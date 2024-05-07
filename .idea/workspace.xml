@@ -4,17 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="First version">
-      <change afterPath="$PROJECT_DIR$/BigYellowTaxi.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Soundfont/Emu 9ftgrand.sf2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Soundfont/R-piano.sf2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/examples.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/musicpytest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/part01.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/part02.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test.txt" afterDir="false" />
+    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="Colected parts and samples">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/temp.mid" beforeDir="false" afterPath="$PROJECT_DIR$/temp.mid" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BigYellowTaxi.py" beforeDir="false" afterPath="$PROJECT_DIR$/BigYellowTaxi.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,21 +49,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.part01.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.part01.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "Python",
-      "PLAIN_TEXT"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;Python&quot;,
+      &quot;PLAIN_TEXT&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\92591\PycharmProjects\pythonProject" />
@@ -126,7 +118,31 @@
       <option name="project" value="LOCAL" />
       <updated>1715005406799</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Colected parts and samples">
+      <option name="closed" value="true" />
+      <created>1715097985420</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1715097985420</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Colected parts and samples">
+      <option name="closed" value="true" />
+      <created>1715098213195</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1715098213195</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Colected parts and samples">
+      <option name="closed" value="true" />
+      <created>1715098226687</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1715098226687</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -157,6 +173,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="First version" />
-    <option name="LAST_COMMIT_MESSAGE" value="First version" />
+    <MESSAGE value="Collected parts and samples" />
+    <MESSAGE value="Colected parts and samples" />
+    <option name="LAST_COMMIT_MESSAGE" value="Colected parts and samples" />
   </component>
 </project>
