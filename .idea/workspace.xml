@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="Colected parts and samples">
+    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="Unversioned update?">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BigYellowTaxi.py" beforeDir="false" afterPath="$PROJECT_DIR$/BigYellowTaxi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicpytest.py" beforeDir="false" afterPath="$PROJECT_DIR$/musicpytest.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +23,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="SWAP_SIDES_IN_COMPARE_BRANCHES" value="true" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -142,7 +144,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715098226687</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Unversioned update?">
+      <option name="closed" value="true" />
+      <created>1715146363593</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1715146363593</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -175,6 +185,7 @@
     <MESSAGE value="First version" />
     <MESSAGE value="Collected parts and samples" />
     <MESSAGE value="Colected parts and samples" />
-    <option name="LAST_COMMIT_MESSAGE" value="Colected parts and samples" />
+    <MESSAGE value="Unversioned update?" />
+    <option name="LAST_COMMIT_MESSAGE" value="Unversioned update?" />
   </component>
 </project>

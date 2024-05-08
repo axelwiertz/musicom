@@ -22,6 +22,49 @@ play (m1, wait=True)
 print (m1.notes)
 print (m1.interval)
 
+# Compose
+# editor
+S('C4 major')%(15654321, 0.4)
+S('C major').get('1,1,5,5,6,6,5,-,4,4,3,3,2,2,1,-')
+/S('C major').chord_progression(['IM7', 'Vsus', 'vi7', 'IVM7'])
+
+
+guitar = (C('CM7', 3, 1 / 4, 1 / 8) ^ 2 |
+          C('G7sus', 2, 1 / 4, 1 / 8) ^ 2 |
+          C('A7sus', 2, 1 / 4, 1 / 8) ^ 2 |
+          C('Em7', 2, 1 / 4, 1 / 8) ^ 2 |
+          C('FM7', 2, 1 / 4, 1 / 8) ^ 2 |
+          C('CM7', 3, 1 / 4, 1 / 8) @ 1 |
+          C('AbM7', 2, 1 / 4, 1 / 8) ^ 2 |
+          C('G7sus', 2, 1 / 4, 1 / 8) ^ 2) * 2
+
+play(guitar, bpm=100, instrument=25)
+play(guitar, bpm=100)
+play(guitar, bpm=100, instrument=24)
+play(guitar, bpm=100, instrument=25)
+c1 = C('CM7', 3, 1 / 4, 1 / 8) ^ 2
+c2 = C('CM7')
+c2 = C('CM7', 3)
+c3 = C('CM7', 5)
+c5 = C('CM7', 3, 1 / 4, 1 / 8)
+c5 = C('CM7', 3, 1 / 4)
+c6 = C('CM7', 3, 1 / 4) ^ 2
+
+# Bossa Nova
+S('C major').chord_progression(['ii', 'V', 'I'])
+S('C major') % 251
+/ S('C major').chord_progression(['Imaj7', 'II7', 'iim7'])
+
+# Lounge / Jazz
+s1 = S('C major')
+s1 % 4251
+s1 % 736251
+
+# drum
+drum1 = drum('S[l:.8; i:.; r:4], S[l:.16; i:.], S[l:.8; i:.], S[l:.16; i:.], S[l:.8; i:.], S[l:.8; i:.]')
+drum('S[l:.8; i:.; r:4], S[l:.16; i:.], S[l:.8; i:.], S[l:.16; i:.], S[l:.8; i:.], S[l:.8; i:.]')
+
+drum('K, K;H, S, H, K, K;H;PH, H;S, H')
 
 # Instruments
 # Play all MIDI instruments

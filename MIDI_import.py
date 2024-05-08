@@ -2,14 +2,36 @@
 Music MIDI import
 '''
 
-# Init
+# Modules
+import musicpy as mp
 from musicpy import *
+from musicpy.daw import *
+
 
 # Location of files
 MIDIpath = 'C:\\temp\Music\\MIDI\\'
 
-pMIDI = read(MIDIpath + 'AUD_HO0930.mid')
-print pMIDI
+strMIDIFileName =  'SuperTrouper.mid'
+strMIDIFileName =  'AllThatSheWants.mid'
+strMIDIFileName =  'bossa-nova.mid'
+strMIDIFileName =  'AxelTheme.mid'
+strMIDIFileName = 'BigYellowTaxi01.mid'
+piece01 = read(MIDIpath + strMIDIFileName, split_channels=True)
+
+# Read
+print (pMIDI)
+
+play(ST(0))
+play(ST(1))
+play(ST(1)[1:20])
+play(ST(1)[1:10])
+play(ST(1)[1:30])
+play(ST(1)[1:26])
+
+ST(1)[1:26]
+ST(1)[1:26].notes
+
+# Play
 play(pMIDI, channel=1)
 play(pMIDI, bpm=83, channel=1)
 chan1 = 7
@@ -33,7 +55,13 @@ pMIDI[7].content.notes
 play(pMIDI[7].content.notes)
  
 c2 = C(c1.notes)
-             
+
+# Analyis
+cht = mp.alg.detect(ST(1)[1:26])
+'Cmaj13 omit F sort as [1, 2, 3, 5, 6, 4]'
+cht = mp.alg.chord_analysis(ST(1))
+
+
 mp.alg.detect(pMIDI[7].content)
 'B13sus4 omit A sort as [1, 4, 2, 3, 5]'
 c1[1:4]
