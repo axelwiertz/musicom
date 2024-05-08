@@ -4,10 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="Unversioned update?">
+    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="Reorganized">
+      <change afterPath="$PROJECT_DIR$/Soundfont/Seagull_Acoustic_Guitar.SF2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Soundfont/Sessgit.sf2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datastructure.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BigYellowTaxi.py" beforeDir="false" afterPath="$PROJECT_DIR$/BigYellowTaxi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/musicpytest.py" beforeDir="false" afterPath="$PROJECT_DIR$/musicpytest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MIDI_import.py" beforeDir="false" afterPath="$PROJECT_DIR$/MIDI_import.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples.py" beforeDir="false" afterPath="$PROJECT_DIR$/examples.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/part01.py" beforeDir="false" afterPath="$PROJECT_DIR$/part01.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/temp.mid" beforeDir="false" afterPath="$PROJECT_DIR$/temp.mid" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,25 +56,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.part01.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.MIDI_import.executor": "Run",
+    "Python.examples.executor": "Run",
+    "Python.part01.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;Python&quot;,
-      &quot;PLAIN_TEXT&quot;
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "Python",
+      "PLAIN_TEXT"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\92591\PycharmProjects\pythonProject" />
       <recent name="C:\Users\92591\PycharmProjects\pythonProject\Soundfont" />
+      <recent name="C:\Users\92591\PycharmProjects\pythonProject" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -152,7 +159,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715146363593</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Reorganized">
+      <option name="closed" value="true" />
+      <created>1715149124570</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1715149124570</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -186,6 +201,7 @@
     <MESSAGE value="Collected parts and samples" />
     <MESSAGE value="Colected parts and samples" />
     <MESSAGE value="Unversioned update?" />
-    <option name="LAST_COMMIT_MESSAGE" value="Unversioned update?" />
+    <MESSAGE value="Reorganized" />
+    <option name="LAST_COMMIT_MESSAGE" value="Reorganized" />
   </component>
 </project>
