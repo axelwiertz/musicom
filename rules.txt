@@ -1,11 +1,11 @@
-7 1 tonic
-6 2 leading tone
-5 3 submediamt
-4 2 dominant 
-3 2 subdominant 
-2 3 mediant
-1 3 supertonic
-0 1 ronic
+1 1 tonic
+7 2 leading tone
+6 3 submediamt
+5 2 dominant 
+4 2 subdominant 
+3 3 mediant
+2 3 supertonic
+1 1 ronic
 
 I vi (IV ii) (viio V) -> I
 V IV6 IV
