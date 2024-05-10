@@ -17,7 +17,7 @@ chdMelody = [chd01, chd01, chd01]
 # Tracks
 
 # Piece
-pce01 = P(tracks=[chdMelody[0], chdMelody[1], chdMelody[2]],channels=[0, 1, 2])
+pce01 = P(tracks=[chdMelody[0], chdMelody[1], chdMelody[2]],channels=[0, 1, 2], start_times=[0, 2, 4, 6])
 print (pce01)
 
 
