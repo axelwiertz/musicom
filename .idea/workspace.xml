@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="Reorganized">
-      <change afterPath="$PROJECT_DIR$/Soundfont/Seagull_Acoustic_Guitar.SF2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Soundfont/Sessgit.sf2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/datastructure.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MIDI_import.py" beforeDir="false" afterPath="$PROJECT_DIR$/MIDI_import.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples.py" beforeDir="false" afterPath="$PROJECT_DIR$/examples.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/part01.py" beforeDir="false" afterPath="$PROJECT_DIR$/part01.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/temp.mid" beforeDir="false" afterPath="$PROJECT_DIR$/temp.mid" afterDir="false" />
-    </list>
+    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="Pieces and DAW" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -167,7 +158,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715149124570</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Pieces and DAW">
+      <option name="closed" value="true" />
+      <created>1715170427012</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1715170427012</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -202,6 +201,7 @@
     <MESSAGE value="Colected parts and samples" />
     <MESSAGE value="Unversioned update?" />
     <MESSAGE value="Reorganized" />
-    <option name="LAST_COMMIT_MESSAGE" value="Reorganized" />
+    <MESSAGE value="Pieces and DAW" />
+    <option name="LAST_COMMIT_MESSAGE" value="Pieces and DAW" />
   </component>
 </project>
