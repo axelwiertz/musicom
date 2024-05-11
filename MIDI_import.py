@@ -14,12 +14,15 @@ import matplotlib.pyplot as plt
 
 # Location of files
 strMIDIpath = 'C:\\temp\\Music\\MIDI\\'
+# 'C:\\Users\\axelw\\OneDrive\Music\\'
 
 strMIDIFileName = 'SuperTrouper.mid'
 strMIDIFileName = 'AllThatSheWants.mid'
 strMIDIFileName = 'bossa-nova.mid'
 strMIDIFileName = 'AxelTheme.mid'
 strMIDIFileName = 'BigYellowTaxi01.mid'
+strMIDIFileName = 'DKDB.mid'
+
 
 # Read
 pceMIDI = read(strMIDIpath + strMIDIFileName, split_channels=True)
@@ -44,11 +47,11 @@ print (pceMIDI[intTrack].content.notes)
 
 
 # Play
-intChan = 7
+intTrack = 0
 intInstr = 1
-intBPM = 83
-# play (pceMIDI, bpm=intBPM, channel=intChan, instrument=intInstr, wait=True)
-# play (pceMIDI[intTrack], instrument=intInstr, wait=True)
+intBPM = 92
+#play (pceMIDI, wait=True)
+play (pceMIDI[intTrack], instrument=intInstr, wait=True)
 # play (pceMIDI[intTrack].content, bpm=intBPM, instrument=intInstr)
 
 # Analyis

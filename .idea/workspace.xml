@@ -4,18 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="Pieces and DAW">
-      <change afterPath="$PROJECT_DIR$/Soundfont/Brass_SoftHorn.sf2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Soundfont/Brass_SwingHorn1.sf2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Soundfont/Piano_BaroqueHarpsichord.sf2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Soundfont/Voice_DarkCrystalChoir.sf2" afterDir="false" />
+    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="Sync">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Soundfont/Emu 9ftgrand.sf2" beforeDir="false" afterPath="$PROJECT_DIR$/Soundfont/Piano_NineFootGrand.sf2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Soundfont/R-piano.sf2" beforeDir="false" afterPath="$PROJECT_DIR$/Soundfont/Piano_RolandPiano.sf2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Soundfont/Seagull_Acoustic_Guitar.SF2" beforeDir="false" afterPath="$PROJECT_DIR$/Soundfont/Guitar_SeagullAcousticGuitar.SF2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Soundfont/Sessgit.sf2" beforeDir="false" afterPath="$PROJECT_DIR$/Soundfont/Guitar_SessionGuitar.sf2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/part01.py" beforeDir="false" afterPath="$PROJECT_DIR$/instruments.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/part02.py" beforeDir="false" afterPath="$PROJECT_DIR$/composition.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MIDI_import.py" beforeDir="false" afterPath="$PROJECT_DIR$/MIDI_import.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composition.py" beforeDir="false" afterPath="$PROJECT_DIR$/composition.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/temp.mid" beforeDir="false" afterPath="$PROJECT_DIR$/temp.mid" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -60,24 +52,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.MIDI_import.executor": "Run",
-    "Python.examples.executor": "Run",
-    "Python.instruments.executor": "Run",
-    "Python.part01.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.MIDI_import.executor&quot;: &quot;Run&quot;,
+    &quot;Python.examples.executor&quot;: &quot;Run&quot;,
+    &quot;Python.instruments.executor&quot;: &quot;Run&quot;,
+    &quot;Python.part01.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "Python",
-      "PLAIN_TEXT"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;Python&quot;,
+      &quot;PLAIN_TEXT&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\92591\PycharmProjects\pythonProject\Soundfont" />
@@ -188,7 +180,23 @@
       <option name="project" value="LOCAL" />
       <updated>1715334172351</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Sync">
+      <option name="closed" value="true" />
+      <created>1715375288647</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1715375288647</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Sync">
+      <option name="closed" value="true" />
+      <created>1715376461863</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1715376461863</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -224,6 +232,7 @@
     <MESSAGE value="Unversioned update?" />
     <MESSAGE value="Reorganized" />
     <MESSAGE value="Pieces and DAW" />
-    <option name="LAST_COMMIT_MESSAGE" value="Pieces and DAW" />
+    <MESSAGE value="Sync" />
+    <option name="LAST_COMMIT_MESSAGE" value="Sync" />
   </component>
 </project>
