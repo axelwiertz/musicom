@@ -51,7 +51,7 @@ intTrack = 0
 intInstr = 1
 intBPM = 92
 #play (pceMIDI, wait=True)
-play (pceMIDI[intTrack], instrument=intInstr, wait=True)
+#play (pceMIDI[intTrack], instrument=intInstr, wait=True)
 # play (pceMIDI[intTrack].content, bpm=intBPM, instrument=intInstr)
 
 # Analyis
