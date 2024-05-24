@@ -50,6 +50,16 @@ s1 = S('C major')
 chd4 = s1 % 4251
 chd5 = s1 % 736251
 
+# Berendans
+sclEb = S('Bb major')
+scl1 = sclEb
+chd1 = scl1.chord_progression(['I', 'V', 'I'])
+
+print (scl1)
+print ('Play :')
+print (chd1)
+play (chd1, wait=True)
+
 
 # drum                                                                                                                                
 drum1 = drum('S[l:.8; i:.; r:4], S[l:.16; i:.], S[l:.8; i:.], S[l:.16; i:.], S[l:.8; i:.], S[l:.8; i:.]')
@@ -68,7 +78,7 @@ chd6 = S('C major').chord_progression(['IM7', 'Vsus', 'vi7', 'IVM7'])
 # Fantasy
 scla = S('A minor', 3)
 sclC = S('C major')
-print (scla)
+#print (scla)
 
 # a I II VI II
 chdFant01 = scla.chord_progression(['I7', 'II7', 'VI7', 'II7'])

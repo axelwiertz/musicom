@@ -5,7 +5,7 @@
 4 2 subdominant 
 3 3 mediant
 2 3 supertonic
-1 1 ronic
+1 1 tonic
 
 I vi (IV ii) (viio V) -> I
 V IV6 IV
