@@ -6,51 +6,66 @@ from musicpy.daw import *
 # Compose
 # Chords
 # Progression rules
-lstRule01 = ['I vi (IV ii) (viio V)', 'I']
-lstRule02 = ['V', 'IV6','IV']
-lstRule03 = ['v', 'iv']
-lstRule04 = ['iv', 'I6', 'I']
+dctChordProgr = {}
+dctChordProgr ['I'] = ['*']
+dctChordProgr ['ii'] = ['IV', 'V', 'vii0']
+dctChordProgr ['iii'] = ['ii', 'IV', 'vi']
+dctChordProgr ['IV'] = ['I', 'iii', 'V', 'vii0']
+dctChordProgr ['V'] = ['I']
+dctChordProgr ['vi'] = ['I', 'iii']
 
-lstRule = ["I", "*"]
-lstRule = ["ii", "IV, V, vii0"]
-lstRule = ["iii", "ii, IV, vi"]
-lstRule = ["IV", "I, iii, V, vii0"]
-lstRule = ["V", "I"]
-lstRule = ["vi", "I, iii"]
+lstChordPattern = []
+# Analysis of all progressions
+lstChordPattern.append( ['I', 'vi', 'IV', 'viio', 'I'] )
+lstChordPattern.append( ['I', 'vi', 'ii', 'viio', 'I'] )
+lstChordPattern.append( ['I', 'vi', 'IV', 'V', 'I'] )
+lstChordPattern.append( ['I', 'vi', 'ii', 'V', 'I'] )
+lstChordPattern.append( ['V', 'IV6','IV'] )
+lstChordPattern.append( ['v', 'iv'] )
+lstChordPattern.append( ['iv', 'I6', 'I'] )
+# Common progressions
+lstChordPattern.append( ["I", 'IV'] )
+lstChordPattern.append( ["I", 'V'] )
+lstChordPattern.append( ["I", 'IV', 'V'] )
+lstChordPattern.append( ["I", 'IV', 'V7'] )
+lstChordPattern.append( ["I", 'IV', 'I', 'V'] )
+lstChordPattern.append( ["I", 'IV', 'I', 'V7'] )
+lstChordPattern.append( ["I", 'IV', 'V', 'IV'] )
+lstChordPattern.append( ["I", 'V', 'vi', 'IV'] )
+lstChordPattern.append( ["I", 'ii', 'IV', 'V'] )
+lstChordPattern.append( ["I", 'ii', 'IV'] )
+lstChordPattern.append( ["I", 'vi', 'ii', 'V'] )
+lstChordPattern.append( ["I", 'vi', 'IV', 'V'] )
+lstChordPattern.append( ["I", 'vi', 'ii', 'IV', 'V7'] )
+lstChordPattern.append( ["I", 'vi', 'ii', 'V7', 'ii'] )
+lstChordPattern.append( ["IV", 'I', 'IV', 'V'] )
+lstChordPattern.append( ["ii7", 'V7', 'I'] )
+lstChordPattern.append( ["I", 'IV', 'I', 'V7', 'IV', 'I'] )
+lstChordPattern.append( ["I", 'IV', 'vii0', 'iii', 'vi', 'ii', 'V', 'I'] )
+#print (lstChordPattern)
 
-lstCommon = ["I", 'IV']
-lstCommon = ["I", 'V']
-lstCommon = ["I", 'IV', 'V']
-lstCommon = ["I", 'IV', 'V7']
-lstCommon = ["I", 'IV', 'I', 'V']
-lstCommon = ["I", 'IV', 'I', 'V7']
-lstCommon = ["I", 'IV', 'V', 'IV']
-lstCommon = ["I", 'V', 'vi', 'IV']
-lstCommon = ["I", 'ii', 'IV', 'V']
-lstCommon = ["I", 'ii', 'IV']
-lstCommon = ["I", 'vi', 'ii', 'V']
-# page 52
-
-lstCommon = ["", '']
-
-
-
-
-
-
+# Ending cadence
+lstCadencePattern = []
+# Perfect cadence
+lstCadence = ['V', 'I']
+# Plagal cadence
+lstCadence = ['IV', 'I']
+# Imperfect cadence
+lstCadence = ['I', 'V']
+lstCadence = ['ii', 'V']
+lstCadence = ['IV', 'V']
+lstCadence = ['vi', 'V']
+# Interrupted cadence
+lstCadence = ['V', 'IV']
+lstCadence = ['V', 'vi']
+lstCadence = ['V', 'ii']
+lstCadence = ['V', 'V7']
 
 
 # Guitar example
-guitar = (C('CM7', 3, 1 / 4, 1 / 8) ^ 2 |
-          C('G7sus', 2, 1 / 4, 1 / 8) ^ 2 |
-          C('A7sus', 2, 1 / 4, 1 / 8) ^ 2 |
-          C('Em7', 2, 1 / 4, 1 / 8) ^ 2 |
-          C('FM7', 2, 1 / 4, 1 / 8) ^ 2 |
-          C('CM7', 3, 1 / 4, 1 / 8) @ 1 |
-          C('AbM7', 2, 1 / 4, 1 / 8) ^ 2 |
-          C('G7sus', 2, 1 / 4, 1 / 8) ^ 2) * 2
+guitar = (c1 | c2 | c3 * 2 )
 
-# Chord creation syntax
+# Melody creation syntax
 c1 = C('CM7', 3, 1 / 4, 1 / 8) ^ 2
 c2 = C('CM7')
 c2 = C('CM7', 3)
