@@ -5,6 +5,41 @@ from musicpy.daw import *
 
 # Compose
 # Chords
+# Progression rules
+lstRule01 = ['I vi (IV ii) (viio V)', 'I']
+lstRule02 = ['V', 'IV6','IV']
+lstRule03 = ['v', 'iv']
+lstRule04 = ['iv', 'I6', 'I']
+
+lstRule = ["I", "*"]
+lstRule = ["ii", "IV, V, vii0"]
+lstRule = ["iii", "ii, IV, vi"]
+lstRule = ["IV", "I, iii, V, vii0"]
+lstRule = ["V", "I"]
+lstRule = ["vi", "I, iii"]
+
+lstCommon = ["I", 'IV']
+lstCommon = ["I", 'V']
+lstCommon = ["I", 'IV', 'V']
+lstCommon = ["I", 'IV', 'V7']
+lstCommon = ["I", 'IV', 'I', 'V']
+lstCommon = ["I", 'IV', 'I', 'V7']
+lstCommon = ["I", 'IV', 'V', 'IV']
+lstCommon = ["I", 'V', 'vi', 'IV']
+lstCommon = ["I", 'ii', 'IV', 'V']
+lstCommon = ["I", 'ii', 'IV']
+lstCommon = ["I", 'vi', 'ii', 'V']
+# page 52
+
+lstCommon = ["", '']
+
+
+
+
+
+
+
+
 # Guitar example
 guitar = (C('CM7', 3, 1 / 4, 1 / 8) ^ 2 |
           C('G7sus', 2, 1 / 4, 1 / 8) ^ 2 |

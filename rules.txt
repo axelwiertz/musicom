@@ -7,7 +7,3 @@
 2 3 supertonic
 1 1 tonic
 
-I vi (IV ii) (viio V) -> I
-V IV6 IV
-v iv
-iv I6 I
