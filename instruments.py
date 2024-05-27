@@ -1,5 +1,5 @@
 '''
-Music Instruments
+Music - Instruments
 '''
 import os
 # Initialize
@@ -8,17 +8,6 @@ import musicpy as mp
 from musicpy import *
 from musicpy.daw import *
 
-# Chords
-chd01 = S('C major').get('1,2,3,4,5,6,7,1.1')
-
-# Melody
-chdMelody = [chd01, chd01, chd01]
-
-# Tracks
-
-# Piece
-pce01 = P(tracks=[chdMelody[0], chdMelody[1], chdMelody[2]],channels=[0, 1, 2], start_times=[0, 2, 4, 6])
-print (pce01)
 
 
 # Instruments
@@ -55,3 +44,4 @@ daw1.load(intDAWChannel, strSFpath + dctInstr['Brass'][i])
 
 print (daw1)
 daw1.play(pce01, wait=True)
+

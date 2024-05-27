@@ -87,6 +87,7 @@ play(pceTarget, wait=True)
 #str2 = mp.alg.detect (lisNotes)
 #str3 = mp.alg.chord_analysis (pceMIDI(intTrack))
 #str4 = mp.alg.chord_analysis (lisNotes)
+str5 = analyze_rhythm (pceMIDI(intTrack))
 
 #print (str1)
 #print (str2)

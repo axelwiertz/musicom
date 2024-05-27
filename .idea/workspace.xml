@@ -5,9 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="Sync">
+      <change afterPath="$PROJECT_DIR$/harmony.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rhythm.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MIDI_import.py" beforeDir="false" afterPath="$PROJECT_DIR$/MIDI_import.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composition.py" beforeDir="false" afterPath="$PROJECT_DIR$/composition.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/temp.mid" beforeDir="false" afterPath="$PROJECT_DIR$/temp.mid" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datastructure.txt" beforeDir="false" afterPath="$PROJECT_DIR$/datastructure.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/instruments.py" beforeDir="false" afterPath="$PROJECT_DIR$/instruments.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -236,7 +240,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716807714259</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Sync">
+      <option name="closed" value="true" />
+      <created>1716832241164</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1716832241164</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="UnknownFeatures">
