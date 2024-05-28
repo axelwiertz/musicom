@@ -14,27 +14,56 @@ b:n change the duration of the beat to the unit duration * n
 '''
 
 # drum
-drum1 = drum('S[l:.8; i:.; r:4], S[l:.16; i:.], S[l:.8; i:.], S[l:.16; i:.], S[l:.8; i:.], S[l:.8; i:.]')
-drum('S[l:.8; i:.; r:4], S[l:.16; i:.], S[l:.8; i:.], S[l:.16; i:.], S[l:.8; i:.], S[l:.8; i:.]')
+drm1 = drum('S[l:.8; i:.; r:4], S[l:.16; i:.], S[l:.8; i:.], S[l:.16; i:.], S[l:.8; i:.], S[l:.8; i:.]')
+drm2 = drum('S[l:.8; i:.; r:4], S[l:.16; i:.], S[l:.8; i:.], S[l:.16; i:.], S[l:.8; i:.], S[l:.8; i:.]')
 
-drum ('K, K;H, S, H, K, K;H;PH, H;S, H')
+drm3 =  drum ('K, K;H, S, H, K, K;H;PH, H;S, H')
+
+print (drm3)
 
 # rhythm b = beat 0 = rest - = continue . = dotted
 rtm1 = rhythm('b - b. b. b b -', 1)
 # Simple
-rtm = rhythm('b b b b', 1)
+rtm1 = rhythm('b b b b', 1)
+
 # Tresillo
 rtm1 = rhythm('b 0 0 b - 0 b 0', 1, beats=8)
-# Son Clave
-rtm1 = rhythm('b 0 0 b 0 0 b 0 0 0 b 0 b 0 0 0', 1, beats=16)
 # 12/8 Bell
 rtm1 = rhythm('b 0 b 0 b b 0 b 0 b 0 b', 1, beats=12, time_signature=[12, 8] )
+# Son Clave
+rtm1 = rhythm('b 0 0 b 0 0 b 0 0 0 b 0 b 0 0 0', 1, beats=16)
+
+# 3/4
+rtm1 = rhythm('b b b', 1, beats=3, time_signature=[3, 4] )
+
+
+chdC5 = chord ('C3, C2, C2, C2, C2, C2, C2, C2, C2, C2, C2')
+chdRhythm = chdC5.apply_rhythm (rtm1)
+
+
+intDAWChannel = 9
+intPiano = 1
+
+pceRhythm = piece ([chdRhythm], [intPiano], channels=[intDAWChannel])
+
+intNumChannels = 10
+strSongName = 'Percussion 001'
+daw1 = daw(intNumChannels, name=strSongName)
 
 
 
+# Play rhythm
 print ('Play : ')
 print (rtm1)
-chdC5 = chord ('C4, C4, C4, C4, C4, C4, C4, C4, C4, C4, C4, C4, C4, C4, C4, C4, C4, C4, C4, C4, C4, C4, C4, C4')
-chd1 = chdC5.apply_rhythm (rtm1) * 3
-print (chd1)
-play (chd1, wait=True)
+print (chdRhythm)
+# play (chdRhythm, wait=True)
+play (pceRhythm, wait=True)
+
+
+
+
+print (daw1)
+daw1.play(pceRhythm, wait=True)
+
+
+

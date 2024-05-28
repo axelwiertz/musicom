@@ -41,6 +41,9 @@ daw1.load(intDAWChannel, strSFpath + dctInstr['Guitar'][i])
 intDAWChannel = 2
 daw1.load(intDAWChannel, strSFpath + dctInstr['Brass'][i])
 
+intDAWChannel = 9
+daw1.load(intDAWChannel)
+
 
 print (daw1)
 daw1.play(pce01, wait=True)
