@@ -1,9 +1,1 @@
-1 1 tonic
-7 2 leading tone
-6 3 submediamt
-5 2 dominant 
-4 2 subdominant 
-3 3 mediant
-2 3 supertonic
-1 1 tonic
 

@@ -27,6 +27,7 @@ lstChordPattern.append( ['I', 'vi', 'ii', 'V', 'I'] )
 lstChordPattern.append( ['V', 'IV6','IV'] )
 lstChordPattern.append( ['v', 'iv'] )
 lstChordPattern.append( ['iv', 'I6', 'I'] )
+
 # Common progressions
 lstChordPattern.append( ["I", 'IV'] )
 lstChordPattern.append( ["I", 'V'] )
@@ -49,37 +50,58 @@ lstChordPattern.append( ["I", 'IV', 'vii0', 'iii', 'vi', 'ii', 'V', 'I'] )
 #print (lstChordPattern)
 
 # Ending cadence
-lstCadencePattern = []
+dctCadencePattern = {}
+
 # Perfect cadence
-lstCadence = ['V', 'I']
+dctCadencePattern ['Perfect'] = ['V', 'I']
 # Plagal cadence
-lstCadence = ['IV', 'I']
+dctCadencePattern ['Plagal'] = ['IV', 'I']
 # Imperfect cadence
-lstCadence = ['I', 'V']
-lstCadence = ['ii', 'V']
-lstCadence = ['IV', 'V']
-lstCadence = ['vi', 'V']
+dctCadencePattern ['Imperfect1'] = ['I', 'V']
+dctCadencePattern ['Imperfect2'] = ['ii', 'V']
+dctCadencePattern ['Imperfect3'] = ['IV', 'V']
+dctCadencePattern ['Imperfect4'] = ['vi', 'V']
 # Interrupted cadence
-lstCadence = ['V', 'IV']
-lstCadence = ['V', 'vi']
-lstCadence = ['V', 'ii']
-lstCadence = ['V', 'V7']
+dctCadencePattern ['Interrupted1'] = ['V', 'IV']
+dctCadencePattern ['Interrupted2'] = ['V', 'vi']
+dctCadencePattern ['Interrupted3'] = ['V', 'ii']
+dctCadencePattern ['Interrupted4'] = ['V', 'V7']
 
 # Fantasy chords
 # Fantasy
-scla = S('A minor', 3)
-sclC = S('C major')
-#print (scla)
+dctScaleStyle = {}
+dctScaleStyle ['Fantasy'] = ['A minor', 'C major']
 
-# a I II VI II
-chdFant01 = scla.chord_progression(['I7', 'II7', 'VI7', 'II7'])
-# a i II bi bIV
-chdFant02 = scla.chord_progression(['i7', 'II7', 'isus', 'IVsus'])
-# a I VI I VI
-chdFant03 = scla.chord_progression(['I7', 'VI7', 'I7', 'VI7'])
-# a i v VI V
-chdFant04 = scla.chord_progression(['i7', 'v7', 'VI7', 'V7'])
-# a I II I II
-chdFant05 = scla.chord_progression(['I7', 'II7', 'I7', 'II7'])
-# a i II iv V
-chdFant06 = scla.chord_progression(['i7', 'II7', 'iv7', 'V7'])
+lstFantasysChordPattern = []
+
+# I II VI II
+lstFantasysChordPattern.append(['I7', 'II7', 'VI7', 'II7'])
+# i II bi bIV
+lstFantasysChordPattern.append(['i7', 'II7', 'isus', 'IVsus'])
+# I VI I VI
+lstFantasysChordPattern.append(['I7', 'VI7', 'I7', 'VI7'])
+# i v VI V
+lstFantasysChordPattern.append(['i7', 'v7', 'VI7', 'V7'])
+# I II I II
+lstFantasysChordPattern.append(['I7', 'II7', 'I7', 'II7'])
+# i II iv V
+lstFantasysChordPattern.append(['i7', 'II7', 'iv7', 'V7'])
+
+
+# Melody
+dctScaleNotes = {}
+dctScaleNotes [1] = [1, 'tonic']
+dctScaleNotes [2] = [3, 'supertonic']
+dctScaleNotes [3] = [3, 'mediant']
+dctScaleNotes [4] = [2, 'subdominant']
+dctScaleNotes [5] = [2, 'dominant']
+dctScaleNotes [6] = [3, 'submediamt']
+dctScaleNotes [7] = [2, 'leading tone']
+print (dctScaleNotes)
+
+# Form: A B A
+lstForm = [16, 16, 16]
+lstParts = []
+lstParts.append([1, 16])
+lstParts.append([2, 16])
+lstParts.append([3, 16])

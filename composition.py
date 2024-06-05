@@ -11,10 +11,6 @@ import rhythm
 
 
 # Compose
-
-# Guitar example
-guitar = (c1 | c2 | c3 * 2 )
-
 # Melody creation syntax
 c1 = C('CM7', 3, 1 / 4, 1 / 8) ^ 2
 c2 = C('CM7')
@@ -23,6 +19,8 @@ c3 = C('CM7', 5)
 c5 = C('CM7', 3, 1 / 4, 1 / 8)
 c5 = C('CM7', 3, 1 / 4)
 c6 = C('CM7', 3, 1 / 4) ^ 2
+
+melody = (c1 | c2 | c3 * 2 )
 
 
 # Chords
@@ -33,6 +31,7 @@ c2 = C('G7sus', 2, 1/4, 1/8)^2
 # Scale
 # Chords
 chd01 = S('C4 major')%(15654321, 0.4)
+print (chd01)
 chd03 = S('C major').chord_progression(['IM7', 'Vsus', 'vi7', 'IVM7'])
 
 # Notes
@@ -73,8 +72,7 @@ chd6 = S('C major').chord_progression(['IM7', 'Vsus', 'vi7', 'IVM7'])
 
 
 
-chdMelody01 = chdFant02
-# chdFant01 + chdFant02 + chdFant03 + chdFant04 + chdFant05 + chdFant06
+chdMelody01 = chd01
 print ('Notes : ' + str(chdMelody01.notes))
 print ('Interval : ' + str(chdMelody01.interval))
 
