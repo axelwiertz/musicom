@@ -5,7 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="Sync">
+      <change afterPath="$PROJECT_DIR$/song.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composition.py" beforeDir="false" afterPath="$PROJECT_DIR$/composition.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples.py" beforeDir="false" afterPath="$PROJECT_DIR$/examples.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/harmony.py" beforeDir="false" afterPath="$PROJECT_DIR$/harmony.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/instruments.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/rhythm.py" beforeDir="false" afterPath="$PROJECT_DIR$/rhythm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rules.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/temp.mid" beforeDir="false" afterPath="$PROJECT_DIR$/temp.mid" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +62,7 @@
     &quot;Python.MIDI_import.executor&quot;: &quot;Run&quot;,
     &quot;Python.composition.executor&quot;: &quot;Run&quot;,
     &quot;Python.examples.executor&quot;: &quot;Run&quot;,
+    &quot;Python.harmony.executor&quot;: &quot;Run&quot;,
     &quot;Python.instruments.executor&quot;: &quot;Run&quot;,
     &quot;Python.part01.executor&quot;: &quot;Run&quot;,
     &quot;Python.rhythm.executor&quot;: &quot;Run&quot;,
@@ -267,7 +276,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716909365918</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Sync">
+      <option name="closed" value="true" />
+      <created>1717621316348</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1717621316348</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="UnknownFeatures">

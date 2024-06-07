@@ -2,90 +2,68 @@
 Music - Compose
 '''
 # modules
+import os
+import time
 import musicpy as mp
 from musicpy import *
 from musicpy.daw import *
 
-import harmony
-import rhythm
-
-
-# Compose
-# Melody creation syntax
-c1 = C('CM7', 3, 1 / 4, 1 / 8) ^ 2
-c2 = C('CM7')
-c2 = C('CM7', 3)
-c3 = C('CM7', 5)
-c5 = C('CM7', 3, 1 / 4, 1 / 8)
-c5 = C('CM7', 3, 1 / 4)
-c6 = C('CM7', 3, 1 / 4) ^ 2
-
-melody = (c1 | c2 | c3 * 2 )
-
-
-# Chords
-c1 = C('CM7', 3, 1/4, 1/8)^2
-c2 = C('G7sus', 2, 1/4, 1/8)^2
-
-
-# Scale
-# Chords
-chd01 = S('C4 major')%(15654321, 0.4)
-print (chd01)
-chd03 = S('C major').chord_progression(['IM7', 'Vsus', 'vi7', 'IVM7'])
-
-# Notes
-chd02 = S('C major').get('1,1,5,5,6,6,5,-,4,4,3,3,2,2,1,-')
-
-
-# Melody
-# Big Yellow Taxi
-chdMelody01 = chord('B3, C#4, E4, E4, F#4, C#4, E4, E4, F#4, E4, G#3, B3, B3, C#4, E4, F#4, B3, B3, F#4, F#4, F#4, G#4, F#4, E4, E4', 1/8, 1/8)
-
-# Bossa Nova
-chd1 = S('C major').chord_progression(['ii', 'V', 'I'])
-chd2 = S('C major') % 251
-chd3 = S('C major').chord_progression(['Imaj7', 'II7', 'iim7'])
-
-# Lounge / Jazz
-s1 = S('C major')
-chd4 = s1 % 4251
-chd5 = s1 % 736251
-
-# Berendans
-sclEb = S('Bb major')
-scl1 = sclEb
-chd1 = scl1.chord_progression(['I', 'V', 'I'])
-
-print (scl1)
-print ('Play :')
-print (chd1)
-play (chd1, wait=True)
+import song001
+from song001 import *
 
 
 
+for i in range(0, len(lstChdTrack)):
+    print ('Track    : ' + str(i))
+    print ('Notes    : ' + str(lstChdTrack[i].notes))
+    print ('Interval : ' + str(lstChdTrack[i].interval))
 
-# editor
-chd4 = S('C4 major')%(15654321, 0.4)
-chd5 = S('C major').get('1,1,5,5,6,6,5,-,4,4,3,3,2,2,1,-')
-chd6 = S('C major').chord_progression(['IM7', 'Vsus', 'vi7', 'IVM7'])
-
-
-
-chdMelody01 = chd01
-print ('Notes : ' + str(chdMelody01.notes))
-print ('Interval : ' + str(chdMelody01.interval))
-
-play (chdMelody01, bpm=60, wait=True)
-
-# Chords
-chd01 = S('C major').get('1,2,3,4,5,6,7,1.1')
-
-# Melody
-chdMelody = [chd01, chd01, chd01]
-
-# Tracks
 
 # Piece
-pce01 = P(tracks=[chdMelody[0], chdMelody[1], chdMelody[2]],channels=[0, 1, 2], start_times=[0, 2, 4, 6])
+pce01 = P(tracks=lstChdTrack,channels=lstIntChannel, start_times=[0, 0, 0, 0])
 print (pce01)
+play(pce01, wait=True)
+
+
+# Instrumentation
+
+# Instruments
+# Play all MIDI instruments
+'''
+for i in range(1, 127):
+    print ('MIDI instrument ' + str(i))
+    play(chdMelody01, bpm=150, instrument=i, wait=True)
+'''
+
+
+strSFpath = os.getcwd() + '\\Soundfont\\'
+# Instrument library
+dctInstr = {}
+dctInstr['Piano'] = ['Piano_NineFootGrand.sf2', 'Piano_RolandPiano.sf2']
+dctInstr['Guitar'] = ['Guitar_SessionGuitar.sf2', 'Guitar_SeagullAcousticGuitar.SF2']
+dctInstr['Brass'] = ['Brass_SoftHorn.sf2', 'Brass_SwingHorn1.sf2']
+
+
+intNumChannels = 15
+daw1 = daw(intNumChannels, name=strSongName)
+
+i = 0
+intDAWChannel = 0
+daw1.load(intDAWChannel, strSFpath + dctInstr['Piano'][i])
+
+intDAWChannel = 1
+daw1.load(intDAWChannel, strSFpath + dctInstr['Guitar'][i])
+
+intDAWChannel = 2
+daw1.load(intDAWChannel, strSFpath + dctInstr['Brass'][i])
+
+intDAWChannel = 9
+daw1.load(intDAWChannel, strSFpath + dctInstr['Piano'][i]) #Percussion
+
+intPiano = 1
+
+
+
+print (daw1)
+daw1.play(pce01, wait=True)
+

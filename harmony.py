@@ -1,11 +1,10 @@
 '''
 Music - Harmony
-Scales and chords
+Patterns and rules
 '''
 # modules
 import musicpy as mp
 from musicpy import *
-from musicpy.daw import *
 
 
 # Chords
@@ -67,7 +66,6 @@ dctCadencePattern ['Interrupted2'] = ['V', 'vi']
 dctCadencePattern ['Interrupted3'] = ['V', 'ii']
 dctCadencePattern ['Interrupted4'] = ['V', 'V7']
 
-# Fantasy chords
 # Fantasy
 dctScaleStyle = {}
 dctScaleStyle ['Fantasy'] = ['A minor', 'C major']
@@ -87,8 +85,21 @@ lstFantasysChordPattern.append(['I7', 'II7', 'I7', 'II7'])
 # i II iv V
 lstFantasysChordPattern.append(['i7', 'II7', 'iv7', 'V7'])
 
+# Bossa Nova
+dctScaleStyle ['Bossa Nova'] = ['C major']
 
-# Melody
+lstBNChordPattern = []
+
+lstBNChordPattern.append(['ii', 'V', 'I'])
+lstBNChordPattern.append(['Imaj7', 'II7', 'iim7'])
+
+# Lounge / Jazz
+s1 = S('C major')
+chd4 = s1 % 4251
+chd5 = s1 % 736251
+
+
+# Melody scale degrees notes
 dctScaleNotes = {}
 dctScaleNotes [1] = [1, 'tonic']
 dctScaleNotes [2] = [3, 'supertonic']
@@ -97,11 +108,3 @@ dctScaleNotes [4] = [2, 'subdominant']
 dctScaleNotes [5] = [2, 'dominant']
 dctScaleNotes [6] = [3, 'submediamt']
 dctScaleNotes [7] = [2, 'leading tone']
-print (dctScaleNotes)
-
-# Form: A B A
-lstForm = [16, 16, 16]
-lstParts = []
-lstParts.append([1, 16])
-lstParts.append([2, 16])
-lstParts.append([3, 16])
