@@ -5,15 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="Sync">
-      <change afterPath="$PROJECT_DIR$/song.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MIDI_import.py" beforeDir="false" afterPath="$PROJECT_DIR$/MIDI_import.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composition.py" beforeDir="false" afterPath="$PROJECT_DIR$/composition.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples.py" beforeDir="false" afterPath="$PROJECT_DIR$/examples.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/harmony.py" beforeDir="false" afterPath="$PROJECT_DIR$/harmony.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/instruments.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rhythm.py" beforeDir="false" afterPath="$PROJECT_DIR$/rhythm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rules.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/temp.mid" beforeDir="false" afterPath="$PROJECT_DIR$/temp.mid" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datastructure.txt" beforeDir="false" afterPath="$PROJECT_DIR$/datastructure.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,6 +61,7 @@
     &quot;Python.instruments.executor&quot;: &quot;Run&quot;,
     &quot;Python.part01.executor&quot;: &quot;Run&quot;,
     &quot;Python.rhythm.executor&quot;: &quot;Run&quot;,
+    &quot;Python.song.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
@@ -284,7 +280,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717621316348</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Sync">
+      <option name="closed" value="true" />
+      <created>1717795432374</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1717795432374</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="UnknownFeatures">

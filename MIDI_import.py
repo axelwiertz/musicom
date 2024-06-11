@@ -17,14 +17,15 @@ strMIDIpathIn = 'C:\\temp\\Music\\MIDI\\'
 strMIDIpathOut = 'C:\\temp\\Music\\'
 # 'C:\\Users\\axelw\\OneDrive\Music\\'
 
-strMIDIFileName = 'SuperTrouper.mid'
-strMIDIFileName = 'AllThatSheWants.mid'
-strMIDIFileName = 'bossa-nova.mid'
-strMIDIFileName = 'AxelTheme.mid'
-strMIDIFileName = 'BigYellowTaxi01.mid'
-strMIDIFileName = 'DKDB.mid'
-strMIDIFileName = 'DKDBMelody.mid'
-strMIDIFileName = 'berendans.mid'
+lstStrMIDIFileName = []
+lstStrMIDIFileName.append ('SuperTrouper.mid')
+lstStrMIDIFileName.append (AllThatSheWants.mid')
+lstStrMIDIFileName.append ('bossa-nova.mid')
+lstStrMIDIFileName.append ('AxelTheme.mid')
+lstStrMIDIFileName.append ('BigYellowTaxi01.mid')
+lstStrMIDIFileName.append ('DKDB.mid')
+lstStrMIDIFileName.append ('DKDBMelody.mid')
+lstStrMIDIFileName.append ('berendans.mid')
 
 strMIDIFileNameOut = 'track.mid'
 
@@ -44,7 +45,7 @@ intNumNotes = len (lisNotes)
 
 # Scales
 sclSource = scale('Eb', 'major')
-print (sclSource)
+# print (sclSource)
 sclTarget = scale('C', 'major')
 
 # Modulate
