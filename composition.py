@@ -11,7 +11,7 @@ from musicpy.daw import *
 # function compose song framework
 # put specific song parameters here
 import song001
-from song001 import *
+from song import *
 # strSongName
 # lstChdTrack # list of tracks: type mp.Chord
 # lstIntChannel # list of channelnumbers
@@ -28,7 +28,7 @@ pce01 = P(tracks=lstChdTrack,channels=lstIntChannel, start_times=lstIntStartTime
 # Play piece and wait until finish, writes temp.midi
 print ('Play :')
 print (pce01)
-play(pce01, wait=True)
+#play(pce01, wait=True)
 
 
 # Instrumentation

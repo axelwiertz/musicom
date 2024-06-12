@@ -26,6 +26,7 @@ lstChordPattern.append( ['I', 'vi', 'ii', 'V', 'I'] )
 lstChordPattern.append( ['V', 'IV6','IV'] )
 lstChordPattern.append( ['v', 'iv'] )
 lstChordPattern.append( ['iv', 'I6', 'I'] )
+#print(lstChordPattern)
 
 # Common progressions
 lstChordPattern.append( ["I", 'IV'] )
@@ -66,8 +67,12 @@ dctCadencePattern ['Interrupted2'] = ['V', 'vi']
 dctCadencePattern ['Interrupted3'] = ['V', 'ii']
 dctCadencePattern ['Interrupted4'] = ['V', 'V7']
 
-# Fantasy
 dctScaleStyle = {}
+# Standard
+dctScaleStyle ['Standard'] = ['C major']
+
+
+# Fantasy
 dctScaleStyle ['Fantasy'] = ['A minor', 'C major']
 
 lstFantasysChordPattern = []
