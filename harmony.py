@@ -9,44 +9,46 @@ from musicpy import *
 
 # Chords
 # Progression rules
-dctChordProgr = {}
-dctChordProgr ['I'] = ['*']
-dctChordProgr ['ii'] = ['IV', 'V', 'vii0']
-dctChordProgr ['iii'] = ['ii', 'IV', 'vi']
-dctChordProgr ['IV'] = ['I', 'iii', 'V', 'vii0']
-dctChordProgr ['V'] = ['I']
-dctChordProgr ['vi'] = ['I', 'iii']
+dctChordProgr = {
+    'I': ['*'],
+    'ii' : ['IV', 'V', 'vii0'],
+    'iii' : ['ii', 'IV', 'vi'],
+    'IV' : ['I', 'iii', 'V', 'vii0'],
+    'V' : ['I'],
+    'vi' : ['I', 'iii']
+}
 
-lstChordPattern = []
-# Analysis of all progressions
-lstChordPattern.append( ['I', 'vi', 'IV', 'viio', 'I'] )
-lstChordPattern.append( ['I', 'vi', 'ii', 'viio', 'I'] )
-lstChordPattern.append( ['I', 'vi', 'IV', 'V', 'I'] )
-lstChordPattern.append( ['I', 'vi', 'ii', 'V', 'I'] )
-lstChordPattern.append( ['V', 'IV6','IV'] )
-lstChordPattern.append( ['v', 'iv'] )
-lstChordPattern.append( ['iv', 'I6', 'I'] )
+lstChordPattern = [
+    # Analysis of all progressions
+    ['I', 'vi', 'IV', 'viio', 'I'] ,
+    ['I', 'vi', 'ii', 'viio', 'I'] ,
+    ['I', 'vi', 'IV', 'V', 'I'] ,
+    ['I', 'vi', 'ii', 'V', 'I'] ,
+    ['V', 'IV6','IV'] ,
+    ['v', 'iv'] ,
+    ['iv', 'I6', 'I']
+# Common progressions
+    ["I", 'IV'],
+    ["I", 'V'],
+    ["I", 'IV', 'V'],
+    ["I", 'IV', 'V7'],
+    ["I", 'IV', 'I', 'V'],
+    ["I", 'IV', 'I', 'V7'],
+    ["I", 'IV', 'V', 'IV'],
+    ["I", 'V', 'vi', 'IV'],
+    ["I", 'ii', 'IV', 'V'],
+    ["I", 'ii', 'IV'],
+    ["I", 'vi', 'ii', 'V'],
+    ["I", 'vi', 'IV', 'V'],
+    ["I", 'vi', 'ii', 'IV', 'V7'],
+    ["I", 'vi', 'ii', 'V7', 'ii'],
+    ["IV", 'I', 'IV', 'V'],
+    ["ii7", 'V7', 'I'],
+    ["I", 'IV', 'I', 'V7', 'IV', 'I'],
+    ["I", 'IV', 'vii0', 'iii', 'vi', 'ii', 'V', 'I']
+]
 #print(lstChordPattern)
 
-# Common progressions
-lstChordPattern.append( ["I", 'IV'] )
-lstChordPattern.append( ["I", 'V'] )
-lstChordPattern.append( ["I", 'IV', 'V'] )
-lstChordPattern.append( ["I", 'IV', 'V7'] )
-lstChordPattern.append( ["I", 'IV', 'I', 'V'] )
-lstChordPattern.append( ["I", 'IV', 'I', 'V7'] )
-lstChordPattern.append( ["I", 'IV', 'V', 'IV'] )
-lstChordPattern.append( ["I", 'V', 'vi', 'IV'] )
-lstChordPattern.append( ["I", 'ii', 'IV', 'V'] )
-lstChordPattern.append( ["I", 'ii', 'IV'] )
-lstChordPattern.append( ["I", 'vi', 'ii', 'V'] )
-lstChordPattern.append( ["I", 'vi', 'IV', 'V'] )
-lstChordPattern.append( ["I", 'vi', 'ii', 'IV', 'V7'] )
-lstChordPattern.append( ["I", 'vi', 'ii', 'V7', 'ii'] )
-lstChordPattern.append( ["IV", 'I', 'IV', 'V'] )
-lstChordPattern.append( ["ii7", 'V7', 'I'] )
-lstChordPattern.append( ["I", 'IV', 'I', 'V7', 'IV', 'I'] )
-lstChordPattern.append( ["I", 'IV', 'vii0', 'iii', 'vi', 'ii', 'V', 'I'] )
 #print (lstChordPattern)
 
 # Ending cadence
