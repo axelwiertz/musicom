@@ -8,6 +8,11 @@ from musicpy import *
 
 
 # Chords
+# Chord ladder
+dctChordLadder = {
+    'Major': [['I','vi'],['V', 'vii0'],['ii', 'IV'],['vi'],['iii']],
+    'Minor': [['i','VI'],['V', 'vii0'],['ii0', 'iv'],['VI'],['III']]
+}
 # Progression rules
 dctChordProgr = {
     'I': ['*'],
@@ -26,7 +31,7 @@ lstChordPattern = [
     ['I', 'vi', 'ii', 'V', 'I'] ,
     ['V', 'IV6','IV'] ,
     ['v', 'iv'] ,
-    ['iv', 'I6', 'I']
+    ['iv', 'I6', 'I'] ,
 # Common progressions
     ["I", 'IV'],
     ["I", 'V'],
@@ -52,53 +57,48 @@ lstChordPattern = [
 #print (lstChordPattern)
 
 # Ending cadence
-dctCadencePattern = {}
-
+dctCadencePattern = {
 # Perfect cadence
-dctCadencePattern ['Perfect'] = ['V', 'I']
+    'Perfect' : ['V', 'I'],
 # Plagal cadence
-dctCadencePattern ['Plagal'] = ['IV', 'I']
+    'Plagal' : ['IV', 'I'],
 # Imperfect cadence
-dctCadencePattern ['Imperfect1'] = ['I', 'V']
-dctCadencePattern ['Imperfect2'] = ['ii', 'V']
-dctCadencePattern ['Imperfect3'] = ['IV', 'V']
-dctCadencePattern ['Imperfect4'] = ['vi', 'V']
+    'Imperfect' : [['I', 'V'], ['ii', 'V'], ['IV', 'V'], ['vi', 'V']],
 # Interrupted cadence
-dctCadencePattern ['Interrupted1'] = ['V', 'IV']
-dctCadencePattern ['Interrupted2'] = ['V', 'vi']
-dctCadencePattern ['Interrupted3'] = ['V', 'ii']
-dctCadencePattern ['Interrupted4'] = ['V', 'V7']
+    'Interrupted' : [['V', 'IV'], ['V', 'vi'], ['V', 'ii'], ['V', 'V7']]
+}
 
-dctScaleStyle = {}
+dctStyleScale = {
 # Standard
-dctScaleStyle ['Standard'] = ['C major']
-
-
+    'Standard' : ['C major'],
 # Fantasy
-dctScaleStyle ['Fantasy'] = ['A minor', 'C major']
-
-lstFantasysChordPattern = []
-
-# I II VI II
-lstFantasysChordPattern.append(['I7', 'II7', 'VI7', 'II7'])
-# i II bi bIV
-lstFantasysChordPattern.append(['i7', 'II7', 'isus', 'IVsus'])
-# I VI I VI
-lstFantasysChordPattern.append(['I7', 'VI7', 'I7', 'VI7'])
-# i v VI V
-lstFantasysChordPattern.append(['i7', 'v7', 'VI7', 'V7'])
-# I II I II
-lstFantasysChordPattern.append(['I7', 'II7', 'I7', 'II7'])
-# i II iv V
-lstFantasysChordPattern.append(['i7', 'II7', 'iv7', 'V7'])
-
+    'Fantasy' : ['A minor', 'C major'],
 # Bossa Nova
-dctScaleStyle ['Bossa Nova'] = ['C major']
+    'Bossa Nova' : ['C major']
+}
 
-lstBNChordPattern = []
+dctStyleChordPattern = {
+    'Fantasy' :  [
+# I II VI II
+    ['I7', 'II7', 'VI7', 'II7'],
+# i II bi bIV
+    ['i7', 'II7', 'isus', 'IVsus'],
+# I VI I VI
+    ['I7', 'VI7', 'I7', 'VI7'],
+# i v VI V
+    ['i7', 'v7', 'VI7', 'V7'],
+# I II I II
+    ['I7', 'II7', 'I7', 'II7'],
+# i II iv V
+    ['i7', 'II7', 'iv7', 'V7']
+    ],
 
-lstBNChordPattern.append(['ii', 'V', 'I'])
-lstBNChordPattern.append(['Imaj7', 'II7', 'iim7'])
+'Bossa Nova' : [
+    ['ii', 'V', 'I'],
+    ['Imaj7', 'II7', 'iim7']
+    ]
+}
+
 
 # Lounge / Jazz
 s1 = S('C major')
@@ -107,11 +107,41 @@ chd5 = s1 % 736251
 
 
 # Melody scale degrees notes
-dctScaleNotes = {}
-dctScaleNotes [1] = [1, 'tonic']
-dctScaleNotes [2] = [3, 'supertonic']
-dctScaleNotes [3] = [3, 'mediant']
-dctScaleNotes [4] = [2, 'subdominant']
-dctScaleNotes [5] = [2, 'dominant']
-dctScaleNotes [6] = [3, 'submediamt']
-dctScaleNotes [7] = [2, 'leading tone']
+dctScaleNotes = {
+    1 : 'tonic',
+    2 : 'supertonic',
+    3 : 'mediant',
+    4 : 'subdominant',
+    5 : 'dominant',
+    6 : 'submediamt',
+    7 : 'leading tone'
+}
+
+dctScaleDegrPrio = {
+    1 : [1],
+    2 : [4, 5, 7],
+    3 : [2, 3, 6],
+}
+dctScaleDegrAct = {
+    "Active" : [1, 3, 5],
+    "Inactive" : [2, 4, 6, 7],
+}
+# melody degree step movement rules
+# 1 3 5 inactive no rule
+# 2 4 6 7 active
+dctScaleDegrMove = {
+# 0 = any scale degree
+    # Active
+    1 : 0,
+    3 : 0,
+    5 : 0,
+    # Inactive
+    2 : -1,
+    2 : 1,
+    4 : -1,
+    6 : -1,
+    7 : 1,
+    0 : 0,
+    0 : +2,
+    0 : -2
+}

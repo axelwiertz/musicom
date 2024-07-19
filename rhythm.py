@@ -9,11 +9,13 @@ from musicpy.daw import *
 
 # rhythm b = beat 0 = rest - = continue . = dotted
 rtm1 = rhythm('b - b. b. b b -', 1)
-# Simple
-rtmSimple = rhythm('b b b b', 1)
 
+
+# Rhythm library
+# Simple
+rtmSimple = rhythm('b b b b', 1, time_signature=[4, 4])
 # Tresillo
-rtmTresillo = rhythm('b 0 0 b - 0 b 0', 1, beats=8)
+rtmTresillo = rhythm('b 0 0 b - 0 b 0', 1, beats=8, time_signature=[4, 4])
 # 12/8 Bell
 rtmBell = rhythm('b 0 b 0 b b 0 b 0 b 0 b', 1, beats=12, time_signature=[12, 8] )
 # Son Clave
