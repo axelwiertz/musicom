@@ -28,7 +28,7 @@ pce01 = P(tracks=lstChdTrack,channels=lstIntChannel, start_times=lstIntStartTime
 # Play piece and wait until finish, writes temp.midi
 print ('Play :')
 print (pce01)
-#play(pce01, wait=True)
+play(pce01, wait=True)
 
 
 # Instrumentation
@@ -70,5 +70,5 @@ intPiano = 1
 
 print ('Play :')
 print (daw1)
-daw1.play(pce01, wait=True)
+#daw1.play(pce01, wait=True)
 

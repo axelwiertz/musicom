@@ -17,20 +17,21 @@ strMIDIpathIn = 'C:\\temp\\Music\\MIDI\\'
 strMIDIpathOut = 'C:\\temp\\Music\\'
 # 'C:\\Users\\axelw\\OneDrive\Music\\'
 
-lstStrMIDIFileName = []
-lstStrMIDIFileName.append ('SuperTrouper.mid')
-lstStrMIDIFileName.append (AllThatSheWants.mid')
-lstStrMIDIFileName.append ('bossa-nova.mid')
-lstStrMIDIFileName.append ('AxelTheme.mid')
-lstStrMIDIFileName.append ('BigYellowTaxi01.mid')
-lstStrMIDIFileName.append ('DKDB.mid')
-lstStrMIDIFileName.append ('DKDBMelody.mid')
-lstStrMIDIFileName.append ('berendans.mid')
+lstStrMIDIFileName = [
+'SuperTrouper.mid',
+'AllThatSheWants.mid',
+'AxelTheme.mid',
+'BigYellowTaxi01.mid',
+'DKDB.mid',
+'DKDBMelody.mid',
+'berendans.mid'
+]
 
 strMIDIFileNameOut = 'track.mid'
 
 # Read MIDI file
-pceMIDI = read (strMIDIpathIn + strMIDIFileName, get_off_drums=True, split_channels=True)
+i = 0
+pceMIDI = read (strMIDIpathIn + lstStrMIDIFileName[i], get_off_drums=True, split_channels=True)
 
 # Select track and part
 intTrack = 0
