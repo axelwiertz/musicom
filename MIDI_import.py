@@ -13,11 +13,14 @@ import matplotlib.pyplot as plt
 
 
 # Location of files
-strMIDIpathIn = 'C:\\temp\\Music\\MIDI\\'
-strMIDIpathOut = 'C:\\temp\\Music\\'
+#strMIDIpathIn = 'C:\\temp\\Music\\MIDI\\'
+strMIDIpathIn ='C:\Users\92591\OneDrive\Music\MIDI'
+strMIDIpathOut = strMIDIpathIn
+#strMIDIpathOut = 'C:\\temp\\Music\\'
 # 'C:\\Users\\axelw\\OneDrive\Music\\'
 
 lstStrMIDIFileName = [
+'de-bollo-berendans-(mp3convert.org).mp3.mid',
 'SuperTrouper.mid',
 'AllThatSheWants.mid',
 'AxelTheme.mid',

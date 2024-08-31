@@ -1,7 +1,9 @@
 Data structure
-(time, rhythm, voice)
+voice = pitch, rhythm (time)
 melody voice
 accompanying voices
+chord voice
+bass voice
 drum voice
 1,('r'),(1/4)
 stack of 4 voices
