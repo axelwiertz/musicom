@@ -54,7 +54,6 @@ lstChordPattern = [
 ]
 #print(lstChordPattern)
 
-#print (lstChordPattern)
 
 # Ending cadence
 dctCadencePattern = {
@@ -113,7 +112,7 @@ dctScaleNotes = {
     3 : 'mediant',
     4 : 'subdominant',
     5 : 'dominant',
-    6 : 'submediamt',
+    6 : 'submediant',
     7 : 'leading tone'
 }
 

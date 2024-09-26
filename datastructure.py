@@ -1,6 +1,9 @@
 '''
-Music - Template
+Music - Datastructure
 '''
+# Import
+import matplotlib
+import numpy as np
 
 import musicpy as mp
 from musicpy import *
@@ -11,11 +14,32 @@ import rhythm
 from rhythm import *
 
 
-strSongName = 'Patterns'
+strSongName = 'Data structure'
 
-# Scale
-#scl01 = S(str(dctStyleScale['Standard'][0]))
-scl01 = S('E major')
+# Parts
+lstForm = [16, 16, 16]
+lstParts = [
+    [1, 16],
+    [2, 16],
+    [3, 16]
+]
+
+intNrOctaves = 10
+intNrDiatonic = 12
+
+note01 = N ('C9')
+print (note01.degree)
+
+arrPitch = np.arange(intNrOctaves * intNrDiatonic).reshape(intNrOctaves, intNrDiatonic) + intNrDiatonic
+
+
+#for intOctave in range (intNrOctaves) :
+#    for intDiatonicNr in range (intNrDiatonic) :
+#        lstPitch.append note01.degree = (intOctave+1)*12 + intDiatonicNr
+
+
+
+scl01 = S('C major')
 # All chord patterns
 lstChord01 = lstChordPattern
 chd01 = scl01.chord_progression(lstChord01[0])
