@@ -2,14 +2,11 @@
 Music - Template
 '''
 
-import musicpy as mp
-from musicpy import *
-
-import harmony
 from harmony import *
-import rhythm
-from rhythm import *
 
+import random
+
+def
 
 strSongName = 'Patterns'
 
