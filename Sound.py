@@ -35,10 +35,10 @@ wavfile.write('pure_c.wav', rate=44100, data=sine_wave.astype(np.int16))
 
 
 
-plt.style.use('seaborn-dark')
+plt.style.use('dark_background')
 
 # Load data from wav file
-sample_rate, middle_c = wavfile.read('data/piano_c.wav')
+sample_rate, middle_c = wavfile.read('piano_c.wav')
 
 # Plot sound wave
 plt.plot(middle_c[500:2500])
@@ -46,10 +46,7 @@ plt.xlabel('Time')
 plt.ylabel('Amplitude')
 plt.title('Sound Wave of Middle C on Piano')
 plt.grid()
-
-
-# Load data from wav file
-sample_rate, middle_c = wavfile.read('data/piano_c.wav')
+plt.show()
 
 #FFT
 t = np.arange(middle_c.shape[0])
@@ -137,7 +134,6 @@ def get_adsr_weights(frequency, duration, length, decay, sustain_level, sample_r
     if tail > 0:
         weights = np.concatenate((weights, weights[-1] - weights[-1] / tail * np.arange(tail)))
     return weights
-
 
 
 # Get sound wave
