@@ -22,67 +22,6 @@ def get_sine_wave(frequency, duration, sample_rate=44100, amplitude=4096):
     wave = amplitude*np.sin(2*np.pi*frequency*t)
     return wave
 
-
-# Get middle C frequency
-note_freqs = get_piano_notes()
-frequency = note_freqs['C4']
-
-# Pure sine wave
-sine_wave = get_sine_wave(frequency, duration=2, amplitude=2048)
-wavfile.write('pure_c.wav', rate=44100, data=sine_wave.astype(np.int16))
-
-
-
-
-
-plt.style.use('dark_background')
-
-# Load data from wav file
-sample_rate, middle_c = wavfile.read('piano_c.wav')
-
-# Plot sound wave
-plt.plot(middle_c[500:2500])
-plt.xlabel('Time')
-plt.ylabel('Amplitude')
-plt.title('Sound Wave of Middle C on Piano')
-plt.grid()
-plt.show()
-
-#FFT
-t = np.arange(middle_c.shape[0])
-freq = np.fft.fftfreq(t.shape[-1])*sample_rate
-sp = np.fft.fft(middle_c)
-
-# Plot spectrum
-plt.plot(freq, abs(sp.real))
-plt.xlabel('Frequency (Hz)')
-plt.ylabel('Amplitude')
-plt.title('Spectrum of Middle C Recording on Piano')
-plt.xlim((0, 2000))
-plt.grid()
-
-
-
-# Get positive frequency
-idx = np.where(freq > 0)[0]
-freq = freq[idx]
-sp = sp[idx]
-
-# Get dominant frequencies
-sort = np.argsort(-abs(sp.real))[:100]
-dom_freq = freq[sort]
-
-# Round and calculate amplitude ratio
-freq_ratio = np.round(dom_freq/frequency)
-unique_freq_ratio = np.unique(freq_ratio)
-amp_ratio = abs(sp.real[sort]/np.sum(sp.real[sort]))
-factor = np.zeros((int(unique_freq_ratio[-1]), ))
-for i in range(factor.shape[0]):
-    idx = np.where(freq_ratio==i+1)[0]
-    factor[i] = np.sum(amp_ratio[idx])
-factor = factor/np.sum(factor)
-
-
 def apply_overtones(frequency, duration, factor, sample_rate=44100, amplitude=4096):
     assert abs(1 - sum(factor)) < 1e-8
 
@@ -94,11 +33,6 @@ def apply_overtones(frequency, duration, factor, sample_rate=44100, amplitude=40
         overtone = get_sine_wave(frequencies[i], duration, sample_rate, amplitudes[i])
         fundamental += overtone
     return fundamental
-
-
-# Construct harmonic series
-note = apply_overtones(frequency, duration=2.5, factor=factor)
-
 
 def get_adsr_weights(frequency, duration, length, decay, sustain_level, sample_rate=44100):
     assert abs(sum(length) - 1) < 1e-8
@@ -135,6 +69,65 @@ def get_adsr_weights(frequency, duration, length, decay, sustain_level, sample_r
         weights = np.concatenate((weights, weights[-1] - weights[-1] / tail * np.arange(tail)))
     return weights
 
+
+# Get middle C frequency
+note_freqs = get_piano_notes()
+frequency = note_freqs['C4']
+
+# Pure sine wave
+sine_wave = get_sine_wave(frequency, duration=2, amplitude=2048)
+wavfile.write('pure_c.wav', rate=44100, data=sine_wave.astype(np.int16))
+
+# Load data from wav file
+sample_rate, middle_c = wavfile.read('piano_c.wav')
+
+# Plot sound wave
+plt.plot(middle_c[500:2500])
+plt.xlabel('Time')
+plt.ylabel('Amplitude')
+plt.title('Sound Wave of Middle C on Piano')
+plt.style.use('dark_background')
+plt.grid()
+plt.show()
+
+#FFT
+t = np.arange(middle_c.shape[0])
+freq = np.fft.fftfreq(t.shape[-1])*sample_rate
+sp = np.fft.fft(middle_c)
+
+# Plot spectrum
+plt.plot(freq, abs(sp.real))
+plt.xlabel('Frequency (Hz)')
+plt.ylabel('Amplitude')
+plt.title('Spectrum of Middle C Recording on Piano')
+plt.xlim((0, 2000))
+plt.style.use('dark_background')
+plt.grid()
+#plt.show()
+
+
+
+# Get positive frequency
+idx = np.where(freq > 0)[0]
+freq = freq[idx]
+sp = sp[idx]
+
+# Get dominant frequencies
+sort = np.argsort(-abs(sp.real))[:100]
+dom_freq = freq[sort]
+
+# Round and calculate amplitude ratio
+freq_ratio = np.round(dom_freq/frequency)
+unique_freq_ratio = np.unique(freq_ratio)
+amp_ratio = abs(sp.real[sort]/np.sum(sp.real[sort]))
+factor = np.zeros((int(unique_freq_ratio[-1]), ))
+for i in range(factor.shape[0]):
+    idx = np.where(freq_ratio==i+1)[0]
+    factor[i] = np.sum(amp_ratio[idx])
+factor = factor/np.sum(factor)
+
+# Construct harmonic series
+note = apply_overtones(frequency, duration=2.5, factor=factor)
 
 # Get sound wave
 note = apply_overtones(frequency, duration=2.5, factor=factor)
