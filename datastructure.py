@@ -18,27 +18,39 @@ dfParts = pd.DataFrame ([[1, 16],
     [2, 16],
     [3, 16]])
 
-intNrOctaves = 10
-intNrDiatonic = 12
+intFreqA4 = 440
+intNrOctave = 9
+intNrDiatonicPitchClass = 12
+arrPitchClass = np.arange(intNrDiatonicPitchClass)
+arrPitchClassChar = ['C', 'c', 'D', 'd', 'E', 'F', 'f', 'G', 'g', 'A', 'a', 'B']
 
-note01 = N ('C9')
-print (note01.degree)
-
-arrPitch = np.arange(intNrOctaves * intNrDiatonic).reshape(intNrOctaves, intNrDiatonic) + intNrDiatonic
+arrPitch = np.arange(intNrOctave * intNrDiatonicPitchClass).reshape(intNrOctave, intNrDiatonicPitchClass) + intNrDiatonicPitchClass
 dfPitch = pd.DataFrame (arrPitch)
-print (random.choice (arrPitch))
+
+octave = ['C', 'c', 'D', 'd', 'E', 'F', 'f', 'G', 'g', 'A', 'a', 'B']
+arrKeys = np.array([x, y] for y in range(0, 9) for x in octave)
+keys = np.array([x + str(y) for y in range(0, 9) for x in octave])
+# Trim to standard 88 keys
+start = np.where(keys == 'A0')[0][0]
+end = np.where(keys == 'C8')[0][0]
+keys = keys[start:end + 1]
+
+base_freq = 440  # Frequency of Note A4
+note_freqs = dict(zip(keys, [2 ** ((n + 1 - 49) / 12) * base_freq for n in range(len(keys))]))
+note_freqs[''] = 0.0  # stop
 
 x = np.linspace(0, 2, 100)  # Sample data.
 
 # Note that even in the OO-style, we use `.pyplot.figure` to create the Figure.
 fig, ax = plt.subplots(figsize=(5, 2.7), layout='constrained')
-ax.plot(x, x, label='linear')  # Plot some data on the Axes.
+ax.plot(arrPitch [1] , arrPitch[2], label='linear')  # Plot some data on the Axes.
 ax.set_xlabel('x label')  # Add an x-label to the Axes.
 ax.set_ylabel('y label')  # Add a y-label to the Axes.
 ax.set_title("Simple Plot")  # Add a title to the Axes.
 ax.legend()  # Add a legend.
 plt.show()
 
+print (random.choice (arrPitch))
 
 
 #for intOctave in range (intNrOctaves) :

@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="Sync">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sound.py" beforeDir="false" afterPath="$PROJECT_DIR$/Sound.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datastructure.py" beforeDir="false" afterPath="$PROJECT_DIR$/datastructure.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,31 +50,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.MIDI_import.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Sound.executor&quot;: &quot;Run&quot;,
-    &quot;Python.composition.executor&quot;: &quot;Run&quot;,
-    &quot;Python.datastructure.executor&quot;: &quot;Run&quot;,
-    &quot;Python.examples.executor&quot;: &quot;Run&quot;,
-    &quot;Python.harmony.executor&quot;: &quot;Run&quot;,
-    &quot;Python.instruments.executor&quot;: &quot;Run&quot;,
-    &quot;Python.part01.executor&quot;: &quot;Run&quot;,
-    &quot;Python.rhythm.executor&quot;: &quot;Run&quot;,
-    &quot;Python.song.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/92591/PycharmProjects/pythonProject&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;settings.sync&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.MIDI_import.executor": "Run",
+    "Python.Sound.executor": "Run",
+    "Python.composition.executor": "Run",
+    "Python.datastructure.executor": "Debug",
+    "Python.examples.executor": "Run",
+    "Python.harmony.executor": "Run",
+    "Python.instruments.executor": "Run",
+    "Python.part01.executor": "Run",
+    "Python.rhythm.executor": "Run",
+    "Python.song.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/92591/PycharmProjects/pythonProject",
+    "settings.editor.selected.configurable": "settings.sync"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;Python&quot;,
-      &quot;PLAIN_TEXT&quot;
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "Python",
+      "PLAIN_TEXT"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\92591\PycharmProjects\pythonProject" />
@@ -388,7 +388,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727882859465</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Sync">
+      <option name="closed" value="true" />
+      <created>1727895453790</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1727895453790</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -432,10 +440,22 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/datastructure.py</url>
-          <line>28</line>
-          <option name="timeStamp" value="13" />
+          <line>38</line>
+          <option name="timeStamp" value="17" />
         </line-breakpoint>
       </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="dctChordProgr" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>
