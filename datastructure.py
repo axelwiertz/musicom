@@ -9,9 +9,12 @@ import pandas as pd
 import random
 
 from harmony import *
-from musicpy.database import *
 
-print (standard)
+#from musicpy.database import *
+#print (standard)
+
+n = N ('A4')
+print(n.degree)
 
 strSongName = 'Data structure'
 
@@ -21,11 +24,22 @@ dfParts = pd.DataFrame ([[1, 16],
     [2, 16],
     [3, 16]])
 
-intFreqA4 = 440
+
+intA4Freq = 440
+intA4PitchNr = 49
 intNrOctave = 9
 intNrDiatonicPitchClass = 12
-arrPitchClass = np.arange(intNrDiatonicPitchClass)
-arrPitchClassChar = ['C', 'c', 'D', 'd', 'E', 'F', 'f', 'G', 'g', 'A', 'a', 'B']
+intNrPitch = intNrOctave * intNrDiatonicPitchClass
+
+lstPitchClassNr = [x for x in range(intNrDiatonicPitchClass)]
+srsPitchNr = pd.Series (range (intNrPitch))
+lstPitchClassChr = ['C', 'c', 'D', 'd', 'E', 'F', 'f', 'G', 'g', 'A', 'a', 'B']
+srsPitchChr = pd.Series ([x + str(y) for y in range(intNrOctave) for x in lstPitchClassChr])
+srsPitchClassNr = pd.Series (intNrOctave * lstPitchClassNr)
+srsPitchFreq = pd.Series (2 ** ((n + 1 - 49) / intNrDiatonicPitchClass) * intA4Freq for n in range(intNrPitch))
+
+dfPitch = pd.DataFrame ([srsPitchNr.values, srsPitchClassNr.values, srsPitchChr.values, srsPitchFreq.values]).transpose()
+dfPitch.columns=['Nr','ClassNr','ClassChr','Freq']
 
 arrPitch = np.arange(intNrOctave * intNrDiatonicPitchClass).reshape(intNrOctave, intNrDiatonicPitchClass) + intNrDiatonicPitchClass
 dfPitch = pd.DataFrame (arrPitch)
@@ -46,14 +60,14 @@ x = np.linspace(0, 2, 100)  # Sample data.
 
 # Note that even in the OO-style, we use `.pyplot.figure` to create the Figure.
 fig, ax = plt.subplots(figsize=(5, 2.7), layout='constrained')
-ax.plot(arrPitch [1] , arrPitch[2], label='linear')  # Plot some data on the Axes.
+ax.plot(dfPitch, label='linear')  # Plot some data on the Axes.
 ax.set_xlabel('x label')  # Add an x-label to the Axes.
 ax.set_ylabel('y label')  # Add a y-label to the Axes.
 ax.set_title("Simple Plot")  # Add a title to the Axes.
 ax.legend()  # Add a legend.
 plt.show()
 
-print (random.choice (arrPitch))
+print (random.choice (dfPitch))
 
 
 #for intOctave in range (intNrOctaves) :

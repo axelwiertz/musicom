@@ -56,7 +56,7 @@
     "Python.Sound.executor": "Run",
     "Python.composition.executor": "Run",
     "Python.database.executor": "Debug",
-    "Python.datastructure.executor": "Debug",
+    "Python.datastructure.executor": "Run",
     "Python.examples.executor": "Run",
     "Python.harmony.executor": "Run",
     "Python.instruments.executor": "Run",
@@ -405,7 +405,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728050377359</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="Sync">
+      <option name="closed" value="true" />
+      <created>1728303193486</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1728303193486</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -449,18 +457,8 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/datastructure.py</url>
-          <line>42</line>
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/datastructure.py</url>
-          <line>34</line>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/datastructure.py</url>
-          <line>15</line>
-          <option name="timeStamp" value="21" />
+          <line>44</line>
+          <option name="timeStamp" value="22" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
