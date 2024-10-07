@@ -1,14 +1,17 @@
 '''
 Music - Datastructure
 '''
-import random
 
 # Import
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+import random
 
 from harmony import *
+from musicpy.database import *
+
+print (standard)
 
 strSongName = 'Data structure'
 
