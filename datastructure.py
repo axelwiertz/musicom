@@ -26,20 +26,21 @@ dfParts = pd.DataFrame ([[1, 16],
 
 
 intA4Freq = 440
-intA4PitchNr = 49
+intA4PitchNr = 69
 intNrOctave = 9
 intNrDiatonicPitchClass = 12
 intNrPitch = intNrOctave * intNrDiatonicPitchClass
 
 lstPitchClassNr = [x for x in range(intNrDiatonicPitchClass)]
 srsPitchNr = pd.Series (range (intNrPitch))
-lstPitchClassChr = ['C', 'c', 'D', 'd', 'E', 'F', 'f', 'G', 'g', 'A', 'a', 'B']
-srsPitchChr = pd.Series ([x + str(y) for y in range(intNrOctave) for x in lstPitchClassChr])
+lstPitchClassChr = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
+srsPitchChr = pd.Series ([x + str(y) for y in range(-1, intNrOctave+1) for x in lstPitchClassChr])
 srsPitchClassNr = pd.Series (intNrOctave * lstPitchClassNr)
-srsPitchFreq = pd.Series (2 ** ((n + 1 - 49) / intNrDiatonicPitchClass) * intA4Freq for n in range(intNrPitch))
+srsPitchFreq = pd.Series (2 ** ((n - intA4PitchNr) / intNrDiatonicPitchClass) * intA4Freq for n in range(intNrPitch))
+srsPitchNote = pd.Series (degree_to_note(x) for x in range (intNrPitch) )
 
-dfPitch = pd.DataFrame ([srsPitchNr.values, srsPitchClassNr.values, srsPitchChr.values, srsPitchFreq.values]).transpose()
-dfPitch.columns=['Nr','ClassNr','ClassChr','Freq']
+dfPitch = pd.DataFrame ([srsPitchNr.values, srsPitchClassNr.values, srsPitchChr.values, srsPitchNote.values, srsPitchFreq.values]).transpose()
+dfPitch.columns=['Nr','ClassNr','ClassChr','Note', 'Freq']
 
 arrPitch = np.arange(intNrOctave * intNrDiatonicPitchClass).reshape(intNrOctave, intNrDiatonicPitchClass) + intNrDiatonicPitchClass
 dfPitch = pd.DataFrame (arrPitch)
