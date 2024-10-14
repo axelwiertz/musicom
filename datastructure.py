@@ -18,36 +18,32 @@ print(n.degree)
 
 strSongName = 'Data structure'
 
-# Parts
-dfForm = pd.DataFrame ([16, 16, 16])
-dfParts = pd.DataFrame ([[1, 16],
-    [2, 16],
-    [3, 16]])
-
-
+# Constant values of diatonic, equal temperament scale
 intA4Freq = 440
 intA4PitchNr = 69
 intNrOctave = 9
 intNrDiatonicPitchClass = 12
+intNrDegreeHeptaScale = 7
 intNrPitch = intNrOctave * intNrDiatonicPitchClass
 
-lstPitchClassNr = [x for x in range(intNrDiatonicPitchClass)]
-srsPitchNr = pd.Series (range (intNrPitch))
+lstPitchClassNr = list(range (intNrDiatonicPitchClass))
 lstPitchClassChr = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
+lstPitchNr = list(range(intNrPitch))
+lstDegree = list(range(1,intNrDegreeHeptaScale+1))
+srsPitchNr = pd.Series (range (intNrPitch))
 srsPitchChr = pd.Series ([x + str(y) for y in range(-1, intNrOctave+1) for x in lstPitchClassChr])
 srsPitchClassNr = pd.Series (intNrOctave * lstPitchClassNr)
 srsPitchFreq = pd.Series (2 ** ((n - intA4PitchNr) / intNrDiatonicPitchClass) * intA4Freq for n in range(intNrPitch))
 srsPitchNote = pd.Series (degree_to_note(x) for x in range (intNrPitch) )
+lstPitchClassBasePattern = [1,0,1,0,1,1,0,1,0,1,0,1]
+lstScaleDegreeMajorPattern = [1,0,2,0,3,4,0,5,0,6,0,7]
+
 
 dfPitch = pd.DataFrame ([srsPitchNr.values, srsPitchClassNr.values, srsPitchChr.values, srsPitchNote.values, srsPitchFreq.values]).transpose()
 dfPitch.columns=['Nr','ClassNr','ClassChr','Note', 'Freq']
 
-arrPitch = np.arange(intNrOctave * intNrDiatonicPitchClass).reshape(intNrOctave, intNrDiatonicPitchClass) + intNrDiatonicPitchClass
-dfPitch = pd.DataFrame (arrPitch)
 
-octave = ['C', 'c', 'D', 'd', 'E', 'F', 'f', 'G', 'g', 'A', 'a', 'B']
-arrKeys = np.array([x, y] for y in range(0, 9) for x in octave)
-keys = np.array([x + str(y) for y in range(0, 9) for x in octave])
+keys = np.array([x + str(y) for y in range(0, 9) for x in lstPitchClassChr])
 # Trim to standard 88 keys
 start = np.where(keys == 'A0')[0][0]
 end = np.where(keys == 'C8')[0][0]
@@ -61,7 +57,7 @@ x = np.linspace(0, 2, 100)  # Sample data.
 
 # Note that even in the OO-style, we use `.pyplot.figure` to create the Figure.
 fig, ax = plt.subplots(figsize=(5, 2.7), layout='constrained')
-ax.plot(dfPitch, label='linear')  # Plot some data on the Axes.
+ax.plot(srsPitchClassNr, label='linear')  # Plot some data on the Axes.
 ax.set_xlabel('x label')  # Add an x-label to the Axes.
 ax.set_ylabel('y label')  # Add a y-label to the Axes.
 ax.set_title("Simple Plot")  # Add a title to the Axes.
@@ -69,6 +65,12 @@ ax.legend()  # Add a legend.
 plt.show()
 
 print (random.choice (dfPitch))
+
+# Parts
+dfForm = pd.DataFrame ([16, 16, 16])
+dfParts = pd.DataFrame ([[1, 16],
+    [2, 16],
+    [3, 16]])
 
 
 #for intOctave in range (intNrOctaves) :
