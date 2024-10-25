@@ -41,7 +41,6 @@ lstHeptaScalePitchClassBinaryPattern = [1,0,1,0,1,1,0,1,0,1,0,1] # Heptatonic ma
 lstHeptaScaleChordDegreePattern = [1,3,5,7,2,4,6]
 
 # Table of all data along pitch number set
-# dfPitch = pd.DataFrame ([srsPitchNr.values, srsPitchClassNr.values, srsPitchClassChr.values, srsPitchNote.values, srsPitchFreq.values]).transpose()
 dfPitch = pd.DataFrame ([lstPitchNr, srsPitchClassNr.values, srsPitchClassChr.values, srsPitchNote.values, srsPitchFreq.values]).transpose()
 dfPitch.columns=['Nr','ClassNr','ClassChr','Note', 'Freq']
 
