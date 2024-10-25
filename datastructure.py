@@ -13,69 +13,57 @@ from harmony import *
 #from musicpy.database import *
 #print (standard)
 
-n = N ('A4')
-print(n.degree)
 
 strSongName = 'Data structure'
 
 # Constant values of diatonic, equal temperament scale
-intA4Freq = 440
-intA4PitchNr = 69
-intNrOctave = 9
-intNrDiatonicPitchClass = 12
-intNrDegreeHeptaScale = 7
-intNrPitch = intNrOctave * intNrDiatonicPitchClass
+intA4Freq = 440 # Frequency of A4
+intA4PitchNr = 69 # MIDI number of A4
+intNrOctave = 9 # Number of octaves in the pitch set
+intNrDiatonicPitchClass = 12 # Number of pitch classes 0-11
+intNrDegreeHeptaScale = 7 # Number of pitch classes in a heptatonic scale
+intNrDegreePentaScale = 5 # Number of pitch classes in a pentatonic scale
 
-lstPitchClassNr = list(range (intNrDiatonicPitchClass))
-lstPitchClassChr = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
-lstPitchNr = list(range(intNrPitch))
-lstDegree = list(range(1,intNrDegreeHeptaScale+1))
-srsPitchNr = pd.Series (range (intNrPitch))
-srsPitchChr = pd.Series ([x + str(y) for y in range(-1, intNrOctave+1) for x in lstPitchClassChr])
+intTotalNrPitch = intNrOctave * intNrDiatonicPitchClass # Total number of pitches diatonic pitch set
+
+lstPitchClassNr = list(range (intNrDiatonicPitchClass)) # Pitch class number
+lstPitchClassChr = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'] # Pitch class characters
+lstPitchNr = list(range(intTotalNrPitch)) # Pitch number set
+srsPitchNr = pd.Series (range (intTotalNrPitch))
+lstDegree = list(range(1,intNrDegreeHeptaScale+1)) # Heptatonic scale degree number
+srsPitchClassChr = pd.Series ([x + str(y) for y in range(-1, intNrOctave+1) for x in lstPitchClassChr])
 srsPitchClassNr = pd.Series (intNrOctave * lstPitchClassNr)
-srsPitchFreq = pd.Series (2 ** ((n - intA4PitchNr) / intNrDiatonicPitchClass) * intA4Freq for n in range(intNrPitch))
-srsPitchNote = pd.Series (degree_to_note(x) for x in range (intNrPitch) )
-lstPitchClassBasePattern = [1,0,1,0,1,1,0,1,0,1,0,1]
-lstScaleDegreeMajorPattern = [1,0,2,0,3,4,0,5,0,6,0,7]
+srsPitchFreq = pd.Series (2 ** ((n - intA4PitchNr) / intNrDiatonicPitchClass) * intA4Freq for n in range(intTotalNrPitch)) # Pitch frequencies
+srsPitchNote = pd.Series (degree_to_note(x) for x in range (intTotalNrPitch) ) # Pitch Note instances
+lstHeptaScalePitchClassIntervalPattern = [2,2,1,2,2,2,1] # Heptatonic major scale interval pattern
+lstHeptaScalePitchClassBinaryPattern = [1,0,1,0,1,1,0,1,0,1,0,1] # Heptatonic major scale binary pattern
 
+lstHeptaScaleChordDegreePattern = [1,3,5,7,2,4,6]
 
-dfPitch = pd.DataFrame ([srsPitchNr.values, srsPitchClassNr.values, srsPitchChr.values, srsPitchNote.values, srsPitchFreq.values]).transpose()
+# Table of all data along pitch number set
+# dfPitch = pd.DataFrame ([srsPitchNr.values, srsPitchClassNr.values, srsPitchClassChr.values, srsPitchNote.values, srsPitchFreq.values]).transpose()
+dfPitch = pd.DataFrame ([lstPitchNr, srsPitchClassNr.values, srsPitchClassChr.values, srsPitchNote.values, srsPitchFreq.values]).transpose()
 dfPitch.columns=['Nr','ClassNr','ClassChr','Note', 'Freq']
 
 
-keys = np.array([x + str(y) for y in range(0, 9) for x in lstPitchClassChr])
-# Trim to standard 88 keys
-start = np.where(keys == 'A0')[0][0]
-end = np.where(keys == 'C8')[0][0]
-keys = keys[start:end + 1]
 
-base_freq = 440  # Frequency of Note A4
-note_freqs = dict(zip(keys, [2 ** ((n + 1 - 49) / 12) * base_freq for n in range(len(keys))]))
-note_freqs[''] = 0.0  # stop
-
-x = np.linspace(0, 2, 100)  # Sample data.
 
 # Note that even in the OO-style, we use `.pyplot.figure` to create the Figure.
 fig, ax = plt.subplots(figsize=(5, 2.7), layout='constrained')
-ax.plot(srsPitchClassNr, label='linear')  # Plot some data on the Axes.
-ax.set_xlabel('x label')  # Add an x-label to the Axes.
-ax.set_ylabel('y label')  # Add a y-label to the Axes.
-ax.set_title("Simple Plot")  # Add a title to the Axes.
+ax.plot(srsPitchFreq.values, label='pitch frequency')  # Plot some data on the Axes.
+ax.set_xlabel('Pitch number')  # Add an x-label to the Axes.
+ax.set_ylabel('Frequency')  # Add a y-label to the Axes.
+ax.set_title("Pitches")  # Add a title to the Axes.
 ax.legend()  # Add a legend.
 plt.show()
 
-print (random.choice (dfPitch))
+print (random.choice (lstPitchNr))
 
 # Parts
 dfForm = pd.DataFrame ([16, 16, 16])
 dfParts = pd.DataFrame ([[1, 16],
     [2, 16],
     [3, 16]])
-
-
-#for intOctave in range (intNrOctaves) :
-#    for intDiatonicNr in range (intNrDiatonic) :
-#        lstPitch.append note01.degree = (intOctave+1)*12 + intDiatonicNr
 
 
 
