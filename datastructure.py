@@ -13,36 +13,43 @@ from harmony import *
 #from musicpy.database import *
 #print (standard)
 
+strSongName = 'Diatonic pitch set'
 
-strSongName = 'Data structure'
-
-# Constant values of diatonic, equal temperament scale
+# Diatonic pitch set, equal temperament scale
 intA4Freq = 440 # Frequency of A4
 intA4PitchNr = 69 # MIDI number of A4
 intNrOctave = 9 # Number of octaves in the pitch set
 intNrDiatonicPitchClass = 12 # Number of pitch classes 0-11
-intNrDegreeHeptaScale = 7 # Number of pitch classes in a heptatonic scale
-intNrDegreePentaScale = 5 # Number of pitch classes in a pentatonic scale
-
-intTotalNrPitch = intNrOctave * intNrDiatonicPitchClass # Total number of pitches diatonic pitch set
-
+# Total number of pitches diatonic pitch set
+intTotalNrPitch = intNrOctave * intNrDiatonicPitchClass
 lstPitchClassNr = list(range (intNrDiatonicPitchClass)) # Pitch class number
 lstPitchClassChr = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'] # Pitch class characters
 lstPitchNr = list(range(intTotalNrPitch)) # Pitch number set
 srsPitchNr = pd.Series (range (intTotalNrPitch))
-lstDegree = list(range(1,intNrDegreeHeptaScale+1)) # Heptatonic scale degree number
+# Pitch class
 srsPitchClassChr = pd.Series ([x + str(y) for y in range(-1, intNrOctave+1) for x in lstPitchClassChr])
 srsPitchClassNr = pd.Series (intNrOctave * lstPitchClassNr)
 srsPitchFreq = pd.Series (2 ** ((n - intA4PitchNr) / intNrDiatonicPitchClass) * intA4Freq for n in range(intTotalNrPitch)) # Pitch frequencies
 srsPitchNote = pd.Series (degree_to_note(x) for x in range (intTotalNrPitch) ) # Pitch Note instances
-lstHeptaScalePitchClassIntervalPattern = [2,2,1,2,2,2,1] # Heptatonic major scale interval pattern
-lstHeptaScalePitchClassBinaryPattern = [1,0,1,0,1,1,0,1,0,1,0,1] # Heptatonic major scale binary pattern
 
-lstHeptaScaleChordDegreePattern = [1,3,5,7,2,4,6]
 
-# Table of all data along pitch number set
+# Heptatonic scale
+intNrDegreeHeptaScale = 7 # Number of pitch classes in a heptatonic scale
+lstDegree = list(range(1,intNrDegreeHeptaScale+1)) # Heptatonic scale degree number
+lstHeptaScaleIntervalPattern = [2,2,1,2,2,2,1] # Heptatonic major scale interval pattern
+lstHeptaScaleBinaryPattern = [1,0,1,0,1,1,0,1,0,1,0,1] # Heptatonic major scale binary pattern
+lstHeptaScale = [lstHeptaScaleBinaryPattern[x:]+lstHeptaScaleBinaryPattern[:x] for x in range(intNrDiatonicPitchClass) ]
+lstScale = intNrOctave * lstHeptaScaleBinaryPattern
+
+lstHeptaScaleChordDegreePattern = [1,3,5,7,2,4,6] #Heptatonic
+# Pentatonic scale
+intNrDegreePentaScale = 5 # Number of pitch classes in a pentatonic scale
+
+
+# Table of all diatonic data along pitch number set
 dfPitch = pd.DataFrame ([lstPitchNr, srsPitchClassNr.values, srsPitchClassChr.values, srsPitchNote.values, srsPitchFreq.values]).transpose()
 dfPitch.columns=['Nr','ClassNr','ClassChr','Note', 'Freq']
+
 
 
 
