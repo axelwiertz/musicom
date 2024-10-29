@@ -37,9 +37,20 @@ srsPitchNote = pd.Series (degree_to_note(x) for x in range (intTotalNrPitch) ) #
 intNrDegreeHeptaScale = 7 # Number of pitch classes in a heptatonic scale
 lstDegree = list(range(1,intNrDegreeHeptaScale+1)) # Heptatonic scale degree number
 lstHeptaScaleIntervalPattern = [2,2,1,2,2,2,1] # Heptatonic major scale interval pattern
-lstHeptaScaleBinaryPattern = [1,0,1,0,1,1,0,1,0,1,0,1] # Heptatonic major scale binary pattern
-lstHeptaScale = [lstHeptaScaleBinaryPattern[x:]+lstHeptaScaleBinaryPattern[:x] for x in range(intNrDiatonicPitchClass) ]
-lstScale = intNrOctave * lstHeptaScaleBinaryPattern
+lstHeptaScaleInterval = [lstHeptaScaleIntervalPattern[x:]+lstHeptaScaleIntervalPattern[:x] for x in range(intNrDegreeHeptaScale) ]
+
+def IntervalToBinary (lstInterval):
+    lstBinary = []
+    for x in lstInterval:
+        lstBinary.append(1)
+        for y in range(1,x):
+            lstBinary.append(0)
+    return lstBinary
+
+lstHeptaScaleBinary = [IntervalToBinary(lstHeptaScaleInterval[x]) for x in range(len(lstHeptaScaleInterval))] # Heptatonic major scale binary patterns
+
+
+lstScale = intNrOctave * lstHeptaScaleBinary [0]
 
 lstHeptaScaleChordDegreePattern = [1,3,5,7,2,4,6] #Heptatonic
 # Pentatonic scale
