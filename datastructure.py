@@ -58,8 +58,8 @@ intNrDegreePentaScale = 5 # Number of pitch classes in a pentatonic scale
 
 
 # Table of all diatonic data along pitch number set
-dfPitch = pd.DataFrame ([lstPitchNr, srsPitchClassNr.values, srsPitchClassChr.values, srsPitchNote.values, srsPitchFreq.values]).transpose()
-dfPitch.columns=['Nr','ClassNr','ClassChr','Note', 'Freq']
+dfPitch = pd.DataFrame ([lstPitchNr, srsPitchClassNr.values, srsPitchClassChr.values, srsPitchNote.values, srsPitchFreq.values, lstScale]).transpose()
+dfPitch.columns=['Nr','ClassNr','ClassChr','Note', 'Freq', "Scale"]
 
 
 
