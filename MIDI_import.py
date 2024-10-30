@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 
 # Location of files
 #strMIDIpathIn = 'C:\\temp\\Music\\MIDI\\'
-strMIDIpathIn ='C:\Users\92591\OneDrive\Music\MIDI'
+strMIDIpathIn = 'C:\\Users\\92591\\OneDrive\\Music\\'
 strMIDIpathOut = strMIDIpathIn
 #strMIDIpathOut = 'C:\\temp\\Music\\'
 # 'C:\\Users\\axelw\\OneDrive\Music\\'
@@ -30,11 +30,13 @@ lstStrMIDIFileName = [
 'berendans.mid'
 ]
 
-strMIDIFileNameOut = 'track.mid'
+strMIDIFileNameOut = 'out.mid'
 
 # Read MIDI file
 i = 0
-pceMIDI = read (strMIDIpathIn + lstStrMIDIFileName[i], get_off_drums=True, split_channels=True)
+strFileIn = lstStrMIDIFileName[i]
+strFileIn = 'In.mid'
+pceMIDI = read (strMIDIpathIn + strFileIn, get_off_drums=True, split_channels=True)
 
 # Select track and part
 intTrack = 0
@@ -52,8 +54,8 @@ sclSource = scale('Eb', 'major')
 # print (sclSource)
 sclTarget = scale('C', 'major')
 
-# Modulate
-chdTarget = pceMIDI[intTrack].content.modulation(sclSource, sclTarget)
+# Modulate track
+# chdTarget = pceMIDI[intTrack].content.modulation(sclSource, sclTarget)
 # Slice
 chdTarget = trkTrack1[nFrom:nTo]
 
@@ -80,7 +82,7 @@ write (pceTarget, name=strMIDIpathOut+ strMIDIFileNameOut)
 intInstr = 1
 intBPM = 100
 print ('Play :')
-play(pceTarget, wait=True)
+#play(pceTarget, wait=True)
 #play (pceMIDI, wait=True)
 #play (pceMIDI[intTrack], instrument=intInstr, wait=True)
 # play (pceMIDI[intTrack].content, bpm=intBPM, instrument=intInstr)
@@ -88,9 +90,9 @@ play(pceTarget, wait=True)
 #play (chdTarget, wait=true)
 
 # Analyis
-#str1 = mp.alg.detect (pceMIDI(intTrack))
+str1 = mp.alg.detect (pceMIDI(intTrack))
 #str2 = mp.alg.detect (lisNotes)
-#str3 = mp.alg.chord_analysis (pceMIDI(intTrack))
+str3 = mp.alg.chord_analysis (pceMIDI(intTrack))
 #str4 = mp.alg.chord_analysis (lisNotes)
 str5 = analyze_rhythm (pceMIDI(intTrack))
 
