@@ -1,12 +1,12 @@
 '''
 Music - Datastructure
 '''
+import itertools
+import random
 
 # Import
 import matplotlib.pyplot as plt
-import numpy as np
 import pandas as pd
-import random
 
 from harmony import *
 
@@ -35,14 +35,16 @@ srsPitchNote = pd.Series (degree_to_note(x) for x in range (intTotalNrPitch) ) #
 
 # Heptatonic scale
 intNrDegreeHeptaScale = 7 # Number of pitch classes in a heptatonic scale
-lstDegree = list(range(1,intNrDegreeHeptaScale+1)) # Heptatonic scale degree number
+lstIntHeptaDegree = list(range(1,intNrDegreeHeptaScale+1)) # Heptatonic scale degree number
 lstHeptaScaleIntervalPattern = [2,2,1,2,2,2,1] # Heptatonic major scale interval pattern
 lstHeptaScaleInterval = [lstHeptaScaleIntervalPattern[x:]+lstHeptaScaleIntervalPattern[:x] for x in range(intNrDegreeHeptaScale) ]
 
 def IntervalToBinary (lstInterval):
     lstBinary = []
+    intDegree = 1
     for x in lstInterval:
-        lstBinary.append(1)
+        lstBinary.append(intDegree)
+        intDegree += 1
         for y in range(1,x):
             lstBinary.append(0)
     return lstBinary
@@ -52,7 +54,18 @@ lstHeptaScaleBinary = [IntervalToBinary(lstHeptaScaleInterval[x]) for x in range
 
 lstScale = intNrOctave * lstHeptaScaleBinary [0]
 
-lstHeptaScaleChordDegreePattern = [1,3,5,7,2,4,6] #Heptatonic
+# Chord patterns in list of scale degrees
+lstChordDegreePattern = [1,3,5,7,2,4,6] #Heptatonic
+lstHeptaScaleChord = [lstChordDegreePattern[x:]+lstChordDegreePattern[:x] for x in range(intNrDegreeHeptaScale) ]
+lstHeptaScaleChord.sort()
+
+lstHeptaScaleChordDegreeIntervalPattern = [2,2,2,2,2,2,2] #Heptatonic
+
+# Permutations: ordered set
+lstPermChordDegreePattern = list(itertools.permutations (lstIntHeptaDegree))
+# Combinations
+lstCombChordDegreePattern = list(itertools.combinations (lstIntHeptaDegree, 3))
+
 # Pentatonic scale
 intNrDegreePentaScale = 5 # Number of pitch classes in a pentatonic scale
 
@@ -61,11 +74,13 @@ intNrDegreePentaScale = 5 # Number of pitch classes in a pentatonic scale
 dfPitch = pd.DataFrame ([lstPitchNr, srsPitchClassNr.values, srsPitchClassChr.values, srsPitchNote.values, srsPitchFreq.values, lstScale]).transpose()
 dfPitch.columns=['Nr','ClassNr','ClassChr','Note', 'Freq', 'Scale']
 
-print (dfPitch.at [69, 'Note'])
 
-dctRangeInstr = {'Piano': [note('A', 0) ,note('C', 8)]}
-
-
+# Pitch ranges of instruments
+dctRangeInstr = {
+    'Piano': [note('A', 0) ,note('C', 8)], # Piano keyboard
+    'Guitar': [note('E', 2), note('D', 6)], # Acoustic guitar with standard tuning
+    'Ukelele': [note('C', 4), note('C', 6)] # ??
+}
 
 # Note that even in the OO-style, we use `.pyplot.figure` to create the Figure.
 fig, ax = plt.subplots(figsize=(5, 2.7), layout='constrained')
@@ -76,6 +91,7 @@ ax.set_title("Pitches")  # Add a title to the Axes.
 ax.legend()  # Add a legend.
 plt.show()
 
+# Select random pictch
 print (random.choice (lstPitchNr))
 
 # Parts
@@ -122,9 +138,3 @@ lstIntChannel.append (1)
 lstChdTrack.append (chdRhythm.apply_rhythm (rtmSong))
 lstIntChannel.append (9)
 '''
-
-
-
-
-
-
