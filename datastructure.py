@@ -6,6 +6,7 @@ import random
 
 # Import
 import matplotlib.pyplot as plt
+import numpy as np
 import pandas as pd
 
 from harmony import *
@@ -27,13 +28,18 @@ lstPitchClassChr = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 
 lstPitchNr = list(range(intTotalNrPitch)) # Pitch number set
 srsPitchNr = pd.Series (range (intTotalNrPitch))
 # Pitch class
-srsPitchClassChr = pd.Series ([x + str(y) for y in range(-1, intNrOctave+1) for x in lstPitchClassChr])
+srsPitchClassChr = pd.Series ([x for y in range(-1, intNrOctave+1) for x in lstPitchClassChr])
 srsPitchClassNr = pd.Series (intNrOctave * lstPitchClassNr)
 srsPitchFreq = pd.Series (2 ** ((n - intA4PitchNr) / intNrDiatonicPitchClass) * intA4Freq for n in range(intTotalNrPitch)) # Pitch frequencies
 srsPitchNote = pd.Series (degree_to_note(x) for x in range (intTotalNrPitch) ) # Pitch Note instances
 
 
-# Heptatonic scale
+# Pentatonic (5 pitch class) scale
+intNrDegreePentaScale = 5 # Number of pitch classes in a pentatonic scale
+lstIntPentaDegree = list(range(1,intNrDegreePentaScale+1)) # Pentatonic scale degree number
+lstPentaScaleIntervalPattern = [2,2,3,2,3] # Pentatonic major scale interval pattern
+lstPentaScaleInterval = [lstPentaScaleIntervalPattern[x:]+lstPentaScaleIntervalPattern[:x] for x in range(intNrDegreePentaScale) ]
+# Heptatonic (7 pitch class) scale
 intNrDegreeHeptaScale = 7 # Number of pitch classes in a heptatonic scale
 lstIntHeptaDegree = list(range(1,intNrDegreeHeptaScale+1)) # Heptatonic scale degree number
 lstHeptaScaleIntervalPattern = [2,2,1,2,2,2,1] # Heptatonic major scale interval pattern
@@ -50,15 +56,17 @@ def IntervalToBinary (lstInterval):
     return lstBinary
 
 lstHeptaScaleBinary = [IntervalToBinary(lstHeptaScaleInterval[x]) for x in range(len(lstHeptaScaleInterval))] # Heptatonic major scale binary patterns
+lstPentaScaleBinary = [IntervalToBinary(lstPentaScaleInterval[x]) for x in range(len(lstPentaScaleInterval))] # Heptatonic major scale binary patterns
 
 
-lstScale = intNrOctave * lstHeptaScaleBinary [0]
+lstScale = intNrOctave * lstHeptaScaleBinary [0] # C Major scale pitch mask
+lstHeptaScale = [lstScale[-x:]+lstScale[:-x] for x in range(intNrDiatonicPitchClass) ] # All major scale pitch mask
+arrHeptaScale = np.array(lstHeptaScale)
 
 # Chord patterns in list of scale degrees
 lstChordDegreePattern = [1,3,5,7,2,4,6] #Heptatonic
 lstHeptaScaleChord = [lstChordDegreePattern[x:]+lstChordDegreePattern[:x] for x in range(intNrDegreeHeptaScale) ]
 lstHeptaScaleChord.sort()
-
 lstHeptaScaleChordDegreeIntervalPattern = [2,2,2,2,2,2,2] #Heptatonic
 
 # Permutations: ordered set
@@ -66,33 +74,33 @@ lstPermChordDegreePattern = list(itertools.permutations (lstIntHeptaDegree))
 # Combinations
 lstCombChordDegreePattern = list(itertools.combinations (lstIntHeptaDegree, 3))
 
-# Pentatonic scale
-intNrDegreePentaScale = 5 # Number of pitch classes in a pentatonic scale
+
 
 
 # Table of all diatonic data along pitch number set
-dfPitch = pd.DataFrame ([lstPitchNr, srsPitchClassNr.values, srsPitchClassChr.values, srsPitchNote.values, srsPitchFreq.values, lstScale]).transpose()
-dfPitch.columns=['Nr','ClassNr','ClassChr','Note', 'Freq', 'Scale']
+dfPitch = pd.DataFrame ([lstPitchNr, srsPitchClassNr.values, srsPitchClassChr.values, srsPitchNote.values, srsPitchFreq.values]).transpose()
+dfPitch.columns=['Nr','ClassNr','ClassChr','Note', 'Freq']
 
 
 # Pitch ranges of instruments
 dctRangeInstr = {
-    'Piano': [note('A', 0) ,note('C', 8)], # Piano keyboard
-    'Guitar': [note('E', 2), note('D', 6)], # Acoustic guitar with standard tuning
-    'Ukelele': [note('C', 4), note('C', 6)] # ??
+    'Piano': ['A0','C8'], # Piano keyboard
+    'Guitar': ['E2','D6'], # Acoustic guitar with standard tuning
+    'Ukelele': ['C4', 'C6'] # ??
 }
 
 # Note that even in the OO-style, we use `.pyplot.figure` to create the Figure.
-fig, ax = plt.subplots(figsize=(5, 2.7), layout='constrained')
-ax.plot(srsPitchFreq.values, label='pitch frequency')  # Plot some data on the Axes.
-ax.set_xlabel('Pitch number')  # Add an x-label to the Axes.
-ax.set_ylabel('Frequency')  # Add a y-label to the Axes.
-ax.set_title("Pitches")  # Add a title to the Axes.
-ax.legend()  # Add a legend.
-plt.show()
+#fig, ax = plt.subplots(figsize=(5, 2.7), layout='constrained')
+#ax.plot(srsPitchFreq.values, label='pitch frequency')  # Plot some data on the Axes.
+#ax.set_xlabel('Pitch number')  # Add an x-label to the Axes.
+#ax.set_ylabel('Frequency')  # Add a y-label to the Axes.
+#ax.set_title("Pitches")  # Add a title to the Axes.
+#ax.legend()  # Add a legend.
+#plt.show()
 
 # Select random pictch
-print (random.choice (lstPitchNr))
+intPitch = random.choice (lstPitchNr)
+print (srsPitchNote.values[intPitch])
 
 # Parts
 dfForm = pd.DataFrame ([16, 16, 16])
