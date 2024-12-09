@@ -24,9 +24,20 @@ rtmSonClave = rhythm('b 0 0 b 0 0 b 0 0 0 b 0 b 0 0 0', 1, beats=16)
 # 3/4
 rtmWaltz = rhythm('b b b', 1, beats=3, time_signature=[3, 4] )
 
+print (rtmTresillo)
 
+rtmSong = rtmBell
+chd01 = chord('C4', 1/8, 1/8)*7
+chd02 = chd01.apply_rhythm (rtmSong)
+play(chd02, wait=True)
 
-
-
+'''
+lstChdTrack = []
+lstIntChannel = []
+lstChdTrack.append (chd01.apply_rhythm (rtmSong))
+lstIntChannel.append (1)
+lstChdTrack.append (chdRhythm.apply_rhythm (rtmSong))
+lstIntChannel.append (9)
+'''
 
 

@@ -141,12 +141,3 @@ lstIntChannel = [1] # list of channelnumbers
 lstIntStartTimes = [0] # list of starttimes
 
 
-'''
-chd01 = chord('C4', 1/8, 1/8)*100
-lstChdTrack = []
-lstIntChannel = []
-lstChdTrack.append (chd01.apply_rhythm (rtmSong))
-lstIntChannel.append (1)
-lstChdTrack.append (chdRhythm.apply_rhythm (rtmSong))
-lstIntChannel.append (9)
-'''
