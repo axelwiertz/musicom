@@ -11,6 +11,9 @@ import numpy
 import matplotlib
 import matplotlib.pyplot as plt
 
+'''
+Load MIDI
+'''
 
 # Location of files
 #strMIDIpathIn = 'C:\\temp\\Music\\MIDI\\'
@@ -30,7 +33,6 @@ lstStrMIDIFileName = [
 'berendans.mid'
 ]
 
-strMIDIFileNameOut = 'out.mid'
 
 # Read MIDI file
 i = 0
@@ -38,47 +40,84 @@ strFileIn = lstStrMIDIFileName[i]
 strFileIn = 'In.mid'
 pceMIDI = read (strMIDIpathIn + strFileIn, get_off_drums=True, split_channels=True)
 
-# Select track and part
-intTrack = 0
+print ('Piece loaded :')
+print (pceMIDI)
+
+'''
+Select track and part
+'''
+intTrack = 2
 nFrom = 0
-nTo = 900
-nTo = 220
+nTo = 47
 
 intNumTracks = len(pceMIDI.tracks)
 trkTrack1 = pceMIDI(intTrack)
-lisNotes = trkTrack1.notes[nFrom:nTo]
-intNumNotes = len (lisNotes)
+lstNotes = trkTrack1.notes[nFrom:nTo]
+intNumNotes = len (lstNotes)
+
+print ('Track selected :')
+print (trkTrack1)
+print ('Track part from :' + str(nFrom) + ' to ' + str(nTo) + ' :')
+print (trkTrack1[nFrom:nTo])
+print ('Notes from track : '+ str(lstNotes))
+print ('Number of notes : ' + str(intNumNotes))
+
+print (pceMIDI[intTrack].content)
+print (pceMIDI[intTrack].content.notes)
+
+intInstr = 1
+print ('Play selected track :')
+#play(trkTrack1[nFrom:nTo], instrument=intInstr)
+#, wait=True)
+
+
+
+'''
+Analyze track
+'''
+str1 = mp.alg.detect (pceMIDI(intTrack))
+str2 = mp.alg.detect (trkTrack1[nFrom:nTo])
+str3 = mp.alg.chord_analysis (pceMIDI(intTrack))
+str4 = mp.alg.chord_analysis (trkTrack1[nFrom:nTo])
+str5 = analyze_rhythm (trkTrack1[nFrom:nTo])
+
+print (str1)
+print (str2)
+print (str3)
+print (str4)
+print (str5)
+
+
+'''
+Transform
+'''
+
+# Slice
+chdTarget = trkTrack1[nFrom:nTo]
 
 # Scales
 sclSource = scale('Eb', 'major')
 # print (sclSource)
 sclTarget = scale('C', 'major')
 
-# Modulate track
-# chdTarget = pceMIDI[intTrack].content.modulation(sclSource, sclTarget)
-# Slice
-chdTarget = trkTrack1[nFrom:nTo]
+# Modulate
+chdTarget = pceMIDI[intTrack].content.modulation(sclSource, sclTarget)
 
-print (pceMIDI)
-print ('Track :')
-print (trkTrack1)
-print ('Track part from ' + str(nFrom) + ' to ' + str(nTo) + ' :')
-print (trkTrack1[nFrom:nTo])
-print ('Notes from track : '+ str(lisNotes))
-print ('Number of notes : ' + str(intNumNotes))
 
-print (pceMIDI[intTrack].content)
-print (pceMIDI[intTrack].content.notes)
+'''
+Export
+'''
+strMIDIFileNameOut = 'out.mid'
 
 print ('Target chord :')
 print (chdTarget.notes)
-
-# Export
 pceTarget = piece (tracks= [chdTarget])
 print (pceTarget)
 write (pceTarget, name=strMIDIpathOut+ strMIDIFileNameOut)
 
-# Play
+'''
+Play
+'''
 intInstr = 1
 intBPM = 100
 print ('Play :')
@@ -86,17 +125,5 @@ print ('Play :')
 #play (pceMIDI, wait=True)
 #play (pceMIDI[intTrack], instrument=intInstr, wait=True)
 # play (pceMIDI[intTrack].content, bpm=intBPM, instrument=intInstr)
-#play (chdTarget, wait=True)
-#play (chdTarget, wait=true)
+play (chdTarget, wait=True)
 
-# Analyis
-str1 = mp.alg.detect (pceMIDI(intTrack))
-#str2 = mp.alg.detect (lisNotes)
-str3 = mp.alg.chord_analysis (pceMIDI(intTrack))
-#str4 = mp.alg.chord_analysis (lisNotes)
-str5 = analyze_rhythm (pceMIDI(intTrack))
-
-#print (str1)
-#print (str2)
-#print (str3)
-#print (str4)
