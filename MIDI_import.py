@@ -46,9 +46,10 @@ print (pceMIDI)
 '''
 Select track and part
 '''
-intTrack = 2
+intTrack = 0
 nFrom = 0
-nTo = 47
+nTo = 4
+#nTo = 47
 
 intNumTracks = len(pceMIDI.tracks)
 trkTrack1 = pceMIDI(intTrack)
@@ -125,5 +126,5 @@ print ('Play :')
 #play (pceMIDI, wait=True)
 #play (pceMIDI[intTrack], instrument=intInstr, wait=True)
 # play (pceMIDI[intTrack].content, bpm=intBPM, instrument=intInstr)
-play (chdTarget, wait=True)
+#play (chdTarget, wait=True)
 
