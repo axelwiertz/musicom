@@ -3,9 +3,11 @@ Music MIDI import
 '''
 
 # Modules
+import music21 as m21
 import musicpy as mp
-from musicpy import *
-from musicpy.daw import *
+#from musicpy.daw import *
+
+m21.configure.run()
 
 import numpy
 import matplotlib
@@ -38,7 +40,10 @@ lstStrMIDIFileName = [
 i = 0
 strFileIn = lstStrMIDIFileName[i]
 strFileIn = 'In.mid'
-pceMIDI = read (strMIDIpathIn + strFileIn, get_off_drums=True, split_channels=True)
+pceMIDI = mp.read (strMIDIpathIn + strFileIn, get_off_drums=True, split_channels=True)
+sceMIDI = m21.converter.parse(strMIDIpathIn + strFileIn)
+
+sceMIDI.show()
 
 print ('Piece loaded :')
 print (pceMIDI)
