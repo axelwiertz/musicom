@@ -2,31 +2,47 @@
 Music - Template
 '''
 
-from harmony import *
+from datastructure import *
 
 import random
+# Select random pitch
+intPitch = random.choice (lstPitchNr)
+print (dfPitch.values[intPitch])
 
-def
+# Parts
+dfForm = pd.DataFrame ([16, 16, 16])
+dfParts = pd.DataFrame ([[1, 16],
+    [2, 16],
+    [3, 16]])
+
+
+melody = m21.stream.Stream()
+melody.append(m21.note.Note('C4'))
+melody.append(m21.note.Note('E4'))
+melody.append(m21.note.Note('G4'))
+melody.append(m21.note.Note('C5'))
+
 
 strSongName = 'Patterns'
 
 # Scale
 #scl01 = S(str(dctStyleScale['Standard'][0]))
-scl01 = S('E major')
+
+scl01 = mp.S('C major')
 # All chord patterns
 lstChord01 = lstChordPattern
 chd01 = scl01.chord_progression(lstChord01[0])
 for i in range(1, len(lstChordPattern)-1):
 #    print (lstChordPattern[i])
     chd02 = scl01.chord_progression(lstChord01[i], durations=1 / 2, intervals=0, volumes=None, chords_interval=None)
-    chd01 = chd01 + rest(1/2) + chd02
+    chd01 = chd01 + mp.rest(1/2) + chd02
 
 # All chords
 lstChdScale = scl01%(1234567, 0.5)
 chd01 = lstChdScale[0]
 for i in range(1, 7):
 #    print (lstChordPattern[i])
-    chd01 = chd01 + rest(1/2) + lstChdScale[i]
+    chd01 = chd01 + mp.rest(1/2) + lstChdScale[i]
 
 
 

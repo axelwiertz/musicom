@@ -2,18 +2,17 @@
 Music - Harmony
 Patterns and rules
 '''
-# modules
-import musicpy as mp
-from musicpy import *
 
-
+'''
+Chords
+'''
 # Chords
 # Chord ladder
 dctChordLadder = {
     'Major': [['I','vi'],['V', 'vii0'],['ii', 'IV'],['vi'],['iii']],
     'Minor': [['i','VI'],['V', 'vii0'],['ii0', 'iv'],['VI'],['III']]
 }
-# Progression rules
+# Widely used chrod progressions
 dctChordProgr = {
     'I': ['*'],
     'ii' : ['IV', 'V', 'vii0'],
@@ -54,8 +53,9 @@ lstChordPattern = [
 ]
 #print(lstChordPattern)
 
-
-# Ending cadence
+'''
+Ending cadence
+'''
 dctCadencePattern = {
 # Perfect cadence
     'Perfect' : ['V', 'I'],
@@ -67,6 +67,9 @@ dctCadencePattern = {
     'Interrupted' : [['V', 'IV'], ['V', 'vi'], ['V', 'ii'], ['V', 'V7']]
 }
 
+'''
+Scales in styles
+'''
 dctStyleScale = {
 # Standard
     'Standard' : ['C major'],
@@ -76,6 +79,9 @@ dctStyleScale = {
     'Bossa Nova' : ['C major']
 }
 
+'''
+Chord progression patterns in styles
+'''
 dctStyleChordPattern = {
     'Fantasy' :  [
 # I II VI II
@@ -95,15 +101,17 @@ dctStyleChordPattern = {
 'Bossa Nova' : [
     ['ii', 'V', 'I'],
     ['Imaj7', 'II7', 'iim7']
+    ],
+
+'Lounge/Jazz' : [
+    [4, 2, 5, 1],
+    [7, 3, 6, 2, 5, 1]
     ]
 }
 
-
-# Lounge / Jazz
-s1 = S('C major')
-chd4 = s1 % 4251
-chd5 = s1 % 736251
-
+'''
+Voice movement
+'''
 
 # Melody scale degrees notes
 dctScaleNotes = {
@@ -143,4 +151,13 @@ dctScaleDegrMove = {
     0 : 0,
     0 : +2,
     0 : -2
+}
+
+'''
+Pitch ranges of instruments
+'''
+dctRangeInstr = {
+    'Piano': ['A0','C8'], # Piano keyboard
+    'Guitar': ['E2','D6'], # Acoustic guitar with standard tuning
+    'Ukelele': ['C4', 'C6'] # ??
 }

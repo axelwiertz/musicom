@@ -9,8 +9,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
+# Harmony data
 from harmony import *
-
+import music21 as m21
+import musicpy as mp
+#from musicpy.daw import *
 #from musicpy.database import *
 #print (standard)
 
@@ -42,7 +45,6 @@ srsPitchNr = pd.Series (range (intTotalNrPitch))
 srsPitchClassChr = pd.Series ([x for y in range(-1, intNrOctave+1) for x in lstPitchClassChr])
 srsPitchClassNr = pd.Series (intNrOctave * lstPitchClassNr)
 srsPitchFreq = pd.Series (2 ** ((n - intA4PitchNr) / intNrDiatonicPitchClass) * intA4Freq for n in range(intTotalNrPitch)) # Pitch frequencies
-srsPitchNote = pd.Series (degree_to_note(x) for x in range (intTotalNrPitch) ) # Pitch Note instances
 
 
 # Pentatonic (5 pitch class) scale
@@ -81,16 +83,9 @@ lstCombChordDegreePattern = list(itertools.combinations (lstIntHeptaDegree, 3))
 
 
 # Table of all diatonic data along pitch number set
-dfPitch = pd.DataFrame ([lstPitchNr, srsPitchClassNr.values, srsPitchClassChr.values, srsPitchNote.values, srsPitchFreq.values]).transpose()
-dfPitch.columns=['Nr','ClassNr','ClassChr','Note', 'Freq']
+dfPitch = pd.DataFrame ([lstPitchNr, srsPitchClassNr.values, srsPitchClassChr.values, srsPitchFreq.values]).transpose()
+dfPitch.columns=['Nr','ClassNr','ClassChr', 'Freq']
 
-
-# Pitch ranges of instruments
-dctRangeInstr = {
-    'Piano': ['A0','C8'], # Piano keyboard
-    'Guitar': ['E2','D6'], # Acoustic guitar with standard tuning
-    'Ukelele': ['C4', 'C6'] # ??
-}
 
 # Plot
 # Note that even in the OO-style, we use `.pyplot.figure` to create the Figure.
@@ -101,43 +96,5 @@ dctRangeInstr = {
 #ax.set_title("Pitches")  # Add a title to the Axes.
 #ax.legend()  # Add a legend.
 #plt.show()
-
-# Select random pictch
-intPitch = random.choice (lstPitchNr)
-print (srsPitchNote.values[intPitch])
-
-# Parts
-dfForm = pd.DataFrame ([16, 16, 16])
-dfParts = pd.DataFrame ([[1, 16],
-    [2, 16],
-    [3, 16]])
-
-
-
-scl01 = S('C major')
-# All chord patterns
-lstChord01 = lstChordPattern
-chd01 = scl01.chord_progression(lstChord01[0])
-for i in range(1, len(lstChordPattern)-1):
-#    print (lstChordPattern[i])
-    chd02 = scl01.chord_progression(lstChord01[i], durations=1 / 2, intervals=0, volumes=None, chords_interval=None)
-    chd01 = chd01 + rest(1/2) + chd02
-
-# All chords
-lstChdScale = scl01%(1234567, 0.5)
-chd01 = lstChdScale[0]
-for i in range(1, 7):
-#    print (lstChordPattern[i])
-    chd01 = chd01 + rest(1/2) + lstChdScale[i]
-
-
-
-#print (chd01)
-#play (chd01, wait=True)
-
-# Output
-lstChdTrack = [chd01] # list of tracks
-lstIntChannel = [1] # list of channelnumbers
-lstIntStartTimes = [0] # list of starttimes
 
 

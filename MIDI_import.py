@@ -2,12 +2,12 @@
 Music MIDI import
 '''
 
-# Modules
-import music21 as m21
-import musicpy as mp
-#from musicpy.daw import *
+# Musical library
 
-m21.configure.run()
+from datastructure import *
+
+
+#m21.configure.run()
 
 import numpy
 import matplotlib
@@ -43,7 +43,9 @@ strFileIn = 'In.mid'
 pceMIDI = mp.read (strMIDIpathIn + strFileIn, get_off_drums=True, split_channels=True)
 sceMIDI = m21.converter.parse(strMIDIpathIn + strFileIn)
 
-sceMIDI.show()
+print (sceMIDI.notes)
+
+print (sceMIDI.analyze('key'))
 
 print ('Piece loaded :')
 print (pceMIDI)
@@ -85,7 +87,7 @@ str1 = mp.alg.detect (pceMIDI(intTrack))
 str2 = mp.alg.detect (trkTrack1[nFrom:nTo])
 str3 = mp.alg.chord_analysis (pceMIDI(intTrack))
 str4 = mp.alg.chord_analysis (trkTrack1[nFrom:nTo])
-str5 = analyze_rhythm (trkTrack1[nFrom:nTo])
+str5 = mp.alg.analyze_rhythm (trkTrack1[nFrom:nTo])
 
 print (str1)
 print (str2)
@@ -102,9 +104,9 @@ Transform
 chdTarget = trkTrack1[nFrom:nTo]
 
 # Scales
-sclSource = scale('Eb', 'major')
+sclSource = mp.scale('Bb', 'major')
 # print (sclSource)
-sclTarget = scale('C', 'major')
+sclTarget = mp.scale('C', 'major')
 
 # Modulate
 chdTarget = pceMIDI[intTrack].content.modulation(sclSource, sclTarget)
@@ -117,9 +119,9 @@ strMIDIFileNameOut = 'out.mid'
 
 print ('Target chord :')
 print (chdTarget.notes)
-pceTarget = piece (tracks= [chdTarget])
+pceTarget = mp.piece (tracks= [chdTarget])
 print (pceTarget)
-write (pceTarget, name=strMIDIpathOut+ strMIDIFileNameOut)
+mp.write (pceTarget, name=strMIDIpathOut+ strMIDIFileNameOut)
 
 '''
 Play
