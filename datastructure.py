@@ -13,6 +13,7 @@ import pandas as pd
 from harmony import *
 import music21 as m21
 import musicpy as mp
+import showscore as ssc
 #from musicpy.daw import *
 #from musicpy.database import *
 #print (standard)

@@ -1,6 +1,7 @@
 '''
 Music MIDI import
 '''
+import music21.converter.subConverters
 
 # Musical library
 
@@ -41,10 +42,17 @@ i = 0
 strFileIn = lstStrMIDIFileName[i]
 strFileIn = 'In.mid'
 pceMIDI = mp.read (strMIDIpathIn + strFileIn, get_off_drums=True, split_channels=True)
+
 sceMIDI = m21.converter.parse(strMIDIpathIn + strFileIn)
+vceVoice = sceMIDI.parts[0]
 
-print (sceMIDI.notes)
+sceABC = music21.converter.subConverters.ConverterABC(sceMIDI)
 
+#vceVoice.plot('3d')
+vceVoice.plot('histogram','pitch')
+vceVoice.show('abc')
+
+ssc.show(sceMIDI)
 print (sceMIDI.analyze('key'))
 
 print ('Piece loaded :')
