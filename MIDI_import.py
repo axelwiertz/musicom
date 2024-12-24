@@ -46,7 +46,6 @@ pceMIDI = mp.read (strMIDIpathIn + strFileIn, get_off_drums=True, split_channels
 sceMIDI = m21.converter.parse(strMIDIpathIn + strFileIn)
 vceVoice = sceMIDI.parts[0]
 
-sceABC = music21.converter.subConverters.ConverterABC(sceMIDI)
 
 #vceVoice.plot('3d')
 vceVoice.plot('histogram','pitch')
