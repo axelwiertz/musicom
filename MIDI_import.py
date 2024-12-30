@@ -15,14 +15,14 @@ import matplotlib
 import matplotlib.pyplot as plt
 
 '''
-Load MIDI
+Load MIDI / MusicXML
 '''
 
 # Location of files
-#strMIDIpathIn = 'C:\\temp\\Music\\MIDI\\'
-strMIDIpathIn = 'C:\\Users\\92591\\OneDrive\\Music\\'
-strMIDIpathOut = strMIDIpathIn
-#strMIDIpathOut = 'C:\\temp\\Music\\'
+#strPathIn = 'C:\\temp\\Music\\MIDI\\'
+strPathIn = 'C:\\Users\\92591\\OneDrive\\Music\\'
+strPathOut = strPathIn
+#strPathOut = 'C:\\temp\\Music\\'
 # 'C:\\Users\\axelw\\OneDrive\Music\\'
 
 lstStrMIDIFileName = [
@@ -39,20 +39,24 @@ lstStrMIDIFileName = [
 
 # Read MIDI file
 i = 0
-strFileIn = lstStrMIDIFileName[i]
-strFileIn = 'In.mid'
-pceMIDI = mp.read (strMIDIpathIn + strFileIn, get_off_drums=True, split_channels=True)
+strMIDIFileIn = lstStrMIDIFileName[i]
+strMIDIFileIn = 'In.mid'
+strMXLFileIn = 'In.mxl'
 
-sceMIDI = m21.converter.parse(strMIDIpathIn + strFileIn)
-vceVoice = sceMIDI.parts[0]
+pceMIDI = mp.read (strPathIn + strMIDIFileIn, get_off_drums=True, split_channels=True)
+
+sceFileIn2 = m21.converter.parse(strPathIn + strMIDIFileIn)
+sceFileIn = m21.converter.parse(strPathIn + strMXLFileIn)
+
+vceVoice = sceFileIn.parts[0]
 
 
 #vceVoice.plot('3d')
 vceVoice.plot('histogram','pitch')
-vceVoice.show('abc')
+#vceVoice.show('abc')
 
-ssc.show(sceMIDI)
-print (sceMIDI.analyze('key'))
+ssc.show(sceFileIn)
+print (sceFileIn.analyze('key'))
 
 print ('Piece loaded :')
 print (pceMIDI)
@@ -128,7 +132,7 @@ print ('Target chord :')
 print (chdTarget.notes)
 pceTarget = mp.piece (tracks= [chdTarget])
 print (pceTarget)
-mp.write (pceTarget, name=strMIDIpathOut+ strMIDIFileNameOut)
+mp.write (pceTarget, name=strPathOut+ strMIDIFileNameOut)
 
 '''
 Play
