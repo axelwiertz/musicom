@@ -1,3 +1,54 @@
+Note
+
+    QuaLen
+    octave
+    .transpose
+    .split
+Pitch
+Duration
+    .Tuplet
+meter.TimeSignature
+
+converter.parse
+Stream
+    .append
+    .insert
+    .recurse traverse tree
+    .measure
+Score
+Part
+Voice
+
+Composition
+1. Time
+Rhythm event pattern
+Even / odd
+Kick (first + nearlast / Snare middle / Hi-hat (every)
+
+2. Pitch
+Contour
+    Shape:
+        Bass/back: steady 1 + 5
+        Chords/harmony: jumpy triads+extended
+        Lead/melody: smooth, penta, hepta
+    Direction
+    Repetition: events, varia
+Scale
+    Align with scales
+    Modulation: Circle, Key Change, Maj/Min
+        middle part, Bar change, Section
+Chord Prog
+    Chord Types: Tension/Resolution
+
+    Based on Scale degree:
+        I home
+        II,IV Suspend
+        3,6 Colour
+        5 dominant
+        7 leading
+
+Bass Sraed
+
 Data structure
 voice = pitch, rhythm (time)
 melody voice
