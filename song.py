@@ -1,6 +1,7 @@
 '''
 Music - Template
 '''
+import music21.stream
 
 from datastructure import *
 
@@ -16,11 +17,12 @@ dfParts = pd.DataFrame ([[1, 16],
     [3, 16]])
 
 
-melody = m21.stream.Stream()
-melody.append(m21.note.Note('C4'))
-melody.append(m21.note.Note('E4'))
-melody.append(m21.note.Note('G4'))
-melody.append(m21.note.Note('C5'))
+strStream01 = m21.stream.Stream()
+prtPart = music21.stream.Part
+strStream01.append(m21.note.Note('C4'))
+strStream01.append(m21.note.Note('E4'))
+strStream01.append(m21.note.Note('G4'))
+strStream01.append(m21.note.Note('C5'))
 
 
 strSongName = 'Patterns'
