@@ -1,8 +1,10 @@
+from music21 import stream
+
 '''
 Music - Rhythm
 '''
 # modules
-import musicpy as mp
+import datastructure
 from musicpy import *
 from musicpy.daw import *
 
@@ -40,4 +42,20 @@ lstChdTrack.append (chdRhythm.apply_rhythm (rtmSong))
 lstIntChannel.append (9)
 '''
 
+'''
+Music 21 rhythm_and_duration
+'''
+s = stream.Stream()
+s.insert(meter.TimeSignature('4/4')
+# A list representing the durations of notes in a rhythmic sequence
+notes_values = [1.5, 0.5, 0.5, 0.25, 0.25, 1]
+# Iterate over the list
+for note_value in notes_values
+# Set the new duration to the current note value
+    s.append(note. Note('C4', duration=duration. Duration(note_value)) )
+    #Insert a several new notes
+    new_note_1 = note.Note('C4', duration=duration. Duration(0.75)
+    new_note_2 = note.Note('C4', duration=duration. Duration(0.25) )
+    s.insertAndShift([2, new_note_1, 2.75, new_note_2])
 
+s. show()

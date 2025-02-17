@@ -1,11 +1,28 @@
 '''
 Music - Template
 '''
-import music21.stream
+from music21 import stream
 
 from datastructure import *
 
 import random
+
+score = stream.Score()
+# Create a part object to represent a single instrumental or vocal part
+part = stream.Part( )
+# Create a part object to represent a bass part
+bass_line = stream.Part()
+#Create two voice objects to represent the melody and the harmony parts
+voice1 = stream.Voice()
+voice2 = stream.Voice()
+# Define a list of notenames that make up a C major scale
+notes = ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"]
+# Create a note object for each note and append it to voice
+for notename in notes:
+    melody_note = note.Note(notename)
+    voice1. append(melody_note)
+
+
 # Select random pitch
 intPitch = random.choice (lstPitchNr)
 print (dfPitch.values[intPitch])
