@@ -1,5 +1,5 @@
 '''
-Music - Datastructure
+Music data - Structure
 '''
 import itertools
 import random
@@ -18,6 +18,7 @@ import showscore as ssc
 #from musicpy.database import *
 #print (standard)
 
+# Convert a list of intervals to a binary mask
 def IntervalToBinary (lstInterval):
     lstBinary = []
     intDegree = 1
@@ -28,6 +29,10 @@ def IntervalToBinary (lstInterval):
             lstBinary.append(0)
     return lstBinary
 
+
+'''
+Music data - Absolute data: frequency, pitch(class), octave
+'''
 
 strSongName = 'Diatonic pitch set'
 

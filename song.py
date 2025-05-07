@@ -2,6 +2,7 @@
 Music - Template
 '''
 from music21 import stream
+from music21 import scale
 
 from datastructure import *
 
@@ -46,7 +47,7 @@ strSongName = 'Patterns'
 
 # Scale
 #scl01 = S(str(dctStyleScale['Standard'][0]))
-
+sclScale01 = m21.scale()
 scl01 = mp.S('C major')
 # All chord patterns
 lstChord01 = lstChordPattern
