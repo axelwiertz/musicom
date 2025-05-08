@@ -7,12 +7,25 @@ Patterns and rules
 Chords
 '''
 # Chords
-# Chord ladder
-dctTriChordLadder = {
-    'Major': [['I','vi'],['V', 'vii0'],['ii', 'IV'],['vi'],['iii']],
-    'Minor': [['i','VI'],['V', 'vii0'],['ii0', 'iv'],['VI'],['III']],
-    'Generic': ((1, 6),(5, 7),(2, 4),(6),(3))
+dctChordRomanMm = {
+    1: ('I','i'),
+    2: ('ii','ii0'),
+    3: ('iii','III'),
+    4: ('IV','iv'),
+    5: ('V','V'),
+    6: ('vi','VI'),
+    7: ('vii0','vii0')
 }
+
+# Chord ladder
+lstTriChordLadder = (
+    (1, 6),
+    (5, 7),
+    (2, 4),
+    (6),
+    (3)
+)
+
 # Widely used chord progressions
 dctChordProgr = {
     1 : ('*'),

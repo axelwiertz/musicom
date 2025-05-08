@@ -70,27 +70,32 @@ lstHeptaScaleIntervalPattern = (2,2,1,2,2,2,1) # Heptatonic major scale interval
 lstHeptaScaleInterval = tuple(lstHeptaScaleIntervalPattern[x:]+lstHeptaScaleIntervalPattern[:x] for x in range(intNrDegreeHeptaScale) )
 lstHeptaScaleBinary = [IntervalToBinary(lstHeptaScaleInterval[x]) for x in range(len(lstHeptaScaleInterval))] # Heptatonic major scale binary patterns
 
+# Scale pitch mask
+# Major
+lstScale = intNrOctave * lstHeptaScaleBinary [0] # C scale pitch mask
+# Minor
+lstScale1 = intNrOctave * lstHeptaScaleBinary [5] # a scale pitch mask
+
+lstHeptaScale = [lstScale[-x:]+lstScale[:-x] for x in range(intNrDiatonicPitchClass) ] # All major scale pitch mask
+arrHeptaScale = np.array(lstHeptaScale)
+
 '''
 Music data - Relative data: chords
 '''
 lstChordIntervals = (3,4) # Chord intervals
+# diminished, major, minor, augmented
 dctChordIntervals = {
     'd': (3, 3),
     'M': (4, 3),
     'm': (3, 4),
     'A': (4, 4)
 }
-
+# inversions
+lstInversions = list(itertools.permutations ((1,3,5)))
 
 '''
 Music data - Chords in scales
 '''
-# Scale pitch mask
-# To do minor scale?
-lstScale = intNrOctave * lstHeptaScaleBinary [0] # C Major scale pitch mask
-lstHeptaScale = [lstScale[-x:]+lstScale[:-x] for x in range(intNrDiatonicPitchClass) ] # All major scale pitch mask
-arrHeptaScale = np.array(lstHeptaScale)
-
 # Chord patterns in list of scale degrees
 lstChordDegreePattern = [1,3,5,7,2,4,6] #Heptatonic
 
