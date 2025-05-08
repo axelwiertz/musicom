@@ -8,22 +8,23 @@ Chords
 '''
 # Chords
 # Chord ladder
-dctChordLadder = {
+dctTriChordLadder = {
     'Major': [['I','vi'],['V', 'vii0'],['ii', 'IV'],['vi'],['iii']],
-    'Minor': [['i','VI'],['V', 'vii0'],['ii0', 'iv'],['VI'],['III']]
+    'Minor': [['i','VI'],['V', 'vii0'],['ii0', 'iv'],['VI'],['III']],
+    'Generic': ((1, 6),(5, 7),(2, 4),(6),(3))
 }
-# Widely used chrod progressions
+# Widely used chord progressions
 dctChordProgr = {
-    'I': ['*'],
-    'ii' : ['IV', 'V', 'vii0'],
-    'iii' : ['ii', 'IV', 'vi'],
-    'IV' : ['I', 'iii', 'V', 'vii0'],
-    'V' : ['I'],
-    'vi' : ['I', 'iii']
+    1 : ('*'),
+    2 : (4, 5, 7),
+    3 : (2, 4, 6),
+    4 : (1, 3, 5, 7),
+    5 : (1),
+    6 : (1, 3)
 }
 
 lstChordPattern = [
-    # Analysis of all progressions
+ # Analysis of all progressions
     ['I', 'vi', 'IV', 'viio', 'I'] ,
     ['I', 'vi', 'ii', 'viio', 'I'] ,
     ['I', 'vi', 'IV', 'V', 'I'] ,
@@ -58,13 +59,13 @@ Ending cadence
 '''
 dctCadencePattern = {
 # Perfect cadence
-    'Perfect' : ['V', 'I'],
+    'Perfect' : ('V', 'I'),
 # Plagal cadence
-    'Plagal' : ['IV', 'I'],
+    'Plagal' : ('IV', 'I'),
 # Imperfect cadence
-    'Imperfect' : [['I', 'V'], ['ii', 'V'], ['IV', 'V'], ['vi', 'V']],
+    'Imperfect' : (('I', 'V'), ('ii', 'V'), ('IV', 'V'), ('vi', 'V')),
 # Interrupted cadence
-    'Interrupted' : [['V', 'IV'], ['V', 'vi'], ['V', 'ii'], ['V', 'V7']]
+    'Interrupted' : (('V', 'IV'), ('V', 'vi'), ('V', 'ii'), ('V', 'V7'))
 }
 
 '''

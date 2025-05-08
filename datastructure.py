@@ -52,13 +52,16 @@ srsPitchClassChr = pd.Series ([x for y in range(-1, intNrOctave+1) for x in lstP
 srsPitchClassNr = pd.Series (intNrOctave * lstPitchClassNr)
 srsPitchFreq = pd.Series (2 ** ((n - intA4PitchNr) / intNrDiatonicPitchClass) * intA4Freq for n in range(intTotalNrPitch)) # Pitch frequencies
 
-
+'''
+Music data - Relative data: pentatonic and heptatonic scales
+'''
 # Pentatonic (5 pitch class) scale
 intNrDegreePentaScale = 5 # Number of pitch classes in a pentatonic scale
 lstIntPentaDegree = tuple(range(1,intNrDegreePentaScale+1)) # Pentatonic scale degree number
 lstPentaScaleIntervalPattern = (2,2,3,2,3) # Pentatonic major scale interval pattern
 lstPentaScaleInterval = tuple(lstPentaScaleIntervalPattern[x:]+lstPentaScaleIntervalPattern[:x] for x in range(intNrDegreePentaScale) )
 lstPentaScaleBinary = [IntervalToBinary(lstPentaScaleInterval[x]) for x in range(len(lstPentaScaleInterval))] # Heptatonic major scale binary patterns
+
 # Heptatonic (7 pitch class) scale
 intNrDegreeHeptaScale = 7 # Number of pitch classes in a heptatonic scale
 lstIntHeptaDegree = tuple(range(1,intNrDegreeHeptaScale+1)) # Heptatonic scale degree number
@@ -67,8 +70,22 @@ lstHeptaScaleIntervalPattern = (2,2,1,2,2,2,1) # Heptatonic major scale interval
 lstHeptaScaleInterval = tuple(lstHeptaScaleIntervalPattern[x:]+lstHeptaScaleIntervalPattern[:x] for x in range(intNrDegreeHeptaScale) )
 lstHeptaScaleBinary = [IntervalToBinary(lstHeptaScaleInterval[x]) for x in range(len(lstHeptaScaleInterval))] # Heptatonic major scale binary patterns
 
+'''
+Music data - Relative data: chords
+'''
+lstChordIntervals = (3,4) # Chord intervals
+dctChordIntervals = {
+    'd': (3, 3),
+    'M': (4, 3),
+    'm': (3, 4),
+    'A': (4, 4)
+}
+
+'''
+Music data - Chords in scales
+'''
 # Scale pitch mask
-# To do minor scale
+# To do minor scale?
 lstScale = intNrOctave * lstHeptaScaleBinary [0] # C Major scale pitch mask
 lstHeptaScale = [lstScale[-x:]+lstScale[:-x] for x in range(intNrDiatonicPitchClass) ] # All major scale pitch mask
 arrHeptaScale = np.array(lstHeptaScale)
@@ -84,8 +101,6 @@ lstHeptaScaleChordDegreeIntervalPattern = [2,2,2,2,2,2,2] #Heptatonic
 lstPermChordDegreePattern = list(itertools.permutations (lstIntHeptaDegree))
 # Combinations
 lstCombChordDegreePattern = list(itertools.combinations (lstIntHeptaDegree, 3))
-
-
 
 
 # Table of all diatonic data along pitch number set
