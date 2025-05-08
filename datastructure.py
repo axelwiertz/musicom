@@ -81,6 +81,7 @@ dctChordIntervals = {
     'A': (4, 4)
 }
 
+
 '''
 Music data - Chords in scales
 '''
