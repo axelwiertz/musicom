@@ -53,22 +53,41 @@ srsPitchClassNr = pd.Series (intNrOctave * lstPitchClassNr)
 srsPitchFreq = pd.Series (2 ** ((n - intA4PitchNr) / intNrDiatonicPitchClass) * intA4Freq for n in range(intTotalNrPitch)) # Pitch frequencies
 
 '''
-Music data - Relative data: pentatonic and heptatonic scales
+Music data - Diatonic patterns: triads
+'''
+intNrDegreeScale = 3 # Number of pitch classes in a triad
+lstIntDegree = tuple(range(1,intNrDegreeScale+1)) # Scale degree numbers
+# Patterns: diminished, major, minor, augmented
+dctIntervalPattern = {
+    'd': (3, 3, 6),
+    'M': (4, 3, 5),
+    'm': (3, 4, 5),
+    'A': (4, 4, 4)
+}
+lstIntervalPattern = dctIntervalPattern['M']
+
+# inversions
+lstScaleInterval = tuple(lstIntervalPattern[x:]+lstIntervalPattern[:x] for x in range(intNrDegreeScale) )
+lstScaleBinary = [IntervalToBinary(lstScaleInterval[x]) for x in range(len(lstScaleInterval))] # Binary patterns
+
+
+'''
+Music data - Diatonic patterns: pentatonic and heptatonic scales
 '''
 # Pentatonic (5 pitch class) scale
 intNrDegreePentaScale = 5 # Number of pitch classes in a pentatonic scale
 lstIntPentaDegree = tuple(range(1,intNrDegreePentaScale+1)) # Pentatonic scale degree number
-lstPentaScaleIntervalPattern = (2,2,3,2,3) # Pentatonic major scale interval pattern
+lstPentaScaleIntervalPattern = (2,2,3,2,3) # Pentatonic interval pattern
 lstPentaScaleInterval = tuple(lstPentaScaleIntervalPattern[x:]+lstPentaScaleIntervalPattern[:x] for x in range(intNrDegreePentaScale) )
-lstPentaScaleBinary = [IntervalToBinary(lstPentaScaleInterval[x]) for x in range(len(lstPentaScaleInterval))] # Heptatonic major scale binary patterns
+lstPentaScaleBinary = [IntervalToBinary(lstPentaScaleInterval[x]) for x in range(len(lstPentaScaleInterval))] # Heptatonic binary patterns
 
 # Heptatonic (7 pitch class) scale
 intNrDegreeHeptaScale = 7 # Number of pitch classes in a heptatonic scale
 lstIntHeptaDegree = tuple(range(1,intNrDegreeHeptaScale+1)) # Heptatonic scale degree number
-lstHeptaScaleIntervalPattern = (2,2,1,2,2,2,1) # Heptatonic major scale interval pattern
+lstHeptaScaleIntervalPattern = (2,2,1,2,2,2,1) # Heptatonic interval pattern
 # Modes
 lstHeptaScaleInterval = tuple(lstHeptaScaleIntervalPattern[x:]+lstHeptaScaleIntervalPattern[:x] for x in range(intNrDegreeHeptaScale) )
-lstHeptaScaleBinary = [IntervalToBinary(lstHeptaScaleInterval[x]) for x in range(len(lstHeptaScaleInterval))] # Heptatonic major scale binary patterns
+lstHeptaScaleBinary = [IntervalToBinary(lstHeptaScaleInterval[x]) for x in range(len(lstHeptaScaleInterval))] # Heptatonic binary patterns
 
 # Scale pitch mask
 # Major
@@ -79,22 +98,10 @@ lstScale1 = intNrOctave * lstHeptaScaleBinary [5] # a scale pitch mask
 lstHeptaScale = [lstScale[-x:]+lstScale[:-x] for x in range(intNrDiatonicPitchClass) ] # All major scale pitch mask
 arrHeptaScale = np.array(lstHeptaScale)
 
-'''
-Music data - Relative data: chords
-'''
-lstChordIntervals = (3,4) # Chord intervals
-# diminished, major, minor, augmented
-dctChordIntervals = {
-    'd': (3, 3),
-    'M': (4, 3),
-    'm': (3, 4),
-    'A': (4, 4)
-}
-# inversions
-lstInversions = list(itertools.permutations ((1,3,5)))
 
 '''
 Music data - Chords in scales
+
 '''
 # Chord patterns in list of scale degrees
 lstChordDegreePattern = [1,3,5,7,2,4,6] #Heptatonic
@@ -122,6 +129,27 @@ dfPitch.columns=['Nr','ClassNr','ClassChr', 'Freq']
 #ax.set_ylabel('Frequency')  # Add a y-label to the Axes.
 #ax.set_title("Pitches")  # Add a title to the Axes.
 #ax.legend()  # Add a legend.
+#plt.show()
+
+
+# Pitch class numbers
+pitch_classes = list(range(12))
+
+# Convert pitch class numbers to angles
+angles = np.linspace(0, 2 * np.pi, 12, endpoint=False)
+
+# Create a figure and axis
+fig, ax = plt.subplots(subplot_kw={'projection': 'polar'})
+
+# Plot the pitch class numbers
+for angle, pitch in zip(angles, pitch_classes):
+    ax.plot(angle, 1, 'o', markersize=10)
+    ax.text(angle, 1.1, str(pitch), ha='center', va='center')
+
+# Set the title
+ax.set_title('Circle of Pitch Class Numbers')
+
+# Show the plot
 #plt.show()
 
 
