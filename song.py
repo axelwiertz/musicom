@@ -1,6 +1,7 @@
 '''
 Music - Template
 '''
+import music21.scale
 from music21 import stream
 from music21 import scale
 
@@ -20,7 +21,7 @@ voice2 = stream.Voice()
 notes = ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"]
 # Create a note object for each note and append it to voice
 for notename in notes:
-    melody_note = note.Note(notename)
+    melody_note = m21.note.Note(notename)
     voice1. append(melody_note)
 
 
@@ -29,25 +30,22 @@ intPitch = random.choice (lstPitchNr)
 print (dfPitch.values[intPitch])
 
 # Parts
-dfForm = pd.DataFrame ([16, 16, 16])
-dfParts = pd.DataFrame ([[1, 16],
-    [2, 16],
-    [3, 16]])
+dfForm = (16, 16, 16)
 
 
 strStream01 = m21.stream.Stream()
-prtPart = music21.stream.Part
-strStream01.append(m21.note.Note('C4'))
-strStream01.append(m21.note.Note('E4'))
-strStream01.append(m21.note.Note('G4'))
-strStream01.append(m21.note.Note('C5'))
+prtPart = m21.stream.Part
+prtPart.append(m21.note.Note('C4'))
+prtPart.append(m21.note.Note('E4'))
+prtPart.append(m21.note.Note('G4'))
+prtPart.append(m21.note.Note('C5'))
 
 
 strSongName = 'Patterns'
 
 # Scale
 #scl01 = S(str(dctStyleScale['Standard'][0]))
-sclScale01 = m21.scale()
+sclScale01 = m21.scale.Scale
 scl01 = mp.S('C major')
 # All chord patterns
 lstChord01 = lstChordPattern

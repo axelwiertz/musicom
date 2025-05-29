@@ -33,20 +33,21 @@ lstStrMIDIFileName = [
 'BigYellowTaxi01.mid',
 'DKDB.mid',
 'DKDBMelody.mid',
-'berendans.mid'
+'berendans.mid',
+'Summer_sunshine__The_Corrs.mid'
 ]
 
 
 # Read MIDI file
-i = 0
+i = 8
 strMIDIFileIn = lstStrMIDIFileName[i]
 strMIDIFileIn = 'In.mid'
 strMXLFileIn = 'In.mxl'
 
 pceMIDI = mp.read (strPathIn + strMIDIFileIn, get_off_drums=True, split_channels=True)
 
-sceFileIn2 = m21.converter.parse(strPathIn + strMIDIFileIn)
-sceFileIn = m21.converter.parse(strPathIn + strMXLFileIn)
+sceFileIn = m21.converter.parse(strPathIn + strMIDIFileIn)
+sceFileIn2 = m21.converter.parse(strPathIn + strMXLFileIn)
 
 vceVoice = sceFileIn.parts[0]
 
