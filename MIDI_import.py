@@ -4,7 +4,6 @@ Music MIDI import
 import music21.converter.subConverters
 
 # Musical library
-
 from datastructure import *
 
 

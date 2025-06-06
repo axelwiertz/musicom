@@ -1,12 +1,7 @@
 '''
 Music - Compose
 '''
-# modules
-import os
-import time
-import musicpy as mp
-from musicpy import *
-from musicpy.daw import *
+
 
 # function compose song framework
 # put specific song parameters here

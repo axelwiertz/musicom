@@ -3,6 +3,9 @@ Music data - Structure
 '''
 import itertools
 import random
+import os
+import time
+
 
 # Import
 import matplotlib.pyplot as plt
@@ -11,9 +14,14 @@ import pandas as pd
 
 # Harmony data
 from harmony import *
-import music21 as m21
+from music21 import stream, note, chord, interval, meter
+
 import musicpy as mp
 import showscore as ssc
+
+
+# modules
+
 #from musicpy.daw import *
 #from musicpy.database import *
 #print (standard)
