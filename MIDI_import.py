@@ -1,7 +1,6 @@
 '''
 Music MIDI import
 '''
-import music21.converter.subConverters
 
 # Musical library
 from datastructure import *
@@ -18,8 +17,8 @@ Load MIDI / MusicXML
 '''
 
 # Location of files
-#strPathIn = 'C:\\temp\\Music\\MIDI\\'
-strPathIn = 'C:\\Users\\92591\\OneDrive\\Music\\'
+#strPathIn = 'C:\\temp\\Music\\'
+strPathIn = 'C:\\temp\\Music\\'
 strPathOut = strPathIn
 #strPathOut = 'C:\\temp\\Music\\'
 # 'C:\\Users\\axelw\\OneDrive\Music\\'

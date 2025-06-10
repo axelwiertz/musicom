@@ -1,13 +1,9 @@
 '''
 Music - Template
 '''
-import music21.scale
-from music21 import stream
-from music21 import scale
 
 from datastructure import *
 
-import random
 
 score = stream.Score()
 # Create a part object to represent a single instrumental or vocal part
@@ -46,14 +42,33 @@ strSongName = 'Patterns'
 
 # Scale
 #scl01 = S(str(dctStyleScale['Standard'][0]))
-sclScale01 = scale.Scale
+sclCM = scale.MajorScale ('c')
+keyCM = key.Key ('C')
 scl01 = mp.S('C major')
-# All chord patterns
-lstChord01 = lstChordPattern
-chd01 = scl01.chord_progression(lstChord01[0])
-for i in range(1, len(lstChordPattern)-1):
+
+# Stream of all chord patterns
+lstChordSeqs = lstChordPattern.copy()
+strStream = stream.Stream ()
+
+for i in range(1, len(lstChordSeqs)-1):
+    strStream.append (note.Rest(quarterLength=2))
+    for j in range (0, len(lstChordSeqs[i])):
+        chdChord = roman.RomanNumeral (lstChordSeqs[i][j], keyCM)
+        chdChord.duration.quarterLength = 2
+        strStream.append (chdChord)
+
+#show (strStream)
+
+# Play stream
+#strStream.show('midi')
+
+# Write stream
+strStream.write('midi', fp='C:\\temp\\Music\\out.mid')
+
+chd01 = scl01.chord_progression(lstChordSeqs[0])
+for i in range(1, len(lstChordSeqs)-1):
 #    print (lstChordPattern[i])
-    chd02 = scl01.chord_progression(lstChord01[i], durations=1 / 2, intervals=0, volumes=None, chords_interval=None)
+    chd02 = scl01.chord_progression(lstChordSeqs[i], durations=1 / 2, intervals=0, volumes=None, chords_interval=None)
     chd01 = chd01 + mp.rest(1/2) + chd02
 
 # All chords
@@ -85,6 +100,17 @@ lstIntChannel.append (9)
 '''
 
 
+
+# Interval classes
+lstPerfectIntervals = ['P1', 'P4', 'P5', 'P8']
+lstImperfectIntervals = ['M2', 'm3', 'M3', 'm6', 'M6', 'm7', 'M7']
+
+
+# Define a function to check if an interval is perfect
+def is_perfect_interval(intInterval: interval.Interval):
+    return (intInterval.quality == 'P')
+
+
 def generate_counterpoint(voice1, voice2):
     # Ensure the voices are of the same length
     if len(voice1) != len(voice2):
@@ -94,14 +120,14 @@ def generate_counterpoint(voice1, voice2):
     for i in range(len(voice1) - 1):
         intv1 = interval.Interval(voice1[i], voice1[i + 1])
         intv2 = interval.Interval(voice2[i], voice2[i + 1])
-        if intv1.isPerfect and intv2.isPerfect and intv1.direction == intv2.direction:
+        if is_perfect_interval(intv1) and is_perfect_interval(intv2) and intv1.direction == intv2.direction:
             return False
 
     # Check for hidden parallels
     for i in range(len(voice1) - 1):
         intv1 = interval.Interval(voice1[i], voice1[i + 1])
         intv2 = interval.Interval(voice2[i], voice2[i + 1])
-        if intv1.isPerfect and intv2.isPerfect and intv1.direction == intv2.direction:
+        if is_perfect_interval(intv1) and is_perfect_interval(intv2) and intv1.direction == intv2.direction:
             return False
 
     # Check for crossing voices

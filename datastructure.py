@@ -14,10 +14,11 @@ import pandas as pd
 
 # Harmony data
 from harmony import *
-from music21 import stream, note, chord, interval, meter
+from music21 import stream, note, key, scale, chord, interval, meter, roman, converter
+from showscore import show
 
 import musicpy as mp
-import showscore as ssc
+
 
 
 # modules
