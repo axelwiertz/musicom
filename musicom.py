@@ -1,5 +1,5 @@
 '''
-Music MIDI import
+Music Composition Assistant
 '''
 
 # Musical library
@@ -8,9 +8,6 @@ from datastructure import *
 
 #m21.configure.run()
 
-import numpy
-import matplotlib
-import matplotlib.pyplot as plt
 
 '''
 Load MIDI / MusicXML
