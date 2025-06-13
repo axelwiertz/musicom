@@ -1,16 +1,44 @@
 '''
-Music - Compose
+MusicPy - Archive
 '''
 
+from musicpy import *
 
-# function compose song framework
-# put specific song parameters here
-import song001
-from song import *
+scl01 = S(str(dctStyleScale['Standard'][0]))
+scl01 = mp.S('C major')
+
+chd01 = scl01.chord_progression(lstChordSeqs[0])
+for i in range(1, len(lstChordSeqs)-1):
+#    print (lstChordPattern[i])
+    chd02 = scl01.chord_progression(lstChordSeqs[i], durations=1 / 2, intervals=0, volumes=None, chords_interval=None)
+    chd01 = chd01 + mp.rest(1/2) + chd02
+
+lstChdScale = scl01%(1234567, 0.5)
+chd01 = lstChdScale[0]
+for i in range(1, 7):
+#    print (lstChordPattern[i])
+    chd01 = chd01 + mp.rest(1/2) + lstChdScale[i]
+
+
+# Output
+lstChdTrack = [chd01] # list of tracks
+lstIntChannel = [1] # list of channelnumbers
+lstIntStartTimes = [0] # list of starttimes
+
+strSongName = 'Patterns'
+
 # strSongName
 # lstChdTrack # list of tracks: type mp.Chord
 # lstIntChannel # list of channelnumbers
 # lstIntStartTimes # list of starttimes
+chd01 = chord('C4', 1/8, 1/8)*100
+lstChdTrack = []
+lstIntChannel = []
+lstChdTrack.append (chd01.apply_rhythm (rtmSong))
+lstIntChannel.append (1)
+lstChdTrack.append (chdRhythm.apply_rhythm (rtmSong))
+lstIntChannel.append (9)
+
 
 for i in range(0, len(lstChdTrack)):
     print ('Track    : ' + str(i))

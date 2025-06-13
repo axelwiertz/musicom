@@ -4,16 +4,22 @@ Music - Template
 
 from datastructure import *
 
+# Parts
+dfForm = (16, 16, 16)
 
+# Create a score
 score = stream.Score()
+# Create a stream
+strStream01 = stream.Stream()
 # Create a part object to represent a single instrumental or vocal part
 part = stream.Part( )
 # Create a part object to represent a bass part
 bass_line = stream.Part()
-#Create two voice objects to represent the melody and the harmony parts
+# Create two voice objects to represent the melody and the harmony parts
 voice1 = stream.Voice()
 voice2 = stream.Voice()
-# Define a list of notenames that make up a C major scale
+# Create a list of notes
+# C major scale
 notes = ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"]
 # Create a note object for each note and append it to voice
 for notename in notes:
@@ -25,11 +31,8 @@ for notename in notes:
 intPitch = random.choice (lstPitchNr)
 print (dfPitch.values[intPitch])
 
-# Parts
-dfForm = (16, 16, 16)
 
 
-strStream01 = stream.Stream()
 prtPart = stream.Part()
 msrMeasure = stream.Measure()
 msrMeasure.append(note.Note('C4'))
@@ -38,68 +41,37 @@ prtPart.append(note.Note('G4'))
 prtPart.append(note.Note('C5'))
 
 
-strSongName = 'Patterns'
 
-# Scale
-#scl01 = S(str(dctStyleScale['Standard'][0]))
+# Create a scale
 sclCM = scale.MajorScale ('c')
 keyCM = key.Key ('C')
-scl01 = mp.S('C major')
 
 # Stream of all chord patterns
 lstChordSeqs = lstChordPattern.copy()
 strStream = stream.Stream ()
 
 for i in range(1, len(lstChordSeqs)-1):
-    strStream.append (note.Rest(quarterLength=2))
+    strStream.append(note.Rest(quarterLength=2))
     for j in range (0, len(lstChordSeqs[i])):
         chdChord = roman.RomanNumeral (lstChordSeqs[i][j], keyCM)
         chdChord.duration.quarterLength = 2
-        strStream.append (chdChord)
-
-#show (strStream)
-
-# Play stream
-#strStream.show('midi')
+        strStream.append(chdChord)
 
 # Write stream
 strStream.write('midi', fp='C:\\temp\\Music\\out.mid')
 
-chd01 = scl01.chord_progression(lstChordSeqs[0])
-for i in range(1, len(lstChordSeqs)-1):
-#    print (lstChordPattern[i])
-    chd02 = scl01.chord_progression(lstChordSeqs[i], durations=1 / 2, intervals=0, volumes=None, chords_interval=None)
-    chd01 = chd01 + mp.rest(1/2) + chd02
 
-# All chords
-lstChdScale = scl01%(1234567, 0.5)
-chd01 = lstChdScale[0]
-for i in range(1, 7):
-#    print (lstChordPattern[i])
-    chd01 = chd01 + mp.rest(1/2) + lstChdScale[i]
+# All triads in a key
+strStream = stream.Stream()
+for i in range(intNrDegreeHeptaScale):
+    chdChord = roman.RomanNumeral(i+1, keyCM)
+    chdChord.duration.quarterLength = 2
+    strStream.append(chdChord)
+    strStream.append(note.Rest(quarterLength=2))
 
-
-
-#print (chd01)
-#play (chd01, wait=True)
-
-# Output
-lstChdTrack = [chd01] # list of tracks
-lstIntChannel = [1] # list of channelnumbers
-lstIntStartTimes = [0] # list of starttimes
-
-
-'''
-chd01 = chord('C4', 1/8, 1/8)*100
-lstChdTrack = []
-lstIntChannel = []
-lstChdTrack.append (chd01.apply_rhythm (rtmSong))
-lstIntChannel.append (1)
-lstChdTrack.append (chdRhythm.apply_rhythm (rtmSong))
-lstIntChannel.append (9)
-'''
-
-
+# Write stream
+#show (strStream)
+strStream.write('midi', fp='C:\\temp\\Music\\out.mid')
 
 # Interval classes
 lstPerfectIntervals = ('P1', 'P4', 'P5', 'P8')
@@ -107,8 +79,8 @@ lstImperfectIntervals = ('M2', 'm3', 'M3', 'm6', 'M6', 'm7', 'M7')
 
 
 # Define a function to check if an interval is perfect
-def is_perfect_interval(intInterval: interval.Interval):
-    return (intInterval.quality == 'P')
+def is_perfect_interval(ivlInterval: interval.DiatonicInterval):
+    return (ivlInterval.perfectable)
 
 
 def generate_counterpoint(voice1, voice2):
@@ -160,6 +132,7 @@ s.append(voice2)
 
 # Show the counterpoint
 s.show('text')
+show(s)
 
 
 
