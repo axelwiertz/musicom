@@ -102,8 +102,8 @@ lstIntChannel.append (9)
 
 
 # Interval classes
-lstPerfectIntervals = ['P1', 'P4', 'P5', 'P8']
-lstImperfectIntervals = ['M2', 'm3', 'M3', 'm6', 'M6', 'm7', 'M7']
+lstPerfectIntervals = ('P1', 'P4', 'P5', 'P8')
+lstImperfectIntervals = ('M2', 'm3', 'M3', 'm6', 'M6', 'm7', 'M7')
 
 
 # Define a function to check if an interval is perfect

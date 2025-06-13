@@ -14,7 +14,7 @@ import pandas as pd
 
 # Harmony data
 from harmony import *
-from music21 import stream, note, key, scale, chord, interval, meter, roman, converter
+from music21 import stream, note, key, scale, chord, interval, meter, roman, converter, instrument
 from showscore import show
 
 import musicpy as mp

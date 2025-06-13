@@ -10,52 +10,61 @@ from datastructure import *
 
 
 '''
+Source
+'''
+lstStrMIDIFileName = (
+    'de-bollo-berendans-(mp3convert.org).mp3.mid',
+    'SuperTrouper.mid',
+    'AllThatSheWants.mid',
+    'AxelTheme.mid',
+    'BigYellowTaxi01.mid',
+    'DKDB.mid',
+    'DKDBMelody.mid',
+    'berendans.mid',
+    'Summer_sunshine__The_Corrs.mid'
+)
+
+'''
 Load MIDI / MusicXML
 '''
-
-# Location of files
-#strPathIn = 'C:\\temp\\Music\\'
-strPathIn = 'C:\\temp\\Music\\'
-strPathOut = strPathIn
-#strPathOut = 'C:\\temp\\Music\\'
-# 'C:\\Users\\axelw\\OneDrive\Music\\'
-
-lstStrMIDIFileName = [
-'de-bollo-berendans-(mp3convert.org).mp3.mid',
-'SuperTrouper.mid',
-'AllThatSheWants.mid',
-'AxelTheme.mid',
-'BigYellowTaxi01.mid',
-'DKDB.mid',
-'DKDBMelody.mid',
-'berendans.mid',
-'Summer_sunshine__The_Corrs.mid'
-]
-
-
 # Read MIDI file
 i = 8
-strMIDIFileIn = lstStrMIDIFileName[i]
-strMIDIFileIn = 'In.mid'
+strMIDIFile = lstStrMIDIFileName[i]
+strMIDIFile = 'In.mid'
 strMXLFileIn = 'In.mxl'
-
-pceMIDI = mp.read (strPathIn + strMIDIFileIn, get_off_drums=True, split_channels=True)
-
-sceFileIn = m21.converter.parse(strPathIn + strMIDIFileIn)
-sceFileIn2 = m21.converter.parse(strPathIn + strMXLFileIn)
-
-vceVoice = sceFileIn.parts[0]
-
-
-#vceVoice.plot('3d')
-vceVoice.plot('histogram','pitch')
-#vceVoice.show('abc')
-
-ssc.show(sceFileIn)
-print (sceFileIn.analyze('key'))
-
+sceScore = score_in (strMIDIFile)
 print ('Piece loaded :')
-print (pceMIDI)
+print (sceScore)
+
+
+def score_in (strFileName):
+
+# Location of files
+    strPathIn = 'C:\\temp\\Music\\'
+    strPathOut = 'C:\\temp\\Music\\'
+
+    sceSource = converter.parse(strPathIn + strFileName)
+    #pceMIDI = mp.read (strPathIn + strFileName, get_off_drums=True, split_channels=True)
+
+    return sceSource
+
+
+
+
+
+
+def piece_analyze (sceScore)
+
+    ssc.show(sceScore)
+    prtPart = sceScore.parts[0]
+
+    #vceVoice.plot('3d')
+    vceVoice.plot('histogram','pitch')
+    #vceVoice.show('abc')
+
+    print (sceScore.analyze('key'))
+
+    return true
 
 '''
 Select track and part
@@ -120,7 +129,7 @@ chdTarget = pceMIDI[intTrack].content.modulation(sclSource, sclTarget)
 
 
 '''
-Export
+Target
 '''
 strMIDIFileNameOut = 'out.mid'
 
