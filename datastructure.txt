@@ -51,6 +51,7 @@ Bass Sraed
 
 Data structure
 voice = pitch, rhythm (time)
+
 melody voice
 accompanying voices
 chord voice

@@ -8,15 +8,15 @@ import datastructure
 #from musicpy import *
 #from musicpy.daw import *
 
+from datastructure import *
 
-# rhythm b = beat 0 = rest - = continue . = dotted
-rtm1 = rhythm('b - b. b. b b -', 1)
+# beat, rest, beat, beat, , , rest
+rtm1 = (1.0, 0, 1.5, 1.5, 1, 1, 0)
 
-from music21 import note, stream
 
 # Create a stream for a rhythmic pattern
 rhythmic_pattern = stream.Stream()
-time_sig_stream.append(meter.TimeSignature('4/4'))
+rhythmic_pattern.append(meter.TimeSignature('4/4'))
 
 # Add notes and rests to the pattern
 rhythmic_pattern.append(note.Note('C4', quarterLength=1.0))
