@@ -1,5 +1,7 @@
 '''
 MusicPy - Archive
+
+Code using MusicPY, replaced by music21 code
 '''
 
 from musicpy import *
