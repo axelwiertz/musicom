@@ -53,7 +53,6 @@ def create_balfolk_melody():
 # Generate and show the Balfolk-inspired composition
 score = create_balfolk_melody()
 score.write('midi', fp='target.mid')
-print(score)
 score.show('text')
 # Play the result:
 player = sound.MIDIPlayer('target.mid')
