@@ -52,9 +52,11 @@ def create_balfolk_melody():
 
 # Generate and show the Balfolk-inspired composition
 score = create_balfolk_melody()
-score.write('midi', fp='target.mid')
+strPathOut = 'C:\\temp\\Music\\'
+score.write('midi', fp=strPathOut+'target.mid')
+
 score.show('text')
-# Play the result:
+# Play the result (IOS):
 player = sound.MIDIPlayer('target.mid')
 player.play()
 #player.stop()

@@ -41,8 +41,8 @@ Chord Prog
     Chord Types: Tension/Resolution
 
     Based on Scale degree:
-        I home
-        II,IV Suspend
+        1 home
+        2,4 Suspend
         3,6 Colour
         5 dominant
         7 leading
