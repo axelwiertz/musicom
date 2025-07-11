@@ -2,7 +2,6 @@
 Music data - Structure
 '''
 import itertools
-import random
 import os
 import time
 
@@ -14,8 +13,10 @@ import pandas as pd
 
 # Harmony data
 from harmony import *
-from music21 import stream, note, key, scale, chord, interval, meter, roman, converter, instrument
+from music21 import stream, note, key, scale, chord, interval, meter, roman, converter, instrument, serial
 from showscore import show
+
+import copy
 
 import musicpy as mp
 

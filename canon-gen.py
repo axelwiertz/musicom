@@ -1,5 +1,5 @@
 import music21
-import scamp
+#import scamp
 import copy
 import random
 

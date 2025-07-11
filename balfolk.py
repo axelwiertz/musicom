@@ -57,8 +57,8 @@ score.write('midi', fp=strPathOut+'target.mid')
 
 score.show('text')
 # Play the result (IOS):
-player = sound.MIDIPlayer('target.mid')
-player.play()
+#player = sound.MIDIPlayer('target.mid')
+#player.play()
 #player.stop()
-#balfolk_piece.show('midi')  # Play MIDI
-#balfolk_piece.show()  # Show musical notation
+score.show('midi')  # Play MIDI
+score.show()  # Show musical notation
