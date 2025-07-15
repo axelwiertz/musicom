@@ -1,5 +1,4 @@
 import music21
-#import scamp
 import copy
 import random
 
@@ -310,10 +309,6 @@ def serialize_stream(stream, repeats=1):
     return new_stream, length
 
 
-def notate_voice(part, initial_rest, notesandrests):
-    if initial_rest:
-        #print(f"{initial_rest=}")
-        scamp.wait(initial_rest)
     NOTE = type(music21.note.Note())
     REST = type(music21.note.Rest())
     for event in notesandrests:
@@ -325,36 +320,14 @@ def notate_voice(part, initial_rest, notesandrests):
             scamp.wait(event.quarterLength)
 
 
-def canon(serialized_stream, delay, voices, extra_transposition_map={}, tempo=120):
-    """
-    function that takes serialized stream and sequences it against
-    itself voices times with a delay "delay"
-    """
-    s = scamp.Session(tempo=tempo)
-    s.fast_forward_in_beats(10000)
-    parts = [s.new_part("piano") for _ in range(voices)]
-    s.start_transcribing()
-    initial_rests = [i * delay for i in range(voices)]
+    range(voices)
 
-    for v in range(voices):
-        interval = extra_transposition_map[v]
-        scamp.fork(notate_voice, args=(
-            parts[v], initial_rests[v], copy.deepcopy(serialized_stream).transpose(interval).flat.notesAndRests))
-
-    s.wait_for_children_to_finish()
-
-    performance = s.stop_transcribing()
-    return performance
+    copy.deepcopy(stream01).transpose(interval01).flat.notesAndRests
 
 
-if __name__ == "__main__":
-    ############################################################################
-    #
-    # START OF USER EDITABLE CODE
-    #
-    ############################################################################
+
+def create_canon ():
     # define a chord progression that serves as basis for the canon (change this!)
-    path_to_musescore = ''  # change as needed; leave empty to use default settings
     chords = "C F Am Dm G C"
     # scale in which to interpret these chords
     scale = music21.scale.MajorScale("C")
@@ -409,20 +382,14 @@ if __name__ == "__main__":
 
     # debug code: visualize the spiced up chords, and allow the user to abort
     # canon generation if the result is too horrible
-    if path_to_musescore:
-        music21.environment.set('musicxmlPath', path_to_musescore)
     spiced_streams[-1].show("musicxml")
-    answer = None
-    while answer not in ['y', 'Y', 'n', 'N']:
-        answer = input("continue to generate canon from this spiced up chord progression? [y/n]: ")
 
-    if answer in ['y', 'Y']:
-        # unfold the final spiced up chord progression into a serialized stream
-        ser, delay = serialize_stream(spiced_streams[-1])
-        # ser.show('musicxml')
+    # unfold the final spiced up chord progression into a serialized stream
+    ser, delay = serialize_stream(spiced_streams[-1])
+    # ser.show('musicxml')
 
-        # and turn it into a canon. Add extra transpositions to some voices to create some diversity
-        canonized = canon(ser, delay, voices * stacking, voice_transpositions)
+    # and turn it into a canon. Add extra transpositions to some voices to create some diversity
+    canonized = ser, delay, voices * stacking, voice_transpositions)
 
-        # show the final product
-        canonized.to_score(title="Canon", composer="canon-generator.py", max_divisor=16).show_xml()
+    # show the final product
+    canonized.to_score(title="Canon", composer="canon-generator.py", max_divisor=16).show_xml()
