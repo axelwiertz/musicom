@@ -27,11 +27,22 @@ def main():
 
 
     # Create stream
-    melody_part = part_create_melody()
+    melody = part_create_melody()
 
+    # Create the score and parts
+    score = stream.Score()
     # Create parts for melody and accompaniment
-    melody_part = stream.Part()
-    accompaniment_part = stream.Part()
+    melody, harmony, bass = create_melody_harmony_bass()
+
+    # Instruments of parts
+    melody.insert(0, instrument.Flute())
+    harmony.insert(0, instrument.Violin())
+    bass.insert(0, instrument.Bass())
+
+    # Meter
+    melody.append(tempo.MetronomeMark(number=100))
+    for part in [melody, harmony, bass]:
+        part.append(meter.TimeSignature('4/4'))
 
     # Set key and time signature typical of Balfolk
     melody_part, bass_part = part_create_balfolk()
@@ -39,14 +50,19 @@ def main():
     # Add parts to score
     # Create a score
     sce01 = stream.Score()
+    # Combine parts
     sce01.insert(0, melody_part)
     sce01.insert(0, bass_part)
+    score.insert(0, melody)
+    score.insert(0, harmony)
+    score.insert(0, bass)
 
     # Analyze stream
     stream_analyze (sce01)
 
     # Transform piece
-    sce01 = stream_transform (sce01)
+    trw01 = serial.ToneRow()
+    trw02 = tonerow_transform (trw01)
 
     # Play stream
 
@@ -97,6 +113,29 @@ def stream_show (stm01):
         #player.stop()
 
 
+def create_stream () -> stream.Stream:
+    # Create a stream to hold the musical elements
+    stm01 = stream.Stream()
+
+    # Create a series of notes
+    note1 = note.Note("C4", quarterLength=1.0)
+    note2 = note.Note("D4", quarterLength=1.0)
+    note3 = note.Note("E4", quarterLength=1.0)
+    note4 = note.Note("F4")
+
+    # Add the notes to the stream
+    stm01.append(note1)
+    stm01.append(note2)
+    stm01.append(note3)
+    stm01.append(note4)
+
+    # Set the time signature and key signature
+    stm01.insert(0, meter.TimeSignature("4/4"))
+    stm01.insert(0, key.Key("C"))
+
+
+    return stm01
+
 def part_create_melody() -> stream.Part:
     """
     Create stream
@@ -116,6 +155,33 @@ def part_create_melody() -> stream.Part:
 
 
     return prt01
+
+
+def create_melody_harmony_bass () -> (stream.Part, stream.Part, stream.Part):
+# Add 40 measures of melody, harmony, and bass
+    melody, harmony, bass = stream.Part()
+
+    for i in range(40):
+        melody_notes = ['C5', 'D5', 'E5', 'F5'] if i % 2 == 0 else ['G5', 'A5', 'B4', 'C5']
+        harmony_chord = ['C4', 'E4', 'G4'] if i % 2 == 0 else ['F4', 'A4', 'C5']
+        bass_note = 'C3' if i % 2 == 0 else 'G2'
+
+        m1 = stream.Measure()
+        for not01 in melody_notes:
+            m1.append(note.Note(not01, quarterLength=1))
+        melody.append(m1)
+
+        m2 = stream.Measure()
+        m2.append(chord.Chord(harmony_chord, quarterLength=4))
+        harmony.append(m2)
+
+        m3 = stream.Measure()
+        m3.append(note.Note(bass_note, quarterLength=4))
+        bass.append(m3)
+
+    return melody, harmony, bass
+
+
 
 def part_create_balfolk () -> (stream.Part, stream.Part):
     """
@@ -170,10 +236,33 @@ def stream_analyze (stm01: stream.Stream):
     #vceVoice.plot('3d')
     stm01.plot('histogram','pitch')
     #vceVoice.show('abc')
-    print (stm01.analyze('key'))
+    # Key
+    key01 = stm01.analyze('key')
+    print (key01)
+
+    sce01 = stream.Score()
+
+    chordset = stm01.chordify()
+    # Check for specific chords
+    for chd01 in chordset.recurse().getElementsByClass(chord.Chord):
+        if chd01.isDominantSeventh():
+            print(chd01.measureNumber, chd01.beatStr, chd01)
+
+    # All chords
+    for chd01 in chordset.recurse().getElementsByClass(chord.Chord):
+        # Put chord in closed position
+        chd01.closedPosition(forceOctave=4, inPlace=True)
+        # Annotate chord intervals
+        chd01.annotateIntervals(inPlace=True)
+        # Add Roman numerals in lyrics
+        rn = roman.romanNumeralFromChord(chd01, key01)
+        chd01.addLyric(str(rn.figure))
 
 
-def stream_transform (stm_in: stream.Stream) -> stream.Stream:
+    sce01.insert (0, chordset)
+    sce01.show()
+
+def tonerow_transform (stm_in: serial.ToneRow) -> serial.ToneRow:
 
     #stm_out = copy.deepcopy(stm_in)
 
@@ -182,6 +271,9 @@ def stream_transform (stm_in: stream.Stream) -> stream.Stream:
     trans01 = random.choice (transformations)
     # Transform tone row
     stm_out = stm_in.zeroCenteredTransformation (trans01, 0)
+
+    # Transpose the phrase up by a major third
+    stm_out = stm_in.transpose("M3")
 
 
     return stm_out

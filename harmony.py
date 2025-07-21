@@ -19,8 +19,11 @@ dctChordRomanMm = {
 
 # Chord ladder
 lstTriChordLadder = (
+    # Tonic
     (1, 6),
+    # Dominant
     (5, 7),
+    # Pre-dominant
     (2, 4),
     (6),
     (3)
@@ -79,6 +82,18 @@ dctCadencePattern = {
     'Imperfect' : (('I', 'V'), ('ii', 'V'), ('IV', 'V'), ('vi', 'V')),
 # Interrupted cadence
     'Interrupted' : (('V', 'IV'), ('V', 'vi'), ('V', 'ii'), ('V', 'V7'))
+}
+
+"""
+Modulation progression in new key
+"""
+dctModulationPattern = {
+# Perfect cadence
+    'Direct' : (),
+# Plagal cadence
+    'Dominant' : ('V7'),
+# Imperfect cadence
+    'Subdominant' : ('iim7', 'V7'),
 }
 
 '''
