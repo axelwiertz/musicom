@@ -1,5 +1,6 @@
 '''
 Music - Template
+
 '''
 
 import musicpy as mp
