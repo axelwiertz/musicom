@@ -13,61 +13,61 @@ from datastructure import *
 #m21.configure.run()
 
 def main():
+    # Create datastructure
+    main_score = stream.Score()
+    # Create a scale
+    scale1 = scale.MajorScale('c')
 
-    # Load piece
-    sce01 = score_load()
-    print('Score loaded :')
-    print(sce01)
+    # Load score
+    load_score = score_load()
 
-    stream_analyze (sce01)
+    # Analyze score
+    stream_analyze (load_score)
 
     # Analyze parts
-    for i in range (0, len(sce01.parts)-1):
-        stream_analyze (sce01.parts[i])
-
+    for i in range (0, len(score1.parts)-1):
+        stream_analyze (score1.parts[i])
 
     # Create stream
+    # Form
+    form = (16, 16, 16)
     melody = part_create_melody()
 
     # Create the score and parts
-    score = stream.Score()
-    # Create parts for melody and accompaniment
-    melody, harmony, bass = create_melody_harmony_bass()
+    score2 = stream.Score()
+    # Create voices for melody and accompaniment
+    melody_voice, harmony_voice, bass_voice = create_melody_harmony_bass()
 
     # Instruments of parts
-    melody.insert(0, instrument.Flute())
-    harmony.insert(0, instrument.Violin())
-    bass.insert(0, instrument.Bass())
+    melody_voice.insert(0, instrument.Flute())
+    harmony_voice.insert(0, instrument.Violin())
+    bass_voice.insert(0, instrument.Bass())
 
     # Meter
-    melody.append(tempo.MetronomeMark(number=100))
-    for part in [melody, harmony, bass]:
+    melody_voice.append(tempo.MetronomeMark(number=100))
+    for part in [melody_voice, harmony_voice, bass_voice]:
         part.append(meter.TimeSignature('4/4'))
 
     # Set key and time signature typical of Balfolk
-    melody_part, bass_part = part_create_balfolk()
+    melody_voice, bass_voice = part_create_balfolk()
 
     # Add parts to score
-    # Create a score
-    sce01 = stream.Score()
     # Combine parts
-    sce01.insert(0, melody_part)
-    sce01.insert(0, bass_part)
-    score.insert(0, melody)
-    score.insert(0, harmony)
-    score.insert(0, bass)
+    main_score.insert(0, melody_voice)
+    main_score.insert(0, harmony_voice)
+    main_score.insert(0, bass_voice)
 
     # Analyze stream
-    stream_analyze (sce01)
+    stream_analyze (main_score)
 
-    # Transform piece
+    # Transform pitch sequence
     trw01 = serial.ToneRow()
     trw02 = tonerow_transform (trw01)
 
     # Play stream
 
     # Save piece
-    stream_save (sce01)
+    stream_save (main_score)
 
 
 '''

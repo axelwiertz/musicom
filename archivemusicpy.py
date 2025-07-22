@@ -6,6 +6,10 @@ Code using MusicPY, replaced by music21 code
 
 from musicpy import *
 
+#from musicpy.daw import *
+#from musicpy.database import *
+
+
 # pceMIDI = mp.read (strPathIn + strFileName, get_off_drums=True, split_channels=True)
 intTrack = 0
 nFrom = 0

@@ -2,8 +2,6 @@
 Music data - Structure
 '''
 import itertools
-import os
-import time
 
 
 # Import
@@ -18,15 +16,8 @@ from showscore import show
 
 import copy
 
-import musicpy as mp
 
 
-
-# modules
-
-#from musicpy.daw import *
-#from musicpy.database import *
-#print (standard)
 
 # Convert a list of intervals to a binary mask
 def IntervalToBinary (lstInterval):
@@ -43,8 +34,6 @@ def IntervalToBinary (lstInterval):
 '''
 Music data - Absolute data: frequency, pitch(class), octave
 '''
-
-strSongName = 'Diatonic pitch set'
 
 # Diatonic pitch set, equal temperament scale
 intA4Freq = 440 # Frequency of A4
@@ -131,35 +120,68 @@ dfPitch = pd.DataFrame ([lstPitchNr, srsPitchClassNr.values, srsPitchClassChr.va
 dfPitch.columns=['Nr','ClassNr','ClassChr', 'Freq']
 
 
+
+def create_stream_chords_in_key (lstChordSeqs: list, key_in: key.Key() = key.Key ('C'),  quarterlength_in: int = 1 ) -> stream.Stream ():
+    # Stream of chord progression patterns in a key
+    stream_out = stream.Stream()
+    for i in range(1, len(lstChordSeqs)-1):
+        stream_out.append(note.Rest(quarterLength= quarterlength_in))
+        for j in range (0, len(lstChordSeqs[i])):
+            chdChord = roman.RomanNumeral (lstChordSeqs[i][j], key_in)
+            chdChord.duration.quarterLength = quarterlength_in
+            stream_out.append(chdChord)
+
+    return stream_out
+
+chord_progressions_stream = create_stream_chords_in_key (lstChordPattern, key.Key ('C'),  2)
+
+
+def create_stream_triads_in_key (key_in: key.Key() = key.Key ('C'),  quarterlength_in: int = 1 ) -> stream.Stream ():
+    # Stream of all triads in a key
+    stream_out = stream.Stream()
+    for i in range(intNrDegreeHeptaScale):
+        chdChord = roman.RomanNumeral(i+1, key_in)
+        chdChord.duration.quarterLength = quarterlength_in
+        stream_out.append(chdChord)
+        stream_out.append(note.Rest(quarterLength=quarterlength_in))
+
+    return stream_out
+
+triads_stream = create_stream_triads_in_key (key.Key ('C'),  2)
+
+
+
+
 # Plot
 # Note that even in the OO-style, we use `.pyplot.figure` to create the Figure.
 #fig, ax = plt.subplots(figsize=(5, 2.7), layout='constrained')
-#ax.plot(srsPitchFreq.values, label='pitch frequency')  # Plot some data on the Axes.
+#ax.plot(srsPitchFreq.values, label='pitch frequency') # Plot some data on the Axes.
 #ax.set_xlabel('Pitch number')  # Add an x-label to the Axes.
 #ax.set_ylabel('Frequency')  # Add a y-label to the Axes.
 #ax.set_title("Pitches")  # Add a title to the Axes.
 #ax.legend()  # Add a legend.
 #plt.show()
 
+def pitch_class_circle():
 
-# Pitch class numbers
-pitch_classes = list(range(12))
+    # Pitch class numbers
+    pitch_classes = list(range(12))
 
-# Convert pitch class numbers to angles
-angles = np.linspace(0, 2 * np.pi, 12, endpoint=False)
+    # Convert pitch class numbers to angles
+    angles = np.linspace(0, 2 * np.pi, 12, endpoint=False)
 
-# Create a figure and axis
-fig, ax = plt.subplots(subplot_kw={'projection': 'polar'})
+    # Create a figure and axis
+    fig, ax = plt.subplots(subplot_kw={'projection': 'polar'})
 
-# Plot the pitch class numbers
-for angle, pitch in zip(angles, pitch_classes):
-    ax.plot(angle, 1, 'o', markersize=10)
-    ax.text(angle, 1.1, str(pitch), ha='center', va='center')
+    # Plot the pitch class numbers
+    for angle, pitch in zip(angles, pitch_classes):
+        ax.plot(angle, 1, 'o', markersize=10)
+        ax.text(angle, 1.1, str(pitch), ha='center', va='center')
 
-# Set the title
-ax.set_title('Circle of Pitch Class Numbers')
+    # Set the title
+    ax.set_title('Circle of Pitch Class Numbers')
 
-# Show the plot
-#plt.show()
+    # Show the plot
+    plt.show()
 
 
