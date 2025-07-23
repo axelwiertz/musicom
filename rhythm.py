@@ -1,12 +1,6 @@
-from music21 import stream
-
-'''
+"""
 Music - Rhythm
-'''
-# modules
-import datastructure
-#from musicpy import *
-#from musicpy.daw import *
+"""
 
 from datastructure import *
 
@@ -28,55 +22,42 @@ rhythmic_pattern.append(note.Rest(quarterLength=1.0))
 # Show the rhythmic pattern
 rhythmic_pattern.show('text')
 
-rhythmic_info = rhythm.RhythmAnalyzer(rhythmic_stream)
-rhythmic_info.getRhythm()
 
-# Show the rhythmic information
-print(rhythmic_info.getRhythm())
 
 # Rhythm library
-# Simple
-rtmSimple = rhythm('b b b b', 1, time_signature=[4, 4])
+# Four-beat rhythm
+rhythmic_pattern = converter.parse('tinynotation: 4/4 c5 c5 c5 c5')
+
 # Tresillo
-rtmTresillo = rhythm('b 0 0 b - 0 b 0', 1, beats=8, time_signature=[4, 4])
+tresillo_rhythmic_pattern = converter.parse('tinynotation: 4/4 c5 r r c5 r r c5 r')
 # 12/8 Bell
-rtmBell = rhythm('b 0 b 0 b b 0 b 0 b 0 b', 1, beats=12, time_signature=[12, 8] )
+twelve_8_bell_rhythmic_pattern = converter.parse('tinynotation: 12/8 c5 r c5 r c5 c5 r c5 r c5 r c5')
 # Son Clave
-rtmSonClave = rhythm('b 0 0 b 0 0 b 0 0 0 b 0 b 0 0 0', 1, beats=16)
+sonclave_rhythmic_pattern = converter.parse('tinynotation: 16/8 c5 r r c5 r r c5 r r r c5 r c5 r r r')
+
+show(sonclave_rhythmic_pattern)
 
 # 3/4
-rtmWaltz = rhythm('b b b', 1, beats=3, time_signature=[3, 4] )
+waltz_rhythmic_pattern = converter.parse('tinynotation: 3/4 c5 c5 c5')
 
-print (rtmTresillo)
 
-rtmSong = rtmBell
-chd01 = chord('C4', 1/8, 1/8)*7
-chd02 = chd01.apply_rhythm (rtmSong)
-play(chd02, wait=True)
 
-'''
-lstChdTrack = []
-lstIntChannel = []
-lstChdTrack.append (chd01.apply_rhythm (rtmSong))
-lstIntChannel.append (1)
-lstChdTrack.append (chdRhythm.apply_rhythm (rtmSong))
-lstIntChannel.append (9)
-'''
 
 '''
 Music 21 rhythm_and_duration
 '''
-s = stream.Stream()
-s.insert(meter.TimeSignature('4/4'))
+rhythm_stream = stream.Stream()
+rhythm_stream.insert(meter.TimeSignature('4/4'))
 # A list representing the durations of notes in a rhythmic sequence
-notes_values = [1.5, 0.5, 0.5, 0.25, 0.25, 1]
+durations = [1.5, 0.5, 0.5, 0.25, 0.25, 1]
 # Iterate over the list
-for note_value in notes_values:
+for duration_value in durations:
     # Set the new duration to the current note value
-    s.append(note.Note('C4', duration=duration.Duration(note_value)) )
-    #Insert a several new notes
-    new_note_1 = note.Note('C4', duration=duration.Duration(0.75) )
-    new_note_2 = note.Note('C4', duration=duration.Duration(0.25) )
-    s.insertAndShift([2, new_note_1, 2.75, new_note_2])
+    rhythm_stream.append(note.Note('C4', quarterLength=duration_value) )
 
-s. show()
+# Insert a several new notes
+new_note_1 = note.Note('C4', quarterLength=0.75 )
+new_note_2 = note.Note('C4', quarterLength=0.25 )
+rhythm_stream.insertAndShift([2, new_note_1, 2.75, new_note_2])
+
+#show(rhythm_stream)

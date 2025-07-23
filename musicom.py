@@ -25,8 +25,8 @@ def main():
     stream_analyze (load_score)
 
     # Analyze parts
-    for i in range (0, len(score1.parts)-1):
-        stream_analyze (score1.parts[i])
+    for i in range (0, len(load_score.parts)-1):
+        stream_analyze (load_score.parts[i])
 
     # Create stream
     # Form
@@ -37,6 +37,8 @@ def main():
     score2 = stream.Score()
     # Create voices for melody and accompaniment
     melody_voice, harmony_voice, bass_voice = create_melody_harmony_bass()
+
+    score3 = stream.Stream.voicesToParts()
 
     # Instruments of parts
     melody_voice.insert(0, instrument.Flute())
@@ -274,7 +276,7 @@ def tonerow_transform (stm_in: serial.ToneRow) -> serial.ToneRow:
 
     # Transpose the phrase up by a major third
     stm_out = stm_in.transpose("M3")
-
+    #stm_out = stm_in.transpose(4)
 
     return stm_out
 
