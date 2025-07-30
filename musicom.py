@@ -6,8 +6,11 @@ import random
 import platform
 #import sound
 
-# Musical library
+# Musical data
 from datastructure import *
+# Harmony rules
+from harmony import *
+
 
 
 #m21.configure.run()
@@ -35,6 +38,9 @@ def main():
 
     # Create the score and parts
     score2 = stream.Score()
+    chord_progressions_stream = create_stream_chords_in_key(lstChordPattern, key.Key('C'), 2)
+    triads_stream = create_stream_triads_in_key(key.Key('C'), 2)
+
     # Create voices for melody and accompaniment
     melody_voice, harmony_voice, bass_voice = create_melody_harmony_bass()
 
