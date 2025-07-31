@@ -7,8 +7,6 @@ from musicpy import *
 
 import harmony
 from harmony import *
-import rhythm
-from rhythm import *
 
 
 chdRhythm = chord ('C3, C2, C2, C2, C2, C2, C2, C2, C2, C2, C2')

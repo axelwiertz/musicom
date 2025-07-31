@@ -5,6 +5,7 @@ Music Composition Assistant
 import random
 import platform
 #import sound
+import matplotlib.pyplot as plt
 
 # Musical data
 from datastructure import *
@@ -19,7 +20,7 @@ def main():
     # Create a score
     main_score = stream.Score()
     # Create a scale
-    scale1 = scale.MajorScale('c')
+    main_scale = scale.MajorScale('c')
 
     # Load a score
     load_score = score_load()
@@ -37,7 +38,6 @@ def main():
     melody = part_create_melody()
 
     # Create the score and parts
-    score2 = stream.Score()
     chord_progressions_stream = create_stream_chords_in_key(lstChordPattern, key.Key('C'), 2)
     triads_stream = create_stream_triads_in_key(key.Key('C'), 2)
 
@@ -109,7 +109,7 @@ Creation
 """
 def create_stream () -> stream.Stream:
     # Create a stream to hold the musical elements
-    stm01 = stream.Stream()
+    stream_out = stream.Stream()
 
     # Create a series of notes
     note1 = note.Note("C4", quarterLength=1.0)
@@ -118,23 +118,28 @@ def create_stream () -> stream.Stream:
     note4 = note.Note("F4")
 
     # Add the notes to the stream
-    stm01.append(note1)
-    stm01.append(note2)
-    stm01.append(note3)
-    stm01.append(note4)
+    stream_out.append(note1)
+    stream_out.append(note2)
+    stream_out.append(note3)
+    stream_out.append(note4)
+
+    # Insert several new notes
+    new_note_1 = note.Note('C4', quarterLength=0.75)
+    new_note_2 = note.Note('C4', quarterLength=0.25)
+    stream_out.insertAndShift([2, new_note_1, 2.75, new_note_2])
 
     # Set the time signature and key signature
-    stm01.insert(0, meter.TimeSignature("4/4"))
-    stm01.insert(0, key.Key("C"))
+    stream_out.insert(0, meter.TimeSignature("4/4"))
+    stream_out.insert(0, key.Key("C"))
 
 
-    return stm01
+    return stream_out
 
 def part_create_melody() -> stream.Part:
     """
     Create stream
     """
-    prt01 = stream.Part()
+    part_out = stream.Part()
     # Rhythm
     duration_unit = 0.125
     duration_factor = 8
@@ -145,10 +150,17 @@ def part_create_melody() -> stream.Part:
         pcs01 = base_row.pitchClasses (i)
         pcs01.duration = duration_unit * duration_factor
         pcs01.octave = 3
-        prt01.append(pcs01)
+        part_out.append(pcs01)
 
+        # Rhythm
+        rtm_example01 = [[BT, RS, BT, BT, BT, BT, RS],
+                     [1.0, 1.0, 1.5, 1.5, 1.0, 1.0, 1.0]]
+        stream_rhythm = create_rhythmic_stream(rtm_example01)
 
-    return prt01
+        rtm_example02 = [[BT, BT, RS, BT, BT, RS],
+                     [1.5, 0.5, 0.5, 0.25, 0.25, 1]]
+
+    return part_out
 
 
 def create_melody_harmony_bass () -> (stream.Part, stream.Part, stream.Part):
@@ -247,19 +259,19 @@ def pitch_class_circle():
     plt.show()
 
 
-def stream_analyze (stm01: stream.Stream):
+def stream_analyze (stream_in: stream.Stream):
     # Analyze stream
-    show (stm01)
+    show (stream_in)
     #vceVoice.plot('3d')
-    stm01.plot('histogram','pitch')
+    stream_in.plot('histogram','pitch')
     #vceVoice.show('abc')
     # Key
-    key01 = stm01.analyze('key')
+    key01 = stream_in.analyze('key')
     print (key01)
 
     sce01 = stream.Score()
 
-    chordset = stm01.chordify()
+    chordset = stream_in.chordify()
     # Check for specific chords
     for chd01 in chordset.recurse().getElementsByClass(chord.Chord):
         if chd01.isDominantSeventh():
@@ -279,17 +291,17 @@ def stream_analyze (stm01: stream.Stream):
     sce01.insert (0, chordset)
     sce01.show()
 
-def stream_show (stm01):
+def stream_show (stream_in):
     """
     Show or play the stream
     """
     if platform.system() == 'Windows':
-        stm01.show('text')
+        stream_in.show('text')
 #    score.show('midi')  # Play MIDI
-        stm01.show()  # Show musical notation
+        stream_in.show()  # Show musical notation
 
     elif platform.system() == 'IOS':
-        stm01.show('text')
+        stream_in.show('text')
 
         # Play the result (IOS):
         #player = sound.MIDIPlayer('target.mid')
@@ -301,22 +313,21 @@ def stream_show (stm01):
 Transformation
 """
 
-def tonerow_transform (stm_in: serial.ToneRow) -> serial.ToneRow:
+def tonerow_transform (stream_in: serial.ToneRow) -> serial.ToneRow:
 
-    #stm_out = copy.deepcopy(stm_in)
+    stream_out = copy.deepcopy(stream_in)
 
     # P I R RI
     transformations = ('P', 'I', 'R', 'RI')
     trans01 = random.choice (transformations)
     # Transform tone row
-    stm_out = stm_in.zeroCenteredTransformation (trans01, 0)
+    stream_out = stream_in.zeroCenteredTransformation (trans01, 0)
 
     # Transpose the phrase up by a major third
-    stm_out = stm_in.transpose("M3")
-    #stm_out = stm_in.transpose(4)
+    stream_out = stream_in.transpose("M3")
+    #stream_out = stream_in.transpose(4)
 
-    return stm_out
-
+    return stream_out
 
 
 if __name__ == '__main__':

@@ -8,8 +8,6 @@ from musicpy import *
 
 import harmony
 from harmony import *
-import rhythm
-from rhythm import *
 
 
 strSongName = 'Big Yellow Taxi'

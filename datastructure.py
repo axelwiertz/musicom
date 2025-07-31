@@ -5,7 +5,6 @@ import itertools
 
 
 # Import
-import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
@@ -41,6 +40,9 @@ NUMDIATONICPITCHCLASS = 12 # Number of pitch classes 0-11
 NUMPITCH = OCTAVES * NUMDIATONICPITCHCLASS
 lstPitchClassNr = tuple(range (NUMDIATONICPITCHCLASS)) # Pitch class number
 lstPitchClassChr = ('C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B') # Pitch class characters
+chromaticRow = serial.ToneRow(lstPitchClassNr)
+matrixObj = chromaticRow.matrix()
+
 lstPitchNr = tuple(range(NUMPITCH)) # Pitch number set
 srsPitchNr = pd.Series (range (NUMPITCH))
 # Pitch class
@@ -147,6 +149,58 @@ def create_stream_triads_in_key (key_in: key.Key = key.Key ('C'),  quarterlength
 
     return stream_out
 
+"""
+Rhythm of beats and rests with durations in a measure
+"""
+BEAT_REST = 1
+DURATION = 2
+BT = 'b'
+RS = 'r'
+
+
+def create_rhythmic_stream (measure_pattern, signature : meter.TimeSignature = meter.TimeSignature('4/4')) -> stream.Stream:
+    # Create a stream for a rhythmic pattern
+    rhythmic_stream = stream.Stream()
+    rhythmic_stream.append(signature)
+
+    measure_length = 0
+    # Iterate over the pattern list
+    for i in len(measure_pattern-1):
+        # Add beats and rests to the stream
+        measure_length += measure_pattern [DURATION][i]
+        if measure_pattern [BEAT_REST][i] = BT
+            rhythmic_stream.append(note.Note('C4', quarterLength=measure_pattern [DURATION][i]))
+
+        if measure_pattern[BEAT_REST][i] = RS:
+            rhythmic_stream.append(note.Rest(quarterLength=measure_pattern [DURATION][i]))
+    return rhythmic_stream
+
+
+"""
+Rhythm library
+"""
+# Four-beat rhythm
+four_rhythmic_pattern = converter.parse('tinynotation: 4/4 c5 c5 c5 c5')
+four_rtm = [    [BT, BT, BT, BT],
+                [1.0, 1.0, 1.0, 1.0]  ]
+# Tresillo rhythm
+tresillo_rhythmic_pattern = converter.parse('tinynotation: 4/4 c5 r r c5 r r c5 r')
+tresillo_rtm = [[BT, RS, RS, BT, BT, RS, RS, BT, RS],
+                [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5 ] ]
+# 12/8 Bell rhythm
+twelve_8_bell_rhythmic_pattern = converter.parse('tinynotation: 12/8 c5 r c5 r c5 c5 r c5 r c5 r c5')
+twelve_8_bell_rtm = [   [BT, RS, BT, RS, BT, BT, RS, BT, RS, BT, RS, BT],
+                        [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5 ] ]
+# Son Clave
+sonclave_rhythmic_pattern = converter.parse('tinynotation: 16/8 c5 r r c5 r r c5 r r r c5 r c5 r r r')
+sonclave_rtm = [    [BT, RS, RS, BT, RS, RS, BT, RS, RS, RS, BT, RS, BT, RS, RS, RS],
+                    [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5 ] ]
+
+
+# 3/4 Waltz
+waltz_rhythmic_pattern = converter.parse('tinynotation: 3/4 c5 c5 c5')
+three_rtm = [   [BT, BT, BT],
+                [1.0, 1.0, 1.0] ]
 
 
 
