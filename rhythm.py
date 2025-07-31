@@ -4,29 +4,46 @@ Music - Rhythm
 
 from datastructure import *
 
-# beat, rest, beat, beat, , , rest
-rtm1 = (1.0, 0, 1.5, 1.5, 1, 1, 0)
+"""
+Rhythm of beats and rests with durations in a measure
+"""
+BEAT_REST = 1
+DURATION = 2
+BT = 'b'
+RS = 'r'
 
+stream_rhythm = create_rhythmic_stream (rtm1)
 
-# Create a stream for a rhythmic pattern
-rhythmic_pattern = stream.Stream()
-rhythmic_pattern.append(meter.TimeSignature('4/4'))
+def create_rhythmic_stream (measure_pattern, signature : meter.TimeSignature = meter.TimeSignature('4/4')) -> stream.Stream[]
+    # Create a stream for a rhythmic pattern
+    rhythmic_stream = stream.Stream()
+    rhythmic_stream.append(signature)
 
-# Add notes and rests to the pattern
-rhythmic_pattern.append(note.Note('C4', quarterLength=1.0))
-rhythmic_pattern.append(note.Note('D4', quarterLength=0.5))
-rhythmic_pattern.append(note.Rest(quarterLength=0.5))
-rhythmic_pattern.append(note.Note('E4', quarterLength=1.0))
-rhythmic_pattern.append(note.Rest(quarterLength=1.0))
+    measure_length = 0
+    for i in len(measure_pattern-1)
+        # Add beats and rests to the pattern
+        measure_length += measure_pattern [DURATION][i]
+        if measure_pattern [BEAT_REST][i] = BT
+            rhythmic_stream.append(note.Note('C4', quarterLength=measure_pattern [DURATION][i]))
 
-# Show the rhythmic pattern
-rhythmic_pattern.show('text')
+        if measure_pattern[BEAT_REST][i] = RS
+            rhythmic_stream.append(note.Rest(quarterLength=measure_pattern [DURATION][i]))
 
+    return rhythmic_pattern
+
+rtm1 = [
+    [BT, RS, BT, BT,BT, BT, RS],
+    [1.0, 1.0, 1.5, 1.5, 1.0, 1.0, 1.0]
+]
 
 
 # Rhythm library
 # Four-beat rhythm
-rhythmic_pattern = converter.parse('tinynotation: 4/4 c5 c5 c5 c5')
+four_rhythmic_pattern = converter.parse('tinynotation: 4/4 c5 c5 c5 c5')
+four_rtm = [
+    [BT, BT, BT, BT],
+    [1.0, 1.0, 1.0, 1.0]
+]
 
 # Tresillo
 tresillo_rhythmic_pattern = converter.parse('tinynotation: 4/4 c5 r r c5 r r c5 r')

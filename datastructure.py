@@ -161,24 +161,5 @@ def create_stream_triads_in_key (key_in: key.Key = key.Key ('C'),  quarterlength
 #ax.legend()  # Add a legend.
 #plt.show()
 
-def pitch_class_circle():
-
-
-    # Convert pitch class numbers to angles
-    angles = np.linspace(0, 2 * np.pi, NUMDIATONICPITCHCLASS, endpoint=False)
-
-    # Create a figure and axis
-    fig, ax = plt.subplots(subplot_kw={'projection': 'polar'})
-
-    # Plot the pitch class numbers
-    for angle, pitch in zip(angles, lstPitchClassNr):
-        ax.plot(angle, 1, 'o', markersize=10)
-        ax.text(angle, 1.1, str(pitch), ha='center', va='center')
-
-    # Set the title
-    ax.set_title('Circle of Pitch Class Numbers')
-
-    # Show the plot
-    plt.show()
 
 

@@ -16,12 +16,12 @@ from harmony import *
 #m21.configure.run()
 
 def main():
-    # Create datastructure
+    # Create a score
     main_score = stream.Score()
     # Create a scale
     scale1 = scale.MajorScale('c')
 
-    # Load score
+    # Load a score
     load_score = score_load()
 
     # Analyze score
@@ -103,24 +103,10 @@ def stream_save (stm01):
     # Write stream to output
     stm01.write(midi_or_mxl, fp=path + filename)
 
-def stream_show (stm01):
-    """
-    Show or play the stream
-    """
-    if platform.system() == 'Windows':
-        stm01.show('text')
-#    score.show('midi')  # Play MIDI
-        stm01.show()  # Show musical notation
 
-    elif platform.system() == 'IOS':
-        stm01.show('text')
-
-        # Play the result (IOS):
-        #player = sound.MIDIPlayer('target.mid')
-        #player.play()
-        #player.stop()
-
-
+"""
+Creation
+"""
 def create_stream () -> stream.Stream:
     # Create a stream to hold the musical elements
     stm01 = stream.Stream()
@@ -166,7 +152,7 @@ def part_create_melody() -> stream.Part:
 
 
 def create_melody_harmony_bass () -> (stream.Part, stream.Part, stream.Part):
-# Add 40 measures of melody, harmony, and bass
+    # Add 40 measures of melody, harmony, and bass
     melody, harmony, bass = stream.Part()
 
     for i in range(40):
@@ -192,9 +178,7 @@ def create_melody_harmony_bass () -> (stream.Part, stream.Part, stream.Part):
 
 
 def part_create_balfolk () -> (stream.Part, stream.Part):
-    """
-    Create Balfolk melody
-    """
+    # Create a Balfolk style melody and bass
     melody_part = stream.Part()
     bass_part = stream.Part()
 
@@ -235,11 +219,36 @@ def part_create_balfolk () -> (stream.Part, stream.Part):
 
     return melody_part, bass_part
 
+"""
+Analysis and visualization
+"""
+
+# To do: Rhythm circle
+
+
+def pitch_class_circle():
+    # Show pitch classes in circle
+
+    # Convert pitch class numbers to angles
+    angles = np.linspace(0, 2 * np.pi, NUMDIATONICPITCHCLASS, endpoint=False)
+
+    # Create a figure and axis
+    fig, ax = plt.subplots(subplot_kw={'projection': 'polar'})
+
+    # Plot the pitch class numbers
+    for angle, pitch in zip(angles, lstPitchClassNr):
+        ax.plot(angle, 1, 'o', markersize=10)
+        ax.text(angle, 1.1, str(pitch), ha='center', va='center')
+
+    # Set the title
+    ax.set_title('Circle of Pitch Class Numbers')
+
+    # Show the plot
+    plt.show()
+
 
 def stream_analyze (stm01: stream.Stream):
-    """
-    Analyze stream
-    """
+    # Analyze stream
     show (stm01)
     #vceVoice.plot('3d')
     stm01.plot('histogram','pitch')
@@ -269,6 +278,28 @@ def stream_analyze (stm01: stream.Stream):
 
     sce01.insert (0, chordset)
     sce01.show()
+
+def stream_show (stm01):
+    """
+    Show or play the stream
+    """
+    if platform.system() == 'Windows':
+        stm01.show('text')
+#    score.show('midi')  # Play MIDI
+        stm01.show()  # Show musical notation
+
+    elif platform.system() == 'IOS':
+        stm01.show('text')
+
+        # Play the result (IOS):
+        #player = sound.MIDIPlayer('target.mid')
+        #player.play()
+        #player.stop()
+
+
+"""
+Transformation
+"""
 
 def tonerow_transform (stm_in: serial.ToneRow) -> serial.ToneRow:
 
