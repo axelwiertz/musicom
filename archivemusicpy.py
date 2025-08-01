@@ -274,11 +274,10 @@ chd01 = chord('C4', 1/8, 1/8)*7
 chd02 = chd01.apply_rhythm (rtmSong)
 play(chd02, wait=True)
 
-'''
+
 lstChdTrack = []
 lstIntChannel = []
 lstChdTrack.append (chd01.apply_rhythm (rtmSong))
 lstIntChannel.append (1)
 lstChdTrack.append (chdRhythm.apply_rhythm (rtmSong))
 lstIntChannel.append (9)
-'''

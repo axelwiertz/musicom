@@ -9,9 +9,6 @@ import numpy as np
 import pandas as pd
 
 from music21 import stream, note, key, scale, chord, interval, meter, roman, converter, instrument, serial, tempo
-from showscore import show
-
-import copy
 
 
 def interval_to_binary (intervals):
@@ -43,12 +40,26 @@ lstPitchClassChr = ('C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 
 chromaticRow = serial.ToneRow(lstPitchClassNr)
 matrixObj = chromaticRow.matrix()
 
-lstPitchNr = tuple(range(NUMPITCH)) # Pitch number set
+PITCH_MIDI_NUMBERS = tuple(range(NUMPITCH)) # Pitch number set
 srsPitchNr = pd.Series (range (NUMPITCH))
 # Pitch class
 srsPitchClassChr = pd.Series ([x for y in range(-1, OCTAVES+1) for x in lstPitchClassChr])
 srsPitchClassNr = pd.Series (OCTAVES * lstPitchClassNr)
 srsPitchFreq = pd.Series (2 ** ((n - A4MIDIPITCHNUM) / NUMDIATONICPITCHCLASS) * A4FREQUENCY for n in range(NUMPITCH)) # Pitch frequencies
+
+"""
+Music data - Intervals
+"""
+# Interval classes
+PERFECTINTERVALS = ('P1', 'P4', 'P5', 'P8')
+IMPERFECTINTERVALS = ('M2', 'm3', 'M3', 'm6', 'M6', 'm7', 'M7')
+
+interval01 = interval.Interval()
+
+# Check if an interval is perfect
+def is_perfect_interval(ivlInterval: interval.DiatonicInterval):
+    return (ivlInterval.perfectable)
+
 
 '''
 Music data - Diatonic chord patterns: triads and sevenths
@@ -56,7 +67,6 @@ Music data - Diatonic chord patterns: triads and sevenths
 chord1 = chord.Chord()
 
 TRIAD = 3 # Number of pitch classes in a triad
-interval01 = interval.Interval()
 # Patterns: diminished, major, minor, augmented
 dctIntervalPattern = {
     'd': (3, 3, 6),
@@ -119,7 +129,7 @@ lstCombChordDegreePattern = list(itertools.combinations (lstIntHeptaDegree, 3))
 
 
 # Table of all diatonic data along pitch number set
-dfPitch = pd.DataFrame ([lstPitchNr, srsPitchClassNr.values, srsPitchClassChr.values, srsPitchFreq.values]).transpose()
+dfPitch = pd.DataFrame ([PITCH_MIDI_NUMBERS, srsPitchClassNr.values, srsPitchClassChr.values, srsPitchFreq.values]).transpose()
 dfPitch.columns=['Nr','ClassNr','ClassChr', 'Freq']
 
 
@@ -168,11 +178,11 @@ def create_rhythmic_stream (measure_pattern, signature : meter.TimeSignature = m
     for i in len(measure_pattern-1):
         # Add beats and rests to the stream
         measure_length += measure_pattern [DURATION][i]
-        if measure_pattern [BEAT_REST][i] = BT
+        if measure_pattern [BEAT_REST][i] == BT:
             rhythmic_stream.append(note.Note('C4', quarterLength=measure_pattern [DURATION][i]))
-
-        if measure_pattern[BEAT_REST][i] = RS:
+        elif measure_pattern[BEAT_REST][i] == RS:
             rhythmic_stream.append(note.Rest(quarterLength=measure_pattern [DURATION][i]))
+
     return rhythmic_stream
 
 

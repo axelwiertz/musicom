@@ -1,7 +1,7 @@
 """
 Music Composition Assistant
 """
-
+import copy
 import random
 import platform
 #import sound
@@ -12,9 +12,21 @@ from datastructure import *
 # Harmony rules
 from harmony import *
 
+# Showing score without external programs like Musescore
+from showscore import show
 
 
-#m21.configure.run()
+def big_yellow_taxi():
+    # 'Big Yellow Taxi'
+    tonerow_byt = serial.Tonerow (
+        'B3, C#4, E4, E4, F#4, C#4, E4, E4, F#4, E4, G#3, B3, B3, C#4, E4, F#4, B3, B3, F#4, F#4, F#4, G#4, F#4, E4, E4')
+    lstScales = ['Bb major']
+
+def berendans():
+    # Berendans
+    lstScales = ['Bb major']
+    progr = ['I', 'V', 'I']
+
 
 def main():
     # Create a score
@@ -87,11 +99,11 @@ def score_load() -> stream.Score:
     filename = 'in.mid'
     #filename = 'in.mxl'
     # Location of files
-    sce01 = converter.parse (path + filename)
+    score_out = converter.parse (path + filename)
 
-    return sce01
+    return score_out
 
-def stream_save (stm01):
+def stream_save (stream_in):
     """
     Save the target file
     """
@@ -101,37 +113,42 @@ def stream_save (stm01):
     path = 'C:\\temp\\Music\\'
     filename = 'out.mid'
     # Write stream to output
-    stm01.write(midi_or_mxl, fp=path + filename)
+    stream_in.write(midi_or_mxl, fp=path + filename)
 
 
 """
 Creation
 """
-def create_stream () -> stream.Stream:
+def create_stream (signature_in: meter.TimeSignature = meter.TimeSignature("4/4"),
+                   key_in: key.Key= key.Key("C"),
+                   nummeasures: int = 4) -> stream.Stream:
     # Create a stream to hold the musical elements
     stream_out = stream.Stream()
 
-    # Create a series of notes
-    note1 = note.Note("C4", quarterLength=1.0)
-    note2 = note.Note("D4", quarterLength=1.0)
-    note3 = note.Note("E4", quarterLength=1.0)
-    note4 = note.Note("F4")
+    # Set the time signature and key signature
+    stream_out.insert(0, signature_in)
+    stream_out.insert(0, key_in)
 
-    # Add the notes to the stream
-    stream_out.append(note1)
-    stream_out.append(note2)
-    stream_out.append(note3)
-    stream_out.append(note4)
+    notes = ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"]
+    durations = [1,1,1,1,1,1,1,1]
+
+    # Create a note object for each note and append it to stream
+    for i in len(notes)-1:
+        stream_note = (note.Note(pitch=notes[i], quarterLength=durations[i]))
+        # Add the notes to the stream
+        stream_out.append(stream_note)
+
+    # Create random measures
+    # Select random pitch
+    msrMeasure = stream.Measure()
+    pitch_midi_number = random.choice(PITCH_MIDI_NUMBERS)
+
+    msrMeasure.append(note.Note(pitch_midi_number))
 
     # Insert several new notes
     new_note_1 = note.Note('C4', quarterLength=0.75)
     new_note_2 = note.Note('C4', quarterLength=0.25)
     stream_out.insertAndShift([2, new_note_1, 2.75, new_note_2])
-
-    # Set the time signature and key signature
-    stream_out.insert(0, meter.TimeSignature("4/4"))
-    stream_out.insert(0, key.Key("C"))
-
 
     return stream_out
 
@@ -163,11 +180,12 @@ def part_create_melody() -> stream.Part:
     return part_out
 
 
-def create_melody_harmony_bass () -> (stream.Part, stream.Part, stream.Part):
-    # Add 40 measures of melody, harmony, and bass
+def create_melody_harmony_bass (nummeasure: int) -> (stream.Part, stream.Part, stream.Part):
+    # Create three voices melody, harmony, and bass
     melody, harmony, bass = stream.Part()
 
-    for i in range(40):
+    # Add measures
+    for i in range(nummeasures):
         melody_notes = ['C5', 'D5', 'E5', 'F5'] if i % 2 == 0 else ['G5', 'A5', 'B4', 'C5']
         harmony_chord = ['C4', 'E4', 'G4'] if i % 2 == 0 else ['F4', 'A4', 'C5']
         bass_note = 'C3' if i % 2 == 0 else 'G2'
@@ -186,6 +204,56 @@ def create_melody_harmony_bass () -> (stream.Part, stream.Part, stream.Part):
         bass.append(m3)
 
     return melody, harmony, bass
+
+
+
+def create_random_voice(length, pitch_range: tuple = (60, 72), durations: list = [0.5, 1, 2]):
+    # Create a random list of notes
+    voice = []
+    for i in range(length):
+        new_pitch = random.choice(range(pitch_range))  # C4 to B4
+        duration = random.choice(durations)
+        new_note = note.Note(pitch= new_pitch, quarterLength=duration)
+        voice.append(new_note)
+    return voice
+
+
+def generate_counterpoint(voice1, voice2):
+    # Generate two counterpoint voices
+    # Ensure the voices are of the same length
+    if len(voice1) != len(voice2):
+        raise ValueError("Voices must be of the same length")
+
+    # Check for parallel perfect intervals
+    for i in range(len(voice1) - 1):
+        intv1 = interval.Interval(voice1[i], voice1[i + 1])
+        intv2 = interval.Interval(voice2[i], voice2[i + 1])
+        if is_perfect_interval(intv1) and is_perfect_interval(intv2) and intv1.direction == intv2.direction:
+            return False
+
+    # Check for hidden parallels
+    for i in range(len(voice1) - 1):
+        intv1 = interval.Interval(voice1[i], voice1[i + 1])
+        intv2 = interval.Interval(voice2[i], voice2[i + 1])
+        if is_perfect_interval(intv1) and is_perfect_interval(intv2) and intv1.direction == intv2.direction:
+            return False
+
+    # Check for crossing voices
+    for i in range(len(voice1)):
+        if voice1[i].pitch < voice2[i].pitch and voice1[i + 1].pitch > voice2[i + 1].pitch:
+            return False
+
+    return True
+
+
+def counterpoint_voices():
+
+    length = 16  # Length of the counterpoint
+    voice1 = create_random_voice(length)
+    voice2 = create_random_voice(length)
+
+    while not generate_counterpoint(voice1, voice2):
+        voice2 = create_random_voice(length)
 
 
 
@@ -269,7 +337,7 @@ def stream_analyze (stream_in: stream.Stream):
     key01 = stream_in.analyze('key')
     print (key01)
 
-    sce01 = stream.Score()
+    score_out = stream.Score()
 
     chordset = stream_in.chordify()
     # Check for specific chords
@@ -288,8 +356,8 @@ def stream_analyze (stream_in: stream.Stream):
         chd01.addLyric(str(rn.figure))
 
 
-    sce01.insert (0, chordset)
-    sce01.show()
+    score_out.insert (0, chordset)
+    score_out.show()
 
 def stream_show (stream_in):
     """
