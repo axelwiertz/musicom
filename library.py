@@ -30,8 +30,8 @@ Music library - Absolute data: frequency, pitch(class), octave
 '''
 
 # Diatonic pitch set, equal temperament scale
-A4FREQUENCY = 440 # Frequency of A4
-A4MIDIPITCHNUM = 69 # MIDI number of A4
+FREQUENCY_A4 = 440 # Frequency of A4
+MIDIPITCHNUM_A4 = 69 # MIDI number of A4
 OCTAVES = 9 # Number of octaves in the pitch set
 
 NUMDIATONICPITCHCLASS = 12 # Number of pitch classes 0-11
@@ -45,13 +45,13 @@ PITCHCLASSTEXTS = ('C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', '
 chromaticRow = serial.TwelveToneRow(PITCHCLASSNUMBERS)
 matrixObj = chromaticRow.matrix()
 
-srsPitchNr = pd.Series (range (NUMPITCH))
+#srsPitchNr = pd.Series (range (NUMPITCH))
 # Pitch class
-PITCHCLASSTEXTLIST = ([x for y in range(-1, OCTAVES+1) for x in PITCHCLASSTEXTS])
+PITCHCLASSTEXTLIST = ([x for y in range(0, OCTAVES) for x in PITCHCLASSTEXTS])
 PITCHCLASSNUMBERLIST = (OCTAVES * PITCHCLASSNUMBERS)
-PITCHFREQUENCYLIST = (2 ** ((n - A4MIDIPITCHNUM) / NUMDIATONICPITCHCLASS) * A4FREQUENCY for n in range(NUMPITCH)) # Pitch frequencies
+PITCHFREQUENCYLIST = tuple(2 ** ((n - MIDIPITCHNUM_A4) / NUMDIATONICPITCHCLASS) * FREQUENCY_A4 for n in range(NUMPITCH)) # Pitch frequencies
 
-# Table of all diatonic data along pitch number set
+# Table of all absolute diatonic data along pitch number set
 dfPitch = pd.DataFrame ([PITCHMIDINUMBERLIST, PITCHCLASSNUMBERLIST, PITCHCLASSTEXTLIST, PITCHFREQUENCYLIST]).transpose()
 dfPitch.columns=['Nr','ClassNr','ClassChr', 'Freq']
 
@@ -59,12 +59,16 @@ dfPitch.columns=['Nr','ClassNr','ClassChr', 'Freq']
 """
 Music library - Pitch ranges of instruments
 """
-instr = instrument.Flute
+instr1 = instrument.Piano
+instr2 = instrument.Guitar
+instr3 = instrument.Ukulele
+instrPerc = instrument.Percussion
+
 
 dctRangeInstr = {
-    'Piano': ['A0','C8'], # Piano keyboard
-    'Guitar': ['E2','D6'], # Acoustic guitar with standard tuning
-    'Ukelele': ['C4', 'C6'] # Ukelele
+    'Piano': ('A0','C8'), # Piano keyboard
+    'Guitar': ('E2','D6'), # Acoustic guitar with standard tuning
+    'Ukelele': ('C4', 'C6') # Ukelele
 }
 
 
@@ -217,10 +221,10 @@ Rhythm of beats and rests with durations in a measure
 """
 BEAT_REST = 0
 DURATION = 1
-PITCHES = 2
 BT = 'b'
 RS = 'r'
 
+QUARTER = 0.25
 
 """
 Rhythm library

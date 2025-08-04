@@ -1,7 +1,7 @@
-'''
+"""
 Music - Harmony
 Patterns and rules
-'''
+"""
 
 
 """
@@ -26,18 +26,19 @@ lstTriChordLadder = (
     (5, 7),
     # Pre-dominant
     (2, 4),
-    (6),
-    (3)
+    6,
+    3
 )
 
 # Widely used next chords
 dctChordProgr = {
-    1 : ('*'),
+    1 : '*',
     2 : (4, 5, 7),
     3 : (2, 4, 6),
     4 : (1, 3, 5, 7),
-    5 : (1),
-    6 : (1, 3)
+    5 : 1,
+    6 : (1, 3),
+    7 : 1
 }
 
 lstChordPattern = [
@@ -89,11 +90,11 @@ dctCadencePattern = {
 Modulation progression in new key
 """
 dctModulationPattern = {
-# Perfect cadence
+# Direct progression
     'Direct' : (),
-# Plagal cadence
-    'Dominant' : ('V7'),
-# Imperfect cadence
+# Dominant progression
+    'Dominant' : 'V7',
+# Subdominant progression
     'Subdominant' : ('iim7', 'V7'),
 }
 
@@ -173,12 +174,9 @@ dctScaleDegrMove = {
     3 : 0,
     5 : 0,
     # Inactive
-    2 : -1,
-    2 : 1,
+    2 : [-1, 1],
     4 : -1,
     6 : -1,
     7 : 1,
-    0 : 0,
-    0 : +2,
-    0 : -2
+    0 : [0, +2, -2]
 }

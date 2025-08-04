@@ -5,7 +5,6 @@ import copy
 import random
 import platform
 #import sound
-import matplotlib.pyplot as plt
 from music21.meter import TimeSignature
 
 # Musical data
@@ -38,7 +37,7 @@ PART_D = 3
 
 def big_yellow_taxi():
     # 'Big Yellow Taxi'
-    tonerow_byt = serial.Tonerow (
+    tonerow_byt = serial.ToneRow (
         'B3, C#4, E4, E4, F#4, C#4, E4, E4, F#4, E4, G#3, B3, B3, C#4, E4, F#4, B3, B3, F#4, F#4, F#4, G#4, F#4, E4, E4')
     lstScales = ['Bb major']
 
@@ -81,21 +80,42 @@ def create_new ():
 
     # Form
     parts = 3
+    voices = 3
     form = (16, 16, 16)
 
 #    main_scale = scale.MajorScale('c')
+    # Rhythm
+    rtm_example01 = [[BT, RS, BT, BT, BT, BT, RS],
+                     [1.0, 1.0, 1.5, 1.5, 1.0, 1.0, 1.0]]
+    pitch_classes01 = ['C4', '', 'C4', 'C4', 'C4', 'C4', '']
 
-    part_a = part_create()
-    main_score.append(part_a)
+    voices = []
+    voices [MELODY_VOICE] = part_create(rtm_example01, pitch_classes01)
 
-    # Create voices for melody and accompaniment
+    rtm_example02 = [[BT, BT, RS, BT, BT, RS],
+                     [1.5, 0.5, 0.5, 0.25, 0.25, 1]]
+    pitch_classes02 = ['C4', 'C4', '', 'C4', 'C4', '']
+
+    voices [HARMONY_VOICE] = part_create(rtm_example02, pitch_classes02)
+
+    main_score.append(voices)
+    #main_score.append(voice_b)
+    #main_score.append(voice_c)
+
+    # Instruments of parts
+    voices [MELODY_VOICE].insert(0, instrument.Flute())
+    voices [HARMONY_VOICE].insert(0, instrument.Violin())
+    voices [BASS_VOICE].insert(0, instrument.Bass())
+
+    # Create three voices for melody and accompaniment
     create_three_voice_melody (main_score)
 
     # for voices ?
-    score3 = stream.Stream.voicesToParts()
+    # score3 = stream.Stream.voicesToParts()
 
     # Set key and time signature typical of Balfolk
     melody_voice, bass_voice = part_create_balfolk()
+
 
     rhythm_pattern = FOUR_RHYTHM
 
@@ -108,13 +128,18 @@ def create_new ():
 
     for pcs in enumerate (tonerow_base):
         pcs.octave = 3
-        part_out.append(pcs)
+        voices[0].append(pcs)
 
 
-    # Generate rhythm
     signature : TimeSignature
-    signature = main_score.getElementsByClass('TimeSignature')
+    signature = main_score.getElementsByClass('TimeSignature')[0]
+    # number of beats per measure
     beats = signature.numerator
+    # signature in quarterlength
+    beatduration = signature.denominator * QUARTER
+
+    # Generate durations
+    # 1/32 note
     duration_unit = 0.125
     duration_factor = 8
     duration_new = duration_unit * duration_factor
@@ -123,16 +148,16 @@ def create_new ():
 
 
 
-def score_library ()
+def score_library ():
     # Create a score with library elements
 
     main_score = create_stream_chords_in_key(lstChordPattern, key.Key('C'), 2)
     # Save score
-    main_score.write(fmt='midi', fp=MAIN_PATH + filename)
+    main_score.write(fmt='midi', fp=MAIN_PATH + "chordprog_in_key_CM")
 
     main_score = create_stream_triads_in_key(key.Key('C'), 2)
     # Save score
-    main_score.write(fmt='midi', fp=MAIN_PATH + filename)
+    main_score.write(fmt='midi', fp=MAIN_PATH + "chordtriad_in_key_CM")
 
 
 
@@ -140,7 +165,7 @@ def score_library ()
 def main():
     # Main: create or transform
 
-    create_new_score()
+    create_new()
 
 
 
@@ -157,81 +182,50 @@ def score_create (signature_in: meter.TimeSignature = meter.TimeSignature("4/4")
     # Set the time signature and key signature
     score_out.insert(0, signature_in)
     score_out.insert(0, key_in)
-    tempo_stream = tempo.MetronomeMark(number=bpm_in)
+    score_out.insert(0, tempo.MetronomeMark(number=bpm_in))
 
     return score_out
 
 
 
-def part_create(rhythm_in, pitch_classes_in) -> stream.Part:
+def part_create(rhythm_in: list, pitch_classes_in) -> stream.Part:
     part_out = stream.Part()
-
-    # Rhythm
-    rtm_example01 = [[BT, RS, BT, BT, BT, BT, RS],
-                     [1.0, 1.0, 1.5, 1.5, 1.0, 1.0, 1.0]]
-    stream_rhythm = create_rhythmic_stream(rtm_example01)
-
-    rtm_example02 = [[BT, BT, RS, BT, BT, RS],
-                     [1.5, 0.5, 0.5, 0.25, 0.25, 1]]
-
-    return part_out
-
-def create_rhythmic_stream (measure_pattern,
-                            signature_in : meter.TimeSignature = meter.TimeSignature('4/4')) -> stream.Stream:
-    # Create a stream for a rhythmic pattern
-    rhythmic_stream = stream.Stream()
-    rhythmic_stream.append(signature_in)
 
     measure_length = 0
     # Iterate over the pattern list
-    for i in range (0, len(measure_pattern-1)):
+    for i in range (0, len(rhythm_in)):
         # Add beats and rests to the stream
-        measure_length += measure_pattern [DURATION][i]
-        if measure_pattern [BEAT_REST][i] == BT:
-            rhythmic_stream.append(note.Note(measure_pattern[PITCHES][i], quarterLength=measure_pattern [DURATION][i]))
-        elif measure_pattern[BEAT_REST][i] == RS:
-            rhythmic_stream.append(note.Rest(quarterLength=measure_pattern [DURATION][i]))
+        measure_length += rhythm_in [DURATION][i]
+        if rhythm_in [BEAT_REST][i] == BT:
+            rhythm_in.append(note.Note(pitch=pitch_classes_in[i], quarterLength=rhythm_in [DURATION][i]))
+        elif rhythm_in[BEAT_REST][i] == RS:
+            rhythm_in.append(note.Rest(quarterLength=rhythm_in [DURATION][i]))
 
-    return rhythmic_stream
-
-
+    return part_out
 
 
-def create_three_voice_melody (score_in: stream.Score, nummeasure: int = 20):
+
+
+
+def create_three_voice_melody (score_in: stream.Score):
     # Create three voices melody, harmony, and bass
-    score_in = stream.Score()
-    score_in.append(stream.Part())
-    score_in.append(stream.Part())
-    score_in.append(stream.Part())
-
-    # Instruments of parts
-    score_in.parts (MELODY_VOICE).insert(0, instrument.Flute())
-    score_in.parts (HARMONY_VOICE).insert(0, instrument.Violin())
-    score_in.parts (BASS_VOICE).insert(0, instrument.Bass())
-
 
     # Motifs of voices
-    pitch_classes =
-         [
-            [['C5', 'D5', 'E5', 'F5'],
-             ['G5', 'A5', 'B4', 'C5']],
-            [['C4', 'E4', 'G4'],
-             ['F4', 'A4', 'C5']],
-            [['C3'],
-             ['G3']]
-        ]
-    for i in range(nummeasures):
-        # Alternating motifs
-        motif = i % len(pitch_classes[1])
-        for melody_pc in pitch_classes [MELODY_VOICE, motif]:
-            score_in.parts (MELODY_VOICE).append(note.Note(not01, quarterLength=1))
+    pitch_classes = []
+    durations = []
+    pitch_classes [MELODY_VOICE] = ['C5', 'D5', 'E5', 'F5', 'G5', 'A5', 'B4', 'C5']
+    durations [MELODY_VOICE] = [1, 1, 1, 1, 1, 1, 1, 1]
+    pitch_classes [HARMONY_VOICE] = ['C4', 'E4', 'G4', '', 'F4', 'A4', 'C5', '']
+    durations [HARMONY_VOICE] = [1, 1, 1, 1, 1, 1, 1, 1]
+    pitch_classes [BASS_VOICE] = ['C3', 'G3']
+    durations [BASS_VOICE] = [4, 4]
 
-        score_in.parts (HARMONY_VOICE).append(chord.Chord(pitch_classes [HARMONY_VOICE, motif], quarterLength=4))
+    voices = []
+    voices [MELODY_VOICE] = part_create(pitch_classes [MELODY_VOICE])
+    voices [HARMONY_VOICE] = part_create(pitch_classes [HARMONY_VOICE])
+    voices [BASS_VOICE] = part_create(pitch_classes [BASS_VOICE])
 
-        score_in.parts (BASS_VOICE).append(note.Note(pitch_classes [BASS_VOICE, motif], quarterLength=4))
-
-    return true
-
+    score_in.append(voices)
 
 
 def create_random_voice(length, pitch_range: tuple = (60, 72), durations: list = [0.5, 1, 2]):
@@ -343,8 +337,8 @@ def score_analyze (score_in: stream.Stream):
     print (key01)
 
     # Analyze parts ?
-    for i in range (0, len(main_score.parts)-1):
-        score_part = main_score.parts[i])
+    for score_part in main_score.parts:
+        score_part
 
 
     score_out = stream.Score()
@@ -377,7 +371,7 @@ def score_show (score_in):
     if platform.system() == 'Windows':
         score_in.show('text')
 #    score.show('midi')  # Play MIDI
-        score_in.show()  # Show musical notation
+        show(score_in)  # Show musical notation
 
     elif platform.system() == 'IOS':
         score_in.show('text')
