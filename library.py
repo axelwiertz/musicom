@@ -1,14 +1,15 @@
 """
 Music library
 """
-import itertools
-
 
 # Import
 import numpy as np
 import pandas as pd
+import itertools
+import matplotlib.pyplot as plt
 
-from music21 import stream, note, key, scale, chord, interval, meter, roman, converter, instrument, serial, tempo
+# Music21 modules
+from music21 import stream, note, key, scale, chord, interval, meter, tempo, roman, converter, instrument, serial, harmony
 
 
 def interval_to_binary (intervals):
@@ -36,7 +37,7 @@ OCTAVES = 9 # Number of octaves in the pitch set
 NUMDIATONICPITCHCLASS = 12 # Number of pitch classes 0-11
 # Total number of pitches diatonic pitch set
 NUMPITCH = OCTAVES * NUMDIATONICPITCHCLASS
-PITCH_MIDI_NUMBERS = tuple(range(NUMPITCH)) # Pitch number set
+PITCHMIDINUMBERLIST = tuple(range(NUMPITCH)) # Pitch number set
 
 
 PITCHCLASSNUMBERS = tuple(range (NUMDIATONICPITCHCLASS)) # Pitch class number
@@ -46,14 +47,20 @@ matrixObj = chromaticRow.matrix()
 
 srsPitchNr = pd.Series (range (NUMPITCH))
 # Pitch class
-srsPitchClassChr = ([x for y in range(-1, OCTAVES+1) for x in PITCHCLASSTEXTS])
-srsPitchClassNr = pd.Series (OCTAVES * PITCHCLASSNUMBERS)
-srsPitchFreq = pd.Series (2 ** ((n - A4MIDIPITCHNUM) / NUMDIATONICPITCHCLASS) * A4FREQUENCY for n in range(NUMPITCH)) # Pitch frequencies
+PITCHCLASSTEXTLIST = ([x for y in range(-1, OCTAVES+1) for x in PITCHCLASSTEXTS])
+PITCHCLASSNUMBERLIST = (OCTAVES * PITCHCLASSNUMBERS)
+PITCHFREQUENCYLIST = (2 ** ((n - A4MIDIPITCHNUM) / NUMDIATONICPITCHCLASS) * A4FREQUENCY for n in range(NUMPITCH)) # Pitch frequencies
+
+# Table of all diatonic data along pitch number set
+dfPitch = pd.DataFrame ([PITCHMIDINUMBERLIST, PITCHCLASSNUMBERLIST, PITCHCLASSTEXTLIST, PITCHFREQUENCYLIST]).transpose()
+dfPitch.columns=['Nr','ClassNr','ClassChr', 'Freq']
 
 
 """
 Music library - Pitch ranges of instruments
 """
+instr = instrument.Flute
+
 dctRangeInstr = {
     'Piano': ['A0','C8'], # Piano keyboard
     'Guitar': ['E2','D6'], # Acoustic guitar with standard tuning
@@ -74,14 +81,19 @@ IMPERFECTINTERVALS = ('M2', 'm3', 'M3', 'm6', 'M6', 'm7', 'M7')
 interval02 = interval.Interval()
 
 # Check if an interval is perfect
-def is_perfect_interval(ivlInterval: interval.DiatonicInterval):
-    return (ivlInterval.perfectable)
+def is_perfect_interval(interval_in: interval.DiatonicInterval):
+    return interval_in.perfectable
 
 
 '''
 Music library - Diatonic chord patterns: triads and sevenths
 '''
 chord1 = chord.Chord()
+
+h = harmony.ChordSymbol('Dsus4')
+h.romanNumeral = 'III'
+h.romanNumeral.key = key.Key('B')
+h.romanNumeral = roman.RomanNumeral('IV', 'A' )
 
 TRIAD = 3 # Number of pitch classes in a triad
 # Patterns: diminished, major, minor, augmented
@@ -105,7 +117,7 @@ Music library - Diatonic scale patterns: pentatonic and heptatonic
 """
 # Pentatonic (5 pitch class) scale
 PENTA = 5 # Number of pitch classes in a pentatonic scale
-lstIntPentaDegree = tuple(range(1,PENTA+1)) # Pentatonic scale degree number
+lstIntPentaDegree = tuple(range(1, PENTA + 1)) # Pentatonic scale degree number
 lstPentaScaleIntervalPattern = (2,2,3,2,3) # Pentatonic interval pattern
 lstPentaScaleInterval = tuple(lstPentaScaleIntervalPattern[x:]+lstPentaScaleIntervalPattern[:x] for x in range(PENTA) )
 lstPentaScaleBinary = [interval_to_binary(lstPentaScaleInterval[x]) for x in range(len(lstPentaScaleInterval))] # Heptatonic binary patterns
@@ -113,7 +125,7 @@ lstPentaScaleBinary = [interval_to_binary(lstPentaScaleInterval[x]) for x in ran
 # Heptatonic (7 pitch class) scale
 scale01 = scale.Scale()
 HEPTA = 7 # Number of pitch classes in a heptatonic scale
-lstIntHeptaDegree = tuple(range(1,HEPTA+1)) # Heptatonic scale degree number
+lstIntHeptaDegree = tuple(range(1, HEPTA + 1)) # Heptatonic scale degree number
 lstHeptaScaleIntervalPattern = (2,2,1,2,2,2,1) # Heptatonic interval pattern
 # Modes
 lstHeptaScaleInterval = tuple(lstHeptaScaleIntervalPattern[x:]+lstHeptaScaleIntervalPattern[:x] for x in range(HEPTA) )
@@ -145,11 +157,6 @@ lstPermChordDegreePattern = list(itertools.permutations (lstIntHeptaDegree))
 lstCombChordDegreePattern = list(itertools.combinations (lstIntHeptaDegree, 3))
 
 
-# Table of all diatonic data along pitch number set
-dfPitch = pd.DataFrame ([PITCH_MIDI_NUMBERS, srsPitchClassNr.values, srsPitchClassChr.values, srsPitchFreq.values]).transpose()
-dfPitch.columns=['Nr','ClassNr','ClassChr', 'Freq']
-
-
 
 def create_stream_chords_in_key (chord_progressions: list, key_in: key.Key = key.Key ('C'),  quarterlength_in: int = 1 ) -> stream.Stream:
     # Stream of chord progression patterns in a key
@@ -169,38 +176,50 @@ def create_stream_triads_in_key (key_in: key.Key = key.Key ('C'),  quarterlength
     # Stream of all triads in a key
     stream_out = stream.Stream()
     for i in range(HEPTA):
-        chord1 = roman.RomanNumeral(i+1, key_in)
-        chord1.duration.quarterLength = quarterlength_in
-        stream_out.append(chord1)
+        triad = roman.RomanNumeral(i+1, key_in)
+        triad.duration.quarterLength = quarterlength_in
+        stream_out.append(triad)
         stream_out.append(note.Rest(quarterLength=quarterlength_in))
 
     return stream_out
 
+
+"""
+Visualization
+"""
+
+# To do: Rhythm circle
+
+
+def pitch_class_circle():
+    # Show pitch classes in circle
+
+    # Convert pitch class numbers to angles
+    angles = np.linspace(0, 2 * np.pi, NUMDIATONICPITCHCLASS, endpoint=False)
+
+    # Create a figure and axis
+    fig, ax = plt.subplots(subplot_kw={'projection': 'polar'})
+
+    # Plot the pitch class numbers
+    for angle, pitch in zip(angles, PITCHCLASSNUMBERS):
+        ax.plot(angle, 1, 'o', markersize=10)
+        ax.text(angle, 1.1, str(pitch), ha='center', va='center')
+
+    # Set the title
+    ax.set_title('Circle of Pitch Class Numbers')
+
+    # Show the plot
+    plt.show()
+
+
 """
 Rhythm of beats and rests with durations in a measure
 """
-BEAT_REST = 1
-DURATION = 2
+BEAT_REST = 0
+DURATION = 1
+PITCHES = 2
 BT = 'b'
 RS = 'r'
-
-
-def create_rhythmic_stream (measure_pattern, signature : meter.TimeSignature = meter.TimeSignature('4/4')) -> stream.Stream:
-    # Create a stream for a rhythmic pattern
-    rhythmic_stream = stream.Stream()
-    rhythmic_stream.append(signature)
-
-    measure_length = 0
-    # Iterate over the pattern list
-    for i in len(measure_pattern-1):
-        # Add beats and rests to the stream
-        measure_length += measure_pattern [DURATION][i]
-        if measure_pattern [BEAT_REST][i] == BT:
-            rhythmic_stream.append(note.Note('C4', quarterLength=measure_pattern [DURATION][i]))
-        elif measure_pattern[BEAT_REST][i] == RS:
-            rhythmic_stream.append(note.Rest(quarterLength=measure_pattern [DURATION][i]))
-
-    return rhythmic_stream
 
 
 """
@@ -208,7 +227,7 @@ Rhythm library
 """
 # Four-beat rhythm
 four_rhythmic_pattern = converter.parse('tinynotation: 4/4 c5 c5 c5 c5')
-four_rtm = [    [BT, BT, BT, BT],
+FOUR_RHYTHM = [    [BT, BT, BT, BT],
                 [1.0, 1.0, 1.0, 1.0]  ]
 # Tresillo rhythm
 tresillo_rhythmic_pattern = converter.parse('tinynotation: 4/4 c5 r r c5 r r c5 r')

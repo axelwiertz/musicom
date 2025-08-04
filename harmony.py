@@ -2,22 +2,6 @@
 Music - Harmony
 Patterns and rules
 '''
-from music21.harmony import Harmony
-from winioctlcon import PARTITION_STYLE_GPT
-
-"""
-Harmony rules - Structure
-"""
-# Three voice score
-MELODY_VOICE = 0
-HARMONY_VOICE = 1
-BASS_VOICE = 2
-
-PART_A = 0
-PART_B = 1
-PART_C = 2
-PART_D = 3
-
 
 
 """
