@@ -8,12 +8,18 @@ import platform
 import matplotlib.pyplot as plt
 
 # Musical data
-from datastructure import *
+from library import *
 # Harmony rules
 from harmony import *
 
 # Showing score without external programs like Musescore
 from showscore import show
+
+
+"""
+Main score
+"""
+main_score = stream.Score()
 
 
 def big_yellow_taxi():
@@ -30,7 +36,6 @@ def berendans():
 
 def main():
     # Create a score
-    main_score = stream.Score()
     # Create a scale
     main_scale = scale.MajorScale('c')
 
@@ -54,28 +59,16 @@ def main():
     triads_stream = create_stream_triads_in_key(key.Key('C'), 2)
 
     # Create voices for melody and accompaniment
-    melody_voice, harmony_voice, bass_voice = create_melody_harmony_bass()
+    create_three_voice_melody (main_score)
 
+    # for voices ?
     score3 = stream.Stream.voicesToParts()
 
-    # Instruments of parts
-    melody_voice.insert(0, instrument.Flute())
-    harmony_voice.insert(0, instrument.Violin())
-    bass_voice.insert(0, instrument.Bass())
 
-    # Meter
-    melody_voice.append(tempo.MetronomeMark(number=100))
-    for part in [melody_voice, harmony_voice, bass_voice]:
-        part.append(meter.TimeSignature('4/4'))
 
     # Set key and time signature typical of Balfolk
     melody_voice, bass_voice = part_create_balfolk()
 
-    # Add parts to score
-    # Combine parts
-    main_score.insert(0, melody_voice)
-    main_score.insert(0, harmony_voice)
-    main_score.insert(0, bass_voice)
 
     # Analyze stream
     stream_analyze (main_score)
@@ -121,13 +114,14 @@ Creation
 """
 def create_stream (signature_in: meter.TimeSignature = meter.TimeSignature("4/4"),
                    key_in: key.Key= key.Key("C"),
-                   nummeasures: int = 4) -> stream.Stream:
+                   bpm_in: int = 120) -> stream.Stream:
     # Create a stream to hold the musical elements
     stream_out = stream.Stream()
 
     # Set the time signature and key signature
     stream_out.insert(0, signature_in)
     stream_out.insert(0, key_in)
+    tempo_stream = tempo.MetronomeMark(number=bpm_in)
 
     notes = ["C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"]
     durations = [1,1,1,1,1,1,1,1]
@@ -138,12 +132,10 @@ def create_stream (signature_in: meter.TimeSignature = meter.TimeSignature("4/4"
         # Add the notes to the stream
         stream_out.append(stream_note)
 
-    # Create random measures
     # Select random pitch
-    msrMeasure = stream.Measure()
     pitch_midi_number = random.choice(PITCH_MIDI_NUMBERS)
 
-    msrMeasure.append(note.Note(pitch_midi_number))
+    stream_out.append(note.Note(pitch_midi_number))
 
     # Insert several new notes
     new_note_1 = note.Note('C4', quarterLength=0.75)
@@ -180,30 +172,40 @@ def part_create_melody() -> stream.Part:
     return part_out
 
 
-def create_melody_harmony_bass (nummeasure: int) -> (stream.Part, stream.Part, stream.Part):
+def create_three_voice_melody (score_in: stream.Score, nummeasure: int = 20):
     # Create three voices melody, harmony, and bass
-    melody, harmony, bass = stream.Part()
+    score_in = stream.Score()
+    score_in.append(stream.Part())
+    score_in.append(stream.Part())
+    score_in.append(stream.Part())
 
-    # Add measures
+    # Instruments of parts
+    score_in.parts (MELODY_VOICE).insert(0, instrument.Flute())
+    score_in.parts (HARMONY_VOICE).insert(0, instrument.Violin())
+    score_in.parts (BASS_VOICE).insert(0, instrument.Bass())
+
+
+    # Motifs of voices
+    pitch_classes =
+         [
+            [['C5', 'D5', 'E5', 'F5'],
+             ['G5', 'A5', 'B4', 'C5']],
+            [['C4', 'E4', 'G4'],
+             ['F4', 'A4', 'C5']],
+            [['C3'],
+             ['G3']]
+        ]
     for i in range(nummeasures):
-        melody_notes = ['C5', 'D5', 'E5', 'F5'] if i % 2 == 0 else ['G5', 'A5', 'B4', 'C5']
-        harmony_chord = ['C4', 'E4', 'G4'] if i % 2 == 0 else ['F4', 'A4', 'C5']
-        bass_note = 'C3' if i % 2 == 0 else 'G2'
+        # Alternating motifs
+        motif = i % len(pitch_classes[1])
+        for melody_pc in pitch_classes [MELODY_VOICE, motif]:
+            score_in.parts (MELODY_VOICE).append(note.Note(not01, quarterLength=1))
 
-        m1 = stream.Measure()
-        for not01 in melody_notes:
-            m1.append(note.Note(not01, quarterLength=1))
-        melody.append(m1)
+        score_in.parts (HARMONY_VOICE).append(chord.Chord(pitch_classes [HARMONY_VOICE, motif], quarterLength=4))
 
-        m2 = stream.Measure()
-        m2.append(chord.Chord(harmony_chord, quarterLength=4))
-        harmony.append(m2)
+        score_in.parts (BASS_VOICE).append(note.Note(pitch_classes [BASS_VOICE, motif], quarterLength=4))
 
-        m3 = stream.Measure()
-        m3.append(note.Note(bass_note, quarterLength=4))
-        bass.append(m3)
-
-    return melody, harmony, bass
+    return true
 
 
 

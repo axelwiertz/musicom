@@ -2,10 +2,27 @@
 Music - Harmony
 Patterns and rules
 '''
+from music21.harmony import Harmony
+from winioctlcon import PARTITION_STYLE_GPT
 
-'''
-Chords
-'''
+"""
+Harmony rules - Structure
+"""
+# Three voice score
+MELODY_VOICE = 0
+HARMONY_VOICE = 1
+BASS_VOICE = 2
+
+PART_A = 0
+PART_B = 1
+PART_C = 2
+PART_D = 3
+
+
+
+"""
+Diatonic scale - Chord degrees
+"""
 # Chords
 dctChordRomanMm = {
     1: ('I','i'),
@@ -29,7 +46,7 @@ lstTriChordLadder = (
     (3)
 )
 
-# Widely used chord progressions
+# Widely used next chords
 dctChordProgr = {
     1 : ('*'),
     2 : (4, 5, 7),
@@ -180,13 +197,4 @@ dctScaleDegrMove = {
     0 : 0,
     0 : +2,
     0 : -2
-}
-
-'''
-Pitch ranges of instruments
-'''
-dctRangeInstr = {
-    'Piano': ['A0','C8'], # Piano keyboard
-    'Guitar': ['E2','D6'], # Acoustic guitar with standard tuning
-    'Ukelele': ['C4', 'C6'] # ??
 }

@@ -1,5 +1,5 @@
 """
-Music data - Structure
+Music library
 """
 import itertools
 
@@ -25,36 +25,53 @@ def interval_to_binary (intervals):
 
 
 '''
-Music data - Absolute data: frequency, pitch(class), octave
+Music library - Absolute data: frequency, pitch(class), octave
 '''
 
 # Diatonic pitch set, equal temperament scale
 A4FREQUENCY = 440 # Frequency of A4
 A4MIDIPITCHNUM = 69 # MIDI number of A4
 OCTAVES = 9 # Number of octaves in the pitch set
+
 NUMDIATONICPITCHCLASS = 12 # Number of pitch classes 0-11
 # Total number of pitches diatonic pitch set
 NUMPITCH = OCTAVES * NUMDIATONICPITCHCLASS
-lstPitchClassNr = tuple(range (NUMDIATONICPITCHCLASS)) # Pitch class number
-lstPitchClassChr = ('C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B') # Pitch class characters
-chromaticRow = serial.ToneRow(lstPitchClassNr)
+PITCH_MIDI_NUMBERS = tuple(range(NUMPITCH)) # Pitch number set
+
+
+PITCHCLASSNUMBERS = tuple(range (NUMDIATONICPITCHCLASS)) # Pitch class number
+PITCHCLASSTEXTS = ('C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B') # Pitch class characters
+chromaticRow = serial.TwelveToneRow(PITCHCLASSNUMBERS)
 matrixObj = chromaticRow.matrix()
 
-PITCH_MIDI_NUMBERS = tuple(range(NUMPITCH)) # Pitch number set
 srsPitchNr = pd.Series (range (NUMPITCH))
 # Pitch class
-srsPitchClassChr = pd.Series ([x for y in range(-1, OCTAVES+1) for x in lstPitchClassChr])
-srsPitchClassNr = pd.Series (OCTAVES * lstPitchClassNr)
+srsPitchClassChr = ([x for y in range(-1, OCTAVES+1) for x in PITCHCLASSTEXTS])
+srsPitchClassNr = pd.Series (OCTAVES * PITCHCLASSNUMBERS)
 srsPitchFreq = pd.Series (2 ** ((n - A4MIDIPITCHNUM) / NUMDIATONICPITCHCLASS) * A4FREQUENCY for n in range(NUMPITCH)) # Pitch frequencies
 
+
 """
-Music data - Intervals
+Music library - Pitch ranges of instruments
 """
-# Interval classes
+dctRangeInstr = {
+    'Piano': ['A0','C8'], # Piano keyboard
+    'Guitar': ['E2','D6'], # Acoustic guitar with standard tuning
+    'Ukelele': ['C4', 'C6'] # Ukelele
+}
+
+
+
+"""
+Music library - Interval classes
+"""
+interval01 = interval.ChromaticInterval()
+
+# Diatonic Interval classes
 PERFECTINTERVALS = ('P1', 'P4', 'P5', 'P8')
 IMPERFECTINTERVALS = ('M2', 'm3', 'M3', 'm6', 'M6', 'm7', 'M7')
 
-interval01 = interval.Interval()
+interval02 = interval.Interval()
 
 # Check if an interval is perfect
 def is_perfect_interval(ivlInterval: interval.DiatonicInterval):
@@ -62,7 +79,7 @@ def is_perfect_interval(ivlInterval: interval.DiatonicInterval):
 
 
 '''
-Music data - Diatonic chord patterns: triads and sevenths
+Music library - Diatonic chord patterns: triads and sevenths
 '''
 chord1 = chord.Chord()
 
@@ -84,7 +101,7 @@ lstScaleBinary = [interval_to_binary(lstScaleInterval[x]) for x in range(len(lst
 
 
 """
-Music data - Diatonic scale patterns: pentatonic and heptatonic
+Music library - Diatonic scale patterns: pentatonic and heptatonic
 """
 # Pentatonic (5 pitch class) scale
 PENTA = 5 # Number of pitch classes in a pentatonic scale
@@ -113,7 +130,7 @@ arrHeptaScale = np.array(lstHeptaScale)
 
 
 """
-Music data - Chords in scales
+Music library - Chords in scales
 """
 # Chord patterns in scale degrees
 lstChordDegreePattern = (1,3,5,7,2,4,6) #Heptatonic
