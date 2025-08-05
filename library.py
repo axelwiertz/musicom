@@ -9,7 +9,8 @@ import itertools
 import matplotlib.pyplot as plt
 
 # Music21 modules
-from music21 import stream, note, key, scale, chord, interval, meter, tempo, roman, converter, instrument, serial, harmony
+from music21 import stream, note, key, scale, chord, interval, roman, converter, instrument, serial, harmony
+from music21 import meter, tempo
 
 
 def interval_to_binary (intervals):
@@ -85,8 +86,8 @@ IMPERFECTINTERVALS = ('M2', 'm3', 'M3', 'm6', 'M6', 'm7', 'M7')
 interval02 = interval.Interval()
 
 # Check if an interval is perfect
-def is_perfect_interval(interval_in: interval.DiatonicInterval):
-    return interval_in.perfectable
+def is_perfect_interval(interval_in: interval.Interval):
+    return interval_in.name in PERFECTINTERVALS
 
 
 '''

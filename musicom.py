@@ -20,7 +20,6 @@ from showscore import show
 Composition - Structure
 """
 # Main score
-main_score = stream.Score()
 MAIN_PATH = 'C:\\temp\\Music\\'
 
 # Three voice score
@@ -39,16 +38,19 @@ def big_yellow_taxi():
     # Big Yellow Taxi
     main_score = score_create('Bb','4/4')
 
-    tonerow_byt = serial.ToneRow (
+    main_score.append(
+        serial.ToneRow (
         ['B3', 'C#4', 'E4', 'E4', 'F#4', 'C#4', 'E4', 'E4', 'F#4', 'E4', 'G#3', 'B3', 'B3', 'C#4',
-        'E4', 'F#4', 'B3', 'B3', 'F#4', 'F#4', 'F#4', 'G#4', 'F#4', 'E4', 'E4'])
-
+        'E4', 'F#4', 'B3', 'B3', 'F#4', 'F#4', 'F#4', 'G#4', 'F#4', 'E4', 'E4']
+        )
+    )
     # Analyze score
     score_analyze (main_score)
 
 def berendans():
     # Berendans
     main_score = score_create('Bb','4/4')
+
     progr = ['I', 'V', 'I']
 
 
@@ -79,62 +81,91 @@ def load_and_transform ():
     trw01 = serial.ToneRow()
     trw02 = tonerow_transform (trw01)
 
+
 def create_new ():
     # Create a new score
     # Form
     parts = 3
-    voices = 3
+    voices = []
+    numvoices = 3
     form = (16, 16, 16)
 
     main_score = score_create('C','4/4')
 
-    # Rhythm
-    rhythm01 = [BT, RS, BT, BT, BT, BT, RS]
-    durations01 = [1.0, 1.0, 1.5, 1.5, 1.0, 1.0, 1.0]
-    pitch_list01 = ['C4', '', 'C4', 'C4', 'C4', 'C4', '']
-
-    voices = []
-    voices [MELODY_VOICE] = part_create(pitch_list01, durations01)
-
-    rtm_example02 = [BT, BT, RS, BT, BT, RS]
-    pitch_list02 = ['C4', 'C4', '', 'C4', 'C4', '']
-    durations02 = [1.5, 0.5, 0.5, 0.25, 0.25, 1]
-
-    voices [HARMONY_VOICE] = part_create(pitch_list02, durations02 )
-
-    main_score.append(voices)
-    #main_score.append(voice_b)
-    #main_score.append(voice_c)
-
-    # Instruments of parts
-    voices [MELODY_VOICE].insert(0, instrument.Flute())
-    voices [HARMONY_VOICE].insert(0, instrument.Violin())
-    voices [BASS_VOICE].insert(0, instrument.Bass())
-
     # Create three voices for melody and accompaniment
-    create_three_voice_melody (main_score)
+    # Motifs of voices
+    pitches_list = [['C5', 'D5', 'E5', 'F5', 'G5', 'A5', 'B4', 'C5'],
+                    ['C4', 'E4', 'G4', '', 'F4', 'A4', 'C5', ''],
+                    ['C3', 'G3']]
+    durations_list = [[1, 1, 1, 1, 1, 1, 1, 1],
+                      [1, 1, 1, 1, 1, 1, 1, 1]]
+    instruments_list = [instrument.Flute(),
+                        instrument.Violin(),
+                        instrument.Bass()]
 
-    # for voices ?
-    # score3 = stream.Stream.voicesToParts()
+    for i in range (0, len(pitches_list)-1):
+        main_score.append(
+            part_create(pitches_list [i], durations_list[i], instruments_list[i])
+        )
 
-    # Set key and time signature typical of Balfolk
-    melody_voice, bass_voice = part_create_balfolk()
+    # Analyze score
+    score_analyze (main_score)
+    score_show(main_score)
+    # Save score
+    main_score.write(fmt='midi', fp=MAIN_PATH + "new.mid")
+
+def create_balfolk ():
+    # Create a Balfolk style melody and bass
+
+    # C major/A minor
+    main_score = score_create('C','6/8')
+    melody_part = stream.Part()
+    bass_part = stream.Part()
+    main_score.append(melody_part)
+    main_score.append(bass_part)
+
+    # Bourrée-inspired melody (typical Balfolk rhythm)
+    # Create notes with Balfolk-style rhythm
+    # Chord
+    chord_degrees = [1, 2, 3, 4]
+    melody_notes = [
+        ['C4', 'E4', 'G4'],
+        ['D4', 'F4', 'A4'],
+        ['E4', 'G4', 'B4'],
+        ['F4', 'A4', 'C5']
+    ]
+
+    # Create melody with rhythmic variation
+    for i in range(16):  # 4 measures
+        # Choose a random melodic fragment
+        fragment = random.choice(melody_notes)
+
+        # Arpeggiate chords
+        for note_name in fragment:
+            n = note.Note(note_name)
+            n.duration.type = 'eighth'
+            melody_part.append(n)
+
+    # Create accompaniment (drone/rhythmic support)
+    bass_notes = ['C3', 'G3']
+    for i in range(32):  # matching melody length
+        bass_note = note.Note(random.choice(bass_notes))
+        bass_note.duration.type = 'eighth'
+        bass_part.append(bass_note)
+
+    # Analyze score
+    score_analyze (main_score)
+    score_show(main_score)
+    # Save score
+    main_score.write(fmt='midi', fp=MAIN_PATH + "new.mid")
 
 
-    rhythm_pattern = FOUR_RHYTHM
-
-    pitch_list = [["C4", "D4", "E4", "F4"],
-                    ["G4", "A4", "B4", "C5"]]
-
-    # Unused material
-    # Tonerow
-    tonerow_base = serial.ToneRow(row = [0,4,7,4])
-
-    for pcs in enumerate (tonerow_base):
-        pcs.octave = 3
-        voices[0].append(pcs)
+    return
 
 
+def create_percussion ():
+
+    main_score = score_create('C','4/4')
     signature : TimeSignature
     signature = main_score.getElementsByClass('TimeSignature')[0]
     # number of beats per measure
@@ -142,14 +173,47 @@ def create_new ():
     # signature in quarterlength
     beatduration = signature.denominator * QUARTER
 
+    # Percussion
+    rhythm01 = [BT, RS, BT, BT, BT, BT, RS]
+    pitch_list01 = ['C4', '', 'C4', 'C4', 'C4', 'C4', '']
+    durations01 = [1.0, 1.0, 1.5, 1.5, 1.0, 1.0, 1.0]
+
+    rtm_example02 = [BT, BT, RS, BT, BT, RS]
+    pitch_list02 = ['C4', 'C4', '', 'C4', 'C4', '']
+    durations02 = [1.5, 0.5, 0.5, 0.25, 0.25, 1]
+
+    rhythm_pattern = FOUR_RHYTHM
+
+    pitches_list = [["C4", "D4", "E4", "F4"],
+                    ["G4", "A4", "B4", "C5"]]
+
+
     # Generate durations
     # 1/32 note
     duration_unit = 0.125
     duration_factor = 8
     duration_new = duration_unit * duration_factor
 
-    counterpoint_voices()
 
+def create_counterpoint():
+
+    # Counterpoint
+    main_score = score_create('C','4/4')
+
+    length = 16  # Length of the counterpoint
+    voice1 = stream_create_random(length)
+    voice2 = stream_create_random(length)
+
+    while not stream_is_counterpoint(voice1, voice2):
+        voice2 = stream_create_random(length)
+
+    main_score.append(voice1)
+    main_score.append(voice2)
+    # Analyze score
+    score_analyze (main_score)
+    score_show(main_score)
+    # Save score
+    main_score.write(fmt='midi', fp=MAIN_PATH + "counterpoint.mid")
 
 
 def score_library ():
@@ -157,21 +221,19 @@ def score_library ():
 
     main_score = create_stream_chords_in_key(lstChordPattern, key.Key('C'), 2)
     # Save score
-    main_score.write(fmt='midi', fp=MAIN_PATH + "chordprog_in_key_CM")
+    main_score.write(fmt='midi', fp=MAIN_PATH + "chordprog_in_key_CM.mid")
 
     main_score = create_stream_triads_in_key(key.Key('C'), 2)
     # Save score
-    main_score.write(fmt='midi', fp=MAIN_PATH + "chordtriad_in_key_CM")
-
-
+    main_score.write(fmt='midi', fp=MAIN_PATH + "chordtriad_in_key_CM.mid")
 
 
 def main():
     # Main: create or transform
-
     create_new()
-
-
+    create_percussion()
+    create_balfolk()
+    create_counterpoint()
 
 
 """
@@ -191,140 +253,76 @@ def score_create ( key_in: str = 'C' ,
     return score_out
 
 
-
-def part_create(pitch_list_in = list[str], durations_in = list[float]) -> stream.Part:
+def part_create(pitches : list[str],
+                durations : list[float],
+                instr: instrument.Instrument = instrument.Piano()
+                ) -> stream.Part:
     # Create a part with notes and rests
     part_out = stream.Part()
+    # Add instrument of part
+    part_out.insert(0, instr)
 
     # Iterate over the list of pitches
-    for i, pitch_str in pitch_list_in:
+    for i in range(len(pitches)) :
         # Add beats and rests to the stream
-        if pitch_str == '':
-            part_out.append(note.Rest(quarterLength=durations_in[i]))
+        if pitches[i] == '':
+            part_out.append(note.Rest(quarterLength=durations[i]))
         else:
-            part_out.append(note.Note(pitch=pitch_str, quarterLength=durations_in[i]))
+            part_out.append(note.Note(pitch=pitches[i], quarterLength=durations[i]))
 
     return part_out
 
 
 
 
-
-def create_three_voice_melody (score_in: stream.Score):
-    # Create three voices melody, harmony, and bass
-
-    # Motifs of voices
-    pitch_list_list = []
-    duration_list_list = []
-    pitch_list_list [MELODY_VOICE] = ['C5', 'D5', 'E5', 'F5', 'G5', 'A5', 'B4', 'C5']
-    duration_list_list [MELODY_VOICE] = [1, 1, 1, 1, 1, 1, 1, 1]
-    pitch_list_list [HARMONY_VOICE] = ['C4', 'E4', 'G4', '', 'F4', 'A4', 'C5', '']
-    duration_list_list [HARMONY_VOICE] = [1, 1, 1, 1, 1, 1, 1, 1]
-    pitch_list_list [BASS_VOICE] = ['C3', 'G3']
-    duration_list_list [BASS_VOICE] = [4, 4]
-
-    for i in range (0, len(pitch_list_list)-1):
-        score_in.append(
-            part_create(pitch_list_list [i], duration_list_list[i])
+def stream_create_random(length,
+                        pitch_set: list = ('C4','D4','E4','F4','G4'),
+                        duration_set: list = (0.5, 1, 2)) -> stream.Stream:
+    # Create a random voice from a list of pitches and durations
+    stream_out = stream.Stream()
+    for i in range(length):
+        stream_out.append(
+            note.Note(pitch= random.choice(pitch_set),
+                      quarterLength=random.choice(duration_set)
+                      )
         )
 
-
-def create_random_voice(length,
-                        pitch_set: list = ['C4','D4','E4','F4','G4'],
-                        duration_set: list = [0.5, 1, 2]):
-    # Create a random voice from a list of pitches and durations
-    voice = []
-    for i in range(length):
-        new_pitch = random.choice(pitch_set)  # C4 to B4
-        duration = random.choice(duration_set)
-        new_note = note.Note(pitch= new_pitch, quarterLength=duration)
-        voice.append(new_note)
-
-    return voice
+    return stream_out
 
 
-def generate_counterpoint(voice1, voice2):
+def stream_is_counterpoint(stream1: stream.Stream, stream2: stream.Stream) -> bool:
     # Generate two counterpoint voices
     # Ensure the voices are of the same length
-    if len(voice1) != len(voice2):
+    if len(stream1) != len(stream2):
         raise ValueError("Voices must be of the same length")
 
     # Check for parallel perfect intervals
-    for i in range(len(voice1) - 1):
-        intv1 = interval.Interval(voice1[i], voice1[i + 1])
-        intv2 = interval.Interval(voice2[i], voice2[i + 1])
+    for i in range(len(stream1) - 1):
+        intv1 = interval.Interval(stream1[i], stream1[i + 1])
+        intv2 = interval.Interval(stream2[i], stream2[i + 1])
         if is_perfect_interval(intv1) and is_perfect_interval(intv2) and intv1.direction == intv2.direction:
             return False
 
     # Check for hidden parallels
-    for i in range(len(voice1) - 1):
-        intv1 = interval.Interval(voice1[i], voice1[i + 1])
-        intv2 = interval.Interval(voice2[i], voice2[i + 1])
+    for i in range(len(stream1) - 1):
+        intv1 = interval.Interval(stream1[i], stream1[i + 1])
+        intv2 = interval.Interval(stream2[i], stream2[i + 1])
         if is_perfect_interval(intv1) and is_perfect_interval(intv2) and intv1.direction == intv2.direction:
             return False
 
     # Check for crossing voices
-    for i in range(len(voice1)):
-        if voice1[i].pitch < voice2[i].pitch and voice1[i + 1].pitch > voice2[i + 1].pitch:
+    for i in range(len(stream1) - 1):
+        if stream1[i].pitch < stream2[i].pitch and stream1[i + 1].pitch > stream2[i + 1].pitch:
             return False
 
     return True
 
 
-def counterpoint_voices():
-
-    length = 16  # Length of the counterpoint
-    voice1 = create_random_voice(length)
-    voice2 = create_random_voice(length)
-
-    while not generate_counterpoint(voice1, voice2):
-        voice2 = create_random_voice(length)
 
 
-def part_create_balfolk () -> (stream.Part, stream.Part):
-    # Create a Balfolk style melody and bass
-    melody_part = stream.Part()
-    bass_part = stream.Part()
-
-    key_signature = key.KeySignature(0)  # C major/A minor
-    time_signature = meter.TimeSignature('6/8')
-
-    melody_part.append(key_signature)
-    melody_part.append(time_signature)
-    bass_part.append(key_signature)
-    bass_part.append(time_signature)
-
-# Bourrée-inspired melody (typical Balfolk rhythm)
-    melody_notes = [
-        ['C4', 'E4', 'G4'],
-        ['D4', 'F4', 'A4'],
-        ['E4', 'G4', 'B4'],
-        ['F4', 'A4', 'C5']
-    ]
-
-    # Create melody with rhythmic variation
-    for i in range(16):  # 4 measures
-        # Choose a random melodic fragment
-        fragment = random.choice(melody_notes)
-
-        # Create notes with Balfolk-style rhythm
-        for note_name in fragment:
-            n = note.Note(note_name)
-            n.duration.type = 'eighth'
-            melody_part.append(n)
-
-    # Create accompaniment (drone/rhythmic support)
-    bass_notes = ['C3', 'G3']
-    for i in range(32):  # matching melody length
-        bass_note = note.Note(random.choice(bass_notes))
-        bass_note.duration.type = 'eighth'
-        bass_part.append(bass_note)
 
 
-    return melody_part, bass_part
-
-
-def score_analyze (score_in: stream.Stream):
+def score_analyze (score_in: stream.Score):
     # Analyze score
 
     #vceVoice.plot('3d')
@@ -335,8 +333,8 @@ def score_analyze (score_in: stream.Stream):
     print (key01)
 
     # Analyze parts ?
-    for score_part in main_score.parts:
-        score_part
+    #    for score_part in score_in.parts:
+    #    show(score_part)
 
 
     score_out = stream.Score()
@@ -357,7 +355,7 @@ def score_analyze (score_in: stream.Stream):
         rn = roman.romanNumeralFromChord(chd01, key01)
         chd01.addLyric(str(rn.figure))
 
-        score_out.insert (0, chordset)
+    score_out.insert (0, chordset)
 
     return score_out
 
@@ -381,8 +379,20 @@ def score_show (score_in):
 
 
 """
-Transformation
+ToneRow
 """
+
+def tonerow_create(tonerow_base: serial.ToneRow = serial.ToneRow(row=[0, 4, 7, 4]),
+                   octave : int = 4
+                   ) -> stream.Stream:
+    stream_out = stream.Stream()
+    # Tonerow
+    for pcs in enumerate(tonerow_base):
+        pcs.octave = octave
+        stream_out.append(pcs)
+
+    return stream_out
+
 
 def tonerow_transform (tonerow_in: serial.ToneRow) -> serial.ToneRow:
 
