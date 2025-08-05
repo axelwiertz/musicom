@@ -36,19 +36,24 @@ PART_D = 3
 
 
 def big_yellow_taxi():
-    # 'Big Yellow Taxi'
+    # Big Yellow Taxi
+    main_score = score_create('Bb','4/4')
+
     tonerow_byt = serial.ToneRow (
-        'B3, C#4, E4, E4, F#4, C#4, E4, E4, F#4, E4, G#3, B3, B3, C#4, E4, F#4, B3, B3, F#4, F#4, F#4, G#4, F#4, E4, E4')
-    lstScales = ['Bb major']
+        ['B3', 'C#4', 'E4', 'E4', 'F#4', 'C#4', 'E4', 'E4', 'F#4', 'E4', 'G#3', 'B3', 'B3', 'C#4',
+        'E4', 'F#4', 'B3', 'B3', 'F#4', 'F#4', 'F#4', 'G#4', 'F#4', 'E4', 'E4'])
+
+    # Analyze score
+    score_analyze (main_score)
 
 def berendans():
     # Berendans
-    lstScales = ['Bb major']
+    main_score = score_create('Bb','4/4')
     progr = ['I', 'V', 'I']
 
 
 
-def score_load_and_analyze ():
+def load_and_analyze ():
     # Load and analyze a score
 
     # Load a score
@@ -58,7 +63,7 @@ def score_load_and_analyze ():
     score_analyze (main_score)
 
 
-def score_load_and_transform ():
+def load_and_transform ():
     # Load a score
     main_score = converter.parse (MAIN_PATH + 'in.mid')
 
@@ -76,27 +81,26 @@ def score_load_and_transform ():
 
 def create_new ():
     # Create a new score
-    main_score = score_create()
-
     # Form
     parts = 3
     voices = 3
     form = (16, 16, 16)
 
-#    main_scale = scale.MajorScale('c')
+    main_score = score_create('C','4/4')
+
     # Rhythm
-    rtm_example01 = [[BT, RS, BT, BT, BT, BT, RS],
-                     [1.0, 1.0, 1.5, 1.5, 1.0, 1.0, 1.0]]
-    pitch_classes01 = ['C4', '', 'C4', 'C4', 'C4', 'C4', '']
+    rhythm01 = [BT, RS, BT, BT, BT, BT, RS]
+    durations01 = [1.0, 1.0, 1.5, 1.5, 1.0, 1.0, 1.0]
+    pitch_list01 = ['C4', '', 'C4', 'C4', 'C4', 'C4', '']
 
     voices = []
-    voices [MELODY_VOICE] = part_create(rtm_example01, pitch_classes01)
+    voices [MELODY_VOICE] = part_create(pitch_list01, durations01)
 
-    rtm_example02 = [[BT, BT, RS, BT, BT, RS],
-                     [1.5, 0.5, 0.5, 0.25, 0.25, 1]]
-    pitch_classes02 = ['C4', 'C4', '', 'C4', 'C4', '']
+    rtm_example02 = [BT, BT, RS, BT, BT, RS]
+    pitch_list02 = ['C4', 'C4', '', 'C4', 'C4', '']
+    durations02 = [1.5, 0.5, 0.5, 0.25, 0.25, 1]
 
-    voices [HARMONY_VOICE] = part_create(rtm_example02, pitch_classes02)
+    voices [HARMONY_VOICE] = part_create(pitch_list02, durations02 )
 
     main_score.append(voices)
     #main_score.append(voice_b)
@@ -119,7 +123,7 @@ def create_new ():
 
     rhythm_pattern = FOUR_RHYTHM
 
-    pitch_classes = [["C4", "D4", "E4", "F4"],
+    pitch_list = [["C4", "D4", "E4", "F4"],
                     ["G4", "A4", "B4", "C5"]]
 
     # Unused material
@@ -144,7 +148,7 @@ def create_new ():
     duration_factor = 8
     duration_new = duration_unit * duration_factor
 
-
+    counterpoint_voices()
 
 
 
@@ -173,33 +177,32 @@ def main():
 """
 Creation
 """
-def score_create (signature_in: meter.TimeSignature = meter.TimeSignature("4/4"),
-                   key_in: key.Key= key.Key("C"),
+def score_create ( key_in: str = 'C' ,
+                   signature_in: str = '4/4' ,
                    bpm_in: int = 120) -> stream.Score:
     # Create a stream to hold the musical elements
     score_out = stream.Score()
 
-    # Set the time signature and key signature
-    score_out.insert(0, signature_in)
-    score_out.insert(0, key_in)
+    # Set the time signature, key signature and tempo
+    score_out.insert(0, key.Key(key_in))
+    score_out.insert(0, meter.TimeSignature(signature_in))
     score_out.insert(0, tempo.MetronomeMark(number=bpm_in))
 
     return score_out
 
 
 
-def part_create(rhythm_in: list, pitch_classes_in) -> stream.Part:
+def part_create(pitch_list_in = list[str], durations_in = list[float]) -> stream.Part:
+    # Create a part with notes and rests
     part_out = stream.Part()
 
-    measure_length = 0
-    # Iterate over the pattern list
-    for i in range (0, len(rhythm_in)):
+    # Iterate over the list of pitches
+    for i, pitch_str in pitch_list_in:
         # Add beats and rests to the stream
-        measure_length += rhythm_in [DURATION][i]
-        if rhythm_in [BEAT_REST][i] == BT:
-            rhythm_in.append(note.Note(pitch=pitch_classes_in[i], quarterLength=rhythm_in [DURATION][i]))
-        elif rhythm_in[BEAT_REST][i] == RS:
-            rhythm_in.append(note.Rest(quarterLength=rhythm_in [DURATION][i]))
+        if pitch_str == '':
+            part_out.append(note.Rest(quarterLength=durations_in[i]))
+        else:
+            part_out.append(note.Note(pitch=pitch_str, quarterLength=durations_in[i]))
 
     return part_out
 
@@ -211,36 +214,31 @@ def create_three_voice_melody (score_in: stream.Score):
     # Create three voices melody, harmony, and bass
 
     # Motifs of voices
-    pitch_classes = []
-    durations = []
-    pitch_classes [MELODY_VOICE] = ['C5', 'D5', 'E5', 'F5', 'G5', 'A5', 'B4', 'C5']
-    durations [MELODY_VOICE] = [1, 1, 1, 1, 1, 1, 1, 1]
-    pitch_classes [HARMONY_VOICE] = ['C4', 'E4', 'G4', '', 'F4', 'A4', 'C5', '']
-    durations [HARMONY_VOICE] = [1, 1, 1, 1, 1, 1, 1, 1]
-    pitch_classes [BASS_VOICE] = ['C3', 'G3']
-    durations [BASS_VOICE] = [4, 4]
+    pitch_list_list = []
+    duration_list_list = []
+    pitch_list_list [MELODY_VOICE] = ['C5', 'D5', 'E5', 'F5', 'G5', 'A5', 'B4', 'C5']
+    duration_list_list [MELODY_VOICE] = [1, 1, 1, 1, 1, 1, 1, 1]
+    pitch_list_list [HARMONY_VOICE] = ['C4', 'E4', 'G4', '', 'F4', 'A4', 'C5', '']
+    duration_list_list [HARMONY_VOICE] = [1, 1, 1, 1, 1, 1, 1, 1]
+    pitch_list_list [BASS_VOICE] = ['C3', 'G3']
+    duration_list_list [BASS_VOICE] = [4, 4]
 
-    voices = []
-    voices [MELODY_VOICE] = part_create(pitch_classes [MELODY_VOICE])
-    voices [HARMONY_VOICE] = part_create(pitch_classes [HARMONY_VOICE])
-    voices [BASS_VOICE] = part_create(pitch_classes [BASS_VOICE])
-
-    score_in.append(voices)
+    for i in range (0, len(pitch_list_list)-1):
+        score_in.append(
+            part_create(pitch_list_list [i], duration_list_list[i])
+        )
 
 
-def create_random_voice(length, pitch_range: tuple = (60, 72), durations: list = [0.5, 1, 2]):
-    # Create a random list of notes
+def create_random_voice(length,
+                        pitch_set: list = ['C4','D4','E4','F4','G4'],
+                        duration_set: list = [0.5, 1, 2]):
+    # Create a random voice from a list of pitches and durations
     voice = []
     for i in range(length):
-        new_pitch = random.choice(range(pitch_range))  # C4 to B4
-        duration = random.choice(durations)
+        new_pitch = random.choice(pitch_set)  # C4 to B4
+        duration = random.choice(duration_set)
         new_note = note.Note(pitch= new_pitch, quarterLength=duration)
         voice.append(new_note)
-
-    # Select random pitch
-#    pitch_midi_number = random.choice(PITCHMIDINUMBERLIST)
-
-
 
     return voice
 
