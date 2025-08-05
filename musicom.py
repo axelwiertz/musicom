@@ -36,7 +36,7 @@ PART_D = 3
 
 def big_yellow_taxi():
     # Big Yellow Taxi
-    main_score = score_create('Bb','4/4')
+    main_score = score_create('Big yellow taxi','Bb','4/4')
 
     main_score.append(
         serial.ToneRow (
@@ -49,7 +49,7 @@ def big_yellow_taxi():
 
 def berendans():
     # Berendans
-    main_score = score_create('Bb','4/4')
+    main_score = score_create('Berendans','Bb','4/4')
 
     progr = ['I', 'V', 'I']
 
@@ -90,7 +90,7 @@ def create_new ():
     numvoices = 3
     form = (16, 16, 16)
 
-    main_score = score_create('C','4/4')
+    main_score = score_create('New score', 'C','4/4')
 
     # Create three voices for melody and accompaniment
     # Motifs of voices
@@ -118,7 +118,7 @@ def create_balfolk ():
     # Create a Balfolk style melody and bass
 
     # C major/A minor
-    main_score = score_create('C','6/8')
+    main_score = score_create('Balfolk','C','6/8')
     melody_part = stream.Part()
     bass_part = stream.Part()
     main_score.append(melody_part)
@@ -157,7 +157,7 @@ def create_balfolk ():
     score_analyze (main_score)
     score_show(main_score)
     # Save score
-    main_score.write(fmt='midi', fp=MAIN_PATH + "new.mid")
+    main_score.write(fmt='midi', fp=MAIN_PATH + "balfolk.mid")
 
 
     return
@@ -165,7 +165,7 @@ def create_balfolk ():
 
 def create_percussion ():
 
-    main_score = score_create('C','4/4')
+    main_score = score_create('Percussion','C','4/4')
     signature : TimeSignature
     signature = main_score.getElementsByClass('TimeSignature')[0]
     # number of beats per measure
@@ -198,7 +198,7 @@ def create_percussion ():
 def create_counterpoint():
 
     # Counterpoint
-    main_score = score_create('C','4/4')
+    main_score = score_create('Counterpoint', 'C','4/4')
 
     length = 16  # Length of the counterpoint
     voice1 = stream_create_random(length)
@@ -216,36 +216,82 @@ def create_counterpoint():
     main_score.write(fmt='midi', fp=MAIN_PATH + "counterpoint.mid")
 
 
-def score_library ():
+def create_key_library (key_in: str = 'C'):
     # Create a score with library elements
 
-    main_score = create_stream_chords_in_key(lstChordPattern, key.Key('C'), 2)
-    # Save score
-    main_score.write(fmt='midi', fp=MAIN_PATH + "chordprog_in_key_CM.mid")
+    # Common chord progressions
+    main_score = score_create('Chord progressions and triads in C', 'C','4/4')
 
-    main_score = create_stream_triads_in_key(key.Key('C'), 2)
+    part_triad = stream.Part()
+    main_score.append(part_triad)
+    stream_lib = create_stream_triads_in_key(key_in, 1)
+    part_triad.append(stream_lib.notesAndRests)
+
+    part_prog = stream.Part()
+    main_score.append(part_prog)
+    stream_lib = create_stream_chords_in_key(lstChordPattern, key_in, 1)
+    part_prog.append(stream_lib.notesAndRests)
+
+    score_analyze(main_score)
+    score_show(main_score)
     # Save score
-    main_score.write(fmt='midi', fp=MAIN_PATH + "chordtriad_in_key_CM.mid")
+    main_score.write(fmt='midi', fp=MAIN_PATH + 'chordlibrary_in_key_' + key_in +'.mid')
+
+
+def create_stream_chords_in_key (chord_progressions: list, key_in: str = 'C' ,  quarterlength_in: int = 1 ) -> stream.Stream:
+    # Stream of chord progression patterns in a key
+    stream_out = stream.Stream()
+    main_key = key.Key (key_in)
+    for i in range(1, len(chord_progressions)-1):
+        stream_out.append(note.Rest(quarterLength= quarterlength_in))
+        for j in range (0, len(chord_progressions[i])):
+            chord01 = roman.RomanNumeral (chord_progressions[i][j], main_key)
+            chord01.duration.quarterLength = quarterlength_in
+            stream_out.append(chord01)
+
+    return stream_out
+
+
+
+def create_stream_triads_in_key (key_in: str = 'C' ,  quarterlength_in: int = 1 ) -> stream.Stream:
+    # Stream of all triads in a key
+    stream_out = stream.Stream()
+    main_key = key.Key (key_in)
+
+    for i in range(HEPTA):
+        triad = roman.RomanNumeral(i+1, main_key)
+        triad.duration.quarterLength = quarterlength_in
+        stream_out.append(triad)
+        stream_out.append(note.Rest(quarterLength=quarterlength_in))
+
+    return stream_out
+
 
 
 def main():
     # Main: create or transform
-    create_new()
-    create_percussion()
-    create_balfolk()
-    create_counterpoint()
+    #create_new()
+    #create_percussion()
+    #create_balfolk()
+    #create_counterpoint()
+
+    create_key_library()
 
 
 """
 Creation
 """
-def score_create ( key_in: str = 'C' ,
+def score_create ( title: str = 'New score',
+                    key_in: str = 'C' ,
                    signature_in: str = '4/4' ,
                    bpm_in: int = 120) -> stream.Score:
     # Create a stream to hold the musical elements
     score_out = stream.Score()
+    score_out.metadata = metadata.Metadata()
+    score_out.metadata.title = title
+    score_out.metadata.composer = 'Musicom'
 
-    # Set the time signature, key signature and tempo
+# Set the time signature, key signature and tempo
     score_out.insert(0, key.Key(key_in))
     score_out.insert(0, meter.TimeSignature(signature_in))
     score_out.insert(0, tempo.MetronomeMark(number=bpm_in))
@@ -318,16 +364,12 @@ def stream_is_counterpoint(stream1: stream.Stream, stream2: stream.Stream) -> bo
     return True
 
 
-
-
-
-
 def score_analyze (score_in: stream.Score):
     # Analyze score
 
-    #vceVoice.plot('3d')
+    #score_in.plot('3d')
     score_in.plot('histogram','pitch')
-    #vceVoice.show('abc')
+    #score_in.show('abc')
     # Key
     key01 = score_in.analyze('key')
     print (key01)
@@ -335,9 +377,6 @@ def score_analyze (score_in: stream.Score):
     # Analyze parts ?
     #    for score_part in score_in.parts:
     #    show(score_part)
-
-
-    score_out = stream.Score()
 
     chordset = score_in.chordify()
     # Check for specific chords
@@ -355,9 +394,8 @@ def score_analyze (score_in: stream.Score):
         rn = roman.romanNumeralFromChord(chd01, key01)
         chd01.addLyric(str(rn.figure))
 
-    score_out.insert (0, chordset)
+    score_in.insert (0, chordset)
 
-    return score_out
 
 
 def score_show (score_in):

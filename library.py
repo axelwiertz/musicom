@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 
 # Music21 modules
 from music21 import stream, note, key, scale, chord, interval, roman, converter, instrument, serial, harmony
-from music21 import meter, tempo
+from music21 import meter, tempo, metadata
 
 
 def interval_to_binary (intervals):
@@ -163,30 +163,6 @@ lstCombChordDegreePattern = list(itertools.combinations (lstIntHeptaDegree, 3))
 
 
 
-def create_stream_chords_in_key (chord_progressions: list, key_in: key.Key = key.Key ('C'),  quarterlength_in: int = 1 ) -> stream.Stream:
-    # Stream of chord progression patterns in a key
-    stream_out = stream.Stream()
-    for i in range(1, len(chord_progressions)-1):
-        stream_out.append(note.Rest(quarterLength= quarterlength_in))
-        for j in range (0, len(chord_progressions[i])):
-            chord01 = roman.RomanNumeral (chord_progressions[i][j], key_in)
-            chord01.duration.quarterLength = quarterlength_in
-            stream_out.append(chord1)
-
-    return stream_out
-
-
-
-def create_stream_triads_in_key (key_in: key.Key = key.Key ('C'),  quarterlength_in: int = 1 ) -> stream.Stream:
-    # Stream of all triads in a key
-    stream_out = stream.Stream()
-    for i in range(HEPTA):
-        triad = roman.RomanNumeral(i+1, key_in)
-        triad.duration.quarterLength = quarterlength_in
-        stream_out.append(triad)
-        stream_out.append(note.Rest(quarterLength=quarterlength_in))
-
-    return stream_out
 
 
 """
