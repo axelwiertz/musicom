@@ -229,8 +229,18 @@ waltz_rhythmic_pattern = converter.parse('tinynotation: 3/4 c5 c5 c5')
 three_rtm = [   [BT, BT, BT],
                 [1.0, 1.0, 1.0] ]
 
+"""
+Tools
+"""
 
+def part_create_from_stream (stream_in: stream.Stream)\
+        -> stream.Part:
+    # Transfer notes and rests from the original stream to a new Part
+    part_out = stream.Part()
+    for note_or_rest in stream_in.notesAndRests:
+        part_out.append(note_or_rest)
 
+    return part_out
 
 # Plot
 # Note that even in the OO-style, we use `.pyplot.figure` to create the Figure.

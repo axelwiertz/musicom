@@ -305,7 +305,8 @@ def serialize_stream(stream, repeats=1):
     for i in range(copies):
         for part in reversed(stream):
             length = part.duration.quarterLength
-            new_stream.append(copy.deepcopy(part.flat.elements))
+            new_stream.append(copy.deepcopy(part.flatten().elements))
+
     return new_stream, length
 
 
@@ -385,11 +386,18 @@ def create_canon ():
     spiced_streams[-1].show("musicxml")
 
     # unfold the final spiced up chord progression into a serialized stream
-    ser, delay = serialize_stream(spiced_streams[-1])
+    stream_series, delay = serialize_stream(spiced_streams[-1])
     # ser.show('musicxml')
 
     # and turn it into a canon. Add extra transpositions to some voices to create some diversity
-    canonized = ser, delay, voices * stacking, voice_transpositions)
+    parts = [s.new_part("piano") for _ in range(voices)]
+    initial_rests = [i * delay for i in range(voices)]
 
-    # show the final product
+    canonized = voices * stacking
+    for v in range(voices):
+        interval = voice_transpositions[v]
+        v = copy.deepcopy(stream_series.transpose(interval).flatten().notesAndRests)
+
+
+        # show the final product
     canonized.to_score(title="Canon", composer="canon-generator.py", max_divisor=16).show_xml()

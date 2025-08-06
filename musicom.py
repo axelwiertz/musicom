@@ -21,6 +21,9 @@ Composition - Structure
 """
 # Main score
 MAIN_PATH = 'C:\\temp\\Music\\'
+DEFAULT_KEY = 'C'
+DEFAULT_TEMPO = 100
+DEFAULT_TIMESIGNATURE = '4/4'
 
 # Three voice score
 MELODY_VOICE = 0
@@ -220,17 +223,15 @@ def create_key_library (key_in: str = 'C'):
     # Create a score with library elements
 
     # Common chord progressions
-    main_score = score_create('Chord progressions and triads in C', 'C','4/4')
+    main_score = score_create('Chord progressions and triads in C', key_in,'4/4')
 
-    part_triad = stream.Part()
-    main_score.append(part_triad)
     stream_lib = create_stream_triads_in_key(key_in, 1)
-    part_triad.append(stream_lib.notesAndRests)
+    part_lib = part_create_from_stream(stream_lib)
+    main_score.append(part_lib)
 
-    part_prog = stream.Part()
-    main_score.append(part_prog)
     stream_lib = create_stream_chords_in_key(lstChordPattern, key_in, 1)
-    part_prog.append(stream_lib.notesAndRests)
+    part_lib = part_create_from_stream(stream_lib)
+    main_score.append(part_lib)
 
     score_analyze(main_score)
     score_show(main_score)
@@ -275,16 +276,17 @@ def main():
     #create_balfolk()
     #create_counterpoint()
 
-    create_key_library()
+    create_key_library('D')
 
 
 """
 Creation
 """
 def score_create ( title: str = 'New score',
-                    key_in: str = 'C' ,
-                   signature_in: str = '4/4' ,
-                   bpm_in: int = 120) -> stream.Score:
+                    key_in: str = DEFAULT_KEY ,
+                   signature_in: str = DEFAULT_TIMESIGNATURE ,
+                   bpm_in: int = DEFAULT_TEMPO)\
+        -> stream.Score:
     # Create a stream to hold the musical elements
     score_out = stream.Score()
     score_out.metadata = metadata.Metadata()
@@ -368,11 +370,11 @@ def score_analyze (score_in: stream.Score):
     # Analyze score
 
     #score_in.plot('3d')
-    score_in.plot('histogram','pitch')
+    #score_in.plot('histogram','pitch')
     #score_in.show('abc')
     # Key
     key01 = score_in.analyze('key')
-    print (key01)
+    # print (key01)
 
     # Analyze parts ?
     #    for score_part in score_in.parts:
@@ -394,7 +396,7 @@ def score_analyze (score_in: stream.Score):
         rn = roman.romanNumeralFromChord(chd01, key01)
         chd01.addLyric(str(rn.figure))
 
-    score_in.insert (0, chordset)
+    score_in.append (chordset)
 
 
 
