@@ -5,7 +5,7 @@ import copy
 import random
 import platform
 #import sound
-from music21.meter import TimeSignature
+from music21.scale import Direction
 
 # Musical data
 from library import *
@@ -169,7 +169,7 @@ def create_balfolk ():
 def create_percussion ():
 
     main_score = score_create('Percussion','C','4/4')
-    signature : TimeSignature
+    signature : meter.TimeSignature
     signature = main_score.getElementsByClass('TimeSignature')[0]
     # number of beats per measure
     beats = signature.numerator

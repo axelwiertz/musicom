@@ -9,8 +9,7 @@ import itertools
 import matplotlib.pyplot as plt
 
 # Music21 modules
-from music21 import stream, note, key, scale, chord, interval, roman, converter, instrument, serial, harmony
-from music21 import meter, tempo, metadata
+from music21 import stream, note, key, scale, chord, interval, roman, converter, instrument, serial, harmony, meter, tempo, metadata
 
 
 def interval_to_binary (intervals):
@@ -128,7 +127,7 @@ lstPentaScaleInterval = tuple(lstPentaScaleIntervalPattern[x:]+lstPentaScaleInte
 lstPentaScaleBinary = [interval_to_binary(lstPentaScaleInterval[x]) for x in range(len(lstPentaScaleInterval))] # Heptatonic binary patterns
 
 # Heptatonic (7 pitch class) scale
-scale01 = scale.Scale()
+scale01 = scale.CyclicalScale()
 HEPTA = 7 # Number of pitch classes in a heptatonic scale
 lstIntHeptaDegree = tuple(range(1, HEPTA + 1)) # Heptatonic scale degree number
 lstHeptaScaleIntervalPattern = (2,2,1,2,2,2,1) # Heptatonic interval pattern
