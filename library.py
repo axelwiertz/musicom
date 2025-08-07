@@ -9,7 +9,7 @@ import itertools
 import matplotlib.pyplot as plt
 
 # Music21 modules
-from music21 import stream, note, key, scale, chord, interval, roman, converter, instrument, serial, harmony, meter, tempo, metadata
+from music21 import stream, note, key, scale, chord, interval, roman, converter, instrument, serial, harmony, meter, tempo, metadata, percussion
 
 
 def interval_to_binary (intervals):

@@ -6,16 +6,7 @@ from library import *
 import copy
 import random
 
-# Constants
-SINGLE_NOTE = 0
-DOUBLE_NOTE = 1
-methods = [SINGLE_NOTE, DOUBLE_NOTE]
 
-ASCENDING = 1
-DESCENDING = -1
-
-ODD_UPPER = True
-ODD_LOWER = False
 
 VOICE1 = 0
 VOICE2 = 1
@@ -38,102 +29,96 @@ TWO_TRANS_SET = [IDENTICAL, IDENTICAL, TWO_TO_THREE, TWO_TO_FOUR]
 
 
 def pairwise(iterable):
-    """
-    takes a list and returns a new list containing the elements pairwise
-    with overlap
+    # takes a list and returns a new list containing the elements pairwise
+    # with overlap
 
-    s -> (s[0], s[1]), (s[1], s[2]), (s[2], s[3]), ..., (s[Last], None)
-    """
+    #    s -> (s[0], s[1]), (s[1], s[2]), (s[2], s[3]), ..., (s[Last], None)
     return list(zip(iterable, iterable[1:])) + [(iterable[-1], None)]
 
 
-def median(lst, if_even_length_use_upper_element=False):
-    """ return the median of a list """
-    length = len(lst)
+def pitch_middle_in_scale(minpitch: note.Pitch, maxpitch: note.Pitch, scale_in: scale.ConcreteScale ) -> note.Pitch:
+    # return the middle of two pitches in a scale
 
-    if length == 0:
-        return None
+    pitches = scale_in.getPitches(minpitch, maxpitch)
+    length = len(pitches)
 
-    if length == 1:
-        return lst[0]
+#    if length == 0:
+#        return None
 
-    if length % 2 != 0:
-        # median of a list with odd lenght is well-defined
-        return lst[(length - 1) // 2]
+#    if length == 1:
+#        return pitches[0]
+
+    if length % 2 == 0:
+        odd_even = random.choice([0, 1]) # list with even length can go down or up
     else:
-        # median of a list with even length is a bit tricky
-        if not if_even_length_use_upper_element:
-            return lst[(length - 1) // 2]
-        else:
-            return lst[(length) // 2]
+        odd_even = 1 # list with odd length
+
+    return pitches[(length - odd_even) // 2]
 
 
-def realize_chord(chordstring, numofpitch=3, baseoctave=4, direction=ASCENDING):
-    """
-    given a chordstring like Am7, return a list of numofpitch pitches, starting in octave baseoctave, and ascending
-    if direction == "descending", reverse the list of pitches before returning them
-    """
-    pitches = harmony.ChordSymbol(chordstring).pitches
+def realize_chord(chord_in : chord.Chord,
+                  numofpitch : int = 3,
+                  baseoctave : int = 4,
+                  direction: scale.Direction = scale.Direction.ASCENDING) -> stream.Stream:
+    # given a chord like Am7, return a stream of numofpitch pitches, starting in octave baseoctave, and ascending
+    stream_out = stream.Stream()
+
+    stream_out.append (chord_in.notes)
+
+    pitches = chord_in.pitches
     num_iter = numofpitch // len(pitches) + 1
     octave_correction = baseoctave - pitches[0].octave
-    result = []
     actual_pitches = 0
     for i in range(num_iter):
         for p in pitches:
             if actual_pitches < numofpitch:
                 newp = copy.deepcopy(p)
                 newp.octave = newp.octave + octave_correction
-                result.append(newp)
+                stream_out.append(newp)
                 actual_pitches += 1
             else:
-                if direction == ASCENDING:
-                    return result
+                if direction == scale.Direction.ASCENDING:
+                    return stream_out
                 else:
-                    result.reverse()
-                    return result
+                    stream_out.reverse()
+                    return stream_out
         octave_correction += 1
 
-    if direction == ASCENDING:
-        return result
+    # if direction == "descending", reverse the list of pitches before returning them
+
+    if direction == scale.Direction.ASCENDING:
+        return stream_out
     else:
-        result.reverse()
-        return result
+        stream_out.reverse()
+        return stream_out
 
 
-def Identity(object) -> stream.Stream:
-    new_stream = stream.Stream()
-    new_stream.append(note)
-    return new_stream
-
-
-def OneToThree(note: note.Note, scale: scale.ConcreteScale) -> stream.Stream:
-    # randomly transforms one note into three notes
-    # total duration is kept
-    # first note and last note equal the original note
-    # middle note is the neighbour note
+def note_split_middle_neighbor (note: note.Note, scale: scale.ConcreteScale) -> stream.Stream:
+    # randomly transforms one note
     stream_out = stream.Stream()
 
     if note.isRest:
         stream_out.append(copy.deepcopy(note))
         return stream_out
 
-    possible_durations = [  # [ 1.0/3, 1.0/3, 1.0/3],
+    # original duration is kept, and divided in three parts
+    possible_durations = [
+        # [ 1.0/3, 1.0/3, 1.0/3],
             [0.5, 0.25, 0.25],
             [0.25, 0.5, 0.25],
             [0.25, 0.25, 0.5]      ]
     chosen_dur = random.choice(possible_durations)
 
-
+    # first note and last note equal the original note
     stream_out.append(
         note.Note(pitch= note.pitch,
                   quarterlength= chosen_dur[0] * note.quarterLength))
-
+    # middle note is the neighbour note
     stream_out.append(
-        note.Note(pitch= scale.nextPitch(
-                            pitch= note.pitch,
+        note.Note(pitch= scale.nextPitch(pitch= note.pitch,
                             direction=random.choice([scale.Direction.ASCENDING, scale.Direction.DESCENDING])),
                     quarterlength= chosen_dur[1] * note.quarterLength))
-
+    # last note is equal the original note
     stream_out.append(
         note.Note(pitch= note.pitch,
                   quarterlength= chosen_dur[2] * note.quarterLength))
@@ -141,63 +126,55 @@ def OneToThree(note: note.Note, scale: scale.ConcreteScale) -> stream.Stream:
     return stream_out
 
 
-def TwoToThree(note1, note2, scale) -> stream.Stream:
-    # interpolates a note in between current and next note
-    # generalization of passing note
-    # total duration doesn't change: duration of current note is
-    # spread over a copy of the current note and an interpolated note
+def note_split_passing_next (note1 : note.Note, note2 : note.Note, scale: scale.ConcreteScale) -> stream.Stream:
+    # interpolates a passing note in between current and next note
+    # generalization of
     stream_out = stream.Stream()
 
-    new_note = copy.deepcopy(note1)
+    if note1.isRest:
+        stream_out.append(copy.deepcopy(note1))
+        return stream_out
 
     if note2 is None:
-        stream_out.insert(0, new_note)
+        stream_out.insert(0, copy.deepcopy(note1))
         return stream_out
 
-    if new_note.isRest:
-        stream_out.append(new_note)
-        return stream_out
-
-    pitches = scale.getPitches(new_note.pitch, note2.pitch)
-    rounding_strategy = random.choice([ODD_UPPER, ODD_LOWER])
-
+    # total duration doesn't change: duration of current note is
+    # spread over a copy of the current note and an interpolated note
     possible_durations = [  # [ 1.0/3, 2.0/3],
             # [ 2.0/3, 1.0/3],
             [0.5, 0.5],
             [0.75, 0.25],
             # [ 0.25, 0.75  ]
-        ]
+                        ]
 
     chosen_dur = random.choice(possible_durations)
 
-    new_note.quarterLength = chosen_dur[0] * note1.quarterLength
-    stream_out.append(new_note)
+    # first note is equal to original first note
+    stream_out.append(
+        note.Note(pitch=note1.pitch,
+                  quarterlength=chosen_dur[0] * note1.quarterLength))
 
-    new_note2 = copy.deepcopy(new_note)
-    new_note2.pitch = median(pitches, rounding_strategy)
-    new_note2.quarterLength = chosen_dur[1] * note1.quarterLength
-    stream_out.append(new_note2)
+    # second note is in between first and next note
+    stream_out.append(
+        note.Note(pitch= pitch_middle_in_scale (note1.pitch, note2.pitch, scale),
+                  quarterlength= chosen_dur[1] * note1.quarterLength))
+
 
     return stream_out
 
 
-def TwoToFour(note1, note2, scale) -> stream.Stream:
-    """
-    transformation that looks at next note,
-    creates notes oscillates a single scale degree
-    above and below the next note, and uses those
-    notes in the current beat (kind of cambiata?)
-    """
+def note_split_twopassing_next (note1 : note.Note, note2 : note.Note, scale: scale.ConcreteScale) -> stream.Stream:
+    # creates notes oscillates a single scale degree above and below the next note,
+    # and uses those notes in the current beat (kind of cambiata?)
     stream_out = stream.Stream()
 
-    new_note = copy.deepcopy(note1)
-
-    if note2 is None:
-        stream_out.insert(0, new_note)
+    if note1.isRest:
+        stream_out.append(copy.deepcopy(note1))
         return stream_out
 
-    if new_note.isRest:
-        stream_out.append(new_note)
+    if note2 is None:
+        stream_out.insert(0, copy.deepcopy(note1))
         return stream_out
 
     possible_durations = [
@@ -206,68 +183,53 @@ def TwoToFour(note1, note2, scale) -> stream.Stream:
         ]
     chosen_dur = random.choice(possible_durations)
 
-    possible_directions = [
-            "ascending",
-            "descending"
-        ]
-    chosen_direction = random.choice(possible_directions)
-    other_direction = list(set(possible_directions) - set([chosen_direction]))[0]
+    chosen_directions = random.choice([[scale.Direction.ASCENDING, scale.Direction.DESCENDING],
+                                      [scale.Direction.DESCENDING, scale.Direction.ASCENDING]
+                                      ])
+    stream_out.append(
+        note.Note(pitch= note1.pitch,
+                  quarterlength= chosen_dur[0] * note1.quarterLength))
+    stream_out.append(
+        note.Note(pitch= scale.nextPitch(
+                            pitch= note2.pitch,
+                            direction=chosen_directions[0]),
+                    quarterlength= chosen_dur[1] * note2.quarterLength))
+    stream_out.append(
+        note.Note(pitch= scale.nextPitch(
+                            pitch= note2.pitch,
+                            direction=chosen_directions[1]),
+                    quarterlength= chosen_dur[2] * note2.quarterLength))
 
-    new_note.quarterLength = chosen_dur[0] * note1.quarterLength
-    stream_out = stream.Stream()
-    stream_out.append(new_note)
 
-    new_note2 = copy.deepcopy(note2)
-    new_note2.pitch = scale.next(note2.pitch, direction=chosen_direction)
-    new_note2.quarterLength = chosen_dur[1] * note1.quarterLength
-    stream_out.append(new_note2)
-
-    new_note3 = copy.deepcopy(note2)
-    new_note3.pitch = scale.next(note2.pitch, direction=other_direction)
-    new_note3.quarterLength = chosen_dur[2] * note1.quarterLength
-    stream_out.append(new_note3)
 
     return stream_out
 
 
 # OBSOLETE
-single_note_transformers = [Identity,
-                            Identity,
-                            OneToThree
-                            ]
-double_note_transformers = [Identity,
-                            Identity,
-                            TwoToThree,
-                            TwoToFour,
-                            ]
+transformation_set = [None, None, None, None, # high changce of no transformation
+                     'note_split_middle_neighbor',
+                     'note_split_passing_next',
+                     'note_split_twopassing_next'
+                     ]
 
 
-def spiceup_streams(streams, scale, repetitions=1):
-    """
-    function that takes a stream of parts
-    and spices up every part using the
-    Identity, OneToThree, TwoToThree, TwoToFour, ...
-    transformations
+def stream_transform_random(stream_in, scale) -> stream.Stream:
+    # transform stream with random operations
 
-    * it requires a scale in which to interpret the streams
-    * it can create "repetitions" spiced sequences of the given stream
-    """
-    newtotalstream = stream.Stream()
-    for i, part in enumerate(streams):
-        newstream = stream.Stream()
-        for x in range(repetitions):
-            for note, nextnote in pairwise(part.notesAndRests):
-                new_note = copy.deepcopy(note)
-                new_nextnote = copy.deepcopy(nextnote)
-                method = random.choice(methods)
-                if method == SINGLE_NOTE:
-                    trafo = random.choice(single_note_transformers)()
-                    newstream.append(trafo.transform(scale, new_note).flatten().elements)
-                elif method == DOUBLE_NOTE:
-                    trafo = random.choice(double_note_transformers)()
-                    newstream.append(trafo.transform(scale, new_note, new_nextnote).flatten().elements)
-        newtotalstream.insert(0, newstream)
-    return newtotalstream
+    stream_out = stream.Stream()
+
+    for i in range(len(stream_in)):
+
+        method = random.choice(transformation_set)
+        match method:
+            case 'note_split_middle_neighbor':
+                stream_out.appemd (note_split_middle_neighbor (stream_in[i], scale))
+            case 'note_split_passing_next':
+                stream_out.append (note_split_passing_next (stream_in[i], stream_in[i+1], scale))
+            case 'note_split_twopassing_next':
+                stream_out.append (note_split_twopassing_next (stream_in[i], stream_in[i+1], scale))
+
+    return stream_out.flatten()
 
 
 def serialize_stream(stream, repeats=1) -> stream.Stream:
@@ -299,7 +261,6 @@ def serialize_stream(stream, repeats=1) -> stream.Stream:
     copy.deepcopy(stream01).transpose(interval01).flat.notesAndRests
 
 
-from music21 import scale
 
 def create_canon ():
 
@@ -314,46 +275,36 @@ def create_canon ():
     for i in main_chord_prog:
         main_chords.append(roman.RomanNumeral(i, main_key))
 
+    chord_progressions = lstChordPattern
+    for i in range (len(chord_progressions[0])):
+        chord01 = roman.RomanNumeral (chord_progressions[0][i], main_key)
+        chord01.duration.quarterLength = quarterlength_in
+        stream_in.append(chord01)
 
     voices = 5 # realize the chords using the given number of voices (e.g. 4)
     octave = 4 # realize the chords in octave 4 (e.g. 4)
-    quarterLength = 2 # realize the chords using half notes (e.g. 1 for a whole note)
-    spice_depth = 1 # number of times to spice-up the streams (e.g. 2)
-    stacking = 1 # how many instances of the same chords to stack (e.g. 2)
+
+    quarterLength_in = 2 # realize the chords using half notes (e.g. 1 for a whole note)
 
     # define extra transpositions for different voices (e.g. +12, -24, ...)
     # note that the currently implemented method only gives good results with multiples of 12
     voice_transpositions = {VOICE1: 0, VOICE2: 0, VOICE3: -12, VOICE4: -24, VOICE5: -12}
-    ############################################################################
-    #
-    # END OF USER EDITABLE CODE
-    #
-    ############################################################################
 
     # prepare some streams: one per voice
     # all bass notes of each chord form one voice
     # all 2nd notes of each chord form a second voice
     # ...
     # convert chords to notes and stuff into a stream
-    streams = {}
-    splitted_chords = chords.split(" ")
-    for v in range(voices):
-        streams[v] = stream.Stream()
+    main_stream = stream.Stream())
+
     # split each chord into a separate voice
-    for c in splitted_chords:
+    for c in main_chords:
         pitches = realize_chord (c, voices, octave, direction="descending")
         for v in range(voices):
-            note = note.Note (pitches[v], quarterLength)
-            streams[v].append(note)
+            note = note.Note (pitches[v], quarterLength_in)
+            main_stream.append(note)
 
-    # combine all voices to one big stream
-    totalstream = stream.Stream()
-    for r in range(stacking):
-        for s in streams:
-            totalstream.insert(0, copy.deepcopy(streams[s]))
-
-    spiced_streams = [totalstream]
-    spiced_streams.append(spiceup_streams(spiced_streams[s], scale))
+    stream_out.append(stream_transform_random(stream_in, scale))
 
     # unfold the final spiced up chord progression into a serialized stream
     stream_series, delay = serialize_stream(spiced_streams[-1])

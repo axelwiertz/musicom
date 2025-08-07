@@ -4,6 +4,7 @@ Music Composition Assistant
 import copy
 import random
 import platform
+
 #import sound
 from music21.scale import Direction
 
@@ -177,6 +178,7 @@ def create_percussion ():
     beatduration = signature.denominator * QUARTER
 
     # Percussion
+    pchord = PercussionChord()
     rhythm01 = [BT, RS, BT, BT, BT, BT, RS]
     pitch_list01 = ['C4', '', 'C4', 'C4', 'C4', 'C4', '']
     durations01 = [1.0, 1.0, 1.5, 1.5, 1.0, 1.0, 1.0]
