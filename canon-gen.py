@@ -1,7 +1,7 @@
-from music21.scale import MinorScale, MajorScale
+from music21.scale import MinorScale, MajorScale, ConcreteScale
 
 from library import *
-
+from harmony import *
 
 import copy
 import random
@@ -59,9 +59,16 @@ def pitch_middle_in_scale(minpitch: note.Pitch, maxpitch: note.Pitch, scale_in: 
 def realize_chord(chord_in : chord.Chord,
                   numofpitch : int = 3,
                   baseoctave : int = 4,
-                  direction: scale.Direction = scale.Direction.ASCENDING) -> stream.Stream:
-    # given a chord like Am7, return a stream of numofpitch pitches, starting in octave baseoctave, and ascending
+                  direction: scale.Direction = scale.Direction.ASCENDING)\
+        -> stream.Stream:
+    # given a chord like Am7, return a stream of numofpitch pitches,
+    # starting in octave baseoctave, and ascending
     stream_out = stream.Stream()
+
+    # prepare some streams: one per voice
+    # all bass notes of each chord form one voice
+    # all 2nd notes of each chord form a second voice
+
 
     stream_out.append (chord_in.notes)
 
@@ -232,100 +239,67 @@ def stream_transform_random(stream_in, scale) -> stream.Stream:
     return stream_out.flatten()
 
 
-def serialize_stream(stream, repeats=1) -> stream.Stream:
-    # sequenced stream of parallel parts
+
+
+    copy.deepcopy(stream01).transpose(interval01).flatten().notesAndRests
+
+
+def create_stream_from_chords (stream_chords: stream.Stream,
+                               main_scale : scale.ConcreteScale = scale.MajorScale("C"),
+                               number_of_voices: int = 5,
+                                octave_in: int = 4,
+                                quarterLength_in = 2) -> stream.Stream:
+
     stream_out = stream.Stream()
-    length = 0
-    copies = len(stream)
-    for i in range(copies):
-        for part in reversed(stream):
-            length += part.duration.quarterLength
-            stream_out.append(copy.deepcopy(part.flatten().elements))
 
-    return stream_out, length
-
-
-    NOTE = type(note.Note())
-    REST = type(note.Rest())
-    for event in notesandrests:
-        if type(event) == NOTE:
-            #print(f"{event=}, {event.quarterLength=}, {event.pitch.midi=}")
-            part.play_note(event.pitch.midi, 0.7, event.quarterLength)
-        elif type(event) == REST:
-            #print(f"{event=}")
-            scamp.wait(event.quarterLength)
-
-
-    range(voices)
-
-    copy.deepcopy(stream01).transpose(interval01).flat.notesAndRests
-
-
-
-def create_canon ():
-
-    scale01 = MinorScale()
-    scale = MajorScale("C") # scale in which to interpret these chords
-    main_key = key.Key ('C')
-
-    chords = "C F Am Dm G C"
-    main_chord_prog = [1, 4, 6, 2, 5, 1] # define a chord progression
-
-    main_chords : list(int) = []
-    for i in main_chord_prog:
-        main_chords.append(roman.RomanNumeral(i, main_key))
-
-    chord_progressions = lstChordPattern
-    for i in range (len(chord_progressions[0])):
-        chord01 = roman.RomanNumeral (chord_progressions[0][i], main_key)
-        chord01.duration.quarterLength = quarterlength_in
-        stream_in.append(chord01)
-
-    voices = 5 # realize the chords using the given number of voices (e.g. 4)
-    octave = 4 # realize the chords in octave 4 (e.g. 4)
-
-    quarterLength_in = 2 # realize the chords using half notes (e.g. 1 for a whole note)
 
     # define extra transpositions for different voices (e.g. +12, -24, ...)
     # note that the currently implemented method only gives good results with multiples of 12
-    voice_transpositions = {VOICE1: 0, VOICE2: 0, VOICE3: -12, VOICE4: -24, VOICE5: -12}
 
-    # prepare some streams: one per voice
-    # all bass notes of each chord form one voice
-    # all 2nd notes of each chord form a second voice
-    # ...
-    # convert chords to notes and stuff into a stream
-    main_stream = stream.Stream())
+    main_stream = stream.Stream()
 
     # split each chord into a separate voice
-    for c in main_chords:
-        pitches = realize_chord (c, voices, octave, direction="descending")
-        for v in range(voices):
+    for c in stream_chords:
+        pitches = realize_chord (c, number_of_voices, octave_in, direction="descending")
+
+
+        for v in range(number_of_voices):
             note = note.Note (pitches[v], quarterLength_in)
             main_stream.append(note)
 
-    stream_out.append(stream_transform_random(stream_in, scale))
 
-    # unfold the final spiced up chord progression into a serialized stream
-    stream_series, delay = serialize_stream(spiced_streams[-1])
-    # ser.show('musicxml')
+def stream_transform_canon()
+    # and turn it into a canon. Add extra transpositions to some number_of_voices to create some diversity
+    parts = [s.new_part("piano") for _ in range(number_of_voices)]
+    initial_rests = [i * delay for i in range(number_of_voices)]
 
-    # and turn it into a canon. Add extra transpositions to some voices to create some diversity
-    parts = [s.new_part("piano") for _ in range(voices)]
-    initial_rests = [i * delay for i in range(voices)]
+    voice_transpositions = {VOICE1: 0, VOICE2: 0, VOICE3: -12, VOICE4: -24, VOICE5: -12}
 
-    canonized = voices * stacking
-    for v in range(voices):
+    canonized = number_of_voices * stacking
+    for v in range(number_of_voices):
         interval = voice_transpositions[v]
         v = copy.deepcopy(stream_series.transpose(interval).flatten().notesAndRests)
 
 
-        # show the final product
-    canonized.to_score(title="Canon", composer="canon-generator.py", max_divisor=16).show_xml()
 
+def create_from_chord_progression():
+
+    main_key = key.Key ('C')
+    #chord_degrees = [1, 4, 6, 2, 5, 1]
+    chord_degrees = lstChordPattern[0]
+
+    main_chords = stream.Stream()
+    for i in chord_degrees:
+        main_chords.append(roman.RomanNumeral(i, main_key))
+    main_stream = create_stream_from_chords(main_key, main_chords)
+
+    new_stream = stream_transform_random(main_stream, main_scale))
+
+    canon_stream = stream_transform_canon(main_stream)
 
 def main():
-    create_canon()
+    create_from_chord_progression()
+
 
 if __name__ == '__main__':
     main()
