@@ -1,4 +1,3 @@
-from music21.scale import MinorScale, MajorScale, ConcreteScale
 
 from library import *
 from harmony import *
@@ -36,10 +35,11 @@ def pairwise(iterable):
     return list(zip(iterable, iterable[1:])) + [(iterable[-1], None)]
 
 
-def pitch_middle_in_scale(minpitch: note.Pitch, maxpitch: note.Pitch, scale_in: scale.ConcreteScale ) -> note.Pitch:
+def pitch_middle_in_scale(pitch_in1: note.Pitch, pitch_in2: note.Pitch, scale_in: scale.ConcreteScale ) -> note.Pitch:
     # return the middle of two pitches in a scale
 
-    pitches = scale_in.getPitches(minpitch, maxpitch)
+    pitches = scale_in.getPitches (minPitch=pitch_in1, maxPitch=pitch_in2,
+                                   direction=scale.Direction.ASCENDING)
     length = len(pitches)
 
 #    if length == 0:
@@ -56,56 +56,12 @@ def pitch_middle_in_scale(minpitch: note.Pitch, maxpitch: note.Pitch, scale_in: 
     return pitches[(length - odd_even) // 2]
 
 
-def realize_chord(chord_in : chord.Chord,
-                  numofpitch : int = 3,
-                  baseoctave : int = 4,
-                  direction: scale.Direction = scale.Direction.ASCENDING)\
-        -> stream.Stream:
-    # given a chord like Am7, return a stream of numofpitch pitches,
-    # starting in octave baseoctave, and ascending
-    stream_out = stream.Stream()
-
-    # prepare some streams: one per voice
-    # all bass notes of each chord form one voice
-    # all 2nd notes of each chord form a second voice
-
-
-    stream_out.append (chord_in.notes)
-
-    pitches = chord_in.pitches
-    num_iter = numofpitch // len(pitches) + 1
-    octave_correction = baseoctave - pitches[0].octave
-    actual_pitches = 0
-    for i in range(num_iter):
-        for p in pitches:
-            if actual_pitches < numofpitch:
-                newp = copy.deepcopy(p)
-                newp.octave = newp.octave + octave_correction
-                stream_out.append(newp)
-                actual_pitches += 1
-            else:
-                if direction == scale.Direction.ASCENDING:
-                    return stream_out
-                else:
-                    stream_out.reverse()
-                    return stream_out
-        octave_correction += 1
-
-    # if direction == "descending", reverse the list of pitches before returning them
-
-    if direction == scale.Direction.ASCENDING:
-        return stream_out
-    else:
-        stream_out.reverse()
-        return stream_out
-
-
-def note_split_middle_neighbor (note: note.Note, scale: scale.ConcreteScale) -> stream.Stream:
+def note_split_middle_neighbor (note_in: note.Note, scale_in: scale.ConcreteScale) -> stream.Stream:
     # randomly transforms one note
     stream_out = stream.Stream()
 
-    if note.isRest:
-        stream_out.append(copy.deepcopy(note))
+    if note_in.isRest:
+        stream_out.append(copy.deepcopy(note_in))
         return stream_out
 
     # original duration is kept, and divided in three parts
@@ -118,17 +74,17 @@ def note_split_middle_neighbor (note: note.Note, scale: scale.ConcreteScale) -> 
 
     # first note and last note equal the original note
     stream_out.append(
-        note.Note(pitch= note.pitch,
-                  quarterlength= chosen_dur[0] * note.quarterLength))
+        note.Note(pitch= note_in.pitch,
+                  quarterlength= chosen_dur[0] * note_in.quarterLength))
     # middle note is the neighbour note
     stream_out.append(
-        note.Note(pitch= scale.nextPitch(pitch= note.pitch,
+        note.Note(pitch= scale_in.nextPitch(pitchOrigin= note_in.pitch,
                             direction=random.choice([scale.Direction.ASCENDING, scale.Direction.DESCENDING])),
-                    quarterlength= chosen_dur[1] * note.quarterLength))
+                    quarterlength= chosen_dur[1] * note_in.quarterLength))
     # last note is equal the original note
     stream_out.append(
-        note.Note(pitch= note.pitch,
-                  quarterlength= chosen_dur[2] * note.quarterLength))
+        note.Note(pitch= note_in.pitch,
+                  quarterlength= chosen_dur[2] * note_in.quarterLength))
 
     return stream_out
 
@@ -198,16 +154,14 @@ def note_split_twopassing_next (note1 : note.Note, note2 : note.Note, scale: sca
                   quarterlength= chosen_dur[0] * note1.quarterLength))
     stream_out.append(
         note.Note(pitch= scale.nextPitch(
-                            pitch= note2.pitch,
+                            pitchOrigin= note2.pitch,
                             direction=chosen_directions[0]),
                     quarterlength= chosen_dur[1] * note2.quarterLength))
     stream_out.append(
         note.Note(pitch= scale.nextPitch(
-                            pitch= note2.pitch,
+                            pitchOrigin= note2.pitch,
                             direction=chosen_directions[1]),
                     quarterlength= chosen_dur[2] * note2.quarterLength))
-
-
 
     return stream_out
 
@@ -220,82 +174,106 @@ transformation_set = [None, None, None, None, # high changce of no transformatio
                      ]
 
 
-def stream_transform_random(stream_in, scale) -> stream.Stream:
-    # transform stream with random operations
+def stream_transform_random(stream_in: stream.Stream,
+                            scale_in: scale.ConcreteScale) -> stream.Stream:
+    # transform Stream with random operations
 
     stream_out = stream.Stream()
 
     for i in range(len(stream_in)):
 
         method = random.choice(transformation_set)
+        new_stream = stream.Stream()
         match method:
             case 'note_split_middle_neighbor':
-                stream_out.appemd (note_split_middle_neighbor (stream_in[i], scale))
+                new_stream = note_split_middle_neighbor (stream_in[i], scale_in)
             case 'note_split_passing_next':
-                stream_out.append (note_split_passing_next (stream_in[i], stream_in[i+1], scale))
+                new_stream = note_split_passing_next (stream_in[i], stream_in[i+1], scale_in)
             case 'note_split_twopassing_next':
-                stream_out.append (note_split_twopassing_next (stream_in[i], stream_in[i+1], scale))
+                new_stream = note_split_twopassing_next (stream_in[i], stream_in[i+1], scale_in)
+        stream_out.append (new_stream)
 
     return stream_out.flatten()
 
 
 
 
-    copy.deepcopy(stream01).transpose(interval01).flatten().notesAndRests
-
 
 def create_stream_from_chords (stream_chords: stream.Stream,
-                               main_scale : scale.ConcreteScale = scale.MajorScale("C"),
-                               number_of_voices: int = 5,
-                                octave_in: int = 4,
-                                quarterLength_in = 2) -> stream.Stream:
+                               number_of_voices : int = 3,
+                               octave_in: int = 4,
+                               quarterLength_in = 2) -> stream.Stream:
+    # given chords, return a stream of voices,
+    # starting in octave octave_in, and ascending
+    # prepare some streams: one per voice
+    # all bass notes of each chord form one voice
+    # all 2nd notes of each chord form a second voice
 
     stream_out = stream.Stream()
 
+    # create voice streams to hold chords
+    for i in range(number_of_voices):
+        stream_out.append(stream.Stream())
 
-    # define extra transpositions for different voices (e.g. +12, -24, ...)
-    # note that the currently implemented method only gives good results with multiples of 12
+    for i, chord_in in enumerate(stream_chords):
 
-    main_stream = stream.Stream()
+        octave_correction = octave_in - chord_in.notes[0].octave
+        for n in chord_in.notes:
+            n.octave += octave_correction
 
-    # split each chord into a separate voice
-    for c in stream_chords:
-        pitches = realize_chord (c, number_of_voices, octave_in, direction="descending")
+        # split each chord into separate voices
+        for j in range(number_of_voices):
+            stream_out[j].append()
+            stream_out.append(note.Note(chord_in.notes[j].pitch, quarterLength_in))
 
-
-        for v in range(number_of_voices):
-            note = note.Note (pitches[v], quarterLength_in)
-            main_stream.append(note)
-
-
-def stream_transform_canon()
-    # and turn it into a canon. Add extra transpositions to some number_of_voices to create some diversity
-    parts = [s.new_part("piano") for _ in range(number_of_voices)]
-    initial_rests = [i * delay for i in range(number_of_voices)]
-
-    voice_transpositions = {VOICE1: 0, VOICE2: 0, VOICE3: -12, VOICE4: -24, VOICE5: -12}
-
-    canonized = number_of_voices * stacking
-    for v in range(number_of_voices):
-        interval = voice_transpositions[v]
-        v = copy.deepcopy(stream_series.transpose(interval).flatten().notesAndRests)
-
+    return stream_out
 
 
 def create_from_chord_progression():
-
-    main_key = key.Key ('C')
-    #chord_degrees = [1, 4, 6, 2, 5, 1]
+    # Create based on chord progression
+    main_scale: scale.ConcreteScale = scale.MajorScale("C"),
+    main_key = key.Key('C')
+    # chord_degrees = [1, 4, 6, 2, 5, 1]
     chord_degrees = lstChordPattern[0]
 
     main_chords = stream.Stream()
     for i in chord_degrees:
         main_chords.append(roman.RomanNumeral(i, main_key))
-    main_stream = create_stream_from_chords(main_key, main_chords)
 
-    new_stream = stream_transform_random(main_stream, main_scale))
+    main_stream = create_stream_from_chords(main_chords, 3, 4,2)
+
+    # if direction_in == scale.Direction.DESCENDING:
+    #    pitches.reverse()
+
+
+    new_stream = stream_transform_random(main_stream, main_scale)
 
     canon_stream = stream_transform_canon(main_stream)
+
+
+
+
+def stream_transform_canon(stream_in: stream.Stream,
+                           delay_ql : int = 4,
+                           number_of_voices: int = 5):
+    # and turn it into a canon. Add extra transpositions to some number_of_voices to create some diversity
+
+
+    stream_out = stream.Stream()
+
+    parts = [stream_out.new_part("piano") for _ in range(number_of_voices)]
+    initial_rests = [i * delay_ql for i in range(number_of_voices)]
+
+    # define extra transpositions for different voices (e.g. +12, -24, ...)
+    voice_transpositions = {VOICE1: 0, VOICE2: 0, VOICE3: -12, VOICE4: -24, VOICE5: -12}
+
+    stacking = 3
+    canonized = number_of_voices * stacking
+    for v in range(number_of_voices):
+        interval = voice_transpositions[v]
+        v = copy.deepcopy(stream_in.transpose(interval).flatten().notesAndRests)
+
+
 
 def main():
     create_from_chord_progression()
