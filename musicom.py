@@ -4,12 +4,14 @@ Music Composition Assistant
 import copy
 import random
 import platform
+from datetime import datetime
+
 
 #import sound
-from music21.scale import Direction
 
 # Musical data
 from library import *
+from music21 import stream, note
 # Harmony rules
 from harmony import *
 
@@ -22,7 +24,9 @@ Composition - Structure
 """
 # Main score
 MAIN_PATH = 'C:\\temp\\Music\\'
-DEFAULT_KEY = 'C'
+DEFAULT_KEY = key.Key('C', 'major')
+DEFAULT_SCALE = scale.MajorScale('C')
+
 DEFAULT_TEMPO = 100
 DEFAULT_TIMESIGNATURE = '4/4'
 
@@ -36,11 +40,144 @@ PART_B = 1
 PART_C = 2
 PART_D = 3
 
+from genetic import generate_genome, Genome, selection_pair, single_point_crossover, mutation
+
+BITS_PER_NOTE = 4
+
+
+def int_from_bits(bits: list[int]) -> int:
+    return int(sum([bit * pow(2, index) for index, bit in enumerate(bits)]))
+
+
+def genome_to_melody(genome: Genome,
+                     num_bars: int,
+                     num_notes: int,
+                     num_steps: int,
+                     pauses: int,
+                     scale_in: scale.ConcreteScale,
+                     root_octave: int) -> stream.Stream:
+    # Dict[str, list]:
+
+    melody = {
+        "notes": [],
+        "volume": [],
+        "duration": []
+    }
+    stream_out = stream.Stream()
+
+    notes = []
+    for i in range(num_bars * num_notes):
+        notes = [genome[i * BITS_PER_NOTE:i * BITS_PER_NOTE + BITS_PER_NOTE]]
+
+    note_length = 4 / float(num_notes)
+
+    scl = scale_in.pitches
+
+    for note_bits in notes:
+        integer = int_from_bits(note_bits)
+
+        if not pauses:
+            integer = int(integer % pow(2, BITS_PER_NOTE - 1))
+
+        if integer >= pow(2, BITS_PER_NOTE - 1):
+            melody["notes"] += [0]
+            melody["volume"] += [0]
+            melody["duration"] += [note_length]
+        else:
+            if len(melody["notes"]) > 0 and melody["notes"][-1] == integer:
+                melody["duration"][-1] += note_length
+            else:
+                melody["notes"] += [integer]
+                melody["volume"] += [127]
+                melody["duration"] += [note_length]
+
+    steps = []
+    for step in range(num_steps):
+        steps.append([scl[(note01 + step * 2) % len(scl)] for note01 in melody["notes"]])
+
+    melody["notes"] = steps
+
+    for i, vol in enumerate(melody["volume"]):
+        if vol > 0:
+            for step in melody["notes"]:
+                new_note = note.Note(pitch=step[i], duration=melody["duration"][i])
+                stream_out.append(new_note)
+
+    return stream_out
+
+
+def stream_rate_rules(genome: Genome) -> int:
+    rating = genome[1]
+
+    return rating
+
+
+def create_genetic():
+    # Number of measures    Length of the generated stream in measures
+    num_measures = 3
+    # Notes per bar	        Number of notes in a measure
+    num_notes_per_measure = 4
+    # Number of steps	    Number of pitches per note
+    num_steps_per_note = 1
+    # Include rests	    Introduce rests between notes OR a constant stream of notes?
+    include_rests: bool = True
+
+    root_octave: int = 4
+
+    main_key = key.Key('C', 'major')
+    main_scale = scale.MajorScale('C')
+    main_score = score_create('Genetic', main_key, '4/4', 120)
+
+    #   Population Size	        Number of melodies per generation to rate and recombine
+    population_size: int = 10
+    #   Number of mutations	    Max number of mutations that should be possible per child generated
+    num_mutations: int = 2
+    #   Mutation probability	Probability for a mutation to occur
+    mutation_probability: float = 0.5
+
+    new_stream = stream.Stream
+
+    title = str(int(datetime.now().timestamp()))
+
+    population = []
+    for _ in range(population_size):
+        genome_size = num_measures * num_notes_per_measure * BITS_PER_NOTE
+        population.append(generate_genome(genome_size))
+
+    population_id = 0
+
+    random.shuffle(population)
+    population_fitness = []
+    for i, genome in enumerate(population):
+        population_fitness.append (stream_rate_rules(genome))
+
+    sorted_population_fitness = sorted(population_fitness, key=lambda e: e[1], reverse=True)
+    population = [e[0] for e in sorted_population_fitness]
+
+    next_generation = population[0:2]
+
+
+    def fitness_lookup(genome):
+        for e in population_fitness:
+            if e[0] == genome:
+                return e[1]
+        return 0
+
+
+    parents = selection_pair(population, fitness_lookup)
+    offspring_a, offspring_b = single_point_crossover(parents[0], parents[1])
+    offspring_a = mutation(offspring_a, num=num_mutations, probability=mutation_probability)
+    offspring_b = mutation(offspring_b, num=num_mutations, probability=mutation_probability)
+    next_generation += [offspring_a, offspring_b]
+
+    new_stream = genome_to_melody(population[0], num_measures, num_notes_per_measure, num_steps_per_note, include_rests, main_scale, root_octave)
 
 
 def big_yellow_taxi():
     # Big Yellow Taxi
-    main_score = score_create('Big yellow taxi','Bb','4/4')
+    main_key = key.Key('Bb', 'major')
+
+    main_score = score_create('Big yellow taxi', main_key,'4/4')
 
     main_score.append(
         serial.ToneRow (
@@ -53,7 +190,9 @@ def big_yellow_taxi():
 
 def berendans():
     # Berendans
-    main_score = score_create('Berendans','Bb','4/4')
+    main_key = key.Key('Bb', 'major')
+
+    main_score = score_create('Berendans',main_key,'4/4')
 
     progr = ['I', 'V', 'I']
 
@@ -87,14 +226,18 @@ def load_and_transform ():
 
 
 def create_new ():
-    # Create a new score
+    # Create new score template
     # Form
     parts = 3
     voices = []
     numvoices = 3
     form = (16, 16, 16)
 
-    main_score = score_create('New score', 'C','4/4')
+    main_key = key.Key('C', 'major')
+    main_scale = scale.MajorScale ('C')
+    main_scale = scale.MelodicMinorScale ('C')
+
+    main_score = score_create('New score', main_key,signature_in= '4/4')
 
     # Create three voices for melody and accompaniment
     # Motifs of voices
@@ -118,11 +261,17 @@ def create_new ():
     # Save score
     main_score.write(fmt='midi', fp=MAIN_PATH + "new.mid")
 
+
 def create_balfolk ():
-    # Create a Balfolk style melody and bass
+    # Style : Balfolk
+    # Parts:  melody and bass
 
     # C major/A minor
-    main_score = score_create('Balfolk','C','6/8')
+    main_key = key.Key('C', 'major')
+    main_scale = scale.MajorScale ('C')
+
+
+    main_score = score_create('Balfolk',main_key,'6/8')
     melody_part = stream.Part()
     bass_part = stream.Part()
     main_score.append(melody_part)
@@ -130,7 +279,6 @@ def create_balfolk ():
 
     # Bourrée-inspired melody (typical Balfolk rhythm)
     # Create notes with Balfolk-style rhythm
-    # Chord
     chord_degrees = [1, 2, 3, 4]
     melody_notes = [
         ['C4', 'E4', 'G4'],
@@ -168,8 +316,13 @@ def create_balfolk ():
 
 
 def create_percussion ():
+    # Percussion
 
-    main_score = score_create('Percussion','C','4/4')
+    main_key = key.Key('C', 'major')
+    main_scale = scale.MajorScale ('C')
+
+
+    main_score = score_create('Percussion',main_key,'4/4')
     signature : meter.TimeSignature
     signature = main_score.getElementsByClass('TimeSignature')[0]
     # number of beats per measure
@@ -178,8 +331,9 @@ def create_percussion ():
     beatduration = signature.denominator * QUARTER
 
     # Percussion
-    pchord = PercussionChord()
     rhythm01 = [BT, RS, BT, BT, BT, BT, RS]
+
+    pchord = percussion.PercussionChord()
     pitch_list01 = ['C4', '', 'C4', 'C4', 'C4', 'C4', '']
     durations01 = [1.0, 1.0, 1.5, 1.5, 1.0, 1.0, 1.0]
 
@@ -202,8 +356,11 @@ def create_percussion ():
 
 def create_counterpoint():
 
+    main_key = key.Key('C', 'major')
+    main_scale = scale.MajorScale ('C')
+
     # Counterpoint
-    main_score = score_create('Counterpoint', 'C','4/4')
+    main_score = score_create('Counterpoint', main_key,'4/4')
 
     length = 16  # Length of the counterpoint
     voice1 = stream_create_random(length)
@@ -221,7 +378,7 @@ def create_counterpoint():
     main_score.write(fmt='midi', fp=MAIN_PATH + "counterpoint.mid")
 
 
-def create_key_library (key_in: str = 'C'):
+def create_key_library (key_in: key.Key):
     # Create a score with library elements
 
     # Common chord progressions
@@ -238,31 +395,28 @@ def create_key_library (key_in: str = 'C'):
     score_analyze(main_score)
     score_show(main_score)
     # Save score
-    main_score.write(fmt='midi', fp=MAIN_PATH + 'chordlibrary_in_key_' + key_in +'.mid')
+    main_score.write(fmt='midi', fp=MAIN_PATH + 'chordlibrary_in_key_' + key_in.name +'.mid')
 
 
-def create_stream_chords_in_key (chord_progressions: list, key_in: str = 'C' ,  quarterlength_in: int = 1 ) -> stream.Stream:
+def create_stream_chords_in_key (chord_progressions: list, key_in: key.Key ,  quarterlength_in: int = 1 ) -> stream.Stream:
     # Stream of chord progression patterns in a key
     stream_out = stream.Stream()
-    main_key = key.Key (key_in)
     for i in range(1, len(chord_progressions)-1):
         stream_out.append(note.Rest(quarterLength= quarterlength_in))
         for j in range (0, len(chord_progressions[i])):
-            chord01 = roman.RomanNumeral (chord_progressions[i][j], main_key)
+            chord01 = roman.RomanNumeral (chord_progressions[i][j], keyOrScale=key_in)
             chord01.duration.quarterLength = quarterlength_in
             stream_out.append(chord01)
 
     return stream_out
 
 
-
-def create_stream_triads_in_key (key_in: str = 'C' ,  quarterlength_in: int = 1 ) -> stream.Stream:
+def create_stream_triads_in_key (key_in: key.Key ,  quarterlength_in: int = 1 ) -> stream.Stream:
     # Stream of all triads in a key
     stream_out = stream.Stream()
-    main_key = key.Key (key_in)
 
     for i in range(HEPTA):
-        triad = roman.RomanNumeral(i+1, main_key)
+        triad = roman.RomanNumeral(i+1, key_in)
         triad.duration.quarterLength = quarterlength_in
         stream_out.append(triad)
         stream_out.append(note.Rest(quarterLength=quarterlength_in))
@@ -278,14 +432,15 @@ def main():
     #create_balfolk()
     #create_counterpoint()
 
-    create_key_library('D')
+    create_genetic()
+#    create_key_library(key.Key('C', 'major'))
 
 
 """
 Creation
 """
 def score_create ( title: str = 'New score',
-                    key_in: str = DEFAULT_KEY ,
+                    key_in: key.Key = DEFAULT_KEY ,
                    signature_in: str = DEFAULT_TIMESIGNATURE ,
                    bpm_in: int = DEFAULT_TEMPO)\
         -> stream.Score:
@@ -296,7 +451,7 @@ def score_create ( title: str = 'New score',
     score_out.metadata.composer = 'Musicom'
 
 # Set the time signature, key signature and tempo
-    score_out.insert(0, key.Key(key_in))
+    score_out.insert(0, key_in)
     score_out.insert(0, meter.TimeSignature(signature_in))
     score_out.insert(0, tempo.MetronomeMark(number=bpm_in))
 
