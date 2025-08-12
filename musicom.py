@@ -45,63 +45,47 @@ from genetic import generate_genome, Genome, selection_pair, single_point_crosso
 BITS_PER_NOTE = 4
 
 
-def int_from_bits(bits: list[int]) -> int:
-    return int(sum([bit * pow(2, index) for index, bit in enumerate(bits)]))
-
 
 def genome_to_melody(genome: Genome,
                      num_bars: int,
                      num_notes: int,
-                     num_steps: int,
-                     pauses: int,
-                     scale_in: scale.ConcreteScale,
-                     root_octave: int) -> stream.Stream:
-    # Dict[str, list]:
+                     include_rests: bool,
+                     scale_in: scale.ConcreteScale) -> stream.Stream:
 
-    melody = {
-        "notes": [],
-        "volume": [],
-        "duration": []
-    }
     stream_out = stream.Stream()
 
-    notes = []
+    pitch_degrees = []
+    durations = []
+
+    pitch_degrees_binary = []
     for i in range(num_bars * num_notes):
-        notes = [genome[i * BITS_PER_NOTE:i * BITS_PER_NOTE + BITS_PER_NOTE]]
+        pitch_degrees_binary += [genome[i * BITS_PER_NOTE:i * BITS_PER_NOTE + BITS_PER_NOTE]]
 
     note_length = 4 / float(num_notes)
 
     scl = scale_in.pitches
 
-    for note_bits in notes:
-        integer = int_from_bits(note_bits)
+    for pitch_binary in pitch_degrees_binary:
+        pitch_degree = int(sum([bit * pow(2, i) for i, bit in enumerate(pitch_binary)]))
 
-        if not pauses:
-            integer = int(integer % pow(2, BITS_PER_NOTE - 1))
+        max_degree = pow(2, BITS_PER_NOTE - 1)
+        # Degrees not in scale are rest
+        if not include_rests:
+            pitch_degree = int(pitch_degree % max_degree)
 
-        if integer >= pow(2, BITS_PER_NOTE - 1):
-            melody["notes"] += [0]
-            melody["volume"] += [0]
-            melody["duration"] += [note_length]
+        if pitch_degree >= max_degree:
+            pitch_degrees += [0]
+            durations += [note_length]
         else:
-            if len(melody["notes"]) > 0 and melody["notes"][-1] == integer:
-                melody["duration"][-1] += note_length
-            else:
-                melody["notes"] += [integer]
-                melody["volume"] += [127]
-                melody["duration"] += [note_length]
+            pitch_degrees += [pitch_degree]
+            durations += [note_length]
 
-    steps = []
-    for step in range(num_steps):
-        steps.append([scl[(note01 + step * 2) % len(scl)] for note01 in melody["notes"]])
-
-    melody["notes"] = steps
-
-    for i, vol in enumerate(melody["volume"]):
-        if vol > 0:
-            for step in melody["notes"]:
-                new_note = note.Note(pitch=step[i], duration=melody["duration"][i])
-                stream_out.append(new_note)
+    for i, degree in enumerate(pitch_degrees):
+        if degree > 0:
+            new_note = note.Note(pitch=scl[degree], quarterLength=durations[i])
+            stream_out.append(new_note)
+        else:
+            stream_out.append(note.Rest(length=durations[i]))
 
     return stream_out
 
@@ -114,15 +98,11 @@ def stream_rate_rules(genome: Genome) -> int:
 
 def create_genetic():
     # Number of measures    Length of the generated stream in measures
-    num_measures = 3
+    num_measures = 2
     # Notes per bar	        Number of notes in a measure
     num_notes_per_measure = 4
-    # Number of steps	    Number of pitches per note
-    num_steps_per_note = 1
     # Include rests	    Introduce rests between notes OR a constant stream of notes?
     include_rests: bool = True
-
-    root_octave: int = 4
 
     main_key = key.Key('C', 'major')
     main_scale = scale.MajorScale('C')
@@ -130,15 +110,10 @@ def create_genetic():
 
     #   Population Size	        Number of melodies per generation to rate and recombine
     population_size: int = 10
-    #   Number of mutations	    Max number of mutations that should be possible per child generated
-    num_mutations: int = 2
-    #   Mutation probability	Probability for a mutation to occur
-    mutation_probability: float = 0.5
-
-    new_stream = stream.Stream
 
     title = str(int(datetime.now().timestamp()))
 
+    # Generate populations
     population = []
     for _ in range(population_size):
         genome_size = num_measures * num_notes_per_measure * BITS_PER_NOTE
@@ -146,16 +121,21 @@ def create_genetic():
 
     population_id = 0
 
-    random.shuffle(population)
+    #random.shuffle(population)
+
+    # Rate population based on rules
     population_fitness = []
     for i, genome in enumerate(population):
-        population_fitness.append (stream_rate_rules(genome))
+        population_fitness.append ([genome, stream_rate_rules(genome)])
 
-    sorted_population_fitness = sorted(population_fitness, key=lambda e: e[1], reverse=True)
+    def population_sort (e):
+        return e[1]
+
+    # Continue with the fittest populations
+    sorted_population_fitness = sorted(population_fitness, key=population_sort, reverse=True)
     population = [e[0] for e in sorted_population_fitness]
 
     next_generation = population[0:2]
-
 
     def fitness_lookup(genome):
         for e in population_fitness:
@@ -163,14 +143,32 @@ def create_genetic():
                 return e[1]
         return 0
 
-
     parents = selection_pair(population, fitness_lookup)
     offspring_a, offspring_b = single_point_crossover(parents[0], parents[1])
+
+    #   Number of mutations	    Max number of mutations that should be possible per child generated
+    num_mutations: int = 2
+    #   Mutation probability	Probability for a mutation to occur
+    mutation_probability: float = 0.5
     offspring_a = mutation(offspring_a, num=num_mutations, probability=mutation_probability)
     offspring_b = mutation(offspring_b, num=num_mutations, probability=mutation_probability)
     next_generation += [offspring_a, offspring_b]
 
-    new_stream = genome_to_melody(population[0], num_measures, num_notes_per_measure, num_steps_per_note, include_rests, main_scale, root_octave)
+    new_stream = genome_to_melody(population[0],
+                                  num_measures,
+                                  num_notes_per_measure,
+                                  include_rests,
+                                  main_scale)
+
+    main_score.append(new_stream)
+
+    #        part_create(pitches_list[i], durations_list[i], instruments_list[i])
+
+    # Analyze score
+    score_analyze (main_score)
+    score_show(main_score)
+    # Save score
+    main_score.write(fmt='midi', fp=MAIN_PATH + "new.mid")
 
 
 def big_yellow_taxi():
@@ -223,6 +221,9 @@ def load_and_transform ():
     # Transform pitch sequence in tomerow
     trw01 = serial.ToneRow()
     trw02 = tonerow_transform (trw01)
+
+    # Save score
+    main_score.write(fmt='midi', fp=MAIN_PATH + "out.mid")
 
 
 def create_new ():
