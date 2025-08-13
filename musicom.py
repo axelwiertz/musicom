@@ -46,7 +46,7 @@ BITS_PER_NOTE = 4
 
 
 
-def genome_to_melody(genome: Genome,
+def genome_to_stream (genome: Genome,
                      num_bars: int,
                      num_notes: int,
                      include_rests: bool,
@@ -98,7 +98,7 @@ def stream_rate_rules(genome: Genome) -> int:
 
 def create_genetic():
     # Number of measures    Length of the generated stream in measures
-    num_measures = 2
+    num_measures = 4
     # Notes per bar	        Number of notes in a measure
     num_notes_per_measure = 4
     # Include rests	    Introduce rests between notes OR a constant stream of notes?
@@ -106,20 +106,17 @@ def create_genetic():
 
     main_key = key.Key('C', 'major')
     main_scale = scale.MajorScale('C')
-    main_score = score_create('Genetic', main_key, '4/4', 120)
-
-    #   Population Size	        Number of melodies per generation to rate and recombine
-    population_size: int = 10
-
-    title = str(int(datetime.now().timestamp()))
+    title = 'Genetic '+str(int(datetime.now().timestamp()))
+    main_score = score_create(title,
+                              main_key, '4/4', 120)
 
     # Generate populations
     population = []
+    # Population Size   Number of melodies per generation to rate and recombine
+    population_size: int = 10
     for _ in range(population_size):
         genome_size = num_measures * num_notes_per_measure * BITS_PER_NOTE
         population.append(generate_genome(genome_size))
-
-    population_id = 0
 
     #random.shuffle(population)
 
@@ -154,22 +151,39 @@ def create_genetic():
     offspring_b = mutation(offspring_b, num=num_mutations, probability=mutation_probability)
     next_generation += [offspring_a, offspring_b]
 
-    new_stream = genome_to_melody(population[0],
+    new_stream = genome_to_stream (population[0],
                                   num_measures,
                                   num_notes_per_measure,
                                   include_rests,
                                   main_scale)
 
-    main_score.append(new_stream)
-
-    #        part_create(pitches_list[i], durations_list[i], instruments_list[i])
+    main_score.append(part_create_from_stream(new_stream, instrument.Piano()))
 
     # Analyze score
     score_analyze (main_score)
     score_show(main_score)
     # Save score
-    main_score.write(fmt='midi', fp=MAIN_PATH + "new.mid")
+    main_score.write(fmt='midi', fp=MAIN_PATH + title +".mid")
 
+
+def euclidian_rhythm (onsets: int, timesteps: int, ) -> list :
+
+    base_duration = timesteps // onsets
+    remaining_timesteps = timesteps % onsets
+
+    rhythm = [[base_duration + 1] if i < remaining_timesteps else [base_duration] for i in range[onsets]]
+
+    while rhythm[0] != rhythm[-1]:
+        for group in rhythm:
+            if group != rhythm[-1]:
+                    group += rhythm.pop[-1]
+
+    rhythm = rhythm [0]
+    return rhythm
+
+def create_rhythm():
+
+    main_stream = stream.Stream([note.Note(duration=duration.Duration(0.25 * i)) for i in euclidian_rhythm(4,8)])
 
 def big_yellow_taxi():
     # Big Yellow Taxi
@@ -428,12 +442,12 @@ def create_stream_triads_in_key (key_in: key.Key ,  quarterlength_in: int = 1 ) 
 
 def main():
     # Main: create or transform
-    #create_new()
+    create_new()
     #create_percussion()
     #create_balfolk()
     #create_counterpoint()
 
-    create_genetic()
+#    create_genetic()
 #    create_key_library(key.Key('C', 'major'))
 
 
@@ -457,28 +471,6 @@ def score_create ( title: str = 'New score',
     score_out.insert(0, tempo.MetronomeMark(number=bpm_in))
 
     return score_out
-
-
-def part_create(pitches : list[str],
-                durations : list[float],
-                instr: instrument.Instrument = instrument.Piano()
-                ) -> stream.Part:
-    # Create a part with notes and rests
-    part_out = stream.Part()
-    # Add instrument of part
-    part_out.insert(0, instr)
-
-    # Iterate over the list of pitches
-    for i in range(len(pitches)) :
-        # Add beats and rests to the stream
-        if pitches[i] == '':
-            part_out.append(note.Rest(quarterLength=durations[i]))
-        else:
-            part_out.append(note.Note(pitch=pitches[i], quarterLength=durations[i]))
-
-    return part_out
-
-
 
 
 def stream_create_random(length,

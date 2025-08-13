@@ -232,14 +232,39 @@ three_rtm = [   [BT, BT, BT],
 Tools
 """
 
-def part_create_from_stream (stream_in: stream.Stream)\
-        -> stream.Part:
+def part_create_from_stream (stream_in: stream.Stream,
+                             instr: instrument.Instrument = instrument.Piano()) -> stream.Part:
     # Transfer notes and rests from the original stream to a new Part
     part_out = stream.Part()
+    # Add instrument of part
+    part_out.insert(0, instr)
+
     for note_or_rest in stream_in.notesAndRests:
         part_out.append(note_or_rest)
 
     return part_out
+
+
+def part_create(pitches : list[str],
+                durations : list[float],
+                instr: instrument.Instrument = instrument.Piano()
+                ) -> stream.Part:
+    # Create a part with notes and rests
+    part_out = stream.Part()
+    # Add instrument of part
+    part_out.insert(0, instr)
+
+    # Iterate over the list of pitches
+    for i in range(len(pitches)) :
+        # Add beats and rests to the stream
+        if pitches[i] == '':
+            part_out.append(note.Rest(quarterLength=durations[i]))
+        else:
+            part_out.append(note.Note(pitch=pitches[i], quarterLength=durations[i]))
+
+    return part_out
+
+
 
 # Plot
 # Note that even in the OO-style, we use `.pyplot.figure` to create the Figure.
