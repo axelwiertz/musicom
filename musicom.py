@@ -11,7 +11,6 @@ from datetime import datetime
 
 # Musical data
 from library import *
-from music21 import stream, note
 # Harmony rules
 from harmony import *
 
@@ -28,19 +27,27 @@ DEFAULT_KEY = key.Key('C', 'major')
 DEFAULT_SCALE = scale.MajorScale('C')
 
 DEFAULT_TEMPO = 100
-DEFAULT_TIMESIGNATURE = '4/4'
+DEFAULT_TIMESIGNATURE = meter.TimeSignature('4/4')
+
+QUARTERLENGTH1 = 2
+QUARTERLENGTH2 = 2
+QUARTERLENGTH4 = 1
+QUARTERLENGTH8 = 0.5
+QUARTERLENGTH16 = 0.25
+QUARTERLENGTH32 = 0.125
+
+DEFAULT_DURATIONS = [[note.Duration(d)] for d in [QUARTERLENGTH8, QUARTERLENGTH4, QUARTERLENGTH2]]
+DEFAULT_PITCHES = scale.MajorScale('C').pitches
 
 # Three voice score
-MELODY_VOICE = 0
-HARMONY_VOICE = 1
-BASS_VOICE = 2
 
 PART_A = 0
 PART_B = 1
 PART_C = 2
 PART_D = 3
 
-from genetic import generate_genome, Genome, selection_pair, single_point_crossover, mutation
+from genetic import Genome, selection_pair, single_point_crossover, mutation, generate_population, \
+    sort_population
 
 BITS_PER_NOTE = 4
 
@@ -48,7 +55,7 @@ BITS_PER_NOTE = 4
 
 def genome_to_stream (genome: Genome,
                      num_bars: int,
-                     num_notes: int,
+                     num_notes_per_measure: int,
                      include_rests: bool,
                      scale_in: scale.ConcreteScale) -> stream.Stream:
 
@@ -58,10 +65,10 @@ def genome_to_stream (genome: Genome,
     durations = []
 
     pitch_degrees_binary = []
-    for i in range(num_bars * num_notes):
+    for i in range(num_bars * num_notes_per_measure):
         pitch_degrees_binary += [genome[i * BITS_PER_NOTE:i * BITS_PER_NOTE + BITS_PER_NOTE]]
 
-    note_length = 4 / float(num_notes)
+    note_length = 4 / float(num_notes_per_measure)
 
     scl = scale_in.pitches
 
@@ -108,45 +115,31 @@ def create_genetic():
     main_scale = scale.MajorScale('C')
     title = 'Genetic '+str(int(datetime.now().timestamp()))
     main_score = score_create(title,
-                              main_key, '4/4', 120)
+                              main_key,
+                              meter.TimeSignature('4/4'),
+                              120)
+
+    # Population Size   Number of streams per generation to rate and recombine
+    population_size: int = 10
+    genome_size = num_measures * num_notes_per_measure * BITS_PER_NOTE
 
     # Generate populations
-    population = []
-    # Population Size   Number of melodies per generation to rate and recombine
-    population_size: int = 10
-    for _ in range(population_size):
-        genome_size = num_measures * num_notes_per_measure * BITS_PER_NOTE
-        population.append(generate_genome(genome_size))
-
-    #random.shuffle(population)
-
-    # Rate population based on rules
-    population_fitness = []
-    for i, genome in enumerate(population):
-        population_fitness.append ([genome, stream_rate_rules(genome)])
-
-    def population_sort (e):
-        return e[1]
+    population = generate_population(population_size, genome_size)
 
     # Continue with the fittest populations
-    sorted_population_fitness = sorted(population_fitness, key=population_sort, reverse=True)
-    population = [e[0] for e in sorted_population_fitness]
+    population = sort_population (population, fitness_func=stream_rate_rules)
 
+    # Three fittest as next population
     next_generation = population[0:2]
 
-    def fitness_lookup(genome):
-        for e in population_fitness:
-            if e[0] == genome:
-                return e[1]
-        return 0
-
-    parents = selection_pair(population, fitness_lookup)
+    parents = selection_pair(population, stream_rate_rules)
     offspring_a, offspring_b = single_point_crossover(parents[0], parents[1])
 
     #   Number of mutations	    Max number of mutations that should be possible per child generated
     num_mutations: int = 2
     #   Mutation probability	Probability for a mutation to occur
     mutation_probability: float = 0.5
+
     offspring_a = mutation(offspring_a, num=num_mutations, probability=mutation_probability)
     offspring_b = mutation(offspring_b, num=num_mutations, probability=mutation_probability)
     next_generation += [offspring_a, offspring_b]
@@ -166,30 +159,131 @@ def create_genetic():
     main_score.write(fmt='midi', fp=MAIN_PATH + title +".mid")
 
 
-def euclidian_rhythm (onsets: int, timesteps: int, ) -> list :
+def euclidian_rhythm (onsets: int, timesteps: int ) -> list :
 
-    base_duration = timesteps // onsets
+    # Every onset gets a timestep interval
+    base_timestep_interval = timesteps // onsets
+    # And the remaining timesteps are a separate time step intervel
     remaining_timesteps = timesteps % onsets
 
-    rhythm = [[base_duration + 1] if i < remaining_timesteps else [base_duration] for i in range[onsets]]
+    rhythm = []
+    for i in range(onsets):
+        rhythm_timestep_interval = base_timestep_interval
+        if i < remaining_timesteps:
+            rhythm_timestep_interval += 1
+        rhythm.append (rhythm_timestep_interval)
 
+    # Reduce
     while rhythm[0] != rhythm[-1]:
         for group in rhythm:
             if group != rhythm[-1]:
-                    group += rhythm.pop[-1]
+                    group += rhythm.pop(-1)
 
     rhythm = rhythm [0]
     return rhythm
 
-def create_rhythm():
+"""
+Where the beats in the measure are and how many there are.
+How the notes should be beamed
+How much accent or weight each note gets,
+These three aspects of TimeSignatures are controlled by the
+:attr:`~music21.meter.TimeSignature.beatSequence`,
+:attr:`~music21.meter.TimeSignature.beamSequence`,
+and :attr:`~music21.meter.TimeSignature.accentSequence` properties of the TimeSignature.
+Each of them is an independent :class:`~music21.meter.MeterSequence` element
+which might have nested properties
+(e.g., an 11/16 meter might be beamed as {1/4+1/4+{1/8+1/16}}),
+so if you want to change how beats are calculated or beams are generated you'll want to learn more about meter.MeterSequence objects.
+"""
 
-    main_stream = stream.Stream([note.Note(duration=duration.Duration(0.25 * i)) for i in euclidian_rhythm(4,8)])
+
+def create_rhythm(onsets: int = 4,      # beats
+                  timesteps: int = 4,   # steps of time
+                  timestep_duration : float = QUARTERLENGTH4)\
+        -> list:
+    # main_scale = scale.MajorScale ('C')
+
+    main_numerator = 6
+    main_denominator = 8
+
+    # Measure
+    main_timesignature = meter.TimeSignature(ratiostring='6/8')
+    main_beatcount =  main_timesignature.beatCount
+
+    terminal = meter.MeterTerminal(beatCount=main_beatcount)
+    # ts.ratioString '3/4'
+    # ts.numerator 3
+    # ts.beatCountName 'Triple'
+    # ts.beatCountName 'Triple'
+    # ts.beatDuration.quarterLength 1.0
+
+    quarterlength_unit = 4 / main_timesignature.denominator
+    main_timesignature.denominator = (1 / quarterlength_unit) * 4
+
+
+    main_key = key.Key('C', 'major')
+    main_score = score_create('Rhythm',main_key,main_timesignature)
+    rhythm_part = stream.Part()
+
+    rhythm_interval_pattern = euclidian_rhythm(onsets, timesteps)
+
+    # Genrate duration based on multiplier
+    duration_factor = 8
+    duration_new = QUARTERLENGTH32 * duration_factor
+
+    rhythm_pitch = note.Pitch ('C4')
+    for i in rhythm_interval_pattern:
+        rhythm_note = note.Note(rhythm_pitch,quarterLength=note.Duration(timestep_duration * i))
+        rhythm_part.append(rhythm_note)
+
+    score_show(main_score)
+
+    return rhythm_interval_pattern
+
+
+def create_percussion ():
+    # main_scale = scale.MajorScale ('C')
+
+
+    # Percussion
+    main_key = key.Key('C', 'major')
+
+
+    main_score = score_create('Percussion',main_key,meter.TimeSignature('4/4'))
+    signature : meter.TimeSignature
+    signature = main_score.getElementsByClass('TimeSignature')[0]
+    # number of beats per measure
+    beats = signature.numerator
+    # signature in quarterlength
+    beatduration = signature.denominator * QUARTER
+
+    pchord = percussion.PercussionChord()
+
+
+    # Harmonic rhythm
+    rhythm01 = [BT, RS, BT, BT, BT, BT, RS]
+    rhythm_intervals = [0,2,1,1,1]
+    rhythm_beats_per_measure = 4
+
+    pitch_list01 = ['C4', '', 'C4', 'C4', 'C4', 'C4', '']
+    durations01 = [1.0, 1.0, 1.5, 1.5, 1.0, 1.0, 1.0]
+
+    rtm_example02 = [BT, BT, RS, BT, BT, RS]
+    pitch_list02 = ['C4', 'C4', '', 'C4', 'C4', '']
+    durations02 = [1.5, 0.5, 0.5, 0.25, 0.25, 1]
+
+    rhythm_pattern = FOUR_RHYTHM
+
+    pitches_list = [["C4", "D4", "E4", "F4"],
+                    ["G4", "A4", "B4", "C5"]]
+
+
 
 def big_yellow_taxi():
     # Big Yellow Taxi
     main_key = key.Key('Bb', 'major')
 
-    main_score = score_create('Big yellow taxi', main_key,'4/4')
+    main_score = score_create('Big yellow taxi', main_key,meter.TimeSignature('4/4'))
 
     main_score.append(
         serial.ToneRow (
@@ -204,7 +298,7 @@ def berendans():
     # Berendans
     main_key = key.Key('Bb', 'major')
 
-    main_score = score_create('Berendans',main_key,'4/4')
+    main_score = score_create('Berendans',main_key,meter.TimeSignature('4/4'))
 
     progr = ['I', 'V', 'I']
 
@@ -252,7 +346,7 @@ def create_new ():
     main_scale = scale.MajorScale ('C')
     main_scale = scale.MelodicMinorScale ('C')
 
-    main_score = score_create('New score', main_key,signature_in= '4/4')
+    main_score = score_create('New score', main_key,signature_in= meter.TimeSignature('4/4'))
 
     # Create three voices for melody and accompaniment
     # Motifs of voices
@@ -285,14 +379,14 @@ def create_balfolk ():
     main_key = key.Key('C', 'major')
     main_scale = scale.MajorScale ('C')
 
+    # Bourrée-inspired melody (typical Balfolk rhythm)
 
-    main_score = score_create('Balfolk',main_key,'6/8')
+    main_score = score_create('Balfolk',main_key,meter.TimeSignature('6/8'))
     melody_part = stream.Part()
     bass_part = stream.Part()
     main_score.append(melody_part)
     main_score.append(bass_part)
 
-    # Bourrée-inspired melody (typical Balfolk rhythm)
     # Create notes with Balfolk-style rhythm
     chord_degrees = [1, 2, 3, 4]
     melody_notes = [
@@ -330,59 +424,21 @@ def create_balfolk ():
     return
 
 
-def create_percussion ():
-    # Percussion
-
-    main_key = key.Key('C', 'major')
-    main_scale = scale.MajorScale ('C')
-
-
-    main_score = score_create('Percussion',main_key,'4/4')
-    signature : meter.TimeSignature
-    signature = main_score.getElementsByClass('TimeSignature')[0]
-    # number of beats per measure
-    beats = signature.numerator
-    # signature in quarterlength
-    beatduration = signature.denominator * QUARTER
-
-    # Percussion
-    rhythm01 = [BT, RS, BT, BT, BT, BT, RS]
-
-    pchord = percussion.PercussionChord()
-    pitch_list01 = ['C4', '', 'C4', 'C4', 'C4', 'C4', '']
-    durations01 = [1.0, 1.0, 1.5, 1.5, 1.0, 1.0, 1.0]
-
-    rtm_example02 = [BT, BT, RS, BT, BT, RS]
-    pitch_list02 = ['C4', 'C4', '', 'C4', 'C4', '']
-    durations02 = [1.5, 0.5, 0.5, 0.25, 0.25, 1]
-
-    rhythm_pattern = FOUR_RHYTHM
-
-    pitches_list = [["C4", "D4", "E4", "F4"],
-                    ["G4", "A4", "B4", "C5"]]
-
-
-    # Generate durations
-    # 1/32 note
-    duration_unit = 0.125
-    duration_factor = 8
-    duration_new = duration_unit * duration_factor
-
-
 def create_counterpoint():
 
     main_key = key.Key('C', 'major')
     main_scale = scale.MajorScale ('C')
 
     # Counterpoint
-    main_score = score_create('Counterpoint', main_key,'4/4')
+    main_score = score_create('Counterpoint', main_key,meter.TimeSignature('4/4'))
 
     length = 16  # Length of the counterpoint
-    voice1 = stream_create_random(length)
-    voice2 = stream_create_random(length)
+    voice1 = stream_create_random_from_list(length)
+    voice2 = stream_create_random_from_list(length)
 
+    # Keep generating until counterpoint reached
     while not stream_is_counterpoint(voice1, voice2):
-        voice2 = stream_create_random(length)
+        voice2 = stream_create_random_from_list(length)
 
     main_score.append(voice1)
     main_score.append(voice2)
@@ -397,7 +453,7 @@ def create_key_library (key_in: key.Key):
     # Create a score with library elements
 
     # Common chord progressions
-    main_score = score_create('Chord progressions and triads in C', key_in,'4/4')
+    main_score = score_create('Chord progressions and triads in C', key_in,meter.TimeSignature('4/4'))
 
     stream_lib = create_stream_triads_in_key(key_in, 1)
     part_lib = part_create_from_stream(stream_lib)
@@ -442,6 +498,7 @@ def create_stream_triads_in_key (key_in: key.Key ,  quarterlength_in: int = 1 ) 
 
 def main():
     # Main: create or transform
+    create_rhythm(4,4)
     create_new()
     #create_percussion()
     #create_balfolk()
@@ -456,7 +513,7 @@ Creation
 """
 def score_create ( title: str = 'New score',
                     key_in: key.Key = DEFAULT_KEY ,
-                   signature_in: str = DEFAULT_TIMESIGNATURE ,
+                   signature_in: meter.TimeSignature = DEFAULT_TIMESIGNATURE ,
                    bpm_in: int = DEFAULT_TEMPO)\
         -> stream.Score:
     # Create a stream to hold the musical elements
@@ -467,16 +524,17 @@ def score_create ( title: str = 'New score',
 
 # Set the time signature, key signature and tempo
     score_out.insert(0, key_in)
-    score_out.insert(0, meter.TimeSignature(signature_in))
+    score_out.insert(0, signature_in)
     score_out.insert(0, tempo.MetronomeMark(number=bpm_in))
 
     return score_out
 
 
-def stream_create_random(length,
-                        pitch_set: list = ('C4','D4','E4','F4','G4'),
-                        duration_set: list = (0.5, 1, 2)) -> stream.Stream:
-    # Create a random voice from a list of pitches and durations
+def stream_create_random_from_list(length,
+                        pitch_set: list[note.Pitch] = DEFAULT_PITCHES,
+                        duration_set: list[note.Duration] = DEFAULT_DURATIONS) -> stream.Stream:
+
+    # Create a random stream from a list of pitches and durations
     stream_out = stream.Stream()
     for i in range(length):
         stream_out.append(
@@ -546,8 +604,11 @@ def score_analyze (score_in: stream.Score):
         rn = roman.romanNumeralFromChord(chd01, key01)
         chd01.addLyric(str(rn.figure))
 
+    chordset.partName = "Chord analysis"
     score_in.append (chordset)
 
+    score_in.makeMeasures(inPlace=True)
+    post = analysis.metrical.labelBeatDepth(score_in)
 
 
 def score_show (score_in):
