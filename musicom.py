@@ -506,7 +506,7 @@ def main():
 
 #    create_genetic()
 #    create_key_library(key.Key('C', 'major'))
-
+#    tonerow()
 
 """
 Creation
@@ -556,7 +556,7 @@ def stream_is_counterpoint(stream1: stream.Stream, stream2: stream.Stream) -> bo
     for i in range(len(stream1) - 1):
         intv1 = interval.Interval(stream1[i], stream1[i + 1])
         intv2 = interval.Interval(stream2[i], stream2[i + 1])
-        if is_perfect_interval(intv1) and is_perfect_interval(intv2) and intv1.direction == intv2.direction:
+        if intv1.perfectable and intv2.perfectable and intv1.direction == intv2.direction:
             return False
 
     # Check for hidden parallels
@@ -632,6 +632,12 @@ def score_show (score_in):
 """
 ToneRow
 """
+
+def tonerow()
+    # Music 21 TwelveToneRow
+    chromaticRow = serial.TwelveToneRow(PITCHCLASSNUMBERS)
+    matrixObj = chromaticRow.matrix()
+
 
 def tonerow_create(tonerow_base: serial.ToneRow = serial.ToneRow(row=[0, 4, 7, 4]),
                    octave : int = 4
