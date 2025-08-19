@@ -145,20 +145,20 @@ lstHeptaScale = [lstScale[-x:]+lstScale[:-x] for x in range(NUMCHROMATICPITCHCLA
 arrHeptaScale = np.array(lstHeptaScale)
 
 # Permutations: ordered set
-pitchlist = lstIntHeptaDegree
-lstPermutations = list(itertools.permutations (pitchlist))
+itemlist = lstIntHeptaDegree
+lstPermutations = list(itertools.permutations (itemlist))
 # Combinations: of a set
-num_notes = 3
-lstCombinations = list(itertools.combinations (pitchList, num_notes))
+itemlist = CHROMATICPITCHCLASSNUMBERS
+num_items = 3
+lstCombinations = list(itertools.combinations (itemlist, num_items))
 
 
 """
 Music library - Chords in scales
-DEPRECATED: chords and scales are both patterns, that are related. 
+ARCHIVED: chords and scales are both patterns 
 """
 # Chord patterns in scale degrees
 #lstChordDegreePattern = (1,3,5,7,2,4,6) #Heptatonic
-
 #lstHeptaScaleChord = [lstChordDegreePattern[x:]+lstChordDegreePattern[:x] for x in range(HEPTA) ]
 #lstHeptaScaleChord.sort()
 #lstHeptaScaleChordDegreeIntervalPattern = [2,2,2,2,2,2,2] #Heptatonic

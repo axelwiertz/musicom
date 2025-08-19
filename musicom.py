@@ -255,7 +255,7 @@ def create_percussion ():
     # number of beats per measure
     beats = signature.numerator
     # signature in quarterlength
-    beatduration = signature.denominator * QUARTER
+    beatduration = signature.denominator / 4
 
     pchord = percussion.PercussionChord()
 
@@ -498,9 +498,9 @@ def create_stream_triads_in_key (key_in: key.Key ,  quarterlength_in: int = 1 ) 
 
 def main():
     # Main: create or transform
-    create_rhythm(4,4)
-    create_new()
-    #create_percussion()
+    #create_rhythm(4,4)
+    #create_new()
+    create_percussion()
     #create_balfolk()
     #create_counterpoint()
 
@@ -563,7 +563,7 @@ def stream_is_counterpoint(stream1: stream.Stream, stream2: stream.Stream) -> bo
     for i in range(len(stream1) - 1):
         intv1 = interval.Interval(stream1[i], stream1[i + 1])
         intv2 = interval.Interval(stream2[i], stream2[i + 1])
-        if is_perfect_interval(intv1) and is_perfect_interval(intv2) and intv1.direction == intv2.direction:
+        if intv1.perfectable and intv2.perfectable and intv1.direction == intv2.direction:
             return False
 
     # Check for crossing voices
@@ -633,9 +633,9 @@ def score_show (score_in):
 ToneRow
 """
 
-def tonerow()
+def tonerow():
     # Music 21 TwelveToneRow
-    chromaticRow = serial.TwelveToneRow(PITCHCLASSNUMBERS)
+    chromaticRow = serial.TwelveToneRow(CHROMATICPITCHCLASSNUMBERS)
     matrixObj = chromaticRow.matrix()
 
 
