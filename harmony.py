@@ -110,12 +110,40 @@ dctStyleScale = {
     'Bossa Nova' : ['C major']
 }
 
+
+"""
+Chord functions
+"""
+TONIC = 0
+DOMINANT = 1
+SUBDOMINANT = 2
+TONICPROLONG = 3
+
+chordfunctions = {  TONIC : (1),
+                    DOMINANT : (7,5),
+                    SUBDOMINANT : (4,2),
+                    TONICPROLONG : (3,6)
+                    }
+FLATVIICHORD = 'b7' # substitues 7 and has DOM, SUBDOM and PROLON functions
+
+chordfunctionprogressions = {
+    TONIC : [TONICPROLONG, DOMINANT, SUBDOMINANT],
+    DOMINANT : [TONIC],
+    SUBDOMINANT : [DOMINANT]
+}
+
+MINORPOP = (1, 7, 6, 7)
+BESTSELLER = (1,5,6,4)
+
+CYCLICFIFTHCHORDPROGRESSION = (1,4,7,3,6,2,5)
+
+
 '''
 Chord progression patterns in styles
 '''
 dctStyleChordPattern = {
     'Fantasy' :  [
-# I II VI II
+# 1 2 4 2
     ['I7', 'II7', 'VI7', 'II7'],
 # i II bi bIV
     ['i7', 'II7', 'isus', 'IVsus'],
@@ -130,7 +158,7 @@ dctStyleChordPattern = {
     ],
 
 'Bossa Nova' : [
-    ['ii', 'V', 'I'],
+    [2, 5, 1],
     ['Imaj7', 'II7', 'iim7']
     ],
 
@@ -145,15 +173,8 @@ dctStyleChordPattern = {
 
 }
 
-MINORPOP = (1, 7, 6,7)
-BESTSELLER = (1,5,6,4)
-
-CYCLICFIFTHCHORDPROGRESSION = (1,4,7,3,6,2,5)
-
-
-
 '''
-Voice movement
+Classic style - Voice movement
 '''
 
 # Melody scale degrees notes

@@ -41,11 +41,6 @@ DEFAULT_PITCHES = scale.MajorScale('C').pitches
 
 # Three voice score
 
-PART_A = 0
-PART_B = 1
-PART_C = 2
-PART_D = 3
-
 from genetic import Genome, selection_pair, single_point_crossover, mutation, generate_population, \
     sort_population
 
@@ -241,6 +236,14 @@ def create_rhythm(onsets: int = 4,      # beats
     return rhythm_interval_pattern
 
 
+def percussion():
+    main_score = load_and_analyze('midipercussion.mid')
+    main_score = load_and_analyze('midipercussionmidi.mid')
+    score_show(main_score)
+
+    main_score.append(clef.PercussionClef())
+
+
 def create_percussion ():
     # main_scale = scale.MajorScale ('C')
 
@@ -304,19 +307,22 @@ def berendans():
 
 
 
-def load_and_analyze ():
+def load_and_analyze (filename_in: str = 'in.mid') -> stream.Score:
     # Load and analyze a score
 
     # Load a score
-    main_score = converter.parse (MAIN_PATH + 'in.mid')
+    main_score = converter.parse (MAIN_PATH + filename_in)
 
     # Analyze score
     score_analyze (main_score)
 
+    return main_score
 
-def load_and_transform ():
+
+def load_and_transform (filename_in: str = 'in.mid',
+                        filename_out: str = 'out.mid'):
     # Load a score
-    main_score = converter.parse (MAIN_PATH + 'in.mid')
+    main_score = converter.parse (MAIN_PATH + filename_in)
 
 
     # Add to score
@@ -326,12 +332,8 @@ def load_and_transform ():
     main_score.insertAndShift([2, new_note_1, 2.75, new_note_2])
 
 
-    # Transform pitch sequence in tomerow
-    trw01 = serial.ToneRow()
-    trw02 = tonerow_transform (trw01)
-
     # Save score
-    main_score.write(fmt='midi', fp=MAIN_PATH + "out.mid")
+    main_score.write(fmt='midi', fp=MAIN_PATH + filename_out)
 
 
 def create_new ():
@@ -500,7 +502,11 @@ def main():
     # Main: create or transform
     #create_rhythm(4,4)
     #create_new()
-    create_percussion()
+    main_score = load_and_analyze('Sousta.mid')
+    score_show(main_score)
+
+    #percussion()
+    #create_percussion()
     #create_balfolk()
     #create_counterpoint()
 
@@ -582,7 +588,9 @@ def score_analyze (score_in: stream.Score):
     #score_in.show('abc')
     # Key
     key01 = score_in.analyze('key')
-    # print (key01)
+    print ('Imported :')
+    print (score_in)
+    print (' with key ' + str(key01))
 
     # Analyze parts ?
     #    for score_part in score_in.parts:
@@ -637,6 +645,11 @@ def tonerow():
     # Music 21 TwelveToneRow
     chromaticRow = serial.TwelveToneRow(CHROMATICPITCHCLASSNUMBERS)
     matrixObj = chromaticRow.matrix()
+
+    # Transform pitch sequence in tomerow
+    trw01 = serial.ToneRow()
+    trw02 = tonerow_transform (trw01)
+
 
 
 def tonerow_create(tonerow_base: serial.ToneRow = serial.ToneRow(row=[0, 4, 7, 4]),

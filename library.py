@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 # Music21 modules
 from music21 import (stream, note, key, scale, chord, interval,
                      roman, converter, instrument, serial, harmony,
-                     meter, tempo, metadata, percussion, analysis)
+                     meter, tempo, metadata, clef, percussion, analysis)
 from music21.common import pitchList
 
 
@@ -159,25 +159,6 @@ Scale level - Harmonic function and progression of chords in scales
 scaledegreepattern = (1,3,5,7,2,4,6) #Heptatonic
 lstHeptaScaleChord = [scaledegreepattern[x:]+scaledegreepattern[:x] for x in range(HEPTA) ]
 lstHeptaScaleChord.sort()
-TONIC = 0
-DOMINANT = 1
-SUBDOMINANT = 2
-TONICPROLONG = 3
-harmonicchordfunctions = {[TONIC, (1)],
-                     DOMINANT, (7,5),
-                     SUBDOMINANT, (4,2),
-                     TONICPROLONG, (3,6)}
-POPROCKCHORD = '7-' # substitues 7 and has DOM, SUBDOM and PROLON functions
-
-harmonicchordprogressions =\
-    {[TONIC, TONICPROLONG],
-    [TONIC, DOMINANT],
-    [TONIC, SUBDOMINANT],
-    [DOMINANT, TONIC],
-    [SUBDOMINANT, DOMINANT]}
-# not becessary
-#lstHeptaScaleChordDegreeIntervalPattern = [2,2,2,2,2,2,2] #Heptaton
-
 
 
 
