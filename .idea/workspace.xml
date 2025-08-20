@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="Sync">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/pythonProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/pythonProject.iml" afterDir="false" />
+    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="reference library">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rhythm.py" beforeDir="false" afterPath="$PROJECT_DIR$/rhythm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/song.py" beforeDir="false" afterPath="$PROJECT_DIR$/song.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/harmony.py" beforeDir="false" afterPath="$PROJECT_DIR$/harmony.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/library.py" beforeDir="false" afterPath="$PROJECT_DIR$/library.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/musicom.py" beforeDir="false" afterPath="$PROJECT_DIR$/musicom.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,46 +45,54 @@
   &quot;associatedIndex&quot;: 0
 }</component>
   <component name="ProjectId" id="2fsoNi8MZ63sg65UKwMVCFSzoUT" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+  <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.MIDI_import.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.Sound.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.composition.executor&quot;: &quot;Run&quot;,
-    &quot;Python.database.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.datastructure.executor&quot;: &quot;Run&quot;,
-    &quot;Python.examples.executor&quot;: &quot;Run&quot;,
-    &quot;Python.harmony.executor&quot;: &quot;Run&quot;,
-    &quot;Python.instruments.executor&quot;: &quot;Run&quot;,
-    &quot;Python.part01.executor&quot;: &quot;Run&quot;,
-    &quot;Python.rhythm.executor&quot;: &quot;Run&quot;,
-    &quot;Python.song.executor&quot;: &quot;Run&quot;,
-    &quot;Python.song002.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/92591/PycharmProjects/pythonProject&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.MIDI_import.executor": "Debug",
+    "Python.Sound.executor": "Debug",
+    "Python.balfolk.executor": "Debug",
+    "Python.canon-gen.executor": "Debug",
+    "Python.composition.executor": "Run",
+    "Python.cp.executor": "Run",
+    "Python.database.executor": "Debug",
+    "Python.datastructure.executor": "Debug",
+    "Python.examples.executor": "Run",
+    "Python.harmony.executor": "Run",
+    "Python.instruments.executor": "Run",
+    "Python.library.executor": "Run",
+    "Python.musicom.executor": "Run",
+    "Python.part01.executor": "Run",
+    "Python.rhythm.executor": "Run",
+    "Python.song.executor": "Run",
+    "Python.song002.executor": "Debug",
+    "Python.thread.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/92591/PycharmProjects/musicom",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;Python&quot;,
-      &quot;PLAIN_TEXT&quot;
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "Python",
+      "PLAIN_TEXT"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\92591\PycharmProjects\musicom" />
       <recent name="C:\Users\92591\PycharmProjects\pythonProject" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\92591\PycharmProjects\musicom" />
       <recent name="C:\Users\92591\PycharmProjects\pythonProject" />
       <recent name="C:\Users\92591\PycharmProjects\pythonProject\Soundfont" />
     </key>
@@ -93,7 +100,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-a5bc9544c897-aa17d162503b-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-243.23654.177" />
+        <option value="bundled-python-sdk-d9fa9deec7cb-d902c0275401-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-252.23892.515" />
       </set>
     </attachedChunks>
   </component>
@@ -105,382 +112,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1714599109129</updated>
-    </task>
-    <task id="LOCAL-00013" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1715376461863</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1715376461863</updated>
-    </task>
-    <task id="LOCAL-00014" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1715462087524</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1715462087524</updated>
-    </task>
-    <task id="LOCAL-00015" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1715958816071</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1715958816071</updated>
-    </task>
-    <task id="LOCAL-00016" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1716217876902</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1716217876902</updated>
-    </task>
-    <task id="LOCAL-00017" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1716584166780</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1716584166780</updated>
-    </task>
-    <task id="LOCAL-00018" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1716807714259</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1716807714259</updated>
-    </task>
-    <task id="LOCAL-00019" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1716832241164</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1716832241164</updated>
-    </task>
-    <task id="LOCAL-00020" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1716844070888</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1716844070889</updated>
-    </task>
-    <task id="LOCAL-00021" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1716896769795</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1716896769795</updated>
-    </task>
-    <task id="LOCAL-00022" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1716909365918</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1716909365918</updated>
-    </task>
-    <task id="LOCAL-00023" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1717621316348</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1717621316348</updated>
-    </task>
-    <task id="LOCAL-00024" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1717795432374</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1717795432374</updated>
-    </task>
-    <task id="LOCAL-00025" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1718139010471</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1718139010471</updated>
-    </task>
-    <task id="LOCAL-00026" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1718225524895</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1718225524895</updated>
-    </task>
-    <task id="LOCAL-00027" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1720786642251</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1720786642251</updated>
-    </task>
-    <task id="LOCAL-00028" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1721311312616</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1721311312616</updated>
-    </task>
-    <task id="LOCAL-00029" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1721400068746</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1721400068746</updated>
-    </task>
-    <task id="LOCAL-00030" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1722265754147</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1722265754147</updated>
-    </task>
-    <task id="LOCAL-00031" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1725113587454</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1725113587454</updated>
-    </task>
-    <task id="LOCAL-00032" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1727359911418</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1727359911418</updated>
-    </task>
-    <task id="LOCAL-00033" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1727437201624</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1727437201624</updated>
-    </task>
-    <task id="LOCAL-00034" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1727471240955</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1727471240955</updated>
-    </task>
-    <task id="LOCAL-00035" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1727871683186</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1727871683186</updated>
-    </task>
-    <task id="LOCAL-00036" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1727882859465</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1727882859465</updated>
-    </task>
-    <task id="LOCAL-00037" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1727895453790</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1727895453790</updated>
-    </task>
-    <task id="LOCAL-00038" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1728050377359</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1728050377359</updated>
-    </task>
-    <task id="LOCAL-00039" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1728303193486</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1728303193486</updated>
-    </task>
-    <task id="LOCAL-00040" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1728330212725</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1728330212725</updated>
-    </task>
-    <task id="LOCAL-00041" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1728404778015</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1728404778015</updated>
-    </task>
-    <task id="LOCAL-00042" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1728404824189</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1728404824189</updated>
-    </task>
-    <task id="LOCAL-00043" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1728923491523</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1728923491523</updated>
-    </task>
-    <task id="LOCAL-00044" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1729879066460</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1729879066460</updated>
-    </task>
-    <task id="LOCAL-00045" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1729879203558</created>
-      <option name="number" value="00045" />
-      <option name="presentableId" value="LOCAL-00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1729879203558</updated>
-    </task>
-    <task id="LOCAL-00046" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1730056195804</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1730056195804</updated>
-    </task>
-    <task id="LOCAL-00047" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1730222193574</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1730222193574</updated>
-    </task>
-    <task id="LOCAL-00048" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1730222419941</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1730222419941</updated>
-    </task>
-    <task id="LOCAL-00049" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1730321131146</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1730321131146</updated>
-    </task>
-    <task id="LOCAL-00050" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1730578256758</created>
-      <option name="number" value="00050" />
-      <option name="presentableId" value="LOCAL-00050" />
-      <option name="project" value="LOCAL" />
-      <updated>1730578256759</updated>
-    </task>
-    <task id="LOCAL-00051" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1731341151785</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1731341151785</updated>
-    </task>
-    <task id="LOCAL-00052" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1731430305065</created>
-      <option name="number" value="00052" />
-      <option name="presentableId" value="LOCAL-00052" />
-      <option name="project" value="LOCAL" />
-      <updated>1731430305066</updated>
-    </task>
-    <task id="LOCAL-00053" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1733754029102</created>
-      <option name="number" value="00053" />
-      <option name="presentableId" value="LOCAL-00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1733754029102</updated>
-    </task>
-    <task id="LOCAL-00054" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1733846570630</created>
-      <option name="number" value="00054" />
-      <option name="presentableId" value="LOCAL-00054" />
-      <option name="project" value="LOCAL" />
-      <updated>1733846570630</updated>
-    </task>
-    <task id="LOCAL-00055" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1734017342608</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1734017342608</updated>
-    </task>
-    <task id="LOCAL-00056" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1734471708566</created>
-      <option name="number" value="00056" />
-      <option name="presentableId" value="LOCAL-00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1734471708567</updated>
-    </task>
-    <task id="LOCAL-00057" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1734539076140</created>
-      <option name="number" value="00057" />
-      <option name="presentableId" value="LOCAL-00057" />
-      <option name="project" value="LOCAL" />
-      <updated>1734539076141</updated>
-    </task>
-    <task id="LOCAL-00058" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1735052096987</created>
-      <option name="number" value="00058" />
-      <option name="presentableId" value="LOCAL-00058" />
-      <option name="project" value="LOCAL" />
-      <updated>1735052096988</updated>
-    </task>
-    <task id="LOCAL-00059" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1735054023794</created>
-      <option name="number" value="00059" />
-      <option name="presentableId" value="LOCAL-00059" />
-      <option name="project" value="LOCAL" />
-      <updated>1735054023794</updated>
     </task>
     <task id="LOCAL-00060" summary="Sync">
       <option name="closed" value="true" />
@@ -498,7 +129,383 @@
       <option name="project" value="LOCAL" />
       <updated>1736353860352</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="Sync">
+      <option name="closed" value="true" />
+      <created>1739795701707</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1739795701707</updated>
+    </task>
+    <task id="LOCAL-00063" summary="Sync">
+      <option name="closed" value="true" />
+      <created>1746646637820</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1746646637821</updated>
+    </task>
+    <task id="LOCAL-00064" summary="Sync">
+      <option name="closed" value="true" />
+      <created>1746732856669</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1746732856670</updated>
+    </task>
+    <task id="LOCAL-00065" summary="Sync">
+      <option name="closed" value="true" />
+      <created>1746733063070</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1746733063070</updated>
+    </task>
+    <task id="LOCAL-00066" summary="Sync">
+      <option name="closed" value="true" />
+      <created>1746736240764</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1746736240764</updated>
+    </task>
+    <task id="LOCAL-00067" summary="Sync">
+      <option name="closed" value="true" />
+      <created>1747081198606</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1747081198606</updated>
+    </task>
+    <task id="LOCAL-00068" summary="Sync">
+      <option name="closed" value="true" />
+      <created>1748529250474</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1748529250474</updated>
+    </task>
+    <task id="LOCAL-00069" summary="Sync">
+      <option name="closed" value="true" />
+      <created>1749221414232</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1749221414232</updated>
+    </task>
+    <task id="LOCAL-00070" summary="Sync">
+      <option name="closed" value="true" />
+      <created>1749567289695</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1749567289696</updated>
+    </task>
+    <task id="LOCAL-00071" summary="Sync">
+      <option name="closed" value="true" />
+      <created>1749627013202</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1749627013203</updated>
+    </task>
+    <task id="LOCAL-00072" summary="Sync">
+      <option name="closed" value="true" />
+      <created>1749812900083</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1749812900083</updated>
+    </task>
+    <task id="LOCAL-00073" summary="Scratch files added">
+      <option name="closed" value="true" />
+      <created>1749813915026</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1749813915027</updated>
+    </task>
+    <task id="LOCAL-00074" summary="MusicPy archiving">
+      <option name="closed" value="true" />
+      <created>1749849203725</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1749849203725</updated>
+    </task>
+    <task id="LOCAL-00075" summary="MusicPy archiving">
+      <option name="closed" value="true" />
+      <created>1750067231104</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1750067231104</updated>
+    </task>
+    <task id="LOCAL-00076" summary="copy">
+      <option name="closed" value="true" />
+      <created>1750089318271</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1750089318273</updated>
+    </task>
+    <task id="LOCAL-00077" summary="copy">
+      <option name="closed" value="true" />
+      <created>1751873335319</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1751873335321</updated>
+    </task>
+    <task id="LOCAL-00078" summary="copy">
+      <option name="closed" value="true" />
+      <created>1751902539839</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1751902539840</updated>
+    </task>
+    <task id="LOCAL-00079" summary="copy">
+      <option name="closed" value="true" />
+      <created>1752244653158</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1752244653159</updated>
+    </task>
+    <task id="LOCAL-00080" summary="copy">
+      <option name="closed" value="true" />
+      <created>1752597017291</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1752597017292</updated>
+    </task>
+    <task id="LOCAL-00081" summary="copy">
+      <option name="closed" value="true" />
+      <created>1753105746887</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1753105746888</updated>
+    </task>
+    <task id="LOCAL-00082" summary="upodate">
+      <option name="closed" value="true" />
+      <created>1753105779466</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1753105779466</updated>
+    </task>
+    <task id="LOCAL-00083" summary="upodate">
+      <option name="closed" value="true" />
+      <created>1753105867662</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1753105867662</updated>
+    </task>
+    <task id="LOCAL-00084" summary="upodate">
+      <option name="closed" value="true" />
+      <created>1753199417522</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1753199417522</updated>
+    </task>
+    <task id="LOCAL-00085" summary="update">
+      <option name="closed" value="true" />
+      <created>1753199440630</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1753199440630</updated>
+    </task>
+    <task id="LOCAL-00086" summary="update">
+      <option name="closed" value="true" />
+      <created>1753288313111</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1753288313111</updated>
+    </task>
+    <task id="LOCAL-00087" summary="update">
+      <option name="closed" value="true" />
+      <created>1753888899760</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1753888899760</updated>
+    </task>
+    <task id="LOCAL-00088" summary="update">
+      <option name="closed" value="true" />
+      <created>1753945267675</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1753945267675</updated>
+    </task>
+    <task id="LOCAL-00089" summary="delete rhythm.py">
+      <option name="closed" value="true" />
+      <created>1753973285979</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1753973285979</updated>
+    </task>
+    <task id="LOCAL-00090" summary="delete song**.py">
+      <option name="closed" value="true" />
+      <created>1754064185901</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1754064185901</updated>
+    </task>
+    <task id="LOCAL-00091" summary="rename to library.py">
+      <option name="closed" value="true" />
+      <created>1754313509061</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1754313509062</updated>
+    </task>
+    <task id="LOCAL-00092" summary="rename to library.py">
+      <option name="closed" value="true" />
+      <created>1754320439490</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1754320439490</updated>
+    </task>
+    <task id="LOCAL-00093" summary="simplification">
+      <option name="closed" value="true" />
+      <created>1754344529616</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1754344529616</updated>
+    </task>
+    <task id="LOCAL-00094" summary="integration">
+      <option name="closed" value="true" />
+      <created>1754380628691</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1754380628691</updated>
+    </task>
+    <task id="LOCAL-00095" summary="Creation routines">
+      <option name="closed" value="true" />
+      <created>1754394920349</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1754394920350</updated>
+    </task>
+    <task id="LOCAL-00096" summary="Library routines">
+      <option name="closed" value="true" />
+      <created>1754409646080</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1754409646081</updated>
+    </task>
+    <task id="LOCAL-00097" summary="Library routines">
+      <option name="closed" value="true" />
+      <created>1754475392543</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1754475392543</updated>
+    </task>
+    <task id="LOCAL-00098" summary="note transformation">
+      <option name="closed" value="true" />
+      <created>1754513516205</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1754513516206</updated>
+    </task>
+    <task id="LOCAL-00099" summary="note transformation">
+      <option name="closed" value="true" />
+      <created>1754579581959</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1754579581960</updated>
+    </task>
+    <task id="LOCAL-00100" summary="chord transformation">
+      <option name="closed" value="true" />
+      <created>1754665035636</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1754665035637</updated>
+    </task>
+    <task id="LOCAL-00101" summary="chord transformation">
+      <option name="closed" value="true" />
+      <created>1754685785797</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1754685785798</updated>
+    </task>
+    <task id="LOCAL-00102" summary="include generator in musicom">
+      <option name="closed" value="true" />
+      <created>1754916296635</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1754916296635</updated>
+    </task>
+    <task id="LOCAL-00103" summary="include generator in musicom">
+      <option name="closed" value="true" />
+      <created>1755018088241</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1755018088242</updated>
+    </task>
+    <task id="LOCAL-00104" summary="rhythm create">
+      <option name="closed" value="true" />
+      <created>1755116680402</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1755116680402</updated>
+    </task>
+    <task id="LOCAL-00105" summary="rhythm create">
+      <option name="closed" value="true" />
+      <created>1755262885724</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1755262885725</updated>
+    </task>
+    <task id="LOCAL-00106" summary="reference library">
+      <option name="closed" value="true" />
+      <created>1755626595226</created>
+      <option name="number" value="00106" />
+      <option name="presentableId" value="LOCAL-00106" />
+      <option name="project" value="LOCAL" />
+      <updated>1755626595227</updated>
+    </task>
+    <task id="LOCAL-00107" summary="reference library">
+      <option name="closed" value="true" />
+      <created>1755634139143</created>
+      <option name="number" value="00107" />
+      <option name="presentableId" value="LOCAL-00107" />
+      <option name="project" value="LOCAL" />
+      <updated>1755634139147</updated>
+    </task>
+    <task id="LOCAL-00108" summary="reference library">
+      <option name="closed" value="true" />
+      <created>1755676682867</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1755676682867</updated>
+    </task>
+    <option name="localTasksCounter" value="109" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -515,7 +522,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/main" />
+                        <option value="main" />
                       </list>
                     </value>
                   </entry>
@@ -535,45 +542,32 @@
     <MESSAGE value="Reorganized" />
     <MESSAGE value="Pieces and DAW" />
     <MESSAGE value="Sync" />
-    <option name="LAST_COMMIT_MESSAGE" value="Sync" />
+    <MESSAGE value="Scratch files added" />
+    <MESSAGE value="MusicPy archiving" />
+    <MESSAGE value="copy" />
+    <MESSAGE value="upodate" />
+    <MESSAGE value="update" />
+    <MESSAGE value="delete rhythm.py" />
+    <MESSAGE value="delete song**.py" />
+    <MESSAGE value="rename to library.py" />
+    <MESSAGE value="simplification" />
+    <MESSAGE value="integration" />
+    <MESSAGE value="Creation routines" />
+    <MESSAGE value="Library routines" />
+    <MESSAGE value="note transformation" />
+    <MESSAGE value="chord transformation" />
+    <MESSAGE value="include generator in musicom" />
+    <MESSAGE value="rhythm create" />
+    <MESSAGE value="reference library" />
+    <option name="LAST_COMMIT_MESSAGE" value="reference library" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Sound.py</url>
-          <line>77</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Sound.py</url>
-          <line>81</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Sound.py</url>
-          <line>126</line>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/MIDI_import.py</url>
-          <line>74</line>
-          <option name="timeStamp" value="19" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/song002.py</url>
-          <line>23</line>
+          <url>file://$PROJECT_DIR$/musicom.py</url>
+          <line>251</line>
           <option name="timeStamp" value="21" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/MIDI_import.py</url>
-          <line>66</line>
-          <option name="timeStamp" value="22" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/MIDI_import.py</url>
-          <line>54</line>
-          <option name="timeStamp" value="23" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
