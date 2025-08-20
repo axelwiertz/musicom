@@ -117,9 +117,9 @@ lstScaleBinary = [interval_to_binary(lstScaleInterval[x]) for x in range(len(lst
 
 
 """
-Music library - Diatonic scale patterns: pentatonic and heptatonic
+Interval patterns - Diatonic cyclic patterns: pentatonic and heptatonic
 """
-# Pentatonic (5 pitch class) scale
+# Pentatonic
 PENTA = 5 # Number of pitch classes in a pentatonic scale
 lstIntPentaDegree = tuple(range(1, PENTA + 1)) # Pentatonic scale degree number
 lstPentaScaleIntervalPattern = (2,2,3,2,3) # Pentatonic interval pattern
@@ -152,16 +152,31 @@ itemlist = CHROMATICPITCHCLASSNUMBERS
 num_items = 3
 lstCombinations = list(itertools.combinations (itemlist, num_items))
 
+"""
+Scale level - Harmonic function and progression of chords in scales
+"""
+# Chord patterns in heptatonic scale degrees
+scaledegreepattern = (1,3,5,7,2,4,6) #Heptatonic
+lstHeptaScaleChord = [scaledegreepattern[x:]+scaledegreepattern[:x] for x in range(HEPTA) ]
+lstHeptaScaleChord.sort()
+TONIC = 0
+DOMINANT = 1
+SUBDOMINANT = 2
+TONICPROLONG = 3
+harmonicchordfunctions = {[TONIC, (1)],
+                     DOMINANT, (7,5),
+                     SUBDOMINANT, (4,2),
+                     TONICPROLONG, (3,6)}
+POPROCKCHORD = '7-' # substitues 7 and has DOM, SUBDOM and PROLON functions
 
-"""
-Music library - Chords in scales
-ARCHIVED: chords and scales are both patterns 
-"""
-# Chord patterns in scale degrees
-#lstChordDegreePattern = (1,3,5,7,2,4,6) #Heptatonic
-#lstHeptaScaleChord = [lstChordDegreePattern[x:]+lstChordDegreePattern[:x] for x in range(HEPTA) ]
-#lstHeptaScaleChord.sort()
-#lstHeptaScaleChordDegreeIntervalPattern = [2,2,2,2,2,2,2] #Heptatonic
+harmonicchordprogressions =\
+    {[TONIC, TONICPROLONG],
+    [TONIC, DOMINANT],
+    [TONIC, SUBDOMINANT],
+    [DOMINANT, TONIC],
+    [SUBDOMINANT, DOMINANT]}
+# not becessary
+#lstHeptaScaleChordDegreeIntervalPattern = [2,2,2,2,2,2,2] #Heptaton
 
 
 
@@ -193,6 +208,18 @@ def show_circle(num_parts: int = 12, labels : list = CHROMATICPITCHCLASSTEXTS, t
 
     # Show the plot
     plt.show()
+
+def show_plot(yvalues: list):
+    # Plot
+    # Note that even in the OO-style, we use `.pyplot.figure` to create the Figure.
+    fig, ax = plt.subplots(figsize=(5, 2.7), layout='constrained')
+    ax.plot(yvalues, label='pitch frequency') # Plot some data on the Axes.
+    ax.set_xlabel('Pitch number')  # Add an x-label to the Axes.
+    ax.set_ylabel('Frequency')  # Add a y-label to the Axes.
+    ax.set_title("Pitches")  # Add a title to the Axes.
+    ax.legend()  # Add a legend.
+    plt.show()
+
 
 
 """
@@ -235,8 +262,9 @@ Rhythm intervals
 """
 
 
+
 """
-Tools
+Music 21 Tools for streams
 """
 
 def part_create_from_stream (stream_in: stream.Stream,
@@ -271,24 +299,13 @@ def part_create(pitches : list[str],
 
     return part_out
 
+
 def main():
     show_circle(NUMCHROMATICPITCHCLASS, CHROMATICPITCHCLASSTEXTS, 'Pitch class circle')
 
 
 if __name__ == '__main__':
     main()
-
-
-
-# Plot
-# Note that even in the OO-style, we use `.pyplot.figure` to create the Figure.
-#fig, ax = plt.subplots(figsize=(5, 2.7), layout='constrained')
-#ax.plot(srsPitchFreq.values, label='pitch frequency') # Plot some data on the Axes.
-#ax.set_xlabel('Pitch number')  # Add an x-label to the Axes.
-#ax.set_ylabel('Frequency')  # Add a y-label to the Axes.
-#ax.set_title("Pitches")  # Add a title to the Axes.
-#ax.legend()  # Add a legend.
-#plt.show()
 
 
 

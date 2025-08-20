@@ -137,8 +137,20 @@ dctStyleChordPattern = {
 'Lounge/Jazz' : [
     [4, 2, 5, 1],
     [7, 3, 6, 2, 5, 1]
+    ],
+
+'Flamenco' : [
+    [1, 7, 6, 5] # descending
     ]
+
 }
+
+MINORPOP = (1, 7, 6,7)
+BESTSELLER = (1,5,6,4)
+
+CYCLICFIFTHCHORDPROGRESSION = (1,4,7,3,6,2,5)
+
+
 
 '''
 Voice movement
