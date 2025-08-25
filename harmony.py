@@ -138,6 +138,9 @@ BESTSELLER = (1,5,6,4)
 CYCLICFIFTHCHORDPROGRESSION = (1,4,7,3,6,2,5)
 
 
+
+
+
 '''
 Chord progression patterns in styles
 '''

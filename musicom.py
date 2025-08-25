@@ -5,11 +5,11 @@ import copy
 import random
 import platform
 from datetime import datetime
-
+from collections import defaultdict
 
 #import sound
 
-# Musical data
+# Musical datastructures and tools
 from library import *
 # Harmony rules
 from harmony import *
@@ -21,23 +21,6 @@ from showscore import show
 """
 Composition - Structure
 """
-# Main score
-MAIN_PATH = 'C:\\temp\\Music\\'
-DEFAULT_KEY = key.Key('C', 'major')
-DEFAULT_SCALE = scale.MajorScale('C')
-
-DEFAULT_TEMPO = 100
-DEFAULT_TIMESIGNATURE = meter.TimeSignature('4/4')
-
-QUARTERLENGTH1 = 2
-QUARTERLENGTH2 = 2
-QUARTERLENGTH4 = 1
-QUARTERLENGTH8 = 0.5
-QUARTERLENGTH16 = 0.25
-QUARTERLENGTH32 = 0.125
-
-DEFAULT_DURATIONS = [[note.Duration(d)] for d in [QUARTERLENGTH8, QUARTERLENGTH4, QUARTERLENGTH2]]
-DEFAULT_PITCHES = scale.MajorScale('C').pitches
 
 # Three voice score
 
@@ -46,6 +29,36 @@ from genetic import Genome, selection_pair, single_point_crossover, mutation, ge
 
 BITS_PER_NOTE = 4
 
+
+
+def create_markov ():
+    # Markov chain of transitions
+
+    # Example training tokens: list of (pitch_name_or_rest, dur)
+    train = [('C4', 1), ('E4', 1), ('G4', 1), ('C5', 1), ('E4', 1), ('G4', 1), ('rest', 1)]
+
+    # build transition dict for pitches
+    trans = defaultdict(list)
+    for a, b in zip(train, train[1:]):
+        trans[a[0]].append(b[0])
+
+    def sample_markov(start, length=16):
+        out = [start]
+        cur = start
+        for _ in range(length - 1):
+            choices = trans.get(cur) or list(trans.keys())
+            cur = random.choice(choices)
+            out.append(cur)
+        return out
+
+    gen_pitches = sample_markov('C4', length=16)
+    # fixed duration 1 quarter for simplicity
+    part = stream.Part()
+    for p in gen_pitches:
+        if p == 'rest':
+            part.append(note.Rest(quarterLength=1))
+        else:
+            part.append(note.Note(p, quarterLength=1))
 
 
 def genome_to_stream (genome: Genome,
@@ -151,14 +164,14 @@ def create_genetic():
     score_analyze (main_score)
     score_show(main_score)
     # Save score
-    main_score.write(fmt='midi', fp=MAIN_PATH + title +".mid")
+    main_score.write(fmt='midi', fp=DEFAULT_PATH + title +".mid")
 
 
 def euclidian_rhythm (onsets: int, timesteps: int ) -> list :
 
     # Every onset gets a timestep interval
     base_timestep_interval = timesteps // onsets
-    # And the remaining timesteps are a separate time step intervel
+    # And the remaining timesteps are a separate time step interval
     remaining_timesteps = timesteps % onsets
 
     rhythm = []
@@ -205,7 +218,8 @@ def create_rhythm(onsets: int = 4,      # beats
     main_timesignature = meter.TimeSignature(ratiostring='6/8')
     main_beatcount =  main_timesignature.beatCount
 
-    terminal = meter.MeterTerminal(beatCount=main_beatcount)
+    # Meter change separator
+    #terminal = meter.MeterTerminal(beatCount=main_beatcount)
     # ts.ratioString '3/4'
     # ts.numerator 3
     # ts.beatCountName 'Triple'
@@ -226,9 +240,9 @@ def create_rhythm(onsets: int = 4,      # beats
     duration_factor = 8
     duration_new = QUARTERLENGTH32 * duration_factor
 
-    rhythm_pitch = note.Pitch ('C4')
     for i in rhythm_interval_pattern:
-        rhythm_note = note.Note(rhythm_pitch,quarterLength=note.Duration(timestep_duration * i))
+        rhythm_note = note.Note(note.Pitch ('C4'),
+                                quarterLength=note.Duration(timestep_duration * i))
         rhythm_part.append(rhythm_note)
 
     score_show(main_score)
@@ -239,9 +253,26 @@ def create_rhythm(onsets: int = 4,      # beats
 def percussion():
     main_score = load_and_analyze('midipercussion.mid')
     main_score = load_and_analyze('midipercussionmidi.mid')
+    main_score.append(clef.PercussionClef())
+
     score_show(main_score)
 
-    main_score.append(clef.PercussionClef())
+
+    main_score = score_create('Percussion', DEFAULT_KEY, DEFAULT_TIMESIGNATURE, 100)
+
+    main_score.insert(0,
+                      create_percussion_part())
+
+    # Write to MIDI
+    mf = midi.translate.streamToMidiFile(main_score)
+    mf.open(DEFAULT_PATH+'percussion_example.mid', 'wb')
+    mf.write()
+    mf.close()
+
+    print("Wrote percussion_example.mid")
+
+
+
 
 
 def create_percussion ():
@@ -249,10 +280,10 @@ def create_percussion ():
 
 
     # Percussion
-    main_key = key.Key('C', 'major')
+    main_key = DEFAULT_KEY
 
 
-    main_score = score_create('Percussion',main_key,meter.TimeSignature('4/4'))
+    main_score = score_create('Percussion',main_key, DEFAULT_TIMESIGNATURE)
     signature : meter.TimeSignature
     signature = main_score.getElementsByClass('TimeSignature')[0]
     # number of beats per measure
@@ -264,22 +295,59 @@ def create_percussion ():
 
 
     # Harmonic rhythm
-    rhythm01 = [BT, RS, BT, BT, BT, BT, RS]
-    rhythm_intervals = [0,2,1,1,1]
-    rhythm_beats_per_measure = 4
+    onset_intervals01 = [1,1,0.5,0.5,1]
 
-    pitch_list01 = ['C4', '', 'C4', 'C4', 'C4', 'C4', '']
-    durations01 = [1.0, 1.0, 1.5, 1.5, 1.0, 1.0, 1.0]
+    onset_intervals02 = [2, 1.5, 1.5, 1.0, 2.0]
+    onset_intervals03 = [1.5, 1, 0.25, 1.25]
 
-    rtm_example02 = [BT, BT, RS, BT, BT, RS]
-    pitch_list02 = ['C4', 'C4', '', 'C4', 'C4', '']
-    durations02 = [1.5, 0.5, 0.5, 0.25, 0.25, 1]
-
-    rhythm_pattern = FOUR_RHYTHM
+    onset_pattern = FOUR_RHYTHM
 
     pitches_list = [["C4", "D4", "E4", "F4"],
                     ["G4", "A4", "B4", "C5"]]
 
+
+def create_percussion_part() -> stream.Part:
+
+    perc_part = stream.Part()
+    # Set to percussion instrument (General MIDI channel 10)
+    perc_part.insert(0,
+                     instrument.Woodblock())  # music21 uses an unpitched instrument class; channel will be set by MIDI export
+
+
+    # Helper to create an unpitched percussion note by MIDI pitch number
+    # General MIDI percussion mapping (channel 10): 35-81 common drums
+    # Common mappings used here: 36 = Bass Drum 1, 38 = Acoustic Snare, 42 = Closed Hi-Hat
+    def perc_note(midi_pitch, dur=0.5, velocity=100):
+#        n = note.Unpitched()
+        n = note.Note(pitch=midi_pitch, duration=dur)
+        # set volume (velocity) for MIDI export
+        n.volume.velocity = velocity
+        return n
+
+    # Build a 4-bar pattern (4/4), subdivided into eighth notes
+    pattern = []
+    # Bar template: BD on 1 & (quarter = 1, 3), snare on 2 & 4, hh on every eighth
+    for bar in range(4):
+        # eight subdivisions: indices 0..7 (each eighth note = 0.5 quarterLength)
+        for i in range(8):
+            if i % 2 == 0:  # downbeats (quarter boundaries)
+                # Bass drum on beats 1 and 3 (i = 0 and 4)
+                if i in (0, 4):
+                    pattern.append(perc_note(36, dur=0.5, velocity=110))
+                # Snare on beats 2 and 4 (i = 2 and 6)
+                if i in (2, 6):
+                    pattern.append(perc_note(38, dur=0.5, velocity=110))
+            # Hi-hat on every eighth
+            pattern.append(perc_note(42, dur=0.5, velocity=70))
+
+    # Combine pattern into the part (they will stack as simultaneous events if same offset used;
+    # we append and set offsets incrementally)
+    offset = 0.0
+    for pn in pattern:
+        perc_part.insert(offset, pn)
+        offset += pn.duration.quarterLength
+
+    return perc_part
 
 
 def big_yellow_taxi():
@@ -311,7 +379,7 @@ def load_and_analyze (filename_in: str = 'in.mid') -> stream.Score:
     # Load and analyze a score
 
     # Load a score
-    main_score = converter.parse (MAIN_PATH + filename_in)
+    main_score = converter.parse (DEFAULT_PATH + filename_in)
 
     # Analyze score
     score_analyze (main_score)
@@ -322,7 +390,7 @@ def load_and_analyze (filename_in: str = 'in.mid') -> stream.Score:
 def load_and_transform (filename_in: str = 'in.mid',
                         filename_out: str = 'out.mid'):
     # Load a score
-    main_score = converter.parse (MAIN_PATH + filename_in)
+    main_score = converter.parse (DEFAULT_PATH + filename_in)
 
 
     # Add to score
@@ -333,7 +401,7 @@ def load_and_transform (filename_in: str = 'in.mid',
 
 
     # Save score
-    main_score.write(fmt='midi', fp=MAIN_PATH + filename_out)
+    main_score.write(fmt='midi', fp=DEFAULT_PATH + filename_out)
 
 
 def create_new ():
@@ -355,22 +423,29 @@ def create_new ():
     pitches_list = [['C5', 'D5', 'E5', 'F5', 'G5', 'A5', 'B4', 'C5'],
                     ['C4', 'E4', 'G4', '', 'F4', 'A4', 'C5', ''],
                     ['C3', 'G3']]
+    # Durations
     durations_list = [[1, 1, 1, 1, 1, 1, 1, 1],
-                      [1, 1, 1, 1, 1, 1, 1, 1]]
+                      [1, 1, 1, 1, 1, 1, 1, 1],
+                      [2,2]]
+    # Onset intervals (harmonic rhythm)
+    onset_intervals_list = [[0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5],
+                  [0.5,0.5,1,0.5,0.5,1],
+                  [2,2]]
+    # Instruments
     instruments_list = [instrument.Flute(),
                         instrument.Violin(),
                         instrument.Bass()]
 
     for i in range (0, len(pitches_list)-1):
         main_score.append(
-            part_create(pitches_list [i], durations_list[i], instruments_list[i])
+            part_create(pitches_list [i], durations_list[i], onset_intervals_list [i], instruments_list[i])
         )
 
     # Analyze score
     score_analyze (main_score)
     score_show(main_score)
     # Save score
-    main_score.write(fmt='midi', fp=MAIN_PATH + "new.mid")
+    main_score.write(fmt='midi', fp=DEFAULT_PATH + "new.mid")
 
 
 def create_balfolk ():
@@ -420,7 +495,7 @@ def create_balfolk ():
     score_analyze (main_score)
     score_show(main_score)
     # Save score
-    main_score.write(fmt='midi', fp=MAIN_PATH + "balfolk.mid")
+    main_score.write(fmt='midi', fp=DEFAULT_PATH + "balfolk.mid")
 
 
     return
@@ -448,7 +523,7 @@ def create_counterpoint():
     score_analyze (main_score)
     score_show(main_score)
     # Save score
-    main_score.write(fmt='midi', fp=MAIN_PATH + "counterpoint.mid")
+    main_score.write(fmt='midi', fp=DEFAULT_PATH + "counterpoint.mid")
 
 
 def create_key_library (key_in: key.Key):
@@ -468,10 +543,10 @@ def create_key_library (key_in: key.Key):
     score_analyze(main_score)
     score_show(main_score)
     # Save score
-    main_score.write(fmt='midi', fp=MAIN_PATH + 'chordlibrary_in_key_' + key_in.name +'.mid')
+    main_score.write(fmt='midi', fp=DEFAULT_PATH + 'chordlibrary_in_key_' + key_in.name +'.mid')
 
 
-def create_stream_chords_in_key (chord_progressions: list, key_in: key.Key ,  quarterlength_in: int = 1 ) -> stream.Stream:
+def create_stream_chords_in_key (chord_progressions: list, key_in: key.Key ,  quarterlength_in: int = 4 ) -> stream.Stream:
     # Stream of chord progression patterns in a key
     stream_out = stream.Stream()
     for i in range(1, len(chord_progressions)-1):
@@ -484,7 +559,7 @@ def create_stream_chords_in_key (chord_progressions: list, key_in: key.Key ,  qu
     return stream_out
 
 
-def create_stream_triads_in_key (key_in: key.Key ,  quarterlength_in: int = 1 ) -> stream.Stream:
+def create_stream_triads_in_key (key_in: key.Key ,  quarterlength_in: int = 4 ) -> stream.Stream:
     # Stream of all triads in a key
     stream_out = stream.Stream()
 
@@ -560,15 +635,15 @@ def stream_is_counterpoint(stream1: stream.Stream, stream2: stream.Stream) -> bo
 
     # Check for parallel perfect intervals
     for i in range(len(stream1) - 1):
-        intv1 = interval.Interval(stream1[i], stream1[i + 1])
-        intv2 = interval.Interval(stream2[i], stream2[i + 1])
+        intv1 = interval.DiatonicInterval(stream1[i], stream1[i + 1])
+        intv2 = interval.DiatonicInterval(stream2[i], stream2[i + 1])
         if intv1.perfectable and intv2.perfectable and intv1.direction == intv2.direction:
             return False
 
     # Check for hidden parallels
     for i in range(len(stream1) - 1):
-        intv1 = interval.Interval(stream1[i], stream1[i + 1])
-        intv2 = interval.Interval(stream2[i], stream2[i + 1])
+        intv1 = interval.DiatonicInterval(stream1[i], stream1[i + 1])
+        intv2 = interval.DiatonicInterval(stream2[i], stream2[i + 1])
         if intv1.perfectable and intv2.perfectable and intv1.direction == intv2.direction:
             return False
 

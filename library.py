@@ -11,21 +11,11 @@ import matplotlib.pyplot as plt
 # Music21 modules
 from music21 import (stream, note, key, scale, chord, interval,
                      roman, converter, instrument, serial, harmony,
-                     meter, tempo, metadata, clef, percussion, analysis)
-from music21.common import pitchList
+                     meter, tempo, metadata, clef, percussion, midi, analysis)
 
+# Defaults
+DEFAULT_PATH = 'C:\\temp\\Music\\'
 
-def interval_to_binary (intervals):
-    # Convert a list of intervals to a binary mask with sequential degree numbers
-    # Example [2, 3] -> [1, 0, 2, 0, 0, 3]
-    binary_with_degrees = []
-    degree = 1
-    for x in intervals:
-        binary_with_degrees.append(degree)
-        degree += 1
-        for y in range(1,x):
-            binary_with_degrees.append(0)
-    return binary_with_degrees
 
 
 '''
@@ -53,16 +43,8 @@ CHROMATICPITCHCLASSNUMBERLIST = (OCTAVES * CHROMATICPITCHCLASSNUMBERS)
 CHROMATICPITCHFREQUENCYLIST = tuple(2 ** ((n - MIDIPITCHNUM_A4) / NUMCHROMATICPITCHCLASS) * FREQUENCY_A4
                                     for n in range(NUMPITCH)) # Pitch frequencies
 
-# Table of all absolute chromatic data along pitch number set
-dfPitch = pd.DataFrame ([PITCHMIDINUMBERLIST,
-                         CHROMATICPITCHCLASSNUMBERLIST,
-                         CHROMATICPITCHCLASSTEXTLIST,
-                         CHROMATICPITCHFREQUENCYLIST]).transpose()
-dfPitch.columns=['Nr','ClassNr','ClassChr', 'Freq']
-
-
 """
-Music library - Pitch ranges of instruments
+Music library - Instruments
 """
 instr1 = instrument.Piano
 instr2 = instrument.Guitar
@@ -71,8 +53,15 @@ instrPerc = instrument.Percussion
 
 
 """
-Music library - Diatonic interval classes
+Music library - Diatonic data
 """
+# Constants
+PENTA = 5 # Number of pitch classes in a pentatonic scale
+HEPTA = 7 # Number of pitch classes in a heptatonic scale
+
+DEFAULT_KEY = key.Key('C', 'major')
+DEFAULT_SCALE = scale.MajorScale('C')
+
 
 # Diatonic Interval classes
 perfectintervallist = [interval.DiatonicInterval(interval.Specifier.PERFECT, 1),
@@ -86,6 +75,17 @@ intervallist = [interval.DiatonicInterval(interval.Specifier.MAJOR, 2),
                 ]
 IMPERFECTINTERVALS = ('M2', 'm3', 'M3', 'm6', 'M6', 'm7', 'M7')
 
+def interval_to_binary (intervals):
+    # Convert a list of intervals to a binary mask with sequential degree numbers
+    # Example [2, 3] -> [1, 0, 2, 0, 0, 3]
+    binary_with_degrees = []
+    degree = 1
+    for x in intervals:
+        binary_with_degrees.append(degree)
+        degree += 1
+        for y in range(1,x):
+            binary_with_degrees.append(0)
+    return binary_with_degrees
 
 
 '''
@@ -120,28 +120,27 @@ lstScaleBinary = [interval_to_binary(lstScaleInterval[x]) for x in range(len(lst
 Interval patterns - Diatonic cyclic patterns: pentatonic and heptatonic
 """
 # Pentatonic
-PENTA = 5 # Number of pitch classes in a pentatonic scale
 lstIntPentaDegree = tuple(range(1, PENTA + 1)) # Pentatonic scale degree number
 lstPentaScaleIntervalPattern = (2,2,3,2,3) # Pentatonic interval pattern
 lstPentaScaleInterval = tuple(lstPentaScaleIntervalPattern[x:]+lstPentaScaleIntervalPattern[:x] for x in range(PENTA) )
-lstPentaScaleBinary = [interval_to_binary(lstPentaScaleInterval[x]) for x in range(len(lstPentaScaleInterval))] # Heptatonic binary patterns
+lstPentaScaleBinaryDiatonicMask = [interval_to_binary(lstPentaScaleInterval[x]) for x in range(len(lstPentaScaleInterval))] # Heptatonic binary patterns
 
 # Heptatonic (7 pitch class) scale
 scale01 = scale.ConcreteScale()
-HEPTA = 7 # Number of pitch classes in a heptatonic scale
 lstIntHeptaDegree = tuple(range(1, HEPTA + 1)) # Heptatonic scale degree number
 lstHeptaScaleIntervalPattern = (2,2,1,2,2,2,1) # Heptatonic interval pattern
 # Modes
 lstHeptaScaleInterval = tuple(lstHeptaScaleIntervalPattern[x:]+lstHeptaScaleIntervalPattern[:x] for x in range(HEPTA) )
-lstHeptaScaleBinary = [interval_to_binary(lstHeptaScaleInterval[x]) for x in range(len(lstHeptaScaleInterval))] # Heptatonic binary patterns
+# Diatonic heptatonic binary masks for chromatic
+lstHeptaScaleBinaryDiatonicMask = [interval_to_binary(lstHeptaScaleInterval[x]) for x in range(len(lstHeptaScaleInterval))]
 
-# Scale pitch mask
+# Diatonic pitch masks for modes
 # Major
-lstScale = OCTAVES * lstHeptaScaleBinary [0] # C scale pitch mask
+lstScaleMajor = OCTAVES * lstHeptaScaleBinaryDiatonicMask [0] # C scale pitch mask
 # Minor
-lstScale1 = OCTAVES * lstHeptaScaleBinary [5] # a scale pitch mask
+lstScaleMinor = OCTAVES * lstHeptaScaleBinaryDiatonicMask [5] # a minor scale pitch mask
 
-lstHeptaScale = [lstScale[-x:]+lstScale[:-x] for x in range(NUMCHROMATICPITCHCLASS) ] # All major scale pitch mask
+lstHeptaScale = [lstScaleMajor[-x:]+lstScaleMajor[:-x] for x in range(NUMCHROMATICPITCHCLASS) ] # All major scale pitch mask
 arrHeptaScale = np.array(lstHeptaScale)
 
 # Permutations: ordered set
@@ -167,10 +166,25 @@ lstHeptaScaleChord.sort()
 Visualization
 """
 
-# To do: Rhythm circle
+def save_library_sheet():
+
+    # Table of all absolute chromatic data along pitch number set
+    dfPitch = pd.DataFrame ([PITCHMIDINUMBERLIST,
+                         CHROMATICPITCHCLASSNUMBERLIST,
+                         CHROMATICPITCHCLASSTEXTLIST,
+                         CHROMATICPITCHFREQUENCYLIST]+ lstHeptaScale,
+                              ).transpose()
+#    dfPitch.columns=['Nr','ClassNr','ClassChr', 'Freq', 'Major', 'Minor']
+    dfPitch.to_excel(DEFAULT_PATH+'musicom_library.xlsx', index=True, sheet_name='Pitch')
 
 
-def show_circle(num_parts: int = 12, labels : list = CHROMATICPITCHCLASSTEXTS, title : str = 'Circle of parts and values' ):
+def rhythm_circle ():
+    # SHow rhythm in circle
+    show_circle(4, ['Down', 'Up','Down', 'Up'], 'Rhythm')
+
+
+
+def show_circle(num_parts: int = 12, labels : tuple | list  = CHROMATICPITCHCLASSTEXTS, title : str = 'Circle of parts and labels' ):
     # Show parts (angles) and labels in circle
 
     # Convert parts to angles
@@ -203,13 +217,31 @@ def show_plot(yvalues: list):
 
 
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Music library: Rhythm and meter
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+# Defaults
+DEFAULT_TEMPO = 100
+DEFAULT_TIMESIGNATURE = meter.TimeSignature('4/4')
+
+QUARTERLENGTH1 = 2
+QUARTERLENGTH2 = 2
+QUARTERLENGTH4 = 1
+QUARTERLENGTH8 = 0.5
+QUARTERLENGTH16 = 0.25
+QUARTERLENGTH32 = 0.125
+
+DEFAULT_DURATIONS = [[note.Duration(d)] for d in [QUARTERLENGTH8, QUARTERLENGTH4, QUARTERLENGTH2]]
+DEFAULT_PITCHES = scale.MajorScale('C').pitches
+
+
 """
-Rhythm of beats and rests with durations in a measure
+Rhythm of onsets and rests with durations in a measure
 """
-BEAT_REST = 0
-DURATION = 1
-BT = 'b'
-RS = 'r'
+
+#BT = 'b'
+#RS = 'r'
 
 
 """
@@ -217,26 +249,21 @@ Absolute rhythm library
 """
 # Four-beat rhythm
 four_rhythmic_pattern = converter.parse('tinynotation: 4/4 c5 c5 c5 c5')
-FOUR_RHYTHM = [    [BT, BT, BT, BT],
-                [1.0, 1.0, 1.0, 1.0]  ]
+FOUR_RHYTHM = [1.0, 1.0, 1.0, 1.0]
 # Tresillo rhythm
 tresillo_rhythmic_pattern = converter.parse('tinynotation: 4/4 c5 r r c5 r r c5 r')
-tresillo_rtm = [[BT, RS, RS, BT, BT, RS, RS, BT, RS],
-                [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5 ] ]
+TRESILLO_RTM = [1.5, 1.5, 1]
 # 12/8 Bell rhythm
-twelve_8_bell_rhythmic_pattern = converter.parse('tinynotation: 12/8 c5 r c5 r c5 c5 r c5 r c5 r c5')
-twelve_8_bell_rtm = [   [BT, RS, BT, RS, BT, BT, RS, BT, RS, BT, RS, BT],
-                        [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5 ] ]
+twelve_eigth_bell_rhythmic_pattern = converter.parse('tinynotation: 12/8 c5 r c5 r c5 c5 r c5 r c5 r c5')
+TWELVE_EIGTH_BELL_RHYTHM = [1, 1, 0.5, 1, 1, 1, 0.5]
 # Son Clave
-sonclave_rhythmic_pattern = converter.parse('tinynotation: 16/8 c5 r r c5 r r c5 r r r c5 r c5 r r r')
-sonclave_rtm = [    [BT, RS, RS, BT, RS, RS, BT, RS, RS, RS, BT, RS, BT, RS, RS, RS],
-                    [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5 ] ]
+son_clave_rhythmic_pattern = converter.parse('tinynotation: 16/8 c5 r r c5 r r c5 r r r c5 r c5 r r r')
+SON_CLAVE_RHYTHM = [1.5, 1.5, 2, 1, 2]
 
 
 # 3/4 Waltz
 waltz_rhythmic_pattern = converter.parse('tinynotation: 3/4 c5 c5 c5')
-three_rtm = [   [BT, BT, BT],
-                [1.0, 1.0, 1.0] ]
+three_rtm = [1.0, 1.0, 1.0]
 
 """
 Rhythm intervals
@@ -258,11 +285,17 @@ def part_create_from_stream (stream_in: stream.Stream,
     for note_or_rest in stream_in.notesAndRests:
         part_out.append(note_or_rest)
 
+    # Create a Part and add notes
+    for element in stream_in:
+        if isinstance(element, (note.Note, note.Rest, chord.Chord)):
+            part_out.append(element)
+
     return part_out
 
 
 def part_create(pitches : list[str],
                 durations : list[float],
+                onset_intervals : list[float],
                 instr: instrument.Instrument = instrument.Piano()
                 ) -> stream.Part:
     # Create a part with notes and rests
@@ -272,9 +305,10 @@ def part_create(pitches : list[str],
 
     # Iterate over the list of pitches
     for i in range(len(pitches)) :
-        # Add beats and rests to the stream
-        if pitches[i] == '':
-            part_out.append(note.Rest(quarterLength=durations[i]))
+        # Add notes and rests to the stream
+        restduration = onset_intervals[i] - durations[i]
+        if restduration > 0:
+            part_out.append(note.Rest(quarterLength=restduration))
         else:
             part_out.append(note.Note(pitch=pitches[i], quarterLength=durations[i]))
 
@@ -283,6 +317,7 @@ def part_create(pitches : list[str],
 
 def main():
     show_circle(NUMCHROMATICPITCHCLASS, CHROMATICPITCHCLASSTEXTS, 'Pitch class circle')
+    save_library_sheet ()
 
 
 if __name__ == '__main__':
