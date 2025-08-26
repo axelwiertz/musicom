@@ -5,24 +5,19 @@ Musicom documentation
 https://www.reddit.com/r/composer/wiki/resources/
 
 https://viva.pressbooks.pub/openmusictheory/chapter/analyzing-with-collections-scales-and-modes/
+https://learnmusictheory.net/
 
 https://www.cambridge.org/core/journals/ai-edam/article/developing-and-evaluating-computational-models-of-musical-style/2D13038AEC3BB894F1345C63F74F6CF4
 
 
 
-Melody
-🔗We all know what melody is, but don’t confuse melody with ostinato! Melody lives and breathes and has variety.
-Harmony
-🔗In this section, we will associate harmony with key and mode (major versus minor).
-Rhythm
-🔗What the most common rhythmic value is in a section.
-Timbre
-🔗The different tone colors of different instruments, and the different tone colors an individual instrument can produce.
-Texture
-🔗Described in the previous chapter as existing in the vertical plane (the number of voices) and the horizontal plane (rhythmic activity of the various voices).
-Articulation
-🔗Staccato versus legato, or short, clipped notes versus long, sustained or connected notes.
-Dynamics
-🔗Loud versus soft.
-Register
-🔗High versus middle versus low.
+Melody      Distinctive note sequence
+Harmony     Key and mode
+Rhythm      Most common rhythmic value is in a section.
+Timbre      Tone colors produced by instruments
+Texture     Existing in the vertical plane (the number of voices)
+            and the horizontal plane (rhythmic activity of the various voices).
+Articulation    Staccato versus legato, or
+            short, clipped notes versus long, sustained or connected notes.
+Dynamics    Loud / soft.
+Register    High / middle / low.
