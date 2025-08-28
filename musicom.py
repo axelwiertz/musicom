@@ -191,115 +191,24 @@ def euclidian_rhythm (onsets: int, timesteps: int ) -> list :
     return rhythm
 
 """
-Where the beats in the measure are and how many there are.
-How the notes should be beamed
-How much accent or weight each note gets,
 These three aspects of TimeSignatures are controlled by the
-:attr:`~music21.meter.TimeSignature.beatSequence`,
-:attr:`~music21.meter.TimeSignature.beamSequence`,
-and :attr:`~music21.meter.TimeSignature.accentSequence` properties of the TimeSignature.
-Each of them is an independent :class:`~music21.meter.MeterSequence` element
-which might have nested properties
-(e.g., an 11/16 meter might be beamed as {1/4+1/4+{1/8+1/16}}),
-so if you want to change how beats are calculated or beams are generated you'll want to learn more about meter.MeterSequence objects.
+music21.meter.TimeSignature.
+    beatSequence   : where the beats in the measure are and how many there are
+    beamSequence   : How the notes should be beamed
+    accentSequence : How much accent or weight each note gets
+All sequences are of class MeterSequence
 """
 
+def create_rhythm(num_onset: int = 4,
+                  num_timestep: int = 4,   # steps of time
+                  beats_per_timestep : float = 1) -> stream.Stream:
 
-def create_rhythm(onsets: int = 4,      # beats
-                  timesteps: int = 4,   # steps of time
-                  timestep_duration : float = QUARTERLENGTH4)\
-        -> list:
+    # Harmonic rhythm: cycle of onsets sequence in timesteps
+    # num_onset + 1 intervals
+    onset_timestep_intervals = [2,1,1,2] # total num_timestep
 
-    # Rhythm
-    num_duration_unit_in_cycle = 6
+    onset_timestep_intervals = euclidian_rhythm(num_onset, num_timestep)
 
-
-    # Meter
-    main_denominator = 8
-    beat_duration = QUARTER/main_denominator
-    num_beats_in_cycle = 6
-
-    # Measure
-    main_timesignature = meter.TimeSignature(ratiostring=str(num_beats_in_cycle)+'/'+str(main_denominator))
-    main_beatcount =  main_timesignature.beatCount
-
-    # Meter change separator
-    #terminal = meter.MeterTerminal(beatCount=main_beatcount)
-    # ts.ratioString '3/4'
-    # ts.numerator 3
-    # ts.beatCountName 'Triple'
-    # ts.beatCountName 'Triple'
-    # ts.beatDuration.quarterLength 1.0
-
-    quarterlength_unit = 4 / main_timesignature.denominator
-    main_timesignature.denominator = (1 / quarterlength_unit) * 4
-
-
-    main_key = key.Key('C', 'major')
-    main_score = score_create('Rhythm',main_key,main_timesignature)
-    rhythm_part = stream.Part()
-
-    rhythm_interval_pattern = euclidian_rhythm(onsets, timesteps)
-
-    # Genrate duration based on multiplier
-    duration_factor = 8
-    duration_new = QUARTER/32 * duration_factor
-
-    for i in rhythm_interval_pattern:
-        rhythm_note = note.Note(note.Pitch ('C4'),
-                                quarterLength=note.Duration(timestep_duration * i))
-        rhythm_part.append(rhythm_note)
-
-    score_show(main_score)
-
-    return rhythm_interval_pattern
-
-
-def percussion():
-    main_score = load_and_analyze('midipercussion.mid')
-    main_score = load_and_analyze('midipercussionmidi.mid')
-    main_score.append(clef.PercussionClef())
-
-    score_show(main_score)
-
-
-    main_score = score_create('Percussion', DEFAULT_KEY, DEFAULT_TIMESIGNATURE, 100)
-
-    main_score.insert(0,
-                      create_percussion_part())
-
-    # Write to MIDI
-    mf = midi.translate.streamToMidiFile(main_score)
-    mf.open(DEFAULT_PATH+'percussion_example.mid', 'wb')
-    mf.write()
-    mf.close()
-
-    print("Wrote percussion_example.mid")
-
-
-
-
-
-def create_percussion ():
-    # main_scale = scale.MajorScale ('C')
-
-
-    # Percussion
-    main_key = DEFAULT_KEY
-
-
-    main_score = score_create('Percussion',main_key, DEFAULT_TIMESIGNATURE)
-    signature : meter.TimeSignature
-    signature = main_score.getElementsByClass('TimeSignature')[0]
-    # number of beats per measure
-    beats = signature.numerator
-    # signature in quarterlength
-    beatduration = signature.denominator / 4
-
-    pchord = percussion.PercussionChord()
-
-
-    # Harmonic rhythm
     onset_intervals01 = [1,1,0.5,0.5,1]
 
     onset_intervals02 = [2, 1.5, 1.5, 1.0, 2.0]
@@ -311,9 +220,61 @@ def create_percussion ():
                     ["G4", "A4", "B4", "C5"]]
 
 
+    # Rhythm on meter
+    beats_per_timestep = 2
+
+    # Meter: measure cycle of beats
+    beat_note = 8  # eigth
+    beat_duration = QUARTER/beat_note
+    num_beats_in_measure = 6
+
+    main_timesignature = meter.TimeSignature(ratiostring=str(num_beats_in_measure)+'/'+str(beat_note))
+    main_beatcount =  main_timesignature.beatCount
+
+    beat_duration = main_timesignature.beatDuration.quarterLength
+
+    main_key = key.Key('C', 'major')
+    main_score = score_create('Rhythm',main_key,main_timesignature)
+    rhythm_part = stream.Part()
+
+    # Apply rhythm in note stream
+    for timestep_interval in onset_timestep_intervals:
+        rhythm_note = note.Note(note.Pitch ('C4'),
+                                quarterLength=note.Duration(timestep_interval * beat_duration * beats_per_timestep))
+        rhythm_part.append(rhythm_note)
+
+    score_show(main_score)
+
+    return rhythm_part
+
+
+
+
+def percussion():
+    # Load
+    main_score = load_and_analyze('midipercussion.mid')
+    main_score = load_and_analyze('midipercussionmidi.mid')
+    main_score.append(clef.PercussionClef())
+    score_show(main_score)
+
+    # Create
+    main_score = score_create('Percussion', DEFAULT_KEY, DEFAULT_TIMESIGNATURE, 100)
+    main_score.append(clef.PercussionClef())
+
+    main_score.insert(0, create_percussion_part())
+
+    # Write to MIDI
+    mf = midi.translate.streamToMidiFile(main_score)
+    mf.open(DEFAULT_PATH+'percussion_example.mid', 'wb')
+    mf.write()
+    mf.close()
+
+
 def create_percussion_part() -> stream.Part:
 
     perc_part = stream.Part()
+    pchord = percussion.PercussionChord()
+
     # Set to percussion instrument (General MIDI channel 10)
     perc_part.insert(0,
                      instrument.Woodblock())  # music21 uses an unpitched instrument class; channel will be set by MIDI export
@@ -329,21 +290,27 @@ def create_percussion_part() -> stream.Part:
         n.volume.velocity = velocity
         return n
 
-    # Build a 4-bar pattern (4/4), subdivided into eighth notes
+    # Meter 4/4, 8 timesteps, 0,5 beat per timestep
+    # Three onset lines
+    # BD on beats1 & (quarter = 1, 3),
+    bass_drum_timesteps = [0, 4]
+    # snare on 2 & 4,
+    snare_timesteps = [2, 6]
+    # hh on every eighth
+    hihat_timesteps = [0,1,2,3,4,5,6,7]
     pattern = []
-    # Bar template: BD on 1 & (quarter = 1, 3), snare on 2 & 4, hh on every eighth
-    for bar in range(4):
+    num_timesteps = 8
+    for timestep in range(num_timesteps):
         # eight subdivisions: indices 0..7 (each eighth note = 0.5 quarterLength)
-        for i in range(8):
-            if i % 2 == 0:  # downbeats (quarter boundaries)
-                # Bass drum on beats 1 and 3 (i = 0 and 4)
-                if i in (0, 4):
-                    pattern.append(perc_note(36, dur=0.5, velocity=110))
-                # Snare on beats 2 and 4 (i = 2 and 6)
-                if i in (2, 6):
-                    pattern.append(perc_note(38, dur=0.5, velocity=110))
-            # Hi-hat on every eighth
-            pattern.append(perc_note(42, dur=0.5, velocity=70))
+        if timestep % 2 == 0:  # downbeats (quarter boundaries)
+            # Bass drum on beats 1 and 3 (i = 0 and 4)
+            if timestep in (0, 4):
+                pattern.append(perc_note(36, dur=0.5, velocity=110))
+            # Snare on beats 2 and 4 (i = 2 and 6)
+            elif timestep in (2, 6):
+                pattern.append(perc_note(38, dur=0.5, velocity=110))
+        # Hi-hat on every eighth
+        pattern.append(perc_note(42, dur=0.5, velocity=70))
 
     # Combine pattern into the part (they will stack as simultaneous events if same offset used;
     # we append and set offsets incrementally)
@@ -589,7 +556,7 @@ def chord_create_harmonic (fundamental_pitch  : note.Pitch = note.Pitch('C4'),
 
 
 def stream_create_harmonic (fundamental_pitch : note.Pitch = note.Pitch('A2'),
-                            harmonic_numbers : list[int] = list(range(1,17))) -> stream.Stream:
+                            harmonic_numbers : list[int] = tuple(range(1,17))) -> stream.Stream:
 
     stream_out = stream.Stream()
     for harmonic in harmonic_numbers:
@@ -615,7 +582,7 @@ def create_harmonic():
         transpose_by = interval.Interval(new_chord[0], bass_pitch)
 
         new_chord.transpose(transpose_by, inPlace=True)
-        new_chord.duration = note.Duration(random.choice([QUARTERLENGTH2, QUARTERLENGTH1]))
+        new_chord.duration = note.Duration(random.choice([QUARTER/2, QUARTER/1]))
 
         harmonic_stream.append(new_chord)
 
