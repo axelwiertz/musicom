@@ -79,15 +79,15 @@ def main():
     idx_to_token = {i: t for t, i in token_to_idx.items()}
 
     # Create sequences for training (simple next-token prediction)
-    SEQ_LEN = 32
+    sequence_length = 32
     step = 1
     inputs = []
     targets = []
     for seq in all_tokens:
-        if len(seq) <= SEQ_LEN: continue
-        for i in range(0, len(seq) - SEQ_LEN, step):
-            chunk = seq[i:i + SEQ_LEN]
-            nxt = seq[i + SEQ_LEN]
+        if len(seq) <= sequence_length: continue
+        for i in range(0, len(seq) - sequence_length, step):
+            chunk = seq[i:i + sequence_length]
+            nxt = seq[i + sequence_length]
             inputs.append([token_to_idx[t] for t in chunk])
             targets.append(token_to_idx[nxt])
 
@@ -105,7 +105,7 @@ def main():
     EPOCHS = 40
 
     model = Sequential([
-        Embedding(input_dim=len(vocab), output_dim=EMBED_DIM, input_length=SEQ_LEN),
+        Embedding(input_dim=len(vocab), output_dim=EMBED_DIM, input_length=sequence_length),
         LSTM(HIDDEN, return_sequences=False),
         Dense(len(vocab), activation='softmax')
     ])
@@ -118,16 +118,16 @@ def main():
     start_idx = random.randrange(0, len(inputs))
     seed = inputs[start_idx].copy()
     generated = seed.copy()
-    GEN_LEN = 200
+    generation_length = 200
     temperature = 0.8
 
-    for _ in range(GEN_LEN):
-        x = np.array([generated[-SEQ_LEN:]])
+    for _ in range(generation_length):
+        x = np.array([generated[-sequence_length:]])
         preds = model.predict(x, verbose=0)[0]
         idx = sample_from_probs(preds, temperature_in=temperature)
         generated.append(int(idx))
 
-    gen_part = tokens_to_stream(generated[SEQ_LEN:SEQ_LEN+GEN_LEN], idx_to_token)
+    gen_part = tokens_to_stream(generated[sequence_length:sequence_length+generation_length], idx_to_token)
 
     score = stream.Score()
     score.insert(0, gen_part)

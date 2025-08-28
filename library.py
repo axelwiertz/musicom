@@ -277,15 +277,12 @@ Music 21 Tools for streams
 
 def part_create_from_stream (stream_in: stream.Stream,
                              instr: instrument.Instrument = instrument.Piano()) -> stream.Part:
-    # Transfer notes and rests from the original stream to a new Part
+    # Transfer notes, rests and chords from the original stream to a new Part
     part_out = stream.Part()
     # Add instrument of part
     part_out.insert(0, instr)
 
-    for note_or_rest in stream_in.notesAndRests:
-        part_out.append(note_or_rest)
-
-    # Create a Part and add notes
+    # Create a Part and add notes, rests and chords
     for element in stream_in:
         if isinstance(element, (note.Note, note.Rest, chord.Chord)):
             part_out.append(element)

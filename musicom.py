@@ -145,7 +145,7 @@ def create_genetic():
 
     #   Number of mutations	    Max number of mutations that should be possible per child generated
     num_mutations: int = 2
-    #   Mutation probability	Probability for a mutation to occur
+    #   Mutation probability
     mutation_probability: float = 0.5
 
     offspring_a = mutation(offspring_a, num=num_mutations, probability=mutation_probability)
@@ -572,13 +572,54 @@ def create_stream_triads_in_key (key_in: key.Key ,  quarterlength_in: int = 4 ) 
     return stream_out
 
 
+def chord_create_harmonic (fundamental_pitch  : note.Pitch = note.Pitch('C4'),
+                           harmonic_numbers: list[int] = range(1,4)) -> chord.Chord:
+
+    harmonic_chord = chord.Chord()
+    for harmonic in harmonic_numbers:
+        new_pitch = fundamental_pitch.getHarmonic(harmonic).midi
+
+        harmonic_chord.add (note.Note(new_pitch))
+
+    return harmonic_chord
+
+
+def stream_create_harmonic (fundamental_pitch : note.Pitch = note.Pitch('A2'),
+                            harmonic_numbers : list[int] = list(range(1,17))) -> stream.Stream:
+
+    stream_out = stream.Stream()
+    for harmonic in harmonic_numbers:
+        new_pitch = fundamental_pitch.getHarmonic(harmonic).midi
+        stream_out.append (note.Note(new_pitch))
+
+    return stream_out
+
+
+def create_harmonic():
+
+    main_score = score_create('Harmonic sequence and chords')
+
+    harmonic_stream = stream_create_harmonic()
+    harmonic_chord = chord_create_harmonic(note.Pitch('A1'),[5,6,7,9,12,15])
+
+    harmonic_stream.append(harmonic_chord)
+
+    main_score.append(part_create_from_stream(harmonic_stream))
+
+    score_analyze(main_score)
+    score_show(main_score)
+
 
 def main():
-    # Main: create or transform
+    # Main: create or load, analyze or transform
+
+    #main_score = load_and_analyze('Sousta.mid')
+    #score_show(main_score)
+
     #create_rhythm(4,4)
     #create_new()
-    main_score = load_and_analyze('Sousta.mid')
-    score_show(main_score)
+
+    create_harmonic()
 
     #percussion()
     #create_percussion()
