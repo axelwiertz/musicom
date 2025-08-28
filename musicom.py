@@ -209,13 +209,18 @@ def create_rhythm(onsets: int = 4,      # beats
                   timesteps: int = 4,   # steps of time
                   timestep_duration : float = QUARTERLENGTH4)\
         -> list:
-    # main_scale = scale.MajorScale ('C')
 
-    main_numerator = 6
+    # Rhythm
+    num_duration_unit_in_cycle = 6
+
+
+    # Meter
     main_denominator = 8
+    beat_duration = QUARTER/main_denominator
+    num_beats_in_cycle = 6
 
     # Measure
-    main_timesignature = meter.TimeSignature(ratiostring='6/8')
+    main_timesignature = meter.TimeSignature(ratiostring=str(num_beats_in_cycle)+'/'+str(main_denominator))
     main_beatcount =  main_timesignature.beatCount
 
     # Meter change separator
@@ -238,7 +243,7 @@ def create_rhythm(onsets: int = 4,      # beats
 
     # Genrate duration based on multiplier
     duration_factor = 8
-    duration_new = QUARTERLENGTH32 * duration_factor
+    duration_new = QUARTER/32 * duration_factor
 
     for i in rhythm_interval_pattern:
         rhythm_note = note.Note(note.Pitch ('C4'),
@@ -578,7 +583,6 @@ def chord_create_harmonic (fundamental_pitch  : note.Pitch = note.Pitch('C4'),
     harmonic_chord = chord.Chord()
     for harmonic in harmonic_numbers:
         new_pitch = fundamental_pitch.getHarmonic(harmonic).midi
-
         harmonic_chord.add (note.Note(new_pitch))
 
     return harmonic_chord
@@ -599,10 +603,25 @@ def create_harmonic():
 
     main_score = score_create('Harmonic sequence and chords')
 
-    harmonic_stream = stream_create_harmonic()
-    harmonic_chord = chord_create_harmonic(note.Pitch('A1'),[5,6,7,9,12,15])
+    harmonic_stream = stream.Stream()
 
-    harmonic_stream.append(harmonic_chord)
+    bass_pitches = ['E4', 'D4', 'B3', 'B-3', 'E-4', 'D-4', 'C4', 'G3', 'A3']
+    bass_line = [note.Pitch(i) for i in bass_pitches]
+
+    for bass_pitch in bass_line:
+        random_harmonics = random.sample(range(4,21), random.randrange(3, 6))
+        new_chord = chord_create_harmonic(bass_pitch, random_harmonics)
+
+        transpose_by = interval.Interval(new_chord[0], bass_pitch)
+
+        new_chord.transpose(transpose_by, inPlace=True)
+        new_chord.duration = note.Duration(random.choice([QUARTERLENGTH2, QUARTERLENGTH1]))
+
+        harmonic_stream.append(new_chord)
+
+    #harmonic_stream = stream_create_harmonic()
+    #harmonic_chord = chord_create_harmonic(note.Pitch('A1'),[5,6,7,9,12,15])
+    #harmonic_stream.append(harmonic_chord)
 
     main_score.append(part_create_from_stream(harmonic_stream))
 
@@ -616,10 +635,10 @@ def main():
     #main_score = load_and_analyze('Sousta.mid')
     #score_show(main_score)
 
-    #create_rhythm(4,4)
+    create_rhythm(4,4)
     #create_new()
 
-    create_harmonic()
+    #create_harmonic()
 
     #percussion()
     #create_percussion()
