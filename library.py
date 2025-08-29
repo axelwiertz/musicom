@@ -18,6 +18,7 @@ DEFAULT_PATH = 'C:\\temp\\Music\\'
 
 
 
+
 '''
 Music library - Chromatic data: frequency, pitch(class), octave
 '''
@@ -52,16 +53,54 @@ instr3 = instrument.Ukulele
 instrPerc = instrument.Percussion
 
 
-"""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Music library: Rhythm and meter
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+# Defaults
+DEFAULT_TEMPO = 100
+DEFAULT_TIMESIGNATURE = meter.TimeSignature('4/4')
+
+# Meter unit is quarter note
+QUARTER = 4
+
+DEFAULT_DURATION = note.Duration(QUARTER/4)
+
+DEFAULT_DURATIONS = [[note.Duration(d)] for d in [QUARTER/8, QUARTER/4, QUARTER/2]]
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Rhythm library - onset time intervals
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+# Four-beat rhythm
+four_rhythmic_pattern = converter.parse('tinynotation: 4/4 c5 c5 c5 c5')
+FOUR_RHYTHM =  (1, 1, 1, 1)
+# Tresillo rhythm
+tresillo_rhythmic_pattern = converter.parse('tinynotation: 4/4 c5 r r c5 r r c5 r')
+TRESILLO_RTM = (3, 3, 2)
+# 12/8 Bell rhythm
+twelve_eigth_bell_rhythmic_pattern = converter.parse('tinynotation: 12/8 c5 r c5 r c5 c5 r c5 r c5 r c5')
+TWELVE_EIGTH_BELL_RHYTHM = (2, 2, 1, 2, 2, 2, 1)
+# Son Clave
+son_clave_rhythmic_pattern = converter.parse('tinynotation: 16/8 c5 r r c5 r r c5 r r r c5 r c5 r r r')
+SON_CLAVE_RHYTHM = (3, 3, 4, 2, 4)
+# 3/4 Waltz
+waltz_rhythmic_pattern = converter.parse('tinynotation: 3/4 c5 c5 c5')
+three_rtm = (1, 1, 1)
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Music library - Diatonic data
-"""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 # Constants
 PENTA = 5 # Number of pitch classes in a pentatonic scale
 HEPTA = 7 # Number of pitch classes in a heptatonic scale
 
 DEFAULT_KEY = key.Key('C', 'major')
 DEFAULT_SCALE = scale.MajorScale('C')
-
+DEFAULT_PITCHES = DEFAULT_SCALE.pitches
+DEFAULT_PITCH = DEFAULT_PITCHES [0]
+DEFAULT_NOTE = note.Note(DEFAULT_PITCH,duration=DEFAULT_DURATION)
 
 # Diatonic Interval classes
 perfectintervallist = [interval.DiatonicInterval(interval.Specifier.PERFECT, 1),
@@ -88,9 +127,9 @@ def interval_to_binary (intervals):
     return binary_with_degrees
 
 
-'''
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Music library - Interval patterns: diatonic triads and sevenths
-'''
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 chromaticintervallist = [interval.ChromaticInterval(n) for n in range(NUMCHROMATICPITCHCLASS)]
 
 chord1 = chord.Chord()
@@ -116,9 +155,9 @@ lstScaleInterval = tuple(intervalsPattern[x:]+intervalsPattern[:x] for x in rang
 lstScaleBinary = [interval_to_binary(lstScaleInterval[x]) for x in range(len(lstScaleInterval))] 
 
 
-"""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Interval patterns - Diatonic cyclic patterns: pentatonic and heptatonic
-"""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 # Pentatonic
 lstIntPentaDegree = tuple(range(1, PENTA + 1)) # Pentatonic scale degree number
 lstPentaScaleIntervalPattern = (2,2,3,2,3) # Pentatonic interval pattern
@@ -151,9 +190,9 @@ itemlist = CHROMATICPITCHCLASSNUMBERS
 num_items = 3
 lstCombinations = list(itertools.combinations (itemlist, num_items))
 
-"""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Scale level - Harmonic function and progression of chords in scales
-"""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 # Chord patterns in heptatonic scale degrees
 scaledegreepattern = (1,3,5,7,2,4,6) #Heptatonic
 lstHeptaScaleChord = [scaledegreepattern[x:]+scaledegreepattern[:x] for x in range(HEPTA) ]
@@ -162,9 +201,9 @@ lstHeptaScaleChord.sort()
 
 
 
-"""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Visualization
-"""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 def save_library_sheet():
 
@@ -216,73 +255,19 @@ def show_plot(yvalues: list):
     plt.show()
 
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Music library: Rhythm and meter
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-# Defaults
-DEFAULT_TEMPO = 100
-DEFAULT_TIMESIGNATURE = meter.TimeSignature('4/4')
-
-QUARTER = 4
-
-#QUARTERLENGTH1 = 4
-#QUARTERLENGTH2 = 2
-#QUARTERLENGTH4 = 1
-#QUARTERLENGTH8 = 0.5
-#QUARTERLENGTH16 = 0.25
-#QUARTERLENGTH32 = 0.125
-
-DEFAULT_DURATIONS = [[note.Duration(d)] for d in [QUARTER/8, QUARTER/4, QUARTER/2]]
-DEFAULT_PITCHES = scale.MajorScale('C').pitches
-
-
-"""
-Rhythm of onsets and rests with durations in a measure
-"""
-
-#BT = 'b'
-#RS = 'r'
-
-
-"""
-Absolute rhythm library
-"""
-# Four-beat rhythm
-four_rhythmic_pattern = converter.parse('tinynotation: 4/4 c5 c5 c5 c5')
-FOUR_RHYTHM = [1.0, 1.0, 1.0, 1.0]
-# Tresillo rhythm
-tresillo_rhythmic_pattern = converter.parse('tinynotation: 4/4 c5 r r c5 r r c5 r')
-TRESILLO_RTM = [1.5, 1.5, 1]
-# 12/8 Bell rhythm
-twelve_eigth_bell_rhythmic_pattern = converter.parse('tinynotation: 12/8 c5 r c5 r c5 c5 r c5 r c5 r c5')
-TWELVE_EIGTH_BELL_RHYTHM = [1, 1, 0.5, 1, 1, 1, 0.5]
-# Son Clave
-son_clave_rhythmic_pattern = converter.parse('tinynotation: 16/8 c5 r r c5 r r c5 r r r c5 r c5 r r r')
-SON_CLAVE_RHYTHM = [1.5, 1.5, 2, 1, 2]
-
-
-# 3/4 Waltz
-waltz_rhythmic_pattern = converter.parse('tinynotation: 3/4 c5 c5 c5')
-three_rtm = [1.0, 1.0, 1.0]
-
-"""
-Rhythm intervals
-"""
-
-
-
-"""
 Music 21 Tools for streams
-"""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 def part_create_from_stream (stream_in: stream.Stream,
-                             instr: instrument.Instrument = instrument.Piano()) -> stream.Part:
+                             instr: instrument.Instrument = instrument.Piano(),
+                             clef_in : clef.Clef = clef.TrebleClef()) -> stream.Part:
     # Transfer notes, rests and chords from the original stream to a new Part
     part_out = stream.Part()
     # Add instrument of part
     part_out.insert(0, instr)
+    # Add clef of part
+    part_out.insert(0, clef_in)
 
     # Create a Part and add notes, rests and chords
     for element in stream_in:
@@ -292,26 +277,25 @@ def part_create_from_stream (stream_in: stream.Stream,
     return part_out
 
 
-def part_create(pitches : list[str],
-                durations : list[float],
-                onset_intervals : list[float],
-                instr: instrument.Instrument = instrument.Piano()
-                ) -> stream.Part:
+def stream_create(pitches : list[int|str],
+                  onset_intervals: list[float],
+                  durations : list[float],
+                  velocities : list[int] = list[100]) -> stream.Stream:
     # Create a part with notes and rests
-    part_out = stream.Part()
-    # Add instrument of part
-    part_out.insert(0, instr)
+    stream_out = stream.Stream()
 
-    # Iterate over the list of pitches
+    # Iterate over the list of pitches, intervals and durations
     for i in range(len(pitches)) :
         # Add notes and rests to the stream
         restduration = onset_intervals[i] - durations[i]
         if restduration > 0:
-            part_out.append(note.Rest(quarterLength=restduration))
+            stream_out.append(note.Rest(quarterLength=restduration))
         else:
-            part_out.append(note.Note(pitch=pitches[i], quarterLength=durations[i]))
+            new_note = note.Note(pitch=pitches[i], quarterLength=durations[i])
+            new_note.volume.velocity = velocities[i]
+            stream_out.append(new_note)
 
-    return part_out
+    return stream_out
 
 
 def main():

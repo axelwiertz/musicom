@@ -167,15 +167,16 @@ def create_genetic():
     main_score.write(fmt='midi', fp=DEFAULT_PATH + title +".mid")
 
 
-def euclidian_rhythm (onsets: int, timesteps: int ) -> list :
+def euclidian_rhythm (num_onset: int = 4, num_timestep: int = 4 ) -> list [int] :
+    # Divide number of onsets evenly over number of timesteps, reduced if duplicate
 
-    # Every onset gets a timestep interval
-    base_timestep_interval = timesteps // onsets
+    # Onsets gets an equal timestep interval
+    base_timestep_interval = num_timestep // num_onset
     # And the remaining timesteps are a separate time step interval
-    remaining_timesteps = timesteps % onsets
+    remaining_timesteps = num_timestep % num_onset
 
     rhythm = []
-    for i in range(onsets):
+    for i in range(num_onset):
         rhythm_timestep_interval = base_timestep_interval
         if i < remaining_timesteps:
             rhythm_timestep_interval += 1
@@ -187,7 +188,10 @@ def euclidian_rhythm (onsets: int, timesteps: int ) -> list :
             if group != rhythm[-1]:
                     group += rhythm.pop(-1)
 
-    rhythm = rhythm [0]
+    last_interval = num_timestep - sum(rhythm)
+    if last_interval > 0:
+        rhythm.append(last_interval)
+
     return rhythm
 
 """
@@ -199,69 +203,73 @@ music21.meter.TimeSignature.
 All sequences are of class MeterSequence
 """
 
-def create_rhythm(num_onset: int = 4,
-                  num_timestep: int = 4,   # steps of time
-                  beats_per_timestep : float = 1) -> stream.Stream:
+def create_rhythm () -> stream.Stream:
+    # Timestep is the rhythm relative unit, represented as integer
+    # Harmonic rhythm: sequential pattern of onsets at timesteps
+    # A rhythm sequence is defined by
+    #  - a sequence of timestep in tervals between onsets
+    #
+    # The number of timesteps is the sum of the intervals
 
-    # Harmonic rhythm: cycle of onsets sequence in timesteps
-    # num_onset + 1 intervals
-    onset_timestep_intervals = [2,1,1,2] # total num_timestep
+    rhythm_seq = euclidian_rhythm (3, 8)
 
-    onset_timestep_intervals = euclidian_rhythm(num_onset, num_timestep)
+    # [2,1,1.1]
+    # [2,2,1,1,2]
+    # [4, 3, 3, 3, 4]
+    # [6, 4, 1, 5, 6]
 
-    onset_intervals01 = [1,1,0.5,0.5,1]
+    num_timesteps = sum(rhythm_seq)
 
-    onset_intervals02 = [2, 1.5, 1.5, 1.0, 2.0]
-    onset_intervals03 = [1.5, 1, 0.25, 1.25]
-
-    onset_pattern = FOUR_RHYTHM
-
-    pitches_list = [["C4", "D4", "E4", "F4"],
-                    ["G4", "A4", "B4", "C5"]]
-
-
-    # Rhythm on meter
-    beats_per_timestep = 2
+    # Linking rhythm timesteps to meter beats
+    timesteps_per_beat = 2
 
     # Meter: measure cycle of beats
-    beat_note = 8  # eigth
-    beat_duration = QUARTER/beat_note
-    num_beats_in_measure = 6
+    beat_note = 4  # eigth
 
-    main_timesignature = meter.TimeSignature(ratiostring=str(num_beats_in_measure)+'/'+str(beat_note))
+    num_beats_in_measure = 4
+    main_timesignature = meter.TimeSignature(str(num_beats_in_measure)+'/'+str(beat_note))
+
     main_beatcount =  main_timesignature.beatCount
 
+    beat_duration = QUARTER/beat_note
     beat_duration = main_timesignature.beatDuration.quarterLength
 
-    main_key = key.Key('C', 'major')
-    main_score = score_create('Rhythm',main_key,main_timesignature)
-    rhythm_part = stream.Part()
 
-    # Apply rhythm in note stream
-    for timestep_interval in onset_timestep_intervals:
-        rhythm_note = note.Note(note.Pitch ('C4'),
-                                quarterLength=note.Duration(timestep_interval * beat_duration * beats_per_timestep))
-        rhythm_part.append(rhythm_note)
+    main_score = score_create('Rhythm',DEFAULT_KEY,main_timesignature)
 
+    rhythm_stream = stream.Stream()
+    # Apply rhythm in note stream without rests
+    for timestep_interval in rhythm_seq:
+        rhythm_note = note.Note(pitch=note.Pitch ('C5'),
+                                duration=note.Duration(timestep_interval * beat_duration / timesteps_per_beat))
+        rhythm_stream.append(rhythm_note)
+
+    rhythm_part = part_create_from_stream(rhythm_stream)
+
+    main_score.append(rhythm_part)
     score_show(main_score)
 
-    return rhythm_part
+    return rhythm_stream
 
 
-
-
-def percussion():
+def percussion_load ():
     # Load
     main_score = load_and_analyze('midipercussion.mid')
     main_score = load_and_analyze('midipercussionmidi.mid')
     main_score.append(clef.PercussionClef())
     score_show(main_score)
 
+def create_percussion ():
+
     # Create
     main_score = score_create('Percussion', DEFAULT_KEY, DEFAULT_TIMESIGNATURE, 100)
-    main_score.append(clef.PercussionClef())
 
-    main_score.insert(0, create_percussion_part())
+    # percussion_score =
+    for part in create_percussion_parts().parts:
+        main_score.append(part)
+
+    score_show(main_score)
+
 
     # Write to MIDI
     mf = midi.translate.streamToMidiFile(main_score)
@@ -270,19 +278,22 @@ def percussion():
     mf.close()
 
 
-def create_percussion_part() -> stream.Part:
+def create_percussion_parts () -> stream.Score:
 
-    perc_part = stream.Part()
+    score_out = stream.Score()
+
+
     pchord = percussion.PercussionChord()
 
-    # Set to percussion instrument (General MIDI channel 10)
-    perc_part.insert(0,
-                     instrument.Woodblock())  # music21 uses an unpitched instrument class; channel will be set by MIDI export
 
 
     # Helper to create an unpitched percussion note by MIDI pitch number
     # General MIDI percussion mapping (channel 10): 35-81 common drums
-    # Common mappings used here: 36 = Bass Drum 1, 38 = Acoustic Snare, 42 = Closed Hi-Hat
+
+    MIDI_BASS_DRUM = 36
+    MIDI_ACOUSTIC_SNARE = 38
+    MIDI_CLOSED_HIHAT = 42
+
     def perc_note(midi_pitch, dur=0.5, velocity=100):
 #        n = note.Unpitched()
         n = note.Note(pitch=midi_pitch, duration=dur)
@@ -291,35 +302,26 @@ def create_percussion_part() -> stream.Part:
         return n
 
     # Meter 4/4, 8 timesteps, 0,5 beat per timestep
+    num_timestep = 8
+    timestepos_per_beat = 2
     # Three onset lines
-    # BD on beats1 & (quarter = 1, 3),
-    bass_drum_timesteps = [0, 4]
-    # snare on 2 & 4,
-    snare_timesteps = [2, 6]
+    # BD on beats1 & (quarter = 1, 3), snare on 2 & 4,
+    bass_pitches = [MIDI_BASS_DRUM, MIDI_ACOUSTIC_SNARE, MIDI_BASS_DRUM, MIDI_ACOUSTIC_SNARE]
+    bass_rhythm = [2, 2, 2, 2]
+    bass_durations = [1, 1, 1, 1]
+    bass_volumes = [110, 110, 110, 110, 110, 110, 110, 110]
     # hh on every eighth
-    hihat_timesteps = [0,1,2,3,4,5,6,7]
-    pattern = []
-    num_timesteps = 8
-    for timestep in range(num_timesteps):
-        # eight subdivisions: indices 0..7 (each eighth note = 0.5 quarterLength)
-        if timestep % 2 == 0:  # downbeats (quarter boundaries)
-            # Bass drum on beats 1 and 3 (i = 0 and 4)
-            if timestep in (0, 4):
-                pattern.append(perc_note(36, dur=0.5, velocity=110))
-            # Snare on beats 2 and 4 (i = 2 and 6)
-            elif timestep in (2, 6):
-                pattern.append(perc_note(38, dur=0.5, velocity=110))
-        # Hi-hat on every eighth
-        pattern.append(perc_note(42, dur=0.5, velocity=70))
+    hihat_pitches = [MIDI_CLOSED_HIHAT,MIDI_CLOSED_HIHAT,MIDI_CLOSED_HIHAT,MIDI_CLOSED_HIHAT,MIDI_CLOSED_HIHAT,MIDI_CLOSED_HIHAT,MIDI_CLOSED_HIHAT,MIDI_CLOSED_HIHAT]
+    hihat_rhythm = [1,1,1,1,1,1,1,1]
+    hihat_durations = [1,1,1,1,1,1,1,1]
+    hihat_volumes = [70, 70, 70, 70, 70, 70, 70, 70]
 
-    # Combine pattern into the part (they will stack as simultaneous events if same offset used;
-    # we append and set offsets incrementally)
-    offset = 0.0
-    for pn in pattern:
-        perc_part.insert(offset, pn)
-        offset += pn.duration.quarterLength
+    # Set to percussion instrument (General MIDI channel 10)
+    # music21 uses an unpitched instrument class; channel will be set by MIDI export
+    bass_part = part_create_from_stream(stream_create(bass_pitches, bass_rhythm, bass_durations, hihat_volumes), instrument.Woodblock(),clef.PercussionClef() )
+    hihat_part = part_create_from_stream(stream_create(hihat_pitches, hihat_rhythm, hihat_durations, bass_volumes), instrument.Woodblock(), clef.PercussionClef())
 
-    return perc_part
+    return score_out
 
 
 def big_yellow_taxi():
@@ -367,8 +369,8 @@ def load_and_transform (filename_in: str = 'in.mid',
 
     # Add to score
     # Insert several new notes
-    new_note_1 = note.Note('C4', quarterLength=0.75)
-    new_note_2 = note.Note('C4', quarterLength=0.25)
+    new_note_1 = note.Note(DEFAULT_PITCH, quarterLength=0.75)
+    new_note_2 = note.Note(DEFAULT_PITCH, quarterLength=0.25)
     main_score.insertAndShift([2, new_note_1, 2.75, new_note_2])
 
 
@@ -379,10 +381,10 @@ def load_and_transform (filename_in: str = 'in.mid',
 def create_new ():
     # Create new score template
     # Form
-    parts = 3
-    voices = []
-    numvoices = 3
-    form = (16, 16, 16)
+    num_voices = 3
+    form = ('A', 'A', 'B', "A")
+    form_num_measures = (8, 8, 8, 8)
+
 
     main_key = key.Key('C', 'major')
     main_scale = scale.MajorScale ('C')
@@ -390,27 +392,41 @@ def create_new ():
 
     main_score = score_create('New score', main_key,signature_in= meter.TimeSignature('4/4'))
 
+    pitches_list = [main_scale.pitches[0:3],
+                    ["G4", "A4", "B4", "C5"]]
+
+
     # Create three voices for melody and accompaniment
     # Motifs of voices
-    pitches_list = [['C5', 'D5', 'E5', 'F5', 'G5', 'A5', 'B4', 'C5'],
-                    ['C4', 'E4', 'G4', '', 'F4', 'A4', 'C5', ''],
-                    ['C3', 'G3']]
-    # Durations
-    durations_list = [[1, 1, 1, 1, 1, 1, 1, 1],
-                      [1, 1, 1, 1, 1, 1, 1, 1],
-                      [2,2]]
+    pitches_list1 = [['C5', 'D5', 'E5', 'F5'],
+                    ['C4', 'E4', 'G4'],
+                    ['C3']]
+    pitches_list12 = [['G5', 'A5', 'B4', 'C5'],
+                    ['F4', 'A4', 'C5'],
+                    ['G3']]
     # Onset intervals (harmonic rhythm)
-    onset_intervals_list = [[0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5],
-                  [0.5,0.5,1,0.5,0.5,1],
+    onset_intervals_list = [[1,1,1,1],
+                  [1,1,2],
                   [2,2]]
+    # Durations
+    durations_list = [[1, 1, 1, 1],
+                      [1, 1, 1],
+                      [2,2]]
+
+    # Velocities
+    velocities_list = [[100, 100, 100,100],
+                       [100, 100, 100],
+                       [100, 100]]
+
     # Instruments
     instruments_list = [instrument.Flute(),
                         instrument.Violin(),
                         instrument.Bass()]
 
-    for i in range (0, len(pitches_list)-1):
+    for i in range (0, len(pitches_list1)-1):
+
         main_score.append(
-            part_create(pitches_list [i], durations_list[i], onset_intervals_list [i], instruments_list[i])
+            part_create_from_stream(stream_create(pitches_list1 [i], durations_list[i], onset_intervals_list [i], velocities_list [i]), instruments_list[i])
         )
 
     # Analyze score
@@ -602,13 +618,12 @@ def main():
     #main_score = load_and_analyze('Sousta.mid')
     #score_show(main_score)
 
-    create_rhythm(4,4)
+    #create_rhythm()
     #create_new()
 
     #create_harmonic()
 
-    #percussion()
-    #create_percussion()
+    create_percussion()
     #create_balfolk()
     #create_counterpoint()
 
