@@ -1,23 +1,24 @@
 '''
-MusicPy - Archive
+MusicPy - Music21
 
-Code using MusicPY, replaced by music21 code
+Code using MusicPY and music21
 '''
 
-from musicpy import *
+from music21py import *
+from musicpy import database, musicpy, daw, control, algorithms
 
-#from musicpy.daw import *
-#from musicpy.database import *
+from harmony import *
+from library import *
 
 
-# pceMIDI = mp.read (strPathIn + strFileName, get_off_drums=True, split_channels=True)
-intTrack = 0
+piece_midi = musicpy.read (DEFAULT_PATH + DEFAULT_MIDI_FILE_IN, get_off_drums=True, split_channels=True)
+track_number = 0
 nFrom = 0
 nTo = 4
 #nTo = 47
 
-intNumTracks = len(pceMIDI.tracks)
-trkTrack1 = pceMIDI(intTrack)
+intNumTracks = len(piece_midi.tracks)
+trkTrack1 = piece_midi(track_number)
 lstNotes = trkTrack1.notes[nFrom:nTo]
 intNumNotes = len (lstNotes)
 
@@ -28,54 +29,56 @@ print (trkTrack1[nFrom:nTo])
 print ('Notes from track : '+ str(lstNotes))
 print ('Number of notes : ' + str(intNumNotes))
 
-print (pceMIDI[intTrack].content)
-print (pceMIDI[intTrack].content.notes)
+print (piece_midi[track_number].content)
+print (piece_midi[track_number].content.notes)
 
 intInstr = 1
 print ('Play selected track :')
 #play(trkTrack1[nFrom:nTo], instrument=intInstr)
 #, wait=True)
 
-str1 = mp.alg.detect (pceMIDI(intTrack))
-str2 = mp.alg.detect (trkTrack1[nFrom:nTo])
-str3 = mp.alg.chord_analysis (pceMIDI(intTrack))
-str4 = mp.alg.chord_analysis (trkTrack1[nFrom:nTo])
-str5 = mp.alg.analyze_rhythm (trkTrack1[nFrom:nTo])
+part_analyzed = piece_midi(track_number)
+part_analyzed = trkTrack1[nFrom:nTo]
+str1 = algorithms.detect (part_analyzed)
+str2 = algorithms.chord_analysis (piece_midi(track_number))
+str3 = algorithms.analyze_rhythm (trkTrack1[nFrom:nTo])
 
 
-scl01 = S(str(dctStyleScale['Standard'][0]))
-scl01 = mp.S('C major')
+scl01 = musicpy.S(str(dctStyleScale['Standard'][0]))
+scl01 = musicpy.S('C major')
 
-chd01 = scl01.chord_progression(lstChordSeqs[0])
-for i in range(1, len(lstChordSeqs)-1):
+chd01 = scl01.chord_progression(lstChordPattern[0])
+for i in range(1, len(lstChordPattern)-1):
 #    print (lstChordPattern[i])
-    chd02 = scl01.chord_progression(lstChordSeqs[i], durations=1 / 2, intervals=0, volumes=None, chords_interval=None)
-    chd01 = chd01 + mp.rest(1/2) + chd02
+    chd02 = scl01.chord_progression(lstChordPattern[i], durations=1 / 2, intervals=0, volumes=None, chords_interval=None)
+    chd01 = chd01 + musicpy.rest(1/2) + chd02
 
-lstChdScale = scl01%(1234567, 0.5)
-chd01 = lstChdScale[0]
+chords_in_scale = scl01%(1234567, 0.5)
+mpstream_chords = chords_in_scale[0]
 for i in range(1, 7):
 #    print (lstChordPattern[i])
-    chd01 = chd01 + mp.rest(1/2) + lstChdScale[i]
+    mpstream_chords = mpstream_chords + musicpy.rest(1/2) + chords_in_scale[i]
 
 
 # Output
-lstChdTrack = [chd01] # list of tracks
+lstChdTrack = [mpstream_chords] # list of tracks
 lstIntChannel = [1] # list of channelnumbers
 lstIntStartTimes = [0] # list of starttimes
 
 strSongName = 'Patterns'
+rtmSong = []
 
 # strSongName
-# lstChdTrack # list of tracks: type mp.Chord
+# lstChdTrack # list of tracks: type musicpy.Chord
 # lstIntChannel # list of channelnumbers
 # lstIntStartTimes # list of starttimes
-chd01 = chord('C4', 1/8, 1/8)*100
+mpstream = chord('C4', 1/8, 1/8)*100
+mpstream_rhythm = []
 lstChdTrack = []
 lstIntChannel = []
-lstChdTrack.append (chd01.apply_rhythm (rtmSong))
+lstChdTrack.append (mpstream.apply_rhythm (rtmSong))
 lstIntChannel.append (1)
-lstChdTrack.append (chdRhythm.apply_rhythm (rtmSong))
+lstChdTrack.append (mpstream_rhythm.apply_rhythm (rtmSong))
 lstIntChannel.append (9)
 
 
@@ -86,11 +89,11 @@ for i in range(0, len(lstChdTrack)):
 
 
 # Construct piece out of tracks
-pce01 = P(tracks=lstChdTrack,channels=lstIntChannel, start_times=lstIntStartTimes)
-# Play piece and wait until finish, writes temp.midi
+pce01 = musicpy.piece(tracks=lstChdTrack,channels=lstIntChannel, start_times=lstIntStartTimes)
+# Play piece and wait until finish, writes temusicpy.midi
 print ('Play :')
 print (pce01)
-play(pce01, wait=True)
+musicpy.play(pce01, wait=True)
 
 
 # Instrumentation
@@ -104,7 +107,7 @@ for i in range(1, 127):
 '''
 
 # Soundfont library
-strSFpath = os.getcwd() + '\\Soundfont\\'
+strSFpath = '\\Soundfont\\'
 dctInstr = {}
 dctInstr['Piano'] = ['Piano_NineFootGrand.sf2', 'Piano_RolandPiano.sf2']
 dctInstr['Guitar'] = ['Guitar_SessionGuitar.sf2', 'Guitar_SeagullAcousticGuitar.SF2']
@@ -135,46 +138,46 @@ print (daw1)
 #daw1.play(pce01, wait=True)
 
 # Slice
-chdTarget = trkTrack1[nFrom:nTo]
+mpstream_out = trkTrack1[nFrom:nTo]
 
 # Scales
-sclSource = mp.scale('Bb', 'major')
+sclSource = musicpy.scale('Bb', 'major')
 # print (sclSource)
-sclTarget = mp.scale('C', 'major')
+sclTarget = musicpy.scale('C', 'major')
 
 # Modulate
-chdTarget = pceMIDI[intTrack].content.modulation(sclSource, sclTarget)
+mpstream_out = piece_midi[track_number].content.modulation(sclSource, sclTarget)
 
-print ('Target chord :')
-print (chdTarget.notes)
-pceTarget = mp.piece (tracks= [chdTarget])
+print ('Target musicpy stream :')
+print (mpstream_out.notes)
+pceTarget = musicpy.piece (tracks= [mpstream_out])
 print (pceTarget)
-mp.write (pceTarget, name=strPathOut+ strMIDIFileNameOut)
+musicpy.write (pceTarget, name=DEFAULT_PATH+DEFAULT_MIDI_FILE_OUT)
 
 intInstr = 1
 intBPM = 100
 print ('Play :')
 #play(pceTarget, wait=True)
-#play (pceMIDI, wait=True)
-#play (pceMIDI[intTrack], instrument=intInstr, wait=True)
-# play (pceMIDI[intTrack].content, bpm=intBPM, instrument=intInstr)
-#play (chdTarget, wait=True)
+#play (piece_midi, wait=True)
+#play (piece_midi[track_number], instrument=intInstr, wait=True)
+# play (piece_midi[track_number].content, bpm=intBPM, instrument=intInstr)
+#play (mpstream_out, wait=True)
 
 
 
 # Melody creation syntax
-c1 = C('CM7', 3, 1 / 4, 1 / 8) ^ 2
-c2 = C('CM7')
-c2 = C('CM7', 3)
-c3 = C('CM7', 5)
-c5 = C('CM7', 3, 1 / 4, 1 / 8)
-c5 = C('CM7', 3, 1 / 4)
-c6 = C('CM7', 3, 1 / 4) ^ 2
+c1 = musicpy.chord('CM7', 3, 1 / 4, 1 / 8) ^ 2
+c2 = musicpy.chord('CM7')
+c2 = musicpy.chord('CM7', 3)
+c3 = musicpy.chord('CM7', 5)
+c5 = musicpy.chord('CM7', 3, 1 / 4, 1 / 8)
+c5 = musicpy.chord('CM7', 3, 1 / 4)
+c6 = musicpy.chord('CM7', 3, 1 / 4) ^ 2
 
 melody = (c1 | c2 | c3 * 2 )
 
-chd4 = S('C4 major')%(15654321, 0.4)
-chd01 = S('C major').get('1,2,3,4,5,6,7,1.1')
+chd4 = musicpy.S('C4 major')%(15654321, 0.4)
+mpstream = S('C major').get('1,2,3,4,5,6,7,1.1')
 
 chd5 = S('C major').get('1,1,5,5,6,6,5,-,4,4,3,3,2,2,1,-')
 chd6 = S('C major').chord_progression(['IM7', 'Vsus', 'vi7', 'IVM7'])
@@ -183,8 +186,8 @@ chd6 = S('C major').chord_progression(['IM7', 'Vsus', 'vi7', 'IVM7'])
 # Chords
 c1 = C('CM7', 3, 1/4, 1/8)^2
 c2 = C('G7sus', 2, 1/4, 1/8)^2
-chd01 = S('C4 major')%(15654321, 0.4)
-print (chd01)
+mpstream = S('C4 major')%(15654321, 0.4)
+print (mpstream)
 chd03 = S('C major').chord_progression(['IM7', 'Vsus', 'vi7', 'IVM7'])
 
 # Notes
@@ -197,7 +200,7 @@ t1 = s1.get('-,1,-,2') % (1 / 2,)
 t1 = s1.get('r,1,r,2')
 
 #1
-chd01 = chord ('F2, A2, F3')
+mpstream = chord ('F2, A2, F3')
 chd02 = S('F major').get('1.-2;3.-2;1.-1')
 #2
 chd03 = chord('C2, C3, E3, G3')
@@ -241,10 +244,12 @@ print (drm3)
 
 # Play DAW
 
+mpstream_percussion = []
+
+# Percussion channel 10
 intDAWChannel = 9
 intPiano = 1
-
-pceRhythm = piece ([chdRhythm], [intPiano], channels=[intDAWChannel])
+pceRhythm = piece (mpstream_percussion, [intPiano], channels=[intDAWChannel])
 
 intNumChannels = 10
 strSongName = 'Percussion 001'
@@ -270,14 +275,14 @@ print(rhythmic_info.getRhythm())
 
 
 rtmSong = rtmBell
-chd01 = chord('C4', 1/8, 1/8)*7
-chd02 = chd01.apply_rhythm (rtmSong)
+mpstream = chord('C4', 1/8, 1/8)*7
+chd02 = mpstream.apply_rhythm (rtmSong)
 play(chd02, wait=True)
 
 
 lstChdTrack = []
 lstIntChannel = []
-lstChdTrack.append (chd01.apply_rhythm (rtmSong))
+lstChdTrack.append (mpstream.apply_rhythm (rtmSong))
 lstIntChannel.append (1)
 lstChdTrack.append (chdRhythm.apply_rhythm (rtmSong))
 lstIntChannel.append (9)

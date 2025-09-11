@@ -15,8 +15,8 @@ from music21 import (stream, note, key, scale, chord, interval,
 
 # Defaults
 DEFAULT_PATH = 'C:\\temp\\Music\\'
-
-
+DEFAULT_MIDI_FILE_IN = 'in.mid'
+DEFAULT_MIDI_FILE_OUT = 'out.mid'
 
 
 '''

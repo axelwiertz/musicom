@@ -1,9 +1,19 @@
-show Python data structures for each representation (event-list, quantised grid, hierarchical tree, phase-based
+"""
+Rhythm - Data structures for each representation
+(event-list, quantised grid, hierarchical tree, phase-based)
 
-Below are compact Python examples (dataclasses + simple constructors) for four rhythm representations: event-list, quantized grid, hierarchical tree, and phase-based. Each example shows the data structure and a small usage snippet converting a short rhythm (three onsets at 0.0s, 0.5s, 0.75s; tempo 120 BPM) into that format.
+(dataclasses + simple constructors) for four rhythm representations:
+event-list, quantized grid, hierarchical tree, and phase-based.
+Example (three onsets at 0.0s, 0.5s, 0.75s; tempo 120 BPM) into that format.
 
-Event-list (timestamped events)
-```python
+- Use event-list for flexible, continuous-time processing (onset detection, ML datasets).
+- Use quantized grid for symbolic editing, MIDI export, and DAW workflows.
+- Use hierarchical tree for metrical analyses, score rendering, and meter-aware algorithms.
+- Use phase-based states for oscillator models, entrainment simulations, and beat-prediction.
+
+"""
+
+# Event-list (timestamped events)
 # event_list.py
 from dataclasses import dataclass
 from typing import List, Optional
@@ -24,9 +34,9 @@ events: List[Event] = [
 ]
 ```
 
-Quantized grid (ticks per beat)
-```python
+# Quantized grid (ticks per beat)
 # quantized_grid.py
+# quant_events -> use in MIDI-like grid processing
 from dataclasses import dataclass
 from typing import List
 import math
@@ -54,11 +64,8 @@ quant_events: List[QuantizedEvent] = [
                    duration_ticks=max(1, seconds_to_ticks(0.1, bpm, tpb)))
     for t in times
 ]
-# quant_events -> use in MIDI-like grid processing
-```
 
-Hierarchical tree (metrical levels)
-```python
+# Hierarchical tree (metrical levels)
 # hierarchical_tree.py
 from dataclasses import dataclass, field
 from typing import List, Optional
@@ -89,10 +96,9 @@ for t in times:
     # find closest metrical level and its phase
     # naive: pick beat-level for demonstration
     hier_events.append(HierarchicalEvent(time=t, node=beat, label='onset'))
-```
 
-Phase-based representation (continuous phase per metrical level)
-```python
+
+# Phase-based representation (continuous phase per metrical level)
 # phase_based.py
 from dataclasses import dataclass
 from typing import Dict, List
@@ -124,12 +130,3 @@ for t in times:
         'eighth': time_to_phase(t, bpm, level_div=0.5),
     }
     phase_events.append(PhaseEvent(time=t, phases=phases))
-```
-
-Notes:
-- Use event-list for flexible, continuous-time processing (onset detection, ML datasets).  
-- Use quantized grid for symbolic editing, MIDI export, and DAW workflows.  
-- Use hierarchical tree for metrical analyses, score rendering, and meter-aware algorithms.  
-- Use phase-based states for oscillator models, entrainment simulations, and beat-prediction.
-
-If you want, I can add (1) conversion routines between these formats, (2) an example storing expressive microtiming as offsets in each format, or (3) JSON schemas for interchange. Which next?

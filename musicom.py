@@ -349,7 +349,7 @@ def berendans():
 
 
 
-def load_and_analyze (filename_in: str = 'in.mid') -> stream.Score:
+def load_and_analyze (filename_in: str = DEFAULT_MIDI_FILE_IN) -> stream.Score:
     # Load and analyze a score
 
     # Load a score
