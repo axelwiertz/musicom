@@ -32,14 +32,12 @@ events: List[Event] = [
     Event(time=0.5, duration=0.1, track=0, velocity=0.9),
     Event(time=0.75, duration=0.1, track=0, velocity=0.95),
 ]
-```
 
 # Quantized grid (ticks per beat)
 # quantized_grid.py
 # quant_events -> use in MIDI-like grid processing
 from dataclasses import dataclass
 from typing import List
-import math
 
 @dataclass
 class QuantizedEvent:
