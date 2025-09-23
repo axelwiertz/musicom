@@ -10,7 +10,6 @@ Example (three onsets at 0.0s, 0.5s, 0.75s; tempo 120 BPM) into that format.
 - Use quantized grid for symbolic editing, MIDI export, and DAW workflows.
 - Use hierarchical tree for metrical analyses, score rendering, and meter-aware algorithms.
 - Use phase-based states for oscillator models, entrainment simulations, and beat-prediction.
-
 """
 
 # Event-list (timestamped events)
