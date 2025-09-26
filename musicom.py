@@ -303,7 +303,7 @@ def create_percussion_parts () -> stream.Score:
 
     # Meter 4/4, 8 timesteps, 0,5 beat per timestep
     num_timestep = 8
-    timestepos_per_beat = 2
+    timesteps_per_beat = 2
     # Three onset lines
     # BD on beats1 & (quarter = 1, 3), snare on 2 & 4,
     bass_pitches = [MIDI_BASS_DRUM, MIDI_ACOUSTIC_SNARE, MIDI_BASS_DRUM, MIDI_ACOUSTIC_SNARE]
