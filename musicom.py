@@ -22,11 +22,10 @@ from showscore import show
 Composition - Structure
 """
 
-# Three voice score
-
-from genetic import Genome, selection_pair, single_point_crossover, mutation, generate_population, \
-    sort_population
-
+# Genetic creation
+from genetic import (Genome, selection_pair, single_point_crossover, mutation,
+                     generate_population, sort_population)
+# Bianry representation of note in genetic creation
 BITS_PER_NOTE = 4
 
 
@@ -66,7 +65,7 @@ def genome_to_stream (genome: Genome,
                      num_notes_per_measure: int,
                      include_rests: bool,
                      scale_in: scale.ConcreteScale) -> stream.Stream:
-
+    # Transform a generated genomen into a Stream
     stream_out = stream.Stream()
 
     pitch_degrees = []
@@ -106,6 +105,7 @@ def genome_to_stream (genome: Genome,
 
 
 def stream_rate_rules(genome: Genome) -> int:
+    # Rating of generation
     rating = genome[1]
 
     return rating
