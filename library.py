@@ -13,36 +13,38 @@ from music21 import (stream, note, key, scale, chord, interval,
                      roman, converter, instrument, serial, harmony,
                      meter, tempo, metadata, clef, percussion, midi, analysis)
 
-# Defaults
-DEFAULT_PATH = 'C:\\temp\\Music\\'
-DEFAULT_MIDI_FILE_IN = 'in.mid'
-DEFAULT_MIDI_FILE_OUT = 'out.mid'
+class Config:
+    # Default configuration
+    DEFAULT_PATH = 'C:\\temp\\Music\\'
+    DEFAULT_MIDI_FILE_IN = 'in.mid'
+    DEFAULT_MIDI_FILE_OUT = 'out.mid'
 
 
 '''
 Music library - Chromatic data: frequency, pitch(class), octave
 '''
+class Chromatic:
 
-# Chromatic pitch set, equal temperament scale
-FREQUENCY_A4 = 440 # Frequency of A4
-MIDIPITCHNUM_A4 = 69 # MIDI number of A4
-OCTAVES = 9 # Number of octaves in the pitch set
+    # Chromatic pitch set, equal temperament scale
+    FREQUENCY_A4 = 440 # Frequency of A4
+    MIDIPITCHNUM_A4 = 69 # MIDI number of A4
+    OCTAVES = 9 # Number of octaves in the pitch set
 
-NUMCHROMATICPITCHCLASS = 12 # Number of pitch classes 0-11
-# Total number of pitches diatonic pitch set
-NUMPITCH = OCTAVES * NUMCHROMATICPITCHCLASS
-PITCHMIDINUMBERLIST = tuple(range(NUMPITCH)) # Pitch number set
+    NUMCHROMATICPITCHCLASS = 12 # Number of pitch classes 0-11
+    # Total number of pitches chromatic pitch set
+    NUMPITCH = OCTAVES * NUMCHROMATICPITCHCLASS
+    PITCHMIDINUMBERLIST = tuple(range(NUMPITCH)) # Pitch number set
 
+    # Chromatic sets
+    CHROMATICPITCHCLASSNUMBERS = tuple(range (NUMCHROMATICPITCHCLASS)) # Pitch class numbers
+    CHROMATICPITCHCLASSTEXTS = ('C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B') # Pitch class characters
 
-CHROMATICPITCHCLASSNUMBERS = tuple(range (NUMCHROMATICPITCHCLASS)) # Pitch class numbers
-CHROMATICPITCHCLASSTEXTS = ('C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B') # Pitch class characters
-
-
-# Pitch class
-CHROMATICPITCHCLASSTEXTLIST = ([x for y in range(0, OCTAVES) for x in CHROMATICPITCHCLASSTEXTS])
-CHROMATICPITCHCLASSNUMBERLIST = (OCTAVES * CHROMATICPITCHCLASSNUMBERS)
-CHROMATICPITCHFREQUENCYLIST = tuple(2 ** ((n - MIDIPITCHNUM_A4) / NUMCHROMATICPITCHCLASS) * FREQUENCY_A4
+    # Pitch class
+    CHROMATICPITCHCLASSTEXTLIST = ([x for y in range(0, OCTAVES) for x in CHROMATICPITCHCLASSTEXTS])
+    CHROMATICPITCHCLASSNUMBERLIST = (OCTAVES * CHROMATICPITCHCLASSNUMBERS)
+    CHROMATICPITCHFREQUENCYLIST = tuple(2 ** ((n - MIDIPITCHNUM_A4) / NUMCHROMATICPITCHCLASS) * FREQUENCY_A4
                                     for n in range(NUMPITCH)) # Pitch frequencies
+    INTERVALLIST = [interval.ChromaticInterval(n) for n in range(NUMCHROMATICPITCHCLASS)]
 
 """
 Music library - Instruments
@@ -57,62 +59,65 @@ instrPerc = instrument.Percussion
 Music library: Rhythm and meter
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-# Defaults
-DEFAULT_TEMPO = 100
-DEFAULT_TIMESIGNATURE = meter.TimeSignature('4/4')
+class MCTime
+    # Defaults
+    DEFAULT_TEMPO = 100
+    DEFAULT_TIMESIGNATURE = meter.TimeSignature('4/4')
 
-# Meter unit is quarter note
-QUARTER = 4
+    # Meter unit is quarter note
+    QUARTER = 4
 
-DEFAULT_DURATION = note.Duration(QUARTER/4)
+    DEFAULT_DURATION = note.Duration(QUARTER/4)
 
-DEFAULT_DURATIONS = [[note.Duration(d)] for d in [QUARTER/8, QUARTER/4, QUARTER/2]]
+    DEFAULT_DURATIONS = [[note.Duration(d)] for d in [QUARTER/8, QUARTER/4, QUARTER/2]]
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Rhythm library - onset time intervals
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
-# Four-beat rhythm
-four_rhythmic_pattern = converter.parse('tinynotation: 4/4 c5 c5 c5 c5')
-FOUR_RHYTHM =  (1, 1, 1, 1)
-# Tresillo rhythm
-tresillo_rhythmic_pattern = converter.parse('tinynotation: 4/4 c5 r r c5 r r c5 r')
-TRESILLO_RTM = (3, 3, 2)
-# 12/8 Bell rhythm
-twelve_eigth_bell_rhythmic_pattern = converter.parse('tinynotation: 12/8 c5 r c5 r c5 c5 r c5 r c5 r c5')
-TWELVE_EIGTH_BELL_RHYTHM = (2, 2, 1, 2, 2, 2, 1)
-# Son Clave
-son_clave_rhythmic_pattern = converter.parse('tinynotation: 16/8 c5 r r c5 r r c5 r r r c5 r c5 r r r')
-SON_CLAVE_RHYTHM = (3, 3, 4, 2, 4)
-# 3/4 Waltz
-waltz_rhythmic_pattern = converter.parse('tinynotation: 3/4 c5 c5 c5')
-three_rtm = (1, 1, 1)
+class MCRhythm
+    # Four-beat rhythm
+    four_rhythmic_pattern = converter.parse('tinynotation: 4/4 c5 c5 c5 c5')
+    FOUR_RHYTHM =  (1, 1, 1, 1)
+    # Tresillo rhythm
+    tresillo_rhythmic_pattern = converter.parse('tinynotation: 4/4 c5 r r c5 r r c5 r')
+    TRESILLO_RTM = (3, 3, 2)
+    # 12/8 Bell rhythm
+    twelve_eigth_bell_rhythmic_pattern = converter.parse('tinynotation: 12/8 c5 r c5 r c5 c5 r c5 r c5 r c5')
+    TWELVE_EIGTH_BELL_RHYTHM = (2, 2, 1, 2, 2, 2, 1)
+    # Son Clave
+    son_clave_rhythmic_pattern = converter.parse('tinynotation: 16/8 c5 r r c5 r r c5 r r r c5 r c5 r r r')
+    SON_CLAVE_RHYTHM = (3, 3, 4, 2, 4)
+    # 3/4 Waltz
+    waltz_rhythmic_pattern = converter.parse('tinynotation: 3/4 c5 c5 c5')
+    three_rtm = (1, 1, 1)
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Music library - Diatonic data
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
-# Constants
-PENTA = 5 # Number of pitch classes in a pentatonic scale
-HEPTA = 7 # Number of pitch classes in a heptatonic scale
+class Diatonic
+    # Constants
+    PENTA = 5 # Number of pitch classes in a pentatonic scale
+    HEPTA = 7 # Number of pitch classes in a heptatonic scale
 
-DEFAULT_KEY = key.Key('C', 'major')
-DEFAULT_SCALE = scale.MajorScale('C')
-DEFAULT_PITCHES = DEFAULT_SCALE.pitches
-DEFAULT_PITCH = DEFAULT_PITCHES [0]
-DEFAULT_NOTE = note.Note(DEFAULT_PITCH,duration=DEFAULT_DURATION)
+    DEFAULT_KEY = key.Key('C', 'major')
+    DEFAULT_SCALE = scale.MajorScale('C')
+    DEFAULT_PITCHES = DEFAULT_SCALE.pitches
+    DEFAULT_PITCH = DEFAULT_PITCHES [0]
+    DEFAULT_NOTE = note.Note(DEFAULT_PITCH,duration=DEFAULT_DURATION)
 
-# Diatonic Interval classes
-perfectintervallist = [interval.DiatonicInterval(interval.Specifier.PERFECT, 1),
+    # Diatonic Interval classes
+    perfectintervallist = [interval.DiatonicInterval(interval.Specifier.PERFECT, 1),
                 interval.DiatonicInterval(interval.Specifier.PERFECT, 4),
                 interval.DiatonicInterval(interval.Specifier.PERFECT, 5),
                 interval.DiatonicInterval(interval.Specifier.PERFECT, 8)]
-PERFECTINTERVALS = ('P1', 'P4', 'P5', 'P8')
+    PERFECTINTERVALS = ('P1', 'P4', 'P5', 'P8')
 
-intervallist = [interval.DiatonicInterval(interval.Specifier.MAJOR, 2),
+    intervallist = [interval.DiatonicInterval(interval.Specifier.MAJOR, 2),
                 interval.DiatonicInterval(interval.Specifier.MINOR, 3)
                 ]
-IMPERFECTINTERVALS = ('M2', 'm3', 'M3', 'm6', 'M6', 'm7', 'M7')
+    IMPERFECTINTERVALS = ('M2', 'm3', 'M3', 'm6', 'M6', 'm7', 'M7')
 
 def interval_to_binary (intervals):
     # Convert a list of intervals to a binary mask with sequential degree numbers
@@ -130,7 +135,6 @@ def interval_to_binary (intervals):
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Music library - Interval patterns: diatonic triads and sevenths
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
-chromaticintervallist = [interval.ChromaticInterval(n) for n in range(NUMCHROMATICPITCHCLASS)]
 
 chord1 = chord.Chord()
 
