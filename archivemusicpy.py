@@ -10,7 +10,7 @@ from harmony import *
 from library import *
 
 
-piece_midi = musicpy.read (DEFAULT_PATH + DEFAULT_MIDI_FILE_IN, get_off_drums=True, split_channels=True)
+piece_midi = musicpy.read (Config.DEFAULT_PATH + Config.DEFAULT_MIDI_FILE_IN, get_off_drums=True, split_channels=True)
 track_number = 0
 nFrom = 0
 nTo = 4
@@ -42,20 +42,20 @@ str2 = algorithms.chord_analysis (piece_midi(track_number))
 str3 = musicpy.analyze_rhythm (trkTrack1[nFrom:nTo])
 
 
-scalename = str(dctStyleScale['Standard'][0])
+scalename = str(MCStyle.dctStyleScale['Standard'][0])
 scl01 = structures.scale(scalename)
-scl01 = structures.scale('C major')
+scl01 = structures.scale('C', 'major')
 
-chd01 = scl01.chord_progression(lstChordPattern[0])
-for i in range(1, len(lstChordPattern)-1):
-#    print (lstChordPattern[i])
-    chd02 = scl01.chord_progression(lstChordPattern[i], durations=1 / 2, intervals=0, volumes=None, chords_interval=None)
+chd01 = scl01.chord_progression(MCChord.PROGRESSIONS[0])
+for i in range(1, len(MCChord.PROGRESSIONS)-1):
+#    print (PROGRESSIONS[i])
+    chd02 = scl01.chord_progression(MCChord.PROGRESSIONS[i], durations=1 / 2, intervals=0, volumes=None, chords_interval=None)
     chd01 = chd01 + structures.rest(1/2) + chd02
 
 chords_in_scale = scl01%(1234567, 0.5)
 mpstream_chords = chords_in_scale[0]
 for i in range(1, 7):
-#    print (lstChordPattern[i])
+#    print (PROGRESSIONS[i])
     mpstream_chords = mpstream_chords + structures.rest(1/2) + chords_in_scale[i]
 
 
@@ -126,7 +126,7 @@ print ('Target musicpy stream :')
 print (mpstream_out.notes)
 pceTarget = structures.piece(tracks= [mpstream_out])
 print (pceTarget)
-musicpy.write (pceTarget, name=DEFAULT_PATH+DEFAULT_MIDI_FILE_OUT)
+musicpy.write (pceTarget, name=Config.DEFAULT_PATH+Config.DEFAULT_MIDI_FILE_OUT)
 
 intInstr = 1
 intBPM = 100

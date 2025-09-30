@@ -164,7 +164,7 @@ def create_genetic():
     score_analyze (main_score)
     score_show(main_score)
     # Save score
-    main_score.write(fmt='midi', fp=DEFAULT_PATH + title +".mid")
+    main_score.write(fmt='midi', fp=Config.DEFAULT_PATH + title +".mid")
 
 
 def euclidian_rhythm (num_onset: int = 4, num_timestep: int = 4 ) -> list [int] :
@@ -231,11 +231,11 @@ def create_rhythm () -> stream.Stream:
 
     main_beatcount =  main_timesignature.beatCount
 
-    beat_duration = QUARTER/beat_note
+    beat_duration = MCTime.QUARTER/beat_note
     beat_duration = main_timesignature.beatDuration.quarterLength
 
 
-    main_score = score_create('Rhythm',DEFAULT_KEY,main_timesignature)
+    main_score = score_create('Rhythm',Diatonic.DEFAULT_KEY,main_timesignature)
 
     rhythm_stream = stream.Stream()
     # Apply rhythm in note stream without rests
@@ -262,7 +262,7 @@ def percussion_load ():
 def create_percussion ():
 
     # Create
-    main_score = score_create('Percussion', DEFAULT_KEY, DEFAULT_TIMESIGNATURE, 100)
+    main_score = score_create('Percussion', Diatonic.DEFAULT_KEY, MCTime.DEFAULT_TIMESIGNATURE, 100)
 
     # percussion_score =
     for part in create_percussion_parts().parts:
@@ -273,7 +273,7 @@ def create_percussion ():
 
     # Write to MIDI
     mf = midi.translate.streamToMidiFile(main_score)
-    mf.open(DEFAULT_PATH+'percussion_example.mid', 'wb')
+    mf.open(Config.DEFAULT_PATH+'percussion_example.mid', 'wb')
     mf.write()
     mf.close()
 
@@ -349,11 +349,11 @@ def berendans():
 
 
 
-def load_and_analyze (filename_in: str = DEFAULT_MIDI_FILE_IN) -> stream.Score:
+def load_and_analyze (filename_in: str = Config.DEFAULT_MIDI_FILE_IN) -> stream.Score:
     # Load and analyze a score
 
     # Load a score
-    main_score = converter.parse (DEFAULT_PATH + filename_in)
+    main_score = converter.parse (Config.DEFAULT_PATH + filename_in)
 
     # Analyze score
     score_analyze (main_score)
@@ -364,18 +364,18 @@ def load_and_analyze (filename_in: str = DEFAULT_MIDI_FILE_IN) -> stream.Score:
 def load_and_transform (filename_in: str = 'in.mid',
                         filename_out: str = 'out.mid'):
     # Load a score
-    main_score = converter.parse (DEFAULT_PATH + filename_in)
+    main_score = converter.parse (Config.DEFAULT_PATH + filename_in)
 
 
     # Add to score
     # Insert several new notes
-    new_note_1 = note.Note(DEFAULT_PITCH, quarterLength=0.75)
-    new_note_2 = note.Note(DEFAULT_PITCH, quarterLength=0.25)
+    new_note_1 = note.Note(Diatonic.DEFAULT_PITCH, quarterLength=0.75)
+    new_note_2 = note.Note(Diatonic.DEFAULT_PITCH, quarterLength=0.25)
     main_score.insertAndShift([2, new_note_1, 2.75, new_note_2])
 
 
     # Save score
-    main_score.write(fmt='midi', fp=DEFAULT_PATH + filename_out)
+    main_score.write(fmt='midi', fp=Config.DEFAULT_PATH + filename_out)
 
 
 def create_new ():
@@ -433,7 +433,7 @@ def create_new ():
     score_analyze (main_score)
     score_show(main_score)
     # Save score
-    main_score.write(fmt='midi', fp=DEFAULT_PATH + "new.mid")
+    main_score.write(fmt='midi', fp=Config.DEFAULT_PATH + "new.mid")
 
 
 def create_balfolk ():
@@ -483,7 +483,7 @@ def create_balfolk ():
     score_analyze (main_score)
     score_show(main_score)
     # Save score
-    main_score.write(fmt='midi', fp=DEFAULT_PATH + "balfolk.mid")
+    main_score.write(fmt='midi', fp=Config.DEFAULT_PATH + "balfolk.mid")
 
 
     return
@@ -511,7 +511,7 @@ def create_counterpoint():
     score_analyze (main_score)
     score_show(main_score)
     # Save score
-    main_score.write(fmt='midi', fp=DEFAULT_PATH + "counterpoint.mid")
+    main_score.write(fmt='midi', fp=Config.DEFAULT_PATH + "counterpoint.mid")
 
 
 def create_key_library (key_in: key.Key):
@@ -524,14 +524,14 @@ def create_key_library (key_in: key.Key):
     part_lib = part_create_from_stream(stream_lib)
     main_score.append(part_lib)
 
-    stream_lib = create_stream_chords_in_key(lstChordPattern, key_in, 1)
+    stream_lib = create_stream_chords_in_key(MCChord.PROGRESSIONS, key_in, 1)
     part_lib = part_create_from_stream(stream_lib)
     main_score.append(part_lib)
 
     score_analyze(main_score)
     score_show(main_score)
     # Save score
-    main_score.write(fmt='midi', fp=DEFAULT_PATH + 'chordlibrary_in_key_' + key_in.name +'.mid')
+    main_score.write(fmt='midi', fp=Config.DEFAULT_PATH + 'chordlibrary_in_key_' + key_in.name +'.mid')
 
 
 def create_stream_chords_in_key (chord_progressions: list, key_in: key.Key ,  quarterlength_in: int = 4 ) -> stream.Stream:
@@ -551,7 +551,7 @@ def create_stream_triads_in_key (key_in: key.Key ,  quarterlength_in: int = 4 ) 
     # Stream of all triads in a key
     stream_out = stream.Stream()
 
-    for i in range(HEPTA):
+    for i in range(Diatonic.HEPTA):
         triad = roman.RomanNumeral(i+1, key_in)
         triad.duration.quarterLength = quarterlength_in
         stream_out.append(triad)
@@ -598,7 +598,7 @@ def create_harmonic():
         transpose_by = interval.Interval(new_chord[0], bass_pitch)
 
         new_chord.transpose(transpose_by, inPlace=True)
-        new_chord.duration = note.Duration(random.choice([QUARTER/2, QUARTER/1]))
+        new_chord.duration = note.Duration(random.choice([MCTime.QUARTER/2, MCTime.QUARTER/1]))
 
         harmonic_stream.append(new_chord)
 
@@ -635,9 +635,9 @@ def main():
 Creation
 """
 def score_create ( title: str = 'New score',
-                    key_in: key.Key = DEFAULT_KEY ,
-                   signature_in: meter.TimeSignature = DEFAULT_TIMESIGNATURE ,
-                   bpm_in: int = DEFAULT_TEMPO)\
+                    key_in: key.Key = Diatonic.DEFAULT_KEY ,
+                   signature_in: meter.TimeSignature = MCTime.DEFAULT_TIMESIGNATURE ,
+                   bpm_in: int = MCTime.DEFAULT_TEMPO)\
         -> stream.Score:
     # Create a stream to hold the musical elements
     score_out = stream.Score()
@@ -654,8 +654,8 @@ def score_create ( title: str = 'New score',
 
 
 def stream_create_random_from_list(length,
-                        pitch_set: list[note.Pitch] = DEFAULT_PITCHES,
-                        duration_set: list[note.Duration] = DEFAULT_DURATIONS) -> stream.Stream:
+                        pitch_set: list[note.Pitch] = Diatonic.DEFAULT_PITCHES,
+                        duration_set: list[note.Duration] = MCTime.DEFAULT_DURATIONS) -> stream.Stream:
 
     # Create a random stream from a list of pitches and durations
     stream_out = stream.Stream()
@@ -760,7 +760,7 @@ ToneRow
 
 def tonerow():
     # Music 21 TwelveToneRow
-    chromaticRow = serial.TwelveToneRow(CHROMATICPITCHCLASSNUMBERS)
+    chromaticRow = serial.TwelveToneRow(Chromatic.PITCHCLASSNUMBERS)
     matrixObj = chromaticRow.matrix()
 
     # Transform pitch sequence in tomerow
