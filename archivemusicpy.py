@@ -4,8 +4,7 @@ MusicPy - Music21
 Code using MusicPY and music21
 """
 
-from music21py import *
-from musicpy import database, musicpy, daw, control, algorithms, structures
+from musicpy import database, musicpy, control, algorithms, structures
 
 from harmony import *
 from library import *
@@ -43,7 +42,8 @@ str2 = algorithms.chord_analysis (piece_midi(track_number))
 str3 = musicpy.analyze_rhythm (trkTrack1[nFrom:nTo])
 
 
-scl01 = structures.scale(str(dctStyleScale['Standard'][0]))
+scalename = str(dctStyleScale['Standard'][0])
+scl01 = structures.scale(scalename)
 scl01 = structures.scale('C major')
 
 chd01 = scl01.chord_progression(lstChordPattern[0])
@@ -110,29 +110,6 @@ dctInstr['Piano'] = ['Piano_NineFootGrand.sf2', 'Piano_RolandPiano.sf2']
 dctInstr['Guitar'] = ['Guitar_SessionGuitar.sf2', 'Guitar_SeagullAcousticGuitar.SF2']
 dctInstr['Brass'] = ['Brass_SoftHorn.sf2', 'Brass_SwingHorn1.sf2']
 
-# MP DAW
-intNumChannels = 15
-daw1 = daw.daw(intNumChannels, name=strSongName)
-
-i = 0
-intDAWChannel = 0
-daw1.load(intDAWChannel, strSFpath + dctInstr['Piano'][i])
-
-intDAWChannel = 1
-daw1.load(intDAWChannel, strSFpath + dctInstr['Guitar'][i])
-
-intDAWChannel = 2
-daw1.load(intDAWChannel, strSFpath + dctInstr['Brass'][i])
-
-intDAWChannel = 9
-daw1.load(intDAWChannel, strSFpath + dctInstr['Piano'][i]) #Percussion
-
-intPiano = 1
-
-
-print ('Play :')
-print (daw1)
-#daw1.play(pce01, wait=True)
 
 # Slice
 mpstream_slice = trkTrack1[nFrom:nTo]
@@ -192,9 +169,9 @@ chd02 = structures.scale('C major').get('1,1,5,5,6,6,5,-,4,4,3,3,2,2,1,-')
 
 
 # Scales
-s1 = structures.scale('C Major')
-t1 = s1.get('-,1,-,2') % (1 / 2,)
-t1 = s1.get('r,1,r,2')
+mpscale1 = structures.scale('C Major')
+t1 = mpscale1.get('-,1,-,2') % (1 / 2,)
+t1 = mpscale1.get('r,1,r,2')
 
 #1
 mpstream = structures.chord ('F2, A2, F3')
@@ -248,20 +225,12 @@ intDAWChannel = 9
 intPiano = 1
 pceRhythm = structures.piece(mpstream_percussion, [intPiano], channels=[intDAWChannel])
 
-intNumChannels = 10
-strSongName = 'Percussion 001'
-daw1 = daw.daw(intNumChannels, name=strSongName)
 
 # Play rhythm
 print ('Play : ')
 print (pceRhythm)
 # play (chdRhythm, wait=True)
 musicpy.play (pceRhythm, wait=True)
-
-
-print (daw1)
-daw1.play(pceRhythm, wait=True)
-
 
 rhythmic_info = structures.rhythm.RhythmAnalyzer(pceRhythm)
 rtmSong = rhythmic_info.getRhythm()
@@ -285,3 +254,30 @@ lstIntChannel.append (1)
 # Percussion
 lstChdTrack.append (mpstream_percussion.apply_rhythm (rtmSong))
 lstIntChannel.append (9)
+
+
+
+"""
+DAW contains errors in importing (py)audioop
+
+# MP DAW
+intNumChannels = 15
+daw1 = daw.daw(intNumChannels, name=strSongName)
+
+i = 0
+intDAWChannel = 0
+daw1.load(intDAWChannel, strSFpath + dctInstr['Piano'][i])
+intDAWChannel = 1
+daw1.load(intDAWChannel, strSFpath + dctInstr['Guitar'][i])
+intDAWChannel = 2
+daw1.load(intDAWChannel, strSFpath + dctInstr['Brass'][i])
+intDAWChannel = 9
+daw1.load(intDAWChannel, strSFpath + dctInstr['Piano'][i]) #Percussion
+intPiano = 1
+
+
+print ('Play :')
+print (daw1)
+#daw1.play(pce01, wait=True)
+
+"""
