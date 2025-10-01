@@ -19,6 +19,21 @@ class Config:
     DEFAULT_MIDI_FILE_IN = 'in.mid'
     DEFAULT_MIDI_FILE_OUT = 'out.mid'
 
+def interval_to_step (intervals: list(int)):
+    # Convert a list of intervals to a sequential mask with sequential degree/onset numbers and zeroes
+    # Example [2, 3] -> [1, 0, 2, 0, 0, 3]
+    steps = []
+    degree = 1
+    for x in intervals:
+        steps.append(degree)
+        degree += 1
+        for y in range(1,x):
+            steps.append(0)
+    return steps
+
+def sequence_permutations (length: int, sequence: list(int)) -> (list,list):
+    permutations = tuple(sequence[x:]+sequence[:x] for x in range(length))
+    return permutations
 
 '''
 Music library - Chromatic data: frequency, pitch(class), octave
@@ -86,9 +101,6 @@ class MCTime:
 Music library - Diatonic data
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 class Diatonic:
-    # Constants
-    PENTA = 5 # Number of pitch classes in a pentatonic scale
-    HEPTA = 7 # Number of pitch classes in a heptatonic scale
 
     DEFAULT_KEY = key.Key('C', 'major')
     DEFAULT_SCALE = scale.MajorScale('C')
@@ -108,104 +120,125 @@ class Diatonic:
                 ]
     IMPERFECTINTERVALS = ('M2', 'm3', 'M3', 'm6', 'M6', 'm7', 'M7')
 
-
-def interval_to_sequential (intervals):
-    # Convert a list of intervals to a binary mask with sequential degree numbers
-    # Example [2, 3] -> [1, 0, 2, 0, 0, 3]
-    binary_with_degrees = []
-    degree = 1
-    for x in intervals:
-        binary_with_degrees.append(degree)
-        degree += 1
-        for y in range(1,x):
-            binary_with_degrees.append(0)
-    return binary_with_degrees
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Music library - Interval patterns: triads and sevenths
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-chord1 = chord.Chord()
-
-h = harmony.ChordSymbol('Dsus4')
-h.romanNumeral = 'III'
-h.romanNumeral.key = key.Key('B')
-h.romanNumeral = roman.RomanNumeral('IV', 'A' )
-
-TRIAD = 3 # Number of pitch classes in a triad
-# Patterns: diminished, major, minor, augmented
-dctIntervalPattern = {
-    'd': (3, 3, 6),
-    'M': (4, 3, 5),
-    'm': (3, 4, 5),
-    'A': (4, 4, 4)
+    # Melody scale degree functions
+    FUNCTIONS = {
+        1: 'tonic',
+        2: 'supertonic',
+        3: 'mediant',
+        4: 'subdominant',
+        5: 'dominant',
+        6: 'submediant',
+        7: 'leading tone'
 }
-intervalsPattern = dctIntervalPattern['M']
 
-# inversions
-lstScaleInterval = tuple(intervalsPattern[x:]+intervalsPattern[:x] for x in range(TRIAD) )
-# Chromatic patterns
-lstScaleBinary = [interval_to_sequential(lstScaleInterval[x]) for x in range(len(lstScaleInterval))]
+"""
+Diatonic scale - Chord degrees
+"""
+class MCChord:
+    """
+    Chords and progressions
+    """
+    chord1 = chord.Chord()
+
+    h = harmony.ChordSymbol('Dsus4')
+    h.romanNumeral = 'III'
+    h.romanNumeral.key = key.Key('B')
+    h.romanNumeral = roman.RomanNumeral('IV', 'A')
+
+    # Diatonic scale - Chord degrees
+    NUMTOROMAN = {
+        1: ("I","i"),
+        2: ('ii','ii0'),
+        3: ('iii','III'),
+        4: ('IV','iv'),
+        5: ('V','V'),
+        6: ('vi','VI'),
+        7: ('vii0','vii0')
+}
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Interval patterns - Diatonic cyclic patterns: pentatonic and heptatonic
+Music library - Intervals: triads and sevenths
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
-# Pentatonic
-lstIntPentaDegree = tuple(range(1, Diatonic.PENTA + 1)) # Pentatonic scale degree number
-lstPentaScaleIntervalPattern = (2,2,3,2,3) # Pentatonic interval pattern
-lstPentaScaleInterval = tuple(lstPentaScaleIntervalPattern[x:]+lstPentaScaleIntervalPattern[:x] for x in range(Diatonic.PENTA) )
-lstPentaScaleChromaticMask = [interval_to_sequential(lstPentaScaleInterval[x]) for x in range(len(lstPentaScaleInterval))] # Heptatonic binary patterns
+class MCInterval:
 
-# Heptatonic (7 pitch class) scale
-scale01 = scale.ConcreteScale()
-lstIntHeptaDegree = tuple(range(1, Diatonic.HEPTA + 1)) # Heptatonic scale degree number
-lstHeptaScaleIntervalPattern = (2,2,1,2,2,2,1) # Heptatonic interval pattern
-# Modes
-lstHeptaScaleInterval = tuple(lstHeptaScaleIntervalPattern[x:]+lstHeptaScaleIntervalPattern[:x] for x in range(Diatonic.HEPTA) )
-# Diatonic heptatonic binary masks for chromatic
-lstHeptaScaleChromaticMask = [interval_to_sequential(lstHeptaScaleInterval[x]) for x in range(len(lstHeptaScaleInterval))]
+    PENTATONIC = (2,2,3,2,3) # sequence of 5 intervals
+    HEPTATONIC = (2,2,1,2,2,2,1) # sequence of 7 intervals
 
-# Diatonic pitch masks for modes:
-# 1. Ionian = Major 2. Dorian, 3. Phrygian, 4. Lydian, 5. Mixolydian, 6. Aeolian = Minor, 7. Locrian
-IONIAM = MAJOR = 0
-DOROIAN = 1
-PHRYGIAN = 2
-LYDIAN = 3
-MIXOLYDIAN = 4
-AEOLIAN = MINOR = 5
-LOCRIAN = 6
-lstScaleMajor = Chromatic.OCTAVES * lstHeptaScaleChromaticMask [MAJOR]
-# Minor
-lstScaleMinor = Chromatic.OCTAVES * lstHeptaScaleChromaticMask [MINOR]
+    TRIAD = 2 # Number intervals in a triad
+    SEVENTH = 3 # Number of pitch classes in a seventh
+    # Patterns:
+    DIMINISHED = 0
+    MINOR = 1
+    MAJOR = 2
+    AUGMENTED = 3
+    CHORDINTERVALS = {
+        DIMINISHED : (3, 3, 6),
+        MINOR: (3, 4, 5),
+        MAJOR : (4, 3, 5),
+        AUGMENTED: (4, 4, 4)
+    }
+    intervalsPattern = CHORDINTERVALS[MAJOR]
 
-# Major scale pitch masks for all tonics (C, C#, D, ..., B)
-lstHeptaScale = [lstScaleMajor[-x:]+lstScaleMajor[:-x] for x in range(Chromatic.NUMPITCHCLASS) ]
-arrHeptaScale = np.array(lstHeptaScale)
+    # inversions
+    positions = sequence_permutations(TRIAD, CHORDINTERVALS[MAJOR])
+    # Chromatic steps
+    positions_chromatic_steps = [interval_to_step(positions[x]) for x in range(len(positions))]
 
-# Permutations: ordered set
-itemlist = lstIntHeptaDegree
-lstPermutations = list(itertools.permutations (itemlist))
-# Combinations: of a set
-itemlist = Chromatic.PITCHCLASSNUMBERS
-num_items = 3
-lstCombinations = list(itertools.combinations (itemlist, num_items))
+
+class MCScale:
+    """
+    Interval patterns - Diatonic cyclic patterns: pentatonic and heptatonic
+    """
+    PENTA = 5 # Number of pitch classes in a pentatonic scale
+    PENTATONICDEGREES = tuple(range(1, PENTA + 1)) # Pentatonic scale degree number
+
+    HEPTA = 7 # Number of pitch classes in a heptatonic scale
+    HEPTATONICDEGREES = tuple(range(1, Diatonic.HEPTA + 1)) # Heptatonic scale degree number
+
+    scale01 = scale.ConcreteScale()
+
+
+    # Pentatonic (5 pitch class) scale
+    PENTAMODES = sequence_permutations (PENTA, MCInterval.PENTATONIC)
+    PENTAMODESCHROMATIC = [interval_to_step(PENTAMODES[x]) for x in range(len(PENTAMODES))]
+
+    # Heptatonic (7 pitch class) scale
+    HEPTAMODES = sequence_permutations (HEPTA, MCInterval.HEPTATONIC)
+    HEPTAMODESCHROMATIC = [interval_to_step(HEPTAMODES[x]) for x in range(len(HEPTAMODES))]
+
+
+    # Chromatic pitch masks for modes:
+    # 1. Ionian = Major 2. Dorian, 3. Phrygian, 4. Lydian, 5. Mixolydian, 6. Aeolian = Minor, 7. Locrian
+    IONIAM = MAJOR = 0
+    DOROIAN = 1
+    PHRYGIAN = 2
+    LYDIAN = 3
+    MIXOLYDIAN = 4
+    AEOLIAN = MINOR = 5
+    LOCRIAN = 6
+    lstScaleMajor = Chromatic.OCTAVES * HEPTAMODESCHROMATIC [MAJOR]
+    # Minor
+    lstScaleMinor = Chromatic.OCTAVES * HEPTAMODESCHROMATIC [MINOR]
+
+    # Major scale pitch masks for all tonics (C, C#, D, ..., B)
+    HEPTAMAJORSCALES = [lstScaleMajor[-x:]+lstScaleMajor[:-x] for x in range(Chromatic.NUMPITCHCLASS) ]
+    arrHeptaScale = np.array(HEPTAMAJORSCALES)
+
+class MCSet:
+    # Permutations: ordered set
+    itemlist = MCScale.HEPTATONICDEGREES
+    lstPermutations = list(itertools.permutations (itemlist))
+    # Combinations: of a set
+    itemlist = Chromatic.PITCHCLASSNUMBERS
+    num_items = 3
+    lstCombinations = list(itertools.combinations (itemlist, num_items))
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Scale level - Harmonic function and progression of chords in scales
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 # Chord patterns in heptatonic scale degrees
-# Melody scale degree functions
-FUNCTIONS = {
-    1: 'tonic',
-    2: 'supertonic',
-    3: 'mediant',
-    4: 'subdominant',
-    5: 'dominant',
-    6: 'submediant',
-    7: 'leading tone'
-}
+
 
 scaledegreepattern = (1,3,5,7,2,4,6) #Heptatonic
 lstHeptaScaleChord = [scaledegreepattern[x:]+scaledegreepattern[:x] for x in range(Diatonic.HEPTA) ]
@@ -223,7 +256,7 @@ def save_library_sheet():
     chromatic_data = pd.DataFrame ([Chromatic.PITCHMIDINUMBERLIST,
                          Chromatic.PITCHCLASSNUMBERLIST,
                          Chromatic.PITCHCLASSTEXTLIST,
-                         Chromatic.PITCHFREQUENCYLIST]+ lstHeptaScale,
+                         Chromatic.PITCHFREQUENCYLIST]+ MCScale.HEPTAMAJORSCALES,
                               ).transpose()
 #    chromatic_data.columns=['Nr','ClassNr','ClassChr', 'Freq', 'Major', 'Minor']
     chromatic_data.to_excel(Config.DEFAULT_PATH+'chromatic.xlsx', index=True, sheet_name='Pitch')

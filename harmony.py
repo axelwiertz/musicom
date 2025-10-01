@@ -4,24 +4,8 @@ Patterns and rules
 """
 
 
-"""
-Diatonic scale - Chord degrees
-"""
-class MCChord:
-    """
-    Chords and progressions
-    """
 
-    # Diatonic scale - Chord degrees
-    NUMTOROMAN = {
-        1: (1,1),
-        2: ('ii','ii0'),
-        3: ('iii','III'),
-        4: ('IV','iv'),
-        5: ('V','V'),
-        6: ('vi','VI'),
-        7: ('vii0','vii0')
-}
+class ChordHarmony:
     # Chord ladder
     LADDER = (
         (1, 6), # Tonic
@@ -30,7 +14,7 @@ class MCChord:
         6, 3
     )
     # Widely used chords sequences (progressions)
-    PROGRESSIONNEXT = {
+    PROGRESSION_NEXT = {
         1 : '*',
         2 : (4, 5, 7),
         3 : (2, 4, 6),
@@ -43,17 +27,17 @@ class MCChord:
     TONIC = 0
     DOMINANT = 1
     SUBDOMINANT = 2
-    TONICPROLONG = 3
+    TONIC_PROLONG = 3
 
-    FUNCTIONS = {  TONIC : (1),
+    FUNCTIONS = {  TONIC : 1,
                    DOMINANT : (7,5),
                    SUBDOMINANT : (4,2),
-                   TONICPROLONG : (3,6)
+                   TONIC_PROLONG : (3,6)
                 }
     FLATVIICHORD = 'b7' # substitues 7 and has DOM, SUBDOM and PROLON functions
 
     FUNCTIONPROGRESSION = {
-        TONIC : [TONICPROLONG, DOMINANT, SUBDOMINANT],
+        TONIC : [TONIC_PROLONG, DOMINANT, SUBDOMINANT],
         DOMINANT : [TONIC],
         SUBDOMINANT : [DOMINANT]
     }
@@ -113,13 +97,9 @@ class MCModulation:
     """
     Modulation progression in new key
     """
-
     dctModulationPattern = {
-    # Direct progression
         'Direct' : (),
-    # Dominant progression
         'Dominant' : 'V7',
-    # Subdominant progression
         'Subdominant' : ('iim7', 'V7'),
 }
 

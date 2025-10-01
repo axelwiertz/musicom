@@ -524,7 +524,7 @@ def create_key_library (key_in: key.Key):
     part_lib = part_create_from_stream(stream_lib)
     main_score.append(part_lib)
 
-    stream_lib = create_stream_chords_in_key(MCChord.PROGRESSIONS, key_in, 1)
+    stream_lib = create_stream_chords_in_key(ChordHarmony.PROGRESSIONS, key_in, 1)
     part_lib = part_create_from_stream(stream_lib)
     main_score.append(part_lib)
 
@@ -551,7 +551,7 @@ def create_stream_triads_in_key (key_in: key.Key ,  quarterlength_in: int = 4 ) 
     # Stream of all triads in a key
     stream_out = stream.Stream()
 
-    for i in range(Diatonic.HEPTA):
+    for i in range(MCScale.HEPTA):
         triad = roman.RomanNumeral(i+1, key_in)
         triad.duration.quarterLength = quarterlength_in
         stream_out.append(triad)
