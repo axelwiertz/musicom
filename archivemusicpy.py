@@ -10,14 +10,14 @@ from harmony import *
 from library import *
 
 
-piece_midi = musicpy.read (Config.DEFAULT_PATH + Config.DEFAULT_MIDI_FILE_IN, get_off_drums=True, split_channels=True)
+mpstream = musicpy.read (Config.DEFAULT_PATH + Config.DEFAULT_MIDI_FILE_IN, get_off_drums=True, split_channels=True)
 track_number = 0
 nFrom = 0
 nTo = 4
 #nTo = 47
 
-intNumTracks = len(piece_midi.tracks)
-trkTrack1 = piece_midi(track_number)
+intNumTracks = len(mpstream.tracks)
+trkTrack1 = mpstream(track_number)
 lstNotes = trkTrack1.notes[nFrom:nTo]
 intNumNotes = len (lstNotes)
 
@@ -28,8 +28,8 @@ print (trkTrack1[nFrom:nTo])
 print ('Notes from track : '+ str(lstNotes))
 print ('Number of notes : ' + str(intNumNotes))
 
-print (piece_midi[track_number].content)
-print (piece_midi[track_number].content.notes)
+print (mpstream[track_number].content)
+print (mpstream[track_number].content.notes)
 
 intInstr = 1
 print ('Play selected track :')
@@ -38,7 +38,7 @@ print ('Play selected track :')
 
 part_analyzed = trkTrack1[nFrom:nTo]
 str1 = algorithms.detect (part_analyzed)
-str2 = algorithms.chord_analysis (piece_midi(track_number))
+str2 = algorithms.chord_analysis (mpstream(track_number))
 str3 = musicpy.analyze_rhythm (trkTrack1[nFrom:nTo])
 
 
@@ -120,7 +120,7 @@ sclSource = structures.scale('Bb', 'major')
 sclTarget = structures.scale('C', 'major')
 
 # Modulate
-mpstream_out = piece_midi[track_number].content.modulation(sclSource, sclTarget)
+mpstream_out = mpstream[track_number].content.modulation(sclSource, sclTarget)
 
 print ('Target musicpy stream :')
 print (mpstream_out.notes)
@@ -132,9 +132,9 @@ intInstr = 1
 intBPM = 100
 print ('Play :')
 #play(pceTarget, wait=True)
-#play (piece_midi, wait=True)
-#play (piece_midi[track_number], instrument=intInstr, wait=True)
-# play (piece_midi[track_number].content, bpm=intBPM, instrument=intInstr)
+#play (mpstream, wait=True)
+#play (mpstream[track_number], instrument=intInstr, wait=True)
+# play (mpstream[track_number].content, bpm=intBPM, instrument=intInstr)
 #play (mpstream_out, wait=True)
 
 

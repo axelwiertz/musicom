@@ -8,9 +8,13 @@ Patterns and rules
 Diatonic scale - Chord degrees
 """
 class MCChord:
-    # Chords
-    dctChordRomanMm = {
-        1: ('I','i'),
+    """
+    Chords and progressions
+    """
+
+    # Diatonic scale - Chord degrees
+    NUMTOROMAN = {
+        1: (1,1),
         2: ('ii','ii0'),
         3: ('iii','III'),
         4: ('IV','iv'),
@@ -18,21 +22,15 @@ class MCChord:
         6: ('vi','VI'),
         7: ('vii0','vii0')
 }
-
     # Chord ladder
-    lstTriChordLadder = (
-        # Tonic
-        (1, 6),
-        # Dominant
-        (5, 7),
-        # Pre-dominant
-        (2, 4),
-        6,
-        3
+    LADDER = (
+        (1, 6), # Tonic
+        (5, 7), # Dominant
+        (2, 4), # Pre-dominant
+        6, 3
     )
-
-    # Widely used next chords
-    dctChordProgr = {
+    # Widely used chords sequences (progressions)
+    PROGRESSIONNEXT = {
         1 : '*',
         2 : (4, 5, 7),
         3 : (2, 4, 6),
@@ -41,82 +39,80 @@ class MCChord:
         6 : (1, 3),
         7 : 1
     }
-
-    PROGRESSIONS = [
-    # Analysis of all progressions
-        ['I', 'vi', 'IV', 'viio', 'I'] ,
-        ['I', 'vi', 'ii', 'viio', 'I'] ,
-        ['I', 'vi', 'IV', 'V', 'I'] ,
-        ['I', 'vi', 'ii', 'V', 'I'] ,
-        ['V', 'IV6','IV'] ,
-        ['v', 'iv'] ,
-        ['iv', 'I6', 'I'] ,
-    # Common progressions
-        ["I", 'IV'],
-        ["I", 'V'],
-        ["I", 'IV', 'V'],
-        ["I", 'IV', 'V7'],
-        ["I", 'IV', 'I', 'V'],
-        ["I", 'IV', 'I', 'V7'],
-        ["I", 'IV', 'V', 'IV'],
-        ["I", 'V', 'vi', 'IV'],
-        ["I", 'ii', 'IV', 'V'],
-        ["I", 'ii', 'IV'],
-        ["I", 'vi', 'ii', 'V'],
-        ["I", 'vi', 'IV', 'V'],
-        ["I", 'vi', 'ii', 'IV', 'V7'],
-        ["I", 'vi', 'ii', 'V7', 'ii'],
-        ["IV", 'I', 'IV', 'V'],
-        ["ii7", 'V7', 'I'],
-        ["I", 'IV', 'I', 'V7', 'IV', 'I'],
-        ["I", 'IV', 'vii0', 'iii', 'vi', 'ii', 'V', 'I']
-]
-
-    # Chord functions
+    # Diatonic chord functions
     TONIC = 0
     DOMINANT = 1
     SUBDOMINANT = 2
     TONICPROLONG = 3
 
     FUNCTIONS = {  TONIC : (1),
-                        DOMINANT : (7,5),
-                        SUBDOMINANT : (4,2),
-                        TONICPROLONG : (3,6)
-                        }
+                   DOMINANT : (7,5),
+                   SUBDOMINANT : (4,2),
+                   TONICPROLONG : (3,6)
+                }
     FLATVIICHORD = 'b7' # substitues 7 and has DOM, SUBDOM and PROLON functions
 
-    chordfunctionprogressions = {
+    FUNCTIONPROGRESSION = {
         TONIC : [TONICPROLONG, DOMINANT, SUBDOMINANT],
         DOMINANT : [TONIC],
         SUBDOMINANT : [DOMINANT]
     }
-
     MINORPOP = (1, 7, 6, 7)
-    BESTSELLER = (1,5,6,4)
+    BESTSELLER = (1, 5, 6, 4)
 
-    CYCLICFIFTHCHORDPROGRESSION = (1,4,7,3,6,2,5)
+    CYCLICFIFTHPROGRESSION = (1,4,7,3,6,2,5)
+
+    PROGRESSIONS = [
+    # Analysis of all progressions
+        [1, 6, 4, 7, 1] ,
+        [1, 6, 2, 7, 1] ,
+        [1, 6, 4, 5, 1] ,
+        [1, 6, 2, 5, 1] ,
+        [5, 'IV6',4] ,
+        [5, 4] ,
+        [4, 'I6', 1] ,
+    # Common progressions
+        [1, 4],
+        [1, 5],
+        [1, 4, 5],
+        [1, 4, 'V7'],
+        [1, 4, 1, 5],
+        [1, 4, 1, 'V7'],
+        [1, 4, 5, 4],
+        [1, 5, 6, 4],
+        [1, 2, 4, 5],
+        [1, 2, 4],
+        [1, 6, 2, 5],
+        [1, 6, 4, 5],
+        [1, 6, 2, 4, 'V7'],
+        [1, 6, 2, 'V7', 2],
+        [4, 1, 4, 5],
+        ["ii7", 'V7', 1],
+        [1, 4, 1, 'V7', 4, 1],
+        [1, 4, 7, 3, 6, 2, 5, 1]
+]
 
 
-'''
-Ending cadence
-'''
 class MCCadence:
+    """
+    Ending cadence
+    """
 
     dctCadencePattern = {
     # Perfect cadence
-        'Perfect' : ('V', 'I'),
+        'Perfect' : (5, 1),
     # Plagal cadence
-        'Plagal' : ('IV', 'I'),
+        'Plagal' : (4, 1),
     # Imperfect cadence
-        'Imperfect' : (('I', 'V'), ('ii', 'V'), ('IV', 'V'), ('vi', 'V')),
+        'Imperfect' : ((1, 5), (2, 5), (4, 5), (6, 5)),
     # Interrupted cadence
-        'Interrupted' : (('V', 'IV'), ('V', 'vi'), ('V', 'ii'), ('V', 'V7'))
+        'Interrupted' : ((5, 4), (5, 6), (5, 2), (5, 'V7'))
     }
 
-"""
-Modulation progression in new key
-"""
 class MCModulation:
+    """
+    Modulation progression in new key
+    """
 
     dctModulationPattern = {
     # Direct progression
@@ -127,15 +123,15 @@ class MCModulation:
         'Subdominant' : ('iim7', 'V7'),
 }
 
-'''
-Scales in styles
-'''
 class MCStyle:
+    """
+    Scales and chord progression patterns in different musical styles.
+    """
 
     SCALE = {
         'Standard' : ('C', 'major'),
         'Fantasy' : (('A', 'minor'), ('C', 'major')),
-        'Bossa Nova' : ('C major')
+        'Bossa Nova' : ('C', 'major')
     }
 
     # Chord progression patterns in styles

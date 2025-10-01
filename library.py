@@ -108,7 +108,8 @@ class Diatonic:
                 ]
     IMPERFECTINTERVALS = ('M2', 'm3', 'M3', 'm6', 'M6', 'm7', 'M7')
 
-def interval_to_binary (intervals):
+
+def interval_to_sequential (intervals):
     # Convert a list of intervals to a binary mask with sequential degree numbers
     # Example [2, 3] -> [1, 0, 2, 0, 0, 3]
     binary_with_degrees = []
@@ -144,8 +145,8 @@ intervalsPattern = dctIntervalPattern['M']
 
 # inversions
 lstScaleInterval = tuple(intervalsPattern[x:]+intervalsPattern[:x] for x in range(TRIAD) )
-# Binary patterns
-lstScaleBinary = [interval_to_binary(lstScaleInterval[x]) for x in range(len(lstScaleInterval))] 
+# Chromatic patterns
+lstScaleBinary = [interval_to_sequential(lstScaleInterval[x]) for x in range(len(lstScaleInterval))]
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -155,7 +156,7 @@ Interval patterns - Diatonic cyclic patterns: pentatonic and heptatonic
 lstIntPentaDegree = tuple(range(1, Diatonic.PENTA + 1)) # Pentatonic scale degree number
 lstPentaScaleIntervalPattern = (2,2,3,2,3) # Pentatonic interval pattern
 lstPentaScaleInterval = tuple(lstPentaScaleIntervalPattern[x:]+lstPentaScaleIntervalPattern[:x] for x in range(Diatonic.PENTA) )
-lstPentaScaleBinaryDiatonicMask = [interval_to_binary(lstPentaScaleInterval[x]) for x in range(len(lstPentaScaleInterval))] # Heptatonic binary patterns
+lstPentaScaleChromaticMask = [interval_to_sequential(lstPentaScaleInterval[x]) for x in range(len(lstPentaScaleInterval))] # Heptatonic binary patterns
 
 # Heptatonic (7 pitch class) scale
 scale01 = scale.ConcreteScale()
@@ -164,15 +165,22 @@ lstHeptaScaleIntervalPattern = (2,2,1,2,2,2,1) # Heptatonic interval pattern
 # Modes
 lstHeptaScaleInterval = tuple(lstHeptaScaleIntervalPattern[x:]+lstHeptaScaleIntervalPattern[:x] for x in range(Diatonic.HEPTA) )
 # Diatonic heptatonic binary masks for chromatic
-lstHeptaScaleBinaryDiatonicMask = [interval_to_binary(lstHeptaScaleInterval[x]) for x in range(len(lstHeptaScaleInterval))]
+lstHeptaScaleChromaticMask = [interval_to_sequential(lstHeptaScaleInterval[x]) for x in range(len(lstHeptaScaleInterval))]
 
-# Diatonic pitch masks for modes
-# Major
-lstScaleMajor = Chromatic.OCTAVES * lstHeptaScaleBinaryDiatonicMask [0] # C scale pitch mask
+# Diatonic pitch masks for modes:
+# 1. Ionian = Major 2. Dorian, 3. Phrygian, 4. Lydian, 5. Mixolydian, 6. Aeolian = Minor, 7. Locrian
+IONIAM = MAJOR = 0
+DOROIAN = 1
+PHRYGIAN = 2
+LYDIAN = 3
+MIXOLYDIAN = 4
+AEOLIAN = MINOR = 5
+LOCRIAN = 6
+lstScaleMajor = Chromatic.OCTAVES * lstHeptaScaleChromaticMask [MAJOR]
 # Minor
-lstScaleMinor = Chromatic.OCTAVES * lstHeptaScaleBinaryDiatonicMask [5] # a minor scale pitch mask
+lstScaleMinor = Chromatic.OCTAVES * lstHeptaScaleChromaticMask [MINOR]
 
-# All major scale pitch mask
+# Major scale pitch masks for all tonics (C, C#, D, ..., B)
 lstHeptaScale = [lstScaleMajor[-x:]+lstScaleMajor[:-x] for x in range(Chromatic.NUMPITCHCLASS) ]
 arrHeptaScale = np.array(lstHeptaScale)
 
@@ -202,7 +210,6 @@ FUNCTIONS = {
 scaledegreepattern = (1,3,5,7,2,4,6) #Heptatonic
 lstHeptaScaleChord = [scaledegreepattern[x:]+scaledegreepattern[:x] for x in range(Diatonic.HEPTA) ]
 lstHeptaScaleChord.sort()
-
 
 
 
