@@ -1,6 +1,7 @@
 """
 Music library
 """
+from dataclasses import dataclass
 
 # Import
 import numpy as np
