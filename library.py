@@ -19,7 +19,7 @@ class Config:
     DEFAULT_MIDI_FILE_IN = 'in.mid'
     DEFAULT_MIDI_FILE_OUT = 'out.mid'
 
-def interval_to_step (intervals: list(int)):
+def interval_to_step (intervals: list[int]) -> list[int]:
     # Convert a list of intervals to a sequential mask with sequential degree/onset numbers and zeroes
     # Example [2, 3] -> [1, 0, 2, 0, 0, 3]
     steps = []
@@ -31,42 +31,39 @@ def interval_to_step (intervals: list(int)):
             steps.append(0)
     return steps
 
-def sequence_permutations (length: int, sequence: list(int)) -> (list,list):
+def sequence_permutations (length: int, sequence: list[int]) -> tuple:
     permutations = tuple(sequence[x:]+sequence[:x] for x in range(length))
     return permutations
 
-'''
-Music library - Chromatic data: frequency, pitch(class), octave
-'''
 class Chromatic:
-
-    # Chromatic pitch set, equal temperament scale
+    """
+    Chromatic pitch set and intervals
+    equal temperament scale
+    """
     FREQUENCY_A4 = 440 # Frequency of A4
-    MIDIPITCHNUM_A4 = 69 # MIDI number of A4
+    MIDI_PITCH_A4 = 69 # MIDI number of A4
     OCTAVES = 9 # Number of octaves in the pitch set
-
     NUMPITCHCLASS = 12 # Number of pitch classes 0-11
     # Total number of pitches chromatic pitch set
     NUMPITCH = OCTAVES * NUMPITCHCLASS
-    PITCHMIDINUMBERLIST = tuple(range(NUMPITCH)) # Pitch number set
-
-    # Chromatic sets
-    PITCHCLASSNUMBERS = tuple(range (NUMPITCHCLASS)) # Pitch class numbers
-    PITCHCLASSTEXTS = ('C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B') # Pitch class characters
-
-    # Pitch class
-    PITCHCLASSTEXTLIST = ([x for y in range(0, OCTAVES) for x in PITCHCLASSTEXTS])
-    PITCHCLASSNUMBERLIST = (OCTAVES * PITCHCLASSNUMBERS)
-    PITCHFREQUENCYLIST = tuple(2 ** ((n - MIDIPITCHNUM_A4) / NUMPITCHCLASS) * FREQUENCY_A4
+    # Pitch MIDI number set
+    PITCHMIDINUMBERLIST = tuple(range(NUMPITCH))
+    # Chromatic pitch class sets
+    # One octave
+    PITCHCLASSES_INT = tuple(range (NUMPITCHCLASS))
+    PITCHCLASSES_STR = ('C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B')
+    # Multiple octaves
+#    PITCHCLASSTEXTLIST = [x for y in range(0, OCTAVES) for x in Chromatic.PITCHCLASSES_STR]
+    PITCHCLASSNUMBERLIST = (OCTAVES * PITCHCLASSES_INT)
+    PITCHFREQUENCYLIST = tuple(2 ** ((n - MIDI_PITCH_A4) / NUMPITCHCLASS) * FREQUENCY_A4
                                     for n in range(NUMPITCH)) # Pitch frequencies
     INTERVALLIST = [interval.ChromaticInterval(n) for n in range(NUMPITCHCLASS)]
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Music library: Rhythm and meter
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 class MCTime:
+    """
+    Rhythm and meter
+    """
     # Defaults
     DEFAULT_TEMPO = 100
     DEFAULT_TIMESIGNATURE = meter.TimeSignature('4/4')
@@ -97,11 +94,10 @@ class MCTime:
     three_rtm = (1, 1, 1)
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Music library - Diatonic data
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 class Diatonic:
-
+    """
+    Diatonic scale - Notes, intervals and functions
+    """
     DEFAULT_KEY = key.Key('C', 'major')
     DEFAULT_SCALE = scale.MajorScale('C')
     DEFAULT_PITCHES = DEFAULT_SCALE.pitches
@@ -131,9 +127,6 @@ class Diatonic:
         7: 'leading tone'
 }
 
-"""
-Diatonic scale - Chord degrees
-"""
 class MCChord:
     """
     Chords and progressions
@@ -172,15 +165,19 @@ class MCInterval:
     MINOR = 1
     MAJOR = 2
     AUGMENTED = 3
+    SUS2 = 4
+    SUS4 = 5
     CHORDINTERVALS = {
         DIMINISHED : (3, 3, 6),
         MINOR: (3, 4, 5),
         MAJOR : (4, 3, 5),
-        AUGMENTED: (4, 4, 4)
+        AUGMENTED: (4, 4, 4),
+        SUS2: (2, 5, 5),
+        SUS4: (5, 2, 5)
     }
     intervalsPattern = CHORDINTERVALS[MAJOR]
 
-    # inversions
+    # chord positions - permutations of intervals
     positions = sequence_permutations(TRIAD, CHORDINTERVALS[MAJOR])
     # Chromatic steps
     positions_chromatic_steps = [interval_to_step(positions[x]) for x in range(len(positions))]
@@ -197,7 +194,6 @@ class MCScale:
     HEPTATONICDEGREES = tuple(range(1, Diatonic.HEPTA + 1)) # Heptatonic scale degree number
 
     scale01 = scale.ConcreteScale()
-
 
     # Pentatonic (5 pitch class) scale
     PENTAMODES = sequence_permutations (PENTA, MCInterval.PENTATONIC)
@@ -230,21 +226,9 @@ class MCSet:
     itemlist = MCScale.HEPTATONICDEGREES
     lstPermutations = list(itertools.permutations (itemlist))
     # Combinations: of a set
-    itemlist = Chromatic.PITCHCLASSNUMBERS
+    itemlist = Chromatic.PITCHCLASSES_INT
     num_items = 3
     lstCombinations = list(itertools.combinations (itemlist, num_items))
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Scale level - Harmonic function and progression of chords in scales
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-# Chord patterns in heptatonic scale degrees
-
-
-scaledegreepattern = (1,3,5,7,2,4,6) #Heptatonic
-lstHeptaScaleChord = [scaledegreepattern[x:]+scaledegreepattern[:x] for x in range(Diatonic.HEPTA) ]
-lstHeptaScaleChord.sort()
-
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Visualization
@@ -255,7 +239,7 @@ def save_library_sheet():
     # Table of all absolute chromatic data along pitch number set
     chromatic_data = pd.DataFrame ([Chromatic.PITCHMIDINUMBERLIST,
                          Chromatic.PITCHCLASSNUMBERLIST,
-                         Chromatic.PITCHCLASSTEXTLIST,
+#                         Chromatic.PITCHCLASSTEXTLIST,
                          Chromatic.PITCHFREQUENCYLIST]+ MCScale.HEPTAMAJORSCALES,
                               ).transpose()
 #    chromatic_data.columns=['Nr','ClassNr','ClassChr', 'Freq', 'Major', 'Minor']
@@ -268,7 +252,7 @@ def rhythm_circle ():
 
 
 
-def show_circle(num_parts: int = 12, labels : tuple | list  = Chromatic.PITCHCLASSTEXTS, title : str = 'Circle of parts and labels' ):
+def show_circle(num_parts: int = 12, labels : tuple | list  = Chromatic.PITCHCLASSES_STR, title : str = 'Circle of parts and labels' ):
     # Show parts (angles) and labels in circle
 
     # Convert parts to angles
@@ -344,7 +328,7 @@ def stream_create(pitches : list[int|str],
 
 
 def main():
-    show_circle(Chromatic.NUMPITCHCLASS, Chromatic.PITCHCLASSTEXTS, 'Pitch class circle')
+    show_circle(Chromatic.NUMPITCHCLASS, Chromatic.PITCHCLASSES_STR, 'Pitch class circle')
     save_library_sheet ()
 
 

@@ -3,8 +3,6 @@ Music - Harmony
 Patterns and rules
 """
 
-
-
 class ChordHarmony:
     # Chord ladder
     LADDER = (
