@@ -23,7 +23,7 @@ Composition - Structure
 # Genetic creation
 from genetic import (Genome, selection_pair, single_point_crossover, mutation,
                      generate_population, sort_population)
-# Bianry representation of note in genetic creation
+# Binary representation of note in genetic creation
 BITS_PER_NOTE = 4
 
 
@@ -202,10 +202,10 @@ All sequences are of class MeterSequence
 """
 
 def create_rhythm () -> stream.Stream:
-    # Timestep is the rhythm relative unit, represented as integer
+    # Timestep is the smallest rhythm relative unit, represented as integer
     # Harmonic rhythm: sequential pattern of onsets at timesteps
     # A rhythm sequence is defined by
-    #  - a sequence of timestep in tervals between onsets
+    #  - a sequence of timestep intervals between onsets
     #
     # The number of timesteps is the sum of the intervals
 
@@ -213,8 +213,8 @@ def create_rhythm () -> stream.Stream:
 
     # [2,1,1.1]
     # [2,2,1,1,2]
-    # [4, 3, 3, 3, 4]
-    # [6, 4, 1, 5, 6]
+    # [4,3,3,3,4]
+    # [6,4,1,5,6]
 
     num_timesteps = sum(rhythm_seq)
 
@@ -222,7 +222,7 @@ def create_rhythm () -> stream.Stream:
     timesteps_per_beat = 2
 
     # Meter: measure cycle of beats
-    beat_note = 4  # eigth
+    beat_note = 4  # eighth
 
     num_beats_in_measure = 4
     main_timesignature = meter.TimeSignature(str(num_beats_in_measure)+'/'+str(beat_note))
@@ -737,8 +737,8 @@ def idea_tonerow():
     """
 
     # Music 21 TwelveToneRow
-    chromaticRow = serial.TwelveToneRow(ChromaticLayer.PITCHCLASSES_INT)
-    matrixObj = chromaticRow.matrix()
+    chromaticrow = serial.TwelveToneRow(ChromaticLayer.PITCHCLASSES_INT)
+    matrixobj = chromaticrow.matrix()
 
     # Transform pitch sequence in tomerow
     trw01 = serial.ToneRow()

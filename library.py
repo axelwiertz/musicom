@@ -11,7 +11,7 @@ from showscore import show
 import numpy as np
 import matplotlib.pyplot as plt
 
-from theory import ChromaticLayer, DiatonicLayer, MCTime
+from theory import ChromaticLayer
 
 # Music21 modules
 from music21 import (stream, note, key, scale, chord, interval,
@@ -28,26 +28,27 @@ class Config:
 """
 Visualization
 """
+class Circle:
 
-def show_circle(num_parts: int = 12, labels : tuple | list  = ChromaticLayer.PITCHCLASSES_STR, title : str = 'Circle of parts and labels' ):
-    # Show parts (angles) and labels in circle
+    def show(self, num_parts: int = 12, labels : tuple | list  = ChromaticLayer.PITCHCLASSES_STR, title : str = 'Circle of parts and labels' ):
+        # Show parts (angles) and labels in circle
 
-    # Convert parts to angles
-    angles = np.linspace(0, 2 * np.pi, num_parts, endpoint=False)
+        # Convert parts to angles
+        angles = np.linspace(0, 2 * np.pi, num_parts, endpoint=False)
 
-    # Create a figure and axis
-    fig, ax = plt.subplots(subplot_kw={'projection': 'polar'})
+        # Create a figure and axis
+        fig, ax = plt.subplots(subplot_kw={'projection': 'polar'})
 
-    # Plot the labels
-    for angle, label in zip(angles, labels):
-        ax.plot(angle, 1, 'o', markersize=10)
-        ax.text(angle, 1.1, str(label), ha='center', va='center')
+        # Plot the labels
+        for angle, label in zip(angles, labels):
+            ax.plot(angle, 1, 'o', markersize=10)
+            ax.text(angle, 1.1, str(label), ha='center', va='center')
 
-    # Set the title
-    ax.set_title(title)
+        # Set the title
+        ax.set_title(title)
 
-    # Show the plot
-    plt.show()
+        # Show the plot
+        plt.show()
 
 def show_plot(yvalues: list):
     # Plot

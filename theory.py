@@ -1,7 +1,7 @@
 """
 Music theory
 """
-from library import Config
+from library import Config, Circle
 
 # General modules
 import numpy as np
@@ -281,9 +281,10 @@ def main():
 
     d.save_library_sheet ()
 
-    show_circle(c.NUMPITCHCLASS, c.PITCHCLASSES_STR, 'Pitch class circle')
+    pc_circle = Circle()
+    pc_circle.show(c.NUMPITCHCLASS, c.PITCHCLASSES_STR, 'Pitch class circle')
 
-#    show_circle(d.HEPTAMODESCHROMATIC[d.MAJOR_MODE], c.PITCHCLASSES_STR, 'Major circle')
+#    pc_circle.show(d.HEPTAMODESCHROMATIC[d.MAJOR_MODE], c.PITCHCLASSES_STR, 'Major circle')
 
 
 
