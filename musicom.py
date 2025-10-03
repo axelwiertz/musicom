@@ -235,7 +235,7 @@ def create_rhythm () -> stream.Stream:
     beat_duration = main_timesignature.beatDuration.quarterLength
 
 
-    main_score = score_create('Rhythm',Diatonic.DEFAULT_KEY,main_timesignature)
+    main_score = score_create('Rhythm',DiatonicLayer.DEFAULT_KEY,main_timesignature)
 
     rhythm_stream = stream.Stream()
     # Apply rhythm in note stream without rests
@@ -262,7 +262,7 @@ def percussion_load ():
 def create_percussion ():
 
     # Create
-    main_score = score_create('Percussion', Diatonic.DEFAULT_KEY, MCTime.DEFAULT_TIMESIGNATURE, 100)
+    main_score = score_create('Percussion', DiatonicLayer.DEFAULT_KEY, MCTime.DEFAULT_TIMESIGNATURE, 100)
 
     # percussion_score =
     for part in create_percussion_parts().parts:
@@ -278,6 +278,24 @@ def create_percussion ():
     mf.close()
 
 
+class MCMIDI:
+    # General MIDI percussion mapping (channel 10): 35-81 common drums
+    BASS_DRUM = 36
+    ACOUSTIC_SNARE = 38
+    CLOSED_HIHAT = 42
+    LOW_TOM = 45
+    MID_TOM = 47
+    HIGH_TOM = 50
+    RIDE_CYMBAL = 51
+    CRASH_CYMBAL = 49
+    HAND_CLAP = 39
+    CLAVES = 75
+    MARACAS = 70
+    COWBELL = 56
+    VIBRASLAP = 58
+    WOODBLOCK = 76
+
+
 def create_percussion_parts () -> stream.Score:
 
     score_out = stream.Score()
@@ -290,9 +308,6 @@ def create_percussion_parts () -> stream.Score:
     # Helper to create an unpitched percussion note by MIDI pitch number
     # General MIDI percussion mapping (channel 10): 35-81 common drums
 
-    MIDI_BASS_DRUM = 36
-    MIDI_ACOUSTIC_SNARE = 38
-    MIDI_CLOSED_HIHAT = 42
 
     def perc_note(midi_pitch, dur=0.5, velocity=100):
 #        n = note.Unpitched()
@@ -306,12 +321,12 @@ def create_percussion_parts () -> stream.Score:
     timesteps_per_beat = 2
     # Three onset lines
     # BD on beats1 & (quarter = 1, 3), snare on 2 & 4,
-    bass_pitches = [MIDI_BASS_DRUM, MIDI_ACOUSTIC_SNARE, MIDI_BASS_DRUM, MIDI_ACOUSTIC_SNARE]
+    bass_pitches = [MCMIDI.BASS_DRUM, MCMIDI.ACOUSTIC_SNARE, MCMIDI.BASS_DRUM, MCMIDI.ACOUSTIC_SNARE]
     bass_rhythm = [2, 2, 2, 2]
     bass_durations = [1, 1, 1, 1]
     bass_volumes = [110, 110, 110, 110, 110, 110, 110, 110]
     # hh on every eighth
-    hihat_pitches = [MIDI_CLOSED_HIHAT,MIDI_CLOSED_HIHAT,MIDI_CLOSED_HIHAT,MIDI_CLOSED_HIHAT,MIDI_CLOSED_HIHAT,MIDI_CLOSED_HIHAT,MIDI_CLOSED_HIHAT,MIDI_CLOSED_HIHAT]
+    hihat_pitches = [MCMIDI.CLOSED_HIHAT,MCMIDI.CLOSED_HIHAT,MCMIDI.CLOSED_HIHAT,MCMIDI.CLOSED_HIHAT,MCMIDI.CLOSED_HIHAT,MCMIDI.CLOSED_HIHAT,MCMIDI.CLOSED_HIHAT,MCMIDI.CLOSED_HIHAT]
     hihat_rhythm = [1,1,1,1,1,1,1,1]
     hihat_durations = [1,1,1,1,1,1,1,1]
     hihat_volumes = [70, 70, 70, 70, 70, 70, 70, 70]
@@ -369,8 +384,8 @@ def load_and_transform (filename_in: str = 'in.mid',
 
     # Add to score
     # Insert several new notes
-    new_note_1 = note.Note(Diatonic.DEFAULT_PITCH, quarterLength=0.75)
-    new_note_2 = note.Note(Diatonic.DEFAULT_PITCH, quarterLength=0.25)
+    new_note_1 = note.Note(DiatonicLayer.DEFAULT_PITCH, quarterLength=0.75)
+    new_note_2 = note.Note(DiatonicLayer.DEFAULT_PITCH, quarterLength=0.25)
     main_score.insertAndShift([2, new_note_1, 2.75, new_note_2])
 
 
@@ -551,7 +566,7 @@ def create_stream_triads_in_key (key_in: key.Key ,  quarterlength_in: int = 4 ) 
     # Stream of all triads in a key
     stream_out = stream.Stream()
 
-    for i in range(MCScale.HEPTA):
+    for i in range(DiatonicLayer.HEPTA):
         triad = roman.RomanNumeral(i+1, key_in)
         triad.duration.quarterLength = quarterlength_in
         stream_out.append(triad)
@@ -635,7 +650,7 @@ def main():
 Creation
 """
 def score_create ( title: str = 'New score',
-                    key_in: key.Key = Diatonic.DEFAULT_KEY ,
+                    key_in: key.Key = DiatonicLayer.DEFAULT_KEY ,
                    signature_in: meter.TimeSignature = MCTime.DEFAULT_TIMESIGNATURE ,
                    bpm_in: int = MCTime.DEFAULT_TEMPO)\
         -> stream.Score:
@@ -654,7 +669,7 @@ def score_create ( title: str = 'New score',
 
 
 def stream_create_random_from_list(length,
-                        pitch_set: list[note.Pitch] = Diatonic.DEFAULT_PITCHES,
+                        pitch_set: list[note.Pitch] = DiatonicLayer.DEFAULT_PITCHES,
                         duration_set: list[note.Duration] = MCTime.DEFAULT_DURATIONS) -> stream.Stream:
 
     # Create a random stream from a list of pitches and durations
@@ -760,7 +775,7 @@ ToneRow
 
 def tonerow():
     # Music 21 TwelveToneRow
-    chromaticRow = serial.TwelveToneRow(Chromatic.PITCHCLASSNUMBERS)
+    chromaticRow = serial.TwelveToneRow(ChromaticLayer.PITCHCLASSNUMBERS)
     matrixObj = chromaticRow.matrix()
 
     # Transform pitch sequence in tomerow

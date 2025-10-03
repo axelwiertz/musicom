@@ -1,7 +1,7 @@
 """
 Music library
 """
-from dataclasses import dataclass
+#from dataclasses import dataclass
 
 # Import
 import numpy as np
@@ -32,11 +32,11 @@ def interval_to_step (intervals: list[int]) -> list[int]:
             steps.append(0)
     return steps
 
-def sequence_permutations (length: int, sequence: list[int]) -> tuple:
-    permutations = tuple(sequence[x:]+sequence[:x] for x in range(length))
+def sequence_permutations (sequence: list | tuple) -> list:
+    permutations = [sequence[x:]+sequence[:x] for x in range(len(sequence))]
     return permutations
 
-class Chromatic:
+class ChromaticLayer:
     """
     Chromatic pitch set and intervals
     equal temperament scale
@@ -53,13 +53,19 @@ class Chromatic:
     # One octave
     PITCHCLASSES_INT = tuple(range (NUMPITCHCLASS))
     PITCHCLASSES_STR = ('C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B')
-    # Multiple octaves
-#    PITCHCLASSTEXTLIST = [x for y in range(0, OCTAVES) for x in Chromatic.PITCHCLASSES_STR]
-    PITCHCLASSNUMBERLIST = (OCTAVES * PITCHCLASSES_INT)
-    PITCHFREQUENCYLIST = tuple(2 ** ((n - MIDI_PITCH_A4) / NUMPITCHCLASS) * FREQUENCY_A4
-                                    for n in range(NUMPITCH)) # Pitch frequencies
-    INTERVALLIST = [interval.ChromaticInterval(n) for n in range(NUMPITCHCLASS)]
 
+    PITCHCLASSES_STR_FULL = ()
+    PITCHCLASSES_INT_FULL = ()
+    PITCHFREQUENCYLIST = ()
+    INTERVALLIST = ()
+
+    def __init__(self):
+        # Multiple octaves
+        self.PITCHCLASSES_STR_FULL = tuple(x for _ in range(0, self.OCTAVES) for x in self.PITCHCLASSES_STR)
+        self.PITCHCLASSES_INT_FULL = tuple(self.OCTAVES * self.PITCHCLASSES_INT)
+        self.PITCHFREQUENCYLIST = tuple(2 ** ((n - self.MIDI_PITCH_A4) / self.NUMPITCHCLASS) * self.FREQUENCY_A4
+                                        for n in range(self.NUMPITCH))
+        self.INTERVALLIST = (interval.ChromaticInterval(n) for n in range(self.NUMPITCHCLASS))
 
 class MCTime:
     """
@@ -73,7 +79,6 @@ class MCTime:
     QUARTER = 4
 
     DEFAULT_DURATION = note.Duration(QUARTER/4)
-
     DEFAULT_DURATIONS = [[note.Duration(d)] for d in [QUARTER/8, QUARTER/4, QUARTER/2]]
 
     # Rhythm - onset time intervals
@@ -95,156 +100,172 @@ class MCTime:
     three_rtm = (1, 1, 1)
 
 
-class Diatonic:
+class DiatonicLayer:
     """
     Diatonic scale - Notes, intervals and functions
     """
-    DEFAULT_KEY = key.Key('C', 'major')
-    DEFAULT_SCALE = scale.MajorScale('C')
-    DEFAULT_PITCHES = DEFAULT_SCALE.pitches
-    DEFAULT_PITCH = DEFAULT_PITCHES [0]
-    DEFAULT_NOTE = note.Note(DEFAULT_PITCH,duration=MCTime.DEFAULT_DURATION)
+    PENTATONIC = (2,2,3,2,3) # sequence of 5 intervalsteps
+    HEPTATONIC = (2,2,1,2,2,2,1) # sequence of 7 intervalsteps
 
+    # Melody scale degree functions
+    FUNCTIONS = {1:'tonic', 2:'supertonic', 3:'mediant', 4:'subdominant', 5:'dominant', 6:'submediant', 7:'leading tone'}
     # Diatonic Interval classes
+    PERFECTINTERVALS = ('P1','P4','P5','P8')
+    IMPERFECTINTERVALS = ('M2','m3','M3','m6','M6','m7','M7')
+
     perfectintervallist = [interval.DiatonicInterval(interval.Specifier.PERFECT, 1),
                 interval.DiatonicInterval(interval.Specifier.PERFECT, 4),
                 interval.DiatonicInterval(interval.Specifier.PERFECT, 5),
                 interval.DiatonicInterval(interval.Specifier.PERFECT, 8)]
-    PERFECTINTERVALS = ('P1', 'P4', 'P5', 'P8')
 
     intervallist = [interval.DiatonicInterval(interval.Specifier.MAJOR, 2),
-                interval.DiatonicInterval(interval.Specifier.MINOR, 3)
-                ]
-    IMPERFECTINTERVALS = ('M2', 'm3', 'M3', 'm6', 'M6', 'm7', 'M7')
-
-    # Melody scale degree functions
-    FUNCTIONS = {
-        1: 'tonic',
-        2: 'supertonic',
-        3: 'mediant',
-        4: 'subdominant',
-        5: 'dominant',
-        6: 'submediant',
-        7: 'leading tone'
-}
-
-class MCChord:
-    """
-    Chords and progressions
-    """
-    chord1 = chord.Chord()
-
-    h = harmony.ChordSymbol('Dsus4')
-    h.romanNumeral = 'III'
-    h.romanNumeral.key = key.Key('B')
-    h.romanNumeral = roman.RomanNumeral('IV', 'A')
+                interval.DiatonicInterval(interval.Specifier.MINOR, 3) ]
 
     # Diatonic scale - Chord degrees
-    NUMTOROMAN = {
-        1: ("I","i"),
-        2: ('ii','ii0'),
-        3: ('iii','III'),
-        4: ('IV','iv'),
-        5: ('V','V'),
-        6: ('vi','VI'),
-        7: ('vii0','vii0')
-}
+    INT_ROMAN = {1:("I","i"), 2:('ii','ii0'), 3:('iii','III'), 4:('IV','iv'), 5:('V','V'), 6:('vi','VI'), 7: ('vii0','vii0')}
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Music library - Intervals: triads and sevenths
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-class MCInterval:
-
-    PENTATONIC = (2,2,3,2,3) # sequence of 5 intervals
-    HEPTATONIC = (2,2,1,2,2,2,1) # sequence of 7 intervals
-
-    TRIAD = 2 # Number intervals in a triad
-    SEVENTH = 3 # Number of pitch classes in a seventh
-    # Patterns:
-    DIMINISHED = 0
-    MINOR = 1
-    MAJOR = 2
-    AUGMENTED = 3
-    SUS2 = 4
-    SUS4 = 5
-    CHORDINTERVALS = {
-        DIMINISHED : (3, 3, 6),
-        MINOR: (3, 4, 5),
-        MAJOR : (4, 3, 5),
-        AUGMENTED: (4, 4, 4),
-        SUS2: (2, 5, 5),
-        SUS4: (5, 2, 5)
-    }
-    intervalsPattern = CHORDINTERVALS[MAJOR]
-
-    # chord positions - permutations of intervals
-    positions = sequence_permutations(TRIAD, CHORDINTERVALS[MAJOR])
-    # Chromatic steps
-    positions_chromatic_steps = [interval_to_step(positions[x]) for x in range(len(positions))]
-
-
-class MCScale:
     """
-    Interval patterns - Diatonic cyclic patterns: pentatonic and heptatonic
+    Diatonic cyclic patterns: pentatonic and heptatonic
     """
     PENTA = 5 # Number of pitch classes in a pentatonic scale
     PENTATONICDEGREES = tuple(range(1, PENTA + 1)) # Pentatonic scale degree number
 
     HEPTA = 7 # Number of pitch classes in a heptatonic scale
-    HEPTATONICDEGREES = tuple(range(1, Diatonic.HEPTA + 1)) # Heptatonic scale degree number
+    HEPTATONICDEGREES = tuple(range(1, HEPTA + 1)) # Heptatonic scale degree number
 
-    scale01 = scale.ConcreteScale()
 
     # Pentatonic (5 pitch class) scale
-    PENTAMODES = sequence_permutations (PENTA, MCInterval.PENTATONIC)
-    PENTAMODESCHROMATIC = [interval_to_step(PENTAMODES[x]) for x in range(len(PENTAMODES))]
+    PENTAMODES = []
+    PENTAMODESCHROMATIC = []
 
     # Heptatonic (7 pitch class) scale
-    HEPTAMODES = sequence_permutations (HEPTA, MCInterval.HEPTATONIC)
-    HEPTAMODESCHROMATIC = [interval_to_step(HEPTAMODES[x]) for x in range(len(HEPTAMODES))]
-
+    HEPTAMODES = []
+    HEPTAMODESCHROMATIC = []
 
     # Chromatic pitch masks for modes:
     # 1. Ionian = Major 2. Dorian, 3. Phrygian, 4. Lydian, 5. Mixolydian, 6. Aeolian = Minor, 7. Locrian
-    IONIAM = MAJOR = 0
-    DOROIAN = 1
-    PHRYGIAN = 2
-    LYDIAN = 3
-    MIXOLYDIAN = 4
-    AEOLIAN = MINOR = 5
-    LOCRIAN = 6
-    lstScaleMajor = Chromatic.OCTAVES * HEPTAMODESCHROMATIC [MAJOR]
-    # Minor
-    lstScaleMinor = Chromatic.OCTAVES * HEPTAMODESCHROMATIC [MINOR]
+    IONIAN_MODE = MAJOR_MODE = 0
+    DORIAN_MODE = 1
+    PHRYGIAN_MODE = 2
+    LYDIAN_MODE = 3
+    MIXOLYDIAN_MODE = 4
+    AEOLIAN_MODE = MINOR_MODE = 5
+    LOCRIAN_MODE = 6
+    MODES = {
+        IONIAN_MODE : 'Ionian',
+        DORIAN_MODE : 'Dorian',
+        PHRYGIAN_MODE : 'Phrygian',
+        LYDIAN_MODE : 'Lydian',
+        MIXOLYDIAN_MODE : 'Mixolydian',
+        AEOLIAN_MODE : 'Aeolian',
+        LOCRIAN_MODE : 'Locrian' }
 
-    # Major scale pitch masks for all tonics (C, C#, D, ..., B)
-    HEPTAMAJORSCALES = [lstScaleMajor[-x:]+lstScaleMajor[:-x] for x in range(Chromatic.NUMPITCHCLASS) ]
-    arrHeptaScale = np.array(HEPTAMAJORSCALES)
+    """
+    Interval patterns - Chord interval patterns and permutations
+    """
+    NUMTRIADINTERVALS = 2 # Number intervals to compose a triad
+    SEVENTH = 3 # Number of intervals to compose a seventh
+    # Patterns:
+    DIMINISHED_CHORD = 0
+    MINOR_CHORD = 1
+    MAJOR_CHORD = 2
+    AUGMENTED_CHORD = 3
+    SUS2_CHORD = 4
+    SUS4_CHORD = 5
+    CHORDINTERVALS = {
+        DIMINISHED_CHORD : (3, 3, 6),
+        MINOR_CHORD: (3, 4, 5),
+        MAJOR_CHORD : (4, 3, 5),
+        AUGMENTED_CHORD: (4, 4, 4),
+        SUS2_CHORD: (2, 5, 5),
+        SUS4_CHORD: (5, 2, 5)
+    }
 
-class MCSet:
-    # Permutations: ordered set
-    itemlist = MCScale.HEPTATONICDEGREES
-    lstPermutations = list(itertools.permutations (itemlist))
-    # Combinations: of a set
-    itemlist = Chromatic.PITCHCLASSES_INT
-    num_items = 3
-    lstCombinations = list(itertools.combinations (itemlist, num_items))
+    HEPTAMAJORSCALES = [] # Major scale pitch masks for all tonics (C, C#, D, ..., B)
+    HEPTAMINORSCALES = [] # Minor scale pitch masks for all tonics
+
+    DEFAULT_KEY = None
+    DEFAULT_SCALE = None
+    DEFAULT_PITCHES = []
+    DEFAULT_PITCH = None
+    DEFAULT_NOTE = None
+
+    def __init__(self):
+        self.DEFAULT_KEY = key.Key('C', 'major')
+        self.DEFAULT_SCALE = scale.MajorScale('C')
+        self.DEFAULT_PITCHES = self.DEFAULT_SCALE.pitches
+        self.DEFAULT_PITCH = self.DEFAULT_PITCHES [0]
+        self.DEFAULT_NOTE = note.Note(self.DEFAULT_PITCH,duration=MCTime.DEFAULT_DURATION)
+
+        # Pentatonic (5 pitch class) scale
+        self.PENTAMODES = sequence_permutations (self.PENTATONIC)
+        self.PENTAMODESCHROMATIC = [interval_to_step(self.PENTAMODES[x]) for x in range(len(self.PENTAMODES))]
+
+        # Heptatonic (7 pitch class) scale
+        self.HEPTAMODES = sequence_permutations (self.HEPTATONIC)
+        self.HEPTAMODESCHROMATIC = [interval_to_step(self.HEPTAMODES[x]) for x in range(len(self.HEPTAMODES))]
+
+
+        # Major
+        lstScaleMajor = ChromaticLayer.OCTAVES * self.HEPTAMODESCHROMATIC [self.MAJOR_MODE]
+        # Minor
+        lstScaleMinor = ChromaticLayer.OCTAVES * self.HEPTAMODESCHROMATIC [self.MINOR_MODE]
+
+        # Major scale pitch masks for all tonics (C, C#, D, ..., B)
+        self.HEPTAMAJORSCALES = [lstScaleMajor[-x:]+lstScaleMajor[:-x] for x in range(ChromaticLayer.NUMPITCHCLASS) ]
+        self.HEPTAMINORSCALES = [lstScaleMinor[-x:]+lstScaleMinor[:-x] for x in range(ChromaticLayer.NUMPITCHCLASS) ]
+
+        # chord positions - permutations of intervals
+        positions = sequence_permutations(self.CHORDINTERVALS[self.MAJOR_CHORD])
+        # Chromatic steps
+        positions_chromatic_steps = [interval_to_step(positions[x]) for x in range(len(positions))]
+
+
+    def create_piece(self):
+        scale01 = scale.ConcreteScale()
+
+        self.chords = []
+        self.chords.append (chord.Chord())
+
+        h = harmony.ChordSymbol('maj7', 'C')
+        h.romanNumeral = roman.RomanNumeral('I', 'C')
+        h.romanNumeral = roman.RomanNumeral('IV', 'A')
+
+        self.chords.append(harmony.ChordSymbol('sus4', 'D'))
+        self.chords[1].romanNumeral = 'III'
+        self.chords[1].romanNumeral.key = key.Key('B')
+
+
+    def init_sets(self):
+        # Combinations: of a set
+        num_items = 3
+        pc_ombinations = list(itertools.combinations (ChromaticLayer.PITCHCLASSES_INT, num_items))
+
+        # Permutations: ordered set
+        degree_permutations = list(itertools.permutations (self.HEPTATONICDEGREES))
+
+
+
+    def save_library_sheet(self):
+
+        # Table of all absolute chromatic data along pitch number set
+        chromatic_data = pd.DataFrame ([ChromaticLayer.PITCHMIDINUMBERLIST,
+                             ChromaticLayer.PITCHCLASSES_INT_FULL,
+                             ChromaticLayer.PITCHCLASSES_STR_FULL,
+                             ChromaticLayer.PITCHFREQUENCYLIST]+ self.HEPTAMAJORSCALES,
+                                  )
+        chromatic_data.to_excel(Config.DEFAULT_PATH+'ChromaticLayer.xlsx', index=True, sheet_name='Pitch')
+
+        chromatic_table = chromatic_data.transpose()
+        chromatic_table.columns=['Nr','ClassNr','ClassChr', 'Freq'] + list(ChromaticLayer.PITCHCLASSES_STR)
+        chromatic_table.to_excel(Config.DEFAULT_PATH+'ChromaticTable.xlsx', index=True, sheet_name='Pitch')
+
+        arrHeptaScale = np.array(self.HEPTAMAJORSCALES)
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Visualization
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-def save_library_sheet():
-
-    # Table of all absolute chromatic data along pitch number set
-    chromatic_data = pd.DataFrame ([Chromatic.PITCHMIDINUMBERLIST,
-                         Chromatic.PITCHCLASSNUMBERLIST,
-#                         Chromatic.PITCHCLASSTEXTLIST,
-                         Chromatic.PITCHFREQUENCYLIST]+ MCScale.HEPTAMAJORSCALES,
-                              ).transpose()
-#    chromatic_data.columns=['Nr','ClassNr','ClassChr', 'Freq', 'Major', 'Minor']
-    chromatic_data.to_excel(Config.DEFAULT_PATH+'chromatic.xlsx', index=True, sheet_name='Pitch')
 
 
 def rhythm_circle ():
@@ -253,7 +274,7 @@ def rhythm_circle ():
 
 
 
-def show_circle(num_parts: int = 12, labels : tuple | list  = Chromatic.PITCHCLASSES_STR, title : str = 'Circle of parts and labels' ):
+def show_circle(num_parts: int = 12, labels : tuple | list  = ChromaticLayer.PITCHCLASSES_STR, title : str = 'Circle of parts and labels' ):
     # Show parts (angles) and labels in circle
 
     # Convert parts to angles
@@ -329,8 +350,16 @@ def stream_create(pitches : list[int|str],
 
 
 def main():
-    show_circle(Chromatic.NUMPITCHCLASS, Chromatic.PITCHCLASSES_STR, 'Pitch class circle')
-    save_library_sheet ()
+    c = ChromaticLayer()
+    d = DiatonicLayer()
+    m = MCTime()
+
+    d.save_library_sheet ()
+
+    show_circle(c.NUMPITCHCLASS, c.PITCHCLASSES_STR, 'Pitch class circle')
+
+#    show_circle(d.HEPTAMODESCHROMATIC[d.MAJOR_MODE], c.PITCHCLASSES_STR, 'Major circle')
+
 
 
 if __name__ == '__main__':
