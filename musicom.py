@@ -3,19 +3,17 @@ Music Composition Assistant
 """
 import copy
 import random
-import platform
 from datetime import datetime
 from collections import defaultdict
 
 #import sound
 
-# Musical datastructures and tools
+# Musical datastructures
+from theory import *
+# tools
 from library import *
 # Harmony rules
 from harmony import *
-
-# Showing score without external programs like Musescore
-from showscore import show
 
 
 """
@@ -278,23 +276,6 @@ def create_percussion ():
     mf.close()
 
 
-class MCMIDI:
-    # General MIDI percussion mapping (channel 10): 35-81 common drums
-    BASS_DRUM = 36
-    ACOUSTIC_SNARE = 38
-    CLOSED_HIHAT = 42
-    LOW_TOM = 45
-    MID_TOM = 47
-    HIGH_TOM = 50
-    RIDE_CYMBAL = 51
-    CRASH_CYMBAL = 49
-    HAND_CLAP = 39
-    CLAVES = 75
-    MARACAS = 70
-    COWBELL = 56
-    VIBRASLAP = 58
-    WOODBLOCK = 76
-
 
 def create_percussion_parts () -> stream.Score:
 
@@ -339,7 +320,7 @@ def create_percussion_parts () -> stream.Score:
     return score_out
 
 
-def big_yellow_taxi():
+def project_big_yellow_taxi():
     # Big Yellow Taxi
     main_key = key.Key('Bb', 'major')
 
@@ -354,10 +335,9 @@ def big_yellow_taxi():
     # Analyze score
     score_analyze (main_score)
 
-def berendans():
+def project_berendans():
     # Berendans
     main_key = key.Key('Bb', 'major')
-
     main_score = score_create('Berendans',main_key,meter.TimeSignature('4/4'))
 
     progr = ['I', 'V', 'I']
@@ -751,31 +731,13 @@ def score_analyze (score_in: stream.Score):
     post = analysis.metrical.labelBeatDepth(score_in)
 
 
-def score_show (score_in):
+def idea_tonerow():
     """
-    Show or play the stream
+    Music21 ToneRow
     """
-    if platform.system() == 'Windows':
-        score_in.show('text')
-#    score.show('midi')  # Play MIDI
-        show(score_in)  # Show musical notation
 
-    elif platform.system() == 'IOS':
-        score_in.show('text')
-
-        # Play the result (IOS):
-        #player = sound.MIDIPlayer('target.mid')
-        #player.play()
-        #player.stop()
-
-
-"""
-ToneRow
-"""
-
-def tonerow():
     # Music 21 TwelveToneRow
-    chromaticRow = serial.TwelveToneRow(ChromaticLayer.PITCHCLASSNUMBERS)
+    chromaticRow = serial.TwelveToneRow(ChromaticLayer.PITCHCLASSES_INT)
     matrixObj = chromaticRow.matrix()
 
     # Transform pitch sequence in tomerow
