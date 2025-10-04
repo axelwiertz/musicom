@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="reference library">
+    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="split theory.py">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/harmony.py" beforeDir="false" afterPath="$PROJECT_DIR$/harmony.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/library.py" beforeDir="false" afterPath="$PROJECT_DIR$/library.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/musicom.py" beforeDir="false" afterPath="$PROJECT_DIR$/musicom.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/theory.py" beforeDir="false" afterPath="$PROJECT_DIR$/theory.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +35,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/axelwiertz/musicom.git&quot;,
-    &quot;accountId&quot;: &quot;492dc205-6640-48c6-8abd-49ddb1598aca&quot;
+    &quot;accountId&quot;: &quot;6aae448d-8813-4912-9f10-269bb181c470&quot;
   }
 }</component>
   <component name="ProblemsViewState">
@@ -52,40 +52,46 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.MIDI_import.executor": "Debug",
-    "Python.Sound.executor": "Debug",
-    "Python.balfolk.executor": "Debug",
-    "Python.canon-gen.executor": "Debug",
-    "Python.composition.executor": "Run",
-    "Python.cp.executor": "Run",
-    "Python.database.executor": "Debug",
-    "Python.datastructure.executor": "Debug",
-    "Python.examples.executor": "Run",
-    "Python.harmony.executor": "Run",
-    "Python.instruments.executor": "Run",
-    "Python.library.executor": "Run",
-    "Python.musicom.executor": "Run",
-    "Python.part01.executor": "Run",
-    "Python.rhythm.executor": "Run",
-    "Python.song.executor": "Run",
-    "Python.song002.executor": "Debug",
-    "Python.thread.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/92591/PycharmProjects/musicom",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.MIDI_import.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.Sound.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.balfolk.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.canon-gen.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.composition.executor&quot;: &quot;Run&quot;,
+    &quot;Python.cp.executor&quot;: &quot;Run&quot;,
+    &quot;Python.database.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.datastructure.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.examples.executor&quot;: &quot;Run&quot;,
+    &quot;Python.harmony.executor&quot;: &quot;Run&quot;,
+    &quot;Python.instruments.executor&quot;: &quot;Run&quot;,
+    &quot;Python.library.executor&quot;: &quot;Run&quot;,
+    &quot;Python.musicom.executor&quot;: &quot;Run&quot;,
+    &quot;Python.part01.executor&quot;: &quot;Run&quot;,
+    &quot;Python.rhythm.executor&quot;: &quot;Run&quot;,
+    &quot;Python.song.executor&quot;: &quot;Run&quot;,
+    &quot;Python.song002.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.thread.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/92591/PycharmProjects/musicom&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "Python",
-      "PLAIN_TEXT"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;Python&quot;,
+      &quot;PLAIN_TEXT&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\92591\PycharmProjects\musicom" />
@@ -100,7 +106,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-d9fa9deec7cb-d902c0275401-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-252.23892.515" />
+        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-PY-252.26830.99" />
+        <option value="bundled-python-sdk-164cda30dcd9-0af03a5fa574-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-252.26830.99" />
       </set>
     </attachedChunks>
   </component>
@@ -112,14 +119,10 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1714599109129</updated>
-    </task>
-    <task id="LOCAL-00060" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1735574922836</created>
-      <option name="number" value="00060" />
-      <option name="presentableId" value="LOCAL-00060" />
-      <option name="project" value="LOCAL" />
-      <updated>1735574922837</updated>
+      <workItem from="1759522375263" duration="999000" />
+      <workItem from="1759523435691" duration="1129000" />
+      <workItem from="1759606945322" duration="1323000" />
+      <workItem from="1759608352622" duration="7578000" />
     </task>
     <task id="LOCAL-00061" summary="Sync">
       <option name="closed" value="true" />
@@ -505,8 +508,19 @@
       <option name="project" value="LOCAL" />
       <updated>1755676682867</updated>
     </task>
-    <option name="localTasksCounter" value="109" />
+    <task id="LOCAL-00109" summary="split theory.py">
+      <option name="closed" value="true" />
+      <created>1759524420838</created>
+      <option name="number" value="00109" />
+      <option name="presentableId" value="LOCAL-00109" />
+      <option name="project" value="LOCAL" />
+      <updated>1759524420838</updated>
+    </task>
+    <option name="localTasksCounter" value="110" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.cfg" />
@@ -559,15 +573,21 @@
     <MESSAGE value="include generator in musicom" />
     <MESSAGE value="rhythm create" />
     <MESSAGE value="reference library" />
-    <option name="LAST_COMMIT_MESSAGE" value="reference library" />
+    <MESSAGE value="split theory.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="split theory.py" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/musicom.py</url>
-          <line>251</line>
+          <line>338</line>
           <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/theory.py</url>
+          <line>3</line>
+          <option name="timeStamp" value="22" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -578,5 +598,8 @@
         </breakpoint>
       </default-breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/musicom$library.coverage" NAME="library Coverage Results" MODIFIED="1759609971862" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

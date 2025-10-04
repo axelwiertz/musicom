@@ -11,7 +11,7 @@ import itertools
 # Music21 modules
 from music21 import (stream, note, key, scale, chord, interval,
                      roman, converter, instrument, serial, harmony,
-                     meter, tempo, metadata, clef, percussion, midi, analysis)
+                     meter, tempo, metadata, clef, percussion, analysis)
 
 
 def interval_to_step (intervals: list[int]) -> list[int]:
@@ -53,6 +53,8 @@ class ChromaticLayer:
     PITCHFREQUENCYLIST = ()
     INTERVALLIST = ()
 
+    PITCHCLASS_COMBINATIONS = []
+
     def __init__(self):
         # Multiple octaves
         self.PITCHCLASSES_STR_FULL = tuple(x for _ in range(0, self.OCTAVES) for x in self.PITCHCLASSES_STR)
@@ -61,23 +63,10 @@ class ChromaticLayer:
                                         for n in range(self.NUMPITCH))
         self.INTERVALLIST = (interval.ChromaticInterval(n) for n in range(self.NUMPITCHCLASS))
 
-class MCMIDI:
-    # General MIDI percussion mapping (channel 10): 35-81 common drums
-    BASS_DRUM = 36
-    ACOUSTIC_SNARE = 38
-    CLOSED_HIHAT = 42
-    LOW_TOM = 45
-    MID_TOM = 47
-    HIGH_TOM = 50
-    RIDE_CYMBAL = 51
-    CRASH_CYMBAL = 49
-    HAND_CLAP = 39
-    CLAVES = 75
-    MARACAS = 70
-    COWBELL = 56
-    VIBRASLAP = 58
-    WOODBLOCK = 76
-
+    def init_sets(self):
+        # Combinations: of a set
+        num_items = 3
+        self.PITCHCLASS_COMBINATIONS = list(itertools.combinations (ChromaticLayer.PITCHCLASSES_INT, num_items))
 
 class MCTime:
     """
@@ -219,13 +208,13 @@ class DiatonicLayer:
 
 
         # Major
-        lstScaleMajor = ChromaticLayer.OCTAVES * self.HEPTAMODESCHROMATIC [self.MAJOR_MODE]
+        self.HEPTAMAJORMODESCHROMATIC = ChromaticLayer.OCTAVES * self.HEPTAMODESCHROMATIC [self.MAJOR_MODE]
         # Minor
-        lstScaleMinor = ChromaticLayer.OCTAVES * self.HEPTAMODESCHROMATIC [self.MINOR_MODE]
+        self.HEPTAMINORMODESCHROMATIC = ChromaticLayer.OCTAVES * self.HEPTAMODESCHROMATIC [self.MINOR_MODE]
 
         # Major scale pitch masks for all tonics (C, C#, D, ..., B)
-        self.HEPTAMAJORSCALES = [lstScaleMajor[-x:]+lstScaleMajor[:-x] for x in range(ChromaticLayer.NUMPITCHCLASS) ]
-        self.HEPTAMINORSCALES = [lstScaleMinor[-x:]+lstScaleMinor[:-x] for x in range(ChromaticLayer.NUMPITCHCLASS) ]
+        self.HEPTAMAJORSCALES = [self.HEPTAMAJORMODESCHROMATIC[-x:]+self.HEPTAMAJORMODESCHROMATIC[:-x] for x in range(ChromaticLayer.NUMPITCHCLASS) ]
+        self.HEPTAMINORSCALES = [self.HEPTAMINORMODESCHROMATIC[-x:]+self.HEPTAMINORMODESCHROMATIC[:-x] for x in range(ChromaticLayer.NUMPITCHCLASS) ]
 
         # chord positions - permutations of intervals
         positions = sequence_permutations(self.CHORDINTERVALS[self.MAJOR_CHORD])
@@ -233,29 +222,9 @@ class DiatonicLayer:
         positions_chromatic_steps = [interval_to_step(positions[x]) for x in range(len(positions))]
 
 
-    def create_piece(self):
-        scale01 = scale.ConcreteScale()
-
-        self.chords = []
-        self.chords.append (chord.Chord())
-
-        h = harmony.ChordSymbol('maj7', 'C')
-        h.romanNumeral = roman.RomanNumeral('I', 'C')
-        h.romanNumeral = roman.RomanNumeral('IV', 'A')
-
-        self.chords.append(harmony.ChordSymbol('sus4', 'D'))
-        self.chords[1].romanNumeral = 'III'
-        self.chords[1].romanNumeral.key = key.Key('B')
-
-
     def init_sets(self):
-        # Combinations: of a set
-        num_items = 3
-        pc_ombinations = list(itertools.combinations (ChromaticLayer.PITCHCLASSES_INT, num_items))
-
         # Permutations: ordered set
         degree_permutations = list(itertools.permutations (self.HEPTATONICDEGREES))
-
 
 
     def save_library_sheet(self):
@@ -281,8 +250,8 @@ def main():
 
     d.save_library_sheet ()
 
-    pc_circle = Circle()
-    pc_circle.show(c.NUMPITCHCLASS, c.PITCHCLASSES_STR, 'Pitch class circle')
+    pc_circle = Circle(c.NUMPITCHCLASS, c.PITCHCLASSES_STR, 'Pitch class circle')
+    pc_circle.show()
 
 #    pc_circle.show(d.HEPTAMODESCHROMATIC[d.MAJOR_MODE], c.PITCHCLASSES_STR, 'Major circle')
 

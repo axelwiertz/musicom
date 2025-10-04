@@ -20,13 +20,102 @@ from harmony import *
 Composition - Structure
 """
 
+class Composition: 
+    """
+    Composition structure
+    """
+    def __init__(self, title: str = 'New score',
+                 key_in: key.Key = DiatonicLayer.DEFAULT_KEY,
+                 meter_in: meter.TimeSignature = MCTime.DEFAULT_TIMESIGNATURE,
+                 tempo_in: int = MCTime.DEFAULT_TEMPO):
+
+        self.progression = None
+        self.form = []
+        self.bars = 0
+        self.voices = 0
+        self.style = ''
+        self.key = None
+        self.meter = None
+        self.tempo = None
+
+        self.score = stream.Score()
+
+        self.score.metadata = metadata.Metadata()
+        self.score.metadata.title = title
+        self.score.metadata.composer = 'Musicom'
+
+        # Set the time signature, key signature and tempo
+        self.score.insert(0, key_in)
+        self.score.insert(0, meter_in)
+        self.score.insert(0, tempo.MetronomeMark(number=tempo_in))
+
+    def show(self):
+        score_show(self.score)
+
+    def analysis(self):
+        # Analyze score
+
+        # self.score.plot('3d')
+        # self.score.plot('histogram','pitch')
+        # self.score.show('abc')
+        # Key
+        key01 = self.score.analyze('key')
+        print('Score :')
+        print(self.score)
+        print(' with key ' + str(key01))
+
+        # Analyze parts ?
+        #    for score_part in self.parts:
+        #    show(score_part)
+
+        chordset = self.score.chordify()
+        # Check for specific chords
+        for chd01 in chordset.recurse().getElementsByClass(chord.Chord):
+            if chd01.isDominantSeventh():
+                print(chd01.measureNumber, chd01.beatStr, chd01)
+
+        # All chords
+        for chd01 in chordset.recurse().getElementsByClass(chord.Chord):
+            # Put chord in closed position
+            chd01.closedPosition(forceOctave=4, inPlace=True)
+            # Annotate chord intervals
+            chd01.annotateIntervals(inPlace=True)
+            # Add Roman numerals in lyrics
+            rn = roman.romanNumeralFromChord(chd01, key01)
+            chd01.addLyric(str(rn.figure))
+
+        chordset.partName = "Chord analysis"
+        self.score.append(chordset)
+
+        self.score.makeMeasures(inPlace=True)
+        post = analysis.metrical.labelBeatDepth(self.score)
+
+
+    def load (self, filename_in: str = Config.DEFAULT_MIDI_FILE_IN):
+        # Load a score
+        self.score = converter.parse (Config.DEFAULT_PATH + filename_in)
+    
+    
+    def transform (self, method: int):
+        # Transform a composition
+        if method == 1:
+            # Add to score
+            # Insert several new notes
+            new_note_1 = note.Note(DiatonicLayer.DEFAULT_PITCH, quarterLength=0.75)
+            new_note_2 = note.Note(DiatonicLayer.DEFAULT_PITCH, quarterLength=0.25)
+            self.score.insertAndShift([2, new_note_1, 2.75, new_note_2])
+    
+    
+    def save(self, filename_out: str = Config.DEFAULT_MIDI_FILE_OUT):
+        # Save score
+        self.score.write(fmt='midi', fp=Config.DEFAULT_PATH + filename_out)
+
+
 # Genetic creation
 from genetic import (Genome, selection_pair, single_point_crossover, mutation,
                      generate_population, sort_population)
 # Binary representation of note in genetic creation
 BITS_PER_NOTE = 4
-
-
 
 def create_markov ():
     # Markov chain of transitions
@@ -120,7 +209,7 @@ def create_genetic():
     main_key = key.Key('C', 'major')
     main_scale = scale.MajorScale('C')
     title = 'Genetic '+str(int(datetime.now().timestamp()))
-    main_score = score_create(title,
+    comp = Composition(title,
                               main_key,
                               meter.TimeSignature('4/4'),
                               120)
@@ -156,13 +245,12 @@ def create_genetic():
                                   include_rests,
                                   main_scale)
 
-    main_score.append(part_create_from_stream(new_stream, instrument.Piano()))
+    comp.score.append(part_create_from_stream(new_stream, instrument.Piano()))
 
-    # Analyze score
-    score_analyze (main_score)
-    score_show(main_score)
+    comp.analysis()
+    comp.show()
     # Save score
-    main_score.write(fmt='midi', fp=Config.DEFAULT_PATH + title +".mid")
+    comp.save(title +".mid")
 
 
 def euclidian_rhythm (num_onset: int = 4, num_timestep: int = 4 ) -> list [int] :
@@ -233,7 +321,7 @@ def create_rhythm () -> stream.Stream:
     beat_duration = main_timesignature.beatDuration.quarterLength
 
 
-    main_score = score_create('Rhythm',DiatonicLayer.DEFAULT_KEY,main_timesignature)
+    comp = Composition('Rhythm',DiatonicLayer.DEFAULT_KEY,main_timesignature)
 
     rhythm_stream = stream.Stream()
     # Apply rhythm in note stream without rests
@@ -244,58 +332,63 @@ def create_rhythm () -> stream.Stream:
 
     rhythm_part = part_create_from_stream(rhythm_stream)
 
-    main_score.append(rhythm_part)
-    score_show(main_score)
+    comp.score.append(rhythm_part)
+    comp.show()
 
     return rhythm_stream
 
 
 def percussion_load ():
     # Load
-    main_score = load_and_analyze('midipercussion.mid')
-    main_score = load_and_analyze('midipercussionmidi.mid')
-    main_score.append(clef.PercussionClef())
-    score_show(main_score)
+    comp = Composition('Percussion')
+    comp.load('midipercussion.mid')
+    comp.analysis()
+    comp.load('midipercussionmidi.mid')
+
+    comp.score.append(clef.PercussionClef())
+
+    comp.show()
 
 def create_percussion ():
 
     # Create
-    main_score = score_create('Percussion', DiatonicLayer.DEFAULT_KEY, MCTime.DEFAULT_TIMESIGNATURE, 100)
+    comp = Composition('Percussion', DiatonicLayer.DEFAULT_KEY, MCTime.DEFAULT_TIMESIGNATURE, 100)
 
     # percussion_score =
     for part in create_percussion_parts().parts:
-        main_score.append(part)
+        comp.score.append(part)
 
-    score_show(main_score)
+    comp.show()
 
 
     # Write to MIDI
-    mf = midi.translate.streamToMidiFile(main_score)
+    mf = midi.translate.streamToMidiFile(comp)
     mf.open(Config.DEFAULT_PATH+'percussion_example.mid', 'wb')
     mf.write()
     mf.close()
 
+class ChordSet:
+    """
+    Set of chords
+    """
+    def __init__(self, chords):
+        self.chords = chords
+        
+        ch = chord.Chord()
+        
+        h = harmony.ChordSymbol('maj7', 'C')
+        h.romanNumeral = roman.RomanNumeral('I', 'C')
+        h.romanNumeral = roman.RomanNumeral('IV', 'A')
+
+        self.chords.append(harmony.ChordSymbol('sus4', 'D'))
+        self.chords[1].romanNumeral = 'III'
+        self.chords[1].romanNumeral.key = key.Key('B')
 
 
 def create_percussion_parts () -> stream.Score:
 
     score_out = stream.Score()
-
-
     pchord = percussion.PercussionChord()
-
-
-
-    # Helper to create an unpitched percussion note by MIDI pitch number
-    # General MIDI percussion mapping (channel 10): 35-81 common drums
-
-
-    def perc_note(midi_pitch, dur=0.5, velocity=100):
-#        n = note.Unpitched()
-        n = note.Note(pitch=midi_pitch, duration=dur)
-        # set volume (velocity) for MIDI export
-        n.volume.velocity = velocity
-        return n
 
     # Meter 4/4, 8 timesteps, 0,5 beat per timestep
     num_timestep = 8
@@ -324,53 +417,26 @@ def project_big_yellow_taxi():
     # Big Yellow Taxi
     main_key = key.Key('Bb', 'major')
 
-    main_score = score_create('Big yellow taxi', main_key,meter.TimeSignature('4/4'))
+    comp = Composition('Big yellow taxi', main_key,meter.TimeSignature('4/4'))
 
-    main_score.append(
+    comp.score.append(
         serial.ToneRow (
         ['B3', 'C#4', 'E4', 'E4', 'F#4', 'C#4', 'E4', 'E4', 'F#4', 'E4', 'G#3', 'B3', 'B3', 'C#4',
         'E4', 'F#4', 'B3', 'B3', 'F#4', 'F#4', 'F#4', 'G#4', 'F#4', 'E4', 'E4']
         )
     )
     # Analyze score
-    score_analyze (main_score)
+    comp.analysis()
 
 def project_berendans():
     # Berendans
     main_key = key.Key('Bb', 'major')
-    main_score = score_create('Berendans',main_key,meter.TimeSignature('4/4'))
+    comp = Composition('Berendans',main_key,meter.TimeSignature('4/4'))
 
-    progr = ['I', 'V', 'I']
-
-
-
-def load_and_analyze (filename_in: str = Config.DEFAULT_MIDI_FILE_IN) -> stream.Score:
-    # Load and analyze a score
-
-    # Load a score
-    main_score = converter.parse (Config.DEFAULT_PATH + filename_in)
-
-    # Analyze score
-    score_analyze (main_score)
-
-    return main_score
+    comp.progression = ['I', 'V', 'I']
 
 
-def load_and_transform (filename_in: str = 'in.mid',
-                        filename_out: str = 'out.mid'):
-    # Load a score
-    main_score = converter.parse (Config.DEFAULT_PATH + filename_in)
 
-
-    # Add to score
-    # Insert several new notes
-    new_note_1 = note.Note(DiatonicLayer.DEFAULT_PITCH, quarterLength=0.75)
-    new_note_2 = note.Note(DiatonicLayer.DEFAULT_PITCH, quarterLength=0.25)
-    main_score.insertAndShift([2, new_note_1, 2.75, new_note_2])
-
-
-    # Save score
-    main_score.write(fmt='midi', fp=Config.DEFAULT_PATH + filename_out)
 
 
 def create_new ():
@@ -385,7 +451,7 @@ def create_new ():
     main_scale = scale.MajorScale ('C')
     main_scale = scale.MelodicMinorScale ('C')
 
-    main_score = score_create('New score', main_key,signature_in= meter.TimeSignature('4/4'))
+    comp = Composition('New score', main_key, meter.TimeSignature('4/4'))
 
     pitches_list = [main_scale.pitches[0:3],
                     ["G4", "A4", "B4", "C5"]]
@@ -420,15 +486,15 @@ def create_new ():
 
     for i in range (0, len(pitches_list1)-1):
 
-        main_score.append(
+        comp.score.append(
             part_create_from_stream(stream_create(pitches_list1 [i], durations_list[i], onset_intervals_list [i], velocities_list [i]), instruments_list[i])
         )
 
     # Analyze score
-    score_analyze (main_score)
-    score_show(main_score)
+    comp.analysis()
+    comp.show()
     # Save score
-    main_score.write(fmt='midi', fp=Config.DEFAULT_PATH + "new.mid")
+    comp.save("new.mid")
 
 
 def create_balfolk ():
@@ -441,11 +507,11 @@ def create_balfolk ():
 
     # Bourrée-inspired melody (typical Balfolk rhythm)
 
-    main_score = score_create('Balfolk',main_key,meter.TimeSignature('6/8'))
+    comp = Composition('Balfolk',main_key,meter.TimeSignature('6/8'))
     melody_part = stream.Part()
     bass_part = stream.Part()
-    main_score.append(melody_part)
-    main_score.append(bass_part)
+    comp.score.append(melody_part)
+    comp.score.append(bass_part)
 
     # Create notes with Balfolk-style rhythm
     chord_degrees = [1, 2, 3, 4]
@@ -475,10 +541,10 @@ def create_balfolk ():
         bass_part.append(bass_note)
 
     # Analyze score
-    score_analyze (main_score)
-    score_show(main_score)
+    comp.analysis()
+    comp.show()
     # Save score
-    main_score.write(fmt='midi', fp=Config.DEFAULT_PATH + "balfolk.mid")
+    comp.save("balfolk.mid")
 
 
     return
@@ -490,7 +556,7 @@ def create_counterpoint():
     main_scale = scale.MajorScale ('C')
 
     # Counterpoint
-    main_score = score_create('Counterpoint', main_key,meter.TimeSignature('4/4'))
+    comp = Composition('Counterpoint', main_key,meter.TimeSignature('4/4'))
 
     length = 16  # Length of the counterpoint
     voice1 = stream_create_random_from_list(length)
@@ -500,33 +566,33 @@ def create_counterpoint():
     while not stream_is_counterpoint(voice1, voice2):
         voice2 = stream_create_random_from_list(length)
 
-    main_score.append(voice1)
-    main_score.append(voice2)
+    comp.score.append(voice1)
+    comp.score.append(voice2)
     # Analyze score
-    score_analyze (main_score)
-    score_show(main_score)
+    comp.analysis()
+    comp.show()
     # Save score
-    main_score.write(fmt='midi', fp=Config.DEFAULT_PATH + "counterpoint.mid")
+    comp.save()
 
 
 def create_key_library (key_in: key.Key):
     # Create a score with library elements
 
     # Common chord progressions
-    main_score = score_create('Chord progressions and triads in C', key_in,meter.TimeSignature('4/4'))
+    comp = Composition('Chord progressions and triads in C', key_in,meter.TimeSignature('4/4'))
 
     stream_lib = create_stream_triads_in_key(key_in, 1)
     part_lib = part_create_from_stream(stream_lib)
-    main_score.append(part_lib)
+    comp.score.append(part_lib)
 
     stream_lib = create_stream_chords_in_key(ChordHarmony.PROGRESSIONS, key_in, 1)
     part_lib = part_create_from_stream(stream_lib)
-    main_score.append(part_lib)
+    comp.score.append(part_lib)
 
-    score_analyze(main_score)
-    score_show(main_score)
+    comp.analysis()
+    comp.show()
     # Save score
-    main_score.write(fmt='midi', fp=Config.DEFAULT_PATH + 'chordlibrary_in_key_' + key_in.name +'.mid')
+    comp.save('chordlibrary_in_key_' + key_in.name +'.mid')
 
 
 def create_stream_chords_in_key (chord_progressions: list, key_in: key.Key ,  quarterlength_in: int = 4 ) -> stream.Stream:
@@ -579,7 +645,7 @@ def stream_create_harmonic (fundamental_pitch : note.Pitch = note.Pitch('A2'),
 
 def create_harmonic():
 
-    main_score = score_create('Harmonic sequence and chords')
+    comp = Composition('Harmonic sequence and chords')
 
     harmonic_stream = stream.Stream()
 
@@ -601,17 +667,17 @@ def create_harmonic():
     #harmonic_chord = chord_create_harmonic(note.Pitch('A1'),[5,6,7,9,12,15])
     #harmonic_stream.append(harmonic_chord)
 
-    main_score.append(part_create_from_stream(harmonic_stream))
+    comp.score.append(part_create_from_stream(harmonic_stream))
 
-    score_analyze(main_score)
-    score_show(main_score)
+    comp.analysis()
+    comp.show()
 
 
 def main():
     # Main: create or load, analyze or transform
 
-    #main_score = load_and_analyze('Sousta.mid')
-    #score_show(main_score)
+    #comp = load_and_analyze('Sousta.mid')
+    #comp.show()
 
     #create_rhythm()
     #create_new()
@@ -629,24 +695,6 @@ def main():
 """
 Creation
 """
-def score_create ( title: str = 'New score',
-                    key_in: key.Key = DiatonicLayer.DEFAULT_KEY ,
-                   signature_in: meter.TimeSignature = MCTime.DEFAULT_TIMESIGNATURE ,
-                   bpm_in: int = MCTime.DEFAULT_TEMPO)\
-        -> stream.Score:
-    # Create a stream to hold the musical elements
-    score_out = stream.Score()
-    score_out.metadata = metadata.Metadata()
-    score_out.metadata.title = title
-    score_out.metadata.composer = 'Musicom'
-
-# Set the time signature, key signature and tempo
-    score_out.insert(0, key_in)
-    score_out.insert(0, signature_in)
-    score_out.insert(0, tempo.MetronomeMark(number=bpm_in))
-
-    return score_out
-
 
 def stream_create_random_from_list(length,
                         pitch_set: list[note.Pitch] = DiatonicLayer.DEFAULT_PITCHES,
@@ -691,44 +739,6 @@ def stream_is_counterpoint(stream1: stream.Stream, stream2: stream.Stream) -> bo
 
     return True
 
-
-def score_analyze (score_in: stream.Score):
-    # Analyze score
-
-    #score_in.plot('3d')
-    #score_in.plot('histogram','pitch')
-    #score_in.show('abc')
-    # Key
-    key01 = score_in.analyze('key')
-    print ('Imported :')
-    print (score_in)
-    print (' with key ' + str(key01))
-
-    # Analyze parts ?
-    #    for score_part in score_in.parts:
-    #    show(score_part)
-
-    chordset = score_in.chordify()
-    # Check for specific chords
-    for chd01 in chordset.recurse().getElementsByClass(chord.Chord):
-        if chd01.isDominantSeventh():
-            print(chd01.measureNumber, chd01.beatStr, chd01)
-
-    # All chords
-    for chd01 in chordset.recurse().getElementsByClass(chord.Chord):
-        # Put chord in closed position
-        chd01.closedPosition(forceOctave=4, inPlace=True)
-        # Annotate chord intervals
-        chd01.annotateIntervals(inPlace=True)
-        # Add Roman numerals in lyrics
-        rn = roman.romanNumeralFromChord(chd01, key01)
-        chd01.addLyric(str(rn.figure))
-
-    chordset.partName = "Chord analysis"
-    score_in.append (chordset)
-
-    score_in.makeMeasures(inPlace=True)
-    post = analysis.metrical.labelBeatDepth(score_in)
 
 
 def idea_tonerow():

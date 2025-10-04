@@ -11,8 +11,6 @@ from showscore import show
 import numpy as np
 import matplotlib.pyplot as plt
 
-from theory import ChromaticLayer
-
 # Music21 modules
 from music21 import (stream, note, key, scale, chord, interval,
                      roman, converter, instrument, serial, harmony,
@@ -24,28 +22,60 @@ class Config:
     DEFAULT_MIDI_FILE_IN = 'in.mid'
     DEFAULT_MIDI_FILE_OUT = 'out.mid'
 
+class MCMIDI:
+    # General MIDI percussion mapping (channel 10): 35-81 common drums
+    BASS_DRUM = 36
+    ACOUSTIC_SNARE = 38
+    CLOSED_HIHAT = 42
+    LOW_TOM = 45
+    MID_TOM = 47
+    HIGH_TOM = 50
+    RIDE_CYMBAL = 51
+    CRASH_CYMBAL = 49
+    HAND_CLAP = 39
+    CLAVES = 75
+    MARACAS = 70
+    COWBELL = 56
+    VIBRASLAP = 58
+    WOODBLOCK = 76
+
+    # Helper to create an unpitched percussion note by MIDI pitch number
+    # General MIDI percussion mapping (channel 10): 35-81 common drums
+
+    def perc_note(self, midi_pitch, dur=0.5, velocity=100):
+#        n = note.Unpitched()
+        n = note.Note(pitch=midi_pitch, duration=dur)
+        # set volume (velocity) for MIDI export
+        n.volume.velocity = velocity
+        return n
 
 """
 Visualization
 """
 class Circle:
+    def __init__(self, num_parts: int = 12,
+                labels : tuple | list  = None,
+                title : str = 'Circle of parts and labels'):
+        self.num_parts = num_parts
+        self.labels = labels
+        self.title = title
 
-    def show(self, num_parts: int = 12, labels : tuple | list  = ChromaticLayer.PITCHCLASSES_STR, title : str = 'Circle of parts and labels' ):
+    def show(self):
         # Show parts (angles) and labels in circle
 
         # Convert parts to angles
-        angles = np.linspace(0, 2 * np.pi, num_parts, endpoint=False)
+        angles = np.linspace(0, 2 * np.pi, self.num_parts, endpoint=False)
 
         # Create a figure and axis
         fig, ax = plt.subplots(subplot_kw={'projection': 'polar'})
 
         # Plot the labels
-        for angle, label in zip(angles, labels):
+        for angle, label in zip(angles, self.labels):
             ax.plot(angle, 1, 'o', markersize=10)
             ax.text(angle, 1.1, str(label), ha='center', va='center')
 
         # Set the title
-        ax.set_title(title)
+        ax.set_title(self.title)
 
         # Show the plot
         plt.show()
@@ -123,7 +153,8 @@ def score_show (score_in):
 
 def rhythm_circle ():
     # SHow rhythm in circle
-    show_circle(4, ['Down', 'Up','Down', 'Up'], 'Rhythm')
+    rhythm_circle = Circle(4, ['Down', 'Up','Down', 'Up'], 'Rhythm')
+    rhythm_circle.show()
 
 
 def main():
