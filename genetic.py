@@ -11,6 +11,27 @@ CrossoverFunc = Callable[[Genome, Genome], Tuple[Genome, Genome]]
 MutationFunc = Callable[[Genome], Genome]
 PrinterFunc = Callable[[Population, int, FitnessFunc], None]
 
+
+# Genetic creation
+
+class GeneticCreation:
+
+    def __init__(self,
+                 population_size: int,
+                 genes_size: int,
+                 bits_per_gene: int = 4,
+                 ):
+
+        # Population Size   Number of streams per generation to rate and recombine
+        self.population_size = population_size
+        self.bits_per_gene = bits_per_gene
+        self.genes_size = genes_size
+
+        self.genome_size = genes_size * bits_per_gene
+
+        self.genome = Genome()
+
+
 # Generate a random genome of given length
 def generate_genome(length: int) -> Genome:
     return choices([0, 1], k=length)
@@ -84,6 +105,33 @@ def print_stats(population: Population, generation_id: int, fitness_func: Fitnes
 
     return sorted_population[0]
 
+
+
+def evolve (self):
+    # Generate populations
+    population = generate_population(self.population_size, self.genome_size)
+
+    # Continue with the fittest populations
+    population = sort_population (population, fitness_func=FitnessFunc)
+
+    # Three fittest as next population
+    next_generation = population[0:2]
+
+    # Generate offspring
+    parents = selection_pair(population, FitnessFunc)
+    offspring_a, offspring_b = single_point_crossover(parents[0], parents[1])
+
+    #   Number of mutations	    Max number of mutations that should be possible per child generated
+    num_mutations: int = 2
+    #   Mutation probability
+    mutation_probability: float = 0.5
+
+    # Mutate offspring
+    offspring_a = mutation(offspring_a, num=num_mutations, probability=mutation_probability)
+    offspring_b = mutation(offspring_b, num=num_mutations, probability=mutation_probability)
+    next_generation += [offspring_a, offspring_b]
+
+
 # Run the genetic algorithm evolution process
 def run_evolution(
         populate_func: PopulateFunc,
@@ -107,7 +155,7 @@ def run_evolution(
         if printer is not None:
             printer(population, i, fitness_func)
 
-        if fitness_func(population[0]) >= fitness_limit
+        if fitness_func(population[0]) >= fitness_limit:
             break
         # Create the next generation
         next_generation = population[0:2]

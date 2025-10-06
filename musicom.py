@@ -12,6 +12,8 @@ from collections import defaultdict
 from theory import *
 # tools
 from library import *
+from genetic import GeneticCreation
+
 # Harmony rules
 from harmony import *
 
@@ -146,117 +148,77 @@ def create_markov ():
             part.append(note.Note(p, quarterLength=1))
 
 
-# Genetic creation
-from genetic import (Genome, selection_pair, single_point_crossover, mutation,
-                     generate_population, sort_population)
 
-class Genetic:
+def bits_to_stream (genetic: GeneticCreation,
+                scale_in: scale.ConcreteScale) -> stream.Stream:
+    # Transform a generated genome into a Stream
+    stream_out = stream.Stream()
 
-    def __init__(self,
-                 num_measures: int,
-                 num_notes_per_measure: int,
-                 population_size: int,
-                 include_rests: bool,
-                 ):
+    pitch_degrees = []
+    durations = []
 
-        self.BITS_PER_NOTE = 4
-
-        # Number of measures    Length of the generated stream in measures
-        self.num_measures = num_measures
-        # Notes per bar	        Number of notes in a measure
-        self.num_notes_per_measure = num_notes_per_measure
-        # Population Size   Number of streams per generation to rate and recombine
-        self.population_size = population_size
-
-        self.genome_size = num_measures * num_notes_per_measure * self.BITS_PER_NOTE
-
-        self.genome = Genome()
-
-    def to_stream (self,
-                    scale_in: scale.ConcreteScale) -> stream.Stream:
-        # Transform a generated genome into a Stream
-        stream_out = stream.Stream()
-
-        pitch_degrees = []
-        durations = []
-
-        # population[0] or genome?
-        pitch_degrees_binary = []
-        for i in range(self.num_measures * self.num_notes_per_measure):
-            # Extract bits for each note
-            pitch_degrees_binary += [self.genome[i * self.BITS_PER_NOTE:i * self.BITS_PER_NOTE + self.BITS_PER_NOTE]]
+    # population[0] or genome?
+    binary_elements = genetic.elements()
+    bits = genetic.bits_per_gene
 
 
-        note_length = 4 / float(self.num_notes_per_measure)
+    pitch_degrees_binary = []
+    for i in range(genetic.genome_size):
+        # Extract binary elements
+        pitch_degrees_binary += [genetic.genome[i * bits:i * bits + bits]]
 
-        scl = scale_in.pitches
+    note_length = 1 / MCTime.QUARTER
+    include_rests = True
 
-        for pitch_binary in pitch_degrees_binary:
-            pitch_degree = int(sum([bit * pow(2, i) for i, bit in enumerate(pitch_binary)]))
+    scl = scale_in.pitches
 
-            max_degree = pow(2, self.BITS_PER_NOTE - 1)
-            # Degrees not in scale are rest
-            if not self.include_rests:
-                pitch_degree = int(pitch_degree % max_degree)
+    for pitch_binary in pitch_degrees_binary:
+        pitch_degree = int(sum([bit * pow(2, i) for i, bit in enumerate(pitch_binary)]))
 
-            if pitch_degree >= max_degree:
-                pitch_degrees += [0]
-                durations += [note_length]
-            else:
-                pitch_degrees += [pitch_degree]
-                durations += [note_length]
+        max_degree = pow(2, bits - 1)
+        # Degrees not in scale are rest
+        if not include_rests:
+            pitch_degree = int(pitch_degree % max_degree)
 
-        for i, degree in enumerate(pitch_degrees):
-            if degree > 0:
-                new_note = note.Note(pitch=scl[degree], quarterLength=durations[i])
-                stream_out.append(new_note)
-            else:
-                stream_out.append(note.Rest(length=durations[i]))
+        if pitch_degree >= max_degree:
+            pitch_degrees += [0]
+            durations += [note_length]
+        else:
+            pitch_degrees += [pitch_degree]
+            durations += [note_length]
 
-        return stream_out
+    for i, degree in enumerate(pitch_degrees):
+        if degree > 0:
+            new_note = note.Note(pitch=scl[degree], quarterLength=durations[i])
+            stream_out.append(new_note)
+        else:
+            stream_out.append(note.Rest(length=durations[i]))
 
+    return stream_out
 
-    def rating (self) -> int:
-        # Rating of generation
-        rate = self.genome[1]
+def rating (self) -> int:
+    # Rating of generation
+    rate = self.genome[1]
 
-        return rate
-
-    def evolve (self):
-        # Generate populations
-        population = generate_population(self.population_size, self.genome_size)
-
-        # Continue with the fittest populations
-        population = sort_population (population, fitness_func=rating(self))
-
-        # Three fittest as next population
-        next_generation = population[0:2]
-
-        parents = selection_pair(population, rating)
-        offspring_a, offspring_b = single_point_crossover(parents[0], parents[1])
-
-        #   Number of mutations	    Max number of mutations that should be possible per child generated
-        num_mutations: int = 2
-        #   Mutation probability
-        mutation_probability: float = 0.5
-
-        # Mutate offspring
-        offspring_a = mutation(offspring_a, num=num_mutations, probability=mutation_probability)
-        offspring_b = mutation(offspring_b, num=num_mutations, probability=mutation_probability)
-        next_generation += [offspring_a, offspring_b]
+    return rate
 
 
-def create_genetic():
+def create_population():
     # Create a genetic composition
     comp = Composition('Genetic '+str(int(datetime.now().timestamp())),
                        DiatonicLayer.DEFAULT_KEY,
                        MCTime.DEFAULT_TIMESIGNATURE,
                        120)
 
-    gen = Genetic(4,4,10, include_rests=True)
+    # Number of measures    Length of the generated stream in measures
+    num_measures = 4
+    # Notes per bar	        Number of notes in a measure
+    num_notes_per_measure = 4
+
+    gen = GeneticCreation (10, num_measures * num_notes_per_measure, 4)
 
     gen.evolve()
-    new_stream = gen.to_stream (DiatonicLayer.DEFAULT_SCALE)
+    new_stream = bits_to_stream (gen, DiatonicLayer.DEFAULT_SCALE)
 
     comp.score.append(part_create_from_stream(new_stream, instrument.Piano()))
 
@@ -700,7 +662,7 @@ def main():
     #create_balfolk()
     #create_counterpoint()
 
-#    create_genetic()
+#    create_Population()
 #    create_key_library(key.Key('C', 'major'))
 #    tonerow()
 
