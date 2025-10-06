@@ -112,11 +112,6 @@ class Composition:
     
 
 
-# Genetic creation
-from genetic import (Genome, selection_pair, single_point_crossover, mutation,
-                     generate_population, sort_population)
-# Binary representation of note in genetic creation
-BITS_PER_NOTE = 4
 
 class MarkovChain:
     # Markov chain of transitions
@@ -151,35 +146,57 @@ def create_markov ():
             part.append(note.Note(p, quarterLength=1))
 
 
+# Genetic creation
+from genetic import (Genome, selection_pair, single_point_crossover, mutation,
+                     generate_population, sort_population)
+
 class Genetic:
-    def __init__(self):
+
+    def __init__(self,
+                 num_measures: int,
+                 num_notes_per_measure: int,
+                 population_size: int,
+                 include_rests: bool,
+                 ):
+
+        self.BITS_PER_NOTE = 4
+
+        # Number of measures    Length of the generated stream in measures
+        self.num_measures = num_measures
+        # Notes per bar	        Number of notes in a measure
+        self.num_notes_per_measure = num_notes_per_measure
+        # Population Size   Number of streams per generation to rate and recombine
+        self.population_size = population_size
+
+        self.genome_size = num_measures * num_notes_per_measure * self.BITS_PER_NOTE
+
         self.genome = Genome()
 
     def to_stream (self,
-                         num_bars: int,
-                         num_notes_per_measure: int,
-                         include_rests: bool,
-                         scale_in: scale.ConcreteScale) -> stream.Stream:
-        # Transform a generated genomen into a Stream
+                    scale_in: scale.ConcreteScale) -> stream.Stream:
+        # Transform a generated genome into a Stream
         stream_out = stream.Stream()
 
         pitch_degrees = []
         durations = []
 
+        # population[0] or genome?
         pitch_degrees_binary = []
-        for i in range(num_bars * num_notes_per_measure):
-            pitch_degrees_binary += [self.genome[i * BITS_PER_NOTE:i * BITS_PER_NOTE + BITS_PER_NOTE]]
+        for i in range(self.num_measures * self.num_notes_per_measure):
+            # Extract bits for each note
+            pitch_degrees_binary += [self.genome[i * self.BITS_PER_NOTE:i * self.BITS_PER_NOTE + self.BITS_PER_NOTE]]
 
-        note_length = 4 / float(num_notes_per_measure)
+
+        note_length = 4 / float(self.num_notes_per_measure)
 
         scl = scale_in.pitches
 
         for pitch_binary in pitch_degrees_binary:
             pitch_degree = int(sum([bit * pow(2, i) for i, bit in enumerate(pitch_binary)]))
 
-            max_degree = pow(2, BITS_PER_NOTE - 1)
+            max_degree = pow(2, self.BITS_PER_NOTE - 1)
             # Degrees not in scale are rest
-            if not include_rests:
+            if not self.include_rests:
                 pitch_degree = int(pitch_degree % max_degree)
 
             if pitch_degree >= max_degree:
@@ -201,55 +218,45 @@ class Genetic:
 
     def rating (self) -> int:
         # Rating of generation
-        rating = self.genome[1]
+        rate = self.genome[1]
 
-        return rating
+        return rate
+
+    def evolve (self):
+        # Generate populations
+        population = generate_population(self.population_size, self.genome_size)
+
+        # Continue with the fittest populations
+        population = sort_population (population, fitness_func=rating(self))
+
+        # Three fittest as next population
+        next_generation = population[0:2]
+
+        parents = selection_pair(population, rating)
+        offspring_a, offspring_b = single_point_crossover(parents[0], parents[1])
+
+        #   Number of mutations	    Max number of mutations that should be possible per child generated
+        num_mutations: int = 2
+        #   Mutation probability
+        mutation_probability: float = 0.5
+
+        # Mutate offspring
+        offspring_a = mutation(offspring_a, num=num_mutations, probability=mutation_probability)
+        offspring_b = mutation(offspring_b, num=num_mutations, probability=mutation_probability)
+        next_generation += [offspring_a, offspring_b]
 
 
 def create_genetic():
-
-    # Include rests	    Introduce rests between notes OR a constant stream of notes?
-    include_rests: bool = True
-
+    # Create a genetic composition
     comp = Composition('Genetic '+str(int(datetime.now().timestamp())),
                        DiatonicLayer.DEFAULT_KEY,
                        MCTime.DEFAULT_TIMESIGNATURE,
                        120)
 
-    gen = Genetic()
-    # Population Size   Number of streams per generation to rate and recombine
-    # Number of measures    Length of the generated stream in measures
-    num_measures = 4
-    # Notes per bar	        Number of notes in a measure
-    num_notes_per_measure = 4
-    population_size: int = 10
-    genome_size = num_measures * num_notes_per_measure * BITS_PER_NOTE
+    gen = Genetic(4,4,10, include_rests=True)
 
-    # Generate populations
-    population = generate_population(population_size, genome_size)
-
-    # Continue with the fittest populations
-    population = sort_population (population, fitness_func=rating)
-
-    # Three fittest as next population
-    next_generation = population[0:2]
-
-    parents = selection_pair(population, rating)
-    offspring_a, offspring_b = single_point_crossover(parents[0], parents[1])
-
-    #   Number of mutations	    Max number of mutations that should be possible per child generated
-    num_mutations: int = 2
-    #   Mutation probability
-    mutation_probability: float = 0.5
-
-    offspring_a = mutation(offspring_a, num=num_mutations, probability=mutation_probability)
-    offspring_b = mutation(offspring_b, num=num_mutations, probability=mutation_probability)
-    next_generation += [offspring_a, offspring_b]
-
-    new_stream = gen.to_stream (population[0],
-                                  num_measures,
-                                  num_notes_per_measure,
-                                  include_rests)
+    gen.evolve()
+    new_stream = gen.to_stream (DiatonicLayer.DEFAULT_SCALE)
 
     comp.score.append(part_create_from_stream(new_stream, instrument.Piano()))
 
@@ -792,3 +799,5 @@ def tonerow_transform (tonerow_in: serial.ToneRow) -> serial.ToneRow:
 
 if __name__ == '__main__':
     main()
+
+
