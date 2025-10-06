@@ -169,7 +169,6 @@ def bits_to_stream (genetic: GeneticCreation,
 
     note_length = 1 / MCTime.QUARTER
     include_rests = True
-
     scl = scale_in.pitches
 
     for pitch_binary in pitch_degrees_binary:
