@@ -94,21 +94,22 @@ class Composition:
     def load (self, filename_in: str = Config.DEFAULT_MIDI_FILE_IN):
         # Load a score
         self.score = converter.parse (Config.DEFAULT_PATH + filename_in)
-    
+
+    def save (self, filename_out: str = Config.DEFAULT_MIDI_FILE_OUT):
+        # Save score
+        self.score.write(fmt='midi', fp=Config.DEFAULT_PATH + filename_out)
+
     
     def transform (self, method: int):
         # Transform a composition
         if method == 1:
             # Add to score
             # Insert several new notes
-            new_note_1 = note.Note(DiatonicLayer.DEFAULT_PITCH, quarterLength=0.75)
-            new_note_2 = note.Note(DiatonicLayer.DEFAULT_PITCH, quarterLength=0.25)
+            new_note_1 = note.Note(DiatonicLayer.DEFAULT_PITCH, quarterLength=MCTime.QUARTER/4)
+            new_note_2 = note.Note(DiatonicLayer.DEFAULT_PITCH, quarterLength=MCTime.DEFAULT_DURATION)
             self.score.insertAndShift([2, new_note_1, 2.75, new_note_2])
     
     
-    def save(self, filename_out: str = Config.DEFAULT_MIDI_FILE_OUT):
-        # Save score
-        self.score.write(fmt='midi', fp=Config.DEFAULT_PATH + filename_out)
 
 
 # Genetic creation
@@ -117,27 +118,30 @@ from genetic import (Genome, selection_pair, single_point_crossover, mutation,
 # Binary representation of note in genetic creation
 BITS_PER_NOTE = 4
 
-def create_markov ():
+class MarkovChain:
     # Markov chain of transitions
+    def __init__(self, train):
+        # Example training tokens: list of (pitch_name_or_rest, dur)
+        # build transition dict for pitches
+        self.trans = defaultdict(list)
+        for a, b in zip(train, train[1:]):
+            self.trans[a[0]].append(b[0])
 
-    # Example training tokens: list of (pitch_name_or_rest, dur)
-    train = [('C4', 1), ('E4', 1), ('G4', 1), ('C5', 1), ('E4', 1), ('G4', 1), ('rest', 1)]
-
-    # build transition dict for pitches
-    trans = defaultdict(list)
-    for a, b in zip(train, train[1:]):
-        trans[a[0]].append(b[0])
-
-    def sample_markov(start, length=16):
+    def sample(self, start, length=16):
         out = [start]
         cur = start
         for _ in range(length - 1):
-            choices = trans.get(cur) or list(trans.keys())
+            choices = self.trans.get(cur) or list(self.trans.keys())
             cur = random.choice(choices)
             out.append(cur)
         return out
 
-    gen_pitches = sample_markov('C4', length=16)
+
+def create_markov ():
+
+    mc = MarkovChain([('C4', 1), ('E4', 1), ('G4', 1), ('C5', 1), ('E4', 1), ('G4', 1), ('rest', 1)])
+
+    gen_pitches = mc.sample('C4', length=16)
     # fixed duration 1 quarter for simplicity
     part = stream.Part()
     for p in gen_pitches:
@@ -147,74 +151,77 @@ def create_markov ():
             part.append(note.Note(p, quarterLength=1))
 
 
-def genome_to_stream (genome: Genome,
-                     num_bars: int,
-                     num_notes_per_measure: int,
-                     include_rests: bool,
-                     scale_in: scale.ConcreteScale) -> stream.Stream:
-    # Transform a generated genomen into a Stream
-    stream_out = stream.Stream()
+class Genetic:
+    def __init__(self):
+        self.genome = Genome()
 
-    pitch_degrees = []
-    durations = []
+    def to_stream (self,
+                         num_bars: int,
+                         num_notes_per_measure: int,
+                         include_rests: bool,
+                         scale_in: scale.ConcreteScale) -> stream.Stream:
+        # Transform a generated genomen into a Stream
+        stream_out = stream.Stream()
 
-    pitch_degrees_binary = []
-    for i in range(num_bars * num_notes_per_measure):
-        pitch_degrees_binary += [genome[i * BITS_PER_NOTE:i * BITS_PER_NOTE + BITS_PER_NOTE]]
+        pitch_degrees = []
+        durations = []
 
-    note_length = 4 / float(num_notes_per_measure)
+        pitch_degrees_binary = []
+        for i in range(num_bars * num_notes_per_measure):
+            pitch_degrees_binary += [self.genome[i * BITS_PER_NOTE:i * BITS_PER_NOTE + BITS_PER_NOTE]]
 
-    scl = scale_in.pitches
+        note_length = 4 / float(num_notes_per_measure)
 
-    for pitch_binary in pitch_degrees_binary:
-        pitch_degree = int(sum([bit * pow(2, i) for i, bit in enumerate(pitch_binary)]))
+        scl = scale_in.pitches
 
-        max_degree = pow(2, BITS_PER_NOTE - 1)
-        # Degrees not in scale are rest
-        if not include_rests:
-            pitch_degree = int(pitch_degree % max_degree)
+        for pitch_binary in pitch_degrees_binary:
+            pitch_degree = int(sum([bit * pow(2, i) for i, bit in enumerate(pitch_binary)]))
 
-        if pitch_degree >= max_degree:
-            pitch_degrees += [0]
-            durations += [note_length]
-        else:
-            pitch_degrees += [pitch_degree]
-            durations += [note_length]
+            max_degree = pow(2, BITS_PER_NOTE - 1)
+            # Degrees not in scale are rest
+            if not include_rests:
+                pitch_degree = int(pitch_degree % max_degree)
 
-    for i, degree in enumerate(pitch_degrees):
-        if degree > 0:
-            new_note = note.Note(pitch=scl[degree], quarterLength=durations[i])
-            stream_out.append(new_note)
-        else:
-            stream_out.append(note.Rest(length=durations[i]))
+            if pitch_degree >= max_degree:
+                pitch_degrees += [0]
+                durations += [note_length]
+            else:
+                pitch_degrees += [pitch_degree]
+                durations += [note_length]
 
-    return stream_out
+        for i, degree in enumerate(pitch_degrees):
+            if degree > 0:
+                new_note = note.Note(pitch=scl[degree], quarterLength=durations[i])
+                stream_out.append(new_note)
+            else:
+                stream_out.append(note.Rest(length=durations[i]))
+
+        return stream_out
 
 
-def stream_rate_rules(genome: Genome) -> int:
-    # Rating of generation
-    rating = genome[1]
+    def rating (self) -> int:
+        # Rating of generation
+        rating = self.genome[1]
 
-    return rating
+        return rating
 
 
 def create_genetic():
+
+    # Include rests	    Introduce rests between notes OR a constant stream of notes?
+    include_rests: bool = True
+
+    comp = Composition('Genetic '+str(int(datetime.now().timestamp())),
+                       DiatonicLayer.DEFAULT_KEY,
+                       MCTime.DEFAULT_TIMESIGNATURE,
+                       120)
+
+    gen = Genetic()
+    # Population Size   Number of streams per generation to rate and recombine
     # Number of measures    Length of the generated stream in measures
     num_measures = 4
     # Notes per bar	        Number of notes in a measure
     num_notes_per_measure = 4
-    # Include rests	    Introduce rests between notes OR a constant stream of notes?
-    include_rests: bool = True
-
-    main_key = key.Key('C', 'major')
-    main_scale = scale.MajorScale('C')
-    title = 'Genetic '+str(int(datetime.now().timestamp()))
-    comp = Composition(title,
-                              main_key,
-                              meter.TimeSignature('4/4'),
-                              120)
-
-    # Population Size   Number of streams per generation to rate and recombine
     population_size: int = 10
     genome_size = num_measures * num_notes_per_measure * BITS_PER_NOTE
 
@@ -222,12 +229,12 @@ def create_genetic():
     population = generate_population(population_size, genome_size)
 
     # Continue with the fittest populations
-    population = sort_population (population, fitness_func=stream_rate_rules)
+    population = sort_population (population, fitness_func=rating)
 
     # Three fittest as next population
     next_generation = population[0:2]
 
-    parents = selection_pair(population, stream_rate_rules)
+    parents = selection_pair(population, rating)
     offspring_a, offspring_b = single_point_crossover(parents[0], parents[1])
 
     #   Number of mutations	    Max number of mutations that should be possible per child generated
@@ -239,18 +246,16 @@ def create_genetic():
     offspring_b = mutation(offspring_b, num=num_mutations, probability=mutation_probability)
     next_generation += [offspring_a, offspring_b]
 
-    new_stream = genome_to_stream (population[0],
+    new_stream = gen.to_stream (population[0],
                                   num_measures,
                                   num_notes_per_measure,
-                                  include_rests,
-                                  main_scale)
+                                  include_rests)
 
     comp.score.append(part_create_from_stream(new_stream, instrument.Piano()))
 
     comp.analysis()
     comp.show()
-    # Save score
-    comp.save(title +".mid")
+    comp.save()
 
 
 def euclidian_rhythm (num_onset: int = 4, num_timestep: int = 4 ) -> list [int] :
@@ -362,7 +367,7 @@ def create_percussion ():
 
 
     # Write to MIDI
-    mf = midi.translate.streamToMidiFile(comp)
+    mf = midi.translate.streamToMidiFile(comp.score)
     mf.open(Config.DEFAULT_PATH+'percussion_example.mid', 'wb')
     mf.write()
     mf.close()
