@@ -1,283 +1,103 @@
 """
-MusicPy - Music21
-
-Code using musicpy and music21
+MusicPy - Notebook examples
 """
 
-from musicpy import database, musicpy as mp, control, algorithms, structures
-from music21py import *
-
-from harmony import *
-from library import *
-
-mpstream = mp.read (Config.DEFAULT_PATH + Config.DEFAULT_MIDI_FILE_IN, get_off_drums=True, split_channels=True)
-track_number = 0
-nFrom = 0
-nTo = 4
-#nTo = 47
-
-intNumTracks = len(mpstream.tracks)
-trkTrack1 = mpstream(track_number)
-lstNotes = trkTrack1.notes[nFrom:nTo]
-intNumNotes = len (lstNotes)
-
-print ('Track selected :')
-print (trkTrack1)
-print ('Track part from :' + str(nFrom) + ' to ' + str(nTo) + ' :')
-print (trkTrack1[nFrom:nTo])
-print ('Notes from track : '+ str(lstNotes))
-print ('Number of notes : ' + str(intNumNotes))
-
-print (mpstream[track_number].content)
-print (mpstream[track_number].content.notes)
-
-intInstr = 1
-print ('Play selected track :')
-#play(trkTrack1[nFrom:nTo], instrument=intInstr)
-#, wait=True)
-
-part_analyzed = trkTrack1[nFrom:nTo]
-str1 = algorithms.detect (part_analyzed)
-str2 = algorithms.chord_analysis (mpstream(track_number))
-str3 = mp.analyze_rhythm (trkTrack1[nFrom:nTo])
-
-
-scalename = str(MCStyle.SCALE['Standard'][0])
-scl01 = structures.scale(scalename)
-scl02 = structures.scale('C', 'major')
-
-chd01 = scl01.chord_progression(ChordHarmony.PROGRESSIONS[0])
-for i in range(1, len(ChordHarmony.PROGRESSIONS)-1):
-#    print (PROGRESSIONS[i])
-    chd02 = scl01.chord_progression(ChordHarmony.PROGRESSIONS[i], durations=1 / 2, intervals=0, volumes=None, chords_interval=None)
-    chd01 = chd01 + structures.rest(1/2) + chd02
-
-chords_in_scale = scl01%(1234567, 0.5)
-mpstream_chords = chords_in_scale[0]
-for i in range(1, 7):
-#    print (PROGRESSIONS[i])
-    mpstream_chords = mpstream_chords + structures.rest(1/2) + chords_in_scale[i]
-
-
-# Output
-lstChdTrack = [mpstream_chords] # list of tracks
-lstIntChannel = [1] # list of channelnumbers
-lstIntStartTimes = [0] # list of starttimes
-
-strSongName = 'Patterns'
-rtmSong = []
-
-# strSongName
-# lstChdTrack # list of tracks: type musicpy.Chord
-# lstIntChannel # list of channelnumbers
-# lstIntStartTimes # list of starttimes
-mpstream = structures.chord('C4', 1/8, 1/8)*100
-mpstream_rhythm = structures.chord('C2')
-lstChdTrack.append (mpstream.apply_rhythm (rtmSong))
-lstIntChannel.append (1)
-lstChdTrack.append (mpstream_rhythm.apply_rhythm (rtmSong))
-lstIntChannel.append (9)
-
-
-for i in range(0, len(lstChdTrack)):
-    print ('Track    : ' + str(i))
-    print ('Notes    : ' + str(lstChdTrack[i].notes))
-    print ('Interval : ' + str(lstChdTrack[i].interval))
-
+from musicpy import musicpy as mp, structures
 
-# Construct piece out of tracks
-pce01 = structures.piece(tracks=lstChdTrack,channels=lstIntChannel, start_times=lstIntStartTimes)
-# Play piece and wait until finish, writes temusicpy.midi
-print ('Play :')
-print (pce01)
-mp.play(pce01, wait=True)
+from library import MCMIDI
+from musicom import MusicalUnit, Composition
 
 
-# Instrumentation
 
-# Instruments
-# Play all MIDI instruments
-'''
-for i in range(1, 127):
-    print ('MIDI instrument ' + str(i))
-    play(chdMelody01, bpm=150, instrument=i, wait=True)
-'''
+def create_mp_notebook ():
+    unit = MusicalUnit()
+    unit1, unit2 = MusicalUnit()
+    comp = Composition()
 
-# Soundfont library
-strSFpath = '\\Soundfont\\'
-dctInstr = {}
-dctInstr['Piano'] = ['Piano_NineFootGrand.sf2', 'Piano_RolandPiano.sf2']
-dctInstr['Guitar'] = ['Guitar_SessionGuitar.sf2', 'Guitar_SeagullAcousticGuitar.SF2']
-dctInstr['Brass'] = ['Brass_SoftHorn.sf2', 'Brass_SwingHorn1.sf2']
+    # Compose unit
+    unit.chord = structures.chord (notes='C4',
+                                  duration=1 / 8,
+                                  interval=1 / 8,
+                                   volume = 100) * 50
+    # Construct piece
+    comp.piece = structures.piece(tracks=[structures.track(content=unit.chord, instrument=MCMIDI.PIANO, start_time=1)],
+                                  channels=[0],
+                                  start_times=[0])
 
+    # Melody creation syntax
+    unit.chord += structures.chord('CM7', 3, 1/4, 1/8) ^ 2
+    c2 = structures.chord('CM7')
+    c3 = structures.chord('CM7', 3)
+    unit.chord += structures.chord('CM7', 5)
+    unit.chord += structures.chord('CM7', 3,interval=1/4, default_duration=1/8)
+    unit.chord += structures.chord('CM7', 3, 1/4)
+    unit.chord += structures.chord('CM7', 3, 1/4) ^ 2
 
-# Slice
-mpstream_slice = trkTrack1[nFrom:nTo]
+    unit.chord = (c2 | c3 * 2 )
 
-# Scales
-sclSource = structures.scale('Bb', 'major')
-# print (sclSource)
-sclTarget = structures.scale('C', 'major')
+    unit.chord = mp.S('C4 major')%(15654321, 0.4)
+    unit.chord = structures.scale('C major').pick_chord_by_degree([1, 5])
+    unit.chord = structures.scale('C major').get('1,2,3,4,5,6,7,1.1')
 
-# Modulate
-mpstream_out = mpstream[track_number].content.modulation(sclSource, sclTarget)
+    unit.chord = structures.scale('C major').get('1,1,5,5,6,6,5,-,4,4,3,3,2,2,1,-')
+    unit.chord = structures.scale('C major').chord_progression(['IM7', 'Vsus', 'vi7', 'IVM7'])
 
-print ('Target musicpy stream :')
-print (mpstream_out.notes)
-pceTarget = structures.piece(tracks= [mpstream_out])
-print (pceTarget)
-mp.write (pceTarget, name=Config.DEFAULT_PATH+Config.DEFAULT_MIDI_FILE_OUT)
+    # Chords
+    unit.chord = structures.chord('CM7', 3, 1/4, 1/8)^2
+    unit.chord = structures.chord('G7sus', 2, 1/4, 1/8)^2
+    unit.chord = structures.scale('C4 major')%(15654321, 0.4)
+    unit.chord = structures.scale('C major').chord_progression(['IM7', 'Vsus', 'vi7', 'IVM7'])
 
-intInstr = 1
-intBPM = 100
-print ('Play :')
-#play(pceTarget, wait=True)
-#play (mpstream, wait=True)
-#play (mpstream[track_number], instrument=intInstr, wait=True)
-# play (mpstream[track_number].content, bpm=intBPM, instrument=intInstr)
-#play (mpstream_out, wait=True)
+    # Diatonic scale degrees
+    unit.chord = structures.scale('C major').get('1,1,5,5,6,6,5,-,4,4,3,3,2,2,1,-')
 
+    # Scales
+    mpscale1 = structures.scale('C Major')
+    unit.chord = mpscale1.get('-,1,-,2') % (1 / 2,)
+    unit.chord = mpscale1.get('r,1,r,2')
 
+    #1
+    unit1.chord = structures.chord ('F2, A2, F3')
+    unit1.chord = structures.scale('F major').get('1.-2;3.-2;1.-1')
+    #2
+    unit2.chord = structures.chord('C2, C3, E3, G3')
 
-# Melody creation syntax
-c1 = structures.chord('CM7', 3, 1 / 4, 1 / 8) ^ 2
-c2 = structures.chord('CM7')
-c3 = structures.chord('CM7', 3)
-c4 = structures.chord('CM7', 5)
-c5 = structures.chord('CM7', 3, 1 / 4, 1 / 8)
-c6 = structures.chord('CM7', 3, 1 / 4)
-c7 = structures.chord('CM7', 3, 1 / 4) ^ 2
+    # Melody
+    # Musical composition examples page 13
+    s1 = structures.scale('F major')
+    b1 = s1.get('-') + s1.get('1.-1; 3.-1; 1') + s1.get('5.-1; 5   ; 7.-1;2') + s1.get('1.-1; 5.-1; 1   ;3')
+    b2 = s1.get('6.-1; 4.-1; 1   ;4') + s1.get('1.-1; 3.-1; 1   ;5') + s1.get('6.-1; 3.-1; 1   ;6') + s1.get('5.-1; 5.-1; 2   ;7')
+    b3 = s1.get('1.-1; 5.-1; 3   ;1.+1')%(1,)
+    b21 = s1.get('-') + s1.get('1') + s1.get('7.-1; 2') + s1.get('5.-1; 3')
+    b22 = s1.get('6.-1; 4') + s1.get('3.-1; 5') + s1.get('4.-1; 6') + s1.get('2.-1; 7')
+    b23 = s1.get('1.-1; 1.+1')%(1,)
 
-melody = (c1 | c2 | c3 * 2 )
+    unit1.chord = b1 + b2 + b3
+    unit2.chord = b21 + b22 + b23
 
-chd4 = mp.S('C4 major')%(15654321, 0.4)
-mpstream = structures.scale('C major').get('1,2,3,4,5,6,7,1.1')
 
-chd5 = structures.scale('C major').get('1,1,5,5,6,6,5,-,4,4,3,3,2,2,1,-')
-chd6 = structures.scale('C major').chord_progression(['IM7', 'Vsus', 'vi7', 'IVM7'])
 
+def create_mp_notebook_percussion ():
+    """
+    :[] settings blok
+    r:n repeat the beat n times with the equally divided unit duration
+    R:n repeat the beat n times with the unit duration
+    b:n change the duration of the beat to the unit duration * n
+    """
 
-# Chords
-c1 = structures.chord('CM7', 3, 1/4, 1/8)^2
-c2 = structures.chord('G7sus', 2, 1/4, 1/8)^2
-mpstream = structures.scale('C4 major')%(15654321, 0.4)
-print (mpstream)
-chd03 = structures.scale('C major').chord_progression(['IM7', 'Vsus', 'vi7', 'IVM7'])
+    # drum
+    drm1 = structures.drum('S[l:.8; i:.; r:4], S[l:.16; i:.], S[l:.8; i:.], S[l:.16; i:.], S[l:.8; i:.], S[l:.8; i:.]')
+    drm2 = structures.drum('S[l:.8; i:.; r:4], S[l:.16; i:.], S[l:.8; i:.], S[l:.16; i:.], S[l:.8; i:.], S[l:.8; i:.]')
+    drm3 =  structures.drum ('K, K;H, S, H, K, K;H;PH, H;S, H')
 
-# Notes
-chd02 = structures.scale('C major').get('1,1,5,5,6,6,5,-,4,4,3,3,2,2,1,-')
+    percussion_unit = MusicalUnit ()
+    percussion_unit.chord = drm1 + drm2 + drm3
 
 
-# Scales
-mpscale1 = structures.scale('C Major')
-t1 = mpscale1.get('-,1,-,2') % (1 / 2,)
-t2 = mpscale1.get('r,1,r,2')
+    comp = Composition ()
+    comp.piece = structures.piece(percussion_unit.chord, [MCMIDI.PIANO], channels=[MCMIDI.PERCUSSION_CHANNEL_INDEX])
 
-#1
-mpstream = structures.chord ('F2, A2, F3')
-chd05 = structures.scale('F major').get('1.-2;3.-2;1.-1')
-#2
-chd06 = structures.chord('C2, C3, E3, G3')
 
 
-# Melody
 
-# Musical composition examples page 13
 
-s1 = structures.scale('F major')
-
-b1 = s1.get('-') + s1.get('1.-1; 3.-1; 1') + s1.get('5.-1; 5   ; 7.-1;2') + s1.get('1.-1; 5.-1; 1   ;3')
-b2 = s1.get('6.-1; 4.-1; 1   ;4') + s1.get('1.-1; 3.-1; 1   ;5') + s1.get('6.-1; 3.-1; 1   ;6') + s1.get('5.-1; 5.-1; 2   ;7')
-b3 = s1.get('1.-1; 5.-1; 3   ;1.+1')%(1,)
-
-
-b21 = s1.get('-') + s1.get('1') + s1.get('7.-1; 2') + s1.get('5.-1; 3')
-b22 = s1.get('6.-1; 4') + s1.get('3.-1; 5') + s1.get('4.-1; 6') + s1.get('2.-1; 7')
-b23 = s1.get('1.-1; 1.+1')%(1,)
-
-musicpy.play (b1 + b2 + b3, wait=True)
-musicpy.play (b21 + b22 + b23, wait=True)
-
-
-'''
-:[] settings blok
-r:n repeat the beat n times with the equally divided unit duration
-R:n repeat the beat n times with the unit duration
-b:n change the duration of the beat to the unit duration * n
-'''
-
-# drum
-drm1 = structures.drum('S[l:.8; i:.; r:4], S[l:.16; i:.], S[l:.8; i:.], S[l:.16; i:.], S[l:.8; i:.], S[l:.8; i:.]')
-drm2 = structures.drum('S[l:.8; i:.; r:4], S[l:.16; i:.], S[l:.8; i:.], S[l:.16; i:.], S[l:.8; i:.], S[l:.8; i:.]')
-
-drm3 =  structures.drum ('K, K;H, S, H, K, K;H;PH, H;S, H')
-
-print (drm3)
-
-
-
-# Play DAW
-
-mpstream_percussion = []
-
-# Percussion channel 10
-intDAWChannel = 9
-intPiano = 1
-pceRhythm = structures.piece(mpstream_percussion, [intPiano], channels=[intDAWChannel])
-
-
-# Play rhythm
-print ('Play : ')
-print (pceRhythm)
-# play (chdRhythm, wait=True)
-musicpy.play (pceRhythm, wait=True)
-
-rhythmic_info = structures.rhythm.RhythmAnalyzer(pceRhythm)
-rtmSong = rhythmic_info.getRhythm()
-
-# Show the rhythmic information
-print(rhythmic_info.getRhythm())
-
-
-mpstream = structures.chord('C4', 1/8, 1/8)*7
-chd02 = mpstream.apply_rhythm (rtmSong)
-musicpy.play(chd02, wait=True)
-
-
-# Tracks
-lstChdTrack = []
-# Channels
-lstIntChannel = []
-# Voice
-lstChdTrack.append (mpstream.apply_rhythm (rtmSong))
-lstIntChannel.append (1)
-# Percussion
-lstChdTrack.append (mpstream_percussion.apply_rhythm (rtmSong))
-lstIntChannel.append (9)
-
-
-
-"""
-DAW contains errors in importing (py)audioop
-
-# MP DAW
-intNumChannels = 15
-daw1 = daw.daw(intNumChannels, name=strSongName)
-
-i = 0
-intDAWChannel = 0
-daw1.load(intDAWChannel, strSFpath + dctInstr['Piano'][i])
-intDAWChannel = 1
-daw1.load(intDAWChannel, strSFpath + dctInstr['Guitar'][i])
-intDAWChannel = 2
-daw1.load(intDAWChannel, strSFpath + dctInstr['Brass'][i])
-intDAWChannel = 9
-daw1.load(intDAWChannel, strSFpath + dctInstr['Piano'][i]) #Percussion
-intPiano = 1
-
-
-print ('Play :')
-print (daw1)
-#daw1.play(pce01, wait=True)
-
-"""
