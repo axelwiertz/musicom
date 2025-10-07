@@ -12,7 +12,7 @@ from collections import defaultdict
 from theory import *
 # tools
 from library import *
-from genetic import GeneticCreation
+from genetic import *
 
 # Harmony rules
 from harmony import *
@@ -101,15 +101,17 @@ class Composition:
         # Save score
         self.score.write(fmt='midi', fp=Config.DEFAULT_PATH + filename_out)
 
-    
+class Phrase:
+    def __init__(self):
+        self.stream =  stream.Stream()
+
     def transform (self, method: int):
         # Transform a composition
         if method == 1:
-            # Add to score
             # Insert several new notes
             new_note_1 = note.Note(DiatonicLayer.DEFAULT_PITCH, quarterLength=MCTime.QUARTER/4)
             new_note_2 = note.Note(DiatonicLayer.DEFAULT_PITCH, quarterLength=MCTime.DEFAULT_DURATION)
-            self.score.insertAndShift([2, new_note_1, 2.75, new_note_2])
+            self.stream.insertAndShift([2, new_note_1, 2.75, new_note_2])
     
     
 
@@ -148,8 +150,8 @@ def create_markov ():
             part.append(note.Note(p, quarterLength=1))
 
 
-
-def bits_to_stream (genetic: GeneticCreation,
+def genome_to_stream (genome: Genome,
+                      bits: int,
                 scale_in: scale.ConcreteScale) -> stream.Stream:
     # Transform a generated genome into a Stream
     stream_out = stream.Stream()
@@ -157,15 +159,12 @@ def bits_to_stream (genetic: GeneticCreation,
     pitch_degrees = []
     durations = []
 
-    # population[0] or genome?
-    binary_elements = genetic.elements()
-    bits = genetic.bits_per_gene
-
-
+    # Split genome in parts of 'bits' length
+    numparts = len(genome)%bits
     pitch_degrees_binary = []
-    for i in range(genetic.genome_size):
+    for i in range(numparts):
         # Extract binary elements
-        pitch_degrees_binary += [genetic.genome[i * bits:i * bits + bits]]
+        pitch_degrees_binary += [genome[(i*bits):(i*bits) + bits]]
 
     note_length = 1 / MCTime.QUARTER
     include_rests = True
@@ -195,12 +194,6 @@ def bits_to_stream (genetic: GeneticCreation,
 
     return stream_out
 
-def rating (self) -> int:
-    # Rating of generation
-    rate = self.genome[1]
-
-    return rate
-
 
 def create_population():
     # Create a genetic composition
@@ -209,15 +202,23 @@ def create_population():
                        MCTime.DEFAULT_TIMESIGNATURE,
                        120)
 
-    # Number of measures    Length of the generated stream in measures
-    num_measures = 4
-    # Notes per bar	        Number of notes in a measure
-    num_notes_per_measure = 4
+    def fitness_func(genome: Genome) -> int:
+        return sum(genome)
 
-    gen = GeneticCreation (10, num_measures * num_notes_per_measure, 4)
+    # Run the genetic algorithm
+    final_population, generations = run_evolution(
+        populate_func=lambda: generate_population(10, 20),
+        fitness_func=fitness_func,
+        fitness_limit=20,
+        generation_limit=50,
+        printer=print_stats
+    )
 
-    gen.evolve()
-    new_stream = bits_to_stream (gen, DiatonicLayer.DEFAULT_SCALE)
+    print("Final Population after %d generations:" % generations)
+    for genome in final_population:
+        print("%s (Fitness: %d)" % (genome_to_string(genome), fitness_func(genome)))
+    
+    new_stream = genome_to_stream (final_population[0], 4, DiatonicLayer.DEFAULT_SCALE)
 
     comp.score.append(part_create_from_stream(new_stream, instrument.Piano()))
 

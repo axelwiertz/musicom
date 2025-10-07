@@ -5,6 +5,7 @@ Code using MusicPY and music21
 """
 
 from musicpy import database, musicpy, control, algorithms, structures
+from music21py import *
 
 from harmony import *
 from library import *
@@ -42,14 +43,14 @@ str2 = algorithms.chord_analysis (mpstream(track_number))
 str3 = musicpy.analyze_rhythm (trkTrack1[nFrom:nTo])
 
 
-scalename = str(MCStyle.dctStyleScale['Standard'][0])
+scalename = str(MCStyle.SCALE['Standard'][0])
 scl01 = structures.scale(scalename)
 scl01 = structures.scale('C', 'major')
 
-chd01 = scl01.chord_progression(MCChord.PROGRESSIONS[0])
-for i in range(1, len(MCChord.PROGRESSIONS)-1):
+chd01 = scl01.chord_progression(ChordHarmony.PROGRESSIONS[0])
+for i in range(1, len(ChordHarmony.PROGRESSIONS)-1):
 #    print (PROGRESSIONS[i])
-    chd02 = scl01.chord_progression(MCChord.PROGRESSIONS[i], durations=1 / 2, intervals=0, volumes=None, chords_interval=None)
+    chd02 = scl01.chord_progression(ChordHarmony.PROGRESSIONS[i], durations=1 / 2, intervals=0, volumes=None, chords_interval=None)
     chd01 = chd01 + structures.rest(1/2) + chd02
 
 chords_in_scale = scl01%(1234567, 0.5)

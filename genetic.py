@@ -1,3 +1,6 @@
+"""
+A simple genetic algorithm implementation in Python.
+"""
 from random import choices, randint, randrange, random, sample
 from typing import List, Optional, Callable, Tuple
 
@@ -12,25 +15,7 @@ MutationFunc = Callable[[Genome], Genome]
 PrinterFunc = Callable[[Population, int, FitnessFunc], None]
 
 
-# Genetic creation
-
-class GeneticCreation:
-
-    def __init__(self,
-                 population_size: int,
-                 genes_size: int,
-                 bits_per_gene: int = 4,
-                 ):
-
-        # Population Size   Number of streams per generation to rate and recombine
-        self.population_size = population_size
-        self.bits_per_gene = bits_per_gene
-        self.genes_size = genes_size
-
-        self.genome_size = genes_size * bits_per_gene
-
-        self.genome = Genome()
-
+# Genetic evolution functions
 
 # Generate a random genome of given length
 def generate_genome(length: int) -> Genome:
@@ -107,31 +92,6 @@ def print_stats(population: Population, generation_id: int, fitness_func: Fitnes
 
 
 
-def evolve (self):
-    # Generate populations
-    population = generate_population(self.population_size, self.genome_size)
-
-    # Continue with the fittest populations
-    population = sort_population (population, fitness_func=FitnessFunc)
-
-    # Three fittest as next population
-    next_generation = population[0:2]
-
-    # Generate offspring
-    parents = selection_pair(population, FitnessFunc)
-    offspring_a, offspring_b = single_point_crossover(parents[0], parents[1])
-
-    #   Number of mutations	    Max number of mutations that should be possible per child generated
-    num_mutations: int = 2
-    #   Mutation probability
-    mutation_probability: float = 0.5
-
-    # Mutate offspring
-    offspring_a = mutation(offspring_a, num=num_mutations, probability=mutation_probability)
-    offspring_b = mutation(offspring_b, num=num_mutations, probability=mutation_probability)
-    next_generation += [offspring_a, offspring_b]
-
-
 # Run the genetic algorithm evolution process
 def run_evolution(
         populate_func: PopulateFunc,
@@ -173,3 +133,26 @@ def run_evolution(
         population = next_generation
 
     return population, i
+
+
+def main():
+    # Example fitness function: counts the number of 1s in the genome
+    def fitness_func(genome: Genome) -> int:
+        return sum(genome)
+
+    # Run the genetic algorithm
+    final_population, generations = run_evolution(
+        populate_func=lambda: generate_population(10, 20),
+        fitness_func=fitness_func,
+        fitness_limit=20,
+        generation_limit=50,
+        printer=print_stats
+    )
+
+    print("Final Population after %d generations:" % generations)
+    for genome in final_population:
+        print("%s (Fitness: %d)" % (genome_to_string(genome), fitness_func(genome)))
+
+if __name__ == '__main__':
+    main()
+
