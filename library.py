@@ -23,6 +23,19 @@ class Config:
     DEFAULT_MIDI_FILE_OUT = 'out.mid'
 
 class MCMIDI:
+
+    PIANO = 1
+    CHURCH_ORGAN = 20
+    ACOUSTIC_GUITAR = 25
+    VIOLIN = 41
+    STRING_ENSEMBLE = 49
+    TRUMPET = 57
+    FLUTE = 74
+    SYNTH_PAD = 88
+
+    PERCUSSION_CHANNEL = 10  # Channel 10 (index 9) is reserved for percussion in General MIDI
+    PERCUSSION_CHANNEL_INDEX = 9
+
     # General MIDI percussion mapping (channel 10): 35-81 common drums
     BASS_DRUM = 36
     ACOUSTIC_SNARE = 38
@@ -38,6 +51,7 @@ class MCMIDI:
     COWBELL = 56
     VIBRASLAP = 58
     WOODBLOCK = 76
+
 
     # Helper to create an unpitched percussion note by MIDI pitch number
     # General MIDI percussion mapping (channel 10): 35-81 common drums

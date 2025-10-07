@@ -17,6 +17,8 @@ from genetic import *
 # Harmony rules
 from harmony import *
 
+from musicpy import musicpy as mp, algorithms, structures
+from music21py import *
 
 """
 Composition - Structure
@@ -35,11 +37,12 @@ class Composition:
         self.form = []
         self.bars = 0
         self.voices = 0
-        self.style = ''
+        self.style = 'Standard'
         self.key = None
         self.meter = None
         self.tempo = None
 
+        # Music21 score
         self.score = stream.Score()
 
         self.score.metadata = metadata.Metadata()
@@ -51,8 +54,46 @@ class Composition:
         self.score.insert(0, meter_in)
         self.score.insert(0, tempo.MetronomeMark(number=tempo_in))
 
-    def show(self):
+        # MusicPy structures
+        scalename = str(MCStyle.SCALE[self.style][0])
+        scl01 = structures.scale(scalename)
+        scl02 = structures.scale('C', 'major')
+        self.piece = structures.piece
+
+    def piece_track_notes (self, track_number: int = 0, nFrom: int = 0, nTo: int = 4):
+        track_notes = self.piece(track_number)[nFrom:nTo]
+
+        content = self.piece(track_number).content
+        content_notes = self.piece(track_number).content.notes
+
+    def score_show(self):
         score_show(self.score)
+
+    def play_track (self, track_number: int = 0, instrument: int = MCMIDI.PIANO):
+        mp.play(self.piece[track_number], instrument=instrument, wait=True)
+
+    def play_piece (self):
+        # convert music21 score to musicpy piece
+        self.piece = m21_to_mpy(self.score)
+        # Play piece and wait until finish, writes temp.midi
+        mp.play(self.piece, wait=True)
+
+    def load (self, filename_in: str = Config.DEFAULT_MIDI_FILE_IN):
+        # Load a score
+        self.score = converter.parse (Config.DEFAULT_PATH + filename_in)
+        self.piece = mp.read(Config.DEFAULT_PATH + Config.DEFAULT_MIDI_FILE_IN, get_off_drums=True, split_channels=True)
+
+    def save (self, filename_out: str = Config.DEFAULT_MIDI_FILE_OUT):
+        # Save score
+        self.score.write(fmt='midi', fp=Config.DEFAULT_PATH + filename_out)
+
+    def print_piece (self):
+        for i in range(0, len(self.piece)):
+            print ('Track    : ' + str(i))
+            print ('Notes    : ' + str(self.piece(i).notes))
+            print ('Duration : ' + str(self.piece.tracks[i].duration))
+            print ('Interval : ' + str(self.piece.tracks[i].interval))
+
 
     def analysis(self):
         # Analyze score
@@ -92,28 +133,46 @@ class Composition:
         self.score.makeMeasures(inPlace=True)
         post = analysis.metrical.labelBeatDepth(self.score)
 
+        # MusicPy analysis
 
-    def load (self, filename_in: str = Config.DEFAULT_MIDI_FILE_IN):
-        # Load a score
-        self.score = converter.parse (Config.DEFAULT_PATH + filename_in)
+        str1 = algorithms.detect(self.piece)
+        str2 = algorithms.chord_analysis(self.piece)
+        str3 = mp.analyze_rhythm(self.piece)
+        rhythmic_info = structures.rhythm.RhythmAnalyzer(self.piece)
 
-    def save (self, filename_out: str = Config.DEFAULT_MIDI_FILE_OUT):
-        # Save score
-        self.score.write(fmt='midi', fp=Config.DEFAULT_PATH + filename_out)
+        # Show the rhythmic information
+        print(rhythmic_info.getRhythm())
 
-class Phrase:
+
+
+class MusicalUnit ():
     def __init__(self):
         self.stream =  stream.Stream()
+        self.chord = structures.chord()
+        self.tempo = MCTime.DEFAULT_TEMPO
+        self.instrument = instrument.Piano()
+
+    def modulate (self, sclSource : structures.scale(),
+             sclTarget : structures.scale()):
+        # Modulate
+        mpstream_out = self.chord.modulation(sclSource, sclTarget)
+
+    def play (self):
+        mp.play (self.track, bpm=self.tempo, instrument=self.instrument.midiProgram)
+
 
     def transform (self, method: int):
         # Transform a composition
         if method == 1:
-            # Insert several new notes
-            new_note_1 = note.Note(DiatonicLayer.DEFAULT_PITCH, quarterLength=MCTime.QUARTER/4)
-            new_note_2 = note.Note(DiatonicLayer.DEFAULT_PITCH, quarterLength=MCTime.DEFAULT_DURATION)
-            self.stream.insertAndShift([2, new_note_1, 2.75, new_note_2])
-    
-    
+            None
+
+def compose_unit ():
+
+        unit1 = MusicalUnit()
+        # Insert several new notes
+        new_note_1 = note.Note(DiatonicLayer.DEFAULT_PITCH, quarterLength=MCTime.QUARTER/4)
+        new_note_2 = note.Note(DiatonicLayer.DEFAULT_PITCH, quarterLength=MCTime.DEFAULT_DURATION)
+        unit1.stream.insertAndShift([2, new_note_1, 2.75, new_note_2])
 
 
 
@@ -223,7 +282,7 @@ def create_population():
     comp.score.append(part_create_from_stream(new_stream, instrument.Piano()))
 
     comp.analysis()
-    comp.show()
+    comp.score_show()
     comp.save()
 
 
@@ -307,7 +366,7 @@ def create_rhythm () -> stream.Stream:
     rhythm_part = part_create_from_stream(rhythm_stream)
 
     comp.score.append(rhythm_part)
-    comp.show()
+    comp.score_show()
 
     return rhythm_stream
 
@@ -321,7 +380,7 @@ def percussion_load ():
 
     comp.score.append(clef.PercussionClef())
 
-    comp.show()
+    comp.score_show()
 
 def create_percussion ():
 
@@ -332,7 +391,7 @@ def create_percussion ():
     for part in create_percussion_parts().parts:
         comp.score.append(part)
 
-    comp.show()
+    comp.score_show()
 
 
     # Write to MIDI
@@ -466,7 +525,7 @@ def create_new ():
 
     # Analyze score
     comp.analysis()
-    comp.show()
+    comp.score_show()
     # Save score
     comp.save("new.mid")
 
@@ -516,7 +575,7 @@ def create_balfolk ():
 
     # Analyze score
     comp.analysis()
-    comp.show()
+    comp.score_show()
     # Save score
     comp.save("balfolk.mid")
 
@@ -544,7 +603,7 @@ def create_counterpoint():
     comp.score.append(voice2)
     # Analyze score
     comp.analysis()
-    comp.show()
+    comp.score_show()
     # Save score
     comp.save()
 
@@ -564,17 +623,27 @@ def create_key_library (key_in: key.Key):
     comp.score.append(part_lib)
 
     comp.analysis()
-    comp.show()
+    comp.score_show()
     # Save score
     comp.save('chordlibrary_in_key_' + key_in.name +'.mid')
 
 
 def create_stream_chords_in_key (chord_progressions: list, key_in: key.Key ,  quarterlength_in: int = 4 ) -> stream.Stream:
-    # Stream of chord progression patterns in a key
+    # m21 Stream of chord progression patterns in a key
     stream_out = stream.Stream()
+    # mp
+    mpscale = structures.scale(str(key_in.tonic.name), str(key_in.mode))
+    chd01 = mpscale.chord_progression(chord_progressions[0])
     for i in range(1, len(chord_progressions)-1):
+        # mp
+        chd02 = mpscale.chord_progression(chord_progressions[i], durations=1 / 2, intervals=0, volumes=None,
+                                        chords_interval=None)
+        chd01 = chd01 + structures.rest(1 / 2) + chd02
+
+        # m21 Add rest between progressions
         stream_out.append(note.Rest(quarterLength= quarterlength_in))
         for j in range (0, len(chord_progressions[i])):
+            # m21 Create chord from Roman numeral
             chord01 = roman.RomanNumeral (chord_progressions[i][j], keyOrScale=key_in)
             chord01.duration.quarterLength = quarterlength_in
             stream_out.append(chord01)
@@ -591,6 +660,14 @@ def create_stream_triads_in_key (key_in: key.Key ,  quarterlength_in: int = 4 ) 
         triad.duration.quarterLength = quarterlength_in
         stream_out.append(triad)
         stream_out.append(note.Rest(quarterLength=quarterlength_in))
+
+    # mp
+    mpscale = structures.scale(str(key_in.tonic.name), str(key_in.mode))
+    chords_in_scale = mpscale % (1234567, 0.5)
+    mpstream_chords = chords_in_scale[0]
+    for i in range(1, DiatonicLayer.HEPTA):
+    #    print (PROGRESSIONS[i])
+        mpstream_chords = mpstream_chords + structures.rest(1 / 2) + chords_in_scale[i]
 
     return stream_out
 
@@ -644,14 +721,14 @@ def create_harmonic():
     comp.score.append(part_create_from_stream(harmonic_stream))
 
     comp.analysis()
-    comp.show()
+    comp.score_show()
 
 
 def main():
     # Main: create or load, analyze or transform
 
     #comp = load_and_analyze('Sousta.mid')
-    #comp.show()
+    #comp.score_show()
 
     #create_rhythm()
     #create_new()

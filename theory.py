@@ -12,6 +12,8 @@ import itertools
 from music21 import (stream, note, key, scale, chord, interval,
                      roman, converter, instrument, serial, harmony,
                      meter, tempo, metadata, clef, percussion, analysis)
+# mp
+from musicpy import database
 
 
 def interval_to_step (intervals: list[int]) -> list[int]:
