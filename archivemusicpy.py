@@ -1,17 +1,16 @@
 """
 MusicPy - Music21
 
-Code using MusicPY and music21
+Code using musicpy and music21
 """
 
-from musicpy import database, musicpy, control, algorithms, structures
+from musicpy import database, musicpy as mp, control, algorithms, structures
 from music21py import *
 
 from harmony import *
 from library import *
 
-
-mpstream = musicpy.read (Config.DEFAULT_PATH + Config.DEFAULT_MIDI_FILE_IN, get_off_drums=True, split_channels=True)
+mpstream = mp.read (Config.DEFAULT_PATH + Config.DEFAULT_MIDI_FILE_IN, get_off_drums=True, split_channels=True)
 track_number = 0
 nFrom = 0
 nTo = 4
@@ -40,12 +39,12 @@ print ('Play selected track :')
 part_analyzed = trkTrack1[nFrom:nTo]
 str1 = algorithms.detect (part_analyzed)
 str2 = algorithms.chord_analysis (mpstream(track_number))
-str3 = musicpy.analyze_rhythm (trkTrack1[nFrom:nTo])
+str3 = mp.analyze_rhythm (trkTrack1[nFrom:nTo])
 
 
 scalename = str(MCStyle.SCALE['Standard'][0])
 scl01 = structures.scale(scalename)
-scl01 = structures.scale('C', 'major')
+scl02 = structures.scale('C', 'major')
 
 chd01 = scl01.chord_progression(ChordHarmony.PROGRESSIONS[0])
 for i in range(1, len(ChordHarmony.PROGRESSIONS)-1):
@@ -73,7 +72,7 @@ rtmSong = []
 # lstIntChannel # list of channelnumbers
 # lstIntStartTimes # list of starttimes
 mpstream = structures.chord('C4', 1/8, 1/8)*100
-mpstream_rhythm = []
+mpstream_rhythm = structures.chord('C2')
 lstChdTrack.append (mpstream.apply_rhythm (rtmSong))
 lstIntChannel.append (1)
 lstChdTrack.append (mpstream_rhythm.apply_rhythm (rtmSong))
@@ -91,7 +90,7 @@ pce01 = structures.piece(tracks=lstChdTrack,channels=lstIntChannel, start_times=
 # Play piece and wait until finish, writes temusicpy.midi
 print ('Play :')
 print (pce01)
-musicpy.play(pce01, wait=True)
+mp.play(pce01, wait=True)
 
 
 # Instrumentation
@@ -127,7 +126,7 @@ print ('Target musicpy stream :')
 print (mpstream_out.notes)
 pceTarget = structures.piece(tracks= [mpstream_out])
 print (pceTarget)
-musicpy.write (pceTarget, name=Config.DEFAULT_PATH+Config.DEFAULT_MIDI_FILE_OUT)
+mp.write (pceTarget, name=Config.DEFAULT_PATH+Config.DEFAULT_MIDI_FILE_OUT)
 
 intInstr = 1
 intBPM = 100
@@ -143,15 +142,15 @@ print ('Play :')
 # Melody creation syntax
 c1 = structures.chord('CM7', 3, 1 / 4, 1 / 8) ^ 2
 c2 = structures.chord('CM7')
-c2 = structures.chord('CM7', 3)
-c3 = structures.chord('CM7', 5)
+c3 = structures.chord('CM7', 3)
+c4 = structures.chord('CM7', 5)
 c5 = structures.chord('CM7', 3, 1 / 4, 1 / 8)
-c5 = structures.chord('CM7', 3, 1 / 4)
-c6 = structures.chord('CM7', 3, 1 / 4) ^ 2
+c6 = structures.chord('CM7', 3, 1 / 4)
+c7 = structures.chord('CM7', 3, 1 / 4) ^ 2
 
 melody = (c1 | c2 | c3 * 2 )
 
-chd4 = musicpy.S('C4 major')%(15654321, 0.4)
+chd4 = mp.S('C4 major')%(15654321, 0.4)
 mpstream = structures.scale('C major').get('1,2,3,4,5,6,7,1.1')
 
 chd5 = structures.scale('C major').get('1,1,5,5,6,6,5,-,4,4,3,3,2,2,1,-')
@@ -172,13 +171,13 @@ chd02 = structures.scale('C major').get('1,1,5,5,6,6,5,-,4,4,3,3,2,2,1,-')
 # Scales
 mpscale1 = structures.scale('C Major')
 t1 = mpscale1.get('-,1,-,2') % (1 / 2,)
-t1 = mpscale1.get('r,1,r,2')
+t2 = mpscale1.get('r,1,r,2')
 
 #1
 mpstream = structures.chord ('F2, A2, F3')
-chd02 = structures.scale('F major').get('1.-2;3.-2;1.-1')
+chd05 = structures.scale('F major').get('1.-2;3.-2;1.-1')
 #2
-chd03 = structures.chord('C2, C3, E3, G3')
+chd06 = structures.chord('C2, C3, E3, G3')
 
 
 # Melody
