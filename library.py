@@ -110,22 +110,6 @@ def show_plot(yvalues: list):
 Music 21 Tools for streams
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-def part_create_from_stream (stream_in: stream.Stream,
-                             instr: instrument.Instrument = instrument.Piano(),
-                             clef_in : clef.Clef = clef.TrebleClef()) -> stream.Part:
-    # Transfer notes, rests and chords from the original stream to a new Part
-    part_out = stream.Part()
-    # Add instrument of part
-    part_out.insert(0, instr)
-    # Add clef of part
-    part_out.insert(0, clef_in)
-
-    # Create a Part and add notes, rests and chords
-    for element in stream_in:
-        if isinstance(element, (note.Note, note.Rest, chord.Chord)):
-            part_out.append(element)
-
-    return part_out
 
 
 def stream_create(pitches : list[int|str],

@@ -10,23 +10,20 @@ from collections import defaultdict
 
 # Musical datastructures
 from theory import *
-# tools
+# Harmony rules
+from harmony import *
+# Tools
 from library import *
 from genetic import *
 
-# Harmony rules
-from harmony import *
 
+# MusicPy modules: computational music structures and algorithms
 from musicpy import musicpy as mp, algorithms, structures
 from music21py import *
 
-"""
-Composition - Structure
-"""
-
 class Composition: 
     """
-    Composition structure
+    Composition main structure
     """
     def __init__(self, title: str = 'New score',
                  key_in: key.Key = DiatonicLayer.DEFAULT_KEY,
@@ -63,14 +60,14 @@ class Composition:
     def piece_track_notes (self, track_number: int = 0, nFrom: int = 0, nTo: int = 4):
         track_notes = self.piece(track_number)[nFrom:nTo]
 
-        content = self.piece(track_number).content
-        content_notes = self.piece(track_number).content.notes
+        content = self.piece(track_number).tracks
+        content_notes = self.piece(track_number).tracks.notes
 
     def score_show(self):
         score_show(self.score)
 
     def play_track (self, track_number: int = 0, instrument: int = MCMIDI.PIANO):
-        mp.play(self.piece[track_number], instrument=instrument, wait=True)
+        mp.play(self.piece(track_number), instrument=instrument, wait=True)
 
     def play_piece (self):
         # convert music21 score to musicpy piece
@@ -87,12 +84,20 @@ class Composition:
         # Save score
         self.score.write(fmt='midi', fp=Config.DEFAULT_PATH + filename_out)
 
+    def write_to_midi (self):
+        # Write to MIDI
+        mf = midi.translate.streamToMidiFile(self.score)
+        mf.open(Config.DEFAULT_PATH+'percussion_example.mid', 'wb')
+        mf.write()
+        mf.close()
+
+
     def print_piece (self):
         for i in range(0, len(self.piece)):
             print ('Track    : ' + str(i))
-            print ('Notes    : ' + str(self.piece(i).notes))
-            print ('Duration : ' + str(self.piece.tracks[i].duration))
-            print ('Interval : ' + str(self.piece.tracks[i].interval))
+            print ('Notes    : ' + str(self.piece(i).tracks.notes))
+            print ('Duration : ' + str(self.piece(i).tracks.duration))
+            print ('Interval : ' + str(self.piece(i).tracks.interval))
 
 
     def analysis(self):
@@ -138,7 +143,7 @@ class Composition:
         str1 = algorithms.detect(self.piece)
         str2 = algorithms.chord_analysis(self.piece)
         str3 = mp.analyze_rhythm(self.piece)
-        rhythmic_info = structures.rhythm.RhythmAnalyzer(self.piece)
+        rhythmic_info = structures.rhythm.r.RhythmAnalyzer(self.piece)
 
         # Show the rhythmic information
         print(rhythmic_info.getRhythm())
@@ -146,11 +151,62 @@ class Composition:
 
 
 class MusicalUnit ():
-    def __init__(self):
+    # Stream with notes, chord, tempo, instrument
+    def __init__(self,
+                timesteps : int = 8,
+                beat_note : int = 4,
+                beats_in_measure : int = 4,
+                pitches: list[int | str] = (),
+                onset_intervals: list[float] = (),
+                durations: list[float] = (),
+                velocities: list[int] = (100),
+                instrument: instrument.Instrument = instrument.Piano(),
+                clef: clef.Clef = clef.TrebleClef(),
+                scale: scale.ConcreteScale = DiatonicLayer.DEFAULT_SCALE,
+                ):
+
+        # Linking timesteps to meter beats
+        self.timesteps = timesteps
+        # Meter: measure cycle of beats
+        beats_in_measure = beats_in_measure
+        beat_note = beat_note
+
+        self.timesignature = meter.TimeSignature(str(self.beats_in_measure) + '/' + str(self.beat_note))
+        main_beatcount = self.timesignature.beatCount
+        self.beat_duration = MCTime.QUARTER / self.beat_note
+        beat_duration2 = self.timesignature.beatDuration.quarterLength
+
+        self.pitches = pitches
+        self.onset_intervals = onset_intervals
+        self.durations = durations
+        self.velocities = velocities
+
+        self.scale = scale
+        self.pitch_classes = scale.pitches
+        self.instrument = instrument
+        self.clef = clef
+
+
+        pitch_bits = 8  # binary 128 pitches
+        max_pitch = pow(2, self.pitch_bits - 1)
+
+        duration_bits = 4  # binary 8 timesteps
+        interval_bits = 4  # binary 8 timesteps
+        velocity_bits = 4  # binary 8 levels
+        bits = pitch_bits + duration_bits + interval_bits + velocity_bits
+
+        # m21
         self.stream =  stream.Stream()
-        self.chord = structures.chord()
+        # mp
+        self.chord = structures.chord([])
         self.tempo = MCTime.DEFAULT_TEMPO
         self.instrument = instrument.Piano()
+
+    def unit_to_chord(self):
+        self.chord += structures.chord(self.pitches, self.durations, self.intervals)
+
+    def unit_to_stream(self):
+        self.stream = stream_create(self.pitches, self.onset_intervals, self.durations, self.velocities)
 
     def modulate (self, sclSource : structures.scale(),
              sclTarget : structures.scale()):
@@ -160,16 +216,43 @@ class MusicalUnit ():
     def play (self):
         mp.play (self.track, bpm=self.tempo, instrument=self.instrument.midiProgram)
 
-
     def transform (self, method: int):
         # Transform a composition
         if method == 1:
             None
 
-def compose_unit ():
+    def genome_to_unit(self, genome: Genome):
+        # Transform a generated genome into a unit
+        # Split genome in parts of 'bits' length
+        numparts = len(genome) % self.bits
+        genes_binary = []
+        for i in range(numparts):
+            # Extract binary elements
+            genes_binary += [genome[(i * self.bits):(i * self.bits) + self.bits]]
 
+        for gene_binary in genes_binary:
+            pitch_nr = int(sum([bit * pow(2, i) for i, bit in enumerate(gene_binary)]))
+
+    def stream_to_part (self) -> stream.Part:
+        # Transfer notes, rests and chords from the original stream to a new Part
+        part_out = stream.Part()
+        # Add instrument of part
+        part_out.insert(0, self.instrument)
+        # Add clef of part
+        part_out.insert(0, self.clef)
+
+        # Create a part and add notes, rests and chords
+        for element in self.stream:
+            if isinstance(element, (note.Note, note.Rest, chord.Chord)):
+                part_out.append(element)
+
+        return part_out
+
+
+def compose_unit ():
+        # Create a musical unit
         unit1 = MusicalUnit()
-        # Insert several new notes
+        # Insert several new notes in m21 stream
         new_note_1 = note.Note(DiatonicLayer.DEFAULT_PITCH, quarterLength=MCTime.QUARTER/4)
         new_note_2 = note.Note(DiatonicLayer.DEFAULT_PITCH, quarterLength=MCTime.DEFAULT_DURATION)
         unit1.stream.insertAndShift([2, new_note_1, 2.75, new_note_2])
@@ -197,61 +280,13 @@ class MarkovChain:
 
 def create_markov ():
 
-    mc = MarkovChain([('C4', 1), ('E4', 1), ('G4', 1), ('C5', 1), ('E4', 1), ('G4', 1), ('rest', 1)])
-
+    mc = MarkovChain([('C4', 1), ('E4', 1), ('G4', 1), ('C5', 1), ('E4', 1), ('G4', 1)])
     gen_pitches = mc.sample('C4', length=16)
+
     # fixed duration 1 quarter for simplicity
     part = stream.Part()
     for p in gen_pitches:
-        if p == 'rest':
-            part.append(note.Rest(quarterLength=1))
-        else:
-            part.append(note.Note(p, quarterLength=1))
-
-
-def genome_to_stream (genome: Genome,
-                      bits: int,
-                scale_in: scale.ConcreteScale) -> stream.Stream:
-    # Transform a generated genome into a Stream
-    stream_out = stream.Stream()
-
-    pitch_degrees = []
-    durations = []
-
-    # Split genome in parts of 'bits' length
-    numparts = len(genome)%bits
-    pitch_degrees_binary = []
-    for i in range(numparts):
-        # Extract binary elements
-        pitch_degrees_binary += [genome[(i*bits):(i*bits) + bits]]
-
-    note_length = 1 / MCTime.QUARTER
-    include_rests = True
-    scl = scale_in.pitches
-
-    for pitch_binary in pitch_degrees_binary:
-        pitch_degree = int(sum([bit * pow(2, i) for i, bit in enumerate(pitch_binary)]))
-
-        max_degree = pow(2, bits - 1)
-        # Degrees not in scale are rest
-        if not include_rests:
-            pitch_degree = int(pitch_degree % max_degree)
-
-        if pitch_degree >= max_degree:
-            pitch_degrees += [0]
-            durations += [note_length]
-        else:
-            pitch_degrees += [pitch_degree]
-            durations += [note_length]
-
-    for i, degree in enumerate(pitch_degrees):
-        if degree > 0:
-            new_note = note.Note(pitch=scl[degree], quarterLength=durations[i])
-            stream_out.append(new_note)
-        else:
-            stream_out.append(note.Rest(length=durations[i]))
-
-    return stream_out
+        part.append(note.Note(p, quarterLength=4/MCTime.QUARTER))
 
 
 def create_population():
@@ -276,26 +311,30 @@ def create_population():
     print("Final Population after %d generations:" % generations)
     for genome in final_population:
         print("%s (Fitness: %d)" % (genome_to_string(genome), fitness_func(genome)))
-    
-    new_stream = genome_to_stream (final_population[0], 4, DiatonicLayer.DEFAULT_SCALE)
 
-    comp.score.append(part_create_from_stream(new_stream, instrument.Piano()))
+    # Convert best genome to musical unit
+    unit = MusicalUnit()
+    unit.genome_to_unit (final_population[0])
+    unit.instrument = instrument.Piano()
+    unit.stream_to_part()
+    comp.score.append(unit.part)
 
     comp.analysis()
     comp.score_show()
     comp.save()
 
 
-def euclidian_rhythm (num_onset: int = 4, num_timestep: int = 4 ) -> list [int] :
+def euclidian_rhythm (onsets: int = 4,
+                      timesteps: int = 4 ) -> list [int] :
     # Divide number of onsets evenly over number of timesteps, reduced if duplicate
 
     # Onsets gets an equal timestep interval
-    base_timestep_interval = num_timestep // num_onset
+    base_timestep_interval = timesteps // onsets
     # And the remaining timesteps are a separate time step interval
-    remaining_timesteps = num_timestep % num_onset
+    remaining_timesteps = timesteps % onsets
 
     rhythm = []
-    for i in range(num_onset):
+    for i in range(onsets):
         rhythm_timestep_interval = base_timestep_interval
         if i < remaining_timesteps:
             rhythm_timestep_interval += 1
@@ -307,7 +346,7 @@ def euclidian_rhythm (num_onset: int = 4, num_timestep: int = 4 ) -> list [int] 
             if group != rhythm[-1]:
                     group += rhythm.pop(-1)
 
-    last_interval = num_timestep - sum(rhythm)
+    last_interval = timesteps - sum(rhythm)
     if last_interval > 0:
         rhythm.append(last_interval)
 
@@ -330,45 +369,21 @@ def create_rhythm () -> stream.Stream:
     #
     # The number of timesteps is the sum of the intervals
 
+    comp = Composition('Rhythm')
+    unit = MusicalUnit(8, 4, 4)
+
     rhythm_seq = euclidian_rhythm (3, 8)
-
-    # [2,1,1.1]
-    # [2,2,1,1,2]
-    # [4,3,3,3,4]
-    # [6,4,1,5,6]
-
     num_timesteps = sum(rhythm_seq)
 
-    # Linking rhythm timesteps to meter beats
-    timesteps_per_beat = 2
-
-    # Meter: measure cycle of beats
-    beat_note = 4  # eighth
-
-    num_beats_in_measure = 4
-    main_timesignature = meter.TimeSignature(str(num_beats_in_measure)+'/'+str(beat_note))
-
-    main_beatcount =  main_timesignature.beatCount
-
-    beat_duration = MCTime.QUARTER/beat_note
-    beat_duration = main_timesignature.beatDuration.quarterLength
-
-
-    comp = Composition('Rhythm',DiatonicLayer.DEFAULT_KEY,main_timesignature)
-
-    rhythm_stream = stream.Stream()
-    # Apply rhythm in note stream without rests
+    # Apply rhythm in note stream
     for timestep_interval in rhythm_seq:
-        rhythm_note = note.Note(pitch=note.Pitch ('C5'),
-                                duration=note.Duration(timestep_interval * beat_duration / timesteps_per_beat))
-        rhythm_stream.append(rhythm_note)
+        rhythm_note = note.Note(pitch=DiatonicLayer.DEFAULT_PITCH,
+                                duration=note.Duration(timestep_interval * unit.beat_duration / unit.timesteps_per_beat))
+        unit.stream.append(rhythm_note)
 
-    rhythm_part = part_create_from_stream(rhythm_stream)
-
-    comp.score.append(rhythm_part)
+    unit.stream_to_part()
+    comp.score.append(unit.part)
     comp.score_show()
-
-    return rhythm_stream
 
 
 def percussion_load ():
@@ -387,18 +402,43 @@ def create_percussion ():
     # Create
     comp = Composition('Percussion', DiatonicLayer.DEFAULT_KEY, MCTime.DEFAULT_TIMESIGNATURE, 100)
 
-    # percussion_score =
-    for part in create_percussion_parts().parts:
-        comp.score.append(part)
+    pchord = percussion.PercussionChord()
+
+    # Meter 4/4, 8 timesteps, 0,5 beat per timestep
+    unit_bass = MusicalUnit(
+        8, 4, 4,
+        # Onset lines
+        # bass drum on beats 1 & 3), snare on 2 & 4,
+        [MCMIDI.BASS_DRUM, MCMIDI.ACOUSTIC_SNARE, MCMIDI.BASS_DRUM, MCMIDI.ACOUSTIC_SNARE],
+        [2, 2, 2, 2],
+        [1, 1, 1, 1],
+        [110, 110, 110, 110, 110, 110, 110, 110],
+        instrument.Woodblock(),
+        clef.PercussionClef())
+    unit_hihat = MusicalUnit(
+        8, 4, 4,
+        # hh on every eighth
+        [MCMIDI.CLOSED_HIHAT, MCMIDI.CLOSED_HIHAT, MCMIDI.CLOSED_HIHAT, MCMIDI.CLOSED_HIHAT,
+                         MCMIDI.CLOSED_HIHAT, MCMIDI.CLOSED_HIHAT, MCMIDI.CLOSED_HIHAT, MCMIDI.CLOSED_HIHAT],
+        [1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1],
+        [70, 70, 70, 70, 70, 70, 70, 70],
+        instrument.Woodblock(),
+        clef.PercussionClef())
+
+    # Set to percussion instrument (General MIDI channel 10)
+    # music21 uses an unpitched instrument class; channel will be set by MIDI export
+
+    unit_bass.unit_to_stream()
+    unit_bass.stream_to_part()
+    comp.score.append(unit_bass.part)
+
+    unit_hihat.unit_to_stream()
+    unit_hihat.stream_to_part()
+    comp.score.append(unit_hihat.part)
 
     comp.score_show()
-
-
-    # Write to MIDI
-    mf = midi.translate.streamToMidiFile(comp.score)
-    mf.open(Config.DEFAULT_PATH+'percussion_example.mid', 'wb')
-    mf.write()
-    mf.close()
+    comp.write_to_midi()
 
 class ChordSet:
     """
@@ -418,32 +458,6 @@ class ChordSet:
         self.chords[1].romanNumeral.key = key.Key('B')
 
 
-def create_percussion_parts () -> stream.Score:
-
-    score_out = stream.Score()
-    pchord = percussion.PercussionChord()
-
-    # Meter 4/4, 8 timesteps, 0,5 beat per timestep
-    num_timestep = 8
-    timesteps_per_beat = 2
-    # Three onset lines
-    # BD on beats1 & (quarter = 1, 3), snare on 2 & 4,
-    bass_pitches = [MCMIDI.BASS_DRUM, MCMIDI.ACOUSTIC_SNARE, MCMIDI.BASS_DRUM, MCMIDI.ACOUSTIC_SNARE]
-    bass_rhythm = [2, 2, 2, 2]
-    bass_durations = [1, 1, 1, 1]
-    bass_volumes = [110, 110, 110, 110, 110, 110, 110, 110]
-    # hh on every eighth
-    hihat_pitches = [MCMIDI.CLOSED_HIHAT,MCMIDI.CLOSED_HIHAT,MCMIDI.CLOSED_HIHAT,MCMIDI.CLOSED_HIHAT,MCMIDI.CLOSED_HIHAT,MCMIDI.CLOSED_HIHAT,MCMIDI.CLOSED_HIHAT,MCMIDI.CLOSED_HIHAT]
-    hihat_rhythm = [1,1,1,1,1,1,1,1]
-    hihat_durations = [1,1,1,1,1,1,1,1]
-    hihat_volumes = [70, 70, 70, 70, 70, 70, 70, 70]
-
-    # Set to percussion instrument (General MIDI channel 10)
-    # music21 uses an unpitched instrument class; channel will be set by MIDI export
-    bass_part = part_create_from_stream(stream_create(bass_pitches, bass_rhythm, bass_durations, hihat_volumes), instrument.Woodblock(),clef.PercussionClef() )
-    hihat_part = part_create_from_stream(stream_create(hihat_pitches, hihat_rhythm, hihat_durations, bass_volumes), instrument.Woodblock(), clef.PercussionClef())
-
-    return score_out
 
 
 def project_big_yellow_taxi():
@@ -518,10 +532,13 @@ def create_new ():
                         instrument.Bass()]
 
     for i in range (0, len(pitches_list1)-1):
-
-        comp.score.append(
-            part_create_from_stream(stream_create(pitches_list1 [i], durations_list[i], onset_intervals_list [i], velocities_list [i]), instruments_list[i])
-        )
+        # Create unit
+        unit = MusicalUnit(4,4,4,
+            pitches_list1[i], durations_list[i], onset_intervals_list[i], velocities_list[i],
+            instruments_list[i])
+        unit.unit_to_stream()
+        unit.stream_to_part()
+        comp.score.append(unit)
 
     # Analyze score
     comp.analysis()
@@ -615,11 +632,11 @@ def create_key_library (key_in: key.Key):
     comp = Composition('Chord progressions and triads in C', key_in,meter.TimeSignature('4/4'))
 
     stream_lib = create_stream_triads_in_key(key_in, 1)
-    part_lib = part_create_from_stream(stream_lib)
+    part_lib = unit.stream_to_part(stream_lib)
     comp.score.append(part_lib)
 
     stream_lib = create_stream_chords_in_key(ChordHarmony.PROGRESSIONS, key_in, 1)
-    part_lib = part_create_from_stream(stream_lib)
+    part_lib = unit.stream_to_part(stream_lib)
     comp.score.append(part_lib)
 
     comp.analysis()
@@ -718,7 +735,7 @@ def create_harmonic():
     #harmonic_chord = chord_create_harmonic(note.Pitch('A1'),[5,6,7,9,12,15])
     #harmonic_stream.append(harmonic_chord)
 
-    comp.score.append(part_create_from_stream(harmonic_stream))
+    comp.score.append(unit.stream_to_part(harmonic_stream))
 
     comp.analysis()
     comp.score_show()
