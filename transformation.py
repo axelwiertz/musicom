@@ -1,30 +1,29 @@
 
-from library import *
-from harmony import *
-
+from music21 import stream, note, key, scale, roman
 import copy
 import random
 
+from harmony import ChordHarmony
+from musicom import MusicalUnit
+from theory import DiatonicLayer
 
-
+# Voices in a canon
 VOICE1 = 0
 VOICE2 = 1
 VOICE3 = 2
 VOICE4 = 3
 VOICE5 = 4
 
+# Transformation types
 IDENTICAL = 0
 ONE_TO_THREE = 1
 TWO_TO_THREE = 2
 TWO_TO_FOUR = 3
+# Transformations of single/double note to series of new notes
 ONE_TRANS_SET = [IDENTICAL, IDENTICAL, ONE_TO_THREE]
-TWO_TRANS_SET = [IDENTICAL, IDENTICAL, TWO_TO_THREE, TWO_TO_FOUR]
-# list of transformations that transform a single note to a series of new notes
-# identity is listed more than once to increase the chance of it getting chosen
-
 # list of transformations that transform a single note based on both current and next note
-# idenity is listed more than once to give it more chance of being chosen
-
+TWO_TRANS_SET = [IDENTICAL, IDENTICAL, TWO_TO_THREE, TWO_TO_FOUR]
+# identity is listed more than once to increase the chance of it getting chosen
 
 
 def pairwise(iterable):
@@ -229,29 +228,6 @@ def create_stream_from_chords (stream_chords: stream.Stream,
     return stream_out
 
 
-def create_from_chord_progression():
-    # Create based on chord progression
-    main_scale: scale.ConcreteScale = scale.MajorScale("C"),
-    main_key = key.Key('C')
-    # chord_degrees = [1, 4, 6, 2, 5, 1]
-    chord_degrees = lstChordPattern[0]
-
-    main_chords = stream.Stream()
-    for i in chord_degrees:
-        main_chords.append(roman.RomanNumeral(i, main_key))
-
-    main_stream = create_stream_from_chords(main_chords, 3, 4,2)
-
-    # if direction_in == scale.Direction.DESCENDING:
-    #    pitches.reverse()
-
-
-    new_stream = stream_transform_random(main_stream, main_scale)
-
-    canon_stream = stream_transform_canon(main_stream)
-
-
-
 
 def stream_transform_canon(stream_in: stream.Stream,
                            delay_ql : int = 4,
@@ -274,9 +250,27 @@ def stream_transform_canon(stream_in: stream.Stream,
         v = copy.deepcopy(stream_in.transpose(interval).flatten().notesAndRests)
 
 
-
 def main():
-    create_from_chord_progression()
+    unit = MusicalUnit()
+    # Create based on chord progression
+    unit.scale = DiatonicLayer.DEFAULT_SCALE
+    main_key = key.Key('C')
+    # chord_degrees = [1, 4, 6, 2, 5, 1]
+    chord_degrees = ChordHarmony.PROGRESSIONS[0]
+
+    main_chords = stream.Stream()
+    for i in chord_degrees:
+        main_chords.append(roman.RomanNumeral(i, main_key))
+
+    main_stream = create_stream_from_chords(main_chords, 3, 4, 2)
+
+    # if direction_in == scale.Direction.DESCENDING:
+    #    pitches.reverse()
+
+
+    new_stream = stream_transform_random(main_stream, unit.scale)
+
+    canon_stream = stream_transform_canon(main_stream)
 
 
 if __name__ == '__main__':
