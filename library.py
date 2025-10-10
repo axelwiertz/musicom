@@ -52,6 +52,7 @@ class MCMIDI:
     VIBRASLAP = 58
     WOODBLOCK = 76
 
+    MIDI_PITCH_A4 = 69 # MIDI number of A4
 
     # Helper to create an unpitched percussion note by MIDI pitch number
     # General MIDI percussion mapping (channel 10): 35-81 common drums

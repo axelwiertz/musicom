@@ -1,12 +1,14 @@
 """
 Music theory
 """
-from library import Config, Circle
+from library import Config, Circle, MCMIDI
 
 # General modules
 import numpy as np
 import pandas as pd
 import itertools
+
+from soundlayer import SoundLayer
 
 # Music21 modules
 from music21 import (stream, note, key, scale, chord, interval,
@@ -37,8 +39,6 @@ class ChromaticLayer:
     Chromatic pitch set and intervals
     equal temperament scale
     """
-    FREQUENCY_A4 = 440 # Frequency of A4
-    MIDI_PITCH_A4 = 69 # MIDI number of A4
     OCTAVES = 9 # Number of octaves in the pitch set
     NUMPITCHCLASS = 12 # Number of pitch classes 0-11
     # Total number of pitches chromatic pitch set
@@ -58,10 +58,11 @@ class ChromaticLayer:
     PITCHCLASS_COMBINATIONS = []
 
     def __init__(self):
+        soundlayer = SoundLayer()
         # Multiple octaves
         self.PITCHCLASSES_STR_FULL = tuple(x for _ in range(0, self.OCTAVES) for x in self.PITCHCLASSES_STR)
         self.PITCHCLASSES_INT_FULL = tuple(self.OCTAVES * self.PITCHCLASSES_INT)
-        self.PITCHFREQUENCYLIST = tuple(2 ** ((n - self.MIDI_PITCH_A4) / self.NUMPITCHCLASS) * self.FREQUENCY_A4
+        self.PITCHFREQUENCYLIST = tuple(2 ** ((n - MCMIDI.MIDI_PITCH_A4) / self.NUMPITCHCLASS) * soundlayer.FREQUENCY_A4
                                         for n in range(self.NUMPITCH))
         self.INTERVALLIST = (interval.ChromaticInterval(n) for n in range(self.NUMPITCHCLASS))
 

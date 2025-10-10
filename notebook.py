@@ -9,7 +9,7 @@ from musicom import MusicalUnit, Composition
 
 
 
-def create_mp_notebook ():
+def compose_mp_notebook ():
     unit = MusicalUnit()
     unit1, unit2 = MusicalUnit()
     comp = Composition()
@@ -25,15 +25,13 @@ def create_mp_notebook ():
                                   start_times=[0])
 
     # Melody creation syntax
-    unit.chord += structures.chord('CM7', 3, 1/4, 1/8) ^ 2
+    # Chords
+    unit.chord += structures.chord(notes='CM7',duration= 3,interval= 1/4,default_duration= 1/8) ^ 2
     c2 = structures.chord('CM7')
     c3 = structures.chord('CM7', 3)
-    unit.chord += structures.chord('CM7', 5)
-    unit.chord += structures.chord('CM7', 3,interval=1/4, default_duration=1/8)
-    unit.chord += structures.chord('CM7', 3, 1/4)
-    unit.chord += structures.chord('CM7', 3, 1/4) ^ 2
-
     unit.chord = (c2 | c3 * 2 )
+    unit.chord += structures.chord('CM7', 3,interval=1/4, default_duration=1/8)
+
 
     unit.chord = mp.S('C4 major')%(15654321, 0.4)
     unit.chord = structures.scale('C major').pick_chord_by_degree([1, 5])
@@ -42,16 +40,14 @@ def create_mp_notebook ():
     unit.chord = structures.scale('C major').get('1,1,5,5,6,6,5,-,4,4,3,3,2,2,1,-')
     unit.chord = structures.scale('C major').chord_progression(['IM7', 'Vsus', 'vi7', 'IVM7'])
 
-    # Chords
     unit.chord = structures.chord('CM7', 3, 1/4, 1/8)^2
     unit.chord = structures.chord('G7sus', 2, 1/4, 1/8)^2
     unit.chord = structures.scale('C4 major')%(15654321, 0.4)
     unit.chord = structures.scale('C major').chord_progression(['IM7', 'Vsus', 'vi7', 'IVM7'])
 
-    # Diatonic scale degrees
+    # Diatonic Scales
     unit.chord = structures.scale('C major').get('1,1,5,5,6,6,5,-,4,4,3,3,2,2,1,-')
 
-    # Scales
     mpscale1 = structures.scale('C Major')
     unit.chord = mpscale1.get('-,1,-,2') % (1 / 2,)
     unit.chord = mpscale1.get('r,1,r,2')
@@ -77,7 +73,7 @@ def create_mp_notebook ():
 
 
 
-def create_mp_notebook_percussion ():
+def compose_mp_notebook_percussion ():
     """
     :[] settings blok
     r:n repeat the beat n times with the equally divided unit duration
