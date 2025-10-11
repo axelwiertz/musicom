@@ -1,7 +1,7 @@
 """
 Music theory
 """
-from library import *
+from library import Config, Circle, MCMIDI
 
 # General modules
 import numpy as np
@@ -11,19 +11,21 @@ import itertools
 from soundlayer import SoundLayer
 
 # Music21 modules
-from music21 import note, key, scale, chord, interval, converter, instrument, serial, harmony, meter, tempo, metadata, clef, percussion, analysis
+from music21 import (stream, note, key, scale, chord, interval,
+                     roman, converter, instrument, serial, harmony,
+                     meter, tempo, metadata, clef, percussion, analysis)
 # mp
 from musicpy import database
 
 
 def interval_to_step (intervals: list[int]) -> list[int]:
-    # Convert a list of intervals to a sequential mask with sequential numbers and zeroes
+    # Convert a list of intervals to a sequential mask with sequential degree/onset numbers and zeroes
     # Example [2, 3] -> [1, 0, 2, 0, 0, 3]
     steps = []
-    sequence_nr = 1
+    degree = 1
     for x in intervals:
-        steps.append(sequence_nr)
-        sequence_nr += 1
+        steps.append(degree)
+        degree += 1
         for y in range(1,x):
             steps.append(0)
     return steps
@@ -31,15 +33,6 @@ def interval_to_step (intervals: list[int]) -> list[int]:
 def sequence_permutations (sequence: list | tuple) -> list:
     permutations = [sequence[x:]+sequence[:x] for x in range(len(sequence))]
     return permutations
-
-class MIDIpitch:
-    # MIDI pitch numbers
-    # MIDI note number to frequency conversion
-    # Frequency of a pitch in Hz = 440 * (2 ^ ((MIDI number - 69) / 12))
-    # A4 (440 Hz) is MIDI number 69
-    A4_FREQUENCY = 440.0 # Frequency of A4 in Hz
-    MIDI_PITCH_A4 = 69 # MIDI number of A4
-
 
 class ChromaticLayer:
     """
@@ -69,7 +62,7 @@ class ChromaticLayer:
         # Multiple octaves
         self.PITCHCLASSES_STR_FULL = tuple(x for _ in range(0, self.OCTAVES) for x in self.PITCHCLASSES_STR)
         self.PITCHCLASSES_INT_FULL = tuple(self.OCTAVES * self.PITCHCLASSES_INT)
-        self.PITCHFREQUENCYLIST = tuple(2 ** ((n - MIDIpitch.MIDI_PITCH_A4) / self.NUMPITCHCLASS) * soundlayer.FREQUENCY_A4
+        self.PITCHFREQUENCYLIST = tuple(2 ** ((n - MCMIDI.MIDI_PITCH_A4) / self.NUMPITCHCLASS) * soundlayer.FREQUENCY_A4
                                         for n in range(self.NUMPITCH))
         self.INTERVALLIST = (interval.ChromaticInterval(n) for n in range(self.NUMPITCHCLASS))
 
@@ -92,28 +85,35 @@ class MCTime:
     DEFAULT_DURATION = note.Duration(QUARTER/4)
     DEFAULT_DURATIONS = [[note.Duration(d)] for d in [QUARTER/8, QUARTER/4, QUARTER/2]]
 
-
     # Rhythm - onset time intervals
-    TWO = (1, 1)
-    THREE = (1, 1, 1)
-    FOUR = (1, 1, 1, 1)
-    TRESILLO = (3, 3, 2)
-    TWELVE_EIGHTH_BELL = (2, 2, 1, 2, 2, 2, 1)
-    SON_CLAVE = (3, 3, 4, 2, 4)
 
-
+    # Four-beat rhythm
+    four_rhythmic_pattern = converter.parse('tinynotation: 4/4 c5 c5 c5 c5')
+    FOUR_RHYTHM =  (1, 1, 1, 1)
+    # Tresillo rhythm
+    tresillo_rhythmic_pattern = converter.parse('tinynotation: 4/4 c5 r r c5 r r c5 r')
+    TRESILLO_RTM = (3, 3, 2)
+    # 12/8 Bell rhythm
+    twelve_eigth_bell_rhythmic_pattern = converter.parse('tinynotation: 12/8 c5 r c5 r c5 c5 r c5 r c5 r c5')
+    TWELVE_EIGTH_BELL_RHYTHM = (2, 2, 1, 2, 2, 2, 1)
+    # Son Clave
+    son_clave_rhythmic_pattern = converter.parse('tinynotation: 16/8 c5 r r c5 r r c5 r r r c5 r c5 r r r')
+    SON_CLAVE_RHYTHM = (3, 3, 4, 2, 4)
+    # 3/4 Waltz
+    waltz_rhythmic_pattern = converter.parse('tinynotation: 3/4 c5 c5 c5')
+    three_rtm = (1, 1, 1)
 
 
 class DiatonicLayer:
     """
-    Diatonic - Scale, Notes, Intervals and functions
+    Diatonic scale - Notes, intervals and functions
     """
-    PENTATONIC = (2,2,3,2,3) # sequence of 5 steps, 6 intervals
+    PENTATONIC = (2,2,3,2,3) # sequence of 5 intervalsteps
     HEPTATONIC = (2,2,1,2,2,2,1) # sequence of 7 intervalsteps
 
-    # 7 hepta scale degree melody functions
+    # Melody scale degree functions
     FUNCTIONS = {1:'tonic', 2:'supertonic', 3:'mediant', 4:'subdominant', 5:'dominant', 6:'submediant', 7:'leading tone'}
-    # 7 hepta interval classes
+    # Diatonic Interval classes
     PERFECTINTERVALS = ('P1','P4','P5','P8')
     IMPERFECTINTERVALS = ('M2','m3','M3','m6','M6','m7','M7')
 
@@ -188,13 +188,11 @@ class DiatonicLayer:
     HEPTAMAJORSCALES = [] # Major scale pitch masks for all tonics (C, C#, D, ..., B)
     HEPTAMINORSCALES = [] # Minor scale pitch masks for all tonics
 
-"""
     DEFAULT_KEY = None
     DEFAULT_SCALE = None
     DEFAULT_PITCHES = []
     DEFAULT_PITCH = None
     DEFAULT_NOTE = None
-"""
 
     def __init__(self):
         self.DEFAULT_KEY = key.Key('C', 'major')
