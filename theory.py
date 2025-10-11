@@ -1,38 +1,19 @@
 """
 Music theory
 """
-from library import Config, Circle, MCMIDI
+from library import *
 
 # General modules
 import numpy as np
 import pandas as pd
 import itertools
 
-from soundlayer import SoundLayer
-
 # Music21 modules
-from music21 import (stream, note, key, scale, chord, interval,
-                     roman, converter, instrument, serial, harmony,
-                     meter, tempo, metadata, clef, percussion, analysis)
+from music21 import note, key, scale, chord, interval, roman, serial, harmony, meter, tempo
 # mp
 from musicpy import database
 
 
-def interval_to_step (intervals: list[int]) -> list[int]:
-    # Convert a list of intervals to a sequential mask with sequential degree/onset numbers and zeroes
-    # Example [2, 3] -> [1, 0, 2, 0, 0, 3]
-    steps = []
-    degree = 1
-    for x in intervals:
-        steps.append(degree)
-        degree += 1
-        for y in range(1,x):
-            steps.append(0)
-    return steps
-
-def sequence_permutations (sequence: list | tuple) -> list:
-    permutations = [sequence[x:]+sequence[:x] for x in range(len(sequence))]
-    return permutations
 
 class ChromaticLayer:
     """
@@ -46,7 +27,6 @@ class ChromaticLayer:
     # Pitch MIDI number set
     PITCHMIDINUMBERLIST = tuple(range(NUMPITCH))
     # Chromatic pitch class sets
-    # One octave
     PITCHCLASSES_INT = tuple(range (NUMPITCHCLASS))
     PITCHCLASSES_STR = ('C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B')
 
@@ -58,12 +38,28 @@ class ChromaticLayer:
     PITCHCLASS_COMBINATIONS = []
 
     def __init__(self):
-        soundlayer = SoundLayer()
+        self.FREQUENCY_A4 = 440  # Frequency of A4
+        self.MIDI_PITCH_A4 = 69
+
+
+        # Create pitch to frequency mapping
+        # Chromatic layer - 12-TET
+        keys = np.array([x + str(y) for y in range(0, 9) for x in self.PITCHCLASSES_STR])
+        # Trim to standard 88 pianokeys
+        start = np.where(keys == 'A0')[0][0]
+        end = np.where(keys == 'C8')[0][0]
+        keys = keys[start:end + 1]
+
+        self.pitch_freqs = dict(zip(keys, [2 ** ((n + 1 - 49) / 12) * self.FREQUENCY_A4 for n in range(len(keys))]))
+        self.pitch_freqs[''] = 0.0  # stop
+
+        self.PITCHFREQUENCYLIST = tuple(2 ** ((n - self.MIDI_PITCH_A4) / self.NUMPITCHCLASS) * self.FREQUENCY_A4
+                                        for n in range(self.NUMPITCH))
+
+
         # Multiple octaves
         self.PITCHCLASSES_STR_FULL = tuple(x for _ in range(0, self.OCTAVES) for x in self.PITCHCLASSES_STR)
         self.PITCHCLASSES_INT_FULL = tuple(self.OCTAVES * self.PITCHCLASSES_INT)
-        self.PITCHFREQUENCYLIST = tuple(2 ** ((n - MCMIDI.MIDI_PITCH_A4) / self.NUMPITCHCLASS) * soundlayer.FREQUENCY_A4
-                                        for n in range(self.NUMPITCH))
         self.INTERVALLIST = (interval.ChromaticInterval(n) for n in range(self.NUMPITCHCLASS))
 
     def init_sets(self):
@@ -72,44 +68,35 @@ class ChromaticLayer:
         self.PITCHCLASS_COMBINATIONS = list(itertools.combinations (ChromaticLayer.PITCHCLASSES_INT, num_items))
 
 class MCTime:
-    """
-    Rhythm and meter
-    """
-    # Defaults
-    DEFAULT_TEMPO = 100
-    DEFAULT_TIMESIGNATURE = meter.TimeSignature('4/4')
+    # Rhythm and meter
+    def __init__(self,
+                 timesteps: int = 8,
+                 beat_note: int = 4,
+                 beats_in_measure: int = 4,
+                 tempo: int = 100):
 
-    # Meter unit is quarter note
-    QUARTER = 4
+        # Linking timesteps to meter beats
+        self.timesteps = timesteps
+        # Meter: measure cycle of beats
+        self.beats_in_measure = beats_in_measure
+        self.beat_note = beat_note
 
-    DEFAULT_DURATION = note.Duration(QUARTER/4)
-    DEFAULT_DURATIONS = [[note.Duration(d)] for d in [QUARTER/8, QUARTER/4, QUARTER/2]]
+        # m21 meter
+        # unit is quarter note
+        self.M21_QUARTER = 4
+        self.timesignature = meter.TimeSignature(str(self.beats_in_measure) + '/' + str(self.beat_note))
+        main_beatcount = self.timesignature.beatCount
+        self.beat_duration = self.M21_QUARTER / self.beat_note
+        beat_duration2 = self.timesignature.beatDuration.quarterLength
 
-    # Rhythm - onset time intervals
-
-    # Four-beat rhythm
-    four_rhythmic_pattern = converter.parse('tinynotation: 4/4 c5 c5 c5 c5')
-    FOUR_RHYTHM =  (1, 1, 1, 1)
-    # Tresillo rhythm
-    tresillo_rhythmic_pattern = converter.parse('tinynotation: 4/4 c5 r r c5 r r c5 r')
-    TRESILLO_RTM = (3, 3, 2)
-    # 12/8 Bell rhythm
-    twelve_eigth_bell_rhythmic_pattern = converter.parse('tinynotation: 12/8 c5 r c5 r c5 c5 r c5 r c5 r c5')
-    TWELVE_EIGTH_BELL_RHYTHM = (2, 2, 1, 2, 2, 2, 1)
-    # Son Clave
-    son_clave_rhythmic_pattern = converter.parse('tinynotation: 16/8 c5 r r c5 r r c5 r r r c5 r c5 r r r')
-    SON_CLAVE_RHYTHM = (3, 3, 4, 2, 4)
-    # 3/4 Waltz
-    waltz_rhythmic_pattern = converter.parse('tinynotation: 3/4 c5 c5 c5')
-    three_rtm = (1, 1, 1)
+        self.tempo = tempo
+        # Defaults
 
 
 class DiatonicLayer:
     """
     Diatonic scale - Notes, intervals and functions
     """
-    PENTATONIC = (2,2,3,2,3) # sequence of 5 intervalsteps
-    HEPTATONIC = (2,2,1,2,2,2,1) # sequence of 7 intervalsteps
 
     """
     2 — di / dy- (e.g., dioxide, dynamo)
@@ -120,38 +107,21 @@ class DiatonicLayer:
     7 — hepta- (heptagon, heptathlon)
     """
 
-    # Melody scale degree functions
-    FUNCTIONS = {1:'tonic', 2:'supertonic', 3:'mediant', 4:'subdominant', 5:'dominant', 6:'submediant', 7:'leading tone'}
-    # Diatonic Interval classes
-    PERFECTINTERVALS = ('P1','P4','P5','P8')
-    IMPERFECTINTERVALS = ('M2','m3','M3','m6','M6','m7','M7')
-
-    perfectintervallist = [interval.DiatonicInterval(interval.Specifier.PERFECT, 1),
-                interval.DiatonicInterval(interval.Specifier.PERFECT, 4),
-                interval.DiatonicInterval(interval.Specifier.PERFECT, 5),
-                interval.DiatonicInterval(interval.Specifier.PERFECT, 8)]
-
-    intervallist = [interval.DiatonicInterval(interval.Specifier.MAJOR, 2),
-                interval.DiatonicInterval(interval.Specifier.MINOR, 3) ]
-
-    # Diatonic scale - Chord degrees
-    INT_ROMAN = {1:("I","i"), 2:('ii','ii0'), 3:('iii','III'), 4:('IV','iv'), 5:('V','V'), 6:('vi','VI'), 7: ('vii0','vii0')}
 
     """
-    Diatonic cyclic patterns: pentatonic and heptatonic
+    Diatonic patterns: pentatonic and heptatonic
     """
+    # Pentatonic (5 pitch class) scale
     PENTA = 5 # Number of pitch classes in a pentatonic scale
     PENTATONICDEGREES = tuple(range(1, PENTA + 1)) # Pentatonic scale degree number
-
-    HEPTA = 7 # Number of pitch classes in a heptatonic scale
-    HEPTATONICDEGREES = tuple(range(1, HEPTA + 1)) # Heptatonic scale degree number
-
-
-    # Pentatonic (5 pitch class) scale
+    PENTATONIC = (2,2,3,2,3) # sequence of 5 intervalsteps
     PENTAMODES = []
     PENTAMODESCHROMATIC = []
 
     # Heptatonic (7 pitch class) scale
+    HEPTA = 7 # Number of pitch classes in a heptatonic scale
+    HEPTATONICDEGREES = tuple(range(1, HEPTA + 1)) # Heptatonic scale degree number
+    HEPTATONIC = (2,2,1,2,2,2,1) # sequence of 7 intervalsteps
     HEPTAMODES = []
     HEPTAMODESCHROMATIC = []
 
@@ -172,6 +142,24 @@ class DiatonicLayer:
         MIXOLYDIAN_MODE : 'Mixolydian',
         AEOLIAN_MODE : 'Aeolian',
         LOCRIAN_MODE : 'Locrian' }
+
+    # 7 Hepta scale degree functions
+    FUNCTIONS = {1:'tonic', 2:'supertonic', 3:'mediant', 4:'subdominant', 5:'dominant', 6:'submediant', 7:'leading tone'}
+    # 7 Hepta Interval classes
+    PERFECTINTERVALS = ('P1','P4','P5','P8')
+    IMPERFECTINTERVALS = ('M2','m3','M3','m6','M6','m7','M7')
+
+    perfectintervallist = [interval.DiatonicInterval(interval.Specifier.PERFECT, 1),
+                interval.DiatonicInterval(interval.Specifier.PERFECT, 4),
+                interval.DiatonicInterval(interval.Specifier.PERFECT, 5),
+                interval.DiatonicInterval(interval.Specifier.PERFECT, 8)]
+
+    intervallist = [interval.DiatonicInterval(interval.Specifier.MAJOR, 2),
+                interval.DiatonicInterval(interval.Specifier.MINOR, 3) ]
+
+    # 7 Hepta scale - Triad degrees
+    INT_ROMAN = {1:("I","i"), 2:('ii','ii0'), 3:('iii','III'), 4:('IV','iv'), 5:('V','V'), 6:('vi','VI'), 7: ('vii0','vii0')}
+
 
     """
     Interval patterns - Chord interval patterns and permutations

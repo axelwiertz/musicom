@@ -6,6 +6,7 @@ from musicpy import musicpy as mp, structures
 
 from library import *
 from musicom import MusicalUnit, Composition, MIDIpercussion
+from music21 import converter, instrument
 
 def m21_tiny_notebook ():
     waltz_rhythmic_pattern = converter.parse('tinynotation: 3/4 c5 c5 c5')
@@ -13,7 +14,7 @@ def m21_tiny_notebook ():
     tresillo_rhythmic_pattern = converter.parse('tinynotation: 4/4 c5 r r c5 r r c5 r')
     twelve_eigth_bell_rhythmic_pattern = converter.parse('tinynotation: 12/8 c5 r c5 r c5 c5 r c5 r c5 r c5')
     son_clave_rhythmic_pattern = converter.parse('tinynotation: 16/8 c5 r r c5 r r c5 r r r c5 r c5 r r r')
-
+    instrument.Piano()
 
 def mp_notebook ():
     unit = MusicalUnit()
@@ -97,7 +98,9 @@ def mp_percussion_notebook ():
 
 
     comp = Composition ()
-    comp.piece = structures.piece(percussion_unit.chord, [MIDIinstrument.PIANO], channels=[MIDIpercussion.CHANNEL_INDEX])
+    comp.piece = structures.piece(percussion_unit.chord,
+                                  [MIDIinstrument.PIANO],
+                                  channels=[MIDIpercussion.CHANNEL_INDEX])
 
 
 

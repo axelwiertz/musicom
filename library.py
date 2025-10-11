@@ -3,18 +3,11 @@ Musicom library
 """
 #from dataclasses import dataclass
 
-import platform
-# Showing score without external programs like Musescore
-from showscore import show
 
 # Import
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Music21 modules
-from music21 import stream, note, key, scale, chord, interval,
-                     roman, converter, instrument, serial, harmony,
-                     meter, tempo, metadata, clef, percussion, midi, analysis)
 
 class Config:
     # Default configuration
@@ -34,7 +27,7 @@ class MIDIinstrument:
     FLUTE = 74
     SYNTH_PAD = 88
 
-class MCMIDIchannel:
+class MIDIchannel:
     PERCUSSION = 10  # Channel 10 (index 9) is reserved for percussion in General MIDI
     PERCUSSION_INDEX = 9
 
@@ -56,15 +49,26 @@ class MIDIpercussion:
     VIBRASLAP = 58
     WOODBLOCK = 76
 
-    # Helper to create an unpitched percussion note by MIDI pitch number
-    # General MIDI percussion mapping (channel 10): 35-81 common drums
+"""
+Tools
+"""
+def interval_to_step (intervals: list[int]) -> list[int]:
+    # Convert a list of intervals to a sequential mask with sequential degree/onset numbers and zeroes
+    # Example [2, 3] -> [1, 0, 2, 0, 0, 3]
+    steps = []
+    sequence_nr = 1
+    for x in intervals:
+        steps.append(sequence_nr)
+        sequence_nr += 1
+        for y in range(1,x):
+            steps.append(0)
+    return steps
 
-    def perc_note(self, midi_pitch, dur=0.5, velocity=100):
-#        n = note.Unpitched()
-        n = note.Note(pitch=midi_pitch, duration=dur)
-        # set volume (velocity) for MIDI export
-        n.volume.velocity = velocity
-        return n
+def sequence_permutations (sequence: list | tuple) -> list:
+    permutations = [sequence[x:]+sequence[:x] for x in range(len(sequence))]
+    return permutations
+
+
 
 """
 Visualization
@@ -108,35 +112,10 @@ def show_plot(yvalues: list):
     ax.legend()  # Add a legend.
     plt.show()
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Music 21 Tools for streams
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
-
-
-def score_show (score_in):
-    """
-    Show or play the stream
-    """
-    if platform.system() == 'Windows':
-        score_in.show('text')
-#    score.show('midi')  # Play MIDI
-        show(score_in)  # Show musical notation
-
-    elif platform.system() == 'IOS':
-        score_in.show('text')
-
-        # Play the result (IOS):
-        #player = sound.MIDIPlayer('target.mid')
-        #player.play()
-        #player.stop()
-
 def rhythm_circle ():
     # SHow rhythm in circle
-    rhythm_circle = Circle(4, ['Down', 'Up','Down', 'Up'], 'Rhythm')
-    rhythm_circle.show()
+    rc = Circle(4, ['Down', 'Up','Down', 'Up'], 'Rhythm')
+    rc.show()
 
 
 def main():

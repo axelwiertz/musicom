@@ -1,11 +1,11 @@
 """
 Music Composition Assistant
 """
+import platform
 import copy
 import random
 from datetime import datetime
 from collections import defaultdict
-
 #import sound
 
 # Musical datastructures
@@ -16,9 +16,11 @@ from harmony import *
 from library import *
 from genetic import *
 
+# Showing score without external programs like Musescore
+from showscore import show
 
 # Music21 modules: music notation and analysis
-from music21 import roman, midi
+from music21 import metadata, stream, roman, midi, converter, analysis, instrument, percussion, note, chord, key, meter, tempo, clef, harmony, serial, scale
 # MusicPy modules: computational music structures and algorithms
 from musicpy import musicpy as mp, algorithms, structures
 from music21py import *
@@ -62,9 +64,6 @@ class Composition:
 
         content = self.piece(track_number).tracks
         content_notes = self.piece(track_number).tracks.notes
-
-    def score_show(self):
-        score_show(self.score)
 
     def play_track (self,
                     track_number: int = 0,
@@ -142,68 +141,68 @@ class Composition:
         str1 = algorithms.detect(self.piece)
         str2 = algorithms.chord_analysis(self.piece)
         str3 = mp.analyze_rhythm(self.piece)
-        rhythmic_info = structures.rhythm.RhythmAnalyzer(self.piece)
+        print('MusicPy analysis:')
+        print(str1)
+        print(str2)
+        print(str3)
 
-        # Show the rhythmic information
-        print(rhythmic_info.getRhythm())
+
+    def score_show (self):
+        """
+        Show or play the stream
+        """
+        if platform.system() == 'Windows':
+            self.score.show('text')
+    #    score.show('midi')  # Play MIDI
+            show(self.score)  # Show musical notation
+
+        elif platform.system() == 'IOS':
+            self.score.show('text')
+
+            # Play the result (IOS):
+            #player = sound.MIDIPlayer('target.mid')
+            #player.play()
+            #player.stop()
 
 
 
 class MusicalUnit ():
     # Stream with notes, chord, tempo, instrument
     def __init__(self,
-                timesteps : int = 8,
-                beat_note : int = 4,
-                beats_in_measure : int = 4,
-                root : int = ChromaticLayer.DEFAULT_PITCH.midi,
+                center : int = ChromaticLayer.NUMPITCH // 2,
                 pitches: list[int | str] = (),
                 onset_intervals: list[float] = (),
                 durations: list[float] = (),
                 velocities: list[int] = (100),
-                instrument: instrument.Instrument = instrument.Piano(),
-                clef: clef.Clef = clef.TrebleClef(),
-                m21scale: scale.ConcreteScale = DiatonicLayer.DEFAULT_SCALE,
+                tonic: str = 'C',
+                mode: str = 'major',
                 ):
 
-        # Linking timesteps to meter beats
-        self.timesteps = timesteps
-        # Meter: measure cycle of beats
-        self.beats_in_measure = beats_in_measure
-        self.beat_note = beat_note
-
-        self.timesignature = meter.TimeSignature(str(self.beats_in_measure) + '/' + str(self.beat_note))
-        main_beatcount = self.timesignature.beatCount
-        self.beat_duration = MCTime.QUARTER / self.beat_note
-        beat_duration2 = self.timesignature.beatDuration.quarterLength
-
+        self.center = center
         self.pitches = pitches
         self.onset_intervals = onset_intervals
         self.durations = durations
         self.velocities = velocities
 
-        self.m21scale = m21scale
+        # m21
+        self.stream =  stream.Stream()
+        self.m21scale = scale.ConcreteScale(tonic, mode)
         self.pitch_classes = m21scale.pitches
-        self.instrument = instrument
-        self.clef = clef
+        self.instrument = instrument.Piano()
+        self.clef = clef.TrebleClef()
 
         # MusicPy structures
-        self.mpscale = structures.scale(str(self.key.tonic.name), str(self.key.mode))
+        self.mpscale = structures.scale(str(self.tonic), str(self.mode))
+        self.chord = structures.chord([])
 
-
+        # Binary genome representation
         pitch_bits = 8  # binary 128 pitches
         max_pitch = pow(2, self.pitch_bits - 1)
-
         duration_bits = 4  # binary 8 timesteps
         interval_bits = 4  # binary 8 timesteps
         velocity_bits = 4  # binary 8 levels
         bits = pitch_bits + duration_bits + interval_bits + velocity_bits
 
-        # m21
-        self.stream =  stream.Stream()
-        # mp
-        self.chord = structures.chord([])
-        self.tempo = MCTime.DEFAULT_TEMPO
-        self.instrument = instrument.Piano()
 
     def unit_to_chord(self):
         self.chord += structures.chord(self.pitches, self.durations, self.intervals)
@@ -309,6 +308,20 @@ class MusicalUnit ():
             mpstream_chords = mpstream_chords + structures.rest(1 / 2) + chords_in_scale[i]
 
 
+class Percussion(MusicalUnit):
+    def __init__(self):
+        super.center = 0
+        self.clef = clef.PercussionClef()
+        self.instrument.Woodblock()
+
+    def m21note_percusssion(self, midi_pitch, dur=0.5, velocity=100):
+        # Create unpitched percussion note by MIDI pitch number
+        #        n = note.Unpitched()
+        n = note.Note(pitch=midi_pitch, duration=dur)
+        n.volume.velocity = velocity
+        return n
+
+
 
 def compose_unit ():
 
@@ -318,8 +331,6 @@ def compose_unit ():
                             onset_intervals=[8, 3, 5],
                             durations=[0, 3, 5],
                             velocities=[0, 100, 100],
-                            instrument=instrument.Piano(),
-                            clef=clef.TrebleClef(),
                             m21scale=DiatonicLayer.DEFAULT_SCALE)
 
         # Insert several new notes in m21 stream
@@ -467,6 +478,8 @@ def percussion_load ():
 
     comp.score_show()
 
+
+
 def create_percussion ():
 
     # Create
@@ -483,9 +496,9 @@ def create_percussion ():
         [MIDIpercussion.BASS_DRUM, MIDIpercussion.ACOUSTIC_SNARE, MIDIpercussion.BASS_DRUM, MIDIpercussion.ACOUSTIC_SNARE],
         [2, 2, 2, 2],
         [1, 1, 1, 1],
-        [110, 110, 110, 110, 110, 110, 110, 110],
-        instrument.Woodblock(),
-        clef.PercussionClef())
+        [110, 110, 110, 110, 110, 110, 110, 110])
+
+
     unit_hihat = MusicalUnit(
         8, 4, 4,
         0,
@@ -494,9 +507,7 @@ def create_percussion ():
                          MIDIpercussion.CLOSED_HIHAT, MIDIpercussion.CLOSED_HIHAT, MIDIpercussion.CLOSED_HIHAT, MIDIpercussion.CLOSED_HIHAT],
         [1, 1, 1, 1, 1, 1, 1, 1],
         [1, 1, 1, 1, 1, 1, 1, 1],
-        [70, 70, 70, 70, 70, 70, 70, 70],
-        instrument.Woodblock(),
-        clef.PercussionClef())
+        [70, 70, 70, 70, 70, 70, 70, 70])
 
     # Set to percussion instrument (General MIDI channel 10)
     # music21 uses an unpitched instrument class; channel will be set by MIDI export
