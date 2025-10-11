@@ -111,6 +111,15 @@ class DiatonicLayer:
     PENTATONIC = (2,2,3,2,3) # sequence of 5 intervalsteps
     HEPTATONIC = (2,2,1,2,2,2,1) # sequence of 7 intervalsteps
 
+    """
+    2 — di / dy- (e.g., dioxide, dynamo)
+    3 — tri / tria- (triangle, tricycle)
+    4 — tetra- (tetrahedron, tetrapod)
+    5 — penta- (pentagon, pentathlon)
+    6 — hexa- (hexagon, hexapod)
+    7 — hepta- (heptagon, heptathlon)
+    """
+
     # Melody scale degree functions
     FUNCTIONS = {1:'tonic', 2:'supertonic', 3:'mediant', 4:'subdominant', 5:'dominant', 6:'submediant', 7:'leading tone'}
     # Diatonic Interval classes
