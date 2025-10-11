@@ -12,7 +12,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Music21 modules
-from music21 import (stream, note, key, scale, chord, interval,
+from music21 import stream, note, key, scale, chord, interval,
                      roman, converter, instrument, serial, harmony,
                      meter, tempo, metadata, clef, percussion, midi, analysis)
 
@@ -22,8 +22,9 @@ class Config:
     DEFAULT_MIDI_FILE_IN = 'in.mid'
     DEFAULT_MIDI_FILE_OUT = 'out.mid'
 
-class MCMIDI:
+class MIDIinstrument:
 
+    # General MIDI instrument numbers (0-127)
     PIANO = 1
     CHURCH_ORGAN = 20
     ACOUSTIC_GUITAR = 25
@@ -33,10 +34,13 @@ class MCMIDI:
     FLUTE = 74
     SYNTH_PAD = 88
 
-    PERCUSSION_CHANNEL = 10  # Channel 10 (index 9) is reserved for percussion in General MIDI
-    PERCUSSION_CHANNEL_INDEX = 9
+class MCMIDIchannel:
+    PERCUSSION = 10  # Channel 10 (index 9) is reserved for percussion in General MIDI
+    PERCUSSION_INDEX = 9
 
-    # General MIDI percussion mapping (channel 10): 35-81 common drums
+class MIDIpercussion:
+    # MIDI percussion mapping (channel 10): 35-81 common drums
+    # See https://www.midi.org/specifications-old/item/gm-level-1-s
     BASS_DRUM = 36
     ACOUSTIC_SNARE = 38
     CLOSED_HIHAT = 42
@@ -51,8 +55,6 @@ class MCMIDI:
     COWBELL = 56
     VIBRASLAP = 58
     WOODBLOCK = 76
-
-    MIDI_PITCH_A4 = 69 # MIDI number of A4
 
     # Helper to create an unpitched percussion note by MIDI pitch number
     # General MIDI percussion mapping (channel 10): 35-81 common drums
@@ -113,25 +115,6 @@ Music 21 Tools for streams
 
 
 
-def stream_create(pitches : list[int|str],
-                  onset_intervals: list[float],
-                  durations : list[float],
-                  velocities : list[int] = (100)) -> stream.Stream:
-    # Create a part with notes and rests
-    stream_out = stream.Stream()
-
-    # Iterate over the list of pitches, intervals and durations
-    for i in range(len(pitches)) :
-        # Add notes and rests to the stream
-        restduration = onset_intervals[i] - durations[i]
-        if restduration > 0:
-            stream_out.append(note.Rest(quarterLength=restduration))
-        else:
-            new_note = note.Note(pitch=pitches[i], quarterLength=durations[i])
-            new_note.volume.velocity = velocities[i]
-            stream_out.append(new_note)
-
-    return stream_out
 
 def score_show (score_in):
     """

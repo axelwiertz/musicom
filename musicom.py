@@ -17,6 +17,8 @@ from library import *
 from genetic import *
 
 
+# Music21 modules: music notation and analysis
+from music21 import roman, midi
 # MusicPy modules: computational music structures and algorithms
 from musicpy import musicpy as mp, algorithms, structures
 from music21py import *
@@ -64,7 +66,9 @@ class Composition:
     def score_show(self):
         score_show(self.score)
 
-    def play_track (self, track_number: int = 0, instrument: int = MCMIDI.PIANO):
+    def play_track (self,
+                    track_number: int = 0,
+                    instrument: int = MIDIinstrument.PIANO):
         mp.play(self.piece(track_number), instrument=instrument, wait=True)
 
     def play_piece (self):
@@ -151,6 +155,7 @@ class MusicalUnit ():
                 timesteps : int = 8,
                 beat_note : int = 4,
                 beats_in_measure : int = 4,
+                root : int = ChromaticLayer.DEFAULT_PITCH.midi,
                 pitches: list[int | str] = (),
                 onset_intervals: list[float] = (),
                 durations: list[float] = (),
@@ -203,11 +208,22 @@ class MusicalUnit ():
     def unit_to_chord(self):
         self.chord += structures.chord(self.pitches, self.durations, self.intervals)
 
-    def unit_to_stream(self):
-        self.stream = stream_create(self.pitches, self.onset_intervals, self.durations, self.velocities)
+    def unit_to_stream (self):
+        # Create a stream with notes and rests
+        # Iterate over the list of pitches, intervals, durations and velocities
+        for i in range(len(self.pitches)):
+            # Add notes and rests to the stream
+            restduration = self.onset_intervals[i] - self.durations[i]
+            if restduration > 0:
+                self.stream.append(note.Rest(quarterLength=restduration))
+            else:
+                new_note = note.Note(pitch=self.pitches[i], quarterLength=self.durations[i])
+                new_note.volume.velocity = self.velocities[i]
+                self.stream.append(new_note)
 
-    def modulate (self, sclSource : structures.scale(),
-             sclTarget : structures.scale()):
+    def modulate (self,
+                    sclSource : structures.scale(),
+                    sclTarget : structures.scale()):
         # Modulate
         mpstream_out = self.chord.modulation(sclSource, sclTarget)
 
@@ -461,9 +477,10 @@ def create_percussion ():
     # Meter 4/4, 8 timesteps, 0,5 beat per timestep
     unit_bass = MusicalUnit(
         8, 4, 4,
+        0,
         # Onset lines
         # bass drum on beats 1 & 3), snare on 2 & 4,
-        [MCMIDI.BASS_DRUM, MCMIDI.ACOUSTIC_SNARE, MCMIDI.BASS_DRUM, MCMIDI.ACOUSTIC_SNARE],
+        [MIDIpercussion.BASS_DRUM, MIDIpercussion.ACOUSTIC_SNARE, MIDIpercussion.BASS_DRUM, MIDIpercussion.ACOUSTIC_SNARE],
         [2, 2, 2, 2],
         [1, 1, 1, 1],
         [110, 110, 110, 110, 110, 110, 110, 110],
@@ -471,9 +488,10 @@ def create_percussion ():
         clef.PercussionClef())
     unit_hihat = MusicalUnit(
         8, 4, 4,
+        0,
         # hh on every eighth
-        [MCMIDI.CLOSED_HIHAT, MCMIDI.CLOSED_HIHAT, MCMIDI.CLOSED_HIHAT, MCMIDI.CLOSED_HIHAT,
-                         MCMIDI.CLOSED_HIHAT, MCMIDI.CLOSED_HIHAT, MCMIDI.CLOSED_HIHAT, MCMIDI.CLOSED_HIHAT],
+        [MIDIpercussion.CLOSED_HIHAT, MIDIpercussion.CLOSED_HIHAT, MIDIpercussion.CLOSED_HIHAT, MIDIpercussion.CLOSED_HIHAT,
+                         MIDIpercussion.CLOSED_HIHAT, MIDIpercussion.CLOSED_HIHAT, MIDIpercussion.CLOSED_HIHAT, MIDIpercussion.CLOSED_HIHAT],
         [1, 1, 1, 1, 1, 1, 1, 1],
         [1, 1, 1, 1, 1, 1, 1, 1],
         [70, 70, 70, 70, 70, 70, 70, 70],

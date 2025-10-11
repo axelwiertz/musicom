@@ -4,12 +4,18 @@ MusicPy - Notebook examples
 
 from musicpy import musicpy as mp, structures
 
-from library import MCMIDI
-from musicom import MusicalUnit, Composition
+from library import *
+from musicom import MusicalUnit, Composition, MIDIpercussion
+
+def m21_tiny_notebook ():
+    waltz_rhythmic_pattern = converter.parse('tinynotation: 3/4 c5 c5 c5')
+    four_rhythmic_pattern = converter.parse('tinynotation: 4/4 c5 c5 c5 c5')
+    tresillo_rhythmic_pattern = converter.parse('tinynotation: 4/4 c5 r r c5 r r c5 r')
+    twelve_eigth_bell_rhythmic_pattern = converter.parse('tinynotation: 12/8 c5 r c5 r c5 c5 r c5 r c5 r c5')
+    son_clave_rhythmic_pattern = converter.parse('tinynotation: 16/8 c5 r r c5 r r c5 r r r c5 r c5 r r r')
 
 
-
-def compose_mp_notebook ():
+def mp_notebook ():
     unit = MusicalUnit()
     unit1, unit2 = MusicalUnit()
     comp = Composition()
@@ -20,7 +26,7 @@ def compose_mp_notebook ():
                                   interval=1 / 8,
                                    volume = 100) * 50
     # Construct piece
-    comp.piece = structures.piece(tracks=[structures.track(content=unit.chord, instrument=MCMIDI.PIANO, start_time=1)],
+    comp.piece = structures.piece(tracks=[structures.track(content=unit.chord, instrument=MIDIinstrument.PIANO, start_time=1)],
                                   channels=[0],
                                   start_times=[0])
 
@@ -73,7 +79,7 @@ def compose_mp_notebook ():
 
 
 
-def compose_mp_notebook_percussion ():
+def mp_percussion_notebook ():
     """
     :[] settings blok
     r:n repeat the beat n times with the equally divided unit duration
@@ -91,7 +97,7 @@ def compose_mp_notebook_percussion ():
 
 
     comp = Composition ()
-    comp.piece = structures.piece(percussion_unit.chord, [MCMIDI.PIANO], channels=[MCMIDI.PERCUSSION_CHANNEL_INDEX])
+    comp.piece = structures.piece(percussion_unit.chord, [MIDIinstrument.PIANO], channels=[MIDIpercussion.CHANNEL_INDEX])
 
 
 
