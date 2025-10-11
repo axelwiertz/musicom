@@ -110,7 +110,15 @@ class DiatonicLayer:
     """
     PENTATONIC = (2,2,3,2,3) # sequence of 5 intervalsteps
     HEPTATONIC = (2,2,1,2,2,2,1) # sequence of 7 intervalsteps
-
+"""
+2 — di / dy- (e.g., dioxide, dynamo)
+3 — tri / tria- (triangle, tricycle)
+4 — tetra- (tetrahedron, tetrapod)
+5 — penta- (pentagon, pentathlon)
+6 — hexa- (hexagon, hexapod)
+7 — hepta- (heptagon, heptathlon)
+"""
+	# 7 Hepta 
     # Melody scale degree functions
     FUNCTIONS = {1:'tonic', 2:'supertonic', 3:'mediant', 4:'subdominant', 5:'dominant', 6:'submediant', 7:'leading tone'}
     # Diatonic Interval classes
@@ -125,7 +133,7 @@ class DiatonicLayer:
     intervallist = [interval.DiatonicInterval(interval.Specifier.MAJOR, 2),
                 interval.DiatonicInterval(interval.Specifier.MINOR, 3) ]
 
-    # Diatonic scale - Chord degrees
+    # 7 Hepta scale - 3 Tria and 4 TetraChord degrees
     INT_ROMAN = {1:("I","i"), 2:('ii','ii0'), 3:('iii','III'), 4:('IV','iv'), 5:('V','V'), 6:('vi','VI'), 7: ('vii0','vii0')}
 
     """
@@ -166,6 +174,7 @@ class DiatonicLayer:
 
     """
     Interval patterns - Chord interval patterns and permutations
+    n pitch classes = root (key) + n+1 interval classes (scale)
     """
     NUMTRIADINTERVALS = 2 # Number intervals to compose a triad
     SEVENTH = 3 # Number of intervals to compose a seventh
