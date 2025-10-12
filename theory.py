@@ -9,11 +9,9 @@ import pandas as pd
 import itertools
 
 # Music21 modules
-from music21 import note, key, scale, chord, interval, roman, serial, harmony, meter, tempo
+from music21 import note, key, scale, interval, meter, tempo
 # mp
 from musicpy import database
-
-
 
 class ChromaticLayer:
     """
@@ -22,13 +20,13 @@ class ChromaticLayer:
     """
     OCTAVES = 9 # Number of octaves in the pitch set
     NUMPITCHCLASS = 12 # Number of pitch classes 0-11
+    # Pitch class sets
+    PITCHCLASSES_INT = tuple(range (NUMPITCHCLASS))
+    PITCHCLASSES_STR = ('C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B')
     # Total number of pitches chromatic pitch set
     NUMPITCH = OCTAVES * NUMPITCHCLASS
     # Pitch MIDI number set
-    PITCHMIDINUMBERLIST = tuple(range(NUMPITCH))
-    # Chromatic pitch class sets
-    PITCHCLASSES_INT = tuple(range (NUMPITCHCLASS))
-    PITCHCLASSES_STR = ('C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B')
+    MIDIPITCHNUMBERS = tuple(range(NUMPITCH))
 
     PITCHCLASSES_STR_FULL = ()
     PITCHCLASSES_INT_FULL = ()
@@ -54,7 +52,7 @@ class ChromaticLayer:
         self.pitch_freqs[''] = 0.0  # stop
 
         self.PITCHFREQUENCYLIST = tuple(2 ** ((n - self.MIDI_PITCH_A4) / self.NUMPITCHCLASS) * self.FREQUENCY_A4
-                                        for n in range(self.NUMPITCH))
+                                        for n in self.MIDIPITCHNUMBERS)
 
 
         # Multiple octaves
@@ -67,19 +65,27 @@ class ChromaticLayer:
         num_items = 3
         self.PITCHCLASS_COMBINATIONS = list(itertools.combinations (ChromaticLayer.PITCHCLASSES_INT, num_items))
 
-class MCTime:
+class MusicalTime:
+    TWO = (1, 1)
+    THREE = (1, 1, 1)
+    FOUR =  (1, 1, 1, 1)
+    TRESILLO = (3, 3, 2)
+    TWELVE_EIGHTH_BELL = (2, 2, 1, 2, 2, 2, 1)
+    SON_CLAVE = (3, 3, 4, 2, 4)
+
     # Rhythm and meter
     def __init__(self,
                  timesteps: int = 8,
                  beat_note: int = 4,
                  beats_in_measure: int = 4,
-                 tempo: int = 100):
+                 bpm: int = 100):
 
         # Linking timesteps to meter beats
         self.timesteps = timesteps
         # Meter: measure cycle of beats
         self.beats_in_measure = beats_in_measure
         self.beat_note = beat_note
+        self.bpm = bpm
 
         # m21 meter
         # unit is quarter note
@@ -89,37 +95,53 @@ class MCTime:
         self.beat_duration = self.M21_QUARTER / self.beat_note
         beat_duration2 = self.timesignature.beatDuration.quarterLength
 
-        self.tempo = tempo
-        # Defaults
-
 
 class DiatonicLayer:
     """
-    Diatonic scale - Notes, intervals and functions
+    Diatonic patterns: intervals, scales, modes, chords
     """
+    DI = 2
+    TRIA = 3
+    TETRA = 4
+    PENTA = 5
+    HEXA = 6
+    HEPTA = 7
+    OCTA = 8
+    NONA = 9
+    DECA = 10
 
-    """
-    2 — di / dy- (e.g., dioxide, dynamo)
-    3 — tri / tria- (triangle, tricycle)
-    4 — tetra- (tetrahedron, tetrapod)
-    5 — penta- (pentagon, pentathlon)
-    6 — hexa- (hexagon, hexapod)
-    7 — hepta- (heptagon, heptathlon)
-    """
+    # 3 Tria patterns:
+    DIMINISHED_CHORD = 0
+    MINOR_CHORD = 1
+    MAJOR_CHORD = 2
+    AUGMENTED_CHORD = 3
+    SUS2_CHORD = 4
+    SUS4_CHORD = 5
+    TRIAD = {
+        DIMINISHED_CHORD : (3, 3, 6),
+        MINOR_CHORD: (3, 4, 5),
+        MAJOR_CHORD : (4, 3, 5),
+        AUGMENTED_CHORD: (4, 4, 4),
+        SUS2_CHORD: (2, 5, 5),
+        SUS4_CHORD: (5, 2, 5)
+    }
+    # 4 Tetra scale Patterns
+    TETRACHORD = {
+        MINOR_CHORD: (3, 4, 3, 2),
+        MAJOR_CHORD : (4, 3, 4, 1),
+        AUGMENTED_CHORD: (4, 4, 3, 1),
+        SUS2_CHORD: (2, 5, 4, 1),
+        SUS4_CHORD: (5, 2, 4, 1)
+    }
 
 
-    """
-    Diatonic patterns: pentatonic and heptatonic
-    """
     # Pentatonic (5 pitch class) scale
-    PENTA = 5 # Number of pitch classes in a pentatonic scale
     PENTATONICDEGREES = tuple(range(1, PENTA + 1)) # Pentatonic scale degree number
     PENTATONIC = (2,2,3,2,3) # sequence of 5 intervalsteps
     PENTAMODES = []
     PENTAMODESCHROMATIC = []
 
     # Heptatonic (7 pitch class) scale
-    HEPTA = 7 # Number of pitch classes in a heptatonic scale
     HEPTATONICDEGREES = tuple(range(1, HEPTA + 1)) # Heptatonic scale degree number
     HEPTATONIC = (2,2,1,2,2,2,1) # sequence of 7 intervalsteps
     HEPTAMODES = []
@@ -161,26 +183,6 @@ class DiatonicLayer:
     INT_ROMAN = {1:("I","i"), 2:('ii','ii0'), 3:('iii','III'), 4:('IV','iv'), 5:('V','V'), 6:('vi','VI'), 7: ('vii0','vii0')}
 
 
-    """
-    Interval patterns - Chord interval patterns and permutations
-    """
-    NUMTRIADINTERVALS = 2 # Number intervals to compose a triad
-    SEVENTH = 3 # Number of intervals to compose a seventh
-    # Patterns:
-    DIMINISHED_CHORD = 0
-    MINOR_CHORD = 1
-    MAJOR_CHORD = 2
-    AUGMENTED_CHORD = 3
-    SUS2_CHORD = 4
-    SUS4_CHORD = 5
-    CHORDINTERVALS = {
-        DIMINISHED_CHORD : (3, 3, 6),
-        MINOR_CHORD: (3, 4, 5),
-        MAJOR_CHORD : (4, 3, 5),
-        AUGMENTED_CHORD: (4, 4, 4),
-        SUS2_CHORD: (2, 5, 5),
-        SUS4_CHORD: (5, 2, 5)
-    }
 
     HEPTAMAJORSCALES = [] # Major scale pitch masks for all tonics (C, C#, D, ..., B)
     HEPTAMINORSCALES = [] # Minor scale pitch masks for all tonics
@@ -217,7 +219,7 @@ class DiatonicLayer:
         self.HEPTAMINORSCALES = [self.HEPTAMINORMODESCHROMATIC[-x:]+self.HEPTAMINORMODESCHROMATIC[:-x] for x in range(ChromaticLayer.NUMPITCHCLASS) ]
 
         # chord positions - permutations of intervals
-        positions = sequence_permutations(self.CHORDINTERVALS[self.MAJOR_CHORD])
+        positions = sequence_permutations(self.TRIAD[self.MAJOR_CHORD])
         # Chromatic steps
         positions_chromatic_steps = [interval_to_step(positions[x]) for x in range(len(positions))]
 
@@ -230,7 +232,7 @@ class DiatonicLayer:
     def save_library_sheet(self):
 
         # Table of all absolute chromatic data along pitch number set
-        chromatic_data = pd.DataFrame ([ChromaticLayer.PITCHMIDINUMBERLIST,
+        chromatic_data = pd.DataFrame ([ChromaticLayer.MIDIPITCHNUMBERS,
                              ChromaticLayer.PITCHCLASSES_INT_FULL,
                              ChromaticLayer.PITCHCLASSES_STR_FULL,
                              ChromaticLayer.PITCHFREQUENCYLIST]+ self.HEPTAMAJORSCALES,

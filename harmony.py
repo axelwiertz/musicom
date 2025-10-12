@@ -3,14 +3,6 @@ Music - Harmony
 Patterns and rules
 """
 
-class Rhythms:
-    TWO = (1, 1)
-    THREE = (1, 1, 1)
-    FOUR =  (1, 1, 1, 1)
-    TRESILLO = (3, 3, 2)
-    TWELVE_EIGHTH_BELL = (2, 2, 1, 2, 2, 2, 1)
-    SON_CLAVE = (3, 3, 4, 2, 4)
-
 
 class ChordHarmony:
     # Chord ladder
@@ -110,45 +102,6 @@ class MCModulation:
         'Subdominant' : ('iim7', 'V7'),
 }
 
-class MCStyle:
-    """
-    Scales and chord progression patterns in different musical styles.
-    """
-
-    SCALE = {
-        'Standard' : ('C', 'major'),
-        'Fantasy' : (('A', 'minor'), ('C', 'major')),
-        'Bossa Nova' : ('C', 'major')
-    }
-
-    # Chord progression patterns in styles
-    PROGRESSIONS = {
-        'Fantasy' :  [
-    # 1 2 4 2
-        ['I7', 'II7', 'VI7', 'II7'],
-    # i II bi bIV
-        ['i7', 'II7', 'isus', 'IVsus'],
-    # I VI I VI
-        ['I7', 'VI7', 'I7', 'VI7'],
-    # i v VI V
-        ['i7', 'v7', 'VI7', 'V7'],
-    # I II I II
-        ['I7', 'II7', 'I7', 'II7'],
-    # i II iv V
-        ['i7', 'II7', 'iv7', 'V7']
-        ],
-    'Bossa Nova' : [
-        [2, 5, 1],
-        ['Imaj7', 'II7', 'iim7']
-        ],
-    'Lounge/Jazz' : [
-        [4, 2, 5, 1],
-        [7, 3, 6, 2, 5, 1]
-        ],
-    'Flamenco' : [
-        [1, 7, 6, 5] # descending
-        ]
-    }
 
 class MCVoiceMovement:
     # Classic style - Voice movement

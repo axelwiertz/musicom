@@ -29,35 +29,33 @@ class Composition:
     """
     Composition main structure
     """
-    def __init__(self, title: str = 'New score',
-                 key_in: key.Key = DiatonicLayer.DEFAULT_KEY,
-                 meter_in: meter.TimeSignature = MCTime.DEFAULT_TIMESIGNATURE,
-                 tempo_in: int = MCTime.DEFAULT_TEMPO):
+    def __init__(self,
+                 title: str = None,
+                 form: list = None,
+                 tonic: str = None,
+                 mode: int = None,
+                 progression: list = None
+                ):
 
+        self.form = form
+        self.tonic = tonic
+        self.mode = mode
         self.progression = None
-        self.form = []
-        self.bars = 0
         self.voices = 0
-        self.style = 'Standard'
-        self.scale = str(MCStyle.SCALE[self.style][0])
-
-        self.key = None
-        self.meter = None
-        self.tempo = None
 
         # Music21 score
         self.score = stream.Score()
-
         self.score.metadata = metadata.Metadata()
         self.score.metadata.title = title
         self.score.metadata.composer = 'Musicom'
 
-        # Set the time signature, key signature and tempo
-        self.score.insert(0, key_in)
-        self.score.insert(0, meter_in)
-        self.score.insert(0, tempo.MetronomeMark(number=tempo_in))
-
+        # MusicPy piece
         self.piece = structures.piece
+
+    def set_time(self, time : MusicalTime):
+        # Set the time signature, key signature and tempo
+        self.score.insert(0, time.timesignature)
+        self.score.insert(0, tempo.MetronomeMark(number=time.bpm))
 
     def piece_track_notes (self, track_number: int = 0, nFrom: int = 0, nTo: int = 4):
         track_notes = self.piece(track_number)[nFrom:nTo]
@@ -65,14 +63,20 @@ class Composition:
         content = self.piece(track_number).tracks
         content_notes = self.piece(track_number).tracks.notes
 
-    def play_track (self,
+    def piece_play_track (self,
                     track_number: int = 0,
                     instrument: int = MIDIinstrument.PIANO):
         mp.play(self.piece(track_number), instrument=instrument, wait=True)
 
-    def play_piece (self):
+    def m21score_to_mppiece (self):
         # convert music21 score to musicpy piece
         self.piece = m21_to_mpy(self.score)
+
+    def mppiece_to_m21score (self):
+        # convert musicpy piece to music21 score
+        self.score = mpy_to_m21(self.piece)
+
+    def piece_play (self):
         # Play piece and wait until finish, writes temp.midi
         mp.play(self.piece, wait=True)
 
@@ -169,7 +173,7 @@ class Composition:
 class MusicalUnit ():
     # Stream with notes, chord, tempo, instrument
     def __init__(self,
-                center : int = ChromaticLayer.NUMPITCH // 2,
+                start : int = ChromaticLayer.NUMPITCH // 2,
                 pitches: list[int | str] = (),
                 onset_intervals: list[float] = (),
                 durations: list[float] = (),
@@ -178,16 +182,18 @@ class MusicalUnit ():
                 mode: str = 'major',
                 ):
 
-        self.center = center
+        self.start = start
         self.pitches = pitches
         self.onset_intervals = onset_intervals
         self.durations = durations
         self.velocities = velocities
+        self.tonic = tonic
+        self.mode = mode
 
         # m21
         self.stream =  stream.Stream()
         self.m21scale = scale.ConcreteScale(tonic, mode)
-        self.pitch_classes = m21scale.pitches
+        self.pitch_classes = self.m21scale.pitches
         self.instrument = instrument.Piano()
         self.clef = clef.TrebleClef()
 
@@ -196,16 +202,15 @@ class MusicalUnit ():
         self.chord = structures.chord([])
 
         # Binary genome representation
-        pitch_bits = 8  # binary 128 pitches
-        max_pitch = pow(2, self.pitch_bits - 1)
+        pitch_interval_bits = 6  # binary 24 pitch intervals
+        max_pitch_interval = pow(2, pitch_interval_bits - 1)
         duration_bits = 4  # binary 8 timesteps
-        interval_bits = 4  # binary 8 timesteps
+        onset_interval_bits = 4  # binary 8 timesteps
         velocity_bits = 4  # binary 8 levels
-        bits = pitch_bits + duration_bits + interval_bits + velocity_bits
-
+        self.totalbits = pitch_interval_bits + duration_bits + onset_interval_bits + velocity_bits
 
     def unit_to_chord(self):
-        self.chord += structures.chord(self.pitches, self.durations, self.intervals)
+        self.chord += structures.chord(self.pitches, self.durations, self.onset_intervals)
 
     def unit_to_stream (self):
         # Create a stream with notes and rests
@@ -221,27 +226,22 @@ class MusicalUnit ():
                 self.stream.append(new_note)
 
     def modulate (self,
-                    sclSource : structures.scale(),
-                    sclTarget : structures.scale()):
+                    sclSource : structures.scale,
+                    sclTarget : structures.scale):
         # Modulate
-        mpstream_out = self.chord.modulation(sclSource, sclTarget)
+        self.chord = self.chord.modulation(sclSource, sclTarget)
 
-    def play (self):
-        mp.play (self.track, bpm=self.tempo, instrument=self.instrument.midiProgram)
-
-    def transform (self, method: int):
-        # Transform a composition
-        if method == 1:
-            None
+    def play (self, time: MusicalTime):
+        mp.play (self.chord, bpm=time.bpm, instrument=self.instrument.midiProgram)
 
     def genome_to_unit(self, genome: Genome):
         # Transform a generated genome into a unit
         # Split genome in parts of 'bits' length
-        numparts = len(genome) % self.bits
+        numparts = len(genome) % self.totalbits
         genes_binary = []
         for i in range(numparts):
             # Extract binary elements
-            genes_binary += [genome[(i * self.bits):(i * self.bits) + self.bits]]
+            genes_binary += [genome[(i * self.totalbits):(i * self.totalbits) + self.totalbits]]
 
         for gene_binary in genes_binary:
             pitch_nr = int(sum([bit * pow(2, i) for i, bit in enumerate(gene_binary)]))
@@ -264,7 +264,7 @@ class MusicalUnit ():
     def set_progression_in_key (self,
                                 chord_progressions: list,
                                 key_in: key.Key,
-                                quarterlength_in: int = 4 ) -> stream.Stream:
+                                quarterlength_in: int = 4 ):
         # Chord progression patterns in a key
         # mp
         chd01 = self.mpscale.chord_progression(chord_progressions[0])
@@ -287,7 +287,7 @@ class MusicalUnit ():
 
         for i in range(DiatonicLayer.HEPTA):
             # m21 Create triad from Roman numeral
-            triad = roman.RomanNumeral(i+1, self.key)
+            triad = roman.RomanNumeral(i+1, self.m21scale)
             chord_pitches = triad.pitches
             # Unit
             for p in chord_pitches:
@@ -307,10 +307,9 @@ class MusicalUnit ():
         #    print (PROGRESSIONS[i])
             mpstream_chords = mpstream_chords + structures.rest(1 / 2) + chords_in_scale[i]
 
-
 class Percussion(MusicalUnit):
     def __init__(self):
-        super.center = 0
+        super().__init__()
         self.clef = clef.PercussionClef()
         self.instrument.Woodblock()
 
@@ -334,8 +333,8 @@ def compose_unit ():
                             m21scale=DiatonicLayer.DEFAULT_SCALE)
 
         # Insert several new notes in m21 stream
-        new_note_1 = note.Note(DiatonicLayer.DEFAULT_PITCH, quarterLength=MCTime.QUARTER/4)
-        new_note_2 = note.Note(DiatonicLayer.DEFAULT_PITCH, quarterLength=MCTime.DEFAULT_DURATION)
+        new_note_1 = note.Note(DiatonicLayer.DEFAULT_PITCH, quarterLength=MusicalTime.QUARTER/4)
+        new_note_2 = note.Note(DiatonicLayer.DEFAULT_PITCH, quarterLength=MusicalTime.DEFAULT_DURATION)
         unit1.stream.insertAndShift([2, new_note_1, 2.75, new_note_2])
 
 
@@ -367,14 +366,14 @@ def create_markov ():
     # fixed duration 1 quarter for simplicity
     part = stream.Part()
     for p in gen_pitches:
-        part.append(note.Note(p, quarterLength=4/MCTime.QUARTER))
+        part.append(note.Note(p, quarterLength=4/MusicalTime.QUARTER))
 
 
 def create_population():
     # Create a genetic composition
     comp = Composition('Genetic '+str(int(datetime.now().timestamp())),
                        DiatonicLayer.DEFAULT_KEY,
-                       MCTime.DEFAULT_TIMESIGNATURE,
+                       MusicalTime.DEFAULT_TIMESIGNATURE,
                        120)
 
     def fitness_func(genome: Genome) -> int:
@@ -483,7 +482,7 @@ def percussion_load ():
 def create_percussion ():
 
     # Create
-    comp = Composition('Percussion', DiatonicLayer.DEFAULT_KEY, MCTime.DEFAULT_TIMESIGNATURE, 100)
+    comp = Composition('Percussion', DiatonicLayer.DEFAULT_KEY, MusicalTime.DEFAULT_TIMESIGNATURE, 100)
 
     pchord = percussion.PercussionChord()
 
@@ -714,7 +713,8 @@ def create_key_library (key_in: key.Key):
     # Common chord progressions
     comp = Composition('Chord progressions and triads in C', key_in,meter.TimeSignature('4/4'))
 
-    unit = MusicalUnit(4,4,4)
+    time = MusicalTime(4, 4, 4)
+    unit = MusicalUnit()
 
     unit.set_triads_in_key(key_in, 1)
 
@@ -767,7 +767,7 @@ def create_harmonic():
         transpose_by = interval.Interval(new_chord[0], bass_pitch)
 
         new_chord.transpose(transpose_by, inPlace=True)
-        new_chord.duration = note.Duration(random.choice([MCTime.QUARTER/2, MCTime.QUARTER/1]))
+        new_chord.duration = note.Duration(random.choice([MusicalTime.QUARTER/2, MusicalTime.QUARTER/1]))
 
         unit.stream.append(new_chord)
 
@@ -806,7 +806,7 @@ Creation
 
 def stream_create_random_from_list(length,
                         pitch_set: list[note.Pitch] = DiatonicLayer.DEFAULT_PITCHES,
-                        duration_set: list[note.Duration] = MCTime.DEFAULT_DURATIONS) -> stream.Stream:
+                        duration_set: list[note.Duration] = MusicalTime.DEFAULT_DURATIONS) -> stream.Stream:
 
     # Create a random stream from a list of pitches and durations
     stream_out = stream.Stream()

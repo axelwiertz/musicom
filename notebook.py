@@ -8,13 +8,13 @@ from library import *
 from musicom import MusicalUnit, Composition, MIDIpercussion
 from music21 import converter, instrument
 
+from theory import DiatonicLayer
+
+
 def m21_tiny_notebook ():
-    waltz_rhythmic_pattern = converter.parse('tinynotation: 3/4 c5 c5 c5')
-    four_rhythmic_pattern = converter.parse('tinynotation: 4/4 c5 c5 c5 c5')
-    tresillo_rhythmic_pattern = converter.parse('tinynotation: 4/4 c5 r r c5 r r c5 r')
-    twelve_eigth_bell_rhythmic_pattern = converter.parse('tinynotation: 12/8 c5 r c5 r c5 c5 r c5 r c5 r c5')
-    son_clave_rhythmic_pattern = converter.parse('tinynotation: 16/8 c5 r r c5 r r c5 r r r c5 r c5 r r r')
-    instrument.Piano()
+    unit = MusicalUnit()
+    unit.stream = converter.parse('tinynotation: 4/4 c5 r r c5 r r c5 r')
+    unit.instrument = instrument.Piano()
 
 def mp_notebook ():
     unit = MusicalUnit()
@@ -103,6 +103,62 @@ def mp_percussion_notebook ():
                                   channels=[MIDIpercussion.CHANNEL_INDEX])
 
 
+def standard_notebook ():
+
+    comp = Composition('Standard',
+                       form = ['A', 'A', 'B', 'A'],
+                       tonic='C',
+                       mode= DiatonicLayer.MAJOR_MODE,
+                       progression=[]
+                       )
+
+    fantasy_progressions = [
+    # 1 2 4 2
+        ['I7', 'II7', 'VI7', 'II7'],
+    # i II bi bIV
+        ['i7', 'II7', 'isus', 'IVsus'],
+    # I VI I VI
+        ['I7', 'VI7', 'I7', 'VI7'],
+    # i v VI V
+        ['i7', 'v7', 'VI7', 'V7'],
+    # I II I II
+        ['I7', 'II7', 'I7', 'II7'],
+    # i II iv V
+        ['i7', 'II7', 'iv7', 'V7']
+        ]
 
 
+    comp = Composition('Fantasy A minor',
+                       tonic='A',
+                       mode= DiatonicLayer.MINOR_MODE,
+                       progression=fantasy_progressions
+                       )
 
+    comp = Composition('Fantasy C major',
+                       tonic='C',
+                       mode= DiatonicLayer.MAJOR_MODE,
+                       progression=fantasy_progressions
+                       )
+
+    comp = Composition('Bossa Nova',
+                       form = ['A', 'A', 'B', 'A'],
+                       tonic='C',
+                       mode= DiatonicLayer.MAJOR_MODE,
+                       progression=[
+        [2, 5, 1],
+        ['Imaj7', 'II7', 'iim7']
+        ]
+                       )
+
+    comp = Composition('Flamenco',
+                       progression=[
+        [1, 7, 6, 5] # descending
+        ]
+            )
+
+    comp = Composition('Lounge/Jazz',
+                          progression=[
+        [4, 2, 5, 1],
+        [7, 3, 6, 2, 5, 1]
+        ],
+                       )
