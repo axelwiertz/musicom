@@ -15,6 +15,12 @@ class Config:
     DEFAULT_MIDI_FILE_IN = 'in.mid'
     DEFAULT_MIDI_FILE_OUT = 'out.mid'
 
+
+class MIDIpitch:
+    NUMBERS = tuple(range(127))
+    A4 = 69
+
+
 class MIDIinstrument:
 
     # General MIDI instrument numbers (0-127)

@@ -178,8 +178,8 @@ class MusicalUnit ():
                 onset_intervals: list[float] = (),
                 durations: list[float] = (),
                 velocities: list[int] = (100),
-                tonic: str = 'C',
-                mode: str = 'major',
+                tonic: str = DiatonicLayer.PitchClass.C,
+                mode: str = DiatonicLayer.MAJOR_MODE,
                 ):
 
         self.start = start
@@ -192,7 +192,9 @@ class MusicalUnit ():
 
         # m21
         self.stream =  stream.Stream()
-        self.m21scale = scale.ConcreteScale(tonic, mode)
+        self.m21key = key.Key(tonic, mode)
+        self.m21scale = scale.MajorScale(tonic) if mode == 'major' else scale.MinorScale(tonic)
+
         self.pitch_classes = self.m21scale.pitches
         self.instrument = instrument.Piano()
         self.clef = clef.TrebleClef()
@@ -311,7 +313,7 @@ class Percussion(MusicalUnit):
     def __init__(self):
         super().__init__()
         self.clef = clef.PercussionClef()
-        self.instrument.Woodblock()
+        self.instrument = instrument.Woodblock()
 
     def m21note_percusssion(self, midi_pitch, dur=0.5, velocity=100):
         # Create unpitched percussion note by MIDI pitch number
