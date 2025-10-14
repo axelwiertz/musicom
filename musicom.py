@@ -171,37 +171,46 @@ class Composition:
 
 
 class MusicalUnit ():
-    # Stream with notes, chord, tempo, instrument
+    # A musical unit
     def __init__(self,
-                start : int = ChromaticLayer.NUMPITCH // 2,
-                pitches: list[int | str] = (),
-                onset_intervals: list[float] = (),
-                durations: list[float] = (),
-                velocities: list[int] = (100),
-                tonic: str = DiatonicLayer.PitchClass.C,
-                mode: str = DiatonicLayer.MAJOR_MODE,
+                time: MusicalTime = MusicalTime(),
+                pitch_ring : PitchRing = PitchRing(),
+                tonic : int = EqualTemp.C,
+                pitch_pattern : list = None,
+                start : int = None,  # C4
+                pitch_intervals: list[int] = None,
+                onset_intervals: list[float] = None,
+                durations: list[float] = None,
+                velocities: list[int] = None,
                 ):
 
+        self.time = time
+        self.pitch_ring = pitch_ring
+        self.tonic = tonic
+        self.pitch_pattern = pitch_pattern
+
         self.start = start
-        self.pitches = pitches
+        self.pitch_intervals = pitch_intervals
         self.onset_intervals = onset_intervals
         self.durations = durations
         self.velocities = velocities
-        self.tonic = tonic
-        self.mode = mode
 
         # m21
         self.stream =  stream.Stream()
-        self.m21key = key.Key(tonic, mode)
-        self.m21scale = scale.MajorScale(tonic) if mode == 'major' else scale.MinorScale(tonic)
+        # mp
+        self.chord = structures.chord([])
 
+    def m21set(self):
+        # Music21 structures
+        self.m21key = key.Key(EqualTemp.STRINGS[self.tonic], mode)
+        self.m21scale = scale.MajorScale(tonic) if mode == 'major' else scale.MinorScale(tonic)
         self.pitch_classes = self.m21scale.pitches
         self.instrument = instrument.Piano()
         self.clef = clef.TrebleClef()
 
+    def mpset(self):
         # MusicPy structures
         self.mpscale = structures.scale(str(self.tonic), str(self.mode))
-        self.chord = structures.chord([])
 
         # Binary genome representation
         pitch_interval_bits = 6  # binary 24 pitch intervals
@@ -327,17 +336,18 @@ class Percussion(MusicalUnit):
 def compose_unit ():
 
     # Create a musical unit
-        unit1 = MusicalUnit(16, 4, 4,
-                            pitches=[0, DiatonicLayer.DEFAULT_PITCH, DiatonicLayer.DEFAULT_PITCH],
-                            onset_intervals=[8, 3, 5],
-                            durations=[0, 3, 5],
-                            velocities=[0, 100, 100],
-                            m21scale=DiatonicLayer.DEFAULT_SCALE)
+    time
+    unit1 = MusicalUnit(16, 4, 4,
+                        pitches=[0, DiatonicLayer.DEFAULT_PITCH, DiatonicLayer.DEFAULT_PITCH],
+                        onset_intervals=[8, 3, 5],
+                        durations=[0, 3, 5],
+                        velocities=[0, 100, 100],
+                        m21scale=DiatonicLayer.DEFAULT_SCALE)
 
-        # Insert several new notes in m21 stream
-        new_note_1 = note.Note(DiatonicLayer.DEFAULT_PITCH, quarterLength=MusicalTime.QUARTER/4)
-        new_note_2 = note.Note(DiatonicLayer.DEFAULT_PITCH, quarterLength=MusicalTime.DEFAULT_DURATION)
-        unit1.stream.insertAndShift([2, new_note_1, 2.75, new_note_2])
+    # Insert several new notes in m21 stream
+    new_note_1 = note.Note(DiatonicLayer.DEFAULT_PITCH, quarterLength=MusicalTime.QUARTER/4)
+    new_note_2 = note.Note(DiatonicLayer.DEFAULT_PITCH, quarterLength=MusicalTime.DEFAULT_DURATION)
+    unit1.stream.insertAndShift([2, new_note_1, 2.75, new_note_2])
 
 
 

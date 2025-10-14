@@ -10,8 +10,6 @@ import itertools
 
 # Music21 modules
 from music21 import interval, meter, tempo
-# mp
-from musicpy import database
 
 class MusicalTime:
     TWO = (1, 1)
@@ -39,13 +37,14 @@ class MusicalTime:
         # unit is quarter note
         self.M21_QUARTER = 4
         self.timesignature = meter.TimeSignature(str(self.beats_in_measure) + '/' + str(self.beat_note))
-        main_beatcount = self.timesignature.beatCount
+        # main_beatcount = self.timesignature.beatCount
         self.beat_duration = self.M21_QUARTER / self.beat_note
-        beat_duration2 = self.timesignature.beatDuration.quarterLength
+        # beat_duration2 = self.timesignature.beatDuration.quarterLength
+        self.tempo = tempo.MetronomeMark(number=self.bpm)
 
 
-class EqualTemp:
-    # equal temperament scale
+class TwelveTET:
+    # 12-Tone Equal Temperament tuning system
     FREQUENCY_A4 = 440
     OCTAVE = 12  # Number of pitch classes 0-11
     C = 0
@@ -66,52 +65,49 @@ class EqualTemp:
 
 
 class PitchRing:
+    ASCENDING = 1
+    DESCENDING = -1
     """
-    Chromatic pitch ring and intervals
+    Chromatic pitch octave ring
     """
     def __init__(self):
-        # Chromatic layer - 12-TET
         # Represent as list of (octave, pitchclass)
         self.ring = [(octave_idx, pitch_class)
-                     for octave_idx in range(EqualTemp.CYCLES)
-                     for pitch_class in range(EqualTemp.OCTAVE)]
+                     for octave_idx in range(TwelveTET.CYCLES)
+                     for pitch_class in range(TwelveTET.OCTAVE)]
 
-        index_A0 = self.index_of(0, EqualTemp.A)
-        index_C8 = self.index_of(8, EqualTemp.C)
+        index_A0 = self.index_of(0, TwelveTET.A)
+        index_C8 = self.index_of(8, TwelveTET.C)
         self.piano_ring = self.ring[index_A0:index_C8 + 1]
 
         # Create pitch to frequency mapping
-        keys = np.array([x + str(y) for y in range(EqualTemp.CYCLES) for x in EqualTemp.STRINGS])
+        keys = np.array([x + str(y) for y in range(TwelveTET.CYCLES) for x in TwelveTET.STRINGS])
         # Trim to standard 88 pianokeys
         start = np.where(keys == 'A0')[0][0]
         end = np.where(keys == 'C8')[0][0]
         keys = keys[start:end + 1]
 
-        self.pitch_freqs = dict(zip(keys, [2 ** ((n + 1 - 49) / 12) * self.FREQUENCY_A4 for n in range(len(keys))]))
+        self.pitch_freqs = dict(zip(keys, [2 ** ((n + 1 - 49) / 12) * TwelveTET.FREQUENCY_A4 for n in range(len(keys))]))
         self.pitch_freqs[''] = 0.0  # stop
 
-        self.PITCHFREQUENCYLIST = tuple(2 ** ((n - self.MIDIpitch.A4) / EqualTemp.OCTAVE) * EqualTemp.FREQUENCY_A4
+        self.PITCHFREQUENCYLIST = tuple(2 ** ((n - MIDIpitch.A4) / TwelveTET.OCTAVE) * TwelveTET.FREQUENCY_A4
                                         for n in MIDIpitch.NUMBERS)
 
 
         # Multiple octaves
-        self.PITCHCLASSES_STR_FULL = tuple(x for _ in range(0, EqualTemp.CYCLES) for x in EqualTemp.STRINGS)
-        self.PITCHCLASSES_INT_FULL = tuple(EqualTemp.CYCLES * EqualTemp.INTEGERS)
-        self.INTERVALLIST = (interval.ChromaticInterval(n) for n in range(self.NUMPITCHCLASS))
+        self.PITCHCLASSES_STR_FULL = tuple(x for _ in range(0, TwelveTET.CYCLES) for x in TwelveTET.STRINGS)
+        self.PITCHCLASSES_INT_FULL = tuple(TwelveTET.CYCLES * TwelveTET.INTEGERS)
 
+        self.INTERVALLIST = (interval.ChromaticInterval(n) for n in TwelveTET.INTEGERS)
 
     def index_of(self, octave_idx, pitchclass):
-        return octave_idx * EqualTemp.CYCLES + pitchclass
+        return octave_idx * TwelveTET.CYCLES + pitchclass
 
     def get_at(self, i):
         return self.ring[i % len(self.ring)]
 
-    def advance(self, i, steps=1):
-        return (i + steps) % len(self.ring)
-
-    def prev(self, i, steps=1):
-        return (i - steps) % len(self.ring)
-
+    def transpose(self, i, interval_steps, direction=ASCENDING):
+        return (i + direction*interval_steps) % len(self.ring)
 
 
 class PitchClassSet:
@@ -119,15 +115,11 @@ class PitchClassSet:
 
         # Combinations: of a set
         num_items = 3
-        self.PITCHCLASS_COMBINATIONS = list(itertools.combinations (EqualTemp.INTEGERS, num_items))
-
+        self.PITCHCLASS_COMBINATIONS = list(itertools.combinations (TwelveTET.INTEGERS, num_items))
 
 
 class DiatonicLayer:
-
-    """
-    Diatonic patterns: intervals, scales, modes, chords
-    """
+    # Diatonic patterns: intervals, scales, modes, chords
     DI = 2
     TRIA = 3
     TETRA = 4
@@ -212,7 +204,9 @@ class DiatonicLayer:
 
 
 class PitchClassPattern:
-    def __init__(self, pitch_intervals : list = DiatonicLayer.HEPTATONIC):
+    # Diatonic patterns: intervals, scales, modes, chords
+    def __init__(self,
+                 pitch_intervals : tuple = DiatonicLayer.HEPTATONIC):
         self.pitch_intervals = pitch_intervals
 
         # Scale modes and chord positions - permutations of interval sequence
@@ -222,25 +216,23 @@ class PitchClassPattern:
 
         # Pitch ring masks for specific modes
         # Major
-        self.majormodeschromatic = EqualTemp.CYCLES * self.modeschromatic [self.MAJOR_MODE]
+        self.majormodeschromatic = TwelveTET.CYCLES * self.modeschromatic [DiatonicLayer.MAJOR_MODE]
         # Minor
-        self.minormodeschromatic = EqualTemp.CYCLES * self.modeschromatic [self.MINOR_MODE]
+        self.minormodeschromatic = TwelveTET.CYCLES * self.modeschromatic [DiatonicLayer.MINOR_MODE]
 
-        # Major pitch ring masks for all centers (C, C#, D, ..., B)
-        self.majorscales = [self.majormodeschromatic[-x:]+self.majormodeschromatic[:-x] for x in range(EqualTemp.OCTAVE) ]
-        self.minorscales = [self.minormodeschromatic[-x:]+self.minormodeschromatic[:-x] for x in range(EqualTemp.OCTAVE) ]
+        # Major pitch ring masks for all tonics (C, C#, D, ..., B)
+        self.majorscales = [self.majormodeschromatic[-x:]+self.majormodeschromatic[:-x] for x in range(TwelveTET.OCTAVE) ]
+        self.minorscales = [self.minormodeschromatic[-x:]+self.minormodeschromatic[:-x] for x in range(TwelveTET.OCTAVE) ]
 
         # Permutations: ordered set
-        self.degree_permutations = list(itertools.permutations (len(self.pitch_intervals)))
-
-
+        self.degree_permutations = list(itertools.permutations (range(1,len(pitch_intervals)) ) )
 
 
 def main():
     time = MusicalTime()
     pr = PitchRing()
     pos = pr.index_of(3, 7)  # octave 3, pitchclass 7 -> index
-    next_pos = pr.advance(pos)  # next pitchclass
+    next_pos = pr.transpose(pos,pr.ASCENDING)  # next pitchclass
     octave_pitchclass = pr.get_at(next_pos)
 
     pcs = PitchClassSet()
@@ -258,15 +250,15 @@ def main():
     chromatic_data.to_excel(Config.DEFAULT_PATH + 'ChromaticLayer.xlsx', index=True, sheet_name='Pitch')
 
     chromatic_table = chromatic_data.transpose()
-    chromatic_table.columns = ['Nr', 'ClassNr', 'ClassChr', 'Freq'] + list(EqualTemp.STRINGS)
+    chromatic_table.columns = ['Nr', 'ClassNr', 'ClassChr', 'Freq'] + list(TwelveTET.STRINGS)
     chromatic_table.to_excel(Config.DEFAULT_PATH + 'ChromaticTable.xlsx', index=True, sheet_name='Pitch')
 
     arrHeptaScale = np.array(pcp7.majorscales)
 
-    pc_circle = Circle(EqualTemp.OCTAVE, EqualTemp.STRINGS, 'Pitch class circle')
+    pc_circle = Circle(TwelveTET.OCTAVE, TwelveTET.STRINGS, 'Pitch class circle')
     pc_circle.show()
 
-#    pc_circle.show(pcp7.majormodeschromatic, EqualTemp.STRINGS, 'Major circle')
+#    pc_circle.show(pcp7.majormodeschromatic, TwelveTET.STRINGS, 'Major circle')
 
 
 
