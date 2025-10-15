@@ -175,9 +175,9 @@ class MusicalUnit ():
     def __init__(self,
                 time: MusicalTime = MusicalTime(),
                 pitch_ring : PitchRing = PitchRing(),
-                tonic : int = EqualTemp.C,
+                tonic : int = None,
                 pitch_pattern : list = None,
-                start : int = None,  # C4
+                start : int = None,
                 pitch_intervals: list[int] = None,
                 onset_intervals: list[float] = None,
                 durations: list[float] = None,
