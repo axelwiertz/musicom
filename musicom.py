@@ -175,8 +175,6 @@ class MusicalUnit ():
     def __init__(self,
                 time: MusicalTime = MusicalTime(),
                 pitch_ring : PitchRing = PitchRing(),
-                tonic : int = None,
-                pitch_pattern : list = None,
                 start : int = None,
                 pitch_intervals: list[int] = None,
                 onset_intervals: list[float] = None,
@@ -186,8 +184,6 @@ class MusicalUnit ():
 
         self.time = time
         self.pitch_ring = pitch_ring
-        self.tonic = tonic
-        self.pitch_pattern = pitch_pattern
 
         self.start = start
         self.pitch_intervals = pitch_intervals
@@ -202,10 +198,9 @@ class MusicalUnit ():
 
     def m21set(self):
         # Music21 structures
-        self.m21key = key.Key(EqualTemp.STRINGS[self.tonic], mode)
-        self.m21scale = scale.MajorScale(tonic) if mode == 'major' else scale.MinorScale(tonic)
-        self.pitch_classes = self.m21scale.pitches
-        self.instrument = instrument.Piano()
+        self.m21key = key.Key()
+        self.m21scale = scale.MajorScale()
+        self.m21instrument = instrument.Piano()
         self.clef = clef.TrebleClef()
 
     def mpset(self):
@@ -272,45 +267,6 @@ class MusicalUnit ():
 
         return part_out
 
-    def set_progression_in_key (self,
-                                chord_progressions: list,
-                                key_in: key.Key,
-                                quarterlength_in: int = 4 ):
-        # Chord progression patterns in a key
-        # mp
-        chd01 = self.mpscale.chord_progression(chord_progressions[0])
-        for i in range(1, len(chord_progressions)-1):
-            # mp
-            chd02 = self.mpscale.chord_progression(chord_progressions[i], durations=1 / 2, intervals=0, volumes=None,
-                                            chords_interval=None)
-            chd01 = chd01 + structures.rest(1 / 2) + chd02
-
-            # m21 Add rest between progressions
-            self.stream.append(note.Rest(quarterLength= quarterlength_in))
-            for j in range (0, len(chord_progressions[i])):
-                # m21 Create chord from Roman numeral
-                chord01 = roman.RomanNumeral (chord_progressions[i][j], keyOrScale=key_in)
-                chord01.duration.quarterLength = quarterlength_in
-                self.stream.append(chord01)
-
-
-    def set_triads_in_key (self, quarterlength_in: int = 4 ):
-
-        for i in range(DiatonicLayer.HEPTA):
-            # m21 Create triad from Roman numeral
-            triad = roman.RomanNumeral(i+1, self.m21scale)
-            chord_pitches = triad.pitches
-            # Unit
-            for p in chord_pitches:
-                self.pitches += [p.midi]
-                self.onset_intervals += [0]
-                self.durations += [quarterlength_in]
-                self.velocities += [100]
-            # m21
-            triad.duration.quarterLength = quarterlength_in
-            self.stream.append(triad)
-            self.stream.append(note.Rest(quarterLength=quarterlength_in))
-
         # mp
         chords_in_scale = self.mpscale % (1234567, 0.5)
         mpstream_chords = chords_in_scale[0]
@@ -331,24 +287,73 @@ class Percussion(MusicalUnit):
         n.volume.velocity = velocity
         return n
 
+    def add_chord_to_unit (self, chord_pitches, duration=4):
+
+        for p in chord_pitches:
+            self.pitches += [p]
+            self.pitch_intervals += self.pitches[-1] - self.pitches[-2] if len(self.pitches) > 1 else 0
+            self.onset_intervals += [0]
+            self.durations += [duration]
+            self.velocities += [100]
+
+
+def progression_in_scale (chord_progressions: list,
+                            key_in: key.Key):
+    # Chord progression patterns in a key
+    unit = MusicalUnit()
+    # mp
+    unit.chord = unit.mpscale.chord_progression(chord_progressions[0])
+    for i in range(1, len(chord_progressions)-1):
+        chd02 = unit.mpscale.chord_progression(chord_progressions[i], durations=1 / 2, intervals=0, volumes=None,
+                                        chords_interval=None)
+        unit.chord += structures.rest(1 / 2) + chd02
+
+        # m21 Add rest between progressions
+        unit.stream.append(note.Rest(quarterLength=4))
+        for j in range (0, len(chord_progressions[i])):
+            # m21 Create chord from Roman numeral
+            chord01 = roman.RomanNumeral (chord_progressions[i][j], keyOrScale=key_in)
+            chord01.duration.quarterLength = 4
+            unit.stream.append(chord01)
+
+
+def triads_in_scale ():
+
+    unit = MusicalUnit()
+
+    triads_in_scale = unit.mpscale % (1234567, 1)
+
+    for i in range(TwelveTET.HEPTA):
+        # m21 Create triad from Roman numeral
+        triad = roman.RomanNumeral(i+1, unit.m21scale)
+        chord_pitches = triad.pitches
+        # Unit
+        unit.add_chord_to_unit (chord_pitches)
+        # m21
+        triad.duration.quarterLength = 4
+        unit.stream.append(triad)
+        unit.stream.append(note.Rest(quarterLength=4))
 
 
 def compose_unit ():
 
     # Create a musical unit
-    time
-    unit1 = MusicalUnit(16, 4, 4,
-                        pitches=[0, DiatonicLayer.DEFAULT_PITCH, DiatonicLayer.DEFAULT_PITCH],
+    time = MusicalTime(16, 4, 4, 120)
+    pitch_ring = PitchRing()
+    unit1 = MusicalUnit(time,
+                        pitches=[0, pitch_ring.index_of(TwelveTET.C,4),
+                                    pitch_ring.index_of(TwelveTET.E,4)],
+                        start = pitch_ring.index_of(TwelveTET.C,4),
+                        pitch_intervals=[0, 4],
                         onset_intervals=[8, 3, 5],
                         durations=[0, 3, 5],
                         velocities=[0, 100, 100],
-                        m21scale=DiatonicLayer.DEFAULT_SCALE)
+                        m21scale=scale.MajorScale())
 
     # Insert several new notes in m21 stream
-    new_note_1 = note.Note(DiatonicLayer.DEFAULT_PITCH, quarterLength=MusicalTime.QUARTER/4)
-    new_note_2 = note.Note(DiatonicLayer.DEFAULT_PITCH, quarterLength=MusicalTime.DEFAULT_DURATION)
+    new_note_1 = note.Note(pitch=89, quarterLength=MusicalTime.QUARTER/4)
+    new_note_2 = note.Note(pitch=93, quarterLength=MusicalTime.DEFAULT_DURATION)
     unit1.stream.insertAndShift([2, new_note_1, 2.75, new_note_2])
-
 
 
 class MarkovChain:
@@ -383,9 +388,11 @@ def create_markov ():
 
 def create_population():
     # Create a genetic composition
+    pip = PitchIntervalPattern()
+    time = MusicalTime(8, 4, 4, 100)
     comp = Composition('Genetic '+str(int(datetime.now().timestamp())),
-                       DiatonicLayer.DEFAULT_KEY,
-                       MusicalTime.DEFAULT_TIMESIGNATURE,
+                       pip,
+                       time,
                        120)
 
     def fitness_func(genome: Genome) -> int:
@@ -462,9 +469,10 @@ def create_rhythm () -> stream.Stream:
     # The number of timesteps is the sum of the intervals
 
     comp = Composition('Rhythm')
-    unit = MusicalUnit(8, 4, 4)
+    time = MusicalTime(8, 4, 4, 100)
+    unit = MusicalUnit(time,
+                       onset_intervals=euclidian_rhythm (3, 8))
 
-    rhythm_seq = euclidian_rhythm (3, 8)
     num_timesteps = sum(rhythm_seq)
 
     # Apply rhythm in note stream
