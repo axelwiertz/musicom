@@ -16,11 +16,6 @@ class Config:
     DEFAULT_MIDI_FILE_OUT = 'out.mid'
 
 
-class MIDIpitch:
-    NUMBERS = tuple(range(127))
-    A4 = 69
-
-
 class MIDIinstrument:
 
     # General MIDI instrument numbers (0-127)
@@ -55,9 +50,7 @@ class MIDIpercussion:
     VIBRASLAP = 58
     WOODBLOCK = 76
 
-"""
-Tools
-"""
+
 def interval_to_step (intervals: list[int]) -> list[int]:
     # Convert a list of intervals to a sequential mask with sequential degree/onset numbers and zeroes
     # Example [2, 3] -> [1, 0, 2, 0, 0, 3]
@@ -70,9 +63,6 @@ def interval_to_step (intervals: list[int]) -> list[int]:
             steps.append(0)
     return steps
 
-def sequence_permutations (sequence: list | tuple) -> list:
-    permutations = [sequence[x:]+sequence[:x] for x in range(len(sequence))]
-    return permutations
 
 
 
