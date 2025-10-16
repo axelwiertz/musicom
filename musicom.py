@@ -171,10 +171,14 @@ class Composition:
 
 
 class MusicalUnit ():
-    # A musical unit
+    # Harmonic rhythm: sequential pattern of onsets at timesteps
+    # A rhythm sequence is defined by
+    #  - a sequence of timestep intervals between onsets
+    #
+    # The number of timesteps is the sum of the intervals
+
     def __init__(self,
                 time: MusicalTime = MusicalTime(),
-                pitch_ring : PitchRing = PitchRing(),
                 start : int = None,
                 pitch_intervals: list[int] = None,
                 onset_intervals: list[float] = None,
@@ -183,7 +187,6 @@ class MusicalUnit ():
                 ):
 
         self.time = time
-        self.pitch_ring = pitch_ring
 
         self.start = start
         self.pitch_intervals = pitch_intervals
@@ -204,8 +207,6 @@ class MusicalUnit ():
         self.clef = clef.TrebleClef()
 
     def mpset(self):
-        # MusicPy structures
-        self.mpscale = structures.scale(str(self.tonic), str(self.mode))
 
         # Binary genome representation
         pitch_interval_bits = 6  # binary 24 pitch intervals
@@ -267,18 +268,14 @@ class MusicalUnit ():
 
         return part_out
 
-        # mp
-        chords_in_scale = self.mpscale % (1234567, 0.5)
-        mpstream_chords = chords_in_scale[0]
-        for i in range(1, DiatonicLayer.HEPTA):
-        #    print (PROGRESSIONS[i])
-            mpstream_chords = mpstream_chords + structures.rest(1 / 2) + chords_in_scale[i]
 
 class Percussion(MusicalUnit):
     def __init__(self):
         super().__init__()
         self.clef = clef.PercussionClef()
         self.instrument = instrument.Woodblock()
+
+        num_timesteps = sum(self.onset_intervals)
 
     def m21note_percusssion(self, midi_pitch, dur=0.5, velocity=100):
         # Create unpitched percussion note by MIDI pitch number
@@ -321,8 +318,6 @@ def triads_in_scale ():
 
     unit = MusicalUnit()
 
-    triads_in_scale = unit.mpscale % (1234567, 1)
-
     for i in range(TwelveTET.HEPTA):
         # m21 Create triad from Roman numeral
         triad = roman.RomanNumeral(i+1, unit.m21scale)
@@ -333,6 +328,12 @@ def triads_in_scale ():
         triad.duration.quarterLength = 4
         unit.stream.append(triad)
         unit.stream.append(note.Rest(quarterLength=4))
+
+    # mp
+    triads_in_scale = unit.mpscale % (1234567, 1)
+    unit.chords = triads_in_scale[0]
+    for i in range(1, TwelveTET.HEPTA):
+        unit.chords += structures.rest(1 / 2) + triads_in_scale[i]
 
 
 def compose_unit ():
@@ -461,25 +462,14 @@ All sequences are of class MeterSequence
 """
 
 def create_rhythm () -> stream.Stream:
-    # Timestep is the smallest rhythm relative unit, represented as integer
-    # Harmonic rhythm: sequential pattern of onsets at timesteps
-    # A rhythm sequence is defined by
-    #  - a sequence of timestep intervals between onsets
-    #
-    # The number of timesteps is the sum of the intervals
 
     comp = Composition('Rhythm')
     time = MusicalTime(8, 4, 4, 100)
-    unit = MusicalUnit(time,
-                       onset_intervals=euclidian_rhythm (3, 8))
+    unit = MusicalUnit(time)
 
-    num_timesteps = sum(rhythm_seq)
-
-    # Apply rhythm in note stream
-    for timestep_interval in rhythm_seq:
-        rhythm_note = note.Note(pitch=DiatonicLayer.DEFAULT_PITCH,
-                                duration=note.Duration(timestep_interval * unit.beat_duration / unit.timesteps_per_beat))
-        unit.stream.append(rhythm_note)
+    onset_intervals = euclidian_rhythm (3, 8)
+    unit.onset_intervals = onset_intervals
+    unit.durations += [s * unit.beat_duration / unit.timesteps_per_beat for s in unit.onset_intervals]
 
     unit.stream_to_part()
     comp.score.append(unit.part)
@@ -502,13 +492,15 @@ def percussion_load ():
 def create_percussion ():
 
     # Create
-    comp = Composition('Percussion', DiatonicLayer.DEFAULT_KEY, MusicalTime.DEFAULT_TIMESIGNATURE, 100)
+    comp = Composition('Percussion')
 
     pchord = percussion.PercussionChord()
 
     # Meter 4/4, 8 timesteps, 0,5 beat per timestep
-    unit_bass = MusicalUnit(
-        8, 4, 4,
+    time = MusicalTime(8, 4, 4, 100)
+
+    unit_bass = Percussion(
+        time,
         0,
         # Onset lines
         # bass drum on beats 1 & 3), snare on 2 & 4,
@@ -518,8 +510,8 @@ def create_percussion ():
         [110, 110, 110, 110, 110, 110, 110, 110])
 
 
-    unit_hihat = MusicalUnit(
-        8, 4, 4,
+    unit_hihat = Percussion(
+        time,
         0,
         # hh on every eighth
         [MIDIpercussion.CLOSED_HIHAT, MIDIpercussion.CLOSED_HIHAT, MIDIpercussion.CLOSED_HIHAT, MIDIpercussion.CLOSED_HIHAT,
@@ -825,8 +817,8 @@ Creation
 """
 
 def stream_create_random_from_list(length,
-                        pitch_set: list[note.Pitch] = DiatonicLayer.DEFAULT_PITCHES,
-                        duration_set: list[note.Duration] = MusicalTime.DEFAULT_DURATIONS) -> stream.Stream:
+                        pitch_set: list[note.Pitch] = None,
+                        duration_set: list[note.Duration] = None) -> stream.Stream:
 
     # Create a random stream from a list of pitches and durations
     stream_out = stream.Stream()
@@ -873,10 +865,13 @@ def idea_tonerow():
     """
     Music21 ToneRow
     """
+    unit = MusicalUnit()
 
     # Music 21 TwelveToneRow
-    chromaticrow = serial.TwelveToneRow(ChromaticLayer.PITCHCLASSES_INT)
+    chromaticrow = serial.TwelveToneRow(TwelveTET.PITCH_CLASS_NUMBERS)
     matrixobj = chromaticrow.matrix()
+
+    serial.TwelveToneRow.matrix()
 
     # Transform pitch sequence in tomerow
     trw01 = serial.ToneRow()

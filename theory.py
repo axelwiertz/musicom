@@ -11,10 +11,13 @@ import itertools
 
 # Music21 modules
 from music21 import interval, meter, tempo
+# MusicPy modules
+from musicpy import structures
 
 class MusicalTime:
-
     # Rhythm and meter
+    # Timestep is the smallest rhythm relative unit, represented as integer
+
     def __init__(self,
                  timesteps: int = 8,
                  beat_note: int = 4,
@@ -291,13 +294,18 @@ class Heptatonic(PitchIntervalPattern):
     
         # Pitch rings for heptatonic modes
         # Major
-        self.majormodeschromatic = TwelveTET.CYCLES * self.modeschromatic[major_mode]
+        self.majormodechromatic = TwelveTET.CYCLES * self.modeschromatic[major_mode]
         # Minor
-        self.minormodeschromatic = TwelveTET.CYCLES * self.modeschromatic[minor_mode]
+        self.minormodechromatic = TwelveTET.CYCLES * self.modeschromatic[minor_mode]
         
         # Major pitch rings for all tonics (C, C#, D, ..., B)
-        self.majorscales = [self.majormodeschromatic[-x:] + self.majormodeschromatic[:-x] for x in range(TwelveTET.TWELVE)]
-        self.minorscales = [self.minormodeschromatic[-x:] + self.minormodeschromatic[:-x] for x in range(TwelveTET.TWELVE)]
+        self.majorscales = [self.majormodechromatic[-x:] + self.majormodechromatic[:-x] for x in range(TwelveTET.TWELVE)]
+        self.minorscales = [self.minormodechromatic[-x:] + self.minormodechromatic[:-x] for x in range(TwelveTET.TWELVE)]
+
+        # MusicPy structures
+        self.tonic = TwelveTET.C  # C
+        self.mode = major_mode  # Ionian
+        self.mpscale = structures.scale(str(self.tonic), str(self.mode))
 
 
 class Register(PitchRing):
@@ -341,16 +349,14 @@ def main():
     pcp5 = Pentatonic()
     pcp7 = Heptatonic()
 
-    m21intervals = (interval.ChromaticInterval(n) for n in TwelveTET.PITCH_CLASS_NUMBERS)
+    m21intervals = list(interval.ChromaticInterval(n) for n in TwelveTET.PITCH_CLASS_NUMBERS)
 
     # Table of all absolute chromatic data along pitch number set
-    chromatic_data = pd.DataFrame([idx for idx in pr.indexes() ]
-                                    + pcp7.majorscales,
-                                  )
+    chromatic_data = pd.DataFrame(pcp7.majorscales)
     chromatic_data.to_excel(Config.DEFAULT_PATH + 'ChromaticLayer.xlsx', index=True, sheet_name='Pitch')
 
     chromatic_table = chromatic_data.transpose()
-    chromatic_table.columns = ['Nr', 'ClassNr', 'ClassChr', 'Freq'] + list(TwelveTET.PITCH_CLASS_NAMES_SHARP)
+    #chromatic_table.columns = ['Nr', 'ClassNr', 'ClassChr', 'Freq'] + list(TwelveTET.PITCH_CLASS_NAMES_SHARP)
     chromatic_table.to_excel(Config.DEFAULT_PATH + 'ChromaticTable.xlsx', index=True, sheet_name='Pitch')
 
     arrHeptaScale = np.array(pcp7.majorscales)
