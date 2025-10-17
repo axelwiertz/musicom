@@ -116,7 +116,6 @@ class TwelveTET:
         return (octave + 1) * self.TWELVE + semitone_index
 
 
-
 class PitchRing(TwelveTET):
     # Chromatic pitch octave ring
     ASCENDING = 1
@@ -141,7 +140,8 @@ class PitchRing(TwelveTET):
                                         for n in self.PITCH_CLASS_NUMBERS)
 
 
-    def index_of(self, pitchclass, octave_idx):
+    @staticmethod
+    def index_of(pitchclass, octave_idx):
         # Get index in pitch ring from (pitchclass, octave)
         return octave_idx * TwelveTET.CYCLES + pitchclass
 
@@ -175,16 +175,28 @@ class Patterns:
     UNDA = 11
     DODECA = 12
 
+    THIRD = 0
+    FOURTH = 1
+    FIFTH = 2
+
+    SCALE = 0
+
     DIMINISHED = 0
     MINOR = 1
     MAJOR = 2
     AUGMENTED = 3
     SUS2 = 4
     SUS4 = 5
-    
-    THIRD = 0
-    FOURTH = 1
-    FIFTH = 2
+
+    MINOR7 = 1
+    MAJOR7 = 2
+    DOMINANT7 = 3
+    MAJOR6 = 4
+    MINOR6 = 5
+    MINOR7_FLAT5 = 6
+
+    NINTH = 1
+    MINOR_NINTH = 2
 
     # Interval patterns for scales and chords
     # pitch_intervals: tuple of interval steps, e.g. (2,2)
@@ -203,19 +215,33 @@ class Patterns:
             SUS4: (5, 2, 5)
         },
         TETRA : {
-            MINOR: (3, 4, 3, 2),
-            MAJOR : (4, 3, 4, 1),
+            MINOR7: (3, 4, 3, 2),
+            MINOR7_FLAT5: (3, 3, 4, 2),
+            MAJOR7 : (4, 3, 4, 1),
+            DOMINANT7: (4, 3, 3, 2),
+            MAJOR6: (4, 3, 2, 3),
+            MINOR6: (3, 4, 2, 3),
             AUGMENTED: (4, 4, 3, 1),
             SUS2: (2, 5, 4, 1),
             SUS4: (5, 2, 4, 1)
         },
-        PENTA: (2, 2, 3, 2, 3),
-        HEPTA: (2, 2, 1, 2, 2, 2, 1),
-        DODECA: (1,1,1,1,1,1,1,1,1,1,1,1)
+        PENTA: {
+            SCALE: (2, 2, 3, 2, 3),
+            NINTH: (4,3,3,4),
+            MINOR_NINTH: (3,4,3,4)
+        },
+        HEPTA: {
+            SCALE : (2, 2, 1, 2, 2, 2, 1)
+        },
+        NONA: {},
+        DECA: {},
+        DODECA: {
+            SCALE: (1,1,1,1,1,1,1,1,1,1,1,1)
         }
+    }
 
 
-class PitchIntervalPattern(PitchRing):
+class PitchIntervalPattern(Patterns):
     def __init__(self,
                  pitch_intervals : tuple = None):
         super().__init__()
@@ -233,7 +259,8 @@ class PitchIntervalPattern(PitchRing):
         # Permutations: ordered set
         self.degree_permutations = list(itertools.permutations (self.degrees ) )
 
-    def sequence_permutations (self, sequence: list | tuple) -> list:
+    @staticmethod
+    def sequence_permutations (sequence: list | tuple) -> list:
         permutations = [sequence[x:]+sequence[:x] for x in range(len(sequence))]
         return permutations
 
@@ -255,14 +282,14 @@ class TetraChord (PitchIntervalPattern):
 
 class Pentatonic(PitchIntervalPattern):
     def __init__(self):
-        # 4 Tetra patterns:
-        super().__init__(Patterns.pitch_intervals_dict[Patterns.PENTA])
+        # 5 Penta patterns:
+        super().__init__(self.pitch_intervals_dict[self.PENTA][self.SCALE])
 
 class Heptatonic(PitchIntervalPattern):
     # Heptatonic (7 pitch class) scale
     def __init__(self):
-        # 4 Tetra patterns:
-        super().__init__(Patterns.pitch_intervals_dict[Patterns.HEPTA])
+        # 7 Hepta patterns:
+        super().__init__(self.pitch_intervals_dict[self.HEPTA][self.SCALE])
 
         # Heptatonic modes:
         # 1. Ionian = Major 2. Dorian, 3. Phrygian, 4. Lydian, 5. Mixolydian, 6. Aeolian = Minor, 7. Locrian
@@ -359,7 +386,7 @@ def main():
     #chromatic_table.columns = ['Nr', 'ClassNr', 'ClassChr', 'Freq'] + list(TwelveTET.PITCH_CLASS_NAMES_SHARP)
     chromatic_table.to_excel(Config.DEFAULT_PATH + 'ChromaticTable.xlsx', index=True, sheet_name='Pitch')
 
-    arrHeptaScale = np.array(pcp7.majorscales)
+    hepta_major_arr = np.array(pcp7.majorscales)
 
     pc_circle = Circle(TwelveTET.TWELVE, TwelveTET.PITCH_CLASS_NAMES_SHARP, 'Pitch class circle')
     pc_circle.show()
