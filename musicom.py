@@ -179,16 +179,16 @@ class MusicalUnit ():
 
     def __init__(self,
                 time: MusicalTime = MusicalTime(),
-                start : int = None,
-                pitch_intervals: list[int] = None,
-                onset_intervals: list[float] = None,
-                durations: list[float] = None,
-                velocities: list[int] = None,
+                pitch_nodes : list [int] = (),
+                pitch_intervals: list[int] = (),
+                onset_intervals: list[float] = (),
+                durations: list[float] = (),
+                velocities: list[int] = (),
                 ):
 
         self.time = time
 
-        self.start = start
+        self.pitch_nodes = pitch_nodes
         self.pitch_intervals = pitch_intervals
         self.onset_intervals = onset_intervals
         self.durations = durations
@@ -217,18 +217,18 @@ class MusicalUnit ():
         self.totalbits = pitch_interval_bits + duration_bits + onset_interval_bits + velocity_bits
 
     def unit_to_chord(self):
-        self.chord += structures.chord(self.pitches, self.durations, self.onset_intervals)
+        self.chord += structures.chord(self.pitch_nodes, self.durations, self.onset_intervals)
 
     def unit_to_stream (self):
         # Create a stream with notes and rests
         # Iterate over the list of pitches, intervals, durations and velocities
-        for i in range(len(self.pitches)):
+        for i in range(len(self.pitch_nodes)):
             # Add notes and rests to the stream
             restduration = self.onset_intervals[i] - self.durations[i]
             if restduration > 0:
                 self.stream.append(note.Rest(quarterLength=restduration))
             else:
-                new_note = note.Note(pitch=self.pitches[i], quarterLength=self.durations[i])
+                new_note = note.Note(pitch=self.pitch_nodes[i], quarterLength=self.durations[i])
                 new_note.volume.velocity = self.velocities[i]
                 self.stream.append(new_note)
 
@@ -287,8 +287,8 @@ class Percussion(MusicalUnit):
     def add_chord_to_unit (self, chord_pitches, duration=4):
 
         for p in chord_pitches:
-            self.pitches += [p]
-            self.pitch_intervals += self.pitches[-1] - self.pitches[-2] if len(self.pitches) > 1 else 0
+            self.pitch_nodes += [p]
+            self.pitch_intervals += self.pitch_nodes[-1] - self.pitch_nodes[-2] if len(self.pitch_nodes) > 1 else 0
             self.onset_intervals += [0]
             self.durations += [duration]
             self.velocities += [100]
@@ -772,7 +772,7 @@ def create_harmonic():
     unit = MusicalUnit(8,4,4,
                             pitches= ['E4', 'D4', 'B3', 'B-3', 'E-4', 'D-4', 'C4', 'G3', 'A3'])
 
-    for bass_pitch in unit.pitches:
+    for bass_pitch in unit.pitch_nodes:
         random_harmonics = random.sample(range(4,21), random.randrange(3, 6))
         new_chord = chord_create_harmonic(bass_pitch, random_harmonics)
 
