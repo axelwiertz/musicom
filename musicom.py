@@ -34,14 +34,18 @@ class Composition:
                  form: list = None,
                  tonic: str = None,
                  mode: int = None,
-                 progression: list = None
+                 progression: list = None,
+                voices : list = None,
+                 instruments: list = None
                 ):
 
+        self.title = title
         self.form = form
         self.tonic = tonic
         self.mode = mode
         self.progression = None
-        self.voices = 0
+        self.voices = voices
+        self.instruments = instruments
 
         # Music21 score
         self.score = stream.Score()
@@ -199,25 +203,27 @@ class MusicalUnit ():
         # mp
         self.chord = structures.chord([])
 
-    def m21set(self):
-        # Music21 structures
-        self.m21key = key.Key()
-        self.m21scale = scale.MajorScale()
-        self.m21instrument = instrument.Piano()
-        self.clef = clef.TrebleClef()
+    def __add__(self, other):
+        # Combine two musical units
+        new_unit = MusicalUnit()
+        new_unit.pitch_nodes = self.pitch_nodes + other.pitch_nodes
+        new_unit.pitch_intervals = self.pitch_intervals + other.pitch_intervals
+        new_unit.onset_intervals = self.onset_intervals + other.onset_intervals
+        new_unit.durations = self.durations + other.durations
+        new_unit.velocities = self.velocities + other.velocities
 
-    def mpset(self):
+        # m21
+        new_unit.stream = copy.deepcopy(self.stream)
+        new_unit.stream.append(other.stream)
 
-        # Binary genome representation
-        pitch_interval_bits = 6  # binary 24 pitch intervals
-        max_pitch_interval = pow(2, pitch_interval_bits - 1)
-        duration_bits = 4  # binary 8 timesteps
-        onset_interval_bits = 4  # binary 8 timesteps
-        velocity_bits = 4  # binary 8 levels
-        self.totalbits = pitch_interval_bits + duration_bits + onset_interval_bits + velocity_bits
+        # mp
+        new_unit.chord = self.chord + other.chord
+
+        return new_unit
+
 
     def unit_to_chord(self):
-        self.chord += structures.chord(self.pitch_nodes, self.durations, self.onset_intervals)
+        self.chord = structures.chord(self.pitch_nodes, self.durations, self.onset_intervals, self.velocities)
 
     def unit_to_stream (self):
         # Create a stream with notes and rests
@@ -238,28 +244,9 @@ class MusicalUnit ():
         # Modulate
         self.chord = self.chord.modulation(sclSource, sclTarget)
 
-    def play (self, time: MusicalTime):
-        mp.play (self.chord, bpm=time.bpm, instrument=self.instrument.midiProgram)
-
-    def genome_to_unit(self, genome: Genome):
-        # Transform a generated genome into a unit
-        # Split genome in parts of 'bits' length
-        numparts = len(genome) % self.totalbits
-        genes_binary = []
-        for i in range(numparts):
-            # Extract binary elements
-            genes_binary += [genome[(i * self.totalbits):(i * self.totalbits) + self.totalbits]]
-
-        for gene_binary in genes_binary:
-            pitch_nr = int(sum([bit * pow(2, i) for i, bit in enumerate(gene_binary)]))
-
     def stream_to_part (self) -> stream.Part:
         # Transfer notes, rests and chords from the original stream to a new Part
         part_out = stream.Part()
-        # Add instrument of part
-        part_out.insert(0, self.instrument)
-        # Add clef of part
-        part_out.insert(0, self.clef)
 
         # Create a part and add notes, rests and chords
         for element in self.stream:
@@ -267,6 +254,9 @@ class MusicalUnit ():
                 part_out.append(element)
 
         return part_out
+
+    def play (self, instrument: instrument.Instrument = instrument.Piano()):
+        mp.play (self.chord, bpm=self.time.bpm, instrument=instrument.midiProgram)
 
 
 class Percussion(MusicalUnit):
@@ -298,12 +288,14 @@ def progression_in_scale (chord_progressions: list,
                             key_in: key.Key):
     # Chord progression patterns in a key
     unit = MusicalUnit()
+    pcp7 = Heptatonic()
+
     # mp
-    unit.chord = unit.mpscale.chord_progression(chord_progressions[0])
+    unit.chord = pcp7.mpscale.chord_progression(chord_progressions[0])
     for i in range(1, len(chord_progressions)-1):
-        chd02 = unit.mpscale.chord_progression(chord_progressions[i], durations=1 / 2, intervals=0, volumes=None,
+        chd02 = pcp7.mpscale.chord_progression(chord_progressions[i], durations=1 / 2, intervals=0, volumes=None,
                                         chords_interval=None)
-        unit.chord += structures.rest(1 / 2) + chd02
+        unit.chord += chd02
 
         # m21 Add rest between progressions
         unit.stream.append(note.Rest(quarterLength=4))
@@ -317,10 +309,11 @@ def progression_in_scale (chord_progressions: list,
 def triads_in_scale ():
 
     unit = MusicalUnit()
+    scale = Heptatonic()
 
-    for i in range(TwelveTET.HEPTA):
+    for i in range(scale.HEPTA):
         # m21 Create triad from Roman numeral
-        triad = roman.RomanNumeral(i+1, unit.m21scale)
+        triad = roman.RomanNumeral(i+1, scale.m21scale)
         chord_pitches = triad.pitches
         # Unit
         unit.add_chord_to_unit (chord_pitches)
@@ -330,9 +323,9 @@ def triads_in_scale ():
         unit.stream.append(note.Rest(quarterLength=4))
 
     # mp
-    triads_in_scale = unit.mpscale % (1234567, 1)
+    triads_in_scale = scale.mpscale % (1234567, 1)
     unit.chords = triads_in_scale[0]
-    for i in range(1, TwelveTET.HEPTA):
+    for i in range(1, scale.HEPTA):
         unit.chords += structures.rest(1 / 2) + triads_in_scale[i]
 
 
@@ -340,20 +333,20 @@ def compose_unit ():
 
     # Create a musical unit
     time = MusicalTime(16, 4, 4, 120)
-    pitch_ring = PitchRing()
+    pitch_pattern = Heptatonic()
+    pitch_pattern.m21scale = scale.MajorScale()
+    pitch_ring = PitchHelix()
     unit1 = MusicalUnit(time,
-                        pitches=[0, pitch_ring.index_of(TwelveTET.C,4),
+                        pitch_nodes=[0, pitch_ring.index_of(TwelveTET.C,4),
                                     pitch_ring.index_of(TwelveTET.E,4)],
-                        start = pitch_ring.index_of(TwelveTET.C,4),
                         pitch_intervals=[0, 4],
                         onset_intervals=[8, 3, 5],
                         durations=[0, 3, 5],
-                        velocities=[0, 100, 100],
-                        m21scale=scale.MajorScale())
+                        velocities=[0, 100, 100])
 
     # Insert several new notes in m21 stream
-    new_note_1 = note.Note(pitch=89, quarterLength=MusicalTime.QUARTER/4)
-    new_note_2 = note.Note(pitch=93, quarterLength=MusicalTime.DEFAULT_DURATION)
+    new_note_1 = note.Note(pitch=89, quarterLength=time.QUARTER/4)
+    new_note_2 = note.Note(pitch=93, quarterLength=time.QUARTER/4)
     unit1.stream.insertAndShift([2, new_note_1, 2.75, new_note_2])
 
 
@@ -389,15 +382,25 @@ def create_markov ():
 
 def create_population():
     # Create a genetic composition
-    pip = PitchIntervalPattern()
     time = MusicalTime(8, 4, 4, 100)
+    scale7 = Heptatonic()
     comp = Composition('Genetic '+str(int(datetime.now().timestamp())),
-                       pip,
+                       [0,1,1,0],
+                       scale7,
                        time,
                        120)
 
     def fitness_func(genome: Genome) -> int:
         return sum(genome)
+
+    unit = MusicalUnit()
+    # Binary genome representation
+    pitch_interval_bits = 6  # binary 24 pitch intervals
+    max_pitch_interval = pow(2, pitch_interval_bits - 1)
+    onset_interval_bits = 4  # binary 8 timesteps
+    duration_bits = 4  # binary 8 timesteps
+    velocity_bits = 4  # binary 8 levels
+    totalbits = pitch_interval_bits + duration_bits + onset_interval_bits + velocity_bits
 
     # Run the genetic algorithm
     final_population, generations = run_evolution(
@@ -415,8 +418,22 @@ def create_population():
     # Convert best genome to musical unit
     unit = MusicalUnit()
     unit.genome_to_unit (final_population[0])
+    # Transform a generated genome into a unit
+    # Split genome in parts of 'bits' length
+    numparts = len(genome) % totalbits
+    genes_binary = []
+    for i in range(numparts):
+        # Extract binary elements
+        genes_binary += [genome[(i * totalbits):(i * totalbits) + totalbits]]
+
+    for gene_binary in genes_binary:
+        pitch_nr = int(sum([bit * pow(2, i) for i, bit in enumerate(gene_binary)]))
+
+
     unit.instrument = instrument.Piano()
     unit.stream_to_part()
+    # Add clef of part
+    unit.part.insert(0, clef.TrebleClef())
     comp.score.append(unit.part)
 
     comp.analysis()

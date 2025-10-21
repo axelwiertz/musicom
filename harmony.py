@@ -3,7 +3,7 @@ Music - Harmony
 Patterns and rules
 """
 
-class OnsetPattern:
+class OnsetIntervalPattern:
     TWO = (1, 1)
     THREE = (1, 1, 1)
     FOUR =  (1, 1, 1, 1)

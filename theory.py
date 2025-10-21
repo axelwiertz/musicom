@@ -10,7 +10,7 @@ import pandas as pd
 import itertools
 
 # Music21 modules
-from music21 import interval, meter, tempo
+from music21 import interval, meter, tempo, key, scale, note
 # MusicPy modules
 from musicpy import structures
 
@@ -60,6 +60,7 @@ class TwelveTET:
     CYCLES = 9  # Number of octaves in the pitch set
 
     PITCH_CLASS_NAMES_SHARP = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
+    PITCH_CLASS_NAMES_FLATMAP = {'D': 'C#', 'E': 'D#', 'G': 'F#', 'A': 'G#', 'B': 'A#', 'C': 'B', 'F': 'E'}
 
     CENTS : float = 100  # Cents in semitone
 
@@ -105,19 +106,18 @@ class TwelveTET:
             accidental = rest[0]
             rest = rest[1:]
         octave = int(rest) if rest else 4
-        note = base
+        idx = base
         if accidental == '#':
-            note += '#'
+            idx += '#'
         elif accidental == 'b':
             # convert flat to equivalent sharp
-            flat_map = {'D':'C#','E':'D#','G':'F#','A':'G#','B':'A#','C':'B','F':'E'}
-            note = flat_map.get(base, base)
-        semitone_index = self.PITCH_CLASS_NAMES_SHARP.index(note)
+            idx = self.PITCH_CLASS_NAMES_FLATMAP.get(base, base)
+        semitone_index = self.PITCH_CLASS_NAMES_SHARP.index(idx)
         return (octave + 1) * self.TWELVE + semitone_index
 
 
-class PitchRing(TwelveTET):
-    # Chromatic pitch octave ring
+class PitchHelix(TwelveTET):
+    # Chromatic pitch helix
     ASCENDING = 1
     DESCENDING = -1
     def __init__(self):
@@ -175,6 +175,7 @@ class Patterns:
     UNDA = 11
     DODECA = 12
 
+
     THIRD = 0
     FOURTH = 1
     FIFTH = 2
@@ -227,8 +228,6 @@ class Patterns:
         },
         PENTA: {
             SCALE: (2, 2, 3, 2, 3),
-            NINTH: (4,3,3,4),
-            MINOR_NINTH: (3,4,3,4)
         },
         HEPTA: {
             SCALE : (2, 2, 1, 2, 2, 2, 1)
@@ -237,6 +236,12 @@ class Patterns:
         DECA: {},
         DODECA: {
             SCALE: (1,1,1,1,1,1,1,1,1,1,1,1)
+        },
+    }
+    multicycle_patterns = {
+        14: {
+            NINTH: (4, 3, 3, 4, 10),
+            MINOR_NINTH: (3, 4, 3, 4, 10)
         }
     }
 
@@ -251,7 +256,7 @@ class PitchIntervalPattern(Patterns):
 
 
         # Scale modes and chord positions - permutations of interval sequence
-        self.modes = self.sequence_permutations (self.pitch_intervals)
+        self.modes = self.sequence_rotations (self.pitch_intervals)
 
         # Pitch ring steps
         self.modeschromatic = [interval_to_step(self.modes[x]) for x in range(len(self.modes))]
@@ -260,82 +265,101 @@ class PitchIntervalPattern(Patterns):
         self.degree_permutations = list(itertools.permutations (self.degrees ) )
 
     @staticmethod
-    def sequence_permutations (sequence: list | tuple) -> list:
-        permutations = [sequence[x:]+sequence[:x] for x in range(len(sequence))]
-        return permutations
+    def sequence_rotations (sequence: list | tuple) -> list:
+        rotations = [sequence[x:]+sequence[:x] for x in range(len(sequence))]
+        return rotations
+
+class MusicalScale(PitchIntervalPattern):
+    def __init__(self,
+                cardinality: int = None,
+                pattern: int = None,
+                 tonic : int = None,
+                 mode : int = None):
+        super().__init__(Patterns.pitch_intervals_dict[cardinality][pattern])
+        self.tonic = tonic
+        self.mode = mode
+
+        # MusicPy structures
+        self.mpscale = structures.scale(str(self.tonic), str(self.mode))
+
+        # Music21 structures
+        self.m21key = key.Key(note.Pitch(midi=tonic), mode=self.mode)
+        self.m21scale = scale.ConcreteScale(key=self.m21key)
 
 
-
-class Triad (PitchIntervalPattern):
+class Triad (MusicalScale):
     # 3 Triad scale Patterns
     def __init__(self):
         # 3 Tria patterns:
-        super().__init__(Patterns.pitch_intervals_dict[Patterns.TRIA][Patterns.MAJOR])
+        super().__init__(Patterns.TRIA, Patterns.MAJOR)
 
 
-class TetraChord (PitchIntervalPattern):
+class TetraChord (MusicalScale):
     # 4 Tetra scale Patterns
     def __init__(self):
         # 4 Tetra patterns:
-        super().__init__(Patterns.pitch_intervals_dict[Patterns.TETRA][Patterns.MAJOR])
+        super().__init__(Patterns.TETRA, Patterns.MAJOR7)
 
 
-class Pentatonic(PitchIntervalPattern):
+class Pentatonic(MusicalScale):
     def __init__(self):
         # 5 Penta patterns:
-        super().__init__(self.pitch_intervals_dict[self.PENTA][self.SCALE])
+        super().__init__(self.PENTA, self.SCALE)
 
-class Heptatonic(PitchIntervalPattern):
+class Heptatonic(MusicalScale):
     # Heptatonic (7 pitch class) scale
+    # 7 Hepta scale modes:
+    # 1. Ionian = Major 2. Dorian, 3. Phrygian, 4. Lydian, 5. Mixolydian, 6. Aeolian = Minor, 7. Locrian
+    ionian = major_mode = 0
+    dorian = 1
+    phrygian = 2
+    lydian = 3
+    myxolydian = 4
+    aeolian = minor_mode = 5
+    locrian = 6
+
+    # 7 Hepta scale degree functions
+    degree_functions = {1: 'tonic', 2: 'supertonic', 3: 'mediant', 4: 'subdominant', 5: 'dominant', 6: 'submediant',
+                        7: 'leading tone'}
+
+    # 7 Hepta scale - Triad degrees
+    triad_degrees = {1: ("I", "i"), 2: ('ii', 'ii0'), 3: ('iii', 'III'), 4: ('IV', 'iv'), 5: ('V', 'V'),
+                     6: ('vi', 'VI'), 7: ('vii0', 'vii0')}
+
     def __init__(self):
         # 7 Hepta patterns:
-        super().__init__(self.pitch_intervals_dict[self.HEPTA][self.SCALE])
+        super().__init__(self.HEPTA, self.SCALE)
 
-        # Heptatonic modes:
-        # 1. Ionian = Major 2. Dorian, 3. Phrygian, 4. Lydian, 5. Mixolydian, 6. Aeolian = Minor, 7. Locrian
-        ionian = major_mode = 0
-        dorian = 1
-        phrygian = 2
-        lydian = 3
-        myxolydian = 4
-        aeolian = minor_mode = 5
-        locrian = 6
-
-        # 7 Hepta scale degree functions
-        degree_functions = {1:'tonic', 2:'supertonic', 3:'mediant', 4:'subdominant', 5:'dominant', 6:'submediant', 7:'leading tone'}
-        # 7 Hepta Interval classes
-        perfectintervals = ('P1','P4','P5','P8')
-        imperfectintervals = ('M2','m3','M3','m6','M6','m7','M7')
-    
-        perfectintervallist = [interval.DiatonicInterval(interval.Specifier.PERFECT, 1),
-                    interval.DiatonicInterval(interval.Specifier.PERFECT, 4),
-                    interval.DiatonicInterval(interval.Specifier.PERFECT, 5),
-                    interval.DiatonicInterval(interval.Specifier.PERFECT, 8)]
-    
-        intervallist = [interval.DiatonicInterval(interval.Specifier.MAJOR, 2),
-                    interval.DiatonicInterval(interval.Specifier.MINOR, 3) ]
-    
-        # 7 Hepta scale - Triad degrees
-        triad_degrees = {1:("I","i"), 2:('ii','ii0'), 3:('iii','III'), 4:('IV','iv'), 5:('V','V'), 6:('vi','VI'), 7: ('vii0','vii0')}
-    
-    
         # Pitch rings for heptatonic modes
         # Major
-        self.majormodechromatic = TwelveTET.CYCLES * self.modeschromatic[major_mode]
+        self.majormodechromatic = TwelveTET.CYCLES * self.modeschromatic[self.major_mode]
         # Minor
-        self.minormodechromatic = TwelveTET.CYCLES * self.modeschromatic[minor_mode]
+        self.minormodechromatic = TwelveTET.CYCLES * self.modeschromatic[self.minor_mode]
         
         # Major pitch rings for all tonics (C, C#, D, ..., B)
         self.majorscales = [self.majormodechromatic[-x:] + self.majormodechromatic[:-x] for x in range(TwelveTET.TWELVE)]
         self.minorscales = [self.minormodechromatic[-x:] + self.minormodechromatic[:-x] for x in range(TwelveTET.TWELVE)]
 
-        # MusicPy structures
-        self.tonic = TwelveTET.C  # C
-        self.mode = major_mode  # Ionian
-        self.mpscale = structures.scale(str(self.tonic), str(self.mode))
+class MusicalInterval:
+    # Musical intervals
+    def __init__(self, semitones=0):
+        self.semitones = semitones
+        self.cents = TwelveTET().interval_cents(semitones)
+
+        # 7 Hepta Interval classes
+        perfectintervals = ('P1', 'P4', 'P5', 'P8')
+        imperfectintervals = ('M2', 'm3', 'M3', 'm6', 'M6', 'm7', 'M7')
+
+        perfectintervallist = [interval.DiatonicInterval(interval.Specifier.PERFECT, 1),
+                               interval.DiatonicInterval(interval.Specifier.PERFECT, 4),
+                               interval.DiatonicInterval(interval.Specifier.PERFECT, 5),
+                               interval.DiatonicInterval(interval.Specifier.PERFECT, 8)]
+
+        intervallist = [interval.DiatonicInterval(interval.Specifier.MAJOR, 2),
+                        interval.DiatonicInterval(interval.Specifier.MINOR, 3)]
 
 
-class Register(PitchRing):
+class Register(PitchHelix):
     def __init__(self, pitchclass_start=TwelveTET.A, octave_start=0, pitchclass_end=TwelveTET.C, octave_end=8):
         super().__init__()  
         self.index_start = self.index_of(pitchclass_start, octave_start)
@@ -361,7 +385,7 @@ def main():
 
     
     time = MusicalTime()
-    pr = PitchRing()
+    pr = PitchHelix()
 
     # Piano register from A0 to C8
     reg = Register(t.A, 0, t.C, 8)
