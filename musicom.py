@@ -221,9 +221,19 @@ class MusicalUnit ():
 
         return new_unit
 
+    def nodes_to_intervals(self):
+        self.pitch_intervals = [self.pitch_nodes[i+1]-self.pitch_nodes[i] for i in range(len(self.pitch_nodes)-1)]
+
 
     def unit_to_chord(self):
         self.chord = structures.chord(self.pitch_nodes, self.durations, self.onset_intervals, self.velocities)
+
+    def chord_to_unit(self):
+        self.pitch_nodes = self.chord.notes
+        self.nodes_to_intervals()
+        self.durations = self.chord.get_duration()
+        self.onset_intervals = self.chord.interval
+        self.velocities = self.chord.get_volume()
 
     def unit_to_stream (self):
         # Create a stream with notes and rests
@@ -237,6 +247,34 @@ class MusicalUnit ():
                 new_note = note.Note(pitch=self.pitch_nodes[i], quarterLength=self.durations[i])
                 new_note.volume.velocity = self.velocities[i]
                 self.stream.append(new_note)
+
+    def stream_to_unit (self):
+        # Convert m21 stream to unit
+        # via chord
+        self.stream_to_chord()
+        self.chord_to_unit()
+        # direct
+        """
+        for i in range(len(self.pitch_nodes)):
+            # Add notes and rests to the unit
+            if isinstance(element, note.Note):
+                self.pitch_nodes += self.stream[i].pitch.midi
+
+            if isinstance(element, note.Rest):
+                restduration = self.onset_intervals[i] - self.durations[i]
+                self.velocities[i] += self.stream[i].volume.velocity
+
+        self.nodes_to_intervals()
+        """
+
+    def stream_to_chord (self):
+        # convert music21 score to musicpy piece
+        self.chord = m21_to_mpy(self.stream)
+
+    def chord_to_stream (self):
+        # convert musicpy piece to music21 score
+        self.stream = mpy_to_m21(self.chord)
+
 
     def modulate (self,
                     sclSource : structures.scale,
@@ -496,7 +534,11 @@ def create_rhythm () -> stream.Stream:
 def percussion_load ():
     # Load
     comp = Composition('Percussion')
-    comp.load('midipercussion.mid')
+    unit = MusicalUnit()
+    comp.load('r_son.mid')
+    unit.stream = comp.score.flatten()
+    unit.stream_to_unit()
+
     comp.analysis()
     comp.load('midipercussionmidi.mid')
 
@@ -785,9 +827,9 @@ def stream_create_harmonic (fundamental_pitch : note.Pitch = note.Pitch('A2'),
 def create_harmonic():
 
     comp = Composition('Harmonic sequence and chords')
-
-    unit = MusicalUnit(8,4,4,
-                            pitches= ['E4', 'D4', 'B3', 'B-3', 'E-4', 'D-4', 'C4', 'G3', 'A3'])
+    time = MusicalTime(8,4,4)
+    unit = MusicalUnit(time,
+                            pitch_nodes= ['E4', 'D4', 'B3', 'B-3', 'E-4', 'D-4', 'C4', 'G3', 'A3'])
 
     for bass_pitch in unit.pitch_nodes:
         random_harmonics = random.sample(range(4,21), random.randrange(3, 6))
@@ -821,7 +863,8 @@ def main():
 
     #create_harmonic()
 
-    create_percussion()
+    percussion_load()
+    #create_percussion()
     #create_balfolk()
     #create_counterpoint()
 
