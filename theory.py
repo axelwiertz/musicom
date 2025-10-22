@@ -14,7 +14,7 @@ from music21 import interval, meter, tempo, key, scale, note
 # MusicPy modules
 from musicpy import structures
 
-class MusicalTime:
+class MusicTime:
     # Rhythm and meter
     # Timestep is the smallest rhythm relative unit, represented as integer
 
@@ -123,7 +123,7 @@ class PitchHelix(TwelveTET):
     def __init__(self):
         super().__init__()
         # Represent as list of (pitchclass, octave): (0, 4)
-        self.ring = [(pitch_class, octave_idx)
+        self.helix = [(pitch_class, octave_idx)
                      for octave_idx in range(self.CYCLES)
                      for pitch_class in range(self.TWELVE)]
 
@@ -147,21 +147,28 @@ class PitchHelix(TwelveTET):
 
     def get_at(self, i):
         # Get (pitchclass, octave) at index i in pitch ring
-        return self.ring[i % len(self.ring)]
+        return self.helix[i % len(self.helix)]
 
     def transpose(self, i, interval_steps, direction=ASCENDING):
         # Transpose index i by interval_steps in direction (ASCENDING or DESCENDING)
-        return (i + direction*interval_steps) % len(self.ring)
+        return (i + direction*interval_steps) % len(self.helix)
 
     def length(self):
         # Length of pitch ring
-        return len(self.ring)
+        return len(self.helix)
 
     def indexes(self):
-        return list(range(len(self.ring)))
+        return list(range(len(self.helix)))
+
+class Register(PitchHelix):
+    def __init__(self, pitchclass_start=TwelveTET.A, octave_start=0, pitchclass_end=TwelveTET.C, octave_end=8):
+        super().__init__()
+        self.index_start = self.index_of(pitchclass_start, octave_start)
+        self.index_end = self.index_of(pitchclass_end, octave_end) + 1
+        self.register = self.helix[self.index_start:self.index_end]
 
 
-class Patterns:
+class Diatonic:
     # Diatonic patterns: intervals, scales, modes, chords
     DI = 2
     TRIA = 3
@@ -246,10 +253,9 @@ class Patterns:
     }
 
 
-class PitchIntervalPattern(Patterns):
+class PitchIntervalPattern:
     def __init__(self,
                  pitch_intervals : tuple = None):
-        super().__init__()
 
         self.pitch_intervals = pitch_intervals
         self.degrees = tuple(range(1, len(pitch_intervals) + 1))
@@ -275,7 +281,7 @@ class MusicalScale(PitchIntervalPattern):
                 pattern: int = None,
                  tonic : int = None,
                  mode : int = None):
-        super().__init__(Patterns.pitch_intervals_dict[cardinality][pattern])
+        super().__init__(Diatonic.pitch_intervals_dict[cardinality][pattern])
         self.tonic = tonic
         self.mode = mode
 
@@ -291,20 +297,21 @@ class Triad (MusicalScale):
     # 3 Triad scale Patterns
     def __init__(self):
         # 3 Tria patterns:
-        super().__init__(Patterns.TRIA, Patterns.MAJOR)
+        super().__init__(Diatonic.TRIA, Diatonic.MAJOR)
 
 
 class TetraChord (MusicalScale):
     # 4 Tetra scale Patterns
     def __init__(self):
         # 4 Tetra patterns:
-        super().__init__(Patterns.TETRA, Patterns.MAJOR7)
+        super().__init__(Diatonic.TETRA, Diatonic.MAJOR7)
 
 
 class Pentatonic(MusicalScale):
     def __init__(self):
         # 5 Penta patterns:
-        super().__init__(self.PENTA, self.SCALE)
+        super().__init__(Diatonic.PENTA, Diatonic.SCALE)
+
 
 class Heptatonic(MusicalScale):
     # Heptatonic (7 pitch class) scale
@@ -328,17 +335,18 @@ class Heptatonic(MusicalScale):
 
     def __init__(self):
         # 7 Hepta patterns:
-        super().__init__(self.HEPTA, self.SCALE)
+        super().__init__(Diatonic.HEPTA, Diatonic.SCALE)
 
-        # Pitch rings for heptatonic modes
+        # Pitch helixes for heptatonic modes
         # Major
-        self.majormodechromatic = TwelveTET.CYCLES * self.modeschromatic[self.major_mode]
+        self.majormodehelix = TwelveTET.CYCLES * self.modeschromatic[self.major_mode]
         # Minor
-        self.minormodechromatic = TwelveTET.CYCLES * self.modeschromatic[self.minor_mode]
+        self.minormodehelix = TwelveTET.CYCLES * self.modeschromatic[self.minor_mode]
         
         # Major pitch rings for all tonics (C, C#, D, ..., B)
-        self.majorscales = [self.majormodechromatic[-x:] + self.majormodechromatic[:-x] for x in range(TwelveTET.TWELVE)]
-        self.minorscales = [self.minormodechromatic[-x:] + self.minormodechromatic[:-x] for x in range(TwelveTET.TWELVE)]
+        self.majorscales = [self.majormodehelix[-x:] + self.majormodehelix[:-x] for x in range(TwelveTET.TWELVE)]
+        self.minorscales = [self.minormodehelix[-x:] + self.minormodehelix[:-x] for x in range(TwelveTET.TWELVE)]
+
 
 class MusicalInterval:
     # Musical intervals
@@ -359,14 +367,6 @@ class MusicalInterval:
                         interval.DiatonicInterval(interval.Specifier.MINOR, 3)]
 
 
-class Register(PitchHelix):
-    def __init__(self, pitchclass_start=TwelveTET.A, octave_start=0, pitchclass_end=TwelveTET.C, octave_end=8):
-        super().__init__()  
-        self.index_start = self.index_of(pitchclass_start, octave_start)
-        self.index_end = self.index_of(pitchclass_end, octave_end) + 1
-        self.register = self.ring[self.index_start:self.index_end]
-
-
 class PitchClassSet:
     def __init__(self, num_items=3):
 
@@ -384,7 +384,7 @@ def main():
     print("Cents between 440 and 466.16:", t.cents_between(440.0, 466.1637615180899))
 
     
-    time = MusicalTime()
+    time = MusicTime()
     pr = PitchHelix()
 
     # Piano register from A0 to C8
@@ -398,19 +398,19 @@ def main():
 
     triad = Triad()
     pcp5 = Pentatonic()
-    pcp7 = Heptatonic()
+    scale7 = Heptatonic()
 
     m21intervals = list(interval.ChromaticInterval(n) for n in TwelveTET.PITCH_CLASS_NUMBERS)
 
     # Table of all absolute chromatic data along pitch number set
-    chromatic_data = pd.DataFrame(pcp7.majorscales)
+    chromatic_data = pd.DataFrame(scale7.majorscales)
     chromatic_data.to_excel(Config.DEFAULT_PATH + 'ChromaticLayer.xlsx', index=True, sheet_name='Pitch')
 
     chromatic_table = chromatic_data.transpose()
     #chromatic_table.columns = ['Nr', 'ClassNr', 'ClassChr', 'Freq'] + list(TwelveTET.PITCH_CLASS_NAMES_SHARP)
     chromatic_table.to_excel(Config.DEFAULT_PATH + 'ChromaticTable.xlsx', index=True, sheet_name='Pitch')
 
-    hepta_major_arr = np.array(pcp7.majorscales)
+    hepta_major_arr = np.array(scale7.majorscales)
 
     pc_circle = Circle(TwelveTET.TWELVE, TwelveTET.PITCH_CLASS_NAMES_SHARP, 'Pitch class circle')
     pc_circle.show()

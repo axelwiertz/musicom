@@ -1,5 +1,5 @@
 """
-Music Composition Assistant
+Music MusicComposition Assistant
 """
 import platform
 import copy
@@ -25,9 +25,9 @@ from music21 import metadata, stream, roman, midi, converter, analysis, instrume
 from musicpy import musicpy as mp, algorithms, structures
 from music21py import *
 
-class Composition: 
+class MusicComposition: 
     """
-    Composition main structure
+    MusicComposition main structure
     """
     def __init__(self,
                  title: str = None,
@@ -56,7 +56,7 @@ class Composition:
         # MusicPy piece
         self.piece = structures.piece
 
-    def set_time(self, time : MusicalTime):
+    def set_time(self, time : MusicTime):
         # Set the time signature, key signature and tempo
         self.score.insert(0, time.timesignature)
         self.score.insert(0, tempo.MetronomeMark(number=time.bpm))
@@ -72,11 +72,11 @@ class Composition:
                     instrument: int = MIDIinstrument.PIANO):
         mp.play(self.piece(track_number), instrument=instrument, wait=True)
 
-    def m21score_to_mppiece (self):
+    def score_to_piece (self):
         # convert music21 score to musicpy piece
         self.piece = m21_to_mpy(self.score)
 
-    def mppiece_to_m21score (self):
+    def piece_to_score (self):
         # convert musicpy piece to music21 score
         self.score = mpy_to_m21(self.piece)
 
@@ -182,7 +182,7 @@ class MusicalUnit ():
     # The number of timesteps is the sum of the intervals
 
     def __init__(self,
-                time: MusicalTime = MusicalTime(),
+                time: MusicTime = MusicTime(),
                 pitch_nodes : list [int] = (),
                 pitch_intervals: list[int] = (),
                 onset_intervals: list[float] = (),
@@ -223,7 +223,6 @@ class MusicalUnit ():
 
     def nodes_to_intervals(self):
         self.pitch_intervals = [self.pitch_nodes[i+1]-self.pitch_nodes[i] for i in range(len(self.pitch_nodes)-1)]
-
 
     def unit_to_chord(self):
         self.chord = structures.chord(self.pitch_nodes, self.durations, self.onset_intervals, self.velocities)
@@ -296,8 +295,20 @@ class MusicalUnit ():
     def play (self, instrument: instrument.Instrument = instrument.Piano()):
         mp.play (self.chord, bpm=self.time.bpm, instrument=instrument.midiProgram)
 
+    def add_pitch (self, pitch, duration : int = 1, onset_interval : int = 1, velocity: int = 100):
+        self.pitch_nodes += [pitch]
+        self.pitch_intervals += [self.pitch_nodes[-1] - self.pitch_nodes[-2] if len(self.pitch_nodes) > 1 else 0]
+        self.onset_intervals += [onset_interval]
+        self.durations += [duration]
+        self.velocities += [100]
 
-class Percussion(MusicalUnit):
+    def add_pitches_vertical (self, pitches, duration=4):
+        for p in pitches:
+            self.add_pitch(p,0, duration)
+
+
+class PercussionUnit(MusicalUnit):
+
     def __init__(self):
         super().__init__()
         self.clef = clef.PercussionClef()
@@ -312,65 +323,44 @@ class Percussion(MusicalUnit):
         n.volume.velocity = velocity
         return n
 
-    def add_chord_to_unit (self, chord_pitches, duration=4):
-
-        for p in chord_pitches:
-            self.pitch_nodes += [p]
-            self.pitch_intervals += self.pitch_nodes[-1] - self.pitch_nodes[-2] if len(self.pitch_nodes) > 1 else 0
-            self.onset_intervals += [0]
-            self.durations += [duration]
-            self.velocities += [100]
 
 
-def progression_in_scale (chord_progressions: list,
-                            key_in: key.Key):
+def progression_in_scale (chord_progression: list[int],
+                            scale7 = Heptatonic() ):
     # Chord progression patterns in a key
-    unit = MusicalUnit()
-    pcp7 = Heptatonic()
-
+    comp = MusicComposition('Chord progressions',
+                       [0],
+                       'C',
+                       scale7.major_mode,
+                       chord_progression,
+                       [0]
+                       )
+    time = MusicTime(4,4,4)
+    unit = MusicalUnit(time)
     # mp
-    unit.chord = pcp7.mpscale.chord_progression(chord_progressions[0])
-    for i in range(1, len(chord_progressions)-1):
-        chd02 = pcp7.mpscale.chord_progression(chord_progressions[i], durations=1 / 2, intervals=0, volumes=None,
-                                        chords_interval=None)
-        unit.chord += chd02
-
-        # m21 Add rest between progressions
-        unit.stream.append(note.Rest(quarterLength=4))
-        for j in range (0, len(chord_progressions[i])):
-            # m21 Create chord from Roman numeral
-            chord01 = roman.RomanNumeral (chord_progressions[i][j], keyOrScale=key_in)
-            chord01.duration.quarterLength = 4
-            unit.stream.append(chord01)
+    unit.chord = scale7.mpscale.chord_progression(chord_progression,
+                            durations=1 / 2,
+                            intervals=0,
+                            volumes=None,
+                            chords_interval=None)
+    # m21
+    for i in range (len(chord_progression)):
+        # m21 Create chord from Roman numeral
+        chord01 = roman.RomanNumeral (chord_progression[i], keyOrScale=scale7.m21scale)
+        chord01.duration.quarterLength = 4
+        unit.stream.append(chord01)
 
 
 def triads_in_scale ():
 
-    unit = MusicalUnit()
-    scale = Heptatonic()
-
-    for i in range(scale.HEPTA):
-        # m21 Create triad from Roman numeral
-        triad = roman.RomanNumeral(i+1, scale.m21scale)
-        chord_pitches = triad.pitches
-        # Unit
-        unit.add_chord_to_unit (chord_pitches)
-        # m21
-        triad.duration.quarterLength = 4
-        unit.stream.append(triad)
-        unit.stream.append(note.Rest(quarterLength=4))
-
-    # mp
-    triads_in_scale = scale.mpscale % (1234567, 1)
-    unit.chords = triads_in_scale[0]
-    for i in range(1, scale.HEPTA):
-        unit.chords += structures.rest(1 / 2) + triads_in_scale[i]
+    progression_in_scale([1,2,3,4,5,6,7], Heptatonic())
 
 
-def compose_unit ():
+
+def compose_unit (scale):
 
     # Create a musical unit
-    time = MusicalTime(16, 4, 4, 120)
+    time = MusicTime(16, 4, 4, 120)
     pitch_pattern = Heptatonic()
     pitch_pattern.m21scale = scale.MajorScale()
     pitch_ring = PitchHelix()
@@ -383,9 +373,12 @@ def compose_unit ():
                         velocities=[0, 100, 100])
 
     # Insert several new notes in m21 stream
-    new_note_1 = note.Note(pitch=89, quarterLength=time.QUARTER/4)
-    new_note_2 = note.Note(pitch=93, quarterLength=time.QUARTER/4)
+    new_note_1 = note.Note(pitch=89, quarterLength=time.M21_QUARTER/4)
+    new_note_2 = note.Note(pitch=93, quarterLength=time.M21_QUARTER/4)
     unit1.stream.insertAndShift([2, new_note_1, 2.75, new_note_2])
+
+    # mp
+    triads_in_scale = scale.mpscale % (1234567, 1)
 
 
 class MarkovChain:
@@ -409,24 +402,25 @@ class MarkovChain:
 
 def create_markov ():
 
+    time = MusicTime()
     mc = MarkovChain([('C4', 1), ('E4', 1), ('G4', 1), ('C5', 1), ('E4', 1), ('G4', 1)])
     gen_pitches = mc.sample('C4', length=16)
 
     # fixed duration 1 quarter for simplicity
     part = stream.Part()
     for p in gen_pitches:
-        part.append(note.Note(p, quarterLength=4/MusicalTime.QUARTER))
+        part.append(note.Note(p, quarterLength=4/time.M21_QUARTER))
 
 
 def create_population():
-    # Create a genetic composition
-    time = MusicalTime(8, 4, 4, 100)
+    # Create a genetic MusicComposition
+    time = MusicTime(8, 4, 4, 100)
     scale7 = Heptatonic()
-    comp = Composition('Genetic '+str(int(datetime.now().timestamp())),
+    comp = MusicComposition('Genetic '+str(int(datetime.now().timestamp())),
                        [0,1,1,0],
-                       scale7,
-                       time,
-                       120)
+                       'C',
+                        Heptatonic().major_mode)
+
 
     def fitness_func(genome: Genome) -> int:
         return sum(genome)
@@ -455,7 +449,8 @@ def create_population():
 
     # Convert best genome to musical unit
     unit = MusicalUnit()
-    unit.genome_to_unit (final_population[0])
+
+    genome = final_population[0]
     # Transform a generated genome into a unit
     # Split genome in parts of 'bits' length
     numparts = len(genome) % totalbits
@@ -471,8 +466,8 @@ def create_population():
     unit.instrument = instrument.Piano()
     unit.stream_to_part()
     # Add clef of part
-    unit.part.insert(0, clef.TrebleClef())
-    comp.score.append(unit.part)
+    comp.score.insert(0, clef.TrebleClef())
+    comp.score.append(unit.stream)
 
     comp.analysis()
     comp.score_show()
@@ -516,27 +511,26 @@ music21.meter.TimeSignature.
 All sequences are of class MeterSequence
 """
 
-def create_rhythm () -> stream.Stream:
+def create_rhythm ():
 
-    comp = Composition('Rhythm')
-    time = MusicalTime(8, 4, 4, 100)
+    time = MusicTime(8, 4, 4, 100)
+    comp = MusicComposition('Rhythm',[0])
     unit = MusicalUnit(time)
 
-    onset_intervals = euclidian_rhythm (3, 8)
-    unit.onset_intervals = onset_intervals
-    unit.durations += [s * unit.beat_duration / unit.timesteps_per_beat for s in unit.onset_intervals]
+    unit.onset_intervals = euclidian_rhythm (3, 8)
 
-    unit.stream_to_part()
-    comp.score.append(unit.part)
+    
+    comp.score.append(unit.stream_to_part())
     comp.score_show()
 
 
 def percussion_load ():
     # Load
-    comp = Composition('Percussion')
+    comp = MusicComposition('Percussion')
     unit = MusicalUnit()
     comp.load('r_son.mid')
     unit.stream = comp.score.flatten()
+    part_stream = stream.Stream(comp.score)
     unit.stream_to_unit()
 
     comp.analysis()
@@ -551,14 +545,14 @@ def percussion_load ():
 def create_percussion ():
 
     # Create
-    comp = Composition('Percussion')
+    comp = MusicComposition('Percussion')
 
     pchord = percussion.PercussionChord()
 
     # Meter 4/4, 8 timesteps, 0,5 beat per timestep
-    time = MusicalTime(8, 4, 4, 100)
+    time = MusicTime(8, 4, 4, 100)
 
-    unit_bass = Percussion(
+    unit_bass = PercussionUnit (
         time,
         0,
         # Onset lines
@@ -569,7 +563,7 @@ def create_percussion ():
         [110, 110, 110, 110, 110, 110, 110, 110])
 
 
-    unit_hihat = Percussion(
+    unit_hihat = PercussionUnit (
         time,
         0,
         # hh on every eighth
@@ -584,11 +578,11 @@ def create_percussion ():
 
     unit_bass.unit_to_stream()
     unit_bass.stream_to_part()
-    comp.score.append(unit_bass.part)
+    comp.score.append(unit_bass.stream)
 
     unit_hihat.unit_to_stream()
     unit_hihat.stream_to_part()
-    comp.score.append(unit_hihat.part)
+    comp.score.append(unit_hihat.stream)
 
     comp.score_show()
     comp.write_to_midi()
@@ -617,45 +611,47 @@ def project_big_yellow_taxi():
     # Big Yellow Taxi
     main_key = key.Key('Bb', 'major')
 
-    comp = Composition('Big yellow taxi', main_key,meter.TimeSignature('4/4'))
+    scale7 = Heptatonic()
 
-    comp.score.append(
-        serial.ToneRow (
-        ['B3', 'C#4', 'E4', 'E4', 'F#4', 'C#4', 'E4', 'E4', 'F#4', 'E4', 'G#3', 'B3', 'B3', 'C#4',
-        'E4', 'F#4', 'B3', 'B3', 'F#4', 'F#4', 'F#4', 'G#4', 'F#4', 'E4', 'E4']
+    time = MusicTime(8,4,4)
+    comp = MusicComposition('Big yellow taxi',[0], 'Bb', scale7.major_mode)
+
+    unit = MusicalUnit(time,
+        scale7.name_to_midi (['B3', 'C#4', 'E4', 'E4', 'F#4', 'C#4', 'E4', 'E4', 'F#4', 'E4', 'G#3', 'B3', 'B3', 'C#4',
+        'E4', 'F#4', 'B3', 'B3', 'F#4', 'F#4', 'F#4', 'G#4', 'F#4', 'E4', 'E4'])
         )
-    )
     # Analyze score
     comp.analysis()
 
 def project_berendans():
     # Berendans
-    main_key = key.Key('Bb', 'major')
-    comp = Composition('Berendans',main_key,meter.TimeSignature('4/4'))
+    scale7 = Heptatonic()
 
-    comp.progression = ['I', 'V', 'I']
-
-
+    comp = MusicComposition('Berendans',
+                       [0],
+                       'Bb',
+                       scale7.major_mode,
+                       ['I', 'V', 'I'])
 
 
 
 def create_new ():
     # Create new score template
-    # Form
-    num_voices = 3
-    form = ('A', 'A', 'B', "A")
-    form_num_measures = (8, 8, 8, 8)
+    scale7 = MusicalScale(7,)
+    comp = MusicComposition('New',
+                       (0, 0, 1, 0),
+                       'C',
+                        scale7.major_mode,
+                       [],
+                       [],
+                       [])
 
+    time = MusicTime(4,4,4)
 
-    main_key = key.Key('C', 'major')
-    main_scale = scale.MajorScale ('C')
-    main_scale = scale.MelodicMinorScale ('C')
-
-    comp = Composition('New score', main_key, meter.TimeSignature('4/4'))
-
-    pitches_list = [main_scale.pitches[0:3],
+    pitches_list = [scale7.pitches[0:3],
                     ["G4", "A4", "B4", "C5"]]
 
+    unit = MusicalUnit()
 
     # Create three voices for melody and accompaniment
     # Motifs of voices
@@ -710,7 +706,7 @@ def create_balfolk ():
 
     # Bourrée-inspired melody (typical Balfolk rhythm)
 
-    comp = Composition('Balfolk',main_key,meter.TimeSignature('6/8'))
+    comp = MusicComposition('Balfolk',main_key,meter.TimeSignature('6/8'))
     melody_part = stream.Part()
     bass_part = stream.Part()
     comp.score.append(melody_part)
@@ -759,7 +755,7 @@ def create_counterpoint():
     main_scale = scale.MajorScale ('C')
 
     # Counterpoint
-    comp = Composition('Counterpoint', main_key,meter.TimeSignature('4/4'))
+    comp = MusicComposition('Counterpoint', main_key,meter.TimeSignature('4/4'))
 
     length = 16  # Length of the counterpoint
     voice1 = stream_create_random_from_list(length)
@@ -782,9 +778,9 @@ def create_key_library (key_in: key.Key):
     # Create a score with library elements
 
     # Common chord progressions
-    comp = Composition('Chord progressions and triads in C', key_in,meter.TimeSignature('4/4'))
+    comp = MusicComposition('Chord progressions and triads in C', key_in,meter.TimeSignature('4/4'))
 
-    time = MusicalTime(4, 4, 4)
+    time = MusicTime(4, 4, 4)
     unit = MusicalUnit()
 
     unit.set_triads_in_key(key_in, 1)
@@ -826,8 +822,8 @@ def stream_create_harmonic (fundamental_pitch : note.Pitch = note.Pitch('A2'),
 
 def create_harmonic():
 
-    comp = Composition('Harmonic sequence and chords')
-    time = MusicalTime(8,4,4)
+    comp = MusicComposition('Harmonic sequence and chords')
+    time = MusicTime(8,4,4)
     unit = MusicalUnit(time,
                             pitch_nodes= ['E4', 'D4', 'B3', 'B-3', 'E-4', 'D-4', 'C4', 'G3', 'A3'])
 
@@ -838,7 +834,7 @@ def create_harmonic():
         transpose_by = interval.Interval(new_chord[0], bass_pitch)
 
         new_chord.transpose(transpose_by, inPlace=True)
-        new_chord.duration = note.Duration(random.choice([MusicalTime.QUARTER/2, MusicalTime.QUARTER/1]))
+        new_chord.duration = note.Duration(random.choice([MusicTime.QUARTER/2, MusicTime.QUARTER/1]))
 
         unit.stream.append(new_chord)
 
