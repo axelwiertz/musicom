@@ -1,6 +1,7 @@
 """
 Music theory
 """
+
 from library import *
 
 # General modules
@@ -182,7 +183,6 @@ class Diatonic:
     UNDA = 11
     DODECA = 12
 
-
     THIRD = 0
     FOURTH = 1
     FIFTH = 2
@@ -214,6 +214,7 @@ class Diatonic:
             FOURTH: (6, 6),
             FIFTH: (7, 5)
         },
+        # 3 Triad scale Patterns
         TRIA:  {
             DIMINISHED: (3, 3, 6),
             MINOR: (3, 4, 5),
@@ -252,69 +253,6 @@ class Diatonic:
         }
     }
 
-
-class PitchIntervalPattern:
-    def __init__(self,
-                 pitch_intervals : tuple = None):
-
-        self.pitch_intervals = pitch_intervals
-        self.degrees = tuple(range(1, len(pitch_intervals) + 1))
-
-
-        # Scale modes and chord positions - permutations of interval sequence
-        self.modes = self.sequence_rotations (self.pitch_intervals)
-
-        # Pitch ring steps
-        self.modeschromatic = [interval_to_step(self.modes[x]) for x in range(len(self.modes))]
-
-        # Permutations: ordered set
-        self.degree_permutations = list(itertools.permutations (self.degrees ) )
-
-    @staticmethod
-    def sequence_rotations (sequence: list | tuple) -> list:
-        rotations = [sequence[x:]+sequence[:x] for x in range(len(sequence))]
-        return rotations
-
-class MusicalScale(PitchIntervalPattern):
-    def __init__(self,
-                cardinality: int = None,
-                pattern: int = None,
-                 tonic : int = None,
-                 mode : int = None):
-        super().__init__(Diatonic.pitch_intervals_dict[cardinality][pattern])
-        self.tonic = tonic
-        self.mode = mode
-
-        # MusicPy structures
-        self.mpscale = structures.scale(str(self.tonic), str(self.mode))
-
-        # Music21 structures
-        self.m21key = key.Key(note.Pitch(midi=tonic), mode=self.mode)
-        self.m21scale = scale.ConcreteScale(key=self.m21key)
-
-
-class Triad (MusicalScale):
-    # 3 Triad scale Patterns
-    def __init__(self):
-        # 3 Tria patterns:
-        super().__init__(Diatonic.TRIA, Diatonic.MAJOR)
-
-
-class TetraChord (MusicalScale):
-    # 4 Tetra scale Patterns
-    def __init__(self):
-        # 4 Tetra patterns:
-        super().__init__(Diatonic.TETRA, Diatonic.MAJOR7)
-
-
-class Pentatonic(MusicalScale):
-    def __init__(self):
-        # 5 Penta patterns:
-        super().__init__(Diatonic.PENTA, Diatonic.SCALE)
-
-
-class Heptatonic(MusicalScale):
-    # Heptatonic (7 pitch class) scale
     # 7 Hepta scale modes:
     # 1. Ionian = Major 2. Dorian, 3. Phrygian, 4. Lydian, 5. Mixolydian, 6. Aeolian = Minor, 7. Locrian
     ionian = major_mode = 0
@@ -333,19 +271,48 @@ class Heptatonic(MusicalScale):
     triad_degrees = {1: ("I", "i"), 2: ('ii', 'ii0'), 3: ('iii', 'III'), 4: ('IV', 'iv'), 5: ('V', 'V'),
                      6: ('vi', 'VI'), 7: ('vii0', 'vii0')}
 
-    def __init__(self):
-        # 7 Hepta patterns:
-        super().__init__(Diatonic.HEPTA, Diatonic.SCALE)
 
-        # Pitch helixes for heptatonic modes
-        # Major
-        self.majormodehelix = TwelveTET.CYCLES * self.modeschromatic[self.major_mode]
-        # Minor
-        self.minormodehelix = TwelveTET.CYCLES * self.modeschromatic[self.minor_mode]
-        
-        # Major pitch rings for all tonics (C, C#, D, ..., B)
-        self.majorscales = [self.majormodehelix[-x:] + self.majormodehelix[:-x] for x in range(TwelveTET.TWELVE)]
-        self.minorscales = [self.minormodehelix[-x:] + self.minormodehelix[:-x] for x in range(TwelveTET.TWELVE)]
+class MusicPattern:
+    def __init__(self,
+                 cardinality: int = None,
+                 pattern: int = None
+                 ):
+        self.pitch_intervals = Diatonic.pitch_intervals_dict[cardinality][pattern]
+        self.degrees = tuple(range(1, cardinality + 1))
+
+        # Scale modes and chord positions - permutations of interval sequence
+        self.modes = self.sequence_rotations (self.pitch_intervals)
+
+        # Pitch helix steps
+        self.modeshelix = [interval_to_step(self.modes[x]) for x in range(len(self.modes))]
+
+        # Permutations: ordered set
+        self.degree_permutations = list(itertools.permutations (self.degrees ) )
+
+    @staticmethod
+    def sequence_rotations (sequence: list | tuple) -> list:
+        rotations = [sequence[x:]+sequence[:x] for x in range(len(sequence))]
+        return rotations
+
+class MusicScale(MusicPattern):
+    def __init__(self,
+                cardinality: int = None,
+                pattern: int = None,
+                tonic : int = None,
+                mode : int = None
+                 ):
+        super().__init__(cardinality, pattern)
+        self.tonic = tonic
+        self.mode = mode
+
+        # Heptatonic (7 pitch class) scale
+        if cardinality == Diatonic.HEPTA and pattern == Diatonic.SCALE:
+            # MusicPy structures
+            self.mpscale = structures.scale(str(self.tonic), str(self.mode))
+
+            # Music21 structures
+            self.m21key = key.Key(note.Pitch(midi=tonic), mode=self.mode)
+            self.m21scale = scale.ConcreteScale(key=self.m21key)
 
 
 class MusicalInterval:
@@ -396,21 +363,33 @@ def main():
 
     pcs = PitchClassSet()
 
-    triad = Triad()
-    pcp5 = Pentatonic()
-    scale7 = Heptatonic()
+    scale5Cmajor = MusicScale(Diatonic.PENTA, Diatonic.SCALE, tonic=t.C, mode=Diatonic.major_mode)
+    scale7Cmajor = MusicScale(Diatonic.HEPTA, Diatonic.SCALE, tonic=t.C, mode=Diatonic.major_mode)
 
     m21intervals = list(interval.ChromaticInterval(n) for n in TwelveTET.PITCH_CLASS_NUMBERS)
 
     # Table of all absolute chromatic data along pitch number set
-    chromatic_data = pd.DataFrame(scale7.majorscales)
+    pattern7 = MusicPattern(Diatonic.HEPTA, Diatonic.SCALE)
+    scale7 = MusicScale(Diatonic.HEPTA, Diatonic.SCALE, tonic=TwelveTET.C, mode=Diatonic.major_mode)
+
+    # Pitch helixes for heptatonic modes
+    # Major
+    majormodehelix = TwelveTET.CYCLES * pattern7.modeshelix[Diatonic.major_mode]
+    # Minor
+    minormodehelix = TwelveTET.CYCLES * pattern7.modeshelix[Diatonic.minor_mode]
+
+    # Major mode pitch helixes for all tonics (C, C#, D, ..., B)
+    majorscales = [majormodehelix[-x:] + majormodehelix[:-x] for x in range(TwelveTET.TWELVE)]
+    minorscales = [minormodehelix[-x:] + minormodehelix[:-x] for x in range(TwelveTET.TWELVE)]
+
+    chromatic_data = pd.DataFrame(majorscales)
     chromatic_data.to_excel(Config.DEFAULT_PATH + 'ChromaticLayer.xlsx', index=True, sheet_name='Pitch')
 
     chromatic_table = chromatic_data.transpose()
     #chromatic_table.columns = ['Nr', 'ClassNr', 'ClassChr', 'Freq'] + list(TwelveTET.PITCH_CLASS_NAMES_SHARP)
     chromatic_table.to_excel(Config.DEFAULT_PATH + 'ChromaticTable.xlsx', index=True, sheet_name='Pitch')
 
-    hepta_major_arr = np.array(scale7.majorscales)
+    hepta_major_arr = np.array(majorscales)
 
     pc_circle = Circle(TwelveTET.TWELVE, TwelveTET.PITCH_CLASS_NAMES_SHARP, 'Pitch class circle')
     pc_circle.show()
