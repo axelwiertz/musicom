@@ -9,13 +9,6 @@ from typing import Tuple
 import numpy as np
 import matplotlib.pyplot as plt
 
-class Config:
-    # Default configuration
-    DEFAULT_PATH = 'C:\\temp\\Music\\'
-    DEFAULT_MIDI_FILE_IN = 'in.mid'
-    DEFAULT_MIDI_FILE_OUT = 'out.mid'
-
-
 class MIDIinstrument:
 
     # General MIDI instrument numbers (0-127)
