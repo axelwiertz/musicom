@@ -24,7 +24,7 @@ from music21py import *
 from showscore import show
 
 # Music21 modules: music notation and analysis
-from music21 import metadata, stream, roman, midi, converter, analysis, instrument, percussion, note, chord, key, meter, tempo, clef, harmony, serial, scale, interval
+from music21 import metadata, stream, roman, midi, converter, analysis, instrument, percussion, note, chord, key, tempo, clef, harmony, serial, scale, interval
 # MusicPy modules: computational music structures and algorithms
 from musicpy import musicpy as mp, algorithms, structures
 
@@ -796,28 +796,26 @@ def create_counterpoint():
     comp.save()
 
 
-def create_key_library (tonic : int):
+def create_key_library (scale: MusicScale):
     # Create a score with library elements
     h = PitchHelix()
-    # Common chord progressions
-    comp = MusicComposition('Chord progressions and triads in C', [0,1],
-                            MusicScale(Diatonic.HEPTA, Diatonic.SCALE, tonic, Diatonic.major_mode))
-
     time = MusicTime(4, 4, 4)
-    unit = MusicUnit()
+    # Common chord progressions
+    comp = MusicComposition('Chord progressions and triads',
+                            scale,
+                            [1,2,3,4,5,6,7],
+                            [0,1])
 
-    triads_in_scale = comp.main_scale.mpscale % (1234567, 1)
+    triads_in_scale = MusicUnit(time)
+    triads_in_scale.chord = comp.main_scale.mpscale % (1234567, 1)
 
-
-    comp.score.append(unit.unit_to_part())
-
-    progression_in_scale(ChordHarmony.PROGRESSIONS, comp.scale)
-    comp.score.append(unit.unit_to_part())
+    prog_in_scale = MusicUnit(time)
+    progression_in_scale(ChordHarmony.PROGRESSIONS, comp.main_scale)
 
     comp.analysis()
     comp.score_show()
     # Save score
-    comp.save('chordlibrary_in_key_' + TwelveTET.PITCH_CLASS_NAMES_SHARP(tonic) +'.mid')
+    comp.save('chordlibrary_in_key_' + TwelveTET.PITCH_CLASS_NAMES_SHARP(scale.tonic) +'.mid')
 
 
 def chord_create_harmonic (fundamental_pitch  : note.Pitch = note.Pitch('C4'),
@@ -844,10 +842,10 @@ def stream_create_harmonic (fundamental_pitch : note.Pitch = note.Pitch('A2'),
 
 def create_harmonic():
 
-    comp = MusicComposition('Harmonic sequence and chords')
     time = MusicTime(8,4,4)
+    ph = PitchHelix()
     unit = MusicUnit(time,
-                            pitch_nodes= ['E4', 'D4', 'B3', 'B-3', 'E-4', 'D-4', 'C4', 'G3', 'A3'])
+                            pitch_nodes= ph.name_to_midi( ['E4', 'D4', 'B3', 'B-3', 'E-4', 'D-4', 'C4', 'G3', 'A3']))
 
     for bass_pitch in unit.pitch_nodes:
         random_harmonics = random.sample(range(4,21), random.randrange(3, 6))
@@ -859,6 +857,8 @@ def create_harmonic():
         new_chord.duration = note.Duration(random.choice([MusicTime.QUARTER/2, MusicTime.QUARTER/1]))
 
         unit.stream.append(new_chord)
+
+    comp = MusicComposition('Harmonic sequence and chords')
 
     #harmonic_stream = stream_create_harmonic()
     #harmonic_chord = chord_create_harmonic(note.Pitch('A1'),[5,6,7,9,12,15])
