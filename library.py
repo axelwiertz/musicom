@@ -9,8 +9,10 @@ from typing import Tuple
 import numpy as np
 import matplotlib.pyplot as plt
 
+"""
+MIDI
+"""
 class MIDIinstrument:
-
     # General MIDI instrument numbers (0-127)
     PIANO = 1
     CHURCH_ORGAN = 20
@@ -43,8 +45,16 @@ class MIDIpercussion:
     VIBRASLAP = 58
     WOODBLOCK = 76
 
+"""
+Data structures
+"""
+def sequence_rotations(sequence: list | tuple) -> list:
+    #
+    rotations = [sequence[x:] + sequence[:x] for x in range(len(sequence))]
+    return rotations
 
-def interval_to_step (intervals: list[int]) -> list[int]:
+
+def interval_to_step(intervals: list[int]) -> list[int]:
     # Convert a list of n intervals to a sequential mask with n+1 sequential degree/onset numbers and zeroes
     # Example [2, 3] -> [1, 0, 2, 0, 0, 3]
     steps = []
@@ -52,11 +62,9 @@ def interval_to_step (intervals: list[int]) -> list[int]:
     for x in intervals:
         steps.append(sequence_nr)
         sequence_nr += 1
-        for y in range(1,x):
+        for y in range(1, x):
             steps.append(0)
     return steps
-
-
 
 
 """

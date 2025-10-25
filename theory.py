@@ -1,8 +1,8 @@
 """
 Music theory
 """
-
-from library import *
+from config import Config
+from library import Circle, sequence_rotations, interval_to_step
 
 # General modules
 from math import pow, log2
@@ -272,41 +272,54 @@ class Diatonic:
                      6: ('vi', 'VI'), 7: ('vii0', 'vii0')}
 
 
+    # 7 Hepta Interval classes
+    perfectintervals = ('P1', 'P4', 'P5', 'P8')
+    imperfectintervals = ('M2', 'm3', 'M3', 'm6', 'M6', 'm7', 'M7')
+
+    perfectintervallist = [interval.DiatonicInterval(interval.Specifier.PERFECT, 1),
+                           interval.DiatonicInterval(interval.Specifier.PERFECT, 4),
+                           interval.DiatonicInterval(interval.Specifier.PERFECT, 5),
+                           interval.DiatonicInterval(interval.Specifier.PERFECT, 8)]
+
+    intervallist = [interval.DiatonicInterval(interval.Specifier.MAJOR, 2),
+                    interval.DiatonicInterval(interval.Specifier.MINOR, 3)]
+
+
 class MusicPattern:
     def __init__(self,
                  cardinality: int = None,
-                 pattern: int = None
+                 interval_pattern: int = None
                  ):
-        self.pitch_intervals = Diatonic.pitch_intervals_dict[cardinality][pattern]
+        self.pitch_intervals = Diatonic.pitch_intervals_dict[cardinality][interval_pattern]
         self.degrees = tuple(range(1, cardinality + 1))
-
-        # Scale modes and chord positions - permutations of interval sequence
-        self.modes = self.sequence_rotations (self.pitch_intervals)
-
-        # Pitch helix steps
-        self.modeshelix = [interval_to_step(self.modes[x]) for x in range(len(self.modes))]
-
         # Permutations: ordered set
-        self.degree_permutations = list(itertools.permutations (self.degrees ) )
+        self.degree_permutations = list(itertools.permutations(self.degrees))
 
-    @staticmethod
-    def sequence_rotations (sequence: list | tuple) -> list:
-        rotations = [sequence[x:]+sequence[:x] for x in range(len(sequence))]
-        return rotations
+        # Scale modes and chord positions - rotations of interval sequence
+        self.modes = sequence_rotations(self.pitch_intervals)
+        # Modes on pitch helix
+        self.modeshelix = [interval_to_step(m) for m in self.modes]
+
+    def save (self):
+        pdmodes = pd.DataFrame(self.modes)
+        pdmodeshelix = pd.DataFrame(self.modeshelix)
+
+        pdmodes.to_excel(Config.DEFAULT_PATH + 'interval_patternModes.xlsx', index=True, sheet_name='MusicPattern')
+        pdmodeshelix.to_excel(Config.DEFAULT_PATH + 'interval_patternModesHelix.xlsx', index=True, sheet_name='MusicPattern')
 
 class MusicScale(MusicPattern):
     def __init__(self,
                 cardinality: int = None,
-                pattern: int = None,
+                interval_pattern: int = None,
                 tonic : int = None,
                 mode : int = None
                  ):
-        super().__init__(cardinality, pattern)
+        super().__init__(cardinality, interval_pattern)
         self.tonic = tonic
         self.mode = mode
 
         # Heptatonic (7 pitch class) scale
-        if cardinality == Diatonic.HEPTA and pattern == Diatonic.SCALE:
+        if cardinality == Diatonic.HEPTA and interval_pattern == Diatonic.SCALE:
             # MusicPy structures
             self.mpscale = structures.scale(str(self.tonic), str(self.mode))
 
@@ -321,17 +334,6 @@ class MusicalInterval:
         self.semitones = semitones
         self.cents = TwelveTET().interval_cents(semitones)
 
-        # 7 Hepta Interval classes
-        perfectintervals = ('P1', 'P4', 'P5', 'P8')
-        imperfectintervals = ('M2', 'm3', 'M3', 'm6', 'M6', 'm7', 'M7')
-
-        perfectintervallist = [interval.DiatonicInterval(interval.Specifier.PERFECT, 1),
-                               interval.DiatonicInterval(interval.Specifier.PERFECT, 4),
-                               interval.DiatonicInterval(interval.Specifier.PERFECT, 5),
-                               interval.DiatonicInterval(interval.Specifier.PERFECT, 8)]
-
-        intervallist = [interval.DiatonicInterval(interval.Specifier.MAJOR, 2),
-                        interval.DiatonicInterval(interval.Specifier.MINOR, 3)]
 
 
 class PitchClassSet:
@@ -369,14 +371,15 @@ def main():
     m21intervals = list(interval.ChromaticInterval(n) for n in TwelveTET.PITCH_CLASS_NUMBERS)
 
     # Table of all absolute chromatic data along pitch number set
-    pattern7 = MusicPattern(Diatonic.HEPTA, Diatonic.SCALE)
+    interval_pattern7 = MusicPattern(Diatonic.HEPTA, Diatonic.SCALE)
+    interval_pattern7.save()
     scale7 = MusicScale(Diatonic.HEPTA, Diatonic.SCALE, tonic=TwelveTET.C, mode=Diatonic.major_mode)
 
     # Pitch helixes for heptatonic modes
     # Major
-    majormodehelix = TwelveTET.CYCLES * pattern7.modeshelix[Diatonic.major_mode]
+    majormodehelix = TwelveTET.CYCLES * interval_pattern7.modeshelix[Diatonic.major_mode]
     # Minor
-    minormodehelix = TwelveTET.CYCLES * pattern7.modeshelix[Diatonic.minor_mode]
+    minormodehelix = TwelveTET.CYCLES * interval_pattern7.modeshelix[Diatonic.minor_mode]
 
     # Major mode pitch helixes for all tonics (C, C#, D, ..., B)
     majorscales = [majormodehelix[-x:] + majormodehelix[:-x] for x in range(TwelveTET.TWELVE)]
