@@ -33,14 +33,14 @@ def interval_to_step(intervals: list[int]) -> list[int]:
 Visualization
 """
 class Circle:
-    def __init__(self, num_parts: int = 12,
-                labels : tuple | list  = None,
-                title : str = 'Circle of parts and labels'):
+    def __init__(self,
+                 num_parts: int = 4,
+                labels : list(str) = ('1','2','3','4')):
         self.num_parts = num_parts
         self.labels = labels
-        self.title = title
 
-    def show(self):
+    def show(self,
+                title : str = 'Circle of parts and labels'):
         # Show parts (angles) and labels in circle
 
         # Convert parts to angles
@@ -55,7 +55,7 @@ class Circle:
             ax.text(angle, 1.1, str(label), ha='center', va='center')
 
         # Set the title
-        ax.set_title(self.title)
+        ax.set_title(title)
 
         # Show the plot
         plt.show()
@@ -73,7 +73,7 @@ def show_plot(yvalues: list):
 
 def rhythm_circle ():
     # SHow rhythm in circle
-    rc = Circle(4, ['Down', 'Up','Down', 'Up'], 'Rhythm')
+    rc = Circle(4, ['Down', 'Up','Down', 'Up'])
     rc.show()
 
 

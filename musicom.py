@@ -1,6 +1,7 @@
 """
-Music MusicComposition Assistant
+Music Composition Assistant
 """
+
 from config import Config
 import platform
 import copy
@@ -12,7 +13,7 @@ from collections import defaultdict
 from twelvetet import TwelveTET, MIDIpercussion, MIDIinstrument
 
 # Musical datastructures
-from theory import MusicTime, MusicScale, Diatonic, PitchHelix
+from theory import MusicTime, MusicScale, Diatonic, PitchRegister
 from harmony import ChordHarmony
 
 # Genetic algorithm
@@ -33,22 +34,20 @@ class MusicUnit ():
     # Harmonic rhythm: sequential pattern of onsets at timesteps
     # A rhythm sequence is defined by
     #  - a sequence of timestep intervals between onsets
-    #
-    # The number of timesteps is the sum of the intervals
-
     def __init__(self,
                 time: MusicTime = MusicTime(),
+                register: PitchRegister = PitchRegister(),
                 pitch_nodes : list [int] = (),
                 pitch_intervals: list[int] = (),
                 onset_intervals: list[float] = (),
                 durations: list[float] = (),
                 velocities: list[int] = (),
                 ):
-
         self.time = time
-
+        self.register = register
         self.pitch_nodes = pitch_nodes
         self.pitch_intervals = pitch_intervals
+        # The sum of the intervals is the total number of timesteps in MusicTime
         self.onset_intervals = onset_intervals
         self.durations = durations
         self.velocities = velocities
@@ -161,6 +160,24 @@ class MusicUnit ():
         for p in pitches:
             self.add_pitch(p,0, duration)
 
+    def pitches_transpose (self, interval : int, direction : str = PitchRegister.ASCENDING):
+        # Transpose the unit's pitches by interval in positive or negative direction (ASCENDING or DESCENDING)
+        tonerow = serial.ToneRow(self.pitch_nodes).transpose(interval * direction)
+        # Update pitch nodes
+
+    # Transform pitch sequence in tomerow
+    PRIME = 'P'
+    INVERSION = 'I'
+    RETROGRADE = 'R'
+    RETROGRADE_INVERSION = 'RI'
+
+    def random_select (self):
+        return random.choice ([self.PRIME, self.INVERSION, self.RETROGRADE, self.RETROGRADE_INVERSION])
+
+    def execute (self, pitches : list[int], trans : str, index : int = 0) -> list[int]:
+        # Transform tone row
+        tonerow = serial.ToneRow(pitches).zeroCenteredTransformation (trans, index)
+        return tonerow.pitches.midiNumbers
 
 
 class MusicVoice():
@@ -376,7 +393,7 @@ def compose_unit ():
 
     time = MusicTime(16, 4, 4, 120)
     scale7 = MusicScale(Diatonic.HEPTA, Diatonic.SCALE, TwelveTET.C, Diatonic.major_mode)
-    pitch_helix = PitchHelix()
+    pitch_helix = PitchRegister()
     # Create a musical unit
     unit1 = MusicUnit(time,
                         pitch_nodes=[0, pitch_helix.index_of(TwelveTET.C,4),
@@ -396,7 +413,6 @@ def compose_unit ():
 class MarkovChain:
     # Markov chain of transitions
     def __init__(self, train):
-        # Example training tokens: list of (pitch_name_or_rest, dur)
         # build transition dict for pitches
         self.trans = defaultdict(list)
         for a, b in zip(train, train[1:]):
@@ -414,19 +430,13 @@ class MarkovChain:
 
 def create_markov ():
 
-    time = MusicTime()
     mc = MarkovChain([('C4', 1), ('E4', 1), ('G4', 1), ('C5', 1), ('E4', 1), ('G4', 1)])
     gen_pitches = mc.sample('C4', length=16)
-
-    # fixed duration 1 quarter for simplicity
-    part = stream.Part()
-    for p in gen_pitches:
-        part.append(note.Note(p, quarterLength=4/time.M21_QUARTER))
-
+    print('Generated pitches by Markov chain: ' + str(gen_pitches))
 
 def create_population():
     # Use a genetic algorithm to create a population of musical units
-    ph = PitchHelix()
+    ph = PitchRegister()
     time = MusicTime(8, 4, 4, 100)
     comp = MusicComposition('Genetic '+str(int(datetime.now().timestamp())),
                              MusicScale(Diatonic.HEPTA, Diatonic.SCALE, TwelveTET.C, Diatonic.major_mode))
@@ -560,9 +570,9 @@ def create_percussion ():
 
     # Meter 4/4, 8 timesteps, 0,5 beat per timestep
     time = MusicTime(8, 4, 4, 100)
-
+    reg = PitchRegister()
     unit_bass = MusicUnit (
-        time,
+        time, reg,
         # Onset lines
         # bass drum on beats 1 & 3), snare on 2 & 4,
         [MIDIpercussion.BASS_DRUM, MIDIpercussion.ACOUSTIC_SNARE, MIDIpercussion.BASS_DRUM, MIDIpercussion.ACOUSTIC_SNARE],
@@ -573,7 +583,7 @@ def create_percussion ():
 
 
     unit_hihat = MusicUnit (
-        time,
+        time, reg,
         # hh on every eighth
         [MIDIpercussion.CLOSED_HIHAT, MIDIpercussion.CLOSED_HIHAT, MIDIpercussion.CLOSED_HIHAT, MIDIpercussion.CLOSED_HIHAT,
                          MIDIpercussion.CLOSED_HIHAT, MIDIpercussion.CLOSED_HIHAT, MIDIpercussion.CLOSED_HIHAT, MIDIpercussion.CLOSED_HIHAT],
@@ -620,7 +630,7 @@ def project_big_yellow_taxi():
     # Big Yellow Taxi
 
     t = TwelveTET()
-    helix = PitchHelix()
+    helix = PitchRegister()
 
     time = MusicTime(8,4,4)
     comp = MusicComposition('Big yellow taxi',
@@ -637,7 +647,7 @@ def project_big_yellow_taxi():
 
 def project_berendans():
     # Berendans
-    ph = PitchHelix()
+    ph = PitchRegister()
 
     time = MusicTime(8,4,4)
     comp = MusicComposition('Berendans',
@@ -649,7 +659,7 @@ def create_new ():
     # New composition
     t = TwelveTET()
     time = MusicTime(4,4,4)
-    helix = PitchHelix()
+    helix = PitchRegister()
 
     comp = MusicComposition('New',
                     MusicScale(Diatonic.HEPTA, Diatonic.SCALE, TwelveTET.C, Diatonic.major_mode),
@@ -717,8 +727,8 @@ def create_balfolk ():
     # Style : Balfolk
     # Parts:  melody and bass
     t = TwelveTET()
-    ph = PitchHelix()
-    time = MusicTime(6, 8, 8, 120)
+    ph = PitchRegister()
+    time = MusicTime(6, 6, 8, 120)
     # C major/A minor
     scale7Cmajor = MusicScale(Diatonic.HEPTA, Diatonic.SCALE, t.C, Diatonic.major_mode)
     scale7Aminor = MusicScale(Diatonic.HEPTA, Diatonic.SCALE, t.A, Diatonic.minor_mode)
@@ -775,7 +785,7 @@ def create_balfolk ():
 
 def create_counterpoint():
 
-    h = PitchHelix()
+    h = PitchRegister()
     main_key = key.Key('C', 'major')
     main_scale = scale.MajorScale ('C')
 
@@ -803,7 +813,7 @@ def create_counterpoint():
 
 def create_key_library (scale: MusicScale):
     # Create a score with library elements
-    h = PitchHelix()
+    h = PitchRegister()
     time = MusicTime(4, 4, 4)
     # Common chord progressions
     comp = MusicComposition('Chord progressions and triads',
@@ -823,79 +833,41 @@ def create_key_library (scale: MusicScale):
     comp.save('chordlibrary_in_key_' + TwelveTET.PITCH_CLASS_NAMES_SHARP(scale.tonic) +'.mid')
 
 
-def chord_create_harmonic (fundamental_pitch  : note.Pitch = note.Pitch('C4'),
-                           harmonic_numbers: list[int] = range(1,4)) -> chord.Chord:
+def harmonic_series (fundamental_pitch  : int,
+                           harmonic_numbers: list[int] = range(1,17)) -> chord.Chord:
+    # The harmonic series of a fundamental pitch
 
     harmonic_chord = chord.Chord()
-    for harmonic in harmonic_numbers:
-        new_pitch = fundamental_pitch.getHarmonic(harmonic).midi
-        harmonic_chord.add (note.Note(new_pitch))
-
-    return harmonic_chord
-
-
-def stream_create_harmonic (fundamental_pitch : note.Pitch = note.Pitch('A2'),
-                            harmonic_numbers : list[int] = tuple(range(1,17))) -> stream.Stream:
-
     stream_out = stream.Stream()
     for harmonic in harmonic_numbers:
-        new_pitch = fundamental_pitch.getHarmonic(harmonic).midi
+        new_pitch = note.Pitch(fundamental_pitch).getHarmonic(harmonic)
+        harmonic_chord.add (note.Note(new_pitch.midi))
         stream_out.append (note.Note(new_pitch))
 
-    return stream_out
+    return harmonic_chord
 
 
 def create_harmonic():
 
     t = TwelveTET()
-    ph = PitchHelix()
+    ph = PitchRegister()
 
     time = MusicTime(8,4,4)
     unit = MusicUnit(time,
-                            pitch_nodes= t.name_to_midi( ['E4', 'D4', 'B3', 'Bb3', 'Eb4', 'Db4', 'C4', 'G3', 'A3']))
+                   t.name_to_midi( ['E4', 'D4', 'B3', 'Bb3', 'Eb4', 'Db4', 'C4', 'G3', 'A3']))
 
     for bass_pitch in unit.pitch_nodes:
         random_harmonics = random.sample(range(4,21), random.randrange(3, 6))
-        new_chord = chord_create_harmonic(bass_pitch, random_harmonics)
+        new_chord = harmonic_series(bass_pitch, random_harmonics)
+        new_chord.transpose(interval.Interval(new_chord[0],
+                                              note.Pitch(bass_pitch),
+                            inPlace=True))
 
-        transpose_by = interval.Interval(new_chord[0], bass_pitch)
-
-        new_chord.transpose(transpose_by, inPlace=True)
         new_chord.duration = note.Duration(random.choice([time.M21_QUARTER/2, time.M21_QUARTER/1]))
 
-        unit.stream.append(new_chord)
-
-    comp = MusicComposition('Harmonic sequence and chords')
-
-    #harmonic_stream = stream_create_harmonic()
-    #harmonic_chord = chord_create_harmonic(note.Pitch('A1'),[5,6,7,9,12,15])
-    #harmonic_stream.append(harmonic_chord)
-
-    unit.stream_to_part()
-    comp.score.append(unit.part)
-    comp.analysis()
-    comp.score_show()
+    unit.stream = harmonic_series(note.Pitch('A1').midi,[5,6,7,9,12,15])
 
 
-def main():
-    # Main: create or load, analyze or transform
-
-    #comp = load_and_analyze('Sousta.mid')
-    #comp.score_show()
-
-    #create_rhythm()
-    #create_new()
-
-    #create_harmonic()
-
-    percussion_load()
-    #create_percussion()
-    #create_balfolk()
-    #create_counterpoint()
-
-#    create_Population()
-#    create_key_library(key.Key('C', 'major'))
-#    tonerow()
 
 """
 Creation
@@ -947,21 +919,15 @@ def stream_is_counterpoint(stream1: stream.Stream, stream2: stream.Stream) -> bo
 
 
 def idea_tonerow():
-    """
-    Music21 ToneRow
-    """
-    unit = MusicUnit()
-
-    # Music 21 TwelveToneRow
+    # Music 21 ToneRow
     chromaticrow = serial.TwelveToneRow(TwelveTET.PITCH_CLASS_NUMBERS)
     matrixobj = chromaticrow.matrix()
 
-    serial.TwelveToneRow.matrix()
+    unit = MusicUnit()
+    unit.pitch_nodes = chromaticrow.pitches
+    unit.nodes_to_intervals()
 
-    # Transform pitch sequence in tomerow
-    trw01 = serial.ToneRow()
-    trw02 = tonerow_transform (trw01)
-
+    unit.transform (unit.PRIME, 0)
 
 
 def tonerow_create(tonerow_base: serial.ToneRow = serial.ToneRow(row=[0, 4, 7, 4]),
@@ -976,24 +942,27 @@ def tonerow_create(tonerow_base: serial.ToneRow = serial.ToneRow(row=[0, 4, 7, 4
     return stream_out
 
 
-def tonerow_transform (tonerow_in: serial.ToneRow) -> serial.ToneRow:
 
-    tonerow_out = copy.deepcopy(tonerow_in)
 
-    # P I R RI
-    transformations = ('P', 'I', 'R', 'RI')
-    trans01 = random.choice (transformations)
-    # Transform tone row
-    tonerow_out = tonerow_in.zeroCenteredTransformation (trans01, 0)
+def main():
+    # Main: create or load, analyze or transform
 
-    # Transpose the phrase up by a major third
-    tonerow_out = tonerow_in.transpose("M3")
-    #tonerow_out = tonerow_in.transpose(4)
+    #comp = load_and_analyze('Sousta.mid')
+    #comp.score_show()
 
-    return tonerow_out
+    #create_rhythm()
+    #create_new()
+
+    #create_harmonic()
+
+    percussion_load()
+    #create_percussion()
+    #create_balfolk()
+    #create_counterpoint()
+
+#    create_Population()
+#    create_key_library(key.Key('C', 'major'))
 
 
 if __name__ == '__main__':
     main()
-
-

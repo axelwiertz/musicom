@@ -15,18 +15,17 @@ from music21 import interval, meter, tempo, key, scale, note
 # MusicPy modules
 from musicpy import structures
 
-class MusicTime:
+class MusicTime (Circle):
     # Rhythm and meter
-    # Timestep is the smallest rhythm relative unit, represented as integer
 
     def __init__(self,
-                 timesteps: int = 8,
-                 beat_note: int = 4,
+                 timesteps: int = 8, # Number of timesteps (ticks) per cycle
                  beats_in_measure: int = 4,
+                 beat_note: int = 4,
                  bpm: int = 100):
-
-        # Linking timesteps to meter beats
+        # Timestep is the smallest rhythm relative unit, represented as integer
         self.timesteps = timesteps
+        super().__init__(timesteps, labels=[str(i+1) for i in range(timesteps)])
         # Meter: measure cycle of beats
         self.beats_in_measure = beats_in_measure
         self.beat_note = beat_note
@@ -42,21 +41,22 @@ class MusicTime:
         self.tempo = tempo.MetronomeMark(number=self.bpm)
 
 
-class PitchHelix(Helix):
+class PitchRegister(Helix):
     # Chromatic pitch helix
     ASCENDING = 1
     DESCENDING = -1
-    def __init__(self, num_pitchclasses: int = TwelveTET.TWELVE,
-                        num_octaves: int = TwelveTET.CYCLES,
-                        pitchclass_start=TwelveTET.A,
+    def __init__(self,  pitchclass_start=TwelveTET.A,
                         octave_start=0,
                         pitchclass_end=TwelveTET.C,
-                        octave_end=8):
+                        octave_end=8,
+                        num_pitchclasses: int = TwelveTET.TWELVE,
+                        num_octaves: int = TwelveTET.OCTAVES,
+                      ):
+        # Represent as helix of (pitchclass, octave): (0, 4)
+        super().__init__(num_pitchclasses, num_octaves)
 
-        # Represent as list of (pitchclass, octave): (0, 4)
         self.num_pitchclasses = num_pitchclasses
         self.num_octaves = num_octaves
-        super().__init__(num_pitchclasses, num_octaves)
 
         self.index_start = self.index_of(pitchclass_start, octave_start)
         self.index_end = self.index_of(pitchclass_end, octave_end) + 1
@@ -251,10 +251,10 @@ def main():
     print("440 Hz -> MIDI", t.freq_to_midi(440.0))
     print("Cents between 440 and 466.16:", t.cents_between(440.0, 466.1637615180899))
 
-    time = MusicTime()
+    time = MusicTime(16, 4, 4, 120)
 
     # Piano register from A0 to C8
-    reg = PitchHelix(t.A, 0, t.C, 8)
+    reg = PitchRegister(t.A, 0, t.C, 8)
     
     pos = reg.index_of(3, 7)  # octave 3, pitchclass 7 -> index
     next_pos = reg.transpose(pos,reg.ASCENDING)  # next pitchclass
@@ -262,8 +262,8 @@ def main():
 
     pcs = PitchClassSet()
 
-    scale5Cmajor = MusicScale(Diatonic.PENTA, Diatonic.SCALE, tonic=t.C, mode=Diatonic.major_mode)
-    scale7Cmajor = MusicScale(Diatonic.HEPTA, Diatonic.SCALE, tonic=t.C, mode=Diatonic.major_mode)
+    scale5cmajor = MusicScale(Diatonic.PENTA, Diatonic.SCALE, tonic=t.C, mode=Diatonic.major_mode)
+    scale7cmajor = MusicScale(Diatonic.HEPTA, Diatonic.SCALE, tonic=t.C, mode=Diatonic.major_mode)
 
     m21intervals = list(interval.ChromaticInterval(n) for n in TwelveTET.PITCH_CLASS_NUMBERS)
 
@@ -274,9 +274,9 @@ def main():
 
     # Pitch helixes for heptatonic modes
     # Major
-    majormodehelix = TwelveTET.CYCLES * interval_pattern7.modeshelix[Diatonic.major_mode]
+    majormodehelix = TwelveTET.OCTAVES * interval_pattern7.modeshelix[Diatonic.major_mode]
     # Minor
-    minormodehelix = TwelveTET.CYCLES * interval_pattern7.modeshelix[Diatonic.minor_mode]
+    minormodehelix = TwelveTET.OCTAVES * interval_pattern7.modeshelix[Diatonic.minor_mode]
 
     # Major mode pitch helixes for all tonics (C, C#, D, ..., B)
     majorscales = [majormodehelix[-x:] + majormodehelix[:-x] for x in range(TwelveTET.TWELVE)]
@@ -291,7 +291,7 @@ def main():
 
     hepta_major_arr = np.array(majorscales)
 
-    pc_circle = Circle(TwelveTET.TWELVE, TwelveTET.PITCH_CLASS_NAMES_SHARP, 'Pitch class circle')
+    pc_circle = Circle(TwelveTET.TWELVE, TwelveTET.PITCH_CLASS_NAMES_SHARP)
     pc_circle.show()
 
 #    pc_circle.show(pcp7.majormodeschromatic, TwelveTET.PITCH_CLASS_NAMES_SHARP, 'Major circle')

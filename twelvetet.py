@@ -22,14 +22,14 @@ class TwelveTET:
     A_SHARP = B_FLAT = 10
     B = 11
     PITCH_CLASS_NUMBERS = (C, C_SHARP, D, D_SHARP, E, F, F_SHARP, G, G_SHARP, A, A_SHARP, B)
-    CYCLES = 9  # Number of octaves in the pitch set
+    OCTAVES = 9  # Number of octaves in the pitch set
 
     PITCH_CLASS_NAMES_SHARP = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
     PITCH_CLASS_NAMES_FLATMAP = {'D': 'C#', 'E': 'D#', 'G': 'F#', 'A': 'G#', 'B': 'A#', 'C': 'B', 'F': 'E'}
 
     def __init__(self):
         # Create pitch to frequency mapping
-        self.pitch_numbers = array([x + str(y) for y in range(self.CYCLES) for x in self.PITCH_CLASS_NAMES_SHARP])
+        self.pitch_numbers = array([x + str(y) for y in range(self.OCTAVES) for x in self.PITCH_CLASS_NAMES_SHARP])
 
         self.pitch_freqs = dict(
                             zip(self.pitch_numbers,
