@@ -59,8 +59,10 @@ class PitchRegister(Helix):
         self.num_octaves = num_octaves
 
         self.index_start = self.index_of(pitchclass_start, octave_start)
-        self.index_end = self.index_of(pitchclass_end, octave_end) + 1
+        self.index_end = self.index_of(pitchclass_end, octave_end)
 
+        self.midi = [TwelveTET.name_to_midi(TwelveTET.PITCH_CLASS_NAMES_SHARP[pitchclass]+str(octave))
+                for (pitchclass, octave) in self.helix]
 
     def transpose(self, i, interval_steps, direction=ASCENDING):
         # Transpose index i by interval_steps in direction (ASCENDING or DESCENDING)
@@ -243,27 +245,23 @@ class PitchClassSet:
 
 
 def main():
-    
-    t = TwelveTET()
-    print("A4 ->", t.midi_to_freq(69))
-    print("C4 ->", t.name_to_midi("C4"))
-    print("C4 ->", t.midi_to_freq(t.name_to_midi("C4")))
-    print("440 Hz -> MIDI", t.freq_to_midi(440.0))
-    print("Cents between 440 and 466.16:", t.cents_between(440.0, 466.1637615180899))
-
+    # Music time and meter
     time = MusicTime(16, 4, 4, 120)
-
+    time.show('16 timesteps circle')
     # Piano register from A0 to C8
-    reg = PitchRegister(t.A, 0, t.C, 8)
-    
+    reg = PitchRegister(TwelveTET.A, 0, TwelveTET.C, 8)
+    reg.show()
+
     pos = reg.index_of(3, 7)  # octave 3, pitchclass 7 -> index
     next_pos = reg.transpose(pos,reg.ASCENDING)  # next pitchclass
     octave_pitchclass = reg.get_at(next_pos)
 
     pcs = PitchClassSet()
 
-    scale5cmajor = MusicScale(Diatonic.PENTA, Diatonic.SCALE, tonic=t.C, mode=Diatonic.major_mode)
-    scale7cmajor = MusicScale(Diatonic.HEPTA, Diatonic.SCALE, tonic=t.C, mode=Diatonic.major_mode)
+    scale5cmajor = MusicScale(Diatonic.PENTA, Diatonic.SCALE,
+                              tonic=TwelveTET.C, mode=Diatonic.major_mode)
+    scale7cmajor = MusicScale(Diatonic.HEPTA, Diatonic.SCALE,
+                              tonic=TwelveTET.C, mode=Diatonic.major_mode)
 
     m21intervals = list(interval.ChromaticInterval(n) for n in TwelveTET.PITCH_CLASS_NUMBERS)
 

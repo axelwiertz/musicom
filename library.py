@@ -35,7 +35,7 @@ Visualization
 class Circle:
     def __init__(self,
                  num_parts: int = 4,
-                labels : list(str) = ('1','2','3','4')):
+                labels : list[str] = ('1','2','3','4')):
         self.num_parts = num_parts
         self.labels = labels
 
@@ -77,11 +77,10 @@ def rhythm_circle ():
     rc.show()
 
 
-@dataclass
 class Helix:
     def __init__(self,
-                 turns: int = 4,  # number of full turns
-                points_per_turn: int = 12,  # sampling resolution per turn
+                points_per_turn: int = 4,  # sampling resolution per turn
+                turns: int = 4,  # number of full turns
                 vertical_per_turn: float = 1.0,  # vertical advance per full turn (2π radians)
                 start_angle: float = 0.0,  # radians
                 direction: int = 1  # 1 for right-handed, -1 for left-handed

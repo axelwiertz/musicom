@@ -30,7 +30,7 @@ from music21 import metadata, stream, roman, midi, converter, analysis, instrume
 from musicpy import musicpy as mp, algorithms, structures
 
 
-class MusicUnit ():
+class MusicUnit:
     # Harmonic rhythm: sequential pattern of onsets at timesteps
     # A rhythm sequence is defined by
     #  - a sequence of timestep intervals between onsets
@@ -51,6 +51,8 @@ class MusicUnit ():
         self.onset_intervals = onset_intervals
         self.durations = durations
         self.velocities = velocities
+        #self.refresh()
+        self.timesteps = sum(self.onset_intervals)
 
         # m21
         self.stream =  stream.Stream()
@@ -69,11 +71,16 @@ class MusicUnit ():
         # m21
         new_unit.stream = copy.deepcopy(self.stream)
         new_unit.stream.append(other.stream)
-
         # mp
         new_unit.chord = self.chord + other.chord
 
+        new_unit.refresh()
         return new_unit
+
+    def refresh (self):
+        # Refresh derived attributes
+        self.timesteps = sum(self.onset_intervals)
+
 
     def nodes_to_intervals(self):
         self.pitch_intervals = [self.pitch_nodes[i+1]-self.pitch_nodes[i] for i in range(len(self.pitch_nodes)-1)]
@@ -130,10 +137,10 @@ class MusicUnit ():
 
 
     def modulate (self,
-                    sclSource : structures.scale,
-                    sclTarget : structures.scale):
+                    scale_source : structures.scale,
+                    scale_target : structures.scale):
         # Modulate
-        self.chord = self.chord.modulation(sclSource, sclTarget)
+        self.chord = self.chord.modulation(scale_source, scale_target)
 
     def stream_to_part (self) -> stream.Part:
         # Transfer notes, rests and chords from the original stream to a new Part
@@ -146,24 +153,25 @@ class MusicUnit ():
 
         return part_out
 
-    def play (self, instrument: instrument.Instrument = instrument.Piano()):
-        mp.play (self.chord, bpm=self.time.bpm, instrument=instrument.midiProgram)
+    def chord_play (self, midiinstrument: int = MIDIinstrument.PIANO):
+        mp.play (self.chord, bpm=self.time.bpm, instrument=midiinstrument, wait=True)
 
     def add_pitch (self, pitch, duration : int = 1, onset_interval : int = 1, velocity: int = 100):
         self.pitch_nodes += [pitch]
         self.pitch_intervals += [self.pitch_nodes[-1] - self.pitch_nodes[-2] if len(self.pitch_nodes) > 1 else 0]
         self.onset_intervals += [onset_interval]
         self.durations += [duration]
-        self.velocities += [100]
+        self.velocities += [velocity]
 
     def add_pitches_vertical (self, pitches, duration=4):
         for p in pitches:
             self.add_pitch(p,0, duration)
 
-    def pitches_transpose (self, interval : int, direction : str = PitchRegister.ASCENDING):
+    def pitches_transpose (self, pitch_interval : int, direction : str = PitchRegister.ASCENDING):
         # Transpose the unit's pitches by interval in positive or negative direction (ASCENDING or DESCENDING)
-        tonerow = serial.ToneRow(self.pitch_nodes).transpose(interval * direction)
+        tonerow = serial.ToneRow(self.pitch_nodes).transpose(pitch_interval * direction)
         # Update pitch nodes
+        return tonerow.pitches.midiNumbers
 
     # Transform pitch sequence in tomerow
     PRIME = 'P'
@@ -174,28 +182,28 @@ class MusicUnit ():
     def random_select (self):
         return random.choice ([self.PRIME, self.INVERSION, self.RETROGRADE, self.RETROGRADE_INVERSION])
 
-    def execute (self, pitches : list[int], trans : str, index : int = 0) -> list[int]:
+    def transform (self, trans : str, index : int = 0) -> list[int]:
         # Transform tone row
-        tonerow = serial.ToneRow(pitches).zeroCenteredTransformation (trans, index)
+        tonerow = serial.ToneRow(self.pitch_nodes).zeroCenteredTransformation (trans, index)
         return tonerow.pitches.midiNumbers
 
 
-class MusicVoice():
+class MusicVoice:
     # A musical voice
     def __init__(self,
                  name: str = 'Voice',
-                 instrument: int = MIDIinstrument.PIANO,
+                 midi_instrument: int = MIDIinstrument.PIANO,
                  units: list[MusicUnit] = (),
                  ):
         self.name = name
-        self.instrument = instrument
+        self.midi_instrument = midi_instrument
         self.units = units
 
         self.track = structures.track([], track_name=name,instrument=instrument)
         self.part = stream.Part()
 
     def track_notes(self, i: int = 0, j: int = 4):
-        track_notes = self.track[i:j]
+        return self.track[i:j]
 
     def track_play (self):
         mp.play(self.track, wait=True)
@@ -287,7 +295,7 @@ class MusicComposition:
         print(self.score)
         print(' with key ' + str(key01))
 
-        # Chord analysis
+        # m21 Chord analysis
         chordset = self.score.chordify()
         # Check for specific chords
         for chd01 in chordset.recurse().getElementsByClass(chord.Chord):
@@ -306,12 +314,11 @@ class MusicComposition:
 
         chordset.partName = "Chord analysis"
         self.score.append(chordset)
-
         self.score.makeMeasures(inPlace=True)
-        post = analysis.metrical.labelBeatDepth(self.score)
-
+        # Music21 analysis
+        result = analysis.metrical.labelBeatDepth(self.score)
+        print('Metrical analysis: beat depth' + str(result))
         # MusicPy analysis
-
         str1 = algorithms.detect(self.piece)
         str2 = algorithms.chord_analysis(self.piece)
         str3 = mp.analyze_rhythm(self.piece)
@@ -347,29 +354,22 @@ class PercussionUnit(MusicUnit):
         self.clef = clef.PercussionClef()
         self.instrument = instrument.Woodblock()
 
-        num_timesteps = sum(self.onset_intervals)
 
-    def m21note_percusssion(self, midi_pitch, dur=0.5, velocity=100):
-        # Create unpitched percussion note by MIDI pitch number
-        #        n = note.Unpitched()
-        n = note.Note(pitch=midi_pitch, duration=dur)
-        n.volume.velocity = velocity
-        return n
 
 def progression_in_scale (chord_progression: list[int],
-                            scale : MusicScale ):
+                            music_scale : MusicScale ):
     # Chord progression patterns in a key
     time = MusicTime(4,4,4)
     unit_prog = MusicUnit(time)
     voice_prog = MusicVoice('Chord progression voice', MIDIinstrument.PIANO, [unit_prog])
     comp = MusicComposition('Chord progressions',
-                       scale,
+                       music_scale,
                        chord_progression,
                        [0],
                        [voice_prog]
                        )
     # mp
-    unit_prog.chord = scale.mpscale.chord_progression(
+    unit_prog.chord = music_scale.mpscale.chord_progression(
             chord_progression,
             durations=1 / 2,
             intervals=0,
@@ -378,9 +378,11 @@ def progression_in_scale (chord_progression: list[int],
     # m21
     for i in range (len(chord_progression)):
         # m21 Create chord from Roman numeral
-        chord01 = roman.RomanNumeral (chord_progression[i], keyOrScale=scale.m21scale)
+        chord01 = roman.RomanNumeral (chord_progression[i], keyOrScale=music_scale.m21scale)
         chord01.duration.quarterLength = 4
         unit_prog.stream.append(chord01)
+
+    comp.score_show()
 
 
 def triads_in_scale7 (scale7 : MusicScale):
@@ -389,15 +391,15 @@ def triads_in_scale7 (scale7 : MusicScale):
 
 
 def compose_unit ():
-    t = TwelveTET()
-
+    # Create a musical unit and insert new notes in its stream
     time = MusicTime(16, 4, 4, 120)
+    reg = PitchRegister()
+
     scale7 = MusicScale(Diatonic.HEPTA, Diatonic.SCALE, TwelveTET.C, Diatonic.major_mode)
-    pitch_helix = PitchRegister()
     # Create a musical unit
-    unit1 = MusicUnit(time,
-                        pitch_nodes=[0, pitch_helix.index_of(TwelveTET.C,4),
-                                    pitch_helix.index_of(TwelveTET.E,4)],
+    unit1 = MusicUnit(time, reg,
+                        pitch_nodes=[0, reg.index_of(TwelveTET.C,4),
+                                    reg.index_of(TwelveTET.E,4)],
                         pitch_intervals=[0, 4],
                         onset_intervals=[8, 3, 5],
                         durations=[0, 3, 5],
