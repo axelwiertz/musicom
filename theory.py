@@ -2,11 +2,10 @@
 Music theory
 """
 from config import Config
-from musicmidi import MIDIinstrument, MIDIpercussion, MIDIchannel
-from library import Circle, sequence_rotations, interval_to_step
+from twelvetet import TwelveTET
+from library import Circle, Helix, sequence_rotations, interval_to_step
 
 # General modules
-from math import pow, log2
 import numpy as np
 import pandas as pd
 import itertools
@@ -43,133 +42,29 @@ class MusicTime:
         self.tempo = tempo.MetronomeMark(number=self.bpm)
 
 
-class TwelveTET:
-    # 12-Tone Equal Temperament tuning system
-    TWELVE = 12  # Number of pitch classes 0-11
-    C = 0
-    C_SHARP = D_FLAT = 1
-    D = 2
-    D_SHARP = E_FLAT = 3
-    E = 4
-    F = 5
-    F_SHARP = G_FLAT = 6
-    G = 7
-    G_SHARP = A_FLAT = 8
-    A = 9
-    A_SHARP = B_FLAT = 10
-    B = 11
-    PITCH_CLASS_NUMBERS = (C, C_SHARP, D, D_SHARP, E, F, F_SHARP, G, G_SHARP, A, A_SHARP, B)
-    CYCLES = 9  # Number of octaves in the pitch set
-
-    PITCH_CLASS_NAMES_SHARP = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
-    PITCH_CLASS_NAMES_FLATMAP = {'D': 'C#', 'E': 'D#', 'G': 'F#', 'A': 'G#', 'B': 'A#', 'C': 'B', 'F': 'E'}
-
-    CENTS : float = 100  # Cents in semitone
-
-    A4_FREQ = 440.0  # Frequency of A4
-
-    def __init__(self):
-        self.a4_freq = float(a4_freq)
-        self.a4_midi = int(a4_midi)
-
-    def midi_to_freq(self, midi):
-        """Return frequency (Hz) for given MIDI note number (integer or float)."""
-        return self.a4_freq * pow(2.0, (midi - MIDIpitch.A4) / float(self.TWELVE))
-
-    def freq_to_midi(self, freq):
-        """Return MIDI note number (can be fractional) for a given frequency (Hz)."""
-        return MIDIpitch.A4 + float(self.TWELVE) * log2(freq / self.a4_freq)
-
-    def semitone_ratio(self, n=1):
-        """Return frequency ratio for n semitones: 2^(n/12)."""
-        return pow(2.0, n / float(self.TWELVE))
-
-    def cents_between(self, f1, f2):
-        """Return difference in cents from f1 to f2 (positive if f2 > f1)."""
-        return float(self.TWELVE) * log2(f2 / f1)
-
-    def interval_cents(self, semitones):
-        """Return cents value for given semitone interval."""
-        return semitones * self.CENTS
-
-    def midi_to_name(self, midi):
-        """Return note name (e.g., C4, A4) for integer MIDI. If non-integer, rounds to nearest."""
-        m = int(round(midi))
-        name = self.PITCH_CLASS_NAMES_SHARP[m % self.TWELVE]
-        octave = (m // self.TWELVE) - 1
-        return f"{name}{octave}"
-
-    def name_to_midi(self, name):
-        """Parse note name like 'C#4' or 'A4' to MIDI number. Accepts flats as 'Bb'."""
-        s = name.strip()
-        # handle optional accidental and octave
-        base = s[0].upper()
-        accidental = ''
-        rest = s[1:]
-        if rest and rest[0] in ('#', 'b'):
-            accidental = rest[0]
-            rest = rest[1:]
-        octave = int(rest) if rest else 4
-        idx = base
-        if accidental == '#':
-            idx += '#'
-        elif accidental == 'b':
-            # convert flat to equivalent sharp
-            idx = self.PITCH_CLASS_NAMES_FLATMAP.get(base, base)
-        semitone_index = self.PITCH_CLASS_NAMES_SHARP.index(idx)
-        return (octave + 1) * self.TWELVE + semitone_index
-
-
-class PitchHelix(TwelveTET):
+class PitchHelix(Helix):
     # Chromatic pitch helix
     ASCENDING = 1
     DESCENDING = -1
-    def __init__(self):
-        super().__init__()
+    def __init__(self, num_pitchclasses: int = TwelveTET.TWELVE,
+                        num_octaves: int = TwelveTET.CYCLES,
+                        pitchclass_start=TwelveTET.A,
+                        octave_start=0,
+                        pitchclass_end=TwelveTET.C,
+                        octave_end=8):
+
         # Represent as list of (pitchclass, octave): (0, 4)
-        self.helix = [(pitch_class, octave_idx)
-                     for octave_idx in range(self.CYCLES)
-                     for pitch_class in range(self.TWELVE)]
+        self.num_pitchclasses = num_pitchclasses
+        self.num_octaves = num_octaves
+        super().__init__(num_pitchclasses, num_octaves)
 
-        # Create pitch to frequency mapping
-        keys = np.array([x + str(y) for y in range(self.CYCLES) for x in self.PITCH_CLASS_NAMES_SHARP])
+        self.index_start = self.index_of(pitchclass_start, octave_start)
+        self.index_end = self.index_of(pitchclass_end, octave_end) + 1
 
-        self.pitch_freqs = dict(
-                            zip(keys,
-                                [2 ** ((n + 1 - 49) / 12) * self.a4_freq for n in range(len(keys))]
-                                )
-                            )
-        self.pitch_freqs[''] = 0.0  # stop
-        self.pitch_freqs = tuple(2 ** ((n - MIDIpitch.A4) / self.TWELVE) * self.a4_freq
-                                        for n in self.PITCH_CLASS_NUMBERS)
-
-
-    @staticmethod
-    def index_of(pitchclass, octave_idx):
-        # Get index in pitch ring from (pitchclass, octave)
-        return octave_idx * TwelveTET.CYCLES + pitchclass
-
-    def get_at(self, i):
-        # Get (pitchclass, octave) at index i in pitch ring
-        return self.helix[i % len(self.helix)]
 
     def transpose(self, i, interval_steps, direction=ASCENDING):
         # Transpose index i by interval_steps in direction (ASCENDING or DESCENDING)
         return (i + direction*interval_steps) % len(self.helix)
-
-    def length(self):
-        # Length of pitch ring
-        return len(self.helix)
-
-    def indexes(self):
-        return list(range(len(self.helix)))
-
-class Register(PitchHelix):
-    def __init__(self, pitchclass_start=TwelveTET.A, octave_start=0, pitchclass_end=TwelveTET.C, octave_end=8):
-        super().__init__()
-        self.index_start = self.index_of(pitchclass_start, octave_start)
-        self.index_end = self.index_of(pitchclass_end, octave_end) + 1
-        self.register = self.helix[self.index_start:self.index_end]
 
 
 class Diatonic:
@@ -357,14 +252,13 @@ def main():
     print("Cents between 440 and 466.16:", t.cents_between(440.0, 466.1637615180899))
 
     time = MusicTime()
-    pr = PitchHelix()
 
     # Piano register from A0 to C8
-    reg = Register(t.A, 0, t.C, 8)
+    reg = PitchHelix(t.A, 0, t.C, 8)
     
-    pos = pr.index_of(3, 7)  # octave 3, pitchclass 7 -> index
-    next_pos = pr.transpose(pos,pr.ASCENDING)  # next pitchclass
-    octave_pitchclass = pr.get_at(next_pos)
+    pos = reg.index_of(3, 7)  # octave 3, pitchclass 7 -> index
+    next_pos = reg.transpose(pos,reg.ASCENDING)  # next pitchclass
+    octave_pitchclass = reg.get_at(next_pos)
 
     pcs = PitchClassSet()
 

@@ -9,10 +9,10 @@ from datetime import datetime
 from collections import defaultdict
 #import sound
 
-from library import MIDIpercussion, MIDIinstrument
+from twelvetet import TwelveTET, MIDIpercussion, MIDIinstrument
 
 # Musical datastructures
-from theory import MusicTime, MusicScale, Diatonic, TwelveTET, PitchHelix
+from theory import MusicTime, MusicScale, Diatonic, PitchHelix
 from harmony import ChordHarmony
 
 # Genetic algorithm
@@ -619,14 +619,17 @@ class ChordSet:
 def project_big_yellow_taxi():
     # Big Yellow Taxi
 
+    t = TwelveTET()
+    helix = PitchHelix()
+
     time = MusicTime(8,4,4)
     comp = MusicComposition('Big yellow taxi',
                             MusicScale(Diatonic.HEPTA, Diatonic.SCALE, TwelveTET.B_FLAT, Diatonic.major_mode))
-    helix = PitchHelix()
+
 
     # Create unit
     unit = MusicUnit(time,
-        helix.name_to_midi (name=['B3', 'C#4', 'E4', 'E4', 'F#4', 'C#4', 'E4', 'E4', 'F#4', 'E4', 'G#3', 'B3', 'B3', 'C#4',
+        t.name_to_midi (name=['B3', 'C#4', 'E4', 'E4', 'F#4', 'C#4', 'E4', 'E4', 'F#4', 'E4', 'G#3', 'B3', 'B3', 'C#4',
         'E4', 'F#4', 'B3', 'B3', 'F#4', 'F#4', 'F#4', 'G#4', 'F#4', 'E4', 'E4'])
         )
     # Analyze score
@@ -634,7 +637,7 @@ def project_big_yellow_taxi():
 
 def project_berendans():
     # Berendans
-    h = PitchHelix()
+    ph = PitchHelix()
 
     time = MusicTime(8,4,4)
     comp = MusicComposition('Berendans',
@@ -644,6 +647,7 @@ def project_berendans():
 
 def create_new ():
     # New composition
+    t = TwelveTET()
     time = MusicTime(4,4,4)
     helix = PitchHelix()
 
@@ -667,7 +671,7 @@ def create_new ():
 
     # Create three voices for melody and accompaniment
     # Motifs of voices
-    pitches_list1 = [helix.name_to_midi(['C5', 'D5', 'E5', 'F5']),
+    pitches_list1 = [t.name_to_midi(['C5', 'D5', 'E5', 'F5']),
                     ['C4', 'E4', 'G4'],
                     ['C3']]
     pitches_list12 = [['G5', 'A5', 'B4', 'C5'],
@@ -712,11 +716,12 @@ def create_new ():
 def create_balfolk ():
     # Style : Balfolk
     # Parts:  melody and bass
-    h = PitchHelix()
+    t = TwelveTET()
+    ph = PitchHelix()
     time = MusicTime(6, 8, 8, 120)
     # C major/A minor
-    scale7Cmajor = MusicScale(Diatonic.HEPTA, Diatonic.SCALE, h.C, Diatonic.major_mode)
-    scale7Aminor = MusicScale(Diatonic.HEPTA, Diatonic.SCALE, h.A, Diatonic.minor_mode)
+    scale7Cmajor = MusicScale(Diatonic.HEPTA, Diatonic.SCALE, t.C, Diatonic.major_mode)
+    scale7Aminor = MusicScale(Diatonic.HEPTA, Diatonic.SCALE, t.A, Diatonic.minor_mode)
 
     # Bourrée-inspired melody (typical Balfolk rhythm)
 
@@ -842,10 +847,12 @@ def stream_create_harmonic (fundamental_pitch : note.Pitch = note.Pitch('A2'),
 
 def create_harmonic():
 
-    time = MusicTime(8,4,4)
+    t = TwelveTET()
     ph = PitchHelix()
+
+    time = MusicTime(8,4,4)
     unit = MusicUnit(time,
-                            pitch_nodes= ph.name_to_midi( ['E4', 'D4', 'B3', 'B-3', 'E-4', 'D-4', 'C4', 'G3', 'A3']))
+                            pitch_nodes= t.name_to_midi( ['E4', 'D4', 'B3', 'Bb3', 'Eb4', 'Db4', 'C4', 'G3', 'A3']))
 
     for bass_pitch in unit.pitch_nodes:
         random_harmonics = random.sample(range(4,21), random.randrange(3, 6))
@@ -854,7 +861,7 @@ def create_harmonic():
         transpose_by = interval.Interval(new_chord[0], bass_pitch)
 
         new_chord.transpose(transpose_by, inPlace=True)
-        new_chord.duration = note.Duration(random.choice([MusicTime.QUARTER/2, MusicTime.QUARTER/1]))
+        new_chord.duration = note.Duration(random.choice([time.M21_QUARTER/2, time.M21_QUARTER/1]))
 
         unit.stream.append(new_chord)
 

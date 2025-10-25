@@ -3,47 +3,9 @@ Musicom library
 """
 from dataclasses import dataclass
 from typing import Tuple
-
-
 # Import
 import numpy as np
 import matplotlib.pyplot as plt
-
-"""
-MIDI
-"""
-class MIDIinstrument:
-    # General MIDI instrument numbers (0-127)
-    PIANO = 1
-    CHURCH_ORGAN = 20
-    ACOUSTIC_GUITAR = 25
-    VIOLIN = 41
-    STRING_ENSEMBLE = 49
-    TRUMPET = 57
-    FLUTE = 74
-    SYNTH_PAD = 88
-
-class MIDIchannel:
-    PERCUSSION = 10  # Channel 10 (index 9) is reserved for percussion in General MIDI
-    PERCUSSION_INDEX = 9
-
-class MIDIpercussion:
-    # MIDI percussion mapping (channel 10): 35-81 common drums
-    # See https://www.midi.org/specifications-old/item/gm-level-1-s
-    BASS_DRUM = 36
-    ACOUSTIC_SNARE = 38
-    CLOSED_HIHAT = 42
-    LOW_TOM = 45
-    MID_TOM = 47
-    HIGH_TOM = 50
-    RIDE_CYMBAL = 51
-    CRASH_CYMBAL = 49
-    HAND_CLAP = 39
-    CLAVES = 75
-    MARACAS = 70
-    COWBELL = 56
-    VIBRASLAP = 58
-    WOODBLOCK = 76
 
 """
 Data structures
@@ -117,11 +79,37 @@ def rhythm_circle ():
 
 @dataclass
 class Helix:
-    vertical_per_turn: float = 1.0          # vertical advance per full turn (2π radians)
-    turns: float = 4.0          # number of full turns
-    points_per_turn: int = 12   # sampling resolution per turn
-    start_angle: float = 0.0    # radians
-    direction: int = 1          # 1 for right-handed, -1 for left-handed
+    def __init__(self,
+                 turns: int = 4,  # number of full turns
+                points_per_turn: int = 12,  # sampling resolution per turn
+                vertical_per_turn: float = 1.0,  # vertical advance per full turn (2π radians)
+                start_angle: float = 0.0,  # radians
+                direction: int = 1  # 1 for right-handed, -1 for left-handed
+    ):
+        self.turns = turns
+        self.points_per_turn = points_per_turn
+        self.vertical_per_turn = vertical_per_turn
+        self.start_angle = start_angle
+        self.direction = direction
+
+        self.helix = [(point, turn)
+                      for turn in range(turns)
+                      for point in range(points_per_turn)]
+
+    def index_of(self, point, turn):
+        # Get index in helix from (point, turn)
+        return turn * self.turns + point
+
+    def get_at(self, idx):
+        # Get (point, turn) at index i in helix
+        return self.helix[idx % len(self.helix)]
+
+    def length(self):
+        # Length of helix
+        return len(self.helix)
+
+    def indexes(self):
+        return list(range(len(self.helix)))
 
     def total_points(self) -> int:
         return max(1, int(self.points_per_turn * max(0.0, self.turns)))
@@ -158,7 +146,6 @@ class Helix:
         y = radius * np.sin(theta)
         z = (self.vertical_per_turn * (theta - start)) / (2 * np.pi)
         return float(x), float(y), float(z)
-
 
     def show (self,
                 radius = 1.0,
