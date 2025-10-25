@@ -2,6 +2,7 @@
 Music theory
 """
 from config import Config
+from musicmidi import MIDIinstrument, MIDIpercussion, MIDIchannel
 from library import Circle, sequence_rotations, interval_to_step
 
 # General modules
@@ -65,17 +66,19 @@ class TwelveTET:
 
     CENTS : float = 100  # Cents in semitone
 
-    def __init__(self, a4_freq=440.0, a4_midi=69):
+    A4_FREQ = 440.0  # Frequency of A4
+
+    def __init__(self):
         self.a4_freq = float(a4_freq)
         self.a4_midi = int(a4_midi)
 
     def midi_to_freq(self, midi):
         """Return frequency (Hz) for given MIDI note number (integer or float)."""
-        return self.a4_freq * pow(2.0, (midi - self.a4_midi) / float(self.TWELVE))
+        return self.a4_freq * pow(2.0, (midi - MIDIpitch.A4) / float(self.TWELVE))
 
     def freq_to_midi(self, freq):
         """Return MIDI note number (can be fractional) for a given frequency (Hz)."""
-        return self.a4_midi + float(self.TWELVE) * log2(freq / self.a4_freq)
+        return MIDIpitch.A4 + float(self.TWELVE) * log2(freq / self.a4_freq)
 
     def semitone_ratio(self, n=1):
         """Return frequency ratio for n semitones: 2^(n/12)."""
@@ -137,7 +140,7 @@ class PitchHelix(TwelveTET):
                                 )
                             )
         self.pitch_freqs[''] = 0.0  # stop
-        self.pitch_freqs = tuple(2 ** ((n - self.a4_midi) / self.TWELVE) * self.a4_freq
+        self.pitch_freqs = tuple(2 ** ((n - MIDIpitch.A4) / self.TWELVE) * self.a4_freq
                                         for n in self.PITCH_CLASS_NUMBERS)
 
 
@@ -348,11 +351,11 @@ def main():
     
     t = TwelveTET()
     print("A4 ->", t.midi_to_freq(69))
+    print("C4 ->", t.name_to_midi("C4"))
     print("C4 ->", t.midi_to_freq(t.name_to_midi("C4")))
     print("440 Hz -> MIDI", t.freq_to_midi(440.0))
     print("Cents between 440 and 466.16:", t.cents_between(440.0, 466.1637615180899))
 
-    
     time = MusicTime()
     pr = PitchHelix()
 
