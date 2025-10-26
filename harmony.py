@@ -30,6 +30,24 @@ class ChordHarmony:
         6 : (1, 3),
         7 : 1
     }
+    majornext {
+1maj - *
+2min - I, V, or vii°
+3min - I, ii, IV, or vi
+4maj - I, ii, iii, V, or vii°
+5maj - I or vi
+6min - I, ii, iii, IV, or V
+7dim - I or iii
+
+Minor
+1min - *
+2dim , 2 - 1min, iii, V, v, vii°, or VII
+3maj , 3aug - i, iv, IV, VI, #vi°, vii°, or VI
+4min, 4maj - i, V, v, vii°, or VII
+5maj, 5min - i, VI, or #vi°
+6maj ,#6dim - i, III, III+, iv, IV, V, v, vii°, or VII
+7dim , 7maj - 1min
+}
     # Diatonic chord functions
     TONIC = 0
     DOMINANT = 1
