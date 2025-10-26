@@ -61,7 +61,8 @@ class PitchRegister(Helix):
         self.index_start = self.index_of(pitchclass_start, octave_start)
         self.index_end = self.index_of(pitchclass_end, octave_end)
 
-        self.midi = [TwelveTET.name_to_midi(TwelveTET.PITCH_CLASS_NAMES_SHARP[pitchclass]+str(octave))
+        self.tt = TwelveTET()
+        self.midi = [self.tt.name_to_midi(self.tt.PITCH_CLASS_NAMES_SHARP[pitchclass]+str(octave))
                 for (pitchclass, octave) in self.helix]
 
     def transpose(self, i, interval_steps, direction=ASCENDING):
@@ -83,18 +84,22 @@ class Diatonic:
     UNDA = 11
     DODECA = 12
 
-    THIRD = 0
-    FOURTH = 1
-    FIFTH = 2
+    MINOR_THIRD = 1
+    MAJOR_THIRD = 2
+    PERFECT_FOURTH = 3
+    TRITONE = 4
+    PERFECT_FIFTH = 5
+    MINOR_SIXTH = 6
+    MAJOR_SIXTH = 7
 
     SCALE = 0
 
-    DIMINISHED = 0
-    MINOR = 1
-    MAJOR = 2
-    AUGMENTED = 3
-    SUS2 = 4
-    SUS4 = 5
+    DIMINISHED = 1
+    MINOR = 2
+    MAJOR = 3
+    AUGMENTED = 4
+    SUS2 = 5
+    SUS4 = 6
 
     MINOR7 = 1
     MAJOR7 = 2
@@ -110,9 +115,13 @@ class Diatonic:
     # pitch_intervals: tuple of interval steps, e.g. (2,2)
     pitch_intervals_dict = {
         DI: {
-            THIRD: (3, 9),
-            FOURTH: (6, 6),
-            FIFTH: (7, 5)
+            MINOR_THIRD     : (3, 9),
+            MAJOR_THIRD     : (4, 8),
+            PERFECT_FOURTH  : (5, 7),
+            TRITONE         : (6, 6),
+            PERFECT_FIFTH   : (7, 5),
+            MINOR_SIXTH     : (8, 4),
+            MAJOR_SIXTH     : (9, 3),
         },
         # 3 Triad scale Patterns
         TRIA:  {
@@ -121,7 +130,7 @@ class Diatonic:
             MAJOR: (4, 3, 5),
             AUGMENTED: (4, 4, 4),
             SUS2: (2, 5, 5),
-            SUS4: (5, 2, 5)
+            SUS4: (5, 2, 5),
         },
         TETRA : {
             MINOR7: (3, 4, 3, 2),
@@ -255,6 +264,7 @@ def main():
     pos = reg.index_of(3, 7)  # octave 3, pitchclass 7 -> index
     next_pos = reg.transpose(pos,reg.ASCENDING)  # next pitchclass
     octave_pitchclass = reg.get_at(next_pos)
+    print (f'PitchRegister: pos {pos} -> next pos {next_pos} -> (octave, pitchclass) {octave_pitchclass}')
 
     pcs = PitchClassSet()
 
