@@ -1,7 +1,6 @@
 """
 Music Composition Assistant
 """
-
 from config import Config
 import platform
 import copy
