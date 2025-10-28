@@ -13,7 +13,7 @@ from twelvetet import TwelveTET, MIDIpercussion, MIDIinstrument
 
 # Musical datastructures
 from theory import MusicTime, MusicScale, Diatonic, PitchRegister
-from harmony import ChordHarmony
+from harmony import Scale7ChordHarmony, Scale7PitchDegree, Scale7Triad
 
 # Genetic algorithm
 from genetic import Genome, generate_population, run_evolution, print_stats, genome_to_string
@@ -429,10 +429,14 @@ class MarkovChain:
         return out
 
 
-def create_markov ():
+def create_random_pitches ():
 
-    mc = MarkovChain([('C4', 1), ('E4', 1), ('G4', 1), ('C5', 1), ('E4', 1), ('G4', 1)])
-    gen_pitches = mc.sample('C4', length=16)
+    chord_chain = MarkovChain(Scale7ChordHarmony.movement_rules)
+    gen_chords = chord_chain.sample('1', length=16)
+    print('Generated chords by Markov chain: ' + str(gen_chords))
+
+    pitch_chain = MarkovChain(Scale7PitchDegree.movement_rules)
+    gen_pitches = pitch_chain.sample('1', length=16)
     print('Generated pitches by Markov chain: ' + str(gen_pitches))
 
 def create_population():
@@ -826,7 +830,7 @@ def create_key_library (scale: MusicScale):
     triads_in_scale.chord = comp.main_scale.mpscale % (1234567, 1)
 
     prog_in_scale = MusicUnit(time)
-    progression_in_scale(ChordHarmony.PROGRESSIONS, comp.main_scale)
+    progression_in_scale(Scale7ChordHarmony.PROGRESSIONS_COMMON, comp.main_scale)
 
     comp.analysis()
     comp.score_show()

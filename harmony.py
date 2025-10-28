@@ -33,7 +33,7 @@ class Scale7PitchDegree:
     # 1 3 5 inactive no rule
     # 2 4 6 7 active
     ANY = 0
-    movement_rule = {
+    movement_rules = {
         # Active
         1 : ANY,       # tonic
         3 : ANY,       # subdominant
@@ -71,7 +71,7 @@ class Scale7Triad:
 
 class Scale7ChordHarmony:
     # Widely used chords sequences (progressions)
-    PROGRESSIONS = {
+    movement_rules = {
         1 : '*',            # tonic to any
         2 : (4, 5, 7),      # subdominant to dominant
         3 : (2, 4, 6),      # tonic prolong to subdominant
