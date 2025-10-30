@@ -2,10 +2,7 @@
 Music - Harmony
 Patterns and rules
 """
-
-from theory import Diatonic, MusicScale, MusicPattern
-
-
+from theory import Diatonic, MusicPattern
 
 class OnsetIntervalPattern:
     TWO = (1, 1)
@@ -67,7 +64,8 @@ class Scale7ChordDegree:
 
 class Scale7Triad:
     def __init__(self):
-        self.pattern3 = MusicPattern (Diatonic.TRIA, Diatonic.MAJOR)
+        self.pattern_major = MusicPattern (Diatonic.TRIA, Diatonic.MAJOR)
+        self.pattern_minor = MusicPattern (Diatonic.TRIA, Diatonic.MINOR)
 
 class Scale7ChordHarmony:
     # Widely used chords sequences (progressions)
@@ -104,7 +102,7 @@ class Scale7ChordHarmony:
     BESTSELLER = (1, 5, 6, 4)
 
 
-    PROGRESSIONS_COMMON = [
+    common_progressions = [
     # Analysis of all progressions
         [1, 6, 4, 7, 1] ,   # sensitive
         [1, 6, 2, 7, 1] ,   # sensitive
@@ -137,7 +135,7 @@ class Scale7ChordHarmony:
     CYCLICFIFTHPROGRESSION = (1,4,7,3,6,2,5)
 
     # Common ending cadence progressions
-    PROGRESSIONS_CADENCE = {
+    cadence_progressiions = {
     # Perfect cadence
         'Perfect' : (5, 1),     # V to I
     # Plagal cadence
