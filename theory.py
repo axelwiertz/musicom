@@ -163,14 +163,16 @@ class Diatonic:
     }
 
     # 7 Hepta scale modes:
-    # 1. Ionian = Major 2. Dorian, 3. Phrygian, 4. Lydian, 5. Mixolydian, 6. Aeolian = Minor, 7. Locrian
     ionian = major_mode = 0
     dorian = 1
     phrygian = 2
     lydian = 3
-    myxolydian = 4
+    mixolydian = 4
     aeolian = minor_mode = 5
     locrian = 6
+    mode_names = {ionian:'ionian',dorian:'dorian',phrygian:'phrygian',
+            lydian:'lydian',mixolydian:'mixolydian',aeolian:'aeolian',locrian:'locrian'}
+
 
     # 7 Hepta scale degree functions
     degree_functions = {1: 'tonic', 2: 'supertonic', 3: 'mediant', 4: 'subdominant', 5: 'dominant', 6: 'submediant',
@@ -230,10 +232,10 @@ class MusicScale(MusicPattern):
         # Heptatonic (7 pitch class) scale
         if cardinality == Diatonic.HEPTA and interval_pattern == Diatonic.SCALE:
             # MusicPy structures
-            self.mpscale = structures.scale(str(self.tonic), str(self.mode))
+            self.mpscale = structures.scale(TwelveTET.PITCH_CLASS_NAMES_SHARP[self.tonic], interval=self.modes[self.mode])
 
             # Music21 structures
-            self.m21key = key.Key(note.Pitch(midi=tonic), mode=self.mode)
+            self.m21key = key.Key(note.Pitch(tonic), mode=Diatonic.mode_names[self.mode])
             self.m21scale = scale.ConcreteScale(key=self.m21key)
 
 

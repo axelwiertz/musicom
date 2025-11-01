@@ -4,9 +4,10 @@ import numpy as np
 #from tqdm import tqdm
 from music21 import corpus, note, chord, stream, meter, tempo
 #import tensorflow as tf
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Embedding, LSTM, Dense
-from tensorflow.keras.utils import to_categorical
+
+#from tensorflow.keras.models import Sequential
+#from tensorflow.keras.layers import Embedding, LSTM, Dense
+#from tensorflow.keras.utils import to_categorical
 
 # ---------------------------
 # 1) Data extraction / tokenization

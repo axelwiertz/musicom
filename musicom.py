@@ -17,8 +17,6 @@ from harmony import Scale7ChordHarmony, Scale7PitchDegree, Scale7Triad
 
 # Genetic algorithm
 from genetic import Genome, generate_population, run_evolution, print_stats, genome_to_string
-# Conversion between music21 and musicpy
-from music21py import *
 
 # Showing score without external programs like Musescore
 from showscore import show
@@ -27,6 +25,8 @@ from showscore import show
 from music21 import metadata, stream, roman, midi, converter, analysis, instrument, percussion, note, chord, key, tempo, clef, harmony, serial, scale, interval
 # MusicPy modules: computational music structures and algorithms
 from musicpy import musicpy as mp, algorithms, structures
+# Conversion between music21 and musicpy
+from music21py import *
 
 
 class MusicUnit:
@@ -233,6 +233,14 @@ class MusicVoice:
             u.unit_to_stream()
             self.part.append(u.stream)
 
+    def part_to_unit (self) -> MusicUnit:
+        # Convert part to unit
+        unit = MusicUnit()
+        unit.stream = stream.Stream()
+        for e in self.part.recurse().notesAndRests:
+            unit.stream.append(e)
+        self.units.append(unit)
+        return unit
 
 class MusicComposition:
     #
@@ -259,10 +267,19 @@ class MusicComposition:
         # MusicPy piece
         self.piece = structures.piece
 
-    def voices_to_score (self):
+    def voices_to_parts (self):
         # Convert voices to score parts
         for v in self.voices:
             self.score.append(v.part)
+
+    def parts_to_voices (self):
+        # Convert score parts to voices
+        self.voices = []
+        for p in self.score.parts:
+            unit = MusicUnit()
+            voice = MusicVoice(name=p.partName, units=[unit])
+            voice.part = p
+            self.voices.append(voice)
 
     def score_set_time(self, time : MusicTime):
         # Set the time signature, key signature and tempo
@@ -442,7 +459,7 @@ def compose_unit ():
     unit.chord_play()
 
     voice.units_to_part()
-    comp.voices_to_score()
+    comp.voices_to_parts()
     comp.score_show()
 
 
@@ -525,7 +542,6 @@ def create_population():
     for gene_binary in genes_binary:
         pitch_nr = int(sum([bit * pow(2, i) for i, bit in enumerate(gene_binary)]))
 
-
     voice = MusicVoice('Genetic voice', [unit], MIDIinstrument.PIANO)
     voice.part.insert(0, clef.TrebleClef())
     voice.units_to_part()
@@ -589,7 +605,7 @@ def create_rhythm ():
     unit.intervals_to_nodes()
 
     voice.units_to_part()
-    comp.voices_to_score()
+    comp.voices_to_parts()
     comp.score_show()
 
 
@@ -597,21 +613,16 @@ def percussion_load ():
     # Load
     comp = MusicComposition('Percussion')
     comp.load('r_son.mid')
-    unit = MusicUnit()
-    unit.stream = comp.score.flatten()
-    unit.stream_to_unit()
-    voice = MusicVoice('Percussion voice', [unit], MIDIinstrument.PERCUSSION)
-
-    voice.units_to_part()
-    comp.voices_to_score()
+    comp.score.parts[0].insert(0, clef.PercussionClef())
     comp.score_show()
+    comp.piece.show()
 
-    comp.analysis()
+    # To unit
+    comp.parts_to_voices()
+    comp.voices[0].part_to_unit()
+
+
     comp.load('midipercussionmidi.mid')
-
-    comp.score.append(clef.PercussionClef())
-
-    comp.score_show()
 
 
 
@@ -653,7 +664,7 @@ def create_percussion ():
     unit_hihat.unit_to_stream()
 
     voice.units_to_part()
-    comp.voices_to_score()
+    comp.voices_to_parts()
 
     comp.score_show()
     comp.write_to_midi()
