@@ -4,22 +4,21 @@ MusicPy - Notebook examples
 
 from musicpy import musicpy as mp, structures
 
-from library import *
-from musicom import MusicalUnit, Composition, MIDIpercussion
+from structures import MusicUnit, MusicComposition
+from constants import MIDIpercussion, MIDIinstrument
 from music21 import converter, instrument
 
-from theory import DiatonicLayer
 
 
 def m21_tiny_notebook ():
-    unit = MusicalUnit()
+    unit = MusicUnit()
     unit.stream = converter.parse('tinynotation: 4/4 c5 r r c5 r r c5 r')
     unit.instrument = instrument.Piano()
 
 def mp_notebook ():
-    unit = MusicalUnit()
-    unit1, unit2 = MusicalUnit()
-    comp = Composition()
+    unit = MusicUnit()
+    unit1, unit2 = MusicUnit()
+    comp = MusicComposition()
 
     # Compose unit
     unit.chord = structures.chord (notes='C4',
@@ -93,11 +92,11 @@ def mp_percussion_notebook ():
     drm2 = structures.drum('S[l:.8; i:.; r:4], S[l:.16; i:.], S[l:.8; i:.], S[l:.16; i:.], S[l:.8; i:.], S[l:.8; i:.]')
     drm3 =  structures.drum ('K, K;H, S, H, K, K;H;PH, H;S, H')
 
-    percussion_unit = MusicalUnit ()
+    percussion_unit = MusicUnit ()
     percussion_unit.chord = drm1 + drm2 + drm3
 
 
-    comp = Composition ()
+    comp = MusicComposition ()
     comp.piece = structures.piece(percussion_unit.chord,
                                   [MIDIinstrument.PIANO],
                                   channels=[MIDIpercussion.CHANNEL_INDEX])
@@ -105,7 +104,7 @@ def mp_percussion_notebook ():
 
 def standard_notebook ():
 
-    comp = Composition('Standard',
+    comp = MusicComposition('Standard',
                        form = ['A', 'A', 'B', 'A'],
                        tonic='C',
                        mode= DiatonicLayer.MAJOR_MODE,
@@ -128,19 +127,19 @@ def standard_notebook ():
         ]
 
 
-    comp = Composition('Fantasy A minor',
+    comp = MusicComposition('Fantasy A minor',
                        tonic='A',
                        mode= DiatonicLayer.MINOR_MODE,
                        progression=fantasy_progressions
                        )
 
-    comp = Composition('Fantasy C major',
+    comp = MusicComposition('Fantasy C major',
                        tonic='C',
                        mode= DiatonicLayer.MAJOR_MODE,
                        progression=fantasy_progressions
                        )
 
-    comp = Composition('Bossa Nova',
+    comp = MusicComposition('Bossa Nova',
                        form = ['A', 'A', 'B', 'A'],
                        tonic='C',
                        mode= DiatonicLayer.MAJOR_MODE,
@@ -150,13 +149,13 @@ def standard_notebook ():
         ]
                        )
 
-    comp = Composition('Flamenco',
+    comp = MusicComposition('Flamenco',
                        progression=[
         [1, 7, 6, 5] # descending
         ]
             )
 
-    comp = Composition('Lounge/Jazz',
+    comp = MusicComposition('Lounge/Jazz',
                           progression=[
         [4, 2, 5, 1],
         [7, 3, 6, 2, 5, 1]

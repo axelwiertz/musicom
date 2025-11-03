@@ -1,7 +1,160 @@
 """
-Musicom library
+Musicom structures module
+Music composition structures using music21 and musicpy
 """
-from dataclasses import dataclass
+import copy
+from constants import TwelveTET, MIDIinstrument
+from theory import MusicTime, MusicScale, Diatonic, PitchRegister
+
+# Music21 modules: music notation and analysis
+from music21 import stream, clef, serial, metadata, tempo, instrument
+# MusicPy modules: computational music structures and algorithms
+from musicpy import structures
+from musicpy import musicpy as mp
+
+class MusicUnit:
+    # Harmonic rhythm: sequential pattern of onsets at timesteps
+    # A rhythm sequence is defined by
+    #  - a sequence of timestep intervals between onsets
+    def __init__(self,
+                time: MusicTime = MusicTime(),
+                register: PitchRegister = PitchRegister(),
+                pitch_nodes : list [int] = (),
+                pitch_intervals: list[int] = (),
+                onset_intervals: list[float] = (),
+                durations: list[float] = (),
+                velocities: list[int] = (),
+                ):
+        self.time = time
+        self.register = register
+        self.pitch_nodes = pitch_nodes
+        self.pitch_intervals = pitch_intervals
+        # The sum of the intervals is the total number of timesteps in MusicTime
+        self.onset_intervals = onset_intervals
+        self.durations = durations
+        self.velocities = velocities
+        #self.refresh()
+        self.timesteps = sum(self.onset_intervals)
+
+        # m21
+        self.stream =  stream.Stream()
+        # mp
+        self.chord = structures.chord([])
+
+    def __add__(self, other):
+        # Combine two musical units
+        new_unit = MusicUnit()
+        new_unit.pitch_nodes = self.pitch_nodes + other.pitch_nodes
+        new_unit.pitch_intervals = self.pitch_intervals + other.pitch_intervals
+        new_unit.onset_intervals = self.onset_intervals + other.onset_intervals
+        new_unit.durations = self.durations + other.durations
+        new_unit.velocities = self.velocities + other.velocities
+
+        # m21
+        new_unit.stream = copy.deepcopy(self.stream)
+        new_unit.stream.append(other.stream)
+        # mp
+        new_unit.chord = self.chord + other.chord
+
+        new_unit.refresh()
+        return new_unit
+
+    def refresh (self):
+        # Refresh derived attributes
+        self.timesteps = sum(self.onset_intervals)
+
+
+    def nodes_to_intervals(self):
+        self.pitch_intervals = [self.pitch_nodes[i+1]-self.pitch_nodes[i] for i in range(len(self.pitch_nodes)-1)]
+
+    def intervals_to_nodes(self, start_pitch_node: int = 0):
+        self.pitch_nodes = []
+        current_pitch = start_pitch_node
+        self.pitch_nodes.append(current_pitch)
+        for pitch_interval in self.pitch_intervals:
+            current_pitch += pitch_interval
+            self.pitch_nodes.append(current_pitch)
+
+
+    def modulate (self,
+                    scale_source : structures.scale,
+                    scale_target : structures.scale):
+        # Modulate
+        self.chord = self.chord.modulation(scale_source, scale_target)
+
+    def chord_play (self, midi_instrument: int = MIDIinstrument.PIANO):
+        mp.play (self.chord, bpm=self.time.bpm, instrument=midi_instrument, wait=True)
+
+    def add_pitch (self, pitch, duration : int = 1, onset_interval : int = 1, velocity: int = 100):
+        self.pitch_nodes += [pitch]
+        self.pitch_intervals += [self.pitch_nodes[-1] - self.pitch_nodes[-2] if len(self.pitch_nodes) > 1 else 0]
+        self.onset_intervals += [onset_interval]
+        self.durations += [duration]
+        self.velocities += [velocity]
+
+    def add_pitches_vertical (self, pitches, duration=4):
+        for p in pitches:
+            self.add_pitch(p,0, duration)
+
+class MusicVoice:
+    # A musical voice
+    def __init__(self,
+                 name: str = 'Voice',
+                 units: list[MusicUnit] = (),
+                 midi_instrument: int = MIDIinstrument.PIANO,
+                 ):
+        self.name = name
+        self.midi_instrument = midi_instrument
+        self.units = units
+
+        self.track = structures.track([], track_name=name,instrument=midi_instrument)
+        self.part = stream.Part()
+
+    def track_notes(self, i: int = 0, j: int = 4):
+        return self.track[i:j]
+
+
+class MusicComposition:
+    #
+    def __init__(self,
+                 title: str = "Composition",
+                 main_scale: MusicScale = MusicScale(Diatonic.HEPTA, Diatonic.SCALE, TwelveTET.C, Diatonic.major_mode),
+                 voices : list[MusicVoice] = (),
+                 main_progression: list = (),
+                 form: list = ()
+                ):
+
+        self.title = title
+        self.form = form
+        self.main_scale = main_scale
+        self.main_progression = main_progression
+        self.voices = voices
+
+        # Music21 score
+        self.score = stream.Score()
+        self.score.metadata = metadata.Metadata()
+        self.score.metadata.title = title
+        self.score.metadata.composer = 'Musicom'
+
+        # MusicPy piece
+        self.piece = structures.piece
+
+    def score_set_time(self, time : MusicTime):
+        # Set the time signature, key signature and tempo
+        self.score.insert(0, time.timesignature)
+        self.score.insert(0, tempo.MetronomeMark(number=time.bpm))
+
+
+
+class PercussionUnit(MusicUnit):
+
+    def __init__(self):
+        super().__init__()
+        self.clef = clef.PercussionClef()
+        self.instrument = instrument.Woodblock()
+
+
+
 from typing import Tuple
 # Import
 import numpy as np
@@ -175,6 +328,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-

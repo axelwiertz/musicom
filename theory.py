@@ -2,8 +2,8 @@
 Music theory
 """
 from config import Config
-from twelvetet import TwelveTET
-from library import Circle, Helix, sequence_rotations, interval_to_step
+from constants import TwelveTET
+from structures import Circle, Helix, sequence_rotations, interval_to_step
 
 # General modules
 import numpy as np
@@ -11,7 +11,7 @@ import pandas as pd
 import itertools
 
 # Music21 modules
-from music21 import interval, meter, tempo, key, scale, note
+from music21 import interval, meter, tempo, key, scale, note, serial
 # MusicPy modules
 from musicpy import structures
 
@@ -246,13 +246,33 @@ class MusicalInterval:
         self.cents = TwelveTET().interval_cents(semitones)
 
 
-
 class PitchClassSet:
     def __init__(self, num_items=3):
 
         # Combinations: and permutations of a set
         self.combinations = list(itertools.combinations (TwelveTET.PITCH_CLASS_NUMBERS, num_items))
         self.permutations = list(itertools.permutations (TwelveTET.PITCH_CLASS_NUMBERS, num_items))
+
+
+class PitchSequence:
+    PRIME = 'P'
+    INVERSION = 'I'
+    RETROGRADE = 'R'
+    RETROGRADE_INVERSION = 'RI'
+
+    def __init__(self, pitch_nodes: list[int]):
+        self.pitch_nodes = pitch_nodes
+        self.tonerow = serial.ToneRow(self.pitch_nodes)
+
+    def transform (self, trans : str, index : int = 0):
+        # Transform tone row
+        self.tonerow = serial.ToneRow(self.pitch_nodes).zeroCenteredTransformation (trans, index)
+        self.pitch_nodes = self.tonerow.pitches.midiNumbers
+
+    def transpose (self, pitch_interval : int):
+        # Transpose the unit's pitches by interval in positive or negative direction (ASCENDING or DESCENDING)
+        self.tonerow = serial.ToneRow(self.pitch_nodes).transpose(pitch_interval)
+        self.pitch_nodes = self.tonerow.pitches.midiNumbers
 
 
 def main():

@@ -1,5 +1,7 @@
 """
-12-TET and MIDI
+Musicom Constants
+    12-TET
+    MIDI
 """
 from numpy import array
 from math import pow, log2
