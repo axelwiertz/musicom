@@ -1,29 +1,25 @@
 """
+Musicom
 Music Composition Assistant
 """
 import random
-from datetime import datetime
-from collections import defaultdict
-#import sound
 
 from constants import TwelveTET, MIDIpercussion, MIDIinstrument
 from structures import MusicComposition, MusicUnit, MusicVoice
-from converters import unit_to_chord
+from converters import unit_to_sound, unit_to_chord, unit_to_stream
+from converters import units_to_part, voices_to_parts, part_to_unit
+from converters import parts_to_voices, comp_to_visual, file_to_comp, comp_to_file, comp_to_midifile, comp_to_sound
 
 # Musical datastructures
-from theory import MusicTime, MusicScale, Diatonic, PitchRegister
-from harmony import Scale7ChordHarmony, Scale7PitchDegree, Scale7Triad
+from theory import MusicScale, Diatonic, PitchRegister
+from rhythm import MusicTime
+from harmony import Scale7Triad
+from analysis import analyze
 
-# Genetic algorithm
-from generators.genetic import Genome, generate_population, run_evolution, print_stats, genome_to_string
-
-# Showing score without external programs like Musescore
 
 # Music21 modules: music notation and analysis
-from music21 import stream, roman, percussion, note, chord, key, clef, harmony, serial, interval
+from music21 import stream, roman, percussion, note, chord, key, clef, harmony, serial
 # MusicPy modules: computational music structures and algorithms
-# Conversion between music21 and musicpy
-
 
 
 def compose_unit ():
@@ -53,174 +49,28 @@ def compose_unit ():
     print (triads)
     # triads.pattern_major.pitch_intervals
 
-    unit.unit_to_chord()
-    unit.chord_play()
+    unit_to_chord(unit)
+    unit_to_sound(unit)
 
-    voice.units_to_part()
-    comp.voices_to_parts()
-    comp.score_show()
-
-
-class MarkovChain:
-    # Markov chain of transitions
-    def __init__(self, train):
-        # build transition dict for pitches
-        self.trans = defaultdict(list)
-        for a, b in zip(train, train[1:]):
-            self.trans[a[0]].append(b[0])
-
-    def sample(self, start, length=16):
-        out = [start]
-        cur = start
-        for _ in range(length - 1):
-            choices = self.trans.get(cur) or list(self.trans.keys())
-            cur = random.choice(choices)
-            out.append(cur)
-        return out
+    units_to_part(voice)
+    voices_to_parts(comp)
+    comp_to_visual(comp)
 
 
-def create_random_pitches ():
-
-    chord_chain = MarkovChain(Scale7ChordHarmony.movement_rules)
-    gen_chords = chord_chain.sample('1', length=16)
-    print('Generated chords by Markov chain: ' + str(gen_chords))
-
-    pitch_chain = MarkovChain(Scale7PitchDegree.movement_rules)
-    gen_pitches = pitch_chain.sample('1', length=16)
-    print('Generated pitches by Markov chain: ' + str(gen_pitches))
-
-
-def create_population():
-    # Use a genetic algorithm to create a population of musical units
-    pr = PitchRegister()
-    time = MusicTime(8, 4, 4, 100)
-    unit = MusicUnit(time, pr)
-    voice = MusicVoice('Genetic voice', [unit], MIDIinstrument.PIANO)
-    comp = MusicComposition('Genetic '+str(int(datetime.now().timestamp())),
-                             MusicScale(Diatonic.HEPTA, Diatonic.SCALE, TwelveTET.C, Diatonic.major_mode),
-                [voice])
-
-    def fitness_func(genome_in: Genome) -> int:
-        # Simple fitness function: sum of genome values
-        return sum(genome_in)
-
-    # Binary genome representation
-    pitch_interval_bits = 6  # binary 24 pitch intervals
-    #max_pitch_interval = pow(2, pitch_interval_bits - 1)
-    onset_interval_bits = 4  # binary 8 timesteps
-    duration_bits = 4  # binary 8 timesteps
-    velocity_bits = 4  # binary 8 levels
-    totalbits = pitch_interval_bits + duration_bits + onset_interval_bits + velocity_bits
-
-    # Run the genetic algorithm
-    final_population, generations = run_evolution(
-        populate_func=lambda: generate_population(10, 20),
-        fitness_func=fitness_func,
-        fitness_limit=20,
-        generation_limit=50,
-        printer=print_stats
-    )
-
-    print("Final Population after %d generations:" % generations)
-    for genome in final_population:
-        print("%s (Fitness: %d)" % (genome_to_string(genome), fitness_func(genome)))
-
-    # Convert best genome to musical unit
-    unit = MusicUnit(time)
-
-    genome = final_population[0]
-    # Transform a generated genome into a unit
-    # Split genome in parts of 'bits' length
-    numparts = len(genome) % totalbits
-    genes_binary = []
-    for i in range(numparts):
-        # Extract binary elements
-        genes_binary += [genome[(i * totalbits):(i * totalbits) + totalbits]]
-
-    for gene_binary in genes_binary:
-        pitch_nr = int(sum([bit * pow(2, i) for i, bit in enumerate(gene_binary)]))
-
-    voice = MusicVoice('Genetic voice', [unit], MIDIinstrument.PIANO)
-    voice.part.insert(0, clef.TrebleClef())
-    voice.units_to_part()
-    # Add clef of part
-
-    comp.analysis()
-    comp.score_show()
-    comp.save()
-
-
-def euclidian_rhythm (onsets: int = 4,
-                      timesteps: int = 4 ) -> list [int] :
-    # Divide number of onsets evenly over number of timesteps, reduced if duplicate
-
-    # Onsets gets an equal timestep interval
-    base_timestep_interval = timesteps // onsets
-    # And the remaining timesteps are a separate time step interval
-    remaining_timesteps = timesteps % onsets
-
-    rhythm = []
-    for i in range(onsets):
-        rhythm_timestep_interval = base_timestep_interval
-        if i < remaining_timesteps:
-            rhythm_timestep_interval += 1
-        rhythm.append (rhythm_timestep_interval)
-
-    # Reduce
-    while rhythm[0] != rhythm[-1]:
-        for group in rhythm:
-            if group != rhythm[-1]:
-                    group += rhythm.pop(-1)
-
-    last_interval = timesteps - sum(rhythm)
-    if last_interval > 0:
-        rhythm.append(last_interval)
-
-    return rhythm
-
-"""
-These three aspects of TimeSignatures are controlled by the
-music21.meter.TimeSignature.
-    beatSequence   : where the beats in the measure are and how many there are
-    beamSequence   : How the notes should be beamed
-    accentSequence : How much accent or weight each note gets
-All sequences are of class MeterSequence
-"""
-
-def create_rhythm ():
-
-    time = MusicTime(8, 4, 4, 100)
-    reg = PitchRegister()
-    unit = MusicUnit(time, reg)
-    unit.onset_intervals = euclidian_rhythm (3, 8)
-    unit.intervals_to_nodes()
-
-    voice = MusicVoice('Rhythm voice', [unit], MIDIinstrument.PIANO)
-    comp = MusicComposition('Rhythm',
-                            MusicScale(Diatonic.HEPTA, Diatonic.SCALE, TwelveTET.C, Diatonic.major_mode),
-                            [],
-                            [0],
-                            [voice]
-                            )
-
-    voice.units_to_part()
-    comp.voices_to_parts()
-    comp.score_show()
 
 
 def percussion_load ():
     # Load
     comp = MusicComposition('Percussion')
-    comp.load('r_son.mid')
+    file_to_comp(comp, 'midipercussionmidi.mid')
+    file_to_comp(comp, 'r_son.mid')
     comp.score.parts[0].insert(0, clef.PercussionClef())
-    comp.score_show()
-    comp.piece.show()
+    comp_to_visual(comp)
 
     # To unit
-    comp.parts_to_voices()
-    comp.voices[0].part_to_unit()
+    parts_to_voices(comp)
+    part_to_unit(comp.voices[0])
 
-    comp.load('midipercussionmidi.mid')
 
 
 def create_percussion ():
@@ -255,16 +105,16 @@ def create_percussion ():
 
     pchord = percussion.PercussionChord()
 
+    unit_to_stream(unit_bass)
+    unit_to_stream(unit_hihat)
 
-    unit_bass.unit_to_stream()
+    units_to_part(voice)
+    voices_to_parts(comp)
 
-    unit_hihat.unit_to_stream()
+    comp_to_visual(comp)
 
-    voice.units_to_part()
-    comp.voices_to_parts()
+    comp_to_midifile(comp)
 
-    comp.score_show()
-    comp.write_to_midi()
 
 class ChordSet:
     """
@@ -302,8 +152,10 @@ def project_big_yellow_taxi():
         t.name_to_midi (name=['B3', 'C#4', 'E4', 'E4', 'F#4', 'C#4', 'E4', 'E4', 'F#4', 'E4', 'G#3', 'B3', 'B3', 'C#4',
         'E4', 'F#4', 'B3', 'B3', 'F#4', 'F#4', 'F#4', 'G#4', 'F#4', 'E4', 'E4'])
         )
-    # Analyze score
-    comp.analysis()
+
+    analyze(comp)
+    comp_to_visual(comp)
+
 
 def project_berendans():
     # Berendans
@@ -319,6 +171,9 @@ def project_berendans():
     comp = MusicComposition('Berendans',
                        MusicScale(Diatonic.HEPTA, Diatonic.SCALE, TwelveTET.B_FLAT, Diatonic.major_mode),
                 [voice1, voice2])
+
+    analyze(comp)
+    comp_to_visual(comp)
 
 
 def create_new ():
@@ -378,13 +233,13 @@ def create_new ():
                     ["G4", "A4", "B4", "C5"]]
 
     for v in comp.voices:
-        v.units_to_part()
+        units_to_part(v)
 
     # Analyze score
-    comp.analysis()
-    comp.score_show()
+    analyze(comp)
+    comp_to_visual(comp)
     # Save score
-    comp.save("new.mid")
+    comp_to_file(comp, "new.mid")
 
 
 def create_balfolk ():
@@ -439,65 +294,18 @@ def create_balfolk ():
         bass_voice.part.append(bass_note)
 
     # Analyze score
-    comp.analysis()
-    comp.score_show()
+    analyze(comp)
+    comp_to_visual(comp)
     # Save score
-    comp.save("balfolk.mid")
+    comp_to_file(comp, "balfolk.mid")
 
 
-
-
-def scale_library():
-
-    comp = scale_library(MusicScale(Diatonic.HEPTA, Diatonic.SCALE, 60, Diatonic.mixolydian))
-    # Save score
-    comp.save('chordlibrary_in_key_' + TwelveTET.PITCH_CLASS_NAMES_SHARP(comp.scale.tonic) +'.mid')
-
-
-def harmonic_series (fundamental_pitch  : int,
-                           harmonic_numbers: list[int] = range(1,17)) -> chord.Chord:
-    # The harmonic series of a fundamental pitch
-
-    harmonic_chord = chord.Chord()
-    stream_out = stream.Stream()
-    for harmonic in harmonic_numbers:
-        new_pitch = note.Pitch(fundamental_pitch).getHarmonic(harmonic)
-        harmonic_chord.add (note.Note(new_pitch.midi))
-        stream_out.append (note.Note(new_pitch))
-
-    return harmonic_chord
-
-
-def create_harmonic():
-
-    t = TwelveTET()
-    ph = PitchRegister()
-
-    time = MusicTime(8,4,4)
-    unit = MusicUnit(time,
-                   t.name_to_midi( ['E4', 'D4', 'B3', 'Bb3', 'Eb4', 'Db4', 'C4', 'G3', 'A3']))
-
-    for bass_pitch in unit.pitch_nodes:
-        random_harmonics = random.sample(range(4,21), random.randrange(3, 6))
-        new_chord = harmonic_series(bass_pitch, random_harmonics)
-        new_chord.transpose(interval.Interval(new_chord[0],
-                                              note.Pitch(bass_pitch),
-                            inPlace=True))
-
-        new_chord.duration = note.Duration(random.choice([time.M21_QUARTER/2, time.M21_QUARTER/1]))
-
-    unit.stream = harmonic_series(note.Pitch('A1').midi,[5,6,7,9,12,15])
 
 
 
 """
 Creation
 """
-
-
-
-
-
 
 def idea_tonerow():
     # Music 21 ToneRow

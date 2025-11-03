@@ -2,14 +2,17 @@
 Musicom generators module - scale library
 Module for generating musical scales and chords.
 """
-from structures import MusicScale, MusicUnit, MusicVoice, MusicComposition, PitchRegister, MusicTime
-from constants import MIDIinstrument
+from constants import TwelveTET, MIDIinstrument
+from structures import MusicScale, MusicUnit, MusicVoice, MusicComposition, PitchRegister
+from converters import comp_to_file
+from rhythm import MusicTime
+from theory import Diatonic
 from music21 import roman
 from harmony import Scale7ChordHarmony
 
 
 def progression_in_scale (chord_progression: list[int],
-                            music_scale : MusicScale ):
+                            music_scale : MusicScale):
     # Chord progression patterns in a key
     time = MusicTime(4,4,4)
     reg = PitchRegister()
@@ -43,7 +46,7 @@ def triads_in_scale7 (scale7 : MusicScale):
                          scale7)
 
 
-def scale_library (musicscale: MusicScale) -> MusicComposition:
+def library (musicscale: MusicScale) -> MusicComposition:
     # Create a score with library elements
     reg = PitchRegister()
     time = MusicTime(4, 4, 4)
@@ -61,3 +64,13 @@ def scale_library (musicscale: MusicScale) -> MusicComposition:
                             [voice],
                             [1,2,3,4,5,6,7],
                             [0,1])
+    return comp
+
+def main():
+    comp = library(MusicScale(Diatonic.HEPTA, Diatonic.SCALE, 60, Diatonic.mixolydian))
+    # Save score
+    comp_to_file(comp, 'chordlibrary_in_key_' + TwelveTET.PITCH_CLASS_NAMES_SHARP(comp.main_scale.tonic) + '.mid')
+
+
+if __name__ == '__main__':
+    main()

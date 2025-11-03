@@ -11,35 +11,9 @@ import pandas as pd
 import itertools
 
 # Music21 modules
-from music21 import interval, meter, tempo, key, scale, note, serial
+from music21 import interval, key, scale, note, serial
 # MusicPy modules
 from musicpy import structures
-
-class MusicTime (Circle):
-    # Rhythm and meter
-
-    def __init__(self,
-                 timesteps: int = 8, # Number of timesteps (ticks) per cycle
-                 beats_in_measure: int = 4,
-                 beat_note: int = 4,
-                 bpm: int = 100):
-        # Timestep is the smallest rhythm relative unit, represented as integer
-        self.timesteps = timesteps
-        super().__init__(timesteps, labels=[str(i+1) for i in range(timesteps)])
-        # Meter: measure cycle of beats
-        self.beats_in_measure = beats_in_measure
-        self.beat_note = beat_note
-        self.bpm = bpm
-
-        # m21 meter
-        # unit is quarter note
-        self.M21_QUARTER = 4
-        self.timesignature = meter.TimeSignature(str(self.beats_in_measure) + '/' + str(self.beat_note))
-        # main_beatcount = self.timesignature.beatCount
-        self.beat_duration = self.M21_QUARTER / self.beat_note
-        # beat_duration2 = self.timesignature.beatDuration.quarterLength
-        self.tempo = tempo.MetronomeMark(number=self.bpm)
-
 
 class PitchRegister(Helix):
     # Chromatic pitch helix
@@ -276,9 +250,6 @@ class PitchSequence:
 
 
 def main():
-    # Music time and meter
-    time = MusicTime(16, 4, 4, 120)
-    time.show('16 timesteps circle')
     # Piano register from A0 to C8
     reg = PitchRegister(TwelveTET.A, 0, TwelveTET.C, 8)
     reg.show()
@@ -289,6 +260,7 @@ def main():
     print (f'PitchRegister: pos {pos} -> next pos {next_pos} -> (octave, pitchclass) {octave_pitchclass}')
 
     pcs = PitchClassSet()
+    print(f'PitchClassSet combinations: {len(pcs.combinations)}')
 
     scale5cmajor = MusicScale(Diatonic.PENTA, Diatonic.SCALE,
                               tonic=TwelveTET.C, mode=Diatonic.major_mode)

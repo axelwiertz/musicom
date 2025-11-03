@@ -4,18 +4,16 @@ Music composition structures using music21 and musicpy
 """
 import copy
 from constants import TwelveTET, MIDIinstrument
-from theory import MusicTime, MusicScale, Diatonic, PitchRegister
+from theory import MusicScale, Diatonic, PitchRegister
+from rhythm import MusicTime
 
 # Music21 modules: music notation and analysis
-from music21 import stream, clef, serial, metadata, tempo, instrument
+from music21 import stream, clef, metadata, tempo, instrument
 # MusicPy modules: computational music structures and algorithms
 from musicpy import structures
-from musicpy import musicpy as mp
 
 class MusicUnit:
-    # Harmonic rhythm: sequential pattern of onsets at timesteps
-    # A rhythm sequence is defined by
-    #  - a sequence of timestep intervals between onsets
+    # A musical unit: a sequence of pitches with timing and dynamics
     def __init__(self,
                 time: MusicTime = MusicTime(),
                 register: PitchRegister = PitchRegister(),
@@ -81,9 +79,6 @@ class MusicUnit:
                     scale_target : structures.scale):
         # Modulate
         self.chord = self.chord.modulation(scale_source, scale_target)
-
-    def chord_play (self, midi_instrument: int = MIDIinstrument.PIANO):
-        mp.play (self.chord, bpm=self.time.bpm, instrument=midi_instrument, wait=True)
 
     def add_pitch (self, pitch, duration : int = 1, onset_interval : int = 1, velocity: int = 100):
         self.pitch_nodes += [pitch]

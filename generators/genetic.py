@@ -1,8 +1,15 @@
 """
 A simple genetic algorithm implementation in Python.
 """
+from datetime import datetime
 from random import choices, randint, randrange, random, sample
 from typing import List, Optional, Callable, Tuple
+
+from constants import TwelveTET, MIDIinstrument
+from structures import MusicComposition, MusicUnit, MusicVoice
+from theory import MusicScale, PitchRegister, Diatonic
+from rhythm import MusicTime
+from converters import units_to_part
 
 # Type aliases for better readability
 Genome = List[int]
@@ -152,6 +159,60 @@ def main():
     print("Final Population after %d generations:" % generations)
     for genome in final_population:
         print("%s (Fitness: %d)" % (genome_to_string(genome), fitness_func(genome)))
+
+def create_population():
+    # Use a genetic algorithm to create a population of musical units
+    pr = PitchRegister()
+    time = MusicTime(8, 4, 4, 100)
+    unit = MusicUnit(time, pr)
+    voice = MusicVoice('Genetic voice', [unit], MIDIinstrument.PIANO)
+    comp = MusicComposition('Genetic '+str(int(datetime.now().timestamp())),
+                             MusicScale(Diatonic.HEPTA, Diatonic.SCALE, TwelveTET.C, Diatonic.major_mode),
+                [voice])
+
+    def fitness_func(genome_in: Genome) -> int:
+        # Simple fitness function: sum of genome values
+        return sum(genome_in)
+
+    # Binary genome representation
+    pitch_interval_bits = 6  # binary 24 pitch intervals
+    #max_pitch_interval = pow(2, pitch_interval_bits - 1)
+    onset_interval_bits = 4  # binary 8 timesteps
+    duration_bits = 4  # binary 8 timesteps
+    velocity_bits = 4  # binary 8 levels
+    totalbits = pitch_interval_bits + duration_bits + onset_interval_bits + velocity_bits
+
+    # Run the genetic algorithm
+    final_population, generations = run_evolution(
+        populate_func=lambda: generate_population(10, 20),
+        fitness_func=fitness_func,
+        fitness_limit=20,
+        generation_limit=50,
+        printer=print_stats
+    )
+
+    print("Final Population after %d generations:" % generations)
+    for genome in final_population:
+        print("%s (Fitness: %d)" % (genome_to_string(genome), fitness_func(genome)))
+
+    # Convert best genome to musical unit
+    unit = MusicUnit(time)
+
+    genome = final_population[0]
+    # Transform a generated genome into a unit
+    # Split genome in parts of 'bits' length
+    numparts = len(genome) % totalbits
+    genes_binary = []
+    for i in range(numparts):
+        # Extract binary elements
+        genes_binary += [genome[(i * totalbits):(i * totalbits) + totalbits]]
+
+    for gene_binary in genes_binary:
+        pitch_nr = int(sum([bit * pow(2, i) for i, bit in enumerate(gene_binary)]))
+
+    voice = MusicVoice('Genetic voice', [unit], MIDIinstrument.PIANO)
+    units_to_part(voice)
+
 
 if __name__ == '__main__':
     main()
