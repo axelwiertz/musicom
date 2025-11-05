@@ -10,6 +10,15 @@ from theory import Diatonic
 from music21 import roman
 from harmony import Scale7ChordHarmony
 
+def scale_patterns():
+    # Patterns in scales
+    # 3 Tria patterns:
+    scale3 = MusicScale(Diatonic.TRIA, Diatonic.MAJOR)
+    # 4 Tetra patterns:
+    scale4 = MusicScale(Diatonic.TETRA, Diatonic.MAJOR7)
+    # 5 Penta patterns:
+    scale5 = MusicScale(Diatonic.PENTA, Diatonic.SCALE)
+
 
 def progression_in_scale (chord_progression: list[int],
                             music_scale : MusicScale):

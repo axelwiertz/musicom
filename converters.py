@@ -8,14 +8,44 @@ import platform
 from constants import MIDIinstrument
 from structures import MusicUnit, MusicVoice, MusicComposition
 
-from musicpy import structures
-from musicpy import musicpy as mp
-from music21 import converter, stream, note, chord, midi
+from musicpy import structures, musicpy as mp
+from music21 import converter, stream, note, chord, midi, serial
 
 # Conversion between music21 and musicpy
 from music21py import m21_to_mpy, mpy_to_m21
 # Show score
 from showscore import show
+
+# Helper functions
+def sequence_rotations(sequence: list | tuple) -> list:
+    # Generate all rotations of a given sequence
+    rotations = [sequence[x:] + sequence[:x] for x in range(len(sequence))]
+    return rotations
+
+def interval_to_step(intervals: list[int]) -> list[int]:
+    # Convert a list of n intervals to a sequential mask with n+1 sequential degree/onset numbers and zeroes
+    # Example [2, 3] -> [1, 0, 2, 0, 0, 3]
+    steps = []
+    sequence_nr = 1
+    for x in intervals:
+        steps.append(sequence_nr)
+        sequence_nr += 1
+        for y in range(1, x):
+            steps.append(0)
+    return steps
+
+# Music21 converters
+def tonerow_to_stream (tonerow_base: serial.ToneRow = serial.ToneRow(row=[0, 4, 7, 4]),
+                   octave : int = 4
+                   ) -> stream.Stream:
+    stream_out = stream.Stream()
+    # Tonerow
+    for pcs in enumerate(tonerow_base):
+        pcs.octave = octave
+        stream_out.append(pcs)
+
+    return stream_out
+
 
 # Composition converters: display and playback
 def comp_to_visual(comp: MusicComposition):
@@ -41,6 +71,7 @@ def comp_to_sound(comp: MusicComposition):
         show(comp.score)  # Show musical notation
 
     elif platform.system() == 'IOS':
+        # Pyhonista does not support direct MIDI playback, so we use MIDIPlayer
         import sound
         # Play the result (IOS):
         comp.score.show('text')

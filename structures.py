@@ -2,7 +2,11 @@
 Musicom structures module
 Music composition structures using music21 and musicpy
 """
+from typing import Tuple
+import numpy as np
+import matplotlib.pyplot as plt
 import copy
+
 from constants import TwelveTET, MIDIinstrument
 from theory import MusicScale, Diatonic, PitchRegister
 from rhythm import MusicTime
@@ -147,36 +151,6 @@ class PercussionUnit(MusicUnit):
         super().__init__()
         self.clef = clef.PercussionClef()
         self.instrument = instrument.Woodblock()
-
-
-
-from typing import Tuple
-# Import
-import numpy as np
-import matplotlib.pyplot as plt
-
-
-"""
-Data structures
-"""
-def sequence_rotations(sequence: list | tuple) -> list:
-    #
-    rotations = [sequence[x:] + sequence[:x] for x in range(len(sequence))]
-    return rotations
-
-
-def interval_to_step(intervals: list[int]) -> list[int]:
-    # Convert a list of n intervals to a sequential mask with n+1 sequential degree/onset numbers and zeroes
-    # Example [2, 3] -> [1, 0, 2, 0, 0, 3]
-    steps = []
-    sequence_nr = 1
-    for x in intervals:
-        steps.append(sequence_nr)
-        sequence_nr += 1
-        for y in range(1, x):
-            steps.append(0)
-    return steps
-
 
 """
 Visualization

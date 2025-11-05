@@ -4,7 +4,7 @@ import copy
 import random
 
 from harmony import ChordHarmony
-from compose import MusicalUnit
+from ideas import MusicalUnit
 from theory import DiatonicLayer
 
 # Voices in a canon
