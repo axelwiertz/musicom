@@ -22,7 +22,6 @@ class MusicUnit:
                 time: MusicTime = MusicTime(),
                 register: PitchRegister = PitchRegister(),
                 pitch_nodes : list [int] = (),
-                pitch_intervals: list[int] = (),
                 onset_intervals: list[float] = (),
                 durations: list[float] = (),
                 velocities: list[int] = (),
@@ -46,7 +45,6 @@ class MusicUnit:
         # Combine two musical units
         new_unit = MusicUnit()
         new_unit.pitch_nodes = self.pitch_nodes + other.pitch_nodes
-        new_unit.pitch_intervals = self.pitch_intervals + other.pitch_intervals
         new_unit.onset_intervals = self.onset_intervals + other.onset_intervals
         new_unit.durations = self.durations + other.durations
         new_unit.velocities = self.velocities + other.velocities
@@ -87,7 +85,6 @@ class MusicUnit:
 
     def add_pitch (self, pitch, duration : int = 1, onset_interval : int = 1, velocity: int = 100):
         self.pitch_nodes += [pitch]
-        self.pitch_intervals += [self.pitch_nodes[-1] - self.pitch_nodes[-2] if len(self.pitch_nodes) > 1 else 0]
         self.onset_intervals += [onset_interval]
         self.durations += [duration]
         self.velocities += [velocity]
