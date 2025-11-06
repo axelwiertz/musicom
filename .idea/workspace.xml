@@ -4,11 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="split theory.py">
+    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="MusicSection">
+      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.agent.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.ask.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.ask2agent.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.edit.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library.py" beforeDir="false" afterPath="$PROJECT_DIR$/library.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/musicom.py" beforeDir="false" afterPath="$PROJECT_DIR$/musicom.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/theory.py" beforeDir="false" afterPath="$PROJECT_DIR$/theory.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/converters.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/intervalnetwork.py" beforeDir="false" afterPath="$PROJECT_DIR$/intervalnetwork.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/network.py" beforeDir="false" afterPath="$PROJECT_DIR$/network.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/percussion.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/projects/percussion.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/template.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/projects/template.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/soundwave.py" beforeDir="false" afterPath="$PROJECT_DIR$/soundwave.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +26,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="Jupyter Notebook" />
       </list>
     </option>
   </component>
@@ -35,7 +43,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/axelwiertz/musicom.git&quot;,
-    &quot;accountId&quot;: &quot;6aae448d-8813-4912-9f10-269bb181c470&quot;
+    &quot;accountId&quot;: &quot;492dc205-6640-48c6-8abd-49ddb1598aca&quot;
   }
 }</component>
   <component name="ProblemsViewState">
@@ -63,16 +71,23 @@
     &quot;Python.database.executor&quot;: &quot;Debug&quot;,
     &quot;Python.datastructure.executor&quot;: &quot;Debug&quot;,
     &quot;Python.examples.executor&quot;: &quot;Run&quot;,
+    &quot;Python.genetic.executor&quot;: &quot;Run&quot;,
     &quot;Python.harmony.executor&quot;: &quot;Run&quot;,
     &quot;Python.instruments.executor&quot;: &quot;Run&quot;,
-    &quot;Python.library.executor&quot;: &quot;Run&quot;,
-    &quot;Python.musicom.executor&quot;: &quot;Run&quot;,
+    &quot;Python.library.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.musicom.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.musicpy.executor&quot;: &quot;Debug&quot;,
     &quot;Python.part01.executor&quot;: &quot;Run&quot;,
     &quot;Python.rhythm.executor&quot;: &quot;Run&quot;,
     &quot;Python.song.executor&quot;: &quot;Run&quot;,
     &quot;Python.song002.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.soundlayer.executor&quot;: &quot;Run&quot;,
+    &quot;Python.structures.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.theory.executor&quot;: &quot;Run&quot;,
     &quot;Python.thread.executor&quot;: &quot;Run&quot;,
+    &quot;Python.twelvetet.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
@@ -82,7 +97,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.sync&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -98,16 +113,18 @@
       <recent name="C:\Users\92591\PycharmProjects\pythonProject" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\92591\PycharmProjects\musicom\generators" />
+      <recent name="C:\Users\92591\PycharmProjects\musicom\transformators" />
       <recent name="C:\Users\92591\PycharmProjects\musicom" />
+      <recent name="C:\Users\92591\PycharmProjects\musicom\projects" />
       <recent name="C:\Users\92591\PycharmProjects\pythonProject" />
-      <recent name="C:\Users\92591\PycharmProjects\pythonProject\Soundfont" />
     </key>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-PY-252.26830.99" />
-        <option value="bundled-python-sdk-164cda30dcd9-0af03a5fa574-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-252.26830.99" />
+        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-PY-252.27397.106" />
+        <option value="bundled-python-sdk-4e2b1448bda8-9a97661f3031-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-252.27397.106" />
       </set>
     </attachedChunks>
   </component>
@@ -123,342 +140,12 @@
       <workItem from="1759523435691" duration="1129000" />
       <workItem from="1759606945322" duration="1323000" />
       <workItem from="1759608352622" duration="7578000" />
-    </task>
-    <task id="LOCAL-00061" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1736353860352</created>
-      <option name="number" value="00061" />
-      <option name="presentableId" value="LOCAL-00061" />
-      <option name="project" value="LOCAL" />
-      <updated>1736353860352</updated>
-    </task>
-    <task id="LOCAL-00062" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1739795701707</created>
-      <option name="number" value="00062" />
-      <option name="presentableId" value="LOCAL-00062" />
-      <option name="project" value="LOCAL" />
-      <updated>1739795701707</updated>
-    </task>
-    <task id="LOCAL-00063" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1746646637820</created>
-      <option name="number" value="00063" />
-      <option name="presentableId" value="LOCAL-00063" />
-      <option name="project" value="LOCAL" />
-      <updated>1746646637821</updated>
-    </task>
-    <task id="LOCAL-00064" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1746732856669</created>
-      <option name="number" value="00064" />
-      <option name="presentableId" value="LOCAL-00064" />
-      <option name="project" value="LOCAL" />
-      <updated>1746732856670</updated>
-    </task>
-    <task id="LOCAL-00065" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1746733063070</created>
-      <option name="number" value="00065" />
-      <option name="presentableId" value="LOCAL-00065" />
-      <option name="project" value="LOCAL" />
-      <updated>1746733063070</updated>
-    </task>
-    <task id="LOCAL-00066" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1746736240764</created>
-      <option name="number" value="00066" />
-      <option name="presentableId" value="LOCAL-00066" />
-      <option name="project" value="LOCAL" />
-      <updated>1746736240764</updated>
-    </task>
-    <task id="LOCAL-00067" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1747081198606</created>
-      <option name="number" value="00067" />
-      <option name="presentableId" value="LOCAL-00067" />
-      <option name="project" value="LOCAL" />
-      <updated>1747081198606</updated>
-    </task>
-    <task id="LOCAL-00068" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1748529250474</created>
-      <option name="number" value="00068" />
-      <option name="presentableId" value="LOCAL-00068" />
-      <option name="project" value="LOCAL" />
-      <updated>1748529250474</updated>
-    </task>
-    <task id="LOCAL-00069" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1749221414232</created>
-      <option name="number" value="00069" />
-      <option name="presentableId" value="LOCAL-00069" />
-      <option name="project" value="LOCAL" />
-      <updated>1749221414232</updated>
-    </task>
-    <task id="LOCAL-00070" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1749567289695</created>
-      <option name="number" value="00070" />
-      <option name="presentableId" value="LOCAL-00070" />
-      <option name="project" value="LOCAL" />
-      <updated>1749567289696</updated>
-    </task>
-    <task id="LOCAL-00071" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1749627013202</created>
-      <option name="number" value="00071" />
-      <option name="presentableId" value="LOCAL-00071" />
-      <option name="project" value="LOCAL" />
-      <updated>1749627013203</updated>
-    </task>
-    <task id="LOCAL-00072" summary="Sync">
-      <option name="closed" value="true" />
-      <created>1749812900083</created>
-      <option name="number" value="00072" />
-      <option name="presentableId" value="LOCAL-00072" />
-      <option name="project" value="LOCAL" />
-      <updated>1749812900083</updated>
-    </task>
-    <task id="LOCAL-00073" summary="Scratch files added">
-      <option name="closed" value="true" />
-      <created>1749813915026</created>
-      <option name="number" value="00073" />
-      <option name="presentableId" value="LOCAL-00073" />
-      <option name="project" value="LOCAL" />
-      <updated>1749813915027</updated>
-    </task>
-    <task id="LOCAL-00074" summary="MusicPy archiving">
-      <option name="closed" value="true" />
-      <created>1749849203725</created>
-      <option name="number" value="00074" />
-      <option name="presentableId" value="LOCAL-00074" />
-      <option name="project" value="LOCAL" />
-      <updated>1749849203725</updated>
-    </task>
-    <task id="LOCAL-00075" summary="MusicPy archiving">
-      <option name="closed" value="true" />
-      <created>1750067231104</created>
-      <option name="number" value="00075" />
-      <option name="presentableId" value="LOCAL-00075" />
-      <option name="project" value="LOCAL" />
-      <updated>1750067231104</updated>
-    </task>
-    <task id="LOCAL-00076" summary="copy">
-      <option name="closed" value="true" />
-      <created>1750089318271</created>
-      <option name="number" value="00076" />
-      <option name="presentableId" value="LOCAL-00076" />
-      <option name="project" value="LOCAL" />
-      <updated>1750089318273</updated>
-    </task>
-    <task id="LOCAL-00077" summary="copy">
-      <option name="closed" value="true" />
-      <created>1751873335319</created>
-      <option name="number" value="00077" />
-      <option name="presentableId" value="LOCAL-00077" />
-      <option name="project" value="LOCAL" />
-      <updated>1751873335321</updated>
-    </task>
-    <task id="LOCAL-00078" summary="copy">
-      <option name="closed" value="true" />
-      <created>1751902539839</created>
-      <option name="number" value="00078" />
-      <option name="presentableId" value="LOCAL-00078" />
-      <option name="project" value="LOCAL" />
-      <updated>1751902539840</updated>
-    </task>
-    <task id="LOCAL-00079" summary="copy">
-      <option name="closed" value="true" />
-      <created>1752244653158</created>
-      <option name="number" value="00079" />
-      <option name="presentableId" value="LOCAL-00079" />
-      <option name="project" value="LOCAL" />
-      <updated>1752244653159</updated>
-    </task>
-    <task id="LOCAL-00080" summary="copy">
-      <option name="closed" value="true" />
-      <created>1752597017291</created>
-      <option name="number" value="00080" />
-      <option name="presentableId" value="LOCAL-00080" />
-      <option name="project" value="LOCAL" />
-      <updated>1752597017292</updated>
-    </task>
-    <task id="LOCAL-00081" summary="copy">
-      <option name="closed" value="true" />
-      <created>1753105746887</created>
-      <option name="number" value="00081" />
-      <option name="presentableId" value="LOCAL-00081" />
-      <option name="project" value="LOCAL" />
-      <updated>1753105746888</updated>
-    </task>
-    <task id="LOCAL-00082" summary="upodate">
-      <option name="closed" value="true" />
-      <created>1753105779466</created>
-      <option name="number" value="00082" />
-      <option name="presentableId" value="LOCAL-00082" />
-      <option name="project" value="LOCAL" />
-      <updated>1753105779466</updated>
-    </task>
-    <task id="LOCAL-00083" summary="upodate">
-      <option name="closed" value="true" />
-      <created>1753105867662</created>
-      <option name="number" value="00083" />
-      <option name="presentableId" value="LOCAL-00083" />
-      <option name="project" value="LOCAL" />
-      <updated>1753105867662</updated>
-    </task>
-    <task id="LOCAL-00084" summary="upodate">
-      <option name="closed" value="true" />
-      <created>1753199417522</created>
-      <option name="number" value="00084" />
-      <option name="presentableId" value="LOCAL-00084" />
-      <option name="project" value="LOCAL" />
-      <updated>1753199417522</updated>
-    </task>
-    <task id="LOCAL-00085" summary="update">
-      <option name="closed" value="true" />
-      <created>1753199440630</created>
-      <option name="number" value="00085" />
-      <option name="presentableId" value="LOCAL-00085" />
-      <option name="project" value="LOCAL" />
-      <updated>1753199440630</updated>
-    </task>
-    <task id="LOCAL-00086" summary="update">
-      <option name="closed" value="true" />
-      <created>1753288313111</created>
-      <option name="number" value="00086" />
-      <option name="presentableId" value="LOCAL-00086" />
-      <option name="project" value="LOCAL" />
-      <updated>1753288313111</updated>
-    </task>
-    <task id="LOCAL-00087" summary="update">
-      <option name="closed" value="true" />
-      <created>1753888899760</created>
-      <option name="number" value="00087" />
-      <option name="presentableId" value="LOCAL-00087" />
-      <option name="project" value="LOCAL" />
-      <updated>1753888899760</updated>
-    </task>
-    <task id="LOCAL-00088" summary="update">
-      <option name="closed" value="true" />
-      <created>1753945267675</created>
-      <option name="number" value="00088" />
-      <option name="presentableId" value="LOCAL-00088" />
-      <option name="project" value="LOCAL" />
-      <updated>1753945267675</updated>
-    </task>
-    <task id="LOCAL-00089" summary="delete rhythm.py">
-      <option name="closed" value="true" />
-      <created>1753973285979</created>
-      <option name="number" value="00089" />
-      <option name="presentableId" value="LOCAL-00089" />
-      <option name="project" value="LOCAL" />
-      <updated>1753973285979</updated>
-    </task>
-    <task id="LOCAL-00090" summary="delete song**.py">
-      <option name="closed" value="true" />
-      <created>1754064185901</created>
-      <option name="number" value="00090" />
-      <option name="presentableId" value="LOCAL-00090" />
-      <option name="project" value="LOCAL" />
-      <updated>1754064185901</updated>
-    </task>
-    <task id="LOCAL-00091" summary="rename to library.py">
-      <option name="closed" value="true" />
-      <created>1754313509061</created>
-      <option name="number" value="00091" />
-      <option name="presentableId" value="LOCAL-00091" />
-      <option name="project" value="LOCAL" />
-      <updated>1754313509062</updated>
-    </task>
-    <task id="LOCAL-00092" summary="rename to library.py">
-      <option name="closed" value="true" />
-      <created>1754320439490</created>
-      <option name="number" value="00092" />
-      <option name="presentableId" value="LOCAL-00092" />
-      <option name="project" value="LOCAL" />
-      <updated>1754320439490</updated>
-    </task>
-    <task id="LOCAL-00093" summary="simplification">
-      <option name="closed" value="true" />
-      <created>1754344529616</created>
-      <option name="number" value="00093" />
-      <option name="presentableId" value="LOCAL-00093" />
-      <option name="project" value="LOCAL" />
-      <updated>1754344529616</updated>
-    </task>
-    <task id="LOCAL-00094" summary="integration">
-      <option name="closed" value="true" />
-      <created>1754380628691</created>
-      <option name="number" value="00094" />
-      <option name="presentableId" value="LOCAL-00094" />
-      <option name="project" value="LOCAL" />
-      <updated>1754380628691</updated>
-    </task>
-    <task id="LOCAL-00095" summary="Creation routines">
-      <option name="closed" value="true" />
-      <created>1754394920349</created>
-      <option name="number" value="00095" />
-      <option name="presentableId" value="LOCAL-00095" />
-      <option name="project" value="LOCAL" />
-      <updated>1754394920350</updated>
-    </task>
-    <task id="LOCAL-00096" summary="Library routines">
-      <option name="closed" value="true" />
-      <created>1754409646080</created>
-      <option name="number" value="00096" />
-      <option name="presentableId" value="LOCAL-00096" />
-      <option name="project" value="LOCAL" />
-      <updated>1754409646081</updated>
-    </task>
-    <task id="LOCAL-00097" summary="Library routines">
-      <option name="closed" value="true" />
-      <created>1754475392543</created>
-      <option name="number" value="00097" />
-      <option name="presentableId" value="LOCAL-00097" />
-      <option name="project" value="LOCAL" />
-      <updated>1754475392543</updated>
-    </task>
-    <task id="LOCAL-00098" summary="note transformation">
-      <option name="closed" value="true" />
-      <created>1754513516205</created>
-      <option name="number" value="00098" />
-      <option name="presentableId" value="LOCAL-00098" />
-      <option name="project" value="LOCAL" />
-      <updated>1754513516206</updated>
-    </task>
-    <task id="LOCAL-00099" summary="note transformation">
-      <option name="closed" value="true" />
-      <created>1754579581959</created>
-      <option name="number" value="00099" />
-      <option name="presentableId" value="LOCAL-00099" />
-      <option name="project" value="LOCAL" />
-      <updated>1754579581960</updated>
-    </task>
-    <task id="LOCAL-00100" summary="chord transformation">
-      <option name="closed" value="true" />
-      <created>1754665035636</created>
-      <option name="number" value="00100" />
-      <option name="presentableId" value="LOCAL-00100" />
-      <option name="project" value="LOCAL" />
-      <updated>1754665035637</updated>
-    </task>
-    <task id="LOCAL-00101" summary="chord transformation">
-      <option name="closed" value="true" />
-      <created>1754685785797</created>
-      <option name="number" value="00101" />
-      <option name="presentableId" value="LOCAL-00101" />
-      <option name="project" value="LOCAL" />
-      <updated>1754685785798</updated>
-    </task>
-    <task id="LOCAL-00102" summary="include generator in musicom">
-      <option name="closed" value="true" />
-      <created>1754916296635</created>
-      <option name="number" value="00102" />
-      <option name="presentableId" value="LOCAL-00102" />
-      <option name="project" value="LOCAL" />
-      <updated>1754916296635</updated>
+      <workItem from="1761580141736" duration="145000" />
+      <workItem from="1761580312064" duration="471000" />
+      <workItem from="1762190479785" duration="9368000" />
+      <workItem from="1762244823565" duration="1675000" />
+      <workItem from="1762367057314" duration="7150000" />
+      <workItem from="1762456439379" duration="6060000" />
     </task>
     <task id="LOCAL-00103" summary="include generator in musicom">
       <option name="closed" value="true" />
@@ -516,7 +203,343 @@
       <option name="project" value="LOCAL" />
       <updated>1759524420838</updated>
     </task>
-    <option name="localTasksCounter" value="110" />
+    <task id="LOCAL-00110" summary="class Genetic">
+      <option name="closed" value="true" />
+      <created>1759766164538</created>
+      <option name="number" value="00110" />
+      <option name="presentableId" value="LOCAL-00110" />
+      <option name="project" value="LOCAL" />
+      <updated>1759766164538</updated>
+    </task>
+    <task id="LOCAL-00111" summary="stable genetic creation">
+      <option name="closed" value="true" />
+      <created>1759828270425</created>
+      <option name="number" value="00111" />
+      <option name="presentableId" value="LOCAL-00111" />
+      <option name="project" value="LOCAL" />
+      <updated>1759828270425</updated>
+    </task>
+    <task id="LOCAL-00112" summary="musicpy">
+      <option name="closed" value="true" />
+      <created>1759828863156</created>
+      <option name="number" value="00112" />
+      <option name="presentableId" value="LOCAL-00112" />
+      <option name="project" value="LOCAL" />
+      <updated>1759828863156</updated>
+    </task>
+    <task id="LOCAL-00113" summary="composition and unit">
+      <option name="closed" value="true" />
+      <created>1759854025349</created>
+      <option name="number" value="00113" />
+      <option name="presentableId" value="LOCAL-00113" />
+      <option name="project" value="LOCAL" />
+      <updated>1759854025350</updated>
+    </task>
+    <task id="LOCAL-00114" summary="musicpy notebook">
+      <option name="closed" value="true" />
+      <created>1759855298829</created>
+      <option name="number" value="00114" />
+      <option name="presentableId" value="LOCAL-00114" />
+      <option name="project" value="LOCAL" />
+      <updated>1759855298829</updated>
+    </task>
+    <task id="LOCAL-00115" summary="class musicalunit">
+      <option name="closed" value="true" />
+      <created>1760042672433</created>
+      <option name="number" value="00115" />
+      <option name="presentableId" value="LOCAL-00115" />
+      <option name="project" value="LOCAL" />
+      <updated>1760042672434</updated>
+    </task>
+    <task id="LOCAL-00116" summary="transformation and creation">
+      <option name="closed" value="true" />
+      <created>1760131769554</created>
+      <option name="number" value="00116" />
+      <option name="presentableId" value="LOCAL-00116" />
+      <option name="project" value="LOCAL" />
+      <updated>1760131769554</updated>
+    </task>
+    <task id="LOCAL-00117" summary="transformation and creation">
+      <option name="closed" value="true" />
+      <created>1760215398658</created>
+      <option name="number" value="00117" />
+      <option name="presentableId" value="LOCAL-00117" />
+      <option name="project" value="LOCAL" />
+      <updated>1760215398659</updated>
+    </task>
+    <task id="LOCAL-00118" summary="transformation and creation">
+      <option name="closed" value="true" />
+      <created>1760215639758</created>
+      <option name="number" value="00118" />
+      <option name="presentableId" value="LOCAL-00118" />
+      <option name="project" value="LOCAL" />
+      <updated>1760215639758</updated>
+    </task>
+    <task id="LOCAL-00119" summary="refactoring in classes">
+      <option name="closed" value="true" />
+      <created>1760222544368</created>
+      <option name="number" value="00119" />
+      <option name="presentableId" value="LOCAL-00119" />
+      <option name="project" value="LOCAL" />
+      <updated>1760222544369</updated>
+    </task>
+    <task id="LOCAL-00120" summary="time and styles">
+      <option name="closed" value="true" />
+      <created>1760306507384</created>
+      <option name="number" value="00120" />
+      <option name="presentableId" value="LOCAL-00120" />
+      <option name="project" value="LOCAL" />
+      <updated>1760306507384</updated>
+    </task>
+    <task id="LOCAL-00121" summary="numeric theory">
+      <option name="closed" value="true" />
+      <created>1760393001605</created>
+      <option name="number" value="00121" />
+      <option name="presentableId" value="LOCAL-00121" />
+      <option name="project" value="LOCAL" />
+      <updated>1760393001605</updated>
+    </task>
+    <task id="LOCAL-00122" summary="unit">
+      <option name="closed" value="true" />
+      <created>1760476665669</created>
+      <option name="number" value="00122" />
+      <option name="presentableId" value="LOCAL-00122" />
+      <option name="project" value="LOCAL" />
+      <updated>1760476665669</updated>
+    </task>
+    <task id="LOCAL-00123" summary="theory classes">
+      <option name="closed" value="true" />
+      <created>1760537978115</created>
+      <option name="number" value="00123" />
+      <option name="presentableId" value="LOCAL-00123" />
+      <option name="project" value="LOCAL" />
+      <updated>1760537978116</updated>
+    </task>
+    <task id="LOCAL-00124" summary="musicom use of musicalunit">
+      <option name="closed" value="true" />
+      <created>1760559077908</created>
+      <option name="number" value="00124" />
+      <option name="presentableId" value="LOCAL-00124" />
+      <option name="project" value="LOCAL" />
+      <updated>1760559077909</updated>
+    </task>
+    <task id="LOCAL-00125" summary="class hierarchy of 12TET and diatonic">
+      <option name="closed" value="true" />
+      <created>1760604983289</created>
+      <option name="number" value="00125" />
+      <option name="presentableId" value="LOCAL-00125" />
+      <option name="project" value="LOCAL" />
+      <updated>1760604983289</updated>
+    </task>
+    <task id="LOCAL-00126" summary="musicalunit">
+      <option name="closed" value="true" />
+      <created>1760628052086</created>
+      <option name="number" value="00126" />
+      <option name="presentableId" value="LOCAL-00126" />
+      <option name="project" value="LOCAL" />
+      <updated>1760628052086</updated>
+    </task>
+    <task id="LOCAL-00127" summary="musicalunit">
+      <option name="closed" value="true" />
+      <created>1760712206806</created>
+      <option name="number" value="00127" />
+      <option name="presentableId" value="LOCAL-00127" />
+      <option name="project" value="LOCAL" />
+      <updated>1760712206806</updated>
+    </task>
+    <task id="LOCAL-00128" summary="theory classes">
+      <option name="closed" value="true" />
+      <created>1760723749368</created>
+      <option name="number" value="00128" />
+      <option name="presentableId" value="LOCAL-00128" />
+      <option name="project" value="LOCAL" />
+      <updated>1760723749370</updated>
+    </task>
+    <task id="LOCAL-00129" summary="class structure">
+      <option name="closed" value="true" />
+      <created>1761082483720</created>
+      <option name="number" value="00129" />
+      <option name="presentableId" value="LOCAL-00129" />
+      <option name="project" value="LOCAL" />
+      <updated>1761082483721</updated>
+    </task>
+    <task id="LOCAL-00130" summary="loading percussion tracks">
+      <option name="closed" value="true" />
+      <created>1761150805491</created>
+      <option name="number" value="00130" />
+      <option name="presentableId" value="LOCAL-00130" />
+      <option name="project" value="LOCAL" />
+      <updated>1761150805491</updated>
+    </task>
+    <task id="LOCAL-00131" summary="classes and subclasses">
+      <option name="closed" value="true" />
+      <created>1761165936896</created>
+      <option name="number" value="00131" />
+      <option name="presentableId" value="LOCAL-00131" />
+      <option name="project" value="LOCAL" />
+      <updated>1761165936896</updated>
+    </task>
+    <task id="LOCAL-00132" summary="composition with theory">
+      <option name="closed" value="true" />
+      <created>1761253187679</created>
+      <option name="number" value="00132" />
+      <option name="presentableId" value="LOCAL-00132" />
+      <option name="project" value="LOCAL" />
+      <updated>1761253187679</updated>
+    </task>
+    <task id="LOCAL-00133" summary="MusicVoice">
+      <option name="closed" value="true" />
+      <created>1761310382206</created>
+      <option name="number" value="00133" />
+      <option name="presentableId" value="LOCAL-00133" />
+      <option name="project" value="LOCAL" />
+      <updated>1761310382206</updated>
+    </task>
+    <task id="LOCAL-00134" summary="Composing">
+      <option name="closed" value="true" />
+      <created>1761319526167</created>
+      <option name="number" value="00134" />
+      <option name="presentableId" value="LOCAL-00134" />
+      <option name="project" value="LOCAL" />
+      <updated>1761319526168</updated>
+    </task>
+    <task id="LOCAL-00135" summary="Theory and library">
+      <option name="closed" value="true" />
+      <created>1761385232759</created>
+      <option name="number" value="00135" />
+      <option name="presentableId" value="LOCAL-00135" />
+      <option name="project" value="LOCAL" />
+      <updated>1761385232760</updated>
+    </task>
+    <task id="LOCAL-00136" summary="Theory and library">
+      <option name="closed" value="true" />
+      <created>1761386952389</created>
+      <option name="number" value="00136" />
+      <option name="presentableId" value="LOCAL-00136" />
+      <option name="project" value="LOCAL" />
+      <updated>1761386952390</updated>
+    </task>
+    <task id="LOCAL-00137" summary="Helix classes">
+      <option name="closed" value="true" />
+      <created>1761392255270</created>
+      <option name="number" value="00137" />
+      <option name="presentableId" value="LOCAL-00137" />
+      <option name="project" value="LOCAL" />
+      <updated>1761392255270</updated>
+    </task>
+    <task id="LOCAL-00138" summary="Time circle and transformation">
+      <option name="closed" value="true" />
+      <created>1761410188943</created>
+      <option name="number" value="00138" />
+      <option name="presentableId" value="LOCAL-00138" />
+      <option name="project" value="LOCAL" />
+      <updated>1761410188943</updated>
+    </task>
+    <task id="LOCAL-00139" summary="Diatonic layer and classes">
+      <option name="closed" value="true" />
+      <created>1761426633939</created>
+      <option name="number" value="00139" />
+      <option name="presentableId" value="LOCAL-00139" />
+      <option name="project" value="LOCAL" />
+      <updated>1761426633940</updated>
+    </task>
+    <task id="LOCAL-00140" summary="Harmony and theory">
+      <option name="closed" value="true" />
+      <created>1761519251825</created>
+      <option name="number" value="00140" />
+      <option name="presentableId" value="LOCAL-00140" />
+      <option name="project" value="LOCAL" />
+      <updated>1761519251826</updated>
+    </task>
+    <task id="LOCAL-00141" summary="Harmony and theory">
+      <option name="closed" value="true" />
+      <created>1761580698769</created>
+      <option name="number" value="00141" />
+      <option name="presentableId" value="LOCAL-00141" />
+      <option name="project" value="LOCAL" />
+      <updated>1761580698769</updated>
+    </task>
+    <task id="LOCAL-00142" summary="Notebook">
+      <option name="closed" value="true" />
+      <created>1761580736250</created>
+      <option name="number" value="00142" />
+      <option name="presentableId" value="LOCAL-00142" />
+      <option name="project" value="LOCAL" />
+      <updated>1761580736250</updated>
+    </task>
+    <task id="LOCAL-00143" summary="Generation">
+      <option name="closed" value="true" />
+      <created>1761668766212</created>
+      <option name="number" value="00143" />
+      <option name="presentableId" value="LOCAL-00143" />
+      <option name="project" value="LOCAL" />
+      <updated>1761668766213</updated>
+    </task>
+    <task id="LOCAL-00144" summary="Composition">
+      <option name="closed" value="true" />
+      <created>1761858204611</created>
+      <option name="number" value="00144" />
+      <option name="presentableId" value="LOCAL-00144" />
+      <option name="project" value="LOCAL" />
+      <updated>1761858204612</updated>
+    </task>
+    <task id="LOCAL-00145" summary="Percussion and classes">
+      <option name="closed" value="true" />
+      <created>1762036278282</created>
+      <option name="number" value="00145" />
+      <option name="presentableId" value="LOCAL-00145" />
+      <option name="project" value="LOCAL" />
+      <updated>1762036278284</updated>
+    </task>
+    <task id="LOCAL-00146" summary="Restructuring">
+      <option name="closed" value="true" />
+      <created>1762189616482</created>
+      <option name="number" value="00146" />
+      <option name="presentableId" value="LOCAL-00146" />
+      <option name="project" value="LOCAL" />
+      <updated>1762189616483</updated>
+    </task>
+    <task id="LOCAL-00147" summary="Restructuring in functional modules">
+      <option name="closed" value="true" />
+      <created>1762205806310</created>
+      <option name="number" value="00147" />
+      <option name="presentableId" value="LOCAL-00147" />
+      <option name="project" value="LOCAL" />
+      <updated>1762205806311</updated>
+    </task>
+    <task id="LOCAL-00148" summary="README and requirements.txt">
+      <option name="closed" value="true" />
+      <created>1762367583405</created>
+      <option name="number" value="00148" />
+      <option name="presentableId" value="LOCAL-00148" />
+      <option name="project" value="LOCAL" />
+      <updated>1762367583406</updated>
+    </task>
+    <task id="LOCAL-00149" summary="projects">
+      <option name="closed" value="true" />
+      <created>1762380949056</created>
+      <option name="number" value="00149" />
+      <option name="presentableId" value="LOCAL-00149" />
+      <option name="project" value="LOCAL" />
+      <updated>1762380949056</updated>
+    </task>
+    <task id="LOCAL-00150" summary="adding librosa">
+      <option name="closed" value="true" />
+      <created>1762459655207</created>
+      <option name="number" value="00150" />
+      <option name="presentableId" value="LOCAL-00150" />
+      <option name="project" value="LOCAL" />
+      <updated>1762459655208</updated>
+    </task>
+    <task id="LOCAL-00151" summary="MusicSection">
+      <option name="closed" value="true" />
+      <created>1762459959202</created>
+      <option name="number" value="00151" />
+      <option name="presentableId" value="LOCAL-00151" />
+      <option name="project" value="LOCAL" />
+      <updated>1762459959202</updated>
+    </task>
+    <option name="localTasksCounter" value="152" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -549,45 +572,50 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="First version" />
-    <MESSAGE value="Collected parts and samples" />
-    <MESSAGE value="Colected parts and samples" />
-    <MESSAGE value="Unversioned update?" />
-    <MESSAGE value="Reorganized" />
-    <MESSAGE value="Pieces and DAW" />
-    <MESSAGE value="Sync" />
-    <MESSAGE value="Scratch files added" />
-    <MESSAGE value="MusicPy archiving" />
-    <MESSAGE value="copy" />
-    <MESSAGE value="upodate" />
-    <MESSAGE value="update" />
-    <MESSAGE value="delete rhythm.py" />
-    <MESSAGE value="delete song**.py" />
-    <MESSAGE value="rename to library.py" />
-    <MESSAGE value="simplification" />
-    <MESSAGE value="integration" />
-    <MESSAGE value="Creation routines" />
-    <MESSAGE value="Library routines" />
-    <MESSAGE value="note transformation" />
-    <MESSAGE value="chord transformation" />
-    <MESSAGE value="include generator in musicom" />
-    <MESSAGE value="rhythm create" />
-    <MESSAGE value="reference library" />
-    <MESSAGE value="split theory.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="split theory.py" />
+    <MESSAGE value="musicom use of musicalunit" />
+    <MESSAGE value="class hierarchy of 12TET and diatonic" />
+    <MESSAGE value="musicalunit" />
+    <MESSAGE value="theory classes" />
+    <MESSAGE value="class structure" />
+    <MESSAGE value="loading percussion tracks" />
+    <MESSAGE value="classes and subclasses" />
+    <MESSAGE value="composition with theory" />
+    <MESSAGE value="MusicVoice" />
+    <MESSAGE value="Composing" />
+    <MESSAGE value="Theory and library" />
+    <MESSAGE value="Helix classes" />
+    <MESSAGE value="Time circle and transformation" />
+    <MESSAGE value="Diatonic layer and classes" />
+    <MESSAGE value="Harmony and theory" />
+    <MESSAGE value="Notebook" />
+    <MESSAGE value="Generation" />
+    <MESSAGE value="Composition" />
+    <MESSAGE value="Percussion and classes" />
+    <MESSAGE value="Restructuring" />
+    <MESSAGE value="Restructuring in functional modules" />
+    <MESSAGE value="README and requirements.txt" />
+    <MESSAGE value="projects" />
+    <MESSAGE value="adding librosa" />
+    <MESSAGE value="MusicSection" />
+    <option name="LAST_COMMIT_MESSAGE" value="MusicSection" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/musicom.py</url>
-          <line>338</line>
-          <option name="timeStamp" value="21" />
+          <url>file://$PROJECT_DIR$/intervalnetwork.py</url>
+          <line>14</line>
+          <option name="timeStamp" value="44" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/theory.py</url>
-          <line>3</line>
-          <option name="timeStamp" value="22" />
+          <url>file://$PROJECT_DIR$/generators/genetic.py</url>
+          <line>150</line>
+          <option name="timeStamp" value="45" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/constants.py</url>
+          <line>5</line>
+          <option name="timeStamp" value="46" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

@@ -1,3 +1,19 @@
+"""
+This module builds directed graphs representing chromatic and diatonic
+interval networks enriched with chord qualities (triads and seventh chords)
+and voice-leading information. Each node represents a pitch class or scale
+degree, and edges are annotated with interval data and voice-leading movements
+between chords. The graphs can be exported in various formats and visualized
+using Matplotlib.
+"""
+
+"""
+TODO:
+- Extend chord qualities to include more complex chords (e.g., ninths, elevenths).
+- Implement more sophisticated voice-leading algorithms considering voice ranges (PitchRegister).
+"""
+
+
 # interval_networks_with_chords_and_voice_leading.py
 import networkx as nx
 import matplotlib.pyplot as plt

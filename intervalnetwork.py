@@ -1,3 +1,16 @@
+"""
+Musicom
+Musical Interval Network Representation and Export
+"""
+
+"""
+TODO:
+- Create a dict-based chromatic interval network with nodes and edges.
+- Convert to NetworkX graph with edge attributes.
+- Export to GraphML, GEXF, GML formats.
+- combine with network.py
+"""
+
 # chromatic_interval_network_to_networkx.py
 import networkx as nx
 import matplotlib.pyplot as plt

@@ -1,3 +1,16 @@
+"""
+Musicom
+Sound Wave Synthesis and Analysis
+"""
+
+"""
+TODO:
+- Split into multiple files (synthesis, analysis, utils)
+- Implement more waveforms (square, triangle, sawtooth)
+- Add effects (reverb, delay)
+- Improve ADSR envelope customization
+"""
+
 import numpy as np
 from scipy.io import wavfile
 import matplotlib.pyplot as plt
@@ -112,56 +125,57 @@ class SoundWave:
         self.spectrum_frequency = np.fft.fftfreq(t.shape[-1]) * self.sample_rate
         self.spectrum_amplitude = np.fft.fft(self.wavarray)
 
-    def synthesize (self):
-        # Synthesize sound wave based on the FFT analysis
-        assert hasattr(self, 'spectrum_frequency') and hasattr(self, 'spectrum_amplitude')
+def synthesize_wave (wave: SoundWave):
+    # Synthesize sound wave based on the FFT analysis
+    assert hasattr(wave, 'spectrum_frequency') and hasattr(wave, 'spectrum_amplitude')
 
-        # Get positive frequencies
-        idx = np.where(self.spectrum_frequency > 0)[0]
-        freq = self.spectrum_frequency[idx]
-        sp = self.spectrum_amplitude[idx]
+    wave.fft_analyze()
 
-        # Get dominant frequencies
-        sort = np.argsort(-abs(sp.real))[:100]
-        dom_freq = freq[sort]
+    # Get positive frequencies
+    idx = np.where(wave.spectrum_frequency > 0)[0]
+    freq = wave.spectrum_frequency[idx]
+    sp = wave.spectrum_amplitude[idx]
 
-        # Round and calculate amplitude ratio
-        freq_ratio = np.round(dom_freq / self.frequency)
-        # Normalize amplitude ratio
-        unique_freq_ratio = np.unique(freq_ratio)
-        # Amplitude ratio
-        amp_ratio = abs(sp.real[sort] / np.sum(sp.real[sort]))
-        # Average amplitude ratio for each harmonic
-        factor = np.zeros((int(unique_freq_ratio[-1]),))
-        for i in range(factor.shape[0]):
-            idx = np.where(freq_ratio == i + 1)[0]
-            factor[i] = np.sum(amp_ratio[idx])
-        factor = factor / np.sum(factor)
+    # Get dominant frequencies
+    sort = np.argsort(-abs(sp.real))[:100]
+    dom_freq = freq[sort]
 
-        # Synthesize note with overtones
-        self.duration = 2.5
-        self.apply_overtones(factor=factor)
-        # Apply smooth ADSR weights
-        self.get_adsr_weights(length=[0.05, 0.25, 0.55, 0.15],
-                              decay=[0.075, 0.02, 0.005, 0.1],
-                              sustain_level=0.1)
+    # Round and calculate amplitude ratio
+    freq_ratio = np.round(dom_freq / wave.frequency)
+    # Normalize amplitude ratio
+    unique_freq_ratio = np.unique(freq_ratio)
+    # Amplitude ratio
+    amp_ratio = abs(sp.real[sort] / np.sum(sp.real[sort]))
+    # Average amplitude ratio for each harmonic
+    factor = np.zeros((int(unique_freq_ratio[-1]),))
+    for i in range(factor.shape[0]):
+        idx = np.where(freq_ratio == i + 1)[0]
+        factor[i] = np.sum(amp_ratio[idx])
+    factor = factor / np.sum(factor)
 
-        data = self.fundamental * self.weights
-        # Adjusting the Amplitude
-        self.wavedata = data * (4096 / np.max(data))
+    # Synthesize note with overtones
+    wave.duration = 2.5
+    wave.apply_overtones(factor=factor)
+    # Apply smooth ADSR weights
+    wave.get_adsr_weights(length=[0.05, 0.25, 0.55, 0.15],
+                          decay=[0.075, 0.02, 0.005, 0.1],
+                          sustain_level=0.1)
+
+    data = wave.fundamental * wave.weights
+    # Adjusting the Amplitude
+    wave.wavedata = data * (4096 / np.max(data))
 
 
 def main():
     sw = SoundWave()
-    sw.load_wave('piano_c.wav')
-    sw.plot_wave_time()
-    sw.create_wave('C4')
-    sw.save_wave('pure_c.wav')
+    sw.load('piano_c.wav')
+    sw.plot_time()
+    sw.create('C4')
+    sw.save('pure_c.wav')
 
-    sw.plot_wave_time()
+    sw.plot_time()
 
-    sw.fft_analyze()
-    sw.synthesize_wave()
+    synthesize_wave(sw)
     sw.save_wave('synthetic_c.wav')
 
 
