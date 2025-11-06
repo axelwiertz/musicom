@@ -2,7 +2,7 @@
 Musicom structures module
 Music composition structures using music21 and musicpy
 """
-from typing import Tuple
+from typing import Tuple, List, Optional
 import numpy as np
 import matplotlib.pyplot as plt
 import copy
@@ -30,7 +30,6 @@ class MusicUnit:
         self.time = time
         self.register = register
         self.pitch_nodes = pitch_nodes
-        self.pitch_intervals = pitch_intervals
         # The sum of the intervals is the total number of timesteps in MusicTime
         self.onset_intervals = onset_intervals
         self.durations = durations
@@ -65,9 +64,11 @@ class MusicUnit:
         # Refresh derived attributes
         self.timesteps = sum(self.onset_intervals)
 
-
-    def nodes_to_intervals(self):
-        self.pitch_intervals = [self.pitch_nodes[i+1]-self.pitch_nodes[i] for i in range(len(self.pitch_nodes)-1)]
+    @property
+    def pitch_intervals(self) -> List[int]:
+        if len(self.pitch_nodes) < 2:
+            return []
+        return [self.pitch_nodes[i+1]-self.pitch_nodes[i] for i in range(len(self.pitch_nodes)-1)]
 
     def intervals_to_nodes(self, start_pitch_node: int = 0):
         self.pitch_nodes = []
@@ -111,6 +112,87 @@ class MusicVoice:
 
     def track_notes(self, i: int = 0, j: int = 4):
         return self.track[i:j]
+
+
+# --- new: MusicSection ---
+class MusicSection:
+    """A section is an ordered collection of MusicUnit objects with helpers.
+
+    Minimal contract:
+    - inputs: list of MusicUnit (optional)
+    - outputs: query methods (length, total_timesteps), conversions (to_stream, to_track)
+    - error modes: accepts empty lists; methods raise IndexError for invalid indices where appropriate.
+    """
+    def __init__(self, name: str = 'Section', units: list[MusicUnit] | None = None):
+        self.name = name
+        self.units = list(units) if units is not None else []
+
+    def append(self, unit: MusicUnit):
+        """Append a MusicUnit to the section."""
+        self.units.append(unit)
+
+    def extend(self, units: list[MusicUnit]):
+        """Extend section with an iterable of MusicUnit."""
+        self.units.extend(units)
+
+    def insert(self, index: int, unit: MusicUnit):
+        self.units.insert(index, unit)
+
+    def remove_at(self, index: int):
+        """Remove and return unit at index."""
+        return self.units.pop(index)
+
+    def refresh(self):
+        for u in self.units:
+            if hasattr(u, 'refresh'):
+                u.refresh()
+
+    def total_timesteps(self) -> int:
+        """Return total timesteps across all contained units."""
+        total = 0
+        for u in self.units:
+            # prefer timesteps attribute, fall back to onset_intervals
+            if hasattr(u, 'timesteps') and u.timesteps is not None:
+                total += int(u.timesteps)
+            elif hasattr(u, 'onset_intervals'):
+                total += int(sum(getattr(u, 'onset_intervals', [])))
+        return total
+
+    def to_stream(self) -> stream.Stream:
+        """Concatenate the music21 streams from contained units into a single Stream."""
+        s = stream.Stream()
+        for u in self.units:
+            if hasattr(u, 'stream') and u.stream is not None:
+                # deep copy to avoid side effects when appending
+                s.append(copy.deepcopy(u.stream))
+        return s
+
+    def to_track(self):
+        """Build a musicpy track by concatenating unit chords if available."""
+        t = structures.track([], track_name=self.name)
+        for u in self.units:
+            if hasattr(u, 'chord') and u.chord is not None:
+                try:
+                    t = t + u.chord
+                except Exception:
+                    # fall back to extend if addition is not supported
+                    try:
+                        t.extend(u.chord)
+                    except Exception:
+                        pass
+        return t
+
+    def __len__(self):
+        return len(self.units)
+
+    def __iter__(self):
+        return iter(self.units)
+
+    def __getitem__(self, idx):
+        return self.units[idx]
+
+    def __add__(self, other: 'MusicSection') -> 'MusicSection':
+        return MusicSection(name=f"{self.name}+{other.name}", units=self.units + other.units)
 
 
 class MusicComposition:

@@ -6,6 +6,9 @@ Musicom Constants
 from numpy import array
 from math import pow, log2
 
+from librosa import midi_to_hz, hz_to_midi, note_to_midi, midi_to_note
+
+
 class TwelveTET:
     # 12-Tone Equal Temperament tuning system
     TWELVE = 12  # Number of pitch classes 0-11
@@ -44,12 +47,14 @@ class TwelveTET:
 
 
     def midi_to_freq(self, midi):
-        """Return frequency (Hz) for given MIDI note number (integer or float)."""
-        return self.A4_FREQ * pow(2.0, (midi - MIDIpitch.A4) / float(self.TWELVE))
+        """Return frequency (Hz) for given MIDI note number (integer or float).
+        return self.A4_FREQ * pow(2.0, (midi - MIDIpitch.A4) / float(self.TWELVE))"""
+        return midi_to_hz(midi)
 
     def freq_to_midi(self, freq):
-        """Return MIDI note number (can be fractional) for a given frequency (Hz)."""
-        return MIDIpitch.A4 + float(self.TWELVE) * log2(freq / self.A4_FREQ)
+        """Return MIDI note number (can be fractional) for a given frequency (Hz).
+        return MIDIpitch.A4 + float(self.TWELVE) * log2(freq / self.A4_FREQ)"""
+        return hz_to_midi(freq)
 
     def semitone_ratio(self, n=1):
         """Return frequency ratio for n semitones: 2^(n/12)."""
@@ -64,14 +69,15 @@ class TwelveTET:
         return semitones * self.CENTS
 
     def midi_to_name(self, midi):
-        """Return note name (e.g., C4, A4) for integer MIDI. If non-integer, rounds to nearest."""
+        """Return note name (e.g., C4, A4) for integer MIDI. If non-integer, rounds to nearest.
         m = int(round(midi))
         name = self.PITCH_CLASS_NAMES_SHARP[m % self.TWELVE]
         octave = (m // self.TWELVE) - 1
-        return f"{name}{octave}"
+        return f"{name}{octave}"""
+        return midi_to_note(midi)
 
     def name_to_midi(self, name):
-        """Parse note name like 'C#4' or 'A4' to MIDI number. Accepts flats as 'Bb'."""
+        """Parse note name like 'C#4' or 'A4' to MIDI number. Accepts flats as 'Bb'.
         s = name.strip()
         # handle optional accidental and octave
         base = s[0].upper()
@@ -88,7 +94,8 @@ class TwelveTET:
             # convert flat to equivalent sharp
             idx = self.PITCH_CLASS_NAMES_FLATMAP.get(base, base)
         semitone_index = self.PITCH_CLASS_NAMES_SHARP.index(idx)
-        return (octave + 1) * self.TWELVE + semitone_index
+        return (octave + 1) * self.TWELVE + semitone_index"""
+        return note_to_midi (name)
 
 
 class MIDIpitch:
