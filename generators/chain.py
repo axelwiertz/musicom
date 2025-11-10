@@ -4,12 +4,18 @@ Markov chain music generator
 """
 from random import choice
 from collections import defaultdict
-from harmony import Scale7ChordHarmony, Scale7PitchDegree
 
-class MarkovChain:
+from generators.generator import Generator
+from harmony import Scale7ChordHarmony, Scale7PitchDegree
+from structures import MusicUnit
+
+
+class MarkovChain(Generator):
     # Markov chain of transitions
-    def __init__(self, train):
+    def __init__(self, source_unit : MusicUnit, train):
         # build transition dict
+        super().__init__(source_unit)
+        self.train = train
         self.trans = defaultdict(list)
         for a, b in zip(train, train[1:]):
             self.trans[a[0]].append(b[0])

@@ -105,26 +105,22 @@ def track_to_print(track: structures.track):
     print('Duration : ' + str(track.content.duration))
     print('Interval : ' + str(track.content.interval))
 
-def units_to_part (self):
-    for u in self.units:
-        u.unit_to_stream()
-        self.part.append(u.stream)
+def section_to_part (section: MusicSection) -> stream.Part:
+    part_out = stream.Part()
+    for u in section.units:
+        part_out.append(unit_to_stream(u))
 
-def part_to_unit (self) -> MusicUnit:
+def part_to_unit (part : stream.Part) -> MusicUnit:
     # Convert part to unit
-    unit = MusicUnit()
-    unit.stream = stream.Stream()
-    for e in self.part.recurse().notesAndRests:
-        unit.stream.append(e)
-    self.units.append(unit)
+    unit = stream_to_unit(part_to_stream(part))
     return unit
 
 # Unit converters
 def unit_to_sound (unit: MusicUnit, midi_instrument: int = MIDIinstrument.PIANO):
     mp.play (unit.chord, bpm=unit.time.bpm, instrument=midi_instrument, wait=True)
 
-def unit_to_chord(unit: MusicUnit):
-    unit.chord = structures.chord(unit.pitch_nodes, unit.durations, unit.onset_intervals, unit.volumes)
+def unit_to_chord(unit: MusicUnit) -> structures.chord:
+    return structures.chord(unit.pitch_nodes, unit.durations, unit.onset_intervals, unit.volumes)
 
 def chord_to_unit(chord: structures.chord) -> MusicUnit:
     unit = MusicUnit()
@@ -302,37 +298,43 @@ def score_set_time(score : stream.Score, time : MusicTime):
     score.insert(0, time.timesignature)
     score.insert(0, tempo.MetronomeMark(number=time.bpm))
 
+def comp_to_score (comp : MusicComposition) -> stream.Score:
+    # Convert composition to music21 score
+    score_out = stream.Score()
+    for v in comp.voices:
+        part = stream.Part()
+        part.partName = v.name
+        for u in v.units:
+            part.append(unit_to_stream(u))
+        score_out.append(part)
+    return score_out
 
-def score_to_piece (self):
+def score_to_piece (score : stream.Score) -> structures.piece:
     # convert music21 score to musicpy piece
-    self.piece = m21_to_mpy(self.score)
+    return m21_to_mpy(score)
 
-def piece_to_score (self):
+def piece_to_score (piece : structures.piece) -> stream.Score:
     # convert musicpy piece to music21 score
-    self.score = mpy_to_m21(self.piece)
+    return mpy_to_m21(piece)
 
-def piece_play (self):
+def piece_play (piece : structures.piece):
     # Play piece and wait until finish, writes temp.midi
-    mp.play(self.piece, wait=True)
+    mp.play(piece, wait=True)
 
 def file_to_comp (comp: MusicComposition, filename_in: str = Config.DEFAULT_MIDI_FILE_IN):
     # Load a score
     comp.score = converter.parse (Config.DEFAULT_PATH + filename_in)
     comp.piece = mp.read(Config.DEFAULT_PATH + Config.DEFAULT_MIDI_FILE_IN, get_off_drums=True, split_channels=True)
 
-def comp_to_file (comp : MusicComposition, filename_out: str = Config.DEFAULT_MIDI_FILE_OUT):
+def score_to_midifile (score: stream.Score , filename_out: str = Config.DEFAULT_MIDI_FILE_OUT):
     # Save score
-    comp.score.write(fmt='midi', fp=Config.DEFAULT_PATH + filename_out)
+    score.write(fmt='midi', fp=Config.DEFAULT_PATH + filename_out)
 
-def comp_to_midifile (comp: MusicComposition):
+def percussionscore_to_midifile (score: stream.Score, filename_out: str = Config.DEFAULT_MIDI_FILE_OUT):
     # Set to percussion instrument (General MIDI channel 10)
     # Write to MIDI
-    mf = midi.translate.streamToMidiFile(comp.score)
+    mf = midi.translate.streamToMidiFile(score)
     # music21 uses an unpitched instrument class; channel will be set by MIDI export
-    mf.open(Config.DEFAULT_PATH+'percussion_example.mid', 'wb')
+    mf.open(Config.DEFAULT_PATH+filename_out, 'wb')
     mf.write()
     mf.close()
-
-def comp_to_piece (comp: MusicComposition):
-    # convert music21 score to musicpy piece
-    comp.piece = m21_to_mpy(comp.score)

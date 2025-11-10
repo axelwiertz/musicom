@@ -7,11 +7,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from constants import TwelveTET, MIDIinstrument
+from converters import unit_to_chord
 from theory import MusicScale, Diatonic, PitchRegister
 from rhythm import MusicTime
 
 # Music21 modules: music notation and analysis
-from music21 import stream, clef, metadata, instrument
+from music21 import clef, instrument
 # MusicPy modules: computational music structures and algorithms
 from musicpy import structures
 
@@ -56,7 +57,7 @@ class MusicUnit:
                     scale_source : structures.scale,
                     scale_target : structures.scale):
         # Modulate
-        self.chord = self.chord.modulation(scale_source, scale_target)
+        self.pitch_nodes = unit_to_chord(self).modulation(scale_source, scale_target).pitches
 
     def add_pitch (self, pitch, duration : int = 1, onset_interval : int = 1, volume: int = 100):
         self.pitch_nodes += [pitch]

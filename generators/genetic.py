@@ -9,7 +9,7 @@ from constants import TwelveTET, MIDIinstrument
 from structures import MusicComposition, MusicUnit, MusicVoice
 from theory import MusicScale, PitchRegister, Diatonic
 from rhythm import MusicTime
-from converters import units_to_part
+from converters import unit_to_stream
 
 # Type aliases for better readability
 Genome = List[int]
@@ -211,7 +211,6 @@ def create_population():
         pitch_nr = int(sum([bit * pow(2, i) for i, bit in enumerate(gene_binary)]))
 
     voice = MusicVoice('Genetic voice', [unit], MIDIinstrument.PIANO)
-    units_to_part(voice)
 
 
 if __name__ == '__main__':
