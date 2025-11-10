@@ -2,14 +2,16 @@
 Musicom converters
 Module for converting musical scores between different formats using Music21 and MusicPy.
 """
+from typing import List
 from config import Config
 import platform
+import copy
 
 from constants import MIDIinstrument
-from structures import MusicUnit, MusicVoice, MusicComposition
+from structures import MusicUnit, MusicSection, MusicVoice, MusicComposition, MusicTime
 
 from musicpy import structures, musicpy as mp
-from music21 import converter, stream, note, chord, midi, serial
+from music21 import converter, stream, note, midi, serial, tempo
 
 # Conversion between music21 and musicpy
 from music21py import m21_to_mpy, mpy_to_m21
@@ -36,6 +38,17 @@ def interval_to_step(intervals: list[int]) -> list[int]:
             steps.append(0)
     return steps
 
+def intervals_to_nodes(pitch_intervals: List[int], start_pitch_node: int = 0) -> List[int]:
+    # Convert a list of pitch intervals to pitch nodes starting from start_pitch_node
+    pitch_nodes = []
+    current_pitch = start_pitch_node
+    pitch_nodes.append(current_pitch)
+    for pitch_interval in pitch_intervals:
+        current_pitch += pitch_interval
+        pitch_nodes.append(current_pitch)
+    return pitch_nodes
+
+
 # Music21 converters
 def tonerow_to_stream (tonerow_base: serial.ToneRow = serial.ToneRow(row=[0, 4, 7, 4]),
                    octave : int = 4
@@ -50,27 +63,27 @@ def tonerow_to_stream (tonerow_base: serial.ToneRow = serial.ToneRow(row=[0, 4, 
 
 
 # Composition converters: display and playback
-def comp_to_visual(comp: MusicComposition):
+def score_to_visual(score: stream.Score):
     """
     Show or play the score depending on the platform.
     1. On Windows, display text and musical notation.
     2. On iOS, display text (MIDI playback code is commented out).
     """
     if platform.system() == 'Windows':
-        comp.score.show('text')
+        score.show('text')
         #    score.show('midi')  # Play MIDI
         # Showing score without external programs like Musescore
-        show(comp.score)  # Show musical notation
+        show(score)  # Show musical notation
 
     elif platform.system() == 'IOS':
-        comp.score.show('text')
+        score.show('text')
 
-def comp_to_sound(comp: MusicComposition):
+def score_to_sound(score: stream.Score):
     # Play or show the score depending on the platform.
     if platform.system() == 'Windows':
-        comp.score.show('text')
+        score.show('text')
         #    score.show('midi')  # Play MIDI
-        show(comp.score)  # Show musical notation
+        show(score)  # Show musical notation
 
     elif platform.system() == 'IOS':
         # Pyhonista may not support direct MIDI playback; try to import sound module if available
@@ -80,20 +93,17 @@ def comp_to_sound(comp: MusicComposition):
         except Exception:
             sound = None
         # Play the result (IOS) when sound module is available
-        comp.score.show('text')
+        score.show('text')
         player = sound.MIDIPlayer('target.mid')
         player.play()
         player.stop()
 
-# Voice converters
-def track_play (self):
-    mp.play(self.track, wait=True)
-
-def track_to_print(voice: MusicVoice):
-    print('Name     : ' + str(voice.track.track_name))
-    print('Notes    : ' + str(voice.track.content.notes))
-    print('Duration : ' + str(voice.track.content.duration))
-    print('Interval : ' + str(voice.track.content.interval))
+# Print converters
+def track_to_print(track: structures.track):
+    print('Name     : ' + str(track.track_name))
+    print('Notes    : ' + str(track.content.notes))
+    print('Duration : ' + str(track.content.duration))
+    print('Interval : ' + str(track.content.interval))
 
 def units_to_part (self):
     for u in self.units:
@@ -114,32 +124,36 @@ def unit_to_sound (unit: MusicUnit, midi_instrument: int = MIDIinstrument.PIANO)
     mp.play (unit.chord, bpm=unit.time.bpm, instrument=midi_instrument, wait=True)
 
 def unit_to_chord(unit: MusicUnit):
-    unit.chord = structures.chord(unit.pitch_nodes, unit.durations, unit.onset_intervals, unit.velocities)
+    unit.chord = structures.chord(unit.pitch_nodes, unit.durations, unit.onset_intervals, unit.volumes)
 
-def chord_to_unit(unit: MusicUnit):
-    unit.pitch_nodes = unit.chord.notes
-    unit.durations = unit.chord.get_duration()
-    unit.onset_intervals = unit.chord.interval
-    unit.velocities = unit.chord.get_volume()
+def chord_to_unit(chord: structures.chord) -> MusicUnit:
+    unit = MusicUnit()
+    unit.pitch_nodes = chord.notes
+    unit.durations = chord.get_duration()
+    unit.onset_intervals = chord.interval
+    unit.volumes = chord.get_volume()
+    return unit
 
-def unit_to_stream (unit: MusicUnit):
+def unit_to_stream (unit: MusicUnit) -> stream.Stream:
     # Create a stream with notes and rests
-    # Iterate over the list of pitches, intervals, durations and velocities
+    stream_out = stream.Stream()
+    # Iterate over the list of pitches, intervals, durations and volumes
     for i in range(len(unit.pitch_nodes)):
         # Add notes and rests to the stream
         restduration = unit.onset_intervals[i] - unit.durations[i]
         if restduration > 0:
-            unit.stream.append(note.Rest(quarterLength=restduration))
+            stream_out.append(note.Rest(quarterLength=restduration))
         else:
             new_note = note.Note(pitch=unit.pitch_nodes[i], quarterLength=unit.durations[i])
-            new_note.volume.velocity = unit.velocities[i]
-            unit.stream.append(new_note)
+            new_note.volume.velocity = unit.volumes[i]
+            stream_out.append(new_note)
+    return stream_out
 
-def stream_to_unit (unit: MusicUnit):
+def stream_to_unit (stream_in : stream.Stream) -> MusicUnit:
     # Convert m21 stream to unit
     # via chord
-    stream_to_chord(unit)
-    chord_to_unit(unit)
+    chord = stream_to_chord(stream_in)
+    unit = chord_to_unit(chord)
     # direct
     """
     for i in range(len(unit.pitch_nodes)):
@@ -149,37 +163,32 @@ def stream_to_unit (unit: MusicUnit):
 
         if isinstance(element, note.Rest):
             restduration = unit.onset_intervals[i] - unit.durations[i]
-            unit.velocities[i] += unit.stream[i].volume.velocity
+            unit.volumes[i] += unit.stream[i].volume.velocity
 
     unit.nodes_to_intervals()
     """
     # Transfer notes, rests and chords from the stream to the unit
-    for element in unit.stream:
-        if isinstance(element, (note.Note, note.Rest, chord.Chord)):
+    for element in stream_in:
+        if isinstance(element, (note.Note, note.Rest)):
             if isinstance(element, note.Note):
                 unit.pitch_nodes += [element.pitch.midi]
                 unit.durations += [element.duration.quarterLength]
-                unit.velocities += [element.volume.velocity if element.volume.velocity is not None else 100]
+                unit.volumes += [element.volume.velocity if element.volume.velocity is not None else 100]
             elif isinstance(element, note.Rest):
                 # Add rest as onset interval
                 if len(unit.onset_intervals) == 0:
                     unit.onset_intervals += [element.duration.quarterLength]
                 else:
                     unit.onset_intervals[-1] += element.duration.quarterLength
-            elif isinstance(element, chord.Chord):
-                for p in element.pitches:
-                    unit.pitch_nodes += [p.midi]
-                    unit.durations += [element.duration.quarterLength]
-                    unit.velocities += [element.volume.velocity if element.volume.velocity is not None else 100]
+    return unit
 
-
-def stream_to_chord (unit: MusicUnit):
+def stream_to_chord (stream_in: stream.Stream) -> structures.chord:
     # convert music21 score to musicpy piece
-    unit.chord = m21_to_mpy(unit.stream)
+    return m21_to_mpy(stream_in)
 
-def chord_to_stream (unit: MusicUnit):
+def chord_to_stream (chord: structures.chord) -> stream.Stream:
     # convert musicpy piece to music21 score
-    unit.stream = mpy_to_m21(unit.chord)
+    return mpy_to_m21(chord)
 
 # --- DataFrame / Excel helpers for MusicUnit ---
 def unit_to_dataframe(unit: MusicUnit) -> pd.DataFrame:
@@ -199,7 +208,7 @@ def unit_to_dataframe(unit: MusicUnit) -> pd.DataFrame:
         'pitch_interval': list(getattr(unit, 'pitch_intervals', []) or []),
         'onset_interval': list(getattr(unit, 'onset_intervals', []) or []),
         'duration': list(getattr(unit, 'durations', []) or []),
-        'velocity': list(getattr(unit, 'velocities', []) or []),
+        'velocity': list(getattr(unit, 'volumes', []) or []),
     }
 
     n = max((len(v) for v in fields.values()), default=0)
@@ -244,20 +253,55 @@ def unit_to_excel(unit: MusicUnit, filename: str | None = None, path: str = Conf
 
     return filepath
 
-# Composition converters
-def voices_to_parts (self):
-    # Convert voices to score parts
-    for v in self.voices:
-        self.score.append(v.part)
+# Section cobverters
 
-def parts_to_voices (self):
+def to_stream(section: MusicSection) -> stream.Stream:
+    """Concatenate the music21 streams from contained units into a single Stream."""
+    s = stream.Stream()
+    for u in section.units:
+        if hasattr(u, 'stream') and u.stream is not None:
+            # deep copy to avoid side effects when appending
+            s.append(copy.deepcopy(u.stream))
+    return s
+
+def section_to_track(section: MusicSection) -> structures.track:
+    """Build a musicpy track by concatenating unit chords if available."""
+    t = structures.track([], track_name=section.name)
+    for u in section.units:
+        if hasattr(u, 'chord') and u.chord is not None:
+            try:
+                t = t + u.chord
+            except Exception:
+                # fall back to extend if addition is not supported
+                try:
+                    t.extend(u.chord)
+                except Exception:
+                    pass
+    return t
+
+
+# Composition converters
+def voices_to_parts (composition: MusicComposition) -> list[stream.Part]:
+    # Convert voices to score parts
+    parts = []
+    for v in composition.voices:
+        for u in v.units:
+            parts.append(unit_to_stream(u))
+    return parts
+
+def parts_to_voices (score: stream.Score) -> list[MusicVoice]:
     # Convert score parts to voices
-    self.voices = []
-    for p in self.score.parts:
-        unit = MusicUnit()
-        voice = MusicVoice(name=p.partName, units=[unit])
-        voice.part = p
-        self.voices.append(voice)
+    voices = []
+    for p in score.parts:
+        voice = MusicVoice(name=p.partName, units=[stream_to_unit(p)])
+        voices.append(voice)
+    return voices
+
+def score_set_time(score : stream.Score, time : MusicTime):
+    # Set the time signature, key signature and tempo
+    score.insert(0, time.timesignature)
+    score.insert(0, tempo.MetronomeMark(number=time.bpm))
+
 
 def score_to_piece (self):
     # convert music21 score to musicpy piece
@@ -289,6 +333,6 @@ def comp_to_midifile (comp: MusicComposition):
     mf.write()
     mf.close()
 
-def print_piece (comp: MusicComposition):
-    for i in range(len(comp.voices)):
-        track_to_print(comp.voices[i])
+def comp_to_piece (comp: MusicComposition):
+    # convert music21 score to musicpy piece
+    comp.piece = m21_to_mpy(comp.score)

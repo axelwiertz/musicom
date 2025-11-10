@@ -1,18 +1,17 @@
 """
 Musicom structures module
-Music composition structures using music21 and musicpy
+Music composition structures
 """
-from typing import Tuple, List, Optional
+from typing import Tuple, List
 import numpy as np
 import matplotlib.pyplot as plt
-import copy
 
 from constants import TwelveTET, MIDIinstrument
 from theory import MusicScale, Diatonic, PitchRegister
 from rhythm import MusicTime
 
 # Music21 modules: music notation and analysis
-from music21 import stream, clef, metadata, tempo, instrument
+from music21 import stream, clef, metadata, instrument
 # MusicPy modules: computational music structures and algorithms
 from musicpy import structures
 
@@ -24,22 +23,14 @@ class MusicUnit:
                 pitch_nodes : list [int] = (),
                 onset_intervals: list[float] = (),
                 durations: list[float] = (),
-                velocities: list[int] = (),
+                volumes: list[int] = (),
                 ):
         self.time = time
         self.register = register
         self.pitch_nodes = pitch_nodes
-        # The sum of the intervals is the total number of timesteps in MusicTime
         self.onset_intervals = onset_intervals
         self.durations = durations
-        self.velocities = velocities
-        #self.refresh()
-        self.timesteps = sum(self.onset_intervals)
-
-        # m21
-        self.stream =  stream.Stream()
-        # mp
-        self.chord = structures.chord([])
+        self.volumes = volumes
 
     def __add__(self, other):
         # Combine two musical units
@@ -47,20 +38,13 @@ class MusicUnit:
         new_unit.pitch_nodes = self.pitch_nodes + other.pitch_nodes
         new_unit.onset_intervals = self.onset_intervals + other.onset_intervals
         new_unit.durations = self.durations + other.durations
-        new_unit.velocities = self.velocities + other.velocities
-
-        # m21
-        new_unit.stream = copy.deepcopy(self.stream)
-        new_unit.stream.append(other.stream)
-        # mp
-        new_unit.chord = self.chord + other.chord
-
-        new_unit.refresh()
+        new_unit.volumes = self.volumes + other.volumes
         return new_unit
 
-    def refresh (self):
-        # Refresh derived attributes
-        self.timesteps = sum(self.onset_intervals)
+    @property
+    def timesteps (self):
+        # The sum of the onset intervals is the total number of timesteps in MusicTime
+        return sum(self.onset_intervals)
 
     @property
     def pitch_intervals(self) -> List[int]:
@@ -68,26 +52,17 @@ class MusicUnit:
             return []
         return [self.pitch_nodes[i+1]-self.pitch_nodes[i] for i in range(len(self.pitch_nodes)-1)]
 
-    def intervals_to_nodes(self, start_pitch_node: int = 0):
-        self.pitch_nodes = []
-        current_pitch = start_pitch_node
-        self.pitch_nodes.append(current_pitch)
-        for pitch_interval in self.pitch_intervals:
-            current_pitch += pitch_interval
-            self.pitch_nodes.append(current_pitch)
-
-
     def modulate (self,
                     scale_source : structures.scale,
                     scale_target : structures.scale):
         # Modulate
         self.chord = self.chord.modulation(scale_source, scale_target)
 
-    def add_pitch (self, pitch, duration : int = 1, onset_interval : int = 1, velocity: int = 100):
+    def add_pitch (self, pitch, duration : int = 1, onset_interval : int = 1, volume: int = 100):
         self.pitch_nodes += [pitch]
         self.onset_intervals += [onset_interval]
         self.durations += [duration]
-        self.velocities += [velocity]
+        self.volumes += [volume]
 
     def add_pitches_vertical (self, pitches, duration=4):
         for p in pitches:
@@ -103,13 +78,6 @@ class MusicVoice:
         self.name = name
         self.midi_instrument = midi_instrument
         self.units = units
-
-        self.track = structures.track([], track_name=name,instrument=midi_instrument)
-        self.part = stream.Part()
-
-    def track_notes(self, i: int = 0, j: int = 4):
-        return self.track[i:j]
-
 
 # --- new: MusicSection ---
 class MusicSection:
@@ -139,45 +107,13 @@ class MusicSection:
         """Remove and return unit at index."""
         return self.units.pop(index)
 
-    def refresh(self):
-        for u in self.units:
-            if hasattr(u, 'refresh'):
-                u.refresh()
-
     def total_timesteps(self) -> int:
         """Return total timesteps across all contained units."""
         total = 0
         for u in self.units:
-            # prefer timesteps attribute, fall back to onset_intervals
             if hasattr(u, 'timesteps') and u.timesteps is not None:
                 total += int(u.timesteps)
-            elif hasattr(u, 'onset_intervals'):
-                total += int(sum(getattr(u, 'onset_intervals', [])))
         return total
-
-    def to_stream(self) -> stream.Stream:
-        """Concatenate the music21 streams from contained units into a single Stream."""
-        s = stream.Stream()
-        for u in self.units:
-            if hasattr(u, 'stream') and u.stream is not None:
-                # deep copy to avoid side effects when appending
-                s.append(copy.deepcopy(u.stream))
-        return s
-
-    def to_track(self):
-        """Build a musicpy track by concatenating unit chords if available."""
-        t = structures.track([], track_name=self.name)
-        for u in self.units:
-            if hasattr(u, 'chord') and u.chord is not None:
-                try:
-                    t = t + u.chord
-                except Exception:
-                    # fall back to extend if addition is not supported
-                    try:
-                        t.extend(u.chord)
-                    except Exception:
-                        pass
-        return t
 
     def __len__(self):
         return len(self.units)
@@ -207,21 +143,6 @@ class MusicComposition:
         self.main_scale = main_scale
         self.main_progression = main_progression
         self.voices = voices
-
-        # Music21 score
-        self.score = stream.Score()
-        self.score.metadata = metadata.Metadata()
-        self.score.metadata.title = title
-        self.score.metadata.composer = 'Musicom'
-
-        # MusicPy piece
-        self.piece = structures.piece
-
-    def score_set_time(self, time : MusicTime):
-        # Set the time signature, key signature and tempo
-        self.score.insert(0, time.timesignature)
-        self.score.insert(0, tempo.MetronomeMark(number=time.bpm))
-
 
 
 class PercussionUnit(MusicUnit):
