@@ -3,8 +3,8 @@ from music21 import stream, note, key, scale, roman
 import copy
 import random
 
-from harmony import ChordHarmony
-from ideas import MusicalUnit
+from harmony import Scale7ChordHarmony
+from structures import MusicalUnit
 from theory import DiatonicLayer
 
 # Voices in a canon
@@ -256,7 +256,7 @@ def main():
     unit.scale = DiatonicLayer.DEFAULT_SCALE
     main_key = key.Key('C')
     # chord_degrees = [1, 4, 6, 2, 5, 1]
-    chord_degrees = ChordHarmony.PROGRESSIONS[0]
+    chord_degrees = Scale7ChordHarmony.PROGRESSIONS[0]
 
     main_chords = stream.Stream()
     for i in chord_degrees:

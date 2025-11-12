@@ -6,7 +6,7 @@ from constants import TwelveTET
 from converters import *
 
 
-from transformators.pitchsequence import PitchSequence
+from generators.pitchsequence import PitchSequence
 
 # Music21 modules: music notation and analysis
 from music21 import roman, key, harmony, serial

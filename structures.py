@@ -20,14 +20,12 @@ class MusicUnit:
     # A musical unit: a sequence of pitches with timing and dynamics
     def __init__(self,
                 time: MusicTime = MusicTime(),
-                register: PitchRegister = PitchRegister(),
                 pitch_nodes : list [int] = (),
                 onset_intervals: list[float] = (),
                 durations: list[float] = (),
                 volumes: list[int] = (),
                 ):
         self.time = time
-        self.register = register
         self.pitch_nodes = pitch_nodes
         self.onset_intervals = onset_intervals
         self.durations = durations
@@ -107,14 +105,6 @@ class MusicSection:
     def remove_at(self, index: int):
         """Remove and return unit at index."""
         return self.units.pop(index)
-
-    def total_timesteps(self) -> int:
-        """Return total timesteps across all contained units."""
-        total = 0
-        for u in self.units:
-            if hasattr(u, 'timesteps') and u.timesteps is not None:
-                total += int(u.timesteps)
-        return total
 
     def __len__(self):
         return len(self.units)

@@ -24,7 +24,6 @@ All sequences are of class MeterSequence
 from dataclasses import dataclass
 
 from structures import MusicUnit, Circle
-from music21 import meter, tempo
 
 
 class MusicTime (Circle):
@@ -42,14 +41,6 @@ class MusicTime (Circle):
         self.beat_note = beat_note
         self.bpm = bpm
 
-        # m21 meter
-        # unit is quarter note
-        self.M21_QUARTER = 4
-        self.timesignature = meter.TimeSignature(str(self.beats_in_measure) + '/' + str(self.beat_note))
-        # main_beatcount = self.timesignature.beatCount
-        self.beat_duration = self.M21_QUARTER / self.beat_note
-        # beat_duration2 = self.timesignature.beatDuration.quarterLength
-        self.tempo = tempo.MetronomeMark(number=self.bpm)
 
 @dataclass
 class QuantizedEvent:

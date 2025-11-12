@@ -6,7 +6,7 @@ from typing import List
 from music21 import chord, note, stream, interval
 from structures import MusicUnit, PitchRegister
 
-from generators.generator import Generator
+from generators import Generator
 
 import random
 from constants import TwelveTET

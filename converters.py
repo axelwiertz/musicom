@@ -11,7 +11,7 @@ from constants import MIDIinstrument
 from structures import MusicUnit, MusicSection, MusicVoice, MusicComposition, MusicTime
 
 from musicpy import structures, musicpy as mp
-from music21 import converter, stream, note, midi, serial, tempo
+from music21 import converter, stream, note, midi, serial, tempo, meter
 
 # Conversion between music21 and musicpy
 from music21py import m21_to_mpy, mpy_to_m21
@@ -48,6 +48,16 @@ def intervals_to_nodes(pitch_intervals: List[int], start_pitch_node: int = 0) ->
         pitch_nodes.append(current_pitch)
     return pitch_nodes
 
+def time_to_meter (time: MusicTime) -> meter.TimeSignature:
+    # m21 meter
+    timesignature = meter.TimeSignature(str(time.beats_in_measure) + '/' + str(time.beat_note))
+    return timesignature
+
+def time_to_tempo (time: MusicTime) -> tempo.MetronomeMark:
+    # m21 temp
+    metronomemark = tempo.MetronomeMark(number=time.bpm)
+
+    return metronomemark
 
 # Music21 converters
 def tonerow_to_stream (tonerow_base: serial.ToneRow = serial.ToneRow(row=[0, 4, 7, 4]),
