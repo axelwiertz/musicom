@@ -3,7 +3,7 @@ Music theory
 """
 from utilities.config import Config
 from constants import TwelveTET
-from structures.structures import Circle, Helix
+from structures.composition import Circle, Helix
 from utilities.helpers import sequence_rotations, interval_to_step
 
 # General modules

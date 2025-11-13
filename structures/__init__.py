@@ -3,16 +3,16 @@ Musicom structures package
 Music composition structures, theory, rhythm, and network representations
 """
 
+from .circle import Circle
+from .helix import Helix
+
 # Core structures
-from .structures import (
+from .composition import (
     MusicUnit,
     MusicVoice,
     MusicSection,
     MusicComposition,
-    PercussionUnit,
 )
-from circle import Circle
-from helix import Helix
 
 # Music theory
 from .theory import (
@@ -65,7 +65,6 @@ __all__ = [
     'MusicVoice',
     'MusicSection',
     'MusicComposition',
-    'PercussionUnit',
     'Circle',
     'Helix',
 

@@ -4,29 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="module structure">
-      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.agent.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.ask.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.ask2agent.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.edit.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/converters/music21.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/converters/musiccomposition.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/converters/musicpy.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/converters/musicunit.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/structures/circle.py" afterDir="false" />
+    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="logical split of files">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/converters.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/time.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/time.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generators/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/generators/base.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/generators/transformation.py" beforeDir="false" afterPath="$PROJECT_DIR$/generators/transformation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/percussion.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/projects/percussion.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/template.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/projects/template.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/structures/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/structures.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/structures.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testers/structures.py" beforeDir="false" afterPath="$PROJECT_DIR$/testers/structures.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utilities/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utilities/helpers.py" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/helpers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/structures/rhythm.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/rhythm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/structures/structures.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/composition.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/structures/theory.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/theory.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,15 +145,8 @@
       <workItem from="1762792915030" duration="14621000" />
       <workItem from="1762979986451" duration="187000" />
       <workItem from="1762980239447" duration="6339000" />
-      <workItem from="1763061855290" duration="10053000" />
-    </task>
-    <task id="LOCAL-00108" summary="reference library">
-      <option name="closed" value="true" />
-      <created>1755676682867</created>
-      <option name="number" value="00108" />
-      <option name="presentableId" value="LOCAL-00108" />
-      <option name="project" value="LOCAL" />
-      <updated>1755676682867</updated>
+      <workItem from="1763061855290" duration="10141000" />
+      <workItem from="1763072110739" duration="3200000" />
     </task>
     <task id="LOCAL-00109" summary="split theory.py">
       <option name="closed" value="true" />
@@ -554,7 +532,15 @@
       <option name="project" value="LOCAL" />
       <updated>1763064805586</updated>
     </task>
-    <option name="localTasksCounter" value="157" />
+    <task id="LOCAL-00157" summary="logical split of files">
+      <option name="closed" value="true" />
+      <created>1763072055437</created>
+      <option name="number" value="00157" />
+      <option name="presentableId" value="LOCAL-00157" />
+      <option name="project" value="LOCAL" />
+      <updated>1763072055437</updated>
+    </task>
+    <option name="localTasksCounter" value="158" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -587,7 +573,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="class structure" />
     <MESSAGE value="loading percussion tracks" />
     <MESSAGE value="classes and subclasses" />
     <MESSAGE value="composition with theory" />
@@ -612,7 +597,8 @@
     <MESSAGE value="separate converters" />
     <MESSAGE value="generators" />
     <MESSAGE value="module structure" />
-    <option name="LAST_COMMIT_MESSAGE" value="module structure" />
+    <MESSAGE value="logical split of files" />
+    <option name="LAST_COMMIT_MESSAGE" value="logical split of files" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

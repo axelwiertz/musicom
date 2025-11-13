@@ -23,7 +23,7 @@ All sequences are of class MeterSequence
 # quant_events -> use in MIDI-like grid processing
 from dataclasses import dataclass
 
-from structures.structures import MusicUnit, Circle
+from structures.composition import MusicUnit, Circle
 
 
 class MusicTime (Circle):

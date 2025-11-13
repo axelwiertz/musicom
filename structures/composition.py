@@ -4,7 +4,6 @@ Music composition structures
 """
 from typing import List
 
-
 from constants import TwelveTET, MIDIinstrument
 from .theory import MusicScale, Diatonic
 from .rhythm import MusicTime
@@ -62,17 +61,6 @@ class MusicUnit(MusicBase):
         for p in pitches:
             self.add_pitch(p,0, duration)
 
-class MusicVoice(MusicBase):
-    # A horizontal musical voice
-    def __init__(self,
-                 name: str = 'Voice',
-                 units: list[MusicUnit] = (),
-                 midi_instrument: int = MIDIinstrument.PIANO,
-                 ):
-        super().__init__(name)
-        self.midi_instrument = midi_instrument
-        self.units = units
-
 # --- new: MusicSection ---
 class MusicSection (MusicBase):
     """A section is an vertical collection of MusicUnit objects
@@ -83,7 +71,7 @@ class MusicSection (MusicBase):
     def __init__(self,
                  name: str = 'Section',
                  units: List[MusicUnit] = ()):
-        super.__init__(name)
+        super().__init__(name)
         self.units = units
 
     def append(self, unit: MusicUnit):
@@ -110,19 +98,27 @@ class MusicSection (MusicBase):
     def __getitem__(self, idx):
         return self.units[idx]
 
-    def __add__(self, other: 'MusicSection') -> 'MusicSection':
-        return MusicSection(name=f"{self.name}+{other.name}", units=self.units + other.units)
+
+class MusicVoice(MusicBase):
+    # A horizontal musical voice
+    def __init__(self,
+                 name: str = 'Voice',
+                 sections: List[MusicSection] = (),
+                 midi_instrument: int = MIDIinstrument.PIANO,
+                 ):
+        super().__init__(name)
+        self.midi_instrument = midi_instrument
+        self.sections = sections
 
 
 class MusicComposition:
-    #
+    # A full musical composition
     def __init__(self,
                  title: str = "Composition",
                  main_scale: MusicScale = MusicScale(Diatonic.HEPTA, Diatonic.SCALE, TwelveTET.C, Diatonic.major_mode),
                  voices : list[MusicVoice] = (),
                  sections: list[MusicSection] = (),
                 ):
-
         self.title = title
         self.main_scale = main_scale
         self.voices = voices

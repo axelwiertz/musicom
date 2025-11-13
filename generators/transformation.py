@@ -4,8 +4,7 @@ import copy
 import random
 
 from rules.harmony import Scale7ChordHarmony
-from structures import MusicalUnit
-from structures.theory import Diatonic
+from structures import MusicalUnit, Diatonic
 
 # Voices in a canon
 VOICE1 = 0
