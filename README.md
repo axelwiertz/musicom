@@ -127,8 +127,8 @@ musicom/
 ```python
 from constants import TwelveTET, MIDIinstrument
 from structures import MusicComposition, MusicUnit, MusicVoice
-from theory import MusicScale, Diatonic, PitchRegister
-from rhythm import MusicTime
+from structures.theory import MusicScale, Diatonic, PitchRegister
+from structures.rhythm import MusicTime
 from converters import comp_to_visual
 
 # Create a time signature (16 timesteps, 4/4 time, 120 BPM)
@@ -166,7 +166,7 @@ comp_to_visual(comp)
 
 ```python
 from generators.chain import MarkovChain
-from harmony import Scale7ChordHarmony
+from rules.harmony import Scale7ChordHarmony
 
 # Create a Markov chain for chord progressions
 chord_chain = MarkovChain(Scale7ChordHarmony.movement_rules)

@@ -10,7 +10,7 @@ from generators import Generator
 
 import random
 from constants import TwelveTET
-from rhythm import MusicTime
+from structures.rhythm import MusicTime
 
 class HarmonicFunction(Generator):
     def __init__(self,

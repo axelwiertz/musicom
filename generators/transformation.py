@@ -3,9 +3,9 @@ from music21 import stream, note, key, scale, roman
 import copy
 import random
 
-from harmony import Scale7ChordHarmony
+from rules.harmony import Scale7ChordHarmony
 from structures import MusicalUnit
-from theory import DiatonicLayer
+from structures.theory import DiatonicLayer
 
 # Voices in a canon
 VOICE1 = 0

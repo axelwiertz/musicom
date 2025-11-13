@@ -2,7 +2,7 @@
 Music - Harmony
 Patterns and rules
 """
-from theory import Diatonic, MusicPattern
+from structures.theory import Diatonic, MusicPattern
 
 class OnsetIntervalPattern:
     TWO = (1, 1)

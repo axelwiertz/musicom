@@ -7,8 +7,8 @@ from typing import List, Optional, Callable, Tuple
 
 from constants import TwelveTET, MIDIinstrument
 from structures import MusicComposition, MusicUnit, MusicVoice
-from theory import MusicScale, PitchRegister, Diatonic
-from rhythm import MusicTime
+from structures.theory import MusicScale, PitchRegister, Diatonic
+from structures.rhythm import MusicTime
 from converters import unit_to_stream
 
 # Type aliases for better readability

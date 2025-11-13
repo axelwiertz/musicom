@@ -8,7 +8,7 @@ from collections import defaultdict
 
 
 from generators import Generator
-from harmony import Scale7ChordHarmony, Scale7PitchDegree
+from rules.harmony import Scale7ChordHarmony, Scale7PitchDegree
 from structures import MusicUnit
 
 

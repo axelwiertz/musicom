@@ -6,10 +6,9 @@ from typing import List
 from constants import TwelveTET, MIDIinstrument
 from structures import MusicScale, MusicUnit, MusicVoice, MusicComposition, PitchRegister
 from converters import score_to_midifile, chord_to_unit, comp_to_score, stream_to_unit
-from rhythm import MusicTime
-from theory import Diatonic
+from structures.rhythm import MusicTime
+from structures.theory import Diatonic
 from music21 import roman, stream
-from harmony import Scale7ChordHarmony
 
 from generators import Generator
 
