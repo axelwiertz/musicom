@@ -5,7 +5,7 @@ import random
 
 from rules.harmony import Scale7ChordHarmony
 from structures import MusicalUnit
-from structures.theory import DiatonicLayer
+from structures.theory import Diatonic
 
 # Voices in a canon
 VOICE1 = 0
@@ -253,7 +253,7 @@ def stream_transform_canon(stream_in: stream.Stream,
 def main():
     unit = MusicalUnit()
     # Create based on chord progression
-    unit.scale = DiatonicLayer.DEFAULT_SCALE
+    unit.scale = Diatonic.DEFAULT_SCALE
     main_key = key.Key('C')
     # chord_degrees = [1, 4, 6, 2, 5, 1]
     chord_degrees = Scale7ChordHarmony.PROGRESSIONS[0]

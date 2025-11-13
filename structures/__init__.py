@@ -10,11 +10,9 @@ from .structures import (
     MusicSection,
     MusicComposition,
     PercussionUnit,
-    Circle,
-    Helix,
-    show_plot,
-    rhythm_circle,
 )
+from circle import Circle
+from helix import Helix
 
 # Music theory
 from .theory import (
@@ -70,8 +68,6 @@ __all__ = [
     'PercussionUnit',
     'Circle',
     'Helix',
-    'show_plot',
-    'rhythm_circle',
 
     # Music theory
     'PitchRegister',

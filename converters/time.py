@@ -1,3 +1,6 @@
+from structures import MusicTime
+from music21 import meter, tempo
+
 def time_to_meter (time: MusicTime) -> meter.TimeSignature:
     # m21 meter
     timesignature = meter.TimeSignature(str(time.beats_in_measure) + '/' + str(time.beat_note))

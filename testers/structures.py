@@ -1,3 +1,12 @@
+from utilities import Config
+import pandas as pd
+import numpy as np
+from constants import TwelveTET
+from structures import PitchRegister, Diatonic, MusicPattern, MusicScale, PitchClassSet
+from structures.circle import Circle
+from structures.helix import Helix
+from music21 import interval
+
 def main():
     # Piano register from A0 to C8
     reg = PitchRegister(TwelveTET.A, 0, TwelveTET.C, 8)
@@ -47,6 +56,12 @@ def main():
 
 #    pc_circle.show(pcp7.majormodeschromatic, TwelveTET.PITCH_CLASS_NAMES_SHARP, 'Major circle')
 
+    h = Helix()
+    h.show()
+    # Test functions
+    # Show rhythm in circle
+    rc = Circle(4, ['Down', 'Up','Down', 'Up'])
+    rc.show()
 
 
 if __name__ == '__main__':
