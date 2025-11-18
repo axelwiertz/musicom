@@ -1,13 +1,16 @@
-from utilities import Config
+from typing import List
 import pandas as pd
 import numpy as np
+from utilities import Config
 from constants import TwelveTET
-from structures import PitchRegister, Diatonic, MusicPattern, MusicScale, PitchClassSet
+from structures import PitchRegister, Diatonic, MusicPattern, MusicScale, PitchClassSet, MusicUnit, MusicTime
 from structures.circle import Circle
 from structures.helix import Helix
+from structures.rhythm import QuantizedEvent, seconds_to_ticks, MetricalNode, HierarchicalEvent
+from generators.rhythm import euclidian
 from music21 import interval
 
-def main():
+def test_structures():
     # Piano register from A0 to C8
     reg = PitchRegister(TwelveTET.A, 0, TwelveTET.C, 8)
     reg.show()
@@ -63,6 +66,50 @@ def main():
     rc = Circle(4, ['Down', 'Up','Down', 'Up'])
     rc.show()
 
+def test_rhythm_time():
+    # Example MusicUnit with Euclidian rhythm
+    unit = MusicUnit()
+    unit.onset_intervals = euclidian (3, 8)
+
+    # Music time and meter
+    time = MusicTime(16, 4, 4, 120)
+    time.show('16 timesteps circle')
+
+
+    # Example quantized events
+    bpm = 120.0
+    tpb = 96  # high-resolution
+    times = [0.0, 0.5, 0.75]
+
+    quant_events: List[QuantizedEvent] = [
+        QuantizedEvent(tick=seconds_to_ticks(t, bpm, tpb),
+                       ticks_per_beat=tpb,
+                       duration_ticks=max(1, seconds_to_ticks(0.1, bpm, tpb)))
+        for t in times
+    ]
+    print("Quantized Events:")
+    for qe in quant_events:
+        print(qe)
+
+    # Build a simple hierarchy for 120 BPM (0.5s per beat), 4/4 measure
+    beat = MetricalNode('beat', period=0.5, phase_offset=0.0)
+    measure = MetricalNode('measure', period=2.0, phase_offset=0.0, children=[beat])
+    sub = MetricalNode('eighth', period=0.25, phase_offset=0.0, children=[])
+    beat.children.append(sub)
+
+    # Map onsets into hierarchy (choose nearest level/phase)
+    times = [0.0, 0.5, 0.75]
+    hier_events = []
+    for t in times:
+        # find closest metrical level and its phase
+        # naive: pick beat-level for demonstration
+        hier_events.append(HierarchicalEvent(time=t, node=beat, label='onset'))
+    print(hier_events)
+
+
+def main():
+    test_structures()
+    test_rhythm_time()
 
 if __name__ == '__main__':
     main()

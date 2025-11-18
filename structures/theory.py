@@ -3,7 +3,6 @@ Music theory
 """
 from utilities.config import Config
 from constants import TwelveTET
-from structures.composition import Circle, Helix
 from utilities.helpers import sequence_rotations, interval_to_step
 
 # General modules
@@ -14,35 +13,6 @@ import itertools
 from music21 import interval, key, scale, note
 # MusicPy modules
 from musicpy import structures
-
-class PitchRegister(Helix):
-    # Chromatic pitch helix
-    ASCENDING = 1
-    DESCENDING = -1
-    def __init__(self,  pitchclass_start=TwelveTET.A,
-                        octave_start=0,
-                        pitchclass_end=TwelveTET.C,
-                        octave_end=8,
-                        num_pitchclasses: int = TwelveTET.TWELVE,
-                        num_octaves: int = TwelveTET.OCTAVES,
-                      ):
-        # Represent as helix of (pitchclass, octave): (0, 4)
-        super().__init__(num_pitchclasses, num_octaves)
-
-        self.num_pitchclasses = num_pitchclasses
-        self.num_octaves = num_octaves
-
-        self.index_start = self.index_of(pitchclass_start, octave_start)
-        self.index_end = self.index_of(pitchclass_end, octave_end)
-
-        self.tt = TwelveTET()
-        self.midi = [self.tt.name_to_midi(self.tt.PITCH_CLASS_NAMES_SHARP[pitchclass]+str(octave))
-                for (pitchclass, octave) in self.helix]
-
-    def transpose(self, i, interval_steps, direction=ASCENDING):
-        # Transpose index i by interval_steps in direction (ASCENDING or DESCENDING)
-        return (i + direction*interval_steps) % len(self.helix)
-
 
 class Diatonic:
     # Diatonic patterns: intervals, scales, modes, chords

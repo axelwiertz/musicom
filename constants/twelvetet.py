@@ -8,6 +8,7 @@ from math import pow, log2
 
 from librosa import midi_to_hz, hz_to_midi, note_to_midi, midi_to_note
 
+from constants.midi import MIDIpitch
 
 class TwelveTET:
     # 12-Tone Equal Temperament tuning system

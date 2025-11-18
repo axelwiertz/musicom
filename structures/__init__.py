@@ -8,6 +8,8 @@ from .helix import Helix
 
 # Core structures
 from .composition import (
+    PitchRegister,
+    MusicTime,
     MusicUnit,
     MusicVoice,
     MusicSection,
@@ -16,7 +18,6 @@ from .composition import (
 
 # Music theory
 from .theory import (
-    PitchRegister,
     Diatonic,
     MusicPattern,
     MusicScale,
@@ -27,12 +28,10 @@ from .theory import (
 
 # Rhythm
 from .rhythm import (
-    MusicTime,
     QuantizedEvent,
     MetricalNode,
     HierarchicalEvent,
     seconds_to_ticks,
-    euclidian,
 )
 
 # Sound wave synthesis

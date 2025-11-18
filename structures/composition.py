@@ -4,9 +4,26 @@ Music composition structures
 """
 from typing import List
 
-from constants import TwelveTET, MIDIinstrument
-from .theory import MusicScale, Diatonic
-from .rhythm import MusicTime
+from constants.twelvetet import TwelveTET
+from constants.midi import MIDIinstrument
+from structures.helix import Helix
+from structures.circle import Circle
+
+class MusicTime (Circle):
+    # Rhythm and meter
+    def __init__(self,
+                 timesteps: int = 8, # Number of timesteps (ticks) per cycle
+                 beats_in_measure: int = 4,
+                 beat_note: int = 4,
+                 bpm: int = 100):
+        # Timestep is the smallest rhythm relative unit, represented as integer
+        self.timesteps = timesteps
+        super().__init__(timesteps, labels=[str(i+1) for i in range(timesteps)])
+        # Meter: measure cycle of beats
+        self.beats_in_measure = beats_in_measure
+        self.beat_note = beat_note
+        self.bpm = bpm
+
 
 class MusicBase:
     # Base class for musical structures
@@ -115,13 +132,39 @@ class MusicComposition:
     # A full musical composition
     def __init__(self,
                  title: str = "Composition",
-                 main_scale: MusicScale = MusicScale(Diatonic.HEPTA, Diatonic.SCALE, TwelveTET.C, Diatonic.major_mode),
                  voices : list[MusicVoice] = (),
                  sections: list[MusicSection] = (),
                 ):
         self.title = title
-        self.main_scale = main_scale
         self.voices = voices
         self.sections = sections
 
+
+class PitchRegister(Helix):
+    # Chromatic pitch helix
+    ASCENDING = 1
+    DESCENDING = -1
+    def __init__(self,  pitchclass_start=TwelveTET.A,
+                        octave_start=0,
+                        pitchclass_end=TwelveTET.C,
+                        octave_end=8,
+                        num_pitchclasses: int = TwelveTET.TWELVE,
+                        num_octaves: int = TwelveTET.OCTAVES,
+                      ):
+        # Represent as helix of (pitchclass, octave): (0, 4)
+        super().__init__(num_pitchclasses, num_octaves)
+
+        self.num_pitchclasses = num_pitchclasses
+        self.num_octaves = num_octaves
+
+        self.index_start = self.index_of(pitchclass_start, octave_start)
+        self.index_end = self.index_of(pitchclass_end, octave_end)
+
+        self.tt = TwelveTET()
+        self.midi = [self.tt.name_to_midi(self.tt.PITCH_CLASS_NAMES_SHARP[pitchclass]+str(octave))
+                for (pitchclass, octave) in self.helix]
+
+    def transpose(self, i, interval_steps, direction=ASCENDING):
+        # Transpose index i by interval_steps in direction (ASCENDING or DESCENDING)
+        return (i + direction*interval_steps) % len(self.helix)
 

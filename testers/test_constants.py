@@ -1,5 +1,7 @@
+from constants.twelvetet import TwelveTET
+from constants.midi import MIDIpitch, MIDIinstrument
 
-def contants_test():
+def test_constants():
     tt = TwelveTET()
     print("12-TET Pitch Frequencies:")
     for i in range(12):
@@ -18,6 +20,9 @@ def contants_test():
     print("440 Hz -> MIDI", tt.freq_to_midi(440.0))
     print("Cents between 440 and 466.16:", tt.cents_between(440.0, 466.1637615180899))
 
+
+def main():
+    test_constants()
 
 if __name__ == "__main__":
     main()
