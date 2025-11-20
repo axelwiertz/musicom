@@ -4,7 +4,7 @@ Converters between different music representations (Music21, MusicPy, MusicUnit,
 """
 
 from .time import time_to_meter, time_to_tempo
-from .musiccomposition import voices_to_parts, parts_to_voices, score_set_time
+from .composition import voices_to_parts, parts_to_voices, score_set_time
 from .musicunit import unit_to_excel, unit_to_dataframe
 
 from .music21 import unit_to_stream, stream_to_unit, stream_to_chord, score_to_midifile, midifile_to_score

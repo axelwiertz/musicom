@@ -50,21 +50,3 @@ class HarmonicFunction(Generator):
             new_chord.duration = note.Duration(random.choice([self.source_unit.time.M21_QUARTER/2,
                                                               self.source_unit.time.M21_QUARTER/1]))
 
-
-def main():
-
-    unit = MusicUnit(MusicTime(8,4,4),
-                    PitchRegister(),
-                    TwelveTET.name_to_midi(['E4', 'D4', 'B3', 'Bb3', 'Eb4', 'Db4', 'C4', 'G3', 'A3'])
-                     )
-
-    gen = HarmonicFunction(unit,
-                            fundamental_pitch = note.Pitch('A1').midi,
-                            harmonic_numbers  = list(range(1,21))
-                           )
-
-
-    unit.stream = gen.harmonic_series(note.Pitch('A1').midi,[5,6,7,9,12,15])
-
-if __name__ == '__main__':
-    main()

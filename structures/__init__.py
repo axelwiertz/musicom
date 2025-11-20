@@ -82,7 +82,6 @@ __all__ = [
     'MetricalNode',
     'HierarchicalEvent',
     'seconds_to_ticks',
-    'euclidian',
 
     # Sound wave
     'SoundWave',

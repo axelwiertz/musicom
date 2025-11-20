@@ -93,31 +93,18 @@ pip install music21 musicpy numpy scipy pandas matplotlib networkx
 
 ```
 musicom/
-├── __init__.py              # Package initialization
-├── config.py                # Configuration settings
-├── constants.py             # Music constants (12-TET, MIDI mappings)
-├── theory.py                # Music theory (scales, intervals, patterns)
-├── structures.py            # Core data structures (Unit, Voice, Composition)
-├── harmony.py               # Harmonic rules and progressions
-├── rhythm.py                # Rhythm and meter structures
-├── compose.py               # Composition examples and utilities
-├── converters.py            # Format conversion utilities
-├── analysis.py              # Analysis tools
-├── transformation.py        # Musical transformations
-├── network.py               # Interval networks and voice leading
-├── soundwave.py             # Audio synthesis
-├── generators/              # Algorithmic generators
-│   ├── __init__.py
-│   ├── chain.py            # Markov chain generator
-│   ├── genetic.py          # Genetic algorithm
-│   ├── harmonic.py         # Harmonic series generator
-│   ├── random.py           # Random generation
-│   ├── counterpoint.py     # Counterpoint generator
-│   ├── scale_library.py    # Scale definitions
-│   └── trainmodel.py       # ML training utilities
-└── projects/                # Example projects
-    ├── notebook.py
-    └── project.ipynb
+├── analysis/              # Scripts for analyzing musical structures
+├── constants/             # Basic constants for music theory (e.g., MIDI numbers)
+├── converters/            # Converters between different music representations
+├── generators/            # Algorithmic music generators
+├── projects/              # Jupyter notebooks for experiments and projects
+├── rules/                 # Rules for harmony and composition
+├── structures/            # Core data structures for music representation
+├── testers/               # Tests for the different modules
+├── utilities/             # Helper functions and configuration
+├── README.md              # Project documentation
+├── requirements.txt       # Project dependencies
+└── __init__.py            # Package initialization
 ```
 
 ## Quick Start

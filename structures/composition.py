@@ -80,7 +80,7 @@ class MusicUnit(MusicBase):
 
 # --- new: MusicSection ---
 class MusicSection (MusicBase):
-    """A section is an vertical collection of MusicUnit objects
+    """A section is a vertical collection of MusicUnit objects
     Minimal contract:
     - inputs: list of MusicUnit (optional)
     - outputs: query methods (length, total_timesteps)

@@ -21,7 +21,6 @@ from .structures import (
     MusicVoice,
     MusicSection,
     MusicComposition,
-    PercussionUnit,
 
     # Geometric structures
     Circle,
@@ -40,9 +39,6 @@ from .structures import (
     MusicTime,
     QuantizedEvent,
 
-    # Visualization
-    show_plot,
-    rhythm_circle,
 )
 
 # Constants
@@ -54,6 +50,7 @@ from .constants import (
 # Converters
 from .converters import (
     unit_to_chord,
+
 )
 
 # Generators
@@ -75,7 +72,6 @@ __all__ = [
     'MusicVoice',
     'MusicSection',
     'MusicComposition',
-    'PercussionUnit',
 
     # Geometric structures
     'Circle',
@@ -94,8 +90,6 @@ __all__ = [
     'MusicTime',
     'QuantizedEvent',
 
-    # Visualization
-    'show_plot',
 
     # Constants
     'TwelveTET',
@@ -112,4 +106,3 @@ __all__ = [
     # Configuration
     'Config',
 ]
-

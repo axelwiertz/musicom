@@ -64,7 +64,7 @@ def tokens_to_stream(idx_sequence, idx_to_token) -> stream.Part:
         offset += dur
     return part_out
 
-def main():
+def generate():
     all_tokens = []
     for src in SOURCES:
         s = corpus.parse(src)
@@ -138,6 +138,3 @@ def main():
     score.write('musicxml', fp=out_xml)
     score.write('midi', fp=out_midi)
     print(f"Wrote {out_xml} and {out_midi}")
-
-if __name__ == '__main__':
-    main()
