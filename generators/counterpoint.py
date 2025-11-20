@@ -1,9 +1,8 @@
 """
 Musicom generators module - counterpoint
 """
-from generators import random
 from structures import MusicUnit
-from music21 import stream, interval
+from analysis.music21 import stream, interval
 
 
 def stream_is_counterpoint(unit1: MusicUnit, unit2: MusicUnit) -> bool:

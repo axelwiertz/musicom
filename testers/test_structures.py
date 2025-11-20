@@ -8,7 +8,7 @@ from structures.circle import Circle
 from structures.helix import Helix
 from structures.rhythm import QuantizedEvent, seconds_to_ticks, MetricalNode, HierarchicalEvent
 from generators.rhythm import euclidian
-from music21 import interval
+from analysis.music21 import interval
 
 def test_structures():
     # Piano register from A0 to C8

@@ -6,7 +6,7 @@ from typing import List
 from structures import MusicScale, MusicUnit
 from converters import chord_to_unit, stream_to_unit
 from structures.composition import MusicTime
-from music21 import roman, stream
+from analysis.music21 import roman, stream
 
 from generators import Generator
 

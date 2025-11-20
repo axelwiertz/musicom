@@ -6,7 +6,7 @@ from musicpy import musicpy as mp, structures
 
 from structures import MusicUnit, MusicComposition
 from constants import MIDIpercussion, MIDIinstrument
-from music21 import converter, instrument
+from analysis.music21 import converter, instrument
 
 
 

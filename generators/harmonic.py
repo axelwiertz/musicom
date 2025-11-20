@@ -3,7 +3,7 @@ Musicom generators module
 harmonic functions
 """
 from typing import List
-from music21 import chord, note, stream, interval
+from analysis.music21 import chord, note, stream, interval
 from structures import MusicUnit, PitchRegister
 
 from generators import Generator

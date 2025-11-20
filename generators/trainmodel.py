@@ -2,7 +2,7 @@ import random
 #from collections import Counter
 import numpy as np
 #from tqdm import tqdm
-from music21 import corpus, note, chord, stream, meter, tempo
+from analysis.music21 import corpus, note, chord, stream, meter, tempo
 #import tensorflow as tf
 
 #from tensorflow.keras.models import Sequential

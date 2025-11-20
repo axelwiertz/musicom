@@ -4,7 +4,7 @@ Module for generating random musical structures.
 """
 import random
 
-from music21 import stream, note
+from analysis.music21 import stream, note
 
 def stream_create_random_from_list(length,
                         pitch_set: list[note.Pitch] = None,

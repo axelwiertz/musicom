@@ -10,7 +10,7 @@ import pandas as pd
 import itertools
 
 # Music21 modules
-from music21 import interval, key, scale, note
+from analysis.music21 import interval, key, scale, note
 # MusicPy modules
 from musicpy import structures
 

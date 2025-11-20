@@ -2,7 +2,7 @@ from constants import MIDIinstrument
 from utilities import Config
 from structures import MusicUnit, MusicSection
 from musicpy import musicpy, structures
-from music21 import stream
+from analysis.music21 import stream
 from music21py import mpy_to_m21
 
 def chord_to_stream (chord: structures.chord) -> stream.Stream:

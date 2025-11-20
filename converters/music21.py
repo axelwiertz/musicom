@@ -2,7 +2,7 @@ import platform
 from utilities import Config
 from structures import MusicUnit, MusicSection
 from converters.musicpy import chord_to_unit
-from music21 import serial, stream, note, midi, converter
+from analysis.music21 import serial, stream, note, midi, converter
 from musicpy import structures
 from showscore import show
 from copy import deepcopy

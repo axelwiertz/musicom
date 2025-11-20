@@ -2,24 +2,22 @@
 Musicom analysis module
 Module for analyzing musical scores using Music21 and MusicPy.
 """
-from structures import MusicComposition
-from music21 import chord, roman, analysis
-from musicpy import musicpy as mp
+from analysis.music21 import chord, roman, analysis, stream
 
-def analyze(comp: MusicComposition):
+def score_analyze(score: stream.Score):
     # Analyze score
 
-    # comp.score.plot('3d')
-    # comp.score.plot('histogram','pitch')
-    # comp.score.show('abc')
+    score.plot('3d')
+    score.plot('histogram','pitch')
+    score.show('abc')
     # Key
-    key01 = comp.score.analyze('key')
+    key01 = score.analyze('key')
     print('Score :')
-    print(comp.score)
+    print(score)
     print(' with key ' + str(key01))
 
     # m21 Chord analysis
-    chordset = comp.score.chordify()
+    chordset = score.chordify()
     # Check for specific chords
     for chd01 in chordset.recurse().getElementsByClass(chord.Chord):
         if chd01.isDominantSeventh():
@@ -36,16 +34,9 @@ def analyze(comp: MusicComposition):
         chd01.addLyric(str(rn.figure))
 
     chordset.partName = "Chord analysis"
-    comp.score.append(chordset)
-    comp.score.makeMeasures(inPlace=True)
+    score.append(chordset)
+    score.makeMeasures(inPlace=True)
     # Music21 analysis
-    result = analysis.metrical.labelBeatDepth(comp.score)
+    result = analysis.metrical.labelBeatDepth(score)
     print('Metrical analysis: beat depth' + str(result))
-    # MusicPy analysis
-    str1 = mp.algorithms.detect(comp.piece)
-    str2 = mp.algorithms.chord_analysis(comp.piece)
-    str3 = mp.analyze_rhythm(comp.piece)
-    print('MusicPy analysis:')
-    print(str1)
-    print(str2)
-    print(str3)
+

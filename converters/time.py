@@ -1,5 +1,5 @@
 from structures import MusicTime
-from music21 import meter, tempo
+from analysis.music21 import meter, tempo
 
 def time_to_meter (time: MusicTime) -> meter.TimeSignature:
     # m21 meter

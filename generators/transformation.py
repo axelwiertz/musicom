@@ -1,5 +1,5 @@
 
-from music21 import stream, note, key, scale, roman
+from analysis.music21 import stream, note, key, scale, roman
 import copy
 import random
 

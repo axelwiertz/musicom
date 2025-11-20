@@ -4,7 +4,7 @@ from converters import score_to_midifile
 from generators import ProgressionGenerator
 from structures.composition import MusicTime, MusicSection
 from structures.theory import Diatonic
-from music21 import stream
+from analysis.music21 import stream
 
 def test_progression():
 
