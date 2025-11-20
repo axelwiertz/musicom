@@ -1,4 +1,5 @@
 import os
+from typing import List
 import pandas as pd
 from utilities import Config
 from structures import MusicUnit
@@ -65,3 +66,32 @@ def unit_to_excel(unit: MusicUnit, filename: str | None = None, path: str = Conf
         df.to_excel(filepath, sheet_name=sheet_name or 'MusicUnit', index=False)
 
     return filepath
+
+
+pitch_interval_bits = 6  # binary 24 pitch intervals
+#max_pitch_interval = pow(2, pitch_interval_bits - 1)
+onset_interval_bits = 4  # binary 8 timesteps
+duration_bits = 4  # binary 8 timesteps
+velocity_bits = 4  # binary 8 levels
+totalbits = pitch_interval_bits + duration_bits + onset_interval_bits + velocity_bits
+
+def unit_to_binary (unit: MusicUnit) -> List[int]:
+    """Convert a MusicUnit to a binary representation (list of 0,1)."""
+    # Binary genome representation
+
+    binary = []
+
+    return binary
+
+def binary_to_unit(binary: List[int]) -> MusicUnit:
+    # Transform a binary into a unit
+    # Split genome in parts of 'bits' length
+    numparts = len(binary) % totalbits
+    binary_parts = []
+    for i in range(numparts):
+        # Extract binary elements
+        binary_parts += [binary[(i * totalbits):(i * totalbits) + totalbits]]
+
+    unit = MusicUnit("FromBinary")
+    for binary_part in binary_parts:
+        pitch_nr = int(sum([bit * pow(2, i) for i, bit in enumerate(binary_part)]))

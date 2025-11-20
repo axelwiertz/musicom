@@ -1,7 +1,7 @@
 from constants import TwelveTET, MIDIinstrument
 from structures import MusicScale, MusicUnit, MusicVoice, MusicComposition
 from converters import score_to_midifile
-from generators import ProgressionGenerator, HarmonicFunction
+from generators import ProgressionGenerator, HarmonicFunction, GeneticGenerator
 from structures.composition import MusicTime, MusicSection
 from structures.theory import Diatonic
 from music21 import stream, note
@@ -9,28 +9,30 @@ from music21 import stream, note
 
 def test_genetic():
     # Example fitness function: counts the number of 1s in the genome
-    def fitness_func(genome: Genome) -> int:
+    gen = GeneticGenerator(MusicUnit("Seed"))
+    def fitness_func(genome: gen.Genome) -> int:
         return sum(genome)
 
     # Run the genetic algorithm
-    final_population, generations = run_evolution(
-        populate_func=lambda: generate_population(10, 20),
+    final_population, generations = gen.run_evolution(
+        populate_func=lambda: gen.generate_population(10, 20),
         fitness_func=fitness_func,
         fitness_limit=20,
         generation_limit=50,
-        printer=print_stats
+        printer=gen.print_stats
     )
 
     print("Final Population after %d generations:" % generations)
     for genome in final_population:
-        print("%s (Fitness: %d)" % (genome_to_string(genome), fitness_func(genome)))
+        print("%s (Fitness: %d)" % (gen.genome_to_string(genome), fitness_func(genome)))
 
 
 def test_harmonics():
 
+    tt = TwelveTET()
     unit = MusicUnit("Harmonics",
                      MusicTime(8,4,4),
-                    TwelveTET.name_to_midi(['E4', 'D4', 'B3', 'Bb3', 'Eb4', 'Db4', 'C4', 'G3', 'A3'])
+                    tt.name_to_midi(name=['E4', 'D4', 'B3', 'Bb3', 'Eb4', 'Db4', 'C4', 'G3', 'A3'])
                      )
 
     gen = HarmonicFunction(unit,

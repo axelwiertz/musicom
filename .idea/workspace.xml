@@ -5,18 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="packaging">
-      <change afterPath="$PROJECT_DIR$/converters/visual.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/musiccomposition.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/composition.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/converters/musicunit.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/musicunit.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/generators/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/generators/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/generators/genetic.py" beforeDir="false" afterPath="$PROJECT_DIR$/generators/genetic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generators/harmonic.py" beforeDir="false" afterPath="$PROJECT_DIR$/generators/harmonic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generators/trainmodel.py" beforeDir="false" afterPath="$PROJECT_DIR$/generators/trainmodel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/circle.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/circle.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/composition.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/composition.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testers/test_generators.py" beforeDir="false" afterPath="$PROJECT_DIR$/testers/test_generators.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -159,15 +151,8 @@
       <workItem from="1763072110739" duration="3274000" />
       <workItem from="1763499474928" duration="74000" />
       <workItem from="1763499617357" duration="3744000" />
-      <workItem from="1763662599124" duration="6730000" />
-    </task>
-    <task id="LOCAL-00112" summary="musicpy">
-      <option name="closed" value="true" />
-      <created>1759828863156</created>
-      <option name="number" value="00112" />
-      <option name="presentableId" value="LOCAL-00112" />
-      <option name="project" value="LOCAL" />
-      <updated>1759828863156</updated>
+      <workItem from="1763662599124" duration="6781000" />
+      <workItem from="1763673548929" duration="5428000" />
     </task>
     <task id="LOCAL-00113" summary="composition and unit">
       <option name="closed" value="true" />
@@ -553,7 +538,15 @@
       <option name="project" value="LOCAL" />
       <updated>1763666390559</updated>
     </task>
-    <option name="localTasksCounter" value="161" />
+    <task id="LOCAL-00161" summary="packaging">
+      <option name="closed" value="true" />
+      <created>1763669412540</created>
+      <option name="number" value="00161" />
+      <option name="presentableId" value="LOCAL-00161" />
+      <option name="project" value="LOCAL" />
+      <updated>1763669412540</updated>
+    </task>
+    <option name="localTasksCounter" value="162" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
