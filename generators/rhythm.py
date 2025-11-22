@@ -1,3 +1,5 @@
+""" Rhythm generators """
+
 # Euclidian rhythm generator
 def euclidian (onsets: int = 4,
                       timesteps: int = 4 ) -> list[int] :

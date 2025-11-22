@@ -7,8 +7,8 @@ from .time import time_to_meter, time_to_tempo
 from .composition import voices_to_parts, parts_to_voices, score_set_time
 from .musicunit import unit_to_excel, unit_to_dataframe
 
-from .music21 import unit_to_stream, stream_to_unit, stream_to_chord, score_to_midifile, midifile_to_score
-from .musicpy import track_to_print, unit_to_chord, chord_to_unit, chord_to_stream
+from .m21 import unit_to_stream, stream_to_unit, stream_to_chord, score_to_midifile, midifile_to_score
+from .mp import track_to_print, unit_to_chord, chord_to_unit, chord_to_stream
 
 
 __all__ = [

@@ -1,13 +1,27 @@
+"""MusicPy converters."""
 from constants import MIDIinstrument
-from utilities import Config
-from structures import MusicUnit, MusicSection
+from utilities.config import Config
+from structures.composition import MusicUnit, MusicVoice
+from structures.pattern import MusicPattern
+from regularity.diatonic import Diatonic
+from constants.tuning import TwelveTET
 from musicpy import musicpy, structures
-from analysis.music21 import stream
+from music21 import stream
 from music21py import mpy_to_m21
 
 def chord_to_stream (chord: structures.chord) -> stream.Stream:
     # convert musicpy piece to music21 score
     return mpy_to_m21(chord)
+
+def pattern_to_mpscale (pattern : MusicPattern ) -> structures.scale:
+    mpscale = structures.scale()
+
+    # Diatonic (7 pitch class) scale
+    if pattern.cardinality == Diatonic.HEPTA and pattern.interval_pattern == Diatonic.SCALE:
+        # MusicPy structures
+        mpscale = structures.scale(TwelveTET.PITCH_CLASS_NAMES_SHARP[pattern.tonic], interval=pattern.modes[pattern.mode])
+
+    return mpscale
 
 
 def midifile_to_piece (filename_in: str = Config.DEFAULT_MIDI_FILE_IN) -> structures.piece:
@@ -43,20 +57,12 @@ def chord_to_unit(chord: structures.chord) -> MusicUnit:
     unit.volumes = chord.get_volume()
     return unit
 
-def section_to_track(section: MusicSection) -> structures.track:
+def voice_to_track(voice: MusicVoice) -> structures.track:
     """Build a musicpy track by concatenating unit chords if available."""
-    t = structures.track([], track_name=section.name)
-    for u in section.units:
-        if hasattr(u, 'chord') and u.chord is not None:
-            try:
-                t = t + u.chord
-            except Exception:
-                # fall back to extend if addition is not supported
-                try:
-                    t.extend(u.chord)
-                except Exception:
-                    pass
-    return t
+    track = structures.track([], track_name=voice.name)
+    for unit in voice.units:
+        track += unit_to_chord(unit)
+    return track
 
 def piece_play (piece : structures.piece):
     # Play piece and wait until finish, writes temusicpy.midi

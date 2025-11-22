@@ -2,7 +2,7 @@ from analysis.music21 import stream, tempo
 from musicpy import structures
 from music21py import m21_to_mpy, mpy_to_m21
 from structures import MusicVoice, MusicComposition, MusicTime
-from .music21 import unit_to_stream, stream_to_unit
+from .m21 import unit_to_stream, stream_to_unit
 
 # Composition converters
 def voices_to_parts (composition: MusicComposition) -> list[stream.Part]:

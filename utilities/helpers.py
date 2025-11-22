@@ -1,3 +1,4 @@
+from itertools import permutations
 from typing import List, Tuple
 
 # Helper functions
@@ -27,3 +28,7 @@ def intervals_to_nodes(intervals: List[int], start_node: int = 0) -> List[int]:
         current_node += itv
         nodes.append(current_node)
     return nodes
+
+def set_permutations(sequence : List[int]) -> List:
+    # Permutations: ordered set of all possible arrangements of the input sequence
+    return list(permutations(sequence))

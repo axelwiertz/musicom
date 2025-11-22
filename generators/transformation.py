@@ -3,7 +3,7 @@ from analysis.music21 import stream, note, key, scale, roman
 import copy
 import random
 
-from rules.harmony import Scale7ChordHarmony
+from regularity.progression import Scale7ChordHarmony
 from structures import MusicalUnit, Diatonic
 
 # Voices in a canon

@@ -1,4 +1,4 @@
 from .midi import MIDIinstrument, MIDIpitch
-from .twelvetet import TwelveTET
+from constants.tuning import TwelveTET
 
 __all__ = ['TwelveTET', 'MIDIinstrument', 'MIDIpitch']

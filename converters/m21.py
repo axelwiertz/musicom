@@ -1,11 +1,13 @@
+"""Converters between music21 and other structures."""
 import platform
 from utilities import Config
-from structures import MusicUnit, MusicSection
-from converters.musicpy import chord_to_unit
-from analysis.music21 import serial, stream, note, midi, converter
+from structures.composition import MusicUnit, MusicSection
+from structures.pattern import MusicPattern
+from converters.mp import chord_to_unit
+from regularity.diatonic import Diatonic
+from music21 import serial, stream, note, midi, converter, scale, key
 from musicpy import structures
 from showscore import show
-from copy import deepcopy
 from music21py import m21_to_mpy
 
 def stream_to_chord (stream_in: stream.Stream) -> structures.chord:
@@ -13,7 +15,19 @@ def stream_to_chord (stream_in: stream.Stream) -> structures.chord:
     return m21_to_mpy(stream_in)
 
 
-# Music21 converters
+def pattern_to_m21scale (pattern : MusicPattern) -> scale.ConcreteScale:
+    # Convert pattern to music21 scale
+    m21scale = scale.ConcreteScale()
+
+    # Diatonic (7 pitch class) scale
+    if pattern.cardinality == Diatonic.HEPTA and pattern.interval_pattern == Diatonic.SCALE:
+        # Music21 structure
+        m21key = key.Key(note.Pitch(pattern.tonic), mode=Diatonic.mode_names[pattern.mode])
+        m21scale = scale.ConcreteScale(key=m21key)
+
+    return m21scale
+
+
 def tonerow_to_stream (tonerow_base: serial.ToneRow = serial.ToneRow(row=[0, 4, 7, 4]),
                    octave : int = 4
                    ) -> stream.Stream:
@@ -61,15 +75,15 @@ def score_to_sound(score: stream.Score):
     # Play or show the score depending on the platform.
     if platform.system() == 'Windows':
         score.show('text')
-        #    score.show('midi')  # Play MIDI
+        #score.show('midi')  # Play MIDI
         show(score)  # Show musical notation
 
     elif platform.system() == 'IOS':
         # Pyhonista may not support direct MIDI playback; try to import sound module if available
+        import importlib
         try:
-            import importlib
             sound = importlib.import_module('sound')
-        except Exception:
+        except ImportError:
             sound = None
         # Play the result (IOS) when sound module is available
         score.show('text')
@@ -82,12 +96,6 @@ def section_to_part (section: MusicSection) -> stream.Part:
     for u in section.units:
         part_out.append(unit_to_stream(u))
     return part_out
-
-def part_to_unit (part : stream.Part) -> MusicUnit:
-    # Convert part to unit
-    unit = stream_to_unit(part_to_stream(part))
-    return unit
-
 
 def unit_to_stream (unit: MusicUnit) -> stream.Stream:
     # Create a stream with notes and rests
@@ -141,9 +149,7 @@ def stream_to_unit (stream_in : stream.Stream) -> MusicUnit:
 
 def section_to_stream(section: MusicSection) -> stream.Stream:
     """Concatenate the music21 streams from contained units into a single Stream."""
-    s = stream.Stream()
-    for u in section.units:
-        if hasattr(u, 'stream') and u.stream is not None:
-            # deep copy to avoid side effects when appending
-            s.append(deepcopy(u.stream))
-    return s
+    stream_out = stream.Stream()
+    for unit in section.units:
+        stream_out.append(unit_to_stream(unit))
+    return stream_out

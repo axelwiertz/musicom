@@ -7,7 +7,7 @@ Main modules:
 - constants: Musical constants (TwelveTET, MIDI instruments)
 - converters: Conversion between different music formats
 - generators: Music generation algorithms
-- rules: Music theory rules and harmony
+- regularity: Music theory regularity and harmony
 - utilities: Helper utilities and configuration
 """
 

@@ -114,7 +114,7 @@ musicom/
 ```python
 from constants import TwelveTET, MIDIinstrument
 from structures import MusicComposition, MusicUnit, MusicVoice
-from structures.theory import MusicScale, Diatonic, PitchRegister
+from structures.composition import MusicScale, Diatonic, PitchRegister
 from structures.rhythm import MusicTime
 from converters import comp_to_visual
 
@@ -153,7 +153,7 @@ comp_to_visual(comp)
 
 ```python
 from generators.chain import MarkovChain
-from rules.harmony import Scale7ChordHarmony
+from regularity.progression import Scale7ChordHarmony
 
 # Create a Markov chain for chord progressions
 chord_chain = MarkovChain(Scale7ChordHarmony.movement_rules)

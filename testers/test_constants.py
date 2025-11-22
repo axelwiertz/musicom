@@ -1,5 +1,6 @@
-from constants.twelvetet import TwelveTET
-from constants.midi import MIDIpitch, MIDIinstrument
+from constants.tuning import TwelveTET
+from constants.midi import MIDIpitch
+
 
 def test_constants():
     tt = TwelveTET()

@@ -1,18 +1,5 @@
-"""
-Music theory
-"""
-from utilities.config import Config
-from constants import TwelveTET
-from utilities.helpers import sequence_rotations, interval_to_step
-
-# General modules
-import pandas as pd
-import itertools
-
-# Music21 modules
-from analysis.music21 import interval, key, scale, note
-# MusicPy modules
-from musicpy import structures
+from structures.pattern import MusicPattern
+from music21 import interval
 
 class Diatonic:
     # Diatonic patterns: intervals, scales, modes, chords
@@ -106,7 +93,7 @@ class Diatonic:
         }
     }
 
-    # 7 Hepta scale modes:
+    # 7 Heptatonic scale modes:
     ionian = major_mode = 0
     dorian = 1
     phrygian = 2
@@ -140,70 +127,7 @@ class Diatonic:
                     interval.DiatonicInterval(interval.Specifier.MINOR, 3)]
 
 
-class MusicPattern:
-    def __init__(self,
-                 cardinality: int = None,
-                 interval_pattern: int = None
-                 ):
-        self.pitch_intervals = Diatonic.pitch_intervals_dict[cardinality][interval_pattern]
-        self.degrees = tuple(range(1, cardinality + 1))
-        # Permutations: ordered set
-        self.degree_permutations = list(itertools.permutations(self.degrees))
-
-        # Scale modes and chord positions - rotations of interval sequence
-        self.modes = sequence_rotations(self.pitch_intervals)
-        # Modes on pitch helix
-        self.modeshelix = [interval_to_step(m) for m in self.modes]
-
-    def save (self):
-        pdmodes = pd.DataFrame(self.modes)
-        pdmodeshelix = pd.DataFrame(self.modeshelix)
-
-        pdmodes.to_excel(Config.DEFAULT_PATH + 'interval_patternModes.xlsx', index=True, sheet_name='MusicPattern')
-        pdmodeshelix.to_excel(Config.DEFAULT_PATH + 'interval_patternModesHelix.xlsx', index=True, sheet_name='MusicPattern')
-
-class MusicScale(MusicPattern):
-    def __init__(self,
-                cardinality: int = None,
-                interval_pattern: int = None,
-                tonic : int = None,
-                mode : int = None
-                 ):
-        super().__init__(cardinality, interval_pattern)
-        self.tonic = tonic
-        self.mode = mode
-
-        # Heptatonic (7 pitch class) scale
-        if cardinality == Diatonic.HEPTA and interval_pattern == Diatonic.SCALE:
-            # MusicPy structures
-            self.mpscale = structures.scale(TwelveTET.PITCH_CLASS_NAMES_SHARP[self.tonic], interval=self.modes[self.mode])
-
-            # Music21 structures
-            self.m21key = key.Key(note.Pitch(tonic), mode=Diatonic.mode_names[self.mode])
-            self.m21scale = scale.ConcreteScale(key=self.m21key)
-
-
-class MusicalInterval:
-    # Musical intervals
-    def __init__(self, semitones=0):
-        self.semitones = semitones
-        self.cents = TwelveTET().interval_cents(semitones)
-
-class PatternSequence:
-    """
-    Ordered set of patterns
-    """
-    def __init__(self, patterns: list[MusicPattern]):
-        self.patterns = patterns
-
-
-class PitchClassSet:
-    def __init__(self, num_items=3):
-
-        # Combinations: and permutations of a set
-        self.combinations = list(itertools.combinations (TwelveTET.PITCH_CLASS_NUMBERS, num_items))
-        self.permutations = list(itertools.permutations (TwelveTET.PITCH_CLASS_NUMBERS, num_items))
-
-
-
-
+class Scale7Triad:
+    def __init__(self):
+        self.pattern_major = MusicPattern (Diatonic.TRIA, Diatonic.MAJOR)
+        self.pattern_minor = MusicPattern (Diatonic.TRIA, Diatonic.MINOR)
