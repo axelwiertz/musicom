@@ -1,4 +1,4 @@
-"""Module defining the base class for musical strcutures."""
+"""Module defining the base class for musical structures."""
 
 class MusicBase:
     # Base class for musical structures
