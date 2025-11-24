@@ -60,3 +60,6 @@ def name_to_midi(name):
     semitone_index = self.PITCH_CLASS_NAMES_SHARP.index(idx)
     return (octave + 1) * self.TWELVE + semitone_index"""
     return note_to_midi(name)
+
+def pitch_to_midi (pitch_class, octave) -> int:
+    return name_to_midi(TwelveTET.PITCH_CLASS_NAMES_SHARP[pitch_class]+str(octave))

@@ -17,7 +17,7 @@ TODO:
 # interval_networks_with_chords_and_voice_leading.py
 import networkx as nx
 import matplotlib.pyplot as plt
-from typing import List, Dict, Tuple
+from typing import List
 
 # --- Basic maps -----------------------------------------------------------
 SEMITONE_MAP = {

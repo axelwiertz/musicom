@@ -2,11 +2,13 @@
 MusicPy - Notebook examples
 """
 
+from constants.midi import MidiInstrument, MidiChannel
+from constants.tuning import TwelveTET
+from structures.composition import MusicUnit, MusicComposition, MusicSection
+from structures.pattern import MusicPattern
+from regularity.diatonic import Diatonic
+from music21 import converter, instrument
 from musicpy import musicpy as mp, structures
-
-from structures import MusicUnit, MusicComposition
-from constants import MIDIpercussion, MIDIinstrument
-from analysis.music21 import converter, instrument
 
 
 
@@ -26,7 +28,7 @@ def mp_notebook ():
                                   interval=1 / 8,
                                    volume = 100) * 50
     # Construct piece
-    comp.piece = structures.piece(tracks=[structures.track(content=unit.chord, instrument=MIDIinstrument.PIANO, start_time=1)],
+    comp.piece = structures.piece(tracks=[structures.track(content=unit.chord, instrument=MidiInstrument.PIANO, start_time=1)],
                                   channels=[0],
                                   start_times=[0])
 
@@ -98,66 +100,49 @@ def mp_percussion_notebook ():
 
     comp = MusicComposition ()
     comp.piece = structures.piece(percussion_unit.chord,
-                                  [MIDIinstrument.PIANO],
-                                  channels=[MIDIpercussion.CHANNEL_INDEX])
+                                  [MidiInstrument.PIANO],
+                                  channels=[MidiChannel.PERCUSSION_INDEX])
 
 
 def standard_notebook ():
 
-    comp = MusicComposition('Standard',
-                       form = ['A', 'A', 'B', 'A'],
-                       tonic='C',
-                       mode= DiatonicLayer.MAJOR_MODE,
-                       progression=[]
-                       )
+    scale7 = MusicPattern (Diatonic.HEPTA, Diatonic.SCALE, TwelveTET.C , Diatonic.major_mode)
 
     fantasy_progressions = [
-    # 1 2 4 2
+    # TETRADIC PROGRESSIONS
+    # (TETRA,1,MAJOR7), (TETRA,2,MAJOR7), (TETRA,6,MAJOR7), (TETRA,2,MAJOR7)
         ['I7', 'II7', 'VI7', 'II7'],
-    # i II bi bIV
+    # 1, 2, 1, 4  i II bi bIV
+    # (TETRA,1,MINOR), (TETRA,2,MAJOR), (TETRA,1,SUS2), (TETRA,4,SUS2)
         ['i7', 'II7', 'isus', 'IVsus'],
-    # I VI I VI
+    # 1, 6, 1, 6  I VI I VI
         ['I7', 'VI7', 'I7', 'VI7'],
-    # i v VI V
+    # 1, 5, 6, 5  i v VI V
         ['i7', 'v7', 'VI7', 'V7'],
-    # I II I II
+    # 1, 2, 1, 2  I II I II
         ['I7', 'II7', 'I7', 'II7'],
-    # i II iv V
+    # 1,2,4,5  i II iv V
         ['i7', 'II7', 'iv7', 'V7']
         ]
 
 
-    comp = MusicComposition('Fantasy A minor',
-                       tonic='A',
-                       mode= DiatonicLayer.MINOR_MODE,
-                       progression=fantasy_progressions
-                       )
+    scale7 = MusicPattern (Diatonic.HEPTA, Diatonic.SCALE, TwelveTET.A, Diatonic.minor_mode)
+    comp = MusicComposition('Fantasy A minor')
 
-    comp = MusicComposition('Fantasy C major',
-                       tonic='C',
-                       mode= DiatonicLayer.MAJOR_MODE,
-                       progression=fantasy_progressions
-                       )
+    scale7 = MusicPattern (Diatonic.HEPTA, Diatonic.SCALE, TwelveTET.C, Diatonic.major_mode)
+    comp = MusicComposition('Fantasy C major')
 
+    scale7 = MusicPattern (Diatonic.HEPTA, Diatonic.SCALE, TwelveTET.C, Diatonic.major_mode)
+    sectionA = MusicSection('A')
+    sectionB = MusicSection('B')
     comp = MusicComposition('Bossa Nova',
-                       form = ['A', 'A', 'B', 'A'],
-                       tonic='C',
-                       mode= DiatonicLayer.MAJOR_MODE,
-                       progression=[
-        [2, 5, 1],
-        ['Imaj7', 'II7', 'iim7']
-        ]
-                       )
+                       sections = [sectionA, sectionA, sectionB, sectionA])
+    # (TRIA,2,MAJOR), (TRIA,5,MAJOR), (TRIA,1,MAJOR)
+    bossa_nova_progression1 = [2, 5, 1]
+    # (TETRA,1,MAJOR), (TETRA,2,MAJOR), (TETRA,2,MINOR)
+    bossa_nova_progression2 = ['Imaj7', 'II7', 'iim7']
 
-    comp = MusicComposition('Flamenco',
-                       progression=[
-        [1, 7, 6, 5] # descending
-        ]
-            )
+    flamenco_progression = (1, 7, 6, 5)
 
-    comp = MusicComposition('Lounge/Jazz',
-                          progression=[
-        [4, 2, 5, 1],
-        [7, 3, 6, 2, 5, 1]
-        ],
-                       )
+    loungejazz_progression1 = (4, 2, 5, 1),
+    loungejazz_progression1 = (7, 3, 6, 2, 5, 1)

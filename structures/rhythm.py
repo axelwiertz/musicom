@@ -1,7 +1,4 @@
-"""
-Musicom - rhythm
-hythmic data structures
-"""
+""" Rhythm and Meter Data Structures"""
 from music21 import meter
 
 # Rhythm: sequential pattern of events at timesteps
@@ -18,9 +15,9 @@ Aspects of TimeSignatures are controlled by the music21.meter.TimeSignature.
     accentSequence : How much accent or weight each note gets
 All sequences are of class MeterSequence
 """
-seq = meter.MeterSequence()
-seq.type = 'beat'
-seq.sequence = [1, 0, 1, 0]  # e.g., 4/4 time with accents on beats 1 and 3
+term = meter.MeterTerminal()
+seq = meter.MeterSequence(term)
+# [1, 0, 1, 0]  # e.g., 4/4 time with accents on beats 1 and 3
 ts = meter.TimeSignature('4/4')
 ts.beatSequence = seq
 

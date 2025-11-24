@@ -3,12 +3,14 @@ import pandas as pd
 import numpy as np
 from utilities import Config
 from constants import TwelveTET
-from structures import PitchRegister, Diatonic, MusicPattern, MusicScale, PitchClassSet, MusicUnit, MusicTime
+from structures.composition import PitchRegister, MusicUnit, MusicTime
+from structures.pattern import MusicPattern
+from regularity.diatonic import Diatonic
 from structures.circle import Circle
 from structures.helix import Helix
 from structures.rhythm import QuantizedEvent, seconds_to_ticks, MetricalNode, HierarchicalEvent
 from generators.rhythm import euclidian
-from analysis.music21 import interval
+from music21 import interval
 
 def test_structures():
     # Piano register from A0 to C8
@@ -20,20 +22,16 @@ def test_structures():
     octave_pitchclass = reg.get_at(next_pos)
     print (f'PitchRegister: pos {pos} -> next pos {next_pos} -> (octave, pitchclass) {octave_pitchclass}')
 
-    pcs = PitchClassSet()
-    print(f'PitchClassSet combinations: {len(pcs.combinations)}')
-
-    scale5cmajor = MusicScale(Diatonic.PENTA, Diatonic.SCALE,
+    scale5cmajor = MusicPattern(Diatonic.PENTA, Diatonic.SCALE,
                               tonic=TwelveTET.C, mode=Diatonic.major_mode)
-    scale7cmajor = MusicScale(Diatonic.HEPTA, Diatonic.SCALE,
+    scale7cmajor = MusicPattern(Diatonic.HEPTA, Diatonic.SCALE,
                               tonic=TwelveTET.C, mode=Diatonic.major_mode)
 
     m21intervals = list(interval.ChromaticInterval(n) for n in TwelveTET.PITCH_CLASS_NUMBERS)
 
     # Table of all absolute chromatic data along pitch number set
     interval_pattern7 = MusicPattern(Diatonic.HEPTA, Diatonic.SCALE)
-    interval_pattern7.save()
-    scale7 = MusicScale(Diatonic.HEPTA, Diatonic.SCALE, tonic=TwelveTET.C, mode=Diatonic.major_mode)
+    scale7 = MusicPattern(Diatonic.HEPTA, Diatonic.SCALE, tonic=TwelveTET.C, mode=Diatonic.major_mode)
 
     # Pitch helixes for heptatonic modes
     # Major

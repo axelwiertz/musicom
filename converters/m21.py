@@ -1,9 +1,10 @@
 """Converters between music21 and other structures."""
 import platform
 from utilities import Config
-from structures.composition import MusicUnit, MusicSection
+from structures.composition import MusicTime, MusicUnit, MusicSection
 from structures.pattern import MusicPattern
 from converters.mp import chord_to_unit
+from converters.time import time_to_meter, time_to_tempo
 from regularity.diatonic import Diatonic
 from music21 import serial, stream, note, midi, converter, scale, key
 from musicpy import structures
@@ -144,6 +145,12 @@ def stream_to_unit (stream_in : stream.Stream) -> MusicUnit:
                 else:
                     unit.onset_intervals[-1] += element.duration.quarterLength
     return unit
+
+def time_to_stream(stream_ : stream.Stream, time : MusicTime):
+    # Set the time signature and tempo
+    stream_.insert(0, time_to_meter(time))
+    stream_.insert(0, time_to_tempo(time))
+
 
 # Section converters
 

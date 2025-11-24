@@ -6,7 +6,7 @@ from random import choices, randint, randrange, random, sample
 from typing import List, Callable, Tuple
 
 from structures import MusicUnit, MusicTime
-from converters.musicunit import binary_to_unit
+from converters.unit import binary_to_unit
 from generators import Generator
 
 GenomeType = List[int]

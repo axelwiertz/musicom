@@ -1,7 +1,7 @@
-from analysis.music21 import stream, tempo
+from music21 import stream
 from musicpy import structures
 from music21py import m21_to_mpy, mpy_to_m21
-from structures import MusicVoice, MusicComposition, MusicTime
+from structures import MusicVoice, MusicComposition
 from .m21 import unit_to_stream, stream_to_unit
 
 # Composition converters
@@ -20,11 +20,6 @@ def parts_to_voices (score: stream.Score) -> list[MusicVoice]:
         voice = MusicVoice(name=p.partName, units=[stream_to_unit(p)])
         voices.append(voice)
     return voices
-
-def score_set_time(score : stream.Score, time : MusicTime):
-    # Set the time signature, key signature and tempo
-    score.insert(0, time.timesignature)
-    score.insert(0, tempo.MetronomeMark(number=time.bpm))
 
 def comp_to_score (comp : MusicComposition) -> stream.Score:
     # Convert composition to music21 score

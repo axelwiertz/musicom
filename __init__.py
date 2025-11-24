@@ -30,10 +30,8 @@ from .structures import (
     PitchRegister,
     Diatonic,
     MusicPattern,
-    MusicScale,
     MusicalInterval,
     PatternSequence,
-    PitchClassSet,
 
     # Rhythm
     MusicTime,

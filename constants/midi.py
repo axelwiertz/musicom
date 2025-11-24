@@ -3,18 +3,18 @@ Musicom Constants
     MIDI
 """
 
-class MIDIpitch:
+class MidiPitch:
     # MIDI pitch numbers for common notes
     C4 = 60  # Middle C
     D4 = 62
     E4 = 64
     F4 = 65
     G4 = 67
-    A4 = 69  # A above middle C (440 Hz)
+    A4 = 69  # above middle C (440 Hz)
     B4 = 71
     C5 = 72
 
-class MIDIinstrument:
+class MidiInstrument:
     # General MIDI instrument numbers (0-127)
     PIANO = 1
     CHURCH_ORGAN = 20
@@ -28,16 +28,16 @@ class MIDIinstrument:
 
     PERCUSSION = 128  # Channel 10 is percussion
 
-class MIDIchannel:
+class MidiChannel:
     PERCUSSION = 10  # Channel 10 (index 9) is reserved for percussion in General MIDI
     PERCUSSION_INDEX = 9
 
-class MIDIpercussion:
+class MidiPercussion:
     # MIDI percussion mapping (channel 10): 35-81 common drums
     # See https://www.midi.org/specifications-old/item/gm-level-1-s
     BASS_DRUM = 36
     ACOUSTIC_SNARE = 38
-    CLOSED_HIHAT = 42
+    CLOSED_HI_HAT = 42
     LOW_TOM = 45
     MID_TOM = 47
     HIGH_TOM = 50

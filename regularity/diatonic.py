@@ -3,7 +3,7 @@ from music21 import interval
 
 class Diatonic:
     # Diatonic patterns: intervals, scales, modes, chords
-    DI = 2
+    DYAD = 2
     TRIA = 3
     TETRA = 4
     PENTA = 5
@@ -12,7 +12,7 @@ class Diatonic:
     OCTA = 8
     NONA = 9
     DECA = 10
-    UNDA = 11
+    UNDECA = 11
     DODECA = 12
 
     MINOR_THIRD = 1
@@ -45,7 +45,7 @@ class Diatonic:
     # Interval patterns for scales and chords
     # pitch_intervals: tuple of interval steps, e.g. (2,2)
     pitch_intervals_dict = {
-        DI: {
+        DYAD: {
             MINOR_THIRD     : (3, 9),
             MAJOR_THIRD     : (4, 8),
             PERFECT_FOURTH  : (5, 7),
@@ -115,19 +115,19 @@ class Diatonic:
 
 
     # 7 Hepta Interval classes
-    perfectintervals = ('P1', 'P4', 'P5', 'P8')
-    imperfectintervals = ('M2', 'm3', 'M3', 'm6', 'M6', 'm7', 'M7')
+    perfect_interval_classes = ('P1', 'P4', 'P5', 'P8')
+    imperfect_interval_classes = ('M2', 'm3', 'M3', 'm6', 'M6', 'm7', 'M7')
 
-    perfectintervallist = [interval.DiatonicInterval(interval.Specifier.PERFECT, 1),
+    perfect_interval_class_list = [interval.DiatonicInterval(interval.Specifier.PERFECT, 1),
                            interval.DiatonicInterval(interval.Specifier.PERFECT, 4),
                            interval.DiatonicInterval(interval.Specifier.PERFECT, 5),
                            interval.DiatonicInterval(interval.Specifier.PERFECT, 8)]
 
-    intervallist = [interval.DiatonicInterval(interval.Specifier.MAJOR, 2),
+    imperfect_interval_class_list = [interval.DiatonicInterval(interval.Specifier.MAJOR, 2),
                     interval.DiatonicInterval(interval.Specifier.MINOR, 3)]
 
 
 class Scale7Triad:
     def __init__(self):
-        self.pattern_major = MusicPattern (Diatonic.TRIA, Diatonic.MAJOR)
-        self.pattern_minor = MusicPattern (Diatonic.TRIA, Diatonic.MINOR)
+        self.pattern_major = MusicPattern(Diatonic.TRIA, Diatonic.MAJOR)
+        self.pattern_minor = MusicPattern(Diatonic.TRIA, Diatonic.MINOR)
