@@ -7,13 +7,14 @@ from structures.helix import Helix
 class MusicUnit(MusicBase):
     # A musical unit: a sequence of pitches with timing and dynamics
     def __init__(self,
+                 _id: int = 0,
                 name: str = 'Unit',
                 pitch_nodes : list [int] = (),
                 onset_intervals: list[float] = (),
                 durations: list[float] = (),
                 volumes: list[int] = (),
                 ):
-        super().__init__(name)
+        super().__init__(_id, name)
         self.pitch_nodes = pitch_nodes
         self.onset_intervals = onset_intervals
         self.durations = durations

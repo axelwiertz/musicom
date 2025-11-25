@@ -15,7 +15,10 @@ class MusicMatrix:
     Cells contain MusicUnit objects (or other musical elements)
     """
 
-    def __init__(self, rows: int = 0, cols: int = 0, data: Optional[Sequence[Sequence[Any]]] = None):
+    def __init__(self,
+                 rows: int = 0,
+                 cols: int = 0,
+                 data: Optional[Sequence[Sequence[Any]]] = None):
         if data is not None:
             # accept list-of-lists; normalize to list of lists
             self._data = [list(row) for row in data]
@@ -73,7 +76,7 @@ class MusicMatrix:
     def _transform_cell(cell: Any, op: Any) -> Any:
         if callable(op):
             return op(cell)
-
+        
         # Handle MusicUnit transformations
         if isinstance(cell, MusicUnit):
             if isinstance(op, (int, float)):
@@ -83,7 +86,7 @@ class MusicMatrix:
                 except Exception:
                     pass
             return cell
-
+        
         # numeric offset (transpose) or factor (augment) handling for common types
         if isinstance(op, (int, float)):
             # try common ops: if cell has a method named 'transpose' or 'augment' try them
@@ -156,14 +159,14 @@ class MusicMatrix:
         def aug(c):
             if callable(factor_or_func):
                 return factor_or_func(c)
-
+            
             # Handle MusicUnit augmentation
             if isinstance(c, MusicUnit):
                 try:
                     return c.augment(factor_or_func)
                 except Exception:
                     pass
-
+            
             if isinstance(c, (int, float)) and isinstance(factor_or_func, (int, float)):
                 return c * factor_or_func
             if hasattr(c, "augment"):
@@ -275,10 +278,10 @@ class MusicMatrix:
     def from_units(cls, units: Sequence[Sequence[MusicUnit]]) -> "MusicMatrix":
         """
         Create a MusicMatrix from a 2D list of MusicUnit objects.
-
+        
         Args:
             units: 2D list where rows are voices and columns are sections
-
+        
         Returns:
             MusicMatrix with the given units
         """
@@ -294,4 +297,3 @@ class MusicMatrix:
         if not isinstance(unit, MusicUnit):
             raise TypeError("Expected MusicUnit object")
         self._data[row][col] = unit
-
