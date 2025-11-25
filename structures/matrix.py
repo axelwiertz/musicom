@@ -4,12 +4,15 @@ import numpy as np
 from copy import deepcopy
 from typing import Any, Callable, List, Optional, Sequence, Tuple
 
+from structures.unit import MusicUnit
+
+
 class MusicMatrix:
     """
     Basic 2D matrix for musical material:
     - rows are voices
     - columns are sections
-    Cells may be arbitrary objects (notes, chords, motifs, numbers, etc.)
+    Cells contain MusicUnit objects (or other musical elements)
     """
 
     def __init__(self, rows: int = 0, cols: int = 0, data: Optional[Sequence[Sequence[Any]]] = None):
@@ -70,6 +73,17 @@ class MusicMatrix:
     def _transform_cell(cell: Any, op: Any) -> Any:
         if callable(op):
             return op(cell)
+
+        # Handle MusicUnit transformations
+        if isinstance(cell, MusicUnit):
+            if isinstance(op, (int, float)):
+                # Try to transpose the MusicUnit
+                try:
+                    return cell.transpose(int(op))
+                except Exception:
+                    pass
+            return cell
+
         # numeric offset (transpose) or factor (augment) handling for common types
         if isinstance(op, (int, float)):
             # try common ops: if cell has a method named 'transpose' or 'augment' try them
@@ -99,6 +113,12 @@ class MusicMatrix:
 
     def invert_row(self, r: int, pivot: Optional[float] = None, in_place: bool = True) -> Optional["MusicMatrix"]:
         def inv(c):
+            # Handle MusicUnit inversion
+            if isinstance(c, MusicUnit):
+                try:
+                    return c.invert(pivot)
+                except Exception:
+                    pass
             if hasattr(c, "invert"):
                 try:
                     return c.invert(pivot)
@@ -114,15 +134,36 @@ class MusicMatrix:
     def retrograde_row(self, r: int, in_place: bool = True) -> Optional["MusicMatrix"]:
         if in_place:
             self._data[r].reverse()
+            # If cells are MusicUnit objects, reverse their internal content too
+            for i, cell in enumerate(self._data[r]):
+                if isinstance(cell, MusicUnit):
+                    try:
+                        self._data[r][i] = cell.retrograde()
+                    except Exception:
+                        pass
             return None
         new = self.copy()
         new._data[r].reverse()
+        for i, cell in enumerate(new._data[r]):
+            if isinstance(cell, MusicUnit):
+                try:
+                    new._data[r][i] = cell.retrograde()
+                except Exception:
+                    pass
         return new
 
     def augment_row(self, r: int, factor_or_func: Any, in_place: bool = True) -> Optional["MusicMatrix"]:
         def aug(c):
             if callable(factor_or_func):
                 return factor_or_func(c)
+
+            # Handle MusicUnit augmentation
+            if isinstance(c, MusicUnit):
+                try:
+                    return c.augment(factor_or_func)
+                except Exception:
+                    pass
+
             if isinstance(c, (int, float)) and isinstance(factor_or_func, (int, float)):
                 return c * factor_or_func
             if hasattr(c, "augment"):
@@ -228,3 +269,29 @@ class MusicMatrix:
             for c in range(self._cols):
                 if predicate(r, c, self._data[r][c]):
                     self._data[r][c] = None
+
+    # Helper method to create a matrix from MusicUnit objects
+    @classmethod
+    def from_units(cls, units: Sequence[Sequence[MusicUnit]]) -> "MusicMatrix":
+        """
+        Create a MusicMatrix from a 2D list of MusicUnit objects.
+
+        Args:
+            units: 2D list where rows are voices and columns are sections
+
+        Returns:
+            MusicMatrix with the given units
+        """
+        return cls(data=units)
+
+    def get_unit(self, row: int, col: int) -> Optional[MusicUnit]:
+        """Get the MusicUnit at the specified position."""
+        cell = self._data[row][col]
+        return cell if isinstance(cell, MusicUnit) else None
+
+    def set_unit(self, row: int, col: int, unit: MusicUnit):
+        """Set a MusicUnit at the specified position."""
+        if not isinstance(unit, MusicUnit):
+            raise TypeError("Expected MusicUnit object")
+        self._data[row][col] = unit
+

@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="refactoring and matrix structure">
-      <change afterPath="$PROJECT_DIR$/structures/grid.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/base.py" afterDir="false" />
+    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="project and grid">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/structures/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/structures/matrix.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/matrix.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,15 +154,8 @@
       <workItem from="1763821424047" duration="572000" />
       <workItem from="1763822018294" duration="19264000" />
       <workItem from="1763999978273" duration="9754000" />
-      <workItem from="1764019756568" duration="2231000" />
-    </task>
-    <task id="LOCAL-00117" summary="transformation and creation">
-      <option name="closed" value="true" />
-      <created>1760215398658</created>
-      <option name="number" value="00117" />
-      <option name="presentableId" value="LOCAL-00117" />
-      <option name="project" value="LOCAL" />
-      <updated>1760215398659</updated>
+      <workItem from="1764019756568" duration="2271000" />
+      <workItem from="1764057557979" duration="540000" />
     </task>
     <task id="LOCAL-00118" summary="transformation and creation">
       <option name="closed" value="true" />
@@ -547,7 +541,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764021550004</updated>
     </task>
-    <option name="localTasksCounter" value="166" />
+    <task id="LOCAL-00166" summary="project and grid">
+      <option name="closed" value="true" />
+      <created>1764022026872</created>
+      <option name="number" value="00166" />
+      <option name="presentableId" value="LOCAL-00166" />
+      <option name="project" value="LOCAL" />
+      <updated>1764022026872</updated>
+    </task>
+    <option name="localTasksCounter" value="167" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -580,7 +582,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Composing" />
     <MESSAGE value="Theory and library" />
     <MESSAGE value="Helix classes" />
     <MESSAGE value="Time circle and transformation" />
@@ -605,7 +606,8 @@
     <MESSAGE value="generators" />
     <MESSAGE value="refactoring" />
     <MESSAGE value="refactoring and matrix structure" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactoring and matrix structure" />
+    <MESSAGE value="project and grid" />
+    <option name="LAST_COMMIT_MESSAGE" value="project and grid" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

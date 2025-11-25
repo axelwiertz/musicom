@@ -4,6 +4,7 @@ Music composition structures, theory, rhythm, and network representations
 """
 from structures.composition import MusicUnit, MusicTime, MusicSection, MusicVoice, MusicComposition
 from structures.pattern import MusicPattern
+from structures.matrix import MusicMatrix
 
 __all__ = [
     "MusicUnit",
@@ -12,4 +13,5 @@ __all__ = [
     "MusicSection",
     "MusicVoice",
     "MusicComposition",
+    "MusicMatrix",
 ]
