@@ -1,24 +1,23 @@
-"""MusicMatrix: A 2D matrix structure for musical material manipulation."""
+"""MusicMatrix: A 2D matrix structure for musical material manipulation that holds `MusicUnit` objects"""
 
 import numpy as np
 from copy import deepcopy
 from typing import Any, Callable, List, Optional, Sequence, Tuple
-
 from structures.unit import MusicUnit
 
 
 class MusicMatrix:
     """
     Basic 2D matrix for musical material:
-    - rows are voices
-    - columns are sections
-    Cells contain MusicUnit objects (or other musical elements)
+    - horizontal rows are voices in pitch space
+    - vertical columns are sections in time space
+    Cells contain MusicUnit objects
     """
-
     def __init__(self,
                  rows: int = 0,
                  cols: int = 0,
-                 data: Optional[Sequence[Sequence[Any]]] = None):
+                 data: Optional[List[List[MusicUnit]]] = None):
+
         if data is not None:
             # accept list-of-lists; normalize to list of lists
             self._data = [list(row) for row in data]
@@ -36,6 +35,9 @@ class MusicMatrix:
             self._data = [[None for _ in range(cols)] for _ in range(rows)]
 
         self.matrix = np.array(self._data)
+
+    def __repr__(self):
+        return f"Matrix(rows={self.rows}, cols={self.cols})"
 
     # Basic properties
     @property
@@ -60,8 +62,8 @@ class MusicMatrix:
         else:
             self._data[key] = list(value)
 
-    def copy(self) -> "MusicMatrix":
-        return MusicMatrix(data=deepcopy(self._data))
+    def clone(self) -> "MusicMatrix":
+        return deepcopy(self)
 
     def __str__(self) -> str:
         # simple pretty print showing repr(cell) trimmed
@@ -71,35 +73,6 @@ class MusicMatrix:
         rows = ["\t".join(fmt(c) for c in row) for row in self._data]
         return "\n".join(rows)
 
-    # Internal helper to transform a single cell according to either a numeric op or a callable
-    @staticmethod
-    def _transform_cell(cell: Any, op: Any) -> Any:
-        if callable(op):
-            return op(cell)
-        
-        # Handle MusicUnit transformations
-        if isinstance(cell, MusicUnit):
-            if isinstance(op, (int, float)):
-                # Try to transpose the MusicUnit
-                try:
-                    return cell.transpose(int(op))
-                except Exception:
-                    pass
-            return cell
-        
-        # numeric offset (transpose) or factor (augment) handling for common types
-        if isinstance(op, (int, float)):
-            # try common ops: if cell has a method named 'transpose' or 'augment' try them
-            if hasattr(cell, "transpose"):
-                try:
-                    return cell.transpose(op)
-                except Exception:
-                    pass
-            if isinstance(cell, (int, float)):
-                return cell + op
-        # fallback: return cell unchanged
-        return cell
-
     # Row operations
     def apply_to_row(self, r: int, func: Callable[[Any], Any], in_place: bool = True) -> Optional["MusicMatrix"]:
         if not (0 <= r < self._rows):
@@ -107,75 +80,9 @@ class MusicMatrix:
         if in_place:
             self._data[r] = [func(c) for c in self._data[r]]
             return None
-        new = self.copy()
+        new = self.clone()
         new._data[r] = [func(c) for c in new._data[r]]
         return new
-
-    def transpose_row(self, r: int, offset_or_func: Any, in_place: bool = True) -> Optional["MusicMatrix"]:
-        return self.apply_to_row(r, lambda c: self._transform_cell(c, offset_or_func), in_place)
-
-    def invert_row(self, r: int, pivot: Optional[float] = None, in_place: bool = True) -> Optional["MusicMatrix"]:
-        def inv(c):
-            # Handle MusicUnit inversion
-            if isinstance(c, MusicUnit):
-                try:
-                    return c.invert(pivot)
-                except Exception:
-                    pass
-            if hasattr(c, "invert"):
-                try:
-                    return c.invert(pivot)
-                except Exception:
-                    pass
-            if isinstance(c, (int, float)):
-                if pivot is None:
-                    return -c
-                return pivot * 2 - c
-            return c
-        return self.apply_to_row(r, inv, in_place)
-
-    def retrograde_row(self, r: int, in_place: bool = True) -> Optional["MusicMatrix"]:
-        if in_place:
-            self._data[r].reverse()
-            # If cells are MusicUnit objects, reverse their internal content too
-            for i, cell in enumerate(self._data[r]):
-                if isinstance(cell, MusicUnit):
-                    try:
-                        self._data[r][i] = cell.retrograde()
-                    except Exception:
-                        pass
-            return None
-        new = self.copy()
-        new._data[r].reverse()
-        for i, cell in enumerate(new._data[r]):
-            if isinstance(cell, MusicUnit):
-                try:
-                    new._data[r][i] = cell.retrograde()
-                except Exception:
-                    pass
-        return new
-
-    def augment_row(self, r: int, factor_or_func: Any, in_place: bool = True) -> Optional["MusicMatrix"]:
-        def aug(c):
-            if callable(factor_or_func):
-                return factor_or_func(c)
-            
-            # Handle MusicUnit augmentation
-            if isinstance(c, MusicUnit):
-                try:
-                    return c.augment(factor_or_func)
-                except Exception:
-                    pass
-            
-            if isinstance(c, (int, float)) and isinstance(factor_or_func, (int, float)):
-                return c * factor_or_func
-            if hasattr(c, "augment"):
-                try:
-                    return c.augment(factor_or_func)
-                except Exception:
-                    pass
-            return c
-        return self.apply_to_row(r, aug, in_place)
 
     # Column operations
     def _get_column(self, c: int) -> List[Any]:
@@ -195,7 +102,7 @@ class MusicMatrix:
         if in_place:
             self._set_column(c, new_col)
             return None
-        new = self.copy()
+        new = self.clone()
         new._set_column(c, new_col)
         return new
 
@@ -275,13 +182,11 @@ class MusicMatrix:
 
     # Helper method to create a matrix from MusicUnit objects
     @classmethod
-    def from_units(cls, units: Sequence[Sequence[MusicUnit]]) -> "MusicMatrix":
+    def from_units(cls, units: List[List[MusicUnit]]) -> "MusicMatrix":
         """
         Create a MusicMatrix from a 2D list of MusicUnit objects.
-        
         Args:
-            units: 2D list where rows are voices and columns are sections
-        
+            units: 2D list horizontal rows and vertical columns of MusicUnit objects.
         Returns:
             MusicMatrix with the given units
         """
@@ -289,11 +194,11 @@ class MusicMatrix:
 
     def get_unit(self, row: int, col: int) -> Optional[MusicUnit]:
         """Get the MusicUnit at the specified position."""
-        cell = self._data[row][col]
-        return cell if isinstance(cell, MusicUnit) else None
+        return self._data[row][col]
 
     def set_unit(self, row: int, col: int, unit: MusicUnit):
         """Set a MusicUnit at the specified position."""
-        if not isinstance(unit, MusicUnit):
-            raise TypeError("Expected MusicUnit object")
-        self._data[row][col] = unit
+        if 0 <= row < self.rows and 0 <= col < self.cols:
+            self._data[row][col] = unit
+        else:
+            raise IndexError("Matrix index out of range.")

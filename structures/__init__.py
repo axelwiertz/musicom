@@ -1,9 +1,8 @@
-"""
-Musicom structures package
-Music composition structures, theory, rhythm, and network representations
-"""
-from structures.composition import MusicUnit, MusicTime, MusicSection, MusicVoice, MusicComposition
+"""Package for music composition structures."""
+from structures.unit import MusicUnit
+from structures.time import MusicTime
 from structures.pattern import MusicPattern
+from structures.project import MusicSection, MusicVoice, MusicProject
 from structures.matrix import MusicMatrix
 
 __all__ = [
@@ -12,6 +11,6 @@ __all__ = [
     "MusicPattern",
     "MusicSection",
     "MusicVoice",
-    "MusicComposition",
+    "MusicProject",
     "MusicMatrix",
 ]

@@ -14,6 +14,12 @@ Main modules:
 __version__ = '0.1.0'
 __author__ = 'Musicom Team'
 
+# Constants
+from .constants import (
+    TwelveTET,
+    MidiInstrument,
+)
+
 # Core structures
 from .structures import (
     # Music structures
@@ -22,13 +28,7 @@ from .structures import (
     MusicSection,
     MusicComposition,
 
-    # Geometric structures
-    Circle,
-    Helix,
-
     # Music theory
-    PitchRegister,
-    Diatonic,
     MusicPattern,
     MusicalInterval,
     PatternSequence,
@@ -36,14 +36,10 @@ from .structures import (
     # Rhythm
     MusicTime,
     QuantizedEvent,
-
 )
-
-# Constants
-from .constants import (
-    TwelveTET,
-    MIDIinstrument,
-)
+from .regularity import (
+    PitchClassSet,
+    Diatonic)
 
 # Converters
 from .converters import (

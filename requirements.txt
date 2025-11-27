@@ -2,15 +2,15 @@
 # Music composition and analysis framework dependencies
 
 # Core music libraries
-music21>=9.1.0
-musicpy>=1.1.0
+music21>=9.9.1
+musicpy>=7.11
 
 # Conversion utilities (optional - may need to be installed separately or from source)
-# music21py>=0.1.0
-# showscore>=0.1.0
+music21py>=0.0.2
+showscore>=0.1.0
 
 # Scientific computing
-numpy>=1.24.0
+numpy>=2.3.5
 scipy>=1.10.0
 pandas>=2.0.0
 
@@ -28,4 +28,3 @@ networkx>=3.1
 # collections - built-in
 # dataclasses - built-in (Python 3.7+)
 # math - built-in
-

@@ -1,7 +1,4 @@
-"""
-Musicom transformators
-Transform musical pitch sequences using serial techniques.
-"""
+"""Module for handling pitch sequences and their transformations using music21 library."""
 
 from music21 import serial
 

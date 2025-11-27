@@ -1,4 +1,7 @@
-"""Module defining the base class for musical structures."""
+"""Module defining the base classes for musical structures."""
+from typing import Tuple
+import numpy as np
+import matplotlib.pyplot as plt
 
 class MusicBase:
     # Base class for musical structures
@@ -8,3 +11,5 @@ class MusicBase:
 
     def __repr__(self):
         return f"Instance(class='{self.__class__}', id={self._id}, name='{self.name}')"
+
+

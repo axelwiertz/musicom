@@ -3,14 +3,54 @@ import pandas as pd
 import numpy as np
 from utilities import Config
 from constants import TwelveTET
-from structures.composition import PitchRegister, MusicUnit, MusicTime
+from structures.composition import PitchRegister
+from structures.unit import MusicUnit
+from structures.time import MusicTime
 from structures.pattern import MusicPattern
 from regularity.diatonic import Diatonic
-from structures.circle import Circle
+from structures.time import Circle
 from structures.helix import Helix
 from structures.rhythm import QuantizedEvent, seconds_to_ticks, MetricalNode, HierarchicalEvent
 from generators.rhythm import euclidian
 from music21 import interval
+
+from structures.unit import MusicUnit
+from structures.composition import MusicVoice
+from structures.matrix import MusicMatrix
+from structures.project import Project, Section
+
+def test_project():
+    ### Usage Example
+    # Here is how you can combine these classes to build a project structure.
+
+    # 2. Create units with voices
+    voice1 = MusicVoice(0, name="Melody")
+    unit_a1 = MusicUnit(1)
+    unit_a2 = MusicUnit(2)
+    voice2 = MusicVoice(1, name="Bass")
+    unit_b1 = MusicUnit(3)
+    unit_b2 = MusicUnit(4)
+    proj = Project(1, name="My First Song", sections=[])
+
+    # 3. Create a matrix and populate it with units
+    section1 = Section(1, name="Intro", matrix=MusicMatrix(2,2))
+    main_matrix.set_unit(0, 0, unit_a1)
+    main_matrix.set_unit(0, 1, unit_a2)
+    main_matrix.set_unit(1, 0, unit_b1)
+    main_matrix.set_unit(1, 1, unit_b2)
+
+    # 4. Create a section with the matrix
+    intro_section = Section(name="Intro", matrix=main_matrix)
+
+    # 5. Create a project and add the section
+    my_project = Project(name="My First Song")
+    my_project.add_section(intro_section)
+
+    # Print the structure
+    print(my_project)
+    print(my_project.sections[0])
+    print(my_project.sections[0].matrix.grid)
+
 
 def test_structures():
     # Piano register from A0 to C8
@@ -106,6 +146,7 @@ def test_rhythm_time():
 
 
 def main():
+    test_project()
     test_structures()
     test_rhythm_time()
 

@@ -15,6 +15,7 @@
 - **MusicUnit**: Core structure representing sequences of pitches with timing and dynamics
 - **MusicVoice**: Collections of musical units with instrument assignments
 - **MusicComposition**: Complete compositions with multiple voices, scales, and progressions
+- **MusicMatrix**: Matrix-based compositional framework for systematic musical development
 - Support for both **Music21** and **MusicPy** data structures
 
 ### 🎹 Harmony & Composition Rules
@@ -30,6 +31,14 @@
 - **Euclidean rhythm** generation
 - **Hierarchical metrical structures** with beat depth analysis
 - Support for various rhythmic patterns (Tresillo, Son Clave, etc.)
+
+### 🎨 Matrix-Based Composition
+- **MusicMatrix**: 2D compositional framework organizing musical material
+- **Voice transformations**: Transpose, invert, retrograde, augment/diminish individual voices
+- **Sectional development**: Repeat, vary, interpolate, and reorder temporal sections
+- **Cell operations**: Transform individual musical units, cross-pollinate between voices
+- **Matrix operations**: Transpose entire structures, diagonal reading, rotation, selective erasure
+- Integration with **MusicUnit** for seamless musical content management
 
 ### 🤖 Algorithmic Generation
 Multiple generator modules for creative composition:
@@ -100,6 +109,8 @@ musicom/
 ├── projects/              # Jupyter notebooks for experiments and projects
 ├── rules/                 # Rules for harmony and composition
 ├── structures/            # Core data structures for music representation
+│   ├── matrix.py         # Matrix-based compositional framework
+│   └── ...
 ├── testers/               # Tests for the different modules
 ├── utilities/             # Helper functions and configuration
 ├── README.md              # Project documentation
@@ -112,9 +123,10 @@ musicom/
 ### Creating a Simple Composition
 
 ```python
-from constants import TwelveTET, MIDIinstrument
-from structures import MusicComposition, MusicUnit, MusicVoice
-from structures.composition import MusicScale, Diatonic, PitchRegister
+from constants import TwelveTET, MidiInstrument
+from structures.composition import MusicComposition, MusicUnit, MusicVoice
+from structures.pattern import MusicPattern
+from structures.regularity import Diatonic, PitchRegister
 from structures.rhythm import MusicTime
 from converters import comp_to_visual
 
@@ -147,6 +159,66 @@ comp = MusicComposition(
 
 # Display the composition
 comp_to_visual(comp)
+```
+
+### Matrix-Based Composition
+
+```python
+from structures import MusicMatrix, MusicalUnit
+from structures.rhythm import MusicTime
+from structures.composition import PitchRegister
+from constants import TwelveTET
+
+# Create a 4x4 musical matrix (4 voices, 4 sections)
+matrix = MusicMatrix(rows=4, cols=4)
+
+# Create musical units
+time = MusicTime(16, 4, 4, 120)
+reg = PitchRegister()
+
+motif_a = MusicalUnit(
+    unit_type="motif",
+    content=[reg.index_of(TwelveTET.C, 4), reg.index_of(TwelveTET.E, 4)],
+    metadata={"pitch": 60, "dynamics": "mf"}
+)
+
+motif_b = MusicalUnit(
+    unit_type="phrase",
+    content=[reg.index_of(TwelveTET.G, 4), reg.index_of(TwelveTET.B, 4)],
+    metadata={"pitch": 67, "dynamics": "f"}
+)
+
+# Populate the matrix
+matrix.set_cell(0, 0, motif_a)
+matrix.set_cell(1, 0, motif_b)
+
+# Apply compositional transformations
+
+# Row operations (voice transformations)
+matrix.transpose_row(0, 2)           # Transpose voice 1 up by 2 semitones
+matrix.retrograde_row(1)             # Play voice 2 backward
+matrix.invert_row(2, pivot=60)       # Mirror melodic contours around middle C
+matrix.augment_row(3, factor=2.0)    # Double note durations in voice 4
+
+# Column operations (sectional development)
+matrix.repeat_column(0, 3)           # Repeat section 1 at position 3
+transition = MusicalUnit(unit_type="transition", content=[])
+matrix.insert_column(2, transition)  # Insert transitional material
+matrix.reorder_columns([0, 2, 1, 3]) # Non-linear narrative structure
+
+# Cell operations (unit manipulation)
+matrix.swap_cells((0, 0), (1, 1))    # Exchange material between voices
+matrix.mutate_cell(0, 0, lambda cell: cell.transpose(5) if cell else None)
+
+# Matrix operations
+diagonal = matrix.diagonal_read()     # Extract diagonal pattern
+transposed = matrix.transpose()       # Swap rows and columns (voices ↔ sections)
+matrix.selective_erase(
+    condition=lambda cell: cell is None or cell.metadata.get("density", 0) < 0.5
+)
+
+# Display the matrix
+print(matrix)
 ```
 
 ### Using Generators
@@ -186,11 +258,39 @@ The fundamental building block representing a sequence of musical events with:
 - **durations**: Note durations
 - **velocities**: Note dynamics (0-127)
 
+### MusicalUnit
+A flexible container for musical content used in matrix-based composition:
+- **unit_type**: Classification (motif, phrase, chord, rhythm, etc.)
+- **content**: Musical data (can be pitches, durations, or any musical information)
+- **metadata**: Additional attributes (dynamics, articulation, pitch center, etc.)
+- **Methods**: transpose(), invert(), retrograde(), augment()
+
 ### MusicVoice
 A collection of `MusicUnit` objects representing a single instrumental or vocal line with a specific MIDI instrument.
 
 ### MusicComposition
 A complete piece containing multiple voices, a main scale, chord progression, and formal structure.
+
+### MusicMatrix
+A 2D compositional framework where:
+- **Rows** represent independent voices or parts (melody, harmony, bass, percussion, etc.)
+- **Columns** represent temporal sections or measures
+- **Cells** contain `MusicalUnit` objects (motifs, phrases, chords, rhythmic patterns)
+
+**Matrix Structure Example:**
+```
+        Section 1   Section 2   Section 3   Section 4
+Voice 1:   [A₁]       [A₂]        [A₃]        [A₁']
+Voice 2:   [B₁]       [B₂]        [B₁]        [B₃]
+Voice 3:   [C₁]       [C₁]        [C₂]        [C₂']
+Voice 4:   [D₁]       [D₂]        [D₃]        [D₁]
+```
+
+**Compositional Operations:**
+- **Row Operations**: Transform entire voices (transpose, invert, retrograde, augment/diminish)
+- **Column Operations**: Develop sections (repeat, insert, reorder)
+- **Cell Operations**: Modify individual units (mutate, swap)
+- **Matrix Operations**: Global transformations (transpose matrix, diagonal reading, rotation, selective erasure)
 
 ### Diatonic Theory
 Comprehensive support for diatonic harmony including:
@@ -214,6 +314,52 @@ analyze(comp)
 # Outputs: key, chord progressions, Roman numerals, metrical structure
 ```
 
+## Advanced Matrix Techniques
+
+### Systematic Development
+```python
+# Create a theme and develop it systematically
+theme = MusicalUnit(unit_type="theme", content=[60, 64, 67])
+matrix = MusicMatrix(rows=4, cols=8)
+
+# Voice 1: Original theme
+matrix.set_cell(0, 0, theme)
+
+# Voice 2: Inverted theme
+matrix.set_cell(1, 0, theme)
+matrix.invert_row(1, pivot=64)
+
+# Voice 3: Retrograde theme
+matrix.set_cell(2, 0, theme)
+matrix.retrograde_row(2)
+
+# Voice 4: Augmented theme
+matrix.set_cell(3, 0, theme)
+matrix.augment_row(3, factor=2.0)
+
+# Develop across sections
+for col in range(1, 8):
+    matrix.repeat_column(0, col)
+    # Apply variations to each section
+    matrix.transpose_row(0, offset=col % 12, start_col=col, end_col=col)
+```
+
+### Cross-Voice Material Exchange
+```python
+# Create contrasting materials
+material_a = MusicalUnit(unit_type="motif", content=[60, 62, 64])
+material_b = MusicalUnit(unit_type="motif", content=[67, 65, 64])
+
+matrix = MusicMatrix(rows=2, cols=4)
+matrix.set_cell(0, 0, material_a)
+matrix.set_cell(1, 0, material_b)
+
+# Cross-pollinate materials
+matrix.swap_cells((0, 1), (1, 1))  # Exchange at section 2
+matrix.repeat_column(1, 2)          # Stabilize the exchange
+matrix.repeat_column(0, 3)          # Return to original
+```
+
 ## Contributing
 
 Contributions are welcome! Areas for enhancement:
@@ -222,6 +368,7 @@ Contributions are welcome! Areas for enhancement:
 - Extended analysis capabilities
 - Performance optimizations
 - Documentation improvements
+- Advanced matrix operations and transformations
 
 ## License
 
@@ -232,6 +379,7 @@ Contributions are welcome! Areas for enhancement:
 - Built with [music21](https://web.mit.edu/music21/) - MIT's music analysis toolkit
 - Built with [musicpy](https://github.com/Rainbow-Dreamer/musicpy) - Computational music composition library
 - Inspired by classical music theory and algorithmic composition techniques
+- Matrix-based composition inspired by serialism and systematic compositional techniques
 
 ## Contact
 
@@ -240,4 +388,3 @@ Contributions are welcome! Areas for enhancement:
 ---
 
 **Note**: This is a research and educational project for exploring computational music composition and analysis. It's designed for composers, music theorists, and developers interested in algorithmic music generation.
-
