@@ -3,65 +3,59 @@ import pandas as pd
 import numpy as np
 from utilities import Config
 from constants import TwelveTET
-from structures.composition import PitchRegister
-from structures.unit import MusicUnit
-from structures.time import MusicTime
+from constants.chromatic import Helix, ChromaticPitches
+from structures.time import MusicTime, Circle
 from structures.pattern import MusicPattern
 from regularity.diatonic import Diatonic
-from structures.time import Circle
-from structures.helix import Helix
 from structures.rhythm import QuantizedEvent, seconds_to_ticks, MetricalNode, HierarchicalEvent
 from generators.rhythm import euclidian
 from music21 import interval
 
 from structures.unit import MusicUnit
-from structures.composition import MusicVoice
+from structures.project import MusicVoice
 from structures.matrix import MusicMatrix
-from structures.project import Project, Section
+from structures.project import MusicProject, MusicSection
 
 def test_project():
     ### Usage Example
     # Here is how you can combine these classes to build a project structure.
 
     # 2. Create units with voices
-    voice1 = MusicVoice(0, name="Melody")
+    voice1 = MusicVoice(0, "Melody")
     unit_a1 = MusicUnit(1)
     unit_a2 = MusicUnit(2)
-    voice2 = MusicVoice(1, name="Bass")
+    voice2 = MusicVoice(1, "Bass")
     unit_b1 = MusicUnit(3)
     unit_b2 = MusicUnit(4)
-    proj = Project(1, name="My First Song", sections=[])
 
     # 3. Create a matrix and populate it with units
-    section1 = Section(1, name="Intro", matrix=MusicMatrix(2,2))
-    main_matrix.set_unit(0, 0, unit_a1)
-    main_matrix.set_unit(0, 1, unit_a2)
-    main_matrix.set_unit(1, 0, unit_b1)
-    main_matrix.set_unit(1, 1, unit_b2)
-
-    # 4. Create a section with the matrix
-    intro_section = Section(name="Intro", matrix=main_matrix)
+    intro_section = MusicSection(1, "Intro", MusicMatrix(2,2))
+    intro_section.matrix.set_unit(0, 0, unit_a1)
+    intro_section.matrix.set_unit(0, 1, unit_a2)
+    intro_section.matrix.set_unit(1, 0, unit_b1)
+    intro_section.matrix.set_unit(1, 1, unit_b2)
 
     # 5. Create a project and add the section
-    my_project = Project(name="My First Song")
-    my_project.add_section(intro_section)
+    my_project = MusicProject(1,"My First Song")
+    my_project.sections = [intro_section]
 
     # Print the structure
     print(my_project)
     print(my_project.sections[0])
-    print(my_project.sections[0].matrix.grid)
+    print(my_project.sections[0].matrix)
 
 
 def test_structures():
     # Piano register from A0 to C8
-    reg = PitchRegister(TwelveTET.A, 0, TwelveTET.C, 8)
-    reg.show()
+    chromatic_pitches = ChromaticPitches()
+    chromatic_pitches.show()
 
-    pos = reg.index_of(3, 7)  # octave 3, pitchclass 7 -> index
-    next_pos = reg.transpose(pos,reg.ASCENDING)  # next pitchclass
-    octave_pitchclass = reg.get_at(next_pos)
-    print (f'PitchRegister: pos {pos} -> next pos {next_pos} -> (octave, pitchclass) {octave_pitchclass}')
+    pos = chromatic_pitches.index_of(3, 7)  # octave 3, pitchclass 7 -> index
+    next_pos = chromatic_pitches.transpose(pos,chromatic_pitches.ASCENDING)  # next pitchclass
+    octave_pitchclass = chromatic_pitches.get_at(next_pos)
+    print (f'PitchRange: pos {pos} -> next pos {next_pos} -> (octave, pitchclass) {octave_pitchclass}')
 
+    # Patterns: Diatonic scales
     scale5cmajor = MusicPattern(Diatonic.PENTA, Diatonic.SCALE,
                               tonic=TwelveTET.C, mode=Diatonic.major_mode)
     scale7cmajor = MusicPattern(Diatonic.HEPTA, Diatonic.SCALE,
@@ -97,6 +91,7 @@ def test_structures():
 
 #    pc_circle.show(pcp7.majormodeschromatic, TwelveTET.PITCH_CLASS_NAMES_SHARP, 'Major circle')
 
+    # Show helix
     h = Helix()
     h.show()
     # Test functions

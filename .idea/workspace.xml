@@ -4,32 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="project and grid">
-      <change afterPath="$PROJECT_DIR$/structures/chromatic.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/transformators/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/transformators/augment.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/transformators/invert.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/transformators/retrograde.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/transformators/transpose.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/copilotDiffState.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilotDiffState.xml" afterDir="false" />
+    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="project, matrix, unit, transformators">
+      <change afterPath="$PROJECT_DIR$/generators/chords.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testers/test_transformators.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/transformators/canon.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/copilotDiffState.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generators/pitchsequence.py" beforeDir="false" afterPath="$PROJECT_DIR$/transformators/pitchsequence.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/project.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/project.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/serial.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/projects/serial.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generators/progression.py" beforeDir="false" afterPath="$PROJECT_DIR$/generators/progression.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generators/transformation.py" beforeDir="false" afterPath="$PROJECT_DIR$/transformators/embellishment.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/structures/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/structures/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/base.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/circle.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/composition.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/grid.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/helix.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/matrix.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/matrix.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/time.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/time.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/unit.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/unit.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/structures/chromatic.py" beforeDir="false" afterPath="$PROJECT_DIR$/constants/chromatic.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/structures/project.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/project.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testers/test_generators.py" beforeDir="false" afterPath="$PROJECT_DIR$/testers/test_generators.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testers/test_structures.py" beforeDir="false" afterPath="$PROJECT_DIR$/testers/test_structures.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utilities/helpers.py" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/helpers.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +107,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.github.copilot.settings.chat.ChatConfigurable&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -134,8 +124,8 @@
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\92591\PycharmProjects\musicom\transformators" />
-      <recent name="C:\Users\92591\PycharmProjects\musicom\structures" />
       <recent name="C:\Users\92591\PycharmProjects\musicom\constants" />
+      <recent name="C:\Users\92591\PycharmProjects\musicom\structures" />
       <recent name="C:\Users\92591\PycharmProjects\musicom\regularity" />
       <recent name="C:\Users\92591\PycharmProjects\musicom\analysis" />
     </key>
@@ -143,8 +133,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-PY-252.27397.106" />
-        <option value="bundled-python-sdk-4e2b1448bda8-9a97661f3031-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-252.27397.106" />
+        <option value="bundled-js-predefined-d6986cc7102b-a71380e98a7c-JavaScript-PY-252.28238.29" />
+        <option value="bundled-python-sdk-a101402ee41c-968fe969f28a-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-252.28238.29" />
       </set>
     </attachedChunks>
   </component>
@@ -183,15 +173,10 @@
       <workItem from="1764086506712" duration="40000" />
       <workItem from="1764086562862" duration="3482000" />
       <workItem from="1764268242636" duration="31000" />
-      <workItem from="1764268334560" duration="10779000" />
-    </task>
-    <task id="LOCAL-00120" summary="time and styles">
-      <option name="closed" value="true" />
-      <created>1760306507384</created>
-      <option name="number" value="00120" />
-      <option name="presentableId" value="LOCAL-00120" />
-      <option name="project" value="LOCAL" />
-      <updated>1760306507384</updated>
+      <workItem from="1764268334560" duration="10827000" />
+      <workItem from="1764334747707" duration="2167000" />
+      <workItem from="1764338824439" duration="275000" />
+      <workItem from="1764339213502" duration="4382000" />
     </task>
     <task id="LOCAL-00121" summary="numeric theory">
       <option name="closed" value="true" />
@@ -577,7 +562,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764090045867</updated>
     </task>
-    <option name="localTasksCounter" value="169" />
+    <task id="LOCAL-00169" summary="project, matrix, unit, transformators">
+      <option name="closed" value="true" />
+      <created>1764279244981</created>
+      <option name="number" value="00169" />
+      <option name="presentableId" value="LOCAL-00169" />
+      <option name="project" value="LOCAL" />
+      <updated>1764279244983</updated>
+    </task>
+    <option name="localTasksCounter" value="170" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -610,7 +603,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Helix classes" />
     <MESSAGE value="Time circle and transformation" />
     <MESSAGE value="Diatonic layer and classes" />
     <MESSAGE value="Harmony and theory" />
@@ -635,7 +627,8 @@
     <MESSAGE value="refactoring and matrix structure" />
     <MESSAGE value="matrix.py" />
     <MESSAGE value="project and grid" />
-    <option name="LAST_COMMIT_MESSAGE" value="project and grid" />
+    <MESSAGE value="project, matrix, unit, transformators" />
+    <option name="LAST_COMMIT_MESSAGE" value="project, matrix, unit, transformators" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -1,17 +1,8 @@
-
-from analysis.music21 import stream, note, key, scale, roman
-import copy
+""" Module for transforming musical streams with various note transformations. """
+from music21 import stream, note, scale
+from copy import deepcopy
 import random
 
-from regularity.progression import Scale7ChordHarmony
-from structures import MusicalUnit, Diatonic
-
-# Voices in a canon
-VOICE1 = 0
-VOICE2 = 1
-VOICE3 = 2
-VOICE4 = 3
-VOICE5 = 4
 
 # Transformation types
 IDENTICAL = 0
@@ -23,14 +14,6 @@ ONE_TRANS_SET = [IDENTICAL, IDENTICAL, ONE_TO_THREE]
 # list of transformations that transform a single note based on both current and next note
 TWO_TRANS_SET = [IDENTICAL, IDENTICAL, TWO_TO_THREE, TWO_TO_FOUR]
 # identity is listed more than once to increase the chance of it getting chosen
-
-
-def pairwise(iterable):
-    # takes a list and returns a new list containing the elements pairwise
-    # with overlap
-
-    #    s -> (s[0], s[1]), (s[1], s[2]), (s[2], s[3]), ..., (s[Last], None)
-    return list(zip(iterable, iterable[1:])) + [(iterable[-1], None)]
 
 
 def pitch_middle_in_scale(pitch_in1: note.Pitch, pitch_in2: note.Pitch, scale_in: scale.ConcreteScale ) -> note.Pitch:
@@ -59,7 +42,7 @@ def note_split_middle_neighbor (note_in: note.Note, scale_in: scale.ConcreteScal
     stream_out = stream.Stream()
 
     if note_in.isRest:
-        stream_out.append(copy.deepcopy(note_in))
+        stream_out.append(deepcopy(note_in))
         return stream_out
 
     # original duration is kept, and divided in three parts
@@ -93,11 +76,11 @@ def note_split_passing_next (note1 : note.Note, note2 : note.Note, scale: scale.
     stream_out = stream.Stream()
 
     if note1.isRest:
-        stream_out.append(copy.deepcopy(note1))
+        stream_out.append(deepcopy(note1))
         return stream_out
 
     if note2 is None:
-        stream_out.insert(0, copy.deepcopy(note1))
+        stream_out.insert(0, deepcopy(note1))
         return stream_out
 
     # total duration doesn't change: duration of current note is
@@ -131,11 +114,11 @@ def note_split_twopassing_next (note1 : note.Note, note2 : note.Note, scale: sca
     stream_out = stream.Stream()
 
     if note1.isRest:
-        stream_out.append(copy.deepcopy(note1))
+        stream_out.append(deepcopy(note1))
         return stream_out
 
     if note2 is None:
-        stream_out.insert(0, copy.deepcopy(note1))
+        stream_out.insert(0, deepcopy(note1))
         return stream_out
 
     possible_durations = [
@@ -192,85 +175,3 @@ def stream_transform_random(stream_in: stream.Stream,
         stream_out.append (new_stream)
 
     return stream_out.flatten()
-
-
-
-
-
-def create_stream_from_chords (stream_chords: stream.Stream,
-                               number_of_voices : int = 3,
-                               octave_in: int = 4,
-                               quarterLength_in = 2) -> stream.Stream:
-    # given chords, return a stream of voices,
-    # starting in octave octave_in, and ascending
-    # prepare some streams: one per voice
-    # all bass notes of each chord form one voice
-    # all 2nd notes of each chord form a second voice
-
-    stream_out = stream.Stream()
-
-    # create voice streams to hold chords
-    for i in range(number_of_voices):
-        stream_out.append(stream.Stream())
-
-    for i, chord_in in enumerate(stream_chords):
-
-        octave_correction = octave_in - chord_in.notes[0].octave
-        for n in chord_in.notes:
-            n.octave += octave_correction
-
-        # split each chord into separate voices
-        for j in range(number_of_voices):
-            stream_out[j].append()
-            stream_out.append(note.Note(chord_in.notes[j].pitch, quarterLength_in))
-
-    return stream_out
-
-
-
-def stream_transform_canon(stream_in: stream.Stream,
-                           delay_ql : int = 4,
-                           number_of_voices: int = 5):
-    # and turn it into a canon. Add extra transpositions to some number_of_voices to create some diversity
-
-
-    stream_out = stream.Stream()
-
-    parts = [stream_out.new_part("piano") for _ in range(number_of_voices)]
-    initial_rests = [i * delay_ql for i in range(number_of_voices)]
-
-    # define extra transpositions for different voices (e.g. +12, -24, ...)
-    voice_transpositions = {VOICE1: 0, VOICE2: 0, VOICE3: -12, VOICE4: -24, VOICE5: -12}
-
-    stacking = 3
-    canonized = number_of_voices * stacking
-    for v in range(number_of_voices):
-        interval = voice_transpositions[v]
-        v = copy.deepcopy(stream_in.transpose(interval).flatten().notesAndRests)
-
-
-def main():
-    unit = MusicalUnit()
-    # Create based on chord progression
-    unit.scale = Diatonic.DEFAULT_SCALE
-    main_key = key.Key('C')
-    # chord_degrees = [1, 4, 6, 2, 5, 1]
-    chord_degrees = Scale7ChordHarmony.PROGRESSIONS[0]
-
-    main_chords = stream.Stream()
-    for i in chord_degrees:
-        main_chords.append(roman.RomanNumeral(i, main_key))
-
-    main_stream = create_stream_from_chords(main_chords, 3, 4, 2)
-
-    # if direction_in == scale.Direction.DESCENDING:
-    #    pitches.reverse()
-
-
-    new_stream = stream_transform_random(main_stream, unit.scale)
-
-    canon_stream = stream_transform_canon(main_stream)
-
-
-if __name__ == '__main__':
-    main()

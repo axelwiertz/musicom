@@ -1,9 +1,23 @@
 from typing import List
 
+from constants.tuning import TwelveTET
 from constants.midi import MidiInstrument
+from constants.chromatic import ChromaticPitches
 from structures.base import MusicBase
-from structures.unit import PitchRegister
 from structures.matrix import MusicMatrix
+
+class PitchRange:
+    # Chromatic pitch range
+    def __init__(self,  pitch_class_start=TwelveTET.A,
+                        octave_start=0,
+                        pitch_class_end=TwelveTET.C,
+                        octave_end=8):
+
+        self.chromatic = ChromaticPitches()
+
+        self.index_start = self.chromatic.index_of(pitch_class_start, octave_start)
+        self.index_end = self.chromatic.index_of(pitch_class_end, octave_end)
+
 
 class MusicVoice(MusicBase):
     """Represents a voice in the project."""
@@ -11,11 +25,11 @@ class MusicVoice(MusicBase):
     def __init__(self,
                  _id: int,
                  name: str = 'Voice',
-                 pitch_register: PitchRegister = None,
+                 pitch_range: PitchRange = None,
                  midi_instrument: int = MidiInstrument.PIANO,
                  ):
         super().__init__(_id, name)
-        self.pitch_register = pitch_register
+        self.pitch_range = pitch_range
         self.midi_instrument = midi_instrument
 
 

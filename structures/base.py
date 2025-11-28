@@ -1,7 +1,4 @@
 """Module defining the base classes for musical structures."""
-from typing import Tuple
-import numpy as np
-import matplotlib.pyplot as plt
 
 class MusicBase:
     # Base class for musical structures

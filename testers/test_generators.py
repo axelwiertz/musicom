@@ -1,17 +1,21 @@
-from constants import TwelveTET, MIDIinstrument
-from structures import MusicScale, MusicUnit, MusicVoice, MusicComposition
+from constants import TwelveTET
+from structures import MusicPattern, MusicUnit, MusicVoice, MusicProject
 from converters import score_to_midifile
 from generators import ProgressionGenerator, HarmonicFunction, GeneticGenerator
-from structures.composition import MusicTime, MusicSection
-from structures.theory import Diatonic
-from music21 import stream, note
+from structures.time import MusicTime
+from structures.project import MusicSection
+from regularity.diatonic import Diatonic
+from regularity.progression import Scale7ChordHarmony
+from music21 import stream, note, key, roman
 
 
 def test_genetic():
     # Example fitness function: counts the number of 1s in the genome
-    gen = GeneticGenerator(MusicUnit("Seed"))
     def fitness_func(genome: gen.Genome) -> int:
         return sum(genome)
+
+    gen = GeneticGenerator(MusicUnit("Seed"), fitness_func )
+
 
     # Run the genetic algorithm
     final_population, generations = gen.run_evolution(
@@ -47,14 +51,14 @@ def test_progression():
 
     # Patterns in scales
     # 3 Tria patterns:
-    scale3 = MusicScale(Diatonic.TRIA, Diatonic.MAJOR)
+    scale3 = MusicPattern(Diatonic.TRIA, Diatonic.MAJOR)
     # 4 Tetra patterns:
-    scale4 = MusicScale(Diatonic.TETRA, Diatonic.MAJOR7)
+    scale4 = MusicPattern(Diatonic.TETRA, Diatonic.MAJOR7)
     # 5 Penta patterns:
-    scale5 = MusicScale(Diatonic.PENTA, Diatonic.SCALE)
+    scale5 = MusicPattern(Diatonic.PENTA, Diatonic.SCALE)
 
     seed_unit = MusicUnit("Seed", MusicTime(4,4,4))
-    scale1 = MusicScale(Diatonic.HEPTA, Diatonic.SCALE, 60, Diatonic.major_mode)
+    scale1 = MusicPattern(Diatonic.HEPTA, Diatonic.SCALE, 60, Diatonic.major_mode)
 
     gen = ProgressionGenerator(
         seed_unit=seed_unit,
@@ -68,7 +72,7 @@ def test_progression():
         return self.progression([1,2,3,4,5,6,7])
 
     seed_unit2 = MusicUnit("Seed2", MusicTime(4,4,4))
-    scale2 = MusicScale(Diatonic.HEPTA, Diatonic.SCALE, 60, Diatonic.mixolydian)
+    scale2 = MusicPattern(Diatonic.HEPTA, Diatonic.SCALE, 60, Diatonic.mixolydian)
 
     gen = ProgressionGenerator(
         seed_unit=seed_unit2,
@@ -77,13 +81,11 @@ def test_progression():
         chord_progression_degrees=[1, 4, 5, 6, 3, 2, 7]
     )
 
-    section = MusicSection("Chord progression",
-                           [gen.generate()])
-    voice = MusicVoice('Piano voice',
-                            [section],
-                            MIDIinstrument.PIANO)
-    comp = MusicComposition('Chord progressions and triads',
-                            [voice])
+    unit = gen.generate()
+    section = MusicSection (1,"Chord progression")
+    section.matrix.set_unit(0,0,unit)
+    voice = MusicVoice(1,'Piano voice')
+    comp = MusicProject(1,'Chord progressions and triads')
     # Convert to music21 stream and save as MIDI file
     score = stream.Score()
     # TO DO: convert MusicComposition to music21 stream
@@ -91,6 +93,32 @@ def test_progression():
                         'chordlibrary_in_key_' +
                         TwelveTET.PITCH_CLASS_NAMES_SHARP(scale1.tonic) +
                         '.mid')
+
+
+    """Double code"""
+    # Example: Get triads in C major
+    gen = ProgressionGenerator()
+    triads_c_major = gen.generate_triads_in_key(TwelveTET.C, Diatonic.MAJOR)
+    for chord in triads_c_major:
+        print(chord)
+
+    unit = MusicUnit()
+    # Create based on chord progression
+    unit.scale = Diatonic.DEFAULT_SCALE
+    main_key = key.Key('C')
+    # chord_degrees = [1, 4, 6, 2, 5, 1]
+    chord_degrees = Scale7ChordHarmony.PROGRESSIONS[0]
+
+    main_chords = stream.Stream()
+    for i in chord_degrees:
+        main_chords.append(roman.RomanNumeral(i, main_key))
+
+
+    """ Generate a stream from chords """
+    main_stream = create_stream_from_chords(main_chords, 3, 4, 2)
+
+
+
 
 
 def main():

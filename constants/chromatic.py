@@ -1,4 +1,4 @@
-"""3D Helix structure for representing pitch classes and octaves."""
+"""Chromatic pitch helix and range structures."""
 from typing import Tuple
 import numpy as np
 import matplotlib.pyplot as plt
@@ -95,27 +95,18 @@ class Helix:
         plt.savefig('helix.png', dpi=200)
         plt.show()
 
-class PitchRegister(Helix):
-    # Chromatic pitch helix
+"""Chromatic pitch helix structure"""
+class ChromaticPitches(Helix):
+    # Direction
     ASCENDING = 1
     DESCENDING = -1
-    def __init__(self,  pitch_class_start=TwelveTET.A,
-                        octave_start=0,
-                        pitch_class_end=TwelveTET.C,
-                        octave_end=8,
-                        num_pitch_classes: int = TwelveTET.TWELVE,
-                        num_octaves: int = TwelveTET.OCTAVES,
-                      ):
+    # Chromatic pitch helix
+    def __init__(self):
         # Represent as helix of (pitch_class, octave): (0, 4)
-        super().__init__(num_pitch_classes, num_octaves)
-
-        self.num_pitch_classes = num_pitch_classes
-        self.num_octaves = num_octaves
-
-        self.index_start = self.index_of(pitch_class_start, octave_start)
-        self.index_end = self.index_of(pitch_class_end, octave_end)
-
+        super().__init__(TwelveTET.TWELVE, TwelveTET.OCTAVES)
 
     def transpose(self, i, interval_steps, direction=ASCENDING):
         # Transpose index i by interval_steps in direction (ASCENDING or DESCENDING)
         return (i + direction*interval_steps) % len(self.helix)
+
+

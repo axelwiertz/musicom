@@ -32,3 +32,10 @@ def intervals_to_nodes(intervals: List[int], start_node: int = 0) -> List[int]:
 def set_permutations(sequence : List[int]) -> List:
     # Permutations: ordered set of all possible arrangements of the input sequence
     return list(permutations(sequence))
+
+def pairwise(iterable):
+    # takes a list and returns a new list containing the elements pairwise
+    # with overlap
+
+    #    s -> (s[0], s[1]), (s[1], s[2]), (s[2], s[3]), ..., (s[Last], None)
+    return list(zip(iterable, iterable[1:])) + [(iterable[-1], None)]

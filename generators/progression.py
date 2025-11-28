@@ -3,9 +3,9 @@ Musicom generators module - scale library
 Module for generating musical scales and chords.
 """
 from typing import List
-from structures.composition import MusicUnit
+from structures.unit import MusicUnit
 from structures.pattern import MusicPattern
-from structures.composition import MusicTime
+from structures.time import MusicTime
 from music21 import roman, stream
 from converters.mp import pattern_to_mpscale
 from converters.m21 import pattern_to_m21scale

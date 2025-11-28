@@ -122,6 +122,8 @@ musicom/
 
 ### Creating a Simple Composition
 
+This example uses the lower-level `MusicUnit` to construct a voice from precise note data.
+
 ```python
 from constants import TwelveTET, MidiInstrument
 from structures.composition import MusicComposition, MusicUnit, MusicVoice
@@ -130,7 +132,7 @@ from structures.regularity import Diatonic, PitchRegister
 from structures.rhythm import MusicTime
 from converters import comp_to_visual
 
-# Create a time signature (16 timesteps, 4/4 time, 120 BPM)
+# Create a time grid (16 timesteps, 4/4 time, 120 BPM)
 time = MusicTime(16, 4, 4, 120)
 
 # Create a pitch register
@@ -146,7 +148,7 @@ unit = MusicUnit(
 )
 
 # Create a voice
-voice = MusicVoice('Piano Voice', [unit], MIDIinstrument.PIANO)
+voice = MusicVoice('Piano Voice', [unit], MidiInstrument.PIANO)
 
 # Create a composition
 comp = MusicComposition(
@@ -252,7 +254,7 @@ population = generate_population(size=10, genome_length=16)
 ## Key Concepts
 
 ### MusicUnit
-The fundamental building block representing a sequence of musical events with:
+The fundamental building block representing a sequence of musical events with precise timing and pitch information. It contains:
 - **pitch_nodes**: MIDI pitch numbers
 - **onset_intervals**: Time between note onsets
 - **durations**: Note durations
@@ -266,7 +268,7 @@ A flexible container for musical content used in matrix-based composition:
 - **Methods**: transpose(), invert(), retrograde(), augment()
 
 ### MusicVoice
-A collection of `MusicUnit` objects representing a single instrumental or vocal line with a specific MIDI instrument.
+A collection of `MusicUnit` objects representing a single instrumental or vocal line, assigned to a specific MIDI instrument.
 
 ### MusicComposition
 A complete piece containing multiple voices, a main scale, chord progression, and formal structure.
