@@ -1,7 +1,4 @@
-""" Module defining the Twelve-Tone Equal Temperament tuning system. """
-from numpy import array
-
-from constants.midi import MIDIpitch
+""" Constants of the Twelve-Tone Equal Temperament tuning system. """
 
 class TwelveTET:
     # 12-Tone Equal Temperament tuning system
@@ -26,17 +23,5 @@ class TwelveTET:
     PITCH_CLASS_NAMES_SHARP = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
     PITCH_CLASS_NAMES_FLATMAP = {'D': 'C#', 'E': 'D#', 'G': 'F#', 'A': 'G#', 'B': 'A#', 'C': 'B', 'F': 'E'}
 
-    def __init__(self):
-        # Create pitch to frequency mapping
-        self.pitch_numbers = array([x + str(y) for y in range(self.OCTAVES) for x in self.PITCH_CLASS_NAMES_SHARP])
-
-        self.pitch_freqs = dict(
-                            zip(self.pitch_numbers,
-                                [2 ** ((n + 1 - 49) / 12) * TwelveTET.A4_FREQ for n in range(len(self.pitch_numbers))]
-                                )
-                            )
-        self.pitch_freqs[''] = 0.0  # stop
-        self.pitch_freqs = tuple(2 ** ((n - MIDIpitch.A4) / self.TWELVE) * self.A4_FREQ
-                                        for n in self.PITCH_CLASS_NUMBERS)
 
 

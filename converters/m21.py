@@ -1,7 +1,9 @@
 """Converters between music21 and other structures."""
 import platform
 from utilities import Config
-from structures.composition import MusicTime, MusicUnit, MusicSection
+from structures.time import MusicTime
+from structures.unit import MusicUnit
+from structures.matrix import MusicMatrix
 from structures.pattern import MusicPattern
 from converters.mp import chord_to_unit
 from converters.time import time_to_meter, time_to_tempo
@@ -33,7 +35,7 @@ def tonerow_to_stream (tonerow_base: serial.ToneRow = serial.ToneRow(row=[0, 4, 
                    octave : int = 4
                    ) -> stream.Stream:
     stream_out = stream.Stream()
-    # Tonerow
+    # Tone row
     for pcs in enumerate(tonerow_base):
         pcs.octave = octave
         stream_out.append(pcs)
@@ -48,10 +50,10 @@ def midifile_to_score (filename_in: str = Config.DEFAULT_MIDI_FILE_IN) -> stream
     # Load a score
     return converter.parse (Config.DEFAULT_PATH + filename_in)
 
-def percussionscore_to_midifile (score: stream.Score, filename_out: str = Config.DEFAULT_MIDI_FILE_OUT):
+def percussion_stream_to_midifile (stream_in: stream.Stream, filename_out: str = Config.DEFAULT_MIDI_FILE_OUT):
     # Set to percussion instrument (General MIDI channel 10)
     # Write to MIDI
-    mf = midi.translate.streamToMidiFile(score)
+    mf = midi.translate.streamToMidiFile(stream_in)
     # music21 uses an unpitched instrument class; channel will be set by MIDI export
     mf.open(Config.DEFAULT_PATH+filename_out, 'wb')
     mf.write()
@@ -91,12 +93,6 @@ def score_to_sound(score: stream.Score):
         player = sound.MIDIPlayer('target.mid')
         player.play()
         player.stop()
-
-def section_to_part (section: MusicSection) -> stream.Part:
-    part_out = stream.Part()
-    for u in section.units:
-        part_out.append(unit_to_stream(u))
-    return part_out
 
 def unit_to_stream (unit: MusicUnit) -> stream.Stream:
     # Create a stream with notes and rests
@@ -152,11 +148,11 @@ def time_to_stream(stream_ : stream.Stream, time : MusicTime):
     stream_.insert(0, time_to_tempo(time))
 
 
-# Section converters
+# Matrix converters
 
-def section_to_stream(section: MusicSection) -> stream.Stream:
+def matrix_row_to_stream(matrix: MusicMatrix, row: int) -> stream.Stream:
     """Concatenate the music21 streams from contained units into a single Stream."""
     stream_out = stream.Stream()
-    for unit in section.units:
-        stream_out.append(unit_to_stream(unit))
+    for col in range(matrix.cols):
+        stream_out.append(unit_to_stream(matrix.get_unit(row, col)))
     return stream_out

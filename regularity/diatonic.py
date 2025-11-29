@@ -1,8 +1,9 @@
-from structures.pattern import MusicPattern
+"""Diatonic patterns: intervals, scales, modes, chords"""
 from music21 import interval
+from structures.pattern import MusicPattern
 
 class Diatonic:
-    # Diatonic patterns: intervals, scales, modes, chords
+    # Diatonic patterns: cardinality, intervals, scales, modes, chords
     DYAD = 2
     TRIA = 3
     TETRA = 4
