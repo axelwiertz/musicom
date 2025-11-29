@@ -123,7 +123,6 @@ def test_rhythm_time():
         hier_events.append(HierarchicalEvent(time=t, node=beat, label='onset'))
     print(hier_events)
 
-
 def main():
     test_project()
     test_chromatic()

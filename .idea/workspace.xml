@@ -4,20 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="transformators, testers">
-      <change afterPath="$PROJECT_DIR$/converters/matrix.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/constants/tuning.py" beforeDir="false" afterPath="$PROJECT_DIR$/constants/tuning.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/composition.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/m21.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/m21.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/research/musicdata.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/arvo_project.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/arvo_project.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/template.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/projects/template.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/regularity/diatonic.py" beforeDir="false" afterPath="$PROJECT_DIR$/regularity/diatonic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testers/test_structures.py" beforeDir="false" afterPath="$PROJECT_DIR$/testers/test_structures.py" afterDir="false" />
-    </list>
+    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="restructuring" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -174,15 +161,7 @@
       <workItem from="1764334747707" duration="2167000" />
       <workItem from="1764338824439" duration="275000" />
       <workItem from="1764339213502" duration="4426000" />
-      <workItem from="1764432696400" duration="8424000" />
-    </task>
-    <task id="LOCAL-00122" summary="unit">
-      <option name="closed" value="true" />
-      <created>1760476665669</created>
-      <option name="number" value="00122" />
-      <option name="presentableId" value="LOCAL-00122" />
-      <option name="project" value="LOCAL" />
-      <updated>1760476665669</updated>
+      <workItem from="1764432696400" duration="8461000" />
     </task>
     <task id="LOCAL-00123" summary="theory classes">
       <option name="closed" value="true" />
@@ -568,7 +547,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764344721715</updated>
     </task>
-    <option name="localTasksCounter" value="171" />
+    <task id="LOCAL-00171" summary="restructuring">
+      <option name="closed" value="true" />
+      <created>1764444661909</created>
+      <option name="number" value="00171" />
+      <option name="presentableId" value="LOCAL-00171" />
+      <option name="project" value="LOCAL" />
+      <updated>1764444661909</updated>
+    </task>
+    <option name="localTasksCounter" value="172" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -601,7 +588,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Diatonic layer and classes" />
     <MESSAGE value="Harmony and theory" />
     <MESSAGE value="Notebook" />
     <MESSAGE value="Generation" />
@@ -626,7 +612,8 @@
     <MESSAGE value="project and grid" />
     <MESSAGE value="project, matrix, unit, transformators" />
     <MESSAGE value="transformators, testers" />
-    <option name="LAST_COMMIT_MESSAGE" value="transformators, testers" />
+    <MESSAGE value="restructuring" />
+    <option name="LAST_COMMIT_MESSAGE" value="restructuring" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
