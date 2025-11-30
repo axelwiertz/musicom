@@ -1,5 +1,7 @@
 """Converters between music21 and other structures."""
 import platform
+
+from base.diatonic import Cardinality, PatternType, Mode
 from utilities import Config
 from structures.time import MusicTime
 from structures.unit import MusicUnit
@@ -7,7 +9,6 @@ from structures.matrix import MusicMatrix
 from structures.pattern import MusicPattern
 from converters.mp import chord_to_unit
 from converters.time import time_to_meter, time_to_tempo
-from regularity.diatonic import Diatonic
 from music21 import serial, stream, note, midi, converter, scale, key
 from musicpy import structures
 from showscore import show
@@ -23,9 +24,9 @@ def pattern_to_m21scale (pattern : MusicPattern) -> scale.ConcreteScale:
     m21scale = scale.ConcreteScale()
 
     # Diatonic (7 pitch class) scale
-    if pattern.cardinality == Diatonic.HEPTA and pattern.interval_pattern == Diatonic.SCALE:
+    if pattern.cardinality == Cardinality.HEPTA and pattern.interval_pattern == PatternType.SCALE:
         # Music21 structure
-        m21key = key.Key(note.Pitch(pattern.tonic), mode=Diatonic.mode_names[pattern.mode])
+        m21key = key.Key(note.Pitch(pattern.tonic), mode=Mode.mode_names[pattern.mode])
         m21scale = scale.ConcreteScale(key=m21key)
 
     return m21scale

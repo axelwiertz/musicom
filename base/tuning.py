@@ -1,4 +1,4 @@
-""" Constants of the Twelve-Tone Equal Temperament tuning system. """
+""" Twelve-Tone Equal Temperament tuning system. """
 
 class TwelveTET:
     # 12-Tone Equal Temperament tuning system

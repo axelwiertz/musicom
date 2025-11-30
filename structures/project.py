@@ -1,8 +1,8 @@
 from typing import List
 
-from constants.tuning import TwelveTET
-from constants.midi import MidiInstrument
-from constants.chromatic import ChromaticPitches
+from base.tuning import TwelveTET
+from base.midi import MidiInstrument
+from base.chromatic import ChromaticPitches
 from structures.base import MusicBase
 from structures.matrix import MusicMatrix
 

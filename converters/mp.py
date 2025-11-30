@@ -1,10 +1,12 @@
 """MusicPy converters."""
-from constants import MIDIinstrument
+from base.midi import MidiInstrument
+from base.tuning import TwelveTET
+from base.diatonic import Cardinality, PatternType
 from utilities.config import Config
-from structures.composition import MusicUnit, MusicVoice
+from structures.unit import MusicUnit
+from structures.time import MusicTime
+from structures.project import MusicVoice
 from structures.pattern import MusicPattern
-from regularity.diatonic import Diatonic
-from constants.tuning import TwelveTET
 from musicpy import musicpy, structures
 from music21 import stream
 from music21py import mpy_to_m21
@@ -17,7 +19,7 @@ def pattern_to_mpscale (pattern : MusicPattern ) -> structures.scale:
     mpscale = structures.scale()
 
     # Diatonic (7 pitch class) scale
-    if pattern.cardinality == Diatonic.HEPTA and pattern.interval_pattern == Diatonic.SCALE:
+    if pattern.cardinality == Cardinality.HEPTA and pattern.interval_pattern == PatternType.SCALE:
         # MusicPy structures
         mpscale = structures.scale(TwelveTET.PITCH_CLASS_NAMES_SHARP[pattern.tonic], interval=pattern.modes[pattern.mode])
 
@@ -43,8 +45,8 @@ def modulate_unit(unit: MusicUnit,
 
 
 # Unit converters
-def unit_to_sound (unit: MusicUnit, midi_instrument: int = MIDIinstrument.PIANO):
-    musicpy.play (unit_to_chord (unit), bpm=unit.time.bpm, instrument=midi_instrument, wait=True)
+def unit_to_sound (unit: MusicUnit, time : MusicTime, midi_instrument: int = MidiInstrument.PIANO):
+    musicpy.play (unit_to_chord (unit), bpm=time.bpm, instrument=midi_instrument, wait=True)
 
 def unit_to_chord(unit: MusicUnit) -> structures.chord:
     return structures.chord(unit.pitch_nodes, unit.durations, unit.onset_intervals, unit.volumes)

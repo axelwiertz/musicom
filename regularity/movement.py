@@ -1,7 +1,7 @@
 """ Movement regularity for diatonic scale degrees """
 
 import itertools
-from constants.tuning import TwelveTET
+from base.tuning import TwelveTET
 
 class Scale7PitchDegree:
     # Classic style - Voice pitch movement

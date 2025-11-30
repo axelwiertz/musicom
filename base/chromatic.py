@@ -2,7 +2,7 @@
 from typing import Tuple
 import numpy as np
 import matplotlib.pyplot as plt
-from constants.tuning import TwelveTET
+from base.tuning import TwelveTET
 
 class Helix:
     """

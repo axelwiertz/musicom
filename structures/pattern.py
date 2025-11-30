@@ -2,7 +2,7 @@
 
 from typing import Tuple
 from utilities.helpers import sequence_rotations, interval_to_step
-from regularity.diatonic import Diatonic
+from base.diatonic import get_pitch_intervals
 
 class MusicPattern:
     def __init__(self,
@@ -16,7 +16,7 @@ class MusicPattern:
         self.tonic = tonic
         self.mode = mode
 
-        self.pitch_intervals = Diatonic.pitch_intervals_dict[cardinality][interval_pattern]
+        self.pitch_intervals = get_pitch_intervals(cardinality, interval_pattern)
 
         # Pattern modes = scale modes and chord positions - rotations of interval sequence
         self.modes = sequence_rotations(self.pitch_intervals)

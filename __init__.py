@@ -4,7 +4,7 @@ A Python library for algorithmic music composition, analysis, and generation.
 
 Main modules:
 - structures: Core music data structures (MusicUnit, MusicVoice, MusicSection, etc.)
-- constants: Musical constants (TwelveTET, MIDI instruments)
+- base: Musical base (TwelveTET, MIDI instruments)
 - converters: Conversion between different music formats
 - generators: Music generation algorithms
 - regularity: Music theory regularity and harmony
@@ -15,7 +15,7 @@ __version__ = '0.1.0'
 __author__ = 'Musicom Team'
 
 # Constants
-from .constants import (
+from .base import (
     TwelveTET,
     MidiInstrument,
 )

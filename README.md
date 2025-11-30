@@ -125,7 +125,7 @@ musicom/
 This example uses the lower-level `MusicUnit` to construct a voice from precise note data.
 
 ```python
-from constants import TwelveTET, MidiInstrument
+from base import TwelveTET, MidiInstrument
 from structures.composition import MusicComposition, MusicUnit, MusicVoice
 from structures.pattern import MusicPattern
 from structures.regularity import Diatonic, PitchRegister
@@ -169,7 +169,7 @@ comp_to_visual(comp)
 from structures import MusicMatrix, MusicalUnit
 from structures.rhythm import MusicTime
 from structures.composition import PitchRegister
-from constants import TwelveTET
+from base import TwelveTET
 
 # Create a 4x4 musical matrix (4 voices, 4 sections)
 matrix = MusicMatrix(rows=4, cols=4)
@@ -197,24 +197,24 @@ matrix.set_cell(1, 0, motif_b)
 # Apply compositional transformations
 
 # Row operations (voice transformations)
-matrix.transpose_row(0, 2)           # Transpose voice 1 up by 2 semitones
-matrix.retrograde_row(1)             # Play voice 2 backward
-matrix.invert_row(2, pivot=60)       # Mirror melodic contours around middle C
-matrix.augment_row(3, factor=2.0)    # Double note durations in voice 4
+matrix.transpose_row(0, 2)  # Transpose voice 1 up by 2 semitones
+matrix.retrograde_row(1)  # Play voice 2 backward
+matrix.invert_row(2, pivot=60)  # Mirror melodic contours around middle C
+matrix.augment_row(3, factor=2.0)  # Double note durations in voice 4
 
 # Column operations (sectional development)
-matrix.repeat_column(0, 3)           # Repeat section 1 at position 3
+matrix.repeat_column(0, 3)  # Repeat section 1 at position 3
 transition = MusicalUnit(unit_type="transition", content=[])
 matrix.insert_column(2, transition)  # Insert transitional material
-matrix.reorder_columns([0, 2, 1, 3]) # Non-linear narrative structure
+matrix.reorder_columns([0, 2, 1, 3])  # Non-linear narrative structure
 
 # Cell operations (unit manipulation)
-matrix.swap_cells((0, 0), (1, 1))    # Exchange material between voices
+matrix.swap_cells((0, 0), (1, 1))  # Exchange material between voices
 matrix.mutate_cell(0, 0, lambda cell: cell.transpose(5) if cell else None)
 
 # Matrix operations
-diagonal = matrix.diagonal_read()     # Extract diagonal pattern
-transposed = matrix.transpose()       # Swap rows and columns (voices ↔ sections)
+diagonal = matrix.diagonal_read()  # Extract diagonal pattern
+transposed = matrix.transpose()  # Swap rows and columns (voices ↔ sections)
 matrix.selective_erase(
     condition=lambda cell: cell is None or cell.metadata.get("density", 0) < 0.5
 )

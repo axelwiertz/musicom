@@ -2,7 +2,7 @@
 
 from math import pow, log2
 from librosa import midi_to_hz, hz_to_midi, note_to_midi, midi_to_note
-from constants.tuning import TwelveTET
+from base.tuning import TwelveTET
 
 def midi_to_freq(midi):
     """Return frequency (Hz) for given MIDI note number (integer or float).

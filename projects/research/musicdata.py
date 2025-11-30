@@ -2,10 +2,10 @@
 import pandas as pd
 import numpy as np
 
-from constants import MidiPitch
+from base import MidiPitch
 from utilities import Config
 
-from constants.tuning import TwelveTET
+from base.tuning import TwelveTET
 from structures.pattern import MusicPattern
 from regularity.diatonic import Diatonic
 

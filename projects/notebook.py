@@ -2,8 +2,8 @@
 MusicPy - Notebook examples
 """
 
-from constants.midi import MidiInstrument, MidiChannel
-from constants.tuning import TwelveTET
+from base.midi import MidiInstrument, MidiChannel
+from base.tuning import TwelveTET
 from structures.composition import MusicUnit, MusicComposition, MusicSection
 from structures.pattern import MusicPattern
 from regularity.diatonic import Diatonic

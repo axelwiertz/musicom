@@ -1,6 +1,6 @@
 from typing import List
-from constants import TwelveTET
-from constants.chromatic import Helix, ChromaticPitches
+from base import TwelveTET
+from base.chromatic import Helix, ChromaticPitches
 from structures.time import MusicTime, Circle
 from structures.pattern import MusicPattern
 from regularity.diatonic import Diatonic

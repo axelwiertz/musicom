@@ -9,7 +9,7 @@ from structures import MusicUnit, PitchRegister
 from generators import Generator
 
 import random
-from constants import TwelveTET
+from base import TwelveTET
 from structures.rhythm import MusicTime
 
 class HarmonicFunction(Generator):

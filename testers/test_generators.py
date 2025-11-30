@@ -1,4 +1,4 @@
-from constants import TwelveTET
+from base import TwelveTET
 from structures import MusicPattern, MusicUnit, MusicVoice, MusicProject
 from converters import score_to_midifile
 from generators import ProgressionGenerator, HarmonicFunction, GeneticGenerator
