@@ -2,13 +2,14 @@
 Musicom generators module - counterpoint
 """
 from structures import MusicUnit
-from analysis.music21 import stream, interval
+from music21 import stream, interval
+from converters.m21 import unit_to_stream
 
 
 def stream_is_counterpoint(unit1: MusicUnit, unit2: MusicUnit) -> bool:
     # Check two counterpoint voices
-    stream1 = unit1.stream
-    stream2 = unit2.stream
+    stream1 = unit_to_stream(unit1)
+    stream2 = unit_to_stream(unit2)
     # Ensure the voices are of the same length
     if len(stream1) != len(stream2):
         raise ValueError("Voices must be of the same length")
@@ -33,15 +34,3 @@ def stream_is_counterpoint(unit1: MusicUnit, unit2: MusicUnit) -> bool:
             return False
 
     return True
-
-
-def create_counterpoint(voice1: MusicUnit = None) -> MusicUnit:
-    # Create a two-voice counterpoint composition
-    voice2 = MusicUnit()
-    voice2.stream = stream_create_random_from_list(length)
-
-    # Keep generating until counterpoint reached
-    while not stream_is_counterpoint(voice1, voice2):
-        voice2 = stream_create_random_from_list(length)
-
-    return voice2

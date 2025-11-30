@@ -1,6 +1,32 @@
 """ Module to create streams of chords and split them into voices """
-
+from generators.base import Generator
 from music21 import stream, note
+
+# TODO: improve function to handle chords with different number of notes
+
+class FromChordGenerator(Generator):
+    """ Chord generator class """
+
+    def __init__(self,
+                 chord_progression: stream.Stream,
+                 number_of_voices : int = 3,
+                 octave_in: int = 4,
+                 quarterLength_in = 2
+                 ):
+        super().__init__(chord_progression)
+        self.chord_progression = chord_progression
+        self.number_of_voices = number_of_voices
+        self.octave_in = octave_in
+        self.quarterLength_in = quarterLength_in
+
+    def generate(self) -> stream.Stream:
+        """ Generate a stream of voices from the chord progression """
+        return create_stream_from_chords(self.chord_progression,
+                                         self.number_of_voices,
+                                         self.octave_in,
+                                         self.quarterLength_in
+                                         )
+
 
 def create_stream_from_chords (stream_chords: stream.Stream,
                                number_of_voices : int = 3,

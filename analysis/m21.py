@@ -2,7 +2,7 @@
 Musicom analysis module
 Module for analyzing musical scores using Music21 and MusicPy.
 """
-from analysis.music21 import chord, roman, analysis, stream
+from music21 import chord, roman, analysis, stream
 
 def score_analyze(score: stream.Score):
     # Analyze score
@@ -17,14 +17,14 @@ def score_analyze(score: stream.Score):
     print(' with key ' + str(key01))
 
     # m21 Chord analysis
-    chordset = score.chordify()
+    chord_set = score.chordify()
     # Check for specific chords
-    for chd01 in chordset.recurse().getElementsByClass(chord.Chord):
+    for chd01 in chord_set.recurse().getElementsByClass(chord.Chord):
         if chd01.isDominantSeventh():
             print(chd01.measureNumber, chd01.beatStr, chd01)
 
     # All chords
-    for chd01 in chordset.recurse().getElementsByClass(chord.Chord):
+    for chd01 in chord_set.recurse().getElementsByClass(chord.Chord):
         # Put chord in closed position
         chd01.closedPosition(forceOctave=4, inPlace=True)
         # Annotate chord intervals
@@ -33,8 +33,8 @@ def score_analyze(score: stream.Score):
         rn = roman.romanNumeralFromChord(chd01, key01)
         chd01.addLyric(str(rn.figure))
 
-    chordset.partName = "Chord analysis"
-    score.append(chordset)
+    chord_set.partName = "Chord analysis"
+    score.append(chord_set)
     score.makeMeasures(inPlace=True)
     # Music21 analysis
     result = analysis.metrical.labelBeatDepth(score)

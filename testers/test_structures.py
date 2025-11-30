@@ -1,9 +1,9 @@
 from typing import List
-from base import TwelveTET
+from base.tuning import TwelveTET
 from base.chromatic import Helix, ChromaticPitches
+from base.diatonic import Cardinality, PatternType, Mode
 from structures.time import MusicTime, Circle
 from structures.pattern import MusicPattern
-from regularity.diatonic import Diatonic
 from structures.rhythm import QuantizedEvent, seconds_to_ticks, MetricalNode, HierarchicalEvent
 from generators.rhythm import euclidian
 
@@ -52,24 +52,32 @@ def test_chromatic():
 
     pos = chromatic_pitches.index_of(3, 7)  # octave 3, pitchclass 7 -> index
     next_pos = chromatic_pitches.transpose(pos, chromatic_pitches.ASCENDING)  # next pitchclass
-    octave_pitchclass = chromatic_pitches.get_at(next_pos)
-    print(f'PitchRange: pos {pos} -> next pos {next_pos} -> (octave, pitchclass) {octave_pitchclass}')
+    octave_pitch_class = chromatic_pitches.get_at(next_pos)
+    print(f'PitchRange: pos {pos} -> next pos {next_pos} -> (octave, pitchclass) {octave_pitch_class}')
 
 
 def test_patterns():
     # Diatonic heptatonic scale patterns
-    interval_pattern7 = MusicPattern(Diatonic.HEPTA, Diatonic.SCALE)
+    interval_pattern7 = MusicPattern(Cardinality.HEPTA, PatternType.SCALE)
     print(f'Heptatonic major scale intervals: {interval_pattern7.pitch_intervals}')
 
+    major_triad = MusicPattern(3, 3)  # Major triad
+    minor7_chord = MusicPattern(4, 1)  # Minor7 chord
+
+    print("Major Triad Intervals:", major_triad.pitch_intervals)
+    print("Minor7 Chord Intervals:", minor7_chord.pitch_intervals)
+
+
+    # Show pitch class circle
     pc_circle = Circle(TwelveTET.TWELVE, TwelveTET.PITCH_CLASS_NAMES_SHARP)
     pc_circle.show()
 
     # Patterns: Diatonic scales
-    scale5cmajor = MusicPattern(Diatonic.PENTA, Diatonic.SCALE,
-                              tonic=TwelveTET.C, mode=Diatonic.major_mode)
+    scale5cmajor = MusicPattern(Cardinality.PENTA, PatternType.SCALE,
+                              tonic=TwelveTET.C, mode=Mode.major_mode)
     print(scale5cmajor.pitch_intervals)
-    scale7cmajor = MusicPattern(Diatonic.HEPTA, Diatonic.SCALE,
-                              tonic=TwelveTET.C, mode=Diatonic.major_mode)
+    scale7cmajor = MusicPattern(Cardinality.HEPTA, PatternType.SCALE,
+                              tonic=TwelveTET.C, mode=Mode.major_mode)
     print(scale7cmajor.pitch_intervals)
 
     #    pc_circle.show(pcp7.majormodeschromatic, TwelveTET.PITCH_CLASS_NAMES_SHARP, 'Major circle')

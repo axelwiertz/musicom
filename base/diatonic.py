@@ -96,7 +96,7 @@ class DiatonicPatterns:
     }
 
 def get_pitch_intervals(cardinality: int, pattern_type: int) -> Tuple[int, int]:
-     return Tuple(DiatonicPatterns.dict[cardinality][pattern_type])
+     return tuple(DiatonicPatterns.dict[cardinality][pattern_type])
 
 class Mode:
     # 7 Heptatonic scale modes:

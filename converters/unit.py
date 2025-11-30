@@ -3,7 +3,7 @@ import os
 from typing import List
 import pandas as pd
 from utilities.config import Config
-from structures.composition import MusicUnit
+from structures.unit import MusicUnit
 from structures.pattern import MusicPattern
 
 # --- DataFrame / Excel helpers for MusicUnit ---
@@ -99,7 +99,7 @@ def binary_to_unit(binary: List[int]) -> MusicUnit:
         # Extract binary elements
         binary_parts += [binary[(i * total_bits):(i * total_bits) + total_bits]]
 
-    unit = MusicUnit("FromBinary")
+    unit = MusicUnit(0, "FromBinary")
     for binary_part in binary_parts:
         pitch_nr = int(sum([bit * pow(2, i) for i, bit in enumerate(binary_part)]))
         unit.pitch_nodes += [pitch_nr]  
@@ -108,7 +108,7 @@ def binary_to_unit(binary: List[int]) -> MusicUnit:
 
 def pattern_to_unit (pattern : MusicPattern) -> MusicUnit :
     # Convert a MusicPattern to a MusicUnit
-    unit = MusicUnit('Pattern Unit')
+    unit = MusicUnit(0,'Pattern Unit')
     for interval in pattern.pitch_intervals:
         unit.pitch_nodes += [pattern.tonic + interval]
         unit.durations += [1]  # default duration

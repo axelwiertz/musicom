@@ -7,7 +7,6 @@ from structures.time import MusicTime
 from structures.unit import MusicUnit
 from structures.matrix import MusicMatrix
 from structures.pattern import MusicPattern
-from converters.mp import chord_to_unit
 from converters.time import time_to_meter, time_to_tempo
 from music21 import serial, stream, note, midi, converter, scale, key
 from musicpy import structures
@@ -112,22 +111,7 @@ def unit_to_stream (unit: MusicUnit) -> stream.Stream:
 
 def stream_to_unit (stream_in : stream.Stream) -> MusicUnit:
     # Convert m21 stream to unit
-    # via chord
-    chord = stream_to_chord(stream_in)
-    unit = chord_to_unit(chord)
-    # direct
-    """
-    for i in range(len(unit.pitch_nodes)):
-        # Add notes and rests to the unit
-        if isinstance(element, note.Note):
-            unit.pitch_nodes += unit.stream[i].pitch.midi
-
-        if isinstance(element, note.Rest):
-            restduration = unit.onset_intervals[i] - unit.durations[i]
-            unit.volumes[i] += unit.stream[i].volume.velocity
-
-    unit.nodes_to_intervals()
-    """
+    unit = MusicUnit()
     # Transfer notes, rests and chords from the stream to the unit
     for element in stream_in:
         if isinstance(element, (note.Note, note.Rest)):
