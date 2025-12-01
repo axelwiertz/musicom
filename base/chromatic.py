@@ -2,7 +2,11 @@
 from typing import Tuple
 import numpy as np
 import matplotlib.pyplot as plt
-from base.twelvetone import Constants
+from base.twelvetone import Constants, PitchClass
+
+class Direction:
+    ASCENDING = 1
+    DESCENDING = -1
 
 class Helix:
     """
@@ -22,7 +26,7 @@ class Helix:
         self.start_angle = start_angle
         self.direction = direction
 
-        self.helix = [(point, turn)
+        self._data = [(point, turn)
                       for turn in range(turns)
                       for point in range(points_per_turn)]
 
@@ -36,14 +40,10 @@ class Helix:
 
     def get_at(self, idx):
         # Get (point, turn) at index i in helix
-        return self.helix[idx % len(self.helix)]
-
-    def length(self):
-        # Length of helix
-        return len(self.helix)
+        return self._data[idx % len(self._data)]
 
     def indexes(self):
-        return list(range(len(self.helix)))
+        return list(range(len(self._data)))
 
     def total_points(self) -> int:
         return max(1, int(self.points_per_turn * max(0.0, self.turns)))
@@ -96,22 +96,31 @@ class Helix:
         plt.tight_layout()
         plt.show()
 
-    def save (self):
+    @staticmethod
+    def save ():
         plt.savefig('helix.png', dpi=200)
 
 
 """Chromatic pitch helix structure"""
 class ChromaticPitches(Helix):
-    # Direction
-    ASCENDING = 1
-    DESCENDING = -1
-    # Chromatic pitch helix
+    # Chromatic pitches in helix
     def __init__(self):
         # Represent as helix of (pitch_class, octave): (0, 4)
         super().__init__(Constants.TWELVE, Constants.OCTAVES)
 
-    def transpose(self, i, interval_steps, direction=ASCENDING):
+    def transpose(self, i, interval_steps, direction : int  = Direction.ASCENDING):
         # Transpose index i by interval_steps in direction (ASCENDING or DESCENDING)
-        return (i + direction*interval_steps) % len(self.helix)
+        return (i + direction*interval_steps) % len(self._data)
 
 
+class PitchRange:
+    # Chromatic pitch range
+    def __init__(self,  pitch_class_start=PitchClass.A,
+                        octave_start=0,
+                        pitch_class_end=PitchClass.C,
+                        octave_end=8):
+
+        self.chromatic = ChromaticPitches()
+
+        self.index_start = self.chromatic.index_of(pitch_class_start, octave_start)
+        self.index_end = self.chromatic.index_of(pitch_class_end, octave_end)

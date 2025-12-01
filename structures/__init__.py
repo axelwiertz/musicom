@@ -1,17 +1,14 @@
 """Package for music composition structures."""
-from structures.unit import MusicUnit
-from structures.time import MusicTime, Circle
-from base.chromatic import ChromaticPitches, Helix
-from structures.pattern import MusicPattern
-from structures.project import MusicSection, MusicVoice, MusicProject
-from structures.matrix import MusicMatrix
+from .unit import MusicUnit
+from .time import MusicTime, Circle
+from .pattern import MusicPattern
+from .project import MusicSection, MusicVoice, MusicProject
+from .matrix import MusicMatrix
 
 __all__ = [
     "MusicUnit",
     "MusicTime",
     "Circle",
-    "ChromaticPitches",
-    "Helix",
     "MusicPattern",
     "MusicSection",
     "MusicVoice",

@@ -1,22 +1,9 @@
 from typing import List
 
-from base.twelvetone import PitchClass
 from base.midi import MidiInstrument
-from base.chromatic import ChromaticPitches
+from base.chromatic import PitchRange
 from structures.base import MusicBase
 from structures.matrix import MusicMatrix
-
-class PitchRange:
-    # Chromatic pitch range
-    def __init__(self,  pitch_class_start=PitchClass.A,
-                        octave_start=0,
-                        pitch_class_end=PitchClass.C,
-                        octave_end=8):
-
-        self.chromatic = ChromaticPitches()
-
-        self.index_start = self.chromatic.index_of(pitch_class_start, octave_start)
-        self.index_end = self.chromatic.index_of(pitch_class_end, octave_end)
 
 
 class MusicVoice(MusicBase):
@@ -47,7 +34,6 @@ class MusicSection (MusicBase):
         return f"Section(name='{self.name}', matrix={self.matrix})"
 
 # The `Project` class is the top-level container for a list of `Section` objects.
-
 class MusicProject (MusicBase):
     """Represents the entire project, containing multiple sections."""
     def __init__(self,
@@ -58,7 +44,6 @@ class MusicProject (MusicBase):
         self.name = name
         self.sections: List[MusicSection] = []
         self.voices: List[MusicVoice] = []
-
 
     def __repr__(self):
         return f"Project(name='{self.name}', sections={len(self.sections)}, voices={len(self.voices)})"

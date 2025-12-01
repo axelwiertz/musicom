@@ -122,7 +122,7 @@ musicom/
 
 ### Creating a Simple Composition
 
-See projects/examples for a step-by-step guide.
+See projects/examples for a guide.
 
 ### Matrix-Based Composition
 
