@@ -9,7 +9,7 @@ else:
     MusicUnit = Any
 
 
-class SimpleGenerator(Generator):
+class FactoryGenerator(Generator):
     """
     Simple generator that calls a provided factory to build a MusicUnit.
     This avoids assumptions about the MusicUnit constructor/signature.
@@ -18,7 +18,7 @@ class SimpleGenerator(Generator):
         mu = gen.generate()
     """
 
-    def __init__(self, *, factory: Callable[..., "MusicUnit"], params: Dict[str, Any] | None = None, seed: int | None = None) -> None:
+    def __init__(self, *, factory: Callable[..., "MusicUnit"], params: Dict[str, Any] | None = None) -> None:
         super().__init__()
         self.factory = factory
         self.params = params or {}

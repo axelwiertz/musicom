@@ -1,6 +1,7 @@
 """Diatonic patterns: intervals, scales, modes, chords"""
-from music21 import interval
+from base.diatonic import Cardinality, PatternType
 from structures.pattern import MusicPattern
+from music21 import interval
 
 class IntervalClasses:
     perfect_interval_class_list = [interval.DiatonicInterval(interval.Specifier.PERFECT, 1),
@@ -14,5 +15,5 @@ class IntervalClasses:
 
 class Scale7Triad:
     def __init__(self):
-        self.pattern_major = MusicPattern(Diatonic.TRIA, Diatonic.MAJOR)
-        self.pattern_minor = MusicPattern(Diatonic.TRIA, Diatonic.MINOR)
+        self.pattern_major = MusicPattern(Cardinality.TRIA, PatternType.MAJOR)
+        self.pattern_minor = MusicPattern(Cardinality.TRIA, PatternType.MINOR)

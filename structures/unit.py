@@ -1,15 +1,15 @@
-""" Musical Unit Structure """
+"""A MusicUnit represents a technical unit of music, defined by sequences of pitches,"""
 from typing import List
 from structures.base import MusicBase
 
 class MusicUnit(MusicBase):
-    # A musical unit: a sequence of pitches with onset intervals, durations, and volumes
+    # A technical unit of music: a sequence of pitches with onset intervals, durations, and volumes
     def __init__(self,
                  _id: int = 0,
                 name: str = 'Unit',
                 pitch_nodes : list [int] = (),
-                onset_intervals: list[float] = (),
-                durations: list[float] = (),
+                onset_intervals: list[int] = (),
+                durations: list[int] = (),
                 volumes: list[int] = (),
                 ):
         super().__init__(_id, name)
@@ -27,10 +27,8 @@ class MusicUnit(MusicBase):
         new_unit.volumes = self.volumes + other.volumes
         return new_unit
 
-    @property
-    def timesteps (self):
-        # The sum of the onset intervals is the total number of timesteps in MusicTime
-        return sum(self.onset_intervals)
+    def __len__(self):
+        return len(self.pitch_nodes)
 
     @property
     def pitch_intervals(self) -> List[int]:
@@ -38,8 +36,13 @@ class MusicUnit(MusicBase):
             return []
         return [self.pitch_nodes[i+1]-self.pitch_nodes[i] for i in range(len(self.pitch_nodes)-1)]
 
-    def add_pitch (self,
-                   pitch,
+    @property
+    def timesteps (self):
+        # The sum of the onset intervals is the total number of timesteps in MusicTime
+        return sum(self.onset_intervals)
+
+    def append (self,
+                   pitch : int = 60,
                    duration : int = 1,
                    onset_interval : int = 1,
                    volume: int = 100):
@@ -48,9 +51,10 @@ class MusicUnit(MusicBase):
         self.durations += [duration]
         self.volumes += [volume]
 
+
     def add_pitches_vertical (self, pitches, duration=4):
         for p in pitches:
-            self.add_pitch(p,0, duration)
+            self.append(pitch=p, duration=duration)
 
     def clone(self) -> 'MusicUnit':
         # Create a copy of this MusicUnit

@@ -26,6 +26,10 @@ class Helix:
                       for turn in range(turns)
                       for point in range(points_per_turn)]
 
+        self.fig = plt.figure(figsize=(6,6))
+        self.ax = self.fig.add_subplot(111, projection='3d')
+
+
     def index_of(self, point, turn):
         # Get index in helix from (point, turn)
         return turn * self.turns + point
@@ -85,15 +89,16 @@ class Helix:
         y = radius * np.sin(theta)
         z = (self.vertical_per_turn / (2 * np.pi)) * theta
 
-        fig = plt.figure(figsize=(6,6))
-        ax = fig.add_subplot(111, projection='3d')
-        ax.plot(x, y, z, color='C0', linewidth=2)
-        ax.set_box_aspect((1,1,self.turns * self.vertical_per_turn / (2*radius)))  # sensible aspect
-        ax.set_xlabel('X'); ax.set_ylabel('Y'); ax.set_zlabel('Z')
-        ax.view_init(elev=30, azim=45)
+        self.ax.plot(x, y, z, color='C0', linewidth=2)
+        self.ax.set_box_aspect((1,1,self.turns * self.vertical_per_turn / (2*radius)))  # sensible aspect
+        self.ax.set_xlabel('X'); self.ax.set_ylabel('Y'); self.ax.set_zlabel('Z')
+        self.ax.view_init(elev=30, azim=45)
         plt.tight_layout()
-        plt.savefig('helix.png', dpi=200)
         plt.show()
+
+    def save (self):
+        plt.savefig('helix.png', dpi=200)
+
 
 """Chromatic pitch helix structure"""
 class ChromaticPitches(Helix):

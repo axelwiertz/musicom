@@ -1,4 +1,18 @@
 """ Rhythm generators """
+from generators.base import Generator
+from structures.unit import MusicUnit
+
+class RhythmGenerator(Generator):
+    def __init__(self,
+                 source_unit: 'MusicUnit',
+                 onsets: int = 4,
+                 timesteps: int = 4):
+        super().__init__(source_unit)
+        self.onsets = onsets
+        self.timesteps = timesteps
+
+    def generate(self) -> list['MusicUnit']:
+        return [MusicUnit(onset_intervals=euclidian(self.onsets, self.timesteps))]
 
 # Euclidian rhythm generator
 def euclidian (onsets: int = 4,

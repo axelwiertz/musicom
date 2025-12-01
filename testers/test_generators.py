@@ -1,10 +1,13 @@
 from base import TwelveTET
 from base.diatonic import Cardinality, PatternType, Mode
+from converters.pitch import name_to_midi
 from structures import MusicPattern, MusicUnit, MusicVoice, MusicProject
 from converters import score_to_midifile
-from generators.random import stream_create_random_from_list
+from generators.stochastic import StochasticGenerator
+from generators.chain import MarkovChainGenerator
+from regularity import Scale7PitchDegree
 from generators.counterpoint import stream_is_counterpoint
-from generators import ProgressionGenerator, HarmonicFunction
+from generators import ProgressionGenerator, HarmonicsGenerator
 from structures.time import MusicTime
 from structures.project import MusicSection
 from regularity.progression import Scale7ChordHarmony
@@ -12,14 +15,15 @@ from music21 import stream, note, key, roman
 
 def test_counterpoint():
     # Create a two-voice counterpoint composition
-    stream1 = stream.Stream(['A4', 'B4', 'C5', 'D5', 'E5', 'F5', 'G5', 'A5'])
-    length = len(stream1)
-    stream2 = stream_create_random_from_list(length)
+    unit1 = MusicUnit(pitch_nodes=name_to_midi(['A4', 'B4', 'C5', 'D5', 'E5', 'F5', 'G5', 'A5']))
+    length = len(unit1)
+    gen = StochasticGenerator(length=length, duration_set=[1], pitch_set=name_to_midi(['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4']))
+    unit2 = gen.generate()
 
     # Keep generating until counterpoint reached
-    while not stream_is_counterpoint(stream1, stream2):
-        stream2 = stream_create_random_from_list(length)
-    print("Counterpoint achieved between two voices.")
+    while not stream_is_counterpoint(unit1, unit2):
+        unit2 = gen.generate()
+    print("Counterpoint achieved between two streams.")
 
 def test_genetic():
     from generators.genetic import GeneticGenerator, GenomeType
@@ -28,7 +32,8 @@ def test_genetic():
     def fitness_func(genome: GenomeType) -> int:
         return sum(genome)
 
-    gen = GeneticGenerator(MusicUnit(0, "Seed"), fitness_func,100, 20 )
+    gen = GeneticGenerator(MusicUnit(0, "Seed"), fitness_func,100, 20, fitness_limit=100 )
+    gen = gen.generate()
 
 
     # Run the genetic algorithm
@@ -52,12 +57,22 @@ def test_harmonics():
                     name_to_midi(name=['E4', 'D4', 'B3', 'Bb3', 'Eb4', 'Db4', 'C4', 'G3', 'A3'])
                      )
 
-    gen = HarmonicFunction(unit,
+    gen = HarmonicsGenerator(unit,
                             fundamental_pitch = note.Pitch('A1').midi,
                             harmonic_numbers  = list(range(1,21))
                            )
 
     unit.stream = gen.harmonic_series(note.Pitch('A1').midi,[5,6,7,9,12,15])
+
+def test_markov_chain ():
+
+    gen = MarkovChainGenerator(train=Scale7ChordHarmony.movement_rules, start='1', length=16)
+    units = gen.generate()
+    print('Generated chords by Markov chain: ' + units[0])
+
+    gen = MarkovChainGenerator(train=Scale7PitchDegree.movement_rules, start='1', length=16)
+    units = gen.generate()
+    print('Generated pitches by Markov chain: ' + units[0])
 
 
 def test_progression():
@@ -139,6 +154,8 @@ def main():
     test_genetic()
     test_harmonics()
     test_progression()
+    test_from_chords()
+    test_markov_chain()
 
 if __name__ == "__main__":
     main()

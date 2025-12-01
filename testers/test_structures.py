@@ -82,6 +82,7 @@ def test_patterns():
 
     #    pc_circle.show(pcp7.majormodeschromatic, TwelveTET.PITCH_CLASS_NAMES_SHARP, 'Major circle')
 
+def test_helix():
     # Show helix
     h = Helix()
     h.show()
@@ -132,11 +133,11 @@ def test_rhythm_time():
     print(hier_events)
 
 def main():
+    test_helix()
     test_project()
     test_chromatic()
     test_patterns()
     test_rhythm_time()
-
 
 if __name__ == '__main__':
     main()

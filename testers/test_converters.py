@@ -18,3 +18,9 @@ def test_pitch():
     print("C4 ->", midi_to_freq(name_to_midi("C4")))
     print("440 Hz -> MIDI", freq_to_midi(440.0))
     print("Cents between 440 and 466.16:", cents_between(440.0, 466.1637615180899))
+
+def main():
+    test_pitch()
+
+if __name__ == "__main__":
+    main()

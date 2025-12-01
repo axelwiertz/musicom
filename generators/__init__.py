@@ -1,15 +1,18 @@
 # python
 from .base import Generator
-from .simple import SimpleGenerator
+from .factory import FactoryGenerator
 from .progression import ProgressionGenerator
-from .rhythm import euclidian
-from .harmonic import HarmonicFunction
+from .rhythm import RhythmGenerator
+from .harmonics import HarmonicsGenerator
 from .genetic import GeneticGenerator
 from .from_chord import FromChordGenerator
 
-__all__ = ["Generator", "SimpleGenerator",
-           "ProgressionGenerator",
-           euclidian(),
-           "HarmonicFunction",
-           "GeneticGenerator",
-           "FromChordGenerator"]
+__all__ = [
+            "Generator",
+            "FactoryGenerator",
+            "ProgressionGenerator",
+            "RhythmGenerator",
+            "HarmonicsGenerator",
+            "GeneticGenerator",
+            "FromChordGenerator"
+]
