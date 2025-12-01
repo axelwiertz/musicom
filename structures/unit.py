@@ -1,5 +1,6 @@
 """A MusicUnit represents a technical unit of music, defined by sequences of pitches,"""
-from typing import List
+from typing import List, Tuple
+import numpy as np
 from structures.base import MusicBase
 
 class MusicUnit(MusicBase):
@@ -18,6 +19,11 @@ class MusicUnit(MusicBase):
         self.durations = durations
         self.volumes = volumes
 
+        self._data = np.array ([self.pitch_nodes,
+                                self.onset_intervals,
+                                self.durations,
+                                self.volumes])
+
     def __add__(self, other):
         # Combine two musical units
         new_unit = MusicUnit()
@@ -29,6 +35,26 @@ class MusicUnit(MusicBase):
 
     def __len__(self):
         return len(self.pitch_nodes)
+
+    def split(self, index: int) -> Tuple['MusicUnit', 'MusicUnit']:
+        # Split the MusicUnit at the given index into two MusicUnits
+        unit1 = MusicUnit(
+            _id=self._id,
+            name=self.name + '_part1',
+            pitch_nodes=self.pitch_nodes[:index],
+            onset_intervals=self.onset_intervals[:index],
+            durations=self.durations[:index],
+            volumes=self.volumes[:index]
+        )
+        unit2 = MusicUnit(
+            _id=self._id,
+            name=self.name + '_part2',
+            pitch_nodes=self.pitch_nodes[index:],
+            onset_intervals=self.onset_intervals[index:],
+            durations=self.durations[index:],
+            volumes=self.volumes[index:]
+        )
+        return unit1, unit2
 
     @property
     def pitch_intervals(self) -> List[int]:

@@ -1,4 +1,4 @@
-from base.tuning import TwelveTET
+from base.twelvetone import TwelveTET
 from base.midi import MidiPitch
 
 def test_tuning():

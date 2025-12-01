@@ -122,136 +122,18 @@ musicom/
 
 ### Creating a Simple Composition
 
-This example uses the lower-level `MusicUnit` to construct a voice from precise note data.
-
-```python
-from base import TwelveTET, MidiInstrument
-from structures.composition import MusicComposition, MusicUnit, MusicVoice
-from structures.pattern import MusicPattern
-from structures.regularity import Diatonic, PitchRegister
-from structures.rhythm import MusicTime
-from converters import comp_to_visual
-
-# Create a time grid (16 timesteps, 4/4 time, 120 BPM)
-time = MusicTime(16, 4, 4, 120)
-
-# Create a pitch register
-reg = PitchRegister()
-
-# Create a musical unit with pitches, durations, and velocities
-unit = MusicUnit(
-    time, reg,
-    pitch_nodes=[reg.index_of(TwelveTET.C, 4), reg.index_of(TwelveTET.E, 4)],
-    onset_intervals=[4],
-    durations=[3, 5],
-    velocities=[100, 100]
-)
-
-# Create a voice
-voice = MusicVoice('Piano Voice', [unit], MidiInstrument.PIANO)
-
-# Create a composition
-comp = MusicComposition(
-    'My Composition',
-    MusicScale(Diatonic.HEPTA, Diatonic.SCALE, TwelveTET.C, Diatonic.major_mode),
-    [voice],
-    [1, 4, 5, 1],  # Chord progression
-    [0]
-)
-
-# Display the composition
-comp_to_visual(comp)
-```
+See projects/examples for a step-by-step guide.
 
 ### Matrix-Based Composition
 
-```python
-from structures import MusicMatrix, MusicalUnit
-from structures.rhythm import MusicTime
-from structures.composition import PitchRegister
-from base import TwelveTET
-
-# Create a 4x4 musical matrix (4 voices, 4 sections)
-matrix = MusicMatrix(rows=4, cols=4)
-
-# Create musical units
-time = MusicTime(16, 4, 4, 120)
-reg = PitchRegister()
-
-motif_a = MusicalUnit(
-    unit_type="motif",
-    content=[reg.index_of(TwelveTET.C, 4), reg.index_of(TwelveTET.E, 4)],
-    metadata={"pitch": 60, "dynamics": "mf"}
-)
-
-motif_b = MusicalUnit(
-    unit_type="phrase",
-    content=[reg.index_of(TwelveTET.G, 4), reg.index_of(TwelveTET.B, 4)],
-    metadata={"pitch": 67, "dynamics": "f"}
-)
-
-# Populate the matrix
-matrix.set_cell(0, 0, motif_a)
-matrix.set_cell(1, 0, motif_b)
-
-# Apply compositional transformations
-
-# Row operations (voice transformations)
-matrix.transpose_row(0, 2)  # Transpose voice 1 up by 2 semitones
-matrix.retrograde_row(1)  # Play voice 2 backward
-matrix.invert_row(2, pivot=60)  # Mirror melodic contours around middle C
-matrix.augment_row(3, factor=2.0)  # Double note durations in voice 4
-
-# Column operations (sectional development)
-matrix.repeat_column(0, 3)  # Repeat section 1 at position 3
-transition = MusicalUnit(unit_type="transition", content=[])
-matrix.insert_column(2, transition)  # Insert transitional material
-matrix.reorder_columns([0, 2, 1, 3])  # Non-linear narrative structure
-
-# Cell operations (unit manipulation)
-matrix.swap_cells((0, 0), (1, 1))  # Exchange material between voices
-matrix.mutate_cell(0, 0, lambda cell: cell.transpose(5) if cell else None)
-
-# Matrix operations
-diagonal = matrix.diagonal_read()  # Extract diagonal pattern
-transposed = matrix.transpose()  # Swap rows and columns (voices ↔ sections)
-matrix.selective_erase(
-    condition=lambda cell: cell is None or cell.metadata.get("density", 0) < 0.5
-)
-
-# Display the matrix
-print(matrix)
-```
 
 ### Using Generators
 
-```python
-from generators.chain import MarkovChain
-from regularity.progression import Scale7ChordHarmony
-
-# Create a Markov chain for chord progressions
-chord_chain = MarkovChain(Scale7ChordHarmony.movement_rules)
-progression = chord_chain.sample('1', length=16)
-print(f"Generated progression: {progression}")
-```
-
-### Genetic Algorithm Composition
-
-```python
-from generators.genetic import generate_population, single_point_crossover, mutation
-
-# Define a fitness function
-def fitness_func(genome):
-    return sum(genome)  # Simple example
-
-# Generate initial population
-population = generate_population(size=10, genome_length=16)
-
-# Evolve the population
-# (See genetic.py for complete evolution loop)
-```
 
 ## Key Concepts
+
+### MusicPattern
+
 
 ### MusicUnit
 The fundamental building block representing a sequence of musical events with precise timing and pitch information. It contains:
@@ -260,18 +142,8 @@ The fundamental building block representing a sequence of musical events with pr
 - **durations**: Note durations
 - **velocities**: Note dynamics (0-127)
 
-### MusicalUnit
-A flexible container for musical content used in matrix-based composition:
-- **unit_type**: Classification (motif, phrase, chord, rhythm, etc.)
-- **content**: Musical data (can be pitches, durations, or any musical information)
-- **metadata**: Additional attributes (dynamics, articulation, pitch center, etc.)
-- **Methods**: transpose(), invert(), retrograde(), augment()
-
 ### MusicVoice
-A collection of `MusicUnit` objects representing a single instrumental or vocal line, assigned to a specific MIDI instrument.
-
-### MusicComposition
-A complete piece containing multiple voices, a main scale, chord progression, and formal structure.
+A single instrumental or vocal line, assigned to a specific instrument or voice.
 
 ### MusicMatrix
 A 2D compositional framework where:
@@ -301,66 +173,14 @@ Comprehensive support for diatonic harmony including:
 - Seventh chords (Major7, Minor7, Dominant7, etc.)
 - Harmonic functions and voice leading rules
 
-## Analysis Examples
-
-```python
-from analysis import analyze
-from converters import file_to_comp
-
-# Load a MIDI file
-comp = MusicComposition('Analysis Example')
-file_to_comp(comp, 'path/to/file.mid')
-
-# Analyze the composition
-analyze(comp)
-# Outputs: key, chord progressions, Roman numerals, metrical structure
-```
-
 ## Advanced Matrix Techniques
 
 ### Systematic Development
-```python
-# Create a theme and develop it systematically
-theme = MusicalUnit(unit_type="theme", content=[60, 64, 67])
-matrix = MusicMatrix(rows=4, cols=8)
 
-# Voice 1: Original theme
-matrix.set_cell(0, 0, theme)
+See projects/examples/systematic.ipynb
 
-# Voice 2: Inverted theme
-matrix.set_cell(1, 0, theme)
-matrix.invert_row(1, pivot=64)
-
-# Voice 3: Retrograde theme
-matrix.set_cell(2, 0, theme)
-matrix.retrograde_row(2)
-
-# Voice 4: Augmented theme
-matrix.set_cell(3, 0, theme)
-matrix.augment_row(3, factor=2.0)
-
-# Develop across sections
-for col in range(1, 8):
-    matrix.repeat_column(0, col)
-    # Apply variations to each section
-    matrix.transpose_row(0, offset=col % 12, start_col=col, end_col=col)
-```
 
 ### Cross-Voice Material Exchange
-```python
-# Create contrasting materials
-material_a = MusicalUnit(unit_type="motif", content=[60, 62, 64])
-material_b = MusicalUnit(unit_type="motif", content=[67, 65, 64])
-
-matrix = MusicMatrix(rows=2, cols=4)
-matrix.set_cell(0, 0, material_a)
-matrix.set_cell(1, 0, material_b)
-
-# Cross-pollinate materials
-matrix.swap_cells((0, 1), (1, 1))  # Exchange at section 2
-matrix.repeat_column(1, 2)          # Stabilize the exchange
-matrix.repeat_column(0, 3)          # Return to original
-```
 
 ## Contributing
 

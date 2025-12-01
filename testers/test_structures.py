@@ -1,5 +1,5 @@
 from typing import List
-from base.tuning import TwelveTET
+from base.twelvetone import TwelveTET
 from base.chromatic import Helix, ChromaticPitches
 from base.diatonic import Cardinality, PatternType, Mode
 from structures.time import MusicTime, Circle

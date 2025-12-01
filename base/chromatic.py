@@ -2,7 +2,7 @@
 from typing import Tuple
 import numpy as np
 import matplotlib.pyplot as plt
-from base.tuning import TwelveTET
+from base.twelvetone import Constants
 
 class Helix:
     """
@@ -108,7 +108,7 @@ class ChromaticPitches(Helix):
     # Chromatic pitch helix
     def __init__(self):
         # Represent as helix of (pitch_class, octave): (0, 4)
-        super().__init__(TwelveTET.TWELVE, TwelveTET.OCTAVES)
+        super().__init__(Constants.TWELVE, Constants.OCTAVES)
 
     def transpose(self, i, interval_steps, direction=ASCENDING):
         # Transpose index i by interval_steps in direction (ASCENDING or DESCENDING)

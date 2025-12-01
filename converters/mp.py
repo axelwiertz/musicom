@@ -1,6 +1,6 @@
 """MusicPy converters."""
 from base.midi import MidiInstrument
-from base.tuning import TwelveTET
+from base.twelvetone import PitchClass
 from base.diatonic import Cardinality, PatternType
 from utilities.config import Config
 from structures.unit import MusicUnit
@@ -21,7 +21,7 @@ def pattern_to_mpscale (pattern : MusicPattern ) -> structures.scale:
     # Diatonic (7 pitch class) scale
     if pattern.cardinality == Cardinality.HEPTA and pattern.interval_pattern == PatternType.SCALE:
         # MusicPy structures
-        mpscale = structures.scale(TwelveTET.PITCH_CLASS_NAMES_SHARP[pattern.tonic], interval=pattern.modes[pattern.mode])
+        mpscale = structures.scale(PitchClass.NAMES_SHARP[pattern.tonic], interval=pattern.modes[pattern.mode])
 
     return mpscale
 

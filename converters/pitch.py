@@ -2,7 +2,7 @@
 
 from math import pow, log2
 from librosa import midi_to_hz, hz_to_midi, note_to_midi, midi_to_note
-from base.tuning import TwelveTET
+from base.twelvetone import Constants, PitchClass
 
 def midi_to_freq(midi):
     """Return frequency (Hz) for given MIDI note number (integer or float).
@@ -18,24 +18,24 @@ def freq_to_midi(freq):
 
 def semitone_ratio(n=1):
     """Return frequency ratio for n semitones: 2^(n/12)."""
-    return pow(2.0, n / float(TwelveTET.TWELVE))
+    return pow(2.0, n / float(Constants.TWELVE))
 
 
 def cents_between(f1, f2):
     """Return difference in cents from f1 to f2 (positive if f2 > f1)."""
-    return float(TwelveTET.TWELVE) * log2(f2 / f1)
+    return float(Constants.TWELVE) * log2(f2 / f1)
 
 
 def interval_cents(semitones):
     """Return cents value for given semitone interval."""
-    return semitones * TwelveTET.CENTS
+    return semitones * Constants.CENTS
 
 
 def midi_to_name(midi):
     """Return note name (e.g., C4, A4) for integer MIDI. If non-integer, rounds to nearest.
     m = int(round(midi))
-    name = self.PITCH_CLASS_NAMES_SHARP[m % self.TWELVE]
-    octave = (m // self.TWELVE) - 1
+    name = PitchClass.NAMES_SHARP[m % Constants.TWELVE]
+    octave = (m // Constants.TWELVE) - 1
     return f"{name}{octave}"""
     return midi_to_note(midi)
 
@@ -62,4 +62,4 @@ def name_to_midi(name):
     return note_to_midi(name)
 
 def pitch_to_midi (pitch_class, octave) -> int:
-    return name_to_midi(TwelveTET.PITCH_CLASS_NAMES_SHARP[pitch_class]+str(octave))
+    return name_to_midi(PitchClass.NAMES_SHARP[pitch_class]+str(octave))

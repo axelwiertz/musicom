@@ -22,8 +22,8 @@ def invert(unit : MusicUnit, r: int, pivot: Optional[float] = None, in_place: bo
             return unit if not in_place else None
         pivot = unit.pitch_nodes[0]
 
-    for node in unit.pitch_nodes:
-        distance = node.pitch - pivot
-        node.pitch = pivot - distance + r
+    for i in range(len(unit)):
+        distance = unit.pitch_nodes[i] - pivot
+        unit.pitch_nodes[i]  = pivot - distance + r
 
     return unit if not in_place else None

@@ -5,7 +5,7 @@ import numpy as np
 from base import MidiPitch
 from utilities import Config
 
-from base.tuning import TwelveTET
+from base.twelvetone import TwelveTET
 from structures.pattern import MusicPattern
 from regularity.diatonic import Diatonic
 

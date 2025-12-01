@@ -1,6 +1,6 @@
 from typing import List
 
-from base.tuning import TwelveTET
+from base.twelvetone import PitchClass
 from base.midi import MidiInstrument
 from base.chromatic import ChromaticPitches
 from structures.base import MusicBase
@@ -8,9 +8,9 @@ from structures.matrix import MusicMatrix
 
 class PitchRange:
     # Chromatic pitch range
-    def __init__(self,  pitch_class_start=TwelveTET.A,
+    def __init__(self,  pitch_class_start=PitchClass.A,
                         octave_start=0,
-                        pitch_class_end=TwelveTET.C,
+                        pitch_class_end=PitchClass.C,
                         octave_end=8):
 
         self.chromatic = ChromaticPitches()

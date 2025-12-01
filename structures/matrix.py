@@ -78,10 +78,10 @@ class MusicMatrix:
         if not (0 <= r < self._rows):
             raise IndexError("row index out of range")
         if in_place:
-            self._data[r] = [func(c) for c in self._data[r]]
+            self._data[r] = [func(unit) for unit in self._data[r]]
             return None
         new = self.clone()
-        new._data[r] = [func(c) for c in new._data[r]]
+        new._data[r] = [func(unit) for unit in new._data[r]]
         return new
 
     # Column operations
@@ -135,6 +135,28 @@ class MusicMatrix:
         cols = [self._get_column(ci) for ci in new_order]
         new_data = [[cols[col_idx][row_idx] for col_idx in range(len(cols))] for row_idx in range(self._rows)]
         self._data = new_data
+
+    # Row operations
+    def _get_row(self, r: int) -> List[Any]:
+        if not (0 <= r < self._rows):
+            raise IndexError("row index out of range")
+        return [self._data[r][c] for c in range(self._cols)]
+
+    def units_in_row(self, r: int) -> List[MusicUnit]:
+        return self._get_row(r)
+
+    def _set_row(self, r: int, row: Sequence[Any]):
+        if len(row) != self._cols:
+            raise ValueError("row length mismatch")
+        for c in range(self._cols):
+            self._data[r][c] = row[c]
+
+    def reorder_rows(self, new_order: Sequence[int]):
+        if len(new_order) != self._rows:
+            raise ValueError("new_order must include each row index")
+        self._data = [self._data[ri] for ri in new_order]
+
+
 
     # Cell operations
     def mutate_cell(self, r: int, c: int, func: Callable[[Any], Any]):
@@ -194,9 +216,12 @@ class MusicMatrix:
 
     def get_unit(self, row: int, col: int) -> Optional[MusicUnit]:
         """Get the MusicUnit at the specified position."""
-        return self._data[row][col]
+        if 0 <= row < self.rows and 0 <= col < self.cols:
+            return self._data[row][col]
+        else:
+            raise IndexError("Matrix index out of range.")
 
-    def set_unit(self, row: int, col: int, unit: MusicUnit):
+    def set_unit(self, row: int, col: int, unit: Optional[MusicUnit]):
         """Set a MusicUnit at the specified position."""
         if 0 <= row < self.rows and 0 <= col < self.cols:
             self._data[row][col] = unit

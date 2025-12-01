@@ -1,8 +1,21 @@
 from .midi import MidiChannel, MidiInstrument, MidiPercussion, MidiPitch
-from .tuning import TwelveTET
+from .twelvetone import Constants, PitchClass
+from .chromatic import ChromaticPitches
+from .diatonic import DiatonicPatterns, Cardinality, IntervalClass
 
-__all__ = ['TwelveTET',
-           'MidiInstrument',
-           'MidiPercussion',
-           'MidiChannel',
-           'MidiPitch']
+
+__all__ = [
+    'MidiInstrument',
+    'MidiPercussion',
+    'MidiChannel',
+    'MidiPitch',
+
+    'Constants',
+    'PitchClass',
+
+    'ChromaticPitches',
+    'DiatonicPatterns',
+    'Cardinality',
+    'IntervalClass',
+
+]
