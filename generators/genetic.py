@@ -1,30 +1,27 @@
-"""
-A simple genetic algorithm implementation in Python.
-"""
+""" Genetic creation """
 from datetime import datetime
 from random import choices, randint, randrange, random, sample
 from typing import List, Callable, Tuple
 
-from structures import MusicUnit, MusicTime
+from structures import MusicUnit, MusicGenerator
 from converters.unit import binary_to_unit
-from generators import Generator
 
 GenomeType = List[int]
 PopulationType = List[GenomeType]
 FitnessFunctionType = Callable[[GenomeType], int]
 
 
-class GeneticGenerator(Generator):
+class GeneticGenerator(MusicGenerator):
     # Type aliases for better readability
 
     # Genetic evolution functions
-    def __init__(self, seed_unit: MusicUnit,
+    def __init__(self,
                 fitness_func: FitnessFunctionType,
                  size: int,
                  genome_length: int,
                  fitness_limit: int,
                 generation_limit: int = 100):
-        super().__init__(seed_unit)
+        super().__init__()
         self.fitness_func = fitness_func
         self.size = size
         self.genome_length = genome_length
@@ -36,7 +33,7 @@ class GeneticGenerator(Generator):
 
     # Provide a concrete implementation of the abstract `generate` method
     """ Run the genetic algorithm to generate a musical unit """
-    def generate(self) -> List[MusicUnit]:
+    def produce(self) -> List[MusicUnit]:
         # Create the initial population
         population = self.generate_population()
         generations = 0
@@ -151,23 +148,4 @@ class GeneticGenerator(Generator):
 
         # Return the best genome (optional) for callers that want it
         return sorted_population[0]
-
-
-
-def create_population():
-    # Use a genetic algorithm to create a population of musical units
-    time = MusicTime(8, 4, 4, 100)
-    unit = MusicUnit("Genetic", time)
-
-    def fitness_func(genome_in: List[int]) -> int:
-        # Simple fitness function: sum of genome values
-        return sum(genome_in)
-
-    gen = GeneticGenerator(unit, fitness_func=fitness_func, size=10, genome_length=20, fitness_limit=20,
-        generation_limit=50)
-
-    # Run the genetic algorithm
-    gen.generate()
-
-
 

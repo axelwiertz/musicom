@@ -1,10 +1,10 @@
 """ Module to create streams of chords and split them into voices """
-from generators.base import Generator
+from structures.factory import MusicGenerator
 from music21 import stream, note
 
 # TODO: improve function to handle chords with different number of notes
 
-class FromChordGenerator(Generator):
+class FromChordGenerator(MusicGenerator):
     """ Chord generator class """
 
     def __init__(self,
@@ -13,13 +13,13 @@ class FromChordGenerator(Generator):
                  octave_in: int = 4,
                  quarterLength_in = 2
                  ):
-        super().__init__(chord_progression)
+        super().__init__()
         self.chord_progression = chord_progression
         self.number_of_voices = number_of_voices
         self.octave_in = octave_in
         self.quarterLength_in = quarterLength_in
 
-    def generate(self) -> stream.Stream:
+    def produce(self) -> stream.Stream:
         """ Generate a stream of voices from the chord progression """
         return create_stream_from_chords(self.chord_progression,
                                          self.number_of_voices,
@@ -31,7 +31,7 @@ class FromChordGenerator(Generator):
 def create_stream_from_chords (stream_chords: stream.Stream,
                                number_of_voices : int = 3,
                                octave_in: int = 4,
-                               quarterLength_in = 2) -> stream.Stream:
+                               quarterlength_in = 2) -> stream.Stream:
     # given chords, return a stream of voices,
     # starting in octave octave_in, and ascending
     # prepare some streams: one per voice
@@ -53,7 +53,7 @@ def create_stream_from_chords (stream_chords: stream.Stream,
         # split each chord into separate voices
         for j in range(number_of_voices):
             stream_out[j].append()
-            stream_out.append(note.Note(chord_in.notes[j].pitch, quarterLength_in))
+            stream_out.append(note.Note(chord_in.notes[j].pitch, quarterlength_in))
 
     return stream_out
 

@@ -5,10 +5,11 @@ harmonic functions
 import random
 from typing import List
 from structures.unit import MusicUnit
-from generators import Generator
+from structures.factory import MusicGenerator
+from transformators import transpose
 from music21 import note, interval
 
-class HarmonicsGenerator(Generator):
+class HarmonicsGenerator(MusicGenerator):
     def __init__(self,
                 source_unit      : MusicUnit,
                 fundamental_pitch : int,
@@ -22,13 +23,13 @@ class HarmonicsGenerator(Generator):
         return [self.harmonic_series(self.fundamental_pitch,
                                self.harmonic_numbers)]
 
-    def harmonic_series (self, fundamental_pitch  : int,
+    def harmonic_series(self, fundamental_pitch  : int,
                                harmonic_numbers: List[int] = range(1,17)) -> MusicUnit:
         # The harmonic series of a fundamental pitch
         unit = MusicUnit()
         for harmonic in harmonic_numbers:
             new_pitch = note.Pitch(fundamental_pitch).getHarmonic(harmonic)
-            unit.add_pitch (new_pitch.midi)
+            unit.append(new_pitch.midi)
 
         return unit
 

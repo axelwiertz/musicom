@@ -1,6 +1,7 @@
 """A MusicUnit represents a technical unit of music, defined by sequences of pitches,"""
 from typing import List, Tuple
 import numpy as np
+from utilities.config import Config
 from structures.base import MusicBase
 
 class MusicUnit(MusicBase):
@@ -14,10 +15,21 @@ class MusicUnit(MusicBase):
                 volumes: list[int] = (),
                 ):
         super().__init__(_id, name)
+        # Initialize the MusicUnit with pitch nodes, onset intervals, durations, and volumes
         self.pitch_nodes = pitch_nodes
-        self.onset_intervals = onset_intervals
-        self.durations = durations
-        self.volumes = volumes
+        # Ensure all lists have the same length, defaulting to 1 or 100 as needed
+        if not onset_intervals or len(onset_intervals) != len(pitch_nodes):
+            self.onset_intervals = [Config.DEFAULT_ONSET_INTERVAL] * len(pitch_nodes)
+        else:
+            self.onset_intervals = onset_intervals
+        if not durations or len(durations) != len(pitch_nodes):
+            self.durations = [Config.DEFAULT_DURATION] * len(pitch_nodes)
+        else:
+            self.durations = durations
+        if not volumes or len(volumes) != len(pitch_nodes):
+            self.volumes = [Config.DEFAULT_VOLUME] * len(pitch_nodes)
+        else:
+            self.volumes = volumes
 
         self._data = np.array ([self.pitch_nodes,
                                 self.onset_intervals,

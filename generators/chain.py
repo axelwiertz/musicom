@@ -1,24 +1,19 @@
-"""
-Musicom generators
-Markov chain music generator
-"""
+"""Markov Chain Music Generator"""
 import random
 import numpy as np
 from typing import Optional, List
 from numpy.typing import NDArray
-
 from collections import defaultdict
+from structures.unit import MusicUnit
+from structures.factory import MusicGenerator
 
-from generators import Generator
-from structures import MusicUnit
-
-
-class MarkovChainGenerator(Generator):
+class MarkovChainGenerator(MusicGenerator):
     # Markov chain of transitions
     def __init__(self, train, start, length=16):
         # build transition dict
         super().__init__()
         self.train = train
+        # defaultdict of lists to hold transitions
         self.trans = defaultdict(list)
         for a, b in zip(train, train[1:]):
             self.trans[a[0]].append(b[0])
@@ -26,7 +21,7 @@ class MarkovChainGenerator(Generator):
         self.length = length
         self.np_generator = np.random.Generator
 
-    def generate(self) -> List[MusicUnit]:
+    def produce(self) -> List[MusicUnit]:
         unit = MusicUnit()
         # generate a sequence of given length from start state
         out = [self.start]
@@ -88,5 +83,3 @@ class MarkovChainGenerator(Generator):
                 volume=volume
             )
         return unit
-
-

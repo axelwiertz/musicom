@@ -1,4 +1,4 @@
-from base import TwelveTET
+from base.twelvetone import PitchClass
 from base.diatonic import Cardinality, PatternType, Mode
 from converters.pitch import name_to_midi
 from structures import MusicPattern, MusicUnit, MusicVoice, MusicProject
@@ -6,7 +6,7 @@ from converters import score_to_midifile
 from generators.stochastic import StochasticGenerator
 from generators.chain import MarkovChainGenerator
 from regularity import Scale7PitchDegree
-from generators.counterpoint import stream_is_counterpoint
+from regularity.counterpoint import is_counterpoint
 from generators import ProgressionGenerator, HarmonicsGenerator
 from structures.time import MusicTime
 from structures.project import MusicSection
@@ -21,7 +21,7 @@ def test_counterpoint():
     unit2 = gen.generate()
 
     # Keep generating until counterpoint reached
-    while not stream_is_counterpoint(unit1, unit2):
+    while not is_counterpoint(unit1, unit2):
         unit2 = gen.generate()
     print("Counterpoint achieved between two streams.")
 
@@ -29,11 +29,11 @@ def test_genetic():
     from generators.genetic import GeneticGenerator, GenomeType
 
     # Example fitness function: counts the number of 1s in the genome
-    def fitness_func(genome: GenomeType) -> int:
-        return sum(genome)
+    def fitness_func(genome_: GenomeType) -> int:
+        return sum(genome_)
 
-    gen = GeneticGenerator(MusicUnit(0, "Seed"), fitness_func,100, 20, fitness_limit=100 )
-    gen = gen.generate()
+    gen = GeneticGenerator(fitness_func,100, 20, fitness_limit=100 )
+    gen = gen.produce()
 
 
     # Run the genetic algorithm
@@ -49,10 +49,21 @@ def test_genetic():
     for genome in final_population:
         print("%s (Fitness: %d)" % (gen.genome_to_string(genome), fitness_func(genome)))
 
+    # Use a genetic algorithm to create a population of musical units
+    time = MusicTime(8, 4, 4, 100)
+    unit = MusicUnit(0, "Genetic")
+
+    gen = GeneticGenerator(unit, fitness_func=fitness_func, size=10, genome_length=20, fitness_limit=20,
+        generation_limit=50)
+
+    # Run the genetic algorithm
+    gen.produce()
+
+
+
 
 def test_harmonics():
     from converters.pitch import name_to_midi
-    time = MusicTime(8,4,4)
     unit = MusicUnit(0, "Harmonics",
                     name_to_midi(name=['E4', 'D4', 'B3', 'Bb3', 'Eb4', 'Db4', 'C4', 'G3', 'A3'])
                      )
@@ -67,11 +78,11 @@ def test_harmonics():
 def test_markov_chain ():
 
     gen = MarkovChainGenerator(train=Scale7ChordHarmony.movement_rules, start='1', length=16)
-    units = gen.generate()
+    units = gen.produce()
     print('Generated chords by Markov chain: ' + units[0])
 
     gen = MarkovChainGenerator(train=Scale7PitchDegree.movement_rules, start='1', length=16)
-    units = gen.generate()
+    units = gen.produce()
     print('Generated pitches by Markov chain: ' + units[0])
 
 
@@ -99,7 +110,7 @@ def test_progression():
         # triads_in_scale =  chord_to_unit(self.seed_unit.musicscale.mpscale % (1234567, 1))
         return self.progression([1,2,3,4,5,6,7])
 
-    seed_unit2 = MusicUnit("Seed2", MusicTime(4,4,4))
+    seed_unit2 = MusicUnit(1, "Seed2")
     scale2 = MusicPattern(Cardinality.HEPTA, PatternType.SCALE, 60, Mode.mixolydian)
 
     gen = ProgressionGenerator(
@@ -119,14 +130,14 @@ def test_progression():
     # TO DO: convert MusicComposition to music21 stream
     score_to_midifile(score,
                         'chordlibrary_in_key_' +
-                        TwelveTET.PITCH_CLASS_NAMES_SHARP(scale1.tonic) +
+                        PitchClass.NAMES_SHARP(scale1.tonic) +
                         '.mid')
 
 
     """Double code"""
     # Example: Get triads in C major
     gen = ProgressionGenerator()
-    triads_c_major = gen.generate_triads_in_key(TwelveTET.C, Mode.MAJOR)
+    triads_c_major = gen.generate_triads_in_key(PitchClass.C, Mode.major_mode)
     for chord in triads_c_major:
         print(chord)
 

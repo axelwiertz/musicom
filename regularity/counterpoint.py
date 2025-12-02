@@ -2,11 +2,11 @@
 Musicom generators module - counterpoint
 """
 from structures import MusicUnit
-from music21 import stream, interval
+from music21 import interval
 from converters.m21 import unit_to_stream
 
 
-def stream_is_counterpoint(unit1: MusicUnit, unit2: MusicUnit) -> bool:
+def is_counterpoint(unit1: MusicUnit, unit2: MusicUnit) -> bool:
     # Check two counterpoint voices
     stream1 = unit_to_stream(unit1)
     stream2 = unit_to_stream(unit2)

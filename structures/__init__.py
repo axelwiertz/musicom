@@ -4,6 +4,7 @@ from .time import MusicTime, Circle
 from .pattern import MusicPattern
 from .project import MusicSection, MusicVoice, MusicProject
 from .matrix import MusicMatrix
+from .factory import MusicFactory, MusicGenerator, MusicTransformator
 
 __all__ = [
     "MusicUnit",
@@ -14,4 +15,7 @@ __all__ = [
     "MusicVoice",
     "MusicProject",
     "MusicMatrix",
+    "MusicFactory",
+    "MusicGenerator",
+    "MusicTransformator"
 ]
