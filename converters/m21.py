@@ -42,13 +42,16 @@ def tonerow_to_stream (tonerow_base: serial.ToneRow = serial.ToneRow(row=[0, 4, 
 
     return stream_out
 
+
 def score_to_midifile (score: stream.Score , filename_out: str = Config.DEFAULT_MIDI_FILE_OUT):
     # Save score
     score.write(fmt='midi', fp=Config.DEFAULT_PATH + filename_out)
 
+
 def midifile_to_score (filename_in: str = Config.DEFAULT_MIDI_FILE_IN) -> stream.Score:
     # Load a score
     return converter.parse (Config.DEFAULT_PATH + filename_in)
+
 
 def percussion_stream_to_midifile (stream_in: stream.Stream, filename_out: str = Config.DEFAULT_MIDI_FILE_OUT):
     # Set to percussion instrument (General MIDI channel 10)
@@ -58,6 +61,7 @@ def percussion_stream_to_midifile (stream_in: stream.Stream, filename_out: str =
     mf.open(Config.DEFAULT_PATH+filename_out, 'wb')
     mf.write()
     mf.close()
+
 
 def score_to_visual(score: stream.Score):
     """
@@ -73,6 +77,7 @@ def score_to_visual(score: stream.Score):
 
     elif platform.system() == 'IOS':
         score.show('text')
+
 
 def score_to_sound(score: stream.Score):
     # Play or show the score depending on the platform.
@@ -94,7 +99,11 @@ def score_to_sound(score: stream.Score):
         player.play()
         player.stop()
 
+
 def unit_to_stream (unit: MusicUnit) -> stream.Stream:
+    # Convert unit to m21 stream
+    if unit is None:
+        return stream.Stream()
     # Create a stream with notes and rests
     stream_out = stream.Stream()
     # Iterate over the list of pitches, intervals, durations and volumes
@@ -108,6 +117,7 @@ def unit_to_stream (unit: MusicUnit) -> stream.Stream:
             new_note.volume.velocity = unit.volumes[i]
             stream_out.append(new_note)
     return stream_out
+
 
 def stream_to_unit (stream_in : stream.Stream) -> MusicUnit:
     # Convert m21 stream to unit
@@ -139,5 +149,12 @@ def matrix_row_to_stream(matrix: MusicMatrix, row: int) -> stream.Stream:
     """Concatenate the music21 streams from contained units into a single Stream."""
     stream_out = stream.Stream()
     for col in range(matrix.cols):
-        stream_out.append(unit_to_stream(matrix.get_unit(row, col)))
+        unit_ = matrix.get_unit(row, col)
+        if unit_ is None:
+            rest_ = note.Rest()
+            #TODO: fix duration calculation for empty units
+            rest_.duration = matrix.units_in_col(col)[0].total_duration()
+            stream_out.append(rest_)
+        else:
+            stream_out.append(unit_to_stream(unit_))
     return stream_out

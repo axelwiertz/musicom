@@ -3,7 +3,7 @@
 from converters import matrix_to_score
 from converters.matrix import score_to_piece
 from converters.mp import piece_play
-from transformators import invert, retrograde, augment, transpose
+from transformers import invert, PitchSequenceTransformer, retrograde, transpose
 from structures import MusicMatrix, MusicUnit
 
 # Create a theme and develop it systematically
@@ -12,6 +12,8 @@ matrix = MusicMatrix(rows=4, cols=8)
 
 # Voice 1: Original theme
 matrix.set_unit(0, 0, theme)
+
+trans = PitchSequenceTransformer(theme)
 
 # Voice 2: Inverted theme
 matrix.set_unit(1, 0, theme)
@@ -26,7 +28,8 @@ for u in matrix.units_in_row (2):
 # Voice 4: Augmented theme
 matrix.set_unit(3, 0, theme)
 for u in matrix.units_in_row (3):
-    augment(u, 2.0)
+    trans.set_unit(u)
+    trans.change_durations(2.0)
 
 # Develop across sections
 for col in range(1, 8):

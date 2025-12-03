@@ -6,7 +6,7 @@ import random
 from typing import List
 from structures.unit import MusicUnit
 from structures.factory import MusicGenerator
-from transformators import transpose
+from transformers import transpose
 from music21 import note, interval
 
 class HarmonicsGenerator(MusicGenerator):

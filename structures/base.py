@@ -1,7 +1,9 @@
-"""Module defining the base classes for musical structures."""
+"""Module defining the base class for musical structures."""
+from abc import ABC
 
-class MusicBase:
-    # Base class for musical structures
+
+class Base(ABC):
+    # Base class for project structures
     def __init__(self, _id: int = 0, name: str = 'MusicBase'):
         self._id = _id
         self.name = name

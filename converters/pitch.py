@@ -6,13 +6,13 @@ from base.twelvetone import Constants, PitchClass
 
 def midi_to_freq(midi):
     """Return frequency (Hz) for given MIDI note number (integer or float).
-    return self.A4_FREQ * pow(2.0, (midi - MIDIpitch.A4) / float(self.TWELVE))"""
+    return self.A4_FREQ * pow(2.0, (midi - name_to_midi('A4')) / float(self.TWELVE))"""
     return midi_to_hz(midi)
 
 
 def freq_to_midi(freq):
     """Return MIDI note number (can be fractional) for a given frequency (Hz).
-    return MIDIpitch.A4 + float(self.TWELVE) * log2(freq / self.A4_FREQ)"""
+    return name_to_midi('A4') + float(Constants.TWELVE) * log2(freq / Constants.A4_FREQ)"""
     return hz_to_midi(freq)
 
 
@@ -36,7 +36,8 @@ def midi_to_name(midi):
     m = int(round(midi))
     name = PitchClass.NAMES_SHARP[m % Constants.TWELVE]
     octave = (m // Constants.TWELVE) - 1
-    return f"{name}{octave}"""
+    return f"{name}{octave}
+    """
     return midi_to_note(midi)
 
 

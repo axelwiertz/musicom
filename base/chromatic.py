@@ -102,7 +102,7 @@ class Helix:
 
 
 """Chromatic pitch helix structure"""
-class ChromaticPitches(Helix):
+class Pitches(Helix):
     # Chromatic pitches in helix
     def __init__(self):
         # Represent as helix of (pitch_class, octave): (0, 4)
@@ -120,7 +120,7 @@ class PitchRange:
                         pitch_class_end=PitchClass.C,
                         octave_end=8):
 
-        self.chromatic = ChromaticPitches()
+        self._pitches = Pitches()
 
-        self.index_start = self.chromatic.index_of(pitch_class_start, octave_start)
-        self.index_end = self.chromatic.index_of(pitch_class_end, octave_end)
+        self.index_start = self._pitches.index_of(pitch_class_start, octave_start)
+        self.index_end = self._pitches.index_of(pitch_class_end, octave_end)

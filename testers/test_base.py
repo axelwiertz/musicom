@@ -1,15 +1,11 @@
-from base.twelvetone import TwelveTET
-from base.midi import MidiPitch
+from base import Constants, PitchClass
 
 def test_tuning():
-    tet = TwelveTET.OCTAVES
+    tet = Constants.OCTAVES
     print(f"TwelveTET Octaves: {tet}")
-    tet_pitch = TwelveTET.E
+    tet_pitch = PitchClass.E
     print(tet_pitch)
 
-def test_midi():
-    midi_pitch = MidiPitch.C4  # Middle C
-    print(f"MIDI Pitch: {midi_pitch}")
 
 def test_pitch_intervals():
     from base.diatonic import get_pitch_intervals
@@ -28,7 +24,6 @@ def test_diatonic():
 
 def main():
     test_tuning()
-    test_midi()
     test_pitch_intervals()
     test_diatonic()
 

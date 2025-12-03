@@ -1,12 +1,13 @@
-from base.midi import MidiPitch
+"""Test suite for converter functions in the converters package."""
 from converters.pitch import midi_to_freq, name_to_midi, freq_to_midi, midi_to_name, cents_between
 
 def test_pitch():
     print("12-TET Pitch Frequencies:")
+    midi_C4 = name_to_midi("C4")
     for i in range(12):
-        freq = midi_to_freq(i + MidiPitch.C4)
-        name = midi_to_name(i + MidiPitch.C4)
-        print(f"{name} (MIDI {i + MidiPitch.C4}) = {freq:.2f} Hz")
+        freq = midi_to_freq(i + midi_C4)
+        name = midi_to_name(i + midi_C4)
+        print(f"{name} (MIDI {i + midi_C4}) = {freq:.2f} Hz")
     print("Pitch frequencies:")
     for pitch in ['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5']:
         midi = name_to_midi(pitch)

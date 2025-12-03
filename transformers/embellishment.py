@@ -1,21 +1,23 @@
 """ Module for transforming musical streams with various note transformations. """
-from music21 import stream, note, scale
-from copy import deepcopy
 import random
+from copy import deepcopy
+from structures.factory import Transformer
+from music21 import stream, note, scale
 
 
 
-
-# Transformation types
-IDENTICAL = 0
-ONE_TO_THREE = 1
-TWO_TO_THREE = 2
-TWO_TO_FOUR = 3
-# Transformations of single/double note to series of new notes
-ONE_TRANS_SET = [IDENTICAL, IDENTICAL, ONE_TO_THREE]
-# list of transformations that transform a single note based on both current and next note
-TWO_TRANS_SET = [IDENTICAL, IDENTICAL, TWO_TO_THREE, TWO_TO_FOUR]
-# identity is listed more than once to increase the chance of it getting chosen
+class EmbellishmentTransformer(Transformer):
+    # Class for transforming musical streams with various note transformations.
+    # Transformation types
+    IDENTICAL = 0
+    ONE_TO_THREE = 1
+    TWO_TO_THREE = 2
+    TWO_TO_FOUR = 3
+    # Transformations of single/double note to series of new notes
+    ONE_TRANS_SET = [IDENTICAL, IDENTICAL, ONE_TO_THREE]
+    # list of transformations that transform a single note based on both current and next note
+    TWO_TRANS_SET = [IDENTICAL, IDENTICAL, TWO_TO_THREE, TWO_TO_FOUR]
+    # identity is listed more than once to increase the chance of it getting chosen
 
 
 def pitch_middle_in_scale(pitch_in1: note.Pitch, pitch_in2: note.Pitch, scale_in: scale.ConcreteScale ) -> note.Pitch:
@@ -52,7 +54,8 @@ def note_split_middle_neighbor (note_in: note.Note, scale_in: scale.ConcreteScal
         # [ 1.0/3, 1.0/3, 1.0/3],
             [0.5, 0.25, 0.25],
             [0.25, 0.5, 0.25],
-            [0.25, 0.25, 0.5]      ]
+            [0.25, 0.25, 0.5]
+    ]
     chosen_dur = random.choice(possible_durations)
 
     # first note and last note equal the original note

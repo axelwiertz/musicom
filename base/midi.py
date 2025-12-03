@@ -1,18 +1,4 @@
-"""
-Musicom Constants
-    MIDI
-"""
-
-class MidiPitch:
-    # MIDI pitch numbers for common notes
-    C4 = 60  # Middle C
-    D4 = 62
-    E4 = 64
-    F4 = 65
-    G4 = 67
-    A4 = 69  # above middle C (440 Hz)
-    B4 = 71
-    C5 = 72
+"""MIDI Constants and Mappings for General MIDI Standard."""
 
 class MidiInstrument:
     # General MIDI instrument numbers (0-127)

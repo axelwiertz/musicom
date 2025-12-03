@@ -10,14 +10,18 @@ class MusicFactory(ABC):
     instance from `produce`.
     """
     def __init__(self)-> None:
-        self.source_unit = None
-        self.method = None
+        self._unit = None
+        self._method = None
+        self._function = None
 
-    def set_source_unit(self, source_unit: MusicUnit) -> None:
-        self.source_unit = source_unit
+    def set_unit(self, unit : MusicUnit) -> None:
+        self._unit = unit
 
-    def set_method(self, method: int) -> None:
-        self.method = method
+    def set_method(self, method: str) -> None:
+        self._method = method
+
+    def set_function(self, function: Callable[..., List["MusicUnit"]]) -> None:
+        self._function = function
 
     @abstractmethod
     def produce(self) -> List["MusicUnit"]:
@@ -50,22 +54,22 @@ class FunctionGenerator(MusicGenerator):
 
     def __init__(self, *, function: Callable[..., List["MusicUnit"]], params: Dict[str, Any] | None = None) -> None:
         super().__init__()
-        self.function = function
-        self.params = params or {}
+        self._function = function
+        self._params = params or {}
 
     def produce(self) -> Optional[List["MusicUnit"]]:
         # Any generator logic (randomization, transforms) can be applied to params here
-        return self.function(**self.params)
+        return self._function(**self._params)
 
 
-class MusicTransformator(MusicFactory):
+class MusicTransformer(MusicFactory):
     """
     Abstract base for a transformator. Implementations can start with a MusicUnit and must return a (list of) MusicUnit
     instance from `transform`.
     """
-    def __init__(self, source_unit) -> None:
+    def __init__(self, unit) -> None:
         super().__init__()
-        self.set_source_unit(source_unit)
+        self.set_unit(unit)
 
     @abstractmethod
     def produce(self) -> List["MusicUnit"]:

@@ -140,10 +140,23 @@ class MusicMatrix:
     def _get_row(self, r: int) -> List[Any]:
         if not (0 <= r < self._rows):
             raise IndexError("row index out of range")
-        return [self._data[r][c] for c in range(self._cols)]
+        return [self._data[r][c] for c in range(self._cols-1)]
 
     def units_in_row(self, r: int) -> List[MusicUnit]:
-        return self._get_row(r)
+        units = []
+        for c in range(self._cols):
+            unit = self._data[r][c]
+            if unit is not None:
+                units.append(unit)
+        return units
+
+    def units_in_col(self, c: int) -> List[MusicUnit]:
+        units = []
+        for r in range(self._rows):
+            unit = self._data[r][c]
+            if unit is not None:
+                units.append(unit)
+        return units
 
     def _set_row(self, r: int, row: Sequence[Any]):
         if len(row) != self._cols:

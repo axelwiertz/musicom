@@ -2,9 +2,9 @@
 from typing import List, Tuple
 import numpy as np
 from utilities.config import Config
-from structures.base import MusicBase
+from .base import Base
 
-class MusicUnit(MusicBase):
+class MusicUnit(Base):
     # A technical unit of music: a sequence of pitches with onset intervals, durations, and volumes
     def __init__(self,
                  _id: int = 0,
@@ -72,14 +72,14 @@ class MusicUnit(MusicBase):
     def pitch_intervals(self) -> List[int]:
         if len(self.pitch_nodes) < 2:
             return []
-        return [self.pitch_nodes[i+1]-self.pitch_nodes[i] for i in range(len(self.pitch_nodes)-1)]
+        return [0]+[self.pitch_nodes[i+1]-self.pitch_nodes[i] for i in range(len(self.pitch_nodes)-1)]
 
     @property
-    def timesteps (self):
+    def timesteps(self):
         # The sum of the onset intervals is the total number of timesteps in MusicTime
         return sum(self.onset_intervals)
 
-    def append (self,
+    def append(self,
                    pitch : int = 60,
                    duration : int = 1,
                    onset_interval : int = 1,
@@ -90,7 +90,7 @@ class MusicUnit(MusicBase):
         self.volumes += [volume]
 
 
-    def add_pitches_vertical (self, pitches, duration=4):
+    def add_pitches_vertical(self, pitches, duration=4):
         for p in pitches:
             self.append(pitch=p, duration=duration)
 

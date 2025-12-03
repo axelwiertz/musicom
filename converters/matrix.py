@@ -3,7 +3,7 @@ from music21 import stream
 from musicpy import structures
 from music21py import m21_to_mpy, mpy_to_m21
 from structures import MusicVoice, MusicMatrix
-from .m21 import unit_to_stream, stream_to_unit
+from .m21 import unit_to_stream, stream_to_unit, matrix_row_to_stream
 
 # Section converters
 def voices_to_parts (voices: List[MusicVoice]) -> List[stream.Part]:
@@ -27,8 +27,9 @@ def matrix_to_score (matrix: MusicMatrix) -> stream.Score:
     score = stream.Score()
     for i in range(matrix.rows):
         part = stream.Part()
-        for j in range(matrix.cols):
-            part.append (unit_to_stream(matrix.get_unit(i,j)))
+        stream_ = matrix_row_to_stream (matrix, i)
+        part_.append(stream_)
+        part.partName = f"Voice {i+1}"
         score.append(part)
     return score
 
