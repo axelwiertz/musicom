@@ -4,10 +4,10 @@ Converters between different music representations (Music21, MusicPy, MusicUnit,
 """
 
 from .time import time_to_meter, time_to_tempo
-from .matrix import matrix_to_score, score_to_matrix
+from .project import score_to_section, section_to_score, score_to_piece, piece_to_score
 from .unit import unit_to_excel, unit_to_dataframe
-from .m21 import unit_to_stream, time_to_stream, stream_to_unit, score_to_midifile, midifile_to_score, stream_to_chord, pattern_to_m21scale
-from .mp import track_to_print, unit_to_chord, chord_to_unit, chord_to_stream
+from .m21 import unit_to_stream, time_to_stream, stream_to_unit, score_to_midifile, midifile_to_score, stream_to_chord, pattern_to_m21scale, tonerow_to_stream
+from .mp import track_to_print, unit_to_chord, chord_to_unit, chord_to_stream, piece_play, pattern_to_mpscale, midifile_to_piece
 from .pitch import name_to_midi, midi_to_name
 
 
@@ -25,11 +25,15 @@ __all__ = [
     'score_to_midifile',
     'midifile_to_score',
     'pattern_to_m21scale',
+    'tonerow_to_stream',
 
     # MusicPy converters
     'unit_to_chord',
     'chord_to_unit',
     'chord_to_stream',
+    'piece_play',
+    'pattern_to_mpscale',
+    'midifile_to_piece',
 
     # Pitch converters
     'name_to_midi',
@@ -43,10 +47,11 @@ __all__ = [
     'stream_to_chord',
     'chord_to_stream',
 
-    # Matrix converters
-    'matrix_to_score',
-    'score_to_matrix',
-
+    # Project converters
+    'score_to_section',
+    'section_to_score',
+    'score_to_piece',
+    'piece_to_score',
 
 ]
 

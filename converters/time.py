@@ -6,6 +6,16 @@ def time_to_meter (time: MusicTime) -> meter.TimeSignature:
     time_signature = meter.TimeSignature(str(time.beats_in_measure) + '/' + str(time.beat_note))
     return time_signature
 
+def meter_to_time (time_signature: meter.TimeSignature, timesteps: int, bpm: int) -> MusicTime:
+    # convert m21 meter to MusicTime
+    time = MusicTime(
+        beats_in_measure=time_signature.numerator,
+        beat_note=time_signature.denominator,
+        bpm=bpm,
+        timesteps=timesteps
+    )
+    return time
+
 def timestep_duration_to_quarter_length (time: MusicTime, timestep_duration) -> float:
     # convert duration in timesteps to quarter length
     quarter_length = (timestep_duration *

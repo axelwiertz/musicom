@@ -1,5 +1,4 @@
 """MusicMatrix: A 2D matrix structure for musical material manipulation that holds `MusicUnit` objects"""
-
 import numpy as np
 from copy import deepcopy
 from typing import Any, Callable, List, Optional, Sequence, Tuple
@@ -16,7 +15,7 @@ class MusicMatrix:
     def __init__(self,
                  rows: int = 0,
                  cols: int = 0,
-                 data: Optional[List[List[MusicUnit]]] = None):
+                 data: List[List[MusicUnit]] = None):
 
         if data is not None:
             # accept list-of-lists; normalize to list of lists

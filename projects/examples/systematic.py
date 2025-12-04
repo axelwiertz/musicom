@@ -1,10 +1,8 @@
 """Example of systematic musical development using transformations"""
 
-from converters import matrix_to_score
-from converters.matrix import score_to_piece
-from converters.mp import piece_play
-from transformers import invert, PitchSequenceTransformer, retrograde, transpose
-from structures import MusicMatrix, MusicUnit
+from structures import MusicMatrix,MusicUnit
+from converters import score_to_piece,piece_to_sound
+from transformers import PitchSequenceTransformer, retrograde, transpose, invert
 
 # Create a theme and develop it systematically
 theme = MusicUnit(0, "Theme", [60, 64, 67])

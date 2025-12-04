@@ -7,14 +7,13 @@ from .base import Base
 class MusicUnit(Base):
     # A technical unit of music: a sequence of pitches with onset intervals, durations, and volumes
     def __init__(self,
-                 _id: int = 0,
                 name: str = 'Unit',
                 pitch_nodes : list [int] = (),
                 onset_intervals: list[int] = (),
                 durations: list[int] = (),
                 volumes: list[int] = (),
                 ):
-        super().__init__(_id, name)
+        super().__init__(name)
         # Initialize the MusicUnit with pitch nodes, onset intervals, durations, and volumes
         self.pitch_nodes = pitch_nodes
         # Ensure all lists have the same length, defaulting to 1 or 100 as needed
@@ -51,7 +50,6 @@ class MusicUnit(Base):
     def split(self, index: int) -> Tuple['MusicUnit', 'MusicUnit']:
         # Split the MusicUnit at the given index into two MusicUnits
         unit1 = MusicUnit(
-            _id=self._id,
             name=self.name + '_part1',
             pitch_nodes=self.pitch_nodes[:index],
             onset_intervals=self.onset_intervals[:index],
@@ -59,7 +57,6 @@ class MusicUnit(Base):
             volumes=self.volumes[:index]
         )
         unit2 = MusicUnit(
-            _id=self._id,
             name=self.name + '_part2',
             pitch_nodes=self.pitch_nodes[index:],
             onset_intervals=self.onset_intervals[index:],
@@ -90,14 +87,14 @@ class MusicUnit(Base):
         self.volumes += [volume]
 
 
-    def add_pitches_vertical(self, pitches, duration=4):
+    def add_pitches_vertical(self, pitches: List[int], duration=4):
+        # Add multiple pitches vertically with the same duration
         for p in pitches:
             self.append(pitch=p, duration=duration)
 
     def clone(self) -> 'MusicUnit':
-        # Create a copy of this MusicUnit
+        # Create an exact copy of this MusicUnit instance
         return MusicUnit(
-            _id=self._id,
             name=self.name,
             pitch_nodes=self.pitch_nodes.copy(),
             onset_intervals=self.onset_intervals.copy(),

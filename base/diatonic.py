@@ -1,5 +1,4 @@
 """Diatonic musical patterns: cardinality, intervals, scales, modes, chords"""
-from typing import Tuple
 
 class Cardinality:
     # Diatonic patterns: cardinality, intervals, scales, modes, chords
@@ -95,8 +94,6 @@ class DiatonicPatterns:
         }
     }
 
-def get_pitch_intervals(cardinality: int, pattern_type: int) -> Tuple[int, int]:
-     return tuple(DiatonicPatterns.dict[cardinality][pattern_type])
 
 class Mode:
     # 7 Heptatonic scale modes:

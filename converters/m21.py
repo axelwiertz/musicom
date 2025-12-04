@@ -18,15 +18,33 @@ def stream_to_chord (stream_in: stream.Stream) -> structures.chord:
     return m21_to_mpy(stream_in)
 
 
+def key_to_pattern(m21key: key.Key) -> MusicPattern:
+    """Convert music21 key to MusicPattern."""
+
+    tonic_pc = m21key.tonic.pitchClass
+    #TODO: lookup mode index from mode names by using a reverse mapping of Mode.mode_names
+    mode_index = Mode.mode_names.index(m21key.mode)
+    mode = Mode(mode_index)
+
+    # Assuming a standard diatonic scale from a key
+    pattern = MusicPattern(
+        tonic_pitch_class=tonic_pc,
+        mode=mode,
+        pattern_type=PatternType.SCALE,
+        cardinality=Cardinality.HEPTA
+    )
+    return pattern
+
+
 def pattern_to_m21scale (pattern : MusicPattern) -> scale.ConcreteScale:
     # Convert pattern to music21 scale
     m21scale = scale.ConcreteScale()
 
     # Diatonic (7 pitch class) scale
-    if pattern.cardinality == Cardinality.HEPTA and pattern.interval_pattern == PatternType.SCALE:
-        # Music21 structure
-        m21key = key.Key(note.Pitch(pattern.tonic), mode=Mode.mode_names[pattern.mode])
-        m21scale = scale.ConcreteScale(key=m21key)
+    if pattern.cardinality == Cardinality.HEPTA and pattern.pattern_type == PatternType.SCALE:
+        # m21 scale from key
+        m21key = key.Key(mode=Mode.mode_names[pattern.mode], tonic=note.Pitch(pattern.tonic_pitch_class))
+        m21scale = m21key.getScale()
 
     return m21scale
 
@@ -153,7 +171,7 @@ def matrix_row_to_stream(matrix: MusicMatrix, row: int) -> stream.Stream:
         if unit_ is None:
             rest_ = note.Rest()
             #TODO: fix duration calculation for empty units
-            rest_.duration = matrix.units_in_col(col)[0].total_duration()
+            rest_.duration = matrix.units_in_col(col)[0].timesteps
             stream_out.append(rest_)
         else:
             stream_out.append(unit_to_stream(unit_))

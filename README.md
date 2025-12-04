@@ -1,21 +1,22 @@
 # Musicom
 
 **Musicom** is a Python-based music composition and analysis framework that combines music theory, algorithmic generation, and computational analysis. It leverages both `music21` and `musicpy` libraries to provide a comprehensive toolkit for creating, analyzing, and transforming musical compositions.
+Algorithmic and structured music composition is treated as a series of transformations on organized data structures, allowing for systematic and generative approaches to creating music.
 
 ## Features
 
 ### 🎼 Core Music Theory
 - **12-Tone Equal Temperament (12-TET)** system implementation
-- **Pitch Register** management with chromatic helix representation
+- **Chromatic pitches** management with helix representation
 - **Diatonic patterns** including scales, modes, chords (triads, seventh chords, extended chords)
 - **Music scales** with support for all 7 modes (Ionian, Dorian, Phrygian, Lydian, Mixolydian, Aeolian, Locrian)
-- **Pitch class sets** and serial transformations (Prime, Inversion, Retrograde, Retrograde-Inversion)
+- **Pitch sequences** serial transformations (Prime, Inversion, Retrograde, Retrograde-Inversion)
 
 ### 🎵 Musical Structures
 - **MusicUnit**: Core structure representing sequences of pitches with timing and dynamics
-- **MusicVoice**: Collections of musical units with instrument assignments
-- **MusicComposition**: Complete compositions with multiple voices, scales, and progressions
+- **MusicSection**: Complete compositions with multiple voices, scales, and progressions
 - **MusicMatrix**: Matrix-based compositional framework for systematic musical development
+- **MusicVoice**: Collections of musical units with instrument assignments
 - Support for both **Music21** and **MusicPy** data structures
 
 ### 🎹 Harmony & Composition Rules
@@ -49,6 +50,17 @@ Multiple generator modules for creative composition:
 - **Random Generator**: Stochastic music creation with configurable parameters
 - **Counterpoint Generator**: Two-voice counterpoint following classical rules
 - **Scale Library**: Extensive collection of musical scales
+
+### Regulation & Constraints
+- **Harmonic constraints**: Enforce chord progression rules
+- **Voice leading constraints**: Limit pitch leaps and ensure smooth transitions
+- **Rhythmic constraints**: Maintain metrical consistency and avoid syncopation issues
+- **Fitness evaluation** for generated compositions based on musicality criteria
+
+### 🎶 Melody & Motif Development
+- **Motif extraction** from existing compositions
+- **Melodic variation** techniques: augmentation, diminution, inversion, retrograde
+- **Thematic development** across sections and voices
 
 ### 🔊 Sound Synthesis
 - **SoundWave class** for audio synthesis

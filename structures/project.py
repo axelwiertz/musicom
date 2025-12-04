@@ -4,17 +4,17 @@ from base import MidiInstrument, PitchRange
 from .base import Base
 from .matrix import MusicMatrix
 from .time import MusicTime
+from .pattern import MusicPattern
 
 
 class MusicVoice(Base):
     """Represents a horizontal voice in the project."""
     def __init__(self,
-                 _id: int,
                  name: str = 'Voice',
                  pitch_range: PitchRange = None,
                  midi_instrument: int = MidiInstrument.PIANO,
                  ):
-        super().__init__(_id, name)
+        super().__init__(name)
         self.pitch_range = pitch_range
         self.midi_instrument = midi_instrument
 
@@ -22,11 +22,10 @@ class MusicVoice(Base):
 class MusicSection (Base):
     """Represents a project section, containing a matrix."""
     def __init__(self,
-                 _id: int = 0,
                  name: str = "Section",
                  time : MusicTime = None,
                  matrix: MusicMatrix = None):
-        super().__init__(_id, name)
+        super().__init__(name)
         # The `Section` class contains a `MusicMatrix`
         self._time = time
         self._matrix = matrix
@@ -46,14 +45,17 @@ class MusicSection (Base):
 class MusicProject (Base):
     """Represents the entire project, containing multiple sections."""
     def __init__(self,
-                 _id: int = 0,
-                 name: str = "Project",
+                 name: str = None,
+                 pattern: MusicPattern = None,
+                 sections: List[MusicSection] = None,
+                 voices: List[MusicVoice] = None,
                  ):
-        super().__init__(_id, name)
-        self.name = name
-        self.sections: List[MusicSection] = []
-        self.voices: List[MusicVoice] = []
+        super().__init__(name)
+        self.name = name if name is not None else "Project"
+        self.pattern = pattern if pattern is not None else MusicPattern()
+        self.sections = sections if sections is not None else []
+        self.voices = voices if voices is not None else []
 
     def __repr__(self):
-        return f"Project(name='{self.name}', sections={len(self.sections)}, voices={len(self.voices)})"
+        return f"Project(name='{self.name}', pattern={self.pattern}, sections={len(self.sections)}, voices={len(self.voices)})"
 
