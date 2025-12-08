@@ -1,16 +1,8 @@
-from base.twelvetone import PitchClass
-from base.diatonic import Cardinality, PatternType, Mode
-from converters.pitch import name_to_midi
-from structures import MusicPattern, MusicUnit, MusicVoice, MusicProject
-from converters import score_to_midifile
-from generators.stochastic import StochasticGenerator
-from generators.chain import MarkovChainGenerator
-from regularity import Scale7PitchDegree
-from regularity.counterpoint import is_counterpoint
-from generators import ProgressionGenerator, HarmonicsGenerator
-from structures.time import MusicTime
-from structures.project import MusicSection
-from regularity.progression import Scale7ChordHarmony
+from base import PitchClass, Cardinality, PatternType, PatternMode
+from converters import name_to_midi, score_to_midifile
+from structures import MusicPattern, MusicUnit, MusicVoice, MusicProject, MusicSection, MusicTime
+from regularity import Scale7PitchDegree, is_counterpoint, Scale7ChordHarmony
+from generators import StochasticGenerator, MarkovChainGenerator, ChordDegreeGenerator, HarmonicsGenerator
 from music21 import stream, note, key, roman
 
 def test_counterpoint():
@@ -18,11 +10,11 @@ def test_counterpoint():
     unit1 = MusicUnit(pitch_nodes=name_to_midi(['A4', 'B4', 'C5', 'D5', 'E5', 'F5', 'G5', 'A5']))
     length = len(unit1)
     gen = StochasticGenerator(length=length, duration_set=[1], pitch_set=name_to_midi(['C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4']))
-    unit2 = gen.generate()
+    unit2 = gen.produce()
 
     # Keep generating until counterpoint reached
     while not is_counterpoint(unit1, unit2):
-        unit2 = gen.generate()
+        unit2 = gen.produce()
     print("Counterpoint achieved between two streams.")
 
 def test_genetic():
@@ -97,9 +89,9 @@ def test_progression():
     scale5 = MusicPattern(Cardinality.PENTA, PatternType.SCALE)
 
     seed_unit = MusicUnit("Seed", MusicTime(4,4,4))
-    scale1 = MusicPattern(Cardinality.HEPTA, PatternType.SCALE, 60, Mode.major_mode)
+    scale1 = MusicPattern(Cardinality.HEPTA, PatternType.SCALE, 60, PatternMode.major_mode)
 
-    gen = ProgressionGenerator(
+    gen = ChordDegreeGenerator(
         seed_unit=seed_unit,
         time=seed_unit.time,
         musicscale=scale1,
@@ -111,16 +103,16 @@ def test_progression():
         return self.progression([1,2,3,4,5,6,7])
 
     seed_unit2 = MusicUnit(1, "Seed2")
-    scale2 = MusicPattern(Cardinality.HEPTA, PatternType.SCALE, 60, Mode.mixolydian)
+    scale2 = MusicPattern(Cardinality.HEPTA, PatternType.SCALE, 60, PatternMode.mixolydian)
 
-    gen = ProgressionGenerator(
+    gen = ChordDegreeGenerator(
         seed_unit=seed_unit2,
         time=seed_unit2.time,
         musicscale=scale2,
         chord_progression_degrees=[1, 4, 5, 6, 3, 2, 7]
     )
 
-    unit = gen.generate()
+    unit = gen.produce()
     section = MusicSection (1,"Chord progression")
     section.matrix.set_unit(0,0,unit)
     voice = MusicVoice(1,'Piano voice')
@@ -136,14 +128,14 @@ def test_progression():
 
     """Double code"""
     # Example: Get triads in C major
-    gen = ProgressionGenerator()
-    triads_c_major = gen.generate_triads_in_key(PitchClass.C, Mode.major_mode)
+    gen = ChordDegreeGenerator()
+    triads_c_major = gen.generate_triads_in_key(PitchClass.C, PatternMode.major_mode)
     for chord in triads_c_major:
         print(chord)
 
 
 def test_from_chords():
-    from generators.from_chord import FromChordGenerator
+    from generators import ParallelPatternChordGenerator
     unit = MusicUnit()
     # Create based on chord progression
     main_key = key.Key('C')
@@ -156,8 +148,8 @@ def test_from_chords():
 
 
     """ Generate a stream from chords """
-    gen = FromChordGenerator(main_chords, 3, 4, 2)
-    voices_stream = gen.generate()
+    gen = ParallelPatternChordGenerator(main_chords, 3, 4, 2)
+    voices_stream = gen.produce()
 
 
 def main():

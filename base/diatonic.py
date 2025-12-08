@@ -95,7 +95,7 @@ class DiatonicPatterns:
     }
 
 
-class Mode:
+class PatternMode:
     # 7 Heptatonic scale modes:
     ionian = major_mode = 0
     dorian = 1

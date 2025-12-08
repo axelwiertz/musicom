@@ -1,7 +1,7 @@
 from .midi import MidiChannel, MidiInstrument, MidiPercussion
 from .twelvetone import Constants, PitchClass
 from .chromatic import Pitches, Direction, PitchRange
-from .diatonic import DiatonicPatterns, Cardinality, IntervalClass, Mode, PatternType, Degree
+from .diatonic import DiatonicPatterns, Cardinality, IntervalClass, PatternMode, PatternType, Degree
 
 
 __all__ = [
@@ -19,7 +19,7 @@ __all__ = [
     'DiatonicPatterns',
     'Cardinality',
     'IntervalClass',
-    'Mode',
+    'PatternMode',
     'PatternType',
     'Degree',
 

@@ -37,7 +37,6 @@ class MusicPattern(Base):
         # Scale degrees: ordered set
         return tuple(range(1, self.cardinality + 1))
 
-
     def set_pitch_intervals(self):
         """ Set custom pitch intervals """
         if self.cardinality is not None and self.pattern_type is not None:

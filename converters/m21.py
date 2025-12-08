@@ -1,13 +1,10 @@
 """Converters between music21 and other structures."""
 import platform
 
-from base.diatonic import Cardinality, PatternType, Mode
+from base import Cardinality, PatternType, PatternMode
 from utilities import Config
-from structures.time import MusicTime
-from structures.unit import MusicUnit
-from structures.matrix import MusicMatrix
-from structures.pattern import MusicPattern
-from converters.time import time_to_meter, time_to_tempo
+from structures import MusicTime, MusicUnit, MusicMatrix, MusicPattern
+from converters import time_to_meter, time_to_tempo
 from music21 import serial, stream, note, midi, converter, scale, key
 from musicpy import structures
 from showscore import show
@@ -23,15 +20,15 @@ def key_to_pattern(m21key: key.Key) -> MusicPattern:
 
     tonic_pc = m21key.tonic.pitchClass
     #TODO: lookup mode index from mode names by using a reverse mapping of Mode.mode_names
-    mode_index = Mode.mode_names.index(m21key.mode)
-    mode = Mode(mode_index)
+    mode_index = PatternMode.mode_names.index(m21key.mode)
+    mode = PatternMode(mode_index)
 
     # Assuming a standard diatonic scale from a key
     pattern = MusicPattern(
-        tonic_pitch_class=tonic_pc,
-        mode=mode,
+        cardinality=Cardinality.HEPTA,
         pattern_type=PatternType.SCALE,
-        cardinality=Cardinality.HEPTA
+        mode=mode,
+        tonic_pitch_class=tonic_pc
     )
     return pattern
 
@@ -43,7 +40,7 @@ def pattern_to_m21scale (pattern : MusicPattern) -> scale.ConcreteScale:
     # Diatonic (7 pitch class) scale
     if pattern.cardinality == Cardinality.HEPTA and pattern.pattern_type == PatternType.SCALE:
         # m21 scale from key
-        m21key = key.Key(mode=Mode.mode_names[pattern.mode], tonic=note.Pitch(pattern.tonic_pitch_class))
+        m21key = key.Key(mode=PatternMode.mode_names[pattern.mode], tonic=note.Pitch(pattern.tonic_pitch_class))
         m21scale = m21key.getScale()
 
     return m21scale
@@ -130,10 +127,9 @@ def unit_to_stream (unit: MusicUnit) -> stream.Stream:
         restduration = unit.onset_intervals[i] - unit.durations[i]
         if restduration > 0:
             stream_out.append(note.Rest(quarterLength=restduration))
-        else:
-            new_note = note.Note(pitch=unit.pitch_nodes[i], quarterLength=unit.durations[i])
-            new_note.volume.velocity = unit.volumes[i]
-            stream_out.append(new_note)
+        new_note = note.Note(pitch=unit.pitch_nodes[i], quarterLength=unit.durations[i])
+        new_note.volume.velocity = unit.volumes[i]
+        stream_out.append(new_note)
     return stream_out
 
 

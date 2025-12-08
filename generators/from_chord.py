@@ -1,10 +1,43 @@
-""" Module to create streams of chords and split them into voices """
-from structures.factory import MusicGenerator
+""" Module to create from chords """
+from typing import List
+from structures import MusicGenerator, MusicUnit, MusicPattern
+from converters import pattern_to_pitches
 from music21 import stream, note
 
-# TODO: improve function to handle chords with different number of notes
 
-class FromChordGenerator(MusicGenerator):
+class SequentialPatternGenerator(MusicGenerator):
+    """ Arpeggio generator class """
+
+    def __init__(self,
+                 patterns: List[MusicPattern],
+                 octave_in: int = 4,
+                 timesteps_in: int = 1,
+                 duration_in: int = 1,
+                 volume_in: int = 80
+                 ):
+        super().__init__()
+        self.patterns = patterns
+        self.octave_in = octave_in
+        self.timesteps_in = timesteps_in
+        self.duration_in = duration_in
+        self.volume_in = volume_in
+
+    def produce(self) -> List[MusicUnit]:
+        """ Generate a stream of arpeggios from the chord progression """
+        units = []
+        for pattern in self.patterns:
+            # Convert pattern to pitches
+            pitch_nodes_ = pattern_to_pitches(pattern, self.octave_in)
+            unit = MusicUnit("Arpeggio of "+pattern.name,
+                             [pitch_nodes_],
+                           [self.timesteps_in]*len(pitch_nodes_),
+                               [self.duration_in]*len(pitch_nodes_),
+                                [self.volume_in]*len(pitch_nodes_)
+                             )
+
+        return units
+
+class ParallelPatternChordGenerator(MusicGenerator):
     """ Chord generator class """
 
     def __init__(self,
@@ -27,6 +60,7 @@ class FromChordGenerator(MusicGenerator):
                                          self.quarterLength_in
                                          )
 
+# TODO: improve function to handle chords with different number of notes
 
 def create_stream_from_chords (stream_chords: stream.Stream,
                                number_of_voices : int = 3,
