@@ -2,8 +2,8 @@
 Musicom generators module - counterpoint
 """
 from structures import MusicUnit
+from converters import unit_to_stream
 from music21 import interval
-from converters.m21 import unit_to_stream
 
 
 def is_counterpoint(unit1: MusicUnit, unit2: MusicUnit) -> bool:

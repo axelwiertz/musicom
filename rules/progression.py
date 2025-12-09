@@ -1,6 +1,6 @@
 """Module defining chord progression rules and common progressions."""
 from structures import MusicPattern
-from base import Cardinality, PatternType
+from rules import Cardinality, PatternType
 
 
 class Scale7Triad:

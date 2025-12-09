@@ -1,4 +1,4 @@
-"""Chromatic pitch helix and range structures."""
+"""Twelve tone equal temperament: Chromatic pitches in helix structure."""
 from typing import Tuple
 import numpy as np
 import matplotlib.pyplot as plt
@@ -12,6 +12,18 @@ class Constants:
     A4_FREQ = 440.0  # Frequency of A4
     OCTAVES = 9  # Number of octaves in the pitch set
 
+""" TODO: Add
+Equal‑tempered constants
+12‑TET interval ratios
+Equal temperament ratios
+Semitone ratio (for the base constant: 2^(1/12))
+Twelfth‑root‑of‑2 constant
+Step ratio (12‑tone equal temperament)
+Equal‑tempered step size
+Pitch‑class ratios (12‑TET)
+Frequency ratio for a semitone
+Log‑frequency increment (12‑TET)
+"""
 
 class PitchClass:
     # Pitch class numbers and names

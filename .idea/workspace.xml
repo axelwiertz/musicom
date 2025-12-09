@@ -4,36 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="projects">
-      <change afterPath="$PROJECT_DIR$/research/interval.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/research/pitch_class_space.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/testers/test_rules.py" afterDir="false" />
+    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="refactoring structures, patterns, rules">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/base/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/chromatic.py" beforeDir="false" afterPath="$PROJECT_DIR$/base/pitch_chromatic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/diatonic.py" beforeDir="false" afterPath="$PROJECT_DIR$/rules/pattern_diatonic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/midi.py" beforeDir="false" afterPath="$PROJECT_DIR$/base/instrument.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/twelvetone.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/instrument.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/instrument.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/pitch_chromatic.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/pitch.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/converters/mp.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/mp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/pattern.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/pattern.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/converters/pitch.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/pitch.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/examples/guide.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/projects/examples/guide.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/examples/mp.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/examples/mp.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/notebook.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/notebook.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/research/musicdata.py" beforeDir="false" afterPath="$PROJECT_DIR$/research/musicdata.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/research/percussion_voice.py" beforeDir="false" afterPath="$PROJECT_DIR$/research/percussion_voice.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/research/serial.py" beforeDir="false" afterPath="$PROJECT_DIR$/research/serial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/research/trainmodel.py" beforeDir="false" afterPath="$PROJECT_DIR$/research/trainmodel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/regularity/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/rules/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/regularity/counterpoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/rules/counterpoint.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/regularity/diatonic.py" beforeDir="false" afterPath="$PROJECT_DIR$/rules/diatonic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/regularity/movement.py" beforeDir="false" afterPath="$PROJECT_DIR$/rules/movement.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/regularity/progression.py" beforeDir="false" afterPath="$PROJECT_DIR$/rules/progression.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/regularity/rhythm.py" beforeDir="false" afterPath="$PROJECT_DIR$/rules/rhythm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rules/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/rules/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rules/counterpoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/rules/counterpoint.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rules/diatonic.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/rules/pattern_diatonic.py" beforeDir="false" afterPath="$PROJECT_DIR$/rules/pattern.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rules/progression.py" beforeDir="false" afterPath="$PROJECT_DIR$/rules/progression.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/structures/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/structures/pattern.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/pattern.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testers/test_base.py" beforeDir="false" afterPath="$PROJECT_DIR$/testers/test_base.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testers/test_generators.py" beforeDir="false" afterPath="$PROJECT_DIR$/testers/test_generators.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testers/test_base.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testers/test_rules.py" beforeDir="false" afterPath="$PROJECT_DIR$/testers/test_rules.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testers/test_structures.py" beforeDir="false" afterPath="$PROJECT_DIR$/testers/test_structures.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -148,10 +137,10 @@
       <recent name="C:\Users\92591\PycharmProjects\pythonProject" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\92591\PycharmProjects\musicom\structures" />
       <recent name="C:\Users\92591\PycharmProjects\musicom" />
       <recent name="C:\Users\92591\PycharmProjects\musicom\rules" />
       <recent name="C:\Users\92591\PycharmProjects\musicom\base" />
-      <recent name="C:\Users\92591\PycharmProjects\musicom\structures" />
       <recent name="C:\Users\92591\PycharmProjects\musicom\projects\examples" />
     </key>
   </component>
@@ -222,15 +211,7 @@
       <workItem from="1765231240788" duration="137000" />
       <workItem from="1765231788731" duration="1002000" />
       <workItem from="1765260477847" duration="11360000" />
-      <workItem from="1765295107440" duration="5439000" />
-    </task>
-    <task id="LOCAL-00134" summary="Composing">
-      <option name="closed" value="true" />
-      <created>1761319526167</created>
-      <option name="number" value="00134" />
-      <option name="presentableId" value="LOCAL-00134" />
-      <option name="project" value="LOCAL" />
-      <updated>1761319526168</updated>
+      <workItem from="1765295107440" duration="8289000" />
     </task>
     <task id="LOCAL-00135" summary="Theory and library">
       <option name="closed" value="true" />
@@ -616,7 +597,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765230905439</updated>
     </task>
-    <option name="localTasksCounter" value="183" />
+    <task id="LOCAL-00183" summary="refactoring structures, patterns, rules">
+      <option name="closed" value="true" />
+      <created>1765302940745</created>
+      <option name="number" value="00183" />
+      <option name="presentableId" value="LOCAL-00183" />
+      <option name="project" value="LOCAL" />
+      <updated>1765302940746</updated>
+    </task>
+    <option name="localTasksCounter" value="184" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -649,7 +638,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="README and requirements.txt" />
     <MESSAGE value="adding librosa" />
     <MESSAGE value="MusicSection" />
     <MESSAGE value="pitch_intervals derived" />
@@ -674,7 +662,8 @@
     <MESSAGE value="project, structures and base" />
     <MESSAGE value="project converters" />
     <MESSAGE value="projects" />
-    <option name="LAST_COMMIT_MESSAGE" value="projects" />
+    <MESSAGE value="refactoring structures, patterns, rules" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactoring structures, patterns, rules" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

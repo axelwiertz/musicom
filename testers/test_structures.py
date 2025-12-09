@@ -1,12 +1,9 @@
 from typing import List
-from base import Constants, PitchClass, MusicPitches, Cardinality, PatternType, PatternMode, Direction
-from base.pitch_chromatic import Helix
-from structures import MusicTime,Circle,MusicPattern
+from structures import Constants, PitchClass, MusicPitches
+from structures import Helix, Circle, Direction
+from structures import MusicTime, MusicPattern, MusicUnit, MusicVoice, MusicMatrix, MusicProject, MusicSection
 from structures.rhythm import QuantizedEvent,seconds_to_ticks, MetricalNode, HierarchicalEvent
-from structures.unit import MusicUnit
-from structures.project import MusicVoice
-from structures.matrix import MusicMatrix
-from structures.project import MusicProject, MusicSection
+from rules import Cardinality, PatternType, PatternMode
 from converters import pattern_to_m21scale
 
 
@@ -41,7 +38,12 @@ def test_project():
     print(my_project.sections[0].matrix)
 
 
-def test_chromatic():
+def test_pitch():
+    tet = Constants.OCTAVES
+    print(f"TwelveTET Octaves: {tet}")
+    tet_pitch = PitchClass.E
+    print(tet_pitch)
+
     # Chromatic pitches and transposition
     pitches = MusicPitches()
     pitches.show()
@@ -137,7 +139,7 @@ def test_rhythm_time():
 def main():
     test_helix()
     test_project()
-    test_chromatic()
+    test_pitch()
     test_patterns()
     test_rhythm_time()
 

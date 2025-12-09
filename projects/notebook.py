@@ -2,7 +2,7 @@
 MusicPy - Notebook examples
 """
 
-from base.instrument import MidiInstrument
+from structures.instrument import MidiInstrument
 from base.twelvetone import PitchClass
 from structures import MusicUnit
 from structures.pattern import MusicPattern

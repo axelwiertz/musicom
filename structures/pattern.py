@@ -1,6 +1,7 @@
 """Module for defining musical patterns based on diatonic scales, modes and intervals."""
 from typing import Tuple, List
-from base import Constants, DiatonicPatterns, MusicPitches, Direction
+from structures import Constants, MusicPitches, Direction
+from rules import DiatonicPatterns
 from utilities import sequence_rotations, interval_to_step
 from .base import Base
 

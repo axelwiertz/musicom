@@ -1,16 +1,21 @@
-from .diatonic import IntervalClasses, Scale7Triad
 from .movement import Scale7PitchDegree, Scale7ChordDegree
 from .progression import Scale7ChordHarmony, CommonChordProgressions
 from .rhythm import OnsetIntervalPattern
 from .counterpoint import is_counterpoint
+from .pattern import DiatonicPatterns, Cardinality, PatternMode, PatternType
+
 
 __all__ = [
-    "IntervalClasses",
-    "Scale7Triad",
     "Scale7PitchDegree",
     "Scale7ChordDegree",
     "Scale7ChordHarmony",
     "CommonChordProgressions",
     "OnsetIntervalPattern",
-    "is_counterpoint"
+    "is_counterpoint",
+
+    # Pattern related exports
+    "DiatonicPatterns",
+    "Cardinality",
+    "PatternType",
+    "PatternMode",
 ]
