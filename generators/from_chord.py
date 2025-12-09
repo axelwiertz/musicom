@@ -22,7 +22,7 @@ class SequentialPatternGenerator(MusicGenerator):
         self.duration_in = duration_in
         self.volume_in = volume_in
 
-    def produce(self) -> List[MusicUnit]:
+    def generate(self) -> List[MusicUnit]:
         """ Generate a stream of arpeggios from the chord progression """
         units = []
         for pattern in self.patterns:

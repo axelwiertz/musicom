@@ -5,25 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="refactoring structures, patterns, rules">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/instrument.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/instrument.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/pitch_chromatic.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/pitch.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/mp.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/mp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/pitch.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/pitch.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/examples/guide.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/projects/examples/guide.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/examples/mp.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/examples/mp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/notebook.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/notebook.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rules/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/rules/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rules/counterpoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/rules/counterpoint.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rules/diatonic.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rules/pattern_diatonic.py" beforeDir="false" afterPath="$PROJECT_DIR$/rules/pattern.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rules/progression.py" beforeDir="false" afterPath="$PROJECT_DIR$/rules/progression.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/generators/base.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generators/chain.py" beforeDir="false" afterPath="$PROJECT_DIR$/generators/chain.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generators/chord_degrees.py" beforeDir="false" afterPath="$PROJECT_DIR$/generators/chord_degrees.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generators/from_chord.py" beforeDir="false" afterPath="$PROJECT_DIR$/generators/from_chord.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generators/genetic.py" beforeDir="false" afterPath="$PROJECT_DIR$/generators/genetic.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generators/harmonics.py" beforeDir="false" afterPath="$PROJECT_DIR$/generators/harmonics.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generators/rhythm.py" beforeDir="false" afterPath="$PROJECT_DIR$/generators/rhythm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generators/stochastic.py" beforeDir="false" afterPath="$PROJECT_DIR$/generators/stochastic.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/structures/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/pattern.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/pattern.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testers/test_base.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testers/test_rules.py" beforeDir="false" afterPath="$PROJECT_DIR$/testers/test_rules.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testers/test_structures.py" beforeDir="false" afterPath="$PROJECT_DIR$/testers/test_structures.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/structures/factory.py" beforeDir="false" afterPath="$PROJECT_DIR$/transformers/base.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testers/test_transformators.py" beforeDir="false" afterPath="$PROJECT_DIR$/testers/test_transformators.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/transformers/canon.py" beforeDir="false" afterPath="$PROJECT_DIR$/transformers/canon.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/transformers/embellishment.py" beforeDir="false" afterPath="$PROJECT_DIR$/transformers/embellishment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/transformers/pitchsequence.py" beforeDir="false" afterPath="$PROJECT_DIR$/transformers/pitchsequence.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,11 +132,11 @@
       <recent name="C:\Users\92591\PycharmProjects\pythonProject" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\92591\PycharmProjects\musicom\transformers" />
       <recent name="C:\Users\92591\PycharmProjects\musicom\structures" />
       <recent name="C:\Users\92591\PycharmProjects\musicom" />
       <recent name="C:\Users\92591\PycharmProjects\musicom\rules" />
       <recent name="C:\Users\92591\PycharmProjects\musicom\base" />
-      <recent name="C:\Users\92591\PycharmProjects\musicom\projects\examples" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -211,15 +206,7 @@
       <workItem from="1765231240788" duration="137000" />
       <workItem from="1765231788731" duration="1002000" />
       <workItem from="1765260477847" duration="11360000" />
-      <workItem from="1765295107440" duration="8289000" />
-    </task>
-    <task id="LOCAL-00135" summary="Theory and library">
-      <option name="closed" value="true" />
-      <created>1761385232759</created>
-      <option name="number" value="00135" />
-      <option name="presentableId" value="LOCAL-00135" />
-      <option name="project" value="LOCAL" />
-      <updated>1761385232760</updated>
+      <workItem from="1765295107440" duration="9289000" />
     </task>
     <task id="LOCAL-00136" summary="Theory and library">
       <option name="closed" value="true" />
@@ -605,7 +592,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765302940746</updated>
     </task>
-    <option name="localTasksCounter" value="184" />
+    <task id="LOCAL-00184" summary="refactoring structures, patterns, rules">
+      <option name="closed" value="true" />
+      <created>1765306484734</created>
+      <option name="number" value="00184" />
+      <option name="presentableId" value="LOCAL-00184" />
+      <option name="project" value="LOCAL" />
+      <updated>1765306484734</updated>
+    </task>
+    <option name="localTasksCounter" value="185" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -687,6 +682,11 @@
           <url>file://$PROJECT_DIR$/projects/examples/systematic.py</url>
           <line>37</line>
           <option name="timeStamp" value="48" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/generators/harmonics.py</url>
+          <line>4</line>
+          <option name="timeStamp" value="51" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

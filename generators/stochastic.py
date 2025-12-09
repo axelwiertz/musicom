@@ -2,8 +2,8 @@
 import random
 import numpy as np
 from typing import List
-from structures.unit import MusicUnit
-from structures.factory import MusicGenerator
+from structures import MusicUnit
+from .base import MusicGenerator
 
 class StochasticGenerator(MusicGenerator):
     """Class for generating stochastic music21 streams."""
@@ -18,7 +18,7 @@ class StochasticGenerator(MusicGenerator):
         self.pitch_set = pitch_set
         self.duration_set = duration_set
 
-    def produce(self) -> MusicUnit:
+    def generate(self) -> MusicUnit:
         unit = MusicUnit()
         for i in range(self.length):
             unit.append(random.choice(self.pitch_set),

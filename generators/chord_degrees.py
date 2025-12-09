@@ -13,7 +13,7 @@ from converters.time import timestep_duration_to_quarter_length
 from converters.mp import chord_to_unit
 from converters.m21 import stream_to_unit
 
-from structures.factory import MusicGenerator
+from transformers.base import MusicGenerator
 
 class ChordDegreeGenerator (MusicGenerator):
     """ Chord generator """
@@ -27,7 +27,7 @@ class ChordDegreeGenerator (MusicGenerator):
         self.pattern = pattern
         self.chord_degrees = chord_degrees
 
-    def produce(self) -> MusicUnit:
+    def generate(self) -> MusicUnit:
         """Generate a MusicUnit with the chords corresponding to the specified chord degrees."""
         # mp
         unit = chord_to_unit (pattern_to_mpscale(self.pattern).chord_progression(

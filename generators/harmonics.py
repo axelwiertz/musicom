@@ -4,9 +4,8 @@ harmonic functions
 """
 import random
 from typing import List
-from structures.unit import MusicUnit
-from structures.factory import MusicGenerator
-from transformers import transpose
+from structures import MusicUnit
+from .base import MusicGenerator
 from music21 import note, interval
 
 class HarmonicsGenerator(MusicGenerator):

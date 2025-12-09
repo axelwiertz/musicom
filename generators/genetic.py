@@ -33,7 +33,7 @@ class GeneticGenerator(MusicGenerator):
 
     # Provide a concrete implementation of the abstract `generate` method
     """ Run the genetic algorithm to generate a musical unit """
-    def produce(self) -> List[MusicUnit]:
+    def generate(self) -> List[MusicUnit]:
         # Create the initial population
         population = self.generate_population()
         generations = 0

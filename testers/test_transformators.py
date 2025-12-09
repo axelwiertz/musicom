@@ -1,6 +1,6 @@
 """Tests for transformers module."""
 from typing import List
-from structures.factory import FunctionGenerator
+from transformers.base import FunctionGenerator
 from structures.unit import MusicUnit
 from transformers.embellishment import stream_transform_random
 from transformers.canon import CanonTransformator

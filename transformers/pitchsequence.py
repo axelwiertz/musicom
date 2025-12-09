@@ -1,7 +1,7 @@
 """Module for handling pitch sequences and their standard transformations"""
 from typing import Any, List, Optional
 from structures.unit import MusicUnit
-from structures.factory import MusicTransformer
+from transformers.base import MusicTransformer
 from music21 import serial
 
 
@@ -22,13 +22,13 @@ class PitchSequenceTransformer(MusicTransformer):
         self.tone_row = serial.ToneRow(self._unit.pitch_nodes)
 
 
-    def produce(self) -> List["MusicUnit"]:
+    def transform(self) -> List["MusicUnit"]:
         # Produce transformed MusicUnit
-        self.transform(self.method, self.index)
+        self.execute(self.method, self.index)
         return [self._unit]
 
 
-    def transform(self, trans : str, index : int = 0):
+    def execute(self, trans : str, index : int = 0):
         # Transform tone row
         # m21
         self.tone_row = serial.ToneRow(self._unit.pitch_nodes).zeroCenteredTransformation (trans, index)

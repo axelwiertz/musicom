@@ -4,7 +4,7 @@ from .time import MusicTime, Circle
 from .pattern import MusicPattern
 from .project import MusicSection, MusicVoice, MusicProject
 from .matrix import MusicMatrix
-from .factory import MusicFactory, MusicGenerator, MusicTransformer
+from transformers.base import MusicFactory, MusicGenerator, MusicTransformer
 from .instrument import MidiChannel, MidiInstrument, MidiPercussion
 from .pitch import Constants, PitchClass, MusicPitches, Direction, PitchRange, Helix
 

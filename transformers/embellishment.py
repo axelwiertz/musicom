@@ -1,12 +1,12 @@
 """ Module for transforming musical streams with various note transformations. """
 import random
 from copy import deepcopy
-from structures.factory import Transformer
+from structures import MusicUnit
+from .base import MusicTransformer
 from music21 import stream, note, scale
 
 
-
-class EmbellishmentTransformer(Transformer):
+class EmbellishmentTransformer(MusicTransformer):
     # Class for transforming musical streams with various note transformations.
     # Transformation types
     IDENTICAL = 0
@@ -19,6 +19,8 @@ class EmbellishmentTransformer(Transformer):
     TWO_TRANS_SET = [IDENTICAL, IDENTICAL, TWO_TO_THREE, TWO_TO_FOUR]
     # identity is listed more than once to increase the chance of it getting chosen
 
+    def transform (self) -> MusicUnit:
+        pass
 
 def pitch_middle_in_scale(pitch_in1: note.Pitch, pitch_in2: note.Pitch, scale_in: scale.ConcreteScale ) -> note.Pitch:
     # return the middle of two pitches in a scale

@@ -5,7 +5,7 @@ from typing import Optional, List
 from numpy.typing import NDArray
 from collections import defaultdict
 from structures.unit import MusicUnit
-from structures.factory import MusicGenerator
+from transformers.base import MusicGenerator
 
 class MarkovChainGenerator(MusicGenerator):
     # Markov chain of transitions
@@ -21,7 +21,7 @@ class MarkovChainGenerator(MusicGenerator):
         self.length = length
         self.np_generator = np.random.Generator
 
-    def produce(self) -> List[MusicUnit]:
+    def generate(self) -> List[MusicUnit]:
         unit = MusicUnit()
         # generate a sequence of given length from start state
         out = [self.start]

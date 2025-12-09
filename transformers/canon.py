@@ -1,7 +1,7 @@
 """ Conon transformator """
 from typing import List
 from structures.unit import MusicUnit
-from structures.factory import MusicTransformer
+from .base import MusicTransformer
 
 
 class CanonTransformer(MusicTransformer):
@@ -23,7 +23,7 @@ class CanonTransformer(MusicTransformer):
         # extra transpositions for different voices (e.g. +12, -24, ...)
         self.transpositions = transpositions
 
-    def produce(self) -> List[MusicUnit]:
+    def transform(self) -> List[MusicUnit]:
         # and turn it into a canon. Add extra transpositions to some number_of_voices to create some diversity
         units = []
 
