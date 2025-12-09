@@ -2,13 +2,13 @@
 MusicPy - Notebook examples
 """
 
-from base.midi import MidiInstrument, MidiChannel
+from base.instrument import MidiInstrument
 from base.twelvetone import PitchClass
-from structures import MusicUnit, MusicSection
+from structures import MusicUnit
 from structures.pattern import MusicPattern
-from regularity.diatonic import Diatonic
+from rules.diatonic import Diatonic
 from music21 import converter, instrument
-from musicpy import musicpy as mp, structures
+from musicpy import structures
 
 
 

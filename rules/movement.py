@@ -1,7 +1,10 @@
-""" Movement regularity for diatonic scale degrees """
+""" Movement rules for diatonic scale degrees """
 
-import itertools
-from base.twelvetone import TwelveTET
+class Scale7DegreeFunction:
+    # 7 Hepta scale degree functions
+    degree_functions = {1: 'tonic', 2: 'supertonic', 3: 'mediant', 4: 'subdominant', 5: 'dominant', 6: 'submediant',
+                        7: 'leading tone'}
+
 
 class Scale7PitchDegree:
     # Classic style - Voice pitch movement
@@ -17,7 +20,7 @@ class Scale7PitchDegree:
         "Active" : [1, 3, 5],       # active scale degrees
         "Inactive" : [2, 4, 6, 7],  # inactive scale degrees
     }
-    # movement regularity
+    # movement rules
     # 1 3 5 inactive no rule
     # 2 4 6 7 active
     ANY = 0
@@ -34,13 +37,12 @@ class Scale7PitchDegree:
         ANY : [ANY, +2, -2] # any degree
     }
 
-class PitchClassSpace:
-    def __init__(self, num_items=3):
 
-        # Combinations: and permutations of a set
-        self.combinations = list(itertools.combinations (TwelveTET.PITCH_CLASS_NUMBERS, num_items))
-        self.permutations = list(itertools.permutations (TwelveTET.PITCH_CLASS_NUMBERS, num_items))
 
+class Scale7TriadDegree:
+    # 7 Hepta scale - Triad degrees
+    triad_degrees = {1: ("I", "i"), 2: ('ii', 'ii0'), 3: ('iii', 'III'), 4: ('IV', 'iv'), 5: ('V', 'V'),
+                     6: ('vi', 'VI'), 7: ('vii0', 'vii0')}
 
 
 class Scale7ChordDegree:

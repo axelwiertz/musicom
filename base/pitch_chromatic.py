@@ -2,7 +2,36 @@
 from typing import Tuple
 import numpy as np
 import matplotlib.pyplot as plt
-from base.twelvetone import Constants, PitchClass
+
+"""Twelve-tone equal temperament constants and pitch class definitions"""
+
+class Constants:
+    # General twelve-tone equal temperament constants
+    TWELVE = 12  # Number of pitch classes 0-11
+    CENTS : float = 100  # Cents in semitone
+    A4_FREQ = 440.0  # Frequency of A4
+    OCTAVES = 9  # Number of octaves in the pitch set
+
+
+class PitchClass:
+    # Pitch class numbers and names
+    C = 0
+    C_SHARP = D_FLAT = 1
+    D = 2
+    D_SHARP = E_FLAT = 3
+    E = 4
+    F = 5
+    F_SHARP = G_FLAT = 6
+    G = 7
+    G_SHARP = A_FLAT = 8
+    A = 9
+    A_SHARP = B_FLAT = 10
+    B = 11
+    # 12-tone pitch class numbers and names
+    NUMBERS = (C, C_SHARP, D, D_SHARP, E, F, F_SHARP, G, G_SHARP, A, A_SHARP, B)
+    NAMES_SHARP = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
+    NAMES_FLATMAP = {'D': 'C#', 'E': 'D#', 'F': 'E', 'G': 'F#', 'A': 'G#', 'B': 'A#', 'C': 'B'}
+
 
 class Direction:
     ASCENDING = 1
@@ -30,13 +59,12 @@ class Helix:
                       for turn in range(turns)
                       for point in range(points_per_turn)]
 
-        self.fig = plt.figure(figsize=(6,6))
-        self.ax = self.fig.add_subplot(111, projection='3d')
-
+        self.fig = None
+        self.ax = None
 
     def index_of(self, point, turn):
         # Get index in helix from (point, turn)
-        return turn * self.turns + point
+        return turn * self.points_per_turn + point
 
     def get_at(self, idx):
         # Get (point, turn) at index i in helix
@@ -84,10 +112,14 @@ class Helix:
     def show (self,
                 radius = 1.0,
             ):
-        theta = np.linspace(0, 2 * np.pi * self.turns, int(self.points_per_turn * self.turns))
+        self.fig = plt.figure(figsize=(6,6))
+        self.ax = self.fig.add_subplot(111, projection='3d')
+
+        start, end = self.angle_range()
+        theta = np.linspace(start, end, self.total_points())
         x = radius * np.cos(theta)
         y = radius * np.sin(theta)
-        z = (self.vertical_per_turn / (2 * np.pi)) * theta
+        z = (self.vertical_per_turn / (2 * np.pi)) * (theta - start)
 
         self.ax.plot(x, y, z, color='C0', linewidth=2)
         self.ax.set_box_aspect((1,1,self.turns * self.vertical_per_turn / (2*radius)))  # sensible aspect
@@ -95,17 +127,14 @@ class Helix:
         self.ax.view_init(elev=30, azim=45)
         plt.tight_layout()
         plt.show()
-
-    @staticmethod
-    def save ():
-        plt.savefig('helix.png', dpi=200)
+        #plt.savefig('helix.png', dpi=200)
 
 
 """Chromatic pitch helix structure"""
-class Pitches(Helix):
+class MusicPitches(Helix):
     # Chromatic pitches in helix
     def __init__(self):
-        # Represent as helix of (pitch_class, octave): (0, 4)
+        # Represent as helix of (pitch_class = point, octave = turn): (0, 4)
         super().__init__(Constants.TWELVE, Constants.OCTAVES)
 
     def transpose(self, i, interval_steps, direction : int  = Direction.ASCENDING):
@@ -120,7 +149,9 @@ class PitchRange:
                         pitch_class_end=PitchClass.C,
                         octave_end=8):
 
-        self._pitches = Pitches()
+        self._pitches = MusicPitches()
 
         self.index_start = self._pitches.index_of(pitch_class_start, octave_start)
         self.index_end = self._pitches.index_of(pitch_class_end, octave_end)
+
+

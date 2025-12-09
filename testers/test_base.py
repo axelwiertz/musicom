@@ -8,13 +8,13 @@ def test_tuning():
 
 
 def test_pitch_intervals():
-    from base.diatonic import get_pitch_intervals
+    from rules.pattern_diatonic import get_pitch_intervals
     print("Pitch Intervals for Major Triad:", get_pitch_intervals(3, 3))
     print("Pitch Intervals for Minor7 Chord:", get_pitch_intervals(4, 1))
     print("Pitch Intervals for Dominant7 Chord:", get_pitch_intervals(4, 3))
 
 def test_diatonic():
-    from base.diatonic import DiatonicPatterns, Cardinality, PatternType
+    from rules.pattern_diatonic import DiatonicPatterns, Cardinality, PatternType
 
     pattern = DiatonicPatterns.dict[Cardinality.HEPTA][PatternType.SCALE]
     print("Diatonic Heptatonic Scale Pattern Intervals:", pattern)

@@ -1,21 +1,17 @@
 """ Converters for MusicPattern to MIDI note numbers """
 from typing import List
-from base import Constants
 from structures import MusicPattern
 from .pitch import pitch_to_midi
 
-def pattern_degree_to_midi (pattern: MusicPattern, degree: int, octave: int) -> int:
+def pattern_degree_to_midi (pattern: MusicPattern, degree_: int, octave_: int) -> int:
     """ Convert pattern degree to MIDI note number """
-    pitch_class = (pattern.tonic_pitch_class + pattern.pitch_intervals[degree - 1]) % Constants.TWELVE
-    return pitch_to_midi (pitch_class, octave)
+    return pitch_to_midi (pattern.pitch_classes[degree_ - 1], octave_)
 
 def pattern_to_pitches (pattern: MusicPattern, octave_: int) -> List[int]:
-    """ Convert pattern to list of MIDI note numbers """
+    """ Convert pattern to list of MIDI note numbers in given octave """
     # Start with tonic
-    pitches = [(pitch_to_midi(pattern.tonic_pitch_class,octave_))]
-    for interval in pattern.pitch_intervals:
-        # Calculate pitch class from interval
-        pitch_class = (pattern.tonic_pitch_class + interval) % Constants.TWELVE
+    pitches = []
+    for pitch_class in pattern.pitch_classes:
         # Convert to MIDI note
         midi_note = pitch_to_midi (pitch_class, octave_)
         pitches.append(midi_note)

@@ -7,7 +7,7 @@ Main modules:
 - base: Musical base (TwelveTET, MIDI instruments)
 - converters: Conversion between different music formats
 - generators: Music generation algorithms
-- regularity: Music theory regularity and harmony
+- rules: Music theory rules and harmony
 - utilities: Helper utilities and configuration
 """
 
@@ -37,7 +37,7 @@ from .structures import (
     MusicTime,
     QuantizedEvent,
 )
-from .regularity import (
+from .rules import (
     PitchClassSet,
     Diatonic)
 

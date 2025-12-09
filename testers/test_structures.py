@@ -1,6 +1,6 @@
 from typing import List
-from base import Constants, PitchClass, Pitches, Cardinality, PatternType, Mode, Direction
-from base.chromatic import Helix
+from base import Constants, PitchClass, MusicPitches, Cardinality, PatternType, PatternMode, Direction
+from base.pitch_chromatic import Helix
 from structures import MusicTime,Circle,MusicPattern
 from structures.rhythm import QuantizedEvent,seconds_to_ticks, MetricalNode, HierarchicalEvent
 from structures.unit import MusicUnit
@@ -43,7 +43,7 @@ def test_project():
 
 def test_chromatic():
     # Chromatic pitches and transposition
-    pitches = Pitches()
+    pitches = MusicPitches()
     pitches.show()
 
     pos = pitches.index_of(3, 7)  # octave 3, pitchclass 7 -> index
@@ -54,31 +54,33 @@ def test_chromatic():
 
 def test_patterns():
     # New composition
-    project = MusicProject('Three Voices Composition',
-                           MusicPattern("C Major", Cardinality.HEPTA, PatternType.SCALE, Mode.major_mode, PitchClass.C)
+    project = MusicProject('Test Patterns',
+                           MusicPattern("C Major", Cardinality.HEPTA, PatternType.SCALE, PatternMode.major_mode, PitchClass.C)
                            )
+    pitch_classes = project.pattern.pitch_classes
+    print (f'Pattern pitch classes: {pitch_classes}')
     m21scale = pattern_to_m21scale(project.pattern)
     print(m21scale)
 
     # Diatonic heptatonic scale patterns
     interval_pattern7 = MusicPattern("Heptatonic scale", Cardinality.HEPTA, PatternType.SCALE)
-    print(f'Heptatonic major scale intervals: {interval_pattern7.pitch_intervals}')
+    print(f'Heptatonic major scale intervals: {interval_pattern7.pitch_class_intervals}')
 
     major_triad = MusicPattern("Major triad", Cardinality.TRIA, PatternType.MAJOR)  # Major triad
-    print("Major Triad Intervals:", major_triad.pitch_intervals)
+    print("Major Triad Intervals:", major_triad.pitch_class_intervals, "Pitch classes: ", major_triad.pitch_classes)
 
     minor7_chord = MusicPattern("minor7 chord", Cardinality.TETRA, PatternType.MINOR7)  # Minor7 chord
-    print("Minor7 Chord Intervals:", minor7_chord.pitch_intervals)
+    print("Minor7 Chord Intervals:", minor7_chord.pitch_class_intervals, "Pitch classes: ", minor7_chord.pitch_classes)
 
     # Show pitch class circle
     pc_circle = Circle(Constants.TWELVE, PitchClass.NAMES_SHARP)
     pc_circle.show()
 
     # Patterns: Diatonic scales
-    scale5cmajor = MusicPattern("Pentatonic C major", Cardinality.PENTA, PatternType.SCALE, Mode.major_mode, PitchClass.C)
-    print(scale5cmajor.pitch_intervals)
-    scale7cmajor = MusicPattern("Heptatonic C major", Cardinality.HEPTA, PatternType.SCALE, Mode.major_mode, PitchClass.C,)
-    print(scale7cmajor.pitch_intervals)
+    scale5cmajor = MusicPattern("Pentatonic C major", Cardinality.PENTA, PatternType.SCALE, PatternMode.major_mode, PitchClass.C)
+    print(scale5cmajor.pitch_class_intervals, scale5cmajor.pitch_classes)
+    scale7cmajor = MusicPattern("Heptatonic C major", Cardinality.HEPTA, PatternType.SCALE, PatternMode.major_mode, PitchClass.C,)
+    print(scale7cmajor.pitch_class_intervals, scale7cmajor.pitch_classes)
 
     #    pc_circle.show(pcp7.majormodeschromatic, PitchClass.NAMES_SHARP, 'Major circle')
 

@@ -31,17 +31,16 @@ def interval_cents(semitones):
     return semitones * Constants.CENTS
 
 
-def midi_to_name(midi):
-    """Return note name (e.g., C4, A4) for integer MIDI. If non-integer, rounds to nearest.
+def midi_to_name(midi : int | float) -> str:
+    """Return note name (e.g., C4, A4) for integer MIDI. If noninteger, rounds to nearest.
     m = int(round(midi))
     name = PitchClass.NAMES_SHARP[m % Constants.TWELVE]
     octave = (m // Constants.TWELVE) - 1
-    return f"{name}{octave}
     """
     return midi_to_note(midi)
 
 
-def name_to_midi(name):
+def name_to_midi(name : str) -> int:
     """Parse note name like 'C#4' or 'A4' to MIDI number. Accepts flats as 'Bb'.
     s = name.strip()
     # handle optional accidental and octave
@@ -63,4 +62,8 @@ def name_to_midi(name):
     return note_to_midi(name)
 
 def pitch_to_midi (pitch_class, octave) -> int:
+    if pitch_class < 0 or pitch_class >= Constants.TWELVE:
+        raise ValueError("pitch_class must be in range 0-11")
+    if octave < 0 or octave > Constants.OCTAVES:
+        raise ValueError("octave must be in range 0- "+str(Constants.OCTAVES))
     return name_to_midi(PitchClass.NAMES_SHARP[pitch_class]+str(octave))

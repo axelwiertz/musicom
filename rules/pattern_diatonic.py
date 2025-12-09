@@ -107,16 +107,3 @@ class PatternMode:
     mode_names = {ionian:'ionian',dorian:'dorian',phrygian:'phrygian',
             lydian:'lydian',mixolydian:'mixolydian',aeolian:'aeolian',locrian:'locrian'}
 
-class Degree:
-    # 7 Hepta scale degree functions
-    degree_functions = {1: 'tonic', 2: 'supertonic', 3: 'mediant', 4: 'subdominant', 5: 'dominant', 6: 'submediant',
-                        7: 'leading tone'}
-
-    # 7 Hepta scale - Triad degrees
-    triad_degrees = {1: ("I", "i"), 2: ('ii', 'ii0'), 3: ('iii', 'III'), 4: ('IV', 'iv'), 5: ('V', 'V'),
-                     6: ('vi', 'VI'), 7: ('vii0', 'vii0')}
-
-class IntervalClass:
-    # 7 Hepta Interval classes
-    perfect_interval_classes = ('P1', 'P4', 'P5', 'P8')
-    imperfect_interval_classes = ('M2', 'm3', 'M3', 'm6', 'M6', 'm7', 'M7')

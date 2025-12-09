@@ -1,7 +1,7 @@
 from base import PitchClass, Cardinality, PatternType, PatternMode
 from converters import name_to_midi, score_to_midifile
 from structures import MusicPattern, MusicUnit, MusicVoice, MusicProject, MusicSection, MusicTime
-from regularity import Scale7PitchDegree, is_counterpoint, Scale7ChordHarmony
+from rules import Scale7PitchDegree, is_counterpoint, Scale7ChordHarmony
 from generators import StochasticGenerator, MarkovChainGenerator, ChordDegreeGenerator, HarmonicsGenerator
 from music21 import stream, note, key, roman
 

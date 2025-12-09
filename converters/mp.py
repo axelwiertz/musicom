@@ -1,7 +1,7 @@
 """MusicPy converters."""
-from base.midi import MidiInstrument
+from base.instrument import MidiInstrument
 from base.twelvetone import PitchClass
-from base.diatonic import Cardinality, PatternType
+from rules.pattern_diatonic import Cardinality, PatternType
 from utilities.config import Config
 from structures.unit import MusicUnit
 from structures.time import MusicTime

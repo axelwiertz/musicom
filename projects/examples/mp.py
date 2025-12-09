@@ -1,4 +1,4 @@
-from base.midi import MidiInstrument
+from base.instrument import MidiInstrument
 from musicpy import musicpy as mp, structures
 # Compose unit
 chord = structures.chord (notes='C4',
