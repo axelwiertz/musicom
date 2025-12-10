@@ -170,13 +170,13 @@ def main():
     sw = SoundWave()
     sw.load('piano_c.wav')
     sw.plot_time()
-    sw.create('C4')
+    sw.create_sine_wave()
     sw.save('pure_c.wav')
 
     sw.plot_time()
 
     synthesize_wave(sw)
-    sw.save_wave('synthetic_c.wav')
+    sw.save('synthetic_c.wav')
 
 
 if __name__ == "__main__":

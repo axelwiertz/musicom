@@ -99,7 +99,7 @@ def binary_to_unit(binary: List[int]) -> MusicUnit:
         # Extract binary elements
         binary_parts += [binary[(i * total_bits):(i * total_bits) + total_bits]]
 
-    unit = MusicUnit(0, "FromBinary")
+    unit = MusicUnit("From Binary")
     for binary_part in binary_parts:
         pitch_nr = int(sum([bit * pow(2, i) for i, bit in enumerate(binary_part)]))
         unit.pitch_nodes += [pitch_nr]  
@@ -108,9 +108,10 @@ def binary_to_unit(binary: List[int]) -> MusicUnit:
 
 def pattern_to_unit (pattern : MusicPattern) -> MusicUnit :
     # Convert a MusicPattern to a MusicUnit
-    unit = MusicUnit(0,'Pattern Unit')
-    for interval in pattern.pitch_intervals:
-        unit.pitch_nodes += [pattern.tonic + interval]
+    unit = MusicUnit('Pattern Unit')
+    for interval in pattern.pitch_class_intervals:
+        #TODO: tonic pitch class + tonic octave to midi
+        unit.pitch_nodes += [pattern.tonic_pitch_class + interval]
         unit.durations += [1]  # default duration
         unit.onset_intervals += [1]  # default onset interval
         unit.volumes += [100]  # default volume

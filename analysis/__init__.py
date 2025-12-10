@@ -1,5 +1,5 @@
-from .m21 import score_analyze
-from .mp import piece_analyze
+from .music21_analysis import score_analyze
+from .musicpy_analysis import piece_analyze
 
 __all__ = [
     'score_analyze',

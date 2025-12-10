@@ -4,6 +4,18 @@ import numpy as np
 from utilities.config import Config
 from .base import Base
 
+class SoundEvent():
+    # A basic sound event with pitch, duration, onset interval, and volume
+    def __init__(self,
+                 pitch: int = 60,
+                 duration: int = 1,
+                 onset_interval: int = 1,
+                 volume: int = 100):
+        self.pitch = pitch
+        self.duration = duration
+        self.onset_interval = onset_interval
+        self.volume = volume
+
 class MusicUnit(Base):
     # A technical unit of music: a sequence of pitches with onset intervals, durations, and volumes
     def __init__(self,
@@ -101,3 +113,26 @@ class MusicUnit(Base):
             durations=self.durations.copy(),
             volumes=self.volumes.copy()
         )
+
+class EmptyMusicUnit(MusicUnit):
+    # A MusicUnit representing silence
+    def __init__(self, timesteps: int = 4):
+        super().__init__(name='EmptyUnit')
+        self.onset_intervals = [timesteps]
+        self.pitch_nodes = []
+        self.durations = []
+        self.volumes = []
+
+class MusicUnitGroup(Base):
+    # A group of MusicUnits
+    def __init__(self,
+                 name: str = 'UnitGroup',
+                 units: List[MusicUnit] = []):
+        super().__init__(name)
+        self.units = units
+
+    def add_unit(self, unit: MusicUnit):
+        self.units.append(unit)
+
+    def get_unit(self, index: int) -> MusicUnit:
+        return self.units[index]

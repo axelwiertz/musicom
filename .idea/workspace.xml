@@ -5,20 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="refactoring structures, patterns, rules">
-      <change afterPath="$PROJECT_DIR$/generators/base.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generators/chain.py" beforeDir="false" afterPath="$PROJECT_DIR$/generators/chain.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/m21.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/music21_analysis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis/mp.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/musicpy_analysis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/converters/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/converters/m21.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/music21_converter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/converters/mp.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/musicpy_converter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/converters/project.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/project.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/converters/unit.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/unit.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/generators/chord_degrees.py" beforeDir="false" afterPath="$PROJECT_DIR$/generators/chord_degrees.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generators/from_chord.py" beforeDir="false" afterPath="$PROJECT_DIR$/generators/from_chord.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generators/genetic.py" beforeDir="false" afterPath="$PROJECT_DIR$/generators/genetic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generators/harmonics.py" beforeDir="false" afterPath="$PROJECT_DIR$/generators/harmonics.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generators/rhythm.py" beforeDir="false" afterPath="$PROJECT_DIR$/generators/rhythm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generators/stochastic.py" beforeDir="false" afterPath="$PROJECT_DIR$/generators/stochastic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/factory.py" beforeDir="false" afterPath="$PROJECT_DIR$/transformers/base.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testers/test_transformators.py" beforeDir="false" afterPath="$PROJECT_DIR$/testers/test_transformators.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/transformers/canon.py" beforeDir="false" afterPath="$PROJECT_DIR$/transformers/canon.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/transformers/embellishment.py" beforeDir="false" afterPath="$PROJECT_DIR$/transformers/embellishment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/transformers/pitchsequence.py" beforeDir="false" afterPath="$PROJECT_DIR$/transformers/pitchsequence.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/arvo_project.py" beforeDir="false" afterPath="$PROJECT_DIR$/research/arvo_project.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/examples/guide.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/projects/examples/guide.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rules/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/rules/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rules/rhythm.py" beforeDir="false" afterPath="$PROJECT_DIR$/rules/time.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/structures/rhythm.py" beforeDir="false" afterPath="$PROJECT_DIR$/research/rhythm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/structures/soundwave.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/soundwave.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/structures/unit.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/unit.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testers/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/research/pianoroll.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testers/test_structures.py" beforeDir="false" afterPath="$PROJECT_DIR$/testers/test_structures.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utilities/music21_init.py" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/music21_init.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,80 +69,80 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Python.3voices.executor": "Run",
-    "Python.MIDI_import.executor": "Debug",
-    "Python.Sound.executor": "Debug",
-    "Python.balfolk.executor": "Debug",
-    "Python.canon-gen.executor": "Debug",
-    "Python.composition.executor": "Run",
-    "Python.constants.executor": "Run",
-    "Python.cp.executor": "Run",
-    "Python.database.executor": "Debug",
-    "Python.datastructure.executor": "Debug",
-    "Python.examples.executor": "Run",
-    "Python.genetic.executor": "Run",
-    "Python.harmony.executor": "Run",
-    "Python.instruments.executor": "Run",
-    "Python.library.executor": "Debug",
-    "Python.m21.executor": "Debug",
-    "Python.musicom.executor": "Debug",
-    "Python.musicpy.executor": "Debug",
-    "Python.packages.executor": "Run",
-    "Python.part01.executor": "Run",
-    "Python.percussion_voice.executor": "Debug",
-    "Python.pitchsequence.executor": "Debug",
-    "Python.rhythm.executor": "Run",
-    "Python.song.executor": "Run",
-    "Python.song002.executor": "Debug",
-    "Python.soundlayer.executor": "Run",
-    "Python.structures.executor": "Debug",
-    "Python.systematic.executor": "Run",
-    "Python.test_base.executor": "Run",
-    "Python.test_converters.executor": "Run",
-    "Python.test_generators.executor": "Run",
-    "Python.test_structures.executor": "Run",
-    "Python.test_transformators.executor": "Run",
-    "Python.theory.executor": "Run",
-    "Python.thread.executor": "Run",
-    "Python.three_voices.executor": "Run",
-    "Python.twelvetet.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/92591/PycharmProjects/musicom",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Python.3voices.executor&quot;: &quot;Run&quot;,
+    &quot;Python.MIDI_import.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.Sound.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.balfolk.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.canon-gen.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.composition.executor&quot;: &quot;Run&quot;,
+    &quot;Python.constants.executor&quot;: &quot;Run&quot;,
+    &quot;Python.cp.executor&quot;: &quot;Run&quot;,
+    &quot;Python.database.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.datastructure.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.examples.executor&quot;: &quot;Run&quot;,
+    &quot;Python.genetic.executor&quot;: &quot;Run&quot;,
+    &quot;Python.harmony.executor&quot;: &quot;Run&quot;,
+    &quot;Python.instruments.executor&quot;: &quot;Run&quot;,
+    &quot;Python.library.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.m21.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.musicom.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.musicpy.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.packages.executor&quot;: &quot;Run&quot;,
+    &quot;Python.part01.executor&quot;: &quot;Run&quot;,
+    &quot;Python.percussion_voice.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.pitchsequence.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.rhythm.executor&quot;: &quot;Run&quot;,
+    &quot;Python.song.executor&quot;: &quot;Run&quot;,
+    &quot;Python.song002.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.soundlayer.executor&quot;: &quot;Run&quot;,
+    &quot;Python.structures.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.systematic.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_base.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_converters.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_generators.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_structures.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_transformators.executor&quot;: &quot;Run&quot;,
+    &quot;Python.theory.executor&quot;: &quot;Run&quot;,
+    &quot;Python.thread.executor&quot;: &quot;Run&quot;,
+    &quot;Python.three_voices.executor&quot;: &quot;Run&quot;,
+    &quot;Python.twelvetet.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/92591/PycharmProjects/musicom&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "Python",
-      "PLAIN_TEXT"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;Python&quot;,
+      &quot;PLAIN_TEXT&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\92591\PycharmProjects\musicom" />
       <recent name="C:\Users\92591\PycharmProjects\pythonProject" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\92591\PycharmProjects\musicom\research" />
+      <recent name="C:\Users\92591\PycharmProjects\musicom\testers" />
       <recent name="C:\Users\92591\PycharmProjects\musicom\transformers" />
       <recent name="C:\Users\92591\PycharmProjects\musicom\structures" />
       <recent name="C:\Users\92591\PycharmProjects\musicom" />
-      <recent name="C:\Users\92591\PycharmProjects\musicom\rules" />
-      <recent name="C:\Users\92591\PycharmProjects\musicom\base" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -207,6 +213,7 @@
       <workItem from="1765231788731" duration="1002000" />
       <workItem from="1765260477847" duration="11360000" />
       <workItem from="1765295107440" duration="9289000" />
+      <workItem from="1765394434639" duration="6808000" />
     </task>
     <task id="LOCAL-00136" summary="Theory and library">
       <option name="closed" value="true" />
@@ -674,7 +681,7 @@
           <option name="timeStamp" value="46" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/converters/m21.py</url>
+          <url>file://$PROJECT_DIR$/converters/music21_converter.py</url>
           <line>22</line>
           <option name="timeStamp" value="47" />
         </line-breakpoint>

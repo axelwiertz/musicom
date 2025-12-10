@@ -4,7 +4,7 @@ from music21 import stream
 from musicpy import structures
 from music21py import m21_to_mpy, mpy_to_m21
 from .time import meter_to_time
-from .m21 import stream_to_unit, matrix_row_to_stream, key_to_pattern
+from .music21_converter import stream_to_unit, matrix_row_to_stream, key_to_pattern
 
 # Section converters
 

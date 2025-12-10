@@ -2,7 +2,7 @@ from typing import List
 from structures import Constants, PitchClass, MusicPitches
 from structures import Helix, Circle, Direction
 from structures import MusicTime, MusicPattern, MusicUnit, MusicVoice, MusicMatrix, MusicProject, MusicSection
-from structures.rhythm import QuantizedEvent,seconds_to_ticks, MetricalNode, HierarchicalEvent
+from research.rhythm import QuantizedEvent,seconds_to_ticks, MetricalNode, HierarchicalEvent
 from rules import Cardinality, PatternType, PatternMode
 from converters import pattern_to_m21scale
 

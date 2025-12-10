@@ -7,11 +7,11 @@ from structures.unit import MusicUnit
 from structures.pattern import MusicPattern
 from structures.time import MusicTime
 from music21 import roman, stream
-from converters.mp import pattern_to_mpscale
-from converters.m21 import pattern_to_m21scale
+from converters.musicpy_converter import pattern_to_mpscale
+from converters.music21_converter import pattern_to_m21scale
 from converters.time import timestep_duration_to_quarter_length
-from converters.mp import chord_to_unit
-from converters.m21 import stream_to_unit
+from converters.musicpy_converter import chord_to_unit
+from converters.music21_converter import stream_to_unit
 
 from transformers.base import MusicGenerator
 
