@@ -1,5 +1,5 @@
 """Balfolk Music Generation Project"""
-from base import PitchClass, PitchRange, Cardinality, PatternType, PatternMode
+from base import MusicPitchClass, PitchRange, Cardinality, PatternType, PatternMode
 from structures import MusicProject, MusicSection, MusicPattern, MusicVoice, MusicTime
 from converters import score_to_midifile, section_to_score
 from generators import SequentialPatternGenerator
@@ -11,7 +11,7 @@ proj = MusicProject('Balfolk Project',
                                  Cardinality.HEPTA,
                                  PatternType.SCALE,
                                  PatternMode.minor_mode,
-                                 PitchClass.A),
+                                 MusicPitchClass.A),
                     [MusicSection('Balfolk Section',
                                   MusicTime(12, 6, 8, 120))], # typical Balfolk rhythm
                     [MusicVoice("melody", PitchRange('C4', 'C6')),

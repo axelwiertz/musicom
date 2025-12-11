@@ -6,7 +6,7 @@ from .project import MusicSection, MusicVoice, MusicProject
 from .matrix import MusicMatrix
 from transformers.base import MusicFactory, MusicGenerator, MusicTransformer
 from .instrument import MidiChannel, MidiInstrument, MidiPercussion
-from .pitch import Constants, PitchClass, MusicPitches, Direction, PitchRange, Helix
+from .pitch import Constants, MusicPitchClass, MusicPitch, Direction, PitchRange, Helix
 
 
 __all__ = [
@@ -27,8 +27,8 @@ __all__ = [
     'MidiChannel',
 
     'Constants',
-    'PitchClass',
-    'MusicPitches',
+    'MusicPitchClass',
+    'MusicPitch',
     'Direction',
     'PitchRange',
     'Helix',

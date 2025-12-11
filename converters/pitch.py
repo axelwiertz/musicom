@@ -2,7 +2,18 @@
 
 from math import pow, log2
 from librosa import midi_to_hz, hz_to_midi, note_to_midi, midi_to_note
-from structures import Constants, PitchClass
+from structures import MusicPitch, MusicPitchClass
+
+# Constants
+C0_MIDI = 12  # MIDI number for C0
+A4_FREQ = 440.0  # Frequency of A4 in Hz
+
+def pitch_to_pitch_class (i : int) -> int:
+    return i % MusicPitchClass.TWELVE
+
+def name_to_pitch_class(name : str) -> int:
+    """Convert note name (e.g., C4, A#3) to pitch class number (0-11)."""
+    return pitch_to_pitch_class(name_to_midi(name))
 
 def midi_to_freq(midi):
     """Return frequency (Hz) for given MIDI note number (integer or float).
@@ -12,30 +23,30 @@ def midi_to_freq(midi):
 
 def freq_to_midi(freq):
     """Return MIDI note number (can be fractional) for a given frequency (Hz).
-    return name_to_midi('A4') + float(Constants.TWELVE) * log2(freq / Constants.A4_FREQ)"""
+    return name_to_midi('A4') + float(MusicPitchClass.TWELVE) * log2(freq / Constants.A4_FREQ)"""
     return hz_to_midi(freq)
 
 
 def semitone_ratio(n=1):
     """Return frequency ratio for n semitones: 2^(n/12)."""
-    return pow(2.0, n / float(Constants.TWELVE))
+    return pow(2.0, n / float(MusicPitchClass.TWELVE))
 
 
-def cents_between(f1, f2):
+def cents_between(f1 : float, f2 : float) -> float:
     """Return difference in cents from f1 to f2 (positive if f2 > f1)."""
-    return float(Constants.TWELVE) * log2(f2 / f1)
+    return float(MusicPitchClass.TWELVE) * log2(f2 / f1)
 
 
-def interval_cents(semitones):
+def interval_cents(semitones: int | float) -> float:
     """Return cents value for given semitone interval."""
-    return semitones * Constants.CENTS
+    return semitones * MusicPitch.CENTS
 
 
 def midi_to_name(midi : int | float) -> str:
     """Return note name (e.g., C4, A4) for integer MIDI. If noninteger, rounds to nearest.
     m = int(round(midi))
-    name = PitchClass.NAMES_SHARP[m % Constants.TWELVE]
-    octave = (m // Constants.TWELVE) - 1
+    name = MusicPitchClass.NAMES_SHARP[m % MusicPitchClass.TWELVE]
+    octave = (m // MusicPitchClass.TWELVE) - 1
     """
     return midi_to_note(midi)
 
@@ -60,10 +71,3 @@ def name_to_midi(name : str) -> int:
     semitone_index = self.PITCH_CLASS_NAMES_SHARP.index(idx)
     return (octave + 1) * self.TWELVE + semitone_index"""
     return note_to_midi(name)
-
-def pitch_to_midi (pitch_class, octave) -> int:
-    if pitch_class < 0 or pitch_class >= Constants.TWELVE:
-        raise ValueError("pitch_class must be in range 0-11")
-    if octave < 0 or octave > Constants.OCTAVES:
-        raise ValueError("octave must be in range 0- "+str(Constants.OCTAVES))
-    return name_to_midi(PitchClass.NAMES_SHARP[pitch_class]+str(octave))

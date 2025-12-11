@@ -1,12 +1,7 @@
 """MusicPy converters."""
-from structures.instrument import MidiInstrument
-from base.twelvetone import PitchClass
-from rules.pattern import Cardinality, PatternType
 from utilities.config import Config
-from structures.unit import MusicUnit
-from structures.time import MusicTime
-from structures.project import MusicVoice
-from structures.pattern import MusicPattern
+from structures import MusicPitchClass, MusicUnit, MusicTime, MusicVoice, MusicPattern, MidiInstrument
+from rules import Cardinality, PatternType
 from musicpy import musicpy, structures
 from music21 import stream
 from music21py import mpy_to_m21
@@ -23,7 +18,7 @@ def pattern_to_mpscale(pattern: MusicPattern) -> structures.scale:
     # Diatonic (7 pitch class) scale
     if pattern.cardinality == Cardinality.HEPTA and pattern.interval_pattern == PatternType.SCALE:
         # MusicPy structures
-        mpscale = structures.scale(PitchClass.NAMES_SHARP[pattern.tonic], interval=pattern.modes[pattern.mode])
+        mpscale = structures.scale(MusicPitchClass.NAMES_SHARP[pattern.tonic], interval=pattern.modes[pattern.mode])
 
     return mpscale
 

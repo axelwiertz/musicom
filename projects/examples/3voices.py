@@ -1,11 +1,11 @@
-from base import MidiInstrument,PitchClass,PitchRange,Cardinality,PatternType,Mode
+from base import MidiInstrument,MusicPitchClass,PitchRange,Cardinality,PatternType,Mode
 from structures import MusicPattern, MusicProject, MusicSection, MusicUnit, MusicVoice, MusicTime, MusicMatrix
 from converters import name_to_midi,pattern_to_m21scale,score_to_midifile,section_to_score
 from analysis import score_analyze
 
 # New composition
 project = MusicProject('Three Voices Composition',
-    MusicPattern("C Major", Cardinality.HEPTA,PatternType.SCALE,Mode.major_mode,PitchClass.C)
+    MusicPattern("C Major", Cardinality.HEPTA,PatternType.SCALE,Mode.major_mode,MusicPitchClass.C)
 )
 m21scale = pattern_to_m21scale(project.pattern)
 scale_pitches = m21scale.pitches[0:3]
@@ -16,7 +16,7 @@ print(pitches_list)
 project.voices = [
     MusicVoice('Voice 1', PitchRange(), MidiInstrument.FLUTE),
     MusicVoice('Voice 2', PitchRange(), MidiInstrument.VIOLIN),
-    MusicVoice('Accompaniment', PitchRange(PitchClass.C, 3, PitchClass.G, 3), MidiInstrument.BASS)
+    MusicVoice('Accompaniment', PitchRange(MusicPitchClass.C, 3, MusicPitchClass.G, 3), MidiInstrument.BASS)
 ]
 
 # Define sections

@@ -1,11 +1,12 @@
 """
-This module builds directed graphs representing chromatic and diatonic
+Directed graphs representing chromatic and diatonic
 interval networks enriched with chord qualities (triads and seventh chords)
-and voice-leading information. Each node represents a pitch class or scale
-degree, and edges are annotated with interval data and voice-leading movements
-between chords. The graphs can be exported in various formats and visualized
-using Matplotlib.
+and voice-leading information.
+Each node represents a pitch class or scale degree, and edges are annotated
+with interval data and voice-leading movements between chords.
+The graphs can be exported in various formats and visualized using Matplotlib.
 """
+from .pitch import MusicPitchClass
 
 """
 TODO:
@@ -19,23 +20,22 @@ import networkx as nx
 import matplotlib.pyplot as plt
 from typing import List
 
+PITCH_CLASS_MAP = zip (MusicPitchClass.NUMBERS, MusicPitchClass.NAMES_SHARP)
+
+
 # --- Basic maps -----------------------------------------------------------
 SEMITONE_MAP = {
     "C": 0, "C#": 1, "Db": 1, "D": 2, "D#": 3, "Eb": 3, "E": 4, "F": 5,
     "F#": 6, "Gb": 6, "G": 7, "G#": 8, "Ab": 8, "A": 9, "A#": 10, "Bb": 10, "B": 11
 }
-CHROMATIC_PITCHES = ["C","C#","D","D#","E","F","F#","G","G#","A","A#","B"]
-DIATONIC_SCALES = {
-    "C": ["C","D","E","F","G","A","B"],
-}
 
 # --- Utilities ------------------------------------------------------------
 def semitones_between(a: str, b: str) -> int:
-    return (SEMITONE_MAP[b] - SEMITONE_MAP[a]) % 12
+    return (SEMITONE_MAP[b] - SEMITONE_MAP[a]) % MusicPitchClass.TWELVE
 
 def transpose_pc(pc: str, semitones: int) -> str:
-    idx = CHROMATIC_PITCHES.index(pc)
-    return CHROMATIC_PITCHES[(idx + semitones) % 12]
+    idx = MusicPitchClass.NAMES_SHARP.index(pc)
+    return MusicPitchClass.NAMES_SHARP[(idx + semitones) % MusicPitchClass.TWELVE]
 
 def triad(pc: str, quality: str = "maj") -> List[str]:
     # quality: 'maj' or 'min' or 'dim'
@@ -77,7 +77,9 @@ def smooth_four_voice_leading(chord_from: List[str], chord_to: List[str]) -> Lis
       - Return list of up to 4 integer semitone movements (negative = down).
     Note: this is a heuristic example, not exhaustive.
     """
-    def pc_to_val(pc): return SEMITONE_MAP[pc]
+    def pc_to_val(pc):
+        return SEMITONE_MAP[pc]
+
     from_vals = [pc_to_val(p) for p in chord_from][:4]
     # pad/truncate to 4 voices
     while len(from_vals) < 4:
@@ -108,9 +110,9 @@ def smooth_four_voice_leading(chord_from: List[str], chord_to: List[str]) -> Lis
 
 # --- Build chromatic graph ------------------------------------------------
 def build_chromatic_graph() -> nx.DiGraph:
-    G = nx.DiGraph()
+    graph = nx.DiGraph()
     # add nodes with chord qualities: triad (major/minor) and dominant 7th
-    for pc in CHROMATIC_PITCHES:
+    for pc in MusicPitchClass.NAMES_SHARP:
         # default triad quality: use major triad as metadata; diatonic quality will be in diatonic graph
         node_attrs = {
             "type": "pitch_class",
@@ -119,40 +121,43 @@ def build_chromatic_graph() -> nx.DiGraph:
             "seventh_dom": seventh(pc, "dom"),
             "label": pc
         }
-        G.add_node(pc, **node_attrs)
+        graph.add_node(pc, **node_attrs)
 
     # connect every ordered pair with semitone and voice_leading info
-    for a in CHROMATIC_PITCHES:
-        for b in CHROMATIC_PITCHES:
+    for a in MusicPitchClass.NAMES_SHARP:
+        for b in MusicPitchClass.NAMES_SHARP:
             st = semitones_between(a, b)
             # choose representative chord voicings for voice-leading:
             # use root-position major triad for source, root-position major triad for target
             from_tri = triad(a, "maj")
             to_tri = triad(b, "maj")
             vl = smooth_four_voice_leading(from_tri, to_tri)
-            G.add_edge(a, b,
+            graph.add_edge(a, b,
                        semitones=st,
                        relation="chromatic",
                        weight=max(0.1, 12 - st),
                        voice_leading=vl,
                        from_chord=from_tri,
                        to_chord=to_tri)
-    return G
+    return graph
 
 # --- Build diatonic graph -------------------------------------------------
 def build_diatonic_graph(key: str = "C") -> nx.DiGraph:
-    scale = DIATONIC_SCALES[key]
+    scales = {
+        "C": ["C", "D", "E", "F", "G", "A", "B"],
+    }
+    scale = scales[key]
     degree_names = ["I","ii","iii","IV","V","vi","vii°"]
     degree_qualities = ["maj","min","min","maj","maj","min","dim"]  # triad qualities in major
     seventh_qualities = ["maj7","m7","m7","maj7","7","m7","ø7"]
 
-    G = nx.DiGraph()
+    graph = nx.DiGraph()
     # add pitch and degree nodes with chord-quality attributes
     for deg, pitch, tqual, squal in zip(degree_names, scale, degree_qualities, seventh_qualities):
         tri = triad(pitch, tqual if tqual != "dim" else "dim")
         sev = seventh(pitch, squal)
-        G.add_node(pitch, type="pitch", degree=deg, triad=tri, seventh=sev, label=pitch)
-        G.add_node(deg, type="degree", pitch=pitch, triad=tri, seventh=sev, label=deg)
+        graph.add_node(pitch, type="pitch", degree=deg, triad=tri, seventh=sev, label=pitch)
+        graph.add_node(deg, type="degree", pitch=pitch, triad=tri, seventh=sev, label=deg)
 
     # connect pitch nodes with diatonic intervals and voice-leading using the diatonic triads
     n = len(scale)
@@ -167,7 +172,7 @@ def build_diatonic_graph(key: str = "C") -> nx.DiGraph:
             from_tri = triad(src, "maj" if src in ["C","F","G"] else "min" if src in ["D","E","A"] else "dim")
             to_tri = triad(tgt, "maj" if tgt in ["C","F","G"] else "min" if tgt in ["D","E","A"] else "dim")
             vl = smooth_four_voice_leading(from_tri, to_tri)
-            G.add_edge(src, tgt,
+            graph.add_edge(src, tgt,
                        degree_steps=step_num,
                        diatonic_interval=label,
                        relation="diatonic",
@@ -179,31 +184,31 @@ def build_diatonic_graph(key: str = "C") -> nx.DiGraph:
             src_deg = degree_names[i]
             tgt_deg = degree_names[j]
             # use degree triads from node attributes
-            Fa = G.nodes[src_deg]["triad"] if src_deg in G.nodes else from_tri
-            Fb = G.nodes[tgt_deg]["triad"] if tgt_deg in G.nodes else to_tri
-            vl_deg = smooth_four_voice_leading(Fa, Fb)
-            G.add_edge(src_deg, tgt_deg,
+            f_a = graph.nodes[src_deg]["triad"] if src_deg in graph.nodes else from_tri
+            f_b = graph.nodes[tgt_deg]["triad"] if tgt_deg in graph.nodes else to_tri
+            vl_deg = smooth_four_voice_leading(f_a, f_b)
+            graph.add_edge(src_deg, tgt_deg,
                        degree_steps=step_num,
                        diatonic_interval=label,
                        relation="diatonic_degree",
                        weight=weight,
                        voice_leading=vl_deg,
-                       from_chord=Fa,
-                       to_chord=Fb)
-    return G
+                       from_chord=f_a,
+                       to_chord=f_b)
+    return graph
 
 # --- Export & plot -------------------------------------------------------
-def export_graph(G: nx.Graph, basename: str):
-    nx.write_graphml(G, f"{basename}.graphml")
-    nx.write_gexf(G, f"{basename}.gexf")
-    nx.write_gml(G, f"{basename}.gml")
+def export_graph(graph: nx.Graph, basename: str):
+    nx.write_graphml(graph, f"{basename}.graphml")
+    nx.write_gexf(graph, f"{basename}.gexf")
+    nx.write_gml(graph, f"{basename}.gml")
 
-def plot_graph(G: nx.Graph, basename: str, figsize=(10,8)):
+def plot_graph(graph: nx.Graph, basename: str, figsize=(10,8)):
     plt.figure(figsize=figsize)
-    pos = nx.spring_layout(G, seed=42)
+    pos = nx.spring_layout(graph, seed=42)
     node_colors = []
     labels = {}
-    for n, d in G.nodes(data=True):
+    for n, d in graph.nodes(data=True):
         labels[n] = d.get("label", n)
         if d.get("type") == "pitch":
             node_colors.append("lightblue")
@@ -211,13 +216,13 @@ def plot_graph(G: nx.Graph, basename: str, figsize=(10,8)):
             node_colors.append("lightgreen")
         else:
             node_colors.append("lightgray")
-    nx.draw_networkx_nodes(G, pos, node_color=node_colors, node_size=700)
-    nx.draw_networkx_labels(G, pos, labels=labels, font_size=9)
-    widths = [max(0.4, d.get("weight",1.0)) for _,_,d in G.edges(data=True)]
-    nx.draw_networkx_edges(G, pos, arrowstyle="->", arrowsize=12, width=widths)
+    nx.draw_networkx_nodes(graph, pos, node_color=node_colors, node_size=700)
+    nx.draw_networkx_labels(graph, pos, labels=labels, font_size=9)
+    widths = [max(0.4, d.get("weight",1.0)) for _,_,d in graph.edges(data=True)]
+    nx.draw_networkx_edges(graph, pos, arrowstyle="->", arrowsize=12, width=widths)
     # edge labels: show semitones or diatonic interval and abbreviated voice-leading
     edge_labels = {}
-    for u,v,d in G.edges(data=True):
+    for u,v,d in graph.edges(data=True):
         if "semitones" in d:
             vl = d.get("voice_leading", [])
             vl_short = ",".join(f"{int(x)}" for x in vl[:4])
@@ -226,7 +231,7 @@ def plot_graph(G: nx.Graph, basename: str, figsize=(10,8)):
             vl = d.get("voice_leading", [])
             vl_short = ",".join(f"{int(x)}" for x in vl[:4])
             edge_labels[(u,v)] = f"{d['diatonic_interval']} | vl[{vl_short}]"
-    nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels, font_size=7)
+    nx.draw_networkx_edge_labels(graph, pos, edge_labels=edge_labels, font_size=7)
     plt.axis("off")
     plt.tight_layout()
     plt.savefig(f"{basename}.png", dpi=300)

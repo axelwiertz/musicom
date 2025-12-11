@@ -38,7 +38,7 @@ from .structures import (
     QuantizedEvent,
 )
 from .rules import (
-    PitchClassSet,
+    MusicPitchClassSet,
     Diatonic)
 
 # Converters
@@ -78,7 +78,7 @@ __all__ = [
     'MusicScale',
     'MusicalInterval',
     'PatternSequence',
-    'PitchClassSet',
+    'MusicPitchClassSet',
 
     # Rhythm
     'MusicTime',

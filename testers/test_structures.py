@@ -1,5 +1,5 @@
 from typing import List
-from structures import Constants, PitchClass, MusicPitches
+from structures import Constants, MusicPitchClass, MusicPitch
 from structures import Helix, Circle, Direction
 from structures import MusicTime, MusicPattern, MusicUnit, MusicVoice, MusicMatrix, MusicProject, MusicSection
 from research.rhythm import QuantizedEvent,seconds_to_ticks, MetricalNode, HierarchicalEvent
@@ -39,25 +39,23 @@ def test_project():
 
 
 def test_pitch():
-    tet = Constants.OCTAVES
-    print(f"TwelveTET Octaves: {tet}")
-    tet_pitch = PitchClass.E
+    tet_pitch = MusicPitchClass.E
     print(tet_pitch)
 
     # Chromatic pitches and transposition
-    pitches = MusicPitches()
+    pitches = MusicPitch()
     pitches.show()
 
-    pos = pitches.index_of(3, 7)  # octave 3, pitchclass 7 -> index
-    next_pos = pitches.transpose(pos, Direction.ASCENDING)  # next pitchclass
+    pos = pitches.index_of(3, 7)  # octave 3, MusicPitchClass 7 -> index
+    next_pos = pitches.transpose(pos, Direction.ASCENDING)  # next MusicPitchClass
     octave_pitch_class = pitches.get_at(next_pos)
-    print(f'PitchRange: pos {pos} -> next pos {next_pos} -> (octave, pitchclass) {octave_pitch_class}')
+    print(f'PitchRange: pos {pos} -> next pos {next_pos} -> (octave, MusicPitchClass) {octave_pitch_class}')
 
 
 def test_patterns():
     # New composition
     project = MusicProject('Test Patterns',
-                           MusicPattern("C Major", Cardinality.HEPTA, PatternType.SCALE, PatternMode.major_mode, PitchClass.C)
+                           MusicPattern("C Major", Cardinality.HEPTA, PatternType.SCALE, PatternMode.major_mode, MusicPitchClass.C)
                            )
     pitch_classes = project.pattern.pitch_classes
     print (f'Pattern pitch classes: {pitch_classes}')
@@ -75,16 +73,16 @@ def test_patterns():
     print("Minor7 Chord Intervals:", minor7_chord.pitch_class_intervals, "Pitch classes: ", minor7_chord.pitch_classes)
 
     # Show pitch class circle
-    pc_circle = Circle(Constants.TWELVE, PitchClass.NAMES_SHARP)
+    pc_circle = Circle(MusicPitchClass.TWELVE, MusicPitchClass.NAMES_SHARP)
     pc_circle.show()
 
     # Patterns: Diatonic scales
-    scale5cmajor = MusicPattern("Pentatonic C major", Cardinality.PENTA, PatternType.SCALE, PatternMode.major_mode, PitchClass.C)
+    scale5cmajor = MusicPattern("Pentatonic C major", Cardinality.PENTA, PatternType.SCALE, PatternMode.major_mode, MusicPitchClass.C)
     print(scale5cmajor.pitch_class_intervals, scale5cmajor.pitch_classes)
-    scale7cmajor = MusicPattern("Heptatonic C major", Cardinality.HEPTA, PatternType.SCALE, PatternMode.major_mode, PitchClass.C,)
+    scale7cmajor = MusicPattern("Heptatonic C major", Cardinality.HEPTA, PatternType.SCALE, PatternMode.major_mode, MusicPitchClass.C,)
     print(scale7cmajor.pitch_class_intervals, scale7cmajor.pitch_classes)
 
-    #    pc_circle.show(pcp7.majormodeschromatic, PitchClass.NAMES_SHARP, 'Major circle')
+    #    pc_circle.show(pcp7.majormodeschromatic, MusicPitchClass.NAMES_SHARP, 'Major circle')
 
 def test_helix():
     # Show helix

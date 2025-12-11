@@ -52,7 +52,7 @@ class ParallelPatternChordGenerator(MusicGenerator):
         self.octave_in = octave_in
         self.quarterLength_in = quarterLength_in
 
-    def produce(self) -> stream.Stream:
+    def generate(self) -> stream.Stream:
         """ Generate a stream of voices from the chord progression """
         return create_stream_from_chords(self.chord_progression,
                                          self.number_of_voices,

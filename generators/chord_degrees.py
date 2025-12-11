@@ -3,17 +3,15 @@ Musicom generators module - scale library
 Module for generating musical scales and chords.
 """
 from typing import List
-from structures.unit import MusicUnit
-from structures.pattern import MusicPattern
-from structures.time import MusicTime
-from music21 import roman, stream
+from structures import MusicUnit, MusicPattern, MusicTime
 from converters.musicpy_converter import pattern_to_mpscale
 from converters.music21_converter import pattern_to_m21scale
 from converters.time import timestep_duration_to_quarter_length
 from converters.musicpy_converter import chord_to_unit
 from converters.music21_converter import stream_to_unit
+from music21 import roman, stream
 
-from transformers.base import MusicGenerator
+from .base import MusicGenerator
 
 class ChordDegreeGenerator (MusicGenerator):
     """ Chord generator """

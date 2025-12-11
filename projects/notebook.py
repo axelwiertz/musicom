@@ -3,7 +3,7 @@ MusicPy - Notebook examples
 """
 
 from structures.instrument import MidiInstrument
-from base.twelvetone import PitchClass
+from base.twelvetone import MusicPitchClass
 from structures import MusicUnit
 from structures.pattern import MusicPattern
 from rules.diatonic import Diatonic
@@ -47,7 +47,7 @@ def mp_percussion_notebook():
 
 def standard_notebook ():
 
-    scale7 = MusicPattern (Cardinality.HEPTA, Diatonic.SCALE, PitchClass.C , Diatonic.major_mode)
+    scale7 = MusicPattern (Cardinality.HEPTA, Diatonic.SCALE, MusicPitchClass.C , Diatonic.major_mode)
         # (TETRA,1,MAJOR7), (TETRA,2,MAJOR7), (TETRA,6,MAJOR7), (TETRA,2,MAJOR7)
         ['I7', 'II7', 'VI7', 'II7'],
     # TETRADIC PROGRESSIONS

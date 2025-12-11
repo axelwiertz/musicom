@@ -1,6 +1,6 @@
 """Module for defining musical patterns based on diatonic scales, modes and intervals."""
 from typing import Tuple, List
-from structures import Constants, MusicPitches, Direction
+from structures import MusicPitchClass, MusicPitch, Direction
 from rules import DiatonicPatterns
 from utilities import sequence_rotations, interval_to_step
 from .base import Base
@@ -25,7 +25,7 @@ class MusicPattern(Base):
         self._pitch_class_intervals = []
         self.set_pitch_class_intervals()
         # Connect to chromatic pitch helix
-        self._pitches = MusicPitches()
+        self._pitches = MusicPitch()
 
         self._modes = sequence_rotations(self._pitch_class_intervals)
         self._modes_helix = [interval_to_step(m) for m in self._modes]
@@ -62,7 +62,7 @@ class MusicPattern(Base):
             return () # Empty tuple if no tonic
         pitch_classes = []
         for interval in self.pitch_class_intervals_to_tonic():
-            pc = (self.tonic_pitch_class + interval) % Constants.TWELVE
+            pc = (self.tonic_pitch_class + interval) % MusicPitchClass.TWELVE
             pitch_classes.append(pc)
 
         return tuple(pitch_classes)
@@ -89,8 +89,8 @@ class MusicPattern(Base):
 
     def transpose(self, pitch_interval: int, direction: int = Direction.ASCENDING) -> 'MusicPattern':
         """Return new pattern transposed by pitch_interval on the helix."""
-        new_tonic = (self.tonic_pitch_class + direction * pitch_interval) % Constants.TWELVE
-        new_octave = self.tonic_octave + (self.tonic_pitch_class + direction * pitch_interval) // Constants.TWELVE
+        new_tonic = (self.tonic_pitch_class + direction * pitch_interval) % MusicPitchClass.TWELVE
+        new_octave = self.tonic_octave + (self.tonic_pitch_class + direction * pitch_interval) // MusicPitchClass.TWELVE
 
         return MusicPattern(
             name=f"{self.name} (transposed)",

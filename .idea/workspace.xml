@@ -4,27 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="refactoring structures, patterns, rules">
+    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="unit and pattern">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis/m21.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/music21_analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis/mp.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/musicpy_analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/m21.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/music21_converter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/mp.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/musicpy_converter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/project.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/project.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/unit.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/unit.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/converters/music21_converter.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/music21_converter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/converters/musicpy_converter.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/musicpy_converter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/converters/pitch.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/pitch.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/generators/chord_degrees.py" beforeDir="false" afterPath="$PROJECT_DIR$/generators/chord_degrees.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/arvo_project.py" beforeDir="false" afterPath="$PROJECT_DIR$/research/arvo_project.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generators/from_chord.py" beforeDir="false" afterPath="$PROJECT_DIR$/generators/from_chord.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/balfolk.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/balfolk.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/bigyellowtaxi.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/projects/bigyellowtaxi.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/examples/3voices.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/examples/3voices.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/examples/guide.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/projects/examples/guide.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rules/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/rules/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rules/rhythm.py" beforeDir="false" afterPath="$PROJECT_DIR$/rules/time.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/rhythm.py" beforeDir="false" afterPath="$PROJECT_DIR$/research/rhythm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/soundwave.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/soundwave.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/notebook.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/notebook.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/research/musicdata.py" beforeDir="false" afterPath="$PROJECT_DIR$/research/musicdata.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/research/pitch_class_space.py" beforeDir="false" afterPath="$PROJECT_DIR$/research/pitch_class_space.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/research/serial.py" beforeDir="false" afterPath="$PROJECT_DIR$/research/serial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/structures/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/structures/network.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/network.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/structures/pattern.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/pattern.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/structures/pitch.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/pitch.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/structures/project.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/project.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/structures/time.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/time.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/structures/unit.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/unit.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testers/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/research/pianoroll.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testers/test_converters.py" beforeDir="false" afterPath="$PROJECT_DIR$/testers/test_converters.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testers/test_generators.py" beforeDir="false" afterPath="$PROJECT_DIR$/testers/test_generators.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testers/test_structures.py" beforeDir="false" afterPath="$PROJECT_DIR$/testers/test_structures.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utilities/music21_init.py" beforeDir="false" afterPath="$PROJECT_DIR$/utilities/music21_init.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -213,15 +218,8 @@
       <workItem from="1765231788731" duration="1002000" />
       <workItem from="1765260477847" duration="11360000" />
       <workItem from="1765295107440" duration="9289000" />
-      <workItem from="1765394434639" duration="6808000" />
-    </task>
-    <task id="LOCAL-00136" summary="Theory and library">
-      <option name="closed" value="true" />
-      <created>1761386952389</created>
-      <option name="number" value="00136" />
-      <option name="presentableId" value="LOCAL-00136" />
-      <option name="project" value="LOCAL" />
-      <updated>1761386952390</updated>
+      <workItem from="1765394434639" duration="6885000" />
+      <workItem from="1765472107333" duration="14735000" />
     </task>
     <task id="LOCAL-00137" summary="Helix classes">
       <option name="closed" value="true" />
@@ -607,7 +605,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765306484734</updated>
     </task>
-    <option name="localTasksCounter" value="185" />
+    <task id="LOCAL-00185" summary="unit and pattern">
+      <option name="closed" value="true" />
+      <created>1765406319328</created>
+      <option name="number" value="00185" />
+      <option name="presentableId" value="LOCAL-00185" />
+      <option name="project" value="LOCAL" />
+      <updated>1765406319328</updated>
+    </task>
+    <option name="localTasksCounter" value="186" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -640,7 +646,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="adding librosa" />
     <MESSAGE value="MusicSection" />
     <MESSAGE value="pitch_intervals derived" />
     <MESSAGE value="separate converters" />
@@ -665,7 +670,8 @@
     <MESSAGE value="project converters" />
     <MESSAGE value="projects" />
     <MESSAGE value="refactoring structures, patterns, rules" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactoring structures, patterns, rules" />
+    <MESSAGE value="unit and pattern" />
+    <option name="LAST_COMMIT_MESSAGE" value="unit and pattern" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -716,7 +722,7 @@
     <SUITE FILE_PATH="coverage/musicom$packages.coverage" NAME="packages Coverage Results" MODIFIED="1763500800882" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testers" />
     <SUITE FILE_PATH="coverage/musicom$test_converters.coverage" NAME="test_converters Coverage Results" MODIFIED="1764580867856" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testers" />
     <SUITE FILE_PATH="coverage/musicom$test_structures.coverage" NAME="test_structures Coverage Results" MODIFIED="1765298366435" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testers" />
-    <SUITE FILE_PATH="coverage/musicom$test_generators.coverage" NAME="test_generators Coverage Results" MODIFIED="1763503314858" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testers" />
+    <SUITE FILE_PATH="coverage/musicom$test_generators.coverage" NAME="test_generators Coverage Results" MODIFIED="1765487321169" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testers" />
     <SUITE FILE_PATH="coverage/musicom$3voices.coverage" NAME="3voices Coverage Results" MODIFIED="1764841586724" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/projects/examples" />
     <SUITE FILE_PATH="coverage/musicom$test_transformators.coverage" NAME="test_transformators Coverage Results" MODIFIED="1764702850584" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testers" />
     <SUITE FILE_PATH="coverage/musicom$library.coverage" NAME="library Coverage Results" MODIFIED="1759609971862" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

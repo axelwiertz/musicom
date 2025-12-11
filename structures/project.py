@@ -1,11 +1,10 @@
 """Defines the Project, Section, and Voice classes for the music composition framework."""
 from typing import List
-from base import MidiInstrument, PitchRange
 from .base import Base
 from .matrix import MusicMatrix
 from .time import MusicTime
 from .pattern import MusicPattern
-
+from structures import PitchRange, MidiInstrument
 
 class MusicVoice(Base):
     """Represents a horizontal voice in the project."""

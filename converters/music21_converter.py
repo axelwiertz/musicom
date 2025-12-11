@@ -18,7 +18,7 @@ def stream_to_chord (stream_in: stream.Stream) -> structures.chord:
 def key_to_pattern(m21key: key.Key) -> MusicPattern:
     """Convert music21 key to MusicPattern."""
 
-    tonic_pc = m21key.tonic.pitchClass
+    tonic_pc = m21key.tonic.MusicPitchClass
     #TODO: lookup mode index from mode names by using a reverse mapping of Mode.mode_names
     mode_index = PatternMode.mode_names.index(m21key.mode)
     mode = PatternMode(mode_index)
