@@ -35,12 +35,9 @@ def mp_percussion_notebook():
     percussion_unit = MusicUnit()
     percussion_unit.chord = drm1 + drm2 + drm3
 
-    comp = MusicComposition()
-    comp.piece = structures.piece(percussion_unit.chord,
-                                  [MidiInstrument.PIANO],
 
-    comp = MusicComposition ()
-    return comp
+    piece = structures.piece(percussion_unit.chord,
+                                  [MidiInstrument.PIANO])
 
 
     scale7 = MusicPattern(Cardinality.HEPTA, Diatonic.SCALE, TwelveTET.C, Diatonic.major_mode)
@@ -61,7 +58,6 @@ def standard_notebook ():
     # 1, 5, 6, 5  i v VI V
         # 1,2,4,5  i II iv V
     # 1, 2, 1, 2  I II I II
-    ]
     # 1,2,4,5  i II iv V
     scale7 = MusicPattern(Cardinality.HEPTA, Diatonic.SCALE, TwelveTET.A, Diatonic.minor_mode)
         ]
