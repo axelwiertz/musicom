@@ -1,10 +1,12 @@
 """Module for defining musical patterns based on diatonic scales, modes and intervals."""
 from typing import Tuple, List
-from structures import MusicPitchClass, MusicPitch, Direction
+from .pitch import MusicPitchClass, MusicPitch, Direction
 from rules import DiatonicPatterns
 from utilities import sequence_rotations, interval_to_step
 from .base import Base
 
+#TODO: Add methods for pattern manipulation, e.g., inversion, retrograde, etc.
+#TODO: Patterns are units?
 
 class MusicPattern(Base):
     def __init__(self,
@@ -16,23 +18,31 @@ class MusicPattern(Base):
                  tonic_octave: int = 4,
                  ):
         super().__init__(name)
-        self.cardinality = cardinality
-        self.pattern_type = pattern_type
-        self.mode = mode
+        self._cardinality = cardinality
+        self._pattern_type = pattern_type
+        if self._cardinality is not None and self._pattern_type is not None:
+            self._pitch_class_intervals = tuple(DiatonicPatterns.dict[self._cardinality][self._pattern_type])
+        else:
+            self._pitch_class_intervals = ()
+
+        self._modes = sequence_rotations(self._pitch_class_intervals)
+        self._mode = mode
+
+        # Connect to absolute pitches
+        self._pitches = MusicPitch()
+        self._modes_pitches = [interval_to_step(m) for m in self._modes]
+
         self.tonic_pitch_class = tonic_pitch_class
         self.tonic_octave = tonic_octave
 
-        self._pitch_class_intervals = []
-        self.set_pitch_class_intervals()
-        # Connect to chromatic pitch helix
-        self._pitches = MusicPitch()
-
-        self._modes = sequence_rotations(self._pitch_class_intervals)
-        self._modes_helix = [interval_to_step(m) for m in self._modes]
-
+    def set_mode(self, mode_index: int):
+        """Set the current mode by index."""
+        if mode_index < 0 or mode_index >= len(self._modes):
+            raise ValueError(f"Mode index {mode_index} out of range.")
+        self._mode = mode_index
 
     @property
-    def pitch_class_intervals(self) -> List[int]:
+    def pitch_class_intervals(self) -> Tuple[int]:
         return self._pitch_class_intervals
     
     def pitch_class_intervals_from_mode(self, mode_index: int) -> List[int]:
@@ -94,22 +104,19 @@ class MusicPattern(Base):
 
         return MusicPattern(
             name=f"{self.name} (transposed)",
-            cardinality=self.cardinality,
-            pattern_type=self.pattern_type,
-            mode=self.mode,
+            cardinality=self._cardinality,
+            pattern_type=self._pattern_type,
+            mode=self._mode,
             tonic_pitch_class=new_tonic,
             tonic_octave=new_octave,
         )
 
     def degree_to_helix_index(self, degree: int) -> int:
         """Get helix index for a pattern degree (1-based)."""
-        if degree < 1 or degree > self.cardinality:
-            raise ValueError(f"Degree {degree} out of range [1, {self.cardinality}]")
+        if degree < 1 or degree > self._cardinality:
+            raise ValueError(f"Degree {degree} out of range [1, {self._cardinality}]")
         return self.helix_indices[degree - 1]
 
-    def set_pitch_class_intervals(self):
-        if self.cardinality is not None and self.pattern_type is not None:
-            self._pitch_class_intervals = tuple(DiatonicPatterns.dict[self.cardinality][self.pattern_type])
 
 
 class PatternSequence:
