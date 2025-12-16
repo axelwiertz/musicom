@@ -118,10 +118,3 @@ def pattern_to_unit (pattern : MusicPattern) -> MusicUnit :
 
     return unit
     
-def pattern_to_excel (pattern : MusicPattern) :
-    # Save pattern modes to Excel files
-    pd_modes = pd.DataFrame(pattern.modes)
-    pd_modes_helix = pd.DataFrame(pattern.modes_helix)
-
-    pd_modes.to_excel(Config.DEFAULT_PATH + 'interval_patternModes.xlsx', index=True, sheet_name='MusicPattern')
-    pd_modes_helix.to_excel(Config.DEFAULT_PATH + 'interval_patternModesHelix.xlsx', index=True, sheet_name='MusicPattern')

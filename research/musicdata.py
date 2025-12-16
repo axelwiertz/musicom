@@ -2,12 +2,10 @@
 import pandas as pd
 import numpy as np
 
-from converters.unit import pattern_to_excel
-from structures import MusicPitch, MusicPitchClass
+from structures import MusicPitch, MusicPitchClass, MusicPattern
+from converters import pattern_to_excel
 from rules import Cardinality, PatternMode, PatternType
 from utilities import Config
-from converters import name_to_midi
-from structures import MusicPattern
 
 from music21 import interval
 
@@ -25,15 +23,6 @@ def pitch_data():
         'PitchName': pitch_numbers
     })
     pitch_dataframe.to_excel(Config.DEFAULT_PATH + 'chromaticpitches.xlsx', index=False, sheet_name='Pitches')
-
-    # Create pitches
-
-    def pitch_to_freq(pitch_name: str) -> float:
-        if pitch_name == '':
-            return 0.0
-        midi_number = name_to_midi(pitch_name)
-        freq = 2 ** ((midi_number - 69) / 12) * 440
-        return freq
 
 
 

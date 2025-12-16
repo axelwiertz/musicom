@@ -1,11 +1,4 @@
 """Module defining chord progression rules and common progressions."""
-from structures import MusicPattern
-from rules import Cardinality, PatternType
-
-class Scale7Triad:
-    def __init__(self):
-        self.pattern_major = MusicPattern("Major triad", Cardinality.TRIA, PatternType.MAJOR)
-        self.pattern_minor = MusicPattern("Minor triad", Cardinality.TRIA, PatternType.MINOR)
 
 # TODO: Implementing secondary dominants and modal interchange: borrow chords from parallel keys.
 

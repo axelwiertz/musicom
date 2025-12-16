@@ -4,10 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="pattern structure, isolated visualization">
+    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="pattern structures and diatonic constants merged">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rules/pattern.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/pattern.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/pattern.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/converters/pattern.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/pattern.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/converters/pitch.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/pitch.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/converters/unit.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/unit.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/examples/guide.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/projects/examples/guide.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/research/musicdata.py" beforeDir="false" afterPath="$PROJECT_DIR$/research/musicdata.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rules/progression.py" beforeDir="false" afterPath="$PROJECT_DIR$/rules/progression.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -202,15 +206,7 @@
       <workItem from="1765472107333" duration="14816000" />
       <workItem from="1765886966291" duration="2206000" />
       <workItem from="1765889252963" duration="3224000" />
-      <workItem from="1765892532694" duration="3121000" />
-    </task>
-    <task id="LOCAL-00139" summary="Diatonic layer and classes">
-      <option name="closed" value="true" />
-      <created>1761426633939</created>
-      <option name="number" value="00139" />
-      <option name="presentableId" value="LOCAL-00139" />
-      <option name="project" value="LOCAL" />
-      <updated>1761426633940</updated>
+      <workItem from="1765892532694" duration="4507000" />
     </task>
     <task id="LOCAL-00140" summary="Harmony and theory">
       <option name="closed" value="true" />
@@ -596,7 +592,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765893564459</updated>
     </task>
-    <option name="localTasksCounter" value="188" />
+    <task id="LOCAL-00188" summary="pattern structures and diatonic constants merged">
+      <option name="closed" value="true" />
+      <created>1765895872673</created>
+      <option name="number" value="00188" />
+      <option name="presentableId" value="LOCAL-00188" />
+      <option name="project" value="LOCAL" />
+      <updated>1765895872673</updated>
+    </task>
+    <option name="localTasksCounter" value="189" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -629,7 +633,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="separate converters" />
     <MESSAGE value="module structure" />
     <MESSAGE value="logical split of files" />
     <MESSAGE value="projects template" />
@@ -654,7 +657,8 @@
     <MESSAGE value="unit and pattern" />
     <MESSAGE value="pitch(class) structure and converters" />
     <MESSAGE value="pattern structure, isolated visualization" />
-    <option name="LAST_COMMIT_MESSAGE" value="pattern structure, isolated visualization" />
+    <MESSAGE value="pattern structures and diatonic constants merged" />
+    <option name="LAST_COMMIT_MESSAGE" value="pattern structures and diatonic constants merged" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

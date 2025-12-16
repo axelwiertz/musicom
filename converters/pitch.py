@@ -6,7 +6,17 @@ from structures import MusicPitch, MusicPitchClass
 
 # Constants
 C0_MIDI = 12  # MIDI number for C0
+A4_MIDI = 69  # MIDI number for A4
 A4_FREQ = 440.0  # Frequency of A4 in Hz
+
+
+def pitch_to_freq(pitch_name: str) -> float:
+    if pitch_name == '':
+        return 0.0
+    midi_number = name_to_midi(pitch_name)
+    freq = 2 ** ((midi_number - A4_MIDI) / MusicPitchClass.TWELVE) * A4_FREQ
+    return freq
+
 
 def pitch_to_pitch_class (i : int) -> int:
     return i % MusicPitchClass.TWELVE
@@ -25,7 +35,6 @@ def freq_to_midi(freq):
     """Return MIDI note number (can be fractional) for a given frequency (Hz).
     return name_to_midi('A4') + float(MusicPitchClass.TWELVE) * log2(freq / Constants.A4_FREQ)"""
     return hz_to_midi(freq)
-
 
 def semitone_ratio(n=1):
     """Return frequency ratio for n semitones: 2^(n/12)."""
