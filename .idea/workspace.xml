@@ -4,16 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="pitch(class) structure and converters">
-      <change afterPath="$PROJECT_DIR$/visualization/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/visualization/cycle.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/visualization/helix.py" afterDir="false" />
+    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="pattern structure, isolated visualization">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/research/musicdata.py" beforeDir="false" afterPath="$PROJECT_DIR$/research/musicdata.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rules/pattern.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/structures/pattern.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/pattern.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/pitch.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/pitch.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/time.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/time.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -208,15 +202,7 @@
       <workItem from="1765472107333" duration="14816000" />
       <workItem from="1765886966291" duration="2206000" />
       <workItem from="1765889252963" duration="3224000" />
-      <workItem from="1765892532694" duration="983000" />
-    </task>
-    <task id="LOCAL-00138" summary="Time circle and transformation">
-      <option name="closed" value="true" />
-      <created>1761410188943</created>
-      <option name="number" value="00138" />
-      <option name="presentableId" value="LOCAL-00138" />
-      <option name="project" value="LOCAL" />
-      <updated>1761410188943</updated>
+      <workItem from="1765892532694" duration="3121000" />
     </task>
     <task id="LOCAL-00139" summary="Diatonic layer and classes">
       <option name="closed" value="true" />
@@ -602,7 +588,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765488061847</updated>
     </task>
-    <option name="localTasksCounter" value="187" />
+    <task id="LOCAL-00187" summary="pattern structure, isolated visualization">
+      <option name="closed" value="true" />
+      <created>1765893564459</created>
+      <option name="number" value="00187" />
+      <option name="presentableId" value="LOCAL-00187" />
+      <option name="project" value="LOCAL" />
+      <updated>1765893564459</updated>
+    </task>
+    <option name="localTasksCounter" value="188" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -635,7 +629,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="pitch_intervals derived" />
     <MESSAGE value="separate converters" />
     <MESSAGE value="module structure" />
     <MESSAGE value="logical split of files" />
@@ -660,7 +653,8 @@
     <MESSAGE value="refactoring structures, patterns, rules" />
     <MESSAGE value="unit and pattern" />
     <MESSAGE value="pitch(class) structure and converters" />
-    <option name="LAST_COMMIT_MESSAGE" value="pitch(class) structure and converters" />
+    <MESSAGE value="pattern structure, isolated visualization" />
+    <option name="LAST_COMMIT_MESSAGE" value="pattern structure, isolated visualization" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -703,6 +697,7 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/musicom$systematic.coverage" NAME="systematic Coverage Results" MODIFIED="1765230821856" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/projects/examples" />
     <SUITE FILE_PATH="coverage/musicom$pitchsequence.coverage" NAME="pitchsequence Coverage Results" MODIFIED="1764794483421" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/transformers" />
+    <SUITE FILE_PATH="coverage/musicom$pattern.coverage" NAME="pattern Coverage Results" MODIFIED="1765893413215" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/structures" />
     <SUITE FILE_PATH="coverage/musicom$constants.coverage" NAME="constants Coverage Results" MODIFIED="1763500522878" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testers" />
     <SUITE FILE_PATH="coverage/musicom$three_voices.coverage" NAME="three_voices Coverage Results" MODIFIED="1764839633473" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/projects/examples" />
     <SUITE FILE_PATH="coverage/musicom$m21.coverage" NAME="m21 Coverage Results" MODIFIED="1764847069384" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/converters" />
@@ -710,6 +705,7 @@
     <SUITE FILE_PATH="coverage/musicom$percussion_voice.coverage" NAME="percussion_voice Coverage Results" MODIFIED="1764847126266" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/projects/research" />
     <SUITE FILE_PATH="coverage/musicom$packages.coverage" NAME="packages Coverage Results" MODIFIED="1763500800882" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testers" />
     <SUITE FILE_PATH="coverage/musicom$test_converters.coverage" NAME="test_converters Coverage Results" MODIFIED="1764580867856" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testers" />
+    <SUITE FILE_PATH="coverage/musicom$musicdata.coverage" NAME="musicdata Coverage Results" MODIFIED="1765894413361" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/research" />
     <SUITE FILE_PATH="coverage/musicom$test_structures.coverage" NAME="test_structures Coverage Results" MODIFIED="1765298366435" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testers" />
     <SUITE FILE_PATH="coverage/musicom$test_generators.coverage" NAME="test_generators Coverage Results" MODIFIED="1765487321169" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testers" />
     <SUITE FILE_PATH="coverage/musicom$3voices.coverage" NAME="3voices Coverage Results" MODIFIED="1764841586724" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/projects/examples" />

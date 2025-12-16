@@ -2,7 +2,6 @@
 from structures import MusicPattern
 from rules import Cardinality, PatternType
 
-
 class Scale7Triad:
     def __init__(self):
         self.pattern_major = MusicPattern("Major triad", Cardinality.TRIA, PatternType.MAJOR)
