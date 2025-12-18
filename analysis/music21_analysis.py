@@ -6,10 +6,8 @@ from music21 import chord, roman, analysis, stream
 
 def score_analyze(score: stream.Score):
     # Analyze score
-
     score.plot('3d')
     score.plot('histogram','pitch')
-    score.show('abc')
     # Key
     key01 = score.analyze('key')
     print('Score :')

@@ -10,6 +10,7 @@ class IntervalClasses:
                     interval.DiatonicInterval(interval.Specifier.MINOR, 3)]
 
 class IntervalClass:
+
     # 7 Hepta Interval classes
     perfect_interval_classes = ('P1', 'P4', 'P5', 'P8')
     imperfect_interval_classes = ('M2', 'm3', 'M3', 'm6', 'M6', 'm7', 'M7')

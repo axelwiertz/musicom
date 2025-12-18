@@ -1,11 +1,6 @@
-from typing import List
-from structures import Constants, MusicPitchClass, MusicPitch
-from structures import Helix, Circle, Direction
-from structures import MusicTime, MusicPattern, MusicUnit, MusicVoice, MusicMatrix, MusicProject, MusicSection
-from research.rhythm import QuantizedEvent,seconds_to_ticks, MetricalNode, HierarchicalEvent
+from structures import MusicPitchClass, MusicPitch, Direction, MusicTime, MusicPattern, MusicUnit, MusicVoice, MusicMatrix, MusicProject, MusicSection
 from rules import Cardinality, PatternType, PatternMode
 from converters import pattern_to_m21scale
-
 
 
 def test_project():
@@ -72,26 +67,11 @@ def test_patterns():
     minor7_chord = MusicPattern("minor7 chord", Cardinality.TETRA, PatternType.MINOR7)  # Minor7 chord
     print("Minor7 Chord Intervals:", minor7_chord.pitch_class_intervals, "Pitch classes: ", minor7_chord.pitch_classes)
 
-    # Show pitch class circle
-    pc_circle = Circle(MusicPitchClass.TWELVE, MusicPitchClass.NAMES_SHARP)
-    pc_circle.show()
-
     # Patterns: Diatonic scales
     scale5cmajor = MusicPattern("Pentatonic C major", Cardinality.PENTA, PatternType.SCALE, PatternMode.major_mode, MusicPitchClass.C)
     print(scale5cmajor.pitch_class_intervals, scale5cmajor.pitch_classes)
     scale7cmajor = MusicPattern("Heptatonic C major", Cardinality.HEPTA, PatternType.SCALE, PatternMode.major_mode, MusicPitchClass.C,)
     print(scale7cmajor.pitch_class_intervals, scale7cmajor.pitch_classes)
-
-    #    pc_circle.show(pcp7.majormodeschromatic, MusicPitchClass.NAMES_SHARP, 'Major circle')
-
-def test_helix():
-    # Show helix
-    h = Helix()
-    h.show()
-    # Test functions
-    # Show rhythm in circle
-    rc = Circle(4, ['Down', 'Up', 'Down', 'Up'])
-    rc.show()
 
 
 def test_rhythm_time():
@@ -101,41 +81,10 @@ def test_rhythm_time():
 
     # Music time and meter
     time = MusicTime(16, 4, 4, 120)
-    time.show('16 timesteps circle')
+    time.show()
 
-    # Example quantized events
-    bpm = 120.0
-    tpb = 96  # high-resolution
-    times = [0.0, 0.5, 0.75]
-
-    quant_events: List[QuantizedEvent] = [
-        QuantizedEvent(tick=seconds_to_ticks(t, bpm, tpb),
-                       ticks_per_beat=tpb,
-                       duration_ticks=max(1, seconds_to_ticks(0.1, bpm, tpb)))
-        for t in times
-    ]
-    print("Quantized Events:")
-    for qe in quant_events:
-        print(qe)
-
-    # Build a simple hierarchy for 120 BPM (0.5s per beat), 4/4 measure
-    beat = MetricalNode('beat', period=0.5, phase_offset=0.0)
-    measure = MetricalNode('measure', period=2.0, phase_offset=0.0, children=[beat])
-    print(measure)
-    sub = MetricalNode('eighth', period=0.25, phase_offset=0.0, children=[])
-    beat.children.append(sub)
-
-    # Map onsets into hierarchy (choose nearest level/phase)
-    times = [0.0, 0.5, 0.75]
-    hier_events = []
-    for t in times:
-        # find closest metrical level and its phase
-        # naive: pick beat-level for demonstration
-        hier_events.append(HierarchicalEvent(time=t, node=beat, label='onset'))
-    print(hier_events)
 
 def main():
-    test_helix()
     test_project()
     test_pitch()
     test_patterns()

@@ -1,10 +1,10 @@
 """Converters between music21 and other structures."""
 import platform
 
-from base import Cardinality, PatternType, PatternMode
+from structures.unit import MusicEvent
 from utilities import Config
-from structures import MusicTime, MusicUnit, MusicMatrix, MusicPattern
-from converters import time_to_meter, time_to_tempo
+from structures import Cardinality, PatternType, MusicTime, MusicUnit, MusicMatrix, MusicPattern
+from converters.time import time_to_meter, time_to_tempo
 from music21 import serial, stream, note, midi, converter, scale, key
 from musicpy import structures
 from showscore import show
@@ -18,29 +18,25 @@ def stream_to_chord (stream_in: stream.Stream) -> structures.chord:
 def key_to_pattern(m21key: key.Key) -> MusicPattern:
     """Convert music21 key to MusicPattern."""
 
-    tonic_pc = m21key.tonic.MusicPitchClass
-    #TODO: lookup mode index from mode names by using a reverse mapping of Mode.mode_names
-    mode_index = PatternMode.mode_names.index(m21key.mode)
-    mode = PatternMode(mode_index)
-
-    # Assuming a standard diatonic scale from a key
-    pattern = MusicPattern(
+    # Assuming a standard heptatonic scale from a key
+    pattern = MusicPattern("Heptatonic Scale from Key",
         cardinality=Cardinality.HEPTA,
         pattern_type=PatternType.SCALE,
-        mode=mode,
-        tonic_pitch_class=tonic_pc
     )
+    # Set mode and tonic
+    pattern.set_mode_name(m21key.mode)
+    pattern.set_tonic_pitch_class(m21key.tonic.pitchClass)
+
     return pattern
 
 
 def pattern_to_m21scale (pattern : MusicPattern) -> scale.ConcreteScale:
     # Convert pattern to music21 scale
     m21scale = scale.ConcreteScale()
-
     # Diatonic (7 pitch class) scale
     if pattern.cardinality == Cardinality.HEPTA and pattern.pattern_type == PatternType.SCALE:
         # m21 scale from key
-        m21key = key.Key(mode=PatternMode.mode_names[pattern.mode], tonic=note.Pitch(pattern.tonic_pitch_class))
+        m21key = key.Key(mode=pattern.mode_name, tonic=note.Pitch(pattern.tonic_pitch_class))
         m21scale = m21key.getScale()
 
     return m21scale
@@ -49,6 +45,7 @@ def pattern_to_m21scale (pattern : MusicPattern) -> scale.ConcreteScale:
 def tonerow_to_stream (tonerow_base: serial.ToneRow = serial.ToneRow(row=[0, 4, 7, 4]),
                    octave : int = 4
                    ) -> stream.Stream:
+    """Convert a tone row to a music21 stream."""
     stream_out = stream.Stream()
     # Tone row
     for pcs in enumerate(tonerow_base):
@@ -137,12 +134,15 @@ def stream_to_unit (stream_in : stream.Stream) -> MusicUnit:
     # Convert m21 stream to unit
     unit = MusicUnit()
     # Transfer notes, rests and chords from the stream to the unit
-    for element in stream_in:
+    for element in stream_in.flatten():
         if isinstance(element, (note.Note, note.Rest)):
             if isinstance(element, note.Note):
-                unit.pitch_nodes += [element.pitch.midi]
-                unit.durations += [element.duration.quarterLength]
-                unit.volumes += [element.volume.velocity if element.volume.velocity is not None else 100]
+                event = MusicEvent(pitch=element.pitch.midi,
+                                   volume=element.volume.velocity if element.volume.velocity is not None else 100,
+                                   duration=element.duration.quarterLength,
+                                    onset_time = element.offset,
+                )
+                unit.add_event(event)
             elif isinstance(element, note.Rest):
                 # Add rest as onset interval
                 if len(unit.onset_intervals) == 0:

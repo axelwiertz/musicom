@@ -1,4 +1,4 @@
-"""MIDI Constants and Mappings for General MIDI Standard."""
+"""Defines constants for MIDI instruments, channels, and percussion mapping."""
 
 class MidiInstrument:
     # General MIDI instrument numbers (0-127)

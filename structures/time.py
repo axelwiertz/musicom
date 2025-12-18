@@ -1,7 +1,9 @@
-"""Music time representation: rhythm and meter as circular structures."""
+"""Music Time Structure"""
+
 from visualization import Cycle
 
 class MusicTime:
+    """Music Time Structure: rhythmic cycles, meter and tempo"""
     # Horizontal time: rhythmic cycles and tempo
     def __init__(self,
                  timesteps: int = 8, # Number of timesteps (ticks) per cycle (measure, bar)

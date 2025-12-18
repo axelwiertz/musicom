@@ -1,3 +1,4 @@
+"""Converters between MusicTime and music21 time and tempo representations."""
 from structures.time import MusicTime
 from music21 import meter, tempo
 

@@ -1,5 +1,5 @@
 """Converters between music21 Score and MusicPy MusicSection and piece."""
-from structures import MusicSection,MusicTime,MusicMatrix
+from structures import MusicSection, MusicTime, MusicMatrix, MusicPattern
 from music21 import stream
 from musicpy import structures
 from music21py import m21_to_mpy, mpy_to_m21
@@ -7,18 +7,24 @@ from .time import meter_to_time
 from .music21_converter import stream_to_unit, matrix_row_to_stream, key_to_pattern
 
 # Section converters
+def score_to_pattern(score: stream.Score) -> MusicPattern:
+    key = score.analyze('key')
+    return key_to_pattern(key)
+
+def score_to_time(score: stream.Score, timesteps: int) -> MusicTime:
+    if score.timeSignature is not None:
+        time = meter_to_time(score.timeSignature, timesteps,
+                             score.metronomeMarkBoundaries()[0][2].number)
+    else:
+        time = MusicTime(4,4,4)
+    return time
+
 
 def score_to_section(score: stream.Score) -> MusicSection:
     # Convert score parts to matrix of units
     matrix = MusicMatrix(len(score.parts), 1)
-    if score.timeSignature is not None:
-        time = meter_to_time(score.timeSignature, timesteps, score.metronomeMarkBoundaries()[0][2].number)
-    else:
-        time = MusicTime(4,4,4)
 
-    key = score.analyze('key')
-    pattern = key_to_pattern(key)
-    section = MusicSection(score.metadata.title or 'Untitled', time, matrix, pattern)
+    section = MusicSection(score.metadata.title or 'Untitled', None, matrix)
 
     for i, p in enumerate(score.parts):
         matrix.set_unit(i,0, stream_to_unit(p))

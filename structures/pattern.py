@@ -49,16 +49,18 @@ class PatternType:
     MINOR_NINTH = 2
 
 class PatternMode:
-    # 7 Heptatonic scale modes:
-    ionian = major_mode = 0
+    # 7 modes indices:
+    ionian = major = 0
     dorian = 1
     phrygian = 2
     lydian = 3
     mixolydian = 4
-    aeolian = minor_mode = 5
+    aeolian = minor = 5
     locrian = 6
-    mode_names = {ionian:'ionian',dorian:'dorian',phrygian:'phrygian',
-            lydian:'lydian',mixolydian:'mixolydian',aeolian:'aeolian',locrian:'locrian'}
+    mode_names = {ionian:'major',dorian:'dorian',phrygian:'phrygian',
+            lydian:'lydian',mixolydian:'mixolydian',aeolian:'minor',locrian:'locrian'}
+
+    mode_names_reverse = {v:k for k,v in mode_names.items()}
 
 
 class Diatonic:
@@ -139,17 +141,48 @@ class MusicPattern(Base):
         self._pitches = MusicPitch()
         self._modes_pitches = [interval_to_step(m) for m in self._modes]
 
-        self.tonic_pitch_class = tonic_pitch_class
-        self.tonic_octave = tonic_octave
+        self._tonic_pitch_class = tonic_pitch_class
+        self._tonic_octave = tonic_octave
 
-    def set_mode(self, mode_index: int):
+    def set_mode_index(self, mode_index: int):
         """Set the current mode by index."""
         if mode_index < 0 or mode_index >= len(self._modes):
             raise ValueError(f"Mode index {mode_index} out of range.")
         self._mode = mode_index
 
+    def set_mode_name(self, mode_name: str):
+        """Set the current mode by name."""
+        if mode_name not in PatternMode.mode_names_reverse:
+            raise ValueError(f"Mode name {mode_name} is not recognized.")
+        self._mode = PatternMode.mode_names_reverse[mode_name]
+
+    def set_tonic_pitch_class(self, pitch_class: int):
+        """Set the tonic pitch class."""
+        if pitch_class < 0 or pitch_class >= MusicPitchClass.TWELVE:
+            raise ValueError(f"Tonic pitch class {pitch_class} out of range [0, 11].")
+        self._tonic_pitch_class = pitch_class
+
+    def cardinality(self) -> int:
+        """Get the cardinality of the pattern."""
+        return self._cardinality
+
+    def pattern_type(self) -> int:
+        """Get the pattern type."""
+        return self._pattern_type
+
+    @staticmethod
+    def mode_name(self) -> str:
+        """Get the current mode name."""
+        return PatternMode.mode_names.get(self._mode)
+
+    @property
+    def tonic_pitch_class(self) -> int:
+        """Get the tonic pitch class."""
+        return self._tonic_pitch_class
+
     @property
     def pitch_class_intervals(self) -> Tuple[int] | Tuple[()]:
+        """Get pitch class intervals for the pattern."""
         if self._cardinality is not None and self._pattern_type is not None:
             return Diatonic.pattern.get(self._cardinality, {}).get(self._pattern_type, ())
         else:
@@ -163,7 +196,7 @@ class MusicPattern(Base):
 
     def pitch_class_intervals_to_tonic(self) -> List[int]:
         """Get pitch class intervals starting from the tonic pitch class."""
-        if self.tonic_pitch_class is None:
+        if self._tonic_pitch_class is None:
             raise ValueError("Tonic pitch class is not set.")
 
         # Tonic pitch class
@@ -178,11 +211,11 @@ class MusicPattern(Base):
     @property
     def pitch_classes(self) -> Tuple[int, ...]:
         """Calculate absolute pitch classes based on tonic and intervals."""
-        if self.tonic_pitch_class is None:
+        if self._tonic_pitch_class is None:
             return () # Empty tuple if no tonic
         pitch_classes = []
         for interval in self.pitch_class_intervals_to_tonic():
-            pc = (self.tonic_pitch_class + interval) % MusicPitchClass.TWELVE
+            pc = (self._tonic_pitch_class + interval) % MusicPitchClass.TWELVE
             pitch_classes.append(pc)
 
         return tuple(pitch_classes)
@@ -190,12 +223,12 @@ class MusicPattern(Base):
     @property
     def helix_indices(self) -> List[int]:
         """Map pattern pitch classes to helix indices with octave tracking."""
-        if self.tonic_pitch_class is None:
+        if self._tonic_pitch_class is None:
             return []
 
         indices = []
-        current_octave = self.tonic_octave
-        prev_pitch_class = self.tonic_pitch_class
+        current_octave = self._tonic_octave
+        prev_pitch_class = self._tonic_pitch_class
 
         for pc in self.pitch_classes:
             # Detect octave wrap-around
@@ -209,8 +242,8 @@ class MusicPattern(Base):
 
     def transpose(self, pitch_interval: int, direction: int = Direction.ASCENDING) -> 'MusicPattern':
         """Return new pattern transposed by pitch_interval on the helix."""
-        new_tonic = (self.tonic_pitch_class + direction * pitch_interval) % MusicPitchClass.TWELVE
-        new_octave = self.tonic_octave + (self.tonic_pitch_class + direction * pitch_interval) // MusicPitchClass.TWELVE
+        new_tonic = (self._tonic_pitch_class + direction * pitch_interval) % MusicPitchClass.TWELVE
+        new_octave = self._tonic_octave + (self._tonic_pitch_class + direction * pitch_interval) // MusicPitchClass.TWELVE
 
         return MusicPattern(
             name=f"{self.name} (transposed)",

@@ -3,6 +3,7 @@ Musicom converters package
 Converters between different music representations (Music21, MusicPy, MusicUnit, etc.)
 """
 
+"""
 from .time import time_to_meter, time_to_tempo
 from .project import score_to_section, section_to_score, score_to_piece, piece_to_score
 from .unit import unit_to_excel, unit_to_dataframe
@@ -58,7 +59,10 @@ __all__ = [
     'section_to_score',
     'score_to_piece',
     'piece_to_score',
-
 ]
+"""
+
+__all__ = []
+
 
 

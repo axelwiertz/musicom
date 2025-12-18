@@ -4,7 +4,8 @@ from .base import Base
 from .matrix import MusicMatrix
 from .time import MusicTime
 from .pattern import MusicPattern
-from structures import PitchRange, MidiInstrument
+from .pitch import PitchRange
+from .instrument import MidiInstrument
 
 class MusicVoice(Base):
     """Represents a horizontal voice in the project."""

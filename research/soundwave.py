@@ -1,7 +1,4 @@
-"""
-Musicom
-Sound Wave Synthesis and Analysis
-"""
+"""Sound Wave Synthesis and Analysis Module"""
 
 """
 TODO:
