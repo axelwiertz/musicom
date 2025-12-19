@@ -135,20 +135,13 @@ def stream_to_unit (stream_in : stream.Stream) -> MusicUnit:
     unit = MusicUnit()
     # Transfer notes, rests and chords from the stream to the unit
     for element in stream_in.flatten():
-        if isinstance(element, (note.Note, note.Rest)):
-            if isinstance(element, note.Note):
-                event = MusicEvent(pitch=element.pitch.midi,
-                                   volume=element.volume.velocity if element.volume.velocity is not None else 100,
-                                   duration=element.duration.quarterLength,
-                                    onset_time = element.offset,
-                )
-                unit.add_event(event)
-            elif isinstance(element, note.Rest):
-                # Add rest as onset interval
-                if len(unit.onset_intervals) == 0:
-                    unit.onset_intervals += [element.duration.quarterLength]
-                else:
-                    unit.onset_intervals[-1] += element.duration.quarterLength
+        if isinstance(element, note.Note):
+            event = MusicEvent(pitch=element.pitch.midi,
+                               volume=element.volume.velocity if element.volume.velocity is not None else 100,
+                               duration=element.duration.quarterLength,
+                                onset_time = element.offset,
+            )
+            unit.add_event(event)
     return unit
 
 def time_to_stream(stream_ : stream.Stream, time : MusicTime):

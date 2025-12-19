@@ -4,27 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="scales are patterns">
-      <change afterPath="$PROJECT_DIR$/testers/test_visualization.py" afterDir="false" />
+    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="score, stream, section, unit, MusicEvent">
+      <change afterPath="$PROJECT_DIR$/transformers/pitch.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis/music21_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/analysis/music21_analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/converters/music21_converter.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/music21_converter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/project.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/project.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/time.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/time.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/examples/load_and_analyze.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/examples/load_and_analyze.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/research/interval.py" beforeDir="false" afterPath="$PROJECT_DIR$/research/interval.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/research/rhythm.py" beforeDir="false" afterPath="$PROJECT_DIR$/research/rhythm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rules/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/rules/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rules/counterpoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/rules/counterpoint.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/instrument.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/instrument.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/pattern.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/pattern.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/project.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/project.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/soundwave.py" beforeDir="false" afterPath="$PROJECT_DIR$/research/soundwave.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/structures/time.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/time.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/structures/unit.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/unit.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testers/test_structures.py" beforeDir="false" afterPath="$PROJECT_DIR$/testers/test_structures.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,6 +104,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ai.playground.ignore.import.keys.banner.in.settings": "true",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/Users/92591/PycharmProjects/musicom",
@@ -153,8 +139,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-c7e53b3be11b-JavaScript-PY-253.28294.336" />
-        <option value="bundled-python-sdk-0978a7220b69-9867c7d4c0a4-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-253.28294.336" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-PY-253.29346.142" />
+        <option value="bundled-python-sdk-f2b7a9f6281b-6e1f45a539f7-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-253.29346.142" />
       </set>
     </attachedChunks>
   </component>
@@ -223,15 +209,9 @@
       <workItem from="1765886966291" duration="2206000" />
       <workItem from="1765889252963" duration="3224000" />
       <workItem from="1765892532694" duration="4563000" />
-      <workItem from="1766038265398" duration="22490000" />
-    </task>
-    <task id="LOCAL-00141" summary="Harmony and theory">
-      <option name="closed" value="true" />
-      <created>1761580698769</created>
-      <option name="number" value="00141" />
-      <option name="presentableId" value="LOCAL-00141" />
-      <option name="project" value="LOCAL" />
-      <updated>1761580698769</updated>
+      <workItem from="1766038265398" duration="22787000" />
+      <workItem from="1766149742991" duration="384000" />
+      <workItem from="1766150200849" duration="5952000" />
     </task>
     <task id="LOCAL-00142" summary="Notebook">
       <option name="closed" value="true" />
@@ -617,7 +597,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765897119148</updated>
     </task>
-    <option name="localTasksCounter" value="190" />
+    <task id="LOCAL-00190" summary="score, stream, section, unit, MusicEvent">
+      <option name="closed" value="true" />
+      <created>1766094204359</created>
+      <option name="number" value="00190" />
+      <option name="presentableId" value="LOCAL-00190" />
+      <option name="project" value="LOCAL" />
+      <updated>1766094204362</updated>
+    </task>
+    <option name="localTasksCounter" value="191" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -650,7 +638,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="logical split of files" />
     <MESSAGE value="projects template" />
     <MESSAGE value="packaging" />
     <MESSAGE value="generators" />
@@ -675,7 +662,8 @@
     <MESSAGE value="pattern structure, isolated visualization" />
     <MESSAGE value="pattern structures and diatonic constants merged" />
     <MESSAGE value="scales are patterns" />
-    <option name="LAST_COMMIT_MESSAGE" value="scales are patterns" />
+    <MESSAGE value="score, stream, section, unit, MusicEvent" />
+    <option name="LAST_COMMIT_MESSAGE" value="score, stream, section, unit, MusicEvent" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -702,7 +690,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/converters/music21_converter.py</url>
-          <line>139</line>
+          <line>138</line>
           <option name="timeStamp" value="55" />
         </line-breakpoint>
       </breakpoints>
@@ -720,7 +708,7 @@
     <SUITE FILE_PATH="coverage/musicom$pitchsequence.coverage" NAME="pitchsequence Coverage Results" MODIFIED="1764794483421" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/transformers" />
     <SUITE FILE_PATH="coverage/musicom$pattern.coverage" NAME="pattern Coverage Results" MODIFIED="1765893413215" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/structures" />
     <SUITE FILE_PATH="coverage/musicom$constants.coverage" NAME="constants Coverage Results" MODIFIED="1763500522878" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testers" />
-    <SUITE FILE_PATH="coverage/musicom$load_and_analyze.coverage" NAME="load_and_analyze Coverage Results" MODIFIED="1766093925725" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/projects/examples" />
+    <SUITE FILE_PATH="coverage/musicom$load_and_analyze.coverage" NAME="load_and_analyze Coverage Results" MODIFIED="1766170828719" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/projects/examples" />
     <SUITE FILE_PATH="coverage/musicom$three_voices.coverage" NAME="three_voices Coverage Results" MODIFIED="1764839633473" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/projects/examples" />
     <SUITE FILE_PATH="coverage/musicom$m21.coverage" NAME="m21 Coverage Results" MODIFIED="1764847069384" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/converters" />
     <SUITE FILE_PATH="coverage/musicom$test_base.coverage" NAME="test_base Coverage Results" MODIFIED="1764580863357" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testers" />

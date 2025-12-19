@@ -3,15 +3,43 @@ from typing import List, Tuple
 from .base import Base
 
 class MusicEvent:
-    # A basic sound event with pitch, duration and volume
-    def __init__(self,
-                 pitch: int = None,
-                 duration: int = None,
-                 volume: int = None):
-        self.pitch = pitch
-        self.duration = duration
-        self.volume = volume
+    PITCH = 0
+    VOLUME = 1
+    START_TICK = 2
+    END_TICK = 3
 
+    # A basic sound event with pitch, volume, start and end ticks
+    def __init__(self,
+                pitch: int = None,
+                volume: int = None,
+                start_tick: int = None,
+                end_tick: int = None,
+                ):
+        self._data = (pitch, volume, start_tick, end_tick)
+
+    def get_data(self, index: int):
+        return self._data[index]
+
+    def __set__(self, instance, value):
+        self._data = value
+
+    @property
+    def pitch(self) -> int:
+        return self._data[self.PITCH]
+    @property
+    def volume(self) -> int:
+        return self._data[self.VOLUME]
+    @property
+    def start_tick(self) -> int:
+        return self._data[self.START_TICK]
+    @property
+    def end_tick(self) -> int:
+        return self._data[self.END_TICK]
+    @property
+    def duration(self) -> int:
+        if self._data[self.END_TICK] is not None and self._data[self.START_TICK] is not None:
+            return self._data[self.END_TICK] - self._data[self.START_TICK]
+        return 0
 
 class MusicUnit(Base):
     # A unit of music: a set of MusicEvents in sequence
@@ -21,7 +49,6 @@ class MusicUnit(Base):
                 onset_intervals: List[int] = None,
                 durations: List[int] = None,
                 volumes: List[int] = None,
-                onset_times: List[int] = None,
                 ):
         super().__init__(name)
         # Pitch nodes (MIDI note numbers)
@@ -35,7 +62,6 @@ class MusicUnit(Base):
 
 
         self._events = []
-        self._onset_times = onset_times if onset_times else []
 
     @property
     def pitch_nodes(self) -> list[int]:

@@ -27,3 +27,10 @@ class MusicTime:
     def show(self):
         # Show time cycle
         self._cycle.show(title=f'Music Time Cycle: {self.timesteps} timesteps per measure')
+
+    def scale(self, scale_factor: float):
+        """Scale the time signature and tempo of a MusicTime by a given factor."""
+        self.timesteps *= scale_factor
+        self.beats_in_measure = max(1, int(self.beats_in_measure * scale_factor))
+        self.beat_note = max(1, int(self.beat_note * scale_factor))
+        self.bpm = max(1, int(self.bpm * scale_factor))
