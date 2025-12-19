@@ -3,12 +3,11 @@ from typing import List, Tuple
 from .base import Base
 
 class MusicEvent:
+    """A basic music event with pitch, volume, start and end ticks."""
     PITCH = 0
     VOLUME = 1
     START_TICK = 2
     END_TICK = 3
-
-    # A basic sound event with pitch, volume, start and end ticks
     def __init__(self,
                 pitch: int = None,
                 volume: int = None,
