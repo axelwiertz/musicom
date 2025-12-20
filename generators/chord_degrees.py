@@ -6,7 +6,7 @@ from typing import List
 from structures import MusicUnit, MusicPattern, MusicTime
 from converters.musicpy_converter import pattern_to_mpscale
 from converters.music21_converter import pattern_to_m21scale
-from converters.time import timestep_duration_to_quarter_length
+from converters.time import ticks_to_quarter_length
 from converters.musicpy_converter import chord_to_unit
 from converters.music21_converter import stream_to_unit
 from music21 import roman, stream
@@ -40,7 +40,7 @@ class ChordDegreeGenerator (MusicGenerator):
             # m21 Create chord from Roman numeral
             chord01 = roman.RomanNumeral (self.chord_degrees[i],
                                           keyOrScale=pattern_to_m21scale(self.pattern))
-            chord01.duration.quarterLength = timestep_duration_to_quarter_length(self.time, 1)
+            chord01.duration.quarterLength = ticks_to_quarter_length(self.time, 1)
             stream1.append(chord01)
 
         unit += stream_to_unit(stream1)

@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="score, stream, section, unit, MusicEvent">
-      <change afterPath="$PROJECT_DIR$/transformers/pitch.py" afterDir="false" />
+    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="unit = pitch + time">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/converters/music21_converter.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/music21_converter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/converters/time.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/time.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generators/chord_degrees.py" beforeDir="false" afterPath="$PROJECT_DIR$/generators/chord_degrees.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/structures/time.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/time.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/structures/unit.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/unit.py" afterDir="false" />
     </list>
@@ -54,75 +55,75 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Python.3voices.executor": "Run",
-    "Python.MIDI_import.executor": "Debug",
-    "Python.Sound.executor": "Debug",
-    "Python.balfolk.executor": "Debug",
-    "Python.canon-gen.executor": "Debug",
-    "Python.composition.executor": "Run",
-    "Python.constants.executor": "Run",
-    "Python.cp.executor": "Run",
-    "Python.database.executor": "Debug",
-    "Python.datastructure.executor": "Debug",
-    "Python.examples.executor": "Run",
-    "Python.genetic.executor": "Run",
-    "Python.harmony.executor": "Run",
-    "Python.instruments.executor": "Run",
-    "Python.library.executor": "Debug",
-    "Python.load_and_analyze.executor": "Run",
-    "Python.m21.executor": "Debug",
-    "Python.music21_converter.executor": "Debug",
-    "Python.musicdata.executor": "Run",
-    "Python.musicom.executor": "Debug",
-    "Python.musicpy.executor": "Debug",
-    "Python.packages.executor": "Run",
-    "Python.part01.executor": "Run",
-    "Python.pattern.executor": "Run",
-    "Python.percussion_voice.executor": "Debug",
-    "Python.pitchsequence.executor": "Debug",
-    "Python.rhythm.executor": "Run",
-    "Python.song.executor": "Run",
-    "Python.song002.executor": "Debug",
-    "Python.soundlayer.executor": "Run",
-    "Python.structures.executor": "Debug",
-    "Python.systematic.executor": "Run",
-    "Python.test_base.executor": "Run",
-    "Python.test_converters.executor": "Run",
-    "Python.test_generators.executor": "Run",
-    "Python.test_structures.executor": "Run",
-    "Python.test_transformators.executor": "Run",
-    "Python.test_visualization.executor": "Run",
-    "Python.theory.executor": "Run",
-    "Python.thread.executor": "Run",
-    "Python.three_voices.executor": "Run",
-    "Python.twelvetet.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ai.playground.ignore.import.keys.banner.in.settings": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/92591/PycharmProjects/musicom",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Python.3voices.executor&quot;: &quot;Run&quot;,
+    &quot;Python.MIDI_import.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.Sound.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.balfolk.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.canon-gen.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.composition.executor&quot;: &quot;Run&quot;,
+    &quot;Python.constants.executor&quot;: &quot;Run&quot;,
+    &quot;Python.cp.executor&quot;: &quot;Run&quot;,
+    &quot;Python.database.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.datastructure.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.examples.executor&quot;: &quot;Run&quot;,
+    &quot;Python.genetic.executor&quot;: &quot;Run&quot;,
+    &quot;Python.harmony.executor&quot;: &quot;Run&quot;,
+    &quot;Python.instruments.executor&quot;: &quot;Run&quot;,
+    &quot;Python.library.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.load_and_analyze.executor&quot;: &quot;Run&quot;,
+    &quot;Python.m21.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.music21_converter.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.musicdata.executor&quot;: &quot;Run&quot;,
+    &quot;Python.musicom.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.musicpy.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.packages.executor&quot;: &quot;Run&quot;,
+    &quot;Python.part01.executor&quot;: &quot;Run&quot;,
+    &quot;Python.pattern.executor&quot;: &quot;Run&quot;,
+    &quot;Python.percussion_voice.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.pitchsequence.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.rhythm.executor&quot;: &quot;Run&quot;,
+    &quot;Python.song.executor&quot;: &quot;Run&quot;,
+    &quot;Python.song002.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.soundlayer.executor&quot;: &quot;Run&quot;,
+    &quot;Python.structures.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.systematic.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_base.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_converters.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_generators.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_structures.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_transformators.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_visualization.executor&quot;: &quot;Run&quot;,
+    &quot;Python.theory.executor&quot;: &quot;Run&quot;,
+    &quot;Python.thread.executor&quot;: &quot;Run&quot;,
+    &quot;Python.three_voices.executor&quot;: &quot;Run&quot;,
+    &quot;Python.twelvetet.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ai.playground.ignore.import.keys.banner.in.settings&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/92591/PycharmProjects/musicom&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "Python",
-      "PLAIN_TEXT"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;Python&quot;,
+      &quot;PLAIN_TEXT&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\92591\PycharmProjects\musicom" />
@@ -211,23 +212,8 @@
       <workItem from="1765892532694" duration="4563000" />
       <workItem from="1766038265398" duration="22787000" />
       <workItem from="1766149742991" duration="384000" />
-      <workItem from="1766150200849" duration="5952000" />
-    </task>
-    <task id="LOCAL-00142" summary="Notebook">
-      <option name="closed" value="true" />
-      <created>1761580736250</created>
-      <option name="number" value="00142" />
-      <option name="presentableId" value="LOCAL-00142" />
-      <option name="project" value="LOCAL" />
-      <updated>1761580736250</updated>
-    </task>
-    <task id="LOCAL-00143" summary="Generation">
-      <option name="closed" value="true" />
-      <created>1761668766212</created>
-      <option name="number" value="00143" />
-      <option name="presentableId" value="LOCAL-00143" />
-      <option name="project" value="LOCAL" />
-      <updated>1761668766213</updated>
+      <workItem from="1766150200849" duration="6088000" />
+      <workItem from="1766226909347" duration="7112000" />
     </task>
     <task id="LOCAL-00144" summary="Composition">
       <option name="closed" value="true" />
@@ -605,7 +591,23 @@
       <option name="project" value="LOCAL" />
       <updated>1766094204362</updated>
     </task>
-    <option name="localTasksCounter" value="191" />
+    <task id="LOCAL-00191" summary="unit = pitch + time">
+      <option name="closed" value="true" />
+      <created>1766181673191</created>
+      <option name="number" value="00191" />
+      <option name="presentableId" value="LOCAL-00191" />
+      <option name="project" value="LOCAL" />
+      <updated>1766181673193</updated>
+    </task>
+    <task id="LOCAL-00192" summary="unit = pitch + time">
+      <option name="closed" value="true" />
+      <created>1766181747310</created>
+      <option name="number" value="00192" />
+      <option name="presentableId" value="LOCAL-00192" />
+      <option name="project" value="LOCAL" />
+      <updated>1766181747310</updated>
+    </task>
+    <option name="localTasksCounter" value="193" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -638,7 +640,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="projects template" />
     <MESSAGE value="packaging" />
     <MESSAGE value="generators" />
     <MESSAGE value="refactoring" />
@@ -663,7 +664,8 @@
     <MESSAGE value="pattern structures and diatonic constants merged" />
     <MESSAGE value="scales are patterns" />
     <MESSAGE value="score, stream, section, unit, MusicEvent" />
-    <option name="LAST_COMMIT_MESSAGE" value="score, stream, section, unit, MusicEvent" />
+    <MESSAGE value="unit = pitch + time" />
+    <option name="LAST_COMMIT_MESSAGE" value="unit = pitch + time" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

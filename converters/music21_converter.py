@@ -144,6 +144,15 @@ def stream_to_unit (stream_in : stream.Stream) -> MusicUnit:
             unit.add_event(event)
     return unit
 
+def note_to_event (note_in : note.Note) -> MusicEvent:
+    # Convert m21 note to MusicEvent
+    event = MusicEvent(pitch=note_in.pitch.midi,
+                       volume=note_in.volume.velocity if note_in.volume.velocity is not None else 100,
+                       duration=note_in.duration.quarterLength,
+                       onset_time=0.0,
+                       )
+    return event
+
 def time_to_stream(stream_ : stream.Stream, time : MusicTime):
     # Set the time signature and tempo
     stream_.insert(0, time_to_meter(time))
