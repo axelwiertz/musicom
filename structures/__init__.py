@@ -1,5 +1,5 @@
 """Package for music composition structures."""
-from .unit import MusicUnit
+from .unit import MusicUnit, MusicEvent
 from .time import MusicTime
 from .pattern import MusicPattern, Cardinality, PatternType, PatternMode
 from .project import MusicSection, MusicVoice, MusicProject
@@ -11,6 +11,7 @@ from .pitch import MusicPitchClass, MusicPitch, Direction, PitchRange
 __all__ = [
     "MusicUnit",
     "MusicTime",
+    "MusicEvent",
     "MusicPattern",
     "Cardinality",
     "PatternType",

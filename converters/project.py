@@ -23,11 +23,12 @@ def score_to_time(score: stream.Score, timesteps: int) -> MusicTime:
 def score_to_section(score: stream.Score) -> MusicSection:
     # Convert score parts to matrix of units
     matrix = MusicMatrix(len(score.parts), 1)
-
+    time = score_to_time(score, 4)
+    matrix.time = time
     section = MusicSection(score.metadata.title or 'Untitled', None, matrix)
 
     for i, p in enumerate(score.parts):
-        matrix.set_unit(i,0, stream_to_unit(p))
+        matrix.set_unit(i,0, stream_to_unit(p, time))
         matrix.get_unit(i,0).name = p.partName
 
     return section
@@ -39,7 +40,7 @@ def section_to_score(section : MusicSection) -> stream.Score:
     # Convert section matrix to m21 parts
     for i in range(section.matrix.rows):
         part_ = stream.Part()
-        stream_ = matrix_row_to_stream (section.matrix, i)
+        stream_ = matrix_row_to_stream (section.matrix, i, section.time)
         part_.append(stream_)
         part_.partName = f"Voice {i+1}"
         score.append(part_)

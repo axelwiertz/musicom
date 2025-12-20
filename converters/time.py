@@ -17,12 +17,23 @@ def meter_to_time (time_signature: meter.TimeSignature, ticks: int, bpm: int) ->
     )
     return time
 
-def ticks_to_quarter_length (time: MusicTime, ticks) -> float:
+def ticks_to_quarter_length (ticks : int,
+                             time: MusicTime,
+                             ) -> float:
     # convert duration in ticks to quarter length
     quarter_length = (ticks *
                       (4 / time.beat_note) *
                       (time.beats_per_cycle / time.ticks_per_cycle))
     return quarter_length
+
+def quarter_length_to_ticks (quarter_length: float,
+                             time: MusicTime,
+                             ) -> int:
+    # convert quarter length to duration in ticks
+    ticks = int(quarter_length *
+                (time.beat_note / 4) *
+                (time.ticks_per_cycle / time.beats_per_cycle))
+    return ticks
 
 def time_to_tempo (time: MusicTime) -> tempo.MetronomeMark:
     # m21 temp

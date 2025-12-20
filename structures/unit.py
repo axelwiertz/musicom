@@ -110,9 +110,14 @@ class MusicEventSequence:
                 pitches.append(event.pitch)
         return pitches
 
+    def len_ticks(self):
+        """Return the length of the sequence in ticks."""
+        if len(self._data) == 0:
+            return 0
+        return max(event.end_tick for event in self.events)
 
 @dataclass
-class MusicUnit(Base):
+class MusicUnit(Base, MusicEventSequence):
     # A unit of music: a set of MusicEvents in sequence
     def __init__(self,
                 name: str = 'Unit',
@@ -120,8 +125,10 @@ class MusicUnit(Base):
                 onset_intervals: List[int] = None,
                 durations: List[int] = None,
                 volumes: List[int] = None,
+                 events: MusicEventSequence = None
                 ):
-        super().__init__(name)
+        super(Base).__init__(name)
+        super(MusicEventSequence).__init__(events)
         # Pitch nodes (MIDI note numbers)
         # Initialize the MusicUnit with pitch nodes, onset intervals, durations, and volumes
         self._pitch_nodes = pitch_nodes if pitch_nodes else []
@@ -131,7 +138,6 @@ class MusicUnit(Base):
         self._durations = durations if durations else []
         self._onset_intervals = onset_intervals if onset_intervals else []
 
-        self._events = MusicEventSequence()
         for i in range(len(self._pitch_nodes)):
             start_tick = sum(self._onset_intervals[:i]) if i < len(self._onset_intervals) else 0
             end_tick = start_tick + self._durations[i] if i < len(self._durations) else start_tick
@@ -141,7 +147,7 @@ class MusicUnit(Base):
                 start_tick=start_tick,
                 end_tick=end_tick
             )
-            self._events.add_event(event)
+            self.add_event(event)
 
     @property
     def pitch_nodes(self) -> list[int]:

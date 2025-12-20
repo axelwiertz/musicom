@@ -34,9 +34,7 @@ from dataclasses import dataclass
 class QuantizedEvent:
     tick: int          # integer tick index
     ticks_per_beat: int
-    track: int = 0
-    velocity: float = 1.0
-    duration_ticks: int = 1
+    duration_ticks: int
 
 def seconds_to_ticks(time_s: float, bpm: float, ticks_per_beat: int) -> int:
     beats = time_s * (bpm / 60.0)
@@ -74,7 +72,7 @@ def build_sample_metrical_tree() -> MetricalNode:
 
 def test_rhythm_structures():
     # Test QuantizedEvent
-    quant_event = QuantizedEvent(tick=120, ticks_per_beat=480, track=1, velocity=0.8, duration_ticks=240)
+    quant_event = QuantizedEvent(tick=120, ticks_per_beat=480, duration_ticks=240)
     print(f'Quantized Event: {quant_event}')
 
     # Test seconds to ticks conversion
