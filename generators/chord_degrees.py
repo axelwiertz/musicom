@@ -5,10 +5,10 @@ Module for generating musical scales and chords.
 from typing import List
 from structures import MusicUnit, MusicPattern, MusicTime
 from converters.musicpy_converter import pattern_to_mpscale
-from converters.music21_converter import pattern_to_m21scale
+from converters.music21_score import pattern_to_m21scale
 from converters.time import ticks_to_quarter_length
 from converters.musicpy_converter import chord_to_unit
-from converters.music21_converter import stream_to_unit
+from converters.music21_score import stream_to_unit
 from music21 import roman, stream
 
 from .base import MusicGenerator
