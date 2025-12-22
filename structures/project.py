@@ -13,49 +13,53 @@ class MusicVoice(Base):
                  name: str = 'Voice',
                  pitch_range: PitchRange = None,
                  midi_instrument: int = MidiInstrument.PIANO,
+                 row_index: int = None,
                  ):
         super().__init__(name)
         self.pitch_range = pitch_range
         self.midi_instrument = midi_instrument
+        self.row_index = row_index
 
 
 class MusicSection (Base):
-    """Represents a project section, containing a matrix."""
+    """Represents a project section, containing columns of a matrix."""
     def __init__(self,
-                 name: str = "Section",
-                 time : MusicTime = None,
-                 matrix: MusicMatrix = None):
+                 name: str = None,
+                 start_col_index: int = None,
+                 end_col_index: int = None,
+                 ):
         super().__init__(name)
         # The `Section` class contains a `MusicMatrix`
-        self._time = time
-        self._matrix = matrix
+        self._start_col_index = start_col_index
+        self._end_col_index = end_col_index
 
     @property
-    def time(self) -> MusicTime:
-        return self._time
-
+    def start_col_index(self) -> int:
+        return self._start_col_index
     @property
-    def matrix(self) -> MusicMatrix:
-        return self._matrix
+    def end_col_index(self) -> int:
+        return self._end_col_index
 
-    def __repr__(self):
-        return f"Section(name='{self.name}', time={self.time}, matrix={self.matrix})"
 
-# The `Project` class is the top-level container for a list of `Section` objects.
+# The `Project` class is the top-level container
 class MusicProject (Base):
-    """Represents the entire project, containing multiple sections."""
+    """Represents the entire project structure."""
     def __init__(self,
                  name: str = None,
                  pattern: MusicPattern = None,
+                 time: MusicTime = None,
                  sections: List[MusicSection] = None,
                  voices: List[MusicVoice] = None,
+                 matrix: MusicMatrix = None,
                  ):
         super().__init__(name)
-        self.name = name if name is not None else "Project"
-        self.pattern = pattern if pattern is not None else MusicPattern()
-        self.sections = sections if sections is not None else []
-        self.voices = voices if voices is not None else []
+        self.name = name
+        self.pattern = pattern
+        self.time = time
+        self.sections = sections
+        self.voices = voices
+        self.matrix = matrix
 
     def __repr__(self):
-        return f"Project(name='{self.name}', pattern={self.pattern}, sections={len(self.sections)}, voices={len(self.voices)})"
+        return f"<MusicProject(name={self.name}, sections={len(self.sections) if self.sections else 0}, voices={len(self.voices) if self.voices else 0})>"
 

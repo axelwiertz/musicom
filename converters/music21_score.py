@@ -7,7 +7,7 @@ from music21 import stream
 # Score converters
 
 def score_to_section(score: stream.Score) -> MusicSection:
-    # Convert score parts to matrix of units
+    # Convert score parts to matrix column of units
     matrix = MusicMatrix(len(score.parts), 1)
     time = meter_to_time(score.timeSignature, 4, score.metronomeMarkBoundaries()[0][2].number)
     matrix.time = time
@@ -34,4 +34,12 @@ def section_to_score(section : MusicSection) -> stream.Score:
         part_.partName = f"Voice {i+1}"
         score.append(part_)
 
+    return score
+
+def project_to_score(project) -> stream.Score:
+    # Convert entire project to m21 score
+    score = stream.Score()
+    for section in project.sections:
+        sec_score = section_to_score(section)
+        score.append(sec_score)
     return score

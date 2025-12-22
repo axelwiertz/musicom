@@ -1,6 +1,7 @@
 """A MusicUnit represents a technical unit of music, defined by sets of MusicEvents,"""
 from copy import deepcopy
 import numpy as np
+from numpy import ndarray
 from dataclasses import dataclass
 from typing import List, Tuple
 from .base import Base
@@ -55,17 +56,17 @@ class MusicEvent:
 @dataclass
 class MusicEventSequence:
     # A group of MusicEvents
+    DTYPE = ('uint8', 'uint8', 'uint16', 'uint16')  # pitch, volume, start_tick, end_tick
     def __init__(self,
-                 events: list[MusicEvent] = None):
+                 events: list[MusicEvent] | ndarray = None):
 
-        if events is None:
-            self._data = []
-        else:
+        if events is not None:
             """Internally stores events in a structured numpy array for efficiency"""
-            self._data = np.array([
-                (e.pitch, e.volume, e.start_tick, e.end_tick)
-                for e in self.events
-            ], dtype=('uint8', 'uint8', 'uint16', 'uint16'))
+            self._data += np.array(
+                object=[(e.pitch, e.volume, e.start_tick, e.end_tick) for e in self.events],
+                dtype=self.DTYPE)
+        else:
+            self._data = np.array(object=[], dtype=self.DTYPE)
 
     @property
     def events(self) -> list[MusicEvent]:
@@ -73,23 +74,23 @@ class MusicEventSequence:
                            volume=e[MusicEvent.VOLUME],
                            start_tick=e[MusicEvent.START_TICK],
                            end_tick=e[MusicEvent.END_TICK]) for e in self._data]
+    @property
+    def data(self) -> ndarray:
+        return self._data
 
     def  __len__(self):
         return len(self._data)
 
     def __add__(self, other) -> 'MusicEventSequence':
-        new_sequence = MusicEventSequence(self._data.copy())
-        for event in other.events:
-            new_sequence.add_event(event)
-        return new_sequence
+        new_seq = MusicEventSequence()
+        new_seq._data = np.concatenate((self._data, other.data))
+        return new_seq
 
-    def append(self, other) -> 'MusicEventSequence':
-        for event in other.events:
-            self.add_event(event)
-        return self
-
-    def add_event(self, event: MusicEvent):
-        self._data.append(event)
+    def add_event(self, event: MusicEvent | ndarray):
+        self._data = np.append(self._data, np.array(
+            [(event.pitch, event.volume, event.start_tick, event.end_tick)],
+            dtype=self.DTYPE
+        ))
 
     def split(self, index: int) -> Tuple['MusicEventSequence', 'MusicEventSequence']:
         seq1 = MusicEventSequence(self._data[:index])
@@ -146,18 +147,13 @@ class MusicUnit(Base, MusicEventSequence):
     # A unit of music: a set of MusicEvents in sequence
     def __init__(self,
                 name: str = 'Unit',
-                pitch_nodes : List [int] = None,
-                onset_intervals: List[int] = None,
-                durations: List[int] = None,
-                volumes: List[int] = None,
-                 events: MusicEventSequence = None
+                events: MusicEventSequence = None
                 ):
         super(Base).__init__(name)
         super(MusicEventSequence).__init__(events)
-        # Pitches (MIDI note numbers)
 
-    def set_events(self,
-                   pitch_nodes: List[int] = None,
+    def old_set(self,
+                   pitch_nodes: List[int] = None,         # Pitches (MIDI note numbers)
                    onset_intervals: List[int] = None,
                    durations: List[int] = None,
                    volumes: List[int] = None,

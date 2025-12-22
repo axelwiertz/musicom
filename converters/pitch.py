@@ -80,3 +80,17 @@ def name_to_midi(name : str) -> int:
     semitone_index = self.PITCH_CLASS_NAMES_SHARP.index(idx)
     return (octave + 1) * self.TWELVE + semitone_index"""
     return note_to_midi(name)
+
+
+__all__ = [
+    "pitch_to_freq",
+    "midi_to_freq",
+    "freq_to_midi",
+    "semitone_ratio",
+    "cents_between",
+    "interval_cents",
+    "midi_to_name",
+    "name_to_midi",
+    "pitch_to_pitch_class",
+    "name_to_pitch_class",
+]

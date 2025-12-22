@@ -4,18 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="music21 converters">
+    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="unit is eventsequence">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/midi_converter.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/midi_converter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/music21_musicpy.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/music21_musicpy.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/musicpy_converter.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/musicpy_converter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generators/harmonics.py" beforeDir="false" afterPath="$PROJECT_DIR$/generators/harmonics.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/converters/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/converters/music21_score.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/music21_score.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/converters/pitch.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/pitch.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/balfolk.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/balfolk.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/examples/compose.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/examples/compose.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/examples/guide.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/projects/examples/guide.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/examples/systematic.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/examples/systematic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/intervalnetwork.py" beforeDir="false" afterPath="$PROJECT_DIR$/research/intervalnetwork.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/network.py" beforeDir="false" afterPath="$PROJECT_DIR$/research/network.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/structures/project.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/project.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/structures/unit.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/unit.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/transformers/pitchsequence.py" beforeDir="false" afterPath="$PROJECT_DIR$/transformers/pitchsequence.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testers/test_structures.py" beforeDir="false" afterPath="$PROJECT_DIR$/testers/test_structures.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -222,15 +222,8 @@
       <workItem from="1766226909347" duration="7161000" />
       <workItem from="1766238862150" duration="11405000" />
       <workItem from="1766317992958" duration="2870000" />
-      <workItem from="1766394885186" duration="3820000" />
-    </task>
-    <task id="LOCAL-00147" summary="Restructuring in functional modules">
-      <option name="closed" value="true" />
-      <created>1762205806310</created>
-      <option name="number" value="00147" />
-      <option name="presentableId" value="LOCAL-00147" />
-      <option name="project" value="LOCAL" />
-      <updated>1762205806311</updated>
+      <workItem from="1766394885186" duration="3891000" />
+      <workItem from="1766409721312" duration="9874000" />
     </task>
     <task id="LOCAL-00148" summary="README and requirements.txt">
       <option name="closed" value="true" />
@@ -616,7 +609,15 @@
       <option name="project" value="LOCAL" />
       <updated>1766320863641</updated>
     </task>
-    <option name="localTasksCounter" value="196" />
+    <task id="LOCAL-00196" summary="unit is eventsequence">
+      <option name="closed" value="true" />
+      <created>1766398766429</created>
+      <option name="number" value="00196" />
+      <option name="presentableId" value="LOCAL-00196" />
+      <option name="project" value="LOCAL" />
+      <updated>1766398766430</updated>
+    </task>
+    <option name="localTasksCounter" value="197" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -649,7 +650,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="refactoring" />
     <MESSAGE value="refactoring and matrix structure" />
     <MESSAGE value="matrix.py" />
     <MESSAGE value="project and grid" />
@@ -674,10 +674,18 @@
     <MESSAGE value="unit = pitch + time" />
     <MESSAGE value="timescale, meter and rhythm" />
     <MESSAGE value="music21 converters" />
-    <option name="LAST_COMMIT_MESSAGE" value="music21 converters" />
+    <MESSAGE value="unit is eventsequence" />
+    <option name="LAST_COMMIT_MESSAGE" value="unit is eventsequence" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/structures/unit.py</url>
+          <line>1</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">

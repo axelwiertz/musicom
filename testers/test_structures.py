@@ -1,6 +1,7 @@
-from structures import MusicPitchClass, MusicPitch, Direction, MusicTime, MusicPattern, MusicUnit, MusicVoice, MusicMatrix, MusicProject, MusicSection
-from rules import Cardinality, PatternType, PatternMode
-from converters import pattern_to_m21scale
+from structures import MusicPitchClass, MusicPitch, Direction
+from structures import MusicTime, MusicPattern, Cardinality, PatternType, PatternMode
+from structures import MusicProject, MusicUnit, MusicVoice, MusicMatrix, MusicSection
+from converters.music21_pattern import pattern_to_m21scale
 
 
 def test_project():
@@ -18,8 +19,10 @@ def test_project():
     unit_b2 = MusicUnit()
 
     # Section with matrix
-    intro_section = MusicSection("Intro", MusicTime(4,4,4) , MusicMatrix(2, 2))
-    intro_section.matrix.set_unit(0, 0, unit_a1)
+    intro_section = MusicSection(name="Intro",
+                                 time=MusicTime(4,4,4))
+    matrix = MusicMatrix(2, 2)
+    .matrix.set_unit(0, 0, unit_a1)
     intro_section.matrix.set_unit(0, 1, unit_a2)
     intro_section.matrix.set_unit(1, 0, unit_b1)
     intro_section.matrix.set_unit(1, 1, unit_b2)
@@ -50,7 +53,7 @@ def test_pitch():
 def test_patterns():
     # New composition
     project = MusicProject('Test Patterns',
-                           MusicPattern("C Major", Cardinality.HEPTA, PatternType.SCALE, PatternMode.major_mode, MusicPitchClass.C)
+                           MusicPattern("C Major", Cardinality.HEPTA, PatternType.SCALE, PatternMode.major, MusicPitchClass.C)
                            )
     pitch_classes = project.pattern.pitch_classes
     print (f'Pattern pitch classes: {pitch_classes}')
@@ -68,9 +71,9 @@ def test_patterns():
     print("Minor7 Chord Intervals:", minor7_chord.pitch_class_intervals, "Pitch classes: ", minor7_chord.pitch_classes)
 
     # Patterns: Diatonic scales
-    scale5cmajor = MusicPattern("Pentatonic C major", Cardinality.PENTA, PatternType.SCALE, PatternMode.major_mode, MusicPitchClass.C)
+    scale5cmajor = MusicPattern("Pentatonic C major", Cardinality.PENTA, PatternType.SCALE, PatternMode.major, MusicPitchClass.C)
     print(scale5cmajor.pitch_class_intervals, scale5cmajor.pitch_classes)
-    scale7cmajor = MusicPattern("Heptatonic C major", Cardinality.HEPTA, PatternType.SCALE, PatternMode.major_mode, MusicPitchClass.C,)
+    scale7cmajor = MusicPattern("Heptatonic C major", Cardinality.HEPTA, PatternType.SCALE, PatternMode.major, MusicPitchClass.C,)
     print(scale7cmajor.pitch_class_intervals, scale7cmajor.pitch_classes)
 
 

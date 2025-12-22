@@ -1,14 +1,15 @@
 """Example of systematic musical development using transformations"""
 
-from structures import MusicMatrix,MusicUnit,MusicSection
+from structures import MusicMatrix, MusicUnit, MusicSection
 from converters.music21_score import section_to_score
 from converters.musicpy_converter import piece_play
 from converters.music21_musicpy import score_to_piece
 from transformers import PitchSequenceTransformer, retrograde, transpose, invert
 
 # Create a theme and develop it systematically
-theme = MusicUnit("Theme", [60, 64, 67])
-section_a = MusicSection("Section A", None, MusicMatrix(rows=4, cols=8))
+theme = MusicUnit("Theme", [[60], [64], [67]])
+section_a = MusicSection("Section A", None, )
+matrix = MusicMatrix(rows=4, cols=8)
 
 # Voice 1: Original theme
 section_a.matrix.set_unit(0, 0, theme)

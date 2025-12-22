@@ -1,21 +1,26 @@
 """Balfolk Music Generation Project"""
-from base import MusicPitchClass, PitchRange, Cardinality, PatternType, PatternMode
-from structures import MusicProject, MusicSection, MusicPattern, MusicVoice, MusicTime
-from converters import score_to_midifile, section_to_score
+import random
+from structures import MusicProject, MusicSection, MusicPattern, MusicVoice, MusicTime, MusicPitchClass, PitchRange, Cardinality, PatternType, PatternMode
+from converters.music21_score import section_to_score
+from converters.midi_converter import score_to_midifile
 from generators import SequentialPatternGenerator
 from analysis import score_analyze
 
+MELODY = 0
+BASS = 1
 # Scale: A minor (C major)
-proj = MusicProject('Balfolk Project',
-                    MusicPattern('A minor',
+proj = MusicProject(name='Balfolk Project',
+                    pattern=MusicPattern('A minor',
                                  Cardinality.HEPTA,
                                  PatternType.SCALE,
                                  PatternMode.minor_mode,
                                  MusicPitchClass.A),
-                    [MusicSection('Balfolk Section',
+                    sections=[MusicSection('Balfolk Section',
                                   MusicTime(12, 6, 8, 120))], # typical Balfolk rhythm
-                    [MusicVoice("melody", PitchRange('C4', 'C6')),
-                     MusicVoice("bass", PitchRange('C2', 'C4'))]
+                    voices=[MusicVoice("melody",
+                                       PitchRange('C4', 'C6')),
+                            MusicVoice("bass",
+                                       PitchRange('C2', 'C4'))]
                     )
 
 # Bourrée-inspired melody
@@ -45,14 +50,14 @@ for i in range(16):  # 4 measures
     for note_name in fragment:
         n = note.Note(note_name)
         n.duration.type = 'eighth'
-        melody_voice.part.append(n)
+        proj.voices[MELODY].append(n)
 
 # Create accompaniment (drone/rhythmic support)
 bass_notes = ['C3', 'G3']
 for i in range(32):  # matching melody length
     bass_note = note.Note(random.choice(bass_notes))
     bass_note.duration.type = 'eighth'
-    bass_voice.part.append(bass_note)
+    proj.voices[BASS].append(bass_note)
 
 score = section_to_score(proj.sections[0])
 
