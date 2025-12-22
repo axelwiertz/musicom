@@ -1,5 +1,5 @@
 from base import MidiInstrument, MidiPercussion, PitchRange
-from structures import MusicVoice, MusicUnit, MusicTime, MusicSection, MusicMatrix
+from structures import MusicVoice, MusicUnit, MusicTime, MusicSection, UnitMatrix
 from converters import midifile_to_score, score_to_section, section_to_score
 from music21 import clef, percussion, instrument
 from analysis import score_analyze
@@ -17,7 +17,7 @@ score_analyze(score2)
 
 print(section)
 
-matrix = MusicMatrix(1,2)
+matrix = UnitMatrix(1,2)
 # Meter 4/4, 8 timesteps, 0,5 beat per timestep
 time = MusicTime(8, 4, 4, 100)
 section = MusicSection('Percussion Section', time, matrix )

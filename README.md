@@ -15,7 +15,7 @@ Algorithmic and structured music composition is treated as a series of transform
 ### 🎵 Musical Structures
 - **MusicUnit**: Core structure representing sequences of pitches with timing and dynamics
 - **MusicSection**: Complete compositions with multiple voices, scales, and progressions
-- **MusicMatrix**: Matrix-based compositional framework for systematic musical development
+- **UnitMatrix**: Matrix-based compositional framework for systematic musical development
 - **MusicVoice**: Collections of musical units with instrument assignments
 - Support for both **Music21** and **MusicPy** data structures
 
@@ -34,7 +34,7 @@ Algorithmic and structured music composition is treated as a series of transform
 - Support for various rhythmic patterns (Tresillo, Son Clave, etc.)
 
 ### 🎨 Matrix-Based Composition
-- **MusicMatrix**: 2D compositional framework organizing musical material
+- **UnitMatrix**: 2D compositional framework organizing musical material
 - **Voice transformations**: Transpose, invert, retrograde, augment/diminish individual voices
 - **Sectional development**: Repeat, vary, interpolate, and reorder temporal sections
 - **Cell operations**: Transform individual musical units, cross-pollinate between voices
@@ -157,7 +157,7 @@ The fundamental building block representing a sequence of musical events with pr
 ### MusicVoice
 A single instrumental or vocal line, assigned to a specific instrument or voice.
 
-### MusicMatrix
+### UnitMatrix
 A 2D compositional framework where:
 - **Rows** represent independent voices or parts (melody, harmony, bass, percussion, etc.)
 - **Columns** represent temporal sections or measures

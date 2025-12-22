@@ -1,7 +1,7 @@
 """Defines the Project, Section, and Voice classes for the music composition framework."""
 from typing import List
 from .base import Base
-from .matrix import MusicMatrix
+from .matrix import UnitMatrix
 from .time import MusicTime
 from .pattern import MusicPattern
 from .pitch import PitchRange
@@ -29,7 +29,7 @@ class MusicSection (Base):
                  end_col_index: int = None,
                  ):
         super().__init__(name)
-        # The `Section` class contains a `MusicMatrix`
+        # The `Section` class contains a `UnitMatrix`
         self._start_col_index = start_col_index
         self._end_col_index = end_col_index
 
@@ -50,7 +50,7 @@ class MusicProject (Base):
                  time: MusicTime = None,
                  sections: List[MusicSection] = None,
                  voices: List[MusicVoice] = None,
-                 matrix: MusicMatrix = None,
+                 matrix: UnitMatrix = None,
                  ):
         super().__init__(name)
         self.name = name

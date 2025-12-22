@@ -4,15 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="unit is eventsequence">
+    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="project structure">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/converters/music21_score.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/music21_score.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/pitch.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/pitch.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/converters/music21_stream.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/music21_stream.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/balfolk.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/balfolk.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/examples/3voices.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/examples/3voices.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/examples/compose.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/examples/compose.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/examples/guide.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/projects/examples/guide.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/examples/cross_voice.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/examples/cross_voice.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/examples/systematic.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/examples/systematic.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/research/percussion_voice.py" beforeDir="false" afterPath="$PROJECT_DIR$/research/percussion_voice.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/structures/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/structures/matrix.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/matrix.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/structures/project.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/project.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/structures/unit.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/unit.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testers/test_structures.py" beforeDir="false" afterPath="$PROJECT_DIR$/testers/test_structures.py" afterDir="false" />
@@ -223,15 +227,9 @@
       <workItem from="1766238862150" duration="11405000" />
       <workItem from="1766317992958" duration="2870000" />
       <workItem from="1766394885186" duration="3891000" />
-      <workItem from="1766409721312" duration="9874000" />
-    </task>
-    <task id="LOCAL-00148" summary="README and requirements.txt">
-      <option name="closed" value="true" />
-      <created>1762367583405</created>
-      <option name="number" value="00148" />
-      <option name="presentableId" value="LOCAL-00148" />
-      <option name="project" value="LOCAL" />
-      <updated>1762367583406</updated>
+      <workItem from="1766409721312" duration="9902000" />
+      <workItem from="1766431558574" duration="797000" />
+      <workItem from="1766432466937" duration="6199000" />
     </task>
     <task id="LOCAL-00149" summary="projects">
       <option name="closed" value="true" />
@@ -617,7 +615,15 @@
       <option name="project" value="LOCAL" />
       <updated>1766398766430</updated>
     </task>
-    <option name="localTasksCounter" value="197" />
+    <task id="LOCAL-00197" summary="project structure">
+      <option name="closed" value="true" />
+      <created>1766419710236</created>
+      <option name="number" value="00197" />
+      <option name="presentableId" value="LOCAL-00197" />
+      <option name="project" value="LOCAL" />
+      <updated>1766419710236</updated>
+    </task>
+    <option name="localTasksCounter" value="198" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -650,7 +656,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="refactoring and matrix structure" />
     <MESSAGE value="matrix.py" />
     <MESSAGE value="project and grid" />
     <MESSAGE value="project, matrix, unit, transformators" />
@@ -675,7 +680,8 @@
     <MESSAGE value="timescale, meter and rhythm" />
     <MESSAGE value="music21 converters" />
     <MESSAGE value="unit is eventsequence" />
-    <option name="LAST_COMMIT_MESSAGE" value="unit is eventsequence" />
+    <MESSAGE value="project structure" />
+    <option name="LAST_COMMIT_MESSAGE" value="project structure" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

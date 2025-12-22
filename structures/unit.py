@@ -62,7 +62,7 @@ class MusicEventSequence:
 
         if events is not None:
             """Internally stores events in a structured numpy array for efficiency"""
-            self._data += np.array(
+            self._data = np.array(
                 object=[(e.pitch, e.volume, e.start_tick, e.end_tick) for e in self.events],
                 dtype=self.DTYPE)
         else:
@@ -147,10 +147,16 @@ class MusicUnit(Base, MusicEventSequence):
     # A unit of music: a set of MusicEvents in sequence
     def __init__(self,
                 name: str = 'Unit',
-                events: MusicEventSequence = None
+                events: MusicEventSequence = None,
+                 pitches: List[int] = None,
                 ):
         super(Base).__init__(name)
         super(MusicEventSequence).__init__(events)
+
+        if pitches is not None:
+            # Initialize from a list of pitches with default values
+            for pitch in pitches:
+                self.add_event(MusicEvent(pitch=pitch))
 
     def old_set(self,
                    pitch_nodes: List[int] = None,         # Pitches (MIDI note numbers)

@@ -1,5 +1,5 @@
 """Converters between music21 and other structures."""
-from structures import MusicMatrix, MusicSection
+from structures import UnitMatrix, MusicSection
 from converters.music21_stream import stream_to_unit, matrix_row_to_stream
 from converters.time import meter_to_time, time_to_meter, time_to_tempo
 from music21 import stream
@@ -8,7 +8,7 @@ from music21 import stream
 
 def score_to_section(score: stream.Score) -> MusicSection:
     # Convert score parts to matrix column of units
-    matrix = MusicMatrix(len(score.parts), 1)
+    matrix = UnitMatrix(len(score.parts), 1)
     time = meter_to_time(score.timeSignature, 4, score.metronomeMarkBoundaries()[0][2].number)
     matrix.time = time
     section = MusicSection(score.metadata.title or 'Untitled', None, matrix)

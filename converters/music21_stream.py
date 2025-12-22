@@ -1,4 +1,4 @@
-from structures import MusicUnit, MusicTime, MusicMatrix
+from structures import MusicUnit, MusicTime, UnitMatrix
 from converters.music21_note import note_to_event, event_to_note, tick_gap_to_rest
 from music21 import serial, stream, note, chord
 
@@ -45,7 +45,7 @@ def stream_to_unit(stream_in: stream.Stream, time: MusicTime) -> MusicUnit:
                 unit.add_event(note_to_event(note_, time))
     return unit
 
-def matrix_row_to_stream(matrix: MusicMatrix, row: int, time: MusicTime) -> stream.Stream:
+def matrix_row_to_stream(matrix: UnitMatrix, row: int, time: MusicTime) -> stream.Stream:
     """Concatenate the music21 streams from contained units into a single Stream."""
     stream_out = stream.Stream()
     for col in range(matrix.cols):

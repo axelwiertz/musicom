@@ -1,5 +1,5 @@
 from structures import MidiInstrument, MusicPitchClass, PitchRange, Cardinality, PatternType, PatternMode
-from structures import MusicPattern, MusicProject, MusicSection, MusicUnit, MusicVoice, MusicTime, MusicMatrix
+from structures import MusicPattern, MusicProject, MusicSection, MusicUnit, MusicVoice, MusicTime, UnitMatrix
 from converters.pitch import name_to_midi
 from converters.music21_score import pattern_to_m21scale,score_to_midifile
 from converters.music21_musicpy import section_to_score
@@ -27,8 +27,8 @@ project.voices = [
 
 # Define sections
 project.sections = [
-    MusicSection ('Section A', MusicTime(8,4,4), MusicMatrix(3,2)),
-    MusicSection ('Section B', MusicTime(8,4,4), MusicMatrix(3,2))
+    MusicSection ('Section A', MusicTime(8,4,4), UnitMatrix(3,2)),
+    MusicSection ('Section B', MusicTime(8,4,4), UnitMatrix(3,2))
 ]
 # Define units
 project.sections[0].matrix.set_unit(0, 0,

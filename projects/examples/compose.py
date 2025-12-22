@@ -1,24 +1,18 @@
 import numpy as np
 
-from structures import MusicProject, MusicMatrix, MusicUnit, MusicTime
+from converters.pitch import name_to_midi
+from structures import MusicProject, UnitMatrix, MusicUnit, MusicTime
 
 proj = MusicProject("Systematic Composition")
-matrix = MusicMatrix(rows=4, cols=4)
-
-# Create musical units
-time = MusicTime(16, 4, 4, 120)
+matrix = UnitMatrix()
+time = MusicTime(16, 4)
 
 events = np.array([60, 80, 0, 6])
 
-motif_a = MusicUnit("Motif a",
-    content=[reg.index_of(TwelveTET.C, 4), reg.index_of(TwelveTET.E, 4)],
-    metadata={"pitch": 60, volume = 80}
-)
-
-motif_b = MusicUnit("Motif b")
-        [(TwelveTET.G, 4), (TwelveTET.B, 4)],
-    metadata={"pitch": 67, volume = 100}
-)
+motif_a = MusicUnit("Motif a", pitches=[60, 64]
+    )
+motif_b = MusicUnit("Motif b", pitches=[name_to_midi('G4'), name_to_midi('B4'), 67]
+    )
 
 # Populate the matrix
 matrix.set_cell(0, 0, motif_a)
@@ -34,7 +28,7 @@ matrix.augment_row(3, factor=2.0)  # Double note durations in voice 4
 
 # Column operations (sectional development)
 matrix.repeat_column(0, 3)  # Repeat section 1 at position 3
-transition = MusicalUnit(unit_type="transition", content=[])
+transition = MusicUnit("Transition", pitches=[65, 67, 69])
 matrix.insert_column(2, transition)  # Insert transitional material
 matrix.reorder_columns([0, 2, 1, 3])  # Non-linear narrative structure
 
@@ -49,6 +43,3 @@ matrix.selective_erase(
     condition=lambda cell: cell is None or cell.metadata.get("density", 0) < 0.5
 )
 
-# Display the matrix
-print(matrix)
-```

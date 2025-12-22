@@ -1,6 +1,6 @@
 from structures import MusicPitchClass, MusicPitch, Direction
 from structures import MusicTime, MusicPattern, Cardinality, PatternType, PatternMode
-from structures import MusicProject, MusicUnit, MusicVoice, MusicMatrix, MusicSection
+from structures import MusicProject, MusicUnit, MusicVoice, UnitMatrix, MusicSection
 from converters.music21_pattern import pattern_to_m21scale
 
 
@@ -21,7 +21,7 @@ def test_project():
     # Section with matrix
     intro_section = MusicSection(name="Intro",
                                  time=MusicTime(4,4,4))
-    matrix = MusicMatrix(2, 2)
+    matrix = UnitMatrix(2, 2)
     .matrix.set_unit(0, 0, unit_a1)
     intro_section.matrix.set_unit(0, 1, unit_a2)
     intro_section.matrix.set_unit(1, 0, unit_b1)
