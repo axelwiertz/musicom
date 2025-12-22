@@ -1,18 +1,19 @@
-from structures import MusicMatrix, MusicUnit, MusicTime
+from structures import MusicProject, MusicMatrix, MusicUnit, MusicTime
 
-
+proj = MusicProject("Systematic Composition")
 matrix = MusicMatrix(rows=4, cols=4)
 
 # Create musical units
 time = MusicTime(16, 4, 4, 120)
 
-motif_a = MusicUnit(1, "Motif a",
+events = [60, 80,
+
+motif_a = MusicUnit("Motif a",
     content=[reg.index_of(TwelveTET.C, 4), reg.index_of(TwelveTET.E, 4)],
     metadata={"pitch": 60, volume = 80}
 )
 
-motif_b = MusicUnit(2, "Motif b",
-
+motif_b = MusicUnit("Motif b",
         [(TwelveTET.G, 4), (TwelveTET.B, 4)],
     metadata={"pitch": 67, volume = 100}
 )

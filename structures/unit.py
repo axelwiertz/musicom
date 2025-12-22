@@ -69,7 +69,10 @@ class MusicEventSequence:
 
     @property
     def events(self) -> list[MusicEvent]:
-        return self._data
+        return [MusicEvent(pitch=e[MusicEvent.PITCH],
+                           volume=e[MusicEvent.VOLUME],
+                           start_tick=e[MusicEvent.START_TICK],
+                           end_tick=e[MusicEvent.END_TICK]) for e in self._data]
 
     def  __len__(self):
         return len(self._data)
@@ -116,6 +119,28 @@ class MusicEventSequence:
             return 0
         return max(event.end_tick for event in self.events)
 
+    @property
+    def pitches(self) -> List[int]:
+        """Return a list of all pitches in the sequence."""
+        return [event.pitch for event in self.events]
+
+    @property
+    def pitch_intervals(self) -> List[int]:
+        """Return a list of pitch intervals between consecutive events."""
+        pitches = self.pitches
+        if len(pitches) < 2:
+            return []
+        return [pitches[i+1] - pitches[i] for i in range(len(pitches)-1)]
+
+    @property
+    def volumes(self) -> List[int]:
+        """Return a list of all volumes in the sequence."""
+        return [event.volume for event in self.events]
+
+    def durations(self) -> List[int]:
+        """Return a list of all durations in the sequence."""
+        return [event.duration for event in self.events]
+
 @dataclass
 class MusicUnit(Base, MusicEventSequence):
     # A unit of music: a set of MusicEvents in sequence
@@ -129,57 +154,25 @@ class MusicUnit(Base, MusicEventSequence):
                 ):
         super(Base).__init__(name)
         super(MusicEventSequence).__init__(events)
-        # Pitch nodes (MIDI note numbers)
-        # Initialize the MusicUnit with pitch nodes, onset intervals, durations, and volumes
-        self._pitch_nodes = pitch_nodes if pitch_nodes else []
-        self._volumes = volumes if volumes else []
+        # Pitches (MIDI note numbers)
 
-        # Time intervals and durations
-        self._durations = durations if durations else []
-        self._onset_intervals = onset_intervals if onset_intervals else []
-
-        for i in range(len(self._pitch_nodes)):
-            start_tick = sum(self._onset_intervals[:i]) if i < len(self._onset_intervals) else 0
-            end_tick = start_tick + self._durations[i] if i < len(self._durations) else start_tick
+    def set_events(self,
+                   pitch_nodes: List[int] = None,
+                   onset_intervals: List[int] = None,
+                   durations: List[int] = None,
+                   volumes: List[int] = None,
+                   ):
+        for i in range(len(pitch_nodes)):
+            start_tick = sum(onset_intervals[:i]) if i < len(onset_intervals) else 0
+            end_tick = start_tick + durations[i] if i < len(durations) else start_tick
             event = MusicEvent(
-                pitch=self._pitch_nodes[i],
-                volume=self._volumes[i] if i < len(self._volumes) else 100,
+                pitch=pitch_nodes[i],
+                volume=volumes[i] if i < len(volumes) else 100,
                 start_tick=start_tick,
                 end_tick=end_tick
             )
             self.add_event(event)
 
-    @property
-    def pitch_nodes(self) -> list[int]:
-        return self._pitch_nodes
-
-    @property
-    def pitch_intervals(self) -> list[int]:
-        if len(self._pitch_nodes) < 2:
-            return []
-        return [self._pitch_nodes[i+1]-self._pitch_nodes[i] for i in range(len(self._pitch_nodes)-1)]
-
-    @property
-    def durations(self) -> list[int]:
-        return self._durations
-
-    @property
-    def volumes(self) -> list[int]:
-        return self._volumes
-
-    @property
-    def onset_times(self) -> list[int]:
-        # Calculate onset times based on onset intervals
-        times = []
-        current_time = 0
-        for interval in self._onset_intervals:
-            times.append(current_time)
-            current_time += interval
-        return times
-
-    @property
-    def onset_intervals(self) -> list[int]:
-        return self._onset_intervals
 
     def clone(self) -> 'MusicUnit':
         # Create a copy of the MusicUnit

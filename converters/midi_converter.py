@@ -1,9 +1,14 @@
 
 from utilities import Config
 from music21 import stream, converter, midi
+from musicpy import musicpy, structures
 
 
 # MIDI file converters
+def midifile_to_piece(filename_in: str = Config.DEFAULT_MIDI_FILE_IN) -> structures.piece:
+    # Load a piece
+    return musicpy.read(Config.DEFAULT_PATH + filename_in, get_off_drums=True, split_channels=True)
+
 
 def score_to_midifile(score: stream.Score, filename_out: str = Config.DEFAULT_MIDI_FILE_OUT):
     # Save score

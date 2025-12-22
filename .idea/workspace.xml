@@ -4,20 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="timescale, meter and rhythm">
-      <change afterPath="$PROJECT_DIR$/converters/midi_converter.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/converters/music21_musicpy.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/converters/music21_note.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/converters/music21_pattern.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/converters/music21_stream.py" afterDir="false" />
+    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="music21 converters">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/music21_converter.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/music21_score.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/project.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/time.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/time.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/visual.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/visual.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generators/chord_degrees.py" beforeDir="false" afterPath="$PROJECT_DIR$/generators/chord_degrees.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/examples/3voices.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/examples/3voices.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/examples/load_and_analyze.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/examples/load_and_analyze.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/converters/midi_converter.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/midi_converter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/converters/music21_musicpy.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/music21_musicpy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/converters/musicpy_converter.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/musicpy_converter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generators/harmonics.py" beforeDir="false" afterPath="$PROJECT_DIR$/generators/harmonics.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/examples/compose.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/examples/compose.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/examples/systematic.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/examples/systematic.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/structures/intervalnetwork.py" beforeDir="false" afterPath="$PROJECT_DIR$/research/intervalnetwork.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/structures/network.py" beforeDir="false" afterPath="$PROJECT_DIR$/research/network.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/structures/unit.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/unit.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/transformers/pitchsequence.py" beforeDir="false" afterPath="$PROJECT_DIR$/transformers/pitchsequence.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -223,15 +221,8 @@
       <workItem from="1766150200849" duration="6088000" />
       <workItem from="1766226909347" duration="7161000" />
       <workItem from="1766238862150" duration="11405000" />
-      <workItem from="1766317992958" duration="2832000" />
-    </task>
-    <task id="LOCAL-00146" summary="Restructuring">
-      <option name="closed" value="true" />
-      <created>1762189616482</created>
-      <option name="number" value="00146" />
-      <option name="presentableId" value="LOCAL-00146" />
-      <option name="project" value="LOCAL" />
-      <updated>1762189616483</updated>
+      <workItem from="1766317992958" duration="2870000" />
+      <workItem from="1766394885186" duration="3820000" />
     </task>
     <task id="LOCAL-00147" summary="Restructuring in functional modules">
       <option name="closed" value="true" />
@@ -617,7 +608,15 @@
       <option name="project" value="LOCAL" />
       <updated>1766270578280</updated>
     </task>
-    <option name="localTasksCounter" value="195" />
+    <task id="LOCAL-00195" summary="music21 converters">
+      <option name="closed" value="true" />
+      <created>1766320863640</created>
+      <option name="number" value="00195" />
+      <option name="presentableId" value="LOCAL-00195" />
+      <option name="project" value="LOCAL" />
+      <updated>1766320863641</updated>
+    </task>
+    <option name="localTasksCounter" value="196" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -650,7 +649,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="generators" />
     <MESSAGE value="refactoring" />
     <MESSAGE value="refactoring and matrix structure" />
     <MESSAGE value="matrix.py" />
@@ -675,32 +673,11 @@
     <MESSAGE value="score, stream, section, unit, MusicEvent" />
     <MESSAGE value="unit = pitch + time" />
     <MESSAGE value="timescale, meter and rhythm" />
-    <option name="LAST_COMMIT_MESSAGE" value="timescale, meter and rhythm" />
+    <MESSAGE value="music21 converters" />
+    <option name="LAST_COMMIT_MESSAGE" value="music21 converters" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/structures/intervalnetwork.py</url>
-          <line>14</line>
-          <option name="timeStamp" value="44" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/transformers/pitchsequence.py</url>
-          <line>69</line>
-          <option name="timeStamp" value="46" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/projects/examples/systematic.py</url>
-          <line>37</line>
-          <option name="timeStamp" value="48" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/generators/harmonics.py</url>
-          <line>4</line>
-          <option name="timeStamp" value="51" />
-        </line-breakpoint>
-      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">

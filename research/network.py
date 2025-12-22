@@ -6,7 +6,7 @@ Each node represents a pitch class or scale degree, and edges are annotated
 with interval data and voice-leading movements between chords.
 The graphs can be exported in various formats and visualized using Matplotlib.
 """
-from .pitch import MusicPitchClass
+from structures.pitch import MusicPitchClass
 
 """
 TODO:

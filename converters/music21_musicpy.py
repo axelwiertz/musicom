@@ -13,7 +13,12 @@ def piece_to_score (piece : structures.piece) -> stream.Score:
     # convert musicpy piece to music21 score
     return mpy_to_m21(piece)
 
+
 # Unit converters
+def chord_to_stream(chord: structures.chord) -> stream.Stream:
+    # convert musicpy piece to music21 score
+    return mpy_to_m21(chord)
+
 def stream_to_chord(stream_in: stream.Stream) -> structures.chord:
     # convert music21 stream to musicpy chord
     return m21_to_mpy(stream_in)

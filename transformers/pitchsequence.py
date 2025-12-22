@@ -10,8 +10,7 @@ class PitchSequenceTransformer(MusicTransformer):
     INVERSION = 'I'
     RETROGRADE = 'R'
     RETROGRADE_INVERSION = 'RI'
-
-
+    """Handles pitch sequence transformations such as prime, inversion, retrograde, and retrograde inversion."""
     def __init__(self,
                  _unit: MusicUnit,
                  method : str = None,
@@ -21,12 +20,10 @@ class PitchSequenceTransformer(MusicTransformer):
         self.index = index
         self.tone_row = serial.ToneRow(self._unit.pitch_nodes)
 
-
     def transform(self) -> List["MusicUnit"]:
         # Produce transformed MusicUnit
         self.execute(self.method, self.index)
         return [self._unit]
-
 
     def execute(self, trans : str, index : int = 0):
         # Transform tone row
@@ -34,12 +31,10 @@ class PitchSequenceTransformer(MusicTransformer):
         self.tone_row = serial.ToneRow(self._unit.pitch_nodes).zeroCenteredTransformation (trans, index)
         self._unit.pitch_nodes = self.tone_row.pitches.midiNumbers
 
-
     def transpose(self, pitch_interval : int) -> None:
         # Transpose the unit's pitches by interval in positive or negative direction (ASCENDING or DESCENDING)
         self.tone_row = serial.ToneRow(self._unit.pitch_nodes).transpose(pitch_interval)
         self._unit.pitch_nodes = self.tone_row.pitches.midiNumbers
-
 
     def change_durations(self, factor_or_func: Any) -> None:
         """Changes the duration of the music unit's elements.

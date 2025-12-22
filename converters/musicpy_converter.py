@@ -1,31 +1,18 @@
 """MusicPy converters."""
-from utilities.config import Config
-from structures import MusicPitchClass, MusicUnit, MusicTime, MusicVoice, MusicPattern, MidiInstrument
-from rules import Cardinality, PatternType
+from structures import MusicPitchClass, MusicUnit, MusicTime, MusicVoice, MusicPattern, MidiInstrument, Cardinality, PatternType
 from musicpy import musicpy, structures
-from music21 import stream
-from music21py import mpy_to_m21
-
-
-def chord_to_stream(chord: structures.chord) -> stream.Stream:
-    # convert musicpy piece to music21 score
-    return mpy_to_m21(chord)
 
 
 def pattern_to_mpscale(pattern: MusicPattern) -> structures.scale:
     mpscale = structures.scale()
 
     # Diatonic (7 pitch class) scale
-    if pattern.cardinality == Cardinality.HEPTA and pattern.interval_pattern == PatternType.SCALE:
+    if pattern.cardinality == Cardinality.HEPTA and pattern.pattern_type == PatternType.SCALE:
         # MusicPy structures
-        mpscale = structures.scale(MusicPitchClass.NAMES_SHARP[pattern.tonic], interval=pattern.modes[pattern.mode])
+        mpscale = structures.scale(MusicPitchClass.NAMES_SHARP[pattern.tonic_pitch_class], interval=pattern.modes[pattern.mode])
 
     return mpscale
 
-
-def midifile_to_piece(filename_in: str = Config.DEFAULT_MIDI_FILE_IN) -> structures.piece:
-    # Load a piece
-    return musicpy.read(Config.DEFAULT_PATH + filename_in, get_off_drums=True, split_channels=True)
 
 
 # Print converters
@@ -43,11 +30,11 @@ def modulate_unit(unit: MusicUnit,
     unit.pitch_nodes = unit_to_chord(unit).modulation(scale_source, scale_target).pitches
 
 
-# Unit converters
 def unit_to_sound(unit: MusicUnit, time: MusicTime, midi_instrument: int = MidiInstrument.PIANO):
     musicpy.play(unit_to_chord(unit), bpm=time.bpm, instrument=midi_instrument, wait=True)
 
 
+# Unit converters
 def unit_to_chord(unit: MusicUnit) -> structures.chord:
     return structures.chord(unit.pitch_nodes, unit.durations, unit.onset_intervals, unit.volumes)
 
@@ -70,5 +57,5 @@ def voice_to_track(voice: MusicVoice) -> structures.track:
 
 
 def piece_play(piece: structures.piece):
-    # Play piece and wait until finish, writes temusicpy.midi
+    # Play piece and wait until finish, writes temp.midi
     musicpy.play(piece, wait=True)
