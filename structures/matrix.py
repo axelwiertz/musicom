@@ -6,24 +6,36 @@ from structures.unit import MusicUnit
 
 class UnitMatrix:
     """
-    Basic 2D matrix for musical material:
+    Basic 2D matrix for MusicUnit objects:
     - horizontal rows are voices in pitch space
     - vertical columns are sections in time space
-    Cells contain MusicUnit objects
     """
-
-    def __init__(self, data = None):
-        self.data = np.asarray(data)
+    ROW = 0
+    COL = 1
+    def __init__(self, data = None, shape: Tuple[int, int] = None):
+        if data is None and shape is None:
+            raise ValueError("Either data or shape must be provided")
+        self.data: np.ndarray
+        if shape is not None:
+            self.data = np.empty(shape, dtype=object)
+        if data is not None:
+            self.data = np.asarray(data)
 
     def __add__(self, other):
         return UnitMatrix(self.data + np.asarray(other))
 
     def __repr__(self):
-        return f"MyArray({self.data})"
+        return f"UnitMatrix({self.data})"
 
+    @property
+    def num_rows(self) -> int:
+        return self.data.shape[self.ROW]
+    @property
+    def num_cols(self) -> int:
+        return self.data.shape[self.COL]
 
     def clone(self) -> "UnitMatrix":
-        return UnitMatrix(self.data.copy())
+        return UnitMatrix(data=self.data.copy())
 
     # Row operations
     def apply_to_row(self, r: int, func: Callable[[Any], Any]):
@@ -33,7 +45,7 @@ class UnitMatrix:
         self.data[:, c] = [func(x) for x in self.data[:, c]]
 
     def repeat_column(self, c: int, times: int = 1, after: bool = True):
-        cols = self.data.shape[1]
+        cols = self.data.shape[self.COL]
         if not (0 <= c < cols):
             raise IndexError("column index out of range")
         col_data = self.data[:, c:c+1]

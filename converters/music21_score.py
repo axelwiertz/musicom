@@ -1,45 +1,57 @@
 """Converters between music21 and other structures."""
-from structures import UnitMatrix, MusicSection
+from structures import MusicProject, MusicTime, UnitMatrix, MusicSection, MusicVoice
 from converters.music21_stream import stream_to_unit, matrix_row_to_stream
+from converters.music21_pattern import key_to_pattern
 from converters.time import meter_to_time, time_to_meter, time_to_tempo
 from music21 import stream
 
 # Score converters
 
-def score_to_section(score: stream.Score) -> MusicSection:
-    # Convert score parts to matrix column of units
-    matrix = UnitMatrix(len(score.parts), 1)
-    time = meter_to_time(score.timeSignature, 4, score.metronomeMarkBoundaries()[0][2].number)
-    matrix.time = time
-    section = MusicSection(score.metadata.title or 'Untitled', None, matrix)
+def score_to_project(score: stream.Score) -> MusicProject:
+    """Convert music21 Score to MusicProject."""
+    # Get time signature and tempo from score
+    if score.timeSignature is not None:
+        time = meter_to_time(score.timeSignature, 4, score.metronomeMarkBoundaries()[0][2].number)
+    else:
+        time = MusicTime.default_time()
 
+    score_key = score.analyze('key')
+
+    # Create project
+    project = MusicProject(name=score.metadata.title or 'Untitled',
+                           pattern=key_to_pattern(score_key),
+                           sections=[MusicSection('From Score')],
+                           matrix=UnitMatrix(shape=(len(score.parts), 1)),
+                           voices=[],
+                           time=time)
+
+    # Convert m21 parts to matrix rows (voices)
     for i, p in enumerate(score.parts):
-        matrix.set_unit(i,0, stream_to_unit(p, time))
-        matrix.get_unit(i,0).name = p.partName
+        # Add voice
+        project.voices.append (MusicVoice(
+            name=p.partName or f'Voice {i+1}',
+            midi_instrument=p.getInstrument().midiProgram,
+            row_index=i,))
+        # Convert part stream to matrix row
+        project.matrix.set_unit(i,0, stream_to_unit(p, time))
 
-    return section
+    return project
 
 
-def section_to_score(section : MusicSection) -> stream.Score:
-    # Convert section to m21 score
+def project_to_score(project: MusicProject) -> stream.Score:
+    """Convert MusicProject to music21 Score."""
     score = stream.Score()
-    score.insert(0, time_to_meter(section.time))
-    score.insert(0, time_to_tempo(section.time))
+    score.insert(0, time_to_meter(project.time))
+    score.insert(0, time_to_tempo(project.time))
 
-    # Convert section matrix to m21 parts
-    for i in range(section.matrix.rows):
+    # Convert matrix rows to m21 parts
+    for i, v in enumerate(project.voices):
+        # Create part for each voice
         part_ = stream.Part()
-        stream_ = matrix_row_to_stream (section.matrix, i, section.time)
+        stream_ = matrix_row_to_stream (project.matrix, i, project.time)
         part_.append(stream_)
-        part_.partName = f"Voice {i+1}"
+        part_.partName = v.name
         score.append(part_)
 
     return score
 
-def project_to_score(project) -> stream.Score:
-    # Convert entire project to m21 score
-    score = stream.Score()
-    for section in project.sections:
-        sec_score = section_to_score(section)
-        score.append(sec_score)
-    return score

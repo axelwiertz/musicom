@@ -6,11 +6,14 @@ from converters.music21_pattern import pattern_to_m21scale
 
 def test_project():
     # Project
-    my_project = MusicProject("My First Song")
-
-    # Create voices
-    voices = [MusicVoice("Melody"), MusicVoice("Bass")]
-    print(voices)
+    project = MusicProject(
+        name="My First Song",
+        time = MusicTime(4, 4, 4),
+        sections=[MusicSection(name="Intro")],
+        voices=[MusicVoice("Melody"), MusicVoice("Bass")],
+        matrix=UnitMatrix(shape=(2, 2)),
+    )
+    print(project.voices)
 
     # Units
     unit_a1 = MusicUnit()
@@ -19,21 +22,17 @@ def test_project():
     unit_b2 = MusicUnit()
 
     # Section with matrix
-    intro_section = MusicSection(name="Intro",
-                                 time=MusicTime(4,4,4))
-    matrix = UnitMatrix(2, 2)
-    .matrix.set_unit(0, 0, unit_a1)
-    intro_section.matrix.set_unit(0, 1, unit_a2)
-    intro_section.matrix.set_unit(1, 0, unit_b1)
-    intro_section.matrix.set_unit(1, 1, unit_b2)
-    print(intro_section.matrix)
+    project.matrix.set_unit(0, 0, unit_a1)
+    project.matrix.set_unit(0, 1, unit_a2)
+    project.matrix.set_unit(1, 0, unit_b1)
+    project.matrix.set_unit(1, 1, unit_b2)
+    print(project.matrix)
 
-    my_project.sections = [intro_section]
 
     # Print the structure
-    print(my_project)
-    print(my_project.sections[0])
-    print(my_project.sections[0].matrix)
+    print(project)
+    print(project.sections[0])
+    print(project.voices)
 
 
 def test_pitch():

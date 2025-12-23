@@ -1,5 +1,6 @@
+"""Converters between music21 scales/keys and MusicPattern objects."""
 from structures import Cardinality, PatternType, MusicPattern
-from music21 import note, scale, key, stream
+from music21 import note, scale, key
 
 
 # Pattern converters
@@ -16,10 +17,6 @@ def key_to_pattern(m21key: key.Key) -> MusicPattern:
     pattern.set_tonic_pitch_class(m21key.tonic.pitchClass)
 
     return pattern
-
-def score_to_pattern(score: stream.Score) -> MusicPattern:
-    key_ = score.analyze('key')
-    return key_to_pattern(key_)
 
 
 def pattern_to_m21scale(pattern: MusicPattern) -> scale.ConcreteScale:

@@ -4,20 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="project structure">
+    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="UnitMatrix is np.array">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/converters/music21_pattern.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/music21_pattern.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/converters/music21_score.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/music21_score.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/music21_stream.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/music21_stream.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/balfolk.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/balfolk.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/examples/3voices.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/examples/3voices.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/examples/compose.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/examples/compose.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/examples/cross_voice.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/examples/cross_voice.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/examples/systematic.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/examples/systematic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/research/percussion_voice.py" beforeDir="false" afterPath="$PROJECT_DIR$/research/percussion_voice.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/converters/visual.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/visual.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/examples/load_and_analyze.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/examples/load_and_analyze.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/structures/matrix.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/matrix.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/project.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/project.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/structures/time.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/time.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/structures/unit.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/unit.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testers/test_structures.py" beforeDir="false" afterPath="$PROJECT_DIR$/testers/test_structures.py" afterDir="false" />
     </list>
@@ -64,76 +58,77 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Python.3voices.executor&quot;: &quot;Run&quot;,
-    &quot;Python.MIDI_import.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.Sound.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.balfolk.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.canon-gen.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.composition.executor&quot;: &quot;Run&quot;,
-    &quot;Python.constants.executor&quot;: &quot;Run&quot;,
-    &quot;Python.cp.executor&quot;: &quot;Run&quot;,
-    &quot;Python.database.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.datastructure.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.examples.executor&quot;: &quot;Run&quot;,
-    &quot;Python.genetic.executor&quot;: &quot;Run&quot;,
-    &quot;Python.harmony.executor&quot;: &quot;Run&quot;,
-    &quot;Python.instruments.executor&quot;: &quot;Run&quot;,
-    &quot;Python.library.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.load_and_analyze.executor&quot;: &quot;Run&quot;,
-    &quot;Python.m21.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.music21_converter.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.musicdata.executor&quot;: &quot;Run&quot;,
-    &quot;Python.musicom.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.musicpy.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.packages.executor&quot;: &quot;Run&quot;,
-    &quot;Python.part01.executor&quot;: &quot;Run&quot;,
-    &quot;Python.pattern.executor&quot;: &quot;Run&quot;,
-    &quot;Python.percussion_voice.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.pitchsequence.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.rhythm.executor&quot;: &quot;Run&quot;,
-    &quot;Python.song.executor&quot;: &quot;Run&quot;,
-    &quot;Python.song002.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.soundlayer.executor&quot;: &quot;Run&quot;,
-    &quot;Python.structures.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.systematic.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test_base.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test_converters.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test_generators.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test_structures.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test_transformators.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test_visualization.executor&quot;: &quot;Run&quot;,
-    &quot;Python.theory.executor&quot;: &quot;Run&quot;,
-    &quot;Python.thread.executor&quot;: &quot;Run&quot;,
-    &quot;Python.three_voices.executor&quot;: &quot;Run&quot;,
-    &quot;Python.twelvetet.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ai.playground.ignore.import.keys.banner.in.settings&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/92591/PycharmProjects/musicom&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;aDefault&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Python.3voices.executor": "Run",
+    "Python.MIDI_import.executor": "Debug",
+    "Python.Sound.executor": "Debug",
+    "Python.balfolk.executor": "Debug",
+    "Python.canon-gen.executor": "Debug",
+    "Python.composition.executor": "Run",
+    "Python.constants.executor": "Run",
+    "Python.cp.executor": "Run",
+    "Python.database.executor": "Debug",
+    "Python.datastructure.executor": "Debug",
+    "Python.examples.executor": "Run",
+    "Python.genetic.executor": "Run",
+    "Python.harmony.executor": "Run",
+    "Python.instruments.executor": "Run",
+    "Python.library.executor": "Debug",
+    "Python.load_and_analyze.executor": "Run",
+    "Python.m21.executor": "Debug",
+    "Python.music21_converter.executor": "Debug",
+    "Python.music21_score.executor": "Debug",
+    "Python.musicdata.executor": "Run",
+    "Python.musicom.executor": "Debug",
+    "Python.musicpy.executor": "Debug",
+    "Python.packages.executor": "Run",
+    "Python.part01.executor": "Run",
+    "Python.pattern.executor": "Run",
+    "Python.percussion_voice.executor": "Debug",
+    "Python.pitchsequence.executor": "Debug",
+    "Python.rhythm.executor": "Run",
+    "Python.song.executor": "Run",
+    "Python.song002.executor": "Debug",
+    "Python.soundlayer.executor": "Run",
+    "Python.structures.executor": "Debug",
+    "Python.systematic.executor": "Run",
+    "Python.test_base.executor": "Run",
+    "Python.test_converters.executor": "Run",
+    "Python.test_generators.executor": "Run",
+    "Python.test_structures.executor": "Run",
+    "Python.test_transformators.executor": "Run",
+    "Python.test_visualization.executor": "Run",
+    "Python.theory.executor": "Run",
+    "Python.thread.executor": "Run",
+    "Python.three_voices.executor": "Run",
+    "Python.twelvetet.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ai.playground.ignore.import.keys.banner.in.settings": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/92591/PycharmProjects/musicom",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "run.code.analysis.last.selected.profile": "aDefault",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;Python&quot;,
-      &quot;PLAIN_TEXT&quot;
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "Python",
+      "PLAIN_TEXT"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\92591\PycharmProjects\musicom" />
@@ -229,15 +224,8 @@
       <workItem from="1766394885186" duration="3891000" />
       <workItem from="1766409721312" duration="9902000" />
       <workItem from="1766431558574" duration="797000" />
-      <workItem from="1766432466937" duration="6199000" />
-    </task>
-    <task id="LOCAL-00149" summary="projects">
-      <option name="closed" value="true" />
-      <created>1762380949056</created>
-      <option name="number" value="00149" />
-      <option name="presentableId" value="LOCAL-00149" />
-      <option name="project" value="LOCAL" />
-      <updated>1762380949056</updated>
+      <workItem from="1766432466937" duration="6262000" />
+      <workItem from="1766502255468" duration="10233000" />
     </task>
     <task id="LOCAL-00150" summary="adding librosa">
       <option name="closed" value="true" />
@@ -623,7 +611,15 @@
       <option name="project" value="LOCAL" />
       <updated>1766419710236</updated>
     </task>
-    <option name="localTasksCounter" value="198" />
+    <task id="LOCAL-00198" summary="UnitMatrix is np.array">
+      <option name="closed" value="true" />
+      <created>1766438769094</created>
+      <option name="number" value="00198" />
+      <option name="presentableId" value="LOCAL-00198" />
+      <option name="project" value="LOCAL" />
+      <updated>1766438769095</updated>
+    </task>
+    <option name="localTasksCounter" value="199" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -656,7 +652,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="matrix.py" />
     <MESSAGE value="project and grid" />
     <MESSAGE value="project, matrix, unit, transformators" />
     <MESSAGE value="transformators, testers" />
@@ -681,15 +676,16 @@
     <MESSAGE value="music21 converters" />
     <MESSAGE value="unit is eventsequence" />
     <MESSAGE value="project structure" />
-    <option name="LAST_COMMIT_MESSAGE" value="project structure" />
+    <MESSAGE value="UnitMatrix is np.array" />
+    <option name="LAST_COMMIT_MESSAGE" value="UnitMatrix is np.array" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/structures/unit.py</url>
-          <line>1</line>
-          <option name="timeStamp" value="1" />
+          <url>file://$PROJECT_DIR$/converters/music21_score.py</url>
+          <line>35</line>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -706,7 +702,7 @@
     <SUITE FILE_PATH="coverage/musicom$pitchsequence.coverage" NAME="pitchsequence Coverage Results" MODIFIED="1764794483421" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/transformers" />
     <SUITE FILE_PATH="coverage/musicom$pattern.coverage" NAME="pattern Coverage Results" MODIFIED="1765893413215" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/structures" />
     <SUITE FILE_PATH="coverage/musicom$constants.coverage" NAME="constants Coverage Results" MODIFIED="1763500522878" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testers" />
-    <SUITE FILE_PATH="coverage/musicom$load_and_analyze.coverage" NAME="load_and_analyze Coverage Results" MODIFIED="1766259509557" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/projects/examples" />
+    <SUITE FILE_PATH="coverage/musicom$load_and_analyze.coverage" NAME="load_and_analyze Coverage Results" MODIFIED="1766523763201" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/projects/examples" />
     <SUITE FILE_PATH="coverage/musicom$three_voices.coverage" NAME="three_voices Coverage Results" MODIFIED="1764839633473" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/projects/examples" />
     <SUITE FILE_PATH="coverage/musicom$m21.coverage" NAME="m21 Coverage Results" MODIFIED="1764847069384" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/converters" />
     <SUITE FILE_PATH="coverage/musicom$test_base.coverage" NAME="test_base Coverage Results" MODIFIED="1764580863357" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testers" />
@@ -715,10 +711,11 @@
     <SUITE FILE_PATH="coverage/musicom$packages.coverage" NAME="packages Coverage Results" MODIFIED="1763500800882" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testers" />
     <SUITE FILE_PATH="coverage/musicom$test_converters.coverage" NAME="test_converters Coverage Results" MODIFIED="1764580867856" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testers" />
     <SUITE FILE_PATH="coverage/musicom$musicdata.coverage" NAME="musicdata Coverage Results" MODIFIED="1765894413361" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/research" />
-    <SUITE FILE_PATH="coverage/musicom$test_structures.coverage" NAME="test_structures Coverage Results" MODIFIED="1766041053352" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testers" />
+    <SUITE FILE_PATH="coverage/musicom$test_structures.coverage" NAME="test_structures Coverage Results" MODIFIED="1766524980123" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testers" />
     <SUITE FILE_PATH="coverage/musicom$test_generators.coverage" NAME="test_generators Coverage Results" MODIFIED="1765487321169" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testers" />
     <SUITE FILE_PATH="coverage/musicom$music21_converter.coverage" NAME="music21_converter Coverage Results" MODIFIED="1766088074962" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/converters" />
     <SUITE FILE_PATH="coverage/musicom$3voices.coverage" NAME="3voices Coverage Results" MODIFIED="1764841586724" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/projects/examples" />
+    <SUITE FILE_PATH="coverage/musicom$music21_score.coverage" NAME="music21_score Coverage Results" MODIFIED="1766522347947" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/converters" />
     <SUITE FILE_PATH="coverage/musicom$test_transformators.coverage" NAME="test_transformators Coverage Results" MODIFIED="1764702850584" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testers" />
     <SUITE FILE_PATH="coverage/musicom$library.coverage" NAME="library Coverage Results" MODIFIED="1759609971862" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
