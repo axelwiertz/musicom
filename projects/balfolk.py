@@ -2,7 +2,7 @@
 import random
 from structures import MusicProject, MusicSection, MusicVoice, MusicTime, MusicPitchClass, PitchRange
 from structures import MusicPattern, Cardinality, PatternType, PatternMode, UnitMatrix
-from converters.music21_score import section_to_score
+from converters.music21_score import project_to_score
 from converters.midi_converter import score_to_midifile
 from generators import SequentialPatternGenerator
 from analysis import score_analyze
@@ -10,7 +10,7 @@ from analysis import score_analyze
 MELODY = 0
 BASS = 1
 # Scale: A minor (C major)
-proj = MusicProject(name='Balfolk Project',
+proj = MusicProject(name='Balfolk',
                     pattern=MusicPattern('A minor',
                                  Cardinality.HEPTA,
                                  PatternType.SCALE,
@@ -29,20 +29,23 @@ proj = MusicProject(name='Balfolk Project',
 # Bourrée-inspired melody
 triad_patterns = [1,2,3,4]
 
-tria_patterns = MusicPattern('Triads',
-                             Cardinality.TRIA,
-                             PatternType.MAJOR,
-                             PatternMode.major,
-                             MusicPitchClass.C,
-                             4)
+tria_patterns = MusicPattern(name='Triads',
+                             cardinality=Cardinality.TRIA,
+                             pattern_type=PatternType.MAJOR,
+                             mode=PatternMode.major,
+                             tonic_pitch_class=MusicPitchClass.C,
+                             tonic_octave=4)
 
 #TODO: Implement melody generator based on triad patterns
-gen = SequentialPatternGenerator([proj.pattern], 4, 2, 1)
+gen = SequentialPatternGenerator(patterns=[tria_patterns],
+                                 octave_in=4,
+                                 timesteps_in=2,
+                                volume_in=100)
 melody_units = gen.generate()
 
 melody_notes = [
-    ['C4', 'E4', 'G4'],
-    ['D4', 'F4', 'A4'],
+    ['C4', 'E4', 'G4'], # C major triad
+    ['D4', 'F4', 'A4'], #
     ['E4', 'G4', 'B4'],
     ['F4', 'A4', 'C5']
 ]
@@ -67,7 +70,7 @@ for i in range(32):  # matching melody length
     proj.matrix.data[BASS, i] = unit
 
 
-score = section_to_score(proj.sections[0])
+score = project_to_score(proj)
 
 # Analyze score
 score_analyze(score)

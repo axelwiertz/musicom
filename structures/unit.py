@@ -1,4 +1,4 @@
-"""Defines MusicEvent and MusicEventSequence classes for representing musical events and sequences."""
+"""Defines MusicEvent and MusicUnit classes for representing musical events and sequences."""
 import numpy as np
 from numpy import ndarray
 from dataclasses import dataclass
@@ -7,11 +7,17 @@ from typing import List, Tuple
 @dataclass
 class MusicEvent:
     """A basic music event with pitch, volume, start and end ticks."""
-    """ equivalent to a Note in music21 """
     PITCH = 0
     VOLUME = 1
     START_TICK = 2
     END_TICK = 3
+    DTYPE = np.dtype([
+        ('pitch', 'uint8'),
+        ('volume', 'uint8'),
+        ('start_tick', 'uint16'),
+        ('end_tick', 'uint16'),
+    ])  # pitch, volume, start_tick, end_tick
+
     def __init__(self,
                 pitch: int = None,
                 volume: int = None,
@@ -52,37 +58,39 @@ class MusicEvent:
 
 
 @dataclass
-class MusicEventSequence:
-    DTYPE = np.dtype([
-        ('pitch', 'uint8'),
-        ('volume', 'uint8'),
-        ('start_tick', 'uint16'),
-        ('end_tick', 'uint16'),
-    ])  # pitch, volume, start_tick, end_tick
-
+class MusicUnit:
+    """A MusicUnit represents a technical unit of music, defined by sets of MusicEvents,"""
+    # A unit of music: a set of MusicEvents in sequence
     def __init__(self,
-                 events: list[MusicEvent] | ndarray = None):
+                events: list[MusicEvent] | ndarray = None,
+                pitches: List[int] = None,
+                ):
 
         """Internally stores events in a structured numpy array for efficiency"""
-        self.data = np.empty(0, dtype=self.DTYPE)
+        self.data = np.empty(0, dtype=MusicEvent.DTYPE)
         if events is not None:
             if isinstance(events, ndarray):
                 arr = events
                 # If already structured with correct dtype, keep it
-                if arr.dtype == self.DTYPE:
+                if arr.dtype == MusicEvent.DTYPE:
                     self.data = arr
                 else:
                     arr = np.asarray(arr)
                     # Convert from plain (n,4) numeric array to structured
                     if arr.ndim == 2 and arr.shape[1] == 4:
-                        self.data = np.array([tuple(row) for row in arr], dtype=self.DTYPE)
+                        self.data = np.array([tuple(row) for row in arr], dtype=MusicEvent.DTYPE)
                     else:
                         # Attempt a safe cast for other ndarray shapes
-                        self.data = arr.astype(self.DTYPE, copy=False)
+                        self.data = arr.astype(MusicEvent.DTYPE, copy=False)
             else:
                 self.data = np.array(
                     [(e.pitch, e.volume, e.start_tick, e.end_tick) for e in events],
-                    dtype=self.DTYPE)
+                    dtype=MusicEvent.DTYPE)
+        else:
+            if pitches is not None:
+                # Initialize from a list of pitches with default values
+                for pitch in pitches:
+                    self.add_event(MusicEvent(pitch=pitch))
 
     @property
     def events(self) -> list[MusicEvent]:
@@ -94,9 +102,9 @@ class MusicEventSequence:
     def  __len__(self):
         return len(self.data)
 
-    def __add__(self, other) -> 'MusicEventSequence':
-        """Concatenate two MusicEventSequences."""
-        new_seq = MusicEventSequence()
+    def __add__(self, other) -> 'MusicUnit':
+        """Concatenate two MusicUnits."""
+        new_seq = MusicUnit()
         new_seq.data = np.concatenate((self.data, other.data))
         return new_seq
 
@@ -104,13 +112,13 @@ class MusicEventSequence:
         """Add a MusicEvent to the sequence."""
         self.data = np.append(self.data, np.array(
             [(event.pitch, event.volume, event.start_tick, event.end_tick)],
-            dtype=self.DTYPE
+            dtype=MusicEvent.DTYPE
         ))
 
-    def split(self, index: int) -> Tuple['MusicEventSequence', 'MusicEventSequence']:
+    def split(self, index: int) -> Tuple['MusicUnit', 'MusicUnit']:
         """Split the sequence at the given index into two sequences."""
-        seq1 = MusicEventSequence(self.data[:index])
-        seq2 = MusicEventSequence(self.data[index:])
+        seq1 = MusicUnit(self.data[:index])
+        seq2 = MusicUnit(self.data[index:])
         return seq1, seq2
 
     def __getitem__(self, index):
@@ -120,7 +128,7 @@ class MusicEventSequence:
         self.data[index] = value
 
     def __repr__(self):
-        return f"<MusicEventSequence({len(self.data)} events)>"
+        return f"<MusicUnit({len(self.data)} events)>"
 
     def get_pitches_at_tick(self, tick: int) -> List[int]:
         """Return all pitches active at a given time."""
@@ -158,20 +166,6 @@ class MusicEventSequence:
         """Return a list of all durations in the sequence."""
         return [event.duration for event in self.events]
 
-@dataclass
-class MusicUnit(MusicEventSequence):
-    """A MusicUnit represents a technical unit of music, defined by sets of MusicEvents,"""
-    # A unit of music: a set of MusicEvents in sequence
-    def __init__(self,
-                events: MusicEventSequence | ndarray = None,
-                pitches: List[int] = None,
-                ):
-        super().__init__(events)
-
-        if pitches is not None:
-            # Initialize from a list of pitches with default values
-            for pitch in pitches:
-                self.add_event(MusicEvent(pitch=pitch))
 
     def old_set(self,
                    pitch_nodes: List[int] = None,         # Pitches (MIDI note numbers)
