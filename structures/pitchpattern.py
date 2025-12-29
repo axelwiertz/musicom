@@ -4,10 +4,10 @@ from .base import Base
 from .pitch import MusicPitchClass, MusicPitch, Direction
 from utilities import sequence_rotations, interval_to_step
 
-"""Diatonic musical patterns: cardinality, intervals, scales, modes, chords"""
+"""MusicPattern pitch(class) patterns: cardinality, intervals, scales, modes, chords"""
 
 class Cardinality:
-    # Diatonic patterns: cardinality, intervals, scales, modes, chords
+    # MusicPattern patterns: cardinality, intervals, scales, modes, chords
     DYAD = 2
     TRIA = 3
     TETRA = 4
@@ -23,13 +23,19 @@ class Cardinality:
 class PatternType:
     SCALE = 0
 
-    MINOR_THIRD = 1
-    MAJOR_THIRD = 2
-    PERFECT_FOURTH = 3
-    TRITONE = 4
-    PERFECT_FIFTH = 5
-    MINOR_SIXTH = 6
-    MAJOR_SIXTH = 7
+    UNISON = 0
+    MINOR_SECOND = 1
+    MAJOR_SECOND = 2
+    MINOR_THIRD = 3
+    MAJOR_THIRD = 4
+    PERFECT_FOURTH = 5
+    TRITONE = 6
+    PERFECT_FIFTH = 7
+    MINOR_SIXTH = 8
+    MAJOR_SIXTH = 9
+    MINOR_SEVENTH = 10
+    MAJOR_SEVENTH = 11
+    OCTAVE = 12
 
     DIMINISHED = 1
     MINOR = 2
@@ -63,11 +69,13 @@ class PatternMode:
     mode_names_reverse = {v:k for k,v in mode_names.items()}
 
 
-class Diatonic:
-    # Interval patterns for scales and chords
+class MusicPattern:
+    # Interval patterns for pitch classes
     # pitch_intervals: tuple of interval steps, e.g. (2,2)
     pattern = {
         Cardinality.DYAD: {
+            PatternType.MINOR_SECOND    : (1, 11),
+            PatternType.MAJOR_SECOND    : (2, 10),
             PatternType.MINOR_THIRD     : (3, 9),
             PatternType.MAJOR_THIRD     : (4, 8),
             PatternType.PERFECT_FOURTH  : (5, 7),
@@ -75,6 +83,8 @@ class Diatonic:
             PatternType.PERFECT_FIFTH   : (7, 5),
             PatternType.MINOR_SIXTH     : (8, 4),
             PatternType.MAJOR_SIXTH     : (9, 3),
+            PatternType.MINOR_SEVENTH   : (10, 2),
+            PatternType.MAJOR_SEVENTH   : (11, 1)
         },
         # 3 Triad scale Patterns
         Cardinality.TRIA:  {
@@ -117,9 +127,8 @@ class Diatonic:
 
 
 #TODO: Add methods for pattern manipulation, e.g., inversion, retrograde, etc.
-#TODO: Patterns are units?
 
-class MusicPattern(Base):
+class MusicPitchPattern(Base):
     """Musical pattern based on diatonic scales, modes, and intervals."""
 
     def __init__(self,
@@ -179,12 +188,15 @@ class MusicPattern(Base):
     def tonic_pitch_class(self) -> int:
         """Get the tonic pitch class."""
         return self._tonic_pitch_class
+    @property
+    def tonic_octave(self) -> int:
+        return self._tonic_octave
 
     @property
     def pitch_class_intervals(self) -> Tuple[int] | Tuple[()]:
         """Get pitch class intervals for the pattern."""
         if self._cardinality is not None and self._pattern_type is not None:
-            return Diatonic.pattern.get(self._cardinality, {}).get(self._pattern_type, ())
+            return MusicPattern.pattern.get(self._cardinality, {}).get(self._pattern_type, ())
         else:
             return ()
 
@@ -240,12 +252,12 @@ class MusicPattern(Base):
 
         return indices
 
-    def transpose(self, pitch_interval: int, direction: int = Direction.ASCENDING) -> 'MusicPattern':
+    def transpose(self, pitch_interval: int, direction: int = Direction.ASCENDING) -> 'MusicPitchPattern':
         """Return new pattern transposed by pitch_interval on the helix."""
         new_tonic = (self._tonic_pitch_class + direction * pitch_interval) % MusicPitchClass.TWELVE
         new_octave = self._tonic_octave + (self._tonic_pitch_class + direction * pitch_interval) // MusicPitchClass.TWELVE
 
-        return MusicPattern(
+        return MusicPitchPattern(
             name=f"{self.name} (transposed)",
             cardinality=self._cardinality,
             pattern_type=self._pattern_type,
@@ -262,7 +274,7 @@ class MusicPattern(Base):
 
 
 
-class PatternSequence:
+class MusicPatternSequence:
     """ Ordered set of patterns """
-    def __init__(self, patterns: list[MusicPattern]):
+    def __init__(self, patterns: list[MusicPitchPattern]):
         self.patterns = patterns

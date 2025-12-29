@@ -1,5 +1,5 @@
 from structures import MusicPitchClass, MusicPitch, Direction
-from structures import MusicTime, MusicPattern, Cardinality, PatternType, PatternMode
+from structures import MusicTimePattern, MusicPitchPattern, Cardinality, PatternType, PatternMode
 from structures import MusicProject, MusicUnit, MusicVoice, UnitMatrix, MusicSection
 from converters.music21_pattern import pattern_to_m21scale
 
@@ -8,7 +8,7 @@ def test_project():
     # Project
     project = MusicProject(
         name="My First Song",
-        time = MusicTime(4, 4, 4),
+        time = MusicTimePattern(4, 4, 4),
         sections=[MusicSection(name="Intro")],
         voices=[MusicVoice("Melody"), MusicVoice("Bass")],
         matrix=UnitMatrix(shape=(2, 2)),
@@ -52,7 +52,7 @@ def test_pitch():
 def test_patterns():
     # New composition
     project = MusicProject('Test Patterns',
-                           MusicPattern("C Major", Cardinality.HEPTA, PatternType.SCALE, PatternMode.major, MusicPitchClass.C)
+                           MusicPitchPattern("C Major", Cardinality.HEPTA, PatternType.SCALE, PatternMode.major, MusicPitchClass.C)
                            )
     pitch_classes = project.pattern.pitch_classes
     print (f'Pattern pitch classes: {pitch_classes}')
@@ -60,19 +60,19 @@ def test_patterns():
     print(m21scale)
 
     # Diatonic heptatonic scale patterns
-    interval_pattern7 = MusicPattern("Heptatonic scale", Cardinality.HEPTA, PatternType.SCALE)
+    interval_pattern7 = MusicPitchPattern("Heptatonic scale", Cardinality.HEPTA, PatternType.SCALE)
     print(f'Heptatonic major scale intervals: {interval_pattern7.pitch_class_intervals}')
 
-    major_triad = MusicPattern("Major triad", Cardinality.TRIA, PatternType.MAJOR)  # Major triad
+    major_triad = MusicPitchPattern("Major triad", Cardinality.TRIA, PatternType.MAJOR)  # Major triad
     print("Major Triad Intervals:", major_triad.pitch_class_intervals, "Pitch classes: ", major_triad.pitch_classes)
 
-    minor7_chord = MusicPattern("minor7 chord", Cardinality.TETRA, PatternType.MINOR7)  # Minor7 chord
+    minor7_chord = MusicPitchPattern("minor7 chord", Cardinality.TETRA, PatternType.MINOR7)  # Minor7 chord
     print("Minor7 Chord Intervals:", minor7_chord.pitch_class_intervals, "Pitch classes: ", minor7_chord.pitch_classes)
 
     # Patterns: Diatonic scales
-    scale5cmajor = MusicPattern("Pentatonic C major", Cardinality.PENTA, PatternType.SCALE, PatternMode.major, MusicPitchClass.C)
+    scale5cmajor = MusicPitchPattern("Pentatonic C major", Cardinality.PENTA, PatternType.SCALE, PatternMode.major, MusicPitchClass.C)
     print(scale5cmajor.pitch_class_intervals, scale5cmajor.pitch_classes)
-    scale7cmajor = MusicPattern("Heptatonic C major", Cardinality.HEPTA, PatternType.SCALE, PatternMode.major, MusicPitchClass.C,)
+    scale7cmajor = MusicPitchPattern("Heptatonic C major", Cardinality.HEPTA, PatternType.SCALE, PatternMode.major, MusicPitchClass.C,)
     print(scale7cmajor.pitch_class_intervals, scale7cmajor.pitch_classes)
 
 
@@ -82,7 +82,7 @@ def test_rhythm_time():
     unit.onset_intervals = [1,2,1,1,2]
 
     # Music time and meter
-    time = MusicTime(16, 4, 4, 120)
+    time = MusicTimePattern(16, 4, 4, 120)
     time.show()
 
 

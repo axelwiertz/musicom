@@ -2,8 +2,8 @@
 from typing import List
 from .base import Base
 from .matrix import UnitMatrix
-from .time import MusicTime
-from .pattern import MusicPattern
+from .time import MusicTimePattern
+from .pitchpattern import MusicPitchPattern
 from .pitch import PitchRange
 from .instrument import MidiInstrument
 
@@ -46,8 +46,8 @@ class MusicProject (Base):
     """Represents the entire project structure."""
     def __init__(self,
                  name: str = None,
-                 pattern: MusicPattern = None,
-                 time: MusicTime = None,
+                 pattern: MusicPitchPattern = None,
+                 time: MusicTimePattern = None,
                  sections: List[MusicSection] = None,
                  voices: List[MusicVoice] = None,
                  matrix: UnitMatrix = None,

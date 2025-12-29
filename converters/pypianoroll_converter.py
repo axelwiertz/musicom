@@ -6,7 +6,7 @@ from typing import List
 import numpy as np
 from pypianoroll import Multitrack, Track
 
-from structures.unit import MusicUnit, MusicEvent, MusicEventSequence
+from structures.unit import MusicUnit, MusicEvent
 from structures.project import MusicProject
 from structures.matrix import UnitMatrix
 
@@ -117,8 +117,7 @@ def track_to_musicunit(track: Track) -> MusicUnit:
                 end_tick=end_tick,
             ))
 
-    seq = MusicEventSequence(events)
-    return MusicUnit(events=seq.data)
+    return MusicUnit(events=events)
 
 
 # ---------------------------------------------------------------------------
@@ -170,8 +169,7 @@ def musicproject_to_multitrack(
 
         # Create MusicUnit from combined events
         if combined_events:
-            seq = MusicEventSequence(combined_events)
-            row_unit = MusicUnit(events=seq.data)
+            row_unit = MusicUnit(events=combined_events)
         else:
             row_unit = MusicUnit()
 

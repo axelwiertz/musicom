@@ -2,7 +2,7 @@
 import pandas as pd
 import numpy as np
 
-from structures import MusicPitch, MusicPitchClass, MusicPattern
+from structures import MusicPitch, MusicPitchClass, MusicPitchPattern
 from converters import pattern_to_excel
 from rules import Cardinality, PatternMode, PatternType
 from utilities import Config
@@ -28,7 +28,7 @@ def pitch_data():
 
 def music_data():
     # Heptatonic modes mapped to chromatic pitch helix
-    scale7 = MusicPattern("Heptatonic scale", Cardinality.HEPTA, PatternType.SCALE)
+    scale7 = MusicPitchPattern("Heptatonic scale", Cardinality.HEPTA, PatternType.SCALE)
 
     scale7.set_mode (PatternMode.major_mode)  # Major scale
 

@@ -60,7 +60,7 @@ def midi_to_name(midi : int | float) -> str:
     return midi_to_note(midi)
 
 
-def name_to_midi(name : str) -> int:
+def name_to_midi(name : list[str] | str) -> list[int] | int:
     """Parse note name like 'C#4' or 'A4' to MIDI number. Accepts flats as 'Bb'.
     s = name.strip()
     # handle optional accidental and octave
@@ -79,6 +79,8 @@ def name_to_midi(name : str) -> int:
         idx = self.PITCH_CLASS_NAMES_FLATMAP.get(base, base)
     semitone_index = self.PITCH_CLASS_NAMES_SHARP.index(idx)
     return (octave + 1) * self.TWELVE + semitone_index"""
+    if isinstance(name, list):
+        return [note_to_midi(n) for n in name]
     return note_to_midi(name)
 
 

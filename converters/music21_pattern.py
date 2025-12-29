@@ -1,14 +1,14 @@
-"""Converters between music21 scales/keys and MusicPattern objects."""
-from structures import Cardinality, PatternType, MusicPattern
+"""Converters between music21 scales/keys and MusicPitchPattern objects."""
+from structures import Cardinality, PatternType, MusicPitchPattern
 from music21 import note, scale, key
 
 
 # Pattern converters
-def key_to_pattern(m21key: key.Key) -> MusicPattern:
-    """Convert music21 key to MusicPattern."""
+def key_to_pattern(m21key: key.Key) -> MusicPitchPattern:
+    """Convert music21 key to MusicPitchPattern."""
 
     # Assuming a standard heptatonic scale from a key
-    pattern = MusicPattern("Heptatonic Scale from Key",
+    pattern = MusicPitchPattern("Heptatonic Scale from Key",
                            cardinality=Cardinality.HEPTA,
                            pattern_type=PatternType.SCALE,
                            )
@@ -19,7 +19,7 @@ def key_to_pattern(m21key: key.Key) -> MusicPattern:
     return pattern
 
 
-def pattern_to_m21scale(pattern: MusicPattern) -> scale.ConcreteScale:
+def pattern_to_m21scale(pattern: MusicPitchPattern) -> scale.ConcreteScale:
     # Convert pattern to music21 scale
     m21scale = scale.ConcreteScale()
     # Diatonic (7 pitch class) scale

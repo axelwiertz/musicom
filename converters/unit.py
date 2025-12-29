@@ -1,10 +1,10 @@
-"""Converters for MusicUnit to/from DataFrame, Excel, Binary, and MusicPattern."""
+"""Converters for MusicUnit to/from DataFrame, Excel, Binary, and MusicPitchPattern."""
 import os
 from typing import List
 import pandas as pd
 from utilities.config import Config
 from structures.unit import MusicUnit
-from structures.pattern import MusicPattern
+from structures.pitchpattern import MusicPitchPattern
 
 # --- DataFrame / Excel helpers for MusicUnit ---
 def unit_to_dataframe(unit: MusicUnit) -> pd.DataFrame:
@@ -106,8 +106,8 @@ def binary_to_unit(binary: List[int]) -> MusicUnit:
 
     return unit
 
-def pattern_to_unit (pattern : MusicPattern) -> MusicUnit :
-    # Convert a MusicPattern to a MusicUnit
+def pattern_to_unit (pattern : MusicPitchPattern) -> MusicUnit :
+    # Convert a MusicPitchPattern to a MusicUnit
     unit = MusicUnit('Pattern Unit')
     for interval in pattern.pitch_class_intervals:
         #TODO: tonic pitch class + tonic octave to midi

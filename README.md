@@ -144,7 +144,7 @@ See projects/examples for a guide.
 
 ## Key Concepts
 
-### MusicPattern
+### MusicPitchPattern
 
 
 ### MusicUnit

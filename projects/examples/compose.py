@@ -1,11 +1,11 @@
 import numpy as np
 
 from converters.pitch import name_to_midi
-from structures import MusicProject, UnitMatrix, MusicUnit, MusicTime
+from structures import MusicProject, UnitMatrix, MusicUnit, MusicTimePattern
 
 proj = MusicProject("Systematic Composition")
 matrix = UnitMatrix()
-time = MusicTime(16, 4)
+time = MusicTimePattern(16, 4)
 
 events = np.array([60, 80, 0, 6])
 

@@ -29,12 +29,12 @@ from .structures import (
     MusicComposition,
 
     # Music theory
-    MusicPattern,
+    MusicPitchPattern,
     MusicalInterval,
     PatternSequence,
 
     # Rhythm
-    MusicTime,
+    MusicTimePattern,
     QuantizedEvent,
 )
 from .rules import (
@@ -74,14 +74,14 @@ __all__ = [
     # Music theory
     'PitchRegister',
     'Diatonic',
-    'MusicPattern',
+    'MusicPitchPattern',
     'MusicScale',
     'MusicalInterval',
     'PatternSequence',
     'MusicPitchClassSet',
 
     # Rhythm
-    'MusicTime',
+    'MusicTimePattern',
     'QuantizedEvent',
 
 

@@ -9,10 +9,12 @@ class MusicGenerator(ABC):
     Abstract base for generators. Implementations must return a (list of) MusicUnit
     instance from `produce`.
     """
-    def __init__(self)-> None:
-        self._unit = None
-        self._method = None
-        self._function = None
+    def __init__(self,
+                 unit : MusicUnit = None,
+                 method: str = None,
+                 ):
+        self._unit = unit
+        self._method = method
 
     def set_unit(self, unit : MusicUnit) -> None:
         self._unit = unit
@@ -20,8 +22,6 @@ class MusicGenerator(ABC):
     def set_method(self, method: str) -> None:
         self._method = method
 
-    def set_function(self, function: Callable[..., List["MusicUnit"]]) -> None:
-        self._function = function
 
     @abstractmethod
     def generate(self) -> List["MusicUnit"]:
@@ -47,3 +47,5 @@ class FunctionGenerator(MusicGenerator):
         # Any generator logic (randomization, transforms) can be applied to params here
         return self._function(**self._params)
 
+    def set_function(self, function: Callable[..., List["MusicUnit"]]) -> None:
+        self._function = function
