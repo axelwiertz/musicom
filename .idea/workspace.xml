@@ -4,42 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="generation from patterns">
-      <change afterPath="$PROJECT_DIR$/structures/timepattern.py" afterDir="false" />
+    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="time patterns">
+      <change afterPath="$PROJECT_DIR$/transformers/matrix.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/music21_note.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/music21_note.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/music21_pattern.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/music21_pattern.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/music21_score.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/music21_score.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/music21_stream.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/music21_stream.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/musicpy_converter.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/musicpy_converter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/pattern.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/pattern.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/pitch.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/pitch.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/pypianoroll_converter.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/pypianoroll_converter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/time.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/time.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/unit.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/unit.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generators/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/generators/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generators/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/generators/base.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generators/chord_degrees.py" beforeDir="false" afterPath="$PROJECT_DIR$/generators/chord_degrees.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generators/from_chord.py" beforeDir="false" afterPath="$PROJECT_DIR$/generators/pitchpattern.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/balfolk.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/balfolk.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/bigyellowtaxi.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/projects/bigyellowtaxi.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/examples/3voices.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/examples/3voices.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/examples/compose.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/examples/compose.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/examples/guide.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/projects/examples/guide.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/notebook.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/notebook.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/research/musicdata.py" beforeDir="false" afterPath="$PROJECT_DIR$/research/musicdata.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/research/percussion_voice.py" beforeDir="false" afterPath="$PROJECT_DIR$/research/percussion_voice.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rules/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/rules/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rules/time.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/pattern.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/pitchpattern.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/examples/systematic.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/examples/systematic.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/research/serial.py" beforeDir="false" afterPath="$PROJECT_DIR$/research/serial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/structures/matrix.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/matrix.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/structures/project.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/project.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/time.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/time.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testers/test_generators.py" beforeDir="false" afterPath="$PROJECT_DIR$/testers/test_generators.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testers/test_structures.py" beforeDir="false" afterPath="$PROJECT_DIR$/testers/test_structures.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testers/test_visualization.py" beforeDir="false" afterPath="$PROJECT_DIR$/testers/test_visualization.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/structures/timepattern.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/timepattern.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/structures/unit.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/unit.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/transformers/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/transformers/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/transformers/pitchsequence.py" beforeDir="false" afterPath="$PROJECT_DIR$/transformers/pitchsequence.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/transformers/retrograde.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/transformers/transpose.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -259,15 +238,10 @@
       <workItem from="1766999833158" duration="680000" />
       <workItem from="1767014706349" duration="368000" />
       <workItem from="1767024034037" duration="2700000" />
-      <workItem from="1767041008431" duration="7801000" />
-    </task>
-    <task id="LOCAL-00153" summary="separate converters">
-      <option name="closed" value="true" />
-      <created>1762801876421</created>
-      <option name="number" value="00153" />
-      <option name="presentableId" value="LOCAL-00153" />
-      <option name="project" value="LOCAL" />
-      <updated>1762801876421</updated>
+      <workItem from="1767041008431" duration="7865000" />
+      <workItem from="1767103142639" duration="4091000" />
+      <workItem from="1767113389382" duration="2450000" />
+      <workItem from="1767118550892" duration="5095000" />
     </task>
     <task id="LOCAL-00154" summary="generators">
       <option name="closed" value="true" />
@@ -653,7 +627,15 @@
       <option name="project" value="LOCAL" />
       <updated>1766875073442</updated>
     </task>
-    <option name="localTasksCounter" value="202" />
+    <task id="LOCAL-00202" summary="time patterns">
+      <option name="closed" value="true" />
+      <created>1767048912957</created>
+      <option name="number" value="00202" />
+      <option name="presentableId" value="LOCAL-00202" />
+      <option name="project" value="LOCAL" />
+      <updated>1767048912958</updated>
+    </task>
+    <option name="localTasksCounter" value="203" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -686,7 +668,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="transformators, testers" />
     <MESSAGE value="restructuring" />
     <MESSAGE value="restructuring based on matrix" />
     <MESSAGE value="refactor and test" />
@@ -711,7 +692,8 @@
     <MESSAGE value="UnitMatrix is np.array" />
     <MESSAGE value="MusicProject" />
     <MESSAGE value="generation from patterns" />
-    <option name="LAST_COMMIT_MESSAGE" value="generation from patterns" />
+    <MESSAGE value="time patterns" />
+    <option name="LAST_COMMIT_MESSAGE" value="time patterns" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

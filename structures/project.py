@@ -6,6 +6,8 @@ from .time import MusicTimePattern
 from .pitchpattern import MusicPitchPattern
 from .pitch import PitchRange
 from .instrument import MidiInstrument
+from .timepattern import MusicRhythmPattern
+
 
 class MusicVoice(Base):
     """Represents a horizontal voice in the project."""
@@ -46,20 +48,24 @@ class MusicProject (Base):
     """Represents the entire project structure."""
     def __init__(self,
                  name: str = None,
-                 pattern: MusicPitchPattern = None,
-                 time: MusicTimePattern = None,
+                 pitch_pattern: MusicPitchPattern = None,
+                 time_pattern: MusicTimePattern = None,
+                 rhythm_pattern : MusicRhythmPattern = None,
                  sections: List[MusicSection] = None,
                  voices: List[MusicVoice] = None,
                  matrix: UnitMatrix = None,
                  ):
         super().__init__(name)
         self.name = name
-        self.pattern = pattern
-        self.time = time
+        self.pitch_pattern = pitch_pattern
+        self.time_pattern = time_pattern
+        self.rhythm_pattern = rhythm_pattern
         self.sections = sections
         self.voices = voices
         self.matrix = matrix
 
     def __repr__(self):
-        return f"<MusicProject(name={self.name}, sections={len(self.sections) if self.sections else 0}, voices={len(self.voices) if self.voices else 0})>"
+        return (f"<MusicProject(name={self.name},"
+                f"sections={len(self.sections) if self.sections else 0},"
+                f"voices={len(self.voices) if self.voices else 0})>")
 

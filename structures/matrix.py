@@ -27,6 +27,14 @@ class UnitMatrix:
     def __repr__(self):
         return f"UnitMatrix({self.data})"
 
+    def get_unit(self, row: int, col: int) -> Optional[MusicUnit]:
+        """Get the MusicUnit at the specified position."""
+        return self.data[row, col]
+
+    def set_unit(self, row: int, col: int, unit: Optional[MusicUnit]):
+        """Set a MusicUnit at the specified position."""
+        self.data[row, col] = unit
+
     @property
     def num_rows(self) -> int:
         return self.data.shape[self.ROW]
@@ -90,7 +98,6 @@ class UnitMatrix:
                 units.append(unit)
         return units
 
-
     def reorder_rows(self, new_order: Sequence[int]):
         rows, cols = self.data.shape
         if len(new_order) != rows:
@@ -100,16 +107,16 @@ class UnitMatrix:
         self.data = self.data[new_order, :]
 
     # Cell operations
-    def mutate_cell(self, r: int, c: int, func: Callable[[Any], Any]):
+    def mutate_unit(self, r: int, c: int, func: Callable[[Any], Any]):
         self.data[r, c] = func(self.data[r, c])
 
-    def swap_cells(self, a: Tuple[int, int], b: Tuple[int, int]):
+    def swap_units(self, a: Tuple[int, int], b: Tuple[int, int]):
         ra, ca = a
         rb, cb = b
         self.data[ra, ca], self.data[rb, cb] = self.data[rb, cb], self.data[ra, ca]
 
     # UnitMatrix operations
-    def transpose(self, copy_matrix: bool = False) -> "UnitMatrix":
+    def transpose_matrix(self, copy_matrix: bool = False) -> "UnitMatrix":
         if copy_matrix:
             new = self.clone()
             new.data = new.data.T
@@ -139,10 +146,47 @@ class UnitMatrix:
                 if predicate(r, c, self.data[r, c]):
                     self.data[r, c] = None
 
-    def get_unit(self, row: int, col: int) -> Optional[MusicUnit]:
-        """Get the MusicUnit at the specified position."""
-        return self.data[row, col]
+    """Row transformations (voice transformations)"""
+    def transpose_row(self, row: int, interval_: int):
+        """Transpose (shift) the pitches of a row of units by a given interval.
+        Args:
+            row (int): The row index to transpose.
+            interval_ (int): The interval by which to transpose the pitches.
+        """
+        for c in self.data.shape[self.COL]:
+            cell: Optional[MusicUnit] = self.data[row, c]
+            if cell is not None:
+                self.data[row, c] = cell.transpose(interval_)
 
-    def set_unit(self, row: int, col: int, unit: Optional[MusicUnit]):
-        """Set a MusicUnit at the specified position."""
-        self.data[row, col] = unit
+    def retrograde_row(self, row: int):
+        """Retrograde (reverse) the order of units in a given row.
+        Args:
+            row (int): The row index to retrograde.
+        """
+        cols = self.data.shape[self.COL]
+        for c in range(cols // 2):
+            cell_a = self.data[row, c]
+            cell_b = self.data[row, cols - 1 - c]
+            self.data[row, c], self.data[row, cols - 1 - c] = cell_b, cell_a
+
+    def invert_row(self, row: int, pivot: Optional[int] = None):
+        """Invert the pitches of units in a given row around a pivot point.
+        Args:
+            row (int): The row index to invert.
+            pivot (Optional[int], optional): The pivot pitch. If None, uses the first pitch node's pitch of the first unit. Defaults to None.
+        """
+        for c in self.data.shape[self.COL]:
+            cell: Optional[MusicUnit] = self.data[row, c]
+            if cell is not None:
+                self.data[row, c] = cell.invert(pivot)
+
+    def augment_row(self, row: int, factor: float):
+        """Augment (scale) the durations of units in a given row by a factor.
+        Args:
+            row (int): The row index to augment.
+            factor (float): The factor by which to scale the durations.
+        """
+        for c in self.data.shape[self.COL]:
+            cell: Optional[MusicUnit] = self.data[row, c]
+            if cell is not None:
+                self.data[row, c] = cell.augment(factor)

@@ -1,26 +1,6 @@
 from visualization import Cycle
 
 
-class MusicRhythmPattern:
-    """Common rhythms as onset interval patterns represented as tuples of integers."""
-    _dict = {
-        'Simple': (1,),
-        'Two': (1, 1),
-        'Three': (1, 1, 1),
-        'Four': (1, 1, 1, 1),
-        'Tresillo': (3, 3, 2),
-        'Twelve Eighth Bell': (2, 2, 1, 2, 2, 2, 1),
-        'Son Clave': (3, 3, 4, 2, 4)
-        }
-    @classmethod
-    def get_pattern(cls, name: str):
-        """Get onset interval pattern by name."""
-        return cls._dict.get(name, (1,))  # Default to 'Simple' if name not found
-    @classmethod
-    def patterns(cls):
-        """Get a list of available pattern names."""
-        return list(cls._dict.keys())
-
 
 class MusicTimePattern:
     """Music Time Structure: meter and tempo"""
@@ -69,3 +49,21 @@ class MusicTimePattern:
         self.ticks_per_cycle *= scale_factor
         self.beats_per_cycle = max(1, int(self.beats_per_cycle * scale_factor))
         self.beat_note = max(1, int(self.beat_note * scale_factor))
+
+class MusicRhythmPattern:
+    """Common rhythms as onset interval patterns represented as tuples of integers."""
+    _dict = {
+        'Simple': (1,),
+        'Two': (1, 1),
+        'Three': (1, 1, 1),
+        'Four': (1, 1, 1, 1),
+        'Tresillo': (3, 3, 2),
+        'Twelve Eighth Bell': (2, 2, 1, 2, 2, 2, 1),
+        'Son Clave': (3, 3, 4, 2, 4)
+        }
+
+    def __init__(self, time_pattern: MusicTimePattern, name: str = 'Simple'):
+        self.time_pattern = time_pattern
+        self.name = name
+        self.onset_intervals = self._dict.get(name)
+

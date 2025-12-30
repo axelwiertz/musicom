@@ -56,7 +56,6 @@ class MusicEvent:
             return self.data[self.END_TICK] - self.data[self.START_TICK]
         return 0
 
-
 @dataclass
 class MusicUnit:
     """A MusicUnit represents a technical unit of music, defined by sets of MusicEvents,"""
@@ -110,10 +109,13 @@ class MusicUnit:
 
     def add_event(self, event: MusicEvent | ndarray):
         """Add a MusicEvent to the sequence."""
-        self.data = np.append(self.data, np.array(
-            [(event.pitch, event.volume, event.start_tick, event.end_tick)],
-            dtype=MusicEvent.DTYPE
-        ))
+        if isinstance(event, MusicEvent):
+            self.data = np.append(self.data, np.array(
+                [(event.pitch, event.volume, event.start_tick, event.end_tick)],
+                dtype=MusicEvent.DTYPE
+            ))
+        elif isinstance(event, ndarray):
+            self.data = np.append(self.data, event)
 
     def split(self, index: int) -> Tuple['MusicUnit', 'MusicUnit']:
         """Split the sequence at the given index into two sequences."""
@@ -146,7 +148,7 @@ class MusicUnit:
 
     @property
     def pitches(self) -> List[int]:
-        """Return a list of all pitches in the sequence."""
+        """Return a list of all pitches in the unit."""
         return [event.pitch for event in self.events]
 
     @property
@@ -166,7 +168,6 @@ class MusicUnit:
         """Return a list of all durations in the sequence."""
         return [event.duration for event in self.events]
 
-
     def old_set(self,
                    pitch_nodes: List[int] = None,         # Pitches (MIDI note numbers)
                    onset_intervals: List[int] = None,
@@ -184,9 +185,30 @@ class MusicUnit:
             )
             self.add_event(event)
 
-
     def clone(self) -> 'MusicUnit':
         # Create a copy of the MusicUnit
         return MusicUnit(self.data.copy())
 
 
+    """Operations"""
+
+    def transpose(self, interval_: int):
+        """Transpose the pitches of a MusicUnit by a given interval."""
+        for e in self.data:
+            e[MusicEvent.PITCH] += interval_
+
+    def retrograde(self):
+        """Reverse the order of the events."""
+        self.data = self.data[::-1]
+
+    def invert(self, pivot: int):
+        """Invert the pitches of a MusicUnit around a given pivot pitch."""
+        for e in self.data:
+            e[MusicEvent.PITCH] = pivot + (pivot - e[MusicEvent.PITCH])
+
+    def augment(self, factor: float):
+        """Augment the durations of the events by a given factor."""
+        for e in self.data:
+            duration = e[MusicEvent.END_TICK] - e[MusicEvent.START_TICK]
+            new_duration = int(duration * factor)
+            e[MusicEvent.END_TICK] = e[MusicEvent.START_TICK] + new_duration

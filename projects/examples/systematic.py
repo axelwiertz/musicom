@@ -1,42 +1,36 @@
 """Example of systematic musical development using transformations"""
 
-from structures import UnitMatrix, MusicUnit, MusicSection
-from converters.music21_score import section_to_score
+from structures import MusicProject, UnitMatrix, MusicUnit, MusicSection
+from converters.music21_score import project_to_score
 from converters.musicpy_converter import piece_play
 from converters.music21_musicpy import score_to_piece
-from transformers import PitchSequenceTransformer, retrograde, transpose, invert
 
 # Create a theme and develop it systematically
-theme = MusicUnit("Theme", [[60], [64], [67]])
-section_a = MusicSection("Section A", None, )
-matrix = UnitMatrix(rows=4, cols=8)
+theme = MusicUnit(pitches=[60, 64, 67])
+proj = MusicProject(name="Systematic Composition",
+                    matrix=UnitMatrix(shape=(4, 8)),
+                    sections=[MusicSection("Section A")])
 
 # Voice 1: Original theme
-section_a.matrix.set_unit(0, 0, theme)
-
-trans = PitchSequenceTransformer(theme)
+proj.matrix.set_unit(0, 0, theme)
 
 # Voice 2: Inverted theme
-section_a.matrix.set_unit(1, 0, theme)
-for u in section_a.matrix.units_in_row (1):
-    invert(u, 1, pivot=64)
+proj.matrix.set_unit(row=1, col=0, unit=theme)
+proj.matrix.invert_row(row=1, pivot=64)
 
 # Voice 3: Retrograde theme
-section_a.matrix.set_unit(2, 0, theme)
-for u in section_a.matrix.units_in_row (2):
-    retrograde(u)
+proj.matrix.set_unit(row=2, col=0, unit=theme)
+proj.matrix.retrograde_row(row=2)
 
 # Voice 4: Augmented theme
-section_a.matrix.set_unit(3, 0, theme)
-for u in section_a.matrix.units_in_row (3):
-    trans.set_unit(u)
-    trans.change_durations(2.0)
+proj.matrix.set_unit(row=3, col=0, unit=theme)
+proj.matrix.augment_row(row=3, factor=2.0)
 
 # Develop across sections
 for col in range(1, 8):
-    section_a.matrix.repeat_column(0, col)
+    proj.matrix.repeat_column(0, col)
     # Apply variations to each section
-    transpose(section_a.matrix.get_unit(0, col), col % 12)
+    proj.matrix.get_unit(0, col).transpose(col % 12)
 
-score = section_to_score(section_a)
+score = project_to_score(proj)
 piece_play(score_to_piece(score))
