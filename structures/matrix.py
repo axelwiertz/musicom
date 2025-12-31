@@ -153,7 +153,7 @@ class UnitMatrix:
             row (int): The row index to transpose.
             interval_ (int): The interval by which to transpose the pitches.
         """
-        for c in self.data.shape[self.COL]:
+        for c in range(self.data.shape[self.COL]):
             cell: Optional[MusicUnit] = self.data[row, c]
             if cell is not None:
                 self.data[row, c] = cell.transpose(interval_)
@@ -175,7 +175,7 @@ class UnitMatrix:
             row (int): The row index to invert.
             pivot (Optional[int], optional): The pivot pitch. If None, uses the first pitch node's pitch of the first unit. Defaults to None.
         """
-        for c in self.data.shape[self.COL]:
+        for c in range(self.data.shape[self.COL]):
             cell: Optional[MusicUnit] = self.data[row, c]
             if cell is not None:
                 self.data[row, c] = cell.invert(pivot)

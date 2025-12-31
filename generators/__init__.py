@@ -3,7 +3,7 @@ from .chord_degrees import ChordDegreeGenerator
 from .rhythm import RhythmGenerator
 from .harmonics import HarmonicsGenerator
 from .genetic import GeneticGenerator
-from .pitchpattern import SequentialPatternGenerator, ParallelPatternChordGenerator
+from .pitchpattern import PatternGenerator
 from .stochastic import StochasticGenerator
 from .chain import MarkovChainGenerator
 
@@ -12,8 +12,7 @@ __all__ = [
     "RhythmGenerator",
     "HarmonicsGenerator",
     "GeneticGenerator",
-    "ParallelPatternChordGenerator",
-    "SequentialPatternGenerator",
+    "PatternGenerator",
     "StochasticGenerator",
     "MarkovChainGenerator"
 ]

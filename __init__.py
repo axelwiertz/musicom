@@ -4,7 +4,6 @@ A Python library for algorithmic music composition, analysis, and generation.
 
 Main modules:
 - structures: Core music data structures (MusicUnit, MusicVoice, MusicSection, etc.)
-- base: Musical base (TwelveTET, MIDI instruments)
 - converters: Conversion between different music formats
 - generators: Music generation algorithms
 - rules: Music theory rules and harmony
@@ -14,11 +13,6 @@ Main modules:
 __version__ = '0.1.0'
 __author__ = 'Musicom Team'
 
-# Constants
-from .base import (
-    TwelveTET,
-    MidiInstrument,
-)
 
 # Core structures
 from .structures import (
@@ -26,33 +20,22 @@ from .structures import (
     MusicUnit,
     MusicVoice,
     MusicSection,
-    MusicComposition,
+    MusicProject,
 
     # Music theory
+    MusicPitchClass,
     MusicPitchPattern,
-    MusicalInterval,
-    PatternSequence,
 
     # Rhythm
     MusicTimePattern,
-    QuantizedEvent,
+    MusicRhythmPattern,
 )
-from .rules import (
-    MusicPitchClassSet,
-    Diatonic)
 
-# Converters
-from .converters import (
-    unit_to_chord,
-
-)
 
 # Generators
 from .generators import (
-    Generator,
-    SimpleGenerator,
+    PatternGenerator
 )
-
 # Configuration
 from .utilities.config import Config
 
@@ -65,37 +48,19 @@ __all__ = [
     'MusicUnit',
     'MusicVoice',
     'MusicSection',
-    'MusicComposition',
+    'MusicProject',
 
-    # Geometric structures
-    'Circle',
-    'Helix',
-
-    # Music theory
-    'PitchRegister',
-    'Diatonic',
+    # Pitch
+    'MusicPitchClass',
     'MusicPitchPattern',
-    'MusicScale',
-    'MusicalInterval',
-    'PatternSequence',
-    'MusicPitchClassSet',
 
-    # Rhythm
+    # Time
     'MusicTimePattern',
-    'QuantizedEvent',
-
-
-    # Constants
-    'TwelveTET',
-    'MIDIinstrument',
-
-    # Converters
-    'unit_to_chord',
-
+    # Rhythm
+    'MusicRhythmPattern',
 
     # Generators
-    'Generator',
-    'SimpleGenerator',
+    'PatternGenerator',
 
     # Configuration
     'Config',

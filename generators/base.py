@@ -25,7 +25,7 @@ class MusicGenerator(ABC):
 
     @abstractmethod
     def generate(self) -> List["MusicUnit"]:
-        """Produce a set of MusicUnit instances"""
+        """Generate a set of MusicUnit instances"""
         raise NotImplementedError
 
 
