@@ -1,5 +1,5 @@
 """Converters between music21 and other structures."""
-from structures import MusicProject, MusicTimePattern, UnitMatrix, MusicSection, MusicVoice
+from structures import MusicProject, MusicTimeGrid, UnitMatrix, MusicSection, MusicVoice
 from converters.music21_stream import stream_to_unit, matrix_row_to_stream
 from converters.music21_pattern import key_to_pattern
 from converters.time import meter_to_time, time_to_meter, time_to_tempo
@@ -13,7 +13,7 @@ def score_to_project(score: stream.Score) -> MusicProject:
     if score.timeSignature is not None:
         time = meter_to_time(score.timeSignature, 4, score.metronomeMarkBoundaries()[0][2].number)
     else:
-        time = MusicTimePattern.default_time()
+        time = MusicTimeGrid.default_time()
 
     score_key = score.analyze('key')
 

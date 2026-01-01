@@ -2,7 +2,7 @@
 MusicPy - Notebook examples
 """
 
-from structures import MusicProject, MusicSection, MusicTimePattern
+from structures import MusicProject, MusicSection, MusicTimeGrid
 from structures import MusicPitchClass, MusicPitchPattern, Cardinality, PatternType, PatternMode
 from converters.music21_stream import stream_to_unit
 from converters.pypianoroll_converter import musicunit_to_track
@@ -12,7 +12,7 @@ from musicpy import musicpy, structures
 
 def m21_tiny_notebook():
     stream = converter.parse('tinynotation: 4/4 c5 r r c5 r r c5 r')
-    unit = stream_to_unit(stream, time=MusicTimePattern(16, 4, 4, 120))
+    unit = stream_to_unit(stream, time=MusicTimeGrid(16, 4, 4, 120))
     roll = musicunit_to_track(unit)
     roll.plot()
 

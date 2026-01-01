@@ -1,5 +1,5 @@
 from visualization import Helix, Cycle
-from structures import MusicPitch, MusicPitchClass, MusicTimePattern
+from structures import MusicPitch, MusicPitchClass, MusicTimeGrid
 
 def test_visualization():
     # Show helix
@@ -12,7 +12,7 @@ def test_visualization():
     rc = Cycle(4, ['Down', 'Up', 'Down', 'Up'])
     rc.show()
 
-    time = MusicTimePattern(timesteps=8, beats_in_measure=4, beat_note=4, bpm=120)
+    time = MusicTimeGrid(timesteps=8, beats_in_measure=4, beat_note=4, bpm=120)
     time.show()
 
     # Show pitch class circle

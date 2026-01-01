@@ -1,0 +1,144 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "musicom"
+version = "0.1.0"
+description = "A Python-based music composition and analysis framework combining music theory, algorithmic generation, and computational analysis"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Musicom Team"}
+]
+requires-python = ">=3.8"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Artistic Software",
+    "Topic :: Multimedia :: Sound/Audio",
+    "Topic :: Multimedia :: Sound/Audio :: MIDI",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+keywords = [
+    "music",
+    "composition",
+    "analysis",
+    "algorithmic",
+    "music21",
+    "musicpy",
+    "midi",
+    "harmony",
+    "counterpoint",
+    "generation",
+]
+
+dependencies = [
+    "music21>=9.9.1",
+    "musicpy>=7.11",
+    "numpy>=2.3.5",
+    "scipy>=1.10.0",
+    "pandas>=2.0.0",
+    "matplotlib>=3.7.0",
+    "networkx>=3.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "flake8>=6.0.0",
+    "mypy>=1.0.0",
+]
+conversion = [
+    "music21py>=0.0.2",
+    "showscore>=0.1.0",
+]
+all = [
+    "musicom[dev,conversion]",
+]
+
+[project.urls]
+Homepage = "https://github.com/musicom/musicom"
+Documentation = "https://github.com/musicom/musicom#readme"
+Repository = "https://github.com/musicom/musicom"
+Issues = "https://github.com/musicom/musicom/issues"
+
+[tool.setuptools]
+packages = [
+    "musicom",
+    "musicom.analysis",
+    "musicom.converters",
+    "musicom.generators",
+    "musicom.projects",
+    "musicom.research",
+    "musicom.rules",
+    "musicom.structures",
+    "musicom.tests",
+    "musicom.transformers",
+    "musicom.utilities",
+    "musicom.visualization",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["*"]
+exclude = ["tests*", "examples*"]
+
+[tool.black]
+line-length = 100
+target-version = ["py38", "py39", "py310", "py311", "py312", "py313"]
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+    | \.mypy_cache
+    | \.pytest_cache
+    | __pycache__
+    | build
+    | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 100
+known_first_party = ["musicom"]
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
+
+[tool.coverage.run]
+source = ["musicom"]
+omit = ["*/tests/*", "*/__pycache__/*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+]
+

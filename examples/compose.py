@@ -1,11 +1,11 @@
 import numpy as np
 
-from structures import MusicProject, UnitMatrix, MusicUnit, MusicTimePattern
+from structures import MusicProject, UnitMatrix, MusicUnit, MusicTimeGrid
 from converters.pitch import name_to_midi
 
 # Create a music project with a unit matrix
 proj = MusicProject(name="Systematic Composition",
-                    time_pattern = MusicTimePattern(ticks_per_cycle=16, beats_per_cycle=4),
+                    time_pattern = MusicTimeGrid(ticks_per_cycle=16, beats_per_cycle=4),
                     matrix = UnitMatrix(),
                     )
 

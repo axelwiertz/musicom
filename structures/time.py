@@ -1,5 +1,5 @@
 """Music Time Structure: meter and tempo"""
-from .timepattern import MusicTimePattern
+from .timegrid import MusicTimeGrid
 
 class TempoRange:
     """Common tempo ranges in BPM for different music styles."""
@@ -27,11 +27,11 @@ class TempoRange:
 class MusicLinearTime:
     """Music Linear Time Structure"""
     def __init__(self,
-                pattern: MusicTimePattern = None,
+                pattern: MusicTimeGrid = None,
                 bpm: int = None  # beats per minute
                  ):
         ### Linear timescale
-        self.pattern = pattern if pattern else MusicTimePattern.default_time()
+        self.pattern = pattern if pattern else MusicTimeGrid.default_time()
         # Tempo
         self.bpm = bpm
 

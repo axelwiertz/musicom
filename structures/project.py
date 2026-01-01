@@ -2,11 +2,11 @@
 from typing import List
 from .base import Base
 from .matrix import UnitMatrix
-from .time import MusicTimePattern
+from .time import MusicTimeGrid
 from .pitchpattern import MusicPitchPattern
 from .pitch import PitchRange
 from .instrument import MidiInstrument
-from .timepattern import MusicRhythmPattern
+from .timegrid import MusicRhythmPattern
 
 
 class MusicVoice(Base):
@@ -49,7 +49,7 @@ class MusicProject (Base):
     def __init__(self,
                  name: str = None,
                  pitch_pattern: MusicPitchPattern = None,
-                 time_pattern: MusicTimePattern = None,
+                 time_pattern: MusicTimeGrid = None,
                  rhythm_pattern : MusicRhythmPattern = None,
                  sections: List[MusicSection] = None,
                  voices: List[MusicVoice] = None,

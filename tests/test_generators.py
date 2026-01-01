@@ -1,4 +1,4 @@
-from structures import MusicPitchClass, MusicPitchPattern, MusicUnit, MusicVoice, MusicProject, MusicSection, MusicTimePattern
+from structures import MusicPitchClass, MusicPitchPattern, MusicUnit, MusicVoice, MusicProject, MusicSection, MusicTimeGrid
 from converters import score_to_midifile, chord_to_unit, pattern_to_mpscale
 from rules import Cardinality, PatternType, PatternMode, Scale7PitchDegree, is_counterpoint, Scale7ChordHarmony
 from generators import StochasticGenerator, MarkovChainGenerator, ChordDegreeGenerator, HarmonicsGenerator
@@ -94,7 +94,7 @@ def test_progression():
     print("Scale7:", scale7)
 
 
-    time = MusicTimePattern(4,4,4)
+    time = MusicTimeGrid(4,4,4)
     scale1 = MusicPitchPattern("C4 major", Cardinality.HEPTA, PatternType.SCALE, 60, PatternMode.major_mode)
 
     triads_in_scale =  chord_to_unit(pattern_to_mpscale(scale7) % (1234567, 1))
@@ -140,7 +140,7 @@ def test_progression():
     """Double code"""
     # Example: Get triads in C major
     gen = ChordDegreeGenerator(
-        MusicTimePattern(4,4,4),
+        MusicTimeGrid(4,4,4),
         scale1,
         [1, 2, 3, 4, 5, 6, 7]
     )

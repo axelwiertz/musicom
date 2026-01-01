@@ -1,5 +1,5 @@
 from structures import MusicPitchClass, MusicPitch, Direction
-from structures import MusicTimePattern, MusicPitchPattern, Cardinality, PatternType, PatternMode
+from structures import MusicTimeGrid, MusicPitchPattern, Cardinality, PatternType, PatternMode
 from structures import MusicProject, MusicUnit, MusicVoice, UnitMatrix, MusicSection
 from converters.music21_pattern import pattern_to_m21scale
 
@@ -8,7 +8,7 @@ def test_project():
     # Project
     project = MusicProject(
         name="My First Song",
-        time = MusicTimePattern(4, 4, 4),
+        time = MusicTimeGrid(4, 4, 4),
         sections=[MusicSection(name="Intro")],
         voices=[MusicVoice("Melody"), MusicVoice("Bass")],
         matrix=UnitMatrix(shape=(2, 2)),
@@ -82,7 +82,7 @@ def test_rhythm_time():
     unit.onset_intervals = [1,2,1,1,2]
 
     # Music time and meter
-    time = MusicTimePattern(16, 4, 4, 120)
+    time = MusicTimeGrid(16, 4, 4, 120)
     time.show()
 
 

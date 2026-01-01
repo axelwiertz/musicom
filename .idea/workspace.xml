@@ -4,29 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="composition with unit and matrix operations">
+    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="restructuring">
+      <change afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generators/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/generators/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generators/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/generators/base.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generators/genetic.py" beforeDir="false" afterPath="$PROJECT_DIR$/generators/genetic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/examples/3voices.py" beforeDir="false" afterPath="$PROJECT_DIR$/examples/3voices.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/examples/compose.py" beforeDir="false" afterPath="$PROJECT_DIR$/examples/compose.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/examples/cross_voice.py" beforeDir="false" afterPath="$PROJECT_DIR$/examples/cross_voice.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/examples/guide.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/guide.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/examples/load_and_analyze.py" beforeDir="false" afterPath="$PROJECT_DIR$/examples/load_and_analyze.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/examples/m21.py" beforeDir="false" afterPath="$PROJECT_DIR$/examples/m21.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/examples/mp.py" beforeDir="false" afterPath="$PROJECT_DIR$/examples/mp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/examples/systematic.py" beforeDir="false" afterPath="$PROJECT_DIR$/examples/systematic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rules/counterpoint.py" beforeDir="false" afterPath="$PROJECT_DIR$/rules/counterpoint.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/converters/music21_note.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/music21_note.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/converters/music21_score.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/music21_score.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/converters/music21_stream.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/music21_stream.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/converters/musicpy_converter.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/musicpy_converter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/converters/time.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/time.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/3voices.py" beforeDir="false" afterPath="$PROJECT_DIR$/examples/3voices.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/compose.py" beforeDir="false" afterPath="$PROJECT_DIR$/examples/compose.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/guide.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/guide.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generators/chord_degrees.py" beforeDir="false" afterPath="$PROJECT_DIR$/generators/chord_degrees.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/balfolk.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/balfolk.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/bigyellowtaxi.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/projects/bigyellowtaxi.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/notebook.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/notebook.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/research/percussion_voice.py" beforeDir="false" afterPath="$PROJECT_DIR$/research/percussion_voice.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/research/serial.py" beforeDir="false" afterPath="$PROJECT_DIR$/research/serial.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/structures/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/matrix.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/matrix.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testers/test_converters.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_converters.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testers/test_generators.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_generators.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testers/test_rules.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_rules.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testers/test_structures.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_structures.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testers/test_transformators.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_transformators.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testers/test_visualization.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_visualization.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/structures/project.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/project.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/structures/time.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/time.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/structures/timepattern.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/timegrid.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_generators.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_generators.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_structures.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_structures.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_visualization.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_visualization.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,11 +152,11 @@
       <recent name="C:\Users\92591\PycharmProjects\pythonProject" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\92591\PycharmProjects\musicom" />
       <recent name="C:\Users\92591\PycharmProjects\musicom\research" />
       <recent name="C:\Users\92591\PycharmProjects\musicom\testers" />
       <recent name="C:\Users\92591\PycharmProjects\musicom\transformers" />
       <recent name="C:\Users\92591\PycharmProjects\musicom\structures" />
-      <recent name="C:\Users\92591\PycharmProjects\musicom" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -251,15 +254,9 @@
       <workItem from="1767113389382" duration="2450000" />
       <workItem from="1767118550892" duration="5185000" />
       <workItem from="1767176230165" duration="443000" />
-      <workItem from="1767176957469" duration="5705000" />
-    </task>
-    <task id="LOCAL-00155" summary="generators">
-      <option name="closed" value="true" />
-      <created>1762986592913</created>
-      <option name="number" value="00155" />
-      <option name="presentableId" value="LOCAL-00155" />
-      <option name="project" value="LOCAL" />
-      <updated>1762986592913</updated>
+      <workItem from="1767176957469" duration="5929000" />
+      <workItem from="1767282668694" duration="209000" />
+      <workItem from="1767282916465" duration="2602000" />
     </task>
     <task id="LOCAL-00156" summary="module structure">
       <option name="closed" value="true" />
@@ -645,7 +642,15 @@
       <option name="project" value="LOCAL" />
       <updated>1767129134305</updated>
     </task>
-    <option name="localTasksCounter" value="204" />
+    <task id="LOCAL-00204" summary="restructuring">
+      <option name="closed" value="true" />
+      <created>1767194409478</created>
+      <option name="number" value="00204" />
+      <option name="presentableId" value="LOCAL-00204" />
+      <option name="project" value="LOCAL" />
+      <updated>1767194409478</updated>
+    </task>
+    <option name="localTasksCounter" value="205" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -678,7 +683,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="restructuring based on matrix" />
     <MESSAGE value="refactor and test" />
     <MESSAGE value="refactor" />
     <MESSAGE value="projects and examples" />
@@ -703,7 +707,8 @@
     <MESSAGE value="generation from patterns" />
     <MESSAGE value="time patterns" />
     <MESSAGE value="composition with unit and matrix operations" />
-    <option name="LAST_COMMIT_MESSAGE" value="composition with unit and matrix operations" />
+    <MESSAGE value="restructuring" />
+    <option name="LAST_COMMIT_MESSAGE" value="restructuring" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

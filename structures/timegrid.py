@@ -1,8 +1,7 @@
+"""Music Time Pattern Structures"""
 from visualization import Cycle
 
-
-
-class MusicTimePattern:
+class MusicTimeGrid:
     """Music Time Structure: meter and tempo"""
     # Horizontal time: rhythmic cycles and tempo
     def __init__(self,
@@ -28,9 +27,9 @@ class MusicTimePattern:
         self._cycle = Cycle(ticks_per_cycle, labels=[str(i+1) for i in range(ticks_per_cycle)])
 
     @classmethod
-    def default_time(cls) -> "MusicTimePattern":
+    def default_time(cls) -> "MusicTimeGrid":
         # Default relative time
-        return MusicTimePattern(
+        return MusicTimeGrid(
             ticks_per_cycle=16,
             beats_per_cycle=4,
             beat_note=4,
@@ -45,7 +44,7 @@ class MusicTimePattern:
         self._cycle.show(title=f'Music Time Cycle: {self.ticks_per_cycle} ticks per cycle')
 
     def scale(self, scale_factor: float):
-        """Scale the time signature and tempo of a MusicTimePattern by a given factor."""
+        """Scale the time signature and tempo of a MusicTimeGrid by a given factor."""
         self.ticks_per_cycle *= scale_factor
         self.beats_per_cycle = max(1, int(self.beats_per_cycle * scale_factor))
         self.beat_note = max(1, int(self.beat_note * scale_factor))
@@ -62,7 +61,7 @@ class MusicRhythmPattern:
         'Son Clave': (3, 3, 4, 2, 4)
         }
 
-    def __init__(self, time_pattern: MusicTimePattern, name: str = 'Simple'):
+    def __init__(self, time_pattern: MusicTimeGrid, name: str = 'Simple'):
         self.time_pattern = time_pattern
         self.name = name
         self.onset_intervals = self._dict.get(name)

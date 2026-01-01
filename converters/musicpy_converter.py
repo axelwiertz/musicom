@@ -1,5 +1,5 @@
 """MusicPy converters."""
-from structures import MusicPitchClass, MusicUnit, MusicTimePattern, MusicVoice, MusicPitchPattern, MidiInstrument, Cardinality, PatternType
+from structures import MusicPitchClass, MusicUnit, MusicTimeGrid, MusicVoice, MusicPitchPattern, MidiInstrument, Cardinality, PatternType
 from musicpy import musicpy, structures
 
 
@@ -30,7 +30,7 @@ def modulate_unit(unit: MusicUnit,
     unit.pitch_nodes = unit_to_chord(unit).modulation(scale_source, scale_target).pitches
 
 
-def unit_to_sound(unit: MusicUnit, time: MusicTimePattern, midi_instrument: int = MidiInstrument.PIANO):
+def unit_to_sound(unit: MusicUnit, time: MusicTimeGrid, midi_instrument: int = MidiInstrument.PIANO):
     musicpy.play(unit_to_chord(unit), bpm=time.bpm, instrument=midi_instrument, wait=True)
 
 

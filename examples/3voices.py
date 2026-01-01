@@ -1,6 +1,6 @@
 
 from structures import MidiInstrument, MusicPitchClass, PitchRange, Cardinality, PatternType, PatternMode
-from structures import MusicPitchPattern, MusicProject, MusicSection, MusicUnit, MusicVoice, MusicTimePattern, UnitMatrix
+from structures import MusicPitchPattern, MusicProject, MusicSection, MusicUnit, MusicVoice, MusicTimeGrid, UnitMatrix
 from converters.pitch import name_to_midi
 from converters.music21_pattern import pattern_to_m21scale
 from converters.midi_converter import score_to_midifile
@@ -16,7 +16,7 @@ project = MusicProject(name='Three Voices Composition',
                  mode=PatternMode.major,
                  tonic_pitch_class=MusicPitchClass.C),
     # Define time signature and length
-    time=MusicTimePattern(ticks_per_cycle=16,beats_per_cycle=4,beat_note=4),
+    time=MusicTimeGrid(ticks_per_cycle=16,beats_per_cycle=4,beat_note=4),
     # Create three voices for melody and accompaniment
     voices=[
         MusicVoice(name='Voice 1', row_index=0,

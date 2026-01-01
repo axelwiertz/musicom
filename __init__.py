@@ -27,7 +27,7 @@ from .structures import (
     MusicPitchPattern,
 
     # Rhythm
-    MusicTimePattern,
+    MusicTimeGrid,
     MusicRhythmPattern,
 )
 
@@ -55,7 +55,7 @@ __all__ = [
     'MusicPitchPattern',
 
     # Time
-    'MusicTimePattern',
+    'MusicTimeGrid',
     # Rhythm
     'MusicRhythmPattern',
 
