@@ -14,7 +14,6 @@ def pattern_to_mpscale(pattern: MusicPitchPattern) -> structures.scale:
     return mpscale
 
 
-
 # Print converters
 def track_to_print(track: structures.track):
     print('Name     : ' + str(track.track_name))
@@ -40,11 +39,13 @@ def unit_to_chord(unit: MusicUnit) -> structures.chord:
 
 
 def chord_to_unit(chord: structures.chord) -> MusicUnit:
-    unit = MusicUnit()
-    unit.pitch_nodes = chord.notes
-    unit.durations = chord.get_duration()
-    unit.onset_intervals = chord.interval
-    unit.volumes = chord.get_volume()
+    unit = MusicUnit(
+        pitches=chord.pitches,
+        durations=chord.durations,
+        onset_intervals=chord.onset_intervals,
+        volumes=chord.volumes
+    )
+
     return unit
 
 

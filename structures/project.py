@@ -49,7 +49,7 @@ class MusicProject (Base):
     def __init__(self,
                  name: str = None,
                  pitch_pattern: MusicPitchPattern = None,
-                 time_pattern: MusicTimeGrid = None,
+                 time_grid: MusicTimeGrid = None,
                  rhythm_pattern : MusicRhythmPattern = None,
                  sections: List[MusicSection] = None,
                  voices: List[MusicVoice] = None,
@@ -58,7 +58,7 @@ class MusicProject (Base):
         super().__init__(name)
         self.name = name
         self.pitch_pattern = pitch_pattern
-        self.time_pattern = time_pattern
+        self.time_grid = time_grid
         self.rhythm_pattern = rhythm_pattern
         self.sections = sections
         self.voices = voices

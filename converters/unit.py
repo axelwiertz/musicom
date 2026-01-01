@@ -2,34 +2,15 @@
 import os
 from typing import List
 import pandas as pd
-from utilities.config import Config
-from structures.unit import MusicUnit
-from structures.pitchpattern import MusicPitchPattern
+from utilities import Config
+from structures import MusicUnit
 
 # --- DataFrame / Excel helpers for MusicUnit ---
 def unit_to_dataframe(unit: MusicUnit) -> pd.DataFrame:
     """Convert a MusicUnit into a pandas DataFrame.
-
-    Columns: pitch_node, pitch_interval, onset_interval, duration, velocity, onset_cumulative
-    Handles uneven field lengths by padding with None.
     """
 
-    fields = {
-        'pitch_node': list(getattr(unit, 'pitch_nodes', []) or []),
-        'pitch_interval': list(getattr(unit, 'pitch_intervals', []) or []),
-        'onset_interval': list(getattr(unit, 'onset_intervals', []) or []),
-        'duration': list(getattr(unit, 'durations', []) or []),
-        'velocity': list(getattr(unit, 'volumes', []) or []),
-    }
-
-    n = max((len(v) for v in fields.values()), default=0)
-    for k, v in fields.items():
-        if len(v) < n:
-            fields[k] = v + [None] * (n - len(v))
-
-    df = pd.DataFrame(fields)
-    # cumulative onset (start times) - treat None as 0
-    df['onset_cumulative'] = (pd.to_numeric(df['onset_interval'], errors='coerce').fillna(0.0)).cumsum()
+    df =  pd.DataFrame(unit.data)
 
     return df
 
@@ -72,21 +53,7 @@ def unit_to_binary (unit: MusicUnit) -> List[int]:
     """Convert a MusicUnit to a binary representation (list of 0,1)."""
     # Binary genome representation
 
-    binary = []
-    for i in range(len(unit.pitch_nodes)):
-        pitch_nr = unit.pitch_nodes[i]
-        duration = unit.durations[i] if i < len (unit.durations) else 1
-        onset_interval = unit.onset_intervals[i] if i < len (unit.onset_intervals) else 1
-        volume = unit.volumes[i] if i < len (unit.volumes) else 100
-
-        # Convert to binary parts
-        pitch_bits = [(pitch_nr >> j) & 1 for j in range(pitch_interval_bits)]
-        duration_bits_list = [(duration >> j) & 1 for j in range(duration_bits)]
-        onset_bits = [(onset_interval >> j) & 1 for j in range(onset_interval_bits)]
-        volume_bits = [(volume >> j) & 1 for j in range(velocity_bits)]
-
-        # Concatenate all bits
-        binary += pitch_bits + duration_bits_list + onset_bits + volume_bits
+    binary = unit.data.copy()
 
     return binary
 
@@ -99,22 +66,10 @@ def binary_to_unit(binary: List[int]) -> MusicUnit:
         # Extract binary elements
         binary_parts += [binary[(i * total_bits):(i * total_bits) + total_bits]]
 
-    unit = MusicUnit("From Binary")
+    pitches = []
     for binary_part in binary_parts:
         pitch_nr = int(sum([bit * pow(2, i) for i, bit in enumerate(binary_part)]))
-        unit.pitch_nodes += [pitch_nr]  
+        pitches.append(pitch_nr)
 
-    return unit
+    return MusicUnit(pitches=pitches)
 
-def pattern_to_unit (pattern : MusicPitchPattern) -> MusicUnit :
-    # Convert a MusicPitchPattern to a MusicUnit
-    unit = MusicUnit('Pattern Unit')
-    for interval in pattern.pitch_class_intervals:
-        #TODO: tonic pitch class + tonic octave to midi
-        unit.pitch_nodes += [pattern.tonic_pitch_class + interval]
-        unit.durations += [1]  # default duration
-        unit.onset_intervals += [1]  # default onset interval
-        unit.volumes += [100]  # default volume
-
-    return unit
-    

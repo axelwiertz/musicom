@@ -61,8 +61,8 @@ class MusicRhythmPattern:
         'Son Clave': (3, 3, 4, 2, 4)
         }
 
-    def __init__(self, time_pattern: MusicTimeGrid, name: str = 'Simple'):
-        self.time_pattern = time_pattern
+    def __init__(self, time_grid: MusicTimeGrid, name: str = 'Simple'):
+        self.time_grid = time_grid
         self.name = name
         self.onset_intervals = self._dict.get(name)
 

@@ -229,8 +229,8 @@ def multitrack_to_musicproject(
 
     return MusicProject(
         name=name,
-        pattern=None,
-        time=None,
+        pitch_pattern=None,
+        time_grid=None,
         sections=None,
         voices=voices,
         matrix=matrix,

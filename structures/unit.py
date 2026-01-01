@@ -198,7 +198,7 @@ class MusicUnit:
             e[MusicEvent.PITCH] += interval_
 
     def retrograde(self):
-        """Reverse the order of the events."""
+        """Reverse the order of the events in the unit"""
         self.data = self.data[::-1]
 
     def invert(self, pivot: int):

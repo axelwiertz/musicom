@@ -27,20 +27,20 @@ class TempoRange:
 class MusicLinearTime:
     """Music Linear Time Structure"""
     def __init__(self,
-                pattern: MusicTimeGrid = None,
+                time_grid: MusicTimeGrid = None,
                 bpm: int = None  # beats per minute
                  ):
         ### Linear timescale
-        self.pattern = pattern if pattern else MusicTimeGrid.default_time()
+        self.time_grid = time_grid if time_grid else MusicTimeGrid.default_time()
         # Tempo
         self.bpm = bpm
 
     def seconds_per_cycle(self) -> float:
-        return self.seconds_per_beat * self.pattern.beats_per_cycle
+        return self.seconds_per_beat * self.time_grid.beats_per_cycle
     @property
     def seconds_per_beat(self) -> int:
         return 60.0 / self.bpm if self.bpm else 0
     @property
     def seconds_per_tick(self) -> float:
-        return self.seconds_per_beat / self.pattern.ticks_per_beat if self.pattern.ticks_per_beat else 0
+        return self.seconds_per_beat / self.time_grid.ticks_per_beat if self.time_grid.ticks_per_beat else 0
 
