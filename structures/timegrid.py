@@ -49,20 +49,32 @@ class MusicTimeGrid:
         self.beats_per_cycle = max(1, int(self.beats_per_cycle * scale_factor))
         self.beat_note = max(1, int(self.beat_note * scale_factor))
 
+
 class MusicRhythmPattern:
     """Common rhythms as onset interval patterns represented as tuples of integers."""
     _dict = {
-        'Simple': (1,),
-        'Two': (1, 1),
-        'Three': (1, 1, 1),
-        'Four': (1, 1, 1, 1),
-        'Tresillo': (3, 3, 2),
-        'Twelve Eighth Bell': (2, 2, 1, 2, 2, 2, 1),
-        'Son Clave': (3, 3, 4, 2, 4)
+        'Tresillo':     ( 8, (0, 3, 6)),
+        'Shiko':        (16, (0, 4, 6, 10, 12)),
+        'Soukous':      (16, (0, 3, 6, 10, 11)),
+        'Son Clave':    (16, (0, 3, 6, 10, 12)),
+        'Rumba':        (16, (0, 3, 7, 10, 12)),
+        'Bossa Nova':   (16, (0, 3, 6, 10, 13)),
+        'Gahu':         (16, (0, 3, 6, 10, 14)),
+        'Samba':        (16, (0, 3, 5, 7, 10, 12, 14)),
+        'Fume-fume':    (12, (0, 2, 4, 7, 9)),
+        'Bembe':        (12, (0, 2, 4, 5, 7, 9, 11)),
+        'Steve Reich':  (12, (0, 1, 2, 4, 5, 7, 9, 10)),
+        'One':          ( 8, (0,)),
+        'Two':          ( 8, (0, 4)),
+        'Three':        (12, (0, 4, 8)),
+        'Four':         (16, (0, 4, 8, 12)),
         }
+
+
 
     def __init__(self, time_grid: MusicTimeGrid, name: str = 'Simple'):
         self.time_grid = time_grid
         self.name = name
         self.onset_intervals = self._dict.get(name)
+
 
