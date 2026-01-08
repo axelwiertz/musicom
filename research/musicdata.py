@@ -2,9 +2,9 @@
 import pandas as pd
 import numpy as np
 
-from structures import MusicPitch, MusicPitchClass, MusicPitchPattern
+from structures import MusicPitch, MusicPitchClass, MusicPitchClassPattern
 from converters import pattern_to_excel
-from rules import Cardinality, PatternMode, PatternType
+from rules import Cardinality, PatternRotation, PatternType
 from utilities import Config
 
 from music21 import interval
@@ -16,7 +16,7 @@ def music_interval_data():
     m21intervals = list(interval.ChromaticInterval(n) for n in MusicPitchClass.NUMBERS)
 
 def pitch_data():
-    pitch_numbers = np.array([x + str(y) for y in range(MusicPitch.OCTAVES) for x in MusicPitchClass.NAMES_SHARP])
+    pitch_numbers = np.array([x + str(y) for y in range(MusicPitches.OCTAVES) for x in MusicPitchClass.NAMES_SHARP])
 
     pitch_dataframe = pd.DataFrame({
         'PitchIndex': range(len(pitch_numbers)),
@@ -28,9 +28,9 @@ def pitch_data():
 
 def music_data():
     # Heptatonic modes mapped to chromatic pitch helix
-    scale7 = MusicPitchPattern("Heptatonic scale", Cardinality.HEPTA, PatternType.SCALE)
+    scale7 = MusicPitchClassPattern("Heptatonic scale", Cardinality.HEPTA, PatternType.SCALE)
 
-    scale7.set_mode (PatternMode.major_mode)  # Major scale
+    scale7.set_mode (PatternRotation.major_mode)  # Major scale
 
     pattern_to_excel(scale7)
 

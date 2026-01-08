@@ -1,17 +1,55 @@
-"""Module for defining musical pitch (class) patterns based on scales, modes and intervals."""
+"""Module for defining musical pitch class patterns."""
 from enum import Enum, auto
 from typing import Tuple, FrozenSet, Optional, List
 from dataclasses import dataclass
 import networkx as nx
 from .base import Base
-from .pitch import MusicPitchClass, MusicPitch, Direction
+from .pitch import MusicPitchClass, MusicPitches, Direction
 from utilities import sequence_rotations, interval_to_step
 
 #TODO: Add methods for pattern manipulation, e.g., inversion, retrograde, etc.
 
-
 """1. Pattern Categories and Types"""
+@dataclass(frozen=True)
+class Cardinality:
+    # Number of pitch classes in pattern
+    DYAD = 2
+    TRIA = 3
+    TETRA = 4
+    PENTA = 5
+    HEXA = 6
+    HEPTA = 7
+    OCTA = 8
+    NONA = 9
+    DECA = 10
+    UNDECA = 11
+    DODECA = 12
 
+@dataclass(frozen=True)
+class PatternType(Enum):
+    SCALE = auto()
+
+    # Triad types
+    DIMINISHED = auto()
+    MINOR = auto()
+    MAJOR = auto()
+    AUGMENTED = auto()
+    SUS2 = auto()
+    SUS4 = auto()
+
+    # Tetrad types
+    MINOR7 = auto()
+    MAJOR7 = auto()
+    DOMINANT7 = auto()
+    MAJOR6 = auto()
+    MINOR6 = auto()
+    MINOR7_FLAT5 = auto()
+
+    # Extended chords
+    NINTH = 1
+    MINOR_NINTH = 2
+
+@dataclass(frozen=True)
 class PatternCategory(Enum):
     """Distinct categories of musical patterns."""
     INTERVAL = auto()  # Dyads (2)
@@ -96,10 +134,106 @@ class PatternDefinition:
         # Implementation to extract subset
         pass
 
+
+"""MusicPattern pitch(class) patterns: cardinality, intervals, scales, rotations, chords"""
+
+class PatternRotation:
+    """ Modes are rotations of pitch class patterns
+        Cardinality determines number of rotations:
+        - Dyadic pattern has 2 rotations
+        - Triadic pattern has 3 rotations
+        - Tetradic pattern has 4 rotations
+        - Pentatonic pattern has 5 rotations
+        - Heptatonic pattern has 7 rotations """
+    # Rotations are indexed from 0
+    ionian = major = root = 0
+    dorian = first_inversion = 1
+    phrygian = second_inversion = 2
+    lydian = third_inversion = 3
+    mixolydian = 4
+    aeolian = minor = 5
+    locrian = 6
+    rotation_names = {ionian:'major',dorian:'dorian',phrygian:'phrygian',
+            lydian:'lydian',mixolydian:'mixolydian',aeolian:'minor',locrian:'locrian'}
+
+    rotation_names_reverse = {v:k for k,v in rotation_names.items()}
+
+
+class MusicPattern:
+    # Interval patterns for pitch classes
+    # pitch_intervals: tuple of interval steps, e.g. (2,2)
+    pattern = {
+        Cardinality.DYAD: {
+            IntervalType.MINOR_SECOND    : (1, 11),
+            IntervalType.MAJOR_SECOND    : (2, 10),
+            IntervalType.MINOR_THIRD     : (3, 9),
+            IntervalType.MAJOR_THIRD     : (4, 8),
+            IntervalType.PERFECT_FOURTH  : (5, 7),
+            IntervalType.TRITONE         : (6, 6),
+            IntervalType.PERFECT_FIFTH   : (7, 5),
+            IntervalType.MINOR_SIXTH     : (8, 4),
+            IntervalType.MAJOR_SIXTH     : (9, 3),
+            IntervalType.MINOR_SEVENTH   : (10, 2),
+            IntervalType.MAJOR_SEVENTH   : (11, 1)
+        },
+        # 3 Triad scale Patterns
+        Cardinality.TRIA:  {
+            PatternType.DIMINISHED: (3, 3, 6),
+            PatternType.MINOR: (3, 4, 5),
+            PatternType.MAJOR: (4, 3, 5),
+            PatternType.AUGMENTED: (4, 4, 4),
+            PatternType.SUS2: (2, 5, 5),
+            PatternType.SUS4: (5, 2, 5),
+        },
+        Cardinality.TETRA : {
+            PatternType.MINOR7: (3, 4, 3, 2),
+            PatternType.MINOR7_FLAT5: (3, 3, 4, 2),
+            PatternType.MAJOR7 : (4, 3, 4, 1),
+            PatternType.DOMINANT7: (4, 3, 3, 2),
+            PatternType.MAJOR6: (4, 3, 2, 3),
+            PatternType.MINOR6: (3, 4, 2, 3),
+            PatternType.AUGMENTED: (4, 4, 3, 1),
+            PatternType.SUS2: (2, 5, 4, 1),
+            PatternType.SUS4: (5, 2, 4, 1)
+        },
+        Cardinality.PENTA: {
+            PatternType.SCALE: (2, 2, 3, 2, 3),
+        },
+        Cardinality.HEPTA: {
+            PatternType.SCALE : (2, 2, 1, 2, 2, 2, 1)
+        },
+        Cardinality.NONA: {},
+        Cardinality.DECA: {},
+        Cardinality.DODECA: {
+            PatternType.SCALE: (1,1,1,1,1,1,1,1,1,1,1,1)
+        },
+    }
+    multicycle_patterns = {
+        14: {
+            PatternType.NINTH: (4, 3, 3, 4, 10),
+            PatternType.MINOR_NINTH: (3, 4, 3, 4, 10)
+        }
+    }
+
+    @staticmethod
+    def find_pattern_type(cardinality: int, intervals: Tuple[int, ...]) -> PatternType | None:
+        """Static method to find pattern type from cardinality and intervals."""
+        if cardinality in MusicPattern.pattern:
+            for p_type, p_intervals in MusicPattern.pattern[cardinality].items():
+                if p_intervals == intervals:
+                    return p_type
+        if cardinality in MusicPattern.multicycle_patterns:
+            for p_type, p_intervals in MusicPattern.multicycle_patterns[cardinality].items():
+                if p_intervals == intervals:
+                    return p_type
+        return None
+
 """3. Hierarchical Pattern Registry"""
 
 class PatternRegistry:
     """Central registry for all patterns with relationship tracking."""
+
+    # (cardinality, chord_type, parent_pattern, parent_degree)
 
     # Scale definitions
     CHROMATIC = PatternDefinition(
@@ -174,19 +308,18 @@ class ScaleDegreeChords:
     def chord_at_degree(cls,
                         scale: PatternDefinition,
                         degree: int,
-                        extension: int = 3) -> PatternDefinition:
+                        cardinality: int = 3) -> PatternDefinition:
         """
         Generate chord at a specific scale degree.
-
         Args:
             scale: The parent scale
             degree: Scale degree (1-7)
-            extension: 3 for triad, 4 for 7th, 5 for 9th
+            cardinality: 3 for triad, 4 for 7th, 5 for 9th
         """
         # Build chord by stacking thirds from the degree
         chord_degrees = []
         current_degree = degree
-        for _ in range(extension):
+        for _ in range(cardinality):
             chord_degrees.append(current_degree)
             current_degree = ((current_degree - 1 + 2) % 7) + 1  # Skip by thirds
 
@@ -200,150 +333,14 @@ class ScaleDegreeChords:
 
 
 
-
-"""MusicPattern pitch(class) patterns: cardinality, intervals, scales, modes, chords"""
-
-class Cardinality:
-    # MusicPattern patterns: cardinality, intervals, scales, modes, chords
-    DYAD = 2
-    TRIA = 3
-    TETRA = 4
-    PENTA = 5
-    HEXA = 6
-    HEPTA = 7
-    OCTA = 8
-    NONA = 9
-    DECA = 10
-    UNDECA = 11
-    DODECA = 12
-
-class PatternType:
-    SCALE = 0
-
-    UNISON = 0
-    MINOR_SECOND = 1
-    MAJOR_SECOND = 2
-    MINOR_THIRD = 3
-    MAJOR_THIRD = 4
-    PERFECT_FOURTH = 5
-    TRITONE = 6
-    PERFECT_FIFTH = 7
-    MINOR_SIXTH = 8
-    MAJOR_SIXTH = 9
-    MINOR_SEVENTH = 10
-    MAJOR_SEVENTH = 11
-    OCTAVE = 12
-
-    DIMINISHED = 1
-    MINOR = 2
-    MAJOR = 3
-    AUGMENTED = 4
-    SUS2 = 5
-    SUS4 = 6
-
-    MINOR7 = 1
-    MAJOR7 = 2
-    DOMINANT7 = 3
-    MAJOR6 = 4
-    MINOR6 = 5
-    MINOR7_FLAT5 = 6
-
-    NINTH = 1
-    MINOR_NINTH = 2
-
-class PatternMode:
-    # 7 modes indices:
-    ionian = major = 0
-    dorian = 1
-    phrygian = 2
-    lydian = 3
-    mixolydian = 4
-    aeolian = minor = 5
-    locrian = 6
-    mode_names = {ionian:'major',dorian:'dorian',phrygian:'phrygian',
-            lydian:'lydian',mixolydian:'mixolydian',aeolian:'minor',locrian:'locrian'}
-
-    mode_names_reverse = {v:k for k,v in mode_names.items()}
-
-
-class MusicPattern:
-    # Interval patterns for pitch classes
-    # pitch_intervals: tuple of interval steps, e.g. (2,2)
-    pattern = {
-        Cardinality.DYAD: {
-            PatternType.MINOR_SECOND    : (1, 11),
-            PatternType.MAJOR_SECOND    : (2, 10),
-            PatternType.MINOR_THIRD     : (3, 9),
-            PatternType.MAJOR_THIRD     : (4, 8),
-            PatternType.PERFECT_FOURTH  : (5, 7),
-            PatternType.TRITONE         : (6, 6),
-            PatternType.PERFECT_FIFTH   : (7, 5),
-            PatternType.MINOR_SIXTH     : (8, 4),
-            PatternType.MAJOR_SIXTH     : (9, 3),
-            PatternType.MINOR_SEVENTH   : (10, 2),
-            PatternType.MAJOR_SEVENTH   : (11, 1)
-        },
-        # 3 Triad scale Patterns
-        Cardinality.TRIA:  {
-            PatternType.DIMINISHED: (3, 3, 6),
-            PatternType.MINOR: (3, 4, 5),
-            PatternType.MAJOR: (4, 3, 5),
-            PatternType.AUGMENTED: (4, 4, 4),
-            PatternType.SUS2: (2, 5, 5),
-            PatternType.SUS4: (5, 2, 5),
-        },
-        Cardinality.TETRA : {
-            PatternType.MINOR7: (3, 4, 3, 2),
-            PatternType.MINOR7_FLAT5: (3, 3, 4, 2),
-            PatternType.MAJOR7 : (4, 3, 4, 1),
-            PatternType.DOMINANT7: (4, 3, 3, 2),
-            PatternType.MAJOR6: (4, 3, 2, 3),
-            PatternType.MINOR6: (3, 4, 2, 3),
-            PatternType.AUGMENTED: (4, 4, 3, 1),
-            PatternType.SUS2: (2, 5, 4, 1),
-            PatternType.SUS4: (5, 2, 4, 1)
-        },
-        Cardinality.PENTA: {
-            PatternType.SCALE: (2, 2, 3, 2, 3),
-        },
-        Cardinality.HEPTA: {
-            PatternType.SCALE : (2, 2, 1, 2, 2, 2, 1)
-        },
-        Cardinality.NONA: {},
-        Cardinality.DECA: {},
-        Cardinality.DODECA: {
-            PatternType.SCALE: (1,1,1,1,1,1,1,1,1,1,1,1)
-        },
-    }
-    multicycle_patterns = {
-        14: {
-            PatternType.NINTH: (4, 3, 3, 4, 10),
-            PatternType.MINOR_NINTH: (3, 4, 3, 4, 10)
-        }
-    }
-
-    @staticmethod
-    def find_pattern_type(cardinality: int, intervals: Tuple[int, ...]) -> int | None:
-        """Static method to find pattern type from cardinality and intervals."""
-        if cardinality in MusicPattern.pattern:
-            for p_type, p_intervals in MusicPattern.pattern[cardinality].items():
-                if p_intervals == intervals:
-                    return p_type
-        if cardinality in MusicPattern.multicycle_patterns:
-            for p_type, p_intervals in MusicPattern.multicycle_patterns[cardinality].items():
-                if p_intervals == intervals:
-                    return p_type
-        return None
-
-
-class MusicPitchPattern(Base):
-    """Musical pattern based on diatonic scales, modes, and intervals."""
+class MusicPitchClassPattern(Base):
+    """Musical pattern based on diatonic pitch classes."""
 
     def __init__(self,
                  name: str = "Pattern",
                  cardinality: int = None,
-                 pattern_type: int = None,
-                 mode: int = None,
+                 pattern_type: PatternType = None,
+                 rotation: int = None,
                  tonic_pitch_class: int = None,
                  tonic_octave: int = 4,
                  ):
@@ -351,24 +348,24 @@ class MusicPitchPattern(Base):
         self._cardinality = cardinality
         self._pattern_type = pattern_type
 
-        self._modes = sequence_rotations(self.pitch_class_intervals)
-        self._mode = mode
+        self._rotations = sequence_rotations(self.pitch_class_intervals)
+        self._rotation = rotation
 
         # Connect to absolute pitches
-        self._pitches = MusicPitch()
-        self._modes_pitches = [interval_to_step(m) for m in self._modes]
+        self._pitches = MusicPitches()
+        self._rotations_pitches = [interval_to_step(m) for m in self._rotations]
 
         self._tonic_pitch_class = tonic_pitch_class
         self._tonic_octave = tonic_octave
 
 
-    def create_subpattern(self, degrees: List[int], name: str = "Subpattern") -> 'MusicPitchPattern':
+    def create_subpattern(self, degrees: List[int], name: str = "Subpattern") -> 'MusicPitchClassPattern':
         """
         Create a lower-cardinality subpattern from a subset of this pattern's degrees.
 
         :param degrees: A list of 1-based degrees to extract from the current pattern.
         :param name: The name for the new subpattern.
-        :return: A new MusicPitchPattern instance.
+        :return: A new MusicPitchClassPattern instance.
         """
         if not all(1 <= d <= self._cardinality for d in degrees):
             raise ValueError(f"All degrees must be within the range [1, {self._cardinality}]")
@@ -399,26 +396,26 @@ class MusicPitchPattern(Base):
         # Find the pattern type for the new intervals
         new_pattern_type = MusicPattern.find_pattern_type(new_cardinality, new_intervals)
 
-        return MusicPitchPattern(
+        return MusicPitchClassPattern(
             name=name,
             cardinality=new_cardinality,
             pattern_type=new_pattern_type,
-            mode=None,  # Subpatterns like chords don't typically have modes
+            rotation=None,  # Subpatterns like chords don't typically have rotations
             tonic_pitch_class=self.tonic_pitch_class,
             tonic_octave=self.tonic_octave
         )
 
-    def set_mode_index(self, mode_index: int):
-        """Set the current mode by index."""
-        if mode_index < 0 or mode_index >= len(self._modes):
-            raise ValueError(f"Mode index {mode_index} out of range.")
-        self._mode = mode_index
+    def set_rotation_index(self, rotation_index: int):
+        """Set the current rotation by index."""
+        if rotation_index < 0 or rotation_index >= len(self._rotations):
+            raise ValueError(f"Mode index {rotation_index} out of range.")
+        self._rotation = rotation_index
 
-    def set_mode_name(self, mode_name: str):
-        """Set the current mode by name."""
-        if mode_name not in PatternMode.mode_names_reverse:
-            raise ValueError(f"Mode name {mode_name} is not recognized.")
-        self._mode = PatternMode.mode_names_reverse[mode_name]
+    def set_rotation_name(self, rotation_name: str):
+        """Set the current rotation by name."""
+        if rotation_name not in PatternRotation.rotation_names_reverse:
+            raise ValueError(f"Mode name {rotation_name} is not recognized.")
+        self._rotation = PatternRotation.rotation_names_reverse[rotation_name]
 
     def set_tonic_pitch_class(self, pitch_class: int):
         """Set the tonic pitch class."""
@@ -430,14 +427,14 @@ class MusicPitchPattern(Base):
         """Get the cardinality of the pattern."""
         return self._cardinality
 
-    def pattern_type(self) -> int:
+    def pattern_type(self) -> PatternType:
         """Get the pattern type."""
         return self._pattern_type
 
     @staticmethod
-    def mode_name(self) -> str:
-        """Get the current mode name."""
-        return PatternMode.mode_names.get(self._mode)
+    def rotation_name(self) -> str:
+        """Get the current rotation name."""
+        return PatternRotation.rotation_names.get(self._rotation)
 
     @property
     def tonic_pitch_class(self) -> int:
@@ -455,11 +452,11 @@ class MusicPitchPattern(Base):
         else:
             return ()
 
-    def pitch_class_intervals_from_mode(self, mode_index: int) -> List[int]:
-        """Get pitch class intervals for a specific mode."""
-        if mode_index < 0 or mode_index >= len(self._modes):
-            raise ValueError(f"Mode index {mode_index} out of range.")
-        return self._modes[mode_index]
+    def pitch_class_intervals_from_rotation(self, rotation_index: int) -> List[int]:
+        """Get pitch class intervals for a specific rotation."""
+        if rotation_index < 0 or rotation_index >= len(self._rotations):
+            raise ValueError(f"Mode index {rotation_index} out of range.")
+        return self._rotations[rotation_index]
 
     def pitch_class_intervals_to_tonic(self) -> List[int]:
         """Get pitch class intervals starting from the tonic pitch class."""
@@ -477,7 +474,7 @@ class MusicPitchPattern(Base):
 
     @property
     def pitch_classes(self) -> Tuple[int, ...]:
-        """Calculate absolute pitch classes based on tonic and intervals."""
+        """Calculate pitch classes based on tonic pitch class and intervals."""
         if self._tonic_pitch_class is None:
             return () # Empty tuple if no tonic
         pitch_classes = []
@@ -507,16 +504,16 @@ class MusicPitchPattern(Base):
 
         return indices
 
-    def transpose(self, pitch_interval: int, direction: int = Direction.ASCENDING) -> 'MusicPitchPattern':
+    def transpose(self, pitch_interval: int, direction: int = Direction.ASCENDING) -> 'MusicPitchClassPattern':
         """Return new pattern transposed by pitch_interval on the helix."""
         new_tonic = (self._tonic_pitch_class + direction * pitch_interval) % MusicPitchClass.TWELVE
         new_octave = self._tonic_octave + (self._tonic_pitch_class + direction * pitch_interval) // MusicPitchClass.TWELVE
 
-        return MusicPitchPattern(
+        return MusicPitchClassPattern(
             name=f"{self.name} (transposed)",
             cardinality=self._cardinality,
             pattern_type=self._pattern_type,
-            mode=self._mode,
+            rotation=self._rotation,
             tonic_pitch_class=new_tonic,
             tonic_octave=new_octave,
         )

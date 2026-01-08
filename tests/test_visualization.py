@@ -5,7 +5,7 @@ def test_visualization():
     # Show helix
     h = Helix()
     print(h)
-    p = MusicPitch()
+    p = MusicPitches()
     p.show()
     # Test functions
     # Show rhythm in circle

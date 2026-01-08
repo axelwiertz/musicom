@@ -78,7 +78,7 @@ class SoundWave:
         weights = np.concatenate((A, D, S, R))
         smoothing = np.array([0.1 * (1 - 0.1) ** n for n in range(5)])
         smoothing = smoothing / np.nansum(smoothing)
-        self.weights = np.convolve(weights, smoothing, mode='same')
+        self.weights = np.convolve(weights, smoothing, rotation='same')
 
         self.weights = np.repeat(weights, int(self.sample_rate * self.duration / intervals))
         tail = int(self.sample_rate * self.duration - weights.shape[0])

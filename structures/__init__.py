@@ -2,11 +2,11 @@
 from .unit import MusicUnit, MusicEvent
 from .time import MusicTimeGrid, MusicLinearTime
 from .timegrid import MusicTimeGrid, MusicRhythmPattern
-from .pitchpattern import MusicPitchPattern, Cardinality, PatternType, PatternMode
+from .pitchpattern import MusicPitchClassPattern, Cardinality, PatternType, PatternRotation
 from .project import MusicSection, MusicVoice, MusicProject
 from .matrix import UnitMatrix
 from .instrument import MidiChannel, MidiInstrument, MidiPercussion
-from .pitch import MusicPitchClass, MusicPitch, Direction, PitchRange
+from .pitch import MusicPitchClass, MusicPitches, Direction, PitchRange
 
 
 __all__ = [
@@ -15,10 +15,10 @@ __all__ = [
     "MusicTimeGrid",
     "MusicLinearTime",
     "MusicRhythmPattern",
-    "MusicPitchPattern",
+    "MusicPitchClassPattern",
     "Cardinality",
     "PatternType",
-    "PatternMode",
+    "PatternRotation",
 
     "MusicSection",
     "MusicVoice",
@@ -30,7 +30,7 @@ __all__ = [
     'MidiChannel',
 
     'MusicPitchClass',
-    'MusicPitch',
+    'MusicPitches',
     'Direction',
     'PitchRange',
 

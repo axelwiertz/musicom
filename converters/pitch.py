@@ -48,7 +48,7 @@ def cents_between(f1 : float, f2 : float) -> float:
 
 def interval_cents(semitones: int | float) -> float:
     """Return cents value for given semitone interval."""
-    return semitones * MusicPitch.CENTS
+    return semitones * MusicPitches.CENTS
 
 
 def midi_to_name(midi : int | float) -> str:

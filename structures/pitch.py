@@ -1,6 +1,8 @@
 """Twelve tone equal temperament: Chromatic pitches in helix structure."""
 import numpy as np
 from visualization import Helix
+from typing import Tuple, FrozenSet, Optional, List
+from dataclasses import dataclass
 
 """Twelve-tone equal temperament constants and pitch class definitions"""
 
@@ -18,6 +20,7 @@ Frequency ratio for a semitone
 Log‑frequency increment (12‑TET)
 """
 
+@dataclass(frozen=True)
 class MusicPitchClass:
     TWELVE = 12  # Number of pitch classes 0-11
     # Pitch class numbers and names
@@ -47,19 +50,17 @@ class MusicPitchClass:
         return (a - b) % self.TWELVE
 
 
-
 class Direction:
     ASCENDING = 1
     DESCENDING = -1
 
 
-"""Chromatic pitch helix structure"""
-class MusicPitch:
+"""Chromatic pitches """
+class MusicPitches:
     OCTAVES = 9  # Number of octaves in the chromatic pitch set
     # General twelve-tone equal temperament constants
     CENTS: float = 100  # Cents in semitone
 
-    # Chromatic pitches in helix
     def __init__(self):
         # Contain a Helix as internal data structure
         # Represent as helix of (pitch_class = point, octave = turn): (0, 4)
@@ -122,7 +123,7 @@ class PitchRange:
                         pitch_class_end=MusicPitchClass.C,
                         octave_end=8):
 
-        self._pitches = MusicPitch()
+        self._pitches = MusicPitches()
 
         self.index_start = self._pitches.index_of(pitch_class_start, octave_start)
         self.index_end = self._pitches.index_of(pitch_class_end, octave_end)

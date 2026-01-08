@@ -3,7 +3,7 @@ Musicom generators module - scale library
 Module for generating musical scales and chords.
 """
 from typing import List
-from structures import MusicUnit, MusicPitchPattern, MusicTimeGrid
+from structures import MusicUnit, MusicPitchClassPattern, MusicTimeGrid
 from converters.musicpy_converter import pattern_to_mpscale
 from converters.music21_score import pattern_to_m21scale
 from converters.time import ticks_to_quarter_length
@@ -18,7 +18,7 @@ class ChordDegreeGenerator (MusicGenerator):
     """Generate chords based on chord degrees within a given musical pattern."""
     def __init__(self,
                  time : MusicTimeGrid,
-                 pattern : MusicPitchPattern,
+                 pattern : MusicPitchClassPattern,
                  chord_degrees : List[int]):
         super().__init__()
         self.time = time

@@ -1,6 +1,6 @@
-from structures import MusicPitchClass, MusicPitchPattern, MusicUnit, MusicVoice, MusicProject, MusicSection, MusicTimeGrid
+from structures import MusicPitchClass, MusicPitchClassPattern, MusicUnit, MusicVoice, MusicProject, MusicSection, MusicTimeGrid
 from converters import score_to_midifile, chord_to_unit, pattern_to_mpscale
-from rules import Cardinality, PatternType, PatternMode, Scale7PitchDegree, is_counterpoint, Scale7ChordHarmony
+from rules import Cardinality, PatternType, PatternRotation, Scale7PitchDegree, is_counterpoint, Scale7ChordHarmony
 from generators import StochasticGenerator, MarkovChainGenerator, ChordDegreeGenerator, HarmonicsGenerator
 from music21 import stream, note, key, roman
 
@@ -78,24 +78,24 @@ def test_progression():
 
     # Patterns in scales
     # 3 Tria patterns:
-    scale3 = MusicPitchPattern("Major triad",Cardinality.TRIA, PatternType.MAJOR)
+    scale3 = MusicPitchClassPattern("Major triad",Cardinality.TRIA, PatternType.MAJOR)
     print("Scale3:", scale3)
     # 4 Tetra patterns:
-    scale4 = MusicPitchPattern("Major seventh", PatternType.MAJOR7)
+    scale4 = MusicPitchClassPattern("Major seventh", PatternType.MAJOR7)
     print("Scale4:", scale4)
     # 5 Penta patterns:
-    scale5 = MusicPitchPattern("Pentatonic scale", Cardinality.PENTA, PatternType.SCALE)
+    scale5 = MusicPitchClassPattern("Pentatonic scale", Cardinality.PENTA, PatternType.SCALE)
     print("Scale5:", scale5)
     # 6 Hexa patterns:
-    scale6 = MusicPitchPattern("Whole tone scale", Cardinality.HEXA, PatternType.SCALE)
+    scale6 = MusicPitchClassPattern("Whole tone scale", Cardinality.HEXA, PatternType.SCALE)
     print("Scale6:", scale6)
     # 7 Hepta patterns:
-    scale7 = MusicPitchPattern("Major scale", Cardinality.HEPTA, PatternType.SCALE)
+    scale7 = MusicPitchClassPattern("Major scale", Cardinality.HEPTA, PatternType.SCALE)
     print("Scale7:", scale7)
 
 
     time = MusicTimeGrid(4,4,4)
-    scale1 = MusicPitchPattern("C4 major", Cardinality.HEPTA, PatternType.SCALE, 60, PatternMode.major_mode)
+    scale1 = MusicPitchClassPattern("C4 major", Cardinality.HEPTA, PatternType.SCALE, 60, PatternRotation.major_mode)
 
     triads_in_scale =  chord_to_unit(pattern_to_mpscale(scale7) % (1234567, 1))
     print("Triads in C major scale:", triads_in_scale)
@@ -106,11 +106,11 @@ def test_progression():
     unit = gen.generate()
     print("Triads in C major scale:", unit)
 
-    scale2 = MusicPitchPattern("C4 mixolydian",
+    scale2 = MusicPitchClassPattern("C4 mixolydian",
                           Cardinality.HEPTA,
                           PatternType.SCALE,
                           60,
-                          PatternMode.mixolydian)
+                          PatternRotation.mixolydian)
 
     gen = ChordDegreeGenerator(
         time,
@@ -123,7 +123,7 @@ def test_progression():
     section.matrix.set_unit(0,0,unit)
     voice = MusicVoice('Piano voice')
     proj = MusicProject('Chord progressions and triads',
-                        MusicPitchPattern("Project pattern"),
+                        MusicPitchClassPattern("Project pattern"),
                         [section],
                         [voice],
                         )

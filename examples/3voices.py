@@ -1,6 +1,6 @@
 
-from structures import MidiInstrument, MusicPitchClass, PitchRange, Cardinality, PatternType, PatternMode
-from structures import MusicPitchPattern, MusicProject, MusicSection, MusicUnit, MusicVoice, MusicTimeGrid, UnitMatrix
+from structures import MidiInstrument, MusicPitchClass, PitchRange, Cardinality, PatternType, PatternRotation
+from structures import MusicPitchClassPattern, MusicProject, MusicSection, MusicUnit, MusicVoice, MusicTimeGrid, UnitMatrix
 from converters.pitch import name_to_midi
 from converters.music21_pattern import pattern_to_m21scale
 from converters.midi_converter import score_to_midifile
@@ -10,10 +10,10 @@ from analysis import score_analyze
 # New composition
 project = MusicProject(name='Three Voices Composition',
     # Define musical pattern: C Major scale
-    pattern=MusicPitchPattern(name="C Major",
+    pattern=MusicPitchClassPattern(name="C Major",
                  cardinality=Cardinality.HEPTA,
                  pattern_type=PatternType.SCALE,
-                 mode=PatternMode.major,
+                 rotation=PatternRotation.major,
                  tonic_pitch_class=MusicPitchClass.C),
     # Define time signature and length
     time=MusicTimeGrid(ticks_per_cycle=16,beats_per_cycle=4,beat_note=4),

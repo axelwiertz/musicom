@@ -1,7 +1,7 @@
 """Balfolk Music Generation Project"""
 import random
 from structures import MusicProject, MusicSection, MusicVoice, MusicTimeGrid, MusicPitchClass, PitchRange
-from structures import MusicPitchPattern, Cardinality, PatternType, PatternMode, UnitMatrix
+from structures import MusicPitchClassPattern, Cardinality, PatternType, PatternRotation, UnitMatrix
 from converters.music21_score import project_to_score
 from converters.midi_converter import score_to_midifile
 from generators import SequentialPatternGenerator
@@ -11,10 +11,10 @@ MELODY = 0
 BASS = 1
 # Scale: A minor (C major)
 proj = MusicProject(name='Balfolk',
-                    pattern=MusicPitchPattern('A minor',
+                    pattern=MusicPitchClassPattern('A minor',
                                  Cardinality.HEPTA,
                                  PatternType.SCALE,
-                                 PatternMode.minor,
+                                 PatternRotation.minor,
                                  MusicPitchClass.A),
                     sections=[MusicSection('Balfolk Section',
                                   )],
@@ -29,10 +29,10 @@ proj = MusicProject(name='Balfolk',
 # Bourrée-inspired melody
 triad_patterns = [1,2,3,4]
 
-tria_pattern = MusicPitchPattern(name='Triads',
+tria_pattern = MusicPitchClassPattern(name='Triads',
                              cardinality=Cardinality.TRIA,
                              pattern_type=PatternType.MAJOR,
-                             mode=PatternMode.major,
+                             rotation=PatternRotation.major,
                              tonic_pitch_class=MusicPitchClass.C,
                              tonic_octave=4)
 

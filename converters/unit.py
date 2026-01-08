@@ -1,4 +1,4 @@
-"""Converters for MusicUnit to/from DataFrame, Excel, Binary, and MusicPitchPattern."""
+"""Converters for MusicUnit to/from DataFrame, Excel, Binary, and MusicPitchClassPattern."""
 import os
 from typing import List
 import pandas as pd
