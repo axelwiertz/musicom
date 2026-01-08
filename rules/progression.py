@@ -2,8 +2,30 @@
 
 # TODO: Implementing secondary dominants and modal interchange: borrow chords from parallel keys.
 
+from structures.base import Base
+class MusicForm(Base):
+    # Common music forms
+    common_section_patterns = {
+        'Binary' : ('A', 'B'),
+        'Ternary' : ('A', 'B', 'A'),
+        'Rondo' : ('A', 'B', 'A', 'C', 'A'),
+        'Sonata' : ('Exposition', 'Development', 'Recapitulation'),
+        'Strophic' : ('Verse1', 'Verse2', 'Verse3'),
+        'Verse Chorus' : ('Verse', 'Chorus', 'Verse', 'Chorus', 'Bridge', 'Chorus'),
+        '12 Bar Blues' : ('A', 'A', 'A', 'A', 'B', 'A', 'C', 'A'),
+        'Pop Song' : ('Intro', 'Verse', 'Chorus', 'Verse', 'Chorus', 'Bridge', 'Chorus', 'Outro'),
+        '32 Bar Blues' : ('A', 'A', 'A', 'A', 'B', 'A', 'C', 'A', 'D', 'A', 'E', 'A', 'F', 'A', 'G', 'A'),
+    }
+
+    def __init__(self,
+                 name: str,
+                 section_pattern: tuple):
+        super().__init__(name)
+        self.section_pattern = section_pattern
+
+
 class Scale7ChordHarmony:
-    # Widely used chords sequences (progressions)
+    # Widely used triad move (progressions)
     movement_rules = {
         1 : '*',            # tonic to any
         2 : (4, 5, 7),      # subdominant to dominant
@@ -13,7 +35,7 @@ class Scale7ChordHarmony:
         6 : (1, 3),         # tonic prolong to tonic
         7 : 1               # dominant to tonic
     }
-    majormodenext = {
+    major_mode_next = {
         '1maj' : '*',
         '2min' : ['1maj', '5maj', '7dim'],
         '3min' : ['1maj', '2min', '4maj', '6min'],
@@ -22,7 +44,7 @@ class Scale7ChordHarmony:
         '6min' : ['1maj', '2min', '3min', '4maj', '5maj'],
         '7dim' : ['1maj', '3min']
     }
-    minormodenext = {
+    minor_mode_next = {
         '1min' : '*',
         '2dim/2maj' : ['1min', '3min', '5maj', '5min', '7dim', '7maj'],
         '3maj/3aug' : ['1min', '4minor', '4maj', '6maj', '#6dim', '7dim', '6maj'],
@@ -35,10 +57,10 @@ class Scale7ChordHarmony:
 
 class CommonChordProgressions:
     # Common chord progressions in scale degrees
-    minorpop_progression = (1, 7, 6, 7)
+    minor_pop_progression = (1, 7, 6, 7)
     bestseller_progression = (1, 5, 6, 4)
     fifties_progression = (1, 6, 2, 5)
-    fifths_down_progression = (1,4,7,3,6,2,5)
+    fifths_down_progression = (1, 4, 7, 3, 6, 2, 5)
 
     common_progressions = [
     # Analysis of all progressions
@@ -72,7 +94,7 @@ class CommonChordProgressions:
 ]
 
     # Common ending cadence progressions
-    cadence_progresssions = {
+    cadence_progressions = {
     # Perfect cadence
         'Perfect' : (5, 1),     # V to I
     # Plagal cadence
@@ -91,3 +113,86 @@ class Modulation:
         'Subdominant' : ('iim7', 'V7'), # subdominant to dominant to new key
         'CommonChord' : ('IV', 'V7'),   # common chord to dominant
         }
+
+class Scale7ChordDegree:
+    # Diatonic chord functions
+    TONIC = 0
+    DOMINANT = 1
+    SUBDOMINANT = 2
+    TONIC_PROLONG = 3
+    function = {
+             TONIC : 1,              # Tonic
+             DOMINANT : (7,5),       # Dominant
+             SUBDOMINANT : (4,2),    # Subdominant
+             TONIC_PROLONG : (3,6)   # Tonic prolongation
+             }
+    function_progression = {
+        TONIC : [TONIC_PROLONG, DOMINANT, SUBDOMINANT], # Tonic can go to any
+        DOMINANT : [TONIC],                             # Dominant to Tonic
+        SUBDOMINANT : [DOMINANT]                        # Subdominant to Dominant
+             }
+
+
+class Scale7TriadDegree:
+    # 7 Hepta scale - Triad degrees
+    triad_degrees = {1: ("I", "i"), 2: ('ii', 'ii0'), 3: ('iii', 'III'), 4: ('IV', 'iv'), 5: ('V', 'V'),
+                     6: ('vi', 'VI'), 7: ('vii0', 'vii0')}
+
+
+class Scale7SeventhDegree:
+    # 7 Hepta scale - Seventh chord degrees
+    seventh_degrees = {1: ("I7", "i7"), 2: ('ii7', 'iiø7'), 3: ('iii7', 'III7'), 4: ('IV7', 'iv7'),
+                       5: ('V7', 'V7'), 6: ('vi7', 'viø7'), 7: ('viiø7', 'viiø7')}
+
+
+
+class PatternProgressions:
+
+    blues8_major_progression = [
+        (1, 4, 1, 6),
+        (4, 4, 1, 1),
+        (2, 5, 1, 1)
+    ]
+
+    blues12_major_progression = [
+        (1, 1, 1, 1),
+        (4, 4, 1, 1),
+        (5, 4, 1, 1)
+    ]
+    blues12_minor_progression = [
+        (1, 4, 1, 5),
+        (4, 4, 1, 6),
+        (2, 5, 1, 1)]
+
+    blues12_minor_progression2 = [
+        (1, 1, 1, 1),
+        (4, 4, 1, 1),
+        (5, 4, 1, 1)
+    ]
+
+    blues16_major_progression = [
+        (1, 1, 1, 1),
+        (4, 4, 1, 1),
+        (5, 4, 5, 4),
+        (5, 4, 1, 1)
+    ]
+
+    blues24_major_progression = [
+        (1, 1, 1, 1),
+        (1, 1, 1, 1),
+        (4, 4, 4, 4),
+        (1, 1, 1, 1),
+        (5, 5, 4, 4),
+        (1, 1, 1, 1)
+    ]
+
+    blues32_major_progression = [
+        (1, 1, 1, 1),
+        (1, 1, 1, 1),
+        (4, 4, 4, 4),
+        (1, 1, 1, 1),
+        (5, 5, 4, 4),
+        (1, 1, 1, 1),
+        (5, 5, 4, 4),
+        (1, 1, 1, 1)
+    ]

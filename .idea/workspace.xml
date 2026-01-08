@@ -4,17 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="timegrid and documentation">
-      <change beforePath="$PROJECT_DIR$/converters/musicpy_converter.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/musicpy_converter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/pypianoroll_converter.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/pypianoroll_converter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/unit.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/unit.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/compose.py" beforeDir="false" afterPath="$PROJECT_DIR$/examples/compose.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/cross_voice.py" beforeDir="false" afterPath="$PROJECT_DIR$/examples/cross_voice.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/guide.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/guide.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/project.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/project.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/time.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/time.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/timegrid.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/timegrid.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/unit.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/unit.py" afterDir="false" />
+    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="rhythm patterns">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rules/movement.py" beforeDir="false" afterPath="$PROJECT_DIR$/rules/movement.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rules/progression.py" beforeDir="false" afterPath="$PROJECT_DIR$/rules/progression.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/structures/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/structures/pitch.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/pitch.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/structures/pitchpattern.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/pitchpattern.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_structures.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_structures.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -241,23 +238,12 @@
       <workItem from="1767176230165" duration="443000" />
       <workItem from="1767176957469" duration="5929000" />
       <workItem from="1767282668694" duration="209000" />
-      <workItem from="1767282916465" duration="10507000" />
-    </task>
-    <task id="LOCAL-00157" summary="logical split of files">
-      <option name="closed" value="true" />
-      <created>1763072055437</created>
-      <option name="number" value="00157" />
-      <option name="presentableId" value="LOCAL-00157" />
-      <option name="project" value="LOCAL" />
-      <updated>1763072055437</updated>
-    </task>
-    <task id="LOCAL-00158" summary="projects template">
-      <option name="closed" value="true" />
-      <created>1763075364244</created>
-      <option name="number" value="00158" />
-      <option name="presentableId" value="LOCAL-00158" />
-      <option name="project" value="LOCAL" />
-      <updated>1763075364246</updated>
+      <workItem from="1767282916465" duration="10586000" />
+      <workItem from="1767373451844" duration="109000" />
+      <workItem from="1767373601581" duration="5826000" />
+      <workItem from="1767718717768" duration="5438000" />
+      <workItem from="1767820298556" duration="1182000" />
+      <workItem from="1767892610988" duration="2131000" />
     </task>
     <task id="LOCAL-00159" summary="packaging">
       <option name="closed" value="true" />
@@ -635,7 +621,23 @@
       <option name="project" value="LOCAL" />
       <updated>1767285577050</updated>
     </task>
-    <option name="localTasksCounter" value="206" />
+    <task id="LOCAL-00206" summary="unit conversion">
+      <option name="closed" value="true" />
+      <created>1767301142875</created>
+      <option name="number" value="00206" />
+      <option name="presentableId" value="LOCAL-00206" />
+      <option name="project" value="LOCAL" />
+      <updated>1767301142875</updated>
+    </task>
+    <task id="LOCAL-00207" summary="rhythm patterns">
+      <option name="closed" value="true" />
+      <created>1767391873877</created>
+      <option name="number" value="00207" />
+      <option name="presentableId" value="LOCAL-00207" />
+      <option name="project" value="LOCAL" />
+      <updated>1767391873877</updated>
+    </task>
+    <option name="localTasksCounter" value="208" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -668,8 +670,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="refactor" />
-    <MESSAGE value="projects and examples" />
     <MESSAGE value="factory" />
     <MESSAGE value="project, structures and base" />
     <MESSAGE value="project converters" />
@@ -693,7 +693,9 @@
     <MESSAGE value="composition with unit and matrix operations" />
     <MESSAGE value="restructuring" />
     <MESSAGE value="timegrid and documentation" />
-    <option name="LAST_COMMIT_MESSAGE" value="timegrid and documentation" />
+    <MESSAGE value="unit conversion" />
+    <MESSAGE value="rhythm patterns" />
+    <option name="LAST_COMMIT_MESSAGE" value="rhythm patterns" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -721,7 +723,7 @@
     <SUITE FILE_PATH="coverage/musicom$packages.coverage" NAME="packages Coverage Results" MODIFIED="1763500800882" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testers" />
     <SUITE FILE_PATH="coverage/musicom$test_converters.coverage" NAME="test_converters Coverage Results" MODIFIED="1764580867856" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testers" />
     <SUITE FILE_PATH="coverage/musicom$musicdata.coverage" NAME="musicdata Coverage Results" MODIFIED="1765894413361" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/research" />
-    <SUITE FILE_PATH="coverage/musicom$test_structures.coverage" NAME="test_structures Coverage Results" MODIFIED="1766524980123" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testers" />
+    <SUITE FILE_PATH="coverage/musicom$test_structures.coverage" NAME="test_structures Coverage Results" MODIFIED="1767894284617" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/musicom$test_generators.coverage" NAME="test_generators Coverage Results" MODIFIED="1765487321169" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/testers" />
     <SUITE FILE_PATH="coverage/musicom$music21_converter.coverage" NAME="music21_converter Coverage Results" MODIFIED="1766088074962" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/converters" />
     <SUITE FILE_PATH="coverage/musicom$3voices.coverage" NAME="3voices Coverage Results" MODIFIED="1764841586724" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/projects/examples" />

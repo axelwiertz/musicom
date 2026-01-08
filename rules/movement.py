@@ -1,4 +1,4 @@
-""" Movement rules for diatonic scale degrees """
+""" Movement rules for (heptatonic) scale degrees """
 
 class Scale7DegreeFunction:
     # 7 Hepta scale degree functions
@@ -39,26 +39,4 @@ class Scale7PitchDegree:
 
 
 
-class Scale7TriadDegree:
-    # 7 Hepta scale - Triad degrees
-    triad_degrees = {1: ("I", "i"), 2: ('ii', 'ii0'), 3: ('iii', 'III'), 4: ('IV', 'iv'), 5: ('V', 'V'),
-                     6: ('vi', 'VI'), 7: ('vii0', 'vii0')}
 
-
-class Scale7ChordDegree:
-    # Diatonic chord functions
-    TONIC = 0
-    DOMINANT = 1
-    SUBDOMINANT = 2
-    TONIC_PROLONG = 3
-    function = {
-             TONIC : 1,              # Tonic
-             DOMINANT : (7,5),       # Dominant
-             SUBDOMINANT : (4,2),    # Subdominant
-             TONIC_PROLONG : (3,6)   # Tonic prolongation
-             }
-    function_progression = {
-        TONIC : [TONIC_PROLONG, DOMINANT, SUBDOMINANT], # Tonic can go to any
-        DOMINANT : [TONIC],                             # Dominant to Tonic
-        SUBDOMINANT : [DOMINANT]                        # Subdominant to Dominant
-             }

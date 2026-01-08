@@ -1,6 +1,6 @@
 """Package for music composition structures."""
 from .unit import MusicUnit, MusicEvent
-from .time import MusicTimeGrid
+from .time import MusicTimeGrid, MusicLinearTime
 from .timegrid import MusicTimeGrid, MusicRhythmPattern
 from .pitchpattern import MusicPitchPattern, Cardinality, PatternType, PatternMode
 from .project import MusicSection, MusicVoice, MusicProject
@@ -13,6 +13,7 @@ __all__ = [
     "MusicEvent",
     "MusicUnit",
     "MusicTimeGrid",
+    "MusicLinearTime",
     "MusicRhythmPattern",
     "MusicPitchPattern",
     "Cardinality",

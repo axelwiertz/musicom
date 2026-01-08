@@ -1,8 +1,205 @@
-"""Module for defining musical patterns based on diatonic scales, modes and intervals."""
-from typing import Tuple, List
+"""Module for defining musical pitch (class) patterns based on scales, modes and intervals."""
+from enum import Enum, auto
+from typing import Tuple, FrozenSet, Optional, List
+from dataclasses import dataclass
+import networkx as nx
 from .base import Base
 from .pitch import MusicPitchClass, MusicPitch, Direction
 from utilities import sequence_rotations, interval_to_step
+
+#TODO: Add methods for pattern manipulation, e.g., inversion, retrograde, etc.
+
+
+"""1. Pattern Categories and Types"""
+
+class PatternCategory(Enum):
+    """Distinct categories of musical patterns."""
+    INTERVAL = auto()  # Dyads (2)
+    CHORD = auto()  # Triads (3), 7ths (4), extensions (x)
+    SCALE = auto()  # Pentatonic (5), Heptatonic (7), Chromatic (12)
+    MODE = auto()  # Rotations of scales
+
+
+class IntervalType(Enum):
+    """Interval types (dyads)."""
+    UNISON = 0
+    MINOR_SECOND = 1
+    MAJOR_SECOND = 2
+    MINOR_THIRD = 3
+    MAJOR_THIRD = 4
+    PERFECT_FOURTH = 5
+    TRITONE = 6
+    PERFECT_FIFTH = 7
+    MINOR_SIXTH = 8
+    MAJOR_SIXTH = 9
+    MINOR_SEVENTH = 10
+    MAJOR_SEVENTH = 11
+    OCTAVE = 12
+
+    INTERVAL_NUMBER_QUALITY = {
+        0: "P1", 1: "m2", 2: "M2", 3: "m3", 4: "M3", 5: "P4",
+        6: "TT", 7: "P5", 8: "m6", 9: "M6", 10: "m7", 11: "M7"
+    }
+
+
+class ChordQuality(Enum):
+    """Chord qualities."""
+    DIMINISHED = auto()
+    MINOR = auto()
+    MAJOR = auto()
+    AUGMENTED = auto()
+    DOMINANT = auto()
+    HALF_DIMINISHED = auto()
+    SUS2 = auto()
+    SUS4 = auto()
+
+
+class ScaleType(Enum):
+    """Scale types."""
+    CHROMATIC = auto()
+    HEPTATONIC = auto()
+    PENTATONIC = auto()
+    HEXATONIC = auto()
+    OCTATONIC = auto()
+
+"""2. Pattern Base Class with Relationships"""
+
+@dataclass(frozen=True)
+class PatternDefinition:
+    """Immutable pattern definition with relationship metadata."""
+    name: str
+    intervals: Tuple[int, ...]
+    category: PatternCategory
+    parent: Optional['PatternDefinition'] = None  # Superset pattern
+    degree_indices: Optional[Tuple[int, ...]] = None  # Indices in parent
+
+    @property
+    def cardinality(self) -> int:
+        return len(self.intervals)
+
+    @property
+    def pitch_class_set(self) -> FrozenSet[int]:
+        """Return pitch classes as a set (mod 12)."""
+        pcs = [0]
+        cumulative = 0
+        for interval in self.intervals[:-1]:  # Exclude wrap-around
+            cumulative += interval
+            pcs.append(cumulative % 12)
+        return frozenset(pcs)
+
+    def is_subset_of(self, other: 'PatternDefinition') -> bool:
+        """Check if this pattern's pitch classes are a subset of another."""
+        return self.pitch_class_set.issubset(other.pitch_class_set)
+
+    def extract_degrees(self, degrees: Tuple[int, ...]) -> 'PatternDefinition':
+        """Create a subpattern from specific scale degrees (1-based)."""
+        # Implementation to extract subset
+        pass
+
+"""3. Hierarchical Pattern Registry"""
+
+class PatternRegistry:
+    """Central registry for all patterns with relationship tracking."""
+
+    # Scale definitions
+    CHROMATIC = PatternDefinition(
+        name="Chromatic",
+        intervals=(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+        category=PatternCategory.SCALE
+    )
+
+    HEPTATONIC_MAJOR = PatternDefinition(
+        name="Major Scale",
+        intervals=(2, 2, 1, 2, 2, 2, 1),
+        category=PatternCategory.SCALE,
+        parent=CHROMATIC,
+        degree_indices=(0, 2, 4, 5, 7, 9, 11)  # Chromatic indices
+    )
+
+    PENTATONIC_MAJOR = PatternDefinition(
+        name="Major Pentatonic",
+        intervals=(2, 2, 3, 2, 3),
+        category=PatternCategory.SCALE,
+        parent=HEPTATONIC_MAJOR,
+        degree_indices=(1, 2, 3, 5, 6)  # Heptatonic degrees (1-based)
+    )
+
+    # Chord definitions derived from scales
+    MAJOR_TRIAD = PatternDefinition(
+        name="Major Triad",
+        intervals=(4, 3, 5),
+        category=PatternCategory.CHORD,
+        parent=HEPTATONIC_MAJOR,
+        degree_indices=(1, 3, 5)  # Scale degrees
+    )
+
+    MAJOR_SEVENTH = PatternDefinition(
+        name="Major 7th",
+        intervals=(4, 3, 4, 1),
+        category=PatternCategory.CHORD,
+        parent=HEPTATONIC_MAJOR,
+        degree_indices=(1, 3, 5, 7)
+    )
+
+    # Relationship: MAJOR_TRIAD is subset of MAJOR_SEVENTH
+    # MAJOR_TRIAD.is_subset_of(MAJOR_SEVENTH) == True
+
+
+"""4. Scale Degree Chord Generator"""
+class ScaleDegreeChords:
+    """Generate chords for each degree of a scale."""
+
+    # Chord qualities for each degree of major scale
+    MAJOR_SCALE_TRIADS = {
+        1: ChordQuality.MAJOR,  # I
+        2: ChordQuality.MINOR,  # ii
+        3: ChordQuality.MINOR,  # iii
+        4: ChordQuality.MAJOR,  # IV
+        5: ChordQuality.MAJOR,  # V
+        6: ChordQuality.MINOR,  # vi
+        7: ChordQuality.DIMINISHED  # vii°
+    }
+
+    MAJOR_SCALE_SEVENTHS = {
+        1: (ChordQuality.MAJOR, 'maj7'),  # Imaj7
+        2: (ChordQuality.MINOR, 'min7'),  # ii7
+        3: (ChordQuality.MINOR, 'min7'),  # iii7
+        4: (ChordQuality.MAJOR, 'maj7'),  # IVmaj7
+        5: (ChordQuality.DOMINANT, '7'),  # V7
+        6: (ChordQuality.MINOR, 'min7'),  # vi7
+        7: (ChordQuality.HALF_DIMINISHED, 'ø7')  # viiø7
+    }
+
+    @classmethod
+    def chord_at_degree(cls,
+                        scale: PatternDefinition,
+                        degree: int,
+                        extension: int = 3) -> PatternDefinition:
+        """
+        Generate chord at a specific scale degree.
+
+        Args:
+            scale: The parent scale
+            degree: Scale degree (1-7)
+            extension: 3 for triad, 4 for 7th, 5 for 9th
+        """
+        # Build chord by stacking thirds from the degree
+        chord_degrees = []
+        current_degree = degree
+        for _ in range(extension):
+            chord_degrees.append(current_degree)
+            current_degree = ((current_degree - 1 + 2) % 7) + 1  # Skip by thirds
+
+        return PatternDefinition(
+            name=f"Degree {degree} chord",
+            intervals=cls._calculate_intervals(scale, chord_degrees),
+            category=PatternCategory.CHORD,
+            parent=scale,
+            degree_indices=tuple(chord_degrees)
+        )
+
+
+
 
 """MusicPattern pitch(class) patterns: cardinality, intervals, scales, modes, chords"""
 
@@ -125,8 +322,19 @@ class MusicPattern:
         }
     }
 
+    @staticmethod
+    def find_pattern_type(cardinality: int, intervals: Tuple[int, ...]) -> int | None:
+        """Static method to find pattern type from cardinality and intervals."""
+        if cardinality in MusicPattern.pattern:
+            for p_type, p_intervals in MusicPattern.pattern[cardinality].items():
+                if p_intervals == intervals:
+                    return p_type
+        if cardinality in MusicPattern.multicycle_patterns:
+            for p_type, p_intervals in MusicPattern.multicycle_patterns[cardinality].items():
+                if p_intervals == intervals:
+                    return p_type
+        return None
 
-#TODO: Add methods for pattern manipulation, e.g., inversion, retrograde, etc.
 
 class MusicPitchPattern(Base):
     """Musical pattern based on diatonic scales, modes, and intervals."""
@@ -152,6 +360,53 @@ class MusicPitchPattern(Base):
 
         self._tonic_pitch_class = tonic_pitch_class
         self._tonic_octave = tonic_octave
+
+
+    def create_subpattern(self, degrees: List[int], name: str = "Subpattern") -> 'MusicPitchPattern':
+        """
+        Create a lower-cardinality subpattern from a subset of this pattern's degrees.
+
+        :param degrees: A list of 1-based degrees to extract from the current pattern.
+        :param name: The name for the new subpattern.
+        :return: A new MusicPitchPattern instance.
+        """
+        if not all(1 <= d <= self._cardinality for d in degrees):
+            raise ValueError(f"All degrees must be within the range [1, {self._cardinality}]")
+
+        parent_pitch_classes = self.pitch_classes
+        sub_pitch_classes = tuple(parent_pitch_classes[d - 1] for d in degrees)
+
+        new_cardinality = len(sub_pitch_classes)
+        if new_cardinality >= self._cardinality:
+            raise ValueError("Subpattern must have a lower cardinality than the parent pattern.")
+
+        # Calculate new intervals
+        intervals = []
+        for i in range(new_cardinality):
+            start_pc = sub_pitch_classes[i]
+            end_pc = sub_pitch_classes[(i + 1) % new_cardinality]
+            interval = (end_pc - start_pc + 12) % 12
+            if interval == 0 and new_cardinality > 1: # Handle octave for last interval
+                 interval = 12 - sum(intervals)
+            intervals.append(interval)
+
+        # Correct the last interval for cyclic patterns
+        if sum(intervals) != 12 and new_cardinality > 1:
+            intervals[-1] = 12 - sum(intervals[:-1])
+
+        new_intervals = tuple(intervals)
+
+        # Find the pattern type for the new intervals
+        new_pattern_type = MusicPattern.find_pattern_type(new_cardinality, new_intervals)
+
+        return MusicPitchPattern(
+            name=name,
+            cardinality=new_cardinality,
+            pattern_type=new_pattern_type,
+            mode=None,  # Subpatterns like chords don't typically have modes
+            tonic_pitch_class=self.tonic_pitch_class,
+            tonic_octave=self.tonic_octave
+        )
 
     def set_mode_index(self, mode_index: int):
         """Set the current mode by index."""
@@ -273,8 +528,55 @@ class MusicPitchPattern(Base):
         return self.helix_indices[degree - 1]
 
 
+"""5. Pattern Relationship Graph"""
 
-class MusicPatternSequence:
-    """ Ordered set of patterns """
-    def __init__(self, patterns: list[MusicPitchPattern]):
-        self.patterns = patterns
+class PatternGraph:
+    """Graph-based pattern relationship manager."""
+
+    def __init__(self):
+        self._graph = nx.DiGraph()
+
+    def add_pattern(self, pattern: PatternDefinition):
+        """Add pattern to graph."""
+        self._graph.add_node(pattern.name, pattern=pattern)
+        if pattern.parent:
+            self._graph.add_edge(
+                pattern.parent.name,
+                pattern.name,
+                relation='contains'
+            )
+
+    def get_subpatterns(self, pattern_name: str) -> List[PatternDefinition]:
+        """Get all patterns that are subsets of the given pattern."""
+        return [
+            self._graph.nodes[n]['pattern']
+            for n in self._graph.successors(pattern_name)
+        ]
+
+    def get_superpatterns(self, pattern_name: str) -> List[PatternDefinition]:
+        """Get all patterns that contain the given pattern."""
+        return [
+            self._graph.nodes[n]['pattern']
+            for n in self._graph.predecessors(pattern_name)
+        ]
+
+    def find_common_parent(self,
+                           pattern1: str,
+                           pattern2: str) -> Optional[PatternDefinition]:
+        """Find the smallest common superset of two patterns."""
+        ancestors1 = nx.ancestors(self._graph, pattern1)
+        ancestors2 = nx.ancestors(self._graph, pattern2)
+        common = ancestors1 & ancestors2
+        # Return the one closest to both patterns
+        if common:
+            return min(
+                (self._graph.nodes[n]['pattern'] for n in common),
+                key=lambda p: (
+                    nx.shortest_path_length(self._graph, p.name, pattern1) +
+                    nx.shortest_path_length(self._graph, p.name, pattern2)
+                )
+            )
+        return None
+
+
+

@@ -1,5 +1,5 @@
 from structures import MusicPitchClass, MusicPitch, Direction
-from structures import MusicTimeGrid, MusicPitchPattern, Cardinality, PatternType, PatternMode
+from structures import MusicTimeGrid, MusicLinearTime, MusicPitchPattern, Cardinality, PatternType, PatternMode
 from structures import MusicProject, MusicUnit, MusicVoice, UnitMatrix, MusicSection
 from converters.music21_pattern import pattern_to_m21scale
 
@@ -8,7 +8,7 @@ def test_project():
     # Project
     project = MusicProject(
         name="My First Song",
-        time = MusicTimeGrid(4, 4, 4),
+        time_grid = MusicTimeGrid(ticks_per_cycle=4, beats_per_cycle=4),
         sections=[MusicSection(name="Intro")],
         voices=[MusicVoice("Melody"), MusicVoice("Bass")],
         matrix=UnitMatrix(shape=(2, 2)),
@@ -50,13 +50,15 @@ def test_pitch():
 
 
 def test_patterns():
-    # New composition
-    project = MusicProject('Test Patterns',
-                           MusicPitchPattern("C Major", Cardinality.HEPTA, PatternType.SCALE, PatternMode.major, MusicPitchClass.C)
-                           )
-    pitch_classes = project.pattern.pitch_classes
+
+    pitch_pattern = MusicPitchPattern(name="C Minor",
+                                      cardinality=Cardinality.HEPTA,
+                                      pattern_type=PatternType.SCALE,
+                                      mode=PatternMode.minor,
+                                      tonic_pitch_class=MusicPitchClass.C)
+    pitch_classes = pitch_pattern.pitch_classes
     print (f'Pattern pitch classes: {pitch_classes}')
-    m21scale = pattern_to_m21scale(project.pattern)
+    m21scale = pattern_to_m21scale(pitch_pattern)
     print(m21scale)
 
     # Diatonic heptatonic scale patterns
@@ -82,9 +84,10 @@ def test_rhythm_time():
     unit.onset_intervals = [1,2,1,1,2]
 
     # Music time and meter
-    time = MusicTimeGrid(16, 4, 4, 120)
-    time.show()
-
+    time_grid = MusicTimeGrid(ticks_per_cycle=16, beats_per_cycle=4, beat_note=4)
+    time_grid.show()
+    time = MusicLinearTime (time_grid=time_grid, bpm=120)
+    print(f'Seconds per beat: {time.seconds_per_beat}, Seconds per cycle: {time.seconds_per_cycle()}')
 
 def main():
     test_project()
