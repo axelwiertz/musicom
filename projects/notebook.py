@@ -63,11 +63,3 @@ def standard_notebook ():
                                                   PatternRotation.major, MusicPitchClass.C),
                         sections=[MusicSection('A'), MusicSection('B')])
 
-    # (TRIA,2,MAJOR), (TRIA,5,MAJOR), (TRIA,1,MAJOR)
-    bossa_nova_progression2 = ['Imaj7', 'II7', 'iim7']
-
-    flamenco_progression = (1, 7, 6, 5)
-
-    loungejazz_progression1 = (7, 3, 6, 2, 5, 1)
-
-    loungejazz_progression1 = (4, 2, 5, 1),

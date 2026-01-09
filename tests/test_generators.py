@@ -1,6 +1,6 @@
 from structures import MusicPitchClass, MusicPitchClassPattern, MusicUnit, MusicVoice, MusicProject, MusicSection, MusicTimeGrid
 from converters import score_to_midifile, chord_to_unit, pattern_to_mpscale
-from rules import Cardinality, PatternType, PatternRotation, Scale7PitchDegree, is_counterpoint, Scale7ChordHarmony
+from rules import Cardinality, PatternType, PatternRotation, Scale7PitchDegree, is_counterpoint, PatternMovementRules
 from generators import StochasticGenerator, MarkovChainGenerator, ChordDegreeGenerator, HarmonicsGenerator
 from music21 import stream, note, key, roman
 
@@ -65,7 +65,7 @@ def test_harmonics():
 
 def test_markov_chain ():
 
-    gen = MarkovChainGenerator(train=Scale7ChordHarmony.movement_rules, start='1', length=16)
+    gen = MarkovChainGenerator(train=PatternMovementRules.movement_rules, start='1', length=16)
     units = gen.produce()
     print('Generated chords by Markov chain: ' + units[0])
 
@@ -153,7 +153,7 @@ def test_from_chords():
     # Create based on chord progression
     main_key = key.Key('C')
     # chord_degrees = [1, 4, 6, 2, 5, 1]
-    chord_degrees = Scale7ChordHarmony.movement_rules[0]
+    chord_degrees = PatternMovementRules.movement_rules[0]
 
     main_chords = stream.Stream()
     for i in chord_degrees:

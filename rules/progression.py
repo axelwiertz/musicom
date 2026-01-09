@@ -24,7 +24,7 @@ class MusicForm(Base):
         self.section_pattern = section_pattern
 
 
-class Scale7ChordHarmony:
+class PatternMovementRules:
     # Widely used triad move (progressions)
     movement_rules = {
         1 : '*',            # tonic to any
@@ -55,12 +55,22 @@ class Scale7ChordHarmony:
         }
     FLAT7CHORD = 'b7' # substitutes 7 and has DOM, SUBDOM and PROLON functions
 
-class CommonChordProgressions:
+
+class PatternMovement:
     # Common chord progressions in scale degrees
     minor_pop_progression = (1, 7, 6, 7)
     bestseller_progression = (1, 5, 6, 4)
     fifties_progression = (1, 6, 2, 5)
     fifths_down_progression = (1, 4, 7, 3, 6, 2, 5)
+    # (TRIA,2,MAJOR), (TRIA,5,MAJOR), (TRIA,1,MAJOR)
+    bossa_nova_progression2 = ['Imaj7', 'II7', 'iim7']
+
+    flamenco_progression = (1, 7, 6, 5)
+
+    loungejazz_progression1 = (7, 3, 6, 2, 5, 1)
+
+    loungejazz_progression2 = (4, 2, 5, 1),
+
 
     common_progressions = [
     # Analysis of all progressions

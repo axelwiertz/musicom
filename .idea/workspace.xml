@@ -4,31 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="patterns">
+    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="pattern hierarchy and separating pitch class patterns from absolute pitches">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/music21_pattern.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/music21_pattern.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/musicpy_converter.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/musicpy_converter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/pattern.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/pattern.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/pitch.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/pitch.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/unit.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/unit.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/3voices.py" beforeDir="false" afterPath="$PROJECT_DIR$/examples/3voices.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/guide.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/guide.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generators/chord_degrees.py" beforeDir="false" afterPath="$PROJECT_DIR$/generators/chord_degrees.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generators/pitchpattern.py" beforeDir="false" afterPath="$PROJECT_DIR$/generators/pitchpattern.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/balfolk.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/balfolk.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/bigyellowtaxi.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/projects/bigyellowtaxi.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/notebook.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/notebook.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/research/musicdata.py" beforeDir="false" afterPath="$PROJECT_DIR$/research/musicdata.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/research/soundwave.py" beforeDir="false" afterPath="$PROJECT_DIR$/research/soundwave.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rules/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/rules/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rules/progression.py" beforeDir="false" afterPath="$PROJECT_DIR$/rules/progression.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/structures/pitch.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/pitch.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/structures/pitchpattern.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/pitchpattern.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/project.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/project.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/test_generators.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_generators.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_structures.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_structures.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_visualization.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_visualization.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -261,15 +245,9 @@
       <workItem from="1767718717768" duration="5438000" />
       <workItem from="1767820298556" duration="1182000" />
       <workItem from="1767892610988" duration="2199000" />
-      <workItem from="1767904648316" duration="5045000" />
-    </task>
-    <task id="LOCAL-00160" summary="packaging">
-      <option name="closed" value="true" />
-      <created>1763666390559</created>
-      <option name="number" value="00160" />
-      <option name="presentableId" value="LOCAL-00160" />
-      <option name="project" value="LOCAL" />
-      <updated>1763666390559</updated>
+      <workItem from="1767904648316" duration="5140000" />
+      <workItem from="1767961585921" duration="3000" />
+      <workItem from="1767975831731" duration="3589000" />
     </task>
     <task id="LOCAL-00161" summary="packaging">
       <option name="closed" value="true" />
@@ -655,7 +633,15 @@
       <option name="project" value="LOCAL" />
       <updated>1767894809058</updated>
     </task>
-    <option name="localTasksCounter" value="209" />
+    <task id="LOCAL-00209" summary="pattern hierarchy and separating pitch class patterns from absolute pitches">
+      <option name="closed" value="true" />
+      <created>1767909803270</created>
+      <option name="number" value="00209" />
+      <option name="presentableId" value="LOCAL-00209" />
+      <option name="project" value="LOCAL" />
+      <updated>1767909803271</updated>
+    </task>
+    <option name="localTasksCounter" value="210" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -688,7 +674,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="project, structures and base" />
     <MESSAGE value="project converters" />
     <MESSAGE value="projects" />
     <MESSAGE value="refactoring structures, patterns, rules" />
@@ -713,7 +698,8 @@
     <MESSAGE value="unit conversion" />
     <MESSAGE value="rhythm patterns" />
     <MESSAGE value="patterns" />
-    <option name="LAST_COMMIT_MESSAGE" value="patterns" />
+    <MESSAGE value="pattern hierarchy and separating pitch class patterns from absolute pitches" />
+    <option name="LAST_COMMIT_MESSAGE" value="pattern hierarchy and separating pitch class patterns from absolute pitches" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

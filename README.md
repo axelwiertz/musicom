@@ -30,8 +30,8 @@ Algorithmic and structured music composition is treated as a series of transform
 ### 🎹 Harmony & Composition Rules
 - **Scale7PitchDegree**: Scale degree definitions for 7-note scales
 - **Scale7ChordDegree**: Chord degree definitions for diatonic harmony
-- **Scale7ChordHarmony**: Harmonic functions (Tonic, Dominant, Subdominant)
-- **CommonChordProgressions**: Pre-defined chord progression patterns
+- **PatternMovementRules**: Harmonic functions (Tonic, Dominant, Subdominant)
+- **PatternMovement**: Pre-defined chord progression patterns
 - **Counterpoint**: Two-voice counterpoint rules and constraints
 - Support for both **major** and **minor mode** chord progressions
 
