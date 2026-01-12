@@ -272,29 +272,16 @@ class PatternRegistry:
     # Relationship: MAJOR_TRIAD is subset of MAJOR_SEVENTH
     # MAJOR_TRIAD.is_subset_of(MAJOR_SEVENTH) == True
 
-
-class Tonic:
-    def __init__(self,
-                 pitch_class : int = None,
-                 octave : int = None,):
-        self._pitch_class = pitch_class
-        self._octave = octave
-
-
 class MusicPitchClassPattern(Base):
     """Musical pattern based on diatonic pitch classes."""
-
     def __init__(self,
                  name: str = "Pattern",
-                 cardinality: int = None,
-                 pattern_type: PatternType = None,
+                 definition: PatternType = None,
                  rotation: int = None,
-                 tonic_pitch_class: int = None,
-                 tonic_octave: int = 4,
+                 initial: int = None,
                  ):
         super().__init__(name)
-        self._cardinality = cardinality
-        self._pattern_type = pattern_type
+        self._definition = definition
 
         self._rotations = sequence_rotations(self.pitch_class_intervals)
         self._rotation = rotation
@@ -303,55 +290,7 @@ class MusicPitchClassPattern(Base):
         self._pitches = MusicPitches()
         self._rotations_pitches = [interval_to_step(m) for m in self._rotations]
 
-        self._tonic_pitch_class = tonic_pitch_class
-        self._tonic_octave = tonic_octave
-
-
-    def create_subpattern(self, degrees: List[int], name: str = "Subpattern") -> 'MusicPitchClassPattern':
-        """
-        Create a lower-cardinality subpattern from a subset of this pattern's degrees.
-
-        :param degrees: A list of 1-based degrees to extract from the current pattern.
-        :param name: The name for the new subpattern.
-        :return: A new MusicPitchClassPattern instance.
-        """
-        if not all(1 <= d <= self._cardinality for d in degrees):
-            raise ValueError(f"All degrees must be within the range [1, {self._cardinality}]")
-
-        parent_pitch_classes = self.pitch_classes
-        sub_pitch_classes = tuple(parent_pitch_classes[d - 1] for d in degrees)
-
-        new_cardinality = len(sub_pitch_classes)
-        if new_cardinality >= self._cardinality:
-            raise ValueError("Subpattern must have a lower cardinality than the parent pattern.")
-
-        # Calculate new intervals
-        intervals = []
-        for i in range(new_cardinality):
-            start_pc = sub_pitch_classes[i]
-            end_pc = sub_pitch_classes[(i + 1) % new_cardinality]
-            interval = (end_pc - start_pc + 12) % 12
-            if interval == 0 and new_cardinality > 1: # Handle octave for last interval
-                 interval = 12 - sum(intervals)
-            intervals.append(interval)
-
-        # Correct the last interval for cyclic patterns
-        if sum(intervals) != 12 and new_cardinality > 1:
-            intervals[-1] = 12 - sum(intervals[:-1])
-
-        new_intervals = tuple(intervals)
-
-        # Find the pattern type for the new intervals
-        new_pattern_type = MusicPattern.find_pattern_type(new_cardinality, new_intervals)
-
-        return MusicPitchClassPattern(
-            name=name,
-            cardinality=new_cardinality,
-            pattern_type=new_pattern_type,
-            rotation=None,  # Subpatterns like chords don't typically have rotations
-            tonic_pitch_class=self.tonic_pitch_class,
-            tonic_octave=self.tonic_octave
-        )
+        self._initial = initial
 
     def set_rotation_index(self, rotation_index: int):
         """Set the current rotation by index."""
@@ -365,19 +304,15 @@ class MusicPitchClassPattern(Base):
             raise ValueError(f"Mode name {rotation_name} is not recognized.")
         self._rotation = PatternRotation.rotation_names_reverse[rotation_name]
 
-    def set_tonic_pitch_class(self, pitch_class: int):
-        """Set the tonic pitch class."""
+    def set_initial(self, pitch_class: int):
+        """Set the initial (tonic/root) pitch class."""
         if pitch_class < 0 or pitch_class >= MusicPitchClass.TWELVE:
             raise ValueError(f"Tonic pitch class {pitch_class} out of range [0, 11].")
-        self._tonic_pitch_class = pitch_class
+        self._initial = pitch_class
 
-    def cardinality(self) -> int:
-        """Get the cardinality of the pattern."""
-        return self._cardinality
-
-    def pattern_type(self) -> PatternType:
+    def type(self) -> PatternType:
         """Get the pattern type."""
-        return self._pattern_type
+        return self._definition
 
     @staticmethod
     def rotation_name(self) -> str:
@@ -385,20 +320,21 @@ class MusicPitchClassPattern(Base):
         return PatternRotation.rotation_names.get(self._rotation)
 
     @property
-    def tonic_pitch_class(self) -> int:
-        """Get the tonic pitch class."""
-        return self._tonic_pitch_class
-    @property
-    def tonic_octave(self) -> int:
-        return self._tonic_octave
+    def initial(self) -> int:
+        """Get the initial pitch class."""
+        return self._initial
 
     @property
     def pitch_class_intervals(self) -> Tuple[int] | Tuple[()]:
         """Get pitch class intervals for the pattern."""
-        if self._pattern_type is not None:
-            return MusicPattern.dict.get(self._pattern_type)
+        if self._definition is not None:
+            return MusicPattern.dict.get(self._definition)
         else:
             return ()
+    @property
+    def cardinality(self) -> int:
+        """Get the cardinality of the pattern."""
+        return len(self.pitch_class_intervals)
 
     def pitch_class_intervals_from_rotation(self, rotation_index: int) -> List[int]:
         """Get pitch class intervals for a specific rotation."""
@@ -406,33 +342,86 @@ class MusicPitchClassPattern(Base):
             raise ValueError(f"Mode index {rotation_index} out of range.")
         return self._rotations[rotation_index]
 
-    def pitch_class_intervals_to_tonic(self) -> List[int]:
-        """Get pitch class intervals starting from the tonic pitch class."""
-        if self._tonic_pitch_class is None:
+    def pitch_class_intervals_to_initial(self) -> List[int]:
+        """Get pitch class intervals starting from the initial pitch class."""
+        if self._initial is None:
             raise ValueError("Tonic pitch class is not set.")
 
         # Tonic pitch class
-        interval_to_tonic = 0
-        intervals_to_tonic = []
+        interval_to_initial = 0
+        intervals_to_initial = []
         for interval in self.pitch_class_intervals:
-            interval_to_tonic += interval
-            intervals_to_tonic.append(interval_to_tonic)
+            interval_to_initial += interval
+            intervals_to_initial.append(interval_to_initial)
 
-        return intervals_to_tonic
+        return intervals_to_initial
 
     @property
     def pitch_classes(self) -> Tuple[int, ...]:
         """Calculate pitch classes based on tonic pitch class and intervals."""
-        if self._tonic_pitch_class is None:
-            return () # Empty tuple if no tonic
+        if self._initial is None:
+            return () # Empty tuple if no initial
         pitch_classes = []
-        for interval in self.pitch_class_intervals_to_tonic():
-            pc = (self._tonic_pitch_class + interval) % MusicPitchClass.TWELVE
+        for interval in self.pitch_class_intervals_to_initial():
+            pc = (self._initial + interval) % MusicPitchClass.TWELVE
             pitch_classes.append(pc)
 
         return tuple(pitch_classes)
 
+def create_subpattern(parent_pattern: MusicPitchClassPattern,
+                      child_pattern: MusicPitchClassPattern = None,
+                      degrees: List[int] = None,
+                      name: str = "Subpattern") -> 'MusicPitchClassPattern':
+    """
+    Create a (lower-cardinality) subpattern from a subset of this pattern's degrees.
+    Args:
+        parent_pattern: The parent pattern to extract from
+        child_pattern: Optional existing child pattern to base on
+        degrees: List of scale degrees (1-based) to include in subpattern
+        name: Name of the new subpattern
+    """
+    if not all(1 <= d <= parent_pattern.cardinality for d in degrees):
+        raise ValueError(f"All degrees must be within the range [1, {parent_pattern.cardinality}]")
 
+    parent_pitch_classes = parent_pattern.pitch_classes
+    sub_pitch_classes = ()
+    new_cardinality = 0
+    if child_pattern:
+        sub_pitch_classes = child_pattern.pitch_classes
+        new_cardinality = len(sub_pitch_classes)
+    elif degrees:
+        sub_pitch_classes = tuple(parent_pitch_classes[d - 1] for d in degrees)
+        new_cardinality = len(sub_pitch_classes)
+        
+
+    if new_cardinality >= parent_pattern.cardinality:
+        raise ValueError("Subpattern must have a lower cardinality than the parent pattern.")
+
+    # Calculate new intervals
+    intervals = []
+    for i in range(new_cardinality):
+        start_pc = sub_pitch_classes[i]
+        end_pc = sub_pitch_classes[(i + 1) % new_cardinality]
+        interval = (end_pc - start_pc + 12) % 12
+        if interval == 0 and new_cardinality > 1: # Handle octave for last interval
+             interval = 12 - sum(intervals)
+        intervals.append(interval)
+
+    # Correct the last interval for cyclic patterns
+    if sum(intervals) != 12 and new_cardinality > 1:
+        intervals[-1] = 12 - sum(intervals[:-1])
+
+    new_intervals = tuple(intervals)
+
+    # Find the pattern type for the new intervals
+    new_pattern_type = MusicPattern.find_pattern_type(new_cardinality, new_intervals)
+
+    return MusicPitchClassPattern(
+        name=name,
+        definition=new_pattern_type, # Set pattern type based on intervals
+        rotation=None,  # No specific rotation
+        initial=sub_pitch_classes[0]  # Set tonic to first pitch class,
+    )
 
 """4. Scale Degree Chord Generator"""
 class ScaleDegreeChords:

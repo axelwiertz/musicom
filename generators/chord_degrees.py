@@ -5,7 +5,7 @@ Module for generating musical scales and chords.
 from typing import List
 from structures import MusicUnit, MusicPitchClassPattern, MusicTimeGrid
 from converters.musicpy_converter import pattern_to_mpscale
-from converters.music21_score import pattern_to_m21scale
+from converters.music21_pattern import pattern_to_m21scale
 from converters.time import ticks_to_quarter_length
 from converters.musicpy_converter import chord_to_unit
 from converters.music21_score import stream_to_unit
@@ -17,11 +17,11 @@ class ChordDegreeGenerator (MusicGenerator):
     """ Chord generator """
     """Generate chords based on chord degrees within a given musical pattern."""
     def __init__(self,
-                 time : MusicTimeGrid,
+                 time_grid : MusicTimeGrid,
                  pattern : MusicPitchClassPattern,
                  chord_degrees : List[int]):
         super().__init__()
-        self.time = time
+        self.time_grid = time_grid
         self.pattern = pattern
         self.chord_degrees = chord_degrees
 
@@ -40,9 +40,9 @@ class ChordDegreeGenerator (MusicGenerator):
             # m21 Create chord from Roman numeral
             chord01 = roman.RomanNumeral (self.chord_degrees[i],
                                           keyOrScale=pattern_to_m21scale(self.pattern))
-            chord01.duration.quarterLength = ticks_to_quarter_length(self.time, 1)
+            chord01.duration.quarterLength = ticks_to_quarter_length(ticks=1, time=self.time_grid)
             stream1.append(chord01)
 
-        unit += stream_to_unit(stream1)
+        unit += stream_to_unit(stream_in=stream1, time=self.time_grid)
 
         return unit

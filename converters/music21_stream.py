@@ -45,14 +45,14 @@ def stream_to_unit(stream_in: stream.Stream, time: MusicTimeGrid) -> MusicUnit:
                 unit.add_event(note_to_event(note_, time))
     return unit
 
-def matrix_row_to_stream(matrix: UnitMatrix, row: int, time: MusicTimeGrid) -> stream.Stream:
+def matrix_row_to_stream(matrix: UnitMatrix, row: int, time_grid: MusicTimeGrid) -> stream.Stream:
     """Concatenate the music21 streams from contained units into a single Stream."""
     stream_out = stream.Stream()
-    for col in range(matrix.cols):
+    for col in range(matrix.num_cols):
         unit_ = matrix.get_unit(row, col)
         if unit_ is None:
-            rest_ = tick_gap_to_rest(matrix.units_in_col(col)[0].len_ticks(), time)
+            rest_ = tick_gap_to_rest(matrix.units_in_col(col)[0].len_ticks(), time_grid)
             stream_out.append(rest_)
         else:
-            stream_out.append(unit_to_stream(unit_, time))
+            stream_out.append(unit_to_stream(unit_, time_grid))
     return stream_out

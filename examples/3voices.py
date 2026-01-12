@@ -12,9 +12,9 @@ project = MusicProject(name='Three Voices Composition',
     # Define musical pattern: C Major scale
     pattern=MusicPitchClassPattern(name="C Major",
                  cardinality=Cardinality.HEPTA,
-                 pattern_type=PatternType.SCALE,
+                 definition=PatternType.SCALE,
                  rotation=PatternRotation.major,
-                 tonic_pitch_class=MusicPitchClass.C),
+                 initial=MusicPitchClass.C),
     # Define time signature and length
     time=MusicTimeGrid(ticks_per_cycle=16,beats_per_cycle=4,beat_note=4),
     # Create three voices for melody and accompaniment

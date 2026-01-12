@@ -30,28 +30,28 @@ class PatternGenerator(MusicGenerator):
         units = [MusicUnit() for _ in range(self.number_of_voices)]
 
         # Pitch generation
-        for pattern in self.patterns:
+        for i, pattern in enumerate(self.patterns):
             # Convert pattern to pitches
-            pitch_nodes_ = pattern_to_pitches(pattern, pattern.tonic_octave)
-            for i in range(self.number_of_voices):
-                p = pitch_nodes_[i]
+            pitches = pattern_to_pitches(pattern, self.tonic_octaves[i])
+            for j in range(self.number_of_voices):
+                p = pitches[j]
                 e = MusicEvent(pitch=p,
                                volume=self.volume_in,
                                start_tick=0,
                                end_tick=self.time_interval,
                                )
-                units[i].add_event(e)
+                units[j].add_event(e)
 
         # Sequential arpeggio generation
-        for pattern in self.patterns:
+        for i, pattern in enumerate(self.patterns):
             # Convert pattern to pitches
-            pitch_nodes_ = pattern_to_pitches(pattern, pattern.tonic_octave)
+            pitches = pattern_to_pitches(pattern, self.tonic_octaves[i])
             events = []
-            for i, p in enumerate(pitch_nodes_):
-                e = MusicEvent(pitch=p,
+            for j, pitch in enumerate(pitches):
+                e = MusicEvent(pitch=pitch,
                                volume=self.volume_in,
-                               start_tick=i*self.time_interval,
-                               end_tick= (i+1)*self.time_interval,
+                               start_tick=j*self.time_interval,
+                               end_tick= (j+1)*self.time_interval,
                                )
                 events.append(e)
 
@@ -62,10 +62,12 @@ class PatternGenerator(MusicGenerator):
         # all lowest pitches of each pattern form one voice
         # all 2nd pitches of each pattern form a second voice, etc.,
         # event duration is timesteps_in
-        for p, pattern in enumerate(self.patterns):
-            pitch_nodes_ = pattern_to_pitches(pattern, self.tonic_octaves[p])
+        for i, pattern in enumerate(self.patterns):
+            # Convert pattern to pitches
+            pitches = pattern_to_pitches(pattern, self.tonic_octaves[i])
             for v in range(self.number_of_voices):
-                p = pitch_nodes_[v]
+                # Get pitch for the current voice
+                p = pitches[v]
                 e = MusicEvent(pitch=p,
                                volume=80,
                                start_tick=0,

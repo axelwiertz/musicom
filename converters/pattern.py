@@ -3,7 +3,7 @@ from typing import List
 import pandas as pd
 from utilities import Config
 from structures import MusicPitchClassPattern
-from converters import pitch_to_midi
+from converters.pitch import pitch_to_midi
 
 def pattern_degree_to_midi (pattern: MusicPitchClassPattern, degree_: int, octave_: int) -> int:
     """ Convert pattern degree to MIDI note number """
@@ -19,8 +19,9 @@ def pattern_to_pitches (pattern: MusicPitchClassPattern, octave_: int) -> List[i
         pitches.append(midi_note)
     return pitches
 
+
 def pattern_to_excel (pattern : MusicPitchClassPattern) :
-    # Save pattern modes to Excel files
+    """ Save pattern pitch classes and modes to Excel files """
     pd_modes = pd.DataFrame(pattern.modes)
     pd_modes_helix = pd.DataFrame(pattern.modes_helix)
 

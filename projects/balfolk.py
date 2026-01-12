@@ -1,28 +1,28 @@
 """Balfolk Music Generation Project"""
 import random
 from structures import MusicProject, MusicSection, MusicVoice, MusicTimeGrid, MusicPitchClass, PitchRange
-from structures import MusicPitchClassPattern, Cardinality, PatternType, PatternRotation, UnitMatrix
+from structures import MusicPitchClassPattern, PatternType, PatternRotation, UnitMatrix
 from converters.music21_score import project_to_score
 from converters.midi_converter import score_to_midifile
-from generators import SequentialPatternGenerator
+from generators import PatternGenerator
 from analysis import score_analyze
 
 MELODY = 0
 BASS = 1
 # Scale: A minor (C major)
 proj = MusicProject(name='Balfolk',
-                    pattern=MusicPitchClassPattern('A minor',
-                                 Cardinality.HEPTA,
-                                 PatternType.SCALE,
-                                 PatternRotation.minor,
-                                 MusicPitchClass.A),
+                    pitch_pattern=MusicPitchClassPattern(
+                            name='A minor',
+                            definition=PatternType.HEPTATONIC,
+                            rotation=PatternRotation.minor,
+                            initial=MusicPitchClass.A),
                     sections=[MusicSection('Balfolk Section',
                                   )],
                     voices=[MusicVoice("melody",
                                        PitchRange('C4', 'C6')),
                             MusicVoice("bass",
                                        PitchRange('C2', 'C4'))],
-                    time=MusicTimeGrid(ticks_per_cycle=12, beats_per_cycle=6, beat_note=8), # typical Balfolk rhythm
+                    time_grid=MusicTimeGrid(ticks_per_cycle=12, beats_per_cycle=6, beat_note=8), # typical Balfolk rhythm
                     matrix=UnitMatrix(),
                     )
 
@@ -30,15 +30,15 @@ proj = MusicProject(name='Balfolk',
 triad_patterns = [1,2,3,4]
 
 tria_pattern = MusicPitchClassPattern(name='Triads',
-                             cardinality=Cardinality.TRIA,
-                             pattern_type=PatternType.MAJOR,
+                             definition=PatternType.MAJOR,
                              rotation=PatternRotation.major,
-                             tonic_pitch_class=MusicPitchClass.C,
-                             tonic_octave=4)
+                             initial=MusicPitchClass.C,)
 
-gen = SequentialPatternGenerator(patterns=[tria_pattern],
-                             timesteps_in=2,
-                             volume_in=100)
+gen = PatternGenerator(patterns=[tria_pattern],
+                       tonic_octaves=[4],
+                        number_of_voices=1,
+                       time_interval=2,
+                        volume_in=100)
 melody_units = gen.generate()
 
 melody_notes = [

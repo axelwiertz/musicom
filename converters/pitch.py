@@ -2,7 +2,7 @@
 
 from math import pow, log2
 from librosa import midi_to_hz, hz_to_midi, note_to_midi, midi_to_note
-from structures import MusicPitch, MusicPitchClass
+from structures import MusicPitches, MusicPitchClass
 
 # Constants
 C0_MIDI = 12  # MIDI number for C0

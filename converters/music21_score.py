@@ -19,11 +19,11 @@ def score_to_project(score: stream.Score) -> MusicProject:
 
     # Create project
     project = MusicProject(name=score.metadata.title or 'Untitled',
-                           pattern=key_to_pattern(score_key),
+                           pitch_pattern=key_to_pattern(score_key),
                            sections=[MusicSection('From Score')],
                            matrix=UnitMatrix(shape=(len(score.parts), 1)),
                            voices=[],
-                           time=time)
+                           time_grid=time)
 
     # Convert m21 parts to matrix rows (voices)
     for i, p in enumerate(score.parts):
@@ -41,14 +41,14 @@ def score_to_project(score: stream.Score) -> MusicProject:
 def project_to_score(project: MusicProject) -> stream.Score:
     """Convert MusicProject to music21 Score."""
     score = stream.Score()
-    score.insert(0, time_to_meter(project.time))
-    score.insert(0, time_to_tempo(project.time))
+    score.insert(0, time_to_meter(project.time_grid))
+    score.insert(0, time_to_tempo(project.time_grid))
 
     # Convert matrix rows to m21 parts
     for i, v in enumerate(project.voices):
         # Create part for each voice
         part_ = stream.Part()
-        stream_ = matrix_row_to_stream (project.matrix, i, project.time)
+        stream_ = matrix_row_to_stream (project.matrix, i, project.time_grid)
         part_.append(stream_)
         part_.partName = v.name
         score.append(part_)

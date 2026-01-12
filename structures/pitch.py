@@ -1,7 +1,6 @@
 """Twelve tone equal temperament: Chromatic pitches in helix structure."""
 import numpy as np
 from visualization import Helix
-from typing import Tuple, FrozenSet, Optional, List
 from dataclasses import dataclass
 
 """Twelve-tone equal temperament constants and pitch class definitions"""
@@ -116,25 +115,6 @@ class MusicPitches:
         """Visualize the pitch helix """
         self._helix.plot_3d(radius=radius)
 
-    @property
-    def helix_indices(self) -> List[int]:
-        """Map pattern pitches to helix indices with octave tracking."""
-        if self._tonic_pitch_class is None:
-            return []
-
-        indices = []
-        current_octave = self._tonic_octave
-        prev_pitch_class = self._tonic_pitch_class
-
-        for pc in self.pitch_classes:
-            # Detect octave wrap-around
-            if pc < prev_pitch_class:
-                current_octave += 1
-            idx = self._pitches.index_of(pc, current_octave)
-            indices.append(idx)
-            prev_pitch_class = pc
-
-        return indices
 
 
 class PitchRange:

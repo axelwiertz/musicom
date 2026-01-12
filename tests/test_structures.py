@@ -53,9 +53,9 @@ def test_patterns():
 
     pitch_pattern = MusicPitchClassPattern(name="C Minor",
                                       cardinality=Cardinality.HEPTA,
-                                      pattern_type=PatternType.SCALE,
+                                      definition=PatternType.SCALE,
                                       rotation=PatternRotation.minor,
-                                      tonic_pitch_class=MusicPitchClass.C)
+                                      tonic=MusicPitchClass.C)
     pitch_classes = pitch_pattern.pitch_classes
     print (f'Pattern pitch classes: {pitch_classes}')
     m21scale = pattern_to_m21scale(pitch_pattern)
