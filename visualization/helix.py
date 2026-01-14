@@ -4,7 +4,7 @@ These functions are intentionally decoupled from the core Helix structure
 (see structures.pitch.Helix) so that visualization remains an optional,
 side-effecting concern.
 """
-from typing import Optional, Tuple
+from typing import Tuple
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -52,8 +52,9 @@ class Helix:
     def indexes(self):
         return list(range(len(self._data)))
 
-    def total_points(self) -> int:
+    def _total_points(self) -> int:
         return max(1, int(self.points_per_turn * max(0.0, self.turns)))
+
 
     def angle_range(self) -> Tuple[float, float]:
         start = self.start_angle
@@ -84,48 +85,42 @@ class Helix:
         z = (self.vertical_per_turn * (theta - start)) / (2 * np.pi)
         return float(x), float(y), float(z)
 
-    def plot_3d(self,
-                      radius: float = 1.0,
-                      ax: Optional["plt.Axes"] = None,
-                      show: bool = True):
-        """Plot a 3D helix using matplotlib.
-    
-        Parameters
-        ----------
-        radius : float
-            Radius of the self.
-        ax : matplotlib.axes._subplots.Axes3DSubplot, optional
-            Existing 3D axes to draw on. If None, a new figure/axes is created.
-        show : bool
-            If True, call plt.show() at the end.
+
+    def plot_3d(self, radius: float = 1.0, highlight_indices: list[int] | None = None):
         """
-        # Get sampling parameters from helix
-        start, end = self.angle_range()
-        n = self.total_points()
-        if n <= 0:
-            return
-    
-        theta = np.linspace(start, end, n)
+        Plot the helix in 3D.
+
+        Args:
+            radius: Radius of the helix.
+            highlight_indices: Optional list of indices to highlight (e.g., MIDI numbers).
+                              If None, plots all points.
+        """
+
+        fig = plt.figure(figsize=(10, 8))
+        ax = fig.add_subplot(111, projection='3d')
+
+        # Generate helix coordinates
+        theta = np.linspace(0, 2 * np.pi * self._num_turns, self._total_points)
+        z = np.linspace(0, self._num_turns, self._total_points)
         x = radius * np.cos(theta)
         y = radius * np.sin(theta)
-        z = (self.vertical_per_turn / (2 * np.pi)) * (theta - start)
-    
-        created_fig = False
-        if ax is None:
-            fig = plt.figure(figsize=(6, 6))
-            ax = fig.add_subplot(111, projection='3d')
-            created_fig = True
-    
-        ax.plot(x, y, z, color='C0', linewidth=2)
-        # sensible aspect: scale Z roughly to the vertical span
-        ax.set_box_aspect((1, 1, self.turns * self.vertical_per_turn / (2 * radius)))
+
+        # Plot the helix curve
+        ax.plot(x, y, z, 'b-', alpha=0.3, linewidth=0.5)
+
+        if highlight_indices is not None:
+            # Only plot highlighted points
+            valid_indices = [i for i in highlight_indices if 0 <= i < self._total_points]
+            if valid_indices:
+                ax.scatter(x[valid_indices], y[valid_indices], z[valid_indices],
+                          c='red', s=50, alpha=0.8)
+        else:
+            # Plot all points
+            ax.scatter(x, y, z, c=z, cmap='viridis', s=20, alpha=0.6)
+
         ax.set_xlabel('X')
         ax.set_ylabel('Y')
-        ax.set_zlabel('Z')
-        ax.view_init(elev=30, azim=45)
-    
-        if created_fig:
-            plt.tight_layout()
-            if show:
-                plt.show()
+        ax.set_zlabel('Octave')
+        ax.set_title('Pitch Helix')
 
+        plt.show()

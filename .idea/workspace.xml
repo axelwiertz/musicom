@@ -6,19 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="pitch class pattern definitions">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/music21_pattern.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/music21_pattern.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/music21_score.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/music21_score.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/music21_stream.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/music21_stream.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/pattern.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/pattern.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/converters/pitch.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/pitch.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/3voices.py" beforeDir="false" afterPath="$PROJECT_DIR$/examples/3voices.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generators/chord_degrees.py" beforeDir="false" afterPath="$PROJECT_DIR$/generators/chord_degrees.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generators/pitchpattern.py" beforeDir="false" afterPath="$PROJECT_DIR$/generators/pitchpattern.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/balfolk.py" beforeDir="false" afterPath="$PROJECT_DIR$/projects/balfolk.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/bigyellowtaxi.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/projects/bigyellowtaxi.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/structures/pitch.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/pitch.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/pitchpattern.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/pitchpattern.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_structures.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_structures.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/visualization/helix.py" beforeDir="false" afterPath="$PROJECT_DIR$/visualization/helix.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,78 +53,78 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Python.3voices.executor": "Run",
-    "Python.MIDI_import.executor": "Debug",
-    "Python.Sound.executor": "Debug",
-    "Python.balfolk.executor": "Run",
-    "Python.canon-gen.executor": "Debug",
-    "Python.composition.executor": "Run",
-    "Python.constants.executor": "Run",
-    "Python.cp.executor": "Run",
-    "Python.database.executor": "Debug",
-    "Python.datastructure.executor": "Debug",
-    "Python.examples.executor": "Run",
-    "Python.genetic.executor": "Run",
-    "Python.harmony.executor": "Run",
-    "Python.instruments.executor": "Run",
-    "Python.library.executor": "Debug",
-    "Python.load_and_analyze.executor": "Run",
-    "Python.m21.executor": "Debug",
-    "Python.music21_converter.executor": "Debug",
-    "Python.music21_score.executor": "Debug",
-    "Python.musicdata.executor": "Run",
-    "Python.musicom.executor": "Debug",
-    "Python.musicpy.executor": "Debug",
-    "Python.packages.executor": "Run",
-    "Python.part01.executor": "Run",
-    "Python.pattern.executor": "Run",
-    "Python.percussion_voice.executor": "Debug",
-    "Python.pianoroll.executor": "Run",
-    "Python.pitchsequence.executor": "Debug",
-    "Python.rhythm.executor": "Run",
-    "Python.song.executor": "Run",
-    "Python.song002.executor": "Debug",
-    "Python.soundlayer.executor": "Run",
-    "Python.structures.executor": "Debug",
-    "Python.systematic.executor": "Run",
-    "Python.test_base.executor": "Run",
-    "Python.test_converters.executor": "Run",
-    "Python.test_generators.executor": "Run",
-    "Python.test_structures.executor": "Run",
-    "Python.test_transformators.executor": "Run",
-    "Python.test_visualization.executor": "Run",
-    "Python.theory.executor": "Run",
-    "Python.thread.executor": "Run",
-    "Python.three_voices.executor": "Run",
-    "Python.twelvetet.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ai.playground.ignore.import.keys.banner.in.settings": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/92591/PycharmProjects/musicom",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "run.code.analysis.last.selected.profile": "aDefault",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Python.3voices.executor&quot;: &quot;Run&quot;,
+    &quot;Python.MIDI_import.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.Sound.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.balfolk.executor&quot;: &quot;Run&quot;,
+    &quot;Python.canon-gen.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.composition.executor&quot;: &quot;Run&quot;,
+    &quot;Python.constants.executor&quot;: &quot;Run&quot;,
+    &quot;Python.cp.executor&quot;: &quot;Run&quot;,
+    &quot;Python.database.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.datastructure.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.examples.executor&quot;: &quot;Run&quot;,
+    &quot;Python.genetic.executor&quot;: &quot;Run&quot;,
+    &quot;Python.harmony.executor&quot;: &quot;Run&quot;,
+    &quot;Python.instruments.executor&quot;: &quot;Run&quot;,
+    &quot;Python.library.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.load_and_analyze.executor&quot;: &quot;Run&quot;,
+    &quot;Python.m21.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.music21_converter.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.music21_score.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.musicdata.executor&quot;: &quot;Run&quot;,
+    &quot;Python.musicom.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.musicpy.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.packages.executor&quot;: &quot;Run&quot;,
+    &quot;Python.part01.executor&quot;: &quot;Run&quot;,
+    &quot;Python.pattern.executor&quot;: &quot;Run&quot;,
+    &quot;Python.percussion_voice.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.pianoroll.executor&quot;: &quot;Run&quot;,
+    &quot;Python.pitchsequence.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.rhythm.executor&quot;: &quot;Run&quot;,
+    &quot;Python.song.executor&quot;: &quot;Run&quot;,
+    &quot;Python.song002.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.soundlayer.executor&quot;: &quot;Run&quot;,
+    &quot;Python.structures.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.systematic.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_base.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_converters.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_generators.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_structures.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_transformators.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_visualization.executor&quot;: &quot;Run&quot;,
+    &quot;Python.theory.executor&quot;: &quot;Run&quot;,
+    &quot;Python.thread.executor&quot;: &quot;Run&quot;,
+    &quot;Python.three_voices.executor&quot;: &quot;Run&quot;,
+    &quot;Python.twelvetet.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ai.playground.ignore.import.keys.banner.in.settings&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/92591/PycharmProjects/musicom&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;aDefault&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "Python",
-      "PLAIN_TEXT"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;Python&quot;,
+      &quot;PLAIN_TEXT&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\92591\PycharmProjects\musicom" />
@@ -151,8 +141,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-PY-253.29346.142" />
-        <option value="bundled-python-sdk-f2b7a9f6281b-6e1f45a539f7-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-253.29346.142" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-PY-253.29346.308" />
+        <option value="bundled-python-sdk-ca5e2b39c7df-6e1f45a539f7-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-253.29346.308" />
       </set>
     </attachedChunks>
   </component>
@@ -254,15 +244,11 @@
       <workItem from="1767904648316" duration="5140000" />
       <workItem from="1767961585921" duration="3000" />
       <workItem from="1767975831731" duration="3728000" />
-      <workItem from="1768223385613" duration="15009000" />
-    </task>
-    <task id="LOCAL-00162" summary="generators">
-      <option name="closed" value="true" />
-      <created>1763679038344</created>
-      <option name="number" value="00162" />
-      <option name="presentableId" value="LOCAL-00162" />
-      <option name="project" value="LOCAL" />
-      <updated>1763679038345</updated>
+      <workItem from="1768223385613" duration="15113000" />
+      <workItem from="1768251181450" duration="438000" />
+      <workItem from="1768293415086" duration="1341000" />
+      <workItem from="1768322966280" duration="1487000" />
+      <workItem from="1768386593757" duration="679000" />
     </task>
     <task id="LOCAL-00163" summary="generators">
       <option name="closed" value="true" />
@@ -648,7 +634,15 @@
       <option name="project" value="LOCAL" />
       <updated>1767979491723</updated>
     </task>
-    <option name="localTasksCounter" value="211" />
+    <task id="LOCAL-00211" summary="pitch class pattern definitions">
+      <option name="closed" value="true" />
+      <created>1768251028754</created>
+      <option name="number" value="00211" />
+      <option name="presentableId" value="LOCAL-00211" />
+      <option name="project" value="LOCAL" />
+      <updated>1768251028755</updated>
+    </task>
+    <option name="localTasksCounter" value="212" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
