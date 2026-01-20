@@ -4,16 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="pitch class pattern definitions">
+    <list default="true" id="746c082d-1aa9-499a-a98d-6e68c89edcfa" name="Changes" comment="documentation">
+      <change afterPath="$PROJECT_DIR$/research/audio/sound.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/converters/pitch.py" beforeDir="false" afterPath="$PROJECT_DIR$/converters/pitch.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/structures/pitch.py" beforeDir="false" afterPath="$PROJECT_DIR$/structures/pitch.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/visualization/helix.py" beforeDir="false" afterPath="$PROJECT_DIR$/visualization/helix.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DOC.md" beforeDir="false" afterPath="$PROJECT_DIR$/DOC.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/research/soundwave.py" beforeDir="false" afterPath="$PROJECT_DIR$/research/audio/soundwave.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CopilotPersistence">
+    <persistenceIdMap>
+      <entry key="_C:/Users/92591/PycharmProjects/musicom" value="2fsoNi8MZ63sg65UKwMVCFSzoUT" />
+    </persistenceIdMap>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -131,11 +136,11 @@
       <recent name="C:\Users\92591\PycharmProjects\pythonProject" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\92591\PycharmProjects\musicom\research\audio" />
       <recent name="C:\Users\92591\PycharmProjects\musicom" />
       <recent name="C:\Users\92591\PycharmProjects\musicom\research" />
       <recent name="C:\Users\92591\PycharmProjects\musicom\testers" />
       <recent name="C:\Users\92591\PycharmProjects\musicom\transformers" />
-      <recent name="C:\Users\92591\PycharmProjects\musicom\structures" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -249,22 +254,11 @@
       <workItem from="1768293415086" duration="1341000" />
       <workItem from="1768322966280" duration="1487000" />
       <workItem from="1768386593757" duration="679000" />
-    </task>
-    <task id="LOCAL-00163" summary="generators">
-      <option name="closed" value="true" />
-      <created>1763679092276</created>
-      <option name="number" value="00163" />
-      <option name="presentableId" value="LOCAL-00163" />
-      <option name="project" value="LOCAL" />
-      <updated>1763679092276</updated>
-    </task>
-    <task id="LOCAL-00164" summary="refactoring">
-      <option name="closed" value="true" />
-      <created>1763850239059</created>
-      <option name="number" value="00164" />
-      <option name="presentableId" value="LOCAL-00164" />
-      <option name="project" value="LOCAL" />
-      <updated>1763850239060</updated>
+      <workItem from="1768424681588" duration="635000" />
+      <workItem from="1768811095087" duration="4280000" />
+      <workItem from="1768909165923" duration="875000" />
+      <workItem from="1768919127298" duration="2122000" />
+      <workItem from="1768928768471" duration="1753000" />
     </task>
     <task id="LOCAL-00165" summary="refactoring and matrix structure">
       <option name="closed" value="true" />
@@ -642,7 +636,23 @@
       <option name="project" value="LOCAL" />
       <updated>1768251028755</updated>
     </task>
-    <option name="localTasksCounter" value="212" />
+    <task id="LOCAL-00212" summary="pitch">
+      <option name="closed" value="true" />
+      <created>1768424710643</created>
+      <option name="number" value="00212" />
+      <option name="presentableId" value="LOCAL-00212" />
+      <option name="project" value="LOCAL" />
+      <updated>1768424710644</updated>
+    </task>
+    <task id="LOCAL-00213" summary="documentation">
+      <option name="closed" value="true" />
+      <created>1768817593430</created>
+      <option name="number" value="00213" />
+      <option name="presentableId" value="LOCAL-00213" />
+      <option name="project" value="LOCAL" />
+      <updated>1768817593431</updated>
+    </task>
+    <option name="localTasksCounter" value="214" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -675,8 +685,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="projects" />
-    <MESSAGE value="refactoring structures, patterns, rules" />
     <MESSAGE value="unit and pattern" />
     <MESSAGE value="pitch(class) structure and converters" />
     <MESSAGE value="pattern structure, isolated visualization" />
@@ -700,7 +708,9 @@
     <MESSAGE value="patterns" />
     <MESSAGE value="pattern hierarchy and separating pitch class patterns from absolute pitches" />
     <MESSAGE value="pitch class pattern definitions" />
-    <option name="LAST_COMMIT_MESSAGE" value="pitch class pattern definitions" />
+    <MESSAGE value="pitch" />
+    <MESSAGE value="documentation" />
+    <option name="LAST_COMMIT_MESSAGE" value="documentation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
