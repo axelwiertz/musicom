@@ -331,6 +331,12 @@ class MusicPitchClassPattern(Base):
             return MusicPattern.dict.get(self._definition)
         else:
             return ()
+
+    @property
+    def definition(self) -> PatternType:
+        """Get the pattern definition type."""
+        return self._definition
+
     @property
     def cardinality(self) -> int:
         """Get the cardinality of the pattern."""

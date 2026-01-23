@@ -1,5 +1,8 @@
 """MusicPy converters."""
-from structures import MusicPitchClass, MusicUnit, MusicTimeGrid, MusicVoice, MusicPitchClassPattern, MidiInstrument, Cardinality, PatternType
+from structures import MusicPitchClass, MusicPitchClassPattern, PatternType
+from structures import MidiInstrument, MusicLinearTime
+from structures import MusicUnit, MusicEvent
+from converters.pitch import midi_to_name
 from musicpy import musicpy, structures
 
 
@@ -7,12 +10,12 @@ def pattern_to_mpscale(pattern: MusicPitchClassPattern) -> structures.scale:
     mpscale = structures.scale()
 
     # Diatonic (7 pitch class) scale
-    if pattern.cardinality == Cardinality.HEPTA and pattern.pattern_type == PatternType.SCALE:
+    if pattern.definition == PatternType.HEPTATONIC:
         # MusicPy structures
-        mpscale = structures.scale(MusicPitchClass.NAMES_SHARP[pattern.tonic_pitch_class], interval=pattern.modes[pattern.mode])
+        mpscale = structures.scale(MusicPitchClass.NAMES_SHARP[pattern.initial],
+                                   interval=pattern.rotation_name)
 
     return mpscale
-
 
 # Print converters
 def track_to_print(track: structures.track):
@@ -29,32 +32,42 @@ def modulate_unit(unit: MusicUnit,
     unit.pitch_nodes = unit_to_chord(unit).modulation(scale_source, scale_target).pitches
 
 
-def unit_to_sound(unit: MusicUnit, time: MusicTimeGrid, midi_instrument: int = MidiInstrument.PIANO):
+def unit_to_sound(unit: MusicUnit, time: MusicLinearTime, midi_instrument: int = MidiInstrument.PIANO):
     musicpy.play(unit_to_chord(unit), bpm=time.bpm, instrument=midi_instrument, wait=True)
-
 
 # Unit converters
 def unit_to_chord(unit: MusicUnit) -> structures.chord:
-    return structures.chord(unit.pitch_nodes, unit.durations, unit.onset_intervals, unit.volumes)
+    chord = structures.chord([])
+    for event in unit.events:
+        note = structures.note(name=midi_to_name(event.pitch),
+                               duration=event.duration,
+                               volume=event.volume)
+        chord.notes.append(note, event)
+    return chord
 
+def unit_to_track(unit: MusicUnit, track_name: str = 'Track') -> structures.track:
+    chord = unit_to_chord(unit)
+    track = structures.track(content=chord, track_name=track_name)
+    return track
 
 def chord_to_unit(chord: structures.chord) -> MusicUnit:
-    unit = MusicUnit(
-        pitches=chord.pitches,
-        durations=chord.durations,
-        onset_intervals=chord.onset_intervals,
-        volumes=chord.volumes
-    )
+    unit = MusicUnit()
+
+    pitches = [note.number for note in chord.notes]
+    volumes = [note.volume for note in chord.notes]
+    durations = [note.duration for note in chord.notes]
+    for i in range(len(pitches)):
+        start_tick = sum(chord.interval[:i]) if i < len(chord.interval) else 0
+        end_tick = start_tick + durations[i] if i < len(durations) else start_tick
+        event = MusicEvent(
+            pitch=pitches[i],
+            volume=volumes[i] if i < len(volumes) else 100,
+            start_tick=start_tick,
+            end_tick=end_tick
+        )
+        unit.add_event(event)
 
     return unit
-
-
-def voice_to_track(voice: MusicVoice) -> structures.track:
-    """Build a musicpy track by concatenating unit chords if available."""
-    track = structures.track([], track_name=voice.name)
-    for unit in voice.units:
-        track += unit_to_chord(unit)
-    return track
 
 
 def piece_play(piece: structures.piece):

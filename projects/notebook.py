@@ -63,3 +63,9 @@ def standard_notebook ():
                                                   PatternRotation.major, MusicPitchClass.C),
                         sections=[MusicSection('A'), MusicSection('B')])
 
+def main():
+    m21_tiny_notebook()
+    #mp_percussion_notebook()
+    #standard_notebook()
+if __name__ == '__main__':
+    main()

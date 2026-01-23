@@ -4,7 +4,8 @@ from musicpy import musicpy as mp, structures
 chord = structures.chord (notes='C4',
                               duration=1 / 8,
                               interval=1 / 8,
-                               volume = 100) * 50
+                               volume = 100) * 2
+track = structures.track(content=[chord,structures.note('E4',1/8,1/8), structures.note('G4',1/8,1/8)],)
 # Construct piece
 piece = structures.piece(tracks=[structures.track(content=chord, instrument=MidiInstrument.PIANO, start_time=1)],
                               channels=[0],
@@ -19,30 +20,30 @@ chord = (c2 | c3 * 2 )
 chord += structures.chord('CM7', 3,interval=1/4, default_duration=1/8)
 
 
-chord = mp.S('C4 major')%(15654321, 0.4)
-chord = structures.scale('C major').pick_chord_by_degree([1, 5])
-chord = structures.scale('C major').get('1,2,3,4,5,6,7,1.1')
+chord1 = mp.S('C4 major')%(15654321, 0.4)
+chord2 = structures.scale('C major').pick_chord_by_degree([1, 5])
+chord3 = structures.scale('C major').get('1,2,3,4,5,6,7,1.1')
 
-chord = structures.scale('C major').get('1,1,5,5,6,6,5,-,4,4,3,3,2,2,1,-')
-chord = structures.scale('C major').chord_progression(['IM7', 'Vsus', 'vi7', 'IVM7'])
+chord4 = structures.scale('C major').get('1,1,5,5,6,6,5,-,4,4,3,3,2,2,1,-')
+chord5 = structures.scale('C major').chord_progression(['IM7', 'Vsus', 'vi7', 'IVM7'])
 
-chord = structures.chord('CM7', 3, 1/4, 1/8)^2
-chord = structures.chord('G7sus', 2, 1/4, 1/8)^2
-chord = structures.scale('C4 major')%(15654321, 0.4)
-chord = structures.scale('C major').chord_progression(['IM7', 'Vsus', 'vi7', 'IVM7'])
+chord6 = structures.chord('CM7', 3, 1/4, 1/8)^2
+chord7 = structures.chord('G7sus', 2, 1/4, 1/8)^2
+chord8 = structures.scale('C4 major')%(15654321, 0.4)
+chord9 = structures.scale('C major').chord_progression(['IM7', 'Vsus', 'vi7', 'IVM7'])
 
 # Diatonic Scales
-chord = structures.scale('C major').get('1,1,5,5,6,6,5,-,4,4,3,3,2,2,1,-')
+chord10 = structures.scale('C major').get('1,1,5,5,6,6,5,-,4,4,3,3,2,2,1,-')
 
 mpscale1 = structures.scale('C Major')
-chord = mpscale1.get('-,1,-,2') % (1 / 2,)
-chord = mpscale1.get('r,1,r,2')
+chord11 = mpscale1.get('-,1,-,2') % (1 / 2,)
+chord12 = mpscale1.get('r,1,r,2')
 
 #1
-chord1 = structures.chord ('F2, A2, F3')
-chord2 = structures.scale('F major').get('1.-2;3.-2;1.-1')
+chord13 = structures.chord ('F2, A2, F3')
+chord14 = structures.scale('F major').get('1.-2;3.-2;1.-1')
 #2
-chord3 = structures.chord('C2, C3, E3, G3')
+chord15 = structures.chord('C2, C3, E3, G3')
 
 # Melody
 # Musical composition examples page 13

@@ -3,6 +3,7 @@ import numpy as np
 from numpy import ndarray
 from dataclasses import dataclass
 from typing import List, Tuple
+from .timegrid import MusicTimeGrid
 
 @dataclass
 class MusicEvent:
@@ -19,10 +20,10 @@ class MusicEvent:
     ])  # pitch, volume, start_tick, end_tick
 
     def __init__(self,
-                pitch: int = None,
-                volume: int = None,
-                start_tick: int = None,
-                end_tick: int = None,
+                pitch: int = 0,
+                volume: int = 100,
+                start_tick: int = 0,
+                end_tick: int = 0,
                 ):
         self.data = (pitch, volume, start_tick, end_tick)
 
@@ -52,7 +53,7 @@ class MusicEvent:
         self.data = (self.data[self.PITCH], self.data[self.VOLUME], self.data[self.START_TICK], value)
     @property
     def duration(self) -> int:
-        if self.data[self.END_TICK] is not None and self.data[self.START_TICK] is not None:
+        if self.data[self.END_TICK] != 0 and self.data[self.START_TICK] != 0:
             return self.data[self.END_TICK] - self.data[self.START_TICK]
         return 0
 
@@ -63,10 +64,12 @@ class MusicUnit:
     def __init__(self,
                 events: list[MusicEvent] | ndarray = None,
                 pitches: List[int] = None,
+                time_grid : MusicTimeGrid = None,
                 ):
 
         """Internally stores events in a structured numpy array for efficiency"""
         self.data = np.empty(0, dtype=MusicEvent.DTYPE)
+        self.time_grid = time_grid
         if events is not None:
             if isinstance(events, ndarray):
                 arr = events
@@ -88,8 +91,8 @@ class MusicUnit:
         else:
             if pitches is not None:
                 # Initialize from a list of pitches with default values
-                for pitch in pitches:
-                    self.add_event(MusicEvent(pitch=pitch))
+                for i, pitch in enumerate(pitches):
+                    self.add_event(MusicEvent(pitch=pitch, volume=100, start_tick=i, end_tick=(i+1)))
 
     @property
     def events(self) -> list[MusicEvent]:
@@ -157,33 +160,31 @@ class MusicUnit:
         pitches = self.pitches
         if len(pitches) < 2:
             return []
-        return [pitches[i+1] - pitches[i] for i in range(len(pitches)-1)]
-
+        else:
+            intervals = []
+            for i in range(len(pitches) - 1):
+                intervals.append(pitches[i+1] - pitches[i])
+        return intervals
     @property
     def volumes(self) -> List[int]:
         """Return a list of all volumes in the sequence."""
         return [event.volume for event in self.events]
-
+    @property
     def durations(self) -> List[int]:
         """Return a list of all durations in the sequence."""
         return [event.duration for event in self.events]
+    @property
+    def onset_intervals(self) -> List[int]:
+        """Return a list of onset intervals between consecutive events."""
+        onsets = [event.start_tick for event in self.events]
+        if len(onsets) < 2:
+            return []
+        else:
+            intervals = []
+            for i in range(len(onsets)-1):
+                intervals.append(onsets[i+1] - onsets[i])
 
-    def old_set(self,
-                   pitch_nodes: List[int] = None,         # Pitches (MIDI note numbers)
-                   onset_intervals: List[int] = None,
-                   durations: List[int] = None,
-                   volumes: List[int] = None,
-                   ):
-        for i in range(len(pitch_nodes)):
-            start_tick = sum(onset_intervals[:i]) if i < len(onset_intervals) else 0
-            end_tick = start_tick + durations[i] if i < len(durations) else start_tick
-            event = MusicEvent(
-                pitch=pitch_nodes[i],
-                volume=volumes[i] if i < len(volumes) else 100,
-                start_tick=start_tick,
-                end_tick=end_tick
-            )
-            self.add_event(event)
+        return intervals
 
     def clone(self) -> 'MusicUnit':
         # Create a copy of the MusicUnit
