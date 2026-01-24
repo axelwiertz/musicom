@@ -6,6 +6,7 @@ from typing import List
 import numpy as np
 from pypianoroll import Multitrack, Track
 
+from structures import MusicPitchGrid
 from structures.unit import MusicUnit, MusicEvent
 from structures.project import MusicProject
 from structures.matrix import UnitMatrix
@@ -57,7 +58,7 @@ def musicunit_to_track(
         start = int(e["start_tick"])
         end = int(e["end_tick"])
 
-        if not (0 <= pitch <= 127):
+        if not (MusicPitchGrid.MIDI_MIN <= pitch <= MusicPitchGrid.MIDI_MAX):
             continue
         if end <= start:
             end = start + 1
@@ -149,7 +150,7 @@ def musicproject_to_multitrack(
         current_offset = 0
 
         for col_idx in range(matrix.num_cols):
-            cell = matrix.get_unit(row_idx, col_idx)
+            cell = matrix.get_unit((row_idx, col_idx))
             if cell is None:
                 continue
 
@@ -225,7 +226,7 @@ def multitrack_to_musicproject(
     n_rows = len(units)
     matrix = UnitMatrix(shape=(n_rows, 1))
     for i, u in enumerate(units):
-        matrix.set_unit(i, 0, u)
+        matrix.set_unit(pos=(i, 0), unit=u)
 
     return MusicProject(
         name=name,

@@ -1,21 +1,5 @@
 """Converters between MusicTimeGrid and music21 time and tempo representations."""
 from structures.time import MusicTimeGrid
-from music21 import meter, tempo
-
-def time_to_meter (time: MusicTimeGrid) -> meter.TimeSignature:
-    # m21 meter
-    time_signature = meter.TimeSignature(str(time.beats_per_cycle) + '/' + str(time.beat_note))
-    return time_signature
-
-def meter_to_time (time_signature: meter.TimeSignature, ticks: int, bpm: int) -> MusicTimeGrid:
-    # convert m21 meter to MusicTimeGrid
-    time = MusicTimeGrid(
-        beats_per_cycle=time_signature.numerator,
-        beat_note=time_signature.denominator,
-        bpm=bpm,
-        ticks_per_cycle=ticks
-    )
-    return time
 
 def ticks_to_quarter_length (ticks : int,
                              time: MusicTimeGrid,
@@ -34,11 +18,3 @@ def quarter_length_to_ticks (quarter_length: float,
                 (time.beat_note / 4) *
                 (time.ticks_per_cycle / time.beats_per_cycle))
     return ticks
-
-def time_to_tempo (time: MusicTimeGrid) -> tempo.MetronomeMark:
-    # m21 temp
-    metronome_mark = tempo.MetronomeMark(number=time.bpm)
-    return metronome_mark
-
-
-

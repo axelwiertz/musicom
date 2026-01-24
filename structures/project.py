@@ -1,10 +1,12 @@
 """Defines the Project, Section, and Voice classes for the music composition framework."""
 from typing import List
+
+from . import MusicLinearTime
 from .base import Base
 from .matrix import UnitMatrix
 from .time import MusicTimeGrid
 from .pitchpattern import MusicPitchClassPattern
-from .pitch import PitchRange
+from .pitch import MusicPitchRange
 from .instrument import MidiInstrument
 from .timegrid import MusicRhythmPattern
 
@@ -13,7 +15,7 @@ class MusicVoice(Base):
     """Represents a horizontal voice in the project."""
     def __init__(self,
                  name: str = 'Voice',
-                 pitch_range: PitchRange = None,
+                 pitch_range: MusicPitchRange = None,
                  midi_instrument: int = MidiInstrument.PIANO,
                  row_index: int = None,
                  ):
@@ -54,6 +56,7 @@ class MusicProject (Base):
                  sections: List[MusicSection] = None,
                  voices: List[MusicVoice] = None,
                  matrix: UnitMatrix = None,
+                 time: MusicLinearTime = None,
                  ):
         super().__init__(name)
         self.name = name
@@ -63,6 +66,7 @@ class MusicProject (Base):
         self.sections = sections
         self.voices = voices
         self.matrix = matrix
+        self.time = time
 
     def __repr__(self):
         return (f"<MusicProject(name={self.name},"

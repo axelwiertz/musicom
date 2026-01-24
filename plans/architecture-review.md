@@ -82,7 +82,7 @@ The core data structures that represent musical concepts:
 | [`MusicProject`](structures/project.py:47) | project.py | Top-level container for compositions |
 | [`UnitMatrix`](structures/matrix.py:7) | matrix.py | 2D matrix for compositional manipulation |
 | [`MusicPitchClass`](structures/pitch.py:22) | pitch.py | 12-TET pitch class definitions |
-| [`MusicPitches`](structures/pitch.py:58) | pitch.py | Chromatic pitch set with helix representation |
+| [`MusicPitchGrid`](structures/pitch.py:58) | pitch.py | Chromatic pitch set with helix representation |
 | [`MusicPitchClassPattern`](structures/pitchpattern.py:275) | pitchpattern.py | Pattern-based pitch sequences |
 | [`MusicTimeGrid`](structures/timegrid.py:4) | timegrid.py | Time structure with meter and tempo |
 | [`MusicRhythmPattern`](structures/timegrid.py:53) | timegrid.py | Common rhythm patterns |
@@ -96,7 +96,7 @@ The core data structures that represent musical concepts:
 **Areas for Improvement:**
 - [`MusicUnit`](structures/unit.py:59) has an [`old_set()`](structures/unit.py:171) method that appears deprecated
 - Some inconsistency in property vs method naming - e.g., [`durations()`](structures/unit.py:167) is a method while [`pitches`](structures/unit.py:149) is a property
-- [`PitchRange`](structures/pitch.py:120) class is incomplete - missing methods for range operations
+- [`MusicPitchRange`](structures/pitch.py:120) class is incomplete - missing methods for range operations
 
 ---
 
@@ -357,7 +357,7 @@ The test files show coverage for:
 
 2. **Complete Implementations**
    - Finish [`CanonTransformer`](transformers/canon.py:7) with delay and stacking logic
-   - Implement [`PitchRange`](structures/pitch.py:120) methods
+   - Implement [`MusicPitchRange`](structures/pitch.py:120) methods
 
 3. **Refactor Duplicate Code**
    - Extract common pattern-to-pitch logic in [`PatternGenerator`](generators/pitchpattern.py:9)

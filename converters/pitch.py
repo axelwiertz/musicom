@@ -24,7 +24,7 @@ def name_to_freq(pitch_name: str) -> float | floating[Any]:
 
 def midi_to_pitch_class(i: int) -> int:
     """Convert MIDI number to pitch class (0-11)."""
-    return i % MusicPitchClass.TWELVE
+    return i % MusicPitchClass.SIZE
 
 
 def name_to_pitch_class(name: str) -> int:
@@ -44,7 +44,7 @@ def freq_to_midi(freq: float) -> floating[Any]:
 
 def semitone_ratio(n: int = 1) -> float:
     """Return frequency ratio for n semitones: 2^(n/12)."""
-    return pow(2.0, n / float(MusicPitchClass.TWELVE))
+    return pow(2.0, n / float(MusicPitchClass.SIZE))
 
 
 def cents_between(f1: float, f2: float) -> float:

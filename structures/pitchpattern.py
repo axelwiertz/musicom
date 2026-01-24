@@ -4,7 +4,7 @@ from typing import Tuple, FrozenSet, Optional, List
 from dataclasses import dataclass
 import networkx as nx
 from .base import Base
-from .pitch import MusicPitchClass, MusicPitches
+from .pitch import MusicPitchClass, MusicPitchGrid
 from utilities import sequence_rotations, interval_to_step
 
 #TODO: Add methods for pattern manipulation, e.g., inversion, retrograde, etc.
@@ -287,7 +287,7 @@ class MusicPitchClassPattern(Base):
         self._rotation = rotation
 
         # Connect to absolute pitches
-        self._pitches = MusicPitches()
+        self._pitches = MusicPitchGrid()
         self._rotations_pitches = [interval_to_step(m) for m in self._rotations]
 
         self._initial = initial
@@ -306,7 +306,7 @@ class MusicPitchClassPattern(Base):
 
     def set_initial(self, pitch_class: int):
         """Set the initial (tonic/root) pitch class."""
-        if pitch_class < 0 or pitch_class >= MusicPitchClass.TWELVE:
+        if pitch_class < 0 or pitch_class >= MusicPitchClass.SIZE:
             raise ValueError(f"Tonic pitch class {pitch_class} out of range [0, 11].")
         self._initial = pitch_class
 
@@ -369,10 +369,30 @@ class MusicPitchClassPattern(Base):
             return () # Empty tuple if no initial
         pitch_classes = []
         for interval in self.pitch_class_intervals_to_initial():
-            pc = (self._initial + interval) % MusicPitchClass.TWELVE
+            pc = (self._initial + interval) % MusicPitchClass.SIZE
             pitch_classes.append(pc)
 
         return tuple(pitch_classes)
+
+    def get_pitches_in_octave(self, octave: int) -> List[int]:
+        """Get absolute pitches for the pattern in a specific octave."""
+        if self._initial is None:
+            raise ValueError("Tonic pitch class is not set.")
+
+        midi_pitches = []
+        base_midi = (octave + 1) * MusicPitchClass.SIZE + self._initial
+        for interval in self.pitch_class_intervals_to_initial():
+            midi_pitch = base_midi + interval
+            midi_pitches.append(midi_pitch)
+
+        return midi_pitches
+
+    def __str__(self) -> str:
+        return (f"MusicPitchClassPattern(name={self.name}, "
+                f"type={self._definition}, "
+                f"rotation={self._rotation}, "
+                f"initial={self._initial}, "
+                f"pitch_classes={self.pitch_classes})")
 
 def create_subpattern(parent_pattern: MusicPitchClassPattern,
                       child_pattern: MusicPitchClassPattern = None,

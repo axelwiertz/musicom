@@ -27,12 +27,14 @@ class UnitMatrix:
     def __repr__(self):
         return f"UnitMatrix({self.data})"
 
-    def get_unit(self, row: int, col: int) -> Optional[MusicUnit]:
+    def get_unit(self, pos: Tuple[int, int]) -> Optional[MusicUnit]:
         """Get the MusicUnit at the specified position."""
+        row, col = pos
         return self.data[row, col]
 
-    def set_unit(self, row: int, col: int, unit: Optional[MusicUnit]):
+    def set_unit(self, pos: Tuple[int, int], unit: Optional[MusicUnit]):
         """Set a MusicUnit at the specified position."""
+        row, col = pos
         self.data[row, col] = unit
 
     @property
@@ -107,8 +109,9 @@ class UnitMatrix:
         self.data = self.data[new_order, :]
 
     # Cell operations
-    def mutate_unit(self, r: int, c: int, func: Callable[[Any], Any]):
-        self.data[r, c] = func(self.data[r, c])
+    def mutate_unit(self, pos: Tuple[int, int], func: Callable[[Any], Any]):
+        row, col = pos
+        self.data[row, col] = func(self.data[row, col])
 
     def swap_units(self, a: Tuple[int, int], b: Tuple[int, int]):
         ra, ca = a
@@ -186,7 +189,7 @@ class UnitMatrix:
             row (int): The row index to augment.
             factor (float): The factor by which to scale the durations.
         """
-        for c in self.data.shape[self.COL]:
+        for c in range(self.data.shape[self.COL]):
             cell: Optional[MusicUnit] = self.data[row, c]
             if cell is not None:
                 self.data[row, c] = cell.augment(factor)

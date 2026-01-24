@@ -1,6 +1,6 @@
 """Balfolk Music Generation Project"""
 import random
-from structures import MusicProject, MusicSection, MusicVoice, MusicTimeGrid, MusicPitchClass, PitchRange
+from structures import MusicProject, MusicSection, MusicVoice, MusicTimeGrid, MusicPitchClass, MusicPitchRange
 from structures import MusicPitchClassPattern, PatternType, PatternRotation, UnitMatrix
 from converters.music21_score import project_to_score
 from converters.midi_converter import score_to_midifile
@@ -19,9 +19,9 @@ proj = MusicProject(name='Balfolk',
                     sections=[MusicSection('Balfolk Section',
                                   )],
                     voices=[MusicVoice("melody",
-                                       PitchRange('C4', 'C6')),
+                                       MusicPitchRange('C4', 'C6')),
                             MusicVoice("bass",
-                                       PitchRange('C2', 'C4'))],
+                                       MusicPitchRange('C2', 'C4'))],
                     time_grid=MusicTimeGrid(ticks_per_cycle=12, beats_per_cycle=6, beat_note=8), # typical Balfolk rhythm
                     matrix=UnitMatrix(),
                     )

@@ -1,7 +1,6 @@
-
-from structures import MidiInstrument, MusicPitchClass, PitchRange, Cardinality, PatternType, PatternRotation
+import numpy as np
+from structures import MidiInstrument, MusicPitchClass, PatternType, PatternRotation
 from structures import MusicPitchClassPattern, MusicProject, MusicSection, MusicUnit, MusicVoice, MusicTimeGrid, UnitMatrix
-from converters.pitch import name_to_midi
 from converters.music21_pattern import pattern_to_m21scale
 from converters.midi_converter import score_to_midifile
 from converters.music21_score import project_to_score
@@ -10,22 +9,17 @@ from analysis import score_analyze
 # New composition
 project = MusicProject(name='Three Voices Composition',
     # Define musical pattern: C Major scale
-    pattern=MusicPitchClassPattern(name="C Major",
-                 cardinality=Cardinality.HEPTA,
-                 definition=PatternType.SCALE,
+    pitch_pattern=MusicPitchClassPattern(name="C Major",
+                 definition=PatternType.HEPTATONIC,
                  rotation=PatternRotation.major,
                  initial=MusicPitchClass.C),
-    # Define time signature and length
-    time=MusicTimeGrid(ticks_per_cycle=16,beats_per_cycle=4,beat_note=4),
+    # Define time signature and length: 16 ticks per cycle, 4 beats per cycle, quarter note gets the beat
+    time_grid=MusicTimeGrid(ticks_per_cycle=16,beats_per_cycle=4,beat_note=4),
     # Create three voices for melody and accompaniment
     voices=[
-        MusicVoice(name='Voice 1', row_index=0,
-                   pitch_range=PitchRange(), midi_instrument=MidiInstrument.FLUTE),
-        MusicVoice(name='Voice 2', row_index=1,
-                   pitch_range=PitchRange(), midi_instrument=MidiInstrument.VIOLIN),
-        MusicVoice(name='Accompaniment', row_index=2,
-               pitch_range=PitchRange(MusicPitchClass.C, 3, MusicPitchClass.G, 3),
-               midi_instrument=MidiInstrument.BASS)
+        MusicVoice(name='Voice 1', row_index=0, midi_instrument=MidiInstrument.FLUTE),
+        MusicVoice(name='Voice 2', row_index=1, midi_instrument=MidiInstrument.VIOLIN),
+        MusicVoice(name='Accompaniment', row_index=2, midi_instrument=MidiInstrument.BASS)
             ],
     # Define sections
     sections = [
@@ -35,37 +29,55 @@ project = MusicProject(name='Three Voices Composition',
     matrix=UnitMatrix(shape=(3,2))  # 3 rows (voices), 2 columns (time)
     )
 
-# Get scale pitches
-m21scale = pattern_to_m21scale(project.pattern)
-scale_pitches = m21scale.pitches[0:3]
-pitches_list = scale_pitches + ["G4", "A4", "B4", "C5"]
-print(pitches_list)
+# Pattern = scale
+m21scale = pattern_to_m21scale(project.pitch_pattern)
 
-# Define units
-project.matrix.set_unit(0, 0,
-                MusicUnit(pitches=name_to_midi(['C5', 'D5', 'E5', 'F5'])))
+# Define units for voice 1
+pitches = project.pitch_pattern.get_pitches_in_octave(5)[0:3]
+project.matrix.set_unit(pos=(0, 0),
+                unit=MusicUnit(time_grid=project.time_grid,
+                                pitches=pitches,))
 
-project.matrix.set_unit(0, 1,
-                MusicUnit(
-                  name_to_midi(['G5', 'A5', 'B4', 'C5']),
-                  [1,1,1,1],
-                  [1,1,1,1]))
-project.matrix.set_unit(1, 0,
-                MusicUnit(
-                  name_to_midi(['C4', 'E4', 'G4']),
-                  [1,1,2],
-                  [1,1,1]))
-project.matrix.set_unit(1, 1,
-                MusicUnit(
-                  name_to_midi(['F4', 'A4', 'C5']),
-                  [1,1,2],
-                  [1,1,1]))
-project.matrix.set_unit(2, 0,
-                MusicUnit(
-                  name_to_midi(['C3', 'G3']),
-                    [2,2],
-                    [2,2]))
+pitches = project.pitch_pattern.get_pitches_in_octave(5)[4:7]
+project.matrix.set_unit(pos=(0, 1),
+                unit=MusicUnit(time_grid=project.time_grid,
+                                pitches=pitches))
 
+# Define chords for voice 2
+c_major_triad = MusicPitchClassPattern (
+    name="C Major Chord",
+    definition=PatternType.MAJOR,
+    initial=MusicPitchClass.C)
+pitches = c_major_triad.get_pitches_in_octave(4)
+project.matrix.set_unit(pos=(1, 0),unit=
+                MusicUnit(time_grid=project.time_grid,
+                          events=np.asarray([[pitches[0],1,4,100],
+                                  [pitches[1],5,8,100],
+                                  [pitches[2],9,16,100]])
+                ))
+f_major_triad = MusicPitchClassPattern (
+    name="F Major Chord",
+    definition=PatternType.MAJOR,
+    initial=MusicPitchClass.F)
+pitches = f_major_triad.get_pitches_in_octave(4)
+
+project.matrix.set_unit(pos=(1, 1),unit=
+                MusicUnit(time_grid=project.time_grid,
+                          events=np.asarray([[pitches[0],1,4,100],
+                                  [pitches[1],5,8,100],
+                                  [pitches[2],9,16,100]])
+                        ))
+pattern_bass = MusicPitchClassPattern (
+    name="Bass Pattern",
+    definition=PatternType.PERFECT_FIFTH,
+    initial=MusicPitchClass.C)
+bass_pitches = pattern_bass.get_pitches_in_octave(3)
+# Define bass units
+project.matrix.set_unit(pos=(2, 0),unit=
+                MusicUnit(time_grid=project.time_grid,
+                 events=np.asarray([[bass_pitches[0],1,8,100],
+                        [bass_pitches[1],9,16,100]])
+                ))
 project.matrix.repeat_column(0,)
 
 score = project_to_score(project)

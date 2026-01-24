@@ -20,7 +20,6 @@ Log‑frequency increment (12‑TET)
 
 @dataclass(frozen=True)
 class MusicPitchClass:
-    TWELVE = 12  # Number of pitch classes 0-11
     # Pitch class numbers and names
     C = 0
     C_SHARP = D_FLAT = 1
@@ -38,25 +37,57 @@ class MusicPitchClass:
     NUMBERS = (C, C_SHARP, D, D_SHARP, E, F, F_SHARP, G, G_SHARP, A, A_SHARP, B)
     NAMES_SHARP = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
     NAMES_FLATMAP = {'D': 'C#', 'E': 'D#', 'F': 'E', 'G': 'F#', 'A': 'G#', 'B': 'A#', 'C': 'B'}
+    NAMES_SHARPMAP = {v: k for k, v in NAMES_FLATMAP.items()}
 
-    pass
+    SIZE : int = len(NUMBERS)
 
+    @classmethod
+    def size(cls) -> int:
+        """Return the number of pitch classes (12)."""
+        return len(cls.NUMBERS)
 
+    @classmethod
+    def number_of(cls, name: str) -> int:
+        """Return the pitch class number (0-11) for a given name."""
+        if name in cls.NAMES_SHARP:
+            return cls.NAMES_SHARP.index(name)
+        elif name in cls.NAMES_FLATMAP:
+            sharp_name = cls.NAMES_FLATMAP[name]
+            return cls.NAMES_SHARP.index(sharp_name)
+        else:
+            raise ValueError(f"Invalid pitch class name: {name}")
+
+    @classmethod
+    def name_of(cls, pitch_class: int, use_flats: bool = False) -> str:
+        """Return the name of a pitch class (0-11)."""
+        if not (0 <= pitch_class < cls.size()):
+            raise ValueError(f"Pitch class must be in range 0-{cls.SIZE-1}")
+        name = cls.NAMES_SHARP[pitch_class]
+        if use_flats and name in cls.NAMES_FLATMAP.values():
+            # Convert to flat name
+            for flat_name, sharp_name in cls.NAMES_FLATMAP.items():
+                if sharp_name == name:
+                    return flat_name
+        return name
+
+@dataclass(frozen=True)
+class MusicOctave:
+    MIN = -1  # Lowest octave (C-1)
+    MAX = 9   # Highest octave (G9)
+@dataclass(frozen=True)
 class Direction:
     ASCENDING = 1
     DESCENDING = -1
 
-
-"""Chromatic pitches """
-class MusicPitches:
-    OCTAVES = 9  # Number of octaves in the chromatic pitch set (C-1 to G9 in MIDI)
+"""Chromatic pitch grid """
+class MusicPitchGrid:
     MIDI_MIN = 0    # Lowest MIDI note
     MIDI_MAX = 127  # Highest MIDI note
     CENTS: float = 100  # Cents in semitone
 
     def __init__(self, midi_pitches: np.ndarray | list | None = None):
         """
-        Initialize MusicPitches with MIDI pitch numbers.
+        Initialize MusicPitchGrid with MIDI pitch numbers.
 
         Args:
             midi_pitches: Array of MIDI note numbers (0-127).
@@ -96,24 +127,24 @@ class MusicPitches:
         """Return note names for all pitches using librosa."""
         return [midi_to_note(int(m)) for m in self._midi_pitches]
 
-    def transpose(self, interval_steps: int, direction: int = Direction.ASCENDING) -> 'MusicPitches':
+    def transpose(self, interval_steps: int, direction: int = Direction.ASCENDING) -> 'MusicPitchGrid':
         """
         Transpose all pitches by interval_steps in direction.
-        Returns a new MusicPitches instance.
+        Returns a new MusicPitchGrid instance.
         """
         transposed = self._midi_pitches + (direction * interval_steps)
         # Clip to valid MIDI range
         transposed = np.clip(transposed, self.MIDI_MIN, self.MIDI_MAX)
-        return MusicPitches(transposed)
+        return MusicPitchGrid(transposed)
 
     def octave_of(self, idx: int) -> int:
         """Return octave number for pitch at given index (MIDI octave convention)."""
         midi = self._midi_pitches[idx]
-        return int(midi // MusicPitchClass.TWELVE) - 1
+        return int(midi // MusicPitchClass.SIZE) - 1
 
     def pitch_class_of(self, idx: int) -> int:
         """Return pitch class number (0-11) for pitch at given index."""
-        return int(self._midi_pitches[idx] % MusicPitchClass.TWELVE)
+        return int(self._midi_pitches[idx] % MusicPitchClass.SIZE)
 
     def midi_at(self, idx: int) -> int:
         """Return MIDI note number at given index."""
@@ -130,7 +161,7 @@ class MusicPitches:
     def get_at(self, idx: int) -> tuple[int, int]:
         """Get (pitch_class, octave) at index idx."""
         midi = self._midi_pitches[idx]
-        return int(midi % MusicPitchClass.TWELVE), int(midi // MusicPitchClass.TWELVE) - 1
+        return int(midi % MusicPitchClass.SIZE), int(midi // MusicPitchClass.SIZE) - 1
 
     def index_of_midi(self, midi: int) -> int | None:
         """Return index of given MIDI note, or None if not present."""
@@ -139,31 +170,31 @@ class MusicPitches:
 
     def index_of(self, pitch_class: int, octave: int) -> int | None:
         """Return index for a given pitch class and octave, or None if not present."""
-        midi = (octave + 1) * MusicPitchClass.TWELVE + pitch_class
+        midi = (octave + 1) * MusicPitchClass.SIZE + pitch_class
         return self.index_of_midi(midi)
 
-    def filter_by_pitch_class(self, pitch_classes: list[int]) -> 'MusicPitches':
-        """Return new MusicPitches containing only pitches with given pitch classes."""
-        mask = np.isin(self._midi_pitches % MusicPitchClass.TWELVE, pitch_classes)
-        return MusicPitches(self._midi_pitches[mask])
+    def filter_by_pitch_class(self, pitch_classes: list[int]) -> 'MusicPitchGrid':
+        """Return new MusicPitchGrid containing only pitches with given pitch classes."""
+        mask = np.isin(self._midi_pitches % MusicPitchClass.SIZE, pitch_classes)
+        return MusicPitchGrid(self._midi_pitches[mask])
 
-    def filter_by_octave(self, octaves: list[int]) -> 'MusicPitches':
-        """Return new MusicPitches containing only pitches in given octaves."""
-        midi_octaves = (self._midi_pitches // MusicPitchClass.TWELVE) - 1
+    def filter_by_octave(self, octaves: list[int]) -> 'MusicPitchGrid':
+        """Return new MusicPitchGrid containing only pitches in given octaves."""
+        midi_octaves = (self._midi_pitches // MusicPitchClass.SIZE) - 1
         mask = np.isin(midi_octaves, octaves)
-        return MusicPitches(self._midi_pitches[mask])
+        return MusicPitchGrid(self._midi_pitches[mask])
 
-    def filter_by_range(self, midi_min: int, midi_max: int) -> 'MusicPitches':
-        """Return new MusicPitches containing only pitches in MIDI range."""
+    def filter_by_range(self, midi_min: int, midi_max: int) -> 'MusicPitchGrid':
+        """Return new MusicPitchGrid containing only pitches in MIDI range."""
         mask = (self._midi_pitches >= midi_min) & (self._midi_pitches <= midi_max)
-        return MusicPitches(self._midi_pitches[mask])
+        return MusicPitchGrid(self._midi_pitches[mask])
 
     def show(self, radius: float = 1.0):
         """Visualize the pitches as a helix (imports Helix only when needed)."""
         from visualization import Helix
 
         # Create helix for visualization
-        helix = Helix(MusicPitchClass.TWELVE, self.OCTAVES)
+        helix = Helix(MusicPitchClass.SIZE, MusicOctave.MAX-MusicOctave.MIN + 1)
 
         # Convert MIDI pitches to helix indices and plot
         helix.plot_3d(
@@ -172,38 +203,37 @@ class MusicPitches:
         )
 
     @classmethod
-    def from_range(cls, start_midi: int, end_midi: int) -> 'MusicPitches':
-        """Create MusicPitches from a MIDI range (inclusive)."""
+    def from_range(cls, start_midi: int, end_midi: int) -> 'MusicPitchGrid':
+        """Create MusicPitchGrid from a MIDI range (inclusive)."""
         return cls(np.arange(start_midi, end_midi + 1, dtype=np.int8))
 
     @classmethod
-    def from_names(cls, names: list[str]) -> 'MusicPitches':
-        """Create MusicPitches from a list of note names."""
+    def from_names(cls, names: list[str]) -> 'MusicPitchGrid':
+        """Create MusicPitchGrid from a list of note names."""
         from librosa import note_to_midi
         midi_vals = [note_to_midi(n) for n in names]
         return cls(np.array(midi_vals, dtype=np.int8))
 
 
-class PitchRange:
-    """Chromatic pitch range defined by start and end points."""
-
+class MusicPitchRange:
+    """ Pitch range defined by start and end pitches. """
     def __init__(self,
+                pitch_start : tuple[MusicPitchClass, MusicOctave] = None,
+                pitch_end : tuple[MusicPitchClass, MusicOctave] = None,
                  pitch_class_start: int = MusicPitchClass.A,
                  octave_start: int = 0,
                  pitch_class_end: int = MusicPitchClass.C,
                  octave_end: int = 8):
 
         # Calculate MIDI bounds
-        self.midi_start = (octave_start + 1) * MusicPitchClass.TWELVE + pitch_class_start
-        self.midi_end = (octave_end + 1) * MusicPitchClass.TWELVE + pitch_class_end
-
-        # Create pitches for this range
-        self._pitches = MusicPitches.from_range(self.midi_start, self.midi_end)
-
-    @property
-    def pitches(self) -> MusicPitches:
-        """Return the MusicPitches in this range."""
-        return self._pitches
+        if pitch_start is not None and pitch_end is not None:
+            self.midi_start = pitch_start
+            self.midi_end = pitch_end
+        elif pitch_class_start is not None and pitch_class_end is not None:
+            self.midi_start = (octave_start + 1) * MusicPitchClass.SIZE + pitch_class_start
+            self.midi_end = (octave_end + 1) * MusicPitchClass.SIZE + pitch_class_end
+        else:
+            raise ValueError("Either pitch_start and pitch_end or pitch_class_start, octave_start, pitch_class_end, octave_end must be provided.")
 
     def __len__(self) -> int:
-        return len(self._pitches)
+        return self.midi_end - self.midi_start + 1

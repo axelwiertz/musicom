@@ -9,26 +9,24 @@ class MusicTimeGrid:
             # Meter structure
             beats_per_cycle: int = None,        # Number of beats in a cycle
             beat_start_ticks: list[int] = None, # Beat ticks
-            # Rhythm patterns
-            onset_start_ticks: list[int] = None, # Onset ticks for rhythm patterns
             # Notation
-            beat_note: int = None, # Note value that gets the beat (e.g., 4 = quarter note)
+            beat_note: int = None,  # Note value that gets the beat (e.g., 4 = quarter note)
             ):
         ### Relative timescale
-        self.ticks_per_cycle = ticks_per_cycle # Tick is the smallest relative unit, represented as integer
+        # Tick is the smallest relative unit, represented as integer
+        self.ticks_per_cycle = ticks_per_cycle if ticks_per_cycle else 16  # Default to 16 ticks per cycle
         # Meter: measure cycle of beats
-        self.beats_per_cycle = beats_per_cycle
-        self.beat_start_ticks = beat_start_ticks
-        # Rhythm: onset pattern
-        self.onset_start_ticks = onset_start_ticks
+        self.beats_per_cycle = beats_per_cycle if beats_per_cycle else 4  # Default to 4 beats per cycle
+        # Meter: beat positions in ticks
+        self.beat_start_ticks = beat_start_ticks if beat_start_ticks else [i * (self.ticks_per_cycle // self.beats_per_cycle) for i in range(self.beats_per_cycle)]
         ### Notation: note value that gets the beat
-        self.beat_note = beat_note
-
+        self.beat_note = beat_note if beat_note else 4  # Default to quarter note
+        # Time cycle for visualization
         self._cycle = Cycle(ticks_per_cycle, labels=[str(i+1) for i in range(ticks_per_cycle)])
 
     @classmethod
-    def default_time(cls) -> "MusicTimeGrid":
-        # Default relative time
+    def default_time_grid(cls) -> "MusicTimeGrid":
+        # Default relative time grid: 4/4 time, 16 ticks per cycle
         return MusicTimeGrid(
             ticks_per_cycle=16,
             beats_per_cycle=4,

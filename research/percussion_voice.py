@@ -1,4 +1,4 @@
-from base import MidiInstrument, MidiPercussion, PitchRange
+from base import MidiInstrument, MidiPercussion, MusicPitchRange
 from structures import MusicVoice, MusicUnit, MusicTimeGrid, MusicSection, UnitMatrix
 from converters import midifile_to_score, score_to_section, section_to_score
 from music21 import clef, percussion, instrument
@@ -21,7 +21,7 @@ matrix = UnitMatrix(1,2)
 # Meter 4/4, 8 timesteps, 0,5 beat per timestep
 time = MusicTimeGrid(8, 4, 4, 100)
 section = MusicSection('Percussion Section', time, matrix )
-voices = [MusicVoice('Percussion voice', PitchRange(), MidiInstrument.PERCUSSION)]
+voices = [MusicVoice('Percussion voice', MusicPitchRange(), MidiInstrument.PERCUSSION)]
 
 instrument = instrument.Woodblock()
 midi_inst = MidiInstrument.PERCUSSION

@@ -5,7 +5,7 @@ def test_visualization():
     # Show helix
     h = Helix()
     print(h)
-    p = MusicPitches()
+    p = MusicPitchGrid()
     p.show()
     # Test functions
     # Show rhythm in circle
@@ -16,7 +16,7 @@ def test_visualization():
     time.show()
 
     # Show pitch class circle
-    pc_circle = Cycle(MusicPitchClass.TWELVE, MusicPitchClass.NAMES_SHARP)
+    pc_circle = Cycle(MusicPitchClass.SIZE, MusicPitchClass.NAMES_SHARP)
     pc_circle.show()
 
 

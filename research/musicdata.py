@@ -16,7 +16,7 @@ def music_interval_data():
     m21intervals = list(interval.ChromaticInterval(n) for n in MusicPitchClass.NUMBERS)
 
 def pitch_data():
-    pitch_numbers = np.array([x + str(y) for y in range(MusicPitches.OCTAVES) for x in MusicPitchClass.NAMES_SHARP])
+    pitch_numbers = np.array([x + str(y) for y in range(MusicPitchGrid.OCTAVES) for x in MusicPitchClass.NAMES_SHARP])
 
     pitch_dataframe = pd.DataFrame({
         'PitchIndex': range(len(pitch_numbers)),

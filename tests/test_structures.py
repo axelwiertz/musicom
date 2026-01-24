@@ -1,4 +1,4 @@
-from structures import MusicPitchClass, MusicPitches, Direction
+from structures import MusicPitchClass, MusicPitchGrid, Direction
 from structures import MusicTimeGrid, MusicLinearTime, MusicPitchClassPattern, Cardinality, PatternType, PatternRotation
 from structures import MusicProject, MusicUnit, MusicVoice, UnitMatrix, MusicSection
 from converters.music21_pattern import pattern_to_m21scale
@@ -40,13 +40,13 @@ def test_pitch():
     print(tet_pitch)
 
     # Chromatic pitches and transposition
-    pitches = MusicPitches()
+    pitches = MusicPitchGrid()
     pitches.show()
 
     pos = pitches.index_of(3, 7)  # octave 3, MusicPitchClass 7 -> index
     next_pos = pitches.transpose(pos, Direction.ASCENDING)  # next MusicPitchClass
     octave_pitch_class = pitches.get_at(next_pos)
-    print(f'PitchRange: pos {pos} -> next pos {next_pos} -> (octave, MusicPitchClass) {octave_pitch_class}')
+    print(f'MusicPitchRange: pos {pos} -> next pos {next_pos} -> (octave, MusicPitchClass) {octave_pitch_class}')
 
 
 def test_patterns():

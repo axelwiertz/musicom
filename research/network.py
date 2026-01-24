@@ -31,11 +31,11 @@ SEMITONE_MAP = {
 
 # --- Utilities ------------------------------------------------------------
 def semitones_between(a: str, b: str) -> int:
-    return (SEMITONE_MAP[b] - SEMITONE_MAP[a]) % MusicPitchClass.TWELVE
+    return (SEMITONE_MAP[b] - SEMITONE_MAP[a]) % MusicPitchClass.SIZE
 
 def transpose_pc(pc: str, semitones: int) -> str:
     idx = MusicPitchClass.NAMES_SHARP.index(pc)
-    return MusicPitchClass.NAMES_SHARP[(idx + semitones) % MusicPitchClass.TWELVE]
+    return MusicPitchClass.NAMES_SHARP[(idx + semitones) % MusicPitchClass.SIZE]
 
 def triad(pc: str, quality: str = "maj") -> List[str]:
     # quality: 'maj' or 'min' or 'dim'

@@ -6,7 +6,7 @@ from .pitchpattern import MusicPitchClassPattern, Cardinality, PatternType, Patt
 from .project import MusicSection, MusicVoice, MusicProject
 from .matrix import UnitMatrix
 from .instrument import MidiChannel, MidiInstrument, MidiPercussion
-from .pitch import MusicPitchClass, MusicPitches, Direction, PitchRange
+from .pitch import MusicPitchClass, MusicPitchGrid, Direction, MusicPitchRange
 
 
 __all__ = [
@@ -30,8 +30,8 @@ __all__ = [
     'MidiChannel',
 
     'MusicPitchClass',
-    'MusicPitches',
+    'MusicPitchGrid',
     'Direction',
-    'PitchRange',
+    'MusicPitchRange',
 
 ]

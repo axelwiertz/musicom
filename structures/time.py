@@ -31,9 +31,9 @@ class MusicLinearTime:
                 bpm: int = None  # beats per minute
                  ):
         ### Linear timescale
-        self.time_grid = time_grid if time_grid else MusicTimeGrid.default_time()
+        self.time_grid = time_grid if time_grid else MusicTimeGrid.default_time_grid()
         # Tempo
-        self.bpm = bpm
+        self.bpm = bpm if bpm else 120  # Default to 120 BPM
 
     def seconds_per_cycle(self) -> float:
         return self.seconds_per_beat * self.time_grid.beats_per_cycle
