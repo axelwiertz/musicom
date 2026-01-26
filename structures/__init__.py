@@ -1,6 +1,6 @@
 """Package for music composition structures."""
 from .unit import MusicUnit, MusicEvent
-from .time import MusicTimeGrid, MusicLinearTime
+from .time import MusicLinearTime
 from .timegrid import MusicTimeGrid, MusicRhythmPattern
 from .pitchpattern import MusicPitchClassPattern, Cardinality, PatternType, PatternRotation
 from .project import MusicSection, MusicVoice, MusicProject

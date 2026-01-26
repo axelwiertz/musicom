@@ -112,10 +112,19 @@ class MusicPitchGrid:
     def __iter__(self):
         return iter(self._midi_pitches)
 
+    def __str__(self) -> str:
+        return f"MusicPitchGrid({self._midi_pitches.tolist()})"
+
     @property
     def midi_array(self) -> np.ndarray:
         """Return the underlying MIDI pitch array."""
         return self._midi_pitches.copy()
+
+    @classmethod
+    def pitch_in_octave (cls, pitch_class: int, octave: int) -> int:
+        """ Get absolute pitch for given pitch class in specified octave """
+        return (octave + 1) * MusicPitchClass.SIZE + pitch_class
+
 
     @property
     def frequencies(self) -> np.ndarray:

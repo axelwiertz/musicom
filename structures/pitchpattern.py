@@ -292,6 +292,13 @@ class MusicPitchClassPattern(Base):
 
         self._initial = initial
 
+    def __str__(self) -> str:
+        return (f"MusicPitchClassPattern(name={self.name}, "
+                f"type={self._definition}, "
+                f"rotation={self._rotation}, "
+                f"initial={self._initial}, "
+                f"pitch_classes={self.pitch_classes})")
+
     def set_rotation_index(self, rotation_index: int):
         """Set the current rotation by index."""
         if rotation_index < 0 or rotation_index >= len(self._rotations):
@@ -387,12 +394,11 @@ class MusicPitchClassPattern(Base):
 
         return midi_pitches
 
-    def __str__(self) -> str:
-        return (f"MusicPitchClassPattern(name={self.name}, "
-                f"type={self._definition}, "
-                f"rotation={self._rotation}, "
-                f"initial={self._initial}, "
-                f"pitch_classes={self.pitch_classes})")
+    @staticmethod
+    def get_degree(self, degree_: int) -> int:
+        """ Pattern degree pitch class """
+        return self.pitch_classes[degree_ - 1]
+
 
 def create_subpattern(parent_pattern: MusicPitchClassPattern,
                       child_pattern: MusicPitchClassPattern = None,
@@ -450,7 +456,7 @@ def create_subpattern(parent_pattern: MusicPitchClassPattern,
     )
 
 """4. Scale Degree Chord Generator"""
-class ScaleDegreeChords:
+class SubPatterns:
     """Generate chords for each degree of a scale."""
 
     # Chord qualities for each degree of major scale

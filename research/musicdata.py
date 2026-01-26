@@ -1,45 +1,48 @@
 """Module for generating and storing musical data structures such as scales and intervals."""
 import pandas as pd
-import numpy as np
 
-from structures import MusicPitch, MusicPitchClass, MusicPitchClassPattern
-from converters import pattern_to_excel
-from rules import Cardinality, PatternRotation, PatternType
+from structures import MusicPitchGrid, MusicPitchClass, MusicPitchClassPattern
+from structures import MusicUnit
+from structures import PatternRotation, PatternType
+from converters.pattern import pattern_to_excel
+from converters.unit import unit_to_dataframe
 from utilities import Config
 
-from music21 import interval
 
 def unit_data():
-    pass
+    # Example unit: C Major triad in octave 4
+    c_major_triad = MusicPitchClassPattern(
+        name="C Major Chord",
+        definition=PatternType.MAJOR,
+        initial=MusicPitchClass.C
+    )
+    pitches = c_major_triad.get_pitches_in_octave(4)
+    unit = MusicUnit(time_grid=None, pitches=pitches)
+    dataframe = unit_to_dataframe(unit)
+    dataframe.to_excel(Config.DEFAULT_PATH + 'unit_data.xlsx', index=False)
 
-def music_interval_data():
-    m21intervals = list(interval.ChromaticInterval(n) for n in MusicPitchClass.NUMBERS)
 
-def pitch_data():
-    pitch_numbers = np.array([x + str(y) for y in range(MusicPitchGrid.OCTAVES) for x in MusicPitchClass.NAMES_SHARP])
+def pitch_grid_data():
 
+    pitch_grid = MusicPitchGrid()
     pitch_dataframe = pd.DataFrame({
-        'PitchIndex': range(len(pitch_numbers)),
-        'PitchName': pitch_numbers
+        'PitchIndex': len(pitch_grid),
+        'PitchName': pitch_grid.midi_array
     })
-    pitch_dataframe.to_excel(Config.DEFAULT_PATH + 'chromaticpitches.xlsx', index=False, sheet_name='Pitches')
-
+    pitch_dataframe.to_excel(Config.DEFAULT_PATH + 'pitch_grid.xlsx', index=False, sheet_name='Pitches')
 
 
 def music_data():
     # Heptatonic modes mapped to chromatic pitch helix
-    scale7 = MusicPitchClassPattern("Heptatonic scale", Cardinality.HEPTA, PatternType.SCALE)
-
-    scale7.set_mode (PatternRotation.major_mode)  # Major scale
+    scale7 = MusicPitchClassPattern(name="Heptatonic scale",
+                                    definition=PatternType.HEPTATONIC,
+                                    rotation=PatternRotation.major
+                                    )
 
     pattern_to_excel(scale7)
 
-
-
-
 def main():
-    music_interval_data()
-    pitch_data()
+    pitch_grid_data()
     music_data()
 
 if __name__ == '__main__':

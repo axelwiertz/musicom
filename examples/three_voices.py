@@ -8,8 +8,8 @@ from analysis import score_analyze
 
 # New composition
 project = MusicProject(
-    name='Three Voices Composition',
-    # Define musical pattern: C Major scale
+    name='Three Voices Example',
+    # Musical pattern: C Major scale
     pitch_pattern=MusicPitchClassPattern(
         name="C Major",
         definition=PatternType.HEPTATONIC,
@@ -125,6 +125,7 @@ project.matrix.set_unit(
         ])
     )
 )
+
 
 # Convert project to music21 score
 score = project_to_score(project)

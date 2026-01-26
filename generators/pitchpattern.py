@@ -2,7 +2,7 @@
 from typing import List
 from structures import MusicUnit, MusicPitchClassPattern, MusicEvent
 from .base import MusicGenerator
-from converters.pattern import pattern_to_pitches
+from converters.pattern import get_pitches_in_octave
 
 #TODO: Implement melody generator based on triad patterns
 
@@ -32,7 +32,7 @@ class PatternGenerator(MusicGenerator):
         # Pitch generation
         for i, pattern in enumerate(self.patterns):
             # Convert pattern to pitches
-            pitches = pattern_to_pitches(pattern, self.tonic_octaves[i])
+            pitches = get_pitches_in_octave(pattern, self.tonic_octaves[i])
             for j in range(self.number_of_voices):
                 p = pitches[j]
                 e = MusicEvent(pitch=p,
@@ -45,7 +45,7 @@ class PatternGenerator(MusicGenerator):
         # Sequential arpeggio generation
         for i, pattern in enumerate(self.patterns):
             # Convert pattern to pitches
-            pitches = pattern_to_pitches(pattern, self.tonic_octaves[i])
+            pitches = get_pitches_in_octave(pattern, self.tonic_octaves[i])
             events = []
             for j, pitch in enumerate(pitches):
                 e = MusicEvent(pitch=pitch,
@@ -64,7 +64,7 @@ class PatternGenerator(MusicGenerator):
         # event duration is timesteps_in
         for i, pattern in enumerate(self.patterns):
             # Convert pattern to pitches
-            pitches = pattern_to_pitches(pattern, self.tonic_octaves[i])
+            pitches = get_pitches_in_octave(pattern, self.tonic_octaves[i])
             for v in range(self.number_of_voices):
                 # Get pitch for the current voice
                 p = pitches[v]

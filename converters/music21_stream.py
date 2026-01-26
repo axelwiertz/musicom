@@ -2,7 +2,7 @@ from structures import MusicUnit, MusicTimeGrid, UnitMatrix
 from converters.music21_note import note_to_event, event_to_note
 from converters.time import ticks_to_quarter_length
 
-from music21 import serial, stream, note, chord
+from music21 import serial, stream, note, duration, chord
 
 
 def tonerow_to_stream(tonerow_base: serial.ToneRow = serial.ToneRow(row=[0, 4, 7, 4]),
@@ -60,3 +60,37 @@ def matrix_row_to_stream(matrix: UnitMatrix, row: int, time_grid: MusicTimeGrid)
             # Append the unit's stream
             stream_out.append(unit_to_stream(unit_, time_grid))
     return stream_out
+
+
+
+def add_events_to_stream(stream_out, events, time_grid):
+    """Add note events to stream, inserting rests for gaps."""
+    current_tick = 0
+
+    # Sort events by start tick
+    sorted_events = sorted(events, key=lambda e: e[1])
+
+    for event in sorted_events:
+        pitch, start_tick, end_tick, velocity = event
+
+        # Check for gap before this note
+        if start_tick > current_tick:
+            gap_ticks = start_tick - current_tick
+            quarter_length = ticks_to_quarter_length(gap_ticks, time_grid)
+            rest = note.Rest()
+            rest.duration = duration.Duration(quarterLength=quarter_length)
+            stream_out.append(rest)
+
+        # Add the note
+        note_ticks = end_tick - start_tick
+        quarter_length = ticks_to_quarter_length(note_ticks, time_grid)
+        n = note.Note(pitch)
+        n.duration = duration.Duration(quarterLength=quarter_length)
+        n.volume.velocity = velocity
+        stream_out.append(n)
+
+        current_tick = end_tick
+
+    return stream_out
+
+
