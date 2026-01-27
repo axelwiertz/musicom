@@ -4,7 +4,7 @@ harmonic functions
 """
 import random
 from typing import List
-from structures import MusicUnit
+from structures import MusicUnit, MusicEvent
 from .base import MusicGenerator
 from music21 import note, interval
 
@@ -26,14 +26,14 @@ class HarmonicsGenerator(MusicGenerator):
         # The harmonic series of a fundamental pitch
         unit = MusicUnit()
         for harmonic in harmonic_numbers:
-            new_pitch = note.Pitch(fundamental_pitch).getHarmonic(harmonic)
-            unit.append(new_pitch.midi)
+            new_pitch = note.Pitch(fundamental_pitch).getHarmonic(harmonic).midi
+            unit.add_event(MusicEvent(pitch=new_pitch))
 
         return unit
 
     def random_bass_harmonics(self):
         # Generate random harmonic chords based on bass pitches in source unit
-        for bass_pitch in self._unit.pitch_nodes:
+        for bass_pitch in self._unit.pitches:
             random_harmonics = random.sample(range(4,21), random.randrange(3, 6))
             new_chord = self.harmonic_series(bass_pitch, random_harmonics)
             new_chord.transpose(interval.Interval(new_chord[0],

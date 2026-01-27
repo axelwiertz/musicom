@@ -25,7 +25,7 @@ from .structures import (
     # Music theory
     MusicPitchClass,
     MusicPitchClassSet,
-    MusicPitchClassPattern,  # Backward compatibility alias
+    MusicPitchClassSet,  # Backward compatibility alias
     PatternGraph,
 
     # Rhythm
@@ -55,7 +55,7 @@ __all__ = [
     # Pitch
     'MusicPitchClass',
     'MusicPitchClassSet',
-    'MusicPitchClassPattern',  # Backward compatibility
+    'MusicPitchClassSet',  # Backward compatibility
     'PatternGraph',
 
     # Time

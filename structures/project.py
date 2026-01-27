@@ -5,7 +5,7 @@ from . import MusicLinearTime
 from .base import Base
 from .matrix import UnitMatrix
 from .time import MusicTimeGrid
-from .pitchpattern import MusicPitchClassPattern
+from .pitchclass import MusicPitchClassSet
 from .pitch import MusicPitchRange
 from .instrument import MidiInstrument
 from .timegrid import MusicRhythmPattern
@@ -50,7 +50,7 @@ class MusicProject (Base):
     """Represents the entire project structure."""
     def __init__(self,
                  name: str = None,
-                 pitch_pattern: MusicPitchClassPattern = None,
+                 pitch_pattern: MusicPitchClassSet = None,
                  time_grid: MusicTimeGrid = None,
                  rhythm_pattern : MusicRhythmPattern = None,
                  sections: List[MusicSection] = None,

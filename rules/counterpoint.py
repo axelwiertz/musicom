@@ -15,10 +15,15 @@ class Counterpoint:
     def __init__(self, unit1: MusicUnit, unit2: MusicUnit):
         self._unit1 = unit1
         self._unit2 = unit2
+        self.set_units(unit1, unit2)
+
+    def set_units(self, unit1: MusicUnit, unit2: MusicUnit):
+        """Set the musical units for counterpoint analysis."""
+        self._unit1 = unit1
+        self._unit2 = unit2
         # Ensure the voices are of the same length
         if len(unit1) != len(unit2):
             raise ValueError("Units must be of the same length")
-
 
     def has_parallel_perfect_intervals(self):
         """Check for parallel perfect intervals between two musical units."""

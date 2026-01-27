@@ -1,6 +1,6 @@
 import numpy as np
 from structures import MidiInstrument, MusicPitchClass, PatternType, PatternRotation
-from structures import MusicPitchClassPattern, MusicProject, MusicSection, MusicUnit, MusicVoice, MusicTimeGrid, UnitMatrix
+from structures import MusicPitchClassSet, MusicProject, MusicSection, MusicUnit, MusicVoice, MusicTimeGrid, UnitMatrix
 from converters.music21_pattern import pattern_to_m21scale
 from converters.midi_converter import score_to_midifile
 from converters.music21_score import project_to_score
@@ -10,7 +10,7 @@ from analysis import score_analyze
 project = MusicProject(
     name='Three Voices Example',
     # Musical pattern: C Major scale
-    pitch_pattern=MusicPitchClassPattern(
+    pitch_pattern=MusicPitchClassSet(
         name="C Major",
         definition=PatternType.HEPTATONIC,
         rotation=PatternRotation.major,
@@ -52,7 +52,7 @@ project.matrix.set_unit(
 
 # Define chords for voice 2 (Violin harmony)
 # Section A: C Major triad
-c_major_triad = MusicPitchClassPattern(
+c_major_triad = MusicPitchClassSet(
     name="C Major Chord",
     definition=PatternType.MAJOR,
     initial=MusicPitchClass.C
@@ -71,7 +71,7 @@ project.matrix.set_unit(
 )
 
 # Section B: F Major triad
-f_major_triad = MusicPitchClassPattern(
+f_major_triad = MusicPitchClassSet(
     name="F Major Chord",
     definition=PatternType.MAJOR,
     initial=MusicPitchClass.F
@@ -91,7 +91,7 @@ project.matrix.set_unit(
 
 # Define bass units (Accompaniment)
 # Section A: C and G (perfect fifth from C)
-pattern_bass_c = MusicPitchClassPattern(
+pattern_bass_c = MusicPitchClassSet(
     name="Bass Pattern C",
     definition=PatternType.PERFECT_FIFTH,
     initial=MusicPitchClass.C
@@ -109,7 +109,7 @@ project.matrix.set_unit(
 )
 
 # Section B: F and C (perfect fifth from F)
-pattern_bass_f = MusicPitchClassPattern(
+pattern_bass_f = MusicPitchClassSet(
     name="Bass Pattern F",
     definition=PatternType.PERFECT_FIFTH,
     initial=MusicPitchClass.F

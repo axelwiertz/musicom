@@ -7,7 +7,7 @@ from structures.unit import MusicUnit
 class MusicGenerator(ABC):
     """
     Abstract base for generators. Implementations must return a (list of) MusicUnit
-    instance from `produce`.
+    instance from `generate`.
     """
     def __init__(self,
                  unit : MusicUnit = None,

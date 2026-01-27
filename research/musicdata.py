@@ -1,7 +1,7 @@
 """Module for generating and storing musical data structures such as scales and intervals."""
 import pandas as pd
 
-from structures import MusicPitchGrid, MusicPitchClass, MusicPitchClassPattern
+from structures import MusicPitchGrid, MusicPitchClass, MusicPitchClassSet
 from structures import MusicUnit
 from structures import PatternRotation, PatternType
 from converters.pattern import pattern_to_excel
@@ -11,7 +11,7 @@ from utilities import Config
 
 def unit_data():
     # Example unit: C Major triad in octave 4
-    c_major_triad = MusicPitchClassPattern(
+    c_major_triad = MusicPitchClassSet(
         name="C Major Chord",
         definition=PatternType.MAJOR,
         initial=MusicPitchClass.C
@@ -34,7 +34,7 @@ def pitch_grid_data():
 
 def music_data():
     # Heptatonic modes mapped to chromatic pitch helix
-    scale7 = MusicPitchClassPattern(name="Heptatonic scale",
+    scale7 = MusicPitchClassSet(name="Heptatonic scale",
                                     definition=PatternType.HEPTATONIC,
                                     rotation=PatternRotation.major
                                     )

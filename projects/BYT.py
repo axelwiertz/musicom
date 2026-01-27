@@ -1,12 +1,12 @@
 """ Big Yellow Taxi Music Project """
 from structures import MusicPitchClass, PatternType, PatternRotation, UnitMatrix, MusicLinearTime
-from structures import MusicProject, MusicPitchClassPattern, MusicTimeGrid, MusicUnit
+from structures import MusicProject, MusicPitchClassSet, MusicTimeGrid, MusicUnit
 from converters.pitch import name_to_midi
 from converters.musicpy_converter import unit_to_sound
 
 # Create project
 proj = MusicProject(name='Big yellow taxi',
-                    pitch_pattern=MusicPitchClassPattern(name='B flat major',
+                    pitch_pattern=MusicPitchClassSet(name='B flat major',
                                definition=PatternType.HEPTATONIC,
                                rotation=PatternRotation.major,
                                initial=MusicPitchClass.B_FLAT),

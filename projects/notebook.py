@@ -3,7 +3,7 @@ MusicPy - Notebook examples
 """
 
 from structures import MusicProject, MusicSection, MusicTimeGrid
-from structures import MusicPitchClass, MusicPitchClassPattern, Cardinality, PatternType, PatternRotation
+from structures import MusicPitchClass, MusicPitchClassSet, Cardinality, PatternType, PatternRotation
 from converters.music21_stream import stream_to_unit
 from converters.pypianoroll_converter import musicunit_to_track
 from music21 import converter
@@ -55,11 +55,11 @@ def standard_notebook ():
     # 1,2,4,5  i II iv V
 
     proj = MusicProject(name='Fantasy A minor',
-                        pattern=MusicPitchClassPattern("A minor", Cardinality.HEPTA, PatternType.SCALE,
+                        pattern=MusicPitchClassSet("A minor", Cardinality.HEPTA, PatternType.SCALE,
                                                   PatternRotation.minor, MusicPitchClass.A))
 
     proj = MusicProject(name='Fantasy C major',
-                        pattern=MusicPitchClassPattern("C major", Cardinality.HEPTA, PatternType.SCALE,
+                        pattern=MusicPitchClassSet("C major", Cardinality.HEPTA, PatternType.SCALE,
                                                   PatternRotation.major, MusicPitchClass.C),
                         sections=[MusicSection('A'), MusicSection('B')])
 

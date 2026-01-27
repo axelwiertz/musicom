@@ -1,12 +1,12 @@
 """MusicPy converters."""
-from structures import MusicPitchClass, MusicPitchClassPattern, PatternType
+from structures import MusicPitchClass, MusicPitchClassSet, PatternType
 from structures import MidiInstrument, MusicLinearTime
 from structures import MusicUnit, MusicEvent
 from converters.pitch import midi_to_name
 from musicpy import musicpy, structures
 
 
-def pattern_to_mpscale(pattern: MusicPitchClassPattern) -> structures.scale:
+def pattern_to_mpscale(pattern: MusicPitchClassSet) -> structures.scale:
     mpscale = structures.scale()
 
     # Diatonic (7 pitch class) scale

@@ -25,7 +25,7 @@ Algorithmic and structured music composition is treated as a series of transform
 - **MusicProject**: Full project management with multiple sections
 - **UnitMatrix**: Matrix-based compositional framework for systematic musical development
 - **MusicPitchClass** & **MusicPitch**: Pitch representation with direction and range
-- **MusicPitchClassPattern**: Pattern-based pitch sequences with cardinality and mode
+- **MusicPitchClassSet**: Pattern-based pitch sequences with cardinality and mode
 
 ### 🎹 Harmony & Composition Rules
 - **Scale7PitchDegree**: Scale degree definitions for 7-note scales
@@ -284,7 +284,7 @@ Voice 3:   [C₁]       [C₁]        [C₂]        [C₂']
 Voice 4:   [D₁]       [D₂]        [D₃]        [D₁]
 ```
 
-### MusicPitchClassPattern
+### MusicPitchClassSet
 Pattern-based pitch organization with:
 - **Cardinality**: Number of pitches in pattern
 - **PatternType**: Type of pattern (scale, chord, etc.)

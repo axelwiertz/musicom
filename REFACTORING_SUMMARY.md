@@ -158,17 +158,17 @@ print("\n" + graph.visualize())
 
 ## Backward Compatibility
 
-To maintain backward compatibility, `MusicPitchClassPattern` is kept as an alias to `MusicPitchClassSet`:
+To maintain backward compatibility, `MusicPitchClassSet` is kept as an alias to `MusicPitchClassSet`:
 
 ```python
 # Both work the same way
-from structures import MusicPitchClassSet, MusicPitchClassPattern
+from structures import MusicPitchClassSet, MusicPitchClassSet
 
 # New name (recommended)
 pcs1 = MusicPitchClassSet("Major", PatternType.MAJOR, initial=0)
 
 # Old name (still works)
-pcs2 = MusicPitchClassPattern("Major", PatternType.MAJOR, initial=0)
+pcs2 = MusicPitchClassSet("Major", PatternType.MAJOR, initial=0)
 
 # They are the same class
 assert type(pcs1) == type(pcs2)
@@ -177,7 +177,7 @@ assert type(pcs1) == type(pcs2)
 ## Files Modified
 
 1. **structures/pitchpattern.py**
-   - Renamed `MusicPitchClassPattern` to `MusicPitchClassSet`
+   - Renamed `MusicPitchClassSet` to `MusicPitchClassSet`
    - Added subset relationship methods
    - Enhanced `PatternGraph` with hierarchy management
 
@@ -193,7 +193,7 @@ assert type(pcs1) == type(pcs2)
 
 ## Migration Guide
 
-For existing code using `MusicPitchClassPattern`:
+For existing code using `MusicPitchClassSet`:
 
 1. **No immediate changes required** - The alias ensures backward compatibility
 2. **Recommended**: Gradually update imports to use `MusicPitchClassSet`
@@ -201,8 +201,8 @@ For existing code using `MusicPitchClassPattern`:
 
 ```python
 # Old code (still works)
-from structures import MusicPitchClassPattern
-pattern = MusicPitchClassPattern("Major", PatternType.MAJOR)
+from structures import MusicPitchClassSet
+pattern = MusicPitchClassSet("Major", PatternType.MAJOR)
 
 # New code (recommended)
 from structures import MusicPitchClassSet, PatternGraph

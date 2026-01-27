@@ -15,7 +15,7 @@ graph TB
         S --> P[MusicProject]
         S --> M[UnitMatrix]
         S --> PC[MusicPitchClass]
-        S --> PP[MusicPitchClassPattern]
+        S --> PP[MusicPitchClassSet]
         S --> TG[MusicTimeGrid]
     end
     
@@ -83,7 +83,7 @@ The core data structures that represent musical concepts:
 | [`UnitMatrix`](structures/matrix.py:7) | matrix.py | 2D matrix for compositional manipulation |
 | [`MusicPitchClass`](structures/pitch.py:22) | pitch.py | 12-TET pitch class definitions |
 | [`MusicPitchGrid`](structures/pitch.py:58) | pitch.py | Chromatic pitch set with helix representation |
-| [`MusicPitchClassPattern`](structures/pitchpattern.py:275) | pitchpattern.py | Pattern-based pitch sequences |
+| [`MusicPitchClassSet`](structures/pitchpattern.py:275) | pitchpattern.py | Pattern-based pitch sequences |
 | [`MusicTimeGrid`](structures/timegrid.py:4) | timegrid.py | Time structure with meter and tempo |
 | [`MusicRhythmPattern`](structures/timegrid.py:53) | timegrid.py | Common rhythm patterns |
 
