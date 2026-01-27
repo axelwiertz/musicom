@@ -1,6 +1,6 @@
 """ Module to create from chords """
 from typing import List
-from structures import MusicUnit, MusicPitchClassPattern, MusicEvent
+from structures import MusicUnit, MusicPitchClassSet, MusicEvent
 from .base import MusicGenerator
 from converters.pattern import get_pitches_in_octave
 
@@ -10,7 +10,7 @@ class PatternGenerator(MusicGenerator):
     """ Arpeggio generator class """
 
     def __init__(self,
-                 patterns: List[MusicPitchClassPattern],
+                 patterns: List[MusicPitchClassSet],
                  tonic_octaves: List[int] = None,
                  number_of_voices: int = None,
                  time_interval: int = None,

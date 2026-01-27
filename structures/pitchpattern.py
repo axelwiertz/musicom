@@ -272,8 +272,12 @@ class PatternRegistry:
     # Relationship: MAJOR_TRIAD is subset of MAJOR_SEVENTH
     # MAJOR_TRIAD.is_subset_of(MAJOR_SEVENTH) == True
 
-class MusicPitchClassPattern(Base):
-    """Musical pattern based on diatonic pitch classes."""
+class MusicPitchClassSet(Base):
+    """Musical pitch class set representing a collection of pitch classes.
+    
+    Instances form a subset hierarchy where one set can be a subset of another.
+    The subset relationships are managed by PatternGraph.
+    """
     def __init__(self,
                  name: str = "Pattern",
                  definition: PatternType = None,
@@ -293,7 +297,7 @@ class MusicPitchClassPattern(Base):
         self._initial = initial
 
     def __str__(self) -> str:
-        return (f"MusicPitchClassPattern(name={self.name}, "
+        return (f"MusicPitchClassSet(name={self.name}, "
                 f"type={self._definition}, "
                 f"rotation={self._rotation}, "
                 f"initial={self._initial}, "
@@ -399,11 +403,29 @@ class MusicPitchClassPattern(Base):
         """ Pattern degree pitch class """
         return self.pitch_classes[degree_ - 1]
 
+    def is_subset_of(self, other: 'MusicPitchClassSet') -> bool:
+        """Check if this pitch class set is a subset of another."""
+        if self._initial is None or other._initial is None:
+            return False
+        self_pcs = set(self.pitch_classes)
+        other_pcs = set(other.pitch_classes)
+        return self_pcs.issubset(other_pcs)
 
-def create_subpattern(parent_pattern: MusicPitchClassPattern,
-                      child_pattern: MusicPitchClassPattern = None,
+    def is_superset_of(self, other: 'MusicPitchClassSet') -> bool:
+        """Check if this pitch class set is a superset of another."""
+        return other.is_subset_of(self)
+
+    def pitch_class_set(self) -> FrozenSet[int]:
+        """Return pitch classes as a frozen set."""
+        if self._initial is None:
+            return frozenset()
+        return frozenset(self.pitch_classes)
+
+
+def create_subpattern(parent_pattern: MusicPitchClassSet,
+                      child_pattern: MusicPitchClassSet = None,
                       degrees: List[int] = None,
-                      name: str = "Subpattern") -> 'MusicPitchClassPattern':
+                      name: str = "Subpattern") -> 'MusicPitchClassSet':
     """
     Create a (lower-cardinality) subpattern from a subset of this pattern's degrees.
     Args:
@@ -448,7 +470,7 @@ def create_subpattern(parent_pattern: MusicPitchClassPattern,
     # Find the pattern type for the new intervals
     new_pattern_type = MusicPattern.find_pattern_type(new_cardinality, new_intervals)
 
-    return MusicPitchClassPattern(
+    return MusicPitchClassSet(
         name=name,
         definition=new_pattern_type, # Set pattern type based on intervals
         rotation=None,  # No specific rotation
@@ -515,7 +537,11 @@ class SubPatterns:
 """5. Pattern Relationship Graph"""
 
 class PatternGraph:
-    """Graph-based pattern relationship manager."""
+    """Graph-based pattern relationship manager for MusicPitchClassSet instances.
+    
+    This directed graph manages the subset hierarchy where edges point from
+    supersets to subsets (parent to child relationships).
+    """
 
     def __init__(self):
         self._graph = nx.DiGraph()
@@ -529,6 +555,123 @@ class PatternGraph:
                 pattern.name,
                 relation='contains'
             )
+
+    def add_pitch_class_set(self, pitch_class_set: MusicPitchClassSet):
+        """Add a MusicPitchClassSet instance to the graph.
+        
+        Args:
+            pitch_class_set: The pitch class set to add
+        """
+        node_id = id(pitch_class_set)
+        self._graph.add_node(
+            node_id,
+            pitch_class_set=pitch_class_set,
+            name=pitch_class_set.name,
+            pitch_classes=pitch_class_set.pitch_class_set()
+        )
+
+    def add_subset_relation(self,
+                           superset: MusicPitchClassSet,
+                           subset: MusicPitchClassSet):
+        """Add a subset relationship between two pitch class sets.
+        
+        Args:
+            superset: The larger set (parent)
+            subset: The smaller set (child)
+        
+        Raises:
+            ValueError: If subset is not actually a subset of superset
+        """
+        if not subset.is_subset_of(superset):
+            raise ValueError(
+                f"{subset.name} is not a subset of {superset.name}"
+            )
+        
+        superset_id = id(superset)
+        subset_id = id(subset)
+        
+        # Ensure both nodes exist
+        if superset_id not in self._graph:
+            self.add_pitch_class_set(superset)
+        if subset_id not in self._graph:
+            self.add_pitch_class_set(subset)
+        
+        # Add directed edge from superset to subset
+        self._graph.add_edge(superset_id, subset_id, relation='subset')
+
+    def get_subsets(self, pitch_class_set: MusicPitchClassSet) -> List[MusicPitchClassSet]:
+        """Get all direct subsets of the given pitch class set.
+        
+        Args:
+            pitch_class_set: The set to find subsets for
+            
+        Returns:
+            List of pitch class sets that are direct subsets
+        """
+        node_id = id(pitch_class_set)
+        if node_id not in self._graph:
+            return []
+        
+        return [
+            self._graph.nodes[n]['pitch_class_set']
+            for n in self._graph.successors(node_id)
+        ]
+
+    def get_supersets(self, pitch_class_set: MusicPitchClassSet) -> List[MusicPitchClassSet]:
+        """Get all direct supersets of the given pitch class set.
+        
+        Args:
+            pitch_class_set: The set to find supersets for
+            
+        Returns:
+            List of pitch class sets that are direct supersets
+        """
+        node_id = id(pitch_class_set)
+        if node_id not in self._graph:
+            return []
+        
+        return [
+            self._graph.nodes[n]['pitch_class_set']
+            for n in self._graph.predecessors(node_id)
+        ]
+
+    def get_all_subsets(self, pitch_class_set: MusicPitchClassSet) -> List[MusicPitchClassSet]:
+        """Get all subsets (direct and indirect) of the given pitch class set.
+        
+        Args:
+            pitch_class_set: The set to find all subsets for
+            
+        Returns:
+            List of all pitch class sets in the subset hierarchy
+        """
+        node_id = id(pitch_class_set)
+        if node_id not in self._graph:
+            return []
+        
+        descendants = nx.descendants(self._graph, node_id)
+        return [
+            self._graph.nodes[n]['pitch_class_set']
+            for n in descendants
+        ]
+
+    def get_all_supersets(self, pitch_class_set: MusicPitchClassSet) -> List[MusicPitchClassSet]:
+        """Get all supersets (direct and indirect) of the given pitch class set.
+        
+        Args:
+            pitch_class_set: The set to find all supersets for
+            
+        Returns:
+            List of all pitch class sets that contain this set
+        """
+        node_id = id(pitch_class_set)
+        if node_id not in self._graph:
+            return []
+        
+        ancestors = nx.ancestors(self._graph, node_id)
+        return [
+            self._graph.nodes[n]['pitch_class_set']
+            for n in ancestors
+        ]
 
     def get_subpatterns(self, pattern_name: str) -> List[PatternDefinition]:
         """Get all patterns that are subsets of the given pattern."""
@@ -561,6 +704,68 @@ class PatternGraph:
                 )
             )
         return None
+
+    def find_common_superset(self,
+                            set1: MusicPitchClassSet,
+                            set2: MusicPitchClassSet) -> Optional[MusicPitchClassSet]:
+        """Find the smallest common superset of two pitch class sets.
+        
+        Args:
+            set1: First pitch class set
+            set2: Second pitch class set
+            
+        Returns:
+            The smallest pitch class set that contains both, or None
+        """
+        id1 = id(set1)
+        id2 = id(set2)
+        
+        if id1 not in self._graph or id2 not in self._graph:
+            return None
+        
+        ancestors1 = nx.ancestors(self._graph, id1)
+        ancestors2 = nx.ancestors(self._graph, id2)
+        common = ancestors1 & ancestors2
+        
+        if not common:
+            return None
+        
+        # Return the one closest to both sets (smallest common superset)
+        return min(
+            (self._graph.nodes[n]['pitch_class_set'] for n in common),
+            key=lambda pcs: (
+                nx.shortest_path_length(self._graph, id(pcs), id1) +
+                nx.shortest_path_length(self._graph, id(pcs), id2)
+            )
+        )
+
+    def visualize(self) -> str:
+        """Generate a string representation of the graph structure.
+        
+        Returns:
+            String showing the hierarchy of pitch class sets
+        """
+        lines = ["PatternGraph Hierarchy:"]
+        
+        # Find root nodes (nodes with no predecessors)
+        roots = [n for n in self._graph.nodes() if self._graph.in_degree(n) == 0]
+        
+        def traverse(node, indent=0):
+            node_data = self._graph.nodes[node]
+            if 'pitch_class_set' in node_data:
+                pcs = node_data['pitch_class_set']
+                lines.append(f"{'  ' * indent}└─ {pcs.name} {pcs.pitch_class_set()}")
+            elif 'pattern' in node_data:
+                pattern = node_data['pattern']
+                lines.append(f"{'  ' * indent}└─ {pattern.name}")
+            
+            for child in self._graph.successors(node):
+                traverse(child, indent + 1)
+        
+        for root in roots:
+            traverse(root)
+        
+        return '\n'.join(lines)
 
 
 

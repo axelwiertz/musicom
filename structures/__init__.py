@@ -2,12 +2,21 @@
 from .unit import MusicUnit, MusicEvent
 from .time import MusicLinearTime
 from .timegrid import MusicTimeGrid, MusicRhythmPattern
-from .pitchpattern import MusicPitchClassPattern, Cardinality, PatternType, PatternRotation
+from .pitchpattern import (
+    MusicPitchClassSet,
+    MusicPitchClassPattern,  # Keep for backward compatibility
+    Cardinality,
+    PatternType,
+    PatternRotation,
+    PatternGraph
+)
 from .project import MusicSection, MusicVoice, MusicProject
 from .matrix import UnitMatrix
 from .instrument import MidiChannel, MidiInstrument, MidiPercussion
 from .pitch import MusicPitchClass, MusicPitchGrid, Direction, MusicPitchRange
 
+# Alias for backward compatibility
+MusicPitchClassPattern = MusicPitchClassSet
 
 __all__ = [
     "MusicEvent",
@@ -15,10 +24,12 @@ __all__ = [
     "MusicTimeGrid",
     "MusicLinearTime",
     "MusicRhythmPattern",
-    "MusicPitchClassPattern",
+    "MusicPitchClassSet",
+    "MusicPitchClassPattern",  # Keep for backward compatibility
     "Cardinality",
     "PatternType",
     "PatternRotation",
+    "PatternGraph",
 
     "MusicSection",
     "MusicVoice",
