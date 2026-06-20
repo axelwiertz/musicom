@@ -62,23 +62,28 @@ dev = [
     "flake8>=6.0.0",
     "mypy>=1.0.0",
 ]
-conversion = [
-    "music21py>=0.0.2",
-    "showscore>=0.1.0",
-]
+conversion = []
 all = [
     "musicom[dev,conversion]",
 ]
 
 [project.urls]
-Homepage = "https://github.com/musicom/musicom"
-Documentation = "https://github.com/musicom/musicom#readme"
-Repository = "https://github.com/musicom/musicom"
-Issues = "https://github.com/musicom/musicom/issues"
+Homepage = "https://github.com/axelwiertz/musicom"
+Documentation = "https://github.com/axelwiertz/musicom#readme"
+Repository = "https://github.com/axelwiertz/musicom"
+Issues = "https://github.com/axelwiertz/musicom/issues"
 
 [tool.setuptools]
 packages = [
     "musicom",
+    "musicom.ai",
+    "musicom.ai.core",
+    "musicom.ai.generators",
+    "musicom.ai.integration",
+    "musicom.ai.io",
+    "musicom.ai.rules",
+    "musicom.ai.transformers",
+    "musicom.ai.utils",
     "musicom.analysis",
     "musicom.converters",
     "musicom.generators",
@@ -91,11 +96,6 @@ packages = [
     "musicom.utilities",
     "musicom.visualization",
 ]
-
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["*"]
-exclude = ["tests*", "examples*"]
 
 [tool.black]
 line-length = 100

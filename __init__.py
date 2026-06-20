@@ -8,6 +8,7 @@ Main modules:
 - generators: Music generation algorithms
 - rules: Music theory rules and harmony
 - utilities: Helper utilities and configuration
+- ai: AI-driven generators, I/O, and library integration bridge
 """
 
 __version__ = '0.1.0'

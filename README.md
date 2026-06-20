@@ -10,8 +10,8 @@ Algorithmic and structured music composition is treated as a series of transform
 
 ## Features
 
-### 🎼 Core Music Theory
-- **12-Tone Equal Temperament (12-TET)** system implementation
+| 🎼 Core Music Theory
+- **12-Tone Equal Temperament (12-TET)** system implementation (in `musicom.ai.core.tet_system`)
 - **Chromatic pitches** management with helix representation
 - **Diatonic patterns** including scales, modes, chords (triads, seventh chords, extended chords)
 - **Music scales** with support for all 7 modes (Ionian, Dorian, Phrygian, Lydian, Mixolydian, Aeolian, Locrian)
@@ -98,7 +98,7 @@ Multiple generator modules for creative composition:
 ### Install from source
 
 ```bash
-git clone https://github.com/musicom/musicom.git
+git clone https://github.com/axelwiertz/musicom.git
 cd musicom
 pip install -e .
 ```
@@ -130,7 +130,15 @@ pip install music21 musicpy numpy scipy pandas matplotlib networkx
 
 ```
 musicom/
-├── analysis/              # Music analysis tools (Music21 & MusicPy)
+|├── ai/                   # AI-driven composition extension (merged from musicom_ai)
+|│   ├── core/             # 12-TET system, Note, Chord, Scale, Key
+|│   ├── generators/       # Melody, harmony, rhythm generators
+|│   ├── integration/      # Library bridge (Music21, MusicPy, PyPianoroll)
+|│   ├── io/               # MIDI, MusicXML, audio analysis I/O
+|│   ├── rules/            # Harmonic and voice-leading rules
+|│   ├── transformers/     # Pitch and rhythm transformers
+|│   └── utils/            # Constants, validators, helpers, logging
+|├── analysis/              # Music analysis tools (Music21 & MusicPy)
 │   ├── music21_analysis.py
 │   └── musicpy_analysis.py
 ├── converters/            # Format converters
@@ -298,6 +306,9 @@ See the `examples/` directory for working examples:
 - `cross_voice.py` - Cross-voice techniques
 - `systematic.py` - Systematic composition
 - `guide.ipynb` - Interactive tutorial
+- `research_advanced.py` - Advanced composition workflow (merged from musicom_research)
+- `research_examples.py` - Multi-library usage examples
+- `research_verify.py` - Installation verification script
 
 ## Testing
 

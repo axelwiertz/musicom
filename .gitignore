@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+
+# Environment files
+.env*
+!.env.example
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Generated artifacts
+release.html
+*.tar.gz
+
+# Agent operational files (not part of library)
+check_assignments.py
+cron_assignment_processor.py
+debug_*.py
+mail_*.py
+parse_*.py
+run_check.py
+himalaya/
