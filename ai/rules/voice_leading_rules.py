@@ -4,7 +4,7 @@ Voice leading rules module.
 This module provides rules for voice leading validation and optimization.
 """
 
-from typing import List, Tuple
+from typing import List, Tuple, Dict, Any, Optional
 from musicom.ai.core.structures import Chord, Progression
 from musicom.ai.utils.logging_config import get_logger
 

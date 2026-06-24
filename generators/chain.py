@@ -5,7 +5,7 @@ from typing import Optional, List
 from numpy.typing import NDArray
 from collections import defaultdict
 from structures.unit import MusicUnit
-from transformers.base import MusicGenerator
+from generators.base import MusicGenerator
 
 class MarkovChainGenerator(MusicGenerator):
     # Markov chain of transitions
