@@ -14,59 +14,7 @@ Main modules:
 __version__ = '0.1.0'
 __author__ = 'Musicom Team'
 
-
-# Core structures
-from .structures import (
-    # Music structures
-    MusicUnit,
-    MusicVoice,
-    MusicSection,
-    MusicProject,
-
-    # Music theory
-    MusicPitchClass,
-    MusicPitchClassSet,
-    MusicPitchClassSet,  # Backward compatibility alias
-    PatternGraph,
-
-    # Rhythm
-    MusicTimeGrid,
-    MusicRhythmPattern,
-)
-
-
-# Generators
-from .generators import (
-    PatternGenerator
-)
-# Configuration
-from .utilities.config import Config
-
-__all__ = [
-    # Version info
-    '__version__',
-    '__author__',
-
-    # Core structures
-    'MusicUnit',
-    'MusicVoice',
-    'MusicSection',
-    'MusicProject',
-
-    # Pitch
-    'MusicPitchClass',
-    'MusicPitchClassSet',
-    'MusicPitchClassSet',  # Backward compatibility
-    'PatternGraph',
-
-    # Time
-    'MusicTimeGrid',
-    # Rhythm
-    'MusicRhythmPattern',
-
-    # Generators
-    'PatternGenerator',
-
-    # Configuration
-    'Config',
-]
+# Defer heavy imports to avoid circular/broken dependency issues at package level.
+# Subpackages remain importable directly:
+#   from musicom.ai.core.structures import Note, Phrase
+#   from musicom.ai.rules.theories import HarmonyRules

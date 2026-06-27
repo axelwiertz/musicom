@@ -1,7 +1,7 @@
-"""UnitMatrix: A 2D matrix structure for musical material manipulation that holds `MusicUnit` objects"""
+from .unit import MusicUnit
+from .time import TimeConverter
+from typing import List, Optional, Tuple, Any, Callable, Sequence
 import numpy as np
-from typing import Any, Callable, List, Optional, Sequence, Tuple
-from structures.unit import MusicUnit
 
 
 class UnitMatrix:
@@ -149,7 +149,97 @@ class UnitMatrix:
                 if predicate(r, c, self.data[r, c]):
                     self.data[r, c] = None
 
-    """Row transformations (voice transformations)"""
+    # ==================== TIME VALIDATION METHODS ====================
+
+    def get_row_length(self, row: int) -> int:
+        """Get total length of a row in ticks.
+        
+        Args:
+            row: Row index (voice)
+            
+        Returns:
+            Total ticks for all units in this row
+        """
+        units = self.units_in_row(row)
+        return sum(unit.len_ticks() for unit in units)
+
+    def get_all_row_lengths(self) -> List[int]:
+        """Get total length of each row in ticks.
+        
+        Returns:
+            List of tick lengths, one per row
+        """
+        lengths = []
+        for r in range(self.num_rows):
+            lengths.append(self.get_row_length(r))
+        return lengths
+
+    def validate_timing(self) -> bool:
+        """Check all rows have the same total duration.
+        
+        This is CRITICAL for MIDI export - all tracks must align.
+        
+        Returns:
+            True if all rows have identical total tick count, False otherwise
+        """
+        lengths = self.get_all_row_lengths()
+        return len(set(lengths)) == 1
+
+    def get_row_events(self, row: int) -> List:
+        """Get all MusicEvents for a row, time-aligned across columns.
+        
+        Events from each unit in the row are offset by the cumulative
+        length of previous units in that row.
+        
+        Args:
+            row: Row index (voice)
+            
+        Returns:
+            List of MusicEvent with absolute ticks
+        """
+        return TimeConverter.align_units_to_track(self.units_in_row(row))
+
+    def get_all_track_events(self) -> List[List]:
+        """Get all events for all rows as separate tracks.
+        
+        Returns:
+            List of event lists, one per row (track)
+        """
+        tracks = []
+        for r in range(self.num_rows):
+            tracks.append(self.get_row_events(r))
+        return tracks
+
+    def get_track_length(self) -> int:
+        """Get the common track length in ticks.
+        
+        Returns:
+            Total ticks if all rows aligned, 0 otherwise
+        """
+        if self.validate_timing():
+            return self.get_row_length(0)
+        return 0
+
+    # ==================== MIDI EXPORT METHODS ====================
+
+    def to_midi_track_messages(self, row: int, program: int = 0, 
+                               channel: int = 0) -> List:
+        """Convert a row to MIDI messages with delta times.
+        
+        Args:
+            row: Row index (voice)
+            program: MIDI program number (0-127)
+            channel: MIDI channel (0-15)
+            
+        Returns:
+            List of mido.Message objects ready for MIDI track
+        """
+        events = self.get_row_events(row)
+        delta_events = TimeConverter.events_to_delta(events)
+        return TimeConverter.track_to_midi_messages(delta_events, program, channel)
+
+    # ==================== ROW TRANSFORMATIONS ====================
+
     def transpose_row(self, row: int, interval_: int):
         """Transpose (shift) the pitches of a row of units by a given interval.
         Args:

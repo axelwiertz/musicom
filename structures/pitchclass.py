@@ -5,7 +5,11 @@ from dataclasses import dataclass
 import networkx as nx
 from .base import Base
 from .pitch import MusicPitchClass, MusicPitchGrid
-from utilities import sequence_rotations, interval_to_step
+
+# Lazy import to avoid circular dependencies
+def _get_helpers():
+    from ..utilities.helpers import sequence_rotations, interval_to_step
+    return sequence_rotations, interval_to_step
 
 #TODO: Add methods for pattern manipulation, e.g., inversion, retrograde, etc.
 
@@ -287,12 +291,15 @@ class MusicPitchClassSet(Base):
         super().__init__(name)
         self._definition = definition
 
-        self._rotations = sequence_rotations(self.pitch_class_intervals)
+        # Use lazy import for helpers
+        sequence_rotations_func, interval_to_step_func = _get_helpers()
+        
+        self._rotations = sequence_rotations_func(self.pitch_class_intervals)
         self._rotation = rotation
 
         # Connect to absolute pitches
         self._pitches = MusicPitchGrid()
-        self._rotations_pitches = [interval_to_step(m) for m in self._rotations]
+        self._rotations_pitches = [interval_to_step_func(m) for m in self._rotations]
 
         self._initial = initial
 

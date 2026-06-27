@@ -95,6 +95,7 @@ packages = [
     "musicom.transformers",
     "musicom.utilities",
     "musicom.visualization",
+    "musicom.workflows",
 ]
 
 [tool.black]

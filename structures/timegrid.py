@@ -1,5 +1,4 @@
 """Music Time Pattern Structures"""
-from visualization import Cycle
 
 class MusicTimeGrid:
     """Music Time Structure: meter and tempo"""
@@ -21,8 +20,6 @@ class MusicTimeGrid:
         self.beat_start_ticks = beat_start_ticks if beat_start_ticks else [i * (self.ticks_per_cycle // self.beats_per_cycle) for i in range(self.beats_per_cycle)]
         ### Notation: note value that gets the beat
         self.beat_note = beat_note if beat_note else 4  # Default to quarter note
-        # Time cycle for visualization
-        self._cycle = Cycle(ticks_per_cycle, labels=[str(i+1) for i in range(ticks_per_cycle)])
 
     @classmethod
     def default_time_grid(cls) -> "MusicTimeGrid":
@@ -36,10 +33,6 @@ class MusicTimeGrid:
     @property
     def ticks_per_beat(self):
         return self.ticks_per_cycle // self.beats_per_cycle
-
-    def show(self):
-        # Show time cycle
-        self._cycle.show(title=f'Music Time Cycle: {self.ticks_per_cycle} ticks per cycle')
 
     def scale(self, scale_factor: float):
         """Scale the time signature and tempo of a MusicTimeGrid by a given factor."""
@@ -69,10 +62,8 @@ class MusicRhythmPattern:
         }
 
 
-
     def __init__(self, time_grid: MusicTimeGrid, name: str = 'Simple'):
         self.time_grid = time_grid
         self.name = name
         self.onset_intervals = self._dict.get(name)
-
 
