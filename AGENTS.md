@@ -1,0 +1,104 @@
+# AGENTS.md — Musicom operating guide for AI agents
+
+Canonical, machine-facing entry point. Read this first before composing.
+If this file and README/QUICK_REFERENCE disagree, this file wins.
+
+## Environment (exact)
+
+| Thing | Value |
+|---|---|
+| Python env | `/opt/data/micromamba/envs/musicom/bin/python` |
+| Package | `musicom` 0.1.0, installed **editable** (`pip install -e ".[dev]"`) |
+| Repo root | `/opt/data/repos/musicom` |
+| SoundFont | `TimGM6mb.sf2` (via `/opt/data/micromamba/envs/musicom/bin/fluidsynth`) |
+
+## Import rules (do not guess)
+
+Flat layout — **top-level dirs ARE the packages**:
+
+```python
+from structures import MusicUnit, MusicEvent, UnitMatrix, MidiInstrument
+from workflows.unitmatrix_composer import UnitMatrixComposer, create_note_unit, create_chord_unit
+```
+
+- ✅ `from structures import ...`, `from workflows.unitmatrix_composer import ...`
+- ✅ `from musicom.ai.core.tet_system import ...` (legacy alias, works via `musicom_compat.pth`)
+- ❌ never `from ..structures import ...` (raises "beyond top-level package")
+- ❌ do NOT expect `from musicom import UnitMatrix` — the `musicom` name is an alias namespace only
+
+Imports are **cwd-independent** after the editable install.
+
+## Core model (memorize)
+
+- **Time is ABSOLUTE ticks.** `MusicEvent(pitch, volume, start_tick, end_tick)`.
+- `UnitMatrix`: rows = voices, cols = sections, cells = `MusicUnit`. **All rows MUST be equal length** — this is the zero-drift invariant.
+- Standard resolution: `ticks_per_beat=480`, `beats_per_bar=4` → `BAR = 1920` ticks.
+
+## The one true composition workflow
+
+```python
+from workflows.unitmatrix_composer import UnitMatrixComposer, create_note_unit
+from structures import MidiInstrument
+
+composer = UnitMatrixComposer(bpm=120, ticks_per_beat=480, beats_per_bar=4)
+composer.create_matrix(num_voices=N, num_sections=M)   # 1. shape
+composer.add_voice("Lead", program=MidiInstrument.FLUTE, channel=0)  # 2. voices
+composer.add_section("A", bars=1)                      # 3. sections
+composer.fill_voice_section("Lead", "A", create_note_unit(72, 1920))  # 4. fill cells
+ok, msg = composer.validate()                          # 5. zero-drift gate — MUST be True
+composer.to_midi("out.mid")                            # 6. export
+```
+
+Order: `create_matrix → add_voice → add_section → set_unit/fill_voice_section → validate → to_midi`.
+Tempo meta lives in track 0. Percussion is channel 9 (`MidiPercussion`).
+
+## Rendering MIDI → audio
+
+```bash
+PY=/opt/data/micromamba/envs/musicom/bin
+$PY/fluidsynth -ni -g 1.2 -F out.wav TimGM6mb.sf2 out.mid   # -g 1.2 prevents tail truncation
+ffmpeg -y -i out.wav out.ogg
+```
+
+## Output location (hard rule)
+
+All composition artifacts (`.mid`, `.wav`, `.ogg`) go in a dedicated project
+subfolder under `/opt/data/projects/Research/` (e.g.
+`/opt/data/projects/Research/outputs/<project>/`). **Never** write outputs into
+the repo or a raw root folder.
+
+## Verify-don't-trust (mandatory)
+
+After ANY MIDI/WAV write:
+
+```python
+import os
+assert os.path.getsize(path) > 40, "empty/corrupt output — regenerate"
+```
+
+Empty files historically appear as 16–22 bytes. `stat` and assert size every time.
+
+## Testing
+
+```bash
+cd /opt/data/repos/musicom
+/opt/data/micromamba/envs/musicom/bin/python -m pytest tests/ -q
+```
+
+Known: 3 test files (`test_generators.py`, `test_transformators.py`,
+`test_visualization.py`) fail collection on stale symbol names. Under repair.
+
+## Known code quirks (verified, awaiting fix)
+
+- `MusicEvent.duration` returns **0** when `start_tick == 0` (bad `and` guard in `structures/unit.py`). Compute `end_tick - start_tick` yourself if you need the true value.
+- `Counterpoint.has_crossing_voices()` has inverted return logic.
+- `MarkovChainGenerator.generate_unit_from_sequence()` calls a nonexistent `unit.append()`.
+- `utilities/config.py` `DEFAULT_PATH` is a Windows path.
+
+## Agent execution contract
+
+1. One task at a time, in order.
+2. After each task run the stated verify command; report the **real** output.
+3. If verify fails: stop, report honestly, never fabricate results.
+4. Outputs → `/opt/data/projects/Research/outputs/<project>/`.
+5. Commit after each logical phase.

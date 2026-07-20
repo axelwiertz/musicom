@@ -97,22 +97,29 @@ Multiple generator modules for creative composition:
 
 ### Install from source
 
+Musicom uses a **flat package layout** — the top-level directories
+(`structures/`, `workflows/`, `generators/`, ...) *are* the importable packages.
+
 ```bash
 git clone https://github.com/axelwiertz/musicom.git
 cd musicom
-pip install -e .
+pip install -e ".[dev]"     # editable install + pytest/pytest-cov
 ```
 
-### Install with development dependencies
+After install, imports work from any working directory:
 
-```bash
-pip install -e ".[dev]"
+```python
+from structures import MusicUnit, MusicEvent, UnitMatrix
+from workflows.unitmatrix_composer import UnitMatrixComposer
 ```
+
+> The legacy `from musicom.ai...` namespace style (merged `ai/` subtree) is kept
+> working by a compatibility alias, so both import styles resolve.
 
 ### Install dependencies only
 
 ```bash
-pip install music21 musicpy numpy scipy pandas matplotlib networkx
+pip install numpy mido scipy music21 networkx pandas matplotlib
 ```
 
 ### Core Dependencies
@@ -193,69 +200,71 @@ musicom/
 
 ## Quick Start
 
-### Basic Usage
+All snippets below are executed verbatim by the doc-verification script and pass.
+
+### 1. MusicEvent & MusicUnit
 
 ```python
-from musicom import MusicUnit, MusicEvent, MusicVoice, MusicSection
+from structures import MusicUnit, MusicEvent
 
-# Create a simple melody as MusicEvents
+# MusicEvent uses ABSOLUTE ticks: (pitch, volume, start_tick, end_tick)
 events = [
-    MusicEvent(pitch=60, volume=100, start_tick=0, end_tick=480),    # C4
-    MusicEvent(pitch=62, volume=100, start_tick=480, end_tick=960),  # D4
-    MusicEvent(pitch=64, volume=100, start_tick=960, end_tick=1440), # E4
-    MusicEvent(pitch=65, volume=100, start_tick=1440, end_tick=1920),# F4
+    MusicEvent(pitch=60, volume=100, start_tick=0,   end_tick=480),   # C4
+    MusicEvent(pitch=62, volume=100, start_tick=480, end_tick=960),   # D4
+    MusicEvent(pitch=64, volume=100, start_tick=960, end_tick=1440),  # E4
 ]
-
-# Create a MusicUnit from events
 melody = MusicUnit(events=events)
 
-# Or create from pitches only
-simple_melody = MusicUnit(pitches=[60, 62, 64, 65, 67])
+melody.pitches        # [60, 62, 64]
+melody.volumes        # [100, 100, 100]
+melody.len_ticks()    # 1440
+# NOTE: MusicEvent.duration returns 0 when start_tick == 0 (known quirk).
+
+# In-place unit operations
+melody.transpose(12)  # up an octave  -> pitches become [72, 74, 76]
+melody.retrograde()   # reverse event order
+melody.invert(60)     # mirror pitches around a pivot
 ```
 
-### Using Generators
+### 2. UnitMatrix (voices × sections)
 
 ```python
-from musicom.generators import PatternGenerator, MarkovChainGenerator
+from structures import UnitMatrix
 
-# Generate a pattern-based melody
-pattern_gen = PatternGenerator()
-pattern = pattern_gen.generate()
-
-# Generate using Markov chains
-markov_gen = MarkovChainGenerator()
-sequence = markov_gen.generate()
+matrix = UnitMatrix(shape=(2, 2))   # 2 voices (rows) x 2 sections (cols)
+matrix.set_unit((0, 0), melody)     # place a MusicUnit in a cell
+matrix.get_unit((0, 0))             # retrieve it
+matrix.validate_timing()            # True when all rows share equal length
 ```
 
-### Matrix-Based Composition
+### 3. UnitMatrixComposer — recommended workflow
+
+The composer guarantees **zero-drift**: every track is padded to identical
+absolute length before MIDI export.
 
 ```python
-from musicom import UnitMatrix, MusicUnit
+from workflows.unitmatrix_composer import (
+    UnitMatrixComposer, create_note_unit, create_chord_unit, create_empty_unit,
+)
+from structures import MidiInstrument
 
-# Create a compositional matrix
-matrix = UnitMatrix(voices=4, sections=8)
+composer = UnitMatrixComposer(bpm=120, ticks_per_beat=480, beats_per_bar=4)
+composer.create_matrix(num_voices=2, num_sections=1)
+composer.add_voice("Lead", program=MidiInstrument.FLUTE, channel=0)
+composer.add_voice("Bass", program=MidiInstrument.BASS,  channel=1)
+composer.add_section("A", bars=1)
 
-# Fill with musical units
-for voice in range(4):
-    for section in range(8):
-        unit = MusicUnit(pitches=[60 + voice * 4, 62 + voice * 4])
-        matrix.set_cell(voice, section, unit)
+BAR = 480 * 4  # ticks per bar
+composer.fill_voice_section("Lead", "A", create_note_unit(pitch=72, duration_ticks=BAR))
+composer.fill_voice_section("Bass", "A", create_note_unit(pitch=36, duration_ticks=BAR))
 
-# Apply transformations
-matrix.transpose_voice(0, 12)  # Transpose first voice up an octave
+ok, msg = composer.validate()       # (True, "OK") — zero-drift gate
+composer.to_midi("composition.mid") # export equal-length tracks
 ```
 
-### Analysis
-
-```python
-from musicom.analysis import score_analyze, piece_analyze
-
-# Analyze a Music21 score
-result = score_analyze(score)
-
-# Analyze a MusicPy piece
-result = piece_analyze(piece)
-```
+**Canonical order:** `create_matrix()` → `add_voice()` → `add_section()` →
+`set_unit()` / `fill_voice_section()` → `validate()` → `to_midi()`.
+Tempo meta goes in track 0. `MidiPercussion` lives on channel 9.
 
 ## Key Concepts
 
@@ -312,17 +321,21 @@ See the `examples/` directory for working examples:
 
 ## Testing
 
-Run the test suite:
+Run the test suite (from the repo root):
 
 ```bash
 pytest tests/
 ```
 
-Run with coverage:
+Run with coverage over the flat packages:
 
 ```bash
-pytest tests/ --cov=musicom --cov-report=html
+pytest tests/ --cov=structures --cov=workflows --cov=generators --cov-report=html
 ```
+
+> **Known state:** 3 test files (`test_generators.py`, `test_transformators.py`,
+> `test_visualization.py`) currently fail collection on stale symbol names
+> (e.g. `MusicPitch`). Tracked for the test-harness cleanup phase.
 
 ## Contributing
 

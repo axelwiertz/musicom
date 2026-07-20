@@ -1,291 +1,186 @@
 # Quick Reference Guide
 
+> Every code block here is executed verbatim by the doc-verification script
+> (`tests/test_docs_smoke.py` when present) and passes against the real API.
+
 ## Installation
 
+Flat package layout — top-level dirs are the packages.
+
 ```bash
-pip install -r requirements.txt
-pip install -e .
+pip install -e ".[dev]"
 ```
 
-## Basic Usage
-
-### 1. Create a Note
 ```python
-from musicom.structures import Note
-
-note = Note(pitch=60, duration=1.0, velocity=80, start_time=0.0)
-print(f"Pitch class: {note.pitch_class}")  # 0 (C)
-print(f"Octave: {note.octave}")  # 4
+from structures import MusicUnit, MusicEvent, UnitMatrix
+from workflows.unitmatrix_composer import UnitMatrixComposer
 ```
 
-### 2. Create a Chord
+## Core Concepts
+
+| Concept | Reality |
+|---|---|
+| Time | **Absolute ticks** (`start_tick`, `end_tick`), not relative durations |
+| `MusicEvent` | `(pitch, volume, start_tick, end_tick)`, numpy-backed |
+| `MusicUnit` | sequence of events in a structured numpy array |
+| `UnitMatrix` | rows = voices, cols = sections, cells = `MusicUnit` |
+| `UnitMatrixComposer` | high-level, zero-drift MIDI export workflow |
+
+## 1. MusicEvent
+
 ```python
-from musicom.structures import Chord, MAJOR_TRIAD
+from structures import MusicEvent
 
-# Method 1: From intervals
-chord = Chord.from_intervals(60, MAJOR_TRIAD, duration=1.0)
-
-# Method 2: From notes
-notes = [Note(60, 1.0), Note(64, 1.0), Note(67, 1.0)]
-chord = Chord(notes=notes, name="C Major")
+e = MusicEvent(pitch=60, volume=100, start_tick=0, end_tick=480)  # C4, one beat
+e.pitch        # 60
+e.volume       # 100
+e.start_tick   # 0
+e.end_tick     # 480
+# e.duration returns 0 when start_tick == 0 (known quirk); use end-start yourself.
 ```
 
-### 3. Create a Scale
-```python
-from musicom.structures import Scale, MAJOR_SCALE
+## 2. MusicUnit
 
-c_major = Scale(root=0, intervals=MAJOR_SCALE, name="C Major")
-pitches = c_major.get_pitches(octave=4, num_octaves=1)
-# [60, 62, 64, 65, 67, 69, 71] - C major scale
+```python
+from structures import MusicUnit, MusicEvent
+
+melody = MusicUnit(events=[
+    MusicEvent(60, 100, 0,    480),
+    MusicEvent(62, 100, 480,  960),
+    MusicEvent(64, 100, 960,  1440),
+])
+
+melody.pitches            # [60, 62, 64]
+melody.volumes            # [100, 100, 100]
+melody.pitch_intervals    # [2, 2]
+melody.onset_intervals    # [480, 480]
+melody.len_ticks()        # 1440
+len(melody)               # 3
+
+# In-place transformations
+melody.transpose(12)      # shift all pitches +12
+melody.retrograde()       # reverse event order
+melody.invert(60)         # mirror pitches around pivot 60
+melody.augment(2.0)       # scale durations x2
+
+# Utilities
+a, b = melody.split(1)    # two MusicUnits
+combined = a + b          # concatenate
+clone = melody.clone()
 ```
 
-### 4. Generate a Melody
+## 3. UnitMatrix
+
 ```python
-from musicom.generators import MelodyGenerator
+from structures import UnitMatrix
 
-gen = MelodyGenerator(c_major, seed=42)
-
-# Random melody
-melody = gen.generate_random(length=8)
-
-# Stepwise melody
-melody = gen.generate_stepwise(length=16, start_pitch=60)
-
-# Arpeggio
-arpeggio = gen.generate_arpeggio([0, 4, 7], root_pitch=60, repetitions=2)
+matrix = UnitMatrix(shape=(4, 8))     # 4 voices x 8 sections
+matrix.set_unit((0, 0), melody)       # (row, col) tuple
+matrix.get_unit((0, 0))               # -> MusicUnit or None
+matrix.get_all_row_lengths()          # list of per-row lengths in ticks
+matrix.validate_timing()              # True when all rows equal length
+matrix.get_track_length()             # total ticks
 ```
 
-### 5. Generate Chord Progression
-```python
-from musicom.generators import ChordProgressionGenerator
+## 4. UnitMatrixComposer (recommended)
 
-gen = ChordProgressionGenerator(key_root=0, is_major=True)
-chords = gen.generate_progression(num_chords=4)
-```
-
-### 6. Apply Transformations
 ```python
-from musicom.transformers import (
-    TranspositionTransformer,
-    TimeTransformer,
-    DynamicsTransformer
+from workflows.unitmatrix_composer import (
+    UnitMatrixComposer, create_note_unit, create_chord_unit, create_empty_unit,
 )
+from structures import MidiInstrument
 
-# Transpose
-transposed = TranspositionTransformer.transpose_note(note, semitones=5)
+composer = UnitMatrixComposer(bpm=120, ticks_per_beat=480, beats_per_bar=4)
+composer.create_matrix(num_voices=3, num_sections=1)
 
-# Time stretch
-stretched = TimeTransformer.time_stretch(melody, factor=2.0)
+composer.add_voice("Lead",  program=MidiInstrument.FLUTE,          channel=0)
+composer.add_voice("Chord", program=MidiInstrument.STRING_ENSEMBLE, channel=1)
+composer.add_voice("Bass",  program=MidiInstrument.BASS,           channel=2)
+composer.add_section("A", bars=1)
 
-# Add crescendo
-with_crescendo = DynamicsTransformer.add_crescendo(melody, 40, 100)
+BAR = 480 * 4
+composer.fill_voice_section("Lead",  "A", create_note_unit(72, BAR))
+composer.fill_voice_section("Chord", "A", create_chord_unit([60, 64, 67], BAR))
+composer.fill_voice_section("Bass",  "A", create_note_unit(36, BAR))
 
-# Quantize
-quantized = TimeTransformer.quantize(melody, grid=0.25)
+ok, msg = composer.validate()          # (True, "OK")
+composer.to_midi("out.mid")            # zero-drift, equal-length tracks
+data = composer.to_midi_bytes()        # or get bytes directly
 ```
 
-### 7. Pattern Transformations
+**Canonical order:** `create_matrix()` → `add_voice()` → `add_section()` →
+`set_unit()` / `fill_voice_section()` → `validate()` → `to_midi()`.
+
+### Cell helpers
+
 ```python
-from musicom.transformers import PatternTransformer
-
-# Reverse
-reversed_melody = PatternTransformer.reverse(melody)
-
-# Retrograde (reverse pitches, keep rhythm)
-retrograde = PatternTransformer.retrograde(melody)
-
-# Inversion
-inverted = PatternTransformer.inversion(melody, axis=60)
+create_note_unit(pitch, duration_ticks, start_tick=0)   # single note
+create_chord_unit([p1, p2, p3], duration_ticks, start_tick=0)  # simultaneous
+create_empty_unit(duration_ticks)                        # silent rest (pitch=0)
 ```
 
-### 8. Validate with Rules
+### Pre-built form
+
 ```python
-from musicom.rules import HarmonicRule, MelodicRule, ScaleRule
-
-# Check chord quality
-quality = HarmonicRule.identify_chord_quality(chord)
-
-# Analyze melodic contour
-contour = MelodicRule.analyze_contour(melody)
-
-# Check if note is in scale
-is_valid = ScaleRule.check_note_in_scale(note, c_major)
+from workflows.unitmatrix_composer import create_blues_form_matrix
+composer, info = create_blues_form_matrix(bpm=80, num_bars=12)
+# info -> {'form': '12-bar blues', 'sections': [...], 'harmony': ['I','I',...]}
 ```
 
-### 9. Save to MIDI
+## 5. Generators
+
 ```python
-from musicom.io import MIDIHandler
-from musicom.structures import Sequence
-
-# Create sequence
-sequence = Sequence(events=melody, tempo=120.0, time_signature=(4, 4))
-
-# Save
-midi = MIDIHandler()
-midi.save_midi(sequence, "output.mid")
-
-# Load
-loaded = midi.load_midi("input.mid")
+from generators.markov import MarkovGenerator
+# See generators/ for: markov, genetic, stochastic, harmonics, rhythm,
+# pitchpattern, chord_degrees, schillinger, tendency_masking, markov_constraint.
 ```
 
-### 10. Piano Roll Representation
+## 6. Rules
+
 ```python
-from musicom.io import PianoRollHandler
-
-handler = PianoRollHandler()
-multitrack = handler.sequence_to_pianoroll(sequence, resolution=24)
-
-# Access piano roll matrix
-piano_roll = multitrack.tracks[0].pianoroll
-# Shape: (time_steps, 128)
+from rules.counterpoint import Counterpoint
+from rules.progression import PatternMovement, Scale7ChordDegree, MusicForm
 ```
 
-## Predefined Constants
+## MIDI Reference
 
-### Scales
-- `MAJOR_SCALE` = [0, 2, 4, 5, 7, 9, 11]
-- `MINOR_SCALE` = [0, 2, 3, 5, 7, 8, 10]
-- `HARMONIC_MINOR` = [0, 2, 3, 5, 7, 8, 11]
-- `MELODIC_MINOR` = [0, 2, 3, 5, 7, 9, 11]
-- `PENTATONIC_MAJOR` = [0, 2, 4, 7, 9]
-- `PENTATONIC_MINOR` = [0, 3, 5, 7, 10]
-- `BLUES_SCALE` = [0, 3, 5, 6, 7, 10]
-- `CHROMATIC_SCALE` = [0, 1, 2, ..., 11]
+### MidiInstrument (program numbers)
 
-### Chords
-- `MAJOR_TRIAD` = [0, 4, 7]
-- `MINOR_TRIAD` = [0, 3, 7]
-- `DIMINISHED_TRIAD` = [0, 3, 6]
-- `AUGMENTED_TRIAD` = [0, 4, 8]
-- `MAJOR_SEVENTH` = [0, 4, 7, 11]
-- `MINOR_SEVENTH` = [0, 3, 7, 10]
-- `DOMINANT_SEVENTH` = [0, 4, 7, 10]
-- `DIMINISHED_SEVENTH` = [0, 3, 6, 9]
+| Name | # |
+|---|---|
+| `PIANO` | 1 |
+| `CHURCH_ORGAN` | 20 |
+| `ACOUSTIC_GUITAR` | 25 |
+| `BASS` | 33 |
+| `VIOLIN` | 41 |
+| `STRING_ENSEMBLE` | 49 |
+| `TRUMPET` | 57 |
+| `FLUTE` | 74 |
+| `SYNTH_PAD` | 88 |
 
-## Pitch System (12TET)
+`MidiPercussion` (channel 9): `BASS_DRUM=36`, `ACOUSTIC_SNARE=38`,
+`CLOSED_HI_HAT=42`, `CRASH_CYMBAL=49`, `RIDE_CYMBAL=51`, `LOW_TOM=45`, ...
 
-### Pitch Classes
-- C = 0, C# = 1, D = 2, D# = 3
-- E = 4, F = 5, F# = 6, G = 7
-- G# = 8, A = 9, A# = 10, B = 11
+## Pitch System (12-TET)
 
-### MIDI Pitch Numbers
-- Middle C (C4) = 60
-- A440 (A4) = 69
-- Range: 0-127
+- C=0, C#=1, D=2, D#=3, E=4, F=5, F#=6, G=7, G#=8, A=9, A#=10, B=11
+- Middle C (C4) = 60, A440 (A4) = 69, range 0–127
+- `pitch_class = pitch % 12`, `octave = (pitch // 12) - 1`
 
-### Octave Calculation
-```python
-pitch_class = pitch % 12
-octave = (pitch // 12) - 1
-```
-
-## Common Workflows
-
-### Complete Composition
-```python
-# 1. Setup
-c_major = Scale(root=0, intervals=MAJOR_SCALE)
-melody_gen = MelodyGenerator(c_major, seed=42)
-chord_gen = ChordProgressionGenerator(key_root=0, is_major=True)
-
-# 2. Generate
-melody = melody_gen.generate_stepwise(16)
-chords = chord_gen.generate_progression(4)
-
-# 3. Transform
-melody = TimeTransformer.quantize(melody, grid=0.25)
-melody = DynamicsTransformer.add_crescendo(melody, 50, 90)
-
-# 4. Validate
-contour = MelodicRule.analyze_contour(melody)
-print(f"Contour: {contour}")
-
-# 5. Export
-sequence = Sequence(events=melody, tempo=120.0)
-MIDIHandler().save_midi(sequence, "composition.mid")
-```
-
-## Module Structure
-
-```
-musicom/
-├── structures/     # Note, Chord, Scale, Sequence
-├── generators/     # MelodyGenerator, ChordProgressionGenerator, etc.
-├── transformers/   # Transposition, Time, Dynamics, etc.
-├── io/            # MIDIHandler, MusicXMLHandler, PianoRollHandler
-└── rules/         # HarmonicRule, MelodicRule, etc.
-```
-
-## Running Examples
+## Rendering MIDI → Audio (headless)
 
 ```bash
-# Basic examples
-python examples.py
-
-# Advanced composition
-python advanced_example.py
-
-# Run tests
-python tests/test_musicom.py
-```
-
-## Tips
-
-1. **Use seeds** for reproducible random generation
-2. **Quantize** for precise timing on grid
-3. **Validate** with rules before export
-4. **Humanize** for natural feel
-5. **Check** notes are in scale with `ScaleRule`
-
-## Common Patterns
-
-### Creating Harmony
-```python
-# Harmonize at thirds and fifths
-harmonized = HarmonicTransformer.harmonize(melody, intervals=[4, 7])
-```
-
-### Creating Bass Line
-```python
-for chord in chords:
-    root = chord.root.pitch - 12  # Octave below
-    bass = gen.generate_arpeggio([0, 7], root, repetitions=2)
-```
-
-### Applying Swing
-```python
-from musicom.transformers import RhythmicTransformer
-swung = RhythmicTransformer.swing(melody, swing_ratio=0.67)
-```
-
-### Voice Leading
-```python
-from musicom.rules import VoiceLeadingRule
-smoothness = VoiceLeadingRule.smooth_voice_leading(chord1, chord2)
+# WAV via fluidsynth (boost gain to avoid decay-tail truncation)
+fluidsynth -ni -g 1.2 -F out.wav /path/to/soundfont.sf2 out.mid
+# WAV -> OGG via ffmpeg
+ffmpeg -y -i out.wav out.ogg
 ```
 
 ## Troubleshooting
 
-### Import Error
-```bash
-pip install -r requirements.txt
-```
-
-### Module Not Found
-```bash
-pip install -e .
-```
-
-### Music21 Setup
-```python
-import music21
-music21.configure.run()
-```
-
-## Next Steps
-
-- Check `INTEGRATION.md` for library integration details
-- See `examples.py` for basic usage
-- See `advanced_example.py` for complete workflow
-- Read `README.md` for full documentation
+| Symptom | Fix |
+|---|---|
+| `ModuleNotFoundError: structures` | `pip install -e ".[dev]"` from repo root |
+| `attempted relative import beyond top-level package` | use flat absolute imports (`from structures.base import Base`), not `..structures` |
+| MIDI file 16–22 bytes (empty) | export failed silently — `stat` file, assert size, regenerate |
+| Track length mismatch on `validate()` | pad rows to equal length; matrix is zero-drift only when rows match |
