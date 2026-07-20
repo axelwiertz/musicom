@@ -333,9 +333,9 @@ Run with coverage over the flat packages:
 pytest tests/ --cov=structures --cov=workflows --cov=generators --cov-report=html
 ```
 
-> **Known state:** 3 test files (`test_generators.py`, `test_transformators.py`,
-> `test_visualization.py`) currently fail collection on stale symbol names
-> (e.g. `MusicPitch`). Tracked for the test-harness cleanup phase.
+> **Suite status:** green — 25 passed, 1 documented skip. Includes a
+> golden-file MIDI regression harness (`tests/test_harness_golden.py`) that
+> locks in zero-drift, deterministic, non-empty exports.
 
 ## Contributing
 

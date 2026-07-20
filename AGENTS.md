@@ -85,8 +85,17 @@ cd /opt/data/repos/musicom
 /opt/data/micromamba/envs/musicom/bin/python -m pytest tests/ -q
 ```
 
-Known: 3 test files (`test_generators.py`, `test_transformators.py`,
-`test_visualization.py`) fail collection on stale symbol names. Under repair.
+Suite is **green** (25 passed, 1 documented skip). Key files:
+- `tests/test_harness_golden.py` — **zero-drift regression net**: a fixed
+  composition must export byte-identical MIDI (`GOLDEN_SHA256`), be deterministic,
+  non-empty, and have equal-length tracks. Update `GOLDEN_SHA256` only when the
+  export format changes *intentionally*.
+- `tests/test_phase2_bugfixes.py` — regression guards for the 5 fixed bugs.
+- `tests/test_docs_smoke.py` — proves documented code runs.
+
+1 skip: `test_pitch_class_set_and_graph` — `MusicPitchClassSet` construction is
+broken (`MusicPitchGrid()` called without required `pitches` arg, pitchclass.py:301).
+The pitch subsystem (`structures/pitch.py`) is minimal stubs pending completion.
 
 ## Known code quirks
 
