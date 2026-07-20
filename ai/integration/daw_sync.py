@@ -1,8 +1,10 @@
-import time
-import sys
+"""DAW clock / MTC sync bridge (Missing-Link Area 3).
 
-# Ensure repository path is loaded
-sys.path.insert(0, "/opt/data/repos/musicom")
+Emits MIDI Clock (0xF8, 24 PPQN) via a virtual mido port. Falls back to a
+headless simulation when no ALSA sequencer / virtual MIDI is available.
+"""
+import time
+
 
 class DAWClockBridge:
     """
@@ -27,14 +29,15 @@ class DAWClockBridge:
             self.fallback_mode = True
             print(f"MIDI Server running in Virtual Fallback mode (ALSA sequencer missing on sandbox).")
 
-    def run_clock(self, pulses_count: int = 96):
+    def run_clock(self, pulses_count: int = 96, dry_run: bool = False) -> int:
         """
         Runs the synchronizer loop.
         24 MIDI clock pulses (0xF8) are emitted per quarter note.
+        dry_run=True skips the real-time sleeps (for tests). Returns pulses sent.
         """
         pulse_interval = 60.0 / (self.bpm * 24.0)
         print(f"Streaming {pulses_count} pulses at {self.bpm} BPM (interval: {pulse_interval:.5f}s)...")
-        
+
         # Start command
         if not self.fallback_mode and self.outport:
             import mido
@@ -42,16 +45,19 @@ class DAWClockBridge:
         else:
             print(">>> [MIDI CLOCK START] (0xFA)")
 
+        sent = 0
         for i in range(pulses_count):
             if not self.fallback_mode and self.outport:
                 import mido
                 self.outport.send(mido.Message('clock'))
-            time.sleep(pulse_interval)
-            
+            sent += 1
+            if not dry_run:
+                time.sleep(pulse_interval)
+
             # Print beat alignments to feedback loop
             if i % 24 == 0:
                 print(f"=== [CLOCK SYNC] BEAT {i//24 + 1} (Pulse #{i}) ===")
-                
+
         # Stop command
         if not self.fallback_mode and self.outport:
             import mido
@@ -59,6 +65,7 @@ class DAWClockBridge:
         else:
             print(">>> [MIDI CLOCK STOP] (0xFC)")
         print("Clock stream complete.")
+        return sent
 
 if __name__ == "__main__":
     bridge = DAWClockBridge(bpm=120)

@@ -107,6 +107,19 @@ _All four Phase-1-era quirks are fixed as of Phase 2:_
 
 `MusicUnit` has **no** `append()` method — use `add_event(MusicEvent(...))`.
 
+## Missing-link features (Phase 4)
+
+- **Grid visualizer** — `ai/utils/visualizer.py`: `render_grid(matrix, ...)` returns
+  a █/░ density timeline (per-voice Density %); `write_grid_visualization(matrix, path)`
+  persists it (e.g. `.../Analysis/grid_visualization.txt`).
+- **Vocal guide synth** — `ai/generators/vocal_synth.py`: `FormantVocalGuide` renders
+  formant-filtered guide vocals. `render_syllable(freq, dur, vowel, path)` and
+  `render_melody(unit, path, vowels=[...])` (MusicUnit -> mono WAV). Sine fallback
+  when scipy is unavailable; stdlib `wave` fallback for writing.
+- **DAW clock bridge** — `ai/integration/daw_sync.py`: `DAWClockBridge(bpm).run_clock(pulses, dry_run=)`
+  emits MIDI Clock (24 PPQN) via virtual mido port; headless fallback prints markers.
+  Use `dry_run=True` in tests (skips real-time sleeps).
+
 ## Agent execution contract
 
 1. One task at a time, in order.
