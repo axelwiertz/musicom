@@ -174,7 +174,7 @@ class UnitMatrixComposer:
         return self.get_track_length_ticks() / self.ticks_per_bar
 
     def to_midi(self, output_path: str, include_tempo: bool = True) -> str:
-        """Export UnitMatrix to MIDI file.
+        """Export UnitMatrix to MIDI file with guaranteed zero-drift absolute alignment.
         
         Args:
             output_path: Path to save MIDI file
@@ -198,6 +198,7 @@ class UnitMatrixComposer:
             raise ValueError(f"Timing validation failed: {error}")
         
         # Create MIDI file
+        import mido
         mid = mido.MidiFile()
         mid.ticks_per_beat = self.ticks_per_beat
         
@@ -211,20 +212,44 @@ class UnitMatrixComposer:
             ))
             mid.tracks.append(tempo_track)
         
-        # Add one track per voice
+        total_ticks_expected = self.get_track_length_ticks()
+        
+        # Add one track per voice with strict absolute-to-delta milestone sorting and pad tails
         for voice in self.voices:
             track = mido.MidiTrack()
+            track.append(mido.Message('program_change', 
+                                     program=voice['program'], 
+                                     channel=voice['channel'], 
+                                     time=0))
             
-            # Get MIDI messages for this voice
-            messages = self.matrix.to_midi_track_messages(
-                voice['row'], 
-                program=voice['program'],
-                channel=voice['channel']
-            )
+            # Gather all absolute events for this voice across all sections
+            row_events = self.matrix.get_row_events(voice['row'])
             
-            for msg in messages:
-                track.append(msg)
+            timeline = []
+            for e in row_events:
+                if getattr(e, 'pitch', 0) == 0:  # Skip silent padding/resting placeholder events
+                    continue
+                timeline.append(('on', e.start_tick, e.pitch, getattr(e, 'volume', 100)))
+                timeline.append(('off', e.end_tick, e.pitch, 0))
+                
+            # Chronological sort: off triggers must strictly execute BEFORE on triggers on the same tick!
+            timeline.sort(key=lambda x: (x[1], 0 if x[0] == 'off' else 1))
             
+            curr_tick = 0
+            for action, tick, pitch, vel in timeline:
+                delta = tick - curr_tick
+                if action == 'on':
+                    track.append(mido.Message('note_on', note=pitch, velocity=vel, channel=voice['channel'], time=delta))
+                else:
+                    track.append(mido.Message('note_off', note=pitch, velocity=0, channel=voice['channel'], time=delta))
+                curr_tick = tick
+                
+            # Enforce absolute length equality down to the single tick by appending silent pad tail
+            remaining_ticks = total_ticks_expected - curr_tick
+            if remaining_ticks > 0:
+                track.append(mido.Message('note_on', note=0, velocity=0, channel=voice['channel'], time=remaining_ticks))
+                track.append(mido.Message('note_off', note=0, velocity=0, channel=voice['channel'], time=0))
+                
             mid.tracks.append(track)
         
         mid.save(output_path)

@@ -1,6 +1,6 @@
 """Module for analyzing counterpoint rules between two musical units."""
 import numpy as np
-from structures import MusicUnit
+from structures.unit import MusicUnit
 
 PERFECT_INTERVALS = {0, 5, 7, 12}  # Unison, Perfect Fourth, Perfect Fifth, Octave
 

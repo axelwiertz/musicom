@@ -1,5 +1,6 @@
 """Utility modules for musicom_ai."""
 
+from musicom.ai.utils.visualizer import print_high_contrast_grid
 from musicom.ai.utils.exceptions import (
     MusicomAIException,
     InvalidPitchError,
@@ -40,4 +41,5 @@ __all__ = [
     "DEFAULT_OCTAVE",
     "MIDI_RANGE",
     "VELOCITY_RANGE",
+    "print_high_contrast_grid",
 ]

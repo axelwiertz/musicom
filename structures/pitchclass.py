@@ -8,7 +8,7 @@ from .pitch import MusicPitchClass, MusicPitchGrid
 
 # Lazy import to avoid circular dependencies
 def _get_helpers():
-    from ..utilities.helpers import sequence_rotations, interval_to_step
+    from utilities.helpers import sequence_rotations, interval_to_step
     return sequence_rotations, interval_to_step
 
 #TODO: Add methods for pattern manipulation, e.g., inversion, retrograde, etc.

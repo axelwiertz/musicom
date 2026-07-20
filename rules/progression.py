@@ -142,6 +142,13 @@ class Scale7ChordDegree:
         SUBDOMINANT : [DOMINANT]                        # Subdominant to Dominant
              }
 
+    @staticmethod
+    def get_diatonic_note(key_root: int, scale_intervals: list, degree_index: int) -> int:
+        """Calculate the absolute MIDI pitch in a diatonic key without wrapping transposition errors."""
+        octave_shift = degree_index // 7
+        scale_step = degree_index % 7
+        return key_root + (octave_shift * 12) + scale_intervals[scale_step]
+
 
 class Scale7TriadDegree:
     # 7 Hepta scale - Triad degrees
