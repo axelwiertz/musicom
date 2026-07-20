@@ -163,7 +163,8 @@ class MusicUnit:
         else:
             intervals = []
             for i in range(len(pitches) - 1):
-                intervals.append(pitches[i+1] - pitches[i])
+                # cast to int: MusicEvent.pitch is uint8; raw subtraction overflows
+                intervals.append(int(pitches[i + 1]) - int(pitches[i]))
         return intervals
     @property
     def volumes(self) -> List[int]:

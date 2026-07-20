@@ -120,6 +120,18 @@ _All four Phase-1-era quirks are fixed as of Phase 2:_
   emits MIDI Clock (24 PPQN) via virtual mido port; headless fallback prints markers.
   Use `dry_run=True` in tests (skips real-time sleeps).
 
+## Companion workflows (Phase 5)
+
+- **Paradigm compare** — `workflows/paradigm_compare.py`:
+  `run_comparison(output_dir, bpm, seed)` generates the same slot three ways —
+  `stochastic` (seeded random), `rules` (diatonic stepwise), `nature`
+  (Schillinger resultant) — renders MIDI + grid per paradigm, writes a markdown
+  comparison table + a provenance sidecar for each. Run as a script to print the table.
+- **Provenance** — `workflows/provenance.py`: `write_provenance(artifact, classification,
+  generator, sources=, parameters=)` writes `<artifact>.provenance.json`
+  (classification ∈ human-made / ai-assisted / ai-generated, sha256, sources,
+  params, UTC time). `policy_warnings(record)` surfaces rights/monetization risks.
+
 ## Agent execution contract
 
 1. One task at a time, in order.
