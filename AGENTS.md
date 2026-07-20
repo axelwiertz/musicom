@@ -88,12 +88,15 @@ cd /opt/data/repos/musicom
 Known: 3 test files (`test_generators.py`, `test_transformators.py`,
 `test_visualization.py`) fail collection on stale symbol names. Under repair.
 
-## Known code quirks (verified, awaiting fix)
+## Known code quirks
 
-- `MusicEvent.duration` returns **0** when `start_tick == 0` (bad `and` guard in `structures/unit.py`). Compute `end_tick - start_tick` yourself if you need the true value.
-- `Counterpoint.has_crossing_voices()` has inverted return logic.
-- `MarkovChainGenerator.generate_unit_from_sequence()` calls a nonexistent `unit.append()`.
-- `utilities/config.py` `DEFAULT_PATH` is a Windows path.
+_All four Phase-1-era quirks are fixed as of Phase 2:_
+- ✅ `MusicEvent.duration` now returns `end_tick - start_tick` correctly (including when `start_tick == 0`).
+- ✅ `Counterpoint.has_crossing_voices()` returns `True` on a real crossing (both directions).
+- ✅ `MarkovChainGenerator.generate_unit_from_sequence()` and `StochasticGenerator.generate()` build events via `MusicUnit.add_event(MusicEvent(...))` with absolute ticks (no phantom `unit.append()`).
+- ✅ `utilities/config.py` `DEFAULT_PATH` is now cross-platform (`tempfile.gettempdir()/Music`).
+
+`MusicUnit` has **no** `append()` method — use `add_event(MusicEvent(...))`.
 
 ## Agent execution contract
 

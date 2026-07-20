@@ -3,6 +3,7 @@ import random
 import numpy as np
 from typing import List
 from structures import MusicUnit
+from structures.unit import MusicEvent
 from .base import MusicGenerator
 
 class StochasticGenerator(MusicGenerator):
@@ -20,13 +21,16 @@ class StochasticGenerator(MusicGenerator):
 
     def generate(self) -> MusicUnit:
         unit = MusicUnit()
+        tick = 0
         for i in range(self.length):
-            unit.append(random.choice(self.pitch_set),
-                          random.choice(self.duration_set),
-                            onset_interval=1,
-                            volume=random.randint(60, 100)
-                          )
-
+            duration = random.choice(self.duration_set)
+            unit.add_event(MusicEvent(
+                pitch=random.choice(self.pitch_set),
+                volume=random.randint(60, 100),
+                start_tick=tick,
+                end_tick=tick + duration,
+            ))
+            tick += duration
         return unit
 
 

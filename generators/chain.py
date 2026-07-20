@@ -4,7 +4,7 @@ import numpy as np
 from typing import Optional, List
 from numpy.typing import NDArray
 from collections import defaultdict
-from structures.unit import MusicUnit
+from structures.unit import MusicUnit, MusicEvent
 from generators.base import MusicGenerator
 
 class MarkovChainGenerator(MusicGenerator):
@@ -74,12 +74,14 @@ class MarkovChainGenerator(MusicGenerator):
             pitch_map = {0: 60, 1: 62, 2: 64}  # Default mapping
 
         unit = MusicUnit()
+        tick = 0
         for state in sequence:
             pitch = pitch_map.get(state, 60)  # Default to MIDI 60 if state not in map
-            unit.append(
+            unit.add_event(MusicEvent(
                 pitch=pitch,
-                duration=duration,
-                onset_interval=onset_interval,
-                volume=volume
-            )
+                volume=volume,
+                start_tick=tick,
+                end_tick=tick + duration,
+            ))
+            tick += onset_interval
         return unit

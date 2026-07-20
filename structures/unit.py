@@ -53,7 +53,7 @@ class MusicEvent:
         self.data = (self.data[self.PITCH], self.data[self.VOLUME], self.data[self.START_TICK], value)
     @property
     def duration(self) -> int:
-        if self.data[self.END_TICK] != 0 and self.data[self.START_TICK] != 0:
+        if self.data[self.END_TICK] > self.data[self.START_TICK]:
             return self.data[self.END_TICK] - self.data[self.START_TICK]
         return 0
 

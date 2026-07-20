@@ -36,13 +36,17 @@ class Counterpoint:
         return False
 
     def has_crossing_voices(self) -> bool:
-        """Check for crossing voices between two musical units."""
+        """Return True if the two voices cross between any adjacent positions.
+
+        Voices cross when their relative order flips: one voice starts below
+        the other and ends above it (or vice versa) across a step.
+        """
         for i in range(len(self._unit1) - 1):
             pitch1 = self._unit1.pitches[i]
             pitch2 = self._unit2.pitches[i]
-            next_pitch1 = self._unit1.pitches[i+1]
-            next_pitch2 = self._unit2.pitches[i+1]
-            if pitch1 < pitch2 and next_pitch1 > next_pitch2:
-                return False
-    
-        return True
+            next_pitch1 = self._unit1.pitches[i + 1]
+            next_pitch2 = self._unit2.pitches[i + 1]
+            if (pitch1 < pitch2 and next_pitch1 > next_pitch2) or \
+               (pitch1 > pitch2 and next_pitch1 < next_pitch2):
+                return True
+        return False

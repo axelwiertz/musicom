@@ -1,10 +1,13 @@
 """
 Configuration settings for music composition application.
 """
+import os
+import tempfile
+
 
 class Config:
-    # Default configuration
-    DEFAULT_PATH = 'C:\\temp\\Music\\'
+    # Default configuration (cross-platform temp dir; override as needed).
+    DEFAULT_PATH = os.path.join(tempfile.gettempdir(), 'Music')
     DEFAULT_MIDI_FILE_IN = 'in.mid'
     DEFAULT_MIDI_FILE_OUT = 'out.mid'
 

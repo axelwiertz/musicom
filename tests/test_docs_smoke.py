@@ -28,8 +28,8 @@ def test_musicunit_basics():
     assert melody.onset_intervals == [480, 480]
     assert melody.len_ticks() == 1440
     assert len(melody) == 3
-    # Known quirk: duration is 0 when start_tick == 0.
-    assert melody.durations == [0, 480, 480]
+    # duration is end_tick - start_tick (fixed in Phase 2).
+    assert melody.durations == [480, 480, 480]
 
 
 def test_musicunit_ops():
