@@ -1,27 +1,23 @@
-"""Low-memory formant vocal guide synthesizer (Missing-Link Area 1).
+"""Formant vocal synthesis engine.
 
-DEPRECATED: This module has been moved to sound/synthesis/vocal.py.
-This file re-exports for backward compatibility.
+Formant-filtered subtractive synthesis. Produces guide vocals carrying synthetic
+vowels without heavy DiffSinger RAM. Headless-safe; falls back to a plain sine
+carrier if scipy signal filtering is unavailable.
 """
 
-# Backward-compat re-export
-from sound.synthesis.vocal import FormantVocalGuide
-
-__all__ = ["FormantVocalGuide"]
-
-
-# Original implementation below (kept for reference, will be removed)
 import numpy as np
 
 try:
     import scipy.signal as signal
-    from scipy.io import wavfile
     _SCIPY = True
-except ImportError:          # pragma: no cover - fallback path
+except ImportError:
     _SCIPY = False
 
+from ..utils.io import write_wav
+from ..utils.pitch import midi_to_freq
 
-class _FormantVocalGuideLegacy:
+
+class FormantVocalGuide:
     """
     Formant-filtered additive/subtractive synthesis engine.
     Produces low-memory guide vocal sounds carrying synthetic vowels ('a', 'e', 'i', 'o', 'u')
@@ -87,33 +83,14 @@ class _FormantVocalGuideLegacy:
 
         return filtered_vocal
 
-    def _write_wav(self, path: str, audio_float: np.ndarray):
-        """Write float [-1,1] audio to 16-bit PCM WAV (scipy or stdlib wave)."""
-        audio_i16 = np.clip(audio_float, -1.0, 1.0)
-        audio_i16 = (audio_i16 * 32767).astype(np.int16)
-        if _SCIPY:
-            wavfile.write(path, self.sample_rate, audio_i16)
-        else:  # pragma: no cover - fallback path
-            import wave
-            with wave.open(path, "wb") as w:
-                w.setnchannels(1)
-                w.setsampwidth(2)
-                w.setframerate(self.sample_rate)
-                w.writeframes(audio_i16.tobytes())
-
     def render_syllable(self, frequency: float, duration: float, vowel: str,
                         output_path: str = "vocal_syllable.wav") -> str:
         """Compiles a single syllable of singing vocal and saves it."""
         carrier = self.generate_carrier(frequency, duration)
         vocal = self.apply_formant_filter(carrier, vowel)
-        self._write_wav(output_path, vocal)
+        write_wav(output_path, vocal, self.sample_rate, normalize=True)
         print(f"Guide vocal syllable '{vowel}' rendered at {frequency}Hz to {output_path}")
         return output_path
-
-    @staticmethod
-    def midi_to_freq(midi_pitch: int) -> float:
-        """MIDI note number -> frequency in Hz (A4=69=440Hz)."""
-        return 440.0 * (2.0 ** ((midi_pitch - 69) / 12.0))
 
     def render_melody(self, unit, output_path: str,
                       vowels=None, ticks_per_beat: int = 480, bpm: int = 120) -> str:
@@ -137,7 +114,7 @@ class _FormantVocalGuideLegacy:
             dur_ticks = e.end_tick - e.start_tick
             if dur_ticks <= 0:
                 continue
-            freq = self.midi_to_freq(e.pitch)
+            freq = midi_to_freq(e.pitch)
             vowel = vowels[i % len(vowels)]
             carrier = self.generate_carrier(freq, dur_ticks * sec_per_tick)
             vocal = self.apply_formant_filter(carrier, vowel)
@@ -148,7 +125,7 @@ class _FormantVocalGuideLegacy:
         peak = np.max(np.abs(track))
         if peak > 0:
             track = track / peak
-        self._write_wav(output_path, track)
+        write_wav(output_path, track, self.sample_rate, normalize=True)
         print(f"Guide vocal melody ({len(events)} notes) rendered to {output_path}")
         return output_path
 

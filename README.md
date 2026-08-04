@@ -89,6 +89,18 @@ Multiple generator modules for creative composition:
 - Visual score rendering (notation display)
 - **MIDI instrument** and **percussion** mappings
 
+### 🔊 Sound Synthesis & Processing
+- **Modal synthesis** — ResonatorBank for physical modeling (marimba, bell, drum, string, etc.)
+- **Granular synthesis** — AperiodicGranulator for stochastic grain clouds
+- **Phase modulation** — PhaseModSynth and FDSSynth for wavetable-based FM
+- **Formant synthesis** — FormantVocalGuide for vowel synthesis
+- **Additive synthesis** — SoundWave with harmonic overtone control
+- **Audio effects** — AlgorithmicReverb (Schroeder), StateVariableFilter, BiquadFilter
+- **Audio analysis** — PitchDetector, BeatTracker, OnsetDetector, ChromaExtractor
+- **Generative patterns** — MarkovCore, StochasticCore, EuclideanCore, LSystemCore
+- **Rendering pipeline** — FluidSynth integration with stem rendering (per-track WAV export)
+- **DAW synchronization** — DAWClockBridge for MIDI clock sync
+
 ## Installation
 
 ### Prerequisites
@@ -137,15 +149,15 @@ pip install numpy mido scipy music21 networkx pandas matplotlib
 
 ```
 musicom/
-|├── ai/                   # AI-driven composition extension (merged from musicom_ai)
-|│   ├── core/             # 12-TET system, Note, Chord, Scale, Key
-|│   ├── generators/       # Melody, harmony, rhythm generators
-|│   ├── integration/      # Library bridge (Music21, MusicPy, PyPianoroll)
-|│   ├── io/               # MIDI, MusicXML, audio analysis I/O
-|│   ├── rules/            # Harmonic and voice-leading rules
-|│   ├── transformers/     # Pitch and rhythm transformers
-|│   └── utils/            # Constants, validators, helpers, logging
-|├── analysis/              # Music analysis tools (Music21 & MusicPy)
+├── ai/                   # AI-driven composition extension (merged from musicom_ai)
+│   ├── core/             # 12-TET system, Note, Chord, Scale, Key
+│   ├── generators/       # Melody, harmony, rhythm generators
+│   ├── integration/      # Library bridge (Music21, MusicPy, PyPianoroll)
+│   ├── io/               # MIDI, MusicXML, audio analysis I/O
+│   ├── rules/            # Harmonic and voice-leading rules
+│   ├── transformers/     # Pitch and rhythm transformers
+│   └── utils/            # Constants, validators, helpers, logging
+├── analysis/              # Music analysis tools (Music21 & MusicPy)
 │   ├── music21_analysis.py
 │   └── musicpy_analysis.py
 ├── converters/            # Format converters
@@ -166,6 +178,31 @@ musicom/
 │   ├── counterpoint.py   # Counterpoint rules
 │   ├── movement.py       # Scale degree movement
 │   └── progression.py    # Chord progressions
+├── sound/                 # Sound synthesis, effects, and analysis
+│   ├── synthesis/        # Synthesis engines
+│   │   ├── modal.py      # ResonatorBank, ModalSynth
+│   │   ├── granular.py   # AperiodicGranulator
+│   │   ├── phase_mod.py  # PhaseModSynth, FDSSynth
+│   │   ├── vocal.py      # FormantVocalGuide
+│   │   └── additive.py   # SoundWave
+│   ├── effects/          # Audio effects
+│   │   ├── reverb.py     # AlgorithmicReverb, Freeverb
+│   │   └── filter.py     # StateVariableFilter, BiquadFilter
+│   ├── analysis/         # Audio analysis
+│   │   ├── pitch.py      # PitchDetector
+│   │   ├── rhythm.py     # BeatTracker, OnsetDetector
+│   │   └── chroma.py     # ChromaExtractor
+│   ├── render/           # Audio rendering
+│   │   ├── fluidsynth.py # FluidSynthRenderer
+│   │   └── pipeline.py   # RenderPipeline (with stem rendering)
+│   ├── generators/       # Generative pattern engines
+│   │   └── event_core.py # MarkovCore, StochasticCore, EuclideanCore, LSystemCore
+│   ├── sync/             # DAW synchronization
+│   │   └── clock.py      # DAWClockBridge
+│   └── utils/            # Shared utilities
+│       ├── pitch.py      # Pitch conversion utilities
+│       ├── io.py         # Audio I/O (WAV read/write)
+│       └── envelope.py   # ADSR envelope generator
 ├── structures/            # Core data structures
 │   ├── base.py           # Base classes
 │   ├── instrument.py     # MIDI instruments

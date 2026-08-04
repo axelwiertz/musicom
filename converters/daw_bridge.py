@@ -1,3 +1,17 @@
+"""
+VST3 rendering bridge via DawDreamer.
+
+DEPRECATED: This module has been moved to sound/render/vst.py.
+This file re-exports for backward compatibility.
+"""
+
+# Backward-compat re-export
+from sound.render.vst import VSTRenderer
+
+__all__ = ["VSTRenderer", "render_vst_with_automation"]
+
+
+# Original implementation below (kept for reference, will be removed)
 import sys
 import os
 

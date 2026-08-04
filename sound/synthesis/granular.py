@@ -1,32 +1,16 @@
+"""Aperiodic Granular Synthesis Engine (SP-013).
+
+Splits audio into micro-sonic grains (10-100ms) and schedules them using stochastic,
+non-periodic (aperiodic) time intervals and jitter. Creates dense, evolving ambient
+textures and clouds.
 """
-Aperiodic Granular Synthesis (SP-013) Sound Production Engine
-
-DEPRECATED: This module has been moved to sound/synthesis/granular.py.
-This file re-exports for backward compatibility.
-"""
-
-# Backward-compat re-export
-from sound.synthesis.granular import AperiodicGranulator
-
-__all__ = ["AperiodicGranulator", "export_audio"]
-
-
-# Original implementation below (kept for reference, will be removed)
 
 import numpy as np
-import scipy.io.wavfile as wav
 import random
 import os
 
-def export_audio(matrix, path, format="wav", normalize=True):
-    """Stub audio export for interface compatibility."""
-    import os
-    if not os.path.exists(os.path.dirname(path)):
-        os.makedirs(os.path.dirname(path), exist_ok=True)
-    # Create empty WAV
-    with open(path, 'wb') as f:
-        f.write(b'RIFF....WAVEfmt ')  # minimal header
-    return True
+from ..utils.io import read_wav, write_wav
+
 
 class AperiodicGranulator:
     """
@@ -48,17 +32,32 @@ class AperiodicGranulator:
                        grain_jitter_ms: float = 10.0) -> str:
         """
         Synthesizes an aperiodic granular cloud from a source WAV file.
+        
+        Args:
+            source_path: Path to source WAV file
+            output_path: Output WAV path
+            duration_sec: Output duration in seconds
+            grain_size_ms: Base grain size in milliseconds
+            density_grains_per_sec: Number of grains per second
+            pitch_shift_semi: Pitch shift in semitones
+            position_jitter_ms: Position jitter in milliseconds
+            grain_jitter_ms: Grain size jitter in milliseconds
+            
+        Returns:
+            Path to output WAV file
         """
         # Load source WAV
-        sr, data = wav.read(source_path)
-        if data.dtype == np.int16:
-            data = data.astype(np.float32) / 32768.0
-        elif data.dtype == np.int32:
-            data = data.astype(np.float32) / 2147483648.0
-            
-        # Convert stereo to mono for processing if needed
-        if len(data.shape) > 1:
-            data = np.mean(data, axis=1)
+        data, sr = read_wav(source_path)
+        
+        # Resample if needed
+        if sr != self.sample_rate:
+            # Simple linear resampling
+            ratio = self.sample_rate / sr
+            new_len = int(len(data) * ratio)
+            x_old = np.linspace(0, 1, len(data))
+            x_new = np.linspace(0, 1, new_len)
+            data = np.interp(x_new, x_old, data)
+            sr = self.sample_rate
 
         total_samples = int(duration_sec * self.sample_rate)
         output_buffer = np.zeros(total_samples, dtype=np.float32)
@@ -76,7 +75,7 @@ class AperiodicGranulator:
             
             # Apply position jitter
             pos_jitter_samples = int((random.uniform(-position_jitter_ms, position_jitter_ms) / 1000.0) * self.sample_rate)
-            source_idx = clip_idx(source_center_sample + pos_jitter_samples, 0, len(data) - 1)
+            source_idx = self._clip_idx(source_center_sample + pos_jitter_samples, 0, len(data) - 1)
             
             # Apply grain size jitter
             g_jitter_samples = int((random.uniform(-grain_jitter_ms, grain_jitter_ms) / 1000.0) * self.sample_rate)
@@ -116,12 +115,18 @@ class AperiodicGranulator:
         if max_val > 0:
             output_buffer = output_buffer / max_val * 0.9
             
-        # Write output WAV (16-bit PCM format)
-        out_data = (output_buffer * 32767.0).astype(np.int16)
-        os.makedirs(os.path.dirname(output_path), exist_ok=True)
-        wav.write(output_path, self.sample_rate, out_data)
+        # Write output WAV
+        write_wav(output_path, output_buffer, self.sample_rate, normalize=False)
         
         return output_path
+    
+    @staticmethod
+    def _clip_idx(val: int, low: int, high: int) -> int:
+        return min(max(val, low), high)
 
-def clip_idx(val: int, low: int, high: int) -> int:
-    return min(max(val, low), high)
+
+if __name__ == "__main__":
+    # Example usage
+    granulator = AperiodicGranulator()
+    # granulator.generate_cloud("source.wav", "cloud.wav", duration_sec=10.0)
+    print("AperiodicGranulator ready. Call generate_cloud(source, output, ...) to use.")
