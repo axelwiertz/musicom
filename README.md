@@ -96,6 +96,7 @@ Multiple generator modules for creative composition:
 - **Formant synthesis** — FormantVocalGuide for vowel synthesis
 - **Additive synthesis** — SoundWave with harmonic overtone control
 - **Audio effects** — AlgorithmicReverb (Schroeder), StateVariableFilter, BiquadFilter
+- **Mastering tools** — LUFSMeter (ITU-R BS.1770-4), DynamicEQ, StereoImager, Limiter, MasteringChain
 - **Audio analysis** — PitchDetector, BeatTracker, OnsetDetector, ChromaExtractor
 - **Generative patterns** — MarkovCore, StochasticCore, EuclideanCore, LSystemCore
 - **Rendering pipeline** — FluidSynth integration with stem rendering (per-track WAV export)
