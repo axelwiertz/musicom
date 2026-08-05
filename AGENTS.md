@@ -133,6 +133,13 @@ _All four Phase-1-era quirks are fixed as of Phase 2:_
   (classification ∈ human-made / ai-assisted / ai-generated, sha256, sources,
   params, UTC time). `policy_warnings(record)` surfaces rights/monetization risks.
 
+## Hermes agent knowledge base
+
+Agent-operational knowledge lives in `hermes_agent/` (composition + sound
+production workflows, SP method registry, surveillance findings, decision log).
+This file (AGENTS.md) stays the canonical guide; `hermes_agent/` extends it.
+See `hermes_agent/README.md`.
+
 ## Agent execution contract
 
 1. One task at a time, in order.
