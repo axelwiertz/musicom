@@ -1,265 +1,155 @@
+"""MusicXML export/import for UnitMatrix and MusicUnit.
+
+Writing uses the canonical absolute-tick model: each ``UnitMatrix`` row
+becomes a MusicXML part, and every ``MusicEvent`` becomes a note whose
+duration is derived from ``end_tick - start_tick``. ``music21`` is imported
+lazily so this module stays importable in minimal environments.
 """
-MusicXML I/O module using Music21.
 
-This module provides MusicXML file reading and writing capabilities.
-"""
+from __future__ import annotations
 
-from typing import Union, Optional
-from pathlib import Path
+import os
+from typing import TYPE_CHECKING, List
 
-from musicom.ai.core.structures import Note, Chord, Phrase, Score, Voice
-from musicom.ai.core.tet_system import Key
-from musicom.ai.utils.constants import DEFAULT_TEMPO, DEFAULT_TIME_SIGNATURE
-from musicom.ai.utils.exceptions import FileIOError
-from musicom.ai.utils.logging_config import get_logger
-
-logger = get_logger('musicxml_io')
+if TYPE_CHECKING:
+    from structures import UnitMatrix
 
 
-class MusicXMLReader:
-    """Read MusicXML files and convert to internal representation."""
-
-    def __init__(self):
-        """Initialize MusicXML reader."""
-        pass
-
-    def read(self, filepath: str) -> Union[Phrase, Score]:
-        """
-        Read MusicXML file and return internal representation.
-
-        Args:
-            filepath: Path to MusicXML file
-
-        Returns:
-            Phrase or Score object
-
-        Raises:
-            FileIOError: If file cannot be read
-        """
-        try:
-            import music21
-        except ImportError:
-            raise FileIOError(
-                "music21 is required for MusicXML reading. Install with: pip install music21"
-            )
-
-        try:
-            logger.info(f"Reading MusicXML file: {filepath}")
-            score = music21.converter.parse(filepath)
-
-            # Extract metadata
-            tempo = DEFAULT_TEMPO
-            for element in score.flatten():
-                if isinstance(element, music21.tempo.MetronomeMark):
-                    tempo = element.number
-                    break
-
-            time_sig = DEFAULT_TIME_SIGNATURE
-            for element in score.flatten():
-                if isinstance(element, music21.meter.TimeSignature):
-                    time_sig = (element.numerator, element.denominator)
-                    break
-
-            # Extract key
-            key = None
-            for element in score.flatten():
-                if isinstance(element, music21.key.Key):
-                    key = Key(element.tonic.name, element.mode)
-                    break
-
-            # Check if multi-part score
-            parts = score.parts
-            if len(parts) > 1:
-                # Multi-voice score
-                voices = []
-                for i, part in enumerate(parts):
-                    phrase = self._parse_part(part, tempo, time_sig)
-                    instrument_name = part.partName if hasattr(part, 'partName') else f"Part {i+1}"
-                    voice = Voice(phrase, name=instrument_name)
-                    voices.append(voice)
-
-                title = score.metadata.title if score.metadata else None
-                composer = score.metadata.composer if score.metadata else None
-
-                return Score(
-                    voices,
-                    title=title,
-                    composer=composer,
-                    tempo=tempo,
-                    time_signature=time_sig,
-                    key=key
-                )
-            else:
-                # Single phrase
-                return self._parse_part(parts[0] if parts else score, tempo, time_sig)
-
-        except Exception as e:
-            raise FileIOError(f"Failed to read MusicXML file {filepath}: {str(e)}") from e
-
-    def _parse_part(self, part, tempo, time_sig):
-        """Parse Music21 part into Phrase."""
+def _require_music21():
+    try:
         import music21
+        return music21
+    except ImportError as e:
+        raise ImportError(
+            "music21 is required for MusicXML support. Install with: pip install music21"
+        ) from e
 
-        elements = []
 
-        for element in part.flatten().notesAndRests:
-            start_time = element.offset
+def _matrix_to_m21_score(matrix: "UnitMatrix", ticks_per_beat: int, bpm: float):
+    """Convert a UnitMatrix to a music21 Score (one part per row)."""
+    music21 = _require_music21()
 
-            if isinstance(element, music21.note.Note):
-                note = Note(
-                    pitch=element.pitch.midi,
-                    duration=element.duration.quarterLength,
-                    velocity=element.volume.velocity if element.volume.velocity else 64,
-                    start_time=start_time
-                )
-                elements.append(note)
+    score = music21.stream.Score()
+    tempo_mark = music21.tempo.MetronomeMark(number=bpm)
 
-            elif isinstance(element, music21.chord.Chord):
-                notes = []
-                for pitch in element.pitches:
-                    note = Note(
-                        pitch=pitch.midi,
-                        duration=element.duration.quarterLength,
-                        velocity=element.volume.velocity if element.volume.velocity else 64,
-                        start_time=start_time
-                    )
-                    notes.append(note)
-                chord = Chord(notes, duration=element.duration.quarterLength)
-                elements.append(chord)
+    num_rows, num_cols = matrix.data.shape
 
-        return Phrase(elements, tempo=tempo, time_signature=time_sig)
+    for r_idx in range(num_rows):
+        part = music21.stream.Part()
+        part.id = f"Voice_{r_idx}"
+        if r_idx == 0:
+            part.append(tempo_mark)
+
+        # Gather events across all cells of the row in absolute ticks
+        abs_events = []
+        cumulative_offset = 0
+        for c_idx in range(num_cols):
+            unit = matrix.get_unit((r_idx, c_idx))
+            if unit is not None:
+                for event in unit.events:
+                    if event.pitch <= 0:
+                        continue
+                    abs_events.append((
+                        cumulative_offset + event.start_tick,
+                        cumulative_offset + event.end_tick,
+                        event.pitch,
+                        event.volume,
+                    ))
+                cumulative_offset += unit.len_ticks()
+
+        abs_events.sort(key=lambda x: (x[0], x[1]))
+
+        for start, end, pitch, volume in abs_events:
+            note = music21.note.Note(pitch)
+            note.duration.quarterLength = (end - start) / ticks_per_beat
+            note.offset = start / ticks_per_beat
+            try:
+                note.volume.velocity = volume
+            except Exception:
+                pass
+            part.append(note)
+
+        score.append(part)
+
+    return score
+
+
+def export_musicxml(matrix: "UnitMatrix", path: str,
+                    ticks_per_beat: int = 480, bpm: float = 120.0) -> bool:
+    """
+    Export a UnitMatrix to a MusicXML file (one part per voice row).
+
+    Args:
+        matrix: UnitMatrix to export
+        path: Destination ``.musicxml`` / ``.xml`` path
+        ticks_per_beat: Ticks per quarter note used for the conversion
+        bpm: Tempo marking written into the score
+
+    Returns:
+        True on success
+    """
+    dir_name = os.path.dirname(path)
+    if dir_name:
+        os.makedirs(dir_name, exist_ok=True)
+
+    score = _matrix_to_m21_score(matrix, ticks_per_beat, bpm)
+    score.write('musicxml', fp=path)
+    return True
 
 
 class MusicXMLWriter:
-    """Write MusicXML files from internal representation."""
+    """Write MusicXML files from a UnitMatrix or a list of MusicUnits."""
 
-    def __init__(
-        self,
-        tempo: float = DEFAULT_TEMPO,
-        time_signature: tuple = DEFAULT_TIME_SIGNATURE
-    ):
+    def __init__(self, ticks_per_beat: int = 480, bpm: float = 120.0):
+        self.ticks_per_beat = ticks_per_beat
+        self.bpm = bpm
+
+    def write(self, matrix: "UnitMatrix", path: str) -> bool:
+        """Write a UnitMatrix to MusicXML."""
+        return export_musicxml(matrix, path, self.ticks_per_beat, self.bpm)
+
+
+class MusicXMLReader:
+    """Read MusicXML files into MusicUnits (one per part, absolute ticks)."""
+
+    def __init__(self, ticks_per_beat: int = 480):
+        self.ticks_per_beat = ticks_per_beat
+
+    def read(self, filepath: str) -> List["MusicUnit"]:
         """
-        Initialize MusicXML writer.
+        Read a MusicXML file and return one MusicUnit per part.
 
         Args:
-            tempo: Default tempo in BPM
-            time_signature: Default time signature
+            filepath: Path to the MusicXML file
+
+        Returns:
+            List of MusicUnit, one per part, with absolute tick timing
         """
-        self.tempo = tempo
-        self.time_signature = time_signature
+        from structures.unit import MusicUnit, MusicEvent
 
-    def write(
-        self,
-        element: Union[Phrase, Score],
-        filepath: str,
-        title: Optional[str] = None,
-        composer: Optional[str] = None
-    ):
-        """
-        Write musical element to MusicXML file.
+        music21 = _require_music21()
+        score = music21.converter.parse(filepath)
 
-        Args:
-            element: Phrase or Score to write
-            filepath: Output file path
-            title: Optional title
-            composer: Optional composer name
+        units: List[MusicUnit] = []
+        parts = score.parts if getattr(score, 'parts', None) else [score]
 
-        Raises:
-            FileIOError: If file cannot be written
-        """
-        try:
-            import music21
-        except ImportError:
-            raise FileIOError(
-                "music21 is required for MusicXML writing. Install with: pip install music21"
-            )
+        for part in parts:
+            unit = MusicUnit()
+            for el in part.recurse().notes:
+                if isinstance(el, music21.note.Note):
+                    start = int(round(el.offset * self.ticks_per_beat))
+                    end = start + int(round(el.duration.quarterLength * self.ticks_per_beat))
+                    velocity = 64
+                    try:
+                        velocity = el.volume.velocity or 64
+                    except Exception:
+                        pass
+                    unit.add_event(MusicEvent(
+                        pitch=el.pitch.midi,
+                        volume=velocity,
+                        start_tick=start,
+                        end_tick=end,
+                    ))
+            units.append(unit)
 
-        try:
-            logger.info(f"Writing MusicXML file: {filepath}")
-
-            if isinstance(element, Score):
-                # Multi-voice score
-                score = music21.stream.Score()
-
-                # Add metadata
-                if title or element.title:
-                    score.metadata = music21.metadata.Metadata()
-                    score.metadata.title = title or element.title
-                    if composer or element.composer:
-                        score.metadata.composer = composer or element.composer
-
-                # Add tempo
-                score.append(music21.tempo.MetronomeMark(number=element.tempo))
-
-                # Add time signature
-                ts = element.time_signature
-                score.append(music21.meter.TimeSignature(f"{ts.numerator}/{ts.denominator}"))
-
-                # Add key if available
-                if element.key:
-                    score.append(music21.key.Key(element.key.tonic.name, element.key.mode))
-
-                # Add each voice as a part
-                for voice in element.voices:
-                    part = self._create_part(voice.phrase)
-                    if voice.name:
-                        part.partName = voice.name
-                    score.append(part)
-
-                score.write('musicxml', fp=filepath)
-
-            elif isinstance(element, Phrase):
-                # Single phrase
-                part = self._create_part(element)
-
-                # Add metadata if provided
-                if title or composer:
-                    part.metadata = music21.metadata.Metadata()
-                    if title:
-                        part.metadata.title = title
-                    if composer:
-                        part.metadata.composer = composer
-
-                part.write('musicxml', fp=filepath)
-
-            logger.info(f"Successfully wrote MusicXML file: {filepath}")
-
-        except Exception as e:
-            raise FileIOError(f"Failed to write MusicXML file {filepath}: {str(e)}") from e
-
-    def _create_part(self, phrase: Phrase):
-        """Create Music21 Part from Phrase."""
-        import music21
-
-        part = music21.stream.Part()
-
-        # Add tempo
-        part.append(music21.tempo.MetronomeMark(number=phrase.tempo))
-
-        # Add time signature
-        ts = phrase.time_signature
-        part.append(music21.meter.TimeSignature(f"{ts.numerator}/{ts.denominator}"))
-
-        # Add notes and chords
-        for element in phrase.elements:
-            if isinstance(element, Note):
-                m21_note = music21.note.Note(
-                    element.get_midi_number(),
-                    quarterLength=element.duration
-                )
-                m21_note.volume.velocity = element.velocity
-                m21_note.offset = element.start_time
-                part.append(m21_note)
-
-            elif isinstance(element, Chord):
-                pitches = [note.get_midi_number() for note in element.notes]
-                m21_chord = music21.chord.Chord(
-                    pitches,
-                    quarterLength=element.duration
-                )
-                if element.notes:
-                    m21_chord.volume.velocity = element.notes[0].velocity
-                    m21_chord.offset = element.notes[0].start_time
-                part.append(m21_chord)
-
-        return part
+        return units

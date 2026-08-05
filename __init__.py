@@ -2,19 +2,23 @@
 Musicom - Music Composition Library
 A Python library for algorithmic music composition, analysis, and generation.
 
-Main modules:
-- structures: Core music data structures (MusicUnit, MusicVoice, MusicSection, etc.)
-- converters: Conversion between different music formats
-- generators: Music generation algorithms
-- rules: Music theory rules and harmony
+Flat package layout — each top-level directory is an importable package:
+
+- structures: Core music data structures (MusicUnit, MusicEvent, UnitMatrix, ...)
+- workflows: Composition workflows (UnitMatrixComposer, paradigm compare, provenance)
+- generators: Algorithmic music generators
+- rules: Music theory rules (counterpoint, progression, set theory, voice leading)
+- transformers: Musical transformations
+- converters: Format converters (MIDI, MusicXML, music21, musicpy)
+- sound: Synthesis, effects, analysis, rendering, and sync
+- visualization: Visual representations (grid, helix, cycle)
+- analysis: Music analysis tools
 - utilities: Helper utilities and configuration
-- ai: AI-driven generators, I/O, and library integration bridge
 """
 
 __version__ = '0.1.0'
 __author__ = 'Musicom Team'
 
-# Defer heavy imports to avoid circular/broken dependency issues at package level.
-# Subpackages remain importable directly:
-#   from musicom.ai.core.structures import Note, Phrase
-#   from musicom.ai.rules.theories import HarmonyRules
+# Subpackages are imported directly, e.g.:
+#   from structures import MusicUnit, MusicEvent, UnitMatrix
+#   from workflows.unitmatrix_composer import UnitMatrixComposer

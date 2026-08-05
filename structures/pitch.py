@@ -13,12 +13,14 @@ class MusicPitch:
         self.octave = (midi // 12) - 1
 
 class MusicPitchClass:
+    SIZE = 12
+
     def __init__(self, index: int):
         self.index = index % 12
 
 class MusicPitchGrid:
-    def __init__(self, pitches: list):
-        self.pitches = pitches
+    def __init__(self, pitches: list = None):
+        self.pitches = pitches if pitches is not None else []
 
 class MusicPitchRange:
     def __init__(self, start: int, end: int):

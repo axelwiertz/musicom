@@ -1,8 +1,8 @@
-"""Helper functions for musicom_ai."""
+"""Helper functions for musicom."""
 
 from typing import Union, List, Optional
-from musicom.ai.utils.constants import PITCH_CLASSES, ENHARMONIC_MAP, MIDI_RANGE
-from musicom.ai.utils.exceptions import InvalidPitchError
+from utilities.constants import PITCH_CLASSES, ENHARMONIC_MAP, MIDI_RANGE
+from utilities.exceptions import InvalidPitchError
 
 
 def normalize_pitch_name(pitch_name: str) -> str:

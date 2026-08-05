@@ -1,19 +1,19 @@
-"""Validation functions for musicom_ai."""
+"""Validation functions for musicom."""
 
 from typing import Union, List, Optional
-from musicom.ai.utils.constants import (
+from utilities.constants import (
     PITCH_CLASSES,
     MIDI_RANGE,
     VELOCITY_RANGE,
     SCALE_PATTERNS,
     CHORD_QUALITIES,
 )
-from musicom.ai.utils.exceptions import (
+from utilities.exceptions import (
     InvalidPitchError,
     InvalidDurationError,
     ValidationError,
 )
-from musicom.ai.utils.helpers import normalize_pitch_name
+from utilities.music_helpers import normalize_pitch_name
 
 
 def validate_pitch_class(pitch_class: str) -> bool:

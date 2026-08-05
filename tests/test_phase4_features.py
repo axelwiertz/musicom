@@ -9,6 +9,7 @@ from structures import UnitMatrix, MusicUnit, MusicEvent
 from visualization.grid import render_grid, write_grid_visualization
 from sound.synthesis.vocal import FormantVocalGuide
 from sound.sync.clock import DAWClockBridge
+from sound.utils.pitch import midi_to_freq
 
 
 def _sample_matrix():
@@ -42,8 +43,8 @@ def test_write_grid_visualization_file():
 
 # --- T4.2 vocal guide synth --------------------------------------------------
 def test_midi_to_freq():
-    assert abs(FormantVocalGuide.midi_to_freq(69) - 440.0) < 1e-6
-    assert abs(FormantVocalGuide.midi_to_freq(60) - 261.63) < 0.5
+    assert abs(midi_to_freq(69) - 440.0) < 1e-6
+    assert abs(midi_to_freq(60) - 261.63) < 0.5
 
 
 def test_render_syllable_wav():
@@ -74,8 +75,7 @@ def test_render_melody_wav_duration():
 # --- T4.3 DAW clock bridge ---------------------------------------------------
 def test_daw_clock_dry_run_counts_pulses():
     bridge = DAWClockBridge(bpm=120)
-    bridge.start_virtual_output()   # enters fallback in headless env
-    sent = bridge.run_clock(pulses_count=48, dry_run=True)
+    sent = bridge.run_clock(num_pulses=48, dry_run=True)
     assert sent == 48
 
 

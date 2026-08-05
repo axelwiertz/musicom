@@ -84,7 +84,7 @@ cd /opt/data/repos/musicom
 /opt/data/micromamba/envs/musicom/bin/python -m pytest tests/ -q
 ```
 
-Suite is **green** (25 passed, 1 documented skip). Key files:
+Suite is **green** (42 passed, 0 skipped). Key files:
 - `tests/test_harness_golden.py` — **zero-drift regression net**: a fixed
   composition must export byte-identical MIDI (`GOLDEN_SHA256`), be deterministic,
   non-empty, and have equal-length tracks. Update `GOLDEN_SHA256` only when the
@@ -92,9 +92,11 @@ Suite is **green** (25 passed, 1 documented skip). Key files:
 - `tests/test_phase2_bugfixes.py` — regression guards for the 5 fixed bugs.
 - `tests/test_docs_smoke.py` — proves documented code runs.
 
-1 skip: `test_pitch_class_set_and_graph` — `MusicPitchClassSet` construction is
-broken (`MusicPitchGrid()` called without required `pitches` arg, pitchclass.py:301).
-The pitch subsystem (`structures/pitch.py`) is minimal stubs pending completion.
+The previously skipped `test_pitch_class_set_and_graph` now runs: the
+`@dataclass` decorator was removed from the `PatternType`/`PatternCategory`
+enums (it broke enum hashing/equality) and `MusicPitchGrid()` accepts an
+optional `pitches` arg. The pitch subsystem (`structures/pitch.py`) remains
+minimal stubs pending completion.
 
 ## Known code quirks
 

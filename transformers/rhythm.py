@@ -1,19 +1,28 @@
-"""
-Rhythm transformation module.
+"""Rhythm transformation module.
 
-This module provides transformations for rhythmic operations.
+Transformations for rhythmic operations on ``MusicUnit`` using the canonical
+absolute-tick time model (``MusicEvent(pitch, volume, start_tick, end_tick)``).
 """
 
-from typing import Union, List
-from musicom.ai.core.structures import Note, Chord, Phrase, Rest
-from musicom.ai.utils.helpers import quantize_duration
-from musicom.ai.utils.logging_config import get_logger
+from structures.unit import MusicUnit, MusicEvent
+from utilities.logging_config import get_logger
+from .base import MusicTransformer
 
 logger = get_logger('rhythm_transformers')
 
 
-class RhythmicAugmentation:
-    """Stretch or compress rhythmic durations."""
+def _clone_with_events(unit: MusicUnit, transform_fn) -> MusicUnit:
+    """Build a new MusicUnit by applying ``transform_fn`` to each event."""
+    new_unit = MusicUnit()
+    for e in unit.events:
+        ne = transform_fn(e)
+        if ne is not None:
+            new_unit.add_event(ne)
+    return new_unit
+
+
+class RhythmicAugmentation(MusicTransformer):
+    """Stretch or compress rhythmic durations (and their positions)."""
 
     def __init__(self, factor: float):
         """
@@ -22,240 +31,149 @@ class RhythmicAugmentation:
         Args:
             factor: Augmentation factor (>1 = slower, <1 = faster)
         """
+        super().__init__(None)
         self.factor = factor
 
-    def transform(
-        self,
-        element: Union[Note, Chord, Phrase, List[Union[Note, Chord, Rest]]]
-    ) -> Union[Note, Chord, Phrase, List[Union[Note, Chord, Rest]]]:
+    def transform(self, unit: MusicUnit = None) -> MusicUnit:
         """
         Apply rhythmic augmentation/diminution.
 
         Args:
-            element: Musical element to transform
+            unit: MusicUnit to transform (falls back to the bound unit)
 
         Returns:
-            Transformed element with modified durations
+            Transformed MusicUnit with scaled ticks
         """
+        unit = unit or self._unit
         logger.info(f"Applying rhythmic augmentation with factor: {self.factor}")
 
-        if isinstance(element, Note):
-            return Note(
-                element.get_midi_number(),
-                element.duration * self.factor,
-                element.velocity,
-                articulation=element.articulation
+        def scale(e: MusicEvent) -> MusicEvent:
+            return MusicEvent(
+                pitch=e.pitch,
+                volume=e.volume,
+                start_tick=int(e.start_tick * self.factor),
+                end_tick=int(e.end_tick * self.factor),
             )
 
-        elif isinstance(element, Chord):
-            new_notes = [
-                Note(n.get_midi_number(), n.duration * self.factor, n.velocity)
-                for n in element.notes
-            ]
-            return Chord(new_notes, element.duration * self.factor, element.root)
-
-        elif isinstance(element, Rest):
-            return Rest(element.duration * self.factor)
-
-        elif isinstance(element, Phrase):
-            new_elements = []
-            for e in element.elements:
-                new_elements.append(self.transform(e))
-
-            return Phrase(
-                new_elements,
-                element.tempo,
-                (element.time_signature.numerator, element.time_signature.denominator)
-            )
-
-        elif isinstance(element, list):
-            return [self.transform(e) for e in element]
-
-        else:
-            raise TypeError(f"Cannot transform type: {type(element)}")
+        return _clone_with_events(unit, scale)
 
 
-class Quantizer:
-    """Quantize rhythmic durations to grid."""
+class Quantizer(MusicTransformer):
+    """Quantize event ticks to a fixed grid resolution."""
 
-    def __init__(self, resolution: int = 16):
+    def __init__(self, resolution_ticks: int = 120):
         """
         Initialize quantizer.
 
         Args:
-            resolution: Quantization resolution (16 = sixteenth notes, 8 = eighth notes, etc.)
+            resolution_ticks: Quantization grid in ticks (e.g. 120 = sixteenth
+                at 480 ticks/beat, 240 = eighth, 480 = quarter)
         """
-        self.resolution = resolution
+        super().__init__(None)
+        if resolution_ticks <= 0:
+            raise ValueError("resolution_ticks must be positive")
+        self.resolution_ticks = resolution_ticks
 
-    def transform(
-        self,
-        element: Union[Note, Chord, Phrase, List[Union[Note, Chord, Rest]]]
-    ) -> Union[Note, Chord, Phrase, List[Union[Note, Chord, Rest]]]:
+    def transform(self, unit: MusicUnit = None) -> MusicUnit:
         """
-        Apply quantization to rhythmic durations.
+        Apply quantization to event ticks.
 
         Args:
-            element: Musical element to quantize
+            unit: MusicUnit to quantize (falls back to the bound unit)
 
         Returns:
-            Quantized element
+            Quantized MusicUnit
         """
-        logger.info(f"Quantizing to resolution: {self.resolution}")
+        unit = unit or self._unit
+        logger.info(f"Quantizing to resolution: {self.resolution_ticks} ticks")
+        grid = self.resolution_ticks
 
-        if isinstance(element, Note):
-            quantized_duration = quantize_duration(element.duration, self.resolution)
-            return Note(
-                element.get_midi_number(),
-                quantized_duration,
-                element.velocity,
-                articulation=element.articulation
-            )
+        def quantize(e: MusicEvent) -> MusicEvent:
+            start = round(e.start_tick / grid) * grid
+            end = round(e.end_tick / grid) * grid
+            if end <= start:
+                end = start + grid
+            return MusicEvent(pitch=e.pitch, volume=e.volume,
+                              start_tick=start, end_tick=end)
 
-        elif isinstance(element, Chord):
-            quantized_duration = quantize_duration(element.duration, self.resolution)
-            new_notes = [
-                Note(n.get_midi_number(), quantized_duration, n.velocity)
-                for n in element.notes
-            ]
-            return Chord(new_notes, quantized_duration, element.root)
-
-        elif isinstance(element, Rest):
-            quantized_duration = quantize_duration(element.duration, self.resolution)
-            return Rest(quantized_duration)
-
-        elif isinstance(element, Phrase):
-            new_elements = []
-            for e in element.elements:
-                new_elements.append(self.transform(e))
-
-            return Phrase(
-                new_elements,
-                element.tempo,
-                (element.time_signature.numerator, element.time_signature.denominator)
-            )
-
-        elif isinstance(element, list):
-            return [self.transform(e) for e in element]
-
-        else:
-            raise TypeError(f"Cannot quantize type: {type(element)}")
+        return _clone_with_events(unit, quantize)
 
 
-class RhythmicDisplacement:
-    """Shift rhythmic positions by offset."""
+class RhythmicDisplacement(MusicTransformer):
+    """Shift event positions by a tick offset."""
 
-    def __init__(self, offset: float):
+    def __init__(self, offset_ticks: int):
         """
         Initialize rhythmic displacement.
 
         Args:
-            offset: Time offset in beats (can be negative)
+            offset_ticks: Offset in ticks (may be negative)
         """
-        self.offset = offset
+        super().__init__(None)
+        self.offset_ticks = offset_ticks
 
-    def transform(self, phrase: Phrase) -> Phrase:
+    def transform(self, unit: MusicUnit = None) -> MusicUnit:
         """
-        Apply rhythmic displacement to phrase.
+        Apply rhythmic displacement.
 
         Args:
-            phrase: Phrase to displace
+            unit: MusicUnit to displace (falls back to the bound unit)
 
         Returns:
-            Displaced phrase
+            Displaced MusicUnit
         """
-        logger.info(f"Displacing rhythm by {self.offset} beats")
+        unit = unit or self._unit
+        logger.info(f"Displacing rhythm by {self.offset_ticks} ticks")
 
-        new_elements = []
-        for element in phrase.elements:
-            # Create new element with displaced start time
-            if isinstance(element, Note):
-                new_note = Note(
-                    element.get_midi_number(),
-                    element.duration,
-                    element.velocity,
-                    articulation=element.articulation,
-                    start_time=element.start_time + self.offset
-                )
-                new_elements.append(new_note)
+        def displace(e: MusicEvent) -> MusicEvent:
+            return MusicEvent(
+                pitch=e.pitch,
+                volume=e.volume,
+                start_tick=max(0, e.start_tick + self.offset_ticks),
+                end_tick=max(0, e.end_tick + self.offset_ticks),
+            )
 
-            elif isinstance(element, Chord):
-                new_notes = []
-                for note in element.notes:
-                    new_note = Note(
-                        note.get_midi_number(),
-                        note.duration,
-                        note.velocity,
-                        start_time=note.start_time + self.offset
-                    )
-                    new_notes.append(new_note)
-                new_chord = Chord(new_notes, element.duration, element.root)
-                new_elements.append(new_chord)
-
-            elif isinstance(element, Rest):
-                new_rest = Rest(element.duration, element.start_time + self.offset)
-                new_elements.append(new_rest)
-
-        return Phrase(
-            new_elements,
-            phrase.tempo,
-            (phrase.time_signature.numerator, phrase.time_signature.denominator)
-        )
+        return _clone_with_events(unit, displace)
 
 
-class SwingTransformer:
-    """Apply swing feel to straight rhythms."""
+class SwingTransformer(MusicTransformer):
+    """Apply swing feel to straight rhythms by delaying off-beat events."""
 
-    def __init__(self, swing_ratio: float = 0.67):
+    def __init__(self, swing_ratio: float = 0.67, ticks_per_beat: int = 480):
         """
         Initialize swing transformer.
 
         Args:
-            swing_ratio: Swing ratio (0.5 = straight, 0.67 = standard swing, 0.75 = heavy swing)
+            swing_ratio: Swing ratio (0.5 = straight, 0.67 = standard swing,
+                0.75 = heavy swing)
+            ticks_per_beat: Resolution used to locate off-beats
         """
+        super().__init__(None)
         self.swing_ratio = swing_ratio
+        self.ticks_per_beat = ticks_per_beat
 
-    def transform(self, phrase: Phrase) -> Phrase:
+    def transform(self, unit: MusicUnit = None) -> MusicUnit:
         """
-        Apply swing feel to phrase.
+        Apply swing feel by delaying off-beat events.
 
         Args:
-            phrase: Phrase to swing
+            unit: MusicUnit to swing (falls back to the bound unit)
 
         Returns:
-            Swung phrase
+            Swung MusicUnit
         """
+        unit = unit or self._unit
         logger.info(f"Applying swing with ratio: {self.swing_ratio}")
 
-        new_elements = []
-        beat_duration = 4.0 / phrase.time_signature.denominator
+        half_beat = self.ticks_per_beat / 2.0
+        swing_offset = int(self.ticks_per_beat * (self.swing_ratio - 0.5))
 
-        for element in phrase.elements:
-            if isinstance(element, Note):
-                # Determine if note is on or off beat
-                beat_position = element.start_time % beat_duration
-                is_off_beat = abs(beat_position - beat_duration / 2) < 0.01
+        def swing(e: MusicEvent) -> MusicEvent:
+            beat_position = e.start_tick % self.ticks_per_beat
+            is_off_beat = abs(beat_position - half_beat) < 1e-6
+            start = e.start_tick + swing_offset if is_off_beat else e.start_tick
+            duration = e.end_tick - e.start_tick
+            return MusicEvent(pitch=e.pitch, volume=e.volume,
+                              start_tick=start, end_tick=start + duration)
 
-                if is_off_beat:
-                    # Delay off-beat notes
-                    swing_offset = beat_duration * (self.swing_ratio - 0.5)
-                    new_start = element.start_time + swing_offset
-
-                    new_note = Note(
-                        element.get_midi_number(),
-                        element.duration,
-                        element.velocity,
-                        articulation=element.articulation,
-                        start_time=new_start
-                    )
-                    new_elements.append(new_note)
-                else:
-                    new_elements.append(element)
-
-            else:
-                new_elements.append(element)
-
-        return Phrase(
-            new_elements,
-            phrase.tempo,
-            (phrase.time_signature.numerator, phrase.time_signature.denominator)
-        )
+        return _clone_with_events(unit, swing)

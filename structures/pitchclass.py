@@ -29,7 +29,6 @@ class Cardinality:
     UNDECA = 11
     DODECA = 12
 
-@dataclass(frozen=True)
 class PatternType(Enum):
     SCALE = auto()
 
@@ -75,7 +74,6 @@ class PatternType(Enum):
     CHROMATIC = auto()
 
 
-@dataclass(frozen=True)
 class PatternCategory(Enum):
     """Distinct categories of musical pattern types."""
     INTERVAL = auto()  # Dyads (2)

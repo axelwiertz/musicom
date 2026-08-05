@@ -1,12 +1,13 @@
-"""
-Voice leading rules module.
+"""Voice leading rules module.
 
-This module provides rules for voice leading validation and optimization.
+Rules for voice leading validation and optimization. Voices are modelled as
+sorted MIDI pitch lists (a chord = ``List[int]``), which keeps the module
+independent of any particular time model and compatible with the canonical
+absolute-tick structures.
 """
 
-from typing import List, Tuple, Dict, Any, Optional
-from musicom.ai.core.structures import Chord, Progression
-from musicom.ai.utils.logging_config import get_logger
+from typing import List, Tuple, Dict
+from utilities.logging_config import get_logger
 
 logger = get_logger('voice_leading_rules')
 
@@ -30,38 +31,38 @@ class VoiceLeadingRules:
 
     def check_parallel_motion(
         self,
-        chord1: Chord,
-        chord2: Chord
+        chord1: List[int],
+        chord2: List[int]
     ) -> List[str]:
         """
         Check for parallel fifths and octaves.
 
         Args:
-            chord1: First chord
-            chord2: Second chord
+            chord1: First chord as sorted MIDI pitches
+            chord2: Second chord as sorted MIDI pitches
 
         Returns:
             List of violation messages
         """
         violations = []
 
-        notes1 = sorted(chord1.notes, key=lambda n: n.get_midi_number())
-        notes2 = sorted(chord2.notes, key=lambda n: n.get_midi_number())
+        notes1 = sorted(chord1)
+        notes2 = sorted(chord2)
 
         # Check all voice pairs
         for i in range(len(notes1)):
             for j in range(i + 1, len(notes1)):
                 if i < len(notes2) and j < len(notes2):
                     # Calculate intervals
-                    interval1 = notes1[j].get_midi_number() - notes1[i].get_midi_number()
-                    interval2 = notes2[j].get_midi_number() - notes2[i].get_midi_number()
+                    interval1 = notes1[j] - notes1[i]
+                    interval2 = notes2[j] - notes2[i]
 
                     # Check for parallel fifths
                     if not self.allow_parallel_fifths:
                         if interval1 % 12 == 7 and interval2 % 12 == 7:
                             # Both are perfect fifths
-                            motion1 = notes2[i].get_midi_number() - notes1[i].get_midi_number()
-                            motion2 = notes2[j].get_midi_number() - notes1[j].get_midi_number()
+                            motion1 = notes2[i] - notes1[i]
+                            motion2 = notes2[j] - notes1[j]
 
                             if motion1 == motion2 and motion1 != 0:
                                 violations.append(
@@ -71,8 +72,8 @@ class VoiceLeadingRules:
                     # Check for parallel octaves
                     if not self.allow_parallel_octaves:
                         if interval1 % 12 == 0 and interval2 % 12 == 0:
-                            motion1 = notes2[i].get_midi_number() - notes1[i].get_midi_number()
-                            motion2 = notes2[j].get_midi_number() - notes1[j].get_midi_number()
+                            motion1 = notes2[i] - notes1[i]
+                            motion2 = notes2[j] - notes1[j]
 
                             if motion1 == motion2 and motion1 != 0:
                                 violations.append(
@@ -81,12 +82,13 @@ class VoiceLeadingRules:
 
         return violations
 
-    def check_voice_crossing(self, chord: Chord) -> bool:
+    def check_voice_crossing(self, chord: List[int]) -> bool:
         """
         Check for voice crossing.
 
         Args:
-            chord: Chord to check
+            chord: Chord as a list of MIDI pitches (one entry per voice, in
+                notated voice order from lowest to highest)
 
         Returns:
             True if voice crossing detected
@@ -94,51 +96,50 @@ class VoiceLeadingRules:
         if self.allow_voice_crossing:
             return False
 
-        notes = chord.notes
-        for i in range(len(notes) - 1):
-            if notes[i].get_midi_number() > notes[i + 1].get_midi_number():
+        for i in range(len(chord) - 1):
+            if chord[i] > chord[i + 1]:
                 return True
 
         return False
 
     def optimize_voice_leading(
         self,
-        progression: Progression
-    ) -> Progression:
+        progression: List[List[int]]
+    ) -> List[List[int]]:
         """
-        Optimize voice leading in progression.
+        Optimize voice leading in a progression of chords.
 
         Args:
-            progression: Progression to optimize
+            progression: List of chords, each a list of MIDI pitches
 
         Returns:
-            Optimized Progression
+            Optimized progression
         """
         logger.info("Optimizing voice leading")
 
-        if len(progression.chords) < 2:
+        if len(progression) < 2:
             return progression
 
-        optimized_chords = [progression.chords[0]]
+        optimized_chords = [progression[0]]
 
-        for i in range(1, len(progression.chords)):
+        for i in range(1, len(progression)):
             prev_chord = optimized_chords[-1]
-            current_chord = progression.chords[i]
+            current_chord = progression[i]
 
             # Find best voicing
             best_chord = self._find_best_voicing(prev_chord, current_chord)
             optimized_chords.append(best_chord)
 
-        return Progression(optimized_chords, progression.key)
+        return optimized_chords
 
-    def _find_best_voicing(self, prev_chord: Chord, current_chord: Chord) -> Chord:
+    def _find_best_voicing(self, prev_chord: List[int], current_chord: List[int]) -> List[int]:
         """Find voicing that minimizes voice leading distance."""
-        # Try different inversions
+        # Try different rotations (inversions) of the chord
         best_chord = current_chord
         best_distance = self.calculate_voice_leading_distance(prev_chord, current_chord)
 
-        for inversion in range(1, min(4, len(current_chord.notes))):
-            inverted = current_chord.invert(inversion)
+        for inversion in range(1, min(4, len(current_chord))):
+            inverted = self._rotate_chord(current_chord, inversion)
             distance = self.calculate_voice_leading_distance(prev_chord, inverted)
 
             if distance < best_distance:
@@ -147,23 +148,33 @@ class VoiceLeadingRules:
 
         return best_chord
 
+    @staticmethod
+    def _rotate_chord(chord: List[int], steps: int) -> List[int]:
+        """Rotate chord voices upward, transposing wrapped notes up an octave."""
+        n = len(chord)
+        if n == 0:
+            return chord
+        steps = steps % n
+        rotated = chord[steps:] + [p + 12 for p in chord[:steps]]
+        return sorted(rotated)
+
     def calculate_voice_leading_distance(
         self,
-        chord1: Chord,
-        chord2: Chord
+        chord1: List[int],
+        chord2: List[int]
     ) -> float:
         """
         Calculate total voice leading distance.
 
         Args:
-            chord1: First chord
-            chord2: Second chord
+            chord1: First chord as sorted MIDI pitches
+            chord2: Second chord as sorted MIDI pitches
 
         Returns:
             Total distance in semitones
         """
-        notes1 = sorted([n.get_midi_number() for n in chord1.notes])
-        notes2 = sorted([n.get_midi_number() for n in chord2.notes])
+        notes1 = sorted(chord1)
+        notes2 = sorted(chord2)
 
         # Pad to same length
         max_len = max(len(notes1), len(notes2))
@@ -175,14 +186,14 @@ class VoiceLeadingRules:
 
     def validate_voice_ranges(
         self,
-        chord: Chord,
+        chord: List[int],
         ranges: Dict[str, Tuple[int, int]]
     ) -> List[str]:
         """
         Validate that voices are within specified ranges.
 
         Args:
-            chord: Chord to validate
+            chord: Chord as a list of MIDI pitches in voice order
             ranges: Dictionary of voice ranges (e.g., {'soprano': (60, 81)})
 
         Returns:
@@ -191,12 +202,11 @@ class VoiceLeadingRules:
         violations = []
 
         voice_names = list(ranges.keys())
-        for i, note in enumerate(chord.notes):
+        for i, midi in enumerate(chord):
             if i < len(voice_names):
                 voice_name = voice_names[i]
                 min_pitch, max_pitch = ranges[voice_name]
 
-                midi = note.get_midi_number()
                 if midi < min_pitch or midi > max_pitch:
                     violations.append(
                         f"{voice_name} out of range: {midi} (expected {min_pitch}-{max_pitch})"
@@ -206,15 +216,15 @@ class VoiceLeadingRules:
 
     def check_hidden_fifths(
         self,
-        chord1: Chord,
-        chord2: Chord
+        chord1: List[int],
+        chord2: List[int]
     ) -> List[str]:
         """
         Check for hidden (direct) fifths and octaves.
 
         Args:
-            chord1: First chord
-            chord2: Second chord
+            chord1: First chord as sorted MIDI pitches
+            chord2: Second chord as sorted MIDI pitches
 
         Returns:
             List of violation messages
@@ -224,18 +234,18 @@ class VoiceLeadingRules:
 
         violations = []
 
-        notes1 = sorted(chord1.notes, key=lambda n: n.get_midi_number())
-        notes2 = sorted(chord2.notes, key=lambda n: n.get_midi_number())
+        notes1 = sorted(chord1)
+        notes2 = sorted(chord2)
 
         # Check outer voices (soprano and bass)
         if len(notes1) >= 2 and len(notes2) >= 2:
             # Soprano
-            soprano1 = notes1[-1].get_midi_number()
-            soprano2 = notes2[-1].get_midi_number()
+            soprano1 = notes1[-1]
+            soprano2 = notes2[-1]
 
             # Bass
-            bass1 = notes1[0].get_midi_number()
-            bass2 = notes2[0].get_midi_number()
+            bass1 = notes1[0]
+            bass2 = notes2[0]
 
             # Check if both move in same direction
             soprano_motion = soprano2 - soprano1

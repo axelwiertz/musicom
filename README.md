@@ -126,8 +126,6 @@ from structures import MusicUnit, MusicEvent, UnitMatrix
 from workflows.unitmatrix_composer import UnitMatrixComposer
 ```
 
-> working by a compatibility alias, so both import styles resolve.
-
 ### Install dependencies only
 
 ```bash
@@ -318,7 +316,7 @@ Run with coverage over the flat packages:
 pytest tests/ --cov=structures --cov=workflows --cov=generators --cov-report=html
 ```
 
-> **Suite status:** green — 25 passed, 1 documented skip. Includes a
+> **Suite status:** green — 42 passed, 0 skipped. Includes a
 > golden-file MIDI regression harness (`tests/test_harness_golden.py`) that
 > locks in zero-drift, deterministic, non-empty exports.
 

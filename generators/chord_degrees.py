@@ -25,8 +25,8 @@ class ChordDegreeGenerator (MusicGenerator):
         self.pattern = pattern
         self.chord_degrees = chord_degrees
 
-    def generate(self) -> MusicUnit:
-        """Generate a MusicUnit with the chords corresponding to the specified chord degrees."""
+    def generate(self) -> List[MusicUnit]:
+        """Generate a list of MusicUnits with the chords corresponding to the specified chord degrees."""
         # mp
         unit = chord_to_unit (pattern_to_mpscale(self.pattern).chord_progression(
                 self.chord_degrees,
@@ -45,4 +45,4 @@ class ChordDegreeGenerator (MusicGenerator):
 
         unit += stream_to_unit(stream_in=stream1, time=self.time_grid)
 
-        return unit
+        return [unit]

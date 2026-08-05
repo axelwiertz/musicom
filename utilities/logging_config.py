@@ -1,4 +1,4 @@
-"""Logging configuration for musicom_ai."""
+"""Logging configuration for musicom."""
 
 import logging
 import sys
@@ -11,7 +11,7 @@ def setup_logging(
     format_string: Optional[str] = None
 ) -> logging.Logger:
     """
-    Set up logging configuration for musicom_ai.
+    Set up logging configuration for musicom.
     
     Args:
         level: Logging level (default: INFO)
@@ -25,7 +25,7 @@ def setup_logging(
         format_string = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
     
     # Create logger
-    logger = logging.getLogger('musicom.ai')
+    logger = logging.getLogger('musicom')
     logger.setLevel(level)
     
     # Remove existing handlers
@@ -60,7 +60,7 @@ def get_logger(name: str) -> logging.Logger:
     Returns:
         Logger instance
     """
-    return logging.getLogger(f'musicom.ai.{name}')
+    return logging.getLogger(f'musicom.{name}')
 
 
 # Default logger

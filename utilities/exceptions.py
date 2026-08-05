@@ -1,8 +1,8 @@
-"""Custom exceptions for musicom_ai."""
+"""Custom exceptions for musicom."""
 
 
 class MusicomAIException(Exception):
-    """Base exception for all musicom_ai exceptions."""
+    """Base exception for all musicom exceptions."""
 
     pass
 
