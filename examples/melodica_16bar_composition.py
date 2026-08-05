@@ -17,7 +17,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from converters.melodica_adapter import MelodicaExchangeNote, MelodicaToMatrixConverter
 from converters.midi_converter import export_midi
-from converters.audio import AperiodicGranulator, export_audio
+from sound.synthesis.granular import AperiodicGranulator
 from structures import UnitMatrix, MusicUnit
 
 def run_16bar_composition():

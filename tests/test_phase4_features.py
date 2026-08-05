@@ -6,9 +6,9 @@ import wave
 import numpy as np
 
 from structures import UnitMatrix, MusicUnit, MusicEvent
-from ai.utils.visualizer import render_grid, write_grid_visualization
-from ai.generators.vocal_synth import FormantVocalGuide
-from ai.integration.daw_sync import DAWClockBridge
+from visualization.grid import render_grid, write_grid_visualization
+from sound.synthesis.vocal import FormantVocalGuide
+from sound.sync.clock import DAWClockBridge
 
 
 def _sample_matrix():

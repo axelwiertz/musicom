@@ -36,7 +36,7 @@ e.pitch        # 60
 e.volume       # 100
 e.start_tick   # 0
 e.end_tick     # 480
-# e.duration returns 0 when start_tick == 0 (known quirk); use end-start yourself.
+e.duration     # 480
 ```
 
 ## 2. MusicUnit

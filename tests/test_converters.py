@@ -1,5 +1,5 @@
 """Test suite for converter functions in the converters package."""
-from converters.pitch import midi_to_freq, name_to_midi, freq_to_midi, midi_to_name, cents_between
+from sound.utils.pitch import midi_to_freq, name_to_midi, freq_to_midi, midi_to_name, cents_between
 
 def test_pitch():
     print("12-TET Pitch Frequencies:")

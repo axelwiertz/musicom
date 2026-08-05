@@ -2,7 +2,7 @@
 from structures import MusicPitchClass, MusicPitchClassSet, PatternType
 from structures import MidiInstrument, MusicLinearTime
 from structures import MusicUnit, MusicEvent
-from converters.pitch import midi_to_name
+from sound.utils.pitch import midi_to_name
 from musicpy import musicpy, structures
 
 

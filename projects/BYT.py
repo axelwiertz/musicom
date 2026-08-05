@@ -1,7 +1,7 @@
 """ Big Yellow Taxi Music Project """
 from structures import MusicPitchClass, PatternType, PatternRotation, UnitMatrix, MusicLinearTime
 from structures import MusicProject, MusicPitchClassSet, MusicTimeGrid, MusicUnit
-from converters.pitch import name_to_midi
+from sound.utils.pitch import name_to_midi
 from converters.musicpy_converter import unit_to_sound
 
 # Create project

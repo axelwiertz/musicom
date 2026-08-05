@@ -19,7 +19,7 @@ from typing import Dict, List
 
 from structures import MusicUnit, MusicEvent, MidiInstrument
 from workflows.unitmatrix_composer import UnitMatrixComposer
-from ai.utils.visualizer import write_grid_visualization
+from visualization.grid import write_grid_visualization
 from workflows.provenance import write_provenance, AI_GENERATED
 
 C_MAJOR = [60, 62, 64, 65, 67, 69, 71, 72]

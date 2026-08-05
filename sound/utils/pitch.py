@@ -107,12 +107,78 @@ def name_to_freq(note_name: str) -> float:
     return midi_to_freq(name_to_midi(note_name))
 
 
+def midi_to_pitch_class(midi_note: int) -> int:
+    """Convert MIDI note number to pitch class (0-11).
+    
+    Args:
+        midi_note: MIDI note number (0-127)
+        
+    Returns:
+        Pitch class (0-11, where C=0)
+    """
+    return midi_note % 12
+
+
+def name_to_pitch_class(note_name: str) -> int:
+    """Convert note name to pitch class (0-11).
+    
+    Args:
+        note_name: Note name (e.g., 'C4', 'F#3', 'Bb5')
+        
+    Returns:
+        Pitch class (0-11)
+    """
+    return midi_to_pitch_class(name_to_midi(note_name))
+
+
+def semitone_ratio(semitones: int = 1) -> float:
+    """Return frequency ratio for n semitones: 2^(n/12).
+    
+    Args:
+        semitones: Number of semitones (default: 1)
+        
+    Returns:
+        Frequency ratio
+    """
+    return pow(2.0, semitones / 12.0)
+
+
+def cents_between(f1: float, f2: float) -> float:
+    """Return difference in cents from f1 to f2 (positive if f2 > f1).
+    
+    Args:
+        f1: First frequency in Hz
+        f2: Second frequency in Hz
+        
+    Returns:
+        Difference in cents
+    """
+    return 1200.0 * log2(f2 / f1)
+
+
+def interval_cents(semitones: float) -> float:
+    """Return cents value for given semitone interval.
+    
+    Args:
+        semitones: Number of semitones (can be fractional)
+        
+    Returns:
+        Cents value
+    """
+    return semitones * 100.0
+
+
 __all__ = [
     "midi_to_freq",
     "freq_to_midi",
     "name_to_midi",
     "midi_to_name",
     "name_to_freq",
+    "midi_to_pitch_class",
+    "name_to_pitch_class",
+    "semitone_ratio",
+    "cents_between",
+    "interval_cents",
     "A4_FREQ",
     "A4_MIDI",
     "C0_MIDI",

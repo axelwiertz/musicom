@@ -5,7 +5,7 @@ import os
 sys.path.insert(0, '/opt/data/repos/musicom')
 
 from workflows.form_controller import FormPlanController
-from converters.daw_bridge import render_vst_with_automation
+from sound.render.vst import render_vst_with_automation
 
 def execute_pipeline():
     print("=== STARTING FULL MUSICOM RE-COMPOSITION PROTOCOL ===")
