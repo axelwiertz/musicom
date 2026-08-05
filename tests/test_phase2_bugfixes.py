@@ -55,7 +55,9 @@ def test_markov_generate_unit_from_sequence():
 
 def test_stochastic_generate():
     gen = StochasticGenerator(length=5, pitch_set=[60, 62, 64], duration_set=[240, 480])
-    unit = gen.generate()
+    units = gen.generate()
+    assert isinstance(units, list)
+    unit = units[0]
     assert isinstance(unit, MusicUnit)
     assert len(unit) == 5
     assert all(p in (60, 62, 64) for p in unit.pitches)

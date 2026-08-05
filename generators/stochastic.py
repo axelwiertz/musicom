@@ -19,7 +19,7 @@ class StochasticGenerator(MusicGenerator):
         self.pitch_set = pitch_set
         self.duration_set = duration_set
 
-    def generate(self) -> MusicUnit:
+    def generate(self) -> List[MusicUnit]:
         unit = MusicUnit()
         tick = 0
         for i in range(self.length):
@@ -31,7 +31,7 @@ class StochasticGenerator(MusicGenerator):
                 end_tick=tick + duration,
             ))
             tick += duration
-        return unit
+        return [unit]
 
 
 def random_number_sampling():

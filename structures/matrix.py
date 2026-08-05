@@ -179,6 +179,10 @@ class UnitMatrix:
         
         This is CRITICAL for MIDI export - all tracks must align.
         
+        Low-level structural check returning a bare boolean. For a user-facing
+        validation that also returns an error message, use
+        ``UnitMatrixComposer.validate()`` which returns ``(bool, str)``.
+        
         Returns:
             True if all rows have identical total tick count, False otherwise
         """

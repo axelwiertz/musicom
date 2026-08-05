@@ -22,7 +22,6 @@ from workflows.unitmatrix_composer import UnitMatrixComposer, create_note_unit, 
 ```
 
 - ✅ `from structures import ...`, `from workflows.unitmatrix_composer import ...`
-- ✅ `from musicom.ai.core.tet_system import ...` (legacy alias, works via `musicom_compat.pth`)
 - ❌ never `from ..structures import ...` (raises "beyond top-level package")
 - ❌ do NOT expect `from musicom import UnitMatrix` — the `musicom` name is an alias namespace only
 
@@ -85,7 +84,7 @@ cd /opt/data/repos/musicom
 /opt/data/micromamba/envs/musicom/bin/python -m pytest tests/ -q
 ```
 
-Suite is **green** (25 passed, 1 documented skip). Key files:
+Suite is **green** (42 passed, 0 skipped). Key files:
 - `tests/test_harness_golden.py` — **zero-drift regression net**: a fixed
   composition must export byte-identical MIDI (`GOLDEN_SHA256`), be deterministic,
   non-empty, and have equal-length tracks. Update `GOLDEN_SHA256` only when the
@@ -93,9 +92,11 @@ Suite is **green** (25 passed, 1 documented skip). Key files:
 - `tests/test_phase2_bugfixes.py` — regression guards for the 5 fixed bugs.
 - `tests/test_docs_smoke.py` — proves documented code runs.
 
-1 skip: `test_pitch_class_set_and_graph` — `MusicPitchClassSet` construction is
-broken (`MusicPitchGrid()` called without required `pitches` arg, pitchclass.py:301).
-The pitch subsystem (`structures/pitch.py`) is minimal stubs pending completion.
+The previously skipped `test_pitch_class_set_and_graph` now runs: the
+`@dataclass` decorator was removed from the `PatternType`/`PatternCategory`
+enums (it broke enum hashing/equality) and `MusicPitchGrid()` accepts an
+optional `pitches` arg. The pitch subsystem (`structures/pitch.py`) remains
+minimal stubs pending completion.
 
 ## Known code quirks
 
@@ -109,14 +110,14 @@ _All four Phase-1-era quirks are fixed as of Phase 2:_
 
 ## Missing-link features (Phase 4)
 
-- **Grid visualizer** — `ai/utils/visualizer.py`: `render_grid(matrix, ...)` returns
+- **Grid visualizer** — `visualization/grid.py`: `render_grid(matrix, ...)` returns
   a █/░ density timeline (per-voice Density %); `write_grid_visualization(matrix, path)`
   persists it (e.g. `.../Analysis/grid_visualization.txt`).
-- **Vocal guide synth** — `ai/generators/vocal_synth.py`: `FormantVocalGuide` renders
+- **Vocal guide synth** — `sound/synthesis/vocal.py`: `FormantVocalGuide` renders
   formant-filtered guide vocals. `render_syllable(freq, dur, vowel, path)` and
   `render_melody(unit, path, vowels=[...])` (MusicUnit -> mono WAV). Sine fallback
   when scipy is unavailable; stdlib `wave` fallback for writing.
-- **DAW clock bridge** — `ai/integration/daw_sync.py`: `DAWClockBridge(bpm).run_clock(pulses, dry_run=)`
+- **DAW clock bridge** — `sound/sync/clock.py`: `DAWClockBridge(bpm).run_clock(pulses, dry_run=)`
   emits MIDI Clock (24 PPQN) via virtual mido port; headless fallback prints markers.
   Use `dry_run=True` in tests (skips real-time sleeps).
 

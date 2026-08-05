@@ -1,4 +1,4 @@
-"""Musical constants and enumerations for musicom_ai."""
+"""Musical constants and enumerations for musicom."""
 
 from typing import Dict, List, Tuple
 

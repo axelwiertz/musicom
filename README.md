@@ -11,7 +11,7 @@ Algorithmic and structured music composition is treated as a series of transform
 ## Features
 
 | 🎼 Core Music Theory
-- **12-Tone Equal Temperament (12-TET)** system implementation (in `musicom.ai.core.tet_system`)
+- **12-Tone Equal Temperament (12-TET)** system implementation (in `structures.pitchclass`)
 - **Chromatic pitches** management with helix representation
 - **Diatonic patterns** including scales, modes, chords (triads, seventh chords, extended chords)
 - **Music scales** with support for all 7 modes (Ionian, Dorian, Phrygian, Lydian, Mixolydian, Aeolian, Locrian)
@@ -126,9 +126,6 @@ from structures import MusicUnit, MusicEvent, UnitMatrix
 from workflows.unitmatrix_composer import UnitMatrixComposer
 ```
 
-> The legacy `from musicom.ai...` namespace style (merged `ai/` subtree) is kept
-> working by a compatibility alias, so both import styles resolve.
-
 ### Install dependencies only
 
 ```bash
@@ -150,83 +147,32 @@ pip install numpy mido scipy music21 networkx pandas matplotlib
 
 ```
 musicom/
-├── ai/                   # AI-driven composition extension (merged from musicom_ai)
-│   ├── core/             # 12-TET system, Note, Chord, Scale, Key
-│   ├── generators/       # Melody, harmony, rhythm generators
-│   ├── integration/      # Library bridge (Music21, MusicPy, PyPianoroll)
-│   ├── io/               # MIDI, MusicXML, audio analysis I/O
-│   ├── rules/            # Harmonic and voice-leading rules
-│   ├── transformers/     # Pitch and rhythm transformers
-│   └── utils/            # Constants, validators, helpers, logging
 ├── analysis/              # Music analysis tools (Music21 & MusicPy)
-│   ├── music21_analysis.py
-│   └── musicpy_analysis.py
 ├── converters/            # Format converters
-│   ├── midi_converter.py  # MIDI import/export
-│   ├── music21_*.py       # Music21 conversions
-│   ├── musicpy_converter.py
-│   └── ...
 ├── generators/            # Algorithmic generators
-│   ├── base.py           # Base generator class
-│   ├── chain.py          # Markov chain generator
-│   ├── chord_degrees.py  # Chord progression generator
-│   ├── genetic.py        # Genetic algorithm generator
-│   ├── harmonics.py      # Harmonic series generator
-│   ├── pitchpattern.py   # Pattern generator
-│   ├── rhythm.py         # Rhythm generator
-│   └── stochastic.py     # Stochastic generator
 ├── rules/                 # Music theory rules
-│   ├── counterpoint.py   # Counterpoint rules
-│   ├── movement.py       # Scale degree movement
-│   └── progression.py    # Chord progressions
 ├── sound/                 # Sound synthesis, effects, and analysis
-│   ├── synthesis/        # Synthesis engines
 │   │   ├── modal.py      # ResonatorBank, ModalSynth
 │   │   ├── granular.py   # AperiodicGranulator
 │   │   ├── phase_mod.py  # PhaseModSynth, FDSSynth
 │   │   ├── vocal.py      # FormantVocalGuide
 │   │   └── additive.py   # SoundWave
-│   ├── effects/          # Audio effects
 │   │   ├── reverb.py     # AlgorithmicReverb, Freeverb
 │   │   └── filter.py     # StateVariableFilter, BiquadFilter
-│   ├── analysis/         # Audio analysis
 │   │   ├── pitch.py      # PitchDetector
 │   │   ├── rhythm.py     # BeatTracker, OnsetDetector
 │   │   └── chroma.py     # ChromaExtractor
-│   ├── render/           # Audio rendering
 │   │   ├── fluidsynth.py # FluidSynthRenderer
 │   │   └── pipeline.py   # RenderPipeline (with stem rendering)
-│   ├── generators/       # Generative pattern engines
 │   │   └── event_core.py # MarkovCore, StochasticCore, EuclideanCore, LSystemCore
-│   ├── sync/             # DAW synchronization
 │   │   └── clock.py      # DAWClockBridge
-│   └── utils/            # Shared utilities
 │       ├── pitch.py      # Pitch conversion utilities
 │       ├── io.py         # Audio I/O (WAV read/write)
 │       └── envelope.py   # ADSR envelope generator
 ├── structures/            # Core data structures
-│   ├── base.py           # Base classes
-│   ├── instrument.py     # MIDI instruments
-│   ├── matrix.py         # UnitMatrix
-│   ├── pitch.py          # Pitch classes
-│   ├── pitchpattern.py   # Pitch patterns
-│   ├── project.py        # MusicSection, MusicVoice, MusicProject
-│   ├── time.py           # Time patterns
-│   ├── timepattern.py    # Rhythm patterns
-│   └── unit.py           # MusicEvent, MusicUnit
 ├── transformers/          # Musical transformations
-│   ├── canon.py          # Canon transformer
-│   ├── embellishment.py  # Embellishments
-│   ├── matrix.py         # Matrix operations
-│   ├── pitch.py          # Pitch transformations
-│   └── pitchsequence.py  # Serial transformations
 ├── visualization/         # Visual representations
-│   ├── cycle.py          # Pitch cycle visualization
-│   └── helix.py          # Pitch helix visualization
 ├── utilities/             # Helper utilities
-│   ├── config.py         # Configuration
-│   ├── helpers.py        # Helper functions
-│   └── music21_init.py   # Music21 initialization
 ├── examples/              # Example scripts
 ├── projects/              # Project notebooks
 ├── research/              # Research experiments
@@ -256,7 +202,6 @@ melody = MusicUnit(events=events)
 melody.pitches        # [60, 62, 64]
 melody.volumes        # [100, 100, 100]
 melody.len_ticks()    # 1440
-# NOTE: MusicEvent.duration returns 0 when start_tick == 0 (known quirk).
 
 # In-place unit operations
 melody.transpose(12)  # up an octave  -> pitches become [72, 74, 76]
@@ -371,7 +316,7 @@ Run with coverage over the flat packages:
 pytest tests/ --cov=structures --cov=workflows --cov=generators --cov-report=html
 ```
 
-> **Suite status:** green — 25 passed, 1 documented skip. Includes a
+> **Suite status:** green — 42 passed, 0 skipped. Includes a
 > golden-file MIDI regression harness (`tests/test_harness_golden.py`) that
 > locks in zero-drift, deterministic, non-empty exports.
 

@@ -12,11 +12,6 @@ This solves the track alignment problem where tracks had different lengths.
 
 from typing import List, Tuple, Optional, Dict, Any
 
-# Import structures - use absolute path since package structure is flat
-import sys
-import os
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
 from structures import (
     UnitMatrix, 
     MusicUnit, 
@@ -149,7 +144,12 @@ class UnitMatrixComposer:
         self.set_unit(voice['row'], section['column'], unit)
 
     def validate(self) -> Tuple[bool, str]:
-        """Validate matrix timing alignment.
+        """Validate matrix timing alignment (zero-drift gate).
+        
+        User-facing validation that wraps ``UnitMatrix.validate_timing()``
+        and returns a human-readable message. Use this in composition
+        workflows; use ``UnitMatrix.validate_timing()`` for low-level
+        structural checks.
         
         Returns:
             Tuple of (is_valid, error_message)

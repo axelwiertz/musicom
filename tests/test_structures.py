@@ -8,7 +8,7 @@ removed; when the pitch API is completed, add coverage back here.
 from structures import (
     MusicPitch, MusicPitchClass, MusicPitchGrid, MusicPitchRange, Direction,
     MusicTimeGrid, MusicLinearTime, MusicRhythmPattern,
-    MusicPitchClassSet, PatternType, PatternGraph,
+    MusicPitchClassSet, PatternType, PatternGraph, PatternRotation,
     MusicProject, MusicUnit, MusicVoice, UnitMatrix, MusicSection,
 )
 
@@ -43,11 +43,27 @@ def test_pitch_primitives():
 
 
 def test_pitch_class_set_and_graph():
-    import pytest
-    # KNOWN BROKEN (lib bug): MusicPitchClassSet.__init__ -> pitchclass.py:301
-    # calls MusicPitchGrid() with no args, but the current MusicPitchGrid stub
-    # requires a `pitches` arg. Skip until the pitch subsystem is completed.
-    pytest.skip("MusicPitchClassSet construction broken: MusicPitchGrid() needs pitches arg (pitchclass.py:301)")
+    # Major triad: intervals (4, 3, 5) rooted at pitch class 0 (C)
+    pcs = MusicPitchClassSet(name="Major", definition=PatternType.MAJOR,
+                             rotation=PatternRotation.root, initial=0)
+    assert pcs.cardinality == 3
+    assert pcs.pitch_classes == (4, 7, 0)
+    assert pcs.pitch_class_set() == frozenset({0, 4, 7})
+
+    # Heptatonic (major scale) rooted at C
+    scale = MusicPitchClassSet(name="Major Scale", definition=PatternType.HEPTATONIC,
+                               rotation=PatternRotation.ionian, initial=0)
+    assert scale.pitch_classes == (2, 4, 5, 7, 9, 11, 0)
+
+    # Triad is a subset of the major scale
+    assert pcs.is_subset_of(scale)
+    assert scale.is_superset_of(pcs)
+
+    # PatternGraph tracks subset relationships
+    graph = PatternGraph()
+    graph.add_pitch_class_set(scale)
+    graph.add_pitch_class_set(pcs)
+    graph.add_subset_relation(superset=scale, subset=pcs)
 
 
 def test_time_grid_and_linear_time():
