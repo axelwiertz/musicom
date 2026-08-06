@@ -15,6 +15,7 @@ Status: `implemented` = in sound/ package · `partial` = some pieces exist · `r
 | SP-022 | Wave Terrain Synthesis (WTS) | research | — (2D terrain scan) |
 | SP-032 | FDTD Physical Modeling | research | — (see methods KB; distinct from SP-003) |
 | SP-003 | Modal Physical Modeling (Plate/Bar) | implemented | sound/synthesis/modal.py |
+| — | Polyphonic Multi-Engine (Astrolab-style) | implemented | sound/synthesis/polysynth.py |
 | SP-004 | Formant Vocal Synthesis | implemented | sound/synthesis/vocal.py |
 | — | Additive Synthesis (SoundWave) | implemented | sound/synthesis/additive.py |
 

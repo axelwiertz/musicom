@@ -1,14 +1,11 @@
-"""Synthesis engines — sound generation methods.
-
-Modal synthesis, granular synthesis, phase modulation, additive synthesis,
-and vocal synthesis.
-"""
+"""Synthesis engines — sound generation methods."""
 
 from .modal import ResonatorBank, ModalSynth
 from .granular import AperiodicGranulator
 from .phase_mod import PhaseModSynth, FDSSynth
 from .additive import SoundWave, synthesize_wave
 from .vocal import FormantVocalGuide
+from .polysynth import PolyVoice, Oscillator, EnvelopeGenerator, LFO, MultimodeFilter, StepSequencer
 
 __all__ = [
     "ResonatorBank",
@@ -19,4 +16,10 @@ __all__ = [
     "SoundWave",
     "synthesize_wave",
     "FormantVocalGuide",
+    "PolyVoice",
+    "Oscillator",
+    "EnvelopeGenerator",
+    "LFO",
+    "MultimodeFilter",
+    "StepSequencer",
 ]
