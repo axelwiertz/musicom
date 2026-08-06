@@ -254,37 +254,53 @@ class MultimodeFilter:
         self.keytrack = 0.5  # How much pitch modulates cutoff
     
     def process(self, audio: np.ndarray, freq: float = 440.0,
-                envelope: Optional[np.ndarray] = None) -> np.ndarray:
-        """Apply filter to audio."""
+                envelope: Optional[np.ndarray] = None,
+                cutoff_mod: Optional[np.ndarray] = None) -> np.ndarray:
+        """Apply filter to audio.
+        
+        Args:
+            audio: Input signal
+            freq: Note frequency for key tracking
+            envelope: Envelope curve modulating cutoff
+            cutoff_mod: Optional per-sample cutoff multiplier curve (0-N)
+        """
         # Modulate cutoff
-        cutoff_mod = self.cutoff
+        cutoff_mod_base = self.cutoff
         
         # Key tracking
         if self.keytrack > 0:
-            cutoff_mod *= (freq / 440.0) ** self.keytrack
+            cutoff_mod_base *= (freq / 440.0) ** self.keytrack
         
         # Envelope modulation
         if envelope is not None and self.env_amount > 0:
-            cutoff_mod = cutoff_mod * (1 + envelope * self.env_amount * 2)
+            cutoff_mod_base = cutoff_mod_base * (1 + envelope * self.env_amount * 2)
+        
+        # Per-sample external cutoff modulation (e.g. aftertouch)
+        if cutoff_mod is not None:
+            if len(cutoff_mod) != len(audio):
+                cutoff_mod = np.interp(
+                    np.linspace(0, 1, len(audio)),
+                    np.linspace(0, 1, len(cutoff_mod)),
+                    cutoff_mod
+                )
+            cutoff_mod_base = cutoff_mod_base * cutoff_mod
         
         # Clip cutoff
-        cutoff_mod = np.clip(cutoff_mod, 20, self.sample_rate * 0.45)
+        cutoff_mod_base = np.clip(cutoff_mod_base, 20, self.sample_rate * 0.45)
         
         # Apply 4-pole filter (cascade 2 SVF stages)
         output = audio.copy()
         for _ in range(2):
-            output = self._svf_stage(output, cutoff_mod)
+            output = self._svf_stage(output, cutoff_mod_base)
         
         return output
     
     def _svf_stage(self, audio: np.ndarray, cutoff: np.ndarray) -> np.ndarray:
-        """Single SVF stage with time-varying cutoff."""
-        from scipy.signal import lfilter
-        
-        # For simplicity, use average cutoff for filter design
-        avg_cutoff = np.mean(cutoff)
-        
-        f = 2 * np.sin(np.pi * avg_cutoff / self.sample_rate)
+        """Single SVF stage with time-varying cutoff (per-sample coefficients)."""
+        cutoff_arr = np.atleast_1d(cutoff)
+        if cutoff_arr.size == 1:
+            cutoff_arr = np.full(len(audio), float(cutoff_arr[0]))
+        f = 2 * np.sin(np.pi * cutoff_arr / self.sample_rate)
         q = 1.0 - self.resonance
         
         n = len(audio)
@@ -297,8 +313,8 @@ class MultimodeFilter:
         
         for i in range(n):
             hp[i] = audio[i] - lp_prev - q * bp_prev
-            bp[i] = bp_prev + f * hp[i]
-            lp[i] = lp_prev + f * bp[i]
+            bp[i] = bp_prev + f[i] * hp[i]
+            lp[i] = lp_prev + f[i] * bp[i]
             lp_prev = lp[i]
             bp_prev = bp[i]
         
@@ -349,6 +365,84 @@ class StepSequencer:
 
 
 # =============================================================================
+# Arpeggiator
+# =============================================================================
+
+class Arpeggiator:
+    """16-step arpeggiator with direction modes and octave spans.
+    
+    Modes: up, down, up_down, down_up, random, as_played
+    """
+    
+    MODES = ['up', 'down', 'up_down', 'down_up', 'random', 'as_played']
+    
+    def __init__(self, sample_rate: int = 44100):
+        self.sample_rate = sample_rate
+        self.mode = 'up'
+        self.octaves = 1          # how many octaves to span
+        self.gate_percent = 0.8   # note gate as fraction of step
+        self.division = 4         # steps per beat (4 = 16th notes)
+        self.latch = False        # keep notes after keys released
+    
+    def _order(self, notes: List[int]) -> List[int]:
+        """Return note sequence for current mode."""
+        if self.mode == 'up':
+            return sorted(notes) * self.octaves if self.octaves == 1 else self._spread_octaves(sorted(notes))
+        elif self.mode == 'down':
+            return self._spread_octaves(sorted(notes, reverse=True))
+        elif self.mode == 'up_down':
+            asc = self._spread_octaves(sorted(notes))
+            return asc + asc[-2:0:-1]
+        elif self.mode == 'down_up':
+            desc = self._spread_octaves(sorted(notes, reverse=True))
+            return desc + desc[-2:0:-1]
+        elif self.mode == 'random':
+            import random
+            base = self._spread_octaves(sorted(notes))
+            seq = base[:]
+            random.shuffle(seq)
+            return seq
+        else:  # as_played
+            return self._spread_octaves(list(notes))
+    
+    def _spread_octaves(self, notes: List[int]) -> List[int]:
+        """Spread notes across octave range."""
+        result = []
+        for oct in range(self.octaves):
+            result.extend([n + 12 * oct for n in notes])
+        return result
+    
+    def generate(self, notes: List[int], bpm: float = 120.0,
+                 total_steps: int = 16) -> List[dict]:
+        """Generate arpeggiator note events.
+        
+        Args:
+            notes: MIDI notes held (keys down)
+            bpm: Tempo
+            total_steps: Number of arp steps to generate
+            
+        Returns:
+            List of {midi, start_sec, duration_sec, velocity} events
+        """
+        if not notes:
+            return []
+        
+        sequence = self._order(notes)
+        step_duration = (60.0 / bpm) / self.division
+        
+        events = []
+        for i in range(total_steps):
+            midi = sequence[i % len(sequence)]
+            events.append({
+                'midi': midi,
+                'start_sec': i * step_duration,
+                'duration_sec': step_duration * self.gate_percent,
+                'velocity': 100
+            })
+        return events
+
+
+# =============================================================================
 # Poly Voice
 # =============================================================================
 
@@ -387,16 +481,51 @@ class PolyVoice:
         self.gain = 0.7
         self.pan = 0.0
     
-    def render_note(self, freq: float, duration: float) -> np.ndarray:
-        """Render a single note."""
+    def render_note(self, freq: float, duration: float,
+                    aftertouch_curve: Optional[np.ndarray] = None,
+                    aftertouch_target: str = 'filter_cutoff') -> np.ndarray:
+        """Render a single note.
+        
+        Args:
+            freq: Note frequency (Hz)
+            duration: Duration (seconds)
+            aftertouch_curve: Optional polyphonic aftertouch pressure curve
+                (0-1 over the note duration). Offline emulation of channel/
+                poly pressure — modulates the chosen target.
+            aftertouch_target: 'filter_cutoff', 'osc_level', or 'pitch_cents'
+        """
         n_samples = int(duration * self.sample_rate)
         
         # Generate envelopes
         amp_env = self.env1.generate(duration)
         filter_env = self.env2.generate(duration)
         
-        # Generate oscillators
-        osc1_signal = self.osc1.generate(freq, n_samples)
+        # Prepare per-sample aftertouch modulation curves
+        cutoff_mod = None
+        gain_curve = None
+        pitch_curve = None
+        
+        if aftertouch_curve is not None:
+            if len(aftertouch_curve) != n_samples:
+                aftertouch_curve = np.interp(
+                    np.linspace(0, 1, n_samples),
+                    np.linspace(0, 1, len(aftertouch_curve)),
+                    aftertouch_curve
+                )
+            pressure = np.clip(aftertouch_curve, 0.0, 1.0)
+            if aftertouch_target == 'filter_cutoff':
+                cutoff_mod = 1 + pressure * 2.0
+            elif aftertouch_target == 'osc_level':
+                gain_curve = 0.5 + pressure * 0.5
+            elif aftertouch_target == 'pitch_cents':
+                pitch_curve = pressure * 50.0
+        
+        # Generate oscillators (pitch aftertouch bends osc1 via phase offset)
+        osc1_phase_offset = None
+        if pitch_curve is not None:
+            t = np.arange(n_samples) / self.sample_rate
+            osc1_phase_offset = (2.0 ** (pitch_curve / 1200.0) - 1.0) * freq * t
+        osc1_signal = self.osc1.generate(freq, n_samples, phase_offset=osc1_phase_offset)
         
         # Osc2 (optionally synced to osc1)
         if self.osc2_sync_to_osc1:
@@ -419,21 +548,65 @@ class PolyVoice:
         mixed = osc1_signal + osc2_signal + osc3_signal
         mixed /= 3.0  # Normalize
         
-        # Apply LFO modulations
+        # Build per-sample filter cutoff curve: LFO + aftertouch
+        cutoff_curve = None
         if self.lfo1.target == 'filter_cutoff':
             lfo_signal = self.lfo1.generate(duration)
-            self.filter.cutoff = self.filter.cutoff * (1 + lfo_signal * 0.5)
+            cutoff_curve = 1 + lfo_signal * 0.5
+        if cutoff_mod is not None:
+            cutoff_curve = cutoff_mod if cutoff_curve is None else cutoff_curve * cutoff_mod
         
-        # Apply filter
-        filtered = self.filter.process(mixed, freq=freq, envelope=filter_env)
+        # Apply filter (per-sample cutoff modulation)
+        filtered = self.filter.process(mixed, freq=freq, envelope=filter_env,
+                                       cutoff_mod=cutoff_curve)
         
         # Apply amp envelope
         output = filtered * amp_env
         
-        # Apply gain
+        # Apply gain (+ per-sample aftertouch gain curve)
         output *= self.gain
+        if gain_curve is not None:
+            output *= gain_curve
         
         return output.astype(np.float32)
+    
+    def render_chord(self, freqs: List[float], duration: float,
+                     **kwargs) -> np.ndarray:
+        """Render a polyphonic chord (one voice per note, summed)."""
+        n_samples = int(duration * self.sample_rate)
+        output = np.zeros(n_samples, dtype=np.float32)
+        for f in freqs:
+            output += self.render_note(f, duration, **kwargs)
+        peak = np.max(np.abs(output))
+        if peak > 1.0:
+            output /= peak
+        return output
+    
+    def render_arpeggio(self, midi_notes: List[int], bpm: float = 120.0,
+                        total_steps: int = 16,
+                        arpeggiator: Optional['Arpeggiator'] = None) -> np.ndarray:
+        """Render an arpeggiated pattern from held notes."""
+        arp = arpeggiator or Arpeggiator(self.sample_rate)
+        events = arp.generate(midi_notes, bpm=bpm, total_steps=total_steps)
+        
+        if not events:
+            return np.zeros(0, dtype=np.float32)
+        
+        total_dur = max(e['start_sec'] + e['duration_sec'] for e in events)
+        n_samples = int(total_dur * self.sample_rate) + int(0.1 * self.sample_rate)
+        output = np.zeros(n_samples, dtype=np.float32)
+        
+        for e in events:
+            freq = 440.0 * (2.0 ** ((e['midi'] - 69) / 12.0))
+            note_audio = self.render_note(freq, e['duration_sec'])
+            start = int(e['start_sec'] * self.sample_rate)
+            end = min(start + len(note_audio), n_samples)
+            output[start:end] += note_audio[:end - start]
+        
+        peak = np.max(np.abs(output))
+        if peak > 1.0:
+            output /= peak
+        return output
 
 
 if __name__ == "__main__":
@@ -447,5 +620,29 @@ if __name__ == "__main__":
     voice.env1.set(attack=0.01, decay=0.2, sustain=0.7, release=0.3)
     
     audio = voice.render_note(freq=440.0, duration=1.0)
-    print(f"PolyVoice: {audio.shape}, peak: {np.max(np.abs(audio)):.3f}")
-    print("✓ PolyVoice smoke test passed")
+    print(f"PolyVoice note: {audio.shape}, peak: {np.max(np.abs(audio)):.3f}")
+    
+    # Chord
+    chord = voice.render_chord([220.0, 277.18, 329.63], duration=0.5)
+    print(f"Chord: {chord.shape}, peak: {np.max(np.abs(chord)):.3f}")
+    
+    # Aftertouch (pressure ramp on filter)
+    ramp = np.linspace(0, 1, 44100)
+    at_note = voice.render_note(freq=440.0, duration=1.0,
+                                aftertouch_curve=ramp, aftertouch_target='filter_cutoff')
+    print(f"Aftertouch note: {at_note.shape}, peak: {np.max(np.abs(at_note)):.3f}")
+    
+    # Arpeggiator
+    arp = Arpeggiator()
+    arp.mode = 'up_down'
+    arp.octaves = 2
+    events = arp.generate([60, 64, 67], bpm=120.0, total_steps=16)
+    assert len(events) == 16, f"Expected 16 arp steps, got {len(events)}"
+    print(f"Arpeggiator: {len(events)} steps, pattern: {[e['midi'] for e in events[:8]]}")
+    
+    # Render arpeggio
+    arp_audio = voice.render_arpeggio([60, 64, 67], bpm=140.0, total_steps=16,
+                                       arpeggiator=arp)
+    print(f"Arp render: {arp_audio.shape}, peak: {np.max(np.abs(arp_audio)):.3f}")
+    
+    print("✓ PolyVoice full smoke test passed")

@@ -5,7 +5,7 @@ from .granular import AperiodicGranulator
 from .phase_mod import PhaseModSynth, FDSSynth
 from .additive import SoundWave, synthesize_wave
 from .vocal import FormantVocalGuide
-from .polysynth import PolyVoice, Oscillator, EnvelopeGenerator, LFO, MultimodeFilter, StepSequencer
+from .polysynth import PolyVoice, Oscillator, EnvelopeGenerator, LFO, MultimodeFilter, StepSequencer, Arpeggiator
 
 __all__ = [
     "ResonatorBank",
@@ -22,4 +22,5 @@ __all__ = [
     "LFO",
     "MultimodeFilter",
     "StepSequencer",
+    "Arpeggiator",
 ]
