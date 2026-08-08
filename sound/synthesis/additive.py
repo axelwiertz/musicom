@@ -44,7 +44,7 @@ class SoundWave:
 
     def apply_overtones(self, factor: List[float], amplitude: int = 4096) -> None:
         """Synthesize a note with overtones.
-        
+
         Args:
             factor: List of overtone amplitudes (must sum to 1.0)
             amplitude: Base amplitude
@@ -57,11 +57,12 @@ class SoundWave:
         amplitudes = np.array([amplitude * x for x in factor])
 
         self.frequency = frequencies[0]
-        self.fundamental = self.create_sine_wave(amplitudes[0])
+        self.create_sine_wave(amplitudes[0])          # sets self.wavedata
+        self.fundamental = self.wavedata.copy()
         for i in range(1, len(factor)):
             self.frequency = frequencies[i]
-            overtone = self.create_sine_wave(amplitudes[i])
-            self.fundamental += overtone
+            self.create_sine_wave(amplitudes[i])      # sets self.wavedata
+            self.fundamental = self.fundamental + self.wavedata
 
     def get_adsr_weights(self, length: List[float], decay: List[float], 
                          sustain_level: float) -> None:
