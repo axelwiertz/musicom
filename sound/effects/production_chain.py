@@ -10,8 +10,8 @@ hermes_agent/ (MusicTech Mastering-The-Mix chain):
     3. Biquad peaking EQ (presence)
     4. Dynamic EQ (resonance control, e.g. 2-4 kHz harshness)
     5. Stereo imaging (mono sub-bass, widened highs)
-    6. Limiter (transparent peak control, ceiling -1 dB)
-    7. LUFS normalization (streaming target, e.g. -14 Spotify / -16 Apple)
+    6. LUFS normalization (streaming target, e.g. -14 Spotify / -16 Apple)
+    7. Limiter (transparent peak control, ceiling -1 dB — AFTER the gain)
 
 Every stage is measured (peak, RMS, integrated LUFS) and written to disk so
 each stage can be verified independently — the "one-by-one test" contract.
@@ -115,9 +115,40 @@ class ProductionChain:
     def stage_dynamic_eq(self, audio: np.ndarray,
                          bands: Optional[List[Tuple[float, float, float, float]]] = None
                          ) -> np.ndarray:
-        """Dynamic EQ — resonance control (default: 2-4 kHz harshness)."""
+        """Dynamic EQ — resonance control (default: 2-4 kHz harshness).
+
+        Thresholds are ADAPTIVE when not given: each band's threshold defaults
+        to 10 dB below the band's SMOOTHED-envelope peak (the envelope the
+        compressor actually reacts to) so the stage always engages on real
+        material. A fixed -10 dBFS threshold is a no-op on mixes whose band
+        level sits lower.
+        """
+        from scipy.signal import butter, lfilter
+
+        spec = bands or [(3000.0, 2.0, None, 2.5)]  # (center, q, threshold, ratio)
         deq = DynamicEQ(self.sample_rate)
-        for center, q, thresh, ratio in (bands or [(3000.0, 2.0, -10.0, 2.5)]):
+
+        for center, q, thresh, ratio in spec:
+            bw = center / q
+            low = max(20, center - bw / 2)
+            high = min(self.sample_rate / 2 - 1, center + bw / 2)
+            bb, aa = butter(2, [low, high], btype='band', fs=self.sample_rate)
+            band = lfilter(bb, aa, audio, axis=0)
+            # Smoothed envelope (10ms attack / 100ms release, same as DynamicEQ)
+            env = np.abs(band)
+            if env.ndim == 2:
+                env = env.mean(axis=1)  # fold stereo to mono envelope
+            att = int(0.010 * self.sample_rate)
+            rel = int(0.100 * self.sample_rate)
+            smooth = np.zeros_like(env)
+            smooth[0] = env[0]
+            for i in range(1, len(env)):
+                coeff = np.exp(-1.0 / att) if env[i] > smooth[i-1] else np.exp(-1.0 / rel)
+                smooth[i] = smooth[i-1] * coeff + env[i] * (1 - coeff)
+            env_peak = float(np.max(smooth)) if len(smooth) else 0.0
+            if thresh is None:
+                thresh = 20 * np.log10(max(env_peak, 1e-9)) - 10.0
+                print(f"    [dynamic_eq] band {center:.0f}Hz env peak {20*np.log10(max(env_peak,1e-9)):.1f} dBFS → adaptive threshold {thresh:.1f} dBFS")
             deq.add_band(center, q=q, threshold_db=thresh, ratio=ratio)
         return deq.process(audio)
 
@@ -169,8 +200,10 @@ class ProductionChain:
             ("peaking", self.stage_peaking, {}),
             ("dynamic_eq", self.stage_dynamic_eq, {}),
             ("stereo_imager", self.stage_stereo_imager, {}),
-            ("limiter", self.stage_limiter, {}),
             ("lufs_norm", self.stage_lufs_norm, {"target_lufs": target_lufs}),
+            # Limiter AFTER loudness gain: gain re-crosses ceiling, so the
+            # limiter catches those peaks last (true mastering order).
+            ("limiter", self.stage_limiter, {}),
         ]
         if include:
             stages = [(n, f, k) for n, f, k in stages if n in include]
@@ -194,12 +227,18 @@ class ProductionChain:
         """Convenience: read WAV, run chain, return report."""
         audio, sr = read_wav(wav_path)
         if sr != self.sample_rate:
-            # simple linear resample
+            # simple linear resample (per-channel for stereo)
             ratio = self.sample_rate / sr
             new_len = int(len(audio) * ratio)
             x_old = np.linspace(0, 1, len(audio))
             x_new = np.linspace(0, 1, new_len)
-            audio = np.interp(x_new, x_old, audio)
+            if audio.ndim == 2:
+                audio = np.column_stack([
+                    np.interp(x_new, x_old, audio[:, 0]),
+                    np.interp(x_new, x_old, audio[:, 1]),
+                ])
+            else:
+                audio = np.interp(x_new, x_old, audio)
         return self.run(audio, output_dir, target_lufs=target_lufs, include=include)
 
 

@@ -77,7 +77,14 @@ class StateVariableFilter:
             self.mode = mode
         
         f, q = self._calc_coefficients(self.cutoff)
-        
+
+        # Stereo support: process each channel independently.
+        is_stereo = len(audio.shape) > 1 and audio.shape[1] == 2
+        if is_stereo:
+            left = self.process(audio[:, 0], cutoff=cutoff, resonance=resonance, mode=mode)
+            right = self.process(audio[:, 1], cutoff=cutoff, resonance=resonance, mode=mode)
+            return np.column_stack([left, right])
+
         n = len(audio)
         output = np.zeros(n, dtype=np.float64)
         
@@ -223,13 +230,21 @@ class BiquadFilter:
     def process(self, audio: np.ndarray) -> np.ndarray:
         """
         Apply biquad filter to audio.
-        
+
         Args:
-            audio: Input audio buffer
-            
+            audio: Input audio buffer (mono 1D or stereo [n, 2])
+
         Returns:
-            Filtered audio
+            Filtered audio (same shape as input)
         """
+        # Stereo support: process each channel independently.
+        is_stereo = len(audio.shape) > 1 and audio.shape[1] == 2
+        if is_stereo:
+            return np.column_stack([
+                self.process(audio[:, 0]),
+                self.process(audio[:, 1]),
+            ])
+
         n = len(audio)
         output = np.zeros(n, dtype=np.float64)
         

@@ -195,6 +195,35 @@ class TestProductionStages:
         corr = np.corrcoef(L_low, R_low)[0, 1]
         assert corr > 0.99, f"Sub not mono: corr={corr:.3f}"
 
+    def test_stereo_imager_widens_highs(self):
+        """Multi-band imaging must NOT collapse to mono (regression:
+        sequential side*=width zeroed the side signal)."""
+        sr = self.SR
+        rng = np.random.default_rng(8)
+        n = sr
+        # Independent noise channels → real side content
+        stereo = np.column_stack([rng.standard_normal(n) * 0.1,
+                                  rng.standard_normal(n) * 0.1])
+        imager = StereoImager(sr)
+        imager.set_width(0.0, below_hz=100.0)
+        imager.set_width(1.5, above_hz=2000.0)
+        out = imager.process(stereo)
+        # High-freq side energy must be non-zero (widened) — corr must drop
+        def highfreq(x):
+            fft = np.fft.rfft(x)
+            fr = np.fft.rfftfreq(len(x), 1 / sr)
+            mask = fr > 2000
+            filt_fft = fft * mask
+            return np.fft.irfft(filt_fft, n=len(x))
+        L_h = highfreq(out[:, 0])
+        R_h = highfreq(out[:, 1])
+        corr_high = np.corrcoef(L_h, R_h)[0, 1]
+        # width 1.5 increases side → L/R less correlated than input highs
+        L_in = highfreq(stereo[:, 0])
+        R_in = highfreq(stereo[:, 1])
+        corr_in = np.corrcoef(L_in, R_in)[0, 1]
+        assert corr_high < corr_in - 0.01, f"Highs not widened: {corr_in:.4f} → {corr_high:.4f}"
+
     def test_limiter_peaks_below_ceiling(self):
         """Limiter must cap peaks at threshold (no clipping)."""
         sr = self.SR
@@ -214,6 +243,50 @@ class TestProductionStages:
         normalized = n2l(audio, -14.0, sr)
         lufs = measure_lufs(normalized, sr)
         assert abs(lufs - (-14.0)) < 0.3, f"LUFS={lufs} target=-14"
+
+    def test_stereo_filters(self):
+        """SVF + Biquad must handle stereo [n,2] input (mastering chain)."""
+        from sound.effects import StateVariableFilter, BiquadFilter
+        sr = self.SR
+        rng = np.random.default_rng(2)
+        stereo = (rng.standard_normal((2000, 2)) * 0.1).astype(np.float32)
+        # SVF
+        out_svf = StateVariableFilter(sr).process(stereo, cutoff=8000.0, resonance=0.2, mode='lp')
+        assert out_svf.shape == stereo.shape
+        # Biquad peaking
+        bf = BiquadFilter(sr)
+        bf.design('peaking', freq=3000.0, Q=1.5, gain_db=3.0)
+        out_bq = bf.process(stereo)
+        assert out_bq.shape == stereo.shape
+        assert np.max(np.abs(out_bq - stereo)) > 1e-4, "Biquad stereo no-op"
+
+    def test_stereo_wav_roundtrip(self):
+        """write_wav/read_wav must preserve stereo channels (regression:
+        write_wav silently flattened [n,2] to mono)."""
+        from sound.utils.io import write_wav, read_wav
+        import tempfile
+        sr = 44100
+        rng = np.random.default_rng(4)
+        stereo = (rng.standard_normal((2000, 2)) * 0.5).astype(np.float32)
+        with tempfile.TemporaryDirectory() as tmp:
+            path = os.path.join(tmp, 'stereo.wav')
+            write_wav(path, stereo, sr, normalize=False)
+            data, got_sr = read_wav(path)
+            assert got_sr == sr
+            assert data.ndim == 2 and data.shape[1] == 2, f"Expected stereo, got {data.shape}"
+            # L/R channels preserved (not folded)
+            assert np.corrcoef(data[:, 0], data[:, 1])[0, 1] < 0.95, "Channels folded to mono"
+            assert len(data) == 2000
+
+    def test_dynamic_eq_adaptive_threshold(self):
+        """ProductionChain dynamic_eq must engage with adaptive threshold."""
+        sr = self.SR
+        t = np.linspace(0, 1.0, sr, endpoint=False)
+        # Band content at 3kHz but at modest level (-20 dBFS)
+        audio = 0.1 * np.sin(2 * np.pi * 3000 * t) + 0.3 * np.sin(2 * np.pi * 110 * t)
+        chain = ProductionChain(sample_rate=sr)
+        out = chain.stage_dynamic_eq(audio)
+        assert np.max(np.abs(out - audio)) > 1e-4, "Adaptive threshold must engage"
 
     def test_full_chain_reduces_lufs_gap(self):
         """Full chain: final LUFS closer to target than raw."""
@@ -236,7 +309,16 @@ class TestProductionStages:
             # Sequential stage order preserved
             names = [s.name for s in report.stages]
             assert names == ["reverb", "lowpass", "peaking", "dynamic_eq",
-                             "stereo_imager", "limiter", "lufs_norm"]
+                             "stereo_imager", "lufs_norm", "limiter"]
+            # Limiter AFTER LUFS gain: final peak must respect ceiling
+            # even though loudness gain pushed it up.
+            from sound.utils.io import read_wav as _read_wav
+            final_path = report.stages[-1].path
+            assert final_path is not None
+            final, _ = _read_wav(final_path)
+            peak = np.max(np.abs(final))
+            ceiling = 10 ** (-1.0 / 20.0)
+            assert peak <= ceiling * 1.01, f"Peak {peak:.3f} above -1dB ceiling"
 
     def test_partial_chain(self):
         """include= subset runs only those stages."""

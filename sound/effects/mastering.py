@@ -276,13 +276,30 @@ class StereoImager:
                   above_hz: Optional[float] = None):
         """
         Set stereo width for a frequency band.
-        
+
         Args:
             width: 0.0 = mono, 1.0 = normal stereo, >1.0 = widened
-            below_hz: Apply to frequencies below this (None = no limit)
-            above_hz: Apply to frequencies above this (None = no limit)
+            below_hz: Apply to frequencies below this (None = no lower bound)
+            above_hz: Apply to frequencies above this (None = no upper bound)
+
+        Band semantics:
+            set_width(w, below_hz=X)          → [0, X]
+            set_width(w, above_hz=X)          → [X, nyquist]
+            set_width(w, below_hz=X, above_hz=Y) → [X, Y]
         """
-        self.width_settings.append((below_hz or 0.0, above_hz or self.sample_rate / 2, width))
+        nyq = self.sample_rate / 2
+        if below_hz is None and above_hz is not None:
+            lo, hi = float(above_hz), nyq   # "above X only"
+        elif below_hz is not None and above_hz is None:
+            lo, hi = 0.0, float(below_hz)   # "below X only"
+        elif below_hz is None and above_hz is None:
+            lo, hi = 0.0, nyq               # full band
+        else:
+            # both provided (below_hz and above_hz are non-None here)
+            lo = below_hz if below_hz is not None else 0.0
+            hi = above_hz if above_hz is not None else nyq
+            lo, hi = float(lo), float(hi)   # explicit range (both given)
+        self.width_settings.append((lo, hi, width))
     
     def process(self, audio: np.ndarray) -> np.ndarray:
         """
@@ -307,11 +324,25 @@ class StereoImager:
         mid = (stereo[:, 0] + stereo[:, 1]) * 0.5
         side = (stereo[:, 0] - stereo[:, 1]) * 0.5
         
-        # For each frequency band, apply width
-        # (Simplified: full-band processing, not per-band yet)
+        # Per-band width via FFT split: each width_setting applies to its
+        # frequency band independently (mono sub, widened highs, etc.).
+        # (Previously: sequential side *= width across ALL settings — a bug
+        # that collapsed any multi-band config to side=0.)
+        n = len(side)
+        side_fft = np.fft.rfft(side)
+        freqs = np.fft.rfftfreq(n, 1 / self.sample_rate)
+        nyq = self.sample_rate / 2
+        
+        # Build per-frequency width multiplier (start at 1.0 = unchanged)
+        width_curve = np.ones(len(freqs), dtype=np.float64)
         for below_hz, above_hz, width in self.width_settings:
-            # Apply width to side signal
-            side *= width
+            lo = max(0.0, below_hz)
+            hi = min(nyq, above_hz)
+            mask = (freqs >= lo) & (freqs <= hi)
+            width_curve[mask] = width
+        
+        side_fft = side_fft * width_curve
+        side = np.fft.irfft(side_fft, n=n)
         
         # Reconstruct stereo from mid/side
         left = mid + side
@@ -439,15 +470,22 @@ class DynamicEQ:
     def process(self, audio: np.ndarray) -> np.ndarray:
         """
         Apply dynamic EQ to audio.
-        
+
         Args:
-            audio: Input audio
-            
+            audio: Input audio (mono 1D or stereo [n, 2])
+
         Returns:
             Processed audio
         """
         from scipy.signal import lfilter, butter
-        
+
+        is_stereo = len(audio.shape) > 1 and audio.shape[1] == 2
+        if is_stereo:
+            # Process per channel with the same band config (independent L/R).
+            left = self.process(audio[:, 0])
+            right = self.process(audio[:, 1])
+            return np.column_stack([left, right])
+
         output = audio.copy()
         
         for band in self.bands:

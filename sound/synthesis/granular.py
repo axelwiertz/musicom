@@ -48,6 +48,8 @@ class AperiodicGranulator:
         """
         # Load source WAV
         data, sr = read_wav(source_path)
+        if data.ndim == 2:
+            data = data.mean(axis=1)  # fold stereo source to mono for granular
         
         # Resample if needed
         if sr != self.sample_rate:
