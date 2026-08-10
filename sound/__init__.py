@@ -9,6 +9,8 @@ from . import analysis
 from . import render
 from . import generators
 from . import utils
+from . import tuning
+from . import modular
 
 __all__ = [
     "synthesis",
@@ -17,4 +19,6 @@ __all__ = [
     "render",
     "generators",
     "utils",
+    "tuning",
+    "modular",
 ]

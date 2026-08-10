@@ -9,6 +9,8 @@ from .filter import (StateVariableFilter, BiquadFilter, SubtractiveVoice,
 from .mastering import (LUFSMeter, LoudnessMetrics, measure_lufs, normalize_to_lufs,
                         StereoImager, Limiter, DynamicEQ, MasteringChain)
 from .production_chain import ProductionChain, ProductionReport, StageResult
+from .vowel_filter import VowelFilterBank, VOWEL_FORMANTS
+from .tape_delay import TapeDelay, SamplePlayer, DrumMachine
 
 __all__ = [
     "AlgorithmicReverb", "Freeverb", "apply_reverb",
@@ -16,4 +18,6 @@ __all__ = [
     "LUFSMeter", "LoudnessMetrics", "measure_lufs", "normalize_to_lufs",
     "StereoImager", "Limiter", "DynamicEQ", "MasteringChain",
     "ProductionChain", "ProductionReport", "StageResult",
+    "VowelFilterBank", "VOWEL_FORMANTS",
+    "TapeDelay", "SamplePlayer", "DrumMachine",
 ]

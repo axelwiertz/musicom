@@ -7,6 +7,7 @@ from .additive import SoundWave, synthesize_wave
 from .vocal import FormantVocalGuide
 from .polysynth import PolyVoice, Oscillator, EnvelopeGenerator, LFO, MultimodeFilter, StepSequencer, Arpeggiator
 from .bowed import BowedString
+from .mass_spring import MassSpringSystem, Body, Spring
 
 __all__ = [
     "ResonatorBank",
@@ -25,4 +26,7 @@ __all__ = [
     "StepSequencer",
     "Arpeggiator",
     "BowedString",
+    "MassSpringSystem",
+    "Body",
+    "Spring",
 ]
