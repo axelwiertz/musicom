@@ -16,6 +16,9 @@ Status: `implemented` = in sound/ package · `partial` = some pieces exist · `r
 | SP-032 | FDTD Physical Modeling | research | — (see methods KB; distinct from SP-003) |
 | SP-003 | Modal Physical Modeling (Plate/Bar) | implemented | sound/synthesis/modal.py |
 | SP-024 | Bowed String Physical Modeling (Friction Waveguide) | implemented | sound/synthesis/bowed.py |
+| — | Mass-Spring Physical Modeling (ANUKARI-style) | implemented | sound/synthesis/mass_spring.py |
+| — | Modular Node-Graph DSP (SynthEdit-style) | implemented | sound/modular/graph.py |
+| — | Just Intonation / Microtonal (KHÔRA-style) | implemented | sound/tuning/just_intonation.py |
 | — | Polyphonic Multi-Engine (Astrolab-style) | implemented | sound/synthesis/polysynth.py |
 | SP-004 | Formant Vocal Synthesis | implemented | sound/synthesis/vocal.py |
 | — | Additive Synthesis (SoundWave) | implemented | sound/synthesis/additive.py |
@@ -32,6 +35,8 @@ Status: `implemented` = in sound/ package · `partial` = some pieces exist · `r
 | SP-008 | Dynamic Range Compression (DRC) | partial | sound/effects/mastering.py (Limiter) |
 | SP-009 | Convolutive Reverberation | implemented | sound/effects/reverb.py (algorithmic) |
 | SP-021 | Binaural Woodworth-Schlosberg Spatialization | research | — (HRTF ITD/ILD) |
+| — | Vowel Filter Bank (Vowel-Blender-style) | implemented | sound/effects/vowel_filter.py |
+| — | Tape Delay / Sample Player / Drum Machine (VST-Classics-style) | implemented | sound/effects/tape_delay.py |
 
 ## Mastering (from MusicTech workflow)
 
