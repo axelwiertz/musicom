@@ -6,6 +6,7 @@ from .phase_mod import PhaseModSynth, FDSSynth
 from .additive import SoundWave, synthesize_wave
 from .vocal import FormantVocalGuide
 from .polysynth import PolyVoice, Oscillator, EnvelopeGenerator, LFO, MultimodeFilter, StepSequencer, Arpeggiator
+from .bowed import BowedString
 
 __all__ = [
     "ResonatorBank",
@@ -23,4 +24,5 @@ __all__ = [
     "MultimodeFilter",
     "StepSequencer",
     "Arpeggiator",
+    "BowedString",
 ]
