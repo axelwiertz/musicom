@@ -8,6 +8,11 @@ from .vocal import FormantVocalGuide
 from .polysynth import PolyVoice, Oscillator, EnvelopeGenerator, LFO, MultimodeFilter, StepSequencer, Arpeggiator
 from .bowed import BowedString
 from .mass_spring import MassSpringSystem, Body, Spring
+from .scale_quantizer import ScaleQuantizer, ProbabilityEngine, ScaleModeMIDI
+from .voice_allocator import VoiceAllocator, ModulationMatrix
+from .polyrhythm import PolyrhythmicArp
+from .binaural import HaasDelay, BinauralSynth
+from .west_coast import Wavefolder, LowpassGate, WestCoastVoice
 
 __all__ = [
     "ResonatorBank",
@@ -29,4 +34,15 @@ __all__ = [
     "MassSpringSystem",
     "Body",
     "Spring",
+    "ScaleQuantizer",
+    "ProbabilityEngine",
+    "ScaleModeMIDI",
+    "VoiceAllocator",
+    "ModulationMatrix",
+    "PolyrhythmicArp",
+    "HaasDelay",
+    "BinauralSynth",
+    "Wavefolder",
+    "LowpassGate",
+    "WestCoastVoice",
 ]

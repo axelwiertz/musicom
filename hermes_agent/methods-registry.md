@@ -18,6 +18,18 @@ Status: `implemented` = in sound/ package · `partial` = some pieces exist · `r
 | SP-024 | Bowed String Physical Modeling (Friction Waveguide) | implemented | sound/synthesis/bowed.py |
 | — | Mass-Spring Physical Modeling (ANUKARI-style) | implemented | sound/synthesis/mass_spring.py |
 | — | Modular Node-Graph DSP (SynthEdit-style) | implemented | sound/modular/graph.py |
+| — | Math Modulators + 24-step Sequencer (Altitude-style) | implemented | sound/modular/math_mod.py |
+| — | JSON Patch Loader/Builder (Karst-style) | implemented | sound/modular/patch_loader.py |
+| — | Scale Quantizer + Probability Engine (Synterra-style) | implemented | sound/synthesis/scale_quantizer.py |
+| — | Voice Allocator + Modulation Matrix (ECHON-6-style) | implemented | sound/synthesis/voice_allocator.py |
+| — | Polyrhythmic Arpeggiator (Memory-V-style) | implemented | sound/synthesis/polyrhythm.py |
+| — | Binaural / Haas / Play Modes (DMNO-style) | implemented | sound/synthesis/binaural.py |
+| — | West Coast Wavefolder + LPG (Obsidian-style) | implemented | sound/synthesis/west_coast.py |
+| — | FDN Reverb (Rev-Ocean-style) | implemented | sound/effects/fdn_reverb.py |
+| — | Multiband Compressor + Synth (Rumble-style) | implemented | sound/effects/multiband.py |
+| — | Quantize Modulators + Routing (Radical1-style) | implemented | sound/effects/quantize_mod.py |
+| — | Dice Variation + Param Scopes (Karst-style) | implemented | sound/generators/dice.py |
+| — | Microtonal MIDI Export (KHÔRA-style) | implemented | sound/utils/midi.py |
 | — | Just Intonation / Microtonal (KHÔRA-style) | implemented | sound/tuning/just_intonation.py |
 | — | Polyphonic Multi-Engine (Astrolab-style) | implemented | sound/synthesis/polysynth.py |
 | SP-004 | Formant Vocal Synthesis | implemented | sound/synthesis/vocal.py |

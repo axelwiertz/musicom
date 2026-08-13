@@ -3,6 +3,23 @@
 Replicability analyses from the Hermes agent's music-tech surveillance cron
 (job e2760579d2c8, runs Mon/Thu). Distilled verdicts for musicom adoption.
 
+## 2026-08-13 Scan
+
+| Item | Technique | Verdict | Musicom path |
+|------|-----------|---------|--------------|
+| VAEMI Synterra | Scale quantizer + probability engine + MIDI scale mode | YES | **DONE** — sound/synthesis/scale_quantizer.py |
+| KHÔRA (microtonal output) | Pitch bend + microtonal MIDI export | YES | **DONE** — sound/utils/midi.py |
+| Karst (dice variation) | Dice variation + param scopes | YES | **DONE** — sound/generators/dice.py |
+| Altitude | Math modulators + 24-step sequencer | YES | **DONE** — sound/modular/math_mod.py |
+| Rev Ocean | FDN reverb (freeze + ducking) | YES | **DONE** — sound/effects/fdn_reverb.py |
+| UVI Rumble | Multiband compressor + multiband synth | YES | **DONE** — sound/effects/multiband.py |
+| ECHON 6 | Voice allocator + 9x32 mod matrix | YES | **DONE** — sound/synthesis/voice_allocator.py |
+| Memory V | 4-part polyrhythmic arpeggiator | YES | **DONE** — sound/synthesis/polyrhythm.py |
+| UDO DMNO | Binaural + Haas + play modes | YES | **DONE** — sound/synthesis/binaural.py |
+| Obsidian | Wavefolder + lowpass gate (West Coast) | YES | **DONE** — sound/synthesis/west_coast.py |
+| Radical1 | Quantize modulator + routing | YES | **DONE** — sound/effects/quantize_mod.py |
+| Karst (patches) | JSON patch loader/builder | YES | **DONE** — sound/modular/patch_loader.py |
+
 ## 2026-08-03 Scan
 
 | Item | Technique | Verdict | Musicom path |

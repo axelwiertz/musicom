@@ -11,6 +11,9 @@ from .mastering import (LUFSMeter, LoudnessMetrics, measure_lufs, normalize_to_l
 from .production_chain import ProductionChain, ProductionReport, StageResult
 from .vowel_filter import VowelFilterBank, VOWEL_FORMANTS
 from .tape_delay import TapeDelay, SamplePlayer, DrumMachine
+from .fdn_reverb import FDN
+from .multiband import LinkwitzRiley, MultibandCompressor, MultibandSynth
+from .quantize_mod import QuantizeModulator, ModRouter, QuantizeChain
 
 __all__ = [
     "AlgorithmicReverb", "Freeverb", "apply_reverb",
@@ -20,4 +23,7 @@ __all__ = [
     "ProductionChain", "ProductionReport", "StageResult",
     "VowelFilterBank", "VOWEL_FORMANTS",
     "TapeDelay", "SamplePlayer", "DrumMachine",
+    "FDN",
+    "LinkwitzRiley", "MultibandCompressor", "MultibandSynth",
+    "QuantizeModulator", "ModRouter", "QuantizeChain",
 ]

@@ -20,6 +20,7 @@ from .event_core import (
     WeightedRandomCore,
     PatternSequencer
 )
+from .dice import DiceVariation, ParamScope
 
 __all__ = [
     'EventCore',
@@ -28,5 +29,7 @@ __all__ = [
     'LSystemCore',
     'EuclideanCore',
     'WeightedRandomCore',
-    'PatternSequencer'
+    'PatternSequencer',
+    'DiceVariation',
+    'ParamScope'
 ]
