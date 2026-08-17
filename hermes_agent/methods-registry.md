@@ -36,6 +36,18 @@ Status: `implemented` = in sound/ package · `partial` = some pieces exist · `r
 | SP-004 | Formant Vocal Synthesis | implemented | sound/synthesis/vocal.py |
 | — | Additive Synthesis (SoundWave) | implemented | sound/synthesis/additive.py |
 
+## Interval-Based Composition (NEW)
+
+| Method | Status | Location |
+|--------|--------|----------|
+| Forte Interval-Class Vectors (Set Theory) | implemented | structures/intervals.py |
+| Hindemith Series 2 Harmonic Fluctuation | implemented | structures/intervals.py |
+| Bartók Interval Expansion/Contraction | implemented | structures/intervals.py |
+| Delta Encoding (Transposition-Invariant) | implemented | structures/intervals.py |
+| Interval Markov Chain | implemented | generators/interval_chain.py |
+| Interval L-System (Fractal Melodies) | implemented | generators/interval_lsystem.py |
+| Just-Intonation Ratio Lattice | implemented | sound/tuning/ratio_lattice.py |
+
 ## Post-Processing / DSP
 
 | ID | Method | Status | Location |

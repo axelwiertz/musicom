@@ -1,0 +1,17 @@
+{
+  "artifact": "interval-methods-demo.mid",
+  "classification": "ai-assisted",
+  "generator": "interval-methods-demo",
+  "sources": [],
+  "parameters": {
+    "bpm": 100,
+    "melody": "L-System intervals + Bartok expansion",
+    "harmony": "interval Markov chain + Hindemith rank<=4",
+    "bass": "D pedal"
+  },
+  "notes": "",
+  "sha256": "4c66f6b5f4957390ab8fc4d43cc8600740d452515ec87512966f965dfffed273",
+  "bytes": 882,
+  "created_utc": "2026-08-17T16:28:53.632641+00:00",
+  "provenance_version": "1.0"
+}

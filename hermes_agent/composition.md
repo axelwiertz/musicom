@@ -56,9 +56,31 @@ musically incoherent. Never ship Phase-1-only output.
 | `schillinger.py` | Schillinger system (resultants) |
 | `pitchpattern.py` | Scale-based pitch patterns |
 | `chord_degrees.py` | Diatonic chord progressions |
+| `interval_chain.py` | **Interval Markov chain** (transposition-invariant deltas) |
+| `interval_lsystem.py` | **L-System with interval semantics** (fractal melodies) |
 
 Plus `sound/generators/event_core.py` for event cores:
 MarkovCore, StochasticCore, EuclideanCore, LSystemCore, WeightedRandomCore, PatternSequencer.
+
+## Interval-Based Primitives (structures/intervals.py)
+
+| Function | Purpose |
+|----------|---------|
+| `interval_class_vector(pitches)` | Forte ICV (i1..i6) for set theory |
+| `z_related(a, b)` | Z-relation check (same ICV, no transposition) |
+| `set_prime_form(pitches)` | Prime form (Rahn/Forte-style) |
+| `hindemith_rank(interval)` | Hindemith Series 2 stability rank (0=unison … 11=tritone) |
+| `harmonic_fluctuation(melody)` | Per-step tension ranks |
+| `manage_fluctuation(melody, target_rank)` | Collapse dissonant steps to a rank band |
+| `interval_expansion(motif, steps)` | Bartók-style systematic interval growth |
+| `delta_encode / delta_decode` | Relative encoding (transposition-invariant) |
+| `transposition_invariant(motif, root)` | Re-root a motif preserving contour |
+
+Plus `sound/tuning/ratio_lattice.py` — `RatioLattice` (just-intonation
+lattice walking: ratios as nodes, comma steps as edges).
+
+Worked example: `examples/compose_interval_methods.py` (L-System intervals
++ Bartók expansion + Hindemith fluctuation management → UnitMatrix MIDI).
 
 ## Pitfalls (learned)
 
