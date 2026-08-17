@@ -13,6 +13,7 @@ how the Hermes agent uses the musicom engine.
 |------|---------|
 | `composition.md` | Composition workflow KB: UnitMatrix pipeline, two-phase architecture, zero-drift rules |
 | `sound-production.md` | Sound production KB: sound/ package usage, mastering chain, stem rendering |
+| `sound-methods-overview.md` | **Sound methods comparison + how-to-use**: creation/transformation table, workflow examples |
 | `methods-registry.md` | Sound production method catalog (SP-001…SP-032) with replicability status |
 | `surveillance.md` | Music-tech surveillance findings and replicability analyses |
 | `decisions.md` | Architecture decision log (reorgs, package choices) |

@@ -19,6 +19,7 @@ Status: `implemented` = in sound/ package · `partial` = some pieces exist · `r
 | — | Mass-Spring Physical Modeling (ANUKARI-style) | implemented | sound/synthesis/mass_spring.py |
 | — | Modular Node-Graph DSP (SynthEdit-style) | implemented | sound/modular/graph.py |
 | — | Math Modulators + 24-step Sequencer (Altitude-style) | implemented | sound/modular/math_mod.py |
+| — | Digital Chaos CV (Sofia2 / Leibniz-style) | implemented | sound/modular/chaos_cv.py |
 | — | JSON Patch Loader/Builder (Karst-style) | implemented | sound/modular/patch_loader.py |
 | — | Scale Quantizer + Probability Engine (Synterra-style) | implemented | sound/synthesis/scale_quantizer.py |
 | — | Voice Allocator + Modulation Matrix (ECHON-6-style) | implemented | sound/synthesis/voice_allocator.py |
@@ -68,6 +69,7 @@ Status: `implemented` = in sound/ package · `partial` = some pieces exist · `r
 | EuclideanCore (Bjorklund) | implemented | sound/generators/event_core.py |
 | LSystemCore | implemented | sound/generators/event_core.py |
 | WeightedRandomCore | implemented | sound/generators/event_core.py |
+| Ratchet Sequencer (SuperOS-808-style) | implemented | sound/generators/ratchet_seq.py |
 
 ## Planned (from surveillance, see surveillance.md)
 

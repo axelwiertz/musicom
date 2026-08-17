@@ -3,7 +3,7 @@ import os
 from typing import List
 import pandas as pd
 from utilities import Config
-from structures import MusicUnit
+from structures import MusicUnit, MusicEvent
 
 # --- DataFrame / Excel helpers for MusicUnit ---
 def unit_to_dataframe(unit: MusicUnit) -> pd.DataFrame:
@@ -59,17 +59,38 @@ def unit_to_binary (unit: MusicUnit) -> List[int]:
 
 def binary_to_unit(binary: List[int]) -> MusicUnit:
     # Transform a binary into a unit
-    # Split binary in parts of 'bits' length
-    num_parts = len(binary) % total_bits
+    # Split binary in parts of 'total_bits' length
+    num_parts = len(binary) // total_bits
     binary_parts = []
     for i in range(num_parts):
         # Extract binary elements
         binary_parts += [binary[(i * total_bits):(i * total_bits) + total_bits]]
 
-    pitches = []
+    events = []
+    tick = 0
     for binary_part in binary_parts:
-        pitch_nr = int(sum([bit * pow(2, i) for i, bit in enumerate(binary_part)]))
-        pitches.append(pitch_nr)
+        # Decode: 6 bits pitch interval (relative), 4 bits onset interval, 4 bits duration, 4 bits velocity
+        pitch_bits = binary_part[0:6]
+        onset_bits = binary_part[6:10]
+        duration_bits = binary_part[10:14]
+        velocity_bits = binary_part[14:18]
 
-    return MusicUnit(pitches=pitches)
+        pitch_nr = int(sum([bit * pow(2, i) for i, bit in enumerate(pitch_bits)]))
+        onset = int(sum([bit * pow(2, i) for i, bit in enumerate(onset_bits)]))
+        duration = int(sum([bit * pow(2, i) for i, bit in enumerate(duration_bits)]))
+        velocity = int(sum([bit * pow(2, i) for i, bit in enumerate(velocity_bits)]))
+
+        pitch = 24 + (pitch_nr % 72)  # map to MIDI 24..95
+        tick += onset * 120           # onset in sixteenth steps
+        vel = min(velocity * 8 + 20, 127)
+        dur = max(duration * 60 + 30, 60)
+
+        events.append(MusicEvent(
+            pitch=pitch,
+            volume=vel,
+            start_tick=tick,
+            end_tick=tick + dur,
+        ))
+
+    return MusicUnit(events=events)
 

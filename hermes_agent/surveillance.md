@@ -20,6 +20,15 @@ Replicability analyses from the Hermes agent's music-tech surveillance cron
 | Radical1 | Quantize modulator + routing | YES | **DONE** — sound/effects/quantize_mod.py |
 | Karst (patches) | JSON patch loader/builder | YES | **DONE** — sound/modular/patch_loader.py |
 
+## 2026-08-17 Scan
+
+| Item | Technique | Verdict | Musicom path |
+|------|-----------|---------|--------------|
+| SuperOS-808 (TR-808 replacement firmware) | Ratchet step sequencer: sub-division bursts, per-step probability + accent | YES | **DONE** — sound/generators/ratchet_seq.py |
+| Digital chaos hardware (Sofia2 / Leibniz) | Iterated chaotic maps as CV (logistic/tent) | YES | **DONE** — sound/modular/chaos_cv.py |
+| FDN reverb update (Rev-Ocean) | Freeze + ducking modes | PARTIAL | sound/effects/fdn_reverb.py (freeze exists; ducking pending) |
+| Spectral/source separation | STFT + demucs | PARTIAL | effects/spectral.py planned (librosa + demucs) |
+
 ## 2026-08-03 Scan
 
 | Item | Technique | Verdict | Musicom path |
