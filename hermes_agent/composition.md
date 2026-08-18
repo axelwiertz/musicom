@@ -58,6 +58,8 @@ musically incoherent. Never ship Phase-1-only output.
 | `chord_degrees.py` | Diatonic chord progressions |
 | `interval_chain.py` | **Interval Markov chain** (transposition-invariant deltas) |
 | `interval_lsystem.py` | **L-System with interval semantics** (fractal melodies) |
+| `tintinnabuli.py` | **Arvo Pärt** — M-voice + T-voice + isorhythm (from research) |
+| `tonal_network.py` | **Weighted graph-walk chord progressions** (from research) |
 
 Plus `sound/generators/event_core.py` for event cores:
 MarkovCore, StochasticCore, EuclideanCore, LSystemCore, WeightedRandomCore, PatternSequencer.
@@ -81,6 +83,20 @@ lattice walking: ratios as nodes, comma steps as edges).
 
 Worked example: `examples/compose_interval_methods.py` (L-System intervals
 + Bartók expansion + Hindemith fluctuation management → UnitMatrix MIDI).
+
+## Promoted-from-research Modules (patterns.md lineage)
+
+Three ideas that lived only in `research/` are now first-class library code:
+
+| Source (research/) | Library home | What it does |
+|--------------------|--------------|--------------|
+| `arvo_project.py` | `generators/tintinnabuli.py` | Pärt tintinnabuli (`M-voice` stepwise melody + `T-voice` triad-only shadow, `position` offset) + `isorhythmize(color, talea)` cyclic rhythm×pitch canon |
+| `rhythm.py` | `structures/metrical.py` | `MetricalNode` hierarchical metrical tree (measure→beat→subdivision), `QuantizedEvent`, `quantize_onsets_to_ticks`, `assign_metrical_level` |
+| `network.py`, `intervalnetwork.py` | `generators/tonal_network.py` | Chord-quality roles (`tonic/dominant/mediant/borrow/...`) as graph nodes; weighted functional edges; `progression()` = weighted random walk → chord `MusicUnit` |
+
+These are the *patterns* behind a style — for a style's technical rhythm/pitch
+fingerprint, see `Styles/<Style>/Analysis/patterns.md` (and the DB in
+`Styles/_Data_Patterns/`).
 
 ## Pitfalls (learned)
 

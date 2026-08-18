@@ -20,7 +20,14 @@ The project is stable and testable since the 2026-07 hardening pass
 - Ratchet step sequencer (`sound/generators/ratchet_seq.py`) — SuperOS-808-style.
 - Digital chaos CV (`sound/modular/chaos_cv.py`) — Sofia2/Leibniz-style.
 - Sound methods overview (`hermes_agent/sound-methods-overview.md`).
-- 31 new tests (183 total).
+- **Promoted 3 research ideas to first-class library code**:
+  - `generators/tintinnabuli.py` — Arvo Pärt tintinnabuli (M-voice + T-voice)
+    + isorhythm (`from generators.tintinnabuli import TintinnabuliGenerator, isorhythmize`).
+  - `structures/metrical.py` — hierarchical metrical tree (`MetricalNode`),
+    tick quantization, metrical level assignment.
+  - `generators/tonal_network.py` — weighted graph-walk chord progressions
+    (`TonalNetworkGenerator.progression()`).
+- 31 new tests (214 total).
 
 ### Changed
 - Corrected `ai.utils.visualizer` → `visualization.grid` import across docs/skills.

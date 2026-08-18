@@ -6,6 +6,8 @@ from .genetic import GeneticGenerator
 from .pitchpattern import PatternGenerator
 from .stochastic import StochasticGenerator
 from .chain import MarkovChainGenerator
+from .tintinnabuli import TintinnabuliGenerator, isorhythmize
+from .tonal_network import TonalNetworkGenerator
 
 __all__ = [
     "ChordDegreeGenerator",
@@ -14,5 +16,8 @@ __all__ = [
     "GeneticGenerator",
     "PatternGenerator",
     "StochasticGenerator",
-    "MarkovChainGenerator"
+    "MarkovChainGenerator",
+    "TintinnabuliGenerator",
+    "isorhythmize",
+    "TonalNetworkGenerator"
 ]

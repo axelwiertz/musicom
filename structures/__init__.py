@@ -14,6 +14,8 @@ from .project import MusicSection, MusicVoice, MusicProject
 from .matrix import UnitMatrix
 from .instrument import MidiChannel, MidiInstrument, MidiPercussion
 from .pitch import MusicPitch, MusicPitchClass, MusicPitchGrid, Direction, MusicPitchRange
+from .metrical import MetricalNode, HierarchicalEvent, QuantizedEvent, \
+    seconds_to_ticks, quantize_onsets_to_ticks, build_common_tree, assign_metrical_level
 
 # Alias for backward compatibility
 MusicPitchClassSet = MusicPitchClassSet
