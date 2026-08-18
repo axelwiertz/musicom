@@ -322,19 +322,49 @@ Run with coverage over the flat packages:
 pytest tests/ --cov=structures --cov=workflows --cov=generators --cov-report=html
 ```
 
-> **Suite status:** green — 183 passed, 0 skipped. Includes a
+> **Suite status:** green — 214 passed, 0 skipped. Includes a
 > golden-file MIDI regression harness (`tests/test_harness_golden.py`) that
 > locks in zero-drift, deterministic, non-empty exports.
 
 ## Contributing
 
-Contributions are welcome! Areas for enhancement:
-- Additional generator algorithms
-- More music theory rules
-- Extended analysis capabilities
-- Performance optimizations
+Contributions are welcome! See [`research/README.md`](research/README.md) for
+the full audit of what was promoted from research and what remains open.
+
+### Priority areas (open research seeds)
+
+These are concrete gaps — pick one and open a PR:
+
+1. **Neural / ML generation** — `research/trainmodel.py` seeds a monophonic
+   LSTM. Extend to polyphonic models, a training-data pipeline, and a
+   `generators/`-style `MusicGenerator` interface that emits `MusicUnit`.
+2. **Graph export & visualization** — `research/intervalnetwork.py` exports
+   NetworkX graphs. Build a reusable `visualization/` renderer (GraphML/GEXF/
+   GML/PNG) and wire it to `generators/tonal_network.py`.
+3. **Time-signature metadata** — `converters/midi_converter.py` writes tempo
+   but no `time_signature` meta event; asymmetric meters (7/8, 5/4) aren't
+   encoded in exported MIDI.
+4. **Pitch-class set operations** — `structures/pitchclass.py` has a `#TODO`
+   for inversion/retrograde/transposition of pitch-class sets.
+5. **Voice-leading graph traversal** — full tonal-network walk with
+   voice-leading optimization (partial in `rules/voice_leading.py`).
+
+### General areas
+
+- Additional generator algorithms (neural, transformer, graph-based)
+- More music theory rules (voice leading, counterpoint, set theory)
+- Extended analysis capabilities (MusicPy path is optional + under-tested)
+- Performance optimizations (numpy vectorization of matrix ops)
 - Documentation improvements
 - Advanced matrix operations and transformations
+
+### Workflow
+
+1. Fork and clone; `pip install -e ".[dev]"`.
+2. Run `pytest tests/` — the suite must stay green (214 tests).
+3. Follow the flat-package layout (top-level dirs = importable packages).
+4. Add tests for any new module; keep the zero-drift golden harness intact.
+5. Update `CHANGELOG.md` under `[Unreleased]`.
 
 ## License
 

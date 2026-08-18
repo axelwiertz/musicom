@@ -20,7 +20,6 @@ build/
 .kilo/
 plans/
 projects/
-research/
 
 # OS
 .DS_Store

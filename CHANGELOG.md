@@ -32,6 +32,11 @@ The project is stable and testable since the 2026-07 hardening pass
 ### Changed
 - Corrected `ai.utils.visualizer` → `visualization.grid` import across docs/skills.
 - Hindemith rank corrected to authentic Series 2 (12 ranks, tritone = 11).
+- **Pruned `research/`**: removed 11 files already promoted to library code
+  (see `research/README.md` for the full mapping). Kept two open seeds —
+  `trainmodel.py` (neural generation) and `intervalnetwork.py` (graph export).
+- Added `research/README.md` documenting promoted modules + open contribution
+  areas; rewrote the README Contributing section around those areas.
 
 ## [0.1.0] — 2024-05 → present
 
