@@ -2,9 +2,9 @@
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/version-0.1.0-green.svg)](https://github.com/musicom/musicom)
+[![Version](https://img.shields.io/badge/version-0.1.0-green.svg)](https://github.com/axelwiertz/musicom)
 
-**Musicom** is a Python-based music composition and analysis framework that combines music theory, algorithmic generation, and computational analysis. It leverages both `music21` and `musicpy` libraries to provide a comprehensive toolkit for creating, analyzing, and transforming musical compositions.
+**Musicom** is a Python-based music composition and analysis framework that combines music theory, algorithmic generation, and computational analysis. It provides a comprehensive toolkit for creating, analyzing, and transforming musical compositions — from symbolic structures (UnitMatrix, MusicUnit) through algorithmic generators to sound synthesis, DSP effects, and mastering.
 
 Algorithmic and structured music composition is treated as a series of transformations on organized data structures, allowing for systematic and generative approaches to creating music.
 
@@ -143,6 +143,11 @@ pip install numpy mido scipy music21 networkx pandas matplotlib
 | `matplotlib` | ≥3.7.0 | Visualization |
 | `networkx` | ≥3.1 | Network/graph analysis |
 
+> **Note:** `musicpy`, `music21py`, and `showscore` are optional analysis
+> dependencies used by `analysis/` and `converters/`. They are listed in
+> `requirements.txt` but not in `pyproject.toml` (install separately if you
+> need the MusicPy analysis path).
+
 ## Project Structure
 
 ```
@@ -174,11 +179,12 @@ musicom/
 ├── visualization/         # Visual representations
 ├── utilities/             # Helper utilities
 ├── examples/              # Example scripts
-├── projects/              # Project notebooks
-├── research/              # Research experiments
+├── hermes_agent/          # Agent operational knowledge (workflows, registries, surveillance)
 ├── tests/                 # Unit tests
 ├── pyproject.toml        # Project configuration
 ├── requirements.txt      # Dependencies
+├── CHANGELOG.md          # Release history
+├── LICENSE               # MIT license
 └── README.md             # This file
 ```
 
@@ -316,7 +322,7 @@ Run with coverage over the flat packages:
 pytest tests/ --cov=structures --cov=workflows --cov=generators --cov-report=html
 ```
 
-> **Suite status:** green — 42 passed, 0 skipped. Includes a
+> **Suite status:** green — 183 passed, 0 skipped. Includes a
 > golden-file MIDI regression harness (`tests/test_harness_golden.py`) that
 > locks in zero-drift, deterministic, non-empty exports.
 
@@ -333,6 +339,11 @@ Contributions are welcome! Areas for enhancement:
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## History
+
+See [CHANGELOG.md](CHANGELOG.md) for the release history, and the git log for
+the full phase-by-phase development record (309 commits, 2024 → present).
 
 ## Acknowledgments
 

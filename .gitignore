@@ -16,6 +16,12 @@ build/
 .vscode/
 *.swp
 
+# Agent internal state (not library code)
+.kilo/
+plans/
+projects/
+research/
+
 # OS
 .DS_Store
 Thumbs.db
