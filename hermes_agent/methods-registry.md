@@ -35,6 +35,9 @@ Status: `implemented` = in sound/ package · `partial` = some pieces exist · `r
 | — | Polyphonic Multi-Engine (Astrolab-style) | implemented | sound/synthesis/polysynth.py |
 | SP-004 | Formant Vocal Synthesis | implemented | sound/synthesis/vocal.py |
 | — | Additive Synthesis (SoundWave) | implemented | sound/synthesis/additive.py |
+| — | Mono Subtractive Synth (AD-202 / MC-202-style) | implemented | sound/synthesis/mono_synth.py |
+| — | DX7 Voice Format Parser (Rithmatic-style) | implemented | sound/synthesis/dx7_voice.py |
+| — | Equation→Waveform Synthesis (MathSynth-style) | implemented | sound/synthesis/equation_synth.py |
 
 ## Interval-Based Composition (NEW)
 
@@ -62,6 +65,9 @@ Status: `implemented` = in sound/ package · `partial` = some pieces exist · `r
 | SP-021 | Binaural Woodworth-Schlosberg Spatialization | research | — (HRTF ITD/ILD) |
 | — | Vowel Filter Bank (Vowel-Blender-style) | implemented | sound/effects/vowel_filter.py |
 | — | Tape Delay / Sample Player / Drum Machine (VST-Classics-style) | implemented | sound/effects/tape_delay.py |
+| — | Rhythmic Spectral Gate (Spectdrum-style) | implemented | sound/effects/spectral_gate.py |
+| — | Tilt EQ (Triton Tilt EQ-style) | implemented | sound/effects/tilt_eq.py |
+| — | Gated-Decay Reverb + Shimmer (Liminal Space 2-style) | partial | sound/effects/liminal_reverb.py |
 
 ## Mastering (from MusicTech workflow)
 
@@ -81,7 +87,8 @@ Status: `implemented` = in sound/ package · `partial` = some pieces exist · `r
 | EuclideanCore (Bjorklund) | implemented | sound/generators/event_core.py |
 | LSystemCore | implemented | sound/generators/event_core.py |
 | WeightedRandomCore | implemented | sound/generators/event_core.py |
-| Ratchet Sequencer (SuperOS-808-style) | implemented | sound/generators/ratchet_seq.py |
+| — | Ratchet Sequencer (SuperOS-808-style) | implemented | sound/generators/ratchet_seq.py |
+| — | Complex Noise Generator (Q210-style) | implemented | sound/generators/complex_noise.py |
 
 ## Planned (from surveillance, see surveillance.md)
 
@@ -91,3 +98,5 @@ Status: `implemented` = in sound/ package · `partial` = some pieces exist · `r
 | Mass-spring physical modeling | low | synthesis/physical.py, JAX optional |
 | Guitar Pro / tab export | future | transcription pipeline |
 | Flat.io integration | future | integrations/flat_io.py |
+| Liminal Space 2 full algorithm library | low | liminal_reverb.py has gated decay + shimmer; 4,636 profiled algorithms + per-tap DLFO need parameter-scan framework |
+| Monochord chord library / strum | low | chord voicing engine needs hand-voiced chord data or algorithmic voicing generator |

@@ -37,7 +37,14 @@ comparable to, and how do I use it in a workflow?*
 | `sound/modular/patch_loader.py` | PatchLoader, PatchBuilder | modular | Karst patches | JSON patch → graph |
 | `sound/generators/event_core.py` | EventCore + Markov/Stochastic/Euclidean/LSystem/WeightedRandom cores | generative | KARST | params → event seq |
 | `sound/generators/ratchet_seq.py` | RatchetSequencer | sequencing | SuperOS-808 | step+ratchet+prob+accent → events |
+| `sound/generators/complex_noise.py` | ComplexNoise | synthesis (noise) | Q210 complex noise | noise type → white/pink/metallic/grainy/gate |
 | `sound/generators/dice.py` | DiceVariation | variation | Karst dice | params → varied params |
+| `sound/synthesis/mono_synth.py` | MonoSynth | synthesis | AD-202 / Roland MC-202 | osc+filter+env+lfo → mono WAV |
+| `sound/synthesis/dx7_voice.py` | DX7Voice, DX7Operator, parse_dx7_packed/expanded | format parser | Rithmatic, DX7 | 128/155-byte voice → params dict |
+| `sound/synthesis/equation_synth.py` | EquationSynth | synthesis | MathSynth | math expr (t,f,dur) → WAV |
+| `sound/effects/spectral_gate.py` | SpectralGate | rhythmic spectral FX | Spectdrum | audio+patterns → gated audio |
+| `sound/effects/tilt_eq.py` | TiltEQ | EQ | Triton Tilt EQ | audio+tilt → tilted audio |
+| `sound/effects/liminal_reverb.py` | LiminalReverb | reverb | Liminal Space 2 | audio → gated/shimmer reverb |
 | `sound/utils/midi.py` | MicrotonalExporter | export | KHÔRA microtonal | notes → pitch-bend MIDI |
 | `sound/tuning/just_intonation.py` | JustIntonation | tuning | KHÔRA | ratio → freq/scale |
 | `sound/sync/clock.py` | DAWClockBridge | sync | MTC/MIDI clock | bpm → clock pulses |
@@ -49,10 +56,10 @@ comparable to, and how do I use it in a workflow?*
 
 | Category | Purpose | Key files |
 |---|---|---|
-| **synthesis/** | create audio from scratch | phase_mod, modal, granular, vocal, additive, bowed, mass_spring, polysynth, west_coast |
-| **effects/** | transform existing audio | filter, reverb, fdn_reverb, vowel_filter, tape_delay, multiband, quantize_mod, mastering, production_chain |
+| **synthesis/** | create audio from scratch | phase_mod, modal, granular, vocal, additive, bowed, mass_spring, polysynth, west_coast, mono_synth, dx7_voice, equation_synth |
+| **effects/** | transform existing audio | filter, reverb, fdn_reverb, vowel_filter, tape_delay, multiband, quantize_mod, mastering, production_chain, spectral_gate, tilt_eq, liminal_reverb |
 | **modular/** | node-graph DSP | graph, math_mod, patch_loader |
-| **generators/** | generative event/pattern engines | event_core, dice |
+| **generators/** | generative event/pattern engines | event_core, dice, ratchet_seq, complex_noise |
 | **analysis/** | extract info from audio | pitch, rhythm, chroma |
 | **render/** | symbolic → audio | fluidsynth, vst, pipeline |
 | **tuning/** | microtonal / just intonation | just_intonation |

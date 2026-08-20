@@ -3,6 +3,19 @@
 Replicability analyses from the Hermes agent's music-tech surveillance cron
 (job e2760579d2c8, runs Mon/Thu). Distilled verdicts for musicom adoption.
 
+## 2026-08-20 Scan
+
+| Item | Technique | Verdict | Musicom path |
+|------|-----------|---------|--------------|
+| Spectdrum (rhythmic spectral gate) | Multi-band split + per-band step sequencer (polyrhythmic lengths, velocity/accents/swing) + master normalize | YES | **DONE** — sound/effects/spectral_gate.py |
+| Rithmatic (DX7 voice parser) | Packed 128-byte + expanded 155-byte DX7 voice parsing (op params, algorithm, feedback, name) | YES | **DONE** — sound/synthesis/dx7_voice.py |
+| Synthesizers.com Q210 (complex noise) | White/pink/metallic noise + grainy processing + random gates | YES | **DONE** — sound/generators/complex_noise.py |
+| Audio Damage AD-202 (MC-202 monosynth) | Saw/pulse/sub/noise VCO → 4-pole lowpass + resonance → ADSR → LFO → post-VCA color (saturation/drive/tilt EQ) | YES | **DONE** — sound/synthesis/mono_synth.py |
+| Triton Tilt EQ | Tilt EQ rotating tonal balance around a pivot frequency | YES | **DONE** — sound/effects/tilt_eq.py |
+| Liminal Space 2 (reverb) | Algorithmic reverb + gated/collapse decay envelopes + shimmer pitch-shift + LEXITONE decay shaping | PARTIAL | sound/effects/liminal_reverb.py (gated decay + shimmer + LEXITONE in; 4,636 profiled algorithms / per-tap DLFO modulation not replicated) |
+| MathSynth (equation synth) | Equation → waveform evaluation engine with safe namespace | YES | **DONE** — sound/synthesis/equation_synth.py |
+| Monochord (chord workstation) | Chord voicing from tonal sets + arpeggiation/strum/humanization MIDI output | PARTIAL | sound/synthesis/mono_synth.py + generators/ratchet_seq.py (chord triggers + 600 chord library NOT replicated; requires sample library + hand-voiced chord data) |
+
 ## 2026-08-13 Scan
 
 | Item | Technique | Verdict | Musicom path |
