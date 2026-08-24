@@ -3,6 +3,22 @@
 Replicability analyses from the Hermes agent's music-tech surveillance cron
 (job e2760579d2c8, runs Mon/Thu). Distilled verdicts for musicom adoption.
 
+## 2026-08-24 Scan
+
+| Item | Technique | Verdict | Musicom path |
+|------|-----------|---------|--------------|
+| Minimal Audio Lucid (granular FX) | Real-time granulation + scale-lock (grain pitch quantized to user key/scale) + tempo-synced grain scheduling + stretch/scrub modes + harmonic grain delay (scale-locked shimmer/arp taps) | YES | **DONE** — sound/effects/scale_locked_granular.py (350-preset library, Animator X-Y pad, multi-mode grain filter/imager = proprietary, not replicated) |
+| Rapid Flow miniGRID (sequencer) | 4-lane MIDI step sequencer with per-lane ±64 ms micro time shift (0.02 ms fine), 32 steps/lane, per-lane mute/solo + 7 vintage shuffle styles (TR-909, Tanzbar, MPC60, SP-12, MPC3000, DMX, LM-1) | YES | **DONE** — sound/generators/micro_timing_seq.py (DAW transport lock / plugin UI = host concern, not replicated) |
+| Parish Audio Parametric Compressor | Up to 10 overlapping parametric compressor bands (bell filters, no fixed crossovers), per-band threshold/ratio/attack/release/makeup + frequency/width, per-band detection source (band-limited / full-range / external sidechain) | YES | **DONE** — sound/effects/overlap_comp.py (interactive spectrum display = UI, not replicated) |
+| Sound Radix Radical1 Solo (free additive monosynth) | Additive oscillator engine + filters + modulation; full Radical1 adds Route/Quantize modulators (already covered by sound/effects/quantize_mod.py) | PARTIAL | sound/synthesis/additive.py exists (SoundWave); Radical1's proprietary additive engine + preset library NOT replicated — no new code |
+| Audio Modeling PolySWAM (physical-modeling orchestra) | SWAM physical modeling engine + proprietary voice-allocation distributing notes among virtual players (legato/staccato/portamento from performance, no keyswitches) | PARTIAL | sound/synthesis/bowed.py + voice_allocator.py cover components; SWAM's per-player phrasing engine is proprietary — no new code |
+| Love Synthesizers First Love (hardware FM/wave-morphing synth) | Wave morphing + morphing envelopes + FM, 4-part multitimbral, live looping, riff sequencing, microtonal tuning | PARTIAL | sound/synthesis/phase_mod.py (FM) + west_coast.py (wavefolder) + polyrhythm.py (arps) cover pieces; hardware engine proprietary — no new code |
+| Cubase 15 / Celemony Tonalic | Virtual session musician following the Chord Track; pattern 'sets' with transitions/endings (strum/pick/arpeggio/power-chord/melodic) | PARTIAL | Orchestration direction; needs recorded performance content + chord-track follower — future (see planned) |
+| Yurt Rock Dr. Fill | Human-played drum fill sample library (no AI) | NO | Sample content, not algorithm |
+| Harrison Flex-10 (interface) | Vintage console-style mic pres + HP/LP filters + inserts | NO | Analog hardware |
+| KRK V Series Five (monitors) | Wireless control of monitor tuning | NO | Hardware/network |
+| Audiocube Space | 3D panner (binaural/spatial) | PARTIAL | sound/synthesis/binaural.py covers binaural/Haas; 3D panner UI + HRTF set not replicated |
+
 ## 2026-08-20 Scan
 
 | Item | Technique | Verdict | Musicom path |

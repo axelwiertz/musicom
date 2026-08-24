@@ -45,6 +45,9 @@ comparable to, and how do I use it in a workflow?*
 | `sound/effects/spectral_gate.py` | SpectralGate | rhythmic spectral FX | Spectdrum | audio+patterns → gated audio |
 | `sound/effects/tilt_eq.py` | TiltEQ | EQ | Triton Tilt EQ | audio+tilt → tilted audio |
 | `sound/effects/liminal_reverb.py` | LiminalReverb | reverb | Liminal Space 2 | audio → gated/shimmer reverb |
+| `sound/effects/scale_locked_granular.py` | ScaleLockedGranular | granular FX | Minimal Audio Lucid | audio → scale/tempo-locked grains + harmonic delay |
+| `sound/effects/overlap_comp.py` | OverlapCompressor, CompBand | dynamics | Parish Audio Parametric Compressor | audio → overlapping-band compressed audio |
+| `sound/generators/micro_timing_seq.py` | MicroTimingSequencer | sequencing | Rapid Flow miniGRID | lanes+shifts+shuffle → timed MIDI events |
 | `sound/utils/midi.py` | MicrotonalExporter | export | KHÔRA microtonal | notes → pitch-bend MIDI |
 | `sound/tuning/just_intonation.py` | JustIntonation | tuning | KHÔRA | ratio → freq/scale |
 | `sound/sync/clock.py` | DAWClockBridge | sync | MTC/MIDI clock | bpm → clock pulses |
@@ -57,9 +60,9 @@ comparable to, and how do I use it in a workflow?*
 | Category | Purpose | Key files |
 |---|---|---|
 | **synthesis/** | create audio from scratch | phase_mod, modal, granular, vocal, additive, bowed, mass_spring, polysynth, west_coast, mono_synth, dx7_voice, equation_synth |
-| **effects/** | transform existing audio | filter, reverb, fdn_reverb, vowel_filter, tape_delay, multiband, quantize_mod, mastering, production_chain, spectral_gate, tilt_eq, liminal_reverb |
+| **effects/** | transform existing audio | filter, reverb, fdn_reverb, vowel_filter, tape_delay, multiband, quantize_mod, mastering, production_chain, spectral_gate, tilt_eq, liminal_reverb, scale_locked_granular, overlap_comp |
 | **modular/** | node-graph DSP | graph, math_mod, patch_loader |
-| **generators/** | generative event/pattern engines | event_core, dice, ratchet_seq, complex_noise |
+| **generators/** | generative event/pattern engines | event_core, dice, ratchet_seq, complex_noise, micro_timing_seq |
 | **analysis/** | extract info from audio | pitch, rhythm, chroma |
 | **render/** | symbolic → audio | fluidsynth, vst, pipeline |
 | **tuning/** | microtonal / just intonation | just_intonation |

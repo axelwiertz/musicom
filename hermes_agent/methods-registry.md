@@ -68,6 +68,9 @@ Status: `implemented` = in sound/ package · `partial` = some pieces exist · `r
 | — | Rhythmic Spectral Gate (Spectdrum-style) | implemented | sound/effects/spectral_gate.py |
 | — | Tilt EQ (Triton Tilt EQ-style) | implemented | sound/effects/tilt_eq.py |
 | — | Gated-Decay Reverb + Shimmer (Liminal Space 2-style) | partial | sound/effects/liminal_reverb.py |
+| — | Scale-Locked Granular FX (Lucid-style) | implemented | sound/effects/scale_locked_granular.py |
+| — | Overlapping-Band Parametric Compressor (Parish Audio-style) | implemented | sound/effects/overlap_comp.py |
+| — | Micro-Timing Shift Sequencer (miniGRID-style) | implemented | sound/generators/micro_timing_seq.py |
 
 ## Mastering (from MusicTech workflow)
 
