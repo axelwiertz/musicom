@@ -3,6 +3,19 @@
 Replicability analyses from the Hermes agent's music-tech surveillance cron
 (job e2760579d2c8, runs Mon/Thu). Distilled verdicts for musicom adoption.
 
+## 2026-08-27 Scan
+
+| Item | Technique | Verdict | Musicom path |
+|------|-----------|---------|--------------|
+| Korg Volca Drum alt firmware "hj Firmware" (trig conditions) | Elektron-style trig conditions (A-B, first, last, every-N, FILL, discrete 50/62/75/87% probs), negative accent → ghost notes, negative swing, SLICE sub-step patterns | YES | **DONE** — sound/generators/trig_cond_seq.py (FUNC+knob editing / TOUCH FX pads = hardware UI, not replicated) |
+| AudioKit Pro Super 606 (synth drum machine) | 606-style drum synthesis engine: pitch-swept sine kick (+XL mode), tonal body + bandpassed-noise snare, pitch-swept toms, multi-burst noise clap, XOR'd square+noise metallic hats; 606 sequencing: flams (9 types + ahead-of-beat), ratchets, ghost notes, swing | YES | **DONE** — sound/synthesis/drum_synth_606.py (AUv3/Ableton Link/MIDI import/WAV export = host concerns; Magic Pattern Generator/Smart Fills heuristics not replicated) |
+| Groove Synthesis 3rd Wave OS 2.0a (Make Waves Spectral mode) | Spectral wavetable extraction: STFT the source, score frames by harmonic cleanness, pick best slices spread across the file, phase-align cycles → wavetable; plus fractional-semitone Shimmer reverb | YES | **DONE** — sound/synthesis/spectral_wavetable.py (hardware UI + Pitch-On/Pitch-Off modes not replicated; shimmer already in sound/effects/liminal_reverb.py) |
+| Hot Shower Audio bathROOMs (free reverb) | Small-room reverb: early-reflection tapped delays (position/surface), independent slap feedback loop, wash balance vs Schroeder diffuse tail, temp tilt (bright/warm) | YES | **DONE** — sound/effects/room_reverb.py (5 modeled bathroom IRs + sidechain ducker + A/B UI not replicated) |
+| Liminal Space 2 (reverb, v2 release) | 4,636 profiled algorithms, gated/collapse decays, shimmer, per-tap DLFO, LEXITONE shaping | PARTIAL | sound/effects/liminal_reverb.py (already covers gated decay + shimmer + LEXITONE; algorithm library + DLFO need parameter-scan framework) — no new code |
+| Dreamtonics Instrument X (physical-modeling orchestra) | Neural Acoustics Modeling platform; articulation switching by pitch/length (no keyswitches); scoring-stage response captured via dodecahedral speaker array; Dynamics Lane auto-mapping | PARTIAL | Needs proprietary neural nets + multi-channel IR captures — no new code (see planned) |
+| SOMA Laboratory Enigma (hardware) | Metal-object proximity scanner (0–20 mm) controls sonic landscape; object shape/size/type → sound | NO | Hardware sensor + proprietary mapping; no replicable DSP |
+| Groove Synthesis 3rd Wave Shimmer Verb | Fractional-semitone pitch shift (−1..+2 oct) in reverb feedback, mod-matrix routable Rev Time/Pitch/Cutoff | PARTIAL | Covered by sound/effects/liminal_reverb.py shimmer; fractional detune + mod-matrix routing could extend it — no new code |
+
 ## 2026-08-24 Scan
 
 | Item | Technique | Verdict | Musicom path |

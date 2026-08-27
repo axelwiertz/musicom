@@ -71,6 +71,10 @@ Status: `implemented` = in sound/ package · `partial` = some pieces exist · `r
 | — | Scale-Locked Granular FX (Lucid-style) | implemented | sound/effects/scale_locked_granular.py |
 | — | Overlapping-Band Parametric Compressor (Parish Audio-style) | implemented | sound/effects/overlap_comp.py |
 | — | Micro-Timing Shift Sequencer (miniGRID-style) | implemented | sound/generators/micro_timing_seq.py |
+| — | Trig-Condition Sequencer (Volca Drum alt-firmware-style) | implemented | sound/generators/trig_cond_seq.py |
+| — | 606-Style Drum Synthesis Engine (Super 606-style) | implemented | sound/synthesis/drum_synth_606.py |
+| — | Spectral Wavetable Extraction (3rd Wave Make Waves-style) | implemented | sound/synthesis/spectral_wavetable.py |
+| — | Room Reverb with Slap/Wash/Tilt (bathROOMs-style) | implemented | sound/effects/room_reverb.py |
 
 ## Mastering (from MusicTech workflow)
 
@@ -92,6 +96,7 @@ Status: `implemented` = in sound/ package · `partial` = some pieces exist · `r
 | WeightedRandomCore | implemented | sound/generators/event_core.py |
 | — | Ratchet Sequencer (SuperOS-808-style) | implemented | sound/generators/ratchet_seq.py |
 | — | Complex Noise Generator (Q210-style) | implemented | sound/generators/complex_noise.py |
+| — | Trig-Condition Sequencer (Volca Drum alt-firmware-style) | implemented | sound/generators/trig_cond_seq.py |
 
 ## Planned (from surveillance, see surveillance.md)
 
@@ -103,3 +108,4 @@ Status: `implemented` = in sound/ package · `partial` = some pieces exist · `r
 | Flat.io integration | future | integrations/flat_io.py |
 | Liminal Space 2 full algorithm library | low | liminal_reverb.py has gated decay + shimmer; 4,636 profiled algorithms + per-tap DLFO need parameter-scan framework |
 | Monochord chord library / strum | low | chord voicing engine needs hand-voiced chord data or algorithmic voicing generator |
+| Instrument X neural orchestral modeling | low | proprietary neural nets + dodecahedral IR captures; articulation-by-pitch/length routing could be approximated with voice_allocator + bowed.py |
