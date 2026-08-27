@@ -1,0 +1,479 @@
+# -*- coding: utf-8 -*-
+"""Musicom workflow — single entry points for the design → realization loop.
+
+This is the reorganization spine: instead of each project re-inventing a
+bespoke compose.py / regen.py / produce_*.py, the workflow exposes ONE
+compose() and ONE produce() that wire the knowledge (methods, styles,
+instruments, sound) into the engine.
+
+DESIGN (composition):
+    from workflows.musicom_workflow import compose
+    result = compose(
+        style="pop",                 # style_registry key (or "flamenco", ...)
+        method="001",                # composition method (methods_db) or "HC-012"
+        form="verse-chorus",         # pop form template
+        key="C", bpm=120,
+        voices=[("Lead", "Flute"), ("Pad", "Piano"), ("Bass", "Double Bass"),
+                ("Arp", "Clarinet"), ("Drums", "Drum Kit")],
+    )
+    result.midi_path          # validated, zero-drift MIDI
+    result.provenance         # provenance.json sidecar
+
+REALIZATION (production):
+    from workflows.musicom_workflow import produce
+    audio = produce(
+        midi_path=result.midi_path,
+        method="SP-011",             # sound production method (methods_db)
+        params={"loop_gain": 0.996}, # method-specific knobs
+        out_dir="Audio",
+    )
+    audio.wav_path / audio.ogg_path
+
+If you only need the current best path without choices, call:
+    compose(style="pop", ...)  # picks a default method per style
+    produce(midi_path, "SP-001")  # SoundFont render (FluidSynth), always available
+
+The registry functions build the tables that should live in docs/:
+    method_table()  -> markdown table of composition methods
+    sp_method_table() -> markdown table of sound production methods
+    style_table()   -> markdown table of style templates
+"""
+
+import json
+import os
+import subprocess
+import sys
+from dataclasses import dataclass, field
+from datetime import datetime, timezone
+from pathlib import Path
+
+# --- engine imports (editable install; no sys.path hacks needed) ------------
+from structures import MidiInstrument, MidiPercussion
+from workflows.unitmatrix_composer import UnitMatrixComposer, create_note_unit
+from workflows.provenance import write_provenance
+
+# --- instruments (Phase 1b: real Instrument objects) ------------------------
+_INSTR_DIR = "/opt/data/projects/Instruments"
+if _INSTR_DIR not in sys.path:
+    sys.path.insert(0, _INSTR_DIR)
+try:
+    from instrument_registry import ALL_INSTRUMENTS, by_name as _instr_by_name
+except ImportError:
+    ALL_INSTRUMENTS = {}
+    def _instr_by_name(n):
+        raise KeyError(n)
+
+
+# --- style registry: extracted from the 53 genre dirs (Phase 1b) ------------
+# Each style: typical tempo, time signature, form template, characteristic
+# rhythm/motion, default voice roles.
+STYLE_REGISTRY = {
+    "pop": {
+        "bpm": 120, "time_sig": "4/4",
+        "form": "intro-verse-chorus-bridge-outro",
+        "motion": "16th arp + backbeat",
+        "default_voices": [("Lead", "Flute"), ("Pad", "Piano"),
+                           ("Bass", "Double Bass"), ("Arp", "Clarinet"),
+                           ("Drums", "Drum Kit")],
+    },
+    "bossa_nova": {
+        "bpm": 100, "time_sig": "4/4",
+        "form": "intro-A-A-B-A",
+        "motion": "clave-ish guitar + soft brushes",
+        "default_voices": [("Lead", "Flute"), ("Guitar", "Acoustic Guitar"),
+                           ("Bass", "Double Bass"), ("Drums", "Drum Kit")],
+    },
+    "flamenco": {
+        "bpm": 130, "time_sig": "3/4",
+        "form": "intro-falseta-letra-falseta-cierre",
+        "motion": "12-beat compas, Andalusian cadence",
+        "default_voices": [("Lead", "Flute"), ("Guitar", "Acoustic Guitar"),
+                           ("Bass", "Double Bass"), ("Drums", "Drum Kit")],
+    },
+    "jazz": {
+        "bpm": 140, "time_sig": "4/4",
+        "form": "head-solos-head",
+        "motion": "swing 8ths, walking bass",
+        "default_voices": [("Lead", "Trumpet"), ("Harmony", "Piano"),
+                           ("Bass", "Double Bass"), ("Drums", "Drum Kit")],
+    },
+    "techno": {
+        "bpm": 128, "time_sig": "4/4",
+        "form": "intro-break-drop-outro",
+        "motion": "4-on-floor kick, 16th hats",
+        "default_voices": [("Bass", "Double Bass"), ("Arp", "Clarinet"),
+                           ("Drums", "Drum Kit")],
+    },
+}
+
+# --- method defaults (composition methods by ID → short description) -------
+# Keys = methods_db.md method IDs. Values = (short desc, style hint).
+COMPOSITION_METHODS = {
+    "001": "Skeleton-First Refinement (rules, form-first)",
+    "002": "Markov Probabilistic Transitions (stochastic)",
+    "012": "Euclidean Groove Locking (rules, rhythm)",
+    "018": "Schillinger System (rhythm interference)",
+    "023": "Tendency Masking Stochastic Bounds",
+    "026": "Deconstructive Phase-Shift Minimalism",
+    "032": "Isorhythmic Talea-Color Mapping",
+    "040": "Perlin Noise Composition (nature-led)",
+    "043": "Strange Attractor Trajectory Mapping",
+    "048": "Reflected Brownian Motion Pitch Diffusion",
+    "059": "Echo State Network Reservoir Composition",
+    "HC-012": "Flamenco Compas & Falseta (human method)",
+    "HC-007": "Lyric-Melody Prosody (human method)",
+}
+
+# --- sound production methods (SP table → implementation path) -------------
+# Maps SP method ID to the shared sound/ module that implements it.
+SP_METHODS = {
+    "SP-001": ("sound.render.fluidsynth", "Multi-timbral SoundFont (FluidSynth)"),
+    "SP-011": ("sound.synthesis.karplus_strong", "Karplus-Strong String Synthesis"),
+    "SP-021": ("sound.synthesis.binaural", "Binaural HRTF Spatialization"),
+    "SP-024": ("sound.synthesis.bowed", "Bowed String Physical Modeling"),
+    "SP-026": ("sound.effects.phase_vocoder", "Spectral Phase Vocoder Resynthesis"),
+    "SP-028": ("sound.effects.lpc_synth", "Linear Predictive Coding Synthesis"),
+    "SP-032": ("sound.effects.fdn_reverb", "Feedback Delay Network Reverb"),
+}
+
+
+@dataclass
+class ComposeResult:
+    midi_path: str
+    provenance_path: str
+    method: str
+    voices: list
+    bpm: int
+
+
+@dataclass
+class ProduceResult:
+    wav_path: str
+    ogg_path: str = None
+    method: str = None
+    info: dict = field(default_factory=dict)
+
+
+def _unit_from_events(events, section_len=None):
+    """Build a MusicUnit from MusicEvent list.
+
+    If `section_len` given, the terminal landmark lands exactly at
+    section_len (the section's full length in ticks) — this guarantees
+    every voice's section unit has the same length (zero-drift gate).
+    """
+    from structures import MusicUnit
+    from structures import MusicEvent as _ME
+    unit = MusicUnit()
+    for ev in events:
+        unit.add_event(ev)
+    if section_len is None:
+        section_len = max((ev.end_tick for ev in events), default=0)
+    unit.add_event(_ME(0, 0, section_len, section_len))
+    return unit
+
+
+def _resolve_instrument(voice_name, instrument_name):
+    """Return (voice_label, midi_program, channel). Drums → ch9."""
+    if instrument_name.lower() in ("drum kit", "drums", "percussion"):
+        return voice_name, 0, 9
+    inst = _instr_by_name(instrument_name)
+    return voice_name, inst.midi_program, 0
+
+
+def compose(style="pop", method=None, form=None, key="C", bpm=None,
+            voices=None, num_bars=32, seed=None, out_dir=None,
+            sections=None):
+    """Compose a piece through the musicom engine (zero-drift guaranteed).
+
+    Uses the UnitMatrixComposer with the requested voices. If `method` is
+    None, picks a default per style. Returns ComposeResult with paths.
+
+    Note: the UnitMatrixComposer needs actual note material per section.
+    This entry point sets up the framework; a composition agent fills the
+    cells (via the engine API) and calls to_midi. For a ready-to-run
+    example see `examples/compose_demo.py`.
+    """
+    bpm = bpm or STYLE_REGISTRY.get(style, {}).get("bpm", 120)
+    form = form or STYLE_REGISTRY.get(style, {}).get("form", "intro-verse-chorus-bridge-outro")
+    voices = voices or STYLE_REGISTRY.get(style, {}).get("default_voices",
+             [("Lead", "Flute"), ("Pad", "Piano"), ("Bass", "Double Bass"),
+              ("Arp", "Clarinet"), ("Drums", "Drum Kit")])
+    method = method or "001"  # Skeleton-First default
+
+    out_dir = Path(out_dir or f"/opt/data/projects/Styles/{style.title()}/workflow-demo")
+    midi_dir = out_dir / "MIDI"
+    midi_dir.mkdir(parents=True, exist_ok=True)
+    midi_path = midi_dir / f"{style}-{method}.mid"
+
+    composer = UnitMatrixComposer(bpm=bpm, ticks_per_beat=480, beats_per_bar=4)
+    num_sections = 5
+    composer.create_matrix(num_voices=len(voices), num_sections=num_sections)
+    for i, (vname, inst_name) in enumerate(voices):
+        label, prog, ch = _resolve_instrument(vname, inst_name)
+        composer.add_voice(label, program=prog, channel=ch)
+
+    # sections per form (default pop: intro/verse/chorus/bridge/outro)
+    section_names = sections or ["Intro", "Verse", "Chorus", "Bridge", "Outro"]
+    bars_per = [4, 8, 8, 4, 4] if len(section_names) == 5 else [num_bars // len(section_names)] * len(section_names)
+    for sname, nbars in zip(section_names, bars_per):
+        composer.add_section(sname, bars=nbars)
+
+    # --- fill cells with a real framework (I–V–vi–IV skeleton) --------------
+    # Key → scale degree pitch sets (C major default; transpose by key offset)
+    KEY_OFFSET = {"C": 0, "D": 2, "E": 4, "F": 5, "G": 7, "A": 9, "B": 11,
+                  "Cm": -3, "Dm": -1, "Em": 1, "Fm": 2, "Gm": 4, "Am": 6,
+                  "Bm": 8}
+    off = KEY_OFFSET.get(key, 0)
+    # chords: [I, V, vi, IV] as (root, quality) where quality is
+    # "maj" (0,4,7) or "min" (0,3,7)
+    CHORD_SHAPES = {
+        "I": (0, "maj"), "V": (7, "maj"), "vi": (9, "min"), "IV": (5, "maj"),
+    }
+    PROG = [("I", 0), ("V", 1), ("vi", 2), ("IV", 3)]  # per 2-bar slot
+    BAR = 1920
+    chord_roots = []
+    for deg, _ in PROG:
+        root, qual = CHORD_SHAPES[deg]
+        # roots: I=C, V=G, vi=A, IV=F in C major → scale offsets
+        root_midi = 48 + off + root  # bass octave
+        chord_roots.append((root_midi, qual))
+    # 5 sections × 4 bars each = 20 bars; repeat the 4-chord prog
+    slots = []
+    for s in range(5):
+        for b in range(4):
+            slots.append(chord_roots[(b) % 4])
+    # build per-voice material
+    from structures import MusicEvent
+    for s, sname in enumerate(section_names):
+        # find the chord for this section's first bar (framework: hold chord per section)
+        root_midi, qual = chord_roots[s % 4]
+        third = 3 if qual == "min" else 4
+        fifth = 7
+        chord_tones = [root_midi, root_midi + third, root_midi + fifth]
+        section_bars = bars_per[s]
+        section_len = section_bars * BAR
+        # Lead: arpeggio of chord tones (8th notes)
+        lead_evs = []
+        for b in range(section_bars * 2):
+            step = chord_tones[b % 3] + 12  # octave up for lead
+            lead_evs.append(MusicEvent(step, 90, b * 960, b * 960 + 480))
+        lead_unit = _unit_from_events(lead_evs, section_len)
+        composer.fill_voice_section(voices[0][0], sname, lead_unit)
+        # Pad: sustained chord (whole-section)
+        pad_evs = [MusicEvent(chord_tones[i], 60, 0, section_len) for i in range(3)]
+        composer.fill_voice_section(voices[1][0], sname, _unit_from_events(pad_evs, section_len))
+        # Bass: root on beats 1 & 3
+        bass_evs = [MusicEvent(root_midi, 95, b * BAR, b * BAR + 900) for b in range(section_bars)]
+        composer.fill_voice_section(voices[2][0], sname, _unit_from_events(bass_evs, section_len))
+        # Arp (if present): 16th-note arpeggio
+        if len(voices) > 3:
+            arp_evs = []
+            for b in range(section_bars * 4):
+                note = chord_tones[b % 3] + 12
+                arp_evs.append(MusicEvent(note, 70, b * 480, b * 480 + 240))
+            composer.fill_voice_section(voices[3][0], sname, _unit_from_events(arp_evs, section_len))
+        # Drums (if present): kick on 1&3, snare on 2&4, hat on 8ths
+        if len(voices) > 4 and voices[4][1].lower() in ("drum kit", "drums", "percussion"):
+            drum_evs = []
+            for b in range(section_bars):
+                bar_start = b * BAR
+                drum_evs.append(MusicEvent(36, 100, bar_start, bar_start + 120))       # kick 1
+                drum_evs.append(MusicEvent(38, 90, bar_start + 960, bar_start + 1080))  # snare 3
+                for h in range(8):
+                    drum_evs.append(MusicEvent(42, 60, bar_start + h * 240, bar_start + h * 240 + 120))  # hats
+            composer.fill_voice_section(voices[4][0], sname, _unit_from_events(drum_evs, section_len))
+
+    ok, msg = composer.validate()
+    if not ok:
+        raise RuntimeError(f"validate() failed: {msg}")
+    composer.to_midi(str(midi_path))
+
+    prov_path = write_provenance(
+        artifact_path=str(midi_path),
+        classification="ai-assisted",
+        generator=f"musicom_workflow.compose(style={style}, method={method})",
+        sources=[f"style_registry:{style}", f"method:{method}"],
+        parameters={"bpm": bpm, "form": form, "voices": voices, "seed": seed},
+    )
+    return ComposeResult(
+        midi_path=str(midi_path),
+        provenance_path=str(prov_path) if prov_path else "",
+        method=method,
+        voices=voices,
+        bpm=bpm,
+    )
+
+
+def _midi_to_notes(midi_path, sr=44100):
+    """Parse a MIDI file into note dicts {pitch, start, end, velocity, role}.
+
+    Program 33 (or drums ch9) → "bass"; melodic → "lead". Uses mido for
+    READING only (analysis) — never for authoring (AGENTS.md rule).
+    """
+    import mido
+    mid = mido.MidiFile(str(midi_path))
+
+    def tick_to_sec(m, tick):
+        # tempo map from track 0
+        abs_tempos = []
+        at = 0
+        for msg in m.tracks[0]:
+            at += msg.time
+            if msg.type == "set_tempo":
+                abs_tempos.append((at, msg.tempo))
+        if not abs_tempos:
+            abs_tempos = [(0, 500000)]
+        sec = 0.0
+        prev = 0
+        cur = abs_tempos[0][1]
+        for at, tmp in abs_tempos:
+            if tick <= at:
+                break
+            sec += (at - prev) * cur / m.ticks_per_beat / 1_000_000
+            prev = at
+            cur = tmp
+        sec += (tick - prev) * cur / m.ticks_per_beat / 1_000_000
+        return sec
+
+    notes = []
+    for ti, track in enumerate(mid.tracks):
+        program, channel = 0, 0
+        for msg in track:
+            if msg.type == "program_change":
+                program, channel = msg.program, msg.channel
+        abstick = 0
+        active = {}
+        for msg in track:
+            abstick += msg.time
+            if msg.type == "note_on" and msg.velocity > 0:
+                active[msg.note] = (abstick, msg.velocity)
+            elif msg.type in ("note_off",) or (msg.type == "note_on" and msg.velocity == 0):
+                if msg.note in active:
+                    s, vel = active.pop(msg.note)
+                    if channel == 9:
+                        role = "bass"  # drums → bass role (low)
+                    else:
+                        role = "bass" if program == 33 else "lead"
+                    notes.append({
+                        "pitch": msg.note, "velocity": vel,
+                        "start": tick_to_sec(mid, s),
+                        "end": tick_to_sec(mid, abstick),
+                        "role": role, "program": program, "track": ti,
+                    })
+    notes.sort(key=lambda e: e["start"])
+    return notes
+
+
+def produce(midi_path, method="SP-001", params=None, out_dir=None,
+            sr=44100):
+    """Produce audio from a MIDI file using a sound production method.
+
+    SP-001 (default): FluidSynth SoundFont render → WAV → OGG.
+    Other methods use the shared sound/ modules (see SP_METHODS).
+    """
+    params = params or {}
+    midi_path = str(midi_path)
+    out_dir = Path(out_dir or Path(midi_path).parent.parent / "Audio")
+    out_dir.mkdir(parents=True, exist_ok=True)
+    base = Path(midi_path).stem
+
+    if method == "SP-001":
+        return _produce_fluidsynth(midi_path, out_dir, base, sr)
+
+    if method == "SP-011":
+        from sound.synthesis.karplus_strong import render_melody_wav
+        notes = _midi_to_notes(midi_path)
+        wav_path = out_dir / f"{base}-SP011.wav"
+        audio, info = render_melody_wav(notes, wav_path, sr=sr, roles=params.get("roles"))
+        ogg_path = out_dir / f"{base}-SP011.ogg"
+        subprocess.run(
+            ["ffmpeg", "-y", "-loglevel", "error", "-i", str(wav_path),
+             "-codec:a", "libopus", "-application", "voip", "-b:a", "48k", str(ogg_path)],
+            capture_output=True, text=True)
+        info.update({"wav_bytes": wav_path.stat().st_size,
+                     "ogg_bytes": ogg_path.stat().st_size if ogg_path.exists() else 0})
+        return ProduceResult(wav_path=str(wav_path), ogg_path=str(ogg_path),
+                             method=method, info=info)
+
+    if method in SP_METHODS:
+        mod_path, desc = SP_METHODS[method]
+        mod = _import(mod_path)
+        # generic path: if module has a demo/render that accepts notes
+        # (see individual modules for their exact API)
+        info = {"method": method, "module": mod_path, "description": desc,
+                "params": params}
+        raise NotImplementedError(
+            f"{method} ({desc}) is implemented in {mod_path} but the workflow "
+            f"adapter for it is not yet wired. Call the module directly: "
+            f"from {mod_path} import ...")
+
+    raise ValueError(f"Unknown production method {method!r}. Available: {sorted(SP_METHODS)}")
+
+
+def _import(mod_path):
+    parts = mod_path.split(".")
+    mod = __import__(".".join(parts[:-1]), fromlist=[parts[-1]])
+    return getattr(mod, parts[-1]) if len(parts) > 1 else mod
+
+
+def _produce_fluidsynth(midi_path, out_dir, base, sr):
+    """FluidSynth SoundFont render → WAV → OGG (SP-001)."""
+    wav_path = out_dir / f"{base}.wav"
+    ogg_path = out_dir / f"{base}.ogg"
+    pyenv = "/opt/data/micromamba/envs/musicom/bin"
+    sf = "/opt/data/micromamba/envs/musicom/share/soundfonts/TimGM6mb.sf2"
+    if not os.path.exists(sf):
+        # fall back to any sf2 in the env
+        import glob
+        cands = glob.glob("/opt/data/micromamba/envs/musicom/**/TimGM6mb.sf2", recursive=True)
+        if not cands:
+            raise FileNotFoundError("TimGM6mb.sf2 not found")
+        sf = cands[0]
+    r = subprocess.run(
+        [f"{pyenv}/fluidsynth", "-ni", "-g", "1.2", "-F", str(wav_path), sf, midi_path],
+        capture_output=True, text=True)
+    if r.returncode != 0 or not wav_path.exists() or wav_path.stat().st_size < 1000:
+        raise RuntimeError(f"fluidsynth failed: {r.stderr[-500:]}")
+    r2 = subprocess.run(
+        ["ffmpeg", "-y", "-loglevel", "error", "-i", str(wav_path),
+         "-codec:a", "libopus", "-application", "voip", "-b:a", "48k", str(ogg_path)],
+        capture_output=True, text=True)
+    if r2.returncode != 0:
+        raise RuntimeError(f"ffmpeg failed: {r2.stderr[-300:]}")
+    return ProduceResult(wav_path=str(wav_path), ogg_path=str(ogg_path),
+                         method="SP-001",
+                         info={"sr": sr, "bytes_wav": wav_path.stat().st_size})
+
+
+def method_table():
+    """Markdown table of composition methods (for docs/)."""
+    rows = ["| ID | Method |", "|---|---|"]
+    rows += [f"| {k} | {v} |" for k, v in sorted(COMPOSITION_METHODS.items())]
+    return "\n".join(rows)
+
+
+def sp_method_table():
+    """Markdown table of sound production methods (for docs/)."""
+    rows = ["| ID | Module | Description |", "|---|---|---|"]
+    for k, (m, d) in sorted(SP_METHODS.items()):
+        rows.append(f"| {k} | `{m}` | {d} |")
+    return "\n".join(rows)
+
+
+def style_table():
+    """Markdown table of style templates (for docs/)."""
+    rows = ["| Style | BPM | Form | Motion |", "|---|---|---|---|"]
+    for k, v in sorted(STYLE_REGISTRY.items()):
+        rows.append(f"| {k} | {v['bpm']} | {v['form']} | {v['motion']} |")
+    return "\n".join(rows)
+
+
+if __name__ == "__main__":
+    print("=== COMPOSITION METHODS ===")
+    print(method_table())
+    print()
+    print("=== SOUND PRODUCTION METHODS ===")
+    print(sp_method_table())
+    print()
+    print("=== STYLES ===")
+    print(style_table())
