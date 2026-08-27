@@ -35,6 +35,32 @@ Imports are **cwd-independent** after the editable install.
 
 ## The one true composition workflow
 
+### Fast path (recommended): the workflow spine
+
+For a complete design → realization loop in one call, use `musicom_workflow`
+(Phase 2 reorganization — this is the sanctioned entry point):
+
+```python
+from workflows.musicom_workflow import compose, produce
+
+# DESIGN: framework + note material, validated, zero-drift guaranteed
+r = compose(style="pop", key="C", bpm=120)          # style from STYLE_REGISTRY
+# r.midi_path, r.provenance_path
+
+# REALIZATION: two production methods on the same MIDI
+p1 = produce(r.midi_path, method="SP-001")          # FluidSynth WAV + OGG
+p2 = produce(r.midi_path, method="SP-011")          # Karplus-Strong WAV + OGG
+```
+
+- `compose()` picks a style template (bpm, form, default voices), fills a
+  real I–V–vi–IV framework across intro/verse/chorus/bridge/outro, validates,
+  exports MIDI + provenance.
+- `produce()` dispatches SP methods to the shared `sound/` modules.
+- Tables for docs/ are generated: `method_table()`, `sp_method_table()`,
+  `style_table()` — never hand-maintain them.
+
+### Low-level (when you need full control)
+
 ```python
 from workflows.unitmatrix_composer import UnitMatrixComposer, create_note_unit
 from structures import MidiInstrument
@@ -50,6 +76,11 @@ composer.to_midi("out.mid")                            # 6. export
 
 Order: `create_matrix → add_voice → add_section → set_unit/fill_voice_section → validate → to_midi`.
 Tempo meta lives in track 0. Percussion is channel 9 (`MidiPercussion`).
+
+**Equal-length rule**: every voice's section units MUST end at the section's
+full length in ticks (terminal landmark at `section_len`). If `validate()`
+reports "Track length mismatch", pad the shorter units — see
+`_unit_from_events(events, section_len)` in `musicom_workflow.py` for the pattern.
 
 ## Rendering MIDI → audio
 
@@ -85,7 +116,7 @@ cd /opt/data/repos/musicom
 /opt/data/micromamba/envs/musicom/bin/python -m pytest tests/ -q
 ```
 
-Suite is **green** (214 passed, 0 skipped). Key files:
+Suite is **green** (263 passed, 0 skipped). Key files:
 - `tests/test_harness_golden.py` — **zero-drift regression net**: a fixed
   composition must export byte-identical MIDI (`GOLDEN_SHA256`), be deterministic,
   non-empty, and have equal-length tracks. Update `GOLDEN_SHA256` only when the
@@ -182,8 +213,9 @@ holds a **synced, versioned mirror** of that data.
 
 ### Push
 
-The daily sync commits locally. Pushing to remote requires explicit user
-approval (existing convention — always ask before git push).
+The daily sync commits AND pushes to origin/main automatically (autopush —
+user decision 2026-08-27). The sync script exits non-zero on push failure so
+Hermes alerts if the remote is unreachable.
 
 ### Sync script location
 
