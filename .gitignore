@@ -19,7 +19,9 @@ build/
 # Agent internal state (not library code)
 .kilo/
 plans/
-projects/
+
+# Large raw audio — renderable from MIDI (OGG is tracked, user decision 2026-08-27)
+*.wav
 
 # OS
 .DS_Store
