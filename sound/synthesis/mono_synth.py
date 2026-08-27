@@ -19,7 +19,25 @@ Usage:
 import numpy as np
 from typing import Optional, Dict
 
-__all__ = ["MonoSynth"]
+__all__ = ["MonoSynth", "polyblep"]
+
+
+def polyblep(phase, phase_inc):
+    """PolyBLEP correction for a discontinuity at phase = 0 (vectorized).
+
+    Public so one-off production scripts (e.g. SP-029) can use the shared
+    implementation instead of carrying their own copy. Handles both the
+    positive wrap [0,1)->[1,2) and negative wrap [-1,0) conventions.
+    """
+    d = phase / (phase_inc + 1e-20)
+    correction = np.zeros_like(d)
+    m1 = (d >= 0) & (d < 1)
+    correction[m1] = d[m1] + d[m1] - d[m1] ** 2 - 1.0
+    m2 = (d >= 1) & (d < 2)
+    correction[m2] = d[m2] ** 2 - 2.0 * d[m2] + 1.0
+    m3 = (d >= -1) & (d < 0)
+    correction[m3] = d[m3] + d[m3] + d[m3] ** 2 + 1.0
+    return correction
 
 
 class MonoSynth:
