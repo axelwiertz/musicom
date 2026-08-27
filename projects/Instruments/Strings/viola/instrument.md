@@ -67,7 +67,7 @@ Open strings: C3(48), G3(55), D4(62), A4(69). Solo literature to ~E5 (76); exten
 
 1. **BowedString** (`sound/synthesis/bowed.py`) — physical waveguide, best match
    - Fundamental present, bridge LPF (verify spectral, not argmax)
-   - Use `freq = midi_to_freq(pitch)`; fix octave via `D = sr/(2*freq)`
+   - Use `freq = midi_to_freq(pitch)`; delay length `D = sr/freq` (single delay, no sign inversion — do NOT divide by 2)
    - `bow_position` 0.12–0.18 (between violin 0.15-0.2 and cello 0.1-0.15) for viola-like darkness
 2. **ModalSynth** preset `string` (`sound/synthesis/modal.py`) — pluck/attack, good for pizzicato
 3. **PhaseModSynth** — additive harmonics for synthetic viola pad texture

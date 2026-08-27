@@ -2,7 +2,7 @@
 type: instrument
 family: Brass
 name: Trumpet
-midi_program: 57
+midi_program: 56
 gms: "Trumpet"
 range_min: 54
 range_max: 86
@@ -15,9 +15,9 @@ synthesis: [phase_mod, subtractive, additive]
 
 ## MIDI / GM
 
-- **Program**: 57 (GM1 Trumpet)
+- **Program**: 56 (GM1 Trumpet)
 - **Channel**: melodic channel; monophonic instrument (one note at a time)
-- **FluidSynth**: TimGM6mb.sf2 renders GM57 → trumpet
+- **FluidSynth**: TimGM6mb.sf2 renders GM56 → trumpet
 
 ## Range
 
@@ -72,5 +72,5 @@ synthesis: [phase_mod, subtractive, additive]
 
 ## Verification
 
-- GM57 renders as `trackXX_Trumpet.wav` in RenderPipeline stems
+- GM56 renders as `trackXX_Trumpet.wav` in RenderPipeline stems
 - FM brass: check harmonic energy ≥ 30% above fundamental (brightness test)

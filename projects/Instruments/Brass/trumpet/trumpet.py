@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Trumpet — musicom instrument constants."""
 
-MIDI_PROGRAM = 57
+MIDI_PROGRAM = 56
 GM_NAME = "Trumpet"
 
 RANGE_MIN = 54       # F#3

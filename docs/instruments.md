@@ -64,7 +64,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Strings | Cello | 42 | 36–84 | bass, lead, counter, harmony |
 | Strings | Double Bass | 43 | 28–74 | bass, rhythm, accent, harmony |
 | Keys | Piano | 1 | 21–108 | harmony, melody, bass, rhythm |
-| Brass | Trumpet | 57 | 54–86 | lead, accent, fanfare |
+| Brass | Trumpet | 56 | 54–86 | lead, accent, fanfare |
 | Brass | Trombone | 57 | 40–78 | bass, counter, accent, harmony |
 | Brass | French Horn | 60 | 41–84 | harmony, counter, accent, lead |
 | Brass | Tuba | 58 | 26–72 | bass, harmony, accent, rhythm |
@@ -92,6 +92,6 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 25 | Acoustic Guitar (nylon) | Acoustic_Guitar_nylon ✓ |
 | ch9/pgm0 | Drums | **Acoustic_Grand_Piano** ✗ (program-0 fallback) |
 
-> **Known off-by-one in existing entries**: `trumpet.py` uses 57, which renders/sf2-labels as **Trombone** (SF2 preset 57=`Trombone`). Correct trumpet = 56 (SF2 preset 56=`SoloTrumpet`). `piano.py`=1 → actually Bright Acoustic Piano (GM #2). Legacy registry rows kept as-is; new instruments use 0-indexed programs matching pipeline+SF2.
+> **Known off-by-one in existing entries**: ~~`trumpet.py` uses 57~~ **FIXED 2026-08-27**: trumpet is now 56 (SF2 preset 56=`SoloTrumpet`). `piano.py`=1 → actually Bright Acoustic Piano (GM #2) — cosmetic label difference only, no routing impact. Legacy registry rows kept as-is for piano; new instruments use 0-indexed programs matching pipeline+SF2.
 
 Match production code on ACTUAL labels, not intended names.

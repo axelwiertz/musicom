@@ -67,7 +67,7 @@ Open strings: E1(28), A1(33), D2(38), G2(43). 5-string extends to C1(24). Orches
 
 1. **BowedString** (`sound/synthesis/bowed.py`) — physical waveguide, best match
    - Fundamental present, bridge LPF (verify spectral, not argmax)
-   - Use `freq = midi_to_freq(pitch)`; fix octave via `D = sr/(2*freq)`
+   - Use `freq = midi_to_freq(pitch)`; delay length `D = sr/freq` (single delay, no sign inversion — do NOT divide by 2)
    - Lowest `bow_position` of the family (0.08–0.12) → darkest tone; low `lpf_coef` (0.4–0.5) for sub-bass roll-off
 2. **ModalSynth** preset `string` (`sound/synthesis/modal.py`) — pluck/attack, good for pizzicato (the characteristic bass voice)
 3. **PhaseModSynth** — additive harmonics for synthetic sub/pad bass texture

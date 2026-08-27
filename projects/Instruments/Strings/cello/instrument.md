@@ -65,7 +65,7 @@ Open strings: C2(36), G2(43), D3(50), A3(57). Thumb position extends past A5; so
 
 1. **BowedString** (`sound/synthesis/bowed.py`) — physical waveguide, best match
    - Fundamental present, bridge LPF (verify spectral, not argmax)
-   - Use `freq = midi_to_freq(pitch)`; fix octave via `D = sr/(2*freq)`
+   - Use `freq = midi_to_freq(pitch)`; delay length `D = sr/freq` (single delay, no sign inversion — do NOT divide by 2)
    - Lower `bow_position` (0.1-0.15) for darker cello-like tone vs violin 0.15-0.2
 2. **ModalSynth** preset `string` (`sound/synthesis/modal.py`) — pluck/attack, good for pizzicato
 3. **PhaseModSynth** — additive harmonics for synthetic cello pad texture

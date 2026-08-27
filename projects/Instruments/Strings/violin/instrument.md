@@ -62,7 +62,7 @@ synthesis: [bowed, additive, modal]
 
 1. **BowedString** (`sound/synthesis/bowed.py`) — physical waveguide, best match
    - Fundamental present, bridge LPF (verify spectral, not argmax)
-   - Use `freq = midi_to_freq(pitch)`; fix octave via `D = sr/(2*freq)`
+   - Use `freq = midi_to_freq(pitch)`; delay length `D = sr/freq` (single delay, no sign inversion — do NOT divide by 2)
 2. **ModalSynth** preset `string` (`sound/synthesis/modal.py`) — pluck/attack, okay for pizzicato
 3. **PhaseModSynth** — additive harmonics for synthetic string pad texture
 

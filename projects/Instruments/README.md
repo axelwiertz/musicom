@@ -16,15 +16,20 @@ Each instrument folder contains a `instrument.md` reference file with:
 ## Usage in Compositions
 
 ```python
-from projects.Instruments.Strings.violin import VIOLIN
+# NEW (recommended): uniform Instrument objects via the registry
+from instrument_registry import VIOLIN, PIANO, TRUMPET, by_name, by_program
 
-# Use in UnitMatrixComposer
 composer.add_voice("Violin", program=VIOLIN.midi_program, channel=0)
+inst = by_name("flute")          # → FLUTE
+inst = by_program(56)            # → TRUMPET (GM 56)
+inst.in_sweet_spot(72)           # True if 72 is in the melodic sweet spot
+```
 
-# Use in synthesis
-from sound.synthesis import BowedString
-bow = BowedString(sample_rate=44100)
-audio = bow.render_note(freq=440.0, duration=1.0)
+```python
+# LEGACY (still works): raw constants from the per-instrument modules
+from Strings.violin.violin import MIDI_PROGRAM, SWEET_SPOT
+from Keys.piano.piano import midi_to_freq
+from Percussion.drum_kit.drum_kit import KIT, beat_pattern
 ```
 
 ## Structure
@@ -45,34 +50,40 @@ Instruments/
 │   └── tuba/
 ├── Woodwind/
 │   ├── flute/
-│   ├── clarinet/
-│   ├── oboe/
-│   └── bassoon/
+│   └── clarinet/
 ├── Keys/
-│   ├── piano/
-│   ├── organ/
-│   └── synth_pad/
+│   └── piano/
 ├── Guitar/
-│   ├── acoustic/
-│   └── electric/
+│   └── acoustic/
 └── Percussion/
     └── drum_kit/
 ```
 
+Current instruments (13): Violin, Viola, Cello, Double Bass, Piano, Trumpet,
+Trombone, French Horn, Tuba, Flute, Clarinet, Acoustic Guitar, Drum Kit.
+
 ## Musicom Integration
 
 Instrument definitions feed into:
-1. **UnitMatrixComposer** — program selection, range constraints
+1. **UnitMatrixComposer** — program selection, range constraints (`VIOLIN.midi_program`)
 2. **Synthesis engines** — BowedString, ModalSynth, PhaseModSynth presets
-3. **Arrangement rules** — register zones, role assignments
+3. **Arrangement rules** — register zones, role assignments (`orchestrator.py`)
 4. **Production chains** — per-instrument DSP (reverb, EQ, compression)
+
+## Registry
+
+Auto-generated — run `python instrument_registry.py` to regenerate:
+```bash
+cd /opt/data/projects/Instruments && /opt/data/micromamba/envs/musicom/bin/python instrument_registry.py
+```
+The canonical table lives in `registry.md` (kept in sync manually) and
+`instrument_registry.registry_table()` (generated from code).
 
 ## Status
 
-- [x] Structure created
-- [ ] Violin (Strings)
-- [ ] Piano (Keys)
-- [ ] Trumpet (Brass)
-- [ ] Flute (Woodwind)
-- [ ] Acoustic Guitar
-- [ ] Drum Kit (expand beyond GM mapping)
+- [x] Registry + Instrument objects (13 instruments loaded, lookup by name/program)
+- [x] Trumpet program corrected to GM 56 (was 57 = Trombone)
+- [x] String delay formula corrected (`D = sr/freq`, not `sr/(2*freq)`)
+- [x] Orchestrator (role → instrument mapping)
+- [ ] Oboe, Bassoon, Organ, Synth Pad, Electric Guitar (listed in roadmap)
+- [ ] Drum Kit expansion beyond GM mapping

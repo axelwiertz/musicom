@@ -40,6 +40,10 @@ SRC_MIDI = "/opt/data/projects/Styles/Latin/samba-batucada-daily-2026-06-18/comp
 
 # ---------------------------------------------------------------------------
 # PolyBLEP oscillators (per methods_db.md SP-029 reference implementation)
+# NOTE: local copy kept deliberately — SP-029's variant (falling-edge only,
+# d in [0,1) + dead [-1,0) branch) differs from the standard 2-sample
+# version in sound/synthesis/mono_synth.py. Changing it would alter the
+# verified SP-029 audio output. For NEW code, prefer the shared polyblep.
 # ---------------------------------------------------------------------------
 def polyblep(phase, phase_inc):
     """PolyBLEP correction for a discontinuity at phase = 0 (vectorized)."""

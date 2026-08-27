@@ -1,0 +1,180 @@
+# -*- coding: utf-8 -*-
+"""Instrument registry — musicom instruments as a real, importable package.
+
+Loads every instrument's constants (MIDI_PROGRAM, ranges, articulations,
+synthesis presets, production defaults) from the per-instrument .py files
+into uniform `Instrument` objects. Exposes both module-style constants
+(backwards compatible) and object-style access (VIOLIN.midi_program).
+
+Usage:
+    from instrument_registry import VIOLIN, PIANO, TRUMPET, ALL_INSTRUMENTS, by_name, by_program
+
+    composer.add_voice("Violin", program=VIOLIN.midi_program, channel=0)
+    inst = by_name("flute")            # → FLUTE
+    inst = by_program(56)              # → TRUMPET (GM 56)
+"""
+
+import importlib
+import importlib.util
+import os
+import sys
+
+_INSTR_DIR = os.path.dirname(os.path.abspath(__file__))
+if _INSTR_DIR not in sys.path:
+    sys.path.insert(0, _INSTR_DIR)
+
+# module path (relative to Instruments dir) -> registry key
+_INSTRUMENT_MODULES = {
+    "Strings.violin.violin": "violin",
+    "Strings.viola.viola": "viola",
+    "Strings.cello.cello": "cello",
+    "Strings.double_bass.double_bass": "double_bass",
+    "Keys.piano.piano": "piano",
+    "Brass.trumpet.trumpet": "trumpet",
+    "Brass.trombone.trombone": "trombone",
+    "Brass.french_horn.french_horn": "french_horn",
+    "Brass.tuba.tuba": "tuba",
+    "Woodwind.flute.flute": "flute",
+    "Woodwind.clarinet.clarinet": "clarinet",
+    "Guitar.acoustic.acoustic_guitar": "acoustic_guitar",
+    "Percussion.drum_kit.drum_kit": "drum_kit",
+}
+
+_FIELDS = (
+    "midi_program", "gm_name", "range_min", "range_max",
+    "solo_range", "sweet_spot", "zones", "articulations",
+    "synthesis", "modal_preset", "fm_defaults",
+    "reverb_tail", "eq_body", "eq_presence", "eq_air", "pan",
+    "stem_label",
+)
+
+
+class Instrument:
+    """Uniform view over an instrument's constants."""
+
+    def __init__(self, name, family, module):
+        self.name = name
+        self.family = family
+        self.module_path = module.__name__ if hasattr(module, "__name__") else str(module)
+        for f in _FIELDS:
+            setattr(self, f, getattr(module, f.upper(), None))
+
+    @property
+    def program(self):
+        return self.midi_program
+
+    def in_range(self, midi_note):
+        if self.range_min is None or self.range_max is None:
+            return True
+        return self.range_min <= midi_note <= self.range_max
+
+    def in_sweet_spot(self, midi_note):
+        if self.sweet_spot:
+            return self.sweet_spot[0] <= midi_note <= self.sweet_spot[1]
+        return self.in_range(midi_note)
+
+    def __repr__(self):
+        return (f"<Instrument {self.name} (family={self.family}, "
+                f"program={self.midi_program}, range={self.range_min}-{self.range_max})>")
+
+
+def _load_module(mod_path):
+    """Import a dotted module path relative to Instruments dir."""
+    try:
+        return importlib.import_module(mod_path)
+    except ImportError:
+        full = os.path.join(_INSTR_DIR, mod_path.replace(".", os.sep) + ".py")
+        spec = importlib.util.spec_from_file_location(mod_path, full)
+        if spec is None or spec.loader is None:
+            raise ImportError(f"Cannot load instrument module {mod_path} from {full}")
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        return mod
+
+
+def _load_all():
+    instruments = {}
+    for mod_path, key in _INSTRUMENT_MODULES.items():
+        family = mod_path.split(".")[0]
+        mod = _load_module(mod_path)
+        human = getattr(mod, "GM_NAME", None)
+        if family == "Percussion":
+            human = "Drum Kit"
+        if not human:
+            human = key.replace("_", " ").title()
+        instruments[key] = Instrument(human, family, mod)
+    return instruments
+
+
+ALL_INSTRUMENTS = _load_all()
+
+# Convenience: uppercase short names
+VIOLIN = ALL_INSTRUMENTS["violin"]
+VIOLA = ALL_INSTRUMENTS["viola"]
+CELLO = ALL_INSTRUMENTS["cello"]
+DOUBLE_BASS = ALL_INSTRUMENTS["double_bass"]
+PIANO = ALL_INSTRUMENTS["piano"]
+TRUMPET = ALL_INSTRUMENTS["trumpet"]
+TROMBONE = ALL_INSTRUMENTS["trombone"]
+FRENCH_HORN = ALL_INSTRUMENTS["french_horn"]
+TUBA = ALL_INSTRUMENTS["tuba"]
+FLUTE = ALL_INSTRUMENTS["flute"]
+CLARINET = ALL_INSTRUMENTS["clarinet"]
+ACOUSTIC_GUITAR = ALL_INSTRUMENTS["acoustic_guitar"]
+DRUM_KIT = ALL_INSTRUMENTS["drum_kit"]
+
+
+def by_name(name):
+    """Look up an instrument by case-insensitive name."""
+    key = name.strip().lower().replace(" ", "_").replace("-", "_")
+    if key in ALL_INSTRUMENTS:
+        return ALL_INSTRUMENTS[key]
+    for inst in ALL_INSTRUMENTS.values():
+        if inst.gm_name and inst.gm_name.lower() == name.strip().lower():
+            return inst
+        if inst.name.lower() == name.strip().lower():
+            return inst
+    raise KeyError(f"No instrument named {name!r}. Available: {sorted(ALL_INSTRUMENTS)}")
+
+
+def by_program(program):
+    """Look up an instrument by GM program number."""
+    for inst in ALL_INSTRUMENTS.values():
+        if inst.midi_program == program:
+            return inst
+    raise KeyError(f"No instrument with program {program}. Available programs: "
+                   f"{sorted(i.midi_program for i in ALL_INSTRUMENTS.values())}")
+
+
+def registry_table():
+    """Markdown registry table, auto-generated from loaded instruments."""
+    lines = [
+        "| Family | Instrument | Program | Range | Role |",
+        "|---|---|---|---|---|",
+    ]
+    for inst in sorted(ALL_INSTRUMENTS.values(), key=lambda i: (i.family, i.name)):
+        low = inst.name.lower()
+        if low in ("double bass", "tuba", "trombone", "cello"):
+            role = "bass, counter, accent, harmony"
+        elif low in ("violin", "flute", "trumpet", "clarinet"):
+            role = "lead, counter, accent"
+        elif low in ("piano", "acoustic guitar"):
+            role = "harmony, melody, bass, rhythm"
+        elif low == "drum kit":
+            role = "rhythm, groove, accent"
+        else:
+            role = "lead, harmony, accent"
+        rng = f"{inst.range_min}–{inst.range_max}" if inst.range_min else "-"
+        lines.append(f"| {inst.family} | {inst.name} | {inst.midi_program} | {rng} | {role} |")
+    return "\n".join(lines)
+
+
+if __name__ == "__main__":
+    print(registry_table())
+    print()
+    print("Verification:")
+    print("  VIOLIN.midi_program =", VIOLIN.midi_program)
+    print("  TRUMPET.midi_program =", TRUMPET.midi_program, "(should be 56)")
+    print("  by_name('double bass') =", by_name("double bass"))
+    print("  by_program(56) =", by_program(56))
+    print("  FLUTE.in_sweet_spot(72) =", FLUTE.in_sweet_spot(72))
