@@ -62,9 +62,10 @@ ffmpeg -y -i out.wav out.ogg
 ## Output location (hard rule)
 
 All composition artifacts (`.mid`, `.wav`, `.ogg`) go in a dedicated project
-subfolder under `/opt/data/projects/Research/` (e.g.
-`/opt/data/projects/Research/outputs/<project>/`). **Never** write outputs into
-the repo or a raw root folder.
+subfolder under the Hermes working FS: `/opt/data/projects/Styles/<Genre>/<project>/`
+(for compositions) or `/opt/data/projects/Research/outputs/<project>/` (for
+experiments). **Never** write outputs into the repo or a raw root folder.
+The daily sync mirrors them into this repo's `projects/`.
 
 ## Verify-don't-trust (mandatory)
 
@@ -145,5 +146,46 @@ See `hermes_agent/README.md`.
 1. One task at a time, in order.
 2. After each task run the stated verify command; report the **real** output.
 3. If verify fails: stop, report honestly, never fabricate results.
-4. Outputs → `/opt/data/projects/Research/outputs/<project>/`.
-5. Commit after each logical phase.
+4. Outputs → Hermes working FS (`/opt/data/projects/Styles/`, `/opt/data/projects/Research/`, etc. — see below). Jobs write there; do NOT write directly into this repo's `projects/` mirror.
+5. Do NOT commit per-job. The daily sync job (`daily-repo-sync`) stages + commits everything into this repo.
+
+## Data sync (Hermes FS → repo)
+
+The working tree for all project data is the **Hermes agent filesystem** under
+`/opt/data/projects/` (Styles/, Research/, Instruments/, Production/). This repo
+holds a **synced, versioned mirror** of that data.
+
+### What syncs (daily, `scripts/sync_to_repo.py` → cron `daily-repo-sync` 23:00 UTC)
+
+| Hermes FS | Repo mirror |
+|---|---|
+| `/opt/data/projects/Styles/` | `projects/Styles/` |
+| `/opt/data/projects/Research/` | `projects/Research/` |
+| `/opt/data/projects/Instruments/` | `projects/Instruments/` |
+| Instruments registry + methods DBs | `docs/instruments.md`, `docs/methods.md`, `docs/human-methods.md` |
+
+### Tracked extensions (synced)
+
+`.md`, `.py`, `.json`, `.mid`, `.ogg`, `.txt`, `.yaml`, `.yml`, `.toml`
+
+### Ignored (NOT synced)
+
+- `*.wav` — large raw audio, renderable from MIDI (OGG is the tracked, playable form)
+- `.env*` — secrets
+- `__pycache__/`, `_test/`, `outputs/`, `node_modules/`, `.venv/` — ephemeral
+
+### Manual sync
+
+```bash
+/opt/data/micromamba/envs/musicom/bin/python scripts/sync_to_repo.py
+```
+
+### Push
+
+The daily sync commits locally. Pushing to remote requires explicit user
+approval (existing convention — always ask before git push).
+
+### Sync script location
+
+- Repo copy: `scripts/sync_to_repo.py` (source of truth)
+- Cron copy: `~/.hermes/scripts/sync_to_repo.py` (referenced by the cron job)
