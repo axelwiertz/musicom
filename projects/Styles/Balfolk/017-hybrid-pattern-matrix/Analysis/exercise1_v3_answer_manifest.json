@@ -1,0 +1,21 @@
+{
+  "stem": "musicmatrix_exercise1e_hybrid_v3_answer",
+  "midi": "/opt/data/projects/014-genre-pattern-matrix/MIDI/musicmatrix_exercise1e_hybrid_v3_answer.mid",
+  "ogg": "/opt/data/projects/014-genre-pattern-matrix/Audio/musicmatrix_exercise1e_hybrid_v3_answer.ogg",
+  "compare_ogg": "/opt/data/projects/014-genre-pattern-matrix/Audio/musicmatrix_exercise1_hybrid_v2_v3_compare.ogg",
+  "rows": [
+    "Balanced Jig Pulse",
+    "Modal Bass",
+    "Soft Jazz Color Harmony",
+    "Folk Lead Question Answer"
+  ],
+  "columns": 8,
+  "tempo_bpm": 142.5,
+  "time_signature": "6/8",
+  "transformations": [
+    "reduced brightness: removed C# #11; kept softer Dorian B natural and G13 without #11",
+    "added melody answer: bars 5-8 answer bars 1-4 with descending/closing contour",
+    "reduced dance clutter: removed shaker grid and returned to balanced jig pulse"
+  ],
+  "musicmatrix_semantics": "rows=voices/pitch-space layers; columns=measures/time-space; cells=MusicUnit bar material"
+}

@@ -1,0 +1,3 @@
+files non-empty: yes
+audio files: wav + ogg
+playback: not piano-only (programs 10,14; percussion channel 10)

@@ -1,0 +1,40 @@
+{
+  "genre": "Tango",
+  "subgenre": "Classic",
+  "pitch": {
+    "scale": "Harmonic Minor",
+    "intervals": [
+      2,
+      1,
+      2,
+      2,
+      1,
+      3,
+      1
+    ],
+    "contour": "Dramatic leaps, chromatic passing tones"
+  },
+  "rhythm": {
+    "dna": "\u2588\u2591\u2591\u2588 \u2588\u2591\u2588\u2591",
+    "description": "Marcato 4/4, syncopated '3-3-2' patterns",
+    "metrical_gravity": [
+      1,
+      0,
+      0,
+      0.8,
+      0,
+      0.9,
+      0,
+      0.7
+    ]
+  },
+  "timbre": {
+    "instrumentation": [
+      "Bandoneon",
+      "Violin",
+      "Piano",
+      "Double Bass"
+    ],
+    "calibration": "Aggressive attacks, sharp release"
+  }
+}

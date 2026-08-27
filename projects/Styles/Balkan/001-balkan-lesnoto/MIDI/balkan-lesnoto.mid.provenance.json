@@ -1,0 +1,16 @@
+{
+  "artifact": "balkan-lesnoto.mid",
+  "classification": "ai-assisted",
+  "generator": "balkan-lesnoto",
+  "sources": [],
+  "parameters": {
+    "bpm": 120,
+    "meter": "7/8 2+2+3",
+    "scale": "D hijaz"
+  },
+  "notes": "",
+  "sha256": "84ac0d1a24140cff1601a1ecd35b80d241adbe1d95c706e4cf539e7bef6d4280",
+  "bytes": 989,
+  "created_utc": "2026-08-17T07:57:44.663646+00:00",
+  "provenance_version": "1.0"
+}

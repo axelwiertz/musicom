@@ -1,0 +1,177 @@
+[
+  {
+    "project_name": "027-delta-blues-shack",
+    "midi_file": "/opt/data/projects/Styles/Blues/027-delta-blues-shack/MIDI/027_delta_blues.mid",
+    "scale": "Chromatic",
+    "pitch_classes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "intervals": [
+      1,
+      1,
+      1,
+      1,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "tempo": 72.00002880001152,
+    "time_sig": "12/8",
+    "total_notes": 2080,
+    "midi_range": [
+      36,
+      79
+    ],
+    "velocity_avg": 85.4,
+    "track_count": 4,
+    "tracks_detail": [
+      {
+        "track": 0,
+        "notes": 1251,
+        "pitch_classes": [
+          0,
+          2,
+          3,
+          4,
+          7,
+          9
+        ],
+        "scale_fragment": "Blues Heptatonic",
+        "range": [
+          69,
+          79
+        ]
+      },
+      {
+        "track": 1,
+        "notes": 259,
+        "pitch_classes": [
+          0,
+          1,
+          2,
+          4,
+          6,
+          8,
+          9,
+          11
+        ],
+        "scale_fragment": "Chromatic",
+        "range": [
+          40,
+          71
+        ]
+      },
+      {
+        "track": 2,
+        "notes": 211,
+        "pitch_classes": [
+          2,
+          4,
+          9,
+          11
+        ],
+        "scale_fragment": "Lydian",
+        "range": [
+          40,
+          57
+        ]
+      },
+      {
+        "track": 3,
+        "notes": 359,
+        "pitch_classes": [
+          0,
+          3,
+          6,
+          10
+        ],
+        "scale_fragment": "Blues Hexatonic",
+        "range": [
+          36,
+          46
+        ]
+      }
+    ],
+    "analysis_source": "midi",
+    "source_file": "/opt/data/projects/Styles/Blues/027-delta-blues-shack/Scripts/generate_blues.py",
+    "tempo_from_source": 1,
+    "time_sig_from_source": "12/8",
+    "embedded_pitch_classes": [
+      1,
+      4,
+      7,
+      9
+    ],
+    "embedded_scale": "Octatonic/Diminished"
+  },
+  {
+    "project_name": "blues-delta-blues-daily-2026-06-11",
+    "source_file": "/opt/data/projects/Styles/Blues/blues-delta-blues-daily-2026-06-11/src/regen.py",
+    "scale_from_source": "Dorian",
+    "pitch_pattern_intervals": [
+      2,
+      3,
+      -2,
+      0,
+      5
+    ],
+    "analysis_source": "source"
+  },
+  {
+    "project_name": "blues_delta",
+    "source_file": "/opt/data/projects/Styles/Blues/blues_delta/src/regen.py",
+    "scale_from_source": "Dorian",
+    "pitch_pattern_intervals": [
+      2,
+      3,
+      -2,
+      0,
+      5
+    ],
+    "analysis_source": "source"
+  },
+  {
+    "project_name": "blues_delta_v2",
+    "source_file": "/opt/data/projects/Styles/Blues/blues_delta_v2/src/regen.py",
+    "scale_from_source": "Dorian",
+    "pitch_pattern_intervals": [
+      2,
+      3,
+      -2,
+      0,
+      5
+    ],
+    "analysis_source": "source"
+  },
+  {
+    "project_name": "blues-delta-daily-2026-06-24",
+    "midi_file": "/opt/data/projects/Styles/Blues/blues-delta-daily-2026-06-24/MIDI/blues-delta-daily-2026-06-24.mid",
+    "scale": "Blues Hexatonic",
+    "pitch_classes": [
+      0,
+      3,
+      5,
+      6,
+      7,
+      10
+    ],
+    "tempo": 72.0,
+    "time_sig": "12/8",
+    "track_count": 4,
+    "analysis_source": "midi"
+  }
+]

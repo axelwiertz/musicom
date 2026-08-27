@@ -1,0 +1,126 @@
+{
+  "style": "Folk",
+  "sub_styles": [
+    {
+      "name": "001-folk-drie-kleine-kleutertjes",
+      "scale": "Mixolydian",
+      "pitch_classes": [
+        0,
+        2,
+        4,
+        5,
+        7,
+        9,
+        10
+      ]
+    },
+    {
+      "name": "016-folk-electric-folk-d-major",
+      "scale": "Chromatic",
+      "pitch_classes": [
+        0,
+        1,
+        2,
+        4,
+        6,
+        7,
+        9,
+        10,
+        11
+      ],
+      "tempo": 130.00013000013,
+      "tempo_from_source": 130
+    },
+    {
+      "name": "029-een-klein-meisje",
+      "scale": "Lydian",
+      "pitch_classes": [
+        0,
+        2,
+        7,
+        9,
+        11
+      ],
+      "tempo": 104.99992125005906,
+      "tempo_from_source": 105
+    },
+    {
+      "name": "balfolk",
+      "scale": "Dorian",
+      "pitch_classes": []
+    },
+    {
+      "name": "balfolk_dorian_jig",
+      "scale": "Dorian",
+      "pitch_classes": []
+    },
+    {
+      "name": "balfolk_jig",
+      "scale": "Dorian",
+      "pitch_classes": []
+    },
+    {
+      "name": "balfolk_mazurka",
+      "scale": "Dorian",
+      "pitch_classes": []
+    },
+    {
+      "name": "balfolk_schottische",
+      "scale": "Dorian",
+      "pitch_classes": []
+    },
+    {
+      "name": "dutch_minidisco",
+      "scale": "Dorian",
+      "pitch_classes": []
+    },
+    {
+      "name": "dutch_minidisco_folk",
+      "scale": "Dorian",
+      "pitch_classes": []
+    },
+    {
+      "name": "dutch_nursery",
+      "scale": "Dorian",
+      "pitch_classes": []
+    }
+  ],
+  "pitch": {
+    "scale": "Dorian",
+    "intervals": [
+      1,
+      1,
+      2,
+      1,
+      1,
+      1,
+      2,
+      1,
+      1,
+      1
+    ],
+    "common_pitch_classes": [
+      0,
+      1,
+      2,
+      4,
+      5,
+      6,
+      7,
+      9,
+      10,
+      11
+    ],
+    "total_pitch_classes": 10
+  },
+  "rhythm": {
+    "patterns_analyzed": 11,
+    "metrical_gravity_verified": true,
+    "description": ""
+  },
+  "validation": {
+    "12tet_pass": true,
+    "metrical_gravity_pass": true
+  },
+  "last_updated": "2026-06-24T04:00:00Z"
+}

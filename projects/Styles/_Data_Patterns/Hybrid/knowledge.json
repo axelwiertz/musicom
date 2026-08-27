@@ -1,0 +1,172 @@
+{
+  "style": "Hybrid",
+  "subgenre": "",
+  "pitch": {
+    "scale": "Chromatic",
+    "intervals": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      2,
+      1,
+      1,
+      1
+    ],
+    "pitch_classes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      9,
+      10,
+      11
+    ],
+    "per_track_scale": "Lydian",
+    "per_track_scale_distribution": {
+      "Pentatonic Minor": 1,
+      "Major/Ionian": 2,
+      "Lydian": 3,
+      "Blues Hexatonic": 2,
+      "In Scale": 3,
+      "Mixolydian": 1
+    }
+  },
+  "rhythm": {
+    "metrical_gravity": [
+      1.0,
+      0,
+      0.5,
+      0
+    ],
+    "tempo_range": [
+      128.0,
+      128.0
+    ],
+    "time_signatures": [
+      "4/4"
+    ],
+    "description": ""
+  },
+  "timbre": {
+    "instrumentation": [
+      "Track 1",
+      "Track 2",
+      "Track 3",
+      "Track 4",
+      "Track 5"
+    ]
+  },
+  "patterns": [
+    {
+      "project": "017-polo-beer-dance",
+      "source": "/opt/data/projects/Styles/Hybrid/017-polo-beer-dance/src/regen.py"
+    },
+    {
+      "project": "018-landal-bollo-koos-hybrid",
+      "midi": "/opt/data/projects/Styles/Hybrid/018-landal-bollo-koos-hybrid/midi/hybrid_v1.mid",
+      "source": "/opt/data/projects/Styles/Hybrid/018-landal-bollo-koos-hybrid/scripts/generate_midi.py",
+      "scale": "Pentatonic Minor",
+      "pitch_classes": [
+        5,
+        10
+      ],
+      "tempo": null,
+      "time_sig": null
+    },
+    {
+      "project": "018-rock-apprenticeship",
+      "midi": "/opt/data/projects/Styles/Hybrid/018-rock-apprenticeship/MIDI/first-riff-engine.mid",
+      "source": "/opt/data/projects/Styles/Hybrid/018-rock-apprenticeship/analyze_and_compose_voice_motif.py",
+      "scale": "Chromatic",
+      "pitch_classes": [
+        0,
+        2,
+        4,
+        6,
+        7,
+        9,
+        10,
+        11
+      ],
+      "tempo": 128.0,
+      "time_sig": "4/4"
+    },
+    {
+      "project": "022-indie-pop-sunset",
+      "midi": "/opt/data/projects/Styles/Hybrid/022-indie-pop-sunset/MIDI/sunset_matrix.mid",
+      "scale": "Lydian",
+      "pitch_classes": [
+        0,
+        2,
+        4,
+        6,
+        7,
+        9,
+        11
+      ],
+      "tempo": null,
+      "time_sig": null
+    },
+    {
+      "project": "025-bollo-koos-indian-unified",
+      "midi": "/opt/data/projects/Styles/Hybrid/025-bollo-koos-indian-unified/MIDI/bollo_koos_indian_v1.mid",
+      "source": "/opt/data/projects/Styles/Hybrid/025-bollo-koos-indian-unified/src/aligned_workflow.py",
+      "scale": "Chromatic",
+      "pitch_classes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        9,
+        10
+      ],
+      "tempo": null,
+      "time_sig": null
+    }
+  ],
+  "validated": true,
+  "validation": {
+    "12tet": {
+      "valid": true,
+      "pitch_classes_used": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        9,
+        10,
+        11
+      ],
+      "count": 11,
+      "issues": []
+    },
+    "metrical_gravity": {
+      "valid": true,
+      "length": 4,
+      "strong_beat_count": 1,
+      "profile": [
+        1.0,
+        0,
+        0.5,
+        0
+      ],
+      "issues": []
+    }
+  }
+}

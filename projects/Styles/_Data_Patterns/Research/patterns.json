@@ -1,0 +1,65 @@
+[
+  {
+    "project_name": "virtual_instruments",
+    "midi_file": "/opt/data/projects/Styles/Research/virtual_instruments/dev_metal_plate_2026-06-18.mid",
+    "scale": "In Scale",
+    "pitch_classes": [
+      0,
+      4,
+      7,
+      9
+    ],
+    "intervals": [
+      4,
+      3,
+      2,
+      3
+    ],
+    "tempo": 120.0,
+    "time_sig": null,
+    "total_notes": 12,
+    "midi_range": [
+      57,
+      69
+    ],
+    "velocity_avg": 100.0,
+    "track_count": 1,
+    "tracks_detail": [
+      {
+        "track": 0,
+        "notes": 12,
+        "pitch_classes": [
+          0,
+          4,
+          7,
+          9
+        ],
+        "scale_fragment": "In Scale",
+        "range": [
+          57,
+          69
+        ]
+      }
+    ],
+    "analysis_source": "midi",
+    "source_file": "/opt/data/projects/Styles/Research/virtual_instruments/dev_metal_plate_2026-06-15.py",
+    "embedded_pitch_classes": [
+      0,
+      4,
+      6,
+      8,
+      10
+    ],
+    "embedded_scale": "Whole Tone"
+  },
+  {
+    "project_name": "vocal-research",
+    "source_file": "/opt/data/projects/Styles/Research/vocal-research/Prototypes/vocal_fix.py",
+    "embedded_pitch_classes": [
+      4,
+      10
+    ],
+    "embedded_scale": "Whole Tone",
+    "analysis_source": "source"
+  }
+]

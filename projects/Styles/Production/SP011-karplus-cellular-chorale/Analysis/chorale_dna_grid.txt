@@ -1,0 +1,12 @@
+Chorale DNA — 8 cells x 4 voices (█ onset / ░ rest, 1 column = 2.5 s whole note)
+          c0    c1    c2    c3    c4    c5    c6    c7  
+V1 (P74)       █    █    █    █    █    █    █    █  
+V2 (P74)       █    █    █    █    █    █    █    █  
+V3 (P74)       █    █    █    █    █    █    █    █  
+V4 (P33)       █    █    █    █    █    █    █    █  
+
+Pitch classes per cell:
+V1 (P74): D#  C A#  D A#  D  F D#
+V2 (P74):  B  B F#  E  E F#  B  G
+V3 (P74):  D  B  G C#  E C#  G  D
+V4 (P33):  C  E  D F#  C  D  C  A

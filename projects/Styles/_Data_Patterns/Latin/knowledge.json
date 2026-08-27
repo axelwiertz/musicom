@@ -1,0 +1,333 @@
+{
+  "style": "Latin",
+  "subgenre": "",
+  "pitch": {
+    "scale": "Chromatic",
+    "intervals": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "pitch_classes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "per_track_scale": "In Scale",
+    "per_track_scale_distribution": {
+      "Yo Scale": 1,
+      "Major/Ionian": 5,
+      "Phrygian": 2,
+      "Pentatonic Minor": 2,
+      "Pelog (approx)": 2,
+      "In Scale": 8,
+      "Lydian": 3
+    }
+  },
+  "rhythm": {
+    "metrical_gravity": [
+      1.0,
+      0,
+      0.5,
+      0
+    ],
+    "tempo_range": [
+      80.0,
+      128.0
+    ],
+    "time_signatures": [
+      "4/2",
+      "4/4",
+      "2/4",
+      "2/2"
+    ],
+    "description": ""
+  },
+  "timbre": {
+    "instrumentation": [
+      "Track 1",
+      "Track 2",
+      "Track 3",
+      "Bass",
+      "Harmony",
+      "Percussion",
+      "Bombo",
+      "Llamador",
+      "Alegre",
+      "Maraca",
+      "Accordion",
+      "Track 4",
+      "Track 5",
+      "Piano",
+      "Bandoneon"
+    ]
+  },
+  "patterns": [
+    {
+      "project": "026-bossa-nova-unitmatrix",
+      "midi": "/opt/data/projects/Styles/Latin/026-bossa-nova-unitmatrix/MIDI/v1_bossa_nova_unitmatrix.mid",
+      "source": "/opt/data/projects/Styles/Latin/026-bossa-nova-unitmatrix/Scripts/compose_unitmatrix.py",
+      "scale": "Chromatic",
+      "pitch_classes": [
+        0,
+        1,
+        2,
+        3,
+        5,
+        6,
+        7,
+        9,
+        11
+      ],
+      "tempo": 80.0,
+      "time_sig": "4/4"
+    },
+    {
+      "project": "028-bossa-nova-daily-2026-06-12",
+      "midi": "/opt/data/projects/Styles/Latin/028-bossa-nova-daily-2026-06-12/MIDI/composition.mid",
+      "source": "/opt/data/projects/Styles/Latin/028-bossa-nova-daily-2026-06-12/src/generate_bossa.py",
+      "scale": "Chromatic",
+      "pitch_classes": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        6,
+        7,
+        9,
+        11
+      ],
+      "tempo": 83.99996640001343,
+      "time_sig": "2/4"
+    },
+    {
+      "project": "afro-cuban-son-daily-2026-06-09",
+      "midi": "/opt/data/projects/Styles/Latin/afro-cuban-son-daily-2026-06-09/afro-cuban-son_daily_2026-06-09.mid",
+      "source": "/opt/data/projects/Styles/Latin/afro-cuban-son-daily-2026-06-09/src/regen.py",
+      "scale": "In Scale",
+      "pitch_classes": [
+        0,
+        4,
+        7
+      ],
+      "tempo": 109.99990833340972,
+      "time_sig": null
+    },
+    {
+      "project": "afro_cuban_son",
+      "source": "/opt/data/projects/Styles/Latin/afro_cuban_son/src/regen.py"
+    },
+    {
+      "project": "bossa-nova-daily-2026-06-07",
+      "midi": "/opt/data/projects/Styles/Latin/bossa-nova-daily-2026-06-07/composition.mid",
+      "source": "/opt/data/projects/Styles/Latin/bossa-nova-daily-2026-06-07/src/regen.py",
+      "scale": "Lydian",
+      "pitch_classes": [
+        0,
+        4,
+        7,
+        11
+      ],
+      "tempo": 120.0,
+      "time_sig": "4/4"
+    },
+    {
+      "project": "bossa-nova-daily-2026-06-10",
+      "source": "/opt/data/projects/Styles/Latin/bossa-nova-daily-2026-06-10/src/regen.py"
+    },
+    {
+      "project": "bossa-nova-daily-2026-06-15",
+      "midi": "/opt/data/projects/Styles/Latin/bossa-nova-daily-2026-06-15/composition.mid",
+      "source": "/opt/data/projects/Styles/Latin/bossa-nova-daily-2026-06-15/src/generate.py",
+      "scale": "Octatonic/Diminished",
+      "pitch_classes": [
+        0,
+        1,
+        4,
+        7,
+        9
+      ],
+      "tempo": 83.99996640001343,
+      "time_sig": null,
+      "instruments": [
+        "Bass",
+        "Harmony",
+        "Percussion"
+      ]
+    },
+    {
+      "project": "bossa_nova",
+      "source": "/opt/data/projects/Styles/Latin/bossa_nova/src/regen.py"
+    },
+    {
+      "project": "bossa_nova_classic",
+      "source": "/opt/data/projects/Styles/Latin/bossa_nova_classic/src/regen.py"
+    },
+    {
+      "project": "bossa_nova_classic_v2",
+      "source": "/opt/data/projects/Styles/Latin/bossa_nova_classic_v2/src/regen.py"
+    },
+    {
+      "project": "bossa_nova_classic_v3",
+      "source": "/opt/data/projects/Styles/Latin/bossa_nova_classic_v3/src/regen.py"
+    },
+    {
+      "project": "cumbia-daily-2026-06-22",
+      "midi": "/opt/data/projects/Styles/Latin/cumbia-daily-2026-06-22/composition.mid",
+      "source": "/opt/data/projects/Styles/Latin/cumbia-daily-2026-06-22/generate.py",
+      "scale": "Blues Heptatonic",
+      "pitch_classes": [
+        2,
+        3,
+        4,
+        5,
+        7,
+        9,
+        10
+      ],
+      "tempo": 100.0,
+      "time_sig": "2/2",
+      "instruments": [
+        "Bombo",
+        "Llamador",
+        "Alegre",
+        "Maraca",
+        "Accordion"
+      ]
+    },
+    {
+      "project": "flamenco",
+      "source": "/opt/data/projects/Styles/Latin/flamenco/src/regen.py"
+    },
+    {
+      "project": "flamenco-sole\u00e1-daily-2026-06-11",
+      "midi": "/opt/data/projects/Styles/Latin/flamenco-sole\u00e1-daily-2026-06-11/flamenco-sole\u00e1-daily-2026-06-11.mid",
+      "source": "/opt/data/projects/Styles/Latin/flamenco-sole\u00e1-daily-2026-06-11/src/regen.py",
+      "scale": "Chromatic",
+      "pitch_classes": [
+        1,
+        2,
+        4,
+        6,
+        8,
+        10,
+        11
+      ],
+      "tempo": 109.99990833340972,
+      "time_sig": "4/4"
+    },
+    {
+      "project": "flamenco_solea",
+      "source": "/opt/data/projects/Styles/Latin/flamenco_solea/src/regen.py"
+    },
+    {
+      "project": "flamenco_solea_v2",
+      "source": "/opt/data/projects/Styles/Latin/flamenco_solea_v2/src/regen.py"
+    },
+    {
+      "project": "samba-batucada-daily-2026-06-18",
+      "midi": "/opt/data/projects/Styles/Latin/samba-batucada-daily-2026-06-18/composition.mid",
+      "scale": "In Scale",
+      "pitch_classes": [
+        0,
+        4
+      ],
+      "tempo": 120.0,
+      "time_sig": "4/4"
+    },
+    {
+      "project": "samba_batucada",
+      "source": "/opt/data/projects/Styles/Latin/samba_batucada/src/regen.py"
+    },
+    {
+      "project": "tango-classic-daily-2026-06-21",
+      "midi": "/opt/data/projects/Styles/Latin/tango-classic-daily-2026-06-21/composition.mid",
+      "source": "/opt/data/projects/Styles/Latin/tango-classic-daily-2026-06-21/src/generate.py",
+      "scale": "Chromatic",
+      "pitch_classes": [
+        0,
+        1,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        11
+      ],
+      "tempo": 128.0,
+      "time_sig": "4/2",
+      "instruments": [
+        "Bass",
+        "Piano",
+        "Bandoneon",
+        "Percussion"
+      ]
+    },
+    {
+      "project": "tango_classic",
+      "source": "/opt/data/projects/Styles/Latin/tango_classic/src/regen.py"
+    },
+    {
+      "project": "variation_2026-06-07_bossa_nova_classic",
+      "source": "/opt/data/projects/Styles/Latin/variation_2026-06-07_bossa_nova_classic/src/regen.py"
+    },
+    {
+      "project": "variation_2026-06-11_flamenco",
+      "source": "/opt/data/projects/Styles/Latin/variation_2026-06-11_flamenco/src/regen.py"
+    }
+  ],
+  "validated": true,
+  "validation": {
+    "12tet": {
+      "valid": true,
+      "pitch_classes_used": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "count": 12,
+      "issues": []
+    },
+    "metrical_gravity": {
+      "valid": true,
+      "length": 4,
+      "strong_beat_count": 1,
+      "profile": [
+        1.0,
+        0,
+        0.5,
+        0
+      ],
+      "issues": []
+    }
+  }
+}

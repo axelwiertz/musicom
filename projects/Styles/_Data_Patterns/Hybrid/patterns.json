@@ -1,0 +1,362 @@
+[
+  {
+    "project_name": "017-polo-beer-dance",
+    "source_file": "/opt/data/projects/Styles/Hybrid/017-polo-beer-dance/src/regen.py",
+    "scale_from_source": "Dorian",
+    "pitch_pattern_intervals": [
+      2,
+      3,
+      -2,
+      0,
+      5
+    ],
+    "analysis_source": "source"
+  },
+  {
+    "project_name": "018-landal-bollo-koos-hybrid",
+    "midi_file": "/opt/data/projects/Styles/Hybrid/018-landal-bollo-koos-hybrid/midi/hybrid_v1.mid",
+    "scale": "Pentatonic Minor",
+    "pitch_classes": [
+      5,
+      10
+    ],
+    "intervals": [
+      5,
+      7
+    ],
+    "tempo": null,
+    "time_sig": null,
+    "total_notes": 32,
+    "midi_range": [
+      46,
+      53
+    ],
+    "velocity_avg": 80.0,
+    "track_count": 1,
+    "tracks_detail": [
+      {
+        "track": 0,
+        "notes": 32,
+        "pitch_classes": [
+          5,
+          10
+        ],
+        "scale_fragment": "Pentatonic Minor",
+        "range": [
+          46,
+          53
+        ]
+      }
+    ],
+    "analysis_source": "midi",
+    "source_file": "/opt/data/projects/Styles/Hybrid/018-landal-bollo-koos-hybrid/scripts/generate_midi.py",
+    "embedded_pitch_classes": [
+      5,
+      10
+    ],
+    "embedded_scale": "Pentatonic Minor"
+  },
+  {
+    "project_name": "018-rock-apprenticeship",
+    "midi_file": "/opt/data/projects/Styles/Hybrid/018-rock-apprenticeship/MIDI/first-riff-engine.mid",
+    "scale": "Chromatic",
+    "pitch_classes": [
+      0,
+      2,
+      4,
+      6,
+      7,
+      9,
+      10,
+      11
+    ],
+    "intervals": [
+      2,
+      2,
+      2,
+      1,
+      2,
+      1,
+      1,
+      1
+    ],
+    "tempo": 128.0,
+    "time_sig": "4/4",
+    "total_notes": 294,
+    "midi_range": [
+      33,
+      71
+    ],
+    "velocity_avg": 75.5,
+    "track_count": 5,
+    "tracks_detail": [
+      {
+        "track": 0,
+        "notes": 60,
+        "pitch_classes": [
+          2,
+          4,
+          7,
+          9,
+          10,
+          11
+        ],
+        "scale_fragment": "Chromatic",
+        "range": [
+          52,
+          62
+        ]
+      },
+      {
+        "track": 1,
+        "notes": 54,
+        "pitch_classes": [
+          2,
+          4,
+          7,
+          9,
+          11
+        ],
+        "scale_fragment": "Lydian",
+        "range": [
+          33,
+          45
+        ]
+      },
+      {
+        "track": 2,
+        "notes": 36,
+        "pitch_classes": [
+          2,
+          4,
+          6,
+          7,
+          9,
+          11
+        ],
+        "scale_fragment": "Lydian",
+        "range": [
+          50,
+          71
+        ]
+      },
+      {
+        "track": 3,
+        "notes": 96,
+        "pitch_classes": [
+          6
+        ],
+        "scale_fragment": "Blues Hexatonic",
+        "range": [
+          42,
+          42
+        ]
+      },
+      {
+        "track": 4,
+        "notes": 48,
+        "pitch_classes": [
+          0,
+          2
+        ],
+        "scale_fragment": "In Scale",
+        "range": [
+          36,
+          38
+        ]
+      }
+    ],
+    "analysis_source": "midi",
+    "source_file": "/opt/data/projects/Styles/Hybrid/018-rock-apprenticeship/analyze_and_compose_voice_motif.py",
+    "tempo_from_source": 108,
+    "time_sig_from_source": "4/4",
+    "embedded_pitch_classes": [
+      2,
+      4,
+      7,
+      9,
+      10,
+      11
+    ],
+    "embedded_scale": "Chromatic"
+  },
+  {
+    "project_name": "022-indie-pop-sunset",
+    "midi_file": "/opt/data/projects/Styles/Hybrid/022-indie-pop-sunset/MIDI/sunset_matrix.mid",
+    "scale": "Lydian",
+    "pitch_classes": [
+      0,
+      2,
+      4,
+      6,
+      7,
+      9,
+      11
+    ],
+    "intervals": [
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1
+    ],
+    "tempo": null,
+    "time_sig": null,
+    "total_notes": 120,
+    "midi_range": [
+      36,
+      76
+    ],
+    "velocity_avg": 88.0,
+    "track_count": 3,
+    "tracks_detail": [
+      {
+        "track": 0,
+        "notes": 48,
+        "pitch_classes": [
+          2,
+          4,
+          6,
+          7,
+          9,
+          11
+        ],
+        "scale_fragment": "Lydian",
+        "range": [
+          64,
+          76
+        ]
+      },
+      {
+        "track": 1,
+        "notes": 8,
+        "pitch_classes": [
+          0,
+          2,
+          4,
+          7
+        ],
+        "scale_fragment": "In Scale",
+        "range": [
+          48,
+          55
+        ]
+      },
+      {
+        "track": 2,
+        "notes": 64,
+        "pitch_classes": [
+          0,
+          2,
+          4,
+          7
+        ],
+        "scale_fragment": "In Scale",
+        "range": [
+          36,
+          43
+        ]
+      }
+    ],
+    "analysis_source": "midi"
+  },
+  {
+    "project_name": "025-bollo-koos-indian-unified",
+    "midi_file": "/opt/data/projects/Styles/Hybrid/025-bollo-koos-indian-unified/MIDI/bollo_koos_indian_v1.mid",
+    "scale": "Chromatic",
+    "pitch_classes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      9,
+      10
+    ],
+    "intervals": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      2,
+      1,
+      2
+    ],
+    "tempo": null,
+    "time_sig": null,
+    "total_notes": 72,
+    "midi_range": [
+      42,
+      69
+    ],
+    "velocity_avg": 71.1,
+    "track_count": 3,
+    "tracks_detail": [
+      {
+        "track": 0,
+        "notes": 16,
+        "pitch_classes": [
+          0,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "scale_fragment": "Blues Heptatonic",
+        "range": [
+          60,
+          67
+        ]
+      },
+      {
+        "track": 1,
+        "notes": 48,
+        "pitch_classes": [
+          0,
+          1,
+          2,
+          4,
+          5,
+          7,
+          9,
+          10
+        ],
+        "scale_fragment": "Chromatic",
+        "range": [
+          57,
+          69
+        ]
+      },
+      {
+        "track": 2,
+        "notes": 8,
+        "pitch_classes": [
+          6
+        ],
+        "scale_fragment": "Blues Hexatonic",
+        "range": [
+          42,
+          42
+        ]
+      }
+    ],
+    "analysis_source": "midi",
+    "source_file": "/opt/data/projects/Styles/Hybrid/025-bollo-koos-indian-unified/src/aligned_workflow.py",
+    "embedded_pitch_classes": [
+      2,
+      4,
+      5
+    ],
+    "embedded_scale": "Major/Ionian"
+  }
+]

@@ -1,0 +1,40 @@
+{
+  "genre": "Dutch Folk",
+  "subgenre": "Minidisco",
+  "pitch": {
+    "scale": "Major",
+    "intervals": [
+      2,
+      2,
+      1,
+      2,
+      2,
+      2,
+      1
+    ],
+    "contour": "Simple triadic arpeggios, repetitive hooks"
+  },
+  "rhythm": {
+    "dna": "\u2588\u2591\u2591\u2591\u2588\u2591\u2591\u2591",
+    "euclidean": "E(2,8)",
+    "metrical_gravity": [
+      1,
+      0,
+      1,
+      0,
+      1,
+      0,
+      1,
+      0
+    ],
+    "description": "4/4 Four-on-the-floor, simple syncopation"
+  },
+  "timbre": {
+    "instrumentation": [
+      "Saw Synth",
+      "Kick Drum",
+      "Child Vocals"
+    ],
+    "calibration": "High-energy, compressed, electronic"
+  }
+}

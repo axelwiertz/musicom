@@ -1,0 +1,68 @@
+{
+  "artifact": "054-isorhythmic-waveguide.mid",
+  "classification": "ai-assisted",
+  "generator": "054-isorhythmic-waveguide/src/compose.py",
+  "sources": [],
+  "parameters": {
+    "bpm": 80,
+    "method": "032-ITCM",
+    "sp_method": "SP-023-WaveguideWoodwind",
+    "talea_lead": [
+      1,
+      0,
+      1,
+      1,
+      0,
+      1,
+      0
+    ],
+    "talea_tenor": [
+      0,
+      1,
+      0,
+      1,
+      1,
+      0,
+      1
+    ],
+    "talea_bass": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+      1
+    ],
+    "color_lead_a": [
+      62,
+      65,
+      69,
+      67,
+      64
+    ],
+    "color_tenor_a": [
+      55,
+      57,
+      60,
+      58,
+      53
+    ],
+    "color_bass_a": [
+      38,
+      41,
+      43,
+      40,
+      36
+    ],
+    "key": "D Dorian",
+    "form": "ABA'",
+    "talea_length": 7,
+    "color_length": 5
+  },
+  "notes": "Isorhythmic talea (7-step rhythm) x color (5-pitch D Dorian). Coprime lengths create shifting alignment. SP-023: Clarinet patches (MIDI 71) evoke waveguide woodwind timbre.",
+  "sha256": "7d5f86427337a49dbd5f67e5a3402c21975cf909535e8e625284c505ce785ca8",
+  "bytes": 2520,
+  "created_utc": "2026-07-31T10:03:06.132820+00:00",
+  "provenance_version": "1.0"
+}

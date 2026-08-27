@@ -1,0 +1,150 @@
+[
+  {
+    "project_name": "bluegrass-scruggs-daily-2026-06-23",
+    "midi_file": "/opt/data/projects/Styles/Bluegrass/bluegrass-scruggs-daily-2026-06-23/composition.mid",
+    "scale": "Chromatic",
+    "pitch_classes": [
+      0,
+      1,
+      2,
+      4,
+      5,
+      6,
+      7,
+      9,
+      11
+    ],
+    "intervals": [
+      1,
+      1,
+      2,
+      1,
+      1,
+      1,
+      2,
+      2,
+      1
+    ],
+    "tempo": 140.00014000014,
+    "time_sig": "2/2",
+    "total_notes": 75,
+    "midi_range": [
+      38,
+      77
+    ],
+    "velocity_avg": 79.5,
+    "track_count": 5,
+    "tracks_detail": [
+      {
+        "track": 0,
+        "notes": 16,
+        "pitch_classes": [
+          0,
+          2,
+          4,
+          7,
+          9,
+          11
+        ],
+        "scale_fragment": "Lydian",
+        "range": [
+          67,
+          76
+        ]
+      },
+      {
+        "track": 1,
+        "notes": 18,
+        "pitch_classes": [
+          0,
+          2,
+          4,
+          5,
+          7,
+          9,
+          11
+        ],
+        "scale_fragment": "Major/Ionian",
+        "range": [
+          67,
+          77
+        ]
+      },
+      {
+        "track": 2,
+        "notes": 16,
+        "pitch_classes": [
+          0,
+          2,
+          6,
+          7,
+          9,
+          11
+        ],
+        "scale_fragment": "Lydian",
+        "range": [
+          50,
+          67
+        ]
+      },
+      {
+        "track": 3,
+        "notes": 18,
+        "pitch_classes": [
+          0,
+          1,
+          2,
+          7,
+          9,
+          11
+        ],
+        "scale_fragment": "Chromatic",
+        "range": [
+          55,
+          62
+        ]
+      },
+      {
+        "track": 4,
+        "notes": 7,
+        "pitch_classes": [
+          2,
+          7
+        ],
+        "scale_fragment": "In Scale",
+        "range": [
+          38,
+          50
+        ]
+      }
+    ],
+    "analysis_source": "midi",
+    "source_file": "/opt/data/projects/Styles/Bluegrass/bluegrass-scruggs-daily-2026-06-23/generate.py",
+    "scale_from_source": "G Major",
+    "tempo_from_source": 140,
+    "time_sig_from_source": "2/2",
+    "embedded_pitch_classes": [
+      2,
+      7,
+      11
+    ],
+    "embedded_scale": "Harmonic Minor",
+    "metrical_gravity": [
+      1.0,
+      0.2,
+      0.8,
+      0.2,
+      0.7,
+      0.3,
+      0.6,
+      0.2
+    ],
+    "instrument_rows": [
+      "Banjo",
+      "Fiddle",
+      "Mandolin",
+      "Guitar",
+      "Bass"
+    ]
+  }
+]

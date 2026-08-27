@@ -1,0 +1,18 @@
+{
+  "artifact": "077-klezmer-markov-wavefront-phase1.mid",
+  "classification": "ai-generated",
+  "generator": "musicom-method-022-markov-wavefront-phase1",
+  "sources": [],
+  "parameters": {
+    "seed": 77022,
+    "style": "Klezmer",
+    "bpm": 132,
+    "key": "D harmonic minor (freygish flavor)",
+    "phase": 1
+  },
+  "notes": "raw generative draft, pre-rules, single voice",
+  "sha256": "57744696c23b7dcc2de778e9ffa48fd6ee2b5290c05e1b97af2b01dcf80a3ec7",
+  "bytes": 1264,
+  "created_utc": "2026-08-24T23:10:29.170538+00:00",
+  "provenance_version": "1.0"
+}

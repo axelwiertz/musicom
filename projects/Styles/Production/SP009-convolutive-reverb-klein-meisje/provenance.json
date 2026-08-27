@@ -1,0 +1,54 @@
+{
+  "job": "nightly-production",
+  "source_midi": "/opt/data/projects/Styles/Folk/029-een-klein-meisje/MIDI/live_render.mid",
+  "source_sha256_prefix": "985612a609beea29",
+  "method": "SP-009",
+  "method_name": "Convolutive Reverberation",
+  "method_layer": "Post-Processing / DSP",
+  "ir_type": "synthesized room IR (hall rt60=2.2s, church rt60=3.4s) + early reflections + HF damping",
+  "voices": [
+    {
+      "stem": "Acoustic_Grand_Piano",
+      "env": "church",
+      "wet": 0.38,
+      "predelay_s": 0.045,
+      "azimuth_deg": -18,
+      "depth": 0.55
+    },
+    {
+      "stem": "Acoustic_Guitar_nylon",
+      "env": "hall",
+      "wet": 0.3,
+      "predelay_s": 0.03,
+      "azimuth_deg": 22,
+      "depth": 0.45
+    },
+    {
+      "stem": "Acoustic_Bass",
+      "env": "hall",
+      "wet": 0.22,
+      "predelay_s": 0.02,
+      "azimuth_deg": 5,
+      "depth": 0.35
+    }
+  ],
+  "master": {
+    "normalize_dbfs": -1.0,
+    "soft_clip": "tanh",
+    "sample_rate": 44100
+  },
+  "artifacts": {
+    "wav": "/opt/data/projects/Styles/Production/SP009-convolutive-reverb-klein-meisje/SP009-klein-meisje-convolutive-reverb.wav",
+    "ogg": "/opt/data/projects/Styles/Production/SP009-convolutive-reverb-klein-meisje/SP009-klein-meisje-convolutive-reverb.ogg",
+    "midi_copy": "/opt/data/projects/Styles/Production/SP009-convolutive-reverb-klein-meisje/MIDI/029-een-klein-meisje-live_render.mid",
+    "stems_dir": "/opt/data/projects/Styles/Production/SP009-convolutive-reverb-klein-meisje/stems"
+  },
+  "measurements": {
+    "silence_fraction": 0.0309,
+    "peak": 0.701,
+    "rms": 0.1081,
+    "duration_s": 74.11
+  },
+  "rendered_utc": "2026-08-21T22:18:56Z",
+  "classification": "ai-assisted"
+}

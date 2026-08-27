@@ -1,0 +1,45 @@
+{
+  "job": "production-9a2813f77dac (autonomous daily production pipeline)",
+  "selection": "random via _select_random.py (seeded from OS entropy)",
+  "source_midi": "/opt/data/projects/Styles/Experimental/057-cellular-chorale/MIDI/057-cellular-chorale.mid",
+  "source_midi_sha256": "f7539d488ec2b047afc4b41b3ade5aa28a233fdedf4517d1c39f2b3a43bfb3fa",
+  "source_analysis": {
+    "genre": "Experimental / Cellular Automata",
+    "bpm": 96.0,
+    "ticks_per_beat": 480,
+    "duration_seconds": 20.0,
+    "voices": {
+      "track1": "P74 Flute, 8 whole notes, range D#4-D5",
+      "track2": "P74 Flute, 8 whole notes, range G3-B3",
+      "track3": "P74 Flute, 8 whole notes, range D3-C#4",
+      "track4": "P33 Electric Bass, 8 whole notes, range A2-F#3"
+    },
+    "notes_total": 32
+  },
+  "production_method": "SP-011",
+  "production_method_name": "Karplus-Strong String Synthesis",
+  "production_method_layer": "Synthesis Engines",
+  "production_method_description": "Physical modeling of plucked strings. Uses delay line feedback loop with low-pass filter (moving average) to simulate acoustic decay.",
+  "synthesis_parameters": {
+    "sample_rate": 44100,
+    "excitation": "2-sample uniform noise burst scaled by MIDI velocity (pick transient)",
+    "delay_line": "N = round(sr / f0), full cycle period (single-delay loop, no sign inversion)",
+    "loop_filter": "2-point moving average y[n] = 0.5*(y[n-N] + y[n-N-1])",
+    "loop_gain": "0.996 base with spectral tilt 0.994..0.997 (brighter strings ring longer)",
+    "bass_loop_gain": 0.997,
+    "voice_gain_db": "lead -2 dB, bass -6 dB",
+    "pan": "static per voice (lead width 0.55); lead voice drifts -0.55..+0.55 across the 8 chorale cells",
+    "bus": "soft-knee saturation (thresh 0.82, slope 0.32), peak normalize -1 dBFS"
+  },
+  "render_engine": "pure numpy Karplus-Strong physical modeling (methods_db.md SP-011)",
+  "outputs": {
+    "midi_copy": "/opt/data/projects/Styles/Production/SP011-karplus-cellular-chorale/MIDI/057-cellular-chorale.mid",
+    "full_mix_wav": "/opt/data/projects/Styles/Production/SP011-karplus-cellular-chorale/Audio/SP011-cellular-chorale-karplus-strong.wav",
+    "full_mix_ogg": "/opt/data/projects/Styles/Production/SP011-karplus-cellular-chorale/Audio/SP011-cellular-chorale-karplus-strong.ogg"
+  },
+  "verification": {
+    "spectral_check": "PASS — all fundamentals found in expected 2.5 s cell windows (7/7)",
+    "sanity_check": "PASS — peak 0.696, 0 clipped samples, no clicks",
+    "ogg_duration_seconds": 23.0
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "genre": "Indian Classical",
+  "subgenre": "Yaman (Hindustani)",
+  "pitch": {
+    "scale": "Kalyan Thaat (Lydian)",
+    "intervals": [
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1
+    ],
+    "contour": "Ascending (Aroh) omits 1/5 often, Meend (glissando)"
+  },
+  "rhythm": {
+    "dna": "\u2588\u2591\u2591\u2591\u2588\u2591\u2591\u2591\u2588\u2591\u2591\u2591\u2588\u2591\u2591\u2591",
+    "tala": "Teental (16 beats)",
+    "metrical_gravity": [
+      1.0,
+      0.5,
+      0.8,
+      0.5,
+      1.0,
+      0.5,
+      0.8,
+      0.5,
+      0,
+      0.5,
+      0.8,
+      0.5,
+      1.0,
+      0.5,
+      0.8,
+      0.5
+    ],
+    "description": "4+4+4+4 structure, Sam on 1, Khali on 9"
+  },
+  "timbre": {
+    "instrumentation": [
+      "Sitar",
+      "Tabla",
+      "Tanpura"
+    ],
+    "calibration": "Sympathetic string resonance, sliding frequency"
+  }
+}

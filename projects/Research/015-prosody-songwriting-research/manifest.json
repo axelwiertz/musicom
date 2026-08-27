@@ -1,0 +1,35 @@
+{
+  "project": "015-prosody-songwriting-research",
+  "scope": "musicom-agent",
+  "direction": "roundtrip",
+  "algorithmic_direction": "genetic_algorithm",
+  "evolutionary_loop": {
+    "generate": true,
+    "evaluate": true,
+    "select": true,
+    "mutate": true,
+    "crossover": true,
+    "human_in_the_loop": true,
+    "human_gates": ["goal", "candidate_set", "score_weights", "winner_override", "stop_condition"]
+  },
+  "source_types": ["text", "midi", "audio", "mixed"],
+  "method_registry": [
+    "prosodic_narrative_coupling",
+    "skeleton_first",
+    "markov",
+    "genetic",
+    "negative_harmony",
+    "ostinato",
+    "groove_locked",
+    "reverse_music_analysis"
+  ],
+  "selection_policy": {
+    "candidates": 4,
+    "scorecard": ["prosody", "rhythm", "melody", "harmony", "form", "text"],
+    "tie_breakers": ["prosody", "repeatability", "simplicity"],
+    "feedback": true
+  },
+  "scope_note": "This manifest is project-level, but the same router logic also applies at Musicom Agent level.",
+  "outputs": ["README.md", "research-notes.md", "methods-additions.md", "method-comparison-loop.md", "router-spec.md"],
+  "status": "research"
+}

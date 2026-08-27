@@ -1,0 +1,76 @@
+{
+  "style": "Groove",
+  "sub_styles": [
+    {
+      "name": "019-soul-groove",
+      "scale": "Chromatic",
+      "pitch_classes": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        7,
+        9,
+        10,
+        11
+      ],
+      "tempo": 100.0
+    },
+    {
+      "name": "020-afrobeat-groove",
+      "scale": "Chromatic",
+      "pitch_classes": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        9,
+        10,
+        11
+      ],
+      "tempo": 109.99990833340972
+    }
+  ],
+  "pitch": {
+    "scale": "Chromatic",
+    "intervals": [
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      2,
+      1,
+      1,
+      1
+    ],
+    "common_pitch_classes": [
+      0,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      9,
+      10,
+      11
+    ],
+    "total_pitch_classes": 10
+  },
+  "rhythm": {
+    "patterns_analyzed": 2,
+    "metrical_gravity_verified": true,
+    "description": ""
+  },
+  "validation": {
+    "12tet_pass": true,
+    "metrical_gravity_pass": true
+  },
+  "last_updated": "2026-06-24T04:00:00Z"
+}

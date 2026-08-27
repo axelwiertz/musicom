@@ -1,0 +1,376 @@
+[
+  {
+    "project_name": "001-folk-drie-kleine-kleutertjes",
+    "midi_file": "/opt/data/projects/Styles/Folk/001-folk-drie-kleine-kleutertjes/midi/A1_B_A2_structure.mid",
+    "scale": "Mixolydian",
+    "pitch_classes": [
+      0,
+      2,
+      4,
+      5,
+      7,
+      9,
+      10
+    ],
+    "intervals": [
+      2,
+      2,
+      1,
+      2,
+      2,
+      1,
+      2
+    ],
+    "tempo": null,
+    "time_sig": null,
+    "total_notes": 52,
+    "midi_range": [
+      48,
+      65
+    ],
+    "velocity_avg": 80.0,
+    "track_count": 1,
+    "tracks_detail": [
+      {
+        "track": 0,
+        "notes": 52,
+        "pitch_classes": [
+          0,
+          2,
+          4,
+          5,
+          7,
+          9,
+          10
+        ],
+        "scale_fragment": "Mixolydian",
+        "range": [
+          48,
+          65
+        ]
+      }
+    ],
+    "analysis_source": "midi",
+    "source_file": "/opt/data/projects/Styles/Folk/001-folk-drie-kleine-kleutertjes/src/regen.py",
+    "scale_from_source": "Dorian",
+    "pitch_pattern_intervals": [
+      2,
+      3,
+      -2,
+      0,
+      5
+    ]
+  },
+  {
+    "project_name": "016-folk-electric-folk-d-major",
+    "midi_file": "/opt/data/projects/Styles/Folk/016-folk-electric-folk-d-major/MIDI/v1_electric_folk_d_major_130.mid",
+    "scale": "Chromatic",
+    "pitch_classes": [
+      0,
+      1,
+      2,
+      4,
+      6,
+      7,
+      9,
+      10,
+      11
+    ],
+    "intervals": [
+      1,
+      1,
+      2,
+      2,
+      1,
+      2,
+      1,
+      1,
+      1
+    ],
+    "tempo": 130.00013000013,
+    "time_sig": "4/4",
+    "total_notes": 2632,
+    "midi_range": [
+      36,
+      95
+    ],
+    "velocity_avg": 85.2,
+    "track_count": 6,
+    "tracks_detail": [
+      {
+        "track": 0,
+        "notes": 1152,
+        "pitch_classes": [
+          2,
+          4,
+          6,
+          7,
+          9,
+          11
+        ],
+        "scale_fragment": "Lydian",
+        "range": [
+          55,
+          79
+        ]
+      },
+      {
+        "track": 1,
+        "notes": 208,
+        "pitch_classes": [
+          2,
+          4,
+          6,
+          9,
+          11
+        ],
+        "scale_fragment": "Lydian",
+        "range": [
+          62,
+          88
+        ]
+      },
+      {
+        "track": 2,
+        "notes": 436,
+        "pitch_classes": [
+          2,
+          4,
+          6,
+          9,
+          11
+        ],
+        "scale_fragment": "Lydian",
+        "range": [
+          71,
+          95
+        ]
+      },
+      {
+        "track": 3,
+        "notes": 256,
+        "pitch_classes": [
+          2,
+          4,
+          7,
+          9,
+          11
+        ],
+        "scale_fragment": "Lydian",
+        "range": [
+          43,
+          67
+        ]
+      },
+      {
+        "track": 4,
+        "notes": 128,
+        "pitch_classes": [
+          2,
+          4,
+          6,
+          9,
+          11
+        ],
+        "scale_fragment": "Lydian",
+        "range": [
+          62,
+          81
+        ]
+      },
+      {
+        "track": 5,
+        "notes": 452,
+        "pitch_classes": [
+          0,
+          1,
+          2,
+          6,
+          9,
+          10,
+          11
+        ],
+        "scale_fragment": "Chromatic",
+        "range": [
+          36,
+          49
+        ]
+      }
+    ],
+    "analysis_source": "midi",
+    "source_file": "/opt/data/projects/Styles/Folk/016-folk-electric-folk-d-major/Scripts/generate_v1.py",
+    "scale_from_source": "D major",
+    "tempo_from_source": 130,
+    "time_sig_from_source": "4/4",
+    "embedded_pitch_classes": [
+      4,
+      7,
+      11
+    ],
+    "embedded_scale": "Lydian"
+  },
+  {
+    "project_name": "029-een-klein-meisje",
+    "midi_file": "/opt/data/projects/Styles/Folk/029-een-klein-meisje/MIDI/draft.mid",
+    "scale": "Lydian",
+    "pitch_classes": [
+      0,
+      2,
+      7,
+      9,
+      11
+    ],
+    "intervals": [
+      2,
+      5,
+      2,
+      2,
+      1
+    ],
+    "tempo": 104.99992125005906,
+    "time_sig": "4/4",
+    "total_notes": 12,
+    "midi_range": [
+      67,
+      74
+    ],
+    "velocity_avg": 90.0,
+    "track_count": 1,
+    "tracks_detail": [
+      {
+        "track": 0,
+        "notes": 12,
+        "pitch_classes": [
+          0,
+          2,
+          7,
+          9,
+          11
+        ],
+        "scale_fragment": "Lydian",
+        "range": [
+          67,
+          74
+        ]
+      }
+    ],
+    "analysis_source": "midi",
+    "source_file": "/opt/data/projects/Styles/Folk/029-een-klein-meisje/src/live_composer.py",
+    "scale_from_source": "D",
+    "tempo_from_source": 105,
+    "embedded_pitch_classes": [
+      1,
+      2,
+      4,
+      6,
+      7,
+      9,
+      11
+    ],
+    "embedded_scale": "Chromatic"
+  },
+  {
+    "project_name": "balfolk",
+    "source_file": "/opt/data/projects/Styles/Folk/balfolk/src/regen.py",
+    "scale_from_source": "Dorian",
+    "pitch_pattern_intervals": [
+      2,
+      3,
+      -2,
+      0,
+      5
+    ],
+    "analysis_source": "source"
+  },
+  {
+    "project_name": "balfolk_dorian_jig",
+    "source_file": "/opt/data/projects/Styles/Folk/balfolk_dorian_jig/src/regen.py",
+    "scale_from_source": "Dorian",
+    "pitch_pattern_intervals": [
+      2,
+      3,
+      -2,
+      0,
+      5
+    ],
+    "analysis_source": "source"
+  },
+  {
+    "project_name": "balfolk_jig",
+    "source_file": "/opt/data/projects/Styles/Folk/balfolk_jig/src/regen.py",
+    "scale_from_source": "Dorian",
+    "pitch_pattern_intervals": [
+      2,
+      3,
+      -2,
+      0,
+      5
+    ],
+    "analysis_source": "source"
+  },
+  {
+    "project_name": "balfolk_mazurka",
+    "source_file": "/opt/data/projects/Styles/Folk/balfolk_mazurka/src/regen.py",
+    "scale_from_source": "Dorian",
+    "pitch_pattern_intervals": [
+      2,
+      3,
+      -2,
+      0,
+      5
+    ],
+    "analysis_source": "source"
+  },
+  {
+    "project_name": "balfolk_schottische",
+    "source_file": "/opt/data/projects/Styles/Folk/balfolk_schottische/src/regen.py",
+    "scale_from_source": "Dorian",
+    "pitch_pattern_intervals": [
+      2,
+      3,
+      -2,
+      0,
+      5
+    ],
+    "analysis_source": "source"
+  },
+  {
+    "project_name": "dutch_minidisco",
+    "source_file": "/opt/data/projects/Styles/Folk/dutch_minidisco/src/regen.py",
+    "scale_from_source": "Dorian",
+    "pitch_pattern_intervals": [
+      2,
+      3,
+      -2,
+      0,
+      5
+    ],
+    "analysis_source": "source"
+  },
+  {
+    "project_name": "dutch_minidisco_folk",
+    "source_file": "/opt/data/projects/Styles/Folk/dutch_minidisco_folk/src/regen.py",
+    "scale_from_source": "Dorian",
+    "pitch_pattern_intervals": [
+      2,
+      3,
+      -2,
+      0,
+      5
+    ],
+    "analysis_source": "source"
+  },
+  {
+    "project_name": "dutch_nursery",
+    "source_file": "/opt/data/projects/Styles/Folk/dutch_nursery/src/regen.py",
+    "scale_from_source": "Dorian",
+    "pitch_pattern_intervals": [
+      2,
+      3,
+      -2,
+      0,
+      5
+    ],
+    "analysis_source": "source"
+  }
+]

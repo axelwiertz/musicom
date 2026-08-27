@@ -1,0 +1,19 @@
+{
+  "project": "002-schillinger-rachenitsa",
+  "style": "Balkan",
+  "genre": "Rachenitsa (7/8 dance)",
+  "method": "schillinger_resultant (SchillingerGenerator a=7 b=2)",
+  "classification": "ai-generated",
+  "key": "D harmonic minor",
+  "bpm": 132,
+  "bars": 8,
+  "section_structure": "A x8 (Dm-Bb-Gm-A x2)",
+  "phase1": "raw resultant draft, no harmony, sine-axis pitch projection",
+  "phase2": "chord-tone quantization + voice leading + zero-drift UnitMatrix",
+  "generator": "generators.schillinger.SchillingerGenerator",
+  "engine": "musicom UnitMatrixComposer",
+  "artifacts": {
+    "phase1_mid": "/opt/data/projects/Styles/Balkan/002-schillinger-rachenitsa/MIDI/002-schillinger-rachenitsa-phase1.mid",
+    "final_mid": "/opt/data/projects/Styles/Balkan/002-schillinger-rachenitsa/MIDI/002-schillinger-rachenitsa.mid"
+  }
+}

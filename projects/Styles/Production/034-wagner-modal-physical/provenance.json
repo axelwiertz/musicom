@@ -1,0 +1,39 @@
+{
+  "project_id": "034",
+  "project_name": "wagner-modal-physical",
+  "produced_at_utc": "2026-08-18T22:03:00Z",
+  "source": {
+    "midi": "/opt/data/projects/Styles/Classical/033-wagner-study-v2/midi/wagner_poly.mid",
+    "title": "Wagner study (033) - 4-voice SATB polyphony",
+    "tempo_bpm": 120,
+    "duration_s": 32.0,
+    "voices": ["Soprano", "Alto", "Tenor", "Bass"]
+  },
+  "production_method": {
+    "id": "SP-003",
+    "name": "Modal Physical Modeling (Plate/Bar)",
+    "category": "Synthesis Engines",
+    "engine": "musicom sound/synthesis/modal.py ResonatorBank",
+    "technique": "damped resonator banks (modal synthesis); MIDI pitch maps to fundamental f0, impulse excitation, natural object decay",
+    "object_assignments": {
+      "Soprano": "bar (marimba) ratios 1:4:10:13.2:18.5",
+      "Alto": "string ratios 1:2:3:4:5:6",
+      "Tenor": "plate ratios 1:1.73:2.83:3.61:4.58",
+      "Bass": "bell ratios 0.5:1:1.2:1.5:2:2.5:3"
+    }
+  },
+  "outputs": {
+    "wav": "/opt/data/projects/Styles/Production/034-wagner-modal-physical/audio/wagner_modal_SP003.wav",
+    "ogg": "/opt/data/projects/Styles/Production/034-wagner-modal-physical/audio/wagner_modal_SP003.ogg",
+    "source_midi_copy": "/opt/data/projects/Styles/Production/034-wagner-modal-physical/midi/wagner_poly_source.mid"
+  },
+  "render_health": {
+    "sample_rate": 44100,
+    "channels": 1,
+    "duration_s": 34.0,
+    "silence_fraction": 0.013,
+    "normalization_dbFS": -0.9
+  },
+  "classification": "ai-generated",
+  "notes": "First preset attempt flagged 31.7% silence (decays died before 2s chorale gaps); rebuilt banks with physically-derived ratios + gentle damping -> 1.3% silence."
+}

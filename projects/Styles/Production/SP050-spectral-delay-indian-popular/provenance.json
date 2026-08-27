@@ -1,0 +1,46 @@
+{
+  "job": "production-pass",
+  "timestamp": "2026-08-23T00:00:00Z",
+  "source_midi": "/opt/data/projects/Styles/Hybrid/025-bollo-koos-indian-unified/v2-IndianPopular/MIDI/025v2_unitmatrix.mid",
+  "source_midi_sha256": null,
+  "method": "SP-050",
+  "method_name": "Spectral Delay Filters (SDF)",
+  "method_source": "methods_db.md#SP-050",
+  "dsp": {
+    "stft_fft": 4096,
+    "hop": 1024,
+    "window": "hann",
+    "tau_max_melody_s": 0.75,
+    "tau_max_bass_s": 0.75,
+    "feedback_cap": 0.9,
+    "gcd_quantization": "integer frame counts (hop grid)",
+    "per_voice_mode": true
+  },
+  "render": {
+    "engine": "libfluidsynth ctypes (manual write_float, no audio driver)",
+    "soundfont": "TimGM6mb.sf2",
+    "sample_rate": 44100,
+    "gm_programs": {
+      "melody": 104,
+      "bass_f2": 33,
+      "thump_d2": 34
+    },
+    "mix_gains": {
+      "mel_dry": 0.35,
+      "mel_wet": 0.65,
+      "bass_dry": 0.9,
+      "bass_wet": 0.5
+    },
+    "peak_norm_db": -1.0
+  },
+  "artifacts": [
+    "Audio/SP050-spectral-delay-indian-popular.wav",
+    "Audio/SP050-spectral-delay-indian-popular.ogg",
+    "Audio/stem_melody.wav",
+    "Audio/stem_bass.wav",
+    "MIDI/025v2_unitmatrix.mid",
+    "Analysis/render_stats.json",
+    "README.md"
+  ],
+  "assistance": "AI_ASSISTED"
+}

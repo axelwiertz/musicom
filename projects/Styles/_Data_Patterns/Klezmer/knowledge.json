@@ -1,0 +1,92 @@
+{
+  "style": "Klezmer",
+  "subgenre": "",
+  "pitch": {
+    "scale": "Harmonic Minor",
+    "intervals": [
+      2,
+      5,
+      1,
+      3,
+      1
+    ],
+    "pitch_classes": [
+      0,
+      2,
+      7,
+      8,
+      11
+    ],
+    "per_track_scale": "In Scale",
+    "per_track_scale_distribution": {
+      "In Scale": 2,
+      "Harmonic Minor": 2
+    }
+  },
+  "rhythm": {
+    "metrical_gravity": [
+      1.0,
+      0,
+      0.5,
+      0
+    ],
+    "tempo_range": [
+      120,
+      120
+    ],
+    "time_signatures": [],
+    "description": ""
+  },
+  "timbre": {
+    "instrumentation": [
+      "Track 1",
+      "Track 2",
+      "Track 3",
+      "Track 4"
+    ]
+  },
+  "patterns": [
+    {
+      "project": "freylekhs-daily-2026-06-17",
+      "midi": "/opt/data/projects/Styles/Klezmer/freylekhs-daily-2026-06-17/composition.mid",
+      "source": "/opt/data/projects/Styles/Klezmer/freylekhs-daily-2026-06-17/src/generate.py",
+      "scale": "Harmonic Minor",
+      "pitch_classes": [
+        0,
+        2,
+        7,
+        8,
+        11
+      ],
+      "tempo": null,
+      "time_sig": null
+    }
+  ],
+  "validated": true,
+  "validation": {
+    "12tet": {
+      "valid": true,
+      "pitch_classes_used": [
+        0,
+        2,
+        7,
+        8,
+        11
+      ],
+      "count": 5,
+      "issues": []
+    },
+    "metrical_gravity": {
+      "valid": true,
+      "length": 4,
+      "strong_beat_count": 1,
+      "profile": [
+        1.0,
+        0,
+        0.5,
+        0
+      ],
+      "issues": []
+    }
+  }
+}

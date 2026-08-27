@@ -1,0 +1,19 @@
+{
+  "artifact": "soul_smooth.mid",
+  "classification": "ai-assisted",
+  "generator": "soul_smooth",
+  "sources": [],
+  "parameters": {
+    "bpm": 85,
+    "methods": [
+      "011",
+      "002",
+      "026"
+    ]
+  },
+  "notes": "",
+  "sha256": "0ad6fe72933d387516186d28b816f8144f84d34707d5e627dfbb0670f926c9aa",
+  "bytes": 13052,
+  "created_utc": "2026-07-27T21:04:19.701140+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,21 @@
+{
+  "style": "Ragtime",
+  "sub_styles": [],
+  "pitch": {
+    "scale": "Major/Ionian",
+    "intervals": [2, 2, 1, 2, 2, 2, 1],
+    "pitch_classes": [0, 2, 4, 5, 7, 9, 11],
+    "total_pitch_classes": 7
+  },
+  "rhythm": {
+    "metrical_gravity": [1.0, 0, 0, 1.0],
+    "tempo_range": [100, 140],
+    "time_signatures": ["4/4"],
+    "description": "Syncopated melody over steady 2/4 bass: left hand alternates root (1,3) and chord (2,4); right hand syncopated melodic phrases; characteristic bass-chord 'boom-chick' pattern"
+  },
+  "validation": {
+    "12tet_pass": true,
+    "metrical_gravity_pass": true
+  },
+  "last_updated": "2026-08-17T00:00:00Z"
+}

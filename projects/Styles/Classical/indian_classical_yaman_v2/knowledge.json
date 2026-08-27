@@ -1,0 +1,48 @@
+{
+  "genre": "World",
+  "subgenre": "Indian Classical - Yaman",
+  "pitch": {
+    "scale": "Kalyan (Lydian)",
+    "intervals": [
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1
+    ],
+    "contour": "Meend (glissando), focus on #4 and 7"
+  },
+  "rhythm": {
+    "dna": "\u2588\u2591\u2591\u2591\u2588\u2591\u2591\u2591\u2588\u2591\u2591\u2591\u2588\u2591\u2591\u2591",
+    "euclidean": "E(4,16)",
+    "metrical_gravity": [
+      1,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+    ],
+    "description": "Teental (16 beats: 4+4+4+4)"
+  },
+  "timbre": {
+    "instrumentation": [
+      "Sitar",
+      "Tabla",
+      "Tanpura"
+    ],
+    "calibration": "Sympathetic string resonance, complex transients"
+  }
+}

@@ -1,0 +1,184 @@
+{
+  "voices": {
+    "1": {
+      "program": 74,
+      "cells": [
+        {
+          "cell": 0,
+          "pitch": 63,
+          "pc": "D#"
+        },
+        {
+          "cell": 1,
+          "pitch": 72,
+          "pc": "C"
+        },
+        {
+          "cell": 2,
+          "pitch": 70,
+          "pc": "A#"
+        },
+        {
+          "cell": 3,
+          "pitch": 74,
+          "pc": "D"
+        },
+        {
+          "cell": 4,
+          "pitch": 70,
+          "pc": "A#"
+        },
+        {
+          "cell": 5,
+          "pitch": 74,
+          "pc": "D"
+        },
+        {
+          "cell": 6,
+          "pitch": 65,
+          "pc": "F"
+        },
+        {
+          "cell": 7,
+          "pitch": 63,
+          "pc": "D#"
+        }
+      ]
+    },
+    "2": {
+      "program": 74,
+      "cells": [
+        {
+          "cell": 0,
+          "pitch": 59,
+          "pc": "B"
+        },
+        {
+          "cell": 1,
+          "pitch": 59,
+          "pc": "B"
+        },
+        {
+          "cell": 2,
+          "pitch": 66,
+          "pc": "F#"
+        },
+        {
+          "cell": 3,
+          "pitch": 64,
+          "pc": "E"
+        },
+        {
+          "cell": 4,
+          "pitch": 64,
+          "pc": "E"
+        },
+        {
+          "cell": 5,
+          "pitch": 66,
+          "pc": "F#"
+        },
+        {
+          "cell": 6,
+          "pitch": 59,
+          "pc": "B"
+        },
+        {
+          "cell": 7,
+          "pitch": 55,
+          "pc": "G"
+        }
+      ]
+    },
+    "3": {
+      "program": 74,
+      "cells": [
+        {
+          "cell": 0,
+          "pitch": 50,
+          "pc": "D"
+        },
+        {
+          "cell": 1,
+          "pitch": 59,
+          "pc": "B"
+        },
+        {
+          "cell": 2,
+          "pitch": 55,
+          "pc": "G"
+        },
+        {
+          "cell": 3,
+          "pitch": 61,
+          "pc": "C#"
+        },
+        {
+          "cell": 4,
+          "pitch": 52,
+          "pc": "E"
+        },
+        {
+          "cell": 5,
+          "pitch": 61,
+          "pc": "C#"
+        },
+        {
+          "cell": 6,
+          "pitch": 55,
+          "pc": "G"
+        },
+        {
+          "cell": 7,
+          "pitch": 50,
+          "pc": "D"
+        }
+      ]
+    },
+    "4": {
+      "program": 33,
+      "cells": [
+        {
+          "cell": 0,
+          "pitch": 48,
+          "pc": "C"
+        },
+        {
+          "cell": 1,
+          "pitch": 52,
+          "pc": "E"
+        },
+        {
+          "cell": 2,
+          "pitch": 50,
+          "pc": "D"
+        },
+        {
+          "cell": 3,
+          "pitch": 54,
+          "pc": "F#"
+        },
+        {
+          "cell": 4,
+          "pitch": 48,
+          "pc": "C"
+        },
+        {
+          "cell": 5,
+          "pitch": 50,
+          "pc": "D"
+        },
+        {
+          "cell": 6,
+          "pitch": 48,
+          "pc": "C"
+        },
+        {
+          "cell": 7,
+          "pitch": 45,
+          "pc": "A"
+        }
+      ]
+    }
+  }
+}

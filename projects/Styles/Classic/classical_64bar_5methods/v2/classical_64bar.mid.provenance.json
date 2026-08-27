@@ -1,0 +1,23 @@
+{
+  "artifact": "classical_64bar.mid",
+  "classification": "ai-assisted",
+  "generator": "compose-loop/classical_64bar_5methods",
+  "sources": [],
+  "parameters": {
+    "bpm": 108,
+    "keys": "G-D-G-D-G",
+    "bars": 64,
+    "methods": [
+      "Markov",
+      "Isorhythmic",
+      "DPSM",
+      "Xenakis",
+      "DNA"
+    ]
+  },
+  "notes": "",
+  "sha256": "9580cf5c0fc32ed237719b5e47fd0623cd07ee4d8a02663322c72a2080d4be41",
+  "bytes": 17057,
+  "created_utc": "2026-07-31T20:29:24.939198+00:00",
+  "provenance_version": "1.0"
+}

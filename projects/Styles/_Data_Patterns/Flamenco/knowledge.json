@@ -1,0 +1,119 @@
+{
+  "style": "Flamenco",
+  "subgenre": "",
+  "pitch": {
+    "scale": "Chromatic",
+    "intervals": [
+      2,
+      2,
+      1,
+      2,
+      1,
+      1,
+      2,
+      1
+    ],
+    "pitch_classes": [
+      0,
+      2,
+      4,
+      5,
+      7,
+      8,
+      9,
+      11
+    ],
+    "per_track_scale": "Major/Ionian",
+    "per_track_scale_distribution": {
+      "Major/Ionian": 2
+    }
+  },
+  "rhythm": {
+    "metrical_gravity": [
+      1.0,
+      0,
+      0.5,
+      0
+    ],
+    "tempo_range": [
+      120.0,
+      120.0
+    ],
+    "time_signatures": [
+      "3/4"
+    ],
+    "description": ""
+  },
+  "timbre": {
+    "instrumentation": [
+      "Track 1"
+    ]
+  },
+  "patterns": [
+    {
+      "project": "023-flamenco-16-bar",
+      "midi": "/opt/data/projects/Styles/Flamenco/023-flamenco-16-bar/MIDI/flamenco_16.mid",
+      "source": "/opt/data/projects/Styles/Flamenco/023-flamenco-16-bar/src/regen.py",
+      "scale": "Chromatic",
+      "pitch_classes": [
+        0,
+        2,
+        4,
+        5,
+        7,
+        8,
+        9,
+        11
+      ],
+      "tempo": 120.0,
+      "time_sig": "3/4"
+    },
+    {
+      "project": "033-flamenco-solea-study",
+      "midi": "/opt/data/projects/Styles/Flamenco/033-flamenco-solea-study/MIDI/solea_compas.mid",
+      "scale": "Chromatic",
+      "pitch_classes": [
+        0,
+        2,
+        4,
+        5,
+        7,
+        8,
+        9,
+        11
+      ],
+      "tempo": null,
+      "time_sig": null
+    }
+  ],
+  "validated": true,
+  "validation": {
+    "12tet": {
+      "valid": true,
+      "pitch_classes_used": [
+        0,
+        2,
+        4,
+        5,
+        7,
+        8,
+        9,
+        11
+      ],
+      "count": 8,
+      "issues": []
+    },
+    "metrical_gravity": {
+      "valid": true,
+      "length": 4,
+      "strong_beat_count": 1,
+      "profile": [
+        1.0,
+        0,
+        0.5,
+        0
+      ],
+      "issues": []
+    }
+  }
+}

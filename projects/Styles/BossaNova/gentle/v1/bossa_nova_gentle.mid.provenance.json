@@ -1,0 +1,19 @@
+{
+  "artifact": "bossa_nova_gentle.mid",
+  "classification": "ai-assisted",
+  "generator": "bossa_nova_gentle",
+  "sources": [],
+  "parameters": {
+    "bpm": 100,
+    "methods": [
+      "011",
+      "002",
+      "026"
+    ]
+  },
+  "notes": "",
+  "sha256": "b9be5a640e138d6f41e01506939b3bba64aaf93f4eb671f507891d0582a31942",
+  "bytes": 11597,
+  "created_utc": "2026-07-27T21:03:54.465678+00:00",
+  "provenance_version": "1.0"
+}

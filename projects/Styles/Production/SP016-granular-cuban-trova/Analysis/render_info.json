@@ -1,0 +1,79 @@
+{
+  "job": "SP-016 granular production pass (autonomous cron)",
+  "source_midi": "/opt/data/projects/Styles/Cuban/001-cuban-trova-research/daily-2026-07-01_cuban_001-cuban-trova-research_fixed.mid",
+  "source_midi_sha256": "06925233da6c77a933e70dbac69d5ef2135e35721684d58ac4e3e82197e6d0a9",
+  "production_method": "SP-016",
+  "production_method_name": "Granular Synthesis Engine",
+  "tempo_bpm": 96,
+  "source_notes": 96,
+  "source_duration_sec": 15.0,
+  "output_duration_sec": 18.0,
+  "granular_params": {
+    "lead_flute": {
+      "duration_sec": 18.0,
+      "grain_size_ms": 45,
+      "density_grains_per_sec": 60,
+      "pitch_shift_semi": 7,
+      "position_jitter_ms": 30,
+      "grain_jitter_ms": 12
+    },
+    "nylon_guitar": {
+      "duration_sec": 18.0,
+      "grain_size_ms": 35,
+      "density_grains_per_sec": 80,
+      "pitch_shift_semi": 0,
+      "position_jitter_ms": 20,
+      "grain_jitter_ms": 8
+    },
+    "electric_bass": {
+      "duration_sec": 18.0,
+      "grain_size_ms": 60,
+      "density_grains_per_sec": 30,
+      "pitch_shift_semi": -12,
+      "position_jitter_ms": 15,
+      "grain_jitter_ms": 10
+    },
+    "piano": {
+      "duration_sec": 18.0,
+      "grain_size_ms": 40,
+      "density_grains_per_sec": 70,
+      "pitch_shift_semi": 5,
+      "position_jitter_ms": 25,
+      "grain_jitter_ms": 10
+    }
+  },
+  "mix": {
+    "dry_bed_gain": 0.55,
+    "cloud_gains": {
+      "lead_flute": 0.3,
+      "nylon_guitar": 0.35,
+      "electric_bass": 0.3,
+      "piano": 0.3
+    },
+    "reverb": "AlgorithmicReverb room 0.7 wet 0.25",
+    "stereo_spread_delay_ms": 12
+  },
+  "master": "peak normalize -1 dBFS",
+  "quality": {
+    "full_silence_fraction": 0.123,
+    "wav_bytes": 3175244,
+    "ogg_bytes": 101044,
+    "peak": 0.890999972820282
+  },
+  "outputs": {
+    "full_mix_wav": "/opt/data/projects/Styles/Production/SP016-granular-cuban-trova/Audio/SP016-granular-cuban-trova.wav",
+    "full_mix_ogg": "/opt/data/projects/Styles/Production/SP016-granular-cuban-trova/Audio/SP016-granular-cuban-trova.ogg",
+    "stems": {
+      "lead_flute": "/opt/data/projects/Styles/Production/SP016-granular-cuban-trova/Audio/stem_lead_flute_dry.wav",
+      "nylon_guitar": "/opt/data/projects/Styles/Production/SP016-granular-cuban-trova/Audio/stem_nylon_guitar_dry.wav",
+      "electric_bass": "/opt/data/projects/Styles/Production/SP016-granular-cuban-trova/Audio/stem_electric_bass_dry.wav",
+      "piano": "/opt/data/projects/Styles/Production/SP016-granular-cuban-trova/Audio/stem_piano_dry.wav"
+    },
+    "clouds": {
+      "lead_flute": "/opt/data/projects/Styles/Production/SP016-granular-cuban-trova/Audio/cloud_lead_flute.wav",
+      "nylon_guitar": "/opt/data/projects/Styles/Production/SP016-granular-cuban-trova/Audio/cloud_nylon_guitar.wav",
+      "electric_bass": "/opt/data/projects/Styles/Production/SP016-granular-cuban-trova/Audio/cloud_electric_bass.wav",
+      "piano": "/opt/data/projects/Styles/Production/SP016-granular-cuban-trova/Audio/cloud_piano.wav"
+    }
+  }
+}

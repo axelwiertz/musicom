@@ -1,0 +1,40 @@
+{
+  "genre": "Samba",
+  "subgenre": "Batucada",
+  "pitch": {
+    "scale": "Major",
+    "intervals": [
+      2,
+      2,
+      1,
+      2,
+      2,
+      2,
+      1
+    ],
+    "contour": "Iterative, call and response"
+  },
+  "rhythm": {
+    "dna": "\u2588\u2591\u2591\u2588\u2591\u2591\u2588\u2591 \u2588\u2591\u2591\u2588\u2591\u2591\u2588\u2591",
+    "description": "2/4 feel, heavy surdo on 2, rapid 16th notes",
+    "metrical_gravity": [
+      0.5,
+      0,
+      0,
+      0,
+      1.0,
+      0,
+      0,
+      0
+    ]
+  },
+  "timbre": {
+    "instrumentation": [
+      "Surdo",
+      "Pandeiro",
+      "Cuica",
+      "Agogo"
+    ],
+    "calibration": "Metallic, high-head tension, deep sub"
+  }
+}

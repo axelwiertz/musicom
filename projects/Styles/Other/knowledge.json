@@ -1,0 +1,124 @@
+{
+  "style": "Other",
+  "sub_styles": [
+    {
+      "name": "genre-daily-2026-06-13",
+      "scale": "Pelog (approx)",
+      "pitch_classes": [
+        0,
+        3
+      ]
+    },
+    {
+      "name": "genre-daily-2026-06-14",
+      "scale": "Chromatic",
+      "pitch_classes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "tempo": 120.0
+    },
+    {
+      "name": "klezmer_freylekhs",
+      "scale": "Dorian",
+      "pitch_classes": []
+    },
+    {
+      "name": "unknown-daily-2026-06-04",
+      "scale": "Dorian",
+      "pitch_classes": []
+    },
+    {
+      "name": "unknown-daily-2026-06-05",
+      "scale": "In Scale",
+      "pitch_classes": [
+        0
+      ],
+      "tempo": 120.0
+    },
+    {
+      "name": "unknown-daily-2026-06-06",
+      "scale": "Major/Ionian",
+      "pitch_classes": [
+        4,
+        5,
+        7,
+        9,
+        11
+      ],
+      "tempo": 120.0
+    },
+    {
+      "name": "variation_2026-06-05_bossa",
+      "scale": "Dorian",
+      "pitch_classes": []
+    },
+    {
+      "name": "variation_2026-06-06_solea_retro",
+      "scale": "Dorian",
+      "pitch_classes": []
+    },
+    {
+      "name": "variation_2026-06-09_afro-cuban-son",
+      "scale": "Dorian",
+      "pitch_classes": []
+    },
+    {
+      "name": "variation_2026-06-10_bossa-nova",
+      "scale": "Dorian",
+      "pitch_classes": []
+    }
+  ],
+  "pitch": {
+    "scale": "Dorian",
+    "intervals": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "common_pitch_classes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "total_pitch_classes": 12
+  },
+  "rhythm": {
+    "patterns_analyzed": 10,
+    "metrical_gravity_verified": true,
+    "description": ""
+  },
+  "validation": {
+    "12tet_pass": true,
+    "metrical_gravity_pass": true
+  },
+  "last_updated": "2026-06-24T04:00:00Z"
+}

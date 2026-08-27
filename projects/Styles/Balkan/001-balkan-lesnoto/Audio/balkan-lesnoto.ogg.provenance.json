@@ -1,0 +1,16 @@
+{
+  "artifact": "balkan-lesnoto.ogg",
+  "classification": "ai-generated",
+  "generator": "001-balkan-lesnoto/fluidsynth",
+  "sources": [
+    "Balkan/001-balkan-lesnoto/MIDI/001-balkan-lesnoto.mid"
+  ],
+  "parameters": {
+    "soundfont": "TimGM6mb.sf2",
+    "gain": 1.2
+  },
+  "sha256": "adbb88e5734c594bfef92b6e31a78d827e846c69f5ca72ef42fd8503dd664997",
+  "bytes": 952377,
+  "created_utc": "2026-08-17T07:58:56.278073+00:00",
+  "provenance_version": "1.0"
+}

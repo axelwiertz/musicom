@@ -1,0 +1,16 @@
+{
+  "artifact": "trap-half-time.wav",
+  "classification": "ai-generated",
+  "generator": "001-trap-half-time/fluidsynth",
+  "sources": [
+    "Trap/001-trap-half-time/MIDI/001-trap-half-time.mid"
+  ],
+  "parameters": {
+    "soundfont": "TimGM6mb.sf2",
+    "gain": 1.2
+  },
+  "sha256": "e33f05a71ba95770d50ca1483f8487951b199b1191d95efb65ffb1b9e0f1426d",
+  "bytes": 5724204,
+  "created_utc": "2026-08-17T07:58:56.285772+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,92 @@
+{
+  "style": "Classical",
+  "sub_styles": [
+    {
+      "name": "002-classical-daily-2026-06-12",
+      "scale": "Lydian",
+      "pitch_classes": [
+        0,
+        2,
+        4,
+        6,
+        7,
+        9,
+        11
+      ],
+      "tempo": 85.00004250002125
+    },
+    {
+      "name": "021-classical-mozart",
+      "scale": "Major/Ionian",
+      "pitch_classes": [
+        0,
+        2,
+        4,
+        5,
+        7,
+        9,
+        11
+      ],
+      "tempo": 120.0
+    },
+    {
+      "name": "classical_baroque",
+      "scale": "Dorian",
+      "pitch_classes": []
+    },
+    {
+      "name": "classical_common_practice",
+      "scale": "Dorian",
+      "pitch_classes": []
+    },
+    {
+      "name": "indian_classical_yaman",
+      "scale": "Dorian",
+      "pitch_classes": []
+    },
+    {
+      "name": "indian_classical_yaman_v2",
+      "scale": "Dorian",
+      "pitch_classes": []
+    },
+    {
+      "name": "indian_classical_yaman_v3",
+      "scale": "Dorian",
+      "pitch_classes": []
+    }
+  ],
+  "pitch": {
+    "scale": "Dorian",
+    "intervals": [
+      2,
+      2,
+      1,
+      1,
+      1,
+      2,
+      2,
+      1
+    ],
+    "common_pitch_classes": [
+      0,
+      2,
+      4,
+      5,
+      6,
+      7,
+      9,
+      11
+    ],
+    "total_pitch_classes": 8
+  },
+  "rhythm": {
+    "patterns_analyzed": 7,
+    "metrical_gravity_verified": true,
+    "description": ""
+  },
+  "validation": {
+    "12tet_pass": true,
+    "metrical_gravity_pass": true
+  },
+  "last_updated": "2026-06-24T04:00:00Z"
+}

@@ -1,0 +1,5 @@
+SP-029 samba-batucada rhythm DNA (one 7-sixteenth loop @120 BPM)
+sixteenth: 0     1     2     3     4     5     6
+agogo   : █     █     █     █     █     █     █     
+kick    : █     █     █     █     ░     ░     █
+(agogo = every sixteenth E4; kick = surdo accents on 0,1,2,3,6,7)

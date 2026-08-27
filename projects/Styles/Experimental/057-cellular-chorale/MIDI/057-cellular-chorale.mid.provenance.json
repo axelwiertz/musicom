@@ -1,0 +1,46 @@
+{
+  "project": "057-cellular-chorale",
+  "classification": "ai-generated",
+  "generator": "Rule 30 Elementary Cellular Automaton",
+  "phase1_method": "Rule 30 CA (seed=0b00010100, 4 timesteps)",
+  "phase2_rules": "VoiceLeadingRules (parallel fifths/octaves check + step correction)",
+  "key": "Eb Major",
+  "form": "8-bar chorale (I-IV-V-vi-ii-V-IV-I)",
+  "voices": [
+    "Soprano (Flute)",
+    "Alto (Flute)",
+    "Tenor (Flute)",
+    "Bass (Bass)"
+  ],
+  "bpm": 96,
+  "ticks_per_beat": 480,
+  "total_bars": 8,
+  "voice_leading_fixes": 1,
+  "validation": {
+    "zero_drift": true,
+    "message": "OK"
+  },
+  "midi_file": "057-cellular-chorale.mid",
+  "midi_size_bytes": 381,
+  "ca_seed": 20,
+  "ca_width": 8,
+  "chord_plan": [
+    1,
+    4,
+    5,
+    6,
+    2,
+    5,
+    4,
+    1
+  ],
+  "scale_intervals": [
+    0,
+    2,
+    4,
+    5,
+    7,
+    9,
+    11
+  ]
+}

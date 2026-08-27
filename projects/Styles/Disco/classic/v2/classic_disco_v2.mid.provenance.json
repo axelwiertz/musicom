@@ -1,0 +1,25 @@
+{
+  "artifact": "classic_disco_v2.mid",
+  "classification": "ai-assisted",
+  "generator": "disco-classic-v2",
+  "sources": [],
+  "parameters": {
+    "bpm": 120,
+    "key": "D minor",
+    "style": "Classic Disco",
+    "method": "011 Euclidean Groove (Bjorklund's algorithm)",
+    "patterns": {
+      "kick": "E(4,16)/E(5,16)",
+      "bass": "E(5,16)",
+      "hat": "E(7,16)/E(9,16)",
+      "snare": "E(3,8)",
+      "stabs": "E(3,8)",
+      "brass": "E(2,4)"
+    }
+  },
+  "notes": "",
+  "sha256": "2ec0a312db40b1e27515c09b0de5dbf66d04e02c038e6a665c93060b071533e8",
+  "bytes": 4115,
+  "created_utc": "2026-07-26T19:53:05.415777+00:00",
+  "provenance_version": "1.0"
+}

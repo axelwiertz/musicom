@@ -1,0 +1,16 @@
+{
+  "artifact": "moonlight-shadow-variant1-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "markov",
+  "sources": [],
+  "parameters": {
+    "method": "markov",
+    "seed": 34401,
+    "phase": "1 (pre-rules)"
+  },
+  "notes": "",
+  "sha256": "d1a03eee636f3b7abae563339786c0cf1cdd09c193a348244af2d1d2fb1b24c7",
+  "bytes": 2049,
+  "created_utc": "2026-08-15T17:37:03.737542+00:00",
+  "provenance_version": "1.0"
+}

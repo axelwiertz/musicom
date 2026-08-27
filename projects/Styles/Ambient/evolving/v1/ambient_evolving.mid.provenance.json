@@ -1,0 +1,18 @@
+{
+  "artifact": "ambient_evolving.mid",
+  "classification": "ai-assisted",
+  "generator": "ambient_evolving",
+  "sources": [],
+  "parameters": {
+    "bpm": 60,
+    "methods": [
+      "023",
+      "026"
+    ]
+  },
+  "notes": "",
+  "sha256": "5e6dc086367700b88ca59995e08b83f94fcb4643ab1ec0925378a07576bfb7c9",
+  "bytes": 7852,
+  "created_utc": "2026-07-27T21:03:16.689014+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,87 @@
+[
+  {
+    "project_name": "002-modal-dorian-agent",
+    "midi_file": "/opt/data/projects/Styles/Modal/002-modal-dorian-agent/midi/two_track_composition.mid",
+    "scale": "Major/Ionian",
+    "pitch_classes": [
+      0,
+      2,
+      4,
+      5,
+      7,
+      9,
+      11
+    ],
+    "intervals": [
+      2,
+      2,
+      1,
+      2,
+      2,
+      2,
+      1
+    ],
+    "tempo": 120.0,
+    "time_sig": "4/4",
+    "total_notes": 24,
+    "midi_range": [
+      62,
+      81
+    ],
+    "velocity_avg": 70.0,
+    "track_count": 2,
+    "tracks_detail": [
+      {
+        "track": 0,
+        "notes": 8,
+        "pitch_classes": [
+          2,
+          4,
+          5,
+          7,
+          9
+        ],
+        "scale_fragment": "Major/Ionian",
+        "range": [
+          74,
+          81
+        ]
+      },
+      {
+        "track": 1,
+        "notes": 16,
+        "pitch_classes": [
+          0,
+          2,
+          4,
+          5,
+          7,
+          9,
+          11
+        ],
+        "scale_fragment": "Major/Ionian",
+        "range": [
+          62,
+          77
+        ]
+      }
+    ],
+    "analysis_source": "midi"
+  },
+  {
+    "project_name": "010-modal-project-dorian",
+    "source_file": "/opt/data/projects/Styles/Modal/010-modal-project-dorian/src/walkthrough.py",
+    "tempo_from_source": 124,
+    "embedded_pitch_classes": [
+      0,
+      2,
+      3,
+      5,
+      7,
+      9,
+      10
+    ],
+    "embedded_scale": "Dorian",
+    "analysis_source": "source"
+  }
+]

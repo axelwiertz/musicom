@@ -1,0 +1,83 @@
+{
+  "source": "/opt/data/projects/014-rock-apprenticeship/Analysis/voice-motif/source_voice.wav",
+  "duration_sec": 5.387,
+  "bpm_used": 108,
+  "detected_onsets_sec": [
+    0.29,
+    0.824,
+    0.94,
+    1.637,
+    2.194,
+    2.31,
+    2.995,
+    3.692,
+    4.505,
+    5.283
+  ],
+  "median_centroid_hz": 2381.8,
+  "median_flatness": 0.0037,
+  "median_zcr": 0.1992,
+  "voiced_frames": 185,
+  "extracted_notes": [
+    {
+      "time": 0.29,
+      "raw_midi": 74,
+      "quant_midi": 74,
+      "hz": 601.1
+    },
+    {
+      "time": 0.824,
+      "raw_midi": 74,
+      "quant_midi": 74,
+      "hz": 583.9
+    },
+    {
+      "time": 0.94,
+      "raw_midi": 74,
+      "quant_midi": 74,
+      "hz": 595.9
+    },
+    {
+      "time": 1.637,
+      "raw_midi": 74,
+      "quant_midi": 74,
+      "hz": 597.6
+    },
+    {
+      "time": 2.194,
+      "raw_midi": 74,
+      "quant_midi": 74,
+      "hz": 583.9
+    },
+    {
+      "time": 2.31,
+      "raw_midi": 74,
+      "quant_midi": 74,
+      "hz": 583.9
+    },
+    {
+      "time": 2.995,
+      "raw_midi": 74,
+      "quant_midi": 74,
+      "hz": 583.9
+    },
+    {
+      "time": 3.692,
+      "raw_midi": 74,
+      "quant_midi": 74,
+      "hz": 583.9
+    }
+  ],
+  "pitch_intervals_semitones": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "motif_midi": "/opt/data/projects/014-rock-apprenticeship/MIDI/study-03-voice-derived-motif.mid",
+  "motif_ogg": "/opt/data/projects/014-rock-apprenticeship/Audio/study-03-voice-derived-motif.ogg",
+  "analysis_png": "/opt/data/projects/014-rock-apprenticeship/Analysis/voice-motif/voice_motif_analysis.png"
+}

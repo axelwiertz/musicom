@@ -1,0 +1,25 @@
+Electric Folk - D Major - 130 BPM
+
+Brief:
+- Key: D major
+- Tempo: 130 BPM
+- Meter: 4/4, 32 bars
+- Energy: continuous drive, no slow/introspective sections
+- Band: acoustic rhythm guitar, electric melodic guitar, prominent fiddle, electric bass, live drums, single lead vocal guide
+
+Harmony DNA:
+- Main: I-V-vi-IV = D-A-Bm-G
+- Lift: ii-IV-I-V = Em-G-D-A
+
+Rhythm DNA:
+KICK  █░░░█░█░
+SNARE ░░█░░░█░
+HAT   █░█░█░█░
+- Acoustic guitar: 8th-note boom-chuck, accents on 2 and 4
+- Drums: kick drives 1/3/push, snare hard backbeat on 2/4
+- Bass: root/fifth 8ths locked to kick
+
+Pitch DNA:
+- Electric guitar: D major pentatonic hook with octave lift in final section
+- Fiddle: reel-like 16th-note runs, call-response against guitar/vocal
+- Vocal guide: single clear lead contour, strong chorus high register

@@ -1,0 +1,23 @@
+{
+  "artifact": "046-pcfg-clarinet.mid",
+  "classification": "ai-assisted",
+  "generator": "Experimental/046-pcfg-clarinet/compose.py",
+  "sources": [],
+  "parameters": {
+    "bpm": 100,
+    "methods": [
+      "034",
+      "SP-023"
+    ],
+    "grid_voices": 3,
+    "grid_sections": 8,
+    "physical_model": "digital_waveguide_clarinet",
+    "key": "Bb Major",
+    "pcfg_seed": 46
+  },
+  "notes": "Composed via PCFG Recursion (Method 034) and synthesized via physical modeling woodwind clarinet (Method SP-023).",
+  "sha256": "1d5e47261a429e07bd02a27c79631e48717e75baec0d0b452e414c151d90fc09",
+  "bytes": 861,
+  "created_utc": "2026-07-23T19:28:40.097146+00:00",
+  "provenance_version": "1.0"
+}

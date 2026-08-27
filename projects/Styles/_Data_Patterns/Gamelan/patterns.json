@@ -1,0 +1,144 @@
+[
+  {
+    "project_name": "017-gamelan-central-java",
+    "midi_file": "/opt/data/projects/Styles/Gamelan/017-gamelan-central-java/MIDI/gamelan_live_render.mid",
+    "scale": "Lydian",
+    "pitch_classes": [
+      2,
+      4,
+      6,
+      9,
+      11
+    ],
+    "intervals": [
+      2,
+      2,
+      3,
+      2,
+      3
+    ],
+    "tempo": 80.0,
+    "time_sig": null,
+    "total_notes": 512,
+    "midi_range": [
+      26,
+      74
+    ],
+    "velocity_avg": 89.9,
+    "track_count": 4,
+    "tracks_detail": [
+      {
+        "track": 0,
+        "notes": 128,
+        "pitch_classes": [
+          2,
+          4,
+          6,
+          9,
+          11
+        ],
+        "scale_fragment": "Lydian",
+        "range": [
+          62,
+          74
+        ]
+      },
+      {
+        "track": 1,
+        "notes": 256,
+        "pitch_classes": [
+          2,
+          4,
+          6,
+          9,
+          11
+        ],
+        "scale_fragment": "Lydian",
+        "range": [
+          62,
+          74
+        ]
+      },
+      {
+        "track": 2,
+        "notes": 120,
+        "pitch_classes": [
+          2,
+          9
+        ],
+        "scale_fragment": "In Scale",
+        "range": [
+          38,
+          50
+        ]
+      },
+      {
+        "track": 3,
+        "notes": 8,
+        "pitch_classes": [
+          2
+        ],
+        "scale_fragment": "In Scale",
+        "range": [
+          26,
+          26
+        ]
+      }
+    ],
+    "analysis_source": "midi",
+    "source_file": "/opt/data/projects/Styles/Gamelan/017-gamelan-central-java/src/live_composer.py",
+    "tempo_from_source": 80,
+    "embedded_pitch_classes": [
+      2,
+      4,
+      6,
+      9,
+      11
+    ],
+    "embedded_scale": "Lydian"
+  },
+  {
+    "project_name": "gamelan-daily-2026-06-20",
+    "midi_file": "/opt/data/projects/Styles/Gamelan/gamelan-daily-2026-06-20/composition.mid",
+    "scale": "Lydian",
+    "pitch_classes": [
+      2,
+      4,
+      6,
+      9
+    ],
+    "intervals": [
+      2,
+      2,
+      3,
+      5
+    ],
+    "tempo": null,
+    "time_sig": null,
+    "total_notes": 8,
+    "midi_range": [
+      62,
+      69
+    ],
+    "velocity_avg": 67.5,
+    "track_count": 1,
+    "tracks_detail": [
+      {
+        "track": 0,
+        "notes": 8,
+        "pitch_classes": [
+          2,
+          4,
+          6,
+          9
+        ],
+        "scale_fragment": "Lydian",
+        "range": [
+          62,
+          69
+        ]
+      }
+    ],
+    "analysis_source": "midi"
+  }
+]

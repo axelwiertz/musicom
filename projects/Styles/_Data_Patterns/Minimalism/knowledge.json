@@ -1,0 +1,29 @@
+{
+  "style": "Minimalism",
+  "sub_styles": [
+    {
+      "name": "001-minimalism-phase-study",
+      "scale": "Pentatonic",
+      "pitch_classes": [0, 2, 4, 7, 9],
+      "tempo": 120.0,
+      "cell": "E(5,12)",
+      "phase_walk_per_section": 480
+    }
+  ],
+  "pitch": {
+    "scale": "Pentatonic",
+    "intervals": [2, 2, 3, 2, 3],
+    "common_pitch_classes": [0, 2, 4, 7, 9],
+    "total_pitch_classes": 5
+  },
+  "rhythm": {
+    "patterns_analyzed": 1,
+    "metrical_gravity_verified": true,
+    "description": "E(5,12) cell, phase-walk +1 beat per section (Reich Clapping Music process)"
+  },
+  "validation": {
+    "12tet_pass": true,
+    "metrical_gravity_pass": true
+  },
+  "last_updated": "2026-08-17T00:00:00Z"
+}

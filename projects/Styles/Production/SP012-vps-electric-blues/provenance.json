@@ -1,0 +1,10 @@
+{
+  "job": "SP-012 production pass (autonomous cron)",
+  "source_midi": "/opt/data/projects/Styles/Blues/039-electric-blues/daily-2026-06-27_blues_039-electric-blues-v5.mid",
+  "production_method": "SP-012",
+  "production_method_name": "Vector Phase Shaping (VPS)",
+  "outputs": {
+    "full_mix_wav": "/opt/data/projects/Styles/Production/SP012-vps-electric-blues/Audio/SP012-electric-blues-vps.wav",
+    "full_mix_ogg": "/opt/data/projects/Styles/Production/SP012-vps-electric-blues/Audio/SP012-electric-blues-vps.ogg"
+  }
+}

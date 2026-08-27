@@ -1,0 +1,16 @@
+{
+  "artifact": "grid_visualization.txt",
+  "classification": "ai-generated",
+  "generator": "GPC (Method 061 Gaussian Process Composition)",
+  "sources": [],
+  "parameters": {
+    "bpm": 106,
+    "key": "G natural minor",
+    "seed": 20260820
+  },
+  "notes": "analysis artifact",
+  "sha256": "a2ddaaf05d8531c040bcd7ca06857cc18ec3ef5dc25581fadaa862226c5468e9",
+  "bytes": 6594,
+  "created_utc": "2026-08-20T23:11:04.385265+00:00",
+  "provenance_version": "1.0"
+}

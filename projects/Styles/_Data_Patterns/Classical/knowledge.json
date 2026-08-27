@@ -1,0 +1,144 @@
+{
+  "style": "Classical",
+  "subgenre": "",
+  "pitch": {
+    "scale": "Lydian",
+    "intervals": [
+      2,
+      2,
+      1,
+      1,
+      1,
+      2,
+      2,
+      1
+    ],
+    "pitch_classes": [
+      0,
+      2,
+      4,
+      5,
+      6,
+      7,
+      9,
+      11
+    ],
+    "per_track_scale": "Lydian",
+    "per_track_scale_distribution": {
+      "Pentatonic Major": 1,
+      "In Scale": 1,
+      "Lydian": 2,
+      "Blues Hexatonic": 1,
+      "Major/Ionian": 1
+    }
+  },
+  "rhythm": {
+    "metrical_gravity": [
+      1.0,
+      0,
+      0.5,
+      0
+    ],
+    "tempo_range": [
+      85.00004250002125,
+      120.0
+    ],
+    "time_signatures": [
+      "4/4"
+    ],
+    "description": ""
+  },
+  "timbre": {
+    "instrumentation": [
+      "Track 1",
+      "Track 2",
+      "Track 3",
+      "Track 4"
+    ]
+  },
+  "patterns": [
+    {
+      "project": "002-classical-daily-2026-06-12",
+      "midi": "/opt/data/projects/Styles/Classical/002-classical-daily-2026-06-12/MIDI/composition.mid",
+      "scale": "Lydian",
+      "pitch_classes": [
+        0,
+        2,
+        4,
+        6,
+        7,
+        9,
+        11
+      ],
+      "tempo": 85.00004250002125,
+      "time_sig": "4/4"
+    },
+    {
+      "project": "021-classical-mozart",
+      "midi": "/opt/data/projects/Styles/Classical/021-classical-mozart/MIDI/mozart_classical.mid",
+      "source": "/opt/data/projects/Styles/Classical/021-classical-mozart/compose_mozart.py",
+      "scale": "Major/Ionian",
+      "pitch_classes": [
+        0,
+        2,
+        4,
+        5,
+        7,
+        9,
+        11
+      ],
+      "tempo": 120.0,
+      "time_sig": "4/4"
+    },
+    {
+      "project": "classical_baroque",
+      "source": "/opt/data/projects/Styles/Classical/classical_baroque/src/regen.py"
+    },
+    {
+      "project": "classical_common_practice",
+      "source": "/opt/data/projects/Styles/Classical/classical_common_practice/src/regen.py"
+    },
+    {
+      "project": "indian_classical_yaman",
+      "source": "/opt/data/projects/Styles/Classical/indian_classical_yaman/src/regen.py"
+    },
+    {
+      "project": "indian_classical_yaman_v2",
+      "source": "/opt/data/projects/Styles/Classical/indian_classical_yaman_v2/src/regen.py"
+    },
+    {
+      "project": "indian_classical_yaman_v3",
+      "source": "/opt/data/projects/Styles/Classical/indian_classical_yaman_v3/src/regen.py"
+    }
+  ],
+  "validated": true,
+  "validation": {
+    "12tet": {
+      "valid": true,
+      "pitch_classes_used": [
+        0,
+        2,
+        4,
+        5,
+        6,
+        7,
+        9,
+        11
+      ],
+      "count": 8,
+      "issues": []
+    },
+    "metrical_gravity": {
+      "valid": true,
+      "length": 4,
+      "strong_beat_count": 1,
+      "profile": [
+        1.0,
+        0,
+        0.5,
+        0
+      ],
+      "issues": []
+    }
+  }
+}

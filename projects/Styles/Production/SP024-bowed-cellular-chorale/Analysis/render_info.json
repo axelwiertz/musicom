@@ -1,0 +1,56 @@
+{
+  "source_midi": "/opt/data/projects/Styles/Experimental/057-cellular-chorale/MIDI/057-cellular-chorale.mid",
+  "method": "SP-024",
+  "method_name": "Bowed String Physical Modeling (Friction-Induced Waveguide Synthesis)",
+  "bpm": 96.0,
+  "total_notes": 32,
+  "output_seconds": 23.0,
+  "voices": {
+    "1": {
+      "role": "lead",
+      "program": 74,
+      "notes": 8,
+      "bow_velocity": 0.18,
+      "bow_force": 1.2,
+      "bow_position": 0.15,
+      "gain_db": -2.0
+    },
+    "2": {
+      "role": "lead",
+      "program": 74,
+      "notes": 8,
+      "bow_velocity": 0.18,
+      "bow_force": 1.2,
+      "bow_position": 0.15,
+      "gain_db": -2.0
+    },
+    "3": {
+      "role": "lead",
+      "program": 74,
+      "notes": 8,
+      "bow_velocity": 0.18,
+      "bow_force": 1.2,
+      "bow_position": 0.15,
+      "gain_db": -2.0
+    },
+    "4": {
+      "role": "bass",
+      "program": 33,
+      "notes": 8,
+      "bow_velocity": 0.12,
+      "bow_force": 1.8,
+      "bow_position": 0.12,
+      "gain_db": -6.0
+    }
+  },
+  "parameters": {
+    "sample_rate": 44100,
+    "synthesis_engine": "sound.synthesis.bowed.BowedString (library)",
+    "bow_friction_model": "exponential sliding friction, Newton-Raphson (4 iterations)",
+    "waveguide": "bidirectional delay lines, neck + bridge segments",
+    "bridge_filter": "one-pole LPF (coef=0.6)",
+    "bow_envelope": "attack 80ms \u2192 sustain \u2192 release 120ms",
+    "pan": "static per voice; lead drift -0.55..+0.55 across 8 cells",
+    "bus": "soft-knee saturation, peak -1 dBFS"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "style": "Baroque",
+  "sub_styles": [
+    {
+      "name": "004-baroque-counterpoint-inversion",
+      "scale": "Chromatic",
+      "pitch_classes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "tempo": 120.0
+    }
+  ],
+  "pitch": {
+    "scale": "Chromatic",
+    "intervals": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "common_pitch_classes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "total_pitch_classes": 11
+  },
+  "rhythm": {
+    "patterns_analyzed": 1,
+    "metrical_gravity_verified": true,
+    "description": ""
+  },
+  "validation": {
+    "12tet_pass": true,
+    "metrical_gravity_pass": true
+  },
+  "last_updated": "2026-06-24T04:00:00Z"
+}

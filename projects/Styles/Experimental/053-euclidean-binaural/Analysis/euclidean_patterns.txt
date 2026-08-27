@@ -1,0 +1,17 @@
+# Euclidean Rhythm DNA (Method 012)
+
+E(3,8) Lead tresillo: ..X..X.X
+E(5,16) Pad latin: ...X..X..X..X..X
+E(2,5) Bass khaling: ..X.X
+E(7,16) Perc samba: ..X.X.X..X.X.X.X
+
+## Voice Assignment
+Lead:  E(3,8)  tresillo - melodic motif
+Pad:   E(5,16) latin  - harmonic texture
+Bass:  E(2,5)  khaling - walking bass
+Perc:  E(7,16) samba   - rhythmic drive
+
+## Binaural (SP-021)
+Woodworth-Schlosberg ITD/ILD model
+Azimuth: +/-60deg sine sweep at 0.15Hz
+Head radius: 8.75cm, c=343m/s

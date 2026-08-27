@@ -1,0 +1,51 @@
+{
+  "artifact": "060-schillinger-resultant-chorale.mid",
+  "classification": "ai-generated",
+  "generator": "Method 018 Schillinger System of Musical Design (generators/schillinger.py) + musicom rules",
+  "sources": [
+    "generators/schillinger.py",
+    "rules/voice_leading.py",
+    "rules/progression.py",
+    "workflows/unitmatrix_composer.py"
+  ],
+  "parameters": {
+    "method": 18,
+    "key": "G major",
+    "bpm": 96,
+    "ticks_per_beat": 480,
+    "beats_per_bar": 4,
+    "sections": 4,
+    "section_bars": 2,
+    "progression_degrees": [
+      1,
+      5,
+      6,
+      4
+    ],
+    "schillinger_generators": [
+      [
+        3,
+        2
+      ],
+      [
+        4,
+        3
+      ],
+      [
+        5,
+        3
+      ],
+      [
+        5,
+        2
+      ]
+    ],
+    "voice_leading_style": "classical",
+    "two_phase": true
+  },
+  "notes": "Phase 1: Schillinger resultants (rhythmic DNA) + sine axis projection (pitch DNA). Phase 2: chord-tone quantization of soprano, diatonic block harmony, voice-leading optimization, zero-drift validated UnitMatrix export.",
+  "sha256": "9d244b607fcf4b8f776f451f0ddd0f927050a206e10b4bd942f2ca0a20aa85b2",
+  "bytes": 921,
+  "created_utc": "2026-08-07T23:08:45.545935+00:00",
+  "provenance_version": "1.0"
+}

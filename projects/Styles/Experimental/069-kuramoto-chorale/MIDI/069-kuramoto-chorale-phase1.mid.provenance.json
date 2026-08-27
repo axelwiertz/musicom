@@ -1,0 +1,43 @@
+{
+  "artifact": "069-kuramoto-chorale-phase1.mid",
+  "classification": "ai-generated",
+  "generator": "Method 038 Kuramoto Oscillator Phase Synchronization (KOPS) - PRE-RULES raw draft",
+  "sources": [
+    "Research/CompositionMethods/methods_db.md:Method 038",
+    "workflows/unitmatrix_composer.py"
+  ],
+  "parameters": {
+    "method": 38,
+    "phase": 1,
+    "key": "F dorian",
+    "bpm": 92,
+    "ticks_per_beat": 480,
+    "beats_per_bar": 4,
+    "sections": 4,
+    "section_bars": 2,
+    "model": "Kuramoto coupled phase oscillators, RK4, dt=0.005 beats",
+    "natural_frequencies_events_per_beat": [
+      0.85,
+      1.0,
+      1.15,
+      1.35
+    ],
+    "coupling_per_section": [
+      0.5,
+      1.5,
+      2.5,
+      4.0
+    ],
+    "raw_pitch_mapping": "effective angular velocity omega_eff -> chromatic MIDI 48..84",
+    "raw_rhythm_mapping": "phase-wrap pulse train (2*pi boundary crossing)",
+    "raw_velocity_mapping": "70 + 30*order_parameter r",
+    "seed": 69,
+    "two_phase": true,
+    "rules_applied": "NONE (pre-rules generative draft)"
+  },
+  "notes": "Phase 1: Kuramoto model with N=4 oscillators (voices), natural frequencies 0.85/1.0/1.15/1.35 events per beat (incommensurate polyrhythm), coupling K rising per section (0.5, 1.5, 2.5, 4.0) drives the desync->sync transition. Rhythm = phase-wrap pulse train; pitch = continuous chromatic mapping of the instantaneous effective frequency -> heavy non-diatonic leak (the pre-rules signature); velocity follows the order parameter r. Single voice (slowest oscillator), no scale enforcement, no chord context, no voice leading. Raw generative material preserved for comparison against the rules-processed Phase 2 artifact. Zero-drift validated UnitMatrix export.",
+  "sha256": "98c97d00b9429e229ed4e3eba2ab5a01ff9183cdd365fa8d9ebea70a6de6365e",
+  "bytes": 339,
+  "created_utc": "2026-08-15T23:12:45.987088+00:00",
+  "provenance_version": "1.0"
+}

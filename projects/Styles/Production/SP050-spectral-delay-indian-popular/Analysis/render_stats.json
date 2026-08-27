@@ -1,0 +1,27 @@
+{
+  "source_midi": "/opt/data/projects/Styles/Hybrid/025-bollo-koos-indian-unified/v2-IndianPopular/MIDI/025v2_unitmatrix.mid",
+  "method": "SP-050",
+  "sr": 44100,
+  "duration_s": 14.0,
+  "silence_fraction": 0.267,
+  "per_sec_rms": [
+    0.0742,
+    0.0771,
+    0.0293,
+    0.0282,
+    0.0256,
+    0.0239,
+    0.0247,
+    0.023,
+    0.0074,
+    0.0049,
+    0.0333,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "n_fft": 4096,
+  "hop": 1024,
+  "tau_max_melody_s": 0.5,
+  "tau_max_bass_s": 0.75
+}

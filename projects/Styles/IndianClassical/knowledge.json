@@ -1,0 +1,96 @@
+{
+  "style": "IndianClassical",
+  "sub_styles": [
+    {
+      "name": "018-hindustani-bhairavi",
+      "scale": "Chromatic",
+      "pitch_classes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "tempo": 94.99999208333399,
+      "tempo_from_source": 95
+    },
+    {
+      "name": "024-ahir-bhairav-teental-showcase",
+      "scale": "Chromatic",
+      "pitch_classes": [
+        0,
+        1,
+        4,
+        5,
+        7,
+        9,
+        10
+      ],
+      "tempo": 109.99990833340972
+    },
+    {
+      "name": "hindustani-daily-2026-06-16",
+      "scale": "Chromatic",
+      "pitch_classes": [
+        0,
+        1,
+        2,
+        3,
+        5,
+        7,
+        9,
+        10
+      ],
+      "tempo": 89.9999550000225
+    }
+  ],
+  "pitch": {
+    "scale": "Chromatic",
+    "intervals": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "common_pitch_classes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "total_pitch_classes": 12
+  },
+  "rhythm": {
+    "patterns_analyzed": 3,
+    "metrical_gravity_verified": true,
+    "description": ""
+  },
+  "validation": {
+    "12tet_pass": true,
+    "metrical_gravity_pass": true
+  },
+  "last_updated": "2026-06-24T04:00:00Z"
+}

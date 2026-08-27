@@ -1,0 +1,18 @@
+{
+  "artifact": "minimalism-phase.mid",
+  "classification": "ai-assisted",
+  "generator": "minimalism-phase-study",
+  "sources": [],
+  "parameters": {
+    "bpm": 120,
+    "cell": "E(5,12) C-pentatonic",
+    "phase_walk_per_section": 480,
+    "sections": 8,
+    "bars_per_section": 3
+  },
+  "notes": "",
+  "sha256": "3ec4584c649d83f81953f77e82d6a88beb9a9b7fc7dc1e01fdc799e580f3012b",
+  "bytes": 1679,
+  "created_utc": "2026-08-17T07:41:25.422431+00:00",
+  "provenance_version": "1.0"
+}

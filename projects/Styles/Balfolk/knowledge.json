@@ -1,0 +1,116 @@
+{
+  "style": "Balfolk",
+  "sub_styles": [
+    {
+      "name": "005-balfolk-production",
+      "scale": "Chromatic",
+      "pitch_classes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        7,
+        8,
+        9,
+        11
+      ],
+      "tempo": 120.0,
+      "tempo_from_source": 118
+    },
+    {
+      "name": "011-balfolk-dust-on-the-dashboard",
+      "scale": "Lydian",
+      "pitch_classes": [
+        0,
+        2,
+        4,
+        6,
+        7,
+        9,
+        11
+      ],
+      "tempo": 109.99990833340972
+    },
+    {
+      "name": "014-balfolk-cinematic",
+      "scale": "Major/Ionian",
+      "pitch_classes": [
+        2,
+        4,
+        5,
+        7,
+        9
+      ],
+      "tempo": 120.0
+    },
+    {
+      "name": "017-hybrid-pattern-matrix",
+      "scale": "Major/Ionian",
+      "pitch_classes": [
+        0,
+        2,
+        4,
+        5,
+        7,
+        9,
+        11
+      ],
+      "tempo": 142.4998753126091
+    },
+    {
+      "name": "030-balfolk-grand-suite",
+      "scale": "Major/Ionian",
+      "pitch_classes": [
+        0,
+        2,
+        4,
+        5,
+        7,
+        9,
+        11
+      ],
+      "tempo": 117.99990166674861
+    }
+  ],
+  "pitch": {
+    "scale": "Major/Ionian",
+    "intervals": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      2,
+      1
+    ],
+    "common_pitch_classes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      11
+    ],
+    "total_pitch_classes": 11
+  },
+  "rhythm": {
+    "patterns_analyzed": 5,
+    "metrical_gravity_verified": true,
+    "description": ""
+  },
+  "validation": {
+    "12tet_pass": true,
+    "metrical_gravity_pass": true
+  },
+  "last_updated": "2026-06-24T04:00:00Z"
+}

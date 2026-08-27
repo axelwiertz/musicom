@@ -1,0 +1,68 @@
+{
+  "style": "Flamenco",
+  "sub_styles": [
+    {
+      "name": "023-flamenco-16-bar",
+      "scale": "Chromatic",
+      "pitch_classes": [
+        0,
+        2,
+        4,
+        5,
+        7,
+        8,
+        9,
+        11
+      ],
+      "tempo": 120.0
+    },
+    {
+      "name": "033-flamenco-solea-study",
+      "scale": "Chromatic",
+      "pitch_classes": [
+        0,
+        2,
+        4,
+        5,
+        7,
+        8,
+        9,
+        11
+      ]
+    }
+  ],
+  "pitch": {
+    "scale": "Chromatic",
+    "intervals": [
+      2,
+      2,
+      1,
+      2,
+      1,
+      1,
+      2,
+      1
+    ],
+    "common_pitch_classes": [
+      0,
+      2,
+      4,
+      5,
+      7,
+      8,
+      9,
+      11
+    ],
+    "total_pitch_classes": 8
+  },
+  "rhythm": {
+    "patterns_analyzed": 2,
+    "metrical_gravity_verified": true,
+    "description": ""
+  },
+  "validation": {
+    "12tet_pass": true,
+    "metrical_gravity_pass": true
+  },
+  "last_updated": "2026-06-24T04:00:00Z"
+}

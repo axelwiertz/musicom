@@ -1,0 +1,23 @@
+{
+  "artifact": "pop_5part_methods.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom skeleton-first + per-section methods",
+  "sources": [
+    "C major I-V-vi-IV",
+    "Markov 002",
+    "Tendency 023",
+    "Euclidean 011",
+    "DPSM 026",
+    "Isorhythm 032",
+    "Schillinger 018"
+  ],
+  "parameters": {
+    "bpm": 120,
+    "form": "Intro-Verse-Chorus-Bridge-Outro"
+  },
+  "notes": "Phase 1: framework + per-section method variation, same key/progression.",
+  "sha256": "27249b6186ca9e914f725cb5020a6b170f9611bf446f9c3545f46445c461b240",
+  "bytes": 7540,
+  "created_utc": "2026-08-19T14:53:01.189128+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,1 @@
+# Project 017: Polo Beer Dance\n\nGenre: Dutch Children / Dance\nSource: Voice Message transcription\n\n## Lyrics Analysis\n- Theme: Forest friends, cake, dancing.\n- Key line: 'Dit is de Polo Beer dans'\n- Rhythm: 'Klappen... Lopen als een beer'\n

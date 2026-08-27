@@ -1,0 +1,96 @@
+[
+  {
+    "project_name": "freylekhs-daily-2026-06-17",
+    "midi_file": "/opt/data/projects/Styles/Klezmer/freylekhs-daily-2026-06-17/composition.mid",
+    "scale": "Harmonic Minor",
+    "pitch_classes": [
+      0,
+      2,
+      7,
+      8,
+      11
+    ],
+    "intervals": [
+      2,
+      5,
+      1,
+      3,
+      1
+    ],
+    "tempo": null,
+    "time_sig": null,
+    "total_notes": 18,
+    "midi_range": [
+      38,
+      72
+    ],
+    "velocity_avg": 91.1,
+    "track_count": 4,
+    "tracks_detail": [
+      {
+        "track": 0,
+        "notes": 4,
+        "pitch_classes": [
+          2,
+          7
+        ],
+        "scale_fragment": "In Scale",
+        "range": [
+          38,
+          43
+        ]
+      },
+      {
+        "track": 1,
+        "notes": 4,
+        "pitch_classes": [
+          7
+        ],
+        "scale_fragment": "In Scale",
+        "range": [
+          55,
+          55
+        ]
+      },
+      {
+        "track": 2,
+        "notes": 5,
+        "pitch_classes": [
+          0,
+          7,
+          8,
+          11
+        ],
+        "scale_fragment": "Harmonic Minor",
+        "range": [
+          67,
+          72
+        ]
+      },
+      {
+        "track": 3,
+        "notes": 5,
+        "pitch_classes": [
+          0,
+          7,
+          8,
+          11
+        ],
+        "scale_fragment": "Harmonic Minor",
+        "range": [
+          67,
+          72
+        ]
+      }
+    ],
+    "analysis_source": "midi",
+    "source_file": "/opt/data/projects/Styles/Klezmer/freylekhs-daily-2026-06-17/src/generate.py",
+    "tempo_from_source": 125,
+    "embedded_pitch_classes": [
+      0,
+      2,
+      7
+    ],
+    "embedded_scale": "In Scale"
+  }
+]

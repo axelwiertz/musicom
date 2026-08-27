@@ -1,0 +1,36 @@
+{
+  "artifact": "069-kuramoto-chorale.mid",
+  "classification": "ai-generated",
+  "generator": "Method 038 Kuramoto Oscillator Phase Synchronization (KOPS) + musicom rules (chord-tone quantization, voice leading, harmonic progression)",
+  "sources": [
+    "Research/CompositionMethods/methods_db.md:Method 038",
+    "rules/voice_leading.py",
+    "rules/progression.py",
+    "workflows/unitmatrix_composer.py"
+  ],
+  "parameters": {
+    "method": 38,
+    "phase": 2,
+    "key": "F dorian",
+    "bpm": 92,
+    "ticks_per_beat": 480,
+    "beats_per_bar": 4,
+    "sections": 4,
+    "section_bars": 2,
+    "progression_degrees": [
+      0,
+      3,
+      6,
+      0
+    ],
+    "seed": 69,
+    "voice_leading_style": "classical",
+    "two_phase": true,
+    "rules_applied": "chord-tone quantization, diatonic block harmony, voice-leading optimization, Phase 2c inversion-rotation correction"
+  },
+  "notes": "Phase 2: raw KOPS phase-wrap pitches quantized to nearest section triad tone (soprano), Alto/Tenor/Bass as diatonic block harmony via Scale7ChordDegree.get_diatonic_note(), voice-leading optimization + Phase 2c inversion-rotation correction of parallel/hidden fifths, harmonic function validation (i-iv-VII-i, F dorian, closed perfect cadence), zero-drift validated UnitMatrix export.",
+  "sha256": "23bed8cd6c4fe57955df44e8992fbc361544beb7b96f00f769c5317e8238905d",
+  "bytes": 1257,
+  "created_utc": "2026-08-15T23:12:45.987257+00:00",
+  "provenance_version": "1.0"
+}

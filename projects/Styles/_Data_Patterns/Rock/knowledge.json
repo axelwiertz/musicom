@@ -1,0 +1,115 @@
+{
+  "style": "Rock",
+  "subgenre": "",
+  "pitch": {
+    "scale": "Chromatic",
+    "intervals": [
+      1,
+      1,
+      1,
+      1,
+      2,
+      1,
+      1,
+      1,
+      2,
+      1
+    ],
+    "pitch_classes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      6,
+      7,
+      8,
+      9,
+      11
+    ],
+    "per_track_scale": "Lydian",
+    "per_track_scale_distribution": {
+      "Lydian": 5,
+      "Harmonic Minor": 1
+    }
+  },
+  "rhythm": {
+    "metrical_gravity": [
+      1.0,
+      0,
+      0.5,
+      0
+    ],
+    "tempo_range": [
+      130.00013000013,
+      130.00013000013
+    ],
+    "time_signatures": [
+      "3/4"
+    ],
+    "description": ""
+  },
+  "timbre": {
+    "instrumentation": [
+      "Track 1",
+      "Track 2",
+      "Track 3",
+      "Track 4",
+      "Track 5",
+      "Track 6"
+    ]
+  },
+  "patterns": [
+    {
+      "project": "037-u2-streets-analysis",
+      "midi": "/opt/data/projects/Styles/Rock/037-u2-streets-analysis/MIDI/streets.mid",
+      "scale": "Chromatic",
+      "pitch_classes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        6,
+        7,
+        8,
+        9,
+        11
+      ],
+      "tempo": 130.00013000013,
+      "time_sig": "3/4"
+    }
+  ],
+  "validated": true,
+  "validation": {
+    "12tet": {
+      "valid": true,
+      "pitch_classes_used": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        6,
+        7,
+        8,
+        9,
+        11
+      ],
+      "count": 10,
+      "issues": []
+    },
+    "metrical_gravity": {
+      "valid": true,
+      "length": 4,
+      "strong_beat_count": 1,
+      "profile": [
+        1.0,
+        0,
+        0.5,
+        0
+      ],
+      "issues": []
+    }
+  }
+}

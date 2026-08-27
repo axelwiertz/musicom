@@ -1,0 +1,103 @@
+{
+  "style": "Hybrid",
+  "sub_styles": [
+    {
+      "name": "017-polo-beer-dance",
+      "scale": "Dorian",
+      "pitch_classes": []
+    },
+    {
+      "name": "018-landal-bollo-koos-hybrid",
+      "scale": "Pentatonic Minor",
+      "pitch_classes": [
+        5,
+        10
+      ]
+    },
+    {
+      "name": "018-rock-apprenticeship",
+      "scale": "Chromatic",
+      "pitch_classes": [
+        0,
+        2,
+        4,
+        6,
+        7,
+        9,
+        10,
+        11
+      ],
+      "tempo": 128.0,
+      "tempo_from_source": 108
+    },
+    {
+      "name": "022-indie-pop-sunset",
+      "scale": "Lydian",
+      "pitch_classes": [
+        0,
+        2,
+        4,
+        6,
+        7,
+        9,
+        11
+      ]
+    },
+    {
+      "name": "025-bollo-koos-indian-unified",
+      "scale": "Chromatic",
+      "pitch_classes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        9,
+        10
+      ]
+    }
+  ],
+  "pitch": {
+    "scale": "Chromatic",
+    "intervals": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      2,
+      1,
+      1,
+      1
+    ],
+    "common_pitch_classes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      9,
+      10,
+      11
+    ],
+    "total_pitch_classes": 11
+  },
+  "rhythm": {
+    "patterns_analyzed": 5,
+    "metrical_gravity_verified": true,
+    "description": ""
+  },
+  "validation": {
+    "12tet_pass": true,
+    "metrical_gravity_pass": true
+  },
+  "last_updated": "2026-06-24T04:00:00Z"
+}

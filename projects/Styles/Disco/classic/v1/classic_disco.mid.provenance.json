@@ -1,0 +1,22 @@
+{
+  "artifact": "classic_disco.mid",
+  "classification": "ai-assisted",
+  "generator": "disco-classic",
+  "sources": [],
+  "parameters": {
+    "bpm": 120,
+    "key": "D minor",
+    "style": "Classic Disco 1977-79",
+    "methods": [
+      "four-on-the-floor",
+      "syncopated bass",
+      "string stabs",
+      "brass hits"
+    ]
+  },
+  "notes": "",
+  "sha256": "2adc771e0a422d2b49da02043789e6481e9ba2b5823d865c8596ab1fec16ba59",
+  "bytes": 5646,
+  "created_utc": "2026-07-26T19:09:34.690236+00:00",
+  "provenance_version": "1.0"
+}

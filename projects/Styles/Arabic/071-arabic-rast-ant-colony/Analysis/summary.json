@@ -1,0 +1,38 @@
+{
+  "project": "071-arabic-rast-ant-colony",
+  "style": "Arabic",
+  "method": "041 Ant Colony Optimization Path Finding (ACOPF)",
+  "paradigm": "Stochastic",
+  "created_utc": "2026-08-17T23:12:00Z",
+  "key": "D Rast (D E1/4b F G A B1/4b C)",
+  "bpm": 100,
+  "bars": 16,
+  "sections": [
+    "A(4) D Rast",
+    "B(4) A Nahawand",
+    "A2(4) D Rast",
+    "C(4) cadence"
+  ],
+  "harmony": [
+    "Dm",
+    "Am",
+    "F",
+    "Dm"
+  ],
+  "rhythm": "Maqsum 3+3+2 (DUM TEK TEK DUM TEK)",
+  "voices": [
+    "Lead Flute",
+    "Harmony Strings",
+    "Bass",
+    "Drums ch10",
+    "Pad Synth"
+  ],
+  "phase1": "raw ant-colony pitch trajectory, unquantized (chromatic leak), chaotic clustered rhythm, single voice",
+  "phase2": "Rast-quantized lead, section harmony pads, voice-leading fix, zero-drift UnitMatrix export",
+  "files": {
+    "MIDI/071-arabic-rast-ant-colony-phase1.mid": 4583,
+    "MIDI/071-arabic-rast-ant-colony.mid": 4583,
+    "Audio/071-arabic-rast-ant-colony.wav": 7692588,
+    "Audio/071-arabic-rast-ant-colony.ogg": 285593
+  }
+}

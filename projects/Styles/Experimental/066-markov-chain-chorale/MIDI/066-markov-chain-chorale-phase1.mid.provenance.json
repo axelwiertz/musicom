@@ -1,0 +1,32 @@
+{
+  "artifact": "066-markov-chain-chorale-phase1.mid",
+  "classification": "ai-generated",
+  "generator": "Method 020 First-Order Markov Chain Sequencing (generators/chain.py) - PRE-RULES raw draft",
+  "sources": [
+    "generators/chain.py",
+    "workflows/unitmatrix_composer.py"
+  ],
+  "parameters": {
+    "method": 20,
+    "phase": 1,
+    "key": "F major (ionian)",
+    "bpm": 92,
+    "ticks_per_beat": 480,
+    "beats_per_bar": 4,
+    "sections": 4,
+    "section_bars": 2,
+    "pc_transition_matrix_12x12": true,
+    "duration_states": [
+      240,
+      480
+    ],
+    "seed": 66,
+    "two_phase": true,
+    "rules_applied": "NONE (pre-rules generative draft)"
+  },
+  "notes": "Phase 1: first-order Markov chain with memory over 12 pitch-class states (stepwise-neighbour-biased transition matrix with chromatic escape states -> raw draft leaks non-diatonic tones), plus a second first-order Markov chain over duration states {1/8,1/4}. No scale enforcement, no chord context, no voice leading in this raw draft. Raw generative material preserved for comparison against the rules-processed Phase 2 artifact. Zero-drift validated UnitMatrix export.",
+  "sha256": "6f4cb21f7030c909f72595c6dd7634fcbd76295675b4d7cfe4fb55498f3e2af6",
+  "bytes": 471,
+  "created_utc": "2026-08-12T23:04:55.343993+00:00",
+  "provenance_version": "1.0"
+}

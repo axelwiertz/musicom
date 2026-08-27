@@ -1,0 +1,27 @@
+{
+  "artifact": "classic_disco_v3.mid",
+  "classification": "ai-assisted",
+  "generator": "disco-classic-v3",
+  "sources": [],
+  "parameters": {
+    "bpm": 120,
+    "key": "D minor",
+    "style": "Classic Disco (flowing)",
+    "methods": [
+      "011 Euclidean Groove",
+      "026 DPSM Phase-Shift Minimalism"
+    ],
+    "layers": [
+      "Euclidean drums",
+      "Euclidean bass + walking fills",
+      "DPSM 3-phase arpeggios",
+      "Sustained string pad",
+      "Euclidean brass"
+    ]
+  },
+  "notes": "",
+  "sha256": "1c4cdafb3a3067cba51cd22485612c8a76660ab66d939b14913c1eaf2974f845",
+  "bytes": 9740,
+  "created_utc": "2026-07-26T20:02:40.681084+00:00",
+  "provenance_version": "1.0"
+}

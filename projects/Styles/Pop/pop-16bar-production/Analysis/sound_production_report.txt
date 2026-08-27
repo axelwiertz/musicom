@@ -1,0 +1,37 @@
+Sound production verification: 22/22 passed
+PASS MIDI→WAV mix
+PASS stem track00_Recorder
+PASS stem track01_String_Ensemble_2
+PASS stem track02_Electric_Bass_finger
+PASS stem track03_Acoustic_Grand_Piano
+PASS humanization module available
+PASS DynamicEQ alters signal
+PASS Limiter caps peak ≤ -1dB
+PASS Reverb tail audible @0.5s
+PASS Imager outputs stereo
+PASS Sub-100Hz mono-safe
+PASS Final LUFS ≈ -14
+PASS modal marimba
+PASS modal bell
+PASS modal string
+PASS PM generates harmonics >5%
+PASS Granular cloud generated
+PASS Vocal syllable rendered
+PASS Additive overtone synth
+PASS PolyVoice chord renders
+PASS 7 stages, all exported
+PASS No stage is a no-op (limiter=ceiling, may idle)
+
+========================================================
+PRODUCTION PIPELINE SUMMARY
+========================================================
+Stage                        LUFS   Δ LUFS
+--------------------------------------------------------
+reverb                     -19.7    -2.1
+lowpass                    -19.7    +0.0
+peaking                    -19.6    +0.1
+dynamic_eq                 -19.6    +0.0
+stereo_imager              -19.6    -0.0
+lufs_norm                  -14.0    +5.6
+limiter                    -14.0    +0.0
+========================================================

@@ -1,0 +1,27 @@
+{
+  "artifact": "058-markov-chorale.mid",
+  "classification": "ai-generated",
+  "generator": "MarkovChainGenerator + VoiceLeadingRules",
+  "sources": [
+    "ai/generators/melody.py:MarkovChainGenerator"
+  ],
+  "parameters": {
+    "bpm": 90,
+    "key": "C major",
+    "markov_order": 1,
+    "seed": 42,
+    "progression": [
+      "I",
+      "IV",
+      "V",
+      "I"
+    ],
+    "voices": 3,
+    "sections": 4
+  },
+  "notes": "Two-phase composition: Markov chain melody generation + classical voice leading rules",
+  "sha256": "d424f6ad75a862085f6f1cd4e36f07e4269c2e389fdc5aa480dba83dfa9e7a33",
+  "bytes": 342,
+  "created_utc": "2026-08-04T23:02:27.362513+00:00",
+  "provenance_version": "1.0"
+}

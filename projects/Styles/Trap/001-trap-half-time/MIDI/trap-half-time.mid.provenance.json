@@ -1,0 +1,17 @@
+{
+  "artifact": "trap-half-time.mid",
+  "classification": "ai-assisted",
+  "generator": "trap-half-time",
+  "sources": [],
+  "parameters": {
+    "bpm": 140,
+    "kick": "E(2,16) half-time",
+    "808": "C1 roots",
+    "scale": "C phrygian"
+  },
+  "notes": "",
+  "sha256": "767373a327563de5db0998c82793d84bec70f852364e2b5ff10e602af25e3a7d",
+  "bytes": 1609,
+  "created_utc": "2026-08-17T07:57:45.358149+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,41 @@
+{
+  "artifact": "070-levy-chorale-phase1.mid",
+  "classification": "ai-generated",
+  "generator": "Method 053 Levy Flight Composition (LFC) - PRE-RULES raw draft",
+  "sources": [
+    "Research/CompositionMethods/methods_db.md:Method 053",
+    "workflows/unitmatrix_composer.py"
+  ],
+  "parameters": {
+    "method": 53,
+    "phase": 1,
+    "key": "G aeolian",
+    "bpm": 88,
+    "ticks_per_beat": 480,
+    "beats_per_bar": 4,
+    "sections": 4,
+    "section_bars": 2,
+    "model": "Levy flight (alpha-stable CMS), alpha descending 1.6->1.0 per section",
+    "alpha_per_section": [
+      1.6,
+      1.4,
+      1.2,
+      1.0
+    ],
+    "sigma_pitch_semitones": 3.5,
+    "max_step_clip": 24,
+    "mean_reversion": 0.15,
+    "rhythm_ioi": "base 0.5 beats + Levy(alpha=1.5, sigma=0.4), clipped [0.25, 4.0]",
+    "raw_pitch_mapping": "alpha-stable step accumulation -> chromatic MIDI 48..84",
+    "raw_rhythm_mapping": "Levy-distributed inter-onset intervals",
+    "raw_velocity_mapping": "62 + 6*|step| (leaps louder)",
+    "seed": 70,
+    "two_phase": true,
+    "rules_applied": "NONE (pre-rules generative draft)"
+  },
+  "notes": "Phase 1: symmetric Levy flight in MIDI pitch space, CMS algorithm, stability index alpha descending 1.6 -> 1.0 across the four sections (Brownian stepwise motion decays into Cauchy-like dramatic leaping). Rhythm = Levy-distributed inter-onset intervals (bursty clusters). Pitch = continuous chromatic accumulation -> heavy non-diatonic leak (the pre-rules signature); velocity follows local step magnitude. Single voice, no scale enforcement, no chord context, no voice leading. Raw generative material preserved for comparison against the rules-processed Phase 2 artifact. Zero-drift validated UnitMatrix export.",
+  "sha256": "3ee004886ab8d6d1bac869fb2a3ceba25fdb27581c44dca1c406e7e7f240bb01",
+  "bytes": 458,
+  "created_utc": "2026-08-16T23:13:20.421342+00:00",
+  "provenance_version": "1.0"
+}

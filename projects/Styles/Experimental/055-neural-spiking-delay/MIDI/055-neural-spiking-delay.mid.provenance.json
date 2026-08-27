@@ -1,0 +1,84 @@
+{
+  "artifact": "055-neural-spiking-delay.mid",
+  "classification": "ai-assisted",
+  "generator": "055-neural-spiking-delay/src/compose.py",
+  "sources": [],
+  "parameters": {
+    "bpm": 100,
+    "method": "037-FHNS",
+    "sp_method": "SP-013-FDL",
+    "key": "E natural minor",
+    "scale_pattern": [
+      0,
+      2,
+      3,
+      5,
+      7,
+      8,
+      10
+    ],
+    "form": "A(4)-B(8)-A'(4)",
+    "fhn_params": {
+      "a": 0.7,
+      "b": 0.8,
+      "tau": 12.5,
+      "dt": 0.01
+    },
+    "i_drives": {
+      "Lead": 0.6,
+      "Tenor": 0.8,
+      "Bass": 0.35,
+      "Pad": 0.4
+    },
+    "spike_threshold": 0.5,
+    "refractory_ticks": {
+      "Lead": 120,
+      "Tenor": 180,
+      "Bass": 480,
+      "Pad": 960
+    },
+    "phase1": "FHN neural spiking \u2192 spike timings + ISI pitch indices",
+    "phase2_rules": [
+      "FunctionalHarmony: section chord progressions",
+      "chord-tone quantization (pitch \u2192 nearest chord tone)",
+      "VoiceLeadingRules: parallel fifths/octaves check",
+      "voice leading correction (stepwise shift)"
+    ],
+    "section_progressions": {
+      "A": [
+        "i",
+        "iv",
+        "i",
+        "v"
+      ],
+      "B": [
+        "i",
+        "v",
+        "iv",
+        "VII",
+        "III",
+        "iv",
+        "v",
+        "i"
+      ],
+      "Ap": [
+        "i",
+        "iv",
+        "v",
+        "i"
+      ]
+    },
+    "voice_leading_violations": 2,
+    "voices": {
+      "Lead": "Flute (73)",
+      "Tenor": "Piano (0)",
+      "Bass": "Electric Bass (33)",
+      "Pad": "Strings (48)"
+    }
+  },
+  "notes": "Two-phase composition: (1) FHN neural dynamics generate raw spike timings and ISI-derived pitch indices. (2) musicom rules post-process: FunctionalHarmony chord progressions per section, chord-tone quantization, VoiceLeadingRules parallel motion check and correction. SP-013: Feedback Delay with HF damping post-render.",
+  "sha256": "d33c2852c1c3917b266584cdad4b7fbe9b678b8b8c5989d5e3bcbffc49e0c048",
+  "bytes": 3275,
+  "created_utc": "2026-08-03T07:09:53.968888+00:00",
+  "provenance_version": "1.0"
+}

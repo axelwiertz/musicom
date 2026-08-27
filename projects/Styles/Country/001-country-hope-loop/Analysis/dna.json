@@ -1,0 +1,15 @@
+{
+  "style": "Country",
+  "bars": 8,
+  "meter": "4/4",
+  "tonic": "G",
+  "mode": "mixolydian",
+  "tempo": 96,
+  "rows": [
+    "Lead",
+    "Harmony",
+    "Bass",
+    "Drums",
+    "Guitar"
+  ]
+}

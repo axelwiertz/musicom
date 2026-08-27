@@ -1,0 +1,17 @@
+{
+  "artifact": "techno-four-floor.mid",
+  "classification": "ai-assisted",
+  "generator": "techno-four-floor",
+  "sources": [],
+  "parameters": {
+    "bpm": 132,
+    "kick": "E(4,16)",
+    "bass": "syncopated 8ths",
+    "key": "A Aeolian"
+  },
+  "notes": "",
+  "sha256": "ab1470d60aae6be210b79c2d5e810db51e167b32df62c5fddafbfe43d242ac82",
+  "bytes": 1556,
+  "created_utc": "2026-08-17T07:58:31.307595+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,20 @@
+{
+  "artifact": "056-perlin-lpc.mid",
+  "classification": "ai-assisted",
+  "generator": "056-perlin-lpc/compose.py",
+  "sources": [],
+  "parameters": {
+    "bpm": 80,
+    "method": "040-Perlin-Noise-Composition",
+    "seed": 42,
+    "octaves": 4,
+    "key": "D Dorian",
+    "form": "ABA (3x4 bars)",
+    "voices": 4
+  },
+  "notes": "Perlin noise (fBm) drives pitch contour, rhythm density, velocity. D Dorian. 80 BPM.",
+  "sha256": "e2ff40d32f8f2d0b328cd5cbc8b50f60d2db8248fd51f2270576eb9cab332b4d",
+  "bytes": 1901,
+  "created_utc": "2026-08-02T10:04:04.257042+00:00",
+  "provenance_version": "1.0"
+}

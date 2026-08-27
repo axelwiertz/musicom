@@ -1,0 +1,23 @@
+{
+  "artifact": "blues_32bar.mid",
+  "classification": "ai-assisted",
+  "generator": "compose-loop/blues-32bar-patterns",
+  "sources": [],
+  "parameters": {
+    "bpm": 120,
+    "key": "C Blues",
+    "bars": 32,
+    "patterns": [
+      "5th-6th-b7 shuffle",
+      "walking bass",
+      "boogie bass",
+      "block chords",
+      "blue note slides"
+    ]
+  },
+  "notes": "",
+  "sha256": "6353b01c57c719d011b8164c744d6e6270f3d16bdae3fdf92f14cba8bdab524e",
+  "bytes": 13317,
+  "created_utc": "2026-07-26T12:52:27.646567+00:00",
+  "provenance_version": "1.0"
+}

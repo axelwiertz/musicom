@@ -1,0 +1,16 @@
+{
+  "artifact": "samba-surdo-loop.wav",
+  "classification": "ai-generated",
+  "generator": "001-samba-surdo-loop/fluidsynth",
+  "sources": [
+    "Samba/001-samba-surdo-loop/MIDI/001-samba-surdo-loop.mid"
+  ],
+  "parameters": {
+    "soundfont": "TimGM6mb.sf2",
+    "gain": 1.2
+  },
+  "sha256": "7ea1a676a810b634ba74c53945db2cd370c650172e0a164154cc0f1f8b031a04",
+  "bytes": 7153452,
+  "created_utc": "2026-08-17T07:58:56.259878+00:00",
+  "provenance_version": "1.0"
+}

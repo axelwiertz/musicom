@@ -1,0 +1,16 @@
+{
+  "artifact": "052-perlin-chebyshev.mid",
+  "classification": "ai-assisted",
+  "generator": "052-perlin-chebyshev/src/compose.py",
+  "sources": [],
+  "parameters": {
+    "bpm": 100,
+    "method": "040",
+    "production": "SP-019"
+  },
+  "notes": "Perlin Noise pitch/rhythm + Chebyshev waveshaping velocity mapping.",
+  "sha256": "a6ea9762f5fc273c698ea3e22e81240e2d4fb277bc55f0662c91ace8ed90de84",
+  "bytes": 699,
+  "created_utc": "2026-07-29T10:01:52.557686+00:00",
+  "provenance_version": "1.0"
+}

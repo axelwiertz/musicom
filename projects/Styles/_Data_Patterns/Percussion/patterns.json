@@ -1,0 +1,72 @@
+[
+  {
+    "project_name": "015-percussion-percussion-dna",
+    "midi_file": "/opt/data/projects/Styles/Percussion/015-percussion-percussion-dna/MIDI/015_combined.mid",
+    "scale": "Dorian",
+    "pitch_classes": [
+      0,
+      2,
+      5,
+      7,
+      9,
+      10
+    ],
+    "intervals": [
+      2,
+      3,
+      2,
+      2,
+      1,
+      2
+    ],
+    "tempo": null,
+    "time_sig": null,
+    "total_notes": 17,
+    "midi_range": [
+      36,
+      70
+    ],
+    "velocity_avg": 94.7,
+    "track_count": 2,
+    "tracks_detail": [
+      {
+        "track": 0,
+        "notes": 8,
+        "pitch_classes": [
+          0
+        ],
+        "scale_fragment": "In Scale",
+        "range": [
+          36,
+          36
+        ]
+      },
+      {
+        "track": 1,
+        "notes": 9,
+        "pitch_classes": [
+          2,
+          5,
+          7,
+          9,
+          10
+        ],
+        "scale_fragment": "Dorian",
+        "range": [
+          62,
+          70
+        ]
+      }
+    ],
+    "analysis_source": "midi",
+    "source_file": "/opt/data/projects/Styles/Percussion/015-percussion-percussion-dna/src/regen.py",
+    "scale_from_source": "Dorian",
+    "pitch_pattern_intervals": [
+      2,
+      3,
+      -2,
+      0,
+      5
+    ]
+  }
+]

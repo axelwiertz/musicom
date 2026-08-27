@@ -1,0 +1,43 @@
+{
+  "artifact": "moonlight-shadow-aligned.mid",
+  "classification": "ai-assisted",
+  "generator": "align+matrix (sources: 6 versions of Moonlight Shadow)",
+  "sources": {
+    "MEL": "Moonlight_Shadow 2.mid",
+    "FULL": "Moonlight_ShadowMike_Oldfeild 2.mid",
+    "PERC": "Moonlight_shadow__Mike_Oldfield_Moonlight_shadow_percussion 2.mid"
+  },
+  "parameters": {
+    "bpm": 126,
+    "key": "E major",
+    "form": [
+      [
+        "Intro",
+        4
+      ],
+      [
+        "Verse1",
+        8
+      ],
+      [
+        "Chorus",
+        8
+      ],
+      [
+        "Verse2",
+        8
+      ],
+      [
+        "Outro",
+        4
+      ]
+    ],
+    "quantization": "16th",
+    "transpose": "E minor \u2192 E major (-3)"
+  },
+  "notes": "",
+  "sha256": "ef36dfcc09ad0b1a058c3d7245df03887096654fbe6aed2cfd4a550a2c247e40",
+  "bytes": 11248,
+  "created_utc": "2026-08-15T17:37:01.832795+00:00",
+  "provenance_version": "1.0"
+}

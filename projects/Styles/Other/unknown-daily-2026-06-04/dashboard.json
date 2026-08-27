@@ -1,0 +1,11 @@
+{
+  "project": "Daily Experiment 2026-06-04",
+  "base_genre": "Jazz",
+  "rhythm_dna": "\u2588\u2591\u2588\u2588\u2591\u2588\u2588\u2591\u2588\u2588\u2591\u2588",
+  "pitch_transform": "Inversion",
+  "structure": "Intro-A-B-A'-Outro",
+  "artifacts": [
+    "projects/0XX-daily-experiment-2026-06-04/composition.mid",
+    "projects/0XX-daily-experiment-2026-06-04/composition.ogg"
+  ]
+}

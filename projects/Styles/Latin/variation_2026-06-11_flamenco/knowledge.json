@@ -1,0 +1,9 @@
+{
+  "genre": "Flamenco",
+  "variation_type": "Retrograde-Inversion",
+  "parent_file": "flamenco_solea.json",
+  "rhythm": {
+    "dna": "\u2588\u2591\u2588\u2591\u2588\u2591\u2588\u2591\u2591\u2588\u2591\u2591"
+  },
+  "date": "2026-06-11"
+}

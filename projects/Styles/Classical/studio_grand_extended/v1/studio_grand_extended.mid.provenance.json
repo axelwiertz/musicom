@@ -1,0 +1,18 @@
+{
+  "artifact": "studio_grand_extended.mid",
+  "classification": "ai-assisted",
+  "generator": "studio_grand_extended",
+  "sources": [],
+  "parameters": {
+    "bpm": 110,
+    "key": "C major",
+    "bars": 32,
+    "source": "studio_grand.mid (8 bars)",
+    "structure": "Intro(4) + V1(8) + Chorus(8) + V2(8) + Outro(4)"
+  },
+  "notes": "",
+  "sha256": "8f0e0c2d2b03750e9c971955cdd7ebc7a5693554b5ffbede4984b5f9503343d6",
+  "bytes": 9510,
+  "created_utc": "2026-07-27T07:26:34.669362+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,20 @@
+{
+  "artifact": "056-perlin-lpc.ogg",
+  "classification": "ai-assisted",
+  "generator": "056-perlin-lpc/src/apply_lpc.py",
+  "sources": [],
+  "parameters": {
+    "method": "SP-028-LPC-Synthesis",
+    "lpc_order": 12,
+    "frame_size": 1024,
+    "hop_size": 512,
+    "normalization": "-1dB",
+    "codec": "opus",
+    "bitrate": "48k"
+  },
+  "notes": "LPC analysis/synthesis post-processing on FluidSynth render. Formant-like spectral coloration.",
+  "sha256": "9aa421f95c3fe0d83f3db3c46508d977f196ccd1f75987defa2a8e363c3e9937",
+  "bytes": 271260,
+  "created_utc": "2026-08-02T10:08:01.112579+00:00",
+  "provenance_version": "1.0"
+}

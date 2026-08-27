@@ -1,0 +1,18 @@
+{
+  "artifact": "metal_riff.mid",
+  "classification": "ai-assisted",
+  "generator": "metal_riff",
+  "sources": [],
+  "parameters": {
+    "bpm": 160,
+    "methods": [
+      "011",
+      "001"
+    ]
+  },
+  "notes": "",
+  "sha256": "4b81a61ec3eff2366bad7b28ca2cad17aa3613dd768deba5b19d33d91652d6d1",
+  "bytes": 17384,
+  "created_utc": "2026-07-27T21:03:29.913631+00:00",
+  "provenance_version": "1.0"
+}

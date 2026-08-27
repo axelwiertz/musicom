@@ -1,0 +1,51 @@
+{
+  "project": "076-reggae-lsystem",
+  "style": "Reggae",
+  "method": "019 L-System Algorithmic Composition (Fibonacci word)",
+  "paradigm": "Rules-Based",
+  "bpm": 96,
+  "key": "A aeolian",
+  "bars": 24,
+  "sections": [
+    "Intro",
+    "Verse",
+    "Chorus",
+    "Verse2",
+    "Chorus2",
+    "Outro"
+  ],
+  "bars_per_section": 4,
+  "progression": [
+    "i",
+    "bVII",
+    "i",
+    "bVI",
+    "i",
+    "bVII",
+    "i",
+    "bVI",
+    "i",
+    "bVII",
+    "i",
+    "bVI",
+    "i",
+    "bVII",
+    "i",
+    "bVI",
+    "i",
+    "bVII",
+    "i",
+    "bVI",
+    "i",
+    "bVII",
+    "i",
+    "bVI"
+  ],
+  "voices": [
+    "Lead",
+    "Skank",
+    "Bass",
+    "Drums"
+  ],
+  "seed": 76
+}

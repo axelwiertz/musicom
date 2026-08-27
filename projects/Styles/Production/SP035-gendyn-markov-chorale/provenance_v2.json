@@ -1,0 +1,63 @@
+{
+  "job": "SP-035 production pass FIXED (v2)",
+  "source_midi": "/opt/data/projects/Styles/Experimental/058-markov-chorale/MIDI/058-markov-chorale.mid",
+  "source_midi_sha256": "d424f6ad75a862085f6f1cd4e36f07e4269c2e389fdc5aa480dba83dfa9e7a33",
+  "production_method": "SP-035",
+  "production_method_name": "GENDYN Stochastic Breakpoint Synthesis (dynamic-stochastic, fixed)",
+  "fix": "v1 redrew breakpoints each period \u2192 noise (pitch detect 0 Hz, harmonic 4%). v2: fixed breakpoint times per note, amplitude random-walk per period (Skorokhod-reflected), zero-anchored boundaries (phase continuity).",
+  "parameters": {
+    "sample_rate": 48000,
+    "bpm": 90,
+    "seed": 42,
+    "per_voice": {
+      "74": {
+        "n_bp": 8,
+        "sigma_a": 0.2,
+        "gain": 1.0
+      },
+      "33": {
+        "n_bp": 6,
+        "sigma_a": 0.12,
+        "gain": 1.4
+      },
+      "49": {
+        "n_bp": 10,
+        "sigma_a": 0.25,
+        "gain": 0.9
+      }
+    },
+    "sigma_walk_factor": 0.4,
+    "amplitude_bounds": [
+      -0.85,
+      0.85
+    ],
+    "adsr": {
+      "attack_s": 0.01,
+      "release_s": 0.08
+    },
+    "lowpass_hz": 16000,
+    "peak": 0.89
+  },
+  "outputs": {
+    "full_mix_wav": "/opt/data/projects/Styles/Production/SP035-gendyn-markov-chorale/Audio/058-markov-chorale-gendyn-v2.wav",
+    "full_mix_ogg": "/opt/data/projects/Styles/Production/SP035-gendyn-markov-chorale/Audio/058-markov-chorale-gendyn-v2.ogg"
+  },
+  "verification": {
+    "notes_parsed": 32,
+    "notes_synthesized": 32,
+    "duration_sec": 9.0,
+    "silence_ratio": 0.1169,
+    "rms_per_second": [
+      0.15484,
+      0.1793,
+      0.20487,
+      0.2164,
+      0.19262,
+      0.19194,
+      0.22773,
+      0.22791,
+      0.0
+    ],
+    "pitch_frames_detected": 16
+  }
+}

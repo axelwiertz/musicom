@@ -1,0 +1,160 @@
+{
+  "style": "IndianClassical",
+  "subgenre": "",
+  "pitch": {
+    "scale": "Chromatic",
+    "intervals": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "pitch_classes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "per_track_scale": "In Scale",
+    "per_track_scale_distribution": {
+      "Major/Ionian": 1,
+      "In Scale": 3,
+      "Phrygian": 1,
+      "Mixolydian": 1,
+      "Dorian": 1,
+      "Pelog (approx)": 1
+    }
+  },
+  "rhythm": {
+    "metrical_gravity": [
+      1.0,
+      0,
+      0.5,
+      0
+    ],
+    "tempo_range": [
+      89.9999550000225,
+      109.99990833340972
+    ],
+    "time_signatures": [
+      "4/4"
+    ],
+    "description": ""
+  },
+  "timbre": {
+    "instrumentation": [
+      "Track 1",
+      "Track 2",
+      "Track 3"
+    ]
+  },
+  "patterns": [
+    {
+      "project": "018-hindustani-bhairavi",
+      "midi": "/opt/data/projects/Styles/IndianClassical/018-hindustani-bhairavi/MIDI/bhairavi_live_render.mid",
+      "source": "/opt/data/projects/Styles/IndianClassical/018-hindustani-bhairavi/src/live_composer.py",
+      "scale": "Chromatic",
+      "pitch_classes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "tempo": 94.99999208333399,
+      "time_sig": null
+    },
+    {
+      "project": "024-ahir-bhairav-teental-showcase",
+      "midi": "/opt/data/projects/Styles/IndianClassical/024-ahir-bhairav-teental-showcase/MIDI/ahir_bhairav_v1.mid",
+      "source": "/opt/data/projects/Styles/IndianClassical/024-ahir-bhairav-teental-showcase/src/regen.py",
+      "scale": "Chromatic",
+      "pitch_classes": [
+        0,
+        1,
+        4,
+        5,
+        7,
+        9,
+        10
+      ],
+      "tempo": 109.99990833340972,
+      "time_sig": "4/4"
+    },
+    {
+      "project": "hindustani-daily-2026-06-16",
+      "midi": "/opt/data/projects/Styles/IndianClassical/hindustani-daily-2026-06-16/composition.mid",
+      "source": "/opt/data/projects/Styles/IndianClassical/hindustani-daily-2026-06-16/src/regen.py",
+      "scale": "Chromatic",
+      "pitch_classes": [
+        0,
+        1,
+        2,
+        3,
+        5,
+        7,
+        9,
+        10
+      ],
+      "tempo": 89.9999550000225,
+      "time_sig": null
+    }
+  ],
+  "validated": true,
+  "validation": {
+    "12tet": {
+      "valid": true,
+      "pitch_classes_used": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "count": 12,
+      "issues": []
+    },
+    "metrical_gravity": {
+      "valid": true,
+      "length": 4,
+      "strong_beat_count": 1,
+      "profile": [
+        1.0,
+        0,
+        0.5,
+        0
+      ],
+      "issues": []
+    }
+  }
+}

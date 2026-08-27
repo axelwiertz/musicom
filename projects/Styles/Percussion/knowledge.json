@@ -1,0 +1,47 @@
+{
+  "style": "Percussion",
+  "sub_styles": [
+    {
+      "name": "015-percussion-percussion-dna",
+      "scale": "Dorian",
+      "pitch_classes": [
+        0,
+        2,
+        5,
+        7,
+        9,
+        10
+      ]
+    }
+  ],
+  "pitch": {
+    "scale": "Dorian",
+    "intervals": [
+      2,
+      3,
+      2,
+      2,
+      1,
+      2
+    ],
+    "common_pitch_classes": [
+      0,
+      2,
+      5,
+      7,
+      9,
+      10
+    ],
+    "total_pitch_classes": 6
+  },
+  "rhythm": {
+    "patterns_analyzed": 1,
+    "metrical_gravity_verified": true,
+    "description": ""
+  },
+  "validation": {
+    "12tet_pass": true,
+    "metrical_gravity_pass": true
+  },
+  "last_updated": "2026-06-24T04:00:00Z"
+}

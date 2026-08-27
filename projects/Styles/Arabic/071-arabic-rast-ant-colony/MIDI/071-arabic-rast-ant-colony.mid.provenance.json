@@ -1,0 +1,22 @@
+{
+  "artifact": "071-arabic-rast-ant-colony.mid",
+  "classification": "ai-generated",
+  "generator": "musicom.method041.ant_colony_phase2",
+  "sources": [
+    "methods_db.md:Method 041 ACOPF"
+  ],
+  "parameters": {
+    "bpm": 100,
+    "bars": 16,
+    "seed": 20260817,
+    "phase": 2,
+    "maqam": "Rast",
+    "rhythm": "Maqsum 3+3+2",
+    "quantized": true
+  },
+  "notes": "Rules post-process: Rast quantization, section harmony, voice-leading fix, zero-drift cells.",
+  "sha256": "bf85ea15b0757389b213da35215c03972ee34a829934955eb106fe402ea23c28",
+  "bytes": 4583,
+  "created_utc": "2026-08-17T23:12:36.993207+00:00",
+  "provenance_version": "1.0"
+}

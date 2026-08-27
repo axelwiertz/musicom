@@ -1,0 +1,21 @@
+{
+  "midi": "/opt/data/projects/Styles/Experimental/058-markov-chorale/MIDI/058-markov-chorale.mid",
+  "method": "SP-003",
+  "method_name": "Modal Physical Modeling (Plate/Bar)",
+  "voice_presets": {
+    "0": "marimba_bar",
+    "2": "glass_bar",
+    "1": "rectangular_plate"
+  },
+  "tempo_bpm": 89.9999550000225,
+  "track_means": [
+    66.8,
+    51.0,
+    66.7
+  ],
+  "n_notes": 32,
+  "duration_s": 12.0,
+  "silence_ratio": 0.115,
+  "wav_bytes": 2116844,
+  "ogg_bytes": 84387
+}

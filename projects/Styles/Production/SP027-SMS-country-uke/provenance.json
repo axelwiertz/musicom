@@ -1,0 +1,32 @@
+{
+  "job": "production-9a2813f77dac",
+  "source_midi": "/opt/data/projects/Styles/Country/012-country-country-uke/MIDI/country_uke.mid",
+  "source_midi_sha256": "0f77f155c97e9942e8feda190f8847502bdd831b59dde5456744be864f2ffc62",
+  "production_method": "SP-027",
+  "production_method_name": "Spectral Modeling Synthesis (Friction-Induced Waveguide-adjacent hybrid: deterministic/stochastic decomposition + transformation)",
+  "transformation": {
+    "deterministic_pitch_shift_semitones": 3.0,
+    "stochastic_gain_db": 3.0,
+    "description": "SMS decomposed the source into a deterministic (harmonic sinusoidal) component and a stochastic (residual noise) component. The harmonic component was pitch-shifted up +3 semitones (brightening the uke) while the stochastic envelope was preserved. Stochastic energy was lifted +3 dB for a livelier room character. Components re-mixed and peak-normalized to -1 dBFS."
+  },
+  "sms_parameters": {
+    "N": 2048,
+    "H": 512,
+    "K_max": 60,
+    "min_snr_db": 40.0,
+    "peak_tolerance_hz": 30.0,
+    "tracks_detected": 13918
+  },
+  "render_engine": "FluidSynth 2.5.6 (TimGM6mb.sf2)",
+  "outputs": {
+    "base_wav": "/opt/data/projects/Styles/Production/SP027-SMS-country-uke/country_uke_base.wav",
+    "full_mix_wav": "/opt/data/projects/Styles/Production/SP027-SMS-country-uke/country_uke_SP027_SMS.wav",
+    "full_mix_ogg": "/opt/data/projects/Styles/Production/SP027-SMS-country-uke/country_uke_SP027_SMS.ogg",
+    "deterministic_wav": "/opt/data/projects/Styles/Production/SP027-SMS-country-uke/country_uke_SP027_deterministic.wav",
+    "stochastic_wav": "/opt/data/projects/Styles/Production/SP027-SMS-country-uke/country_uke_SP027_stochastic.wav"
+  },
+  "output_sha256": {
+    "full_mix_wav": "ad11ce58faf5770ea529209a223c4799837ccf3e8134b085fd27740ff772548a",
+    "full_mix_ogg": "9031815c159b6f8b5bb2ed9805855b86771aa855d8a6e935c3519b94cfc5045e"
+  }
+}

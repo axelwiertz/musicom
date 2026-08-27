@@ -1,0 +1,20 @@
+{
+  "source_midi": "/opt/data/projects/Styles/Soul/073-soul-rbmpd/MIDI/073-soul-rbmpd.mid",
+  "production_method": "SP-035",
+  "method_name": "GENDYN Stochastic Breakpoint Synthesis",
+  "parameters": {
+    "density": 12,
+    "amp_variance": 0.7,
+    "time_variance": 0.6,
+    "adsr": {
+      "attack": 0.02,
+      "decay": 0.1,
+      "sustain": 0.6,
+      "release": 0.3
+    }
+  },
+  "output_wav": "/opt/data/projects/Styles/Production/SP035-gendyn-soul-rbmpd/073-soul-rbmpd-gendyn.wav",
+  "output_ogg": "/opt/data/projects/Styles/Production/SP035-gendyn-soul-rbmpd/073-soul-rbmpd-gendyn.ogg",
+  "sample_rate": 48000,
+  "description": "Stochastic breakpoint synthesis: random time-amplitude breakpoints per period, linear interpolation, evolving non-repeating timbres"
+}

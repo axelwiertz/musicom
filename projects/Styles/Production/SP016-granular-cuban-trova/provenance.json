@@ -1,0 +1,11 @@
+{
+  "job": "SP-016 production pass (autonomous cron)",
+  "source_midi": "/opt/data/projects/Styles/Cuban/001-cuban-trova-research/daily-2026-07-01_cuban_001-cuban-trova-research_fixed.mid",
+  "source_midi_sha256": "06925233da6c77a933e70dbac69d5ef2135e35721684d58ac4e3e82197e6d0a9",
+  "production_method": "SP-016",
+  "production_method_name": "Granular Synthesis Engine",
+  "outputs": {
+    "full_mix_wav": "/opt/data/projects/Styles/Production/SP016-granular-cuban-trova/Audio/SP016-granular-cuban-trova.wav",
+    "full_mix_ogg": "/opt/data/projects/Styles/Production/SP016-granular-cuban-trova/Audio/SP016-granular-cuban-trova.ogg"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "artifact": "moonlight-shadow-variant2-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "genetic",
+  "sources": [],
+  "parameters": {
+    "method": "genetic",
+    "seed": 89372,
+    "phase": "1 (pre-rules)"
+  },
+  "notes": "",
+  "sha256": "22ef99006c220bc5e78cd688da5c48b3cf11959d3f2c5c132931961c1b9f7d20",
+  "bytes": 1511,
+  "created_utc": "2026-08-15T17:37:05.772596+00:00",
+  "provenance_version": "1.0"
+}

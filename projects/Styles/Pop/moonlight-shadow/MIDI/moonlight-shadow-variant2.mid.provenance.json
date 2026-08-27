@@ -1,0 +1,43 @@
+{
+  "artifact": "moonlight-shadow-variant2.mid",
+  "classification": "ai-assisted",
+  "generator": "genetic",
+  "sources": {
+    "MEL": "Moonlight_Shadow 2.mid",
+    "FULL": "Moonlight_ShadowMike_Oldfeild 2.mid"
+  },
+  "parameters": {
+    "method": "genetic",
+    "seed": 89372,
+    "bpm": 126,
+    "key": "E major",
+    "form": [
+      [
+        "Intro",
+        4
+      ],
+      [
+        "Verse1",
+        8
+      ],
+      [
+        "Chorus",
+        8
+      ],
+      [
+        "Verse2",
+        8
+      ],
+      [
+        "Outro",
+        4
+      ]
+    ],
+    "phase": "2 (chord-tone quantized)"
+  },
+  "notes": "",
+  "sha256": "44458e8886ada142a8caab24491e83d40501f76e89f685f264484be8398e9a5e",
+  "bytes": 10698,
+  "created_utc": "2026-08-15T17:37:05.767529+00:00",
+  "provenance_version": "1.0"
+}

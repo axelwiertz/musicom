@@ -1,0 +1,41 @@
+{
+  "artifact": "072-world-melisma-phase1.mid",
+  "classification": "ai-generated",
+  "generator": "MarkovConstraintGenerator+M-022 markov-harmony",
+  "sources": [],
+  "parameters": {
+    "bpm": 100,
+    "key": "D dorian",
+    "sections": 5,
+    "bars": 20,
+    "phase": "1",
+    "chord_walk": [
+      "i",
+      "v",
+      "i",
+      "III",
+      "v",
+      "i",
+      "IV",
+      "v",
+      "IV",
+      "v",
+      "i",
+      "III",
+      "v",
+      "i",
+      "III",
+      "IV",
+      "i",
+      "III",
+      "v",
+      "IV"
+    ],
+    "seed": 20260818
+  },
+  "notes": "raw markov melody, unquantized, single voice",
+  "sha256": "82c7384889f1227903c629f069f9f87237914b3d44e373dae64e1c1463c337da",
+  "bytes": 447,
+  "created_utc": "2026-08-18T23:04:17.425050+00:00",
+  "provenance_version": "1.0"
+}

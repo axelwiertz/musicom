@@ -1,0 +1,36 @@
+{
+  "artifact": "068-lsystem-chorale.mid",
+  "classification": "ai-generated",
+  "generator": "Method 019 L-System Algorithmic Composition + musicom rules (chord-tone quantization, voice leading, harmonic progression)",
+  "sources": [
+    "sound/generators/event_core.py",
+    "rules/voice_leading.py",
+    "rules/progression.py",
+    "workflows/unitmatrix_composer.py"
+  ],
+  "parameters": {
+    "method": 19,
+    "phase": 2,
+    "key": "A minor (aeolian)",
+    "bpm": 76,
+    "ticks_per_beat": 480,
+    "beats_per_bar": 4,
+    "sections": 4,
+    "section_bars": 2,
+    "progression_degrees": [
+      0,
+      5,
+      4,
+      0
+    ],
+    "seed": 68,
+    "voice_leading_style": "classical",
+    "two_phase": true,
+    "rules_applied": "chord-tone quantization, diatonic block harmony, voice-leading optimization, Phase 2c inversion-rotation correction"
+  },
+  "notes": "Phase 2: raw L-system symbol-walk pitches quantized to nearest section triad tone (soprano), Alto/Tenor/Bass as diatonic block harmony via Scale7ChordDegree.get_diatonic_note(), voice-leading optimization + Phase 2c inversion-rotation correction of parallel/hidden fifths, harmonic function validation (i-VI-v-i, A minor, closed perfect cadence), zero-drift validated UnitMatrix export.",
+  "sha256": "5884a9a69f6749e6d9ca33c203f6492f1aaff678613dcf1138836766424270a4",
+  "bytes": 1569,
+  "created_utc": "2026-08-14T23:16:06.416045+00:00",
+  "provenance_version": "1.0"
+}

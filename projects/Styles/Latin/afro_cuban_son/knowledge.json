@@ -1,0 +1,49 @@
+{
+  "genre": "Afro-Cuban",
+  "subgenre": "Son Clave",
+  "pitch": {
+    "scale": "Major / Mixolydian",
+    "intervals": [
+      2,
+      2,
+      1,
+      2,
+      2,
+      1,
+      2
+    ],
+    "contour": "Arpeggiated, syncopated melodies"
+  },
+  "rhythm": {
+    "dna": "\u2588\u2591\u2591\u2588\u2591\u2591\u2588\u2591\u2591\u2591\u2588\u2591\u2588\u2591\u2591\u2591",
+    "euclidean": "Clave 3-2",
+    "metrical_gravity": [
+      1.0,
+      0,
+      0,
+      1.0,
+      0,
+      0,
+      1.0,
+      0,
+      0,
+      0,
+      1.0,
+      0,
+      1.0,
+      0,
+      0,
+      0
+    ],
+    "description": "16-step grid, fundamental syncopation pattern"
+  },
+  "timbre": {
+    "instrumentation": [
+      "Claves",
+      "Congas",
+      "Tres Guitar",
+      "Trumpet"
+    ],
+    "calibration": "Dry percussion, sharp transients"
+  }
+}

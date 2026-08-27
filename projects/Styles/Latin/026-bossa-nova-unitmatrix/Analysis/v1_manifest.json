@@ -1,0 +1,58 @@
+{
+  "project": "026-bossa-nova-unitmatrix",
+  "workflow": "UnitMatrix-first",
+  "visualization": "columns=form sections, rows=tracks, cells=separate patterns with mini piano rolls and harmonic/melodic bases",
+  "rows": [
+    "Guitar",
+    "Bass",
+    "Percussion"
+  ],
+  "columns": [
+    "Intro",
+    "A",
+    "B",
+    "A_prime",
+    "Outro"
+  ],
+  "files": {
+    "midi": "/opt/data/projects/Genres/Latin/026-bossa-nova-unitmatrix/MIDI/v1_bossa_nova_unitmatrix.mid",
+    "musicxml": "/opt/data/projects/Genres/Latin/026-bossa-nova-unitmatrix/Scores/v1_bossa_nova_unitmatrix.musicxml",
+    "flat_io_score_id": "6a29be924f4787e16bad4026",
+    "wav": "/opt/data/projects/Genres/Latin/026-bossa-nova-unitmatrix/Renders/v1_bossa_nova_unitmatrix.wav",
+    "ogg": "/opt/data/projects/Genres/Latin/026-bossa-nova-unitmatrix/Audio/v1_bossa_nova_unitmatrix.ogg"
+  },
+  "tempo_bpm": 80,
+  "meter": "4/4",
+  "sections": [
+    [
+      "Intro",
+      4
+    ],
+    [
+      "A",
+      12
+    ],
+    [
+      "B",
+      8
+    ],
+    [
+      "A_prime",
+      12
+    ],
+    [
+      "Outro",
+      4
+    ]
+  ],
+  "verification": {
+    "note_on": 736,
+    "percussion_note_on": 424,
+    "channels": [
+      0,
+      1,
+      9
+    ]
+  },
+  "soundfont": "/usr/share/sounds/sf2/FluidR3_GM.sf2"
+}

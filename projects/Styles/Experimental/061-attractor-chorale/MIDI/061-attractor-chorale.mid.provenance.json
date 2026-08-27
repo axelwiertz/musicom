@@ -1,0 +1,156 @@
+{
+  "artifact": "061-attractor-chorale.mid",
+  "classification": "ai-generated",
+  "generator": "Strange Attractor Trajectory Mapping (Lorenz, RK4) -- Method 043",
+  "sources": [
+    "Research/CompositionMethods/method_043_satm.md",
+    "rules/voice_leading.py:VoiceLeadingRules",
+    "rules/progression.py:Scale7ChordDegree",
+    "utilities/constants.py:SCALE_PATTERNS"
+  ],
+  "parameters": {
+    "bpm": 92,
+    "key": "E dorian",
+    "progression": [
+      "i",
+      "ii",
+      "IV",
+      "VI",
+      "i",
+      "ii",
+      "IV",
+      "i"
+    ],
+    "chord_degrees": [
+      1,
+      2,
+      4,
+      6,
+      1,
+      2,
+      4,
+      1
+    ],
+    "attractor": {
+      "system": "Lorenz",
+      "sigma": 10.0,
+      "rho": 28.0,
+      "beta": 2.6666666666666665,
+      "integrator": "RK4",
+      "h": 0.01,
+      "transient_discard": 2000
+    },
+    "coordinate_mapping": {
+      "Soprano": "z",
+      "Alto": "x",
+      "Tenor": "y",
+      "Bass": "z-24"
+    },
+    "rhythm": {
+      "grid": "eighth notes",
+      "threshold": 0.3,
+      "density_floor": 3,
+      "anchors": [
+        "downbeat",
+        "bar-end"
+      ],
+      "masks": [
+        [
+          1,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        [
+          1,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ]
+    },
+    "seed": 2201,
+    "voices": [
+      "Soprano",
+      "Alto",
+      "Tenor",
+      "Bass"
+    ],
+    "bars": 8,
+    "voice_leading_fixes": 7,
+    "residual_violations": 0
+  },
+  "notes": "Two-phase architecture: Lorenz strange attractor trajectory (RK4) -> raw pitch contours + speed-triggered rhythm (Phase 1); chord-tone quantization + classical voice leading rules (Phase 2).",
+  "sha256": "336cea01fc8f28112c45127a597466686ac26bf34d5272a93e7f29ee45b7d9eb",
+  "bytes": 1573,
+  "created_utc": "2026-08-08T23:16:28.958883+00:00",
+  "provenance_version": "1.0"
+}

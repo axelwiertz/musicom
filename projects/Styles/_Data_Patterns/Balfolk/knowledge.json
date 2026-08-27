@@ -1,0 +1,184 @@
+{
+  "style": "Balfolk",
+  "subgenre": "",
+  "pitch": {
+    "scale": "Major/Ionian",
+    "intervals": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      2,
+      1
+    ],
+    "pitch_classes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      11
+    ],
+    "per_track_scale": "Major/Ionian",
+    "per_track_scale_distribution": {
+      "Major/Ionian": 5,
+      "Lydian": 2,
+      "In Scale": 5
+    }
+  },
+  "rhythm": {
+    "metrical_gravity": [
+      1.0,
+      0,
+      0.5,
+      0
+    ],
+    "tempo_range": [
+      109.99990833340972,
+      142.4998753126091
+    ],
+    "time_signatures": [
+      "4/4",
+      "6/8"
+    ],
+    "description": ""
+  },
+  "timbre": {
+    "instrumentation": [
+      "Track 1",
+      "Track 2",
+      "Track 3",
+      "Track 4"
+    ]
+  },
+  "patterns": [
+    {
+      "project": "005-balfolk-production",
+      "midi": "/opt/data/projects/Styles/Balfolk/005-balfolk-production/audio/VoiceAudio.mid",
+      "source": "/opt/data/projects/Styles/Balfolk/005-balfolk-production/src/generator.py",
+      "scale": "Chromatic",
+      "pitch_classes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        7,
+        8,
+        9,
+        11
+      ],
+      "tempo": 120.0,
+      "time_sig": "4/4"
+    },
+    {
+      "project": "011-balfolk-dust-on-the-dashboard",
+      "midi": "/opt/data/projects/Styles/Balfolk/011-balfolk-dust-on-the-dashboard/MIDI/composition.mid",
+      "source": "/opt/data/projects/Styles/Balfolk/011-balfolk-dust-on-the-dashboard/src/regen.py",
+      "scale": "Lydian",
+      "pitch_classes": [
+        0,
+        2,
+        4,
+        6,
+        7,
+        9,
+        11
+      ],
+      "tempo": 109.99990833340972,
+      "time_sig": "4/4"
+    },
+    {
+      "project": "014-balfolk-cinematic",
+      "midi": "/opt/data/projects/Styles/Balfolk/014-balfolk-cinematic/Audio/balfolk_cinematic_v1.mid",
+      "source": "/opt/data/projects/Styles/Balfolk/014-balfolk-cinematic/src/regen.py",
+      "scale": "Major/Ionian",
+      "pitch_classes": [
+        2,
+        4,
+        5,
+        7,
+        9
+      ],
+      "tempo": 120.0,
+      "time_sig": "4/4"
+    },
+    {
+      "project": "017-hybrid-pattern-matrix",
+      "midi": "/opt/data/projects/Styles/Balfolk/017-hybrid-pattern-matrix/MIDI/exercise1a_balfolk_dorian_jig.mid",
+      "source": "/opt/data/projects/Styles/Balfolk/017-hybrid-pattern-matrix/Scripts/generate_exercise1.py",
+      "scale": "Major/Ionian",
+      "pitch_classes": [
+        0,
+        2,
+        4,
+        5,
+        7,
+        9,
+        11
+      ],
+      "tempo": 142.4998753126091,
+      "time_sig": "6/8"
+    },
+    {
+      "project": "030-balfolk-grand-suite",
+      "midi": "/opt/data/projects/Styles/Balfolk/030-balfolk-grand-suite/MIDI/grand_suite.mid",
+      "source": "/opt/data/projects/Styles/Balfolk/030-balfolk-grand-suite/src/extended_midi.py",
+      "scale": "Major/Ionian",
+      "pitch_classes": [
+        0,
+        2,
+        4,
+        5,
+        7,
+        9,
+        11
+      ],
+      "tempo": 117.99990166674861,
+      "time_sig": null
+    }
+  ],
+  "validated": true,
+  "validation": {
+    "12tet": {
+      "valid": true,
+      "pitch_classes_used": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        11
+      ],
+      "count": 11,
+      "issues": []
+    },
+    "metrical_gravity": {
+      "valid": true,
+      "length": 4,
+      "strong_beat_count": 1,
+      "profile": [
+        1.0,
+        0,
+        0.5,
+        0
+      ],
+      "issues": []
+    }
+  }
+}

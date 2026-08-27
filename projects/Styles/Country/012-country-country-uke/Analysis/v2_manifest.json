@@ -1,0 +1,1557 @@
+{
+  "project": "012-country-country-uke",
+  "workflow": "UnitMatrix-first",
+  "settings": {
+    "genre": "Country",
+    "subgenre": "Country-pop road song",
+    "tempo_bpm": 96,
+    "meter": "4/4",
+    "key": "G major",
+    "total_bars": 48,
+    "sections": [
+      {
+        "name": "Intro",
+        "kind": "intro",
+        "bars": 4,
+        "chords": [
+          "G",
+          "D",
+          "Em",
+          "C"
+        ]
+      },
+      {
+        "name": "Verse 1",
+        "kind": "verse",
+        "bars": 8,
+        "chords": [
+          "G",
+          "D",
+          "Em",
+          "C",
+          "G",
+          "D",
+          "C",
+          "D"
+        ]
+      },
+      {
+        "name": "Chorus 1",
+        "kind": "chorus",
+        "bars": 8,
+        "chords": [
+          "G",
+          "D",
+          "Em",
+          "C",
+          "G",
+          "D",
+          "C",
+          "D"
+        ]
+      },
+      {
+        "name": "Verse 2",
+        "kind": "verse",
+        "bars": 8,
+        "chords": [
+          "G",
+          "D",
+          "Em",
+          "C",
+          "G",
+          "D",
+          "C",
+          "D"
+        ]
+      },
+      {
+        "name": "Chorus 2",
+        "kind": "chorus",
+        "bars": 8,
+        "chords": [
+          "G",
+          "D",
+          "Em",
+          "C",
+          "G",
+          "D",
+          "C",
+          "D"
+        ]
+      },
+      {
+        "name": "Bridge",
+        "kind": "bridge",
+        "bars": 4,
+        "chords": [
+          "Em",
+          "C",
+          "G",
+          "D"
+        ]
+      },
+      {
+        "name": "Final Chorus",
+        "kind": "final",
+        "bars": 4,
+        "chords": [
+          "G",
+          "D",
+          "C",
+          "D"
+        ]
+      },
+      {
+        "name": "Outro",
+        "kind": "outro",
+        "bars": 4,
+        "chords": [
+          "G",
+          "C",
+          "G",
+          "G"
+        ]
+      }
+    ],
+    "rows": [
+      "Lead Vocal",
+      "Harmony Vox",
+      "Acoustic Guitar",
+      "Electric Guitar",
+      "Bass",
+      "Drums",
+      "Fiddle",
+      "Pedal Steel"
+    ]
+  },
+  "matrix": [
+    {
+      "name": "Lead Vocal",
+      "kind": "lead",
+      "cells": [
+        {
+          "section": "Intro",
+          "section_kind": "intro",
+          "bars": 4,
+          "base": "Scale: G major | Degrees: 1-2-3-5",
+          "notes": [
+            67,
+            69,
+            71,
+            74
+          ],
+          "beats": [
+            0.0,
+            1.0,
+            2.0,
+            3.0
+          ]
+        },
+        {
+          "section": "Verse 1",
+          "section_kind": "verse",
+          "bars": 8,
+          "base": "Scale: G major | Degrees: 1-2-3-5-3-2-1-2",
+          "notes": [
+            67,
+            69,
+            71,
+            74,
+            71,
+            69,
+            67,
+            69
+          ],
+          "beats": [
+            0.0,
+            0.5,
+            1.0,
+            1.5,
+            2.0,
+            2.5,
+            3.0,
+            3.5
+          ]
+        },
+        {
+          "section": "Chorus 1",
+          "section_kind": "chorus",
+          "bars": 8,
+          "base": "Scale: G major | Degrees: 5-6-1-2-3-2-1",
+          "notes": [
+            74,
+            76,
+            67,
+            69,
+            71,
+            69,
+            67
+          ],
+          "beats": [
+            0.0,
+            0.5,
+            1.0,
+            1.5,
+            2.0,
+            2.5,
+            3.0
+          ]
+        },
+        {
+          "section": "Verse 2",
+          "section_kind": "verse",
+          "bars": 8,
+          "base": "Scale: G major | Degrees: 1-2-3-5-3-2-1-2",
+          "notes": [
+            67,
+            69,
+            71,
+            74,
+            71,
+            69,
+            67,
+            69
+          ],
+          "beats": [
+            0.0,
+            0.5,
+            1.0,
+            1.5,
+            2.0,
+            2.5,
+            3.0,
+            3.5
+          ]
+        },
+        {
+          "section": "Chorus 2",
+          "section_kind": "chorus",
+          "bars": 8,
+          "base": "Scale: G major | Degrees: 5-6-1-2-3-2-1",
+          "notes": [
+            74,
+            76,
+            67,
+            69,
+            71,
+            69,
+            67
+          ],
+          "beats": [
+            0.0,
+            0.5,
+            1.0,
+            1.5,
+            2.0,
+            2.5,
+            3.0
+          ]
+        },
+        {
+          "section": "Bridge",
+          "section_kind": "bridge",
+          "bars": 4,
+          "base": "Scale: E minor / G major | Degrees: 6-5-3-2",
+          "notes": [
+            76,
+            74,
+            71,
+            69
+          ],
+          "beats": [
+            0.0,
+            1.0,
+            2.0,
+            3.0
+          ]
+        },
+        {
+          "section": "Final Chorus",
+          "section_kind": "final",
+          "bars": 4,
+          "base": "Scale: G major | Degrees: 5-6-1-2-3-5",
+          "notes": [
+            74,
+            76,
+            67,
+            69,
+            71,
+            74
+          ],
+          "beats": [
+            0.0,
+            0.5,
+            1.0,
+            1.5,
+            2.5,
+            3.0
+          ]
+        },
+        {
+          "section": "Outro",
+          "section_kind": "outro",
+          "bars": 4,
+          "base": "Scale: G major | Degrees: 1-5-1",
+          "notes": [
+            67,
+            74,
+            67
+          ],
+          "beats": [
+            0.0,
+            1.5,
+            3.0
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Harmony Vox",
+      "kind": "harmony",
+      "cells": [
+        {
+          "section": "Intro",
+          "section_kind": "intro",
+          "bars": 4,
+          "base": "Scale: G major | Degrees: 3-5-6",
+          "notes": [
+            71,
+            74,
+            76
+          ],
+          "beats": [
+            0.0,
+            1.5,
+            3.0
+          ]
+        },
+        {
+          "section": "Verse 1",
+          "section_kind": "verse",
+          "bars": 8,
+          "base": "Scale: G major | Degrees: 3-2-1-2",
+          "notes": [
+            71,
+            69,
+            67,
+            69
+          ],
+          "beats": [
+            0.0,
+            1.0,
+            2.0,
+            3.0
+          ]
+        },
+        {
+          "section": "Chorus 1",
+          "section_kind": "chorus",
+          "bars": 8,
+          "base": "Scale: G major | Degrees: 6-5-3-2",
+          "notes": [
+            76,
+            74,
+            71,
+            69
+          ],
+          "beats": [
+            0.0,
+            1.0,
+            2.0,
+            3.0
+          ]
+        },
+        {
+          "section": "Verse 2",
+          "section_kind": "verse",
+          "bars": 8,
+          "base": "Scale: G major | Degrees: 3-2-1-2",
+          "notes": [
+            71,
+            69,
+            67,
+            69
+          ],
+          "beats": [
+            0.0,
+            1.0,
+            2.0,
+            3.0
+          ]
+        },
+        {
+          "section": "Chorus 2",
+          "section_kind": "chorus",
+          "bars": 8,
+          "base": "Scale: G major | Degrees: 6-5-3-2",
+          "notes": [
+            76,
+            74,
+            71,
+            69
+          ],
+          "beats": [
+            0.0,
+            1.0,
+            2.0,
+            3.0
+          ]
+        },
+        {
+          "section": "Bridge",
+          "section_kind": "bridge",
+          "bars": 4,
+          "base": "Scale: G major | Degrees: 5-3-2-1",
+          "notes": [
+            74,
+            71,
+            69,
+            67
+          ],
+          "beats": [
+            0.0,
+            1.0,
+            2.0,
+            3.0
+          ]
+        },
+        {
+          "section": "Final Chorus",
+          "section_kind": "final",
+          "bars": 4,
+          "base": "Scale: G major | Degrees: 3-5-6-5",
+          "notes": [
+            71,
+            74,
+            76,
+            74
+          ],
+          "beats": [
+            0.0,
+            1.0,
+            2.0,
+            3.0
+          ]
+        },
+        {
+          "section": "Outro",
+          "section_kind": "outro",
+          "bars": 4,
+          "base": "Scale: G major | Degrees: 3-2-1",
+          "notes": [
+            71,
+            69,
+            67
+          ],
+          "beats": [
+            0.0,
+            1.5,
+            3.0
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Acoustic Guitar",
+      "kind": "acoustic",
+      "cells": [
+        {
+          "section": "Intro",
+          "section_kind": "intro",
+          "bars": 4,
+          "base": "Chord grid: G | D | Em | C | strum on 1 + 3",
+          "notes": [
+            55,
+            59,
+            62,
+            50,
+            54,
+            57,
+            52,
+            55,
+            59,
+            48,
+            52,
+            55
+          ],
+          "beats": [
+            0.0,
+            0.0,
+            0.0,
+            2.0,
+            2.0,
+            2.0,
+            0.0,
+            0.0,
+            0.0,
+            2.0,
+            2.0,
+            2.0
+          ]
+        },
+        {
+          "section": "Verse 1",
+          "section_kind": "verse",
+          "bars": 8,
+          "base": "Chord grid: G | D | Em | C | G | D | C | D | strum on 1 + 3",
+          "notes": [
+            55,
+            59,
+            62,
+            50,
+            54,
+            57,
+            52,
+            55,
+            59,
+            48,
+            52,
+            55
+          ],
+          "beats": [
+            0.0,
+            0.0,
+            0.0,
+            2.0,
+            2.0,
+            2.0,
+            0.0,
+            0.0,
+            0.0,
+            2.0,
+            2.0,
+            2.0
+          ]
+        },
+        {
+          "section": "Chorus 1",
+          "section_kind": "chorus",
+          "bars": 8,
+          "base": "Chord grid: G | D | Em | C | lift with open voicings",
+          "notes": [
+            55,
+            59,
+            62,
+            50,
+            54,
+            57,
+            52,
+            55,
+            59,
+            48,
+            52,
+            55
+          ],
+          "beats": [
+            0.0,
+            0.0,
+            0.0,
+            2.0,
+            2.0,
+            2.0,
+            0.0,
+            0.0,
+            0.0,
+            2.0,
+            2.0,
+            2.0
+          ]
+        },
+        {
+          "section": "Verse 2",
+          "section_kind": "verse",
+          "bars": 8,
+          "base": "Chord grid: G | D | Em | C | G | D | C | D | strum on 1 + 3",
+          "notes": [
+            55,
+            59,
+            62,
+            50,
+            54,
+            57,
+            52,
+            55,
+            59,
+            48,
+            52,
+            55
+          ],
+          "beats": [
+            0.0,
+            0.0,
+            0.0,
+            2.0,
+            2.0,
+            2.0,
+            0.0,
+            0.0,
+            0.0,
+            2.0,
+            2.0,
+            2.0
+          ]
+        },
+        {
+          "section": "Chorus 2",
+          "section_kind": "chorus",
+          "bars": 8,
+          "base": "Chord grid: G | D | Em | C | lift with open voicings",
+          "notes": [
+            55,
+            59,
+            62,
+            50,
+            54,
+            57,
+            52,
+            55,
+            59,
+            48,
+            52,
+            55
+          ],
+          "beats": [
+            0.0,
+            0.0,
+            0.0,
+            2.0,
+            2.0,
+            2.0,
+            0.0,
+            0.0,
+            0.0,
+            2.0,
+            2.0,
+            2.0
+          ]
+        },
+        {
+          "section": "Bridge",
+          "section_kind": "bridge",
+          "bars": 4,
+          "base": "Chord grid: Em | C | G | D | drop to lighter strum",
+          "notes": [
+            52,
+            55,
+            59,
+            48,
+            52,
+            55,
+            55,
+            59,
+            62,
+            50,
+            54,
+            57
+          ],
+          "beats": [
+            0.0,
+            0.0,
+            0.0,
+            2.0,
+            2.0,
+            2.0,
+            0.0,
+            0.0,
+            0.0,
+            2.0,
+            2.0,
+            2.0
+          ]
+        },
+        {
+          "section": "Final Chorus",
+          "section_kind": "final",
+          "bars": 4,
+          "base": "Chord grid: G | D | C | D | tag ending",
+          "notes": [
+            55,
+            59,
+            62,
+            50,
+            54,
+            57,
+            48,
+            52,
+            55,
+            50,
+            54,
+            57
+          ],
+          "beats": [
+            0.0,
+            0.0,
+            0.0,
+            2.0,
+            2.0,
+            2.0,
+            0.0,
+            0.0,
+            0.0,
+            2.0,
+            2.0,
+            2.0
+          ]
+        },
+        {
+          "section": "Outro",
+          "section_kind": "outro",
+          "bars": 4,
+          "base": "Chord grid: G | C | G | G | fade out",
+          "notes": [
+            55,
+            59,
+            62,
+            48,
+            52,
+            55
+          ],
+          "beats": [
+            0.0,
+            0.0,
+            0.0,
+            2.0,
+            2.0,
+            2.0
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Electric Guitar",
+      "kind": "electric",
+      "cells": [
+        {
+          "section": "Intro",
+          "section_kind": "intro",
+          "bars": 4,
+          "base": "Scale: G major pentatonic | Degrees: 5-6-1-2",
+          "notes": [
+            74,
+            76,
+            67,
+            69
+          ],
+          "beats": [
+            0.5,
+            1.5,
+            2.5,
+            3.5
+          ]
+        },
+        {
+          "section": "Verse 1",
+          "section_kind": "verse",
+          "bars": 8,
+          "base": "Scale: G major pentatonic | Degrees: 5-6-1-2-3",
+          "notes": [
+            74,
+            76,
+            67,
+            69,
+            71
+          ],
+          "beats": [
+            0.5,
+            1.25,
+            2.0,
+            2.75,
+            3.5
+          ]
+        },
+        {
+          "section": "Chorus 1",
+          "section_kind": "chorus",
+          "bars": 8,
+          "base": "Scale: G major pentatonic | Degrees: 3-5-6-5-3",
+          "notes": [
+            71,
+            74,
+            76,
+            74,
+            71
+          ],
+          "beats": [
+            0.25,
+            1.0,
+            1.75,
+            2.5,
+            3.25
+          ]
+        },
+        {
+          "section": "Verse 2",
+          "section_kind": "verse",
+          "bars": 8,
+          "base": "Scale: G major pentatonic | Degrees: 5-6-1-2-3",
+          "notes": [
+            74,
+            76,
+            67,
+            69,
+            71
+          ],
+          "beats": [
+            0.5,
+            1.25,
+            2.0,
+            2.75,
+            3.5
+          ]
+        },
+        {
+          "section": "Chorus 2",
+          "section_kind": "chorus",
+          "bars": 8,
+          "base": "Scale: G major pentatonic | Degrees: 3-5-6-5-3",
+          "notes": [
+            71,
+            74,
+            76,
+            74,
+            71
+          ],
+          "beats": [
+            0.25,
+            1.0,
+            1.75,
+            2.5,
+            3.25
+          ]
+        },
+        {
+          "section": "Bridge",
+          "section_kind": "bridge",
+          "bars": 4,
+          "base": "Scale: G major pentatonic | Degrees: 2-3-5-6",
+          "notes": [
+            69,
+            71,
+            74,
+            76
+          ],
+          "beats": [
+            0.5,
+            1.5,
+            2.5,
+            3.5
+          ]
+        },
+        {
+          "section": "Final Chorus",
+          "section_kind": "final",
+          "bars": 4,
+          "base": "Scale: G major pentatonic | Degrees: 5-6-1-2-3 | turnaround",
+          "notes": [
+            74,
+            76,
+            67,
+            69,
+            71
+          ],
+          "beats": [
+            0.25,
+            1.0,
+            1.75,
+            2.5,
+            3.25
+          ]
+        },
+        {
+          "section": "Outro",
+          "section_kind": "outro",
+          "bars": 4,
+          "base": "Scale: G major pentatonic | Degrees: 1-5-1",
+          "notes": [
+            67,
+            74,
+            67
+          ],
+          "beats": [
+            0.5,
+            2.0,
+            3.5
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Bass",
+      "kind": "bass",
+      "cells": [
+        {
+          "section": "Intro",
+          "section_kind": "intro",
+          "bars": 4,
+          "base": "Chord roots + fifths | G-D-Em-C",
+          "notes": [
+            43,
+            50,
+            45,
+            52
+          ],
+          "beats": [
+            0.0,
+            2.0,
+            0.0,
+            2.0
+          ]
+        },
+        {
+          "section": "Verse 1",
+          "section_kind": "verse",
+          "bars": 8,
+          "base": "Chord roots + fifths | walking country pulse",
+          "notes": [
+            43,
+            50,
+            45,
+            48
+          ],
+          "beats": [
+            0.0,
+            2.0,
+            0.0,
+            2.0
+          ]
+        },
+        {
+          "section": "Chorus 1",
+          "section_kind": "chorus",
+          "bars": 8,
+          "base": "Chord roots + fifths | push into chorus",
+          "notes": [
+            43,
+            50,
+            45,
+            48
+          ],
+          "beats": [
+            0.0,
+            2.0,
+            0.0,
+            2.0
+          ]
+        },
+        {
+          "section": "Verse 2",
+          "section_kind": "verse",
+          "bars": 8,
+          "base": "Chord roots + fifths | walking country pulse",
+          "notes": [
+            43,
+            50,
+            45,
+            48
+          ],
+          "beats": [
+            0.0,
+            2.0,
+            0.0,
+            2.0
+          ]
+        },
+        {
+          "section": "Chorus 2",
+          "section_kind": "chorus",
+          "bars": 8,
+          "base": "Chord roots + fifths | push into chorus",
+          "notes": [
+            43,
+            50,
+            45,
+            48
+          ],
+          "beats": [
+            0.0,
+            2.0,
+            0.0,
+            2.0
+          ]
+        },
+        {
+          "section": "Bridge",
+          "section_kind": "bridge",
+          "bars": 4,
+          "base": "Chord roots + fifths | lower lift",
+          "notes": [
+            45,
+            48,
+            43,
+            50
+          ],
+          "beats": [
+            0.0,
+            2.0,
+            0.0,
+            2.0
+          ]
+        },
+        {
+          "section": "Final Chorus",
+          "section_kind": "final",
+          "bars": 4,
+          "base": "Chord roots + fifths | tag ending",
+          "notes": [
+            43,
+            50,
+            48,
+            50
+          ],
+          "beats": [
+            0.0,
+            2.0,
+            0.0,
+            2.0
+          ]
+        },
+        {
+          "section": "Outro",
+          "section_kind": "outro",
+          "bars": 4,
+          "base": "Chord roots + fifths | fade",
+          "notes": [
+            43,
+            48,
+            43,
+            43
+          ],
+          "beats": [
+            0.0,
+            2.0,
+            0.0,
+            2.0
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Drums",
+      "kind": "drums",
+      "cells": [
+        {
+          "section": "Intro",
+          "section_kind": "intro",
+          "bars": 4,
+          "base": "Subset: country kit | kick + snare + hat",
+          "notes": [
+            36,
+            42,
+            38,
+            42,
+            36,
+            42,
+            38,
+            42
+          ],
+          "beats": [
+            0.0,
+            0.0,
+            1.0,
+            1.5,
+            2.0,
+            2.0,
+            3.0,
+            3.5
+          ]
+        },
+        {
+          "section": "Verse 1",
+          "section_kind": "verse",
+          "bars": 8,
+          "base": "Subset: country kit | kick on 1/3, snare on 2/4, hat eighths",
+          "notes": [
+            36,
+            42,
+            42,
+            38,
+            42,
+            42,
+            36,
+            42
+          ],
+          "beats": [
+            0.0,
+            0.5,
+            1.0,
+            1.5,
+            2.0,
+            2.5,
+            3.0,
+            3.5
+          ]
+        },
+        {
+          "section": "Chorus 1",
+          "section_kind": "chorus",
+          "bars": 8,
+          "base": "Subset: country kit | bigger backbeat + open hat",
+          "notes": [
+            36,
+            42,
+            46,
+            38,
+            42,
+            46,
+            36,
+            42
+          ],
+          "beats": [
+            0.0,
+            0.5,
+            1.0,
+            1.5,
+            2.0,
+            2.5,
+            3.0,
+            3.5
+          ]
+        },
+        {
+          "section": "Verse 2",
+          "section_kind": "verse",
+          "bars": 8,
+          "base": "Subset: country kit | kick on 1/3, snare on 2/4, hat eighths",
+          "notes": [
+            36,
+            42,
+            42,
+            38,
+            42,
+            42,
+            36,
+            42
+          ],
+          "beats": [
+            0.0,
+            0.5,
+            1.0,
+            1.5,
+            2.0,
+            2.5,
+            3.0,
+            3.5
+          ]
+        },
+        {
+          "section": "Chorus 2",
+          "section_kind": "chorus",
+          "bars": 8,
+          "base": "Subset: country kit | bigger backbeat + open hat",
+          "notes": [
+            36,
+            42,
+            46,
+            38,
+            42,
+            46,
+            36,
+            42
+          ],
+          "beats": [
+            0.0,
+            0.5,
+            1.0,
+            1.5,
+            2.0,
+            2.5,
+            3.0,
+            3.5
+          ]
+        },
+        {
+          "section": "Bridge",
+          "section_kind": "bridge",
+          "bars": 4,
+          "base": "Subset: country kit | pull back to half-time",
+          "notes": [
+            36,
+            42,
+            36,
+            42
+          ],
+          "beats": [
+            0.0,
+            1.0,
+            2.0,
+            3.0
+          ]
+        },
+        {
+          "section": "Final Chorus",
+          "section_kind": "final",
+          "bars": 4,
+          "base": "Subset: country kit | fill into ending",
+          "notes": [
+            36,
+            42,
+            46,
+            38,
+            42,
+            46,
+            36,
+            42
+          ],
+          "beats": [
+            0.0,
+            0.5,
+            1.0,
+            1.5,
+            2.0,
+            2.5,
+            3.0,
+            3.5
+          ]
+        },
+        {
+          "section": "Outro",
+          "section_kind": "outro",
+          "bars": 4,
+          "base": "Subset: country kit | taper",
+          "notes": [
+            36,
+            42,
+            38,
+            42
+          ],
+          "beats": [
+            0.0,
+            1.0,
+            2.0,
+            3.0
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Fiddle",
+      "kind": "fiddle",
+      "cells": [
+        {
+          "section": "Intro",
+          "section_kind": "intro",
+          "bars": 4,
+          "base": "Scale: G major | Degrees: 3-5-6-5",
+          "notes": [
+            71,
+            74,
+            76,
+            74
+          ],
+          "beats": [
+            0.0,
+            1.0,
+            2.0,
+            3.0
+          ]
+        },
+        {
+          "section": "Verse 1",
+          "section_kind": "verse",
+          "bars": 8,
+          "base": "Scale: G major | Degrees: 5-6-1-2-3",
+          "notes": [
+            74,
+            76,
+            67,
+            69,
+            71
+          ],
+          "beats": [
+            0.0,
+            0.75,
+            1.5,
+            2.25,
+            3.0
+          ]
+        },
+        {
+          "section": "Chorus 1",
+          "section_kind": "chorus",
+          "bars": 8,
+          "base": "Scale: G major | Degrees: 6-5-3-2-1",
+          "notes": [
+            76,
+            74,
+            71,
+            69,
+            67
+          ],
+          "beats": [
+            0.0,
+            0.75,
+            1.5,
+            2.25,
+            3.0
+          ]
+        },
+        {
+          "section": "Verse 2",
+          "section_kind": "verse",
+          "bars": 8,
+          "base": "Scale: G major | Degrees: 5-6-1-2-3",
+          "notes": [
+            74,
+            76,
+            67,
+            69,
+            71
+          ],
+          "beats": [
+            0.0,
+            0.75,
+            1.5,
+            2.25,
+            3.0
+          ]
+        },
+        {
+          "section": "Chorus 2",
+          "section_kind": "chorus",
+          "bars": 8,
+          "base": "Scale: G major | Degrees: 6-5-3-2-1",
+          "notes": [
+            76,
+            74,
+            71,
+            69,
+            67
+          ],
+          "beats": [
+            0.0,
+            0.75,
+            1.5,
+            2.25,
+            3.0
+          ]
+        },
+        {
+          "section": "Bridge",
+          "section_kind": "bridge",
+          "bars": 4,
+          "base": "Scale: E minor / G major | Degrees: 2-3-5-6",
+          "notes": [
+            69,
+            71,
+            74,
+            76
+          ],
+          "beats": [
+            0.0,
+            1.0,
+            2.0,
+            3.0
+          ]
+        },
+        {
+          "section": "Final Chorus",
+          "section_kind": "final",
+          "bars": 4,
+          "base": "Scale: G major | Degrees: 5-6-1-2-3",
+          "notes": [
+            74,
+            76,
+            67,
+            69,
+            71
+          ],
+          "beats": [
+            0.0,
+            0.75,
+            1.5,
+            2.25,
+            3.0
+          ]
+        },
+        {
+          "section": "Outro",
+          "section_kind": "outro",
+          "bars": 4,
+          "base": "Scale: G major | Degrees: 3-2-1",
+          "notes": [
+            71,
+            69,
+            67
+          ],
+          "beats": [
+            0.0,
+            1.5,
+            3.0
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Pedal Steel",
+      "kind": "steel",
+      "cells": [
+        {
+          "section": "Intro",
+          "section_kind": "intro",
+          "bars": 4,
+          "base": "Chord tones + sus4 | G6 add color",
+          "notes": [
+            55,
+            59,
+            62,
+            64
+          ],
+          "beats": [
+            0.0,
+            1.0,
+            2.0,
+            3.0
+          ]
+        },
+        {
+          "section": "Verse 1",
+          "section_kind": "verse",
+          "bars": 8,
+          "base": "Chord tones + sus4 | soft slides",
+          "notes": [
+            55,
+            59,
+            62,
+            60
+          ],
+          "beats": [
+            0.0,
+            1.0,
+            2.0,
+            3.0
+          ]
+        },
+        {
+          "section": "Chorus 1",
+          "section_kind": "chorus",
+          "bars": 8,
+          "base": "Chord tones + sus4 | wider lift",
+          "notes": [
+            55,
+            59,
+            62,
+            64
+          ],
+          "beats": [
+            0.0,
+            1.0,
+            2.0,
+            3.0
+          ]
+        },
+        {
+          "section": "Verse 2",
+          "section_kind": "verse",
+          "bars": 8,
+          "base": "Chord tones + sus4 | soft slides",
+          "notes": [
+            55,
+            59,
+            62,
+            60
+          ],
+          "beats": [
+            0.0,
+            1.0,
+            2.0,
+            3.0
+          ]
+        },
+        {
+          "section": "Chorus 2",
+          "section_kind": "chorus",
+          "bars": 8,
+          "base": "Chord tones + sus4 | wider lift",
+          "notes": [
+            55,
+            59,
+            62,
+            64
+          ],
+          "beats": [
+            0.0,
+            1.0,
+            2.0,
+            3.0
+          ]
+        },
+        {
+          "section": "Bridge",
+          "section_kind": "bridge",
+          "bars": 4,
+          "base": "Chord tones + sus4 | moody sustain",
+          "notes": [
+            52,
+            55,
+            59,
+            62
+          ],
+          "beats": [
+            0.0,
+            1.0,
+            2.0,
+            3.0
+          ]
+        },
+        {
+          "section": "Final Chorus",
+          "section_kind": "final",
+          "bars": 4,
+          "base": "Chord tones + sus4 | tag ending",
+          "notes": [
+            55,
+            59,
+            62,
+            64
+          ],
+          "beats": [
+            0.0,
+            1.0,
+            2.0,
+            3.0
+          ]
+        },
+        {
+          "section": "Outro",
+          "section_kind": "outro",
+          "bars": 4,
+          "base": "Chord tones + sus4 | fade",
+          "notes": [
+            55,
+            59,
+            62
+          ],
+          "beats": [
+            0.0,
+            1.5,
+            3.0
+          ]
+        }
+      ]
+    }
+  ],
+  "files": {
+    "midi": "/opt/data/projects/Genres/Country/012-country-country-uke/MIDI/v2_country_unitmatrix.mid",
+    "musicxml": "/opt/data/projects/Genres/Country/012-country-country-uke/Scores/v2_country_unitmatrix.musicxml",
+    "flat_io_safe_musicxml": "/opt/data/projects/Genres/Country/012-country-country-uke/Scores/v2_country_unitmatrix_flat.musicxml",
+    "flat_io_score_id": "6a29c0bcea370a200ff0388c",
+    "wav": "/opt/data/projects/Genres/Country/012-country-country-uke/Renders/v2_country_unitmatrix.wav",
+    "ogg": "/opt/data/projects/Genres/Country/012-country-country-uke/Audio/v2_country_unitmatrix.ogg"
+  },
+  "verification": {
+    "note_on": 1960,
+    "percussion_note_on": 352,
+    "channels": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      9
+    ]
+  },
+  "soundfont": "/usr/share/sounds/sf2/FluidR3_GM.sf2"
+}

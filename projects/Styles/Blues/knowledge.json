@@ -1,0 +1,93 @@
+{
+  "style": "Blues",
+  "sub_styles": [
+    {
+      "name": "027-delta-blues-shack",
+      "scale": "Chromatic",
+      "pitch_classes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "tempo": 72.00002880001152,
+      "tempo_from_source": 1
+    },
+    {
+      "name": "blues-delta-blues-daily-2026-06-11",
+      "scale": "Dorian",
+      "pitch_classes": []
+    },
+    {
+      "name": "blues_delta",
+      "scale": "Dorian",
+      "pitch_classes": []
+    },
+    {
+      "name": "blues_delta_v2",
+      "scale": "Dorian",
+      "pitch_classes": []
+    },
+    {
+      "name": "blues-delta-daily-2026-06-24",
+      "scale": "Blues Hexatonic",
+      "pitch_classes": [
+        0,
+        3,
+        5,
+        6,
+        7,
+        10
+      ],
+      "tempo": 72.0,
+      "tempo_from_source": 1
+    }
+  ],
+  "pitch": {
+    "scale": "Dorian",
+    "intervals": [
+      1,
+      1,
+      1,
+      1,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "common_pitch_classes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "total_pitch_classes": 11
+  },
+  "rhythm": {
+    "patterns_analyzed": 4,
+    "metrical_gravity_verified": true,
+    "description": ""
+  },
+  "validation": {
+    "12tet_pass": true,
+    "metrical_gravity_pass": true
+  },
+  "last_updated": "2026-06-24T04:00:00Z"
+}

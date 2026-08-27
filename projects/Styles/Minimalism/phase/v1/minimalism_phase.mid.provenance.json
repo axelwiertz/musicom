@@ -1,0 +1,18 @@
+{
+  "artifact": "minimalism_phase.mid",
+  "classification": "ai-assisted",
+  "generator": "minimalism_phase",
+  "sources": [],
+  "parameters": {
+    "bpm": 120,
+    "methods": [
+      "026",
+      "032"
+    ]
+  },
+  "notes": "",
+  "sha256": "d42b74673009ffcbdbfcc647b5299d490c983c549d5c3590058aad2e932bc738",
+  "bytes": 11628,
+  "created_utc": "2026-07-27T21:03:42.118966+00:00",
+  "provenance_version": "1.0"
+}

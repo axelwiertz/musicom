@@ -1,0 +1,1 @@
+Country loop. Goal: fence-line road feel. Keep groove dry, vocal-friendly, clean return to G. v4 chosen for hook + seamless loop. Variants tested for strum density, pickup licks, and steel fills.

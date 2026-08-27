@@ -1,0 +1,24 @@
+{
+  "artifact": "053-euclidean-binaural.mid",
+  "classification": "ai-assisted",
+  "generator": "053-euclidean-binaural/compose.py",
+  "sources": [],
+  "parameters": {
+    "bpm": 110,
+    "key": "D Dorian",
+    "method": "012-Euclidean Groove Locking",
+    "sp_method": "SP-021 Binaural Spatialization",
+    "euclidean_patterns": [
+      "E(3,8)",
+      "E(5,16)",
+      "E(2,5)",
+      "E(7,16)"
+    ],
+    "form": "AABA"
+  },
+  "notes": "Euclidean rhythm patterns mapped to D Dorian scale. Binaural spatialization via Woodworth-Schlosberg ITD/ILD model.",
+  "sha256": "fe465a2705d7dd8544650875f197d44075106bcc6719d702d2bde98499e33208",
+  "bytes": 1232,
+  "created_utc": "2026-07-30T10:05:02.069098+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,50 @@
+{
+  "composition_source": {
+    "path": "/opt/data/projects/Styles/Disco/classic/v1/classic_disco.mid",
+    "genre": "Disco",
+    "substyle": "classic",
+    "version": "v1",
+    "tempo_bpm": 120,
+    "duration_seconds": 64.0,
+    "tracks": {
+      "Drums": {"channel": 9, "program": 0, "notes": 328},
+      "Bass": {"channel": 0, "program": 33, "notes": 128},
+      "Strings": {"channel": 1, "program": 49, "notes": 192},
+      "Lead": {"channel": 2, "program": 57, "notes": 48}
+    }
+  },
+  "production_method": {
+    "id": "SP-021",
+    "name": "Binaural Woodworth-Schlosberg Spatialization",
+    "layer": "Post-Processing / DSP",
+    "description": "Applies Head-Related Transfer Function (HRTF) emulation via Woodworth-Schlosberg ITD and frequency-dependent ILD head-shadowing filters for realistic 3D acoustic placement.",
+    "parameters": {
+      "head_radius_m": 0.0875,
+      "speed_of_sound_m_s": 343.0,
+      "f_max_hz": 20000.0,
+      "f_min_hz": 1000.0,
+      "angular_power_p": 2.0
+    },
+    "track_spatialization": {
+      "Drums": {"azimuth_rad": 0.0, "azimuth_deg": 0.0, "distance_m": 1.5},
+      "Bass": {"azimuth_rad": 0.0, "azimuth_deg": 0.0, "distance_m": 1.0},
+      "Strings": {"azimuth_rad": -0.8, "azimuth_deg": -45.8, "distance_m": 1.2},
+      "Lead": {"azimuth_rad": 0.7, "azimuth_deg": 40.1, "distance_m": 1.0}
+    }
+  },
+  "output": {
+    "wav_path": "Audio/disco_binaural_SP021.wav",
+    "ogg_path": "Audio/disco_binaural_SP021.ogg",
+    "sample_rate": 44100,
+    "channels": 2,
+    "bit_depth": 16,
+    "duration_seconds": 68.4,
+    "peak_normalized_to": -1.0
+  },
+  "processing_timestamp": "2026-08-03T22:04:00Z",
+  "engine": {
+    "synth": "FluidSynth 2.5.6",
+    "soundfont": "TimGM6mb.sf2",
+    "dsp": "numpy SP-021 implementation"
+  }
+}

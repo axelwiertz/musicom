@@ -1,0 +1,87 @@
+{
+  "style": "Celtic ",
+  "description": "",
+  "sub_styles": [
+    {
+      "project": " Irish Traditional",
+      "source": "/opt/data/projects/Styles/Celtic / Irish Traditional/034-irish-jig-study/MIDI/irish_jig.mid",
+      "pitch": {
+        "scale": "Chromatic",
+        "pitch_classes": [
+          0,
+          1,
+          2,
+          4,
+          6,
+          7,
+          8,
+          9,
+          11
+        ],
+        "pitch_class_counts": {
+          "2": 11,
+          "4": 7,
+          "9": 6,
+          "11": 6,
+          "0": 11,
+          "6": 5,
+          "7": 8,
+          "1": 1,
+          "8": 1
+        },
+        "total_notes": 56,
+        "tracks": 1
+      },
+      "rhythm": {
+        "total_onsets": 56,
+        "min_ioi": 30,
+        "max_ioi": 240,
+        "avg_ioi": 205.0909090909091,
+        "ioi_distribution": {
+          "240": 39,
+          "30": 8,
+          "210": 8
+        }
+      },
+      "time_signature": null,
+      "tempo": null,
+      "validation": {
+        "12tet": {
+          "valid": true,
+          "message": "All pitches on 12-TET semitone grid (MIDI integers)"
+        },
+        "metrical_gravity": {
+          "valid": true,
+          "track_count": 1,
+          "velocity_range": 0.0,
+          "velocity_avg": 87.1,
+          "note": "Velocities indicate accent hierarchy; metrical gravity inferred from velocity distribution"
+        }
+      }
+    }
+  ],
+  "patterns": {
+    "pitch": {
+      "scales_found": [
+        "Chromatic"
+      ],
+      "common_pitch_classes": [
+        0,
+        1,
+        2,
+        4,
+        6,
+        7,
+        8,
+        9,
+        11
+      ]
+    },
+    "rhythm": {},
+    "metrical_gravity": []
+  },
+  "validation": {
+    "12tet_valid": true,
+    "metrical_gravity_valid": true
+  }
+}

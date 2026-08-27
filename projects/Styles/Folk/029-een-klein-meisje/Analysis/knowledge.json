@@ -1,0 +1,18 @@
+{
+  "genre": "Dutch Folk",
+  "subgenre": "Child Folk / Kleuterlied",
+  "pitch": {
+    "scale": "Major",
+    "intervals": [2, 2, 1, 2, 2, 2, 1],
+    "notes": ["G4", "A4", "B4", "C5", "D5", "E5", "F#5", "G5"],
+    "characteristic": "Simple diatonic melodies, frequent leaps to dominant"
+  },
+  "rhythm": {
+    "dna": "█░█░█░█░",
+    "meter": "6/8 or 2/4",
+    "metrical_gravity": [1.0, 0.4, 0.6, 0.4, 0.8, 0.4, 0.6, 0.4],
+    "bpm": 105
+  },
+  "structure": "A-B-A (Verse-Chorus-Verse)",
+  "vibe": "Naïve, nursery, rhythmic symmetry"
+}

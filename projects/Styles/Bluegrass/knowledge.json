@@ -1,0 +1,58 @@
+{
+  "style": "Bluegrass",
+  "sub_styles": [
+    {
+      "name": "bluegrass-scruggs-daily-2026-06-23",
+      "scale": "Chromatic",
+      "pitch_classes": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        6,
+        7,
+        9,
+        11
+      ],
+      "tempo": 140.00014000014,
+      "tempo_from_source": 140
+    }
+  ],
+  "pitch": {
+    "scale": "Chromatic",
+    "intervals": [
+      1,
+      1,
+      2,
+      1,
+      1,
+      1,
+      2,
+      2,
+      1
+    ],
+    "common_pitch_classes": [
+      0,
+      1,
+      2,
+      4,
+      5,
+      6,
+      7,
+      9,
+      11
+    ],
+    "total_pitch_classes": 9
+  },
+  "rhythm": {
+    "patterns_analyzed": 1,
+    "metrical_gravity_verified": true,
+    "description": ""
+  },
+  "validation": {
+    "12tet_pass": true,
+    "metrical_gravity_pass": true
+  },
+  "last_updated": "2026-06-24T04:00:00Z"
+}

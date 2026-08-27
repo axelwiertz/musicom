@@ -1,0 +1,21 @@
+{
+  "style": "Samba",
+  "sub_styles": [],
+  "pitch": {
+    "scale": "Major/Ionian",
+    "intervals": [2, 2, 1, 2, 2, 2, 1],
+    "pitch_classes": [0, 2, 4, 5, 7, 9, 11],
+    "total_pitch_classes": 7
+  },
+  "rhythm": {
+    "metrical_gravity": [1.0, 0, 0.5, 0],
+    "tempo_range": [96, 108],
+    "time_signatures": ["2/4"],
+    "description": "Surdo pattern E(2,8) with swung 16ths; tamborim 16th subdivisions; repique call-response; continuous 8th-note bass"
+  },
+  "validation": {
+    "12tet_pass": true,
+    "metrical_gravity_pass": true
+  },
+  "last_updated": "2026-08-17T00:00:00Z"
+}

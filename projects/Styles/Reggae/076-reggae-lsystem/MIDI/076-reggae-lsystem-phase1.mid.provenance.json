@@ -1,0 +1,37 @@
+{
+  "artifact": "076-reggae-lsystem-phase1.mid",
+  "classification": "ai-generated",
+  "generator": "Method 019 L-System (Fibonacci word) - PRE-RULES raw draft",
+  "sources": [
+    "Research/CompositionMethods/methods_db.md:Method 019",
+    "workflows/unitmatrix_composer.py"
+  ],
+  "parameters": {
+    "method": 19,
+    "phase": 1,
+    "key": "A aeolian",
+    "bpm": 96,
+    "ticks_per_beat": 480,
+    "beats_per_bar": 4,
+    "sections": 6,
+    "section_bars": 4,
+    "model": "Fibonacci-word L-system (axiom A, A->AB, B->A), 6 iterations, 21 symbols",
+    "symbol_semantics": "A = +2 st / quarter, B = -2 st / eighth",
+    "rotation_offsets": [
+      0,
+      5,
+      3,
+      8,
+      5,
+      3
+    ],
+    "seed": 76,
+    "two_phase": true,
+    "rules_applied": "NONE (pre-rules generative draft)"
+  },
+  "notes": "Phase 1: L-system Fibonacci word driven chromatic walk, continuous unquantized pitch (non-diatonic leak by design), symbol rhythm (A quarter / B eighth), single voice, no harmony.",
+  "sha256": "ba205dd3d231e13a8641489b4ca881d13a04589c3dc807cd183413f676670905",
+  "bytes": 1136,
+  "created_utc": "2026-08-23T23:13:31.450096+00:00",
+  "provenance_version": "1.0"
+}

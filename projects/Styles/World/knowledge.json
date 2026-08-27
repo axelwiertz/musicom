@@ -1,0 +1,119 @@
+{
+  "style": "World",
+  "sub_styles": [
+    {
+      "name": "arabic-daily-2026-06-08",
+      "scale": "Chromatic",
+      "pitch_classes": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        7,
+        8,
+        9,
+        10
+      ],
+      "tempo": 120.0
+    },
+    {
+      "name": "arabic_rast",
+      "scale": "Dorian",
+      "pitch_classes": []
+    },
+    {
+      "name": "arabic_rast_v2",
+      "scale": "Dorian",
+      "pitch_classes": []
+    },
+    {
+      "name": "bollywood-study",
+      "scale": "Blues Heptatonic",
+      "pitch_classes": [
+        0,
+        2,
+        3,
+        5,
+        6,
+        7
+      ],
+      "tempo": 100.0
+    },
+    {
+      "name": "cretan-laika",
+      "scale": "Blues Heptatonic",
+      "pitch_classes": [
+        2,
+        3,
+        6,
+        7,
+        9
+      ],
+      "tempo": 120.0
+    },
+    {
+      "name": "gamelan_kebyar",
+      "scale": "Dorian",
+      "pitch_classes": []
+    },
+    {
+      "name": "gamelan_kebyar_v2",
+      "scale": "Dorian",
+      "pitch_classes": []
+    },
+    {
+      "name": "gamelan_kebyar_v3",
+      "scale": "Dorian",
+      "pitch_classes": []
+    },
+    {
+      "name": "reggae_one_drop",
+      "scale": "Dorian",
+      "pitch_classes": []
+    },
+    {
+      "name": "variation_2026-06-08_arabic_rast",
+      "scale": "Dorian",
+      "pitch_classes": []
+    }
+  ],
+  "pitch": {
+    "scale": "Dorian",
+    "intervals": [
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      2
+    ],
+    "common_pitch_classes": [
+      0,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "total_pitch_classes": 10
+  },
+  "rhythm": {
+    "patterns_analyzed": 10,
+    "metrical_gravity_verified": true,
+    "description": ""
+  },
+  "validation": {
+    "12tet_pass": true,
+    "metrical_gravity_pass": true
+  },
+  "last_updated": "2026-06-24T04:00:00Z"
+}

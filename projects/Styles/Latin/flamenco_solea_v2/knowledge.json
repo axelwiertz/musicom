@@ -1,0 +1,44 @@
+{
+  "genre": "Flamenco",
+  "subgenre": "Sole\u00e1",
+  "pitch": {
+    "scale": "Phrygian with Major 3rd (Andalusian cadence)",
+    "intervals": [
+      1,
+      3,
+      1,
+      2,
+      1,
+      2,
+      2
+    ],
+    "contour": "Ornamented melisma, microtonal turns"
+  },
+  "rhythm": {
+    "dna": "\u2591\u2591\u2588\u2591\u2591\u2588\u2591\u2588\u2591\u2588\u2591\u2588",
+    "metrical_gravity": [
+      0,
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      1,
+      0,
+      1,
+      0,
+      1
+    ],
+    "description": "12-beat cycle (comp\u00e1s), accents on 3, 6, 8, 10, 12"
+  },
+  "timbre": {
+    "instrumentation": [
+      "Flamenco Guitar",
+      "Caj\u00f3n",
+      "Palmas",
+      "Cante"
+    ],
+    "calibration": "Nail attack, percussive wood, strained vocals"
+  }
+}

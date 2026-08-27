@@ -1,0 +1,72 @@
+{
+  "source_midi": "/opt/data/projects/Styles/Country/038-steel-guitar-demo/daily-2026-06-26_country_038-steel-guitar-v5.mid",
+  "method": "SP-002",
+  "method_name": "VST3 Polyphonic Stacking",
+  "bpm": 80.0,
+  "total_notes": 32,
+  "output_seconds": 13.625,
+  "silence_fraction": 0.0911,
+  "synthesis_engine": "per-voice independent synthesis engines (bowed_string + modal_pluck + phase_mod)",
+  "voice_allocation": {
+    "low": {
+      "notes": 16,
+      "engine": "BowedString"
+    },
+    "mid": {
+      "notes": 12,
+      "engine": "ResonatorBank"
+    },
+    "high": {
+      "notes": 4,
+      "engine": "PhaseModSynth"
+    }
+  },
+  "parameters": {
+    "low": {
+      "gain_db": -1.0,
+      "pan": -0.35,
+      "engine": "bowed_string",
+      "bow_pos": 0.12,
+      "bow_vel": 0.22,
+      "bow_force": 1.6
+    },
+    "mid": {
+      "gain_db": -8.0,
+      "pan": 0.0,
+      "engine": "modal_pluck",
+      "modes": [
+        {
+          "freq_ratio": 1.0,
+          "amp": 1.0,
+          "decay": 4.0
+        },
+        {
+          "freq_ratio": 2.0,
+          "amp": 0.28,
+          "decay": 3.0
+        },
+        {
+          "freq_ratio": 3.0,
+          "amp": 0.1,
+          "decay": 2.5
+        }
+      ]
+    },
+    "high": {
+      "gain_db": -9.0,
+      "pan": 0.35,
+      "engine": "phase_mod",
+      "carrier": "sine",
+      "modulator": "sine",
+      "ratio": 1.0,
+      "index": 0.8
+    }
+  },
+  "mix": {
+    "soft_knee": {
+      "threshold": 0.82,
+      "slope": 0.35
+    },
+    "normalize_db": -1.0
+  }
+}

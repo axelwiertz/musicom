@@ -1,0 +1,282 @@
+{
+  "genre": "Bluegrass",
+  "subgenre": "Scruggs-Style Banjo (Bluegrass Breakdown)",
+  "meta": {
+    "origin": "Appalachian folk music, Old-Time, African-American blues; codified by Earl Scruggs in the 1940s (Bill Monroe's Blue Grass Boys)",
+    "era": "1940s–present; bluegrass revival 1960s–70s, newgrass/neo-traditional 1990s–present",
+    "tempo_bpm": 140,
+    "time_signature": "2/2 (cut time, written as 4/4 with half-note feel)",
+    "typical_form": "AABB (32-bar breakdown) or verse-chorus (V-C-V-C-B-C) with instrumental breaks interspersed",
+    "mood": "Driving, energetic, virtuosic; alternates between urgent forward motion and mournful high-lonesome balladry",
+    "instrumentation": [
+      "5-String Banjo (lead/scruggs rolls)",
+      "Fiddle (melody counterpoint)",
+      "Mandolin (rhythm chop / tremolo fills)",
+      "Guitar (flatpicked bass runs + rhythm)",
+      "Upright Bass (walking or two-beat)"
+    ],
+    "reference_tracks": [
+      "Foggy Mountain Breakdown - Earl Scruggs",
+      "Bluegrass Breakdown - Bill Monroe & His Blue Grass Boys",
+      "Rawhide - Bill Monroe / Tony Rice Unit",
+      "Earl's Breakdown - Earl Scruggs",
+      "Dueling Banjos - Eric Weissberg & Steve Mandell"
+    ]
+  },
+  "patterns": {
+    "pitch": {
+      "name": "Bluegrass Pentatonic / Mixolydian / Modal Hybrid",
+      "intervals": [0, 2, 4, 5, 7, 9, 10, 12],
+      "alternate_intervals": [0, 2, 3, 5, 7, 9, 10, 12],
+      "contour": "U-U-U-U-U-U-U",
+      "description": "Bluegrass melody primarily uses the major pentatonic (G-A-B-D-E) with frequent Mixolydian flat-7 (F natural) and occasional blue note b3 (Bb). The G-run archetype in G major: G-A-B-D-E-F#-G (ascending) or G-F#-E-D-B-A-G (descending). Vocal-influenced bends and slides approximate the 'high lonesome' affect. The flatted 7th (F) is the most characteristic bluegrass scalar inflection, giving the music its modal Appalachian quality. Open-string drone (G-D-G-B-D banjo tuning) creates a constant pedal resonance.",
+      "modal_degrees": {
+        "tonic": 0,
+        "major_2": 2,
+        "minor_3_blue": 3,
+        "perfect_4": 5,
+        "perfect_5": 7,
+        "major_6": 9,
+        "flat_7": 10,
+        "major_7": 11,
+        "octave": 12
+      },
+      "characteristic_motifs": [
+        {
+          "name": "G-Run (ascending)",
+          "notes": [0, 2, 4, 5, 7, 9, 11, 12],
+          "rhythm": "single-eighth-16th-16th-8th-8th-8th-quarter",
+          "description": "Signature bluegrass lick: open G string (G3) → A → B → D → E → F# → G4. Often played as a scalar run on the banjo's 4th string or guitar bass run."
+        },
+        {
+          "name": "G-Run (descending)",
+          "notes": [12, 11, 9, 7, 5, 4, 2, 0],
+          "rhythm": "8th-8th-16th-16th-8th-8th-8th-quarter",
+          "description": "Descending version: high G down through F#-E-D-B-A-G. Common turnaround figure at end of phrases."
+        },
+        {
+          "name": "Blue Note Bend",
+          "notes": [3, 2, 0],
+          "rhythm": "quarter-eighth-quarter",
+          "description": "Bent b3 (Bb bent to B or B to C) sliding into root. Vocal-inspired, used on fiddle or banjo as a pull-off."
+        },
+        {
+          "name": "Foggy Mountain Lick",
+          "notes": [7, 9, 7, 5, 4, 2, 0],
+          "rhythm": "8th-8th-8th-8th-8th-8th-quarter",
+          "description": "The iconic Foggy Mountain Breakdown riff: D5-E5-D5-B4-A4-F#4-D4. Descending pentatonic with forward-roll articulation."
+        }
+      ]
+    },
+    "rhythm": {
+      "name": "Scruggs Banjo Rolls (4/4 Cut Time)",
+      "onsets": 8,
+      "steps": 8,
+      "dna": "█░█░█░█░",
+      "metrical_gravity": [1.0, 0.2, 0.8, 0.2, 0.7, 0.3, 0.6, 0.2],
+      "variants": [
+        {
+          "name": "Forward Roll",
+          "dna": "██░██░█░",
+          "description": "5-3-1-5-3-1-5-3 string pattern (thumb-index-middle). The foundational Scruggs roll: continuous 8th-note flow with accents on thumb strokes (strings 5, 4, 3). Three fingers alternating in a forward cycle."
+        },
+        {
+          "name": "Backward Roll",
+          "dna": "░██░██░█",
+          "description": "1-3-5-1-3-5-1-3 string pattern (middle-index-thumb). Reverse direction of forward roll. Used for descending scalar passages and phrase endings."
+        },
+        {
+          "name": "Foggy Mountain Roll",
+          "dna": "██░█░██░",
+          "description": "5-3-1-5-3-1-3-1. Variation with doubled thumb stroke. Creates the signature syncopated drive of Foggy Mountain Breakdown. Accented thumb on beat 1, syncopated middle-index pair on offbeats."
+        },
+        {
+          "name": "Alternating Thumb Roll",
+          "dna": "█░██░█░█",
+          "description": "5-1-5-3-1-5-3-1. Thumb alternates between 5th and 3rd strings. Allows melodic notes on the open/fretted 5th string while maintaining roll pattern. Essential for melodic banjo style."
+        },
+        {
+          "name": "Mandolin Chop (rhythm)",
+          "dna": "█░░░█░░░",
+          "description": "Chop on beats 2 and 4 (backbeat). Mandolinist plays a muted strum on offbeats — the defining bluegrass rhythm guitar/mandolin punctuation."
+        },
+        {
+          "name": "Bass Two-Beat (traditional)",
+          "dna": "█░░░░░░░",
+          "description": "Root on beat 1, fifth on beat 3 (half-note feel). Walking bass lines use quarter-note scalar patterns between chord tones."
+        }
+      ],
+      "time_feel": "Driving eighth notes, straight (never swung), with a forward-pulling 'long-short' lift at moderate tempos. Cut time feel: two beats per bar felt strongly, with backbeat emphasis on 2 and 4."
+    },
+    "timbre": {
+      "instrument": "5-String Banjo (Scruggs Style)",
+      "adsr": [0.003, 0.25, 0.55, 0.197],
+      "vibrato_hz": 0,
+      "vibrato_depth": 0,
+      "harmonic_profile": "bright, percussive attack with rapid decay; strong fundamental (1st) with prominent 2nd–5th harmonics; nasal midrange (1–2 kHz) from the head tension; metallic overtones from the tone ring (Mastertone style)",
+      "ornamentation": {
+        "hammer_on": "Left-hand hammer from lower to higher fret without picking — fills rapid 16th-note pairs between roll strokes",
+        "pull_off": "Left-hand pull from higher to lower fret. Creates 'bounce' effect between repeating notes",
+        "slide": "Fret-hand slide up or down to target pitch. Often on the 1st string for vocal-like bends",
+        "choke": "Palm pressing bridge or head to raise pitch momentarily — 'scream' effect used on accent notes",
+        "roll_accent": "Dynamic accent on thumb stroke (5th string) by picking harder — creates the characteristic driving pulse of Scruggs rolls"
+      },
+      "alternative_instruments": [
+        {
+          "instrument": "Fiddle (bluegrass style)",
+          "adsr": [0.015, 0.12, 0.80, 0.065],
+          "vibrato_hz": 6.5,
+          "vibrato_depth": 0.015,
+          "harmonic_profile": "bright, cutting, with strong 3rd–6th harmonics; double-stops (open-string drones) create a full, bagpipe-like resonance"
+        },
+        {
+          "instrument": "Mandolin (bluegrass chop)",
+          "adsr": [0.002, 0.35, 0.45, 0.198],
+          "vibrato_hz": 0,
+          "vibrato_depth": 0,
+          "harmonic_profile": "percussive 'chunk' on muted strings; bright, with quick decay; open string pairs produce a shimmering chorus effect"
+        },
+        {
+          "instrument": "Upright Bass (bluegrass slap)",
+          "adsr": [0.005, 0.40, 0.50, 0.095],
+          "vibrato_hz": 0,
+          "vibrato_depth": 0,
+          "harmonic_profile": "deep fundamental with warm 2nd–3rd harmonics; slap style adds percussive fingerboard impact at attack onset"
+        }
+      ]
+    }
+  },
+  "musicmatrix_mapping": {
+    "rows": [
+      "Banjo (Scruggs Roll — Forward)",
+      "Fiddle (Melody/Embellishment)",
+      "Mandolin (Chop Rhythm)",
+      "Guitar (Bass Runs + Rhythm)",
+      "Upright Bass (Two-Beat / Walking)"
+    ],
+    "cols": 8,
+    "unit_matrix": {
+      "description": "2-bar Bluegrass Breakdown in G major, cut time (8 eighth-note slots per row). Tempo: 140 BPM. Grid represents one measure in 2/2 feel.",
+      "grid": {
+        "Banjo (Scruggs Roll — Forward)": {
+          "slots": [
+            {"beat": 1, "sub": 1, "pitch_degree": 0, "pitch": "G4", "duration": 0.25, "articulation": "accent (thumb)", "ornament": "5th string open, forward roll start"},
+            {"beat": 1, "sub": 2, "pitch_degree": 4, "pitch": "B4", "duration": 0.25, "articulation": "medium (index)", "ornament": "3rd string, 4th fret"},
+            {"beat": 1, "sub": 3, "pitch_degree": 7, "pitch": "D5", "duration": 0.25, "articulation": "light (middle)", "ornament": "1st string, open"},
+            {"beat": 1, "sub": 4, "pitch_degree": 0, "pitch": "G4", "duration": 0.25, "articulation": "accent (thumb)", "ornament": "5th string open, roll repeat"},
+            {"beat": 2, "sub": 1, "pitch_degree": 4, "pitch": "B4", "duration": 0.25, "articulation": "medium (index)", "ornament": "3rd string, 4th fret"},
+            {"beat": 2, "sub": 2, "pitch_degree": 7, "pitch": "D5", "duration": 0.25, "articulation": "light (middle)", "ornament": "1st string, open"},
+            {"beat": 2, "sub": 3, "pitch_degree": 0, "pitch": "G4", "duration": 0.25, "articulation": "accent (thumb)", "ornament": "5th string open"},
+            {"beat": 2, "sub": 4, "pitch_degree": 5, "pitch": "C5", "duration": 0.25, "articulation": "medium (index)", "ornament": "1st string, 5th fret — passing tone"}
+          ]
+        },
+        "Fiddle (Melody/Embellishment)": {
+          "slots": [
+            {"beat": 1, "sub": 1, "pitch_degree": 0, "pitch": "G4", "duration": 0.5, "articulation": "accent, full bow", "ornament": "open string drone resonance"},
+            {"beat": 1, "sub": 2, "pitch_degree": null, "pitch": null, "duration": 0.25, "articulation": "rest", "ornament": "none"},
+            {"beat": 1, "sub": 3, "pitch_degree": 2, "pitch": "A4", "duration": 0.25, "articulation": "staccato upbow", "ornament": "none"},
+            {"beat": 1, "sub": 4, "pitch_degree": 4, "pitch": "B4", "duration": 0.25, "articulation": "staccato upbow", "ornament": "double-stop with open D string"},
+            {"beat": 2, "sub": 1, "pitch_degree": 5, "pitch": "C5", "duration": 0.5, "articulation": "accent, full bow", "ornament": "slight slide from B"},
+            {"beat": 2, "sub": 2, "pitch_degree": null, "pitch": null, "duration": 0.25, "articulation": "rest", "ornament": "none"},
+            {"beat": 2, "sub": 3, "pitch_degree": 7, "pitch": "D5", "duration": 0.25, "articulation": "staccato upbow", "ornament": "open D string"},
+            {"beat": 2, "sub": 4, "pitch_degree": 4, "pitch": "B4", "duration": 0.25, "articulation": "staccato downbow", "ornament": "none"}
+          ]
+        },
+        "Mandolin (Chop Rhythm)": {
+          "slots": [
+            {"beat": 1, "sub": 1, "pitch_degree": null, "pitch": null, "duration": 0.5, "articulation": "rest (no chop on 1)", "ornament": "none"},
+            {"beat": 1, "sub": 2, "pitch_degree": "G chord", "pitch": ["G4", "B4", "D5", "G5"], "duration": 0.125, "articulation": "muted chop (accent)", "ornament": "backbeat 2"},
+            {"beat": 1, "sub": 3, "pitch_degree": null, "pitch": null, "duration": 0.25, "articulation": "rest", "ornament": "none"},
+            {"beat": 1, "sub": 4, "pitch_degree": "G chord", "pitch": ["G4", "B4", "D5", "G5"], "duration": 0.125, "articulation": "muted chop (accent)", "ornament": "backbeat 4"},
+            {"beat": 2, "sub": 1, "pitch_degree": null, "pitch": null, "duration": 0.5, "articulation": "rest (no chop on 1)", "ornament": "none"},
+            {"beat": 2, "sub": 2, "pitch_degree": "C chord", "pitch": ["C5", "E5", "G5", "C6"], "duration": 0.125, "articulation": "muted chop (accent)", "ornament": "backbeat 2 — IV chord"},
+            {"beat": 2, "sub": 3, "pitch_degree": null, "pitch": null, "duration": 0.25, "articulation": "rest", "ornament": "none"},
+            {"beat": 2, "sub": 4, "pitch_degree": "G chord", "pitch": ["G4", "B4", "D5", "G5"], "duration": 0.125, "articulation": "muted chop (accent)", "ornament": "backbeat 4 — return to I"}
+          ]
+        },
+        "Guitar (Bass Runs + Rhythm)": {
+          "slots": [
+            {"beat": 1, "sub": 1, "pitch_degree": 0, "pitch": "G3", "duration": 0.5, "articulation": "accent, flatpick downstroke", "ornament": "bass run start"},
+            {"beat": 1, "sub": 2, "pitch_degree": 2, "pitch": "A3", "duration": 0.25, "articulation": "medium, flatpick down", "ornament": "walking bass step"},
+            {"beat": 1, "sub": 3, "pitch_degree": 4, "pitch": "B3", "duration": 0.25, "articulation": "medium, flatpick up", "ornament": "walking bass step"},
+            {"beat": 1, "sub": 4, "pitch_degree": 5, "pitch": "C4", "duration": 0.25, "articulation": "medium, flatpick down", "ornament": "walking bass step — approaching V"},
+            {"beat": 2, "sub": 1, "pitch_degree": 7, "pitch": "D4", "duration": 0.5, "articulation": "accent, flatpick downstroke", "ornament": "V chord root"},
+            {"beat": 2, "sub": 2, "pitch_degree": 5, "pitch": "C4", "duration": 0.25, "articulation": "medium, flatpick up", "ornament": "walking return"},
+            {"beat": 2, "sub": 3, "pitch_degree": 4, "pitch": "B3", "duration": 0.25, "articulation": "medium, flatpick down", "ornament": "walking return"},
+            {"beat": 2, "sub": 4, "pitch_degree": 2, "pitch": "A3", "duration": 0.25, "articulation": "light, flatpick up", "ornament": "leading tone back to G"}
+          ]
+        },
+        "Upright Bass (Two-Beat / Walking)": {
+          "slots": [
+            {"beat": 1, "sub": 1, "pitch_degree": 0, "pitch": "G2", "duration": 0.5, "articulation": "heavy accent (slap)", "ornament": "root — two-beat feel"},
+            {"beat": 1, "sub": 2, "pitch_degree": null, "pitch": null, "duration": 0.5, "articulation": "rest", "ornament": "none"},
+            {"beat": 1, "sub": 3, "pitch_degree": 7, "pitch": "D2", "duration": 0.5, "articulation": "heavy accent (slap)", "ornament": "fifth — two-beat feel"},
+            {"beat": 1, "sub": 4, "pitch_degree": null, "pitch": null, "duration": 0.5, "articulation": "rest", "ornament": "none"},
+            {"beat": 2, "sub": 1, "pitch_degree": 5, "pitch": "C2", "duration": 0.5, "articulation": "heavy accent (slap)", "ornament": "IV chord root"},
+            {"beat": 2, "sub": 2, "pitch_degree": null, "pitch": null, "duration": 0.5, "articulation": "rest", "ornament": "none"},
+            {"beat": 2, "sub": 3, "pitch_degree": 7, "pitch": "D2", "duration": 0.5, "articulation": "heavy accent (slap)", "ornament": "V chord root"},
+            {"beat": 2, "sub": 4, "pitch_degree": null, "pitch": null, "duration": 0.5, "articulation": "rest", "ornament": "none"}
+          ]
+        }
+      }
+    },
+    "variations": [
+      {
+        "name": "Backward Roll Pattern (descending)",
+        "rows": ["Banjo (Backward Roll)"],
+        "cols": 8,
+        "description": "Inverted Scruggs roll: middle-index-thumb cycle. Used for descending scalar passages (G-F#-E-D-B-A-G). Produces a softer attack profile than forward roll."
+      },
+      {
+        "name": "Foggy Mountain Breakdown (syncopated thumb)",
+        "rows": ["Banjo (Foggy Mountain Roll)", "Fiddle", "Mandolin", "Guitar", "Bass"],
+        "cols": 8,
+        "description": "Characteristic double-thumb accent pattern: 5-3-1-5-3-1-3-1. The delayed middle-index pair creates the signature syncopated drive. Tempo: 150 BPM."
+      },
+      {
+        "name": "Waltz Time (3/4 bluegrass)",
+        "rows": ["Banjo (Roll — 3/4 adaptation)", "Fiddle", "Mandolin", "Guitar", "Bass"],
+        "cols": 6,
+        "description": "Bluegrass waltz (3/4) with adapted rolls. Bass on 1, mandolin chop on 2 and 3. Banjo roll adjusts to 6 eighth notes per bar."
+      }
+    ]
+  },
+  "harmonic_progression": {
+    "primary": ["I", "IV", "V", "I"],
+    "description": "G (I) → C (IV) → D (V) → G (I). The I-IV-V progression with frequent V-of-V (A7 → D) and ii-V (Am-D7) substitutions. The flat-7 (F natural) in the Mixolydian mode allows the IV chord (C) to function as a subtonic when held. The V chord often incorporates the b7 (D7 → D7sus4 → D7) for a bluesy tension. Turnarounds typically use the 'G-run' over I → V7 → I progression.",
+    "cadences": {
+      "authentic": "V7 → I (D7 → G)",
+      "plagal": "IV → I (C → G)",
+      "deceptive": "V → vi (D → Em) — less common, used in ballads",
+      "blues_turnaround": "I → V-of-V → ii → V (G → A7 → Am → D7) — common in faster breakdowns"
+    },
+    "chord_voicings": {
+      "banjo_G": ["G4", "B4", "D5", "G5", "B5"],
+      "banjo_C": ["C4", "E4", "G4", "C5", "E5"],
+      "banjo_D": ["D4", "F#4", "A4", "D5", "F#5"],
+      "mandolin_chop": "Muted, percussive closed-position voicing (typically G4-B4-D5-G5, chopped on offbeats)"
+    }
+  },
+  "structural_rules": [
+    "Breakdown form: AABB, each section 8 measures (32 total), repeated with variations",
+    "Each instrumental 'break' features a specific player taking the lead while others comp (chop rhythm + bass)",
+    "Banjo roll patterns are continuous eighth notes; breaks in the pattern signal phrase boundaries",
+    "G-run (ascending or descending scalar figure) typically ends each 8-bar section as a turnaround",
+    "Mandolin chop on beats 2 and 4 (backbeats) — never on 1 and 3 (except for accent at section starts)",
+    "Bass two-beat: root on 1, fifth on 3 (half-note feel) in traditional style; walking quarter notes in progressive style",
+    "Guitar provides bass runs (walking scalar lines between chord changes) + strummed rhythm on backbeats",
+    "Fiddle doubles melody at unison or third, adding double-stop drones and slides for Appalachian vocal quality",
+    "Tempo increases through each successive break (traditional 'razzing' or 'driving' effect)",
+    "Final chord is always the tonic (I) with an abrupt cutoff — no decay, ends with a 'snap'",
+    "No swing feel — straight eighth notes at all tempos",
+    "Open-string drone is structural: banjo's 5th string (high G) rings constantly, creating a pedal-point resonance",
+    "Accelerando through the breakdown: each repeat of AABB gets faster, building toward the final tag"
+  ],
+  "unitmatrix_export": {
+    "format_version": "1.0",
+    "schema": "MusicMatrix",
+    "project": "016-genre-pattern-dataset",
+    "generated": "2026-06-22",
+    "compatible_generators": ["generate_bluegrass.py", "musicom-composer", "scruggs-banjo-roll-engine"]
+  }
+}

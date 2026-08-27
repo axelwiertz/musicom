@@ -1,0 +1,40 @@
+{
+  "genre": "Balfolk",
+  "subgenre": "Schottische ground",
+  "pitch": {
+    "scale": "Mixolydian",
+    "intervals": [
+      2,
+      2,
+      1,
+      2,
+      2,
+      1,
+      2
+    ],
+    "contour": "Balanced, symmetrical motifs"
+  },
+  "rhythm": {
+    "dna": "\u2588\u2591\u2588\u2591\u2588\u2591\u2588\u2591",
+    "euclidean": "E(4,8)",
+    "metrical_gravity": [
+      1,
+      0,
+      0.7,
+      0,
+      0.9,
+      0,
+      0.7,
+      0
+    ],
+    "description": "4/4 time, bouncy eighth notes"
+  },
+  "timbre": {
+    "instrumentation": [
+      "Accordion",
+      "Clarinet",
+      "Guitar"
+    ],
+    "calibration": "Clean attack, rhythmic pulse"
+  }
+}

@@ -1,0 +1,15 @@
+import json
+d = json.load(open('/opt/data/projects/016-genre-pattern-dataset/data/bluegrass_scruggs.json'))
+print('VALID JSON')
+print('Genre:', d['genre'])
+print('Subgenre:', d['subgenre'])
+print('Top keys:', list(d.keys()))
+print('Rows:', d['musicmatrix_mapping']['rows'])
+print('Cols:', d['musicmatrix_mapping']['cols'])
+print('Grid rows:', list(d['musicmatrix_mapping']['unit_matrix']['grid'].keys()))
+slots = d['musicmatrix_mapping']['unit_matrix']['grid']['Banjo (Scruggs Roll — Forward)']['slots']
+print('Slots per row:', len(slots))
+print('Patterns sections:', list(d['patterns'].keys()))
+print('Pitch motif count:', len(d['patterns']['pitch']['characteristic_motifs']))
+print('Rhythm variant count:', len(d['patterns']['rhythm']['variants']))
+print('Structural rules count:', len(d['structural_rules']))

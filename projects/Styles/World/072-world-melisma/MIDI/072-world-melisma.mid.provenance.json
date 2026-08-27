@@ -1,0 +1,41 @@
+{
+  "artifact": "072-world-melisma.mid",
+  "classification": "ai-generated",
+  "generator": "MarkovConstraintGenerator+M-022 markov-harmony",
+  "sources": [],
+  "parameters": {
+    "bpm": 100,
+    "key": "D dorian",
+    "sections": 5,
+    "bars": 20,
+    "phase": "2",
+    "chord_walk": [
+      "i",
+      "v",
+      "i",
+      "III",
+      "v",
+      "i",
+      "IV",
+      "v",
+      "IV",
+      "v",
+      "i",
+      "III",
+      "v",
+      "i",
+      "III",
+      "IV",
+      "i",
+      "III",
+      "v",
+      "IV"
+    ],
+    "seed": 20260818
+  },
+  "notes": "chord-tone quantized to markov harmony walk, full world texture",
+  "sha256": "5853aa6acc26fc54882c92357d5ff2379a4a67d1795b7a1ca4a9e6440478abdd",
+  "bytes": 3607,
+  "created_utc": "2026-08-18T23:04:17.425585+00:00",
+  "provenance_version": "1.0"
+}

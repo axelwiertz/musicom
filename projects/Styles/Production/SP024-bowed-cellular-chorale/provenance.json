@@ -1,0 +1,10 @@
+{
+  "job": "SP-024 production pass (manual, not cron)",
+  "source_midi": "/opt/data/projects/Styles/Experimental/057-cellular-chorale/MIDI/057-cellular-chorale.mid",
+  "production_method": "SP-024",
+  "production_method_name": "Bowed String Physical Modeling",
+  "outputs": {
+    "full_mix_wav": "/opt/data/projects/Styles/Production/SP024-bowed-cellular-chorale/Audio/SP024-cellular-chorale-bowed-string.wav",
+    "full_mix_ogg": "/opt/data/projects/Styles/Production/SP024-bowed-cellular-chorale/Audio/SP024-cellular-chorale-bowed-string.ogg"
+  }
+}

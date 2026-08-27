@@ -1,0 +1,139 @@
+{
+  "style": "Pop",
+  "subgenre": "",
+  "pitch": {
+    "scale": "Chromatic",
+    "intervals": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "pitch_classes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "per_track_scale": "Major/Ionian",
+    "per_track_scale_distribution": {
+      "Major/Ionian": 4,
+      "Lydian": 1,
+      "In Scale": 2
+    }
+  },
+  "rhythm": {
+    "metrical_gravity": [
+      1.0,
+      0,
+      0.5,
+      0
+    ],
+    "tempo_range": [
+      73.99980020053945,
+      73.99980020053945
+    ],
+    "time_signatures": [
+      "4/4"
+    ],
+    "description": ""
+  },
+  "timbre": {
+    "instrumentation": [
+      "Track 1",
+      "Track 2",
+      "Track 3",
+      "Track 4"
+    ]
+  },
+  "patterns": [
+    {
+      "project": "036-kate-bush-analysis",
+      "midi": "/opt/data/projects/Styles/Pop/036-kate-bush-analysis/MIDI/The_Man_with_the_Child_in_His_Eyes.mid",
+      "scale": "Chromatic",
+      "pitch_classes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "tempo": 73.99980020053945,
+      "time_sig": "4/4"
+    },
+    {
+      "project": "indie-pop-sunset",
+      "midi": "/opt/data/projects/Styles/Pop/indie-pop-sunset/MIDI/sunset_matrix.mid",
+      "source": "/opt/data/projects/Styles/Pop/indie-pop-sunset/src/regen.py",
+      "scale": "Lydian",
+      "pitch_classes": [
+        0,
+        2,
+        4,
+        6,
+        7,
+        9,
+        11
+      ],
+      "tempo": null,
+      "time_sig": null
+    }
+  ],
+  "validated": true,
+  "validation": {
+    "12tet": {
+      "valid": true,
+      "pitch_classes_used": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "count": 12,
+      "issues": []
+    },
+    "metrical_gravity": {
+      "valid": true,
+      "length": 4,
+      "strong_beat_count": 1,
+      "profile": [
+        1.0,
+        0,
+        0.5,
+        0
+      ],
+      "issues": []
+    }
+  }
+}

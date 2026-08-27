@@ -1,0 +1,30 @@
+{
+  "artifact": "/opt/data/projects/Styles/Production/SP026-phase-vocoder-kleutertjes/Audio/mix_spectral.wav",
+  "classification": "ai-assisted",
+  "generator": "musicom SP-026 spectral phase vocoder resynthesis (numpy STFT/ISTFT)",
+  "sources": [
+    "/opt/data/projects/Styles/Folk/001-folk-drie-kleine-kleutertjes/midi/variation_intro_verse.mid"
+  ],
+  "source_sha256": "e32eeb7d5234801883553f4963243a106d728d419c6f76c48b0a8871078133cf",
+  "parameters": {
+    "method": "SP-026",
+    "method_name": "Spectral Phase Vocoder Resynthesis",
+    "layer": "Post-Processing / DSP",
+    "target": "Time-Stretched / Pitch-Shifted / Frozen Timbres",
+    "sr": 44100,
+    "bpm": 120.0,
+    "fft_size": 2048,
+    "hop_ratio": 0.25,
+    "time_stretch_alpha": 1.2,
+    "mag_exponent": 1.0,
+    "freeze_tail_s": 6.0,
+    "gm_source": "FluidSynth TimGM6mb.sf2 (single track, GM piano default)",
+    "mastering": "musicom ProductionChain: lowpass(12k) + StereoImager(1.2) + LUFS(-16) + Limiter(-1.0dB)",
+    "outputs": {
+      "wav": "/opt/data/projects/Styles/Production/SP026-phase-vocoder-kleutertjes/Audio/mix_spectral.wav",
+      "ogg": "/opt/data/projects/Styles/Production/SP026-phase-vocoder-kleutertjes/Audio/mix_spectral.ogg",
+      "midi": "/opt/data/projects/Styles/Production/SP026-phase-vocoder-kleutertjes/MIDI/original.mid"
+    }
+  },
+  "created_utc": "2026-08-15T22:21:04.876452+00:00"
+}

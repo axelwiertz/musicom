@@ -1,0 +1,16 @@
+{
+  "artifact": "japanese-hirajoshi.mid",
+  "classification": "ai-assisted",
+  "generator": "japanese-hirajoshi",
+  "sources": [],
+  "parameters": {
+    "bpm": 70,
+    "scale": "D hirajoshi 2-1-4-1-4",
+    "instruments": "koto-shakuhachi-shamisen-taiko"
+  },
+  "notes": "",
+  "sha256": "a55393ca709c6d31e4c24e12fa2b91dbed1549e3a19090348f7bae73773780b2",
+  "bytes": 2033,
+  "created_utc": "2026-08-17T07:58:30.691201+00:00",
+  "provenance_version": "1.0"
+}

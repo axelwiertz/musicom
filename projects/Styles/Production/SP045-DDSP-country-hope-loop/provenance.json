@@ -1,0 +1,43 @@
+{
+  "job": "nightly SP production",
+  "composition_source": {
+    "path": "/opt/data/projects/Styles/Country/001-country-hope-loop/MIDI/country-hope-loop-v7.mid",
+    "sha256": "f66ecf4bd083a463529cad7b98ebfffe1fade9c9e44a764e0827e64ff8401d8e",
+    "track_count": 2,
+    "notes": 64,
+    "pitch_range": [
+      36,
+      74
+    ],
+    "duration_s": 83.96,
+    "tempo_bpm": 96.0
+  },
+  "production_method": {
+    "id": "SP-045",
+    "name": "Differentiable Digital Signal Processing (DDSP)",
+    "layer": "Synthesis Engines",
+    "description": "Harmonic additive oscillator bank (48 partials) + time-varying lowpassed noise, driven from MIDI f0 (bypass tracker) and velocity->loudness; synthetic decaying-noise IR reverb."
+  },
+  "params": {
+    "sample_rate": 44100,
+    "n_harmonics": 48,
+    "noise_taps": 24,
+    "noise_gain": 0.15,
+    "reverb_mix": 0.35,
+    "reverb_rt60": 1.4,
+    "vibrato_hz": 5.0,
+    "attack_s": 0.012,
+    "release_s": 0.12
+  },
+  "outputs": {
+    "full_mix_wav": "Audio/SP045-DDSP-country-hope-loop-fullmix.wav",
+    "full_mix_ogg": "Audio/SP045-DDSP-country-hope-loop-fullmix.ogg",
+    "stem_harmonic": "Audio/stem_harmonic.wav",
+    "stem_noise": "Audio/stem_noise.wav",
+    "original_midi": "MIDI/original_country_hope_loop_v7.mid"
+  },
+  "analysis": {
+    "silence_fraction": 0.01892217659345839,
+    "out_dur_s": 84.96
+  }
+}

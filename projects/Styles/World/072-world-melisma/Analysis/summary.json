@@ -1,0 +1,49 @@
+{
+  "project": "072-world-melisma",
+  "style": "World",
+  "method": "markov-harmony (M-022 Markov-Constraint Wavefront)",
+  "bpm": 100,
+  "key": "D Dorian",
+  "tempo": 100,
+  "bars": 20,
+  "sections": {
+    "Intro": 4,
+    "Verse": 4,
+    "Chorus": 4,
+    "Verse2": 4,
+    "Outro": 4
+  },
+  "chord_walk": [
+    "i",
+    "v",
+    "i",
+    "III",
+    "v",
+    "i",
+    "IV",
+    "v",
+    "IV",
+    "v",
+    "i",
+    "III",
+    "v",
+    "i",
+    "III",
+    "IV",
+    "i",
+    "III",
+    "v",
+    "IV"
+  ],
+  "voices": [
+    "Lead",
+    "Counter",
+    "Pad",
+    "Bass",
+    "Perc"
+  ],
+  "phase1": "072-world-melisma-phase1.mid",
+  "phase2": "072-world-melisma.mid",
+  "grid": "grid_visualization.txt",
+  "seed": 20260818
+}

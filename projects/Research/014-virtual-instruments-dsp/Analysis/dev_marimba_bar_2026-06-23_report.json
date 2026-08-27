@@ -1,0 +1,153 @@
+{
+  "instrument": "Marimba Bar + Resonator Tube",
+  "date": "2026-06-23",
+  "fundamental_hz": 261.63,
+  "resonator_tube_freq_hz": 248.55,
+  "resonator_tube_Q": 25.0,
+  "partials": [
+    {
+      "partial": 1,
+      "frequency_hz": 261.63,
+      "amplitude_ratio": 1.0,
+      "decay_time_sec": 1.0,
+      "q_factor": 821.9
+    },
+    {
+      "partial": 2,
+      "frequency_hz": 1046.52,
+      "amplitude_ratio": 0.45,
+      "decay_time_sec": 0.6,
+      "q_factor": 1972.6
+    },
+    {
+      "partial": 3,
+      "frequency_hz": 2485.49,
+      "amplitude_ratio": 0.18,
+      "decay_time_sec": 0.35,
+      "q_factor": 2732.9
+    },
+    {
+      "partial": 4,
+      "frequency_hz": 4578.52,
+      "amplitude_ratio": 0.07,
+      "decay_time_sec": 0.2,
+      "q_factor": 2876.8
+    },
+    {
+      "partial": 5,
+      "frequency_hz": 7064.01,
+      "amplitude_ratio": 0.03,
+      "decay_time_sec": 0.1,
+      "q_factor": 2219.2
+    }
+  ],
+  "adsr": {
+    "attack": 0.001,
+    "decay": 0.02,
+    "sustain": 0.2,
+    "release": 0.15
+  },
+  "mallet_hardness": 0.7,
+  "spectral_peaks_hz": [
+    257.8,
+    1043.0,
+    2484.4,
+    4582.0,
+    550.8,
+    1183.6,
+    726.6,
+    7066.4
+  ],
+  "pattern_notes": [
+    {
+      "note": 60,
+      "start_beat": 0.0,
+      "duration": 0.5,
+      "velocity": 107
+    },
+    {
+      "note": 62,
+      "start_beat": 0.5,
+      "duration": 0.5,
+      "velocity": 88
+    },
+    {
+      "note": 64,
+      "start_beat": 1.0,
+      "duration": 0.5,
+      "velocity": 101
+    },
+    {
+      "note": 67,
+      "start_beat": 1.5,
+      "duration": 0.5,
+      "velocity": 82
+    },
+    {
+      "note": 69,
+      "start_beat": 2.0,
+      "duration": 0.75,
+      "velocity": 114
+    },
+    {
+      "note": 72,
+      "start_beat": 2.75,
+      "duration": 0.25,
+      "velocity": 95
+    },
+    {
+      "note": 64,
+      "start_beat": 3.0,
+      "duration": 0.5,
+      "velocity": 76
+    },
+    {
+      "note": 67,
+      "start_beat": 3.5,
+      "duration": 0.5,
+      "velocity": 88
+    },
+    {
+      "note": 69,
+      "start_beat": 4.0,
+      "duration": 0.75,
+      "velocity": 111
+    },
+    {
+      "note": 67,
+      "start_beat": 4.75,
+      "duration": 0.25,
+      "velocity": 82
+    },
+    {
+      "note": 64,
+      "start_beat": 5.0,
+      "duration": 0.5,
+      "velocity": 95
+    },
+    {
+      "note": 62,
+      "start_beat": 5.5,
+      "duration": 0.5,
+      "velocity": 76
+    },
+    {
+      "note": 60,
+      "start_beat": 6.0,
+      "duration": 1.0,
+      "velocity": 107
+    },
+    {
+      "note": 59,
+      "start_beat": 7.0,
+      "duration": 0.5,
+      "velocity": 63
+    },
+    {
+      "note": 60,
+      "start_beat": 7.5,
+      "duration": 0.5,
+      "velocity": 88
+    }
+  ]
+}

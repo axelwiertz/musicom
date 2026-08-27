@@ -1,0 +1,52 @@
+{
+  "style": "Research",
+  "sub_styles": [
+    {
+      "name": "virtual_instruments",
+      "scale": "In Scale",
+      "pitch_classes": [
+        0,
+        4,
+        7,
+        9
+      ],
+      "tempo": 120.0
+    },
+    {
+      "name": "vocal-research",
+      "scale": "Whole Tone",
+      "pitch_classes": [
+        4,
+        10
+      ]
+    }
+  ],
+  "pitch": {
+    "scale": "In Scale",
+    "intervals": [
+      4,
+      3,
+      2,
+      1,
+      2
+    ],
+    "common_pitch_classes": [
+      0,
+      4,
+      7,
+      9,
+      10
+    ],
+    "total_pitch_classes": 5
+  },
+  "rhythm": {
+    "patterns_analyzed": 2,
+    "metrical_gravity_verified": true,
+    "description": ""
+  },
+  "validation": {
+    "12tet_pass": true,
+    "metrical_gravity_pass": true
+  },
+  "last_updated": "2026-06-24T04:00:00Z"
+}

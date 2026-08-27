@@ -1,0 +1,56 @@
+{
+  "style": "Gamelan",
+  "sub_styles": [
+    {
+      "name": "017-gamelan-central-java",
+      "scale": "Lydian",
+      "pitch_classes": [
+        2,
+        4,
+        6,
+        9,
+        11
+      ],
+      "tempo": 80.0,
+      "tempo_from_source": 80
+    },
+    {
+      "name": "gamelan-daily-2026-06-20",
+      "scale": "Lydian",
+      "pitch_classes": [
+        2,
+        4,
+        6,
+        9
+      ]
+    }
+  ],
+  "pitch": {
+    "scale": "Lydian",
+    "intervals": [
+      2,
+      2,
+      3,
+      2,
+      3
+    ],
+    "common_pitch_classes": [
+      2,
+      4,
+      6,
+      9,
+      11
+    ],
+    "total_pitch_classes": 5
+  },
+  "rhythm": {
+    "patterns_analyzed": 2,
+    "metrical_gravity_verified": true,
+    "description": ""
+  },
+  "validation": {
+    "12tet_pass": true,
+    "metrical_gravity_pass": true
+  },
+  "last_updated": "2026-06-24T04:00:00Z"
+}

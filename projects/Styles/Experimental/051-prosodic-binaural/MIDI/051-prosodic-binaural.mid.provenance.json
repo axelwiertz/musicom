@@ -1,0 +1,18 @@
+{
+  "artifact": "051-prosodic-binaural.mid",
+  "classification": "ai-assisted",
+  "generator": "051-prosodic-binaural/compose.py",
+  "sources": [],
+  "parameters": {
+    "bpm": 96,
+    "method": "005-prosodic-narrative-coupling",
+    "sp_method": "SP-021-binaural-woodworth-schlosberg",
+    "scale": "D Dorian",
+    "prosodic_text": "Where does the river go when the rain stops falling?"
+  },
+  "notes": "Prosodic Narrative Coupling: speech stress/contour mapped to velocity/pitch. Binaural HRTF spatialization with Woodworth ITD + head-shadow ILD.",
+  "sha256": "c84039e12b257ff0175caadd0121707d5a0e7dd000f8b942c160265f7d86be1c",
+  "bytes": 506,
+  "created_utc": "2026-07-28T10:04:40.407103+00:00",
+  "provenance_version": "1.0"
+}

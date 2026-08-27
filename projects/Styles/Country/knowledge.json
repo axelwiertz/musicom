@@ -1,0 +1,79 @@
+{
+  "style": "Country",
+  "sub_styles": [
+    {
+      "name": "012-country-country-uke",
+      "scale": "Major/Ionian",
+      "pitch_classes": [
+        0,
+        2,
+        4,
+        5,
+        7,
+        9,
+        11
+      ],
+      "tempo": 85.00004250002125
+    },
+    {
+      "name": "012-country-full-16bar",
+      "scale": "Lydian",
+      "pitch_classes": [
+        0,
+        2,
+        4,
+        6,
+        7,
+        9,
+        11
+      ],
+      "tempo": 109.99990833340972
+    },
+    {
+      "name": "country-daily-2026-06-19",
+      "scale": "Phrygian Dominant (Freygish)",
+      "pitch_classes": [
+        4,
+        8,
+        11
+      ],
+      "tempo": 120.0
+    }
+  ],
+  "pitch": {
+    "scale": "Major/Ionian",
+    "intervals": [
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      2,
+      1
+    ],
+    "common_pitch_classes": [
+      0,
+      2,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      11
+    ],
+    "total_pitch_classes": 9
+  },
+  "rhythm": {
+    "patterns_analyzed": 3,
+    "metrical_gravity_verified": true,
+    "description": ""
+  },
+  "validation": {
+    "12tet_pass": true,
+    "metrical_gravity_pass": true
+  },
+  "last_updated": "2026-06-24T04:00:00Z"
+}

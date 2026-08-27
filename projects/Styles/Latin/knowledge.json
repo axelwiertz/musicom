@@ -1,0 +1,234 @@
+{
+  "style": "Latin",
+  "sub_styles": [
+    {
+      "name": "026-bossa-nova-unitmatrix",
+      "scale": "Chromatic",
+      "pitch_classes": [
+        0,
+        1,
+        2,
+        3,
+        5,
+        6,
+        7,
+        9,
+        11
+      ],
+      "tempo": 80.0
+    },
+    {
+      "name": "028-bossa-nova-daily-2026-06-12",
+      "scale": "Chromatic",
+      "pitch_classes": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        6,
+        7,
+        9,
+        11
+      ],
+      "tempo": 83.99996640001343,
+      "tempo_from_source": 84
+    },
+    {
+      "name": "afro-cuban-son-daily-2026-06-09",
+      "scale": "In Scale",
+      "pitch_classes": [
+        0,
+        4,
+        7
+      ],
+      "tempo": 109.99990833340972
+    },
+    {
+      "name": "afro_cuban_son",
+      "scale": "Dorian",
+      "pitch_classes": []
+    },
+    {
+      "name": "bossa-nova-daily-2026-06-07",
+      "scale": "Lydian",
+      "pitch_classes": [
+        0,
+        4,
+        7,
+        11
+      ],
+      "tempo": 120.0
+    },
+    {
+      "name": "bossa-nova-daily-2026-06-10",
+      "scale": "Dorian",
+      "pitch_classes": []
+    },
+    {
+      "name": "bossa-nova-daily-2026-06-15",
+      "scale": "Octatonic/Diminished",
+      "pitch_classes": [
+        0,
+        1,
+        4,
+        7,
+        9
+      ],
+      "tempo": 83.99996640001343,
+      "tempo_from_source": 84
+    },
+    {
+      "name": "bossa_nova",
+      "scale": "Dorian",
+      "pitch_classes": []
+    },
+    {
+      "name": "bossa_nova_classic",
+      "scale": "Dorian",
+      "pitch_classes": []
+    },
+    {
+      "name": "bossa_nova_classic_v2",
+      "scale": "Dorian",
+      "pitch_classes": []
+    },
+    {
+      "name": "bossa_nova_classic_v3",
+      "scale": "Dorian",
+      "pitch_classes": []
+    },
+    {
+      "name": "cumbia-daily-2026-06-22",
+      "scale": "Blues Heptatonic",
+      "pitch_classes": [
+        2,
+        3,
+        4,
+        5,
+        7,
+        9,
+        10
+      ],
+      "tempo": 100.0,
+      "tempo_from_source": 100
+    },
+    {
+      "name": "flamenco",
+      "scale": "Dorian",
+      "pitch_classes": []
+    },
+    {
+      "name": "flamenco-sole\u00e1-daily-2026-06-11",
+      "scale": "Chromatic",
+      "pitch_classes": [
+        1,
+        2,
+        4,
+        6,
+        8,
+        10,
+        11
+      ],
+      "tempo": 109.99990833340972
+    },
+    {
+      "name": "flamenco_solea",
+      "scale": "Dorian",
+      "pitch_classes": []
+    },
+    {
+      "name": "flamenco_solea_v2",
+      "scale": "Dorian",
+      "pitch_classes": []
+    },
+    {
+      "name": "samba-batucada-daily-2026-06-18",
+      "scale": "In Scale",
+      "pitch_classes": [
+        0,
+        4
+      ],
+      "tempo": 120.0
+    },
+    {
+      "name": "samba_batucada",
+      "scale": "Dorian",
+      "pitch_classes": []
+    },
+    {
+      "name": "tango-classic-daily-2026-06-21",
+      "scale": "Chromatic",
+      "pitch_classes": [
+        0,
+        1,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        11
+      ],
+      "tempo": 128.0,
+      "tempo_from_source": 128
+    },
+    {
+      "name": "tango_classic",
+      "scale": "Dorian",
+      "pitch_classes": []
+    },
+    {
+      "name": "variation_2026-06-07_bossa_nova_classic",
+      "scale": "Dorian",
+      "pitch_classes": []
+    },
+    {
+      "name": "variation_2026-06-11_flamenco",
+      "scale": "Dorian",
+      "pitch_classes": []
+    }
+  ],
+  "pitch": {
+    "scale": "Dorian",
+    "intervals": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "common_pitch_classes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "total_pitch_classes": 12
+  },
+  "rhythm": {
+    "patterns_analyzed": 22,
+    "metrical_gravity_verified": true,
+    "description": ""
+  },
+  "validation": {
+    "12tet_pass": true,
+    "metrical_gravity_pass": true
+  },
+  "last_updated": "2026-06-24T04:00:00Z"
+}

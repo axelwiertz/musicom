@@ -1,0 +1,170 @@
+{
+  "style": "World",
+  "subgenre": "",
+  "pitch": {
+    "scale": "Blues Heptatonic",
+    "intervals": [
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      2
+    ],
+    "pitch_classes": [
+      0,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "per_track_scale": "Dorian",
+    "per_track_scale_distribution": {
+      "Dorian": 3,
+      "Lydian": 1
+    }
+  },
+  "rhythm": {
+    "metrical_gravity": [
+      1.0,
+      0,
+      0.5,
+      0
+    ],
+    "tempo_range": [
+      100.0,
+      120.0
+    ],
+    "time_signatures": [
+      "4/4"
+    ],
+    "description": ""
+  },
+  "timbre": {
+    "instrumentation": [
+      "Track 1",
+      "Track 2"
+    ]
+  },
+  "patterns": [
+    {
+      "project": "arabic-daily-2026-06-08",
+      "midi": "/opt/data/projects/Styles/World/arabic-daily-2026-06-08/composition.mid",
+      "source": "/opt/data/projects/Styles/World/arabic-daily-2026-06-08/src/regen.py",
+      "scale": "Chromatic",
+      "pitch_classes": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        7,
+        8,
+        9,
+        10
+      ],
+      "tempo": 120.0,
+      "time_sig": "4/4"
+    },
+    {
+      "project": "arabic_rast",
+      "source": "/opt/data/projects/Styles/World/arabic_rast/src/regen.py"
+    },
+    {
+      "project": "arabic_rast_v2",
+      "source": "/opt/data/projects/Styles/World/arabic_rast_v2/src/regen.py"
+    },
+    {
+      "project": "bollywood-study",
+      "midi": "/opt/data/projects/Styles/World/bollywood-study/MIDI/bollywood_16bar.mid",
+      "source": "/opt/data/projects/Styles/World/bollywood-study/src/compose.py",
+      "scale": "Blues Heptatonic",
+      "pitch_classes": [
+        0,
+        2,
+        3,
+        5,
+        6,
+        7
+      ],
+      "tempo": 100.0,
+      "time_sig": null
+    },
+    {
+      "project": "cretan-laika",
+      "midi": "/opt/data/projects/Styles/World/cretan-laika/MIDI/composition.mid",
+      "source": "/opt/data/projects/Styles/World/cretan-laika/src/regen.py",
+      "scale": "Blues Heptatonic",
+      "pitch_classes": [
+        2,
+        3,
+        6,
+        7,
+        9
+      ],
+      "tempo": 120.0,
+      "time_sig": null
+    },
+    {
+      "project": "gamelan_kebyar",
+      "source": "/opt/data/projects/Styles/World/gamelan_kebyar/src/regen.py"
+    },
+    {
+      "project": "gamelan_kebyar_v2",
+      "source": "/opt/data/projects/Styles/World/gamelan_kebyar_v2/src/regen.py"
+    },
+    {
+      "project": "gamelan_kebyar_v3",
+      "source": "/opt/data/projects/Styles/World/gamelan_kebyar_v3/src/regen.py"
+    },
+    {
+      "project": "reggae_one_drop",
+      "source": "/opt/data/projects/Styles/World/reggae_one_drop/src/regen.py"
+    },
+    {
+      "project": "variation_2026-06-08_arabic_rast",
+      "source": "/opt/data/projects/Styles/World/variation_2026-06-08_arabic_rast/src/regen.py"
+    }
+  ],
+  "validated": true,
+  "validation": {
+    "12tet": {
+      "valid": true,
+      "pitch_classes_used": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "count": 10,
+      "issues": []
+    },
+    "metrical_gravity": {
+      "valid": true,
+      "length": 4,
+      "strong_beat_count": 1,
+      "profile": [
+        1.0,
+        0,
+        0.5,
+        0
+      ],
+      "issues": []
+    }
+  }
+}

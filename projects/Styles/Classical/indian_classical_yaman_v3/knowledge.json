@@ -1,0 +1,47 @@
+{
+  "genre": "Indian Classical",
+  "subgenre": "Raga Yaman",
+  "pitch": {
+    "scale": "Lydian (Kalyan Thaat)",
+    "intervals": [
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1
+    ],
+    "contour": "Ascending skipping 1st and 5th (occasionally)"
+  },
+  "rhythm": {
+    "dna": "\u2588\u2591\u2591\u2591\u2588\u2591\u2591\u2591\u2588\u2591\u2591\u2591\u2588\u2591\u2591\u2591",
+    "metrical_gravity": [
+      1,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+    ],
+    "description": "Teental (16 beats: 4+4+4+4)"
+  },
+  "timbre": {
+    "instrumentation": [
+      "Sitar",
+      "Tabla",
+      "Tanpura"
+    ],
+    "calibration": "Sympathetic strings, slides (Meend), varied tabla strokes"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "stem": "musicmatrix_exercise1f_hybrid_v4_aabb_bass",
+  "midi": "/opt/data/projects/014-genre-pattern-matrix/MIDI/musicmatrix_exercise1f_hybrid_v4_aabb_bass.mid",
+  "ogg": "/opt/data/projects/014-genre-pattern-matrix/Audio/musicmatrix_exercise1f_hybrid_v4_aabb_bass.ogg",
+  "rows": [
+    "AABB Jig Pulse",
+    "Bass Variation",
+    "Soft Jazz Color Harmony",
+    "Folk Lead AABB"
+  ],
+  "columns": 16,
+  "form": "A A B B, 16 bars of 6/8",
+  "tempo_bpm": 142.5,
+  "time_signature": "6/8",
+  "transformations": [
+    "expanded accepted v3 into AABB form",
+    "added bass variation: root/fifth/octave/approach patterns while preserving jig gravity",
+    "kept reduced brightness: no C# #11, Dorian B only"
+  ],
+  "musicmatrix_semantics": "rows=voices/pitch-space layers; columns=measures/time-space; cells=MusicUnit bar material"
+}

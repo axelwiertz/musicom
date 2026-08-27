@@ -1,0 +1,16 @@
+{
+  "artifact": "ragtime-maple-leaf.wav",
+  "classification": "ai-generated",
+  "generator": "001-ragtime-maple-leaf/fluidsynth",
+  "sources": [
+    "Ragtime/001-ragtime-maple-leaf/MIDI/001-ragtime-maple-leaf.mid"
+  ],
+  "parameters": {
+    "soundfont": "TimGM6mb.sf2",
+    "gain": 1.2
+  },
+  "sha256": "31f8feeadcdb76765c03d2ce3ae43acf92e22c901cfc1c6fc3bf780dd3a44fe4",
+  "bytes": 6184236,
+  "created_utc": "2026-08-17T07:58:56.291907+00:00",
+  "provenance_version": "1.0"
+}

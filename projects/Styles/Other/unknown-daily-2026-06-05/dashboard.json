@@ -1,0 +1,17 @@
+{
+  "date": "2026-06-05",
+  "base_genre": "Bossa Nova",
+  "rhythm_dna_original": "\u2588\u2591\u2591\u2588\u2591\u2591\u2588\u2591\u2591\u2591\u2588\u2591\u2588\u2591\u2591\u2591",
+  "rhythm_dna_variation": "\u2591\u2591\u2591\u2588\u2591\u2588\u2591\u2591\u2591\u2588\u2591\u2591\u2588\u2591\u2591\u2588",
+  "stats": {
+    "duration_sec": 120,
+    "tempo": 120,
+    "sections": [
+      "Intro",
+      "A",
+      "B",
+      "A'",
+      "Outro"
+    ]
+  }
+}

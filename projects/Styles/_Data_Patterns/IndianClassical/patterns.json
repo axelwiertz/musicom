@@ -1,0 +1,271 @@
+[
+  {
+    "project_name": "018-hindustani-bhairavi",
+    "midi_file": "/opt/data/projects/Styles/IndianClassical/018-hindustani-bhairavi/MIDI/bhairavi_live_render.mid",
+    "scale": "Chromatic",
+    "pitch_classes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "intervals": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "tempo": 94.99999208333399,
+    "time_sig": null,
+    "total_notes": 434,
+    "midi_range": [
+      36,
+      74
+    ],
+    "velocity_avg": 79.6,
+    "track_count": 3,
+    "tracks_detail": [
+      {
+        "track": 0,
+        "notes": 193,
+        "pitch_classes": [
+          0,
+          2,
+          3,
+          4,
+          5,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "scale_fragment": "Chromatic",
+        "range": [
+          62,
+          74
+        ]
+      },
+      {
+        "track": 1,
+        "notes": 97,
+        "pitch_classes": [
+          2,
+          9
+        ],
+        "scale_fragment": "In Scale",
+        "range": [
+          38,
+          62
+        ]
+      },
+      {
+        "track": 2,
+        "notes": 144,
+        "pitch_classes": [
+          0,
+          1,
+          6
+        ],
+        "scale_fragment": "Locrian",
+        "range": [
+          36,
+          60
+        ]
+      }
+    ],
+    "analysis_source": "midi",
+    "source_file": "/opt/data/projects/Styles/IndianClassical/018-hindustani-bhairavi/src/live_composer.py",
+    "tempo_from_source": 95,
+    "embedded_pitch_classes": [
+      0,
+      2,
+      3,
+      5,
+      7,
+      9,
+      10
+    ],
+    "embedded_scale": "Dorian"
+  },
+  {
+    "project_name": "024-ahir-bhairav-teental-showcase",
+    "midi_file": "/opt/data/projects/Styles/IndianClassical/024-ahir-bhairav-teental-showcase/MIDI/ahir_bhairav_v1.mid",
+    "scale": "Chromatic",
+    "pitch_classes": [
+      0,
+      1,
+      4,
+      5,
+      7,
+      9,
+      10
+    ],
+    "intervals": [
+      1,
+      3,
+      1,
+      2,
+      2,
+      1,
+      2
+    ],
+    "tempo": 109.99990833340972,
+    "time_sig": "4/4",
+    "total_notes": 64,
+    "midi_range": [
+      36,
+      70
+    ],
+    "velocity_avg": 90.0,
+    "track_count": 3,
+    "tracks_detail": [
+      {
+        "track": 0,
+        "notes": 16,
+        "pitch_classes": [
+          0,
+          1,
+          4,
+          5,
+          7,
+          9,
+          10
+        ],
+        "scale_fragment": "Chromatic",
+        "range": [
+          60,
+          70
+        ]
+      },
+      {
+        "track": 1,
+        "notes": 32,
+        "pitch_classes": [
+          0,
+          7
+        ],
+        "scale_fragment": "In Scale",
+        "range": [
+          48,
+          55
+        ]
+      },
+      {
+        "track": 2,
+        "notes": 16,
+        "pitch_classes": [
+          0
+        ],
+        "scale_fragment": "In Scale",
+        "range": [
+          36,
+          36
+        ]
+      }
+    ],
+    "analysis_source": "midi",
+    "source_file": "/opt/data/projects/Styles/IndianClassical/024-ahir-bhairav-teental-showcase/src/regen.py",
+    "scale_from_source": "Dorian",
+    "pitch_pattern_intervals": [
+      2,
+      3,
+      -2,
+      0,
+      5
+    ]
+  },
+  {
+    "project_name": "hindustani-daily-2026-06-16",
+    "midi_file": "/opt/data/projects/Styles/IndianClassical/hindustani-daily-2026-06-16/composition.mid",
+    "scale": "Chromatic",
+    "pitch_classes": [
+      0,
+      1,
+      2,
+      3,
+      5,
+      7,
+      9,
+      10
+    ],
+    "intervals": [
+      1,
+      1,
+      1,
+      2,
+      2,
+      2,
+      1,
+      2
+    ],
+    "tempo": 89.9999550000225,
+    "time_sig": null,
+    "total_notes": 32,
+    "midi_range": [
+      36,
+      74
+    ],
+    "velocity_avg": 95.0,
+    "track_count": 2,
+    "tracks_detail": [
+      {
+        "track": 0,
+        "notes": 16,
+        "pitch_classes": [
+          0,
+          2,
+          3,
+          5,
+          7,
+          9,
+          10
+        ],
+        "scale_fragment": "Dorian",
+        "range": [
+          62,
+          74
+        ]
+      },
+      {
+        "track": 1,
+        "notes": 16,
+        "pitch_classes": [
+          0,
+          1
+        ],
+        "scale_fragment": "Pelog (approx)",
+        "range": [
+          36,
+          60
+        ]
+      }
+    ],
+    "analysis_source": "midi",
+    "source_file": "/opt/data/projects/Styles/IndianClassical/hindustani-daily-2026-06-16/src/regen.py",
+    "scale_from_source": "Dorian",
+    "pitch_pattern_intervals": [
+      2,
+      3,
+      -2,
+      0,
+      5
+    ]
+  }
+]

@@ -1,0 +1,48 @@
+{
+  "project": "077-klezmer-markov-wavefront",
+  "style": "Klezmer",
+  "method": "022 Markov-Constraint Wavefront Sequencing",
+  "method_class": "Stochastic",
+  "key": "D harmonic minor (freygish flavor)",
+  "tonic_midi": 62,
+  "scale": [
+    0,
+    2,
+    3,
+    5,
+    7,
+    8,
+    11
+  ],
+  "bpm": 132,
+  "beats_per_bar": 4,
+  "ticks_per_beat": 480,
+  "total_bars": 32,
+  "sections": [
+    "S0 (4 bars)",
+    "S1 (4 bars)",
+    "S2 (4 bars)",
+    "S3 (4 bars)",
+    "S4 (4 bars)",
+    "S5 (4 bars)",
+    "S6 (4 bars)",
+    "S7 (4 bars)"
+  ],
+  "section_letters": "ABCDABCDABCDABCDABCDABCDABCDABCD",
+  "chord_progression": {
+    "A": "F (bIII) - C (bVII) - Dm (i) - A (V)",
+    "B": "Dm (i) - G (bIII) - A (V) - F (bIII)"
+  },
+  "voices": [
+    "Lead",
+    "Harmony",
+    "Bass",
+    "Pad",
+    "Drums"
+  ],
+  "phase1": "raw Markov walk, single lead voice, unquantized pitch indices, no harmony",
+  "phase2": "chord-tone quantization, leap smoothing, grace ornaments, 5-voice zero-drift matrix",
+  "phase1_events": 128,
+  "phase2_events": 839,
+  "seed": 77022
+}

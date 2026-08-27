@@ -1,0 +1,6 @@
+Project: /opt/data/projects/Styles/Gamelan/017-gamelan-central-java
+Scale DNA: slendro pentatonic/heptatonic center on D
+Metrical gravity: gong/kempul on beats 4/8/12/16
+Winning variation: v1
+Selection logic: best cadence closure + structural markers
+White-box: lead 16/16 in-scale; support 16/16 structural hits

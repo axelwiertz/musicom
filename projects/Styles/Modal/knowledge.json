@@ -1,0 +1,69 @@
+{
+  "style": "Modal",
+  "sub_styles": [
+    {
+      "name": "002-modal-dorian-agent",
+      "scale": "Major/Ionian",
+      "pitch_classes": [
+        0,
+        2,
+        4,
+        5,
+        7,
+        9,
+        11
+      ],
+      "tempo": 120.0
+    },
+    {
+      "name": "010-modal-project-dorian",
+      "scale": "Dorian",
+      "pitch_classes": [
+        0,
+        2,
+        3,
+        5,
+        7,
+        9,
+        10
+      ],
+      "tempo_from_source": 124
+    }
+  ],
+  "pitch": {
+    "scale": "Major/Ionian",
+    "intervals": [
+      2,
+      1,
+      1,
+      1,
+      2,
+      2,
+      1,
+      1,
+      1
+    ],
+    "common_pitch_classes": [
+      0,
+      2,
+      3,
+      4,
+      5,
+      7,
+      9,
+      10,
+      11
+    ],
+    "total_pitch_classes": 9
+  },
+  "rhythm": {
+    "patterns_analyzed": 2,
+    "metrical_gravity_verified": true,
+    "description": ""
+  },
+  "validation": {
+    "12tet_pass": true,
+    "metrical_gravity_pass": true
+  },
+  "last_updated": "2026-06-24T04:00:00Z"
+}

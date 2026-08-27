@@ -1,0 +1,35 @@
+{
+  "genre": "Gamelan",
+  "subgenre": "Gon-Kebyar",
+  "pitch": {
+    "scale": "Pelog / Slendro",
+    "intervals": [
+      1,
+      2,
+      4,
+      1,
+      4
+    ],
+    "contour": "Cyclic, interlocking (kotekan)"
+  },
+  "rhythm": {
+    "dna": "\u2588\u2591\u2591\u2591\u2588\u2591\u2591\u2591\u2588\u2591\u2591\u2591\u2588\u2591\u2591\u2591",
+    "colotomic": "Gong cycle",
+    "metrical_gravity": [
+      0,
+      0,
+      0,
+      1
+    ],
+    "description": "End-weighted cycles, sudden tempo shifts"
+  },
+  "timbre": {
+    "instrumentation": [
+      "Gangsa",
+      "Reyong",
+      "Gong Ageng",
+      "Kendang"
+    ],
+    "calibration": "Inharmonic metallic decay, paired tuning (beating)"
+  }
+}

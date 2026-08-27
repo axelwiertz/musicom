@@ -1,0 +1,38 @@
+{
+  "genre": "Balfolk",
+  "subgenre": "Mazurka lean",
+  "pitch": {
+    "scale": "Aeolian/Dorian",
+    "intervals": [
+      2,
+      1,
+      2,
+      2,
+      2,
+      1,
+      2
+    ],
+    "contour": "Lyrical, emphasizing the 3rd"
+  },
+  "rhythm": {
+    "dna": "\u2588\u2591\u2588\u2591\u2588\u2591",
+    "euclidean": "E(3,6)",
+    "metrical_gravity": [
+      1,
+      0,
+      0.8,
+      0,
+      1,
+      0
+    ],
+    "description": "3/4 time, heavy beat 2 or 3 lean"
+  },
+  "timbre": {
+    "instrumentation": [
+      "Accordion",
+      "Violin",
+      "Bagpipes"
+    ],
+    "calibration": "Squeezebox transients, drone support"
+  }
+}

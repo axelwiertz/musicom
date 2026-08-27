@@ -1,0 +1,24 @@
+{
+  "artifact": "044-isorhythmic-spatial.mid",
+  "classification": "ai-assisted",
+  "generator": "Experimental/044-isorhythmic-spatial/compose.py",
+  "sources": [],
+  "parameters": {
+    "bpm": 100,
+    "methods": [
+      "032",
+      "SP-021"
+    ],
+    "lead_talea_len": 9,
+    "lead_color_len": 7,
+    "bass_talea_len": 5,
+    "bass_color_len": 4,
+    "drums_talea_len": 6,
+    "drums_color_len": 5
+  },
+  "notes": "Composed via Isorhythmic Talea-Color Mapping (ITCM) and spatialized via Binaural Woodworth-Schlosberg Spatialization.",
+  "sha256": "57a618ea3d84d659436bd8bfa5afd913ab70ecc27094d218ab3967a9ff0709a5",
+  "bytes": 1610,
+  "created_utc": "2026-07-21T16:14:43.727618+00:00",
+  "provenance_version": "1.0"
+}

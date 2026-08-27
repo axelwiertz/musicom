@@ -1,0 +1,115 @@
+{
+  "artifact": "062-brownian-chorale.mid",
+  "classification": "ai-generated",
+  "generator": "Reflected Brownian Motion Pitch Diffusion (RBMPD) -- Method 048",
+  "sources": [
+    "Research/CompositionMethods/methods_db.md:Method 048",
+    "rules/voice_leading.py:VoiceLeadingRules",
+    "rules/progression.py:Scale7ChordDegree",
+    "utilities/constants.py:SCALE_PATTERNS"
+  ],
+  "parameters": {
+    "bpm": 84,
+    "key": "C aeolian",
+    "progression": [
+      "i",
+      "VI",
+      "III",
+      "vii",
+      "i",
+      "VI",
+      "III",
+      "i"
+    ],
+    "chord_degrees": [
+      1,
+      6,
+      3,
+      7,
+      1,
+      6,
+      3,
+      1
+    ],
+    "diffusion": {
+      "model": "reflected Brownian motion",
+      "sigma": 1.6,
+      "drift": 0.12,
+      "barriers": "voice register limits",
+      "reflection": "elastic mirror (2*barrier - X)"
+    },
+    "rhythm": {
+      "grid": "sixteenth notes",
+      "threshold": 0.42,
+      "density_floor": 3,
+      "anchors": [
+        "downbeat"
+      ],
+      "masks": [
+        [
+          1,
+          0,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          1,
+          1
+        ],
+        [
+          1,
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          1
+        ]
+      ]
+    },
+    "seed": 4801,
+    "voices": [
+      "Soprano",
+      "Alto",
+      "Tenor",
+      "Bass"
+    ],
+    "bars": 8,
+    "voice_leading_fixes": 7,
+    "residual_violations": 0
+  },
+  "notes": "Two-phase architecture: reflected Brownian motion pitch diffusion (per-voice register barriers, tonic drift) -> raw pitch contours + walk-speed rhythm (Phase 1); chord-tone quantization + classical voice leading rules (Phase 2).",
+  "sha256": "046e2b3971b6f9293be618e42c65b3397933bc159fec442ae7fcd951c8756688",
+  "bytes": 1021,
+  "created_utc": "2026-08-09T23:13:42.921122+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,123 @@
+[
+  {
+    "project_name": "023-flamenco-16-bar",
+    "midi_file": "/opt/data/projects/Styles/Flamenco/023-flamenco-16-bar/MIDI/flamenco_16.mid",
+    "scale": "Chromatic",
+    "pitch_classes": [
+      0,
+      2,
+      4,
+      5,
+      7,
+      8,
+      9,
+      11
+    ],
+    "intervals": [
+      2,
+      2,
+      1,
+      2,
+      1,
+      1,
+      2,
+      1
+    ],
+    "tempo": 120.0,
+    "time_sig": "3/4",
+    "total_notes": 64,
+    "midi_range": [
+      40,
+      69
+    ],
+    "velocity_avg": 90.0,
+    "track_count": 1,
+    "tracks_detail": [
+      {
+        "track": 0,
+        "notes": 64,
+        "pitch_classes": [
+          0,
+          2,
+          4,
+          5,
+          7,
+          8,
+          9,
+          11
+        ],
+        "scale_fragment": "Chromatic",
+        "range": [
+          40,
+          69
+        ]
+      }
+    ],
+    "analysis_source": "midi",
+    "source_file": "/opt/data/projects/Styles/Flamenco/023-flamenco-16-bar/src/regen.py",
+    "scale_from_source": "Dorian",
+    "pitch_pattern_intervals": [
+      2,
+      3,
+      -2,
+      0,
+      5
+    ]
+  },
+  {
+    "project_name": "033-flamenco-solea-study",
+    "midi_file": "/opt/data/projects/Styles/Flamenco/033-flamenco-solea-study/MIDI/solea_compas.mid",
+    "scale": "Chromatic",
+    "pitch_classes": [
+      0,
+      2,
+      4,
+      5,
+      7,
+      8,
+      9,
+      11
+    ],
+    "intervals": [
+      2,
+      2,
+      1,
+      2,
+      1,
+      1,
+      2,
+      1
+    ],
+    "tempo": null,
+    "time_sig": null,
+    "total_notes": 39,
+    "midi_range": [
+      52,
+      64
+    ],
+    "velocity_avg": 93.1,
+    "track_count": 1,
+    "tracks_detail": [
+      {
+        "track": 0,
+        "notes": 39,
+        "pitch_classes": [
+          0,
+          2,
+          4,
+          5,
+          7,
+          8,
+          9,
+          11
+        ],
+        "scale_fragment": "Chromatic",
+        "range": [
+          52,
+          64
+        ]
+      }
+    ],
+    "analysis_source": "midi"
+  }
+]

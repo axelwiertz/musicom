@@ -1,0 +1,38 @@
+{
+  "genre": "Balfolk",
+  "subgenre": "Dorian Jig",
+  "pitch": {
+    "scale": "Dorian",
+    "intervals": [
+      2,
+      1,
+      2,
+      2,
+      2,
+      1,
+      2
+    ],
+    "contour": "Angular, leaps of 4ths/5ths"
+  },
+  "rhythm": {
+    "dna": "\u2588\u2591\u2591\u2588\u2591\u2591",
+    "euclidean": "E(2,6)",
+    "metrical_gravity": [
+      1,
+      0,
+      0,
+      0.7,
+      0,
+      0
+    ],
+    "description": "6/8 time, compound duple"
+  },
+  "timbre": {
+    "instrumentation": [
+      "Hurdy-gurdy",
+      "Flute",
+      "Accordion"
+    ],
+    "calibration": "Drone-heavy, resonant"
+  }
+}

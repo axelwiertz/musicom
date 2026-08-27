@@ -1,0 +1,2399 @@
+{
+  "dataset": "Style-Pattern Dataset",
+  "location": "/opt/data/projects/Styles/_Data_Patterns",
+  "last_updated": "2026-06-24T04:01:00Z",
+  "total_styles": 23,
+  "total_projects": 102,
+  "styles": {
+    "Balfolk": {
+      "projects": 5,
+      "12tet_valid": true,
+      "gravity_valid": true,
+      "pitch_classes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        11
+      ],
+      "gravity_profile": [
+        1.0,
+        0,
+        0.5,
+        0
+      ]
+    },
+    "Baroque": {
+      "projects": 1,
+      "12tet_valid": true,
+      "gravity_valid": true,
+      "pitch_classes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "gravity_profile": [
+        1.0,
+        0,
+        0.5,
+        0
+      ]
+    },
+    "Bluegrass": {
+      "projects": 1,
+      "12tet_valid": true,
+      "gravity_valid": true,
+      "pitch_classes": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        6,
+        7,
+        9,
+        11
+      ],
+      "gravity_profile": [
+        1.0,
+        0.2,
+        0.8,
+        0.2,
+        0.7,
+        0.3,
+        0.6,
+        0.2
+      ]
+    },
+    "Blues": {
+      "projects": 4,
+      "12tet_valid": true,
+      "gravity_valid": true,
+      "pitch_classes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "gravity_profile": [
+        1.0,
+        0,
+        0.5,
+        0
+      ]
+    },
+    "Classical": {
+      "projects": 7,
+      "12tet_valid": true,
+      "gravity_valid": true,
+      "pitch_classes": [
+        0,
+        2,
+        4,
+        5,
+        6,
+        7,
+        9,
+        11
+      ],
+      "gravity_profile": [
+        1.0,
+        0,
+        0.5,
+        0
+      ]
+    },
+    "Country": {
+      "projects": 3,
+      "12tet_valid": true,
+      "gravity_valid": true,
+      "pitch_classes": [
+        0,
+        2,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        11
+      ],
+      "gravity_profile": [
+        1.0,
+        0,
+        0.5,
+        0
+      ]
+    },
+    "Experimental": {
+      "projects": 2,
+      "12tet_valid": true,
+      "gravity_valid": true,
+      "pitch_classes": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        11
+      ],
+      "gravity_profile": [
+        1.0,
+        0,
+        0.5,
+        0
+      ]
+    },
+    "Flamenco": {
+      "projects": 2,
+      "12tet_valid": true,
+      "gravity_valid": true,
+      "pitch_classes": [
+        0,
+        2,
+        4,
+        5,
+        7,
+        8,
+        9,
+        11
+      ],
+      "gravity_profile": [
+        1.0,
+        0,
+        0.5,
+        0
+      ]
+    },
+    "Folk": {
+      "projects": 11,
+      "12tet_valid": true,
+      "gravity_valid": true,
+      "pitch_classes": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        6,
+        7,
+        9,
+        10,
+        11
+      ],
+      "gravity_profile": [
+        1.0,
+        0,
+        0.5,
+        0
+      ]
+    },
+    "Gamelan": {
+      "projects": 2,
+      "12tet_valid": true,
+      "gravity_valid": true,
+      "pitch_classes": [
+        2,
+        4,
+        6,
+        9,
+        11
+      ],
+      "gravity_profile": [
+        1.0,
+        0,
+        0.5,
+        0
+      ]
+    },
+    "Groove": {
+      "projects": 2,
+      "12tet_valid": true,
+      "gravity_valid": true,
+      "pitch_classes": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        9,
+        10,
+        11
+      ],
+      "gravity_profile": [
+        1.0,
+        0,
+        0.5,
+        0
+      ]
+    },
+    "Hybrid": {
+      "projects": 5,
+      "12tet_valid": true,
+      "gravity_valid": true,
+      "pitch_classes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        9,
+        10,
+        11
+      ],
+      "gravity_profile": [
+        1.0,
+        0,
+        0.5,
+        0
+      ]
+    },
+    "IndianClassical": {
+      "projects": 3,
+      "12tet_valid": true,
+      "gravity_valid": true,
+      "pitch_classes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "gravity_profile": [
+        1.0,
+        0,
+        0.5,
+        0
+      ]
+    },
+    "Jazz": {
+      "projects": 3,
+      "12tet_valid": true,
+      "gravity_valid": true,
+      "pitch_classes": [],
+      "gravity_profile": [
+        1.0,
+        0,
+        0.5,
+        0
+      ]
+    },
+    "Klezmer": {
+      "projects": 1,
+      "12tet_valid": true,
+      "gravity_valid": true,
+      "pitch_classes": [
+        0,
+        2,
+        7,
+        8,
+        11
+      ],
+      "gravity_profile": [
+        1.0,
+        0,
+        0.5,
+        0
+      ]
+    },
+    "Latin": {
+      "projects": 22,
+      "12tet_valid": true,
+      "gravity_valid": true,
+      "pitch_classes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "gravity_profile": [
+        1.0,
+        0,
+        0.5,
+        0
+      ]
+    },
+    "Modal": {
+      "projects": 2,
+      "12tet_valid": true,
+      "gravity_valid": true,
+      "pitch_classes": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        7,
+        9,
+        10,
+        11
+      ],
+      "gravity_profile": [
+        1.0,
+        0,
+        0.5,
+        0
+      ]
+    },
+    "Other": {
+      "projects": 10,
+      "12tet_valid": true,
+      "gravity_valid": true,
+      "pitch_classes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "gravity_profile": [
+        1.0,
+        0,
+        0.5,
+        0
+      ]
+    },
+    "Percussion": {
+      "projects": 1,
+      "12tet_valid": true,
+      "gravity_valid": true,
+      "pitch_classes": [
+        0,
+        2,
+        5,
+        7,
+        9,
+        10
+      ],
+      "gravity_profile": [
+        1.0,
+        0,
+        0.5,
+        0
+      ]
+    },
+    "Pop": {
+      "projects": 2,
+      "12tet_valid": true,
+      "gravity_valid": true,
+      "pitch_classes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "gravity_profile": [
+        1.0,
+        0,
+        0.5,
+        0
+      ]
+    },
+    "Research": {
+      "projects": 2,
+      "12tet_valid": true,
+      "gravity_valid": true,
+      "pitch_classes": [
+        0,
+        4,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "gravity_profile": [
+        1.0,
+        0,
+        0.5,
+        0
+      ]
+    },
+    "Rock": {
+      "projects": 1,
+      "12tet_valid": true,
+      "gravity_valid": true,
+      "pitch_classes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        6,
+        7,
+        8,
+        9,
+        11
+      ],
+      "gravity_profile": [
+        1.0,
+        0,
+        0.5,
+        0
+      ]
+    },
+    "World": {
+      "projects": 10,
+      "12tet_valid": true,
+      "gravity_valid": true,
+      "pitch_classes": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "gravity_profile": [
+        1.0,
+        0,
+        0.5,
+        0
+      ]
+    }
+  },
+  "scale_refinement": {
+    "Balfolk": {
+      "tracks_analyzed": 12,
+      "dominant_per_track_scale": "Major/Ionian",
+      "scale_distribution": {
+        "Major/Ionian": 5,
+        "Lydian": 2,
+        "In Scale": 5
+      },
+      "track_details": [
+        {
+          "project": "005-balfolk-production",
+          "track": 1,
+          "notes": 203,
+          "pitch_classes": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            7,
+            8,
+            9,
+            11
+          ],
+          "per_track_scale": "Major/Ionian",
+          "range": [
+            50,
+            88
+          ],
+          "velocity_avg": 100.0
+        },
+        {
+          "project": "011-balfolk-dust-on-the-dashboard",
+          "track": 1,
+          "notes": 40,
+          "pitch_classes": [
+            0,
+            2,
+            4,
+            7,
+            9,
+            11
+          ],
+          "per_track_scale": "Lydian",
+          "range": [
+            64,
+            76
+          ],
+          "velocity_avg": 90.0
+        },
+        {
+          "project": "011-balfolk-dust-on-the-dashboard",
+          "track": 2,
+          "notes": 48,
+          "pitch_classes": [
+            0,
+            2,
+            4,
+            6,
+            7,
+            9,
+            11
+          ],
+          "per_track_scale": "Lydian",
+          "range": [
+            50,
+            62
+          ],
+          "velocity_avg": 90.0
+        },
+        {
+          "project": "011-balfolk-dust-on-the-dashboard",
+          "track": 3,
+          "notes": 16,
+          "pitch_classes": [
+            0,
+            2,
+            4,
+            7
+          ],
+          "per_track_scale": "In Scale",
+          "range": [
+            40,
+            50
+          ],
+          "velocity_avg": 90.0
+        },
+        {
+          "project": "014-balfolk-cinematic",
+          "track": 1,
+          "notes": 112,
+          "pitch_classes": [
+            2,
+            4,
+            5,
+            7,
+            9
+          ],
+          "per_track_scale": "Major/Ionian",
+          "range": [
+            62,
+            69
+          ],
+          "velocity_avg": 90.0
+        }
+      ]
+    },
+    "Baroque": {
+      "tracks_analyzed": 2,
+      "dominant_per_track_scale": "Harmonic Minor",
+      "scale_distribution": {
+        "Harmonic Minor": 1,
+        "Mixolydian": 1
+      },
+      "track_details": [
+        {
+          "project": "004-baroque-counterpoint-inversion",
+          "track": 1,
+          "notes": 8,
+          "pitch_classes": [
+            0,
+            2,
+            3,
+            7,
+            8,
+            11
+          ],
+          "per_track_scale": "Harmonic Minor",
+          "range": [
+            55,
+            63
+          ],
+          "velocity_avg": 100.0
+        },
+        {
+          "project": "004-baroque-counterpoint-inversion",
+          "track": 2,
+          "notes": 8,
+          "pitch_classes": [
+            0,
+            1,
+            4,
+            5,
+            9,
+            10
+          ],
+          "per_track_scale": "Mixolydian",
+          "range": [
+            57,
+            65
+          ],
+          "velocity_avg": 100.0
+        }
+      ]
+    },
+    "Bluegrass": {
+      "tracks_analyzed": 5,
+      "dominant_per_track_scale": "Lydian",
+      "scale_distribution": {
+        "Lydian": 2,
+        "Major/Ionian": 2,
+        "In Scale": 1
+      },
+      "track_details": [
+        {
+          "project": "bluegrass-scruggs-daily-2026-06-23",
+          "track": 1,
+          "notes": 16,
+          "pitch_classes": [
+            0,
+            2,
+            4,
+            7,
+            9,
+            11
+          ],
+          "per_track_scale": "Lydian",
+          "range": [
+            67,
+            76
+          ],
+          "velocity_avg": 75.8
+        },
+        {
+          "project": "bluegrass-scruggs-daily-2026-06-23",
+          "track": 2,
+          "notes": 18,
+          "pitch_classes": [
+            0,
+            2,
+            4,
+            5,
+            7,
+            9,
+            11
+          ],
+          "per_track_scale": "Major/Ionian",
+          "range": [
+            67,
+            77
+          ],
+          "velocity_avg": 80.7
+        },
+        {
+          "project": "bluegrass-scruggs-daily-2026-06-23",
+          "track": 3,
+          "notes": 16,
+          "pitch_classes": [
+            0,
+            2,
+            6,
+            7,
+            9,
+            11
+          ],
+          "per_track_scale": "Lydian",
+          "range": [
+            50,
+            67
+          ],
+          "velocity_avg": 85.0
+        },
+        {
+          "project": "bluegrass-scruggs-daily-2026-06-23",
+          "track": 4,
+          "notes": 18,
+          "pitch_classes": [
+            0,
+            1,
+            2,
+            7,
+            9,
+            11
+          ],
+          "per_track_scale": "Major/Ionian",
+          "range": [
+            55,
+            62
+          ],
+          "velocity_avg": 73.4
+        },
+        {
+          "project": "bluegrass-scruggs-daily-2026-06-23",
+          "track": 5,
+          "notes": 7,
+          "pitch_classes": [
+            2,
+            7
+          ],
+          "per_track_scale": "In Scale",
+          "range": [
+            38,
+            50
+          ],
+          "velocity_avg": 87.9
+        }
+      ]
+    },
+    "Blues": {
+      "tracks_analyzed": 4,
+      "dominant_per_track_scale": "Lydian",
+      "scale_distribution": {
+        "Major/Ionian": 1,
+        "Lydian": 2,
+        "Blues Hexatonic": 1
+      },
+      "track_details": [
+        {
+          "project": "027-delta-blues-shack",
+          "track": 1,
+          "notes": 1251,
+          "pitch_classes": [
+            0,
+            2,
+            3,
+            4,
+            7,
+            9
+          ],
+          "per_track_scale": "Major/Ionian",
+          "range": [
+            69,
+            79
+          ],
+          "velocity_avg": 88.8
+        },
+        {
+          "project": "027-delta-blues-shack",
+          "track": 2,
+          "notes": 259,
+          "pitch_classes": [
+            0,
+            1,
+            2,
+            4,
+            6,
+            8,
+            9,
+            11
+          ],
+          "per_track_scale": "Lydian",
+          "range": [
+            40,
+            71
+          ],
+          "velocity_avg": 75.5
+        },
+        {
+          "project": "027-delta-blues-shack",
+          "track": 3,
+          "notes": 211,
+          "pitch_classes": [
+            2,
+            4,
+            9,
+            11
+          ],
+          "per_track_scale": "Lydian",
+          "range": [
+            40,
+            57
+          ],
+          "velocity_avg": 84.2
+        },
+        {
+          "project": "027-delta-blues-shack",
+          "track": 4,
+          "notes": 359,
+          "pitch_classes": [
+            0,
+            3,
+            6,
+            10
+          ],
+          "per_track_scale": "Blues Hexatonic",
+          "range": [
+            36,
+            46
+          ],
+          "velocity_avg": 81.4
+        }
+      ]
+    },
+    "Classical": {
+      "tracks_analyzed": 6,
+      "dominant_per_track_scale": "Lydian",
+      "scale_distribution": {
+        "Pentatonic Major": 1,
+        "In Scale": 1,
+        "Lydian": 2,
+        "Blues Hexatonic": 1,
+        "Major/Ionian": 1
+      },
+      "track_details": [
+        {
+          "project": "002-classical-daily-2026-06-12",
+          "track": 1,
+          "notes": 83,
+          "pitch_classes": [
+            0,
+            2,
+            4,
+            7,
+            9
+          ],
+          "per_track_scale": "Pentatonic Major",
+          "range": [
+            60,
+            69
+          ],
+          "velocity_avg": 95.0
+        },
+        {
+          "project": "002-classical-daily-2026-06-12",
+          "track": 2,
+          "notes": 64,
+          "pitch_classes": [
+            0,
+            2,
+            7
+          ],
+          "per_track_scale": "In Scale",
+          "range": [
+            31,
+            43
+          ],
+          "velocity_avg": 95.0
+        },
+        {
+          "project": "002-classical-daily-2026-06-12",
+          "track": 3,
+          "notes": 128,
+          "pitch_classes": [
+            0,
+            4,
+            7,
+            11
+          ],
+          "per_track_scale": "Lydian",
+          "range": [
+            48,
+            59
+          ],
+          "velocity_avg": 70.0
+        },
+        {
+          "project": "002-classical-daily-2026-06-12",
+          "track": 4,
+          "notes": 128,
+          "pitch_classes": [
+            6
+          ],
+          "per_track_scale": "Blues Hexatonic",
+          "range": [
+            42,
+            42
+          ],
+          "velocity_avg": 80.0
+        },
+        {
+          "project": "021-classical-mozart",
+          "track": 1,
+          "notes": 52,
+          "pitch_classes": [
+            0,
+            2,
+            4,
+            5,
+            7,
+            9,
+            11
+          ],
+          "per_track_scale": "Major/Ionian",
+          "range": [
+            60,
+            84
+          ],
+          "velocity_avg": 90.0
+        }
+      ]
+    },
+    "Country": {
+      "tracks_analyzed": 6,
+      "dominant_per_track_scale": "Lydian",
+      "scale_distribution": {
+        "Major/Ionian": 1,
+        "Lydian": 3,
+        "In Scale": 1,
+        "Phrygian Dominant (Freygish)": 1
+      },
+      "track_details": [
+        {
+          "project": "012-country-country-uke",
+          "track": 1,
+          "notes": 128,
+          "pitch_classes": [
+            0,
+            2,
+            4,
+            5,
+            7,
+            9,
+            11
+          ],
+          "per_track_scale": "Major/Ionian",
+          "range": [
+            59,
+            72
+          ],
+          "velocity_avg": 90.0
+        },
+        {
+          "project": "012-country-full-16bar",
+          "track": 0,
+          "notes": 64,
+          "pitch_classes": [
+            0,
+            2,
+            4,
+            6,
+            7,
+            9,
+            11
+          ],
+          "per_track_scale": "Lydian",
+          "range": [
+            67,
+            81
+          ],
+          "velocity_avg": 90.0
+        },
+        {
+          "project": "012-country-full-16bar",
+          "track": 1,
+          "notes": 96,
+          "pitch_classes": [
+            0,
+            2,
+            4,
+            6,
+            7,
+            9,
+            11
+          ],
+          "per_track_scale": "Lydian",
+          "range": [
+            55,
+            69
+          ],
+          "velocity_avg": 75.0
+        },
+        {
+          "project": "012-country-full-16bar",
+          "track": 2,
+          "notes": 64,
+          "pitch_classes": [
+            0,
+            2,
+            4,
+            6,
+            7,
+            9,
+            11
+          ],
+          "per_track_scale": "Lydian",
+          "range": [
+            55,
+            74
+          ],
+          "velocity_avg": 50.0
+        },
+        {
+          "project": "012-country-full-16bar",
+          "track": 3,
+          "notes": 64,
+          "pitch_classes": [
+            0,
+            2
+          ],
+          "per_track_scale": "In Scale",
+          "range": [
+            36,
+            38
+          ],
+          "velocity_avg": 90.0
+        }
+      ]
+    },
+    "Experimental": {
+      "tracks_analyzed": 3,
+      "dominant_per_track_scale": "Harmonic Minor",
+      "scale_distribution": {
+        "Harmonic Minor": 3
+      },
+      "track_details": [
+        {
+          "project": "032-prime-fractal-full",
+          "track": 0,
+          "notes": 192,
+          "pitch_classes": [
+            0,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            11
+          ],
+          "per_track_scale": "Harmonic Minor",
+          "range": [
+            55,
+            89
+          ],
+          "velocity_avg": 95.0
+        },
+        {
+          "project": "032-prime-fractal-full",
+          "track": 1,
+          "notes": 160,
+          "pitch_classes": [
+            0,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            11
+          ],
+          "per_track_scale": "Harmonic Minor",
+          "range": [
+            43,
+            65
+          ],
+          "velocity_avg": 40.0
+        },
+        {
+          "project": "032-prime-fractal-void",
+          "track": 0,
+          "notes": 96,
+          "pitch_classes": [
+            0,
+            3,
+            5,
+            7,
+            11
+          ],
+          "per_track_scale": "Harmonic Minor",
+          "range": [
+            60,
+            83
+          ],
+          "velocity_avg": 95.0
+        }
+      ]
+    },
+    "Flamenco": {
+      "tracks_analyzed": 2,
+      "dominant_per_track_scale": "Major/Ionian",
+      "scale_distribution": {
+        "Major/Ionian": 2
+      },
+      "track_details": [
+        {
+          "project": "023-flamenco-16-bar",
+          "track": 1,
+          "notes": 64,
+          "pitch_classes": [
+            0,
+            2,
+            4,
+            5,
+            7,
+            8,
+            9,
+            11
+          ],
+          "per_track_scale": "Major/Ionian",
+          "range": [
+            40,
+            69
+          ],
+          "velocity_avg": 90.0
+        },
+        {
+          "project": "033-flamenco-solea-study",
+          "track": 0,
+          "notes": 39,
+          "pitch_classes": [
+            0,
+            2,
+            4,
+            5,
+            7,
+            8,
+            9,
+            11
+          ],
+          "per_track_scale": "Major/Ionian",
+          "range": [
+            52,
+            64
+          ],
+          "velocity_avg": 93.1
+        }
+      ]
+    },
+    "Folk": {
+      "tracks_analyzed": 8,
+      "dominant_per_track_scale": "Lydian",
+      "scale_distribution": {
+        "Mixolydian": 1,
+        "Lydian": 7
+      },
+      "track_details": [
+        {
+          "project": "001-folk-drie-kleine-kleutertjes",
+          "track": 0,
+          "notes": 52,
+          "pitch_classes": [
+            0,
+            2,
+            4,
+            5,
+            7,
+            9,
+            10
+          ],
+          "per_track_scale": "Mixolydian",
+          "range": [
+            48,
+            65
+          ],
+          "velocity_avg": 80.0
+        },
+        {
+          "project": "016-folk-electric-folk-d-major",
+          "track": 1,
+          "notes": 1152,
+          "pitch_classes": [
+            2,
+            4,
+            6,
+            7,
+            9,
+            11
+          ],
+          "per_track_scale": "Lydian",
+          "range": [
+            55,
+            79
+          ],
+          "velocity_avg": 81.6
+        },
+        {
+          "project": "016-folk-electric-folk-d-major",
+          "track": 2,
+          "notes": 208,
+          "pitch_classes": [
+            2,
+            4,
+            6,
+            9,
+            11
+          ],
+          "per_track_scale": "Lydian",
+          "range": [
+            62,
+            88
+          ],
+          "velocity_avg": 89.4
+        },
+        {
+          "project": "016-folk-electric-folk-d-major",
+          "track": 3,
+          "notes": 436,
+          "pitch_classes": [
+            2,
+            4,
+            6,
+            9,
+            11
+          ],
+          "per_track_scale": "Lydian",
+          "range": [
+            71,
+            95
+          ],
+          "velocity_avg": 82.6
+        },
+        {
+          "project": "016-folk-electric-folk-d-major",
+          "track": 4,
+          "notes": 256,
+          "pitch_classes": [
+            2,
+            4,
+            7,
+            9,
+            11
+          ],
+          "per_track_scale": "Lydian",
+          "range": [
+            43,
+            67
+          ],
+          "velocity_avg": 86.0
+        }
+      ]
+    },
+    "Gamelan": {
+      "tracks_analyzed": 5,
+      "dominant_per_track_scale": "Lydian",
+      "scale_distribution": {
+        "Lydian": 3,
+        "In Scale": 2
+      },
+      "track_details": [
+        {
+          "project": "017-gamelan-central-java",
+          "track": 1,
+          "notes": 128,
+          "pitch_classes": [
+            2,
+            4,
+            6,
+            9,
+            11
+          ],
+          "per_track_scale": "Lydian",
+          "range": [
+            62,
+            74
+          ],
+          "velocity_avg": 90.0
+        },
+        {
+          "project": "017-gamelan-central-java",
+          "track": 2,
+          "notes": 256,
+          "pitch_classes": [
+            2,
+            4,
+            6,
+            9,
+            11
+          ],
+          "per_track_scale": "Lydian",
+          "range": [
+            62,
+            74
+          ],
+          "velocity_avg": 92.5
+        },
+        {
+          "project": "017-gamelan-central-java",
+          "track": 3,
+          "notes": 120,
+          "pitch_classes": [
+            2,
+            9
+          ],
+          "per_track_scale": "In Scale",
+          "range": [
+            38,
+            50
+          ],
+          "velocity_avg": 82.3
+        },
+        {
+          "project": "017-gamelan-central-java",
+          "track": 4,
+          "notes": 8,
+          "pitch_classes": [
+            2
+          ],
+          "per_track_scale": "In Scale",
+          "range": [
+            26,
+            26
+          ],
+          "velocity_avg": 120.0
+        },
+        {
+          "project": "gamelan-daily-2026-06-20",
+          "track": 0,
+          "notes": 8,
+          "pitch_classes": [
+            2,
+            4,
+            6,
+            9
+          ],
+          "per_track_scale": "Lydian",
+          "range": [
+            62,
+            69
+          ],
+          "velocity_avg": 67.5
+        }
+      ]
+    },
+    "Groove": {
+      "tracks_analyzed": 9,
+      "dominant_per_track_scale": "Pentatonic Minor",
+      "scale_distribution": {
+        "Pentatonic Minor": 3,
+        "Major/Ionian": 1,
+        "Dorian": 2,
+        "In Scale": 1,
+        "Lydian": 1,
+        "Mixolydian": 1
+      },
+      "track_details": [
+        {
+          "project": "019-soul-groove",
+          "track": 1,
+          "notes": 32,
+          "pitch_classes": [
+            0,
+            3,
+            5,
+            7,
+            10
+          ],
+          "per_track_scale": "Pentatonic Minor",
+          "range": [
+            60,
+            70
+          ],
+          "velocity_avg": 90.0
+        },
+        {
+          "project": "019-soul-groove",
+          "track": 2,
+          "notes": 16,
+          "pitch_classes": [
+            0,
+            2,
+            3,
+            4,
+            5,
+            7,
+            9,
+            10,
+            11
+          ],
+          "per_track_scale": "Major/Ionian",
+          "range": [
+            60,
+            71
+          ],
+          "velocity_avg": 90.0
+        },
+        {
+          "project": "019-soul-groove",
+          "track": 3,
+          "notes": 16,
+          "pitch_classes": [
+            0,
+            2,
+            3,
+            5,
+            7,
+            9,
+            10
+          ],
+          "per_track_scale": "Dorian",
+          "range": [
+            34,
+            45
+          ],
+          "velocity_avg": 90.0
+        },
+        {
+          "project": "019-soul-groove",
+          "track": 4,
+          "notes": 16,
+          "pitch_classes": [
+            0,
+            2
+          ],
+          "per_track_scale": "In Scale",
+          "range": [
+            36,
+            38
+          ],
+          "velocity_avg": 90.0
+        },
+        {
+          "project": "020-afrobeat-groove",
+          "track": 1,
+          "notes": 30,
+          "pitch_classes": [
+            2,
+            6,
+            11
+          ],
+          "per_track_scale": "Lydian",
+          "range": [
+            35,
+            42
+          ],
+          "velocity_avg": 90.0
+        }
+      ]
+    },
+    "Hybrid": {
+      "tracks_analyzed": 12,
+      "dominant_per_track_scale": "Lydian",
+      "scale_distribution": {
+        "Pentatonic Minor": 1,
+        "Major/Ionian": 2,
+        "Lydian": 3,
+        "Blues Hexatonic": 2,
+        "In Scale": 3,
+        "Mixolydian": 1
+      },
+      "track_details": [
+        {
+          "project": "018-landal-bollo-koos-hybrid",
+          "track": 0,
+          "notes": 32,
+          "pitch_classes": [
+            5,
+            10
+          ],
+          "per_track_scale": "Pentatonic Minor",
+          "range": [
+            46,
+            53
+          ],
+          "velocity_avg": 80.0
+        },
+        {
+          "project": "018-rock-apprenticeship",
+          "track": 1,
+          "notes": 60,
+          "pitch_classes": [
+            2,
+            4,
+            7,
+            9,
+            10,
+            11
+          ],
+          "per_track_scale": "Major/Ionian",
+          "range": [
+            52,
+            62
+          ],
+          "velocity_avg": 90.0
+        },
+        {
+          "project": "018-rock-apprenticeship",
+          "track": 2,
+          "notes": 54,
+          "pitch_classes": [
+            2,
+            4,
+            7,
+            9,
+            11
+          ],
+          "per_track_scale": "Lydian",
+          "range": [
+            33,
+            45
+          ],
+          "velocity_avg": 90.0
+        },
+        {
+          "project": "018-rock-apprenticeship",
+          "track": 3,
+          "notes": 36,
+          "pitch_classes": [
+            2,
+            4,
+            6,
+            7,
+            9,
+            11
+          ],
+          "per_track_scale": "Lydian",
+          "range": [
+            50,
+            71
+          ],
+          "velocity_avg": 78.0
+        },
+        {
+          "project": "018-rock-apprenticeship",
+          "track": 4,
+          "notes": 96,
+          "pitch_classes": [
+            6
+          ],
+          "per_track_scale": "Blues Hexatonic",
+          "range": [
+            42,
+            42
+          ],
+          "velocity_avg": 45.0
+        }
+      ]
+    },
+    "IndianClassical": {
+      "tracks_analyzed": 8,
+      "dominant_per_track_scale": "In Scale",
+      "scale_distribution": {
+        "Major/Ionian": 1,
+        "In Scale": 3,
+        "Phrygian": 1,
+        "Mixolydian": 1,
+        "Dorian": 1,
+        "Pelog (approx)": 1
+      },
+      "track_details": [
+        {
+          "project": "018-hindustani-bhairavi",
+          "track": 1,
+          "notes": 193,
+          "pitch_classes": [
+            0,
+            2,
+            3,
+            4,
+            5,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "per_track_scale": "Major/Ionian",
+          "range": [
+            62,
+            74
+          ],
+          "velocity_avg": 88.9
+        },
+        {
+          "project": "018-hindustani-bhairavi",
+          "track": 2,
+          "notes": 97,
+          "pitch_classes": [
+            2,
+            9
+          ],
+          "per_track_scale": "In Scale",
+          "range": [
+            38,
+            62
+          ],
+          "velocity_avg": 50.1
+        },
+        {
+          "project": "018-hindustani-bhairavi",
+          "track": 3,
+          "notes": 144,
+          "pitch_classes": [
+            0,
+            1,
+            6
+          ],
+          "per_track_scale": "Phrygian",
+          "range": [
+            36,
+            60
+          ],
+          "velocity_avg": 86.9
+        },
+        {
+          "project": "024-ahir-bhairav-teental-showcase",
+          "track": 1,
+          "notes": 16,
+          "pitch_classes": [
+            0,
+            1,
+            4,
+            5,
+            7,
+            9,
+            10
+          ],
+          "per_track_scale": "Mixolydian",
+          "range": [
+            60,
+            70
+          ],
+          "velocity_avg": 90.0
+        },
+        {
+          "project": "024-ahir-bhairav-teental-showcase",
+          "track": 2,
+          "notes": 32,
+          "pitch_classes": [
+            0,
+            7
+          ],
+          "per_track_scale": "In Scale",
+          "range": [
+            48,
+            55
+          ],
+          "velocity_avg": 90.0
+        }
+      ]
+    },
+    "Klezmer": {
+      "tracks_analyzed": 4,
+      "dominant_per_track_scale": "In Scale",
+      "scale_distribution": {
+        "In Scale": 2,
+        "Harmonic Minor": 2
+      },
+      "track_details": [
+        {
+          "project": "freylekhs-daily-2026-06-17",
+          "track": 0,
+          "notes": 4,
+          "pitch_classes": [
+            2,
+            7
+          ],
+          "per_track_scale": "In Scale",
+          "range": [
+            38,
+            43
+          ],
+          "velocity_avg": 90.0
+        },
+        {
+          "project": "freylekhs-daily-2026-06-17",
+          "track": 1,
+          "notes": 4,
+          "pitch_classes": [
+            7
+          ],
+          "per_track_scale": "In Scale",
+          "range": [
+            55,
+            55
+          ],
+          "velocity_avg": 70.0
+        },
+        {
+          "project": "freylekhs-daily-2026-06-17",
+          "track": 2,
+          "notes": 5,
+          "pitch_classes": [
+            0,
+            7,
+            8,
+            11
+          ],
+          "per_track_scale": "Harmonic Minor",
+          "range": [
+            67,
+            72
+          ],
+          "velocity_avg": 100.0
+        },
+        {
+          "project": "freylekhs-daily-2026-06-17",
+          "track": 3,
+          "notes": 5,
+          "pitch_classes": [
+            0,
+            7,
+            8,
+            11
+          ],
+          "per_track_scale": "Harmonic Minor",
+          "range": [
+            67,
+            72
+          ],
+          "velocity_avg": 100.0
+        }
+      ]
+    },
+    "Latin": {
+      "tracks_analyzed": 23,
+      "dominant_per_track_scale": "In Scale",
+      "scale_distribution": {
+        "Yo Scale": 1,
+        "Major/Ionian": 5,
+        "Phrygian": 2,
+        "Pentatonic Minor": 2,
+        "Pelog (approx)": 2,
+        "In Scale": 8,
+        "Lydian": 3
+      },
+      "track_details": [
+        {
+          "project": "026-bossa-nova-unitmatrix",
+          "track": 1,
+          "notes": 172,
+          "pitch_classes": [
+            0,
+            2,
+            5,
+            7,
+            9
+          ],
+          "per_track_scale": "Yo Scale",
+          "range": [
+            62,
+            77
+          ],
+          "velocity_avg": 68.2
+        },
+        {
+          "project": "026-bossa-nova-unitmatrix",
+          "track": 2,
+          "notes": 140,
+          "pitch_classes": [
+            2,
+            5,
+            7,
+            9,
+            11
+          ],
+          "per_track_scale": "Major/Ionian",
+          "range": [
+            38,
+            50
+          ],
+          "velocity_avg": 75.4
+        },
+        {
+          "project": "026-bossa-nova-unitmatrix",
+          "track": 3,
+          "notes": 424,
+          "pitch_classes": [
+            0,
+            1,
+            3,
+            6
+          ],
+          "per_track_scale": "Phrygian",
+          "range": [
+            36,
+            63
+          ],
+          "velocity_avg": 79.5
+        },
+        {
+          "project": "028-bossa-nova-daily-2026-06-12",
+          "track": 1,
+          "notes": 40,
+          "pitch_classes": [
+            0,
+            2,
+            4,
+            5,
+            6,
+            7,
+            9,
+            11
+          ],
+          "per_track_scale": "Major/Ionian",
+          "range": [
+            60,
+            78
+          ],
+          "velocity_avg": 86.0
+        },
+        {
+          "project": "028-bossa-nova-daily-2026-06-12",
+          "track": 3,
+          "notes": 32,
+          "pitch_classes": [
+            0,
+            5,
+            7
+          ],
+          "per_track_scale": "Pentatonic Minor",
+          "range": [
+            36,
+            43
+          ],
+          "velocity_avg": 96.0
+        }
+      ]
+    },
+    "Modal": {
+      "tracks_analyzed": 2,
+      "dominant_per_track_scale": "Major/Ionian",
+      "scale_distribution": {
+        "Major/Ionian": 2
+      },
+      "track_details": [
+        {
+          "project": "002-modal-dorian-agent",
+          "track": 1,
+          "notes": 8,
+          "pitch_classes": [
+            2,
+            4,
+            5,
+            7,
+            9
+          ],
+          "per_track_scale": "Major/Ionian",
+          "range": [
+            74,
+            81
+          ],
+          "velocity_avg": 90.0
+        },
+        {
+          "project": "002-modal-dorian-agent",
+          "track": 2,
+          "notes": 16,
+          "pitch_classes": [
+            0,
+            2,
+            4,
+            5,
+            7,
+            9,
+            11
+          ],
+          "per_track_scale": "Major/Ionian",
+          "range": [
+            62,
+            77
+          ],
+          "velocity_avg": 60.0
+        }
+      ]
+    },
+    "Other": {
+      "tracks_analyzed": 5,
+      "dominant_per_track_scale": "Major/Ionian",
+      "scale_distribution": {
+        "Pelog (approx)": 1,
+        "Major/Ionian": 2,
+        "In Scale": 2
+      },
+      "track_details": [
+        {
+          "project": "genre-daily-2026-06-13",
+          "track": 0,
+          "notes": 64,
+          "pitch_classes": [
+            0,
+            3
+          ],
+          "per_track_scale": "Pelog (approx)",
+          "range": [
+            36,
+            63
+          ],
+          "velocity_avg": 95.0
+        },
+        {
+          "project": "genre-daily-2026-06-14",
+          "track": 1,
+          "notes": 32,
+          "pitch_classes": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "per_track_scale": "Major/Ionian",
+          "range": [
+            61,
+            80
+          ],
+          "velocity_avg": 64.0
+        },
+        {
+          "project": "unknown-daily-2026-06-05",
+          "track": 0,
+          "notes": 300,
+          "pitch_classes": [
+            0
+          ],
+          "per_track_scale": "In Scale",
+          "range": [
+            72,
+            72
+          ],
+          "velocity_avg": 100.0
+        },
+        {
+          "project": "unknown-daily-2026-06-06",
+          "track": 1,
+          "notes": 80,
+          "pitch_classes": [
+            4,
+            5,
+            7,
+            9,
+            11
+          ],
+          "per_track_scale": "Major/Ionian",
+          "range": [
+            52,
+            83
+          ],
+          "velocity_avg": 64.0
+        },
+        {
+          "project": "unknown-daily-2026-06-06",
+          "track": 2,
+          "notes": 16,
+          "pitch_classes": [
+            4
+          ],
+          "per_track_scale": "In Scale",
+          "range": [
+            40,
+            40
+          ],
+          "velocity_avg": 64.0
+        }
+      ]
+    },
+    "Percussion": {
+      "tracks_analyzed": 2,
+      "dominant_per_track_scale": "In Scale",
+      "scale_distribution": {
+        "In Scale": 1,
+        "Dorian": 1
+      },
+      "track_details": [
+        {
+          "project": "015-percussion-percussion-dna",
+          "track": 0,
+          "notes": 8,
+          "pitch_classes": [
+            0
+          ],
+          "per_track_scale": "In Scale",
+          "range": [
+            36,
+            36
+          ],
+          "velocity_avg": 100.0
+        },
+        {
+          "project": "015-percussion-percussion-dna",
+          "track": 1,
+          "notes": 9,
+          "pitch_classes": [
+            2,
+            5,
+            7,
+            9,
+            10
+          ],
+          "per_track_scale": "Dorian",
+          "range": [
+            62,
+            70
+          ],
+          "velocity_avg": 90.0
+        }
+      ]
+    },
+    "Pop": {
+      "tracks_analyzed": 7,
+      "dominant_per_track_scale": "Major/Ionian",
+      "scale_distribution": {
+        "Major/Ionian": 4,
+        "Lydian": 1,
+        "In Scale": 2
+      },
+      "track_details": [
+        {
+          "project": "036-kate-bush-analysis",
+          "track": 0,
+          "notes": 295,
+          "pitch_classes": [
+            0,
+            2,
+            3,
+            4,
+            5,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "per_track_scale": "Major/Ionian",
+          "range": [
+            55,
+            77
+          ],
+          "velocity_avg": 80.0
+        },
+        {
+          "project": "036-kate-bush-analysis",
+          "track": 1,
+          "notes": 53,
+          "pitch_classes": [
+            0,
+            2,
+            3,
+            4,
+            7,
+            9,
+            10,
+            11
+          ],
+          "per_track_scale": "Major/Ionian",
+          "range": [
+            57,
+            91
+          ],
+          "velocity_avg": 80.0
+        },
+        {
+          "project": "036-kate-bush-analysis",
+          "track": 2,
+          "notes": 593,
+          "pitch_classes": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "per_track_scale": "Major/Ionian",
+          "range": [
+            55,
+            108
+          ],
+          "velocity_avg": 80.0
+        },
+        {
+          "project": "036-kate-bush-analysis",
+          "track": 3,
+          "notes": 302,
+          "pitch_classes": [
+            0,
+            2,
+            4,
+            5,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "per_track_scale": "Major/Ionian",
+          "range": [
+            31,
+            56
+          ],
+          "velocity_avg": 80.0
+        },
+        {
+          "project": "indie-pop-sunset",
+          "track": 0,
+          "notes": 48,
+          "pitch_classes": [
+            2,
+            4,
+            6,
+            7,
+            9,
+            11
+          ],
+          "per_track_scale": "Lydian",
+          "range": [
+            64,
+            76
+          ],
+          "velocity_avg": 95.0
+        }
+      ]
+    },
+    "Research": {
+      "tracks_analyzed": 1,
+      "dominant_per_track_scale": "In Scale",
+      "scale_distribution": {
+        "In Scale": 1
+      },
+      "track_details": [
+        {
+          "project": "virtual_instruments",
+          "track": 0,
+          "notes": 12,
+          "pitch_classes": [
+            0,
+            4,
+            7,
+            9
+          ],
+          "per_track_scale": "In Scale",
+          "range": [
+            57,
+            69
+          ],
+          "velocity_avg": 100.0
+        }
+      ]
+    },
+    "Rock": {
+      "tracks_analyzed": 6,
+      "dominant_per_track_scale": "Lydian",
+      "scale_distribution": {
+        "Lydian": 5,
+        "Harmonic Minor": 1
+      },
+      "track_details": [
+        {
+          "project": "037-u2-streets-analysis",
+          "track": 1,
+          "notes": 819,
+          "pitch_classes": [
+            1,
+            3,
+            4,
+            6,
+            8,
+            9,
+            11
+          ],
+          "per_track_scale": "Lydian",
+          "range": [
+            68,
+            83
+          ],
+          "velocity_avg": 113.9
+        },
+        {
+          "project": "037-u2-streets-analysis",
+          "track": 2,
+          "notes": 691,
+          "pitch_classes": [
+            1,
+            2,
+            3,
+            4,
+            6,
+            8,
+            9,
+            11
+          ],
+          "per_track_scale": "Lydian",
+          "range": [
+            66,
+            80
+          ],
+          "velocity_avg": 117.9
+        },
+        {
+          "project": "037-u2-streets-analysis",
+          "track": 3,
+          "notes": 580,
+          "pitch_classes": [
+            1,
+            2,
+            3,
+            4,
+            6,
+            8,
+            9,
+            11
+          ],
+          "per_track_scale": "Lydian",
+          "range": [
+            59,
+            76
+          ],
+          "velocity_avg": 116.3
+        },
+        {
+          "project": "037-u2-streets-analysis",
+          "track": 4,
+          "notes": 118,
+          "pitch_classes": [
+            0,
+            1,
+            2,
+            4,
+            6,
+            7,
+            9,
+            11
+          ],
+          "per_track_scale": "Lydian",
+          "range": [
+            36,
+            76
+          ],
+          "velocity_avg": 90.0
+        },
+        {
+          "project": "037-u2-streets-analysis",
+          "track": 5,
+          "notes": 112,
+          "pitch_classes": [
+            0,
+            2,
+            6,
+            7,
+            9,
+            11
+          ],
+          "per_track_scale": "Lydian",
+          "range": [
+            30,
+            48
+          ],
+          "velocity_avg": 90.0
+        }
+      ]
+    },
+    "World": {
+      "tracks_analyzed": 4,
+      "dominant_per_track_scale": "Dorian",
+      "scale_distribution": {
+        "Dorian": 3,
+        "Lydian": 1
+      },
+      "track_details": [
+        {
+          "project": "arabic-daily-2026-06-08",
+          "track": 1,
+          "notes": 318,
+          "pitch_classes": [
+            0,
+            2,
+            3,
+            4,
+            5,
+            7,
+            8,
+            9,
+            10
+          ],
+          "per_track_scale": "Dorian",
+          "range": [
+            48,
+            77
+          ],
+          "velocity_avg": 64.0
+        },
+        {
+          "project": "bollywood-study",
+          "track": 0,
+          "notes": 64,
+          "pitch_classes": [
+            0,
+            2,
+            3,
+            5,
+            7
+          ],
+          "per_track_scale": "Dorian",
+          "range": [
+            60,
+            67
+          ],
+          "velocity_avg": 90.0
+        },
+        {
+          "project": "bollywood-study",
+          "track": 1,
+          "notes": 64,
+          "pitch_classes": [
+            0,
+            2,
+            6
+          ],
+          "per_track_scale": "Lydian",
+          "range": [
+            24,
+            30
+          ],
+          "velocity_avg": 100.0
+        },
+        {
+          "project": "cretan-laika",
+          "track": 0,
+          "notes": 128,
+          "pitch_classes": [
+            2,
+            3,
+            6,
+            7,
+            9
+          ],
+          "per_track_scale": "Dorian",
+          "range": [
+            50,
+            69
+          ],
+          "velocity_avg": 75.0
+        }
+      ]
+    }
+  }
+}

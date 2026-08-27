@@ -1,0 +1,45 @@
+{
+  "job": "production-9a2813f77dac",
+  "source_midi": "/opt/data/projects/Styles/Latin/samba-batucada-daily-2026-06-18/composition.mid",
+  "source_midi_sha256": "b8b9b0cf9d63546060ddddd94ff45c6ed28abed9114d99416c84bc49f1d5e6ce",
+  "production_method": "SP-029",
+  "production_method_name": "Subtractive Synthesis with PolyBLEP Anti-Aliased Oscillators and Analog Filter Emulation",
+  "composition_analysis": {
+    "bpm": 120,
+    "ticks_per_beat": 10080,
+    "loop_seconds": 0.875,
+    "kick_midi_note": 36,
+    "agogo_midi_note": 64,
+    "agogo_hits_per_loop": 14,
+    "kick_hits_per_loop": 6,
+    "voice_map": {
+      "track1": "kick/surdo (MIDI 36) sixteenth accents 0,1,2,3,6,7",
+      "track2": "agogo bell E4 (MIDI 64) every sixteenth"
+    }
+  },
+  "synthesis_parameters": {
+    "sample_rate": 44100,
+    "kick": {
+      "oscillator": "sine + pitch envelope 120->40 Hz (tau 35 ms)",
+      "adsr": "A 2ms D 160ms S 0 R 50ms"
+    },
+    "agogo": {
+      "oscillator": "2x PolyBLEP square PW 0.25, unison detune +/-7 cents",
+      "filter": "Moog 4-pole ladder, resonance 1.8, beta 1.6",
+      "filter_fc": "900 Hz base + 9000 Hz envelope depth (open->close sweep)",
+      "adsr": "A 1ms D 100ms S 0.30 R 90ms"
+    },
+    "master": {
+      "mix": "0.9 agogo + 1.0 kick",
+      "glue": "tanh(1.5x) soft saturation",
+      "normalize": "-1 dBFS peak",
+      "loop_repeats": 8
+    }
+  },
+  "render_engine": "pure numpy/scipy-free subtractive synthesis (methods_db.md SP-029 reference implementation)",
+  "outputs": {
+    "full_mix_wav": "/opt/data/projects/Styles/Production/SP029-subtractive-samba-batucada/Audio/SP029-samba-batucada-subtractive.wav",
+    "stem_kick_wav": "/opt/data/projects/Styles/Production/SP029-subtractive-samba-batucada/Audio/stem_kick_surdo.wav",
+    "stem_agogo_wav": "/opt/data/projects/Styles/Production/SP029-subtractive-samba-batucada/Audio/stem_agogo_polyblep.wav"
+  }
+}

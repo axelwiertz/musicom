@@ -1,0 +1,31 @@
+{
+  "genre": "Bossa Nova",
+  "subgenre": "Daily-Experiment",
+  "pitch": {
+    "scale": "Inverted Bossa",
+    "intervals": [
+      11,
+      10,
+      10,
+      10,
+      11,
+      10,
+      10
+    ],
+    "contour": "Retrograde-Inverted"
+  },
+  "rhythm": {
+    "dna": "\u2588\u2591\u2591\u2588\u2591\u2588\u2591\u2591\u2588\u2591\u2591\u2588\u2591\u2588\u2591\u2591",
+    "description": "Shifted Bossa syncopation"
+  },
+  "timbre": {
+    "instrumentation": [
+      "Nylon Guitar",
+      "Soft Vocals",
+      "Surdo",
+      "Shaker"
+    ],
+    "calibration": "Intimate, low dynamic range"
+  },
+  "parent_genre": "Bossa Nova"
+}

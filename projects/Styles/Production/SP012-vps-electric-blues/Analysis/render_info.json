@@ -1,0 +1,32 @@
+{
+  "source_midi": "/opt/data/projects/Styles/Blues/039-electric-blues/daily-2026-06-27_blues_039-electric-blues-v5.mid",
+  "method": "SP-012",
+  "method_name": "Vector Phase Shaping (VPS)",
+  "bpm": 80.0,
+  "total_notes": 144,
+  "output_seconds": 38.5,
+  "silence_fraction": 0.0455,
+  "synthesis_engine": "project-local VPS (vector phase shaping) + PM sidebands",
+  "parameters": {
+    "lead": {
+      "carrier": "saw",
+      "distortion": 2.5,
+      "sweep_rate": 0.6,
+      "sweep_depth": 1.6,
+      "warp_power": 1.5,
+      "pm_index": 0.9,
+      "pm_ratio": 2.0,
+      "gain_db": -9.0,
+      "pan_width": 0.7
+    }
+  },
+  "mix": {
+    "soft_knee": {
+      "threshold": 0.82,
+      "slope": 0.35
+    },
+    "reverb": "Freeverb(room_size=0.55, damping=0.5, wet_dry=0.22, width=0.8)",
+    "normalize_db": -1.0
+  },
+  "note_count": 144
+}

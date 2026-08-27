@@ -1,0 +1,39 @@
+{
+  "genre": "Gamelan",
+  "subgenre": "Gamelan Gong Kebyar",
+  "pitch": {
+    "scale": "Pelog",
+    "intervals": [
+      1,
+      2,
+      4,
+      1,
+      4
+    ],
+    "contour": "Shared interlocking (Kotekan)"
+  },
+  "rhythm": {
+    "dna": "\u2588\u2591\u2588\u2591\u2588\u2591\u2588\u2591",
+    "euclidean": "E(4,8)",
+    "metrical_gravity": [
+      1,
+      0,
+      0.5,
+      0,
+      1,
+      0,
+      0.5,
+      0
+    ],
+    "description": "Colotomic structure, exponential tempo changes"
+  },
+  "timbre": {
+    "instrumentation": [
+      "Gangsa",
+      "Gong Ageng",
+      "Kendang",
+      "Reyong"
+    ],
+    "calibration": "Inharmonic bronze, ombak (beating) tuning"
+  }
+}

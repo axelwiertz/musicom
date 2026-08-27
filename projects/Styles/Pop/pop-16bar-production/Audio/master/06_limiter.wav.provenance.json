@@ -1,0 +1,30 @@
+{
+  "artifact": "06_limiter.wav",
+  "classification": "ai-assisted",
+  "generator": "musicom:pop-16bar-production",
+  "sources": [
+    "compose_pop_16bar.py",
+    "sound_production.py",
+    "production_chain.py"
+  ],
+  "parameters": {
+    "bpm": 120,
+    "bars": 16,
+    "key": "C major",
+    "production": [
+      "reverb",
+      "lowpass",
+      "peaking",
+      "dynamic-eq",
+      "stereo-imager",
+      "lufs-14",
+      "limiter"
+    ],
+    "stereo": true
+  },
+  "notes": "",
+  "sha256": "8b154c56a6fc00d0b04b91e9443aa74537df0d236da92e4272ba1fe2c1d41b60",
+  "bytes": 6530348,
+  "created_utc": "2026-08-09T20:45:16.529509+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,36 @@
+{
+  "project": "moonlight-shadow",
+  "style": "Pop",
+  "bpm": 126,
+  "key": "E major",
+  "form": [
+    "Intro(4b)",
+    "Verse1(8b)",
+    "Chorus(8b)",
+    "Verse2(8b)",
+    "Outro(4b)"
+  ],
+  "total_bars": 32,
+  "sources": {
+    "MEL": "Moonlight_Shadow 2.mid",
+    "FULL": "Moonlight_ShadowMike_Oldfeild 2.mid",
+    "PERC": "Moonlight_shadow__Mike_Oldfield_Moonlight_shadow_percussion 2.mid"
+  },
+  "transpose": "E minor \u2192 E major (-3 semis)",
+  "outputs": {
+    "aligned": "MIDI/moonlight-shadow-aligned.mid",
+    "variants": [
+      "MIDI/moonlight-shadow-variant1.mid",
+      "MIDI/moonlight-shadow-variant2.mid"
+    ],
+    "phase1": [
+      "MIDI/moonlight-shadow-variant1-phase1.mid",
+      "MIDI/moonlight-shadow-variant2-phase1.mid"
+    ]
+  },
+  "methods": [
+    "markov",
+    "genetic"
+  ],
+  "seed": 42
+}

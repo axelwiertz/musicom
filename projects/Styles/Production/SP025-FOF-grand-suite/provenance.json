@@ -1,0 +1,130 @@
+{
+  "production_id": "SP025-FOF-grand-suite",
+  "timestamp": "2026-08-04T22:03:00Z",
+  "source_composition": {
+    "path": "/opt/data/projects/Styles/Balfolk/030-balfolk-grand-suite/MIDI/grand_suite_v1_3.mid",
+    "project_id": "030",
+    "project_name": "balfolk-grand-suite",
+    "genre": "Balfolk",
+    "bpm": 118.0,
+    "duration_ticks": 740880,
+    "tracks": [
+      {"name": "Violin", "program": 40, "notes": 224},
+      {"name": "Piano", "program": 0, "notes": 112},
+      {"name": "Acoustic Guitar", "program": 24, "notes": 96},
+      {"name": "Woodblock", "program": 115, "notes": 96}
+    ],
+    "total_notes": 528
+  },
+  "production_method": {
+    "method_id": "SP-025",
+    "method_name": "Formant-Wave-Function (FOF) Synthesis",
+    "layer": "Synthesis Engines",
+    "target_output": "Dynamic Vocal and Resonant Timbres",
+    "description": "Time-domain formant synthesis modeling vocal tract resonances by triggering overlapping cosine wave-packets (FOFs) modulated by an exponential decay envelope.",
+    "parameters": {
+      "sample_rate": 44100,
+      "attack_time_ms": 8,
+      "decay_time_ms": 30,
+      "sustain_level": 0.6,
+      "release_time_ms": 40,
+      "jitter_ms": 2,
+      "master_gain_db": -1.0
+    },
+    "formant_presets": {
+      "Violin": {
+        "preset_name": "Soprano Ah",
+        "formants": [
+          {"freq_hz": 800, "bandwidth_hz": 80, "amplitude": 1.0},
+          {"freq_hz": 1200, "bandwidth_hz": 90, "amplitude": 0.6},
+          {"freq_hz": 2500, "bandwidth_hz": 120, "amplitude": 0.3},
+          {"freq_hz": 3500, "bandwidth_hz": 130, "amplitude": 0.15}
+        ]
+      },
+      "Piano": {
+        "preset_name": "Alto Oh",
+        "formants": [
+          {"freq_hz": 500, "bandwidth_hz": 60, "amplitude": 1.0},
+          {"freq_hz": 1000, "bandwidth_hz": 70, "amplitude": 0.5},
+          {"freq_hz": 2400, "bandwidth_hz": 110, "amplitude": 0.25},
+          {"freq_hz": 3300, "bandwidth_hz": 120, "amplitude": 0.1}
+        ]
+      },
+      "Acoustic Guitar": {
+        "preset_name": "Tenor Ee",
+        "formants": [
+          {"freq_hz": 400, "bandwidth_hz": 60, "amplitude": 1.0},
+          {"freq_hz": 2200, "bandwidth_hz": 100, "amplitude": 0.7},
+          {"freq_hz": 2800, "bandwidth_hz": 130, "amplitude": 0.35},
+          {"freq_hz": 3600, "bandwidth_hz": 140, "amplitude": 0.15}
+        ]
+      },
+      "Woodblock": {
+        "preset_name": "Percussive Click",
+        "formants": [
+          {"freq_hz": 1000, "bandwidth_hz": 500, "amplitude": 1.0},
+          {"freq_hz": 3000, "bandwidth_hz": 800, "amplitude": 0.6},
+          {"freq_hz": 6000, "bandwidth_hz": 1200, "amplitude": 0.3}
+        ]
+      }
+    }
+  },
+  "output_files": {
+    "master_mix": {
+      "wav": {
+        "path": "grand_suite_fof_synthesis.wav",
+        "size_bytes": 6502182,
+        "duration_seconds": 73.72,
+        "sample_rate": 44100,
+        "bit_depth": 16,
+        "channels": 1
+      },
+      "ogg": {
+        "path": "grand_suite_fof_synthesis.ogg",
+        "size_bytes": 208896,
+        "codec": "libopus",
+        "bitrate_kbps": 48,
+        "application": "voip"
+      }
+    },
+    "stems": [
+      {"track": "Violin", "path": "stems/Violin_fof.wav", "size_bytes": 1625580},
+      {"track": "Piano", "path": "stems/Piano_fof.wav", "size_bytes": 1625580},
+      {"track": "Acoustic Guitar", "path": "stems/Acoustic Guitar_fof.wav", "size_bytes": 1625580},
+      {"track": "Woodblock", "path": "stems/Woodblock_fof.wav", "size_bytes": 1625580}
+    ],
+    "source_midi": {
+      "path": "source_midi.mid",
+      "size_bytes": 5120
+    }
+  },
+  "processing_chain": [
+    "1. Parse MIDI file (mido library)",
+    "2. Extract note events with absolute timing per track",
+    "3. For each track, select formant preset based on instrument name",
+    "4. For each MIDI note, synthesize FOF wave-packets at fundamental frequency",
+    "5. Apply ADSR envelope (8ms attack, 30ms decay, 0.6 sustain, 40ms release)",
+    "6. Add 2ms jitter to trigger timing for humanization",
+    "7. Sum all formant channels per track",
+    "8. Normalize each track stem to 0.7 peak",
+    "9. Sum all track stems into master mix",
+    "10. Normalize master mix to -1dB peak (0.89 linear)",
+    "11. Export WAV (16-bit PCM, 44.1kHz, mono)",
+    "12. Convert to OGG (Opus codec, 48kbps, VOIP application)",
+    "13. Copy source MIDI for reference"
+  ],
+  "quality_metrics": {
+    "total_duration_seconds": 73.72,
+    "total_notes_synthesized": 528,
+    "tracks_rendered": 4,
+    "peak_level_db": -1.0,
+    "dynamic_range_db": "N/A (not measured)",
+    "file_size_mb": 6.2
+  },
+  "notes": "FOF synthesis creates vocal-like, resonant timbres by summing overlapping cosine wave-packets. Each track receives a distinct formant preset (Soprano Ah, Alto Oh, Tenor Ee, Percussive Click) to create timbral variety while maintaining the same synthesis engine. The result is a choir-like quality with smooth, continuous tones and natural resonant decay.",
+  "references": {
+    "method_documentation": "/opt/data/projects/Research/CompositionMethods/methods_db.md",
+    "source_composition": "/opt/data/projects/Styles/Balfolk/030-balfolk-grand-suite/",
+    "ircom_fof_theory": "Rodet, X., & Depalle, P. (1992). Formant Wave Function (FOF) — Riding the Old Wave to the New Wave."
+  }
+}

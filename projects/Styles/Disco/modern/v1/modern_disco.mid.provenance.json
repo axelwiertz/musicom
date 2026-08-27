@@ -1,0 +1,22 @@
+{
+  "artifact": "modern_disco.mid",
+  "classification": "ai-assisted",
+  "generator": "disco-modern",
+  "sources": [],
+  "parameters": {
+    "bpm": 126,
+    "key": "A minor",
+    "style": "Modern/Italo Disco 1983-86",
+    "methods": [
+      "arpeggiated bass",
+      "sequenced lead",
+      "electronic drums",
+      "sidechain pad"
+    ]
+  },
+  "notes": "",
+  "sha256": "6dc8fcb0e0a83b200d6525845c0fc6cffe373146bd352227c86cee17a0a66319",
+  "bytes": 17213,
+  "created_utc": "2026-07-26T19:09:53.314231+00:00",
+  "provenance_version": "1.0"
+}

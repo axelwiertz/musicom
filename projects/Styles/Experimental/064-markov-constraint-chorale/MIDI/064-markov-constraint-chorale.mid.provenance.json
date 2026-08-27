@@ -1,0 +1,84 @@
+{
+  "artifact": "064-markov-constraint-chorale.mid",
+  "classification": "ai-generated",
+  "generator": "Method 022 Markov-Constraint Wavefront Sequencing (generators/markov_constraint.py) + musicom rules",
+  "sources": [
+    "generators/markov_constraint.py",
+    "rules/voice_leading.py",
+    "rules/progression.py",
+    "workflows/unitmatrix_composer.py"
+  ],
+  "parameters": {
+    "method": 22,
+    "key": "G minor (aeolian)",
+    "bpm": 84,
+    "ticks_per_beat": 480,
+    "beats_per_bar": 4,
+    "sections": 4,
+    "section_bars": 2,
+    "progression_degrees": [
+      0,
+      6,
+      2,
+      5
+    ],
+    "bands": [
+      [
+        [
+          60,
+          74
+        ],
+        [
+          64,
+          78
+        ]
+      ],
+      [
+        [
+          64,
+          78
+        ],
+        [
+          58,
+          72
+        ]
+      ],
+      [
+        [
+          58,
+          72
+        ],
+        [
+          64,
+          78
+        ]
+      ],
+      [
+        [
+          64,
+          78
+        ],
+        [
+          58,
+          72
+        ]
+      ]
+    ],
+    "densities": [
+      0.55,
+      0.65,
+      0.75,
+      0.85
+    ],
+    "step_ticks": 120,
+    "transition_max_interval": 7,
+    "seed": 64,
+    "voice_leading_style": "classical",
+    "two_phase": true
+  },
+  "notes": "Phase 1: order-1 Markov pitch walk with |interval| <= 7 semitones, validated against global key-pool membership and per-section glide bands (wavefront constraint), plus 16th-note stochastic density ramp 0.55->0.85. Phase 2: chord-tone quantization of soprano, diatonic block harmony, voice-leading optimization, Phase 2c inversion-rotation correction of parallel/hidden fifths, harmonic function validation (i-VII-III-VI, G minor), zero-drift validated UnitMatrix export.",
+  "sha256": "f0c77d81e166b2e67cb276d7a7ef25a537fc72d8e49dbc4154483c5128cf748f",
+  "bytes": 3137,
+  "created_utc": "2026-08-11T06:42:56.140186+00:00",
+  "provenance_version": "1.0"
+}

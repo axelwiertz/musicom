@@ -1,0 +1,41 @@
+[
+  {
+    "project_name": "jazz",
+    "source_file": "/opt/data/projects/Styles/Jazz/jazz/src/regen.py",
+    "scale_from_source": "Dorian",
+    "pitch_pattern_intervals": [
+      2,
+      3,
+      -2,
+      0,
+      5
+    ],
+    "analysis_source": "source"
+  },
+  {
+    "project_name": "jazz_swing",
+    "source_file": "/opt/data/projects/Styles/Jazz/jazz_swing/src/regen.py",
+    "scale_from_source": "Dorian",
+    "pitch_pattern_intervals": [
+      2,
+      3,
+      -2,
+      0,
+      5
+    ],
+    "analysis_source": "source"
+  },
+  {
+    "project_name": "variation_2026-06-04_jazz_swing",
+    "source_file": "/opt/data/projects/Styles/Jazz/variation_2026-06-04_jazz_swing/src/regen.py",
+    "scale_from_source": "Dorian",
+    "pitch_pattern_intervals": [
+      2,
+      3,
+      -2,
+      0,
+      5
+    ],
+    "analysis_source": "source"
+  }
+]

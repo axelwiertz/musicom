@@ -1,0 +1,10 @@
+{
+  "job": "SP-002 production pass (autonomous cron)",
+  "source_midi": "/opt/data/projects/Styles/Country/038-steel-guitar-demo/daily-2026-06-26_country_038-steel-guitar-v5.mid",
+  "production_method": "SP-002",
+  "production_method_name": "VST3 Polyphonic Stacking",
+  "outputs": {
+    "full_mix_wav": "/opt/data/projects/Styles/Production/SP002-polyphonic-stack-steel-guitar/Audio/SP002-polyphonic-stack-steel-guitar.wav",
+    "full_mix_ogg": "/opt/data/projects/Styles/Production/SP002-polyphonic-stack-steel-guitar/Audio/SP002-polyphonic-stack-steel-guitar.ogg"
+  }
+}

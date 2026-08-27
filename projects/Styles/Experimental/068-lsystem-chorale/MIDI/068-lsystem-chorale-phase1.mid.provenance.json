@@ -1,0 +1,42 @@
+{
+  "artifact": "068-lsystem-chorale-phase1.mid",
+  "classification": "ai-generated",
+  "generator": "Method 019 L-System Algorithmic Composition (sound/generators/event_core.py LSystemCore) - PRE-RULES raw draft",
+  "sources": [
+    "sound/generators/event_core.py",
+    "workflows/unitmatrix_composer.py"
+  ],
+  "parameters": {
+    "method": 19,
+    "phase": 1,
+    "key": "A minor (aeolian)",
+    "bpm": 76,
+    "ticks_per_beat": 480,
+    "beats_per_bar": 4,
+    "sections": 4,
+    "section_bars": 2,
+    "axiom": "A",
+    "rules": {
+      "A": "AB",
+      "B": "A"
+    },
+    "iterations": 6,
+    "word": "ABAABABAABAABABAABABA",
+    "symbol_semantics": "A -> pitch +2 semitones, quarter; B -> pitch -2 semitones, eighth",
+    "cycle_offsets": [
+      0,
+      5,
+      3,
+      8
+    ],
+    "start_pitch": 69,
+    "seed": 68,
+    "two_phase": true,
+    "rules_applied": "NONE (pre-rules generative draft)"
+  },
+  "notes": "Phase 1: Fibonacci-word L-system (axiom A, rules {A:AB, B:A}, 6 iterations -> 21 symbols, strictly self-similar fractal word). Symbol-driven raw chromatic walk: A steps +2 semitones, B steps -2 semitones from A4; every +2 step taken from scale degrees 2 or 7 (B or E in A minor) leaks non-diatonic tones (C#/D#) - the pre-rules signature. Rhythm DNA = symbol identity (A:quarter, B:eighth); word cycles re-enter at rotation offsets (0,5,3,8) and the timeline is truncated at the 8-bar boundary. No scale enforcement, no chord context, no voice leading. Raw generative material preserved for comparison against the rules-processed Phase 2 artifact. Zero-drift validated UnitMatrix export.",
+  "sha256": "0f2c1d483f3cca3465eedbe845e3c544ea0e4f52552a4e839a9097629c3f77ac",
+  "bytes": 417,
+  "created_utc": "2026-08-14T23:16:06.415354+00:00",
+  "provenance_version": "1.0"
+}

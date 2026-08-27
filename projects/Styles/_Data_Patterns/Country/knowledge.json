@@ -1,0 +1,139 @@
+{
+  "style": "Country",
+  "subgenre": "",
+  "pitch": {
+    "scale": "Major/Ionian",
+    "intervals": [
+      2,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      2,
+      1
+    ],
+    "pitch_classes": [
+      0,
+      2,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      11
+    ],
+    "per_track_scale": "Lydian",
+    "per_track_scale_distribution": {
+      "Major/Ionian": 1,
+      "Lydian": 3,
+      "In Scale": 1,
+      "Phrygian Dominant (Freygish)": 1
+    }
+  },
+  "rhythm": {
+    "metrical_gravity": [
+      1.0,
+      0,
+      0.5,
+      0
+    ],
+    "tempo_range": [
+      85.00004250002125,
+      120.0
+    ],
+    "time_signatures": [
+      "4/4"
+    ],
+    "description": ""
+  },
+  "timbre": {
+    "instrumentation": [
+      "Track 1",
+      "Track 2",
+      "Track 3",
+      "Track 4"
+    ]
+  },
+  "patterns": [
+    {
+      "project": "012-country-country-uke",
+      "midi": "/opt/data/projects/Styles/Country/012-country-country-uke/Audio/rainbow_style.mid",
+      "source": "/opt/data/projects/Styles/Country/012-country-country-uke/Scripts/generate_v2.py",
+      "scale": "Major/Ionian",
+      "pitch_classes": [
+        0,
+        2,
+        4,
+        5,
+        7,
+        9,
+        11
+      ],
+      "tempo": 85.00004250002125,
+      "time_sig": "4/4"
+    },
+    {
+      "project": "012-country-full-16bar",
+      "midi": "/opt/data/projects/Styles/Country/012-country-full-16bar/MIDI/16bar_country.mid",
+      "source": "/opt/data/projects/Styles/Country/012-country-full-16bar/src/regen_minimal.py",
+      "scale": "Lydian",
+      "pitch_classes": [
+        0,
+        2,
+        4,
+        6,
+        7,
+        9,
+        11
+      ],
+      "tempo": 109.99990833340972,
+      "time_sig": null
+    },
+    {
+      "project": "country-daily-2026-06-19",
+      "midi": "/opt/data/projects/Styles/Country/country-daily-2026-06-19/composition.mid",
+      "scale": "Phrygian Dominant (Freygish)",
+      "pitch_classes": [
+        4,
+        8,
+        11
+      ],
+      "tempo": 120.0,
+      "time_sig": null
+    }
+  ],
+  "validated": true,
+  "validation": {
+    "12tet": {
+      "valid": true,
+      "pitch_classes_used": [
+        0,
+        2,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        11
+      ],
+      "count": 9,
+      "issues": []
+    },
+    "metrical_gravity": {
+      "valid": true,
+      "length": 4,
+      "strong_beat_count": 1,
+      "profile": [
+        1.0,
+        0,
+        0.5,
+        0
+      ],
+      "issues": []
+    }
+  }
+}

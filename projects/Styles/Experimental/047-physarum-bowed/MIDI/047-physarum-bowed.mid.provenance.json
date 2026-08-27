@@ -1,0 +1,23 @@
+{
+  "artifact": "047-physarum-bowed.mid",
+  "classification": "ai-assisted",
+  "generator": "Experimental/047-physarum-bowed/compose.py",
+  "sources": [],
+  "parameters": {
+    "bpm": 110,
+    "methods": [
+      "035",
+      "SP-024"
+    ],
+    "grid_voices": 3,
+    "grid_sections": 8,
+    "physical_model": "digital_waveguide_bowed_string",
+    "key": "Bb Major / G Minor",
+    "physarum_seed": 47
+  },
+  "notes": "Composed via Physarum Polycephalum Transport Network Optimization (Method 035) and synthesized via bowed string waveguide modeling (Method SP-024).",
+  "sha256": "0594751d899cd73a0c240a2b5ade06391c10bfe74f4651497631af755bb8e765",
+  "bytes": 1350,
+  "created_utc": "2026-07-24T10:59:39.841899+00:00",
+  "provenance_version": "1.0"
+}

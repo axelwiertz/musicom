@@ -1,0 +1,1 @@
+Style-first Country loop. Goal: seamless 8-bar phrase, vocal-friendly, clean cadence, steel-guitar hook.

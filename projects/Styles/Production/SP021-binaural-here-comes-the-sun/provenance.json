@@ -1,0 +1,80 @@
+{
+  "composition_source": {
+    "path": "/opt/data/projects/Styles/Rock/001-here-comes-the-sun/MIDI/original.mid",
+    "genre": "Rock",
+    "substyle": "Here Comes the Sun (Beatles-style rock study)",
+    "version": "original",
+    "tempo_bpm": 120,
+    "duration_seconds": 180.48,
+    "tracks": {
+      "Lead": {
+        "source_track": 0,
+        "channel": 0,
+        "program": 0,
+        "notes": 658,
+        "pitch_range": [
+          56,
+          79
+        ]
+      },
+      "Bass": {
+        "source_track": 1,
+        "channel": 0,
+        "program": 0,
+        "notes": 286,
+        "pitch_range": [
+          38,
+          64
+        ]
+      }
+    }
+  },
+  "production_method": {
+    "id": "SP-021",
+    "name": "Binaural Woodworth-Schlosberg Spatialization",
+    "layer": "Post-Processing / DSP",
+    "description": "Applies Head-Related Transfer Function (HRTF) emulation via Woodworth-Schlosberg ITD and frequency-dependent ILD head-shadowing filters for realistic 3D acoustic placement.",
+    "parameters": {
+      "head_radius_m": 0.0875,
+      "speed_of_sound_m_s": 343.0,
+      "f_max_hz": 20000.0,
+      "f_min_hz": 1000.0,
+      "angular_power_p": 2.0
+    },
+    "track_spatialization": {
+      "Lead": {
+        "azimuth_choreography": "dynamic sine drift, base +0.5 rad, amp 0.9 rad, period 44s",
+        "azimuth_range_deg": [
+          -22.9,
+          80.2
+        ],
+        "distance_m": 1.4
+      },
+      "Bass": {
+        "azimuth_choreography": "center anchor, subtle counter-drift, base 0.0 rad, amp 0.2 rad, period 22s",
+        "azimuth_range_deg": [
+          -11.5,
+          11.5
+        ],
+        "distance_m": 1.0
+      }
+    }
+  },
+  "output": {
+    "wav_path": "Audio/here_comes_the_sun_binaural_SP021.wav",
+    "ogg_path": "Audio/here_comes_the_sun_binaural_SP021.ogg",
+    "sample_rate": 44100,
+    "channels": 2,
+    "bit_depth": 16,
+    "duration_seconds": 180.48,
+    "peak_normalized_to": -1.0,
+    "silence_ratio": 0.0243,
+    "rms": 0.1212
+  },
+  "processing_timestamp": "2026-08-10T22:25:09Z",
+  "engine": {
+    "synth": "FluidSynth 2.5.6 CLI",
+    "soundfont": "TimGM6mb.sf2",
+    "dsp": "numpy/scipy SP-021 chunked implementation (methods_db.md reference)"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "artifact": "funky_disco.mid",
+  "classification": "ai-assisted",
+  "generator": "disco-funky",
+  "sources": [],
+  "parameters": {
+    "bpm": 118,
+    "key": "E minor",
+    "style": "Funky Disco 1979-82",
+    "methods": [
+      "16th-note hi-hat",
+      "slap bass",
+      "wah-wah guitar",
+      "horn stabs"
+    ]
+  },
+  "notes": "",
+  "sha256": "f2c6c2cae8dc2137e1b2d4e295d501691d8884c70b5d546c578ddd20d576738c",
+  "bytes": 14525,
+  "created_utc": "2026-07-26T19:09:50.249923+00:00",
+  "provenance_version": "1.0"
+}

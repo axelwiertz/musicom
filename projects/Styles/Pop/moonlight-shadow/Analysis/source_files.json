@@ -1,0 +1,50 @@
+[
+  {
+    "file": "Moonlight_Shadow 2.mid",
+    "bpm": 120,
+    "key": "G major",
+    "notes": 170,
+    "dur_ql": 146.0,
+    "tracks": 1
+  },
+  {
+    "file": "Moonlight_ShadowMike_Oldfeild 2.mid",
+    "bpm": 126,
+    "key": "E major",
+    "notes": 2144,
+    "dur_ql": 460.5,
+    "tracks": 5
+  },
+  {
+    "file": "Moonlight_shadow__Mike_Oldfield 2.mid",
+    "bpm": 120,
+    "key": "G major",
+    "notes": 337,
+    "dur_ql": 212.0,
+    "tracks": 2
+  },
+  {
+    "file": "Moonlight_shadow__Mike_Oldfield 3.mid",
+    "bpm": 126,
+    "key": "E major",
+    "notes": 1092,
+    "dur_ql": 448.5,
+    "tracks": 3
+  },
+  {
+    "file": "Moonlight_shadow__Mike_Oldfield_Moonlight_shadow 2.mid",
+    "bpm": 120,
+    "key": "C major",
+    "notes": 304,
+    "dur_ql": 108.0,
+    "tracks": 2
+  },
+  {
+    "file": "Moonlight_shadow__Mike_Oldfield_Moonlight_shadow_percussion 2.mid",
+    "bpm": 89,
+    "key": "C major",
+    "notes": 0,
+    "dur_ql": 953.75,
+    "tracks": 1
+  }
+]

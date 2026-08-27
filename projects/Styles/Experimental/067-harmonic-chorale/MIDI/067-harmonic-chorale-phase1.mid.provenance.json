@@ -1,0 +1,53 @@
+{
+  "artifact": "067-harmonic-chorale-phase1.mid",
+  "classification": "ai-generated",
+  "generator": "Method 023 Harmonic Series / Overtone Composition (generators/harmonics.py) - PRE-RULES raw draft",
+  "sources": [
+    "generators/harmonics.py",
+    "workflows/unitmatrix_composer.py"
+  ],
+  "parameters": {
+    "method": 23,
+    "phase": 1,
+    "key": "F major (ionian)",
+    "bpm": 92,
+    "ticks_per_beat": 480,
+    "beats_per_bar": 4,
+    "sections": 4,
+    "section_bars": 2,
+    "fundamental": 55,
+    "harmonic_numbers": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "cycle_strides": [
+      3,
+      4,
+      5,
+      4
+    ],
+    "duration_rule": "odd partial -> quarter, even partial -> eighth",
+    "seed": 67,
+    "two_phase": true,
+    "rules_applied": "NONE (pre-rules generative draft)"
+  },
+  "notes": "Phase 1: natural harmonic series of G3 (MIDI 55) materialized via music21 getHarmonic() through the engine's HarmonicsGenerator. Partials 1..16 walked in acoustic order with a (3,4,5,4) cycle stride; harmonics 7, 11, 13, 14, 15 are non-diatonic (and in nature microtonal) so the raw draft leaks tones outside F major. Duration = harmonic-number parity (odd partial -> quarter, even partial -> eighth). No scale enforcement, no chord context, no voice leading. Raw generative material preserved for comparison against the rules-processed Phase 2 artifact. Zero-drift validated UnitMatrix export.",
+  "sha256": "1fa7e1184030f8e7f428e6e37c737f8690468783881158b2f298797f521cca9d",
+  "bytes": 426,
+  "created_utc": "2026-08-13T23:14:53.674703+00:00",
+  "provenance_version": "1.0"
+}

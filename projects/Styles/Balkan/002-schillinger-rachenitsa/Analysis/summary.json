@@ -1,0 +1,18 @@
+{
+  "project": "002-schillinger-rachenitsa",
+  "style": "Balkan",
+  "method": "schillinger_resultant",
+  "key": "D harmonic minor",
+  "bpm": 132,
+  "bars": 8,
+  "time_signature": "7/8",
+  "harmony": "Dm - Bb - Gm - A (i - VI - iv - V)",
+  "voices": [
+    "Lead flute",
+    "Pad strings x3",
+    "Bass",
+    "Tapan drums"
+  ],
+  "melody_dna": "Schillinger resultant 7x2 durations, chord-tone quantized",
+  "rhythm_dna": "7/8 pulses, tapan accents on 1,4,6"
+}

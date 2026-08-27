@@ -1,0 +1,89 @@
+[
+  {
+    "project_name": "004-baroque-counterpoint-inversion",
+    "midi_file": "/opt/data/projects/Styles/Baroque/004-baroque-counterpoint-inversion/midi/004_counterpoint_study.mid",
+    "scale": "Chromatic",
+    "pitch_classes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "intervals": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      2,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "tempo": 120.0,
+    "time_sig": "4/4",
+    "total_notes": 16,
+    "midi_range": [
+      55,
+      65
+    ],
+    "velocity_avg": 100.0,
+    "track_count": 2,
+    "tracks_detail": [
+      {
+        "track": 0,
+        "notes": 8,
+        "pitch_classes": [
+          0,
+          2,
+          3,
+          7,
+          8,
+          11
+        ],
+        "scale_fragment": "Harmonic Minor",
+        "range": [
+          55,
+          63
+        ]
+      },
+      {
+        "track": 1,
+        "notes": 8,
+        "pitch_classes": [
+          0,
+          1,
+          4,
+          5,
+          9,
+          10
+        ],
+        "scale_fragment": "Chromatic",
+        "range": [
+          57,
+          65
+        ]
+      }
+    ],
+    "analysis_source": "midi",
+    "source_file": "/opt/data/projects/Styles/Baroque/004-baroque-counterpoint-inversion/src/counterpoint_gen.py",
+    "embedded_pitch_classes": [
+      0,
+      2,
+      3,
+      7,
+      8,
+      11
+    ],
+    "embedded_scale": "Harmonic Minor"
+  }
+]

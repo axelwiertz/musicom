@@ -1,0 +1,18 @@
+=== FILE ===
+/opt/data/uploads/Here_Comes_the_Sun.mid
+type=1 tracks=2 tpb=480 length_sec=177.44 notes=944
+tempos: [(1, 120.0)]
+time_signatures: [(1, 4, 4), (49, 2, 4), (50, 3, 8), (53, 5, 8), (54, 4, 4), (55, 2, 4), (56, 3, 8), (59, 5, 8), (60, 4, 4), (61, 2, 4), (62, 3, 8), (65, 5, 8), (66, 4, 4), (67, 4, 4)]
+keys: [(0, 0, 'A'), (1, 0, 'A')]
+programs: [(0, 0, 0, 0)]
+
+=== TRACKS ===
+00 '': notes=944 range=D2-G5 avgVel=80.0 avgDurQ=0.99
+01 '': notes=944 range=D2-G5 avgVel=80.0 avgDurQ=0.99
+
+=== GLOBAL PITCH CLASSES ===
+[('A', 287), ('E', 172), ('B', 123), ('D', 111), ('C#', 103), ('F#', 78), ('G#', 37), ('D#', 14), ('G', 11), ('C', 8)]
+outside_A_major=3.5%
+
+=== SECTIONS ===
+Complex bridge (bar 49+): 2/4, 3/8, 5/8 transitions.

@@ -1,0 +1,21 @@
+{
+  "artifact": "hiphop_boom_bap.mid",
+  "classification": "ai-assisted",
+  "generator": "hiphop_boom_bap",
+  "sources": [],
+  "parameters": {
+    "bpm": 90,
+    "key": "Em",
+    "bars": 32,
+    "methods": [
+      "011",
+      "002",
+      "026"
+    ]
+  },
+  "notes": "",
+  "sha256": "a9d3cc248d8f891106c595e7692ed7ecd65848d6a1cf7e09cacfcacc7eff1eb2",
+  "bytes": 14337,
+  "created_utc": "2026-07-27T21:02:49.908405+00:00",
+  "provenance_version": "1.0"
+}

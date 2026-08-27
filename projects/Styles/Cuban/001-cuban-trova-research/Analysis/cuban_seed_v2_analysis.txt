@@ -1,0 +1,26 @@
+=== FILE ===
+/opt/data/projects/Styles/Cuban/001-cuban-trova-research/MIDI/cuban_seed_v2.mid
+type=1 tracks=1 tpb=480 length_sec=60.00 notes=96
+tempos: [(1, 96.0)]
+time_signatures: [(1, 4, 4)]
+keys: []
+programs: [(0, 0, 0, 24)]
+markers: []
+
+=== TRACKS ===
+00 '': notes=96 range=A3-B4 avgVel=85.5 avgDurQ=1.00 msgs=196
+
+=== GLOBAL PITCH CLASSES ===
+[('E', 18), ('A', 17), ('F#', 15), ('B', 14), ('D', 14), ('C', 8), ('G#', 8), ('C#', 1), ('F', 1)]
+outside_C_major=24/96 (25.0%)
+
+=== SECTIONS ===
+Whole file: bars 1-25 sec=60.0 notes=96 range=A3-B4 chrom%=25.0 topPC=[('E', 18), ('A', 17), ('F#', 15), ('B', 14), ('D', 14)] topTracks=[('', 96)]
+
+=== DENSITY BY 8-BAR WINDOW ===
+bars 001-008: 32 notes
+bars 009-016: 32 notes
+bars 017-024: 32 notes
+
+=== LARGE SIMULTANEOUS ATTACKS ===
+count: 0

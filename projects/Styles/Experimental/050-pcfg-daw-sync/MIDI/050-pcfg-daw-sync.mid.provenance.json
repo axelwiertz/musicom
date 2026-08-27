@@ -1,0 +1,22 @@
+{
+  "artifact": "050-pcfg-daw-sync.mid",
+  "classification": "ai-assisted",
+  "generator": "Experimental/050-pcfg-daw-sync/compose.py",
+  "sources": [],
+  "parameters": {
+    "bpm": 100,
+    "methods": [
+      "034",
+      "SP-005"
+    ],
+    "grid_voices": 3,
+    "grid_sections": 8,
+    "key": "D Dorian",
+    "pcfg_seed": 50
+  },
+  "notes": "Composed via PCFG Recursion (Method 034) and synchronized for DAW integration (Method SP-005) with MusicXML + separated stems.",
+  "sha256": "d0603bc1c470695989911a88258529c3286f981affa9fe83d3054602bd1e3156",
+  "bytes": 1442,
+  "created_utc": "2026-07-27T10:05:16.212173+00:00",
+  "provenance_version": "1.0"
+}

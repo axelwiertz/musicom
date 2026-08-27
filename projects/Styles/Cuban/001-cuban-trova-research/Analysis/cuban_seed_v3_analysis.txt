@@ -1,0 +1,28 @@
+=== FILE ===
+/opt/data/projects/Styles/Cuban/001-cuban-trova-research/MIDI/cuban_seed_v3.mid
+type=1 tracks=3 tpb=480 length_sec=60.00 notes=236
+tempos: [(1, 96.0)]
+time_signatures: [(1, 4, 4)]
+keys: []
+programs: [(0, 0, 0, 24), (1, 0, 1, 73)]
+markers: []
+
+=== TRACKS ===
+00 '': notes=96 range=A3-B4 avgVel=85.5 avgDurQ=1.00 msgs=196
+01 'Harmonic Voice': notes=36 range=E3-E5 avgVel=56.0 avgDurQ=3.86 msgs=75
+02 'Percussion': notes=104 range=C2-A#5 avgVel=54.4 avgDurQ=0.05 msgs=210
+
+=== GLOBAL PITCH CLASSES ===
+[('F#', 55), ('D', 46), ('C', 34), ('E', 27), ('A', 24), ('B', 16), ('A#', 12), ('G#', 8), ('G', 8), ('F', 5), ('C#', 1)]
+outside_C_major=76/236 (32.2%)
+
+=== SECTIONS ===
+Whole file: bars 1-25 sec=60.0 notes=236 range=C2-A#5 chrom%=32.2 topPC=[('F#', 55), ('D', 46), ('C', 34), ('E', 27), ('A', 24)] topTracks=[('Percussion', 104), ('', 96), ('Harmonic Voice', 36)]
+
+=== DENSITY BY 8-BAR WINDOW ===
+bars 001-008: 124 notes
+bars 009-016: 80 notes
+bars 017-024: 32 notes
+
+=== LARGE SIMULTANEOUS ATTACKS ===
+count: 0

@@ -1,0 +1,90 @@
+{
+  "genre": "Jewish Folk",
+  "subgenre": "Klezmer Freylekhs",
+  "metadata": {
+    "tempo_bpm": 120,
+    "time_signature": "2/4",
+    "cultural_origin": "Ashkenazi Jewish"
+  },
+  "unit_matrix": {
+    "grid_resolution": "16th",
+    "steps": 8,
+    "rhythm_patterns": {
+      "bulgar_rhythm": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0,
+        1,
+        1
+      ],
+      "um-pa_bass": [
+        1,
+        0,
+        1,
+        0,
+        1,
+        0,
+        1,
+        0
+      ],
+      "snare_accent": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "pitch_logic": {
+    "scale": "Freygish (Phrygian Dominant)",
+    "pitch_classes": [
+      0,
+      1,
+      4,
+      5,
+      7,
+      8,
+      10
+    ],
+    "intervals": [
+      1,
+      3,
+      1,
+      2,
+      1,
+      2,
+      2
+    ],
+    "characteristic_moves": [
+      {
+        "name": "Krekhts",
+        "description": "Sobbing ornament, rapid flick to upper neighbor"
+      },
+      {
+        "name": "Dreydlekh",
+        "description": "Trills and turns around a target note"
+      }
+    ]
+  },
+  "structure": {
+    "form": "AABBCC",
+    "harmonic_oscillation": "i - iv - V7"
+  },
+  "timbre": {
+    "primary": "Clarinet (piercing, vocal-like)",
+    "secondary": [
+      "Violin",
+      "Accordion",
+      "Trombone",
+      "Cello"
+    ],
+    "articulation": "Chirp, bend, glissando"
+  }
+}

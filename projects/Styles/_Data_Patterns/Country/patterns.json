@@ -1,0 +1,214 @@
+[
+  {
+    "project_name": "012-country-country-uke",
+    "midi_file": "/opt/data/projects/Styles/Country/012-country-country-uke/Audio/rainbow_style.mid",
+    "scale": "Major/Ionian",
+    "pitch_classes": [
+      0,
+      2,
+      4,
+      5,
+      7,
+      9,
+      11
+    ],
+    "intervals": [
+      2,
+      2,
+      1,
+      2,
+      2,
+      2,
+      1
+    ],
+    "tempo": 85.00004250002125,
+    "time_sig": "4/4",
+    "total_notes": 128,
+    "midi_range": [
+      59,
+      72
+    ],
+    "velocity_avg": 90.0,
+    "track_count": 1,
+    "tracks_detail": [
+      {
+        "track": 0,
+        "notes": 128,
+        "pitch_classes": [
+          0,
+          2,
+          4,
+          5,
+          7,
+          9,
+          11
+        ],
+        "scale_fragment": "Major/Ionian",
+        "range": [
+          59,
+          72
+        ]
+      }
+    ],
+    "analysis_source": "midi",
+    "source_file": "/opt/data/projects/Styles/Country/012-country-country-uke/Scripts/generate_v2.py",
+    "scale_from_source": "G major",
+    "time_sig_from_source": "4/4",
+    "embedded_pitch_classes": [
+      2,
+      7,
+      11
+    ],
+    "embedded_scale": "Harmonic Minor"
+  },
+  {
+    "project_name": "012-country-full-16bar",
+    "midi_file": "/opt/data/projects/Styles/Country/012-country-full-16bar/MIDI/16bar_country.mid",
+    "scale": "Lydian",
+    "pitch_classes": [
+      0,
+      2,
+      4,
+      6,
+      7,
+      9,
+      11
+    ],
+    "intervals": [
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1
+    ],
+    "tempo": 109.99990833340972,
+    "time_sig": null,
+    "total_notes": 288,
+    "midi_range": [
+      36,
+      81
+    ],
+    "velocity_avg": 76.1,
+    "track_count": 4,
+    "tracks_detail": [
+      {
+        "track": 0,
+        "notes": 64,
+        "pitch_classes": [
+          0,
+          2,
+          4,
+          6,
+          7,
+          9,
+          11
+        ],
+        "scale_fragment": "Lydian",
+        "range": [
+          67,
+          81
+        ]
+      },
+      {
+        "track": 1,
+        "notes": 96,
+        "pitch_classes": [
+          0,
+          2,
+          4,
+          6,
+          7,
+          9,
+          11
+        ],
+        "scale_fragment": "Lydian",
+        "range": [
+          55,
+          69
+        ]
+      },
+      {
+        "track": 2,
+        "notes": 64,
+        "pitch_classes": [
+          0,
+          2,
+          4,
+          6,
+          7,
+          9,
+          11
+        ],
+        "scale_fragment": "Lydian",
+        "range": [
+          55,
+          74
+        ]
+      },
+      {
+        "track": 3,
+        "notes": 64,
+        "pitch_classes": [
+          0,
+          2
+        ],
+        "scale_fragment": "In Scale",
+        "range": [
+          36,
+          38
+        ]
+      }
+    ],
+    "analysis_source": "midi",
+    "source_file": "/opt/data/projects/Styles/Country/012-country-full-16bar/src/regen_minimal.py",
+    "embedded_pitch_classes": [
+      0,
+      2,
+      7
+    ],
+    "embedded_scale": "In Scale"
+  },
+  {
+    "project_name": "country-daily-2026-06-19",
+    "midi_file": "/opt/data/projects/Styles/Country/country-daily-2026-06-19/composition.mid",
+    "scale": "Phrygian Dominant (Freygish)",
+    "pitch_classes": [
+      4,
+      8,
+      11
+    ],
+    "intervals": [
+      4,
+      3,
+      5
+    ],
+    "tempo": 120.0,
+    "time_sig": null,
+    "total_notes": 16,
+    "midi_range": [
+      35,
+      59
+    ],
+    "velocity_avg": 86.9,
+    "track_count": 1,
+    "tracks_detail": [
+      {
+        "track": 0,
+        "notes": 16,
+        "pitch_classes": [
+          4,
+          8,
+          11
+        ],
+        "scale_fragment": "Phrygian Dominant (Freygish)",
+        "range": [
+          35,
+          59
+        ]
+      }
+    ],
+    "analysis_source": "midi"
+  }
+]

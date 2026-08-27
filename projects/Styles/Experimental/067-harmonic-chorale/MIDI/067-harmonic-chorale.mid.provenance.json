@@ -1,0 +1,36 @@
+{
+  "artifact": "067-harmonic-chorale.mid",
+  "classification": "ai-generated",
+  "generator": "Method 023 Harmonic Series / Overtone Composition + musicom rules (chord-tone quantization, voice leading, harmonic progression)",
+  "sources": [
+    "generators/harmonics.py",
+    "rules/voice_leading.py",
+    "rules/progression.py",
+    "workflows/unitmatrix_composer.py"
+  ],
+  "parameters": {
+    "method": 23,
+    "phase": 2,
+    "key": "F major (ionian)",
+    "bpm": 92,
+    "ticks_per_beat": 480,
+    "beats_per_bar": 4,
+    "sections": 4,
+    "section_bars": 2,
+    "progression_degrees": [
+      0,
+      5,
+      3,
+      4
+    ],
+    "seed": 67,
+    "voice_leading_style": "classical",
+    "two_phase": true,
+    "rules_applied": "chord-tone quantization, diatonic block harmony, voice-leading optimization, Phase 2c inversion-rotation correction"
+  },
+  "notes": "Phase 2: raw harmonic-series partials quantized to nearest section triad tone (soprano), Alto/Tenor/Bass as diatonic block harmony via Scale7ChordDegree.get_diatonic_note(), voice-leading optimization + Phase 2c inversion-rotation correction of parallel/hidden fifths, harmonic function validation (I-vi-IV-V, F major), zero-drift validated UnitMatrix export.",
+  "sha256": "9db521cb01c57a2c9ac41531f9c6d066e687581e75b6663247ff1f19047594b7",
+  "bytes": 1605,
+  "created_utc": "2026-08-13T23:14:53.675000+00:00",
+  "provenance_version": "1.0"
+}

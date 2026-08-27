@@ -1,0 +1,41 @@
+{
+  "genre": "Classical",
+  "subgenre": "Common Practice",
+  "pitch": {
+    "scale": "Heptatonic",
+    "logic": "Functional Harmony",
+    "intervals": [
+      2,
+      2,
+      1,
+      2,
+      2,
+      2,
+      1
+    ],
+    "contour": "Balanced ascent/descent, suspension-resolution"
+  },
+  "rhythm": {
+    "dna": "\u2588\u2591\u2588\u2591\u2588\u2591\u2588\u2591",
+    "metrical_gravity": [
+      1,
+      0,
+      0.5,
+      0,
+      0.8,
+      0,
+      0.5,
+      0
+    ],
+    "description": "Metric hierarchy, clear bar lines"
+  },
+  "timbre": {
+    "instrumentation": [
+      "Violin",
+      "Cello",
+      "Piano",
+      "Flute"
+    ],
+    "calibration": "Orchestral dynamics, rich harmonics"
+  }
+}

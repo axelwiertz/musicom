@@ -1,0 +1,36 @@
+{
+  "artifact": "pop_16bar_raw.wav",
+  "classification": "ai-assisted",
+  "generator": "musicom:pop-16bar-production",
+  "sources": [
+    "compose_pop_16bar.py",
+    "sound_production.py"
+  ],
+  "parameters": {
+    "bpm": 120,
+    "bars": 16,
+    "key": "C major",
+    "progression": "I-V-vi-IV",
+    "methods": [
+      "markov-002",
+      "euclidean-011",
+      "tendency-023",
+      "weighted-random"
+    ],
+    "production": [
+      "fluidsynth",
+      "reverb",
+      "lowpass",
+      "peaking",
+      "dynamic-eq",
+      "stereo-imager",
+      "limiter",
+      "lufs-14"
+    ]
+  },
+  "notes": "",
+  "sha256": "848ba7dd4d431cd55111cdc6e43efe41cbb03e892e08b87ebd437da9c8b84aa7",
+  "bytes": 6530348,
+  "created_utc": "2026-08-08T20:48:54.083251+00:00",
+  "provenance_version": "1.0"
+}

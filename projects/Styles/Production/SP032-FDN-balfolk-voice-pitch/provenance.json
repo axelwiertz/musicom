@@ -1,0 +1,34 @@
+{
+  "job": "nightly production pass (SP)",
+  "composition_source": "/opt/data/projects/Styles/Balfolk/005-balfolk-production/audio/VoiceAudio_basic_pitch.mid",
+  "composition_sha256": "4beb15f890006fc5c2ad0abcad5f25cc80c29cb6f88da344d76a66e833082fc6",
+  "production_method": "SP-032",
+  "production_method_name": "Feedback Delay Network (FDN) Reverberation",
+  "method_family": "Synthesis Engines / Algorithmic Spatialization",
+  "method_notes": "Jot 1992 FDN: 8 coprime prime delay lines (227-431 samples @44.1k, modal density ~0.06 modes/Hz), Householder unitary feedback matrix, per-line one-pole HF damping at 3.2 kHz, g_i = 10^(-3 M_i/(fs*RT60)), RT60=4.0 s / RT60_high=1.4 s (frequency-dependent decay), pre-delay 25 ms + 4 early reflections, even/odd line split for stereo width 0.85, wet bus level-matched to dry peak, mixed at 42% wet. Reference implementation from methods_db.md (repo sound/effects/fdn_reverb.py is short-tail 'Tidal' style).",
+  "parameters": {
+    "n_lines": 8,
+    "rt60_s": 4.0,
+    "rt60_high_s": 1.4,
+    "damping_freq_hz": 3200.0,
+    "pre_delay_ms": 25.0,
+    "wet_dry": 0.42,
+    "width": 0.85,
+    "sample_rate": 44100,
+    "matrix": "householder",
+    "normalization_dBFS": -1.0
+  },
+  "artifacts": {
+    "midi": "/opt/data/projects/Styles/Production/SP032-FDN-balfolk-voice-pitch/VoiceAudio_basic_pitch.mid",
+    "dry_wav": "/opt/data/projects/Styles/Production/SP032-FDN-balfolk-voice-pitch/dry_render.wav",
+    "processed_wav": "/opt/data/projects/Styles/Production/SP032-FDN-balfolk-voice-pitch/balfolk_voice_pitch_SP032_FDN.wav",
+    "processed_ogg": "/opt/data/projects/Styles/Production/SP032-FDN-balfolk-voice-pitch/balfolk_voice_pitch_SP032_FDN.ogg"
+  },
+  "checks": {
+    "fdn_tail_peak_after_dry_end": 0.00533,
+    "fdn_tail_energy_after_dry_end": 0.05,
+    "wet_tail_minus40dB_point_s": 1.56,
+    "silence_ratio": 0.033,
+    "peak_dBFS": -1.0
+  }
+}

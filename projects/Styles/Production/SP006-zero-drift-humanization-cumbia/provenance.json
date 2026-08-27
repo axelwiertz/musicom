@@ -1,0 +1,96 @@
+{
+  "job": "production-pass",
+  "timestamp": "2026-08-25T00:00:00Z",
+  "source_midi": "/opt/data/projects/Styles/Latin/cumbia-daily-2026-06-22/composition.mid",
+  "source_midi_sha256": "1b063c899ab600950f8d13cf46fcdf8cb6c5857498ef60eb204d648de3d902ca",
+  "method": "SP-006",
+  "production_method": "SP-006",
+  "method_name": "Zero-Drift Humanization",
+  "method_source": "methods_db.md#SP-006",
+  "humanization": {
+    "per_voice": {
+      "Bombo Bass": {
+        "sigma_t": 2.0,
+        "vel_sigma": 8.0,
+        "n_notes_total": 32,
+        "loops": 4,
+        "mean_abs_shift_ticks": 1.47,
+        "max_abs_shift_ticks": 4
+      },
+      "Llamador": {
+        "sigma_t": 1.5,
+        "vel_sigma": 5.0,
+        "n_notes_total": 16,
+        "loops": 4,
+        "mean_abs_shift_ticks": 0.94,
+        "max_abs_shift_ticks": 3
+      },
+      "Alegre": {
+        "sigma_t": 3.0,
+        "vel_sigma": 10.0,
+        "n_notes_total": 32,
+        "loops": 4,
+        "mean_abs_shift_ticks": 2.62,
+        "max_abs_shift_ticks": 7
+      },
+      "Maraca": {
+        "sigma_t": 2.0,
+        "vel_sigma": 6.0,
+        "n_notes_total": 64,
+        "loops": 4,
+        "mean_abs_shift_ticks": 1.52,
+        "max_abs_shift_ticks": 5
+      },
+      "Accordion": {
+        "sigma_t": 5.0,
+        "vel_sigma": 7.0,
+        "n_notes_total": 44,
+        "loops": 4,
+        "mean_abs_shift_ticks": 3.43,
+        "max_abs_shift_ticks": 11
+      }
+    },
+    "zero_drift_readback": {
+      "track_lengths": [
+        7680,
+        7680,
+        7680,
+        7680,
+        7680
+      ],
+      "all_equal": true
+    }
+  },
+  "render": {
+    "engine": "FluidSynth CLI",
+    "soundfont": "/opt/data/micromamba/envs/musicom/lib/python3.11/site-packages/pretty_midi/TimGM6mb.sf2",
+    "sample_rate": 44100,
+    "gain": 1.2,
+    "ogg": "libopus voip 48k",
+    "peak_norm_db": -1.0,
+    "gm_programs": {
+      "Bombo Bass": 34,
+      "Llamador": 0,
+      "Alegre": 0,
+      "Maraca": 0,
+      "Accordion": 22
+    },
+    "source_documented_instruments": {
+      "Bombo Bass": 34,
+      "Llamador": 45,
+      "Alegre": 63,
+      "Maraca": 70,
+      "Accordion": 22
+    }
+  },
+  "artifacts": [
+    "MIDI/SP006-cumbia-zero-drift-humanized.mid",
+    "Audio/SP006-cumbia-zero-drift-humanized.wav",
+    "Audio/SP006-cumbia-zero-drift-humanized.ogg",
+    "Analysis/grid_visualization.txt",
+    "Analysis/humanization_dna.json",
+    "Analysis/render_stats.json",
+    "README.md"
+  ],
+  "assistance": "AI_ASSISTED"
+}

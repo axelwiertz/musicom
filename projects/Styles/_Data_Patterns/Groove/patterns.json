@@ -1,0 +1,243 @@
+[
+  {
+    "project_name": "019-soul-groove",
+    "midi_file": "/opt/data/projects/Styles/Groove/019-soul-groove/MIDI/soul_groove.mid",
+    "scale": "Chromatic",
+    "pitch_classes": [
+      0,
+      2,
+      3,
+      4,
+      5,
+      7,
+      9,
+      10,
+      11
+    ],
+    "intervals": [
+      2,
+      1,
+      1,
+      1,
+      2,
+      2,
+      1,
+      1,
+      1
+    ],
+    "tempo": 100.0,
+    "time_sig": "4/4",
+    "total_notes": 80,
+    "midi_range": [
+      34,
+      71
+    ],
+    "velocity_avg": 90.0,
+    "track_count": 4,
+    "tracks_detail": [
+      {
+        "track": 0,
+        "notes": 32,
+        "pitch_classes": [
+          0,
+          3,
+          5,
+          7,
+          10
+        ],
+        "scale_fragment": "Pentatonic Minor",
+        "range": [
+          60,
+          70
+        ]
+      },
+      {
+        "track": 1,
+        "notes": 16,
+        "pitch_classes": [
+          0,
+          2,
+          3,
+          4,
+          5,
+          7,
+          9,
+          10,
+          11
+        ],
+        "scale_fragment": "Chromatic",
+        "range": [
+          60,
+          71
+        ]
+      },
+      {
+        "track": 2,
+        "notes": 16,
+        "pitch_classes": [
+          0,
+          2,
+          3,
+          5,
+          7,
+          9,
+          10
+        ],
+        "scale_fragment": "Dorian",
+        "range": [
+          34,
+          45
+        ]
+      },
+      {
+        "track": 3,
+        "notes": 16,
+        "pitch_classes": [
+          0,
+          2
+        ],
+        "scale_fragment": "In Scale",
+        "range": [
+          36,
+          38
+        ]
+      }
+    ],
+    "analysis_source": "midi",
+    "source_file": "/opt/data/projects/Styles/Groove/019-soul-groove/src/regen.py",
+    "scale_from_source": "Dorian",
+    "pitch_pattern_intervals": [
+      2,
+      3,
+      -2,
+      0,
+      5
+    ]
+  },
+  {
+    "project_name": "020-afrobeat-groove",
+    "midi_file": "/opt/data/projects/Styles/Groove/020-afrobeat-groove/MIDI/afrobeat_groove.mid",
+    "scale": "Chromatic",
+    "pitch_classes": [
+      0,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      9,
+      10,
+      11
+    ],
+    "intervals": [
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      2,
+      1,
+      1,
+      1
+    ],
+    "tempo": 109.99990833340972,
+    "time_sig": "4/4",
+    "total_notes": 76,
+    "midi_range": [
+      35,
+      65
+    ],
+    "velocity_avg": 90.0,
+    "track_count": 5,
+    "tracks_detail": [
+      {
+        "track": 0,
+        "notes": 30,
+        "pitch_classes": [
+          2,
+          6,
+          11
+        ],
+        "scale_fragment": "Lydian",
+        "range": [
+          35,
+          42
+        ]
+      },
+      {
+        "track": 1,
+        "notes": 10,
+        "pitch_classes": [
+          0,
+          4,
+          7,
+          10
+        ],
+        "scale_fragment": "Mixolydian",
+        "range": [
+          36,
+          46
+        ]
+      },
+      {
+        "track": 2,
+        "notes": 24,
+        "pitch_classes": [
+          0,
+          2,
+          3,
+          4,
+          5,
+          7,
+          9,
+          10
+        ],
+        "scale_fragment": "Blues Heptatonic",
+        "range": [
+          36,
+          58
+        ]
+      },
+      {
+        "track": 3,
+        "notes": 4,
+        "pitch_classes": [
+          0,
+          3,
+          5,
+          10
+        ],
+        "scale_fragment": "Pentatonic Minor",
+        "range": [
+          39,
+          65
+        ]
+      },
+      {
+        "track": 4,
+        "notes": 8,
+        "pitch_classes": [
+          0,
+          3,
+          5,
+          10
+        ],
+        "scale_fragment": "Pentatonic Minor",
+        "range": [
+          36,
+          51
+        ]
+      }
+    ],
+    "analysis_source": "midi",
+    "source_file": "/opt/data/projects/Styles/Groove/020-afrobeat-groove/create_afrobeat.py",
+    "embedded_pitch_classes": [
+      0,
+      2,
+      6
+    ],
+    "embedded_scale": "Whole Tone"
+  }
+]

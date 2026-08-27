@@ -1,0 +1,36 @@
+{
+  "artifact": "065-uniform-stochastic-chorale.mid",
+  "classification": "ai-generated",
+  "generator": "Method 001 Uniform Stochastic sampling + musicom rules (chord-tone quantization, voice leading, harmonic progression)",
+  "sources": [
+    "generators/stochastic.py",
+    "rules/voice_leading.py",
+    "rules/progression.py",
+    "workflows/unitmatrix_composer.py"
+  ],
+  "parameters": {
+    "method": 1,
+    "phase": 2,
+    "key": "D minor (aeolian)",
+    "bpm": 88,
+    "ticks_per_beat": 480,
+    "beats_per_bar": 4,
+    "sections": 4,
+    "section_bars": 2,
+    "progression_degrees": [
+      0,
+      5,
+      2,
+      6
+    ],
+    "seed": 65,
+    "voice_leading_style": "classical",
+    "two_phase": true,
+    "rules_applied": "chord-tone quantization, diatonic block harmony, voice-leading optimization, Phase 2c inversion-rotation correction"
+  },
+  "notes": "Phase 2: raw stochastic pitches quantized to nearest section triad tone (soprano), Alto/Tenor/Bass as diatonic block harmony via Scale7ChordDegree.get_diatonic_note(), voice-leading optimization + Phase 2c inversion-rotation correction of parallel/hidden fifths, harmonic function validation (i-VI-III-VII, D minor), zero-drift validated UnitMatrix export.",
+  "sha256": "872d064aa1c89651967f1b661e8ca8026924c43f5b3f024f54b9f34e45607003",
+  "bytes": 1885,
+  "created_utc": "2026-08-11T23:02:18.997125+00:00",
+  "provenance_version": "1.0"
+}

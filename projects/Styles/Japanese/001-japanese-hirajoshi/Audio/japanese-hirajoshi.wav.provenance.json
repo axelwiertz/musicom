@@ -1,0 +1,16 @@
+{
+  "artifact": "japanese-hirajoshi.wav",
+  "classification": "ai-generated",
+  "generator": "001-japanese-hirajoshi/fluidsynth",
+  "sources": [
+    "Japanese/001-japanese-hirajoshi/MIDI/001-japanese-hirajoshi.mid"
+  ],
+  "parameters": {
+    "soundfont": "TimGM6mb.sf2",
+    "gain": 1.2
+  },
+  "sha256": "7ded76fcc5b5aa5d356ee71ebc8a8832c9456a3837f15e7a2f8df69d5dcb92bf",
+  "bytes": 10203692,
+  "created_utc": "2026-08-17T07:58:56.303952+00:00",
+  "provenance_version": "1.0"
+}

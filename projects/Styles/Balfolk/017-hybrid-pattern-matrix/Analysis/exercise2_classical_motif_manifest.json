@@ -1,0 +1,25 @@
+{
+  "stem": "musicmatrix_exercise2_classical_motif_v1",
+  "midi": "/opt/data/projects/014-genre-pattern-matrix/MIDI/musicmatrix_exercise2_classical_motif_v1.mid",
+  "ogg": "/opt/data/projects/014-genre-pattern-matrix/Audio/musicmatrix_exercise2_classical_motif_v1.ogg",
+  "exercise": "2 classical motif development",
+  "rows": [
+    "Motor Alberti Pattern",
+    "Functional Bass",
+    "Harmony Blocks",
+    "Counterline",
+    "Motif Lead"
+  ],
+  "columns": 8,
+  "form": "8-bar period: antecedent bars 1-4, consequent bars 5-8",
+  "tempo_bpm": 100,
+  "time_signature": "4/4",
+  "motif": "U U D = G-A-B-A",
+  "harmony": "I | V | vi | IV | ii | V | I | I",
+  "transformations": [
+    "sequence",
+    "inversion/contrary motion",
+    "cadence"
+  ],
+  "musicmatrix_semantics": "rows=voices/pitch-space layers; columns=measures/time-space; cells=MusicUnit bar material"
+}

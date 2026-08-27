@@ -1,0 +1,22 @@
+{
+  "artifact": "orchestral_disco.mid",
+  "classification": "ai-assisted",
+  "generator": "disco-orchestral",
+  "sources": [],
+  "parameters": {
+    "bpm": 124,
+    "key": "C major",
+    "style": "Orchestral/Salsoul Disco",
+    "methods": [
+      "string sweeps",
+      "orchestral hits",
+      "timpani rolls",
+      "root-fifth bass"
+    ]
+  },
+  "notes": "",
+  "sha256": "3a9c94a35fef83dc2d7f7b5107563d261a9f190c933aece42ad68d5332d4297e",
+  "bytes": 6653,
+  "created_utc": "2026-07-26T19:09:51.817537+00:00",
+  "provenance_version": "1.0"
+}

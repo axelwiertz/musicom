@@ -1,0 +1,235 @@
+[
+  {
+    "project_name": "002-classical-daily-2026-06-12",
+    "midi_file": "/opt/data/projects/Styles/Classical/002-classical-daily-2026-06-12/MIDI/composition.mid",
+    "scale": "Lydian",
+    "pitch_classes": [
+      0,
+      2,
+      4,
+      6,
+      7,
+      9,
+      11
+    ],
+    "intervals": [
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1
+    ],
+    "tempo": 85.00004250002125,
+    "time_sig": "4/4",
+    "total_notes": 403,
+    "midi_range": [
+      31,
+      69
+    ],
+    "velocity_avg": 82.3,
+    "track_count": 4,
+    "tracks_detail": [
+      {
+        "track": 0,
+        "notes": 83,
+        "pitch_classes": [
+          0,
+          2,
+          4,
+          7,
+          9
+        ],
+        "scale_fragment": "Pentatonic Major",
+        "range": [
+          60,
+          69
+        ]
+      },
+      {
+        "track": 1,
+        "notes": 64,
+        "pitch_classes": [
+          0,
+          2,
+          7
+        ],
+        "scale_fragment": "In Scale",
+        "range": [
+          31,
+          43
+        ]
+      },
+      {
+        "track": 2,
+        "notes": 128,
+        "pitch_classes": [
+          0,
+          4,
+          7,
+          11
+        ],
+        "scale_fragment": "Lydian",
+        "range": [
+          48,
+          59
+        ]
+      },
+      {
+        "track": 3,
+        "notes": 128,
+        "pitch_classes": [
+          6
+        ],
+        "scale_fragment": "Blues Hexatonic",
+        "range": [
+          42,
+          42
+        ]
+      }
+    ],
+    "analysis_source": "midi"
+  },
+  {
+    "project_name": "021-classical-mozart",
+    "midi_file": "/opt/data/projects/Styles/Classical/021-classical-mozart/MIDI/mozart_classical.mid",
+    "scale": "Major/Ionian",
+    "pitch_classes": [
+      0,
+      2,
+      4,
+      5,
+      7,
+      9,
+      11
+    ],
+    "intervals": [
+      2,
+      2,
+      1,
+      2,
+      2,
+      2,
+      1
+    ],
+    "tempo": 120.0,
+    "time_sig": "4/4",
+    "total_notes": 244,
+    "midi_range": [
+      36,
+      84
+    ],
+    "velocity_avg": 90.0,
+    "track_count": 2,
+    "tracks_detail": [
+      {
+        "track": 0,
+        "notes": 52,
+        "pitch_classes": [
+          0,
+          2,
+          4,
+          5,
+          7,
+          9,
+          11
+        ],
+        "scale_fragment": "Major/Ionian",
+        "range": [
+          60,
+          84
+        ]
+      },
+      {
+        "track": 1,
+        "notes": 192,
+        "pitch_classes": [
+          0,
+          2,
+          4,
+          7,
+          11
+        ],
+        "scale_fragment": "Lydian",
+        "range": [
+          36,
+          59
+        ]
+      }
+    ],
+    "analysis_source": "midi",
+    "source_file": "/opt/data/projects/Styles/Classical/021-classical-mozart/compose_mozart.py",
+    "embedded_pitch_classes": [
+      0,
+      4,
+      7
+    ],
+    "embedded_scale": "In Scale"
+  },
+  {
+    "project_name": "classical_baroque",
+    "source_file": "/opt/data/projects/Styles/Classical/classical_baroque/src/regen.py",
+    "scale_from_source": "Dorian",
+    "pitch_pattern_intervals": [
+      2,
+      3,
+      -2,
+      0,
+      5
+    ],
+    "analysis_source": "source"
+  },
+  {
+    "project_name": "classical_common_practice",
+    "source_file": "/opt/data/projects/Styles/Classical/classical_common_practice/src/regen.py",
+    "scale_from_source": "Dorian",
+    "pitch_pattern_intervals": [
+      2,
+      3,
+      -2,
+      0,
+      5
+    ],
+    "analysis_source": "source"
+  },
+  {
+    "project_name": "indian_classical_yaman",
+    "source_file": "/opt/data/projects/Styles/Classical/indian_classical_yaman/src/regen.py",
+    "scale_from_source": "Dorian",
+    "pitch_pattern_intervals": [
+      2,
+      3,
+      -2,
+      0,
+      5
+    ],
+    "analysis_source": "source"
+  },
+  {
+    "project_name": "indian_classical_yaman_v2",
+    "source_file": "/opt/data/projects/Styles/Classical/indian_classical_yaman_v2/src/regen.py",
+    "scale_from_source": "Dorian",
+    "pitch_pattern_intervals": [
+      2,
+      3,
+      -2,
+      0,
+      5
+    ],
+    "analysis_source": "source"
+  },
+  {
+    "project_name": "indian_classical_yaman_v3",
+    "source_file": "/opt/data/projects/Styles/Classical/indian_classical_yaman_v3/src/regen.py",
+    "scale_from_source": "Dorian",
+    "pitch_pattern_intervals": [
+      2,
+      3,
+      -2,
+      0,
+      5
+    ],
+    "analysis_source": "source"
+  }
+]

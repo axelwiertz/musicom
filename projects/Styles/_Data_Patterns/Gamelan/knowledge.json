@@ -1,0 +1,105 @@
+{
+  "style": "Gamelan",
+  "subgenre": "",
+  "pitch": {
+    "scale": "Lydian",
+    "intervals": [
+      2,
+      2,
+      3,
+      2,
+      3
+    ],
+    "pitch_classes": [
+      2,
+      4,
+      6,
+      9,
+      11
+    ],
+    "per_track_scale": "Lydian",
+    "per_track_scale_distribution": {
+      "Lydian": 3,
+      "In Scale": 2
+    }
+  },
+  "rhythm": {
+    "metrical_gravity": [
+      1.0,
+      0,
+      0.5,
+      0
+    ],
+    "tempo_range": [
+      80.0,
+      80.0
+    ],
+    "time_signatures": [],
+    "description": ""
+  },
+  "timbre": {
+    "instrumentation": [
+      "Track 1",
+      "Track 2",
+      "Track 3",
+      "Track 4"
+    ]
+  },
+  "patterns": [
+    {
+      "project": "017-gamelan-central-java",
+      "midi": "/opt/data/projects/Styles/Gamelan/017-gamelan-central-java/MIDI/gamelan_live_render.mid",
+      "source": "/opt/data/projects/Styles/Gamelan/017-gamelan-central-java/src/live_composer.py",
+      "scale": "Lydian",
+      "pitch_classes": [
+        2,
+        4,
+        6,
+        9,
+        11
+      ],
+      "tempo": 80.0,
+      "time_sig": null
+    },
+    {
+      "project": "gamelan-daily-2026-06-20",
+      "midi": "/opt/data/projects/Styles/Gamelan/gamelan-daily-2026-06-20/composition.mid",
+      "scale": "Lydian",
+      "pitch_classes": [
+        2,
+        4,
+        6,
+        9
+      ],
+      "tempo": null,
+      "time_sig": null
+    }
+  ],
+  "validated": true,
+  "validation": {
+    "12tet": {
+      "valid": true,
+      "pitch_classes_used": [
+        2,
+        4,
+        6,
+        9,
+        11
+      ],
+      "count": 5,
+      "issues": []
+    },
+    "metrical_gravity": {
+      "valid": true,
+      "length": 4,
+      "strong_beat_count": 1,
+      "profile": [
+        1.0,
+        0,
+        0.5,
+        0
+      ],
+      "issues": []
+    }
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "artifact": "059-genetic-chorale.mid",
+  "classification": "ai-generated",
+  "generator": "GeneticGenerator (generators/genetic.py, Method 003)",
+  "sources": [
+    "generators/genetic.py:GeneticGenerator",
+    "rules/voice_leading.py:VoiceLeadingRules",
+    "rules/progression.py:Scale7ChordDegree"
+  ],
+  "parameters": {
+    "bpm": 88,
+    "key": "G minor",
+    "progression": [
+      "i",
+      "iv",
+      "v",
+      "i",
+      "iv",
+      "v",
+      "iv",
+      "i"
+    ],
+    "chord_degrees": [
+      1,
+      4,
+      5,
+      1,
+      4,
+      5,
+      4,
+      1
+    ],
+    "seed": 1101,
+    "population_size": 24,
+    "generation_limit": 60,
+    "fitness_limit": 24,
+    "genome_bits_per_bar": 3,
+    "voices": [
+      "Soprano",
+      "Alto",
+      "Tenor",
+      "Bass"
+    ],
+    "bars": 8,
+    "voice_leading_fixes": 7,
+    "residual_violations": 0
+  },
+  "notes": "Two-phase architecture: genetic genome selection (Phase 1) -> chord-tone quantization + classical voice leading rules (Phase 2)",
+  "sha256": "4930b500876b7fa87b8fd9762ee48000aae84973c1a2cf8ec4db36cc7e3492df",
+  "bytes": 381,
+  "created_utc": "2026-08-06T23:23:32.284669+00:00",
+  "provenance_version": "1.0"
+}

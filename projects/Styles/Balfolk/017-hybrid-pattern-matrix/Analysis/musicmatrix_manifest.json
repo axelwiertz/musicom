@@ -1,0 +1,55 @@
+[
+  {
+    "stem": "musicmatrix_exercise1a_balfolk_dorian_jig",
+    "midi": "/opt/data/projects/014-genre-pattern-matrix/MIDI/musicmatrix_exercise1a_balfolk_dorian_jig.mid",
+    "ogg": "/opt/data/projects/014-genre-pattern-matrix/Audio/musicmatrix_exercise1a_balfolk_dorian_jig.ogg",
+    "rows": [
+      "Foot Pulse / Drums",
+      "Bass Voice",
+      "Harmony Voice",
+      "Lead Voice"
+    ],
+    "columns": 8,
+    "bar_ticks": 1440,
+    "tempo_bpm": 142.5,
+    "time_signature": "6/8",
+    "matrix_semantics": "rows=voices/pitch-space layers; columns=measures/time-space; cells=MusicUnit bar material"
+  },
+  {
+    "stem": "musicmatrix_exercise1b_jazz_ii_v_i_swing",
+    "midi": "/opt/data/projects/014-genre-pattern-matrix/MIDI/musicmatrix_exercise1b_jazz_ii_v_i_swing.mid",
+    "ogg": "/opt/data/projects/014-genre-pattern-matrix/Audio/musicmatrix_exercise1b_jazz_ii_v_i_swing.ogg",
+    "rows": [
+      "Ride + Backbeat",
+      "Walking Bass",
+      "Piano Harmony",
+      "Sax Lead"
+    ],
+    "columns": 8,
+    "bar_ticks": 1920,
+    "tempo_bpm": 120,
+    "time_signature": "4/4",
+    "matrix_semantics": "rows=voices/pitch-space layers; columns=measures/time-space; cells=MusicUnit bar material"
+  },
+  {
+    "stem": "musicmatrix_exercise1c_hybrid_balfolk_jazz",
+    "midi": "/opt/data/projects/014-genre-pattern-matrix/MIDI/musicmatrix_exercise1c_hybrid_balfolk_jazz.mid",
+    "ogg": "/opt/data/projects/014-genre-pattern-matrix/Audio/musicmatrix_exercise1c_hybrid_balfolk_jazz.ogg",
+    "rows": [
+      "Jig Pulse / Drums",
+      "Modal Bass",
+      "Jazz Color Harmony",
+      "Folk Lead"
+    ],
+    "columns": 8,
+    "bar_ticks": 1440,
+    "tempo_bpm": 142.5,
+    "time_signature": "6/8",
+    "matrix_semantics": "rows=voices/pitch-space layers; columns=measures/time-space; cells=MusicUnit bar material"
+  },
+  {
+    "stem": "musicmatrix_exercise1_all_three_compare",
+    "ogg": "/opt/data/projects/014-genre-pattern-matrix/Audio/musicmatrix_exercise1_all_three_compare.ogg",
+    "type": "comparison_render"
+  }
+]

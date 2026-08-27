@@ -1,0 +1,32 @@
+{
+  "artifact": "/opt/data/projects/Styles/Production/SP014-waveguide-mesh-disco/Audio/mix_mesh_gm.wav",
+  "classification": "ai-assisted",
+  "generator": "musicom SP-014 waveguide mesh synthesizer (custom DSP, numpy)",
+  "sources": [
+    "/opt/data/projects/Styles/Disco/modern/v1/modern_disco.mid"
+  ],
+  "source_sha256": "6dc8fcb0e0a83b200d6525845c0fc6cffe373146bd352227c86cee17a0a66319",
+  "parameters": {
+    "method": "SP-014",
+    "method_name": "Waveguide Mesh Physical Modeling",
+    "layer": "Synthesis Engines",
+    "target": "Acoustic/Resonant Space Timbre",
+    "sr": 44100,
+    "bpm": 126.0,
+    "tick_seconds": 0.0009920625,
+    "drum_render": "FluidSynth GM TimGM6mb.sf2 (channel 9)",
+    "track_presets": {
+      "2": "LeadFlute",
+      "3": "BassBody",
+      "1": "StringsPlate"
+    },
+    "mesh_bed": "MeshBed",
+    "mastering": "musicom MasteringChain: StereoImager(1.15) + Limiter(-1.0dB) + LUFS(-14)",
+    "outputs": {
+      "wav": "/opt/data/projects/Styles/Production/SP014-waveguide-mesh-disco/Audio/mix_mesh_gm.wav",
+      "ogg": "/opt/data/projects/Styles/Production/SP014-waveguide-mesh-disco/Audio/mix_mesh_gm.ogg",
+      "midi": "/opt/data/projects/Styles/Production/SP014-waveguide-mesh-disco/MIDI/original.mid"
+    }
+  },
+  "created_utc": "2026-08-06T22:31:17.942253+00:00"
+}

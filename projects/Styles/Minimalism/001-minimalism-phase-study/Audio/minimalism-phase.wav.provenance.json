@@ -1,0 +1,17 @@
+{
+  "artifact": "minimalism-phase.wav",
+  "classification": "ai-generated",
+  "generator": "minimalism-phase-study/fluidsynth",
+  "sources": [
+    "MIDI/minimalism-phase.mid"
+  ],
+  "parameters": {
+    "bpm": 120,
+    "soundfont": "TimGM6mb.sf2",
+    "gain": 1.2
+  },
+  "sha256": "2977ebcc6a936826cc96ea047270ac7d99212aaa7ee97397a43c1ad8a62e7c67",
+  "bytes": 9352748,
+  "created_utc": "2026-08-17T07:41:43.462487+00:00",
+  "provenance_version": "1.0"
+}

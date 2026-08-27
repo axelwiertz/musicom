@@ -1,0 +1,41 @@
+{
+  "genre": "Variation 2026-06-05 Bossa Nova",
+  "subgenre": "Classic",
+  "pitch": {
+    "scale": "Major with alterations",
+    "intervals": [
+      2,
+      2,
+      1,
+      2,
+      2,
+      2,
+      1
+    ],
+    "contour": "Smooth, descending chromatically"
+  },
+  "rhythm": {
+    "dna": "\u2591\u2591\u2591\u2588\u2591\u2588\u2591\u2591\u2591\u2588\u2591\u2591\u2588\u2591\u2591\u2588",
+    "euclidean": "E(5,16) variant",
+    "metrical_gravity": [
+      1,
+      0,
+      0.4,
+      0,
+      1,
+      0,
+      0.4,
+      0
+    ],
+    "description": "Syncopated guitar 'viol\u00e3o' style"
+  },
+  "timbre": {
+    "instrumentation": [
+      "Nylon Guitar",
+      "Soft Vocals",
+      "Surdo",
+      "Shaker"
+    ],
+    "calibration": "Intimate, low dynamic range"
+  }
+}

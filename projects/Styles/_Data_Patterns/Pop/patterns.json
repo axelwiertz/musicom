@@ -1,0 +1,221 @@
+[
+  {
+    "project_name": "036-kate-bush-analysis",
+    "midi_file": "/opt/data/projects/Styles/Pop/036-kate-bush-analysis/MIDI/The_Man_with_the_Child_in_His_Eyes.mid",
+    "scale": "Chromatic",
+    "pitch_classes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "intervals": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "tempo": 73.99980020053945,
+    "time_sig": "4/4",
+    "total_notes": 1243,
+    "midi_range": [
+      31,
+      108
+    ],
+    "velocity_avg": 80.0,
+    "track_count": 4,
+    "tracks_detail": [
+      {
+        "track": 0,
+        "notes": 295,
+        "pitch_classes": [
+          0,
+          2,
+          3,
+          4,
+          5,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "scale_fragment": "Chromatic",
+        "range": [
+          55,
+          77
+        ]
+      },
+      {
+        "track": 1,
+        "notes": 53,
+        "pitch_classes": [
+          0,
+          2,
+          3,
+          4,
+          7,
+          9,
+          10,
+          11
+        ],
+        "scale_fragment": "Chromatic",
+        "range": [
+          57,
+          91
+        ]
+      },
+      {
+        "track": 2,
+        "notes": 593,
+        "pitch_classes": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "scale_fragment": "Chromatic",
+        "range": [
+          55,
+          108
+        ]
+      },
+      {
+        "track": 3,
+        "notes": 302,
+        "pitch_classes": [
+          0,
+          2,
+          4,
+          5,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "scale_fragment": "Chromatic",
+        "range": [
+          31,
+          56
+        ]
+      }
+    ],
+    "analysis_source": "midi"
+  },
+  {
+    "project_name": "indie-pop-sunset",
+    "midi_file": "/opt/data/projects/Styles/Pop/indie-pop-sunset/MIDI/sunset_matrix.mid",
+    "scale": "Lydian",
+    "pitch_classes": [
+      0,
+      2,
+      4,
+      6,
+      7,
+      9,
+      11
+    ],
+    "intervals": [
+      2,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1
+    ],
+    "tempo": null,
+    "time_sig": null,
+    "total_notes": 120,
+    "midi_range": [
+      36,
+      76
+    ],
+    "velocity_avg": 88.0,
+    "track_count": 3,
+    "tracks_detail": [
+      {
+        "track": 0,
+        "notes": 48,
+        "pitch_classes": [
+          2,
+          4,
+          6,
+          7,
+          9,
+          11
+        ],
+        "scale_fragment": "Lydian",
+        "range": [
+          64,
+          76
+        ]
+      },
+      {
+        "track": 1,
+        "notes": 8,
+        "pitch_classes": [
+          0,
+          2,
+          4,
+          7
+        ],
+        "scale_fragment": "In Scale",
+        "range": [
+          48,
+          55
+        ]
+      },
+      {
+        "track": 2,
+        "notes": 64,
+        "pitch_classes": [
+          0,
+          2,
+          4,
+          7
+        ],
+        "scale_fragment": "In Scale",
+        "range": [
+          36,
+          43
+        ]
+      }
+    ],
+    "analysis_source": "midi",
+    "source_file": "/opt/data/projects/Styles/Pop/indie-pop-sunset/src/regen.py",
+    "scale_from_source": "Dorian",
+    "pitch_pattern_intervals": [
+      2,
+      3,
+      -2,
+      0,
+      5
+    ]
+  }
+]

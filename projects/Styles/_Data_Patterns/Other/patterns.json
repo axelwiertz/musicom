@@ -1,0 +1,314 @@
+[
+  {
+    "project_name": "genre-daily-2026-06-13",
+    "midi_file": "/opt/data/projects/Styles/Other/genre-daily-2026-06-13/composition.mid",
+    "scale": "Pelog (approx)",
+    "pitch_classes": [
+      0,
+      3
+    ],
+    "intervals": [
+      3,
+      9
+    ],
+    "tempo": null,
+    "time_sig": null,
+    "total_notes": 64,
+    "midi_range": [
+      36,
+      63
+    ],
+    "velocity_avg": 95.0,
+    "track_count": 1,
+    "tracks_detail": [
+      {
+        "track": 0,
+        "notes": 64,
+        "pitch_classes": [
+          0,
+          3
+        ],
+        "scale_fragment": "Pelog (approx)",
+        "range": [
+          36,
+          63
+        ]
+      }
+    ],
+    "analysis_source": "midi",
+    "source_file": "/opt/data/projects/Styles/Other/genre-daily-2026-06-13/src/regen.py",
+    "scale_from_source": "Dorian",
+    "pitch_pattern_intervals": [
+      2,
+      3,
+      -2,
+      0,
+      5
+    ]
+  },
+  {
+    "project_name": "genre-daily-2026-06-14",
+    "midi_file": "/opt/data/projects/Styles/Other/genre-daily-2026-06-14/composition.mid",
+    "scale": "Chromatic",
+    "pitch_classes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "intervals": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "tempo": 120.0,
+    "time_sig": "4/4",
+    "total_notes": 32,
+    "midi_range": [
+      61,
+      80
+    ],
+    "velocity_avg": 64.0,
+    "track_count": 1,
+    "tracks_detail": [
+      {
+        "track": 0,
+        "notes": 32,
+        "pitch_classes": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "scale_fragment": "Chromatic",
+        "range": [
+          61,
+          80
+        ]
+      }
+    ],
+    "analysis_source": "midi",
+    "source_file": "/opt/data/projects/Styles/Other/genre-daily-2026-06-14/src/regen.py",
+    "scale_from_source": "Dorian",
+    "pitch_pattern_intervals": [
+      2,
+      3,
+      -2,
+      0,
+      5
+    ]
+  },
+  {
+    "project_name": "klezmer_freylekhs",
+    "source_file": "/opt/data/projects/Styles/Other/klezmer_freylekhs/src/regen.py",
+    "scale_from_source": "Dorian",
+    "pitch_pattern_intervals": [
+      2,
+      3,
+      -2,
+      0,
+      5
+    ],
+    "analysis_source": "source"
+  },
+  {
+    "project_name": "unknown-daily-2026-06-04",
+    "source_file": "/opt/data/projects/Styles/Other/unknown-daily-2026-06-04/src/regen.py",
+    "scale_from_source": "Dorian",
+    "pitch_pattern_intervals": [
+      2,
+      3,
+      -2,
+      0,
+      5
+    ],
+    "analysis_source": "source"
+  },
+  {
+    "project_name": "unknown-daily-2026-06-05",
+    "midi_file": "/opt/data/projects/Styles/Other/unknown-daily-2026-06-05/composition.mid",
+    "scale": "In Scale",
+    "pitch_classes": [
+      0
+    ],
+    "intervals": [],
+    "tempo": 120.0,
+    "time_sig": null,
+    "total_notes": 300,
+    "midi_range": [
+      72,
+      72
+    ],
+    "velocity_avg": 100.0,
+    "track_count": 1,
+    "tracks_detail": [
+      {
+        "track": 0,
+        "notes": 300,
+        "pitch_classes": [
+          0
+        ],
+        "scale_fragment": "In Scale",
+        "range": [
+          72,
+          72
+        ]
+      }
+    ],
+    "analysis_source": "midi",
+    "source_file": "/opt/data/projects/Styles/Other/unknown-daily-2026-06-05/src/regen.py",
+    "scale_from_source": "Dorian",
+    "pitch_pattern_intervals": [
+      2,
+      3,
+      -2,
+      0,
+      5
+    ]
+  },
+  {
+    "project_name": "unknown-daily-2026-06-06",
+    "midi_file": "/opt/data/projects/Styles/Other/unknown-daily-2026-06-06/composition.mid",
+    "scale": "Major/Ionian",
+    "pitch_classes": [
+      4,
+      5,
+      7,
+      9,
+      11
+    ],
+    "intervals": [
+      1,
+      2,
+      2,
+      2,
+      5
+    ],
+    "tempo": 120.0,
+    "time_sig": "4/4",
+    "total_notes": 96,
+    "midi_range": [
+      40,
+      83
+    ],
+    "velocity_avg": 64.0,
+    "track_count": 2,
+    "tracks_detail": [
+      {
+        "track": 0,
+        "notes": 80,
+        "pitch_classes": [
+          4,
+          5,
+          7,
+          9,
+          11
+        ],
+        "scale_fragment": "Major/Ionian",
+        "range": [
+          52,
+          83
+        ]
+      },
+      {
+        "track": 1,
+        "notes": 16,
+        "pitch_classes": [
+          4
+        ],
+        "scale_fragment": "In Scale",
+        "range": [
+          40,
+          40
+        ]
+      }
+    ],
+    "analysis_source": "midi",
+    "source_file": "/opt/data/projects/Styles/Other/unknown-daily-2026-06-06/src/regen.py",
+    "scale_from_source": "Dorian",
+    "pitch_pattern_intervals": [
+      2,
+      3,
+      -2,
+      0,
+      5
+    ]
+  },
+  {
+    "project_name": "variation_2026-06-05_bossa",
+    "source_file": "/opt/data/projects/Styles/Other/variation_2026-06-05_bossa/src/regen.py",
+    "scale_from_source": "Dorian",
+    "pitch_pattern_intervals": [
+      2,
+      3,
+      -2,
+      0,
+      5
+    ],
+    "analysis_source": "source"
+  },
+  {
+    "project_name": "variation_2026-06-06_solea_retro",
+    "source_file": "/opt/data/projects/Styles/Other/variation_2026-06-06_solea_retro/src/regen.py",
+    "scale_from_source": "Dorian",
+    "pitch_pattern_intervals": [
+      2,
+      3,
+      -2,
+      0,
+      5
+    ],
+    "analysis_source": "source"
+  },
+  {
+    "project_name": "variation_2026-06-09_afro-cuban-son",
+    "source_file": "/opt/data/projects/Styles/Other/variation_2026-06-09_afro-cuban-son/src/regen.py",
+    "scale_from_source": "Dorian",
+    "pitch_pattern_intervals": [
+      2,
+      3,
+      -2,
+      0,
+      5
+    ],
+    "analysis_source": "source"
+  },
+  {
+    "project_name": "variation_2026-06-10_bossa-nova",
+    "source_file": "/opt/data/projects/Styles/Other/variation_2026-06-10_bossa-nova/src/regen.py",
+    "scale_from_source": "Dorian",
+    "pitch_pattern_intervals": [
+      2,
+      3,
+      -2,
+      0,
+      5
+    ],
+    "analysis_source": "source"
+  }
+]

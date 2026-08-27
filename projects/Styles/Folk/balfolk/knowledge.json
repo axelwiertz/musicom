@@ -1,0 +1,58 @@
+{
+  "genre": "Balfolk",
+  "sub_genres": {
+    "Jig": {
+      "pitch": {
+        "scale": "Dorian",
+        "intervals": [
+          2,
+          1,
+          2,
+          2,
+          2,
+          1,
+          2
+        ],
+        "contour": "Iterative, often circling the dominant"
+      },
+      "rhythm": {
+        "grid": "\u2588\u2591\u2591\u2588\u2591\u2591",
+        "time_signature": "6/8",
+        "euclidean": "E(2,6)",
+        "features": [
+          "compound duple",
+          "lilting"
+        ]
+      },
+      "timbre": {
+        "instrumentation": [
+          "Accordion",
+          "Violin",
+          "Diatonic Button Box"
+        ],
+        "synthesis": "Acoustic, bellows-driven transients"
+      }
+    },
+    "Mazurka": {
+      "pitch": {
+        "scale": "Minor/Major mixed",
+        "logic": "Classical functional with folk ornaments"
+      },
+      "rhythm": {
+        "grid": "\u2588\u2591\u2591\u2588\u2591\u2591\u2588\u2591\u2591",
+        "time_signature": "3/4",
+        "features": [
+          "Emphasis on beat 2 or 3",
+          "dotted eighth on beat 1"
+        ]
+      },
+      "timbre": {
+        "instrumentation": [
+          "Violin",
+          "Flute",
+          "Bagpipes (veuze/cornemuse)"
+        ]
+      }
+    }
+  }
+}

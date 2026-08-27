@@ -1,0 +1,102 @@
+{
+  "instrument": "Resonant Glass Armonica",
+  "date": "2026-06-22",
+  "sample_rate": 48000,
+  "bpm": 120,
+  "duration_sec": 4.0,
+  "notes": [
+    {
+      "name": "C4",
+      "freq_hz": 261.63
+    },
+    {
+      "name": "E4",
+      "freq_hz": 329.63
+    },
+    {
+      "name": "G4",
+      "freq_hz": 392.0
+    },
+    {
+      "name": "B4",
+      "freq_hz": 493.88
+    },
+    {
+      "name": "C5",
+      "freq_hz": 523.25
+    },
+    {
+      "name": "B4",
+      "freq_hz": 493.88
+    },
+    {
+      "name": "G4",
+      "freq_hz": 392.0
+    },
+    {
+      "name": "E4",
+      "freq_hz": 329.63
+    }
+  ],
+  "modal_parameters": {
+    "ratios": [
+      1.0,
+      2.31,
+      3.85,
+      5.44,
+      7.23
+    ],
+    "weights": [
+      1.0,
+      0.65,
+      0.35,
+      0.12,
+      0.04
+    ],
+    "q_factors": [
+      350,
+      280,
+      220,
+      180,
+      120
+    ]
+  },
+  "resonant_peaks": [
+    {
+      "freq_hz": 521.48,
+      "peak_db": -33.88,
+      "prominence_db": 68.67,
+      "q_factor": 29.7
+    },
+    {
+      "freq_hz": 761.72,
+      "peak_db": -41.21,
+      "prominence_db": 46.03,
+      "q_factor": 65.0
+    },
+    {
+      "freq_hz": 1207.03,
+      "peak_db": -48.99,
+      "prominence_db": 38.01,
+      "q_factor": 68.7
+    },
+    {
+      "freq_hz": 328.12,
+      "peak_db": -34.4,
+      "prominence_db": 37.61,
+      "q_factor": 18.7
+    },
+    {
+      "freq_hz": 1898.44,
+      "peak_db": -51.38,
+      "prominence_db": 34.81,
+      "q_factor": 64.8
+    }
+  ],
+  "files": {
+    "wav": "glass_armonica_2026-06-22.wav",
+    "ogg": "glass_armonica_2026-06-22.ogg",
+    "opus": "glass_armonica_2026-06-22.opus",
+    "midi": "glass_armonica_2026-06-22.mid"
+  }
+}

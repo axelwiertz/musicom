@@ -1,0 +1,108 @@
+{
+  "style": "Modal",
+  "subgenre": "",
+  "pitch": {
+    "scale": "Major/Ionian",
+    "intervals": [
+      2,
+      1,
+      1,
+      1,
+      2,
+      2,
+      1,
+      1,
+      1
+    ],
+    "pitch_classes": [
+      0,
+      2,
+      3,
+      4,
+      5,
+      7,
+      9,
+      10,
+      11
+    ],
+    "per_track_scale": "Major/Ionian",
+    "per_track_scale_distribution": {
+      "Major/Ionian": 2
+    }
+  },
+  "rhythm": {
+    "metrical_gravity": [
+      1.0,
+      0,
+      0.5,
+      0
+    ],
+    "tempo_range": [
+      120.0,
+      120.0
+    ],
+    "time_signatures": [
+      "4/4"
+    ],
+    "description": ""
+  },
+  "timbre": {
+    "instrumentation": [
+      "Track 1",
+      "Track 2"
+    ]
+  },
+  "patterns": [
+    {
+      "project": "002-modal-dorian-agent",
+      "midi": "/opt/data/projects/Styles/Modal/002-modal-dorian-agent/midi/two_track_composition.mid",
+      "scale": "Major/Ionian",
+      "pitch_classes": [
+        0,
+        2,
+        4,
+        5,
+        7,
+        9,
+        11
+      ],
+      "tempo": 120.0,
+      "time_sig": "4/4"
+    },
+    {
+      "project": "010-modal-project-dorian",
+      "source": "/opt/data/projects/Styles/Modal/010-modal-project-dorian/src/walkthrough.py"
+    }
+  ],
+  "validated": true,
+  "validation": {
+    "12tet": {
+      "valid": true,
+      "pitch_classes_used": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        7,
+        9,
+        10,
+        11
+      ],
+      "count": 9,
+      "issues": []
+    },
+    "metrical_gravity": {
+      "valid": true,
+      "length": 4,
+      "strong_beat_count": 1,
+      "profile": [
+        1.0,
+        0,
+        0.5,
+        0
+      ],
+      "issues": []
+    }
+  }
+}

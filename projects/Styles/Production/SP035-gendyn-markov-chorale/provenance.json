@@ -1,0 +1,77 @@
+{
+  "job": "SP-035 production pass (autonomous cron)",
+  "source_midi": "/opt/data/projects/Styles/Experimental/058-markov-chorale/MIDI/058-markov-chorale.mid",
+  "source_midi_sha256": "d424f6ad75a862085f6f1cd4e36f07e4269c2e389fdc5aa480dba83dfa9e7a33",
+  "production_method": "SP-035",
+  "production_method_name": "GENDYN Stochastic Breakpoint Synthesis",
+  "parameters": {
+    "sample_rate": 48000,
+    "bpm": 90,
+    "per_voice": {
+      "74": {
+        "role": "Lead (Flute)",
+        "n_bp": 12,
+        "sigma_a": 0.25,
+        "sigma_t": 0.08,
+        "amp_dist": "gaussian",
+        "time_dist": "uniform",
+        "gain": 1.0
+      },
+      "33": {
+        "role": "Bass",
+        "n_bp": 6,
+        "sigma_a": 0.1,
+        "sigma_t": 0.06,
+        "amp_dist": "gaussian",
+        "time_dist": "uniform",
+        "gain": 1.4
+      },
+      "49": {
+        "role": "Harmony (Strings)",
+        "n_bp": 15,
+        "sigma_a": 0.3,
+        "sigma_t": 0.1,
+        "amp_dist": "gaussian",
+        "time_dist": "uniform",
+        "gain": 0.9
+      }
+    },
+    "dynamic_walk": {
+      "sigma_a_step": 0.01,
+      "bounds": [
+        0.05,
+        0.9
+      ]
+    },
+    "adsr": {
+      "attack_s": 0.01,
+      "release_s": 0.08
+    },
+    "lowpass_hz": 16000,
+    "peak": 0.89
+  },
+  "outputs": {
+    "full_mix_wav": "/opt/data/projects/Styles/Production/SP035-gendyn-markov-chorale/Audio/058-markov-chorale-gendyn.wav",
+    "full_mix_ogg": "/opt/data/projects/Styles/Production/SP035-gendyn-markov-chorale/Audio/058-markov-chorale-gendyn.ogg",
+    "midi_copy": "/opt/data/projects/Styles/Production/SP035-gendyn-markov-chorale/058-markov-chorale.mid"
+  },
+  "verification": {
+    "notes_parsed": 32,
+    "notes_synthesized": 32,
+    "duration_sec": 9.0,
+    "silence_ratio": 0.1182,
+    "rms_per_second": [
+      0.13956,
+      0.15632,
+      0.1155,
+      0.13296,
+      0.17206,
+      0.23064,
+      0.13633,
+      0.13604,
+      0.0
+    ],
+    "peak": 2.2364
+  },
+  "description": "Xenakis GENDYN stochastic breakpoint synthesis: random time-amplitude breakpoints per period, linear interpolation, fresh random draw each period, dynamic sigma_a random walk, per-voice parameter sets."
+}

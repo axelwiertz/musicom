@@ -1,0 +1,21 @@
+{
+  "style": "Japanese",
+  "sub_styles": [],
+  "pitch": {
+    "scale": "Hirajoshi/In",
+    "intervals": [2, 1, 4, 1, 4],
+    "pitch_classes": [0, 2, 3, 7, 8],
+    "total_pitch_classes": 5
+  },
+  "rhythm": {
+    "metrical_gravity": [1.0, 0, 1.0, 0],
+    "tempo_range": [60, 80],
+    "time_signatures": ["4/4"],
+    "description": "Yotsu-boshi slow 4/4; ma (silence) as structural element; sparse koto plucks on strong beats; horizontal melody with wide leaps (4ths/5ths); pentatonic 2-1-4-1-4"
+  },
+  "validation": {
+    "12tet_pass": true,
+    "metrical_gravity_pass": true
+  },
+  "last_updated": "2026-08-17T00:00:00Z"
+}

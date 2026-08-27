@@ -1,0 +1,16 @@
+{
+  "artifact": "techno-four-floor.wav",
+  "classification": "ai-generated",
+  "generator": "001-techno-four-floor/fluidsynth",
+  "sources": [
+    "Techno/001-techno-four-floor/MIDI/001-techno-four-floor.mid"
+  ],
+  "parameters": {
+    "soundfont": "TimGM6mb.sf2",
+    "gain": 1.2
+  },
+  "sha256": "0b64ad9e50e061bd9f6b996814bba8c2bf5c0b920b51d39496af07d00c21c4ad",
+  "bytes": 6017324,
+  "created_utc": "2026-08-17T07:58:56.309607+00:00",
+  "provenance_version": "1.0"
+}

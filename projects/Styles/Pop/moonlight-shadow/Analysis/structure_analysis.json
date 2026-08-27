@@ -1,0 +1,206 @@
+[
+  {
+    "file": "Moonlight_Shadow 2.mid",
+    "bpm": 120,
+    "key": "G major",
+    "dur_ql": 146.0,
+    "dur_bars": 36.5,
+    "notes": 170,
+    "sections": [
+      [
+        0.0,
+        38.5
+      ],
+      [
+        41.0,
+        61.0
+      ],
+      [
+        65.0,
+        87.5
+      ],
+      [
+        90.0,
+        110.0
+      ],
+      [
+        115.0,
+        127.5
+      ],
+      [
+        131.0,
+        140.5
+      ]
+    ],
+    "pitch_range": [
+      62,
+      74
+    ],
+    "mean_pitch": 68.1470588235294,
+    "mean_ioi": 0.8520710059171598
+  },
+  {
+    "file": "Moonlight_ShadowMike_Oldfeild 2.mid",
+    "bpm": 126,
+    "key": "E major",
+    "dur_ql": 460.5,
+    "dur_bars": 115.125,
+    "notes": 2144,
+    "sections": [
+      [
+        0.0,
+        445.5
+      ],
+      [
+        448.0,
+        459.0
+      ]
+    ],
+    "pitch_range": [
+      28,
+      90
+    ],
+    "mean_pitch": 55.675839552238806,
+    "mean_ioi": 0.518058690744921
+  },
+  {
+    "file": "Moonlight_shadow__Mike_Oldfield 2.mid",
+    "bpm": 120,
+    "key": "G major",
+    "dur_ql": 212.0,
+    "dur_bars": 53.0,
+    "notes": 337,
+    "sections": [
+      [
+        0.0,
+        38.5
+      ],
+      [
+        41.0,
+        61.0
+      ],
+      [
+        65.0,
+        86.5
+      ],
+      [
+        89.0,
+        109.0
+      ],
+      [
+        113.0,
+        139.5
+      ],
+      [
+        142.0,
+        167.5
+      ],
+      [
+        170.0,
+        190.0
+      ],
+      [
+        194.0,
+        204.5
+      ]
+    ],
+    "pitch_range": [
+      48,
+      74
+    ],
+    "mean_pitch": 64.22551928783383,
+    "mean_ioi": 0.7563636363636363
+  },
+  {
+    "file": "Moonlight_shadow__Mike_Oldfield 3.mid",
+    "bpm": 126,
+    "key": "E major",
+    "dur_ql": 448.5,
+    "dur_bars": 112.125,
+    "notes": 1092,
+    "sections": [
+      [
+        0.0,
+        76.5
+      ],
+      [
+        79.0,
+        140.5
+      ],
+      [
+        145.0,
+        157.5
+      ],
+      [
+        161.0,
+        236.5
+      ],
+      [
+        241.0,
+        253.5
+      ],
+      [
+        257.0,
+        298.5
+      ],
+      [
+        302.5,
+        320.0
+      ],
+      [
+        322.5,
+        431.0
+      ],
+      [
+        434.75,
+        445.5
+      ]
+    ],
+    "pitch_range": [
+      35,
+      90
+    ],
+    "mean_pitch": 63.3003663003663,
+    "mean_ioi": 0.6310198300283286
+  },
+  {
+    "file": "Moonlight_shadow__Mike_Oldfield_Moonlight_shadow 2.mid",
+    "bpm": 120,
+    "key": "C major",
+    "dur_ql": 108.0,
+    "dur_bars": 27.0,
+    "notes": 304,
+    "sections": [
+      [
+        0.0,
+        103.0
+      ]
+    ],
+    "pitch_range": [
+      36,
+      84
+    ],
+    "mean_pitch": 58.25657894736842,
+    "mean_ioi": 0.5049019607843137
+  },
+  {
+    "file": "Moonlight_shadow__Mike_Oldfield_Moonlight_shadow_percussion 2.mid",
+    "bpm": 90,
+    "key": "C major",
+    "dur_ql": 953.75,
+    "dur_bars": 238.4375,
+    "notes": 0,
+    "sections": [
+      [
+        0.0,
+        3.75
+      ]
+    ],
+    "pitch_range": [
+      0,
+      0
+    ],
+    "mean_pitch": 0,
+    "mean_ioi": 0.8455056179775281
+  }
+]

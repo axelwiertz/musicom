@@ -1,0 +1,23 @@
+{
+  "artifact": "045-wfc-terrain.mid",
+  "classification": "ai-assisted",
+  "generator": "Experimental/045-wfc-terrain/compose.py",
+  "sources": [],
+  "parameters": {
+    "bpm": 100,
+    "methods": [
+      "033",
+      "SP-022"
+    ],
+    "grid_voices": 3,
+    "grid_sections": 8,
+    "terrain": "sine_product",
+    "orbit": "lissajous",
+    "wts_lead_ratio": 1.5
+  },
+  "notes": "Composed via Wave Function Collapse Grid Synthesis (Method 033) and synthesized via Wave Terrain Synthesis (Method SP-022).",
+  "sha256": "c3a7fffb54fb647fa85e16c34d5a524c1faf0051f06dcfd252af21fea34cfcbe",
+  "bytes": 1534,
+  "created_utc": "2026-07-22T10:06:11.132131+00:00",
+  "provenance_version": "1.0"
+}

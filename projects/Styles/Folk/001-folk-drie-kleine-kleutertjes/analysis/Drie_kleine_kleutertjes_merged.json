@@ -1,0 +1,33 @@
+{
+    "analysis_type": "song_analysis",
+    "title": "Drie Kleine Kleutertjes",
+    "notes": [],
+    "harmonization": {
+        "chord_progression": {
+            "analysis_type": "chord_progression",
+            "key": "F Major",
+            "chords": [
+                {
+                    "time": 0.0,
+                    "duration": 2.0,
+                    "chord": "Fmaj"
+                },
+                {
+                    "time": 2.0,
+                    "duration": 2.0,
+                    "chord": "Gm7"
+                },
+                {
+                    "time": 4.0,
+                    "duration": 2.0,
+                    "chord": "C7"
+                },
+                {
+                    "time": 6.0,
+                    "duration": 2.0,
+                    "chord": "Fmaj"
+                }
+            ]
+        }
+    }
+}

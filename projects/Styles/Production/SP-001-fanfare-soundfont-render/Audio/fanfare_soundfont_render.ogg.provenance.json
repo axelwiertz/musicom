@@ -1,0 +1,24 @@
+{
+  "artifact": "fanfare_soundfont_render.ogg",
+  "classification": "ai-assisted",
+  "generator": "nightly-production-pipeline (SP-001 FluidSynth SoundFont render)",
+  "sources": [
+    "/opt/data/projects/Styles/Fanfare/004-dutch-fanfare-integrated/MIDI/loop.mid",
+    "TimGM6mb.sf2",
+    "methods_db.md SP-001"
+  ],
+  "parameters": {
+    "method": "SP-001",
+    "method_name": "Multi-timbral SoundFont (SF2)",
+    "engine": "fluidsynth CLI 2.5.6",
+    "render_flags": "-ni -F -g 1.0",
+    "normalization": "-1.0 dBFS peak",
+    "opus_bitrate": "48k",
+    "selection": "random (SystemRandom): 276 MIDI files, SP-001..SP-045"
+  },
+  "notes": "Headless SoundFont wavetable render of Dutch Fanfare loop (Trumpet 56 + Tuba 58). Silence ratio 29% (intro/outro padding only, no mid-track gaps). Post-norm peak -1.0 dBFS exact.",
+  "sha256": "29d7518df738fe60d3dbb2d1e0187c3989edf7612655a11285e863e5cbc72ae7",
+  "bytes": 145107,
+  "created_utc": "2026-08-17T22:08:38.662373+00:00",
+  "provenance_version": "1.0"
+}

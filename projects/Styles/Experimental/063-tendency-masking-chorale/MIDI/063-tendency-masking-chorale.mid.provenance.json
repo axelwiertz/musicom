@@ -1,0 +1,78 @@
+{
+  "artifact": "063-tendency-masking-chorale.mid",
+  "classification": "ai-generated",
+  "generator": "Method 023 Tendency Masking Stochastic Bounds (generators/tendency_masking.py) + musicom rules",
+  "sources": [
+    "generators/tendency_masking.py",
+    "rules/voice_leading.py",
+    "rules/progression.py",
+    "workflows/unitmatrix_composer.py"
+  ],
+  "parameters": {
+    "method": 23,
+    "key": "D minor (aeolian)",
+    "bpm": 92,
+    "ticks_per_beat": 480,
+    "beats_per_bar": 4,
+    "sections": 4,
+    "section_bars": 2,
+    "progression_degrees": [
+      0,
+      5,
+      2,
+      6
+    ],
+    "envelopes": [
+      [
+        [
+          62,
+          74
+        ],
+        [
+          72,
+          84
+        ]
+      ],
+      [
+        [
+          70,
+          82
+        ],
+        [
+          62,
+          74
+        ]
+      ],
+      [
+        [
+          62,
+          74
+        ],
+        [
+          72,
+          84
+        ]
+      ],
+      [
+        [
+          72,
+          84
+        ],
+        [
+          62,
+          74
+        ]
+      ]
+    ],
+    "step_ticks": 120,
+    "density": 0.75,
+    "seed": 23,
+    "voice_leading_style": "classical",
+    "two_phase": true
+  },
+  "notes": "Phase 1: tendency-masked stochastic pitch walk inside dynamic frequency envelopes (rising = growth, falling = relaxation) + 16th-note stochastic density. Phase 2: chord-tone quantization of soprano, diatonic block harmony, voice-leading optimization, zero-drift validated UnitMatrix export.",
+  "sha256": "c4265d9fcaa0ef7072fa94a6b2b2508b1d1b6fd2e9c793acf34cdd3c7af716a6",
+  "bytes": 3437,
+  "created_utc": "2026-08-11T06:45:40.947918+00:00",
+  "provenance_version": "1.0"
+}

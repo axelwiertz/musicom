@@ -1,0 +1,22 @@
+{
+  "stem": "musicmatrix_exercise1d_hybrid_v2_bright_dance",
+  "midi": "/opt/data/projects/014-genre-pattern-matrix/MIDI/musicmatrix_exercise1d_hybrid_v2_bright_dance.mid",
+  "ogg": "/opt/data/projects/014-genre-pattern-matrix/Audio/musicmatrix_exercise1d_hybrid_v2_bright_dance.ogg",
+  "compare_ogg": "/opt/data/projects/014-genre-pattern-matrix/Audio/musicmatrix_exercise1_hybrid_v1_v2_compare.ogg",
+  "rows": [
+    "Dance Pulse / Strong Jig",
+    "Shaker Eighth Grid",
+    "Bass Octave Push",
+    "Bright Jazz Color Harmony",
+    "Folk Lead with Lydian Bulb"
+  ],
+  "columns": 8,
+  "tempo_bpm": 148,
+  "time_signature": "6/8",
+  "transformations": [
+    "more dance: stronger 1/4 accents, shaker eighth grid, bass octave push",
+    "brighter: C# as #11 over G13#11 in bars 4 and 7, resolving to D",
+    "kept balance: Balfolk rhythm and folk contour preserved; jazz color stays in harmony row"
+  ],
+  "musicmatrix_semantics": "rows=voices/pitch-space layers; columns=measures/time-space; cells=MusicUnit bar material"
+}

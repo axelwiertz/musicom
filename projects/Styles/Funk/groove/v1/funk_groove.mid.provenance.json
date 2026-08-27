@@ -1,0 +1,18 @@
+{
+  "artifact": "funk_groove.mid",
+  "classification": "ai-assisted",
+  "generator": "funk_groove",
+  "sources": [],
+  "parameters": {
+    "bpm": 110,
+    "methods": [
+      "011",
+      "026"
+    ]
+  },
+  "notes": "",
+  "sha256": "80857ba91b8c00a186aeea43c2f72e4647e14a19038f0db24e18a40c461ea668",
+  "bytes": 20737,
+  "created_utc": "2026-07-27T21:03:04.513748+00:00",
+  "provenance_version": "1.0"
+}

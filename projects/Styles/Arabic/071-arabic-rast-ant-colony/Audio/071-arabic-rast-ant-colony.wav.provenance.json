@@ -1,0 +1,19 @@
+{
+  "artifact": "071-arabic-rast-ant-colony.wav",
+  "classification": "ai-generated",
+  "generator": "fluidsynth.TimGM6mb.render",
+  "sources": [
+    "MIDI/071-arabic-rast-ant-colony.mid"
+  ],
+  "parameters": {
+    "soundfont": "TimGM6mb.sf2",
+    "gain": 1.2,
+    "driver": "file",
+    "renderer": "fluidsynth -ni -F"
+  },
+  "notes": "Full-mix render of phase-2 rules MIDI.",
+  "sha256": "f4d10922f8f83af2e11c76182a5346120eebf148cc6e868b6810d35e475f9ac2",
+  "bytes": 7692588,
+  "created_utc": "2026-08-17T23:12:53.012924+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,333 @@
+{
+  "genre": "West African Ewe Music",
+  "subgenre": "Agbadza (Ewe Social Dance — Gankogui Timeline, Polyrhythms)",
+  "meta": {
+    "origin": "Ewe people of southeastern Ghana, Togo, and Benin (Volta Region, West Africa)",
+    "era": "Traditional (pre-colonial roots, evolved from war dance Atrikpui into social dance form); global ethnomusicological influence 1960s–present",
+    "tempo_bpm": 108,
+    "time_signature": "12/8 (compound quadruple meter, felt as 4 groups of 3 eighth-notes)",
+    "typical_form": "Call-and-response vocal cycles (lead singer + chorus) layered over continuous percussion ostinatos. Dance sections (Bobo, Adzo, Vutsotsotsi) are cued by the Sogo master drum on a 12-pulse timeline. Cyclic — no fixed number of bars, continues until master drum signals transition.",
+    "mood": "Communal, grounded, trance-inducing; the interlocking cross-rhythms create a 'wheel of time' feel — propulsive yet deeply relaxed at the same time; celebratory social dance with spiritual/memorial undertones",
+    "instrumentation": [
+      "Gankogui (double iron bell — timeline keeper)",
+      "Sogo (master drum, low-pitched, leads the dance sections)",
+      "Kidi (supporting drum, medium-high pitch)",
+      "Kagan (smallest drum, high pitch — straight timekeeper)",
+      "Axatse (gourd rattle with beads/shakers — offbeat pulse)",
+      "Claps (audience/participant handclaps on main beats)",
+      "Voices (lead singer + chorus, call-and-response)"
+    ],
+    "reference_tracks": [
+      "Agbadza - Ewe Drumming from Ghana (Anthology of World Music)",
+      "Ewe Drumming: Agbadza - Ghana National Dance Ensemble",
+      "Agbadza - Master Drummers of the Volta Region (field recording - John Miller Chernoff)",
+      "Waka Waka (Agbadza rhythm adaptation) - traditional Ewe"
+    ]
+  },
+  "patterns": {
+    "pitch": {
+      "name": "Ewe Anhemitonic Pentatonic (Vocal) + Drum Tuning System",
+      "intervals": [0, 2, 4, 7, 9, 12],
+      "contour": "U-U-U-U-U-U",
+      "description": "Ewe vocal melodies are primarily anhemitonic pentatonic (no semitones): C-D-E-G-A (sol–la–do–re–mi in solfège). The 'neutral thirds' typical of African scales sit between Western major and minor. Drum pitches are relative: Sogo is tuned low (≈E2–G2), Kidi medium (≈A3–C4), Kagan high (≈D4–F4), with the gankogui having two distinct bell tones (low and high, usually a major 3rd or perfect 4th apart). The interlocking parts create a composite melody across the drum ensemble — no single instrument carries the complete melodic contour.",
+      "modal_degrees": {
+        "tonic": 0,
+        "major_2": 2,
+        "major_3": 4,
+        "perfect_5": 7,
+        "major_6": 9,
+        "octave": 12
+      },
+      "characteristic_motifs": [
+        {
+          "name": "Vocal call — 'Haaaa' (lead entrance)",
+          "notes": [9, 7, 4, 2, 0],
+          "rhythm": "quarter-dotted quarter-dotted quarter-quarter-dotted quarter (12/8 feel)",
+          "description": "Signature Agbadza vocal call: descending pentatonic phrase (A-G-E-D-C). The lead singer intones a characteristic descending line, answered by the chorus with a short repetitive phrase. The call establishes both pitch center (tonic C) and the rhythmic feel."
+        },
+        {
+          "name": "Chorus response figure",
+          "notes": [4, 2, 4, 4, 7],
+          "rhythm": "eighth-eighth-dotted quarter-quarter-eighth (3+3+3+2+1 pulse grouping)",
+          "description": "Chorus answers with a rising figure returning to the dominant area. Short, memorable, cyclically repeating."
+        },
+        {
+          "name": "Gankogui two-tone motif",
+          "notes": ["low", "low", "high", "low", "high", "high"],
+          "rhythm": "timeline pattern (12 pulses)",
+          "description": "The gankogui's two bell tones create a pitch-rhythm motif that is the 'heartbeat' of the ensemble. Low tone = master beat, high tone = offbeat accent. The specific pattern: Low (1), Low (4), High (6), Low (9), High (11). The high tones create forward momentum."
+        }
+      ]
+    },
+    "rhythm": {
+      "name": "Agbadza Timeline & Cross-Rhythm System (12/8)",
+      "onsets": 12,
+      "steps": 12,
+      "dna": "█░░█░█░░█░█░",
+      "metrical_gravity": [1.0, 0.1, 0.1, 0.7, 0.1, 0.6, 0.1, 0.1, 0.6, 0.1, 0.8, 0.1],
+      "variants": [
+        {
+          "name": "Gankogui — Standard Agbadza Bell Timeline",
+          "dna": "█░░█░█░░█░█░",
+          "description": "The definitive timeline pattern. Hits on pulses 1, 4, 6, 9, 11 of the 12-pulse cycle. The gankogui player strikes with a metal stick on two bells (low and high). This is NOT a time-keeper — it is the rhythmic 'locus' that all other parts reference. The silent pulses (2, 3, 5, 7, 8, 10, 12) are as structurally important as the hits. The pattern creates a 5-stroke motif asymmetrically distributed across 12 pulses, generating the characteristic 'off-kilter' feel of Agbadza."
+        },
+        {
+          "name": "Kagan — Straight Timekeeper (High Drum)",
+          "dna": "█░░█░░█░░█░░",
+          "description": "Steady pulse on every beat 1 of each triplet group: hits on pulses 1, 4, 7, 10. Provides the underlying 'grid' against which all other parts create syncopation. Like the 'snare rim' reference pulse. Continuous, never varies."
+        },
+        {
+          "name": "Kidi — Supporting Drum (Interlocking)",
+          "dna": "░█░█░█░█░█░█",
+          "description": "Constant eighth-notes (pulses 2, 3, 5, 6, 8, 9, 11, 12) in the original 12-pulse cycle. Actually the Kidi plays a specific pattern that interlock with the Sogo. The pattern emphasizes offbeat pulses within the 12/8 structure. Open tone (O) on accent pulses, muted tone (M) on lighter pulses."
+        },
+        {
+          "name": "Axatse — Gourd Rattle (Offbeat Shake)",
+          "dna": "░██░██░██░██",
+          "description": "Two shakes per triplet group: shake-shake on pulses 2-3, 5-6, 8-9, 11-12. The axatse is held in one hand and struck against the other hand. The down-up motion: 'pa-pa-pa' where the first pa is muted (hand catches), second pa is open (hand releases). Creates a continuous shimmer that fills the gaps between bell hits."
+        },
+        {
+          "name": "Claps (Aggregate Beat Structure)",
+          "dna": "█░░█░░█░░█░░",
+          "description": "Handclaps on the four main beats: pulses 1, 4, 7, 10. This is the simplest layer, played by participants/dancers. The claps align with the Kagan's downbeats, creating a shared reference point for dancers."
+        },
+        {
+          "name": "Sogo — Master Drum (Dance Section Cues)",
+          "dna": "variable (master calls)",
+          "description": "The Sogo plays from a repertoire of ~6–8 named patterns that cue specific dance movements. These include: Bobo (entry dance — single strokes on main beats), Adzo (main Agbadza dance — syncopated cross-rhythm strokes), Vutsotsotsi (fast running dance — rapid triplet groupings). The Sogo player is the ensemble leader and signals transitions via specific rhythmic phrases."
+        }
+      ],
+      "time_feel": "12/8 compound quadruple: the underlying pulse is a triplet subdivision. The bell pattern creates a 5-over-4 cross-rhythm (5 strokes in the time of 4 beats). The 3:2 hemiola (6 eighth-notes against 4 quarter-notes) is the foundational polyrhythm. The groove is NOT swung in the jazz sense — the triplet subdivision is even, but the asymmetric bell pattern creates an intrinsic forward pull. Dancers often step on the 4 main beats (1, 4, 7, 10) while their torsos move to the cross-rhythm.",
+      "cross_rhythm_proportions": {
+        "primary_hemiola": "3:2 (6 against 4 pulses)",
+        "bell_to_beat": "5:4 (5 bell strokes across 4 main beats)",
+        "axatse_to_bell": "8:5 (8 axatse shakes against 5 bell strokes)",
+        "description": "The cross-rhythms are NOT random polyphony — they are mathematically precise ratios that interlock to create a composite timeline. No part is 'on' or 'off' beat in isolation; they define each other through interlocking. The composite rhythm (all parts sounding simultaneously) creates a 12-pulse field with every pulse filled by at least one instrument — no silence in the composite texture."
+      }
+    },
+    "timbre": {
+      "instrument": "Gankogui (Double Iron Bell)",
+      "adsr": [0.002, 0.50, 0.30, 0.198],
+      "vibrato_hz": 0,
+      "vibrato_depth": 0,
+      "harmonic_profile": "metallic, with sharp attack and sustained ringing; two distinct pitches (low bell ≈F4, high bell ≈A4 — major 3rd interval); rich in inharmonic partials (strike tone + prominent 5th–12th partials); the two bells produce a pitch interval relationship that creates the 'call-and-answer' within the timeline itself",
+      "ornamentation": {
+        "muted_stroke": "Stick pressed against bell after strike to dampen — produces a shorter, drier 'clink' for offbeat accents",
+        "open_ring": "Stick strikes and immediately releases — full resonance, used on the structural timeline hits",
+        "double_stroke": "Two rapid strokes on one bell (low-low or high-high) — used to signal a dance section change",
+        "rim_tap": "Stick strikes the edge rather than the center — produces a higher-pitched, thinner timbre, used for variation"
+      },
+      "alternative_instruments": [
+        {
+          "instrument": "Sogo (Master Drum, Low)",
+          "adsr": [0.005, 0.60, 0.30, 0.095],
+          "vibrato_hz": 0,
+          "vibrato_depth": 0,
+          "harmonic_profile": "deep, resonant low fundamental (≈E2–G2) with prominent 2nd and 3rd harmonics; open tone (stick on head center) produces full ring; closed tone (hand dampening edge) produces short percussive thump; the drum is tuned with mastic/pegs so the head tension is adjustable"
+        },
+        {
+          "instrument": "Kidi (Supporting Drum, Medium-High)",
+          "adsr": [0.003, 0.55, 0.30, 0.147],
+          "vibrato_hz": 0,
+          "vibrato_depth": 0,
+          "harmonic_profile": "brighter than Sogo (≈A3–C4), quick attack, medium sustain; open tone has clear pitch center; slap tone (stick near rim) adds a sharp, cracking accent layered over the open strokes"
+        },
+        {
+          "instrument": "Kagan (Smallest Drum, High)",
+          "adsr": [0.002, 0.45, 0.30, 0.248],
+          "vibrato_hz": 0,
+          "vibrato_depth": 0,
+          "harmonic_profile": "high-pitched (≈D4–F4), very short decay, piercing attack; functions as the 'metronome' of the ensemble — played with straight sticks, no hand dampening, giving a clear, consistent tone that cuts through the full ensemble texture"
+        },
+        {
+          "instrument": "Axatse (Gourd Rattle)",
+          "adsr": [0.001, 0.10, 0.10, 0.799],
+          "vibrato_hz": 0,
+          "vibrato_depth": 0,
+          "harmonic_profile": "broadband noise spectrum from the beads (seeds, shells, or bottle caps) hitting the gourd; two timbral states: 'pa' (open, resonant — gourd struck against hand) and 'ti' (muted, dry — hand catches the beads). The rapid alternation creates a granular, shimmering texture that occupies the 2–8 kHz range"
+        }
+      ]
+    }
+  },
+  "musicmatrix_mapping": {
+    "rows": [
+      "Gankogui (Bell Timeline — Standard Pattern)",
+      "Kagan (Small Drum — Downbeat Pulse)",
+      "Kidi (Supporting Drum — Interlock Pattern)",
+      "Sogo (Master Drum — Adzo Dance Pattern)",
+      "Axatse (Gourd Rattle — Offbeat Shake)",
+      "Claps (Aggregate Beats)",
+      "Voices (Lead + Chorus Call-and-Response)"
+    ],
+    "cols": 12,
+    "unit_matrix": {
+      "description": "1 bar of Agbadza in 12/8 (12 eighth-note pulse slots). Tempo: 108 BPM. The grid represents one complete cycle of the timeline. All parts reference the 12-pulse grid, creating interlocking composite rhythm. The axes: rows = instrumental layers, cols = temporal pulses. Each slot is one eighth-note at dotted-quarter = 108 BPM.",
+      "grid": {
+        "Gankogui (Bell Timeline — Standard Pattern)": {
+          "slots": [
+            {"pulse": 1, "pitch_degree": "low_bell", "pitch": "F4", "duration": 0.33, "articulation": "open ring (accent)", "ornament": "master stroke — structural downbeat"},
+            {"pulse": 2, "pitch_degree": null, "pitch": null, "duration": 0.33, "articulation": "rest", "ornament": "structural silence"},
+            {"pulse": 3, "pitch_degree": null, "pitch": null, "duration": 0.33, "articulation": "rest", "ornament": "structural silence"},
+            {"pulse": 4, "pitch_degree": "low_bell", "pitch": "F4", "duration": 0.33, "articulation": "open ring (medium)", "ornament": "secondary bell hit — pull pulse"},
+            {"pulse": 5, "pitch_degree": null, "pitch": null, "duration": 0.33, "articulation": "rest", "ornament": "structural silence"},
+            {"pulse": 6, "pitch_degree": "high_bell", "pitch": "A4", "duration": 0.33, "articulation": "open ring (accent)", "ornament": "high bell — forward momentum pulse"},
+            {"pulse": 7, "pitch_degree": null, "pitch": null, "duration": 0.33, "articulation": "rest", "ornament": "structural silence"},
+            {"pulse": 8, "pitch_degree": null, "pitch": null, "duration": 0.33, "articulation": "rest", "ornament": "structural silence"},
+            {"pulse": 9, "pitch_degree": "low_bell", "pitch": "F4", "duration": 0.33, "articulation": "open ring (medium)", "ornament": "return pulse — anchors the 3rd beat group"},
+            {"pulse": 10, "pitch_degree": null, "pitch": null, "duration": 0.33, "articulation": "rest", "ornament": "structural silence"},
+            {"pulse": 11, "pitch_degree": "high_bell", "pitch": "A4", "duration": 0.33, "articulation": "open ring (accent)", "ornament": "final high bell — strongest high-pulse, resolves to pulse 1"},
+            {"pulse": 12, "pitch_degree": null, "pitch": null, "duration": 0.33, "articulation": "rest", "ornament": "structural silence — the 'gap' that creates the pattern's asymmetry"}
+          ]
+        },
+        "Kagan (Small Drum — Downbeat Pulse)": {
+          "slots": [
+            {"pulse": 1, "pitch_degree": 0, "pitch": "D4", "duration": 0.33, "articulation": "accent (open tone)", "ornament": "downbeat — primary reference pulse"},
+            {"pulse": 2, "pitch_degree": null, "pitch": null, "duration": 0.33, "articulation": "rest", "ornament": "silence — creates space for axatse"},
+            {"pulse": 3, "pitch_degree": null, "pitch": null, "duration": 0.33, "articulation": "rest", "ornament": "silence"},
+            {"pulse": 4, "pitch_degree": 0, "pitch": "D4", "duration": 0.33, "articulation": "accent (open tone)", "ornament": "beat 2 of 4"},
+            {"pulse": 5, "pitch_degree": null, "pitch": null, "duration": 0.33, "articulation": "rest", "ornament": "silence"},
+            {"pulse": 6, "pitch_degree": null, "pitch": null, "duration": 0.33, "articulation": "rest", "ornament": "silence"},
+            {"pulse": 7, "pitch_degree": 0, "pitch": "D4", "duration": 0.33, "articulation": "accent (open tone)", "ornament": "beat 3 of 4"},
+            {"pulse": 8, "pitch_degree": null, "pitch": null, "duration": 0.33, "articulation": "rest", "ornament": "silence"},
+            {"pulse": 9, "pitch_degree": null, "pitch": null, "duration": 0.33, "articulation": "rest", "ornament": "silence"},
+            {"pulse": 10, "pitch_degree": 0, "pitch": "D4", "duration": 0.33, "articulation": "accent (open tone)", "ornament": "beat 4 of 4 — completes the 4-beat cycle"},
+            {"pulse": 11, "pitch_degree": null, "pitch": null, "duration": 0.33, "articulation": "rest", "ornament": "silence"},
+            {"pulse": 12, "pitch_degree": null, "pitch": null, "duration": 0.33, "articulation": "rest", "ornament": "silence"}
+          ]
+        },
+        "Kidi (Supporting Drum — Interlock Pattern)": {
+          "slots": [
+            {"pulse": 1, "pitch_degree": null, "pitch": null, "duration": 0.33, "articulation": "rest", "ornament": "kidi enters on pulse 2"},
+            {"pulse": 2, "pitch_degree": 0, "pitch": "A3", "duration": 0.33, "articulation": "medium (open tone)", "ornament": "interlock — fills Kagan's first rest"},
+            {"pulse": 3, "pitch_degree": null, "pitch": null, "duration": 0.33, "articulation": "rest", "ornament": "silence"},
+            {"pulse": 4, "pitch_degree": null, "pitch": null, "duration": 0.33, "articulation": "rest", "ornament": "silence — aligns with gankogui hit"},
+            {"pulse": 5, "pitch_degree": 0, "pitch": "A3", "duration": 0.33, "articulation": "medium (open tone)", "ornament": "interlock pulse"},
+            {"pulse": 6, "pitch_degree": null, "pitch": null, "duration": 0.33, "articulation": "rest", "ornament": "silence — gankogui high bell occupies this"},
+            {"pulse": 7, "pitch_degree": 0, "pitch": "A3", "duration": 0.33, "articulation": "accent (slap tone)", "ornament": "accented interlock — stronger hit, slap timbre"},
+            {"pulse": 8, "pitch_degree": null, "pitch": null, "duration": 0.33, "articulation": "rest", "ornament": "silence"},
+            {"pulse": 9, "pitch_degree": null, "pitch": null, "duration": 0.33, "articulation": "rest", "ornament": "silence — gankogui low bell occupies this"},
+            {"pulse": 10, "pitch_degree": 0, "pitch": "A3", "duration": 0.33, "articulation": "light (open tone)", "ornament": "light interlock — preparing for high bell resolution"},
+            {"pulse": 11, "pitch_degree": null, "pitch": null, "duration": 0.33, "articulation": "rest", "ornament": "silence"},
+            {"pulse": 12, "pitch_degree": null, "pitch": null, "duration": 0.33, "articulation": "rest", "ornament": "silence — resolves to pulse 1 downbeat"}
+          ]
+        },
+        "Sogo (Master Drum — Adzo Dance Pattern)": {
+          "slots": [
+            {"pulse": 1, "pitch_degree": 0, "pitch": "E2", "duration": 0.33, "articulation": "heavy accent (open tone)", "ornament": "master stroke — anchors the phrase, signals steady Adzo dance"},
+            {"pulse": 2, "pitch_degree": null, "pitch": null, "duration": 0.33, "articulation": "rest", "ornament": "silence"},
+            {"pulse": 3, "pitch_degree": null, "pitch": null, "duration": 0.33, "articulation": "rest", "ornament": "silence"},
+            {"pulse": 4, "pitch_degree": 0, "pitch": "E2", "duration": 0.165, "articulation": "sharp accent (slap tone)", "ornament": "slap — accents 2nd beat, cross-rhythmic emphasis"},
+            {"pulse": 5, "pitch_degree": 0, "pitch": "E2", "duration": 0.165, "articulation": "muted (closed tone)", "ornament": "muted follow — creates 'bounce' after the slap"},
+            {"pulse": 6, "pitch_degree": null, "pitch": null, "duration": 0.33, "articulation": "rest", "ornament": "silence"},
+            {"pulse": 7, "pitch_degree": 0, "pitch": "E2", "duration": 0.33, "articulation": "accent (open tone)", "ornament": "mid-phrase anchor — pulse 7, aligns with Kidi's accent"},
+            {"pulse": 8, "pitch_degree": null, "pitch": null, "duration": 0.33, "articulation": "rest", "ornament": "silence"},
+            {"pulse": 9, "pitch_degree": null, "pitch": null, "duration": 0.33, "articulation": "rest", "ornament": "silence"},
+            {"pulse": 10, "pitch_degree": null, "pitch": null, "duration": 0.33, "articulation": "rest", "ornament": "silence — anticipation builds toward next cycle"},
+            {"pulse": 11, "pitch_degree": 0, "pitch": "E2", "duration": 0.165, "articulation": "light accent (open tone)", "ornament": "preparation stroke — leads into the next cycle's downbeat"},
+            {"pulse": 12, "pitch_degree": 0, "pitch": "E2", "duration": 0.165, "articulation": "light (closed tone)", "ornament": "muted lead-in — final micro-beat before cycle reset"}
+          ]
+        },
+        "Axatse (Gourd Rattle — Offbeat Shake)": {
+          "slots": [
+            {"pulse": 1, "pitch_degree": null, "pitch": null, "duration": 0.33, "articulation": "rest—shake starts after downbeat", "ornament": "axatse avoids the primary downbeat to maintain offbeat character"},
+            {"pulse": 2, "pitch_degree": null, "pitch": "shaker noise", "duration": 0.165, "articulation": "muted shake ('ti')", "ornament": "hand catches beads — dry, short sound"},
+            {"pulse": 3, "pitch_degree": null, "pitch": "shaker noise", "duration": 0.165, "articulation": "open shake ('pa')", "ornament": "hand releases — gourd strikes palm, full resonance"},
+            {"pulse": 4, "pitch_degree": null, "pitch": null, "duration": 0.33, "articulation": "rest", "ornament": "silence — bell occupies this pulse"},
+            {"pulse": 5, "pitch_degree": null, "pitch": "shaker noise", "duration": 0.165, "articulation": "muted shake ('ti')", "ornament": "dry offbeat"},
+            {"pulse": 6, "pitch_degree": null, "pitch": "shaker noise", "duration": 0.165, "articulation": "open shake ('pa')", "ornament": "resonant offbeat — coincides with gankogui high bell"},
+            {"pulse": 7, "pitch_degree": null, "pitch": null, "duration": 0.33, "articulation": "rest", "ornament": "silence"},
+            {"pulse": 8, "pitch_degree": null, "pitch": "shaker noise", "duration": 0.165, "articulation": "muted shake ('ti')", "ornament": "dry"},
+            {"pulse": 9, "pitch_degree": null, "pitch": "shaker noise", "duration": 0.165, "articulation": "open shake ('pa')", "ornament": "resonant — coincides with gankogui low bell"},
+            {"pulse": 10, "pitch_degree": null, "pitch": null, "duration": 0.33, "articulation": "rest", "ornament": "silence"},
+            {"pulse": 11, "pitch_degree": null, "pitch": "shaker noise", "duration": 0.165, "articulation": "muted shake ('ti')", "ornament": "dry — final offbeat before cycle reset"},
+            {"pulse": 12, "pitch_degree": null, "pitch": "shaker noise", "duration": 0.165, "articulation": "open shake ('pa')", "ornament": "resonant — final shake leads into cycle downbeat"}
+          ]
+        },
+        "Claps (Aggregate Beats)": {
+          "slots": [
+            {"pulse": 1, "pitch_degree": null, "pitch": "clap", "duration": 0.33, "articulation": "strong clap (accent)", "ornament": "downbeat — dancers step on this pulse"},
+            {"pulse": 2, "pitch_degree": null, "pitch": null, "duration": 0.33, "articulation": "rest", "ornament": "silence"},
+            {"pulse": 3, "pitch_degree": null, "pitch": null, "duration": 0.33, "articulation": "rest", "ornament": "silence"},
+            {"pulse": 4, "pitch_degree": null, "pitch": "clap", "duration": 0.33, "articulation": "medium clap", "ornament": "beat 2 — lighter than downbeat"},
+            {"pulse": 5, "pitch_degree": null, "pitch": null, "duration": 0.33, "articulation": "rest", "ornament": "silence"},
+            {"pulse": 6, "pitch_degree": null, "pitch": null, "duration": 0.33, "articulation": "rest", "ornament": "silence"},
+            {"pulse": 7, "pitch_degree": null, "pitch": "clap", "duration": 0.33, "articulation": "medium clap", "ornament": "beat 3"},
+            {"pulse": 8, "pitch_degree": null, "pitch": null, "duration": 0.33, "articulation": "rest", "ornament": "silence"},
+            {"pulse": 9, "pitch_degree": null, "pitch": null, "duration": 0.33, "articulation": "rest", "ornament": "silence"},
+            {"pulse": 10, "pitch_degree": null, "pitch": "clap", "duration": 0.33, "articulation": "medium clap", "ornament": "beat 4 — preparation for next downbeat"},
+            {"pulse": 11, "pitch_degree": null, "pitch": null, "duration": 0.33, "articulation": "rest", "ornament": "silence"},
+            {"pulse": 12, "pitch_degree": null, "pitch": null, "duration": 0.33, "articulation": "rest", "ornament": "silence"}
+          ]
+        },
+        "Voices (Lead + Chorus Call-and-Response)": {
+          "slots": [
+            {"pulse": 1, "pitch_degree": 9, "pitch": "A4", "duration": 0.66, "articulation": "lead singer entrance — full voice", "ornament": "descending call begins on 'Haaaa' — vowel held over pulses 1–2"},
+            {"pulse": 2, "pitch_degree": 9, "pitch": "A4", "duration": 0.33, "articulation": "holding tone (sostenuto)", "ornament": "tied from pulse 1"},
+            {"pulse": 3, "pitch_degree": 7, "pitch": "G4", "duration": 0.33, "articulation": "lead — slight drop (portamento)", "ornament": "first descent step in the pentatonic call"},
+            {"pulse": 4, "pitch_degree": 4, "pitch": "E4", "duration": 0.66, "articulation": "lead — full voice", "ornament": "second descent step"},
+            {"pulse": 5, "pitch_degree": 4, "pitch": "E4", "duration": 0.33, "articulation": "holding tone", "ornament": "tied from pulse 4"},
+            {"pulse": 6, "pitch_degree": 2, "pitch": "D4", "duration": 0.33, "articulation": "lead — light (portamento)", "ornament": "third descent step"},
+            {"pulse": 7, "pitch_degree": 0, "pitch": "C4", "duration": 0.66, "articulation": "lead — full voice, anchor", "ornament": "final note of call — lands on tonic"},
+            {"pulse": 8, "pitch_degree": 0, "pitch": "C4", "duration": 0.33, "articulation": "lead — sustain", "ornament": "tonic sustains"},
+            {"pulse": 9, "pitch_degree": null, "pitch": null, "duration": 0.33, "articulation": "rest (lead breath)", "ornament": "call ends — chorus enters"},
+            {"pulse": 10, "pitch_degree": 4, "pitch": "E4", "duration": 0.33, "articulation": "chorus entrance — full voice", "ornament": "answer begins (Yo-...) — E4"},
+            {"pulse": 11, "pitch_degree": 2, "pitch": "D4", "duration": 0.33, "articulation": "chorus — medium", "ornament": "answer continues (D4)"},
+            {"pulse": 12, "pitch_degree": 4, "pitch": "E4", "duration": 0.33, "articulation": "chorus — accent", "ornament": "final answer note (E4) — loops or resolves back to call"}
+          ]
+        }
+      }
+    },
+    "variations": [
+      {
+        "name": "Bobo Pattern (Entry / Processional Dance)",
+        "rows": ["Gankogui (Bell Timeline)", "Kagan", "Kidi", "Sogo (Bobo pattern)", "Axatse", "Claps", "Voices"],
+        "cols": 12,
+        "description": "Slower, stately Agbadza variant (♩= 92 BPM). Sogo plays single, widely spaced strokes on main beats (pulses 1, 4, 7, 10) — no syncopation. Used as dancers enter the performance space. Kidi and Kagan maintain their standard patterns. The bell timeline is identical but feels more spacious at the slower tempo."
+      },
+      {
+        "name": "Vutsotsotsi Pattern (Fast Running Dance / 'Hot' Section)",
+        "rows": ["Gankogui (Bell Timeline)", "Kagan", "Kidi", "Sogo (Vutsotsotsi pattern)", "Axatse", "Claps", "Voices"],
+        "cols": 12,
+        "description": "Fast Agbadza variant (♩= 132+ BPM). Sogo plays rapid triplet groupings — three quick strokes (open–slap–muted) across the 12-pulse cycle. The Kidi doubles its stroke rate. Vocals shift to short, percussive phrase fragments. The axatse shakes continuously (every pulse). This is the climactic section of the Agbadza performance, equivalent to a 'burning' chorus in Afro-Cuban music. The tempo accelerates through this section."
+      },
+      {
+        "name": "Gakpa Pattern (Abbreviated Timeline — 8-pulse variant)",
+        "rows": ["Gankogui (Abbreviated Bell)", "Kagan", "Kidi", "Sogo", "Axatse", "Claps"],
+        "cols": 8,
+        "description": "Simplified Agbadza variant associated with younger dancers. The bell pattern condenses to 8 pulses: hits on 1, 4, 5, 7 (8-pulse cycle: X..X.X.). Used for teaching beginners and in informal village settings. The 3:2 hemiola is more immediately audible."
+      }
+    ]
+  },
+  "harmonic_progression": {
+    "primary": ["Drone-based — Tonic (C) with emphasis on the dominant (G) and subdominant (F) in the pentatonic vocal melodies"],
+    "description": "Ewe Agbadza does not use functional Western harmony. The 'harmonic' dimension is created through (1) the composite pitch of the drum ensemble — the interlocking of Sogo (low ∼E2-G2), Kidi (∼A3-C4), and Kagan (∼D4-F4) produces a composite sonority centered around a C major/E minor pentatonic pitch field; (2) the gankogui's two bell tones (typically a major 3rd apart) create a tonic-dominant polarity within the percussion section itself; (3) vocal melodies use a pentatonic scale (C-D-E-G-A) that can be interpreted as C major pentatonic (I) or A minor pentatonic (vi). The overall effect is one of a static, drone-like harmonic field with gentle modal shifts rather than functional chord progressions.",
+    "cadences": {
+      "phrase_break": "Composite drum and bell pattern arrives at pulse 1 together — all parts synchronized on the downbeat",
+      "call_completion": "Lead vocal arrives on tonic (C) at pulse 7 of the 12-pulse cycle",
+      "chorus_answer_resolution": "Chorus lands on E (mediant of tonic) at pulse 12 — creates a half-cadence feel that prepares the next call",
+      "section_transition": "Sogo plays a specific 'break' pattern (e.g., triple open strokes followed by rest) to signal the end of a dance section — analogous to a V7 → I but purely rhythmic"
+    }
+  },
+  "structural_rules": [
+    "The gankogui bell timeline is ABSOLUTE — all parts reference it. If the bell player falters, the entire ensemble collapses. The bell player never varies the pattern during a given dance section.",
+    "No single instrument carries the 'melody' — the composite texture emerges from interlocking parts. Every part is incomplete by design; the fullness comes from their combination.",
+    "Parts enter sequentially: gankogui (establishes timeline) → kagan (downbeats) → kidi (interlock) → axatse (shimmer) → sogo (master) → voices and claps (community participation). This layered entry is itself a structural form element.",
+    "The Sogo master drum leads with a vocabulary of ~6-8 rhythmic patterns (Bobo, Adzo, Vutsotsotsi, Gakpa, etc.), each corresponding to a named dance movement. The Sogo player calls transitions via distinct signal patterns.",
+    "Call-and-response is the vocal structural principle. The lead singer's phrase is unique and varied; the chorus response is fixed and repetitive. The call occupies approximately the first 8 pulses, the response the last 4 pulses of the 12-pulse cycle.",
+    "Cross-rhythm ratios are precise and consistent: the 5-over-4 (bell strokes over beats) and 3:2 hemiola (6 pulses against 4 main beats) are the foundational polyrhythms. These ratios do not vary within a performance.",
+    "The 7 silent pulses in the gankogui bell pattern (pulses 2, 3, 5, 7, 8, 10, 12) are as structurally important as the 5 sounding pulses — the asymmetry (5 strokes in 12 pulses) IS the defining rhythmic feature.",
+    "Dancers' footwork follows the 4 main beats (claps), while torso and arm movements follow the cross-rhythm (bell or sogo patterns). This body polyrhythm mirrors the musical structure.",
+    "Tempo is not fixed — it accelerates through the performance, particularly during Vutsotsotsi sections. The initial Bobo (entry) is slowest, Adzo (main dance) is moderate, Vutsotsotsi (climax) is fastest.",
+    "The performance ends abruptly on a unified Sogo cue — all parts stop simultaneously, often on a downbeat. There is no fade-out or ritard; the ending is a communal cutoff.",
+    "Agbadza is cyclic: the 12-pulse timeline repeats indefinitely. There is no 'last bar' or formal cadence in the Western sense. The point of ending is chosen socially (community signals) rather than musically (harmonic resolution).",
+    "Melismatic ornamentation in vocals is minimal — the aesthetic favors clear, direct pitches within the pentatonic framework. Ornamentation resides in the drum strokes (slap vs. open vs. muted) rather than in pitch modulation."
+  ],
+  "unitmatrix_export": {
+    "format_version": "1.0",
+    "schema": "MusicMatrix",
+    "project": "016-genre-pattern-dataset",
+    "generated": "2026-06-23",
+    "compatible_generators": ["generate_african_polyrhythm.py", "musicom-composer", "agbadza-timeline-engine"],
+    "polyrhythm_notation": "The 12-pulse grid represents one cycle at the eighth-note level in 12/8. To generate the cross-rhythm (3:2 hemiola), subdivide each triplet group (pulses 1-3, 4-6, 7-9, 10-12) into 3 equal parts. The gankogui pattern hits at positions that create a 5-stroke motif across these 4 beat groups, generating the characteristic 5:4 cross-rhythm against the 4 main beats."
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "style": "Balkan",
+  "sub_styles": [],
+  "pitch": {
+    "scale": "Dorian/Hijaz",
+    "intervals": [2, 1, 2, 2, 2, 1, 2],
+    "pitch_classes": [0, 2, 3, 5, 7, 9, 10],
+    "total_pitch_classes": 7
+  },
+  "rhythm": {
+    "metrical_gravity": [1.0, 0, 1.0, 0, 0, 0, 1.0],
+    "tempo_range": [110, 140],
+    "time_signatures": ["7/8"],
+    "description": "7/8 asymmetric: 2-2-3 grouping, E(3,7) accents; drones on 1; ornamented stepwise melody"
+  },
+  "validation": {
+    "12tet_pass": true,
+    "metrical_gravity_pass": true
+  },
+  "last_updated": "2026-08-17T00:00:00Z"
+}

@@ -1,0 +1,36 @@
+{
+  "artifact": "070-levy-chorale.mid",
+  "classification": "ai-generated",
+  "generator": "Method 053 Levy Flight Composition (LFC) + musicom rules (chord-tone quantization, voice leading, harmonic progression)",
+  "sources": [
+    "Research/CompositionMethods/methods_db.md:Method 053",
+    "rules/voice_leading.py",
+    "rules/progression.py",
+    "workflows/unitmatrix_composer.py"
+  ],
+  "parameters": {
+    "method": 53,
+    "phase": 2,
+    "key": "G aeolian",
+    "bpm": 88,
+    "ticks_per_beat": 480,
+    "beats_per_bar": 4,
+    "sections": 4,
+    "section_bars": 2,
+    "progression_degrees": [
+      0,
+      5,
+      6,
+      0
+    ],
+    "seed": 70,
+    "voice_leading_style": "classical",
+    "two_phase": true,
+    "rules_applied": "chord-tone quantization, diatonic block harmony, voice-leading optimization, Phase 2c inversion-rotation correction"
+  },
+  "notes": "Phase 2: raw Levy flight pitches quantized to nearest section triad tone (soprano), Alto/Tenor/Bass as diatonic block harmony via Scale7ChordDegree.get_diatonic_note(), voice-leading optimization + Phase 2c inversion-rotation correction of parallel/hidden fifths, harmonic function validation (i-VI-VII-i, G aeolian, closed perfect cadence), zero-drift validated UnitMatrix export.",
+  "sha256": "befa9df24d6ea8a96c101570de3098c5c33ba9c3bd1025b7d06b1274121cbf1d",
+  "bytes": 1733,
+  "created_utc": "2026-08-16T23:13:20.421571+00:00",
+  "provenance_version": "1.0"
+}

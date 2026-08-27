@@ -1,0 +1,94 @@
+{
+  "trackName": "Midi Violin",
+  "instrument": "Violin (Program 40)",
+  "clip": {
+    "startBeat": 0,
+    "durationBeats": 16,
+    "notes": [
+      {
+        "pitch": 69,
+        "startBeat": 0.0,
+        "durationBeats": 2.0,
+        "velocity": 0.6850393700787402
+      },
+      {
+        "pitch": 74,
+        "startBeat": 2.0,
+        "durationBeats": 1.0,
+        "velocity": 0.5590551181102362
+      },
+      {
+        "pitch": 78,
+        "startBeat": 3.0,
+        "durationBeats": 2.0,
+        "velocity": 0.5984251968503937
+      },
+      {
+        "pitch": 69,
+        "startBeat": 5.0,
+        "durationBeats": 2.0,
+        "velocity": 0.6220472440944882
+      },
+      {
+        "pitch": 69,
+        "startBeat": 7.0,
+        "durationBeats": 1.0,
+        "velocity": 0.6299212598425197
+      },
+      {
+        "pitch": 64,
+        "startBeat": 8.0,
+        "durationBeats": 1.0,
+        "velocity": 0.6141732283464567
+      },
+      {
+        "pitch": 66,
+        "startBeat": 9.0,
+        "durationBeats": 0.5,
+        "velocity": 0.5669291338582677
+      },
+      {
+        "pitch": 78,
+        "startBeat": 9.5,
+        "durationBeats": 1.0,
+        "velocity": 0.6377952755905512
+      },
+      {
+        "pitch": 78,
+        "startBeat": 10.5,
+        "durationBeats": 0.5,
+        "velocity": 0.7480314960629921
+      },
+      {
+        "pitch": 69,
+        "startBeat": 11.0,
+        "durationBeats": 1.0,
+        "velocity": 0.7086614173228346
+      },
+      {
+        "pitch": 74,
+        "startBeat": 12.0,
+        "durationBeats": 1.0,
+        "velocity": 0.5984251968503937
+      },
+      {
+        "pitch": 74,
+        "startBeat": 13.0,
+        "durationBeats": 0.5,
+        "velocity": 0.6614173228346457
+      },
+      {
+        "pitch": 69,
+        "startBeat": 13.5,
+        "durationBeats": 1.0,
+        "velocity": 0.5748031496062992
+      },
+      {
+        "pitch": 81,
+        "startBeat": 14.5,
+        "durationBeats": 1.5,
+        "velocity": 0.7165354330708661
+      }
+    ]
+  }
+}

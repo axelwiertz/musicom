@@ -1,0 +1,38 @@
+{
+  "genre": "Jazz",
+  "subgenre": "Swing",
+  "pitch": {
+    "scale": "Major/Minor with Blue Notes",
+    "intervals": [
+      2,
+      1,
+      1,
+      1,
+      2,
+      2,
+      1,
+      2
+    ],
+    "contour": "Stepwise with sudden extensions (9, 13)"
+  },
+  "rhythm": {
+    "dna": "\u2588\u2591\u2588",
+    "swing_ratio": 0.66,
+    "metrical_gravity": [
+      1,
+      0,
+      0.5,
+      0.8
+    ],
+    "description": "Walking bass 4/4, syncopated comping"
+  },
+  "timbre": {
+    "instrumentation": [
+      "Saxophone",
+      "Double Bass",
+      "Piano",
+      "Brushed Drums"
+    ],
+    "calibration": "Breathiness, wood resonance"
+  }
+}

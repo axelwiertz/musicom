@@ -1,0 +1,138 @@
+{
+  "style": "Groove",
+  "subgenre": "",
+  "pitch": {
+    "scale": "Chromatic",
+    "intervals": [
+      2,
+      1,
+      1,
+      1,
+      1,
+      1,
+      2,
+      1,
+      1,
+      1
+    ],
+    "pitch_classes": [
+      0,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      9,
+      10,
+      11
+    ],
+    "per_track_scale": "Pentatonic Minor",
+    "per_track_scale_distribution": {
+      "Pentatonic Minor": 3,
+      "Major/Ionian": 1,
+      "Dorian": 2,
+      "In Scale": 1,
+      "Lydian": 1,
+      "Mixolydian": 1
+    }
+  },
+  "rhythm": {
+    "metrical_gravity": [
+      1.0,
+      0,
+      0.5,
+      0
+    ],
+    "tempo_range": [
+      100.0,
+      109.99990833340972
+    ],
+    "time_signatures": [
+      "4/4"
+    ],
+    "description": ""
+  },
+  "timbre": {
+    "instrumentation": [
+      "Track 1",
+      "Track 2",
+      "Track 3",
+      "Track 4",
+      "Track 5"
+    ]
+  },
+  "patterns": [
+    {
+      "project": "019-soul-groove",
+      "midi": "/opt/data/projects/Styles/Groove/019-soul-groove/MIDI/soul_groove.mid",
+      "source": "/opt/data/projects/Styles/Groove/019-soul-groove/src/regen.py",
+      "scale": "Chromatic",
+      "pitch_classes": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        7,
+        9,
+        10,
+        11
+      ],
+      "tempo": 100.0,
+      "time_sig": "4/4"
+    },
+    {
+      "project": "020-afrobeat-groove",
+      "midi": "/opt/data/projects/Styles/Groove/020-afrobeat-groove/MIDI/afrobeat_groove.mid",
+      "source": "/opt/data/projects/Styles/Groove/020-afrobeat-groove/create_afrobeat.py",
+      "scale": "Chromatic",
+      "pitch_classes": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        9,
+        10,
+        11
+      ],
+      "tempo": 109.99990833340972,
+      "time_sig": "4/4"
+    }
+  ],
+  "validated": true,
+  "validation": {
+    "12tet": {
+      "valid": true,
+      "pitch_classes_used": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        9,
+        10,
+        11
+      ],
+      "count": 10,
+      "issues": []
+    },
+    "metrical_gravity": {
+      "valid": true,
+      "length": 4,
+      "strong_beat_count": 1,
+      "profile": [
+        1.0,
+        0,
+        0.5,
+        0
+      ],
+      "issues": []
+    }
+  }
+}

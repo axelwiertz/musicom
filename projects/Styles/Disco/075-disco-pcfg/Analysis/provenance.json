@@ -1,0 +1,14 @@
+{
+  "project": "075-disco-pcfg",
+  "style": "Disco",
+  "method": "034 Probabilistic Context-Free Grammar Recursion (PCFG)",
+  "paradigm": "Rules-Based",
+  "bpm": 118,
+  "key": "D natural minor",
+  "bars": 24,
+  "sections": ["Intro", "Verse", "Chorus", "Verse2", "Chorus2", "Outro"],
+  "bars_per_section": 4,
+  "progression": ["i", "VI", "III", "VII", "i", "VI", "III", "VII", "i", "v", "VI", "III", "i", "VI", "III", "VII", "i", "v", "VI", "III", "i", "VI", "III", "i"],
+  "voices": ["Lead", "Strings", "Guitar", "Bass", "Drums"],
+  "seed": 20260821
+}

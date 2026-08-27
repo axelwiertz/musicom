@@ -1,0 +1,3 @@
+file '/opt/data/projects/014-genre-pattern-matrix/Renders/musicmatrix_exercise1a_balfolk_dorian_jig.wav'
+file '/opt/data/projects/014-genre-pattern-matrix/Renders/musicmatrix_exercise1b_jazz_ii_v_i_swing.wav'
+file '/opt/data/projects/014-genre-pattern-matrix/Renders/musicmatrix_exercise1c_hybrid_balfolk_jazz.wav'

@@ -1,0 +1,183 @@
+{
+  "style": "Other",
+  "subgenre": "",
+  "pitch": {
+    "scale": "Pelog (approx)",
+    "intervals": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "pitch_classes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "per_track_scale": "Major/Ionian",
+    "per_track_scale_distribution": {
+      "Pelog (approx)": 1,
+      "Major/Ionian": 2,
+      "In Scale": 2
+    }
+  },
+  "rhythm": {
+    "metrical_gravity": [
+      1.0,
+      0,
+      0.5,
+      0
+    ],
+    "tempo_range": [
+      120.0,
+      120.0
+    ],
+    "time_signatures": [
+      "4/4"
+    ],
+    "description": ""
+  },
+  "timbre": {
+    "instrumentation": [
+      "Track 1",
+      "Track 2"
+    ]
+  },
+  "patterns": [
+    {
+      "project": "genre-daily-2026-06-13",
+      "midi": "/opt/data/projects/Styles/Other/genre-daily-2026-06-13/composition.mid",
+      "source": "/opt/data/projects/Styles/Other/genre-daily-2026-06-13/src/regen.py",
+      "scale": "Pelog (approx)",
+      "pitch_classes": [
+        0,
+        3
+      ],
+      "tempo": null,
+      "time_sig": null
+    },
+    {
+      "project": "genre-daily-2026-06-14",
+      "midi": "/opt/data/projects/Styles/Other/genre-daily-2026-06-14/composition.mid",
+      "source": "/opt/data/projects/Styles/Other/genre-daily-2026-06-14/src/regen.py",
+      "scale": "Chromatic",
+      "pitch_classes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "tempo": 120.0,
+      "time_sig": "4/4"
+    },
+    {
+      "project": "klezmer_freylekhs",
+      "source": "/opt/data/projects/Styles/Other/klezmer_freylekhs/src/regen.py"
+    },
+    {
+      "project": "unknown-daily-2026-06-04",
+      "source": "/opt/data/projects/Styles/Other/unknown-daily-2026-06-04/src/regen.py"
+    },
+    {
+      "project": "unknown-daily-2026-06-05",
+      "midi": "/opt/data/projects/Styles/Other/unknown-daily-2026-06-05/composition.mid",
+      "source": "/opt/data/projects/Styles/Other/unknown-daily-2026-06-05/src/regen.py",
+      "scale": "In Scale",
+      "pitch_classes": [
+        0
+      ],
+      "tempo": 120.0,
+      "time_sig": null
+    },
+    {
+      "project": "unknown-daily-2026-06-06",
+      "midi": "/opt/data/projects/Styles/Other/unknown-daily-2026-06-06/composition.mid",
+      "source": "/opt/data/projects/Styles/Other/unknown-daily-2026-06-06/src/regen.py",
+      "scale": "Major/Ionian",
+      "pitch_classes": [
+        4,
+        5,
+        7,
+        9,
+        11
+      ],
+      "tempo": 120.0,
+      "time_sig": "4/4"
+    },
+    {
+      "project": "variation_2026-06-05_bossa",
+      "source": "/opt/data/projects/Styles/Other/variation_2026-06-05_bossa/src/regen.py"
+    },
+    {
+      "project": "variation_2026-06-06_solea_retro",
+      "source": "/opt/data/projects/Styles/Other/variation_2026-06-06_solea_retro/src/regen.py"
+    },
+    {
+      "project": "variation_2026-06-09_afro-cuban-son",
+      "source": "/opt/data/projects/Styles/Other/variation_2026-06-09_afro-cuban-son/src/regen.py"
+    },
+    {
+      "project": "variation_2026-06-10_bossa-nova",
+      "source": "/opt/data/projects/Styles/Other/variation_2026-06-10_bossa-nova/src/regen.py"
+    }
+  ],
+  "validated": true,
+  "validation": {
+    "12tet": {
+      "valid": true,
+      "pitch_classes_used": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "count": 12,
+      "issues": []
+    },
+    "metrical_gravity": {
+      "valid": true,
+      "length": 4,
+      "strong_beat_count": 1,
+      "profile": [
+        1.0,
+        0,
+        0.5,
+        0
+      ],
+      "issues": []
+    }
+  }
+}

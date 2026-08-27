@@ -1,0 +1,192 @@
+{
+  "genre": "Klezmer",
+  "subgenre": "Freylekhs (Bulgar)",
+  "meta": {
+    "origin": "Ashkenazi Jewish folk dance music, Eastern Europe (Moldova, Ukraine, Romania)",
+    "era": "19th–20th century, revived globally 1970s–present",
+    "tempo_bpm": 125,
+    "time_signature": "2/4",
+    "typical_form": "AABB (binary dance form), often with coda (a freylekhs tants)",
+    "mood": "Joyful, celebratory, driving dance with melancholic modal inflections",
+    "instrumentation": ["Violin (lead)", "Clarinet", "Cimbalom / Accordion", "Double Bass / Tuba", "Snare Drum / Darbuka"],
+    "reference_tracks": ["Araber Tantz - The Klezmatics", "Der Heyser Bulgar - Naftule Brandwein", "Freylekhs from Bukovina - traditional"]
+  },
+  "patterns": {
+    "pitch": {
+      "name": "Freygish (Phrygian Dominant) Scale",
+      "intervals": [0, 1, 3, 5, 7, 8, 10, 12],
+      "contour": "U-D-U-L-U-D-U",
+      "description": "G Freygish: G (root), Ab (minor 2nd), B (major 3rd), C (perfect 4th), D (perfect 5th), Eb (minor 6th), F (minor 7th), G (octave). The augmented 2nd between Ab and B creates the signature 'Jewish' interval. Melodies often emphasize the flat 2nd (Ab) resolving to the root, and the major 3rd (B) as a leading tone to the 4th (C).",
+      "modal_degrees": {
+        "tonic": 0,
+        "flat_2": 1,
+        "major_3": 3,
+        "perfect_4": 5,
+        "perfect_5": 7,
+        "flat_6": 8,
+        "flat_7": 10
+      },
+      "characteristic_motifs": [
+        {"name": "Krechts (ornamental cry)", "notes": [0, 1, 0, 1, 3], "rhythm": "long-short-short-short-long"},
+        {"name": "Tsimbl riff", "notes": [7, 5, 3, 1, 0], "contour": "D-D-D-D-D", "description": "Descending cadential figure landing on tonic"},
+        {"name": "Dreydlekh (turn)", "notes": [3, 5, 3, 1, 0], "contour": "U-D-D-D", "description": "Ornamental turn around the tonic area"}
+      ]
+    },
+    "rhythm": {
+      "name": "Freylekhs Dance Rhythm (2/4)",
+      "onsets": 8,
+      "steps": 8,
+      "dna": "█░█░█░█░",
+      "metrical_gravity": [1.0, 0.3, 0.9, 0.2, 0.8, 0.3, 0.7, 0.2],
+      "variants": [
+        {
+          "name": "Bass oom-pah",
+          "dna": "█░░░█░░░",
+          "description": "Root on beat 1, fifth on beat 2 (or root octave jump)"
+        },
+        {
+          "name": "Secunda afterbeat",
+          "dna": "░█░█░█░█",
+          "description": "Offbeat chordal accompaniment (secunda = 'second' in Yiddish, referring to the offbeat)"
+        },
+        {
+          "name": "Snare accent pattern",
+          "dna": "█░██░█░█",
+          "description": "Accented downbeats with offbeat snare cracks"
+        },
+        {
+          "name": "Terkisher (Turkish) variant",
+          "dna": "█░██░██░",
+          "description": "More syncopated, influenced by Ottoman military bands"
+        }
+      ],
+      "time_feel": "Driving eighth notes, slight lift on offbeats, never swung (straight eighths)"
+    },
+    "timbre": {
+      "instrument": "Violin (lead)",
+      "adsr": [0.02, 0.15, 0.70, 0.13],
+      "vibrato_hz": 6.0,
+      "vibrato_depth": 0.012,
+      "harmonic_profile": "bright, nasal, with prominent upper partials (3rd–7th harmonics)",
+      "ornamentation": {
+        "krechts": "Portamento slide up a half-step with a quick vibrato decay — the 'cry'",
+        "dreydlekh": "Rapid four-note turn around a principal note",
+        "glissando": "Expressive slides between intervals, especially the augmented 2nd (Ab↔B)",
+        "trill": "Upper neighbor trill, typically a half-step (e.g., G–Ab–G)"
+      },
+      "alternative_instruments": [
+        {
+          "instrument": "Clarinet (C or Bb)",
+          "adsr": [0.03, 0.10, 0.75, 0.12],
+          "vibrato_hz": 5.5,
+          "vibrato_depth": 0.010,
+          "harmonic_profile": "reedy, piercing, with strong odd harmonics (1st, 3rd, 5th)"
+        },
+        {
+          "instrument": "Cimbalom (hammered dulcimer)",
+          "adsr": [0.005, 0.30, 0.50, 0.195],
+          "vibrato_hz": 0,
+          "vibrato_depth": 0,
+          "harmonic_profile": "bright, percussive attack with rapid decay, rich in inharmonic partials"
+        }
+      ]
+    }
+  },
+  "musicmatrix_mapping": {
+    "rows": ["Lead (Violin/Clarinet)", "Secunda (Accordion/Chord)", "Bass", "Percussion (Snare/Darbuka)"],
+    "cols": 8,
+    "unit_matrix": {
+      "description": "2-bar Freylekhs pattern in 2/4 (8 eighth-note slots per row)",
+      "grid": {
+        "Lead (Violin/Clarinet)": {
+          "slots": [
+            {"beat": 1, "sub": 1, "pitch_degree": 0, "pitch": "G4", "duration": 0.5, "articulation": "accent", "ornament": "none"},
+            {"beat": 1, "sub": 2, "pitch_degree": null, "pitch": null, "duration": 0.5, "articulation": "rest", "ornament": "none"},
+            {"beat": 2, "sub": 1, "pitch_degree": 1, "pitch": "Ab4", "duration": 0.5, "articulation": "staccato", "ornament": "krechts (slide up)"},
+            {"beat": 2, "sub": 2, "pitch_degree": 3, "pitch": "B4", "duration": 0.5, "articulation": "staccato", "ornament": "none"},
+            {"beat": 3, "sub": 1, "pitch_degree": 5, "pitch": "C5", "duration": 0.5, "articulation": "accent", "ornament": "none"},
+            {"beat": 3, "sub": 2, "pitch_degree": null, "pitch": null, "duration": 0.5, "articulation": "rest", "ornament": "none"},
+            {"beat": 4, "sub": 1, "pitch_degree": 3, "pitch": "B4", "duration": 0.5, "articulation": "staccato", "ornament": "dreydlekh (turn)"},
+            {"beat": 4, "sub": 2, "pitch_degree": 0, "pitch": "G4", "duration": 0.5, "articulation": "tenuto", "ornament": "none"}
+          ]
+        },
+        "Secunda (Accordion/Chord)": {
+          "slots": [
+            {"beat": 1, "sub": 1, "pitch_degree": null, "pitch": null, "duration": 0.5, "articulation": "rest", "ornament": "none"},
+            {"beat": 1, "sub": 2, "pitch_degree": "Gm chord", "pitch": ["G3", "Bb3", "D4"], "duration": 0.5, "articulation": "offbeat accent", "ornament": "none"},
+            {"beat": 2, "sub": 1, "pitch_degree": null, "pitch": null, "duration": 0.5, "articulation": "rest", "ornament": "none"},
+            {"beat": 2, "sub": 2, "pitch_degree": "D7 chord", "pitch": ["D3", "F#3", "A3", "C4"], "duration": 0.5, "articulation": "offbeat accent", "ornament": "none"},
+            {"beat": 3, "sub": 1, "pitch_degree": null, "pitch": null, "duration": 0.5, "articulation": "rest", "ornament": "none"},
+            {"beat": 3, "sub": 2, "pitch_degree": "Gm chord", "pitch": ["G3", "Bb3", "D4"], "duration": 0.5, "articulation": "offbeat accent", "ornament": "none"},
+            {"beat": 4, "sub": 1, "pitch_degree": null, "pitch": null, "duration": 0.5, "articulation": "rest", "ornament": "none"},
+            {"beat": 4, "sub": 2, "pitch_degree": "D7 chord", "pitch": ["D3", "F#3", "A3", "C4"], "duration": 0.5, "articulation": "offbeat accent", "ornament": "none"}
+          ]
+        },
+        "Bass": {
+          "slots": [
+            {"beat": 1, "sub": 1, "pitch_degree": 0, "pitch": "G2", "duration": 1.0, "articulation": "heavy accent", "ornament": "none"},
+            {"beat": 1, "sub": 2, "pitch_degree": null, "pitch": null, "duration": 0.5, "articulation": "rest", "ornament": "none"},
+            {"beat": 2, "sub": 1, "pitch_degree": 7, "pitch": "D2", "duration": 0.5, "articulation": "staccato", "ornament": "none"},
+            {"beat": 2, "sub": 2, "pitch_degree": null, "pitch": null, "duration": 0.5, "articulation": "rest", "ornament": "none"},
+            {"beat": 3, "sub": 1, "pitch_degree": 0, "pitch": "G2", "duration": 1.0, "articulation": "heavy accent", "ornament": "none"},
+            {"beat": 3, "sub": 2, "pitch_degree": null, "pitch": null, "duration": 0.5, "articulation": "rest", "ornament": "none"},
+            {"beat": 4, "sub": 1, "pitch_degree": 7, "pitch": "D2", "duration": 0.5, "articulation": "staccato", "ornament": "none"},
+            {"beat": 4, "sub": 2, "pitch_degree": null, "pitch": null, "duration": 0.5, "articulation": "rest", "ornament": "none"}
+          ]
+        },
+        "Percussion (Snare/Darbuka)": {
+          "slots": [
+            {"beat": 1, "sub": 1, "pitch_degree": null, "pitch": "Snare rim", "duration": 0.25, "articulation": "accent", "ornament": "none"},
+            {"beat": 1, "sub": 2, "pitch_degree": null, "pitch": "Darbuka doum", "duration": 0.25, "articulation": "full", "ornament": "none"},
+            {"beat": 2, "sub": 1, "pitch_degree": null, "pitch": "Snare crack", "duration": 0.25, "articulation": "sharp accent", "ornament": "flam"},
+            {"beat": 2, "sub": 2, "pitch_degree": null, "pitch": "Darbuka tek", "duration": 0.25, "articulation": "light", "ornament": "none"},
+            {"beat": 3, "sub": 1, "pitch_degree": null, "pitch": "Snare rim", "duration": 0.25, "articulation": "accent", "ornament": "none"},
+            {"beat": 3, "sub": 2, "pitch_degree": null, "pitch": "Darbuka doum", "duration": 0.25, "articulation": "full", "ornament": "none"},
+            {"beat": 4, "sub": 1, "pitch_degree": null, "pitch": "Snare crack", "duration": 0.25, "articulation": "sharp accent", "ornament": "flam"},
+            {"beat": 4, "sub": 2, "pitch_degree": null, "pitch": "Darbuka tek", "duration": 0.25, "articulation": "light", "ornament": "none"}
+          ]
+        }
+      }
+    },
+    "variations": [
+      {
+        "name": "Slow Hora (3/8 or 9/8)",
+        "rows": ["Lead", "Secunda", "Bass", "Percussion"],
+        "cols": 12,
+        "description": "Slower, more lyrical dance in compound meter. Lead uses longer note values with more ornamentation."
+      },
+      {
+        "name": "Doina (free improvisation)",
+        "rows": ["Lead", "Bass drone"],
+        "cols": 1,
+        "description": "Rubato, improvisatory prelude. No fixed grid. Lead weeps freely over a sustained bass drone (usually tonic)."
+      }
+    ]
+  },
+  "harmonic_progression": {
+    "primary": ["i", "V7", "i", "V7"],
+    "description": "Gm (i) → D7 (V7) → Gm (i) → D7 (V7). The V7 chord uses F# (raised 7th of the scale) creating a strong dominant pull back to i. The flat 6 (Eb) in the scale gives the iv chord (Cm) a minor quality often used as a subdominant.",
+    "cadences": {
+      "authentic": "V7 → i (D7 → Gm)",
+      "plagal": "iv → i (Cm → Gm)",
+      "phrygian_half": "iv6 → V7 (Cm/Eb → D7) — common in slower sections"
+    }
+  },
+  "structural_rules": [
+    "Binary form: AABB, each section typically 8 bars",
+    "Sections contrast in register: A section lower/mid-range, B section higher/more intense",
+    "Bass oom-pah: root on downbeat, fifth on beat 2 (or octave root)",
+    "Secunda (afterbeat) is the defining klezmer rhythm marker — offbeat chordal punctuation",
+    "Lead melody uses Freygish scale with characteristic augmented 2nd (Ab↔B)",
+    "Ornamentation is structural, not decorative: krechts (cry), dreydlekh (turn), tshok (strike)",
+    "Tempo increases through the dance (accelerando toward the coda)",
+    "Final cadence often features a 'tshok' — a sharp, accented final chord with percussion hit"
+  ],
+  "unitmatrix_export": {
+    "format_version": "1.0",
+    "schema": "MusicMatrix",
+    "project": "016-genre-pattern-dataset",
+    "generated": "2026-06-21",
+    "compatible_generators": ["generate_klezmer.py", "musicom-composer"]
+  }
+}

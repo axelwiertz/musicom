@@ -1,0 +1,40 @@
+import json
+
+with open('data/ewa_agbadza.json') as f:
+    d = json.load(f)
+
+print('=== VALID JSON ===')
+print('Genre:', d['genre'])
+print('Subgenre:', d['subgenre'])
+print('Top keys:', list(d.keys()))
+print()
+print('Meta keys:', list(d['meta'].keys()))
+print('Time sig:', d['meta']['time_signature'])
+print('Tempo:', d['meta']['tempo_bpm'])
+print('Instruments:', d['meta']['instrumentation'])
+print()
+print('Patterns -> pitch:', d['patterns']['pitch']['name'])
+print('Patterns -> rhythm:', d['patterns']['rhythm']['name'])
+print('Patterns -> rhythm DNA:', d['patterns']['rhythm']['dna'])
+print('Patterns -> rhythm variants:', [v['name'] for v in d['patterns']['rhythm']['variants']])
+print('Patterns -> timbre:', d['patterns']['timbre']['instrument'])
+print()
+print('MusicMatrix Mapping rows:')
+for r in d['musicmatrix_mapping']['rows']:
+    print(f'  - {r}')
+print('Cols:', d['musicmatrix_mapping']['cols'])
+print()
+print('Grid rows in unit_matrix:')
+for k, v in d['musicmatrix_mapping']['unit_matrix']['grid'].items():
+    slots = v['slots']
+    hits = sum(1 for s in slots if s['articulation'] != 'rest')
+    print(f'  {k}: {len(slots)} slots, {hits} hits/articulations')
+print()
+print('Variations:', [v['name'] for v in d['musicmatrix_mapping']['variations']])
+print()
+print('Harmonic progression:', d['harmonic_progression']['primary'])
+print('Structural rules count:', len(d['structural_rules']))
+print('Unitmatrix export keys:', list(d['unitmatrix_export'].keys()))
+print()
+print('=== SIZE ===')
+print(f'File size: {len(json.dumps(d))} bytes')

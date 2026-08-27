@@ -1,0 +1,60 @@
+{
+  "project_id": "SP-023-klezmer-clarinet-wind",
+  "classification": "ai-assisted",
+  "generator": "musicom-composer / SP-023 physical modeling synthesis",
+  "sources": [
+    {
+      "type": "midi",
+      "path": "/opt/data/projects/Styles/Klezmer/klezmer-freylekhs-daily-2026-06-25/composition.mid",
+      "description": "Original Klezmer freylekhs composition",
+      "notes": 162,
+      "duration_seconds": 54.5
+    }
+  ],
+  "production_method": {
+    "id": "SP-023",
+    "name": "Digital Waveguide Woodwind (Clarinet) Synthesis",
+    "layer": "Synthesis Engines",
+    "category": "Physical Modeling",
+    "description": "Simulates a reed-excited cylindrical pipe using delay line wave propagation, reflection filter for acoustic losses, and non-linear scattering junction for reed pressure-flow dynamics."
+  },
+  "parameters": {
+    "sampling_rate_hz": 44100,
+    "mouth_pressure_range": [0.6, 0.9],
+    "reed_slope_range": [-0.4, -0.25],
+    "reed_offset_range": [0.65, 0.75],
+    "bell_reflection_gain": 0.95,
+    "tube_loss_lpf_coefficient": 0.6,
+    "breath_noise_std": 0.015,
+    "pipe_model": "closed-open cylindrical waveguide",
+    "delay_samples_formula": "fs / (2 * f0)"
+  },
+  "outputs": {
+    "midi": {
+      "path": "MIDI/original.mid",
+      "size_bytes": 4403
+    },
+    "wav": {
+      "path": "Audio/SP023-klezmer-clarinet-wind.wav",
+      "format": "16-bit PCM mono",
+      "sample_rate_hz": 44100,
+      "duration_seconds": 54.5
+    },
+    "ogg": {
+      "path": "Audio/SP023-klezmer-clarinet-wind.ogg",
+      "format": "Opus VOIP",
+      "bitrate_kbps": 48,
+      "size_bytes": 342233
+    }
+  },
+  "processing_notes": [
+    "Each of 162 MIDI notes synthesized independently with SP-023 waveguide model",
+    "Velocity-scaled mouth pressure and reed stiffness for dynamic expression",
+    "Additive mixing of all note waveforms at correct temporal positions",
+    "Peak normalized to -0.5 dB, DC offset removed",
+    "No clicks or discontinuities; stable across pitch range A3 - E5 (MIDI 52-78)"
+  ],
+  "utc_timestamp": "2026-08-05T23:00:00Z",
+  "engine": "musicom 0.1.0",
+  "python_env": "/opt/data/micromamba/envs/musicom/bin/python"
+}

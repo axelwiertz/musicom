@@ -1,0 +1,20 @@
+{
+  "artifact": "071-arabic-rast-ant-colony-phase1.mid",
+  "classification": "ai-generated",
+  "generator": "musicom.method041.ant_colony_phase1",
+  "sources": [
+    "methods_db.md:Method 041 ACOPF"
+  ],
+  "parameters": {
+    "bpm": 100,
+    "bars": 16,
+    "seed": 20260817,
+    "phase": 1,
+    "quantized": false
+  },
+  "notes": "Raw ant-colony pitch trajectory, unquantized, single voice, pre-rules.",
+  "sha256": "cab63a18755f5b772b82e5864b5333ec0d7a126cf56dd4bcf0d8bd21a8faf1ee",
+  "bytes": 4583,
+  "created_utc": "2026-08-17T23:12:36.963551+00:00",
+  "provenance_version": "1.0"
+}

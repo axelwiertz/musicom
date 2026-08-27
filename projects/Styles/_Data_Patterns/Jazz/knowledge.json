@@ -1,0 +1,77 @@
+{
+  "style": "Jazz",
+  "subgenre": "",
+  "pitch": {
+    "scale": "Unknown",
+    "intervals": [
+      2,
+      2,
+      1,
+      2,
+      2,
+      2,
+      1
+    ],
+    "pitch_classes": [
+      0,
+      2,
+      4,
+      5,
+      7,
+      9,
+      11
+    ]
+  },
+  "rhythm": {
+    "metrical_gravity": [
+      1.0,
+      0,
+      0.5,
+      0
+    ],
+    "tempo_range": [
+      120,
+      120
+    ],
+    "time_signatures": [],
+    "description": ""
+  },
+  "timbre": {
+    "instrumentation": []
+  },
+  "patterns": [
+    {
+      "project": "jazz",
+      "source": "/opt/data/projects/Styles/Jazz/jazz/src/regen.py"
+    },
+    {
+      "project": "jazz_swing",
+      "source": "/opt/data/projects/Styles/Jazz/jazz_swing/src/regen.py"
+    },
+    {
+      "project": "variation_2026-06-04_jazz_swing",
+      "source": "/opt/data/projects/Styles/Jazz/variation_2026-06-04_jazz_swing/src/regen.py"
+    }
+  ],
+  "validated": true,
+  "validation": {
+    "12tet": {
+      "valid": true,
+      "pitch_classes_used": [],
+      "count": 0,
+      "issues": []
+    },
+    "metrical_gravity": {
+      "valid": true,
+      "length": 4,
+      "strong_beat_count": 1,
+      "profile": [
+        1.0,
+        0,
+        0.5,
+        0
+      ],
+      "issues": []
+    }
+  }
+}

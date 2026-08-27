@@ -1,0 +1,17 @@
+{
+  "artifact": "ragtime-maple-leaf.mid",
+  "classification": "ai-assisted",
+  "generator": "ragtime-maple-leaf",
+  "sources": [],
+  "parameters": {
+    "bpm": 120,
+    "form": "16-bar",
+    "bass": "boom-chick",
+    "key": "C major"
+  },
+  "notes": "",
+  "sha256": "8aaf815ca4a35376e0f969ac2aa87685ac23d9e338c513807c4ff9b097e71dbf",
+  "bytes": 6035,
+  "created_utc": "2026-08-17T07:58:30.097400+00:00",
+  "provenance_version": "1.0"
+}

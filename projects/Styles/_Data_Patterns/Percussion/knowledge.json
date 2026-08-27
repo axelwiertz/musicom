@@ -1,0 +1,94 @@
+{
+  "style": "Percussion",
+  "subgenre": "",
+  "pitch": {
+    "scale": "Dorian",
+    "intervals": [
+      2,
+      3,
+      2,
+      2,
+      1,
+      2
+    ],
+    "pitch_classes": [
+      0,
+      2,
+      5,
+      7,
+      9,
+      10
+    ],
+    "per_track_scale": "In Scale",
+    "per_track_scale_distribution": {
+      "In Scale": 1,
+      "Dorian": 1
+    }
+  },
+  "rhythm": {
+    "metrical_gravity": [
+      1.0,
+      0,
+      0.5,
+      0
+    ],
+    "tempo_range": [
+      120,
+      120
+    ],
+    "time_signatures": [],
+    "description": ""
+  },
+  "timbre": {
+    "instrumentation": [
+      "Track 1",
+      "Track 2"
+    ]
+  },
+  "patterns": [
+    {
+      "project": "015-percussion-percussion-dna",
+      "midi": "/opt/data/projects/Styles/Percussion/015-percussion-percussion-dna/MIDI/015_combined.mid",
+      "source": "/opt/data/projects/Styles/Percussion/015-percussion-percussion-dna/src/regen.py",
+      "scale": "Dorian",
+      "pitch_classes": [
+        0,
+        2,
+        5,
+        7,
+        9,
+        10
+      ],
+      "tempo": null,
+      "time_sig": null
+    }
+  ],
+  "validated": true,
+  "validation": {
+    "12tet": {
+      "valid": true,
+      "pitch_classes_used": [
+        0,
+        2,
+        5,
+        7,
+        9,
+        10
+      ],
+      "count": 6,
+      "issues": []
+    },
+    "metrical_gravity": {
+      "valid": true,
+      "length": 4,
+      "strong_beat_count": 1,
+      "profile": [
+        1.0,
+        0,
+        0.5,
+        0
+      ],
+      "issues": []
+    }
+  }
+}

@@ -1,0 +1,1 @@
+# Daily Pattern: Hindustani Bhairavi\n\nGenre: Indian Classical\nRaga: Bhairavi\nTala: Teental (16 beats)\nDate: 2026-06-16\n\nComposition focuses on basic Aarohana/Avarohana over a standard Teental cycle.\n

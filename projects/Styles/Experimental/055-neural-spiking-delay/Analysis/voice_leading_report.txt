@@ -1,0 +1,12 @@
+Voice Leading Analysis (musicom VoiceLeadingRules)
+Style: classical
+Key: E natural minor
+
+Section progressions:
+  A: i - iv - i - v
+  B: i - v - iv - VII - III - iv - v - i
+  Ap: i - iv - v - i
+
+Violations detected: 2
+  Bar 1: parallel_octave in voices ('Lead', 'Tenor')
+  Bar 3: parallel_fifth in voices ('Lead', 'Tenor')

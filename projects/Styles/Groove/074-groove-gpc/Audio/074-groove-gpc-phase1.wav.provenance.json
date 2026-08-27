@@ -1,0 +1,19 @@
+{
+  "artifact": "074-groove-gpc-phase1.wav",
+  "classification": "ai-generated",
+  "generator": "FluidSynth TimGM6mb.sf2 render (SP-001)",
+  "sources": [],
+  "parameters": {
+    "bpm": 106,
+    "key": "G natural minor",
+    "phase": "1",
+    "soundfont": "TimGM6mb.sf2",
+    "gain": 0.89,
+    "seed": 20260820
+  },
+  "notes": "FluidSynth CLI render of phase 1 MIDI, peak-normalized volume=0.89, Opus 48k",
+  "sha256": "b3ffc87aef33521370f86ee06f7c3b5affe47cb89d4004c4c28892475d8b1e2e",
+  "bytes": 10195278,
+  "created_utc": "2026-08-20T23:11:04.383994+00:00",
+  "provenance_version": "1.0"
+}

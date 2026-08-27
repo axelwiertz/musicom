@@ -1,0 +1,52 @@
+{
+  "job": "nightly SP production",
+  "composition_source": {
+    "path": "/opt/data/projects/Styles/Country/012-country-country-uke/MIDI/v2_country_unitmatrix.mid",
+    "sha256": "49fc8dad9f1bbad1b96dad214be108feab31c421e1048430727d6f499661d9b4",
+    "tracks": [
+      "Lead Vocal",
+      "Harmony Vox",
+      "Acoustic Guitar",
+      "Electric Guitar",
+      "Bass",
+      "Drums",
+      "Fiddle",
+      "Pedal Steel"
+    ],
+    "tempo_bpm": 96.0,
+    "time_signature": "4/4",
+    "total_notes": 1960
+  },
+  "production_method": {
+    "id": "SP-028",
+    "name": "Linear Predictive Coding (LPC) Synthesis",
+    "layer": "Synthesis Engines",
+    "description": "Source-filter all-pole model. Autocorrelation + Levinson-Durbin extracts spectral envelope (formants); re-excitation with glottal impulse train / noise resynthesizes with formant-preserving pitch shift and vocoder-style timbre transfer."
+  },
+  "params": {
+    "order_p": 16,
+    "frame_ms": 30,
+    "hop_ms": 10,
+    "pre_emphasis_alpha": 0.97,
+    "voicing_threshold": 0.5,
+    "pitch_shift_beta": 1.12,
+    "blend_dry": 0.9,
+    "blend_lpc": 0.35,
+    "sample_rate": 44100
+  },
+  "outputs": {
+    "full_mix_wav": "Audio/SP028-LPC-country-uke-fullmix.wav",
+    "full_mix_ogg": "Audio/SP028-LPC-country-uke-fullmix.ogg",
+    "stem_lpc_vocal": "Audio/stem_lpc_vocal_resynth.wav",
+    "stem_lpc_pitchshift": "Audio/stem_lpc_pitchshift_beta112.wav",
+    "original_midi": "MIDI/original_v2_country_unitmatrix.mid"
+  },
+  "analysis": {
+    "lpc_frames": 2998,
+    "voiced_fraction": 0.217,
+    "voiced_pitch_hz_mean": 374.4,
+    "fullmix_peak": 0.8548,
+    "fullmix_silence_fraction": 0.0194,
+    "fullmix_dur_s": 125.33
+  }
+}

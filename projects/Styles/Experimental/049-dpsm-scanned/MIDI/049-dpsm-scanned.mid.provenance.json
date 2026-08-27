@@ -1,0 +1,23 @@
+{
+  "artifact": "049-dpsm-scanned.mid",
+  "classification": "ai-assisted",
+  "generator": "Experimental/049-dpsm-scanned/compose.py",
+  "sources": [],
+  "parameters": {
+    "bpm": 110,
+    "methods": [
+      "026",
+      "SP-018"
+    ],
+    "grid_voices": 3,
+    "grid_sections": 8,
+    "key": "C Dorian",
+    "num_masses": 64,
+    "scanned_tension": 1.5
+  },
+  "notes": "Composed via Deconstructive Phase-Shift Minimalism (Method 026) and rendered via Scanned Synthesis Engine (Method SP-018).",
+  "sha256": "1407f959544dc14f4cd81d30bfb74e9d10a17713884f0256069b8b6be2ed34bc",
+  "bytes": 1838,
+  "created_utc": "2026-07-26T10:05:26.645467+00:00",
+  "provenance_version": "1.0"
+}

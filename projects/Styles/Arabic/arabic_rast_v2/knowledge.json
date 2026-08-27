@@ -1,0 +1,41 @@
+{
+  "genre": "World",
+  "subgenre": "Arabic Maqam Rast",
+  "pitch": {
+    "scale": "Rast",
+    "intervals": [
+      2,
+      1.5,
+      1.5,
+      2,
+      2,
+      1.5,
+      1.5
+    ],
+    "contour": "Ascending/Descending varied (Jins)"
+  },
+  "rhythm": {
+    "dna": "\u2588\u2591\u2591\u2588\u2591\u2588\u2591\u2591",
+    "euclidean": "E(3,8)",
+    "metrical_gravity": [
+      1,
+      0,
+      0,
+      0.8,
+      0,
+      0.9,
+      0,
+      0
+    ],
+    "description": "Maqsum pattern (8 beats)"
+  },
+  "timbre": {
+    "instrumentation": [
+      "Oud",
+      "Ney",
+      "Qanun",
+      "Riq"
+    ],
+    "calibration": "Woody, microtonal, non-tempered"
+  }
+}

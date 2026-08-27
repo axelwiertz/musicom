@@ -1,0 +1,36 @@
+{
+  "artifact": "066-markov-chain-chorale.mid",
+  "classification": "ai-generated",
+  "generator": "Method 020 First-Order Markov Chain Sequencing + musicom rules (chord-tone quantization, voice leading, harmonic progression)",
+  "sources": [
+    "generators/chain.py",
+    "rules/voice_leading.py",
+    "rules/progression.py",
+    "workflows/unitmatrix_composer.py"
+  ],
+  "parameters": {
+    "method": 20,
+    "phase": 2,
+    "key": "F major (ionian)",
+    "bpm": 92,
+    "ticks_per_beat": 480,
+    "beats_per_bar": 4,
+    "sections": 4,
+    "section_bars": 2,
+    "progression_degrees": [
+      0,
+      5,
+      3,
+      4
+    ],
+    "seed": 66,
+    "voice_leading_style": "classical",
+    "two_phase": true,
+    "rules_applied": "chord-tone quantization, diatonic block harmony, voice-leading optimization, Phase 2c inversion-rotation correction"
+  },
+  "notes": "Phase 2: raw Markov pitches quantized to nearest section triad tone (soprano), Alto/Tenor/Bass as diatonic block harmony via Scale7ChordDegree.get_diatonic_note(), voice-leading optimization + Phase 2c inversion-rotation correction of parallel/hidden fifths, harmonic function validation (I-vi-IV-V, F major), zero-drift validated UnitMatrix export.",
+  "sha256": "8123dc87562ffab26aea461ec5f049a89219392598a5b0666823a6d7326d6f60",
+  "bytes": 1785,
+  "created_utc": "2026-08-12T23:04:55.344242+00:00",
+  "provenance_version": "1.0"
+}

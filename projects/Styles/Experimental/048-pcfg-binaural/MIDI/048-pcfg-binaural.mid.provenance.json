@@ -1,0 +1,22 @@
+{
+  "artifact": "048-pcfg-binaural.mid",
+  "classification": "ai-assisted",
+  "generator": "Experimental/048-pcfg-binaural/compose.py",
+  "sources": [],
+  "parameters": {
+    "bpm": 100,
+    "methods": [
+      "034",
+      "SP-021"
+    ],
+    "grid_voices": 3,
+    "grid_sections": 8,
+    "key": "C Dorian",
+    "pcfg_seed": 48
+  },
+  "notes": "Composed via PCFG Recursion (Method 034) and spatialized via Binaural Spatialization (Method SP-021).",
+  "sha256": "5f1165d3e318e4522024a2f3bb136e20c4c2a9187f80baaa5cbc4679914cf0e1",
+  "bytes": 1400,
+  "created_utc": "2026-07-25T10:04:40.320740+00:00",
+  "provenance_version": "1.0"
+}

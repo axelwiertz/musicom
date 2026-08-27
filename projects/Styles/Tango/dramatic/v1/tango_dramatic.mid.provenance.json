@@ -1,0 +1,19 @@
+{
+  "artifact": "tango_dramatic.mid",
+  "classification": "ai-assisted",
+  "generator": "tango_dramatic",
+  "sources": [],
+  "parameters": {
+    "bpm": 130,
+    "methods": [
+      "011",
+      "001",
+      "026"
+    ]
+  },
+  "notes": "",
+  "sha256": "3a3941e9d32d0a2906ea098160cd402225e9e939226c1ef5097e9cbd60f9fd3b",
+  "bytes": 8926,
+  "created_utc": "2026-07-27T21:04:07.507398+00:00",
+  "provenance_version": "1.0"
+}

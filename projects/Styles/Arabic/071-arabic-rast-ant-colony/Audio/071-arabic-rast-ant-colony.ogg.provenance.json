@@ -1,0 +1,18 @@
+{
+  "artifact": "071-arabic-rast-ant-colony.ogg",
+  "classification": "ai-generated",
+  "generator": "ffmpeg.libopus.voip48k",
+  "sources": [
+    "Audio/071-arabic-rast-ant-colony.wav"
+  ],
+  "parameters": {
+    "codec": "libopus",
+    "application": "voip",
+    "bitrate": "48k"
+  },
+  "notes": "Telegram-friendly Opus delivery format.",
+  "sha256": "d47770091e77e6b8ab606f2b20ad9fd5e0347b345d587ccacffa72f854b012ee",
+  "bytes": 285593,
+  "created_utc": "2026-08-17T23:12:53.013466+00:00",
+  "provenance_version": "1.0"
+}

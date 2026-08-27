@@ -1,0 +1,17 @@
+{
+  "artifact": "samba-surdo-loop.mid",
+  "classification": "ai-assisted",
+  "generator": "samba-surdo-loop",
+  "sources": [],
+  "parameters": {
+    "bpm": 100,
+    "surdo": "E(2,8)",
+    "tamborim": "E(5,16)",
+    "key": "C major"
+  },
+  "notes": "",
+  "sha256": "0639164fab9d401033407942a901e20aef46036f1bde3e6bd3abb9aa4ed569e7",
+  "bytes": 2955,
+  "created_utc": "2026-08-17T07:57:43.961482+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,147 @@
+[
+  {
+    "project_name": "037-u2-streets-analysis",
+    "midi_file": "/opt/data/projects/Styles/Rock/037-u2-streets-analysis/MIDI/streets.mid",
+    "scale": "Chromatic",
+    "pitch_classes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      6,
+      7,
+      8,
+      9,
+      11
+    ],
+    "intervals": [
+      1,
+      1,
+      1,
+      1,
+      2,
+      1,
+      1,
+      1,
+      2,
+      1
+    ],
+    "tempo": 130.00013000013,
+    "time_sig": "3/4",
+    "total_notes": 4130,
+    "midi_range": [
+      30,
+      83
+    ],
+    "velocity_avg": 104.8,
+    "track_count": 6,
+    "tracks_detail": [
+      {
+        "track": 0,
+        "notes": 819,
+        "pitch_classes": [
+          1,
+          3,
+          4,
+          6,
+          8,
+          9,
+          11
+        ],
+        "scale_fragment": "Chromatic",
+        "range": [
+          68,
+          83
+        ]
+      },
+      {
+        "track": 1,
+        "notes": 691,
+        "pitch_classes": [
+          1,
+          2,
+          3,
+          4,
+          6,
+          8,
+          9,
+          11
+        ],
+        "scale_fragment": "Chromatic",
+        "range": [
+          66,
+          80
+        ]
+      },
+      {
+        "track": 2,
+        "notes": 580,
+        "pitch_classes": [
+          1,
+          2,
+          3,
+          4,
+          6,
+          8,
+          9,
+          11
+        ],
+        "scale_fragment": "Chromatic",
+        "range": [
+          59,
+          76
+        ]
+      },
+      {
+        "track": 3,
+        "notes": 118,
+        "pitch_classes": [
+          0,
+          1,
+          2,
+          4,
+          6,
+          7,
+          9,
+          11
+        ],
+        "scale_fragment": "Chromatic",
+        "range": [
+          36,
+          76
+        ]
+      },
+      {
+        "track": 4,
+        "notes": 112,
+        "pitch_classes": [
+          0,
+          2,
+          6,
+          7,
+          9,
+          11
+        ],
+        "scale_fragment": "Lydian",
+        "range": [
+          30,
+          48
+        ]
+      },
+      {
+        "track": 5,
+        "notes": 1810,
+        "pitch_classes": [
+          11
+        ],
+        "scale_fragment": "Harmonic Minor",
+        "range": [
+          35,
+          35
+        ]
+      }
+    ],
+    "analysis_source": "midi"
+  }
+]

@@ -1,0 +1,45 @@
+{
+  "project": "027-delta-blues-shack",
+  "genre": "Blues",
+  "subgenre": "Delta Blues",
+  "bpm": 72,
+  "key": "A pentatonic minor / blues hexatonic",
+  "instrumentation": [
+    "Resonator Guitar (Refined Melodic Lead)",
+    "Acoustic Slide (Harmony Accompaniment)",
+    "Mono Fingerstyle Thumb Bass (Sub-Bass)",
+    "Stomp Box and Claps (Background Rhythm)"
+  ],
+  "sections": [
+    {
+      "name": "Intro",
+      "bars": 2
+    },
+    {
+      "name": "Verse 1",
+      "bars": 12
+    },
+    {
+      "name": "Verse 2",
+      "bars": 12
+    },
+    {
+      "name": "Guitar Solo",
+      "bars": 12
+    },
+    {
+      "name": "Verse 3",
+      "bars": 12
+    },
+    {
+      "name": "Outro",
+      "bars": 2
+    }
+  ],
+  "files": {
+    "midi": "Blues/027-delta-blues-shack/MIDI/027_delta_blues.mid",
+    "wav": "Blues/027-delta-blues-shack/Renders/027_delta_blues.wav",
+    "ogg": "Blues/027-delta-blues-shack/Audio/027_delta_blues.ogg",
+    "musicxml": "Blues/027-delta-blues-shack/Scores/027_delta_blues.musicxml"
+  }
+}
