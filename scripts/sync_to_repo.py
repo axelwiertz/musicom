@@ -12,6 +12,7 @@ User decision (2026-08-27):
 - Sync ALL documentation into the musicom repo daily
 - Store musicom files (scripts, MIDI, OGG, MD, JSON, TXT) as much as possible
 - WAV ignored (large, renderable from MIDI); .env ignored (secrets)
+- AUTO-PUSH: commit + push to origin/main on every run (user: "Flip to autopush")
 
 Run: /opt/data/micromamba/envs/musicom/bin/python sync_to_repo.py
 """
@@ -121,7 +122,15 @@ def main():
             log(f"  commit failed rc={rc}: {err[:300]}")
             sys.exit(1)
 
-    # 4. Report stats
+    # 4. Auto-push to remote (user decision 2026-08-27: flip to autopush)
+    rc, out, err = git("push", "origin", "main")
+    if rc == 0:
+        log(f"  pushed: {out.splitlines()[0] if out else 'ok'}")
+    else:
+        log(f"  push failed rc={rc}: {err[:300]}")
+        sys.exit(1)
+
+    # 5. Report stats
     rc, out, _ = git("log", "--oneline", "-3")
     log("recent commits:")
     for line in out.splitlines()[:3]:
