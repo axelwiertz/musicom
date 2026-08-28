@@ -76,6 +76,7 @@ Classification of active Musicom composition methods categorized by their primar
 | **067** | Factor Oracle Guided Improvisation (FOGI) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Weak (Corpus-implicit) | Grid-Locked / Continuous | Meso / Longest-Repeated-Suffix | $\mathcal{O}(n)$ build, $\mathcal{O}(1)$/symbol improv | Builds a Factor Oracle automaton (forward transitions + suffix links, Allauzen–Crochemore–Raffinot 1999) over a reference corpus, then walks it forward with stochastic suffix-link recombination to emit infinite corpus-styled improvisation. Context = the longest repeated suffix of the full history (order grows automatically, unlike 002 Markov's hand-tuned $k$). Suffix-link cycles = persistent motifs (Trojan islands); recombination jumps = section pivots/new material; section-token conditioning = rondo/verse-chorus macro-form. No training — the automaton is the model. Data-driven counterpart to 001 Skeleton-First; unbounded-context sibling of 002 Markov; non-parametric foil to 054 ATS / 058 NODE-CTC. |
 | **068** | Chemical Master Equation Stochastic Simulation (CME-SSA) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Tension-species) | Continuous / Fluid | Local / Count-State | $\mathcal{O}(E \cdot R)$ direct, $\mathcal{O}(E \log R)$ next-reaction | Declares music as a stochastic reaction network (species = note/tension/motif counts, reactions = onsets/offs/migrations/resolutions with mass-action propensities) and integrates the Chemical Master Equation exactly via the Gillespie direct-method SSA. Each event's sampled sojourn time $\tau \sim \mathrm{Exp}(a_0)$ is the inter-onset interval (the rhythm); the fired reaction is the note/register/harmony event. Self-regulating mass-action: note-offs $\propto$ active count (phrase decay), resolution $\propto$ tension (cadence pull), migration $\propto$ occupancy (voice-leading). Integer-count, continuous-time counterpart to 061 GPC; rate-balanced sibling of 045 HPSEC (excitation kernel = special propensity); stochastic foil to 033 WFCGS / 056 SCCC. |
 | **069** | Christoffel Word Combinatorial Composition (CWCC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Strict (Mode/Well-Formed) | Grid-Locked | Macro / Word | $\mathcal{O}(N)$ | Generates music from Christoffel words (balanced binary words): the word $C(5,2) =$ `aaabaab` is the Lydian step pattern whose 7 conjugates are the diatonic modes, and every Euclidean rhythm is a Christoffel word over $\{1,0\}$. Sturmian morphisms ($G,D,\widetilde{G},\widetilde{D}$) grow self-similar macro-form (Fibonacci words); Christoffel duality maps the step-pattern word to its fifth/fourth folding word, bridging melody (height) and harmony (width). Balancedness = Myhill's Property + maximal evenness, so scales/rhythms are automatically maximally even. Word-theoretic generalization of 012 Euclidean / 025 Sieve / 019 L-System; deterministic foil to 034 PCFG. |
+| **070** | Coupled Map Lattice Composition (CML-C) | **Nature-Led** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Cluster-sync) | Grid-Locked / Continuous | Meso / Cluster State | $\mathcal{O}(L \cdot T)$ | Generates music from spatiotemporal chaos of a ring of $L$ diffusively coupled logistic maps $x_i(t{+}1)=(1-\varepsilon)f(x_i)+\tfrac{\varepsilon}{2}(f(x_{i-1})+f(x_{i+1}))$. Site state → pitch (folded/scale-quantized), Lyapunov exponent $\lambda$ → rhythmic density, cluster synchronization → harmony/voicing (cluster merge/split = chord change), Kaneko pattern regime (frozen/pattern/turbulent) → macro-form, spatiotemporal fluctuation amplitude → texture. Continuous-state, Nature-Led counterpart to 021 Cellular Automata; spatiotemporal sibling of 043 SATM. |
 
 # Sound Production Methods Framework
 
@@ -139,6 +140,7 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 | **SP-053** | Vector Base Amplitude Panning (VBAP) | **Post-Processing / DSP** | Object-Based Spatialization / Multichannel Mix | Places each mono voice as a virtual source in a discrete loudspeaker array by representing its direction as a positive combination of the enclosing 2-speaker (2D) or 3-speaker (3D) vector base. Gains = barycentric coefficients of the source vector in the speaker-vector base, constant-power normalized ($\sum g_i^2=1$), continuous across a Delaunay-triangulated array; $\mathcal{O}(1)$ per source per sample. |
 | **SP-054** | Waveset Distortion Synthesis (WDS) | **Post-Processing / DSP** | Zero-Crossing Granular Distortion / Time-Stretch | Partitions a rendered audio buffer into wavesets (pseudo-wavecycles: sample chunks running from one zero-crossing, through a second, to a third), then transforms the cycle sequence — repeat/omit/resample (pitch & time), average/harmonic/envelope (timbre), reverse/shuffle/interpolate (gesture) — as data-defined grains. Non-linear adaptive counterpart to fixed-grain SP-016 and pitch-synchronous SP-037. |
 | **SP-055** | Frequency Shifting via Hilbert Transform (FSHT) | **Post-Processing / DSP** | Metallic / Inharmonic / Barberpole Timbres | Shifts the entire spectrum by a constant additive offset $f_k \to f_k+\Delta f$ via the analytic-signal (Hilbert transform) phasing method: $y[n]=x[n]\cos(\Delta\omega n)-\hat{x}[n]\sin(\Delta\omega n)$. One-sided (no mirror sideband), unlike ring modulation; breaks harmonic ratios into inharmonicity, unlike ratio-preserving pitch shift. Feedback delay yields endless barberpole/Shepard ascent. Bode 1961 / Stockhausen Klangumwandler lineage. |
+| **SP-056** | Walsh Function Synthesis (Fast Walsh–Hadamard Transform) | **Synthesis Engines** | Reedy / Hollow / Chiptune Square-Wave Timbres | Additive synthesis in the sequency domain: decomposes a periodic waveform into a sum of Walsh functions (binary $\pm1$ square waves) via the Fast Walsh–Hadamard Transform — an $\mathcal{O}(N \log N)$ butterfly with zero multiplications (add/subtract only). Sequency replaces frequency; Beauchamp's brightness $B=\sum n|a_n|/\sum|a_n|$ (the sequency centroid) is a one-knob timbre morph. Multiplier-free resynthesis = phase accumulator + table read. Casio VL-Tone VL-1 lineage. |
 ---
 
 
@@ -13516,3 +13518,318 @@ def euclidean_rhythm(k: int, n: int) -> str:
 - Toussaint, G. T. (2005). "The Euclidean Algorithm Generates Traditional Musical Rhythms." *Proceedings of BRIDGES*, Banff, pp. 47–56.
 - Noll, T. (2009). "Ionian Theorem." *Journal of Mathematics and Music* 3(3), pp. 137–151.
 - Clampitt, D., & Noll, T. (2011). "Modes, the Height-Width Duality, and Handschin's Tone Character." *Music Theory Online* 17.1. (Christoffel duality; Sturmian morphisms; standard words.)
+# Coupled Map Lattice Composition (CML-C) (Method 070)
+
+### **Source**
+Coupled Map Lattices (CMLs) originate in **Kaneko, K. (1983, 1984)**, who introduced spatiotemporal chaos via arrays of coupled logistic maps, and were consolidated in **Kaneko, K. (ed.) (1992), *Theory and Applications of Coupled Map Lattices*, Wiley** (and the companion survey **Kaneko, K. (1993), "Theory and applications of coupled map lattices," in *Chaos* and *Physics Reports***). The canonical model is a ring of logistic maps with **diffusive (nearest-neighbour) coupling**, which exhibits the full phenomenology of pattern formation — **frozen random patterns, pattern selection (traveling waves), defect turbulence, and fully developed turbulence** — classified in **Kaneko (1989), "Pattern dynamics in spatiotemporal chaos," *Physica D* 34(1–2)**, and further analyzed for **cluster synchronization** in **Kaneko (1990), "Clustering, coding, switching, hierarchical ordering, and control in a network of chaotic elements," *Physica D* 41**. The relevant dynamical quantity is the **largest Lyapunov exponent** of the lattice (Eckmann & Ruelle 1985; Oseledets' theorem), which separates the chaotic ($\lambda > 0$) from the periodic ($\lambda < 0$) regime. The musical transfer follows the lineage of chaotic-composition methods: **Pressing (1988)** and **Bidlack (1992)** first mapped chaotic iterated maps to pitch/rhythm; the CML step extends this from a *single* temporal oscillator to a *spatial lattice* of coupled oscillators, so both *time* (site trajectory) and *space* (lattice index = voice/chord position) are chaotic degrees of freedom. In the Musicom catalog, CML-C fills the *spatiotemporal-chaos composition* gap: 043 SATM uses a single 3-D strange attractor (temporal chaos only), 028 CMCG uses coupled maps only to modulate *granular-synthesis* micro-timing (a sound-production, not compositional, role), 021 CA Grid Evolution is *discrete-state* (binary cells), and 036 ASAR is *discrete-state* toppling — but no method yet drives pitch/harmony/structure directly from a **continuous-state lattice of coupled chaotic maps**. CML-C is the continuous-state, Nature-Led counterpart to 021 Cellular Automata and the spatiotemporal sibling of 043 SATM.
+
+### **Description**
+Coupled Map Lattice Composition generates music from the spatiotemporal dynamics of a ring of $L$ diffusively coupled chaotic maps. Each lattice site $i$ is a logistic map
+$$f(x) = 1 - a\,x^2,\qquad a \in [1.4,\,2.0],$$
+with state $x_i(t) \in [-1,1]$ updating in discrete time as
+$$x_i(t{+}1) = (1-\varepsilon)\,f\big(x_i(t)\big) \;+\; \tfrac{\varepsilon}{2}\Big[f\big(x_{i-1}(t)\big) + f\big(x_{i+1}(t)\big)\Big],\qquad \varepsilon \in [0,1],$$
+where $\varepsilon$ is the **coupling strength** (diffusive nearest-neighbour coupling, indices mod $L$). The three tunable knobs — nonlinearity $a$, coupling $\varepsilon$, and lattice size $L$ — select the spatiotemporal regime (Kaneko's phase diagram), and each regime is decoded musically: the **site state** $x_i(t)$ maps to pitch, the **cluster structure** (groups of synchronized sites) maps to harmony/voicing, the **Lyapunov exponent** $\lambda$ maps to rhythmic density, and the **pattern regime** maps to macro-form. Because the dynamics are deterministic but chaotic, the output is **non-repeating yet self-consistent** — organic variation with stable statistical texture, no randomness, no training. The spatial dimension (lattice index) is the natural bridge to the UnitMatrix: each site can serve one voice (rows) or one harmonic slot (columns), and synchronization clusters give exactly the "voice grouping" the matrix wants. **Complexity**: $\mathcal{O}(L \cdot T)$ for $L$ sites evolved $T$ steps (one scalar map evaluation per site per step) — linear, embarrassingly parallel, no optimization, no training.
+
+### **Musical Elements Framework**
+- **PITCH**: Each site state $x_i(t) \in [-1,1]$ is mapped to pitch via a folded/quantized projection, e.g. $p_i = \text{round}\big(60 + 12 \cdot x_i\big)$ quantized to the active scale (or $p_i = \text{scale}\!\big[\lfloor (x_i{+}1)/2 \cdot S \rfloor\big]$ for a scale of $S$ notes). Successive states of one site trace a **chaotic melodic contour**: bounded (the logistic map stays in $[-1,1]$ for $a\le 2$), aperiodic, with the density of large leaps controlled by $a$. Coupling to neighbours pulls nearby sites' pitches toward consonance (they synchronize), so vertical pitch content is coherent rather than independent noise.
+- **RHYTHM**: The **largest Lyapunov exponent** $\lambda(a,\varepsilon)$ is the rhythm knob. In the chaotic regime ($\lambda > 0$) a site's state visits many distinct values → dense, irregular event stream; in the periodic regime ($\lambda < 0$) it cycles through few values → sparse, regular pulses. Event onsets are triggered by threshold-crossings of $|x_i(t{+}1) - x_i(t)|$ (state *velocity* peaks), so rhythmic density is an emergent function of the local dynamical regime, exactly as the CML's turbulence level varies across the lattice.
+- **HARMONY**: **Cluster synchronization** is the harmony generator. For large enough $\varepsilon$, subsets of adjacent sites lock into synchronous clusters (all sites in a cluster evolve identically up to a small deviation). A cluster = a chord/voicing group: the synchronized sites' pitches sound as a block chord, and the **number and size of clusters** gives the harmonic texture (one cluster = unison/octave doubling, $k$ clusters = $k$-voice chord). Cluster *switching* (Kaneko 1990 — clusters merge/split/bifurcate) is the harmonic progression: a cluster split = a chord arpeggiates, a cluster merge = a voicing collapses to unison. The coupling $\varepsilon$ is the harmonic-coherence knob (large $\varepsilon$ = consonant blocks, small $\varepsilon$ = independent/bitonal lines).
+- **STRUCTURE**: The Kaneko **pattern regime** is the macro-form. **Frozen random pattern** (high $a$, high $\varepsilon$) = static section / ostinato (a fixed spatial pattern persists → a repeated "form" section). **Pattern selection** (intermediate) = traveling-wave motifs and spatial period-2 structures → verse-chorus alternation and phasing textures (the wave's spatial period = the form's bar count). **Defect turbulence** (low $\varepsilon$) = development section (wandering defects = modulating, non-repeating passage). **Fully developed turbulence** (high $a$, low $\varepsilon$) = climax/dense finale. A composition *is* a trajectory through the $(a,\varepsilon)$ phase diagram: vary the parameters across sections to script frozen→pattern→turbulent form arcs.
+- **TEXTURE**: Texture density = the **spatiotemporal fluctuation amplitude** $D(t) = \tfrac{1}{L}\sum_i \big(x_i(t) - \bar x(t)\big)^2$. Frozen/pattern regimes → low $D$, sparse, coordinated texture (few simultaneous, consonant events); turbulent regimes → high $D$, dense, many simultaneous events. Per-voice texture = per-cluster density: synchronized clusters sound dense (block chords), unsynchronized sites sound sparse (single lines). The lattice size $L$ is the polyphony knob — $L$ sites can sound as $L$ independent voices (small $\varepsilon$) or collapse into few clusters (large $\varepsilon$).
+
+### **UnitMatrix Integration (Voices & Sections)**
+- **Rows (Voices)**: Two mapping modes. (1) **One-site-per-voice**: each lattice site $i = 1\dots L$ drives one voice $v$; the site state $x_i(t)$ over the section's time window is that voice's pitch contour, and the voice's cluster membership sets its harmonic role. (2) **Cluster-per-voice**: the lattice's synchronization clusters are detected (via pairwise correlation $|x_i - x_j| < \delta$), and each cluster drives one voice with its representative state $\langle x\rangle_{\text{cluster}}$ — so the *number of voices is emergent* (a cluster split adds a voice, a merge removes one), giving the UnitMatrix a dynamically re-voiced row set.
+- **Columns (Sections)**: Each section $s$ prescribes a point in the phase diagram $(a_s, \varepsilon_s)$ plus a lattice reset/continuation flag. A verse = pattern-selection regime ($\varepsilon$ high, $a$ mid) → stable motifs; a chorus = frozen/clustered regime ($\varepsilon$ very high) → block harmony; a development = defect-turbulence regime ($\varepsilon$ low) → modulating wandering; a climax = fully-turbulent regime ($a$ high, $\varepsilon$ low). Section duration $T_s$ = number of CML time steps mapped to the section's bar count (e.g. one step per 16th note).
+- **Cells** $U_{v,s}$:
+  - `{PITCH}`: site state $x_i(t)$ (or cluster representative) folded/quantized into a scale degree within section $s$'s active scale; $a_s$ controls leap density.
+  - `{RHYTHM}`: onset at step $t$ iff the velocity peak $|x_i(t{+}1)-x_i(t)| > \theta_s$, where threshold $\theta_s$ is set by the local Lyapunov regime; $\lambda_s$ controls event density.
+  - `{HARMONY}`: the cell's chord = the section's cluster structure at step $t$ (the set of distinct synchronized pitch classes); cluster merges/splits within the section are the chord changes.
+  - `{TEXTURE}`: the cell's note count/velocity = local fluctuation amplitude $D_i(t) = (x_i(t) - \bar x(t))^2$ mapped to velocity, and cluster size mapped to chord-block density.
+- **Mapping Flow**:
+  1. Choose lattice size $L$, initial states $x_i(0)$ (e.g. small random or a seeded pattern), and a section script $[(a_1,\varepsilon_1,T_1),\dots,(a_S,\varepsilon_S,T_S)]$.
+  2. Evolve the CML step-by-step, switching $(a,\varepsilon)$ at section boundaries (state carries over → smooth section joins).
+  3. Detect synchronization clusters each step (correlation threshold) to assign harmony/voicing.
+  4. Extract per-voice pitch (state → scale), rhythm (velocity-peak onsets), and texture (fluctuation amplitude → velocity/density).
+  5. Fill UnitMatrix cells $U_{v,s}$, validate zero-drift, export via the musicom engine (never hand-roll mido). If a turbulent section yields sparse staccato output, honor the hybridization rule — add a continuous fill voice driven by a synchronized (frozen-regime) site cluster.
+
+### **Technical Mechanics**
+**Coupled logistic lattice** (ring, indices mod $L$):
+$$x_i(t{+}1) = (1-\varepsilon)\,f(x_i(t)) + \frac{\varepsilon}{2}\left[f(x_{i-1}(t)) + f(x_{i+1}(t))\right],\qquad f(x)=1-a x^2.$$
+For $\varepsilon = 0$ the sites decouple into $L$ independent logistic maps (fully developed chaos for $a\to 2$); for $\varepsilon \to 1$ the lattice synchronizes (diffusive coupling forces consensus). Between these lie the four Kaneko regimes. **Lyapunov exponent** (largest, of the coupled system): $\lambda > 0$ = chaotic (dense events), $\lambda < 0$ = periodic (sparse events); it is estimated from the tangent dynamics of the linearized map $Df(x) = -2 a x$.
+
+**Cluster synchronization**: sites $i,j$ are in one cluster when their states stay within $\delta$ for a window $W$ (e.g. $\max_{t<W}|x_i - x_j| < \delta$). The cluster partition changes only via bifurcations (cluster split/merge), giving discrete, controllable harmonic events from continuous dynamics.
+
+**Pitch fold**: $p_i(t) = \text{round}\big(60 + R\,x_i(t)\big)$ quantized to scale ($R$ = register span in semitones, typically $R = 24$). The logistic map's invariant density is $\pi(x) = \left(\pi\sqrt{1-x^2}\right)^{-1}$ (for $a=2$), which concentrates visits near the edges $x = \pm 1$ — so pitch contours spend more time at register extremes, a natural "tessitura" shape that can be flattened by a change of variable $x \mapsto \sin^{-1}(x)$ if a uniform pitch distribution is wanted.
+
+**Complexity**: $\mathcal{O}(L \cdot T)$ per section, linear in lattice size and duration; cluster detection adds $\mathcal{O}(L^2)$ per step in the naive pairwise form (or $\mathcal{O}(L)$ with a sorted-index method). No optimization, no training, deterministic and seedable.
+
+### **Implementation Requirements (Python / NumPy)**
+```python
+from __future__ import annotations
+import numpy as np
+
+def cml_step(x: np.ndarray, a: float, eps: float) -> np.ndarray:
+    """One diffusive CML step on a ring of coupled logistic maps."""
+    f = 1.0 - a * x * x
+    left = np.roll(f, 1)          # x_{i-1}
+    right = np.roll(f, -1)        # x_{i+1}
+    return (1.0 - eps) * f + 0.5 * eps * (left + right)
+
+def evolve_cml(L: int, T: int, a: float, eps: float, seed: int = 0) -> np.ndarray:
+    """Evolve L sites for T steps; returns (T, L) state matrix."""
+    rng = np.random.default_rng(seed)
+    x = rng.uniform(-1.0, 1.0, size=L)
+    states = np.empty((T, L))
+    for t in range(T):
+        states[t] = x
+        x = cml_step(x, a, eps)
+    return states
+
+def state_to_pitch(x: np.ndarray, scale: np.ndarray, center: int = 60, R: int = 24) -> int:
+    """Fold a lattice state into the nearest scale degree (MIDI)."""
+    idx = int(np.clip((x + 1.0) / 2.0 * len(scale), 0, len(scale) - 1))
+    degree = scale[idx]
+    octave = int(round((R * x) / 12.0))
+    return center + degree + 12 * octave
+
+def lyapunov_density(a: float, eps: float, L: int = 64, T: int = 2000) -> float:
+    """Finite-time largest Lyapunov exponent estimate (chaos = +, periodic = -)."""
+    x = np.random.default_rng(1).uniform(-1, 1, size=L)
+    delta = 1e-8
+    y = x + delta
+    lam = 0.0
+    for _ in range(T):
+        x1 = cml_step(x, a, eps)
+        y1 = cml_step(y, a, eps)
+        d = np.linalg.norm(y1 - x1)
+        if d > 0:
+            lam += np.log(d / np.linalg.norm(y - x))
+        x, y = x1, x1 + (y1 - x1) * (delta / max(d, 1e-12))
+    return lam / T
+
+# --- Musicom integration sketch (conceptual — engine does the MIDI authoring) ---
+# sections = [(1.95, 0.6, 128),   # verse: pattern selection -> stable motifs
+#             (1.98, 0.9, 128),   # chorus: near-frozen -> block harmony
+#             (1.90, 0.2, 256),   # development: defect turbulence -> wandering
+#             (2.00, 0.1, 128)]   # climax: fully developed turbulence -> dense
+# for (a, eps, T) in sections:
+#     states = evolve_cml(L=8, T=T, a=a, eps=eps)
+#     for i in range(L):                       # one site = one voice
+#         for t in range(T):
+#             pitch = state_to_pitch(states[t, i], scale)
+#             ... fill UnitMatrix cell U[i, section] ...
+# Fill UnitMatrix cells, then composer.validate() + composer.to_midi()
+# per AGENTS.md (never hand-roll mido).
+```
+
+### **Pitfalls**
+1. **Spatiotemporal turbulence = white-noise pitch, no coherence** → in the fully-developed regime ($a\to 2$, $\varepsilon\to 0$) the site states are essentially independent noise, so pitch output is incoherent garbage, not "chaotic music." Fix: stay in the pattern-selection/frozen regimes ($\varepsilon \gtrsim 0.3$, $a \lesssim 1.95$) for pitched material, and reserve turbulence only for percussion/dense textural sections — or raise $\varepsilon$ to force cluster synchronization (consonant blocks) before mapping to pitch.
+2. **Cluster detection instability** → naive $\delta$-threshold clustering flickers at cluster boundaries (a site near two clusters oscillates between memberships every step, chattering the harmony). Fix: require the site to stay within $\delta$ for a persistence window $W$ (hysteresis) before reassigning cluster membership, or smooth with a moving-average correlation.
+3. **Uniform-vs-U-shaped pitch distribution** → the logistic map's invariant density is U-shaped (edges of $[-1,1]$ dominate), so raw state→pitch gives a bimodal register distribution (phrases hug the extremes). Fix: apply the inverse-sine change of variable $x \mapsto \frac{2}{\pi}\sin^{-1}(x)$ (or use a tent/circle map) to flatten to a uniform distribution if middle-register tessitura is wanted.
+4. **Sparse staccato in turbulent sections** → velocity-peak onset detection in a chaotic section can fire erratically, producing the "staccato instead of flowing" failure. Fix: honor the hybridization rule — always layer a continuous fill voice driven by a *frozen-regime* synchronized cluster (sustained block), and/or low-pass the onset signal ($\theta$ threshold) so only strong velocity peaks trigger events.
+5. **Section-boundary discontinuity** → resetting the lattice at each section start causes an audible seam (the state jumps to a new random initial condition). Fix: carry the final state vector $x_i(T_s)$ forward as the next section's initial state (the dynamics are continuous in the state, only the parameters switch), giving smooth connective tissue between sections.
+6. **Lyapunov-threshold fragility** → the chaotic/periodic boundary ($\lambda = 0$) is a bifurcation line; parameters chosen near it give unreliable rhythmic density (one run periodic, the next chaotic from a tiny seed change). Fix: sample parameters well inside a regime, or measure $\lambda$ first and scale the onset threshold $\theta_s$ from the measured value rather than assuming a regime from $(a,\varepsilon)$.
+
+### **Comparison With Related Methods**
+| Method | Dynamics | State space | Space = ? | Harmony source | Chaos control |
+|---|---|---|---|---|---|
+| 043 SATM | single strange attractor | continuous, 3-D | none (time only) | attractor topology | fixed attractor |
+| 021 CA Grid | discrete cell rules | discrete {0,1} | lattice (binary) | emergent patterns | rule table |
+| 036 ASAR | discrete toppling | discrete (sand counts) | lattice (integer) | avalanche cascades | threshold |
+| 028 CMCG | coupled chaotic maps | continuous | lattice (grains) | none (DSP modulation) | map parameters |
+| **070 CML-C** | **coupled logistic maps** | **continuous, L-D** | **lattice (voices/chords)** | **cluster synchronization** | **$(a,\varepsilon)$ phase diagram** |
+
+### **References**
+- Kaneko, K. (1983). "Transition from Torus to Chaos Accompanied by Frequency Lockings with Symmetry Breaking." *Progress of Theoretical Physics* 69(5), 1427–1442.
+- Kaneko, K. (1984). "Period-doubling of kink-antikink patterns, quasiperiodicity in antiferro-like structures and spatial intermittency in coupled logistic lattice." *Progress of Theoretical Physics* 72(3), 480–486.
+- Kaneko, K. (1989). "Pattern dynamics in spatiotemporal chaos: Pattern selection, diffusion of defect and pattern competition intermittency." *Physica D* 34(1–2), 1–41.
+- Kaneko, K. (1990). "Clustering, coding, switching, hierarchical ordering, and control in a network of chaotic elements." *Physica D* 41, 137–172.
+- Kaneko, K. (ed.) (1992). *Theory and Applications of Coupled Map Lattices*. John Wiley & Sons. (Chua, L. O. ed. Nonlinear Science Series.)
+- Eckmann, J.-P., & Ruelle, D. (1985). "Ergodic theory of chaos and strange attractors." *Reviews of Modern Physics* 57(3), 617–656.
+- Pressing, J. (1988). "Nonlinear maps as generators of musical design." *Computer Music Journal* 12(2), 35–46.
+- Bidlack, R. (1992). "Chaotic systems as simple (but complex) compositional algorithms." *Computer Music Journal* 16(3), 33–47.
+- Crutchfield, J. P., & Kaneko, K. (1987). "Phenomenology of spatiotemporal chaos." In *Directions in Chaos*, World Scientific, 272–353.
+
+# Walsh Function Synthesis (Fast Walsh–Hadamard Transform) (Method SP-056)
+
+### **Source**
+Walsh functions form a complete orthogonal set of piecewise-constant, binary ($\pm 1$) square waves on the unit interval, first introduced by **Joseph L. Walsh (1923), "A Closed Set of Normal Orthogonal Functions," *American Journal of Mathematics* 45(1)** and extended from the Rademacher system (**Hans Rademacher 1922**). They are the *discrete digital counterpart* of the continuous trigonometric (sine/cosine) basis of Fourier analysis: instead of decomposing a waveform into sines of increasing *frequency*, a Walsh series decomposes it into square waves of increasing **sequency** (number of zero-crossings per period). The computational engine is the **Fast Walsh–Hadamard Transform (FWHT)** — an $\mathcal{O}(N \log N)$ butterfly that uses *only additions and subtractions* (no multiplications), because the transform matrix is the Sylvester–Hadamard matrix $H_N$ whose entries are all $\pm 1$. The musical-synthesis formulation is **James W. Beauchamp (1982), "Synthesis by Spectral Amplitude and 'Brightness' Matching of Analyzed Musical Instrument Tones," *Journal of the Audio Engineering Society* 30(6), 396–406**, which showed that a timbre can be resynthesized by matching the *magnitude* of its Walsh (sequency) spectrum and its **brightness** (the sequency-domain spectral centroid), with phase (coefficient sign) being perceptually secondary. The first mass-market instrument to use the technique was the **Casio VL-Tone VL-1 (1981)**, whose tone generator is a Walsh-function synthesizer (per its service manual and the Casiotone documentation), running the FWHT on a tiny, multiplier-free microcontroller. In the Musicom catalog, SP-056 fills the *square-wave-basis additive* gap: SP-039 IFFT additive uses the *sine* basis ($\mathcal{O}(M \log M)$, needs complex multiplies), SP-029 subtractive filters *pre-existing* rich oscillators, SP-035 GENDYN interpolates random breakpoints, and SP-010/017 FM/PM build sidebands from phase modulation — but no method yet uses the **Walsh/sequency basis** as the fundamental additive atom, which is what SP-056 provides: a purely additive synthesizer that is mathematically exact in a binary $\{\pm 1\}$ basis and requires **zero multiplications** to run.
+
+### **Description**
+Walsh Function Synthesis (WFS-056) is a form of **additive synthesis in the sequency domain**. Where ordinary additive synthesis sums sine partials $x(t)=\sum_k a_k \sin(2\pi k f_0 t)$ with harmonic (frequency-domain) atoms, WFS-056 sums *Walsh functions* — square waves that switch between $+1$ and $-1$ at dyadic time subdivisions — each carrying one **sequency** component. A periodic waveform of period $T_0=1/f_0$ is expressed as
+
+$$x(t) = \sum_{n=0}^{N-1} a_n \,\mathrm{WAL}(n,\; f_0 t),$$
+
+where $\mathrm{WAL}(n,\theta)$ is the $n$-th Walsh function in sequency ordering, $a_n$ are the Walsh coefficients (from the FWHT of the target waveform), and $N=2^m$ is the number of Walsh terms. The key musical facts: (1) **sequency replaces frequency** — the coefficient index $n$ counts zero-crossings, not Hz, so the "harmonic structure" of a timbre lives in how energy is distributed across *square-wave* atoms rather than sines; (2) **brightness is one number** — the sequency centroid $B=\sum n |a_n| / \sum |a_n|$ captures the perceptually dominant timbral quality (Beauchamp 1982), so an entire timbre can be morphed with a single scalar; (3) **the engine is multiplier-free** — the FWHT (Hadamard butterfly) needs only $\mathcal{O}(N \log N)$ additions, and real-time resynthesis needs only a phase accumulator plus a table lookup into the weighted Walsh matrix, making it implementable on the cheapest hardware (the reason Casio chose it for the VL-1). The result is a family of *square-wave-derived* timbres — hollow woodwind/clarinet-like tones, chiptune/8-bit digital color, reed and organ stops — that sound distinct from the smooth sine-additive timbres of SP-039 and the filtered analog timbres of SP-029. **Complexity**: FWHT analysis $\mathcal{O}(N \log N)$ (add-only); resynthesis $\mathcal{O}(N)$ per sample (weighted table sum); memory $\mathcal{O}(N)$.
+
+### **Technical Mechanics**
+
+**1. Walsh functions from the Rademacher system.** Let the $k$-th binary digit of $t \in [0,1)$ be $t_k \in \{0,1\}$ (i.e. $t = \sum_k t_k 2^{-(k+1)}$). The Rademacher functions are the fundamental square waves
+
+$$r_k(t) = \mathrm{sign}\big(\sin(2^{k+1}\pi t)\big) = (-1)^{t_k}.$$
+
+Walsh functions in **Paley ordering** are products of Rademacher functions weighted by the bits of the index $n = \sum_k n_k 2^k$:
+
+$$\mathrm{WAL}_P(n,t) = \prod_{k} r_k(t)^{n_k} = (-1)^{\sum_k n_k t_k}.$$
+
+In **sequency ordering** (Hadamard/Walsh ordering), the functions are re-indexed so that $\mathrm{WAL}(n,t)$ has exactly $n$ (or $\lceil n/2 \rceil$, convention-dependent) zero-crossings per period — the direct square-wave analogue of "the $n$-th harmonic." The sequency $\eta$ of a square wave is the number of zero-crossings per second (for a periodic wave, per period), so "low sequency" = slow square wave = fundamental/octave-like, "high sequency" = fast switching = bright/noise-like content.
+
+**2. The Sylvester–Hadamard matrix and the FWHT.** For $N=2^m$, the $N \times N$ Sylvester–Hadamard matrix is built by the Kronecker recursion
+
+$$H_1 = [1], \qquad H_{2N} = \begin{bmatrix} H_N & H_N \\ H_N & -H_N \end{bmatrix}.$$
+
+Every entry is $\pm 1$, the rows are the $N$ Walsh functions sampled at $N$ dyadic points, and $H_N H_N^T = N I$ (orthogonal). The Walsh coefficients of a length-$N$ sample vector $\mathbf{x}$ are
+
+$$\mathbf{a} = \tfrac{1}{N} H_N \mathbf{x}.$$
+
+Because $H_N$ is $\pm 1$-valued, the transform is computed by a **butterfly identical in shape to the FFT but with the twiddle factors replaced by $\pm 1$** — i.e. only additions and subtractions, $\mathcal{O}(N \log N)$ of them, and no multiplications whatsoever.
+
+**3. Walsh series / resynthesis.** Reconstructing the waveform from its coefficients is the inverse transform (identical to the forward up to the $1/N$ scale, since $H_N^{-1} = \tfrac{1}{N} H_N$):
+
+$$x[n] = \sum_{k=0}^{N-1} a_k \,\mathrm{WAL}(k, n/N) = \big(H_N \mathbf{a}\big)_n.$$
+
+For *time-varying* synthesis at a chosen fundamental $f_0$, a phase accumulator runs $\phi[n] = \phi[n-1] + N f_0 / f_s$ (mod $N$), and the output sample is
+
+$$y[n] = \sum_{k=0}^{N-1} a_k \,\mathrm{WAL}\big(k,\; \phi[n]/N\big) = \sum_{k} a_k \, s_k\big[\lfloor \phi[n] \rfloor\big],$$
+
+where $s_k[j] = H_N[k,j] \in \{\pm 1\}$ is the $k$-th Walsh function value at integer phase $j$. Equivalently, precompute the single weighted accumulator column $\mathbf{w}[j] = \sum_k a_k H_N[k,j]$ once ($\mathcal{O}(N^2)$ offline) and read $y[n] = \mathbf{w}[\lfloor \phi[n]\rfloor]$ — then real-time synthesis is a **phase accumulator plus one table read**, the cheapest possible additive oscillator.
+
+**4. Brightness matching (Beauchamp 1982).** The perceptually dominant timbre parameter is the *sequency-domain spectral centroid* (brightness):
+
+$$B = \frac{\sum_{n} n\,|a_n|}{\sum_{n} |a_n|}.$$
+
+Beauchamp's method: (i) analyze a target instrument tone, (ii) keep only the Walsh coefficient *magnitudes* $|a_n|$ (discard signs — phase is secondary to timbre identity), (iii) globally scale/flatten the magnitude spectrum so its centroid equals the desired brightness $B$, (iv) resynthesize. This gives a **one-knob brightness control** that morphs a single stored timbre from dark (energy concentrated at low sequency) to bright (energy spread to high sequency), the sequency analogue of a lowpass-filter cutoff in subtractive synthesis but achieved *inside* the additive engine with no filter.
+
+**5. Anti-aliasing / band-limiting.** Walsh functions are square waves, so a single Walsh term contains an infinite set of odd harmonics (of its sequency rate) and aliases if $f_0 \times \eta$ approaches Nyquist. Band-limiting is by *sequency truncation*: keep only the $K < N$ lowest-sequency terms, and/or make $N$ an integer sub-multiple of the sample rate so the highest sequency term's fundamental stays below Nyquist (the VL-Tone did exactly this with a fixed low $N$). For high pitches one can also apply a PolyBLEP edge correction per Walsh term, but sequency truncation is the native, physically-consistent approach (it is the sequency-domain lowpass).
+
+**Complexity**: FWHT analysis $\mathcal{O}(N \log N)$ add-only; offline weighted-accumulator table $\mathcal{O}(N^2)$; real-time resynthesis $\mathcal{O}(1)$ per sample (table read) or $\mathcal{O}(K)$ per sample (on-the-fly sum over $K$ terms). Memory $\mathcal{O}(N)$.
+
+### **Implementation Requirements (Python / NumPy)**
+
+```python
+import numpy as np
+from scipy.linalg import hadamard   # N x N Sylvester-Hadamard (N = 2^m)
+
+def walsh_matrix(n):
+    """Rows = Walsh functions in sequency (Hadamard) order, N x N, +-1."""
+    H = hadamard(n).astype(np.float64)
+    # Sequency order = Gray-code permutation of Paley/Hadamard rows
+    m = int(np.log2(n))
+    gray = np.arange(n) ^ (np.arange(n) >> 1)   # binary -> Gray code
+    return H[gray]
+
+def fwht(x):
+    """Fast Walsh-Hadamard transform (add-only butterfly). Returns N coeffs."""
+    x = np.asarray(x, dtype=np.float64).copy()
+    N = x.shape[0]
+    h = 1
+    while h < N:
+        x = x.reshape(-1, h << 1)
+        x[:, :h], x[:, h:] = x[:, :h] + x[:, h:], x[:, :h] - x[:, h:]
+        x = x.reshape(-1)
+        h <<= 1
+    return x / N
+
+def analyze_walsh(waveform, n):
+    """Walsh (sequency) coefficients of one period of `waveform`."""
+    # resample one period to n samples, then transform
+    t = np.linspace(0.0, 1.0, n, endpoint=False)
+    x = waveform(t)
+    return fwht(x)
+
+def brightness(a):
+    """Sequency-domain spectral centroid (Beauchamp's brightness)."""
+    n = np.arange(len(a))
+    return float(np.sum(n * np.abs(a)) / (np.sum(np.abs(a)) + 1e-12))
+
+def brightness_match(a, B_target):
+    """Scale the Walsh magnitude spectrum to hit a target brightness."""
+    amag = np.abs(a)
+    B = brightness(a)
+    # multiplicative tilt in sequency: reshape so centroid -> B_target
+    n = np.arange(len(a))
+    # solve for tilt alpha st. sum n*|a|*n^alpha / sum |a|*n^alpha = B_target
+    # (simple one-parameter search; converges in a few iterations)
+    alpha = 0.0
+    for _ in range(40):
+        w = amag * (n + 1.0) ** alpha
+        Bk = np.sum(n * w) / (np.sum(w) + 1e-12)
+        alpha += 0.1 * (B_target - Bk) / (B + 1e-12)
+    return np.sign(a) * amag * (n + 1.0) ** alpha
+
+def synthesize(a, f0, fs, dur):
+    """Resynthesize a tone at f0 from Walsh coefficients a (N=2^m)."""
+    N = len(a)
+    W = walsh_matrix(N)
+    # weighted accumulator column: w[j] = sum_k a_k W[k, j]
+    w = W.T @ a                      # (N,) table, O(N^2) offline
+    nsamp = int(fs * dur)
+    phase = (np.arange(nsamp) * N * f0 / fs).astype(np.int64) % N
+    return w[phase]
+
+# --- Musicom integration sketch (conceptual — engine does the MIDI authoring) ---
+# coeffs = analyze_walsh(lambda t: saw_period(t), 64)   # target timbre in sequency domain
+# coeffs = brightness_match(coeffs, B_target=12.0)      # one-knob timbre morph
+# for each (voice, section): render MIDI note events to f0 envelopes,
+# then synthesize(a=coeffs_voice, f0, fs, dur) per note and sum.
+# Fill UnitMatrix cells, then composer.validate() + composer.to_midi()
+# per AGENTS.md — never hand-roll mido. WFS-056 consumes symbolic pitch/onset
+# data and emits a rendered mono buffer (or consumes f0 + coefficients directly).
+```
+
+**Tooling**: NumPy for the butterfly and table build; `scipy.linalg.hadamard` for the Sylvester–Hadamard matrix and the Gray-code reordering into sequency order (or compute the butterfly directly with the add-only `fwht` above — no SciPy needed at runtime). The transform is add-only, so it can be JIT-compiled (Numba) or pushed to a microcontroller trivially. The musicom engine handles UnitMatrix fill and zero-drift MIDI export upstream; WFS-056 consumes the symbolic pitch/onset/velocity data as per-note $f_0$ and duration, and emits a mono audio buffer (or is embedded as the tone generator inside a FluidSynth-style render pass).
+
+### **Musical Elements Framework**
+
+- **PITCH**: The fundamental $f_0$ comes entirely from the phase-accumulator rate ($\Delta\phi = N f_0 / f_s$), exactly as in a sine oscillator — pitch is decoupled from the coefficient vector $\mathbf{a}$, which carries only *timbre*. This is the same pitch/timbre separation that makes SP-039 additive clean, but with square-wave atoms the intonation is identical while the *color* is fundamentally reedier/hollower. Microtuning is free (any $\Delta\phi$), and vibrato is a slow phase-rate modulation.
+- **RHYTHM**: Envelopes gate the coefficient sum. Per-note ADSR scales $\sum_k a_k\,\mathrm{WAL}(k,\phi)$ (or multiplies the table read); a *brightness envelope* $B(t)$ can also ride on each onset so attacks are brighter than releases (the sequency analogue of a filter-envelope sweep in SP-029). Because the engine is a single table read, it is cheap enough for dense rhythmic clouds of notes without CPU spikes.
+- **HARMONY**: The sequency spectrum $\{|a_n|\}$ and brightness $B$ *are* the harmonic content — but in the square-wave basis, so a Walsh tone's "harmony" is a distribution of square-wave zero-crossings, not sine partials. Two voices with equal $f_0$ but different $B$ beat/clash only via their shared square-wave edges; chords built from Walsh tones sound more reedy and less "smooth" than sine-additive chords. The $B$ scalar is the timbral-harmony knob: matching $B$ across voices fuses a chord into one homogeneous color, spreading $B$ stratifies it (each row a distinct spectral altitude).
+- **STRUCTURE**: Macro-form is carried by the **brightness trajectory** $B(s)$ per section, plus coefficient-vector switching. Section A = dark Walsh timbre (low $B$, few high-sequency terms); Section B = bright (high $B$, richer high-sequency content); a slow $B$ ramp across a whole section is a continuous timbral crescendo that a filter sweep in SP-029 only approximates. Switching coefficient *sets* (different target instruments) at section joins is a hard timbral modulation.
+- **TEXTURE**: The number of retained Walsh terms $K$ and the sequency distribution control density and "squareness": few low-sequency terms = clean, hollow, clarinet/chiptune tones; many high-sequency terms = bright, gritty, near-noise textures. Per-voice different $B$ and $K$ give stratified, separable rows; the add-only engine scales to many simultaneous voices on minimal hardware, so dense Walsh polyphony is essentially free.
+
+### **UnitMatrix Integration (Voices and Sections)**
+
+- **Rows (Voices)**: Each voice $v$ owns its own coefficient vector $\mathbf{a}_v$ (a stored Walsh spectrum) and brightness $B_v$, rendered by its own phase accumulator. Voice 1 (lead) = high-$B$ bright Walsh square-wave lead; Voice 2 (bass) = low-$B$ dark hollow reed (like a clarinet's low register); Voice 3 (pad) = a low-$K$ few-term Walsh organ/stop with slow $B$ LFO; Voice 4 (percussion) = high-sequency burst (a short bright table with fast decay). Each row renders to a mono buffer, then summed (or spatialized via SP-021/SP-034/SP-043).
+- **Columns (Sections)**: Each section $s$ prescribes a brightness $B_s$ and optionally a coefficient-set index. The columns thus become a *timbral macro-form*: A = dark, B = bright, A′ = dark again with a different coefficient set; a continuous $B$ crossfade at section joins replaces hard timbre cuts with a smooth morph (the sequency analogue of a filter crossfade).
+- **Cells** $U_{v,s}$:
+  - `{PITCH}`: the cell's MIDI pitch → the per-cell fundamental $f_0$ feeding the phase accumulator.
+  - `{HARMONY}`: the cell's brightness $B_{v,s}$ and retained-term count $K_{v,s}$ — the sequency-domain "harmonic" content and its tilt.
+  - `{RHYTHM}`: the cell's note onset/offset + velocity → the amplitude envelope gating the Walsh sum.
+  - `{TEXTURE}`: the coefficient vector selection (which target timbre's Walsh spectrum is loaded) and any per-cell $B$/$\mathbf{a}$ interpolation for morphing.
+- **Mapping Flow**:
+  1. Compose + fill the UnitMatrix; validate zero-drift; export MIDI via the musicom engine (symbolic layer).
+  2. For each voice, load its Walsh coefficient vector (from FWHT analysis of a target waveform, or hand-authored sequency spectra) and brightness recipe.
+  3. Render each cell: run the phase accumulator at the cell's $f_0$, read the weighted Walsh table, apply the velocity/ADSR envelope, per-cell brightness.
+  4. Sum voices; post-process (SP-007 EQ, SP-008 DRC); export audio or spatialize (SP-021/SP-034/SP-043).
+
+### **Pitfalls**
+
+1. **Aliasing from square-wave atoms** → every Walsh term is a square wave with infinite odd harmonics, so a high-sequency term at high $f_0$ aliases badly. Fix: sequency-truncate to keep the top retained term's fundamental below Nyquist ($\eta_{\max} f_0 < f_s/2$), choose $N$ as an integer sub-multiple of $f_s$, and/or PolyBLEP-correct each edge. Never run an untruncated full-rank Walsh sum at high pitch.
+2. **Sequency vs. frequency confusion** → coefficient index $n$ counts zero-crossings, not Hz; a "bright" Walsh tone is one with energy at high *index*, not necessarily high audio frequency. Don't map MIDI pitch to the coefficient index — pitch is the accumulator rate only, the index is purely timbral.
+3. **Sequency-ordering mismatch** → Paley (product-of-Rademacher) vs. Walsh/Hadamard (sequency) vs. Cal–Sal orderings all give different index↔function assignments; analyzing in one and synthesizing in another silently permutes the spectrum. Fix: use one ordering end-to-end (sequency/Hadamard via the Gray-code permutation above) and verify by checking that coefficient $n$ of a known square wave lands where expected.
+4. **Brightness-matching tilt divergence** → the single-parameter tilt search can oscillate or drift if the magnitude spectrum has zeros. Fix: add the $+1$ floor to the tilt weights, cap iterations, and clamp $B$ to the feasible centroid range of the stored spectrum.
+5. **Coefficient phase discard loses onset transient** → dropping the signs of $a_n$ (Beauchamp's magnitude-only trick) is fine for sustained timbre but removes the phase coherence that encodes attack transients. Fix: keep signs for percussive/attack material, or split the tone into a sign-preserving transient part and a magnitude-matched sustain part.
+6. **Pure-$\pm1$ basis = inherently hollow/reedy** → Walsh timbres can't reproduce smooth sine-like or rich low-pass warmth by construction; trying to force them there produces gritty artifacts. Fix: use WFS-056 for the square-wave/reed/chiptune color it is native to, and blend with SP-039 (sine additive) or SP-029 (subtractive) when smoothness is required.
+7. **Table-lookup quantization** → the phase accumulator with integer index $\lfloor \phi\rfloor$ quantizes the Walsh switching instants and introduces jitter/stepping at low $N$. Fix: use a large $N$ (e.g. 256–1024) or linear-interpolate between table columns at the cost of a few multiplies (still far fewer than a full additive bank).
+8. **Naive per-sample Python sum** → the on-the-fly $\sum_k a_k s_k[\phi]$ loop is $\mathcal{O}(KN)$ and slow in pure Python. Fix: precompute the weighted accumulator column $\mathbf{w}[j]$ once and do a single `w[phase]` gather (vectorized NumPy), or JIT with Numba.
+
+### **Comparison With Related Methods**
+
+| Method | Basis atom | Coefficient domain | Multipliers | Brightness control | Typical timbre |
+|---|---|---|---|---|---|
+| IFFT Additive (SP-039) | Sine | Frequency | Yes (complex) | Filter envelope | Smooth, clean |
+| Subtractive (SP-029) | Saw/square → filter | Frequency (post-filter) | Yes | Filter cutoff | Warm analog |
+| FM/PM (SP-010/017) | Phase sidebands | $J_n(\beta)$ lattice | Yes | Mod index | Bell, brass, digital |
+| GENDYN (SP-035) | Random breakpoints | None (stochastic) | Yes | Density/amplitude | Evolving, non-periodic |
+| **Walsh (SP-056)** | **Square wave ($\pm1$)** | **Sequency** | **None (add-only)** | **Sequency centroid $B$** | **Reedy, hollow, chiptune** |
+
+### **References**
+
+- Walsh, J. L. (1923). "A Closed Set of Normal Orthogonal Functions." *American Journal of Mathematics* 45(1), 5–24.
+- Rademacher, H. (1922). "Einige Sätze über Reihen von allgemeinen Orthogonalfunktionen." *Mathematische Annalen* 87, 112–138.
+- Beauchamp, J. W. (1982). "Synthesis by Spectral Amplitude and 'Brightness' Matching of Analyzed Musical Instrument Tones." *Journal of the Audio Engineering Society* 30(6), 396–406.
+- Beauchamp, J. W. (1984). *Applications of Walsh and Related Functions: With an Introduction to Sequency Theory.* Academic Press. (Sequency theory and the FWHT in signal/speech/music applications.)
+- Hadamard, J. (1893). "Résolution d'une question relative aux déterminants." *Bulletin des Sciences Mathématiques* 17, 240–246. (Sylvester–Hadamard matrices.)
+- Casio (1981). *VL-Tone VL-1 Service Manual.* (Walsh-function tone generator; the first commercial Walsh synthesizer.)
+- Harmuth, H. F. (1970). *Transmission of Information by Orthogonal Functions.* Springer. (Sequency theory and Walsh-function applications.)
+- Smith, J. O. (2010). *Physical Audio Signal Processing.* W3K Publishing. (Background on additive synthesis and oscillator phase accumulation, shared with SP-039.)

@@ -1,0 +1,47 @@
+{
+  "job": "SP-012 production pass (autonomous cron)",
+  "source_midi": "/opt/data/projects/Styles/Minimalism/001-minimalism-phase-study/MIDI/minimalism-phase.mid",
+  "source_midi_sha256": "3ec4584c649d83f81953f77e82d6a88beb9a9b7fc7dc1e01fdc799e580f3012b",
+  "production_method": "SP-012",
+  "production_method_name": "Vector Phase Shaping (VPS)",
+  "source_composition": {
+    "project": "001-minimalism-phase-study",
+    "genre": "Minimalism / process music (Reich phase study)",
+    "bpm": 120,
+    "meter": "4/4",
+    "form": "8 sections x 3 bars (24 bars), 48 s",
+    "voices": "MarimbaA(12), MarimbaB(12, phase-walk +1 beat/section), Pad(49), Bass(33), Perc(ch9)",
+    "note_events": 168
+  },
+  "outputs": {
+    "full_mix_wav": "/opt/data/projects/Styles/Production/SP012-vps-minimalism-phase/Audio/SP012-vps-minimalism-phase.wav",
+    "full_mix_ogg": "/opt/data/projects/Styles/Production/SP012-vps-minimalism-phase/Audio/SP012-vps-minimalism-phase.ogg",
+    "stems": {
+      "marimba": "/opt/data/projects/Styles/Production/SP012-vps-minimalism-phase/Audio/stems/stem_marimba.wav",
+      "pad": "/opt/data/projects/Styles/Production/SP012-vps-minimalism-phase/Audio/stems/stem_pad.wav",
+      "bass": "/opt/data/projects/Styles/Production/SP012-vps-minimalism-phase/Audio/stems/stem_bass.wav",
+      "kick": "/opt/data/projects/Styles/Production/SP012-vps-minimalism-phase/Audio/stems/stem_kick.wav"
+    }
+  },
+  "verification": {
+    "silence_ratio": 0.049,
+    "rms_min": 0.1009,
+    "rms_max": 0.13506,
+    "fft_pitch_frames_detected": "192/202 (95.0%)",
+    "fft_pitch_range_hz": "64-880",
+    "fft_pitch_median_hz": 132,
+    "harmonic_energy_8harm_c2_full_mix": 0.2284,
+    "harmonic_energy_8harm_c2_bass_stem": 0.6916,
+    "spectral_flatness_200_2000": 0.118,
+    "verdict": "TONAL - PASS (bass stem 69.2% >= 30%; 95% pitch frames; flatness 0.118 = not noise)"
+  },
+  "parameters": {
+    "sample_rate": 44100,
+    "mix": {
+      "soft_knee": {"threshold": 0.82, "slope": 0.35},
+      "reverb": "Freeverb(room_size=0.5, damping=0.6, wet_dry=0.20, width=0.8)",
+      "normalize_db": -1.0
+    }
+  },
+  "report": "/opt/data/projects/Styles/Production/SP012-vps-minimalism-phase/REPORT.md"
+}

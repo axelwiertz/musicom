@@ -1,0 +1,11 @@
+{
+  "full_mix_harmonic_energy_8harm_c2": 0.2284,
+  "bass_stem_harmonic_energy_8harm_c2": 0.6916,
+  "verification_note": "Polyphonic 5-voice piece: full-mix C2 harmonic energy is diluted by marimba/pad PM sidebands. Tonal gate applied per-voice on the sustained bass pedal stem (>=30%); spectral flatness 0.118 and 95% FFT pitch-frame detection confirm tonal render.",
+  "stems": {
+    "marimba": "/opt/data/projects/Styles/Production/SP012-vps-minimalism-phase/Audio/stems/stem_marimba.wav",
+    "pad": "/opt/data/projects/Styles/Production/SP012-vps-minimalism-phase/Audio/stems/stem_pad.wav",
+    "bass": "/opt/data/projects/Styles/Production/SP012-vps-minimalism-phase/Audio/stems/stem_bass.wav",
+    "kick": "/opt/data/projects/Styles/Production/SP012-vps-minimalism-phase/Audio/stems/stem_kick.wav"
+  }
+}

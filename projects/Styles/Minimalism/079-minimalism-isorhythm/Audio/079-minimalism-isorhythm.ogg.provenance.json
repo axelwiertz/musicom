@@ -1,0 +1,17 @@
+{
+  "artifact": "079-minimalism-isorhythm.ogg",
+  "classification": "ai-generated",
+  "generator": "ffmpeg libopus voip 48k",
+  "sources": [],
+  "parameters": {
+    "codec": "libopus",
+    "application": "voip",
+    "bitrate": "48k",
+    "phase": "2"
+  },
+  "notes": "",
+  "sha256": "879594cb40bf1d591a018e617d2ac98d5841aa91044bd7600d763b51db6c66cf",
+  "bytes": 552792,
+  "created_utc": "2026-08-27T23:15:48.746791+00:00",
+  "provenance_version": "1.0"
+}

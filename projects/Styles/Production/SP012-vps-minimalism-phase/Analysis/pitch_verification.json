@@ -1,0 +1,10 @@
+{
+  "full_mix_C2_harmonic_energy": 0.1823,
+  "C2_fundamental_present": true,
+  "C4_fundamental_present": true,
+  "spectral_flatness_200_2000": 0.11843,
+  "stem_marimba_harmonic_energy": 0.1288,
+  "stem_pad_harmonic_energy": 0.0882,
+  "stem_bass_harmonic_energy": 0.6856,
+  "stem_kick_harmonic_energy": 0.2105
+}

@@ -1,0 +1,18 @@
+{
+  "artifact": "079-minimalism-isorhythm-phase1.wav",
+  "classification": "ai-generated",
+  "generator": "FluidSynth TimGM6mb.sf2 render (SP-001)",
+  "sources": [],
+  "parameters": {
+    "soundfont": "TimGM6mb.sf2",
+    "gain": 1.2,
+    "phase": "1",
+    "bpm": 92,
+    "key": "E natural minor"
+  },
+  "notes": "",
+  "sha256": "8a8158e9b7c030daf0fd1cb5e0f351507623cb383acfeffe1ced89a5041e29bb",
+  "bytes": 11437612,
+  "created_utc": "2026-08-27T23:15:48.755500+00:00",
+  "provenance_version": "1.0"
+}

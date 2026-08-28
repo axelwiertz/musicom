@@ -1,2 +1,2 @@
-/opt/data/projects/Styles/Country/001-country-loop-seamless/MIDI/loop.mid
-SP-036
+/opt/data/projects/Styles/Minimalism/001-minimalism-phase-study/MIDI/minimalism-phase.mid
+SP-012

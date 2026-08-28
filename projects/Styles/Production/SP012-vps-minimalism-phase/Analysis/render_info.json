@@ -1,0 +1,148 @@
+{
+  "source_midi": "/opt/data/projects/Styles/Minimalism/001-minimalism-phase-study/MIDI/minimalism-phase.mid",
+  "method": "SP-012",
+  "method_name": "Vector Phase Shaping (VPS)",
+  "bpm": 120.0,
+  "total_notes": 168,
+  "output_seconds": 51.0,
+  "silence_fraction": 0.0493,
+  "rms_per_second": [
+    0.11698,
+    0.12756,
+    0.13019,
+    0.12027,
+    0.13456,
+    0.11355,
+    0.12308,
+    0.12086,
+    0.12452,
+    0.10833,
+    0.12869,
+    0.10492,
+    0.12313,
+    0.11666,
+    0.12433,
+    0.11214,
+    0.12833,
+    0.10454,
+    0.12272,
+    0.11983,
+    0.12354,
+    0.11188,
+    0.12458,
+    0.10515,
+    0.12229,
+    0.12045,
+    0.12029,
+    0.11232,
+    0.12799,
+    0.10513,
+    0.12315,
+    0.12005,
+    0.12418,
+    0.1209,
+    0.13506,
+    0.1009,
+    0.12301,
+    0.12053,
+    0.1244,
+    0.10817,
+    0.12833,
+    0.10432,
+    0.11887,
+    0.12764,
+    0.13014,
+    0.11243,
+    0.12812,
+    0.10438
+  ],
+  "pitch_verification": {
+    "frames_detected": 192,
+    "frames_total": 202,
+    "range_hz": [
+      64.0,
+      880.0
+    ],
+    "median_hz": 132.0
+  },
+  "synthesis_engine": "project-local VPS (vector phase shaping) + PM sidebands",
+  "parameters": {
+    "12": {
+      "carrier": "saw",
+      "distortion": 3.2,
+      "sweep_rate": 0.9,
+      "sweep_depth": 1.2,
+      "warp_power": 1.4,
+      "pm_index": 0.7,
+      "pm_ratio": 2.0,
+      "gain_db": -8.0,
+      "pan_width": 0.85,
+      "env": {
+        "attack": 0.002,
+        "decay": 0.06,
+        "sustain": 0.55,
+        "release": 0.05
+      }
+    },
+    "49": {
+      "carrier": "saw",
+      "distortion": 1.6,
+      "sweep_rate": 0.25,
+      "sweep_depth": 2.4,
+      "warp_power": 1.2,
+      "pm_index": 1.1,
+      "pm_ratio": 3.0,
+      "gain_db": -12.0,
+      "pan_width": 0.4,
+      "env": {
+        "attack": 0.35,
+        "decay": 0.5,
+        "sustain": 0.9,
+        "release": 0.6
+      }
+    },
+    "33": {
+      "carrier": "saw",
+      "distortion": 2.8,
+      "sweep_rate": 0.5,
+      "sweep_depth": 1.0,
+      "warp_power": 1.5,
+      "pm_index": 0.4,
+      "pm_ratio": 1.0,
+      "gain_db": -7.0,
+      "pan_width": 0.3,
+      "env": {
+        "attack": 0.004,
+        "decay": 0.1,
+        "sustain": 0.85,
+        "release": 0.15
+      }
+    },
+    "0": {
+      "carrier": "saw",
+      "distortion": 4.5,
+      "sweep_rate": 2.0,
+      "sweep_depth": 1.5,
+      "warp_power": 2.0,
+      "pm_index": 0.3,
+      "pm_ratio": 0.5,
+      "gain_db": -6.0,
+      "pan_width": 0.2,
+      "env": {
+        "attack": 0.001,
+        "decay": 0.04,
+        "sustain": 0.2,
+        "release": 0.03
+      }
+    }
+  },
+  "mix": {
+    "soft_knee": {
+      "threshold": 0.82,
+      "slope": 0.35
+    },
+    "reverb": "Freeverb(room_size=0.5, damping=0.6, wet_dry=0.20, width=0.8)",
+    "normalize_db": -1.0
+  },
+  "note_count": 168
+}
