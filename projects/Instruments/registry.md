@@ -38,6 +38,12 @@ zero-drift ✓ → MIDI → FluidSynth WAV ✓; RenderPipeline stem label
 `trackXX_Tuba.wav` ✓ (GM_PROGRAMS[58] = "Tuba", SF2 preset 58 = "Tuba" —
 labels match exactly, no quirk).
 
+**Bassoon added** (2026-08-28): GM70, woodwind-family bass entry
+(instrument.md + bassoon.py), verified end-to-end UnitMatrixComposer →
+zero-drift ✓ → MIDI → FluidSynth WAV ✓; RenderPipeline stem label
+`trackXX_Bassoon.wav` ✓ (GM_PROGRAMS[70] = "Bassoon", SF2 preset 70 =
+"Bassoon" — labels match exactly, no quirk).
+
 ## Python usage
 
 ```python
@@ -70,6 +76,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Brass | Tuba | 58 | 26–72 | bass, harmony, accent, rhythm |
 | Woodwind | Flute | 74 | 60–96 | lead, counter, ornament |
 | Woodwind | Clarinet | 71 | 52–96 | lead, counter, harmony, accent |
+| Woodwind | Bassoon | 70 | 34–88 | bass, harmony, counter, lead |
 | Guitar | Acoustic | 25 | 40–84 | harmony, rhythm, strum |
 | Percussion | Drum Kit | ch9 | 35–81 | rhythm, groove, accent |
 
@@ -88,6 +95,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 57 | Trombone | Trombone ✓ |
 | 58 | Tuba | Tuba ✓ |
 | 60 | French Horn | French Horn ✓ (SF2 preset is "French Horns" plural — cosmetic) |
+| 70 | Bassoon | Bassoon ✓ |
 | 74 | Flute | **Recorder** ✗ |
 | 25 | Acoustic Guitar (nylon) | Acoustic_Guitar_nylon ✓ |
 | ch9/pgm0 | Drums | **Acoustic_Grand_Piano** ✗ (program-0 fallback) |

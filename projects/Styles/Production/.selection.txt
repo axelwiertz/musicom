@@ -1,2 +1,3 @@
-/opt/data/projects/Styles/Minimalism/001-minimalism-phase-study/MIDI/minimalism-phase.mid
-SP-012
+1|/opt/data/projects/Styles/World/072-world-melisma/MIDI/072-world-melisma.mid
+2|SP-017
+3|

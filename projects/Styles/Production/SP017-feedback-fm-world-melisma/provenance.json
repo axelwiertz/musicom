@@ -1,0 +1,169 @@
+{
+  "job": "SP-017 production pass (cron)",
+  "source_midi": "/opt/data/projects/Styles/World/072-world-melisma/MIDI/072-world-melisma.mid",
+  "source_midi_sha256": "5853aa6acc26fc54882c92357d5ff2379a4a67d1795b7a1ca4a9e6440478abdd",
+  "production_method": "SP-017",
+  "production_method_name": "Modified FM (Feedback FM & Phase Modulation)",
+  "source_composition": "072-world-melisma (World, D Dorian, 120 BPM file tempo, 20 bars, 5 sections)",
+  "parameters": {
+    "sample_rate": 44100,
+    "seed": 20260828,
+    "peak": 0.89,
+    "post": {
+      "highpass_hz": 20,
+      "lowpass_hz": 16000
+    },
+    "per_voice": {
+      "75": {
+        "fm_mult": 1.0,
+        "index": 2.0,
+        "beta": 0.15,
+        "gain": 0.52,
+        "attack_s": 0.02,
+        "release_s": 0.1
+      },
+      "48": {
+        "fm_mult": 3.0,
+        "index": 3.0,
+        "beta": 0.3,
+        "gain": 0.22,
+        "attack_s": 0.025,
+        "release_s": 0.12
+      },
+      "89": {
+        "fm_mult": 2.0,
+        "index": 1.5,
+        "beta": 0.1,
+        "gain": 0.3,
+        "attack_s": 0.08,
+        "release_s": 0.15
+      },
+      "35": {
+        "fm_mult": 1.0,
+        "index": 4.0,
+        "beta": 0.6,
+        "gain": 0.55,
+        "attack_s": 0.008,
+        "release_s": 0.09
+      }
+    },
+    "percussion": {
+      "35": {
+        "fc": 60.0,
+        "beta": 2.2,
+        "gain": 1.0,
+        "release_s": 0.12
+      },
+      "41": {
+        "fc": 120.0,
+        "beta": 2.0,
+        "gain": 0.8,
+        "release_s": 0.1
+      },
+      "50": {
+        "fc": 220.0,
+        "beta": 2.0,
+        "gain": 0.7,
+        "release_s": 0.08
+      },
+      "82": {
+        "fc": 3000.0,
+        "beta": 3.0,
+        "gain": 0.45,
+        "release_s": 0.03
+      },
+      "69": {
+        "fc": 5200.0,
+        "beta": 3.0,
+        "gain": 0.5,
+        "release_s": 0.03
+      }
+    },
+    "feedback_recurrence": "y_m[n]=cos(2*pi*fm*n*Ts + beta*y_m[n-1]); y[n]=cos(2*pi*fc*n*Ts + I[n]*y_m[n])",
+    "dynamic_index": "I[n]=index*(1+0.30*sin(2*pi*0.4*t))",
+    "adsr": {
+      "attack_s": "per-voice",
+      "release_s": "per-voice"
+    }
+  },
+  "outputs": {
+    "full_mix_wav": "/opt/data/projects/Styles/Production/SP017-feedback-fm-world-melisma/Audio/SP017-feedback-fm-world-melisma.wav",
+    "full_mix_ogg": "/opt/data/projects/Styles/Production/SP017-feedback-fm-world-melisma/Audio/SP017-feedback-fm-world-melisma.ogg",
+    "stems": {
+      "Percussion": "/opt/data/projects/Styles/Production/SP017-feedback-fm-world-melisma/Audio/stems/stem_percussion.wav",
+      "Bass (Fretless)": "/opt/data/projects/Styles/Production/SP017-feedback-fm-world-melisma/Audio/stems/stem_bass.wav",
+      "Counter (Strings)": "/opt/data/projects/Styles/Production/SP017-feedback-fm-world-melisma/Audio/stems/stem_counter.wav",
+      "Lead (Pan Flute)": "/opt/data/projects/Styles/Production/SP017-feedback-fm-world-melisma/Audio/stems/stem_lead.wav",
+      "Pad (Synth Pad)": "/opt/data/projects/Styles/Production/SP017-feedback-fm-world-melisma/Audio/stems/stem_pad.wav"
+    },
+    "midi": "/opt/data/projects/Styles/Production/SP017-feedback-fm-world-melisma/MIDI/SP017-feedback-fm-world-melisma.mid"
+  },
+  "verification": {
+    "notes_parsed": 429,
+    "notes_synthesized": 429,
+    "duration_sec": 40.5,
+    "silence_ratio": 0.0192,
+    "rms_per_second": [
+      0.11861,
+      0.13747,
+      0.12864,
+      0.13547,
+      0.13813,
+      0.11302,
+      0.1216,
+      0.11631,
+      0.12787,
+      0.132,
+      0.1285,
+      0.1376,
+      0.12768,
+      0.13529,
+      0.12231,
+      0.14309,
+      0.13197,
+      0.1315,
+      0.1386,
+      0.1211,
+      0.13933,
+      0.13186,
+      0.13399,
+      0.13969,
+      0.1306,
+      0.11632,
+      0.12211,
+      0.12624,
+      0.13582,
+      0.14343,
+      0.13243,
+      0.13617,
+      0.11991,
+      0.12531,
+      0.13047,
+      0.13715,
+      0.12892,
+      0.14383,
+      0.12391,
+      0.11432
+    ],
+    "pitch_frames_detected": 80,
+    "pitch_frame_total": 80,
+    "pitch_range_hz": [
+      60.0,
+      588.0
+    ],
+    "pitch_median_hz": 110.0,
+    "note_match_windows": 78,
+    "note_match_total": 80,
+    "harmonic_energy_lowest_f0": 0.251,
+    "harmonic_energy_t0_8s": [
+      0.3527,
+      0.1105,
+      0.185,
+      0.0819,
+      0.3539,
+      0.0919,
+      0.0398,
+      0.0184
+    ]
+  }
+}
