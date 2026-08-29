@@ -1,0 +1,61 @@
+{
+  "artifact": "080-groove-sieve-phase1.wav",
+  "classification": "ai-generated",
+  "generator": "Xenakis Sieve Theory (Method 025, sieve C = A \u2229 B, lcm 56)",
+  "sources": [],
+  "parameters": {
+    "bpm": 110,
+    "key": "G natural minor",
+    "sections": 6,
+    "bars": 24,
+    "seed": 20260828,
+    "sieve_A": {
+      "mod": 8,
+      "res": [
+        0,
+        2,
+        5
+      ]
+    },
+    "sieve_B": {
+      "mod": 7,
+      "res": [
+        0,
+        1,
+        4
+      ]
+    },
+    "progression": [
+      "i",
+      "III",
+      "iv",
+      "V",
+      "i",
+      "III",
+      "iv",
+      "V",
+      "i",
+      "iv",
+      "V",
+      "i",
+      "i",
+      "V",
+      "i",
+      "VI",
+      "i",
+      "III",
+      "iv",
+      "V",
+      "i",
+      "V",
+      "iv",
+      "i"
+    ],
+    "artifact": "080-groove-sieve-phase1.wav"
+  },
+  "notes": "FluidSynth full-mix render of phase-1 raw sieve draft",
+  "sha256": "c57dac29806ba0638737ba3d8f4ccd7319016902be3ddeb842dce5028a838bab",
+  "bytes": 9667628,
+  "created_utc": "2026-08-28T23:12:47.091352+00:00",
+  "provenance_version": "1.0"
+}

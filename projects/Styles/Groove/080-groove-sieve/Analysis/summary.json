@@ -1,0 +1,70 @@
+{
+  "project": "080-groove-sieve",
+  "style": "Groove",
+  "method": "025 Xenakis Sieve Theory (sieve C = A \u2229 B, lcm 56)",
+  "bpm": 110,
+  "key": "G natural minor",
+  "tempo": 110,
+  "bars": 24,
+  "sections": {
+    "Intro": 4,
+    "Verse": 4,
+    "Chorus": 4,
+    "Verse2": 4,
+    "Chorus2": 4,
+    "Outro": 4
+  },
+  "progression": [
+    "i",
+    "III",
+    "iv",
+    "V",
+    "i",
+    "III",
+    "iv",
+    "V",
+    "i",
+    "iv",
+    "V",
+    "i",
+    "i",
+    "V",
+    "i",
+    "VI",
+    "i",
+    "III",
+    "iv",
+    "V",
+    "i",
+    "V",
+    "iv",
+    "i"
+  ],
+  "voices": [
+    "Lead",
+    "Horns",
+    "Rhodes",
+    "Bass",
+    "Drums"
+  ],
+  "phase1": "080-groove-sieve-phase1.mid",
+  "phase2": "080-groove-sieve.mid",
+  "grid": "grid_visualization.txt",
+  "seed": 20260828,
+  "sieve_A": {
+    "mod": 8,
+    "res": [
+      0,
+      2,
+      5
+    ]
+  },
+  "sieve_B": {
+    "mod": 7,
+    "res": [
+      0,
+      1,
+      4
+    ]
+  }
+}

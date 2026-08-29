@@ -1,0 +1,61 @@
+{
+  "artifact": "080-groove-sieve.wav",
+  "classification": "ai-generated",
+  "generator": "Xenakis Sieve Theory (Method 025, sieve C = A \u2229 B, lcm 56)",
+  "sources": [],
+  "parameters": {
+    "bpm": 110,
+    "key": "G natural minor",
+    "sections": 6,
+    "bars": 24,
+    "seed": 20260828,
+    "sieve_A": {
+      "mod": 8,
+      "res": [
+        0,
+        2,
+        5
+      ]
+    },
+    "sieve_B": {
+      "mod": 7,
+      "res": [
+        0,
+        1,
+        4
+      ]
+    },
+    "progression": [
+      "i",
+      "III",
+      "iv",
+      "V",
+      "i",
+      "III",
+      "iv",
+      "V",
+      "i",
+      "iv",
+      "V",
+      "i",
+      "i",
+      "V",
+      "i",
+      "VI",
+      "i",
+      "III",
+      "iv",
+      "V",
+      "i",
+      "V",
+      "iv",
+      "i"
+    ],
+    "artifact": "080-groove-sieve.wav"
+  },
+  "notes": "FluidSynth full-mix render (TimGM6mb.sf2, gain 1.2) of phase-2 MIDI",
+  "sha256": "4d9a27d16efecfd9bf0ce8b86697c64b1e4182de941416c666abd5408aa122ec",
+  "bytes": 9668908,
+  "created_utc": "2026-08-28T23:12:47.083136+00:00",
+  "provenance_version": "1.0"
+}

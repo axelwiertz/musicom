@@ -77,6 +77,7 @@ Classification of active Musicom composition methods categorized by their primar
 | **068** | Chemical Master Equation Stochastic Simulation (CME-SSA) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Tension-species) | Continuous / Fluid | Local / Count-State | $\mathcal{O}(E \cdot R)$ direct, $\mathcal{O}(E \log R)$ next-reaction | Declares music as a stochastic reaction network (species = note/tension/motif counts, reactions = onsets/offs/migrations/resolutions with mass-action propensities) and integrates the Chemical Master Equation exactly via the Gillespie direct-method SSA. Each event's sampled sojourn time $\tau \sim \mathrm{Exp}(a_0)$ is the inter-onset interval (the rhythm); the fired reaction is the note/register/harmony event. Self-regulating mass-action: note-offs $\propto$ active count (phrase decay), resolution $\propto$ tension (cadence pull), migration $\propto$ occupancy (voice-leading). Integer-count, continuous-time counterpart to 061 GPC; rate-balanced sibling of 045 HPSEC (excitation kernel = special propensity); stochastic foil to 033 WFCGS / 056 SCCC. |
 | **069** | Christoffel Word Combinatorial Composition (CWCC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Strict (Mode/Well-Formed) | Grid-Locked | Macro / Word | $\mathcal{O}(N)$ | Generates music from Christoffel words (balanced binary words): the word $C(5,2) =$ `aaabaab` is the Lydian step pattern whose 7 conjugates are the diatonic modes, and every Euclidean rhythm is a Christoffel word over $\{1,0\}$. Sturmian morphisms ($G,D,\widetilde{G},\widetilde{D}$) grow self-similar macro-form (Fibonacci words); Christoffel duality maps the step-pattern word to its fifth/fourth folding word, bridging melody (height) and harmony (width). Balancedness = Myhill's Property + maximal evenness, so scales/rhythms are automatically maximally even. Word-theoretic generalization of 012 Euclidean / 025 Sieve / 019 L-System; deterministic foil to 034 PCFG. |
 | **070** | Coupled Map Lattice Composition (CML-C) | **Nature-Led** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Cluster-sync) | Grid-Locked / Continuous | Meso / Cluster State | $\mathcal{O}(L \cdot T)$ | Generates music from spatiotemporal chaos of a ring of $L$ diffusively coupled logistic maps $x_i(t{+}1)=(1-\varepsilon)f(x_i)+\tfrac{\varepsilon}{2}(f(x_{i-1})+f(x_{i+1}))$. Site state → pitch (folded/scale-quantized), Lyapunov exponent $\lambda$ → rhythmic density, cluster synchronization → harmony/voicing (cluster merge/split = chord change), Kaneko pattern regime (frozen/pattern/turbulent) → macro-form, spatiotemporal fluctuation amplitude → texture. Continuous-state, Nature-Led counterpart to 021 Cellular Automata; spatiotemporal sibling of 043 SATM. |
+| **071** | Hopfield Associative Memory Composition (HAM-C) | **Nature-Led** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Memory-attractor) | Grid-Locked / Continuous | Macro / Attractor | $\mathcal{O}(N^2 \cdot I)$ recall, $\mathcal{O}(P \cdot N^2)$ store | Stores musical patterns (riffs, progressions, grooves) as attractors of a Hopfield spin-glass network via one-shot Hebbian storage; composes by content-addressable recall — a partial cue relaxes by asynchronous threshold updates to a stored memory. Pitch field → melody/voicing, onset field → rhythm, memory identity → harmony (spurious states = passing chords), cue schedule → macro-form, active-unit count → texture. Deterministic associative counterpart to 002 Markov / 055 SAMC; the attractor-memory ancestor of 054 ATS attention. |
 
 # Sound Production Methods Framework
 
@@ -141,6 +142,7 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 | **SP-054** | Waveset Distortion Synthesis (WDS) | **Post-Processing / DSP** | Zero-Crossing Granular Distortion / Time-Stretch | Partitions a rendered audio buffer into wavesets (pseudo-wavecycles: sample chunks running from one zero-crossing, through a second, to a third), then transforms the cycle sequence — repeat/omit/resample (pitch & time), average/harmonic/envelope (timbre), reverse/shuffle/interpolate (gesture) — as data-defined grains. Non-linear adaptive counterpart to fixed-grain SP-016 and pitch-synchronous SP-037. |
 | **SP-055** | Frequency Shifting via Hilbert Transform (FSHT) | **Post-Processing / DSP** | Metallic / Inharmonic / Barberpole Timbres | Shifts the entire spectrum by a constant additive offset $f_k \to f_k+\Delta f$ via the analytic-signal (Hilbert transform) phasing method: $y[n]=x[n]\cos(\Delta\omega n)-\hat{x}[n]\sin(\Delta\omega n)$. One-sided (no mirror sideband), unlike ring modulation; breaks harmonic ratios into inharmonicity, unlike ratio-preserving pitch shift. Feedback delay yields endless barberpole/Shepard ascent. Bode 1961 / Stockhausen Klangumwandler lineage. |
 | **SP-056** | Walsh Function Synthesis (Fast Walsh–Hadamard Transform) | **Synthesis Engines** | Reedy / Hollow / Chiptune Square-Wave Timbres | Additive synthesis in the sequency domain: decomposes a periodic waveform into a sum of Walsh functions (binary $\pm1$ square waves) via the Fast Walsh–Hadamard Transform — an $\mathcal{O}(N \log N)$ butterfly with zero multiplications (add/subtract only). Sequency replaces frequency; Beauchamp's brightness $B=\sum n|a_n|/\sum|a_n|$ (the sequency centroid) is a one-knob timbre morph. Multiplier-free resynthesis = phase accumulator + table read. Casio VL-Tone VL-1 lineage. |
+| **SP-057** | Chua's Circuit Chaotic Oscillator Synthesis (CCCOS) | **Synthesis Engines** | Organic Wind / Brass / Percussion / Noise Timbres | Integrates the three Chua double-scroll ODEs ($dx/d\tau=\alpha(y-x-f(x))$, $dy/d\tau=x-y+z$, $dz/d\tau=-\beta y$) at audio rate and emits capacitor voltage $V_1$ as the sample. The scroll-rotation frequency (set by time-rescale $\lambda=f_0/f_{ref}$) is the fundamental; the chaotic attractor supplies subharmonics, 1/f noise, and micro-deviation — the "living" content of real instrument tones. Single chaos knob $G$ (negative conductance) sweeps periodic → period-doubled → double-scroll → noise-dominant. $O(1)$ per sample per voice; the nonlinearity is the generator itself, not a separate exciter. |
 ---
 
 
@@ -13833,3 +13835,310 @@ def synthesize(a, f0, fs, dur):
 - Casio (1981). *VL-Tone VL-1 Service Manual.* (Walsh-function tone generator; the first commercial Walsh synthesizer.)
 - Harmuth, H. F. (1970). *Transmission of Information by Orthogonal Functions.* Springer. (Sequency theory and Walsh-function applications.)
 - Smith, J. O. (2010). *Physical Audio Signal Processing.* W3K Publishing. (Background on additive synthesis and oscillator phase accumulation, shared with SP-039.)
+# Chua's Circuit Chaotic Oscillator Synthesis (CCCOS) (Method SP-057)
+
+### **Source**
+Chua's circuit is the first and most studied autonomous electronic system proven to exhibit *true chaos*: a third-order, piecewise-linear circuit of one inductor $L$, two capacitors $C_1, C_2$, one linear resistor $R$, and one nonlinear "Chua diode" $N_R$ (a voltage-controlled negative-resistance element). It was introduced by **Leon O. Chua (1971), "Memristor — The Missing Circuit Element," *IEEE Transactions on Circuit Theory* 18(5)** and canonically analyzed in **Chua, Komuro & Matsumoto (1986), "The Double Scroll Family," *IEEE Transactions on Circuits and Systems* 33(11), 1072–1118** (the paper that proved the double-scroll attractor is chaotic via the Shilnikov theorem). The musical-synthesis formulation is **Mayer-Kress, Choi, Weber, Barger & Hübler (1993), "Musical Signals from Chua's Circuit," *IEEE Transactions on Circuits and Systems II: Analog and Digital Signal Processing* 40(10), 688–695, DOI 10.1109/82.246172** — the landmark demonstration that a *single autonomous ordinary differential equation*, integrated at audio rate, produces a stable pitch (a clear musical fundamental) while simultaneously generating the subharmonic, noise, and micro-deviation content that makes real instrumental tones (wind, brass, percussion, bowed strings) sound "alive." In the Musicom catalog, SP-057 fills the *chaotic-electronic oscillator* gap: every prior physical-modeling engine is built from linear resonators plus explicit nonlinear excitation (SP-011 Karplus–Strong, SP-024 bowed string, SP-052 CORDIS-ANIMA, SP-040 FDTD), but SP-057 derives its entire spectrum from the *intrinsic nonlinear dynamics* of the oscillator itself — the nonlinearity is not a separate "exciter" stage, it is the generator.
+
+### **Description**
+Chua's Circuit Chaotic Oscillator Synthesis (CCCOS) is a **Synthesis Engine** that produces audio by integrating the three dimensionless Chua ODEs at the sample rate and emitting one of the capacitor voltages as the sample. The attractor has three equilibrium points (two outer foci + one inner saddle) connected by a "double-scroll" orbit: the trajectory spirals outward around one focus, is flung across to the other, spirals outward again, and is flung back — a deterministic, bounded, aperiodic loop. The *dominant scroll-rotation frequency* $\omega_{scroll}$ is the musical **fundamental**, and its harmonics + the chaotic subharmonic/near-1/f noise floor supply the **timbre**. Critically, the fundamental is *tunable*: rescaling time (equivalently, the component values) shifts $\omega_{scroll}$, and Mayer-Kress et al. demonstrated a full playable instrument by driving the circuit with a keyboard-controlled parameter. Because the attractor is stable-chaotic, the output is **bounded** (no clipping, always musically usable) yet **non-repeating** (each note is unique), and it sits exactly at the boundary between periodic and chaotic regimes where pitched, instrument-like sounds live. **Complexity**: $O(1)$ per sample per voice (a 3D RK4 step ≈ 12 derivative evaluations), independent of polyphony; memory $O(1)$ per voice (3 state variables).
+
+### **Technical Mechanics**
+
+**1. The physical circuit equations.** Kirchhoff's laws on the three energy-storage branches give the third-order state-space model in $(V_1, V_2, I_L)$:
+
+$$C_1 \frac{dV_1}{dt} = \frac{V_2 - V_1}{R} - g(V_1), \qquad C_2 \frac{dV_2}{dt} = \frac{V_1 - V_2}{R} + I_L, \qquad L \frac{dI_L}{dt} = -V_2,$$
+
+where $g(V_1)$ is the piecewise-linear three-segment "Chua diode" characteristic (a voltage-controlled current source that provides the negative resistance needed for chaos):
+
+$$g(V_1) = m_1 V_1 + \frac{1}{2}(m_0 - m_1)\Big(\lvert V_1 + B_p \rvert - \lvert V_1 - B_p \rvert\Big),$$
+
+with outer slope $m_0$, inner slope $m_1$, and breakpoint $B_p$. The audio signal is $V_1(t)$ (Mayer-Kress et al. use the voltage across $C_1$).
+
+**2. Dimensionless double-scroll normalization.** Rescaling $x = V_1/B_p$, $y = V_2/B_p$, $z = (R I_L)/B_p$, $\tau = t/(R C_2)$ gives the standard form used for synthesis (and for which the parameter sets are published):
+
+$$\frac{dx}{d\tau} = \alpha\,(y - x - f(x)), \qquad \frac{dy}{d\tau} = x - y + z, \qquad \frac{dz}{d\tau} = -\beta\, y,$$
+
+$$f(x) = m_1 x + \frac{1}{2}(m_0 - m_1)\Big(\lvert x + 1 \rvert - \lvert x - 1 \rvert\Big),$$
+
+with the canonical chaotic parameter set $\alpha = 9$, $\beta = 100/7 \approx 14.286$, $m_0 = -1/7$, $m_1 = 2/7$ (Chua–Komuro–Matsumoto double scroll). The $f(x)$ breakpoints are normalized to $\pm 1$, so $x$ wanders the dimensionless interval roughly $x \in [-2.2, 2.2]$ (the double scroll spans $\approx \pm 2$).
+
+**3. Pitch mapping via time rescaling.** The dimensionless ODE has a characteristic scroll frequency of order $\omega_{scroll}^{dim} \sim 1$. To place the musical fundamental at $f_0$, integrate with a time step scaled by a factor $\lambda$:
+
+$$\Delta\tau = \lambda \cdot \frac{1}{f_s}, \qquad f_0 \propto \lambda.$$
+
+Mayer-Kress et al. achieved keyboard control by scaling the *component values* (equivalently $\lambda$); the natural mapping is $\lambda = f_0 / f_{ref}$ for a calibration constant $f_{ref}$ (the scroll frequency of the reference parameter set at $\lambda = 1$, measured empirically — on the order of a few hundred Hz at $f_s = 44100$). The same three-ODE core then plays any pitch.
+
+**4. Regime control — the chaos knob.** The single bifurcation parameter is the negative conductance $G = 1/R$ (folded into $\alpha, \beta$ above). Varying it sweeps the system through the full route to chaos:
+
+- **Low $G$ (sub-critical)**: a single stable spiral → a clean, damped sinusoid (near-sine flute-like tone).
+- **Period-doubling cascade**: progressively richer harmonic content — bright, reedy, saw-like timbres.
+- **Double-scroll chaos ($G \approx G_{DS}$)**: full spectrum — the "living" timbre with subharmonics, 1/f noise floor, and micro pitch/amplitude deviation.
+- **High $G$ (fully developed chaos / single scroll)**: noise-dominant, cymbal/breath/wind-noise timbres (aperiodic with a weak pitch residual).
+
+The *chaos parameter* is the single most musically important control: it is simultaneously the brightness, the noise-to-harmonic ratio, the vibrato depth, and the attack character.
+
+**5. Numerical integration.** The ODE is mildly stiff at audio rate (the fast inner-slope switching in $f(x)$); explicit RK4 with a fixed step is stable and sufficient because the attractor is globally bounded and the state never escapes. Per sample per voice:
+
+```python
+# s = [x, y, z]; one RK4 step (12 evaluations of the 3D vector field)
+k1 = f(s); k2 = f(s + 0.5*dt*k1); k3 = f(s + 0.5*dt*k2); k4 = f(s + dt*k3)
+s  = s + (dt/6.0)*(k1 + 2*k2 + 2*k3 + k4)
+out = s[0]                     # audio = V1 (dimensionless)
+```
+
+$O(1)$ per sample; a 4-voice UnitMatrix costs ~48 vector-field evaluations per sample (~50 µs/sample on a single core), i.e. real-time at 44.1 kHz with headroom. Higher accuracy (RK45 / Dormand–Prince) or implicit methods are unnecessary for synthesis; fixed-step RK4 preserves the exact phase portrait.
+
+**Complexity**: $O(V)$ per sample for $V$ voices (each voice = independent 3-state integrator). Memory $O(V)$ (3 floats per voice). No tables, no convolution, no FFT — the entire spectrum is generated by integration.
+
+### **Implementation Requirements (Python / NumPy)**
+
+```python
+import numpy as np
+
+# Dimensionless Chua double-scroll (Mayer-Kress et al. 1993 normalization)
+ALPHA, BETA = 9.0, 100.0/7.0
+M0, M1      = -1.0/7.0, 2.0/7.0
+
+def chua_f(x):
+    return M1*x + 0.5*(M0 - M1)*(np.abs(x + 1.0) - np.abs(x - 1.0))
+
+def chua_deriv(s, alpha=ALPHA, beta=BETA):
+    x, y, z = s
+    return np.array([alpha*(y - x - chua_f(x)),   # dV1
+                     x - y + z,                   # dV2
+                     -beta*y])                    # dIL
+
+def render_chua(f0, fs=44100.0, dur=1.0, chaos=1.0, drive=0.0):
+    """Render one voice: fundamental f0, chaos knob scales alpha (G).
+    chaos in [~0.6 .. 1.3] sweeps periodic -> double-scroll -> noisy."""
+    lam = f0 / 110.0                    # time-rescale: ref fundamental ~110 Hz
+    dt  = lam / fs                      # dimensionless time step
+    n   = int(fs * dur)
+    s   = np.array([0.1, 0.0, 0.0])     # initial perturbation off the saddle
+    alpha = ALPHA * chaos               # chaos knob = negative conductance
+    out = np.zeros(n)
+    for i in range(n):
+        out[i] = s[0]                   # audio = V1
+        u = drive * np.sin(2*np.pi*(f0*0.5)*i/fs)   # optional periodic forcing
+        k1 = chua_deriv(s, alpha); k1[2] += u
+        k2 = chua_deriv(s + 0.5*dt*k1, alpha); k2[2] += u
+        k3 = chua_deriv(s + 0.5*dt*k2, alpha); k3[2] += u
+        k4 = chua_deriv(s + dt*k3, alpha); k4[2] += u
+        s = s + (dt/6.0)*(k1 + 2*k2 + 2*k3 + k4)
+    return out
+
+# --- Musicom integration sketch (conceptual — engine does the MIDI authoring) ---
+# for each (voice, section) cell: read the cell's MIDI pitch -> f0,
+# pick `chaos` from the cell's timbre recipe, render the note-length buffer,
+# apply a per-cell amplitude envelope, sum voices, post-process (SP-007/008),
+# then spatialize (SP-021/034/043). Fill UnitMatrix cells, then
+# composer.validate() + composer.to_midi() per AGENTS.md — never hand-roll mido.
+# CCCOS consumes symbolic pitch/onset/velocity and emits a mono buffer per voice.
+```
+
+**Tooling**: pure NumPy, vectorizable across notes (precompute per-note $\lambda$); the per-sample loop is trivially JIT-compiled with Numba for real-time. No SciPy, no lookup tables, no external DSP. The musicom engine handles UnitMatrix fill and zero-drift MIDI export upstream; CCCOS renders each cell's pitch to a mono buffer. Note the 3-state RK4 loop must be *in-process* (not the `python -c` sandbox) — it is pure computation, no file I/O.
+
+### **Musical Elements Framework**
+
+- **PITCH**: The fundamental $f_0$ is set *exactly* by the time-rescaling factor $\lambda$ (component values in the physical circuit), not by any filter or lookup — the scroll-rotation frequency is the pitch. The chaotic attractor adds an *intrinsic* micro-deviation (a few cents of flutter) that mimics a performer's natural intonation drift; no separate vibrato LFO is needed. Melody, harmony, and microtonal systems are all supported since $f_0$ is a free continuous parameter.
+- **RHYTHM**: The oscillator is autonomous and continuous — rhythm is imposed *externally* by the note envelope (amplitude gate per cell) and by onset transient behavior. A fresh initial condition per onset produces a unique attack (the trajectory takes a few scroll periods to settle onto the attractor); percussive timbres come from starting in the fully-chaotic regime with a fast-decay envelope, pitched tones from the double-scroll regime with a slow attack/release.
+- **HARMONY**: The spectrum is the attractor's natural frequency content: a strong fundamental at $f_0$, integer harmonics (from the scroll's non-sinusoidal rotation), *subharmonics* and near-1/f broadband noise (from the aperiodic flinging between scrolls). The **chaos knob** ($G/\alpha$) is the harmonic control — low chaos = pure fundamental + weak harmonics (flute), mid = rich harmonic + subharmonic content (brass, reed), high = noise-dominant (breath, cymbal). Chords of Chua voices are naturally *slightly detuned* against each other (each attractor's chaos adds independent micro-deviation), which gives an organic ensemble chorus rather than a sterile additive stack.
+- **STRUCTURE**: Macro-form is carried by the **chaos trajectory** across sections — a section arc that sweeps the chaos knob from periodic → chaotic → periodic is a timbral *crescendo/decrescendo* far richer than a filter sweep, because it restructures the entire spectrum (harmonics → subharmonics → noise). Section joins can jump the regime abruptly (periodic pad → chaotic brass stab) for a hard timbral modulation, or ramp $\lambda$ for a smooth glissando.
+- **TEXTURE**: The noise-to-harmonic ratio and the subharmonic content *are* the texture. The same voice at low chaos is sparse and pure; at high chaos it fills broadband spectrum like a cymbal wash. Independent chaos values per voice stratify the mix (one clean lead + one breathy pad + one noise-cymbal = a complete orchestration from one ODE), and because every voice is a 3-float integrator, dense chaotic polyphony is essentially free.
+
+### **UnitMatrix Integration (Voices and Sections)**
+
+- **Rows (Voices)**: Each voice $v$ is an independent 3-state Chua integrator with its own chaos setting $G_v$ and reference $\lambda_v$. Voice 1 (lead) = double-scroll regime, rich harmonic + subharmonic; Voice 2 (bass) = low-chaos near-sine scroll at low $f_0$ (deep, pure, sub-heavy); Voice 3 (pad) = mid-chaos with slow attack envelopes; Voice 4 (percussion) = fully-chaotic regime with sharp decays (noise hit). Each row renders to a mono buffer, then summed (or spatialized via SP-021/SP-034/SP-043).
+- **Columns (Sections)**: Each section $s$ prescribes a chaos value $G_s$ and a $\lambda$ (pitch) trajectory. Columns become a *dynamical macro-form*: A = periodic (clean intro), B = double-scroll (rich development), A′ = periodic again but at a different $f_0$ register — the same circuit re-voiced. A continuous chaos ramp at section joins morphs the entire spectral identity, the chaotic analogue of a wavetable or filter crossfade.
+- **Cells** $U_{v,s}$:
+  - `{PITCH}`: the cell's MIDI pitch → the per-cell fundamental $f_0$ → the $\lambda$ time-rescale for that note's integration.
+  - `{HARMONY}`: the cell's chaos setting $G_{v,s}$ — the harmonic/subharmonic/noise balance, i.e. the "chord color" of the voice.
+  - `{RHYTHM}`: the cell's note onset/offset + velocity → the amplitude envelope gating the oscillator output (attack/release shape).
+  - `{TEXTURE}`: the per-cell regime choice (periodic / period-doubled / double-scroll / fully-chaotic) and initial-condition seed, which together set the noise density and the micro-deviation character.
+- **Mapping Flow**:
+  1. Compose + fill the UnitMatrix; validate zero-drift; export MIDI via the musicom engine (symbolic layer).
+  2. For each voice, instantiate a Chua integrator with its chaos recipe ($G_v$, $\lambda$ reference).
+  3. Render each cell: run RK4 at the cell's $f_0$ for the note duration, apply the velocity/ADSR envelope and the cell's chaos setting.
+  4. Sum voices; post-process (SP-007 EQ, SP-008 DRC); export audio or spatialize (SP-021/SP-034/SP-043).
+
+### **Pitfalls**
+
+1. **Wrong integration regime → no pitch** → if the parameters place the system in a stable fixed point (sub-threshold $G$) the output collapses to a decaying transient with no fundamental, or diverges if $G$ is too high. Fix: calibrate $\lambda$ against the reference parameter set at a known fundamental, and keep $G$ inside the double-scroll window. Verify by zero-crossing rate ≈ $f_0$ (the scroll rotation is the fundamental).
+2. **Time-scale vs. sample-rate confusion** → the ODE is in *dimensionless time*; the musical pitch comes from $\lambda = f_0/f_{ref}$, *not* from a direct Hz-in-the-equation substitution. Mixing the two gives either a 100 Hz whisper or a 10 kHz screech. Fix: always go through the dimensionless normalization, then rescale $\Delta\tau = \lambda/f_s$.
+3. **Naive amplitude scaling clips** → the scroll spans $\lvert x\rvert \lesssim 2.2$ dimensionless units with sharp fling transients; a raw $\times 0.5$ gain can still clip on the flings. Fix: normalize by the attractor's measured peak ($\approx 2.2$), apply a soft limiter (`tanh`) or SP-008 DRC, and DC-block (the scroll has a small nonzero mean).
+4. **Fixed-step stiffness artifacts** → RK4 is fine, but Euler/forward-difference with a large $\lambda$ (high pitch) destabilizes at the fast $f(x)$ slope switches and produces audible clicks. Fix: use RK4 minimum, and cap $\lambda$ so $f_0 < f_s/8$ per voice; drop to a smaller step (or use an interpolated sub-step) for the highest register.
+5. **Chaos knob = whole-spectrum change** → unlike a filter cutoff, raising $G$ does not smoothly brighten — it *bifurcates*, jumping from periodic to period-doubled to chaotic. Morphing timbre continuously therefore requires staying *within* one regime (sweep amplitude/envelope) or crossfading two parallel integrators at different $G$. Fix: crossfade two Chua voices for smooth timbre morphs; use regime jumps for hard timbral modulation.
+6. **Non-repeating = non-reproducible** → the chaotic attractor is sensitive to initial conditions, so the same note rendered twice differs slightly (usually desirable, but bad for A/B testing). Fix: seed the initial condition per note deterministically (a fixed perturbation + the note index) to make renders reproducible while keeping per-note variety.
+7. **Low-RMS output** → most of the scroll period is spent in smooth rotation, so broadband RMS is low relative to peak (typical measured RMS ≈ 2–5% of peak); the tone sounds quieter than a sine of equal peak. Fix: normalize by RMS (loudness) not peak before mixing, and rely on SP-008 DRC for the dense sections.
+8. **Percussion needs a transient tail** → the fully-chaotic regime has no clean pitch, but also no natural decay — it rings as long as driven. Fix: impose an exponential amplitude envelope (and optionally a slow chaos ramp downward) so noise hits decay like a struck cymbal rather than a sustained hiss.
+
+### **Comparison With Related Methods**
+
+| Method | Spectrum source | Nonlinearity | Pitch control | Timbre control | Typical timbre |
+|---|---|---|---|---|---|
+| Karplus–Strong (SP-011) | Delay-line loop + LPF | Excitation only | Delay length | LPF/decay | Plucked string |
+| Bowed string (SP-024) | Waveguide + friction | Bow friction | Delay length | Bow force/velocity | Bowed string |
+| CORDIS-ANIMA (SP-052) | Mass-spring network | Per-link | Network stiffness | Topology | Physical/emergent |
+| FDTD (SP-040) | Full PDE grid | Material | Grid geometry | Boundary/material | Plates, membranes |
+| **Chua (SP-057)** | **Chaotic attractor ODE** | **Intrinsic (generator)** | **Time rescale $\lambda$** | **Chaos knob $G$** | **Wind/brass/percussion/noise** |
+
+### **References**
+
+- Chua, L. O. (1971). "Memristor — The Missing Circuit Element." *IEEE Transactions on Circuit Theory* 18(5), 507–519.
+- Chua, L. O., Komuro, M., & Matsumoto, T. (1986). "The Double Scroll Family." *IEEE Transactions on Circuits and Systems* 33(11), 1072–1118.
+- Mayer-Kress, G., Choi, I., Weber, N., Barger, R., & Hübler, A. (1993). "Musical Signals from Chua's Circuit." *IEEE Transactions on Circuits and Systems II: Analog and Digital Signal Processing* 40(10), 688–695. DOI 10.1109/82.246172.
+- Chua, L. O. (2007). "Chua circuit." *Scholarpedia* 2(10), 1488. DOI 10.4249/scholarpedia.1488. (Definitive parameter sets and the double-scroll portrait.)
+- Bader, R. (2013). *Nonlinearities and Synchronization in Musical Acoustics and Music Psychology.* Springer. (Background on nonlinear oscillation as the source of real-instrument timbre, shared with SP-040/SP-052.)
+
+# Hopfield Associative Memory Composition (HAM-C) (Method 071)
+
+### **Source**
+Hopfield associative memories originate in **Little, W. A. (1974), "The existence of persistent states in the brain," *Mathematical Biosciences* 19, 101–120**, and were crystallized in **Hopfield, J. J. (1982), "Neural networks and physical systems with emergent collective computational abilities," *Proceedings of the National Academy of Sciences* 79(8), 2554–2558**, with the continuous (graded-response) form in **Hopfield, J. J. (1984), "Neurons with graded response have collective computational properties like those of two-state neurons," *PNAS* 81(10), 3088–3092**. The model is literally a **Sherrington–Kirkpatrick spin glass** (**Sherrington, D., & Kirkpatrick, S. (1975), "Solvable model of a spin-glass," *Physical Review Letters* 35(26), 1792–1796**): $N$ Ising spins coupled by a symmetric weight matrix relax to fixed-point **attractors** that are the *stored memories*. Storage capacity was characterized in **Amit, D. J., Gutfreund, H., & Sompolinsky, H. (1985), "Storing infinite numbers of patterns in a spin-glass model of neural networks," *Physical Review Letters* 55(14), 1530–1533** ($P \approx 0.14 N$ random patterns), and improved rules in **Storkey, A. (1997), "Increasing the capacity of a Hopfield network without sacrificing functionality," *Proc. ICANN***. The modern revival — **Ramsauer, H., et al. (2020), "Hopfield Networks is All You Need," *arXiv:2008.02217*** — showed that a continuous exponential-capacity Hopfield layer *is* the transformer attention mechanism, making the Hopfield memory the theoretical ancestor of 054 ATS. The musical transfer follows **Todd, P. M. (1989), "A Connectionist Approach to Algorithmic Composition," *Computer Music Journal* 13(4), 27–43** (sequential/Boltzmann networks for melody) and the earlier **Lewis, J. P. (1988)** connectionist composition experiments, but Todd's nets were *sequential generative* models; HAM-C uses the Hopfield network in its native role — **content-addressable memory** — so composition becomes *recall from a partial cue* rather than left-to-right generation. In the Musicom catalog, HAM-C fills the *associative-memory composition* gap: 002 Markov carries local transition statistics, 059 ESN-RC supplies untrained reservoir *dynamics* (no explicit memories), 046 VAE interpolates a continuous *latent* space, 054 ATS/060 S4SC are trained *generative* sequence models, and 055 SAMC descends an *arbitrary* energy — but no method yet stores musical exemplars as explicit attractors and composes by recalling them.
+
+### **Description**
+Hopfield Associative Memory Composition generates music by **storing musical patterns as attractors of a Hopfield network, then composing through content-addressable recall**. A musical pattern — a riff, a chord progression, a groove, a section of an existing piece — is encoded as a binary vector $\boldsymbol{\xi}^\mu \in \{-1,+1\}^N$ and memorized with the one-shot Hebbian rule
+$$W_{ij} = \frac{1}{N}\sum_{\mu=1}^{P} \xi^\mu_i \xi^\mu_j,\qquad W_{ii}=0,$$
+so the stored patterns become local minima of the energy
+$$E(\mathbf{x}) = -\frac{1}{2}\sum_{i \neq j} W_{ij} x_i x_j + \sum_i \theta_i x_i .$$
+Composition is **recall**: present a *partial or corrupted cue* (a fragment, a chord hint, a rhythmic seed) and let the network relax by asynchronous threshold updates
+$$x_i \leftarrow \operatorname{sign}\!\Big(\sum_j W_{ij} x_j - \theta_i\Big),$$
+which monotonically descends $E$ until the state settles into an attractor — the *completed memory*. The three compositional knobs are **(1) the repertoire** (what you store), **(2) the cue** (what fragment you present — this determines which memory is recalled), and **(3) the recall regime** (zero-temperature descent = clean recall of one memory; finite temperature = wandering among nearby memories = variation/ornamentation). Because recall is **content-addressable** ("recall the rest of the piece from this fragment"), the network performs *harmonic completion, melodic continuation, groove reconstruction, and full-section recall* with a single mechanism. Tonal gravity is enforced not by explicit rules but by the *memory content itself*: a stored I–IV–V–I progression is an attractor, so any cue in its basin completes toward a tonally coherent resolution. **Complexity**: Hebbian storage $\mathcal{O}(P N^2)$ (or $\mathcal{O}(PN)$ incremental outer-product update); recall $\mathcal{O}(N^2 I)$ per pattern ($N$ units, $I$ asynchronous sweeps to convergence); no gradient training, no backpropagation.
+
+### **Musical Elements Framework**
+- **PITCH**: Pitch is carried by the **pattern encoding**. In the pitch-field scheme, a block of units is a one-hot (or thermometer) pitch vector — unit $i$ active means "pitch class $i$ sounds" — so a stored pattern is a chord or melodic fragment and recall *completes* a partial pitch set into a full stored voicing/melody. Register is encoded by a parallel octave field (one block per octave), and microtonal/pitch-bend content by a thermometer field. Crucially, pitch is **discrete and attractor-stabilized**: recall snaps a noisy or partial pitch cue onto the nearest *stored* pitch configuration, so output is always in-tune with the repertoire (never a random float).
+- **RHYTHM**: An **onset field** — one block of units per time step, unit active = onset at that step — encodes rhythmic patterns (grooves, clave, talea) as binary grids. Recall reconstructs a full rhythmic loop from a sparse seed (a downbeat + a syncopation hint), and the network's *asynchronous update order* is a natural source of micro-timing variation (two sweeps rarely produce identical onset micro-offsets). Finite-temperature recall introduces probabilistic onset flips = swing/humanization.
+- **HARMONY**: Harmony is the strongest dimension, because the Hopfield energy landscape *is* a harmony map. Stored chord progressions are attractors; a partial cue (melody + bass note) lands in the basin of the *harmonically compatible* stored progression, so recall = **automatic harmonization**. The energy barrier between attractors is a **voice-leading distance**: two memories close in Hamming distance have a low barrier (smooth chord change), distant memories a high barrier (dramatic modulation). The mixing (spurious) states at basin boundaries are *passing harmonies* — the network's built-in way of generating transitional chords between two stored progressions.
+- **STRUCTURE**: Macro-form is the **trajectory of recalled memories**. Each section $s$ is a stored pattern (or a small basin cluster); the *cue schedule* $[\mathbf{c}_1, \dots, \mathbf{c}_S]$ is the composition's form program (verse cue → verse memory, chorus cue → chorus memory, etc.). Section transitions are **cue switches**: at a boundary, a new partial cue (a pivot chord / motif hint) is injected, and the network re-settles into the next section's basin, giving a hard but musically *motivated* section join. A rondo is simply the cue sequence A–B–A–C–A; a through-composed piece uses cues that land in *spurious* (hybrid) states so no memory is ever recalled exactly twice.
+- **TEXTURE**: Texture density = the **number of active units** in the recalled pattern (how many notes sound simultaneously), and texture *identity* = which memory was recalled. Partial recall (settling into a spurious mixture of two memories) yields layered/orchestrated textures that blend two stored voicings. Per-voice texture is achieved by **partitioning the unit vector into voice blocks**: each voice is a sub-vector, the network recalls all voices jointly (shared attractor = vertical coherence), and the energy coupling between voice blocks is the *counterpoint* — strongly coupled blocks recall consonant vertical combinations, weakly coupled blocks recall independent lines.
+
+### **UnitMatrix Integration (Voices & Sections)**
+- **Rows (Voices)**: Each voice $v$ is a **block of units** in the pattern vector (concatenation of per-voice pitch/onset/velocity fields), so the network stores and recalls *polyphonic* patterns in one shot — a stored memory is a complete multi-voice texture. Voice independence is controlled by the weight structure: full Hebbian coupling across all blocks = tightly coordinated voicing (recall of a full homophonic chord block); block-diagonal weights (coupling only within each voice block) = independent monophonic lines; a middle coupling = the "lead + accompaniment" split. The recalled per-voice sub-vectors are routed directly into each row of the UnitMatrix.
+- **Columns (Sections)**: Each section $s$ prescribes a **cue pattern** $\mathbf{c}_s$ (the seed fragment for that section) and a recall-regime temperature $T_s$. Section A = a stored verse memory cued by its opening motif; Section B = a stored chorus memory cued by its hook; a development = a cue engineered to land in a spurious mixture state (variation); a coda = a cue in the tonic memory's basin (resolution). Section duration = the length of the recalled pattern's onset field (number of time-step units × step size).
+- **Cells** $U_{v,s}$:
+  - `{PITCH}`: the recalled pitch-field block for voice $v$ (scale-degree indices or MIDI numbers) decoded from the settled state's $v$-block.
+  - `{RHYTHM}`: the recalled onset-field block → note-on/off times within the cell (onset units decode to ticks).
+  - `{HARMONY}`: the recalled memory identity = the cell's chord/voicing; the energy $E$ of the settled state = harmonic tension (deep attractor = consonant/stable, shallow or spurious state = tense/transitional).
+  - `{TEXTURE}`: the active-unit count and velocity field of the recalled pattern = note density and dynamics; spurious-state recall = layered/orchestrated texture.
+- **Mapping Flow**:
+  1. Build the repertoire: encode each exemplar pattern (riffs, progressions, grooves, or sections of a reference piece) as $\boldsymbol{\xi}^\mu \in \{-1,+1\}^N$ and learn $W$ by the Hebbian rule.
+  2. Script the form: choose the cue sequence $[\mathbf{c}_1, \dots, \mathbf{c}_S]$ and per-section temperature $T_s$.
+  3. For each section: initialize the network at $\mathbf{c}_s$, run asynchronous updates to convergence (with noise at temperature $T_s$), decode the settled state into per-voice pitch/rhythm/velocity.
+  4. Fill UnitMatrix cells $U_{v,s}$, validate zero-drift, export via the musicom engine (never hand-roll mido). If a sparse onset field produces staccato output, honor the hybridization rule — layer a continuous fill voice (026 DPSM arpeggio or sustained pad) driven by a *sustained* memory cue.
+
+### **Technical Mechanics**
+**Hebbian storage.** For $P$ binary patterns $\boldsymbol{\xi}^\mu \in \{-1,+1\}^N$, the symmetric zero-diagonal weight matrix is
+$$W_{ij} = \frac{1}{N}\sum_{\mu=1}^{P} \xi^\mu_i \xi^\mu_j\;(i \neq j),\qquad W_{ii}=0,$$
+or in matrix form $\mathbf{W} = \frac{1}{N}\sum_\mu \left(\boldsymbol{\xi}^\mu {\boldsymbol{\xi}^\mu}^\top - \mathbf{I}\right)$. This makes each $\boldsymbol{\xi}^\mu$ a fixed point (for $P$ below capacity). The **Storkey rule** (iterative, subtracts local-field leakage) raises capacity to ~$0.14 N$ without the outer-product crosstalk; the **pseudo-inverse rule** $\mathbf{W} = \boldsymbol{\Xi}(\boldsymbol{\Xi}^\top\boldsymbol{\Xi})^{-1}\boldsymbol{\Xi}^\top$ stores up to $N$ patterns exactly (at the cost of losing content-addressability for partial cues).
+
+**Energy and recall.** The energy (Lyapunov function)
+$$E(\mathbf{x}) = -\frac{1}{2}\sum_{i\neq j} W_{ij} x_i x_j + \sum_i \theta_i x_i$$
+decreases (or holds) on every asynchronous update $x_i \leftarrow \operatorname{sign}(\sum_j W_{ij} x_j - \theta_i)$, so the dynamics converge to a local minimum — a **stored memory** (low energy) or a **spurious mixture** state (a stable linear combination of memories, at higher energy). Finite temperature (noise) turns this into a Metropolis/Boltzmann walk over the energy landscape: at low $T$ the network stays in one basin (stable motif), at higher $T$ it hops basins (variation, passing harmonies), at very high $T$ it randomizes (texture/noise).
+
+**Capacity and crosstalk.** With random patterns, $P_{\max} \approx 0.138 N$ (Amit–Gutfreund–Sompolinsky). Beyond it, memories blend into spurious states and recall errors multiply. Musical patterns are *not* random — they are highly correlated (shared diatonic vocabulary), which *lowers* effective capacity but *raises* generalization: correlated patterns recall each other's blends as musically plausible passing material.
+
+**Encoding a pattern.** The $N$-vector is a concatenation of fields:
+$$\mathbf{x} = \big[\underbrace{\text{pitch}^{\,(1)}\cdots}_{\text{voice 1}}\;\big|\;\underbrace{\text{onset}^{\,(1)}\cdots}_{\text{voice 1}}\;\big|\;\dots\;\big|\;\text{voice } V \text{ fields}\big],$$
+where each field is one-hot (exactly one active unit per voice pitch) or thermometer (cumulative active units). One-hot pitch fields encode "exactly one note per voice" (monophonic rows); thermometer fields encode chords in a single field. The **mixing ratio** of field lengths sets the pitch-vs-rhythm resolution (a longer onset field = finer rhythmic grid).
+
+**Complexity**: storage $\mathcal{O}(P N^2)$ (full outer-product) or $\mathcal{O}(PN)$ (incremental); recall $\mathcal{O}(N^2 I)$ per memory ($I$ sweeps, typically $I \approx 5$–$20$ to convergence for $N$ in the hundreds). Memory $\mathcal{O}(N^2)$ for the weight matrix. All operations are matrix-vector products — trivially vectorized on NumPy/GPU.
+
+### **Implementation Requirements (Python / NumPy)**
+```python
+from __future__ import annotations
+import numpy as np
+
+def encode_pattern(notes: list[tuple[int, int, int]], n_pitch: int, n_onset: int) -> np.ndarray:
+    """Encode a polyphonic fragment as a binary {-1,+1} pattern.
+    notes: list of (voice, pitch_degree, onset_step). One-hot pitch field + onset field per voice."""
+    n_voices = max(v for v, _, _ in notes) + 1
+    fields = []  # per voice: [pitch one-hot (n_pitch), onset one-hot (n_onset)]
+    for v in range(n_voices):
+        p = np.full(n_pitch, -1.0); o = np.full(n_onset, -1.0)
+        for vv, pp, oo in notes:
+            if vv == v:
+                p[pp] = 1.0; o[oo] = 1.0
+        fields.append(np.concatenate([p, o]))
+    return np.concatenate(fields)
+
+def hebbian_store(patterns: list[np.ndarray]) -> np.ndarray:
+    """One-shot Hebbian weights (zero diagonal). patterns: list of {-1,+1} vectors."""
+    N = patterns[0].size
+    W = np.zeros((N, N))
+    for xi in patterns:
+        W += np.outer(xi, xi)
+    W /= N
+    np.fill_diagonal(W, 0.0)
+    return W
+
+def recall(W: np.ndarray, cue: np.ndarray, theta: np.ndarray | None = None,
+           temperature: float = 0.0, sweeps: int = 20, seed: int = 0) -> np.ndarray:
+    """Content-addressable recall: relax `cue` to an attractor by asynchronous updates.
+    temperature=0 -> clean recall; >0 -> Boltzmann wandering (variation)."""
+    rng = np.random.default_rng(seed)
+    x = np.asarray(cue, dtype=np.float64).copy()
+    b = np.zeros_like(x) if theta is None else theta
+    N = x.size
+    order = np.arange(N)
+    for _ in range(sweeps):
+        rng.shuffle(order)
+        for i in order:
+            h = float(W[i] @ x) - b[i]
+            if temperature <= 0.0:
+                x[i] = 1.0 if h >= 0 else -1.0
+            else:
+                x[i] = 1.0 if rng.random() < 1.0 / (1.0 + np.exp(-2 * h / temperature)) else -1.0
+    return x
+
+def energy(W: np.ndarray, x: np.ndarray, theta: np.ndarray | None = None) -> float:
+    b = np.zeros_like(x) if theta is None else theta
+    return -0.5 * float(x @ W @ x) + float(b @ x)
+
+# --- Musicom integration sketch (conceptual — engine does the MIDI authoring) ---
+# patterns = [encode_pattern(riff_a, n_pitch=12, n_onset=16),   # stored memories
+#             encode_pattern(riff_b, n_pitch=12, n_onset=16),
+#             encode_pattern(progression_chorus, n_pitch=12, n_onset=16)]
+# W = hebbian_store(patterns)
+# cues = [partial_cue_verse, partial_cue_chorus, ...]           # the form program
+# for s, cue in enumerate(cues):
+#     x = recall(W, cue, temperature=0.05, sweeps=20)            # settle into an attractor
+#     decoded = decode_pattern(x)                                # per-voice pitch/onset/velocity
+#     for v in decoded:  # route into UnitMatrix row v, column s
+#         composer.fill_voice_section(voice=v, section=s, create_note_unit(pitch, dur, start_tick))
+# ok, msg = composer.validate()   # MUST be True before to_midi (per AGENTS.md — never hand-roll mido)
+```
+
+**Tooling**: NumPy for the Hebbian store and the (vectorized) recall loop; a GPU is optional ($N$ in the thousands is still cheap). The musicom engine handles UnitMatrix fill and zero-drift MIDI export upstream; HAM-C emits the symbolic pitch/onset/velocity data that fills each cell.
+
+### **Pitfalls**
+1. **Storage-capacity overflow → blended garbage** → storing $P > 0.14 N$ random patterns (or many *highly correlated* patterns, which hit capacity sooner) makes memories overlap into spurious states, and recall returns a mushy blend instead of a clean memory. Fix: keep $P \lesssim 0.1 N$, use the Storkey/pseudo-inverse rule for near-capacity loads, and *verify* each stored pattern is a fixed point (recall it from itself) before composing.
+2. **Local minimum ≠ stored memory (off-key recall)** → recall can settle in a *spurious mixture* that is not a clean memory and sounds harmonically wrong. Fix: (a) check the settled energy $E$ — reject and re-cue if above a threshold; (b) use zero temperature for harmonically critical material and reserve finite temperature for ornamentation; (c) prefer *one-hot* pitch fields (exactly one pitch per voice) so mixtures can't produce two simultaneous pitches in one voice.
+3. **Binary encoding loses nuance** → $\{-1,+1\}$ patterns can't directly encode velocity, register, or note duration. Fix: multi-field encoding — a velocity (thermometer) field per voice, an octave field for register, and an onset+offset pair of fields for duration. The field-length *mixing ratio* must be tuned or the recalled material will be rhythmically or dynamically flat.
+4. **Sparse staccato recall** → a sparse onset field (few active units) recalls a staccato, gap-filled texture. Fix: honor the hybridization rule — layer a continuous fill voice (026 DPSM arpeggios or a sustained pad) driven by a *sustained* memory cue, or densify the onset field with legato (offset = next onset) post-processing.
+5. **Symmetric weights = symmetric recall** → $W_{ij}=W_{ji}$ gives undirected memory, so the network can't encode directional phrase logic (a cadence must go *toward* the tonic). Fix: use the sequential/asymmetric Hopfield variant, or run two coupled recalls (a forward memory for the phrase and a backward memory for the cadence), or inject the directionality in the *cue schedule* rather than the weights.
+6. **Stuck in one basin → mechanical repetition** → a fixed cue always recalls the same attractor, so a "verse" cue reproduces the verse identically every time. Fix: add cue *jitter* (flip a few cue bits), use finite temperature so the network wanders between nearby memories, or use *spurious-state cues* (a blend of two section cues) for variation sections.
+7. **Cue in the wrong basin → wrong section recalled** → if a section cue is too similar to another memory, recall lands in the wrong attractor (the verse cue recalls the chorus). Fix: engineer cues to be *basin-separated* (use the most distinctive fragment of each memory as its cue, verify via one-step recall that each cue settles to its intended memory), and exploit Hamming distance between memories as a measure of cue ambiguity.
+8. **$N$ too small → no capacity for a full piece** → encoding a whole multi-voice section needs $N = V \times (n_{\text{pitch}} + n_{\text{onset}} + n_{\text{vel}})$ units, which can exceed comfortable recall time ($\mathcal{O}(N^2 I)$). Fix: store *short* patterns (one bar, one phrase) and chain them via the cue schedule (each recalled memory seeds the next cue — an associative *sequencing* loop), rather than trying to store the whole piece in one giant pattern.
+
+### **Comparison With Related Methods**
+| Method | Memory / model | Generation = | Storage | Tonal gravity | Output space |
+|---|---|---|---|---|---|
+| 002 Markov | local transition table | stochastic continuation | counts | weak (context) | discrete states |
+| 055 SAMC | arbitrary cost function | stochastic energy descent | none (cost) | strong (weights) | discrete states |
+| 059 ESN-RC | untrained reservoir | decode a trajectory | none (echo states) | weak (fading) | continuous |
+| 046 VAE | continuous latent | sample/interpolate | encoded distribution | variable | continuous |
+| 054 ATS | trained transformer | token-by-token (attention) | learned | variable | discrete tokens |
+| **071 HAM-C** | **associative attractors** | **content-addressable recall** | **Hebbian patterns** | **stored-memory** | **discrete patterns** |
+
+### **References**
+- Little, W. A. (1974). "The existence of persistent states in the brain." *Mathematical Biosciences* 19, 101–120.
+- Hopfield, J. J. (1982). "Neural networks and physical systems with emergent collective computational abilities." *Proceedings of the National Academy of Sciences* 79(8), 2554–2558.
+- Hopfield, J. J. (1984). "Neurons with graded response have collective computational properties like those of two-state neurons." *Proceedings of the National Academy of Sciences* 81(10), 3088–3092.
+- Sherrington, D., & Kirkpatrick, S. (1975). "Solvable model of a spin-glass." *Physical Review Letters* 35(26), 1792–1796.
+- Amit, D. J., Gutfreund, H., & Sompolinsky, H. (1985). "Storing infinite numbers of patterns in a spin-glass model of neural networks." *Physical Review Letters* 55(14), 1530–1533.
+- Storkey, A. (1997). "Increasing the capacity of a Hopfield network without sacrificing functionality." In *Proceedings of ICANN*, 451–456.
+- Ramsauer, H., Schäfl, B., Lehner, J., Seidl, P., Widrich, M., Gruber, L., Holzleitner, M., et al. (2020). "Hopfield Networks is All You Need." *arXiv:2008.02217*.
+- Todd, P. M. (1989). "A Connectionist Approach to Algorithmic Composition." *Computer Music Journal* 13(4), 27–43.
+- Lewis, J. P. (1991). "Creation by refinement and the problem of algorithmic music composition." In *Music and Connectionism*, MIT Press, 212–228.
+- Bharucha, J. J., & Todd, P. M. (1989). "Modeling the perception of tonal structure with neural nets." *Computer Music Journal* 13(4), 44–53.
+

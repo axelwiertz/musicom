@@ -1,0 +1,61 @@
+{
+  "artifact": "080-groove-sieve.mid",
+  "classification": "ai-generated",
+  "generator": "Xenakis Sieve Theory (Method 025, sieve C = A \u2229 B, lcm 56)",
+  "sources": [],
+  "parameters": {
+    "bpm": 110,
+    "key": "G natural minor",
+    "sections": 6,
+    "bars": 24,
+    "phase": "2",
+    "progression": [
+      "i",
+      "III",
+      "iv",
+      "V",
+      "i",
+      "III",
+      "iv",
+      "V",
+      "i",
+      "iv",
+      "V",
+      "i",
+      "i",
+      "V",
+      "i",
+      "VI",
+      "i",
+      "III",
+      "iv",
+      "V",
+      "i",
+      "V",
+      "iv",
+      "i"
+    ],
+    "seed": 20260828,
+    "sieve_A": {
+      "mod": 8,
+      "res": [
+        0,
+        2,
+        5
+      ]
+    },
+    "sieve_B": {
+      "mod": 7,
+      "res": [
+        0,
+        1,
+        4
+      ]
+    }
+  },
+  "notes": "8th-grid locked, chord-tone quantized to G-minor groove progression, sieve-stab horns, voice-leading check, full texture",
+  "sha256": "60ca660d83a606c11ac90a328af55837cb7d885ccb155582c0a99e8254081145",
+  "bytes": 6614,
+  "created_utc": "2026-08-28T23:11:05.479795+00:00",
+  "provenance_version": "1.0"
+}

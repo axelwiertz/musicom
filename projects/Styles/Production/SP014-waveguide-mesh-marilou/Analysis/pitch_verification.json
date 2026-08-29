@@ -1,0 +1,35 @@
+{
+  "mix_harm_energy_D2_8h": 0.0034,
+  "mix_autocorr_frames": "44/45",
+  "mix_autocorr_freqs": [
+    65.6,
+    52.4,
+    74.4,
+    98.0,
+    73.5,
+    87.5,
+    65.4,
+    74.1,
+    73.6,
+    66.0
+  ],
+  "bass_harm_energy_D2_8h": 0.0008,
+  "bass_autocorr_frames": "32/45",
+  "bass_autocorr_freqs": [
+    99.1,
+    99.1,
+    111.1,
+    99.1,
+    99.1,
+    99.1,
+    111.1,
+    99.1,
+    1002.3,
+    1002.3
+  ],
+  "FiddleLead.wav_note_band_conc": 0.7762,
+  "PedalSteel.wav_note_band_conc": 0.6631,
+  "LeadFlute.wav_note_band_conc": 0.6199,
+  "AcGuitar.wav_note_band_conc": 0.5431,
+  "BassBody.wav_note_band_conc": 0.2898
+}

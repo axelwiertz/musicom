@@ -1,0 +1,73 @@
+{
+  "artifact": "/opt/data/projects/Styles/Production/SP014-waveguide-mesh-marilou/Audio/SP014-waveguide-mesh-marilou.wav",
+  "classification": "ai-assisted",
+  "generator": "musicom SP-014 waveguide mesh synthesizer (custom DSP, numpy)",
+  "sources": [
+    "/opt/data/projects/Styles/Country/039-marilou-vacation/marilou_verse_chorus.mid"
+  ],
+  "source_sha256": "93743f64636e88f96c2432ad01a29a1d7fa772b80e474353870c7d9104c26acb",
+  "parameters": {
+    "method": "SP-014",
+    "method_name": "Waveguide Mesh Physical Modeling",
+    "layer": "Synthesis Engines",
+    "target": "Acoustic/Resonant Space Timbre",
+    "sr": 44100,
+    "bpm": 96.0,
+    "tick_seconds": 0.0013020833333333333,
+    "drum_render": "FluidSynth GM TimGM6mb.sf2 (channel 9)",
+    "track_presets": {
+      "4": "FiddleLead",
+      "5": "PedalSteel",
+      "0": "LeadFlute",
+      "1": "AcGuitar",
+      "2": "BassBody"
+    },
+    "mesh_bed": "MeshBed",
+    "mastering": "musicom MasteringChain: StereoImager(1.15) + Limiter(-1.0dB) + LUFS(-14)",
+    "verification": {
+      "duration_s": 22.5,
+      "silence_ratio": 0.0679,
+      "rms_map": [
+        0.1422,
+        0.1526,
+        0.1361,
+        0.1529,
+        0.1399,
+        0.1647,
+        0.1579,
+        0.1436,
+        0.1485,
+        0.1336,
+        0.1616,
+        0.1511,
+        0.1436,
+        0.1545,
+        0.1507,
+        0.152,
+        0.1507,
+        0.1431,
+        0.1521,
+        0.1435,
+        0.0308,
+        0.0009
+      ],
+      "fft_frames_detected": 45,
+      "fft_frames_total": 45,
+      "fft_detect_pct": 100.0,
+      "fft_peak_range_hz": [
+        330.0,
+        786.0
+      ],
+      "fft_median_hz": 440.0,
+      "note_match": 45,
+      "note_match_pct": 100.0,
+      "harmonic_energy_8": 0.0041
+    },
+    "outputs": {
+      "wav": "/opt/data/projects/Styles/Production/SP014-waveguide-mesh-marilou/Audio/SP014-waveguide-mesh-marilou.wav",
+      "ogg": "/opt/data/projects/Styles/Production/SP014-waveguide-mesh-marilou/Audio/SP014-waveguide-mesh-marilou.ogg",
+      "midi": "/opt/data/projects/Styles/Production/SP014-waveguide-mesh-marilou/MIDI/marilou_verse_chorus.mid"
+    }
+  },
+  "created_utc": "2026-08-29T22:08:44.182831+00:00"
+}

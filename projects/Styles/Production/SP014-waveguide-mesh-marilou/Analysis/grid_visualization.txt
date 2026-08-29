@@ -1,0 +1,10 @@
+SP-014 Waveguide Mesh Production - grid visualization
+source: marilou_verse_chorus.mid  bpm: 96.0  duration: 22.5s
+
+Drums_GM         █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ █ ░ ░ ░ ░ ░ ░
+LeadFlute        █ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ░ ░ ░ ░
+AcGuitar         ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ░ ░ ░ ░
+BassBody         █ █ █ █ █ █ █ ▓ █ ▓ █ █ █ █ ▓ ▓ █ ▓ ▓ ▓ ▓ █ █ █ █ █ ▓ ▓ ░ ░ ░ ░
+FiddleLead       █ ▓ ▓ ▓ ▓ ▓ █ ▓ █ █ █ ▓ ▓ ▓ █ █ █ █ ▓ ▓ ▓ █ █ █ █ █ ▓ ▓ ░ ░ ░ ░
+PedalSteel       ▓ ▓ ▓ ▓ ▓ ▓ ▓ █ █ █ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ ▓ █ ▓ ░ ░ ░ ░
+MeshBed          ▓ ░ ░ ▓ ░ ░ ░ ▓ ░ ░ ▓ ░ ░ ░ ▓ ░ ░ ▓ ░ ░ ░ ▓ ░ ░ ▓ ░ ░ ░ ▓ ░ ░ ░

@@ -44,6 +44,12 @@ zero-drift ✓ → MIDI → FluidSynth WAV ✓; RenderPipeline stem label
 `trackXX_Bassoon.wav` ✓ (GM_PROGRAMS[70] = "Bassoon", SF2 preset 70 =
 "Bassoon" — labels match exactly, no quirk).
 
+**Oboe added** (2026-08-29): GM68, woodwind-family double-reed entry
+(instrument.md + oboe.py), verified end-to-end UnitMatrixComposer →
+zero-drift ✓ → MIDI → FluidSynth WAV ✓; RenderPipeline stem label
+`trackXX_Oboe.wav` ✓ (GM_PROGRAMS[68] = "Oboe"; SF2 preset 68 = "Oboe (Orch)"
+— cosmetic suffix only, no routing impact).
+
 ## Python usage
 
 ```python
@@ -75,6 +81,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Brass | French Horn | 60 | 41–84 | harmony, counter, accent, lead |
 | Brass | Tuba | 58 | 26–72 | bass, harmony, accent, rhythm |
 | Woodwind | Flute | 74 | 60–96 | lead, counter, ornament |
+| Woodwind | Oboe | 68 | 52–92 | lead, counter, harmony, accent |
 | Woodwind | Clarinet | 71 | 52–96 | lead, counter, harmony, accent |
 | Woodwind | Bassoon | 70 | 34–88 | bass, harmony, counter, lead |
 | Guitar | Acoustic | 25 | 40–84 | harmony, rhythm, strum |
@@ -96,6 +103,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 58 | Tuba | Tuba ✓ |
 | 60 | French Horn | French Horn ✓ (SF2 preset is "French Horns" plural — cosmetic) |
 | 70 | Bassoon | Bassoon ✓ |
+| 68 | Oboe | Oboe ✓ (SF2 preset is "Oboe (Orch)" — cosmetic suffix only) |
 | 74 | Flute | **Recorder** ✗ |
 | 25 | Acoustic Guitar (nylon) | Acoustic_Guitar_nylon ✓ |
 | ch9/pgm0 | Drums | **Acoustic_Grand_Piano** ✗ (program-0 fallback) |
