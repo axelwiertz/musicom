@@ -36,6 +36,9 @@ _INSTRUMENT_MODULES = {
     "Brass.tuba.tuba": "tuba",
     "Woodwind.flute.flute": "flute",
     "Woodwind.clarinet.clarinet": "clarinet",
+    "Woodwind.oboe.oboe": "oboe",
+    "Woodwind.bassoon.bassoon": "bassoon",
+    "Woodwind.saxophone.saxophone": "saxophone",
     "Guitar.acoustic.acoustic_guitar": "acoustic_guitar",
     "Percussion.drum_kit.drum_kit": "drum_kit",
 }
@@ -120,6 +123,9 @@ FRENCH_HORN = ALL_INSTRUMENTS["french_horn"]
 TUBA = ALL_INSTRUMENTS["tuba"]
 FLUTE = ALL_INSTRUMENTS["flute"]
 CLARINET = ALL_INSTRUMENTS["clarinet"]
+OBOE = ALL_INSTRUMENTS["oboe"]
+BASSOON = ALL_INSTRUMENTS["bassoon"]
+SAXOPHONE = ALL_INSTRUMENTS["saxophone"]
 ACOUSTIC_GUITAR = ALL_INSTRUMENTS["acoustic_guitar"]
 DRUM_KIT = ALL_INSTRUMENTS["drum_kit"]
 

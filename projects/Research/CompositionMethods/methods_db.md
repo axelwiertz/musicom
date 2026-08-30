@@ -78,6 +78,7 @@ Classification of active Musicom composition methods categorized by their primar
 | **069** | Christoffel Word Combinatorial Composition (CWCC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Strict (Mode/Well-Formed) | Grid-Locked | Macro / Word | $\mathcal{O}(N)$ | Generates music from Christoffel words (balanced binary words): the word $C(5,2) =$ `aaabaab` is the Lydian step pattern whose 7 conjugates are the diatonic modes, and every Euclidean rhythm is a Christoffel word over $\{1,0\}$. Sturmian morphisms ($G,D,\widetilde{G},\widetilde{D}$) grow self-similar macro-form (Fibonacci words); Christoffel duality maps the step-pattern word to its fifth/fourth folding word, bridging melody (height) and harmony (width). Balancedness = Myhill's Property + maximal evenness, so scales/rhythms are automatically maximally even. Word-theoretic generalization of 012 Euclidean / 025 Sieve / 019 L-System; deterministic foil to 034 PCFG. |
 | **070** | Coupled Map Lattice Composition (CML-C) | **Nature-Led** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Cluster-sync) | Grid-Locked / Continuous | Meso / Cluster State | $\mathcal{O}(L \cdot T)$ | Generates music from spatiotemporal chaos of a ring of $L$ diffusively coupled logistic maps $x_i(t{+}1)=(1-\varepsilon)f(x_i)+\tfrac{\varepsilon}{2}(f(x_{i-1})+f(x_{i+1}))$. Site state → pitch (folded/scale-quantized), Lyapunov exponent $\lambda$ → rhythmic density, cluster synchronization → harmony/voicing (cluster merge/split = chord change), Kaneko pattern regime (frozen/pattern/turbulent) → macro-form, spatiotemporal fluctuation amplitude → texture. Continuous-state, Nature-Led counterpart to 021 Cellular Automata; spatiotemporal sibling of 043 SATM. |
 | **071** | Hopfield Associative Memory Composition (HAM-C) | **Nature-Led** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Memory-attractor) | Grid-Locked / Continuous | Macro / Attractor | $\mathcal{O}(N^2 \cdot I)$ recall, $\mathcal{O}(P \cdot N^2)$ store | Stores musical patterns (riffs, progressions, grooves) as attractors of a Hopfield spin-glass network via one-shot Hebbian storage; composes by content-addressable recall — a partial cue relaxes by asynchronous threshold updates to a stored memory. Pitch field → melody/voicing, onset field → rhythm, memory identity → harmony (spurious states = passing chords), cue schedule → macro-form, active-unit count → texture. Deterministic associative counterpart to 002 Markov / 055 SAMC; the attractor-memory ancestor of 054 ATS attention. |
+| **072** | Normalizing Flow Composition (NFC) | **AI-Driven** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Condition/Invertible-prior) | Grid-Locked / Continuous | Macro / Latent Trajectory | $\mathcal{O}(K \cdot d)$ pass, $\mathcal{O}(E \cdot B \cdot K \cdot d)$ training | Trains an invertible, exact-likelihood flow $x=f_\theta(z)$ (affine-coupling/Glow) that maps a Gaussian latent space onto the density of symbolic music, then composes by pushing sampled or path-walked latent points through the forward map. Inverse gives every piece a unique latent coordinate; latent trajectory = macro-form, chord conditioning + Gaussian-mixture prior = harmony (HOME/LIFT/TENSE/TURN basins), local Jacobian determinant = rhythm/texture density, per-voice output blocks = voice independence. Exact-likelihood, invertible counterpart to 046 VAE; deterministic-sibling of 047 DSMG. |
 
 # Sound Production Methods Framework
 
@@ -143,6 +144,7 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 | **SP-055** | Frequency Shifting via Hilbert Transform (FSHT) | **Post-Processing / DSP** | Metallic / Inharmonic / Barberpole Timbres | Shifts the entire spectrum by a constant additive offset $f_k \to f_k+\Delta f$ via the analytic-signal (Hilbert transform) phasing method: $y[n]=x[n]\cos(\Delta\omega n)-\hat{x}[n]\sin(\Delta\omega n)$. One-sided (no mirror sideband), unlike ring modulation; breaks harmonic ratios into inharmonicity, unlike ratio-preserving pitch shift. Feedback delay yields endless barberpole/Shepard ascent. Bode 1961 / Stockhausen Klangumwandler lineage. |
 | **SP-056** | Walsh Function Synthesis (Fast Walsh–Hadamard Transform) | **Synthesis Engines** | Reedy / Hollow / Chiptune Square-Wave Timbres | Additive synthesis in the sequency domain: decomposes a periodic waveform into a sum of Walsh functions (binary $\pm1$ square waves) via the Fast Walsh–Hadamard Transform — an $\mathcal{O}(N \log N)$ butterfly with zero multiplications (add/subtract only). Sequency replaces frequency; Beauchamp's brightness $B=\sum n|a_n|/\sum|a_n|$ (the sequency centroid) is a one-knob timbre morph. Multiplier-free resynthesis = phase accumulator + table read. Casio VL-Tone VL-1 lineage. |
 | **SP-057** | Chua's Circuit Chaotic Oscillator Synthesis (CCCOS) | **Synthesis Engines** | Organic Wind / Brass / Percussion / Noise Timbres | Integrates the three Chua double-scroll ODEs ($dx/d\tau=\alpha(y-x-f(x))$, $dy/d\tau=x-y+z$, $dz/d\tau=-\beta y$) at audio rate and emits capacitor voltage $V_1$ as the sample. The scroll-rotation frequency (set by time-rescale $\lambda=f_0/f_{ref}$) is the fundamental; the chaotic attractor supplies subharmonics, 1/f noise, and micro-deviation — the "living" content of real instrument tones. Single chaos knob $G$ (negative conductance) sweeps periodic → period-doubled → double-scroll → noise-dominant. $O(1)$ per sample per voice; the nonlinearity is the generator itself, not a separate exciter. |
+| **SP-058** | Dispersive Waveguide Spring Reverb (DWSR) | **Synthesis Engines** | Physical Spring-Reverb Ambience / Metallic Tail | Models a helical spring tank as a dispersive digital waveguide: a feedback delay line with a cascade of negative-coefficient first-order allpass filters (frequency-dependent phase velocity $c_p\propto\sqrt{\omega}$, low frequencies delayed more) plus a one-pole damping filter. Produces the physical "boing"/"drip" chirp and inharmonic metallic wash of a real Accutronics tank; 2–3 coprime-length springs give the dense, non-flanging tail. Physical-modeling reverb filling the gap between SP-009 (convolutive room IR) and SP-032 (FDN). |
 ---
 
 
@@ -13991,6 +13993,167 @@ def render_chua(f0, fs=44100.0, dur=1.0, chaos=1.0, drive=0.0):
 - Chua, L. O. (2007). "Chua circuit." *Scholarpedia* 2(10), 1488. DOI 10.4249/scholarpedia.1488. (Definitive parameter sets and the double-scroll portrait.)
 - Bader, R. (2013). *Nonlinearities and Synchronization in Musical Acoustics and Music Psychology.* Springer. (Background on nonlinear oscillation as the source of real-instrument timbre, shared with SP-040/SP-052.)
 
+# Dispersive Waveguide Spring Reverb (DWSR) (Method SP-058)
+
+### **Source**
+Spring reverberation is the electromechanical reverb technology of the Hammond organ and the guitar-amplifier era: a helical wire coil (one to three springs per tank) is driven at one end by a magnetic transducer and picked up at the other, so an input signal excites transverse/torsional waves that reflect back and forth along the spring, returning as a dense, ringing, metallic ambience. The first commercial implementation is **Laurens Hammond's "Reverberation Device," U.S. Patent 2,230,836 (filed 1939, granted 1941)** — the spring tank in the Hammond Model A/B organs — and the modern standard is the **Accutronics (Gibbs) Type 4/Type 8/Type 9 tank family** (1958–present). The *physical-modeling* formulation is due to **Vesa Välimäki, Jyri Pakarinen, Cumhur Erkut, and Matti Karjalainen (2006), "Discrete-time modelling of musical instruments," *Reports on Progress in Physics* 69(1), 1–78** (the spring-reverb waveguide section), with the dispersive-stiff-string derivation traceable to **Stefan Bilbao, *Numerical Sound Synthesis* (Wiley, 2009)** and the spring's dispersive allpass approximation refined by **Jonathan S. Abel, David P. Berners, and Julius O. Smith III** in the CCRMA "digital waveguide" corpus. The characteristic *"boing"* chirp — the reason a spring tank sounds nothing like a room — is a direct consequence of the spring's **dispersive** wave equation: high frequencies propagate faster than low frequencies, so a broadband impulse returns as a downward frequency sweep. In the Musicom catalog, SP-058 fills the *physical-modeling reverb* gap: SP-009 convolves a *recorded* room impulse response, SP-032 is an *abstract* feedback-delay-network reverb, but neither reproduces the physically correct, inharmonic, chirping modal structure of a metal spring — the defining timbre of surf-rock guitar, dub, and vintage organ.
+
+### **Description**
+Dispersive Waveguide Spring Reverb (DWSR) is a **Synthesis Engine** that renders an input signal through a physical model of a helical spring tank: each spring is a **dispersive digital waveguide** — a feedback delay line (spring round-trip length) into which is inserted a cascade of **first-order allpass filters** that approximate the spring's frequency-dependent (dispersive) phase velocity, plus a one-pole **low-pass damping filter** for the frequency-dependent decay of real metal. The input signal is injected at the "drive transducer," the dispersive waveguide circulates it with frequency-dependent delay, and per-tap outputs are summed to give the reverberant field. Multiple springs (2–3, as in a real Accutronics tank) with mutually coprime delay lengths provide the uncorrelated modal density that makes the tail smooth and room-like rather than flanging. The **dispersion** — the allpass cascade's frequency-dependent group delay — is what produces the "boing"/"drip" attack transient and the characteristic spring timbre; without it, a spring model degenerates into a boring comb filter. **Complexity**: $\mathcal{O}(M)$ per sample per spring ($M$ = allpass-cascade order, typically 10–20), i.e. $\mathcal{O}(S \cdot M)$ for $S$ springs; memory $\mathcal{O}(L)$ per spring ($L$ = delay length in samples). Real-time for several voices on a single core.
+
+### **Technical Mechanics**
+
+**1. The dispersive stiff-string wave equation.** A helical spring carries transverse (bending) waves that obey a 4th-order PDE combining the spring's restoring stiffness with its bending rigidity — the *dispersive stiff string* equation (a model also shared with piano strings, hence the connection to SP-042 modal banks and SP-048 commuted synthesis):
+
+$$\rho A\,\frac{\partial^2 u}{\partial t^2} = \kappa\,\frac{\partial^2 u}{\partial x^2} - EI\,\frac{\partial^4 u}{\partial x^4},$$
+
+where $u(x,t)$ is transverse displacement, $\rho A$ is mass per unit length, $\kappa$ is the effective torsional/axial stiffness (the "tension" analogue for a coil), and $EI$ is the bending rigidity (Young's modulus $\times$ second moment of area). The wave is *dispersive* because the fourth-order term couples wavenumber to frequency nonlinearly.
+
+**2. Dispersion relation.** Substituting a plane wave $u \propto e^{j(\omega t - kx)}$:
+
+$$\omega^2 = c^2 k^2 + b^2 k^4, \qquad c = \sqrt{\kappa/\rho A},\quad b = \sqrt{EI/\rho A}.$$
+
+Solving for the phase velocity $c_p = \omega/k$:
+
+$$c_p^2(\omega) = \tfrac{1}{2}\Big(c^2 + \sqrt{c^4 + 4\,b^2\omega^2}\Big),$$
+
+which has the two physically meaningful limits:
+- **Low $\omega$** (long wavelengths): $c_p \approx c$ — non-dispersive, like an ideal string.
+- **High $\omega$** (short wavelengths): $c_p \approx \sqrt{b\omega}$ — bending-dominated, *velocity grows with frequency*.
+
+High frequencies therefore traverse the spring *faster* and return *earlier* than low frequencies. The **phase delay** $\tau_p(\omega) = L/c_p(\omega)$ *decreases* with frequency — this is the entire mechanism behind the spring's downward "boing" chirp.
+
+**3. Dispersive allpass approximation.** A digital waveguide (delay line of length $L = f_s \cdot L_{\text{spring}}/c$) propagates all frequencies at one speed, so dispersion is injected as a cascade of $M$ first-order allpass filters with **negative** coefficient $a \in (-1, 0)$:
+
+$$A(z) = \frac{a + z^{-1}}{1 + a\,z^{-1}}.$$
+
+The group delay of one section is
+
+$$\tau_g(\omega) = \frac{1 - a^2}{1 + a^2 + 2a\cos\omega},$$
+
+which for $a < 0$ is *large at low frequency and small at high frequency* — exactly matching the spring's physical dispersion (low frequencies delayed more, high frequencies arrive first). Writing $a = -a_0$ ($a_0 > 0$), the DC-to-Nyquist delay swing per section is
+
+$$\tau_g(0) - \tau_g(\pi) = \frac{1+a_0}{1-a_0} - \frac{1-a_0}{1+a_0} = \frac{4a_0}{1-a_0^2}.$$
+
+The total dispersive delay is the cascade of $M$ sections; $a_0$ (dispersion strength) and $M$ (dispersion order) are the two timbre knobs — more dispersion = a stronger, lower "boing."
+
+**4. The full spring tank topology.** Per spring $s$:
+- A **drive gain** $g_s$ and input tap (the magnetic transducer couples the dry input into the spring).
+- The **dispersive waveguide**: delay line $z^{-L_s}$ (round-trip length) with the allpass cascade $A^M(z)$ inserted in the loop to model dispersion.
+- A **damping filter** in the loop: one-pole low-pass $D(z) = g_d (1-\alpha)/(1-\alpha z^{-1})$ with $0 < \alpha < 1$, giving frequency-dependent decay (high frequencies die faster — real metal is lossy at HF). The loop gain $g_d < 1$ sets the $T_{60}$.
+- **Output taps** at a few positions along the delay line (drive end, mid-spring, pickup end), summed with per-tap gains — a real spring pickup hears a mixture of the circulating field.
+
+The impulse response of one spring is thus an infinite train of increasingly low-pass-filtered, increasingly dispersively-spread echoes: the "boing" chirp on the early returns, melting into a smooth metallic wash on the late returns. With $S = 2$–$3$ springs at coprime lengths ($L_1, L_2, L_3$ chosen to avoid shared resonances), the combined echo density is high enough to read as a reverb rather than a set of discrete delays.
+
+**5. Optional transducer nonlinearity.** Real spring tanks saturate slightly in the magnetic coupling, adding a gentle compression and a touch of second-harmonic "drip" on the attack. Modeled by a mild memoryless saturator $\tanh(\cdot)$ at the drive tap (cf. SP-049 tape saturation for the same idea in a different medium), though it is optional — the linear model already captures the defining timbre.
+
+**Complexity**: per sample, $S \times (M$ allpass sections $+$ 1 damping filter $+$ a few taps$)$. For $S=3$, $M=16$: $\approx$ 51 first-order sections per sample — trivially real-time in NumPy/vectorized or a compiled loop; a full 3-voice UnitMatrix render stays comfortably within budget.
+
+### **Implementation Requirements (Python / NumPy)**
+
+```python
+import numpy as np
+
+def spring_reverb(x, sr=44100, springs=((2203, 0.62, 12), (1789, 0.58, 14), (1511, 0.54, 16)),
+                  drive=0.5, decay=0.75, alpha=0.15, wet=1.0, dry=0.5):
+    """Dispersive waveguide spring reverb (SP-058).
+    springs: list of (delay_len_samples, loop_gain, allpass_order).
+    alpha: one-pole damping coefficient (HF loss). decay: global loop gain.
+    """
+    out = np.zeros_like(x)
+    for L, g_loop, M in springs:
+        buf = np.zeros(L)                     # circulating delay line
+        # per-spring allpass state (negative coeff => dispersion: low freq delayed more)
+        a0 = 0.55                              # dispersion strength in (0,1)
+        ap_x = np.zeros(M); ap_y = np.zeros(M)  # allpass internal states
+        dl = np.zeros(1)                       # damping one-pole state
+        ptr = 0
+        for n in range(len(x)):
+            # read circulating sample (with damping) at delay line output
+            v = g_loop * dl[0]
+            dl[0] += alpha * (buf[ptr] - dl[0])   # one-pole LP damping
+            # drive: inject dry input + feedback
+            s_in = drive * x[n] + v
+            # dispersive allpass cascade (negative coeff)
+            s = s_in
+            for m in range(M):
+                s, ap_x[m], ap_y[m] = (a0*s + ap_x[m]), s, s  # placeholder: see allpass()
+            # simpler explicit per-section:
+            s = s_in
+            for m in range(M):
+                u = s - a0 * ap_x[m]           # allpass: y = a0*x + x_mem - a0*y_mem
+                ap_y[m] = u
+                s = ap_x[m] + a0 * u
+                ap_x[m] = u - a0 * ap_y[m]
+            buf[ptr] = s
+            out[n] += wet * (0.3*buf[(ptr - 0)//1] + 0.5*buf[(ptr - L//3) % L] + 0.7*buf[(ptr - 2*L//3) % L])
+            ptr = (ptr + 1) % L
+    return dry * x + out
+
+# --- Musicom integration sketch (conceptual — engine does the MIDI authoring) ---
+# Render each UnitMatrix voice to a mono dry buffer via any SP-xxx synthesis engine,
+# then run spring_reverb() per voice (its own tank lengths/decay = its spatial/timbre recipe),
+# sum voices, post-process (SP-007 EQ, SP-008 DRC), and optionally spatialize
+# (SP-021/034/043). Fill UnitMatrix cells, validate zero-drift, export via the musicom
+# engine (composer.validate() + composer.to_midi()) per AGENTS.md — never hand-roll mido.
+```
+
+**Tooling**: pure NumPy, vectorizable per spring (the per-sample loop is trivially JIT-compiled with Numba for real-time); no FFT, no convolution, no recorded IR. The musicom engine handles UnitMatrix fill and zero-drift MIDI export upstream; DWSR consumes *rendered audio buffers* (from any SP-xxx voice engine) and returns a reverberant stereo/mono buffer.
+
+### **Musical Elements Framework**
+
+- **PITCH**: DWSR is pitch-*transparent* — it does not alter the fundamental, it only adds the dispersive tail. The pitch content is whatever the dry voice rendered. The only pitch-domain artifact is the *inharmonic chirp* on the attack (the "boing"), which is broadband and transient, not a pitched note. Because the dispersive allpass delays low frequencies relative to high, a fast melodic run is smeared into a shimmering, pitch-ambiguous wash — musically useful for pads and ambience, destructive for precise fast lines (mitigate with a lower $a_0$).
+- **RHYTHM**: The spring's delay lengths ($L_1, L_2, L_3$) are rhythmic *periods* in the tail: a short tank (Accutronics "short" = ~0.8 s) produces a fast, dense decay; a long tank ("long" = ~2.5 s) a slow, spacious one. The early "boing" echoes are discrete rhythm events — with a deliberately *tuned* delay length (e.g. $L = f_s \cdot (60/\text{BPM})$) the spring becomes a syncopated echo with a metallic timbre (classic dub "drip" delay). The chirp spreads each onset into a micro-sweep, softening the grid-lock of 012 Euclidean / 032 isorhythmic material into flow.
+- **HARMONY**: The spring is *inharmonic* by construction (dispersive modes are not integer multiples), so the tail is harmonically "neutral" — it will not reinforce the chord's overtones the way a room reverb does, but it also will not fight the harmony. This makes DWSR the reverb of choice for dense chromatic or dissonant material (it adds shimmer without adding beating), and the wrong choice when a warm, tonal bloom is wanted (use SP-009 convolutive instead). The dispersion parameter $a_0$ tunes how much the tail "detunes" the harmonic spectrum — low $a_0$ = near-harmonic decay, high $a_0$ = pronounced metallic inharmonicity.
+- **STRUCTURE**: Macro-form maps to the **tank recipe per section**. Section A = short, bright spring (fast decay, snappy), Section B = long, dark spring (slow decay, washy), a coda = a second, longer spring layered on for a swelling tail. Because the spring is stateful (the tail from section A *persists into* section B), section joins are naturally *continuous* — the reverberant field carries across the boundary, gluing the form together (a property FDN SP-032 shares, but convolutive SP-009 cannot since it re-triggers the IR per note).
+- **TEXTURE**: The spring tail *is* texture — it fills the gaps between sparse onsets with a continuous metallic wash, directly serving the hybridization rule (011/032 sparse rhythms + a sustained DWSR tail = flowing). The "boing" attack transient is a per-note texture event (a chirp accent), and the per-spring uncorrelated modal density gives the smooth, non-flanging wash that distinguishes a real spring from a comb filter.
+
+### **UnitMatrix Integration (Voices and Sections)**
+
+- **Rows (Voices)**: Each voice $v$ renders its dry buffer through its *own* spring tank instance (its own $S_v$ springs, delay lengths $L_{v,s}$, dispersion $a_{0,v}$, decay $\alpha_v$). Voice 1 (lead) = short bright spring (tight, present); Voice 2 (bass) = dry or very short tank (avoid mud in the low end — real mixes keep bass dry); Voice 3 (pad) = long dark spring (huge wash); Voice 4 (percussion) = medium spring with high dispersion (maximum "drip"/"boing" on hits). Each row renders to a buffer, then summed (or spatialized via SP-021/SP-034/SP-043).
+- **Columns (Sections)**: Each section $s$ prescribes the tank recipe — number of springs, delay lengths, dispersion strength, decay. Columns become a *timbre arc*: A = short/snappy (dry-ish), B = long/washy (wet), A′ = short again but with the B tail ringing through the join (stateful continuity). A dispersion ramp across a section morphs the tail from near-harmonic to metallic without touching the dry signal.
+- **Cells** $U_{v,s}$:
+  - `{PITCH}`: unchanged — DWSR is applied post-render to the cell's audio; the dry pitch content is preserved exactly.
+  - `{RHYTHM}`: the cell's onsets become the spring's excitation points; the tail's echo spacing is set by the tank delay lengths (per-cell `{RHYTHM}` = the chosen $L_{v,s}$ for that section).
+  - `{HARMONY}`: the cell's chord sets the *dry* harmonic content; the spring's dispersion $a_{0,v,s}$ controls how inharmonically the tail smears it.
+  - `{TEXTURE}`: the wet/dry mix and per-cell decay $\alpha_{v,s}$ — sparse cells get a long, wet tail (flow), dense cells get a short, dry tail (clarity).
+- **Mapping Flow**:
+  1. Compose + fill the UnitMatrix; validate zero-drift; export MIDI via the musicom engine (symbolic layer).
+  2. Render each voice's dry audio with its synthesis engine (any SP-xxx).
+  3. Apply DWSR per voice with its tank recipe ($S_v$, $L_{v,s}$, $a_{0,v}$, $\alpha_v$).
+  4. Sum voices; post-process (SP-007 EQ, SP-008 DRC); export audio or spatialize (SP-021/SP-034/SP-043).
+
+### **Pitfalls**
+
+1. **Comb-filter flanging → "metallic tunnel" instead of reverb** → a single spring with no dispersion and no damping is just a comb filter: strong, narrow, harmonically-related resonances that ring and flange. Fix: use $S \ge 2$ springs with *coprime* delay lengths (break the shared resonances), and always keep the damping $\alpha > 0$ so the tail decays smoothly. Verify by inspecting the magnitude spectrum of the impulse response — it should be dense and smooth, not a picket fence.
+2. **Dispersion sign error → wrong chirp direction** → using a *positive* allpass coefficient ($a > 0$) reverses the dispersion (high frequencies delayed more), producing an upward "doink" that sounds nothing like a spring. Fix: use $a \in (-1, 0)$ (negative coefficient) so low frequencies are delayed more, matching the physical stiff-string dispersion $c_p \propto \sqrt{\omega}$.
+3. **Instability / runaway feedback** → if loop gain $g_d$ or the damping coefficient $\alpha$ is mis-tuned (or the allpass coefficient approaches $-1$), the loop can be marginally stable and ring forever (or blow up). Fix: enforce $|g_d| < 1$ strictly (use $g_d \approx 0.6$–$0.85$), keep $\alpha$ modest ($0.05$–$0.4$), and hard-clamp the buffer each sample in a debug build while tuning. Check the impulse response decays to below $-60$ dB within the target $T_{60}$.
+4. **DC / low-frequency buildup → muddy, boomy tail** → the dispersive allpass delays low frequencies *more*, so the low end accumulates in the loop and the tail gets progressively muddier and can develop a slow DC drift. Fix: insert a first-order high-pass (DC blocker) in the loop after the damping filter, and keep bass voices (Voice 2) on a short or bypassed tank.
+5. **Naive taps alias / read stale data** → reading output taps with non-integer or negative indices into the circulating buffer produces clicks or reads uninitialized memory. Fix: keep taps at integer sample offsets modulo $L$, pre-fill the buffer with zeros, and advance the write pointer before reading (or read with explicit wraparound).
+6. **Stateful tail → unpredictable section joins** → because the spring's tail persists across section boundaries, a loud section A leaves a ringing residue that colors the attack of section B (usually desirable, but hard to control precisely). Fix: expose a per-section "dump" (multiply the buffer by a fade factor at a section join) for when a clean break is wanted, and *use* the natural carryover for continuous forms.
+7. **Bass through the spring → mud and pitch smear** → a spring reverb on a bass voice smears low-frequency transients and can create phase cancellation in the low end. Fix: high-pass the reverb *send* (cut below ~150 Hz) or keep the bass voice dry/short-tank; this is also why real dub/production keeps the bass dry and only sends the skank/lead to the spring.
+8. **Cost of per-sample allpass cascades in pure Python** → a naive Python `for` loop over $S \times M$ first-order sections per sample is too slow for long renders. Fix: JIT-compile with Numba, or vectorize across the $M$ sections as a matrix recurrence, or precompute the cascade as a single high-order allpass IIR (biquad/product form) to reduce per-sample cost.
+
+### **Comparison With Related Methods**
+
+| Method | Tail source | Dispersion / chirp | Tonal character | Cost | Stateful carryover |
+|---|---|---|---|---|---|
+| Convolutive reverb (SP-009) | Recorded room IR | None (linear, real-room) | Warm, realistic, tonal | $O(N \log N)$ FFT | No (re-triggers per note) |
+| FDN reverb (SP-032) | Delay network + unitary matrix | None (flat delay) | Smooth, neutral, tail-only | $O(K)$ per sample | Yes |
+| Commuted synthesis (SP-048) | Aggregate excitation + KS loop | None (stiff-string *body* factored) | Plucked/struck *instrument* | $O(1)$ | No |
+| **Spring reverb (SP-058)** | **Dispersive waveguide** | **Physical "boing" chirp ($c_p\propto\sqrt{\omega}$)** | **Metallic, inharmonic, vintage** | **$O(SM)$ per sample** | **Yes** |
+
+### **References**
+
+- Hammond, L. (1941). "Reverberation Device." *U.S. Patent 2,230,836* (filed 1939).
+- Välimäki, V., Pakarinen, J., Erkut, C., & Karjalainen, M. (2006). "Discrete-time modelling of musical instruments." *Reports on Progress in Physics* 69(1), 1–78.
+- Bilbao, S. (2009). *Numerical Sound Synthesis: Finite Difference Schemes and Simulation in Musical Acoustics.* Wiley. (Dispersive stiff-string derivation, shared with SP-042.)
+- Abel, J. S., Berners, D. P., Costello, S., & Smith, J. O. (2006). "Spring reverb emulation using dispersive allpass filters in a waveguide structure." *Audio Engineering Society Convention 121*, preprint 6954.
+- Smith, J. O. (2010). *Physical Audio Signal Processing.* W3K Publishing. (Dispersive waveguide and allpass-approximation background, shared with SP-033/SP-042/SP-048.)
+- Parker, J. (2011). "Spring reverberation: A physical perspective." *Proc. DAFx-11* (perceptual/measurement study of the "boing" chirp).
+
+
+
 # Hopfield Associative Memory Composition (HAM-C) (Method 071)
 
 ### **Source**
@@ -14141,4 +14304,151 @@ def energy(W: np.ndarray, x: np.ndarray, theta: np.ndarray | None = None) -> flo
 - Todd, P. M. (1989). "A Connectionist Approach to Algorithmic Composition." *Computer Music Journal* 13(4), 27–43.
 - Lewis, J. P. (1991). "Creation by refinement and the problem of algorithmic music composition." In *Music and Connectionism*, MIT Press, 212–228.
 - Bharucha, J. J., & Todd, P. M. (1989). "Modeling the perception of tonal structure with neural nets." *Computer Music Journal* 13(4), 44–53.
+
+
+# Normalizing Flow Composition (NFC) (Method 072)
+
+### **Source**
+Normalizing flows originate in **Tabak, E. G., & Vanden-Eijnden, E. (2010), "Density estimation by dual ascent of the log-likelihood," *Communications in Mathematical Sciences* 8(1), 217–233** and **Tabak, E. G., & Turner, C. V. (2013), "A family of nonparametric density estimation algorithms," *Communications on Pure and Applied Mathematics* 66(2), 145–164**, and were named and framed as invertible deep generative models by **Rezende, D. J., & Mohamed, S. (2015), "Variational inference with normalizing flows," *ICML* (PMLR 37, 1530–1538)** and **Dinh, L., Krueger, D., & Bengio, Y. (2015), "NICE: Non-linear Independent Components Estimation," *ICLR Workshop***. The tractable-jacobian architectural family was fixed by **Dinh, L., Sohl-Dickstein, J., & Bengio, S. (2017), "Density estimation using Real NVP," *ICLR*** (affine coupling layers) and **Kingma, D. P., & Dhariwal, P. (2018), "Glow: Generative flow with invertible 1×1 convolutions," *NeurIPS 31***, and unified in the authoritative review **Papamakarios, G., Nalisnick, E., Rezende, D. J., Mohamed, S., & Lakshminarayanan, B. (2021), "Normalizing flows for probabilistic modeling and inference," *Journal of Machine Learning Research* 22(57), 1–64**. The method's musical ancestor is **Todd, P. M. (1989), "A Connectionist Approach to Algorithmic Composition," *Computer Music Journal* 13(4), 27–43**, but NFC uses a **trained, invertible, exact-likelihood** density over symbolic music rather than a sequential network. NFC is the **exact-likelihood, invertible** counterpart to 046 VAE (which is variational, not exact) and the **latent-density-driven** sibling of 047 DSMG (a diffusion is a stochastic ODE whose *reverse* map is a flow; a flow is the deterministic noiseless limit).
+
+### **Description**
+Normalizing Flow Composition generates music by **training an invertible, differentiable transformation $f_\theta$ that maps a simple latent distribution (a Gaussian) onto the observed distribution of musical data, then composing by (a) sampling latent points and pushing them through $f_\theta$, and (b) walking along curated paths in the invertible latent space.** A flow is a chain of bijective layers
+
+$$z_0 \sim p_0(z_0),\qquad z_k = f_k(z_{k-1}),\qquad x = f_K \circ \cdots \circ f_1(z_0),$$
+
+where every $f_k$ is a diffeomorphism with a cheaply computable log-absolute-determinant. Because the map is invertible with the change-of-variables formula
+
+$$p_X(x) = p_0\!\big(f^{-1}(x)\big)\,\Big|\det \frac{\partial f^{-1}}{\partial x}\Big| = p_0(z_0)\,\prod_{k=1}^{K}\Big|\det \frac{\partial f_k}{\partial z_{k-1}}\Big|^{-1},$$
+
+the model is trained by **exact maximum likelihood** (no ELBO, no adversarial loss, no score matching) and — crucially for composition — the map runs in *both* directions: **forward** $z \to x$ generates novel music, and **inverse** $x \to z$ gives every real or generated piece a unique latent coordinate. The four compositional knobs are **(1) the latent space** (Gaussian, or a musically-structured prior like a mixture of section centroids), **(2) the trajectory** (a curated path through latent space whose parameter $t$ indexes time/bar position), **(3) the conditioning** (chord/section/voice labels appended to the latent vector so each flow layer sees them), and **(4) the prior's geometry** (a Gaussian mixture with one component per harmonic function gives latent space a HOME/LIFT/TENSE/TURN topology). Because both directions are exact and cheap, NFC supports *interpolation between real pieces*, *traversal of the learned musical manifold*, and *conditioned generation* all with one object. **Complexity**: forward/inverse pass $\mathcal{O}(K d)$ (affine coupling); Jacobian determinant $\mathcal{O}(d)$ per layer; training $\mathcal{O}(E \cdot B \cdot K \cdot d)$.
+
+### **Musical Elements Framework**
+- **PITCH**: Pitch is a **conditioned output dimension** of the flow. The data vector $x$ is a (bar- or phrase-sized) tensor of per-voice piano-roll / token-one-hot blocks; the flow learns a smooth density over it. Forward generation samples $z \sim p_0$, pushes through $f_\theta$, and threshold/argmaxes the output pitch logits into discrete MIDI/scale-degree events. Pitch *continuity* comes from latent continuity: nearby $z$ values decode to nearby (similar) pitch configurations, so a smooth latent path yields a smooth (conjunct, voice-led) melodic contour. A **multi-scale flow** (successive flow blocks at increasing time resolution) gives hierarchical pitch structure — coarse block = phrase contour, fine block = ornamentation.
+- **RHYTHM**: Rhythm is another output dimension (onset/offset one-hot blocks per time step). Because the flow is a *continuous* map, rhythmic structure is governed by how densely the latent path is sampled: the parameter $t$ along the path indexes time steps, and the local **Jacobian determinant** of the map controls the density of output events (a high-determinant region of the manifold stretches the latent neighborhood → rapid event succession → dense rhythm). A **periodic prior** (wrapped Gaussian over a beat-phase coordinate) injects a metric grid, while a plain Gaussian yields free/continuous rhythm.
+- **HARMONY**: Harmony is enforced by **conditioning and prior geometry**. Chord labels (roman-numeral function, or a one-hot chord symbol) are concatenated to the latent vector before each coupling layer (Real-NVP/Glow conditioning), so the flow learns a *conditional* density $p(x \mid \text{chord})$; generating with a chord-condition sequence $[c_1 \dots c_S]$ walks the piece through the target harmonic progression. A **Gaussian-mixture prior with one component per harmonic function** places HOME/LIFT/TENSE/TURN as distinct latent basins, so the function of each section is a property of *where in latent space it sits*, not of a post-hoc rule.
+- **STRUCTURE**: Macro-form = the **latent trajectory**. Each section $s$ is a latent waypoint $z_s$ (a function centroid); the piece is the curve $z(t) = \mathrm{path}(t)$ interpolating waypoints, and each bar is decoded from $z(t_{\text{bar}})$. A linear interpolation reproduces 046 VAE-LSI's section blend; a spline through function-centroids reproduces functional form; a closed loop (latent $z(t{+}T)=z(t)$) gives rondo/recapitulation. Form becomes an explicit **curve in the learned manifold**, and any property that changes smoothly in latent space (register, density, tension) changes smoothly across the piece.
+- **TEXTURE**: Texture density = the **local Jacobian determinant / output sparsity** at each point of the trajectory (how much the flow stretches or contracts the neighborhood → how many active notes decode). Per-voice texture is achieved by **partitioning the output vector into voice blocks** and using a **multi-head coupling layer** (each voice block gets its own affine scale/shift conditioned on a shared latent — the shared latent encodes the global harmonic context, the per-voice heads encode timbre/register independence). The entropy of the learned density at $z(t)$ measures the "typicality" of that moment's texture (high entropy = novel/orchestral, low entropy = idiomatic/compact).
+
+### **UnitMatrix Integration (Voices & Sections)**
+- **Rows (Voices)**: Each voice $v$ is a **block of the output vector** (a pitch/onset/velocity piano-roll or token slice). A **multi-head conditional flow** decodes all voices from one shared latent $z$ (shared $z$ = vertical harmonic coherence), but gives each voice its own coupling-head (independent scale/shift) so the voices separate into lead / bass / pad roles. Voice independence is a *training-time* objective (penalize cross-voice Jacobian coupling) plus an *architecture* choice (block-diagonal coupling matrices = fully independent voices; full coupling = homophonic blocks). The decoded per-voice blocks fill each row of the UnitMatrix.
+- **Columns (Sections)**: Each section $s$ prescribes a **latent waypoint** $z_s$ and a **condition vector** $c_s$ (chord function, meter, register). The flow decodes $x_s = f_\theta(z_s; c_s)$ into that column's cells. Section A = HOME basin waypoint, Section B = LIFT basin waypoint, etc.; a transition is the interpolated segment $z(s) = (1-\lambda)z_A + \lambda z_B$ decoded at bar-resolution, giving a smooth, voice-led section join with no hard cut. Section duration = number of bars sampled along the path segment.
+- **Cells** $U_{v,s}$:
+  - `{PITCH}`: the decoded pitch block for voice $v$ (argmax/quantized to scale-degree or MIDI pitch), from $f_\theta(z_s; c_s)$ restricted to the $v$-block.
+  - `{RHYTHM}`: the decoded onset/offset block → note-on/off ticks within the cell; dense regions of the trajectory (high Jacobian) → dense onsets.
+  - `{HARMONY}`: the condition vector $c_s$ = the cell's chord/function; the prior component index at $z_s$ = the harmonic-tension label (HOME/LIFT/TENSE/TURN).
+  - `{TEXTURE}`: the number of active output units and the decoded velocity block; the local density $p_X(f_\theta(z_s;c_s))$ = texture typicality.
+- **Mapping Flow**:
+  1. Train (or load) a flow on a corpus of bar/phrase tensors with per-voice blocks and chord conditions; verify the inverse is stable (round-trip $x \approx f_\theta(f_\theta^{-1}(x))$).
+  2. Script the form: choose waypoints $[z_1 \dots z_S]$ (function centroids from the prior) and condition sequence $[c_1 \dots c_S]$.
+  3. For each section, walk the latent path at bar resolution, decode $f_\theta(z(t); c_s)$, quantize to discrete events.
+  4. Fill UnitMatrix cells $U_{v,s}$, validate zero-drift, export via the musicom engine (never hand-roll mido). If a sparse decoding is staccato, honor the hybridization rule — layer a continuous fill voice (026 DPSM arpeggio or sustained pad) decoded from a *slow* latent path segment.
+
+### **Technical Mechanics**
+**Architecture.** The canonical building block is the **affine coupling layer** (Real-NVP): split the input $z$ into two halves $(z_a, z_b)$; keep $z_a$ fixed and transform the other half by an affine map whose parameters are an arbitrary (uninverted) network of the fixed half,
+$$y_a = z_a,\qquad y_b = z_b \odot \exp\!\big(s(z_a; c)\big) + t(z_a; c),$$
+so the Jacobian is triangular with $\log|\det| = \sum s(z_a; c)$, and the inverse is explicit (subtract then divide). **Glow** adds invertible $1\times1$ convolutions and activation normalization between coupling layers so all dimensions mix. A **multi-scale** (squeeze) stack downsamples time resolution between blocks, giving hierarchical phrase structure. Conditioning $c$ is concatenated to the conditioning network's input.
+
+**Latent geometry.** The prior $p_0$ is a Gaussian (continuous, unstructured) or a **Gaussian mixture** with components placed at harmonic-function centroids (learned via the flow's exact likelihood, or fixed by $k$-means on the inverse-encoded training set). Because $f_\theta^{-1}$ is exact, every piece has a *unique* latent coordinate, so the manifold's topology is directly inspectable: component means = section archetypes, component covariances = within-section variation, distances = style/harmony proximity.
+
+**Interpolation vs. sampling.** Interpolating two pieces in *data* space is musically meaningless (mixtures of piano rolls); interpolating in *latent* space is meaningful because the flow guarantees both endpoints and the path lie on the learned musical manifold. The trajectory $z(t)$ is therefore the composition's spine, and every musical attribute (pitch contour, register, density, function) varies continuously along it.
+
+**Exact likelihood = exact tension.** The learned log-density $\log p_X(x)$ is computable exactly for any generated bar; it doubles as a *fitness/tension score* (idiomatic material sits at high density, novel/unusual material at low density), so tension arcs can be drawn by scheduling the trajectory to pass through low-density (surprising) and high-density (resolving) regions.
+
+**Complexity**: one forward/inverse pass $\mathcal{O}(K d)$ where $K$ = number of coupling layers and $d$ = data dimension; log-determinant $\mathcal{O}(d)$ per layer (affine coupling) vs. $\mathcal{O}(d^3)$ for a dense Jacobian. Training $\mathcal{O}(E \cdot B \cdot K \cdot d)$ per epoch. Memory $\mathcal{O}(d)$ (activations recomputed during inverse — no stored graph).
+
+### **Implementation Requirements (Python / PyTorch)**
+```python
+from __future__ import annotations
+import torch, torch.nn as nn, torch.nn.functional as F
+
+class AffineCoupling(nn.Module):
+    """Real-NVP affine coupling layer with conditioning vector c."""
+    def __init__(self, d: int, hid: int, cond_dim: int = 0):
+        super().__init__()
+        self.net = nn.Sequential(
+            nn.Linear(d // 2 + cond_dim, hid), nn.ReLU(),
+            nn.Linear(hid, hid), nn.ReLU(),
+            nn.Linear(hid, d),  # d outputs: d/2 log-scale + d/2 shift
+        )
+    def forward(self, x: torch.Tensor, c: torch.Tensor | None = None, reverse: bool = False):
+        xa, xb = x.chunk(2, dim=-1)
+        h = torch.cat([xa, c], dim=-1) if c is not None else xa
+        out = self.net(h)
+        log_s, t = out.chunk(2, dim=-1)
+        log_s = torch.tanh(log_s)  # stabilize
+        if not reverse:
+            yb = xb * log_s.exp() + t
+            logdet = log_s.sum(dim=-1)
+            return torch.cat([xa, yb], dim=-1), logdet
+        else:
+            xb_ = (xb - t) * (-log_s).exp()
+            return torch.cat([xa, xb_], dim=-1), (-log_s).sum(dim=-1)
+
+class Flow(nn.Module):
+    """K stacked coupling layers; forward z->x, inverse x->z, exact log-density."""
+    def __init__(self, d: int, K: int = 8, hid: int = 256, cond_dim: int = 0):
+        super().__init__()
+        self.layers = nn.ModuleList([AffineCoupling(d, hid, cond_dim) for _ in range(K)])
+    def _run(self, x: torch.Tensor, c: torch.Tensor | None, reverse: bool):
+        logdet = torch.zeros(x.shape[0], device=x.device)
+        for layer in self.layers:
+            x, ld = layer(x, c, reverse=reverse)
+            logdet = logdet + ld
+        return x, logdet
+    def log_prob(self, x: torch.Tensor, c: torch.Tensor | None = None) -> torch.Tensor:
+        z, logdet = self._run(x, c, reverse=True)
+        prior = -0.5 * (z * z).sum(dim=-1) - 0.5 * z.shape[-1] * torch.log(torch.tensor(2 * torch.pi))
+        return prior + logdet
+    def sample(self, n: int, c: torch.Tensor | None = None, seed: int = 0) -> torch.Tensor:
+        g = torch.Generator().manual_seed(seed)
+        z = torch.randn(n, self.layers[0].net[0].in_features * 2, generator=g)
+        x, _ = self._run(z, c, reverse=False)
+        return x
+
+# --- Musicom integration sketch (conceptual — engine does the MIDI authoring) ---
+# model = Flow(d=num_voices * (n_pitch + n_onset + n_vel), K=8, cond_dim=n_chord)
+# model.load_state_dict(torch.load("flow_music.pt"))          # trained on corpus bars
+# zA, zB = flow_waypoints(prior, "HOME"), flow_waypoints(prior, "LIFT")   # section centroids
+# for s, (z_start, z_end, c_s) in enumerate(zip(waypoints, waypoints[1:], chords)):
+#     for lam in torch.linspace(0, 1, bars_per_section):
+#         z = (1 - lam) * z_start + lam * z_end                  # latent path = form
+#         x = model.sample_latent(z, c_s)                        # decode bar
+#         decoded = quantize(x)                                  # per-voice pitch/onset/velocity
+#         for v in range(num_voices):                            # route into UnitMatrix row v
+#             composer.fill_voice_section(voice=v, section=s, create_note_unit(pitch, dur, tick))
+# ok, msg = composer.validate()   # MUST be True before to_midi (per AGENTS.md — never hand-roll mido)
+```
+
+**Tooling**: PyTorch for the flow (or a JAX/`distrax`/`nflows` implementation); a CPU is sufficient for small corpora, a GPU for Glow-scale models. The musicom engine handles UnitMatrix fill and zero-drift MIDI export upstream; NFC emits the symbolic pitch/onset/velocity data that fills each cell.
+
+### **Pitfalls**
+1. **Determinant blow-up → unstable generation** → a coupling layer whose scale network outputs large $s$ makes $\log|\det|$ explode (NaN likelihood, runaway outputs). Fix: `tanh`-clamp the log-scale to a bounded range, use activation normalization (Glow's actnorm) so activations stay zero-mean/unit-variance, and gradient-clip during training.
+2. **One flow, one bar → no long-range structure** → a flow over single-bar tensors cannot itself generate coherent multi-bar form (each bar is i.i.d. given its latent point). Fix: treat the *form* as the primary object — the latent trajectory $z(t)$ (spline/loop through function centroids) carries the long-range structure; the flow only decodes each point into a bar. Do not expect the flow to invent the form on its own.
+3. **Discretization of a continuous output → blurry/off-grid notes** → the flow outputs continuous logits/probabilities; a naive argmax yields staccato or out-of-scale notes. Fix: post-process with 022 MCWS quantization (snap to scale/MIDI grid), or train with a **dequantization** scheme (add uniform noise to the data during training) so the learned density is over the continuous relaxation and decoding is stable.
+4. **Posterior/topology mismatch → latent interpolation crosses empty regions** → linear interpolation in latent space can pass through low-density "off-manifold" regions, decoding to musically incoherent bars. Fix: interpolate along a **geodesic of the learned metric** (pullback metric $G(z) = J_f^\top J_f$), or use a spline through function centroids, or a Gaussian-mixture prior whose component means define valid waypoints.
+5. **Invertibility breaks silently → inverse ≠ forward** → if coupling/actnorm layers aren't exactly invertible (e.g. a `tanh` applied to the *whole* output, not just the scale), round-trip $f_\theta(f_\theta^{-1}(x)) \neq x$ and generation degrades. Fix: unit-test round-trip error ($\|x - f(f^{-1}(x))\| < 10^{-5}$) after every architectural change; only ever transform the *unchanged* half with invertible affine maps.
+6. **Condition collapse → all chords sound the same** → if the conditioning vector $c$ is weak relative to the latent prior, the flow ignores it and every section decodes to the same chord. Fix: strengthen conditioning (concatenate $c$ to *every* coupling layer, not just the first), use a conditional prior $p_0(z \mid c)$, and verify by decoding the same $z$ under two different $c$ and checking the outputs differ.
+7. **Sparse/staccato decoding** → thresholding continuous logits to one-hot yields sparse, gap-filled textures (the same "staccato not flowing" failure as 011/032). Fix: honor the hybridization rule — layer a continuous fill voice (026 DPSM arpeggios or a sustained pad) decoded from a *slow*, high-determinant latent path segment; or use a **legato decode** (offset of each note = onset of the next).
+8. **Cost of dense Jacobians → intractable for large $d$** → if you use a naive fully-connected bijective layer instead of affine coupling, $\log|\det|$ costs $\mathcal{O}(d^3)$, which is prohibitive for multi-voice bar tensors. Fix: always use affine coupling (triangular Jacobian, $\mathcal{O}(d)$ determinant) or invertible convolutions; reserve dense flows for tiny $d$.
+
+### **Comparison With Related Methods**
+| Method | Density model | Generation = | Latent structure | Tonal gravity | Output space |
+|---|---|---|---|---|---|
+| 046 VAE | variational (ELBO) | sample + decode | learned Gaussian | variable | continuous→quantized |
+| 047 DSMG | score function | iterative denoise | no explicit latent | variable | continuous→quantized |
+| 054 ATS | autoregressive (exact) | token-by-token | none (context) | variable | discrete tokens |
+| 059 ESN-RC | none (reservoir) | decode trajectory | echo state | weak | continuous |
+| 060 S4SC | SSM likelihood | token-by-token | state-space | variable | discrete tokens |
+| **072 NFC** | **exact (change-of-vars)** | **push-forward / latent path** | **invertible, inspectable** | **condition + prior geometry** | **continuous→quantized** |
+
+### **References**
+- Tabak, E. G., & Vanden-Eijnden, E. (2010). "Density estimation by dual ascent of the log-likelihood." *Communications in Mathematical Sciences* 8(1), 217–233.
+- Tabak, E. G., & Turner, C. V. (2013). "A family of nonparametric density estimation algorithms." *Communications on Pure and Applied Mathematics* 66(2), 145–164.
+- Rezende, D. J., & Mohamed, S. (2015). "Variational inference with normalizing flows." *Proceedings of ICML* 37, 1530–1538.
+- Dinh, L., Krueger, D., & Bengio, Y. (2015). "NICE: Non-linear Independent Components Estimation." *ICLR Workshop*.
+- Dinh, L., Sohl-Dickstein, J., & Bengio, S. (2017). "Density estimation using Real NVP." *ICLR*.
+- Kingma, D. P., & Dhariwal, P. (2018). "Glow: Generative flow with invertible 1×1 convolutions." *Advances in Neural Information Processing Systems* 31.
+- Papamakarios, G., Nalisnick, E., Rezende, D. J., Mohamed, S., & Lakshminarayanan, B. (2021). "Normalizing flows for probabilistic modeling and inference." *Journal of Machine Learning Research* 22(57), 1–64.
+- Todd, P. M. (1989). "A Connectionist Approach to Algorithmic Composition." *Computer Music Journal* 13(4), 27–43.
+
 

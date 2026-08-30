@@ -1,0 +1,18 @@
+{
+  "artifact": "081-funk-schillinger.ogg",
+  "classification": "ai-generated",
+  "generator": "FluidSynth CLI (SP-001) render",
+  "sources": [],
+  "parameters": {
+    "bpm": 100,
+    "key": "Bb major",
+    "phase": "2",
+    "soundfont": "TimGM6mb.sf2",
+    "gain": 1.2
+  },
+  "notes": "Opus (voip 48k) of full mix",
+  "sha256": "ca9dfd701eb421af1fad5da2ad6f7f35393d30689480cc4701c954c31c647823",
+  "bytes": 443313,
+  "created_utc": "2026-08-29T23:10:16.427320+00:00",
+  "provenance_version": "1.0"
+}

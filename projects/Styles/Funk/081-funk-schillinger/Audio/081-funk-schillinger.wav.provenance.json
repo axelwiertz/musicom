@@ -1,0 +1,18 @@
+{
+  "artifact": "081-funk-schillinger.wav",
+  "classification": "ai-generated",
+  "generator": "FluidSynth CLI (SP-001) render",
+  "sources": [],
+  "parameters": {
+    "bpm": 100,
+    "key": "Bb major",
+    "phase": "2",
+    "soundfont": "TimGM6mb.sf2",
+    "gain": 1.2
+  },
+  "notes": "FluidSynth CLI render (TimGM6mb.sf2, -g 1.2) of rules-processed MIDI",
+  "sha256": "9103140251788932274b83dff16d167427967e3f389a3c146ef1e3422ec8719f",
+  "bytes": 10611500,
+  "created_utc": "2026-08-29T23:10:16.426589+00:00",
+  "provenance_version": "1.0"
+}

@@ -50,6 +50,13 @@ zero-drift ✓ → MIDI → FluidSynth WAV ✓; RenderPipeline stem label
 `trackXX_Oboe.wav` ✓ (GM_PROGRAMS[68] = "Oboe"; SF2 preset 68 = "Oboe (Orch)"
 — cosmetic suffix only, no routing impact).
 
+**Saxophone added** (2026-08-30): GM65, woodwind-family single-reed entry
+(instrument.md + saxophone.py), verified end-to-end UnitMatrixComposer →
+zero-drift ✓ → MIDI → FluidSynth WAV ✓; RenderPipeline stem label
+`trackXX_Alto_Sax.wav` ✓ (GM_PROGRAMS[65] = "Alto Sax" — labeled "Alto_Sax",
+NOT "Saxophone"; SF2 preset 65 = "AltoSax (TB) v2.3" — cosmetic suffix only,
+no routing impact).
+
 ## Python usage
 
 ```python
@@ -83,6 +90,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Woodwind | Flute | 74 | 60–96 | lead, counter, ornament |
 | Woodwind | Oboe | 68 | 52–92 | lead, counter, harmony, accent |
 | Woodwind | Clarinet | 71 | 52–96 | lead, counter, harmony, accent |
+| Woodwind | Alto Saxophone | 65 | 49–88 | lead, counter, accent, harmony |
 | Woodwind | Bassoon | 70 | 34–88 | bass, harmony, counter, lead |
 | Guitar | Acoustic | 25 | 40–84 | harmony, rhythm, strum |
 | Percussion | Drum Kit | ch9 | 35–81 | rhythm, groove, accent |
@@ -104,6 +112,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 60 | French Horn | French Horn ✓ (SF2 preset is "French Horns" plural — cosmetic) |
 | 70 | Bassoon | Bassoon ✓ |
 | 68 | Oboe | Oboe ✓ (SF2 preset is "Oboe (Orch)" — cosmetic suffix only) |
+| 65 | Alto Sax (correct GM) | **Alto_Sax** (labeled "Alto Sax", not "Saxophone") |
 | 74 | Flute | **Recorder** ✗ |
 | 25 | Acoustic Guitar (nylon) | Acoustic_Guitar_nylon ✓ |
 | ch9/pgm0 | Drums | **Acoustic_Grand_Piano** ✗ (program-0 fallback) |

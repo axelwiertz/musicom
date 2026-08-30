@@ -1,0 +1,18 @@
+{
+  "artifact": "081-funk-schillinger-phase1.wav",
+  "classification": "ai-generated",
+  "generator": "FluidSynth CLI (SP-001) render",
+  "sources": [],
+  "parameters": {
+    "bpm": 100,
+    "key": "Bb major",
+    "phase": "1",
+    "soundfont": "TimGM6mb.sf2",
+    "gain": 1.2
+  },
+  "notes": "FluidSynth CLI render (TimGM6mb.sf2, -g 1.2) of raw Schillinger draft",
+  "sha256": "8231873708f22319342908101d03e668f7f9184cc844878442ada468a140d61a",
+  "bytes": 10609708,
+  "created_utc": "2026-08-29T23:10:16.435727+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,136 @@
+{
+  "job": "SP-036 production pass (cron)",
+  "source_midi": "/opt/data/projects/Styles/Classical/033-wagner-study-v2/midi/wagner_poly.mid",
+  "source_midi_sha256": "7e41798ee0a102582149eab9db43c5697f7da983042af19316856078766a153f",
+  "production_method": "SP-036",
+  "production_method_name": "Pulsar Synthesis (Curtis Roads)",
+  "source_composition": "033-wagner-study-v2 (4-voice chromatic chorale, A minor center, 120 BPM, 16 bars)",
+  "voice_mapping": "by track index (all tracks GM program 0)",
+  "parameters": {
+    "sample_rate": 44100,
+    "seed": 20260830,
+    "peak": 0.89,
+    "post": {
+      "highpass_hz": 20,
+      "lowpass_hz": 16000
+    },
+    "per_voice": {
+      "0": {
+        "ff_ratio": 3.0,
+        "duty": 0.5,
+        "carrier": "sine",
+        "envelope": "hann",
+        "gain": 0.5
+      },
+      "1": {
+        "ff_ratio": 4.0,
+        "duty": 0.42,
+        "carrier": "sine",
+        "envelope": "gaussian",
+        "gain": 0.3
+      },
+      "2": {
+        "ff_ratio": 2.0,
+        "duty": 0.55,
+        "carrier": "saw",
+        "envelope": "hann",
+        "gain": 0.35
+      },
+      "3": {
+        "ff_ratio": 1.0,
+        "duty": 0.9,
+        "carrier": "saw",
+        "envelope": "decay",
+        "gain": 0.55
+      }
+    },
+    "adsr": {
+      "attack_s": 0.015,
+      "release_s": 0.09
+    },
+    "carrier_phase": "continuous accumulation, zero-aligned per pulsaret"
+  },
+  "outputs": {
+    "full_mix_wav": "/opt/data/projects/Styles/Production/SP036-pulsar-wagner-chorale/Audio/SP036-pulsar-wagner-chorale.wav",
+    "full_mix_ogg": "/opt/data/projects/Styles/Production/SP036-pulsar-wagner-chorale/Audio/SP036-pulsar-wagner-chorale.ogg",
+    "stems": {
+      "Soprano (Lead)": "/opt/data/projects/Styles/Production/SP036-pulsar-wagner-chorale/Audio/stems/stem_soprano.wav",
+      "Alto (Pad)": "/opt/data/projects/Styles/Production/SP036-pulsar-wagner-chorale/Audio/stems/stem_alto.wav",
+      "Tenor (Inner)": "/opt/data/projects/Styles/Production/SP036-pulsar-wagner-chorale/Audio/stems/stem_tenor.wav",
+      "Bass": "/opt/data/projects/Styles/Production/SP036-pulsar-wagner-chorale/Audio/stems/stem_bass.wav"
+    },
+    "midi": "/opt/data/projects/Styles/Production/SP036-pulsar-wagner-chorale/MIDI/SP036-pulsar-wagner-chorale.mid"
+  },
+  "verification": {
+    "notes_parsed": 64,
+    "notes_synthesized": 64,
+    "duration_sec": 32.5,
+    "silence_ratio": 0.022,
+    "rms_per_second": [
+      0.17461,
+      0.15603,
+      0.15711,
+      0.15745,
+      0.15426,
+      0.14974,
+      0.18991,
+      0.15416,
+      0.16561,
+      0.18086,
+      0.17105,
+      0.17226,
+      0.17022,
+      0.17117,
+      0.18244,
+      0.19186,
+      0.1627,
+      0.16935,
+      0.151,
+      0.15351,
+      0.17479,
+      0.1543,
+      0.16873,
+      0.18229,
+      0.16003,
+      0.16735,
+      0.17254,
+      0.16607,
+      0.17132,
+      0.17452,
+      0.16642,
+      0.17627
+    ],
+    "pitch_frames_detected": 64,
+    "pitch_range_hz": [
+      88.0,
+      988.0
+    ],
+    "pitch_median_hz": 110.0,
+    "per_voice_harmonic_sum": {
+      "Soprano (Lead)": {
+        "best_f0_hz": 54.0,
+        "nearest_midi": 32.7,
+        "harmonic_energy_ratio_8h": 0.0004,
+        "verdict": "CHECK"
+      },
+      "Alto (Pad)": {
+        "best_f0_hz": 828.0,
+        "nearest_midi": 79.9,
+        "harmonic_energy_ratio_8h": 0.0037,
+        "verdict": "CHECK"
+      },
+      "Tenor (Inner)": {
+        "best_f0_hz": 831.0,
+        "nearest_midi": 80.0,
+        "harmonic_energy_ratio_8h": 0.0105,
+        "verdict": "CHECK"
+      },
+      "Bass": {
+        "best_f0_hz": 555.0,
+        "nearest_midi": 73.0,
+        "harmonic_energy_ratio_8h": 0.0184,
+        "verdict": "CHECK"
+      }
+    }
+  }
+}

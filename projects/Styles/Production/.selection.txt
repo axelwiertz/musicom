@@ -1,2 +1,2 @@
-/opt/data/projects/Styles/Country/039-marilou-vacation/marilou_verse_chorus.mid
-SP-014
+/opt/data/projects/Styles/Classical/033-wagner-study-v2/midi/wagner_poly.mid
+SP-036

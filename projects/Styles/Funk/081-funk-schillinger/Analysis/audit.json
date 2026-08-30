@@ -1,0 +1,62 @@
+{
+  "prog56": {
+    "n_onsets": 203,
+    "n_total_onsets": 203,
+    "off16": 0,
+    "off8": 98,
+    "is_percussion": false,
+    "out_of_scale": 0,
+    "out_of_chord": 0,
+    "out_of_chord_examples": []
+  },
+  "prog4": {
+    "n_onsets": 96,
+    "n_total_onsets": 96,
+    "off16": 0,
+    "off8": 0,
+    "is_percussion": false,
+    "out_of_scale": 0,
+    "out_of_chord": 0,
+    "out_of_chord_examples": []
+  },
+  "prog27": {
+    "n_onsets": 80,
+    "n_total_onsets": 80,
+    "off16": 0,
+    "off8": 8,
+    "is_percussion": false,
+    "out_of_scale": 0,
+    "out_of_chord": 0,
+    "out_of_chord_examples": []
+  },
+  "prog33": {
+    "n_onsets": 104,
+    "n_total_onsets": 104,
+    "off16": 0,
+    "off8": 8,
+    "is_percussion": false,
+    "out_of_scale": 0,
+    "out_of_chord": 0,
+    "out_of_chord_examples": []
+  },
+  "prog7": {
+    "n_onsets": 32,
+    "n_total_onsets": 32,
+    "off16": 0,
+    "off8": 0,
+    "is_percussion": false,
+    "out_of_scale": 0,
+    "out_of_chord": 0,
+    "out_of_chord_examples": []
+  },
+  "prog0": {
+    "n_onsets": 0,
+    "n_total_onsets": 296,
+    "off16": 0,
+    "off8": 0,
+    "is_percussion": true,
+    "out_of_scale": 0,
+    "out_of_chord": 0,
+    "out_of_chord_examples": []
+  }
+}
