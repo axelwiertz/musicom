@@ -1,0 +1,77 @@
+{
+  "artifact": "pop-C-42.mid",
+  "classification": "ai-assisted",
+  "generator": "workflows.paths.compose_middle_out(style=pop, seed=42)",
+  "sources": [
+    "style:pop",
+    "key:C",
+    "progression:['I', 'V', 'vi', 'IV']",
+    "path:C",
+    "chain:012,018,001,023,002"
+  ],
+  "parameters": {
+    "seed": 42,
+    "bpm": 120,
+    "form": [
+      [
+        "Intro",
+        4
+      ],
+      [
+        "Verse",
+        8
+      ],
+      [
+        "Chorus",
+        8
+      ],
+      [
+        "Bridge",
+        4
+      ],
+      [
+        "Outro",
+        4
+      ]
+    ],
+    "progression": [
+      "I",
+      "V",
+      "vi",
+      "IV"
+    ],
+    "path": "C",
+    "chain": [
+      [
+        "L3",
+        "012",
+        "Euclidean Groove Locking \u2014 anchor rhythm"
+      ],
+      [
+        "L3",
+        "018",
+        "Schillinger Resultants \u2014 groove variation"
+      ],
+      [
+        "L4",
+        "001",
+        "Skeleton-First \u2014 form around the anchor"
+      ],
+      [
+        "L2",
+        "023",
+        "Tendency Masking \u2014 melodic line above"
+      ],
+      [
+        "L1",
+        "002",
+        "Markov Transitions \u2014 micro-fill transitions"
+      ]
+    ]
+  },
+  "notes": "",
+  "sha256": "0bf18eada2d5c957c147fce0e8f1234b0e5f5e18b948b1ddb8316974736d4166",
+  "bytes": 5357,
+  "created_utc": "2026-08-31T15:43:12.638535+00:00",
+  "provenance_version": "1.0"
+}
