@@ -196,6 +196,12 @@ class PhaseModSynth:
         
         output *= envelope * volume
         
+        # Remove DC offset. Phase-modulating an asymmetric carrier (triangle,
+        # saw) introduces a DC bias that produces a thump at each note onset.
+        # This was audible as a "click/clunk" on bassoon (triangle carrier)
+        # and oboe. Subtracting the mean is cheap and eliminates the artifact.
+        output -= output.mean()
+        
         return output.astype(np.float32)
     
     def render_melody(self, 

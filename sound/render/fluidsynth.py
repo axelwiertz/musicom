@@ -3,9 +3,45 @@
 Wraps the fluidsynth CLI to render MIDI files to audio.
 """
 
+import glob
 import subprocess
 import os
 from typing import Optional
+
+# SoundFont discovery — prefer the best available, fall back to TimGM6mb.
+# FluidR3_GM.sf2 (141MB) has proper woodwind/brass/strings patches; the
+# bundled TimGM6mb (~6MB) is a minimal GM set whose oboe/bassoon/flute
+# patches are thin and buzzy. If a larger GM set is present, use it.
+_SOUNDFONT_CANDIDATES = [
+    "/opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2",
+    "/opt/data/soundfonts/FluidR3_GM.sf2",
+    "/usr/share/sounds/sf2/FluidR3_GM.sf2",
+    "/usr/share/sounds/sf2/FluidR3_GM.sf2",
+    "/usr/share/sounds/sf3/FluidR3_GM.sf3",
+]
+
+
+def discover_soundfont(prefer: Optional[str] = None) -> Optional[str]:
+    """Return the best available SoundFont path, or None if none found.
+
+    Order: explicit `prefer` arg → FluidR3 candidates → any TimGM6mb on disk.
+    """
+    if prefer and os.path.exists(prefer):
+        return prefer
+    for p in _SOUNDFONT_CANDIDATES:
+        if os.path.exists(p):
+            return p
+    # fall back to the bundled minimal GM set (pretty_midi ships TimGM6mb)
+    for pat in (
+        "/opt/data/micromamba/envs/musicom/**/TimGM6mb.sf2",
+        "/opt/data/.local/**/TimGM6mb.sf2",
+        "/usr/share/sounds/sf2/TimGM6mb.sf2",
+        "/usr/share/sounds/sf3/TimGM6mb.sf3",
+    ):
+        hits = glob.glob(pat, recursive=True)
+        if hits:
+            return hits[0]
+    return None
 
 
 class FluidSynthRenderer:

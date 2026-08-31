@@ -51,6 +51,7 @@ from pathlib import Path
 from structures import MidiInstrument, MidiPercussion
 from workflows.unitmatrix_composer import UnitMatrixComposer, create_note_unit
 from workflows.provenance import write_provenance
+from sound.render.fluidsynth import discover_soundfont
 
 # --- instruments (Phase 1b: real Instrument objects) ------------------------
 _INSTR_DIR = "/opt/data/projects/Instruments"
@@ -421,14 +422,9 @@ def _produce_fluidsynth(midi_path, out_dir, base, sr):
     wav_path = out_dir / f"{base}.wav"
     ogg_path = out_dir / f"{base}.ogg"
     pyenv = "/opt/data/micromamba/envs/musicom/bin"
-    sf = "/opt/data/micromamba/envs/musicom/share/soundfonts/TimGM6mb.sf2"
-    if not os.path.exists(sf):
-        # fall back to any sf2 in the env
-        import glob
-        cands = glob.glob("/opt/data/micromamba/envs/musicom/**/TimGM6mb.sf2", recursive=True)
-        if not cands:
-            raise FileNotFoundError("TimGM6mb.sf2 not found")
-        sf = cands[0]
+    sf = discover_soundfont()
+    if not sf:
+        raise FileNotFoundError("No SoundFont found — install FluidR3_GM.sf2 or TimGM6mb.sf2")
     r = subprocess.run(
         [f"{pyenv}/fluidsynth", "-ni", "-g", "1.2", "-F", str(wav_path), sf, midi_path],
         capture_output=True, text=True)

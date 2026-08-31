@@ -10,7 +10,7 @@ If this file and README/QUICK_REFERENCE disagree, this file wins.
 | Python env | `/opt/data/micromamba/envs/musicom/bin/python` |
 | Package | `musicom` 0.1.0, installed **editable** (`pip install -e ".[dev]"`) |
 | Repo root | `/opt/data/repos/musicom` |
-| SoundFont | `TimGM6mb.sf2` (via `/opt/data/micromamba/envs/musicom/bin/fluidsynth`) |
+| SoundFont | `FluidR3_GM.sf2` (preferred) or `TimGM6mb.sf2` (fallback) via `discover_soundfont()` |
 
 ## Import rules (do not guess)
 
@@ -86,9 +86,15 @@ reports "Track length mismatch", pad the shorter units — see
 
 ```bash
 PY=/opt/data/micromamba/envs/musicom/bin
-$PY/fluidsynth -ni -g 1.2 -F out.wav TimGM6mb.sf2 out.mid   # -g 1.2 prevents tail truncation
+$PY/fluidsynth -ni -g 1.2 -F out.wav FluidR3_GM.sf2 out.mid   # -g 1.2 prevents tail truncation
 ffmpeg -y -i out.wav out.ogg
 ```
+
+SoundFont preference (auto-resolved by `discover_soundfont()`):
+1. `FluidR3_GM.sf2` (141 MB, proper woodwind/brass/strings — the default)
+2. `TimGM6mb.sf2` (6 MB minimal GM set — thin/buzzy oboe, bassoon, flute;
+   fallback only). Never hardcode TimGM6mb in new code; call
+   `from sound.render.fluidsynth import discover_soundfont`.
 
 ## Output location (hard rule)
 
