@@ -63,6 +63,7 @@ SCALE = {
     "HC-011": ("L4", False),  # Orchestration
     "HC-016": ("L4", False),  # Drumband Showcraft
     # --- L3 MESO ---
+    "003": ("L3", True),   # Genetic Genome Selection (evolves motifs/anchors, plan §3.3/Ex D)
     "004": ("L3", False),  # Prosodic Coupling
     "005": ("L3", False),  # Prosodic Syntax
     "008": ("L3", False),  # Call-Response Allocation

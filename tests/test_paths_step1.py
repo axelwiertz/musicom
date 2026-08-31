@@ -41,9 +41,10 @@ def test_scale_has_all_four_levels():
 
 def test_scale_counts_match_plan():
     # plan §1: 13 L4, 25 L3, 20 L2, 9 L1 — L3 has 26 rows in the plan table
-    # (the doc's count column says 25; the table lists 26 — registry matches the table)
+    # (the doc's count column says 25; the table lists 26). Step 2 added 003
+    # (Genetic, L3) → L3 = 27. Registry matches the table + later additions.
     assert len(methods_by_scale("L4")) == 13
-    assert len(methods_by_scale("L3")) == 26
+    assert len(methods_by_scale("L3")) == 27
     assert len(methods_by_scale("L2")) == 20
     assert len(methods_by_scale("L1")) == 9
 
