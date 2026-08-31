@@ -57,6 +57,14 @@ zero-drift ✓ → MIDI → FluidSynth WAV ✓; RenderPipeline stem label
 NOT "Saxophone"; SF2 preset 65 = "AltoSax (TB) v2.3" — cosmetic suffix only,
 no routing impact).
 
+**Organ added** (2026-08-31): GM19, keys-family second entry
+(instrument.md + organ.py), verified end-to-end UnitMatrixComposer →
+zero-drift ✓ → MIDI → FluidSynth WAV ✓; RenderPipeline stem label
+`trackXX_Church_Organ.wav` ✓ (GM_PROGRAMS[19] = "Church Organ", SF2 preset 19
+= "Church Organ" — labels match exactly, no quirk). Additive engine bug
+FIXED: `get_adsr_weights` used invalid `np.convolve(rotation='same')` →
+`mode='same'` (broke the organ's recommended engine path).
+
 ## Python usage
 
 ```python
@@ -83,6 +91,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Strings | Cello | 42 | 36–84 | bass, lead, counter, harmony |
 | Strings | Double Bass | 43 | 28–74 | bass, rhythm, accent, harmony |
 | Keys | Piano | 1 | 21–108 | harmony, melody, bass, rhythm |
+| Keys | Church Organ | 19 | 36–96 | harmony, pad, bass, rhythm, accent |
 | Brass | Trumpet | 56 | 54–86 | lead, accent, fanfare |
 | Brass | Trombone | 57 | 40–78 | bass, counter, accent, harmony |
 | Brass | French Horn | 60 | 41–84 | harmony, counter, accent, lead |
@@ -114,6 +123,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 68 | Oboe | Oboe ✓ (SF2 preset is "Oboe (Orch)" — cosmetic suffix only) |
 | 65 | Alto Sax (correct GM) | **Alto_Sax** (labeled "Alto Sax", not "Saxophone") |
 | 74 | Flute | **Recorder** ✗ |
+| 19 | Church Organ | Church Organ ✓ (GM_PROGRAMS[19] + SF2 preset 19 both "Church Organ") |
 | 25 | Acoustic Guitar (nylon) | Acoustic_Guitar_nylon ✓ |
 | ch9/pgm0 | Drums | **Acoustic_Grand_Piano** ✗ (program-0 fallback) |
 

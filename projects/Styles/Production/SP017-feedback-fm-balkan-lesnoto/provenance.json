@@ -1,0 +1,152 @@
+{
+  "job": "SP-017 production pass (cron)",
+  "source_midi": "/opt/data/projects/Styles/Balkan/001-balkan-lesnoto/MIDI/balkan-lesnoto.mid",
+  "source_midi_sha256": "84ac0d1a24140cff1601a1ecd35b80d241adbe1d95c706e4cf539e7bef6d4280",
+  "production_method": "SP-017",
+  "production_method_name": "Modified FM (Feedback FM & Phase Modulation)",
+  "source_composition": "001-balkan-lesnoto (Balkan, 7/8 2+2+3, D hijaz, 120 BPM, 16 bars, 4 sections)",
+  "parameters": {
+    "sample_rate": 44100,
+    "seed": 20260831,
+    "peak": 0.89,
+    "post": {
+      "highpass_hz": 20,
+      "lowpass_hz": 16000
+    },
+    "per_voice": {
+      "74": {
+        "fm_mult": 1.0,
+        "index": 2.0,
+        "beta": 0.15,
+        "gain": 0.5,
+        "attack_s": 0.015,
+        "release_s": 0.09
+      },
+      "50": {
+        "fm_mult": 2.0,
+        "index": 1.5,
+        "beta": 0.25,
+        "gain": 0.32,
+        "attack_s": 0.06,
+        "release_s": 0.15
+      },
+      "33": {
+        "fm_mult": 1.0,
+        "index": 4.0,
+        "beta": 0.6,
+        "gain": 0.55,
+        "attack_s": 0.01,
+        "release_s": 0.09
+      }
+    },
+    "percussion": {
+      "36": {
+        "fc": 85.0,
+        "beta": 2.2,
+        "gain": 1.0,
+        "release_s": 0.12
+      }
+    },
+    "feedback_recurrence": "y_m[n]=cos(2*pi*fm*n*Ts + beta*y_m[n-1]); y[n]=cos(2*pi*fc*n*Ts + I[n]*y_m[n])",
+    "dynamic_index": "I[n]=index*(1+0.30*sin(2*pi*0.4*t))",
+    "adsr": {
+      "attack_s": "per-voice",
+      "release_s": "per-voice"
+    }
+  },
+  "outputs": {
+    "full_mix_wav": "/opt/data/projects/Styles/Production/SP017-feedback-fm-balkan-lesnoto/Audio/SP017-feedback-fm-balkan-lesnoto.wav",
+    "full_mix_ogg": "/opt/data/projects/Styles/Production/SP017-feedback-fm-balkan-lesnoto/Audio/SP017-feedback-fm-balkan-lesnoto.ogg",
+    "stems": {
+      "Percussion": "/opt/data/projects/Styles/Production/SP017-feedback-fm-balkan-lesnoto/Audio/stems/stem_percussion.wav",
+      "Tambura (Bass drone, Electric Bass)": "/opt/data/projects/Styles/Production/SP017-feedback-fm-balkan-lesnoto/Audio/stems/stem_tambura.wav",
+      "Gaida (Drone, Synth Strings)": "/opt/data/projects/Styles/Production/SP017-feedback-fm-balkan-lesnoto/Audio/stems/stem_gaida.wav",
+      "Kaval (Flute, D hijaz melody)": "/opt/data/projects/Styles/Production/SP017-feedback-fm-balkan-lesnoto/Audio/stems/stem_kaval.wav"
+    },
+    "midi": "/opt/data/projects/Styles/Production/SP017-feedback-fm-balkan-lesnoto/MIDI/SP017-feedback-fm-balkan-lesnoto.mid"
+  },
+  "verification": {
+    "notes_parsed": 96,
+    "notes_synthesized": 96,
+    "duration_sec": 56.5,
+    "silence_ratio": 0.0142,
+    "rms_per_second": [
+      0.17382,
+      0.15377,
+      0.15639,
+      0.14464,
+      0.14055,
+      0.14308,
+      0.14333,
+      0.1321,
+      0.13114,
+      0.12474,
+      0.13582,
+      0.12741,
+      0.13145,
+      0.12724,
+      0.18009,
+      0.14494,
+      0.13607,
+      0.12369,
+      0.12873,
+      0.154,
+      0.13602,
+      0.1206,
+      0.1294,
+      0.10992,
+      0.1225,
+      0.11484,
+      0.12727,
+      0.13324,
+      0.16117,
+      0.13951,
+      0.14957,
+      0.14488,
+      0.12211,
+      0.14128,
+      0.1344,
+      0.12724,
+      0.12505,
+      0.11173,
+      0.14583,
+      0.1197,
+      0.11487,
+      0.1163,
+      0.18672,
+      0.15562,
+      0.16071,
+      0.15332,
+      0.14451,
+      0.16292,
+      0.15365,
+      0.14224,
+      0.14824,
+      0.12439,
+      0.14462,
+      0.13084,
+      0.1456,
+      0.14527
+    ],
+    "pitch_frames_detected": 112,
+    "pitch_frame_total": 112,
+    "pitch_range_hz": [
+      74.0,
+      880.0
+    ],
+    "pitch_median_hz": 110.0,
+    "note_match_windows": 112,
+    "note_match_total": 112,
+    "harmonic_energy_lowest_f0": 0.1965,
+    "harmonic_energy_t0_8s": [
+      0.1675,
+      0.2667,
+      0.3038,
+      0.221,
+      0.2475,
+      0.2487,
+      0.3279,
+      0.3211
+    ]
+  }
+}

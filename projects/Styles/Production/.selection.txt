@@ -1,2 +1,2 @@
-/opt/data/projects/Styles/Classical/033-wagner-study-v2/midi/wagner_poly.mid
-SP-036
+/opt/data/projects/Styles/Balkan/001-balkan-lesnoto/MIDI/balkan-lesnoto.mid
+SP-017

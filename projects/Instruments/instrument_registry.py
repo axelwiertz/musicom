@@ -30,6 +30,7 @@ _INSTRUMENT_MODULES = {
     "Strings.cello.cello": "cello",
     "Strings.double_bass.double_bass": "double_bass",
     "Keys.piano.piano": "piano",
+    "Keys.organ.organ": "organ",
     "Brass.trumpet.trumpet": "trumpet",
     "Brass.trombone.trombone": "trombone",
     "Brass.french_horn.french_horn": "french_horn",
@@ -117,6 +118,7 @@ VIOLA = ALL_INSTRUMENTS["viola"]
 CELLO = ALL_INSTRUMENTS["cello"]
 DOUBLE_BASS = ALL_INSTRUMENTS["double_bass"]
 PIANO = ALL_INSTRUMENTS["piano"]
+ORGAN = ALL_INSTRUMENTS["organ"]
 TRUMPET = ALL_INSTRUMENTS["trumpet"]
 TROMBONE = ALL_INSTRUMENTS["trombone"]
 FRENCH_HORN = ALL_INSTRUMENTS["french_horn"]
@@ -180,6 +182,7 @@ if __name__ == "__main__":
     print()
     print("Verification:")
     print("  VIOLIN.midi_program =", VIOLIN.midi_program)
+    print("  ORGAN.midi_program =", ORGAN.midi_program, "(Church Organ, GM19)")
     print("  TRUMPET.midi_program =", TRUMPET.midi_program, "(should be 56)")
     print("  by_name('double bass') =", by_name("double bass"))
     print("  by_program(56) =", by_program(56))

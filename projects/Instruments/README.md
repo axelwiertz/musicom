@@ -55,16 +55,17 @@ Instruments/
 │   ├── bassoon/
 │   └── saxophone/
 ├── Keys/
-│   └── piano/
+│   ├── piano/
+│   └── organ/
 ├── Guitar/
 │   └── acoustic/
 └── Percussion/
     └── drum_kit/
 ```
 
-Current instruments (16): Violin, Viola, Cello, Double Bass, Piano, Trumpet,
-Trombone, French Horn, Tuba, Flute, Oboe, Clarinet, Bassoon, Alto Saxophone,
-Acoustic Guitar, Drum Kit.
+Current instruments (17): Violin, Viola, Cello, Double Bass, Piano, Church
+Organ, Trumpet, Trombone, French Horn, Tuba, Flute, Oboe, Clarinet, Bassoon,
+Alto Saxophone, Acoustic Guitar, Drum Kit.
 
 ## Musicom Integration
 
@@ -90,5 +91,6 @@ The canonical table lives in `registry.md` (kept in sync manually) and
 - [x] String delay formula corrected (`D = sr/freq`, not `sr/(2*freq)`)
 - [x] Orchestrator (role → instrument mapping)
 - [x] Oboe, Bassoon, Saxophone (woodwind family complete)
-- [ ] Organ, Synth Pad, Harpsichord, Electric Guitar (listed in roadmap)
+- [x] Church Organ (keys family, GM19, additive engine — 2026-08-31)
+- [ ] Synth Pad, Harpsichord, Electric Guitar (listed in roadmap)
 - [ ] Drum Kit expansion beyond GM mapping
