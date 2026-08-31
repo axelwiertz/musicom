@@ -1,0 +1,81 @@
+{
+  "style": "pop",
+  "key": "C",
+  "bpm": 120,
+  "seed": 42,
+  "n_generations": 1,
+  "n_variants": 4,
+  "judge": "rule",
+  "generations": [
+    {
+      "generation": 0,
+      "n_candidates": 3,
+      "winner_variant": 1,
+      "winner_density": 4,
+      "winner_offset": 240,
+      "winner_fitness": 0.6243
+    }
+  ],
+  "winner": {
+    "variant": 1,
+    "density": 4,
+    "offset": 240,
+    "fitness": 0.6243,
+    "terms": {
+      "tonal_gravity": 0.4948,
+      "on_grid": 1.0,
+      "stepwise_motion": 0.5,
+      "rhythm_variety": 0.0667,
+      "groove_stability": 1.0
+    },
+    "midi": "/opt/data/projects/Styles/Pop/evolution/evolution/pop-anchor-42.mid",
+    "provenance": "/opt/data/projects/Styles/Pop/evolution/evolution/pop-anchor-42.mid.provenance.json"
+  },
+  "candidates": [
+    {
+      "variant": 0,
+      "generation": 0,
+      "density": 3,
+      "offset": 0,
+      "fitness_total": 0.6071,
+      "terms": {
+        "tonal_gravity": 0.4948,
+        "on_grid": 1.0,
+        "stepwise_motion": 0.5,
+        "rhythm_variety": 0.1818,
+        "groove_stability": 0.7273
+      },
+      "gates": "pass"
+    },
+    {
+      "variant": 1,
+      "generation": 0,
+      "density": 4,
+      "offset": 240,
+      "fitness_total": 0.6243,
+      "terms": {
+        "tonal_gravity": 0.4948,
+        "on_grid": 1.0,
+        "stepwise_motion": 0.5,
+        "rhythm_variety": 0.0667,
+        "groove_stability": 1.0
+      },
+      "gates": "pass"
+    },
+    {
+      "variant": 3,
+      "generation": 0,
+      "density": 3,
+      "offset": 0,
+      "fitness_total": 0.6071,
+      "terms": {
+        "tonal_gravity": 0.4948,
+        "on_grid": 1.0,
+        "stepwise_motion": 0.5,
+        "rhythm_variety": 0.1818,
+        "groove_stability": 0.7273
+      },
+      "gates": "pass"
+    }
+  ]
+}

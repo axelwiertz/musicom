@@ -1,0 +1,30 @@
+{
+  "artifact": "pop-anchor-42.mid",
+  "classification": "ai-assisted",
+  "generator": "workflows.evolution.evolve_anchor(style=pop, seed=42)",
+  "sources": [
+    "style:pop",
+    "key:C",
+    "progression:['I', 'V', 'vi', 'IV']",
+    "path:C",
+    "evolution:anchor"
+  ],
+  "parameters": {
+    "seed": 42,
+    "n_generations": 1,
+    "n_variants": 4,
+    "judge": "rule",
+    "weights": {
+      "tonal_gravity": 1.0,
+      "on_grid": 1.0,
+      "stepwise_motion": 0.8,
+      "rhythm_variety": 0.6,
+      "groove_stability": 0.5
+    }
+  },
+  "notes": "",
+  "sha256": "c9eb0015794d46c336668b238fd06f3afb72b02607603e0ba1a8adfc6c9784a7",
+  "bytes": 5466,
+  "created_utc": "2026-08-31T15:59:00.558291+00:00",
+  "provenance_version": "1.0"
+}
