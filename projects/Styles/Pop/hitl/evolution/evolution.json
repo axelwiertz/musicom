@@ -1,0 +1,156 @@
+{
+  "rounds": [
+    {
+      "judge": "human",
+      "style": "pop",
+      "key": "C",
+      "bpm": 120,
+      "seed": 42,
+      "round": 0,
+      "n_candidates": 3,
+      "pick_index": 2,
+      "winner": {
+        "variant": 2,
+        "density": 4,
+        "offset": 240,
+        "fitness_total": 0.6243,
+        "terms": {
+          "tonal_gravity": 0.4948,
+          "on_grid": 1.0,
+          "stepwise_motion": 0.5,
+          "rhythm_variety": 0.0667,
+          "groove_stability": 1.0
+        },
+        "midi": "/opt/data/projects/Styles/Pop/hitl/candidates/cand2-d4-off240.mid",
+        "ogg": "/opt/data/projects/Styles/Pop/hitl/candidates/cand2-d4-off240.ogg",
+        "wildcard": false
+      },
+      "candidates": [
+        {
+          "variant": 0,
+          "density": 3,
+          "offset": 0,
+          "fitness_total": 0.6071,
+          "terms": {
+            "tonal_gravity": 0.4948,
+            "on_grid": 1.0,
+            "stepwise_motion": 0.5,
+            "rhythm_variety": 0.1818,
+            "groove_stability": 0.7273
+          },
+          "wildcard": false,
+          "midi": "/opt/data/projects/Styles/Pop/hitl/candidates/cand0-d3-off0.mid",
+          "ogg": "/opt/data/projects/Styles/Pop/hitl/candidates/cand0-d3-off0.ogg"
+        },
+        {
+          "variant": 1,
+          "density": 4,
+          "offset": 0,
+          "fitness_total": 0.6243,
+          "terms": {
+            "tonal_gravity": 0.4948,
+            "on_grid": 1.0,
+            "stepwise_motion": 0.5,
+            "rhythm_variety": 0.0667,
+            "groove_stability": 1.0
+          },
+          "wildcard": false,
+          "midi": "/opt/data/projects/Styles/Pop/hitl/candidates/cand1-d4-off0.mid",
+          "ogg": "/opt/data/projects/Styles/Pop/hitl/candidates/cand1-d4-off0.ogg"
+        },
+        {
+          "variant": 2,
+          "density": 4,
+          "offset": 240,
+          "fitness_total": 0.6243,
+          "terms": {
+            "tonal_gravity": 0.4948,
+            "on_grid": 1.0,
+            "stepwise_motion": 0.5,
+            "rhythm_variety": 0.0667,
+            "groove_stability": 1.0
+          },
+          "wildcard": false,
+          "midi": "/opt/data/projects/Styles/Pop/hitl/candidates/cand2-d4-off240.mid",
+          "ogg": "/opt/data/projects/Styles/Pop/hitl/candidates/cand2-d4-off240.ogg"
+        }
+      ]
+    }
+  ],
+  "latest": {
+    "judge": "human",
+    "style": "pop",
+    "key": "C",
+    "bpm": 120,
+    "seed": 42,
+    "round": 0,
+    "n_candidates": 3,
+    "pick_index": 2,
+    "winner": {
+      "variant": 2,
+      "density": 4,
+      "offset": 240,
+      "fitness_total": 0.6243,
+      "terms": {
+        "tonal_gravity": 0.4948,
+        "on_grid": 1.0,
+        "stepwise_motion": 0.5,
+        "rhythm_variety": 0.0667,
+        "groove_stability": 1.0
+      },
+      "midi": "/opt/data/projects/Styles/Pop/hitl/candidates/cand2-d4-off240.mid",
+      "ogg": "/opt/data/projects/Styles/Pop/hitl/candidates/cand2-d4-off240.ogg",
+      "wildcard": false
+    },
+    "candidates": [
+      {
+        "variant": 0,
+        "density": 3,
+        "offset": 0,
+        "fitness_total": 0.6071,
+        "terms": {
+          "tonal_gravity": 0.4948,
+          "on_grid": 1.0,
+          "stepwise_motion": 0.5,
+          "rhythm_variety": 0.1818,
+          "groove_stability": 0.7273
+        },
+        "wildcard": false,
+        "midi": "/opt/data/projects/Styles/Pop/hitl/candidates/cand0-d3-off0.mid",
+        "ogg": "/opt/data/projects/Styles/Pop/hitl/candidates/cand0-d3-off0.ogg"
+      },
+      {
+        "variant": 1,
+        "density": 4,
+        "offset": 0,
+        "fitness_total": 0.6243,
+        "terms": {
+          "tonal_gravity": 0.4948,
+          "on_grid": 1.0,
+          "stepwise_motion": 0.5,
+          "rhythm_variety": 0.0667,
+          "groove_stability": 1.0
+        },
+        "wildcard": false,
+        "midi": "/opt/data/projects/Styles/Pop/hitl/candidates/cand1-d4-off0.mid",
+        "ogg": "/opt/data/projects/Styles/Pop/hitl/candidates/cand1-d4-off0.ogg"
+      },
+      {
+        "variant": 2,
+        "density": 4,
+        "offset": 240,
+        "fitness_total": 0.6243,
+        "terms": {
+          "tonal_gravity": 0.4948,
+          "on_grid": 1.0,
+          "stepwise_motion": 0.5,
+          "rhythm_variety": 0.0667,
+          "groove_stability": 1.0
+        },
+        "wildcard": false,
+        "midi": "/opt/data/projects/Styles/Pop/hitl/candidates/cand2-d4-off240.mid",
+        "ogg": "/opt/data/projects/Styles/Pop/hitl/candidates/cand2-d4-off240.ogg"
+      }
+    ]
+  }
+}

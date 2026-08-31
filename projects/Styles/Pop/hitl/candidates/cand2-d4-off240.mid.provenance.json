@@ -1,0 +1,27 @@
+{
+  "artifact": "cand2-d4-off240.mid",
+  "classification": "ai-assisted",
+  "generator": "workflows.hitl (human pick 2, round 0)",
+  "sources": [
+    "style:pop",
+    "key:C",
+    "seed:42",
+    "judge:human"
+  ],
+  "parameters": {
+    "density": 4,
+    "offset": 240,
+    "fitness": {
+      "tonal_gravity": 0.4948,
+      "on_grid": 1.0,
+      "stepwise_motion": 0.5,
+      "rhythm_variety": 0.0667,
+      "groove_stability": 1.0
+    }
+  },
+  "notes": "",
+  "sha256": "93c7de09a9d2de93db539682e68ca819b2ab8147512c2b8de9083a4daed3fcc0",
+  "bytes": 5466,
+  "created_utc": "2026-08-31T16:07:11.901875+00:00",
+  "provenance_version": "1.0"
+}
