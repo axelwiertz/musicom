@@ -19,9 +19,10 @@ synthesis: [phase_mod, additive]
   `structures/instrument.py` `MidiInstrument` enum (only 10 instruments exposed);
   use raw `program=65` in `add_voice`.
 - **Channel**: any melodic channel (0-9); solo instrument
-- **FluidSynth**: TimGM6mb.sf2 preset 65 = `AltoSax (TB) v2.3` (verified from
-  phdr chunk) → renders a usable alto sax (TimBrasse "TB" bright, reedy,
-  breathy — the classic GM sax timbre)
+- **FluidSynth**: prefers FluidR3_GM.sf2 (preset 65 = `Alto Sax`) over
+  TimGM6mb.sf2 (`AltoSax (TB) v2.3`). `discover_soundfont()` picks FluidR3
+  automatically when present. TimGM6mb sax is TimBrasse "TB" — bright, reedy,
+  breathy; FluidR3 sax is rounder/fuller.
 - **Stem label**: pipeline `GM_PROGRAMS[65] = "Alto Sax"` → sanitized to
   `trackXX_Alto_Sax.wav`. NOTE: the stem label is "Alto_Sax", NOT "Saxophone"
   and NOT "Tenor Sax" — match on the ACTUAL label "Alto_Sax" in any stem-aware

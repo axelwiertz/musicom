@@ -19,9 +19,9 @@ synthesis: [phase_mod, additive]
   `structures/instrument.py` `MidiInstrument` enum (only 10 instruments
   exposed); use raw `program=68` in `add_voice`.
 - **Channel**: any melodic channel (0-9); solo instrument
-- **FluidSynth**: TimGM6mb.sf2 preset 68 = `Oboe (Orch)` (verified from phdr
-  chunk) → renders a usable oboe; the "(Orch)" suffix is cosmetic, no routing
-  impact
+- **FluidSynth**: prefers FluidR3_GM.sf2 (preset 68 = `Oboe`, full-bodied) over
+  TimGM6mb.sf2 (`Oboe (Orch)`, thin/buzzy). `discover_soundfont()` picks
+  FluidR3 automatically when present.
 - **Stem label**: pipeline `GM_PROGRAMS[68] = "Oboe"` ✓ → `trackXX_Oboe.wav`
   (no quirk — exact label match)
 

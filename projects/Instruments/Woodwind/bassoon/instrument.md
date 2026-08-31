@@ -17,7 +17,9 @@ synthesis: [phase_mod, additive]
 
 - **Program**: 70 — 0-indexed MIDI program = strict GM #71 (Bassoon). NOT in `structures/instrument.py` MidiInstrument enum (only 10 instruments exposed); use raw `program=70`
 - **Channel**: any melodic channel (0-9); bass voice of the woodwind choir
-- **FluidSynth**: TimGM6mb.sf2 preset 70 = `Bassoon` (verified from phdr chunk) → renders bassoon; use `-g 1.2` to avoid tail truncation
+- **FluidSynth**: prefers FluidR3_GM.sf2 (preset 70 = `Bassoon`, full low-end)
+  over TimGM6mb.sf2 (`Bassoon`, thin). `discover_soundfont()` picks FluidR3
+  automatically when present.
 - **Stem label**: pipeline `GM_PROGRAMS[70] = "Bassoon"` ✓ → `trackXX_Bassoon.wav` (label matches, no quirk)
 
 ## Range

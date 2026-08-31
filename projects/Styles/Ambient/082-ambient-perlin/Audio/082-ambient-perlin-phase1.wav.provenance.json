@@ -1,0 +1,18 @@
+{
+  "artifact": "082-ambient-perlin-phase1.wav",
+  "classification": "ai-generated",
+  "generator": "FluidSynth CLI render (SP-001 Multi-timbral SoundFont)",
+  "sources": [
+    "/opt/data/projects/Styles/Ambient/082-ambient-perlin/MIDI/082-ambient-perlin-phase1.mid"
+  ],
+  "parameters": {
+    "soundfont": "TimGM6mb.sf2 (FluidR3-compatible GM via pretty_midi, FluidSynth CLI)",
+    "gain": 1.2,
+    "opus_bitrate": 48
+  },
+  "notes": "Phase-1 raw Perlin draft rendered via FluidSynth CLI SP-001, -g 1.2",
+  "sha256": "124c2bb973386862758994345647f5d26fefceedd6cd3d78b0f4757fa1d22aff",
+  "bytes": 14489388,
+  "created_utc": "2026-08-30T23:14:58.850832+00:00",
+  "provenance_version": "1.0"
+}

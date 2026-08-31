@@ -79,6 +79,7 @@ Classification of active Musicom composition methods categorized by their primar
 | **070** | Coupled Map Lattice Composition (CML-C) | **Nature-Led** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Cluster-sync) | Grid-Locked / Continuous | Meso / Cluster State | $\mathcal{O}(L \cdot T)$ | Generates music from spatiotemporal chaos of a ring of $L$ diffusively coupled logistic maps $x_i(t{+}1)=(1-\varepsilon)f(x_i)+\tfrac{\varepsilon}{2}(f(x_{i-1})+f(x_{i+1}))$. Site state → pitch (folded/scale-quantized), Lyapunov exponent $\lambda$ → rhythmic density, cluster synchronization → harmony/voicing (cluster merge/split = chord change), Kaneko pattern regime (frozen/pattern/turbulent) → macro-form, spatiotemporal fluctuation amplitude → texture. Continuous-state, Nature-Led counterpart to 021 Cellular Automata; spatiotemporal sibling of 043 SATM. |
 | **071** | Hopfield Associative Memory Composition (HAM-C) | **Nature-Led** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Memory-attractor) | Grid-Locked / Continuous | Macro / Attractor | $\mathcal{O}(N^2 \cdot I)$ recall, $\mathcal{O}(P \cdot N^2)$ store | Stores musical patterns (riffs, progressions, grooves) as attractors of a Hopfield spin-glass network via one-shot Hebbian storage; composes by content-addressable recall — a partial cue relaxes by asynchronous threshold updates to a stored memory. Pitch field → melody/voicing, onset field → rhythm, memory identity → harmony (spurious states = passing chords), cue schedule → macro-form, active-unit count → texture. Deterministic associative counterpart to 002 Markov / 055 SAMC; the attractor-memory ancestor of 054 ATS attention. |
 | **072** | Normalizing Flow Composition (NFC) | **AI-Driven** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Condition/Invertible-prior) | Grid-Locked / Continuous | Macro / Latent Trajectory | $\mathcal{O}(K \cdot d)$ pass, $\mathcal{O}(E \cdot B \cdot K \cdot d)$ training | Trains an invertible, exact-likelihood flow $x=f_\theta(z)$ (affine-coupling/Glow) that maps a Gaussian latent space onto the density of symbolic music, then composes by pushing sampled or path-walked latent points through the forward map. Inverse gives every piece a unique latent coordinate; latent trajectory = macro-form, chord conditioning + Gaussian-mixture prior = harmony (HOME/LIFT/TENSE/TURN basins), local Jacobian determinant = rhythm/texture density, per-voice output blocks = voice independence. Exact-likelihood, invertible counterpart to 046 VAE; deterministic-sibling of 047 DSMG. |
+| **073** | Harmony Search Improvisational Composition (HSIC) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Fitness-guided + Key-bound) | Grid-Locked / Continuous | Macro / Harmony Memory | $\mathcal{O}(I \cdot N \cdot HMS)$ | Maintains a Harmony Memory of candidate phrases and improvises new ones slot-by-slot via the three Geem–Kim–Loganathan operators: memory consideration ($HMCR$, reuse of motifs/grooves), pitch adjustment ($PAR$, neighbor-tone/voice-leading micro-moves), and random selection ($1-HMCR$, fresh leaps). Weighted musical fitness (tonal gravity, groove, counterpoint, texture, structure) gates memory replacement, so the population converges to idiomatic phrases while retaining diversity. Improvisation-operator metaheuristic: distinct from 003 Genetic (mutation/crossover) and 055 SAMC (temperature schedule); music-inspired optimizer turned back on music (Geem & Choi 2007). |
 
 # Sound Production Methods Framework
 
@@ -145,6 +146,7 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 | **SP-056** | Walsh Function Synthesis (Fast Walsh–Hadamard Transform) | **Synthesis Engines** | Reedy / Hollow / Chiptune Square-Wave Timbres | Additive synthesis in the sequency domain: decomposes a periodic waveform into a sum of Walsh functions (binary $\pm1$ square waves) via the Fast Walsh–Hadamard Transform — an $\mathcal{O}(N \log N)$ butterfly with zero multiplications (add/subtract only). Sequency replaces frequency; Beauchamp's brightness $B=\sum n|a_n|/\sum|a_n|$ (the sequency centroid) is a one-knob timbre morph. Multiplier-free resynthesis = phase accumulator + table read. Casio VL-Tone VL-1 lineage. |
 | **SP-057** | Chua's Circuit Chaotic Oscillator Synthesis (CCCOS) | **Synthesis Engines** | Organic Wind / Brass / Percussion / Noise Timbres | Integrates the three Chua double-scroll ODEs ($dx/d\tau=\alpha(y-x-f(x))$, $dy/d\tau=x-y+z$, $dz/d\tau=-\beta y$) at audio rate and emits capacitor voltage $V_1$ as the sample. The scroll-rotation frequency (set by time-rescale $\lambda=f_0/f_{ref}$) is the fundamental; the chaotic attractor supplies subharmonics, 1/f noise, and micro-deviation — the "living" content of real instrument tones. Single chaos knob $G$ (negative conductance) sweeps periodic → period-doubled → double-scroll → noise-dominant. $O(1)$ per sample per voice; the nonlinearity is the generator itself, not a separate exciter. |
 | **SP-058** | Dispersive Waveguide Spring Reverb (DWSR) | **Synthesis Engines** | Physical Spring-Reverb Ambience / Metallic Tail | Models a helical spring tank as a dispersive digital waveguide: a feedback delay line with a cascade of negative-coefficient first-order allpass filters (frequency-dependent phase velocity $c_p\propto\sqrt{\omega}$, low frequencies delayed more) plus a one-pole damping filter. Produces the physical "boing"/"drip" chirp and inharmonic metallic wash of a real Accutronics tank; 2–3 coprime-length springs give the dense, non-flanging tail. Physical-modeling reverb filling the gap between SP-009 (convolutive room IR) and SP-032 (FDN). |
+| **SP-059** | Fractional Delay-Line Modulation Synthesis (FDLMS) | **Post-Processing / DSP** | Modulated-Delay Effects / Chorus, Flanger, Vibrato & Pitch Shift | Continuously modulates the read pointer of a delay line with sub-sample interpolation (linear FIR or unity-gain first-order allpass) to generate chorus, flanger, vibrato, Doppler/Leslie, and pitch-shift effects from one time-varying-delay engine. Modulation depth/rate/feedback select the effect; multi-voice ensemble chorus uses phase-spread + rate-detuned LFOs. The modulated-delay counterpart to static SP-013/SP-032 and dispersive SP-058. |
 ---
 
 
@@ -14152,6 +14154,191 @@ def spring_reverb(x, sr=44100, springs=((2203, 0.62, 12), (1789, 0.58, 14), (151
 - Smith, J. O. (2010). *Physical Audio Signal Processing.* W3K Publishing. (Dispersive waveguide and allpass-approximation background, shared with SP-033/SP-042/SP-048.)
 - Parker, J. (2011). "Spring reverberation: A physical perspective." *Proc. DAFx-11* (perceptual/measurement study of the "boing" chirp).
 
+# Fractional Delay-Line Modulation Synthesis (FDLMS) (Method SP-059)
+
+### **Source**
+Fractional delay-line modulation is the foundational technique behind chorus, flanger, vibrato, pitch-shifting, Doppler, Leslie rotating-speaker emulation, and doubling effects. The canonical reference is **Jon Dattorro, "Effect Design, Part 2: Delay-Line Modulation and Chorus," *Journal of the Audio Engineering Society* 45(10), October 1997** (also available as CCRMA Stanford technical report). The underlying fractional-delay filter theory is comprehensively surveyed in **Laakso, T. I., Välimäki, V., Karjalainen, M., & Laine, U. K., "Splitting the unit delay — Tools for fractional delay filter design," *IEEE Signal Processing Magazine* 13(1), January 1996, 30–60**. The time-domain treatment of delay-line interpolation as a building block for audio effects is also covered in **Julius O. Smith III, *Physical Audio Signal Processing* (W3K Publishing, 2010), "Delay-Line Interpolation" chapter** (ISBN 978-0-9745607-2-4). In the Musicom catalog, SP-059 fills the *modulated-delay effects* gap: SP-013 is a static high-frequency-damping feedback delay, SP-032 is a static FDN reverb, SP-058 is a dispersive spring reverb — none of them modulate the delay length at audio rate to produce chorus, flange, vibrato, or pitch-shift effects. SP-059 is the general-purpose *time-varying delay* engine that generates all of these from a single mechanism: a delay line whose read pointer is continuously swept by an LFO, envelope, or algorithmic trajectory.
+
+### **Description**
+Fractional Delay-Line Modulation Synthesis (FDLMS) is a **Post-Processing / DSP** method that renders audio effects by continuously modulating the read pointer of a delay line using sub-sample-accurate interpolation. The core algorithm is a circular buffer of length $L$ samples (the maximum delay) with a time-varying read position $d(n) = d_0 + m(n)$, where $d_0$ is the base delay in samples and $m(n)$ is the modulation signal (LFO sine/triangle, envelope follower, algorithmic trajectory). Because $d(n)$ is in general non-integer, the output sample must be *interpolated* from the two (or more) nearest stored samples. The two standard interpolators are:
+
+- **Linear interpolation** (FIR one-zero): $y(n) = (1-\eta)\,x(n-M) + \eta\,x(n-M-1)$, where $\eta = d(n) - M \in [0,1)$ is the fractional part. Cost: 1 multiply + 2 adds per sample. Frequency response: $\text{sinc}^2$-like rolloff near Nyquist (−3.9 dB at $f_s/4$), acceptable for oversampled or narrowband signals, but audible as HF loss on broadband material.
+
+- **First-order allpass interpolation** (IIR): $H(z) = \frac{\eta + z^{-1}}{1 + \eta z^{-1}}$, with coefficient $\eta \approx \frac{1-\Delta}{1+\Delta}$ set to match the desired DC delay $\Delta$. Difference equation: $y(n) = \eta\,[x(n-1) - y(n-1)] + x(n-M-1)$. Cost: 1 multiply + 2 adds per sample (same as linear), but the allpass has **unity gain at all frequencies** — no amplitude distortion, only phase distortion. This is critical in feedback loops (flanger, chorus-with-feedback) where linear interpolation's HF rolloff accumulates on each pass and produces a dull, muffled sound.
+
+The musical effect is determined by the modulation parameters:
+- **Vibrato**: $m(n)$ only, no dry mix. Pure pitch modulation.
+- **Chorus**: $d_0 \approx 1$–$5$ ms (44–220 samples @ 44.1 kHz), depth $1$–$5$ ms, rate $0.1$–$5$ Hz, mixed with dry signal. Multiple delay lines with different phases/rates give the "ensemble" thickening.
+- **Flanger**: $d_0 \approx 0$–$1$ ms (0–44 samples), depth $< 1$ ms, rate $0.1$–$5$ Hz, mixed with dry, often with feedback. Produces the characteristic comb-filter sweep.
+- **Pitch shift**: two read heads at $d_1(n)$ and $d_2(n)$ separated by half the buffer, crossfaded to avoid the discontinuity when a head wraps around. Pitch ratio = ratio of read/write speed.
+- **Doppler / Leslie**: $d(n)$ driven by a rotating-source trajectory (sinusoidal or circular motion).
+
+**Complexity**: $\mathcal{O}(1)$ per sample per delay line (one buffer read + one interpolation). For $V$ voices with $K$ delay lines each: $\mathcal{O}(V \cdot K)$ per sample. Trivially real-time.
+
+### **Technical Mechanics**
+
+**1. The fractional delay filter.** Given a desired delay $d(n) = M + \eta(n)$ where $M = \lfloor d(n) \rfloor$ and $\eta(n) \in [0,1)$, the interpolated output is:
+
+- **Linear (FIR)**:
+$$y(n) = (1 - \eta(n))\,x(n - M) + \eta(n)\,x(n - M - 1)$$
+Transfer function (for fixed $\eta$): $H(z) = (1-\eta) + \eta z^{-1}$. Magnitude response: $|H(e^{j\omega})|^2 = 1 - 2\eta(1-\eta)(1 - \cos\omega)$. Worst-case rolloff at $\eta = 0.5$: $|H(e^{j\pi/2})|^2 = 0.5$ (−3 dB at $f_s/4$).
+
+- **Allpass (IIR)**:
+$$y(n) = \eta(n)\,[x(n - M) - y(n-1)] + x(n - M - 1)$$
+Transfer function: $H(z) = \frac{\eta + z^{-1}}{1 + \eta z^{-1}}$. Magnitude: $|H(e^{j\omega})| = 1$ for all $\omega$ (exact unity gain). Phase delay: $\tau_p(\omega) = \frac{1}{\omega}\arctan\!\left(\frac{(1-\eta^2)\sin\omega}{(1+\eta^2)\cos\omega + 2\eta}\right)$. At DC ($\omega \to 0$): $\tau_p(0) = \frac{1-\eta}{1+\eta}$ (the desired fractional delay). The allpass coefficient is therefore set as $\eta_{\text{ap}} = \frac{1-\eta}{1+\eta}$ for a desired fractional delay $\eta$.
+
+**2. Modulation signals.** The modulation $m(n)$ can be:
+- **Sinusoidal LFO**: $m(n) = A \sin(2\pi f_{\text{LFO}} n / f_s)$, where $A$ is the depth in samples and $f_{\text{LFO}}$ is the modulation rate.
+- **Triangle / trapezoid**: linear sweep for more uniform sweep rate (sinusoidal LFO spends more time at the extremes).
+- **Envelope follower**: $m(n)$ tracks the amplitude envelope of the input (for amplitude-dependent pitch wobble).
+- **Algorithmic trajectory**: $m(n)$ from 040 Perlin noise, 043 SATM attractor, or 026 DPSM phase offset — the Musicom composition methods drive the modulation.
+
+**3. Chorus / flanger topology.** The wet signal is:
+$$w(n) = y(n) + g_f\,w(n-1)$$
+where $g_f$ is the feedback gain (positive for regenerative flanger, negative for "negative flanger"). The output is:
+$$\text{out}(n) = \text{dry}(n) + \alpha\,w(n)$$
+where $\alpha$ is the wet/dry mix. For chorus, $\alpha \approx 0.5$; for flanger, $\alpha \approx 0.7$–$1.0$.
+
+**4. Multi-voice ensemble chorus.** For $K$ delay lines with independent LFOs:
+$$w_k(n) = y_k(n) + g_f\,w_k(n-1), \quad k = 1, \dots, K$$
+$$\text{out}(n) = \text{dry}(n) + \frac{\alpha}{K}\sum_{k=1}^K w_k(n)$$
+Each $y_k$ uses a different LFO phase $\phi_k = 2\pi k / K$ and optionally a slightly different rate $f_k = f_0 + \delta f_k$ (random detune of the LFO rates) to avoid the "metallic" sound of perfectly synchronized modulation.
+
+**5. Pitch shift via dual read heads.** Two read pointers separated by $L/2$ samples, each sweeping from $0$ to $L-1$:
+$$d_1(n) = (d_1(n-1) + r) \bmod L, \quad d_2(n) = (d_1(n) + L/2) \bmod L$$
+where $r$ is the read speed (ratio). The two outputs are crossfaded with complementary windows $h_1, h_2$ (e.g., raised cosine) so that when one head reaches the wrap point, the other is at the midpoint:
+$$\text{out}(n) = h_1(d_1)\,y_1(n) + h_2(d_2)\,y_2(n)$$
+Pitch ratio = $r$ (e.g., $r = 1.5$ shifts up a fifth).
+
+**6. Doppler / Leslie.** A source moving at velocity $v(t)$ relative to the listener produces a delay modulation $d(n) = d_0 + \frac{v(n)}{c} d_0$, where $c$ is the speed of sound. For a Leslie rotating speaker, $v(n) = R\,\Omega \sin(\Omega n / f_s)$ (circular motion of radius $R$ at angular velocity $\Omega$), producing a sinusoidal pitch wobble at the rotation rate.
+
+### **Implementation Requirements (Python / NumPy)**
+
+```python
+import numpy as np
+
+def fractional_delay_chorus(x, fs=44100, base_delay_ms=15.0, depth_ms=3.0,
+                            rate_hz=0.8, feedback=0.0, wet=0.5, n_voices=3,
+                            interpolation='allpass'):
+    """Fractional delay-line modulation: chorus / flanger / vibrato (SP-059).
+    x: input mono buffer
+    base_delay_ms: center delay in ms
+    depth_ms: modulation depth (peak) in ms
+    rate_hz: LFO rate in Hz
+    feedback: regenerative feedback gain (0 = no feedback, 0.5 = mild flanger)
+    wet: wet/dry mix (0 = dry only, 1 = wet only)
+    n_voices: number of parallel delay lines (1 = vibrato, 3+ = chorus)
+    interpolation: 'linear' or 'allpass'
+    """
+    base_delay = int(base_delay_ms * fs / 1000)
+    depth = depth_ms * fs / 1000
+    max_delay = base_delay + int(depth) + 2
+    buf = np.zeros(max_delay)
+    buf_ptr = 0
+    # per-voice LFO phases (evenly spaced)
+    phases = np.linspace(0, 2*np.pi, n_voices, endpoint=False)
+    # per-voice rate detune (avoid metallic sync)
+    rates = rate_hz + 0.05 * np.random.randn(n_voices)
+    # allpass state per voice
+    ap_state = np.zeros(n_voices)
+    out = np.zeros_like(x)
+    for n in range(len(x)):
+        # LFO modulation (vectorized across voices)
+        t = n / fs
+        mod = depth * np.sin(2 * np.pi * rates * t + phases)
+        delays = base_delay + mod  # per-voice delay in samples
+        # read + interpolate per voice
+        wet_sum = 0.0
+        for v in range(n_voices):
+            d = delays[v]
+            M = int(np.floor(d))
+            eta = d - M
+            # read two samples from circular buffer
+            idx0 = (buf_ptr - M) % max_delay
+            idx1 = (buf_ptr - M - 1) % max_delay
+            x0, x1 = buf[idx0], buf[idx1]
+            if interpolation == 'linear':
+                y_v = (1 - eta) * x0 + eta * x1
+            else:  # allpass
+                # coefficient set so DC delay = fractional part eta
+                eta_ap = (1 - eta) / (1 + eta) if (1 + eta) > 1e-9 else 0.0
+                # y = eta_ap * [x0 - y_prev] + x1   (unity gain, phase-only)
+                y_v = eta_ap * (x0 - ap_state[v]) + x1
+                ap_state[v] = y_v
+            wet_sum += y_v
+        wet_sum /= n_voices
+        # feedback
+        wet_sum += feedback * (out[n-1] if n > 0 else 0.0)
+        # write to buffer
+        buf[buf_ptr] = x[n] + feedback * wet_sum
+        buf_ptr = (buf_ptr + 1) % max_delay
+        # mix
+        out[n] = (1 - wet) * x[n] + wet * wet_sum
+    return out
+
+# --- Musicom integration sketch (conceptual — engine does the MIDI authoring) ---
+# Render each UnitMatrix voice to a mono dry buffer via any SP-xxx synthesis engine,
+# then apply FDLMS per voice with its own modulation recipe:
+# Voice 1 (lead) = light chorus (base=10ms, depth=2ms, rate=0.5Hz, 2 voices)
+# Voice 2 (bass) = dry (no modulation) or very subtle vibrato
+# Voice 3 (pad) = heavy chorus (base=20ms, depth=5ms, rate=0.3Hz, 4 voices)
+# Voice 4 (perc) = flanger (base=2ms, depth=1ms, rate=0.2Hz, feedback=0.6)
+# Sum voices; post-process (SP-007 EQ, SP-008 DRC); export audio or spatialize.
+```
+
+**Tooling**: pure NumPy, vectorizable across voices (the per-sample loop is trivially JIT-compiled with Numba for real-time); no FFT, no convolution. The musicom engine handles UnitMatrix fill and zero-drift MIDI export upstream; FDLMS consumes *rendered audio buffers* (from any SP-xxx voice engine) and returns a modulated stereo/mono buffer.
+
+### **Musical Elements Framework**
+
+- **PITCH**: FDLMS directly modulates pitch via the Doppler effect — a time-varying delay $d(n)$ produces a time-varying pitch shift $\Delta f / f \approx -\frac{1}{c}\frac{dd}{dn}$. Vibrato is pure pitch modulation (no dry mix). Chorus is a *thickening* of pitch via multiple detuned copies. Flanger is a *sweeping comb filter* that creates notches and peaks in the spectrum, perceived as a "whoosh" rather than a pitch shift. Pitch shift (dual read heads) is a *harmonic* transformation — the entire spectrum is transposed by a ratio.
+- **RHYTHM**: The modulation rate $f_{\text{LFO}}$ is a rhythmic parameter — slow LFO (0.1–1 Hz) = long, sweeping gestures; fast LFO (5–20 Hz) = tremolo-like amplitude modulation (when the delay is short enough to produce comb-filter notches that sweep through the spectrum). The modulation *shape* (sine vs triangle vs algorithmic) affects the rhythmic feel: sine = smooth, organic; triangle = linear, mechanical; Perlin/SATM = irregular, evolving.
+- **HARMONY**: Chorus adds *detuned copies* of the input, creating a richer, more complex harmonic spectrum (the "ensemble" effect). Flanger creates *notches* in the spectrum that move over time, producing a sweeping harmonic color. Pitch shift creates *harmonic intervals* — a fifth up, a fourth down, etc. — and can be used for harmonization (multiple shifters at different ratios).
+- **STRUCTURE**: Macro-form maps to the *modulation recipe per section*. Section A = dry (no modulation); Section B = light chorus (thickening); Section C = heavy flanger (sweeping); Section D = pitch shift up a fifth (modulation). The modulation parameters become a timbre arc across the form. Because the delay line is stateful (the buffer persists across section boundaries), section joins are naturally *continuous* — the modulated tail carries across the boundary, gluing the form together.
+- **TEXTURE**: Chorus *thickens* texture by adding detuned copies. Flanger *sculpts* texture by creating sweeping notches. Pitch shift *layers* texture by adding harmonic intervals. The number of voices $K$ and the modulation depth $A$ are texture knobs — more voices + deeper modulation = thicker, more complex texture.
+
+### **UnitMatrix Integration (Voices and Sections)**
+
+- **Rows (Voices)**: Each voice $v$ renders its dry buffer through its *own* FDLMS instance (its own base delay, depth, rate, feedback, voice count). Voice 1 (lead) = light chorus (subtle thickening); Voice 2 (bass) = dry or very subtle vibrato (avoid mud in the low end); Voice 3 (pad) = heavy chorus (huge ensemble); Voice 4 (percussion) = flanger (sweeping comb filter on hits). Each row renders to a buffer, then summed (or spatialized via SP-021/SP-034/SP-043).
+- **Columns (Sections)**: Each section $s$ prescribes the modulation recipe — base delay, depth, rate, feedback, voice count. Columns become a *timbre arc*: A = dry, B = light chorus, C = heavy flanger, D = pitch shift. Because the delay line is stateful, section joins are continuous — the modulated tail carries across the boundary.
+- **Cells** $U_{v,s}$:
+  - `{PITCH}`: unchanged — FDLMS is applied post-render to the cell's audio; the dry pitch content is preserved (or shifted, in the case of pitch-shift mode).
+  - `{RHYTHM}`: the cell's onsets become the delay line's excitation points; the modulation rate $f_{\text{LFO}}$ is the rhythmic parameter.
+  - `{HARMONY}`: the cell's chord sets the *dry* harmonic content; the modulation type (chorus/flanger/pitch-shift) controls how the harmony is transformed.
+  - `{TEXTURE}`: the wet/dry mix and per-cell modulation depth — sparse cells get heavy modulation (thickening), dense cells get light modulation (clarity).
+- **Mapping Flow**:
+  1. Compose + fill the UnitMatrix; validate zero-drift; export MIDI via the musicom engine (symbolic layer).
+  2. Render each voice's dry audio with its synthesis engine (any SP-xxx).
+  3. Apply FDLMS per voice with its modulation recipe (base delay, depth, rate, feedback, voice count).
+  4. Sum voices; post-process (SP-007 EQ, SP-008 DRC); export audio or spatialize (SP-021/SP-034/SP-043).
+
+### **Pitfalls**
+
+1. **Zipper noise from abrupt delay changes** → if the modulation signal $m(n)$ changes too quickly (e.g., a step function or a discontinuous LFO reset), the output contains clicks and pops. Fix: smooth the modulation signal with a one-pole low-pass filter (cutoff ~10–20 Hz) before using it to modulate the delay. Never reset the LFO phase abruptly — use a continuous phase accumulator.
+2. **Linear interpolation HF rolloff → dull, muffled sound** → linear interpolation has a $\text{sinc}^2$-like frequency response that attenuates high frequencies (−3 dB at $f_s/4$). In a feedback loop (flanger), this rolloff accumulates on each pass, making the sound progressively duller. Fix: use allpass interpolation (unity gain at all frequencies) for feedback configurations, or oversample the input by 2× before applying linear interpolation.
+3. **Flanger instability / runaway feedback** → if the feedback gain $g_f$ is too high (especially with allpass interpolation, which has no amplitude damping), the feedback loop can become unstable and produce a runaway oscillation. Fix: enforce $|g_f| < 1$ strictly (use $g_f \approx 0.5$–$0.8$ for flanger), and hard-clamp the output buffer each sample in a debug build while tuning. Check the impulse response decays to below $-60$ dB.
+4. **Chorus "metallic" sound from synchronized LFOs** → if multiple chorus voices use the same LFO rate and phase, the modulation is perfectly synchronized and the result sounds metallic and artificial (like a single delay with a tremolo). Fix: use independent LFO phases (evenly spaced: $\phi_k = 2\pi k / K$) and slightly detune the rates ($f_k = f_0 + \delta f_k$ with $\delta f_k \sim \mathcal{N}(0, 0.05)$ Hz) so the voices drift in and out of sync.
+5. **Pitch-shift wrap-around clicks** → in the dual-read-head pitch shifter, when a read head reaches the end of the buffer and wraps around to the beginning, there is a discontinuity. Fix: use two read heads separated by $L/2$ samples and crossfade them with complementary raised-cosine windows $h_1 + h_2 = 1$ so that when one head is at the wrap point (where its window is zero), the other is at the midpoint (where its window is one).
+6. **Bass through the chorus → mud and phase cancellation** → chorus on a bass voice can create phase cancellation in the low end (the detuned copies interfere destructively at low frequencies) and smear the bass transients. Fix: high-pass the chorus *send* (cut below ~150 Hz) or keep the bass voice dry; this is also why real mixes keep the bass dry and only chorus the lead/pad.
+7. **Cost of per-sample interpolation in pure Python** → a naive Python `for` loop over $V$ voices per sample is too slow for long renders. Fix: JIT-compile with Numba, or vectorize across the $V$ voices as a matrix operation, or precompute the modulation signal and use NumPy's `interp` function (for linear interpolation) or `scipy.signal.lfilter` (for allpass interpolation).
+8. **Stateful buffer → unpredictable section joins** → because the delay line buffer persists across section boundaries, a loud section A leaves a residue that colors the attack of section B (usually desirable, but hard to control precisely). Fix: expose a per-section "dump" (multiply the buffer by a fade factor at a section join) for when a clean break is wanted, and *use* the natural carryover for continuous forms.
+
+### **Comparison With Related Methods**
+
+| Method | Delay type | Modulation | Interpolation | Feedback | Effect |
+|---|---|---|---|---|---|
+| Static delay (SP-013) | fixed | none | none (integer delay) | yes (HF damping) | echo, slapback |
+| FDN reverb (SP-032) | fixed (coprime) | none | none (integer delay) | yes (unitary matrix) | reverb tail |
+| Spring reverb (SP-058) | fixed (dispersive) | none | allpass cascade (dispersion) | yes (loop gain) | metallic "boing" |
+| **FDLMS (SP-059)** | **time-varying** | **LFO / envelope / algorithmic** | **linear or allpass (fractional)** | **optional (flanger)** | **chorus, flanger, vibrato, pitch shift** |
+
+### **References**
+
+- Dattorro, J. (1997). "Effect Design, Part 2: Delay-Line Modulation and Chorus." *Journal of the Audio Engineering Society* 45(10), 768–788.
+- Laakso, T. I., Välimäki, V., Karjalainen, M., & Laine, U. K. (1996). "Splitting the unit delay — Tools for fractional delay filter design." *IEEE Signal Processing Magazine* 13(1), 30–60.
+- Smith, J. O. (2010). *Physical Audio Signal Processing.* W3K Publishing. (Delay-line interpolation chapter, shared with SP-013/SP-032/SP-058.)
+- Välimäki, V., & Väänänen, A. (2012). "Fifty years of artificial reverberation." *IEEE Transactions on Audio, Speech, and Language Processing* 20(5), 1421–1444. (Historical context on modulated-delay effects.)
+- Zölzer, U. (ed.) (2011). *DAFX: Digital Audio Effects.* 2nd ed., Wiley. (Chapters on chorus/flanger/pitch shift.)
+
 
 
 # Hopfield Associative Memory Composition (HAM-C) (Method 071)
@@ -14452,3 +14639,141 @@ class Flow(nn.Module):
 - Todd, P. M. (1989). "A Connectionist Approach to Algorithmic Composition." *Computer Music Journal* 13(4), 27–43.
 
 
+
+# Harmony Search Improvisational Composition (HSIC) (Method 073)
+
+### **Source**
+Harmony Search is a population-based metaheuristic introduced by **Geem, Z. W., Kim, J. H., & Loganathan, G. V. (2001), "A new heuristic optimization algorithm: Harmony Search," *Simulation* 76(2), 60–68** (DOI:10.1177/003754970107600201), and extended in **Lee, K. S., & Geem, Z. W. (2005), "A new meta-heuristic algorithm for continuous engineering optimization: harmony search theory and practice," *Computer Methods in Applied Mechanics and Engineering* 194, 3902–3933**. The algorithm's own origin story is *musical*: it mimics the improvisation of jazz musicians, where each musician (decision variable) tries a note (value) and the band collectively seeks an aesthetically pleasing harmony (a good solution). HSIC closes the loop — it turns that metaphor back onto music itself, using the exact three improvisation operators to generate and refine musical material. HSIC is the **improvisation-operator metaheuristic** in the DB: distinct from 003 Genetic (mutation/crossover operators), 041 ACOPF (pheromone-trail operators), and 055 SAMC (Metropolis temperature schedule), and the only optimizer whose search operators are *literally named after musical actions* (memory consideration, pitch adjustment). Its direct musical-metaheuristic ancestry is **Geem, Z. W., & Choi, J.-Y. (2007), "Music composition using the harmony search algorithm," *Proceedings of the 2007 International Conference on Applications of Evolutionary Computing* (EvoWorkshops)**.
+
+### **Description**
+Harmony Search Improvisational Composition generates music by **maintaining a memory of candidate musical phrases (the Harmony Memory, HM) and iteratively improvising new phrases by recombining and tweaking that memory under an aesthetic fitness function.** A "harmony" is a candidate solution vector — one decision variable per musical slot (a note pitch, an onset/duration, a chord function, a section label, a voice density). A new harmony is improvised slot-by-slot using three operators:
+
+1. **Memory consideration (rate $HMCR$)**: with probability $HMCR$, the slot's value is drawn from one of the existing harmonies in HM — reuse of good motifs, grooves, and progressions (exploitation).
+2. **Pitch adjustment (rate $PAR$, bandwidth $bw$)**: a memory-considered value is nudged by a small step ($\pm bw$ on the scale/grid) — neighbor-tone ornamentation, syncopation shift, voice-leading micro-moves (local refinement).
+3. **Random selection (rate $1-HMCR$)**: the slot takes a uniform random value from its feasible range — novel material, leaps, register jumps (exploration).
+
+The new harmony is scored by a weighted musical **fitness vector** (tonal gravity, groove, counterpoint, texture density, structure coherence); if it beats the worst harmony in HM, it replaces it. Repeating this converges HM toward a set of high-fitness phrases, and the best harmony at termination is the composition (or one cell's worth of it). The three operators map cleanly onto the UnitMatrix: HM = the library of already-improvised per-section phrase fillings, one improvisation = one new candidate filling, and fitness = the musicom validation gate plus explicit aesthetic terms. **Complexity**: $\mathcal{O}(I \cdot N \cdot HMS)$ for $I$ improvisations over $N$ variables with memory size $HMS$, plus $\mathcal{O}(HMS \log HMS)$ per memory replacement.
+
+### **Musical Elements Framework**
+- **PITCH**: A pitch decision variable per note slot. **Memory consideration** copies a pitch from a remembered phrase, so melodic motifs persist across improvisations (the "lick" you keep coming back to). **Pitch adjustment** steps the pitch by $\pm bw$ scale degrees — this is the machine equivalent of a musician bending toward a neighbor tone, and with $bw = 1$ it *enforces conjunct motion* (most adjusted notes move a single scale step). **Random selection** draws from the key/scale's feasible pitch set, injecting leaps and fresh register. The key/scale defines each variable's feasible range, so tonal gravity is a hard constraint (not just a soft reward).
+- **RHYTHM**: An onset/duration decision variable per rhythmic slot. Memory consideration reuses rhythmic patterns (grooves) from HM; pitch adjustment shifts an onset by $\pm$ one subdivision (syncopation/micro-timing); random selection picks a fresh onset/duration pair. A **grid-locked** slot grid (16th/8th positions) gives metric binding; the $PAR$ operator adds the *off-grid* jitter that reads as groove, not clock.
+- **HARMONY**: A chord-function decision variable per bar/section. HM accumulates good progressions; memory consideration reproduces them; pitch adjustment moves a chord by a functional step (fifth/third move, voice-leading-consistent transposition); the fitness term penalizes parallel fifths/octaves and non-functional moves. Harmonic coherence is thus a *selective pressure* — the memory holds progressions that survived the fitness filter, so the population converges to a tonal idiom.
+- **STRUCTURE**: The highest-level decision variables are section labels/order (e.g. a sequence over {A, B, C}). HM stores macro-forms (verse-chorus, AABA, rondo); improvisation recombines them; fitness scores form coherence (cadence placement, recapitulation, section contrast). One "harmony" can be the *whole form*, with lower-level HM runs filling each section's cells in a hierarchical, multi-stage search.
+- **TEXTURE**: A voice-density/velocity decision variable per section. Pitch adjustment adds/removes a voice or nudges velocity $\pm bw$; fitness targets a per-section density range and penalizes collision/overlap. The population naturally discovers texture gradients (sparse verse → dense chorus) because those configurations score higher.
+
+### **UnitMatrix Integration (Voices & Sections)**
+- **Rows (Voices)**: Each voice $v$ is a **block of decision variables** in the harmony vector (its own pitch/rhythm sub-vector). HM stores *multi-voice* harmonies — the concatenation of all voice blocks — so vertical coherence (chord voicings, voice-leading between simultaneous notes) is captured *in memory* rather than imposed post-hoc. A multi-voice improvisation draws each voice's slots from HM, and the vertical-fitness terms (consonance of simultaneous notes, independence of parts) evaluate the *combination*, so voices co-evolve. Per-voice $PAR$ bandwidths give independent ornamentation ranges (lead = large $bw$, bass = small $bw$).
+- **Columns (Sections)**: Each section $s$ is either **its own HM** (per-section memories, cross-seeded) or a **conditioning** that sets the feasible ranges (key/scale/register) for that column's variables. The section sequence itself is a decision variable at the structure level, so HSIC can *improvise the form* as well as the content. A transition between sections is a memory-consideration + pitch-adjustment move at the section-boundary variables, giving smooth, voice-led joins.
+- **Cells** $U_{v,s}$:
+  - `{PITCH}`: the improvised pitch variables for voice $v$ in section $s$, after memory/pitch-adjustment/random operators, quantized to scale degrees/MIDI.
+  - `{RHYTHM}`: the improvised onset/duration variables → note-on/off ticks within the cell.
+  - `{HARMONY}`: the chord-function variable(s) active in the cell, from the section-level harmony block.
+  - `{TEXTURE}`: the density/velocity variables → number of active voices and velocities in the cell.
+- **Mapping Flow**:
+  1. Define the variable layout: for each cell $U_{v,s}$, a pitch variable per note, an onset/duration variable per rhythmic slot, plus section-level chord and density variables.
+  2. Initialize HM with $HMS$ random (or skeleton-seeded, per 001) feasible harmonies and score them.
+  3. Improvise $I$ new harmonies (three operators per slot); replace the worst on fitness improvement.
+  4. Decode the best harmony into UnitMatrix cells, validate zero-drift, export via the musicom engine (never hand-roll mido). If the rhythmic slots decode sparse, honor the hybridization rule — layer a continuous fill voice (026 DPSM arpeggio or a sustained pad) decoded from a *separate low-$PAR$* HM run.
+
+### **Technical Mechanics**
+**The three operators.** Let a harmony be $X = (x_1, \dots, x_N)$ with each $x_i$ in a feasible set $\mathcal{F}_i$ (pitch classes in key, grid positions, chord labels). Improvising slot $i$:
+$$x_i' = \begin{cases} x_i^{(j)} \in \text{HM} & \text{w.p. } HMCR \\ x_i^{(j)} \pm bw \text{ (clamped to } \mathcal{F}_i) & \text{w.p. } HMCR \cdot PAR \\ \text{uniform}(\mathcal{F}_i) & \text{w.p. } 1 - HMCR \end{cases}$$
+where $x_i^{(j)}$ is slot $i$ of a uniformly chosen memory harmony. The three rates satisfy $HMCR \in [0.9, 0.95]$, $PAR \in [0.2, 0.5]$ typically (Geem et al. defaults: $HMCR = 0.9$, $PAR = 0.3$, $bw$ problem-dependent). The balance is the exploration/exploitation dial: high $HMCR$ reuses motifs (idiomatic but stale), high $1-HMCR$ explores (fresh but incoherent).
+
+**Fitness and memory update.** Each harmony is scored by a weighted energy
+$$F(X) = w_1 \phi_{\text{tonal}} + w_2 \phi_{\text{groove}} + w_3 \phi_{\text{counterpoint}} + w_4 \phi_{\text{texture}} + w_5 \phi_{\text{structure}}$$
+(the same explicit reward-vector idea as 055/062). If $F(X') > \min_{X \in HM} F(X)$, replace the worst harmony. The memory therefore monotonically improves and — crucially for composition — *retains a diverse set of near-optimal phrases* (the population, not a single point), so different runs/decodes sample different idiomatic material.
+
+**Convergence and schedules.** Like 055 SA's cooling, HSIC uses **adaptive operators**: $PAR$ ramps *up* and $bw$ decays *down* over iterations, so early improvisations explore coarsely and later ones polish (the musical analogue of "improvise freely, then commit to the line"). This avoids premature convergence to a single loop.
+
+**Hierarchical / multi-stage.** Form-level HSIC (variables = section labels) runs first; its best harmonies seed per-section HSIC runs (variables = notes/rhythms). This is the same top-down cascade as 010/017 but with the HSIC operators at every level, and it keeps the search tractable for multi-section pieces.
+
+**Complexity**: one improvisation is $\mathcal{O}(N)$; $I$ improvisations cost $\mathcal{O}(I \cdot N)$ plus $\mathcal{O}(HMS)$ fitness evaluations per iteration, so $\mathcal{O}(I \cdot N \cdot HMS)$ total. Memory $\mathcal{O}(HMS \cdot N)$ (the harmony memory itself is the only state).
+
+### **Implementation Requirements (Python / NumPy)**
+```python
+from __future__ import annotations
+import numpy as np
+from numpy.random import default_rng
+
+class HarmonySearch:
+    """Canonical Harmony Search (Geem-Kim-Loganathan 2001) over discrete musical slots."""
+    def __init__(self, feasible_sets, fitness, hms=20, hmcr=0.90, par=0.30,
+                 bw=1, par_max=0.70, bw_min=0.0, seed=0):
+        self.feasible = feasible_sets          # list of np arrays: feasible values per slot
+        self.fitness = fitness                 # callable X -> float (higher = better)
+        self.hms, self.hmcr, self.par = hms, hmcr, par
+        self.bw, self.par_max, self.bw_min = bw, par_max, bw_min
+        self.rng = default_rng(seed)
+        self.N = len(feasible_sets)
+        self.HM = np.vstack([self._random_harmony() for _ in range(hms)])
+        self.fits = np.array([self.fitness(x) for x in self.HM])
+
+    def _random_harmony(self):
+        return np.array([self.rng.choice(f) for f in self.feasible])
+
+    def _improvise(self, par, bw):
+        x = np.empty(self.N, dtype=object)
+        for i, f in enumerate(self.feasible):
+            if self.rng.random() < self.hmcr:              # memory consideration
+                val = self.HM[self.rng.integers(self.hms), i]
+                if self.rng.random() < par:                # pitch adjustment
+                    idx = np.searchsorted(f, val)
+                    j = int(np.clip(idx + self.rng.integers(-bw, bw + 1), 0, len(f) - 1))
+                    val = f[j]
+            else:                                          # random selection
+                val = self.rng.choice(f)
+            x[i] = val
+        return x
+
+    def run(self, iterations=2000):
+        for it in range(iterations):
+            # adaptive schedule: PAR ramps up, bw decays down (explore -> commit)
+            par = self.par + (self.par_max - self.par) * (it / iterations)
+            bw = max(self.bw_min, int(round(self.bw * (1 - it / iterations))))
+            x = self._improvise(par, bw)
+            fx = self.fitness(x)
+            worst = int(np.argmin(self.fits))
+            if fx > self.fits[worst]:
+                self.HM[worst], self.fits[worst] = x, fx
+        best = int(np.argmax(self.fits))
+        return self.HM[best], self.fits[best]
+
+# --- Musicom integration sketch (conceptual — engine does the MIDI authoring) ---
+# One harmony vector = one UnitMatrix filling: per-voice pitch blocks + rhythm slots
+# + chord/density variables. fitness() wraps the aesthetic terms + the zero-drift
+# validate() gate as a hard constraint (return -inf on violation).
+#   feasible_pitch = scale_degrees_in_key(key)          # tonal gravity = hard bound
+#   hs = HarmonySearch(feasible_sets, fitness, hms=20)
+#   best_X, score = hs.run(iterations=2000)
+#   for v in range(num_voices):
+#       composer.fill_voice_section(voice=v, section=s,
+#           create_note_unit(best_X[pitch_idx], dur, tick))
+#   ok, msg = composer.validate()   # MUST be True before to_midi (per AGENTS.md)
+```
+
+**Tooling**: NumPy suffices (no gradient, no GPU — it is a black-box metaheuristic). The musicom engine handles UnitMatrix fill and zero-drift MIDI export upstream; HSIC emits the symbolic slot values that fill each cell.
+
+### **Pitfalls**
+1. **Premature convergence → stale single loop** → if $HMCR$ is too high (or $PAR$ too low), every new harmony is a near-copy of a memory harmony and HM collapses to one loop. Fix: adaptive schedule ($PAR$ ramps up, $bw$ decays) as above; cap $HMCR \le 0.95$; occasionally re-seed the worst few harmonies with random ones (memory restart).
+2. **Fixed $bw$ → too coarse or too fine** → a large fixed bandwidth never converges (wanders off the motif), a tiny one can't escape local optima. Fix: decay $bw$ from coarse (explore registers) to fine (neighbor-tone polish), mirroring 055 SA's cooling. For pitch, $bw = 1$ (single scale step) late in the run enforces conjunct, vocal, voice-led lines.
+3. **Flat / tied fitness → no gradient to climb** → if many harmonies score identically, memory replacement is a coin-flip and the search drifts. Fix: use a *continuous* weighted energy (sum of tonal-gravity, groove, counterpoint, texture, structure terms), not a binary pass/fail; add small jitter to break ties deterministically.
+4. **HM too small → lost diversity** → a tiny Harmony Memory ($HMS < 10$) holds too few motifs and the search is myopic. Fix: $HMS \in [10, 50]$; reject near-duplicate new harmonies (min Hamming distance) to keep the memory a *diverse* library, not a single attractor.
+5. **Random selection violates key/scale** → the $1-HMCR$ branch draws uniformly; if the feasible set is the full chromatic, random notes destroy tonal gravity. Fix: make $\mathcal{F}_i$ the *key/scale* pitch set (and grid positions for rhythm, functional chords for harmony) so even random selection is in-key — tonal gravity becomes a hard constraint.
+6. **Sparse/staccato output** → if rhythmic slots decode to few onsets, the result is staccato (the same failure as 011/032). Fix: honor the hybridization rule — add a continuous fill layer (026 DPSM arpeggio, sustained pad, or walking bass) from a *separate low-$PAR$, low-$bw$* HM run so the sparse rhythmic layer and the flowing layer coexist.
+7. **Single-flat search for long pieces** → one HM over a whole multi-section piece has a huge variable vector and converges poorly. Fix: **hierarchical HSIC** — a form-level HM (section labels) seeds per-section HMs (notes/rhythms), the same top-down cascade as 010/017, keeping each search small and convergent.
+8. **Ignoring the validation gate** → a high-fitness harmony can still violate zero-drift padding. Fix: wrap `composer.validate()` into the fitness as a hard constraint (return $-\infty$ on failure) so HSIC only ever returns export-safe fillings.
+
+### **Comparison With Related Methods**
+| Method | Search mechanism | Operators | Population | Tonal gravity | Exploration/exploitation |
+|---|---|---|---|---|---|
+| 003 Genetic | evolution | mutation, crossover | yes (genome pool) | fitness-guided | crossover + mutation rates |
+| 041 ACOPF | swarm | pheromone deposit/evaporate | yes (ants) | fitness-guided | pheromone trails |
+| 055 SAMC | annealing | Metropolis accept | no (single state) | energy-guided | temperature schedule |
+| **073 HSIC** | **improvisation** | **memory consideration, pitch adjustment, random** | **yes (harmony memory)** | **fitness-guided + hard key bound** | **HMCR / PAR / bw schedule** |
+
+### **References**
+- Geem, Z. W., Kim, J. H., & Loganathan, G. V. (2001). "A new heuristic optimization algorithm: Harmony Search." *Simulation* 76(2), 60–68.
+- Lee, K. S., & Geem, Z. W. (2005). "A new meta-heuristic algorithm for continuous engineering optimization: harmony search theory and practice." *Computer Methods in Applied Mechanics and Engineering* 194, 3902–3933.
+- Geem, Z. W., & Choi, J.-Y. (2007). "Music composition using the harmony search algorithm." *Proceedings of the 2007 International Conference on Applications of Evolutionary Computing (EvoWorkshops)*.
+- Geem, Z. W. (2010). "Recent advances in harmony search algorithm." *Studies in Computational Intelligence* 270, Springer.
