@@ -3,6 +3,24 @@
 Replicability analyses from the Hermes agent's music-tech surveillance cron
 (job e2760579d2c8, runs Mon/Thu). Distilled verdicts for musicom adoption.
 
+## 2026-08-31 Scan
+
+| Item | Technique | Verdict | Musicom path |
+|------|-----------|---------|--------------|
+| Asterism (free WebAudio drum machine) | Param-lock step sequencing: per-step overrides of track base params (pitch/decay/cutoff/velocity), ratcheting (sub-division bursts), randomization with per-param freeze/unlock | YES | **DONE** — sound/generators/param_lock_seq.py (WebAudio engine + browser UI + pattern chains = host concerns, not replicated) |
+| Cherry Audio Memorymode 2 (Memorymoog soft-synth) | Stacked 3-osc-per-voice analog voice with whole-tone detune cluster (osc locked ± major 2nd = 200 cents), per-osc saw/pulse/triangle mix, 4-pole lowpass + resonance, 3/6/9-voice doubling (voice-count thickening) | YES | **DONE** — sound/synthesis/memorymoog_synth.py (Curtis CEM3340 filter curve, LFO/S&H mod matrix, arpeggiator, preset library = not replicated) |
+| Bitwig Studio 6.1 Sampler | Auto tempo (envelope autocorrelation → BPM) + auto pitch (waveform autocorrelation → fundamental) detection, spectral-flux onset detection → auto-slicing, play modes (oneshot/loop/reverse/pingpong) + per-slice rate (pitch), pad-style slice grid | YES | **DONE** — sound/generators/sample_slicer.py (phase-vocoder time-stretch warping, multisample editor, granular modes = proprietary, not replicated) |
+| Arturia Pure Sub (sub-bass synth) | Sine/saw/square osc + sub-osc + lowpass + drive/saturation for hard-hitting modern bass | PARTIAL | Covered by sound/synthesis/mono_synth.py (sub osc + ladder filter + drive) — no new code |
+| Ravine DSP Inter::State (chain host) | Plugin chain hosting with macro/parameter mapping across devices | PARTIAL | Covered by sound/modular/graph.py + sound/effects/production_chain.py — no new code |
+| Dreamtonics Instrument X (physical-modeling orchestra) | Neural Acoustics physical modeling of orchestral strings/woodwinds/brass; articulation by pitch/length (no keyswitches) | PARTIAL | Proprietary neural nets (see 08-27 note); voice_allocator.py + bowed.py approximate routing — no new code |
+| CEDAR Voxis (voice isolation) | Sub-10ms low-latency voice isolation for live use | PARTIAL | Proprietary ML voice isolation; needs demucs-style source-separation models — no new code |
+| StemDeck (open-source stem separator) | ML stem separation (vocals/drums/bass/piano/guitar) via open-source models | PARTIAL | Needs trained separation models (demucs etc.) — no new code; see planned sound/transcription/separation.py |
+| Love Synths First Love (FM synth, pre-order) | User-friendly FM architecture; wave morphing + FM + microtonal tuning | PARTIAL | FM covered by sound/synthesis/phase_mod.py + west_coast.py — hardware engine + UI not replicated |
+| IK Multimedia Sinphonica Maestosa Strings | Italian orchestral virtual instrument (sample-based strings) | NO | Sample-library content, not algorithm |
+| Reason Studios Reason Free | Free Reason Rack + 15 bundled instruments | NO | Content/business model, not DSP |
+| SSL O-Series V2.0 / Elektron Tonverk OS update | Console software / Overbridge multitrack streaming + per-track mod routing | NO | DAW/host integration, not replicable DSP (Tonverk's per-track modulation routing ≈ existing sound/synthesis/voice_allocator.py + math_mod.py) |
+| Polyend Keys / Patternflow / Interaktiv Tap | QWERTY music keyboard / OSC light synth controller / iPad Traktor surface | NO | Hardware/controller surfaces |
+
 ## 2026-08-27 Scan
 
 | Item | Technique | Verdict | Musicom path |

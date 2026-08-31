@@ -38,6 +38,7 @@ Status: `implemented` = in sound/ package · `partial` = some pieces exist · `r
 | — | Mono Subtractive Synth (AD-202 / MC-202-style) | implemented | sound/synthesis/mono_synth.py |
 | — | DX7 Voice Format Parser (Rithmatic-style) | implemented | sound/synthesis/dx7_voice.py |
 | — | Equation→Waveform Synthesis (MathSynth-style) | implemented | sound/synthesis/equation_synth.py |
+| — | Stacked-Oscillator Memorymoog-Style Voice (Memorymode 2-style) | implemented | sound/synthesis/memorymoog_synth.py |
 
 ## Interval-Based Composition (NEW)
 
@@ -75,6 +76,8 @@ Status: `implemented` = in sound/ package · `partial` = some pieces exist · `r
 | — | 606-Style Drum Synthesis Engine (Super 606-style) | implemented | sound/synthesis/drum_synth_606.py |
 | — | Spectral Wavetable Extraction (3rd Wave Make Waves-style) | implemented | sound/synthesis/spectral_wavetable.py |
 | — | Room Reverb with Slap/Wash/Tilt (bathROOMs-style) | implemented | sound/effects/room_reverb.py |
+| — | Param-Lock Sequencer with Ratchet+Randomize (Asterism-style) | implemented | sound/generators/param_lock_seq.py |
+| — | Auto Tempo/Pitch Detection + Sample Slicer (Bitwig 6.1 Sampler-style) | implemented | sound/generators/sample_slicer.py |
 
 ## Mastering (from MusicTech workflow)
 
