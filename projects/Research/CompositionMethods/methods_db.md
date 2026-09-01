@@ -80,6 +80,7 @@ Classification of active Musicom composition methods categorized by their primar
 | **071** | Hopfield Associative Memory Composition (HAM-C) | **Nature-Led** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Memory-attractor) | Grid-Locked / Continuous | Macro / Attractor | $\mathcal{O}(N^2 \cdot I)$ recall, $\mathcal{O}(P \cdot N^2)$ store | Stores musical patterns (riffs, progressions, grooves) as attractors of a Hopfield spin-glass network via one-shot Hebbian storage; composes by content-addressable recall — a partial cue relaxes by asynchronous threshold updates to a stored memory. Pitch field → melody/voicing, onset field → rhythm, memory identity → harmony (spurious states = passing chords), cue schedule → macro-form, active-unit count → texture. Deterministic associative counterpart to 002 Markov / 055 SAMC; the attractor-memory ancestor of 054 ATS attention. |
 | **072** | Normalizing Flow Composition (NFC) | **AI-Driven** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Condition/Invertible-prior) | Grid-Locked / Continuous | Macro / Latent Trajectory | $\mathcal{O}(K \cdot d)$ pass, $\mathcal{O}(E \cdot B \cdot K \cdot d)$ training | Trains an invertible, exact-likelihood flow $x=f_\theta(z)$ (affine-coupling/Glow) that maps a Gaussian latent space onto the density of symbolic music, then composes by pushing sampled or path-walked latent points through the forward map. Inverse gives every piece a unique latent coordinate; latent trajectory = macro-form, chord conditioning + Gaussian-mixture prior = harmony (HOME/LIFT/TENSE/TURN basins), local Jacobian determinant = rhythm/texture density, per-voice output blocks = voice independence. Exact-likelihood, invertible counterpart to 046 VAE; deterministic-sibling of 047 DSMG. |
 | **073** | Harmony Search Improvisational Composition (HSIC) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Fitness-guided + Key-bound) | Grid-Locked / Continuous | Macro / Harmony Memory | $\mathcal{O}(I \cdot N \cdot HMS)$ | Maintains a Harmony Memory of candidate phrases and improvises new ones slot-by-slot via the three Geem–Kim–Loganathan operators: memory consideration ($HMCR$, reuse of motifs/grooves), pitch adjustment ($PAR$, neighbor-tone/voice-leading micro-moves), and random selection ($1-HMCR$, fresh leaps). Weighted musical fitness (tonal gravity, groove, counterpoint, texture, structure) gates memory replacement, so the population converges to idiomatic phrases while retaining diversity. Improvisation-operator metaheuristic: distinct from 003 Genetic (mutation/crossover) and 055 SAMC (temperature schedule); music-inspired optimizer turned back on music (Geem & Choi 2007). |
+| **074** | Restricted Boltzmann Machine Composition (RBM-C) | **AI-Driven** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Learned-energy) | Grid-Locked / Continuous | Macro / Hidden Feature | $\mathcal{O}(E \cdot N \cdot H)$ training, $\mathcal{O}(N \cdot H)$ per Gibbs step | Learns an energy landscape over per-voice piano-rolls via a bipartite visible↔hidden network trained by contrastive divergence, then composes by block Gibbs sampling from the Boltzmann distribution. Hidden units = learned chord/motif/register features (harmony & voice coherence); RNN-RBM recurrence or a chord/section conditioning schedule = macro-form; active-unit count/Gaussian-visible = texture; scale-quantization (022) post-filters pitch. Learned energy-based counterpart to 064 MRFCC (hand-crafted potentials) and 071 HAM-C (Hebbian Hopfield); generative, likelihood-trained sibling of 047 DSMG / 072 NFC. |
 
 # Sound Production Methods Framework
 
@@ -147,6 +148,7 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 | **SP-057** | Chua's Circuit Chaotic Oscillator Synthesis (CCCOS) | **Synthesis Engines** | Organic Wind / Brass / Percussion / Noise Timbres | Integrates the three Chua double-scroll ODEs ($dx/d\tau=\alpha(y-x-f(x))$, $dy/d\tau=x-y+z$, $dz/d\tau=-\beta y$) at audio rate and emits capacitor voltage $V_1$ as the sample. The scroll-rotation frequency (set by time-rescale $\lambda=f_0/f_{ref}$) is the fundamental; the chaotic attractor supplies subharmonics, 1/f noise, and micro-deviation — the "living" content of real instrument tones. Single chaos knob $G$ (negative conductance) sweeps periodic → period-doubled → double-scroll → noise-dominant. $O(1)$ per sample per voice; the nonlinearity is the generator itself, not a separate exciter. |
 | **SP-058** | Dispersive Waveguide Spring Reverb (DWSR) | **Synthesis Engines** | Physical Spring-Reverb Ambience / Metallic Tail | Models a helical spring tank as a dispersive digital waveguide: a feedback delay line with a cascade of negative-coefficient first-order allpass filters (frequency-dependent phase velocity $c_p\propto\sqrt{\omega}$, low frequencies delayed more) plus a one-pole damping filter. Produces the physical "boing"/"drip" chirp and inharmonic metallic wash of a real Accutronics tank; 2–3 coprime-length springs give the dense, non-flanging tail. Physical-modeling reverb filling the gap between SP-009 (convolutive room IR) and SP-032 (FDN). |
 | **SP-059** | Fractional Delay-Line Modulation Synthesis (FDLMS) | **Post-Processing / DSP** | Modulated-Delay Effects / Chorus, Flanger, Vibrato & Pitch Shift | Continuously modulates the read pointer of a delay line with sub-sample interpolation (linear FIR or unity-gain first-order allpass) to generate chorus, flanger, vibrato, Doppler/Leslie, and pitch-shift effects from one time-varying-delay engine. Modulation depth/rate/feedback select the effect; multi-voice ensemble chorus uses phase-spread + rate-detuned LFOs. The modulated-delay counterpart to static SP-013/SP-032 and dispersive SP-058. |
+| **SP-060** | Denoising Diffusion Audio Synthesis (DDAS) | **Synthesis Engines** | Neural Diffusion / Stochastic Raw-Audio Timbres | Generates audio by learning to reverse a forward process that gradually noisifies real audio into Gaussian noise. A neural denoiser $\epsilon_\theta(x_t, t, c)$ predicts the added noise at each of $T$ steps; sampling runs it backward from $x_T \sim \mathcal{N}(0,\mathbf{I})$ under a conditioning $c$ (mel-spectrogram / STFT image / f0-loudness-label feature). DDIM ($\eta{=}0$) makes it deterministic per seed. Produces corpus-learned organic timbre, breath, and correlated multi-voice texture; audio-domain counterpart to 047 DSMG and stochastic foil to 045 DDSP. |
 ---
 
 
@@ -14777,3 +14779,334 @@ class HarmonySearch:
 - Lee, K. S., & Geem, Z. W. (2005). "A new meta-heuristic algorithm for continuous engineering optimization: harmony search theory and practice." *Computer Methods in Applied Mechanics and Engineering* 194, 3902–3933.
 - Geem, Z. W., & Choi, J.-Y. (2007). "Music composition using the harmony search algorithm." *Proceedings of the 2007 International Conference on Applications of Evolutionary Computing (EvoWorkshops)*.
 - Geem, Z. W. (2010). "Recent advances in harmony search algorithm." *Studies in Computational Intelligence* 270, Springer.
+# Denoising Diffusion Audio Synthesis (DDAS) (Method SP-060)
+
+### **Source**
+Denoising diffusion probabilistic models (DDPMs) originate in **Sohl-Dickstein, J., Weiss, E. A., Maheswaranathan, N., & Ganguli, S. (2015), "Deep Unsupervised Learning using Nonequilibrium Thermodynamics," *Proceedings of the 32nd International Conference on Machine Learning (ICML)***, which framed generative modeling as learning to reverse a gradual noising process. The modern scalable formulation is **Ho, J., Jain, A., & Abbeel, P. (2020), "Denoising Diffusion Probabilistic Models," *Advances in Neural Information Processing Systems 33 (NeurIPS)***, which introduced the simplified noise-prediction ($\epsilon$-parameterization) objective and the linear $T{=}1000$ variance schedule that made diffusion practical. The continuous-time score-based unification is **Song, Y., Sohl-Dickstein, J., Kingma, D. P., Kumar, A., Ermon, S., & Poole, B. (2021), "Score-Based Generative Modeling through Stochastic Differential Equations," *ICLR***. The audio-specific adaptation is **Kong, Z., Ping, W., Huang, J., Zhao, K., & Catanzaro, B. (2021), "DiffWave: A Versatile Diffusion Model for Audio Synthesis," *ICLR*** (1D waveform domain, bidirectional dilated-convolution U-Net, mel-spectrogram conditioning), and the real-time spectrogram variant is **Forsgren, S., & Martiros, H. (2022), "Riffusion: Stable diffusion for real-time music generation"** (latent diffusion over spectrogram images, 5 s × 512×512 STFT-magnitude grid). Open-source full-song audio diffusion is **HarmonAI (2023), Dance Diffusion** (diffusion over a pretrained VAE latent codec). In the Musicom catalog, DDAS fills the *fully-learned stochastic audio generator* gap: SP-045 (DDSP) imposes a deterministic harmonic+filtered-noise DSP prior, 047 (DSMG) diffuses *symbolic* MIDI tokens, but no existing method synthesizes *raw audio timbre* by denoising — DDAS is the audio-domain counterpart to 047 DSMG and the stochastic foil to the deterministic-prior SP-045.
+
+### **Description**
+Denoising Diffusion Audio Synthesis (DDAS) is a **Synthesis Engines** method that generates audio by learning to *reverse* a process that gradually corrupts real audio into Gaussian noise, then sampling the learned reverse process starting from pure noise. Training corrupts a waveform (or a latent/spectrogram representation of it) $x_0$ over $T$ steps by adding Gaussian noise at increasing variance, and trains a neural denoiser $\epsilon_\theta$ to predict the noise that was added at each step, conditioned on $t$ and on a *conditioning signal* $c$ (a mel-spectrogram, a pitch/loudness envelope, or UnitMatrix-derived features). At inference, the same network is run backward from a noise sample $x_T \sim \mathcal{N}(0,\mathbf{I})$: each step removes a little noise, and the conditioning $c$ steers the denoised result toward a specific pitch contour, timbre, or rhythmic texture. The conditioning therefore acts as the *control surface*: the same noise seed can be guided to a flute line or a bass line simply by swapping $c$. Because the forward process is a known Markov chain, the whole thing trains with a single mean-squared error loss — no adversarial discriminator (contrast 057 MT-GAC), no posterior-collapse balancing (contrast 046 VAE-LSI). The two domain choices define two sub-variants: **(a) waveform-domain** (DiffWave) — denoise directly at 16–24 kHz sample level with a 1D conv U-Net, and **(b) spectrogram/latent-domain** (Riffusion, Dance Diffusion) — denoise an STFT-magnitude image or a neural-codec latent, then invert with a vocoder (Griffin-Lim, MelGAN, or the codec decoder). **Complexity**: sampling $\mathcal{O}(T \cdot C)$ for $T$ steps and $C$ = cost of one U-Net forward ($\mathcal{O}(L D)$ for length-$L$ audio at width $D$); DDIM reduces $T$ to 10–50; training is GPU-bound (hours to days), inference is near-real-time on GPU for short clips.
+
+### **Technical Mechanics**
+
+**1. Forward (noising) process.** A fixed Markov chain adds Gaussian noise to data $x_0$:
+$$q(x_t \mid x_{t-1}) = \mathcal{N}\!\big(x_t;\ \sqrt{1-\beta_t}\,x_{t-1},\ \beta_t \mathbf{I}\big)$$
+where $\beta_1,\dots,\beta_T \in (0,1)$ is a variance schedule (linear or cosine). By the Gaussian reparameterization and the additive property, the whole trajectory is closed-form from $x_0$:
+$$q(x_t \mid x_0) = \mathcal{N}\!\big(x_t;\ \sqrt{\bar\alpha_t}\,x_0,\ (1-\bar\alpha_t)\mathbf{I}\big), \qquad x_t = \sqrt{\bar\alpha_t}\,x_0 + \sqrt{1-\bar\alpha_t}\,\epsilon,\ \epsilon \sim \mathcal{N}(0,\mathbf{I}),$$
+with $\alpha_t = 1-\beta_t$ and $\bar\alpha_t = \prod_{s=1}^{t}\alpha_s$. At $t=T$, $\bar\alpha_T \approx 0$, so $x_T$ is essentially pure noise.
+
+**2. Reverse process + noise prediction.** The reverse process is learned as
+$$p_\theta(x_{t-1} \mid x_t) = \mathcal{N}\!\big(x_{t-1};\ \mu_\theta(x_t, t, c),\ \sigma_t^2 \mathbf{I}\big),$$
+and instead of predicting $\mu_\theta$ directly, one predicts the noise (the $\epsilon$-parameterization that makes training stable):
+$$\mu_\theta(x_t,t,c) = \frac{1}{\sqrt{\alpha_t}}\left(x_t - \frac{\beta_t}{\sqrt{1-\bar\alpha_t}}\,\epsilon_\theta(x_t, t, c)\right).$$
+The training objective is the simplified variational bound:
+$$\mathcal{L} = \mathbb{E}_{t,\,x_0,\,\epsilon}\Big[\big\|\epsilon - \epsilon_\theta(\sqrt{\bar\alpha_t}\,x_0 + \sqrt{1-\bar\alpha_t}\,\epsilon,\ t,\ c)\big\|^2\Big].$$
+
+**3. Score-based SDE view.** The forward process is the discretization of a variance-preserving (VP) SDE
+$$dx = -\tfrac{1}{2}\beta(t)\,x\,dt + \sqrt{\beta(t)}\,dw,$$
+whose reverse-time SDE is
+$$dx = \big[-\tfrac{1}{2}\beta(t)\,x - \beta(t)\nabla_x \log p_t(x)\big]\,dt + \sqrt{\beta(t)}\,d\bar{w},$$
+with the score identified as $\nabla_x \log p_t(x) \approx -\epsilon_\theta(x_t,t,c)/\sqrt{1-\bar\alpha_t}$. This connects DDAS to the continuous-time family of 058 NODE-CTC (both integrate an ODE/SDE) but with the dynamics *learned* rather than prescribed.
+
+**4. Sampling.** DDPM ancestral sampling:
+$$x_{t-1} = \frac{1}{\sqrt{\alpha_t}}\Big(x_t - \frac{1-\alpha_t}{\sqrt{1-\bar\alpha_t}}\,\epsilon_\theta(x_t,t,c)\Big) + \sigma_t\,z,\qquad z \sim \mathcal{N}(0,\mathbf{I}),\ \ \sigma_t = \sqrt{\beta_t}.$$
+DDIM (deterministic, fast) sampling — the workhorse for real-time audio:
+$$\hat{x}_0 = \frac{x_t - \sqrt{1-\bar\alpha_t}\,\epsilon_\theta(x_t,t,c)}{\sqrt{\bar\alpha_t}},$$
+$$x_{t-1} = \sqrt{\bar\alpha_{t-1}}\,\hat{x}_0 + \sqrt{1-\bar\alpha_{t-1}}\,\epsilon_\theta(x_t,t,c),$$
+which skips steps (10–50 instead of 1000). Setting $\eta=0$ makes the process *fully deterministic given the seed* — the property that lets DDAS slot into the musicom zero-drift gate.
+
+**5. Conditioning.** $c$ is the control surface. Waveform-domain (DiffWave) conditions on a mel-spectrogram frame sequence (plus a global timbre/style label) concatenated to the U-Net features; spectrogram-domain (Riffusion) conditions by inpainting a spectrogram image. Classifier-free guidance sharpens conditioning adherence by interpolating the conditional and unconditional predictions:
+$$\hat\epsilon_\theta(x_t,t,c) = \epsilon_\theta(x_t,t,\varnothing) + w\,\big[\epsilon_\theta(x_t,t,c) - \epsilon_\theta(x_t,t,\varnothing)\big],$$
+where $\varnothing$ is a dropped-conditioning token (10–15% dropout during training) and $w \ge 1$ is the guidance scale.
+
+**6. Inpainting / continuation.** To continue or repair audio, keep the known region fixed: at each sampling step, overwrite the known coordinates with the forward-diffused ground truth, so only the masked region is denoised. This is how a UnitMatrix cell's rendered conditioning can be *completed* into seamless, glued audio.
+
+**7. Latent diffusion.** For long audio, diffuse in a low-rate latent space instead of raw samples: encode audio to a codec latent $z = \mathcal{E}(x)$ (a VAE or neural codec), denoise the latent, decode $\hat{x} = \mathcal{D}(\hat{z})$. Riffusion uses STFT-magnitude images (512×512, 5 s) inverted by Griffin-Lim or a neural vocoder; Dance Diffusion uses a pretrained VAE latent. Latent diffusion cuts cost ~10–50× and is what makes whole-song synthesis tractable.
+
+### **Implementation Requirements (Python / NumPy)**
+
+```python
+import numpy as np
+
+# --- Pure-NumPy DDIM sampler for audio (SP-060 DDAS) ---
+# Assumes a pre-trained denoiser eps_theta(x_t, t, c) is available
+# (waveform: 1D conv U-Net; spectrogram: 2D U-Net over STFT images).
+# Training requires a deep-learning framework (torch/jax); the schedule,
+# forward noising, and sampling loops below are framework-free.
+
+def linear_schedule(T, beta_start=1e-4, beta_end=0.02):
+    betas = np.linspace(beta_start, beta_end, T)
+    alphas = 1.0 - betas
+    alpha_bar = np.cumprod(alphas)
+    return betas, alphas, alpha_bar
+
+def q_sample(x0, alpha_bar_t, eps=None):
+    """Forward noising: x_t = sqrt(abar) x0 + sqrt(1-abar) eps."""
+    eps = np.random.randn(*x0.shape) if eps is None else eps
+    return np.sqrt(alpha_bar_t) * x0 + np.sqrt(1.0 - alpha_bar_t) * eps
+
+def classifier_free(eps_theta, x_t, t, c, w=3.0, drop=0.1):
+    """Classifier-free guidance: blend conditional and unconditional."""
+    uncond = eps_theta(x_t, t, None)
+    if c is None:
+        return uncond
+    cond = eps_theta(x_t, t, c)
+    return uncond + w * (cond - uncond)
+
+def ddim_sample(eps_theta, c, shape, T=1000, steps=50, eta=0.0, seed=None):
+    """DDIM (or DDPM if steps==T and eta=1) reverse sampling.
+    eta=0 -> deterministic given seed; eta=1 -> stochastic DDPM.
+    Returns x_0 (denoised audio, shape).
+    """
+    rng = np.random.default_rng(seed)
+    betas, alphas, alpha_bar = linear_schedule(T)
+    # subsample timesteps for DDIM
+    times = np.linspace(T - 1, 0, steps).round().astype(int)
+    x_t = rng.standard_normal(shape)  # x_T ~ N(0, I)
+    for i, t in enumerate(times):
+        t_idx = t
+        eps = classifier_free(eps_theta, x_t, t_idx, c, w=3.0)
+        ab_t = alpha_bar[t_idx]
+        # predicted clean x0
+        x0_hat = (x_t - np.sqrt(1.0 - ab_t) * eps) / np.sqrt(max(ab_t, 1e-8))
+        # timestep before this one
+        t_prev = times[i + 1] if i + 1 < steps else 0
+        ab_prev = alpha_bar[t_prev]
+        # DDIM update
+        x_t = np.sqrt(ab_prev) * x0_hat + np.sqrt(1.0 - ab_prev) * eps
+        if eta > 0:
+            # stochastic DDPM-style variance term
+            sigma = eta * np.sqrt((1.0 - ab_prev) / (1.0 - ab_t) * (1.0 - ab_t / ab_prev))
+            x_t = x_t + sigma * rng.standard_normal(shape)
+    return x_t
+
+# --- Inpainting / continuation: mask unknown region, hold known fixed ---
+def inpaint(eps_theta, c, known_mask, known_audio, shape, T=1000, steps=50, seed=None):
+    rng = np.random.default_rng(seed)
+    betas, alphas, alpha_bar = linear_schedule(T)
+    times = np.linspace(T - 1, 0, steps).round().astype(int)
+    x_t = rng.standard_normal(shape)
+    for t in times:
+        # keep known region at its forward-diffused truth
+        x_t = q_sample(known_audio, alpha_bar[t]) * known_mask + x_t * (1 - known_mask)
+        eps = eps_theta(x_t, t, c)
+        ab_t = alpha_bar[t]
+        x0_hat = (x_t - np.sqrt(1.0 - ab_t) * eps) / np.sqrt(max(ab_t, 1e-8))
+        ab_prev = alpha_bar[0] if t == times[-1] else alpha_bar[t - 1]
+        x_t = np.sqrt(ab_prev) * x0_hat + np.sqrt(1.0 - ab_prev) * eps
+    return x_t
+
+# --- Musicom integration sketch (conceptual — engine does MIDI authoring) ---
+# 1. Compose + fill the UnitMatrix; validate zero-drift; export symbolic MIDI.
+# 2. Render each voice's conditioning c_v: either (a) a mel-spectrogram of the
+#    voice rendered by any SP-xxx engine (SP-029 subtractive, SP-039 additive),
+#    or (b) a direct feature trajectory (f0 + loudness + per-section label),
+#    exactly as SP-045 DDSP consumes f0/loudness.
+# 3. Denoise per voice: audio_v = ddim_sample(eps_theta, c_v, shape_v, seed=seed).
+#    The SAME seed across voices with different c_v gives correlated-but-distinct
+#    timbres; different seeds give independent realizations.
+# 4. Sum voices, post-process (SP-007 EQ, SP-008 DRC), spatialize (SP-021/034/043).
+```
+
+**Tooling**: the schedule, forward noising, and DDIM loops are framework-free NumPy and run for small U-Nets; production training/inference uses PyTorch/JAX (DiffWave/Riffusion checkpoints are ~100 M params, a few seconds per 5 s clip on a GPU). The musicom engine handles UnitMatrix fill and zero-drift MIDI export upstream; DDAS consumes *rendered conditioning* and returns audio buffers, so it slots into the same post-render position as SP-045 DDSP.
+
+### **Musical Elements Framework**
+
+- **PITCH**: Pitch is carried by the *conditioning* $c$, not by an explicit oscillator. In waveform-domain DDAS, a mel-spectrogram conditioning encodes the pitch contour; the denoiser reproduces the corresponding fundamental and harmonic series with realistic, corpus-learned timbre. In spectrogram-domain DDAS, pitch lives on the frequency axis of the STFT image — vertical structure in the conditioning places energy at the right partials. Classifier-free guidance scale $w$ trades conditioning *adherence* (exact pitch) against *naturalness* (sample diversity); high $w$ snaps output to the conditioning pitch, low $w$ lets it drift. Unlike SP-045 DDSP (pitch is a hard f0 control driving a deterministic harmonic bank), DDAS pitch is *emergent* from the conditioning — it can glide, bend, and micro-detune in ways a rigid oscillator cannot.
+- **RHYTHM**: Rhythm enters two ways. (a) The conditioning's *temporal structure* (onset positions in the mel/STFT frame sequence) is reproduced by the denoiser, so the UnitMatrix's onset grid becomes the audio's attack envelope. (b) The diffusion *sampling budget* is a rhythm knob — fewer DDIM steps give a looser, blurrier transient (softer attacks), more steps give sharper transients. Cross-attention (in transformer-based denoisers) aligns conditioning frames to output frames, preserving beat positions; dropout of conditioning ($\varnothing$ token) produces free-running, un-gated rhythmic texture.
+- **HARMONY**: Harmony is the *joint* spectral structure of the conditioning: a chord in the UnitMatrix becomes simultaneous partials in the conditioning spectrogram, and the denoiser reproduces them coherently (diffusion is naturally good at modeling correlated multi-pitch spectra — a chord is just a spectrogram with several harmonic stacks). Classifier-free guidance on a *chord label* conditioning biases the generated spectrum toward that harmony. Inpainting can *re-harmonize*: mask a region and re-condition it on a different chord label to regenerate the same rhythm with new harmony.
+- **STRUCTURE**: Macro-form maps to the *conditioning schedule* $[c_1 \dots c_S]$ across sections, exactly like 047 DSMG's section-token sequence and 058 NODE-CTC's conditioning vector sequence. Each column prescribes its conditioning tensor; DDAS inpainting chains section $s{+}1$ onto the denoised tail of section $s$, so joins are continuous. Because the forward process is a shared Markov chain, the noise level $t$ is a *global structure clock* — all voices denoise in lockstep, which is what makes a multi-voice render cohere across the whole form.
+- **TEXTURE**: Texture is the primary dimension DDAS adds. The stochastic reverse process injects corpus-learned noise/breath/air into the output — the "living" detail that deterministic engines (SP-029 subtractive, SP-039 additive) must bolt on. Guidance scale and noise-schedule temperature control texture density; a higher $\eta$ (DDIM) or larger $\sigma_t$ adds stochastic texture. Latent diffusion's codec quantization introduces a controllable grit. Per-voice seeds give independent textures per row while shared conditioning keeps them harmonically aligned.
+
+### **UnitMatrix Integration (Voices and Sections)**
+
+- **Rows (Voices)**: Each voice $v$ is a separate denoising run conditioned on its own $c_v$ (mel/feature trajectory derived from the voice's pitch+rhythm cells). Two modes: **(a) shared-seed ensemble** — one noise $x_T$ per *section*, denoised under $V$ different conditionings, so voices are correlated (same "room", same macro-gesture) but timbrally distinct — the diffusion analog of SP-045's per-voice harmonic banks sharing one f0 tracker; **(b) independent seeds** — each voice gets its own noise, maximizing voice independence (the diffusion analog of the entangled-vs-separable choice in 052 QWC).
+- **Columns (Sections)**: Each section $s$ prescribes a conditioning tensor $c_s$ — a mel-spectrogram frame block, an STFT image region, or a feature vector (f0, loudness, chord label, style label). Columns become a *conditioning arc*: A = sparse flute conditioning, B = dense pad conditioning, C = re-harmonized inpainting of A, etc. Section joins use inpainting: the known region is section $s$'s denoised tail, the masked region is section $s{+}1$, so transitions are seamless rather than cut.
+- **Cells** $U_{v,s}$:
+  - `{PITCH}`: encoded into $c_{v,s}$'s frequency content (mel bins / STFT rows); the denoiser renders the cell's pitches as audio partials.
+  - `{RHYTHM}`: encoded into $c_{v,s}$'s temporal envelope (frame onsets); DDIM step count sets transient sharpness.
+  - `{HARMONY}`: the cell's chord becomes simultaneous partials in $c_{v,s}$; classifier-free guidance on a chord label reinforces it.
+  - `{TEXTURE}`: the per-cell guidance scale $w$ and DDIM $\eta$ — sparse cells get high $w$ (tight adherence) + low $\eta$ (clean), dense cells get low $w$ + high $\eta$ (breathy, free).
+- **Mapping Flow**:
+  1. Compose + fill the UnitMatrix; validate zero-drift; export symbolic MIDI via the musicom engine.
+  2. Render each voice's conditioning $c_v$ (mel/STFT/features) from the symbolic data — directly, or from a scratch render by any SP-xxx engine.
+  3. Denoise per voice: `audio_v = ddim_sample(eps_theta, c_v, shape_v, seed=seed)`; use inpainting across section boundaries.
+  4. Sum voices; post-process (SP-007 EQ, SP-008 DRC); export audio or spatialize (SP-021/SP-034/SP-043).
+
+### **Pitfalls**
+
+1. **Phase incoherence in spectrogram-domain DDAS → muffled/artifacted audio** → an STFT-magnitude image carries no phase; naive Griffin-Lim inversion reconstructs a plausible but muffled signal with phasiness. Fix: invert with a neural vocoder (HiFi-GAN/MelGAN) trained jointly, or diffuse in the waveform/latent domain instead of magnitude-only spectrograms.
+2. **Checkerboard / striping artifacts** → plain strided convolutions in the U-Net alias at up/down-sampling boundaries, leaving visible grid patterns (audible as ringing). Fix: anti-aliased resampling (BlurPool), weight normalization, and initialization scaling (the DDPM recipe) to keep feature-variance flat across the network.
+3. **Too few DDIM steps → blurry, low-detail output** → aggressive step reduction (steps < 20) under-samples the reverse trajectory. Fix: keep steps ≥ 50 for music, raise classifier-free guidance $w$, or use a cosine schedule (denser steps at high noise where detail forms).
+4. **Conditioning ignored (posterior-collapse analog) → output drifts off-pitch/off-rhythm** → if the conditioning path is too weak or dropped too often, the model learns to ignore $c$ and generates unconditional audio. Fix: drop conditioning only 10–15% of the time during training, apply classifier-free guidance at inference, and monitor conditioning-adherence (pitch error vs. target) during validation.
+5. **Chunk-boundary clicks when generating long audio in windows** → independent denoising per window leaves discontinuities at the seams. Fix: overlap-add with a crossfade, or carry a context window and use inpainting so each new chunk is conditioned on the previous chunk's denoised tail.
+6. **Training instability / mode collapse** → diffusion is stabler than GANs (057 MT-GAC) but still sensitive to schedule and learning rate. Fix: cosine or linear noise schedule with $\beta_T \le 0.02$, exponential-moving-average (EMA) of weights, gradient clipping, and large batch size; never reuse a GAN-style discriminator loss.
+7. **Compute for long audio** → raw-waveform diffusion at 44.1 kHz × minutes is prohibitive. Fix: diffuse in a low-rate latent (neural codec / VAE latent, 10–50× cheaper) or a spectrogram at coarse hop, then vocode; only the final decode runs at full audio rate.
+8. **Non-determinism breaks the zero-drift gate** → default DDPM sampling is stochastic, so the same UnitMatrix renders differently each time. Fix: use DDIM with $\eta=0$ and a fixed seed for reproducible renders (the musicom determinism requirement); reserve stochastic sampling for explicit "free variation" interactive runs.
+
+### **Comparison With Related Methods**
+
+| Method | Generative principle | Conditioning | Output domain | Deterministic? |
+|---|---|---|---|---|
+| DDSP (SP-045) | deterministic DSP modules (harmonic+filtered-noise) trained end-to-end | f0 + loudness + latent timbre code | waveform | yes (given controls) |
+| DSMG (047) | diffusion over discrete symbolic tokens | token context + section prompts | MIDI events | no (sampling) |
+| MT-GAC (057) | adversarial (generator vs. critic) | latent vector | multi-track piano-roll | no |
+| NODE-CTC (058) | prescribed neural ODE dynamics | per-section conditioning vector | continuous-time hidden state → pitch/rhythm | yes (given init) |
+| **DDAS (SP-060)** | **learned reverse diffusion (denoising)** | **mel/STFT/feature + label** | **waveform / spectrogram / latent** | **yes with DDIM $\eta{=}0$** |
+
+### **References**
+
+- Sohl-Dickstein, J., Weiss, E. A., Maheswaranathan, N., & Ganguli, S. (2015). "Deep Unsupervised Learning using Nonequilibrium Thermodynamics." *Proceedings of the 32nd International Conference on Machine Learning (ICML)*.
+- Ho, J., Jain, A., & Abbeel, P. (2020). "Denoising Diffusion Probabilistic Models." *Advances in Neural Information Processing Systems 33 (NeurIPS)*.
+- Song, Y., Sohl-Dickstein, J., Kingma, D. P., Kumar, A., Ermon, S., & Poole, B. (2021). "Score-Based Generative Modeling through Stochastic Differential Equations." *International Conference on Learning Representations (ICLR)*.
+- Song, J., Meng, C., & Ermon, S. (2021). "Denoising Diffusion Implicit Models." *ICLR*. (DDIM accelerated sampling.)
+- Kong, Z., Ping, W., Huang, J., Zhao, K., & Catanzaro, B. (2021). "DiffWave: A Versatile Diffusion Model for Audio Synthesis." *ICLR*.
+- Forsgren, S., & Martiros, H. (2022). "Riffusion: Stable diffusion for real-time music generation." (Spectrogram-domain latent diffusion.)
+- HarmonAI (2023). *Dance Diffusion* — open-source diffusion-based audio generation toolkit.
+
+
+# Restricted Boltzmann Machine Composition (RBM-C) (Method 074)
+
+### **Source**
+The Restricted Boltzmann Machine (RBM) originates in **Smolensky, P. (1986), "Information processing in dynamical systems: foundations of harmony theory," in *Parallel Distributed Processing* Vol. 1, MIT Press**, was reformulated as a practical generative model in **Freund, Y., & Haussler, D. (1994)** and **Hinton, G. E. (2002), "Training products of experts by minimizing contrastive divergence," *Neural Computation* 14(8), 1771–1800**, and scaled into deep architectures via **Hinton, G. E., Osindero, S., & Teh, Y.-W. (2006), "A fast learning algorithm for deep belief nets," *Neural Computation* 18(7), 1527–1554**. The musical application is squarely established in **Boulanger-Lewandowski, N., Bengio, Y., & Vincent, P. (2012), "Modeling temporal dependencies in high-dimensional sequences: application to polyphonic music generation and transcription," *ICML 2012* (arXiv:1206.6392)** — the **RNN-RBM**, which conditions the RBM's biases on a recurrent network's hidden state so the visible piano-roll evolves with long-range temporal coherence. Further music-specific work: **Lattner, S., Grachten, M., & Widmer, G. (2018), "Imposing higher-level structure in polyphonic music generation using convolutional restricted Boltzmann machines and constraints," *ISMIR 2018***, and **Mandel, M., Pascanu, R., Larochelle, H., & Bengio, Y. (2011), "Autotagging music with conditional restricted Boltzmann machines," *arXiv:1103.2832***. RBM-C is the **learned, energy-based generative** entry in the DB: it is the trained counterpart to 064 MRFCC (hand-crafted clique potentials) and the probabilistic, bipartite sibling of 071 HAM-C (symmetric Hopfield recall) — the same Boltzmann/Gibbs mathematics, but with the weights *discovered from a corpus* rather than hand-set or Hebb-stored.
+
+### **Description**
+Restricted Boltzmann Machine Composition generates music by **learning an energy landscape over piano-roll configurations and then sampling it.** A two-layer bipartite network — **visible units** $v$ (the notes: pitch × time-step × voice onsets) and **hidden units** $h$ (the learned features: chords, melodic fragments, register textures, harmonic functions) — is connected by weights $W$ with no within-layer edges. The joint energy
+$$E(v, h) = -a^T v - b^T h - h^T W v$$
+assigns low energy to "plausible" music and high energy to noise; the Boltzmann distribution $P(v, h) = \tfrac{1}{Z} e^{-E(v,h)}$ then defines a probability over all possible pieces. Training by **contrastive divergence (CD-k)** adjusts $W, a, b$ so the model assigns high probability to the training corpus (per-voice piano-rolls of the target style). Composition is **block Gibbs sampling**: a seed or conditioning vector is clamped (or the visible layer initialized), and alternating samples $h \sim P(h \mid v)$, $v \sim P(v \mid h)$ relax the configuration toward a high-probability, corpus-consistent piece. Hidden units act as the "features" the model has abstracted — they fire jointly for the chord being played, the register being occupied, the groove being active — so sampling produces *coherent* multi-voice music, not independent random notes. **Complexity**: CD-k training is $\mathcal{O}(E \cdot N \cdot H)$ per epoch (with $k$ Gibbs steps each); one sampling step is $\mathcal{O}(N \cdot H)$ — cheap enough to fill a whole UnitMatrix by repeated conditional sampling.
+
+### **Musical Elements Framework**
+- **PITCH**: Visible units encode pitch as **one-hot (or replicated-softmax) groups per voice per time step** — a unit per pitch class (scale-quantized or full chromatic) per voice slot. A high-probability configuration turns on one pitch per active voice slot, so the sampled $v$ *is* the melody. Hidden units that fire for a given chord/motif act as **soft constraints**: turning on hidden unit $j$ raises $P(v_i{=}1) = \sigma(a_i + \sum_j W_{ij} h_j)$, biasing the visible pitch toward the chord tone / register the feature encodes. Tonal gravity is *learned*, not imposed: a corpus in C major makes the model assign low energy to out-of-key notes automatically.
+- **RHYTHM**: The time axis is the visible layer's second dimension — one unit per (voice, time-step) grid slot (16ths/8ths), so onset patterns are the "black" pixels of a sampled piano-roll. Learned hidden features capture **groove**: a hidden unit that fires for a backbeat, a tresillo, or a swung 8th pattern. A **conditional RBM** (visible biases $a_i \leftarrow a_i + A_i c$) lets a clock/section signal shift the onset distribution, giving grid-locked metric binding; a **Gaussian-visible** variant models velocity/duration richness on a continuous axis.
+- **HARMONY**: Hidden units are the model's harmonic vocabulary. A single hidden unit typically learns a **chord template** (its weight vector $W_{j,:}$ is a vertical slice that spans all simultaneously-active pitches of, say, a I–IV–V–I progression or a ii–V). Harmony generation = *which hidden units are on*: conditioning the hidden biases $b$ on a chord-function vector $c$ (HOME/LIFT/TENSE/TURN) makes the model sample pitch configurations consistent with that function, so harmonic progression is a **sequence of hidden-bias conditions**.
+- **STRUCTURE**: A single RBM is **memoryless** (no recurrent edges), so macro-form requires a driver. **RNN-RBM** (Boulanger-Lewandowski 2012) conditions each time step's visible/hidden biases on an RNN hidden state that accumulates the piece's history — the RNN learns the section grammar, the RBM fills the notes. Section sequence $[c_1 \dots c_S]$ = the conditioning schedule; each section samples its own conditional RBM pass, with the RNN state carried across section joins for smooth, coherent transitions.
+- **TEXTURE**: The **number of active visible units** (and their velocities in the Gaussian-visible variant) is the texture. Sparse hidden-unit activation → sparse visible activation → thin texture; a dense hidden pattern → chordal, full texture. Because hidden features can be *gated* (fixed to 1/0 during sampling), texture density is directly controllable per section — a **density bias** term or a hidden-unit count constraint shapes verse-vs-chorus density.
+
+### **UnitMatrix Integration (Voices & Sections)**
+- **Rows (Voices)**: Each voice $v$ is a **contiguous block of visible units** in the piano-roll tensor (its own pitch × time-step slab). Because all voice blocks live in one visible layer and share the hidden layer, the RBM learns **vertical coherence directly** — a hidden feature that fires for "C major triad, bass root, melody on E" jointly constrains all three voices. Voice independence is controlled by the *weight structure*: fully-shared hidden units couple voices (homophonic voicings), while a **factored / block-diagonal $W$** (hidden units wired to only one voice block) decouples them (independent counterpoint). A **conditional** visible bias per voice ($a^{(v)}_i$) lets a section specify which voice is lead vs. pad vs. bass.
+- **Columns (Sections)**: Each section $s$ is a **conditioning vector $c_s$** (chord function, register, density target) that shifts the visible/hidden biases during that section's sampling pass. The section sequence $[c_1 \dots c_S]$ is the macro-form; an RNN-RBM carries hidden state across the $c_s \to c_{s+1}$ boundary so the join is continuous rather than a jump-cut. A section can also be a **separately trained RBM** (per-style blocks) whose samples are crossfaded at the boundary (parallel to 046 VAE's latent interpolation).
+- **Cells** $U_{v,s}$:
+  - `{PITCH}`: the sampled visible pitch units for voice $v$ over section $s$, decoded from the one-hot/replicated-softmax groups to MIDI notes, scale-quantized.
+  - `{RHYTHM}`: the sampled visible onset units → note-on/note-off ticks within the cell's grid.
+  - `{HARMONY}`: the hidden units active during the cell's sampling (the chord/motif features), or the conditioning chord function $c_s$.
+  - `{TEXTURE}`: the active-unit count / velocity (Gaussian-visible) → number of sounding voices and dynamics in the cell.
+- **Mapping Flow**:
+  1. Train (or load) the RBM on a corpus of per-voice piano-rolls for the target style (CD-k, one-hot or replicated-softmax visible).
+  2. Define the conditioning schedule $c_s$ (section labels, chord functions, density targets) = macro-form.
+  3. For each section, run **block Gibbs sampling** initialized from $c_s$ (or a clamped seed motif per 001) for a fixed number of steps; the final visible state is the cell filling.
+  4. Decode visible units → UnitMatrix cells; post-quantize scale-coherent pitches (022 MCWS) if the sampled pitch drifts off-key; **validate zero-drift and export via the musicom engine** (never hand-roll mido). If sampling is sparse/staccato, honor the hybridization rule — add a continuous fill voice (026 DPSM arpeggio or a sustained pad) from a separate low-temperature sampling pass.
+
+### **Technical Mechanics**
+**The energy function.** For binary visible/hidden units, the energy and conditional distributions are:
+$$E(v,h) = -\sum_i a_i v_i - \sum_j b_j h_j - \sum_{i,j} W_{ij} v_i h_j, \qquad P(v,h) = \tfrac{1}{Z} e^{-E(v,h)}$$
+with the **factorized conditionals** (the reason block Gibbs is exact and fast — no within-layer edges):
+$$P(h_j{=}1 \mid v) = \sigma\!\Big(b_j + \sum_i W_{ij} v_i\Big), \qquad P(v_i{=}1 \mid h) = \sigma\!\Big(a_i + \sum_j W_{ij} h_j\Big)$$
+where $\sigma$ is the logistic sigmoid. One Gibbs step = sample all $h$ from $v$, then all $v$ from $h$. Repeating $T$ steps drives any seed toward a low-energy (high-probability) configuration.
+
+**Contrastive divergence (CD-k).** The log-likelihood gradient has two terms — a data (positive) phase and a model (negative) phase:
+$$\Delta W_{ij} \propto \langle v_i h_j \rangle_{\text{data}} - \langle v_i h_j \rangle_{\text{model}}$$
+The model phase requires samples from $P(v)$, which is intractable (partition function $Z$). CD approximates it by **clamping a data vector $v^{(0)}$, running $k$ Gibbs steps to get $v^{(k)}$, and using $v^{(k)}$ as the model sample.** Even CD-1 works surprisingly well; persistent CD (PCD) keeps a running Markov chain to reduce the bias. The result: $W$ learns the corpus's *feature dictionary* — hidden units become chord/motif/register detectors without any labels.
+
+**Music-specific visible encodings.** (1) **One-hot**: each visible unit is a binary on/off for a specific (voice, pitch, time-step). (2) **Replicated softmax** (RNN-RBM): each time step has one softmax group over pitches (plus a "no note" symbol), modelling *exactly one note per step* — right for monophonic/lead lines. (3) **Gaussian-visible**: $E$ gains a $(v_i - a_i)^2$ term, so visible units are real-valued velocities/durations — right for continuous texture/dynamics.
+
+**Conditioning and RNN-RBM.** A conditional RBM replaces $a \leftarrow a + A c$, $b \leftarrow b + B c$ (visible/hidden biases are affine in the context $c$). The RNN-RBM replaces the *time-constant* biases with a time-dependent RNN state:
+$$a^{(t)} = a + A\, h_{rnn}^{(t-1)}, \qquad b^{(t)} = b + B\, h_{rnn}^{(t-1)}, \qquad h_{rnn}^{(t)} = \tanh\!\big(W_{rnn}\, v^{(t)} + R\, h_{rnn}^{(t-1)} + b_{rnn}\big)$$
+so the *local* energy at step $t$ is shaped by the *global* history — the RNN provides the macro-form grammar, the RBM provides the note-level flesh. This is the same two-subnet temporal idea as 057 MT-GAC's $G_{temp} \to G_{bar}$.
+
+**Sampling temperature.** $P(v) \propto e^{-E(v)/T}$: at low $T$ sampling is crisp (confident, corpus-typical — good for a stable groove); at high $T$ it is exploratory (wanders the energy landscape — good for variation and passing material). An **annealing schedule** over the Gibbs steps (start hot, cool down) mirrors 055 SAMC and yields a coherent-to-committed trajectory.
+
+**Complexity**: one Gibbs step is $\mathcal{O}(N H)$ (one matrix-vector product each direction); $T$ steps per fill, $E$ epochs × $N$ training cases × $k$ CD steps for learning. Sampling a whole UnitMatrix is $\mathcal{O}(V \cdot S \cdot T \cdot N \cdot H)$ — cheap relative to the training pass.
+
+### **Implementation Requirements (Python / NumPy)**
+```python
+from __future__ import annotations
+import numpy as np
+from numpy.random import default_rng
+
+class RBM:
+    """Binary-binary RBM trained by contrastive divergence (Hinton 2002)."""
+    def __init__(self, n_vis, n_hid, lr=0.01, seed=0):
+        self.rng = default_rng(seed)
+        self.W = self.rng.normal(0, 0.01, (n_vis, n_hid))
+        self.a = np.zeros(n_vis)
+        self.b = np.zeros(n_hid)
+        self.lr = lr
+
+    def _sig(self, x):
+        return 1.0 / (1.0 + np.exp(-x))
+
+    def _h_given_v(self, v):
+        return self._sig(self.b + v @ self.W)
+
+    def _v_given_h(self, h):
+        return self._sig(self.a + self.W @ h)
+
+    def _gibbs(self, v, k=1):
+        for _ in range(k):
+            h = self.rng.binomial(1, self._h_given_v(v))
+            v = self.rng.binomial(1, self._v_given_h(h))
+        return v
+
+    def train(self, data, epochs=100, k=1):
+        for _ in range(epochs):
+            for v0 in data:
+                h0 = self._h_given_v(v0)
+                vk = self._gibbs(v0, k)
+                hk = self._h_given_v(vk)
+                self.W += self.lr * (np.outer(v0, h0) - np.outer(vk, hk))
+                self.a += self.lr * (v0 - vk)
+                self.b += self.lr * (h0 - hk)
+
+    def sample(self, v_seed, steps=100, temperature=1.0):
+        """Block Gibbs relax a seed to a high-probability (corpus-consistent) piece."""
+        v = v_seed.copy()
+        for _ in range(steps):
+            h = self.rng.binomial(1, self._sig((self.b + v @ self.W) / temperature))
+            v = self.rng.binomial(1, self._sig((self.a + self.W @ h) / temperature))
+        return v
+
+# --- Musicom integration sketch (conceptual — engine does the MIDI authoring) ---
+# Visible layer = flattened piano-roll: for each voice, a (pitch, time-step)
+# one-hot slab. Train on per-voice piano-rolls of the target corpus; the hidden
+# units become chord/motif/register features. Composition = for each section,
+# clamp a chord-function/register conditioning vector (or a 001 skeleton seed)
+# and run block Gibbs sampling; decode the visible layer to UnitMatrix cells.
+#   rolls = corpus_of_piano_rolls(style)            # N x (V*P*T) binary
+#   rbm = RBM(n_vis=V*P*T, n_hid=512).train(rolls)
+#   for s in range(num_sections):
+#       v = rbm.sample(condition_seed(c_s), steps=200)
+#       for voice, pitch_units, onset_units in decode(v):
+#           composer.fill_voice_section(voice, s,
+#               create_note_unit(pitch, dur, tick))    # scale-quantize via 022
+#   ok, msg = composer.validate()   # MUST be True before to_midi (per AGENTS.md)
+```
+
+**Tooling**: NumPy suffices for a binary RBM (no autograd needed — CD has explicit update rules). For Gaussian-visible or RNN-RBM variants, PyTorch/JAX makes the energy gradient automatic; the musicom engine still handles UnitMatrix fill and zero-drift MIDI export upstream. RBM-C emits the symbolic visible-layer bits that decode to cell fillings.
+
+### **Pitfalls**
+1. **Intractable partition function $Z$** → the exact likelihood (and its gradient) cannot be computed, so you can never *evaluate* how good the model is — only sample from it. Fix: use CD-k / persistent CD; monitor the **reconstruction error** and the log-pseudo-likelihood as proxies; never claim a likelihood value.
+2. **Contrastive-divergence bias** → CD-1 systematically underestimates the model term, biasing $W$ and producing mushy, over-smooth features. Fix: use **PCD** (persistent chains carried across weight updates) or $k \ge 10$; add L2 weight decay to keep $W$ small; anneal the learning rate.
+3. **Poor mixing / mode collapse** → a single short Gibbs chain gets stuck in one basin, so sampling repeats the same few bars. Fix: more Gibbs steps, higher sampling temperature, or **parallel tempering** (multiple chains at different $T$ swapping states) — the RBM analogue of 055 SAMC's annealing.
+4. **Binary visible units can't carry dynamics** → on/off units throw away velocity and duration nuance, giving a robotic, velocity-flat piano-roll. Fix: **Gaussian-visible** units for velocity/duration (energy gains a quadratic term), or a hybrid with a separate real-valued density layer; pair with 026 DPSM fills for continuous flow.
+5. **Memoryless single RBM → no form** → a plain RBM has no time axis memory, so long pieces wander (no phrase/cadence grammar). Fix: **RNN-RBM** (Boulanger-Lewandowski 2012) so an RNN conditions each step's biases on the piece history, or drive a conditional RBM with an explicit section/chord schedule $c_s$ = macro-form.
+6. **Off-key / scale-incoherent samples** → the learned energy may fire a pitch that is corpus-plausible but out of the *current* key (the model doesn't know the key changed mid-piece). Fix: post-process with **022 MCWS quantization** to the active scale; or make the visible pitch groups *scale-conditioned* so out-of-key units are gated off.
+7. **Sparse/staccato output** → a low firing rate can leave cells mostly silent (short active phrases → MIDI tail truncation on export, and a staccato feel). Fix: honor the hybridization rule — add a continuous fill layer (026 DPSM arpeggio, sustained pad, or walking bass) from a separate low-temperature pass; and append the absolute silent padding event at `total_section_ticks - 1` to keep track-length symmetry.
+8. **Single-layer capacity limit** → one hidden layer can only model pairwise visible correlations, missing higher-order structure. Fix: stack RBMs into a **deep belief network** (Hinton et al. 2006) — the top RBM models the hidden features' joint distribution, giving hierarchical form — or use the ConvRBM (Lattner et al. 2018) for translation-invariant (motif-shifted) features.
+9. **Ignoring the validation gate** → a high-probability sample can still violate zero-drift padding. Fix: run `composer.validate()` and, on failure, re-sample the offending section or pad; never export an unvalidated fill.
+
+### **Comparison With Related Methods**
+| Method | Model | Weight origin | Layer topology | Sampling | Time axis |
+|---|---|---|---|---|---|
+| 064 MRFCC | Markov Random Field | hand-crafted clique potentials | general graph (2D lattice) | Gibbs (per-cell) | grid (lattice) |
+| 071 HAM-C | Hopfield network | Hebbian one-shot storage | symmetric, fully-connected | asynchronous threshold / Boltzmann | none (attractor recall) |
+| 046 VAE | VAE | trained (ELBO) | encoder→latent→decoder | latent decode | per-segment |
+| 072 NFC | normalizing flow | trained (exact likelihood) | invertible coupling stack | forward push of latent | per-segment |
+| **074 RBM-C** | **restricted Boltzmann machine** | **trained (contrastive divergence)** | **bipartite visible↔hidden** | **block Gibbs** | **none (memoryless) → RNN-RBM adds recurrence** |
+
+### **References**
+- Smolensky, P. (1986). "Information processing in dynamical systems: foundations of harmony theory." In Rumelhart & McClelland (eds.), *Parallel Distributed Processing* Vol. 1, MIT Press.
+- Hinton, G. E. (2002). "Training products of experts by minimizing contrastive divergence." *Neural Computation* 14(8), 1771–1800.
+- Hinton, G. E., Osindero, S., & Teh, Y.-W. (2006). "A fast learning algorithm for deep belief nets." *Neural Computation* 18(7), 1527–1554.
+- Boulanger-Lewandowski, N., Bengio, Y., & Vincent, P. (2012). "Modeling temporal dependencies in high-dimensional sequences: application to polyphonic music generation and transcription." *ICML 2012* (arXiv:1206.6392).
+- Lattner, S., Grachten, M., & Widmer, G. (2018). "Imposing higher-level structure in polyphonic music generation using convolutional restricted Boltzmann machines and constraints." *ISMIR 2018*.
+- Mandel, M., Pascanu, R., Larochelle, H., & Bengio, Y. (2011). "Autotagging music with conditional restricted Boltzmann machines." *arXiv:1103.2832*.

@@ -1,0 +1,18 @@
+{
+  "artifact": "083-techno-brownian-phase1.wav",
+  "classification": "ai-generated",
+  "generator": "FluidSynth CLI render (SP-001 Multi-timbral SoundFont)",
+  "sources": [
+    "/opt/data/projects/Styles/Techno/083-techno-brownian/MIDI/083-techno-brownian-phase1.mid"
+  ],
+  "parameters": {
+    "soundfont": "TimGM6mb.sf2 (FluidR3-compatible GM via pretty_midi, FluidSynth CLI)",
+    "gain": 1.2,
+    "opus_bitrate": 48
+  },
+  "notes": "Phase-1 raw Brownian draft rendered via FluidSynth CLI SP-001, -g 1.2",
+  "sha256": "9c30375412cba3cc3043ff6d20b47289cb3cae624c0255be6172730b67c7a121",
+  "bytes": 8417068,
+  "created_utc": "2026-08-31T23:07:55.252781+00:00",
+  "provenance_version": "1.0"
+}

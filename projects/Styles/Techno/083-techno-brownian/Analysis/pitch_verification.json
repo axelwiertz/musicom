@@ -1,0 +1,52 @@
+{
+  "083-techno-brownian": {
+    "file": "083-techno-brownian.wav",
+    "windows": 96,
+    "tonal_windows": 91,
+    "tonal_fraction": 0.9479,
+    "harmonic_energy_first8_F2": 0.7317,
+    "peak_freqs_sample": [
+      262.0,
+      174.0,
+      174.0,
+      174.0,
+      138.0,
+      208.0,
+      68.0,
+      70.0,
+      156.0,
+      418.0,
+      50.0,
+      78.0,
+      78.0,
+      78.0,
+      78.0,
+      262.0
+    ]
+  },
+  "083-techno-brownian-phase1": {
+    "file": "083-techno-brownian-phase1.wav",
+    "windows": 95,
+    "tonal_windows": 91,
+    "tonal_fraction": 0.9579,
+    "harmonic_energy_first8_F2": 0.0236,
+    "peak_freqs_sample": [
+      556.0,
+      494.0,
+      418.0,
+      624.0,
+      624.0,
+      524.0,
+      524.0,
+      394.0,
+      418.0,
+      394.0,
+      394.0,
+      372.0,
+      394.0,
+      418.0,
+      442.0,
+      742.0
+    ]
+  }
+}

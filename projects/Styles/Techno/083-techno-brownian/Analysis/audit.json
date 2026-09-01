@@ -1,0 +1,151 @@
+{
+  "phase2_grid": {
+    "Lead": {
+      "n": 174,
+      "off16": 0,
+      "off8": 79,
+      "off16_list": [],
+      "off8_list": [
+        840,
+        2040,
+        4200,
+        4680,
+        5160,
+        5400,
+        6120,
+        6360
+      ]
+    },
+    "Cello": {
+      "n": 72,
+      "off16": 0,
+      "off8": 0,
+      "off16_list": [],
+      "off8_list": []
+    },
+    "Piano": {
+      "n": 192,
+      "off16": 0,
+      "off8": 192,
+      "off16_list": [],
+      "off8_list": [
+        120,
+        360,
+        600,
+        840,
+        1080,
+        1320,
+        1560,
+        1800
+      ]
+    },
+    "Violin": {
+      "n": 192,
+      "off16": 0,
+      "off8": 0,
+      "off16_list": [],
+      "off8_list": []
+    },
+    "Bass": {
+      "n": 137,
+      "off16": 0,
+      "off8": 9,
+      "off16_list": [],
+      "off8_list": [
+        9480,
+        11400,
+        13320,
+        17160,
+        19080,
+        21000,
+        32520,
+        34440
+      ]
+    },
+    "Drums": {
+      "n": 372,
+      "off16": 0,
+      "off8": 64,
+      "off16_list": [],
+      "off8_list": [
+        15480,
+        15720,
+        15960,
+        16200,
+        16440,
+        16680,
+        16920,
+        17160
+      ]
+    }
+  },
+  "phase2_harmony": {
+    "Lead": {
+      "n": 174,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "examples": []
+    },
+    "Cello": {
+      "n": 72,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "examples": []
+    },
+    "Piano": {
+      "n": 192,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "examples": []
+    },
+    "Violin": {
+      "n": 192,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "examples": []
+    },
+    "Bass": {
+      "n": 137,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "examples": []
+    },
+    "Drums": {
+      "n": 372,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "examples": []
+    }
+  },
+  "phase1_grid": {
+    "LeadRaw": {
+      "n": 174,
+      "off16": 166,
+      "off8": 168,
+      "off16_list": [
+        491,
+        881,
+        1401,
+        1705,
+        2010,
+        2384,
+        2683,
+        3149
+      ],
+      "off8_list": [
+        491,
+        881,
+        1401,
+        1705,
+        2010,
+        2384,
+        2683,
+        3149
+      ]
+    }
+  },
+  "voice_leading_flags": [],
+  "voice_leading_flag_count": 0,
+  "phase1_validate": "OK",
+  "phase2_validate": "OK"
+}

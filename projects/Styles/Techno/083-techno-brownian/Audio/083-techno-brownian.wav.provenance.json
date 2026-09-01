@@ -1,0 +1,18 @@
+{
+  "artifact": "083-techno-brownian.wav",
+  "classification": "ai-generated",
+  "generator": "FluidSynth CLI render (SP-001 Multi-timbral SoundFont)",
+  "sources": [
+    "/opt/data/projects/Styles/Techno/083-techno-brownian/MIDI/083-techno-brownian.mid"
+  ],
+  "parameters": {
+    "soundfont": "TimGM6mb.sf2 (FluidR3-compatible GM via pretty_midi, FluidSynth CLI)",
+    "gain": 1.2,
+    "opus_bitrate": 48
+  },
+  "notes": "Phase-2 full arrangement rendered via FluidSynth CLI SP-001, -g 1.2, peak-normalized, Opus 48k",
+  "sha256": "6a9c010432c08c56c2860c9f6c4cb790598201f3c0a1389497514e758765c8ef",
+  "bytes": 8470572,
+  "created_utc": "2026-08-31T23:07:55.245698+00:00",
+  "provenance_version": "1.0"
+}
