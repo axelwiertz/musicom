@@ -1,0 +1,10 @@
+{
+  "job": "SP-024 production pass (cron)",
+  "source_midi": "/opt/data/projects/Styles/Balfolk/017-hybrid-pattern-matrix/MIDI/musicmatrix_exercise2_classical_motif_v1.mid",
+  "production_method": "SP-024",
+  "production_method_name": "Bowed String Physical Modeling",
+  "outputs": {
+    "full_mix_wav": "/opt/data/projects/Styles/Production/SP024-bowed-classical-motif/Audio/SP024-bowed-classical-motif.wav",
+    "full_mix_ogg": "/opt/data/projects/Styles/Production/SP024-bowed-classical-motif/Audio/SP024-bowed-classical-motif.ogg"
+  }
+}

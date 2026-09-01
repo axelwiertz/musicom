@@ -60,12 +60,13 @@ Instruments/
 ├── Guitar/
 │   └── acoustic/
 └── Percussion/
-    └── drum_kit/
+    ├── drum_kit/
+    └── marimba/
 ```
 
-Current instruments (17): Violin, Viola, Cello, Double Bass, Piano, Church
+Current instruments (18): Violin, Viola, Cello, Double Bass, Piano, Church
 Organ, Trumpet, Trombone, French Horn, Tuba, Flute, Oboe, Clarinet, Bassoon,
-Alto Saxophone, Acoustic Guitar, Drum Kit.
+Alto Saxophone, Acoustic Guitar, Drum Kit, Marimba.
 
 ## Musicom Integration
 
@@ -86,11 +87,12 @@ The canonical table lives in `registry.md` (kept in sync manually) and
 
 ## Status
 
-- [x] Registry + Instrument objects (16 instruments loaded, lookup by name/program)
+- [x] Registry + Instrument objects (18 instruments loaded, lookup by name/program)
 - [x] Trumpet program corrected to GM 56 (was 57 = Trombone)
 - [x] String delay formula corrected (`D = sr/freq`, not `sr/(2*freq)`)
 - [x] Orchestrator (role → instrument mapping)
 - [x] Oboe, Bassoon, Saxophone (woodwind family complete)
 - [x] Church Organ (keys family, GM19, additive engine — 2026-08-31)
+- [x] Marimba (percussion melodic, GM12, modal engine — 2026-09-01)
 - [ ] Synth Pad, Harpsichord, Electric Guitar (listed in roadmap)
 - [ ] Drum Kit expansion beyond GM mapping

@@ -42,6 +42,7 @@ _INSTRUMENT_MODULES = {
     "Woodwind.saxophone.saxophone": "saxophone",
     "Guitar.acoustic.acoustic_guitar": "acoustic_guitar",
     "Percussion.drum_kit.drum_kit": "drum_kit",
+    "Percussion.marimba.marimba": "marimba",
 }
 
 _FIELDS = (
@@ -102,7 +103,7 @@ def _load_all():
         family = mod_path.split(".")[0]
         mod = _load_module(mod_path)
         human = getattr(mod, "GM_NAME", None)
-        if family == "Percussion":
+        if family == "Percussion" and key == "drum_kit":
             human = "Drum Kit"
         if not human:
             human = key.replace("_", " ").title()
@@ -130,6 +131,7 @@ BASSOON = ALL_INSTRUMENTS["bassoon"]
 SAXOPHONE = ALL_INSTRUMENTS["saxophone"]
 ACOUSTIC_GUITAR = ALL_INSTRUMENTS["acoustic_guitar"]
 DRUM_KIT = ALL_INSTRUMENTS["drum_kit"]
+MARIMBA = ALL_INSTRUMENTS["marimba"]
 
 
 def by_name(name):
@@ -170,6 +172,8 @@ def registry_table():
             role = "harmony, melody, bass, rhythm"
         elif low == "drum kit":
             role = "rhythm, groove, accent"
+        elif low == "marimba":
+            role = "lead, melody, accent, countermelody, harmony"
         else:
             role = "lead, harmony, accent"
         rng = f"{inst.range_min}–{inst.range_max}" if inst.range_min else "-"

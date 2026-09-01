@@ -1,2 +1,2 @@
-/opt/data/projects/Styles/Balkan/001-balkan-lesnoto/MIDI/balkan-lesnoto.mid
-SP-017
+/opt/data/projects/Styles/Balfolk/017-hybrid-pattern-matrix/MIDI/musicmatrix_exercise2_classical_motif_v1.mid
+SP-024

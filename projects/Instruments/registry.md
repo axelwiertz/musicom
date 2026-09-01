@@ -65,6 +65,15 @@ zero-drift ✓ → MIDI → FluidSynth WAV ✓; RenderPipeline stem label
 FIXED: `get_adsr_weights` used invalid `np.convolve(rotation='same')` →
 `mode='same'` (broke the organ's recommended engine path).
 
+**Marimba added** (2026-09-01): GM12, percussion-family melodic entry
+(instrument.md + marimba.py), verified end-to-end UnitMatrixComposer →
+zero-drift ✓ → MIDI → FluidSynth WAV ✓; RenderPipeline stem label
+`trackXX_Marimba.wav` ✓ (GM_PROGRAMS[12] = "Marimba", SF2 preset 12 =
+"Marimba" — labels match exactly, no quirk). ModalSynth dedicated
+`'marimba'` preset confirmed (fast exponential decay, impulse excitation).
+Note: `instrument_registry._load_all` previously overwrote ALL percussion
+GM_NAMEs with "Drum Kit" — fixed to only override drum_kit.
+
 ## Python usage
 
 ```python
@@ -103,6 +112,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Woodwind | Bassoon | 70 | 34–88 | bass, harmony, counter, lead |
 | Guitar | Acoustic | 25 | 40–84 | harmony, rhythm, strum |
 | Percussion | Drum Kit | ch9 | 35–81 | rhythm, groove, accent |
+| Percussion | Marimba | 12 | 45–96 | lead, melody, accent, countermelody, harmony |
 
 ## Stem label quirks (RenderPipeline)
 
@@ -125,6 +135,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 74 | Flute | **Recorder** ✗ |
 | 19 | Church Organ | Church Organ ✓ (GM_PROGRAMS[19] + SF2 preset 19 both "Church Organ") |
 | 25 | Acoustic Guitar (nylon) | Acoustic_Guitar_nylon ✓ |
+| 12 | Marimba | Marimba ✓ |
 | ch9/pgm0 | Drums | **Acoustic_Grand_Piano** ✗ (program-0 fallback) |
 
 > **Known off-by-one in existing entries**: ~~`trumpet.py` uses 57~~ **FIXED 2026-08-27**: trumpet is now 56 (SF2 preset 56=`SoloTrumpet`). `piano.py`=1 → actually Bright Acoustic Piano (GM #2) — cosmetic label difference only, no routing impact. Legacy registry rows kept as-is for piano; new instruments use 0-indexed programs matching pipeline+SF2.

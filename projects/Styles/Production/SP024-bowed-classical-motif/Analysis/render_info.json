@@ -1,0 +1,148 @@
+{
+  "source_midi": "/opt/data/projects/Styles/Balfolk/017-hybrid-pattern-matrix/MIDI/musicmatrix_exercise2_classical_motif_v1.mid",
+  "method": "SP-024",
+  "method_name": "Bowed String Physical Modeling (Friction-Induced Waveguide Synthesis)",
+  "bpm": 100.0,
+  "total_notes": 168,
+  "output_seconds": 22.8,
+  "voices": {
+    "2": {
+      "role": "cello",
+      "program": 0,
+      "notes": 64,
+      "bow_velocity": 0.16,
+      "bow_force": 1.6,
+      "bow_position": 0.14,
+      "gain_db": -4.0,
+      "pan": 0.42
+    },
+    "3": {
+      "role": "bass",
+      "program": 43,
+      "notes": 32,
+      "bow_velocity": 0.12,
+      "bow_force": 2.2,
+      "bow_position": 0.1,
+      "gain_db": -5.0,
+      "pan": 0.5
+    },
+    "4": {
+      "role": "cello",
+      "program": 48,
+      "notes": 24,
+      "bow_velocity": 0.16,
+      "bow_force": 1.6,
+      "bow_position": 0.14,
+      "gain_db": -4.0,
+      "pan": 0.42
+    },
+    "5": {
+      "role": "viola",
+      "program": 41,
+      "notes": 16,
+      "bow_velocity": 0.2,
+      "bow_force": 1.4,
+      "bow_position": 0.16,
+      "gain_db": -3.0,
+      "pan": 0.58
+    },
+    "6": {
+      "role": "violin",
+      "program": 40,
+      "notes": 32,
+      "bow_velocity": 0.26,
+      "bow_force": 1.2,
+      "bow_position": 0.18,
+      "gain_db": -2.0,
+      "pan": 0.5
+    }
+  },
+  "verification": {
+    "silence_ratio": 0.1643,
+    "rms_per_second": [
+      0.32444,
+      0.32439,
+      0.33329,
+      0.33114,
+      0.31774,
+      0.3317,
+      0.30889,
+      0.30916,
+      0.32194,
+      0.3205,
+      0.31092,
+      0.31715,
+      0.32512,
+      0.32767,
+      0.3295,
+      0.31322,
+      0.28257,
+      0.35683,
+      0.36475
+    ],
+    "per_track": {
+      "2": {
+        "checked": 64,
+        "hit": 64,
+        "pct": 100.0
+      },
+      "3": {
+        "checked": 32,
+        "hit": 32,
+        "pct": 100.0
+      },
+      "4": {
+        "checked": 8,
+        "hit": 4,
+        "pct": 50.0
+      },
+      "5": {
+        "checked": 16,
+        "hit": 15,
+        "pct": 93.8
+      },
+      "6": {
+        "checked": 32,
+        "hit": 32,
+        "pct": 100.0
+      }
+    },
+    "pitch_notes_checked": 152,
+    "pitch_notes_hit": 147,
+    "pitch_hit_pct": 96.7,
+    "pitch_estimates_sample": [
+      194.3,
+      288.2,
+      243.6,
+      288.2,
+      194.3,
+      288.2,
+      243.6,
+      288.2,
+      146.0,
+      218.3,
+      183.8,
+      218.3,
+      146.0,
+      218.3,
+      183.8,
+      218.3,
+      163.3,
+      243.6,
+      194.3,
+      243.6
+    ],
+    "harmonic_members_present": "24/24",
+    "harmonic_presence_pct": 100.0
+  },
+  "parameters": {
+    "sample_rate": 44100,
+    "synthesis_engine": "sound.synthesis.bowed.BowedString (library)",
+    "bow_friction_model": "exponential sliding friction, Newton-Raphson (4 iterations)",
+    "waveguide": "bidirectional delay lines, neck + bridge segments",
+    "bridge_filter": "one-pole LPF (coef=0.6)",
+    "bow_envelope": "attack 80 ms -> sustain -> release 150 ms",
+    "pan": "static per voice; violin lead drift -0.45..+0.45 across phrase",
+    "bus": "soft-knee saturation, peak -1 dBFS"
+  }
+}
