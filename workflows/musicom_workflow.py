@@ -220,16 +220,11 @@ def compose(style="pop", method=None, form=None, key="C", bpm=None,
         composer.add_section(sname, bars=nbars)
 
     # --- fill cells with a real framework (I–V–vi–IV skeleton) --------------
-    # Key → scale degree pitch sets (C major default; transpose by key offset)
-    KEY_OFFSET = {"C": 0, "D": 2, "E": 4, "F": 5, "G": 7, "A": 9, "B": 11,
-                  "Cm": -3, "Dm": -1, "Em": 1, "Fm": 2, "Gm": 4, "Am": 6,
-                  "Bm": 8}
+    # Key → scale degree pitch sets; canonical tables live in rules/harmony.py
+    from rules.harmony import CHORD_SHAPES, KEY_OFFSET, QUALITY_INTERVALS
     off = KEY_OFFSET.get(key, 0)
     # chords: [I, V, vi, IV] as (root, quality) where quality is
     # "maj" (0,4,7) or "min" (0,3,7)
-    CHORD_SHAPES = {
-        "I": (0, "maj"), "V": (7, "maj"), "vi": (9, "min"), "IV": (5, "maj"),
-    }
     PROG = [("I", 0), ("V", 1), ("vi", 2), ("IV", 3)]  # per 2-bar slot
     BAR = 1920
     # ---- abstract path: ABS-* method -> subset-network progression --------

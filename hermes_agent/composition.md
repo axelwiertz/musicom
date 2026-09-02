@@ -2,30 +2,11 @@
 
 Operational guide for Hermes agent composition tasks on the musicom engine.
 
-## Core Model
-
-- **Time is ABSOLUTE ticks.** `MusicEvent(pitch, volume, start_tick, end_tick)`
-- `UnitMatrix`: rows = voices, cols = sections, cells = `MusicUnit`
-- **Zero-drift invariant**: all rows MUST be equal length
-- Standard resolution: `ticks_per_beat=480`, `beats_per_bar=4` → `BAR = 1920` ticks
-
-## The One True Workflow
-
-```python
-from workflows.unitmatrix_composer import UnitMatrixComposer, create_note_unit
-from structures import MidiInstrument
-
-composer = UnitMatrixComposer(bpm=120, ticks_per_beat=480, beats_per_bar=4)
-composer.create_matrix(num_voices=N, num_sections=M)   # 1. shape
-composer.add_voice("Lead", program=MidiInstrument.FLUTE, channel=0)  # 2. voices
-composer.add_section("A", bars=1)                      # 3. sections
-composer.fill_voice_section("Lead", "A", create_note_unit(72, 1920))  # 4. fill cells
-ok, msg = composer.validate()                          # 5. zero-drift gate
-composer.to_midi("out.mid")                            # 6. export
-```
-
-Order is mandatory: `create_matrix → add_voice → add_section → fill → validate → to_midi`.
-Tempo meta lives in track 0. Percussion on channel 9.
+> **Canonical reference**: AGENTS.md (repo root) holds the machine-facing
+> core model (absolute ticks, zero-drift invariant, the one true workflow,
+> environment, testing). This file holds only the agent-operational *delta*:
+> the two-phase generative post-process, the generator catalog, and learned
+> pitfalls. When this file and AGENTS.md disagree, AGENTS.md wins.
 
 ## Two-Phase Architecture (mandatory for generative methods)
 

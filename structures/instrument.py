@@ -2,7 +2,10 @@
 
 class MidiInstrument:
     # General MIDI instrument numbers (0-127)
-    PIANO = 1
+    # NOTE: GM Acoustic Grand Piano is program 0 (fix 2026-09: was 1 = Bright
+    # Acoustic Piano). Percussion is NOT a program number — it is channel 10
+    # (see MidiChannel.PERCUSSION / PERCUSSION_INDEX below).
+    PIANO = 0
     CHURCH_ORGAN = 20
     ACOUSTIC_GUITAR = 25
     VIOLIN = 41
@@ -11,8 +14,6 @@ class MidiInstrument:
     FLUTE = 74
     SYNTH_PAD = 88
     BASS = 33
-
-    PERCUSSION = 128  # Channel 10 is percussion
 
 class MidiChannel:
     PERCUSSION = 10  # Channel 10 (index 9) is reserved for percussion in General MIDI

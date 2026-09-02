@@ -12,8 +12,15 @@ interval-composition assessment:
 
 from typing import Dict, List, Sequence, Tuple
 
+from rules.set_theory import interval_vector as _kernel_icv
+from rules.set_theory import prime_form as _kernel_pf
+
 # ---------------------------------------------------------------------------
 # 1. Forte interval-class vectors (set theory)
+#
+# Canonical implementation lives in rules/set_theory.py; these are thin
+# aliases kept so existing imports (`from structures.intervals import ...`)
+# keep working.
 # ---------------------------------------------------------------------------
 
 INTERVAL_CLASSES = (1, 2, 3, 4, 5, 6)  # i1..i6 (i6 = tritone class)
@@ -22,57 +29,37 @@ INTERVAL_CLASSES = (1, 2, 3, 4, 5, 6)  # i1..i6 (i6 = tritone class)
 def interval_class_vector(pitches: Sequence[int]) -> List[int]:
     """Forte ICV: counts of each interval class (i1..i6) in a pitch set.
 
-    Args:
-        pitches: MIDI note numbers or pitch classes (mod 12 applied).
-
-    Returns:
-        List of 6 counts, index 0 = i1 (minor 2nd class), index 5 = i6.
+    Delegates to the canonical kernel in rules/set_theory.py.
     """
-    pcs = sorted({p % 12 for p in pitches})
-    n = len(pcs)
-    vector = [0] * 6
-    for i in range(n):
-        for j in range(i + 1, n):
-            d = (pcs[j] - pcs[i]) % 12
-            ic = min(d, 12 - d)
-            if 1 <= ic <= 6:
-                vector[ic - 1] += 1
-    return vector
+    return _kernel_icv(pitches)
 
 
 def z_related(a: Sequence[int], b: Sequence[int]) -> bool:
-    """True if two sets share an ICV but are not transpositionally related."""
+    """True if two sets share an ICV but are NOT transpositionally or
+    inversionally related (Forte Z-relation).
+
+    Two sets related by transposition OR inversion have the same interval
+    content by definition — they are not Z-partners. Z-partners share the
+    ICV yet have genuinely different prime forms (e.g. 4-Z15 / 4-Z29).
+    """
     va = interval_class_vector(a)
     vb = interval_class_vector(b)
     if va != vb:
         return False
-    pcs_a = sorted({p % 12 for p in a})
-    pcs_b = sorted({p % 12 for p in b})
-    # transposition check: is b a transposition of a?
-    if len(pcs_a) != len(pcs_b):
-        return True
-    for t in range(12):
-        if sorted((p + t) % 12 for p in pcs_a) == pcs_b:
-            return False  # transpositionally related -> not Z
-    return True
+    return set_prime_form(a) != set_prime_form(b)
 
 
 def set_prime_form(pitches: Sequence[int]) -> Tuple[int, ...]:
-    """Rahn/Forte-ish prime form (normal order, minimal rotation).
+    """Forte prime form (canonical; delegates to rules/set_theory.py).
 
     Returns the prime form as a tuple of pitch classes (lowest form).
+
+    >>> set_prime_form([0, 4, 7])   # major triad
+    (0, 3, 7)
+    >>> set_prime_form([0, 3, 7])   # minor triad — same prime form
+    (0, 3, 7)
     """
-    pcs = sorted({p % 12 for p in pitches})
-    rotations = []
-    for r in range(len(pcs)):
-        rot = pcs[r:] + [p + 12 for p in pcs[:r]]
-        rotations.append(rot)
-    # normalize each rotation to start at 0
-    normalized = []
-    for rot in rotations:
-        base = rot[0]
-        normalized.append(tuple((p - base) % 12 for p in rot))
-    return min(normalized)
+    return tuple(_kernel_pf(pitches))
 
 
 # ---------------------------------------------------------------------------

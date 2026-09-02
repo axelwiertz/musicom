@@ -23,19 +23,8 @@ from structures.unit import MusicUnit, MusicEvent
 from generators.base import MusicGenerator
 
 # Chord qualities -> semitone offsets from root.
-CHORD_QUALITY = {
-    'major': (0, 4, 7),
-    'minor': (0, 3, 7),
-    'diminished': (0, 3, 6),
-    'augmented': (0, 4, 8),
-    'sus2': (0, 2, 7),
-    'sus4': (0, 5, 7),
-    'major7': (0, 4, 7, 11),
-    'dominant7': (0, 4, 7, 10),
-    'minor7': (0, 3, 7, 10),
-    'half_dim7': (0, 3, 6, 10),
-    'dim7': (0, 3, 6, 9),
-}
+# Canonical table lives in rules/harmony.py; alias kept for back-compat.
+from rules.harmony import QUALITY_INTERVALS as CHORD_QUALITY
 
 
 class TonalNetworkGenerator(MusicGenerator):

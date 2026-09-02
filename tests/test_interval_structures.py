@@ -40,7 +40,10 @@ class TestZRelation:
 
 class TestPrimeForm:
     def test_trichord(self):
-        assert set_prime_form([0, 4, 7]) == (0, 3, 8)  # major triad prime form
+        # major triad prime form is [0,3,7] (Forte) — was (0,3,8) before the
+        # inversion-normalization fix (2026-09)
+        assert set_prime_form([0, 4, 7]) == (0, 3, 7)  # major triad prime form
+        assert set_prime_form([0, 3, 7]) == (0, 3, 7)  # minor triad: same PF
 
     def test_minimal_rotation(self):
         assert set_prime_form([2, 4, 7]) == (0, 2, 5)

@@ -6,6 +6,12 @@ Classification of active Musicom composition methods categorized by their primar
 - **Memory Depth**: Context window length required by the generator (None/Markovian, Meso/Phrase, Macro/Form).
 - **Time Complexity**: Computational scale of generation (Linear $\mathcal{O}(N)$, Polynomial, Exponential NP-hard).
 
+> **Canonical source note** (2026-09): this file is the human-readable,
+> long-form method catalog. The machine-readable code truth is
+> `generators/generator_registry.py` + `workflows/paths.py` (`SCALE`). When
+> they disagree, **code wins**. Abstract-layer methods (ABS-001..005,
+> `rules/subset_network.py`) are registered in code but not yet listed below.
+
 | Method ID | Method Name | Paradigm | Primary Elements | Tonal Gravity | Metric Binding | Memory Depth | Time Complexity | Description / UnitMatrix Integration |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **001** | Skeleton-First Refinement | **Rules-Based** | Structure, Pitch, Rhythm | Strict (Static Scale/Key) | Grid-Locked | Macro/Form | $\mathcal{O}(N)$ | Baseline form-first drafting. Establishes deterministic structural skeleton before micro-variations. |

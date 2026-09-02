@@ -148,7 +148,7 @@ from rules.progression import PatternMovement, Scale7ChordDegree, MusicForm
 
 | Name | # |
 |---|---|
-| `PIANO` | 1 |
+| `PIANO` | 0 |
 | `CHURCH_ORGAN` | 20 |
 | `ACOUSTIC_GUITAR` | 25 |
 | `BASS` | 33 |

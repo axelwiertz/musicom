@@ -71,9 +71,14 @@ def common_tones(a: Iterable[int], b: Iterable[int]) -> int:
 def voice_leading_distance(a: Iterable[int], b: Iterable[int]) -> int:
     """Minimal total semitone motion between two subsets (Tymoczko).
 
-    Embedding distance: pair up the sorted pc-sets (wrapping), take the
-    minimal total |Δ| over a small set of alignment offsets. Used to rank
-    how "smooth" a move between patterns is.
+    ABSTRACT-layer metric: operates on pitch classes, tries all alignment
+    offsets, uses the minimal (pc-wrapped) distance. Use this for ranking
+    how smooth a move between two *patterns/subsets* is.
+
+    NOTE: the CONCRETE-layer metric for actual voiced chords (absolute MIDI
+    pitches, padded to equal length) is
+    ``rules.voice_leading.VoiceLeadingRules.calculate_voice_leading_distance``.
+    They are deliberately different: pc-space ranking vs absolute-voice sum.
     """
     sa = sorted(set(p % 12 for p in a))
     sb = sorted(set(p % 12 for p in b))

@@ -173,6 +173,33 @@ def scale_table() -> str:
 
 
 # ============================================================================
+# Registration helper — one call, three places (LAYER_ARCHITECTURE.md)
+# ============================================================================
+# A method is registered in: SCALE (level + impl), GENERATOR_REGISTRY (code
+# resolution). Editing all three by hand drifts (ABS-* landed in two, missed
+# the prose DB). Use register_method() so the machine-readable stores stay in
+# sync; the long-form methods_db.md prose stays manual (documented there).
+
+def register_method(method_id: str, level: str, registry_mod_path: str,
+                    description: str) -> None:
+    """Register a method in SCALE + generator_registry in one call.
+
+    Args:
+        method_id: e.g. "ABS-006" or "HC-023".
+        level: SCALE level, one of LEVELS ("L1".."L4").
+        registry_mod_path: import path for the implementation module (or None
+            for spec-only — registers in SCALE only, not routable).
+        description: short description for the registry.
+    """
+    if level not in LEVELS:
+        raise ValueError(f"level must be one of {LEVELS}, got {level!r}")
+    SCALE[method_id] = (level, registry_mod_path is not None)
+    if registry_mod_path is not None:
+        from generators.generator_registry import GENERATOR_REGISTRY
+        GENERATOR_REGISTRY[method_id] = (registry_mod_path, None, description)
+
+
+# ============================================================================
 # 2. Middle-out framework builder (Path C)
 # ============================================================================
 # "Fix an invariant mid-level spine; structure grows around it, variation
@@ -189,65 +216,16 @@ POP_FORM = [
     ("Outro", 4),
 ]
 
-# Diatonic chord shapes: degree -> (root_interval, quality)
-CHORD_SHAPES = {
-    "I": (0, "maj"), "ii": (2, "min"), "iii": (4, "min"),
-    "IV": (5, "maj"), "V": (7, "maj"), "vi": (9, "min"), "vii": (11, "dim"),
-}
-# Major scale pitch-class offsets (for a C root, offset list per degree)
-MAJOR_DEGREES = ["I", "ii", "iii", "IV", "V", "vi", "vii"]
-
-KEY_OFFSET = {
-    "C": 0, "C#": 1, "Db": 1, "D": 2, "D#": 3, "Eb": 3, "E": 4,
-    "F": 5, "F#": 6, "Gb": 6, "G": 7, "G#": 8, "Ab": 8, "A": 9,
-    "A#": 10, "Bb": 10, "B": 11,
-    # relative minor keys
-    "Cm": -3, "C#m": -2, "Dm": -1, "D#m": 0, "Em": 1, "Fm": 2,
-    "F#m": 3, "Gm": 4, "G#m": 5, "Am": 6, "A#m": 7, "Bm": 8,
-}
-
-# Common progressions by style flavor (degree lists)
-PROGRESSIONS = {
-    "pop": ["I", "V", "vi", "IV"],
-    "pop-ballad": ["I", "vi", "IV", "V"],
-    "andalucian": ["i", "VII", "VI", "V"],  # flamenco flavor
-    "doo-wop": ["I", "vi", "IV", "V"],
-    "minor-aeolian": ["i", "VI", "III", "VII"],
-    "major-asc": ["I", "III", "IV", "V"],
-    "blues-rock": ["I", "IV", "I", "V"],
-}
-
-# Chord quality -> semitone offsets from root
-QUALITY_INTERVALS = {
-    "maj": (0, 4, 7),
-    "min": (0, 3, 7),
-    "dim": (0, 3, 6),
-}
+# --- harmony tables (canonical source: rules/harmony.py) -------------------
+from rules.harmony import (  # noqa: E402  (re-exported for backward compat)
+    CHORD_SHAPES, MAJOR_DEGREES, KEY_OFFSET, PROGRESSIONS, QUALITY_INTERVALS,
+    chord_tones as _harmony_chord_tones,
+)
 
 
 def _chord_tones(degree: str, root_midi: int) -> List[int]:
-    """Pitch classes of a chord built on `root_midi` for a scale degree.
-
-    Handles both "I"/"vi" (major scale spelling) and "i"/"VII" (natural
-    minor spelling, flamenco-style) by case: uppercase roots follow the
-    major scale offsets, lowercase follow the natural minor scale.
-    """
-    qual = "maj" if degree == degree.upper() else "min"
-    # map the degree letter to a scale offset
-    letter = degree.upper()
-    if letter in ("I", "II", "III", "IV", "V", "VI", "VII"):
-        idx = MAJOR_DEGREES.index(letter)
-        # natural-minor spelling: b3, b6, b7 vs major
-        minor_offsets = [0, 2, 3, 5, 7, 8, 10]
-        if degree != degree.upper():
-            scale_off = minor_offsets[idx]
-        else:
-            scale_off = [0, 2, 4, 5, 7, 9, 11][idx]
-    else:
-        scale_off = 0
-    root = root_midi + scale_off
-    intervals = QUALITY_INTERVALS[qual]
-    return [root + i for i in intervals]
+    """Pitch classes of a chord built on `root_midi` for a scale degree."""
+    return _harmony_chord_tones(degree, root_midi)
 
 
 def _euclidean_positions(onsets: int, steps: int) -> List[int]:
