@@ -1,0 +1,18 @@
+{
+  "artifact": "084-soul-voiceleading-graph.wav",
+  "classification": "ai-generated",
+  "generator": "FluidSynth CLI render (SP-001 Multi-timbral SoundFont)",
+  "sources": [
+    "/opt/data/projects/Styles/Soul/084-soul-voiceleading-graph/MIDI/084-soul-voiceleading-graph.mid"
+  ],
+  "parameters": {
+    "soundfont": "FluidR3_GM.sf2 (via discover_soundfont, FluidSynth CLI SP-001)",
+    "gain": 1.2,
+    "opus_bitrate": 48
+  },
+  "notes": "Phase-2 full soul arrangement rendered via FluidSynth CLI SP-001, -g 1.2, Opus 48k voip",
+  "sha256": "5a8ba69b7ce6c5b6500949fbf2ff8aef28338bbb998c1389e20e76d6dfeb95f7",
+  "bytes": 11775276,
+  "created_utc": "2026-09-02T06:50:15.284575+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,133 @@
+{
+  "phase2_grid": {
+    "Lead": {
+      "n": 135,
+      "off16": 0,
+      "off8": 0,
+      "off16_list": [],
+      "off8_list": []
+    },
+    "Piano": {
+      "n": 360,
+      "off16": 0,
+      "off8": 192,
+      "off16_list": [],
+      "off8_list": [
+        120,
+        360,
+        600,
+        840,
+        1080,
+        1320,
+        1560,
+        1800
+      ]
+    },
+    "Violin": {
+      "n": 72,
+      "off16": 0,
+      "off8": 0,
+      "off16_list": [],
+      "off8_list": []
+    },
+    "Guitar": {
+      "n": 192,
+      "off16": 0,
+      "off8": 0,
+      "off16_list": [],
+      "off8_list": []
+    },
+    "Bass": {
+      "n": 140,
+      "off16": 0,
+      "off8": 12,
+      "off16_list": [],
+      "off8_list": [
+        9480,
+        11400,
+        13320,
+        17160,
+        19080,
+        21000,
+        24840,
+        26760
+      ]
+    },
+    "Drums": {
+      "n": 320,
+      "off16": 0,
+      "off8": 0,
+      "off16_list": [],
+      "off8_list": []
+    }
+  },
+  "phase2_harmony": {
+    "Lead": {
+      "n": 135,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "examples": []
+    },
+    "Piano": {
+      "n": 360,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "examples": []
+    },
+    "Violin": {
+      "n": 72,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "examples": []
+    },
+    "Guitar": {
+      "n": 192,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "examples": []
+    },
+    "Bass": {
+      "n": 140,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "examples": []
+    },
+    "Drums": {
+      "n": 320,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "examples": []
+    }
+  },
+  "phase1_grid": {
+    "LeadRaw": {
+      "n": 147,
+      "off16": 141,
+      "off8": 141,
+      "off16_list": [
+        470,
+        941,
+        1328,
+        1886,
+        2119,
+        2504,
+        2768,
+        3123
+      ],
+      "off8_list": [
+        470,
+        941,
+        1328,
+        1886,
+        2119,
+        2504,
+        2768,
+        3123
+      ]
+    }
+  },
+  "voice_leading_flags": [],
+  "voice_leading_flag_count": 0,
+  "phase1_validate": "OK",
+  "phase2_validate": "OK"
+}
