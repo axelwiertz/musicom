@@ -1,0 +1,63 @@
+{
+  "job": "random-style production pass (SP) - LAYER-ALIGNED 2026-09-02",
+  "selection_source": "workflows.musicom_workflow.SP_METHODS registry (7 implemented)",
+  "composition_source": "/opt/data/projects/Styles/Groove/080-groove-sieve/MIDI/080-groove-sieve.mid",
+  "composition_sha256": "60ca660d83a606c11ac90a328af55837cb7d885ccb155582c0a99e8254081145",
+  "production_method": "SP-032",
+  "production_method_name": "Feedback Delay Network (FDN) Reverberation",
+  "registered_module": "sound.effects.fdn_reverb",
+  "layer_discipline": "absolute layer: FDN replaces spatial layer for ALL voices (applied to full mix; per-voice dry stems for DAW remix)",
+  "parameters": {
+    "size": 0.6,
+    "decay": 0.85,
+    "brightness": 0.7,
+    "modulation": 0.28,
+    "width": 0.9,
+    "duck_amount": 0.15,
+    "wet_dry": 0.4,
+    "n_delays": 8,
+    "sample_rate": 44100,
+    "pad_s": 5.0,
+    "normalization_dBFS": -1.0,
+    "fluid_internal_reverb": false,
+    "fluid_internal_chorus": false,
+    "fluid_gain": 1.2,
+    "prime_delay_samples": [
+      1471,
+      1693,
+      1871,
+      2053,
+      2237,
+      2399,
+      2593,
+      2797
+    ]
+  },
+  "checks": {
+    "fdn_tail_peak_after_dry_end": 0.00642,
+    "dry_peak_same_window": 3.1e-05,
+    "stereo_width_side_over_mid": 0.0754,
+    "silence_ratio": 0.0796,
+    "pitch_verification": {
+      "windows_checked": 105,
+      "harmonic_match_hit_rate": 1.0,
+      "harmonic_energy_mean_8h": 0.53,
+      "method": "FFT dominant peak per 0.5s window, 50-1000 Hz; hit = within +/-4% of k*f (k=1..8 in band) of any active non-drum MIDI fundamental; harmonic energy in 8 harmonics of lowest active fundamental",
+      "verdict": "PASS"
+    }
+  },
+  "artifacts": {
+    "midi": "/opt/data/projects/Styles/Production/SP032-fdn-groove-sieve/MIDI/080-groove-sieve.mid",
+    "dry_full_mix_wav": "/opt/data/projects/Styles/Production/SP032-fdn-groove-sieve/dry_full_mix.wav",
+    "processed_wav": "/opt/data/projects/Styles/Production/SP032-fdn-groove-sieve/Audio/SP032-fdn-groove-sieve.wav",
+    "processed_ogg": "/opt/data/projects/Styles/Production/SP032-fdn-groove-sieve/Audio/SP032-fdn-groove-sieve.ogg",
+    "stems": {
+      "track00_Soprano_Sax": "/opt/data/projects/Styles/Production/SP032-fdn-groove-sieve/Audio/stems/track00_Soprano_Sax.wav",
+      "track01_Brass_Section": "/opt/data/projects/Styles/Production/SP032-fdn-groove-sieve/Audio/stems/track01_Brass_Section.wav",
+      "track02_Electric_Piano_1": "/opt/data/projects/Styles/Production/SP032-fdn-groove-sieve/Audio/stems/track02_Electric_Piano_1.wav",
+      "track03_Electric_Bass_finger": "/opt/data/projects/Styles/Production/SP032-fdn-groove-sieve/Audio/stems/track03_Electric_Bass_finger.wav",
+      "track04_Drums_GM": "/opt/data/projects/Styles/Production/SP032-fdn-groove-sieve/Audio/stems/track04_Drums_GM.wav"
+    }
+  },
+  "pitch_verification_note": "v1 octave-only rule FAILED at 0.581 because bass fundamental G1=49 Hz is below the 50 Hz band (dominant landed on 2nd harmonic); harmonic-match rule (k=1..8) is the correct check for low-tuned grooves"
+}

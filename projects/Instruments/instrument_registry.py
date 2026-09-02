@@ -43,12 +43,13 @@ _INSTRUMENT_MODULES = {
     "Guitar.acoustic.acoustic_guitar": "acoustic_guitar",
     "Percussion.drum_kit.drum_kit": "drum_kit",
     "Percussion.marimba.marimba": "marimba",
+    "World.sitar.sitar": "sitar",
 }
 
 _FIELDS = (
     "midi_program", "gm_name", "range_min", "range_max",
     "solo_range", "sweet_spot", "zones", "articulations",
-    "synthesis", "modal_preset", "fm_defaults",
+    "synthesis", "modal_preset", "karplus_defaults", "fm_defaults",
     "reverb_tail", "eq_body", "eq_presence", "eq_air", "pan",
     "stem_label",
 )
@@ -132,6 +133,7 @@ SAXOPHONE = ALL_INSTRUMENTS["saxophone"]
 ACOUSTIC_GUITAR = ALL_INSTRUMENTS["acoustic_guitar"]
 DRUM_KIT = ALL_INSTRUMENTS["drum_kit"]
 MARIMBA = ALL_INSTRUMENTS["marimba"]
+SITAR = ALL_INSTRUMENTS["sitar"]
 
 
 def by_name(name):
@@ -174,6 +176,8 @@ def registry_table():
             role = "rhythm, groove, accent"
         elif low == "marimba":
             role = "lead, melody, accent, countermelody, harmony"
+        elif low == "sitar":
+            role = "lead, melody, ornament, drone"
         else:
             role = "lead, harmony, accent"
         rng = f"{inst.range_min}–{inst.range_max}" if inst.range_min else "-"
@@ -191,3 +195,7 @@ if __name__ == "__main__":
     print("  by_name('double bass') =", by_name("double bass"))
     print("  by_program(56) =", by_program(56))
     print("  FLUTE.in_sweet_spot(72) =", FLUTE.in_sweet_spot(72))
+    print("  SITAR.midi_program =", SITAR.midi_program, "(should be 104)")
+    print("  by_name('sitar') =", by_name("sitar"))
+    print("  by_program(104) =", by_program(104))
+    print("  SITAR.in_sweet_spot(69) =", SITAR.in_sweet_spot(69))

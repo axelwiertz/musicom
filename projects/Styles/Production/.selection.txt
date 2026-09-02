@@ -1,2 +1,2 @@
-/opt/data/projects/Styles/Balfolk/017-hybrid-pattern-matrix/MIDI/musicmatrix_exercise2_classical_motif_v1.mid
-SP-024
+/opt/data/projects/Styles/Groove/080-groove-sieve/MIDI/080-groove-sieve.mid
+SP-032
