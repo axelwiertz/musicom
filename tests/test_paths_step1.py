@@ -43,8 +43,10 @@ def test_scale_counts_match_plan():
     # plan §1: 13 L4, 25 L3, 20 L2, 9 L1 — L3 has 26 rows in the plan table
     # (the doc's count column says 25; the table lists 26). Step 2 added 003
     # (Genetic, L3) → L3 = 27. Registry matches the table + later additions.
-    assert len(methods_by_scale("L4")) == 13
-    assert len(methods_by_scale("L3")) == 27
+    # LAYER_ARCHITECTURE.md added 5 ABS abstract-layer methods:
+    # ABS-001/002 at L4 (+2 → 15), ABS-003/004/005 at L3 (+3 → 30).
+    assert len(methods_by_scale("L4")) == 15
+    assert len(methods_by_scale("L3")) == 30
     assert len(methods_by_scale("L2")) == 20
     assert len(methods_by_scale("L1")) == 9
 

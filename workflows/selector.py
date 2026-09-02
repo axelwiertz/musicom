@@ -25,7 +25,7 @@ so provenance can record why a method was picked.
 """
 
 from dataclasses import dataclass, field
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Tuple
 
 from workflows.paths import SCALE, LEVELS, methods_by_scale, impl_status, scale_of
 
@@ -72,6 +72,10 @@ class TaskProfile:
     determinism: Optional[bool] = None
     style: Optional[str] = None
     headless: bool = False
+    layers_needed: Tuple[str, ...] = ("concrete",)
+    """Layer chain the task wants, in execution order: e.g. ("abstract",
+    "concrete") = design subset walk, then realize; ("concrete", "absolute")
+    = realize + render audio. Default: concrete only (legacy behavior)."""
 
 
 # ============================================================================
@@ -184,6 +188,25 @@ STYLE_HC_MAP = {
 # SCALE level -> memory_depth factor value (derived, never hand-maintained)
 _LEVEL_TO_DEPTH = {"L4": "macro", "L3": "meso", "L2": "local", "L1": "local"}
 
+# ============================================================================
+# Layer tags (LAYER_ARCHITECTURE.md) — abstract | concrete | absolute
+# ============================================================================
+# Concrete = every existing SCALE method (L4/L3 structure, L2/L1 material).
+# Abstract = subset-network methods (rules/subset_network.py): ABS-001..005.
+# Absolute = sound production SP-* methods (workflows/musicom_workflow.SP_METHODS).
+# Derived for SCALE methods (all concrete); explicit map for the rest.
+_ABSTRACT_IDS = {"ABS-001", "ABS-002", "ABS-003", "ABS-004", "ABS-005"}
+_ABSOLUTE_PREFIX = "SP-"
+
+
+def layer_of(method_id: str) -> str:
+    """Which layer a method feeds: abstract | concrete | absolute."""
+    if method_id in _ABSTRACT_IDS:
+        return "abstract"
+    if method_id.startswith(_ABSOLUTE_PREFIX):
+        return "absolute"
+    return "concrete"   # all SCALE L1-L4 methods realize concrete material
+
 # Level-derived defaults for methods with no TRAITS entry (daily additions).
 # Keeps new methods selectable instead of silently unroutable.
 _DEFAULT_TRAITS = {"gravity": "organic", "metric": "grid", "corpus": False,
@@ -285,6 +308,40 @@ def select(profile: TaskProfile, limit: Optional[int] = None) -> List[Selection]
 def select_for_cron(limit: Optional[int] = 5) -> List[Selection]:
     """Convenience: the headless, deterministic, cheap set for cron jobs."""
     return select(TaskProfile(headless=True, determinism=True), limit=limit)
+
+
+def select_chain(profile: TaskProfile, per_layer: int = 2) -> Dict[str, List[Selection]]:
+    """Layer-ordered method chain (LAYER_ARCHITECTURE.md composition paths).
+
+    Splits the routing by the profile's `layers_needed` (execution order,
+    e.g. ("abstract", "concrete", "absolute")): for each layer, return the
+    top `per_layer` implemented methods whose layer tag matches. This is
+    what makes the 3-layer composition paths selectable:
+
+        full path    ("abstract", "concrete", "absolute")
+        direct path  ("concrete",)                       (legacy default)
+        render-only  ("concrete", "absolute")
+
+    Pure function like select(); auditable per layer.
+    """
+    from workflows.musicom_workflow import SP_METHODS  # lazy: avoid heavy import chain
+    out: Dict[str, List[Selection]] = {}
+    for layer in profile.layers_needed:
+        layer_results = []
+        # absolute layer: SP methods aren't in SCALE/registry; pull from SP_METHODS
+        if layer == "absolute":
+            for mid in sorted(SP_METHODS):
+                layer_results.append(Selection(method_id=mid, level="SP",
+                                               score=0, reasons=["layer:absolute"],
+                                               implemented=True))
+            out[layer] = layer_results[:per_layer]
+            continue
+        for s in select(profile, limit=None):
+            if layer_of(s.method_id) == layer:
+                s.reasons.append(f"layer:{layer}")
+                layer_results.append(s)
+        out[layer] = layer_results[:per_layer]
+    return out
 
 
 def selector_table() -> str:

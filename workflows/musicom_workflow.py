@@ -232,6 +232,40 @@ def compose(style="pop", method=None, form=None, key="C", bpm=None,
     }
     PROG = [("I", 0), ("V", 1), ("vi", 2), ("IV", 3)]  # per 2-bar slot
     BAR = 1920
+    # ---- abstract path: ABS-* method -> subset-network progression --------
+    # LAYER_ARCHITECTURE.md: abstract layer designs the harmony as a walk
+    # through 12TET subsets (z-relations, tension curve); concrete layer
+    # realizes it. When method is ABS-*, run the subset walk and derive the
+    # per-section chord tones from the walked patterns instead of the
+    # hardcoded I–V–vi–IV.
+    _is_abs = str(method).startswith("ABS")
+    chord_tones_by_section = []
+    if _is_abs:
+        from rules.subset_network import (patterns_from_degrees,
+                                          PatternNetwork, standard_patterns,
+                                          interval_vector, tension)
+        rng = __import__("random").Random(seed)
+        net_lib = PatternNetwork(standard_patterns())
+        # anchor: tonic-major plus its P/L/R-close neighbors for the walk
+        anchor_ids = ["maj0", "min9", "maj5", "min2", "dom70", "maj70"]
+        anchor_pats = [net_lib.patterns[i] for i in anchor_ids]
+        net = PatternNetwork(anchor_pats)
+        # tension curve over the 5 sections: rise into chorus, peak bridge,
+        # resolve outro (values are tension deltas; walk picks by closeness)
+        curve = [0.0, 0.5, 1.0, 1.5, 0.2]
+        walk = net.walk("maj0", len(section_names), rng=rng,
+                        tension_curve=curve, home="maj0")
+        # per-section chord tones: pattern subset transposed into a register
+        # (root ~48 = C3), plus the root itself for the bass
+        chord_tones_by_section = []
+        for pid in walk:
+            pat = net_lib.patterns[pid]
+            root_pc = min(pat.subset)
+            base = 48 + root_pc  # C3-based register
+            tones = [base + ((pc - root_pc) % 12) for pc in sorted(pat.subset)]
+            chord_tones_by_section.append(tones)
+        # provenance hook: the walk is embedded in the method string below
+        method = f"{method}:subset_walk={','.join(walk)}"
     chord_roots = []
     for deg, _ in PROG:
         root, qual = CHORD_SHAPES[deg]
@@ -247,10 +281,16 @@ def compose(style="pop", method=None, form=None, key="C", bpm=None,
     from structures import MusicEvent
     for s, sname in enumerate(section_names):
         # find the chord for this section's first bar (framework: hold chord per section)
-        root_midi, qual = chord_roots[s % 4]
-        third = 3 if qual == "min" else 4
-        fifth = 7
-        chord_tones = [root_midi, root_midi + third, root_midi + fifth]
+        if _is_abs:
+            # abstract path: chord tones come from the walked subset
+            chord_tones = chord_tones_by_section[s]
+            root_midi = chord_tones[0]
+            qual = "min" if len(chord_tones) > 0 else "maj"  # unused below on this path
+        else:
+            root_midi, qual = chord_roots[s % 4]
+            third = 3 if qual == "min" else 4
+            fifth = 7
+            chord_tones = [root_midi, root_midi + third, root_midi + fifth]
         section_bars = bars_per[s]
         section_len = section_bars * BAR
         # Lead: arpeggio of chord tones (8th notes)

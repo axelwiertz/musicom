@@ -29,6 +29,12 @@ GENERATOR_REGISTRY = {
     "040": ("generators.pitchpattern", None, "Perlin Noise Composition (see pitchpattern.py)"),
     "048": (None, None, "RBMPD — spec only, NO shared code yet (was one-off project script)"),
     "HC-012": ("generators.chord_degrees", None, "Flamenco Compas & Falseta (human method)"),
+    # --- Abstract layer (rules/subset_network.py — LAYER_ARCHITECTURE.md) ---
+    "ABS-001": ("rules.subset_network", None, "Tension Curve Planner (abstract: per-section tension targets)"),
+    "ABS-002": ("rules.subset_network", None, "Subset Walker (abstract: pattern-network walk -> progression)"),
+    "ABS-003": ("rules.subset_network", None, "Z-Variation (abstract: same-ICV re-harmonization)"),
+    "ABS-004": ("rules.subset_network", None, "Parsimonious Voice Leading (abstract: P/L/R smooth moves)"),
+    "ABS-005": ("rules.subset_network", None, "Complement Contrast (abstract: matched-tension contrast)"),
 }
 
 

@@ -48,6 +48,15 @@ from workflows.provenance import write_provenance
 # (step 2) can filter spec-only methods without touching the DB.
 
 SCALE = {
+    # --- Abstract layer (subset network, LAYER_ARCHITECTURE.md) ---
+    # Registered at L4/L3: they produce structural plan (subset sequences,
+    # tension targets), not note material. Level only matters for selector
+    # memory_depth routing; abstract methods are layer-filtered separately.
+    "ABS-001": ("L4", True),   # Tension Curve Planner
+    "ABS-002": ("L4", True),   # Subset Walker
+    "ABS-003": ("L3", True),   # Z-Variation
+    "ABS-004": ("L3", True),   # Parsimonious Voice Leading
+    "ABS-005": ("L3", True),   # Complement Contrast
     # --- L4 MACRO ---
     "001": ("L4", True),   # Skeleton-First Refinement
     "006": ("L4", False),  # Cadence & Closure Mapping (spec)
