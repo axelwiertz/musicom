@@ -143,7 +143,7 @@ pip install numpy mido scipy music21 networkx pandas matplotlib
 | `matplotlib` | ≥3.7.0 | Visualization |
 | `networkx` | ≥3.1 | Network/graph analysis |
 
-> **Note:** `musicpy`, `music21py`, and `showscore` are optional analysis
+> **Note:** `musicpy` and `showscore` are optional analysis
 > dependencies used by `analysis/` and `converters/`. They are listed in
 > `requirements.txt` but not in `pyproject.toml` (install separately if you
 > need the MusicPy analysis path).
@@ -299,7 +299,6 @@ Pattern-based pitch organization with:
 ## Examples
 
 See the `examples/` directory for working examples:
-- `3voices.py` - Three-voice composition
 - `compose.py` - Basic composition workflow
 - `cross_voice.py` - Cross-voice techniques
 - `systematic.py` - Systematic composition
@@ -322,7 +321,7 @@ Run with coverage over the flat packages:
 pytest tests/ --cov=structures --cov=workflows --cov=generators --cov-report=html
 ```
 
-> **Suite status:** green — 214 passed, 0 skipped. Includes a
+> **Suite status:** green — 342 passed, 0 skipped. Includes a
 > golden-file MIDI regression harness (`tests/test_harness_golden.py`) that
 > locks in zero-drift, deterministic, non-empty exports.
 
@@ -361,7 +360,7 @@ These are concrete gaps — pick one and open a PR:
 ### Workflow
 
 1. Fork and clone; `pip install -e ".[dev]"`.
-2. Run `pytest tests/` — the suite must stay green (214 tests).
+2. Run `pytest tests/` — the suite must stay green (342 tests).
 3. Follow the flat-package layout (top-level dirs = importable packages).
 4. Add tests for any new module; keep the zero-drift golden harness intact.
 5. Update `CHANGELOG.md` under `[Unreleased]`.
@@ -373,7 +372,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## History
 
 See [CHANGELOG.md](CHANGELOG.md) for the release history, and the git log for
-the full phase-by-phase development record (309 commits, 2024 → present).
+the full phase-by-phase development record (346 commits, 2024 → present).
 
 ## Acknowledgments
 

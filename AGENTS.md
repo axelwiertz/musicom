@@ -122,7 +122,7 @@ cd /opt/data/repos/musicom
 /opt/data/micromamba/envs/musicom/bin/python -m pytest tests/ -q
 ```
 
-Suite is **green** (263 passed, 0 skipped). Key files:
+Suite is **green** (342 passed, 0 skipped). Key files:
 - `tests/test_harness_golden.py` — **zero-drift regression net**: a fixed
   composition must export byte-identical MIDI (`GOLDEN_SHA256`), be deterministic,
   non-empty, and have equal-length tracks. Update `GOLDEN_SHA256` only when the
@@ -177,6 +177,22 @@ Agent-operational knowledge lives in `hermes_agent/` (composition + sound
 production workflows, SP method registry, surveillance findings, decision log).
 This file (AGENTS.md) stays the canonical guide; `hermes_agent/` extends it.
 See `hermes_agent/README.md`.
+
+## Maintenance notes
+
+- **Vendored engine copies**: several sibling repos (`composer-crew-framework`,
+  `musicom-agent`, `musicom_framework`, `musicom_platform`) carry a `lib/musicom/`
+  tree — parallel copies of this engine at older stages. Do NOT edit those
+  copies. The engine is installed **editable** from this repo
+  (`/opt/data/repos/musicom`); those vendored trees are frozen snapshots.
+- **Method DB code truth**: the canonical, machine-readable method catalog is
+  `generators/generator_registry.py` + `workflows/paths.py` (`SCALE`). The
+  long-form `methods_db.md` / `human_methods_db.md` prose (synced to `docs/`)
+  is human-readable reference and may lag code — when they disagree, code wins.
+- **Abstract layer** (`rules/subset_network.py`, `ABS-001..005`) is the newest
+  addition (see `projects/Research/CompositionMethods/LAYER_ARCHITECTURE.md`).
+  ABS methods are registered in `SCALE` + `GENERATOR_REGISTRY`; they are NOT
+  yet listed in the prose `methods_db.md`.
 
 ## Agent execution contract
 
