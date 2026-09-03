@@ -83,6 +83,16 @@ zero-drift ✓ → MIDI → FluidSynth WAV ✓; RenderPipeline stem label
 dull 0.990 control: 3.3× tail energy). Registry `_FIELDS` extended with
 `karplus_defaults` so synth-engine presets load through the registry.
 
+**Koto added** (2026-09-02): GM107, World-family second entry
+(instrument.md + koto.py), verified end-to-end UnitMatrixComposer →
+zero-drift ✓ → MIDI → FluidSynth WAV ✓; RenderPipeline stem label
+`trackXX_Koto.wav` ✓ (GM_PROGRAMS[107] = "Koto", FluidR3 preset 107 =
+"Koto" — labels match exactly, no quirk). Karplus-Strong recommended
+(plucked waveguide, loop_gain 0.9970 → long koto ring between guitar and
+sitar; ~2× tail energy vs 0.990 dull control confirmed). Hirajoshi tuning
+quirk: koto is NOT chromatic — composition jobs write in-scale pentatonic
+lines, not dense harmony.
+
 ## Python usage
 
 ```python
@@ -123,6 +133,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Percussion | Drum Kit | ch9 | 35–81 | rhythm, groove, accent |
 | Percussion | Marimba | 12 | 45–96 | lead, melody, accent, countermelody, harmony |
 | World | Sitar | 104 | 55–96 | lead, melody, ornament, drone |
+| World | Koto | 107 | 51–90 | lead, melody, ornament, drone, harmony |
 
 ## Stem label quirks (RenderPipeline)
 
@@ -147,6 +158,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 25 | Acoustic Guitar (nylon) | Acoustic_Guitar_nylon ✓ |
 | 12 | Marimba | Marimba ✓ |
 | 104 | Sitar | Sitar ✓ (GM_PROGRAMS[104] + FluidR3 preset 104 both "Sitar") |
+| 107 | Koto | Koto ✓ (GM_PROGRAMS[107] + FluidR3 preset 107 both "Koto") |
 | ch9/pgm0 | Drums | **Acoustic_Grand_Piano** ✗ (program-0 fallback) |
 
 > **Known off-by-one in existing entries**: ~~`trumpet.py` uses 57~~ **FIXED 2026-08-27**: trumpet is now 56 (SF2 preset 56=`SoloTrumpet`). `piano.py`=1 → actually Bright Acoustic Piano (GM #2) — cosmetic label difference only, no routing impact. Legacy registry rows kept as-is for piano; new instruments use 0-indexed programs matching pipeline+SF2.

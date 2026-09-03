@@ -82,6 +82,7 @@ Classification of active Musicom composition methods categorized by their primar
 | **073** | concrete | Harmony Search Improvisational Composition (HSIC) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Fitness-guided + Key-bound) | Grid-Locked / Continuous | Macro / Harmony Memory | $\mathcal{O}(I \cdot N \cdot HMS)$ | Maintains a Harmony Memory of candidate phrases and improvises new ones slot-by-slot via the three Geem–Kim–Loganathan operators: memory consideration ($HMCR$, reuse of motifs/grooves), pitch adjustment ($PAR$, neighbor-tone/voice-leading micro-moves), and random selection ($1-HMCR$, fresh leaps). Weighted musical fitness (tonal gravity, groove, counterpoint, texture, structure) gates memory replacement, so the population converges to idiomatic phrases while retaining diversity. Improvisation-operator metaheuristic: distinct from 003 Genetic (mutation/crossover) and 055 SAMC (temperature schedule); music-inspired optimizer turned back on music (Geem & Choi 2007). |
 | **074** | concrete | Restricted Boltzmann Machine Composition (RBM-C) | **AI-Driven** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Learned-energy) | Grid-Locked / Continuous | Macro / Hidden Feature | $\mathcal{O}(E \cdot N \cdot H)$ training, $\mathcal{O}(N \cdot H)$ per Gibbs step | Learns an energy landscape over per-voice piano-rolls via a bipartite visible↔hidden network trained by contrastive divergence, then composes by block Gibbs sampling from the Boltzmann distribution. Hidden units = learned chord/motif/register features (harmony & voice coherence); RNN-RBM recurrence or a chord/section conditioning schedule = macro-form; active-unit count/Gaussian-visible = texture; scale-quantization (022) post-filters pitch. Learned energy-based counterpart to 064 MRFCC (hand-crafted potentials) and 071 HAM-C (Hebbian Hopfield); generative, likelihood-trained sibling of 047 DSMG / 072 NFC. |
 | **075** | concrete | Self-Organizing Map Composition (SOM-C) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Region-guided) | Grid-Locked / Continuous | Macro / Map Trajectory | $\mathcal{O}(E \cdot I \cdot N \cdot M)$ training, $\mathcal{O}(T \cdot M)$ generation | Trains a Kohonen self-organizing map (topology-preserving, toroidal) on corpus atoms (chord PC vectors, melodic contours, groove patterns), then composes by walking stochastic/deterministic trajectories across the map. Adjacent nodes = smooth voice leading/conjunct melody; U-matrix ridges = section seams; waypoint regions = macro-form; concurrent walkers = voices (coupling force = vertical coherence); map distance between walkers = dissonance/density texture. Discrete-topology counterpart to 046 VAE-LSI (learned similarity space) and 042 NST; learned-landscape sibling of 055 SAMC. |
+| **076** | concrete | Prouhet–Thue–Morse Automatic Sequence Composition (PTM-ASC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Weak (Scale-mapped) | Grid-Locked | None (Self-similar recurrence) | $\mathcal{O}(N)$ | Generates music from the Thue–Morse automatic sequence $t(n)=s_2(n)\bmod 2$ (parity of the base-2 digit sum), the fixed point of the substitution $0{\to}01, 1{\to}10$. Bits map to pitch intervals/onset patterns; Prouhet's equal-power partition (1851) gives balanced multi-voice harmony; self-similarity + overlap-freeness (no $XXX$ cube, Thue 1906/1912) yield aperiodic, recursively nested macro-form (statement/complement). Deterministic self-similar sibling of 002 Markov / 053 LFC; word-theoretic cousin of 069 CWCC / 019 L-System; aperiodic-beat cousin of 012 Euclidean Groove. |
 
 # Sound Production Methods Framework
 
@@ -151,6 +152,7 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 | **SP-059** | Fractional Delay-Line Modulation Synthesis (FDLMS) | **Post-Processing / DSP** | Modulated-Delay Effects / Chorus, Flanger, Vibrato & Pitch Shift | Continuously modulates the read pointer of a delay line with sub-sample interpolation (linear FIR or unity-gain first-order allpass) to generate chorus, flanger, vibrato, Doppler/Leslie, and pitch-shift effects from one time-varying-delay engine. Modulation depth/rate/feedback select the effect; multi-voice ensemble chorus uses phase-spread + rate-detuned LFOs. The modulated-delay counterpart to static SP-013/SP-032 and dispersive SP-058. |
 | **SP-060** | Denoising Diffusion Audio Synthesis (DDAS) | **Synthesis Engines** | Neural Diffusion / Stochastic Raw-Audio Timbres | Generates audio by learning to reverse a forward process that gradually noisifies real audio into Gaussian noise. A neural denoiser $\epsilon_\theta(x_t, t, c)$ predicts the added noise at each of $T$ steps; sampling runs it backward from $x_T \sim \mathcal{N}(0,\mathbf{I})$ under a conditioning $c$ (mel-spectrogram / STFT image / f0-loudness-label feature). DDIM ($\eta{=}0$) makes it deterministic per seed. Produces corpus-learned organic timbre, breath, and correlated multi-voice texture; audio-domain counterpart to 047 DSMG and stochastic foil to 045 DDSP. |
 | **SP-061** | Cepstral Liftering Synthesis (CLS) | **Synthesis Engines** | Homomorphic Source/Resonator Deconvolution / Cross-Synthesis Timbres | Deconvolves a sound into excitation (source) and resonator (spectral envelope) via the complex cepstrum $\hat{x}=\mathcal{F}^{-1}\{\log X[k]\}$, which turns convolution into addition and lands the two components in disjoint quefrency regions. Liftering (quefrency-domain windowing) separates them exactly with phase preserved; cross-synthesis recombines one sound's excitation with another's resonator. The exact-deconvolution counterpart to SP-028 LPC and the phase-preserving foil to SP-031 magnitude cross-synthesis. |
+| **SP-062** | Antiderivative Antialiasing for Nonlinear Waveshaping (ADAA) | **Post-Processing / DSP** | Aliasing-Free Distortion / Saturation / Wavefolding | Anti-aliases an arbitrary memoryless (or stateful) waveshaper $y=f(x)$ without oversampling: replaces the pointwise evaluation with the average of $f$ over each sample interval, computed as a divided difference of the antiderivative $F(x)=\int f(x)\,dx$ — 1st-order (linear segment) or 2nd-order (quadratic segment, flatter passband). Removes the inharmonic "digital grunge" of clippers/saturators at base sample rate for $\mathcal{O}(1)$ cost; the no-oversampling counterpart to SP-049 (16× oversampled) and the waveshaper complement to SP-019/SP-029/SP-051. |
 ---
 
 
@@ -15399,3 +15401,247 @@ class SOM:
 - Toiviainen, P., & Krumhansl, C. L. (2003). "Measuring and modeling real-time responses to music: the dynamics of tonality induction." *Perception* 32(6), 741–766.
 - Krumhansl, C. L. (1990). *Cognitive Foundations of Musical Pitch.* Oxford University Press. (Source of the key-profile vectors used as SOM training features.)
 - Morchen, F., Ultsch, A., Thies, M., & Lohken, I. (2006). "Modeling timbre distance with temporal statistics from polyphonic music." *IEEE Trans. Audio, Speech & Language Processing* 14(1). (SOM/ESOM over audio features — supports the feature-vector training pattern.)
+# Prouhet–Thue–Morse Automatic Sequence Composition (PTM-ASC) (Method 076)
+
+### **Layer**
+**Concrete** — generates concrete note/onset events that fill UnitMatrix cells (rows = voices, columns = sections, cells = MusicUnit). The Thue–Morse sequence is a *realization* engine: a deterministic, self-similar integer sequence whose bits are decoded into pitch, rhythm, harmony, structure, and texture atoms, then handed to the musicom engine for zero-drift MIDI export. It does not design abstract subset/progression plans (that is the Abstract layer), and it is not sound production (Absolute layer). Candidate code path: `generators/automatic_sequence.py` (pure sequence math may live in `rules/automatic_sequence.py`).
+
+### **Source**
+The Thue–Morse sequence is one of the oldest and most studied automatic sequences in combinatorics. It first appears in **Prouhet, E. (1851), "Mémoire sur quelques relations entre les puissances des nombres," *Comptes Rendus de l'Académie des Sciences de Paris* 33, 225** — Prouhet used it to solve the Tarry–Escott problem (partitioning $\{0,\dots,2^k-1\}$ into two equal-sum sets) — and was studied as an *overlap-free* infinite word by **Thue, A. (1906), "Über unendliche Zeichenreihen," *Norske Vid. Selsk. Skr. I. Mat. Nat. Kl. Christiana* 7, 1–22** and **Thue, A. (1912), "Über die gegenseitige Lage gleicher Teile gewisser Zeichenreihen," *Norske Vid. Selsk. Skr. I. Mat. Nat. Kl. Christiana* 1, 1–67**. **Morse, M. (1921), "Recurrent geodesics on a surface of negative curvature," *Transactions of the American Mathematical Society* 22(1), 84–100** rediscovered it via symbolic dynamics and gave it the modern name. The definitive monograph is **Allouche, J.-P., & Shallit, J. (2003), *Automatic Sequences: Theory, Applications, Generalizations*, Cambridge University Press**. Its use as a musical device (the "Thue–Morse melody," the Koch-snowflake turtle curve) is standard in the algorithmic-composition literature (e.g. **Nierhaus, G. (2009), *Algorithmic Composition: Paradigms of Automated Music Generation*, Springer**). PTM-ASC inverts this from analysis into generation.
+
+### **Description**
+Prouhet–Thue–Morse Automatic Sequence Composition generates music from the **Thue–Morse automatic sequence**, the infinite binary word defined by $t(n) = s_2(n) \bmod 2$ — the parity of the number of 1-bits in the binary expansion of $n$ (equivalently, the sum of base-2 digits mod 2):
+
+$$t \;=\; 0,1,1,0,1,0,0,1,1,0,0,1,0,1,1,0,\dots$$
+
+The sequence is the fixed point of the **substitution (morphism)** $0 \to 01,\; 1 \to 10$, iterated from 0: $t_0=0$, $t_1=01$, $t_2=0110$, $t_3=01101001$, $t_4=0110100110010110$, each level being the previous level followed by its bitwise **complement** (because $t(2n)=t(n)$ and $t(2n{+}1)=1-t(n)$). Three properties make it musically powerful:
+
+1. **Overlap-free / cube-free (Thue 1906, 1912)** — no subword of the form $aXaXa$ (no three consecutive equal blocks), so a Thue–Morse-driven line never stutters or repeats a motif verbatim three times.
+2. **Balance / equidistribution** — every factor of even length has an equal number of 0s and 1s; over $2^k$ positions there are exactly $2^{k-1}$ of each symbol, giving a perfectly even density (the combinatorially "maximally even" binary word).
+3. **Prouhet's equal-power partition (1851)** — splitting the indices $\{0,\dots,2^k-1\}$ by their bit value, $S_k=\{n : t(n)=0\}$ and $T_k=\{n : t(n)=1\}$, yields two sets of equal cardinality whose $j$-th powers sum equally for every $0\le j<k$: $\sum_{n\in S_k} n^j = \sum_{n\in T_k} n^j$. This is a principled, high-order **balanced two-voice partition** of any pitch collection.
+
+Composition decodes the bits into musical atoms: **PITCH** via a two-interval contour walk (bit 0 = step up a scale degree, bit 1 = step down), **RHYTHM** via the bit string as an onset/hit pattern (bit 1 = hit) or via block-encoded durations, **HARMONY** via the Prouhet partition (assign note $n$ to voice A or B by $t(n)$) and via generalized base-$p$ Thue–Morse words for $p$-way balance, **STRUCTURE** via the substitution tree (level $k$ = a section whose first half repeats level $k{-}1$ and second half is its complement — nested ABA′/contrast form), and **TEXTURE** via multiple derived sequences (different bases, phase offsets, or the complement). Because $t(n)$ is **2-automatic** (computable from the base-2 digits by a 2-state finite automaton), each bit is $\mathcal{O}(1)$, so the whole $N$-note piece costs $\mathcal{O}(N)$. It is the deterministic, self-similar sibling of 002 Markov / 053 Lévy Flight (all walk a pitch lattice, but PTM-ASC's walk is a fixed, non-random, overlap-free automatic sequence), a word-theoretic cousin of 069 CWCC (Christoffel words) and 019 L-System (both substitution/rewrite systems), and the aperiodic-beat cousin of 012 Euclidean Groove (Euclidean rhythms are also balanced binary words, but Thue–Morse is the *aperiodic*, self-similar extremal case).
+
+### **Musical Elements Framework**
+- **PITCH**: The canonical **Thue–Morse melody** maps each bit to a two-step interval — bit 0 = ascend one scale degree, bit 1 = descend one scale degree — and takes the cumulative sum modulo the scale size (e.g. mod 7 for a diatonic scale). The line wanders symmetrically (the balance property means equal total ascent and descent over even windows, so the contour is self-correcting and stays in range) yet never repeats a three-step contour pattern (overlap-free). Register is bounded by the modulo wrap; the sequence is mapped to a concrete pitch-class → octave assignment per voice so it stays in a playable range. Variants: map bit → two fixed pitches (a two-note cell), map bit → an interval class pair (e.g. minor 2nd / perfect 5th) for a more angular line, or use the generalized base-$p$ word $t_p(n)=\sum_i d_i \bmod p$ to get $p$ distinct steps.
+- **RHYTHM**: The bit string read as an **onset pattern** (bit 1 = note-on, bit 0 = rest) is perfectly balanced — over $2^k$ pulses exactly half are hits — so it yields a driving, even-density groove that is nonetheless *aperiodic* (unlike 012 Euclidean rhythms it never settles into a repeating bar). Because the even-length factors are balanced, the inter-onset intervals are uniformly distributed around the mean (no long gaps, no flams). Multi-speed texture comes from reading the $k$-th level prefix $t_k$ at different pulse resolutions per voice (eighth-note / sixteenth-note clocks). Alternatively, **block coding** maps runs of identical bits to durations (run length = note value), turning the sequence into a rhythm with organic phrase lengths.
+- **HARMONY**: Three mechanisms. (1) **Prouhet partition**: for a section of $2^k$ chord/pitch positions, assign position $n$ to voice A if $t(n)=0$ and voice B if $t(n)=1$ — the two voices then carry pitch-class "mass" that matches to order $k-1$ (equal sums, equal sums of squares, …), a rigorous balanced two-part texture. (2) **Generalized $p$-ary words** $t_p(n)$ partition $p$ voices with the same equal-power property, giving $p$-voice balance (use base 3 for a three-voice texture, base 4 for four). (3) **Two-interval contour + modulo scale** keeps the melody diatonic; chords emerge when several voices run Thue–Morse-derived lines at different offsets and the vertical slice is quantized with 022 MCWS. Tonal gravity is *weak but steerable*: the modulo-scale wrap pins the line to a mode, and a biasing map (bit → +1 / 0 rather than +1 / −1) tilts the drift toward a chosen tonic region.
+- **STRUCTURE**: The **substitution tree is the macro-form**. Level $k$ is a $2^k$-event section; its first half is exactly level $k{-}1$ and its second half is the bitwise complement — a built-in **statement / inversion (answer)** pair, and recursively nested ABA′-style form (level 3 = "A A′ A′ A"). Sections map to morphic levels: the composer scripts which levels/substitutions play in which UnitMatrix column, and the complement relation guarantees a coherent *contrast* between the two halves of any section (a natural antecedent/consequent, parallel to 004 Prosodic call–response but purely structural). Extending the 2-symbol substitution to a **multi-symbol morphism** (e.g. section letters A→AB, B→BA) scripts verse-chorus/rondo macro-form the same way 019 L-System grows fractal structure.
+- **TEXTURE**: Multiple **derived automatic sequences** run concurrently — one voice on the base-2 word, another on the base-3 generalized word, another on the complement, another on a phase-offset copy ($t(n+\delta)$). Because Thue–Morse is uncorrelated with its own non-trivial shifts (its autocorrelation vanishes at odd lags), offset voices are decorrelated → genuine independence (the "voice independence" scalar of 052 QWC's entanglement). Texture density is set by how many voices run at once and at what clock resolution; the complement voice gives a built-in question/answer or hocket pair (0↔1 interleave = the two voices never sound together, like 031 flocking's separation force but exact).
+
+### **UnitMatrix Integration (Voices & Sections)**
+- **Rows (Voices)**: Each voice $v$ is a **derived Thue–Morse stream** — its own base (2, 3, …), phase offset $\delta_v$, bit→pitch/interval mapping, and clock resolution. A voice's cell fill = decoding its bit stream into `create_note_unit` / `create_chord_unit` events over the section's tick span. Voice count and coupling are explicit: run the *same* word at different offsets for a homophonic, phase-related texture, or *different bases* for true independence. The Prouhet partition turns a single pitch collection into two (or $p$) balanced voices with one call.
+- **Columns (Sections)**: Each section $s$ is a **morphic level $k_s$** (a $2^{k_s}$-event block, possibly of a multi-symbol morphism) — the column's cell fill is the level's decoded prefix. The nested self-similarity means section $s$'s first half literally equals a shorter section already heard (recapitulation for free) and its second half is its complement (built-in contrast). Multi-symbol morphisms give non-power-of-2 forms and A/B/A macros. Zero-drift is guaranteed by the musicom engine (`composer.validate()` before `to_midi()`), and the absolute silent padding event at `total_section_ticks - 1` keeps all rows symmetric (per the tail-truncation fix).
+
+### **Technical Mechanics**
+**Bit generation.** $t(n)$ is the parity of the popcount of $n$: `t(n) = bin(n).count("1") & 1`. In closed form $t(n) = \frac{1}{2}\big(1 - (-1)^{s_2(n)}\big)$ where $s_2(n)$ is the binary digit sum. Recurrence: $t(2n)=t(n)$, $t(2n{+}1)=1-t(n)$, so the whole sequence is generated from $t(0)=0$ with no lookback — a pure function of the index. Generalized base-$p$ word: $t_p(n) = \sum_{i} d_i \pmod p$ over the base-$p$ digits $d_i$.
+
+**Substitution.** The morphism $\sigma(0)=01$, $\sigma(1)=10$ is a uniform length-2 substitution whose fixed point (starting from 0) is $t$. Level $k$ is $\sigma^k(0)$, of length $2^k$, and $\sigma^k(0) = \sigma^{k-1}(0)\,\overline{\sigma^{k-1}(0)}$ (complement concatenation) — the source of the structural self-similarity.
+
+**Prouhet–Tarry–Escott.** For $S_k=\{n<2^k : t(n)=0\}$, $T_k=\{n<2^k : t(n)=1\}$, one has $|S_k|=|T_k|=2^{k-1}$ and $\sum_{n\in S_k} n^j = \sum_{n\in T_k} n^j$ for $0\le j<k$. Musically: sort a $2^k$-note pitch collection, assign by $t(n)$, and the two voices are equal in mean, variance, skew, … up to order $k-1$ — a rigorously balanced split no random assignment achieves.
+
+**Overlap-freeness.** No factor of the form $aXaXa$; equivalently $t$ has no factor that is an integer power $\ge 2$ of a *recurring* block in the "binary cube" sense. Compositional payoff: any Thue–Morse-derived contour/rhythm is guaranteed free of literal threefold repetition, so long passages avoid mechanical looping even though the rule set is tiny.
+
+**Turtle-geometry bridge.** Driving a turtle with the bits (turn left on 0, right on 1) traces the Koch snowflake (Jun, von Haeseler, Peitgen, Skordev 1987) — the same self-similar fractal that gives the piece its nested form; the fractal dimension of the curve is a one-number texture/structure summary.
+
+### **Implementation Requirements (Python / NumPy)**
+```python
+from __future__ import annotations
+
+def thue_morse(n: int) -> int:
+    """t(n) = parity of popcount(n)  (2-automatic, O(1))."""
+    return bin(n).count("1") & 1
+
+def thue_morse_prefix(k: int) -> list[int]:
+    """First 2**k symbols via complement concatenation (substitution fixed point)."""
+    w = [0]
+    for _ in range(k):
+        w = w + [1 - b for b in w]        # sigma(w) = w + complement(w)
+    return w
+
+def generalized_thue_morse(n: int, base: int) -> int:
+    """t_p(n) = sum of base-p digits mod p  (p-ary balanced word)."""
+    s = 0
+    while n:
+        n, d = divmod(n, base)
+        s += d
+    return s % base
+
+def prouhet_partition(notes: list[int]) -> tuple[list[int], list[int]]:
+    """Split 2**k notes into two equal-power voices by t(n)."""
+    a = [p for n, p in enumerate(notes) if thue_morse(n) == 0]
+    b = [p for n, p in enumerate(notes) if thue_morse(n) == 1]
+    return a, b
+
+# --- Musicom integration sketch (conceptual — engine does the MIDI authoring) ---
+# for v, (base, offset) in enumerate(voice_specs):          # one stream per voice
+#     for s, (k, morphism) in enumerate(section_specs):     # section = morphic level
+#         for i in range(2 ** k):                           # 2**k events in this column
+#             n = i + offset
+#             bit = thue_morse(n) if base == 2 else generalized_thue_morse(n, base)
+#             pitch = scale_walk.step(bit)                  # bit -> +/- scale step, mod scale
+#             dur, vel = onset_map(bit)                     # bit -> note value / velocity
+#             composer.fill_voice_section(v, s, create_note_unit(pitch, dur, tick))
+# ok, msg = composer.validate()   # MUST be True before to_midi (per AGENTS.md)
+```
+**Tooling**: pure Python / NumPy — the sequence is a popcount parity, no autograd or training. Reuse the existing `generators/` scale/quantization utilities for the bit→pitch decode and 022 MCWS post-filter; the musicom engine handles UnitMatrix fill and zero-drift export upstream.
+
+### **Pitfalls**
+1. **Binary-only → pitch-poor** — a naive 2-symbol map yields only two notes/intervals, sounding monotone. Fix: walk a scale via cumulative ±1 step mod (scale size), use the generalized base-$p$ word for $p$ distinct steps, or pair bit-pairs with 4-way interval choices.
+2. **Mechanical regularity** — the balance property makes the onset pattern *too* even (every factor balanced), which can read as stiff/machine-like. Fix: hybridize per the sparse/continuous rule (add 026 DPSM arpeggio or a sustained pad), and vary velocity/register per bit so "hit" ≠ identical event.
+3. **Near-duplicate halves** — because $\sigma^k(0)$'s second half is the bitwise complement of the first, an interval-map that is symmetric under bit-flip makes the "answer" a lazy mirror. Fix: use an *asymmetric* bit map (bit 0 = +1, bit 1 = 0 rather than −1), or apply a different mapping/octave to the second half of each section.
+4. **Power-of-2 section lengths** — the fixed point lives naturally in $2^k$ blocks; forcing a 3-bar section breaks the balance/self-similarity guarantees. Fix: use multi-symbol morphisms for non-power-of-2 forms, or truncate and accept the *local* (one boundary) loss of balance, which is musically inaudible.
+5. **Overlap-freeness ≠ variety** — cube-free is a weak constraint; long Thue–Morse passages can still feel repetitive even without literal triple repetition. Fix: switch morphisms/base per section (a different substitution = a new character), and re-seed the scale walk each section.
+6. **Ignoring the validation gate** — decoded events must still satisfy zero-drift. Fix: run `composer.validate()` and reset/re-walk the offending section on failure; never export an unvalidated fill (per AGENTS.md).
+
+### **Comparison With Related Methods**
+| Method | Word / walk | Balanced? | Self-similar | Repetition | Macro-form |
+|---|---|---|---|---|---|
+| 012 Euclidean Groove | Bjorklund $E(k,n)$ | max-even (periodic) | no | periodic loop | single bar |
+| 019 L-System | rewrite rules | no | yes (fractal) | by grammar | recursive tree |
+| 069 CWCC | Christoffel words | balanced (periodic) | via Sturmian morphisms | periodic | word conjugates |
+| 002 Markov | random lattice walk | no | no | stochastic | local states |
+| **076 PTM-ASC** | **Thue–Morse $t(n)$** | **balanced (aperiodic)** | **yes (substitution)** | **overlap-free (no XXX)** | **substitution levels / complement** |
+
+### **References**
+- Prouhet, E. (1851). "Mémoire sur quelques relations entre les puissances des nombres." *Comptes Rendus de l'Académie des Sciences de Paris* 33, 225.
+- Thue, A. (1906). "Über unendliche Zeichenreihen." *Norske Vid. Selsk. Skr. I. Mat. Nat. Kl. Christiana* 7, 1–22.
+- Thue, A. (1912). "Über die gegenseitige Lage gleicher Teile gewisser Zeichenreihen." *Norske Vid. Selsk. Skr. I. Mat. Nat. Kl. Christiana* 1, 1–67.
+- Morse, M. (1921). "Recurrent geodesics on a surface of negative curvature." *Transactions of the American Mathematical Society* 22(1), 84–100.
+- Allouche, J.-P., & Shallit, J. (2003). *Automatic Sequences: Theory, Applications, Generalizations*. Cambridge University Press.
+- Jun, K.-S., von Haeseler, F., Peitgen, H.-O., & Skordev, G. (1987). "On self-similarity and the Koch curve." (Thue–Morse turtle/paperfolding connection.)
+- Nierhaus, G. (2009). *Algorithmic Composition: Paradigms of Automated Music Generation*. Springer. (Automatic-sequence methods in music.)
+- Toussaint, G. T. (2013). *The Geometry of Musical Rhythm*. CRC Press. (Balanced/Euclidean binary words context.)
+
+# Antiderivative Antialiasing (ADAA) for Nonlinear Waveshaping (Method SP-062)
+
+### **Source**
+Antiderivative Antialiasing (ADAA) originates from **Parker, J. D., Zavalishin, V., & Le Bivic, E. (2016), "Reducing the Aliasing of Nonlinear Waveshaping Using Continuous-Time Convolution," *Proceedings of the 19th International Conference on Digital Audio Effects (DAFx-16)*, Brno, Czech Republic** — the insight that a memoryless nonlinearity applied pointwise to a discrete signal is equivalent to sampling the *unfiltered* continuous signal, so its out-of-band harmonics alias; replacing the pointwise evaluation with the nonlinearity's integral over each sample interval (a continuous-time convolution with a box kernel) suppresses those aliases. The method was formalized and named in **Bilbao, S., Esqueda, F., Parker, J. D., & Välimäki, V. (2017), "Antiderivative Antialiasing for Memoryless Nonlinearities," *IEEE Signal Processing Letters* 24(7), pp. 1049–1053** — which derives the first- and second-order ADAA schemes and proves their aliasing reduction. The extension to **stateful** (filter-with-memory) nonlinearities is **Holters, M. (2019), "Antiderivative Antialiasing for Stateful Systems," *DAFx-19*, Birmingham**; its use inside wave digital filters is **Albertini, D., Bernardini, A., & Sarti, A. (2020), "Antiderivative Antialiasing in Nonlinear Wave Digital Filters," *DAFx-20*, Vienna**. A reference open implementation (hard-clip, tanh, nonlinear waveguide, each with 1st/2nd-order ADAA + lookup tables) is the `ADAA` plugin by Jatin Chowdhury. In the Musicom catalog ADAA fills the **anti-aliasing-without-oversampling** gap: SP-029 band-limits *oscillators* via PolyBLEP, SP-019 generates band-limited harmonics *directly* via Chebyshev polynomials, SP-049 removes aliasing by 16× oversampling (expensive), and SP-051 models nonlinear circuits with passivity guarantees — but no existing method anti-aliases an *arbitrary* static or stateful waveshaper at base sample rate. ADAA is that method: it is the cheap, exact (to first/second order) alternative to oversampling for distortion, saturation, and clipper stages.
+
+### **Description**
+Antiderivative Antialiasing (ADAA) is a **Post-Processing / DSP** method that removes the aliasing artifacts produced when a memoryless nonlinear waveshaper $y = f(x)$ (hard clip, tanh saturation, diode curve, tube/tape drive, wavefolder) is applied to a discrete audio signal. The classic problem: $f$ generates harmonics that exceed the Nyquist frequency; sampling then folds them back into the audible band as inharmonic "digital grunge" that beats against the true harmonics. The classic fix is oversampling (evaluate $f$ at $k\times$ rate, low-pass, decimate), which multiplies cost by $k$ and needs a decimation filter. ADAA instead **integrates the nonlinearity**: because a waveshaper is memoryless, the correct anti-aliased output for sample $n$ is the *average of $f$ over the continuous signal between the previous sample and the current one* — and by the Fundamental Theorem of Calculus that average is a divided difference of the antiderivative $F(x) = \int f(x)\,dx$. So ADAA replaces $f(x[n])$ with a difference of $F$ evaluated at the sample values, at roughly the cost of one extra function evaluation plus one division per sample — no oversampling, no filter. **First-order ADAA** uses one antiderivative and one previous sample (a linear segment approximation); **second-order ADAA** uses the second antiderivative and two previous samples (a quadratic segment), giving flatter frequency response. ADAA is fully deterministic (no stochastic state beyond the waveshaper's own memory), so it slots cleanly into the musicom zero-drift gate as a post-render stage. **Complexity**: $\mathcal{O}(1)$ per sample per voice (2–3 function evaluations + 1 division); memory $\mathcal{O}(1)$ for memoryless shapes, $\mathcal{O}(S)$ for stateful shapes of order $S$.
+
+### **Technical Mechanics**
+
+**1. The aliasing problem.** A memoryless waveshaper $y(t) = f(x(t))$ is not band-limited: if $x$ is a sinusoid at $f_0$, $f$ produces harmonics at $m f_0$ for all $m$. Sampling at rate $f_s$ leaves harmonics above $f_s/2$ folded (aliased) into the baseband. Direct discrete evaluation $y[n] = f(x[n])$ commits exactly this error because it discards the signal's behavior *between* samples.
+
+**2. Continuous-time convolution (the core idea).** Parker–Zavalishin–Le Bivic (2016) observe that the desired anti-aliased output is the *average* of the continuous nonlinearity over one sample interval:
+$$y[n] = \frac{1}{T}\int_{t_{n-1}}^{t_n} f\big(x(t)\big)\,dt$$
+Averaging over a box kernel of width $T$ multiplies the spectrum by $\operatorname{sinc}(f/f_s)$, which rolls off exactly the out-of-band harmonics before they alias.
+
+**3. First-order ADAA (trapezoidal / linear-segment).** Approximate $x(t)$ on $[t_{n-1}, t_n]$ by the linear segment between $x[n-1]$ and $x[n]$. The integral of $f$ over that segment is, by substitution and the Fundamental Theorem of Calculus, a divided difference of the first antiderivative $F(x)=\int_0^x f(u)\,du$:
+$$y[n] = \begin{cases}
+\dfrac{F(x[n]) - F(x[n-1])}{x[n] - x[n-1]}, & x[n] \neq x[n-1] \\[6pt]
+f(x[n]), & x[n] = x[n-1]
+\end{cases}$$
+The special case (equal samples) is the $h\to 0$ limit, i.e. $f(x[n])$ itself. This is exact for $f$ polynomial of degree $\le 1$ and a first-order approximation otherwise.
+
+**4. Second-order ADAA (quadratic-segment).** Fit a quadratic through $x[n-2], x[n-1], x[n]$; the integral over $[t_{n-1}, t_n]$ involves the second antiderivative $F_2(x)=\int_0^x F(u)\,du$:
+$$y[n] = \frac{2}{x[n]-x[n-2]}\left[ \frac{F(x[n])-F(x[n-1])}{x[n]-x[n-1]} - \frac{F(x[n-1])-F(x[n-2])}{x[n-1]-x[n-2]} \right]$$
+with first-order fallback wherever a denominator vanishes. Second-order ADAA is exact for $f$ of degree $\le 2$ and has a flatter passband (the box-kernel roll-off is corrected to a higher-order spline), preserving high-frequency brightness that first-order slightly dulls.
+
+**5. Antiderivatives of common shapes (closed form).** ADAA only needs $F$ (and $F_2$ for second order), which are analytic for the standard musicom nonlinearities:
+- **Hard clip** $f(x)=\operatorname{clip}(x,-1,1)$: $F(x)=\begin{cases} \tfrac12 x^2, & |x|\le 1 \\ x-\tfrac12\operatorname{sgn}(x), & |x|>1 \end{cases}$.
+- **tanh** $f(x)=\tanh x$: $F(x)=\ln\cosh x$; $F_2(x)=\tfrac12\operatorname{Li}_2\!\big(-e^{-2x}\big) + \tfrac{x^2}{2} - x\ln 2 + \text{const}$ (dilogarithm $\operatorname{Li}_2$; use a Taylor series near $x=0$ to avoid cancellation).
+- **Polynomial / Chebyshev waveshapers** (cf. SP-019): antiderivatives are polynomial by inspection.
+- **$\tanh$ / arctan soft clip, diode/triode curves**: tabulate $F$ and $F_2$ numerically once (or use known special functions), then read out at audio rate.
+
+**6. Stateful ADAA (Holters 2019).** For a nonlinearity with memory (a clipper inside a feedback filter, a diode-bridge ladder, a tube grid with capacitance), the state equation is $\dot{\mathbf{s}} = \mathbf{g}(\mathbf{s}, x)$ where the nonlinear term must be anti-aliased too. Holters' extension replaces the per-sample nonlinear term in the implicit (trapezoidal) update with its ADAA averaged form, so the same box/linear-segment averaging applies to the nonlinear *state contribution* — this is how ADAA slots into SP-051 WDF circuits without oversampling.
+
+**7. Order and cost.** First-order ADAA: 2 evaluations of $F$ + 1 division + 1 comparison per sample; second-order: 3 evaluations + a few divides. Both are cheaper than $2\times$ oversampling (which needs a decimation filter and doubles every downstream stage), and remain deterministic per seed — compatible with the zero-drift gate.
+
+### **Implementation Requirements (Python / NumPy)**
+
+```python
+import numpy as np
+
+# --- First antiderivatives (closed form) ---
+def F_hard_clip(x):                       # F of f(x)=clip(x,-1,1)
+    return np.where(np.abs(x) <= 1.0, 0.5 * x * x,
+                    x * np.sign(x) - 0.5)
+
+def F_tanh(x):                            # F of f(x)=tanh(x)
+    return np.log(np.cosh(x))
+
+# --- First-order ADAA (memoryless) ---
+def adaa1(x, F):
+    """Anti-aliased y[n] = f(x[n]) via first-order ADAA (Bilbao 2017)."""
+    xp = np.concatenate(([x[0]], x[:-1]))          # x[n-1]
+    num = F(x) - F(xp)
+    den = x - xp
+    with np.errstate(divide="ignore", invalid="ignore"):
+        y = np.where(np.abs(den) > 1e-12, num / den, np.tanh(x))  # fallback = f(x)
+    return y
+
+# --- Second-order ADAA (memoryless) ---
+def adaa2(x, F, F2):
+    """Anti-aliased y[n] via second-order ADAA (quadratic segment)."""
+    xp  = np.concatenate(([x[0]], x[:-1]))
+    xpp = np.concatenate(([x[0], x[0]], x[:-2]))
+    d1 = x - xp;  d2 = xp - xpp;  d3 = x - xpp
+    g1 = (F(x) - F(xp)) / np.where(np.abs(d1) > 1e-12, d1, 1.0)
+    g2 = (F(xp) - F(xpp)) / np.where(np.abs(d2) > 1e-12, d2, 1.0)
+    with np.errstate(divide="ignore", invalid="ignore"):
+        y = np.where(np.abs(d3) > 1e-12, 2.0 * (g1 - g2) / d3, np.tanh(x))
+    return y
+
+# --- Hard-clip + tanh example: replace naive clip(x) with adaa1(x, F_hard_clip) ---
+# drive  = 4.0                                    # waveshaper input gain
+# shaped = adaa1(drive * voice_audio, F_hard_clip)  # anti-aliased distortion stage
+# shaped = adaa2(drive * voice_audio, F_tanh, F2_tanh)  # second-order tanh saturation
+```
+
+**Tooling**: NumPy alone implements the whole method (vectorized antiderivatives, one division, one comparison) — no external DSP library. For stateful shapes reuse the implicit-solver scaffolding already present in the `sound/effects/filter.py` and `sound/effects/west_coast.py` wavefolder machinery. The candidate code path is `sound/effects/adaa_waveshaper.py` (a new module alongside `shimmer_reverb.py`, `bbd_chorus.py`, `tilt_eq.py`); it consumes a rendered mono voice buffer (from SP-001 FluidSynth, SP-029 subtractive, SP-039 additive) and returns the anti-aliased distorted buffer, so the musicom engine's UnitMatrix fill and zero-drift export stay upstream.
+
+### **Musical Elements Framework**
+
+- **PITCH**: ADAA does not generate pitch — it *preserves* it while keeping distortion harmonics band-limited. The practical payoff is **usable distortion at high pitch**: a naive clipper on a high lead line folds harmonics into inharmonic aliases that beat and sound sour, whereas ADAA keeps the added harmonics as true integer multiples, so the note stays in tune up the register. This widens the melodic range of any SP method that feeds a waveshaper.
+- **RHYTHM**: ADAA is memoryless (first/second order only), so it introduces no group delay and no filter smearing — transient timing is preserved exactly. Because the nonlinearity compresses the peak of each attack, it actually *sharpens* perceived onset transients, accenting the cell's rhythm grid (a distortion-based accent, complementary to SP-006 micro-timing).
+- **HARMONY**: Distortion is harmonic *generation*. The choice of nonlinearity selects the harmonic spectrum: symmetric odd functions (tanh, odd polynomials) add odd harmonics only (square-wave flavor, hollow/tube-like); asymmetric curves add even harmonics (octave-rich, tape-like warmth). ADAA keeps those harmonics band-limited, so the harmony stays coherent instead of filling with folded aliases — you can drive a full chord through a clipper without the intermodulation beating.
+- **STRUCTURE**: Macro-form maps to the **drive/shape schedule** across sections — each column prescribes its own drive gain $D_s$ and waveshaper curve (clean → saturated → hard-clipped → wavefolded). A continuous drive ramp across a section join is a smooth saturation arc (the distortion analogue of SP-041 wavetable morphing); switching the shape function hard gives a discrete timbre contrast.
+- **TEXTURE**: The drive amount is the texture knob — low drive = subtle thickening/warmth (even-harmonic "glue"), high drive = aggressive fuzz. ADAA specifically removes the "digital grunge" (inharmonic aliases) so high-drive textures stay musical and warm rather than brittle; pairing a dry and an ADAA-distorted copy (parallel processing, cf. SP-008) gives a controllable blend of clean body and driven edge.
+
+### **UnitMatrix Integration (Voices and Sections)**
+
+- **Rows (Voices)**: Two modes. (a) **Bus mode**: all voices are summed and passed through one ADAA waveshaper — the classic "mix-bus saturation" glue, where intermodulation couples the voices and the drive is a single master knob. (b) **Per-voice mode**: each voice $v$ gets its own ADAA stage with independent drive $D_v$ and shape $f_v$ — Voice 1 (lead) = tanh saturation (warm), Voice 2 (bass) = hard clip (aggressive), Voice 3 (pad) = soft asymmetric curve (even-harmonic thickening), Voice 4 (percussion) = wavefolder (metallic crunch). Each row renders to a mono buffer, then summed or spatialized (SP-021/SP-034/SP-043).
+- **Columns (Sections)**: Each section $s$ prescribes a drive arc $D_s$ (and optionally a shape morph between $f_s$ and $f_{s+1}$). Columns become a **saturation arc**: A = clean, B = driven, C = hard-clipped/folded. Section joins ramp $D$ continuously for a smooth saturation swell, or switch shape functions for discrete contrast.
+- **Cells** $U_{v,s}$:
+  - `{PITCH}`: unchanged by ADAA (it preserves the cell's pitch exactly); the added harmonics are integer multiples of the cell's fundamental.
+  - `{RHYTHM}`: the cell's onset grid passes through with zero latency — distortion accents the attack without moving it.
+  - `{HARMONY}`: the cell's chord is harmonic-shaped by the choice of $f$ (odd vs. even harmonics); drive sets the harmonic richness.
+  - `{TEXTURE}`: the cell's drive level + shape = its saturation amount; sparse cells get high drive (each hit bites), dense cells get low drive (avoid intermodulation mud).
+- **Mapping Flow**:
+  1. Compose + fill the UnitMatrix; validate zero-drift; export symbolic MIDI via the musicom engine.
+  2. Render each voice to a mono audio buffer with a clean synthesis engine (SP-001 FluidSynth, SP-029 subtractive, SP-039 additive).
+  3. Per cell/voice, run `adaa1` or `adaa2` with the cell's drive/shape (vectorized over the buffer).
+  4. Morph drive across section joins; sum voices.
+  5. Post-process downstream (SP-007 EQ, SP-008 DRC, SP-009/SP-032 reverb); export audio or spatialize (SP-021/SP-034/SP-043).
+
+### **Pitfalls**
+
+1. **Zero-denominator NaN** — when $x[n]=x[n-1]$ (flat/DC segments, or a signal that sits still), the divided difference $0/0$ yields NaN. Fix: branch to $f(x[n])$ (the limiting value) wherever $|x[n]-x[n-1]|$ is below a small threshold, exactly as in the code sketch above.
+2. **Antiderivative must be continuous and closed-form** — ADAA needs $F$ (and $F_2$); a shape with no convenient integral (e.g., a measured diode curve) must be tabulated. Fix: numerically integrate once at init into a lookup table, or use a shape with a known $F$ (hard clip, tanh, arctan, polynomials).
+3. **First-order high-frequency roll-off** — the box-kernel averaging is a $\operatorname{sinc}$ low-pass, so first-order ADAA slightly dulls the top end. Fix: use second-order ADAA (flatter passband) for bright material, or compensate with a gentle treble tilt (SP tilt EQ).
+4. **tanh second antiderivative instability** — $\operatorname{Li}_2(-e^{-2x})$ and $\ln\cosh$ lose precision near $x=0$ (subtraction of nearly-equal terms). Fix: use a small-$x$ Taylor series for $F_2$ and $F$ near zero.
+5. **Stateful shapes need the Holters extension** — naively wrapping a stateful clipper (diode in a feedback loop, tube grid with capacitance) with the memoryless formula aliases the *state*, not the output. Fix: apply stateful ADAA (Holters 2019) inside the implicit update, or fall back to SP-051 WDF passivity + modest oversampling.
+6. **Sparse/staccato input stays sparse** — ADAA is a timbre shaper, not a rhythm generator; driving sparse 011/032 output yields sparse distorted hits. Fix: per the Method Hybridization rule, pair with a continuous fill layer (026 DPSM arpeggios, sustained pad) before the waveshaper.
+7. **Drive×input scaling** — the antiderivative argument is the *pre-shaped* signal; forgetting to apply the drive gain (or applying it after $F$) produces wrong harmonic levels. Fix: always shape `drive * x`, then apply output makeup gain separately.
+
+### **Comparison With Related Methods**
+
+| Method | Anti-aliases what | Mechanism | Cost | Oversampling? |
+|---|---|---|---|---|
+| SP-029 PolyBLEP | oscillator discontinuities | band-limited step correction | $O(1)$ | no |
+| SP-019 Chebyshev waveshaping | harmonics by design | band-limited polynomial | $O(N)$ | no |
+| SP-041 BLW-MI | wavetable playback | mipmaps + PolyBLEP | $O(1)$ | no |
+| SP-049 JAHTS | tape hysteresis (stateful) | RK4 + 16× oversampling | $O(1)$ @ 16× | yes |
+| SP-051 WDF | nonlinear circuits | passivity-guaranteed scattering | $O(P+I)$ | optional |
+| **SP-062 ADAA** | **arbitrary memoryless/stateful waveshapers** | **antiderivative divided difference** | **$O(1)$** | **no** |
+
+### **References**
+- Parker, J. D., Zavalishin, V., & Le Bivic, E. (2016). "Reducing the Aliasing of Nonlinear Waveshaping Using Continuous-Time Convolution." *Proc. DAFx-16*, Brno.
+- Bilbao, S., Esqueda, F., Parker, J. D., & Välimäki, V. (2017). "Antiderivative Antialiasing for Memoryless Nonlinearities." *IEEE Signal Processing Letters* 24(7), 1049–1053.
+- Holters, M. (2019). "Antiderivative Antialiasing for Stateful Systems." *Proc. DAFx-19*, Birmingham.
+- Albertini, D., Bernardini, A., & Sarti, A. (2020). "Antiderivative Antialiasing in Nonlinear Wave Digital Filters." *Proc. DAFx-20*, Vienna.
+- Chowdhury, J. (2019). *ADAA* plugin repository (BSD-3-Clause), https://github.com/jatinchowdhury18/ADAA.
+- Zavalishin, V. (2018). *The Art of VA Filter Design*, 2nd ed. (Background on the aliasing of nonlinear digital stages.)

@@ -1,0 +1,54 @@
+{
+  "job": "random-style production pass (SP) - LAYER-ALIGNED 2026-09-03",
+  "selection_source": "workflows.musicom_workflow.SP_METHODS registry (10 implemented)",
+  "composition_source": "/opt/data/projects/Styles/Country/039-marilou-vacation/MIDI/039-marilou-vacation-v3.mid",
+  "composition_sha256": "56b7d0e9f5d91f630b9ffb2748883f7b78652620dd274bfaaf2164e468786152",
+  "production_method": "SP-034",
+  "production_method_name": "BBD Chorus Ensemble (Clock/Compander/Per-Voice Variation)",
+  "registered_module": "sound.effects.bbd_chorus",
+  "layer_discipline": "absolute layer: BBD chorus replaces the modulation layer for ALL voices (applied to full mix; per-voice dry stems for DAW remix)",
+  "parameters": {
+    "voices": 6.0,
+    "rate_hz": 0.5,
+    "depth_ms": 4.0,
+    "lfo_spread": 0.4,
+    "clock_mult": 4,
+    "compander": 0.5,
+    "hiss": 0.015,
+    "mix": 0.45,
+    "width": 0.8,
+    "seed": 20260903,
+    "sample_rate": 44100,
+    "normalization_dBFS": -1.0,
+    "fluid_internal_reverb": false,
+    "fluid_internal_chorus": false,
+    "fluid_gain": 1.2
+  },
+  "checks": {
+    "wet_vs_dry_diff_rms": 0.056,
+    "lr_corr_dry": 0.752,
+    "lr_corr_wet": 0.6801,
+    "silence_ratio": 0.0154,
+    "pitch_verification": {
+      "windows_checked": 20,
+      "dominant_peak_hit_rate": 0.75,
+      "harmonic_energy_mean_8h": 0.4563,
+      "method": "FFT dominant peak per 0.5s window, 50-1000 Hz band, +/-4% tolerance vs active MIDI fundamentals (or octave below/above)",
+      "verdict": "PASS"
+    }
+  },
+  "artifacts": {
+    "midi": "/opt/data/projects/Styles/Production/SP034-bbd-chorus-marilou-vacation/MIDI/039-marilou-vacation-v3.mid",
+    "dry_full_mix_wav": "/opt/data/projects/Styles/Production/SP034-bbd-chorus-marilou-vacation/dry_full_mix.wav",
+    "processed_wav": "/opt/data/projects/Styles/Production/SP034-bbd-chorus-marilou-vacation/Audio/SP034-bbd-chorus-marilou-vacation.wav",
+    "processed_ogg": "/opt/data/projects/Styles/Production/SP034-bbd-chorus-marilou-vacation/Audio/SP034-bbd-chorus-marilou-vacation.ogg",
+    "stems": {
+      "track00_Flute": "/opt/data/projects/Styles/Production/SP034-bbd-chorus-marilou-vacation/Audio/stems/track00_Flute.wav",
+      "track01_Acoustic_Guitar_nylon": "/opt/data/projects/Styles/Production/SP034-bbd-chorus-marilou-vacation/Audio/stems/track01_Acoustic_Guitar_nylon.wav",
+      "track02_Electric_Bass_finger": "/opt/data/projects/Styles/Production/SP034-bbd-chorus-marilou-vacation/Audio/stems/track02_Electric_Bass_finger.wav",
+      "track03_Drums_GM": "/opt/data/projects/Styles/Production/SP034-bbd-chorus-marilou-vacation/Audio/stems/track03_Drums_GM.wav",
+      "track04_Fiddle": "/opt/data/projects/Styles/Production/SP034-bbd-chorus-marilou-vacation/Audio/stems/track04_Fiddle.wav",
+      "track05_Pad_1_new_age": "/opt/data/projects/Styles/Production/SP034-bbd-chorus-marilou-vacation/Audio/stems/track05_Pad_1_new_age.wav"
+    }
+  }
+}

@@ -44,6 +44,7 @@ _INSTRUMENT_MODULES = {
     "Percussion.drum_kit.drum_kit": "drum_kit",
     "Percussion.marimba.marimba": "marimba",
     "World.sitar.sitar": "sitar",
+    "World.koto.koto": "koto",
 }
 
 _FIELDS = (
@@ -134,6 +135,7 @@ ACOUSTIC_GUITAR = ALL_INSTRUMENTS["acoustic_guitar"]
 DRUM_KIT = ALL_INSTRUMENTS["drum_kit"]
 MARIMBA = ALL_INSTRUMENTS["marimba"]
 SITAR = ALL_INSTRUMENTS["sitar"]
+KOTO = ALL_INSTRUMENTS["koto"]
 
 
 def by_name(name):
@@ -178,6 +180,8 @@ def registry_table():
             role = "lead, melody, accent, countermelody, harmony"
         elif low == "sitar":
             role = "lead, melody, ornament, drone"
+        elif low == "koto":
+            role = "lead, melody, ornament, drone, harmony"
         else:
             role = "lead, harmony, accent"
         rng = f"{inst.range_min}–{inst.range_max}" if inst.range_min else "-"
@@ -199,3 +203,7 @@ if __name__ == "__main__":
     print("  by_name('sitar') =", by_name("sitar"))
     print("  by_program(104) =", by_program(104))
     print("  SITAR.in_sweet_spot(69) =", SITAR.in_sweet_spot(69))
+    print("  KOTO.midi_program =", KOTO.midi_program, "(should be 107)")
+    print("  by_name('koto') =", by_name("koto"))
+    print("  by_program(107) =", by_program(107))
+    print("  KOTO.in_sweet_spot(69) =", KOTO.in_sweet_spot(69))

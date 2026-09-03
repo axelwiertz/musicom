@@ -1,2 +1,2 @@
-/opt/data/projects/Styles/Groove/080-groove-sieve/MIDI/080-groove-sieve.mid
-SP-032
+/opt/data/projects/Styles/Country/039-marilou-vacation/MIDI/039-marilou-vacation-v3.mid
+SP-034
