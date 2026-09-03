@@ -39,6 +39,8 @@ Status: `implemented` = in sound/ package · `partial` = some pieces exist · `r
 | — | DX7 Voice Format Parser (Rithmatic-style) | implemented | sound/synthesis/dx7_voice.py |
 | — | Equation→Waveform Synthesis (MathSynth-style) | implemented | sound/synthesis/equation_synth.py |
 | — | Stacked-Oscillator Memorymoog-Style Voice (Memorymode 2-style) | implemented | sound/synthesis/memorymoog_synth.py |
+| SP-033 | Detuned Saw Swarm + Harmony Engine + Morph Pad (SuperStarSaw-style) | implemented | sound/synthesis/supersaw_swarm.py |
+| — | Scale/Chord-Pitch Quantizer (SuperStarSaw harmony engine) | implemented | sound/synthesis/supersaw_swarm.py (SCALES/CHORDS + quantize) |
 
 ## Interval-Based Composition (NEW)
 
@@ -70,6 +72,8 @@ Status: `implemented` = in sound/ package · `partial` = some pieces exist · `r
 | — | Tilt EQ (Triton Tilt EQ-style) | implemented | sound/effects/tilt_eq.py |
 | — | Gated-Decay Reverb + Shimmer (Liminal Space 2-style) | partial | sound/effects/liminal_reverb.py |
 | — | Scale-Locked Granular FX (Lucid-style) | implemented | sound/effects/scale_locked_granular.py |
+| SP-034 | BBD Chorus Ensemble (Thorus XT-style) | implemented | sound/effects/bbd_chorus.py |
+| SP-035 | Fractional-Pitch Shimmer Reverb (3rd Wave Shimmer Verb-style) | implemented | sound/effects/shimmer_reverb.py |
 | — | Overlapping-Band Parametric Compressor (Parish Audio-style) | implemented | sound/effects/overlap_comp.py |
 | — | Micro-Timing Shift Sequencer (miniGRID-style) | implemented | sound/generators/micro_timing_seq.py |
 | — | Trig-Condition Sequencer (Volca Drum alt-firmware-style) | implemented | sound/generators/trig_cond_seq.py |

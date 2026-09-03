@@ -54,6 +54,9 @@ comparable to, and how do I use it in a workflow?*
 | `sound/effects/room_reverb.py` | RoomReverb | reverb | bathROOMs, small-room reverb | audio+position/surface/slap/wash/temp → room audio |
 | `sound/generators/param_lock_seq.py` | ParamLockSequencer | sequencing | Asterism, X0X param-lock | base params+locks+ratchet+randomize → (frac, params) hits |
 | `sound/synthesis/memorymoog_synth.py` | MemorymoogVoice | synthesis | Memorymode 2, Memorymoog | freq+dur+detune-mode+doubling → WAV |
+| `sound/synthesis/supersaw_swarm.py` | SupersawSwarm, SwarmSnapshot, MorphPad | synthesis | NI SuperStarSaw, JP-8000 supersaw | freq+dur+spread+harmony → stereo saw-swarm WAV (morphable via XY pad) |
+| `sound/effects/bbd_chorus.py` | BBDChorus | effects (chorus) | UVI Thorus XT, Roland Dimension D / Juno chorus | audio+voices+rate+depth → BBD chorus wet mix (clocked, companded, per-voice variation) |
+| `sound/effects/shimmer_reverb.py` | ShimmerVerb | effects (reverb) | 3rd Wave Shimmer Verb, shimmer reverbs | audio+pitch_cents+rev_time+pitch_amount → fractional-shift shimmer tail |
 | `sound/generators/sample_slicer.py` | SampleSlicer, Slice, auto_tempo, auto_pitch | sampling | Bitwig 6.1 Sampler | audio → onsets/slices → played slices (oneshot/loop/reverse/pingpong) + BPM/pitch estimate |
 | `sound/utils/midi.py` | MicrotonalExporter | export | KHÔRA microtonal | notes → pitch-bend MIDI |
 | `sound/tuning/just_intonation.py` | JustIntonation | tuning | KHÔRA | ratio → freq/scale |
@@ -66,8 +69,8 @@ comparable to, and how do I use it in a workflow?*
 
 | Category | Purpose | Key files |
 |---|---|---|
-| **synthesis/** | create audio from scratch | phase_mod, modal, granular, vocal, additive, bowed, mass_spring, polysynth, west_coast, mono_synth, dx7_voice, equation_synth, drum_synth_606, spectral_wavetable, memorymoog_synth |
-| **effects/** | transform existing audio | filter, reverb, fdn_reverb, vowel_filter, tape_delay, multiband, quantize_mod, mastering, production_chain, spectral_gate, tilt_eq, liminal_reverb, scale_locked_granular, overlap_comp, room_reverb |
+| **synthesis/** | create audio from scratch | phase_mod, modal, granular, vocal, additive, bowed, mass_spring, polysynth, west_coast, mono_synth, dx7_voice, equation_synth, drum_synth_606, spectral_wavetable, memorymoog_synth, supersaw_swarm |
+| **effects/** | transform existing audio | filter, reverb, fdn_reverb, vowel_filter, tape_delay, multiband, quantize_mod, mastering, production_chain, spectral_gate, tilt_eq, liminal_reverb, scale_locked_granular, overlap_comp, room_reverb, bbd_chorus, shimmer_reverb |
 | **modular/** | node-graph DSP | graph, math_mod, patch_loader |
 | **generators/** | generative event/pattern engines | event_core, dice, ratchet_seq, complex_noise, micro_timing_seq, trig_cond_seq, param_lock_seq, sample_slicer |
 | **analysis/** | extract info from audio | pitch, rhythm, chroma |

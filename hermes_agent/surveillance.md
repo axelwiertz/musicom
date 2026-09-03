@@ -3,6 +3,22 @@
 Replicability analyses from the Hermes agent's music-tech surveillance cron
 (job e2760579d2c8, runs Mon/Thu). Distilled verdicts for musicom adoption.
 
+## 2026-09-03 Scan
+
+| Item | Technique | Verdict | Musicom path |
+|------|-----------|---------|--------------|
+| Native Instruments SuperStarSaw (A.G. Cook supersaw synth, MusicTech review) | Two independent "swarms" of 16 detuned saw oscillators (alternating detune ladder scaled by Spread); per-oscillator stereo pan + amplitude drift; harmony engine quantizing every oscillator pitch to a scale (incl. Super Locrian, Dorian #4, Hirajoshi) or a chord shape — wide spread over quantized pitches forms tense tone clusters; 2×2 XY Morph pad bilinearly blending four parameter snapshots | YES | **DONE** — sound/synthesis/supersaw_swarm.py (235-preset library, oscillator-distribution visualizer, unconstrained randomize = UI/content, not replicated) |
+| UVI Thorus XT (chorus, SoS 2026-08-31) | Analogue-modelled BBD chorus engine: bucket-brigade clocked delay with per-voice LFO phase/rate variation, hiss injection, alias filtering (pre/post lowpass around the clock), compander encode/decode (expand-before-delay / inverse-gain-after, "pumping" on mismatch), morphable 1..8-voice shared architecture, clock-rate control | YES | **DONE** — sound/effects/bbd_chorus.py (pristine digital chorus engine + iLok = not replicated; clean multitap delay already in sound/effects/tape_delay.py) |
+| Groove Synthesis 3rd Wave Shimmer Verb (OS 2.0a, SoS 2026-08-25) | Shimmer reverb with pitch shift in fractions of a semitone across ±2 octaves in the feedback loop: SOLA (resample + overlap-add) length-preserving pitch shifter on the recirculated tail, comb+allpass tank with energy-normalized recirculation so loop gain is exactly rev-time controlled, mod-matrix-style destinations (rev time / pitch amount / filter cutoff) + slow LFO wobble on live shift cents | YES | **DONE** — sound/effects/shimmer_reverb.py (Super Plate processor, hardware mod-matrix UI/SysEx, LP/HP dual cutoff = not replicated) |
+| Arturia Pure SUB (sub-bass synth, MusicTech 09-03) | Dedicated sub-bass synth: sub/harmonics/texture split, 40+ filter modes, Sub Processor bass distortion chain, MPE/velocity | PARTIAL | Covered by sound/synthesis/mono_synth.py (sub osc + ladder + drive); 40 filter modes + preset randomiser/resampler = proprietary UI — no new code |
+| Core Sampler (AAX sampler for Pro Tools, MusicTech 09-03) | One-shot sampler: drag audio, edit waveform, envelope/gain/fade/filter/pitch/velocity shaping, play from MIDI | PARTIAL | Covered by sound/generators/sample_slicer.py (oneshot play modes + pitch); AAX hosting + waveform editor UI = not replicable — no new code |
+| Dreamtonics Instrument X (neural orchestra, SoS/Synthtopia 08-31) | Neural Acoustics: translates notation to soundwaves, articulation stack (col legno, mutes...), Dynamics Lane morphing timbre, AI performance retakes | PARTIAL | Proprietary neural nets; existing voice_allocator.py + bowed.py approximate routing — no new code (repeat of 08-27/08-31 finding) |
+| Cherry Audio Memorymode 2 / Korg Volca hj firmware / Polyend Keys / Reason Free / Elektron Tonverk OS / IK Maestosa Strings | Already analyzed 08-27..08-31; Memorymode 2 & Volca Drum DSP already replicated | — | See 2026-08-31 and 2026-08-27 scan tables |
+| Roland Aira firmware switcher (Synthtopia 09-01) | Experimental tool swapping firmware between Scooper/Demora/Torcido/Bitrazer (1-byte difference); AI-assisted reverse engineering | NO | Firmware bit-twiddling for specific hardware; no general DSP |
+| Korg MS2000 Editor Librarian (Synthtopia 08-31) | Free browser Web MIDI patch editor/librarian for MS2000: SysEx bank load/save, program edit, randomisation | NO | Hardware SysEx librarian (Web MIDI + device-specific SysEx); not replicable DSP |
+| LeWitt Space Replicator Free (SoS 09-02) | Headphone virtual mixing room: 800+ headphone compensation profiles + room/consumer-speaker/earbud emulation IRs | NO | Proprietary measured IR/compensation dataset — no new code |
+| SOMA Enigma / Cradle Alt Textures / SuperStarSaw sample content | Hardware metal-scanner instrument / curated sample library content | NO | Not replicable DSP |
+
 ## 2026-08-31 Scan
 
 | Item | Technique | Verdict | Musicom path |

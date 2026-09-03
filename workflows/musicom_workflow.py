@@ -135,6 +135,9 @@ SP_METHODS = {
     "SP-026": ("sound.effects.phase_vocoder", "Spectral Phase Vocoder Resynthesis"),
     "SP-028": ("sound.effects.lpc_synth", "Linear Predictive Coding Synthesis"),
     "SP-032": ("sound.effects.fdn_reverb", "Feedback Delay Network Reverb"),
+    "SP-033": ("sound.synthesis.supersaw_swarm", "Detuned Saw Swarm + Scale/Chord Quantize + Morph Pad"),
+    "SP-034": ("sound.effects.bbd_chorus", "BBD Chorus Ensemble (Clock/Compander/Per-Voice Variation)"),
+    "SP-035": ("sound.effects.shimmer_reverb", "Fractional-Pitch Shimmer Reverb (SOLA Shift in Feedback)"),
 }
 
 
