@@ -1,0 +1,17 @@
+{
+  "artifact": "stem_perc.wav",
+  "classification": "ai-assisted",
+  "generator": "SP-011 Karplus-Strong stem",
+  "sources": [
+    "/opt/data/projects/Styles/Balfolk/017-hybrid-pattern-matrix/MIDI/exercise1b_jazz_ii_v_i_swing.mid"
+  ],
+  "parameters": {
+    "role": "perc",
+    "method": "SP-011"
+  },
+  "notes": "",
+  "sha256": "7dbff275ed93ec4effd32b0f3bb6d56b2638dada74e283d4264f1fc9b3ae809e",
+  "bytes": 2857724,
+  "created_utc": "2026-09-04T22:07:17.869482+00:00",
+  "provenance_version": "1.0"
+}

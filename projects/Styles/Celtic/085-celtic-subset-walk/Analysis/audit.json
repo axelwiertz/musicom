@@ -1,0 +1,151 @@
+{
+  "phase1": {
+    "label": "phase1",
+    "voices": [
+      {
+        "track": 1,
+        "program": 12,
+        "channel": 0,
+        "n_notes": 274,
+        "is_drums": false,
+        "off_grid_16th": 251,
+        "off_grid_8th": 253,
+        "out_of_scale": 0,
+        "out_of_chord": 141,
+        "off_grid_16th_examples": [
+          148,
+          150,
+          156
+        ],
+        "out_of_scale_examples": [],
+        "out_of_chord_examples": [
+          [
+            77,
+            0
+          ],
+          [
+            89,
+            0
+          ],
+          [
+            89,
+            148
+          ]
+        ]
+      }
+    ],
+    "totals": {
+      "notes": 274,
+      "off_grid_16th": 251,
+      "off_grid_8th": 253
+    }
+  },
+  "phase2": {
+    "label": "phase2",
+    "voices": [
+      {
+        "track": 1,
+        "program": 12,
+        "channel": 0,
+        "n_notes": 180,
+        "is_drums": false,
+        "off_grid_16th": 0,
+        "off_grid_8th": 89,
+        "out_of_scale": 0,
+        "out_of_chord": 0,
+        "off_grid_16th_examples": [],
+        "out_of_scale_examples": [],
+        "out_of_chord_examples": []
+      },
+      {
+        "track": 2,
+        "program": 60,
+        "channel": 1,
+        "n_notes": 94,
+        "is_drums": false,
+        "off_grid_16th": 0,
+        "off_grid_8th": 0,
+        "out_of_scale": 0,
+        "out_of_chord": 0,
+        "off_grid_16th_examples": [],
+        "out_of_scale_examples": [],
+        "out_of_chord_examples": []
+      },
+      {
+        "track": 3,
+        "program": 42,
+        "channel": 2,
+        "n_notes": 34,
+        "is_drums": false,
+        "off_grid_16th": 0,
+        "off_grid_8th": 0,
+        "out_of_scale": 0,
+        "out_of_chord": 0,
+        "off_grid_16th_examples": [],
+        "out_of_scale_examples": [],
+        "out_of_chord_examples": []
+      },
+      {
+        "track": 4,
+        "program": 40,
+        "channel": 3,
+        "n_notes": 96,
+        "is_drums": false,
+        "off_grid_16th": 0,
+        "off_grid_8th": 0,
+        "out_of_scale": 0,
+        "out_of_chord": 0,
+        "off_grid_16th_examples": [],
+        "out_of_scale_examples": [],
+        "out_of_chord_examples": []
+      },
+      {
+        "track": 5,
+        "program": 70,
+        "channel": 4,
+        "n_notes": 104,
+        "is_drums": false,
+        "off_grid_16th": 0,
+        "off_grid_8th": 0,
+        "out_of_scale": 0,
+        "out_of_chord": 0,
+        "off_grid_16th_examples": [],
+        "out_of_scale_examples": [],
+        "out_of_chord_examples": []
+      },
+      {
+        "track": 6,
+        "program": 43,
+        "channel": 5,
+        "n_notes": 104,
+        "is_drums": false,
+        "off_grid_16th": 0,
+        "off_grid_8th": 8,
+        "out_of_scale": 0,
+        "out_of_chord": 0,
+        "off_grid_16th_examples": [],
+        "out_of_scale_examples": [],
+        "out_of_chord_examples": []
+      },
+      {
+        "track": 7,
+        "program": 0,
+        "channel": 9,
+        "n_notes": 352,
+        "is_drums": true,
+        "off_grid_16th": 0,
+        "off_grid_8th": 0,
+        "out_of_scale": 0,
+        "out_of_chord": 0,
+        "off_grid_16th_examples": [],
+        "out_of_scale_examples": [],
+        "out_of_chord_examples": []
+      }
+    ],
+    "totals": {
+      "notes": 964,
+      "off_grid_16th": 0,
+      "off_grid_8th": 97
+    }
+  }
+}

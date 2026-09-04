@@ -1,0 +1,17 @@
+{
+  "artifact": "085-celtic-subset-walk-phase1.ogg",
+  "classification": "ai-generated",
+  "generator": "SP-001 (workflows.musicom_workflow.produce) FluidSynth + FluidR3_GM.sf2",
+  "sources": [],
+  "parameters": {
+    "bpm": 96,
+    "key": "Ab major",
+    "method": "ABS-002 Subset Walker",
+    "seed": 20260903
+  },
+  "notes": "Opus 48k VoIP transcode of the phase-1 WAV",
+  "sha256": "0dd97716ff2ae7edfdc4163eba24592826bbf456ce4262f970af93424511e330",
+  "bytes": 322054,
+  "created_utc": "2026-09-03T23:21:33.662979+00:00",
+  "provenance_version": "1.0"
+}

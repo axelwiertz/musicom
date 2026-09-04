@@ -1,0 +1,22 @@
+{
+  "artifact": "SP011-jazz-swing-karplus-strong.ogg",
+  "classification": "ai-assisted",
+  "generator": "SP-011 Karplus-Strong production pass",
+  "sources": [
+    "/opt/data/projects/Styles/Balfolk/017-hybrid-pattern-matrix/MIDI/exercise1b_jazz_ii_v_i_swing.mid"
+  ],
+  "parameters": {
+    "method": "SP-011",
+    "roles": [
+      "lead",
+      "comp",
+      "bass",
+      "perc"
+    ]
+  },
+  "notes": "",
+  "sha256": "a08ae52848cfa87266394e81e0a1227d65789146bc8b938aced41f2299950b51",
+  "bytes": 147975,
+  "created_utc": "2026-09-04T22:07:17.859857+00:00",
+  "provenance_version": "1.0"
+}

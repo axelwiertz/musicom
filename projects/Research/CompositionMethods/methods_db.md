@@ -83,6 +83,7 @@ Classification of active Musicom composition methods categorized by their primar
 | **074** | concrete | Restricted Boltzmann Machine Composition (RBM-C) | **AI-Driven** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Learned-energy) | Grid-Locked / Continuous | Macro / Hidden Feature | $\mathcal{O}(E \cdot N \cdot H)$ training, $\mathcal{O}(N \cdot H)$ per Gibbs step | Learns an energy landscape over per-voice piano-rolls via a bipartite visible↔hidden network trained by contrastive divergence, then composes by block Gibbs sampling from the Boltzmann distribution. Hidden units = learned chord/motif/register features (harmony & voice coherence); RNN-RBM recurrence or a chord/section conditioning schedule = macro-form; active-unit count/Gaussian-visible = texture; scale-quantization (022) post-filters pitch. Learned energy-based counterpart to 064 MRFCC (hand-crafted potentials) and 071 HAM-C (Hebbian Hopfield); generative, likelihood-trained sibling of 047 DSMG / 072 NFC. |
 | **075** | concrete | Self-Organizing Map Composition (SOM-C) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Region-guided) | Grid-Locked / Continuous | Macro / Map Trajectory | $\mathcal{O}(E \cdot I \cdot N \cdot M)$ training, $\mathcal{O}(T \cdot M)$ generation | Trains a Kohonen self-organizing map (topology-preserving, toroidal) on corpus atoms (chord PC vectors, melodic contours, groove patterns), then composes by walking stochastic/deterministic trajectories across the map. Adjacent nodes = smooth voice leading/conjunct melody; U-matrix ridges = section seams; waypoint regions = macro-form; concurrent walkers = voices (coupling force = vertical coherence); map distance between walkers = dissonance/density texture. Discrete-topology counterpart to 046 VAE-LSI (learned similarity space) and 042 NST; learned-landscape sibling of 055 SAMC. |
 | **076** | concrete | Prouhet–Thue–Morse Automatic Sequence Composition (PTM-ASC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Weak (Scale-mapped) | Grid-Locked | None (Self-similar recurrence) | $\mathcal{O}(N)$ | Generates music from the Thue–Morse automatic sequence $t(n)=s_2(n)\bmod 2$ (parity of the base-2 digit sum), the fixed point of the substitution $0{\to}01, 1{\to}10$. Bits map to pitch intervals/onset patterns; Prouhet's equal-power partition (1851) gives balanced multi-voice harmony; self-similarity + overlap-freeness (no $XXX$ cube, Thue 1906/1912) yield aperiodic, recursively nested macro-form (statement/complement). Deterministic self-similar sibling of 002 Markov / 053 LFC; word-theoretic cousin of 069 CWCC / 019 L-System; aperiodic-beat cousin of 012 Euclidean Groove. |
+| **077** | concrete | De Bruijn Universal Cycle Composition (DBUC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Weak (Mode-pinned) | Grid-Locked | Local (Length-$k$ window) | $\mathcal{O}(n^k)$ | Generates music from a de Bruijn sequence $B(k,n)$ — a cyclic word of length $n^k$ whose every length-$k$ window over an $n$-symbol alphabet appears exactly once. Alphabet = scale degrees (pitch), $\{0,1\}$ (rhythm), or chord symbols (harmony); the de Bruijn graph Hamiltonian/Eulerian cycle and Lyndon-word (FKM/Duval) decomposition give exhaustive macro-form with zero verbatim repetition; de Bruijn tori give 2D texture. Deterministic exhaustive sibling of 002 Markov / 041 ACOPF (which walk the same graph probabilistically); maximal-variety complement of 076 PTM-ASC (avoids repetition) and 069 CWCC (balance); graph-theoretic cousin of 011 Voice-Leading Graph Search. |
 
 # Sound Production Methods Framework
 
@@ -153,6 +154,7 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 | **SP-060** | Denoising Diffusion Audio Synthesis (DDAS) | **Synthesis Engines** | Neural Diffusion / Stochastic Raw-Audio Timbres | Generates audio by learning to reverse a forward process that gradually noisifies real audio into Gaussian noise. A neural denoiser $\epsilon_\theta(x_t, t, c)$ predicts the added noise at each of $T$ steps; sampling runs it backward from $x_T \sim \mathcal{N}(0,\mathbf{I})$ under a conditioning $c$ (mel-spectrogram / STFT image / f0-loudness-label feature). DDIM ($\eta{=}0$) makes it deterministic per seed. Produces corpus-learned organic timbre, breath, and correlated multi-voice texture; audio-domain counterpart to 047 DSMG and stochastic foil to 045 DDSP. |
 | **SP-061** | Cepstral Liftering Synthesis (CLS) | **Synthesis Engines** | Homomorphic Source/Resonator Deconvolution / Cross-Synthesis Timbres | Deconvolves a sound into excitation (source) and resonator (spectral envelope) via the complex cepstrum $\hat{x}=\mathcal{F}^{-1}\{\log X[k]\}$, which turns convolution into addition and lands the two components in disjoint quefrency regions. Liftering (quefrency-domain windowing) separates them exactly with phase preserved; cross-synthesis recombines one sound's excitation with another's resonator. The exact-deconvolution counterpart to SP-028 LPC and the phase-preserving foil to SP-031 magnitude cross-synthesis. |
 | **SP-062** | Antiderivative Antialiasing for Nonlinear Waveshaping (ADAA) | **Post-Processing / DSP** | Aliasing-Free Distortion / Saturation / Wavefolding | Anti-aliases an arbitrary memoryless (or stateful) waveshaper $y=f(x)$ without oversampling: replaces the pointwise evaluation with the average of $f$ over each sample interval, computed as a divided difference of the antiderivative $F(x)=\int f(x)\,dx$ — 1st-order (linear segment) or 2nd-order (quadratic segment, flatter passband). Removes the inharmonic "digital grunge" of clippers/saturators at base sample rate for $\mathcal{O}(1)$ cost; the no-oversampling counterpart to SP-049 (16× oversampled) and the waveshaper complement to SP-019/SP-029/SP-051. |
+| **SP-063** | Ring Modulation (Balanced Modulator) Synthesis | **Synthesis Engines** | Metallic / Clangorous Bell, Gong & Robotic-Vocal Timbres | Multiplies a modulator signal $x[n]$ by an audio-rate carrier $m[n]=\sin(2\pi f_c n/f_s)$ (four-quadrant balanced multiplier), producing only the sum-and-difference sidebands $f_c \pm f_i$ while suppressing both carrier and modulator. N modulator partials → 2N sidebands; the ratio $r=f_c/f_m$ selects harmonic (integer, consonant) vs inharmonic (irrational, metallic) output; difference sideband folds through 0 Hz. The double-sideband parent of SP-055 FSHT and the audio-rate cousin of AM tremolo; $\mathcal{O}(1)$ per sample. |
 ---
 
 
@@ -15645,3 +15647,233 @@ def adaa2(x, F, F2):
 - Albertini, D., Bernardini, A., & Sarti, A. (2020). "Antiderivative Antialiasing in Nonlinear Wave Digital Filters." *Proc. DAFx-20*, Vienna.
 - Chowdhury, J. (2019). *ADAA* plugin repository (BSD-3-Clause), https://github.com/jatinchowdhury18/ADAA.
 - Zavalishin, V. (2018). *The Art of VA Filter Design*, 2nd ed. (Background on the aliasing of nonlinear digital stages.)
+# De Bruijn Universal Cycle Composition (DBUC) (Method 077)
+
+### **Layer**
+**Concrete** — generates concrete note/onset/chord events that fill UnitMatrix cells (rows = voices, columns = sections, cells = MusicUnit). The de Bruijn sequence is a *realization* engine: a deterministic combinatorial word whose length-$k$ windows exhaust a symbol alphabet, decoded into pitch, rhythm, harmony, structure, and texture atoms, then handed to the musicom engine for zero-drift MIDI export. It does not design abstract subset/progression plans (that is the Abstract layer), and it is not sound production (Absolute layer). Candidate code path: `generators/debruijn_sequence.py` (pure sequence math may live in `rules/debruijn_sequence.py`).
+
+### **Source**
+The de Bruijn sequence (a.k.a. **universal cycle**, **full cycle**, or **de Bruijn word**) is a central object in combinatorics and shift-register theory. It was first constructed by **Flye Sainte-Marie, C. (1894), "Question 48," *L'Intermédiaire des Mathématiciens* 1, 107–110** and independently, in full generality, by **de Bruijn, N. G. (1946), "A combinatorial problem," *Proc. Koninklijke Nederlandse Akademie van Wetenschappen* 49, 758–764**. The counting formula (the number of distinct de Bruijn sequences) is due to **van Aardenne-Ehrenfest, T., & de Bruijn, N. G. (1951), "Circuits and trees in oriented linear graphs," *Simon Stevin* 28, 203–217**. The efficient generation algorithm used below is **Fredricksen, H., & Maiorana, J. (1978), "Necklaces of beads in k colors and k-ary de Bruijn sequences," *Discrete Mathematics* 23, 207–210** and **Fredricksen, H., & Kessler, I. J. (1986), "An algorithm for generating necklaces of beads in two colors," *Discrete Mathematics* 61, 181–188** (the FKM / Duval algorithm). The connection to **Lyndon words** is standard (Lyndon 1954; Duval 1983). A modern treatment is **Knuth, D. E. (2011), *The Art of Computer Programming*, Vol. 4A, §7.2.1.1**, and the musical application is surveyed in **Nierhaus, G. (2009), *Algorithmic Composition*, Springer**. DBUC inverts these results from analysis into a generation engine.
+
+### **Description**
+De Bruijn Universal Cycle Composition generates music from a **de Bruijn sequence** $B(k, n)$: a *cyclic* sequence of length $n^k$ over an alphabet $\Sigma$ of size $n$ such that **every length-$k$ word over $\Sigma$ appears exactly once** as a contiguous (cyclic) window. Equivalently, $B(k, n)$ is a **Hamiltonian cycle** in the de Bruijn graph $G(n, k{-}1)$ — whose $n^{k-1}$ vertices are all words of length $k{-}1$ and whose edges are all words of length $k$ — and an **Eulerian circuit** in $G(n, k{-}2)$.
+
+For $n=2$, $k=3$ the lexicographically minimal sequence is $B(3,2) = 00010111$: sliding a length-3 window around it cyclically produces $000, 001, 010, 101, 011, 111, 110, 100$ — **all 8 binary triples exactly once**.
+
+The musical power is **maximal variety with zero verbatim repetition**: if the alphabet is a set of scale degrees and $k$ is the phrase/contour length, the generated melody contains *every* possible $k$-note pattern exactly once. No $k$-note fragment ever literally repeats (except the single wrap-around), yet every fragment is present — the combinatorially densest possible "melodic lexicon" of order $k$.
+
+Three structures drive composition:
+
+1. **Exhaustive coverage (universality)** — every length-$k$ word over $\Sigma$ is a factor exactly once. For $\Sigma$ = the 7 diatonic degrees and $k=2$, the $7^2=49$-note cycle contains every ordered pair of scale degrees exactly once (every two-note motive/intervallic cell); $k=3$ gives $343$ notes covering every 3-note contour.
+2. **de Bruijn graph = form** — the vertices of $G(n, k{-}1)$ (all length-$(k{-}1)$ fragments) are the *states* of the piece; the Hamiltonian cycle is the *macro-form path* through every state once, and the Eulerian circuit is the *event stream*. Traversing a subgraph (or a graph over *chord* symbols instead of pitches) yields section scaffolding.
+3. **Lyndon-word / necklace decomposition (FKM)** — the lexicographically minimal $B(k,n)$ is the concatenation of all **Lyndon words** (aperiodic necklace representatives — words strictly smaller than every rotation) over $\Sigma$ whose length divides $k$, in lexicographic order. This gives a principled *ordering* of the material: an ascending lexicographic arc that reads as a gradual build, plus a natural partition into phrase-blocks (one Lyndon word = one phrase).
+
+Composition decodes the sequence into musical atoms: **PITCH** via alphabet = scale degrees (window = melodic cell), **RHYTHM** via alphabet = $\{0,1\}$ (window = onset/hit pattern), **HARMONY** via a de Bruijn sequence over chord symbols (window = harmonic progression) or via multiple offset copies as balanced voice assignments, **STRUCTURE** via the de Bruijn graph Hamiltonian/Eulerian path and the Lyndon-word block ordering, and **TEXTURE** via a **de Bruijn torus** $B(k, n; 2)$ (a 2D generalization) and offset/permuted copies per voice. Generation is **$\mathcal{O}(n^k)$** in the output length (linear) via the FKM algorithm with $\mathcal{O}(n)$ extra space. DBUC is the deterministic *exhaustive* sibling of 002 Markov (which samples the same transition graph probabilistically), the *maximal-variety* complement of 076 PTM-ASC (which forbids repetition) and 069 CWCC (which optimizes balance), and a graph-theoretic cousin of 011 Voice-Leading Graph Search / 041 ACOPF (which also walk graphs, but heuristically rather than exhaustively).
+
+### **Musical Elements Framework**
+- **PITCH**: Alphabet $\Sigma$ = the 7 diatonic scale degrees (or 12 pitch classes, or a pentatonic 5). A de Bruijn sequence $B(k, n)$ over $\Sigma$ gives a melody whose every length-$k$ pitch/degree pattern occurs exactly once — for $k=2$ every ordered pair of degrees (every melodic interval *in degree space*) is heard exactly once, so the line is a compact atlas of all 2-note motives. Larger $k$ = longer "memory" of novelty ($k=3$ covers every 3-note contour). Register/octave is assigned by a separate bounded walk so the line stays playable; the cyclic seam (last $(k{-}1)$ notes returning to the first $(k{-}1)$) can be exploited as the loop point or hidden by an octave shift.
+- **RHYTHM**: Alphabet $\Sigma=\{0,1\}$, $k$ = the rhythmic cell length. $B(k,2)$ is a binary word of length $2^k$ containing **every $k$-bit onset/hit pattern exactly once** — a percussion groove that cycles through the entire $k$-bit rhythm lexicon with no repeated bar (e.g. $B(4,2)$ = 16 pulses covering all 16 four-bit hit patterns). Inter-onset gaps are non-uniform and non-periodic (unlike 012 Euclidean's balanced periodicity). Multi-speed texture: read the same $B(k,2)$ at different clock resolutions per voice (eighth/sixteenth), or use $B(k,3)$ over $\{0,1,2\}$ for three articulation levels (rest/hit/accent).
+- **HARMONY**: Three mechanisms. (1) **Chord-symbol de Bruijn** — $\Sigma$ = a set of chord symbols (e.g. the 7 diatonic triads); $B(2,7)$ = a 49-chord cycle containing every ordered triad pair exactly once, a complete harmonic-transition atlas quantizable with 022 MCWS. (2) **Offset voices** — run $p$ copies of $B(k,n)$ at distinct phase offsets; because a de Bruijn sequence is uncorrelated with its non-trivial rotations over most windows, the vertical slices are decorrelated → independent voice parts (the hocket/interleave of 0↔1 in the binary case makes two offset copies a perfect non-overlap pair). (3) **Alphabet permutation per voice** — applying different symbol permutations (rotations of $\Sigma$) to each voice yields distinct but related lines over a shared pitch-class set, giving consonant *modal* stacks. Tonal gravity is *weak but steerable*: pin the alphabet to a mode, and bias the register walk so the cumulative degree-sum drifts toward a tonic region.
+- **STRUCTURE**: The **de Bruijn graph is the macro-form**. The Hamiltonian cycle in $G(n, k{-}1)$ is the *section path* (each section = one vertex/state, traversed once), and the Eulerian circuit in $G(n, k{-}2)$ is the *event stream* (each edge = one event). The **Lyndon-word decomposition** orders the piece into phrase-blocks in lexicographic order — a natural build from "low" to "high" material that can be shaped into intro→peak→resolve by re-ordering or permuting the necklace order. **Recursive de Bruijn**: a de Bruijn sequence over an alphabet that is *itself* de Bruijn sequences (i.e. de Bruijn-torus slices) yields nested self-similar macro-form (each block is a whole smaller piece), analogous to 019 L-System recursion but with exhaustive-window structure.
+- **TEXTURE**: A **de Bruijn torus** $B(k, n; 2)$ — a 2D cyclic array where every $k \times k$ sub-array of $\Sigma$-symbols appears exactly once — gives a two-dimensional texture (time × voice) whose every local patch is unique, so no two "measure × instrument" regions are identical. Texture density = alphabet size and clock resolution per voice; the decorrelation of offset copies gives genuine voice independence (cf. the entanglement-independence scalar of 052 QWC), and the exhaustive property guarantees **no redundant region** — maximal information density per unit time.
+
+### **UnitMatrix Integration (Voices & Sections)**
+- **Rows (Voices)**: Each voice $v$ is a **de Bruijn stream** — its own alphabet $\Sigma_v$ (scale degrees / $\{0,1\}$ / chord symbols), order $k_v$, phase offset $\delta_v$, symbol permutation $\pi_v$, and clock resolution. A voice's cell fill = decoding its cyclic sequence into `create_note_unit` / `create_chord_unit` events over the section's tick span. Run the *same* sequence at different offsets for phase-related (hocket) texture, or *different* alphabets/permutations for independent lines over a shared pitch-class set. The Lyndon-word blocks give each voice a natural phrase segmentation (one necklace = one phrase/cell row).
+- **Columns (Sections)**: Each section $s$ is a **block of the Lyndon-word decomposition** (a contiguous run of necklaces) or a **subgraph path** of the de Bruijn graph (a set of states = a "key"/"mode" region). The column's cell fill is the decoded block; because the whole sequence is one Hamiltonian cycle, section boundaries are *seamless* (the end of section $s$ flows into the start of $s{+}1$ with no repeated window). Zero-drift is guaranteed by the musicom engine (`composer.validate()` before `to_midi()`), and the absolute silent padding event at `total_section_ticks - 1` keeps all rows symmetric (per the tail-truncation fix). Section length is $n^{k}$-derived; non-power forms come from truncating a block (accepting one local boundary where the "exactly once" guarantee is dropped, which is inaudible).
+- **Fills vs. the sparse/continuous rule**: binary-$B(k,2)$ rhythms and 012 Euclidean grooves are sparse/staccato; per the Method Hybridization rule, DBUC output pairs with a continuous fill layer (026 DPSM phase-shifted arpeggios, sustained string pad, or walking bass) to keep the texture flowing.
+
+### **Technical Mechanics**
+**Definition.** A **de Bruijn sequence** $B(k, n)$ over alphabet $\Sigma$ ($|\Sigma| = n$) is a cyclic word of length $n^k$ in which every word of length $k$ over $\Sigma$ occurs exactly once. It exists for every $n, k \ge 1$, and the number of distinct sequences is
+
+$$\frac{(n!)^{n^{k-1}}}{n^k}.$$
+
+**de Bruijn graph.** $G(n, m)$ has $n^m$ vertices (words of length $m$) and $n^{m+1}$ edges; an edge $(u, v)$ is labeled by the length-$(m{+}1)$ word $u[0]\,v[m{-}1]$. Then:
+- a **Hamiltonian cycle** of $G(n, k{-}1)$ $\iff$ a de Bruijn sequence $B(k, n)$;
+- an **Eulerian circuit** of $G(n, k{-}2)$ $\iff$ a de Bruijn sequence $B(k{-}1, n)$.
+
+So $B(k, n)$ is simultaneously "visit every state once" (form) and "traverse every transition once" (event stream).
+
+**FKM / Duval generation (lexicographically minimal).** The minimal $B(k, n)$ is the concatenation, in lexicographic order, of all **Lyndon words** over $\Sigma$ whose length divides $k$. A **Lyndon word** is a nonempty word that is strictly smaller than all its non-trivial rotations (the lexicographically minimal representative of an *aperiodic necklace*). The Duval algorithm enumerates Lyndon words in $\mathcal{O}(n^k)$ total time with $\mathcal{O}(n)$ space; only those of length $\mid k$ are emitted. This yields the sequence in linear output time with negligible memory.
+
+**Recursive / higher-dim generalization.** A **de Bruijn torus** $B(k, n; d)$ is a $d$-dimensional cyclic array in which every $k$-cube sub-array over $\Sigma$ appears exactly once ($d=2$: every $k{\times}k$ patch is unique). Torus slices supply texture and nested form; the $d{=}1$ case is the ordinary sequence.
+
+**Sampling the whole family.** Any de Bruijn sequence is obtained from the minimal one by an arbitrary permutation of the alphabet $\Sigma$ (relabel symbols) and/or a rotation (phase offset). Distinct permutations give distinct-but-related sequences — the palette for per-voice variation without losing the exhaustive property.
+
+**Bitstream mechanics.** For $\Sigma=\{0,1\}$, $B(k,2)$ is exactly the binary de Bruijn word of order $k$ (e.g. $00010111$ for $k=3$), directly usable as a MIDI onset/hit stream. For musical alphabets, symbols decode through a pitch-class/degree lookup and a register walk.
+
+### **Implementation Requirements (Python / NumPy)**
+```python
+from __future__ import annotations
+
+def lyndon_words(n: int, k: int):
+    """Enumerate Lyndon words over {0..n-1} of length dividing k (Duval/FKM)."""
+    w = [-1]
+    while w:
+        w[-1] += 1
+        yield list(w)                     # w is a Lyndon word here
+        m = len(w)
+        while len(w) < k:                 # periodic extension
+            w.append(w[len(w) - m])
+        while w and w[-1] == n - 1:
+            w.pop()
+
+def debruijn_sequence(n: int, k: int) -> list[int]:
+    """Lexicographically minimal B(k, n): concat Lyndon words of length | k."""
+    out = []
+    for w in lyndon_words(n, k):
+        if k % len(w) == 0:
+            out.extend(w)
+    return out
+
+def debruijn_torus(n: int, k: int, rows: int) -> list[list[int]]:
+    """2D de Bruijn torus slice: rows offset copies of B(k,n) (approximate torus)."""
+    seq = debruijn_sequence(n, k)
+    return [seq[(i * k) % len(seq):] + seq[:(i * k) % len(seq)] for i in range(rows)]
+
+# --- Musicom integration sketch (conceptual — engine does the MIDI authoring) ---
+# for v, (alphabet, order, offset, perm, clock) in enumerate(voice_specs):
+#     seq = debruijn_sequence(len(alphabet), order)      # cyclic word
+#     for s, (block_start, block_len) in enumerate(section_specs):
+#         for j in range(block_len):
+#             idx = (offset + block_start + j) % len(seq)
+#             sym = perm[seq[idx]]                        # per-voice relabel
+#             pitch = alphabet[sym]                       # degree/chord -> pitch
+#             dur, vel = onset_map(sym, clock)            # symbol -> note value/velocity
+#             composer.fill_voice_section(v, s, create_note_unit(pitch, dur, tick))
+# ok, msg = composer.validate()   # MUST be True before to_midi (per AGENTS.md)
+```
+**Tooling**: pure Python — the FKM algorithm is a linear-time necklace enumeration, no autograd, no training. Reuse `generators/` scale/quantization utilities for the symbol→pitch decode and 022 MCWS post-filter; the musicom engine handles UnitMatrix fill and zero-drift export upstream.
+
+### **Pitfalls**
+1. **Combinatorial explosion** — $n^k$ grows fast: $7^3=343$, $7^4=2401$, $12^3=1728$ events. A long form with a big alphabet or high order produces unperformable length. Fix: keep $k \in \{2,3\}$ for scale alphabets, or use small alphabets (pentatonic $n{=}5$, binary $n{=}2$) for long forms; a $7^2{=}49$ or $5^3{=}125$-event cell is the sweet spot.
+2. **Lexicographic monotony** — the minimal (FKM) sequence is lexicographically ordered, so the opening is dominated by the smallest symbols (many 0s/low degrees first) and reads as a "slow ramp". Fix: apply a random/structured alphabet permutation $\pi$ per voice and per section (any permutation yields a valid de Bruijn sequence), or scramble the necklace order, to break the low-first bias while keeping exhaustiveness.
+3. **Near-repetition from window overlap** — although no length-$k$ window repeats, consecutive windows overlap in $k{-}1$ symbols, so long runs of *similar* fragments can sound monotonous. Fix: hybridize with a continuous fill layer (026 DPSM arpeggio / sustained pad) per the sparse/continuous rule, vary velocity/register per symbol, and use $k \ge 3$ so the overlap is a minority of each window.
+4. **Cyclic seam artifact** — the "exactly once" guarantee holds only cyclically; linearizing (cutting the loop open) drops the guarantee for the single window straddling the cut, and a naive join can repeat a fragment at the boundary. Fix: hide the seam at a section boundary or a silent gap, or append the first $k{-}1$ symbols as a closing tail (making the linear sequence also exhaustive), or accept the single boundary repeat as inaudible.
+5. **Pitch-poor binary misuse** — using $\Sigma=\{0,1\}$ for *pitch* yields a two-note line (monotone). Fix: reserve binary for *rhythm/onset* streams only; for pitch use a scale alphabet ($n \ge 5$) and let the window length $k$ control melodic-motive novelty.
+
+### **Comparison With Related Methods**
+| Method | Objective over the word/state space | Mechanism | Cost |
+|---|---|---|---|
+| 076 PTM-ASC (Thue–Morse) | *avoid* repetition (overlap-free) | substitution fixed point | $\mathcal{O}(N)$ |
+| 069 CWCC (Christoffel words) | *balance* (as even as possible) | slope/rational-approximation words | $\mathcal{O}(N)$ |
+| 019 L-System | *self-similar* growth | rewrite rules | $\mathcal{O}(N)$ |
+| 002 Markov / 041 ACOPF | *probabilistic* walk of the graph | transition weights / pheromones | $\mathcal{O}(N)$ |
+| 012 Euclidean Groove | *periodic* balanced hit pattern | Bjorklund | $\mathcal{O}(k)$ |
+| **077 DBUC (de Bruijn)** | **exhaust** every length-$k$ pattern once | Hamiltonian/Eulerian cycle + Lyndon words | $\mathcal{O}(n^k)$ |
+
+### **References**
+- Flye Sainte-Marie, C. (1894). "Question 48." *L'Intermédiaire des Mathématiciens* 1, 107–110.
+- de Bruijn, N. G. (1946). "A combinatorial problem." *Proc. Koninklijke Nederlandse Akademie van Wetenschappen* 49, 758–764.
+- van Aardenne-Ehrenfest, T., & de Bruijn, N. G. (1951). "Circuits and trees in oriented linear graphs." *Simon Stevin* 28, 203–217.
+- Lyndon, R. C. (1954). "On Burnside's problem." *Transactions of the American Mathematical Society* 77, 202–215.
+- Fredricksen, H., & Maiorana, J. (1978). "Necklaces of beads in k colors and k-ary de Bruijn sequences." *Discrete Mathematics* 23, 207–210.
+- Duval, J.-P. (1983). "Factorizing words over an ordered alphabet." *Journal of Algorithms* 4(4), 363–381.
+- Fredricksen, H., & Kessler, I. J. (1986). "An algorithm for generating necklaces of beads in two colors." *Discrete Mathematics* 61, 181–188.
+- Knuth, D. E. (2011). *The Art of Computer Programming*, Vol. 4A, §7.2.1.1. Addison–Wesley.
+- Nierhaus, G. (2009). *Algorithmic Composition: Paradigms of Automated Music Generation*. Springer.
+
+# Ring Modulation (Balanced Modulator) Synthesis (Method SP-063)
+
+### Source
+Ring modulation is one of the oldest electronic-music sound-production techniques, formalized for musical use by Harald Bode (the Bode Ring Modulator / Frequency Shifter, 1961) and made central to the serial electronic idiom by Karlheinz Stockhausen — *Mixtur* (1964, orchestra through ring modulators), *Mantra* (1970, two pianos through ring modulators), and *Telemusik* (1966). The circuit lineage is the four-quadrant (balanced) multiplier: the classic passive diode-ring modulator (four diodes in a ring, hence the name) and the analog multiplier IC (e.g. Analog Devices AD633, Motorola MC1496 "Gilbert cell" balanced modulator). In DSP terms it is the discrete "double-sideband suppressed-carrier" (DSB-SC) amplitude modulation — the *audio-rate* cousin of the sub-audio tremolo, and the double-sideband sibling of SP-055 FSHT (which produces only one sideband via the Hilbert analytic signal). Key references: Stockhausen (1964/1970/1971) scores and Texte; Bode (1961); Chapman, J. "On the Application of Ring Modulation to Electronic Music" (1981, *Interface*); Roads, C. *The Computer Music Tutorial* (MIT Press, 1996) §6.8; AD633 datasheet.
+
+### Layer
+**absolute** (sound production) — **Synthesis Engines**. Candidate code path: `sound/synthesis/ring_mod.py` (new module alongside `phase_mod.py`, `west_coast.py`, `additive.py`). Consumes a rendered modulator buffer (or a live oscillator) and a carrier oscillator, returns the multiplied buffer.
+
+### Description
+Ring modulation multiplies a *modulator* signal $x(t)$ by a *carrier* oscillator $m(t)$ at (usually) audio frequency, producing the sum-and-difference sidebands $f_c \pm f_i$ of every modulator partial $f_i$ — while suppressing both the carrier and the modulator themselves from the output. For a sine carrier $\cos(2\pi f_c t)$ and a sine modulator at $f_m$:
+
+$$y(t) = A\cos(2\pi f_m t)\cos(2\pi f_c t) = \tfrac{A}{2}\Big[\cos\big(2\pi(f_c-f_m)t\big) + \cos\big(2\pi(f_c+f_m)t\big)\Big]$$
+
+The output contains *only* the two sidebands — no energy at $f_c$ or $f_m$. This is the signature "clangorous"/metallic/bell timbre: because the difference sideband is $|f_c - f_m|$, ordinary harmonic ratios are destroyed and replaced by sum/difference arithmetic, producing inharmonic, often non-octave spectra (Stockhausen's *Klangfarben* from arithmetic rather than harmonic relations). It is the standard tool for metallizing a sound — turning a plain saw or vocal into bell, gong, or Dalek-voice timbre, and for generating stable sideband chords from a single modulator+carrier pair.
+
+### Technical Mechanics
+
+**Core operation (four-quadrant multiply), discrete time:**
+
+$$y[n] = x[n]\cdot m[n],\qquad m[n]=\sin(2\pi f_c\, n/f_s)\ \text{or a band-limited carrier table}$$
+
+**Sinusoidal decomposition.** Write the modulator as a sum of partials $x(t)=\sum_i A_i\cos(\omega_i t+\phi_i)$. Each partial splits into two sidebands:
+
+$$y(t)=\sum_i \frac{A_i}{2}\Big[\cos\big((\omega_c-\omega_i)t-\phi_i\big)+\cos\big((\omega_c+\omega_i)t+\phi_i\big)\Big]$$
+
+So $N$ modulator partials become $2N$ output partials (unless some coincide/fold).
+
+**Carrier & modulator suppression.** There is no $\omega_c$ term (the carrier is fully suppressed) and no $\omega_i$ term — the modulator's own pitch disappears entirely. This is the defining difference from ordinary amplitude modulation (AM), where a unipolar modulator retains the carrier. A DC offset in $x$ (offset $+1$ on $m$) is the standard way to *recover* AM/tremolo from a ring modulator: $m(t)=1+\cos(\omega_c t)$ yields carrier + sidebands.
+
+**Difference-sideband folding.** Because $\omega_c-\omega_i$ goes negative when $\omega_i>\omega_c$, the difference sideband folds through 0 Hz: a negative frequency appears at its absolute value, mirroring the spectrum around DC. This "spectral reflection" is what makes ring mod inharmonic and is a *feature* (new low partials) as much as a hazard.
+
+**Harmonic vs inharmonic regime.**
+- If $f_c$ is an integer multiple of $f_m$ (e.g. $f_c = 3 f_m$), the sidebands are $2f_m, 4f_m$ — still harmonic, and a fixed carrier+modulator pair yields a *consonant, fixed* sideband chord (useful for harmonic bell voicings).
+- If $f_c/f_m$ is irrational (or a "clangorous" non-simple ratio like $1:\sqrt{2}$), the spectrum is inharmonic — metallic, gong-like.
+- The ratio $r=f_c/f_m$ is thus the single most important timbral control; sweeping $f_c$ (carrier as a second pitch voice) produces the classic rising/falling "barberpole" sideband glissando that keeps no stable pitch.
+
+**Carrier waveforms.**
+- Sine carrier → one sum + one difference sideband per partial (cleanest, most "metallic").
+- Square/bipolar pulse carrier (sign flip at rate $f_c$) → ring-mod-as-*chopper*: the modulator is polarity-inverted at $f_c$, equivalent to multiplying by a $\pm1$ square wave, yielding all odd sidebands of the square's Fourier series. Rich, brash, "sample-rate" timbres.
+- The carrier itself is normally a plain oscillator (no anti-aliasing needed for a *sine* carrier), but a naive square carrier needs PolyBLEP band-limiting (cf. SP-029).
+
+**Anti-aliasing of the *sum* sideband.** The product $x\cdot m$ generates components up to $f_c + f_{\max}$; if this exceeds $f_s/2$ the sum sideband aliases. Guard: band-limit the modulator before multiplying (it already is, if rendered from a band-limited engine), and choose $f_c$ so $f_c + f_{\max} \le f_s/2$, or oversample the multiply stage 2–4×.
+
+**Quadrature / single-sideband extension.** Feeding the carrier through a $90^\circ$ phase pair and combining per-sample yields a single sideband (frequency shifter) — this is exactly SP-055 FSHT, so RM is the DSB parent of FSHT. Documented here as the relation, not duplicated.
+
+**Cost.** One multiply per sample per voice — $O(1)$, among the cheapest synthesis operations in the whole SP family; trivially vectorized over a rendered buffer.
+
+### Musical Elements Framework
+- **PITCH** = deliberately *destroyed/re-arithmetized*: the output's perceived pitch is $|f_c-f_m|$ (difference) plus the sum sideband, never $f_m$ itself. The modulator's pitch is only recoverable when $f_c$ tracks $f_m$ (ratio-locked); otherwise the result is a pitch that floats with $f_c$. For a stable ringing pitch use $f_c$ as an integer multiple of the target.
+- **RHYTHM** = at sub-audio carrier rates ($f_c<20$ Hz) ring mod degenerates to tremolo/chopping (bipolar = full on/off sign flip, unipolar = AM tremolo). A rhythmic carrier LFO is a built-in gate/chopper; a square carrier at beat subdivisions yields hard gating synchronized to the UnitMatrix clock.
+- **HARMONY** = sum/difference arithmetic: a chord of modulator partials becomes a *sideband chord* under multiplication; the carrier acts as a global "transposition operator" that maps every harmonic to $f_c \pm$ that harmonic. Integer-ratio carriers keep the result inside a harmonic series; irrational carriers produce inharmonic (bell/gong) harmony. Two voices ring-modded against one shared carrier stay mutually consonant (both shifted by the same operator).
+- **STRUCTURE** = the carrier-frequency contour $f_c(s)$ across sections is the macro-form: a rising carrier = upward sideband glissando (tension build), an integer-locked carrier per section = stable ringing blocks, a carrier that jumps an octave = timbral modulation between sections. The $f_c$ trajectory is a second, hidden "pitch voice" independent of the note grid.
+- **TEXTURE** = the signature output: metallic, clangorous, bell/gong, robotic-vocal (Dalek). Drive (carrier amplitude) and ratio control metallization depth — low index = subtle sheen, full = pure sideband bell. Mixing the dry modulator back in (parallel dry/wet) recovers pitch while retaining the metallic edge.
+
+### UnitMatrix Integration
+- **Rows (Voices)** = each voice row is a modulator signal. Two topologies: (a) *shared carrier* — one $f_c$ global, all voices multiplied against it (keeps the ensemble coherent, all shifted by the same operator); (b) *per-voice carrier* — independent $f_c^{(v)}$ per row, yielding a polyphonic cloud of differently-shifted timbres.
+- **Columns (Sections)** = carrier-contour per section $f_c(s)$ (e.g. integer-locked ringing block in verse, rising glissando into chorus, octave drop in bridge); joins ramp $f_c$ continuously for a smooth sideband glide or jump it for a hard timbral cut.
+- **Cells** = each `MusicUnit` carries `{PITCH}` (the modulator's note), `{HARMONY}` (the carrier ratio = timbral operator), `{TEXTURE}` (drive/mix), `{RHYTHM}` (carrier-gating rate when using a sub-audio square carrier).
+- **Flow**: compose → render each voice's clean mono buffer (SP-001 FluidSynth / SP-029 subtractive / SP-039 additive) → `ring_mod(x, f_c, carrier_shape, mix)` per voice → sum → SP-007 EQ / SP-008 DRC / SP-009 reverb post. Deterministic per seed → zero-drift gate compatible.
+
+### Pitfalls
+1. **Lost pitch** — the modulator's pitch vanishes (carrier+modulator both suppressed); the result has *no* energy at the note you played. Fix: lock $f_c$ to an integer multiple of the note, or mix dry modulator back in (parallel dry/wet), or track $f_c$ to the melody so the difference sideband lands on the intended pitch.
+2. **Sum-sideband aliasing** — components up to $f_c+f_{\max}$ fold when past Nyquist. Fix: keep $f_c+f_{\max}\le f_s/2$, band-limit the modulator, or oversample the multiply.
+3. **DC-offset carrier bleed** — a DC component in the modulator (or a DC-biased carrier) leaks the carrier through and turns ring mod into plain AM. Fix: high-pass the modulator (remove DC) and use a zero-mean carrier.
+4. **Clangorous inharmonicity in tonal music** — irrational ratios produce non-octave spectra that fight a 12TET progression. Fix: use integer-ratio carriers for tonal sections, reserve irrational/metallic ratios for texture/percussion layers.
+5. **Difference-sideband folding** — when the modulator is higher than the carrier the difference sideband mirrors around 0 Hz, producing unexpected low partials. Fix: keep $f_m < f_c$ for predictable results, or embrace the fold as a deliberate low-end generator.
+6. **Square-carrier aliasing** — a naive $sign(\sin)$ carrier is not band-limited. Fix: PolyBLEP-correct the square (cf. SP-029) or oversample.
+7. **No carrier at output ≠ silence check** — a beginner "is it working?" test on a pure sine produces two sidebands that may not match any expected pitch. Fix: verify via FFT (expect exactly $|f_c\pm f_m|$), not by ear.
+
+### Implementation Requirements (Python / NumPy)
+```python
+import numpy as np
+
+def ring_mod(x, f_c, sr, carrier="sine", mix=1.0):
+    """Multiply modulator buffer x by a band-limited carrier at f_c.
+    Returns y = mix * x*m + (1-mix) * x  (dry/wet parallel)."""
+    n = np.arange(len(x))
+    if carrier == "sine":
+        m = np.sin(2*np.pi*f_c*n/sr)
+    elif carrier == "square":            # PolyBLEP-band-limited square (cf. SP-029)
+        ph = np.mod(f_c*n/sr, 1.0)
+        m = np.where(ph < 0.5, 1.0, -1.0)
+        # (polyblep correction omitted for brevity — see sound/synthesis/west_coast.py)
+    else:
+        raise ValueError(carrier)
+    m = m - m.mean()                      # force zero-mean carrier (no DC leak)
+    wet = x * m
+    return mix*wet + (1.0-mix)*x
+```
+
+### Comparison With Related Methods
+| Method | Spectrum of one partial $f_i$ | Carrier kept? | Modulator kept? | Cost | Character |
+|---|---|---|---|---|---|
+| AM / tremolo (sub-audio) | $f_i \pm f_c$ (carrier retained) | Yes | Yes | $O(1)$ | Volume wobble |
+| **RM (SP-063)** | $f_c \pm f_i$ (DSB-SC) | No | No | $O(1)$ | Metallic bell |
+| Frequency shift (SP-055) | $f_i + \Delta f$ (one side) | n/a | No | $O(N\log N)$ | Barberpole |
+| FM/PM (SP-010/017) | $f_c \pm k f_m$ lattice | Yes (carrier strong) | Yes (partial) | $O(1)$ | Brass/bell |
+| Waveshaping (SP-019/062) | harmonics of $f_i$ | n/a | n/a | $O(1)$ | Distortion |
+
+### References
+- Stockhausen, K. (1964/1970/1971). *Mixtur*, *Mantra*, *Telemusik* — scores and *Texte zur Musik*.
+- Bode, H. (1961). Ring modulator / frequency shifter patents and instruments.
+- Chapman, J. (1981). "On the Application of Ring Modulation to Electronic Music." *Interface* 10(1).
+- Roads, C. (1996). *The Computer Music Tutorial*, §6.8 (Amplitude Modulation). MIT Press.
+- Analog Devices. *AD633 Low-Cost Analog Multiplier* datasheet (four-quadrant multiply).

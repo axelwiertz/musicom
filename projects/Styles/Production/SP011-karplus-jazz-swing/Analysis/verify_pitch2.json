@@ -1,0 +1,10 @@
+{
+  "frames": 63,
+  "detected_pitch": 60,
+  "detected_pct": 95.2,
+  "detected_matching_expected": 45,
+  "detected_match_pct": 75.0,
+  "harmonic_energy_vs_band_50_2000_pct": 18.2,
+  "silence_music_pct": 28.1,
+  "silence_tail_pct": 100.0
+}

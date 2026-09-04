@@ -1,0 +1,17 @@
+{
+  "artifact": "085-celtic-subset-walk.wav",
+  "classification": "ai-generated",
+  "generator": "SP-001 (workflows.musicom_workflow.produce) FluidSynth + FluidR3_GM.sf2",
+  "sources": [],
+  "parameters": {
+    "bpm": 96,
+    "key": "Ab major",
+    "method": "ABS-002 Subset Walker",
+    "seed": 20260903
+  },
+  "notes": "SP-001 FluidSynth SoundFont render of phase-2 MIDI (full celtic texture)",
+  "sha256": "7cc485495709eeb24ac8c4d4c5ca75a716e2a4dbc737eaca2476b5afcdfacffb",
+  "bytes": 11069996,
+  "created_utc": "2026-09-03T23:21:33.650934+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,93 @@
+{
+  "method": "SP-011",
+  "method_name": "Karplus-Strong String Synthesis",
+  "sample_rate": 44100,
+  "output_seconds": 19.0,
+  "roles": {
+    "lead": {
+      "notes": 44,
+      "config": {
+        "gains": [
+          1.0
+        ],
+        "width": 0.55,
+        "pan_drift": true,
+        "gain_db": -2.0,
+        "loop_gain": 0.9992
+      }
+    },
+    "bass": {
+      "notes": 32,
+      "config": {
+        "gains": [
+          1.0
+        ],
+        "width": 0.35,
+        "pan_drift": false,
+        "gain_db": -5.0,
+        "loop_gain": 0.9994
+      }
+    },
+    "perc": {
+      "notes": 48,
+      "config": {
+        "gains": [
+          1.0
+        ],
+        "width": 0.3,
+        "pan_drift": false,
+        "gain_db": -10.0,
+        "loop_gain": 0.985
+      }
+    },
+    "comp": {
+      "notes": 64,
+      "config": {
+        "gains": [
+          1.0
+        ],
+        "width": 0.6,
+        "pan_drift": false,
+        "gain_db": -6.0,
+        "loop_gain": 0.9978
+      }
+    }
+  },
+  "note_count": 188,
+  "source_midi": "/opt/data/projects/Styles/Balfolk/017-hybrid-pattern-matrix/MIDI/exercise1b_jazz_ii_v_i_swing.mid",
+  "source_name": "exercise1b_jazz_ii_v_i_swing.mid",
+  "bpm": 120.0,
+  "total_notes": 188,
+  "roles_used": {
+    "lead": 44,
+    "comp": 64,
+    "bass": 32,
+    "perc": 48
+  },
+  "stems": {
+    "lead": "/opt/data/projects/Styles/Production/SP011-karplus-jazz-swing/Audio/stem_lead.wav",
+    "comp": "/opt/data/projects/Styles/Production/SP011-karplus-jazz-swing/Audio/stem_comp.wav",
+    "bass": "/opt/data/projects/Styles/Production/SP011-karplus-jazz-swing/Audio/stem_bass.wav",
+    "perc": "/opt/data/projects/Styles/Production/SP011-karplus-jazz-swing/Audio/stem_perc.wav"
+  },
+  "parameters": {
+    "excitation": "2-sample uniform noise burst scaled by velocity",
+    "delay_line": "N = round(sr/f0), full cycle period (no octave drop)",
+    "loop_filter": "2-point moving average y[n]=0.5*(y[n-N]+y[n-N-1])",
+    "loop_gain_by_role": {
+      "lead": 0.9992,
+      "comp": 0.9978,
+      "bass": 0.9994,
+      "perc": 0.985
+    },
+    "gain_db_by_role": {
+      "lead": -2.0,
+      "comp": -6.0,
+      "bass": -5.0,
+      "perc": -10.0
+    },
+    "pan": "lead drift -0.55..+0.55 across form; others center",
+    "bus": "soft-knee saturation, peak -1 dBFS",
+    "tail": "3.0 s reverb-free decay tail"
+  }
+}

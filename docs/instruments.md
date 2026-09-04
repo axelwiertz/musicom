@@ -93,6 +93,18 @@ sitar; ~2× tail energy vs 0.990 dull control confirmed). Hirajoshi tuning
 quirk: koto is NOT chromatic — composition jobs write in-scale pentatonic
 lines, not dense harmony.
 
+**Shamisen added** (2026-09-04): GM106, World-family third entry
+(instrument.md + shamisen.py), verified end-to-end UnitMatrixComposer →
+zero-drift ✓ → MIDI → FluidSynth WAV ✓; RenderPipeline stem label
+`trackXX_Shamisen.wav` ✓ (GM_PROGRAMS[106] = "Shamisen", FluidR3 preset
+106 = "Shamisen" — labels match exactly, no quirk). Karplus-Strong
+recommended (plucked waveguide, loop_gain 0.9955 → punchy dry ring between
+guitar and koto; ring advantage vs 0.990 dull control confirmed). Empirical
+FluidR3 pitch sweep (RMS, notes 24–96): preset 106 audible across the whole
+span, no gaps — SF2 never clips a composition. Line-instrument quirk:
+shamisen is a monophonic bachi line voice (folk/theatre), not a harmony
+voice — no dense chords.
+
 ## Python usage
 
 ```python
@@ -134,6 +146,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Percussion | Marimba | 12 | 45–96 | lead, melody, accent, countermelody, harmony |
 | World | Sitar | 104 | 55–96 | lead, melody, ornament, drone |
 | World | Koto | 107 | 51–90 | lead, melody, ornament, drone, harmony |
+| World | Shamisen | 106 | 45–89 | lead, melody, ornament, drone, countermelody |
 
 ## Stem label quirks (RenderPipeline)
 
@@ -159,6 +172,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 12 | Marimba | Marimba ✓ |
 | 104 | Sitar | Sitar ✓ (GM_PROGRAMS[104] + FluidR3 preset 104 both "Sitar") |
 | 107 | Koto | Koto ✓ (GM_PROGRAMS[107] + FluidR3 preset 107 both "Koto") |
+| 106 | Shamisen | Shamisen ✓ (GM_PROGRAMS[106] + FluidR3 preset 106 both "Shamisen") |
 | ch9/pgm0 | Drums | **Acoustic_Grand_Piano** ✗ (program-0 fallback) |
 
 > **Known off-by-one in existing entries**: ~~`trumpet.py` uses 57~~ **FIXED 2026-08-27**: trumpet is now 56 (SF2 preset 56=`SoloTrumpet`). `piano.py`=1 → actually Bright Acoustic Piano (GM #2) — cosmetic label difference only, no routing impact. Legacy registry rows kept as-is for piano; new instruments use 0-indexed programs matching pipeline+SF2.

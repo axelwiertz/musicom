@@ -1,0 +1,17 @@
+{
+  "artifact": "085-celtic-subset-walk-phase1.wav",
+  "classification": "ai-generated",
+  "generator": "SP-001 (workflows.musicom_workflow.produce) FluidSynth + FluidR3_GM.sf2",
+  "sources": [],
+  "parameters": {
+    "bpm": 96,
+    "key": "Ab major",
+    "method": "ABS-002 Subset Walker",
+    "seed": 20260903
+  },
+  "notes": "SP-001 FluidSynth render of phase-1 raw subset-walk draft",
+  "sha256": "a9ed746770bc09f4671f6886cae9745c5bff3d5d71052a0d1477a1e5bbd5b87b",
+  "bytes": 10937132,
+  "created_utc": "2026-09-03T23:21:33.661803+00:00",
+  "provenance_version": "1.0"
+}

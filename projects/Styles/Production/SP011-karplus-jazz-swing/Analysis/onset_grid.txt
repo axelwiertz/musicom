@@ -1,0 +1,8 @@
+SP-011 Karplus-Strong — source: exercise1b_jazz_ii_v_i_swing.mid (120.0 BPM, 16.0s)
+
+lead  ███░███████████░░███░███████████
+comp  █░█░█░█░█░█░█░█░█░█░█░█░█░█░█░█░
+bass  ████████████████████████████████
+perc  ████████████████████████████████
+
+32 columns across the full piece; each col = 0.5s

@@ -45,6 +45,7 @@ _INSTRUMENT_MODULES = {
     "Percussion.marimba.marimba": "marimba",
     "World.sitar.sitar": "sitar",
     "World.koto.koto": "koto",
+    "World.shamisen.shamisen": "shamisen",
 }
 
 _FIELDS = (
@@ -136,6 +137,7 @@ DRUM_KIT = ALL_INSTRUMENTS["drum_kit"]
 MARIMBA = ALL_INSTRUMENTS["marimba"]
 SITAR = ALL_INSTRUMENTS["sitar"]
 KOTO = ALL_INSTRUMENTS["koto"]
+SHAMISEN = ALL_INSTRUMENTS["shamisen"]
 
 
 def by_name(name):
@@ -182,6 +184,8 @@ def registry_table():
             role = "lead, melody, ornament, drone"
         elif low == "koto":
             role = "lead, melody, ornament, drone, harmony"
+        elif low == "shamisen":
+            role = "lead, melody, ornament, drone, countermelody"
         else:
             role = "lead, harmony, accent"
         rng = f"{inst.range_min}–{inst.range_max}" if inst.range_min else "-"
@@ -207,3 +211,7 @@ if __name__ == "__main__":
     print("  by_name('koto') =", by_name("koto"))
     print("  by_program(107) =", by_program(107))
     print("  KOTO.in_sweet_spot(69) =", KOTO.in_sweet_spot(69))
+    print("  SHAMISEN.midi_program =", SHAMISEN.midi_program, "(should be 106)")
+    print("  by_name('shamisen') =", by_name("shamisen"))
+    print("  by_program(106) =", by_program(106))
+    print("  SHAMISEN.in_sweet_spot(69) =", SHAMISEN.in_sweet_spot(69))
