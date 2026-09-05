@@ -1,0 +1,45 @@
+{
+  "artifact": "086-son-markov-guajira.mid",
+  "classification": "ai-assisted",
+  "generator": "Method 002 Markov + musicom rules post-process (phase 2)",
+  "sources": [
+    "/opt/data/projects/Styles/Cuban/086-son-markov-guajira/MIDI/086-son-markov-guajira-phase1.mid"
+  ],
+  "parameters": {
+    "seed": 20260904,
+    "phase": 2,
+    "bpm": 104,
+    "key": "A minor (aeolian)",
+    "prog": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      6,
+      5,
+      0,
+      1,
+      0,
+      4,
+      0,
+      3,
+      6,
+      4,
+      0,
+      5,
+      3,
+      6,
+      0,
+      0,
+      6,
+      4,
+      0
+    ]
+  },
+  "notes": "",
+  "sha256": "1c8fa8fc42c1a1a6dbfdc503773b2e271d5f180532c857e9d1074cc7a1f8d931",
+  "bytes": 8716,
+  "created_utc": "2026-09-04T23:12:08.189708+00:00",
+  "provenance_version": "1.0"
+}

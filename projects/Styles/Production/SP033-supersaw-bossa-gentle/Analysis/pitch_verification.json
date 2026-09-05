@@ -1,0 +1,11 @@
+{
+  "windows_checked": 153,
+  "dominant_peak_hit_rate": 1.0,
+  "harmonic_energy_mean_8h": 0.5033,
+  "lowest_midi_notes_seen": [
+    35,
+    36
+  ],
+  "method": "FFT dominant peak per 0.5s window, 40-2000 Hz band, +/-4% tolerance vs active MIDI fundamental or its 2nd/3rd harmonic (supersaw stacks put spectral energy on harmonics; octave sub tolerance removed because bass A1=55Hz is inside the band)",
+  "verdict": "PASS"
+}

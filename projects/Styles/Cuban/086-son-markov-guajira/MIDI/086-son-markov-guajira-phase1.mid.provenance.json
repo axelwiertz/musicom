@@ -1,0 +1,17 @@
+{
+  "artifact": "086-son-markov-guajira-phase1.mid",
+  "classification": "ai-generated",
+  "generator": "MarkovChainGenerator.generate_sequence (Method 002)",
+  "sources": [],
+  "parameters": {
+    "seed": 20260904,
+    "phase": 1,
+    "bpm": 104,
+    "key": "A minor (aeolian)"
+  },
+  "notes": "",
+  "sha256": "39017973c5dc97ea7bca4f893bde15b07cecb6fde58e3be153bf5ce5ff7f8651",
+  "bytes": 1674,
+  "created_utc": "2026-09-04T23:12:08.138195+00:00",
+  "provenance_version": "1.0"
+}

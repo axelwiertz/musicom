@@ -1,0 +1,18 @@
+{
+  "artifact": "086-son-markov-guajira.ogg",
+  "classification": "ai-assisted",
+  "generator": "ffmpeg libopus voip 48k from phase-2 WAV",
+  "sources": [
+    "/opt/data/projects/Styles/Cuban/086-son-markov-guajira/Audio/086-son-markov-guajira.wav"
+  ],
+  "parameters": {
+    "codec": "libopus",
+    "application": "voip",
+    "bitrate": "48k"
+  },
+  "notes": "",
+  "sha256": "93eb0012b6d0bc6db170b9ed7511977de891ac40d421c549dd56267aaa76a862",
+  "bytes": 421344,
+  "created_utc": "2026-09-04T23:11:18.286163+00:00",
+  "provenance_version": "1.0"
+}

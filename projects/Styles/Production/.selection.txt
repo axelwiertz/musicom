@@ -1,2 +1,2 @@
-/opt/data/projects/Styles/Country/039-marilou-vacation/MIDI/039-marilou-vacation-v3.mid
-SP-034
+/opt/data/projects/Styles/BossaNova/gentle/v1/bossa_nova_gentle.mid
+SP-033

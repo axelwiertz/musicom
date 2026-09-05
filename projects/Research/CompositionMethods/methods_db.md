@@ -85,6 +85,7 @@ Classification of active Musicom composition methods categorized by their primar
 | **076** | concrete | Prouhet–Thue–Morse Automatic Sequence Composition (PTM-ASC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Weak (Scale-mapped) | Grid-Locked | None (Self-similar recurrence) | $\mathcal{O}(N)$ | Generates music from the Thue–Morse automatic sequence $t(n)=s_2(n)\bmod 2$ (parity of the base-2 digit sum), the fixed point of the substitution $0{\to}01, 1{\to}10$. Bits map to pitch intervals/onset patterns; Prouhet's equal-power partition (1851) gives balanced multi-voice harmony; self-similarity + overlap-freeness (no $XXX$ cube, Thue 1906/1912) yield aperiodic, recursively nested macro-form (statement/complement). Deterministic self-similar sibling of 002 Markov / 053 LFC; word-theoretic cousin of 069 CWCC / 019 L-System; aperiodic-beat cousin of 012 Euclidean Groove. |
 | **077** | concrete | De Bruijn Universal Cycle Composition (DBUC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Weak (Mode-pinned) | Grid-Locked | Local (Length-$k$ window) | $\mathcal{O}(n^k)$ | Generates music from a de Bruijn sequence $B(k,n)$ — a cyclic word of length $n^k$ whose every length-$k$ window over an $n$-symbol alphabet appears exactly once. Alphabet = scale degrees (pitch), $\{0,1\}$ (rhythm), or chord symbols (harmony); the de Bruijn graph Hamiltonian/Eulerian cycle and Lyndon-word (FKM/Duval) decomposition give exhaustive macro-form with zero verbatim repetition; de Bruijn tori give 2D texture. Deterministic exhaustive sibling of 002 Markov / 041 ACOPF (which walk the same graph probabilistically); maximal-variety complement of 076 PTM-ASC (avoids repetition) and 069 CWCC (balance); graph-theoretic cousin of 011 Voice-Leading Graph Search. |
 
+| **078** | concrete | Ising Model Equilibrium Composition (IMEC) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Field/Temperature-guided) | Grid-Locked / Continuous | Meso / Spin-Lattice | $\mathcal{O}(I \cdot V \cdot S)$ | Simulates a 2D Ising spin lattice (rows = voices, columns = time slots) at thermal equilibrium via Metropolis / Wolff cluster sampling. Spin value → pitch (consonant vs passing tone); column magnetization $M(t)$ → onset density/accents; external field $h$ → HOME/LIFT/TENSE/TURN chord function; temperature schedule $T(s)$ → macro-form (cold = chorus, $T_c$ = fractal development, hot = breakdown); cluster-size distribution → texture. Equilibrium sibling of 036 ASAR / 070 CML-C; thermal foil to 071 HAM-C (quenched recall). |
 # Sound Production Methods Framework
 
 Sound production translates symbolic MIDI UnitMatrix data into final acoustic air pressure. Methods are categorized by execution layer: **Hardware/Acoustic Integration**, **Synthesis Engines**, or **Post-Processing / DSP**.
@@ -155,6 +156,7 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 | **SP-061** | Cepstral Liftering Synthesis (CLS) | **Synthesis Engines** | Homomorphic Source/Resonator Deconvolution / Cross-Synthesis Timbres | Deconvolves a sound into excitation (source) and resonator (spectral envelope) via the complex cepstrum $\hat{x}=\mathcal{F}^{-1}\{\log X[k]\}$, which turns convolution into addition and lands the two components in disjoint quefrency regions. Liftering (quefrency-domain windowing) separates them exactly with phase preserved; cross-synthesis recombines one sound's excitation with another's resonator. The exact-deconvolution counterpart to SP-028 LPC and the phase-preserving foil to SP-031 magnitude cross-synthesis. |
 | **SP-062** | Antiderivative Antialiasing for Nonlinear Waveshaping (ADAA) | **Post-Processing / DSP** | Aliasing-Free Distortion / Saturation / Wavefolding | Anti-aliases an arbitrary memoryless (or stateful) waveshaper $y=f(x)$ without oversampling: replaces the pointwise evaluation with the average of $f$ over each sample interval, computed as a divided difference of the antiderivative $F(x)=\int f(x)\,dx$ — 1st-order (linear segment) or 2nd-order (quadratic segment, flatter passband). Removes the inharmonic "digital grunge" of clippers/saturators at base sample rate for $\mathcal{O}(1)$ cost; the no-oversampling counterpart to SP-049 (16× oversampled) and the waveshaper complement to SP-019/SP-029/SP-051. |
 | **SP-063** | Ring Modulation (Balanced Modulator) Synthesis | **Synthesis Engines** | Metallic / Clangorous Bell, Gong & Robotic-Vocal Timbres | Multiplies a modulator signal $x[n]$ by an audio-rate carrier $m[n]=\sin(2\pi f_c n/f_s)$ (four-quadrant balanced multiplier), producing only the sum-and-difference sidebands $f_c \pm f_i$ while suppressing both carrier and modulator. N modulator partials → 2N sidebands; the ratio $r=f_c/f_m$ selects harmonic (integer, consonant) vs inharmonic (irrational, metallic) output; difference sideband folds through 0 Hz. The double-sideband parent of SP-055 FSHT and the audio-rate cousin of AM tremolo; $\mathcal{O}(1)$ per sample. |
+| **SP-064** | Shepard–Risset Glissando Synthesis (SRG) | **Synthesis Engines** | Endless Ascension / Pitch-Circular Drone & Pad Timbres | Sums $N$ octave-spaced partials $f_i=f_0 2^i$ under a fixed log-frequency spectral envelope $A(\log_2 f)$ of period one octave, then glides all partials upward together by a common octave offset $r(t)=ct$ while holding the envelope stationary. After one full octave every partial lands in its neighbor's slot, so the spectrum is identical to $t{=}0$ — the pitch rises forever with zero net frequency change (the Risset endless glissando). Discrete variant steps 12 semitones on a pitch-class circle (Shepard scale); tempo analog is the Risset rhythm (endless accelerando). The additive synthesis of an auditory illusion; canonical continuous-fill pad for the Method Hybridization rule. $\mathcal{O}(N)$ per sample. |
 ---
 
 
@@ -15877,3 +15879,257 @@ def ring_mod(x, f_c, sr, carrier="sine", mix=1.0):
 - Chapman, J. (1981). "On the Application of Ring Modulation to Electronic Music." *Interface* 10(1).
 - Roads, C. (1996). *The Computer Music Tutorial*, §6.8 (Amplitude Modulation). MIT Press.
 - Analog Devices. *AD633 Low-Cost Analog Multiplier* datasheet (four-quadrant multiply).
+# Ising Model Equilibrium Composition (IMEC) (Method 078)
+
+### Source
+The **Ising model** (Wilhelm Lenz 1920; solved exactly in 1D by Ernst Ising 1925, in 2D by Lars Onsager 1944) is the canonical model of equilibrium statistical mechanics: a lattice of binary spins $\sigma_i \in \{+1,-1\}$ whose nearest-neighbor coupling $J$ and external field $h$ drive the system to minimize free energy at temperature $T$. It exhibits the paradigm order–disorder phase transition at a critical temperature $T_c$; near $T_c$ correlations become scale-free and the system develops self-similar (fractal) cluster structure. It is the equilibrium sibling of the non-equilibrium self-organized-criticality methods already in the DB (036 Abelian Sandpile), the stochastic counterpart of 021 Cellular Automata / 070 Coupled Map Lattice, and the thermal-equilibrium foil to 071 Hopfield (quenched stored memories + zero-temperature recall).
+
+### Layer
+**concrete** — generates the ±1 spin lattice and reads it out into concrete MusicEvents (pitch, onset, duration, velocity) that fill UnitMatrix cells; feeds `generators/`.
+
+### Description
+Compose music by simulating a 2D Ising spin lattice whose rows are **voices** and whose columns are **time slots** (16th-note grid), then reading the equilibrium spin configuration out as a score. The Hamiltonian is
+
+$$H = -J_h \sum_{\langle i,j\rangle_h} \sigma_i \sigma_j \;-\; J_v \sum_{\langle i,j\rangle_v} \sigma_i \sigma_j \;-\; h \sum_i \sigma_i$$
+
+where $J_h$ is the horizontal (melodic-continuity) coupling, $J_v$ the vertical (harmonic/voice) coupling, and $h$ the external **tonic field**. Sampling the Boltzmann distribution $p(\sigma) \propto e^{-\beta H}$ ($\beta = 1/k_B T$) via Metropolis or Wolff cluster updates yields a spin configuration whose statistical texture is fully controlled by the temperature:
+
+- **PITCH**: the spin value + lattice coordinate decide the pitch. $\sigma=+1$ selects a consonant scale degree (chord tone from the tonic field $h$); $\sigma=-1$ selects a chromatic neighbor/passing tone (tension). The local magnetization of a spin's neighborhood weights the register.
+- **RHYTHM**: the column magnetization $M(t) = \frac{1}{V}\sum_{v}\sigma_{v,t}$ drives onset density — a strongly-magnetized column is a downbeat, a mixed column is a pickup/off-beat. Wolff cluster-flip events emit rhythmic accents.
+- **HARMONY**: the global magnetization $M = \langle \sigma \rangle$ is the harmonic consensus; the external field $h$ encodes the chord function (HOME $h>0$, TENSE $h<0$, LIFT/TURN via $h$ trajectory). Domain walls between up/down regions are chord-change seams.
+- **STRUCTURE**: the **temperature schedule** $T(s)$ per section *is* the macro-form. Cold ($T \ll T_c$) → strongly ordered, repetitive, high-consensus (chorus). Critical ($T = T_c$) → scale-free fractal clusters, power-law motif hierarchy (organic development). Hot ($T \gg T_c$) → disordered noise (breakdown/outro).
+- **TEXTURE**: the cluster-size distribution $P(\text{size})$ — Poisson-like at low $T$, power-law $P(s)\propto s^{-\tau}$ at $T_c$, exponential at high $T$ — sets the density of simultaneous activity across voices.
+
+### Musical Elements Framework
+
+| Element | Ising mechanism | Musical output |
+|---|---|---|
+| **PITCH** | spin value folded through a scale + neighborhood magnetization | consonant vs passing-tone selection; register from cluster membership |
+| **RHYTHM** | column magnetization $M(t)$; cluster-flip events | onset density, downbeat/pickup accents, syncopation at domain walls |
+| **HARMONY** | external field $h$ (tonic pull) + global magnetization | HOME/LIFT/TENSE/TURN chord functions; consensus = tonal stability |
+| **STRUCTURE** | temperature schedule $T(s)$ across sections | macro-form: cold chorus / critical development / hot breakdown |
+| **TEXTURE** | cluster-size distribution, correlation length $\xi$ | sparse→dense voicing; fractal multi-scale activity at $T_c$ |
+
+### UnitMatrix Integration (Voices & Sections)
+- **Rows (Voices)** = spin-lattice rows. Voice $v$ is the spin chain $\sigma_{v,\cdot}$ over time; the vertical coupling $J_v$ makes voices cohere into chords (aligned spins = consonant voicing), while independent rows (or rows read at different $T$) give contrapuntal independence.
+- **Columns (Sections)** = time blocks, each with a $(T_s, h_s)$ pair. Section $s$ is realized by annealing the lattice to equilibrium at $T_s$ in field $h_s$, then reading out the $\pm 1$ pattern.
+- **Cells (MusicUnit)** = a spin mapped to a note/rest event: $+1$ → note-on at the scale degree implied by $h$ and neighborhood; $-1$ → rest or passing tone; velocity from $|M|$ and cluster size.
+- Zero-drift gating is preserved: the spin grid is a fixed $V \times S$ lattice, read out once per section to a fixed event count, then handed to `UnitMatrixComposer` (engine-authored MIDI per AGENTS.md, `validate()` before `to_midi()`).
+
+### Technical Mechanics
+- **Equilibrium update** (Metropolis): pick a random spin, propose a flip, accept with probability $\min(1, e^{-\beta \Delta H})$. Repeat $I$ sweeps per section until thermalized.
+- **Cluster update** (Wolff 1989 / Swendsen–Wang 1987): grow a connected cluster of like spins with bond probability $p_{\text{add}} = 1 - e^{-2\beta J}$, flip the whole cluster. Eliminates critical slowing down near $T_c$ and is the natural "section reharmonization" operator (one flip = one coherent harmonic region change).
+- **2D critical point** (square lattice, Onsager 1944): $T_c = 2 J / (k_B \ln(1+\sqrt{2})) \approx 2.269\, J/k_B$. Correlation length diverges as $\xi \sim |T-T_c|^{-1}$ ($\nu=1$); magnetization vanishes as $M \sim |t|^{1/8}$; geometric spin clusters at $T_c$ are fractal (mass dimension $187/96 \approx 1.95$).
+- **Field-driven harmony**: setting $h = +|h|$ aligns spins up (HOME, tonic consensus), $h = -|h|$ forces a down-aligned tension region; a step change in $h$ at a section boundary is a clean chord jump, a smooth ramp is a modulation.
+
+### Implementation Requirements (Python / NumPy)
+```python
+import numpy as np
+rng = np.random.default_rng(seed)
+
+def metropolis_sweep(S, J_h, J_v, h, beta, sweeps):
+    V, T = S.shape
+    for _ in range(sweeps * V * T):
+        v, t = rng.integers(0, V), rng.integers(0, T)
+        nb = (S[(v-1) % V, t] + S[(v+1) % V, t]) * J_v + \
+             (S[v, (t-1) % T] + S[v, (t+1) % T]) * J_h
+        dE = 2 * S[v, t] * (nb + h)          # change in H if flipped
+        if dE <= 0 or rng.random() < np.exp(-beta * dE):
+            S[v, t] *= -1
+    return S
+
+def wolff_flip(S, J_h, J_v, beta):
+    V, T = S.shape
+    sv, st = rng.integers(0, V), rng.integers(0, T)
+    target = S[sv, st]
+    stack, cluster = [(sv, st)], {(sv, st)}
+    p_add = 1 - np.exp(-2 * beta * max(J_h, J_v))
+    while stack:
+        v, t = stack.pop()
+        for nv, nt in ((v-1, t), (v+1, t), (v, t-1), (v, t+1)):
+            nv %= V; nt %= T
+            if (nv, nt) not in cluster and S[nv, nt] == target and rng.random() < p_add:
+                cluster.add((nv, nt)); stack.append((nv, nt))
+    for (v, t) in cluster:
+        S[v, t] *= -1
+    return S, len(cluster)
+```
+
+Musicom integration (engine authors the MIDI; sketch only — real imports per `AGENTS.md`):
+```python
+# from structures import MusicUnit
+# from workflows.unitmatrix_composer import UnitMatrixComposer, create_note_unit
+# composer = UnitMatrixComposer(bpm=120, ticks_per_beat=480, beats_per_bar=4)
+# composer.create_matrix(num_voices=V, num_sections=S)
+# for s, (T_s, h_s) in enumerate(section_specs):
+#     grid = anneal_section(V, ticks_s, T_s, h_s, J_h, J_v)   # Metropolis/Wolff
+#     for v in range(V):
+#         for t, spin in enumerate(grid[v]):
+#             if spin == +1:
+#                 pitch = pitch_from(spin, h_s, neighborhood_mag(grid, v, t))
+#                 composer.fill_voice_section(v, s, create_note_unit(pitch, dur, tick=t))
+# ok, msg = composer.validate()   # MUST be True before to_midi (per AGENTS.md)
+```
+
+### Pitfalls
+1. **Critical slowing down**: single-spin Metropolis near $T_c$ has diverging autocorrelation time — use Wolff/Swendsen–Wang cluster updates, or the section never thermalizes and you read a transient artifact.
+2. **Temperature extremes are boring**: $T=0$ quench → all spins aligned (monotone unison); $T\to\infty$ → white noise. Schedule $T$ *around* $T_c$; the interesting music lives at and just below $T_c$.
+3. **Aggregate-pitch collapse**: mapping a *column* magnetization directly to a single pitch collapses polyphony. Read per-spin state (each spin = its own event), use magnetization only for density/velocity/register.
+4. **Binary spin → binary pitch**: a single ±1 layer yields only two pitch classes. Pair a register/spin layer with a pitch-selection pass, or post-quantize with 022 MCWS, or use multiple field values $h$ per section to span the scale.
+5. **Field discontinuity**: an abrupt $h$ sign flip mid-section causes a jarring global chord slam; keep $h$ constant within a section and step it only at section boundaries (or ramp it deliberately for a modulation).
+6. **Finite-size rounding**: a tiny lattice ($V\times S < 100$) has no sharp $T_c$ and noisy magnetization — use $V \ge 8$ voices and $\ge 64$ slots per section so critical structure emerges.
+7. **Confusing IMEC with Hopfield (071 HAM-C)**: Hopfield uses *quenched* couplings learned from stored patterns and *zero-temperature* asynchronous relaxation to recall a memory; IMEC uses near-uniform couplings and *finite-temperature equilibrium* sampling with $T$ as a free form knob — it explores the phase diagram, it does not recall. Do not subclass the Hopfield attractor code; the energy function looks identical but the semantics (annealed vs quenched, equilibrium vs recall) are opposite.
+
+### Comparison With Related Methods
+| Method | Mechanism | Criticality | Couplings | Form knob |
+|---|---|---|---|---|
+| 036 ASAR | sandpile avalanches | non-equilibrium SOC | fixed threshold | driving rate |
+| 021 CA | deterministic local rules | none (ordered/chaotic) | fixed rule | rule table |
+| 070 CML-C | coupled logistic maps | spatiotemporal chaos | fixed coupling | $\varepsilon$, nonlinearity |
+| 071 HAM-C | Hebbian Hopfield recall | none (attractor) | quenched (learned) | cue schedule |
+| **078 IMEC** | **Ising equilibrium sampling** | **equilibrium (thermal)** | **uniform $J_h,J_v$** | **temperature $T(s)$** |
+
+### References
+- Lenz, W. (1920). "Beiträge zum Verständnis der magnetischen Erscheinungen in festen Körpern." *Physikalische Zeitschrift* 21, 613–615.
+- Ising, E. (1925). "Beitrag zur Theorie des Ferromagnetismus." *Zeitschrift für Physik* 31, 253–258.
+- Onsager, L. (1944). "Crystal statistics. I. A two-dimensional model with an order-disorder transition." *Physical Review* 65(3–4), 117–149.
+- Metropolis, N., Rosenbluth, A. W., Rosenbluth, M. N., Teller, A. H., & Teller, E. (1953). "Equation of state calculations by fast computing machines." *Journal of Chemical Physics* 21(6), 1087–1092.
+- Swendsen, R. H., & Wang, J.-S. (1987). "Nonuniversal critical dynamics in Monte Carlo simulations." *Physical Review Letters* 58(2), 86–88.
+- Wolff, U. (1989). "Collective Monte Carlo updating for spin systems." *Physical Review Letters* 62(4), 361–364.
+- Coniglio, A., & Klein, W. (1980). "Clusters and Ising critical droplets: a renormalisation group approach." *Journal of Physics A: Mathematical and General* 13(8), 2775–2780. (Geometric-cluster fractal dimension $187/96$.)
+- Nierhaus, G. (2009). *Algorithmic Composition: Paradigms of Automated Music Generation*. Springer. (Statistical-physics methods in algorithmic composition.)
+# Shepard–Risset Glissando Synthesis (SRG) (Method SP-064)
+
+### Source
+The **Shepard tone** is the canonical auditory illusion of pitch circularity, discovered by **Roger N. Shepard (1964), "Circularity in Judgments of Relative Pitch," *J. Acoust. Soc. Am.* 36(12), 2346–2353**: a superposition of octave-separated sinusoids weighted by a fixed spectral envelope is perceived as rising (or falling) *forever* while never leaving its octave. **Jean-Claude Risset** extended it to the **continuous glissando** — **Risset (1969), "Pitch control and pitch paradoxes demonstrated with computer-synthesized sound," *JASA* 46(1B), 88**, first heard in *Computer Suite from Little Boy* (1968) and *Mutations* (1969) — and catalogued it in **Risset (1971), *An Introductory Catalogue of Computer Synthesized Sounds*, Bell Laboratories**, alongside the **Risset rhythm** (endless accelerando, the tempo-circularity analog). **Diana Deutsch (1986), "A musical paradox," *Music Perception* 3(3), 275–280** built the *tritone paradox* on the same circular pitch geometry; **Risset (1986), "Pitch and rhythm paradoxes," *JASA* 80(3), 961–962** surveys both. Modern reference: **Roads, C. (1996), *The Computer Music Tutorial*, §7, MIT Press**. The method is the *auditory-illusion* branch of additive synthesis: octave-stacked partials under a static log-frequency envelope.
+
+### Layer
+**absolute** (sound production) — **Synthesis Engines**. Candidate code path: `sound/synthesis/shepard_risset.py` (new module alongside `additive.py`, `phase_mod.py`, `spectral_wavetable.py`). Pure additive oscillator bank + envelope weighting, fully vectorizable in NumPy; renders a mono/stereo buffer per section (not a note-event consumer — it is a *continuous fill layer*).
+
+### Description
+The Shepard tone is an illusion of **pitch circularity**: sum $N$ pure tones whose frequencies are exact octaves apart, $f_i = f_0 \cdot 2^i$, and weight each by a spectral envelope $A(\log_2 f)$ that is *periodic with period one octave* (e.g. a $\cos^2$ bell centered in the audible band). Because every partial is an octave of its neighbors, the chord has no unambiguous octave — it sounds like a single pitch class thickened by octaves. Now glide all partials upward together by a common, continuously increasing log-frequency offset $r(t)$ while **keeping the envelope fixed**: each partial rises, but the *set* of (frequency, amplitude) pairs is invariant after any whole-octave offset. After one full octave of rise, every partial has moved into its neighbor's former slot, and the spectrum is *exactly* what it was at $t{=}0$ — so the pitch appears to climb forever with **zero net frequency change**. This is the Risset glissando (endless ascension). A discrete variant steps the offset by one semitone per event (the **Shepard scale**: 12 tones on a circle, no octave boundary → endless chromatic ascent); a rhythmic variant (**Risset rhythm**) does the same for tempo (endless accelerando).
+
+### Technical Mechanics
+
+**Octave-stacked partials.** With $N$ partials at $f_i = f_0 \cdot 2^i$ ($i=0,\dots,N-1$), each through a fixed log-frequency envelope $A$:
+
+$$y(t) = \sum_{i=0}^{N-1} A\big(\log_2(f_0)+i\big)\,\sin\!\big(2\pi f_i t + \phi_i\big)$$
+
+**Spectral envelope (period one octave).** $A$ is a function of log-frequency that repeats every octave, so partial $i$ and $i{+}1$ (one octave apart) get the *same* weight. Two standard shapes, centered at $\log_2 f_c$:
+
+$$A(\log_2 f) = \cos^2\!\Big(\tfrac{\pi}{2}(\log_2 f - \log_2 f_c)\Big)
+\qquad\text{or}\qquad
+A(\log_2 f) = \exp\!\Big(-\tfrac{(\log_2 f - \log_2 f_c)^2}{2\sigma^2}\Big),\ \sigma \approx 1 \text{ octave}$$
+
+The envelope is **stationary**; only the partials move under it.
+
+**Continuous Risset glissando.** Let the common offset advance linearly in octaves, $r(t) = c\,t$ ($c$ in octaves/sec, $c>0$ rising, $c<0$ falling). Partial $i$ has instantaneous frequency
+
+$$f_i(t) = f_0 \cdot 2^{i + r(t)} = f_0\, 2^{i}\, 2^{ct}$$
+
+and instantaneous phase (the integral of frequency, with $c \ne 0$):
+
+$$\phi_i(t) = 2\pi\!\int_0^t\! f_i(\tau)\,d\tau
+= 2\pi f_0\, 2^{i}\cdot \frac{2^{ct}-1}{c\ln 2}$$
+
+**The invariance that creates the illusion.** At $t = T$ with $cT = 1$ (one full octave), $f_i(T) = f_0 2^{i+1} = f_{i+1}(0)$: every partial now sits exactly where its neighbor started. The envelope hasn't moved, so the amplitude attached to each frequency slot is unchanged. The spectrum is identical to $t{=}0$ — yet the ear, tracking each partial's continuous upward motion, reports "one octave higher." Loop the segment (or keep $r(t)$ increasing) and the ascent never ends. This exact end-equals-start spectral identity is the *whole* trick: no other synthesis method produces a pitch that rises forever while its spectrum stays put.
+
+**Discrete Shepard scale.** Step the offset by one semitone per event: partial set at step $k$ is $f_i = f_0\, 2^{i + k/12}$. After 12 steps the set returns to itself → a 12-note *circular* scale with no top/bottom. Stepping rate sets the rhythmic grid; perceived pitch-class sequence is the ordinary chromatic scale, but with no octave to land on.
+
+**Risset rhythm (tempo analog).** A rhythm loop whose inter-onset intervals all halve (double) each cycle, with a loudness envelope periodic in *log-tempo* (same circularity). The ear hears an accelerando that never reaches a downbeat.
+
+**Cost.** $N$ sine evaluations per sample, $N \approx 8$–$12$ → $\mathcal{O}(N)$ per sample, $\mathcal{O}(N L)$ for $L$ samples; fully vectorizable (one array per partial), no state besides the phase accumulators, deterministic per seed → zero-drift gate compatible.
+
+### Musical Elements Framework
+- **PITCH** = *circularized*: perceived pitch class moves forever up (or down) with **zero net frequency change** — the octave boundary is deleted. Direction is fully controllable (sign of $c$); rate is the glissando slope. Because there is no octave, there is **no cadence and no tonic arrival** — the ultimate suspension. Discrete form yields an endless chromatic ascent.
+- **RHYTHM** = continuous glissando is grid-free (rate $c$ is the only time parameter); the discrete Shepard scale is grid-locked (semitone per step, step rate = metronome); the Risset rhythm gives endless accelerando. A sub-audio staircase on $r(t)$ gives stepped pitch within a fixed tempo.
+- **HARMONY** = each Shepard tone is a *thickened unison* — one pitch class × all its octaves — harmonically static (a drone). Two (or more) Shepard tones at different pitch-class offsets (e.g. a fifth apart) produce an endlessly-rising interval/chord; the envelope shapes which octaves dominate, so the chord's register weighting is a timbre knob, not a harmony knob.
+- **STRUCTURE** = the macro-form is the $r(t)$ schedule: rise → plateau → rise again (never resolves), a full 12-step circular scale, or a Risset accelerando that never lands. Ideal for building a climax that perpetually approaches and never arrives, an intro that "keeps rising," or an outro that fades upward. Breaking the illusion at a structural seam (freeze the envelope, or ramp $A$ to zero) *is* the cadence.
+- **TEXTURE** = dense, shimmering, choir/orchestral-pad-like (the octave stack reads as a large ensemble swelling). Envelope width $\sigma$ controls the shimmer: narrow → focused organ/theremin, wide → airy pad; partial count $N$ controls richness. Two detuned Shepard tones = chorus-like beating.
+
+### UnitMatrix Integration
+- **Rows (Voices)** = one Shepard tone per row, each at a different pitch-class offset (row 1 = C-Shepard, row 2 = G-Shepard) → an endlessly-rising chord; or one row per octave partial for manual envelope control. Independent glissando direction per row (some rising, some falling) = a Möbius pitch-field.
+- **Columns (Sections)** = each section is one circular ascent (12 steps, or one octave of glissando). Section joins are *seamless by construction*: the end state equals the start state shifted one octave, i.e. the identical percept — the ultimate loop seam, and the method's signature contribution to the zero-drift aesthetic.
+- **Cells** = each `MusicUnit` carries `{PITCH}` (starting pitch class / offset), `{STRUCTURE}` (glissando slope $c$ or step count), `{TEXTURE}` (envelope $\sigma$, partial count $N$), `{RHYTHM}` (step rate for the discrete variant).
+- **Flow**: this is a *continuous fill layer* (not a note-event consumer). Render per section via `shepard_risset(section_spec)` → sum under the other voices' rendered buffers → SP-007 EQ / SP-008 DRC / SP-009 or SP-032 reverb post. It is the canonical "sustained pad" continuous layer required by the Method Hybridization rule: pair a Shepard pad with any sparse rhythmic generator (011 Euclidean, 032 Isorhythmic) to convert staccato → flowing. Deterministic per seed; `validate()` zero-drift gate unaffected (audio-layer, no MIDI).
+
+### Pitfalls
+1. **Non-integer-octave segment breaks the illusion** — if the glissando duration is not an exact whole number of octaves (or the discrete run is not exactly 12 steps), the loop point shows a visible frequency jump and the pitch "lands." Fix: constrain $cT \in \mathbb{Z}$ (octaves) or step exactly 12 semitones; verify the partial set at $t{=}T$ matches $t{=}0$.
+2. **Moving the envelope kills the effect** — if the spectral envelope glides *with* the partials, the ear localizes the pitch and you get an ordinary upward glissando that runs out of audible range. Fix: hold $A(\log_2 f)$ absolutely stationary while the partials pass underneath it.
+3. **Too few partials → audible step** — with $N < 6$, a partial leaves the envelope's loud edge before its lower neighbor has faded in, producing a noticeable "resetting" pop. Fix: $N \ge 8$ spanning the full audible band, with a gentle rolloff so edge partials enter/exit near-silently.
+4. **Phase click at the loop** — even with matching frequencies, hard-resetting oscillator phases clicks. Fix: never reset phase (use continuous accumulators), and/or apply a short (≈5 ms) equal-power crossfade at the loop boundary; the ear ignores per-partial phase when the envelope is fixed.
+5. **Band-edge audibility** — below ~30 Hz and above ~16 kHz partials are inaudible; center the envelope in the audible band (e.g. 100 Hz–6 kHz) so outer partials fade at the physical band edges, not at the envelope's own edges.
+6. **No cadence = exhausting** — a Shepard rise never resolves, so a whole track of it fatigues and loses direction. Fix: use it as a drone/transition layer, and *break* the illusion deliberately at a structural moment (freeze or collapse the envelope onto a real tonic) to land.
+7. **Habituation** — the "it's still rising?" percept fades after ~30 s. Fix: alternate rise/fall, vary $c$, add a real tonal anchor voice, or shift the envelope center periodically.
+
+### Implementation Requirements (Python / NumPy)
+```python
+import numpy as np
+
+def shepard_risset_glissando(f0, n_partials, octaves_per_sec, duration, sr,
+                             envelope="cos", f_center=1000.0, sigma=1.0,
+                             direction=+1.0, phases=None):
+    """Render a continuous Shepard-Risset glissando (endless ascension).
+
+    f0:              reference frequency of the lowest audible partial (Hz)
+    n_partials:      octave-spaced partial count (>= 8)
+    octaves_per_sec: glissando rate in octaves/second (+ rising, - falling)
+    duration:        seconds (choose so octaves_per_sec * duration is an INTEGER)
+    envelope:        'cos' raised-cosine bell or 'gauss' (period-one-octave)
+    Returns a mono float32 buffer normalized to [-1, 1].
+    """
+    t = np.arange(int(duration * sr)) / sr
+    c = direction * octaves_per_sec
+    y = np.zeros_like(t)
+    log2_fc = np.log2(f_center)
+    for i in range(n_partials):
+        # instantaneous phase = integral of f_i(t) = f0 * 2^i * 2^(c t)
+        phase = 2*np.pi * f0 * (2.0**i) * (np.exp2(c*t) - 1.0) / (c*np.log(2.0))
+        # FIXED log-frequency envelope (does NOT move with the glissando):
+        logf = np.log2(f0) + i
+        if envelope == "cos":
+            a = np.cos(np.pi*(logf - log2_fc)/2.0)**2
+        else:  # gauss
+            a = np.exp(-((logf - log2_fc)**2) / (2.0*sigma**2))
+        a = np.clip(a, 0.0, 1.0)
+        y += a * np.sin(phase)
+    y /= np.max(np.abs(y)) + 1e-9
+    return y
+
+# Discrete Shepard scale (12 steps = one circular octave, endless chromatic ascent):
+def shepard_scale(f0, n_partials, steps=12, step_dur=0.5, sr=44100, envelope="cos"):
+    out = []
+    for k in range(steps):
+        out.append(shepard_risset_glissando(
+            f0 * 2.0**(k/12.0), n_partials, 0.0, step_dur, sr,
+            envelope=envelope))            # 0 glissando = frozen chord at step k
+    return np.concatenate(out)
+```
+
+Musicom integration (engine authors the MIDI; this is an audio-layer continuous fill, so it sums under the rendered voices rather than emitting notes — real imports per `AGENTS.md`):
+```python
+# from sound.synthesis.shepard_risset import shepard_risset_glissando
+# pad = shepard_risset_glissando(f0=55.0, n_partials=10,
+#                                octaves_per_sec=1/8.0, duration=8.0,  # 1 octave / 8 s
+#                                sr=44100, direction=+1.0)
+# mix = rendered_voices.sum(axis=0) + pad   # continuous fill layer over sparse 011/032
+# then SP-007 EQ / SP-008 DRC / SP-009 reverb; export via sound/render
+```
+
+### Comparison With Related Methods
+| Method | Endless ascent? | Mechanism | Octave circular? | Cost | Character |
+|---|---|---|---|---|---|
+| FSHT (SP-055) barberpole | yes | additive freq shift + feedback | no (inharmonic) | $O(N\log N)$ | metallic sheen |
+| **Shepard-Risset (SP-064)** | **yes** | **octave stack + fixed envelope** | **yes (PC circular)** | $O(N)$/sample | choir/pad illusion |
+| Ring mod (SP-063) | no | sideband arithmetic | no | $O(1)$ | clangorous bell |
+| IFFT additive (SP-039) | no | FFT resynthesis | no | $O(M\log M)$ | dense polyphonic |
+| Walsh (SP-056) | no | sequency additive | no | $O(N\log N)$ | reedy square |
+
+### References
+- Shepard, R. N. (1964). "Circularity in Judgments of Relative Pitch." *J. Acoust. Soc. Am.* 36(12), 2346–2353.
+- Risset, J.-C. (1969). "Pitch control and pitch paradoxes demonstrated with computer-synthesized sound." *J. Acoust. Soc. Am.* 46(1B), 88.
+- Risset, J.-C. (1971). *An Introductory Catalogue of Computer Synthesized Sounds*. Bell Laboratories.
+- Risset, J.-C. (1986). "Pitch and rhythm paradoxes." *J. Acoust. Soc. Am.* 80(3), 961–962.
+- Deutsch, D. (1986). "A musical paradox." *Music Perception* 3(3), 275–280.
+- Roads, C. (1996). *The Computer Music Tutorial*, §7 (Pitch circularity / Shepard tones). MIT Press.
+- Risset, J.-C. (1969). *Computer Suite from Little Boy* and *Mutations* (first musical uses of the endless glissando).

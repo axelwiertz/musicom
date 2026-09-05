@@ -1,0 +1,132 @@
+{
+  "files": [
+    {
+      "label": "phase2 (rules)",
+      "voices": [
+        {
+          "track": 1,
+          "program": 24,
+          "gm": "Tres (nylon gtr)",
+          "channel": 0,
+          "percussion": false,
+          "note_count": 118,
+          "off_grid_16th": 0,
+          "off_grid_8th": 50,
+          "out_of_scale": 0,
+          "out_of_chord": 0,
+          "first_onset": 7920,
+          "last_end": 46080,
+          "sample_out_scale": [],
+          "sample_out_chord": []
+        },
+        {
+          "track": 2,
+          "program": 1,
+          "gm": "Piano",
+          "channel": 1,
+          "percussion": false,
+          "note_count": 288,
+          "off_grid_16th": 0,
+          "off_grid_8th": 0,
+          "out_of_scale": 0,
+          "out_of_chord": 0,
+          "first_onset": 0,
+          "last_end": 45540,
+          "sample_out_scale": [],
+          "sample_out_chord": []
+        },
+        {
+          "track": 3,
+          "program": 25,
+          "gm": "Ac.Guitar",
+          "channel": 2,
+          "percussion": false,
+          "note_count": 150,
+          "off_grid_16th": 0,
+          "off_grid_8th": 0,
+          "out_of_scale": 0,
+          "out_of_chord": 0,
+          "first_onset": 0,
+          "last_end": 45550,
+          "sample_out_scale": [],
+          "sample_out_chord": []
+        },
+        {
+          "track": 4,
+          "program": 43,
+          "gm": "Contrabass",
+          "channel": 3,
+          "percussion": false,
+          "note_count": 72,
+          "off_grid_16th": 0,
+          "off_grid_8th": 0,
+          "out_of_scale": 0,
+          "out_of_chord": 0,
+          "first_onset": 0,
+          "last_end": 45980,
+          "sample_out_scale": [],
+          "sample_out_chord": []
+        },
+        {
+          "track": 5,
+          "program": 56,
+          "gm": "Trumpet",
+          "channel": 4,
+          "percussion": false,
+          "note_count": 24,
+          "off_grid_16th": 0,
+          "off_grid_8th": 0,
+          "out_of_scale": 0,
+          "out_of_chord": 0,
+          "first_onset": 1440,
+          "last_end": 46000,
+          "sample_out_scale": [],
+          "sample_out_chord": []
+        },
+        {
+          "track": 6,
+          "program": 0,
+          "gm": "Drums/ch9",
+          "channel": 9,
+          "percussion": true,
+          "note_count": 480,
+          "off_grid_16th": 0,
+          "off_grid_8th": 48,
+          "out_of_scale": 0,
+          "out_of_chord": 0,
+          "first_onset": 0,
+          "last_end": 45940,
+          "sample_out_scale": [],
+          "sample_out_chord": []
+        }
+      ]
+    },
+    {
+      "label": "phase1 (raw)",
+      "voices": [
+        {
+          "track": 1,
+          "program": 12,
+          "gm": "Marimba",
+          "channel": 0,
+          "percussion": false,
+          "note_count": 192,
+          "off_grid_16th": 92,
+          "off_grid_8th": 92,
+          "out_of_scale": 0,
+          "out_of_chord": 87,
+          "first_onset": 0,
+          "last_end": 45865,
+          "sample_out_scale": [],
+          "sample_out_chord": [
+            67,
+            67,
+            62,
+            71,
+            71
+          ]
+        }
+      ]
+    }
+  ]
+}

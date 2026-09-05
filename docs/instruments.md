@@ -105,6 +105,20 @@ span, no gaps — SF2 never clips a composition. Line-instrument quirk:
 shamisen is a monophonic bachi line voice (folk/theatre), not a harmony
 voice — no dense chords.
 
+**Kalimba added** (2026-09-05): GM108, World-family fourth entry
+(instrument.md + kalimba.py), verified end-to-end UnitMatrixComposer →
+zero-drift ✓ → MIDI → FluidSynth WAV ✓; RenderPipeline stem label
+`trackXX_Kalimba.wav` ✓ (GM_PROGRAMS[108] = "Kalimba", FluidR3 preset 108 =
+"Kalimba" — labels match exactly, no quirk). Karplus-Strong recommended
+(plucked waveguide, loop_gain 0.9940 — metal tine ring clearly above the
+0.990 dull control: 0.014 vs 0.008 tail ratio at 0.2–0.6 s, 1.7×, and SHORTER
+than sitar 0.023 — metal tines decay faster than sympathetic strings).
+ModalSynth 'bell' preset (inharmonic metal-bar modes) is the fallback.
+Solo-render spectral check: 4–8 kHz buzz 4.3% (no comb-filtering).
+Measurement note: the kalimba ring is short — verify with the 0.2–0.6 s
+window, NOT the 1–2 s window used for sitar/koto (both readings sit at the
+noise floor there).
+
 ## Python usage
 
 ```python
@@ -147,6 +161,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | World | Sitar | 104 | 55–96 | lead, melody, ornament, drone |
 | World | Koto | 107 | 51–90 | lead, melody, ornament, drone, harmony |
 | World | Shamisen | 106 | 45–89 | lead, melody, ornament, drone, countermelody |
+| World | Kalimba | 108 | 48–96 | lead, melody, ornament, drone, harmony |
 
 ## Stem label quirks (RenderPipeline)
 
@@ -173,6 +188,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 104 | Sitar | Sitar ✓ (GM_PROGRAMS[104] + FluidR3 preset 104 both "Sitar") |
 | 107 | Koto | Koto ✓ (GM_PROGRAMS[107] + FluidR3 preset 107 both "Koto") |
 | 106 | Shamisen | Shamisen ✓ (GM_PROGRAMS[106] + FluidR3 preset 106 both "Shamisen") |
+| 108 | Kalimba | Kalimba ✓ (GM_PROGRAMS[108] + FluidR3 preset 108 both "Kalimba") |
 | ch9/pgm0 | Drums | **Acoustic_Grand_Piano** ✗ (program-0 fallback) |
 
 > **Known off-by-one in existing entries**: ~~`trumpet.py` uses 57~~ **FIXED 2026-08-27**: trumpet is now 56 (SF2 preset 56=`SoloTrumpet`). `piano.py`=1 → actually Bright Acoustic Piano (GM #2) — cosmetic label difference only, no routing impact. Legacy registry rows kept as-is for piano; new instruments use 0-indexed programs matching pipeline+SF2.

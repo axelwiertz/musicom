@@ -1,0 +1,17 @@
+{
+  "artifact": "086-son-markov-guajira-phase1.wav",
+  "classification": "ai-generated",
+  "generator": "SP-001 FluidSynth render of phase-1 MIDI (raw Markov draft)",
+  "sources": [
+    "/opt/data/projects/Styles/Cuban/086-son-markov-guajira/MIDI/086-son-markov-guajira-phase1.mid"
+  ],
+  "parameters": {
+    "method": "SP-001",
+    "soundfont": "/opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2"
+  },
+  "notes": "",
+  "sha256": "db74b9a833ce7aafa20e5f90719c48faf955fc55a1009d38d88abefa3a7f34af",
+  "bytes": 10355756,
+  "created_utc": "2026-09-04T23:11:18.293979+00:00",
+  "provenance_version": "1.0"
+}

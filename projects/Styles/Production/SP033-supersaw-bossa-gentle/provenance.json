@@ -1,0 +1,73 @@
+{
+  "job": "random-style production pass (SP) - LAYER-ALIGNED 2026-09-05",
+  "selection_source": "workflows.musicom_workflow.SP_METHODS registry (10 implemented)",
+  "selection_file": "/opt/data/select_job_20260905.json",
+  "composition_source": "/opt/data/projects/Styles/BossaNova/gentle/v1/bossa_nova_gentle.mid",
+  "composition_sha256": "b9be5a640e138d6f41e01506939b3bba64aaf93f4eb671f507891d0582a31942",
+  "production_method": "SP-033",
+  "production_method_name": "Detuned Saw Swarm + Scale/Chord Quantize + Morph Pad",
+  "registered_module": "sound.synthesis.supersaw_swarm",
+  "layer_discipline": "absolute layer: supersaw swarm replaces the timbre layer for ALL pitched voices (every MIDI note synthesized by SupersawSwarm.render_note); drums ride GM kit as rhythmic anchor",
+  "voice_roles": {
+    "bass (ch1, prog 33)": {
+      "spread_cents": 6.0,
+      "swarm2": false,
+      "harmony": null,
+      "brightness": 0.55,
+      "gain": 1.0
+    },
+    "guitar (ch0, prog 25)": {
+      "spread_cents": 14.0,
+      "swarm2": true,
+      "harmony": "major",
+      "brightness": 0.85,
+      "gain": 0.55
+    },
+    "flute lead (ch2, prog 74)": {
+      "spread_cents": 30.0,
+      "swarm2": true,
+      "harmony": "major",
+      "brightness": 0.95,
+      "gain": 0.6
+    }
+  },
+  "parameters": {
+    "sample_rate": 44100,
+    "seed": 20260905,
+    "osc_per_swarm": 16,
+    "harmony_root_mode": "(pitch-60) mod 12",
+    "note_attack_s": 0.25,
+    "note_release_s": 0.4,
+    "global_fade_s": 0.05,
+    "rms_target_dBFS": -20.0,
+    "peak_dBFS": -1.0,
+    "drums": "FluidSynth GM kit (reverb/chorus OFF)",
+    "sp001_reference": "dry_full_mix_sp001_reference.wav"
+  },
+  "checks": {
+    "silence_ratio": 0.0549,
+    "sp001_reference_silence": 0.0652,
+    "pitch_verification": {
+      "windows_checked": 153,
+      "dominant_peak_hit_rate": 1.0,
+      "harmonic_energy_mean_8h": 0.5033,
+      "lowest_midi_notes_seen": [
+        35,
+        36
+      ],
+      "method": "FFT dominant peak per 0.5s window, 40-2000 Hz band, +/-4% tolerance vs active MIDI fundamental or its 2nd/3rd harmonic (supersaw stacks put spectral energy on harmonics; octave sub tolerance removed because bass A1=55Hz is inside the band)",
+      "verdict": "PASS"
+    }
+  },
+  "artifacts": {
+    "midi": "/opt/data/projects/Styles/Production/SP033-supersaw-bossa-gentle/MIDI/bossa_nova_gentle.mid",
+    "sp033_wav": "/opt/data/projects/Styles/Production/SP033-supersaw-bossa-gentle/Audio/SP033-supersaw-bossa-gentle.wav",
+    "sp033_ogg": "/opt/data/projects/Styles/Production/SP033-supersaw-bossa-gentle/Audio/SP033-supersaw-bossa-gentle.ogg",
+    "sp001_reference_wav": "/opt/data/projects/Styles/Production/SP033-supersaw-bossa-gentle/dry_full_mix_sp001_reference.wav",
+    "stems": {
+      "track00_Acoustic_Guitar_nylon": "/opt/data/projects/Styles/Production/SP033-supersaw-bossa-gentle/Audio/stems/track00_Acoustic_Guitar_nylon.wav",
+      "track01_Electric_Bass_finger": "/opt/data/projects/Styles/Production/SP033-supersaw-bossa-gentle/Audio/stems/track01_Electric_Bass_finger.wav",
+      "track02_Recorder": "/opt/data/projects/Styles/Production/SP033-supersaw-bossa-gentle/Audio/stems/track02_Recorder.wav"
+    }
+  }
+}

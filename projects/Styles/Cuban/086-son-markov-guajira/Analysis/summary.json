@@ -1,0 +1,177 @@
+{
+  "project": "086-son-markov-guajira",
+  "id": 86,
+  "style": "Cuban (son, guajira-leaning)",
+  "method": "002 Markov Probabilistic Transitions (MarkovChainGenerator.generate_sequence)",
+  "layer": "concrete",
+  "form": "AAB - 6 sections x 4 bars (ClaveIntro, SonA, Montuno, SonA2, Montuno2, Outro) = 24 bars",
+  "key": "A minor (aeolian; V7 bars 10/14/23 use harmonic-minor G#)",
+  "tempo_bpm": 104,
+  "meter": "4/4, 480 TPB",
+  "voices": [
+    {
+      "name": "Lead",
+      "instrument": "Tres (GM 24 nylon-guitar stand-in; tres not in 18-instrument registry)"
+    },
+    {
+      "name": "Montuno",
+      "instrument": "Piano (registry PIANO, GM 1)"
+    },
+    {
+      "name": "Comp",
+      "instrument": "Acoustic Guitar (registry ACOUSTIC_GUITAR, GM 25)"
+    },
+    {
+      "name": "Bass",
+      "instrument": "Contrabass (registry DOUBLE_BASS, GM 43)"
+    },
+    {
+      "name": "Trumpet",
+      "instrument": "Trumpet (registry TRUMPET, GM 56)"
+    },
+    {
+      "name": "Drums",
+      "instrument": "GM kit ch9 (kick/snare/hat/cowbell) + son-clave woodblock"
+    }
+  ],
+  "progression": [
+    {
+      "bar": 1,
+      "degree": "i"
+    },
+    {
+      "bar": 2,
+      "degree": "i"
+    },
+    {
+      "bar": 3,
+      "degree": "i"
+    },
+    {
+      "bar": 4,
+      "degree": "i"
+    },
+    {
+      "bar": 5,
+      "degree": "i"
+    },
+    {
+      "bar": 6,
+      "degree": "VII"
+    },
+    {
+      "bar": 7,
+      "degree": "VI"
+    },
+    {
+      "bar": 8,
+      "degree": "i"
+    },
+    {
+      "bar": 9,
+      "degree": "ii"
+    },
+    {
+      "bar": 10,
+      "degree": "i"
+    },
+    {
+      "bar": 11,
+      "degree": "V7"
+    },
+    {
+      "bar": 12,
+      "degree": "i"
+    },
+    {
+      "bar": 13,
+      "degree": "iv"
+    },
+    {
+      "bar": 14,
+      "degree": "VII"
+    },
+    {
+      "bar": 15,
+      "degree": "V7"
+    },
+    {
+      "bar": 16,
+      "degree": "i"
+    },
+    {
+      "bar": 17,
+      "degree": "VI"
+    },
+    {
+      "bar": 18,
+      "degree": "iv"
+    },
+    {
+      "bar": 19,
+      "degree": "VII"
+    },
+    {
+      "bar": 20,
+      "degree": "i"
+    },
+    {
+      "bar": 21,
+      "degree": "i"
+    },
+    {
+      "bar": 22,
+      "degree": "VII"
+    },
+    {
+      "bar": 23,
+      "degree": "V7"
+    },
+    {
+      "bar": 24,
+      "degree": "i"
+    }
+  ],
+  "grid_audit": {
+    "per_pitched_voice_off_grid_16th": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "verdict": "0 off-grid onsets (16th = 120 ticks) across all pitched voices"
+  },
+  "harmony_audit": {
+    "per_pitched_voice_out_of_scale": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "per_pitched_voice_out_of_chord": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "verdict": "0 out-of-scale, 0 out-of-chord across all pitched voices"
+  },
+  "zero_drift": "validate() passed for both phase-1 and phase-2 MIDIs (track length 46080 ticks)",
+  "render": {
+    "method": "SP-001",
+    "duration_s": 62.26,
+    "silence_ratio": 0.1079,
+    "peak": 0.96,
+    "wav_bytes": 10983212,
+    "ogg_bytes": 421344
+  },
+  "files": {
+    "midi_phase1": "MIDI/086-son-markov-guajira-phase1.mid (1674 B)",
+    "midi_phase2": "MIDI/086-son-markov-guajira.mid (8716 B)",
+    "ogg": "Audio/086-son-markov-guajira.ogg (421344 B)",
+    "wav": "Audio/086-son-markov-guajira.wav (10983212 B)"
+  }
+}
