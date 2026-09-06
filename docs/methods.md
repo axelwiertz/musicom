@@ -86,6 +86,7 @@ Classification of active Musicom composition methods categorized by their primar
 | **077** | concrete | De Bruijn Universal Cycle Composition (DBUC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Weak (Mode-pinned) | Grid-Locked | Local (Length-$k$ window) | $\mathcal{O}(n^k)$ | Generates music from a de Bruijn sequence $B(k,n)$ — a cyclic word of length $n^k$ whose every length-$k$ window over an $n$-symbol alphabet appears exactly once. Alphabet = scale degrees (pitch), $\{0,1\}$ (rhythm), or chord symbols (harmony); the de Bruijn graph Hamiltonian/Eulerian cycle and Lyndon-word (FKM/Duval) decomposition give exhaustive macro-form with zero verbatim repetition; de Bruijn tori give 2D texture. Deterministic exhaustive sibling of 002 Markov / 041 ACOPF (which walk the same graph probabilistically); maximal-variety complement of 076 PTM-ASC (avoids repetition) and 069 CWCC (balance); graph-theoretic cousin of 011 Voice-Leading Graph Search. |
 
 | **078** | concrete | Ising Model Equilibrium Composition (IMEC) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Field/Temperature-guided) | Grid-Locked / Continuous | Meso / Spin-Lattice | $\mathcal{O}(I \cdot V \cdot S)$ | Simulates a 2D Ising spin lattice (rows = voices, columns = time slots) at thermal equilibrium via Metropolis / Wolff cluster sampling. Spin value → pitch (consonant vs passing tone); column magnetization $M(t)$ → onset density/accents; external field $h$ → HOME/LIFT/TENSE/TURN chord function; temperature schedule $T(s)$ → macro-form (cold = chorus, $T_c$ = fractal development, hot = breakdown); cluster-size distribution → texture. Equilibrium sibling of 036 ASAR / 070 CML-C; thermal foil to 071 HAM-C (quenched recall). |
+| **079** | concrete | Tintinnabuli Composition (TINC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Strict (Static Triad) | Grid-Locked / Continuous | Meso / Phrase | $\mathcal{O}(N)$ | Realizes Arvo Pärt's tintinnabuli style (1976, "1 + 1 = 1"): a stepwise diatonic M-voice ($|m_{i+1}-m_i| \le 2$) is projected note-by-note onto a single fixed tonic triad to form a T-voice (nearest triad tone above/below per a position sequence $P$). Every dyad contains exactly one triad tone → constant consonance, no functional harmony; structure from the position pattern + additive note add/drop; bell-like sacred-minimalist texture. Deterministic rules-based sibling of 056 SCCC / 066 GTTM-HC; static-harmony foil to 011 Voice-Leading Graph. |
 # Sound Production Methods Framework
 
 Sound production translates symbolic MIDI UnitMatrix data into final acoustic air pressure. Methods are categorized by execution layer: **Hardware/Acoustic Integration**, **Synthesis Engines**, or **Post-Processing / DSP**.
@@ -157,6 +158,7 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 | **SP-062** | Antiderivative Antialiasing for Nonlinear Waveshaping (ADAA) | **Post-Processing / DSP** | Aliasing-Free Distortion / Saturation / Wavefolding | Anti-aliases an arbitrary memoryless (or stateful) waveshaper $y=f(x)$ without oversampling: replaces the pointwise evaluation with the average of $f$ over each sample interval, computed as a divided difference of the antiderivative $F(x)=\int f(x)\,dx$ — 1st-order (linear segment) or 2nd-order (quadratic segment, flatter passband). Removes the inharmonic "digital grunge" of clippers/saturators at base sample rate for $\mathcal{O}(1)$ cost; the no-oversampling counterpart to SP-049 (16× oversampled) and the waveshaper complement to SP-019/SP-029/SP-051. |
 | **SP-063** | Ring Modulation (Balanced Modulator) Synthesis | **Synthesis Engines** | Metallic / Clangorous Bell, Gong & Robotic-Vocal Timbres | Multiplies a modulator signal $x[n]$ by an audio-rate carrier $m[n]=\sin(2\pi f_c n/f_s)$ (four-quadrant balanced multiplier), producing only the sum-and-difference sidebands $f_c \pm f_i$ while suppressing both carrier and modulator. N modulator partials → 2N sidebands; the ratio $r=f_c/f_m$ selects harmonic (integer, consonant) vs inharmonic (irrational, metallic) output; difference sideband folds through 0 Hz. The double-sideband parent of SP-055 FSHT and the audio-rate cousin of AM tremolo; $\mathcal{O}(1)$ per sample. |
 | **SP-064** | Shepard–Risset Glissando Synthesis (SRG) | **Synthesis Engines** | Endless Ascension / Pitch-Circular Drone & Pad Timbres | Sums $N$ octave-spaced partials $f_i=f_0 2^i$ under a fixed log-frequency spectral envelope $A(\log_2 f)$ of period one octave, then glides all partials upward together by a common octave offset $r(t)=ct$ while holding the envelope stationary. After one full octave every partial lands in its neighbor's slot, so the spectrum is identical to $t{=}0$ — the pitch rises forever with zero net frequency change (the Risset endless glissando). Discrete variant steps 12 semitones on a pitch-class circle (Shepard scale); tempo analog is the Risset rhythm (endless accelerando). The additive synthesis of an auditory illusion; canonical continuous-fill pad for the Method Hybridization rule. $\mathcal{O}(N)$ per sample. |
+| **SP-065** | Brass Lip-Reed Physical Modeling (LIPS) | **Synthesis Engines** | Physical Brass Timbre (Trumpet/Trombone/Horn) | Models brass as a nonlinear self-oscillating loop: a lip valve (damped mass-spring with unilateral contact, Bernoulli flow $u \propto y\sqrt{|\Delta p|}$) coupled to a flaring bore + bell resonator via a reflection function $p[n]=\sum h[k]u[n-k]$. Pitch from bore length $L$ (valves/slide), bent by lip resonance; blowing pressure $p_m$ scales the nonlinearity so louder = brighter (free velocity→filter). Completes the physical-model family (reed SP-023, bow SP-024, plate SP-040, string SP-011/033/048). $\mathcal{O}(M)$ per sample. |
 ---
 
 
@@ -16133,3 +16135,199 @@ Musicom integration (engine authors the MIDI; this is an audio-layer continuous 
 - Deutsch, D. (1986). "A musical paradox." *Music Perception* 3(3), 275–280.
 - Roads, C. (1996). *The Computer Music Tutorial*, §7 (Pitch circularity / Shepard tones). MIT Press.
 - Risset, J.-C. (1969). *Computer Suite from Little Boy* and *Mutations* (first musical uses of the endless glissando).
+
+# Tintinnabuli Composition (TINC) (Method 079)
+
+### Source
+The **tintinnabuli** technique was invented by **Arvo Pärt in 1976**, after an eight-year self-imposed silence (1968–1976) spent studying Gregorian chant and early polyphony (Machaut, Obrecht, Josquin). It marks the birth of his mature "tintinnabuli style," first heard in **Für Alina** (1976), **Cantus in Memoriam Benjamin Britten** (1977), **Tabula Rasa** (1977), **Spiegel im Spiegel** (1978), and **Fratres** (1977). Pärt's own formulation — **"1 + 1 = 1"** — states the core idea: a melodic voice (the "subjective" world of human wandering) is joined to a triadic voice (the "objective" world of the immutable triad), and the two together are heard as a single sonority. The definitive analytical account is **Hillier, P. (1997), *Arvo Pärt*, Oxford University Press** (esp. ch. "Tintinnabuli"); see also **Saale Kareda, "Back to the Source," in *Tintinnabuli: Music of Arvo Pärt*, Muziekcentrum Nederland (2007)** and Pärt's own **"Tintinnabuli — mein persönlicher Weg,"** lecture (1990s). It is the *minimalist–sacred* branch of rules-based composition: a deterministic, triadic realization of a stepwise melody.
+
+### Layer
+**concrete** — realizes the stepwise M-voice and its triad-locked T-voice as concrete MusicEvents (pitch, onset, duration, velocity) that fill UnitMatrix cells; feeds `generators/`. (Not abstract: it does not design pitch *pools* or set relations; it emits the actual notes. Not absolute: it emits symbolic events, not audio.)
+
+### Description
+Compose in Pärt's tintinnabuli style by generating **two interdependent voices** from a single diatonic mode and a single tonic triad:
+
+- The **M-voice** (melodic voice) is a *stepwise* (conjunct) line drawn from a diatonic mode $M$: each successive note moves by at most a whole step, $|m_{i+1} - m_i| \le 2$ semitones. It is the "wandering" voice — the only voice allowed to move freely (but always by step).
+- The **T-voice** (tintinnabuli voice) is *triad-locked*: for every M-voice note $m_i$, the T-voice sounds the note of a fixed tonic triad $T = \{c, e, g\}$ (taken over all octaves) that is *nearest* to $m_i$ in a chosen direction. The T-voice therefore leaps only between members of one triad — it has no melodic motion of its own, only the M-voice's shadow cast onto the triad.
+
+The **position rule** $p_i \in \{+1, -1\}$ chooses the direction of the T-voice note:
+$$t_i = \begin{cases} \min\{t \in T : t \ge m_i\} & p_i = +1\ \text{(superior / "above")} \\ \max\{t \in T : t \le m_i\} & p_i = -1\ \text{(inferior / "below")} \end{cases}$$
+
+Every sonority $(m_i, t_i)$ is a dyad containing exactly one triad tone, so the texture is *always consonant* (unisons, seconds, thirds — never harsh dissonance). There is **no functional harmony**: the harmony is the static field of one triad, colored by which of its tones each dyad contains.
+
+- **PITCH**: the M-voice is a stepwise modal line; the T-voice is the nearest-triad projection of each M-note. Together they trace a contour in "triad-distance space."
+- **RHYTHM**: classically the two voices are *homorhythmic* (they attack together), but the M-voice rhythm can be decoupled (long M-notes over a pulsing T-voice, or vice versa) for texture. Pärt's rhythm is usually slow, additive, and non-periodic.
+- **HARMONY**: no progression — a single tonic triad held over the whole piece. Tension comes only from *which* triad tone each dyad contains (root vs third vs fifth) and from the interval span (unison vs second vs third). A movement of the triad itself (e.g. Fratres's modal transpositions) is a rare, section-level event.
+- **STRUCTURE**: the macro-form is the **position sequence** $P = (p_1, p_2, \dots)$ — constant-above, constant-below, alternating $+1,-1,+1,-1$, or per-measure/per-section alternation — plus **additive processes** (notes are added/dropped one at a time, Cantus-style: M-voice enters, accumulates, then sheds). Sections differ by mode (Ionian vs Aeolian), by M-voice register/octave, or by position pattern.
+- **TEXTURE**: transparent and bell-like — the T-voice rings like a struck bell (hence *tintinnabulum*, Latin "bell"); the M-voice is a quiet chant. The 1+1=1 dyad is the atom of the texture.
+
+### Musical Elements Framework
+
+| Element | Tintinnabuli mechanism | Musical output |
+|---|---|---|
+| **PITCH** | stepwise M-voice; nearest-triad projection for T-voice | conjunct modal melody + triad-locked counter-voice; $|m_{i+1}-m_i|\le 2$ |
+| **RHYTHM** | homorhythmic pairing (or decoupled); additive onsets | slow, bell-like pulse; notes enter/leave one at a time |
+| **HARMONY** | single fixed tonic triad; no progression | every dyad contains a triad tone → constant consonance; root/third/fifth coloring only |
+| **STRUCTURE** | position sequence $P$; additive add/drop; mode/register per section | macro-form from above/below alternation + note accumulation |
+| **TEXTURE** | 1+1=1 dyad atoms; sparse two-voice | transparent, resonant, sacred-minimalist bell field |
+
+### UnitMatrix Integration (Voices & Sections)
+- **Rows (Voices)** = the M-voice is one row, the T-voice another. A richer texture adds *multiple* T-voices at different octaves (or a second T-voice in the other direction) — each is still just a projection of the same M-voice onto the same triad, so all rows stay locked to one pitch pool (zero drift, one tonal center).
+- **Columns (Sections)** = each section is a $(M, T, P)$ triple: a mode $M$, a tonic triad $T$ (usually constant across sections — changing $T$ is a whole-piece-level event), and a position pattern $P$ (the section's structural identity). Section $s$ generates a fixed block of M-notes (additive accumulation gives section length), then projects each onto the triad per $P$.
+- **Cells (MusicUnit)** = one dyad $(m_i, t_i)$ = one `MusicUnit` carrying `{PITCH}` (both voices), `{RHYTHM}` (shared or decoupled onset/duration), `{HARMONY}` (which triad tone the dyad contains), `{STRUCTURE}` (position sign $p_i$). The M-voice and T-voice are two `MusicEvent`s inside the same cell (or two voices' cells at the same column index).
+- Zero-drift gating is preserved: the M-voice and T-voice have identical event counts (one dyad per cell), so both rows have the same total tick length; hand to `UnitMatrixComposer` (engine-authored MIDI per AGENTS.md, `validate()` before `to_midi()`).
+
+### Technical Mechanics
+- **Stepwise generator**: the M-voice is a walk on the mode — start on a scale degree, step $\pm 1$ or $\pm 2$ semitones within the mode, optionally with a slow "gravity" toward a home degree. (Any drift/random-walk generator works; what makes it tintinnabuli is the *projection*, not the walk.)
+- **Nearest-triad projection**: sort the triad tones (all octaves in range) once, then for each M-note binary-search the position. $\mathcal{O}(N \log|T|)$ total, effectively $\mathcal{O}(N)$.
+- **Position sequence**: $P$ is a small deterministic pattern (constant / alternating / per-section). It can also be a boolean LFSR or any binary sequence — but Pärt's is deliberately simple and slow.
+- **Octave handling**: the M-voice's octave and the T-voice's octave are independent; the T-voice usually sits close to (or just above/below) the M-voice, which is what produces the "bell" of a nearby triad tone.
+- **Cost**: $\mathcal{O}(N)$ — one projection + one note emission per M-note. Trivially parallelizable across sections; deterministic per seed (no stochastic element unless the M-voice walk is seeded).
+
+### Implementation Requirements (Python / NumPy)
+```python
+import bisect
+
+def tintinnabuli(m_voice, triad, positions, octave_shift=0):
+    """Project a stepwise M-voice onto a tonic triad (T-voice).
+
+    m_voice:  list of MIDI note numbers (stepwise modal line)
+    triad:    list of pitch classes of the tonic triad, e.g. [0,4,7]
+    positions: list of +1 (nearest above) / -1 (nearest below), len == len(m_voice)
+    Returns list of (m, t) dyads.
+    """
+    # All triad tones across a wide range (sorted for bisect).
+    tones = sorted(pc + 12 * o for o in range(-1, 9) for pc in triad)
+    dyads = []
+    for m, p in zip(m_voice, positions):
+        i = bisect.bisect_left(tones, m)
+        if p >= 0:                      # nearest triad tone above
+            t = tones[min(i, len(tones) - 1)]
+        else:                            # nearest triad tone below
+            t = tones[max(i - 1, 0)]
+        dyads.append((m, t))
+    return dyads
+
+# Example: C-Ionian stepwise M-voice, alternating above/below T-voice.
+m = [60, 62, 64, 65, 64, 62, 60, 62]      # C D E F E D C D (stepwise)
+pos = [+1, -1, +1, -1, +1, -1, +1, -1]
+dyads = tintinnabuli(m, [0, 4, 7], pos)
+# -> [(60,60),(62,60),(64,64),(65,64),(64,64),(62,60),(60,60),(62,60)]
+```
+
+Musicom integration (engine authors the MIDI; sketch only — real imports per `AGENTS.md`):
+```python
+# from structures import MusicUnit
+# from workflows.unitmatrix_composer import UnitMatrixComposer, create_note_unit
+# composer = UnitMatrixComposer(bpm=60, ticks_per_beat=480, beats_per_bar=4)
+# composer.create_matrix(num_voices=2, num_sections=S)
+# composer.add_voice("M-voice", program=MidiInstrument.FLUTE, channel=0)
+# composer.add_voice("T-voice", program=MidiInstrument.MARIMBA, channel=1)
+# for s, (mode, triad, pospat) in enumerate(section_specs):
+#     m_line = stepwise_line(mode, n_notes=additive_len(s))
+#     for i, (m, t) in enumerate(tintinnabuli(m_line, triad, pospat)):
+#         composer.fill_voice_section("M-voice", s, create_note_unit(m, dur, tick=i))
+#         composer.fill_voice_section("T-voice", s, create_note_unit(t, dur, tick=i))
+# ok, msg = composer.validate()   # MUST be True before to_midi (per AGENTS.md)
+```
+
+### Pitfalls
+1. **Unison collapse at triad tones**: when an M-note *is* a triad tone, the nearest-above projection returns the same note (unison). Perfectly idiomatic (Pärt does it), but a naive "skip unison" hack breaks the style. Keep unisons — they are the "1" in 1+1=1 — and only octave-displace if the two voices are on the same instrument/channel.
+2. **Treating it as arpeggiation**: the T-voice must *follow the M-voice note-by-note*, not run its own triad pattern. If the T-voice gets an independent rhythm or contour, the result degrades into plain broken chords. The T-voice is a *function* of the M-voice, never free.
+3. **Non-stepwise M-voice**: if the M-voice leaps (skips more than a whole step), the "1+1=1" balance breaks and the music loses the chant quality that makes the style recognizable. Enforce $|m_{i+1}-m_i|\le 2$ on the M-voice generator.
+4. **Forgetting the octave register**: the T-voice must be *near* the M-voice (same octave, or at most one octave off), or the bell-like intimacy vanishes. Pick the triad tone in the M-voice's octave, not the nearest tone in *absolute* frequency across the whole keyboard.
+5. **Random position sequences**: $P$ should be a slow, deterministic pattern (constant / alternating / per-section). Random or fast $p_i$ flipping produces a nervous, non-Pärtian texture. Change $P$ at section boundaries, not per note.
+6. **Confusing "no functional harmony" with "no triad"**: the triad is the entire harmonic universe — do not substitute it or add passing chromatic chords. All tension is *registral* and *interval-span* (which triad tone, how wide the dyad), never chord-progression-based.
+7. **Strict homorhythm only**: Pärt often writes *both* voices with identical rhythm, but keeping them always homorhythmic sounds mechanical. Decouple rhythm sparingly (a held M-note over a moving T-voice, or an additive M-voice over a sustained T-drone) to get the additive "breathing" texture.
+
+### Comparison With Related Methods
+| Method | Voice relation | Harmonic field | Motion constraint | Character |
+|---|---|---|---|---|
+| 056 SCCC | CF + species counterpoint | functional consonance rules | melodic interval limits | scholarly counterpoint |
+| 011 Voice-Leading Graph | chord → chord via graph | Riemannian | minimal voice leading | smooth progression |
+| 066 GTTM-HC | prolongational tree | tonal hierarchy | diminution rules | hierarchical tonal |
+| 069 CWCC | word-generated | mode/well-formed | balanced words | combinatorial |
+| **079 TINC** | **M-voice + triad projection** | **single static triad** | **stepwise M + triad-locked T** | **bell-like sacred minimalism** |
+
+### References
+- Pärt, A. (1976). *Für Alina*. (First tintinnabuli work.)
+- Pärt, A. (1977). *Cantus in Memoriam Benjamin Britten*; *Tabula Rasa*; *Fratres*.
+- Pärt, A. (1978). *Spiegel im Spiegel*.
+- Hillier, P. (1997). *Arvo Pärt*. Oxford University Press. (Definitive tintinnabuli analysis.)
+- Kareda, S. (2007). "Back to the Source." In *Tintinnabuli: Music of Arvo Pärt*. Muziekcentrum Nederland.
+- Pärt, A. (c. 1990s). "Tintinnabuli — mein persönlicher Weg." (Composer's own lecture.)
+# Brass Lip-Reed Physical Modeling (LIPS) (Method SP-065)
+
+### Source
+Brass instruments (trumpet, trombone, French horn, tuba) sound by **nonlinear self-oscillation of the player's lips** (an *inward-swinging valve*) coupled to a **flaring bore terminating in a bell**. The canonical physics framework is the self-sustained oscillator model of **McIntyre, Schumacher & Woodhouse (1981/1983), "On the oscillations of musical instruments," *J. Acoust. Soc. Am.*** (the same exciter–resonator loop that covers reeds, lips, and bows). The brass-specific lip model is **Adachi & Sato (1995/1996), "Time-domain simulation of sound production in the brass instrument" / "Trumpet sound simulation using a two-dimensional lip vibration model," *JASA***. The real-time digital realization (table-lookup nonlinear junction) is **Cook, P. R. (1993), "Bone / SPASM"**, and the bore as a reflection function (input impedance) is **Causse, Kergomard & Lurton (1984), "Input impedance of brass musical instruments," *JASA* 75(1), 241–254** and **Agulló, Barjau & Martínez (1988), "On the time-domain simulation of brass instruments"**. Reference acoustics: **Fletcher & Rossing (1998), *The Physics of Musical Instruments*, 2nd ed., Springer**. It is the *physical-modeling* branch for the brass family — the inward-swinging-valve counterpart to SP-023's clarinet (outward-swinging reed).
+
+### Layer
+**absolute** (sound production) — **Synthesis Engines**. Candidate code path: `sound/synthesis/lip_reed.py` (new module alongside `bowed.py`, `modal.py`, `karplus_strong.py`). Renders a `MusicUnit`'s `{PITCH, RHYTHM, STRUCTURE}` as a mono/stereo audio buffer per note via the coupled lip-valve + bore reflection function; sums into the section bus.
+
+### Description
+Model brass timbre as a feedback oscillator: the mouth (blowing pressure $p_m$) drives a **lip valve** (a damped mass-spring mass $m_r$ with unilateral contact, opening $y \ge 0$) that throttles a Bernoulli airflow $u$; that flow drives the **mouthpiece–bore–bell** resonator, whose returned pressure $p$ feeds back to close the lips. The loop self-oscillates at a frequency the **bore resonances** select (the instrument's harmonic series), so pitch is set by tube length $L$ (valves/slide) and *bent* by lip resonance $\omega_r$ and $p_m$. The Bernoulli nonlinearity ($u \propto y\sqrt{|\Delta p|}$) is the source of the harmonic-rich "buzz"; the bell acts as a frequency-dependent reflector/radiator (highs radiate, lows reflect back to sustain the standing wave), and the blowing pressure controls brightness (louder = more harmonics — the physical origin of *fortissimo = brassy*). LIPS completes the physical-model instrument family: SP-023 clarinet (beating reed), SP-024 bowed string (friction), SP-040 plates/bars (FDTD), SP-011/033/048 strings (waveguide) — brass is the last major Western acoustic family without a dedicated SP method.
+
+### Technical Mechanics
+
+**Lip (single-mass, normalized).** Lips as a driven harmonic oscillator with one-sided (unilateral) contact constraint:
+$$m_r\,\ddot y + r_r\,\dot y + k_r\,(y - y_0) = (p_m - p)\,S,\qquad y \ge 0$$
+with $\omega_r = \sqrt{k_r/m_r}$ the lip mechanical resonance (player-set, near the played note) and $Q_r = \omega_r m_r / r_r$ the lip quality factor (free-buzz vs tight). The constraint $y\ge0$ is the lip/mouthpiece contact: clamp $y=\max(y,0)$ and zero inward velocity on contact (soften for click-free audio).
+
+**Valve flow (the nonlinearity).** Turbulent Bernoulli flow through the lip slit of width $w$:
+$$u(t) = w\,y(t)\,\sqrt{\frac{2\,|p_m - p|}{\rho}}\;\mathrm{sgn}(p_m - p)$$
+where $\rho$ = air density. This $\sqrt{\Delta p}$ nonlinearity converts even sinusoidal lip motion into a pulse-like flow → the harmonic-rich brass buzz. It is an *inward-swinging* valve (+1), the opposite sign convention of the clarinet's outward reed (−1).
+
+**Bore + bell (resonator).** Two equivalent forms:
+- **Reflection function (used here):** the bore presents input impedance $Z(\omega)$ with peaks at the resonances; mouthpiece pressure is the flow convolved with the impulse response $h = \mathcal{F}^{-1}\{Z\}$:
+$$p[n] = \sum_{k=0}^{M-1} h[k]\,u[n-k]$$
+- **Digital waveguide:** bidirectional delay lines with a bell reflection/transmission FIR; equivalent but more stateful.
+
+Closed-at-mouthpiece bore resonances $f_k \approx (2k+1)c/(4L)$ are lowered/compressed by the flare into the brass harmonic series; the bell transmits highs (radiation high-pass) and reflects lows.
+
+**Coupled step (per sample $n$).** ① compute returned $p$ from the bore; ② solve the nonlinear junction for $(u,p)$ jointly via 2–4 fixed-point iterations (or a one-step Newton, or Cook's table-lookup); ③ integrate the lip ODE with the new force (semi-implicit Euler/Verlet); ④ enforce $y\ge0$; ⑤ inject $u$ into the bore history; ⑥ radiated output = bell transmission filter applied to $p$. Stability requires the iterative/lookup junction and (optionally) slight numerical damping; the lip ODE is stiff at realistic $k_r$, so use an implicit or symplectic integrator.
+
+**Pitch/brightness control.** Fundamental = bore resonance nearest $\omega_r$; $f_0 \propto 1/L$ (valves/slide); player bends via $\omega_r$ and $p_m$. Blowing pressure $p_m$ scales the nonlinearity → more high harmonics → *fortissimo = brighter*. Cost: $\mathcal{O}(M)$ per sample ($M \approx 50$ ms of FIR), $\mathcal{O}(N M)$ per note; fully vectorizable across voices; deterministic per seed → zero-drift gate compatible.
+
+### Musical Elements Framework
+- **PITCH** = bore length $L$ sets the resonance series; lip resonance $\omega_r$ + blowing pressure $p_m$ select and *bend* the mode. Harmonic series of the tube; valves/slide = change $L$; lip-bend = continuous portamento; multiphonics = blowing between modes.
+- **RHYTHM** = per-note onset is a $p_m$ ramp from 0 (tongue = brief $p_m$ interrupt = articulation); sustain = hold $p_m$; slur = hold $p_m$ and move $\omega_r$; breath phrase length = $p_m$ envelope length. Attack "bite," tongued staccato, legato slurs.
+- **HARMONY** = one voice = one bore+lip pair; a chord = multiple LIPS instances (polyphony = N parallel exciter–resonator loops). Mute = per-voice spectral filter (straight/Harmon/cup = different cavity colorations). Brass choir, muted "wah" harmony, open-vs-muted contrast.
+- **STRUCTURE** = per-section bore/mute/pressure schedule; crescendo = $p_m$ ramp; doits/falls = $\omega_r$ glide at note end. Section-level brass arrangement: open fanfare → muted verse → fortissimo climax.
+- **TEXTURE** = $p_m$ (dynamic → brightness), $Q_r$ (free vs tight buzz), flare/mute (radiation color), unison detune of multiple instances (chorus-like section warmth). Velocity maps *physically* to $p_m$, so loud notes are automatically brighter — a free velocity→filter that sample libraries fake with key-switches.
+
+### UnitMatrix Integration
+- **Rows (Voices)** = one LIPS instance per voice row (trumpet 1, trumpet 2, trombone, tuba); each row's notes render independently then sum. Polyphony = N parallel pairs; cost scales linearly with voices.
+- **Columns (Sections)** = per-section performance state carried in `{STRUCTURE}`: mute on/off, section dynamic ($p_m$ baseline), articulation mode (tongued vs slurred). A muted A-section → open B-section is a one-parameter change at the section seam.
+- **Cells (MusicUnit)** = each note cell carries `{PITCH}` (→ bore length + lip resonance), `{RHYTHM}` (onset/duration → $p_m$ envelope), `{TEXTURE}` (velocity → $p_m$ peak → brightness; mute type). Velocity is interpreted as blowing pressure, not a gain scalar.
+- **Flow**: `lip_reed_brass(note_spec)` per note → accumulate into the section buffer → mix under other voices → post-FX (SP-007 EQ, SP-008 DRC, SP-009/SP-032 reverb). It is a **note-event consumer** (unlike SP-064's continuous pad). Deterministic per seed; `validate()` zero-drift gate unaffected (audio layer, no MIDI).
+
+### Pitfalls
+1. **Explicit junction instability** — solving $u(p_m-p)$ and $p(u)$ in one explicit step oscillates/blows up at high $p_m$. Fix: 2–4 fixed-point iterations, a one-step Newton, or Cook's precomputed nonlinear table lookup.
+2. **Stiff lip ODE** — realistic $k_r$ makes $\omega_r$ high → explicit Euler unstable. Fix: semi-implicit/symplectic integrator, or solve the lip (a driven SHO between contacts) in closed form per sample.
+3. **Wrong valve sign** — brass lips are *inward-swinging* (+1); coding them like a clarinet's outward-swinging reed (−1) gives no sustained oscillation or selects the wrong mode. Check the sign of the $(p_m-p)$ term and the flow coupling.
+4. **No oscillation / no note** — if $p_m$ is below the oscillation threshold, or the bore resonance is too far from $\omega_r$, loop gain < 1 → noise/puffs instead of a note. Fix: raise $p_m$, tune $\omega_r$ near a bore mode, ensure the bore reflection is strong enough.
+5. **Unilateral-contact clicks** — hard clamping $y\ge0$ injects broadband clicks. Fix: soft-contact (penalty) model or smooth the velocity reversal; low-pass the lip force.
+6. **Aliasing from the $\sqrt{\cdot}$ nonlinearity** — the valve generates harmonics above Nyquist. Fix: oversample the exciter (2–4×) or apply SP-062 ADAA to the junction; the bore filter removes some but not all.
+7. **Bore length vs lip resonance mismatch = wrong pitch** — the note is set by the *bore*, but it is tempting to set pitch by $\omega_r$ alone. Fix: derive bore length from the target $f_0$, set $\omega_r\approx f_0$, and let $\omega_r$ only *bend* around it.
+8. **Static timbre** — holding $p_m$ and $\omega_r$ constant sounds like an organ, not brass. Fix: add slow $p_m$ vibrato/swell, an attack transient on $p_m$, and per-note micro-variation (SP-006-style humanization at the audio layer).
+
+### Comparison With Related Methods
+| Method | Exciter | Resonator | Valve type | Family | Cost |
+|---|---|---|---|---|---|
+| SP-023 clarinet | single reed | cylindrical bore | outward-swinging (−1) | woodwind | low |
+| SP-024 bowed string | stick-slip friction | string (bi-dir waveguide) | contact | string | low |
+| SP-011/048 string | pluck/strike | string + body | — | string | very low |
+| SP-040 struck plate | hammer | plate modes/FDTD | — | percussion | high |
+| **SP-065 brass** | **lip valve** | **flaring bore + bell** | **inward-swinging (+1)** | **brass** | **low–med** |
+| SP-045 DDSP | neural f0/loudness | harmonic + filtered noise | learned | neural | med |
+
+### References
+- McIntyre, M. E., Schumacher, R. T., & Woodhouse, J. (1981/1983). "On the oscillations of musical instruments." *J. Acoust. Soc. Am.* 69(5), 1325–1345; 74(5), 1325–1345.
+- Adachi, S., & Sato, M. (1995). "Time-domain simulation of sound production in the brass instrument." *J. Acoust. Soc. Am.* 97(6), 3850–3861.
+- Adachi, S., & Sato, M. (1996). "Trumpet sound simulation using a two-dimensional lip vibration model." *J. Acoust. Soc. Am.* 99(2), 1200–1209.
+- Vergez, C., & Rodet, X. (2000). "Trumpet and trumpet player: model and simulation in a musical context." *Proc. ICMC*.
+- Cook, P. R. (1993). *Bone* / *SPASM* (real-time brass physical model, table-lookup junction).
+- Causse, R., Kergomard, J., & Lurton, X. (1984). "Input impedance of brass musical instruments." *J. Acoust. Soc. Am.* 75(1), 241–254.
+- Agulló, J., Barjau, A., & Martínez, J. (1988). "On the time-domain simulation of brass instruments."
+- Fletcher, N. H., & Rossing, T. D. (1998). *The Physics of Musical Instruments*, 2nd ed., Springer.
+- Msallam, R., Dequidt, S., Causse, R., & Tassart, S. (2000). "Physical model of the trombone including nonlinear propagation." *Acta Acustica* 86. (Nonlinear wave steepening → brassiness at fortissimo.)

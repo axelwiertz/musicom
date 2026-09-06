@@ -1,0 +1,56 @@
+{
+  "artifact": "087-tango-abstract-dorian.mid",
+  "classification": "ai-generated",
+  "generator": "musicom nightly 087-tango-abstract-dorian",
+  "sources": [
+    "methods_db:ABS-002 subset walk",
+    "style:Tango",
+    "phase:2 rules"
+  ],
+  "parameters": {
+    "phase": 2,
+    "seed": 20260905,
+    "key": "D dorian",
+    "bpm": 112,
+    "form": [
+      [
+        "Intro",
+        4
+      ],
+      [
+        "TangoA",
+        4
+      ],
+      [
+        "TangoB",
+        4
+      ],
+      [
+        "Lift",
+        4
+      ],
+      [
+        "TangoA2",
+        4
+      ],
+      [
+        "Outro",
+        4
+      ]
+    ],
+    "walk": "maj0,min2,maj5,maj0,min2,maj7,min2,maj5,maj7,maj0,min2,maj7,maj0,min79,min74,min72,min2,maj0,min2,maj0,maj5,min2,maj0,maj0",
+    "texture": [
+      "LeadSax",
+      "Violin",
+      "Cello",
+      "Piano",
+      "Bass",
+      "Drums"
+    ]
+  },
+  "notes": "",
+  "sha256": "00daae1302d8fc14fb316db5b0321b97a78659e7b3d5365103ccc2e2033686e9",
+  "bytes": 7151,
+  "created_utc": "2026-09-05T23:11:28.671498+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,52 @@
+{
+  "job": "random-style production pass (SP) - LAYER-ALIGNED 2026-09-06",
+  "selection_source": "workflows.musicom_workflow.SP_METHODS registry (10 implemented)",
+  "selection_file": "/opt/data/select_job_20260906.json",
+  "composition_source": "/opt/data/projects/Styles/Ambient/evolving/v1/ambient_evolving.mid",
+  "composition_sha256": "5e6dc086367700b88ca59995e08b83f94fcb4643ab1ec0925378a07576bfb7c9",
+  "production_method": "SP-026",
+  "production_method_name": "Spectral Phase Vocoder Resynthesis",
+  "registered_module": "sound.effects.phase_vocoder",
+  "layer_discipline": "absolute layer: phase vocoder resynthesis replaces the spectral/timbre layer for ALL voices (full-mix dry render resynthesized; every per-voice stem gets the same identity/freeze treatment)",
+  "parameters": {
+    "mode": "identity resynthesis + spectral-freeze tail chord",
+    "sample_rate": 44100,
+    "n_fft": 2048,
+    "hop": 512,
+    "freeze_tail_s": 8.0,
+    "freeze_decay_k": 2.0,
+    "freeze_amp": 0.5,
+    "fluid_internal_reverb": false,
+    "fluid_internal_chorus": false,
+    "fluid_gain": 1.2
+  },
+  "fixes_applied": [
+    "module phase_vocoder(freeze=True) collapses to silence on 128 s input (phase_acc never unwrapped: plain np.angle diffs wrap at +-pi -> synthesized phase destroys harmonics -> 98.5% silence)",
+    "module sharpness!=1.0 applies |X|^sharpness to EVERY frame -> post-norm clipping brickwall (peak 88 on test block)",
+    "adapter uses straight _stft/_istft magnitude-phase identity (rms/peak bit-preserved, verified) + re-synthesized decaying freeze chord from the last LOUD analysis frame (module froze the final frame, which sits in FluidSynth silent tail -> inaudible; backward scan for last frame above 2% of peak frame RMS fixes it)"
+  ],
+  "checks": {
+    "silence_ratio": 0.077,
+    "dry_silence_ratio": 0.0614,
+    "freeze_tail_peak_after_dry_end": 0.00239,
+    "pitch_verification": {
+      "windows_checked": 256,
+      "dominant_peak_hit_rate": 0.9609,
+      "harmonic_energy_mean_8h": 0.5821,
+      "method": "FFT dominant peak per 0.5s window, 50-1000 Hz band, +/-4% tolerance vs active MIDI fundamentals (or octave below). Identity resynthesis preserves the dry tonal content by design.",
+      "verdict": "PASS"
+    }
+  },
+  "artifacts": {
+    "midi": "/opt/data/projects/Styles/Production/SP026-phase-vocoder-ambient-evolving/MIDI/ambient_evolving.mid",
+    "dry_full_mix_wav": "/opt/data/projects/Styles/Production/SP026-phase-vocoder-ambient-evolving/dry_full_mix.wav",
+    "processed_wav": "/opt/data/projects/Styles/Production/SP026-phase-vocoder-ambient-evolving/Audio/SP026-phase-vocoder-ambient-evolving.wav",
+    "processed_ogg": "/opt/data/projects/Styles/Production/SP026-phase-vocoder-ambient-evolving/Audio/SP026-phase-vocoder-ambient-evolving.ogg",
+    "stems": {
+      "track00_Pad_1_new_age": "/opt/data/projects/Styles/Production/SP026-phase-vocoder-ambient-evolving/Audio/stems/track00_Pad_1_new_age.wav",
+      "track01_Pad_2_warm": "/opt/data/projects/Styles/Production/SP026-phase-vocoder-ambient-evolving/Audio/stems/track01_Pad_2_warm.wav",
+      "track02_Electric_Bass_finger": "/opt/data/projects/Styles/Production/SP026-phase-vocoder-ambient-evolving/Audio/stems/track02_Electric_Bass_finger.wav",
+      "track03_Recorder": "/opt/data/projects/Styles/Production/SP026-phase-vocoder-ambient-evolving/Audio/stems/track03_Recorder.wav"
+    }
+  }
+}

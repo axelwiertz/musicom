@@ -1,2 +1,4 @@
+/opt/data/projects/Styles/Ambient/evolving/v1/ambient_evolving.mid
+SP-026
 /opt/data/projects/Styles/BossaNova/gentle/v1/bossa_nova_gentle.mid
 SP-033

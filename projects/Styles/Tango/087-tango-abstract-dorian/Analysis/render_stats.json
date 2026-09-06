@@ -1,0 +1,25 @@
+{
+  "087-tango-abstract-dorian": {
+    "duration_s": 54.18,
+    "channels": 2,
+    "silence_ratio": 0.0466,
+    "silent_secs": [
+      52,
+      53
+    ],
+    "last_audio_sec": 51,
+    "peak": 0.8074,
+    "rms_mean": 0.12087
+  },
+  "087-tango-abstract-dorian-phase1": {
+    "duration_s": 53.73,
+    "channels": 2,
+    "silence_ratio": 0.0859,
+    "silent_secs": [
+      52
+    ],
+    "last_audio_sec": 51,
+    "peak": 0.5177,
+    "rms_mean": 0.07518
+  }
+}

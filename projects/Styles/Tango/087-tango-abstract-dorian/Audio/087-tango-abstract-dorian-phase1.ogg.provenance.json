@@ -1,0 +1,18 @@
+{
+  "artifact": "087-tango-abstract-dorian-phase1.ogg",
+  "classification": "ai-generated",
+  "generator": "musicom nightly 087-tango-abstract-dorian produce SP-001",
+  "sources": [
+    "SP-001 fluidsynth",
+    "087 phase1 midi"
+  ],
+  "parameters": {
+    "render": "SP-001",
+    "phase": "phase1"
+  },
+  "notes": "",
+  "sha256": "a2ea30de002760084a3b139b2ee76183e2ea1c1490d9934880180ee44f7b170c",
+  "bytes": 446287,
+  "created_utc": "2026-09-05T23:11:30.483969+00:00",
+  "provenance_version": "1.0"
+}

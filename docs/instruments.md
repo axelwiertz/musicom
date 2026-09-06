@@ -119,6 +119,21 @@ Measurement note: the kalimba ring is short — verify with the 0.2–0.6 s
 window, NOT the 1–2 s window used for sitar/koto (both readings sit at the
 noise floor there).
 
+**Banjo added** (2026-09-06): GM105, World-family fifth entry
+(instrument.md + banjo.py), verified end-to-end UnitMatrixComposer →
+zero-drift ✓ → MIDI → FluidSynth WAV ✓; RenderPipeline stem label
+`trackXX_Banjo.wav` ✓ (GM_PROGRAMS[105] = "Banjo", FluidR3 preset 105 =
+"Banjo" — labels match exactly, no quirk). Karplus-Strong recommended
+(plucked waveguide, loop_gain 0.9960 — head-snap ring clearly above the
+0.990 dull control: 0.019 vs 0.008 tail ratio at 0.2–0.6 s, 2.4×, and SHORTER
+than sitar 0.023 — taut head decays faster than sympathetic strings).
+ModalSynth 'string' preset is the fallback. Solo-render spectral check:
+4–8 kHz buzz 5.4% (no comb-filtering). Empirical FluidR3 pitch sweep
+(RMS, notes 24–96): preset 105 audible across the whole span, no gaps — SF2
+never clips a composition. Line/rhythm-instrument quirk: banjo is a
+roll/strum voice (Scruggs T-I-M-T-M-I-T-M + clawhammer), not a harmony
+voice — no dense chords.
+
 ## Python usage
 
 ```python
@@ -159,6 +174,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Percussion | Drum Kit | ch9 | 35–81 | rhythm, groove, accent |
 | Percussion | Marimba | 12 | 45–96 | lead, melody, accent, countermelody, harmony |
 | World | Sitar | 104 | 55–96 | lead, melody, ornament, drone |
+| World | Banjo | 105 | 46–93 | lead, melody, ornament, rhythm, accent |
 | World | Koto | 107 | 51–90 | lead, melody, ornament, drone, harmony |
 | World | Shamisen | 106 | 45–89 | lead, melody, ornament, drone, countermelody |
 | World | Kalimba | 108 | 48–96 | lead, melody, ornament, drone, harmony |
@@ -186,6 +202,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 25 | Acoustic Guitar (nylon) | Acoustic_Guitar_nylon ✓ |
 | 12 | Marimba | Marimba ✓ |
 | 104 | Sitar | Sitar ✓ (GM_PROGRAMS[104] + FluidR3 preset 104 both "Sitar") |
+| 105 | Banjo | Banjo ✓ (GM_PROGRAMS[105] + FluidR3 preset 105 both "Banjo") |
 | 107 | Koto | Koto ✓ (GM_PROGRAMS[107] + FluidR3 preset 107 both "Koto") |
 | 106 | Shamisen | Shamisen ✓ (GM_PROGRAMS[106] + FluidR3 preset 106 both "Shamisen") |
 | 108 | Kalimba | Kalimba ✓ (GM_PROGRAMS[108] + FluidR3 preset 108 both "Kalimba") |
