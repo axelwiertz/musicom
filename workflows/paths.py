@@ -118,8 +118,26 @@ SCALE = {
     "061": ("L2", False),  # Gaussian Process
     "068": ("L2", False),  # CME-SSA
     "070": ("L2", False),  # Coupled Map Lattice
+    "071": ("L4", False),  # Hopfield Associative Memory (HAM-C) (spec)
+    "073": ("L4", False),  # Harmony Search Improvisational (HSIC) (spec)
+    "074": ("L4", False),  # Restricted Boltzmann Machine (RBM-C) (spec)
+    "075": ("L4", False),  # Self-Organizing Map (SOM-C) (spec)
+    "072": ("L4", False),  # Normalizing Flow Composition (NFC) (spec)
+    "076": ("L3", False),  # Thue-Morse Automatic Sequence (PTM-ASC) (spec)
+    "077": ("L3", False),  # De Bruijn Universal Cycle (DBUC) (spec)
+    "078": ("L3", False),  # Ising Model Equilibrium (IMEC) (spec)
     "HC-003": ("L2", False),  # Makam Seyir
     "HC-010": ("L2", False),  # Fanfare
+    "HC-018": ("L3", False),  # Clave-Guided Montuno (spec)
+    "HC-019": ("L3", False),  # Aksak Horo (spec)
+    "HC-020": ("L4", False),  # Tension-Release Drop Arrangement (spec)
+    "HC-021": ("L3", False),  # Species Counterpoint (spec)
+    "HC-022": ("L3", False),  # Twelve-Bar Blues AAB (spec)
+    "HC-023": ("L3", False),  # Spectral Listening Orchestration (spec)
+    "HC-024": ("L4", False),  # Graphic Score Indeterminate (spec)
+    "HC-025": ("L3", False),  # Kora Griot Ostinato-Song (spec)
+    "HC-026": ("L3", False),  # Pibroch Theme-Variation (spec)
+    "HC-027": ("L3", False),  # Tuvan Overtone Throat Singing (spec)
     # --- L1 MICRO ---
     "002": ("L1", True),   # Markov Transitions
     "011": ("L1", False),  # Voice-Leading Graph Search

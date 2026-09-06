@@ -35,6 +35,17 @@ GENERATOR_REGISTRY = {
     "ABS-003": ("rules.subset_network", None, "Z-Variation (abstract: same-ICV re-harmonization)"),
     "ABS-004": ("rules.subset_network", None, "Parsimonious Voice Leading (abstract: P/L/R smooth moves)"),
     "ABS-005": ("rules.subset_network", None, "Complement Contrast (abstract: matched-tension contrast)"),
+    # --- Human methods (HC-*, human_methods_db.md) — spec-only until shared code ---
+    "HC-018": (None, None, "Clave-Guided Montuno (Cuban son; spec in human_methods_db.md)"),
+    "HC-019": (None, None, "Bulgarian Aksak Horo (spec in human_methods_db.md)"),
+    "HC-020": (None, None, "Tension-and-Release Drop Arrangement (spec in human_methods_db.md)"),
+    "HC-021": (None, None, "Species Counterpoint (spec in human_methods_db.md)"),
+    "HC-022": (None, None, "Twelve-Bar Blues AAB Form (spec in human_methods_db.md)"),
+    "HC-023": (None, None, "Spectral Listening & Harmonic-Series Orchestration (spec in human_methods_db.md)"),
+    "HC-024": (None, None, "Graphic Score & Indeterminate Notation (spec in human_methods_db.md)"),
+    "HC-025": (None, None, "Kora Griot Ostinato-Song (spec in human_methods_db.md)"),
+    "HC-026": (None, None, "Scottish Pibroch Theme-and-Variation (spec in human_methods_db.md)"),
+    "HC-027": (None, None, "Tuvan Overtone Throat Singing (spec in human_methods_db.md)"),
 }
 
 

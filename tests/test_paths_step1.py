@@ -45,8 +45,12 @@ def test_scale_counts_match_plan():
     # (Genetic, L3) → L3 = 27. Registry matches the table + later additions.
     # LAYER_ARCHITECTURE.md added 5 ABS abstract-layer methods:
     # ABS-001/002 at L4 (+2 → 15), ABS-003/004/005 at L3 (+3 → 30).
-    assert len(methods_by_scale("L4")) == 15
-    assert len(methods_by_scale("L3")) == 30
+    # Weekly registration (2026-09-06) added 071/072/073/074/075 at L4
+    # (+5 → 20) and 076/077/078 at L3 (+3 → 33).
+    # HC weekly registration added HC-020/HC-024 at L4 (+2 → 22), and
+    # HC-018/019/021/022/023/025/026/027 at L3 (+8 → 41).
+    assert len(methods_by_scale("L4")) == 22
+    assert len(methods_by_scale("L3")) == 41
     assert len(methods_by_scale("L2")) == 20
     assert len(methods_by_scale("L1")) == 9
 
