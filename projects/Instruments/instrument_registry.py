@@ -31,6 +31,7 @@ _INSTRUMENT_MODULES = {
     "Strings.double_bass.double_bass": "double_bass",
     "Keys.piano.piano": "piano",
     "Keys.organ.organ": "organ",
+    "Keys.dulcimer.dulcimer": "dulcimer",
     "Brass.trumpet.trumpet": "trumpet",
     "Brass.trombone.trombone": "trombone",
     "Brass.french_horn.french_horn": "french_horn",
@@ -125,6 +126,7 @@ CELLO = ALL_INSTRUMENTS["cello"]
 DOUBLE_BASS = ALL_INSTRUMENTS["double_bass"]
 PIANO = ALL_INSTRUMENTS["piano"]
 ORGAN = ALL_INSTRUMENTS["organ"]
+DULCIMER = ALL_INSTRUMENTS["dulcimer"]
 TRUMPET = ALL_INSTRUMENTS["trumpet"]
 TROMBONE = ALL_INSTRUMENTS["trombone"]
 FRENCH_HORN = ALL_INSTRUMENTS["french_horn"]
@@ -178,8 +180,12 @@ def registry_table():
             role = "bass, counter, accent, harmony"
         elif low in ("violin", "flute", "trumpet", "clarinet"):
             role = "lead, counter, accent"
-        elif low in ("piano", "acoustic guitar"):
+        elif low == "piano":
             role = "harmony, melody, bass, rhythm"
+        elif low == "church organ":
+            role = "harmony, pad, bass, rhythm, accent"
+        elif low == "dulcimer":
+            role = "lead, melody, ornament, rhythm, harmony"
         elif low == "drum kit":
             role = "rhythm, groove, accent"
         elif low == "marimba":
@@ -207,6 +213,10 @@ if __name__ == "__main__":
     print("Verification:")
     print("  VIOLIN.midi_program =", VIOLIN.midi_program)
     print("  ORGAN.midi_program =", ORGAN.midi_program, "(Church Organ, GM19)")
+    print("  DULCIMER.midi_program =", DULCIMER.midi_program, "(should be 15)")
+    print("  by_name('dulcimer') =", by_name("dulcimer"))
+    print("  by_program(15) =", by_program(15))
+    print("  DULCIMER.in_sweet_spot(69) =", DULCIMER.in_sweet_spot(69))
     print("  TRUMPET.midi_program =", TRUMPET.midi_program, "(should be 56)")
     print("  by_name('double bass') =", by_name("double bass"))
     print("  by_program(56) =", by_program(56))

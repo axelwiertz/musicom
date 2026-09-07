@@ -1,0 +1,28 @@
+{
+  "088-funk-hawkes": {
+    "duration_s": 60.24,
+    "channels": 2,
+    "silence_ratio": 0.0438,
+    "silent_secs": [
+      59
+    ],
+    "last_audio_sec": 58,
+    "peak": 0.89,
+    "rms_mean": 0.08397,
+    "tonal_windows": "118/120"
+  },
+  "088-funk-hawkes-phase1": {
+    "duration_s": 59.9,
+    "channels": 2,
+    "silence_ratio": 0.1899,
+    "silent_secs": [
+      8,
+      37,
+      58
+    ],
+    "last_audio_sec": 57,
+    "peak": 0.366,
+    "rms_mean": 0.03716,
+    "tonal_windows": "112/119"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "artifact": "shimmer_track00_Accordion.wav",
+  "sha256": "bc2097e3ba8a6b30ba346d1996490cd65826342aec9f7946c667b52c1c9a0af1",
+  "method": "SP-035",
+  "module": "sound.effects.shimmer_reverb",
+  "label": "per-stem shimmer track00_Accordion",
+  "source": "/opt/data/projects/Styles/Tango/dramatic/v1/tango_dramatic.mid",
+  "params": {
+    "pitch_cents": 250,
+    "rev_time": 0.6,
+    "pitch_amount": 0.65,
+    "filter_cutoff": 6500.0,
+    "mix": 0.55
+  },
+  "utc": "2026-09-07T22:05:34.271627+00:00"
+}

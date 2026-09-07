@@ -1,0 +1,16 @@
+{
+  "artifact": "SP035-shimmer-tango-dramatic.ogg",
+  "sha256": "f886b22e21529f369b77f6845d6d32548150d57ed05d40baab87162c548c7f01",
+  "method": "SP-035",
+  "module": "sound.effects.shimmer_reverb",
+  "label": "delivery ogg",
+  "source": "/opt/data/projects/Styles/Tango/dramatic/v1/tango_dramatic.mid",
+  "params": {
+    "pitch_cents": 250,
+    "rev_time": 0.6,
+    "pitch_amount": 0.65,
+    "filter_cutoff": 6500.0,
+    "mix": 0.55
+  },
+  "utc": "2026-09-07T22:05:34.283809+00:00"
+}

@@ -1,0 +1,16 @@
+{
+  "artifact": "SP035-shimmer-tango-dramatic_full_mix.wav",
+  "sha256": "f12304e0d481cfc87e9c65e6aef153e08f6fd977fa7ed3175e122d3830383fc4",
+  "method": "SP-035",
+  "module": "sound.effects.shimmer_reverb",
+  "label": "full mix (shimmer reverb, layered per-stem + tail pass)",
+  "source": "/opt/data/projects/Styles/Tango/dramatic/v1/tango_dramatic.mid",
+  "params": {
+    "pitch_cents": 250,
+    "rev_time": 0.6,
+    "pitch_amount": 0.65,
+    "filter_cutoff": 6500.0,
+    "mix": 0.55
+  },
+  "utc": "2026-09-07T22:05:34.267400+00:00"
+}

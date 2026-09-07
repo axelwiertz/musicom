@@ -87,6 +87,7 @@ Classification of active Musicom composition methods categorized by their primar
 
 | **078** | concrete | Ising Model Equilibrium Composition (IMEC) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Field/Temperature-guided) | Grid-Locked / Continuous | Meso / Spin-Lattice | $\mathcal{O}(I \cdot V \cdot S)$ | Simulates a 2D Ising spin lattice (rows = voices, columns = time slots) at thermal equilibrium via Metropolis / Wolff cluster sampling. Spin value → pitch (consonant vs passing tone); column magnetization $M(t)$ → onset density/accents; external field $h$ → HOME/LIFT/TENSE/TURN chord function; temperature schedule $T(s)$ → macro-form (cold = chorus, $T_c$ = fractal development, hot = breakdown); cluster-size distribution → texture. Equilibrium sibling of 036 ASAR / 070 CML-C; thermal foil to 071 HAM-C (quenched recall). |
 | **079** | concrete | Tintinnabuli Composition (TINC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Strict (Static Triad) | Grid-Locked / Continuous | Meso / Phrase | $\mathcal{O}(N)$ | Realizes Arvo Pärt's tintinnabuli style (1976, "1 + 1 = 1"): a stepwise diatonic M-voice ($|m_{i+1}-m_i| \le 2$) is projected note-by-note onto a single fixed tonic triad to form a T-voice (nearest triad tone above/below per a position sequence $P$). Every dyad contains exactly one triad tone → constant consonance, no functional harmony; structure from the position pattern + additive note add/drop; bell-like sacred-minimalist texture. Deterministic rules-based sibling of 056 SCCC / 066 GTTM-HC; static-harmony foil to 011 Voice-Leading Graph. |
+| **080** | concrete | Messiaen Modes of Limited Transposition (MMLT) | **Rules-Based** | Pitch, Harmony, Structure, Texture | Strict (Mode/Truncation-guided) | Grid-Locked / Continuous | Meso / Phrase | $\mathcal{O}(N)$ | Generates music inside Messiaen's seven modes of limited transposition (whole-tone, octatonic, and five more) — pitch-class sets invariant under a non-trivial transposition, hence only 2–6 distinct transpositions (33 total, the "charm of impossibilities"). Melody is a walk on the mode; harmony is the mode's symmetric truncation chords (augmented triads, diminished sevenths, tritones); section = transposition shift (a color permutation) or a mode switch. No functional harmony — tension from mode choice, register, and truncation-chord. Symmetric-subset counterpart to 025 Xenakis Sieve / 069 CWCC; atonal cousin of 065 TTSMC. |
 # Sound Production Methods Framework
 
 Sound production translates symbolic MIDI UnitMatrix data into final acoustic air pressure. Methods are categorized by execution layer: **Hardware/Acoustic Integration**, **Synthesis Engines**, or **Post-Processing / DSP**.
@@ -159,6 +160,7 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 | **SP-063** | Ring Modulation (Balanced Modulator) Synthesis | **Synthesis Engines** | Metallic / Clangorous Bell, Gong & Robotic-Vocal Timbres | Multiplies a modulator signal $x[n]$ by an audio-rate carrier $m[n]=\sin(2\pi f_c n/f_s)$ (four-quadrant balanced multiplier), producing only the sum-and-difference sidebands $f_c \pm f_i$ while suppressing both carrier and modulator. N modulator partials → 2N sidebands; the ratio $r=f_c/f_m$ selects harmonic (integer, consonant) vs inharmonic (irrational, metallic) output; difference sideband folds through 0 Hz. The double-sideband parent of SP-055 FSHT and the audio-rate cousin of AM tremolo; $\mathcal{O}(1)$ per sample. |
 | **SP-064** | Shepard–Risset Glissando Synthesis (SRG) | **Synthesis Engines** | Endless Ascension / Pitch-Circular Drone & Pad Timbres | Sums $N$ octave-spaced partials $f_i=f_0 2^i$ under a fixed log-frequency spectral envelope $A(\log_2 f)$ of period one octave, then glides all partials upward together by a common octave offset $r(t)=ct$ while holding the envelope stationary. After one full octave every partial lands in its neighbor's slot, so the spectrum is identical to $t{=}0$ — the pitch rises forever with zero net frequency change (the Risset endless glissando). Discrete variant steps 12 semitones on a pitch-class circle (Shepard scale); tempo analog is the Risset rhythm (endless accelerando). The additive synthesis of an auditory illusion; canonical continuous-fill pad for the Method Hybridization rule. $\mathcal{O}(N)$ per sample. |
 | **SP-065** | Brass Lip-Reed Physical Modeling (LIPS) | **Synthesis Engines** | Physical Brass Timbre (Trumpet/Trombone/Horn) | Models brass as a nonlinear self-oscillating loop: a lip valve (damped mass-spring with unilateral contact, Bernoulli flow $u \propto y\sqrt{|\Delta p|}$) coupled to a flaring bore + bell resonator via a reflection function $p[n]=\sum h[k]u[n-k]$. Pitch from bore length $L$ (valves/slide), bent by lip resonance; blowing pressure $p_m$ scales the nonlinearity so louder = brighter (free velocity→filter). Completes the physical-model family (reed SP-023, bow SP-024, plate SP-040, string SP-011/033/048). $\mathcal{O}(M)$ per sample. |
+| **SP-066** | Air-Jet Labium (Flute) Physical Modeling (FLUE) | **Synthesis Engines** | Physical Flute / Flue-Organ Timbre | Models the flute/flue pipe as a self-sustained fluid oscillator: mouth pressure $p_m$ drives an unstable air jet (Bernoulli $v_j=C_v\sqrt{2p_m/\rho}$, convection at $0.4v_j$) that flips across the labium, injecting saturated acoustic flow $Q_{ac}=v_j b\,\mathrm{clip}(\eta_L/\eta_{\max})$ into an open-open bore (half-wave resonances $f_n=(n{+}1)c/2L_{eff}$). No vibrating solid — the only fluid-instability exciter; completes the family (reed SP-023, bow SP-024, lip-reed SP-065). Breath noise $\propto p_m$ separates flute from organ. $\mathcal{O}(1)$ per sample. |
 ---
 
 
@@ -16331,3 +16333,222 @@ Closed-at-mouthpiece bore resonances $f_k \approx (2k+1)c/(4L)$ are lowered/comp
 - Agulló, J., Barjau, A., & Martínez, J. (1988). "On the time-domain simulation of brass instruments."
 - Fletcher, N. H., & Rossing, T. D. (1998). *The Physics of Musical Instruments*, 2nd ed., Springer.
 - Msallam, R., Dequidt, S., Causse, R., & Tassart, S. (2000). "Physical model of the trombone including nonlinear propagation." *Acta Acustica* 86. (Nonlinear wave steepening → brassiness at fortissimo.)
+
+
+# Messiaen Modes of Limited Transposition (MMLT) (Method 080)
+
+### Source
+The **modes of limited transposition** (*modes à transpositions limitées*) are the central pitch-technique of **Olivier Messiaen**, systematized in his treatise **"Technique de mon langage musical" (1944; Eng. trans. John Satterfield, 1956, Alphonse Leduc)**. A mode is "limited" when it is **invariant under one or more non-trivial transpositions**: transposing the scale by a certain interval reproduces the *same* set of pitch classes, so the scale has fewer than 12 distinct transpositions (the diatonic scale has 12). Messiaen enumerated **7 modes** with, respectively, **2, 3, 4, 6, 6, 6, and 6 transpositions — 33 in all**; he called their restricted chord vocabulary the **"charm of impossibilities"** (*le charme des impossibilités*): because the scales are symmetrical, only a few sonorities (augmented triads, diminished sevenths, tritones, whole-tone chords) fit inside them. Mode 1 (whole-tone) was inherited from Debussy and the Russian school; Modes 2 (octatonic) and 3 are Messiaen's signatures, heard throughout *Quatuor pour la fin du temps* (1941), *Vingt Regards sur l'Enfant-Jésus* (1944), and the *Turangalîla-Symphonie* (1948). Analytical literature: **Messiaen (1944)**; **Toop, R. (1974), "Messiaen/Goeyvaerts, Fano/Stockhausen, Boulez," *Perspectives of New Music* 13(1)**; **Johnson, R. S. (1975), *Messiaen*, J. M. Dent**; and **Tymoczko, D. (2011), *A Geometry of Music*, Oxford UP** (symmetry and the octatonic). It is the *transpositional-symmetry* branch of rules-based scale construction — the symmetric-subset counterpart to 025 Xenakis Sieve and 069 Christoffel Words.
+
+### Layer
+**concrete** — realizes each mode as a pitch-class universe from which actual `MusicEvent`s (notes, chords) are drawn into UnitMatrix cells; feeds `generators/`. The mode *definition* is abstract — a transposition-invariant pitch-class subset of $\mathbb{Z}_{12}$, exactly the subset-network object that `rules/subset_network.py` (ABS-001..005) manipulates — but as documented here the method emits events: melody is drawn from the mode, harmony from its truncation chords. Candidate code path: `generators/messiaen_modes.py`; the pure pitch-pool/symmetry kernel `transposition_symmetric_subsets()` could equally feed the abstract layer.
+
+### Description
+Compose inside Messiaen's symmetrical pitch universes. A mode of limited transposition is a pitch-class set $M \subset \mathbb{Z}_{12}$ invariant under a non-trivial transposition: there exists $k \neq 0 \pmod{12}$ with $M + k = M$. The set $G_M = \{k : M+k = M\}$ is the mode's **symmetry group** (a subgroup of $\mathbb{Z}_{12}$); the number of distinct transpositions is $12/|G_M|$. Messiaen's seven modes:
+
+| Mode | Interval pattern (cyclic) | Notes | Symmetry group $G_M$ | Transpositions | Signature truncation chord |
+|---|---|---|---|---|---|
+| 1 | 2 2 2 2 2 2 | 6 | $\{0,2,4,6,8,10\}$ (even) | 2 | augmented triad $\{0,4,8\}$ |
+| 2 | 1 2 1 2 1 2 1 2 | 8 | $\{0,3,6,9\}$ | 3 | diminished 7th $\{0,3,6,9\}$ + major/minor triads |
+| 3 | 2 1 1 2 1 1 2 1 1 | 9 | $\{0,4,8\}$ | 4 | augmented triad |
+| 4 | 1 1 3 1 1 1 3 1 | 8 | $\{0,6\}$ | 6 | tritone $\{0,6\}$ + dim7 |
+| 5 | 1 4 1 1 4 1 | 6 | $\{0,6\}$ | 6 | tritone |
+| 6 | 2 2 2 2 1 2 1 | 8 | $\{0,6\}$ | 6 | augmented triad + dim7 |
+| 7 | 1 1 1 1 2 1 1 2 1 1 | 10 | $\{0,6\}$ | 6 | augmented triad + dim7 + tritone |
+
+Because $M+k=M$, **transposing the mode does not change its pitch-class content** — it only permutes which tones sit in which register/position. A "key change" to another transposition is therefore a *color shift*, not a modulation: only 2–6 distinct transpositions exist before the scale returns to itself. Tension and color come from **set relations** (which truncation chords the mode admits, which degrees are emphasized), never from functional harmony — the modes have no leading-tone/dominant pull in the tonal sense, so HOME/LIFT/TENSE/TURN is carried by *mode choice, register, and truncation-chord*, not by diatonic function.
+
+### Musical Elements Framework
+
+| Element | Mechanism | Output |
+|---|---|---|
+| **PITCH** | draw note-by-note from one mode's PC set; transposition = limited color permutation | melodic lines bound to a symmetric pitch universe; no leading-tone pull (esp. whole-tone/octatonic) |
+| **RHYTHM** | modes impose none — pair with Messiaen's added values / non-retrogradable rhythms, or any 011/012 grid | free; typically paired with symmetrical (non-retrogradable) rhythms |
+| **HARMONY** | truncation chords = every-2nd/3rd-note subsets (aug triads, dim7s, tritones) | a small, closed chord vocabulary determined by the mode's symmetry |
+| **STRUCTURE** | sections = distinct transpositions (2–6) or mode switches; limited transpositions → cyclic macro-form | form that returns to itself (you run out of transpositions) |
+| **TEXTURE** | register/octave doubling across the mode; color from which degrees are doubled | shimmering, "stained-glass" coloristic texture (Messiaen's synaesthetic colors) |
+
+### UnitMatrix Integration (Voices & Sections)
+- **Rows (Voices)** = assign each voice a different transposition of the *same* mode (or one mode per voice). Because transposition is an internal permutation, all voices share one pitch-class pool → guaranteed vertical coherence; register/octave offsets separate them. A chord = one truncation chord split across voices.
+- **Columns (Sections)** = each section is a `(mode_id, transposition)` pair; section seams are "limited transpositions" (a color shift) or a mode switch (real contrast, e.g. Mode 2 → Mode 1). The 2–6 available transpositions make the section loop cyclic by construction.
+- **Cells (MusicUnit)** = one note `{PITCH}` drawn from the mode PC set, `{HARMONY}` = truncation-chord membership, `{STRUCTURE}` = transposition index, `{RHYTHM}` = onset/duration (added-value or grid). Deterministic per seed → zero-drift gate satisfied; hand to `UnitMatrixComposer` per AGENTS.md.
+
+### Technical Mechanics
+- **Build a mode** as the cumulative sum of its cyclic interval pattern mod 12: $p_{i+1} = p_i + \mathrm{iv}_i \pmod{12}$, then sort. The cycle must close (sum of intervals $\equiv 0 \pmod{12}$).
+- **Verify limited transposition**: compute $G_M = \{k \in [0,12) : \mathrm{sorted}(M+k) = M\}$; transpositions $= 12/|G_M|$. Modes 1–7 have $|G_M| = 6,4,3,2,2,2,2$.
+- **Truncation chords**: take every $r$-th note of the (sorted, cyclic) mode; $r=2$ on Mode 1 → augmented triad, $r=2$ on Mode 2 → diminished 7th, $r=3$ on Mode 3 → augmented triad. These are the complete chord vocabulary.
+- **Melody**: a walk on the mode (like 002 Markov or 048 RBMPD restricted to the PC set), or a 001-style skeleton filled with mode tones.
+- **Cost**: $\mathcal{O}(N)$ — mode build is $O(12)$, truncation precompute $O(12)$; generation is one note per cell.
+
+### Implementation Requirements (Python)
+```python
+# The 7 Messiaen modes as cyclic interval patterns (Technique de mon langage musical, 1944).
+MESSIAEN_MODES = {
+    1: [2, 2, 2, 2, 2, 2],            # whole-tone,     2 transpositions
+    2: [1, 2, 1, 2, 1, 2, 1, 2],      # octatonic,      3 transpositions
+    3: [2, 1, 1, 2, 1, 1, 2, 1, 1],   #                 4 transpositions
+    4: [1, 1, 3, 1, 1, 1, 3, 1],      #                 6 transpositions
+    5: [1, 4, 1, 1, 4, 1],            #                 6 transpositions
+    6: [2, 2, 2, 2, 1, 2, 1],         #                 6 transpositions
+    7: [1, 1, 1, 1, 2, 1, 1, 2, 1, 1],#                 6 transpositions
+}
+
+def mode_pcs(mode_id, root=0):
+    """Pitch-class set of a Messiaen mode (cyclic interval pattern -> sorted PCs)."""
+    pcs, acc = [], root % 12
+    for iv in MESSIAEN_MODES[mode_id]:
+        pcs.append(acc)
+        acc = (acc + iv) % 12
+    return sorted(set(pcs))
+
+def symmetry_order(mode_id):
+    """Return (|symmetry group|, number of distinct transpositions)."""
+    pcs = mode_pcs(mode_id)
+    g = sum(1 for k in range(12) if sorted((p + k) % 12 for p in pcs) == pcs)
+    return g, 12 // g
+
+def truncation_chord(mode_id, r):
+    """Every r-th note of the mode (a symmetric 'truncation' chord)."""
+    pcs = mode_pcs(mode_id)
+    return sorted(pcs[::r])
+
+# Example:
+# symmetry_order(1) -> (6, 2)   whole-tone: 2 transpositions
+# symmetry_order(2) -> (4, 3)   octatonic: 3 transpositions
+# truncation_chord(1, 2) -> [0, 4, 8]      augmented triad
+# truncation_chord(2, 2) -> [0, 3, 6, 9]   diminished seventh
+```
+
+Musicom integration sketch (engine authors the MIDI; real imports per AGENTS.md):
+```python
+# from structures import MusicUnit
+# from workflows.unitmatrix_composer import UnitMatrixComposer, create_note_unit
+# composer = UnitMatrixComposer(bpm=100, ticks_per_beat=480, beats_per_bar=4)
+# composer.create_matrix(num_voices=V, num_sections=S)
+# for v in range(V):
+#     composer.add_voice(f"voice{v}", ...)
+# for s in range(S):
+#     mode_id, trans = section_specs[s]               # e.g. (2, 0) then (2, 3)
+#     pcs = [(p + trans) % 12 for p in mode_pcs(mode_id)]
+#     for v in range(V):
+#         for i in range(notes_per_section):
+#             pitch = pc_to_midi(pcs[(i + v) % len(pcs)], octave=(i // 8) + v)
+#             composer.fill_voice_section(f"voice{v}", s, create_note_unit(pitch, dur, tick=i))
+# ok, msg = composer.validate()   # MUST be True before to_midi (per AGENTS.md)
+```
+
+### Pitfalls
+1. **Whole-tone has no semitone and no perfect fifth** — no leading tone, no dominant → melodies float and never cadence tonally. Fix: use Mode 1 as a color/transition layer, or introduce chromatic passing notes (Messiaen does) — but then you've left the strict mode.
+2. **Transposition ≠ modulation** — because $M+k=M$, moving to another transposition keeps the *same* pitch classes; it's a color permutation, not a key change. For real contrast switch *modes*, not transpositions. Beginners hear "transposition" and expect tonal modulation.
+3. **Octatonic over-triadic drift** — Mode 2 contains major and minor triads on many roots; free triadic writing degenerates into rootless polytonality. Commit to one or two roots' triads (Messiaen's "dominating" usage) or the dim7 truncation.
+4. **Ignoring the truncation vocabulary** — the modes' only native chords are the symmetric truncations (aug triad, dim7, tritone, whole-tone chord). Introducing ordinary diatonic chords breaks the "charm of impossibilities" and the color collapses into generic chromaticism.
+5. **Interval pattern must be cyclic** — implement the mode as a closed loop (cumulative mod 12); treating the interval list as a linear (non-cyclic) string breaks transposition-invariance at the seam and silently adds a bogus 12th note.
+6. **Mode 7 is near-chromatic** — 10 of 12 PCs; it carries almost no scalar identity. Use it sparingly, as a maximal-color field, not a "scale" with character.
+7. **Conflating the modes with Messiaen's rhythm** — added values and non-retrogradable rhythms are a *separate* technique; grafting them onto the modes yields Messiaen-pastiche. The modes are a pitch method; pair them with any rhythm generator (011/012/032) to keep the texture your own.
+
+### Comparison With Related Methods
+| Method | Scale/set construction | Symmetry | Chord vocabulary | Character |
+|---|---|---|---|---|
+| 025 Xenakis Sieve | modular congruence (union/intersection) | general | any via sieve | dense spectral |
+| 069 CWCC | Christoffel words / Sturmian | balancedness | mode/melodic | combinatorial |
+| 065 TTSMC | 12-tone row + set-complex | aggregate | row forms | atonal serial |
+| 076 PTM-ASC | Thue-Morse substitution | self-similar | bit-mapped | aperiodic |
+| **080 MMLT** | **transposition-invariant PC subset** | **limited transposition** | **symmetric truncations (aug/dim7/tritone)** | **coloristic sacred-modern** |
+
+### References
+- Messiaen, O. (1944). *Technique de mon langage musical*. Leduc. (Eng. trans. J. Satterfield, 1956.)
+- Messiaen, O. (1941). *Quatuor pour la fin du temps*; (1944) *Vingt Regards sur l'Enfant-Jésus*; (1948) *Turangalîla-Symphonie*.
+- Toop, R. (1974). "Messiaen/Goeyvaerts, Fano/Stockhausen, Boulez." *Perspectives of New Music* 13(1).
+- Johnson, R. S. (1975). *Messiaen*. J. M. Dent.
+- Tymoczko, D. (2011). *A Geometry of Music*. Oxford University Press. (Symmetry, the octatonic, and voice-leading.)
+- Forte, A. (1973). *The Structure of Atonal Music*. Yale University Press. (Transpositional symmetry = T-invariant set classes.)
+# Air-Jet Labium (Flute) Physical Modeling (FLUE) (Method SP-066)
+
+### Source
+
+The flute and organ flue pipe are sustained by a *fluid-mechanical* oscillator with no vibrating solid — the only such exciter in the physical-model family. The mechanism was quantified by **Coltman, J. W. (1968), "Sounding mechanism of the flute and organ pipe," *J. Acoust. Soc. Am.* 44(4), 983–992**, by **Fletcher, N. H. (1976), "Jet-drive mechanism in organ pipes," *J. Acoust. Soc. Am.* 60(2), 481–483**, and the comprehensive treatment in **Fletcher, N. H., & Rossing, T. D. (1998), *The Physics of Musical Instruments*, 2nd ed., Springer, Ch. 16**. The digital-waveguide realization is **Cook, P. R. (1992), "A meta-wind-instrument physical model, and a meta-controller for real-time performance control," *Proc. ICMC* 1992**, and the STK `Flute` (StkFlute). Aerodynamic detail: **Howe, M. S. (1975), "Contributions to the theory of aerodynamic sound, with application to excess jet noise and the theory of the flute," *J. Fluid Mech.* 71(4), 625–673**; **De la Cuadra, P. (2005), "The sound of oscillating air jets: physics, modeling and simulation in flute-like instruments," PhD thesis, Stanford (CCRMA)**; **Verge, M.-P., Fabre, B., Hirschberg, A. et al. (1994–97)** on jet formation and velocity fluctuations. FLUE completes the exciter taxonomy: reed (SP-023), bow (SP-024), lip-reed (SP-065), and now **air-jet/labium** — the only member whose oscillator is pure fluid instability (Kelvin–Helmholtz / edge-tone), not a vibrating solid.
+
+### Layer
+
+**Absolute** — sound production. FLUE consumes symbolic `MusicUnit` note events and renders raw audio (WAV/OGG); it emits no MIDI (that would be `concrete`) and designs no pitch pools (that would be `abstract`). Candidate code path: `sound/synthesis/flute_jet.py` (alongside `bowed.py`, `karplus_strong.py`, `modal.py`; future sibling of the brass `lip_reed.py` from SP-065).
+
+### Description
+
+Air-jet labium synthesis models the flute (and flue organ pipe) as a **self-sustained fluid oscillator**: mouth pressure $p_m$ drives a thin air **jet** out of the flue slit; the jet is intrinsically unstable and its transverse displacement travels as a wave to the **labium** (edge), where it is split — alternately injecting acoustic flow into, and out of, the **bore** resonator. The bore's standing wave deflects the jet at the embouchure, closing a feedback loop. Pitch is set by the bore's half-wave resonance series (finger holes → effective length); the embouchure (jet length, lip opening) *selects and bends* the mode, so overblowing jumps the octave/12th like the real instrument. There is **no vibrating reed or string**: the tone color comes from (a) the jet's nonlinear saturation at the edge, (b) the mixing ratio of turbulent **breath noise**, and (c) the bore's wall/end losses.
+
+### Technical Mechanics
+
+**1. Jet formation (Bernoulli).** Mouth pressure $p_m$ → jet velocity
+$$v_j = C_v\sqrt{2p_m/\rho}$$
+with $\rho$ air density and $C_v\approx0.6$ a vena-contracta coefficient. Jet half-width $b$ is set by the flue slit height.
+
+**2. Jet transit and convection.** The jet's transverse disturbance convects at the jet-wave velocity $u_c\approx0.4\,v_j$ (a result of the jet's shear profile / Kelvin–Helmholtz instability). Flue-to-labium distance $L_j$ gives the transit delay
+$$\tau_j = L_j/u_c = L_j/(0.4\,v_j).$$
+
+**3. Jet deflection (delay + low-pass).** The pipe's acoustic particle velocity $u_n$ at the flue exit deflects the jet; the displacement at the labium is a delayed, inertially-smoothed copy:
+$$\eta_L(\omega) = G_j\, e^{-j\omega\tau_j}\, H_{LP}(j\omega)\, u_n(\omega),\qquad G_j=\frac{L_j}{v_j}.$$
+Discrete form: a jet delay line of $D_j=\mathrm{round}(f_s\tau_j)$ samples plus a one-pole low-pass (pole $a_j\approx-0.7$). Note $D_j$ *depends on* $p_m$ — a dynamic delay.
+
+**4. Edge splitting (nonlinear).** The labium splits the jet; the acoustic volume flow injected into the bore saturates as the jet can deflect no farther than its width:
+$$Q_{ac}(t) = v_j b \cdot \mathrm{clip}(\eta_L(t)/\eta_{\max},-1,1).$$
+The soft-clip is the harmonic source — harder blowing drives $\eta_L$ into saturation → brighter tone (flute's *forte* edge).
+
+**5. Bore resonator.** The flute is a cylindrical tube open at both ends; effective length $L_{eff}$ (finger holes + end correction) gives half-wave resonances
+$$f_n \approx \frac{(n+1)c}{2L_{eff}},\qquad n=0,1,2,\dots$$
+with input impedance $Z_p(\omega)$ at the embouchure; mouth pressure $p=Z_p\,Q_{ac}$.
+
+**6. Regeneration.** Oscillation holds where loop gain ≥ 1 and loop phase = $2\pi n$ (pipe delay + jet delay + lip filter). Blowing harder raises $v_j$ → shorter $\tau_j$ → the operating point drifts; the jet delay makes overblown modes run slightly sharp (flute "octave stretch").
+
+**7. Breath noise.** Turbulent flow mixes white noise (one-pole LP, cutoff ≈ 3–6 kHz) with amplitude $\propto p_m$, present only while blowing — the difference between a flute and an organ.
+
+**Waveguide realization (Cook/STK style):** bore delay line (length $N=\mathrm{round}(f_s/f_n)$, fractional tuning via allpass) + open-end reflection filter $R_\omega$ (pole ≈ −0.98 with rolloff) + jet delay $D_j$ + one-pole jet filter + one-pole lip/embouchure filter + DC blocker. **Cost:** $\mathcal{O}(1)$ per sample plus a few delay reads; vectorizable across voices; deterministic per seed (breath noise from seeded RNG).
+
+### Musical Elements Framework
+
+| Element | Mechanism |
+|---|---|
+| PITCH | finger-hole state → $L_{eff}$ → half-wave series $f_n$; embouchure (jet length $L_j$, lip opening) selects/overblows the mode (octave/12th); jet delay bends pitch sharp at high modes |
+| RHYTHM | onset = $p_m$ ramp (tongue = $p_m$ interrupt); articulation = $p_m$ envelope; flutter-tongue = $p_m$ modulation ≈ 20 Hz |
+| HARMONY | one voice = one jet+bore pair; chord = $N$ parallel instances; overblow = partial shift (octave/12th); breath-noise ratio changes chord blend |
+| STRUCTURE | per-section fingering/embouchure schedule; dynamics via $p_m$; breath-noise level per section (airy verse vs pure chorus) |
+| TEXTURE | $p_m$ → brightness (saturation at the edge); breath-noise ratio → airy vs pure; vibrato = $p_m$/embouchure LFO; jet turbulation at high $p_m$ → edgy/whisper |
+
+### UnitMatrix Integration
+
+- **Rows (Voices)** = one FLUE instance per voice row (flute 1, flute 2, alto flute, piccolo); each renders independently, then summed (spatialized via SP-021/034/043).
+- **Columns (Sections)** = per-section performance state in `{STRUCTURE}`: fingering (effective-length) schedule, embouchure/overblow mode, section dynamic ($p_m$ baseline), breath-noise level.
+- **Cells (MusicUnit)** = `{PITCH}` → bore length + mode selection (overblow flag); `{RHYTHM}` → $p_m$ envelope (tongue vs slur); `{TEXTURE}` → velocity → $p_m$ peak → brightness + breath-noise mix.
+- **Flow:** `flute_jet(note_spec)` per note → section buffer → mix under other voices → post-FX (SP-007 EQ, SP-008 DRC, SP-009/032 reverb). Note-event consumer (unlike SP-064's continuous pad). Deterministic; `validate()` zero-drift gate unaffected (audio layer, no MIDI).
+
+### Pitfalls
+
+1. **Dynamic jet-delay clicks** — $D_j=\mathrm{round}(f_s\tau_j)$ changes with $p_m$; a hard length change clicks. Fix: interpolate with a fractional-delay first-order allpass; update $D_j$ only at note boundaries.
+2. **Explicit junction instability** — solving jet deflection and bore reflection in one explicit step diverges at high $p_m$ (same pathology as SP-065). Fix: 2–4 fixed-point iterations, or Cook's one-pass delay-then-reflect loop with a leaky integrator.
+3. **No note below oscillation threshold** — too little $p_m$, or $L_j$ mismatched to a bore mode → loop gain < 1 → breath noise only. Fix: raise $p_m$; keep $L_j$ in the regime where $\tau_j$ aligns with a mode.
+4. **Overblown-mode sharpness** — the jet delay adds phase, so high partials run sharp. Fix: shorten $L_{eff}$ per mode, or apply the "octave stretch" correction the real player performs.
+5. **DC / low-frequency drift** — the open-end reflection + jet loop admits near-DC instability. Fix: DC blocker (one-pole high-pass ≈ 20 Hz) in the loop, as STK does.
+6. **Breath-noise balance** — too much noise = hiss; too little = organ/recorder. Fix: scale noise by $p_m$ and band-limit (LP ≈ 6 kHz); route it *inside* the loop for the real "blown" character.
+7. **Edge-saturation aliasing** — the clip nonlinearity generates harmonics above Nyquist. Fix: oversample the jet junction 2–4× or apply SP-062 ADAA; the bore LP removes some but not all.
+8. **Nondeterminism** — unseeded breath noise breaks reproducible renders and the zero-drift byte-identical gate's spirit. Fix: seed the RNG per voice/seed.
+9. **Sparse input stays sparse** — FLUE is a timbre engine, not a rhythm generator; driving sparse 011/032 output yields sparse airy hits. Fix: per the Method Hybridization rule, add a continuous fill layer (026 DPSM arpeggio, sustained pad) so the flute flows.
+
+### Comparison With Related Methods
+
+| Method | Exciter | Resonator | Exciter type | Family | Cost |
+|---|---|---|---|---|---|
+| SP-023 clarinet | single reed | cylindrical bore | vibrating reed | woodwind | low |
+| SP-024 bowed string | stick-slip friction | string | contact | string | low |
+| SP-065 brass | lip valve | flaring bore + bell | inward reed | brass | low–med |
+| **SP-066 FLUE** | **air jet + labium** | **open-open bore** | **fluid instability / edge tone** | **woodwind (flute/pipe)** | **low** |
+| SP-045 DDSP | neural f0/loudness | harmonic + filtered noise | learned | neural | med |
+
+### References
+
+- Coltman, J. W. (1968). "Sounding mechanism of the flute and organ pipe." *J. Acoust. Soc. Am.* 44(4), 983–992.
+- Fletcher, N. H. (1976). "Jet-drive mechanism in organ pipes." *J. Acoust. Soc. Am.* 60(2), 481–483.
+- Fletcher, N. H., & Rossing, T. D. (1998). *The Physics of Musical Instruments*, 2nd ed., Springer. (Ch. 16: flutes and flue instruments.)
+- Howe, M. S. (1975). "Contributions to the theory of aerodynamic sound, with application to excess jet noise and the theory of the flute." *J. Fluid Mech.* 71(4), 625–673.
+- Cook, P. R. (1992). "A meta-wind-instrument physical model, and a meta-controller for real-time performance control." *Proc. ICMC* 1992, San Jose. (Basis of the STK `Flute`.)
+- Cook, P. R., & Scavone, G. P. (1999). *The Synthesis ToolKit (STK)* — `StkFlute` implementation.
+- Verge, M.-P., Fabre, B., Hirschberg, A., & Wijnands, A. P. J. (1994/97). "Jet formation and jet velocity fluctuations in a flue organ pipe." *J. Acoust. Soc. Am.* 95(2), 1119–1132; and "Aeroacoustics of musical instruments." *Ann. Rev. Fluid Mech.*
+- De la Cuadra, P. (2005). "The sound of oscillating air jets: physics, modeling and simulation in flute-like instruments." PhD thesis, Stanford University (CCRMA).

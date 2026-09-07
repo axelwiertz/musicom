@@ -1,0 +1,16 @@
+{
+  "artifact": "shimmer_track01_Bright_Acoustic_Piano.wav",
+  "sha256": "409fccbb8d86ce84b0898479ac5cb1ecf70d04f42e96f9f805f089a4e690f1f9",
+  "method": "SP-035",
+  "module": "sound.effects.shimmer_reverb",
+  "label": "per-stem shimmer track01_Bright_Acoustic_Piano",
+  "source": "/opt/data/projects/Styles/Tango/dramatic/v1/tango_dramatic.mid",
+  "params": {
+    "pitch_cents": 250,
+    "rev_time": 0.6,
+    "pitch_amount": 0.65,
+    "filter_cutoff": 6500.0,
+    "mix": 0.55
+  },
+  "utc": "2026-09-07T22:05:34.275721+00:00"
+}

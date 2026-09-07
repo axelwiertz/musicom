@@ -1,0 +1,16 @@
+{
+  "artifact": "shimmer_track03_Acoustic_Grand_Piano.wav",
+  "sha256": "456361a7b841c926e6fcbc30cd78713c6e8b8989031cd536620a872aa16cfeb3",
+  "method": "SP-035",
+  "module": "sound.effects.shimmer_reverb",
+  "label": "per-stem shimmer track03_Acoustic_Grand_Piano",
+  "source": "/opt/data/projects/Styles/Tango/dramatic/v1/tango_dramatic.mid",
+  "params": {
+    "pitch_cents": 250,
+    "rev_time": 0.6,
+    "pitch_amount": 0.65,
+    "filter_cutoff": 6500.0,
+    "mix": 0.55
+  },
+  "utc": "2026-09-07T22:05:34.283358+00:00"
+}

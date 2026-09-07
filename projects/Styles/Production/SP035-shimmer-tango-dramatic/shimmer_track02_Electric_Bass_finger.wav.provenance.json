@@ -1,0 +1,16 @@
+{
+  "artifact": "shimmer_track02_Electric_Bass_finger.wav",
+  "sha256": "3c875d5e04da99644b52ae315a1b15da51bd3f4b594f62a403c1b107d4c33779",
+  "method": "SP-035",
+  "module": "sound.effects.shimmer_reverb",
+  "label": "per-stem shimmer track02_Electric_Bass_finger",
+  "source": "/opt/data/projects/Styles/Tango/dramatic/v1/tango_dramatic.mid",
+  "params": {
+    "pitch_cents": 250,
+    "rev_time": 0.6,
+    "pitch_amount": 0.65,
+    "filter_cutoff": 6500.0,
+    "mix": 0.55
+  },
+  "utc": "2026-09-07T22:05:34.279478+00:00"
+}

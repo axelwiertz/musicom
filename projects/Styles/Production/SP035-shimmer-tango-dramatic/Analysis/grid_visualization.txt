@@ -1,0 +1,9 @@
+SP-035 Shimmer Tango Dramatic — source MIDI density grid
+tracks=5 channels=4 bars=33 (4 beats/bar)
+rows = MIDI channels (0=Bandoneon,1=Piano,2=Bass,9=Perc)
+cols = bars; # = any onset in bar
+
+Bandoneon  ################################.
+Piano      ################################.
+Bass       ################################.
+Perc       ################################.

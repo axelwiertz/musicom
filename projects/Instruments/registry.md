@@ -134,6 +134,19 @@ never clips a composition. Line/rhythm-instrument quirk: banjo is a
 roll/strum voice (Scruggs T-I-M-T-M-I-T-M + clawhammer), not a harmony
 voice — no dense chords.
 
+**Dulcimer added** (2026-09-07): GM15, Keys-family third entry
+(instrument.md + dulcimer.py), verified end-to-end UnitMatrixComposer →
+zero-drift ✓ → MIDI → FluidSynth WAV ✓; RenderPipeline stem label
+`trackXX_Dulcimer.wav` ✓ (GM_PROGRAMS[15] = "Dulcimer", FluidR3 preset 15 =
+"Dulcimer" — labels match exactly, no quirk). Identity note: GM15 "Dulcimer"
+is the **hammered** dulcimer (cimbalom/santur/yangqin struck-string zither),
+NOT the Appalachian lap dulcimer. ModalSynth recommended (impulse-excited
+resonator bank; 'string' preset + custom struck-string modes with
+fast-decaying harmonic partials). Karplus-Strong alt (loop_gain 0.9975 →
+bright ring 0.023 vs 0.008 dull control, 2.9×). Solo-render spectral check:
+4–8 kHz buzz 4.1% (no comb-filtering). Chordal voice OK (folk styles play
+2–4 note rolled chords); NOT a bass voice.
+
 ## Python usage
 
 ```python
@@ -161,6 +174,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Strings | Double Bass | 43 | 28–74 | bass, rhythm, accent, harmony |
 | Keys | Piano | 1 | 21–108 | harmony, melody, bass, rhythm |
 | Keys | Church Organ | 19 | 36–96 | harmony, pad, bass, rhythm, accent |
+| Keys | Dulcimer | 15 | 48–96 | lead, melody, ornament, rhythm, harmony |
 | Brass | Trumpet | 56 | 54–86 | lead, accent, fanfare |
 | Brass | Trombone | 57 | 40–78 | bass, counter, accent, harmony |
 | Brass | French Horn | 60 | 41–84 | harmony, counter, accent, lead |
@@ -198,6 +212,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 68 | Oboe | Oboe ✓ (SF2 preset is "Oboe (Orch)" — cosmetic suffix only) |
 | 65 | Alto Sax (correct GM) | **Alto_Sax** (labeled "Alto Sax", not "Saxophone") |
 | 74 | Flute | **Recorder** ✗ |
+| 15 | Dulcimer | Dulcimer ✓ (GM_PROGRAMS[15] + FluidR3 preset 15 both "Dulcimer") |
 | 19 | Church Organ | Church Organ ✓ (GM_PROGRAMS[19] + SF2 preset 19 both "Church Organ") |
 | 25 | Acoustic Guitar (nylon) | Acoustic_Guitar_nylon ✓ |
 | 12 | Marimba | Marimba ✓ |

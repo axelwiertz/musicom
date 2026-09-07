@@ -1,0 +1,18 @@
+{
+  "artifact": "088-funk-hawkes.ogg",
+  "classification": "ai-generated",
+  "generator": "musicom nightly 088-funk-hawkes produce SP-001",
+  "sources": [
+    "SP-001 fluidsynth FluidR3_GM",
+    "088 088-funk-hawkes midi"
+  ],
+  "parameters": {
+    "render": "SP-001",
+    "phase": "hawkes"
+  },
+  "notes": "",
+  "sha256": "93ec279e89c43f0b07228a00202322dbb9e2f0228fc5e4fe6038409ddb530e26",
+  "bytes": 423816,
+  "created_utc": "2026-09-06T23:05:36.720886+00:00",
+  "provenance_version": "1.0"
+}
