@@ -83,6 +83,9 @@ Status: `implemented` = in sound/ package · `partial` = some pieces exist · `r
 | — | Param-Lock Sequencer with Ratchet+Randomize (Asterism-style) | implemented | sound/generators/param_lock_seq.py |
 | — | Auto Tempo/Pitch Detection + Sample Slicer (Bitwig 6.1 Sampler-style) | implemented | sound/generators/sample_slicer.py |
 
+| SP-036 | Klatt-Cascade Formant Voice / Speech Synthesis (klattsch-style) | implemented | sound/synthesis/formant_voice.py |
+| SP-037 | Pitch-Tracked 3-Band Sub-Harmonic Generator (Penteo 8 Synthesized LFE-style) | implemented | sound/effects/subharmonic.py |
+
 ## Mastering (from MusicTech workflow)
 
 | Method | Status | Location |

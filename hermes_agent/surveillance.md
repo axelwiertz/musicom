@@ -3,6 +3,26 @@
 Replicability analyses from the Hermes agent's music-tech surveillance cron
 (job e2760579d2c8, runs Mon/Thu). Distilled verdicts for musicom adoption.
 
+## 2026-09-07 Scan
+
+| Item | Technique | Verdict | Musicom path |
+|------|-----------|---------|--------------|
+| klattsch (retro vocal synthesizer, Synthtopia 09-03) | 1980 Klatt formant-synthesis design: chain of oscillators + noise + resonators, no samples, per-phone editable parameters, text/piano-roll input with hand-drawn pitch curves, multi-voice layering | YES | **DONE** — sound/synthesis/formant_voice.py (SP-036: `FormantVoiceSynth`, 40+ phone inventory incl. Japanese kana vowels, text_to_phones front end, per-phone pitch curve + vibrato) |
+| Penteo 8 (upmix/downmix v8, SoS 09-03) | Synthesized LFE Sub-Harmonic Generator across three independently mute-able/link-able frequency bands; plus phaseless-decorrelation upmix, 62-format ITU downmix | PARTIAL | Sub-harmonic core **DONE** — sound/effects/subharmonic.py (SP-037: pitch-tracked 3-band sub-octave synthesis, envelope-followed, add-fifth/sub-sub modes); full upmix decorrelation suite + ITU downmix = proprietary, not replicated |
+| Groove Synthesis 3rd Wave OS 2.0a (SoS 08-25) | Shimmer Verb + Make Waves third "Spectral" wavetable mode (frequency-domain slice picking for wandering-pitch sources); MIDI CC/SysEx expansion | YES (partial new) | Shimmer + Make Waves Spectral already **DONE** 09-03 (sound/effects/shimmer_reverb.py, sound/synthesis/spectral_wavetable.py) — no new code (repeat of 08-27/09-03 finding) |
+| Arturia Pure SUB (MusicTech, ~08-28) | Sub/harmonics/texture three-way split bass synth, 40+ filter modes, Sub Processor distortion chain, 12-slot FX rack, preset randomiser + resampler | PARTIAL | Covered by sound/synthesis/mono_synth.py (sub osc + ladder + drive) + sound/effects/production_chain.py — no new code (repeat of 09-03 finding) |
+| Dreamtonics Instrument X (MusicTech + Synthtopia 08-31) | Neural Acoustics Modeling: notation → soundwaves via neural nets, breath/bow-friction dynamics, 3D Sound-Field Control (spot/Decca Tree/ambient mics) | PARTIAL | Proprietary neural nets + multi-channel IR captures; voice_allocator.py + bowed.py approximate routing — no new code (repeat of 08-27/08-31/09-03 finding) |
+| Akai S900 SuperOS v4.0 (Synthtopia 09-03) | Custom firmware: S950/S1000 features, new MIDI control, TIMESTRETCH, real-time filter modulation | PARTIAL | Time-stretch covered by sound/effects/phase_vocoder.py; per-note filter modulation ≈ sound/synthesis/voice_allocator.py mod matrix; firmware + sample playback engine = hardware, not replicated — no new code |
+| BS-203 MacroAcidizer (SoS 09-06) | TB-303/MC-202 emulation (3 modes: 303, 202, Bassboy) + scale-locked Acid Sequencer with randomize + saturation/delay/reverb FX | PARTIAL | 303-style voice covered by sound/synthesis/mono_synth.py; MC-202-style AD-202 already in sound/synthesis (mono_synth); scale-locked random sequencer ≈ sound/generators/param_lock_seq.py + scale_quantizer.py — no new code |
+| Electric Cow EC909 (Synthtopia 09-04) | 1998 Atari ST virtual TR-909 + TB-303: PCM 909 drums (editable pitch/attack) + 303 synth in one, pattern → MIDI/AIFF export | PARTIAL | 909 drum synthesis covered by sound/synthesis/drum_synth_606.py family + ratchet_seq.py; PCM sample playback + 1998 Atari UI = not replicated — no new code |
+| Elektron Tonverk OS 1.40 (Synthtopia 09-03) | OS update in-depth demo: per-track mod routing, Overbridge multitrack streaming | NO | DAW/host integration (repeat of 09-03 finding); per-track mod routing ≈ voice_allocator.py — no new code |
+| Korg Prologue Elixir user oscillators (Synthtopia 09-03) | 3 custom multi-engine osc + 5 wavetable osc: DXOSC FM (25 algos, mod gen with 24 LFO shapes), TZFM dual-waveform (90 shapes, ringmod/bitcrush, A↔B FM), STEPr (per-note waveform stepping) | PARTIAL | FM covered by sound/synthesis/phase_mod.py; dual-waveform morph + bitcrush ≈ sound/synthesis/supersaw_swarm.py harmony + equation_synth.py; STEPr per-note stepping is a sequencing idea ≈ param_lock_seq.py — no new code |
+| SOMA Enigma (SoS 08-26) | Metal-object proximity scanner (0-20 mm) controls freeform sonic landscape; any metal object = control surface | NO | Hardware sensor instrument (repeat of 08-27 finding) — not replicable DSP |
+| LeWitt Space Replicator Free (SoS 09-02) | Headphone virtual mixing room: 800+ headphone compensation profiles + room/consumer-speaker/earbud emulation | NO | Proprietary measured IR/compensation dataset (repeat of 09-03 finding) |
+| e-instruments Velvet Guitars Fragment (SoS 09-04) | Free Kontakt baritone-guitar instrument: sustains/mutes/dead notes/legato + 2 vintage amps + spring reverb + 60s tremolo | NO | Sample-library content, not algorithm |
+| Audacity 4 (MusicTech, ~09-05) | DAW refresh: overlapping/non-destructive clips, ripple editing, redesigned effects, real-time VST3/AU/LV2 hosting, Workspaces | NO | Host/DAW architecture, not replicable DSP |
+| HeadRush FRFR Cab Series / Sony ULT Tower / Denon Prime 4 G2 / Polyend Keys / HEDD CTRL / IK Tonex Board / Keeley Tube Drive / Reason Free | Speakers/controllers/consoles/pedals | NO | Hardware / host / content (Polyend Keys + Reason Free repeat of 08-31 finding) |
+
 ## 2026-09-03 Scan
 
 | Item | Technique | Verdict | Musicom path |

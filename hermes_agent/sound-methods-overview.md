@@ -58,6 +58,8 @@ comparable to, and how do I use it in a workflow?*
 | `sound/effects/bbd_chorus.py` | BBDChorus | effects (chorus) | UVI Thorus XT, Roland Dimension D / Juno chorus | audio+voices+rate+depth → BBD chorus wet mix (clocked, companded, per-voice variation) |
 | `sound/effects/shimmer_reverb.py` | ShimmerVerb | effects (reverb) | 3rd Wave Shimmer Verb, shimmer reverbs | audio+pitch_cents+rev_time+pitch_amount → fractional-shift shimmer tail |
 | `sound/generators/sample_slicer.py` | SampleSlicer, Slice, auto_tempo, auto_pitch | sampling | Bitwig 6.1 Sampler | audio → onsets/slices → played slices (oneshot/loop/reverse/pingpong) + BPM/pitch estimate |
+| `sound/synthesis/formant_voice.py` | FormantVoiceSynth | synthesis (voice) | klattsch, Klatt 1980 cascade formant synth | phones/text+pitch curve → formant voice WAV (40+ phones incl. kana vowels, tts front end) |
+| `sound/effects/subharmonic.py` | SubHarmonicGenerator, SubBand | effects (sub/LFE) | Penteo 8 Synthesized LFE, sub-harmonic pedals | audio → pitch-tracked 3-band sub-octave LFE signal (mute-able bands, add-fifth/sub-sub) |
 | `sound/utils/midi.py` | MicrotonalExporter | export | KHÔRA microtonal | notes → pitch-bend MIDI |
 | `sound/tuning/just_intonation.py` | JustIntonation | tuning | KHÔRA | ratio → freq/scale |
 | `sound/sync/clock.py` | DAWClockBridge | sync | MTC/MIDI clock | bpm → clock pulses |
@@ -69,8 +71,8 @@ comparable to, and how do I use it in a workflow?*
 
 | Category | Purpose | Key files |
 |---|---|---|
-| **synthesis/** | create audio from scratch | phase_mod, modal, granular, vocal, additive, bowed, mass_spring, polysynth, west_coast, mono_synth, dx7_voice, equation_synth, drum_synth_606, spectral_wavetable, memorymoog_synth, supersaw_swarm |
-| **effects/** | transform existing audio | filter, reverb, fdn_reverb, vowel_filter, tape_delay, multiband, quantize_mod, mastering, production_chain, spectral_gate, tilt_eq, liminal_reverb, scale_locked_granular, overlap_comp, room_reverb, bbd_chorus, shimmer_reverb |
+| **synthesis/** | create audio from scratch | phase_mod, modal, granular, vocal, additive, bowed, mass_spring, polysynth, west_coast, mono_synth, dx7_voice, equation_synth, drum_synth_606, spectral_wavetable, memorymoog_synth, supersaw_swarm, formant_voice |
+| **effects/** | transform existing audio | filter, reverb, fdn_reverb, vowel_filter, tape_delay, multiband, quantize_mod, mastering, production_chain, spectral_gate, tilt_eq, liminal_reverb, scale_locked_granular, overlap_comp, room_reverb, bbd_chorus, shimmer_reverb, subharmonic |
 | **modular/** | node-graph DSP | graph, math_mod, patch_loader |
 | **generators/** | generative event/pattern engines | event_core, dice, ratchet_seq, complex_noise, micro_timing_seq, trig_cond_seq, param_lock_seq, sample_slicer |
 | **analysis/** | extract info from audio | pitch, rhythm, chroma |

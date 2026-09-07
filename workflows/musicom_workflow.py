@@ -138,6 +138,8 @@ SP_METHODS = {
     "SP-033": ("sound.synthesis.supersaw_swarm", "Detuned Saw Swarm + Scale/Chord Quantize + Morph Pad"),
     "SP-034": ("sound.effects.bbd_chorus", "BBD Chorus Ensemble (Clock/Compander/Per-Voice Variation)"),
     "SP-035": ("sound.effects.shimmer_reverb", "Fractional-Pitch Shimmer Reverb (SOLA Shift in Feedback)"),
+    "SP-036": ("sound.synthesis.formant_voice", "Klatt-Cascade Formant Voice / Speech Synthesis (klattsch-style)"),
+    "SP-037": ("sound.effects.subharmonic", "Pitch-Tracked 3-Band Sub-Harmonic Generator (Penteo 8 Synthesized LFE-style)"),
 }
 
 
