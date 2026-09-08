@@ -1,0 +1,15 @@
+{
+  "artifact": "089-electronic-subset-minor.wav",
+  "classification": "ai-generated",
+  "generator": "SP-001 FluidSynth render",
+  "sources": [],
+  "parameters": {
+    "method": "SP-001",
+    "project": "089-electronic-subset-minor"
+  },
+  "notes": "",
+  "sha256": "e21106a4c015debb31c9d9d14257cf8ac3208f4d1ab22ea7e6fb20a781d62d38",
+  "bytes": 9562668,
+  "created_utc": "2026-09-08T07:17:10.219993+00:00",
+  "provenance_version": "1.0"
+}
