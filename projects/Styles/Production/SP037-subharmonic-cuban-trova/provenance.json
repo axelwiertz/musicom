@@ -1,0 +1,76 @@
+{
+  "job": "random-style production SP layer-aligned 2026-09-08",
+  "method": "SP-037",
+  "module": "sound.effects.subharmonic",
+  "desc": "Pitch-Tracked 3-Band Sub-Harmonic Generator (Penteo 8 Synthesized LFE-style)",
+  "registry": "workflows.musicom_workflow.SP_METHODS",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Cuban/001-cuban-trova-research/MIDI/cuban_001-cuban-trova-research-v8.mid",
+  "out_dir": "/opt/data/repos/musicom/projects/Styles/Production/SP037-subharmonic-cuban-trova",
+  "params": {
+    "Flute": {
+      "depth": 0.55,
+      "add_fifth": false
+    },
+    "Acoustic_Guitar_nylon": {
+      "depth": 0.7,
+      "add_fifth": false
+    },
+    "Electric_Bass_finger": {
+      "depth": 1.0,
+      "add_fifth": true
+    }
+  },
+  "wet_gain": {
+    "Flute": 0.9,
+    "Acoustic_Guitar_nylon": 1.0,
+    "Electric_Bass_finger": 1.2
+  },
+  "full_mix_sub_depth": 0.45,
+  "dry_mix_atten": 0.9,
+  "full_sub_mix_gain": 0.35,
+  "soundfont": "/opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2",
+  "silence_ratio": 0.14686064202805094,
+  "rms_map": [
+    0.18500665261752672,
+    0.17356930924396854,
+    0.17079409251178929,
+    0.1588928556881826,
+    0.16584708819578406,
+    0.18389941594054546,
+    0.1759626166775449,
+    0.16926158235276673,
+    0.15958019376242893,
+    0.16605178331905235,
+    0.18120720920682729,
+    0.17094948354764672,
+    0.16857019901420572,
+    0.15986016274686093,
+    0.16647926729813495,
+    0.02586289462812528,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "pitch_check_mix": {
+    "median": 220.0,
+    "n_frames": 32,
+    "unpitched_frames": 0
+  },
+  "pitch_check_dry": {
+    "median": 220.0,
+    "n_frames": 32,
+    "unpitched_frames": 0
+  },
+  "files": {
+    "dry_full_mix.wav": 3175980,
+    "SP037-subharmonic-cuban-trova.wav": 1588012,
+    "SP037-subharmonic-cuban-trova.ogg": 126960
+  },
+  "stems": {
+    "track00_Flute": 3043628,
+    "track01_Acoustic_Guitar_nylon": 3175980,
+    "track02_Electric_Bass_finger": 3034668,
+    "track03_Acoustic_Grand_Piano": 2999340
+  },
+  "elapsed_s": 14.1
+}
