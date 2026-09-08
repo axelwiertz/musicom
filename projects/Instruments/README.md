@@ -64,9 +64,10 @@ Instruments/
     └── marimba/
 ```
 
-Current instruments (18): Violin, Viola, Cello, Double Bass, Piano, Church
-Organ, Trumpet, Trombone, French Horn, Tuba, Flute, Oboe, Clarinet, Bassoon,
-Alto Saxophone, Acoustic Guitar, Drum Kit, Marimba.
+Current instruments (25): Violin, Viola, Cello, Double Bass, Piano, Church
+Organ, Dulcimer, Trumpet, Trombone, French Horn, Tuba, Flute, Oboe, Clarinet,
+Bassoon, Alto Saxophone, Acoustic Guitar, Drum Kit, Marimba, Sitar, Koto,
+Shamisen, Kalimba, Banjo, Bagpipe.
 
 ## Musicom Integration
 

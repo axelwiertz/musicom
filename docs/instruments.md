@@ -147,6 +147,22 @@ bright ring 0.023 vs 0.008 dull control, 2.9×). Solo-render spectral check:
 4–8 kHz buzz 4.1% (no comb-filtering). Chordal voice OK (folk styles play
 2–4 note rolled chords); NOT a bass voice.
 
+**Bagpipe added** (2026-09-08): GM109, Woodwind-family sixth entry
+(instrument.md + bagpipe.py), verified end-to-end UnitMatrixComposer →
+zero-drift ✓ → MIDI → FluidSynth WAV ✓; RenderPipeline stem label
+`trackXX_Bag_pipe.wav` ✗ **QUIRK**: GM_PROGRAMS[109] = "Bag pipe" (two
+words) — the actual stem label is `Bag_pipe`, NOT `Bagpipe`; STEM_LABEL
+matches the pipeline's real label ("Bag_pipe") so stem-file lookups work.
+FluidR3 preset 109 = "BagPipe" (cosmetic only). PhaseModSynth recommended
+(sustained double-reed chanter: saw carrier, mod_depth 4.5 — highest of the
+woodwind set — for the piercing reed wall; attack 0.03 s = reeds already
+blown by bag pressure, no breath transient; sustain confirmed 0.464
+late-window ratio, no collapse). Identity: GM109 = Great Highland Bagpipe —
+monophonic 9-note chanter (A3–A4, mixolydian on D) over a constant drone;
+line-instrument quirk: modal melody over a pedal, NO dense harmony. Range
+53–96 is the GM-patch span (empirical FluidR3 sweep 8/8 notes audible);
+real chanter register is 57–69.
+
 ## Python usage
 
 ```python
@@ -192,6 +208,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | World | Koto | 107 | 51–90 | lead, melody, ornament, drone, harmony |
 | World | Shamisen | 106 | 45–89 | lead, melody, ornament, drone, countermelody |
 | World | Kalimba | 108 | 48–96 | lead, melody, ornament, drone, harmony |
+| Woodwind | Bagpipe | 109 | 53–96 | lead, melody, ornament, drone, accent |
 
 ## Stem label quirks (RenderPipeline)
 
@@ -221,6 +238,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 107 | Koto | Koto ✓ (GM_PROGRAMS[107] + FluidR3 preset 107 both "Koto") |
 | 106 | Shamisen | Shamisen ✓ (GM_PROGRAMS[106] + FluidR3 preset 106 both "Shamisen") |
 | 108 | Kalimba | Kalimba ✓ (GM_PROGRAMS[108] + FluidR3 preset 108 both "Kalimba") |
+| 109 | Bagpipe | **Bag_pipe** ✗ (GM_PROGRAMS[109] = "Bag pipe" — two words; FluidR3 preset 109 = "BagPipe") |
 | ch9/pgm0 | Drums | **Acoustic_Grand_Piano** ✗ (program-0 fallback) |
 
 > **Known off-by-one in existing entries**: ~~`trumpet.py` uses 57~~ **FIXED 2026-08-27**: trumpet is now 56 (SF2 preset 56=`SoloTrumpet`). `piano.py`=1 → actually Bright Acoustic Piano (GM #2) — cosmetic label difference only, no routing impact. Legacy registry rows kept as-is for piano; new instruments use 0-indexed programs matching pipeline+SF2.
