@@ -461,12 +461,12 @@ def _produce_fluidsynth(midi_path, out_dir, base, sr):
     """FluidSynth SoundFont render → WAV → OGG (SP-001)."""
     wav_path = out_dir / f"{base}.wav"
     ogg_path = out_dir / f"{base}.ogg"
-    pyenv = "/opt/data/micromamba/envs/musicom/bin"
+    from utilities.env import fluidsynth_bin
     sf = discover_soundfont()
     if not sf:
         raise FileNotFoundError("No SoundFont found — install FluidR3_GM.sf2 or TimGM6mb.sf2")
     r = subprocess.run(
-        [f"{pyenv}/fluidsynth", "-ni", "-g", "1.2", "-F", str(wav_path), sf, midi_path],
+        [fluidsynth_bin(), "-ni", "-g", "1.2", "-F", str(wav_path), sf, midi_path],
         capture_output=True, text=True)
     if r.returncode != 0 or not wav_path.exists() or wav_path.stat().st_size < 1000:
         raise RuntimeError(f"fluidsynth failed: {r.stderr[-500:]}")

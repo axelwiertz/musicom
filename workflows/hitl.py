@@ -98,13 +98,13 @@ def _render_excerpt(midi_path: Path, out_dir: Path, base: str,
     """Render a MIDI to a <=30s OGG excerpt (Telegram-playable)."""
     ogg_path = out_dir / f"{base}.ogg"
     wav_path = out_dir / f"{base}.wav"
-    pyenv = "/opt/data/micromamba/envs/musicom/bin"
+    from utilities.env import fluidsynth_bin
     from sound.render.fluidsynth import discover_soundfont
     sf = discover_soundfont()
     if not sf:
         raise FileNotFoundError("no SoundFont — install FluidR3_GM.sf2")
     r = subprocess.run(
-        [f"{pyenv}/fluidsynth", "-ni", "-g", "1.2", "-F", str(wav_path),
+        [fluidsynth_bin(), "-ni", "-g", "1.2", "-F", str(wav_path),
          sf, str(midi_path)],
         capture_output=True, text=True)
     if r.returncode != 0:

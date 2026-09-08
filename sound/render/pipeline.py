@@ -18,17 +18,22 @@ class RenderPipeline:
     """Full render chain: MIDI → WAV → OGG/MP3."""
 
     def __init__(self,
-                 fluidsynth_bin: str = "fluidsynth",
+                 fluidsynth_bin: Optional[str] = None,
                  soundfont_path: Optional[str] = None,
                  sample_rate: int = 44100,
                  gain: float = 1.2):
-        """
-        Args:
-            fluidsynth_bin: Path to fluidsynth binary
+        """Args:
+            fluidsynth_bin: Path to fluidsynth binary (default: resolved via
+                utilities.env.fluidsynth_bin() — $MUSICOM_FLUIDSYNTH, env dir,
+                or PATH; fixes bare-'fluidsynth'-not-found on cron envs)
+            soundfont_path: Path to .sf2 SoundFont file
             soundfont_path: Default SoundFont path
             sample_rate: Output sample rate
             gain: Gain multiplier
         """
+        if fluidsynth_bin is None:
+            from utilities.env import fluidsynth_bin as _resolve_fluid
+            fluidsynth_bin = _resolve_fluid()
         self.renderer = FluidSynthRenderer(
             fluidsynth_bin=fluidsynth_bin,
             soundfont_path=soundfont_path,

@@ -1,0 +1,22 @@
+# Musicom environment specification (micromamba/conda)
+# Generated 2026-09-08 from the working env (micromamba/envs/musicom).
+# Recreate:  micromamba create -f environment.yml   (or: conda env create -f)
+# Then:      pip install -e ".[dev]"                (editable install of repo)
+# Verify:    scripts/setup_env.sh --check
+#
+# NOTE: this file lists the DIRECT toolchain the env must provide. The full
+# transitive pin-set lives in requirements.lock (pip freeze of the working
+# env, 2026-09-08). For a byte-exact rebuild use requirements.lock first,
+# then this file for the conda-level packages (python, fluidsynth, ffmpeg).
+
+name: musicom
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pip
+  - numpy=1.26.4
+  - scipy=1.17.1
+  - fluidsynth>=2.3        # provides the fluidsynth binary (absolute path contract)
+  - pip:
+      - -r requirements.lock

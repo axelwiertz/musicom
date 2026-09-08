@@ -4,18 +4,18 @@ Wraps the fluidsynth CLI to render MIDI files to audio.
 """
 
 import glob
-import subprocess
 import os
+import subprocess
 from typing import Optional
 
 # SoundFont discovery — prefer the best available, fall back to TimGM6mb.
 # FluidR3_GM.sf2 (141MB) has proper woodwind/brass/strings patches; the
 # bundled TimGM6mb (~6MB) is a minimal GM set whose oboe/bassoon/flute
 # patches are thin and buzzy. If a larger GM set is present, use it.
+# $MUSICOM_SOUNDFONT (ONE-ENV contract) wins when set.
 _SOUNDFONT_CANDIDATES = [
     "/opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2",
     "/opt/data/soundfonts/FluidR3_GM.sf2",
-    "/usr/share/sounds/sf2/FluidR3_GM.sf2",
     "/usr/share/sounds/sf2/FluidR3_GM.sf2",
     "/usr/share/sounds/sf3/FluidR3_GM.sf3",
 ]
@@ -24,10 +24,14 @@ _SOUNDFONT_CANDIDATES = [
 def discover_soundfont(prefer: Optional[str] = None) -> Optional[str]:
     """Return the best available SoundFont path, or None if none found.
 
-    Order: explicit `prefer` arg → FluidR3 candidates → any TimGM6mb on disk.
+    Order: explicit `prefer` arg → $MUSICOM_SOUNDFONT → FluidR3 candidates →
+    any TimGM6mb on disk.
     """
     if prefer and os.path.exists(prefer):
         return prefer
+    env_sf = os.environ.get("MUSICOM_SOUNDFONT")
+    if env_sf and os.path.exists(env_sf):
+        return env_sf
     for p in _SOUNDFONT_CANDIDATES:
         if os.path.exists(p):
             return p
