@@ -1,9 +1,9 @@
 # Technical Improvement Plan — One Repo, One Env, Decoupled Paths
 
-Date: 2026-09-08. Status: **PLAN — awaiting approval on 3 decisions (§7)**.
-Scope: consolidate scattered folders into one repo, standardize on one Python
-environment (incl. fluidsynth resolution), adhere to Hermes-agent-in-Docker
-standards, plus every other inconsistency found during investigation.
+Date: 2026-09-08. Status: **EXECUTED (P0–P3 done, P4 done, P5 verify)**.
+Execution log at bottom. Defaults taken on open decisions: D1=A (tree into
+repo + symlinks), D2=Legacy into repo, D3=DiffSinger KEPT (referenced by
+human-voice-singing skill).
 
 ---
 
@@ -266,3 +266,21 @@ Phase 0 (safety) → 1 (env) → 2 (one tree) → 3 (retire) → 4 (prompts/docs
 5 (verify). Each phase ends with a green gate (pytest / preflight / job
 dry-run) + commit before the next starts. Phases 1 and 3 are independent and
 can interleave if time-boxed.
+
+---
+
+## 9. Execution log (2026-09-08)
+
+| Phase | What | Result |
+|---|---|---|
+| P0.1 | PAT scrub | remote URL cleaned (`https://github.com/axelwiertz/musicom.git`, no embedded token); credential store keeps auth working. **User still should rotate the token on github.com.** |
+| P0.2 | Backups | `backups/musicom_git_backup_20260908.tgz` (203M), `backups/projects_meta_20260908.tgz` (220M), `backups/repos_archive/*` (dead repos) |
+| P0.3 | Freeze | 6 write-jobs paused (composition, style-prod, instrument, sync, weekly-registration, human-research) |
+| P1 | One env | dead `.venv` (713M) + composer-crew venv removed; `environment.yml` + `requirements.lock` committed; `scripts/setup_env.sh` (idempotent, verified); `~/.bashrc` MUSICOM_* contract; `utilities/env.py` (env-var → relative fallback resolution); workflows/hitl + musicom_workflow + pipeline + soundfont discovery use it. **357 tests green** (`dedbfd4`) |
+| P2 | One tree | working tree rsync'd (cp) into repo; nested `.git` (3) removed; old paths → symlinks (write-through verified); .gitignore extended (html/png/sample/musicxml/xml/rpp/opus/pyc/m4a/mp3/log); sync script → commit-only; tree committed (`8a22e72`, `7b5e4c2`) |
+| P3 | Retire | musicom_framework/musicom_platform/composer-crew-framework/musicom-agent archived (`backups/repos_archive/`) + removed; music-projects + Knowledge → `projects/Legacy/` (nested git removed); trash_git_data_repo (471M) removed; DiffSinger KEPT (referenced by human-voice-singing) |
+| P4 | Prompts/docs | AGENTS.md ×3 env/one-tree contract; musicom-composer skill canonical paths + registry + dynamic method range; 8 cron prompts got ONE-ENV/ONE-TREE preamble; daw-integration/research-cron-jobs/musicom-framework-orchestration skills updated to one-tree sync |
+
+**Remaining (P5 + follow-ups):** resume paused jobs after full-cycle watch;
+rotate GitHub PAT (user action); verify one full nightly cycle 20:00→23:30
+with zero path errors; update this doc's stale §1 tables if desired.
