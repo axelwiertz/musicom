@@ -1,0 +1,28 @@
+{
+  "090-celtic-subset-walk": {
+    "duration_s": 56.02,
+    "channels": 2,
+    "silence_ratio": 0.0472,
+    "silent_secs": [
+      54,
+      55
+    ],
+    "last_audio_sec": 53,
+    "peak": 1.0,
+    "rms_mean": 0.08503,
+    "tonal_windows": "109/112"
+  },
+  "090-celtic-subset-walk-phase1": {
+    "duration_s": 55.33,
+    "channels": 2,
+    "silence_ratio": 0.106,
+    "silent_secs": [
+      53,
+      54
+    ],
+    "last_audio_sec": 52,
+    "peak": 0.2605,
+    "rms_mean": 0.04571,
+    "tonal_windows": "107/110"
+  }
+}
