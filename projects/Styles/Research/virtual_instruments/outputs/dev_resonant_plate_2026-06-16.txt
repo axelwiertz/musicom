@@ -1,0 +1,2 @@
+Pattern: C4, Eb4, G4, Bb4
+Duration: 2s total

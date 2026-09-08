@@ -1,0 +1,14 @@
+{
+  "artifact": "template_project.mid",
+  "classification": "ai-assisted",
+  "generator": "template_project/compose.py",
+  "sources": [],
+  "parameters": {
+    "bpm": 120
+  },
+  "notes": "Composed via musicom UnitMatrixComposer.",
+  "sha256": "305b77039919d841d7d63504ba47073a0c12f7893846b883b99a4f0c1bf1402d",
+  "bytes": 81,
+  "created_utc": "2026-07-20T16:09:18.829456+00:00",
+  "provenance_version": "1.0"
+}

@@ -39,3 +39,25 @@ mail_*.py
 parse_*.py
 run_check.py
 himalaya/
+
+# Full-tree project mirror (2026-09-08): working tree moved into projects/
+# Generated/visualization/DAW-format files — not library artifacts
+*.html
+*.png
+*.sample
+*.musicxml
+*.xml
+*.rpp
+*.opus
+*.pyc
+
+# Legacy nested-repo state dirs (removed 2026-09-08; history in /opt/data/backups)
+# Scratch dirs
+_cron_tmp/
+
+# Raw audio + logs merged from working tree — renderable/transient, not library
+*.m4a
+*.mp3
+*.run.log
+run.log
+*.log

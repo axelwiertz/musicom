@@ -1,0 +1,53 @@
+{
+  "composition_method": "Markov-Constraint Wavefront Sequencing (MCWS) / Method 022",
+  "classification": "ai-assisted",
+  "generator": "MarkovConstraintGenerator",
+  "rules_applied": [
+    "voice_leading (classical style)",
+    "harmonic_progression (A minor: i - V - i - V)",
+    "chord_tone_quantization",
+    "zero_drift_validation"
+  ],
+  "key": "A minor",
+  "tonic": 69,
+  "bpm": 100,
+  "ticks_per_beat": 480,
+  "form": "A-B-A-B (Verse-Chorus-Verse-Chorus)",
+  "sections": [
+    {
+      "name": "Verse_A",
+      "density": 0.6,
+      "chord": "Amin(i)"
+    },
+    {
+      "name": "Chorus_B",
+      "density": 0.85,
+      "chord": "Emaj(V)"
+    },
+    {
+      "name": "Verse_A2",
+      "density": 0.65,
+      "chord": "Amin(i)"
+    },
+    {
+      "name": "Chorus_B2",
+      "density": 0.9,
+      "chord": "Emaj(V)"
+    }
+  ],
+  "voices": [
+    "Melody",
+    "Inner",
+    "Harmony",
+    "Bass"
+  ],
+  "validation": {
+    "zero_drift_passed": true,
+    "message": "OK"
+  },
+  "timestamp": "2026-08-05T23:04:57.101554Z",
+  "source_repos": [
+    "musicom"
+  ],
+  "phase_architecture": "two-phase (generative MCWS -> musicom rules)"
+}

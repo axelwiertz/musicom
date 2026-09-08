@@ -88,6 +88,7 @@ Classification of active Musicom composition methods categorized by their primar
 | **078** | concrete | Ising Model Equilibrium Composition (IMEC) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Field/Temperature-guided) | Grid-Locked / Continuous | Meso / Spin-Lattice | $\mathcal{O}(I \cdot V \cdot S)$ | Simulates a 2D Ising spin lattice (rows = voices, columns = time slots) at thermal equilibrium via Metropolis / Wolff cluster sampling. Spin value → pitch (consonant vs passing tone); column magnetization $M(t)$ → onset density/accents; external field $h$ → HOME/LIFT/TENSE/TURN chord function; temperature schedule $T(s)$ → macro-form (cold = chorus, $T_c$ = fractal development, hot = breakdown); cluster-size distribution → texture. Equilibrium sibling of 036 ASAR / 070 CML-C; thermal foil to 071 HAM-C (quenched recall). |
 | **079** | concrete | Tintinnabuli Composition (TINC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Strict (Static Triad) | Grid-Locked / Continuous | Meso / Phrase | $\mathcal{O}(N)$ | Realizes Arvo Pärt's tintinnabuli style (1976, "1 + 1 = 1"): a stepwise diatonic M-voice ($|m_{i+1}-m_i| \le 2$) is projected note-by-note onto a single fixed tonic triad to form a T-voice (nearest triad tone above/below per a position sequence $P$). Every dyad contains exactly one triad tone → constant consonance, no functional harmony; structure from the position pattern + additive note add/drop; bell-like sacred-minimalist texture. Deterministic rules-based sibling of 056 SCCC / 066 GTTM-HC; static-harmony foil to 011 Voice-Leading Graph. |
 | **080** | concrete | Messiaen Modes of Limited Transposition (MMLT) | **Rules-Based** | Pitch, Harmony, Structure, Texture | Strict (Mode/Truncation-guided) | Grid-Locked / Continuous | Meso / Phrase | $\mathcal{O}(N)$ | Generates music inside Messiaen's seven modes of limited transposition (whole-tone, octatonic, and five more) — pitch-class sets invariant under a non-trivial transposition, hence only 2–6 distinct transpositions (33 total, the "charm of impossibilities"). Melody is a walk on the mode; harmony is the mode's symmetric truncation chords (augmented triads, diminished sevenths, tritones); section = transposition shift (a color permutation) or a mode switch. No functional harmony — tension from mode choice, register, and truncation-chord. Symmetric-subset counterpart to 025 Xenakis Sieve / 069 CWCC; atonal cousin of 065 TTSMC. |
+| **081** | concrete | Narmour Implication-Realization Melodic Composition (NIRMC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Expectation-guided) | Grid-Locked / Continuous | Meso / Implicative Chain | $\mathcal{O}(N)$ | Generates melody by treating every interval as an implication: each successor either realizes the expectation (same registral direction; similar size if the interval is small, gap-fill if large) or denies it (surprise → tension → a compensating gap-fill implication). Realization rate per section = macro-form; nested implicative chains = multi-level structure; chord-tone vs non-chord-tone = harmony; independent chains per voice = texture. Expectation-driven counterpart to 002 Markov / 066 GTTM-HC; deterministic foil to learned-transition melodic generators. |
 # Sound Production Methods Framework
 
 Sound production translates symbolic MIDI UnitMatrix data into final acoustic air pressure. Methods are categorized by execution layer: **Hardware/Acoustic Integration**, **Synthesis Engines**, or **Post-Processing / DSP**.
@@ -161,6 +162,7 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 | **SP-064** | Shepard–Risset Glissando Synthesis (SRG) | **Synthesis Engines** | Endless Ascension / Pitch-Circular Drone & Pad Timbres | Sums $N$ octave-spaced partials $f_i=f_0 2^i$ under a fixed log-frequency spectral envelope $A(\log_2 f)$ of period one octave, then glides all partials upward together by a common octave offset $r(t)=ct$ while holding the envelope stationary. After one full octave every partial lands in its neighbor's slot, so the spectrum is identical to $t{=}0$ — the pitch rises forever with zero net frequency change (the Risset endless glissando). Discrete variant steps 12 semitones on a pitch-class circle (Shepard scale); tempo analog is the Risset rhythm (endless accelerando). The additive synthesis of an auditory illusion; canonical continuous-fill pad for the Method Hybridization rule. $\mathcal{O}(N)$ per sample. |
 | **SP-065** | Brass Lip-Reed Physical Modeling (LIPS) | **Synthesis Engines** | Physical Brass Timbre (Trumpet/Trombone/Horn) | Models brass as a nonlinear self-oscillating loop: a lip valve (damped mass-spring with unilateral contact, Bernoulli flow $u \propto y\sqrt{|\Delta p|}$) coupled to a flaring bore + bell resonator via a reflection function $p[n]=\sum h[k]u[n-k]$. Pitch from bore length $L$ (valves/slide), bent by lip resonance; blowing pressure $p_m$ scales the nonlinearity so louder = brighter (free velocity→filter). Completes the physical-model family (reed SP-023, bow SP-024, plate SP-040, string SP-011/033/048). $\mathcal{O}(M)$ per sample. |
 | **SP-066** | Air-Jet Labium (Flute) Physical Modeling (FLUE) | **Synthesis Engines** | Physical Flute / Flue-Organ Timbre | Models the flute/flue pipe as a self-sustained fluid oscillator: mouth pressure $p_m$ drives an unstable air jet (Bernoulli $v_j=C_v\sqrt{2p_m/\rho}$, convection at $0.4v_j$) that flips across the labium, injecting saturated acoustic flow $Q_{ac}=v_j b\,\mathrm{clip}(\eta_L/\eta_{\max})$ into an open-open bore (half-wave resonances $f_n=(n{+}1)c/2L_{eff}$). No vibrating solid — the only fluid-instability exciter; completes the family (reed SP-023, bow SP-024, lip-reed SP-065). Breath noise $\propto p_m$ separates flute from organ. $\mathcal{O}(1)$ per sample. |
+| **SP-067** | Kelly-Lochbaum Acoustic Tube Model (Vocal Tract Physical Modeling) (KLAT) | **Synthesis Engines** | Physical Vocal / Vowel / Formant Timbres | Models the vocal tract as an N-section lossless acoustic transmission line: the area function $A_i$ (vowel geometry) sets each junction's reflection coefficient $k_i=\frac{A_i-A_{i+1}}{A_i+A_{i+1}}$, and forward/backward pressure waves scatter through the two-port Kelly-Lochbaum lattice ($p^+_{i+1}=(1+k_i)p^+_i+k_i p^-_{i+1}$). A glottal pulse train (voiced) or frication noise (unvoiced) excites the glottal end; a $1-z^{-1}$ radiation load terminates the lips. Formants emerge from the area-function geometry — no formant filters. The physical/scattering-junction member of the vocal family (vs parametric SP-015/025/028/038/046). $\mathcal{O}(N)$ per sample, N≈8–20. |
 ---
 
 
@@ -16552,3 +16554,166 @@ with input impedance $Z_p(\omega)$ at the embouchure; mouth pressure $p=Z_p\,Q_{
 - Cook, P. R., & Scavone, G. P. (1999). *The Synthesis ToolKit (STK)* — `StkFlute` implementation.
 - Verge, M.-P., Fabre, B., Hirschberg, A., & Wijnands, A. P. J. (1994/97). "Jet formation and jet velocity fluctuations in a flue organ pipe." *J. Acoust. Soc. Am.* 95(2), 1119–1132; and "Aeroacoustics of musical instruments." *Ann. Rev. Fluid Mech.*
 - De la Cuadra, P. (2005). "The sound of oscillating air jets: physics, modeling and simulation in flute-like instruments." PhD thesis, Stanford University (CCRMA).
+# Narmour Implication-Realization Melodic Composition (NIRMC) (Method 081)
+
+### Source
+The **Implication-Realization (I-R) model** of melodic expectation is the cognitive theory of **Eugene Narmour**, developed in **"The Analysis and Cognition of Basic Melodic Structures: The Implication-Realization Model" (University of Chicago Press, 1990)** and **"The Analysis and Cognition of Melodic Complexity" (University of Chicago Press, 1992)**. Narmour systematizes how listeners *expect* a melody to continue after each interval, building on the Gestalt psychology of **Leonard B. Meyer's *Emotion and Meaning in Music* (1956)** and the gap-fill principle of **Meyer's *Explaining Music* (1973)**. The model splits melodic cognition into two systems: **bottom-up** (innate, Gestalt-driven: registral direction and intervallic motion), and **top-down** (learned stylistic schemata). Experimental validation of the core expectations (continuation, reversal, gap-fill) appears in **Krumhansl (1995), "Music psychology and music theory: problems and prospects," *Music Theory Spectrum* 17(1)**; **Schellenberg (1996/1997), "Expectancy in melody," *Journal of Experimental Psychology: Human Perception and Performance* 22/23**; and **Cuddy & Lunney (1995), "Expectancies generated by melodic intervals," *Music Perception* 12(4)**. It is the *expectation-driven* branch of rules-based melody generation — the cognitive counterpart to 066 GTTM-HC (hierarchical prolongation) and the deterministic foil to 002 Markov (transition probabilities learned from data, with no theory of *why* an interval implies its successor).
+
+### Layer
+**concrete** — consumes a scale/chord pool and emits actual `MusicEvent`s (notes) into UnitMatrix cells; feeds `generators/`. The implication *structure* (which intervals imply which successors, at multiple hierarchical levels) is abstract pitch-relation design that could feed `rules/subset_network.py` (ABS-001..005), but as documented here the method emits events. Candidate code path: `generators/narmour_ir.py`.
+
+### Description
+Compose melody by treating every interval as an **implication**: given two consecutive notes, the listener (and the generator) expects a specific continuation in registral direction and interval size. The generator either **realizes** the implication (predictable → low tension, closure) or **denies** it (surprise → tension, which in turn sets up a *new* implication). Narmour's bottom-up implications from an interval of size $s$ (semitones, signed) are:
+
+1. **Registral direction (R)**: the next interval tends to continue in the *same* direction as $s$ (up implies up, down implies down, $s=0$ implies lateral/duplication).
+2. **Intervallic motion (I)**: if $|s|$ is *small* ($\le 6$, the tritone), the next interval is implied to be of *similar* size (within a tolerance, Narmour's $\pm 3$ semitones); if $|s|$ is *large* ($> 6$), the next interval is implied to be *smaller* — large leaps cannot be sustained and imply a return toward the register of the previous note (**gap-fill**).
+
+The combination of R and I yields the canonical **archetypes** (realized structures):
+
+| Archetype | Name | Direction | Size | Meaning |
+|---|---|---|---|---|
+| **P** | Process | same | similar (small) | stepwise/skipwise continuation in one direction |
+| **IP** | Intervallic Process | same | same | exact intervallic continuation (sequence/ostinato tendency) |
+| **D** | Duplication | lateral ($s=0$) | — | pitch repeated |
+| **R** | Reversal | opposite | similar | gap-fill / neighbor-tone turn |
+| **IR** | Intervallic Reversal | opposite | same | mirror of the interval |
+
+A **denial** is any successor that violates R and/or I. Denials are not errors — they are the engine of musical interest: a denied implication *itself* implies a compensating continuation (typically a stepwise **gap-fill** back across the leap, or a **registral return** to the register abandoned by a large leap). Realization rate is the primary creative dial: high realization = lyrical, predictable, "singable"; high denial = angular, dramatic, through-composed. Because denials spawn new implications, the model generates long-range **implicative chains** (nested at multiple hierarchical levels), not just local note-to-note transitions — this is what distinguishes it from Markov order-1.
+
+### Musical Elements Framework
+
+| Element | Mechanism |
+|---|---|
+| **PITCH** | each note is the realization/denial of the previous interval's implication, chosen per archetype (P/IP/D/R/IR); large intervals trigger stepwise gap-fill; register pinned to a scale/tonic via top-down schema |
+| **RHYTHM** | realized implications bind to stable (strong-beat) onsets; denials land on weak beats / syncopations; implicative strength of a note sets its duration/velocity (structural notes longer, diminutions shorter) |
+| **HARMONY** | a realized implication arriving on a chord tone = consonance/closure; a denial = dissonance (passing/neighbor/suspension) that resolves by gap-fill to a chord tone; HOME/LIFT/TENSE/TURN = the realization/denial budget per section |
+| **STRUCTURE** | nested I-R units: a low-level chain (diminutions) elaborates a higher-level implication (structural line); section = a macro-implication (registral trajectory) that closes (cadence) at the section seam |
+| **TEXTURE** | each voice = an independent implication chain; the *realization rate* per voice sets density (lyrical voice + angular voice); concurrent denials stack tension; gap-fill timing staggers onsets across voices |
+
+### UnitMatrix Integration (Voices & Sections)
+- **Rows (Voices)** = one independent I-R chain per voice. A chord tone pool (scale + current chord) supplies realization targets; each voice realizes/denies its own last interval, so voices stay melodically independent but harmonically coherent (all targets drawn from the same chord). A denial in one voice while another realizes → call-and-response texture.
+- **Columns (Sections)** = each section carries a `(realization_rate, denial_budget, registral_trajectory)` state in `{STRUCTURE}`. Verse = high realization (lyrical), chorus = moderate, bridge = low realization + long leap → big gap-fill (peak tension), outro = cadential closure (forced R + IR onto the tonic).
+- **Cells (MusicUnit)** = one note `{PITCH}` = the realized/denied successor; `{HARMONY}` = chord-tone vs non-chord-tone (denial); `{RHYTHM}` = onset/duration (strong beat if realized, weak/syncopated if denied); `{STRUCTURE}` = implicative level (structural vs diminution). Deterministic per seed → zero-drift gate satisfied; hand to `UnitMatrixComposer` per AGENTS.md.
+- **Flow**: `narmour_next(prev_note, curr_note, chord_tones, realization_rate)` per cell → fill voice sections left-to-right → `composer.validate()` must be True before `to_midi`.
+
+### Pitfalls
+1. **Over-realization = scalar monotony** — a high realization rate degenerates into unbroken P/IP runs (endless scales/sequences), the same flattening as low-order 002 Markov. Fix: enforce a minimum denial budget per phrase (e.g. 15–25%), and cap consecutive same-archetype steps.
+2. **Gap-fill greed = zigzag** — every leap immediately gap-filled produces mechanical sawtooth. Fix: allow the fill to be *deferred* (interpolate other material first) and vary fill direction/register; Narmour's gap-fill is a tendency, not a next-note obligation.
+3. **Register drift** — pure bottom-up I-R has no tonic; the line wanders out of range. Fix: pin the chain to a scale/chord pool and enforce registral return after large leaps (the melodic counterpart of 048 RBMPD's reflecting barriers).
+4. **Intervallic process lock** — IP (same size, same direction) repeated becomes a stuck sequence/ostinato. Fix: break IP after 2–3 repeats with an R or denial; treat IP as a local device, not a default.
+5. **Melody-only bias** — I-R is a melodic theory; alone it yields sparse, unaccompanied output (violates the Method Hybridization rule for sparse methods). Fix: supply a harmonic anchor (chord-tone targets) and a continuous fill layer (026 DPSM arpeggio or sustained pad) for flowing texture.
+6. **Wrong interval threshold** — treat "small" as $\le 6$ semitones (the tritone). Using $\le 4$ or $\le 12$ mis-assigns implication type: a 4th (5 semitones) is *small* in I-R terms (implies similar-size continuation), not large (which implies gap-fill). Get the threshold right or the archetypes invert.
+7. **Direction sign errors on lateral** — $s=0$ (duplication) is its own direction; coding it as "up" or "down" breaks the D archetype and the duplication→continuation logic.
+
+### Comparison With Related Methods
+| Method | Driving principle | Memory | Character |
+|---|---|---|---|
+| 002 Markov | learned transition probabilities | order-$k$ | data-driven, no theory of expectation |
+| 066 GTTM-HC | prolongational tree + preference rules | macro tree | hierarchical tonal reduction |
+| 056 SCCC | species counterpoint constraints | phrase | strict voice-leading against cantus firmus |
+| 048 RBMPD | reflected Brownian drift | particle state | organic wandering with barriers |
+| **081 NIRMC** | **interval → implied successor, realized or denied** | **implicative chain (multi-level)** | **expectation-driven, singable-or-angular dial** |
+
+### References
+- Narmour, E. (1990). *The Analysis and Cognition of Basic Melodic Structures: The Implication-Realization Model*. University of Chicago Press.
+- Narmour, E. (1992). *The Analysis and Cognition of Melodic Complexity*. University of Chicago Press.
+- Meyer, L. B. (1956). *Emotion and Meaning in Music*. University of Chicago Press.
+- Meyer, L. B. (1973). *Explaining Music*. University of California Press. (Gap-fill.)
+- Krumhansl, C. L. (1995). "Music psychology and music theory: problems and prospects." *Music Theory Spectrum* 17(1), 53–80.
+- Schellenberg, E. G. (1996/1997). "Expectancy in melody: tests of the implication-realization model." *Journal of Experimental Psychology: Human Perception and Performance* 22/23.
+- Cuddy, L. L., & Lunney, C. A. (1995). "Expectancies generated by melodic intervals: perceptual judgments of melodic continuity." *Music Perception* 12(4), 451–462.
+# Kelly-Lochbaum Acoustic Tube Model (Vocal Tract Physical Modeling) (Method SP-067)
+
+### Source
+
+The vocal tract as a concatenated acoustic-tube model originates with **Kelly, J. L., & Lochbaum, C. C. (1962), "Speech synthesis," *Proc. Fourth Int. Congress on Acoustics*, Paper G42** — the first physically-grounded speech synthesizer, which produced the famous 1961 Bell Labs "Daisy" singing demonstration. The transmission-line / two-port scattering formulation is standardized in **Markel, J. D., & Gray, A. H. (1976), *Linear Prediction of Speech*, Springer** and **Rabiner, L. R., & Schafer, R. W. (1978), *Digital Processing of Speech Signals*, Prentice-Hall (Ch. 3)**. The waveguide/scattering-junction reframing is **Smith, J. O. (2010), *Physical Audio Signal Processing*, CCRMA**. Area-function data (vowel shapes) come from **Fant, G. (1960), *Acoustic Theory of Speech Production*, Mouton**; the glottal source models from **Rosenberg, A. E. (1971)** and **Fant, Liljencrants & Lin (1985), the LF model**. KLAT is the *scattering-junction / physical* member of the vocal-synthesis family — the missing counterpart to the parametric formant methods (SP-015 PFVF, SP-025 FOF, SP-028 LPC, SP-038 VOSIM, SP-046 channel vocoder) and to the source-filter hybrids SP-045 DDSP / SP-061 CLS. It models the tract as a *physical geometry* (area function) rather than as a set of formant resonators.
+
+### Layer
+
+**Absolute** — sound production. KLAT consumes symbolic `MusicUnit` note events (pitch, duration, vowel/timbre, voicing) and renders raw audio (WAV/OGG); it emits no MIDI (that would be `concrete`) and designs no pitch pools (that would be `abstract`). Candidate code path: `sound/synthesis/kelly_lochbaum.py` (sibling to `vocal.py`, `formant_voice.py`, `karplus_strong.py`, `bowed.py`).
+
+### Description
+
+Kelly-Lochbaum synthesis models the human vocal tract as a **lossless transmission line**: a concatenation of N equal-length cylindrical tube sections (total length L ≈ 17 cm for an adult male), each of cross-sectional area $A_i$. The **area function** $A_i$ is the physical shape of the tract; vowels are distinct area functions (Fant's /a/ /i/ /u/). A **glottal source** (quasi-periodic glottal-pulse train for voiced sounds, or turbulent noise at a constriction for unvoiced) excites one end; the **lips** terminate the other end with a radiation load. Acoustic traveling waves (forward/backward pressure waves) scatter through the tube junctions; the junction reflection coefficients are set *entirely* by the area ratios. The resonances (formants) emerge *automatically* from the area-function geometry — no formant filters are specified. Time-varying the area function (morphing between vowel shapes) produces formant transitions and diphthongs, exactly as the physical tract moves.
+
+### Technical Mechanics
+
+**1. Tube discretization.** The tract of length L is split into N cylindrical sections of length $\Delta x = L/N$. For sampling rate $f_s$, the standard choice $\Delta x = c/(2 f_s)$ (c = 343 m/s) makes each section a half-sample of one-way travel; N ≈ 8–20 sections suffice for the first 3–4 formants.
+
+**2. Reflection coefficients.** At the junction between section i (area $A_i$) and section i+1 (area $A_{i+1}$), the pressure-wave reflection coefficient is
+$$k_i = \frac{A_i - A_{i+1}}{A_i + A_{i+1}}, \qquad -1 < k_i < 1.$$
+The magnitude $|k_i|$ grows with the area change; $k_i=0$ for a uniform tube, $k_i \to +1$ toward a closed (glottal) end, $k_i \to -1$ toward an open (lip) end.
+
+**3. Kelly-Lochbaum scattering junction.** With forward pressure wave $p^+_i$ and backward wave $p^-_i$ in section i, the lossless two-port scattering at junction i is
+$$p^+_{i+1} = (1+k_i)\,p^+_i + k_i\,p^-_{i+1}$$
+$$p^-_i = k_i\,p^+_i + (1-k_i)\,p^-_{i+1}.$$
+(Some texts use volume-velocity waves with flipped signs; the pressure convention above matches Markel–Gray.) Energy is conserved exactly: the scattering matrix is unitary. Each section contributes one unit delay per direction; the full N-section lattice is a chain of these junctions interleaved with delays — a **waveguide chain** (a special case of SP-033's 1D waveguide, with section-varying impedance).
+
+**4. Glottal source.** At the glottal (section 0) end, the excitation is the glottal volume-velocity $u_g(t)$:
+- **Voiced:** quasi-periodic glottal pulse (Rosenberg / LF model) at fundamental frequency $f_0$ — a smooth, skewed pulse train whose spectrum rolls off ~ −12 dB/oct; period $T_0 = 1/f_0$ from the note's pitch.
+- **Unvoiced:** white noise injected at a constriction (frication) or at the glottis (aspiration), band-limited.
+The glottal boundary reflects with $k_g \approx +0.99$ (nearly closed during the closed phase) but is time-varying over the glottal cycle.
+
+**5. Lip radiation.** At the lips (section N), volume velocity radiates; the pressure wave reflects with $r_L \approx -1$ (pressure node at the open end), and the radiated pressure is (to first order) the time derivative of the lip volume velocity:
+$$R(z) = 1 - z^{-1},$$
+a +6 dB/oct high-pass tilt — the radiation load. Combined with the −12 dB/oct glottal rolloff, the net spectrum tilts −6 dB/oct, matching the observed speech spectrum.
+
+**6. Formants emerge from geometry.** The standing-wave resonances are set by the area function alone. Uniform tube ($A_i$ = const, $k_i=0$) → resonances at odd quarter-wave frequencies $f_n = (2n+1)c/4L$. Constrictions (small $A_i$) shift formants: a front constriction raises F2 (the /i/ cavity geometry), a back constriction lowers F2 (/u/), a wide pharynx raises F1 (/a/). Each vowel's area function is a lookup table; formant trajectories = interpolating $A_i(t)$ (or $k_i(t)$) between vowel targets.
+
+**7. Time-varying tract.** For diphthongs, transitions, and syllable gestures, the reflection coefficients become time-varying $k_i(t)$. Interpolate the *area function* (not the $k_i$ directly, to avoid transient artifacts) with linear or cosinusoidal ramps across a phoneme boundary; the formants glide along the corresponding path.
+
+**8. Losses.** Real tracts have wall-vibration, boundary-layer, and radiation losses that damp and widen the formants. Model them by (a) scaling each junction with a small loss factor $(1 - \mu_i)$, or (b) replacing the lossless junction with a slightly lossy one (complex reflection coefficients), giving each formant its bandwidth.
+
+**Cost:** $\mathcal{O}(N)$ per sample (N ≈ 8–20 two-port junctions + 2N delays); trivially real-time and vectorizable across voices; deterministic per seed (seeded frication-noise RNG). This is the *physical* (geometric) vocal model — far cheaper than FEM/FDTD (SP-040) but still shape-driven, unlike the parametric formant filters (SP-015/025).
+
+### Musical Elements Framework
+
+| Element | Mechanism |
+|---|---|
+| PITCH | $f_0$ → glottal pulse period $T_0 = f_s/f_0$; a sung note = one $f_0$; glissando = continuous $f_0$ ramp; vibrato = $f_0$ LFO (~5–6 Hz, ±0.5 st) |
+| RHYTHM | onset = glottal pulse-train start (note-on); articulation = glottal closure timing (legato vs staccato = open/close glottal between notes); consonant = noise burst + formant transient |
+| HARMONY | one voice = one tract instance; chord = N parallel instances at different $f_0$; formant alignment (shared vowel) vs formant independence (different vowels) = blend vs separation |
+| STRUCTURE | per-section vowel schedule (the "lyric") = area-function trajectory across columns; section boundaries = phoneme/target changes |
+| TEXTURE | voicing mode (voiced/unvoiced/whisper/breathy = noise-to-pulse mix) sets timbre; vowel = formant shape; breathiness = aspiration noise added to glottal flow; consonant frication = constriction noise |
+
+### UnitMatrix Integration
+
+- **Rows (Voices)** = one KLAT instance per vocal voice (soprano/alto/tenor/bass, or lead + backing choir); each renders independently, then summed and spatialized (SP-021/034/043).
+- **Columns (Sections)** = per-section `{STRUCTURE}` carries the vowel/lyric schedule (a sequence of area-function targets per section) plus voicing mode and breathiness.
+- **Cells (MusicUnit)** = `{PITCH}` → $f_0$ (and glissando/vibrato params); `{RHYTHM}` → glottal onset/duration and articulation; `{TEXTURE}` → vowel index + voicing/breathiness + velocity → source amplitude.
+- **Flow:** `kelly_lochbaum(note_spec, vowel)` per note → glottal source train → scattering lattice → radiation filter → section buffer → mix → post-FX (SP-007 EQ, SP-008 DRC, SP-009/032 reverb). Note-event consumer; deterministic per seed; `validate()` zero-drift gate unaffected (audio layer, no MIDI). Forms a complete vocal chain with SP-045 DDSP (learned f0/loudness extraction feeding KLAT's source) and SP-061 CLS (cepstral cross-synthesis of the resonator).
+
+### Pitfalls
+
+1. **Reflection-coefficient instability** — $k_i$ must satisfy $|k_i|<1$; negative or zero areas (bad interpolation) push $|k_i| \ge 1$ → divergence. Fix: clamp areas to a floor ($A_i \ge A_{min}$), interpolate areas not $k_i$.
+2. **Glottal-pulse aliasing** — a raw impulse/pulse train aliases. Fix: band-limited glottal pulse (BLIT/polyBLEP or the Rosenberg polynomial, which is intrinsically band-limited), or oversample the source.
+3. **Formant-count limit** — N sections resolve at most ~N/2 formants; too few sections flatten vowel distinctions. Fix: N ≥ 10 (4 formants), or use a frequency-warped tube.
+4. **Time-varying clicks** — step changes in $A_i(t)$ (or $k_i$) cause discontinuity artifacts. Fix: ramp over ~10–30 ms at phoneme boundaries; update coefficients sample-smoothly.
+5. **Radiation tilt** — the $1-z^{-1}$ radiation load adds +6 dB/oct; forgetting it leaves the output dull/muddy. Fix: apply the radiation filter, and de-emphasize when A/B-testing against formant-filter methods.
+6. **DC / near-DC drift** — the nearly-closed glottal boundary $k_g \approx +0.99$ plus a DC-ish source can accumulate. Fix: DC blocker (~20 Hz) at the output.
+7. **Nondeterminism** — unseeded frication/aspiration noise breaks reproducible renders. Fix: seed the RNG per voice/seed.
+8. **Sparse input stays sparse** — KLAT is a timbre engine, not a rhythm generator; driving it with sparse 011/032 output yields sparse syllables. Fix: add a continuous fill layer (026 DPSM, sustained pad) per the Method Hybridization rule.
+9. **Nasal/consonant coverage** — a single tube has no nasal side-branch or turbulent constriction detail; pure KLAT under-articulates consonants. Fix: add a parallel nasal tract branch and a constriction-noise injector for fricatives/plosives.
+
+### Comparison With Related Methods
+
+| Method | Tract model | Source | Character |
+|---|---|---|---|
+| SP-015 PFVF | parallel bandpass formants | pulse train | parametric, per-formant control |
+| SP-025 FOF | overlapping wave-packets | wave packets | time-domain formants, smooth morphs |
+| SP-028 LPC | all-pole IIR | impulse/noise | compact, data-derived |
+| SP-038 VOSIM | sin² chirp trains | chirps | formant from chirp geometry |
+| SP-046 channel vocoder | filter bank | carrier | envelope transfer |
+| SP-045 DDSP | learned harmonic+noise | neural | interpretable neural |
+| **SP-067 KLAT** | **physical tube (area function)** | **glottal pulse / frication** | **geometry-driven, formants emergent** |
+
+### References
+
+- Kelly, J. L., & Lochbaum, C. C. (1962). "Speech synthesis." *Proc. Fourth Int. Congress on Acoustics*, Paper G42.
+- Markel, J. D., & Gray, A. H. (1976). *Linear Prediction of Speech*. Springer.
+- Rabiner, L. R., & Schafer, R. W. (1978). *Digital Processing of Speech Signals*. Prentice-Hall. (Ch. 3.)
+- Fant, G. (1960). *Acoustic Theory of Speech Production*. Mouton.
+- Fant, G., Liljencrants, J., & Lin, Q. (1985). "A four-parameter model of glottal flow." *STL-QPSR* 26(4).
+- Rosenberg, A. E. (1971). "Effect of glottal pulse shape on the quality of natural vowels." *J. Acoust. Soc. Am.* 49(2B), 583–590.
+- Smith, J. O. (2010). *Physical Audio Signal Processing*. CCRMA. (Scattering junctions, waveguide vocal tract.)
+- Zölzer, U. (ed.) (2011). *DAFX: Digital Audio Effects*, 2nd ed. Wiley. (Physical-modeling section.)

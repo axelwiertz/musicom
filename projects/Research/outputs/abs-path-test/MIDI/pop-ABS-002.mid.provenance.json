@@ -1,0 +1,41 @@
+{
+  "artifact": "pop-ABS-002.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom_workflow.compose(style=pop, method=ABS-002:subset_walk=maj0,maj5,maj0,maj5,min2)",
+  "sources": [
+    "style_registry:pop",
+    "method:ABS-002:subset_walk=maj0,maj5,maj0,maj5,min2"
+  ],
+  "parameters": {
+    "bpm": 120,
+    "form": "intro-verse-chorus-bridge-outro",
+    "voices": [
+      [
+        "Lead",
+        "Flute"
+      ],
+      [
+        "Pad",
+        "Piano"
+      ],
+      [
+        "Bass",
+        "Double Bass"
+      ],
+      [
+        "Arp",
+        "Clarinet"
+      ],
+      [
+        "Drums",
+        "Drum Kit"
+      ]
+    ],
+    "seed": 7
+  },
+  "notes": "",
+  "sha256": "7a43efa9290dcea3476e8b35ecbe020795c13d562ac3069125b39612df79abf4",
+  "bytes": 4333,
+  "created_utc": "2026-09-02T09:14:02.635300+00:00",
+  "provenance_version": "1.0"
+}
