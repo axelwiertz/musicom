@@ -7,10 +7,17 @@ If this file and README/QUICK_REFERENCE disagree, this file wins.
 
 | Thing | Value |
 |---|---|
-| Python env | `/opt/data/micromamba/envs/musicom/bin/python` |
+| Python env | `$MUSICOM_PYTHON` → `/opt/data/micromamba/envs/musicom/bin/python` (ONE-ENV contract, see `utilities/env.py`) |
 | Package | `musicom` 0.1.0, installed **editable** (`pip install -e ".[dev]"`) |
-| Repo root | `/opt/data/repos/musicom` |
-| SoundFont | `FluidR3_GM.sf2` (preferred) or `TimGM6mb.sf2` (fallback) via `discover_soundfont()` |
+| Repo root | `$MUSICOM_ROOT` → `/opt/data/repos/musicom` (env vars in `~/.bashrc`, auto-sourced) |
+| Fluidsynth | `$MUSICOM_FLUIDSYNTH` → `/opt/data/micromamba/envs/musicom/bin/fluidsynth`; bare `fluidsynth` on PATH via env |
+| SoundFont | `$MUSICOM_SOUNDFONT` → FluidR3_GM.sf2 (preferred) or TimGM6mb.sf2 (fallback) via `discover_soundfont()` |
+| Project tree | `/opt/data/repos/musicom/projects/` is the SINGLE working tree; `/opt/data/projects/{Styles,Research,Instruments}` are symlinks to it (2026-09-08 restructure) |
+
+Resolution helpers (never hardcode absolute paths in new code):
+```python
+from utilities.env import repo_root, python_bin, fluidsynth_bin, soundfont_path
+```
 
 ## Import rules (do not guess)
 

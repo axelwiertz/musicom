@@ -45,7 +45,8 @@ This is what guarantees **zero track drift** — the whole reason the engine exi
 
 ## Output rules
 
-- Every artifact → its own subfolder: `/opt/data/projects/Research/outputs/<project>/`
+- Every artifact → its own subfolder: `$MUSICOM_ROOT/projects/Research/outputs/<project>/`
+  (alias: `/opt/data/projects/Research/outputs/<project>/` — symlinked)
 - After render: assert file size > 40 bytes (empties historically 16–22 B).
 - Write a `provenance.json` sidecar (`from workflows.provenance import write_provenance`).
 - Visualize before trusting: `from visualization.grid import write_grid_visualization`.
@@ -53,13 +54,14 @@ This is what guarantees **zero track drift** — the whole reason the engine exi
 ## Before you commit / finish — run the preflight
 
 ```bash
-/opt/data/micromamba/envs/musicom/bin/python \
-  /opt/data/projects/Research/preflight_check.py <your_project_dir>
+$MUSICOM_PYTHON \
+  $MUSICOM_ROOT/projects/Research/preflight_check.py <your_project_dir>
 ```
 
 Exit 0 = compliant. Non-zero = you used forbidden raw-MIDI/custom code — fix it.
 
 ## Reference
 
-Full engine guide: `/opt/data/repos/musicom/AGENTS.md`. Copy a fresh project from
-`/opt/data/projects/Research/_TEMPLATE/`.
+Full engine guide: `$MUSICOM_ROOT/AGENTS.md` (alias:
+`/opt/data/repos/musicom/AGENTS.md`). Copy a fresh project from
+`$MUSICOM_ROOT/projects/Research/_TEMPLATE/`.

@@ -7,7 +7,7 @@
 All MIDI composition in this folder MUST go through the installed `musicom`
 engine. Do **not** hand-roll MIDI with raw `mido`, custom note loops, or ad-hoc numpy event arrays.
 
-**Python env:** `/opt/data/micromamba/envs/musicom/bin/python`
+**Python env:** `$MUSICOM_PYTHON` → `/opt/data/micromamba/envs/musicom/bin/python` (ONE-ENV contract; bare `fluidsynth` on PATH via `~/.bashrc`)
 
 ### Required imports (work from any cwd)
 
@@ -55,13 +55,14 @@ composer.to_midi(out_path)
 ## Preflight
 
 ```bash
-/opt/data/micromamba/envs/musicom/bin/python \
-  /opt/data/projects/Research/preflight_check.py <your_project_dir>
+$MUSICOM_PYTHON \
+  $MUSICOM_ROOT/projects/Research/preflight_check.py <your_project_dir>
 ```
 
 ## Starter template
 
-Copy from `/opt/data/projects/Research/_TEMPLATE/`.
+Copy from `$MUSICOM_ROOT/projects/Research/_TEMPLATE/` (alias:
+`/opt/data/projects/Research/_TEMPLATE/` — symlinked).
 
 ## Reference
 
