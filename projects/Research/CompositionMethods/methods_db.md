@@ -89,6 +89,7 @@ Classification of active Musicom composition methods categorized by their primar
 | **079** | concrete | Tintinnabuli Composition (TINC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Strict (Static Triad) | Grid-Locked / Continuous | Meso / Phrase | $\mathcal{O}(N)$ | Realizes Arvo Pärt's tintinnabuli style (1976, "1 + 1 = 1"): a stepwise diatonic M-voice ($|m_{i+1}-m_i| \le 2$) is projected note-by-note onto a single fixed tonic triad to form a T-voice (nearest triad tone above/below per a position sequence $P$). Every dyad contains exactly one triad tone → constant consonance, no functional harmony; structure from the position pattern + additive note add/drop; bell-like sacred-minimalist texture. Deterministic rules-based sibling of 056 SCCC / 066 GTTM-HC; static-harmony foil to 011 Voice-Leading Graph. |
 | **080** | concrete | Messiaen Modes of Limited Transposition (MMLT) | **Rules-Based** | Pitch, Harmony, Structure, Texture | Strict (Mode/Truncation-guided) | Grid-Locked / Continuous | Meso / Phrase | $\mathcal{O}(N)$ | Generates music inside Messiaen's seven modes of limited transposition (whole-tone, octatonic, and five more) — pitch-class sets invariant under a non-trivial transposition, hence only 2–6 distinct transpositions (33 total, the "charm of impossibilities"). Melody is a walk on the mode; harmony is the mode's symmetric truncation chords (augmented triads, diminished sevenths, tritones); section = transposition shift (a color permutation) or a mode switch. No functional harmony — tension from mode choice, register, and truncation-chord. Symmetric-subset counterpart to 025 Xenakis Sieve / 069 CWCC; atonal cousin of 065 TTSMC. |
 | **081** | concrete | Narmour Implication-Realization Melodic Composition (NIRMC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Expectation-guided) | Grid-Locked / Continuous | Meso / Implicative Chain | $\mathcal{O}(N)$ | Generates melody by treating every interval as an implication: each successor either realizes the expectation (same registral direction; similar size if the interval is small, gap-fill if large) or denies it (surprise → tension → a compensating gap-fill implication). Realization rate per section = macro-form; nested implicative chains = multi-level structure; chord-tone vs non-chord-tone = harmony; independent chains per voice = texture. Expectation-driven counterpart to 002 Markov / 066 GTTM-HC; deterministic foil to learned-transition melodic generators. |
+| **082** | concrete | Random Boolean Network Criticality Composition (RBNCC) | **Nature-Led** | Structure, Pitch, Harmony, Rhythm, Texture | Weak (Self-Organizing) | Grid-Locked / Continuous | Meso / Attractor Cycle | $\mathcal{O}(N \cdot T)$ | Composes by running a synchronous random Boolean network (Kauffman's gene-regulatory model) at its critical point (edge of chaos): the deterministic state trajectory falls into an attractor cycle decoded into a repeating groove/chord-progression loop. Connectivity $K$ and output bias $p$ are the creative dials ($K_c = 1/[2p(1-p)]$; ordered $K<K_c$ = short catchy loop, critical $K\approx K_c$ = rich phrase, chaotic $K>K_c$ = tension/transient). Pre-attractor transient = connective/tension material; frozen node core = harmonic scaffold, unstable periphery = figuration. Self-organizing discrete counterpart to 036 ASAR / 071 HAM-C; deterministic-per-seed foil to 002 Markov. |
 # Sound Production Methods Framework
 
 Sound production translates symbolic MIDI UnitMatrix data into final acoustic air pressure. Methods are categorized by execution layer: **Hardware/Acoustic Integration**, **Synthesis Engines**, or **Post-Processing / DSP**.
@@ -163,7 +164,8 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 | **SP-065** | Brass Lip-Reed Physical Modeling (LIPS) | **Synthesis Engines** | Physical Brass Timbre (Trumpet/Trombone/Horn) | Models brass as a nonlinear self-oscillating loop: a lip valve (damped mass-spring with unilateral contact, Bernoulli flow $u \propto y\sqrt{|\Delta p|}$) coupled to a flaring bore + bell resonator via a reflection function $p[n]=\sum h[k]u[n-k]$. Pitch from bore length $L$ (valves/slide), bent by lip resonance; blowing pressure $p_m$ scales the nonlinearity so louder = brighter (free velocity→filter). Completes the physical-model family (reed SP-023, bow SP-024, plate SP-040, string SP-011/033/048). $\mathcal{O}(M)$ per sample. |
 | **SP-066** | Air-Jet Labium (Flute) Physical Modeling (FLUE) | **Synthesis Engines** | Physical Flute / Flue-Organ Timbre | Models the flute/flue pipe as a self-sustained fluid oscillator: mouth pressure $p_m$ drives an unstable air jet (Bernoulli $v_j=C_v\sqrt{2p_m/\rho}$, convection at $0.4v_j$) that flips across the labium, injecting saturated acoustic flow $Q_{ac}=v_j b\,\mathrm{clip}(\eta_L/\eta_{\max})$ into an open-open bore (half-wave resonances $f_n=(n{+}1)c/2L_{eff}$). No vibrating solid — the only fluid-instability exciter; completes the family (reed SP-023, bow SP-024, lip-reed SP-065). Breath noise $\propto p_m$ separates flute from organ. $\mathcal{O}(1)$ per sample. |
 | **SP-067** | Kelly-Lochbaum Acoustic Tube Model (Vocal Tract Physical Modeling) (KLAT) | **Synthesis Engines** | Physical Vocal / Vowel / Formant Timbres | Models the vocal tract as an N-section lossless acoustic transmission line: the area function $A_i$ (vowel geometry) sets each junction's reflection coefficient $k_i=\frac{A_i-A_{i+1}}{A_i+A_{i+1}}$, and forward/backward pressure waves scatter through the two-port Kelly-Lochbaum lattice ($p^+_{i+1}=(1+k_i)p^+_i+k_i p^-_{i+1}$). A glottal pulse train (voiced) or frication noise (unvoiced) excites the glottal end; a $1-z^{-1}$ radiation load terminates the lips. Formants emerge from the area-function geometry — no formant filters. The physical/scattering-junction member of the vocal family (vs parametric SP-015/025/028/038/046). $\mathcal{O}(N)$ per sample, N≈8–20. |
----
+| **SP-068** | Bytebeat Synthesis (Integer-Expression Algorithmic Synthesis) | **Synthesis Engines** | Deterministic Chip / Glitch / Looping Timbre | Evaluates an integer expression $f(t)$ of a monotonic sample counter $t$ once per sample and takes the low byte as the waveform ($y=f(t) \& 255$), using only integer arithmetic and bitwise ops (shift/AND/XOR). Pitch = multiplier $K \to f = f_s\cdot\gcd(K,256)/256$ (or a phase accumulator for exact pitch); octave = `t>>s`; rhythm = `(t>>s)&mask` gates; harmony = additive/AND-XOR term stacks; macro-form = high-bit term `t>>P`. $\mathcal{O}(1)$ per sample, zero state, inherently looping (counter wraps mod $2^N$). The pure-integer, expression-driven counterpart to SP-035 GENDYN / SP-057 Chua; canonical continuous-fill layer for the Method Hybridization rule. |
+|---|
 
 
 # Higher-Order Ambisonics (HOA) Spatialization (Method SP-034)
@@ -16717,3 +16719,146 @@ a +6 dB/oct high-pass tilt — the radiation load. Combined with the −12 dB/oc
 - Rosenberg, A. E. (1971). "Effect of glottal pulse shape on the quality of natural vowels." *J. Acoust. Soc. Am.* 49(2B), 583–590.
 - Smith, J. O. (2010). *Physical Audio Signal Processing*. CCRMA. (Scattering junctions, waveguide vocal tract.)
 - Zölzer, U. (ed.) (2011). *DAFX: Digital Audio Effects*, 2nd ed. Wiley. (Physical-modeling section.)
+# Random Boolean Network Criticality Composition (RBNCC) (Method 082)
+
+### Source
+The **random Boolean network (RBN)** was introduced by **Stuart A. Kauffman (1969, "Metabolic stability and epigenesis in randomly constructed genetic nets," *Journal of Theoretical Biology* 22:437–467)** as a random model of gene regulatory networks, later formalized as the **NK model** (Kauffman 1993, *The Origins of Order*, Oxford University Press). A network of $N$ binary variables ("genes"/nodes), each driven by a randomly assigned Boolean function of $K$ other nodes, synchronously updates every tick. Its central discovery is a **phase transition controlled by $K$ and the output bias $p$**: for $K < K_c = 1/[2p(1-p)]$ the dynamics are **ordered** (short attractor cycles, high mutual overlap, frozen nodes — strong memory), for $K > K_c$ they are **chaotic** (long attractor cycles, sensitive to initial conditions, no memory), and at $K \approx K_c$ the network sits at the **edge of chaos** — the regime where Kauffman (and later Langton 1990) hypothesized life, computation, and adaptive systems to be most evolvable and information-rich. The critical regime yields attractor cycles of moderate, *organically varying* length and "snowflake" structure (a frozen ordered core plus a fluctuating, unstable periphery). Derrida & Pomeau (1986, "Random networks of automata: a simple annealed approximation," *Europhysics Letters* 1:45–49) derived the annealed approximation $K_c = 1/[2p(1-p)]$; for the balanced case $p=0.5$, $K_c = 2$. **Criticality tuning** as a creative dial is the musical novelty here: RBNCC is the *edge-of-chaos* member of the Nature-Led paradigm — the discrete, self-organizing counterpart to 036 ASAR (sandpile self-organized criticality) and 071 HAM-C (Hopfield fixed-point memory), and the deterministic-per-seed foil to learned/generative methods.
+
+### Layer
+**concrete** — consumes a per-section connectivity/attractor spec and emits actual `MusicEvent`s (pitch, onset, duration, velocity) into UnitMatrix cells; feeds `generators/`. The network *topology and its attractor cycle* (which binary states recur, in what order) is a transposition-invariant structural design that could feed `rules/subset_network.py` (ABS-001..005) as a pattern walk, but as documented here the method emits events. Candidate code path: `generators/boolean_network.py`.
+
+### Description
+Model composition as a **synchronous Boolean network** of $N$ binary nodes, one per "musical decision bit" (e.g. 12 pitch-class on/off flags, or per-voice on/off × onset/rest flags). At each tick the full state vector $x(t) \in \{0,1\}^N$ updates in parallel via the network's update rules; the resulting **state trajectory** is a deterministic walk that falls, after a transient, into an **attractor cycle** — a finite, repeating sequence of states that functions as a *self-generated loop/groove*. Because the trajectory is finite-state and deterministic, it *must* cycle; the creative control is **how long and how varied the cycle is**, which is set by tuning the network to its critical point. The workflow:
+
+1. **Build the network** — $N$ nodes, each with $K$ random incoming edges and a random truth table (bias $p$). Frozen nodes (whose function ignores most inputs) act as the "harmonic scaffold"; unstable nodes act as the "figuration".
+2. **Tune to criticality** — set $K \approx K_c$ (2 for $p=0.5$) so the attractor cycle is long enough to be musically interesting but not so long it becomes white noise; adjust $p$ to bias the on/off density (pitch density / note density).
+3. **Run the trajectory** — from a seed state, iterate; discard the transient; record the attractor cycle as the **loop**.
+4. **Decode state → music** — each node's on/off bit maps to a musical feature (pitch class present, note onset, accent); each tick maps to a time step; the attractor cycle maps to a repeating section/groove.
+5. **Compose form** — different sections use different subnetworks (or different $K/p$), so verse/chorus/bridge are different attractor cycles; transitions = the transient trajectory between two basins (one-shot, non-repeating connective tissue).
+
+Two sub-modes: **cycle mode** (loop the attractor — ostinato/groove/riff) and **transient mode** (play the pre-attractor transient — the "intro" that resolves into the cycle, giving tension→release). Deterministic per seed; the parallel update gives a single global clock pulse per tick → naturally grid-aligned, but node subsets may update asynchronously to introduce micro-rhythmic fluidity.
+
+### Musical Elements Framework
+
+| Element | Mechanism |
+|---|---|
+| **PITCH** | a 12-bit sub-network encodes pitch classes per tick (bit=1 → that pc is sounding); the frozen core pins the tonic/mode (scale), the unstable periphery adds passing tones/color; different attractor states = different chord/scale subsets |
+| **RHYTHM** | each synchronous tick = one time step; node on/off patterns form onset grids; attractor-cycle length × tick duration = bar/loop length; asynchronous sub-updates or skipped ticks = syncopation/micro-timing |
+| **HARMONY** | the attractor's 12-bit states are chord/scale subsets — the cycle is a *chord progression* (each state a chord); transition between states = voice-leading; $p$ controls chord density (dense vs sparse); HOME/LIFT/TENSE/TURN = where a section's network sits relative to $K_c$ |
+| **STRUCTURE** | the attractor cycle = the loop/groove (section backbone); the transient = intro/outro connective tissue; section = one network's cycle; form = a sequence of subnetworks with different $(K,p)$; cycle length variance across sections = macro-form contrast |
+| **TEXTURE** | each voice = an independent node subset (or independent network) sharing the clock; frozen nodes = sustained/pad layer, unstable nodes = figuration/percussive layer; number of active bits per tick = density |
+
+### UnitMatrix Integration (Voices & Sections)
+- **Rows (Voices)** = one node subset (or sub-network) per voice, all clocked by the same tick. A frozen-node subset drives sustained pads/bass (long on-states); an unstable-node subset drives lead/melody or percussion (fast flipping). Voices stay mutually coherent because they share the global state/clock, but remain rhythmically distinct because each reads different nodes.
+- **Columns (Sections)** = each section carries a `(K, p, N_nodes, mode)` spec in `{STRUCTURE}`. Verse = ordered ($K<K_c$, short catchy cycle); chorus = near-critical ($K\approx K_c$, longer, richer cycle); bridge = chaotic-tending ($K>K_c$, transient-only, no stable loop) for peak tension; outro = strongly ordered (point attractor → single held chord/resolution).
+- **Cells (MusicUnit)** = `{PITCH}` = the decoded 12-bit chord/subset at tick $t$; `{RHYTHM}` = tick onset + on-state duration; `{HARMONY}` = the chord/scale subset (pc set); `{TEXTURE}` = active-bit count → velocity/density. Deterministic per seed → zero-drift gate satisfied; hand to `UnitMatrixComposer` per AGENTS.md.
+- **Flow**: `build_rbn(N, K, p, seed)` → `run(n_steps, x0)` → `detect_cycle()` → decode attractor states into `create_note_unit`/`create_chord_unit` cells → `composer.validate()` must be True before `to_midi`.
+
+### Pitfalls
+1. **Unmusically long attractors** — at $K \gg K_c$ attractor lengths blow up exponentially (near $2^N$), degenerating into white-noise output. Fix: tune $K$ to $\approx K_c$ (2 for $p=0.5$) and cap the reported cycle length; if the detected cycle exceeds a musical bound (e.g. 64 ticks), reduce $K$ or $p$ and rebuild.
+2. **Point-attractor deadlock** — at $K \ll K_c$ the network collapses to a 1-state fixed point (a single held chord / frozen drone, no motion). Fix: raise $K$ toward $K_c$, or deliberately *perturb* one node per phrase to re-seed the transient (a controlled "mutation" that re-launches the trajectory).
+3. **Transient-length ambiguity** — the transient (pre-attractor) length is unpredictable; using it directly as an intro yields variable-length sections. Fix: detect the attractor first (Floyd's/Brent's cycle detection), measure the transient, then either pad/trim to the section bar count or use only the cycle for grid-locked sections and reserve the transient for fluid/through-composed passages.
+4. **Density bias from $p$** — the output bias $p$ directly sets average note density; a "fair coin" network ($p=0.5$) gives ~50% note density (too dense for sparse textures). Fix: tune $p$ per voice ($p\approx0.3$ for sparse rhythm, $p\approx0.7$ for sustained pad), remembering that $p$ also moves $K_c$ (recompute $K_c = 1/[2p(1-p)]$ whenever $p$ changes).
+5. **Sparse-output hazard** — a near-critical network with low $p$ yields sparse, gap-filled textures; per the Method Hybridization rule, pair RBNCC with a continuous fill layer (026 DPSM arpeggios, sustained pad, or walking bass) to maintain flow when using it as the sole rhythmic generator.
+6. **Decode ambiguity** — mapping binary states to pitch classes can produce repeated/unvoiced chords; a state may decode to silence (all bits 0) or a dense cluster (all bits 1). Fix: enforce a minimum sounding-bit floor and a maximum cluster size (voice-leading constraints), or decode via subset-prime-form lookup (reuse `rules/set_theory.py`).
+7. **Sync-update rigidity** — pure synchronous update locks every voice to the same global grid (staccato, machine-like). Fix: update node subsets asynchronously (random subset per tick) or derive onset offsets from node update order, to reintroduce micro-rhythmic fluidity without breaking determinism.
+
+### Comparison With Related Methods
+| Method | Driving principle | Update | Character |
+|---|---|---|---|
+| 021 Cellular Automata | local rule table on a spatial grid | synchronous | spatial texture/density |
+| 036 ASAR | sandpile avalanches (SOC) | asynchronous | critical avalanche rhythms |
+| 071 HAM-C | Hopfield energy descent | asynchronous | fixed-point memory recall |
+| 002 Markov | transition probabilities | — | data-driven continuation |
+| **082 RBNCC** | **Boolean network at edge of chaos** | **sync (or mixed)** | **self-generated attractor loops, criticality dial** |
+
+### References
+- Kauffman, S. A. (1969). "Metabolic stability and epigenesis in randomly constructed genetic nets." *Journal of Theoretical Biology* 22(3), 437–467.
+- Kauffman, S. A. (1993). *The Origins of Order: Self-Organization and Selection in Evolution*. Oxford University Press.
+- Derrida, B., & Pomeau, Y. (1986). "Random networks of automata: a simple annealed approximation." *Europhysics Letters* 1(2), 45–49.
+- Langton, C. G. (1990). "Computation at the edge of chaos: phase transitions and emergent computation." *Physica D* 42, 12–37.
+- Gershenson, C. (2004). "Introduction to Random Boolean Networks." arXiv:cs/0406014.
+- Aldana, M., Coppersmith, S., & Kadanoff, L. P. (2003). "Boolean dynamics with random couplings." In *Perspectives and Problems in Nonlinear Science*, Springer.
+- Burraston, D., & Edmonds, E. (2005). "Cellular automata in generative electronic music and sonic art: a historical and technical review." *Digital Creativity* 16(3), 165–185.
+# Bytebeat Synthesis (Integer-Expression Algorithmic Synthesis) (Method SP-068)
+
+### Source
+
+Bytebeat (also "byte beat", "viznut-style") is an algorithmic synthesis technique popularized by **Ville-Matias Heikkilä (viznut)** in **2011** ("Discovering novel computer music techniques by exploring the space of short computer programs", circulated on the demoscene, pouet.net, and web players such as crasno.ca / thebytebeat.com). The core idea: treat the audio sample stream as the 8-bit output of a tiny integer expression evaluated on a monotonically increasing counter $t$. It descends from the demoscene "one-liner" procedural-generation tradition and the 8-bit chip/chiptune aesthetic. Bytebeat is the *pure integer-computation* member of the synthesis family — no oscillators, no wavetables, no filters required — the deterministic, expression-driven counterpart to SP-035 GENDYN (stochastic breakpoints), SP-057 Chua (chaotic ODE), and the additive/wavetable methods. It is a *synthesis engine* (absolute layer): it turns a symbolic spec (a set of integer constants derived from `MusicUnit` pitch/rhythm/velocity) into raw audio.
+
+### Layer
+
+**Absolute** — sound production. Bytebeat consumes a symbolic expression spec (constants $K$, shifts, masks, and a chosen expression grammar) derived from `MusicUnit` content and renders a raw audio buffer (WAV/OGG). It emits no MIDI (that would be `concrete`) and designs no pitch pools (that would be `abstract`). Candidate code path: `sound/synthesis/bytebeat.py` (sibling to `equation_synth.py`, `west_coast.py`, `dx7_voice.py`, `granular.py`).
+
+### Description
+
+Bytebeat synthesizes a waveform by evaluating an integer-valued function $f(t)$ once per sample, taking the low 8 bits as the sample value. $t$ is an unsigned integer counter (typically 32- or 64-bit) incremented by 1 each sample. The expression uses only integer arithmetic and bitwise operators — right/left shift (`>>`, `<<`), bitwise AND/OR/XOR/NOT (`&`, `|`, `^`, `~`), addition/subtraction (`+`, `-`), multiplication (`*`), division/modulo (`/`, `%`). Because $t$ grows without bound, the *low bits* produce fast audio-rate variation (pitch/oscillation) while the *high bits* change slowly and gate/select macro structure. Crucially, since a finite-width counter wraps modulo $2^N$, any expression of $t$ is ultimately periodic with period dividing $2^N$ samples — bytebeat is inherently a *looping* generator, perfect for grid-locked sections (a single expression encodes an entire repeating loop). A single line like `t*((t>>12|t>>8)&63&t>>4)` produces surprisingly musical chip-style arpeggios, basslines, and noise textures. The workflow: (1) choose/derive an expression grammar, (2) bind its constants to musical parameters (pitch → multiplier, octave → shift, rhythm → mask, harmony → additive term), (3) evaluate per sample at $f_s$, (4) center/scale and band-limit the 8-bit output to signed float.
+
+### Technical Mechanics
+
+**1. Per-sample evaluation.** $y[n] = f(t) \bmod 256$ with $t = n$ (or $t = n + \mathrm{phase\_offset}$). The unsigned 0–255 byte is centered and scaled to signed float: $x[n] = (y[n] - 128)/128 \in [-1, 1)$.
+
+**2. Base ramp/saw oscillator.** $f(t) = t \cdot K$ has low byte $y = t \cdot K \bmod 256$, which steps by $K \bmod 256$ each sample. The number of distinct values per cycle is $256/\gcd(K, 256)$, so the period is
+$$T = \frac{256}{\gcd(K, 256)} \text{ samples},\qquad f = f_s \cdot \frac{\gcd(K, 256)}{256}\ \mathrm{Hz}.$$
+$K=1 \to \approx 172\ \mathrm{Hz}$ at 44.1 kHz (ramp), $K=2 \to 344\ \mathrm{Hz}$, $K=4 \to 689\ \mathrm{Hz}$; $K=3$ gives a different (stride-3) waveform at the same 172 Hz. This gcd grid is the *integer pitch lattice* — not a free pitch space.
+
+**3. Octave / sub-harmonic via shift.** Replacing $t$ by $t \gg s$ (or using `t>>s` inside the expression) slows the counter by $2^s$, dropping pitch by $s$ octaves. Nested shifts give sub-octave layers; `(t>>s)&m` extracts a square-wave gate with period $m \cdot 2^{s+1}$ samples.
+
+**4. Pitch via phase accumulator (generalization).** For free pitch, replace the raw counter with a per-voice phase accumulator $p \leftarrow p + \mathrm{inc}$, $y = p \bmod 256$, where $\mathrm{inc} = \mathrm{round}(256 \cdot f / f_s)$ gives exact frequency $f$. This keeps the integer/bitwise idiom while escaping the gcd grid; the pure-$t$ form is the special case $p = t \cdot K$ with $\mathrm{inc} = K$.
+
+**5. Harmony (additive vs ring-mod).** Sum of two terms $t \cdot A + t \cdot B$ gives an additive interval ($A$, $B$ map to two pitch constants); AND/XOR products $t\cdot A\ \&\ (t\cdot B)$ or $t\cdot A\ \hat{}\ (t\cdot B)$ give ring-modulation-style sum/difference sidebands — metallic/clangorous results. Chords = sum of $k$ terms; voice count = number of additive terms.
+
+**6. Rhythm & texture.** A term `(t>>s) & mask` yields a periodic square-wave gate (rhythm) of period $\mathrm{mask} \cdot 2^s$ samples; XOR of staggered shifts `t^(t>>s)` yields pseudo-random/glitch noise (texture); multiplication `t*((t>>a | t>>b) & m)` couples fast and slow bits for evolving timbre/arpeggiation. Low bits = bright/noisy, high bits = slow/form.
+
+**7. Macro-form.** The high bits of $t$ select large-scale regions: an expression referencing `t>>P` changes character every $2^P$ samples ($\approx 2^P/f_s$ seconds). A piece = a single expression whose high-bit terms act as a state machine over sections; equivalently, per-section wrap $t_{\mathrm{sec}} = t \bmod P_{\mathrm{section}}$ resets the loop while a global `t>>S` term still advances the form. Deterministic per seed — identical buffer every render.
+
+**8. Band-limiting.** $f(t)$ is spectrally unconstrained (bitwise ops inject energy up to and beyond Nyquist). Render at an integer oversampling ratio $R$ (e.g. 4×), then decimate with a windowed-sinc FIR lowpass, or apply an inline one-pole lowpass $y_{\mathrm{lp}} \mathrel{+}= a \cdot (y - y_{\mathrm{lp}})$ after evaluation. Without this, output is harsh/aliased chip-grit.
+
+**Cost:** $\mathcal{O}(1)$ per sample (one integer expression, a few dozen ALU ops); zero state, zero memory; trivially vectorizable across voices/sections in NumPy (vectorized `t` array → vectorized expression → `& 255`). The cheapest synthesis method in the framework; deterministic per seed.
+
+### Musical Elements Framework
+
+| Element | Mechanism |
+|---|---|
+| **PITCH** | base multiplier $K \to f = f_s \cdot \gcd(K,256)/256$ (pure-$t$ form) or phase increment $\mathrm{inc} = \mathrm{round}(256\,f/f_s)$ (accumulator form); octave = right-shift `t>>s`; melody = time-varying $K$ (an expression in $t$) |
+| **RHYTHM** | `(t>>s)&mask` square-wave gates set onset grids; period $= \mathrm{mask}\cdot 2^s$ samples; nested shifts = polymeter; XOR glitch = percussion/noise |
+| **HARMONY** | additive terms $t\cdot A + t\cdot B + \dots$ = chord/interval stack ($A,B$ = pitch constants); AND/XOR products = ring-mod sidebands (metallic); per-voice expression = independent line |
+| **STRUCTURE** | high-bit term `t>>P` = section selector ($2^P$-sample macro regions); per-section wrap $t \bmod P_{\mathrm{section}}$ = loop; a single expression encodes a whole piece |
+| **TEXTURE** | bit depth (8 vs 16-bit output) sets grit; XOR/reverse-bit terms = noise density; low-bit activity = brightness; oversampling + lowpass = clean vs crunchy |
+
+### UnitMatrix Integration
+
+- **Rows (Voices)** = one additive term (or one expression instance) per voice; all voices sum into the same buffer. Lead = fast-multiplier term; bass = slow shift; percussion = XOR/mask term; pad = sum of octave terms.
+- **Columns (Sections)** = each section carries an expression spec (or a set of constants $K$, shift, mask) in `{STRUCTURE}`; section boundary = high-bit term switch or phase reset $t \bmod P_{\mathrm{section}}$.
+- **Cells (MusicUnit)** = `{PITCH}` → $K$ or $\mathrm{inc}$ (per note); `{RHYTHM}` → shift/mask gates; `{HARMONY}` → additive term constants; `{TEXTURE}` → bit-depth + XOR noise + velocity → amplitude scale.
+- **Flow:** derive expression from `MusicUnit` → evaluate vectorized `t` → `& 255` → center/scale → oversample + lowpass → section buffer → mix → post-FX (SP-007 EQ, SP-008 DRC, SP-009/032 reverb). Deterministic per seed → zero-drift gate unaffected (audio layer, no MIDI). Bytebeat is the canonical **continuous-fill layer** for the Method Hybridization rule (pair with sparse 011/032 generators).
+
+### Pitfalls
+
+1. **Aliasing / harsh grit** — bitwise ops inject energy above Nyquist. Fix: oversample ×4–8 and decimate with a windowed-sinc FIR, or inline one-pole lowpass; never render at base rate for "clean" output.
+2. **Unsigned DC offset** — output is 0–255; forgetting to center gives a large DC component. Fix: subtract 128, then DC-block (~20 Hz) at output.
+3. **Integer pitch grid** — pure-$t$ form only hits $f = f_s \cdot \gcd(K,256)/256$; most target pitches are off-grid. Fix: use a per-voice phase accumulator ($\mathrm{inc} = \mathrm{round}(256\,f/f_s)$) for exact pitch; reserve the pure-$t$ form for character/grit.
+4. **Period/loop misalignment** — the natural period $2^N$ or $T = 256/\gcd(K,256)$ does not land on a bar boundary. Fix: wrap $t \bmod P_{\mathrm{section}}$ ($P_{\mathrm{section}}$ = bars × samples-per-bar) and reset phase at section starts; or snap $K$ so $T$ divides the bar.
+5. **8-bit crunch vs 16-bit headroom** — `&255` is 8-bit (48 dB SNR, hissy). Fix: use `& 65535` (16-bit) for cleaner results; `&255` is a deliberate aesthetic.
+6. **Expression-search explosion** — random expressions are mostly noise; brute-force grammar search is huge. Fix: constrain to a small curated grammar (`t*(K + (t>>s))`, `(t>>s)&m`, `t^(t>>s)`, sums/products thereof) and bind constants from musical parameters instead of searching.
+7. **Overflow / width dependence** — in C, signed overflow is UB and width changes the wrap period (32-bit vs 64-bit). Fix: use unsigned fixed width (uint32) and mask explicitly `y = expr & 0xFF`; in Python/NumPy use `int64` and mask — identical results across platforms.
+8. **Sparse-input hazard** — bytebeat is dense/continuous by nature; driving it with sparse note data underuses it. Fix: use it AS the continuous fill layer (sustained pad, arpeggio, noise bed) under sparse 011/032 rhythmic generators per the hybridization rule.
+
+### Comparison With Related Methods
+
+| Method | Waveform source | Character |
+|---|---|---|
+| SP-035 GENDYN | stochastic breakpoints | evolving non-periodic |
+| SP-057 Chua | chaotic ODE | organic wind/brass |
+| SP-056 Walsh | sequency sum | reedy square |
+| SP-029 subtractive | PolyBLEP osc + filter | analog |
+| **SP-068 Bytebeat** | **single integer expression of $t$** | **deterministic chip/glitch, $\mathcal{O}(1)$, looping** |
+
+### References
+
+- Heikkilä, V.-M. (viznut) (2011). "Discovering novel computer music techniques by exploring the space of short computer programs." (bytebeat writeup / demoscene.)
+- Heikkilä, V.-M. (2011). "The bytebeat — sound synthesis with a single line of code." (countercomplex / viznut writings.)
+- Bytebeat community collection and web players (crasno.ca, thebytebeat.com, pouet.net threads).
+- Zölzer, U. (ed.) (2011). *DAFX: Digital Audio Effects*, 2nd ed. Wiley. (Oversampling/decimation, band-limiting.)
+- Smith, J. O. (2010). *Physical Audio Signal Processing*. CCRMA. (Phase accumulator, band-limited oscillators.)
+

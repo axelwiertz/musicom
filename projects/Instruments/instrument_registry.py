@@ -44,6 +44,7 @@ _INSTRUMENT_MODULES = {
     "Guitar.acoustic.acoustic_guitar": "acoustic_guitar",
     "Percussion.drum_kit.drum_kit": "drum_kit",
     "Percussion.marimba.marimba": "marimba",
+    "Percussion.steel_drums.steel_drums": "steel_drums",
     "World.sitar.sitar": "sitar",
     "World.koto.koto": "koto",
     "World.shamisen.shamisen": "shamisen",
@@ -140,6 +141,7 @@ SAXOPHONE = ALL_INSTRUMENTS["saxophone"]
 ACOUSTIC_GUITAR = ALL_INSTRUMENTS["acoustic_guitar"]
 DRUM_KIT = ALL_INSTRUMENTS["drum_kit"]
 MARIMBA = ALL_INSTRUMENTS["marimba"]
+STEEL_DRUMS = ALL_INSTRUMENTS["steel_drums"]
 SITAR = ALL_INSTRUMENTS["sitar"]
 KOTO = ALL_INSTRUMENTS["koto"]
 SHAMISEN = ALL_INSTRUMENTS["shamisen"]
@@ -192,6 +194,8 @@ def registry_table():
             role = "rhythm, groove, accent"
         elif low == "marimba":
             role = "lead, melody, accent, countermelody, harmony"
+        elif low == "steel drums":
+            role = "lead, melody, accent, countermelody, harmony, rhythm"
         elif low == "sitar":
             role = "lead, melody, ornament, drone"
         elif low == "koto":
@@ -249,3 +253,7 @@ if __name__ == "__main__":
     print("  by_name('bagpipe') =", by_name("bagpipe"))
     print("  by_program(109) =", by_program(109))
     print("  BAGPIPE.in_sweet_spot(62) =", BAGPIPE.in_sweet_spot(62))
+    print("  STEEL_DRUMS.midi_program =", STEEL_DRUMS.midi_program, "(should be 114)")
+    print("  by_name('steel drums') =", by_name("steel drums"))
+    print("  by_program(114) =", by_program(114))
+    print("  STEEL_DRUMS.in_sweet_spot(69) =", STEEL_DRUMS.in_sweet_spot(69))

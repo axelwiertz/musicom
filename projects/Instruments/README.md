@@ -61,13 +61,14 @@ Instruments/
 │   └── acoustic/
 └── Percussion/
     ├── drum_kit/
-    └── marimba/
+    ├── marimba/
+    └── steel_drums/
 ```
 
-Current instruments (25): Violin, Viola, Cello, Double Bass, Piano, Church
+Current instruments (26): Violin, Viola, Cello, Double Bass, Piano, Church
 Organ, Dulcimer, Trumpet, Trombone, French Horn, Tuba, Flute, Oboe, Clarinet,
-Bassoon, Alto Saxophone, Acoustic Guitar, Drum Kit, Marimba, Sitar, Koto,
-Shamisen, Kalimba, Banjo, Bagpipe.
+Bassoon, Alto Saxophone, Acoustic Guitar, Drum Kit, Marimba, Steel Drums,
+Sitar, Koto, Shamisen, Kalimba, Banjo, Bagpipe.
 
 ## Musicom Integration
 
@@ -95,5 +96,6 @@ The canonical table lives in `registry.md` (kept in sync manually) and
 - [x] Oboe, Bassoon, Saxophone (woodwind family complete)
 - [x] Church Organ (keys family, GM19, additive engine — 2026-08-31)
 - [x] Marimba (percussion melodic, GM12, modal engine — 2026-09-01)
+- [x] Steel Drums (percussion melodic, GM114, modal engine — 2026-09-09)
 - [ ] Synth Pad, Harpsichord, Electric Guitar (listed in roadmap)
 - [ ] Drum Kit expansion beyond GM mapping

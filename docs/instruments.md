@@ -163,6 +163,23 @@ line-instrument quirk: modal melody over a pedal, NO dense harmony. Range
 53–96 is the GM-patch span (empirical FluidR3 sweep 8/8 notes audible);
 real chanter register is 57–69.
 
+**Steel Drums added** (2026-09-09): GM114, Percussion-family third entry
+(instrument.md + steel_drums.py), verified end-to-end UnitMatrixComposer →
+zero-drift ✓ → MIDI → FluidSynth WAV ✓; RenderPipeline stem label
+`trackXX_Steel_Drums.wav` ✓ (GM_PROGRAMS[114] = "Steel Drums", FluidR3
+preset 114 = "Steel Drums" — labels match exactly, no quirk). Identity:
+GM114 = Trinidadian steelpan (pan) family — lead/tenor pan chromatic
+melodic instrument; line + harmony voice (2–4 note chords idiomatic), NOT a
+bass voice. ModalSynth recommended (impulse-excited struck-membrane bank;
+'pan' custom modes f0, 2.0×, 2.7×, 3.6× with decays 12–28 — see PAN_MODES;
+MODAL_PRESET 'marimba' is the closest stock bank, 'bell' the metallic alt).
+Karplus-Strong fallback loop_gain 0.9950 (metallic ping 0.016 vs 0.008 dull
+control, 2.0×, between kalimba 0.9940 and banjo 0.9960). Solo-render
+spectral check: 4–8 kHz buzz 0.6% (no comb-filtering). Empirical FluidR3
+pitch sweep (RMS, notes 24–96): preset 114 audible across the whole span,
+no gaps — SF2 never clips a composition. Range 55–96 is the lead-pan
+register (sweep proves the patch plays the full GM span).
+
 ## Python usage
 
 ```python
@@ -203,6 +220,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Guitar | Acoustic | 25 | 40–84 | harmony, rhythm, strum |
 | Percussion | Drum Kit | ch9 | 35–81 | rhythm, groove, accent |
 | Percussion | Marimba | 12 | 45–96 | lead, melody, accent, countermelody, harmony |
+| Percussion | Steel Drums | 114 | 55–96 | lead, melody, accent, countermelody, harmony, rhythm |
 | World | Sitar | 104 | 55–96 | lead, melody, ornament, drone |
 | World | Banjo | 105 | 46–93 | lead, melody, ornament, rhythm, accent |
 | World | Koto | 107 | 51–90 | lead, melody, ornament, drone, harmony |
@@ -239,6 +257,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 106 | Shamisen | Shamisen ✓ (GM_PROGRAMS[106] + FluidR3 preset 106 both "Shamisen") |
 | 108 | Kalimba | Kalimba ✓ (GM_PROGRAMS[108] + FluidR3 preset 108 both "Kalimba") |
 | 109 | Bagpipe | **Bag_pipe** ✗ (GM_PROGRAMS[109] = "Bag pipe" — two words; FluidR3 preset 109 = "BagPipe") |
+| 114 | Steel Drums | Steel Drums ✓ (GM_PROGRAMS[114] + FluidR3 preset 114 both "Steel Drums") |
 | ch9/pgm0 | Drums | **Acoustic_Grand_Piano** ✗ (program-0 fallback) |
 
 > **Known off-by-one in existing entries**: ~~`trumpet.py` uses 57~~ **FIXED 2026-08-27**: trumpet is now 56 (SF2 preset 56=`SoloTrumpet`). `piano.py`=1 → actually Bright Acoustic Piano (GM #2) — cosmetic label difference only, no routing impact. Legacy registry rows kept as-is for piano; new instruments use 0-indexed programs matching pipeline+SF2.
