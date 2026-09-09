@@ -1,0 +1,67 @@
+{
+  "project": "091-baroque-genetic-allemande",
+  "genre": "Baroque",
+  "method": "003 Genetic Genome Selection",
+  "layer": "concrete",
+  "key": "D aeolian (+ harmonic-minor C#, dorian B)",
+  "bpm": 92,
+  "form": "6 sections x 4 bars = 24 bars: Intro | AllemandeA | AllemandeB | Lift | AllemandeA2 | Outro",
+  "voices": [
+    {
+      "voice": "Lead",
+      "instrument": "Violin",
+      "gm": 40
+    },
+    {
+      "voice": "Oboe",
+      "instrument": "Oboe",
+      "gm": 68
+    },
+    {
+      "voice": "Cello",
+      "instrument": "Cello",
+      "gm": 42
+    },
+    {
+      "voice": "Piano",
+      "instrument": "Acoustic Grand Piano",
+      "gm": 1
+    },
+    {
+      "voice": "Viola",
+      "instrument": "Viola",
+      "gm": 41
+    },
+    {
+      "voice": "Bass",
+      "instrument": "Double Bass",
+      "gm": 43
+    },
+    {
+      "voice": "Drums",
+      "instrument": "Drum Kit",
+      "gm": 0,
+      "channel": 9
+    }
+  ],
+  "verdict_grid": "PASS 0 off-grid (16th)",
+  "verdict_harmony": "PASS 0 out",
+  "verdict_zerodrift": "PASS",
+  "verdict_silence": "PASS",
+  "grid": {
+    "16th_off": 0,
+    "notes": 1221
+  },
+  "harmony": {
+    "out_of_scale": 0,
+    "out_of_chord": 0
+  },
+  "silence_ratio": 0.0413,
+  "duration_s": 65.28,
+  "files": {
+    "midi_phase1": 2244,
+    "midi_phase2": 11058,
+    "wav": 11515692,
+    "ogg": 446685
+  }
+}

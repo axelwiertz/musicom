@@ -1,0 +1,19 @@
+{
+  "artifact": "091-baroque-genetic-allemande.mid",
+  "classification": "ai-assisted",
+  "generator": "GeneticGenerator(method 003) + rules layer",
+  "sources": [],
+  "parameters": {
+    "phase": 2,
+    "seed": 20260909,
+    "grid": "16th (120 @ 480 TPB)",
+    "key": "D aeolian",
+    "harmony": "011 TonalNetworkGenerator walk",
+    "method": "003 + 011 wiring"
+  },
+  "notes": "Rules post-processed: grid lock, scale snap, chord-tone quantize, voice-leading check.",
+  "sha256": "60bf322978294e9ca3a2cf40383ad4ca8ccf50f02b04c2e1992e1cfd0fe87fc4",
+  "bytes": 11058,
+  "created_utc": "2026-09-09T23:10:27.915909+00:00",
+  "provenance_version": "1.0"
+}

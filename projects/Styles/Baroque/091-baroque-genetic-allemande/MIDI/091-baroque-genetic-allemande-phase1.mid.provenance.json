@@ -1,0 +1,17 @@
+{
+  "artifact": "091-baroque-genetic-allemande-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "GeneticGenerator(method 003)",
+  "sources": [],
+  "parameters": {
+    "phase": 1,
+    "seed": 20260909,
+    "fitness": "baroque_contour",
+    "method": "003 Genetic Genome Selection"
+  },
+  "notes": "Raw genetic draft: unquantized, no harmony.",
+  "sha256": "95e10c1d7046cfcdc4235280d368a1bfc0dc358bfbf8c57e6495f9f732047ac8",
+  "bytes": 2244,
+  "created_utc": "2026-09-09T23:10:27.915590+00:00",
+  "provenance_version": "1.0"
+}

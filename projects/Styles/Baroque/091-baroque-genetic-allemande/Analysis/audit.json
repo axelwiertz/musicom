@@ -1,0 +1,206 @@
+{
+  "project": "091-baroque-genetic-allemande",
+  "grid_phase2": {
+    "label": "phase2",
+    "grid_16th": 120,
+    "grid_8th": 240,
+    "total_notes": 1221,
+    "total_off_16th": 0,
+    "total_off_8th": 314,
+    "voices": [
+      {
+        "voice": "",
+        "program": 40,
+        "channel": 0,
+        "notes": 163,
+        "off_16th": 0,
+        "off_8th": 55,
+        "track_end": 46080
+      },
+      {
+        "voice": "",
+        "program": 68,
+        "channel": 1,
+        "notes": 96,
+        "off_16th": 0,
+        "off_8th": 0,
+        "track_end": 46080
+      },
+      {
+        "voice": "",
+        "program": 42,
+        "channel": 2,
+        "notes": 66,
+        "off_16th": 0,
+        "off_8th": 0,
+        "track_end": 46080
+      },
+      {
+        "voice": "",
+        "program": 1,
+        "channel": 3,
+        "notes": 384,
+        "off_16th": 0,
+        "off_8th": 192,
+        "track_end": 46080
+      },
+      {
+        "voice": "",
+        "program": 41,
+        "channel": 4,
+        "notes": 24,
+        "off_16th": 0,
+        "off_8th": 0,
+        "track_end": 46080
+      },
+      {
+        "voice": "",
+        "program": 43,
+        "channel": 5,
+        "notes": 160,
+        "off_16th": 0,
+        "off_8th": 3,
+        "track_end": 46080
+      },
+      {
+        "voice": "",
+        "program": 0,
+        "channel": 9,
+        "notes": 328,
+        "off_16th": 0,
+        "off_8th": 64,
+        "track_end": 46080
+      }
+    ]
+  },
+  "harmony_phase2": [
+    {
+      "voice": "",
+      "program": 40,
+      "notes": 163,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "first_out_of_scale": [],
+      "first_out_of_chord": []
+    },
+    {
+      "voice": "",
+      "program": 68,
+      "notes": 96,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "first_out_of_scale": [],
+      "first_out_of_chord": []
+    },
+    {
+      "voice": "",
+      "program": 42,
+      "notes": 66,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "first_out_of_scale": [],
+      "first_out_of_chord": []
+    },
+    {
+      "voice": "",
+      "program": 1,
+      "notes": 384,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "first_out_of_scale": [],
+      "first_out_of_chord": []
+    },
+    {
+      "voice": "",
+      "program": 41,
+      "notes": 24,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "first_out_of_scale": [],
+      "first_out_of_chord": []
+    },
+    {
+      "voice": "",
+      "program": 43,
+      "notes": 160,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "first_out_of_scale": [],
+      "first_out_of_chord": []
+    }
+  ],
+  "zero_drift_phase2": {
+    "max_end": 46080,
+    "drift_per_track": [
+      [
+        "",
+        46080,
+        0
+      ],
+      [
+        "",
+        46080,
+        0
+      ],
+      [
+        "",
+        46080,
+        0
+      ],
+      [
+        "",
+        46080,
+        0
+      ],
+      [
+        "",
+        46080,
+        0
+      ],
+      [
+        "",
+        46080,
+        0
+      ],
+      [
+        "",
+        46080,
+        0
+      ]
+    ],
+    "drift_ok": true
+  },
+  "zero_drift_phase1": {
+    "max_end": 46080,
+    "drift_per_track": [
+      [
+        "",
+        46080,
+        0
+      ]
+    ],
+    "drift_ok": true
+  },
+  "phase1_fingerprint": {
+    "label": "phase1-raw",
+    "grid_16th": 120,
+    "grid_8th": 240,
+    "total_notes": 282,
+    "total_off_16th": 282,
+    "total_off_8th": 282,
+    "voices": [
+      {
+        "voice": "",
+        "program": 40,
+        "channel": 0,
+        "notes": 282,
+        "off_16th": 282,
+        "off_8th": 282,
+        "track_end": 46080
+      }
+    ]
+  },
+  "verdict_grid": "PASS 0 off-grid (16th)",
+  "verdict_harmony": "PASS 0 out",
+  "verdict_zerodrift": "PASS"
+}
