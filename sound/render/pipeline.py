@@ -158,9 +158,22 @@ class RenderPipeline:
                     program = msg.program
                     channel = msg.channel
                     break
-            
-            # Get instrument name
-            inst_name = GM_PROGRAMS[program] if program < len(GM_PROGRAMS) else f"Program_{program}"
+            # If no program_change found, infer from note channels (some
+            # exports omit program changes on drums / default-0 tracks).
+            if channel == 0 and program == 0:
+                note_chans = {m.channel for m in track if m.type == 'note_on'}
+                if note_chans == {9}:
+                    channel = 9
+
+            # Instrument name: channel 9 (GM percussion) is ALWAYS drums —
+            # program 0 on channel 9 means "standard kit", NOT Acoustic Grand
+            # Piano. Previously the code labeled by program alone, so every
+            # drum stem came out as "Acoustic_Grand_Piano" (mislabel bug,
+            # fixed 2026-09-08).
+            if channel == 9:
+                inst_name = "Drums"
+            else:
+                inst_name = GM_PROGRAMS[program] if program < len(GM_PROGRAMS) else f"Program_{program}"
             # Sanitize for filename
             safe_name = inst_name.replace(" ", "_").replace("(", "").replace(")", "").replace("/", "_")
             stem_name = f"track{track_idx:02d}_{safe_name}"
