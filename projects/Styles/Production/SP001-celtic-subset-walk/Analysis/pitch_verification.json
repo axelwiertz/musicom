@@ -1,0 +1,7 @@
+{
+  "windows_checked": 107,
+  "dominant_peak_hit_rate": 0.9907,
+  "harmonic_energy_mean_8h": 0.434,
+  "method": "FFT dominant peak per 0.5s window, 50-1000 Hz band, +/-4% tolerance vs active MIDI fundamentals (or octave below/above)",
+  "verdict": "PASS"
+}

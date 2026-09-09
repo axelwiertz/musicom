@@ -1,0 +1,49 @@
+{
+  "job": "random-style production pass (SP) - LAYER-ALIGNED 2026-09-09",
+  "selection_source": "workflows.musicom_workflow.SP_METHODS registry (12 implemented, 2026-09-02 layer-aligned spec)",
+  "composition_source": "/opt/data/projects/Styles/Celtic/090-celtic-subset-walk/MIDI/090-celtic-subset-walk.mid",
+  "composition_sha256": "d2b32f7dc5ba36171a7a179d1b3497773479996db185c0038ea84d147ba4eb32",
+  "production_method": "SP-001",
+  "production_method_name": "Multi-timbral SoundFont (FluidSynth)",
+  "registered_module": "sound.render.fluidsynth",
+  "layer_discipline": "absolute layer: FluidSynth GM SoundFont rendering is the production/timbre layer for ALL voices (full mix + per-voice stems)",
+  "parameters": {
+    "soundfont": "/opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2",
+    "sample_rate": 44100,
+    "gain": 1.2,
+    "fluid_internal_reverb": true,
+    "fluid_internal_chorus": true,
+    "normalization_dBFS": -1.0
+  },
+  "checks": {
+    "silence_ratio": 0.0488,
+    "pitch_verification": {
+      "windows_checked": 107,
+      "dominant_peak_hit_rate": 0.9907,
+      "harmonic_energy_mean_8h": 0.434,
+      "method": "FFT dominant peak per 0.5s window, 50-1000 Hz band, +/-4% tolerance vs active MIDI fundamentals (or octave below/above)",
+      "verdict": "PASS"
+    }
+  },
+  "artifacts": {
+    "midi": "/opt/data/projects/Styles/Production/SP001-celtic-subset-walk/MIDI/090-celtic-subset-walk.mid",
+    "processed_wav": "/opt/data/projects/Styles/Production/SP001-celtic-subset-walk/Audio/SP001-celtic-subset-walk.wav",
+    "processed_ogg": "/opt/data/projects/Styles/Production/SP001-celtic-subset-walk/Audio/SP001-celtic-subset-walk.ogg",
+    "stems_wav": {
+      "track00_Violin": "/opt/data/projects/Styles/Production/SP001-celtic-subset-walk/Audio/stems/track00_Violin.wav",
+      "track01_Recorder": "/opt/data/projects/Styles/Production/SP001-celtic-subset-walk/Audio/stems/track01_Recorder.wav",
+      "track02_Cello": "/opt/data/projects/Styles/Production/SP001-celtic-subset-walk/Audio/stems/track02_Cello.wav",
+      "track03_Bright_Acoustic_Piano": "/opt/data/projects/Styles/Production/SP001-celtic-subset-walk/Audio/stems/track03_Bright_Acoustic_Piano.wav",
+      "track04_Contrabass": "/opt/data/projects/Styles/Production/SP001-celtic-subset-walk/Audio/stems/track04_Contrabass.wav",
+      "track05_Drums": "/opt/data/projects/Styles/Production/SP001-celtic-subset-walk/Audio/stems/track05_Drums.wav"
+    },
+    "stems_ogg": {
+      "track00_Violin": "/opt/data/projects/Styles/Production/SP001-celtic-subset-walk/Audio/stems/track00_Violin.ogg",
+      "track01_Recorder": "/opt/data/projects/Styles/Production/SP001-celtic-subset-walk/Audio/stems/track01_Recorder.ogg",
+      "track02_Cello": "/opt/data/projects/Styles/Production/SP001-celtic-subset-walk/Audio/stems/track02_Cello.ogg",
+      "track03_Bright_Acoustic_Piano": "/opt/data/projects/Styles/Production/SP001-celtic-subset-walk/Audio/stems/track03_Bright_Acoustic_Piano.ogg",
+      "track04_Contrabass": "/opt/data/projects/Styles/Production/SP001-celtic-subset-walk/Audio/stems/track04_Contrabass.ogg",
+      "track05_Drums": "/opt/data/projects/Styles/Production/SP001-celtic-subset-walk/Audio/stems/track05_Drums.ogg"
+    }
+  }
+}
