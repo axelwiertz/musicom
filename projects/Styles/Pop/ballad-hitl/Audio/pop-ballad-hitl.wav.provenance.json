@@ -1,0 +1,36 @@
+{
+  "artifact": "pop-ballad-hitl.wav",
+  "classification": "ai-assisted",
+  "generator": "pop-ballad-hitl phase2 (per-voice + per-section production)",
+  "sources": [
+    "midi:pop-ballad-hitl.mid",
+    "stems:RenderPipeline.render_stems",
+    "sp:032,020,019,008,021"
+  ],
+  "parameters": {
+    "bpm": 72,
+    "key": "D",
+    "lufs": -14.01,
+    "peak": 0.891,
+    "silence_pct": 3.2,
+    "voice_sp": {
+      "Lead": "SP-032",
+      "Pad": "SP-020",
+      "Bass": "SP-020",
+      "Arp": "SP-019",
+      "Drums": "SP-008"
+    },
+    "section_sp": {
+      "Intro": "SP-020-lp1200",
+      "Verse": "dry",
+      "Chorus": "SP-021",
+      "Bridge": "SP-032",
+      "Outro": "SP-020-lp800+fade"
+    }
+  },
+  "notes": "",
+  "sha256": "448dd94a5e659c32bfcdfce8cd98602e33162c396f60125f97f07e6d19a1106f",
+  "bytes": 16464044,
+  "created_utc": "2026-09-10T19:05:34.105806+00:00",
+  "provenance_version": "1.0"
+}
