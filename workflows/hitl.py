@@ -43,7 +43,7 @@ from workflows.evolution import (
     _build_with_anchor, hard_gates, rule_judge,
 )
 from workflows.paths import (
-    POP_FORM, PROGRESSIONS, KEY_OFFSET, MAJOR_DEGREES,
+    POP_FORM, PROGRESSIONS, progression_roots,
 )
 
 BAR = 1920
@@ -79,18 +79,16 @@ class HITLRound:
     out_dir: str
 
 
-def _progression_roots(progression, total_bars, key):
-    off = KEY_OFFSET.get(key, 0)
-    deg_seq = [progression[i % len(progression)] for i in range(total_bars)]
-    roots = []
-    for deg in deg_seq:
-        letter = deg.upper()
-        idx = MAJOR_DEGREES.index(letter) if letter in MAJOR_DEGREES else 0
-        scale_off = [0, 2, 4, 5, 7, 9, 11][idx]
-        if deg != deg.upper():
-            scale_off = [0, 2, 3, 5, 7, 8, 10][idx]
-        roots.append(36 + off + scale_off)
-    return roots
+def _progression_roots(progression, total_bars, key, harmonic_rhythm=1):
+    """Per-bar root MIDI pitches (mode-aware — delegates to rules.harmony).
+
+    Historical bug: this used `MAJOR_DEGREES.index(deg.upper())`, which
+    collapsed every uppercase minor-mode degree (VI/III/VII) onto index 0
+    and produced static all-tonic harmony for minor progressions. The
+    canonical mode-aware lookup lives in rules.harmony.progression_roots.
+    """
+    return progression_roots(progression, total_bars, key,
+                             harmonic_rhythm=harmonic_rhythm)
 
 
 def _render_excerpt(midi_path: Path, out_dir: Path, base: str,

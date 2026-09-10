@@ -237,13 +237,28 @@ POP_FORM = [
 # --- harmony tables (canonical source: rules/harmony.py) -------------------
 from rules.harmony import (  # noqa: E402  (re-exported for backward compat)
     CHORD_SHAPES, MAJOR_DEGREES, KEY_OFFSET, PROGRESSIONS, QUALITY_INTERVALS,
+    MODE_OFFSETS, degree_offset, infer_mode, parse_degree, tonic_offset,
     chord_tones as _harmony_chord_tones,
+    progression_roots as _harmony_progression_roots,
 )
 
 
 def _chord_tones(degree: str, root_midi: int) -> List[int]:
     """Pitch classes of a chord built on `root_midi` for a scale degree."""
     return _harmony_chord_tones(degree, root_midi)
+
+
+def progression_roots(progression, total_bars: int, key: str,
+                      harmonic_rhythm: int = 1, mode=None,
+                      base_octave: int = 36) -> List[int]:
+    """Per-bar root MIDI pitches for a progression (mode-aware).
+
+    Single canonical implementation (rules/harmony.progression_roots),
+    re-exported here so workflow modules don't re-derive scale offsets.
+    """
+    return _harmony_progression_roots(
+        progression, total_bars, key, harmonic_rhythm=harmonic_rhythm,
+        mode=mode, base_octave=base_octave)
 
 
 def _euclidean_positions(onsets: int, steps: int) -> List[int]:
@@ -447,22 +462,9 @@ def compose_middle_out(style="pop", key="C", bpm=120, progression=None,
 
     # ---- L3 anchor: progression = the invariant harmony spine ----
     progression = progression or PROGRESSIONS.get(style, PROGRESSIONS["pop"])
-    off = KEY_OFFSET.get(key, 0)
-    # per-bar root sequence
+    # per-bar root sequence (mode-aware; canonical helper)
     total_bars = sum(bars_per)
-    deg_seq = [progression[i % len(progression)] for i in range(total_bars)]
-    # map each degree to a midi root (bass octave 36 + key offset + degree offset)
-    roots_per_bar = []
-    for deg in deg_seq:
-        letter = deg.upper()
-        idx = MAJOR_DEGREES.index(letter) if letter in MAJOR_DEGREES else 0
-        major_offsets = [0, 2, 4, 5, 7, 9, 11]
-        scale_off = major_offsets[idx]
-        if deg != deg.upper():
-            # natural-minor spelling: b3, b6, b7
-            minor_offsets = [0, 2, 3, 5, 7, 8, 10]
-            scale_off = minor_offsets[idx]
-        roots_per_bar.append(36 + off + scale_off)
+    roots_per_bar = progression_roots(progression, total_bars, key)
     # per-section roots (first bar of the section = section root)
     section_roots = []
     bar_cursor = 0

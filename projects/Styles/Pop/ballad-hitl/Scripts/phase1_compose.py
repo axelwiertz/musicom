@@ -21,7 +21,10 @@ from pathlib import Path
 
 from structures import MusicUnit, MusicEvent, MidiInstrument
 from workflows.unitmatrix_composer import UnitMatrixComposer
-from workflows.paths import build_framework, POP_FORM, PROGRESSIONS, KEY_OFFSET, MAJOR_DEGREES
+from workflows.paths import (
+    build_framework, POP_FORM, PROGRESSIONS, KEY_OFFSET, MAJOR_DEGREES,
+    progression_roots as engine_progression_roots,
+)
 from workflows.provenance import write_provenance, AI_ASSISTED
 from visualization.grid import write_grid_visualization
 
@@ -30,7 +33,7 @@ PROJECT = Path("/opt/data/repos/musicom/projects/Styles/Pop/ballad-hitl")
 MIDI_DIR = PROJECT / "MIDI"
 MIDI_DIR.mkdir(parents=True, exist_ok=True)
 
-KEY = "D"          # D minor-ish ballad (relative: D aeolian flavor via vi-heavy prog)
+KEY = "Dm"         # D minor ballad — explicit 'm' suffix drives mode inference
 BPM = 72           # slow ballad
 SEED = 7
 
@@ -55,37 +58,15 @@ def _unit(events, section_len):
 
 
 def _progression_roots(progression, total_bars, key, harmonic_rhythm=1):
-    """Degree symbol -> semitone offset in the aeolian (natural minor) scale.
+    """Per-bar root MIDI pitches — delegates to the canonical engine helper.
 
-    Handles BOTH major (I/IV/V/vi) and minor-aeolian (i/VI/III/VII) spellings.
-    This fixes the engine bug where uppercase 'VI'/'III'/'VII' fall through
-    MAJOR_DEGREES.index() to idx=0 (all roots identical).
-
-    harmonic_rhythm: bars per chord. 2 = chord change every 2 bars
-    (ballad-appropriate slow harmonic movement within 8-bar sections).
+    Handles BOTH major (I/IV/V/vi) and minor-aeolian (i/VI/III/VII) spellings
+    via rules.harmony.progression_roots (mode-aware). This used to be a local
+    reimplementation of the engine's buggy `MAJOR_DEGREES.index(deg.upper())`
+    lookup, which collapsed uppercase minor degrees (VI/III/VII) onto index 0.
     """
-    off = KEY_OFFSET.get(key, 0)
-    # aeolian scale degrees: i, ii°, III, iv, v, VI, VII
-    AEOLIAN_OFFSETS = {
-        "i": 0, "ii": 2, "III": 3, "iv": 5, "v": 7, "VI": 8, "VII": 10,
-        "I": 0, "ii°": 2, "bIII": 3, "iv": 5, "v": 7, "bVI": 8, "bVII": 10,
-    }
-    # major-key spellings (ionian): I, ii, iii, IV, V, vi, vii°
-    IONIAN_OFFSETS = {
-        "I": 0, "ii": 2, "iii": 4, "IV": 5, "V": 7, "vi": 9, "vii": 11,
-    }
-    deg_seq = [progression[(i // harmonic_rhythm) % len(progression)]
-               for i in range(total_bars)]
-    roots = []
-    for deg in deg_seq:
-        scale_off = AEOLIAN_OFFSETS.get(deg) or IONIAN_OFFSETS.get(deg)
-        if scale_off is None:
-            # fallback: uppercase letter -> major index
-            letter = deg.upper()
-            idx = MAJOR_DEGREES.index(letter) if letter in MAJOR_DEGREES else 0
-            scale_off = [0, 2, 4, 5, 7, 9, 11][idx]
-        roots.append(36 + off + scale_off)
-    return roots
+    return engine_progression_roots(progression, total_bars, key,
+                                    harmonic_rhythm=harmonic_rhythm)
 
 
 def _chord_tones(root, quality="maj", inv=0):
@@ -108,8 +89,32 @@ def _euclid(onsets, steps):
 
 
 # ---------------------------------------------------------------- fills
-def fill_bass(composer, roots_per_bar, section_names, bars_per):
-    """Method 012 + 018: Euclidean groove-locked bass, Schillinger density."""
+def _bar_onsets(density, steps=4, bar=0):
+    """Euclidean onset positions for one bar at a given density.
+
+    density 3 -> 3 accents on the quarter grid (walking)
+    density 4 -> all four quarters (pulse)
+    density 5 -> 5 accents on the eighth grid (syncopated drive)
+
+    Density is clamped so every variant stays playable — a density above
+    the grid size yields an empty Euclidean result (silent bar), which the
+    historical engine silently dropped.
+    """
+    if density <= steps:
+        return _euclid(max(1, density), steps), 480
+    # denser than the quarter grid: move to the eighth-note grid
+    return _euclid(min(density, 8), 8), 240
+
+
+def fill_bass(composer, roots_per_bar, section_names, bars_per,
+              density=None, offset=0):
+    """Method 012 + 018: Euclidean groove-locked bass, Schillinger density.
+
+    density (int or None): accents per bar. None keeps the original
+    Schillinger 3/4 resultant alternation (byte-exact default); an int
+    selects a fixed evolvable density. offset: start offset in ticks
+    (0 = on-beat, 240 = off-beat).
+    """
     bar = 0
     for si, sname in enumerate(section_names):
         nbars = bars_per[si]
@@ -117,10 +122,13 @@ def fill_bass(composer, roots_per_bar, section_names, bars_per):
         evs = []
         for b in range(nbars):
             root = roots_per_bar[bar]
-            onsets = 3 + (b % 2)  # 3/4 Schillinger resultant
-            for p in _euclid(onsets, 4):
-                start = b * BAR + p * 480
-                evs.append(MusicEvent(root, 95, start, start + 480))
+            d = (3 + (b % 2)) if density is None else density
+            positions, step_ticks = _bar_onsets(d, bar=b)
+            for p in positions:
+                start = b * BAR + offset + p * step_ticks
+                end = min(start + step_ticks, section_len)
+                if end > start:
+                    evs.append(MusicEvent(root, 95, start, end))
             bar += 1
         composer.fill_voice_section("Bass", sname, _unit(evs, section_len))
 
@@ -262,74 +270,87 @@ def fill_arp(composer, section_roots, section_names, bars_per, qualities, on):
 
 
 # ---------------------------------------------------------------- main
-def main():
-    rng = random.Random(SEED)
-    form = FORM
-    section_names = [s[0] for s in form]
-    bars_per = [s[1] for s in form]
 
-    # progression roots + section qualities (Dm-Bb-F-C)
-    total_bars = sum(bars_per)
-    # Per-section harmonic REGIONS (ballad arc) — not one global loop.
-    # Verse sits low (i-VI), Chorus lifts (III-VII-i), Bridge peaks (VII-VI),
-    # Intro/Outro frame on i/VI. Each section gets its own 2-bar harmonic rhythm.
-    section_progs = [
-        ["i", "VI"],                    # Intro: i-VI frame
-        ["i", "VI", "III", "VII"],      # Verse: full aeolian cycle
-        ["III", "VII", "i", "VI", "III", "VII"],  # Chorus: lift on III-VII
-        ["VII", "VI", "III", "VII"],    # Bridge: peak on VII
-        ["i", "VI", "i", "i"],          # Outro: resolve to i
-    ]
-    roots_per_bar = []
-    section_roots = []
+# Per-section harmonic REGIONS (ballad arc) — not one global loop.
+# Intro frames i-VI, Verse walks the full aeolian cycle low, Chorus lifts
+# on III-VII, Bridge peaks on VII-VI, Outro resolves home. Each section
+# gets its own 2-bar harmonic rhythm.
+SECTION_PROGS = [
+    ["i", "VI"],                    # Intro
+    ["i", "VI", "III", "VII"],      # Verse
+    ["III", "VII", "i", "VI", "III", "VII"],  # Chorus
+    ["VII", "VI", "III", "VII"],    # Bridge
+    ["i", "VI", "i", "i"],          # Outro
+]
+
+# Per-part lead method swaps (same framework, same base patterns).
+LEAD_METHODS = {
+    "Intro": "001",     # skeleton sparse
+    "Verse": "004",     # prosodic lyrical
+    "Chorus": "011",    # voice-leading leaps
+    "Bridge": "023",    # tendency tension
+    "Outro": "013",     # retrograde motif
+}
+
+ARP_ON = {"Intro": False, "Verse": True, "Chorus": True,
+          "Bridge": False, "Outro": False}
+DRUM_DENSITY = [0, 45, 70, 30, 0]      # intro/outro silent
+
+
+def ballad_harmony(form=None, key=None):
+    """(section_roots, qualities, roots_per_bar) for the ballad form.
+
+    Derived entirely from SECTION_PROGS via the canonical mode-aware
+    engine helper — no hardcoded root lists.
+    """
+    form = form or FORM
+    key = key or KEY
+    roots_per_bar, section_roots = [], []
     cursor = 0
     for si, (sname, nbars) in enumerate(form):
-        prog = section_progs[si]
-        off = KEY_OFFSET.get(KEY, 0)
-        AEOL = {"i": 0, "II": 2, "III": 3, "iv": 5, "v": 7, "VI": 8, "VII": 10}
-        ION = {"I": 0, "ii": 2, "iii": 4, "IV": 5, "V": 7, "vi": 9, "vii": 11}
-        for b in range(nbars):
-            deg = prog[(b // 2) % len(prog)]
-            so = AEOL.get(deg) or ION.get(deg)
-            if so is None:
-                letter = deg.upper()
-                idx = MAJOR_DEGREES.index(letter) if letter in MAJOR_DEGREES else 0
-                so = [0, 2, 4, 5, 7, 9, 11][idx]
-            roots_per_bar.append(36 + off + so)
-        # section root = midpoint chord
+        prog = SECTION_PROGS[si % len(SECTION_PROGS)]
+        roots_per_bar.extend(_progression_roots(prog, nbars, key,
+                                                harmonic_rhythm=2))
         section_roots.append(roots_per_bar[cursor + nbars // 2])
         cursor += nbars
-    # quality per section = quality of the section's MIDPOINT chord
-    # (i/iv/v = minor; I/II/III/IV/V/VI/VII = major in aeolian spelling)
-    qualities = ["maj", "maj", "min", "maj", "maj"]   # Bb, F, Dm, Bb, Bb
-    # fix: derive from the actual midpoint degree
-    mid_deg = []
-    for si, (sname, nbars) in enumerate(form):
-        prog = section_progs[si]
-        mid_deg.append(prog[(nbars // 2 // 2) % len(prog)])
-    qualities = [("min" if d in ("i", "iv", "v") else "maj") for d in mid_deg]
+    mid_deg = [SECTION_PROGS[si % len(SECTION_PROGS)][(nbars // 2 // 2)
+               % len(SECTION_PROGS[si % len(SECTION_PROGS)])]
+               for si, (sname, nbars) in enumerate(form)]
+    qualities = ["min" if d in ("i", "iv", "v") else "maj" for d in mid_deg]
+    return section_roots, qualities, roots_per_bar
 
-    # ---- framework (Path C middle-out, method 001/012/018) ----
-    composer = build_framework(style="pop", key=KEY, bpm=BPM, form=form,
-                               seed=SEED)
-    fill_drums(composer, section_names, bars_per,
-               dense=[0, 45, 70, 30, 0])          # intro/outro no drums
-    fill_bass(composer, roots_per_bar, section_names, bars_per)
+
+def build_ballad(seed=None, density=None, offset=0, form=None, key=None):
+    """Build the full ballad composer (framework + per-part method swaps).
+
+    seed            : RNG seed for the tendency-masking lead (method 023)
+    density/offset  : anchor (bass) variant parameters — the HITL search
+                      space. density=None keeps the original 3/4 alternation.
+    """
+    form = form or FORM
+    key = key or KEY
+    section_names = [s[0] for s in form]
+    bars_per = [s[1] for s in form]
+    seed = SEED if seed is None else seed
+    rng = random.Random(seed)
+
+    section_roots, qualities, roots_per_bar = ballad_harmony(form, key)
+
+    composer = build_framework(style="pop", key=key, bpm=BPM, form=form,
+                               seed=seed)
+    fill_drums(composer, section_names, bars_per, dense=DRUM_DENSITY)
+    fill_bass(composer, roots_per_bar, section_names, bars_per,
+              density=density, offset=offset)
     fill_pad(composer, section_roots, section_names, bars_per, qualities)
-
-    # ---- per-part lead method swaps (same framework, same patterns) ----
-    lead_methods = {
-        "Intro": "001",     # skeleton sparse
-        "Verse": "004",     # prosodic lyrical
-        "Chorus": "011",    # voice-leading leaps
-        "Bridge": "023",    # tendency tension
-        "Outro": "013",     # retrograde motif
-    }
     fill_lead(composer, rng, section_roots, section_names, bars_per,
-              qualities, [lead_methods[s] for s in section_names])
+              qualities, [LEAD_METHODS[s] for s in section_names])
     fill_arp(composer, section_roots, section_names, bars_per, qualities,
-             on={"Intro": False, "Verse": True, "Chorus": True,
-                 "Bridge": False, "Outro": False})
+             on=ARP_ON)
+    return composer
+
+
+def main():
+    composer = build_ballad(seed=SEED)
 
     # ---- zero-drift gate ----
     ok, msg = composer.validate()
@@ -338,6 +359,9 @@ def main():
     midi_path = MIDI_DIR / "pop-ballad-hitl.mid"
     composer.to_midi(str(midi_path))
     assert midi_path.stat().st_size > 40
+
+    section_names = [s[0] for s in FORM]
+    section_roots, qualities, _ = ballad_harmony()
 
     # provenance
     prov = write_provenance(
@@ -348,14 +372,15 @@ def main():
                  f"progression:{','.join(PROG)}", "path:C middle-out",
                  "methods:001,012,018,015,004,011,023,013"],
         parameters={"seed": SEED, "form": str(FORM),
-                    "lead_methods": lead_methods},
+                    "lead_methods": LEAD_METHODS},
     )
     # grid viz
-    write_grid_visualization(composer.matrix, str(PROJECT / "Analysis" / "grid_phase1.txt"))
+    write_grid_visualization(composer.matrix,
+                             str(PROJECT / "Analysis" / "grid_phase1.txt"))
 
     print(f"OK {midi_path} ({midi_path.stat().st_size} B)")
     print(f"provenance: {prov}")
-    print(f"sections: {section_names} bars: {bars_per}")
+    print(f"sections: {section_names} bars: {[s[1] for s in FORM]}")
     print(f"roots: {section_roots} qualities: {qualities}")
 
 

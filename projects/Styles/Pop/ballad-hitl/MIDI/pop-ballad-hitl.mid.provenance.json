@@ -4,7 +4,7 @@
   "generator": "pop-ballad-hitl phase1 (paths.build_framework + per-part methods)",
   "sources": [
     "style:pop-ballad",
-    "key:D",
+    "key:Dm",
     "bpm:72",
     "progression:i,VI,III,VII",
     "path:C middle-out",
@@ -24,6 +24,6 @@
   "notes": "",
   "sha256": "87952519a2bb1aeca555c0fee91848f7d6e8d662942b98b9298ad62dabcdf9be",
   "bytes": 3292,
-  "created_utc": "2026-09-10T18:57:48.315347+00:00",
+  "created_utc": "2026-09-10T19:34:49.217167+00:00",
   "provenance_version": "1.0"
 }

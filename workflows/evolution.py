@@ -54,7 +54,7 @@ from workflows.unitmatrix_composer import UnitMatrixComposer
 from workflows.provenance import write_provenance
 from workflows.paths import (
     build_framework, fill_drums, fill_pad, fill_lead, fill_arp,
-    POP_FORM, PROGRESSIONS, KEY_OFFSET, MAJOR_DEGREES,
+    POP_FORM, PROGRESSIONS, progression_roots,
 )
 
 # --- key profiles (Lerdahl-Krumhansl, DB method 066) ------------------------
@@ -348,21 +348,10 @@ def evolve_anchor(style="pop", key="C", bpm=120, progression=None,
     section_names = [s[0] for s in form]
     bars_per = [s[1] for s in form]
     progression = progression or PROGRESSIONS.get(style, PROGRESSIONS["pop"])
-    off = KEY_OFFSET.get(key, 0)
 
-    # per-bar roots for the bass anchor
+    # per-bar roots for the bass anchor (mode-aware; canonical helper)
     total_bars = sum(bars_per)
-    deg_seq = [progression[i % len(progression)] for i in range(total_bars)]
-    roots_per_bar = []
-    for deg in deg_seq:
-        letter = deg.upper()
-        idx = MAJOR_DEGREES.index(letter) if letter in MAJOR_DEGREES else 0
-        major_offsets = [0, 2, 4, 5, 7, 9, 11]
-        scale_off = major_offsets[idx]
-        if deg != deg.upper():
-            minor_offsets = [0, 2, 3, 5, 7, 8, 10]
-            scale_off = minor_offsets[idx]
-        roots_per_bar.append(36 + off + scale_off)
+    roots_per_bar = progression_roots(progression, total_bars, key)
 
     # per-section roots (first bar of each section)
     section_roots = []

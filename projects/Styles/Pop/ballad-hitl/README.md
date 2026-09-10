@@ -62,7 +62,55 @@ LUFS -14.01  peak 0.891  silence 3.2%
 - Stems: `Audio/stems/track*_*.wav`
 - Grid: `Analysis/grid_phase1.txt`
 
+## Phase 3 — HITL evolution round (human pick)
+
+`Scripts/phase3_hitl.py` drives the engine's HITL machinery
+(`workflows.hitl`) over **this ballad's own framework** — the generic
+`run_hitl_round` builds a plain I–V–vi–IV pop anchor, which would discard
+the per-section regions and per-part methods from phase 1.
+
+**Search space**: the L3 anchor (bass) groove — Euclidean density ×
+on/off-beat offset. Macro-structure (form, harmony, per-part methods) is
+frozen, per plan advice #5 ("evolve phrases/anchors, not whole songs").
+
+```bash
+PY=/opt/data/micromamba/envs/musicom/bin/python
+$PY Scripts/phase3_hitl.py                       # round 0
+$PY Scripts/phase3_hitl.py --round 1 \
+      --parent-density 4 --parent-offset 240     # mutate around winner
+$PY Scripts/phase3_hitl.py --pick 2              # record the human pick
+```
+
+### Round 0 candidates (seed 7)
+
+| # | density | offset | bass onsets/bar | onset grid | fitness |
+|---|---|---|---|---|---|
+| 0 | 3 | 0 | 3 (walking) | {0, 480, 960} | 0.599 |
+| 1 | 4 | 0 | 4 (pulse) | {0, 480, 960, 1440} | 0.616 |
+| 2 | 5 | 0 | 5 (syncopated) | {0, 240, 720, 960, 1440} | 0.568 |
+| 3 | 4 | 240 | 4, pushed off-beat | {240, 720, 1200, 1680} | 0.616 [wildcard] |
+
+Fitness ties between cand 1 and cand 3 (the rule metric is phase-invariant)
+— exactly the ambiguity the human judge resolves.
+
+Artifacts per round: `HITL/roundN/candidates/cand*-d*-off*.{mid,ogg}`,
+`HITL/roundN/round.json`, and on a pick `HITL/roundN/evolution.json` +
+provenance sidecar on the winner.
+
+### Engine fix shipped with phase 3
+
+The mode-aware root lookup (`rules/harmony.progression_roots`) replaced a
+duplicated bug in **four** places (`workflows/paths.py`,
+`workflows/hitl.py`, `workflows/evolution.py`, and this project's phase 1).
+The old code did `MAJOR_DEGREES.index(deg.upper())`, collapsing every
+uppercase minor-mode degree (VI/III/VII) and every lowercase major-mode
+degree (ii/iii/vi/vii) onto index 0 — e.g. `i–VI–III–VII` in D produced
+`[38, 38, 38, 38]` (static harmony). Now: `[38, 46, 41, 48]` = D–B♭–F–C.
+
+Regression-locked by `tests/test_harmony_degrees.py` (16 tests).
+
 ## HITL hook
 
-Next: run `workflows.hitl.run_hitl_round()` over this anchor to evolve
-density/offset variants; human pick recorded in `evolution.json`.
+Round 0 is rendered and awaiting the human pick. Reply with a candidate
+number (0–3); the agent records it via `phase3_hitl.py --pick N`, writes
+`evolution.json` + provenance, and spawns round 1 mutated around the winner.
