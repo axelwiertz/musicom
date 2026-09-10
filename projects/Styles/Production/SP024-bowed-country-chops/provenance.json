@@ -1,0 +1,18 @@
+{
+  "job": "random-style production (SP) layer-aligned",
+  "date": "2026-09-10",
+  "production_method": "SP-024",
+  "production_method_name": "Bowed String Physical Modeling",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Country/001-country-loop-seamless/MIDI/loop.mid",
+  "layer": "absolute (all voices)",
+  "outputs": {
+    "full_mix_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP024-bowed-country-chops/Audio/SP024-bowed-country-chops.wav",
+    "full_mix_ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP024-bowed-country-chops/Audio/SP024-bowed-country-chops.ogg",
+    "stems": {
+      "track01_Violin": "/opt/data/repos/musicom/projects/Styles/Production/SP024-bowed-country-chops/Audio/stems/track01_Violin.wav",
+      "track02_Guitar": "/opt/data/repos/musicom/projects/Styles/Production/SP024-bowed-country-chops/Audio/stems/track02_Guitar.wav",
+      "track03_Bass": "/opt/data/repos/musicom/projects/Styles/Production/SP024-bowed-country-chops/Audio/stems/track03_Bass.wav",
+      "track04_Percussion": "/opt/data/repos/musicom/projects/Styles/Production/SP024-bowed-country-chops/Audio/stems/track04_Percussion.wav"
+    }
+  }
+}

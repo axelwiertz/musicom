@@ -1,0 +1,499 @@
+{
+  "method": "SP-024",
+  "method_module": "sound.synthesis.bowed",
+  "method_name": "Bowed String Physical Modeling (friction-induced waveguide)",
+  "registry_source": "workflows.musicom_workflow.SP_METHODS",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Country/001-country-loop-seamless/MIDI/loop.mid",
+  "bpm": 120.0,
+  "total_notes": 333,
+  "output_seconds": 65.25,
+  "voices": {
+    "1": {
+      "track_name": "Violin",
+      "role": "violin",
+      "notes": 61,
+      "bow_velocity": 0.26,
+      "bow_force": 1.2,
+      "bow_position": 0.17,
+      "friction_decay": 5.0,
+      "rosin_noise": 0.01,
+      "gain_db": -3.0,
+      "pan": "phrase drift -0.40..+0.40",
+      "register": "67-79"
+    },
+    "2": {
+      "track_name": "Guitar",
+      "role": "viola",
+      "notes": 80,
+      "bow_velocity": 0.19,
+      "bow_force": 1.5,
+      "bow_position": 0.15,
+      "friction_decay": 5.5,
+      "rosin_noise": 0.014,
+      "gain_db": -6.5,
+      "pan": "alternating 0.38/0.62",
+      "register": "43-66"
+    },
+    "3": {
+      "track_name": "Bass",
+      "role": "bass",
+      "notes": 64,
+      "bow_velocity": 0.13,
+      "bow_force": 2.2,
+      "bow_position": 0.1,
+      "friction_decay": 5.0,
+      "rosin_noise": 0.01,
+      "gain_db": -4.0,
+      "pan": "static 0.44",
+      "register": "36-47"
+    },
+    "4": {
+      "track_name": "Percussion",
+      "role": "perc (bowed chop)",
+      "notes": 128,
+      "spec": {
+        "36": {
+          "kind": "kick",
+          "body_freq": 65.4,
+          "dur_max": 0.2,
+          "force": 5.2,
+          "pos": 0.05,
+          "decay": 6.0,
+          "lp": [
+            300.0,
+            2
+          ],
+          "hp": null,
+          "noise": null,
+          "target_rms": 0.06
+        },
+        "38": {
+          "kind": "snare",
+          "body_freq": 190.0,
+          "dur_max": 0.15,
+          "force": 4.4,
+          "pos": 0.06,
+          "decay": 15.0,
+          "lp": [
+            4000.0,
+            1
+          ],
+          "hp": null,
+          "noise": {
+            "band": [
+              1200.0,
+              7000.0
+            ],
+            "lp": 7000.0,
+            "target_rms": 0.035
+          },
+          "target_rms": 0.05
+        },
+        "42": {
+          "kind": "hat",
+          "body_freq": 1700.0,
+          "dur_max": 0.07,
+          "force": 3.0,
+          "pos": 0.08,
+          "decay": 28.0,
+          "lp": null,
+          "hp": [
+            5000.0,
+            2
+          ],
+          "noise": {
+            "band": [
+              6000.0,
+              13000.0
+            ],
+            "lp": null,
+            "target_rms": 0.008
+          },
+          "target_rms": 0.01
+        }
+      },
+      "measured_centroid_hz": {
+        "kick": 301.1,
+        "hat": 9642.7,
+        "snare": 4665.1
+      },
+      "note": "GM drum notes remapped to short high-force near-bridge bow strokes, class-filtered (kick LP 300x2 / snare body+band noise / hat HP 5000x2 + air noise) and RMS-matched per drum class"
+    }
+  },
+  "verification": {
+    "silence_ratio": 0.6286,
+    "peak": 0.8473,
+    "rms_per_second": [
+      0.26056,
+      0.29449,
+      0.26144,
+      0.287,
+      0.30327,
+      0.26108,
+      0.29196,
+      0.26156,
+      0.26178,
+      0.30295,
+      0.26097,
+      0.29206,
+      0.29591,
+      0.26113,
+      0.28449,
+      0.25486,
+      0.01449,
+      0.00945,
+      0.01191,
+      0.00948,
+      0.01191,
+      0.00948,
+      0.01191,
+      0.00948,
+      0.01191,
+      0.00952,
+      0.01191,
+      0.00949,
+      0.01191,
+      0.00948,
+      0.01191,
+      0.00951,
+      0.01191,
+      0.00944,
+      0.01191,
+      0.00949,
+      0.01191,
+      0.00946,
+      0.01191,
+      0.00946,
+      0.01191,
+      0.00946,
+      0.01191,
+      0.00949,
+      0.01191,
+      0.00947,
+      0.01191,
+      0.00946,
+      0.01191,
+      0.00948,
+      0.01191,
+      0.00954,
+      0.01191,
+      0.00951,
+      0.01191,
+      0.00947,
+      0.01191,
+      0.00947,
+      0.01191,
+      0.00947,
+      0.01191,
+      0.00941,
+      0.01191,
+      0.00951,
+      0.0
+    ],
+    "per_note_checked": 141,
+    "per_note_hit": 141,
+    "per_note_hit_pct": 100.0,
+    "per_track": {
+      "1": {
+        "role": "violin",
+        "checked": 61,
+        "hit": 61,
+        "pct": 100.0
+      },
+      "2": {
+        "role": "viola",
+        "checked": 16,
+        "hit": 16,
+        "pct": 100.0
+      },
+      "3": {
+        "role": "bass",
+        "checked": 64,
+        "hit": 64,
+        "pct": 100.0
+      }
+    },
+    "pitch_estimate_sample": [
+      {
+        "track": 1,
+        "midi": 67,
+        "expected_hz": 392.0,
+        "detected_hz": 378.9,
+        "method": "fft",
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 71,
+        "expected_hz": 493.9,
+        "detected_hz": 479.3,
+        "method": "ac",
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 74,
+        "expected_hz": 587.3,
+        "detected_hz": 565.4,
+        "method": "ac",
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 71,
+        "expected_hz": 493.9,
+        "detected_hz": 479.3,
+        "method": "ac",
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 72,
+        "expected_hz": 523.3,
+        "detected_hz": 506.9,
+        "method": "ac",
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 76,
+        "expected_hz": 659.3,
+        "detected_hz": 630.0,
+        "method": "ac",
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 79,
+        "expected_hz": 784.0,
+        "detected_hz": 747.5,
+        "method": "ac",
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 76,
+        "expected_hz": 659.3,
+        "detected_hz": 630.0,
+        "method": "ac",
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 67,
+        "expected_hz": 392.0,
+        "detected_hz": 378.9,
+        "method": "fft",
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 71,
+        "expected_hz": 493.9,
+        "detected_hz": 479.3,
+        "method": "ac",
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 74,
+        "expected_hz": 587.3,
+        "detected_hz": 565.4,
+        "method": "ac",
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 71,
+        "expected_hz": 493.9,
+        "detected_hz": 479.3,
+        "method": "ac",
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 69,
+        "expected_hz": 440.0,
+        "detected_hz": 428.2,
+        "method": "ac",
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 74,
+        "expected_hz": 587.3,
+        "detected_hz": 565.4,
+        "method": "ac",
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 78,
+        "expected_hz": 740.0,
+        "detected_hz": 700.0,
+        "method": "ac",
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 74,
+        "expected_hz": 587.3,
+        "detected_hz": 565.4,
+        "method": "ac",
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 72,
+        "expected_hz": 523.3,
+        "detected_hz": 506.9,
+        "method": "ac",
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 76,
+        "expected_hz": 659.3,
+        "detected_hz": 630.0,
+        "method": "ac",
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 79,
+        "expected_hz": 784.0,
+        "detected_hz": 747.5,
+        "method": "ac",
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 76,
+        "expected_hz": 659.3,
+        "detected_hz": 630.0,
+        "method": "ac",
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 67,
+        "expected_hz": 392.0,
+        "detected_hz": 378.9,
+        "method": "fft",
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 71,
+        "expected_hz": 493.9,
+        "detected_hz": 479.3,
+        "method": "ac",
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 74,
+        "expected_hz": 587.3,
+        "detected_hz": 565.4,
+        "method": "ac",
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 71,
+        "expected_hz": 493.9,
+        "detected_hz": 479.3,
+        "method": "ac",
+        "ok": true
+      }
+    ],
+    "harmonic_energy": {
+      "1": {
+        "track": "Violin",
+        "midi": 67,
+        "f0_hz": 392.0,
+        "fundamental_present": true,
+        "harmonic_energy_8h": 0.3059
+      },
+      "2": {
+        "track": "Guitar",
+        "midi": 43,
+        "f0_hz": 98.0,
+        "fundamental_present": true,
+        "harmonic_energy_8h": 0.3727
+      },
+      "3": {
+        "track": "Bass",
+        "midi": 36,
+        "f0_hz": 65.4,
+        "fundamental_present": true,
+        "harmonic_energy_8h": 0.7234
+      }
+    },
+    "perc_class_centroid_hz": {
+      "kick": 332.8,
+      "hat": 9700.7,
+      "snare": 4607.8
+    },
+    "perc_class_rms": {
+      "kick": 0.0188,
+      "hat": 0.003,
+      "snare": 0.0149
+    },
+    "perc_class_stats": {
+      "36": {
+        "hits": 32,
+        "centroid_hz": 7812.8,
+        "rms": 0.0041,
+        "low_share": 0.086,
+        "high_share": 0.77
+      },
+      "38": {
+        "hits": 32,
+        "centroid_hz": 5595.6,
+        "rms": 0.0116,
+        "low_share": 0.001,
+        "high_share": 0.633
+      },
+      "42": {
+        "hits": 64,
+        "centroid_hz": 6779.2,
+        "rms": 0.0075,
+        "low_share": 0.043,
+        "high_share": 0.711
+      }
+    },
+    "perc_texture_ok": true,
+    "perc_texture_note": "measured on isolated class buses (coincident hits otherwise dominate the summed stem); ordering must be kick < snare < hat",
+    "core_seconds": 17.0,
+    "core_silence_ratio": 0.0328,
+    "core_rms_per_second": [
+      0.26056,
+      0.29449,
+      0.26144,
+      0.287,
+      0.30327,
+      0.26108,
+      0.29196,
+      0.26156,
+      0.26178,
+      0.30295,
+      0.26097,
+      0.29206,
+      0.29591,
+      0.26113,
+      0.28449,
+      0.25486,
+      0.01449
+    ],
+    "source_defect_note": "percussion track repeats to 63.25 s; violin/guitar/bass end at 16.5 s -> full-mix silence ratio inflated by the percussion-only tail"
+  },
+  "parameters": {
+    "sample_rate": 44100,
+    "engine": "sound.synthesis.bowed.BowedString",
+    "waveguide": "bidirectional delay lines (neck/bridge split at bow point)",
+    "friction": "exponential sliding model, Newton-Raphson 4 iterations",
+    "bridge_filter": "one-pole LPF (coef 0.6)",
+    "mix_bus": "soft-knee saturation thresh 0.85 slope 0.30, peak normalized to -1 dBFS (0.8473)"
+  }
+}
