@@ -59,16 +59,23 @@ Instruments/
 │   └── organ/
 ├── Guitar/
 │   └── acoustic/
-└── Percussion/
-    ├── drum_kit/
-    ├── marimba/
-    └── steel_drums/
+├── Percussion/
+│   ├── drum_kit/
+│   ├── marimba/
+│   └── steel_drums/
+└── World/
+    ├── sitar/
+    ├── koto/
+    ├── shamisen/
+    ├── kalimba/
+    ├── banjo/
+    └── shenai/
 ```
 
-Current instruments (26): Violin, Viola, Cello, Double Bass, Piano, Church
+Current instruments (27): Violin, Viola, Cello, Double Bass, Piano, Church
 Organ, Dulcimer, Trumpet, Trombone, French Horn, Tuba, Flute, Oboe, Clarinet,
 Bassoon, Alto Saxophone, Acoustic Guitar, Drum Kit, Marimba, Steel Drums,
-Sitar, Koto, Shamisen, Kalimba, Banjo, Bagpipe.
+Sitar, Koto, Shamisen, Kalimba, Banjo, Bagpipe, Shenai.
 
 ## Musicom Integration
 

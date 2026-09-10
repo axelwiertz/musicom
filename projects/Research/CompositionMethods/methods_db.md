@@ -166,6 +166,7 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 | **SP-066** | Air-Jet Labium (Flute) Physical Modeling (FLUE) | **Synthesis Engines** | Physical Flute / Flue-Organ Timbre | Models the flute/flue pipe as a self-sustained fluid oscillator: mouth pressure $p_m$ drives an unstable air jet (Bernoulli $v_j=C_v\sqrt{2p_m/\rho}$, convection at $0.4v_j$) that flips across the labium, injecting saturated acoustic flow $Q_{ac}=v_j b\,\mathrm{clip}(\eta_L/\eta_{\max})$ into an open-open bore (half-wave resonances $f_n=(n{+}1)c/2L_{eff}$). No vibrating solid — the only fluid-instability exciter; completes the family (reed SP-023, bow SP-024, lip-reed SP-065). Breath noise $\propto p_m$ separates flute from organ. $\mathcal{O}(1)$ per sample. |
 | **SP-067** | Kelly-Lochbaum Acoustic Tube Model (Vocal Tract Physical Modeling) (KLAT) | **Synthesis Engines** | Physical Vocal / Vowel / Formant Timbres | Models the vocal tract as an N-section lossless acoustic transmission line: the area function $A_i$ (vowel geometry) sets each junction's reflection coefficient $k_i=\frac{A_i-A_{i+1}}{A_i+A_{i+1}}$, and forward/backward pressure waves scatter through the two-port Kelly-Lochbaum lattice ($p^+_{i+1}=(1+k_i)p^+_i+k_i p^-_{i+1}$). A glottal pulse train (voiced) or frication noise (unvoiced) excites the glottal end; a $1-z^{-1}$ radiation load terminates the lips. Formants emerge from the area-function geometry — no formant filters. The physical/scattering-junction member of the vocal family (vs parametric SP-015/025/028/038/046). $\mathcal{O}(N)$ per sample, N≈8–20. |
 | **SP-068** | Bytebeat Synthesis (Integer-Expression Algorithmic Synthesis) | **Synthesis Engines** | Deterministic Chip / Glitch / Looping Timbre | Evaluates an integer expression $f(t)$ of a monotonic sample counter $t$ once per sample and takes the low byte as the waveform ($y=f(t) \& 255$), using only integer arithmetic and bitwise ops (shift/AND/XOR). Pitch = multiplier $K \to f = f_s\cdot\gcd(K,256)/256$ (or a phase accumulator for exact pitch); octave = `t>>s`; rhythm = `(t>>s)&mask` gates; harmony = additive/AND-XOR term stacks; macro-form = high-bit term `t>>P`. $\mathcal{O}(1)$ per sample, zero state, inherently looping (counter wraps mod $2^N$). The pure-integer, expression-driven counterpart to SP-035 GENDYN / SP-057 Chua; canonical continuous-fill layer for the Method Hybridization rule. |
+| **SP-069** | Wavelet Packet Spectral Synthesis (WPSS) | **Synthesis Engines** | Time-Scale Spectral Sculpting / Octave-Band Resynthesis Timbres | Decomposes audio into octave-spaced, constant-Q scale bands via Mallat's discrete wavelet transform (QMF lowpass/highpass filter pair + decimation), optionally expanded to a full wavelet-packet tree with Shannon-entropy best-basis selection, then recombines edited coefficients via the inverse transform. Scale label = octave; per-band gain = critical-band EQ; transposition = scale relabel $j \to j{+}s$; time-stretch = coefficient re-spacing; entropy threshold = denoise/shrinkage. The time-scale (log-frequency) counterpart to STFT phase-vocoder SP-026 / SMS SP-027; $\mathcal{O}(N \log N)$, deterministic per seed. |
 |---|
 
 
@@ -16930,3 +16931,91 @@ Aperiodicity is the point: the music has **global order** (every patch recurs, t
 - Beenker, F. P. M. (1982). "Algebraic theory of non-periodic tilings of the plane by two simple building blocks." TH Report 82-WSK-04, TU Eindhoven.
 - Solomyak, B. (1997). "Dynamics of self-similar tilings." *Ergodic Theory Dynam. Systems* 17, 695–738.
 - Miller, S. J., & Schmid, G. (2017). "Quasicrystals and continued fractions" (survey; cut-and-project chains in music).
+# Wavelet Packet Spectral Synthesis (WPSS) (Method SP-069)
+
+### Source
+
+Wavelet analysis-synthesis began in geophysics with **Jean Morlet & Alex Grossmann (1984), "Decomposition of Hardy functions into square integrable wavelets of constant shape," *SIAM J. Math. Anal.* 15(4)** (the continuous wavelet transform); **Yves Meyer (1985–87)** proved the existence of smooth orthonormal wavelet bases. The discrete, fast, invertible machinery used here is **Stéphane Mallat (1989), "A theory for multiresolution signal decomposition: the wavelet representation," *IEEE Trans. Pattern Anal. Mach. Intell.* 11(7)** — the dyadic pyramid (QMF lowpass/highpass pair + decimation) that makes the transform $\mathcal{O}(N)$ per level / $\mathcal{O}(N \log N)$ overall. The compactly-supported filter families (`dbN`, `symN`) are **Ingrid Daubechies (1988), "Orthonormal bases of compactly supported wavelets," *Comm. Pure Appl. Math.* 41**, standardized in her monograph **Daubechies (1992), *Ten Lectures on Wavelets*, SIAM**. The over-complete **wavelet-packet** best-basis algorithm (the knob that lets the tiling morph between pure octave bands and near-uniform STFT cells) is **R. R. Coifman & M. V. Wickerhauser (1992), "Entropy-based algorithms for best basis selection," *IEEE Trans. Inf. Theory* 38(2)**. The first musical application is **Kronland-Martinet, Morlet & Grossmann (1987), "Analysis of sound patterns through wavelet transforms," *Int. J. Pattern Recognition & Artificial Intelligence* 1(2)** — the "scalogram" (per-scale energy) as the time-scale music image. WPSS is the *time-scale* member of the spectral family: unlike STFT phase-vocoder (SP-026) and SMS (SP-027), whose atoms are fixed-window sinusoids on a linear frequency grid, WPSS's atoms are constant-$Q$ (log-spaced, octave-aligned) wavelets that match the ear's critical-band/ERB scaling and musical octaves.
+
+### Layer
+
+**Absolute** — sound production. WPSS consumes a symbolic spec (a per-unit scale-band gain/mute mask, time-scale stretch/transpose factors, a best-basis tree choice, and a wavelet family) derived from `MusicUnit` content and renders/transforms a raw audio buffer (WAV/OGG). It emits no MIDI (that would be `concrete`) and designs no pitch pools (that would be `abstract`). Candidate code path: `sound/synthesis/wavelet_packet.py` (sibling to `additive.py`, `spectral_wavetable.py`, `spectral_morph`; the `sound/effects/phase_vocoder.py` analog on a log-frequency, time-scale grid rather than a linear-frequency STFT grid).
+
+### Description
+
+Wavelet Packet Spectral Synthesis decomposes an audio signal (or a per-voice render) into **octave-spaced scale bands** via Mallat's discrete wavelet transform pyramid, optionally expanded to a full **wavelet-packet tree** with a Shannon-entropy best-basis selector, then recombines the modified coefficient bands with the inverse transform. The core idea: represent sound as a sum of **wavelet atoms** — short, zero-mean, dilated-and-shifted copies of one "mother" wavelet $\psi$ — rather than as a sum of sinusoids. A scale-$j$ detail band captures energy in roughly one octave $[f_s/2^{j+1}, f_s/2^j]$ centered near $3f_s/2^{j+2}$; because the cells dilate with scale (constant relative bandwidth $Q\!\approx\!1$), low frequencies get long time windows (good pitch resolution) and high frequencies get short time windows (good transient/attack resolution) — a "mathematical zoom" the fixed-window STFT cannot offer. Synthesis becomes **additive-style resynthesis in the time-scale domain**: each kept band is a time-localized "partial" whose gain, position, and scale label can be edited independently, then the inverse DWT perfectly reconstructs a modified waveform. Because scale labels are exactly octaves, transposition is a *relabeling* ($j \to j+s$), time-stretch is a *coefficient re-spacing*, and harmonic-envelope sculpting is per-band gain — all structurally matched to music (octaves, onset↔scale duality, critical bands). The workflow: (1) choose wavelet family + depth $J$; (2) forward DWT (or packet best-basis) → $a_J, d_J, \dots, d_1$; (3) edit bands per the `MusicUnit` spec (gain/mute, transpose, stretch, entropy threshold); (4) inverse DWT → resynthesized buffer.
+
+### Technical Mechanics
+
+**1. One-level decomposition (QMF pair).** Let $h$ be the lowpass (scaling) filter and $g$ the highpass (wavelet) filter, in quadrature mirror relation $g[k]=(-1)^k h[N-1-k]$. One level splits the approximation $a_j$ into a coarser approximation and a detail:
+$$a_{j+1}[n]=\sum_k h[k]\,a_j[2n-k],\qquad d_{j+1}[n]=\sum_k g[k]\,a_j[2n-k]$$
+(convolution then $\downarrow 2$ decimation). Iterating $J$ times on $a$ alone yields the **DWT** coefficients $\{a_J, d_J, d_{J-1}, \dots, d_1\}$ — one coarse approximation plus $J$ octave details.
+
+**2. Perfect reconstruction (inverse).** With synthesis filters $\tilde{h}, \tilde{g}$ (orthogonal case $\tilde{h}[k]=h[N-1-k]$, or a biorthogonal pair), upsample then filter and sum:
+$$a_j[n]=\sum_k \tilde{h}[k]\,a_{j+1}\!\left[\tfrac{n-k}{2}\right] + \sum_k \tilde{g}[k]\,d_{j+1}\!\left[\tfrac{n-k}{2}\right]$$
+where coefficients are zero at non-integer indices. Orthogonality guarantees exact, numerically stable reconstruction; energy is conserved $||x||^2 = ||a_J||^2 + \sum_j ||d_j||^2$.
+
+**3. Octave band and constant-$Q$.** Level-$j$ detail occupies approximately $f \in [f_s/2^{j+1}, f_s/2^j]$, center $f_j \approx 3 f_s / 2^{\,j+2}$, bandwidth $B_j \approx f_s/2^{j+1}$, so $Q_j = f_j/B_j \approx 3/2 \approx 1$ — a **constant-$Q$, log-spaced** tiling congruent with the octave (12 semitones per band) and with the ear's critical bands. This is the key structural difference from STFT/SMS (linear-frequency, fixed window).
+
+**4. Time-scale tiling / Heisenberg cells.** The Heisenberg cell at scale $j$ has time-extent $\propto 2^j$ and frequency-extent $\propto 2^{-j}$ (area constant). Low scales (large $j$): long time, narrow frequency → pitch-accurate. High scales (small $j$): short time, wide frequency → transient-accurate. A single DWT thus localizes an onset *and* a sustained pitch simultaneously, with no windowing trade-off.
+
+**5. Scalogram.** The energy image $S_j[n] = |d_j[n]|^2$ (the "scalogram") is the time-scale counterpart of the spectrogram. Per-band energy traces $E_j = \sum_n |d_j[n]|^2$ drive rhythm/texture; band entropy $H_j = -\sum p \log p$ over normalized $|d_j|$ drives complexity.
+
+**6. Wavelet-packet best basis.** Decompose *both* approximations and details recursively (the full binary tree of depth $D$), giving $2^D$ uniform leaves at the finest level (approaching an STFT tiling). Select the best basis bottom-up with a split rule:
+$$\text{split}(node) \iff \text{Cost}(node) > \text{Cost}(left) + \text{Cost}(right)$$
+with Cost an additive info measure (Shannon entropy $\sum |c_k|^2 \log|c_k|^2$, log-energy, or threshold count). This lets the tiling adapt per section: pure octave DWT for pitched/harmonic material, near-uniform packets for percussive/transient material.
+
+**7. Edit operations (synthesis controls).**
+- **Harmonic envelope sculpting (texture/pitch brightness):** multiply each detail band by a gain $G_j$ ($y = \mathrm{idwt}(a_J, G_J d_J, \dots, G_1 d_1)$) — one knob per octave = critical-band EQ with perfect-reconstruction semantics.
+- **Coarse transposition:** relabel scale index $j \to j+s$ (shift all bands up/down $s$ octaves); sub-octave shifts via packet leaves (relabel leaf depth).
+- **Time-stretch/compress:** re-space coefficient columns ($d_j[n] \to d_j[\lfloor \alpha n\rfloor]$ with bandlimited interpolation) — dyadic time-scale manipulation that preserves transient character better than STFT time-scaling.
+- **Spectral morph:** linearly interpolate two timbres' per-band gains $G_j = (1-\beta)G_j^A + \beta G_j^B$ — a cross-synthesis on a perceptual (octave) grid.
+- **Denoise/sparsify:** zero coefficients below a band-relative threshold $|d_j[n]| < \tau\sqrt{E_j}$ (wavelet shrinkage) — removes texture floor / reveals harmonic core.
+
+**8. Numerics.** Mallat FWT: $\mathcal{O}(N)$ per level, $\mathcal{O}(N)$ total per level over J=$\log_2 N$ levels → $\mathcal{O}(N \log N)$ forward and inverse (vs $\mathcal{O}(N M)$ for STFT with $M$ bins); memory $\mathcal{O}(N)$ in place. Fully vectorizable in NumPy (convolution via `np.convolve` / FFT), $J \approx 8$–$12$ for $f_s=44.1$ kHz. Deterministic per seed — identical buffer every render (safe for the zero-drift gate).
+
+### Musical Elements Framework
+
+| Element | Mechanism |
+|---|---|
+| **PITCH** | scale index $j$ = octave band (centered $3f_s/2^{j+2}$, width one octave); transpose = relabel $j \to j+s$; within-band periodicity = the note fundamental; packet leaves give sub-octave (semitone-capable) control; pitch *contour* = the ridge of a chosen scale in the scalogram |
+| **RHYTHM** | attack/onsets = high-frequency detail coefficients (small $j$) where the short time window localizes transients; scalogram energy spikes $S_j[n]$ = onset grid / accent map; per-band energy envelopes = rhythmic subdivision texture |
+| **HARMONY** | per-band gain vector $\{G_j\}$ = harmonic envelope / critical-band EQ; simultaneous bands = chord voicing (bass detail in high scale, melody in low scale); best-basis tree = autonomous harmonic-vs-percussive split of each section; threshold shrinkage = harmonic-core extraction |
+| **STRUCTURE** | coarse approximation $a_J$ = slow macro-form / harmonic bass bed (the "sketch"); detail bands = figuration layered above; per-section wavelet family/depth/best-basis choice = section geometry (intro coarse, chorus rich, bridge packet-dense); review of the coefficient tree = the piece's top-down plan |
+| **TEXTURE** | number/size of retained bands + entropy threshold = density (sparse ↔ dense); energy spread across scales = tonal vs noisy (rooted DWT = tonal, packet tree = noisy); shrinking/growing $J$ = granularity of the texture floor |
+
+### UnitMatrix Integration
+
+- **Rows (Voices)** = one independent DWT chain per voice; voices mix in the **coefficient domain** (per-band gain vectors add before the shared inverse transform), so per-voice octave masks isolate lead/bass/pad cleanly while a single inverse DWT rebuilds the mixed buffer. Lead = mid scales un-muted; bass = high scales boosted; pad = wide retained bands; percussion = packet leaves near the finest level.
+- **Columns (Sections)** = each section records `{STRUCTURE}` = `(wavelet_family, depth_J, best_basis_tree, scale_mask G_j, transpose_s)`; section boundary = new tree/mask (the inverse transform is run per section buffer). Intro = deep J + sparse mask; verse = base; chorus = packet-dense + full mask; bridge = transposed mask ($j\to j+s$); outro = coarse $a_J$ dominated.
+- **Cells (MusicUnit)** = `{PITCH}` → scale-label/octave transposition per note; `{RHYTHM}` → onset extracted from the scalogram ridge path; `{HARMONY}` → per-band gain vector; `{TEXTURE}` → retained-band count + shrinkage threshold. Deterministic per seed → the zero-drift gate holds (audio layer, no MIDI).
+- **Flow:** render/obtain a per-voice source buffer → `dwt(buffer, family, J)` → apply `{HARMONY}`/`{PITCH}`/`{TEXTURE}` edits to coefficients → `idwt` → section buffer → mix → post-FX (SP-007 EQ, SP-008 DRC, SP-009/032 reverb). Complements the spectral family: WPSS (time-scale) ↔ SP-026 phase-vocoder / SP-027 SMS (time-frequency STFT) ↔ SP-061 CLS (cepstral).
+
+### Pitfalls
+
+1. **Shift-variance (translation sensitivity)** — decimated DWT redistributes energy across bands when a note shifts by one sample (onset smearing in rhythm extraction). Fix: use the *undecimated/stationary* wavelet transform (SWT / "à trous", no downsampling) for analysis where translation invariance matters, or cycle-spin (average the reconstruction over all shifts); keep the decimated transform for plain resynthesis.
+2. **Boundary artifacts** — the pyramid assumes periodic extension; a non-periodic buffer wraps energy from the end to the start, ringing at section edges. Fix: symmetric/border extension (half-sample mirroring) or overlap-add the inverse transform over windowed frames; DC—block the residual.
+3. **Octave-only pitch grid is too coarse** — a pure DWT gives one knob per *octave*, not per semitone. Fix: two-stage — coarse transpose via scale relabel $j\to j+s$, then fine pitch within a band via packet leaves (depth $D$ up to $\log_2(\text{semitones})$), or drive a band-limited oscillator per band center; reserve the raw octave relabel for character shifts.
+4. **Cross-band leakage / aliasing** — short low-vanishing-moment filters (`haar`, `db2`) leak energy between adjacent octave bands and ring on steep transients. Fix: use higher-order filters (`db8`, `sym8`, biorthogonal `bior4.4`) for smooth separation; the inverse transform is exact but a *heavily edited* coefficient set can still alias — validate with a null test (forward → no-op → inverse == input to $<10^{-12}$).
+5. **Nonlinear phase smearing** — orthogonal `dbN` filters have nonlinear phase, so strong per-band gains slightly smear transient edges on reconstruction. Fix: prefer `sym` (least-asymmetric) or biorthogonal spline filters for near-linear phase when transient fidelity matters.
+6. **Sparse/edited output can go silent** — thresholding every band or muting the approximation $a_J$ removes the macro bed and leaves a thin, clicky residue. Fix: always keep $a_J$, and per the Method Hybridization rule pair WPSS (a spectral-sculpting layer) with a continuous fill source when the underlying material is sparse rhythmic generators (011/032).
+7. **Mallat FWT is $\mathcal{O}(N\log N)$, not free** — full packet best-basis search over a depth-$D$ tree costs $\mathcal{O}(2^D N)$ to evaluate all leaves before pruning. Fix: cap $D$ (typically 5–7) and evaluate the split criterion bottom-up in one pass; use the decimated FWT in a tight loop, NumPy `np.convolve`/FFT for the filter stage.
+
+### Comparison With Related Methods
+
+| Method | Domain | Atoms | Frequency grid | Transient fidelity |
+|---|---|---|---|---|
+| SP-026 Phase Vocoder | time-frequency (STFT) | fixed-window sinusoids | linear | poor (window-limited) |
+| SP-027 SMS | harmonic + noise split | sinusoid tracks + residual | linear (peak-tracked) | poor |
+| SP-039 IFFT additive | frequency frame | magnitude/phase bins | linear | poor |
+| **SP-069 WPSS** | **time-scale (DWT/packet)** | **constant-Q wavelet atoms** | **octave/log (critical-band)** | **excellent** |
+
+### References
+
+- Grossmann, A., & Morlet, J. (1984). "Decomposition of Hardy functions into square integrable wavelets of constant shape." *SIAM J. Math. Anal.* 15(4), 723–736.
+- Mallat, S. G. (1989). "A theory for multiresolution signal decomposition: the wavelet representation." *IEEE Trans. Pattern Anal. Mach. Intell.* 11(7), 674–693.
+- Daubechies, I. (1988). "Orthonormal bases of compactly supported wavelets." *Comm. Pure Appl. Math.* 41(7), 909–996.
+- Daubechies, I. (1992). *Ten Lectures on Wavelets*. SIAM.
+- Coifman, R. R., & Wickerhauser, M. V. (1992). "Entropy-based algorithms for best basis selection." *IEEE Trans. Inf. Theory* 38(2), 713–718.
+- Kronland-Martinet, R., Morlet, J., & Grossmann, A. (1987). "Analysis of sound patterns through wavelet transforms." *Int. J. Pattern Recognition & Artificial Intelligence* 1(2), 273–302.
+- Mallat, S. (2009). *A Wavelet Tour of Signal Processing: The Sparse Way*, 3rd ed. Academic Press.

@@ -180,6 +180,22 @@ pitch sweep (RMS, notes 24–96): preset 114 audible across the whole span,
 no gaps — SF2 never clips a composition. Range 55–96 is the lead-pan
 register (sweep proves the patch plays the full GM span).
 
+**Shenai added** (2026-09-10): GM111, World-family sixth entry
+(instrument.md + shenai.py), verified end-to-end UnitMatrixComposer →
+zero-drift ✓ → MIDI → FluidSynth WAV ✓; RenderPipeline stem label
+`trackXX_Shanai.wav` ✗ **QUIRK**: GM_PROGRAMS[111] = "Shanai" (GM2 spec
+spelling) — the stem label is `Shanai`, NOT `Shenai`; the instrument is the
+North Indian shehnai (also "shenai"), and FluidR3 preset 111 = "Shenai"
+(cosmetic only). STEM_LABEL matches the pipeline's real label ("Shanai") so
+stem-file lookups work. PhaseModSynth recommended (continuous-tone double
+reed: saw carrier, mod_freq_ratio 1.5, mod_depth 3.2 — between oboe 2.5 and
+bagpipe 4.5; attack 0.06 = real reed transient, sustain confirmed 0.400
+late-window ratio, no collapse). Identity: GM111 = shehnai — monophonic
+continuous raga line over a tanpura-style Sa-Pa drone; line-instrument quirk:
+modal melody over a pedal, NO dense harmony. Range 55–96 is the GM-patch span
+(empirical FluidR3 sweep 8/8 notes audible); real shehnai register is 62–84
+(D4–C6). Solo-render spectral check: 4–8 kHz buzz 1.3% (no comb-filtering).
+
 ## Python usage
 
 ```python
@@ -226,6 +242,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | World | Koto | 107 | 51–90 | lead, melody, ornament, drone, harmony |
 | World | Shamisen | 106 | 45–89 | lead, melody, ornament, drone, countermelody |
 | World | Kalimba | 108 | 48–96 | lead, melody, ornament, drone, harmony |
+| World | Shenai | 111 | 55–96 | lead, melody, ornament, drone, accent |
 | Woodwind | Bagpipe | 109 | 53–96 | lead, melody, ornament, drone, accent |
 
 ## Stem label quirks (RenderPipeline)
@@ -257,6 +274,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 106 | Shamisen | Shamisen ✓ (GM_PROGRAMS[106] + FluidR3 preset 106 both "Shamisen") |
 | 108 | Kalimba | Kalimba ✓ (GM_PROGRAMS[108] + FluidR3 preset 108 both "Kalimba") |
 | 109 | Bagpipe | **Bag_pipe** ✗ (GM_PROGRAMS[109] = "Bag pipe" — two words; FluidR3 preset 109 = "BagPipe") |
+| 111 | Shanai | **Shanai** ✗ (GM_PROGRAMS[111] = "Shanai" — GM2 spec spelling; instrument = Shenai, FluidR3 preset 111 = "Shenai") |
 | 114 | Steel Drums | Steel Drums ✓ (GM_PROGRAMS[114] + FluidR3 preset 114 both "Steel Drums") |
 | ch9/pgm0 | Drums | **Acoustic_Grand_Piano** ✗ (program-0 fallback) |
 

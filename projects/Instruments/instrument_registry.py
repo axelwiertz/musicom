@@ -51,6 +51,7 @@ _INSTRUMENT_MODULES = {
     "World.kalimba.kalimba": "kalimba",
     "World.banjo.banjo": "banjo",
     "Woodwind.bagpipe.bagpipe": "bagpipe",
+    "World.shenai.shenai": "shenai",
 }
 
 _FIELDS = (
@@ -148,6 +149,7 @@ SHAMISEN = ALL_INSTRUMENTS["shamisen"]
 KALIMBA = ALL_INSTRUMENTS["kalimba"]
 BANJO = ALL_INSTRUMENTS["banjo"]
 BAGPIPE = ALL_INSTRUMENTS["bagpipe"]
+SHENAI = ALL_INSTRUMENTS["shenai"]
 
 
 def by_name(name):
@@ -207,6 +209,8 @@ def registry_table():
         elif low == "banjo":
             role = "lead, melody, ornament, rhythm, accent"
         elif low == "bagpipe":
+            role = "lead, melody, ornament, drone, accent"
+        elif low == "shenai":
             role = "lead, melody, ornament, drone, accent"
         else:
             role = "lead, harmony, accent"
