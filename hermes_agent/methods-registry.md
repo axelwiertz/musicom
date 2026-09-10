@@ -86,6 +86,27 @@ Status: `implemented` = in sound/ package · `partial` = some pieces exist · `r
 | SP-036 | Klatt-Cascade Formant Voice / Speech Synthesis (klattsch-style) | implemented | sound/synthesis/formant_voice.py |
 | SP-037 | Pitch-Tracked 3-Band Sub-Harmonic Generator (Penteo 8 Synthesized LFE-style) | implemented | sound/effects/subharmonic.py |
 
+> ⚠️ **ID-space conflict (found 2026-09-10):** `docs/methods.md` independently
+> assigned **SP-033…SP-037** to different absolute-layer methods (Digital
+> Waveguide, Higher-Order Ambisonics, GENDYN, Pulsar, PSOLA) while this
+> registry used the same IDs for the 2026-09-03/09-07 surveillance replications
+> (SuperStarSaw, Thorus XT, Shimmer Verb, klattsch, Penteo 8). Those five IDs
+> are **duplicated across the two docs**. Reproduction is untouched (SP_METHODS
+> resolves to the sound/ modules), but the ID space must be reconciled in a
+> dedicated pass; new IDs from 2026-09-10 onward start above the global max
+> (SP-069) so no *new* collisions can occur.
+
+## Post-Processing / DSP (2026-09-10 scan additions)
+
+| ID | Method | Status | Location |
+|----|--------|--------|----------|
+| SP-069 | Switched Discrete Distortion Topology Bank (FuzzBillion-style) | implemented | sound/effects/topology_distortion.py |
+| SP-070 | Morphing Five-Character Resonant Filter (ZERO9 Fusion Filter-style) | implemented | sound/effects/morph_filter.py |
+| SP-071 | Gated Reverb + Dual-Engine Delay + Glitch Chain + Parallel Band Compressor (ZERO9 Severed Space / Eccentric Echo / Fractured Frequency / Crushing Compressor-style) | implemented | sound/effects/severance.py |
+| SP-072 | Three-Partial Pad Bank with Stochastic Microtonal Critters Layer (Crow Hill Brackish Pads-style) | implemented | sound/synthesis/critter_pad.py |
+| SP-073 | Twin-Detuned-Comb Music Box Modal Synthesis (Muro Box N40-style) | implemented | sound/synthesis/music_box.py |
+| SP-074 | Eight-Channel Sample Drum Machine + CV Lane Sequencer (Erica Synths Bullfrog Drums-style) | implemented | sound/generators/drum_machine.py |
+
 ## Mastering (from MusicTech workflow)
 
 | Method | Status | Location |

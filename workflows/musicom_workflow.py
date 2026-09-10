@@ -140,6 +140,16 @@ SP_METHODS = {
     "SP-035": ("sound.effects.shimmer_reverb", "Fractional-Pitch Shimmer Reverb (SOLA Shift in Feedback)"),
     "SP-036": ("sound.synthesis.formant_voice", "Klatt-Cascade Formant Voice / Speech Synthesis (klattsch-style)"),
     "SP-037": ("sound.effects.subharmonic", "Pitch-Tracked 3-Band Sub-Harmonic Generator (Penteo 8 Synthesized LFE-style)"),
+    # NOTE (2026-09-10): docs/methods.md already reserves SP-038..SP-068 for the
+    # absolute-layer catalog (VOSIM, FDTD, DDSP, ...).  The LAYER DISCIPLINE
+    # union (SP_METHODS ∪ methods-registry.md) therefore under-counts; the true
+    # next free SP-ID is the global max across all three docs + 1 = SP-069.
+    "SP-069": ("sound.effects.topology_distortion", "Switched Discrete Distortion Topology Bank (FuzzBillion-style)"),
+    "SP-070": ("sound.effects.morph_filter", "Morphing Five-Character Resonant Filter (ZERO9 Fusion Filter-style)"),
+    "SP-071": ("sound.effects.severance", "Gated Reverb + Dual-Engine Delay + Glitch Chain + Parallel Band Compressor (ZERO9-style)"),
+    "SP-072": ("sound.synthesis.critter_pad", "Three-Partial Pad Bank with Stochastic Microtonal Critters Layer (Brackish Pads-style)"),
+    "SP-073": ("sound.synthesis.music_box", "Twin-Detuned-Comb Music Box Modal Synthesis (Muro Box N40-style)"),
+    "SP-074": ("sound.generators.drum_machine", "Eight-Channel Sample Drum Machine + Sequencer (Bullfrog Drums-style)"),
 }
 
 

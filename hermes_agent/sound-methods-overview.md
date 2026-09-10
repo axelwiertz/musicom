@@ -62,6 +62,12 @@ comparable to, and how do I use it in a workflow?*
 | `sound/effects/subharmonic.py` | SubHarmonicGenerator, SubBand | effects (sub/LFE) | Penteo 8 Synthesized LFE, sub-harmonic pedals | audio → pitch-tracked 3-band sub-octave LFE signal (mute-able bands, add-fifth/sub-sub) |
 | `sound/utils/midi.py` | MicrotonalExporter | export | KHÔRA microtonal | notes → pitch-bend MIDI |
 | `sound/tuning/just_intonation.py` | JustIntonation | tuning | KHÔRA | ratio → freq/scale |
+| `sound/effects/topology_distortion.py` | FuzzBillion, TopologyStage | effects (distortion) | Teaching Machines FuzzBillion | audio + 11-switch code (10^11 circuits) + gain → distorted audio |
+| `sound/effects/morph_filter.py` | FusionFilter, filter_character | effects (filter) | ZERO9 Fusion Filter | audio + cutoff/res/position(0..4) → morphed five-character filtered audio |
+| `sound/effects/severance.py` | GatedReverb, DualEngineDelay, RhythmicGlitchChain, ParallelBandCompressor, spectral_declash | effects (ZERO9 suite) | ZERO9 Severed Space / Eccentric Echo / Fractured Frequency / Crushing Compressor | audio + triggers/patterns → gated-reverb, dual-engine delay, glitch chain, 4-band up/down parallel compression |
+| `sound/synthesis/critter_pad.py` | PadPartialBank, Partial, Critters | synthesis (pads) | Crow Hill Brackish Pads | partial balances + seed → wobbling microtonal pad with stochastic Critters layer, cassette + splosh |
+| `sound/synthesis/music_box.py` | TwinCombMusicBox, MusicBoxComb | synthesis (modal, idiophone) | Muro Box N40 (Sublime twin comb) | midi note/melody + detune cents → inharmonic tine stereo audio (14-cent twin-comb chorus) |
+| `sound/generators/drum_machine.py` | BullfrogDrums, SampleChannel, CVChannel, Kit | sequencing (drum machine) | Erica Synths Bullfrog Drums | 64-step X0X grid + velocity/swing/flam → stereo kit audio + CV/midi sequence |
 | `sound/sync/clock.py` | DAWClockBridge | sync | MTC/MIDI clock | bpm → clock pulses |
 | `sound/render/fluidsynth.py` | FluidSynthRenderer | render | SF2 synth | MIDI → WAV |
 | `sound/render/vst.py` | VSTRenderer | render | DAW VST3 | MIDI → VST audio |
