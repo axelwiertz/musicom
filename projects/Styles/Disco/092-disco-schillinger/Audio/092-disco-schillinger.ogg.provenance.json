@@ -1,0 +1,18 @@
+{
+  "artifact": "092-disco-schillinger.ogg",
+  "classification": "ai-assisted",
+  "generator": "workflows.musicom_workflow.produce(method='SP-001')",
+  "sources": [],
+  "parameters": {
+    "phase": 2,
+    "source_midi": "092-disco-schillinger.mid",
+    "engine": "FluidSynth SoundFont -> WAV -> ffmpeg libopus",
+    "bpm": 118,
+    "key": "Eb major"
+  },
+  "notes": "Disco / Schillinger method-018 render.",
+  "sha256": "60db38db793d5b288bbf7b44f7d633f63fafe6f25740216fd77343236e8659ab",
+  "bytes": 375573,
+  "created_utc": "2026-09-10T23:11:24.333112+00:00",
+  "provenance_version": "1.0"
+}

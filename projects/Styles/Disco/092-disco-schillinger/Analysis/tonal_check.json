@@ -1,0 +1,12 @@
+{
+  "phase2": {
+    "note_energy_ratio": 0.5931,
+    "windows": 98,
+    "notes_in_midi": 1237
+  },
+  "phase1": {
+    "note_energy_ratio": 0.668,
+    "windows": 98,
+    "notes_in_midi": 191
+  }
+}

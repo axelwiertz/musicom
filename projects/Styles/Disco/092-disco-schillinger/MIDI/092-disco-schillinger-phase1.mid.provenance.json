@@ -1,0 +1,29 @@
+{
+  "artifact": "092-disco-schillinger-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "SchillingerGenerator(method 018)",
+  "sources": [],
+  "parameters": {
+    "phase": 1,
+    "seed": 20260910,
+    "generators": "a=7, b=4",
+    "resultant_pulses": [
+      4,
+      3,
+      1,
+      4,
+      2,
+      2,
+      4,
+      1,
+      3,
+      4
+    ],
+    "method": "018 Schillinger System of Musical Design"
+  },
+  "notes": "Raw Schillinger draft: fractional (off-grid) onsets, coordinate-axis pitch projection, no harmony.",
+  "sha256": "c55b01551080b34b09606d04dc2a36a33bbde9d20ecdb2beab45fb49d7216b9a",
+  "bytes": 1723,
+  "created_utc": "2026-09-10T23:11:10.675859+00:00",
+  "provenance_version": "1.0"
+}

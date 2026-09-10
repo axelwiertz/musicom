@@ -1,0 +1,71 @@
+{
+  "project": "092-disco-schillinger",
+  "genre": "Disco",
+  "method": "018 Schillinger System of Musical Design",
+  "layer": "concrete",
+  "seed": 20260910,
+  "bpm": 118,
+  "key": "Eb major",
+  "grid_16th": 120,
+  "schillinger": {
+    "a": 7,
+    "b": 4,
+    "resultant": [
+      4,
+      3,
+      1,
+      4,
+      2,
+      2,
+      4,
+      1,
+      3,
+      4
+    ]
+  },
+  "progression": [
+    "EbI",
+    "Cvi",
+    "Fii",
+    "BbV",
+    "EbI",
+    "BbV",
+    "Cvi",
+    "AbIV",
+    "AbIV",
+    "BbV",
+    "EbI",
+    "Cvi",
+    "Fii",
+    "BbV",
+    "EbI",
+    "Cvi",
+    "AbIV",
+    "BbV",
+    "EbI",
+    "Cvi",
+    "Fii",
+    "BbV",
+    "EbI",
+    "EbI"
+  ],
+  "sections": [
+    "Intro",
+    "Verse",
+    "Chorus",
+    "Break",
+    "Chorus2",
+    "Outro"
+  ],
+  "voices": [
+    "Lead",
+    "Sax",
+    "Piano",
+    "Organ",
+    "Guitar",
+    "Bass",
+    "Drums"
+  ],
+  "vl_flags": 6,
+  "vl_fixes": 6
+}

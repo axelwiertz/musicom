@@ -1,0 +1,117 @@
+{
+  "instruments": [
+    {
+      "program": 56,
+      "channel": 0,
+      "notes": 185,
+      "min": 62,
+      "max": 80,
+      "instrument": "Trumpet",
+      "range": [
+        54,
+        86
+      ],
+      "sweet_spot": null,
+      "in_range": true
+    },
+    {
+      "program": 65,
+      "channel": 1,
+      "notes": 96,
+      "min": 62,
+      "max": 79,
+      "instrument": "Alto Saxophone",
+      "range": [
+        49,
+        88
+      ],
+      "sweet_spot": [
+        61,
+        79
+      ],
+      "in_range": true
+    },
+    {
+      "program": 1,
+      "channel": 2,
+      "notes": 120,
+      "min": 60,
+      "max": 84,
+      "instrument": "Acoustic Grand Piano",
+      "range": [
+        21,
+        108
+      ],
+      "sweet_spot": null,
+      "in_range": true
+    },
+    {
+      "program": 19,
+      "channel": 3,
+      "notes": 72,
+      "min": 55,
+      "max": 65,
+      "instrument": "Church Organ",
+      "range": [
+        36,
+        96
+      ],
+      "sweet_spot": [
+        55,
+        79
+      ],
+      "in_range": true
+    },
+    {
+      "program": 25,
+      "channel": 4,
+      "notes": 192,
+      "min": 53,
+      "max": 75,
+      "instrument": "Acoustic Guitar (nylon)",
+      "range": [
+        40,
+        84
+      ],
+      "sweet_spot": null,
+      "in_range": true
+    },
+    {
+      "program": 43,
+      "channel": 5,
+      "notes": 192,
+      "min": 34,
+      "max": 56,
+      "instrument": "Double Bass",
+      "range": [
+        28,
+        74
+      ],
+      "sweet_spot": [
+        40,
+        55
+      ],
+      "in_range": true
+    },
+    {
+      "program": 0,
+      "channel": 9,
+      "notes": 380,
+      "min": 36,
+      "max": 51,
+      "instrument": "drum kit (ch9)",
+      "range": [
+        35,
+        81
+      ],
+      "in_range": true
+    }
+  ],
+  "render_windows": 98,
+  "peak_hz_min": 54.0,
+  "peak_hz_median": 312.0,
+  "peak_hz_max": 1662.0,
+  "windows_on_12tet_note_frac": 0.4184,
+  "mean_harmonic_energy_ratio": 0.0284,
+  "verdict_tonal": "SUSPECT (noise-like)"
+}
