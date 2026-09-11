@@ -1,0 +1,87 @@
+{
+  "artifact": "093-rock-euclidean.mid",
+  "classification": "ai-assisted",
+  "generator": "generators.rhythm.euclidian + musicom rules layer",
+  "sources": [],
+  "parameters": {
+    "phase": 2,
+    "seed": 20260911,
+    "bpm": 128,
+    "key": "E aeolian",
+    "grid": "16th (120 @ 480 TPB)",
+    "progression": [
+      "Ei",
+      "Ei",
+      "CVI",
+      "DVII",
+      "Ei",
+      "CVI",
+      "GIII",
+      "DVII",
+      "CVI",
+      "DVII",
+      "Ei",
+      "Ei",
+      "Aiv",
+      "CVI",
+      "GIII",
+      "DVII",
+      "CVI",
+      "DVII",
+      "Ei",
+      "Ei",
+      "Ei",
+      "Ei",
+      "CVI",
+      "Ei"
+    ],
+    "euclid_patterns": {
+      "lead": [
+        6,
+        16,
+        120
+      ],
+      "guitar": [
+        4,
+        16,
+        120
+      ],
+      "piano": [
+        3,
+        8,
+        240
+      ],
+      "bass": [
+        8,
+        8,
+        240
+      ],
+      "kick": [
+        4,
+        16,
+        120
+      ],
+      "snare": [
+        2,
+        8,
+        240
+      ],
+      "hat": [
+        8,
+        16,
+        120
+      ],
+      "organ": [
+        1,
+        4,
+        480
+      ]
+    },
+    "method": "012 Euclidean Groove Locking + rules"
+  },
+  "notes": "",
+  "sha256": "4df35ea5357570ef102ff98bc03e55546eff9a2e69d17583991144493e61975e",
+  "bytes": 7987,
+  "created_utc": "2026-09-11T23:14:51.098308+00:00",
+  "provenance_version": "1.0"
+}

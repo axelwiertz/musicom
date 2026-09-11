@@ -1,0 +1,97 @@
+{
+  "project": "093-rock-euclidean",
+  "genre": "Rock",
+  "method": "012 Euclidean Groove Locking",
+  "layer": "concrete",
+  "seed": 20260911,
+  "bpm": 128,
+  "key": "E aeolian",
+  "grid_16th": 120,
+  "euclid_patterns": {
+    "lead": [
+      6,
+      16,
+      120
+    ],
+    "guitar": [
+      4,
+      16,
+      120
+    ],
+    "piano": [
+      3,
+      8,
+      240
+    ],
+    "bass": [
+      8,
+      8,
+      240
+    ],
+    "kick": [
+      4,
+      16,
+      120
+    ],
+    "snare": [
+      2,
+      8,
+      240
+    ],
+    "hat": [
+      8,
+      16,
+      120
+    ],
+    "organ": [
+      1,
+      4,
+      480
+    ]
+  },
+  "phase1_unit_ticks": 417,
+  "progression": [
+    "Ei",
+    "Ei",
+    "CVI",
+    "DVII",
+    "Ei",
+    "CVI",
+    "GIII",
+    "DVII",
+    "CVI",
+    "DVII",
+    "Ei",
+    "Ei",
+    "Aiv",
+    "CVI",
+    "GIII",
+    "DVII",
+    "CVI",
+    "DVII",
+    "Ei",
+    "Ei",
+    "Ei",
+    "Ei",
+    "CVI",
+    "Ei"
+  ],
+  "sections": [
+    "Intro",
+    "Verse",
+    "Chorus",
+    "Bridge",
+    "Chorus2",
+    "Outro"
+  ],
+  "voices": [
+    "Lead",
+    "Guitar",
+    "Piano",
+    "Organ",
+    "Bass",
+    "Drums"
+  ],
+  "vl_flags": 6,
+  "vl_fixes": 6
+}

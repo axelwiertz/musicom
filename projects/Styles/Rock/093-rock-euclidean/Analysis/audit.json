@@ -1,0 +1,253 @@
+{
+  "project": "093-rock-euclidean",
+  "grid_phase2": {
+    "label": "phase2",
+    "grid_16th": 120,
+    "grid_8th": 240,
+    "total_notes": 972,
+    "total_off_16th": 0,
+    "total_off_8th": 56,
+    "voices": [
+      {
+        "voice": "Lead(fiddle)",
+        "program": 110,
+        "channel": 0,
+        "notes": 120,
+        "off_16th": 0,
+        "off_8th": 56,
+        "first_off_16th": [],
+        "track_end": 46080
+      },
+      {
+        "voice": "Guitar",
+        "program": 25,
+        "channel": 1,
+        "notes": 192,
+        "off_16th": 0,
+        "off_8th": 0,
+        "first_off_16th": [],
+        "track_end": 46080
+      },
+      {
+        "voice": "Piano",
+        "program": 1,
+        "channel": 2,
+        "notes": 72,
+        "off_16th": 0,
+        "off_8th": 0,
+        "first_off_16th": [],
+        "track_end": 46080
+      },
+      {
+        "voice": "Organ",
+        "program": 19,
+        "channel": 3,
+        "notes": 72,
+        "off_16th": 0,
+        "off_8th": 0,
+        "first_off_16th": [],
+        "track_end": 46080
+      },
+      {
+        "voice": "Bass",
+        "program": 43,
+        "channel": 4,
+        "notes": 192,
+        "off_16th": 0,
+        "off_8th": 0,
+        "first_off_16th": [],
+        "track_end": 46080
+      },
+      {
+        "voice": "Drums",
+        "program": 0,
+        "channel": 9,
+        "notes": 324,
+        "off_16th": 0,
+        "off_8th": 0,
+        "first_off_16th": [],
+        "track_end": 46080
+      }
+    ]
+  },
+  "harmony_phase2": [
+    {
+      "voice": "Lead(fiddle)",
+      "program": 110,
+      "notes": 120,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "first_out_of_scale": [],
+      "first_out_of_chord": []
+    },
+    {
+      "voice": "Guitar",
+      "program": 25,
+      "notes": 192,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "first_out_of_scale": [],
+      "first_out_of_chord": []
+    },
+    {
+      "voice": "Piano",
+      "program": 1,
+      "notes": 72,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "first_out_of_scale": [],
+      "first_out_of_chord": []
+    },
+    {
+      "voice": "Organ",
+      "program": 19,
+      "notes": 72,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "first_out_of_scale": [],
+      "first_out_of_chord": []
+    },
+    {
+      "voice": "Bass",
+      "program": 43,
+      "notes": 192,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "first_out_of_scale": [],
+      "first_out_of_chord": []
+    }
+  ],
+  "range_phase2": [
+    {
+      "voice": "Lead(fiddle)",
+      "instrument": "Fiddle",
+      "min": 72,
+      "max": 95,
+      "range": [
+        55,
+        96
+      ],
+      "in_range": true
+    },
+    {
+      "voice": "Guitar",
+      "instrument": "Acoustic Guitar (nylon)",
+      "min": 50,
+      "max": 60,
+      "range": [
+        40,
+        84
+      ],
+      "in_range": true
+    },
+    {
+      "voice": "Piano",
+      "instrument": "Acoustic Grand Piano",
+      "min": 55,
+      "max": 78,
+      "range": [
+        21,
+        108
+      ],
+      "in_range": true
+    },
+    {
+      "voice": "Organ",
+      "instrument": "Church Organ",
+      "min": 55,
+      "max": 66,
+      "range": [
+        36,
+        96
+      ],
+      "in_range": true
+    },
+    {
+      "voice": "Bass",
+      "instrument": "Double Bass",
+      "min": 36,
+      "max": 57,
+      "range": [
+        28,
+        74
+      ],
+      "in_range": true
+    }
+  ],
+  "zero_drift_phase2": {
+    "max_end": 46080,
+    "drift_per_track": [
+      [
+        "Lead(fiddle)",
+        46080,
+        0
+      ],
+      [
+        "Guitar",
+        46080,
+        0
+      ],
+      [
+        "Piano",
+        46080,
+        0
+      ],
+      [
+        "Organ",
+        46080,
+        0
+      ],
+      [
+        "Bass",
+        46080,
+        0
+      ],
+      [
+        "Drums",
+        46080,
+        0
+      ]
+    ],
+    "drift_ok": true
+  },
+  "zero_drift_phase1": {
+    "max_end": 46080,
+    "drift_per_track": [
+      [
+        "Lead(fiddle)",
+        46080,
+        0
+      ]
+    ],
+    "drift_ok": true
+  },
+  "phase1_fingerprint": {
+    "label": "phase1-raw",
+    "grid_16th": 120,
+    "grid_8th": 240,
+    "total_notes": 54,
+    "total_off_16th": 48,
+    "total_off_8th": 48,
+    "voices": [
+      {
+        "voice": "Lead(fiddle)",
+        "program": 110,
+        "channel": 0,
+        "notes": 54,
+        "off_16th": 48,
+        "off_8th": 48,
+        "first_off_16th": [
+          904,
+          1814,
+          2391,
+          3288
+        ],
+        "track_end": 46080
+      }
+    ]
+  },
+  "verdict_grid": "PASS 0 off-grid (16th)",
+  "verdict_harmony": "PASS 0 out",
+  "verdict_range": "PASS",
+  "verdict_zerodrift": "PASS"
+}

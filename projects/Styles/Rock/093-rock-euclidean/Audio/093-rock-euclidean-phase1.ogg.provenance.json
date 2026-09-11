@@ -1,0 +1,19 @@
+{
+  "artifact": "093-rock-euclidean-phase1.ogg",
+  "classification": "ai-assisted",
+  "generator": "fluidsynth(FluidR3_GM.sf2) + ffmpeg libopus (SP-001)",
+  "sources": [],
+  "parameters": {
+    "phase": 1,
+    "source_midi": "093-rock-euclidean-phase1.mid",
+    "engine": "FluidSynth SoundFont -> peak norm -1 dBFS -> ffmpeg libopus 48k",
+    "bpm": 128,
+    "key": "E aeolian",
+    "method": "012 Euclidean Groove Locking"
+  },
+  "notes": "Rock / method-012 Euclidean render.",
+  "sha256": "96bbf7823037d751160287a2f8452cd8fd9995ad95b9c794b0c7bab57265354d",
+  "bytes": 387975,
+  "created_utc": "2026-09-11T23:15:09.243677+00:00",
+  "provenance_version": "1.0"
+}

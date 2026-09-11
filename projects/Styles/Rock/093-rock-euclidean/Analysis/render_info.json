@@ -1,0 +1,22 @@
+{
+  "phase2": {
+    "midi": "/opt/data/repos/musicom/projects/Styles/Rock/093-rock-euclidean/MIDI/093-rock-euclidean.mid",
+    "wav": "/opt/data/repos/musicom/projects/Styles/Rock/093-rock-euclidean/Audio/093-rock-euclidean.wav",
+    "ogg": "/opt/data/repos/musicom/projects/Styles/Rock/093-rock-euclidean/Audio/093-rock-euclidean.ogg",
+    "peak_before_norm": 1.0,
+    "volume_applied": 0.89,
+    "peak_after_norm": 0.89,
+    "wav_bytes": 10206542,
+    "ogg_bytes": 404221
+  },
+  "phase1": {
+    "midi": "/opt/data/repos/musicom/projects/Styles/Rock/093-rock-euclidean/MIDI/093-rock-euclidean-phase1.mid",
+    "wav": "/opt/data/repos/musicom/projects/Styles/Rock/093-rock-euclidean/Audio/093-rock-euclidean-phase1.wav",
+    "ogg": "/opt/data/repos/musicom/projects/Styles/Rock/093-rock-euclidean/Audio/093-rock-euclidean-phase1.ogg",
+    "peak_before_norm": 0.2527,
+    "volume_applied": 3.5217,
+    "peak_after_norm": 0.89,
+    "wav_bytes": 8291150,
+    "ogg_bytes": 387975
+  }
+}

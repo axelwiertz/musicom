@@ -1,0 +1,22 @@
+{
+  "run_date": "2026-09-11",
+  "seed": 20260911,
+  "style": "Rock",
+  "method": "012",
+  "layer": "concrete",
+  "cadence": "concrete (prior abstract run 090; 091/092 concrete too)",
+  "excluded_recent": [
+    "002",
+    "003",
+    "018",
+    "045"
+  ],
+  "candidate_pool": [
+    "001",
+    "010",
+    "012",
+    "023",
+    "040",
+    "HC-012"
+  ]
+}

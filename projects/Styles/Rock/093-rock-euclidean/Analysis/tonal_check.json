@@ -1,0 +1,74 @@
+{
+  "phase1_ground_truth": {
+    "source": "phase-1 (single fiddle voice, known MIDI pitches)",
+    "notes_in_midi": 54,
+    "notes_checked": 54,
+    "fundamental_present": 54,
+    "fundamental_present_frac": 1.0,
+    "harmonic_ratio_gt_0.30": 54,
+    "harmonic_ratio_gt_0.30_frac": 1.0,
+    "examples_first8": [
+      {
+        "pitch": 76,
+        "f0_hz": 659.3,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.5931
+      },
+      {
+        "pitch": 73,
+        "f0_hz": 554.4,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.6301
+      },
+      {
+        "pitch": 75,
+        "f0_hz": 622.3,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.5856
+      },
+      {
+        "pitch": 71,
+        "f0_hz": 493.9,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.5699
+      },
+      {
+        "pitch": 76,
+        "f0_hz": 659.3,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.5912
+      },
+      {
+        "pitch": 75,
+        "f0_hz": 622.3,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.5971
+      },
+      {
+        "pitch": 71,
+        "f0_hz": 493.9,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.5764
+      },
+      {
+        "pitch": 75,
+        "f0_hz": 622.3,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.5759
+      }
+    ]
+  },
+  "phase2_polyphonic": {
+    "source": "phase-2 (full polyphonic mix + drum kit)",
+    "spectral_windows": 93,
+    "peak_hz_median": 330.0,
+    "windows_on_12tet_note_frac": 0.8065,
+    "mean_harmonic_energy_ratio": 0.1622,
+    "chroma_top3_in_aeolian_frac": 0.9785,
+    "autocorr_frames_total": 93,
+    "autocorr_frames_pitched": 84,
+    "autocorr_f0_median": 82.4
+  },
+  "verdict_phase1": "PASS: fundamentals present + harmonic",
+  "verdict_phase2": "PASS tonal"
+}

@@ -1,0 +1,302 @@
+{
+  "project": "093-rock-euclidean",
+  "genre": "Rock",
+  "layer": "concrete",
+  "method": "012 Euclidean Groove Locking (Bjorklund)",
+  "method_impl": "generators.rhythm.euclidian",
+  "seed": 20260911,
+  "key": "E aeolian (natural minor)",
+  "bpm": 128,
+  "form": "6 sections x 4 bars = 24 bars: Intro | Verse | Chorus | Bridge | Chorus2 | Outro",
+  "euclid_patterns": {
+    "lead": [
+      6,
+      16,
+      120
+    ],
+    "guitar": [
+      4,
+      16,
+      120
+    ],
+    "piano": [
+      3,
+      8,
+      240
+    ],
+    "bass": [
+      8,
+      8,
+      240
+    ],
+    "kick": [
+      4,
+      16,
+      120
+    ],
+    "snare": [
+      2,
+      8,
+      240
+    ],
+    "hat": [
+      8,
+      16,
+      120
+    ],
+    "organ": [
+      1,
+      4,
+      480
+    ]
+  },
+  "phase1_unit_ticks": 417,
+  "phase1_pairs": [
+    [
+      6,
+      16
+    ],
+    [
+      3,
+      8
+    ],
+    [
+      4,
+      16
+    ],
+    [
+      7,
+      16
+    ],
+    [
+      2,
+      8
+    ]
+  ],
+  "progression": [
+    "Ei",
+    "Ei",
+    "CVI",
+    "DVII",
+    "Ei",
+    "CVI",
+    "GIII",
+    "DVII",
+    "CVI",
+    "DVII",
+    "Ei",
+    "Ei",
+    "Aiv",
+    "CVI",
+    "GIII",
+    "DVII",
+    "CVI",
+    "DVII",
+    "Ei",
+    "Ei",
+    "Ei",
+    "Ei",
+    "CVI",
+    "Ei"
+  ],
+  "vl_flags": 6,
+  "vl_fixes": 6,
+  "voices": [
+    {
+      "voice": "Lead",
+      "instrument": "Fiddle",
+      "gm": 110,
+      "channel": 0
+    },
+    {
+      "voice": "Guitar",
+      "instrument": "Acoustic Guitar (nylon)",
+      "gm": 25,
+      "channel": 1
+    },
+    {
+      "voice": "Piano",
+      "instrument": "Acoustic Grand Piano",
+      "gm": 1,
+      "channel": 2
+    },
+    {
+      "voice": "Organ",
+      "instrument": "Church Organ",
+      "gm": 19,
+      "channel": 3
+    },
+    {
+      "voice": "Bass",
+      "instrument": "Double Bass",
+      "gm": 43,
+      "channel": 4
+    },
+    {
+      "voice": "Drums",
+      "instrument": "Drum Kit",
+      "gm": 0,
+      "channel": 9
+    }
+  ],
+  "verdict_grid": "PASS 0 off-grid (16th)",
+  "verdict_harmony": "PASS 0 out",
+  "verdict_range": "PASS",
+  "verdict_zerodrift": "PASS",
+  "verdict_tonal_phase1": "PASS: fundamentals present + harmonic",
+  "verdict_tonal_phase2": "PASS tonal",
+  "verdict_silence": "PASS",
+  "grid": {
+    "off_16th": 0,
+    "notes": 972,
+    "off_8th": 56
+  },
+  "harmony": {
+    "out_of_scale": 0,
+    "out_of_chord": 0
+  },
+  "phase1_fingerprint": {
+    "off_16th": 48,
+    "notes": 54
+  },
+  "tonal_phase1": {
+    "source": "phase-1 (single fiddle voice, known MIDI pitches)",
+    "notes_in_midi": 54,
+    "notes_checked": 54,
+    "fundamental_present": 54,
+    "fundamental_present_frac": 1.0,
+    "harmonic_ratio_gt_0.30": 54,
+    "harmonic_ratio_gt_0.30_frac": 1.0,
+    "examples_first8": [
+      {
+        "pitch": 76,
+        "f0_hz": 659.3,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.5931
+      },
+      {
+        "pitch": 73,
+        "f0_hz": 554.4,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.6301
+      },
+      {
+        "pitch": 75,
+        "f0_hz": 622.3,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.5856
+      },
+      {
+        "pitch": 71,
+        "f0_hz": 493.9,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.5699
+      },
+      {
+        "pitch": 76,
+        "f0_hz": 659.3,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.5912
+      },
+      {
+        "pitch": 75,
+        "f0_hz": 622.3,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.5971
+      },
+      {
+        "pitch": 71,
+        "f0_hz": 493.9,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.5764
+      },
+      {
+        "pitch": 75,
+        "f0_hz": 622.3,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.5759
+      }
+    ]
+  },
+  "tonal_phase2": {
+    "source": "phase-2 (full polyphonic mix + drum kit)",
+    "spectral_windows": 93,
+    "peak_hz_median": 330.0,
+    "windows_on_12tet_note_frac": 0.8065,
+    "mean_harmonic_energy_ratio": 0.1622,
+    "chroma_top3_in_aeolian_frac": 0.9785,
+    "autocorr_frames_total": 93,
+    "autocorr_frames_pitched": 84,
+    "autocorr_f0_median": 82.4
+  },
+  "silence_ratio": 0.1934,
+  "duration_s": 57.86,
+  "peak": 0.8569,
+  "per_second_rms": [
+    0.09666,
+    0.09326,
+    0.08795,
+    0.09799,
+    0.09365,
+    0.09686,
+    0.09715,
+    0.09449,
+    0.09853,
+    0.10627,
+    0.09905,
+    0.10898,
+    0.09973,
+    0.10041,
+    0.09487,
+    0.11522,
+    0.10696,
+    0.10635,
+    0.09835,
+    0.09757,
+    0.09969,
+    0.09693,
+    0.11272,
+    0.10326,
+    0.1057,
+    0.09781,
+    0.10716,
+    0.09905,
+    0.09807,
+    0.09426,
+    0.11152,
+    0.10709,
+    0.1062,
+    0.09641,
+    0.09727,
+    0.10083,
+    0.09827,
+    0.10574,
+    0.09297,
+    0.09465,
+    0.08892,
+    0.0994,
+    0.09668,
+    0.08408,
+    0.09587,
+    0.02854,
+    0.00466,
+    0.00142,
+    0.00036,
+    0.00013,
+    6e-05,
+    3e-05,
+    2e-05,
+    2e-05,
+    2e-05,
+    2e-05,
+    3e-05,
+    3e-05
+  ],
+  "files": {
+    "midi_phase1": 548,
+    "midi_phase2": 7987,
+    "wav": 10206542,
+    "ogg": 404221,
+    "ogg_phase1": 387975
+  }
+}
