@@ -1,0 +1,17 @@
+{
+  "artifact": "track02_bass.wav",
+  "classification": "ai-assisted",
+  "generator": "SP-011 Karplus-Strong stem (rev3)",
+  "sources": [
+    "/opt/data/repos/musicom/projects/Styles/HipHop/boom-bap/v1/hiphop_boom_bap.mid"
+  ],
+  "parameters": {
+    "role": "bass",
+    "method": "SP-011"
+  },
+  "notes": "",
+  "sha256": "bfda48adfab0d3ddfbd310f9ed7e6e56214986fb20ec68fedf71b1ee91970792",
+  "bytes": 15158688,
+  "created_utc": "2026-09-11T22:13:32.721934+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,22 @@
+{
+  "artifact": "SP011-karplus-hiphop-boombap.wav",
+  "classification": "ai-assisted",
+  "generator": "SP-011 Karplus-Strong production pass (rev3)",
+  "sources": [
+    "/opt/data/repos/musicom/projects/Styles/HipHop/boom-bap/v1/hiphop_boom_bap.mid"
+  ],
+  "parameters": {
+    "method": "SP-011",
+    "roles": [
+      "comp",
+      "bass",
+      "lead",
+      "perc"
+    ]
+  },
+  "notes": "",
+  "sha256": "ddedf72ec516122144c55b6078aae3fa5d10bd4c15e45271439fea9ede077928",
+  "bytes": 15158688,
+  "created_utc": "2026-09-11T22:10:57.532756+00:00",
+  "provenance_version": "1.0"
+}

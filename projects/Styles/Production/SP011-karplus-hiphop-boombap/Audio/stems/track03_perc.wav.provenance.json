@@ -1,0 +1,17 @@
+{
+  "artifact": "track03_perc.wav",
+  "classification": "ai-assisted",
+  "generator": "SP-011 Karplus-Strong stem (rev3)",
+  "sources": [
+    "/opt/data/repos/musicom/projects/Styles/HipHop/boom-bap/v1/hiphop_boom_bap.mid"
+  ],
+  "parameters": {
+    "role": "perc",
+    "method": "SP-011"
+  },
+  "notes": "",
+  "sha256": "de35d8eceb71cf90e68edfb2c74a8e10c196813b74096fb1a147bf8b65085c55",
+  "bytes": 15158688,
+  "created_utc": "2026-09-11T22:13:32.736301+00:00",
+  "provenance_version": "1.0"
+}

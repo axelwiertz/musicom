@@ -1,0 +1,284 @@
+{
+  "method": "SP-011 Karplus-Strong",
+  "artifact": "/opt/data/repos/musicom/projects/Styles/Production/SP011-karplus-hiphop-boombap/Audio/SP011-karplus-hiphop-boombap.wav",
+  "engine_level": {
+    "summary": {
+      "notes_tested": 21,
+      "fundamental_within_1pct": 21,
+      "max_abs_ratio_error_pct": 0.33,
+      "min_harmonic_energy_pct": 22.2,
+      "median_harmonic_energy_pct": 69.9
+    },
+    "per_note": [
+      {
+        "midi": 36,
+        "loop_gain": 0.9995,
+        "expected_hz": 65.4,
+        "detected_hz": 65.4,
+        "ratio": 1.0004,
+        "conf": 0.89,
+        "harmonic_energy_pct": 24.1
+      },
+      {
+        "midi": 36,
+        "loop_gain": 0.9986,
+        "expected_hz": 65.4,
+        "detected_hz": 65.4,
+        "ratio": 1.0004,
+        "conf": 0.889,
+        "harmonic_energy_pct": 24.1
+      },
+      {
+        "midi": 36,
+        "loop_gain": 0.984,
+        "expected_hz": 65.4,
+        "detected_hz": 65.4,
+        "ratio": 1.0004,
+        "conf": 0.856,
+        "harmonic_energy_pct": 22.2
+      },
+      {
+        "midi": 40,
+        "loop_gain": 0.9995,
+        "expected_hz": 82.4,
+        "detected_hz": 82.4,
+        "ratio": 1.0003,
+        "conf": 0.893,
+        "harmonic_energy_pct": 31.5
+      },
+      {
+        "midi": 40,
+        "loop_gain": 0.9986,
+        "expected_hz": 82.4,
+        "detected_hz": 82.4,
+        "ratio": 1.0003,
+        "conf": 0.892,
+        "harmonic_energy_pct": 31.5
+      },
+      {
+        "midi": 40,
+        "loop_gain": 0.984,
+        "expected_hz": 82.4,
+        "detected_hz": 82.4,
+        "ratio": 1.0003,
+        "conf": 0.861,
+        "harmonic_energy_pct": 28.2
+      },
+      {
+        "midi": 45,
+        "loop_gain": 0.9995,
+        "expected_hz": 110.0,
+        "detected_hz": 110.0,
+        "ratio": 0.9998,
+        "conf": 0.949,
+        "harmonic_energy_pct": 43.8
+      },
+      {
+        "midi": 45,
+        "loop_gain": 0.9986,
+        "expected_hz": 110.0,
+        "detected_hz": 110.0,
+        "ratio": 0.9998,
+        "conf": 0.949,
+        "harmonic_energy_pct": 43.7
+      },
+      {
+        "midi": 45,
+        "loop_gain": 0.984,
+        "expected_hz": 110.0,
+        "detected_hz": 110.0,
+        "ratio": 0.9998,
+        "conf": 0.93,
+        "harmonic_energy_pct": 42.4
+      },
+      {
+        "midi": 52,
+        "loop_gain": 0.9995,
+        "expected_hz": 164.8,
+        "detected_hz": 164.6,
+        "ratio": 0.9984,
+        "conf": 0.965,
+        "harmonic_energy_pct": 70.0
+      },
+      {
+        "midi": 52,
+        "loop_gain": 0.9986,
+        "expected_hz": 164.8,
+        "detected_hz": 164.6,
+        "ratio": 0.9984,
+        "conf": 0.964,
+        "harmonic_energy_pct": 69.9
+      },
+      {
+        "midi": 52,
+        "loop_gain": 0.984,
+        "expected_hz": 164.8,
+        "detected_hz": 164.6,
+        "ratio": 0.9984,
+        "conf": 0.948,
+        "harmonic_energy_pct": 66.5
+      },
+      {
+        "midi": 60,
+        "loop_gain": 0.9995,
+        "expected_hz": 261.6,
+        "detected_hz": 260.9,
+        "ratio": 0.9974,
+        "conf": 0.959,
+        "harmonic_energy_pct": 113.5
+      },
+      {
+        "midi": 60,
+        "loop_gain": 0.9986,
+        "expected_hz": 261.6,
+        "detected_hz": 260.9,
+        "ratio": 0.9974,
+        "conf": 0.958,
+        "harmonic_energy_pct": 113.6
+      },
+      {
+        "midi": 60,
+        "loop_gain": 0.984,
+        "expected_hz": 261.6,
+        "detected_hz": 260.9,
+        "ratio": 0.9974,
+        "conf": 0.936,
+        "harmonic_energy_pct": 114.2
+      },
+      {
+        "midi": 72,
+        "loop_gain": 0.9995,
+        "expected_hz": 523.3,
+        "detected_hz": 525.0,
+        "ratio": 1.0033,
+        "conf": 0.979,
+        "harmonic_energy_pct": 158.2
+      },
+      {
+        "midi": 72,
+        "loop_gain": 0.9986,
+        "expected_hz": 523.3,
+        "detected_hz": 525.0,
+        "ratio": 1.0033,
+        "conf": 0.978,
+        "harmonic_energy_pct": 159.1
+      },
+      {
+        "midi": 72,
+        "loop_gain": 0.984,
+        "expected_hz": 523.3,
+        "detected_hz": 525.0,
+        "ratio": 1.0033,
+        "conf": 0.957,
+        "harmonic_energy_pct": 187.0
+      },
+      {
+        "midi": 84,
+        "loop_gain": 0.9995,
+        "expected_hz": 1046.5,
+        "detected_hz": 1050.0,
+        "ratio": 1.0033,
+        "conf": 0.991,
+        "harmonic_energy_pct": 129.1
+      },
+      {
+        "midi": 84,
+        "loop_gain": 0.9986,
+        "expected_hz": 1046.5,
+        "detected_hz": 1050.0,
+        "ratio": 1.0033,
+        "conf": 0.99,
+        "harmonic_energy_pct": 130.1
+      },
+      {
+        "midi": 84,
+        "loop_gain": 0.984,
+        "expected_hz": 1046.5,
+        "detected_hz": 1050.0,
+        "ratio": 1.0033,
+        "conf": 0.975,
+        "harmonic_energy_pct": 149.2
+      }
+    ]
+  },
+  "mix_frames": {
+    "frames": 342,
+    "frames_with_periodic_f0": 340,
+    "pct": 99.4,
+    "zero_hz_frames": 0,
+    "mean_conf": 0.536,
+    "median_detected_f0_hz": 97.4
+  },
+  "chroma_vs_fluidsynth_gm_reference": {
+    "cosine_similarity": 0.9735,
+    "best_rotation_semitones": 0,
+    "best_rotation_cosine": 0.9735,
+    "ks_profile": [
+      0.1575,
+      0.0686,
+      0.1099,
+      0.0451,
+      0.0736,
+      0.0883,
+      0.0467,
+      0.1021,
+      0.0671,
+      0.0661,
+      0.1079,
+      0.0672
+    ],
+    "gm_profile": [
+      0.1184,
+      0.0684,
+      0.1449,
+      0.0581,
+      0.0438,
+      0.0755,
+      0.0626,
+      0.1273,
+      0.0658,
+      0.0703,
+      0.0972,
+      0.0677
+    ]
+  },
+  "per_note_diagnostic": {
+    "by_role": {
+      "bass": {
+        "notes": 256,
+        "acf_fundamental_or_octave": 98,
+        "acf_pct": 38.3,
+        "spectral_top6_peak_match": 100,
+        "spectral_pct": 39.1
+      },
+      "lead": {
+        "notes": 128,
+        "acf_fundamental_or_octave": 112,
+        "acf_pct": 87.5,
+        "spectral_top6_peak_match": 120,
+        "spectral_pct": 93.8
+      },
+      "comp": {
+        "notes": 768,
+        "acf_fundamental_or_octave": 312,
+        "acf_pct": 40.6,
+        "spectral_top6_peak_match": 664,
+        "spectral_pct": 86.5
+      }
+    },
+    "octave_ratio_histogram": {
+      "1": 183,
+      "0.5": 339
+    },
+    "note": "windows in a single stem still contain overlapping let-ring tails of neighbouring notes plus simultaneous voices, so this score under-reports; the engine-level and chroma checks are the pass gates"
+  },
+  "gates": {
+    "engine_fundamental_within_1pct": true,
+    "engine_harmonic_energy_ge_20pct": true,
+    "mix_no_zero_hz_frames": true,
+    "mix_periodic_frames_ge_80pct": true,
+    "chroma_cosine_ge_0.9": true,
+    "chroma_same_key_rotation_0": true
+  },
+  "verdict": "PASS \u2014 pitched, tonal, octave-correct plucked-string render, NOT noise: 21/21 engine notes within 1% of target f0, 0 zero-Hz frames, chroma cosine 0.9735 vs GM reference at the same key."
+}

@@ -1,0 +1,207 @@
+{
+  "method": "SP-011",
+  "method_name": "Karplus-Strong String Synthesis",
+  "method_module": "sound.synthesis.karplus_strong",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/HipHop/boom-bap/v1/hiphop_boom_bap.mid",
+  "source_name": "hiphop_boom_bap.mid",
+  "bpm": 90.0,
+  "ticks_per_beat": 480,
+  "bars": 32,
+  "total_notes": 1792,
+  "role_counts": {
+    "perc": 640,
+    "bass": 256,
+    "comp": 768,
+    "lead": 128
+  },
+  "output_seconds": 85.93,
+  "sample_rate": 44100,
+  "stems": {
+    "lead": "/opt/data/repos/musicom/projects/Styles/Production/SP011-karplus-hiphop-boombap/Audio/stems/track00_lead.wav",
+    "comp": "/opt/data/repos/musicom/projects/Styles/Production/SP011-karplus-hiphop-boombap/Audio/stems/track01_comp.wav",
+    "bass": "/opt/data/repos/musicom/projects/Styles/Production/SP011-karplus-hiphop-boombap/Audio/stems/track02_bass.wav",
+    "perc": "/opt/data/repos/musicom/projects/Styles/Production/SP011-karplus-hiphop-boombap/Audio/stems/track03_perc.wav"
+  },
+  "role_stats": {
+    "lead": {
+      "plucks": 128,
+      "pre_rms": 0.00598,
+      "post_rms": 0.07518,
+      "peak": 2.0876
+    },
+    "comp": {
+      "plucks": 768,
+      "pre_rms": 0.0038,
+      "post_rms": 0.08913,
+      "peak": 0.9232
+    },
+    "bass": {
+      "plucks": 256,
+      "pre_rms": 0.00679,
+      "post_rms": 0.08835,
+      "peak": 1.499
+    },
+    "perc": {
+      "plucks": 640,
+      "pre_rms": 0.00299,
+      "post_rms": 0.04149,
+      "peak": 1.3506
+    }
+  },
+  "parameters": {
+    "excitation": "2-sample uniform noise burst scaled by velocity",
+    "delay_line": "N = round(sr/f0) full-cycle period (no octave drop)",
+    "loop_filter": "2-point moving average y[n]=0.5*(y[n-N]+y[n-N-1])",
+    "loop_gain_by_role": {
+      "comp": 0.9987,
+      "bass": 0.9995,
+      "lead": 0.999,
+      "perc": 0.984
+    },
+    "let_ring_seconds": {
+      "comp": 0.9,
+      "bass": 1.4,
+      "lead": 1.0,
+      "perc": 0.25
+    },
+    "target_rms_by_role": {
+      "comp": 0.1,
+      "bass": 0.115,
+      "lead": 0.09,
+      "perc": 0.055
+    },
+    "outlier_control": "per-role soft-knee (thresh 0.45-0.50, slope 0.25)",
+    "master_chain": "Limiter(-1 dB) -> normalize_to_lufs(-14) -> Limiter(-1 dB)",
+    "lufs_integrated": -14.0
+  },
+  "pitch_verification": {
+    "per_note_pitch": {
+      "bass": {
+        "notes": 256,
+        "pitch_matched": 98,
+        "pct": 38.3
+      },
+      "lead": {
+        "notes": 128,
+        "pitch_matched": 62,
+        "pct": 48.4
+      },
+      "comp": {
+        "notes": 768,
+        "pitch_matched": 25,
+        "pct": 3.3
+      }
+    },
+    "mix_frames": {
+      "frames": 342,
+      "pitched": 340,
+      "pitched_pct": 99.4,
+      "zero_hz_frames": 0,
+      "match_expected_or_harmonic_pct": 52.1
+    },
+    "harmonic_energy_pct": {
+      "bass_stem": 12.4,
+      "lead_stem": 34.7,
+      "full_mix": 11.6,
+      "note": "polyphonic mix; naive 8-harmonic-of-one-f0 metric under-reports by design",
+      "fluidsynth_gm_reference": 23.1
+    },
+    "verdict": "PASS \u2014 pitched plucked-string render, not noise: per-note fundamental match 38.3% bass / 48.4% lead, 0-Hz frames 0, silence 0.0%, LUFS -14.0"
+  },
+  "mix_stats": {
+    "duration_s": 85.93,
+    "peak": 0.8287,
+    "rms": 0.14954,
+    "silence_pct": 0.0,
+    "max_silent_run_ms": 0.3,
+    "min_rms_sec": 0.0998,
+    "rms_per_second": [
+      0.0998,
+      0.15,
+      0.1052,
+      0.1702,
+      0.1526,
+      0.1636,
+      0.1352,
+      0.1458,
+      0.1423,
+      0.1496,
+      0.1159,
+      0.1427,
+      0.1557,
+      0.1352,
+      0.1901,
+      0.1645,
+      0.1647,
+      0.1615,
+      0.1243,
+      0.1336,
+      0.1527,
+      0.1387,
+      0.1547,
+      0.1147,
+      0.1604,
+      0.1726,
+      0.1652,
+      0.1539,
+      0.159,
+      0.1303,
+      0.1351,
+      0.1384,
+      0.134,
+      0.136,
+      0.1367,
+      0.1643,
+      0.1768,
+      0.1534,
+      0.1781,
+      0.1614,
+      0.1796,
+      0.1697,
+      0.1654,
+      0.1307,
+      0.1621,
+      0.1582,
+      0.1993,
+      0.1835,
+      0.1663,
+      0.1383,
+      0.1244,
+      0.1289,
+      0.1649,
+      0.1523,
+      0.1422,
+      0.1543,
+      0.1735,
+      0.1538,
+      0.1587,
+      0.166,
+      0.1655,
+      0.1255,
+      0.1594,
+      0.1121,
+      0.1152,
+      0.1307,
+      0.1199,
+      0.1536,
+      0.1754,
+      0.1457,
+      0.1716,
+      0.1505,
+      0.1308,
+      0.1283,
+      0.1594,
+      0.129,
+      0.1327,
+      0.1523,
+      0.1751,
+      0.1392,
+      0.1376,
+      0.1432,
+      0.1524,
+      0.1196,
+      0.1244
+    ],
+    "lufs_integrated": -14.0
+  }
+}
