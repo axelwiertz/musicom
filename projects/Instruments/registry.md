@@ -196,6 +196,22 @@ modal melody over a pedal, NO dense harmony. Range 55–96 is the GM-patch span
 (empirical FluidR3 sweep 8/8 notes audible); real shehnai register is 62–84
 (D4–C6). Solo-render spectral check: 4–8 kHz buzz 1.3% (no comb-filtering).
 
+**Fiddle added** (2026-09-11): GM110, World-family seventh entry — the
+folk-fiddle double of the classical violin (same GDAE tuning/dimensions,
+different idiom: flat vibrato, aggressive bow drive, rosin noise).
+instrument.md + fiddle.py), verified end-to-end UnitMatrixComposer →
+zero-drift ✓ → MIDI → FluidSynth WAV ✓; RenderPipeline stem label
+`trackXX_Fiddle.wav` ✓ (GM_PROGRAMS[110] = "Fiddle", FluidR3 preset 110 =
+"Fiddle" — labels match exactly, no quirk — distinct from the "Shanai"
+quirk at 111). BowedString recommended (friction waveguide, bow_velocity
+0.24 > concert-violin 0.2 for folk drive, bow_force 1.8, noise 0.025
+rosin; sustain confirmed 0.572 late-window ratio, no collapse). ModalSynth
+'string' preset = pizzicato fallback. Solo-render spectral check: 4–8 kHz
+buzz 2.9% (no comb-filtering). Empirical FluidR3 pitch sweep (RMS, notes
+55–96): preset 110 audible 8/8, no gaps — SF2 never clips a composition.
+Line-instrument quirk: fiddle is a monophonic bow line (double-stops with
+open-string drones allowed), NOT a harmony voice — no dense chords.
+
 ## Python usage
 
 ```python
@@ -243,6 +259,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | World | Shamisen | 106 | 45–89 | lead, melody, ornament, drone, countermelody |
 | World | Kalimba | 108 | 48–96 | lead, melody, ornament, drone, harmony |
 | World | Shenai | 111 | 55–96 | lead, melody, ornament, drone, accent |
+| World | Fiddle | 110 | 55–96 | lead, melody, ornament, countermelody, accent |
 | Woodwind | Bagpipe | 109 | 53–96 | lead, melody, ornament, drone, accent |
 
 ## Stem label quirks (RenderPipeline)
@@ -275,6 +292,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 108 | Kalimba | Kalimba ✓ (GM_PROGRAMS[108] + FluidR3 preset 108 both "Kalimba") |
 | 109 | Bagpipe | **Bag_pipe** ✗ (GM_PROGRAMS[109] = "Bag pipe" — two words; FluidR3 preset 109 = "BagPipe") |
 | 111 | Shanai | **Shanai** ✗ (GM_PROGRAMS[111] = "Shanai" — GM2 spec spelling; instrument = Shenai, FluidR3 preset 111 = "Shenai") |
+| 110 | Fiddle | Fiddle ✓ (GM_PROGRAMS[110] + FluidR3 preset 110 both "Fiddle") |
 | 114 | Steel Drums | Steel Drums ✓ (GM_PROGRAMS[114] + FluidR3 preset 114 both "Steel Drums") |
 | ch9/pgm0 | Drums | **Acoustic_Grand_Piano** ✗ (program-0 fallback) |
 

@@ -91,6 +91,7 @@ Classification of active Musicom composition methods categorized by their primar
 | **081** | concrete | Narmour Implication-Realization Melodic Composition (NIRMC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Expectation-guided) | Grid-Locked / Continuous | Meso / Implicative Chain | $\mathcal{O}(N)$ | Generates melody by treating every interval as an implication: each successor either realizes the expectation (same registral direction; similar size if the interval is small, gap-fill if large) or denies it (surprise → tension → a compensating gap-fill implication). Realization rate per section = macro-form; nested implicative chains = multi-level structure; chord-tone vs non-chord-tone = harmony; independent chains per voice = texture. Expectation-driven counterpart to 002 Markov / 066 GTTM-HC; deterministic foil to learned-transition melodic generators. |
 | **082** | concrete | Random Boolean Network Criticality Composition (RBNCC) | **Nature-Led** | Structure, Pitch, Harmony, Rhythm, Texture | Weak (Self-Organizing) | Grid-Locked / Continuous | Meso / Attractor Cycle | $\mathcal{O}(N \cdot T)$ | Composes by running a synchronous random Boolean network (Kauffman's gene-regulatory model) at its critical point (edge of chaos): the deterministic state trajectory falls into an attractor cycle decoded into a repeating groove/chord-progression loop. Connectivity $K$ and output bias $p$ are the creative dials ($K_c = 1/[2p(1-p)]$; ordered $K<K_c$ = short catchy loop, critical $K\approx K_c$ = rich phrase, chaotic $K>K_c$ = tension/transient). Pre-attractor transient = connective/tension material; frozen node core = harmonic scaffold, unstable periphery = figuration. Self-organizing discrete counterpart to 036 ASAR / 071 HAM-C; deterministic-per-seed foil to 002 Markov. |
 | **083** | concrete | Aperiodic Quasicrystal Tiling Composition (QTSC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Window/Cut-and-project) | Grid-Locked / Continuous | Macro / Inflation Level | $\mathcal{O}(W \cdot L)$ | Generates music from an aperiodic substitution tiling of the plane (Penrose P3 five-fold / Ammann–Beenker eight-fold): iterate an inflation rule ($\varphi$ or $1{+}\sqrt2$ scale factor), then read quasi-periodic scanlines whose edge/vertex symbols decode to never-repeating melodies, chord progressions, and rhythms with global order but no exact repetition. Vertex configurations = chord/scale subsets; inflation level = section/form; determinism per seed. The 2D aperiodic counterpart to 019/069 1D substitution words and the foil to 021 CA. |
+| **084** | concrete | Zipf–Mandelbrot Rank–Frequency Composition (ZMRC) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Ranking-imposed) | Grid-Locked / Continuous | Macro / Vocabulary | $\mathcal{O}(N)$ | Treats the piece as a text over a ranked musical vocabulary and samples tokens from a Zipf–Mandelbrot rank–frequency law $f(r) \propto (r+q)^{-s}$. Rank 1 = tonic/HOME (saturating), long tail = chromatic/TENSE (rare); exponent $s$ = vocabulary richness, shift $q$ = dominance ceiling, ranking order = tonal grammar. Macro-form = a per-section trajectory in $(s,q,\text{ranking})$ space. Empirical basis: pitch/rhythm/chord distributions in real music are Zipfian (Manaris 2003; Zanette 2006; Levitin 2012). Statistical foil to 002 Markov (marginal vs conditional) and 053 Lévy (rank vs step-length). |
 # Sound Production Methods Framework
 
 Sound production translates symbolic MIDI UnitMatrix data into final acoustic air pressure. Methods are categorized by execution layer: **Hardware/Acoustic Integration**, **Synthesis Engines**, or **Post-Processing / DSP**.
@@ -167,6 +168,7 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 | **SP-067** | Kelly-Lochbaum Acoustic Tube Model (Vocal Tract Physical Modeling) (KLAT) | **Synthesis Engines** | Physical Vocal / Vowel / Formant Timbres | Models the vocal tract as an N-section lossless acoustic transmission line: the area function $A_i$ (vowel geometry) sets each junction's reflection coefficient $k_i=\frac{A_i-A_{i+1}}{A_i+A_{i+1}}$, and forward/backward pressure waves scatter through the two-port Kelly-Lochbaum lattice ($p^+_{i+1}=(1+k_i)p^+_i+k_i p^-_{i+1}$). A glottal pulse train (voiced) or frication noise (unvoiced) excites the glottal end; a $1-z^{-1}$ radiation load terminates the lips. Formants emerge from the area-function geometry — no formant filters. The physical/scattering-junction member of the vocal family (vs parametric SP-015/025/028/038/046). $\mathcal{O}(N)$ per sample, N≈8–20. |
 | **SP-068** | Bytebeat Synthesis (Integer-Expression Algorithmic Synthesis) | **Synthesis Engines** | Deterministic Chip / Glitch / Looping Timbre | Evaluates an integer expression $f(t)$ of a monotonic sample counter $t$ once per sample and takes the low byte as the waveform ($y=f(t) \& 255$), using only integer arithmetic and bitwise ops (shift/AND/XOR). Pitch = multiplier $K \to f = f_s\cdot\gcd(K,256)/256$ (or a phase accumulator for exact pitch); octave = `t>>s`; rhythm = `(t>>s)&mask` gates; harmony = additive/AND-XOR term stacks; macro-form = high-bit term `t>>P`. $\mathcal{O}(1)$ per sample, zero state, inherently looping (counter wraps mod $2^N$). The pure-integer, expression-driven counterpart to SP-035 GENDYN / SP-057 Chua; canonical continuous-fill layer for the Method Hybridization rule. |
 | **SP-069** | Wavelet Packet Spectral Synthesis (WPSS) | **Synthesis Engines** | Time-Scale Spectral Sculpting / Octave-Band Resynthesis Timbres | Decomposes audio into octave-spaced, constant-Q scale bands via Mallat's discrete wavelet transform (QMF lowpass/highpass filter pair + decimation), optionally expanded to a full wavelet-packet tree with Shannon-entropy best-basis selection, then recombines edited coefficients via the inverse transform. Scale label = octave; per-band gain = critical-band EQ; transposition = scale relabel $j \to j{+}s$; time-stretch = coefficient re-spacing; entropy threshold = denoise/shrinkage. The time-scale (log-frequency) counterpart to STFT phase-vocoder SP-026 / SMS SP-027; $\mathcal{O}(N \log N)$, deterministic per seed. |
+| **SP-070** | Feedback Amplitude Modulation Synthesis (FBAM) | **Synthesis Engines** | Harmonic-Rich / Formant / Distortion Timbres | Nonlinear synthesis where a sinusoidal carrier is amplitude-modulated by its own fed-back output: $y(n)=\cos(\omega_0 n)[1+\beta\,y(n-1)]$ — a periodically linear time-varying one-pole filter whose coefficient is the input itself. Single scalar $\beta$ sweeps brightness from a pure sinusoid to a full harmonic pulse train with no spectral holes; 6 variations add feedforward delay, allpass phase distortion, heterodyning (double-carrier formants), waveshaping (odd/even-harmonic control), non-unitary delay, and decoupled carrier/modulator (adaptive distortion effect). $\mathcal{O}(1)$ per sample (1 mul + 1 add + 1 lookup); the feedback-amplitude cousin of FM SP-010/017 and phase distortion SP-030. |
 |---|
 
 
@@ -17019,3 +17021,167 @@ with Cost an additive info measure (Shannon entropy $\sum |c_k|^2 \log|c_k|^2$, 
 - Coifman, R. R., & Wickerhauser, M. V. (1992). "Entropy-based algorithms for best basis selection." *IEEE Trans. Inf. Theory* 38(2), 713–718.
 - Kronland-Martinet, R., Morlet, J., & Grossmann, A. (1987). "Analysis of sound patterns through wavelet transforms." *Int. J. Pattern Recognition & Artificial Intelligence* 1(2), 273–302.
 - Mallat, S. (2009). *A Wavelet Tour of Signal Processing: The Sparse Way*, 3rd ed. Academic Press.
+# Zipf–Mandelbrot Rank–Frequency Composition (ZMRC) (Method 084)
+
+### Source
+The rank–frequency law is one of the most robust empirical regularities in complex systems: **George Kingsley Zipf (1935, *The Psycho-Biology of Language*)** observed that in a natural-language corpus the frequency of the $r$-th most common word is proportional to $1/r$. **Benoit Mandelbrot (1953, "An informational theory of the statistical structure of language," *Communication Theory*)** generalized it to $f(r) \propto (r+q)^{-s}$ — the **Zipf–Mandelbrot law** — with a shift parameter $q$ and a free exponent, and proved it is the distribution that maximizes information transfer under a fixed average "cost" per symbol. The musical transfer is empirical, not metaphorical: **Manaris, Vaughan, Wagner, Romero & Davis (2003, "Evolutionary music and the Zipf–Mandelbrot law: developing fitness functions for pleasant music," *EvoWorkshops*)**, **Manaris et al. (2003, "Zipf's law, music classification, and aesthetics," *Computer Music Journal* 27(3))**, and **Zanette (2006, "Zipf's law and the creation of musical context," *Musicae Scientiae* 10)** all showed that **pitch-class usage, melodic interval distributions, and chord vocabularies in real music obey Zipf(–Mandelbrot) laws** with exponents that separate composers, genres, and even "pleasant" from "random" music. **Levitin, Chordia & Menon (2012, "Musical rhythm spectra follow Zipf's law," *Psychological Science* 23(4))** extended this to rhythm: the frequency spectrum of rhythmic cells is Zipfian. ZMRC inverts this descriptive law into a **generator**: build a ranked musical vocabulary, then *sample* tokens from a Zipf–Mandelbrot distribution so that a few dominant "words" (tonic pitch classes, home chords, signature rhythmic cells) saturate the texture while a long tail of rare words supplies novelty — a statistical-linguistics route to music not covered by the DB's other stochastic methods (002 Markov transitions, 053 Lévy step-lengths, 067 Factor Oracle).
+
+### Layer
+**concrete** — consumes a per-section vocabulary (ranked token list) plus $(s, q)$ shape parameters and emits actual `MusicEvent`s (pitch, onset, duration, velocity) into UnitMatrix cells; feeds `generators/`. The *ranking itself* (which pitch-class/chord occupies rank 1 = tonic, which ranks map to HOME/LIFT/TENSE/TURN) is a transposition/register-invariant design decision that could feed `rules/subset_network.py` (ABS-001..005) as a rank-ordered subset hierarchy — but as documented the method samples concrete events, so it is concrete. Candidate code path: `generators/zipf_rank_frequency.py`.
+
+### Description
+Treat the piece as a **text over a musical alphabet**, and compose it by drawing "words" from a **Zipf–Mandelbrot rank–frequency distribution**. The core object is a **ranked vocabulary**: a list of musical tokens (pitch classes, scale degrees, melodic intervals, rhythmic cells, chord/PC-sets) sorted from most to least frequent, so that token $r$ (rank $r = 1, 2, \dots$) is emitted with probability mass
+
+$$f(r) \;=\; \frac{C}{(r + q)^s}, \qquad C = \Big[\textstyle\sum_{k=1}^{V} (k+q)^{-s}\Big]^{-1}.$$
+
+Three parameters drive everything:
+
+1. **The ranking order** — *which* token is rank 1, rank 2, … This is the **tonal grammar**. Rank 1 = tonic pitch class / tonic triad / signature downbeat cell (HOME); the top few ranks = diatonic chord tones and stable scale degrees (LIFT); mid ranks = passing/neighbor tones and secondary chords (TURN); the long tail = chromatic alterations, borrowed chords, rare ornaments (TENSE). The same Zipfian mass distribution over a *different* ranking produces a *different* musical language — a mode, key, or genre is just a permutation of the alphabet.
+
+2. **The exponent $s$** (Zipf slope) — **vocabulary richness**. $s \to 0$ flattens the distribution (all tokens nearly equiprobable → atonal/random texture); large $s$ concentrates mass on the top ranks (strongly tonic-centered, predictable). Empirical slopes for "pleasant" music cluster in a band (Manaris's fitness measure is precisely the $L^1$/correlation distance of the generated rank–frequency curve from a target corpus slope); real pitch distributions give $s \approx 0.8\text{–}1.5$, rhythm spectra slightly steeper.
+
+3. **The shift $q$** (Mandelbrot parameter) — the **ceiling on dominance**: $q$ controls how much the top rank out-competes the next; raising $q$ softens the power-law head (less tonic tyranny, more even top ranks). It is the fine knob between "obsessive ostinato" (small $q$) and "balanced diatonicism" (large $q$).
+
+The generative loop:
+1. **Build vocabulary** — from a corpus (count tokens, sort by frequency, estimate $s$ by log-log regression of rank vs. frequency) or impose a ranking by rule (tonic first, chord tones next, …).
+2. **Sample** — draw $N$ tokens from $f(r)$ (Walker alias / inverse-CDF table for $\mathcal{O}(1)$ per draw). Consecutive draws are **independent** — no transition memory — so the *global* distribution is exactly Zipfian while *local* order is purely emergent.
+3. **Decode** — each token maps to a note/chord/onset via the section's scale/chord map and rhythmic grid; velocity/register carry the token's rank (lower rank → louder, more central).
+4. **Section-shape the parameters** — each section is a distinct $(s, q, \text{ranking})$ triple, so the macro-form is a trajectory through the $(s,q)$ plane (intro = steep $s$ + tiny vocabulary, verse = target corpus slope, chorus = even steeper $s$ = maximal tonic pull, bridge = flat $s$ = maximal novelty, outro = re-steepen).
+
+The appeal is the **statistical fingerprint**: because the *marginal* distribution is exactly a Zipf–Mandelbrot law, the piece reproduces the same rank–frequency signature that Manaris et al. showed separates real from random music. The method is **non-parametric, deterministic per seed, and corpus-optional** (a rule-imposed ranking suffices).
+
+### Musical Elements Framework
+
+| Element | Mechanism |
+|---|---|
+| **PITCH** | vocabulary = pitch classes / scale degrees ranked by target frequency. Sampling yields a melody whose pitch-class histogram is Zipfian — tonic saturates, chord tones fill, chromatic tail rare. Register/octave = an independent high-rank-low-rank fold (low rank → low octave bass, high rank → high octave sparkle); the ranked alphabet order *is* the scale-degree hierarchy |
+| **RHYTHM** | vocabulary = rhythmic cells (IOI patterns, onset figures) ranked by frequency; the emitted onset sequence has a Zipfian spectrum (Levitin 2012), so a dominant downbeat cell recurs constantly while rare syncopations pepper the groove. The inter-onset gap = cell duration; grid snap = the Grid-Locked variant, raw proportional gaps = the Continuous variant |
+| **HARMONY** | vocabulary = chord/PC-set tokens ranked so HOME triads occupy the top ranks and chromatic/borrowed sets the tail. The chord-emission stream is Zipfian → a strong tonal center with rare tension chords at exactly the right (rare) rate. Rank of a chord = its harmonic function; the $(s,q)$ per section set the tonic-pull strength |
+| **STRUCTURE** | macro-form = a trajectory in $(s, q, \text{ranking})$ space: each section assigns its own Zipf slope and shift, so form is a *statistical* modulation (steepen/flatten the slope) rather than a key/modulation. Slope distance from the corpus target = the global tension curve (Manaris fitness) |
+| **TEXTURE** | voice count / note density = the *mass under the head* of the distribution (small $q$, steep $s$ → few tokens dominate → sparse, ostinato texture; flat $s$ → dense, diverse texture). Rare-tail tokens → ornaments/accents; independent per-voice samplers over the same ranking give coherent-but-distinct streams |
+
+### UnitMatrix Integration (Voices & Sections)
+- **Rows (Voices)** = independent **samplers** over a *shared* ranked vocabulary. All voices draw from the same ranking (guaranteeing vertical coherence: everyone's rank-1 token is the tonic), but each may use a distinct $(s, q)$ — e.g. bass = steep $s$ (obsessively tonic/root-fifth), lead = moderate $s$ (diatonic melody), pad = flat $s$ (harmonic wash), percussion = a separate rhythmic-cell vocabulary. Shared ranking = harmonic agreement; distinct slopes = timbral/textural separation.
+- **Columns (Sections)** = each section is a **(ranking, $s$, $q$) triple** recorded in `{STRUCTURE}` as `(vocab_id, slope, shift, n_events, seed)`. Intro = steep $s$ + tiny vocab; verse = corpus-target $s$; chorus = steepest $s$ (max tonic pull) + full vocab; bridge = flat $s$ (novelty burst); outro = re-steepen. The sequence of $s$ values across columns *is* the macro-form.
+- **Cells (MusicUnit)** = `{PITCH}` = sampled token decoded via scale map to a note/chord; `{RHYTHM}` = cell duration/onset + velocity from rank; `{HARMONY}` = chord-token rank → function (HOME/LIFT/TENSE/TURN by rank band); `{TEXTURE}` = head-mass → velocity/accent. Deterministic per seed (seeded RNG + alias table) → zero-drift gate holds; hand to `UnitMatrixComposer` per AGENTS.md.
+- **Flow**: `build_vocabulary(corpus|rule, ranking)` → `fit_slope(hist)` → `sample_tokens(vocab, s, q, n, seed)` → decode to `create_note_unit`/`create_chord_unit` cells → `composer.validate()` must be True before `to_midi`.
+
+### Pitfalls
+1. **Independence ≠ memory** — pure Zipf sampling has *no* transition structure: local sequences can sound aimless even though the global histogram is right (the "stochastic soup" effect). Fix: post-filter consecutive samples with a light smoothness constraint (002 Markov as a local prior, or reject extreme successive interval leaps), or interleave a rank-1 tonic re-anchor every $k$ events to keep a gravitational center.
+2. **Ranking must be imposed or fit, not assumed** — sampling a *uniform* vocabulary with a Zipf mask only works if the ranking is musically meaningful. Fix: never shuffle; either fit the ranking from a real corpus (count-and-sort) or hand-rank by scale-degree/chord-function rules (tonic first, then chord tones, then non-chord tones, then chromatic).
+3. **Slope-fit instability on small corpora** — log-log regression of rank vs. frequency is noisy for short vocabularies (few points, integer counts). Fix: use maximum-likelihood (Hill/MLE) estimation of $s$ for a truncated Zipf rather than least-squares on a log-log plot, and regularize with a prior slope for tiny sections.
+4. **Flat slope reads as "wrong"** — $s \to 0$ makes every token equiprobable, which listeners hear as atonal/random even though the math is self-consistent. Fix: keep the *performance* slope in the empirical "pleasant" band ($0.8 \le s \le 1.5$ for pitch, steeper for rhythm) unless a deliberate atonal section is the goal; reserve flat $s$ for bridges/contrast.
+5. **Token granularity drift** — the Zipf shape depends on the alphabet: a vocabulary of 12 pitch classes has a different natural slope than one of 7 scale degrees or 400 rhythmic cells. Fix: fix the vocabulary *per element* (one for pitch, one for rhythm, one for harmony) and fit/report $s$ separately for each; do not mix granularities in one distribution.
+6. **Sparse-head hazard** — a steep-$s$, small-$q$ section concentrates mass on 1–2 tokens, producing gap-filled, ostinato-like textures. Per the Method Hybridization rule, pair ZMRC with a continuous fill layer (026 DPSM arpeggios, sustained pad, or walking bass) when it is the sole rhythmic generator.
+
+### Comparison With Related Methods
+| Method | Distribution object | Memory | Aesthetic anchor |
+|---|---|---|---|
+| 002 Markov | transition matrix (conditional) | State-1 | local transition probabilities |
+| 053 Lévy Flight | step-length power law | none | heavy-tailed interval magnitudes |
+| 067 Factor Oracle | suffix-link automaton | unbounded (repeated suffix) | corpus recombination |
+| 075 SOM-C | map trajectory | none (map neighborhood) | topology-preserving atoms |
+| **084 ZMRC** | **rank–frequency law (marginal)** | **none (global statistic)** | **Zipf–Mandelbrot slope of a corpus** |
+
+### References
+- Zipf, G. K. (1935). *The Psycho-Biology of Language: An Introduction to Dynamic Philology*. Houghton Mifflin.
+- Mandelbrot, B. B. (1953). "An informational theory of the statistical structure of language." In *Communication Theory* (W. Jackson, ed.), 486–502. Butterworths.
+- Manaris, B., Vaughan, D., Wagner, C., Romero, J., & Davis, R. B. (2003). "Evolutionary music and the Zipf–Mandelbrot law: developing fitness functions for pleasant music." *Applications of Evolutionary Computing (EvoWorkshops 2003)*, LNCS 2611, 522–534. Springer.
+- Manaris, B., Romero, J., Machado, P., Krehbiel, D., Hirzel, T., Pharr, W., & Davis, R. B. (2005). "Zipf's law, music classification, and aesthetics." *Computer Music Journal* 29(1), 55–69. MIT Press.
+- Zanette, D. H. (2006). "Zipf's law and the creation of musical context." *Musicae Scientiae* 10(1), 3–18.
+- Levitin, D. J., Chordia, P., & Menon, V. (2012). "Musical rhythm spectra follow Zipf's law." *Psychological Science* 23(4), 365–371.
+- Voss, R. F., & Clarke, J. (1975). "1/f noise in music and speech." *Nature* 258, 317–318.
+- Newman, M. E. J. (2005). "Power laws, Pareto distributions and Zipf's law." *Contemporary Physics* 46(5), 323–351.
+# Feedback Amplitude Modulation Synthesis (FBAM) (Method SP-070)
+
+### Source
+
+The modern FBAM formulation is **Jari Kleimola, Victor Lazzarini, Vesa Välimäki & Joseph Timoney (2011), "Feedback Amplitude Modulation Synthesis," *EURASIP Journal on Advances in Signal Processing*, Article ID 434378** (18 pp, open access) — an extended journal version of **Lazzarini, Timoney, Kleimola & Välimäki (2009), "Five Variations on a Feedback Theme," *Proc. 12th Int. Conf. on Digital Audio Effects (DAFx-09)*, Como, pp. 139–145**. The underlying idea is older: **Jean-Claude Risset (1969), *An Introductory Catalog of Computer-Synthesized Sounds*, Bell Labs** (the MUSIC V unit generator feeding the output back as its own amplitude modulator) and **A. Layzer (1971), "Some idiosyncratic aspects of computer-synthesized sound"**. FBAM's theoretical framing (periodically linear time-varying digital filters) comes from **Cherniakov (2003), *An Introduction to Parametric Digital Filters and Oscillators***, and its nonlinear-distortion lineage from **Arfib (1979)** / **Le Brun (1979)** waveshaping. It is the feedback-modulation cousin of FM (SP-010/017) and phase distortion (SP-030/012): instead of feeding the output back into the *phase* (feedback FM), it feeds it back into the *amplitude*.
+
+### Layer
+
+**Absolute** — sound production. FBAM consumes a symbolic spec (carrier pitch, modulation index $\beta$, variation selector, delay length, waveshaper choice) derived from `MusicUnit` content and renders raw audio samples. It emits no MIDI (`concrete`) and designs no pitch pools (`abstract`). Candidate code path: `sound/synthesis/fbam.py` (sibling to `phase_mod.py`, `dx7_voice.py`, `west_coast.py`, `karplus_strong.py`); its adaptive-effects mode (Variation 6, §3.6.1) could also live under `sound/effects/` as a coefficient-modulated distortion.
+
+### Description
+
+Feedback Amplitude Modulation (FBAM) is a nonlinear synthesis principle where a sinusoidal carrier is amplitude-modulated by **its own fed-back output**, recursively: the output sample $y(n-1)$ is added to unity and multiplied against the current carrier $\cos(\omega_0 n)$. Interpreted as a **periodically linear time-varying (PLTV) filter**, FBAM is a one-pole IIR filter whose coefficient $a(n)=\cos(\omega_0 n)$ is itself the input sinusoid. The result is a rich, low-pass-shaped harmonic spectrum whose brightness is governed by a **single scalar** — the feedback amount $\beta$ — that sweeps continuously from a pure sinusoid ($\beta=0$) to a fully saturated harmonic pulse train without the "spectral holes" (Bessel-fade dropouts) characteristic of FM. Its computational cost is near-zero: the basic form needs one multiply, one add, and one table lookup per sample. Six structural variations extend it: (1) feedforward delay (waveform reshaping), (2) coefficient-modulated allpass (phase distortion / feedback-FM bridge), (3) heterodyning (ring-modulation inside or outside the loop → tunable formants via a double-carrier), (4) nonlinear waveshaping in the feedback path (cosine → feedback-FM partial; ABS → odd-harmonic-only square-like spectra), (5) non-unitary feedback delay $D$ (comb-filter timbre, closed-form when $D=f_s/f_0$), and (6) decoupled carrier/modulator (a general coefficient-modulated filter → adaptive audio effect). Applications span subtractive-without-filters, vocal-formant stacks, abstract physical modeling (waveguide-loop topology), and adaptive distortion.
+
+### Technical Mechanics
+
+**1. Basic FBAM equation (unit-delay feedback).**
+
+$$y(n)=\cos(\omega_0 n)\left[1+\beta\,y(n-1)\right]$$
+
+with $\omega_0 = 2\pi f_0/f_s$ and initial condition $y(n)=0$ for $n\le 0$. Expanding recursively gives the infinite product-sum $y(n)=\sum_{k=0}^{\infty}\prod_{m=0}^{k}\cos[\omega_0(n-m)]$, showing the spectrum is a sum of harmonics of $f_0$ (a smooth pulse-like steady state is reached within one period; a $\sin$ carrier removes the initial peak transient).
+
+**2. PLTV filter interpretation.** Rewriting $y(n)=x(n)+a(n)\,y(n-1)$ with $x(n)=a(n)=\cos(\omega_0 n)$ casts FBAM as a **coefficient-modulated one-pole IIR filter**. Its time-varying impulse response is $h(m,n)=\prod_{i=m+1}^{n}a(i)=g(n)/g(m)$ for $m<n$, where $g(n)=\prod_{i=1}^{n}a(i)$, $g(0)=1$. Setting the modulator period $N=\lfloor T_0+0.5\rfloor$ ($T_0=2\pi/\omega_0$) gives the generalized transfer function
+
+$$H(\omega,n)=\frac{1+\sum_{k=1}^{N-1}b_k(n)\,e^{-jk\omega}}{1-a_N\,e^{-jN\omega}},\qquad
+b_k(n)=\prod_{m=1}^{k}\cos\!\left(\omega_0[n-m+1]\right),\quad
+a_N=\prod_{m=1}^{N}\cos(\omega_0 m).$$
+
+FBAM is thus equivalent to a time-varying FIR ($b_k$) cascaded with a fixed-coefficient comb ($a_N$). The time-varying FIR generates the harmonic partials; the comb's magnitude peaks align with the fundamental's harmonics. The output can be exactly reconstructed as simultaneous amplitude + phase modulation, $y(n)=A(n)\cos(\omega_0 n+\phi(n))$ with $A(n)=|H(\omega_0,n)|$, $\phi(n)=\arg H(\omega_0,n)$ — the AM term dominates, hence FBAM's kinship with ring-modulation methods (PAF, ModFM) more than classic FM.
+
+**3. Stability.** The impulse response decays when $|\beta\,a_N|<1$ — the product of the instantaneous coefficients over one period, times $\beta$, is less than unity. Approximate stability ceiling $\beta_{\text{stable}}\approx 1.9986-0.00003532\,(f_0-27.5)$. In practice **aliasing**, not instability, bounds usable $\beta$: for $f_0$ below ~1300 Hz the $-80$ dB aliasing limit is set by overmodulation foldover; above, by harmonics folding at Nyquist. Oversampling ($f_s=88.2$ kHz) stretches the usable $\beta$ range.
+
+**4. Scaling (output normalization).** FBAM gain is strongly $\beta$- and frequency-dependent and grows fast past $\beta=1$. Fixes: (a) per-$\beta$ polynomial gain approximations (degree 1 for $\beta<0.7$; degrees 2/3/5 for 0.7/0.8/0.9) with linear interpolation at $\Delta\beta=0.05$; (b) a 2-D lookup table ($\Delta\beta=0.05$, 100 frequency samples, bilinear interpolation) precomputed from one half-period of the equation; (c) an online RMS balancer (two RMS estimators + adaptive gain).
+
+**5. Variations.**
+
+- **V1 — feedforward delay:** $y(n)=\cos[\omega_0(n-1)]-\cos(\omega_0 n)[1+\beta y(n-1)]$; same spectrum, different harmonic phases (waveform reshape).
+- **V2 — coefficient-modulated allpass:** $y(n)=\cos[\omega_0(n-1)]-\beta\cos(\omega_0 n)[\cos(\omega_0 n)-y(n-1)]$; equivalent to phase-distortion synthesis (cf. SP-030); first harmonic dominates.
+- **V3 — heterodyning.** Type I (modulator inside loop): $y(n)=\cos(\theta n)\{\cos(\omega_0 n)[1+\beta y(n-1)]\}$; integer ratios → harmonic spectra with predictable missing harmonics. Type II (outside loop): $s(n)=\cos(\theta n)\,y(n)$ with $y(n)$ the basic FBAM; with $\theta=k\omega_0$ it places a **formant** at harmonic $k$, bandwidth $\propto\beta$. General formant synthesis via double-carrier interpolation:
+$$k=\mathrm{int}\!\left(\frac{f_c}{f_0}\right),\qquad g=\frac{f_c}{f_0}-k,\qquad s(n)=y(n)\big[(1-g)\cos(k\omega_0 n)+g\cos[(k{+}1)\omega_0 n]\big].$$
+- **V4 — nonlinear waveshaping:** $y(n)=\cos(\omega_0 n)\{1+f[\beta y(n-1)]\}$. Cosine waveshaper partially realizes feedback FM ($\cos[\omega_0 n+\beta y(n-1)]=\cos(\omega_0 n)\cos[\beta y(n-1)]-\sin(\omega_0 n)\sin[\beta y(n-1)]$) and **removes even harmonics**; ABS (full-wave rectifier) gives odd-harmonic-only square-like spectra. Two stacked waveshapers (cos + sin) recover feedback FM exactly up to $f_0$ components.
+- **V5 — non-unitary delay:** $y(n)=\cos(\omega_0 n)[1+\beta y(n-D)]$. A coefficient-modulated comb; spectrum invariant if $T_D:f_0$ ratio is preserved. At $D=f_s/f_0$ the series collapses to the closed form $y(n)=\frac{\cos(\omega_0 n)}{1-\beta\cos(\omega_0 n)}$ for $0\le\beta<1$ (singularity at $\beta=1$). Fractional $D$ needs interpolation (linear for long delays).
+- **V6 — decoupled coefficient-modulated filter:** $y(n)=x(n)+m(n)\,\beta\,y(n-1)$, carrier $x(n)$ and modulator $m(n)$ independent. Sidebands at $f_x\pm k f_m$; small-integer ratios → harmonic, else inharmonic. Adaptive effect: $y(n)=x(n)[1+\beta y(n-1)]$ (self-modulating distortion), or pitch-tracked modulator (AdFBAM, cf. AdFM).
+
+**6. Computational load.** Basic FBAM: **1 MUL + 1 ADD + 1 table lookup** per sample (variations add ≤1 more each). Comparable to PAF/ModFM but without precomputed lookup tables in the modulator. Deterministic per seed (safe for the zero-drift gate).
+
+### Musical Elements Framework
+
+| Element | Mechanism |
+|---|---|
+| **PITCH** | carrier frequency $f_0$ (MIDI→Hz); frequency ratio $q=f_0/f_B$ in the operator's $[\text{osc}]$ vector; the harmonic series of $f_0$ is the spectral skeleton — $\beta$ fills it, it does not shift it |
+| **RHYTHM** | per-note ADSR envelope $[\text{env}]=(A,D,S,R)$ gates each FBAM operator; attack transient (first-period overshoot) is a natural accent; envelope-controlled $\beta$ = brightness articulation per onset |
+| **HARMONY** | $\beta$ = spectral brightness / harmonic count (one-knob filter); variation choice sets odd/even balance (V4 ABS/cos → odd-only) or missing-harmonic masks (V3-I ratios); formant stack (V3-II double-carrier) = vowel/vocal harmonic envelope |
+| **STRUCTURE** | operator topology = macro-form: parallel multicarrier (mix), cascade (modulator→carrier), cross-modulated feedback; per-section $[\text{fbam}]=(v,\beta,ws,D)$ selects variation/waveshaper/delay; section join = parameter crossfade |
+| **TEXTURE** | $\beta$ sweep = dense↔sparse spectral fill; heterodyne formant bandwidth $\propto\beta$ = texture width; delay length $D$ = comb density; waveshaper choice = tonal (cos) vs. noisy (complex $f(\cdot)$) grain |
+
+### UnitMatrix Integration
+
+- **Rows (Voices)** = one FBAM operator (or operator algorithm) per voice: lead = V2/V4 high-$\beta$ bright; bass = basic FBAM low $f_0$; pad = V3-II formant stack (sustained); percussion = V5 short-$D$ comb + noise excitation. Each row renders to a mono buffer, then summed or spatialized (SP-021/034/043).
+- **Columns (Sections)** = `{STRUCTURE}` = `(variation, beta, waveshaper, delay_D, carrier_ratio, env)` per section; a section boundary swaps the $[\text{fbam}]$ vector; continuous $\beta$-sweep across a join = smooth timbral morph (the FBAM analogue of SP-041 wavetable morphing).
+- **Cells (MusicUnit)** = `{PITCH}` → carrier $f_0$; `{RHYTHM}` → note onset/ADSR gate; `{HARMONY}` → $\beta$ (brightness) + variation (harmonic mask); `{TEXTURE}` → formant double-carrier settings / waveshaper type. Deterministic per seed; hand to `UnitMatrixComposer` for the MIDI layer, FBAM renders the audio layer.
+- **Flow:** `compose` (UnitMatrix MIDI) → `produce(method="SP-070")` → per-voice FBAM operator renders `MusicUnit` pitch/onset/velocity → sum voices → post-FX (SP-007 EQ, SP-008 DRC, SP-009/032 reverb). Pairs with SP-019 (Chebyshev waveshaping) for the V4 transfer functions and SP-030/012 (phase distortion) for the V2 allpass bridge.
+
+### Pitfalls
+
+1. **Aliasing bounds $\beta$ before instability does** — the $-80$ dB aliasing limit for high $\beta$ is the real ceiling, not the stability bound. Fix: oversample 2–4× (or raise $f_s$) for high-$\beta$ timbres, or clamp $\beta$ per the paper's frequency-dependent curve; use a cubed-cosine modulator $\cos^3(\omega_0 n)$ to widen usable $\beta$ ($|\cos|\le 1$ permits higher $\beta$ for the same aliasing).
+2. **Frequency-dependent output gain** — FBAM output level varies with both $\beta$ and $f_0$ and grows sharply past $\beta=1$. Fix: per-$\beta$ polynomial scaling + linear interpolation, a 2-D $(\beta,f_0)$ lookup table, or an RMS balancer; never hard-code a single normalization constant.
+3. **Cosine carrier's DC offset** — the basic cosine FBAM contains a significant DC component (generated by odd-order products) and a first-period transient; a sine carrier removes the transient but complicates the closed-form theory. Fix: DC-block (high-pass) the output, and initialize the feedback state $y(0)$ to the steady-state peak (not 0 or 1) to kill the attack artifact.
+4. **V5 instability at $D=f_s/f_0$ or $D=f_s/2f_0$** — large $\beta$ diverges when the delay is an exact period (or half-period) multiple. Fix: detune $D$ slightly or cap $\beta$ in that regime; use fractional-delay interpolation carefully (linear for long delays, higher-order for very short ones).
+5. **Even-harmonic cancellation surprises** — cosine and ABS waveshapers (V4) are *even* functions and strip even harmonics, giving thin square-like spectra when a rich tone was intended. Fix: pick the waveshaper deliberately (odd/even balance is a feature, not a bug); stack cos + sin waveshapers (Eq. 37) to reconstruct full feedback-FM richness.
+6. **Formant width is tied to $\beta$** — in V3-II the formant bandwidth scales with $\beta$, so a wide formant forces high $\beta$ and its aliasing. Fix: use the double-carrier form (Eq. 32) to place the formant between harmonics with controlled $g$ weighting, and keep $\beta$ modest; scale formant operators ~35 dB below the fundamental region as in the paper's vocal example.
+7. **Sparse-only output** — a single basic FBAM operator with an envelope is one continuous voice; per the Method Hybridization rule, if FBAM is driven by sparse rhythmic generators (011/032) always pair it with a continuous fill layer (sustained FBAM pad, DPSM arpeggio) to keep the texture flowing.
+
+### Comparison With Related Methods
+
+| Method | Feedback into | Brightness knob | Spectral holes | Cost/sample |
+|---|---|---|---|---|
+| FM (SP-010/017) | phase | index (Bessel fades) | yes | 2 osc |
+| Phase Distortion (SP-030) | phase (warped) | warp amount | no | 1 table |
+| Waveshaping (SP-019) | none (static) | drive | no | 1 poly |
+| **FBAM (SP-070)** | **amplitude (self)** | **$\beta$ (monotonic)** | **no** | **1 mul + 1 add + 1 table** |
+
+### References
+
+- Kleimola, J., Lazzarini, V., Välimäki, V., & Timoney, J. (2011). "Feedback Amplitude Modulation Synthesis." *EURASIP Journal on Advances in Signal Processing*, 2011, Article 434378. doi:10.1155/2011/434378.
+- Lazzarini, V., Timoney, J., Kleimola, J., & Välimäki, V. (2009). "Five Variations on a Feedback Theme." *Proc. 12th Int. Conf. on Digital Audio Effects (DAFx-09)*, Como, Italy, 139–145.
+- Risset, J.-C. (1969). *An Introductory Catalog of Computer-Synthesized Sounds*. Bell Laboratories (reissued 1995, Wergo WER 2033-2).
+- Layzer, A. (1971). "Some idiosyncratic aspects of computer-synthesized sound." *Proc. Annual Conf. American Society of University Composers*, 27–39.
+- Cherniakov, M. (2003). *An Introduction to Parametric Digital Filters and Oscillators*. Wiley.
+- Arfib, D. (1979). "Digital synthesis of complex spectra by means of multiplication of nonlinear distorted sine waves." *JAES* 27(10), 757–768.
+- Le Brun, M. (1979). "Digital waveshaping synthesis." *JAES* 27(4), 250–266.
+- Moorer, J. A. (1976). "The synthesis of complex audio spectra by means of discrete summation formulae." *JAES* 24(9), 717–727.
+- Puckette, M. (1995). "Formant-based audio synthesis using nonlinear distortion." *JAES* 43(1–2), 40–47.

@@ -52,12 +52,14 @@ _INSTRUMENT_MODULES = {
     "World.banjo.banjo": "banjo",
     "Woodwind.bagpipe.bagpipe": "bagpipe",
     "World.shenai.shenai": "shenai",
+    "World.fiddle.fiddle": "fiddle",
 }
 
 _FIELDS = (
     "midi_program", "gm_name", "range_min", "range_max",
     "solo_range", "sweet_spot", "zones", "articulations",
     "synthesis", "modal_preset", "karplus_defaults", "fm_defaults",
+    "bowed_defaults",
     "reverb_tail", "eq_body", "eq_presence", "eq_air", "pan",
     "stem_label",
 )
@@ -150,6 +152,7 @@ KALIMBA = ALL_INSTRUMENTS["kalimba"]
 BANJO = ALL_INSTRUMENTS["banjo"]
 BAGPIPE = ALL_INSTRUMENTS["bagpipe"]
 SHENAI = ALL_INSTRUMENTS["shenai"]
+FIDDLE = ALL_INSTRUMENTS["fiddle"]
 
 
 def by_name(name):
@@ -212,6 +215,8 @@ def registry_table():
             role = "lead, melody, ornament, drone, accent"
         elif low == "shenai":
             role = "lead, melody, ornament, drone, accent"
+        elif low == "fiddle":
+            role = "lead, melody, ornament, countermelody, accent"
         else:
             role = "lead, harmony, accent"
         rng = f"{inst.range_min}–{inst.range_max}" if inst.range_min else "-"
@@ -261,3 +266,7 @@ if __name__ == "__main__":
     print("  by_name('steel drums') =", by_name("steel drums"))
     print("  by_program(114) =", by_program(114))
     print("  STEEL_DRUMS.in_sweet_spot(69) =", STEEL_DRUMS.in_sweet_spot(69))
+    print("  FIDDLE.midi_program =", FIDDLE.midi_program, "(should be 110)")
+    print("  by_name('fiddle') =", by_name("fiddle"))
+    print("  by_program(110) =", by_program(110))
+    print("  FIDDLE.in_sweet_spot(69) =", FIDDLE.in_sweet_spot(69))
