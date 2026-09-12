@@ -269,13 +269,19 @@ def _euclidean_positions(onsets: int, steps: int) -> List[int]:
 
 
 def build_framework(style="pop", key="C", bpm=120, form=None, num_bars=None,
-                    seed=None) -> UnitMatrixComposer:
+                    seed=None, voices=None) -> UnitMatrixComposer:
     """Build the middle-out framework (Path C, steps 1–2 of the chain).
 
     Creates the UnitMatrixComposer with pop form sections (L4 skeleton)
-    and the standard pop voice stack, ready for cell filling. The
-    framework is deterministic given (style, key, bpm) — the L3 anchor
-    (groove) and L2/L1 material are added in later chain steps.
+    and a voice stack, ready for cell filling. The framework is
+    deterministic given (style, key, bpm) — the L3 anchor (groove) and
+    L2/L1 material are added in later chain steps.
+
+    voices: optional list of (voice_name, instrument_name) overrides. When
+    omitted, the standard pop stack is used. Instrument names resolve
+    through the instrument registry (see workflows.musicom_workflow
+    ._resolve_instrument), so style-appropriate palettes can be swapped in
+    without forking the framework.
     """
     import random
     rng = random.Random(seed)
@@ -283,14 +289,15 @@ def build_framework(style="pop", key="C", bpm=120, form=None, num_bars=None,
     form = form or POP_FORM
     composer = UnitMatrixComposer(bpm=bpm, ticks_per_beat=480, beats_per_bar=4)
 
-    # --- voices (pop default stack) ---
-    voices = [
-        ("Lead", "Flute"),
-        ("Pad", "Piano"),
-        ("Bass", "Double Bass"),
-        ("Arp", "Clarinet"),
-        ("Drums", "Drum Kit"),
-    ]
+    # --- voices (pop default stack, or a caller-supplied palette) ---
+    if not voices:
+        voices = [
+            ("Lead", "Flute"),
+            ("Pad", "Piano"),
+            ("Bass", "Double Bass"),
+            ("Arp", "Clarinet"),
+            ("Drums", "Drum Kit"),
+        ]
     from workflows.musicom_workflow import _resolve_instrument
     composer.create_matrix(num_voices=len(voices), num_sections=len(form))
     for vname, inst in voices:

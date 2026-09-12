@@ -33,13 +33,16 @@ Zero-drift validated (`validate()` gate), provenance sidecar, grid viz.
 
 Different production method per VOICE (on stems) AND per SECTION (on bus):
 
-| Voice (stem label) | SP method |
+| Voice (by role/index) | SP method |
 |---|---|
-| Lead (Recorder) | SP-032 FDN reverb wash (wet .3) |
-| Pad (Bright Acoustic Piano) | SP-020 SVF lowpass 4.5 kHz |
-| Bass (Contrabass) | SP-020 SVF lowpass 700 Hz (sub body) |
-| Arp (Clarinet) | SP-019 Chebyshev waveshape (drive 1.5) |
-| Drums (Drums) | SP-008 multiband compressor (punch) |
+| Lead | SP-032 FDN reverb wash (wet .3) |
+| Pad | SP-020 SVF lowpass 4.5 kHz |
+| Bass | SP-020 SVF lowpass 700 Hz (sub body) |
+| Arp | SP-019 Chebyshev waveshape (drive 1.5) |
+| Drums | SP-008 multiband compressor (punch) |
+
+Stems route **by role and track index**, not by GM name — the palette
+rotates per HITL round, so a name-based router stops matching.
 
 | Section | SP method |
 |---|---|
@@ -62,71 +65,90 @@ LUFS -14.01  peak 0.891  silence 3.2%
 - Stems: `Audio/stems/track*_*.wav`
 - Grid: `Analysis/grid_phase1.txt`
 
-## Phase 3 — HITL evolution round (human pick)
+## Phase 3 — HITL evolution rounds (human pick)
 
 `Scripts/phase3_hitl.py` drives the engine's HITL machinery
-(`workflows.hitl`) over **this ballad's own framework** — the generic
-`run_hitl_round` builds a plain I–V–vi–IV pop anchor, which would discard
-the per-section regions and per-part methods from phase 1.
+(`workflows.hitl.record_pick`) over **this ballad's own framework** — the
+generic `run_hitl_round` builds a plain I–V–vi–IV pop anchor, which would
+discard the per-section regions and per-part methods from phase 1.
 
-**Search space**: the L3 anchor (bass) groove — Euclidean density ×
-on/off-beat offset. Macro-structure (form, harmony, per-part methods) is
-frozen, per plan advice #5 ("evolve phrases/anchors, not whole songs").
+### Two rules that keep rounds from sounding identical
+
+1. **Instrumentation rotates per round.** `PALETTES` defines four
+   ballad-idiomatic line-ups; round *r* uses
+   `PALETTE_ORDER[r % 4]`, so consecutive rounds are heard in fresh
+   instrumentation instead of the same four tracks.
+
+   | palette | Lead | Pad | Bass | Arp | Drums |
+   |---|---|---|---|---|---|
+   | classic | Violin | Piano | Cello | Viola | Drum Kit |
+   | noir | Alto Sax | Piano | Double Bass | Dulcimer | Drum Kit |
+   | chamber | Oboe | Church Organ | Bassoon | Clarinet | Timpani |
+   | folk | Acoustic Guitar | Dulcimer | Double Bass | Kalimba | Drum Kit |
+
+   Every instrument is **range-verified against the register its role
+   writes** (`tests/test_ballad_palette.py`). The original default wrote the
+   texture at 50–60, below the clarinet's 52 floor — a real out-of-range bug.
+
+2. **Candidates vary different stems.** Within a round each slot mutates a
+   distinct dimension instead of four takes on the bass:
+
+   | slot | role | what changes |
+   |---|---|---|
+   | 0 | incumbent | control — previous winner / current palette |
+   | 1 | anchor | bass groove density × offset |
+   | 2 | lead | lead composition method (per-section swap) |
+   | 3 | texture+bed | arp rate × spread, pad behaviour × drum level |
+
+### Fair audition
+
+Excerpts are **loudness-normalized** (`loudnorm I=-16`) before delivery. A
+soft palette (sax/oboe) otherwise lands ~7 dB under a bright one (violin),
+so the judge would pick the loudest candidate rather than the best.
+
+### Search space
+
+A `VariantSpec` (phase1_compose) controls every evolvable stem. Fitness is
+**composite** — averaged over Lead/Bass/Arp, not the bass alone, since
+scoring only the anchor made distinct tracks score identically.
+
+Macro-structure (form, harmony, section roles) is frozen, per plan advice
+#5: evolve phrases/anchors, not whole songs.
 
 ```bash
 PY=/opt/data/micromamba/envs/musicom/bin/python
-$PY Scripts/phase3_hitl.py                       # round 0
-$PY Scripts/phase3_hitl.py --round 1 \
-      --parent-density 4 --parent-offset 240     # mutate around winner
-$PY Scripts/phase3_hitl.py --pick 2              # record the human pick
+$PY Scripts/phase3_hitl.py                        # round 0
+$PY Scripts/phase3_hitl.py --round 1 --from-round 0   # mutate round-0 winner
+$PY Scripts/phase3_hitl.py --round 0 --pick 2     # record the human pick
 ```
 
-### Round 0 candidates (seed 7)
-
-| # | density | offset | bass onsets/bar | onset grid | fitness |
-|---|---|---|---|---|---|
-| 0 | 3 | 0 | 3 (walking) | {0, 480, 960} | 0.599 |
-| 1 | 4 | 0 | 4 (pulse) | {0, 480, 960, 1440} | 0.616 |
-| 2 | 5 | 0 | 5 (syncopated) | {0, 240, 720, 960, 1440} | 0.568 |
-| 3 | 4 | 240 | 4, pushed off-beat | {240, 720, 1200, 1680} | 0.616 [wildcard] |
-
-Fitness ties between cand 1 and cand 3 (the rule metric is phase-invariant)
-— exactly the ambiguity the human judge resolves.
-
-**Round 0 result: human pick = 0** (density=3, on-beat walking). Recorded in
-`HITL/round0/evolution.json` + provenance sidecar on the winner.
-
-### Round 1 candidates (seed 108, mutated around the round-0 winner d3/off0)
-
-| # | density | offset | bass onsets/bar | onset grid | fitness | note |
-|---|---|---|---|---|---|---|
-| 0 | 3 | 0 | 3 | {0, 480, 960} | 0.599 | incumbent (stay slot) |
-| 1 | 4 | 0 | 4 | {0, 480, 960, 1440} | 0.616 | denser |
-| 2 | 3 | 240 | 3, pushed off-beat | {240, 720, 1200} | 0.599 | flip phase |
-| 3 | 4 | 240 | 4, pushed off-beat | {240, 720, 1200, 1680} | 0.616 | wildcard |
-
-Note the mutant at density−1 (2 → clamped to 3) would have duplicated the
-stay slot; `_variant_set` de-duplicates and fills the freed slot from the
-unexplored pool.
-
-Artifacts per round: `HITL/roundN/candidates/cand*-d*-off*.{mid,ogg}`,
+Artifacts per round: `HITL/roundN/candidates/cand*.{mid,ogg}`,
 `HITL/roundN/round.json`, and on a pick `HITL/roundN/evolution.json` +
 provenance sidecar on the winner.
 
-### Engine fix shipped with phase 3
+### Engine fixes shipped with phase 3
 
-The mode-aware root lookup (`rules/harmony.progression_roots`) replaced a
-duplicated bug in **four** places (`workflows/paths.py`,
-`workflows/hitl.py`, `workflows/evolution.py`, and this project's phase 1).
-The old code did `MAJOR_DEGREES.index(deg.upper())`, collapsing every
-uppercase minor-mode degree (VI/III/VII) and every lowercase major-mode
-degree (ii/iii/vi/vii) onto index 0 — e.g. `i–VI–III–VII` in D produced
-`[38, 38, 38, 38]` (static harmony). Now: `[38, 46, 41, 48]` = D–B♭–F–C.
+- **Mode-aware root lookup** (`rules/harmony.progression_roots`) replaced a
+  bug duplicated in **four** places (`workflows/paths.py`,
+  `workflows/hitl.py`, `workflows/evolution.py`, this project's phase 1).
+  The old code did `MAJOR_DEGREES.index(deg.upper())`, collapsing every
+  uppercase minor-mode degree (VI/III/VII) and every lowercase major-mode
+  degree (ii/iii/vi/vii) onto index 0 — `i–VI–III–VII` in D gave
+  `[38, 38, 38, 38]`. Now `[38, 46, 41, 48]` = D–B♭–F–C.
+- **`record_pick` preserves candidate extras** (`spec`, `role`, per-stem
+  fitness) into `evolution.json`, so a richer search space survives into the
+  next round instead of silently resetting.
+- **`build_framework(voices=...)`** accepts a custom voice stack, so a
+  style-appropriate palette can be swapped in without forking the framework.
+- **Phase 2 routes stems by role/index**, not by hardcoded GM name — the
+  name-based router stopped matching the moment the palette changed.
 
-Regression-locked by `tests/test_harmony_degrees.py` (16 tests).
+Regression-locked by `tests/test_harmony_degrees.py` (16 tests) and
+`tests/test_ballad_palette.py` (10 tests).
 
 ## HITL hook
 
 Round 0 is rendered and awaiting the human pick. Reply with a candidate
 number (0–3); the agent records it via `phase3_hitl.py --pick N`, writes
-`evolution.json` + provenance, and spawns round 1 mutated around the winner.
+`evolution.json` + provenance, and spawns round 1 mutated around the winner
+on the next palette.

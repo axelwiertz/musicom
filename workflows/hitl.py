@@ -220,6 +220,27 @@ def record_pick(round_obj: HITLRound, pick_index: int,
     evo_dir.mkdir(parents=True, exist_ok=True)
     evo_path = Path(evolution_path or evo_dir / "evolution.json")
 
+    def _extras(cand) -> Dict:
+        """Optional per-candidate metadata set by a caller (e.g. a VariantSpec).
+
+        The generic HITL layer knows density/offset only. Projects that
+        evolve a richer search space attach extras to the candidate; they
+        must survive into evolution.json, or the next round cannot inherit
+        them and would silently reset to the default palette/methods.
+        """
+        out = {}
+        spec = getattr(cand, "spec", None)
+        if spec is not None:
+            out["spec"] = spec
+        role = getattr(cand, "role", None)
+        if role is not None:
+            out["role"] = role
+        per_stem = cand.fitness.get("per_stem") if isinstance(
+            cand.fitness, dict) else None
+        if per_stem:
+            out["per_stem"] = per_stem
+        return out
+
     record = {
         "judge": "human",
         "style": round_obj.style, "key": round_obj.key, "bpm": round_obj.bpm,
@@ -236,12 +257,14 @@ def record_pick(round_obj: HITLRound, pick_index: int,
             "midi": winner.midi_path,
             "ogg": winner.ogg_path,
             "wildcard": winner.is_wildcard,
+            **_extras(winner),
         },
         "candidates": [
             {"variant": c.variant, "density": c.density, "offset": c.offset,
              "fitness_total": round(c.fitness["total"], 4),
              "terms": c.fitness["terms"], "wildcard": c.is_wildcard,
-             "midi": c.midi_path, "ogg": c.ogg_path}
+             "midi": c.midi_path, "ogg": c.ogg_path,
+             **_extras(c)}
             for c in round_obj.candidates
         ],
     }

@@ -4,12 +4,19 @@
 Applies DIFFERENT production methods per voice (on stems) AND per section
 (on the mixed bus), then masters. Pattern: per-voice-per-section-production.md
 
-Per-voice production methods (on stems, matched by GM stem label):
-  Lead  (Recorder/GM74)   -> SP-032 FDN reverb wash  (vocal lead space)
-  Pad   (Acoustic_Grand)  -> SP-020 SVF lowpass warm (ballad bed)
-  Bass  (Contrabass)      -> SP-011 Karplus body (sub presence) via EQ boost
-  Arp   (Clarinet)        -> SP-019 waveshape (harmonics, widen)
-  Drums (Drums)           -> SP-008 multiband compress (punch)
+Stems are routed BY ROLE (index order), not by hardcoded GM name — the
+instrumentation palette rotates per HITL round, so a name-based router
+("Recorder", "Contrabass") silently stopped matching the moment the
+palette changed. `RenderPipeline.render_stems` names tracks
+track00..trackN in voice order, which is exactly the order phase 1 adds
+voices: Lead, Pad, Bass, Arp, Drums.
+
+Per-voice production methods (on stems):
+  Lead   -> SP-032 FDN reverb wash   (lead space)
+  Pad    -> SP-020 SVF lowpass warm  (ballad bed)
+  Bass   -> SP-020 SVF lowpass 700   (sub body)
+  Arp    -> SP-019 waveshape         (harmonics)
+  Drums  -> SP-008 multiband compress(punch)
 
 Per-section production methods (on the mixed bus, sliced at bar boundaries):
   Intro  (0-4)  -> SP-020 lowpass 1200 Hz (muffled build-in)
@@ -21,6 +28,7 @@ Master: normalize_to_lufs(-14) then Limiter(-1 dB) LAST.
 """
 import os
 import subprocess
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -41,6 +49,9 @@ STEMS = AUDIO / "stems"
 BPM = 72
 BAR_S = 60.0 / BPM * 4          # 3.333 s per bar at 72bpm 4/4
 SEC_BOUNDS = [0, 4, 12, 20, 24, 28]   # section start bars: intro/verse/chorus/bridge/outro
+
+# Voice order == stem index order (phase 1 build order).
+ROLE_ORDER = ["Lead", "Pad", "Bass", "Arp", "Drums"]
 
 
 def sp020_lowpass(a, cutoff_hz):
@@ -83,58 +94,69 @@ def mono(a):
     return a
 
 
-def main():
+def _stem_by_index(stems, idx):
+    """Resolve a stem path by track index (track00 = first voice, ...).
+
+    `render_stems` keys look like 'track03_Clarinet' — the numeric prefix
+    is the voice order, which is stable across palette changes.
+    """
+    for key, path in stems.items():
+        if key.startswith(f"track{idx:02d}"):
+            return path
+    return None
+
+
+def _process_voice(role, audio):
+    """Per-voice production method (dispatch by ROLE, not by GM name)."""
+    if role == "Lead":
+        return sp032_fdn(audio, size=0.75, decay=0.5, brightness=0.65,
+                         wet=0.3)                       # lead space
+    if role == "Pad":
+        return sp020_lowpass(audio, 4500)               # warm bed
+    if role == "Bass":
+        return sp020_lowpass(audio, 700)                # sub body
+    if role == "Arp":
+        return sp019_waveshape(audio, 1.5)              # harmonics
+    if role == "Drums":
+        return sp008_mbc(audio)                         # punch
+    return audio
+
+
+def main(midi_path=None, out_stem=None):
+    midi_path = Path(midi_path or MID)
+    stem_name = out_stem or midi_path.stem
     AUDIO.mkdir(parents=True, exist_ok=True)
     STEMS.mkdir(parents=True, exist_ok=True)
 
     # ---- 1. render stems ----
     pipe = RenderPipeline(fluidsynth_bin=fluidsynth_bin(),
                           soundfont_path=soundfont_path(), gain=1.2)
-    stems = pipe.render_stems(str(MID), str(STEMS), format="wav")
+    stems = pipe.render_stems(str(midi_path), str(STEMS), format="wav")
     print("stems:", {k: os.path.basename(v) for k, v in stems.items()})
 
-    # ---- 2. per-voice production (route by ACTUAL GM stem label) ----
-    def _find(label_substr):
-        for k, v in stems.items():
-            if label_substr in k:
-                return v
-        return None
-
+    # ---- 2. per-voice production (route by ROLE / track index) ----
     processed = {}
-    for label_sub in ["Recorder", "Bright_Acoustic", "Contrabass", "Clarinet", "Drums"]:
-        p = _find(label_sub)
+    pan = {"Lead": 0.25, "Pad": 0.0, "Bass": 0.0, "Arp": 0.75, "Drums": 0.0}
+    gains = {"Lead": 1.0, "Pad": 0.7, "Bass": 0.9, "Arp": 0.5, "Drums": 0.6}
+    for idx, role in enumerate(ROLE_ORDER):
+        p = _stem_by_index(stems, idx)
         if not p:
-            print(f"  (no stem matching {label_sub})")
+            print(f"  (no stem for role {role} / track{idx:02d})")
             continue
         a, _sr = read_wav(p)
         a = mono(a)
-        if "Recorder" in p:
-            out = sp032_fdn(a, size=0.75, decay=0.5, brightness=0.65, wet=0.3)   # lead space
-        elif "Bright_Acoustic" in p:
-            out = sp020_lowpass(a, 4500)                                          # warm pad
-        elif "Contrabass" in p:
-            out = sp020_lowpass(a, 700)                                           # sub body
-        elif "Clarinet" in p:
-            out = sp019_waveshape(a, 1.5)                                         # arp harmonics
-        elif "Drums" in p:
-            out = sp008_mbc(a)                                                    # punch
-        else:
-            out = a
-        processed[label_sub] = out
+        out = _process_voice(role, a)
+        processed[role] = out
         rms = float(np.sqrt(np.mean(out ** 2)))
-        print(f"  {label_sub}: rms {rms:.4f}")
+        print(f"  {role}: {os.path.basename(p)} rms {rms:.4f}")
 
-    # ---- 3. mix to stereo bus with pan (lead L, arp R, rest center) ----
+    # ---- 3. mix to stereo bus with pan ----
     n = max(len(v) for v in processed.values()) if processed else SR
     bus_l = np.zeros(n, dtype=np.float64)
     bus_r = np.zeros(n, dtype=np.float64)
-    pan = {"Recorder": 0.25, "Bright_Acoustic": 0.0, "Contrabass": 0.0,
-           "Clarinet": 0.75, "Drums": 0.0}
-    gains = {"Recorder": 1.0, "Bright_Acoustic": 0.7, "Contrabass": 0.9,
-             "Clarinet": 0.5, "Drums": 0.6}
-    for label_sub, sig in processed.items():
-        g = gains.get(label_sub, 0.7) * 0.5
-        p = pan.get(label_sub, 0.0)
+    for role, sig in processed.items():
+        g = gains.get(role, 0.7) * 0.5
+        p = pan.get(role, 0.0)
         bus_l[:len(sig)] += sig * g * (1.0 - p)
         bus_r[:len(sig)] += sig * g * (1.0 + p)
     mix = np.stack([bus_l, bus_r], axis=1)
@@ -170,8 +192,8 @@ def main():
     lim = Limiter(threshold_db=-1.0)
     out = lim.process(out)
 
-    wav_path = AUDIO / "pop-ballad-hitl.wav"
-    ogg_path = AUDIO / "pop-ballad-hitl.ogg"
+    wav_path = AUDIO / f"{stem_name}.wav"
+    ogg_path = AUDIO / f"{stem_name}.ogg"
     write_wav(str(wav_path), out, SR)
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(wav_path),
                     "-codec:a", "libopus", "-application", "voip", "-b:a", "48k",
@@ -188,4 +210,10 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    import argparse
+    ap = argparse.ArgumentParser(description="Pop-ballad phase 2 production")
+    ap.add_argument("--midi", default=None,
+                    help="MIDI to produce (default: the canonical phase-1 mix)")
+    ap.add_argument("--out-stem", default=None, help="output basename")
+    a = ap.parse_args()
+    main(midi_path=a.midi, out_stem=a.out_stem)

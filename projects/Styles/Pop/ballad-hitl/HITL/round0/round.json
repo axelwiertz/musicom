@@ -3,78 +3,168 @@
   "seed": 7,
   "key": "Dm",
   "bpm": 72,
-  "parent_density": null,
-  "parent_offset": null,
+  "palette_name": "classic",
+  "palette": {
+    "Lead": "Violin",
+    "Pad": "Piano",
+    "Bass": "Cello",
+    "Arp": "Viola",
+    "Drums": "Drum Kit"
+  },
+  "parent": null,
   "candidates": [
     {
       "variant": 0,
-      "density": 3,
-      "offset": 0,
-      "fitness_total": 0.5986,
+      "fitness_total": 0.672,
       "terms": {
-        "tonal_gravity": 0.5417,
+        "tonal_gravity": 0.7153,
         "on_grid": 1.0,
-        "stepwise_motion": 0.4,
-        "rhythm_variety": 0.1818,
-        "groove_stability": 0.7273
+        "stepwise_motion": 0.5956,
+        "rhythm_variety": 0.0676,
+        "groove_stability": 0.777
+      },
+      "per_stem": {
+        "Lead": 0.6447,
+        "Bass": 0.647,
+        "Arp": 0.7244
       },
       "wildcard": false,
-      "midi": "/opt/data/repos/musicom/projects/Styles/Pop/ballad-hitl/HITL/round0/candidates/cand0-d3-off0.mid",
-      "ogg": "/opt/data/repos/musicom/projects/Styles/Pop/ballad-hitl/HITL/round0/candidates/cand0-d3-off0.ogg",
+      "role": "incumbent",
+      "spec": {
+        "density": null,
+        "offset": 0,
+        "lead_method": null,
+        "arp_on": null,
+        "arp_rate": 2,
+        "pad_style": "sustain",
+        "drum_level": "default",
+        "palette": {
+          "Lead": "Violin",
+          "Pad": "Piano",
+          "Bass": "Cello",
+          "Arp": "Viola",
+          "Drums": "Drum Kit"
+        }
+      },
+      "midi": "/opt/data/repos/musicom/projects/Styles/Pop/ballad-hitl/HITL/round0/candidates/cand0-pViol-ldX-ar2-pdsust-drdef-bXo0.mid",
+      "ogg": "/opt/data/repos/musicom/projects/Styles/Pop/ballad-hitl/HITL/round0/candidates/cand0-pViol-ldX-ar2-pdsust-drdef-bXo0.ogg",
       "form": "[('Intro', 4), ('Verse', 8), ('Chorus', 8), ('Bridge', 4), ('Outro', 4)]",
       "progression": "i-VI-III-VII (Dm-Bb-F-C)"
     },
     {
       "variant": 1,
-      "density": 4,
-      "offset": 0,
-      "fitness_total": 0.6158,
+      "fitness_total": 0.6791,
       "terms": {
-        "tonal_gravity": 0.5417,
+        "tonal_gravity": 0.7136,
         "on_grid": 1.0,
-        "stepwise_motion": 0.4,
-        "rhythm_variety": 0.0667,
-        "groove_stability": 1.0
+        "stepwise_motion": 0.6039,
+        "rhythm_variety": 0.0636,
+        "groove_stability": 0.8272
+      },
+      "per_stem": {
+        "Lead": 0.6485,
+        "Bass": 0.6645,
+        "Arp": 0.7244
       },
       "wildcard": false,
-      "midi": "/opt/data/repos/musicom/projects/Styles/Pop/ballad-hitl/HITL/round0/candidates/cand1-d4-off0.mid",
-      "ogg": "/opt/data/repos/musicom/projects/Styles/Pop/ballad-hitl/HITL/round0/candidates/cand1-d4-off0.ogg",
+      "role": "anchor",
+      "spec": {
+        "density": 4,
+        "offset": 0,
+        "lead_method": null,
+        "arp_on": null,
+        "arp_rate": 2,
+        "pad_style": "sustain",
+        "drum_level": "default",
+        "palette": {
+          "Lead": "Violin",
+          "Pad": "Piano",
+          "Bass": "Cello",
+          "Arp": "Viola",
+          "Drums": "Drum Kit"
+        }
+      },
+      "midi": "/opt/data/repos/musicom/projects/Styles/Pop/ballad-hitl/HITL/round0/candidates/cand1-pViol-ldX-ar2-pdsust-drdef-b4o0.mid",
+      "ogg": "/opt/data/repos/musicom/projects/Styles/Pop/ballad-hitl/HITL/round0/candidates/cand1-pViol-ldX-ar2-pdsust-drdef-b4o0.ogg",
       "form": "[('Intro', 4), ('Verse', 8), ('Chorus', 8), ('Bridge', 4), ('Outro', 4)]",
       "progression": "i-VI-III-VII (Dm-Bb-F-C)"
     },
     {
       "variant": 2,
-      "density": 5,
-      "offset": 0,
-      "fitness_total": 0.5678,
+      "fitness_total": 0.6936,
       "terms": {
-        "tonal_gravity": 0.5417,
+        "tonal_gravity": 0.7193,
         "on_grid": 1.0,
-        "stepwise_motion": 0.4,
-        "rhythm_variety": 0.1053,
-        "groove_stability": 0.5789
+        "stepwise_motion": 0.6848,
+        "rhythm_variety": 0.0473,
+        "groove_stability": 0.8194
+      },
+      "per_stem": {
+        "Lead": 0.7095,
+        "Bass": 0.647,
+        "Arp": 0.7244
       },
       "wildcard": false,
-      "midi": "/opt/data/repos/musicom/projects/Styles/Pop/ballad-hitl/HITL/round0/candidates/cand2-d5-off0.mid",
-      "ogg": "/opt/data/repos/musicom/projects/Styles/Pop/ballad-hitl/HITL/round0/candidates/cand2-d5-off0.ogg",
+      "role": "lead",
+      "spec": {
+        "density": null,
+        "offset": 0,
+        "lead_method": "004",
+        "arp_on": null,
+        "arp_rate": 2,
+        "pad_style": "sustain",
+        "drum_level": "default",
+        "palette": {
+          "Lead": "Violin",
+          "Pad": "Piano",
+          "Bass": "Cello",
+          "Arp": "Viola",
+          "Drums": "Drum Kit"
+        }
+      },
+      "midi": "/opt/data/repos/musicom/projects/Styles/Pop/ballad-hitl/HITL/round0/candidates/cand2-pViol-ld004-ar2-pdsust-drdef-bXo0.mid",
+      "ogg": "/opt/data/repos/musicom/projects/Styles/Pop/ballad-hitl/HITL/round0/candidates/cand2-pViol-ld004-ar2-pdsust-drdef-bXo0.ogg",
       "form": "[('Intro', 4), ('Verse', 8), ('Chorus', 8), ('Bridge', 4), ('Outro', 4)]",
       "progression": "i-VI-III-VII (Dm-Bb-F-C)"
     },
     {
       "variant": 3,
-      "density": 4,
-      "offset": 240,
-      "fitness_total": 0.6158,
+      "fitness_total": 0.6709,
       "terms": {
-        "tonal_gravity": 0.5417,
+        "tonal_gravity": 0.707,
         "on_grid": 1.0,
-        "stepwise_motion": 0.4,
-        "rhythm_variety": 0.0667,
-        "groove_stability": 1.0
+        "stepwise_motion": 0.6049,
+        "rhythm_variety": 0.0619,
+        "groove_stability": 0.777
+      },
+      "per_stem": {
+        "Lead": 0.6474,
+        "Bass": 0.647,
+        "Arp": 0.7183
       },
       "wildcard": true,
-      "midi": "/opt/data/repos/musicom/projects/Styles/Pop/ballad-hitl/HITL/round0/candidates/cand3-d4-off240.mid",
-      "ogg": "/opt/data/repos/musicom/projects/Styles/Pop/ballad-hitl/HITL/round0/candidates/cand3-d4-off240.ogg",
+      "role": "texture+bed",
+      "spec": {
+        "density": null,
+        "offset": 0,
+        "lead_method": null,
+        "arp_on": [
+          "Verse",
+          "Chorus"
+        ],
+        "arp_rate": 4,
+        "pad_style": "pulse",
+        "drum_level": "full",
+        "palette": {
+          "Lead": "Violin",
+          "Pad": "Piano",
+          "Bass": "Cello",
+          "Arp": "Viola",
+          "Drums": "Drum Kit"
+        }
+      },
+      "midi": "/opt/data/repos/musicom/projects/Styles/Pop/ballad-hitl/HITL/round0/candidates/cand3-pViol-ldX-ar4-pdpuls-drful-bXo0.mid",
+      "ogg": "/opt/data/repos/musicom/projects/Styles/Pop/ballad-hitl/HITL/round0/candidates/cand3-pViol-ldX-ar4-pdpuls-drful-bXo0.ogg",
       "form": "[('Intro', 4), ('Verse', 8), ('Chorus', 8), ('Bridge', 4), ('Outro', 4)]",
       "progression": "i-VI-III-VII (Dm-Bb-F-C)"
     }
