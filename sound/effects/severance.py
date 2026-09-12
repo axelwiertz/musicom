@@ -36,6 +36,16 @@ Usage:
 
     gr = GatedReverb(sample_rate=44100)
     out = gr.process(audio, triggers=[0.25, 1.25], gate_len=0.30)
+
+IMPORTANT (measured 2026-09-12, SP-071 production pass on a 4-on-floor techno
+mix): ``DualEngineDelay.process()`` returns the **delay engine output only**
+(continuous + granular taps) — it does NOT add the dry signal back. Using it as
+a bus insert at 100% wet replaces the source: on a 128 BPM four-on-floor mix the
+dry-vs-wet waveform correlation collapsed to **0.061** (transients moved 3/16
+late, whole bus comb-filtered). Always pair it with an explicit mix, e.g.
+``y = (1 - 0.45) * y + 0.45 * dd.process(y, ...)`` (correlation recovered to
+0.430). Likewise, blending ``spectral_declash`` on the chain output costs
+loudness fast — 35% parallel is about the limit before it eats the reverb tail.
 """
 
 from __future__ import annotations

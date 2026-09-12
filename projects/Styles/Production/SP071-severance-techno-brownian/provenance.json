@@ -1,0 +1,1870 @@
+{
+  "job": "random-style production SP layer-aligned 2026-09-12",
+  "method": "SP-071",
+  "module": "sound.effects.severance",
+  "desc": "Gated Reverb + Dual-Engine Delay + Glitch Chain + Parallel Band Compressor (ZERO9-style)",
+  "registry": "workflows.musicom_workflow.SP_METHODS",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Techno/083-techno-brownian/MIDI/083-techno-brownian.mid",
+  "out_dir": "/opt/data/repos/musicom/projects/Styles/Production/SP071-severance-techno-brownian",
+  "layer_discipline": "absolute - ZERO9 suite replaces the space/echo/glue layer for ALL voices (full mix bus + per-voice processed stems)",
+  "params": {
+    "bpm": 128.0,
+    "gate_len_s": 0.234375,
+    "gate_triggers": 372,
+    "gated_reverb": {
+      "tail_gain": 0.55,
+      "declash": 0.5,
+      "movement": 0.5,
+      "decay": 0.62
+    },
+    "dual_engine_delay": {
+      "time_cont_s": 0.3515625,
+      "time_gran_s": 0.703125,
+      "feedback": 0.42,
+      "routing": "serial",
+      "splice": 4,
+      "grain_len": 512,
+      "note": "dotted-8th (3x16th) + dotted-quarter (6x16th) at 128 BPM"
+    },
+    "glitch_chain": {
+      "steps": 16,
+      "patterns": [
+        [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "note": "sparse by design: ~3 of 16 steps per bar active; decimate stage OFF"
+    },
+    "parallel_band_comp": {
+      "down_threshold_db": -16.0,
+      "down_ratio": 3.0,
+      "up_threshold_db": -44.0,
+      "up_amount": 0.3,
+      "parallel_mix": 0.45
+    },
+    "declash_blend": 0.35,
+    "master": {
+      "target_lufs": -14.0,
+      "limiter_threshold_db": -1.0
+    }
+  },
+  "soundfont": "/opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2",
+  "dry_full_mix": {
+    "path": "/opt/data/repos/musicom/projects/Styles/Production/SP071-severance-techno-brownian/dry_full_mix.wav",
+    "bytes": 8505132,
+    "silence_ratio": 0.067
+  },
+  "wet_full_mix": {
+    "path": "/opt/data/repos/musicom/projects/Styles/Production/SP071-severance-techno-brownian/SP071-severance-techno-brownian.wav",
+    "bytes": 8505132,
+    "ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP071-severance-techno-brownian/SP071-severance-techno-brownian.ogg",
+    "ogg_bytes": 323783,
+    "lufs": -14.09,
+    "peak": 0.8912,
+    "silence_ratio": 0.0379,
+    "sha256": "367c99e95d56a39a5a2f85fe27e7c46b6b2e20c7a2e70a7dce3f42b0ba520335"
+  },
+  "stems": {
+    "track01": {
+      "dry_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP071-severance-techno-brownian/Audio/stems_dry/track01.wav",
+      "dry_bytes": 8505132,
+      "processed_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP071-severance-techno-brownian/Audio/stems_processed/track01_serverance.wav",
+      "processed_bytes": 8505132
+    },
+    "track02": {
+      "dry_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP071-severance-techno-brownian/Audio/stems_dry/track02.wav",
+      "dry_bytes": 8408364,
+      "processed_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP071-severance-techno-brownian/Audio/stems_processed/track02_serverance.wav",
+      "processed_bytes": 8408364
+    },
+    "track03": {
+      "dry_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP071-severance-techno-brownian/Audio/stems_dry/track03.wav",
+      "dry_bytes": 8356908,
+      "processed_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP071-severance-techno-brownian/Audio/stems_processed/track03_serverance.wav",
+      "processed_bytes": 8356908
+    },
+    "track04": {
+      "dry_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP071-severance-techno-brownian/Audio/stems_dry/track04.wav",
+      "dry_bytes": 8385324,
+      "processed_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP071-severance-techno-brownian/Audio/stems_processed/track04_serverance.wav",
+      "processed_bytes": 8385324
+    },
+    "track05": {
+      "dry_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP071-severance-techno-brownian/Audio/stems_dry/track05.wav",
+      "dry_bytes": 8356908,
+      "processed_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP071-severance-techno-brownian/Audio/stems_processed/track05_serverance.wav",
+      "processed_bytes": 8356908
+    },
+    "track06": {
+      "dry_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP071-severance-techno-brownian/Audio/stems_dry/track06.wav",
+      "dry_bytes": 8375852,
+      "processed_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP071-severance-techno-brownian/Audio/stems_processed/track06_serverance.wav",
+      "processed_bytes": 8375852
+    }
+  },
+  "pitch_verification": {
+    "verdict": "PASS",
+    "hit_rate": 0.6556,
+    "median_harmonic_ratio": 0.374,
+    "median_dom_hz": 208.0,
+    "auto_frames": 95,
+    "auto_unpitched_frames": 1,
+    "windows": [
+      {
+        "t": 0.0,
+        "dom_hz": 174.0,
+        "acf_hz": 43.7,
+        "hit": true,
+        "harm_ratio": 0.593,
+        "expected_notes": [
+          41,
+          53,
+          56,
+          60,
+          65,
+          68,
+          72,
+          84
+        ]
+      },
+      {
+        "t": 0.5,
+        "dom_hz": 262.0,
+        "acf_hz": 43.7,
+        "hit": true,
+        "harm_ratio": 0.537,
+        "expected_notes": [
+          41,
+          53,
+          56,
+          60,
+          68,
+          72,
+          80,
+          84
+        ]
+      },
+      {
+        "t": 1.0,
+        "dom_hz": 262.0,
+        "acf_hz": 43.8,
+        "hit": true,
+        "harm_ratio": 0.564,
+        "expected_notes": [
+          41,
+          53,
+          56,
+          60,
+          68,
+          77
+        ]
+      },
+      {
+        "t": 1.5,
+        "dom_hz": 262.0,
+        "acf_hz": 43.8,
+        "hit": true,
+        "harm_ratio": 0.081,
+        "expected_notes": [
+          37,
+          41,
+          49,
+          53,
+          56,
+          60,
+          61,
+          65,
+          73,
+          77,
+          84
+        ]
+      },
+      {
+        "t": 2.0,
+        "dom_hz": 68.0,
+        "acf_hz": 69.3,
+        "hit": true,
+        "harm_ratio": 0.44,
+        "expected_notes": [
+          37,
+          49,
+          53,
+          56,
+          61,
+          65,
+          73,
+          80,
+          85
+        ]
+      },
+      {
+        "t": 2.5,
+        "dom_hz": 72.0,
+        "acf_hz": 69.5,
+        "hit": false,
+        "harm_ratio": 0.646,
+        "expected_notes": [
+          37,
+          49,
+          53,
+          56,
+          61,
+          68,
+          73,
+          77
+        ]
+      },
+      {
+        "t": 3.0,
+        "dom_hz": 68.0,
+        "acf_hz": 69.3,
+        "hit": true,
+        "harm_ratio": 0.824,
+        "expected_notes": [
+          37,
+          49,
+          53,
+          56,
+          61,
+          65,
+          73,
+          77,
+          85
+        ]
+      },
+      {
+        "t": 3.5,
+        "dom_hz": 68.0,
+        "acf_hz": 69.5,
+        "hit": true,
+        "harm_ratio": 0.142,
+        "expected_notes": [
+          32,
+          37,
+          44,
+          48,
+          49,
+          51,
+          53,
+          56,
+          63,
+          73,
+          77,
+          80,
+          84
+        ]
+      },
+      {
+        "t": 4.0,
+        "dom_hz": 68.0,
+        "acf_hz": 69.6,
+        "hit": false,
+        "harm_ratio": 0.364,
+        "expected_notes": [
+          32,
+          44,
+          48,
+          51,
+          56,
+          72,
+          80,
+          84
+        ]
+      },
+      {
+        "t": 4.5,
+        "dom_hz": 836.0,
+        "acf_hz": 52.1,
+        "hit": true,
+        "harm_ratio": 0.411,
+        "expected_notes": [
+          32,
+          44,
+          48,
+          51,
+          56,
+          60,
+          63,
+          80,
+          84,
+          87
+        ]
+      },
+      {
+        "t": 5.0,
+        "dom_hz": 836.0,
+        "acf_hz": 52.1,
+        "hit": true,
+        "harm_ratio": 0.42,
+        "expected_notes": [
+          32,
+          44,
+          48,
+          51,
+          56,
+          68,
+          72,
+          80,
+          84
+        ]
+      },
+      {
+        "t": 5.5,
+        "dom_hz": 208.0,
+        "acf_hz": 52.1,
+        "hit": true,
+        "harm_ratio": 0.485,
+        "expected_notes": [
+          32,
+          39,
+          44,
+          48,
+          51,
+          55,
+          58,
+          63,
+          70,
+          84,
+          87
+        ]
+      },
+      {
+        "t": 6.0,
+        "dom_hz": 788.0,
+        "acf_hz": 98.5,
+        "hit": true,
+        "harm_ratio": 0.283,
+        "expected_notes": [
+          39,
+          51,
+          55,
+          58,
+          63,
+          70,
+          75,
+          79,
+          87
+        ]
+      },
+      {
+        "t": 6.5,
+        "dom_hz": 232.0,
+        "acf_hz": 78.2,
+        "hit": true,
+        "harm_ratio": 0.461,
+        "expected_notes": [
+          39,
+          51,
+          55,
+          58,
+          63,
+          67,
+          75,
+          87
+        ]
+      },
+      {
+        "t": 7.0,
+        "dom_hz": 234.0,
+        "acf_hz": 78.1,
+        "hit": true,
+        "harm_ratio": 0.754,
+        "expected_notes": [
+          39,
+          51,
+          55,
+          58,
+          63,
+          70,
+          75,
+          82
+        ]
+      },
+      {
+        "t": 7.5,
+        "dom_hz": 232.0,
+        "acf_hz": 1002.3,
+        "hit": false,
+        "harm_ratio": 0.272,
+        "expected_notes": [
+          41,
+          53,
+          56,
+          60,
+          65,
+          72,
+          84
+        ]
+      },
+      {
+        "t": 8.0,
+        "dom_hz": 260.0,
+        "acf_hz": 87.4,
+        "hit": true,
+        "harm_ratio": 0.476,
+        "expected_notes": [
+          41,
+          53,
+          56,
+          60,
+          65,
+          77,
+          80,
+          84
+        ]
+      },
+      {
+        "t": 8.5,
+        "dom_hz": 262.0,
+        "acf_hz": 43.8,
+        "hit": true,
+        "harm_ratio": 0.61,
+        "expected_notes": [
+          41,
+          53,
+          56,
+          60,
+          65,
+          68,
+          77,
+          84
+        ]
+      },
+      {
+        "t": 9.0,
+        "dom_hz": 262.0,
+        "acf_hz": 43.7,
+        "hit": true,
+        "harm_ratio": 0.119,
+        "expected_notes": [
+          34,
+          41,
+          46,
+          49,
+          53,
+          56,
+          58,
+          60,
+          65,
+          72,
+          73,
+          77,
+          84
+        ]
+      },
+      {
+        "t": 9.5,
+        "dom_hz": 262.0,
+        "acf_hz": 43.8,
+        "hit": false,
+        "harm_ratio": 0.298,
+        "expected_notes": [
+          34,
+          46,
+          49,
+          53,
+          58,
+          61,
+          65,
+          73,
+          77,
+          82
+        ]
+      },
+      {
+        "t": 10.0,
+        "dom_hz": 50.0,
+        "acf_hz": 1002.3,
+        "hit": false,
+        "harm_ratio": 0.358,
+        "expected_notes": [
+          34,
+          46,
+          49,
+          53,
+          58,
+          61,
+          65,
+          70,
+          77
+        ]
+      },
+      {
+        "t": 10.5,
+        "dom_hz": 174.0,
+        "acf_hz": 58.4,
+        "hit": true,
+        "harm_ratio": 0.442,
+        "expected_notes": [
+          34,
+          46,
+          49,
+          53,
+          58,
+          61,
+          65,
+          70,
+          77,
+          82,
+          85
+        ]
+      },
+      {
+        "t": 11.0,
+        "dom_hz": 64.0,
+        "acf_hz": 58.5,
+        "hit": false,
+        "harm_ratio": 0.516,
+        "expected_notes": [
+          34,
+          36,
+          46,
+          48,
+          49,
+          51,
+          53,
+          55,
+          58,
+          63,
+          73,
+          79,
+          87
+        ]
+      },
+      {
+        "t": 11.5,
+        "dom_hz": 66.0,
+        "acf_hz": 65.4,
+        "hit": true,
+        "harm_ratio": 0.667,
+        "expected_notes": [
+          36,
+          48,
+          51,
+          55,
+          72,
+          79,
+          87
+        ]
+      },
+      {
+        "t": 12.0,
+        "dom_hz": 64.0,
+        "acf_hz": 1002.3,
+        "hit": false,
+        "harm_ratio": 0.31,
+        "expected_notes": [
+          36,
+          48,
+          51,
+          55,
+          60,
+          63,
+          79,
+          84,
+          87
+        ]
+      },
+      {
+        "t": 12.5,
+        "dom_hz": 64.0,
+        "acf_hz": 65.6,
+        "hit": false,
+        "harm_ratio": 0.633,
+        "expected_notes": [
+          36,
+          48,
+          51,
+          55,
+          60,
+          72,
+          79,
+          84,
+          87
+        ]
+      },
+      {
+        "t": 13.0,
+        "dom_hz": 50.0,
+        "acf_hz": 65.5,
+        "hit": false,
+        "harm_ratio": 0.334,
+        "expected_notes": [
+          36,
+          41,
+          48,
+          51,
+          53,
+          55,
+          56,
+          60,
+          65,
+          68,
+          72,
+          87
+        ]
+      },
+      {
+        "t": 13.5,
+        "dom_hz": 66.0,
+        "acf_hz": 87.6,
+        "hit": false,
+        "harm_ratio": 0.374,
+        "expected_notes": [
+          41,
+          53,
+          56,
+          60,
+          65,
+          68,
+          72,
+          77,
+          80,
+          84
+        ]
+      },
+      {
+        "t": 14.0,
+        "dom_hz": 262.0,
+        "acf_hz": 52.1,
+        "hit": true,
+        "harm_ratio": 0.515,
+        "expected_notes": [
+          41,
+          53,
+          56,
+          60,
+          65,
+          72,
+          77,
+          84
+        ]
+      },
+      {
+        "t": 14.5,
+        "dom_hz": 262.0,
+        "acf_hz": 43.7,
+        "hit": true,
+        "harm_ratio": 0.642,
+        "expected_notes": [
+          41,
+          53,
+          56,
+          60,
+          65,
+          72,
+          77,
+          80,
+          84
+        ]
+      },
+      {
+        "t": 15.0,
+        "dom_hz": 262.0,
+        "acf_hz": 1002.3,
+        "hit": false,
+        "harm_ratio": 0.263,
+        "expected_notes": [
+          37,
+          49,
+          53,
+          56,
+          65,
+          68,
+          73,
+          80
+        ]
+      },
+      {
+        "t": 15.5,
+        "dom_hz": 66.0,
+        "acf_hz": 921.0,
+        "hit": false,
+        "harm_ratio": 0.557,
+        "expected_notes": [
+          37,
+          49,
+          53,
+          56,
+          61,
+          68,
+          80,
+          85
+        ]
+      },
+      {
+        "t": 16.0,
+        "dom_hz": 68.0,
+        "acf_hz": 913.6,
+        "hit": true,
+        "harm_ratio": 0.639,
+        "expected_notes": [
+          37,
+          49,
+          53,
+          56,
+          68,
+          77,
+          85
+        ]
+      },
+      {
+        "t": 16.5,
+        "dom_hz": 68.0,
+        "acf_hz": 854.6,
+        "hit": true,
+        "harm_ratio": 0.129,
+        "expected_notes": [
+          32,
+          37,
+          44,
+          48,
+          49,
+          51,
+          53,
+          56,
+          60,
+          63,
+          65,
+          68,
+          77,
+          85
+        ]
+      },
+      {
+        "t": 17.0,
+        "dom_hz": 68.0,
+        "acf_hz": 839.0,
+        "hit": false,
+        "harm_ratio": 0.274,
+        "expected_notes": [
+          32,
+          44,
+          48,
+          51,
+          60,
+          63,
+          68,
+          72,
+          80
+        ]
+      },
+      {
+        "t": 17.5,
+        "dom_hz": 102.0,
+        "acf_hz": 52.1,
+        "hit": true,
+        "harm_ratio": 0.459,
+        "expected_notes": [
+          32,
+          44,
+          48,
+          51,
+          63,
+          68,
+          72,
+          80,
+          87
+        ]
+      },
+      {
+        "t": 18.0,
+        "dom_hz": 52.0,
+        "acf_hz": 52.1,
+        "hit": true,
+        "harm_ratio": 0.436,
+        "expected_notes": [
+          32,
+          44,
+          48,
+          51,
+          60,
+          63,
+          68,
+          72,
+          80
+        ]
+      },
+      {
+        "t": 18.5,
+        "dom_hz": 50.0,
+        "acf_hz": 52.1,
+        "hit": false,
+        "harm_ratio": 0.632,
+        "expected_notes": [
+          32,
+          39,
+          44,
+          48,
+          51,
+          55,
+          58,
+          63,
+          67,
+          68,
+          70,
+          75,
+          82,
+          87
+        ]
+      },
+      {
+        "t": 19.0,
+        "dom_hz": 76.0,
+        "acf_hz": 918.5,
+        "hit": false,
+        "harm_ratio": 0.248,
+        "expected_notes": [
+          39,
+          51,
+          55,
+          58,
+          63,
+          67,
+          70,
+          75,
+          87
+        ]
+      },
+      {
+        "t": 19.5,
+        "dom_hz": 52.0,
+        "acf_hz": 926.7,
+        "hit": false,
+        "harm_ratio": 0.106,
+        "expected_notes": [
+          39,
+          51,
+          55,
+          58,
+          63,
+          67,
+          79,
+          87
+        ]
+      },
+      {
+        "t": 20.0,
+        "dom_hz": 76.0,
+        "acf_hz": 1002.3,
+        "hit": false,
+        "harm_ratio": 0.591,
+        "expected_notes": [
+          39,
+          51,
+          55,
+          58,
+          63,
+          67,
+          75
+        ]
+      },
+      {
+        "t": 20.5,
+        "dom_hz": 52.0,
+        "acf_hz": 1002.3,
+        "hit": false,
+        "harm_ratio": 0.262,
+        "expected_notes": [
+          39,
+          41,
+          51,
+          53,
+          55,
+          56,
+          58,
+          60,
+          63,
+          65,
+          67,
+          68,
+          82,
+          84
+        ]
+      },
+      {
+        "t": 21.0,
+        "dom_hz": 262.0,
+        "acf_hz": 920.0,
+        "hit": true,
+        "harm_ratio": 0.257,
+        "expected_notes": [
+          41,
+          53,
+          56,
+          60,
+          65,
+          68,
+          72,
+          77,
+          80,
+          84
+        ]
+      },
+      {
+        "t": 21.5,
+        "dom_hz": 262.0,
+        "acf_hz": 0.0,
+        "hit": true,
+        "harm_ratio": 0.327,
+        "expected_notes": [
+          41,
+          53,
+          56,
+          60,
+          65,
+          68,
+          72,
+          77,
+          84
+        ]
+      },
+      {
+        "t": 22.0,
+        "dom_hz": 262.0,
+        "acf_hz": 43.8,
+        "hit": true,
+        "harm_ratio": 0.352,
+        "expected_notes": [
+          41,
+          53,
+          56,
+          60,
+          65,
+          68,
+          72,
+          80
+        ]
+      },
+      {
+        "t": 22.5,
+        "dom_hz": 262.0,
+        "acf_hz": 43.8,
+        "hit": true,
+        "harm_ratio": 0.472,
+        "expected_notes": [
+          41,
+          53,
+          56,
+          60,
+          65,
+          72,
+          80
+        ]
+      },
+      {
+        "t": 23.0,
+        "dom_hz": 260.0,
+        "acf_hz": 43.8,
+        "hit": true,
+        "harm_ratio": 0.548,
+        "expected_notes": [
+          41,
+          53,
+          56,
+          60,
+          65,
+          80
+        ]
+      },
+      {
+        "t": 23.5,
+        "dom_hz": 262.0,
+        "acf_hz": 87.5,
+        "hit": true,
+        "harm_ratio": 0.592,
+        "expected_notes": [
+          41,
+          53,
+          56,
+          60,
+          65,
+          68,
+          72,
+          77,
+          80
+        ]
+      },
+      {
+        "t": 24.0,
+        "dom_hz": 262.0,
+        "acf_hz": 87.5,
+        "hit": true,
+        "harm_ratio": 0.103,
+        "expected_notes": [
+          37,
+          41,
+          49,
+          53,
+          56,
+          60,
+          65,
+          68,
+          73,
+          80,
+          84
+        ]
+      },
+      {
+        "t": 24.5,
+        "dom_hz": 68.0,
+        "acf_hz": 69.7,
+        "hit": true,
+        "harm_ratio": 0.374,
+        "expected_notes": [
+          37,
+          49,
+          53,
+          56,
+          61,
+          65,
+          68,
+          73,
+          77,
+          80
+        ]
+      },
+      {
+        "t": 25.0,
+        "dom_hz": 72.0,
+        "acf_hz": 69.6,
+        "hit": false,
+        "harm_ratio": 0.541,
+        "expected_notes": [
+          37,
+          49,
+          53,
+          56,
+          61,
+          65,
+          68,
+          77
+        ]
+      },
+      {
+        "t": 25.5,
+        "dom_hz": 68.0,
+        "acf_hz": 69.5,
+        "hit": true,
+        "harm_ratio": 0.753,
+        "expected_notes": [
+          37,
+          49,
+          53,
+          56,
+          65,
+          68,
+          77,
+          85
+        ]
+      },
+      {
+        "t": 26.0,
+        "dom_hz": 68.0,
+        "acf_hz": 69.5,
+        "hit": true,
+        "harm_ratio": 0.174,
+        "expected_notes": [
+          32,
+          37,
+          44,
+          48,
+          49,
+          51,
+          53,
+          56,
+          60,
+          63,
+          73,
+          75,
+          77
+        ]
+      },
+      {
+        "t": 26.5,
+        "dom_hz": 68.0,
+        "acf_hz": 69.5,
+        "hit": false,
+        "harm_ratio": 0.261,
+        "expected_notes": [
+          32,
+          44,
+          48,
+          51,
+          60,
+          63,
+          68,
+          72,
+          80
+        ]
+      },
+      {
+        "t": 27.0,
+        "dom_hz": 208.0,
+        "acf_hz": 52.1,
+        "hit": true,
+        "harm_ratio": 0.424,
+        "expected_notes": [
+          32,
+          44,
+          48,
+          51,
+          63,
+          68,
+          72,
+          80,
+          87
+        ]
+      },
+      {
+        "t": 27.5,
+        "dom_hz": 208.0,
+        "acf_hz": 52.1,
+        "hit": true,
+        "harm_ratio": 0.534,
+        "expected_notes": [
+          32,
+          44,
+          48,
+          51,
+          68,
+          72,
+          80,
+          87
+        ]
+      },
+      {
+        "t": 28.0,
+        "dom_hz": 208.0,
+        "acf_hz": 52.1,
+        "hit": true,
+        "harm_ratio": 0.588,
+        "expected_notes": [
+          32,
+          39,
+          44,
+          48,
+          51,
+          55,
+          58,
+          63,
+          68,
+          70,
+          79,
+          87
+        ]
+      },
+      {
+        "t": 28.5,
+        "dom_hz": 312.0,
+        "acf_hz": 104.2,
+        "hit": true,
+        "harm_ratio": 0.364,
+        "expected_notes": [
+          39,
+          51,
+          55,
+          58,
+          63,
+          67,
+          70,
+          79,
+          87
+        ]
+      },
+      {
+        "t": 29.0,
+        "dom_hz": 232.0,
+        "acf_hz": 78.0,
+        "hit": true,
+        "harm_ratio": 0.675,
+        "expected_notes": [
+          39,
+          51,
+          55,
+          58,
+          63,
+          67,
+          75,
+          79,
+          87
+        ]
+      },
+      {
+        "t": 29.5,
+        "dom_hz": 234.0,
+        "acf_hz": 78.0,
+        "hit": true,
+        "harm_ratio": 0.832,
+        "expected_notes": [
+          39,
+          51,
+          55,
+          58,
+          63,
+          75,
+          79,
+          82
+        ]
+      },
+      {
+        "t": 30.0,
+        "dom_hz": 232.0,
+        "acf_hz": 1002.3,
+        "hit": false,
+        "harm_ratio": 0.177,
+        "expected_notes": [
+          41,
+          53,
+          56,
+          60,
+          65,
+          68,
+          72,
+          77,
+          80,
+          84
+        ]
+      },
+      {
+        "t": 30.5,
+        "dom_hz": 260.0,
+        "acf_hz": 43.9,
+        "hit": true,
+        "harm_ratio": 0.277,
+        "expected_notes": [
+          41,
+          53,
+          56,
+          60,
+          65,
+          72,
+          77,
+          80,
+          84
+        ]
+      },
+      {
+        "t": 31.0,
+        "dom_hz": 262.0,
+        "acf_hz": 43.8,
+        "hit": true,
+        "harm_ratio": 0.356,
+        "expected_notes": [
+          41,
+          53,
+          56,
+          60,
+          68,
+          72,
+          77,
+          80
+        ]
+      },
+      {
+        "t": 31.5,
+        "dom_hz": 262.0,
+        "acf_hz": 43.8,
+        "hit": true,
+        "harm_ratio": 0.139,
+        "expected_notes": [
+          34,
+          41,
+          46,
+          49,
+          53,
+          56,
+          60,
+          65,
+          72,
+          73,
+          77,
+          82,
+          84
+        ]
+      },
+      {
+        "t": 32.0,
+        "dom_hz": 60.0,
+        "acf_hz": 43.8,
+        "hit": false,
+        "harm_ratio": 0.308,
+        "expected_notes": [
+          34,
+          46,
+          49,
+          53,
+          61,
+          65,
+          73,
+          77,
+          82
+        ]
+      },
+      {
+        "t": 32.5,
+        "dom_hz": 54.0,
+        "acf_hz": 703.2,
+        "hit": false,
+        "harm_ratio": 0.267,
+        "expected_notes": [
+          34,
+          46,
+          49,
+          53,
+          61,
+          65,
+          70,
+          77,
+          85
+        ]
+      },
+      {
+        "t": 33.0,
+        "dom_hz": 60.0,
+        "acf_hz": 702.3,
+        "hit": false,
+        "harm_ratio": 0.289,
+        "expected_notes": [
+          34,
+          46,
+          49,
+          53,
+          65,
+          70,
+          77,
+          82,
+          85
+        ]
+      },
+      {
+        "t": 33.5,
+        "dom_hz": 52.0,
+        "acf_hz": 935.8,
+        "hit": false,
+        "harm_ratio": 0.391,
+        "expected_notes": [
+          34,
+          36,
+          46,
+          48,
+          49,
+          51,
+          53,
+          55,
+          60,
+          61,
+          63,
+          73,
+          75,
+          77
+        ]
+      },
+      {
+        "t": 34.0,
+        "dom_hz": 68.0,
+        "acf_hz": 939.3,
+        "hit": false,
+        "harm_ratio": 0.244,
+        "expected_notes": [
+          36,
+          48,
+          51,
+          55,
+          63,
+          72,
+          75,
+          79
+        ]
+      },
+      {
+        "t": 34.5,
+        "dom_hz": 52.0,
+        "acf_hz": 940.2,
+        "hit": false,
+        "harm_ratio": 0.139,
+        "expected_notes": [
+          36,
+          48,
+          51,
+          55,
+          63,
+          67,
+          72,
+          75,
+          84,
+          87
+        ]
+      },
+      {
+        "t": 35.0,
+        "dom_hz": 64.0,
+        "acf_hz": 944.7,
+        "hit": false,
+        "harm_ratio": 0.443,
+        "expected_notes": [
+          36,
+          48,
+          51,
+          55,
+          67,
+          72,
+          75,
+          79,
+          87
+        ]
+      },
+      {
+        "t": 35.5,
+        "dom_hz": 52.0,
+        "acf_hz": 1002.3,
+        "hit": false,
+        "harm_ratio": 0.253,
+        "expected_notes": [
+          36,
+          41,
+          48,
+          51,
+          53,
+          55,
+          56,
+          60,
+          67,
+          68,
+          72,
+          87
+        ]
+      },
+      {
+        "t": 36.0,
+        "dom_hz": 68.0,
+        "acf_hz": 919.9,
+        "hit": false,
+        "harm_ratio": 0.207,
+        "expected_notes": [
+          41,
+          53,
+          56,
+          60,
+          68,
+          72,
+          77,
+          84
+        ]
+      },
+      {
+        "t": 36.5,
+        "dom_hz": 262.0,
+        "acf_hz": 1002.3,
+        "hit": true,
+        "harm_ratio": 0.297,
+        "expected_notes": [
+          41,
+          53,
+          56,
+          60,
+          65,
+          68,
+          72,
+          80,
+          84
+        ]
+      },
+      {
+        "t": 37.0,
+        "dom_hz": 262.0,
+        "acf_hz": 43.8,
+        "hit": true,
+        "harm_ratio": 0.356,
+        "expected_notes": [
+          41,
+          53,
+          56,
+          60,
+          72,
+          77,
+          80
+        ]
+      },
+      {
+        "t": 37.5,
+        "dom_hz": 70.0,
+        "acf_hz": 932.6,
+        "hit": true,
+        "harm_ratio": 0.218,
+        "expected_notes": [
+          37,
+          49,
+          53,
+          56,
+          61,
+          65,
+          68,
+          73,
+          77
+        ]
+      },
+      {
+        "t": 38.0,
+        "dom_hz": 70.0,
+        "acf_hz": 69.7,
+        "hit": true,
+        "harm_ratio": 0.507,
+        "expected_notes": [
+          37,
+          49,
+          53,
+          56,
+          61,
+          77,
+          80
+        ]
+      },
+      {
+        "t": 38.5,
+        "dom_hz": 68.0,
+        "acf_hz": 69.5,
+        "hit": true,
+        "harm_ratio": 0.703,
+        "expected_notes": [
+          37,
+          49,
+          53,
+          56,
+          61,
+          65,
+          68,
+          77,
+          80
+        ]
+      },
+      {
+        "t": 39.0,
+        "dom_hz": 68.0,
+        "acf_hz": 69.4,
+        "hit": true,
+        "harm_ratio": 0.135,
+        "expected_notes": [
+          32,
+          37,
+          44,
+          48,
+          49,
+          51,
+          53,
+          56,
+          61,
+          63,
+          65,
+          75,
+          85
+        ]
+      },
+      {
+        "t": 39.5,
+        "dom_hz": 68.0,
+        "acf_hz": 965.3,
+        "hit": false,
+        "harm_ratio": 0.342,
+        "expected_notes": [
+          32,
+          44,
+          48,
+          51,
+          63,
+          68,
+          72,
+          75,
+          80,
+          87
+        ]
+      },
+      {
+        "t": 40.0,
+        "dom_hz": 156.0,
+        "acf_hz": 51.9,
+        "hit": true,
+        "harm_ratio": 0.527,
+        "expected_notes": [
+          32,
+          44,
+          48,
+          51,
+          56,
+          63,
+          68,
+          72,
+          80,
+          87
+        ]
+      },
+      {
+        "t": 40.5,
+        "dom_hz": 208.0,
+        "acf_hz": 51.9,
+        "hit": true,
+        "harm_ratio": 0.699,
+        "expected_notes": [
+          32,
+          44,
+          48,
+          51,
+          56,
+          63,
+          72,
+          80
+        ]
+      },
+      {
+        "t": 41.0,
+        "dom_hz": 208.0,
+        "acf_hz": 52.0,
+        "hit": true,
+        "harm_ratio": 0.74,
+        "expected_notes": [
+          32,
+          41,
+          44,
+          48,
+          51,
+          53,
+          56,
+          60,
+          72,
+          80,
+          87
+        ]
+      },
+      {
+        "t": 41.5,
+        "dom_hz": 208.0,
+        "acf_hz": 52.0,
+        "hit": true,
+        "harm_ratio": 0.191,
+        "expected_notes": [
+          41,
+          51,
+          53,
+          56,
+          60,
+          68,
+          72
+        ]
+      },
+      {
+        "t": 42.0,
+        "dom_hz": 838.0,
+        "acf_hz": 52.1,
+        "hit": true,
+        "harm_ratio": 0.216,
+        "expected_notes": [
+          41,
+          53,
+          56,
+          60,
+          77,
+          80,
+          84
+        ]
+      },
+      {
+        "t": 42.5,
+        "dom_hz": 262.0,
+        "acf_hz": 43.8,
+        "hit": true,
+        "harm_ratio": 0.625,
+        "expected_notes": [
+          41,
+          53,
+          56,
+          60,
+          65,
+          72,
+          77,
+          84
+        ]
+      },
+      {
+        "t": 43.0,
+        "dom_hz": 262.0,
+        "acf_hz": 43.8,
+        "hit": true,
+        "harm_ratio": 0.349,
+        "expected_notes": [
+          41,
+          53,
+          56,
+          60,
+          65,
+          68,
+          80,
+          84
+        ]
+      },
+      {
+        "t": 43.5,
+        "dom_hz": 174.0,
+        "acf_hz": 43.8,
+        "hit": true,
+        "harm_ratio": 0.469,
+        "expected_notes": [
+          41,
+          53,
+          56,
+          60,
+          68,
+          72,
+          77,
+          84
+        ]
+      },
+      {
+        "t": 44.0,
+        "dom_hz": 262.0,
+        "acf_hz": 43.8,
+        "hit": true,
+        "harm_ratio": 0.667,
+        "expected_notes": [
+          41,
+          53,
+          56,
+          60,
+          65,
+          72,
+          77,
+          80,
+          84
+        ]
+      },
+      {
+        "t": 44.5,
+        "dom_hz": 262.0,
+        "acf_hz": 87.5,
+        "hit": true,
+        "harm_ratio": 0.735,
+        "expected_notes": [
+          41,
+          53,
+          56,
+          60,
+          72,
+          80
+        ]
+      },
+      {
+        "t": 45.0,
+        "dom_hz": 262.0,
+        "acf_hz": 87.5,
+        "hit": false,
+        "harm_ratio": 0.009,
+        "expected_notes": []
+      },
+      {
+        "t": 45.5,
+        "dom_hz": 262.0,
+        "acf_hz": 87.6,
+        "hit": false,
+        "harm_ratio": 0.015,
+        "expected_notes": []
+      },
+      {
+        "t": 46.0,
+        "dom_hz": 262.0,
+        "acf_hz": 87.6,
+        "hit": false,
+        "harm_ratio": 0.016,
+        "expected_notes": []
+      },
+      {
+        "t": 46.5,
+        "dom_hz": 262.0,
+        "acf_hz": 87.6,
+        "hit": false,
+        "harm_ratio": 0.01,
+        "expected_notes": []
+      },
+      {
+        "t": 47.0,
+        "dom_hz": 262.0,
+        "acf_hz": 87.6,
+        "hit": false,
+        "harm_ratio": 0.011,
+        "expected_notes": []
+      }
+    ]
+  },
+  "fixes_applied": [
+    "render_grid() kwarg is ticks_per_character (not ticks_per_char) - fixed",
+    "sparse tempo-locked glitch patterns chosen so the 4-stage chain does not shred the mix",
+    "per-channel (L/R independent) chain application to preserve stereo image"
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "job": "random-style production (SP) layer-aligned",
+  "date": "2026-09-12",
+  "registry_source": "workflows.musicom_workflow.SP_METHODS",
+  "registry_size": 18,
+  "seed": "unseeded (random.seed())",
+  "recent_7d": [
+    "SP-011",
+    "SP-024",
+    "SP-001",
+    "SP-037",
+    "SP-035",
+    "SP-026",
+    "SP-033"
+  ],
+  "eligible_pool": [
+    "SP-021",
+    "SP-028",
+    "SP-032",
+    "SP-034",
+    "SP-036",
+    "SP-069",
+    "SP-070",
+    "SP-071",
+    "SP-072",
+    "SP-073",
+    "SP-074"
+  ],
+  "method": "SP-071",
+  "method_module": "sound.effects.severance",
+  "method_desc": "Gated Reverb + Dual-Engine Delay + Glitch Chain + Parallel Band Compressor (ZERO9-style)",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Techno/083-techno-brownian/MIDI/083-techno-brownian.mid",
+  "n_candidates": 158,
+  "output": "projects/Styles/Production/SP071-severance-techno-brownian",
+  "verdict": "PASS",
+  "lufs": -14.09,
+  "silence_pct": 3.79,
+  "pitch_hit_rate": 0.656,
+  "median_harmonic_ratio": 0.374,
+  "dry_vs_wet_corr": 0.43,
+  "fixes": [
+    "DualEngineDelay is wet-only -> explicit 0.45 dry/echo blend",
+    "spectral_declash limited to 35% parallel blend",
+    "sparse glitch patterns (3/16 steps, decimate off)",
+    "write_grid_visualization kwarg ticks_per_character"
+  ],
+  "time": "2026-09-12T22:00:00Z"
+}
