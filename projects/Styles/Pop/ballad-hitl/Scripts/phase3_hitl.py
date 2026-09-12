@@ -79,26 +79,36 @@ def _render_excerpt(midi_path: Path, out_dir: Path, base: str,
 
 def _variant_set(parent_density=None, parent_offset=None, seed=None,
                  n_candidates=MAX_CANDIDATES):
-    """(density, offset) variants: mutate around the parent + a wildcard.
+    """(density, offset) variants: mutate around the parent + fill from pool.
 
-    Without a parent: the ballad's own default is a 3/4 alternation, so we
-    probe fixed densities 3/4/5 plus an off-beat variant. The final slot is
-    an epsilon-wildcard (random outlier) to prevent premature convergence.
+    Without a parent: probe fixed densities 3/4/5 plus an off-beat variant.
+    With a parent: stay / +1 / -1 / flip-phase. Density is clamped to
+    [3, 5], so a parent sitting at either boundary would otherwise emit a
+    DUPLICATE variant (e.g. winner d3 -> {3, 4, 2->3} = two d3 on-beats).
+    Remaining slots are filled from the unexplored pool, which doubles as
+    the epsilon-wildcard (exploration outlier, plan §3.2b).
     """
     rng = random.Random(seed)
-    if parent_density is not None and parent_offset is not None:
-        base = [(parent_density + d, o) for d, o in
-                [(0, parent_offset), (1, parent_offset), (-1, parent_offset),
-                 (0, 240 - parent_offset)]]
-        variants = [(max(3, min(5, d)), o) for d, o in base][:n_candidates]
-        if len(variants) == n_candidates and n_candidates > 1:
-            existing = set(variants[:-1])
-            pool = [(d, o) for d in (3, 4, 5) for o in (0, 240)
-                    if (d, o) not in existing]
-            if pool:
-                variants[-1] = rng.choice(pool)
-    else:
-        variants = [(3, 0), (4, 0), (5, 0), (4, 240)][:n_candidates]
+    if parent_density is None or parent_offset is None:
+        return [(3, 0), (4, 0), (5, 0), (4, 240)][:n_candidates]
+
+    proposed = [
+        (parent_density, parent_offset),                 # stay
+        (parent_density + 1, parent_offset),             # denser
+        (parent_density - 1, parent_offset),             # sparser
+        (parent_density, 240 - parent_offset),           # flip phase
+    ]
+    variants = []
+    for d, o in proposed:
+        d = max(3, min(5, d))
+        if (d, o) not in variants and len(variants) < n_candidates:
+            variants.append((d, o))
+
+    pool = [(d, o) for d in (3, 4, 5) for o in (0, 240)
+            if (d, o) not in variants]
+    rng.shuffle(pool)
+    while len(variants) < n_candidates and pool:
+        variants.append(pool.pop())
     return variants
 
 
@@ -153,11 +163,21 @@ def run_ballad_round(round_num=0, seed=7, parent_density=None,
     if not candidates:
         raise RuntimeError("no candidate passed the hard gates")
 
-    # mark the exploration outlier (the one that broke the default pattern)
+    # The exploration outlier: with a parent, it's the slot that broke the
+    # mutation neighbourhood; without one, any non-default groove.
     defaults = {(3, 0), (4, 0), (5, 0)}
+    neighbourhood = {(parent_density, parent_offset),
+                     (parent_density + 1, parent_offset),
+                     (parent_density - 1, parent_offset),
+                     (parent_density, 240 - parent_offset)} if \
+        parent_density is not None and parent_offset is not None else None
     for c in candidates:
-        if (c.density, c.offset) not in defaults:
-            c.is_wildcard = True
+        if neighbourhood is not None:
+            c.is_wildcard = (c.density, c.offset) not in neighbourhood
+        else:
+            c.is_wildcard = (c.density, c.offset) not in defaults
+    if not any(c.is_wildcard for c in candidates) and len(candidates) > 1:
+        candidates[-1].is_wildcard = True
 
     round_obj = HITLRound(round_num=round_num, candidates=candidates,
                           seed=seed, style="pop-ballad", key=KEY, bpm=BPM,
@@ -174,6 +194,28 @@ def run_ballad_round(round_num=0, seed=7, parent_density=None,
             for c in candidates],
     }, indent=2))
     return round_obj
+
+
+def load_round(out_dir):
+    """Rebuild a HITLRound from a rendered round.json (no re-render).
+
+    Lets a pick be recorded without regenerating + re-rendering all four
+    excerpts — round.json already carries density/offset/fitness/paths.
+    """
+    out_dir = Path(out_dir)
+    data = json.loads((out_dir / "round.json").read_text())
+    candidates = [
+        HITLCandidate(
+            variant=c["variant"], density=c["density"], offset=c["offset"],
+            fitness={"total": c["fitness_total"], "terms": c["terms"]},
+            midi_path=c["midi"], ogg_path=c["ogg"],
+            is_wildcard=c["wildcard"],
+        )
+        for c in data["candidates"]
+    ]
+    return HITLRound(round_num=data["round"], candidates=candidates,
+                     seed=data["seed"], style="pop-ballad",
+                     key=data["key"], bpm=data["bpm"], out_dir=str(out_dir))
 
 
 def hitl_summary(round_obj):

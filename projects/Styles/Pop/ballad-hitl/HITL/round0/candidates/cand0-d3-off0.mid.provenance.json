@@ -1,0 +1,31 @@
+{
+  "artifact": "cand0-d3-off0.mid",
+  "classification": "ai-assisted",
+  "generator": "pop-ballad-hitl phase3 HITL (round 0, human pick 0)",
+  "sources": [
+    "style:pop-ballad",
+    "key:Dm",
+    "bpm:72",
+    "progression:i-VI-III-VII",
+    "path:C middle-out",
+    "judge:human",
+    "methods:001,012,018,015,004,011,023,013"
+  ],
+  "parameters": {
+    "density": 3,
+    "offset": 0,
+    "fitness": {
+      "tonal_gravity": 0.5417,
+      "on_grid": 1.0,
+      "stepwise_motion": 0.4,
+      "rhythm_variety": 0.1818,
+      "groove_stability": 0.7273
+    },
+    "search_space": "L3 anchor Euclidean density x offset"
+  },
+  "notes": "",
+  "sha256": "96d49b0b403526a4ce245e5285aad9eed33eedecdd8047f355a489a2d495dd9d",
+  "bytes": 3188,
+  "created_utc": "2026-09-12T20:44:13.867672+00:00",
+  "provenance_version": "1.0"
+}

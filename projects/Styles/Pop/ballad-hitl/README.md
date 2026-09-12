@@ -93,6 +93,22 @@ $PY Scripts/phase3_hitl.py --pick 2              # record the human pick
 Fitness ties between cand 1 and cand 3 (the rule metric is phase-invariant)
 — exactly the ambiguity the human judge resolves.
 
+**Round 0 result: human pick = 0** (density=3, on-beat walking). Recorded in
+`HITL/round0/evolution.json` + provenance sidecar on the winner.
+
+### Round 1 candidates (seed 108, mutated around the round-0 winner d3/off0)
+
+| # | density | offset | bass onsets/bar | onset grid | fitness | note |
+|---|---|---|---|---|---|---|
+| 0 | 3 | 0 | 3 | {0, 480, 960} | 0.599 | incumbent (stay slot) |
+| 1 | 4 | 0 | 4 | {0, 480, 960, 1440} | 0.616 | denser |
+| 2 | 3 | 240 | 3, pushed off-beat | {240, 720, 1200} | 0.599 | flip phase |
+| 3 | 4 | 240 | 4, pushed off-beat | {240, 720, 1200, 1680} | 0.616 | wildcard |
+
+Note the mutant at density−1 (2 → clamped to 3) would have duplicated the
+stay slot; `_variant_set` de-duplicates and fills the freed slot from the
+unexplored pool.
+
 Artifacts per round: `HITL/roundN/candidates/cand*-d*-off*.{mid,ogg}`,
 `HITL/roundN/round.json`, and on a pick `HITL/roundN/evolution.json` +
 provenance sidecar on the winner.
