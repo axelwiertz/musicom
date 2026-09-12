@@ -1,0 +1,200 @@
+{
+  "project": "094-african-hierarchical-diffusion",
+  "phase1": {
+    "notes_tested": 102,
+    "fundamental_present": 102,
+    "harmonic_energy_gt_30pct": 102,
+    "pct_present": 100.0,
+    "pct_harmonic": 100.0
+  },
+  "phase2": {
+    "windows": 108,
+    "windows_pitched": 108,
+    "pct_pitched": 100.0,
+    "mean_harmonic_ratio": 0.193,
+    "sample_frames": [
+      {
+        "t": 0.0,
+        "lowest_peak_hz": 161.5,
+        "harmonic_ratio": 0.168,
+        "autocorr_hz": 87.8
+      },
+      {
+        "t": 0.5,
+        "lowest_peak_hz": 96.9,
+        "harmonic_ratio": 0.176,
+        "autocorr_hz": 87.8
+      },
+      {
+        "t": 1.0,
+        "lowest_peak_hz": 328.4,
+        "harmonic_ratio": 0.113,
+        "autocorr_hz": 88.0
+      },
+      {
+        "t": 1.5,
+        "lowest_peak_hz": 113.0,
+        "harmonic_ratio": 0.285,
+        "autocorr_hz": 130.9
+      },
+      {
+        "t": 2.0,
+        "lowest_peak_hz": 441.4,
+        "harmonic_ratio": 0.244,
+        "autocorr_hz": 87.5
+      },
+      {
+        "t": 2.5,
+        "lowest_peak_hz": 107.7,
+        "harmonic_ratio": 0.438,
+        "autocorr_hz": 87.8
+      },
+      {
+        "t": 3.0,
+        "lowest_peak_hz": 118.4,
+        "harmonic_ratio": 0.091,
+        "autocorr_hz": 129.7
+      },
+      {
+        "t": 3.5,
+        "lowest_peak_hz": 441.4,
+        "harmonic_ratio": 0.184,
+        "autocorr_hz": 110.0
+      }
+    ]
+  },
+  "chroma": {
+    "method": "peak-picked spectral chroma, 500-2000 Hz melodic band",
+    "windows": 108,
+    "profile": [
+      0.2807,
+      0.0406,
+      0.1603,
+      0.0127,
+      0.0844,
+      0.0052,
+      0.0279,
+      0.0682,
+      0.0185,
+      0.1005,
+      0.0178,
+      0.1831
+    ],
+    "top4_pcs": [
+      0,
+      11,
+      2,
+      9
+    ],
+    "top4": [
+      [
+        0,
+        0.2807
+      ],
+      [
+        11,
+        0.1831
+      ],
+      [
+        2,
+        0.1603
+      ],
+      [
+        9,
+        0.1005
+      ]
+    ],
+    "in_key_mass": 0.9052,
+    "top4_in_key": true
+  },
+  "track_pc_audit": [
+    {
+      "track": "track1",
+      "channel": 0,
+      "pcs": [
+        0,
+        2,
+        4,
+        6,
+        7,
+        9,
+        11
+      ],
+      "off_key": [],
+      "is_percussion": false
+    },
+    {
+      "track": "track2",
+      "channel": 1,
+      "pcs": [
+        0,
+        2,
+        4,
+        6,
+        7,
+        9,
+        11
+      ],
+      "off_key": [],
+      "is_percussion": false
+    },
+    {
+      "track": "track3",
+      "channel": 2,
+      "pcs": [
+        0,
+        2,
+        4,
+        6,
+        7,
+        9,
+        11
+      ],
+      "off_key": [],
+      "is_percussion": false
+    },
+    {
+      "track": "track4",
+      "channel": 3,
+      "pcs": [
+        0,
+        2,
+        4,
+        6,
+        7,
+        9,
+        11
+      ],
+      "off_key": [],
+      "is_percussion": false
+    },
+    {
+      "track": "track5",
+      "channel": 4,
+      "pcs": [
+        2,
+        4
+      ],
+      "off_key": [],
+      "is_percussion": false
+    },
+    {
+      "track": "track6",
+      "channel": 9,
+      "pcs": [
+        0,
+        1,
+        2,
+        3,
+        10,
+        11
+      ],
+      "off_key": [
+        1,
+        3,
+        10
+      ],
+      "is_percussion": true
+    }
+  ]
+}

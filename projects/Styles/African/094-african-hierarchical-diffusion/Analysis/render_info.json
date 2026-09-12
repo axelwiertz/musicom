@@ -1,0 +1,22 @@
+{
+  "phase2": {
+    "midi": "/opt/data/repos/musicom/projects/Styles/African/094-african-hierarchical-diffusion/MIDI/094-african-hierarchical-diffusion.mid",
+    "wav": "/opt/data/repos/musicom/projects/Styles/African/094-african-hierarchical-diffusion/Audio/094-african-hierarchical-diffusion.wav",
+    "ogg": "/opt/data/repos/musicom/projects/Styles/African/094-african-hierarchical-diffusion/Audio/094-african-hierarchical-diffusion.ogg",
+    "peak_before_norm": 1.0,
+    "volume_applied": 0.89,
+    "peak_after_norm": 0.89,
+    "wav_bytes": 11078478,
+    "ogg_bytes": 494453
+  },
+  "phase1": {
+    "midi": "/opt/data/repos/musicom/projects/Styles/African/094-african-hierarchical-diffusion/MIDI/094-african-hierarchical-diffusion-phase1.mid",
+    "wav": "/opt/data/repos/musicom/projects/Styles/African/094-african-hierarchical-diffusion/Audio/094-african-hierarchical-diffusion-phase1.wav",
+    "ogg": "/opt/data/repos/musicom/projects/Styles/African/094-african-hierarchical-diffusion/Audio/094-african-hierarchical-diffusion-phase1.ogg",
+    "peak_before_norm": 0.2198,
+    "volume_applied": 4.0499,
+    "peak_after_norm": 0.89,
+    "wav_bytes": 9669454,
+    "ogg_bytes": 445264
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "project": "094-african-hierarchical-diffusion",
+  "genre": "African",
+  "method": "010 Hierarchical Diffusion",
+  "layer": "concrete",
+  "seed": 20260912,
+  "bpm": 112,
+  "key": "A dorian",
+  "bars": 24,
+  "sections": [
+    "Intro",
+    "KoraVerse",
+    "BalafonChorus",
+    "Bridge",
+    "Chorus2",
+    "Outro"
+  ],
+  "grid_16th": 120,
+  "progression": [
+    "Ai7",
+    "Ai7",
+    "DIV",
+    "GVII",
+    "Ai7",
+    "DIV",
+    "GVII",
+    "Ai7",
+    "CIII",
+    "GVII",
+    "Ai7",
+    "Ev",
+    "DIV",
+    "Ev",
+    "Ai7",
+    "GVII",
+    "CIII",
+    "GVII",
+    "Ai7",
+    "Ev",
+    "Ai7",
+    "DIV",
+    "Ai7",
+    "Ai7"
+  ],
+  "voices": [
+    {
+      "name": "Kalimba",
+      "program": 108,
+      "channel": 0
+    },
+    {
+      "name": "Balafon",
+      "program": 12,
+      "channel": 1
+    },
+    {
+      "name": "Flute",
+      "program": 74,
+      "channel": 2
+    },
+    {
+      "name": "Kora",
+      "program": 25,
+      "channel": 3
+    },
+    {
+      "name": "Bass",
+      "program": 43,
+      "channel": 4
+    },
+    {
+      "name": "Drums",
+      "program": 0,
+      "channel": 9
+    }
+  ],
+  "vl_flags": 2,
+  "vl_fixes": 2,
+  "phase1_notes": 102
+}

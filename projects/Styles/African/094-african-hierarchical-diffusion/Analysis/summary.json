@@ -1,0 +1,181 @@
+{
+  "project": "094-african-hierarchical-diffusion",
+  "date": "2026-09-12",
+  "style": "African (Mande / djembe drum-ensemble idiom)",
+  "layer": "concrete",
+  "method": {
+    "id": "010",
+    "name": "Hierarchical Diffusion",
+    "implementation": "generators.chain.MarkovChainGenerator",
+    "levels": [
+      "L4 section (6 states)",
+      "L3 bar (3 states)",
+      "L2 beat (3 states)",
+      "L1 onset expansion (1/2/3-4 hits)"
+    ]
+  },
+  "key": "A dorian",
+  "bpm": 112,
+  "form": [
+    "Intro",
+    "KoraVerse",
+    "BalafonChorus",
+    "Bridge",
+    "Chorus2",
+    "Outro"
+  ],
+  "bars": 24,
+  "grid": "16th (120 ticks @ 480 TPB)",
+  "progression": [
+    "Ai7",
+    "Ai7",
+    "DIV",
+    "GVII",
+    "Ai7",
+    "DIV",
+    "GVII",
+    "Ai7",
+    "CIII",
+    "GVII",
+    "Ai7",
+    "Ev",
+    "DIV",
+    "Ev",
+    "Ai7",
+    "GVII",
+    "CIII",
+    "GVII",
+    "Ai7",
+    "Ev",
+    "Ai7",
+    "DIV",
+    "Ai7",
+    "Ai7"
+  ],
+  "voices": [
+    {
+      "name": "Kalimba",
+      "program": 108,
+      "channel": 0
+    },
+    {
+      "name": "Balafon",
+      "program": 12,
+      "channel": 1
+    },
+    {
+      "name": "Flute",
+      "program": 74,
+      "channel": 2
+    },
+    {
+      "name": "Kora",
+      "program": 25,
+      "channel": 3
+    },
+    {
+      "name": "Bass",
+      "program": 43,
+      "channel": 4
+    },
+    {
+      "name": "Drums",
+      "program": 0,
+      "channel": 9
+    }
+  ],
+  "grid_audit": {
+    "off_16th": 0,
+    "notes": 1433,
+    "verdict": "PASS 0 off-grid (16th)"
+  },
+  "harmony_audit": {
+    "verdict": "PASS 0 out",
+    "per_voice": [
+      {
+        "voice": "Kalimba",
+        "out_of_scale": 0,
+        "out_of_chord": 0
+      },
+      {
+        "voice": "Balafon",
+        "out_of_scale": 0,
+        "out_of_chord": 0
+      },
+      {
+        "voice": "Flute",
+        "out_of_scale": 0,
+        "out_of_chord": 0
+      },
+      {
+        "voice": "Kora",
+        "out_of_scale": 0,
+        "out_of_chord": 0
+      },
+      {
+        "voice": "Bass",
+        "out_of_scale": 0,
+        "out_of_chord": 0
+      }
+    ]
+  },
+  "range_audit": {
+    "verdict": "PASS"
+  },
+  "zero_drift": {
+    "phase1": true,
+    "phase2": true,
+    "max_end_ticks": 46080
+  },
+  "phase1_fingerprint": {
+    "off_16th": 96,
+    "notes": 102
+  },
+  "audio": {
+    "phase2": {
+      "duration_s": 62.8,
+      "peak": 0.89,
+      "silence_ratio": 0.1576,
+      "silent_seconds": [
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62
+      ],
+      "verdict": "PASS"
+    },
+    "phase1": {
+      "duration_s": 54.82,
+      "peak": 0.8878,
+      "silence_ratio": 0.1332,
+      "verdict": "PASS"
+    }
+  },
+  "tonal": {
+    "phase1_fundamentals_present": "102/102",
+    "phase2_windows_pitched": "108/108",
+    "melodic_in_key_mass": 0.9052,
+    "track_pc_off_key": {
+      "track1": [],
+      "track2": [],
+      "track3": [],
+      "track4": [],
+      "track5": []
+    }
+  },
+  "fixes_applied": [
+    "UnitMatrix cell rebase: events carry ABSOLUTE ticks but each cell is a section-relative coordinate space; without the `slice_section` rebase every event in sections > 0 clamped to SECTION_TICKS-10 -> 124 off-grid onsets + collapsed note collisions. After fix: 0 off-grid, 1433 notes.",
+    "Bass octave doublings rewired to real chord tones (was root+12 blindly -> 6 out-of-chord); range widened to 33-52 so the diatonic octave is the chord tone. After fix: 0 out-of-chord."
+  ],
+  "artifacts": {
+    "MIDI/094-african-hierarchical-diffusion.mid": 11820,
+    "MIDI/094-african-hierarchical-diffusion-phase1.mid": 978,
+    "Audio/094-african-hierarchical-diffusion.ogg": 494453,
+    "Audio/094-african-hierarchical-diffusion-phase1.ogg": 445264
+  }
+}

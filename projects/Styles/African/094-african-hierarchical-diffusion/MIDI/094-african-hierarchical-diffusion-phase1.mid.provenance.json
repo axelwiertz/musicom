@@ -1,0 +1,28 @@
+{
+  "artifact": "094-african-hierarchical-diffusion-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "generators.chain.MarkovChainGenerator (method 010)",
+  "sources": [],
+  "parameters": {
+    "phase": 1,
+    "seed": 20260912,
+    "bpm": 112,
+    "key": "A dorian",
+    "onset_interval_ticks": 417,
+    "pitch_map": {
+      "0": 66,
+      "1": 69,
+      "2": 73,
+      "3": 76,
+      "4": 78,
+      "5": 80,
+      "6": 84
+    },
+    "method": "010 Hierarchical Diffusion (raw draft)"
+  },
+  "notes": "Raw Markov draft: engine MarkovChainGenerator sequence realized at a fractional (off-grid) 417-tick onset interval with a pitch map containing out-of-scale tones. Single voice, no harmony, no quantization.",
+  "sha256": "de245fec64f4079fe55da0dc2b1efbf1db342986cb0419e527561635197ef5cc",
+  "bytes": 978,
+  "created_utc": "2026-09-12T23:05:15.068048+00:00",
+  "provenance_version": "1.0"
+}

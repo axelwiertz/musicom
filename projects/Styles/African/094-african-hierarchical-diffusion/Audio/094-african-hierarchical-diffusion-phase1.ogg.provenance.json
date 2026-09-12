@@ -1,0 +1,19 @@
+{
+  "artifact": "094-african-hierarchical-diffusion-phase1.ogg",
+  "classification": "ai-assisted",
+  "generator": "workflows.musicom_workflow.produce (SP-001 FluidSynth)",
+  "sources": [],
+  "parameters": {
+    "phase": 1,
+    "bpm": 112,
+    "soundfont": "FluidR3_GM.sf2",
+    "peak_after_norm": 0.89,
+    "silence_ratio": 0.1332,
+    "format": "Opus 48k voip OGG"
+  },
+  "notes": "FluidSynth CLI render of the 094 MIDI -> ffmpeg volume normalisation to -1 dBFS -> Opus OGG.",
+  "sha256": "6821b33f2df186eb9fcad04e4269ee6b90599f91ae8e7bc722d8f94c1a544598",
+  "bytes": 445264,
+  "created_utc": "2026-09-12T23:07:05.066315+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,61 @@
+{
+  "artifact": "094-african-hierarchical-diffusion.mid",
+  "classification": "ai-assisted",
+  "generator": "generators.chain + musicom rules layer (method 010)",
+  "sources": [],
+  "parameters": {
+    "phase": 2,
+    "seed": 20260912,
+    "bpm": 112,
+    "key": "A dorian",
+    "grid": "16th (120 @ 480 TPB)",
+    "hierarchy": [
+      "L4 section",
+      "L3 bar",
+      "L2 beat",
+      "L1 onset"
+    ],
+    "progression": [
+      "Ai7",
+      "Ai7",
+      "DIV",
+      "GVII",
+      "Ai7",
+      "DIV",
+      "GVII",
+      "Ai7",
+      "CIII",
+      "GVII",
+      "Ai7",
+      "Ev",
+      "DIV",
+      "Ev",
+      "Ai7",
+      "GVII",
+      "CIII",
+      "GVII",
+      "Ai7",
+      "Ev",
+      "Ai7",
+      "DIV",
+      "Ai7",
+      "Ai7"
+    ],
+    "voices": [
+      "Kalimba",
+      "Balafon",
+      "Flute",
+      "Kora",
+      "Bass",
+      "Drums"
+    ],
+    "vl_flags": 2,
+    "vl_fixes": 2,
+    "method": "010 Hierarchical Diffusion + rules"
+  },
+  "notes": "",
+  "sha256": "b781b39192bdbff2dc5404084001c127125a85a044e1f2fa1f561e49fce07887",
+  "bytes": 11820,
+  "created_utc": "2026-09-12T23:05:15.068339+00:00",
+  "provenance_version": "1.0"
+}

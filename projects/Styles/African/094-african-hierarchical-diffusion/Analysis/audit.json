@@ -1,0 +1,253 @@
+{
+  "project": "094-african-hierarchical-diffusion",
+  "grid_phase2": {
+    "label": "phase2",
+    "grid_16th": 120,
+    "grid_8th": 240,
+    "total_notes": 1433,
+    "total_off_16th": 0,
+    "total_off_8th": 635,
+    "voices": [
+      {
+        "voice": "Kalimba",
+        "program": 108,
+        "channel": 0,
+        "notes": 182,
+        "off_16th": 0,
+        "off_8th": 36,
+        "first_off_16th": [],
+        "track_end": 46080
+      },
+      {
+        "voice": "Balafon",
+        "program": 12,
+        "channel": 1,
+        "notes": 190,
+        "off_16th": 0,
+        "off_8th": 45,
+        "first_off_16th": [],
+        "track_end": 46080
+      },
+      {
+        "voice": "Flute",
+        "program": 74,
+        "channel": 2,
+        "notes": 184,
+        "off_16th": 0,
+        "off_8th": 141,
+        "first_off_16th": [],
+        "track_end": 46080
+      },
+      {
+        "voice": "Kora",
+        "program": 25,
+        "channel": 3,
+        "notes": 179,
+        "off_16th": 0,
+        "off_8th": 141,
+        "first_off_16th": [],
+        "track_end": 46080
+      },
+      {
+        "voice": "Bass",
+        "program": 43,
+        "channel": 4,
+        "notes": 76,
+        "off_16th": 0,
+        "off_8th": 0,
+        "first_off_16th": [],
+        "track_end": 46080
+      },
+      {
+        "voice": "Drums",
+        "program": 0,
+        "channel": 9,
+        "notes": 622,
+        "off_16th": 0,
+        "off_8th": 272,
+        "first_off_16th": [],
+        "track_end": 46080
+      }
+    ]
+  },
+  "harmony_phase2": [
+    {
+      "voice": "Kalimba",
+      "program": 108,
+      "notes": 182,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "first_out_of_scale": [],
+      "first_out_of_chord": []
+    },
+    {
+      "voice": "Balafon",
+      "program": 12,
+      "notes": 190,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "first_out_of_scale": [],
+      "first_out_of_chord": []
+    },
+    {
+      "voice": "Flute",
+      "program": 74,
+      "notes": 184,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "first_out_of_scale": [],
+      "first_out_of_chord": []
+    },
+    {
+      "voice": "Kora",
+      "program": 25,
+      "notes": 179,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "first_out_of_scale": [],
+      "first_out_of_chord": []
+    },
+    {
+      "voice": "Bass",
+      "program": 43,
+      "notes": 76,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "first_out_of_scale": [],
+      "first_out_of_chord": []
+    }
+  ],
+  "range_phase2": [
+    {
+      "voice": "Kalimba",
+      "instrument": "Kalimba",
+      "min": 62,
+      "max": 79,
+      "range": [
+        48,
+        96
+      ],
+      "in_range": true
+    },
+    {
+      "voice": "Balafon",
+      "instrument": "Marimba",
+      "min": 60,
+      "max": 72,
+      "range": [
+        45,
+        96
+      ],
+      "in_range": true
+    },
+    {
+      "voice": "Flute",
+      "instrument": "Flute",
+      "min": 78,
+      "max": 88,
+      "range": [
+        60,
+        96
+      ],
+      "in_range": true
+    },
+    {
+      "voice": "Kora",
+      "instrument": "Acoustic Guitar (nylon)",
+      "min": 52,
+      "max": 76,
+      "range": [
+        40,
+        84
+      ],
+      "in_range": true
+    },
+    {
+      "voice": "Bass",
+      "instrument": "Double Bass",
+      "min": 38,
+      "max": 52,
+      "range": [
+        28,
+        74
+      ],
+      "in_range": true
+    }
+  ],
+  "zero_drift_phase2": {
+    "max_end": 46080,
+    "drift_per_track": [
+      [
+        "Kalimba",
+        46080,
+        0
+      ],
+      [
+        "Balafon",
+        46080,
+        0
+      ],
+      [
+        "Flute",
+        46080,
+        0
+      ],
+      [
+        "Kora",
+        46080,
+        0
+      ],
+      [
+        "Bass",
+        46080,
+        0
+      ],
+      [
+        "Drums",
+        46080,
+        0
+      ]
+    ],
+    "drift_ok": true
+  },
+  "zero_drift_phase1": {
+    "max_end": 46080,
+    "drift_per_track": [
+      [
+        "Kalimba",
+        46080,
+        0
+      ]
+    ],
+    "drift_ok": true
+  },
+  "phase1_fingerprint": {
+    "label": "phase1-raw",
+    "grid_16th": 120,
+    "grid_8th": 240,
+    "total_notes": 102,
+    "total_off_16th": 96,
+    "total_off_8th": 96,
+    "voices": [
+      {
+        "voice": "Kalimba",
+        "program": 108,
+        "channel": 0,
+        "notes": 102,
+        "off_16th": 96,
+        "off_8th": 96,
+        "first_off_16th": [
+          417,
+          834,
+          1251,
+          1668
+        ],
+        "track_end": 46080
+      }
+    ]
+  },
+  "verdict_grid": "PASS 0 off-grid (16th)",
+  "verdict_harmony": "PASS 0 out",
+  "verdict_range": "PASS",
+  "verdict_zerodrift": "PASS"
+}
