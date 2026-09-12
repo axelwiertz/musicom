@@ -212,6 +212,36 @@ buzz 2.9% (no comb-filtering). Empirical FluidR3 pitch sweep (RMS, notes
 Line-instrument quirk: fiddle is a monophonic bow line (double-stops with
 open-string drones allowed), NOT a harmony voice — no dense chords.
 
+**Timpani added** (2026-09-12): GM47, Percussion-family fourth entry — the
+pitched kettledrums (pedal-tuned copper-bowl membrane drums, felt sticks);
+the instrument `orchestration.md` and `orchestrator.py` already referenced
+as the Accent role's secondary voice with no KB entry behind it
+(instrument.md + timpani.py), verified end-to-end UnitMatrixComposer → zero-drift ✓ → MIDI
+→ FluidSynth WAV ✓; RenderPipeline stem label `trackXX_Timpani.wav` ✓
+(GM_PROGRAMS[47] = "Timpani" = FluidR3 preset 47 — labels match exactly, no
+quirk). ModalSynth recommended (impulse-excited resonator bank) with a custom
+`TIMPANI_MODES` bank built on the ideal circular-membrane Bessel ratios
+1 : 1.594 : 2.136 : 2.296 : 2.653 — the first KB instrument with an INHARMONIC
+partial set rather than a harmonic series — with LOW decay rates 0.9–3.0
+(marimba uses 8–20; the `decay` arg is a rate, so timpani need the opposite
+end): late(1.0–1.5 s) rms/peak 0.134 and 1.59× partial band energy 23.7%,
+vs the marimba preset's 0.0001 (~1000× longer ring). MODAL_PRESET 'drum' is
+the closest stock bank but decays far too fast (damped/covered character
+only); DrumSynth606 `tom` (DRUM606_DEFAULTS freq 110, decay 0.9, sweep 1.35)
+covers the strike thump; Karplus-Strong is EXPLICITLY REJECTED — there is no
+string, and a KS loop's harmonic series is the wrong partial structure (first
+instrument in the KB where KS is rejected rather than demoted). Solo-render
+spectral check: 4–8 kHz buzz 0.3% (no comb-filtering — lowest of the set).
+Empirical FluidR3 pitch sweep (RMS, notes 24–84): preset 47 audible 15/15, no
+gaps — SF2 never clips a composition. Registry `_FIELDS` extended with
+`drum606_defaults`. Range 36–65 = C2 (32-inch drum) to F4 (piccolo-timpano
+ceiling; Milhaud asks F#4=66); real four-drum set is D2–A3 (38–57), each drum
+covering about a perfect fifth. Pitched-instrument quirk: MUST use a melodic
+channel (0–9) with program 47 — channel 9 would trigger the drum-kit map and
+the `Acoustic_Grand_Piano` program-0 fallback label. Muffling is inherent
+playing (the head out-rings the written note); REVERB_TAIL 2.2 s is the
+longest in the instrument set.
+
 ## Python usage
 
 ```python
@@ -253,6 +283,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Percussion | Drum Kit | ch9 | 35–81 | rhythm, groove, accent |
 | Percussion | Marimba | 12 | 45–96 | lead, melody, accent, countermelody, harmony |
 | Percussion | Steel Drums | 114 | 55–96 | lead, melody, accent, countermelody, harmony, rhythm |
+| Percussion | Timpani | 47 | 36–65 | accent, rhythm, bass, drone |
 | World | Sitar | 104 | 55–96 | lead, melody, ornament, drone |
 | World | Banjo | 105 | 46–93 | lead, melody, ornament, rhythm, accent |
 | World | Koto | 107 | 51–90 | lead, melody, ornament, drone, harmony |
@@ -285,6 +316,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 19 | Church Organ | Church Organ ✓ (GM_PROGRAMS[19] + SF2 preset 19 both "Church Organ") |
 | 25 | Acoustic Guitar (nylon) | Acoustic_Guitar_nylon ✓ |
 | 12 | Marimba | Marimba ✓ |
+| 47 | Timpani | Timpani ✓ (GM_PROGRAMS[47] + FluidR3 preset 47 both "Timpani") |
 | 104 | Sitar | Sitar ✓ (GM_PROGRAMS[104] + FluidR3 preset 104 both "Sitar") |
 | 105 | Banjo | Banjo ✓ (GM_PROGRAMS[105] + FluidR3 preset 105 both "Banjo") |
 | 107 | Koto | Koto ✓ (GM_PROGRAMS[107] + FluidR3 preset 107 both "Koto") |

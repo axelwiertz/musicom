@@ -62,20 +62,24 @@ Instruments/
 ├── Percussion/
 │   ├── drum_kit/
 │   ├── marimba/
-│   └── steel_drums/
+│   ├── steel_drums/
+│   └── timpani/
 └── World/
     ├── sitar/
     ├── koto/
     ├── shamisen/
     ├── kalimba/
     ├── banjo/
-    └── shenai/
+    ├── shenai/
+    └── fiddle/
 ```
 
-Current instruments (27): Violin, Viola, Cello, Double Bass, Piano, Church
+Current instruments (29): Violin, Viola, Cello, Double Bass, Piano, Church
 Organ, Dulcimer, Trumpet, Trombone, French Horn, Tuba, Flute, Oboe, Clarinet,
 Bassoon, Alto Saxophone, Acoustic Guitar, Drum Kit, Marimba, Steel Drums,
-Sitar, Koto, Shamisen, Kalimba, Banjo, Bagpipe, Shenai.
+Timpani, Sitar, Koto, Shamisen, Kalimba, Banjo, Bagpipe, Shenai, Fiddle.
+(`Bagpipe` lives under `Woodwind/` — it was filed there for the double-reed
+chanter; the count above follows `instrument_registry.ALL_INSTRUMENTS`.)
 
 ## Musicom Integration
 
@@ -96,7 +100,7 @@ The canonical table lives in `registry.md` (kept in sync manually) and
 
 ## Status
 
-- [x] Registry + Instrument objects (18 instruments loaded, lookup by name/program)
+- [x] Registry + Instrument objects (29 instruments loaded, lookup by name/program)
 - [x] Trumpet program corrected to GM 56 (was 57 = Trombone)
 - [x] String delay formula corrected (`D = sr/freq`, not `sr/(2*freq)`)
 - [x] Orchestrator (role → instrument mapping)
@@ -104,5 +108,6 @@ The canonical table lives in `registry.md` (kept in sync manually) and
 - [x] Church Organ (keys family, GM19, additive engine — 2026-08-31)
 - [x] Marimba (percussion melodic, GM12, modal engine — 2026-09-01)
 - [x] Steel Drums (percussion melodic, GM114, modal engine — 2026-09-09)
+- [x] Timpani (pitched percussion, GM47, modal engine — 2026-09-12)
 - [ ] Synth Pad, Harpsichord, Electric Guitar (listed in roadmap)
 - [ ] Drum Kit expansion beyond GM mapping
