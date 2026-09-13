@@ -5,6 +5,7 @@ from .granular import AperiodicGranulator
 from .phase_mod import PhaseModSynth, FDSSynth
 from .additive import SoundWave, synthesize_wave
 from .vocal import FormantVocalGuide
+from .singing_voice import SingingVoice
 from .polysynth import PolyVoice, Oscillator, EnvelopeGenerator, LFO, MultimodeFilter, StepSequencer, Arpeggiator
 from .bowed import BowedString
 from .mass_spring import MassSpringSystem, Body, Spring
@@ -23,6 +24,7 @@ __all__ = [
     "SoundWave",
     "synthesize_wave",
     "FormantVocalGuide",
+    "SingingVoice",
     "PolyVoice",
     "Oscillator",
     "EnvelopeGenerator",

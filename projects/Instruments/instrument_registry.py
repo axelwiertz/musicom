@@ -54,13 +54,14 @@ _INSTRUMENT_MODULES = {
     "World.shenai.shenai": "shenai",
     "World.fiddle.fiddle": "fiddle",
     "Percussion.timpani.timpani": "timpani",
+    "Vocal.human_voice.human_voice": "human_voice",
 }
 
 _FIELDS = (
     "midi_program", "gm_name", "range_min", "range_max",
     "solo_range", "sweet_spot", "zones", "articulations",
     "synthesis", "modal_preset", "karplus_defaults", "fm_defaults",
-    "bowed_defaults", "drum606_defaults",
+    "bowed_defaults", "drum606_defaults", "synthesis_defaults",
     "reverb_tail", "eq_body", "eq_presence", "eq_air", "pan",
     "stem_label",
 )
@@ -155,6 +156,7 @@ BAGPIPE = ALL_INSTRUMENTS["bagpipe"]
 SHENAI = ALL_INSTRUMENTS["shenai"]
 FIDDLE = ALL_INSTRUMENTS["fiddle"]
 TIMPANI = ALL_INSTRUMENTS["timpani"]
+HUMAN_VOICE = ALL_INSTRUMENTS["human_voice"]
 
 
 def by_name(name):
@@ -221,6 +223,8 @@ def registry_table():
             role = "lead, melody, ornament, countermelody, accent"
         elif low == "timpani":
             role = "accent, rhythm, bass, drone"
+        elif low == "human voice":
+            role = "lead, melody, countermelody"
         else:
             role = "lead, harmony, accent"
         rng = f"{inst.range_min}–{inst.range_max}" if inst.range_min else "-"
