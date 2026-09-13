@@ -28,6 +28,7 @@ GENERATOR_REGISTRY = {
     "026": (None, None, "DPSM — spec only, NO shared code yet (was one-off project script)"),
     "040": ("generators.pitchpattern", None, "Perlin Noise Composition (see pitchpattern.py)"),
     "048": (None, None, "RBMPD — spec only, NO shared code yet (was one-off project script)"),
+    "079": ("generators.tintinnabuli", None, "Tintinnabuli Composition (TINC) — Arvo Pärt M/T-voice"),
     "HC-012": ("generators.chord_degrees", None, "Flamenco Compas & Falseta (human method)"),
     # --- Abstract layer (rules/subset_network.py — LAYER_ARCHITECTURE.md) ---
     "ABS-001": ("rules.subset_network", None, "Tension Curve Planner (abstract: per-section tension targets)"),
@@ -46,6 +47,14 @@ GENERATOR_REGISTRY = {
     "HC-025": (None, None, "Kora Griot Ostinato-Song (spec in human_methods_db.md)"),
     "HC-026": (None, None, "Scottish Pibroch Theme-and-Variation (spec in human_methods_db.md)"),
     "HC-027": (None, None, "Tuvan Overtone Throat Singing (spec in human_methods_db.md)"),
+    # --- Human methods weekly promotion 2026-09-13 (reports HC-028..HC-034) ---
+    "HC-028": (None, None, "Jazz Chord-Scale Improvisation & Comping (spec in human_methods_db.md)"),
+    "HC-029": (None, None, "Shakuhachi Honkyoku Breath-Phrase & Ma (spec in human_methods_db.md)"),
+    "HC-030": (None, None, "Argentine Tango Marcato Counterpoint (spec in human_methods_db.md)"),
+    "HC-031": (None, None, "Persian Radif Dastgah-Gusheh Ordering (spec in human_methods_db.md)"),
+    "HC-032": (None, None, "Guqin Jianzipu Tablature & Dapu Reconstruction (spec in human_methods_db.md)"),
+    "HC-033": (None, None, "Inuit Katajjaq Throat-Singing Duet (spec in human_methods_db.md)"),
+    "HC-034": (None, None, "Choro Rondo & Baixaria Counterpoint (spec in human_methods_db.md)"),
 }
 
 

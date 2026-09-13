@@ -49,8 +49,12 @@ def test_scale_counts_match_plan():
     # (+5 → 20) and 076/077/078 at L3 (+3 → 33).
     # HC weekly registration added HC-020/HC-024 at L4 (+2 → 22), and
     # HC-018/019/021/022/023/025/026/027 at L3 (+8 → 41).
-    assert len(methods_by_scale("L4")) == 22
-    assert len(methods_by_scale("L3")) == 41
+    # Weekly registration (2026-09-13) added 083/084/085 at L4 (+3 → 25),
+    # 079/080/081/082 at L3 (+4 → 45); HC-028/029/030/031/032/033/034
+    # added HC-029/030/031/032 at L4 (+4 → 29) and HC-028/033/034 at L3
+    # (+3 → 48). Registry now routes 079 (tintinnabuli, first 07x with code).
+    assert len(methods_by_scale("L4")) == 29
+    assert len(methods_by_scale("L3")) == 48
     assert len(methods_by_scale("L2")) == 20
     assert len(methods_by_scale("L1")) == 9
 

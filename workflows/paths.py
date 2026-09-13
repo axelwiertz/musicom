@@ -126,6 +126,14 @@ SCALE = {
     "076": ("L3", False),  # Thue-Morse Automatic Sequence (PTM-ASC) (spec)
     "077": ("L3", False),  # De Bruijn Universal Cycle (DBUC) (spec)
     "078": ("L3", False),  # Ising Model Equilibrium (IMEC) (spec)
+    # REGISTERED 2026-09-13 (weekly prose->code promotion, reports 079..085)
+    "079": ("L3", True),   # Tintinnabuli (TINC) — generators/tintinnabuli.py (IMPLEMENTED)
+    "080": ("L3", False),  # Messiaen Modes of Limited Transposition (MMLT) (spec)
+    "081": ("L3", False),  # Narmour Implication-Realization Melodic (NIRMC) (spec)
+    "082": ("L3", False),  # Random Boolean Network Criticality (RBNCC) (spec)
+    "083": ("L4", False),  # Aperiodic Quasicrystal Tiling (QTSC) (spec)
+    "084": ("L4", False),  # Zipf-Mandelbrot Rank-Frequency (ZMRC) (spec)
+    "085": ("L4", False),  # Non-negative Matrix Factorization (NMF-C) (spec)
     "HC-003": ("L2", False),  # Makam Seyir
     "HC-010": ("L2", False),  # Fanfare
     "HC-018": ("L3", False),  # Clave-Guided Montuno (spec)
@@ -138,6 +146,14 @@ SCALE = {
     "HC-025": ("L3", False),  # Kora Griot Ostinato-Song (spec)
     "HC-026": ("L3", False),  # Pibroch Theme-Variation (spec)
     "HC-027": ("L3", False),  # Tuvan Overtone Throat Singing (spec)
+    # REGISTERED 2026-09-13 (weekly promotion, reports HC-028..HC-034)
+    "HC-028": ("L3", False),  # Jazz Chord-Scale Improv & Comping (spec)
+    "HC-029": ("L4", False),  # Shakuhachi Honkyoku Breath-Arch (spec)
+    "HC-030": ("L4", False),  # Argentine Tango Arrangement Arc (spec)
+    "HC-031": ("L4", False),  # Persian Radif Dastgah-Gusheh Ordering (spec)
+    "HC-032": ("L4", False),  # Guqin Jianzipu Dapu Arch Reconstruction (spec)
+    "HC-033": ("L3", False),  # Inuit Katajjaq Duet Rounds (spec)
+    "HC-034": ("L3", False),  # Choro Rondo & Baixaria (spec)
     # --- L1 MICRO ---
     "002": ("L1", True),   # Markov Transitions
     "011": ("L1", False),  # Voice-Leading Graph Search
