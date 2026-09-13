@@ -1,0 +1,240 @@
+{
+  "job": "random-style production SP layer-aligned 2026-09-13",
+  "method": "SP-073",
+  "module": "sound.synthesis.music_box",
+  "desc": "Twin-Detuned-Comb Music Box Modal Synthesis (Muro Box N40-style)",
+  "registry": "workflows.musicom_workflow.SP_METHODS",
+  "registry_size": 19,
+  "eligible_pool": [
+    "SP-021",
+    "SP-028",
+    "SP-032",
+    "SP-033",
+    "SP-034",
+    "SP-036",
+    "SP-069",
+    "SP-070",
+    "SP-072",
+    "SP-073",
+    "SP-074",
+    "SP-075"
+  ],
+  "excluded_last_7d": [
+    "SP-001",
+    "SP-011",
+    "SP-024",
+    "SP-026",
+    "SP-035",
+    "SP-037",
+    "SP-071"
+  ],
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Blues/027-delta-blues-shack/MIDI/027_delta_blues.mid",
+  "out_dir": "/opt/data/repos/musicom/projects/Styles/Production/SP073-musicbox-delta-blues",
+  "layer_discipline": "absolute -- twin-comb tine synthesis replaces the production layer for all 4 voices",
+  "params": {
+    "sample_rate": 44100,
+    "bpm": 72.0,
+    "bar_ticks": 1920,
+    "duration_s": 174.742,
+    "tine_ratios": [
+      1.0,
+      6.2669,
+      17.547,
+      34.3863
+    ],
+    "voice_profiles": {
+      "25": {
+        "label": "Resonator Guitar lead",
+        "kind": "tine",
+        "decay": 0.32,
+        "brightness": 1.0,
+        "detune": 14.0,
+        "pan": -0.22,
+        "mechanics": 0.16,
+        "jitter": 3.0,
+        "tail": 1.0,
+        "gain": 1.0
+      },
+      "26": {
+        "label": "Acoustic Slide harmony",
+        "kind": "tine",
+        "decay": 1.1,
+        "brightness": 0.7,
+        "detune": 7.0,
+        "pan": 0.38,
+        "mechanics": 0.13,
+        "jitter": 3.5,
+        "tail": 1.6,
+        "gain": 0.8
+      },
+      "32": {
+        "label": "Thumb Bass sub",
+        "kind": "tine",
+        "decay": 1.0,
+        "brightness": 0.55,
+        "detune": 14.0,
+        "pan": 0.0,
+        "mechanics": 0.2,
+        "jitter": 1.8,
+        "tail": 1.6,
+        "gain": 0.62
+      }
+    },
+    "percussion_map": {
+      "36": {
+        "label": "Stomp/kick",
+        "shift": -12,
+        "decay": 0.12,
+        "brightness": 0.55,
+        "detune": 10.0,
+        "mechanics": 0.3,
+        "jitter": 4.0,
+        "tail": 0.3,
+        "gain": 0.95,
+        "pan": 0.0
+      },
+      "39": {
+        "label": "Clap",
+        "shift": 12,
+        "decay": 0.14,
+        "brightness": 1.15,
+        "detune": 12.0,
+        "mechanics": 0.4,
+        "jitter": 6.0,
+        "tail": 0.25,
+        "gain": 0.55,
+        "pan": 0.28
+      },
+      "42": {
+        "label": "Closed hat",
+        "shift": 36,
+        "decay": 0.12,
+        "brightness": 1.35,
+        "detune": 16.0,
+        "mechanics": 0.5,
+        "jitter": 7.0,
+        "tail": 0.2,
+        "gain": 0.42,
+        "pan": null
+      },
+      "46": {
+        "label": "Open hat",
+        "shift": 31,
+        "decay": 0.3,
+        "brightness": 1.25,
+        "detune": 14.0,
+        "mechanics": 0.45,
+        "jitter": 7.0,
+        "tail": 0.4,
+        "gain": 0.45,
+        "pan": -0.3
+      }
+    },
+    "velocity_gain": "clip((vel/90)**1.5, 0.22, 1.30) after render_note() peak-normalisation to 0.9",
+    "segment_fade_ms": 30.0,
+    "fade_guard": 2.6,
+    "master": {
+      "target_lufs": -14.0,
+      "limiter_threshold_db": -1.0
+    }
+  },
+  "soundfont": "/opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2",
+  "dry_full_mix": {
+    "path": "/opt/data/repos/musicom/projects/Styles/Production/SP073-musicbox-delta-blues/dry_full_mix.wav",
+    "bytes": 31317036,
+    "peak": 1.0,
+    "silence_ratio": 0.061
+  },
+  "dry_stems": {
+    "track00_Acoustic_Guitar_steel": 31317036,
+    "track01_Electric_Guitar_jazz": 30798636,
+    "track02_Acoustic_Bass": 30801452,
+    "track03_Drums": 30391596
+  },
+  "wet_stems": {
+    "Resonator Guitar lead": {
+      "path": "/opt/data/repos/musicom/projects/Styles/Production/SP073-musicbox-delta-blues/Audio/stems_wet/track_Resonator_Guitar_lead.wav",
+      "bytes": 30824536,
+      "peak": 4.6916
+    },
+    "Acoustic Slide harmony": {
+      "path": "/opt/data/repos/musicom/projects/Styles/Production/SP073-musicbox-delta-blues/Audio/stems_wet/track_Acoustic_Slide_harmony.wav",
+      "bytes": 30824536,
+      "peak": 2.2672
+    },
+    "Thumb Bass sub": {
+      "path": "/opt/data/repos/musicom/projects/Styles/Production/SP073-musicbox-delta-blues/Audio/stems_wet/track_Thumb_Bass_sub.wav",
+      "bytes": 30824536,
+      "peak": 1.6732
+    },
+    "Percussion tines": {
+      "path": "/opt/data/repos/musicom/projects/Styles/Production/SP073-musicbox-delta-blues/Audio/stems_wet/track_Percussion_tines.wav",
+      "bytes": 30824536,
+      "peak": 1.3983
+    }
+  },
+  "wet_full_mix": {
+    "path": "/opt/data/repos/musicom/projects/Styles/Production/SP073-musicbox-delta-blues/SP073-musicbox-delta-blues.wav",
+    "bytes": 30824536,
+    "ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP073-musicbox-delta-blues/SP073-musicbox-delta-blues.ogg",
+    "ogg_bytes": 1486597,
+    "lufs": -14.09,
+    "peak": 0.8913,
+    "silence_ratio": 0.0104,
+    "onset_env_corr": 0.1066,
+    "onset_env_cosine": 0.2754,
+    "onset_env_energy_ratio": 1.478,
+    "wave_corr_dry_vs_wet": -0.0007,
+    "sha256": "fe1774bd289d34181fcfbdc7f4c5af9b853c2021dd6b6075c719812c50afe411"
+  },
+  "pitch_verification": {
+    "verdict": "PASS",
+    "mix_hit_rate": 0.9422,
+    "note_strict_rate": 0.5523,
+    "per_voice_note_stats": {
+      "Resonator Guitar lead": {
+        "notes": 1251,
+        "strict_slots": 161,
+        "ambiguous_slots": 881
+      },
+      "Acoustic Slide harmony": {
+        "notes": 259,
+        "strict_slots": 160,
+        "ambiguous_slots": 47
+      },
+      "Thumb Bass sub": {
+        "notes": 211,
+        "strict_slots": 117,
+        "ambiguous_slots": 0
+      }
+    },
+    "chroma_corr": 0.9859,
+    "median_harmonic_ratio": 0.362,
+    "auto_unpitched_frames": 2,
+    "auto_frames": 349,
+    "texture_order_ok": true
+  },
+  "synthesis_seconds": 250.9,
+  "final_verification": {
+    "report": "Analysis/verify_final.json",
+    "pitch_attribution_total": {
+      "strict_slots": 638,
+      "tonal_attribution_rate": 1.0
+    },
+    "pitch_attribution_note": "per-note strict-slot checks run on the ISOLATED wet stems; every unmatched dominant peak was the fundamental of a neighbouring (still-ringing) tine, not noise -- 100 % tonal attribution on all three pitched voices",
+    "rhythmic_grid_total_rate": 0.78,
+    "rhythmic_grid_kick_narrowband_rate": 0.896,
+    "silence_pct": 1.04,
+    "lufs": -14.09,
+    "peak": 0.8912,
+    "mid_track_gaps": []
+  },
+  "fixes_applied": [
+    "first full run OOM-killed (exit 137): four float64 voice buses + dry mix + mix copy held at once on a 3.9 GB box -> streamed one voice at a time, float32 everywhere, dry stereo dropped after its mono summary",
+    "render_note() peak-normalizes every note to 0.9, erasing dynamics -> explicit clip((vel/90)**1.5, 0.22, 1.30) gain at the call site",
+    "stomp tine decay 0.45 s overlapped the 0.156 s percussion grid -> onset contrast 19 %; measured sweep set decays to 0.12-0.30 s -> 90-99 %",
+    "strict pitch window straddled the next onset on a 7.2 notes/s line (881/1251 'ambiguous') -> gap-aware window min(max(dur,30ms), 150ms, 80 % of gap)",
+    "band-limited grid metric ran sosfiltfilt + np.convolve(7.7M, 2648) -> exit 137; replaced with causal sosfilt + cumsum-difference RMS",
+    "the 25-120 Hz kick band also carries the thumb-bass tine line -> narrow-banded to 25-55 Hz for the kick metric"
+  ]
+}

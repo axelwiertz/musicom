@@ -1,0 +1,31 @@
+{
+  "full mix": {
+    "slots": 144,
+    "hits": 129,
+    "rate": 0.8958,
+    "median_rise": 3.76
+  },
+  "isolated perc stem": {
+    "slots": 144,
+    "hits": 135,
+    "rate": 0.9375,
+    "median_rise": 3.87
+  },
+  "isolated bass stem": {
+    "slots": 144,
+    "hits": 48,
+    "rate": 0.3333,
+    "median_rise": 1.4
+  },
+  "dry full mix": {
+    "slots": 144,
+    "hits": 141,
+    "rate": 0.9792,
+    "median_rise": 9.44
+  },
+  "band_hz": [
+    25.0,
+    55.0
+  ],
+  "note": "the 25-120 Hz band used in verify_final also carries the thumb-bass tine line (MIDI 40-57 = 82-220 Hz); narrow-banding to 25-55 Hz isolates the stomp transposition (MIDI 24 = 32.7 Hz)"
+}
