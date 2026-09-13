@@ -1,0 +1,23 @@
+{
+  "artifact": "vocalballad-AB-a-soundfont-square.ogg",
+  "classification": "ai-assisted",
+  "generator": "render_vocal_ballad.py",
+  "sources": [
+    "phase1_compose.build_ballad",
+    "sound.render.hybrid.render_hybrid"
+  ],
+  "parameters": {
+    "title": "A/B A: Lead via soundfont stand-in (square lead)",
+    "bpm": 72,
+    "sr": 44100,
+    "master": {
+      "lufs": -15.396230399051804,
+      "peak": 0.8912509381337457
+    }
+  },
+  "notes": "",
+  "sha256": "5312a7bcbd6a88bd1afb8687c4e479ec6cf4e05929f18c7fa95cb36d626f5ffa",
+  "bytes": 1145613,
+  "created_utc": "2026-09-13T20:23:54.180478+00:00",
+  "provenance_version": "1.0"
+}

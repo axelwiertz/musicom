@@ -69,12 +69,21 @@ REGISTER = {
 # ------------------------------------------------------- instrumentation
 # Ballad-appropriate pools per role. Every entry is range-verified against
 # the register above — see tests/test_ballad_palette.py.
+#
+# The voice-like family (sound/synthesis/voice_like.py) appears where it fits:
+# these are non-vocal instruments that read as voice-like (formant envelope),
+# which makes them the natural "singing" voice in an arrangement. Lead spans
+# 62-77, so jaw_harp (tops at 74) and didgeridoo (tops at 55) do NOT fit Lead;
+# they are listed under the roles they do fit (Arp / Bass).
 INSTRUMENT_POOLS = {
     "Lead": ["Violin", "Flute", "Oboe", "Alto Saxophone", "Acoustic Guitar",
-             "Cello"],
-    "Pad": ["Piano", "Church Organ", "Acoustic Guitar", "Dulcimer"],
-    "Bass": ["Double Bass", "Cello", "Tuba", "Bassoon"],
-    "Arp": ["Marimba", "Kalimba", "Dulcimer", "Clarinet", "Viola"],
+             "Cello",
+             # voice-like family, Lead-compatible:
+             "Talkbox", "Vox Humana", "Kazoo", "Singing Saw"],
+    "Pad": ["Piano", "Church Organ", "Acoustic Guitar", "Dulcimer",
+            "Vox Humana", "Kazoo"],
+    "Bass": ["Double Bass", "Cello", "Tuba", "Bassoon", "Didgeridoo"],
+    "Arp": ["Marimba", "Kalimba", "Dulcimer", "Clarinet", "Viola", "Jaw Harp"],
     "Drums": ["Drum Kit", "Timpani"],
 }
 
@@ -97,9 +106,23 @@ PALETTES = {
         "Lead": "Acoustic Guitar", "Pad": "Dulcimer", "Bass": "Double Bass",
         "Arp": "Kalimba", "Drums": "Drum Kit",
     },
+    "vocal": {            # voice-like lead: a synthesized "singing" line
+        "Lead": "Talkbox", "Pad": "Piano", "Bass": "Double Bass",
+        "Arp": "Jaw Harp", "Drums": "Drum Kit",
+    },
+    "drone": {            # voice-like low end + saw lead
+        "Lead": "Singing Saw", "Pad": "Vox Humana", "Bass": "Didgeridoo",
+        "Arp": "Kalimba", "Drums": "Drum Kit",
+    },
 }
-PALETTE_ORDER = ["classic", "noir", "chamber", "folk"]
+# NOTE: new palettes are APPENDED so existing round→palette indices are stable
+# (HITL rounds already recorded reference their palette by round index).
+PALETTE_ORDER = ["classic", "noir", "chamber", "folk", "vocal", "drone"]
 DEFAULT_PALETTE = "classic"
+
+#: Palettes whose Lead is a voice-like instrument (needs the SP-075 hybrid
+#: render — the soundfont has no real equivalent for these instruments).
+VOICE_LIKE_PALETTES = ("vocal", "drone")
 
 
 def palette_for_round(round_num: int) -> dict:
@@ -435,6 +458,41 @@ def ballad_harmony(form=None, key=None):
                for si, (sname, nbars) in enumerate(form)]
     qualities = ["min" if d in ("i", "iv", "v") else "maj" for d in mid_deg]
     return section_roots, qualities, roots_per_bar
+
+
+def voice_instrument_map(palette):
+    """Map a palette onto `render_hybrid`'s `voice_instruments` list.
+
+    Returns a list aligned to the composer's voice order (Lead, Pad, Bass,
+    Arp, Drums) where each entry is the VoiceLikeInstrument engine key for a
+    voice-like instrument, or None when the soundfont should render it.
+
+    This is the bridge between orchestration (which instrument plays each
+    role) and production (which engine synthesizes it). A voice-like
+    instrument has no real GM equivalent, so its MIDI program is only a label
+    — without this routing, FluidSynth would play the stand-in preset instead.
+    """
+    import sys
+    if "/opt/data/projects/Instruments" not in sys.path:
+        sys.path.insert(0, "/opt/data/projects/Instruments")
+    from instrument_registry import ALL_INSTRUMENTS
+
+    out = []
+    for role in ("Lead", "Pad", "Bass", "Arp", "Drums"):
+        name = palette.get(role)
+        key = None
+        if name:
+            # resolve the palette's display name to a registry key, then find
+            # its engine key when it is part of the voice-like family
+            try:
+                inst = next(i for i in ALL_INSTRUMENTS.values()
+                            if i.name.lower() == name.lower())
+            except StopIteration:
+                inst = None
+            if inst is not None and inst.synthesis == "voice_like":
+                key = (inst.synthesis_defaults or {}).get("instrument")
+        out.append(key)
+    return out
 
 
 def build_ballad(seed=None, variant=None, density=None, offset=0, form=None,

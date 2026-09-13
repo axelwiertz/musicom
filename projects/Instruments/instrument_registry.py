@@ -45,6 +45,7 @@ _INSTRUMENT_MODULES = {
     "Percussion.drum_kit.drum_kit": "drum_kit",
     "Percussion.marimba.marimba": "marimba",
     "Percussion.steel_drums.steel_drums": "steel_drums",
+    "Percussion.vibraphone.vibraphone": "vibraphone",
     "World.sitar.sitar": "sitar",
     "World.koto.koto": "koto",
     "World.shamisen.shamisen": "shamisen",
@@ -63,6 +64,7 @@ _FIELDS = (
     "solo_range", "sweet_spot", "zones", "articulations",
     "synthesis", "modal_preset", "karplus_defaults", "fm_defaults",
     "bowed_defaults", "drum606_defaults", "synthesis_defaults",
+    "motor_defaults",
     "reverb_tail", "eq_body", "eq_presence", "eq_air", "pan",
     "stem_label",
 )
@@ -111,6 +113,45 @@ def _load_module(mod_path):
         return mod
 
 
+def _member_module(base_mod, spec):
+    """Build a module-like namespace for one voice-like family member.
+
+    The Instrument class reads uppercase constants off a module object; a
+    family member shares the base module's defaults (zones, articulations,
+    synthesis engine, production EQ) but overrides its own program / name /
+    stem / range / sweet spot, and sets SYNTHESIS_DEFAULTS["instrument"] to
+    its engine key so rendering routes to the right VoiceLikeInstrument.
+    """
+    import types
+
+    m = types.SimpleNamespace()
+    m.MIDI_PROGRAM = spec["midi_program"]
+    m.GM_NAME = spec["label"]
+    m.STEM_LABEL = spec["stem_label"]
+    m.RANGE_MIN = spec["range_min"]
+    m.RANGE_MAX = spec["range_max"]
+    m.SOLO_RANGE = spec["sweet_spot"]
+    m.SWEET_SPOT = spec["sweet_spot"]
+    m.ZONES = getattr(base_mod, "ZONES", None)
+    m.ARTICULATIONS = getattr(base_mod, "ARTICULATIONS", None)
+    m.SYNTHESIS = getattr(base_mod, "SYNTHESIS", None)
+    defaults = dict(getattr(base_mod, "SYNTHESIS_DEFAULTS", {}) or {})
+    defaults["instrument"] = spec["engine"]
+    m.SYNTHESIS_DEFAULTS = defaults
+    m.MODAL_PRESET = getattr(base_mod, "MODAL_PRESET", None)
+    m.KARPLUS_DEFAULTS = getattr(base_mod, "KARPLUS_DEFAULTS", None)
+    m.FM_DEFAULTS = getattr(base_mod, "FM_DEFAULTS", None)
+    m.BOWED_DEFAULTS = getattr(base_mod, "BOWED_DEFAULTS", None)
+    m.DRUM606_DEFAULTS = getattr(base_mod, "DRUM606_DEFAULTS", None)
+    m.MOTOR_DEFAULTS = getattr(base_mod, "MOTOR_DEFAULTS", None)
+    m.REVERB_TAIL = getattr(base_mod, "REVERB_TAIL", None)
+    m.EQ_BODY = getattr(base_mod, "EQ_BODY", None)
+    m.EQ_PRESENCE = getattr(base_mod, "EQ_PRESENCE", None)
+    m.EQ_AIR = getattr(base_mod, "EQ_AIR", None)
+    m.PAN = getattr(base_mod, "PAN", None)
+    return m
+
+
 def _load_all():
     instruments = {}
     for mod_path, key in _INSTRUMENT_MODULES.items():
@@ -122,6 +163,16 @@ def _load_all():
         if not human:
             human = key.replace("_", " ").title()
         instruments[key] = Instrument(human, family, mod)
+
+        # Voice-like family: register each member individually (kazoo,
+        # jaw_harp, singing_saw, ...) in addition to the `voice_like` umbrella.
+        fam = getattr(mod, "FAMILY", None)
+        if isinstance(fam, dict):
+            for member_key, spec in fam.items():
+                if member_key == key:
+                    continue
+                instruments[member_key] = Instrument(
+                    spec["label"], family, _member_module(mod, spec))
     return instruments
 
 
@@ -148,6 +199,7 @@ ACOUSTIC_GUITAR = ALL_INSTRUMENTS["acoustic_guitar"]
 DRUM_KIT = ALL_INSTRUMENTS["drum_kit"]
 MARIMBA = ALL_INSTRUMENTS["marimba"]
 STEEL_DRUMS = ALL_INSTRUMENTS["steel_drums"]
+VIBRAPHONE = ALL_INSTRUMENTS["vibraphone"]
 SITAR = ALL_INSTRUMENTS["sitar"]
 KOTO = ALL_INSTRUMENTS["koto"]
 SHAMISEN = ALL_INSTRUMENTS["shamisen"]
@@ -158,6 +210,21 @@ SHENAI = ALL_INSTRUMENTS["shenai"]
 FIDDLE = ALL_INSTRUMENTS["fiddle"]
 TIMPANI = ALL_INSTRUMENTS["timpani"]
 HUMAN_VOICE = ALL_INSTRUMENTS["human_voice"]
+# Voice-like family — one instrument per non-vocal source. The `voice_like`
+# key is the umbrella (vox humana); each member is also addressable directly.
+VOICE_LIKE = ALL_INSTRUMENTS["voice_like"]
+VOX_HUMANA = ALL_INSTRUMENTS["vox_humana"]
+KAZOO = ALL_INSTRUMENTS["kazoo"]
+JAW_HARP = ALL_INSTRUMENTS["jaw_harp"]
+DIDGERIDOO = ALL_INSTRUMENTS["didgeridoo"]
+SINGING_SAW = ALL_INSTRUMENTS["singing_saw"]
+TALKBOX = ALL_INSTRUMENTS["talkbox"]
+
+#: Registry keys whose audio must come from VoiceLikeInstrument, not FluidSynth.
+VOICE_LIKE_KEYS = (
+    "voice_like", "vox_humana", "kazoo", "jaw_harp",
+    "didgeridoo", "singing_saw", "talkbox",
+)
 
 
 def by_name(name):
@@ -206,6 +273,8 @@ def registry_table():
             role = "lead, melody, accent, countermelody, harmony"
         elif low == "steel drums":
             role = "lead, melody, accent, countermelody, harmony, rhythm"
+        elif low == "vibraphone":
+            role = "lead, melody, harmony, countermelody, accent"
         elif low == "sitar":
             role = "lead, melody, ornament, drone"
         elif low == "koto":
@@ -283,3 +352,7 @@ if __name__ == "__main__":
     print("  by_name('timpani') =", by_name("timpani"))
     print("  by_program(47) =", by_program(47))
     print("  TIMPANI.in_sweet_spot(45) =", TIMPANI.in_sweet_spot(45))
+    print("  VIBRAPHONE.midi_program =", VIBRAPHONE.midi_program, "(should be 11)")
+    print("  by_name('vibraphone') =", by_name("vibraphone"))
+    print("  by_program(11) =", by_program(11))
+    print("  VIBRAPHONE.in_sweet_spot(69) =", VIBRAPHONE.in_sweet_spot(69))

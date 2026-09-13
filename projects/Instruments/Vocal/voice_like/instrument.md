@@ -116,6 +116,58 @@ from sound.synthesis.voice_like import render_phrase_wav
 render_phrase_wav("out.wav", [(69, 0.5, "o"), (72, 0.8, "a")], instrument="talkbox")
 ```
 
+## Using these in compositions (the "singing" track)
+
+These instruments are the natural **singing voice** of an arrangement. They
+have **no real GM equivalent** — a track assigned "Talkbox" exports MIDI
+program 80, and the soundfont would play *Lead 1 (square)*. So producing a
+composition that uses them needs two engines on one file:
+
+```
+voice tracks  ->  VoiceLikeInstrument (synthesized, per track)
+other tracks  ->  FluidSynth (soundfont, the backing band)
+then sum -> master -> encode
+```
+
+That is **SP-075** (`sound/render/hybrid.py`), wired into the workflow spine:
+
+```python
+from workflows.musicom_workflow import produce
+
+r = produce("song.mid", method="SP-075",
+            params={"voice_instruments": ["talkbox", None, None, None, None],
+                    "bpm": 72})
+# → r.wav_path, r.ogg_path ; r.info["engines"] shows which engine per track
+```
+
+`voice_instruments` is aligned to the MIDI's **note-bearing tracks** in the
+composer's `add_voice()` order (track 0, the tempo track, is skipped —
+the same convention as `RenderPipeline.render_stems`). `None` = use the
+soundfont for that track.
+
+### In the ballad project
+
+`projects/Styles/Pop/ballad-hitl/` has two palettes with voice-like leads
+(`vocal`: Talkbox / Jaw Harp, `drone`: Singing Saw / Vox Humana / Didgeridoo)
+and a bridge that produces the routing automatically:
+
+```python
+from phase1_compose import PALETTES, voice_instrument_map
+voice_instrument_map(PALETTES["vocal"])
+# → ['talkbox', None, None, 'jaw_harp', None]
+```
+
+Render the demo (4 mastered OGGs, incl. a soundfont-vs-voice A/B):
+
+```bash
+$MUSICOM_PYTHON projects/Styles/Pop/ballad-hitl/Scripts/render_vocal_ballad.py
+```
+
+**Range caution**: the voice-like members do not all span the same register.
+Check before assigning to a role — `jaw_harp` tops at 74 and `didgeridoo` at
+55, so neither fits a lead line written 62–77. The palette ranges are
+verified by tests.
+
 ## Verification (measured, not claimed)
 
 `projects/Instruments/Vocal/voice_like_family/analyze_and_render.py` runs four
@@ -137,6 +189,9 @@ $MUSICOM_PYTHON projects/Instruments/Vocal/voice_like_family/analyze_and_render.
    one filter with six labels.
 
 `tests/test_voice_like.py` guards all of the above; **47 tests**.
+`tests/test_voice_hybrid.py` covers the composition integration (SP-075
+routing, the palette bridge, per-engine routing, determinism, and the
+soundfont-vs-voice A/B); **24 tests**.
 
 ## Method notes / pitfalls
 

@@ -1,0 +1,23 @@
+{
+  "artifact": "vocalballad-vocal-talkbox-jawharp.ogg",
+  "classification": "ai-assisted",
+  "generator": "render_vocal_ballad.py",
+  "sources": [
+    "phase1_compose.build_ballad",
+    "sound.render.hybrid.render_hybrid"
+  ],
+  "parameters": {
+    "title": "pop ballad, vocal palette (Talkbox lead, Jaw Harp arp)",
+    "bpm": 72,
+    "sr": 44100,
+    "master": {
+      "lufs": -14.044524778329174,
+      "peak": 0.8912509381337457
+    }
+  },
+  "notes": "",
+  "sha256": "9a22aa710f07dc1366745e477af5ec42d9cca63a0e5fb9b74d63812f5ef60e2d",
+  "bytes": 1038050,
+  "created_utc": "2026-09-13T20:23:13.501676+00:00",
+  "provenance_version": "1.0"
+}

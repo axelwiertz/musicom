@@ -1,0 +1,23 @@
+{
+  "artifact": "vocalballad-drone-singingsaw-didge.ogg",
+  "classification": "ai-assisted",
+  "generator": "render_vocal_ballad.py",
+  "sources": [
+    "phase1_compose.build_ballad",
+    "sound.render.hybrid.render_hybrid"
+  ],
+  "parameters": {
+    "title": "pop ballad, drone palette (Singing Saw, Vox Humana, Didgeridoo)",
+    "bpm": 72,
+    "sr": 44100,
+    "master": {
+      "lufs": -14.000187654614521,
+      "peak": 0.8912509381337456
+    }
+  },
+  "notes": "",
+  "sha256": "8d0e10d2c66973e77de262fe5c0776ff19438e2f552f5501718e7e674998f045",
+  "bytes": 829990,
+  "created_utc": "2026-09-13T20:23:44.727364+00:00",
+  "provenance_version": "1.0"
+}

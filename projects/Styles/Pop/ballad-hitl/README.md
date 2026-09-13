@@ -54,6 +54,64 @@ rotates per HITL round, so a name-based router stops matching.
 
 Master: `normalize_to_lufs(-14)` → `Limiter(-1 dB)` LAST.
 
+## Phase 2b — Voice-like instruments on the "singing" track
+
+The voice-like family (`sound/synthesis/voice_like.py`) is used here as the
+**singing voice** of the arrangement. These are non-vocal instruments — a
+free reed, a mirliton membrane, a plucked lamella, a lip reed, a bowed blade,
+an amplified saw — each routed through a vocal-tract formant cascade, so they
+read as voice-like without being voices.
+
+They have **no real GM equivalent**. A track assigned "Talkbox" exports MIDI
+program 80, and the soundfont would play *Lead 1 (square)* — a square lead,
+not a talkbox. So a composition using them needs two engines on one file:
+
+```
+voice tracks  ->  VoiceLikeInstrument (synthesized, per track)
+other tracks  ->  FluidSynth (soundfont, the backing band)
+then sum -> master -> encode
+```
+
+That is **SP-075** (`sound/render/hybrid.py`), wired into
+`musicom_workflow.produce(method="SP-075")`.
+
+### Palettes
+
+Two palettes put voice-like instruments on lead roles (appended to
+`PALETTE_ORDER` so existing round→palette indices stay stable):
+
+| Palette | Lead | Pad | Bass | Arp |
+|---|---|---|---|---|
+| `vocal` | Talkbox | Piano | Double Bass | Jaw Harp |
+| `drone` | Singing Saw | Vox Humana | Didgeridoo | Kalimba |
+
+The Lead register spans 62–77, so `jaw_harp` (tops at 74) and `didgeridoo`
+(55) do **not** fit Lead; they are placed under the roles they do fit.
+
+`phase1_compose.voice_instrument_map(palette)` is the orchestration→production
+bridge: it returns the `voice_instruments` list SP-075 needs, aligned to the
+composer's voice order, with `None` for soundfont tracks.
+
+### Render
+
+```bash
+$MUSICOM_PYTHON Scripts/render_vocal_ballad.py
+```
+
+Produces, all mastered to LUFS −14 / peak −1 dB:
+
+| artifact | what it is |
+|---|---|
+| `vocalballad-vocal-talkbox-jawharp` | `vocal` palette, HYBRID render |
+| `vocalballad-drone-singingsaw-didge` | `drone` palette, HYBRID render |
+| `vocalballad-AB-a-soundfont-square` | A/B A — same notes, **soundfont stand-in** |
+| `vocalballad-AB-b-talkbox` | A/B B — same notes, **Talkbox synthesized** |
+
+The A/B pair are the honest check: identical MIDI, two engines. Measured
+difference in the lead's entry bar — centroid **703 Hz** (square) vs **582 Hz**
+(talkbox), mix difference 0.22 mean|Δ|. If the hybrid routing ever regressed,
+the B render would collapse onto A and you would hear a square lead.
+
 ## Verification
 
 ```
@@ -64,6 +122,7 @@ LUFS -14.01  peak 0.891  silence 3.2%
 - Audio: `Audio/pop-ballad-hitl.wav` (16.5 MB) + `.ogg` (670 KB)
 - Stems: `Audio/stems/track*_*.wav`
 - Grid: `Analysis/grid_phase1.txt`
+- Voice-instrument renders: `Audio/vocalballad-*.ogg` (4 files, see above)
 
 ## Phase 3 — HITL evolution rounds (human pick)
 
