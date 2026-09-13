@@ -93,6 +93,7 @@ Classification of active Musicom composition methods categorized by their primar
 | **083** | concrete | Aperiodic Quasicrystal Tiling Composition (QTSC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Window/Cut-and-project) | Grid-Locked / Continuous | Macro / Inflation Level | $\mathcal{O}(W \cdot L)$ | Generates music from an aperiodic substitution tiling of the plane (Penrose P3 five-fold / Ammann–Beenker eight-fold): iterate an inflation rule ($\varphi$ or $1{+}\sqrt2$ scale factor), then read quasi-periodic scanlines whose edge/vertex symbols decode to never-repeating melodies, chord progressions, and rhythms with global order but no exact repetition. Vertex configurations = chord/scale subsets; inflation level = section/form; determinism per seed. The 2D aperiodic counterpart to 019/069 1D substitution words and the foil to 021 CA. |
 | **084** | concrete | Zipf–Mandelbrot Rank–Frequency Composition (ZMRC) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Ranking-imposed) | Grid-Locked / Continuous | Macro / Vocabulary | $\mathcal{O}(N)$ | Treats the piece as a text over a ranked musical vocabulary and samples tokens from a Zipf–Mandelbrot rank–frequency law $f(r) \propto (r+q)^{-s}$. Rank 1 = tonic/HOME (saturating), long tail = chromatic/TENSE (rare); exponent $s$ = vocabulary richness, shift $q$ = dominance ceiling, ranking order = tonal grammar. Macro-form = a per-section trajectory in $(s,q,\text{ranking})$ space. Empirical basis: pitch/rhythm/chord distributions in real music are Zipfian (Manaris 2003; Zanette 2006; Levitin 2012). Statistical foil to 002 Markov (marginal vs conditional) and 053 Lévy (rank vs step-length). |
 | **085** | concrete | Non-negative Matrix Factorization Composition (NMF-C) | **AI-Driven** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Learned-basis) | Grid-Locked / Continuous | Macro / Corpus | $\mathcal{O}(I \cdot K \cdot F \cdot T)$ | Factors a piano-roll/chromagram/spectrogram $V \approx WH$ into a non-negative parts dictionary $W$ (learned chord/PC-set voicings, rhythmic cells) and an activation matrix $H$ (onset-energy envelopes). Non-negativity forces additive, parts-based atoms — the learned $W$ is the "style", a designed/structured $H$ is the "piece". Rank $K$ = vocabulary/harmonic complexity; block structure of $H$ = macro-form; co-activation = harmony; activation sparsity = texture. The factorization ancestor of 046 VAE / 072 NFC / 074 RBM-C, with the Smaragdis-Brown transcription lineage; linear non-negative foil to the learned-transition 054 ATS. |
+| **086** | concrete | Hidden Markov Model Latent-State Composition (HMM-C) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Functional-grammar) | Grid-Locked / Continuous | Meso / Hidden Chain | $\mathcal{O}(I \cdot T \cdot S^2)$ train, $\mathcal{O}(T \cdot S^2)$ Viterbi | Generates music as the emission of a hidden Markov chain: latent states are tonal functions/chord regions/sections, emissions are pitch classes, rhythmic cells, and velocity levels. Transition matrix $A$ = harmonic grammar (state→state = chord progression), emission matrix $B$ = surface vocabulary, initial $\pi$ = opening. Composition = sample or Viterbi-decode the hidden path (forced per section), then emit; Baum–Welch (EM) learns $A,B$ from a corpus. Latent-state generalization of 002 Markov; discrete-state ancestor of 059 ESN-RC / 060 S4SC; hidden-variable counterpart to 064 MRFCC's spatial lattice. |
 # Sound Production Methods Framework
 
 Sound production translates symbolic MIDI UnitMatrix data into final acoustic air pressure. Methods are categorized by execution layer: **Hardware/Acoustic Integration**, **Synthesis Engines**, or **Post-Processing / DSP**.
@@ -171,6 +172,7 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 | **SP-069** | Wavelet Packet Spectral Synthesis (WPSS) | **Synthesis Engines** | Time-Scale Spectral Sculpting / Octave-Band Resynthesis Timbres | Decomposes audio into octave-spaced, constant-Q scale bands via Mallat's discrete wavelet transform (QMF lowpass/highpass filter pair + decimation), optionally expanded to a full wavelet-packet tree with Shannon-entropy best-basis selection, then recombines edited coefficients via the inverse transform. Scale label = octave; per-band gain = critical-band EQ; transposition = scale relabel $j \to j{+}s$; time-stretch = coefficient re-spacing; entropy threshold = denoise/shrinkage. The time-scale (log-frequency) counterpart to STFT phase-vocoder SP-026 / SMS SP-027; $\mathcal{O}(N \log N)$, deterministic per seed. |
 | **SP-070** | Feedback Amplitude Modulation Synthesis (FBAM) | **Synthesis Engines** | Harmonic-Rich / Formant / Distortion Timbres | Nonlinear synthesis where a sinusoidal carrier is amplitude-modulated by its own fed-back output: $y(n)=\cos(\omega_0 n)[1+\beta\,y(n-1)]$ — a periodically linear time-varying one-pole filter whose coefficient is the input itself. Single scalar $\beta$ sweeps brightness from a pure sinusoid to a full harmonic pulse train with no spectral holes; 6 variations add feedforward delay, allpass phase distortion, heterodyning (double-carrier formants), waveshaping (odd/even-harmonic control), non-unitary delay, and decoupled carrier/modulator (adaptive distortion effect). $\mathcal{O}(1)$ per sample (1 mul + 1 add + 1 lookup); the feedback-amplitude cousin of FM SP-010/017 and phase distortion SP-030. |
 | **SP-071** | Dattorro Plate Reverb (DPR) | **Post-Processing / DSP** | Dense / Warm Algorithmic Plate Reverb Tail | Algorithmic plate reverberator in the style of the EMT 140: four input all-pass lattice diffusers decorrelate the signal into a recirculating "figure-eight" tank (two cross-coupled delay-line loops with in-loop one-pole HF-damping and four modulated all-pass diffusers), read out through seven ±0.6-weighted taps into a synthetic stereo image. Runs at a nominal 29761 Hz with all delays scaled by $f_s/29761$. Slow LFO modulation smears tank modes; decay/damping/diffusion/predelay are the knobs. $O(1)$ per sample; the dense, warm plate-class member between SP-009 (convolution IR), SP-032 (FDN) and SP-058 (spring). |
+| **SP-072** | Harmonic-Percussive Source Separation (HPSS) | **Post-Processing / DSP** | Tonal/Transient Stem Split (Harmonic + Percussive Buffers) | Splits a rendered audio buffer into two re-mixable stems via anisotropic median filtering (or IRLS) of the magnitude STFT: a time-axis median extracts the horizontal spectral ridges (harmonic/sustained), a frequency-axis median extracts the vertical ridges (percussive/transient), and a binary or soft mask splits the complex STFT with the original phase. No training, no pitch model; $O(N \log N)$ per frame. The non-parametric source-separation counterpart to SP-026 phase vocoder / SP-027 SMS / SP-031 cross-synthesis. |
 |---|
 
 
@@ -17346,3 +17348,195 @@ with the tap locations (at 29 761 Hz; scaled by `f_s/29761` for other rates) dra
 - Schroeder, M. R. (1962). "Natural Sounding Artificial Reverberation." *Journal of the Audio Engineering Society* 10(3), 219–223.
 - Griesinger, D. (1989). "Practical Processors and Programs for Digital Reverberation." *Proc. AES 7th Int. Conf.*
 - Valley Audio (2018). *Plateau* VCV Rack module — Dattorro reverb re-implementation (reference C++ coefficient sets at 29 761 Hz).
+# Hidden Markov Model Latent-State Composition (HMM-C) (Method 086)
+
+### Source
+The Hidden Markov Model was formalized by **Leonard E. Baum & Ted Petrie (1966), "Statistical Inference for Probabilistic Functions of Finite State Markov Chains," *Annals of Mathematical Statistics* 37(6), 1554–1563**, and the three canonical algorithms — the **forward–backward** recursion, the **Baum–Welch** (EM) parameter re-estimation, and the **Viterbi** decoding path — were consolidated by **Lawrence R. Rabiner (1989), "A Tutorial on Hidden Markov Models and Selected Applications in Speech Recognition," *Proceedings of the IEEE* 77(2), 257–286**, the paper that made HMMs the default sequential-latent-state model in signal processing. The musical lineage is equally direct: **Ponsford, Wiggins & Mellish (1999), "Statistical Learning of Harmonic Movement," *Journal of New Music Research* 28(2), 150–177**, learned harmonic-progression HMMs from Bach chorales; **Christopher Raphael (2002), "A Hybrid Graphical Model for Rhythmic Parsing," *Artificial Intelligence* 137(1–2), 217–238**, used a hidden-state graphical model for score-following and rhythm; **Sheh & Ellis (2003), "Chord Segmentation and Recognition Using EM-Trained Hidden Markov Models," *ISMIR***, made HMM chord recognition a standard; and **Allan & Williams (2005), "Harmonising Chorales by Probabilistic Inference," *NeurIPS 17***, used an HMM over hidden harmonic states to harmonize melodies. HMM-C inverts this *analysis/recognition* tool into a *generator*: the hidden chain is the composition plan, and the emissions are the sounding music.
+
+### Layer
+**concrete** — emits actual `MusicEvent`s (pitch, onset, velocity) into UnitMatrix cells by sampling (or Viterbi-decoding) an emission from a hidden state at each step; feeds `generators/`. The hidden-state sequence itself is an abstract-layer object (a tension/function curve over HOME/LIFT/TENSE/TURN that could seed `rules/subset_network.py` ABS-001/002), but as documented the method realizes events, so it is **concrete**. Candidate code path: `generators/hmm_composition.py`.
+
+### Description
+A Hidden Markov Model is a doubly stochastic process: a **hidden** first-order Markov chain over discrete states $q_t \in \{1..S\}$ that is never observed directly, and a **visible** emission $o_t$ drawn at each step from a state-conditioned distribution. The model is the tuple $\lambda = (A, B, \pi)$:
+
+- $\pi_i = P(q_1 = i)$ — the initial-state distribution (where the piece starts);
+- $A_{ij} = P(q_{t+1} = j \mid q_t = i)$ — the **transition matrix**, the harmonic/structural grammar;
+- $B_i(o) = P(o_t = o \mid q_t = i)$ — the **emission matrix**, the surface vocabulary of each state.
+
+Composition is the *generative direction* of HMM inference. Three modes:
+
+1. **Unconditional sampling**: draw $q_1 \sim \pi$, then alternately $q_{t+1} \sim A_{q_t,\cdot}$ and $o_t \sim B_{q_t}$ — a free stochastic walk whose macro-structure is governed entirely by the transition grammar (self-loops = phrase holds, off-diagonal mass = modulation/progression).
+2. **Viterbi-forced composition**: fix the emission sequence (a target melody/skeleton, or an abstract form template) and decode the single most probable hidden path $\hat q = \arg\max_q P(q \mid o, \lambda)$ — the optimal "harmonic interpretation" of the surface. This is re-harmonization as generation: new music = old surface + decoded structure.
+3. **Section-conditioned composition (per-column state priors)**: force $q_t$ into a chosen subset during section $s$ (e.g. states $\{1,2\}$ for verse, $\{3\}$ for chorus). This couples the HMM to the UnitMatrix's section columns, so the hidden chain *is* the macro-form.
+
+Training (Baum–Welch) learns $A$ and $B$ from a corpus of target-style excerpts: the learned transition matrix encodes the style's harmonic grammar (probable HOME→LIFT→TENSE→TURN movements), and the learned emissions encode its melodic/rhythmic vocabulary. States then admit a musically meaningful interpretation: with a suitably restricted state space, the hidden states align with tonal function (HOME/LIFT/TENSE/TURN), chord regions, or structural sections.
+
+### Technical Mechanics
+
+**The three algorithms** (all standard; complexity below for $T$ time steps, $S$ states, $V$ emission symbols):
+
+1. **Forward–backward** — computes $\alpha_t(i) = P(o_{1:t}, q_t = i)$ and $\beta_t(i) = P(o_{t+1:T} \mid q_t = i)$ by the recurrences
+
+$$\alpha_t(j) = \left[\sum_i \alpha_{t-1}(i) A_{ij}\right] B_j(o_t), \qquad \beta_t(i) = \sum_j A_{ij} B_j(o_{t+1}) \beta_{t+1}(j),$$
+
+so $P(O \mid \lambda) = \sum_i \alpha_T(i)$. This is the basis of all HMM inference.
+
+2. **Baum–Welch (EM)** — re-estimates the parameters by counting the expected transitions/emissions under the forward–backward posterior:
+
+$$\gamma_t(i) = \frac{\alpha_t(i)\beta_t(i)}{P(O\mid\lambda)}, \qquad
+\xi_t(i,j) = \frac{\alpha_t(i) A_{ij} B_j(o_{t+1}) \beta_{t+1}(j)}{P(O\mid\lambda)},$$
+
+$$A_{ij} \leftarrow \frac{\sum_t \xi_t(i,j)}{\sum_t \gamma_t(i)}, \qquad
+B_i(k) \leftarrow \frac{\sum_{t:\,o_t=k} \gamma_t(i)}{\sum_t \gamma_t(i)}, \qquad
+\pi_i \leftarrow \gamma_1(i).$$
+
+Iterated to convergence, this is maximum-likelihood training of $A$ and $B$ from a corpus. **Complexity** $\mathcal{O}(I \cdot T \cdot S^2)$ for $I$ iterations.
+
+3. **Viterbi decoding** — the dynamic-programming max-path:
+
+$$\delta_t(j) = \max_i \left[ \delta_{t-1}(i) A_{ij} \right] B_j(o_t),$$
+
+with backpointers recovered to yield $\hat q$. This finds the single best hidden-state explanation of an observation sequence. **Complexity** $\mathcal{O}(T \cdot S^2 \cdot V)$ when emission evaluation is included.
+
+**Underflow**: $\alpha_t, \beta_t, \delta_t$ decay geometrically in $T$; implement in log-space ($\log\alpha$, $\log\beta$, $\log\delta$) and use the log-sum-exp trick, or rescale at each step. **Tie-breaking determinism**: Baum–Welch is non-convex (local optima) — seed the RNG and fix iteration count for the zero-drift gate; Viterbi ties broken by lowest state index for reproducibility.
+
+### Musical Elements Framework
+
+| Element | Mechanism |
+|---|---|
+| **PITCH** | emission distribution $B_i$ over pitch classes / scale degrees per hidden state. A state's emission = its melodic vocabulary: HOME emits chord tones of the tonic with high probability, TENSE emits chromatic/leading-tone classes, TURN emits passing tones. Sampling $o_t \sim B_{q_t}$ at each step yields the melody; the same pitch class maps to a register via a state- or section-dependent octave profile |
+| **RHYTHM** | two channels: (a) a separate emission symbol stream over rhythmic cells (onset patterns / IOI classes) so each hidden state has a *groove* distribution; (b) the self-loop probability $A_{ii}$ controls dwell time — high $A_{ii}$ = long held notes / sustained state (legato), low $A_{ii}$ = rapid state turnover (busy, sectional). State-holding time is geometrically distributed with mean $1/(1-A_{ii})$, which maps directly to phrase length |
+| **HARMONY** | the hidden state *is* the harmonic identity. A well-trained $A$ encodes the functional grammar (HOME→LIFT→TENSE→TURN arcs); the *decoded* or *forced* state path is the chord progression. $B_i$'s emission mass over pitch classes = the chord/scale content of state $i$ (co-occurring pitch classes = a chord voicing). Forcing a state subset per section = harmonic modulation (verse in HOME-region states, bridge in LIFT/TURN-region states) |
+| **STRUCTURE** | the state path = macro-form. With $S$ states interpreted as sections/functions, the transition matrix's macro-block structure (near-block-diagonal $A$ with sparse off-block leaks) yields verse–chorus/rondo form; a single recurrent component = through-composed flow. Viterbi over a *form template* (a designed emission skeleton) fixes the structural plan deterministically; unconditional sampling lets it emerge from $A$ |
+| **TEXTURE** | state-conditioned emission multiplicity: a state whose emission distributes mass over *several simultaneous* symbols (a chord cell, a drum pattern) is a dense state; one with a sparse single-note emission is thin. The dwell time (self-loop) × multiplicity sets per-cell density. A low-entropy $B_i$ (peaked) = repetitive/ostinato texture; high-entropy $B_i$ = varied/ornamental texture |
+
+### UnitMatrix Integration (Voices & Sections)
+- **Rows (Voices)** = parallel hidden chains, either **(a) coupled**: one hidden state chain $q_t$ shared by all voices, each voice drawing its own emission from the *same* state (vertical coherence — a state emits a chord voicing split across voices), or **(b) independent per-voice chains** with a coupling emission (voice $v$ emits from $B^{(v)}$ conditioned on the shared state → independence + consonance). A third mode couples voices via a *product* emission over a joint pitch-class vector (the chord), which is the HMM analogue of 064 MRFCC's vertical clique potentials.
+- **Columns (Sections)** = forced state subsets. Each section records `(allowed_states, initial_state_prior, dwell_bias)`. Intro = states with high self-loop (sustained HOME); verse = HOME/LIFT region; chorus = maximal-multiplicity dense states; bridge = TENSE/TURN states (off-diagonal $A$ mass = novelty); outro = decay to a single terminal state (cadence on finalis).
+- **Cells (MusicUnit)** = `{PITCH}` = sampled emission pitch class (+ octave profile); `{RHYTHM}` = emission rhythmic cell + onset from dwell-time; `{HARMONY}` = hidden state → function label (HOME/LIFT/TENSE/TURN by state index); `{TEXTURE}` = emission entropy + multiplicity → accent/density. Deterministic per seed (seeded RNG + fixed Baum–Welch iterations + fixed tie-break) → zero-drift gate holds; hand to `UnitMatrixComposer` per AGENTS.md.
+- **Flow**: `train(corpus, S, seed)` (or hand-set $A,B,\pi$) → `force_sections(section_specs)` → `sample_path()` / `viterbi_force(target)` → decode $(q_t, o_t)$ to `create_note_unit`/`create_chord_unit` cells → `composer.validate()` must be True before `to_midi`.
+
+### Pitfalls
+1. **Log-underflow** — raw $\alpha_t/\beta_t/\delta_t$ underflow to 0 for $T \gtrsim 100$ at machine precision. Fix: implement the three recursions entirely in log-space (log-sum-exp), the standard Rabiner scaling alternative being the only other safe choice.
+2. **State-count mismatch** — too few states merges distinct functions (HOME and LIFT collapse into one), too many splits a single function into near-duplicate states. Fix: sweep $S$ (e.g. 4–16) and pick the knee of held-out log-likelihood, or pin $S$ to the number of chord functions + sections expected.
+3. **Non-convex training drift** — Baum–Welch converges to local optima; different seeds → different $A,B$ → different "same" composition. Fix: seed RNG + fixed iteration count for determinism; initialize $A$ with a functional prior (self-loops high, HOME→LIFT allowed, no LIFT→HOME reversal) to land in musically sensible optima.
+4. **Viterbi tie ambiguity** — equal-scoring hidden paths (degenerate $A$ or uniform $B$) make the decoded structure unstable. Fix: deterministic tie-break (lowest state index), and add a tiny prior or temperature to $A$ to break exact ties.
+5. **Sparse/staccato emission hazard** — a per-step sampled emission can produce gap-filled, staccato textures, especially with low self-loop mass. Per the Method Hybridization rule, pair HMM-C with a continuous fill layer (026 DPSM arpeggios, sustained pad, or walking bass) when it is the sole rhythmic generator.
+6. **Emission granularity coupling** — $B$ learned at one granularity (pitch class vs chord symbol vs rhythmic cell) cannot be decoded at another. Fix: fix the emission alphabet per element (pitch-class for melody, chord for harmony, IOI-cell for rhythm) and use separate HMM layers or a factored (multi-stream) emission for each element rather than mixing them in one alphabet.
+7. **Unseen-emission zero probability** — a corpus-trained $B$ assigns $0$ to tokens absent from training, crashing inference on novel input. Fix: Laplace/floor smoothing ($B_i(o) \leftarrow (c + \delta)/(\cdot)$) so every symbol has positive probability.
+
+### Comparison With Related Methods
+| Method | State | Learning | Structure source | Generation |
+|---|---|---|---|---|
+| 002 Markov | observed (the token *is* the state) | none (count transitions) | transition matrix | sample next token |
+| 045 HPSEC | none (self-exciting intensity) | none (excitation kernel) | Hawkes intensity | sample event times |
+| 059 ESN-RC | continuous reservoir (untrained) | ridge readout only | reservoir dynamics | decode state trajectory |
+| 060 S4SC | continuous state-space (trained) | gradient (HiPPO/selective) | learned recurrence | autoregressive token |
+| 061 GPC | continuous latent function | kernel hyperparams | kernel/anchors | posterior sample |
+| 064 MRFCC | spatial lattice (2D grid) | none (clique potentials) | grid neighborhoods | Gibbs sampling |
+| **086 HMM-C** | **discrete hidden chain** | **Baum–Welch (EM)** | **transition grammar + section forcing** | **sample / Viterbi-decode emission** |
+
+HMM-C is the discrete-hidden-state, EM-trainable member of the sequential family: it generalizes 002 Markov by making the state *latent* (the progression is inferred/designed, not read off the token), and it is the interpretable, grammar-bearing ancestor of the continuous/deep sequence models (059/060) — the same A/B/π object that HMM chord recognizers *fit* is here *sampled from* to compose.
+
+### References
+- Baum, L. E., & Petrie, T. (1966). "Statistical Inference for Probabilistic Functions of Finite State Markov Chains." *Annals of Mathematical Statistics* 37(6), 1554–1563.
+- Rabiner, L. R. (1989). "A Tutorial on Hidden Markov Models and Selected Applications in Speech Recognition." *Proceedings of the IEEE* 77(2), 257–286.
+- Viterbi, A. J. (1967). "Error Bounds for Convolutional Codes and an Asymptotically Optimum Decoding Algorithm." *IEEE Transactions on Information Theory* 13(2), 260–269.
+- Ponsford, D., Wiggins, G., & Mellish, C. (1999). "Statistical Learning of Harmonic Movement." *Journal of New Music Research* 28(2), 150–177.
+- Raphael, C. (2002). "A Hybrid Graphical Model for Rhythmic Parsing." *Artificial Intelligence* 137(1–2), 217–238.
+- Sheh, A., & Ellis, D. P. W. (2003). "Chord Segmentation and Recognition Using EM-Trained Hidden Markov Models." *Proceedings of ISMIR*.
+- Allan, M., & Williams, C. K. I. (2005). "Harmonising Chorales by Probabilistic Inference." *Advances in Neural Information Processing Systems (NeurIPS) 17*.
+
+# Harmonic-Percussive Source Separation (HPSS) (Method SP-072)
+
+### Source
+The canonical formulation is **Derry FitzGerald (2010), "Harmonic/Percussive Separation Using Median Filtering," *Proc. 13th International Conference on Digital Audio Effects (DAFx-10)*, Graz, Austria, D-10** — the paper that established the two-axis median-filtering decomposition and its binary/soft time-frequency mask. It descends from **Virtanen's NMF-based separation (2003)** and the earlier **Onishi & Miyoshi (2001/2002) spectral filtering** for harmonic/percussive splitting, but replaces NMF's expensive iterative factorization with a pair of *anisotropic* median filters — linear-complexity, no training, no iterative fitting. The dominant refinement is **Driedger, Müller & Disch (2014), "Extending Harmonic-Percussive Separation of Audio Signals," *Proc. ISMIR*, Taipei** — which replaces the median filters with an **iteratively reweighted least-squares (IRLS)** objective and adds a **cascaded/iterative** decomposition that recovers finer intermediate layers. HPSS is the source-separation counterpart to Musicom's spectral *processors* (SP-026 phase vocoder, SP-027 SMS, SP-031 cross-synthesis) — it does not resynthesize timbre but **splits a mixed buffer into two re-mixable stems** along the tonal/transient axis.
+
+### Layer
+**Absolute** — sound production (post-processing / DSP). HPSS consumes an already-rendered audio buffer (a voice stem, a bus sum, or a full mix: SP-001 FluidSynth output, SP-029 subtractive, VST stems) and emits *two* buffers — a harmonic stream and a percussive stream — that recombine to the input (up to mask leakage). It emits no MIDI (`concrete`) and designs no pitch pools (`abstract`). Candidate code path: `sound/effects/hpss.py` (new module, sibling to the existing spectral-domain processors `phase_vocoder.py`, `spectral_gate.py`, `lpc_synth.py`, `morph_filter.py`); the STFT framing/overlap-add machinery can be shared with SP-026.
+
+### Description
+Harmonic-Percussive Source Separation decomposes a mono (or per-channel) audio signal into two additive components: a **harmonic** part containing the pitched, slowly-evolving material (sustained notes, chords, vocals, pads — spectral energy that is *smooth over time*) and a **percussive** part containing the transient, broadband material (drums, attacks, plucks, noise bursts — spectral energy that is *smooth over frequency*). The separation exploits a single geometric fact about the magnitude spectrogram $Y[k,m]$: harmonic energy forms **horizontal ridges** (a pitched note persists across many frames at a near-constant frequency bin), while percussive energy forms **vertical ridges** (a transient spikes many bins at once for one or two frames). Applying a **median filter along the time axis** suppresses the transient spikes and leaves the harmonic ridges; applying a **median filter along the frequency axis** suppresses the tonal lines and leaves the transient spikes. A per-bin mask (binary winner-take-all, or a soft ratio) then splits the *complex* STFT, reusing the original phase, and the two streams are resynthesized via inverse STFT. The result is two musically coherent, independently processable stems from a single mix — the spectral-domain analogue of "remove the drums" / "remove the melody," achieved with no learning and $O(N \log N)$ cost.
+
+### Technical Mechanics
+
+**1. STFT.** Frame the signal with analysis window $w$ and hop $H$; take the complex spectrogram $X[k,m]$ and its magnitude $Y[k,m]=|X[k,m]|$ (FitzGerald uses the magnitude; power $|X|^2$ is an equally common variant).
+
+**2. Anisotropic median filtering.** Two enhanced spectrograms are computed with a moving median over a rectangular window:
+
+$$\tilde Y_h[k,m] = \mathrm{median}\big(Y[k,\,m-\tfrac{L_h-1}{2}:m+\tfrac{L_h-1}{2}]\big) \qquad (\text{time axis, per bin } k)$$
+
+$$\tilde Y_p[k,m] = \mathrm{median}\big(Y[k-\tfrac{L_p-1}{2}:k+\tfrac{L_p-1}{2},\,m]\big) \qquad (\text{frequency axis, per frame } m)$$
+
+$L_h$ (frames, e.g. $L_h\approx 17 \Rightarrow \sim 200$ ms at a 512-sample/11.6 ms hop) controls how long a tone must persist to count as "harmonic"; $L_p$ (bins, e.g. $L_p\approx 17$) controls how broad a burst must be to count as "percussive". Larger $L$ ⇒ cleaner separation ⇒ more smearing/artifacts.
+
+**3. Masks.** FitzGerald's **binary** mask:
+
+$$M_h[k,m] = \begin{cases} 1, & \tilde Y_h[k,m] > \tilde Y_p[k,m] \\ 0, & \text{otherwise}\end{cases}, \qquad M_p[k,m]=1-M_h[k,m]$$
+
+and the **soft** mask (fewer "musical noise" artifacts, smoother residual):
+
+$$M_h = \frac{\tilde Y_h}{\tilde Y_h + \tilde Y_p}, \qquad M_p = \frac{\tilde Y_p}{\tilde Y_h + \tilde Y_p}$$
+
+**4. Resynthesis.** The mask multiplies the *complex* STFT (phase is reused from the original — no phase estimation is attempted), then inverse STFT (overlap-add) reconstructs the two streams:
+
+$$x_h[n]=\mathrm{iSTFT}\big(M_h\odot X\big),\qquad x_p[n]=\mathrm{iSTFT}\big(M_p\odot X\big),\qquad x[n]\approx x_h[n]+x_p[n].$$
+
+**5. IRLS refinement (Driedger–Müller–Disch 2014).** Median filtering is replaced by a differentiable separation: minimize
+
+$$\sum_{k,m}\Big[ \tfrac12\big(Y - Y_h - Y_p\big)^2 + \lambda\, \big(H\, Y_h^{\,2} + P\, Y_p^{\,2}\big)\Big]$$
+
+where $H$ penalizes temporal non-smoothness (rows of a time-difference matrix) and $P$ penalizes spectral non-smoothness (columns of a frequency-difference matrix). Solving the resulting linear system with iterative reweighting (weights derived from the previous $Y_h, Y_p$ estimate) avoids the frame-length tuning of median filters and produces sharper, artifact-free masks at the cost of a few iterations.
+
+**6. Cascaded decomposition.** Apply HPSS, then re-apply it to the *residual* or to the harmonic stream, extracting a finer transient layer (e.g. ride-cymbal wash out of a harmonic pad) — a multi-scale "stem tree" rather than a single 2-way split.
+
+**7. Complexity.** One FFT + one IFFT per frame ($O(N\log N)$) plus two median filters. A naive median is $O(L)$ per bin with a sorting window; a sliding-window median (two heaps) or the running-histogram variant is $O(1)$ amortized, so the filter pass is $O(K\cdot M)$ — linear in the spectrogram. Total $O(N\log N)$ per frame, real-time for typical $N=1024\text{–}4096$. Fully deterministic (no RNG), so it satisfies the zero-drift gate trivially.
+
+### Musical Elements Framework
+
+| Element | Mechanism |
+|---|---|
+| **PITCH** | the harmonic stream is *all* pitched content: sustained melodies, chords, bass lines, and vocals live there. Its spectral ridges are the pitch-bearing partials; the percussive stream has no stable pitch (broadband transients). HPSS thus acts as a pitch/noise *splitter*, not a pitch detector |
+| **RHYTHM** | the percussive stream is *all* onset/transient content: kick, snare, hats, pluck attacks, and click transients. Its vertical ridges are the attack events; re-using the original phase preserves onset timing exactly. HPSS is effectively a transient *gate* — the percussive stem is a ready-made rhythm layer |
+| **HARMONY** | the harmonic stream's spectral envelope carries chord/scale identity (the sustained partials of a chord live entirely in $x_h$); separating first and *then* analyzing (chroma, SP-039-style peak tracking) is far more robust than analyzing the mix — the percussion no longer smears the harmonic estimate. Removing $x_p$ before chord extraction is the single biggest accuracy win |
+| **STRUCTURE** | per-section mask hardness + filter-length automation = macro-form. Verse = softer mask + short $L_h$ (keep attacks in the harmonic bed → intimate); chorus = hard binary mask + long $L_h$ (full drums/melody split → wide, punchy). Section joins crossfade the mask blend ratio |
+| **TEXTURE** | the harmonic/percussive *balance* after independent re-processing is the primary texture knob: heavy reverb + compression on $x_h$ with dry, gated $x_p$ = spacious yet punchy; the reverse = gritty, upfront. Cascaded HPSS yields intermediate layers (noise wash, rim shimmer) that thicken/thin texture at will |
+
+### UnitMatrix Integration
+
+- **Rows (Voices)** = two modes. **(a) Per-voice split** — render each voice, HPSS it, then re-process its two streams with *per-voice* chains: harmonic stream of the pad voice gets a long reverb + tilt EQ, its percussive stream is discarded; the drum voice's percussive stream gets transient shaping (SP-008 DRC), its harmonic stream (kick's resonant body) gets a sub-harmonic enhancer. Each row becomes a re-mixable harmonic/percussive pair. **(b) Bus split** — sum all voices to the mix, HPSS once, and treat the two streams as global layers: harmonic bus → stereo widening/reverb, percussive bus → transient punch. Mode (b) is the classic "de-drums / de-melody" remix workflow.
+
+- **Columns (Sections)** = `{STRUCTURE}` = `(mask_mode, L_h, L_p, softness, cascade_depth)` per section. Verse: soft mask, modest $L$; chorus: binary mask, long $L_h$ for a full split; bridge: high `cascade_depth` to extract an extra transient layer; a `mask_blend` parameter crossfades between the two stems at a section join (the source-separation analogue of SP-041 wavetable morphing).
+
+- **Cells (MusicUnit)** = `{RHYTHM}` → percussive-stream onset emphasis (transient shaper gain per cell); `{TEXTURE}` → mask hardness + filter lengths (softer mask = smearier, denser texture; binary = sharper); `{HARMONY}` → harmonic-stream brightness (EQ/reverb send on the extracted $x_h$). HPSS is a *render-stage* transform: compose and validate the `MusicUnit` grid (zero-drift gate) exactly as usual, then `produce()` runs the rendered buffers through HPSS before the post-FX chain.
+
+- **Flow**: `compose` (UnitMatrix MIDI) → `produce(method="SP-072")` → per-voice (or bus) HPSS → independent harmonic/percussive processing (SP-007 EQ, SP-008 DRC, SP-009/032 reverb, SP-071 plate on $x_h$) → re-sum → export WAV/OGG. Pairs with SP-039 (additive peak-tracking on the *separated* harmonic stream), SP-027 SMS (harmonic + noise components already separated — HPSS is the cheap, non-parametric alternative), and SP-026 (phase vocoder on the separated stems rather than the mix). Per the Method Hybridization rule, HPSS's percussive stream is a *sparse* transient layer — pair it with the harmonic stream's continuous pad/reverb fill (or a 026 DPSM layer) to keep the result flowing rather than staccato.
+
+### Pitfalls
+1. **Binary-mask "musical noise" / birdies** — the hard winner-take-all mask leaves isolated bins flipping between streams, audible as warbling "birdies" or flanging on vocals. Fix: use the soft mask (ratio $Y_h/(Y_h+Y_p)$) or the IRLS formulation; soften mask transitions with a time-smoothing (e.g. a short moving average on $M_h$) before multiplying.
+2. **Median-filter length coupling** — $L_h$ too short leaks sustained tones into the percussive stream (tonal "bongs" in the drum stem); $L_p$ too short leaks cymbal/hat brightness into the harmonic stream. There is no single ideal pair: tune per material (short $L_p$ for pitched-only sources, long $L_h$ for slow pads), or use IRLS to drop the length tuning entirely.
+3. **Sustained percussion misclassification** — a ride cymbal or tambourine *tail* is spectrally smooth over time and gets absorbed into the harmonic stream; a staccato piano/marimba *attack* is broadband and gets pulled into the percussive stream. Fix: accept the continuum (HPSS is a soft split, not a perfect classifier), or cascade a second HPSS pass on the residual to recover the intermediate layer.
+4. **Phase reuse smearing** — multiplying the original complex STFT by a real mask assumes the two sources share the original phase; where they overlap in time-frequency, each resynthesized stream carries the other's phase, causing mild smearing. Fix: finer masks (soft), larger hop (more overlap), or accept — it is the standard, near-transparent HPSS artifact.
+5. **Window/hop mismatch** — too-large a hop under-samples the transient in the time direction (percussive energy smears across frames); too-small a hop makes $L_h$ frames cover too little time to define "harmonic." Fix: fix hop at ~512 samples (11.6 ms at 44.1 kHz) and express $L_h$ in *seconds* (~150–250 ms), not frames, then convert.
+6. **Stereo phase/decorrelation** — running HPSS independently per L/R channel can decorrelate the stereo image of the two stems (the masks differ per channel). Fix: compute a *shared* mask from the mid (mono sum) magnitude and apply it to both channels, or operate on a mid/side decomposition and separate M and S independently.
+7. **DC / very-low-frequency leakage** — the median filters pass near-DC energy into whichever stream wins the low bins (often the harmonic side), bloating the harmonic stem with sub-bass rumble. Fix: high-pass the input (or the harmonic stream) at ~20–30 Hz before/after separation, mirroring the DC hygiene used in SP-071's tank.
+
+### Comparison With Related Methods
+
+| Method | Mechanism | Output | Iterative? | Cost |
+|---|---|---|---|---|
+| SP-027 SMS | sinusoidal peak tracking + noise residual | harmonic tracks + stochastic residual | no (peak-continuation) | O(K·N + N log N) |
+| SP-026 Phase Vocoder | STFT analysis/mod/synthesis | time/pitch-modified signal | no | O(N log N) |
+| SP-031 Cross-Synthesis | envelope transfer | one hybrid signal | no | O(N log N) |
+| Virtanen NMF (2003) | non-negative factorization masks | multiple sources | yes (EM/MU) | O(I·K·N) |
+| **SP-072 HPSS** | **two-axis median/IRLS masks** | **harmonic + percussive stems** | **no (median) / few (IRLS)** | **O(N log N)** |
+
+HPSS is the cheapest, most robust member of the source-separation family: it needs no training, no pitch model, and no iteration (median form), trading *source* identity (it can only split tonal vs transient, not "guitar vs vocal") for *speed* and *tunability*. It is the natural pre-processor for any downstream spectral method — separate first, then analyze/synthesize.
+
+### References
+- FitzGerald, D. (2010). "Harmonic/Percussive Separation Using Median Filtering." *Proc. 13th Int. Conf. on Digital Audio Effects (DAFx-10)*, Graz, Austria.
+- Driedger, J., Müller, M., & Disch, S. (2014). "Extending Harmonic-Percussive Separation of Audio Signals." *Proc. 15th Int. Society for Music Information Retrieval Conf. (ISMIR)*, Taipei, Taiwan.
+- Ono, N., Miyamoto, K., Le Roux, J., Kameoka, H., & Sagayama, S. (2008). "Separation of a Monaural Audio Signal into Harmonic/Percussive Components by Complementary Diffusion on Spectrogram." *Proc. EUSIPCO*, Lausanne.
+- Tachibana, H., Ono, N., & Sagayama, S. (2014). "Singing Voice Enhancement in Monaural Music Signals Based on Two-stage Harmonic/Percussive Sound Separation on Multiple Resolution Spectrograms." *IEEE/ACM Trans. Audio Speech Lang. Process.* 22(1).
+- Virtanen, T. (2007). "Monaural Sound Source Separation by Nonnegative Matrix Factorization with Temporal Continuity and Sparseness Criteria." *IEEE Trans. Audio Speech Lang. Process.* 15(3).
+- Rafii, Z., & Pardo, B. (2013). "REpeating Pattern Extraction Technique (REPET): A Simple Method for Music/Voice Separation." *IEEE Trans. Audio Speech Lang. Process.* 21(1) — the repeating-vs-variable alternative split.

@@ -242,6 +242,30 @@ the `Acoustic_Grand_Piano` program-0 fallback label. Muffling is inherent
 playing (the head out-rings the written note); REVERB_TAIL 2.2 s is the
 longest in the instrument set.
 
+**Vibraphone added** (2026-09-13): GM11, Percussion-family fifth entry — the
+struck-aluminium-bar metallophone with resonator tubes, a piano-style sustain
+pedal and the motor tremolo (instrument.md + vibraphone.py), verified
+end-to-end UnitMatrixComposer → zero-drift ✓ → MIDI → FluidSynth WAV ✓;
+RenderPipeline stem label `trackXX_Vibraphone.wav` ✓ (GM_PROGRAMS[11] =
+"Vibraphone" + FluidR3 preset 11 = "Vibraphone" — labels match exactly, no
+quirk). ModalSynth recommended with a custom `VIBRAPHONE_MODES` bank at the
+arch-tuned ratios **1 : 4 : 10** (fundamental, 2 octaves, octave+major 3rd)
+and LOW decay rates 0.30/0.60/1.10: late(1.0–1.5 s) rms/peak **0.445** vs the
+marimba preset's 0.0001 — a ~4400× longer ring, the inverse of the timpani
+case (which used the same ModalSynth `decay`-as-rate argument at the opposite
+extreme). Fundamental dominance confirmed (4× partial 13.0% and 10× 4.1% of
+f0). MOTOR_DEFAULTS (rate 5.0 Hz, depth 0.35) define the namesake amplitude
+tremolo — measured AM peak at the motor rate = 0.670 of the nearby envelope
+max. Identity: GM11 = vibraphone (vibraharp) — mellow arch-tuned aluminium
+bars, NON-transposing, second-most-popular solo keyboard-percussion after the
+marimba; line + harmony voice (four-mallet pianistic comping), NOT a bass
+voice. Range 48–89 = 4-octave models from C3 to the standard F6 top; the
+standard 3-octave instrument is F3–F6 (53–89). Solo-render spectral check:
+4–8 kHz buzz 0.8% (no comb-filtering). Empirical FluidR3 pitch sweep (RMS,
+notes 36–96): preset 11 audible 13/13, no gaps — SF2 never clips a
+composition. Karplus-Strong demoted to fallback (the bar is struck, not
+plucked; loop_gain 0.9975 approximates the multi-second ring only).
+
 ## Python usage
 
 ```python
@@ -284,6 +308,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Percussion | Marimba | 12 | 45–96 | lead, melody, accent, countermelody, harmony |
 | Percussion | Steel Drums | 114 | 55–96 | lead, melody, accent, countermelody, harmony, rhythm |
 | Percussion | Timpani | 47 | 36–65 | accent, rhythm, bass, drone |
+| Percussion | Vibraphone | 11 | 48–89 | lead, melody, harmony, countermelody, accent |
 | World | Sitar | 104 | 55–96 | lead, melody, ornament, drone |
 | World | Banjo | 105 | 46–93 | lead, melody, ornament, rhythm, accent |
 | World | Koto | 107 | 51–90 | lead, melody, ornament, drone, harmony |
@@ -317,6 +342,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 25 | Acoustic Guitar (nylon) | Acoustic_Guitar_nylon ✓ |
 | 12 | Marimba | Marimba ✓ |
 | 47 | Timpani | Timpani ✓ (GM_PROGRAMS[47] + FluidR3 preset 47 both "Timpani") |
+| 11 | Vibraphone | Vibraphone ✓ (GM_PROGRAMS[11] + FluidR3 preset 11 both "Vibraphone") |
 | 104 | Sitar | Sitar ✓ (GM_PROGRAMS[104] + FluidR3 preset 104 both "Sitar") |
 | 105 | Banjo | Banjo ✓ (GM_PROGRAMS[105] + FluidR3 preset 105 both "Banjo") |
 | 107 | Koto | Koto ✓ (GM_PROGRAMS[107] + FluidR3 preset 107 both "Koto") |
