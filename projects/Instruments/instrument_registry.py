@@ -55,6 +55,7 @@ _INSTRUMENT_MODULES = {
     "World.fiddle.fiddle": "fiddle",
     "Percussion.timpani.timpani": "timpani",
     "Vocal.human_voice.human_voice": "human_voice",
+    "Vocal.voice_like.voice_like_voice": "voice_like",
 }
 
 _FIELDS = (
