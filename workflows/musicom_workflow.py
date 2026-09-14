@@ -150,6 +150,7 @@ SP_METHODS = {
     "SP-072": ("sound.synthesis.critter_pad", "Three-Partial Pad Bank with Stochastic Microtonal Critters Layer (Brackish Pads-style)"),
     "SP-073": ("sound.synthesis.music_box", "Twin-Detuned-Comb Music Box Modal Synthesis (Muro Box N40-style)"),
     "SP-074": ("sound.generators.drum_machine", "Eight-Channel Sample Drum Machine + Sequencer (Bullfrog Drums-style)"),
+    "SP-075": ("sound.render.hybrid", "Voice-Like Instrument Hybrid Render (synthesized voice tracks + SoundFont backing)"),
 }
 
 
@@ -440,6 +441,36 @@ def produce(midi_path, method="SP-001", params=None, out_dir=None,
         subprocess.run(
             ["ffmpeg", "-y", "-loglevel", "error", "-i", str(wav_path),
              "-codec:a", "libopus", "-application", "voip", "-b:a", "48k", str(ogg_path)],
+            capture_output=True, text=True)
+        info.update({"wav_bytes": wav_path.stat().st_size,
+                     "ogg_bytes": ogg_path.stat().st_size if ogg_path.exists() else 0})
+        return ProduceResult(wav_path=str(wav_path), ogg_path=str(ogg_path),
+                             method=method, info=info)
+
+    if method == "SP-075":
+        # Voice-like hybrid: synthesize the "singing" tracks with
+        # VoiceLikeInstrument, render the rest with the soundfont.
+        # params["voice_instruments"] is a list aligned to the MIDI's
+        # note-bearing tracks (voice order); None = use the soundfont.
+        from sound.render.hybrid import render_hybrid
+        vi = params.get("voice_instruments")
+        if vi is None:
+            raise ValueError(
+                "SP-075 needs params['voice_instruments'] — a list aligned to "
+                "the MIDI's note-bearing tracks, e.g. ['talkbox', None, None]. "
+                "Voice order is the composer's add_voice() order.")
+        wav_path = out_dir / f"{base}-SP075.wav"
+        info = render_hybrid(
+            midi_path, vi, str(wav_path), sr=sr,
+            bpm=params.get("bpm"), vowels=params.get("vowels"),
+            voice_gain=params.get("voice_gain", 1.0),
+            backing_gain=params.get("backing_gain", 1.0),
+            seed=params.get("seed", 0))
+        ogg_path = out_dir / f"{base}-SP075.ogg"
+        subprocess.run(
+            ["ffmpeg", "-y", "-loglevel", "error", "-i", str(wav_path),
+             "-codec:a", "libopus", "-application", "voip", "-b:a", "48k",
+             str(ogg_path)],
             capture_output=True, text=True)
         info.update({"wav_bytes": wav_path.stat().st_size,
                      "ogg_bytes": ogg_path.stat().st_size if ogg_path.exists() else 0})
