@@ -1,14 +1,27 @@
 """Defines the Project, Section, and Voice classes for the music composition framework."""
-from typing import List
+from typing import TYPE_CHECKING, List
 
 from . import MusicLinearTime
 from .base import Base
 from .matrix import UnitMatrix
 from .time import MusicTimeGrid
-from .pitchclass import MusicPitchClassSet
 from .pitch import MusicPitchRange
 from .instrument import MidiInstrument
 from .timegrid import MusicRhythmPattern
+
+if TYPE_CHECKING:  # quarantined type, resolved lazily at runtime
+    from legacy.pitchclass import MusicPitchClassSet
+
+# Quarantined System A type, imported lazily: legacy/pitchclass.py imports
+# structures.pitch, which re-enters this package during __init__, so an eager
+# import here would raise a circular-import error. The name is resolved on
+# first attribute access; annotations referencing it use a string literal.
+def __getattr__(name: str):
+    """Lazily resolve the quarantined MusicPitchClassSet (PEP 562)."""
+    if name == "MusicPitchClassSet":
+        from legacy.pitchclass import MusicPitchClassSet as _M
+        return _M
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
 
 
 class MusicVoice(Base):
@@ -50,7 +63,7 @@ class MusicProject (Base):
     """Represents the entire project structure."""
     def __init__(self,
                  name: str = None,
-                 pitch_pattern: MusicPitchClassSet = None,
+                 pitch_pattern: "MusicPitchClassSet" = None,
                  time_grid: MusicTimeGrid = None,
                  rhythm_pattern : MusicRhythmPattern = None,
                  sections: List[MusicSection] = None,
