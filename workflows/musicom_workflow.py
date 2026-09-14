@@ -255,6 +255,12 @@ def compose(style="pop", method=None, form=None, key="C", bpm=None,
         from rules.subset_network import (patterns_from_degrees,
                                           PatternNetwork, standard_patterns,
                                           interval_vector, tension)
+        # The abstract->concrete bridge now lives in rules/realize.py instead
+        # of being six hardcoded inline lines here. realize_tonal_cluster()
+        # is byte-identical to the previous inline formula (pinned by
+        # tests/test_realize_bridge.py), so this refactor is provably
+        # output-neutral rather than approximately equivalent.
+        from rules.realize import realize_tonal_cluster
         rng = __import__("random").Random(seed)
         net_lib = PatternNetwork(standard_patterns())
         # anchor: tonic-major plus its P/L/R-close neighbors for the walk
@@ -271,10 +277,7 @@ def compose(style="pop", method=None, form=None, key="C", bpm=None,
         chord_tones_by_section = []
         for pid in walk:
             pat = net_lib.patterns[pid]
-            root_pc = min(pat.subset)
-            base = 48 + root_pc  # C3-based register
-            tones = [base + ((pc - root_pc) % 12) for pc in sorted(pat.subset)]
-            chord_tones_by_section.append(tones)
+            chord_tones_by_section.append(realize_tonal_cluster(pat))
         # provenance hook: the walk is embedded in the method string below
         method = f"{method}:subset_walk={','.join(walk)}"
     chord_roots = []
