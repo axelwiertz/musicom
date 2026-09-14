@@ -1,0 +1,13 @@
+{
+  "job": "random-style production (SP) layer-aligned",
+  "date": "2026-09-14",
+  "method": "SP-036",
+  "method_module": "sound.synthesis.formant_voice",
+  "method_desc": "Klatt-Cascade Formant Voice / Speech Synthesis (klattsch-style)",
+  "registry_source": "workflows.musicom_workflow.SP_METHODS",
+  "seed": 20260914,
+  "source_midi": "MIDI/lsystem_study.mid (copy of Styles/Experimental/032-lsystem-study/MIDI/lsystem_study.mid)",
+  "renderer": "Scripts/produce_sp036_choir_FINAL.py",
+  "verifier": "Scripts/verify_final.py",
+  "note": "V4 renderer; V1 (interp-stretch octave drop) and V3 (tiling while-loop hang) superseded and removed"
+}

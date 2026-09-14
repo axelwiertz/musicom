@@ -1,0 +1,16 @@
+{
+  "melody": {
+    "self": 35,
+    "neigh": 0,
+    "other": 29,
+    "skipped": 0,
+    "med_harm": 0.9000726460697472
+  },
+  "drone": {
+    "self": 8,
+    "neigh": 0,
+    "other": 0,
+    "skipped": 0,
+    "med_harm": 0.9665065940660167
+  }
+}

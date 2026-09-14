@@ -94,6 +94,7 @@ Classification of active Musicom composition methods categorized by their primar
 | **084** | concrete | Zipf–Mandelbrot Rank–Frequency Composition (ZMRC) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Ranking-imposed) | Grid-Locked / Continuous | Macro / Vocabulary | $\mathcal{O}(N)$ | Treats the piece as a text over a ranked musical vocabulary and samples tokens from a Zipf–Mandelbrot rank–frequency law $f(r) \propto (r+q)^{-s}$. Rank 1 = tonic/HOME (saturating), long tail = chromatic/TENSE (rare); exponent $s$ = vocabulary richness, shift $q$ = dominance ceiling, ranking order = tonal grammar. Macro-form = a per-section trajectory in $(s,q,\text{ranking})$ space. Empirical basis: pitch/rhythm/chord distributions in real music are Zipfian (Manaris 2003; Zanette 2006; Levitin 2012). Statistical foil to 002 Markov (marginal vs conditional) and 053 Lévy (rank vs step-length). |
 | **085** | concrete | Non-negative Matrix Factorization Composition (NMF-C) | **AI-Driven** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Learned-basis) | Grid-Locked / Continuous | Macro / Corpus | $\mathcal{O}(I \cdot K \cdot F \cdot T)$ | Factors a piano-roll/chromagram/spectrogram $V \approx WH$ into a non-negative parts dictionary $W$ (learned chord/PC-set voicings, rhythmic cells) and an activation matrix $H$ (onset-energy envelopes). Non-negativity forces additive, parts-based atoms — the learned $W$ is the "style", a designed/structured $H$ is the "piece". Rank $K$ = vocabulary/harmonic complexity; block structure of $H$ = macro-form; co-activation = harmony; activation sparsity = texture. The factorization ancestor of 046 VAE / 072 NFC / 074 RBM-C, with the Smaragdis-Brown transcription lineage; linear non-negative foil to the learned-transition 054 ATS. |
 | **086** | concrete | Hidden Markov Model Latent-State Composition (HMM-C) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Functional-grammar) | Grid-Locked / Continuous | Meso / Hidden Chain | $\mathcal{O}(I \cdot T \cdot S^2)$ train, $\mathcal{O}(T \cdot S^2)$ Viterbi | Generates music as the emission of a hidden Markov chain: latent states are tonal functions/chord regions/sections, emissions are pitch classes, rhythmic cells, and velocity levels. Transition matrix $A$ = harmonic grammar (state→state = chord progression), emission matrix $B$ = surface vocabulary, initial $\pi$ = opening. Composition = sample or Viterbi-decode the hidden path (forced per section), then emit; Baum–Welch (EM) learns $A,B$ from a corpus. Latent-state generalization of 002 Markov; discrete-state ancestor of 059 ESN-RC / 060 S4SC; hidden-variable counterpart to 064 MRFCC's spatial lattice. |
+| **087** | concrete | Multiple Viewpoint Systems Composition (MVS-C) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Ensemble-constrained) | Grid-Locked / Continuous | Meso / Variable-Order Context | $\mathcal{O}(N \cdot k)$ amortized, $\mathcal{O}(N \cdot k \cdot V)$ naive | Composes by combining many specialized statistical predictors (viewpoints: pitch, pitch-interval, contour, scale-degree, onset-interval, duration, metric-position, chord — plus linked product viewpoints) into one product-of-experts distribution over the next event, then sampling or argmax-decoding it. Backoff with PPM* escape adapts context order automatically; a long-term corpus model (style) and a short-term within-piece model (structure/repetition) are blended in log space (IDyOM). Entropy-based viewpoint selection drops redundant features. Ensemble counterpart to 002 Markov (single viewpoint) / 067 Factor Oracle (single automaton); count-based ancestor of 054 ATS attention. |
 # Sound Production Methods Framework
 
 Sound production translates symbolic MIDI UnitMatrix data into final acoustic air pressure. Methods are categorized by execution layer: **Hardware/Acoustic Integration**, **Synthesis Engines**, or **Post-Processing / DSP**.
@@ -173,6 +174,7 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 | **SP-070** | Feedback Amplitude Modulation Synthesis (FBAM) | **Synthesis Engines** | Harmonic-Rich / Formant / Distortion Timbres | Nonlinear synthesis where a sinusoidal carrier is amplitude-modulated by its own fed-back output: $y(n)=\cos(\omega_0 n)[1+\beta\,y(n-1)]$ — a periodically linear time-varying one-pole filter whose coefficient is the input itself. Single scalar $\beta$ sweeps brightness from a pure sinusoid to a full harmonic pulse train with no spectral holes; 6 variations add feedforward delay, allpass phase distortion, heterodyning (double-carrier formants), waveshaping (odd/even-harmonic control), non-unitary delay, and decoupled carrier/modulator (adaptive distortion effect). $\mathcal{O}(1)$ per sample (1 mul + 1 add + 1 lookup); the feedback-amplitude cousin of FM SP-010/017 and phase distortion SP-030. |
 | **SP-071** | Dattorro Plate Reverb (DPR) | **Post-Processing / DSP** | Dense / Warm Algorithmic Plate Reverb Tail | Algorithmic plate reverberator in the style of the EMT 140: four input all-pass lattice diffusers decorrelate the signal into a recirculating "figure-eight" tank (two cross-coupled delay-line loops with in-loop one-pole HF-damping and four modulated all-pass diffusers), read out through seven ±0.6-weighted taps into a synthetic stereo image. Runs at a nominal 29761 Hz with all delays scaled by $f_s/29761$. Slow LFO modulation smears tank modes; decay/damping/diffusion/predelay are the knobs. $O(1)$ per sample; the dense, warm plate-class member between SP-009 (convolution IR), SP-032 (FDN) and SP-058 (spring). |
 | **SP-072** | Harmonic-Percussive Source Separation (HPSS) | **Post-Processing / DSP** | Tonal/Transient Stem Split (Harmonic + Percussive Buffers) | Splits a rendered audio buffer into two re-mixable stems via anisotropic median filtering (or IRLS) of the magnitude STFT: a time-axis median extracts the horizontal spectral ridges (harmonic/sustained), a frequency-axis median extracts the vertical ridges (percussive/transient), and a binary or soft mask splits the complex STFT with the original phase. No training, no pitch model; $O(N \log N)$ per frame. The non-parametric source-separation counterpart to SP-026 phase vocoder / SP-027 SMS / SP-031 cross-synthesis. |
+| **SP-073** | Transient Shaping via Differential Envelope Processing (TSDE) | **Post-Processing / DSP** | Transient/Punch & Sustain Shaping (Level-Independent Dynamics) | Reshapes the attack/sustain balance of a rendered buffer by riding a gain derived from two parallel one-pole envelope followers (fast peak detector vs slow sustain detector); the *difference* is the transient content, boosted/attenuated independently by Attack and Sustain gains and recombined with the original phase/time untouched. No threshold, no ratio, level-independent; the SPL Transient Designer differential-envelope technique. $O(1)$ per sample. The transient-shaping counterpart to SP-008 (threshold DRC) and the time-domain partner of SP-072 (frequency-domain split). |
 |---|
 
 
@@ -17540,3 +17542,170 @@ HPSS is the cheapest, most robust member of the source-separation family: it nee
 - Tachibana, H., Ono, N., & Sagayama, S. (2014). "Singing Voice Enhancement in Monaural Music Signals Based on Two-stage Harmonic/Percussive Sound Separation on Multiple Resolution Spectrograms." *IEEE/ACM Trans. Audio Speech Lang. Process.* 22(1).
 - Virtanen, T. (2007). "Monaural Sound Source Separation by Nonnegative Matrix Factorization with Temporal Continuity and Sparseness Criteria." *IEEE Trans. Audio Speech Lang. Process.* 15(3).
 - Rafii, Z., & Pardo, B. (2013). "REpeating Pattern Extraction Technique (REPET): A Simple Method for Music/Voice Separation." *IEEE Trans. Audio Speech Lang. Process.* 21(1) — the repeating-vs-variable alternative split.
+# Multiple Viewpoint Systems Composition (MVS-C) (Method 087)
+
+### Source
+The Multiple Viewpoint Systems (MVS) framework was introduced by **Darrell Conklin & Ian H. Witten (1995), "Multiple Viewpoint Systems for Music Prediction," *Journal of New Music Research* 24(1), 51–73**, as a principled architecture for combining many specialized statistical models of a musical surface into a single predictor. Its variable-order backbone descends from **Cleary & Witten (1984), "Data Compression Using Adaptive Coding and Partial String Matching," *IEEE Transactions on Communications* 32(4), 396–402** (the PPM family), and its generative use is consolidated in **Conklin (2003), "Music Generation from Statistical Models," *Proc. AISB Symposium on AI and Creativity in the Arts and Sciences***. The strongest contemporary extension is **Marcus Pearce's IDyOM (Information Dynamics of Music)**, first fully specified in **Pearce (2005), "The Construction and Evaluation of Statistical Models of Melodic Structure in Music Perception and Composition," PhD thesis, City University London**, which added the **long-term/short-term model split** (LTM = corpus-trained viewpoints, STM = viewpoints trained incrementally on the piece so far) and the PPM*-style escape scheme, and which was validated as a model of human melodic expectation in **Pearce & Wiggins (2006), "Expectation in Melody: The Influence of Context and Learning," *Music Perception* 23(5), 377–405**. MVS-C inverts the prediction task into generation: the combined next-event distribution that MVS computes for *analysis/expectation* is sampled from to *compose*.
+
+### Layer
+**concrete** — emits actual `MusicEvent`s (pitch, onset, duration) into UnitMatrix cells by sampling (or argmax-decoding) the combined next-event distribution at each step; feeds `generators/`. The per-section viewpoint constraints and the LTM/STM blend are design-time parameters (a kind of abstract plan), but the method's output is resolved note events, so it is **concrete**. Candidate code path: `generators/multiple_viewpoint.py`.
+
+### Description
+An MVS treats a musical surface as a sequence of **events** (each a tuple of attributes: onset time, pitch, duration, voice, metric position). A **viewpoint** τ is a partial function from the event history to a feature value drawn from a finite **type** [τ]:
+
+- **Primitive viewpoints** read event fields directly: onset (`O`), pitch (`P`), duration (`D`), metric position (`M`).
+- **Derived viewpoints** are computed from primitives: pitch interval (`int = P_i − P_{i−1}`), pitch contour (`up/down/same`), onset interval (`IOI = O_i − O_{i−1}`), scale degree (`P mod 12` referenced to the key).
+- **Linked viewpoints** are Cartesian products of two types, e.g. ⟨pitch × metric position⟩ or ⟨interval × contour⟩, which model feature *interactions*: "what pitch is likely, given this beat position?" is a single conditional distribution over the product alphabet.
+
+For each viewpoint, an independent **viewpoint model** estimates the conditional distribution of the next event's τ-value given the history, `P(τ(e_i) | e_1 … e_{i−1})`, by counting occurrences with a **backoff/escape** scheme (PPM*: a fixed-order model that "escapes" with probability `e` to a lower-order model when the full context is unseen, so the effective context length adapts automatically). A **long-term model (LTM)** is trained on a corpus (style); a **short-term model (STM)** is trained incrementally on the piece composed so far (within-piece repetition and structure). The two are combined in log space.
+
+**Composition** is the generative direction. At each step, every active viewpoint τ proposes a distribution over its feature; the ensemble prediction is the **normalized product-of-experts**:
+
+`P(x | h) = (1/Z) · Π_{τ∈Φ} P(τ(x) | h)^{w_τ},   Z = Σ_x Π_{τ∈Φ} P(τ(x) | h)^{w_τ}`
+
+where `w_τ` is a viewpoint weight (from entropy-based selection) and `x` ranges over the candidate next events. The next event is drawn from `P(x|h)` (stochastic) or taken as `argmax_x` (deterministic per seed). **Entropy-based viewpoint selection** (Conklin 1995) ranks viewpoints by held-out cross-entropy and keeps only the most informative, so the ensemble never drowns in redundant features.
+
+### Technical Mechanics
+
+**1. Event alphabet and viewpoints.** A next-event candidate `x` is decoded by *each* viewpoint into its own feature; the product is taken over the *agreement* between viewpoints. Two viewpoints that disagree (e.g. pitch-interval prefers an upward leap while contour-viewpoint prefers stepwise motion) produce a low combined mass, so the ensemble naturally smooths melodic leaps, rhythm, and chord-tone placement.
+
+**2. Backoff with escape (PPM*).** For a viewpoint with a context of maximal order `k`, the estimate at the actual (possibly shorter) matched context `c` is
+
+`P(τ|h) = c(τ,h)/(T(h))`  when τ was seen in context `h`, else `P(τ|h) = e(h) · P(τ|h′)`,
+
+with `h′` the suffix of `h` of length `|h|−1`, `e(h)` the escape (mass allocated to unseen continuations), `c(τ,h)` the count, and `T(h)` the total count at context `h`. This mirrors PPM blending and guarantees no zero-probability tokens (fixes the HMM-086 unseen-symbol pitfall by construction).
+
+**3. LTM/STM combination (IDyOM).** The two model families are combined by another product-of-experts in log space:
+
+`log P(x|h) = α · log P_LTM(x|h) + (1−α) · log P_STM(x|h) − log Z,`
+
+with `α` a global blend (or per-viewpoint). Early in the piece (STM nearly empty) the LTM dominates (style); later the STM's memory of the piece's own motifs dominates (structure, repetition, closure). This is the mechanism that turns a "prediction" model into a *form-aware* generator.
+
+**4. Complexity.** With `N` events, `k` active viewpoints, and trie/suffix-tree indexing, prediction is `O(N · k)` amortized (each viewpoint is a fixed-order count over a hashed context); naive per-step scan is `O(N · k · V)` with `V` the largest type alphabet. Training the LTM is `O(C · k)` over the corpus `C`. All counting is deterministic per seed; the RNG is seeded for sampling.
+
+**5. Underflow.** The product-of-experts normalizer `Z` decays with `k`; compute everything in log space (`log P` sums) and renormalize via log-sum-exp.
+
+### Musical Elements Framework
+
+| Element | Mechanism |
+|---|---|
+| **PITCH** | the pitch viewpoint `P` and the derived interval/contour/scale-degree viewpoints jointly shape melody. The ensemble product means a pitch is likely only if it is plausible under *all* viewpoints at once — scale-degree viewpoint keeps it in key, interval viewpoint keeps it singable, contour viewpoint shapes the phrase arc. `argmax` decoding = a deterministic "most expected" melody; sampling = an organic, expectation-guided melody |
+| **RHYTHM** | the onset-interval (`IOI`) and duration viewpoints generate the rhythm; the metric-position viewpoint is the strongest rhythmic constraint (an onset at a weak beat is assigned low mass unless the LTM learned it as idiomatic, e.g. syncopation in the style). Linked ⟨IOI × metric-position⟩ viewpoints give beat-conditional groove |
+| **HARMONY** | a chord/scale-degree linked viewpoint conditions pitch on the current chord tone or HOME/LIFT/TENSE/TURN function. The LTM, trained on a harmonic corpus, encodes the style's chord-vocabulary; the STM over chord symbols composes progressions by the same backoff machinery. Harmony is thus a *viewpoint over pitch*, not a separate layer — the ensemble decides pitch and chord-tone membership together |
+| **STRUCTURE** | the STM is the structure engine: motifs composed early are re-expected later (their contexts now have high counts), producing recapitulation, sequence, and return *without an explicit form model*. A per-section viewpoint schedule (which viewpoints are active, and their weights `w_τ`) is the macro-form — chorus activates high-weight interval+contour viewpoints (singable, directed), bridge activates the LTM-only blend (`α=1`) for novelty |
+| **TEXTURE** | viewpoint count and entropy set density: a large active ensemble with high per-viewpoint entropy = varied, ornamental texture; a small ensemble with peaked distributions = sparse, ostinato texture. The STM's within-piece repetition (its count inflation on recurring motifs) thickens or thins texture as motifs recur |
+
+### UnitMatrix Integration (Voices & Sections)
+
+- **Rows (Voices)** = per-voice viewpoint ensembles. Each voice runs its own LTM/STM (its own pitch/duration viewpoints); a **shared linked viewpoint** over the chord/scale couples them vertically (every voice's pitch is conditioned on the *same* chord symbol, so the vertical stack is consonant). Alternatively a **joint product viewpoint** over the pitch vector of all voices predicts the whole chord at once (the MVS analogue of 064 MRFCC's vertical clique potentials). Independent per-voice STMs = voice independence; shared chord viewpoint = vertical coherence.
+- **Columns (Sections)** = viewpoint schedules. Each section records `(active_viewpoints, weights, alpha_blend, forced_feature_ranges)`. Intro = high `α` (LTM/style), sparse active set (thin texture); verse = balanced LTM/STM, metric-position viewpoint locked to the verse groove; chorus = full ensemble with high interval/contour weights (directed, memorable); bridge = STM suppressed (`α≈1`, novelty from pure style); outro = a forced chord/scale-degree range (cadence on finalis) + terminal metric-position constraint.
+- **Cells (MusicUnit)** = one sampled (or argmax-decoded) next event `x` = `{PITCH}` (pitch viewpoint output), `{RHYTHM}` (IOI + duration viewpoints), `{HARMONY}` (chord/scale-degree linked viewpoint → function label), `{TEXTURE}` (ensemble entropy → accent/density). Deterministic per seed (seeded RNG + fixed `k` + fixed blend + `argmax` mode) → zero-drift gate holds; hand each cell to `create_note_unit`/`create_chord_unit` and call `composer.validate()` before `to_midi` (per AGENTS.md).
+- **Flow**: `train_ltm(corpus, viewpoints)` → `select_viewpoints(heldout)` → `per_section = viewpoint_schedules()` → for each step, `predict(history, active, α)` (product-of-experts in log space) → `sample`/`argmax` → fill cell → validate → export.
+
+### Pitfalls
+1. **Zero-frequency / cold-start** — the STM is empty at step 1 (all contexts unseen), so it contributes a flat prior; the ensemble degenerates to the LTM. Fix: the PPM* escape allocates the unseen mass to the LTM gracefully; never divide by zero (escape `e(h)=1` when `T(h)=0`).
+2. **Viewpoint explosion** — linked viewpoints over `V1 × V2` alphabets blow up to `|V1|·|V2|` states with sparse counts (the "curse of the linked product"). Fix: link only genuinely interacting features (pitch × metric-position, not pitch × duration × contour × IOI all at once), and rely on entropy-based selection to drop weak links.
+3. **Product-of-experts underflow** — `Π P_τ` decays fast in `k`; the normalizer `Z` underflows at machine precision. Fix: sum in log space (log-sum-exp), exactly as in 086 HMM-C.
+4. **Redundant viewpoint double-counting** — pitch and scale-degree and interval are not independent; giving all three full weight over-counts the same evidence and over-sharpens the distribution. Fix: entropy-based viewpoint selection (keep the single most informative of a correlated cluster) or down-weight correlated viewpoints.
+5. **STM recency lock-in** — a motif composed early accumulates STM count mass and can trap the piece in a loop (the STM keeps re-predicting its own output). Fix: decay STM counts (forget factor), cap context order `k`, or ramp `α` down toward the LTM in development sections.
+6. **Sparse/staccato emission hazard** — per-event sampling with a peaked duration viewpoint (short notes) can produce gap-filled textures, especially with a sparse active set. Per the Method Hybridization rule, pair MVS-C with a continuous fill layer (026 DPSM arpeggios, sustained pad, or walking bass) when it is the sole rhythmic generator.
+7. **Selection overfitting** — entropy-based viewpoint selection on a small held-out set can keep a viewpoint that overfits the held-out excerpt. Fix: cross-validate the selection, and cap the number of active viewpoints regardless of held-out entropy.
+
+### Comparison With Related Methods
+| Method | State model | Combination | Long-range structure | Generation |
+|---|---|---|---|---|
+| 002 Markov | fixed-order observed state | single transition matrix | none (order `k`) | sample next token |
+| 067 Factor Oracle | unbounded suffix links | single automaton | suffix-link cycles = motifs | stochastic suffix recombination |
+| 086 HMM-C | discrete hidden chain | single emission grammar | transition grammar + section forcing | sample/Viterbi emission |
+| 054 ATS | transformer self-attention | learned token prediction | autoregressive context | greedy/sampled token |
+| **087 MVS-C** | **ensemble of viewpoint models** | **product-of-experts over viewpoints** | **LTM/STM blend + STM motif recency** | **sample/argmax combined distribution** |
+
+MVS-C is the *combination* framework: rather than committing to one state representation, it composes by making many specialized predictors agree. It generalizes 002 Markov (a single fixed-order viewpoint) and 067 Factor Oracle (a single variable-order automaton) into a weighted ensemble of arbitrarily many features, and it is the interpretable, count-based ancestor of 054 ATS's learned attention — the product-of-experts over viewpoints plays the role attention plays over tokens.
+
+### References
+- Conklin, D., & Witten, I. H. (1995). "Multiple Viewpoint Systems for Music Prediction." *Journal of New Music Research* 24(1), 51–73.
+- Cleary, J. G., & Witten, I. H. (1984). "Data Compression Using Adaptive Coding and Partial String Matching." *IEEE Transactions on Communications* 32(4), 396–402.
+- Conklin, D. (2003). "Music Generation from Statistical Models." *Proc. AISB Symposium on AI and Creativity in the Arts and Sciences*, Aberystwyth.
+- Pearce, M. T. (2005). "The Construction and Evaluation of Statistical Models of Melodic Structure in Music Perception and Composition." PhD thesis, Department of Computing, City University London.
+- Pearce, M. T., & Wiggins, G. A. (2006). "Expectation in Melody: The Influence of Context and Learning." *Music Perception* 23(5), 377–405.
+- Pearce, M. T., Ruiz, M. H., Kapasi, S., Wiggins, G. A., & Bhattacharya, J. (2010). "Unsupervised Statistical Learning Underpins Computational, Behavioural, and Neural Manifestations of Musical Expectation." *NeuroImage* 50(1), 302–313.
+
+
+# Transient Shaping via Differential Envelope Processing (TSDE) (Method SP-073)
+
+### Source
+
+The **differential envelope** technique is the working principle of the **SPL Transient Designer** (1998, SPL electronics GmbH — Hermann Gier / Wolfgang Neumann), the first dedicated hardware "transient shaper" and still the canonical reference. Its patent/whitepaper describes *Differential Envelope Technology (DET)*: instead of threshold-and-ratio dynamics (a compressor), the signal is split into a **fast attack envelope** and a **slow sustain envelope**, and the *difference* between them is treated as the transient content. Two independent controls — **Attack** and **Sustain** — boost or attenuate that difference relative to the steady body, reshaping punch and density without any sidechain, ratio, or make-up gain. The technique builds on the one-pole envelope-follower literature (analog peak/RMS detectors; see Blesser 1969, "Audio dynamic range compression for minimum perceived distortion", and the envelope-follower section of Zölzer, *DAFX*, 2nd ed. 2011, ch. on dynamics). In the Musicom catalog TSDE fills the **transient/dynamics-shaping gap** left by SP-008 (DRC — a *threshold* processor that controls loudness) and SP-072 (HPSS — a *separation* processor that splits harmonic vs percussive stems): TSDE is a *level-independent* envelope-morphing processor that changes the attack/sustain *shape* of each note without changing its level. It is the time-domain counterpart to SP-072's frequency-domain split and the inverse emphasis of SP-006 (which *adds* micro-timing jitter; TSDE *accentuates* the attack that jitter preserves).
+
+### Layer
+
+**absolute** (sound production — post-processing / DSP).
+
+### Description
+
+Transient shaping via differential envelope processing reshapes the attack/sustain balance of a rendered audio buffer by riding a time-varying gain derived from *two* parallel envelope followers running at different speeds. A fast peak detector tracks the sharp leading edge of each onset; a slow RMS (or averaged-peak) detector tracks the sustained body. The transient component is the *excess* of the fast envelope over the slow envelope. An **Attack** gain multiplies that excess (more attack = sharper, punchier onsets; less = rounder, softer), and a **Sustain** gain multiplies the residual body (more sustain = longer, fuller decay/body; less = tighter, more gated). The two are recombined into a single time-varying gain $g[n]$ applied to the original signal, so the output is exactly the input rescaled in level-per-instant — pitch, timing, and phase are untouched. Unlike a compressor (SP-008) there is no threshold and no ratio: a quiet pluck gets the same relative attack boost as a loud one, which is why TSDE is described as *level-independent*. It is $O(1)$ per sample per voice (two one-pole smoothers + one multiply), fully deterministic, and trivially satisfies the zero-drift gate.
+
+### Technical Mechanics
+
+**1. Input.** Rendered mono/stereo buffer $x[n]$, sample rate $f_s$.
+
+**2. Dual envelope followers.** Two one-pole smoothers track the instantaneous level with different time constants. A one-pole envelope follower with attack coefficient $\alpha_a$ and release coefficient $\alpha_r$ is
+
+$$E[n]=\alpha\,|x[n]|+(1-\alpha)\,E[n-1],\qquad \alpha=\begin{cases}\alpha_a,& |x[n]|>E[n-1]\\ \alpha_r,& \text{otherwise}\end{cases},$$
+
+with the coefficient derived from a time constant $\tau$ via $\alpha=1-e^{-1/(\tau f_s)}$. Two followers run in parallel:
+
+- **Fast peak detector** $E_f$: $\tau_a\approx 1\text{–}5$ ms attack, $\tau_r\approx 30\text{–}80$ ms release — rides the transient leading edge and decays quickly.
+- **Slow sustain detector** $E_s$: $\tau_a\approx 20\text{–}60$ ms, $\tau_r\approx 300\text{–}800$ ms (RMS smoothing optional) — rides the steady body and ignores the brief attack.
+
+**3. Differential decomposition.** The transient content is the fast envelope's excess over the slow envelope (clamped non-negative so the gain never boosts below the body):
+
+$$T[n]=\max\!\big(0,\; E_f[n]-E_s[n]\big), \qquad B[n]=E_s[n],$$
+
+so the instantaneous level is approximated as a *sustain body* $B[n]$ plus a *transient excess* $T[n]$. The normalized transient mix is
+
+$$m[n]=\frac{T[n]}{T[n]+B[n]+\varepsilon},\qquad \varepsilon>0.$$
+
+**4. Gain riding.** With **Attack** gain $A$ and **Sustain** gain $S$ (both $\geq 0$, unity = neutral):
+
+$$g[n]=A\,m[n]+S\big(1-m[n]\big)=S+(A-S)\,m[n].$$
+
+The output is a pure level rescalement of the input, then optionally soft-limited:
+
+$$y[n]=x[n]\,g[n],\qquad y[n]\leftarrow \tanh\text{-softclip}\big(y[n]\big).$$
+
+- $A>1,\ S=1$: the transient excess is boosted → sharper, punchier attacks (kick/snare "smack", pluck "snap").
+- $A<1,\ S=1$: transients are pulled down → notes round off, drums soften into a pad-like wash.
+- $S>1,\ A=1$: the sustained body is raised → longer, fuller decay/ring; pads and held chords bloom.
+- $S<1,\ A=1$: the body is lowered between onsets → the signal tightens and "gates" (a transient designer can emulate a gate this way, hence the family relationship to SP-noise-gate behavior).
+
+**5. Smoothing & make-up.** Because $g[n]$ changes per sample, hard steps in $g$ become audible clicks; a short lowpass (e.g. one-pole, $\tau\approx 5$ ms) on $g[n]$ removes zipper noise. A make-up gain or post-limiter (SP-008 DRC) compensates for the level change so the transform reads as a *shape* change, not a loudness change. An optional look-ahead delay (a few ms) lets $E_f$ catch a full attack before the gain is applied, for a "true zero-attack" response.
+
+**6. Complexity.** Two one-pole smoothers and one multiply per sample per channel = $O(1)$ per sample, no FFT, no lookahead buffer (unless the optional delay is used), fully deterministic — no RNG, so the zero-drift gate passes trivially. Parallel-processing variant: send the transient component $x_T[n]=x[n]\,m[n]$ through a saturator (SP-062 ADAA) and the sustain component $x_S[n]=x[n](1-m[n])$ through a compressor/expander (SP-008), then re-sum — "parallel transient design" giving independent timbre chains on the attack and the body.
+
+### Musical Elements Framework
+
+| Element | Mechanism |
+|---|---|
+| **PITCH** | untouched — TSDE is a gain-riding transform; no resampling, no phase modification, so pitch and tuning are preserved exactly (contrast SP-037 PSOLA / SP-026 phase vocoder, which move pitch) |
+| **RHYTHM** | the Attack knob is a *rhythmic accent control*: boosting $A$ sharpens every onset, making the grid punch through sparse Euclidean (011) / isorhythmic (032) patterns that otherwise read as staccato taps; cutting $A$ pushes attacks back into a wash. Attack automation per cell = a programmable "accent lane" (the X0X accent channel, but for arbitrary rendered audio) |
+| **HARMONY** | the Sustain knob governs harmonic *body*: raising $S$ extends and fills the decay/ring of chordal content (a held triad's partials bloom), effectively a spectral-density control on sustained harmony; lowering $S$ pulls sustained chords toward staccato, thinning the harmonic bed |
+| **STRUCTURE** | per-section $A,S$ automation = macro-form. Verse = low $A$, high $S$ (soft, intimate, pads forward); chorus = high $A$, moderate $S$ (punchy, drums forward); bridge = low $A$, low $S$ (gated, tense); section joins crossfade $A$ and $S$ smoothly |
+| **TEXTURE** | the primary texture knob: the $A/S$ balance sets the transient/sustained ratio that SP-072 would otherwise need a full stem split to achieve. High-$A$/low-$S$ = dry, percussive, upfront; low-$A$/high-$S$ = smooth, liquid, ambient. A mild $A$ boost on a continuous pad layer (Method Hybridization rule) adds a defined pulse to otherwise unarticulated fill |
+
+### UnitMatrix Integration
+
+- **Rows (Voices)** = per-voice TSDE instances. Kick/snare/hat voices get $A>1$ (attack boost, punch); pad/string voices get $S>1$ (sustain bloom); bass gets $A\approx1.2, S\approx1.1$ (defined attack + body). Each row can also split its own transient/sustain components into parallel FX (transient → SP-062 saturation, sustain → SP-008 compression).
+- **Columns (Sections)** = `{STRUCTURE}` = `(attack, sustain, attack_tau, release_tau, makeup)` per section. The section profile sets the default $A,S$; a per-section automation curve (attack ramp into a chorus, sustain fall into a bridge) is the macro-form envelope.
+- **Cells (MusicUnit)** = `{RHYTHM}` → per-cell attack accent (an accent lane mapping a cell's `{RHYTHM}` density to an $A$ offset); `{HARMONY}` → per-cell sustain offset (chord cells get a small $S$ lift to ring through); `{TEXTURE}` → the $A/S$ balance itself. TSDE is a *render-stage* transform: compose and validate the `MusicUnit` grid exactly as usual (zero-drift gate), then `produce()` runs the rendered buffers through TSDE before the post-FX chain.
+- **Flow**: `compose` (UnitMatrix MIDI) → `produce(method="SP-073")` → per-voice TSDE (with per-section $A,S$) → optional parallel transient/sustain FX (SP-062, SP-008) → re-sum → SP-007 EQ / SP-009/032 reverb on the sustained body → export WAV/OGG. Pairs naturally with SP-072 (HPSS): run HPSS first to get a clean percussive stem, TSDE that stem for maximum punch, and TSDE the harmonic stem for sustain bloom; pairs with SP-006 (humanization adds the micro-timing TSDE then accents) and SP-008 (post-limiter after TSDE make-up gain).
+
+### Pitfalls
+
+1. **Envelope "pumping" / breathing** — a too-fast release on $E_f$ (or too-slow attack on $E_s$) makes $g[n]$ ride the audio itself, causing audible level modulation ("pumping") on sustained material. Fix: set $E_s$ attack/release slow enough to ignore individual notes ($\tau_r\ge 300$ ms), and lowpass the gain $g[n]$ at ~5 ms to remove per-sample ripple.
+2. **Clicks from gain steps** — abrupt changes in $A$/$S$ (or a hard $m[n]$ switch) create discontinuities in $y[n]$. Fix: smooth the gain with a short one-pole lowpass, and ramp $A,S$ over ~5–10 ms when automating.
+3. **Sub-bass modulation / wobble** — envelope followers driven by low-frequency content (kick body, sub-bass) impose a slow gain wobble on the whole signal. Fix: high-pass the *sidechain* (the envelope input) at ~80–150 Hz so only mid/high transient energy drives $T[n]$; keep the audio path full-bandwidth.
+4. **Clipping on extreme boosts** — $A$ or $S$ well above unity multiplies peaks past 0 dBFS. Fix: apply a make-up gain *down* after boosting, and a soft-clip/limiter (SP-008) at the output; keep the transform perceptually level-matched (shape change, not loudness change).
+5. **Latency-free attack is approximate** — a causal envelope follower can only react after the onset begins; a very sharp first-sample attack gets one sample of the un-boosted gain. Fix: the optional look-ahead delay (2–5 ms) lets $E_f$ settle before the gain is applied, at the cost of tiny latency (acceptable at render time).
+6. **Stereo image smearing** — running TSDE independently on L/R with independent $m[n]$ can wobble the phantom center. Fix: derive a *shared* gain $g[n]$ from the mid (mono sum) envelope and apply it to both channels, preserving the image; or run TSDE on a mid/side pair and shape M and S separately.
+7. **Confusion with compression** — TSDE is *not* a compressor: it has no threshold or ratio and is level-independent (a quiet transient gets the same relative accent as a loud one). Do not use TSDE to control overall loudness (that is SP-008's job); use TSDE to reshape the attack/sustain *shape* and let SP-008 handle the level afterwards.

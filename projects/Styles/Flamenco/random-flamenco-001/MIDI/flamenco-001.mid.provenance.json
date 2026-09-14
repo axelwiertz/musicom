@@ -1,0 +1,37 @@
+{
+  "artifact": "flamenco-001.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom_workflow.compose(style=flamenco, method=001)",
+  "sources": [
+    "style_registry:flamenco",
+    "method:001"
+  ],
+  "parameters": {
+    "bpm": 130,
+    "form": "intro-falseta-letra-falseta-cierre",
+    "voices": [
+      [
+        "Lead",
+        "Flute"
+      ],
+      [
+        "Guitar",
+        "Acoustic Guitar"
+      ],
+      [
+        "Bass",
+        "Double Bass"
+      ],
+      [
+        "Drums",
+        "Drum Kit"
+      ]
+    ],
+    "seed": null
+  },
+  "notes": "",
+  "sha256": "690db4af609c5eef821de49d09f70043d23ddd802bb14d96b0a28376be59a2f4",
+  "bytes": 2182,
+  "created_utc": "2026-09-14T18:05:56.607135+00:00",
+  "provenance_version": "1.0"
+}

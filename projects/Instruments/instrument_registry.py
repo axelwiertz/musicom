@@ -26,6 +26,7 @@ if _INSTR_DIR not in sys.path:
 # module path (relative to Instruments dir) -> registry key
 _INSTRUMENT_MODULES = {
     "Strings.violin.violin": "violin",
+    "Strings.harp.harp": "harp",
     "Strings.viola.viola": "viola",
     "Strings.cello.cello": "cello",
     "Strings.double_bass.double_bass": "double_bass",
@@ -180,6 +181,7 @@ ALL_INSTRUMENTS = _load_all()
 
 # Convenience: uppercase short names
 VIOLIN = ALL_INSTRUMENTS["violin"]
+HARP = ALL_INSTRUMENTS["harp"]
 VIOLA = ALL_INSTRUMENTS["viola"]
 CELLO = ALL_INSTRUMENTS["cello"]
 DOUBLE_BASS = ALL_INSTRUMENTS["double_bass"]
@@ -259,8 +261,10 @@ def registry_table():
         low = inst.name.lower()
         if low in ("double bass", "tuba", "trombone", "cello"):
             role = "bass, counter, accent, harmony"
-        elif low in ("violin", "flute", "trumpet", "clarinet"):
+        elif low == "violin":
             role = "lead, counter, accent"
+        elif low == "orchestral harp":
+            role = "harmony, arpeggio, glissando, melody, countermelody, accent"
         elif low == "piano":
             role = "harmony, melody, bass, rhythm"
         elif low == "church organ":
@@ -356,3 +360,8 @@ if __name__ == "__main__":
     print("  by_name('vibraphone') =", by_name("vibraphone"))
     print("  by_program(11) =", by_program(11))
     print("  VIBRAPHONE.in_sweet_spot(69) =", VIBRAPHONE.in_sweet_spot(69))
+    print("  HARP.midi_program =", HARP.midi_program, "(should be 46)")
+    print("  by_name('harp') =", by_name("harp"))
+    print("  by_name('orchestral harp') =", by_name("orchestral harp"))
+    print("  by_program(46) =", by_program(46))
+    print("  HARP.in_sweet_spot(69) =", HARP.in_sweet_spot(69))

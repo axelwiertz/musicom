@@ -266,6 +266,33 @@ notes 36–96): preset 11 audible 13/13, no gaps — SF2 never clips a
 composition. Karplus-Strong demoted to fallback (the bar is struck, not
 plucked; loop_gain 0.9975 approximates the multi-second ring only).
 
+**Harp added** (2026-09-14): GM46, Strings-family fifth entry — the only
+plucked member of the classical strings block (47-string double-action
+pedal harp; instrument.md + harp.py), verified end-to-end UnitMatrixComposer →
+zero-drift ✓ → MIDI → FluidSynth WAV ✓; RenderPipeline stem label
+`trackXX_Orchestral_Harp.wav` ✓ (GM_PROGRAMS[46] = "Orchestral Harp",
+FluidR3 preset 46 = "Harp" — one-word SF2 spelling, cosmetic only, no
+routing impact). Karplus-Strong recommended (plucked waveguide, loop_gain
+0.9985 — HIGHEST of the plucked set, above sitar 0.9975: tail ratio
+0.0083 vs 0.0050 sitar-class and 0.0013 dull control at the 1–2 s window;
+harp strings are the longest and least-damped in the KB — no dampers
+exist, the harpist damps by hand). ModalSynth 'string' preset is the
+fallback; HARP_MODES custom bank (near-harmonic 1:2:3:4:5 stack, decay
+rates 0.22–1.20) measured late(1.0–1.5 s) rms/peak 0.497 vs the marimba
+preset's 0.0001 — second-longest modal ring after vibraphone 0.445.
+Range 24–103 = C1–G7, the full 47-string concert grand (widest range in
+the KB after the piano). Solo-render spectral check: 4–8 kHz buzz 2.4%
+(no comb-filtering). Empirical FluidR3 pitch sweep (RMS, notes 12–108):
+preset 46 audible 12/12, no gaps — BUT smooth treble rolloff, no cliff:
+bass strings ~0.024 rms, top octave (≥ 84) ~0.0024–0.0037 (≈10× quieter,
+like real nylon trebles); use higher velocities/doubled octaves for
+melody above C6. Identity: GM46 = orchestral pedal harp — diatonic per
+pedal setting (7 double-action pedals retune one pitch class across all
+47 strings), no dampers, glissando + arpeggio are the idiomatic texture;
+line + arpeggio/harmony voice (4 notes per hand, 8 simultaneous), NOT a
+bass voice (wire strings muddy fast in a mix) and NOT a rhythmic strum
+voice.
+
 ## Python usage
 
 ```python
@@ -288,6 +315,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Family | Instrument | Program | Range | Role |
 |---|---|---|---|---|
 | Strings | Violin | 40 | 55–103 | lead, counter, accent |
+| Strings | Orchestral Harp | 46 | 24–103 | harmony, arpeggio, glissando, melody, countermelody, accent |
 | Strings | Viola | 41 | 48–91 | harmony, counter, lead, accent |
 | Strings | Cello | 42 | 36–84 | bass, lead, counter, harmony |
 | Strings | Double Bass | 43 | 28–74 | bass, rhythm, accent, harmony |
@@ -328,6 +356,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 41 | Viola | Viola ✓ |
 | 42 | Cello | Cello ✓ |
 | 43 | Contrabass | Contrabass ✓ (labeled "Contrabass", not "Double_Bass") |
+| 46 | Orchestral Harp | Orchestral_Harp ✓ (GM_PROGRAMS[46] = "Orchestral Harp"; FluidR3 preset 46 = "Harp" — one-word SF2 spelling, cosmetic only) |
 | 1 | Acoustic Grand Piano | **Bright_Acoustic_Piano** ✗ (list[1]) |
 | 56 | Trumpet (correct GM) | Trumpet ✓ |
 | 57 | Trombone | Trombone ✓ |
