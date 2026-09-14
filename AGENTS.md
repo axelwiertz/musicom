@@ -129,19 +129,54 @@ cd /opt/data/repos/musicom
 /opt/data/micromamba/envs/musicom/bin/python -m pytest tests/ -q
 ```
 
-Suite is **green** (342 passed, 0 skipped). Key files:
+Suite is **green** (626 passed, 1 skipped + the voice-hybrid file run
+separately). Key files:
 - `tests/test_harness_golden.py` — **zero-drift regression net**: a fixed
   composition must export byte-identical MIDI (`GOLDEN_SHA256`), be deterministic,
   non-empty, and have equal-length tracks. Update `GOLDEN_SHA256` only when the
   export format changes *intentionally*.
+- `tests/test_realize_bridge.py` — second golden gate: `compose()`'s abstract
+  (ABS-*) path must stay byte-identical (`ABS_GOLDEN_SHA256`), pinning the
+  `rules/realize.py` refactor as output-neutral.
+- `tests/test_generator_lazy_imports.py` — **import purity**: importing the
+  method registry must NOT load `musicpy`/`music21` (see History below).
+- `tests/test_set_theory_kernel.py`, `tests/test_patterns_library.py`,
+  `tests/test_realize_bridge.py`, `tests/test_exercises.py`,
+  `tests/test_patterns_docs.py` — the pattern layer (see `docs/patterns.md`;
+  the docs test re-executes every snippet on that page).
+- `tests/test_legacy_quarantine.py` — pins the quarantined System A defects
+  and proves its consumers still work.
 - `tests/test_phase2_bugfixes.py` — regression guards for the 5 fixed bugs.
 - `tests/test_docs_smoke.py` — proves documented code runs.
 
-The previously skipped `test_pitch_class_set_and_graph` now runs: the
-`@dataclass` decorator was removed from the `PatternType`/`PatternCategory`
-enums (it broke enum hashing/equality) and `MusicPitchGrid()` accepts an
-optional `pitches` arg. The pitch subsystem (`structures/pitch.py`) remains
-minimal stubs pending completion.
+## Pattern layer (post-reorganization)
+
+Pitch-class-set work has one sanctioned path — `docs/patterns.md` is the guide:
+
+- `rules/set_theory.py` — kernel: normal/prime form, ICV, Forte names
+  (`forte_name`, `pcs_from_forte`), Z-relations (`z_partner`, `all_z_pairs` —
+  23 pairs incl. all 15 hexachord pairs).
+- `rules/patterns.py` — `Pattern` (`.forte`, `.z_partner`, roles/tags), the
+  frozen 91-entry `standard_patterns()` (ORDER IS GOLDEN-HASH-LOADING), and
+  the catalogues (48 triads / 60 tetrads / 7 modes / 50 hexachords / 8 scale
+  pools) plus the rhythm side (`RhythmPattern`, `RhythmPatternNetwork`,
+  `euclidean_rhythm`).
+- `rules/realize.py` — the abstract→concrete bridge: `Pattern →
+  MusicEvent[]` with register placement, voicings, articulation and
+  voice-leading continuity (`realize_progression(..., smooth=True)`).
+- `rules/exercises.py` — `run_exercise("ABS-EX-001" … "CON-EX-004")`:
+  runnable, self-verifying abstract and concrete exercises.
+- `legacy/` — the old mode-centric `MusicPitchClassSet` model. Quarantined,
+  partly broken (defects pinned by test), still imported by ~76 project
+  scripts through the `structures.pitchclass` shim. Bridge out with
+  `MusicPitchClassSet(...).to_pattern()`. **Do not import `legacy` in new
+  code** and do not "fix" it — build on `rules/` instead.
+
+History worth knowing: an automated composition job imported
+`generators.generator_registry`, got the legacy `musicpy`/`music21`
+converters loaded via an eager package `__init__`, and burned its whole
+budget "fixing" converters instead of composing. The lazy-import fix and the
+purity tests exist so that cannot repeat.
 
 ## Known code quirks
 

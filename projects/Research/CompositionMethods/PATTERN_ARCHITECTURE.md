@@ -1,6 +1,14 @@
 # Pattern & Pitch-Class-Set Architecture — Design + Migration Plan
 
-**Status:** PROPOSAL — for review before any code changes.
+**Status: EXECUTED — P0–P6 all landed.** Phases map to commits:
+P0+P1 `875f8ad`, P2 `36e3873`, P3 `d4870a1`, P4 `1ad146a`, P5 `6d074ea`,
+P6 (docs: `docs/patterns.md`, this file's status, AGENTS.md) = the commit
+introducing this line. User-facing guide: `docs/patterns.md`. The five
+decisions in §5 were taken per the recommendations below (P4 = quarantine
+to `legacy/`; musicpy/music21 demoted out of the composition path's import
+graph — they remain deps only for MusicXML and the build-time table
+generator; rhythm side built to network parity; exercises checked into
+`rules/exercises.py`).
 **Author:** agent (musicom), 2026-09-13
 **Trigger:** the `daily-algorithmic-composition-production` cron spent an entire
 budget fixing `musicpy`/`music21` converters (project 095) and never composed
