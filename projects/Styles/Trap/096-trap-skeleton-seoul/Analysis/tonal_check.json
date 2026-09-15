@@ -1,0 +1,73 @@
+{
+  "phase1_ground_truth": {
+    "source": "phase-1 (single marimba voice, known MIDI pitches)",
+    "notes_in_midi": 121,
+    "notes_checked": 121,
+    "fundamental_present": 121,
+    "fundamental_present_frac": 1.0,
+    "harmonic_ratio_gt_0.30": 121,
+    "harmonic_ratio_gt_0.30_frac": 1.0,
+    "examples_first8": [
+      {
+        "pitch": 68,
+        "f0_hz": 415.3,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.8659
+      },
+      {
+        "pitch": 66,
+        "f0_hz": 370.0,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.8471
+      },
+      {
+        "pitch": 72,
+        "f0_hz": 523.3,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.8449
+      },
+      {
+        "pitch": 75,
+        "f0_hz": 622.3,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.8465
+      },
+      {
+        "pitch": 72,
+        "f0_hz": 523.3,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.8841
+      },
+      {
+        "pitch": 70,
+        "f0_hz": 466.2,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.7938
+      },
+      {
+        "pitch": 75,
+        "f0_hz": 622.3,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.8215
+      },
+      {
+        "pitch": 76,
+        "f0_hz": 659.3,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.8206
+      }
+    ]
+  },
+  "verdict_phase1": "PASS",
+  "phase2_polyphonic": {
+    "source": "phase-2 (full trap mix, FluidSynth)",
+    "windows": 83,
+    "frac_windows_on_12tet_note": 0.4819,
+    "median_harmonic_ratio": 0.1587,
+    "frac_windows_harm_gt_0.30": 0.0,
+    "frac_windows_chroma_top3_in_key": 0.8193,
+    "autocorr_frames_pitched": 83,
+    "autocorr_frames_total": 83
+  },
+  "verdict_phase2": "CHECK"
+}

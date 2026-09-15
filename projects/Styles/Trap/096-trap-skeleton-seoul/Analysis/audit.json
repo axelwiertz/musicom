@@ -1,0 +1,235 @@
+{
+  "project": "096-trap-skeleton-seoul",
+  "grid_phase2": {
+    "label": "phase2",
+    "grid_16th": 120,
+    "grid_8th": 240,
+    "total_notes": 891,
+    "total_off_16th": 0,
+    "total_off_8th": 11,
+    "voices": [
+      {
+        "voice": "BellLead",
+        "program": 12,
+        "channel": 0,
+        "notes": 120,
+        "off_16th": 0,
+        "off_8th": 0,
+        "first_off_16th": [],
+        "track_end": 46080
+      },
+      {
+        "voice": "ViolinCtr",
+        "program": 40,
+        "channel": 1,
+        "notes": 120,
+        "off_16th": 0,
+        "off_8th": 0,
+        "first_off_16th": [],
+        "track_end": 46080
+      },
+      {
+        "voice": "PianoStab",
+        "program": 1,
+        "channel": 2,
+        "notes": 288,
+        "off_16th": 0,
+        "off_8th": 0,
+        "first_off_16th": [],
+        "track_end": 46080
+      },
+      {
+        "voice": "Sub808",
+        "program": 43,
+        "channel": 4,
+        "notes": 48,
+        "off_16th": 0,
+        "off_8th": 0,
+        "first_off_16th": [],
+        "track_end": 46080
+      },
+      {
+        "voice": "BrassStab",
+        "program": 56,
+        "channel": 5,
+        "notes": 99,
+        "off_16th": 0,
+        "off_8th": 3,
+        "first_off_16th": [],
+        "track_end": 46080
+      },
+      {
+        "voice": "Drums",
+        "program": 0,
+        "channel": 9,
+        "notes": 216,
+        "off_16th": 0,
+        "off_8th": 8,
+        "first_off_16th": [],
+        "track_end": 46080
+      }
+    ]
+  },
+  "phase1_fingerprint": {
+    "label": "phase1-raw-fingerprint",
+    "grid_16th": 120,
+    "grid_8th": 240,
+    "total_notes": 121,
+    "total_off_16th": 117,
+    "total_off_8th": 117,
+    "voices": [
+      {
+        "voice": "BellLead",
+        "program": 12,
+        "channel": 0,
+        "notes": 121,
+        "off_16th": 117,
+        "off_8th": 117,
+        "first_off_16th": [
+          320,
+          937,
+          1258,
+          1860
+        ],
+        "track_end": 46080
+      }
+    ]
+  },
+  "harmony_phase2": [
+    {
+      "voice": "BellLead",
+      "program": 12,
+      "notes": 120,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "first_out_of_scale": [],
+      "first_out_of_chord": []
+    },
+    {
+      "voice": "ViolinCtr",
+      "program": 40,
+      "notes": 120,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "first_out_of_scale": [],
+      "first_out_of_chord": []
+    },
+    {
+      "voice": "PianoStab",
+      "program": 1,
+      "notes": 288,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "first_out_of_scale": [],
+      "first_out_of_chord": []
+    },
+    {
+      "voice": "Sub808",
+      "program": 43,
+      "notes": 48,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "first_out_of_scale": [],
+      "first_out_of_chord": []
+    },
+    {
+      "voice": "BrassStab",
+      "program": 56,
+      "notes": 99,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "first_out_of_scale": [],
+      "first_out_of_chord": []
+    }
+  ],
+  "range_phase2": [
+    {
+      "voice": "BellLead",
+      "program": 12,
+      "channel": 0,
+      "notes": 120,
+      "min": 65,
+      "max": 77,
+      "range": [
+        45,
+        96
+      ],
+      "out_of_range": 0,
+      "status": "PASS"
+    },
+    {
+      "voice": "ViolinCtr",
+      "program": 40,
+      "channel": 1,
+      "notes": 120,
+      "min": 63,
+      "max": 73,
+      "range": [
+        55,
+        103
+      ],
+      "out_of_range": 0,
+      "status": "PASS"
+    },
+    {
+      "voice": "PianoStab",
+      "program": 1,
+      "channel": 2,
+      "notes": 288,
+      "min": 48,
+      "max": 58,
+      "range": [
+        21,
+        108
+      ],
+      "out_of_range": 0,
+      "status": "PASS"
+    },
+    {
+      "voice": "Sub808",
+      "program": 43,
+      "channel": 4,
+      "notes": 48,
+      "min": 34,
+      "max": 44,
+      "range": [
+        28,
+        74
+      ],
+      "out_of_range": 0,
+      "status": "PASS"
+    },
+    {
+      "voice": "BrassStab",
+      "program": 56,
+      "channel": 5,
+      "notes": 99,
+      "min": 60,
+      "max": 80,
+      "range": [
+        54,
+        86
+      ],
+      "out_of_range": 0,
+      "status": "PASS"
+    },
+    {
+      "voice": "Drums",
+      "program": 0,
+      "channel": 9,
+      "notes": 216,
+      "status": "skip (drums/empty)"
+    }
+  ],
+  "track_ends": [
+    46080
+  ],
+  "verdict_grid": "PASS",
+  "verdict_harmony": "PASS",
+  "verdict_range": "PASS",
+  "verdict_zerodrift": "PASS",
+  "files": {
+    "midi_phase2": 7536,
+    "midi_phase1": 1162
+  }
+}

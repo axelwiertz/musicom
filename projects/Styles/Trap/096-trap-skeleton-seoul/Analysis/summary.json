@@ -1,0 +1,275 @@
+{
+  "project": "096-trap-skeleton-seoul",
+  "genre": "Trap",
+  "layer": "concrete",
+  "method": "001 Skeleton-First Refinement",
+  "method_impl": "generators.base.FunctionGenerator",
+  "seed": 20260915,
+  "key": "C phrygian",
+  "bpm": 140,
+  "form": "6 sections x 4 bars = 24 bars: Intro | VerseA | HookB | Bridge | HookB2 | Outro",
+  "skeleton": {
+    "Intro": {
+      "hat": "sparse8",
+      "lead": "half",
+      "drums": "lite",
+      "bass": "long"
+    },
+    "VerseA": {
+      "hat": "16",
+      "lead": "full",
+      "drums": "half",
+      "bass": "half"
+    },
+    "HookB": {
+      "hat": "16roll",
+      "lead": "full",
+      "drums": "full",
+      "bass": "full"
+    },
+    "Bridge": {
+      "hat": "sparse8",
+      "lead": "half",
+      "drums": "lite",
+      "bass": "long"
+    },
+    "HookB2": {
+      "hat": "16roll",
+      "lead": "full",
+      "drums": "full",
+      "bass": "full"
+    },
+    "Outro": {
+      "hat": "sparse8",
+      "lead": "half",
+      "drums": "lite",
+      "bass": "long"
+    }
+  },
+  "motif_steps": [
+    0,
+    1,
+    1,
+    -1,
+    0,
+    -2,
+    1,
+    0,
+    2,
+    -1,
+    -1,
+    0
+  ],
+  "progression": [
+    "Ci",
+    "DbbII",
+    "DbbII",
+    "Ci",
+    "Ci",
+    "DbbII",
+    "Bbbvii",
+    "DbbII",
+    "Bbbvii",
+    "DbbII",
+    "Ci",
+    "Ci",
+    "Bbbvii",
+    "Fiv",
+    "DbbII",
+    "DbbII",
+    "Bbbvii",
+    "DbbII",
+    "Ci",
+    "Ci",
+    "Ci",
+    "DbbII",
+    "Ci",
+    "Ci"
+  ],
+  "vl_flags": 0,
+  "vl_fixes": 5,
+  "voices": [
+    {
+      "voice": "BellLead",
+      "instrument": "Marimba",
+      "gm": 12,
+      "channel": 0
+    },
+    {
+      "voice": "ViolinCtr",
+      "instrument": "Violin",
+      "gm": 40,
+      "channel": 1
+    },
+    {
+      "voice": "PianoStab",
+      "instrument": "Piano",
+      "gm": 1,
+      "channel": 2
+    },
+    {
+      "voice": "Sub808",
+      "instrument": "Double Bass",
+      "gm": 43,
+      "channel": 4
+    },
+    {
+      "voice": "BrassStab",
+      "instrument": "Trumpet",
+      "gm": 56,
+      "channel": 5
+    },
+    {
+      "voice": "Drums",
+      "instrument": "Drum Kit",
+      "gm": 0,
+      "channel": 9
+    }
+  ],
+  "verdict_grid": "PASS",
+  "verdict_harmony": "PASS",
+  "verdict_range": "PASS",
+  "verdict_zerodrift": "PASS",
+  "verdict_tonal_phase1": "PASS",
+  "verdict_tonal_phase2": "CHECK",
+  "verdict_silence": "PASS",
+  "grid": {
+    "off_16th": 0,
+    "notes": 891,
+    "off_8th": 11
+  },
+  "harmony": {
+    "out_of_scale": 0,
+    "out_of_chord": 0
+  },
+  "phase1_fingerprint": {
+    "off_16th": 117,
+    "notes": 121
+  },
+  "tonal_phase1": {
+    "source": "phase-1 (single marimba voice, known MIDI pitches)",
+    "notes_in_midi": 121,
+    "notes_checked": 121,
+    "fundamental_present": 121,
+    "fundamental_present_frac": 1.0,
+    "harmonic_ratio_gt_0.30": 121,
+    "harmonic_ratio_gt_0.30_frac": 1.0,
+    "examples_first8": [
+      {
+        "pitch": 68,
+        "f0_hz": 415.3,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.8659
+      },
+      {
+        "pitch": 66,
+        "f0_hz": 370.0,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.8471
+      },
+      {
+        "pitch": 72,
+        "f0_hz": 523.3,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.8449
+      },
+      {
+        "pitch": 75,
+        "f0_hz": 622.3,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.8465
+      },
+      {
+        "pitch": 72,
+        "f0_hz": 523.3,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.8841
+      },
+      {
+        "pitch": 70,
+        "f0_hz": 466.2,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.7938
+      },
+      {
+        "pitch": 75,
+        "f0_hz": 622.3,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.8215
+      },
+      {
+        "pitch": 76,
+        "f0_hz": 659.3,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.8206
+      }
+    ]
+  },
+  "tonal_phase2": {
+    "source": "phase-2 (full trap mix, FluidSynth)",
+    "windows": 83,
+    "frac_windows_on_12tet_note": 0.4819,
+    "median_harmonic_ratio": 0.1587,
+    "frac_windows_harm_gt_0.30": 0.0,
+    "frac_windows_chroma_top3_in_key": 0.8193,
+    "autocorr_frames_pitched": 83,
+    "autocorr_frames_total": 83
+  },
+  "silence_ratio": 0.0705,
+  "duration_s": 44.81,
+  "peak": 0.8547,
+  "per_second_rms": [
+    0.16658,
+    0.15117,
+    0.14611,
+    0.14363,
+    0.15291,
+    0.14219,
+    0.16642,
+    0.14597,
+    0.15079,
+    0.14883,
+    0.15392,
+    0.13524,
+    0.16454,
+    0.15426,
+    0.15266,
+    0.15413,
+    0.14728,
+    0.15395,
+    0.15285,
+    0.14831,
+    0.14405,
+    0.12279,
+    0.11716,
+    0.15154,
+    0.15759,
+    0.15026,
+    0.14804,
+    0.14943,
+    0.15443,
+    0.16671,
+    0.16213,
+    0.1529,
+    0.15281,
+    0.14017,
+    0.15182,
+    0.1505,
+    0.15465,
+    0.14765,
+    0.15349,
+    0.14992,
+    0.1564,
+    0.03615,
+    0.0003,
+    2e-05,
+    2e-05
+  ],
+  "files": {
+    "midi_phase1": 1162,
+    "midi_phase2": 7536,
+    "wav": 7905102,
+    "ogg": 295856,
+    "ogg_phase1": 374648
+  }
+}

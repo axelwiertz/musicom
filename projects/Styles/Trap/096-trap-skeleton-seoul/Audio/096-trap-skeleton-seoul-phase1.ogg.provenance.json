@@ -1,0 +1,15 @@
+{
+  "artifact": "096-trap-skeleton-seoul-phase1.ogg",
+  "classification": "ai-assisted",
+  "generator": "SP-001 FluidSynth (FluidR3_GM) + ffmpeg Opus",
+  "sources": [],
+  "parameters": {
+    "phase": "1",
+    "project": "096-trap-skeleton-seoul"
+  },
+  "notes": "OGG render of phase-1 MIDI.",
+  "sha256": "4ee012fbe580a140973581ec0fe555f8c50d7e0d3a779adc9fe8f8329b1463c8",
+  "bytes": 374648,
+  "created_utc": "2026-09-15T23:09:46.875457+00:00",
+  "provenance_version": "1.0"
+}

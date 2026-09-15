@@ -1,0 +1,97 @@
+{
+  "artifact": "096-trap-skeleton-seoul.mid",
+  "classification": "ai-assisted",
+  "generator": "generators.base.FunctionGenerator skeleton + musicom rules layer",
+  "sources": [],
+  "parameters": {
+    "phase": 2,
+    "seed": 20260915,
+    "bpm": 140,
+    "key": "C phrygian",
+    "grid": "16th (120 @ 480 TPB)",
+    "progression": [
+      "Ci",
+      "DbbII",
+      "DbbII",
+      "Ci",
+      "Ci",
+      "DbbII",
+      "Bbbvii",
+      "DbbII",
+      "Bbbvii",
+      "DbbII",
+      "Ci",
+      "Ci",
+      "Bbbvii",
+      "Fiv",
+      "DbbII",
+      "DbbII",
+      "Bbbvii",
+      "DbbII",
+      "Ci",
+      "Ci",
+      "Ci",
+      "DbbII",
+      "Ci",
+      "Ci"
+    ],
+    "skeleton": {
+      "Intro": {
+        "hat": "sparse8",
+        "lead": "half",
+        "drums": "lite",
+        "bass": "long"
+      },
+      "VerseA": {
+        "hat": "16",
+        "lead": "full",
+        "drums": "half",
+        "bass": "half"
+      },
+      "HookB": {
+        "hat": "16roll",
+        "lead": "full",
+        "drums": "full",
+        "bass": "full"
+      },
+      "Bridge": {
+        "hat": "sparse8",
+        "lead": "half",
+        "drums": "lite",
+        "bass": "long"
+      },
+      "HookB2": {
+        "hat": "16roll",
+        "lead": "full",
+        "drums": "full",
+        "bass": "full"
+      },
+      "Outro": {
+        "hat": "sparse8",
+        "lead": "half",
+        "drums": "lite",
+        "bass": "long"
+      }
+    },
+    "motif_steps": [
+      0,
+      1,
+      1,
+      -1,
+      0,
+      -2,
+      1,
+      0,
+      2,
+      -1,
+      -1,
+      0
+    ],
+    "method": "001 Skeleton-First Refinement + rules"
+  },
+  "notes": "",
+  "sha256": "ed52726802be8d3e972f6974cae085e4084c11c1def72a13e55af919016ba22d",
+  "bytes": 7536,
+  "created_utc": "2026-09-15T23:08:07.650737+00:00",
+  "provenance_version": "1.0"
+}

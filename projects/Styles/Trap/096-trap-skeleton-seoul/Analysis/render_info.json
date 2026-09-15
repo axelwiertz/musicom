@@ -1,0 +1,22 @@
+{
+  "phase2": {
+    "midi": "/opt/data/repos/musicom/projects/Styles/Trap/096-trap-skeleton-seoul/MIDI/096-trap-skeleton-seoul.mid",
+    "wav": "/opt/data/repos/musicom/projects/Styles/Trap/096-trap-skeleton-seoul/Audio/096-trap-skeleton-seoul.wav",
+    "ogg": "/opt/data/repos/musicom/projects/Styles/Trap/096-trap-skeleton-seoul/Audio/096-trap-skeleton-seoul.ogg",
+    "peak_before_norm": 0.7135,
+    "volume_applied": 1.2474,
+    "peak_after_norm": 0.89,
+    "wav_bytes": 7905102,
+    "ogg_bytes": 295856
+  },
+  "phase1": {
+    "midi": "/opt/data/repos/musicom/projects/Styles/Trap/096-trap-skeleton-seoul/MIDI/096-trap-skeleton-seoul-phase1.mid",
+    "wav": "/opt/data/repos/musicom/projects/Styles/Trap/096-trap-skeleton-seoul/Audio/096-trap-skeleton-seoul-phase1.wav",
+    "ogg": "/opt/data/repos/musicom/projects/Styles/Trap/096-trap-skeleton-seoul/Audio/096-trap-skeleton-seoul-phase1.ogg",
+    "peak_before_norm": 0.2207,
+    "volume_applied": 4.0331,
+    "peak_after_norm": 0.89,
+    "wav_bytes": 7711054,
+    "ogg_bytes": 374648
+  }
+}

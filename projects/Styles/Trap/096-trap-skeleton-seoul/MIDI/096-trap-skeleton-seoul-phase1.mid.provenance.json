@@ -1,0 +1,32 @@
+{
+  "artifact": "096-trap-skeleton-seoul-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "unquantized chromatic walk at fractional unit (method 001 pre-rules)",
+  "sources": [],
+  "parameters": {
+    "phase": 1,
+    "seed": 20260915,
+    "unit1_ticks": 311,
+    "steps": [
+      -5,
+      -3,
+      -2,
+      -1,
+      -1,
+      1,
+      2,
+      2,
+      3,
+      4,
+      -4
+    ],
+    "bpm": 140,
+    "key": "C phrygian (raw, unsnapped)",
+    "method": "001 Skeleton-First Refinement (pre-rules draft)"
+  },
+  "notes": "Raw draft: fractional-tick walk + unquantized pitch. Single marimba voice, no mode, no harmony.",
+  "sha256": "ea3b980ecef8b7364bb25e1341bcb6f022c4df14860432bc5e677323597b2aa3",
+  "bytes": 1162,
+  "created_utc": "2026-09-15T23:08:07.650492+00:00",
+  "provenance_version": "1.0"
+}
