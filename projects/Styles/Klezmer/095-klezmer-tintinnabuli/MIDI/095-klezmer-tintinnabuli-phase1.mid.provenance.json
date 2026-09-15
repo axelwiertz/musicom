@@ -1,0 +1,32 @@
+{
+  "artifact": "095-klezmer-tintinnabuli-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "unquantized chromatic walk at fractional unit (method 079 pre-rules)",
+  "sources": [],
+  "parameters": {
+    "phase": 1,
+    "seed": 20260914,
+    "unit1_ticks": 317,
+    "steps": [
+      -5,
+      -3,
+      -2,
+      -1,
+      -1,
+      1,
+      2,
+      2,
+      3,
+      4,
+      -4
+    ],
+    "bpm": 124,
+    "key": "D harmonic minor (raw, unsnapped)",
+    "method": "079 Tintinnabuli Composition (pre-rules draft)"
+  },
+  "notes": "Raw draft: fractional-tick walk + unquantized pitch. Single violin voice, no mode, no triad, no harmony.",
+  "sha256": "4e1234d91e8f006d6f936ca4a976e8f5fd23f6b823e4a0190dad6f0ea2926cab",
+  "bytes": 1301,
+  "created_utc": "2026-09-14T23:13:24.191525+00:00",
+  "provenance_version": "1.0"
+}

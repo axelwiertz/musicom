@@ -1,0 +1,19 @@
+{
+  "method": "SP-074",
+  "module": "sound.generators.drum_machine",
+  "desc": "Eight-Channel Sample Drum Machine + Sequencer (Bullfrog Drums-style)",
+  "source": "/opt/data/repos/musicom/projects/Styles/Blues/blues-delta-daily-2026-06-24/MIDI/blues-delta-daily-2026-06-24.mid",
+  "bpm": 72.00002880001152,
+  "bars": 12,
+  "grid": {
+    "1": 33,
+    "3": 50,
+    "5": 18
+  },
+  "swing": 0.55,
+  "lufs": -14.448602355521466,
+  "soundfont": "/opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2",
+  "lufs_remix": -14.336570823609806,
+  "mix_balance": "lead 1.0 / harm 0.8 / bass 0.9 / bullfrog 1.0 + cv sub; beds native-length (no truncation), zero-padded to longest (lead 44.68s)",
+  "fix": "V1 truncated all beds to drum-stem length (38.96s) cutting bars 11-12; V2 pads to longest bed, music intact"
+}

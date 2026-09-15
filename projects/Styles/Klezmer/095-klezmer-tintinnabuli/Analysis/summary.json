@@ -1,0 +1,276 @@
+{
+  "project": "095-klezmer-tintinnabuli",
+  "genre": "Klezmer",
+  "layer": "concrete",
+  "method": "079 Tintinnabuli Composition (TINC)",
+  "method_impl": "generators.tintinnabuli.TintinnabuliGenerator",
+  "seed": 20260914,
+  "key": "D harmonic minor",
+  "bpm": 124,
+  "form": "6 sections x 4 bars = 24 bars: Intro | FreylekhsA | FreylekhsB | Bridge | FreylekhsA2 | Outro",
+  "talea_beats": [
+    1.0,
+    0.5,
+    0.5,
+    1.0,
+    0.5,
+    1.0
+  ],
+  "t_pos": [
+    0,
+    1,
+    0,
+    2,
+    0,
+    1
+  ],
+  "z_pair": {
+    "a": [
+      "z_6-Z50",
+      [
+        0,
+        1,
+        4,
+        6,
+        7,
+        9
+      ],
+      19.0
+    ],
+    "b": [
+      "z_6-Z29",
+      [
+        0,
+        2,
+        3,
+        6,
+        7,
+        9
+      ],
+      19.0
+    ]
+  },
+  "phase1_unit_ticks": 317,
+  "progression": [
+    "Di",
+    "C#VII",
+    "C#VII",
+    "Di",
+    "Di",
+    "C#VII",
+    "BbVI",
+    "C#VII",
+    "BbVI",
+    "C#VII",
+    "Di",
+    "Di",
+    "Giv",
+    "BbVI",
+    "C#VII",
+    "C#VII",
+    "Di",
+    "C#VII",
+    "BbVI",
+    "C#VII",
+    "Di",
+    "C#VII",
+    "Di",
+    "Di"
+  ],
+  "vl_flags": 0,
+  "vl_fixes": 5,
+  "tinc_parity": [
+    144,
+    144
+  ],
+  "voices": [
+    {
+      "voice": "ViolinM",
+      "instrument": "Violin",
+      "gm": 40,
+      "channel": 0
+    },
+    {
+      "voice": "ClarinetT",
+      "instrument": "Clarinet",
+      "gm": 71,
+      "channel": 1
+    },
+    {
+      "voice": "Trumpet",
+      "instrument": "Trumpet",
+      "gm": 56,
+      "channel": 2
+    },
+    {
+      "voice": "Dulcimer",
+      "instrument": "Dulcimer",
+      "gm": 15,
+      "channel": 3
+    },
+    {
+      "voice": "Bass",
+      "instrument": "Double Bass",
+      "gm": 43,
+      "channel": 4
+    },
+    {
+      "voice": "Drums",
+      "instrument": "Drum Kit",
+      "gm": 0,
+      "channel": 9
+    }
+  ],
+  "verdict_grid": "PASS 0 off-grid (16th)",
+  "verdict_harmony": "PASS 0 out",
+  "verdict_range": "PASS",
+  "verdict_zerodrift": "PASS",
+  "verdict_tonal_phase1": "PASS: fundamentals present + harmonic",
+  "verdict_tonal_phase2": "CHECK",
+  "verdict_silence": "PASS",
+  "grid": {
+    "off_16th": 0,
+    "notes": 1095,
+    "off_8th": 3
+  },
+  "harmony": {
+    "out_of_scale": 0,
+    "out_of_chord": 0
+  },
+  "phase1_fingerprint": {
+    "off_16th": 131,
+    "notes": 138
+  },
+  "tonal_phase1": {
+    "source": "phase-1 (single violin voice, known MIDI pitches)",
+    "notes_in_midi": 138,
+    "notes_checked": 138,
+    "fundamental_present": 138,
+    "fundamental_present_frac": 1.0,
+    "harmonic_ratio_gt_0.30": 137,
+    "harmonic_ratio_gt_0.30_frac": 0.9928,
+    "examples_first8": [
+      {
+        "pitch": 78,
+        "f0_hz": 740.0,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.5535
+      },
+      {
+        "pitch": 74,
+        "f0_hz": 587.3,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.654
+      },
+      {
+        "pitch": 75,
+        "f0_hz": 622.3,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.6102
+      },
+      {
+        "pitch": 67,
+        "f0_hz": 392.0,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.498
+      },
+      {
+        "pitch": 74,
+        "f0_hz": 587.3,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.618
+      },
+      {
+        "pitch": 71,
+        "f0_hz": 493.9,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.6165
+      },
+      {
+        "pitch": 66,
+        "f0_hz": 370.0,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.5061
+      },
+      {
+        "pitch": 66,
+        "f0_hz": 370.0,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.5451
+      }
+    ]
+  },
+  "tonal_phase2": {
+    "source": "phase-2 (full polyphonic mix + drum kit)",
+    "spectral_windows": 94,
+    "peak_hz_median": 97.0,
+    "windows_on_12tet_note_frac": 0.1489,
+    "mean_harmonic_energy_ratio": 0.0823,
+    "chroma_top3_in_hminor_frac": 0.5319,
+    "autocorr_frames_total": 94,
+    "autocorr_frames_pitched": 90,
+    "autocorr_f0_median": 169.7
+  },
+  "silence_ratio": 0.0569,
+  "duration_s": 49.29,
+  "peak": 0.8868,
+  "per_second_rms": [
+    0.12579,
+    0.10305,
+    0.10989,
+    0.11047,
+    0.11321,
+    0.10442,
+    0.0983,
+    0.09975,
+    0.11199,
+    0.11465,
+    0.11691,
+    0.11693,
+    0.10634,
+    0.11035,
+    0.11655,
+    0.13591,
+    0.11995,
+    0.12301,
+    0.12883,
+    0.12214,
+    0.11816,
+    0.1137,
+    0.11471,
+    0.12201,
+    0.10736,
+    0.10584,
+    0.10892,
+    0.11384,
+    0.11232,
+    0.1168,
+    0.11928,
+    0.11788,
+    0.1205,
+    0.12976,
+    0.12696,
+    0.11466,
+    0.11555,
+    0.12347,
+    0.12797,
+    0.11439,
+    0.10972,
+    0.10799,
+    0.10151,
+    0.09635,
+    0.09984,
+    0.10266,
+    0.06213,
+    0.00048,
+    2e-05,
+    2e-05
+  ],
+  "files": {
+    "midi_phase1": 1301,
+    "midi_phase2": 9356,
+    "wav": 8694094,
+    "ogg": 348264,
+    "ogg_phase1": 391335
+  }
+}

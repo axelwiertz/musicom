@@ -293,6 +293,33 @@ line + arpeggio/harmony voice (4 notes per hand, 8 simultaneous), NOT a
 bass voice (wire strings muddy fast in a mix) and NOT a rhythmic strum
 voice.
 
+**Xylophone added** (2026-09-15): GM13, Percussion-family sixth entry — the
+orchestral rosewood-bar xylophone, the bright dry ancestor of the marimba
+(1 octave up, arch-cut bars, ~0.4 s ring) (instrument.md + xylophone.py),
+verified end-to-end UnitMatrixComposer → zero-drift ✓ → MIDI → FluidSynth
+WAV ✓; RenderPipeline stem label `trackXX_Xylophone.wav` ✓ (GM_PROGRAMS[13]
+= "Xylophone", FluidR3 preset 13 = "Xylophone" — labels match exactly, no
+quirk). ModalSynth recommended with a custom `XYLOPHONE_MODES` bank at the
+rosewood arch ratios **1 : 3 : 6** (fundamental, octave+fifth 12th,
+compressed near-3-octave 17th — the octave partial is DISCARDED by the arch
+cut, unlike the marimba's harmonic 1:2:3 stack) and decay rates 9/14/20:
+late(1.0–1.5 s) rms/peak **0.0000** vs the marimba preset's 0.0001 — a DRY
+bar (the first KB instrument whose modal bank measures BELOW the marimba
+preset; ring advantage is irrelevant, dryness IS the identity). Decay
+confirmed across 0.1–0.4 s (rms ratio 0.162) and fundamental dominance
+confirmed (3× partial 27.3%, 6× 9.1% of f0). Karplus-Strong demoted to
+fallback (bar is struck, not plucked; loop_gain 0.9935 → tail ratio 0.0145
+vs 0.0093 dull control at the 0.2–0.5 s window, only 1.56× — xylophone is
+the SHORTEST ring of the struck/plucked set, ordering check confirmed
+xylophone 0.0145 < kalimba 0.0155 < banjo 0.0202; measure short-ring
+instruments in the 0.2–0.5 s window, NOT 1–2 s). SOLO-render spectral check:
+4–8 kHz buzz 0.4% (no comb-filtering). Empirical FluidR3 pitch sweep (RMS,
+notes 53–89): preset 13 audible 10/10, no gaps — SF2 never clips a
+composition. Identity: GM13 = orchestral concert xylophone (4 octaves,
+F3–F6), NOT the toy glockenspiel (steel bars, GM9); line + accent voice
+(double-stops OK), NOT a bass voice and NOT a chord-sustain pad — rolls are
+the only sustain. Registry `_FIELDS` extended with `xylophone_modes`.
+
 ## Python usage
 
 ```python
@@ -337,6 +364,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Percussion | Steel Drums | 114 | 55–96 | lead, melody, accent, countermelody, harmony, rhythm |
 | Percussion | Timpani | 47 | 36–65 | accent, rhythm, bass, drone |
 | Percussion | Vibraphone | 11 | 48–89 | lead, melody, harmony, countermelody, accent |
+| Percussion | Xylophone | 13 | 53–89 | lead, melody, ornament, accent, countermelody |
 | World | Sitar | 104 | 55–96 | lead, melody, ornament, drone |
 | World | Banjo | 105 | 46–93 | lead, melody, ornament, rhythm, accent |
 | World | Koto | 107 | 51–90 | lead, melody, ornament, drone, harmony |
@@ -372,6 +400,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 12 | Marimba | Marimba ✓ |
 | 47 | Timpani | Timpani ✓ (GM_PROGRAMS[47] + FluidR3 preset 47 both "Timpani") |
 | 11 | Vibraphone | Vibraphone ✓ (GM_PROGRAMS[11] + FluidR3 preset 11 both "Vibraphone") |
+| 13 | Xylophone | Xylophone ✓ (GM_PROGRAMS[13] + FluidR3 preset 13 both "Xylophone") |
 | 104 | Sitar | Sitar ✓ (GM_PROGRAMS[104] + FluidR3 preset 104 both "Sitar") |
 | 105 | Banjo | Banjo ✓ (GM_PROGRAMS[105] + FluidR3 preset 105 both "Banjo") |
 | 107 | Koto | Koto ✓ (GM_PROGRAMS[107] + FluidR3 preset 107 both "Koto") |

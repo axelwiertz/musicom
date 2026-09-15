@@ -1,0 +1,53 @@
+{
+  "seed": 20260915,
+  "all_methods": [
+    "SP-001",
+    "SP-011",
+    "SP-021",
+    "SP-024",
+    "SP-026",
+    "SP-028",
+    "SP-032",
+    "SP-033",
+    "SP-034",
+    "SP-035",
+    "SP-036",
+    "SP-037",
+    "SP-069",
+    "SP-070",
+    "SP-071",
+    "SP-072",
+    "SP-073",
+    "SP-074",
+    "SP-075"
+  ],
+  "recent_7d": [
+    "SP-036",
+    "SP-073",
+    "SP-071",
+    "SP-011",
+    "SP-024",
+    "SP-001",
+    "SP-037"
+  ],
+  "eligible": [
+    "SP-021",
+    "SP-026",
+    "SP-028",
+    "SP-032",
+    "SP-033",
+    "SP-034",
+    "SP-035",
+    "SP-069",
+    "SP-070",
+    "SP-072",
+    "SP-074",
+    "SP-075"
+  ],
+  "method": "SP-074",
+  "module": "sound.generators.drum_machine",
+  "desc": "Eight-Channel Sample Drum Machine + Sequencer (Bullfrog Drums-style)",
+  "midi_pick": "/opt/data/repos/musicom/projects/Styles/Blues/blues-delta-daily-2026-06-24/MIDI/blues-delta-daily-2026-06-24.mid",
+  "n_raw": 289,
+  "n_usable": 282
+}

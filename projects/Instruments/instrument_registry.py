@@ -56,6 +56,7 @@ _INSTRUMENT_MODULES = {
     "World.shenai.shenai": "shenai",
     "World.fiddle.fiddle": "fiddle",
     "Percussion.timpani.timpani": "timpani",
+    "Percussion.xylophone.xylophone": "xylophone",
     "Vocal.human_voice.human_voice": "human_voice",
     "Vocal.voice_like.voice_like_voice": "voice_like",
 }
@@ -65,7 +66,7 @@ _FIELDS = (
     "solo_range", "sweet_spot", "zones", "articulations",
     "synthesis", "modal_preset", "karplus_defaults", "fm_defaults",
     "bowed_defaults", "drum606_defaults", "synthesis_defaults",
-    "motor_defaults",
+    "motor_defaults", "xylophone_modes",
     "reverb_tail", "eq_body", "eq_presence", "eq_air", "pan",
     "stem_label",
 )
@@ -211,6 +212,7 @@ BAGPIPE = ALL_INSTRUMENTS["bagpipe"]
 SHENAI = ALL_INSTRUMENTS["shenai"]
 FIDDLE = ALL_INSTRUMENTS["fiddle"]
 TIMPANI = ALL_INSTRUMENTS["timpani"]
+XYLOPHONE = ALL_INSTRUMENTS["xylophone"]
 HUMAN_VOICE = ALL_INSTRUMENTS["human_voice"]
 # Voice-like family — one instrument per non-vocal source. The `voice_like`
 # key is the umbrella (vox humana); each member is also addressable directly.
@@ -297,6 +299,8 @@ def registry_table():
             role = "lead, melody, ornament, countermelody, accent"
         elif low == "timpani":
             role = "accent, rhythm, bass, drone"
+        elif low == "xylophone":
+            role = "lead, melody, ornament, accent, countermelody"
         elif low == "human voice":
             role = "lead, melody, countermelody"
         else:
@@ -365,3 +369,7 @@ if __name__ == "__main__":
     print("  by_name('orchestral harp') =", by_name("orchestral harp"))
     print("  by_program(46) =", by_program(46))
     print("  HARP.in_sweet_spot(69) =", HARP.in_sweet_spot(69))
+    print("  XYLOPHONE.midi_program =", XYLOPHONE.midi_program, "(should be 13)")
+    print("  by_name('xylophone') =", by_name("xylophone"))
+    print("  by_program(13) =", by_program(13))
+    print("  XYLOPHONE.in_sweet_spot(72) =", XYLOPHONE.in_sweet_spot(72))

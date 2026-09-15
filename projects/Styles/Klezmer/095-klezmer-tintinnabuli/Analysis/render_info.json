@@ -1,0 +1,22 @@
+{
+  "phase2": {
+    "midi": "/opt/data/repos/musicom/projects/Styles/Klezmer/095-klezmer-tintinnabuli/MIDI/095-klezmer-tintinnabuli.mid",
+    "wav": "/opt/data/repos/musicom/projects/Styles/Klezmer/095-klezmer-tintinnabuli/Audio/095-klezmer-tintinnabuli.wav",
+    "ogg": "/opt/data/repos/musicom/projects/Styles/Klezmer/095-klezmer-tintinnabuli/Audio/095-klezmer-tintinnabuli.ogg",
+    "peak_before_norm": 0.6218,
+    "volume_applied": 1.4313,
+    "peak_after_norm": 0.89,
+    "wav_bytes": 8694094,
+    "ogg_bytes": 348264
+  },
+  "phase1": {
+    "midi": "/opt/data/repos/musicom/projects/Styles/Klezmer/095-klezmer-tintinnabuli/MIDI/095-klezmer-tintinnabuli-phase1.mid",
+    "wav": "/opt/data/repos/musicom/projects/Styles/Klezmer/095-klezmer-tintinnabuli/Audio/095-klezmer-tintinnabuli-phase1.wav",
+    "ogg": "/opt/data/repos/musicom/projects/Styles/Klezmer/095-klezmer-tintinnabuli/Audio/095-klezmer-tintinnabuli-phase1.ogg",
+    "peak_before_norm": 0.2084,
+    "volume_applied": 4.2699,
+    "peak_after_norm": 0.89,
+    "wav_bytes": 8547406,
+    "ogg_bytes": 391335
+  }
+}

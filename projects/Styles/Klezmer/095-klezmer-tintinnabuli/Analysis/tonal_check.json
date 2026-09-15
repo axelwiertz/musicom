@@ -1,0 +1,74 @@
+{
+  "phase1_ground_truth": {
+    "source": "phase-1 (single violin voice, known MIDI pitches)",
+    "notes_in_midi": 138,
+    "notes_checked": 138,
+    "fundamental_present": 138,
+    "fundamental_present_frac": 1.0,
+    "harmonic_ratio_gt_0.30": 137,
+    "harmonic_ratio_gt_0.30_frac": 0.9928,
+    "examples_first8": [
+      {
+        "pitch": 78,
+        "f0_hz": 740.0,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.5535
+      },
+      {
+        "pitch": 74,
+        "f0_hz": 587.3,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.654
+      },
+      {
+        "pitch": 75,
+        "f0_hz": 622.3,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.6102
+      },
+      {
+        "pitch": 67,
+        "f0_hz": 392.0,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.498
+      },
+      {
+        "pitch": 74,
+        "f0_hz": 587.3,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.618
+      },
+      {
+        "pitch": 71,
+        "f0_hz": 493.9,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.6165
+      },
+      {
+        "pitch": 66,
+        "f0_hz": 370.0,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.5061
+      },
+      {
+        "pitch": 66,
+        "f0_hz": 370.0,
+        "fundamental_frac_of_max": 1.0,
+        "harmonic_ratio": 0.5451
+      }
+    ]
+  },
+  "phase2_polyphonic": {
+    "source": "phase-2 (full polyphonic mix + drum kit)",
+    "spectral_windows": 94,
+    "peak_hz_median": 97.0,
+    "windows_on_12tet_note_frac": 0.1489,
+    "mean_harmonic_energy_ratio": 0.0823,
+    "chroma_top3_in_hminor_frac": 0.5319,
+    "autocorr_frames_total": 94,
+    "autocorr_frames_pitched": 90,
+    "autocorr_f0_median": 169.7
+  },
+  "verdict_phase1": "PASS: fundamentals present + harmonic",
+  "verdict_phase2": "CHECK"
+}

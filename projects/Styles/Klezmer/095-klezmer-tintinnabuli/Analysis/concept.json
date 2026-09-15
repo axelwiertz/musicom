@@ -1,0 +1,109 @@
+{
+  "project": "095-klezmer-tintinnabuli",
+  "genre": "Klezmer",
+  "method": "079 Tintinnabuli Composition (TINC)",
+  "layer": "concrete",
+  "seed": 20260914,
+  "bpm": 124,
+  "key": "D harmonic minor",
+  "grid_16th": 120,
+  "talea_beats": [
+    1.0,
+    0.5,
+    0.5,
+    1.0,
+    0.5,
+    1.0
+  ],
+  "talea_onsets": [
+    0,
+    480,
+    720,
+    960,
+    1440,
+    1680
+  ],
+  "t_pos": [
+    0,
+    1,
+    0,
+    2,
+    0,
+    1
+  ],
+  "phase1_unit_ticks": 317,
+  "progression": [
+    "Di",
+    "C#VII",
+    "C#VII",
+    "Di",
+    "Di",
+    "C#VII",
+    "BbVI",
+    "C#VII",
+    "BbVI",
+    "C#VII",
+    "Di",
+    "Di",
+    "Giv",
+    "BbVI",
+    "C#VII",
+    "C#VII",
+    "Di",
+    "C#VII",
+    "BbVI",
+    "C#VII",
+    "Di",
+    "C#VII",
+    "Di",
+    "Di"
+  ],
+  "z_pair": {
+    "a": [
+      "z_6-Z50",
+      [
+        0,
+        1,
+        4,
+        6,
+        7,
+        9
+      ],
+      19.0
+    ],
+    "b": [
+      "z_6-Z29",
+      [
+        0,
+        2,
+        3,
+        6,
+        7,
+        9
+      ],
+      19.0
+    ]
+  },
+  "sections": [
+    "Intro",
+    "FreylekhsA",
+    "FreylekhsB",
+    "Bridge",
+    "FreylekhsA2",
+    "Outro"
+  ],
+  "voices": [
+    "ViolinM",
+    "ClarinetT",
+    "Trumpet",
+    "Dulcimer",
+    "Bass",
+    "Drums"
+  ],
+  "vl_flags": 0,
+  "vl_fixes": 5,
+  "tinc_parity": [
+    144,
+    144
+  ]
+}

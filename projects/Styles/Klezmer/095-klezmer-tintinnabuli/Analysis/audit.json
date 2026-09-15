@@ -1,0 +1,253 @@
+{
+  "project": "095-klezmer-tintinnabuli",
+  "grid_phase2": {
+    "label": "phase2",
+    "grid_16th": 120,
+    "grid_8th": 240,
+    "total_notes": 1095,
+    "total_off_16th": 0,
+    "total_off_8th": 3,
+    "voices": [
+      {
+        "voice": "ViolinM",
+        "program": 40,
+        "channel": 0,
+        "notes": 144,
+        "off_16th": 0,
+        "off_8th": 0,
+        "first_off_16th": [],
+        "track_end": 46080
+      },
+      {
+        "voice": "ClarinetT",
+        "program": 71,
+        "channel": 1,
+        "notes": 144,
+        "off_16th": 0,
+        "off_8th": 0,
+        "first_off_16th": [],
+        "track_end": 46080
+      },
+      {
+        "voice": "Trumpet",
+        "program": 56,
+        "channel": 2,
+        "notes": 99,
+        "off_16th": 0,
+        "off_8th": 3,
+        "first_off_16th": [],
+        "track_end": 46080
+      },
+      {
+        "voice": "Dulcimer",
+        "program": 15,
+        "channel": 3,
+        "notes": 192,
+        "off_16th": 0,
+        "off_8th": 0,
+        "first_off_16th": [],
+        "track_end": 46080
+      },
+      {
+        "voice": "Bass",
+        "program": 43,
+        "channel": 4,
+        "notes": 192,
+        "off_16th": 0,
+        "off_8th": 0,
+        "first_off_16th": [],
+        "track_end": 46080
+      },
+      {
+        "voice": "Drums",
+        "program": 0,
+        "channel": 9,
+        "notes": 324,
+        "off_16th": 0,
+        "off_8th": 0,
+        "first_off_16th": [],
+        "track_end": 46080
+      }
+    ]
+  },
+  "harmony_phase2": [
+    {
+      "voice": "ViolinM",
+      "program": 40,
+      "notes": 144,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "first_out_of_scale": [],
+      "first_out_of_chord": []
+    },
+    {
+      "voice": "ClarinetT",
+      "program": 71,
+      "notes": 144,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "first_out_of_scale": [],
+      "first_out_of_chord": []
+    },
+    {
+      "voice": "Trumpet",
+      "program": 56,
+      "notes": 99,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "first_out_of_scale": [],
+      "first_out_of_chord": []
+    },
+    {
+      "voice": "Dulcimer",
+      "program": 15,
+      "notes": 192,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "first_out_of_scale": [],
+      "first_out_of_chord": []
+    },
+    {
+      "voice": "Bass",
+      "program": 43,
+      "notes": 192,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "first_out_of_scale": [],
+      "first_out_of_chord": []
+    }
+  ],
+  "range_phase2": [
+    {
+      "voice": "ViolinM",
+      "instrument": "Violin",
+      "min": 65,
+      "max": 91,
+      "range": [
+        55,
+        103
+      ],
+      "in_range": true
+    },
+    {
+      "voice": "ClarinetT",
+      "instrument": "Clarinet",
+      "min": 62,
+      "max": 69,
+      "range": [
+        52,
+        96
+      ],
+      "in_range": true
+    },
+    {
+      "voice": "Trumpet",
+      "instrument": "Trumpet",
+      "min": 67,
+      "max": 82,
+      "range": [
+        54,
+        86
+      ],
+      "in_range": true
+    },
+    {
+      "voice": "Dulcimer",
+      "instrument": "Dulcimer",
+      "min": 58,
+      "max": 69,
+      "range": [
+        48,
+        96
+      ],
+      "in_range": true
+    },
+    {
+      "voice": "Bass",
+      "instrument": "Double Bass",
+      "min": 34,
+      "max": 50,
+      "range": [
+        28,
+        74
+      ],
+      "in_range": true
+    }
+  ],
+  "zero_drift_phase2": {
+    "max_end": 46080,
+    "drift_per_track": [
+      [
+        "ViolinM",
+        46080,
+        0
+      ],
+      [
+        "ClarinetT",
+        46080,
+        0
+      ],
+      [
+        "Trumpet",
+        46080,
+        0
+      ],
+      [
+        "Dulcimer",
+        46080,
+        0
+      ],
+      [
+        "Bass",
+        46080,
+        0
+      ],
+      [
+        "Drums",
+        46080,
+        0
+      ]
+    ],
+    "drift_ok": true
+  },
+  "zero_drift_phase1": {
+    "max_end": 46080,
+    "drift_per_track": [
+      [
+        "ViolinM",
+        46080,
+        0
+      ]
+    ],
+    "drift_ok": true
+  },
+  "phase1_fingerprint": {
+    "label": "phase1-raw",
+    "grid_16th": 120,
+    "grid_8th": 240,
+    "total_notes": 138,
+    "total_off_16th": 131,
+    "total_off_8th": 131,
+    "voices": [
+      {
+        "voice": "ViolinM",
+        "program": 40,
+        "channel": 0,
+        "notes": 138,
+        "off_16th": 131,
+        "off_8th": 131,
+        "first_off_16th": [
+          306,
+          628,
+          939,
+          1255
+        ],
+        "track_end": 46080
+      }
+    ]
+  },
+  "verdict_grid": "PASS 0 off-grid (16th)",
+  "verdict_harmony": "PASS 0 out",
+  "verdict_range": "PASS",
+  "verdict_zerodrift": "PASS"
+}

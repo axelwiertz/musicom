@@ -1,0 +1,1 @@
+{"cadence": "concrete (prior abstract runs 085/087/089/090; 091/092/093/094 concrete)", "candidate_pool": ["001", "023", "040", "079", "ABS-001", "ABS-002", "ABS-003", "ABS-004", "ABS-005", "HC-012"], "excluded_recent": ["002", "003", "018", "045", "010", "012"], "layer": "concrete", "method": "079", "run_date": "2026-09-14", "seed": 20260914, "style": "Klezmer"}

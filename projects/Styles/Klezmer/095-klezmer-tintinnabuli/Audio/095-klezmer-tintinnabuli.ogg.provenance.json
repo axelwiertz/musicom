@@ -1,0 +1,15 @@
+{
+  "artifact": "095-klezmer-tintinnabuli.ogg",
+  "classification": "ai-assisted",
+  "generator": "SP-001 FluidSynth (FluidR3_GM) + ffmpeg Opus",
+  "sources": [],
+  "parameters": {
+    "phase": "2",
+    "project": "095-klezmer-tintinnabuli"
+  },
+  "notes": "OGG render of phase-2 MIDI.",
+  "sha256": "0082dab9d9f8f79b05f1b2aac7ecf2709f173855113bbadcc0abf0fc961b55dc",
+  "bytes": 348264,
+  "created_utc": "2026-09-14T23:15:33.037714+00:00",
+  "provenance_version": "1.0"
+}

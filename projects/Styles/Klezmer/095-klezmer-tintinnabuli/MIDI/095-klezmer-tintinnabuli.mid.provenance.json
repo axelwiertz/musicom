@@ -1,0 +1,81 @@
+{
+  "artifact": "095-klezmer-tintinnabuli.mid",
+  "classification": "ai-assisted",
+  "generator": "generators.tintinnabuli.TintinnabuliGenerator + musicom rules layer",
+  "sources": [],
+  "parameters": {
+    "phase": 2,
+    "seed": 20260914,
+    "bpm": 124,
+    "key": "D harmonic minor",
+    "grid": "16th (120 @ 480 TPB)",
+    "progression": [
+      "Di",
+      "C#VII",
+      "C#VII",
+      "Di",
+      "Di",
+      "C#VII",
+      "BbVI",
+      "C#VII",
+      "BbVI",
+      "C#VII",
+      "Di",
+      "Di",
+      "Giv",
+      "BbVI",
+      "C#VII",
+      "C#VII",
+      "Di",
+      "C#VII",
+      "BbVI",
+      "C#VII",
+      "Di",
+      "C#VII",
+      "Di",
+      "Di"
+    ],
+    "talea_beats": [
+      1.0,
+      0.5,
+      0.5,
+      1.0,
+      0.5,
+      1.0
+    ],
+    "t_pos": [
+      0,
+      1,
+      0,
+      2,
+      0,
+      1
+    ],
+    "z_pair": [
+      "z_6-Z50",
+      [
+        0,
+        1,
+        4,
+        6,
+        7,
+        9
+      ],
+      "z_6-Z29",
+      [
+        0,
+        2,
+        3,
+        6,
+        7,
+        9
+      ]
+    ],
+    "method": "079 Tintinnabuli + ABS-003 Z-variation bridge + rules"
+  },
+  "notes": "",
+  "sha256": "f6f5b0368661d4efe531fd50e4841602462dfc00c9573895299ffdb9c951d58f",
+  "bytes": 9356,
+  "created_utc": "2026-09-14T23:13:24.191988+00:00",
+  "provenance_version": "1.0"
+}

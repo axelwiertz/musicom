@@ -1,0 +1,10 @@
+======================================================================
+SP-074 DRUM-MACHINE DELTA BLUES - BAR GRID (12 bars, 72 BPM)
+======================================================================
+Lead Slide    : ████████████  (bars 12/12)
+Rhythm Harm   : ████████████  (bars 12/12)
+Bass          : ████████████  (bars 12/12)
+Drums(BF)     : ████████████  (bars 12/12)
+----------------------------------------------------------------------
+Legend: █ = Sounding | ░ = Rest
+Drums row: Bullfrog X0X replaces GM kit 1:1 on source onsets (swing 0.55).
