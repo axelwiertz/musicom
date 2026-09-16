@@ -1,0 +1,106 @@
+{
+  "job": "random-style production pass (SP) - LAYER-ALIGNED 2026-09-16",
+  "selection_source": "workflows.musicom_workflow.SP_METHODS registry (19 implemented)",
+  "selection_file": "/opt/data/sel_20260916.json",
+  "seed": 20260916,
+  "composition_source": "/opt/data/repos/musicom/projects/Styles/Production/SP072-critter-balfolk-cinematic/MIDI/balfolk_cinematic_v1.mid",
+  "composition_sha256": "aa84825ae3b9789b8a02df5ae40cc7a782fb26bdff1e4fd94dad1f94f4be6399",
+  "production_method": "SP-072",
+  "production_method_name": "Three-Partial Pad Bank with Stochastic Microtonal Critters Layer (Brackish Pads-style)",
+  "registered_module": "sound.synthesis.critter_pad",
+  "layer_discipline": "absolute layer: PadPartialBank replaces timbre for ALL voices; no drums in source; GM kit only in SP-001 reference",
+  "voice_profiles": {
+    "Violin lead (prog 40 ch0, 112 notes D4-A4)": {
+      "attack_b": 0.08,
+      "release_b": 0.3,
+      "attack_c": 0.12,
+      "release_c": 0.4,
+      "density": 2.5,
+      "mset": "quarter-tone",
+      "drift": 25.0,
+      "bal": [
+        0.7,
+        0.5,
+        0.5
+      ],
+      "gain": 1.0,
+      "pan": -0.2
+    },
+    "String pedal (prog 48 ch1, 112 notes D2)": {
+      "attack_b": 0.25,
+      "release_b": 0.7,
+      "attack_c": 0.4,
+      "release_c": 1.0,
+      "density": 1.2,
+      "mset": "eighth-tone",
+      "drift": 18.0,
+      "bal": [
+        0.75,
+        0.45,
+        0.35
+      ],
+      "gain": 0.85,
+      "pan": 0.2
+    }
+  },
+  "bus_chain": "voice sum -> cassette(0.35 blend) + splosh(0.22) -> peak 0.89 -> normalize_to_lufs(-14) -> Limiter(-1 dB) LAST",
+  "fixes": [
+    "render_note peak-normalizes every note to 0.8: velocity gain clip((vel/90)**1.5,0.22,1.30) reapplied at call site",
+    "outer half-cosine note envelope + 0.40 s tail per note: click safety for legato zero-gap motif",
+    "first run killed by timeout 550 during dry-stem render (track01 wav partial 2.1 MB, invalid header): leftover single-track mid reused for clean fluidsynth re-render, archived to Analysis/stem2_single_track.mid"
+  ],
+  "checks": {
+    "pitch_verification": {
+      "windows_checked": 96,
+      "dominant_peak_hit_rate": 0.9688,
+      "harmonic_energy_mean_8h": 0.4477,
+      "acf_windows": 24,
+      "acf_unpitched": 1,
+      "acf_unpitched_ratio": 0.0417,
+      "lowest_midi_notes_seen": [
+        38,
+        62,
+        64,
+        65
+      ],
+      "median_dom_hz": 74.0,
+      "misses": [
+        {
+          "t": 1.0,
+          "dom": 772.0,
+          "act": [
+            64,
+            69
+          ]
+        },
+        {
+          "t": 4.0,
+          "dom": 388.0,
+          "act": [
+            64,
+            69
+          ]
+        },
+        {
+          "t": 18.5,
+          "dom": 294.0,
+          "act": [
+            38,
+            65,
+            67
+          ]
+        }
+      ],
+      "method": "FFT dominant peak per 0.5 s window, 50-2000 Hz, +/-4% vs active MIDI fund or x2/x3//2",
+      "verdict": "PASS"
+    },
+    "silence_wet": 0.01,
+    "silence_dry": 0.0682,
+    "lufs": -14.0,
+    "peak": 0.7706
+  },
+  "artifacts": {
+    "wav": "/opt/data/repos/musicom/projects/Styles/Production/SP072-critter-balfolk-cinematic/SP072-critter-balfolk-cinematic.wav",
+    "ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP072-critter-balfolk-cinematic/SP072-critter-balfolk-cinematic.ogg"
+  }
+}

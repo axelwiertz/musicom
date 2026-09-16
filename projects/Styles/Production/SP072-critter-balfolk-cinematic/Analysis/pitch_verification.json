@@ -1,0 +1,44 @@
+{
+  "windows_checked": 96,
+  "dominant_peak_hit_rate": 0.9688,
+  "harmonic_energy_mean_8h": 0.4477,
+  "acf_windows": 24,
+  "acf_unpitched": 1,
+  "acf_unpitched_ratio": 0.0417,
+  "lowest_midi_notes_seen": [
+    38,
+    62,
+    64,
+    65
+  ],
+  "median_dom_hz": 74.0,
+  "misses": [
+    {
+      "t": 1.0,
+      "dom": 772.0,
+      "act": [
+        64,
+        69
+      ]
+    },
+    {
+      "t": 4.0,
+      "dom": 388.0,
+      "act": [
+        64,
+        69
+      ]
+    },
+    {
+      "t": 18.5,
+      "dom": 294.0,
+      "act": [
+        38,
+        65,
+        67
+      ]
+    }
+  ],
+  "method": "FFT dominant peak per 0.5 s window, 50-2000 Hz, +/-4% vs active MIDI fund or x2/x3//2",
+  "verdict": "PASS"
+}

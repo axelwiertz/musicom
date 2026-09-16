@@ -1,0 +1,53 @@
+{
+  "seed": 20260916,
+  "all_methods": [
+    "SP-001",
+    "SP-011",
+    "SP-021",
+    "SP-024",
+    "SP-026",
+    "SP-028",
+    "SP-032",
+    "SP-033",
+    "SP-034",
+    "SP-035",
+    "SP-036",
+    "SP-037",
+    "SP-069",
+    "SP-070",
+    "SP-071",
+    "SP-072",
+    "SP-073",
+    "SP-074",
+    "SP-075"
+  ],
+  "recent_7d": [
+    "SP-074",
+    "SP-036",
+    "SP-073",
+    "SP-071",
+    "SP-011",
+    "SP-024",
+    "SP-001"
+  ],
+  "eligible": [
+    "SP-021",
+    "SP-026",
+    "SP-028",
+    "SP-032",
+    "SP-033",
+    "SP-034",
+    "SP-035",
+    "SP-037",
+    "SP-069",
+    "SP-070",
+    "SP-072",
+    "SP-075"
+  ],
+  "method": "SP-072",
+  "module": "sound.synthesis.critter_pad",
+  "desc": "Three-Partial Pad Bank with Stochastic Microtonal Critters Layer (Brackish Pads-style)",
+  "midi_pick": "/opt/data/repos/musicom/projects/Styles/Balfolk/014-balfolk-cinematic/Audio/balfolk_cinematic_v1.mid",
+  "n_raw": 290,
+  "n_usable": 283
+}
