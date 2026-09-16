@@ -57,6 +57,7 @@ _INSTRUMENT_MODULES = {
     "World.fiddle.fiddle": "fiddle",
     "Percussion.timpani.timpani": "timpani",
     "Percussion.xylophone.xylophone": "xylophone",
+    "World.taiko.taiko": "taiko",
     "Vocal.human_voice.human_voice": "human_voice",
     "Vocal.voice_like.voice_like_voice": "voice_like",
 }
@@ -213,6 +214,7 @@ SHENAI = ALL_INSTRUMENTS["shenai"]
 FIDDLE = ALL_INSTRUMENTS["fiddle"]
 TIMPANI = ALL_INSTRUMENTS["timpani"]
 XYLOPHONE = ALL_INSTRUMENTS["xylophone"]
+TAIKO = ALL_INSTRUMENTS["taiko"]
 HUMAN_VOICE = ALL_INSTRUMENTS["human_voice"]
 # Voice-like family — one instrument per non-vocal source. The `voice_like`
 # key is the umbrella (vox humana); each member is also addressable directly.
@@ -301,6 +303,8 @@ def registry_table():
             role = "accent, rhythm, bass, drone"
         elif low == "xylophone":
             role = "lead, melody, ornament, accent, countermelody"
+        elif low == "taiko drum":
+            role = "accent, rhythm, drone, ornament"
         elif low == "human voice":
             role = "lead, melody, countermelody"
         else:
@@ -373,3 +377,8 @@ if __name__ == "__main__":
     print("  by_name('xylophone') =", by_name("xylophone"))
     print("  by_program(13) =", by_program(13))
     print("  XYLOPHONE.in_sweet_spot(72) =", XYLOPHONE.in_sweet_spot(72))
+    print("  TAIKO.midi_program =", TAIKO.midi_program, "(should be 116)")
+    print("  by_name('taiko') =", by_name("taiko"))
+    print("  by_name('taiko drum') =", by_name("taiko drum"))
+    print("  by_program(116) =", by_program(116))
+    print("  TAIKO.in_sweet_spot(50) =", TAIKO.in_sweet_spot(50))

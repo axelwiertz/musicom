@@ -96,6 +96,7 @@ Classification of active Musicom composition methods categorized by their primar
 | **086** | concrete | Hidden Markov Model Latent-State Composition (HMM-C) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Functional-grammar) | Grid-Locked / Continuous | Meso / Hidden Chain | $\mathcal{O}(I \cdot T \cdot S^2)$ train, $\mathcal{O}(T \cdot S^2)$ Viterbi | Generates music as the emission of a hidden Markov chain: latent states are tonal functions/chord regions/sections, emissions are pitch classes, rhythmic cells, and velocity levels. Transition matrix $A$ = harmonic grammar (state→state = chord progression), emission matrix $B$ = surface vocabulary, initial $\pi$ = opening. Composition = sample or Viterbi-decode the hidden path (forced per section), then emit; Baum–Welch (EM) learns $A,B$ from a corpus. Latent-state generalization of 002 Markov; discrete-state ancestor of 059 ESN-RC / 060 S4SC; hidden-variable counterpart to 064 MRFCC's spatial lattice. |
 | **087** | concrete | Multiple Viewpoint Systems Composition (MVS-C) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Ensemble-constrained) | Grid-Locked / Continuous | Meso / Variable-Order Context | $\mathcal{O}(N \cdot k)$ amortized, $\mathcal{O}(N \cdot k \cdot V)$ naive | Composes by combining many specialized statistical predictors (viewpoints: pitch, pitch-interval, contour, scale-degree, onset-interval, duration, metric-position, chord — plus linked product viewpoints) into one product-of-experts distribution over the next event, then sampling or argmax-decoding it. Backoff with PPM* escape adapts context order automatically; a long-term corpus model (style) and a short-term within-piece model (structure/repetition) are blended in log space (IDyOM). Entropy-based viewpoint selection drops redundant features. Ensemble counterpart to 002 Markov (single viewpoint) / 067 Factor Oracle (single automaton); count-based ancestor of 054 ATS attention. |
 | **088** | concrete | Voronoi Tessellation Event Partitioning (VTEP) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Weak (Geometry-guided, scale-filtered) | Grid-Locked / Continuous | Macro / Seed Plan | $\mathcal{O}(L \log S)$ (cKDTree classify) + $\mathcal{O}(S \log S)$ tessellation | Scatters seed sites in a normalized pitch × time domain, tessellates the space into nearest-seed Voronoi cells, and classifies an event-candidate lattice by cell membership: cell area = inverse event density (crowded cells → bursts, large cells → sparse), Delaunay simplices over pitch-carrying seeds = candidate chord voicings (ICV-checked against the section subset), seed drift/relaxation across sections = macro-form, cell adjacency seams = hocket/echo pairings. Lloyd relaxation pre-balances cells to prevent voice starvation. Geometric counterpart to 083 quasicrystal tiling (no metric semantics) and grid simulations (030/036/070). |
+| **089** | concrete | Change-Ringing Combinatorial Method (CRCM) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Weak (Mode-locked, function-free) | Grid-Locked | Macro / Lead-Head Cycle | $\mathcal{O}(n)$ per change, $\mathcal{O}(n \cdot L)$ course | Generates an endless non-repeating permutation stream of $n$ voice-rows under the change-ringing law: every change is a product of disjoint adjacent swaps (each voice moves at most one position per blow), the treble plain-hunts as a register ostinato (double blows at extremes), and a lead-end deviation (Plain Bob: "make 2nds") extends the hunt's $2n$ cycle toward the full $n!$ space; lead heads cycle $123456 \to 135264 \to 156342 \to 164523 \to 142635 \to$ rounds (verified). Bells = UnitMatrix voices; changes = isochronous grid slots. Mapping A: bell = fixed pitch, melody = the continuous strike stream, verticalities = change rows (all distinct). Mapping B: pitch = scale degree of position — every line 100% stepwise (verified: 0 leaps > 2nd in 354 steps, 83.6% 2nds + 16.4% unisons), phase-shifted palindromic hunt per voice, deterministic hocket. Calls (bob/single) = form pivots. Group-theoretic sibling of 069/077; historical craft counterpart of 056; motion-law foil to 065 TTSMC. |
 # Sound Production Methods Framework
 
 Sound production translates symbolic MIDI UnitMatrix data into final acoustic air pressure. Methods are categorized by execution layer: **Hardware/Acoustic Integration**, **Synthesis Engines**, or **Post-Processing / DSP**.
@@ -177,6 +178,7 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 | **SP-072** | Harmonic-Percussive Source Separation (HPSS) | **Post-Processing / DSP** | Tonal/Transient Stem Split (Harmonic + Percussive Buffers) | Splits a rendered audio buffer into two re-mixable stems via anisotropic median filtering (or IRLS) of the magnitude STFT: a time-axis median extracts the horizontal spectral ridges (harmonic/sustained), a frequency-axis median extracts the vertical ridges (percussive/transient), and a binary or soft mask splits the complex STFT with the original phase. No training, no pitch model; $O(N \log N)$ per frame. The non-parametric source-separation counterpart to SP-026 phase vocoder / SP-027 SMS / SP-031 cross-synthesis. |
 | **SP-073** | Transient Shaping via Differential Envelope Processing (TSDE) | **Post-Processing / DSP** | Transient/Punch & Sustain Shaping (Level-Independent Dynamics) | Reshapes the attack/sustain balance of a rendered buffer by riding a gain derived from two parallel one-pole envelope followers (fast peak detector vs slow sustain detector); the *difference* is the transient content, boosted/attenuated independently by Attack and Sustain gains and recombined with the original phase/time untouched. No threshold, no ratio, level-independent; the SPL Transient Designer differential-envelope technique. $O(1)$ per sample. The transient-shaping counterpart to SP-008 (threshold DRC) and the time-domain partner of SP-072 (frequency-domain split). |
 | **SP-074** | Piano Hammer-String Physical Modeling (PHSP) | **Synthesis Engines** | Physical Struck-String / Grand-Piano Timbre | Physically calibrated piano: Hertz-contact felt hammer (velocity → brightness, Boutillon/Stulov) strikes a stiff dispersive waveguide string (inharmonic partials $f_n=nf_1\sqrt{1+Bn^2}$ + Railsback stretch tuning), 2–3 detuned unison strings share a bridge impedance for Weinreich two-stage decay, soundboard IR + pedal-down sympathetic resonance. Emits audio from note events; $O(1)$/sample per note. Completes the excitation family: plucked SP-011/048, bowed SP-024, lip-reed SP-065, air-jet SP-066, struck SP-074. |
+| **SP-075** | Image-Source Room Acoustics Synthesis (ISRA) | **Post-Processing / DSP** | Physically Simulated Room Impulse Response / Geometric Spatialization | Generates a room impulse response analytically from geometry (Allen & Berkley 1979): every wall reflection becomes a mirror image source at distance $d_q/c$ with gain $\prod_j \beta_j^{p_j}/(4\pi d_q)$, so early reflections, flutter echoes, and echo-density growth are physically exact. Per-band β = frequency-dependent decay; per-voice source positions = geometric mixing; per-section room schedule = spatial macro-form. $O((2R+1)^3)$ per geometry. The parametric generator behind SP-009 and the physical-early counterpart to SP-032/071. |
 |---|
 
 
@@ -17905,3 +17907,350 @@ Polyphony = one such voice per sounding note (88 × ≤3 strings), each $O(1)$/s
 - Conklin, H. A. (1996). "Design and tone in the mechanoacoustic piano. Part I: String and scale design." *JASA* 100(2), 695–708.
 - Van Duyne, S., & Smith, J. O. (1995). "Physical modeling with the 2-D digital waveguide mesh." *Proc. ICMC* (for the soundboard/plate extension).
 - Bensa, J., Bilbao, S., Kronland-Martinet, R., & Smith, J. O. (2003). "The simulation of piano string vibration: From physical models to finite difference schemes and digital waveguides." *JASA* 114(2), 1095–1107.
+# Change-Ringing Combinatorial Method (CRCM) (Method 089)
+
+### Source
+English **change ringing** ("method ringing", 17th-century England): ringing a set of tuned bells through an endless sequence of *changes* (permutations of the striking order) generated by memorized rules rather than a fixed melody. First systematized in **Duckworth & Stedman, *Tintinnalogia* (1668)** and **Stedman, *Campanalogia* (1677)**; the oldest method **Grandsire** (c. 1650, Robert Roan) deviates from plain hunt at the treble's lead; **Plain Bob** is the canonical simple method. The mathematical core is **group theory**: changes are elements of the symmetric group $S_n$ acting on the striking order; a plain course is a cycle generated by alternating two fixed permutations (cross $\sigma_x=(1\,2)(3\,4)\cdots$ and straight $\sigma_s=(2\,3)(4\,5)\cdots$). Modern treatments: White (1987) "Ringing the Cosets" (*Amer. Math. Monthly* 94), Price (1970) *The Theory of Change Ringing*, Central Council method collections. *Tintinnalogia* is arguably the first published algorithmic-music treatise — a rules-based generative system still performed today. Not present in this DB: no change-ringing, adjacent-swap permutation law, or hunt-ostinato method exists (065 TTSMC = serial pitch rows, different law; 069/077 = word/cycle combinatorics without the motion constraint; 008 = conversational roles, not permutation math).
+
+### Layer
+**concrete** — emits resolved `MusicEvent`s (pitch, onset, duration, velocity) per blow per bell; fills UnitMatrix cells directly and pads to section length like any generator. Candidate code path: `generators/change_ringing.py` (`ChangeRingingGenerator`, registry id `089`/`CRCM`), sibling of `tintinnabuli.py` (also a deterministic rules-realizer).
+
+### Description
+A change-ringing method defines an **infinite non-repeating stream of permutations of $n$ voices** under one draconian rule — every change is a product of **disjoint adjacent swaps** (a bell moves at most one position per blow) — plus a **hunting ostinato** (the treble sweeps top→bottom→top with double blows at each extreme) and a small set of **deviations** that break the hunt's short cycle to reach the full $n!$ space. Bells = UnitMatrix voices; changes = isochronous grid slots. The law is a melodic promise: position moves ≤ 1 per blow ⇒ in the position-degree mapping every voice is *entirely stepwise* (verified: 0 jumps > 1 in a 60-change Plain Bob Minor course; 83.6% 2nds + 16.4% unisons) — legato flow by construction, the anti-staccato complement to sparse 011/032 layers. Plain Bob Minor's plain course (60 changes) cycles five lead heads `123456 → 135264 → 156342 → 164523 → 142635 → rounds`; each lead's second half is the first with every row reversed (verified, `rows[6+k]==reversed(rows[k])`, k=0..5); the deviation row alone breaks the mirror (the "blue line" shape). Calls ("bob"/"single") at lead ends pivot to other lead-head cosets — the form grammar. Composition mappings: **A** authentic peal (bell = fixed pitch, melody = continuous strike stream, verticalities = change rows, all distinct); **B** melodic voices (pitch = degree of the bell's position — every line a phase-shifted palindromic hunt, 100% stepwise, interlocking hocket); **C** hybrid (B voices over an ABS subset-network chord bed).
+
+### Musical Elements Framework
+
+| Element | Mechanism |
+|---|---|
+| **PITCH** | Mapping A: fixed per-bell pitch (diatonic ladder; tenor = tonic anchor). Mapping B: pitch = scale degree of position — every line 100% stepwise (verified: 0 leaps > 2nd in 354 steps; histogram {unison 16.4%, 2nd 83.6%}). Contour = the blue line (hunt/dodge/make-2nds shapes). |
+| **RHYTHM** | Strictly isochronous blows (Grid-Locked) — the rhythm IS the change rate. Velocity options: position-based (extremes louder, like physical bell loudness) or call-synced accents at lead ends. |
+| **HARMONY** | Verticalities = change rows (60/60 distinct in Plain Bob Minor). Function-free but *mode-locked*: tenor on tonic, back-rounds (6-5-4-3-2-1, descending scale) at the half-lead = natural cadence. Pair with ABS-002 to steer the tenor through a progression. |
+| **STRUCTURE** | Lead cycle (12 changes) = phrase; plain course (60) = section; calls = form pivots (the conductor's composition IS the macro-form); treble hunt = register ostinato; half-lead mirror = built-in A/B symmetry inside every phrase. |
+| **TEXTURE** | Deterministic hocket: at every blow exactly the swapped pairs move, everything else sustains — pure interlocked counterpoint; the continuous strike stream is the flowing fill layer for the Method Hybridization rule. |
+
+### UnitMatrix Integration (Voices & Sections)
+
+- **Rows (Voices)** = bells. Mapping A: each row holds one fixed pitch (a "bell row"; structure lives in onsets). Mapping B (default): row $i$ = bell $i$'s position-degree melody; $n$ = 4–8 rows typical.
+- **Columns (Sections)** = course segments: one lead per section (12 blows = 3 bars at quarter-note blows), or one plain course over 5 sections (one per lead head). Calls at section boundaries = form markers (bob = chorus pivot).
+- **Cells (MusicUnit)** — `{PITCH}` = the change's pitch assignment; `{RHYTHM}` = equal onsets per lead-cell (or Euclidean-thinned, then add a continuous pad per the Hybridization rule); `{HARMONY}` = tenor-pedal sonority, optionally snapped to the abstract layer's chord; `{TEXTURE}` = swap-pair accent (the two moving bells louder). All cells padded to `section_len` (terminal landmark) so `composer.validate()` passes.
+- **Flow**: method definition (n, deviation table, calls) → change stream → mapping A/B/C → per-voice rows → `UnitMatrixComposer.fill_voice_section` → validate → `to_midi` → SP render. Deterministic per (n, method, calls) — zero-RNG, byte-identical exports.
+
+### Pitfalls
+
+1. **Illegal changes break the melodic contract** — non-adjacent permutation moves inject arbitrary leaps. Fix: generate only by alternating $\sigma_x/\sigma_s$ with the deviation table; assert the adjacent-swap property per change.
+2. **Repeated-row (false) methods** — a badly designed deviation revisits a row; a "true" method never repeats before rounds. Fix: assert `len(set(rows)) == len(rows)` — THE quality gate for method validity.
+3. **Double-blow / off-by-one** — treble double blows at extremes and the lead-end exception hinge on exact row indices; the half-lead mirror holds only up to the deviation row (k=0..n/2−1), not the whole lead. Verify symmetry numerically before documenting it.
+4. **Monotony without calls** — one plain course = 60 rows (6 bells) then loops. Fix: drive calls from the section plan, or splice methods course-per-course (Plain Bob → Grandsire → Stedman) as ringers do.
+5. **Register mapping is inverted vs intuition** — bell 1 (treble) = HIGHEST pitch, bell n (tenor) = lowest; mapping `deg(bell) = n − bell`. Flipping it puts the ostinato in the bass and inverts every contour.
+6. **Percussion-only timbre limit** — struck bells have no dynamics; a pure peal render sounds like an alarm. Fix: assign voices to GM strings/flutes/choir (Mapping B) or sustained synthesis; keep the tenor row as the tonal anchor.
+7. **Static feel** — isochronous blows + pure stepwise lines = hypnotic but flat. Fix: layer 026 DPSM phase shifts or 023 Tendency corridors, or humanize onsets (SP-006) while keeping the change grid.
+8. **Not serialism** — 065 TTSMC permutes pitch-class ROW content; CRCM permutes VOICE POSITIONS under a motion law with a hunting ostinato. Both are "$S_n$ on 12 things" only superficially — do not merge; CRCM's law constrains motion (voice leading), TTSMC's constrains content (row forms).
+
+### Comparison With Related Methods
+
+- **069 CWCC / 077 DBUC / 076 PTM-ASC**: word/combinatorics siblings — Christoffel balance, de Bruijn exhaustiveness, Thue–Morse self-similarity. CRCM adds the adjacent-swap motion law + hunting ostinato: structure lives in *how voices move*, not the sequence's combinatorial spectrum.
+- **065 TTSMC**: both $S_n$-based; see Pitfall 8.
+- **026 DPSM**: both build from identical looping streams; DPSM phases whole cycles, CRCM shuffles adjacent pairs under a hunt — complementary phase/shuffle textures.
+- **032 ITCM**: coprime-loop misalignment vs group-law interlock; both yield non-repeating polyphony from tiny rule sets.
+- **056 SCCC**: both strict historical craft rules; SCCC constrains counterpoint intervals, CRCM constrains permutation motion.
+- **051 SGLM / 011**: graph methods over voice-leading space; CRCM is the historical endpoint of the same idea — an explicit Cayley graph of $S_n$ walked by rule.
+
+### References
+- Duckworth, R., & Stedman, F. (1668). *Tintinnalogia, or the Art of Ringing*. London.
+- Stedman, F. (1677). *Campanalogia: or the Art of Ringing Improved*. London.
+- Price, B. (1970). *The Theory of Change Ringing*. Central Council of Church Bell Ringers.
+- White, A. T. (1987). "Ringing the Cosets." *American Mathematical Monthly* 94(8), 721–746.
+- White, A. T., & Wilson, R. (1995). "The Hunting Group." *Mathematical Spectrum*.
+- Rankin, R. A. — Hamiltonian cycles in Cayley graphs of symmetric groups (extent constructions).
+- Central Council of Church Bell Ringers. *Collections of Methods* (blue-line notation).
+- Fletcher, P. (2003). "The mathematics of change ringing." *The Mathematical Intelligencer*.
+# Sound Production Method SP-075 — Image-Source Room Acoustics Synthesis (ISRA)
+
+**Layer:** absolute (sound production — Post-Processing / DSP)
+**Category:** Post-Processing / DSP | **Target Output:** Physically Simulated Room Impulse Response / Geometric Spatialization
+
+### One-line description
+
+Renders acoustic spaces — not just sounds in them — by mirroring every sound source
+geometrically across the walls, floor, and ceiling of a shoebox room: each mirror
+image is a legitimate echo path, so a room impulse response (RIR) with correct early
+reflections, flutter echoes, and a physically ordered reverberant tail is generated
+analytically from nothing but room dimensions, wall absorption, and the speed of sound
+(Allen & Berkley 1979).
+
+### Layer classification
+
+Per `LAYER_ARCHITECTURE.md`, every SP-* method is **absolute** (sound production:
+audio stems → WAV/OGG). ISRA is an *absolute*-layer method in the Post-Processing / DSP
+class: it consumes rendered per-voice stems (or the summed mix) and produces roomed
+audio. Candidate code path: `sound/effects/image_source_room.py` — sibling of
+`sound/effects/room_reverb.py` (SP-009 convolutive / SP-032 FDN / SP-058 spring /
+SP-071 Dattorro plate). Plugs into `workflows.musicom_workflow.produce(method="SP-075")`
+as a post-render spatialization pass.
+
+### Source
+
+Allen, J. B., & Berkley, D. A. (1979). "Image method for efficiently simulating
+small-room acoustics." *JASA* 66(4), 943–950. Extended to arbitrary polyhedra by
+Borish (1984); production-grade reference implementation: **pyroomacoustics**
+(Scheibler, Bezzam & Dokmanić, ICASSP 2018), whose docs state it provides a "Fast C++
+implementation of the image source model and ray tracing for general polyhedral rooms
+to efficiently generate room impulse responses" (verified from pyroomacoustics
+readthedocs, 2026-09-16). Precise shoebox image-source construction verified against
+pyroomacoustics source (`room.cpp`, `image_source_shoebox`): image positions
+$\mathrm{loc}[d] = q_d L_d + \mathrm{step}_d$ with
+$\mathrm{step}_d = s_d$ for even $|q_d|$ and $L_d - s_d$ for odd $|q_d|$; per-axis
+attenuation $= \beta_{\text{west}}^{p_1}\beta_{\text{east}}^{p_2}$ with
+$(p_1, p_2) = (q/2, (q+1)/2)$ for $q>0$ and $(|(q{-}1)/2|, |q/2|)$ for $q<0$; total
+order $= \sum_d |q_d|$; the image lattice is the **L1 ball** of radius $R$
+($\sum_d|q_d| \le R$), not the naive cube.
+
+### Description
+
+The image-source method (ISM) computes a room impulse response in closed form by
+exploiting specular reflection: every sound path that bounces off $k$ flat walls is
+equivalent to a *straight* path from a mirror image of the source reflected across
+those walls. Unroll all bounces → tile space with mirrored rooms → each image source
+at distance $d_q$ from the receiver contributes one impulse delayed by $d_q/c$ and
+attenuated by $1/d_q$ (spherical spreading) times the product of the reflection
+coefficients of the walls it crossed. Summing all images up to reflection order $R$
+yields the exact early-reflection structure of the room (including flutter echoes
+between parallel walls and the discrete-to-diffuse transition); convolving any dry
+signal with this RIR places it physically in the room. Unlike sampled/IR reverb
+(SP-009) the room is parametric — dimensions, absorption, source and receiver
+positions are all continuous control knobs, and unlike FDN/plate/spring algorithms
+(SP-032/071/058) the early reflections are *physically correct* rather than
+statistically plausible.
+
+### Technical Mechanics
+
+#### 1. The image lattice (shoebox room)
+
+Room $[0,L_x]\times[0,L_y]\times[0,L_z]$, source $\mathbf{s}$, receiver
+$\mathbf{r}$, wall reflection coefficients $\beta_{x_1},\beta_{x_2},\beta_{y_1},
+\beta_{y_2},\beta_{z_1},\beta_{z_2}\in[0,1)$ ($\beta=\sqrt{1-\alpha}$ from absorption
+$\alpha$). For every lattice point $\mathbf{q}=(q_x,q_y,q_z)\in\mathbb{Z}^3$ with
+$|\mathbf{q}|_1 \le R$ the Allen–Berkley image position (per axis $d$):
+
+$$
+\mathrm{loc}_d = q_d L_d + \begin{cases} s_d & |q_d| \text{ even} \\ L_d - s_d & |q_d| \text{ odd}\end{cases}
+$$
+
+#### 2. Per-image attenuation (exact Allen–Berkley index form)
+
+The number of bounces off each of the two walls normal to axis $d$ is
+$(p_1,p_2) = (q_d/2,\ (q_d{+}1)/2)$ for $q_d>0$ and
+$(|(q_d{-}1)/2|,\ |q_d|/2)$ for $q_d<0$ (0,0 for $q_d=0$). The image's broadband
+gain:
+
+$$
+g_{\mathbf{q}} = \frac{\prod_{d}\ \beta_{d_1}^{\,p_1(d)}\ \beta_{d_2}^{\,p_2(d)}}{4\pi\, d_{\mathbf{q}}},
+\qquad d_{\mathbf{q}} = \|\mathbf{r} - \mathbf{loc}(\mathbf{q})\|_2
+$$
+
+(the $1/4\pi d$ is the spherical-spreading term; $\beta=0$ = fully absorbing wall,
+$\beta\to 1$ = hard concrete).
+
+#### 3. The impulse response
+
+$$
+h(t) = \sum_{|\mathbf{q}|_1 \le R} g_{\mathbf{q}}\; \delta\!\left(t - \tfrac{d_{\mathbf{q}}}{c}\right)
+$$
+
+Fractional delays $d_{\mathbf{q}}/c \cdot f_s$ land between samples → Lagrange
+fractional-delay interpolation (3rd/5th order) or a windowed-sinc kernel per image.
+
+#### 4. Frequency-dependent walls (the modern necessity)
+
+Scalar $\beta$ gives flat absorption → comb-colored RIRs. Per-band ISM (pyroomacoustics
+`n_bands`): run the model with a $\beta$ vector per octave band and filter each image's
+impulse with the band's fractionally-delayed, band-limited kernel — equivalently,
+convolve each impulse with a minimum-phase lowpass whose gain is
+$\prod_d \beta_{d,b}^{p(d)}$ in band $b$. High frequencies die on bounces; the tail
+darkens naturally, exactly as in real rooms.
+
+#### 5. Echo-density structure (why it sounds like a room)
+
+Path-length statistics of the image lattice give the classic room-acoustics result:
+echo density grows as $\frac{dE}{dt} \propto t^2$ (polynomial growth toward the
+Schroeder frequency $f_S \approx 2000\sqrt{RT_{60}/V}$, above which the response is
+statistically diffuse). The ISM reproduces the *early* part exactly and the diffuse
+tail approximately (up to order $R$); Lehmann et al. (2010) give the closed-form
+RT60/integration-time estimator used to bound $R$.
+
+#### 6. Render chain
+
+```text
+dry stem per voice  ⊛  h_v(t)  →  roomed voice
+sum over voices (± per-voice source position)  →  mix → limiter
+RIR length: fs · (RT60 target) samples; order R chosen so β̄^(2R) < −60 dB
+```
+
+#### 7. NumPy implementation sketch
+
+```python
+import numpy as np
+from scipy.signal import fftconvolve
+
+def rir_shoebox(src, rec, room, beta, fs, c=343.0, order=5):
+    """Allen-Berkley shoebox RIR. beta = (bx1,bx2,by1,by2,bz1,bz2)."""
+    L = np.asarray(room, float); s = np.asarray(src, float); r = np.asarray(rec, float)
+    n_max = int(fs * (np.linalg.norm(L) * (2 * order + 1)) / c) + 64
+    h = np.zeros(n_max)
+    B = np.asarray(beta, float)          # [x1, x2, y1, y2, z1, z2]
+    for qx in range(-order, order + 1):
+        for qy in range(-order, order + 1):
+            for qz in range(-order, order + 1):
+                if abs(qx) + abs(qy) + abs(qz) > order:   # L1 ball bound
+                    continue
+                q = (qx, qy, qz)
+                loc = np.empty(3)
+                for d in range(3):
+                    loc[d] = q[d] * L[d] + (s[d] if abs(q[d]) % 2 == 0 else L[d] - s[d])
+                dist = np.linalg.norm(r - loc)
+                if dist < 1e-9:
+                    continue
+                # per-axis bounce counts (Allen-Berkley p1/p2)
+                gain = 1.0
+                for d, qd in enumerate(q):
+                    if qd > 0:
+                        p1, p2 = qd // 2, (qd + 1) // 2
+                    elif qd < 0:
+                        p1, p2 = abs((qd - 1) // 2), abs(qd // 2)
+                    else:
+                        p1, p2 = 0, 0
+                    gain *= B[2 * d] ** p1 * B[2 * d + 1] ** p2
+                gain /= (4 * np.pi * dist)
+                tau = dist / c * fs                      # in samples (fractional)
+                i0 = int(tau); frac = tau - i0
+                if i0 + 1 < n_max:
+                    h[i0]     += gain * (1 - frac)       # linear fractional delay;
+                    h[i0 + 1] += gain * frac             # use Lagrange-3 in production
+    return h
+
+# usage: y = fftconvolve(dry_stem, rir_shoebox(...))[:len(dry_stem)+len(h)-1]
+```
+
+Production variant: per-band β (3–8 octave bands), Lagrange/sinc fractional delay,
+visibility culling (images occluded by walls in polyhedral rooms — Borish), and
+optional directional receiver (SP-021 HRTF convolution per image for binaural room
+sim).
+
+### Complexity
+
+$\mathcal{O}((2R{+}1)^3)$ images with $\mathcal{O}(1)$ work each (R=8 → 4913 images,
+sub-second in NumPy), plus one $\mathcal{O}(N\log N)$ FFT convolution per voice stem.
+Deterministic per (geometry, β, fs) — no randomness unless scattering is added.
+
+### Musical Elements Framework
+
+| Element | Mapping |
+|---|---|
+| **PITCH** | Room axial/tangential modes $f_{lmn}=\tfrac{c}{2}\sqrt{(\ell/L_x)^2+(m/L_y)^2+(n/L_z)^2}$ color registers: small rooms boost 80–300 Hz (bathroom bloom), halls have sub-audible modes. Choosing $L$ per section aligns room modes with (or deliberately against) the section's tonal center — organ-builder practice. Direct-to-reverb ratio (DRR) is a register-independent distance cue. |
+| **RHYTHM** | Early-reflection pattern (first 20–80 ms) is the room's rhythmic fingerprint: parallel walls → periodic flutter echo (a physical tremolo at $c/2L$), asymmetric rooms → scattered echoes. Pre-delay = $d_{1st}/c$; longer pre-delay perceptually detaches transients from the wash → tighter perceived groove at identical tempo. Echo density grows $\propto t^2$ from discrete to diffuse. |
+| **HARMONY** | Frequency-dependent absorption = the room's spectral EQ: hard walls (β→1) keep triads bright and ringing; absorbent walls (studio, β≈0.5) dry harmonics down. Modal support in the bass can sympathetically reinforce the key's tonic register; overlapping sustained notes in a long-RT60 room smear into emergent harmony wash (the physical basis of cathedral-organ voicing). |
+| **STRUCTURE** | Per-section room schedule = macro-form: close-mic intro → room verse → hall chorus → cathedral bridge/outro; continuous morph of $(L, \beta, \mathbf{r})$ across a section = walking-through-the-building form. DRR trajectory (near→far) is a narrative distance arc independent of dynamics. |
+| **TEXTURE** | Echo density + decay time = perceived space size; β spectrum = warm/bright surface; flutter = rhythmic texture; the diffuse tail is a canonical continuous-fill layer for the Method Hybridization rule (sparse 011/032 rhythmic layers + ISRA room wash = flowing groove — the Disco v2→v3 fix). Per-voice source positions give geometric mixing (front row vs back row voices). |
+
+### UnitMatrix Integration
+
+- **Rows (Voices)** = each voice rendered to its own dry stem with its own source
+  position $\mathbf{s}_v$ in the room → level/dryness differences emerge *geometrically*
+  (close voice = loud+dry, far voice = soft+wet) without touching per-voice gains.
+  A stereo pair of receivers per voice gives the full stereo room image.
+- **Columns (Sections)** = `{STRUCTURE}` → per-section room preset: dimensions $L$,
+  6-wall β (or per-band β vector), source/receiver geometry, pre-delay. A section-level
+  "architecture plan" (the room schedule) is the spatial orchestration layer; morphing
+  between presets = continuous section transitions.
+- **Cells (MusicUnit)** = `{PITCH}` → optional per-cell source height/distance (register
+  staging); `{RHYTHM}` → cell onsets trigger physically-generated echo patterns — no
+  per-note delay programming, the room does it; `{HARMONY}` → room-mode alignment with
+  the section's tonal center; `{TEXTURE}` → per-cell DRR via receiver distance and
+  β-bandwidth choices.
+- **Flow**: `compose` (UnitMatrix → MIDI) → dry render per voice (SP-001 FluidSynth /
+  SP-011 KS / SP-029 subtractive / SP-074 piano) → `produce(method="SP-075",
+  params={room, beta, positions, order})` → per-voice RIR + fftconvolve → sum →
+  SP-008 limiter → WAV/OGG. Pairs: SP-009 (SP-075 *generates* what SP-009 *measures*;
+  hybrid = ISRA early reflections + measured-IR tail), SP-032/071 (ISM early + FDN/plate
+  diffuse tail — the standard hybrid), SP-058 (spring tank on top for vintage color),
+  SP-021 (per-image HRTF = binaural room simulation), SP-034 (encode ISM images into
+  HOA B-format for head-tracked immersive render), SP-053 VBAP (object placement in
+  arrays vs ISRA room reconstruction — complementary spatialization philosophies).
+
+### Pitfalls
+
+1. **Scalar β = comb-filter coloration.** Flat absorption → all frequencies decay
+   identically → metallic ringing RIR. Fix: per-band β (3–8 octave bands) with
+   band-filtered images, or per-image one-pole lowpass whose cutoff falls with
+   reflection order.
+2. **Flutter echo between parallel walls.** Hard parallel walls produce periodic
+   echoes at $2L/c$ — musically useful (slap) but can dominate. Fix: jitter high-order
+   image positions ±1% or add a scattering coefficient (pyroomacoustics
+   `shoebox_scattering`) that decorrelates high-order images.
+3. **Truncated tail (too-low order R).** RIR ends mid-decay → gated sound. Fix: choose
+   $R$ so $\bar\beta^{2R} < -60$ dB relative to direct path, or crossfade the ISM tail
+   into an FDN (SP-032) — the standard hybrid RT60 completion.
+4. **Fractional delay quantization.** Rounding $d/c$ to whole samples detunes the
+   early reflections and brightens/hash-out the tail. Fix: Lagrange-3/5 or windowed-sinc
+   fractional delay per image (same machinery as SP-074's dispersion allpass).
+5. **$\mathcal{O}((2R{+}1)^3)$ cost explosion.** R=15 → 29,791 images. Fix: L1-ball
+   bound (already $\sim6\times$ fewer than the cube for R=8), vectorized image-lattice
+   construction in NumPy, and cap R by RT60 need (Lehmann 2010 estimator).
+6. **Degenerate geometry.** Receiver coincident with an image (or outside the room) →
+   zero/NaN distances and impulsive artifacts. Fix: clamp src/rec inside
+   $[\epsilon, L-\epsilon]$; assert $d_{\mathbf{q}} > 0$; validate $\beta\in[0,1)$.
+7. **β ≥ 1 instability.** $\beta\ge1$ means energy *gain* per bounce → exponentially
+   exploding RIR. Hard-clamp β and assert.
+8. **Direct-path dominance / dry confusion.** Receiver too close to the source → dry
+   signal dominates, method indistinguishable from SP-009's tap line. Fix: place
+   receiver beyond the critical distance $r_c \approx 0.057\sqrt{V/RT_{60}}$ or scale
+   the direct image separately.
+9. **Confusion with SP-009 (convolutive reverb).** SP-009 convolves with a *measured*
+   IR — fixed real rooms, no parameters. ISRA *synthesizes* the IR from geometry:
+   arbitrary/nonexistent rooms, per-section room morphing, per-voice positions. They
+   compose: ISRA early reflections + measured tail.
+10. **Convolution cost.** 5 s RIR × long stems → always `fftconvolve` (or partitioned
+   convolution for streaming); time-domain convolution of long RIRs is prohibitively
+   slow.
+11. **Occlusion ignored in shoebox.** The classic Allen–Berkley shoobx model assumes
+   all images visible (hard walls only). For partitions/furniture, use the
+   visibility-culled polyhedral ISM (Borish) or hybrid ray-tracing
+   (pyroomacoustics's hybrid ISM+rays) — otherwise reflections pass through walls.
+   (Classic Allen–Berkley shoebox assumes all images visible; image positions remain
+   well-defined for any (L, s) with 0 < s < L.)
+
+### Comparison With Related Methods
+
+- **SP-009 Convolutive Reverberation**: measured IR vs *parametric* IR. ISRA can
+  reproduce SP-009's room *and* every room that doesn't exist.
+- **SP-032 FDN / SP-071 Dattorro plate / SP-058 spring**: statistically diffuse tails,
+  statistically tuned early reflections. ISRA is exact in the early field — the hybrid
+  (ISM early + FDN tail) is industry practice (pyroomacoustics hybrid kernel).
+- **SP-040 FDTD room acoustics**: wave-exact (diffraction, interference) at
+  $\mathcal{O}(f_s^3)$-scale grid cost. ISM is ray/geometric approximation:
+  $\mathcal{O}((2R{+}1)^3)$ once per geometry, exact specular reflections, no
+  diffraction — the right tool below ~2–4 kHz for shoebox rooms.
+- **SP-021 Binaural / SP-034 HOA / SP-053 VBAP**: spatialization *renderers* that
+  assume a spatial model; ISRA is the *room generator* that can feed them (per-image
+  HRTF or B-format encoding).
+- **SP-050 Spectral Delay / SP-026 Phase vocoder**: signal-domain processors; ISRA
+  operates at the geometry level, before any per-sample processing.
+
+### References
+
+- Allen, J. B., & Berkley, D. A. (1979). "Image method for efficiently simulating
+  small-room acoustics." *JASA* 66(4), 943–950.
+- Peterson, P. M. (1986). "Simulating the response of multiple microphones to a single
+  acoustic source in a reverberant room." *JAES* 34(8), 603–612.
+- Borish, J. (1984). "Extension of the image source model to arbitrary polyhedra."
+  *JASA* 75(6), 1827–1836.
+- Scheibler, R., Bezzam, E., & Dokmanić, I. (2018). "Pyroomacoustics: A Python package
+  for audio room simulation and array processing algorithms." *Proc. IEEE ICASSP*.
+- Kuttruff, H. (2016). *Room Acoustics* (6th ed.). Spon Press — geometrical room
+  acoustics / image sources chapters.
+- Savioja, L., & Svensson, U. P. (2015). "Overview of geometrical room acoustics
+  modelling techniques." *JASA* 138(2), 708–730.
+- Vorländer, M. (2007). *Auralization*. Springer — image-source modeling chapter.
+- Lehmann, E. A., Johansson, A. M., & Nordholm, S. (2010). "Reverberation-time
+  prediction method for room impulse responses simulated with the image-source model."
+  *Applied Acoustics* 71(3), 244–249.

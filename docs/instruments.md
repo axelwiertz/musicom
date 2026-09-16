@@ -320,6 +320,37 @@ F3–F6), NOT the toy glockenspiel (steel bars, GM9); line + accent voice
 (double-stops OK), NOT a bass voice and NOT a chord-sustain pad — rolls are
 the only sustain. Registry `_FIELDS` extended with `xylophone_modes`.
 
+**Taiko added** (2026-09-16): GM116, World-family eighth entry — the Japanese
+kumi-daiko festival drum (tacked cowhide head on a hollowed keyaki-log
+shell, thick cedar bachi; the ceremonial accent voice that pairs with the
+KB's koto/shamisen/shenai) (instrument.md + taiko.py), verified end-to-end
+UnitMatrixComposer → zero-drift ✓ → MIDI → FluidSynth WAV ✓; RenderPipeline
+stem label `trackXX_Taiko_Drum.wav` ✓ (GM_PROGRAMS[116] = "Taiko Drum",
+FluidR3 preset 116 = "Taiko Drum" — labels match exactly, no quirk).
+ModalSynth recommended with a custom `TAIKO_MODES` bank: the tuned (0,1)
+head mode (110 Hz at the A2 reference) coupled to inharmonic Bessel
+partners (1.6×/2.13×/2.64× — the timpani family) AND a low hollowed-shell
+mode at ~90 Hz, the chest thump that IS the taiko's identity; measured
+shell band 60–110 Hz = 40.7% of total energy (head band 21.9%, 1.6× partner
+11.8%), and late(1.0–1.5 s) rms/peak 0.019 vs the timpani bank's 0.134 —
+the taiko rings ~7× shorter than a timpano (tacked hide + dense body kill
+energy fast; decay rates 2.6–6.0 sit between timpani 0.9–3.0 and marimba
+8–20). DrumSynth606 `tom` (DRUM606_DEFAULTS freq 80, decay 1.4, sweep
+1.45) covers the strike thump; Karplus-Strong is EXPLICITLY REJECTED (no
+string — the timpani precedent). Solo-render spectral check: 4–8 kHz buzz
+4.4% (no comb-filtering). Empirical FluidR3 pitch sweep (RMS, notes 36–67):
+preset 116 audible 8/8, no gaps — SF2 never clips a composition. Range
+36–67 is the melodic-taiko patch span (real ō-daiko fundamental ~60–80 Hz =
+B1–E2; the composition core is E2–G3 = the chū-daiko festival zone).
+Identity: GM116 is a TUNED drum (pitch follows the note, like a timpano
+without the pedal) but the IDIOM is rhythm + accent, not melody — kuchi-
+shoga strokes (DON/DOKO/KA/SU) land the ensemble on the 1; distinct from
+GM117 Melodic Tom (higher, tom-tuned for melodic fills). Line/rhythm
+quirk: accent/rhythm/drone voice over koto/shamisen lines, NOT a melodic
+lead and NOT a bass melodic voice. Channel quirk: melodic channel (0–9)
+with program 116 — channel 9 would trigger the drum-kit map and the
+`Acoustic_Grand_Piano` program-0 fallback label (timpani lesson).
+
 ## Python usage
 
 ```python
@@ -372,6 +403,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | World | Kalimba | 108 | 48–96 | lead, melody, ornament, drone, harmony |
 | World | Shenai | 111 | 55–96 | lead, melody, ornament, drone, accent |
 | World | Fiddle | 110 | 55–96 | lead, melody, ornament, countermelody, accent |
+| World | Taiko Drum | 116 | 36–67 | accent, rhythm, drone, ornament |
 | Woodwind | Bagpipe | 109 | 53–96 | lead, melody, ornament, drone, accent |
 
 ## Stem label quirks (RenderPipeline)
@@ -410,6 +442,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 111 | Shanai | **Shanai** ✗ (GM_PROGRAMS[111] = "Shanai" — GM2 spec spelling; instrument = Shenai, FluidR3 preset 111 = "Shenai") |
 | 110 | Fiddle | Fiddle ✓ (GM_PROGRAMS[110] + FluidR3 preset 110 both "Fiddle") |
 | 114 | Steel Drums | Steel Drums ✓ (GM_PROGRAMS[114] + FluidR3 preset 114 both "Steel Drums") |
+| 116 | Taiko Drum | Taiko Drum ✓ (GM_PROGRAMS[116] + FluidR3 preset 116 both "Taiko Drum") |
 | ch9/pgm0 | Drums | **Acoustic_Grand_Piano** ✗ (program-0 fallback) |
 
 > **Known off-by-one in existing entries**: ~~`trumpet.py` uses 57~~ **FIXED 2026-08-27**: trumpet is now 56 (SF2 preset 56=`SoloTrumpet`). `piano.py`=1 → actually Bright Acoustic Piano (GM #2) — cosmetic label difference only, no routing impact. Legacy registry rows kept as-is for piano; new instruments use 0-indexed programs matching pipeline+SF2.
