@@ -1,0 +1,95 @@
+{
+  "job": "random-style production pass (SP) - LAYER-ALIGNED 2026-09-17",
+  "selection_source": "workflows.musicom_workflow.SP_METHODS registry (30 implemented)",
+  "selection_file": "/opt/data/sel_20260917.json",
+  "seed": 20260917,
+  "composition_source": "/opt/data/repos/musicom/projects/Styles/Classical/099-classical-crossover-pathA-7sec/MIDI/099-classical-7sec.mid",
+  "composition_sha256": "4288a9cb7dd35e06f184c2754e54792b21c54f496137b708f16f91a9fb65c271",
+  "production_method": "SP-084",
+  "production_method_name": "Flue-Pipe Physical Model w/ Air-Supply Modulation (Modartt Airteq-style)",
+  "registered_module": "sound.synthesis.air_pipe",
+  "layer_discipline": "absolute layer: AirPipe replaces timbre for ALL voices; open pipes only (stopped=True renders octave-high, see report)",
+  "voice_profiles": {
+    "1": {
+      "pressure": 0.62,
+      "balance": 0.35,
+      "gain": 1.0,
+      "pan": -0.2
+    },
+    "2": {
+      "pressure": 0.5,
+      "balance": 0.45,
+      "gain": 0.9,
+      "pan": 0.2
+    },
+    "3": {
+      "pressure": 0.52,
+      "balance": 0.5,
+      "gain": 0.75,
+      "pan": -0.35
+    },
+    "4": {
+      "pressure": 0.52,
+      "balance": 0.5,
+      "gain": 0.75,
+      "pan": 0.35
+    },
+    "5": {
+      "pressure": 0.66,
+      "balance": 0.5,
+      "gain": 0.95,
+      "pan": 0.0
+    }
+  },
+  "bus_chain": "voice sum -> peak 0.89 -> normalize_to_lufs(-14) -> Limiter(-1 dB) LAST",
+  "fixes": [
+    "open-pipe-only: stopped=True mode_freqs uses open-pipe f0 formula (dom 524 Hz for C4); all voices open",
+    "velocity gain clip((vel/90)**1.5,0.22,1.30) reapplied at call site (module has no velocity path)",
+    "outer half-cosine note envelope + 0.25 s tail per note: click safety"
+  ],
+  "checks": {
+    "pitch_verification": {
+      "windows_checked": 259,
+      "dominant_peak_hit_rate": 1.0,
+      "harmonic_energy_mean_8h": 0.3305,
+      "acf_windows": 65,
+      "acf_unpitched": 4,
+      "lowest_midi_notes_seen": [
+        36,
+        38,
+        41,
+        43,
+        45,
+        60,
+        62
+      ],
+      "median_dom_hz": 98.0,
+      "misses": [],
+      "method": "FFT dominant peak per 0.5 s window, 50-2000 Hz, +/-4% vs active MIDI fund or x2/x3//2",
+      "verdict": "PASS"
+    },
+    "silence_wet": 0.0197,
+    "silence_dry": 0.0256,
+    "lufs": -14.0,
+    "peak": 0.8913
+  },
+  "artifacts": {
+    "wav": "/opt/data/repos/musicom/projects/Styles/Production/SP084-airpipe-classical-7sec/SP084-airpipe-classical-7sec.wav",
+    "ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP084-airpipe-classical-7sec/SP084-airpipe-classical-7sec.ogg",
+    "wet_stems": {
+      "track00_Viola_AIRPIPE": "/opt/data/repos/musicom/projects/Styles/Production/SP084-airpipe-classical-7sec/Audio/stems_wet/track00_Viola_AIRPIPE.wav",
+      "track01_Recorder_AIRPIPE": "/opt/data/repos/musicom/projects/Styles/Production/SP084-airpipe-classical-7sec/Audio/stems_wet/track01_Recorder_AIRPIPE.wav",
+      "track02_Acoustic_Grand_Piano_AIRPIPE": "/opt/data/repos/musicom/projects/Styles/Production/SP084-airpipe-classical-7sec/Audio/stems_wet/track02_Acoustic_Grand_Piano_AIRPIPE.wav",
+      "track03_String_Ensemble_2_AIRPIPE": "/opt/data/repos/musicom/projects/Styles/Production/SP084-airpipe-classical-7sec/Audio/stems_wet/track03_String_Ensemble_2_AIRPIPE.wav",
+      "track04_Electric_Bass_finger_AIRPIPE": "/opt/data/repos/musicom/projects/Styles/Production/SP084-airpipe-classical-7sec/Audio/stems_wet/track04_Electric_Bass_finger_AIRPIPE.wav"
+    },
+    "dry_stems": {
+      "track00_Viola": "/opt/data/repos/musicom/projects/Styles/Production/SP084-airpipe-classical-7sec/Audio/stems_dry/track00_Viola.wav",
+      "track01_Recorder": "/opt/data/repos/musicom/projects/Styles/Production/SP084-airpipe-classical-7sec/Audio/stems_dry/track01_Recorder.wav",
+      "track02_Acoustic_Grand_Piano": "/opt/data/repos/musicom/projects/Styles/Production/SP084-airpipe-classical-7sec/Audio/stems_dry/track02_Acoustic_Grand_Piano.wav",
+      "track03_String_Ensemble_2": "/opt/data/repos/musicom/projects/Styles/Production/SP084-airpipe-classical-7sec/Audio/stems_dry/track03_String_Ensemble_2.wav",
+      "track04_Electric_Bass_finger": "/opt/data/repos/musicom/projects/Styles/Production/SP084-airpipe-classical-7sec/Audio/stems_dry/track04_Electric_Bass_finger.wav"
+    },
+    "dry_reference": "/opt/data/repos/musicom/projects/Styles/Production/SP084-airpipe-classical-7sec/dry_full_mix_sp001_reference.wav"
+  }
+}

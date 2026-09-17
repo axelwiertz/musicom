@@ -351,6 +351,37 @@ lead and NOT a bass melodic voice. Channel quirk: melodic channel (0–9)
 with program 116 — channel 9 would trigger the drum-kit map and the
 `Acoustic_Grand_Piano` program-0 fallback label (timpani lesson).
 
+**Harpsichord added** (2026-09-17): GM6, Keys-family fourth entry — the
+quill-plucked Baroque keyboard (one jack, one pluck, per key; the ONLY
+plucked member of the Keys family) (instrument.md + harpsichord.py),
+verified end-to-end UnitMatrixComposer → zero-drift ✓ → MIDI (144 bytes) →
+FluidSynth WAV (761 KB) ✓; RenderPipeline stem label
+`trackXX_Harpsichord.wav` ✓ (GM_PROGRAMS[6] = "Harpsichord", FluidR3
+preset 6 = "Harpsichord" — labels match exactly, no quirk).
+Karplus-Strong recommended (quill-plucked waveguide = the exact physical
+model; loop_gain 0.9980 — between harp 0.9985 and sitar 0.9975: tail
+ratio 0.0063 vs harp 0.0083 and sitar 0.0050 at the 1–2 s window, dull
+control 0.0013 — ring ordering harp > harpsichord > sitar CONFIRMED:
+strings ring 2–5 s while the key holds, then the cloth damper stops them
+clean on release). ModalSynth 'string' preset is the fallback; custom
+`HARPSICHORD_MODES` bank models the 8'+4' registration — a near-harmonic
+stack with an explicit octave DOUBLE (4' choir at 0.55 amp stacked with
+the 0.45 octave partial = octave band 1.00 vs fundamental 1.00), decay
+rates 0.35–0.90; measured late(1.0–1.5 s) rms/peak 0.345 vs the marimba
+preset's 0.0001. KS spectral check on the solo render confirms the
+signature: 2nd partial **107.8% of f0** (the 4' octave double is the
+loudest partial — no other KB instrument has this), 3rd 86.0%. Solo
+spectral gate: 4–8 kHz buzz 9.1% (OK, no comb-filtering). Empirical
+FluidR3 pitch sweep (RMS, notes 29–89): preset 6 audible 10/10, no gaps
+— SF2 never clips a composition (bottom F1 rms 0.035, top F6 0.0175, no
+harp-style treble cliff). Range 29–89 = F1–F6, the modern 61-note
+concert double-manual compass (historic Ruckers/Taskin: 36–84). Identity
+quirk: **no touch dynamics** — the quill plucks at fixed displacement,
+so composition jobs keep velocities in the 84–100 band and phrase with
+registration (density, octave doubling, choir choice) + trills/mordents
+(the trill is the sustain mechanism on fast-dying plucked strings), NOT
+velocity swells. Channel quirk: melodic channel (0–9) with program 6.
+
 ## Python usage
 
 ```python
@@ -380,6 +411,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Keys | Piano | 1 | 21–108 | harmony, melody, bass, rhythm |
 | Keys | Church Organ | 19 | 36–96 | harmony, pad, bass, rhythm, accent |
 | Keys | Dulcimer | 15 | 48–96 | lead, melody, ornament, rhythm, harmony |
+| Keys | Harpsichord | 6 | 29–89 | harmony, continuo, melody, ornament, countermelody, accent |
 | Brass | Trumpet | 56 | 54–86 | lead, accent, fanfare |
 | Brass | Trombone | 57 | 40–78 | bass, counter, accent, harmony |
 | Brass | French Horn | 60 | 41–84 | harmony, counter, accent, lead |
@@ -418,6 +450,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 43 | Contrabass | Contrabass ✓ (labeled "Contrabass", not "Double_Bass") |
 | 46 | Orchestral Harp | Orchestral_Harp ✓ (GM_PROGRAMS[46] = "Orchestral Harp"; FluidR3 preset 46 = "Harp" — one-word SF2 spelling, cosmetic only) |
 | 1 | Acoustic Grand Piano | **Bright_Acoustic_Piano** ✗ (list[1]) |
+| 6 | Harpsichord | Harpsichord ✓ (GM_PROGRAMS[6] + FluidR3 preset 6 both "Harpsichord") |
 | 56 | Trumpet (correct GM) | Trumpet ✓ |
 | 57 | Trombone | Trombone ✓ |
 | 58 | Tuba | Tuba ✓ |

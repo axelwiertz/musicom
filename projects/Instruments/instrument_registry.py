@@ -33,6 +33,7 @@ _INSTRUMENT_MODULES = {
     "Keys.piano.piano": "piano",
     "Keys.organ.organ": "organ",
     "Keys.dulcimer.dulcimer": "dulcimer",
+    "Keys.harpsichord.harpsichord": "harpsichord",
     "Brass.trumpet.trumpet": "trumpet",
     "Brass.trombone.trombone": "trombone",
     "Brass.french_horn.french_horn": "french_horn",
@@ -190,6 +191,7 @@ DOUBLE_BASS = ALL_INSTRUMENTS["double_bass"]
 PIANO = ALL_INSTRUMENTS["piano"]
 ORGAN = ALL_INSTRUMENTS["organ"]
 DULCIMER = ALL_INSTRUMENTS["dulcimer"]
+HARPSICHORD = ALL_INSTRUMENTS["harpsichord"]
 TRUMPET = ALL_INSTRUMENTS["trumpet"]
 TROMBONE = ALL_INSTRUMENTS["trombone"]
 FRENCH_HORN = ALL_INSTRUMENTS["french_horn"]
@@ -275,6 +277,8 @@ def registry_table():
             role = "harmony, pad, bass, rhythm, accent"
         elif low == "dulcimer":
             role = "lead, melody, ornament, rhythm, harmony"
+        elif low == "harpsichord":
+            role = "harmony, continuo, melody, ornament, countermelody, accent"
         elif low == "drum kit":
             role = "rhythm, groove, accent"
         elif low == "marimba":
@@ -382,3 +386,7 @@ if __name__ == "__main__":
     print("  by_name('taiko drum') =", by_name("taiko drum"))
     print("  by_program(116) =", by_program(116))
     print("  TAIKO.in_sweet_spot(50) =", TAIKO.in_sweet_spot(50))
+    print("  HARPSICHORD.midi_program =", HARPSICHORD.midi_program, "(should be 6)")
+    print("  by_name('harpsichord') =", by_name("harpsichord"))
+    print("  by_program(6) =", by_program(6))
+    print("  HARPSICHORD.in_sweet_spot(69) =", HARPSICHORD.in_sweet_spot(69))
