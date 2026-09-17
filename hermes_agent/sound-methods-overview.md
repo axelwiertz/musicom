@@ -68,6 +68,17 @@ comparable to, and how do I use it in a workflow?*
 | `sound/synthesis/critter_pad.py` | PadPartialBank, Partial, Critters | synthesis (pads) | Crow Hill Brackish Pads | partial balances + seed → wobbling microtonal pad with stochastic Critters layer, cassette + splosh |
 | `sound/synthesis/music_box.py` | TwinCombMusicBox, MusicBoxComb | synthesis (modal, idiophone) | Muro Box N40 (Sublime twin comb) | midi note/melody + detune cents → inharmonic tine stereo audio (14-cent twin-comb chorus) |
 | `sound/generators/drum_machine.py` | BullfrogDrums, SampleChannel, CVChannel, Kit | sequencing (drum machine) | Erica Synths Bullfrog Drums | 64-step X0X grid + velocity/swing/flam → stereo kit audio + CV/midi sequence |
+| `sound/synthesis/lfsr_voice.py` | LFSRVoice, LFSR | synthesis (noise voice) | Noise Engineering AT Legio | midi note + bit depth → tuned maximal-LFSR noise voice (clock=f0·(2^b−1)) |
+| `sound/synthesis/tzfm.py` | TZFMVoice, SteppedOscillator | synthesis (FM) | Korg Prologue Elixir TZFM/STEPr | note + depth/direction/ringmod/bitcrush → through-zero FM audio; per-note wave stepping |
+| `sound/generators/polymetric_grid.py` | PolymetricGrid, Track, PerStepGraph | sequencing (polymetric) | Rapid Flow omniGRID | 16 tracks, per-track steps/resolution + 6 per-step graphs + shuffle → timed events/MIDI |
+| `sound/generators/acid_seq.py` | AcidSequencer, AcidVoice | sequencing (acid) | BS-203 MacroAcidizer | scale-locked random pattern → 303/202-style rendered sequence audio |
+| `sound/generators/cadence_variator.py` | CadenceEngine, CadenceLayer, FluxRandomizer | sequencing (variation) | Emergence Audio Envoy Cadence Engine | 4-block lanes + flux randomizer + per-layer LFOs → rhythmic event streams |
+| `sound/modular/random8.py` | Random8, RandomChannel | modular (random CV) | Befaco/Mylar Melodies RANDOM8 | 8 channels, 15 quantize scales, 8 styles → quantized random CV streams |
+| `sound/synthesis/string_scales.py` | ArplusVoice, StringVoice | synthesis (strings) | Zlosynth Arplus | chord/scale pool + arpeggiation → plucked-string (KS) scale-quantized arps |
+| `sound/modular/wandering.py` | WanderingEngine, Portal, DriftCloudsVoice | modular (drift) | Sound Dust Drift Clouds | nested non-LFO wander + Portal jumps → Cloud/Shadow layer balance drift |
+| `sound/synthesis/air_pipe.py` | AirPipe, AirPipePatch | synthesis (physical, aerophone) | Modartt Airteq | pipe length + air pressure/mod → flue-pipe audio (open/stopped modes, overblow, MPE air) |
+| `sound/effects/glitch_chopper.py` | GlitchChopper, ChannelChopper | effects (glitch) | GlitchShredder | stereo audio + bpm + glitch/reverse prob → transient-snapped 16-slot recombination |
+| `sound/generators/harmony_writer.py` | HarmonyWriter | generators (harmony/arrangement) | HarmonyKeen | monophonic melody + key + style → rule-based harmony parts (phrase/cadence analysis, SATB voice-leading) |
 | `sound/sync/clock.py` | DAWClockBridge | sync | MTC/MIDI clock | bpm → clock pulses |
 | `sound/render/fluidsynth.py` | FluidSynthRenderer | render | SF2 synth | MIDI → WAV |
 | `sound/render/vst.py` | VSTRenderer | render | DAW VST3 | MIDI → VST audio |

@@ -106,6 +106,18 @@ Status: `implemented` = in sound/ package · `partial` = some pieces exist · `r
 | SP-072 | Three-Partial Pad Bank with Stochastic Microtonal Critters Layer (Crow Hill Brackish Pads-style) | implemented | sound/synthesis/critter_pad.py |
 | SP-073 | Twin-Detuned-Comb Music Box Modal Synthesis (Muro Box N40-style) | implemented | sound/synthesis/music_box.py |
 | SP-074 | Eight-Channel Sample Drum Machine + CV Lane Sequencer (Erica Synths Bullfrog Drums-style) | implemented | sound/generators/drum_machine.py |
+| SP-075 | Image-Source Room Acoustics Synthesis (docs/methods.md ISRA; hybrid render) | implemented | sound/render/hybrid.py |
+| SP-076 | Tuned LFSR Digital-Noise Voice (Noise Engineering AT Legio-style) | implemented | sound/synthesis/lfsr_voice.py |
+| SP-077 | Through-Zero FM + Per-Note Waveform Stepping (Korg Prologue Elixir TZFM/STEPr-style) | implemented | sound/synthesis/tzfm.py |
+| SP-078 | 16-Track Polymetric Step Sequencer with Per-Step Graphs (Rapid Flow omniGRID-style) | implemented | sound/generators/polymetric_grid.py |
+| SP-079 | Scale-Locked Acid Sequencer + 303/202 Voice (BS-203 MacroAcidizer-style) | implemented | sound/generators/acid_seq.py |
+| SP-080 | Cadence Engine Rhythmic Variator with Flux Randomizer (Emergence Audio Envoy-style) | implemented | sound/generators/cadence_variator.py |
+| SP-081 | 8-Channel Quantized Random CV Source (Befaco/Mylar Melodies RANDOM8-style) | implemented | sound/modular/random8.py |
+| SP-082 | Scale-Quantized String Arpeggiator Voice (Zlosynth Arplus-style) | implemented | sound/synthesis/string_scales.py |
+| SP-083 | Non-LFO Wandering Engine + Portal + Drift Clouds Voice (Sound Dust Drift Clouds-style) | implemented | sound/modular/wandering.py |
+| SP-084 | Flue-Pipe Physical Model with Air-Supply Modulation (Modartt Airteq-style) | implemented | sound/synthesis/air_pipe.py |
+| SP-085 | Transient-Snapped Segment Chopper with Glitch/Reverse Probability (GlitchShredder-style) | implemented | sound/effects/glitch_chopper.py |
+| SP-086 | Rule-Based Melody Harmony Writer with Voice Leading (HarmonyKeen-style) | implemented | sound/generators/harmony_writer.py |
 
 ## Mastering (from MusicTech workflow)
 

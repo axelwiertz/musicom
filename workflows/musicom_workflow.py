@@ -151,6 +151,19 @@ SP_METHODS = {
     "SP-073": ("sound.synthesis.music_box", "Twin-Detuned-Comb Music Box Modal Synthesis (Muro Box N40-style)"),
     "SP-074": ("sound.generators.drum_machine", "Eight-Channel Sample Drum Machine + Sequencer (Bullfrog Drums-style)"),
     "SP-075": ("sound.render.hybrid", "Voice-Like Instrument Hybrid Render (synthesized voice tracks + SoundFont backing)"),
+    # 2026-09-14 scan (adopted + registered 2026-09-17)
+    "SP-076": ("sound.synthesis.lfsr_voice", "Tuned LFSR Digital-Noise Voice (Noise Engineering AT Legio-style)"),
+    "SP-077": ("sound.synthesis.tzfm", "Through-Zero FM + Per-Note Waveform Stepping (Korg Prologue Elixir-style)"),
+    "SP-078": ("sound.generators.polymetric_grid", "16-Track Polymetric Step Sequencer w/ Per-Step Graphs (Rapid Flow omniGRID-style)"),
+    "SP-079": ("sound.generators.acid_seq", "Scale-Locked Acid Sequencer + 303/202 Voice (BS-203 MacroAcidizer-style)"),
+    "SP-080": ("sound.generators.cadence_variator", "Cadence Engine Rhythmic Variator w/ Flux Randomizer (Emergence Audio Envoy-style)"),
+    "SP-081": ("sound.modular.random8", "8-Channel Quantized Random CV Source (Befaco/Mylar Melodies RANDOM8-style)"),
+    "SP-082": ("sound.synthesis.string_scales", "Scale-Quantized String Arpeggiator Voice (Zlosynth Arplus-style)"),
+    "SP-083": ("sound.modular.wandering", "Non-LFO Wandering Engine + Portal + Drift Clouds Voice (Sound Dust-style)"),
+    # 2026-09-17 scan
+    "SP-084": ("sound.synthesis.air_pipe", "Flue-Pipe Physical Model w/ Air-Supply Modulation (Modartt Airteq-style)"),
+    "SP-085": ("sound.effects.glitch_chopper", "Transient-Snapped Segment Chopper w/ Glitch/Reverse Probability (GlitchShredder-style)"),
+    "SP-086": ("sound.generators.harmony_writer", "Rule-Based Melody Harmony Writer w/ Voice Leading (HarmonyKeen-style)"),
 }
 
 

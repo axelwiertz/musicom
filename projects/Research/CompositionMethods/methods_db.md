@@ -179,6 +179,7 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 | **SP-073** | Transient Shaping via Differential Envelope Processing (TSDE) | **Post-Processing / DSP** | Transient/Punch & Sustain Shaping (Level-Independent Dynamics) | Reshapes the attack/sustain balance of a rendered buffer by riding a gain derived from two parallel one-pole envelope followers (fast peak detector vs slow sustain detector); the *difference* is the transient content, boosted/attenuated independently by Attack and Sustain gains and recombined with the original phase/time untouched. No threshold, no ratio, level-independent; the SPL Transient Designer differential-envelope technique. $O(1)$ per sample. The transient-shaping counterpart to SP-008 (threshold DRC) and the time-domain partner of SP-072 (frequency-domain split). |
 | **SP-074** | Piano Hammer-String Physical Modeling (PHSP) | **Synthesis Engines** | Physical Struck-String / Grand-Piano Timbre | Physically calibrated piano: Hertz-contact felt hammer (velocity → brightness, Boutillon/Stulov) strikes a stiff dispersive waveguide string (inharmonic partials $f_n=nf_1\sqrt{1+Bn^2}$ + Railsback stretch tuning), 2–3 detuned unison strings share a bridge impedance for Weinreich two-stage decay, soundboard IR + pedal-down sympathetic resonance. Emits audio from note events; $O(1)$/sample per note. Completes the excitation family: plucked SP-011/048, bowed SP-024, lip-reed SP-065, air-jet SP-066, struck SP-074. |
 | **SP-075** | Image-Source Room Acoustics Synthesis (ISRA) | **Post-Processing / DSP** | Physically Simulated Room Impulse Response / Geometric Spatialization | Generates a room impulse response analytically from geometry (Allen & Berkley 1979): every wall reflection becomes a mirror image source at distance $d_q/c$ with gain $\prod_j \beta_j^{p_j}/(4\pi d_q)$, so early reflections, flutter echoes, and echo-density growth are physically exact. Per-band β = frequency-dependent decay; per-voice source positions = geometric mixing; per-section room schedule = spatial macro-form. $O((2R+1)^3)$ per geometry. The parametric generator behind SP-009 and the physical-early counterpart to SP-032/071. |
+| **SP-087** | TR-808 Analog Snare Drum Synthesis (TASS) | **Synthesis Engines** | Circuit-Faithful Analog Snare / Drum-Voice Timbre | Renders the Roland TR-808 snare from its transistor-circuit topology: two high-Q bridged-T shell resonators an octave apart (typical 476/238 Hz, June 1981 service-manual values) summed with differentiator-shaped ("violet") white noise under 60-75 ms RC envelopes. Tone = noise highpass cutoff, Snappy = shell/noise mix, Tune scales both partials; $\mathcal{O}(1)$ per sample, deterministic per seed. The circuit-faithful 808 member beside the generic 606 snare recipe, and what a WDF analysis (SP-051) of the snare subcircuit compiles down to. |
 |---|
 
 
@@ -18254,3 +18255,305 @@ Deterministic per (geometry, β, fs) — no randomness unless scattering is adde
 - Lehmann, E. A., Johansson, A. M., & Nordholm, S. (2010). "Reverberation-time
   prediction method for room impulse responses simulated with the image-source model."
   *Applied Acoustics* 71(3), 244–249.
+
+# Sound Production Method SP-087 — TR-808 Analog Snare Drum Synthesis (TASS)
+
+**Layer:** absolute (sound production — Synthesis Engines)
+**Category:** Synthesis Engines | **Target Output:** Circuit-Faithful Analog Snare / Drum-Voice Timbre
+
+### One-line description
+
+Synthesizes the Roland TR-808 snare voice the way the hardware does — two
+high-Q bridged-T shell resonators an octave apart (typical 476/238 Hz) summed
+with differentiator-shaped ("violet") white noise under a 60–75 ms RC envelope —
+so every hit is computed from the 1980 transistor circuit's topology and the
+June 1981 service-manual component equations, not from a sample.
+
+### Layer classification
+
+Per `LAYER_ARCHITECTURE.md`, every SP-* method is **absolute** (sound production:
+audio stems → WAV/OGG). TASS is an *absolute*-layer method in the Synthesis
+Engines class: it consumes symbolic percussion events (pitch → shell tuning,
+velocity → strike strength, onset → trigger time) and emits audio buffers
+directly. Candidate code path: `sound/synthesis/drum_synth_808.py` — sibling of
+`sound/synthesis/drum_synth_606.py` (the 606-style engine's snare is a *generic*
+tonal-body-plus-bandpassed-noise recipe; TASS is the *circuit-faithful* 808
+voice with Roland's Q/f component equations and the Tone/Snappy control
+semantics). Plugs into `workflows.musicom_workflow.produce(method="SP-087")`
+as a per-voice drum renderer alongside SP-001 (FluidSynth) and SP-011 (KS).
+
+### Source
+
+The **Roland TR-808 Rhythm Composer** (1980, Ikutaro Kakehashi; "TR" = "transistor
+rhythm") generates its percussion with analog synthesis rather than samples —
+"the 808 imitates acoustic percussion: the bass drum, snare, toms, conga,
+rimshot, claves, handclap, maraca, cowbell, cymbal and hi-hat ... Rather than
+playing samples, it generates sounds using analog synthesis" (Roland TR-808,
+Wikipedia, fetched 2026-09-17). The snare voice is a two-path circuit:
+
+1. **Shell path** — two **bridged-T network oscillators** (high and low),
+   tuned roughly an octave apart. The **June 1981 TR-808 service manual**
+   documents a production change to one capacitor in each network that lowers
+   the shell pitch: measured original tuning low 202–254 Hz / high 443–499 Hz
+   → revised low 159–189 Hz / high 326–374 Hz, with the "typical" values quoted
+   as **238 Hz (low) and 476 Hz (high)** — exactly the pair used in the
+   open-source io-808 Web Audio recreation (`highOscFreq = 476`,
+   `lowOscFreq = 238`), which cites the Sound on Sound Synth Secrets series
+   and the 808 block diagrams as its references (vincentriemer/io-808,
+   `src/synth/drumModules/snareDrum.js`, fetched 2026-09-17).
+2. **Noise path** — white noise through a differentiator/highpass stage
+   ("violet" noise, after the WDR-8 module notes) shaped by an RC envelope
+   generator that builders single out as critical to the 808 character
+   (Simon-L/WDR-8-rack README: shell = "two resonators, high and low";
+   noise = "more precisely violet noise, shaped by an envelope generator
+   that I believe is very important to get the 808 sound"; fetched 2026-09-17).
+   io-808 implements this as a highpassed noise burst (cutoff =
+   `tone * 100 + 800` Hz) under a ~75 ms attack-decay envelope, with the shell
+   under a ~50 ms "snappy" envelope.
+3. **Component-level modeling precedent** — Jatin Chowdhury's Wave Digital
+   Filter snare resonator models the literal bridged-T network (R197 820 kΩ,
+   C58/C59 27 nF, citing Eric Archer's TR-808 snare DIY analysis) as a WDF
+   scattering tree, and simo-pandolfi/py78drums proves the same
+   Python-per-sample WDF drum-synthesis workflow this method ports to NumPy.
+
+No 808-specific analog drum-voice method exists in this database: the 606
+engine's snare is generic (no bridged-T equations, no Tone/Snappy semantics),
+SP-051 WDF is the general circuit-modeling framework without a drum-voice
+instantiation, and SP-011/033/048 are string waveguides, not drum resonators.
+
+### Description
+
+TASS renders one snare hit as the sum of three deterministic parts:
+
+1. **Shell** — two exponentially decaying sine partials at $f_H \approx 2 f_L$
+   (service-manual typical: 476/238 Hz). Each is the impulse response of a
+   high-Q bridged-T resonator: near-sinusoidal, ~60 ms to −20 dB (the manual's
+   "decay time" convention — amplitude to 1/10, not 1/1000), zero attack.
+2. **Snap** — a short highpassed white-noise burst ($\sim$1 kHz highpass at
+   mid Tone, $\sim$75 ms decay) that supplies the attack transient and the
+   wire-like sizzle; its level relative to the shell is the **Snappy** knob.
+3. **Controls** — **Tone** sets the noise-path highpass cutoff (dark ↔ crisp),
+   **Snappy** sets the shell/noise mix (hollow shell ↔ cracking snare),
+   **Level** sets the output gain. All three are per-hit automatable, so one
+   voice can morph from rim-click ghost notes (low Snappy) to full backbeats.
+
+The two shell partials beat against each other at $f_H - f_L = f_L$, which is
+why the raw rectified envelope shows deep nulls: the decay must be measured
+per partial (coherent demodulation), exactly as the Norgatronics analysis does
+when reconciling measured $\tau$ against the manual's 60 ms figure.
+
+### Technical Mechanics
+
+#### 1. Bridged-T resonator: frequency and Q from components
+
+Roland's manual gives the design equations for each bridged-T network in terms
+of its R and C values (per the Norgatronics derivation, verified 2026-09-17
+against the service-manual component values):
+
+$$
+f_0 = \frac{1}{2\pi R C}, \qquad Q = \frac{\tau\,\omega_0}{2} = \frac{\tau\,\pi f_0}{1}, \qquad T_{decay} = \frac{\ln(10)\,Q}{\pi f_0}
+$$
+
+where $\tau$ is the 1/e envelope time and $T_{decay}$ is the manual's
+"decay time" (time for the amplitude to fall to 1/10, i.e. −20 dB).
+Reference numbers: the revised low-shell network ($f_0 = 173$ Hz, $Q = 16.3$)
+gives $T_{decay} = \ln(10)\cdot 16.3/(\pi\cdot 173) \approx 69$ ms, matching
+simulation (67 ms); the "typical" high shell (476 Hz, quoted 60 ms) implies
+$Q = 60\,\mathrm{ms}\cdot\pi\cdot 476/\ln(10) \approx 39$ — the documented
+high-Q ring that makes the 808 shell sing rather than thud.
+
+#### 2. Shell synthesis (two partials, one envelope law)
+
+$$
+s(t) = \left[\sin(2\pi f_L t) + \sin(2\pi f_H t)\right]\,e^{-t/\tau_s}, \qquad \tau_s = \frac{T_{decay}}{\ln(10)},\quad f_H \approx 2 f_L
+$$
+
+$f_L = 238$ Hz, $T_{decay} = 60$ ms nominal; per-section transposition scales
+both partials together (preserving the 2:1 ratio = the circuit's character).
+
+#### 3. Noise path (violet noise + RC envelope)
+
+White noise $w[n]$ through a one-pole highpass (the differentiator stand-in):
+
+$$
+n_{hp}[n] = w[n] - w[n-1] + a\,n_{hp}[n-1], \qquad a = e^{-2\pi f_c/f_s}
+$$
+
+with $f_c = 800 + 100\cdot\mathrm{Tone}$ (Tone 0–10, the io-808 law), then the
+RC attack-decay envelope $e_n(t) = (1 - e^{-t/\tau_a})\,e^{-t/\tau_n}$ with
+$\tau_n = 75\,\mathrm{ms}/\ln(10)$:
+
+$$
+n(t) = n_{hp}(t)\,e_n(t)
+$$
+
+#### 4. Mix (Snappy = shell/noise balance)
+
+$$
+y(t) = g\left[(1 - S)\,s(t) + S\,\frac{n(t)}{\max|n|}\right], \qquad S \in [0,1]
+$$
+
+$S$ = Snappy/10 after equal-power compensation; $g$ = Level. Ghost notes use
+$S \approx 0.2$–0.4 and low $g$; backbeats use $S \approx 0.6$–0.8.
+
+#### 5. Render chain
+
+```text
+per hit (onset, velocity, Tone, Snappy) → shell partials + violet noise burst
+  → per-hit mix → place at onset sample into voice stem → sum hits
+  → optional SP-006 timing jitter BEFORE render (drives onset, not the circuit)
+  → SP-008 limit → WAV/OGG
+```
+
+#### 6. NumPy implementation sketch
+
+```python
+import numpy as np
+
+def snare_808(fs=44100, f_low=238.0, t_decay=0.060,
+              tone=5.0, snappy=0.7, level=0.9, dur=0.5, seed=808):
+    """TR-808-style snare hit. tone 0-10, snappy 0-1."""
+    rng = np.random.default_rng(seed)
+    n = int(fs * dur); t = np.arange(n) / fs
+    tau_s = t_decay / np.log(10.0)
+    f_hi = 2.0 * f_low
+    shell = (np.sin(2 * np.pi * f_low * t)
+             + np.sin(2 * np.pi * f_hi * t)) * np.exp(-t / tau_s)
+    white = rng.standard_normal(n)
+    fc = 800.0 + 100.0 * tone
+    a = np.exp(-2 * np.pi * fc / fs)
+    hp = np.empty(n); px = py = 0.0
+    for i in range(n):                      # production: lfilter
+        hp[i] = white[i] - px + a * py
+        px, py = white[i], hp[i]
+    tau_n = 0.075 / np.log(10.0)
+    noise = hp * np.exp(-t / tau_n)
+    noise /= (np.abs(noise).max() + 1e-12)
+    return level * ((1 - snappy) * 0.5 * shell + snappy * noise)
+
+# usage: stem[onset:onset+len(hit)] += velocity * snare_808(tone=sec_tone, ...)
+```
+
+Verified 2026-09-17 (`$MUSICOM_PYTHON`, NumPy): zero-padded FFT peaks at
+238.2/476.4 Hz; per-partial −20 dB times 69.6/69.5 ms (manual: ~60 ms nominal,
+simulation 67 ms); $Q$ = 19.5/39.0 (manual-derived 16.3/39.0); noise centroid
+11.5 kHz (highpass effective); 100% energy within 400 ms; bit-deterministic
+per seed.
+
+### Complexity
+
+$\mathcal{O}(1)$ per sample per hit (2 sine evals + 1 noise sample + 1
+one-pole filter state); hits are sparse, so a full drum stem costs
+$\mathcal{O}(H \cdot D)$ for $H$ hits of $D$ samples. Deterministic per
+(seed, params) — byte-identical stems across renders.
+
+### Musical Elements Framework
+
+| Element | Mapping |
+|---|---|
+| **PITCH** | Shell partials $f_L/f_H = 238/476$ Hz nominal ($\approx$ B♭3/B♭4); per-section transposition scales both (ratio locked — the 808 character). Small rooms/bootlegs vary $\pm 15\%$; expose as the Tune knob. Detuning the ratio off 2:1 morphs 808 → 606 → electronic tom. |
+| **RHYTHM** | The hit IS the rhythm event: onset = trigger time, velocity = strike strength. Backbeat (2 & 4), ghost-note subdivisions (low Snappy + low Level), rolls (repeated triggers — envelopes re-fire, no voice stealing needed). |
+| **HARMONY** | Shell partials are pitched (octave stack) — they ring sympathetically with bass/keys near B♭; tune $f_L$ to the section root for a "tuned 808" (modern trap practice) or leave at 238 Hz for the classic atonal crack. |
+| **STRUCTURE** | Per-section (Tone, Snappy) preset = drum-mix macro-form: dry tight verse (low Tone, mid Snappy) → wide bright chorus (high Tone, high Snappy) → breakdown rim-clicks (Snappy $\to$ 0.2). |
+| **TEXTURE** | Snappy is the texture fader: shell-dominant = hollow/woody, noise-dominant = crisp/cracking. The 60–75 ms decay is naturally staccato — per the Method Hybridization rule, always bed 808 hits over a continuous layer (026 DPSM, sustained pad, 808-style long kick) for flow. |
+
+### UnitMatrix Integration
+
+- **Rows (Voices)** = each percussion row renders through its own TASS instance
+  (snare row, clap row, rim row); pitched rows (bass/keys) bypass TASS to
+  SP-001/SP-074. One shared noise buffer per section, per-hit shell phases
+  reset — matches the hardware (shared noise transistor, independent shell).
+- **Columns (Sections)** = `{STRUCTURE}` → per-section (Tone, Snappy, Tune)
+  preset plus the backbeat/ghost pattern density. Section presets interpolate
+  continuously (filter cutoff and mix are click-free by construction).
+- **Cells (MusicUnit)** = `{PITCH}` → optional per-cell shell retune (tuned-808
+  bass-drum layering); `{RHYTHM}` → cell onsets are trigger times, cell
+  velocity accents map to Level + slight Snappy lift (harder hits = more snap,
+  as on the hardware where hotter triggers push the noise path);
+  `{TEXTURE}` → ghost-note cells get low-Snappy renders automatically.
+- **Flow**: `compose` (UnitMatrix → MIDI) → drum rows extracted →
+  `produce(method="SP-087", params={tone, snappy, tune})` → per-hit render
+  into per-voice stems → sum → SP-007 EQ (highpass rumble cut) → SP-008
+  limiter → WAV/OGG. Pairs: SP-009/032/071 (room/plate on the stem — the
+  classic gated-80s snare is TASS + short plate + gate), SP-072 (HPSS the stem
+  to rebalance shell vs snap post-hoc), SP-073 (TSDE attack boost on the noise
+  transient), SP-006 (humanize onsets pre-render).
+
+### Pitfalls
+
+1. **Measuring decay on the raw mix lies.** The octave partials beat at $f_L$,
+   so the rectified envelope hits interference nulls (~14 ms in testing) long
+   before the true decay. Fix: measure per partial via coherent demodulation
+   (multiply by $\cos/\sin(2\pi f_0 t)$, lowpass, take magnitude) — the only
+   number comparable to the manual's 60 ms.
+2. **−20 dB vs −60 dB confusion.** The manual's "decay time" is amplitude to
+   1/10 (−20 dB), not RT60. Converting naively ($\tau = T/6.9$) makes the shell
+   ring 3× too long. Fix: $\tau = T_{decay}/\ln(10)$.
+3. **White noise instead of violet.** Flat white noise gives a dull thud; the
+   hardware differentiates it (rising spectrum, WDR-8's "violet" note). Fix:
+   always highpass ($f_c \geq 800$ Hz) before the envelope.
+4. **Shared-noise correlation.** Reusing one noise buffer with the same offset
+   per hit produces machine-gun flamming. Fix: per-hit RNG stream (seed + hit
+   index) or ring-buffer offset advance.
+5. **Snappy as linear crossfade.** Linear $(1-S)/S$ dips mid-travel loudness.
+   Fix: equal-power law ($S^2 + (1-S)^2 = 1$ after compensation) as in io-808's
+   `equalPower(level)` convention.
+6. **Retuning one partial only.** Moving $f_H$ without $f_L$ breaks the 2:1
+   bridged-T ratio and the voice stops sounding like an 808. Fix: scale both
+   (Tune knob = multiplier on the pair) unless deliberately morphing.
+7. **Envelope re-trigger clicks.** Cutting a still-ringing shell at the next
+   onset clicks. Fix: hits add into the stem (polyphonic accumulation), never
+   truncate — the hardware envelopes are independent per trigger.
+8. **Confusion with the 606 snare.** `drum_synth_606.py`'s snare is a generic
+   body-plus-bandpassed-noise recipe with no bridged-T equations and no
+   Tone/Snappy semantics. Use the 606 voice for generic analog kits, TASS when
+   the 808 shell ring and its control surface are wanted.
+9. **Forgetting the Hybridization rule.** 60 ms hits alone are maximally
+   staccato. Fix: bed every 808 pattern on a continuous layer (sustained 808
+   kick, DPSM arpeggio, pad) — the Disco v2→v3 lesson.
+
+### Comparison With Related Methods
+
+- **drum_synth_606 engine (code, no SP row)**: generic analog-kit snare —
+  triangle/sine body + bandpassed noise, no component equations. TASS is the
+  circuit-faithful 808 member of the same engine family (candidate sibling
+  module `drum_synth_808.py`).
+- **SP-051 WDF virtual analog**: the general framework (netlist → scattering
+  tree, Newton-Raphson nonlinearities). TASS is what a WDF analysis of the
+  snare subcircuit *compiles down to* at render time (two resonators + shaped
+  noise); use SP-051 to model new circuits, TASS to render this one cheaply.
+- **SP-062 ADAA**: anti-aliases memoryless nonlinearities without oversampling.
+  TASS's sine/noise/one-pole chain is natively bandlimited — no ADAA needed
+  unless a saturating output stage (SP-049 tape, SP-019 fold) is added.
+- **SP-011 Karplus-Strong**: pitched resonant decay via delay loop — the shell
+  could be rendered as two ultra-short KS voices, but the bridged-T sine pair
+  is exact and cheaper; KS remains the plucked-string choice.
+- **SP-057 Chua / SP-068 Bytebeat**: alternative deterministic percussion
+  generators (chaotic / integer-expression). TASS is the historically grounded
+  complement: a named circuit, not a dynamical system.
+
+### References
+
+- Roland Corporation. *TR-808 Rhythm Composer Service Manual* (June 1981) —
+  snare circuit schematics, bridged-T component values, production capacitor
+  change lowering shell pitch.
+- Roland TR-808 — Wikipedia ("transistor rhythm", analog synthesis, voice
+  list; fetched 2026-09-17).
+- Reid, G. *Synth Secrets* series — "Synthesizing Drums: The Snare Drum",
+  Sound on Sound (the analysis lineage cited by the io-808 recreation).
+- vincentriemer/io-808 — `src/synth/drumModules/snareDrum.js` (476/238 Hz
+  shell pair, tone-mapped noise highpass, 75/50 ms AD envelopes; fetched
+  2026-09-17).
+- Simon-L/WDR-8-rack — WDR-8 Snare module notes (dual resonators, violet
+  noise, envelope-generator criticality; fetched 2026-09-17).
+- Chowdhury, J. — WaveDigitalFilters `TR_808/SnareResonator` (WDF model of
+  the bridged-T network, R197 820 kΩ, C58/C59 27 nF; fetched 2026-09-17).
+- Werner, K. J. — *Virtual Analog Modeling of Audio Circuitry Using Wave
+  Digital Filters* (dissertation; the WDF methodology behind the resonator).
+- Norgatronics (S. Norgate). "808 Snare Continued..." / SD-80'81 tuning
+  investigation (bridged-T Q/f/decay equations, original vs revised tuning
+  ranges, measured τ; fetched 2026-09-17).
+- Archer, E. — *TR-808 Snare Drum DIY Project* analysis (component-level
+  snare circuit reference used by the WDF model).
+- simo-pandolfi/py78drums — Python per-sample WDF drum synthesis workflow
+  (precedent for the NumPy render path).
