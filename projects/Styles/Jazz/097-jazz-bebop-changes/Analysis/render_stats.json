@@ -1,0 +1,27 @@
+{
+  "097-jazz-bebop-changes": {
+    "duration_s": 47.77,
+    "channels": 2,
+    "silence_ratio": 0.0878,
+    "silent_secs": [
+      45,
+      46
+    ],
+    "last_audio_sec": 44,
+    "peak": 0.6263,
+    "rms_mean": 0.073,
+    "tonal_windows": "90/95"
+  },
+  "097-jazz-bebop-changes-phase1": {
+    "duration_s": 45.94,
+    "channels": 2,
+    "silence_ratio": 0.1264,
+    "silent_secs": [
+      44
+    ],
+    "last_audio_sec": 43,
+    "peak": 0.2954,
+    "rms_mean": 0.04078,
+    "tonal_windows": "89/91"
+  }
+}
