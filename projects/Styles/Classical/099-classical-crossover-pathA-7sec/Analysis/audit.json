@@ -1,0 +1,66 @@
+{
+  "drift_ok": true,
+  "lengths": [
+    99840
+  ],
+  "per_track": {
+    "Lead": {
+      "program": [
+        [
+          41,
+          0
+        ]
+      ],
+      "notes": 243,
+      "unique_pitches": 17,
+      "offgrid": 0
+    },
+    "Counter": {
+      "program": [
+        [
+          74,
+          1
+        ]
+      ],
+      "notes": 76,
+      "unique_pitches": 9,
+      "offgrid": 0
+    },
+    "Piano": {
+      "program": [
+        [
+          0,
+          2
+        ]
+      ],
+      "notes": 315,
+      "unique_pitches": 10,
+      "offgrid": 0
+    },
+    "Pad": {
+      "program": [
+        [
+          49,
+          3
+        ]
+      ],
+      "notes": 315,
+      "unique_pitches": 10,
+      "offgrid": 0
+    },
+    "Bass": {
+      "program": [
+        [
+          33,
+          4
+        ]
+      ],
+      "notes": 98,
+      "unique_pitches": 5,
+      "offgrid": 0
+    }
+  },
+  "scale_violations": 0,
+  "chord_violations": 0,
+  "total_notes": 1047
+}

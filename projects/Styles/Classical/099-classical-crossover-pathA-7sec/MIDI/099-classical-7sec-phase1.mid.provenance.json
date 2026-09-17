@@ -1,0 +1,21 @@
+{
+  "artifact": "099-classical-7sec-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "phase1 raw drafts (pre-rules)",
+  "sources": [
+    "023",
+    "002",
+    "079",
+    "ABS-003",
+    "018"
+  ],
+  "parameters": {
+    "phase": 1,
+    "seed": 20260917
+  },
+  "notes": "",
+  "sha256": "8403834947c2c6876c4a335cbeabe164a91f8fd2994764c7a756c160c15c58bc",
+  "bytes": 2351,
+  "created_utc": "2026-09-17T18:26:38.768999+00:00",
+  "provenance_version": "1.0"
+}

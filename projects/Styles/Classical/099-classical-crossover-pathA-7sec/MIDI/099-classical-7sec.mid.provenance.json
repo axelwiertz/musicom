@@ -1,0 +1,37 @@
+{
+  "artifact": "099-classical-7sec.mid",
+  "classification": "ai-assisted",
+  "generator": "099-classical-crossover-pathA-7sec (Path A: 001 skeleton + per-section methods)",
+  "sources": [
+    "paths:A top-down",
+    "001",
+    "002",
+    "023",
+    "079",
+    "018",
+    "ABS-001",
+    "ABS-003",
+    "ABS-004"
+  ],
+  "parameters": {
+    "bpm": 96,
+    "key": "C",
+    "form": "Intro|A|B|Dev|A2|B2|Coda",
+    "tension_curve": {
+      "Intro": 0.0,
+      "A": 0.3,
+      "B": 0.5,
+      "Dev": 1.0,
+      "A2": 0.4,
+      "B2": 0.5,
+      "Coda": 0.1
+    },
+    "seed": 20260917,
+    "phase": 2
+  },
+  "notes": "",
+  "sha256": "4288a9cb7dd35e06f184c2754e54792b21c54f496137b708f16f91a9fb65c271",
+  "bytes": 8401,
+  "created_utc": "2026-09-17T18:26:38.768661+00:00",
+  "provenance_version": "1.0"
+}
