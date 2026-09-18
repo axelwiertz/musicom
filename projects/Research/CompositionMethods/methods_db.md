@@ -97,6 +97,7 @@ Classification of active Musicom composition methods categorized by their primar
 | **087** | concrete | Multiple Viewpoint Systems Composition (MVS-C) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Ensemble-constrained) | Grid-Locked / Continuous | Meso / Variable-Order Context | $\mathcal{O}(N \cdot k)$ amortized, $\mathcal{O}(N \cdot k \cdot V)$ naive | Composes by combining many specialized statistical predictors (viewpoints: pitch, pitch-interval, contour, scale-degree, onset-interval, duration, metric-position, chord — plus linked product viewpoints) into one product-of-experts distribution over the next event, then sampling or argmax-decoding it. Backoff with PPM* escape adapts context order automatically; a long-term corpus model (style) and a short-term within-piece model (structure/repetition) are blended in log space (IDyOM). Entropy-based viewpoint selection drops redundant features. Ensemble counterpart to 002 Markov (single viewpoint) / 067 Factor Oracle (single automaton); count-based ancestor of 054 ATS attention. |
 | **088** | concrete | Voronoi Tessellation Event Partitioning (VTEP) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Weak (Geometry-guided, scale-filtered) | Grid-Locked / Continuous | Macro / Seed Plan | $\mathcal{O}(L \log S)$ (cKDTree classify) + $\mathcal{O}(S \log S)$ tessellation | Scatters seed sites in a normalized pitch × time domain, tessellates the space into nearest-seed Voronoi cells, and classifies an event-candidate lattice by cell membership: cell area = inverse event density (crowded cells → bursts, large cells → sparse), Delaunay simplices over pitch-carrying seeds = candidate chord voicings (ICV-checked against the section subset), seed drift/relaxation across sections = macro-form, cell adjacency seams = hocket/echo pairings. Lloyd relaxation pre-balances cells to prevent voice starvation. Geometric counterpart to 083 quasicrystal tiling (no metric semantics) and grid simulations (030/036/070). |
 | **089** | concrete | Change-Ringing Combinatorial Method (CRCM) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Weak (Mode-locked, function-free) | Grid-Locked | Macro / Lead-Head Cycle | $\mathcal{O}(n)$ per change, $\mathcal{O}(n \cdot L)$ course | Generates an endless non-repeating permutation stream of $n$ voice-rows under the change-ringing law: every change is a product of disjoint adjacent swaps (each voice moves at most one position per blow), the treble plain-hunts as a register ostinato (double blows at extremes), and a lead-end deviation (Plain Bob: "make 2nds") extends the hunt's $2n$ cycle toward the full $n!$ space; lead heads cycle $123456 \to 135264 \to 156342 \to 164523 \to 142635 \to$ rounds (verified). Bells = UnitMatrix voices; changes = isochronous grid slots. Mapping A: bell = fixed pitch, melody = the continuous strike stream, verticalities = change rows (all distinct). Mapping B: pitch = scale degree of position — every line 100% stepwise (verified: 0 leaps > 2nd in 354 steps, 83.6% 2nds + 16.4% unisons), phase-shifted palindromic hunt per voice, deterministic hocket. Calls (bob/single) = form pivots. Group-theoretic sibling of 069/077; historical craft counterpart of 056; motion-law foil to 065 TTSMC. |
+| **090** | concrete | Golomb Ruler Distinct-Difference Composition (GRDC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Weak (ICV-invariant pool) | Grid-Locked | Macro / Ruler Span | $\mathcal{O}(S \cdot m^2)$ search, $\mathcal{O}(m^2)$ verify | Composes from a Golomb ruler / finite Sidon set — marks whose pairwise differences are ALL distinct (optimal Golomb rulers; Sidon density in $\mathbb{Z}_n$). Pitch plane: marks = pitch classes → no interval class repeats (ICV entries ≤ 1; all-interval tetrachord 4-Z15 at $m{=}4$), the maximal-interval-variety opposite of symmetric 080 MMLT subsets. Time plane: marks = onsets → no inter-onset interval repeats, a certificate-backed non-isoperiodic groove (maximal unevenness, deterministic). Harmony = union of per-voice rulers, tension = duplicate-difference count; form = transposition/reflection/mark-insert transforms per section; Shearer's bound $L \gtrsim m^2/2$ makes dense Golomb grooves demand long bars. Position-choosing complement to 089 CRCM (which permutes orderings); uniqueness foil to 011 Euclidean / 069 CWCC evenness; modular (Sidon) cousin of 065 TTSMC aggregates. |
 # Sound Production Methods Framework
 
 Sound production translates symbolic MIDI UnitMatrix data into final acoustic air pressure. Methods are categorized by execution layer: **Hardware/Acoustic Integration**, **Synthesis Engines**, or **Post-Processing / DSP**.
@@ -180,6 +181,7 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 | **SP-074** | Piano Hammer-String Physical Modeling (PHSP) | **Synthesis Engines** | Physical Struck-String / Grand-Piano Timbre | Physically calibrated piano: Hertz-contact felt hammer (velocity → brightness, Boutillon/Stulov) strikes a stiff dispersive waveguide string (inharmonic partials $f_n=nf_1\sqrt{1+Bn^2}$ + Railsback stretch tuning), 2–3 detuned unison strings share a bridge impedance for Weinreich two-stage decay, soundboard IR + pedal-down sympathetic resonance. Emits audio from note events; $O(1)$/sample per note. Completes the excitation family: plucked SP-011/048, bowed SP-024, lip-reed SP-065, air-jet SP-066, struck SP-074. |
 | **SP-075** | Image-Source Room Acoustics Synthesis (ISRA) | **Post-Processing / DSP** | Physically Simulated Room Impulse Response / Geometric Spatialization | Generates a room impulse response analytically from geometry (Allen & Berkley 1979): every wall reflection becomes a mirror image source at distance $d_q/c$ with gain $\prod_j \beta_j^{p_j}/(4\pi d_q)$, so early reflections, flutter echoes, and echo-density growth are physically exact. Per-band β = frequency-dependent decay; per-voice source positions = geometric mixing; per-section room schedule = spatial macro-form. $O((2R+1)^3)$ per geometry. The parametric generator behind SP-009 and the physical-early counterpart to SP-032/071. |
 | **SP-087** | TR-808 Analog Snare Drum Synthesis (TASS) | **Synthesis Engines** | Circuit-Faithful Analog Snare / Drum-Voice Timbre | Renders the Roland TR-808 snare from its transistor-circuit topology: two high-Q bridged-T shell resonators an octave apart (typical 476/238 Hz, June 1981 service-manual values) summed with differentiator-shaped ("violet") white noise under 60-75 ms RC envelopes. Tone = noise highpass cutoff, Snappy = shell/noise mix, Tune scales both partials; $\mathcal{O}(1)$ per sample, deterministic per seed. The circuit-faithful 808 member beside the generic 606 snare recipe, and what a WDF analysis (SP-051) of the snare subcircuit compiles down to. |
+| **SP-088** | Jiles–Atherton Magnetic Tape Saturation Synthesis (JAMS) | **Post-Processing / DSP** | Analog Tape Saturation / Magnetic Hysteresis Coloration | Integrates the Jiles–Atherton ferromagnetic hysteresis ODE ($dM/dH_e$ with Langevin anhysteretic $\coth(u)-1/u$, domain pinning $a$, coupling $\alpha$, coercivity $k$, reversibility $c$) per sample against the head field $H_e=\alpha M+H$, so compression, slope-dependent harmonics, NAB head bump, gap loss, and asperity noise emerge from domain physics with real memory (hysteresis state carries across section joins). Feasible ~25 kHz HF bias, singularity-clamped, no oversampling/ADAA needed. Candidate: `sound/effects/tape_saturation.py`. |
 |---|
 
 
@@ -18557,3 +18559,267 @@ $\mathcal{O}(H \cdot D)$ for $H$ hits of $D$ samples. Deterministic per
   snare circuit reference used by the WDF model).
 - simo-pandolfi/py78drums — Python per-sample WDF drum synthesis workflow
   (precedent for the NumPy render path).
+
+---
+
+# Golomb Ruler Distinct-Difference Composition (GRDC) (Method 090)
+
+## Classification
+
+- **Layer:** concrete (realizes pitch pools, onset grids, and chord subsets into UnitMatrix cells — nothing here is register-invariant planning; it feeds `generators/`)
+- **Paradigm:** Rules-Based (deterministic, combinatorial design; stochastic only via a search optimizer over a strictly defined combinatorial object)
+- **Number:** 090 (next free after 089 CRCM)
+
+### Source
+
+- Golomb, S. W. (1972). "How to number a graph." In *Graph Theory and Computing* (R. C. Read, ed.), pp. 23–37. Academic Press. (The ruler construction named for Golomb; Babcock 1953 introduced the same structure as "graceful-permutation-free" SPREAD spectrums for radio channel assignment.)
+- Babcock, W. C. (1953). "Intermodulation interference in radio systems." *Bell System Technical Journal* 32(1): 63–73.
+- Bloom, G. S., & Golomb, S. W. (1977). "Applications of ordered directed graphs and topological graph theory to radio frequency assignment." *Communications of the ACM* 20(2): 92–94.
+- Shearer, J. B. (1998). "Some new optimum Golomb rulers." *IEEE Transactions on Information Theory* 44(2): 778–782. (Optimal-ruler length tables, lengths up to order 28.)
+- Dimitromanolakis, A. (2002). *Analysis of the Golomb Ruler and the Sidon Sequence Problems* (dissertation, Technical University of Denmark) — SBDD (SAT-based backtracking) search for optimal rulers.
+- Sidon, S. (1932). "Ein Satz über Tripel mit harmonischem Mittel." *Mathematische Annalen* 106; Erdős, P., & Turán, P. (1941). "On a problem of Sidon in additive number theory." *J. London Math. Soc.* 16: 212–215 (finite Sidon sets in $\mathbb{Z}_n$).
+- Bose, R. C., & Chowla, S. (1962). "Theorems in the additive theory of numbers." *Comment. Math. Helv.* 37: 141–147 (constructive modular Sidon families).
+- Ruzsa, I. Z. (1993). "Solving a linear equation in a set of integers I." *Acta Arithmetica* 65 (constructive dense Sidon sets in $[1,N]$).
+- In additive combinatorics the signal-processing twin is the *Sonar/Costas* property (equal-difference-free arrays); in coding theory, distinct-difference configurations underpin * hopping-pattern design for OFDM (orthogonal variable-spreading-factor hopping).
+
+### Layer
+
+Concrete (L2/L1 on the SCALE abstraction ladder). The ruler is designed abstractly, but every consumer here produces concrete events: L2 for pitch pools (which scale degrees are *in*), L3 for onset lattices and groove interlocks, L4 for section-marker placement. No subset-network (ABS-\*) machinery is required; the construction is standalone and realizes directly into `MusicUnit` events. Registered in `workflows/paths.py` SCALE as L3 (onset lattice) with pitch-pool use at L2.
+
+### Description
+
+A **Golomb ruler** of order $m$ is a set of $m$ marks
+$G=\{g_0< g_1<\dots< g_{m-1}\}$ (integer positions on an abstract ruler of length $L=g_{m-1}$) such that **all pairwise differences are distinct**:
+$g_j-g_i = g_l-g_k \implies (i,l)=(j,k)$. An *optimal* Golomb ruler minimizes $L$ for a given $m$ (known optima: $m{=}5\to L{=}11$, $m{=}6\to 17$, $m{=}7\to 25$, $m{=}8\to 34$; orders above ~28 are open problems, so large $m$ uses near-optimal heuristics). Every distance on the ruler is heard **at most once** — Golomb called it "the ruler on which no two pairs of marks measure the same distance."
+
+A **finite Sidon set** $S\subset\{0,\dots,N-1\}$ is the same distinct-difference condition, but optimized for *density*: maximize $|S|$ for a bounded span. In a cyclic group $\mathbb{Z}_n$ (modular, wraparound differences), a Sidon set of size $m$ in $\mathbb{Z}_n$ satisfies $m(m-1)\le n-1$; Bose–Chowla constructions give size $\approx\sqrt{n}$, and Ruzsa's construction reaches density $\approx\sqrt{N}$ in the integer interval. Modular membership matters musically: a Sidon set in $\mathbb{Z}_{12}$ is a pitch-class set with **all 12 intervals (ICV entries ≤ 1) represented at most once** — max invariance-free interval content, the extreme opposite of a symmetric subset like the whole-tone or diminished scales (080 MMLT), which *maximize* interval duplication.
+
+GRDC composes with the distinct-difference property directly:
+
+- **Pitch pool (PC plane):** choose marks as pitch classes; the pool guarantees no interval class repeats, so no two vertical dyads (or melodic leap sizes) inside the pool are the same interval. Sidon density in $\mathbb{Z}_{12}$: the search finds max-cardinality sets such as $\{0,1,4,6\}$ (ICV $[1,1,1,1,1,1]$ — the *all-interval tetrachord*, 4-Z15) and for 5 marks $\{0,1,4,9,11\}$-type solutions with one ICV entry $=2$. **Relation to 089 CRCM:** complementary objects — CRCM permutes *positions* to make every ordering distinct; GRDC chooses *positions* so every *distance* is distinct.
+- **Onset lattice (time plane):** marks = onset positions (in ticks) inside a bar of $B$ pulses. Every inter-onset interval occurs at most once → no two gaps in the groove are equal, and no two-hit combination repeats its span. This is a *strict non-iso-periodic groove*: unlike 011 Euclidean (maximal evenness), the Golomb groove is maximal *unevenness* with a uniqueness certificate. Wraparound (modular) marks give the cyclic version where the bar loops.
+- **Chord subset selection:** candidate scale degrees vote via their pairwise-interval coverage; a section's subset maximizes distinct interval coverage inside the current harmony (near-all-interval subsets), yielding "fresh verticals" — every attack pair in a chord voicing sounds a different interval size.
+- **Macro-form:** move the *transposition* or the *reading offset* of one fixed ruler per section. Because all differences are unique, the interval content of the pool is transposition-invariant (ICV constant) — sections are color-rotations, not re-compositions (cf. 080 MMLT's invariance logic, but with *maximal* rather than *zero* interval variety).
+- **Search/heuristics:** exact optimum via backtracking + symmetry breaking (mark $g_0=0$, fix $g_1$ as the smallest non-redundant choice, prune when a partial difference set collides); near-optimal for $m>12$ via simulated annealing / distributed "distributed Golomb rulers" heuristics. Deterministic per seed.
+
+**Duality (Shearer's counting bound).** For an order-$m$ ruler of length $L$: $L\ge m^2/2 - O(m)$, so a ruler of $m$ marks needs $O(m^2)$ ticks of span — the same quadratic information as the difference multiset itself ($\binom{m}{2}$ distinct differences). Musically: a Golomb groove of $m$ onsets per bar *wants* a long bar ($B \gtrsim m^2$) to breathe; dense grids force relaxation to Sidon-with-one-repeat.
+
+### Musical Elements Framework
+
+- **PITCH:** pool = ruler marks mapped onto scale degrees or pitch classes (mod $\pi$, where $\pi$ = pool size — in 12TET, Sidon sets in $\mathbb{Z}_{12}$). Melody = ordered traversal of the marks; every leap size in the traversal is unique per octave-span, and repeated motifs via transposition keep their interval *fingerprint* (ICV) while changing their pitch profile.
+- **RHYTHM:** marks = onset times (in pulses) within a bar/window; inter-onset intervals all distinct (linear reading) or all distinct mod $B$ (cyclic reading). Accent = mark parity or cardinality position; the resulting groove is "fractal-uneven" — it never settles into a repeated subdivision, yet is fully deterministic.
+- **HARMONY:** verticalities = simultaneous marks from *multiple* rulers (one per voice), each ruler offset; cross-voice dyads inherit the distinct-difference property *between* rulers when the union set is itself Sidon (construct a "composite ruler"). Non-Sidon unions = intentional interval duplication = tension. Tension scalar = number of repeated differences in the union's ICV.
+- **STRUCTURE:** macro-form = a section-ordered sequence of ruler transforms — transposition shifts, reflection (retrograde ruler), or mark-insertion/deletion (add a mark = add a subtle new distance everywhere = density uplift). Section boundaries are marked by a ruler *shift*; the first mark aligns to the downbeat.
+- **TEXTURE:** the count of active rulers (voices) times average mark density; distance-histogram entropy of the union set gives a continuous texture measure — flat histogram (Sidon) = glassy, evenly-distributed pointillism; peaked = conventional.
+
+### UnitMatrix Integration (Voices & Sections)
+
+- **Voices (rows):** one Golomb ruler per voice (or per rhythmic layer). Pitch-ruler voice = melodic pool mapping; time-ruler voice = percussion/comping onset pattern.
+- **Sections (columns):** each section applies one transform to the voice's ruler: `translate(+k)` (transpose pitch pool, or shift groove phase), `reflect()` (retrograde order), `insert_mark(x)` / `delete_mark(x)` (density/complexity change), or `switch_ruler(m')` (change order — e.g., 8-mark verse pool → 5-mark chorus hook).
+- **Cells (MusicUnit):** each cell holds the events generated by the voice's ruler *restricted to that section's tick window and pitch window*. For a pitch-pool voice, cell = notes whose pitch classes ∈ current transformed ruler, with the ruler's ordered marks providing the melodic contour. For a time-ruler voice, cell = onset events at the transformed marks within the section's bars; ties/legato handled by marking sustained marks (weight = duration multiplier).
+- **Fill order:** sections filled left-to-right per voice (each voice's ruler transform is independent per column), then vertical union checks (Sidon-ness of the cross-voice union) applied as a post-pass on each column, re-voicing the offending pitch by ±12 or re-timing the onset to preserve the distinct-difference invariant.
+
+### Pitfalls
+
+- **Zero-sum / duplicate-wrap trap (PC plane):** when reading marks as pitch classes mod 12, *cyclic* differences must be checked, not linear ones — a linear-Sidon set like $\{0,1,3,7\}$ has $1-0 = 12-11$… wait: the cyclic check is $d \in \{g_j-g_i \bmod 12\}$ *and* its complement $12-d$; a linearly-unique set can still have $d$ and $12-d$ both present (interval class 5 and 7 = same IC). Always compute the **interval vector** (`rules/set_theory.py` `interval_vector`) and assert `max(ICV) ≤ 1` for a true Sidon-PC claim.
+- **Span explosion:** optimal rulers grow quadratically — an order-12 pitch-pool ruler needs $\ge 77$ scale degrees of span if used linearly. In 12TET pitch-class space this is impossible; use the *modular* (Sidon) formulation for pools, reserve linear rulers for onset grids where span is cheap.
+- **No small-ruler content:** order-4 rulers have only 6 distinct differences — pieces built from $m\le4$ marks sound "thrifty"; use $m\ge6$ for rhythmic figures and $m\ge5$ for pitch pools to avoid perceivable thinness.
+- **Optimality is NP-hard:** beyond order ~28, published "optimal" lengths are unproven; use verified tables (Shearer 1998 / distributed@tg) or heuristic near-optimal rulers and label them near-optimal in provenance.
+- **Hybridization (per master-map rule):** a Golomb groove is *sparse* ($m$ onsets across $B\gg m$ pulses) — always pair with a continuous fill layer (026 DPSM arpeggio, walking bass, or sustained pad) to avoid "staccato-only" output.
+
+### Python Sketch
+
+```python
+def is_golomb(marks):
+    d = sorted(marks[j]-marks[i] for i in range(len(marks))
+                                for j in range(i+1, len(marks)))
+    return all(d[k] != d[k+1] for k in range(len(d)-1))
+
+def sidon_pc_pool(size, modulus=12, seed=0):
+    """Max-cardinality PC subset with max(ICV)<=1 (modular Golomb)."""
+    import itertools, random
+    rng = random.Random(seed)
+    best = []
+    for trial in range(20000):
+        cand = sorted(rng.sample(range(modulus), size))
+        icv = [0]*6
+        ok = True
+        for a, b in itertools.combinations(cand, 2):
+            icv[min((b-a) % modulus, (a-b) % modulus) - 1] += 1
+        if max(icv) <= 1 and len(cand) > len(best):
+            best = cand
+    return best
+
+def golomb_onsets(marks, bar_pulses, section_bars, transform=None):
+    """Time-plane: onset ticks from a Golomb ruler inside one section."""
+    m = list(marks)
+    if transform == 'reflect':
+        m = [m[-1] - x for x in m][::-1]
+    onsets = [x * (bar_pulses * section_bars) // m[-1] for x in m]
+    assert len(set(onsets)) == len(onsets), "compression collision"
+    return onsets
+
+# UnitMatrix wiring (sanctioned workflow):
+# from workflows.unitmatrix_composer import UnitMatrixComposer, create_note_unit
+# composer.fill_voice_section("Lead", "A", create_note_unit(pitch, dur))
+# with pitch from sidon_pc_pool() and onset/duration from golomb_onsets().
+```
+
+### References
+
+- Golomb, S. W. (1972). "How to number a graph," in *Graph Theory and Computing*. Academic Press.
+- Babcock, W. C. (1953). *Bell System Technical Journal* 32(1): 63–73.
+- Shearer, J. B. (1998). "Some new optimum Golomb rulers." *IEEE Trans. Inf. Theory* 44(2): 778–782. (Tables: https://mark.benek.ca or the standard `mgr` tables.)
+- Dimitromanolakis, A. (2002). Dissertation, DTU — SAT/backtracking optimal-ruler search.
+- Erdős, P., & Turán, P. (1941). "On a problem of Sidon in additive number theory." *J. LMS* 16: 212–215.
+- Bose, R. C., & Chowla, S. (1962). *Comment. Math. Helv.* 37: 141–147.
+- Ruzsa, I. Z. (1993). *Acta Arithmetica* 65: 259–272.
+- Bloom, G. S., & Golomb, S. W. (1977). "Applications of ordered graphs…" *Comm. ACM* 20(2).
+
+—
+*Appended 2026-09-18 by the methods-research cron job. Layer tag: concrete. Paradigm: Rules-Based. ID 090 confirmed free at append time (max numeric ID was 089; no `method_090*` or `report_090*` files existed).*
+# Sound Production Method SP-088 — Jiles–Atherton Magnetic Tape Saturation Synthesis (JAMS)
+
+**Layer:** absolute (sound production — Post-Processing / DSP)
+**Category:** Post-Processing / DSP | **Target Output:** Analog Tape Saturation / Magnetic Hysteresis Coloration
+
+### One-line description
+
+Renders analog tape saturation from the physics of magnetic hysteresis rather
+than a static transfer curve: the Jiles–Atherton differential equation
+integrates the tape coating's magnetization $M$ sample-by-sample against the
+head-drive field $H_e = \alpha M + H$, so compression, harmonic generation,
+low-frequency head bump, and high-frequency gap loss all *emerge* from
+domain-wall physics (saturation $M_s$, pinning $a$, coupling $\alpha$,
+reversibility $c$) and react dynamically to level, bias, and tape speed.
+
+### Layer classification
+
+Per `LAYER_ARCHITECTURE.md`, every SP-* method is **absolute** (sound production:
+audio stems → WAV/OGG). JAMS is an *absolute*-layer method in the Post-Processing
+/ DSP class: it consumes an already-rendered audio stem (any UnitMatrix export)
+and emits a re-magnetized buffer. Candidate code path:
+`sound/effects/tape_saturation.py` — sibling of `sound/effects/tape_delay.py`
+(delay-line lo-fi) and the analog-coloration side of
+`sound/effects/mastering.py`. Plugs into
+`workflows.musicom_workflow.produce(method="SP-088")` as a stem coloration
+stage after SP-001 (FluidSynth) / SP-011 (Karplus-Strong) rendering.
+
+### Source
+
+The **Jiles–Atherton model** (Jiles & Atherton, *Journal of Magnetism and
+Magnetic Materials* **61**:48, 1986) is the standard physics-based description
+of ferromagnetic hysteresis: magnetization $M$ lags applied field $H$ through
+domain-wall pinning, an anhysteretic Langevin equilibrium
+$\mathrm{anh}(u)=\coth(u)-1/u$, and inter-domain coupling. Adopted by SPICE
+circuit simulation and, more recently, virtual-analog audio research as the
+mechanistic core of tape saturation. Key sources:
+
+- Jiles, D. C., & Atherton, D. L. (1986). "Theory of ferromagnetic
+  hysteresis." *J. Magn. Magn. Mater.* 61(1-2): 48–60.
+- Jiles–Atherton model — Wikipedia (fetched 2026-09-18).
+- Time-domain audio adaptations (DAFx/AES lineage): delta-method ODE
+  integration $dM/dt = (dM/dH_e)(dH_e/dt)$, Euler/Heun stepping,
+  singularity guards at loop turning points.
+- Tape-machine signal-chain literature (Välimäki et al.): record-head +
+  HF bias stage → hysteresis nonlinearity → playback gap loss + NAB
+  equalization → asperity noise — the modular chain JAMS follows.
+
+### Technical Mechanics
+
+**State:** $M$ (magnetization), driven by effective field
+$H_e = H + \alpha M$ where $H$ is the head field (signal × drive + HF bias).
+
+**Per-sample update** (delta method, explicit Euler with $N_\mathrm{sub}$
+substeps):
+
+$$M[n] = M[n-1] + N_\mathrm{sub}\cdot \mathrm{clamp}\!\left(
+\frac{dM}{dH_e}(H_e[n])\cdot (H_e[n]-H_e[n-1]),\ \Delta M_\max\right)$$
+
+$$\frac{dM}{dH_e} =
+\frac{(1-c)\,\frac{dM_\mathrm{irr}}{dH_e} + c}
+     {1 - \alpha\,(1-c)\,\frac{dM_\mathrm{irr}}{dH_e}},\qquad
+\frac{dM_\mathrm{irr}}{dH_e} =
+\frac{M_\mathrm{an}(H_e) - M_\mathrm{irr}}
+     {k\,\delta - \alpha\,(M_\mathrm{an}(H_e) - M_\mathrm{irr})}$$
+
+with $\delta = \mathrm{sign}(dH_e/dt)$, $M_\mathrm{an}$ the Langevin
+anhysteretic curve, and singularity guard $|k\delta - \alpha(M_\mathrm{an}-
+M_\mathrm{irr})| \ge \epsilon$ (else the derivative blows up at loop
+turning points). Bracketing linear stages:
+
+1. **Record head:** $h[n] = g\,x[n] + I_b\sin(2\pi f_b n/f_s)$ — feasible
+   HF bias (≈25 kHz, not the hardware's 150+ kHz, to avoid aliasing).
+2. **Playback head:** second-order low-pass with gap-loss corner
+   $f_g \propto 1/\text{speed}$ + NAB low-shelf "head bump" (~70 Hz).
+3. **Asperity noise:** $\mathcal{O}(1)$ high-passed Gaussian noise floor
+   (surface roughness of the coating).
+
+**Monotonicity:** $dM/dH_e > 0$ under the clamp → the map never folds →
+no in-loop aliasing, and the compression is inherently soft. Complexity
+$\mathcal{O}(N_\mathrm{sub})$ per sample (~15 flops), no oversampling, no
+ADAA (cf. SP-062) — the ODE is a low-pass integrator by nature.
+
+### Musical Elements Framework
+
+- **PITCH:** pitch-transparent; slow ODE relaxation adds sub-Hz operating-
+  point drift perceived as stability ("tape doesn't waver like a plugin
+  compressor's release").
+- **RHYTHM:** slope-dependent transient compression — fast positive slopes
+  densify, decays open — the soft "round" hats/snares of tape drums;
+  extreme drive smears groove boundaries slightly via flux memory.
+- **HARMONY:** level-dependent harmonic growth — quiet chords stay clean,
+  climaxes grow 2nd/3rd-order sidebands asymmetrically — dynamic "chorus
+  of distortion" that never changes interval content.
+- **STRUCTURE:** global macro-dynamics stage; automate drive/bias per
+  section (intro light → chorus pushed); the ODE state carries across
+  section joins for a 5–20 ms physical "tape settle" glue.
+- **TEXTURE:** asperity noise fills the inter-voice spectral floor;
+  head bump + gap loss focus density into ~120 Hz – 10 kHz — cassette-era
+  density without loss of definition.
+
+### UnitMatrix Integration
+
+- **Voices = rows** — per-voice tape channels with distinct parameter sets
+  (lead: small $k$ / fast speed / bright; bass: large $k$ / 7.5 IPS /
+  head bump; pads: high bias for low-level cleanliness).
+- **Sections = columns** — per-section drive/bias automation table;
+  do NOT reset $M$ between sections (carrying state preserves continuity
+  and avoids clicks; reset only at transport stop).
+- **Cells = MusicUnit** — each unit renders to a stem via SP-001/SP-011;
+  JAMS post-processes stems. Terminal silent padding (MIDI tail truncation
+  fix) must cover the hysteresis decay tail so the last note's settle
+  stays inside the section length.
+- **Workflow:** `compose()` → `produce(method="SP-001")` →
+  `produce(method="SP-088", params={drive, bias, speed, bump})` →
+  WAV/OGG; optional parallel dry/saturated blend for "tape thickness".
+
+### Pitfalls
+
+1. **Denominator singularity** at loop turning points ($k\delta -
+   \alpha(M_\mathrm{an}-M_\mathrm{irr}) \to 0$) → ±∞ derivative →
+   full-scale folded noise. Fix: clamp $|\cdot| \ge \epsilon$.
+2. **Langevin $\coth(u)-1/u$ is 0/0 near $u=0$** — NaN/inf on silent
+   passages. Fix: Taylor series $u/3 - u^3/45$ for $|u|<10^{-3}$.
+3. **Overshoot past $M_s$** on transients with explicit integration →
+   digital hard clip. Fix: soft-clamp $M$, limit $\Delta M$/substep.
+4. **Bias aliasing** — literal 150–250 kHz bias aliases at audio $f_s$.
+   Fix: feasible ~25 kHz bias + pre-low-pass, or 2× fs with decimation.
+5. **Per-section state reset** clicks and kills continuity — carry $M$
+   and bias phase across sections.
+6. **Static-curve regression** (replacing the ODE with a $y=f(x)$ LUT)
+   destroys hysteresis — the entire point. Cache $dM/dH_e(H_e)$ instead
+   if flops matter; memory survives.
+7. **Level dependence** — parameters are flux-domain; normalize input to
+   a reference flux (IEC1 320 nWb/m convention) before the ODE.
+8. **Double saturation** when chained after SP-029 ladder saturation or
+   SP-019 wavefolding → intermodulation harshness. JAMS last, or reduce
+   upstream drive.
+
+---
+
+*Appended 2026-09-18 by the sound-production research cron job. Layer tag:
+absolute. Paradigm: Nature-Led-adjacent (physical hysteresis ODE) —
+categorized Post-Processing / DSP. ID SP-088 confirmed free at append time
+(global max was SP-087: summary table SP-087 TASS, code registry
+SP-076..SP-086, no `sound_method_SP-088*` / `report_SP-088*` files existed).*
