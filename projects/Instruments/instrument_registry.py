@@ -48,6 +48,7 @@ _INSTRUMENT_MODULES = {
     "Percussion.marimba.marimba": "marimba",
     "Percussion.steel_drums.steel_drums": "steel_drums",
     "Percussion.vibraphone.vibraphone": "vibraphone",
+    "Percussion.glockenspiel.glockenspiel": "glockenspiel",
     "World.sitar.sitar": "sitar",
     "World.koto.koto": "koto",
     "World.shamisen.shamisen": "shamisen",
@@ -216,6 +217,7 @@ SHENAI = ALL_INSTRUMENTS["shenai"]
 FIDDLE = ALL_INSTRUMENTS["fiddle"]
 TIMPANI = ALL_INSTRUMENTS["timpani"]
 XYLOPHONE = ALL_INSTRUMENTS["xylophone"]
+GLOCKENSPIEL = ALL_INSTRUMENTS["glockenspiel"]
 TAIKO = ALL_INSTRUMENTS["taiko"]
 HUMAN_VOICE = ALL_INSTRUMENTS["human_voice"]
 # Voice-like family — one instrument per non-vocal source. The `voice_like`
@@ -307,6 +309,8 @@ def registry_table():
             role = "accent, rhythm, bass, drone"
         elif low == "xylophone":
             role = "lead, melody, ornament, accent, countermelody"
+        elif low == "glockenspiel":
+            role = "lead, melody, ornament, accent, countermelody"
         elif low == "taiko drum":
             role = "accent, rhythm, drone, ornament"
         elif low == "human voice":
@@ -386,6 +390,10 @@ if __name__ == "__main__":
     print("  by_name('taiko drum') =", by_name("taiko drum"))
     print("  by_program(116) =", by_program(116))
     print("  TAIKO.in_sweet_spot(50) =", TAIKO.in_sweet_spot(50))
+    print("  GLOCKENSPIEL.midi_program =", GLOCKENSPIEL.midi_program, "(should be 9)")
+    print("  by_name('glockenspiel') =", by_name("glockenspiel"))
+    print("  by_program(9) =", by_program(9))
+    print("  GLOCKENSPIEL.in_sweet_spot(84) =", GLOCKENSPIEL.in_sweet_spot(84))
     print("  HARPSICHORD.midi_program =", HARPSICHORD.midi_program, "(should be 6)")
     print("  by_name('harpsichord') =", by_name("harpsichord"))
     print("  by_program(6) =", by_program(6))

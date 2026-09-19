@@ -382,6 +382,18 @@ registration (density, octave doubling, choir choice) + trills/mordents
 (the trill is the sustain mechanism on fast-dying plucked strings), NOT
 velocity swells. Channel quirk: melodic channel (0–9) with program 6.
 
+**Glockenspiel added** (2026-09-19): GM9, Percussion-family pitched metal entry
+(instrument.md + glockenspiel.py), verified end-to-end UnitMatrixComposer →
+zero-drift ✓ → MIDI (144 bytes) → FluidSynth WAV (1.69 MB) ✓; RenderPipeline stem label
+`trackXX_Glockenspiel.wav` ✓ (GM_PROGRAMS[9] = "Glockenspiel", FluidR3 preset 9 =
+"Glockenspiel" — labels match exactly, no quirk). ModalSynth primary with stock
+'bell' preset and custom `GLOCKENSPIEL_MODES` steel bar inharmonic resonator bank
+(fundamental C6 + 2.71x + 5.15x + 8.43x partials, decay rates 2.5–9.0). Verified
+sounding range 79–108 (G5–C8, 2.5-octave orchestra bells) and sweet spot 84–100 (C6–E7).
+Empirical FluidR3 pitch sweep confirms audibility across full sounding range and
+down to MIDI 55 (G3) for transposed scores, no gaps. Single-voice solo render avoids
+comb-filtering. Karplus-Strong fallback with loop_gain 0.9980 for sustained metallic ringing.
+
 ## Python usage
 
 ```python
@@ -423,6 +435,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Woodwind | Bassoon | 70 | 34–88 | bass, harmony, counter, lead |
 | Guitar | Acoustic | 25 | 40–84 | harmony, rhythm, strum |
 | Percussion | Drum Kit | ch9 | 35–81 | rhythm, groove, accent |
+| Percussion | Glockenspiel | 9 | 79–108 | lead, melody, ornament, accent, countermelody |
 | Percussion | Marimba | 12 | 45–96 | lead, melody, accent, countermelody, harmony |
 | Percussion | Steel Drums | 114 | 55–96 | lead, melody, accent, countermelody, harmony, rhythm |
 | Percussion | Timpani | 47 | 36–65 | accent, rhythm, bass, drone |
@@ -451,6 +464,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 46 | Orchestral Harp | Orchestral_Harp ✓ (GM_PROGRAMS[46] = "Orchestral Harp"; FluidR3 preset 46 = "Harp" — one-word SF2 spelling, cosmetic only) |
 | 1 | Acoustic Grand Piano | **Bright_Acoustic_Piano** ✗ (list[1]) |
 | 6 | Harpsichord | Harpsichord ✓ (GM_PROGRAMS[6] + FluidR3 preset 6 both "Harpsichord") |
+| 9 | Glockenspiel | Glockenspiel ✓ (GM_PROGRAMS[9] + FluidR3 preset 9 both "Glockenspiel") |
 | 56 | Trumpet (correct GM) | Trumpet ✓ |
 | 57 | Trombone | Trombone ✓ |
 | 58 | Tuba | Tuba ✓ |

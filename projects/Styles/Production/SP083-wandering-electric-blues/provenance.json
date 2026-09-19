@@ -1,0 +1,16 @@
+{
+  "job": "random-style production (SP) layer-aligned",
+  "date": "2026-09-19",
+  "method": "SP-083",
+  "method_module": "sound.modular.wandering",
+  "method_desc": "Non-LFO Wandering Engine + Portal + Drift Clouds Voice (Sound Dust-style)",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Blues/039-electric-blues/daily-2026-06-27_blues_039-electric-blues-unitmatrix.mid",
+  "output_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP083-wandering-electric-blues/SP083-wandering-electric-blues.wav",
+  "output_ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP083-wandering-electric-blues/SP083-wandering-electric-blues.ogg",
+  "lufs": -14.0,
+  "peak": 0.8913,
+  "silence_pct": 4.12,
+  "pitch_verdict": "PASS",
+  "hit_rate": 0.9667,
+  "he_mean": 0.3071
+}
