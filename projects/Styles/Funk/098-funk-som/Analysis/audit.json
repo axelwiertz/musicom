@@ -1,0 +1,82 @@
+{
+  "phase2": {
+    "total_notes": 1128,
+    "rows": [
+      {
+        "track": 1,
+        "name": "",
+        "program": 56,
+        "channel": 0,
+        "notes": 184,
+        "off16": 0,
+        "off8": 103,
+        "out_of_scale": 0,
+        "out_of_chord": 0
+      },
+      {
+        "track": 2,
+        "name": "",
+        "program": 65,
+        "channel": 1,
+        "notes": 32,
+        "off16": 0,
+        "off8": 32,
+        "out_of_scale": 0,
+        "out_of_chord": 0
+      },
+      {
+        "track": 3,
+        "name": "",
+        "program": 1,
+        "channel": 2,
+        "notes": 216,
+        "off16": 0,
+        "off8": 72,
+        "out_of_scale": 0,
+        "out_of_chord": 0
+      },
+      {
+        "track": 4,
+        "name": "",
+        "program": 43,
+        "channel": 3,
+        "notes": 144,
+        "off16": 0,
+        "off8": 96,
+        "out_of_scale": 0,
+        "out_of_chord": 0
+      },
+      {
+        "track": 5,
+        "name": "",
+        "program": 0,
+        "channel": 9,
+        "notes": 552,
+        "off16": 0,
+        "off8": 240,
+        "out_of_scale": 0,
+        "out_of_chord": 0
+      }
+    ],
+    "off16_sum": 0,
+    "oos_sum": 0,
+    "ooc_sum": 0
+  },
+  "phase1": {
+    "total_notes": 184,
+    "rows": [
+      {
+        "track": 1,
+        "name": "",
+        "program": 56,
+        "channel": 0,
+        "notes": 184,
+        "off16": 177,
+        "off8": 178,
+        "out_of_scale": 0,
+        "out_of_chord": 0
+      }
+    ],
+    "off16_sum": 177
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "date": "2026-09-20",
+  "seed": 20260920,
+  "method": "SP-080",
+  "module": "sound.generators.cadence_variator",
+  "desc": "Cadence Engine Rhythmic Variator w/ Flux Randomizer (Emergence Audio Envoy-style)",
+  "recent_7d": [
+    "SP-083",
+    "SP-084",
+    "SP-072",
+    "SP-074",
+    "SP-036",
+    "SP-073",
+    "SP-071"
+  ],
+  "eligible_count": 23,
+  "midi_pick": "/opt/data/repos/musicom/projects/Styles/Experimental/064-markov-constraint-chorale/MIDI/064-markov-constraint-chorale.mid",
+  "n_candidates_raw": 293,
+  "n_candidates_usable": 286
+}

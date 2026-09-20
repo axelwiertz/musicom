@@ -1,0 +1,26 @@
+{
+  "098-funk-som": {
+    "duration_s": 57.96,
+    "channels": 2,
+    "silence_ratio": 0.0524,
+    "silent_secs": [
+      56
+    ],
+    "last_audio_sec": 55,
+    "peak": 0.9405,
+    "rms_mean": 0.10505,
+    "tonal_windows": "113/115"
+  },
+  "098-funk-som-phase1": {
+    "duration_s": 57.39,
+    "channels": 2,
+    "silence_ratio": 0.0724,
+    "silent_secs": [
+      56
+    ],
+    "last_audio_sec": 55,
+    "peak": 0.4696,
+    "rms_mean": 0.07093,
+    "tonal_windows": "112/114"
+  }
+}

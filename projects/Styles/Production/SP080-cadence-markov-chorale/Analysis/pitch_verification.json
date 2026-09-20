@@ -1,0 +1,15 @@
+{
+  "verdict": "PASS",
+  "windows_checked": 45,
+  "dominant_peak_hit_rate": 1.0,
+  "harmonic_energy_mean_8h": 0.4629,
+  "acf_windows": 12,
+  "acf_unpitched": 0,
+  "lowest_midi_notes_seen": [
+    43,
+    57,
+    58
+  ],
+  "median_dom_hz": 470.0,
+  "misses": []
+}

@@ -394,6 +394,22 @@ Empirical FluidR3 pitch sweep confirms audibility across full sounding range and
 down to MIDI 55 (G3) for transposed scores, no gaps. Single-voice solo render avoids
 comb-filtering. Karplus-Strong fallback with loop_gain 0.9980 for sustained metallic ringing.
 
+**Piccolo added** (2026-09-20): GM72, Woodwind-family seventh entry — the
+orchestral octave flute (half the length of the concert flute, sounds 1 octave
+higher than written; instrument.md + piccolo.py), verified end-to-end
+UnitMatrixComposer → zero-drift ✓ → MIDI (144 bytes) → FluidSynth WAV (768 KB) ✓;
+RenderPipeline stem label `trackXX_Piccolo.wav` ✓ (GM_PROGRAMS[72] = "Piccolo",
+FluidR3 preset 72 = "Piccolo" — labels match exactly, no quirk, distinct from
+GM74 Flute which maps to "Recorder"). PhaseModSynth recommended (sine carrier +
+sine modulator, ratio 1.0, depth 1.2, attack 0.04 s, release 0.10 s) producing
+sweet focused flue tone without artificial harshness. Physical aerophone model
+AirPipe supported (`stopped=False`, `length_scale=0.5`, `pressure=0.65`).
+Range 72–108 (C5–C8 sounding pitch); sweet spot 84–96 (C6–C7); solo range
+79–101 (G5–F7). Solo-render spectral check: 4–8 kHz buzz 3.3% (well within 20%
+gate, clean single voice, no comb-filtering). Empirical FluidR3 pitch sweep
+(RMS, notes 72–108): preset 72 audible across full range (RMS 0.048–0.103, no
+gaps or dropouts). Registry verified with full verification suite.
+
 ## Python usage
 
 ```python
@@ -431,6 +447,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Woodwind | Flute | 74 | 60–96 | lead, counter, ornament |
 | Woodwind | Oboe | 68 | 52–92 | lead, counter, harmony, accent |
 | Woodwind | Clarinet | 71 | 52–96 | lead, counter, harmony, accent |
+| Woodwind | Piccolo | 72 | 72–108 | lead, melody, ornament, accent, countermelody |
 | Woodwind | Alto Saxophone | 65 | 49–88 | lead, counter, accent, harmony |
 | Woodwind | Bassoon | 70 | 34–88 | bass, harmony, counter, lead |
 | Guitar | Acoustic | 25 | 40–84 | harmony, rhythm, strum |
@@ -470,6 +487,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 58 | Tuba | Tuba ✓ |
 | 60 | French Horn | French Horn ✓ (SF2 preset is "French Horns" plural — cosmetic) |
 | 70 | Bassoon | Bassoon ✓ |
+| 72 | Piccolo | Piccolo ✓ (GM_PROGRAMS[72] + FluidR3 preset 72 both "Piccolo") |
 | 68 | Oboe | Oboe ✓ (SF2 preset is "Oboe (Orch)" — cosmetic suffix only) |
 | 65 | Alto Sax (correct GM) | **Alto_Sax** (labeled "Alto Sax", not "Saxophone") |
 | 74 | Flute | **Recorder** ✗ |

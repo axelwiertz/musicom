@@ -1,0 +1,19 @@
+{
+  "artifact": "098-funk-som.mid",
+  "classification": "ai-assisted",
+  "generator": "Method 075 SOM-C (Phase 2 Rules)",
+  "sources": [],
+  "parameters": {
+    "m": 4,
+    "n": 4,
+    "dim": 3,
+    "seed": 20260919,
+    "phase": 2,
+    "grid": 120
+  },
+  "notes": "",
+  "sha256": "fdfe4e0ea3669835570f611ba8906ef00d0831b2d2ec0d8bc1535a07168cc62e",
+  "bytes": 8835,
+  "created_utc": "2026-09-19T23:12:15.500077+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,11 @@
+{
+  "sr": 44100,
+  "duration_s": 29.63,
+  "samples": 1306880,
+  "silence_pct": 18.16,
+  "lufs": -14.06,
+  "peak": 0.8913,
+  "stems_count": 4,
+  "wav_bytes": 5227564,
+  "ogg_bytes": 204222
+}

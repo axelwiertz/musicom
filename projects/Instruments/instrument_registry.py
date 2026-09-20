@@ -38,6 +38,7 @@ _INSTRUMENT_MODULES = {
     "Brass.trombone.trombone": "trombone",
     "Brass.french_horn.french_horn": "french_horn",
     "Brass.tuba.tuba": "tuba",
+    "Woodwind.piccolo.piccolo": "piccolo",
     "Woodwind.flute.flute": "flute",
     "Woodwind.clarinet.clarinet": "clarinet",
     "Woodwind.oboe.oboe": "oboe",
@@ -218,6 +219,7 @@ FIDDLE = ALL_INSTRUMENTS["fiddle"]
 TIMPANI = ALL_INSTRUMENTS["timpani"]
 XYLOPHONE = ALL_INSTRUMENTS["xylophone"]
 GLOCKENSPIEL = ALL_INSTRUMENTS["glockenspiel"]
+PICCOLO = ALL_INSTRUMENTS["piccolo"]
 TAIKO = ALL_INSTRUMENTS["taiko"]
 HUMAN_VOICE = ALL_INSTRUMENTS["human_voice"]
 # Voice-like family — one instrument per non-vocal source. The `voice_like`
@@ -311,6 +313,8 @@ def registry_table():
             role = "lead, melody, ornament, accent, countermelody"
         elif low == "glockenspiel":
             role = "lead, melody, ornament, accent, countermelody"
+        elif low == "piccolo":
+            role = "lead, melody, ornament, accent, countermelody"
         elif low == "taiko drum":
             role = "accent, rhythm, drone, ornament"
         elif low == "human voice":
@@ -398,3 +402,7 @@ if __name__ == "__main__":
     print("  by_name('harpsichord') =", by_name("harpsichord"))
     print("  by_program(6) =", by_program(6))
     print("  HARPSICHORD.in_sweet_spot(69) =", HARPSICHORD.in_sweet_spot(69))
+    print("  PICCOLO.midi_program =", PICCOLO.midi_program, "(should be 72)")
+    print("  by_name('piccolo') =", by_name("piccolo"))
+    print("  by_program(72) =", by_program(72))
+    print("  PICCOLO.in_sweet_spot(88) =", PICCOLO.in_sweet_spot(88))

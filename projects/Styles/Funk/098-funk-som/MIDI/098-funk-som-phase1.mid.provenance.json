@@ -1,0 +1,18 @@
+{
+  "artifact": "098-funk-som-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "Method 075 SOM-C (Phase 1 Raw)",
+  "sources": [],
+  "parameters": {
+    "m": 4,
+    "n": 4,
+    "dim": 3,
+    "seed": 20260919,
+    "phase": 1
+  },
+  "notes": "",
+  "sha256": "d2bd11e9fc7f46704782071cfa96830f57cde8dac86315210af75ad578c18ae7",
+  "bytes": 1742,
+  "created_utc": "2026-09-19T23:12:15.499467+00:00",
+  "provenance_version": "1.0"
+}
