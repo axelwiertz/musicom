@@ -55,6 +55,13 @@ GENERATOR_REGISTRY = {
     "HC-032": (None, None, "Guqin Jianzipu Tablature & Dapu Reconstruction (spec in human_methods_db.md)"),
     "HC-033": (None, None, "Inuit Katajjaq Throat-Singing Duet (spec in human_methods_db.md)"),
     "HC-034": (None, None, "Choro Rondo & Baixaria Counterpoint (spec in human_methods_db.md)"),
+    # --- Human methods weekly promotion 2026-09-20 (reports HC-035..HC-040) ---
+    "HC-035": (None, None, "Shona Mbira Kushaura/Kutsinhira Interlocking (spec in human_methods_db.md)"),
+    "HC-036": (None, None, "Norwegian Hardanger Fiddle Slått Craft (spec in human_methods_db.md)"),
+    "HC-037": (None, None, "Klezmer Ornament-Led Ensemble Craft (spec in human_methods_db.md)"),
+    "HC-038": (None, None, "Sonata Form Process (spec in human_methods_db.md)"),
+    "HC-039": (None, None, "Irish Traditional Dance Tune Setting & Ornamentation Craft (spec in human_methods_db.md)"),
+    "HC-040": (None, None, "Andalusi Nūbah Suite Architecture & Mīzān Metric Acceleration (spec in human_methods_db.md)"),
 }
 
 

@@ -134,6 +134,13 @@ SCALE = {
     "083": ("L4", False),  # Aperiodic Quasicrystal Tiling (QTSC) (spec)
     "084": ("L4", False),  # Zipf-Mandelbrot Rank-Frequency (ZMRC) (spec)
     "085": ("L4", False),  # Non-negative Matrix Factorization (NMF-C) (spec)
+    # REGISTERED 2026-09-20 (weekly prose->code promotion, reports 086..091)
+    "086": ("L3", False),  # Hidden Markov Model Latent-State Composition (HMM-C) (spec)
+    "087": ("L3", False),  # Multiple Viewpoint Systems Composition (MVS-C) (spec)
+    "088": ("L4", False),  # Voronoi Tessellation Event Partitioning (VTEP) (spec)
+    "089": ("L4", False),  # Change-Ringing Combinatorial Method (CRCM) (spec)
+    "090": ("L4", False),  # Golomb Ruler Distinct-Difference Composition (GRDC) (spec)
+    "091": ("L4", False),  # Coxeter-Conway Frieze Pattern Composition (CCFPC) (spec)
     "HC-003": ("L2", False),  # Makam Seyir
     "HC-010": ("L2", False),  # Fanfare
     "HC-018": ("L3", False),  # Clave-Guided Montuno (spec)
@@ -154,6 +161,13 @@ SCALE = {
     "HC-032": ("L4", False),  # Guqin Jianzipu Dapu Arch Reconstruction (spec)
     "HC-033": ("L3", False),  # Inuit Katajjaq Duet Rounds (spec)
     "HC-034": ("L3", False),  # Choro Rondo & Baixaria (spec)
+    # REGISTERED 2026-09-20 (weekly promotion, reports HC-035..HC-040)
+    "HC-035": ("L3", False),  # Shona Mbira Kushaura/Kutsinhira Interlocking (spec)
+    "HC-036": ("L4", False),  # Norwegian Hardanger Fiddle Slått Craft (spec)
+    "HC-037": ("L4", False),  # Klezmer Ornament-Led Ensemble Craft (spec)
+    "HC-038": ("L4", False),  # Sonata Form Process (spec)
+    "HC-039": ("L3", False),  # Irish Traditional Dance Tune Setting & Ornamentation (spec)
+    "HC-040": ("L4", False),  # Andalusi Nūbah Suite Architecture & Mīzān Metric Acceleration (spec)
     # --- L1 MICRO ---
     "002": ("L1", True),   # Markov Transitions
     "011": ("L1", False),  # Voice-Leading Graph Search
