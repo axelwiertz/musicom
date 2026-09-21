@@ -410,6 +410,21 @@ gate, clean single voice, no comb-filtering). Empirical FluidR3 pitch sweep
 (RMS, notes 72–108): preset 72 audible across full range (RMS 0.048–0.103, no
 gaps or dropouts). Registry verified with full verification suite.
 
+**Celesta added** (2026-09-21): GM8, Keys-family fifth entry — the keyboard
+metallophone (felt-covered hammers striking steel plates suspended over wooden
+resonance boxes, patented 1886 by Auguste Mustel; Sugar Plum Fairy color)
+(instrument.md + celesta.py), verified end-to-end UnitMatrixComposer →
+zero-drift ✓ → MIDI (144 bytes) → FluidSynth WAV (1.06 MB) ✓; RenderPipeline
+stem label `trackXX_Celesta.wav` ✓ (GM_PROGRAMS[8] = "Celesta", FluidR3 preset 8
+= "Celesta" — labels match exactly, no quirk). ModalSynth primary with stock
+'bell' preset and custom `CELESTA_MODES` (steel plate + wooden cavity coupling
+at 1.0x, 2.76x, 5.40x, 8.90x, decay rates 3.2–8.5). Verified sounding range
+48–108 (C3–C8, 5-octave concert instrument) and sweet spot 72–96 (C5–C7).
+Empirical FluidR3 pitch sweep confirms audibility across full sounding range
+(RMS 0.063–0.113, no gaps or dropouts). Single-voice solo render avoids
+comb-filtering (4–8 kHz buzz 4.5% vs 20% gate). Karplus-Strong fallback
+(`loop_gain: 0.9970`) for warm natural metallophone decay.
+
 ## Python usage
 
 ```python
@@ -440,6 +455,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Keys | Church Organ | 19 | 36–96 | harmony, pad, bass, rhythm, accent |
 | Keys | Dulcimer | 15 | 48–96 | lead, melody, ornament, rhythm, harmony |
 | Keys | Harpsichord | 6 | 29–89 | harmony, continuo, melody, ornament, countermelody, accent |
+| Keys | Celesta | 8 | 48–108 | lead, melody, ornament, arpeggio, countermelody, accent |
 | Brass | Trumpet | 56 | 54–86 | lead, accent, fanfare |
 | Brass | Trombone | 57 | 40–78 | bass, counter, accent, harmony |
 | Brass | French Horn | 60 | 41–84 | harmony, counter, accent, lead |
@@ -481,6 +497,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 46 | Orchestral Harp | Orchestral_Harp ✓ (GM_PROGRAMS[46] = "Orchestral Harp"; FluidR3 preset 46 = "Harp" — one-word SF2 spelling, cosmetic only) |
 | 1 | Acoustic Grand Piano | **Bright_Acoustic_Piano** ✗ (list[1]) |
 | 6 | Harpsichord | Harpsichord ✓ (GM_PROGRAMS[6] + FluidR3 preset 6 both "Harpsichord") |
+| 8 | Celesta | Celesta ✓ (GM_PROGRAMS[8] + FluidR3 preset 8 both "Celesta") |
 | 9 | Glockenspiel | Glockenspiel ✓ (GM_PROGRAMS[9] + FluidR3 preset 9 both "Glockenspiel") |
 | 56 | Trumpet (correct GM) | Trumpet ✓ |
 | 57 | Trombone | Trombone ✓ |

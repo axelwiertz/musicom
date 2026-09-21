@@ -1,0 +1,30 @@
+{
+  "verdict": "PASS",
+  "hit_rate": 1.0,
+  "hits": 56,
+  "total_tested": 56,
+  "harmonic_energy_mean": 0.3773211468838818,
+  "unpitched_acf_frames": 1,
+  "total_acf_frames": 14,
+  "dominant_peaks_median": 146.0,
+  "pitch_classes_targeted": [
+    4,
+    7,
+    11,
+    7,
+    11,
+    0,
+    2,
+    3,
+    7,
+    10,
+    11,
+    3,
+    0,
+    3,
+    5,
+    7,
+    10,
+    0
+  ]
+}

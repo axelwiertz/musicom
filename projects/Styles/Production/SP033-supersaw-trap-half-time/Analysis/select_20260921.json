@@ -1,0 +1,20 @@
+{
+  "date": "2026-09-21",
+  "seed": 20260921,
+  "method": "SP-033",
+  "module": "sound.synthesis.supersaw_swarm",
+  "desc": "Detuned Saw Swarm + Scale/Chord Quantize + Morph Pad",
+  "recent_7d": [
+    "SP-080",
+    "SP-083",
+    "SP-084",
+    "SP-072",
+    "SP-074",
+    "SP-036",
+    "SP-073"
+  ],
+  "eligible_count": 25,
+  "midi_pick": "/opt/data/repos/musicom/projects/Styles/Trap/001-trap-half-time/MIDI/trap-half-time.mid",
+  "output_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP033-supersaw-trap-half-time/SP033-supersaw-trap-half-time.wav",
+  "output_ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP033-supersaw-trap-half-time/SP033-supersaw-trap-half-time.ogg"
+}

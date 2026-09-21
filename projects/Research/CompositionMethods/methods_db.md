@@ -99,6 +99,7 @@ Classification of active Musicom composition methods categorized by their primar
 | **089** | concrete | Change-Ringing Combinatorial Method (CRCM) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Weak (Mode-locked, function-free) | Grid-Locked | Macro / Lead-Head Cycle | $\mathcal{O}(n)$ per change, $\mathcal{O}(n \cdot L)$ course | Generates an endless non-repeating permutation stream of $n$ voice-rows under the change-ringing law: every change is a product of disjoint adjacent swaps (each voice moves at most one position per blow), the treble plain-hunts as a register ostinato (double blows at extremes), and a lead-end deviation (Plain Bob: "make 2nds") extends the hunt's $2n$ cycle toward the full $n!$ space; lead heads cycle $123456 \to 135264 \to 156342 \to 164523 \to 142635 \to$ rounds (verified). Bells = UnitMatrix voices; changes = isochronous grid slots. Mapping A: bell = fixed pitch, melody = the continuous strike stream, verticalities = change rows (all distinct). Mapping B: pitch = scale degree of position — every line 100% stepwise (verified: 0 leaps > 2nd in 354 steps, 83.6% 2nds + 16.4% unisons), phase-shifted palindromic hunt per voice, deterministic hocket. Calls (bob/single) = form pivots. Group-theoretic sibling of 069/077; historical craft counterpart of 056; motion-law foil to 065 TTSMC. |
 | **090** | concrete | Golomb Ruler Distinct-Difference Composition (GRDC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Weak (ICV-invariant pool) | Grid-Locked | Macro / Ruler Span | $\mathcal{O}(S \cdot m^2)$ search, $\mathcal{O}(m^2)$ verify | Composes from a Golomb ruler / finite Sidon set — marks whose pairwise differences are ALL distinct (optimal Golomb rulers; Sidon density in $\mathbb{Z}_n$). Pitch plane: marks = pitch classes → no interval class repeats (ICV entries ≤ 1; all-interval tetrachord 4-Z15 at $m{=}4$), the maximal-interval-variety opposite of symmetric 080 MMLT subsets. Time plane: marks = onsets → no inter-onset interval repeats, a certificate-backed non-isoperiodic groove (maximal unevenness, deterministic). Harmony = union of per-voice rulers, tension = duplicate-difference count; form = transposition/reflection/mark-insert transforms per section; Shearer's bound $L \gtrsim m^2/2$ makes dense Golomb grooves demand long bars. Position-choosing complement to 089 CRCM (which permutes orderings); uniqueness foil to 011 Euclidean / 069 CWCC evenness; modular (Sidon) cousin of 065 TTSMC aggregates. |
 | **091** | concrete | Coxeter–Conway Frieze Pattern Composition (CCFPC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Weak (Cluster-algebraic) | Grid-Locked | Macro / Polygon Period | $\mathcal{O}(w \cdot n)$ generation, $\mathcal{O}(1)$ step | Generates polyphonic pitch, rhythm, and chord voicings from positive integer frieze patterns of unimodular $SL_2(\mathbb{Z})$ diamond lattices ($bc - ad = 1$) bounded by rows of 1s, classified bijectively by Conway–Coxeter triangulations of convex $(n+1)$-gons. Rows = voices/polyphonic strata (quiddity row = voice 1, interior cluster depths = inner voices); columns = temporal metric pulses; glide-reflection symmetry ($180^\circ$ rotation + $(n+1)/2$ shift) enforces exact inverted and phase-shifted polyphonic canon relationships. Unimodular determinant constraint prohibits parallel collapse and harmonic drift; macro-form develops via Ptolemy diagonal flips (cluster algebra mutations) across section boundaries. Integrable combinatorial counterpart to 083 quasicrystal / 088 Voronoi and deterministic foil to 021 CA / 033 WFCGS. |
+| **092** | concrete | Diffusion-Limited Aggregation Fractal Growth (DLACG) | **Nature-Led** | Pitch, Rhythm, Harmony, Structure, Texture | Weak (Cluster-boundary guided) | Grid-Locked / Continuous | Meso / Cluster Topology | $\mathcal{O}(N \cdot K)$ walk, $\mathcal{O}(1)$ stick | Generates dendritic polyphony, rhythmic bursts, and harmonic chord arborescences from 2D Brownian particles diffusing until sticking to seed anchors ($D_f \approx 1.71$). Branch depth = structural hierarchy; harmonic measure screening leaves internal rests (fjords) and concentrates note activity on outer tips (melodic climaxes); tree branches partition into independent UnitMatrix voice rows. Spatial connectivity prevents harmonic drift; seed schedules guide macro-form across section boundaries. Nature-led fractal growth counterpart to 048 RBMPD / 049 IFSMG and physical foil to 088 VTEP / 030 RDTP. |
 # Sound Production Methods Framework
 
 Sound production translates symbolic MIDI UnitMatrix data into final acoustic air pressure. Methods are categorized by execution layer: **Hardware/Acoustic Integration**, **Synthesis Engines**, or **Post-Processing / DSP**.
@@ -184,6 +185,7 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 | **SP-087** | TR-808 Analog Snare Drum Synthesis (TASS) | **Synthesis Engines** | Circuit-Faithful Analog Snare / Drum-Voice Timbre | Renders the Roland TR-808 snare from its transistor-circuit topology: two high-Q bridged-T shell resonators an octave apart (typical 476/238 Hz, June 1981 service-manual values) summed with differentiator-shaped ("violet") white noise under 60-75 ms RC envelopes. Tone = noise highpass cutoff, Snappy = shell/noise mix, Tune scales both partials; $\mathcal{O}(1)$ per sample, deterministic per seed. The circuit-faithful 808 member beside the generic 606 snare recipe, and what a WDF analysis (SP-051) of the snare subcircuit compiles down to. |
 | **SP-088** | Jiles–Atherton Magnetic Tape Saturation Synthesis (JAMS) | **Post-Processing / DSP** | Analog Tape Saturation / Magnetic Hysteresis Coloration | Integrates the Jiles–Atherton ferromagnetic hysteresis ODE ($dM/dH_e$ with Langevin anhysteretic $\coth(u)-1/u$, domain pinning $a$, coupling $\alpha$, coercivity $k$, reversibility $c$) per sample against the head field $H_e=\alpha M+H$, so compression, slope-dependent harmonics, NAB head bump, gap loss, and asperity noise emerge from domain physics with real memory (hysteresis state carries across section joins). Feasible ~25 kHz HF bias, singularity-clamped, no oversampling/ADAA needed. Candidate: `sound/effects/tape_saturation.py`. |
 | **SP-089** | TR-808 Analog Cymbal Physical-Circuit Synthesis (TACS) | **Synthesis Engines** | Circuit-Faithful Analog Metallic Cymbal / Multi-Band Percussion Timbre | Synthesizes the TR-808 cymbal voice via its circuit topology: six Schmitt-trigger square-wave oscillators summed into dual active bandpass filters (~3.4 kHz and ~7.1 kHz), gated by three swing-type non-linear transistor VCAs with RC envelope generators, shaped by Sallen-Key highpass filters and an interconnected passive tone stage with a $+6\text{ dB/oct}$ differentiator buffer. Deterministic metallic sheen without sampling; $\mathcal{O}(1)$ per sample. Candidate: `sound/synthesis/drum_synth_808.py`. |
+| **SP-092** | Scalar Auxiliary Variable Nonlinear String Synthesis (SAV-NSS) | **Synthesis Engines** | Geometrically Exact Nonlinear String / Plucked Acoustic Timbre | Solves large-amplitude nonlinear string vibration coupled to bridge compliance via Scalar Auxiliary Variable (SAV) quadratisation: explicit non-iterative time-stepping via two sequential Sherman–Morrison rank-one updates in $\mathcal{O}(M+J)$ operations with servo drift regulation. Dynamic pitch glide, spectral enrichment, and measured guitar body radiation without matrix inversions. Candidate: `sound/synthesis/sav_string.py`. |
 |---|
 
 
@@ -19143,3 +19145,259 @@ def tr808_cymbal_hit(decay=0.5, tone=0.5, velocity=100, duration_sec=1.5, sample
 
 —
 *Appended 2026-09-19 by the methods-research cron job. Layer tag: absolute. Paradigm: Sound Production / Synthesis Engines. ID SP-089 confirmed free at append time (max SP ID was SP-088; no `sound_method_SP-089*` or `report_SP-089*` existed).*
+# Diffusion-Limited Aggregation Fractal Growth (DLACG) (Method 092)
+
+### Source
+T. A. Witten & L. M. Sander (1981), "Diffusion-Limited Aggregation, a Kinetic Critical Phenomenon", *Physical Review Letters*, 47(19), 1400–1403; P. Meakin (1983), "Diffusion-controlled aggregation in realistic environments", *Physical Review A*, 27(3), 1495–1507; L. Niemeyer, L. Pietronero, & H. J. Wiesmann (1984), "Fractal Dimension of Dielectric Breakdown", *Physical Review Letters*, 52(12), 1033–1036; T. C. Halsey (2000), "Diffusion-limited aggregation: a model for pattern formation", *Physics Today*, 53(11), 36–41.
+
+### Layer
+`concrete` — generates discrete notes, dendritic melodic arborescences, clustered polyphonic rhythm events, and harmonic chord textures directly into UnitMatrix cells (feeds `generators/`; L3 meso phrase coordination and L2 voice contours).
+
+### Description
+Diffusion-Limited Aggregation (DLA) is a fundamental kinetic growth process where Brownian particles diffuse randomly in space until contacting a stationary seed structure, at which point they irrevocably stick (aggregate) to form an open, dendritic, self-similar fractal cluster. In two dimensions, DLA clusters exhibit an asymptotic Hausdorff fractal dimension $D_f \approx 1.71$ (lattice-free) or $D_f \approx 1.67$ (square lattice), governed by the harmonic measure $\mu(x)$ — the hitting probability of diffusing particles onto the cluster boundary — which concentrates exponentially on exterior tips and screenings interior fjords (the screening effect).
+
+In Method 092, DLA is mapped onto the 2D pitch $\times$ time musical plane (or cylindrically on pitch class $\times$ metric beat):
+1. **Lattice & Seeds:** The musical domain is discretized into a 2D grid of pitch bins (semitone or scale degree, vertical axis $y \in [0, Y-1]$) and metric time subdivisions (horizontal axis $t \in [0, T-1]$). One or more seed particles are planted at structural anchor coordinates (e.g. tonic pitch at bar downbeat, or structural cadence notes).
+2. **Brownian Particle Launch:** Successive particles are launched from a launch radius $R_{\text{launch}}$ or boundary region outside the bounding radius $R_{\text{cluster}}$ of the growing cluster.
+3. **Random Walk & Sticking:** Each particle undergoes 2D Brownian random walk until it enters the Moore or von Neumann neighborhood of an aggregated particle, sticking with sticking probability $p_{\text{stick}} \in (0, 1]$. If the particle wanders beyond a killing radius $R_{\text{kill}} > R_{\text{launch}}$, it is discarded and re-launched.
+4. **Tree Hierarchy & Deposition Order:** The order of arrival $k = 1, \dots, N$ and the aggregation parent-child link graph impose a strict directed tree structure (arborescence) rooted at the initial seeds. Branches represent musical motifs and voice streams; cluster depth corresponds to structural hierarchy.
+5. **Tip Screening & Clustering:** The harmonic measure naturally yields rhythmic bursts, dense note clusters at boundary extremities (melodic climaxes), and quiet internal lacunae (musical rests/fjords) without explicit probabilistic gating.
+
+### Musical Elements Framework
+
+- **PITCH:** The vertical coordinate $y$ represents pitch height (or pitch class snapped to an underlying scale or subset from the abstract layer, e.g. ABS-002). Because particles diffuse before sticking, branch tips reach into extreme high and low registers, producing exploratory melodic leaps, while branch stems maintain conjunct, stepwise motion back toward the root seed. Sticking probability $p_{\text{stick}} < 1.0$ increases penetration into fjords, smoothing melodic contours, whereas $p_{\text{stick}} = 1.0$ creates sparse, spiky dendritic arpeggios.
+- **RHYTHM:** The horizontal coordinate $t$ maps to absolute metric time ticks. Clustered aggregate nodes across the same time slice or neighboring subdivisions define rhythmic density. Particle arrival order $k$ assigns event onset times. The screening effect causes rhythmic events to cluster at phrase boundaries, producing natural acceleration into section climaxes followed by sudden silence as walkers fail to penetrate internal voids.
+- **HARMONY:** Vertical cross-sections of the cluster at any time step $t$ yield polyphonic verticalities (chords). The spatial connectivity of the aggregate guarantees that simultaneously sounding pitches share parent branches, ensuring harmonic coherence. Harmonic tension is directly proportional to the radial distance from the seed: nodes close to the seed center represent HOME/consonant harmonic centers, while distant branch tips represent TENSE/dissonant extensions. Subsets can be filtered or steered via ABS-004 parsimonious voice-leading constraints.
+- **STRUCTURE:** Macro-form is governed by seed placement and growth regimes. A single central seed creates a centripetal arch form (introductory sparse periphery $\to$ dense core $\to$ decaying branches). A line seed along the bottom (tonic pedal) produces a branching canopy form (choral vertical growth). Multiple seeds placed at cadence locations across UnitMatrix sections create converging motivic bridges. Controlling the number of aggregated particles $N$ per section tunes textural density across verse, chorus, and bridge.
+- **TEXTURE:** DLA produces an organic, dendritic polyphony where independent musical voices correspond to distinct main branches of the cluster. The Hausdorff fractal dimension $D_f \approx 1.71$ guarantees a power-law distribution of pitch-time intervals, preventing both the monotony of periodic lattices and the white-noise incoherence of unconstrained stochastic walks. The screening of inner fjords creates natural musical rests and spacious textural depth.
+
+### UnitMatrix Integration (Voices & Sections)
+
+- **Voices (rows):** The DLA cluster graph is decomposed into $V$ primary branches traced from the root seed to outer tips using depth-first tree partitioning. Each branch is assigned to a distinct UnitMatrix voice row (e.g., Voice 0 = Bass/Stem, Voice 1 = Tenor branch, Voice 2 = Alto branch, Voice 3 = Soprano canopy tip).
+- **Sections (columns):** Each UnitMatrix section represents a temporal growth window $[T_s, T_{s+1}]$. Sections can either inherit seeds from previous section boundaries (continuous through-composed growth) or introduce fresh seeds reflecting section harmonic targets (e.g. Verse seed at root, Chorus seeds at octave/fifth).
+- **Cells (MusicUnit):** Within each cell (voice $v$, section $s$), the aggregated particles belonging to branch $v$ in time window $s$ are compiled into `MusicEvent` objects with `start_tick`, `end_tick`, `pitch`, and `volume`.
+- **Zero-Drift Invariant:** After compiling all aggregated events in a section cell, a silent padding event (`pitch=0, volume=0`) or duration clamp ensures that each cell terminates exactly at `total_section_ticks`, guaranteeing zero track drift across all voice rows.
+- **Method Hybridization:** DLA produces branchy, dendritic note bursts that can leave internal fjords empty. Per the Musicom Method Hybridization rule, sparse DLA melodic bursts are paired with continuous fill layers (e.g. Method 026 DPSM phase-shifted ostinati or sustained harmonic pads) to maintain rhythmic flow.
+
+### Pitfalls
+
+1. **Screening Starvation (Internal Voice Dropout):** Once outer branches develop, the harmonic measure on inner regions drops exponentially to near zero. Internal voices can become completely silent for multiple bars.
+   *Fix:* Implement interior re-seeding or set sticking probability $p_{\text{stick}} \in [0.1, 0.3]$ (Eden-model / DLA continuum) to allow diffusing particles to penetrate deeper into fjords before sticking.
+2. **Launch & Killing Radius Runaway:** If the killing radius $R_{\text{kill}}$ is too large, Brownian walkers wander indefinitely, causing CPU hang and $\mathcal{O}(\infty)$ generation time.
+   *Fix:* Enforce $R_{\text{launch}} = R_{\text{cluster}} + 5$ and $R_{\text{kill}} = R_{\text{cluster}} + 20$. Bound the maximum step count per walker (e.g. 10,000 steps); discard and respawn if exceeded.
+3. **Pitch Cluster Collisions:** Multiple particles sticking at the same $(y, t)$ coordinate cause unplayable microtonal or identical MIDI collisions.
+   *Fix:* Maintain an occupancy grid; if a particle attempts to stick to an already occupied $(y, t)$ cell, push it to an adjacent vacant scale degree or increment its velocity as an accent.
+4. **Metric Grid Snapping / Track Desync:** Unconstrained floating-point particle coordinates cause fractional-tick event boundaries that drift over long sections.
+   *Fix:* Snap temporal coordinates strictly to an integer subdivision lattice (e.g. 16th note = 120 ticks at 480 TPB) and enforce explicit silent padding at `section_len - 1`.
+
+### Python Implementation Sketch
+
+```python
+"""
+Method 092: Diffusion-Limited Aggregation Fractal Growth (DLACG)
+Generates dendritic musical structures via 2D Brownian aggregation.
+"""
+from typing import List, Tuple, Dict, Set
+import numpy as np
+from structures import MusicUnit, MusicEvent, UnitMatrix, MidiInstrument
+from workflows.unitmatrix_composer import UnitMatrixComposer
+
+def simulate_dla_cluster(
+    num_particles: int,
+    grid_width: int,   # Time steps (e.g., 64 16th notes)
+    grid_height: int,  # Pitch range (e.g., 36 semitones, 48 to 84)
+    seed_coords: List[Tuple[int, int]],
+    p_stick: float = 0.7,
+    max_steps: int = 5000,
+    seed: int = 42
+) -> Tuple[Set[Tuple[int, int]], Dict[Tuple[int, int], int]]:
+    """
+    Simulate 2D DLA on a discrete pitch x time grid.
+    Returns:
+        cluster: Set of (time, pitch) occupied coordinates.
+        tree_parent: Dict mapping child (t, p) to parent (t, p).
+    """
+    rng = np.random.default_rng(seed)
+    cluster: Set[Tuple[int, int]] = set(seed_coords)
+    tree_parent: Dict[Tuple[int, int], Tuple[int, int]] = {}
+    
+    # Neighborhood offsets (Moore 8-neighborhood)
+    neighbors = [(-1, 0), (1, 0), (0, -1), (0, 1),
+                 (-1, -1), (-1, 1), (1, -1), (1, 1)]
+    
+    for _ in range(num_particles):
+        # Spawn near cluster boundary
+        occ_t = [c[0] for c in cluster]
+        occ_p = [c[1] for c in cluster]
+        min_t, max_t = max(0, min(occ_t) - 4), min(grid_width - 1, max(occ_t) + 4)
+        min_p, max_p = max(0, min(occ_p) - 4), min(grid_height - 1, max(occ_p) + 4)
+        
+        # Random launch along bounding perimeter
+        if rng.random() < 0.5:
+            t = rng.integers(min_t, max_t + 1)
+            p = min_p if rng.random() < 0.5 else max_p
+        else:
+            t = min_t if rng.random() < 0.5 else max_t
+            p = rng.integers(min_p, max_p + 1)
+            
+        for step in range(max_steps):
+            # Check contact with cluster
+            adjacent_seeds = []
+            for dt, dp in neighbors:
+                nt, np_ = t + dt, p + dp
+                if (nt, np_) in cluster:
+                    adjacent_seeds.append((nt, np_))
+                    
+            if adjacent_seeds and rng.random() < p_stick:
+                cluster.add((t, p))
+                tree_parent[(t, p)] = adjacent_seeds[0]
+                break
+                
+            # Random Brownian step
+            dt, dp = neighbors[rng.integers(0, len(neighbors))]
+            t = np.clip(t + dt, 0, grid_width - 1)
+            p = np.clip(p + dp, 0, grid_height - 1)
+            
+    return cluster, tree_parent
+
+def realize_dla_to_unitmatrix(
+    cluster: Set[Tuple[int, int]],
+    base_pitch: int = 48,
+    ticks_per_step: int = 120, # 16th note at 480 TPB
+    total_bars: int = 4,
+    bpm: int = 120
+) -> UnitMatrixComposer:
+    """
+    Realize DLA cluster points into zero-drift UnitMatrix.
+    """
+    total_ticks = total_bars * 1920
+    composer = UnitMatrixComposer(bpm=bpm, ticks_per_beat=480, beats_per_bar=4)
+    composer.create_matrix(num_voices=2, num_sections=1)
+    composer.add_voice("DLA_Canopy", program=MidiInstrument.MARIMBA, channel=0)
+    composer.add_voice("DLA_Bass", program=MidiInstrument.CELLO, channel=1)
+    composer.add_section("A", bars=total_bars)
+    
+    canopy_events = []
+    bass_events = []
+    
+    # Split cluster by pitch median into two voices
+    mid_pitch = 18 # relative
+    for t_step, p_rel in sorted(cluster, key=lambda x: x[0]):
+        start = t_step * ticks_per_step
+        if start >= total_ticks:
+            continue
+        duration = ticks_per_step * 2
+        end = min(start + duration, total_ticks)
+        pitch = base_pitch + p_rel
+        vel = 80 + int((p_rel / 36.0) * 35)
+        
+        event = MusicEvent(pitch=pitch, volume=vel, start_tick=start, end_tick=end)
+        if p_rel >= mid_pitch:
+            canopy_events.append(event)
+        else:
+            bass_events.append(event)
+            
+    def make_padded_unit(events: List[MusicEvent], section_len: int) -> MusicUnit:
+        # Zero-drift padding event
+        pad = MusicEvent(pitch=0, volume=0, start_tick=max(0, section_len - 1), end_tick=section_len)
+        return MusicUnit(events=events + [pad])
+        
+    composer.fill_voice_section("DLA_Canopy", "A", make_padded_unit(canopy_events, total_ticks))
+    composer.fill_voice_section("DLA_Bass", "A", make_padded_unit(bass_events, total_ticks))
+    
+    ok, msg = composer.validate()
+    assert ok, f"Zero-drift gate failed: {msg}"
+    return composer
+```
+
+### References
+- Witten, T. A., & Sander, L. M. (1981). "Diffusion-Limited Aggregation, a Kinetic Critical Phenomenon." *Physical Review Letters*, 47(19), 1400–1403.
+- Meakin, P. (1983). "Diffusion-controlled aggregation in realistic environments." *Physical Review A*, 27(3), 1495–1507.
+- Niemeyer, L., Pietronero, L., & Wiesmann, H. J. (1984). "Fractal Dimension of Dielectric Breakdown." *Physical Review Letters*, 52(12), 1033–1036.
+- Halsey, T. C. (2000). "Diffusion-limited aggregation: a model for pattern formation." *Physics Today*, 53(11), 36–41.
+- Mandelbrot, B. B. (1982). *The Fractal Geometry of Nature*. W. H. Freeman and Company, New York.
+- Voss, R. F. (1985). "Random fractal forgeries." *Fundamental Algorithms for Computer Graphics*, Springer, pp. 805–835.
+# Sound Production Method SP-092 — Scalar Auxiliary Variable Nonlinear String Synthesis (SAV-NSS)
+
+### Source
+
+- Ducceschi, M., Russo, R., & Webb, C. J. (2026). "Measurement-Informed Nonlinear Modal Synthesis of 65 Classical Guitars." *Proceedings of the 29th International Conference on Digital Audio Effects (DAFx26)*, Ancona, Italy.
+- Shen, J., Xu, J., & Yang, J. (2018). "The scalar auxiliary variable (SAV) approach for gradient flows." *Journal of Computational Physics*, 353: 407–416.
+- Bilbao, S., Ducceschi, M., & Zama, F. (2023). "Explicit exactly energy-conserving methods for Hamiltonian systems." *Journal of Computational Physics*, 472: 111697.
+- Risse, T., Hélie, T., & Bilbao, S. (2025). "Power-balanced drift regulation for scalar auxiliary variable methods: application to real-time simulation of nonlinear string vibrations." *Proceedings of the International Conference on Digital Audio Effects (DAFx25)*, pp. 126–133.
+- Mores, R. (2021). "Archive for the acoustical documentation of classical Spanish guitars, flamenco guitars and romantic guitars from private and public collections – bridge mobility." *Zenodo*, doi:10.5281/zenodo.4604577.
+
+### Layer
+
+`absolute` (sound production — synthesis engines; translates symbolic note triggers, velocity, and pitch into continuous time-domain audio samples via energy-stable physical modeling). Candidate code path: `sound/synthesis/sav_string.py`, plugged into `workflows.musicom_workflow.produce(method="SP-092")`.
+
+### Description
+
+**Scalar Auxiliary Variable Nonlinear String Synthesis (SAV-NSS)** solves large-amplitude geometrically exact string vibration coupled to multi-modal bridge admittance and acoustic radiation filters. In conventional nonlinear string modeling, large plucking amplitudes induce tension modulation, dynamic pitch glide (a noticeable pitch drop as pluck amplitude decays), and progressive spectral enrichment through mode-mode coupling. However, simulating geometrically exact nonlinear elastic energy densities historically required costly iterative Newton-Raphson solvers or suffered from severe numerical instability when discretised explicitly.
+
+SAV-NSS overcomes this bottleneck by reformulating the non-negative nonlinear elastic potential $\phi_{\mathrm{nl}}(u) \ge 0$ via a Scalar Auxiliary Variable $\psi(t) \triangleq \sqrt{2\phi_{\mathrm{nl}}(u) + \varepsilon}$. This exact continuous-level transformation decouples the nonlinear potential into a scalar amplitude and a normalized gradient vector field $g(x,t)$. In discrete time, the combined equations of motion for the string modes and resonant bridge modes become strictly linear with two rank-one perturbations: one from the bilateral bridge reaction constraint and one from the SAV nonlinearity. Through two sequential applications of the **Sherman–Morrison formula**, the coupled system is inverted explicitly in $\mathcal{O}(M + J)$ operations per time step without numerical iterations or matrix decompositions. Drift servo-regulation and gradient sign-flip guards guarantee long-term energy stability at audio sampling rates ($f_s = 44.1\text{ kHz}$ or $48\text{ kHz}$), yielding authentic dynamic pitch glides, phantom partials, and body wood warmth at near-linear computational cost.
+
+### Technical Mechanics
+
+1. **Nonlinear Continuous String Equation:**
+   The transverse displacement $u(x, t)$ of a stiff string with linear density $\mu$, nominal tension $T_0$, Young's modulus $E$, and second moment of area $I$ obeys:
+   $$\mu \partial_t^2 u = T_0 \partial_x^2 u - E I \partial_x^4 u - \mu \sigma \partial_t u - \frac{\delta \phi_{\mathrm{nl}}}{\delta u} + \delta(x - x_e) f_e(t) + \delta(x - x_b) F_b(t)$$
+   where $f_e(t)$ is the external pluck force at $x_e$, and $F_b(t)$ is the bridge constraint force at $x_b$.
+
+2. **Geometrically Exact Potential & SAV Transform:**
+   For local slope $\zeta \triangleq \partial_x u$, the Green-Lagrange strain is $\varepsilon_{\mathrm{GL}} = \sqrt{1 + \zeta^2} - 1$. The nonlinear potential density is:
+   $$\mathcal{V}(\zeta) = \frac{G}{2}\left(\sqrt{1 + \zeta^2} - 1\right)^2, \quad G \triangleq E A - T_0 > 0$$
+   $$\phi_{\mathrm{nl}}(u) = \int_0^L \mathcal{V}(\partial_x u)\,dx \ge 0$$
+   Introducing the scalar auxiliary variable $\psi(t) \triangleq \sqrt{2\phi_{\mathrm{nl}}(u) + \varepsilon}$ (with regularization constant $\varepsilon = 10^{-12}$) and normalized gradient $g(x) \triangleq \frac{1}{\psi} \frac{\delta \phi_{\mathrm{nl}}}{\delta u}$, the equations become:
+   $$\mu \partial_t^2 u = \mathcal{L} u - \psi g + \delta_e f_e + \delta_b F_b, \quad \dot{\psi} = \langle g, \partial_t u \rangle$$
+
+3. **Modal Expansion & Projection:**
+   Projecting $u(x, t) = \sum_{m=1}^M q_m(t) \sqrt{2/L} \sin(m\pi x / L)$ truncates the string to $M$ modes. To maximize efficiency, only the lowest $M_{\mathrm{nl}}$ modes (up to $f_{\mathrm{nl}}^{\max} \approx 5\text{ kHz}$) undergo nonlinear evaluation. With spatial grid $\{x_i\}_{i=1}^{N_g}$ and slope differentiation matrix $R_{im} = \sqrt{2/L} \frac{m\pi}{L} \cos(m\pi x_i / L)$:
+   $$\boldsymbol{\zeta} = \mathbf{R} \mathbf{q}_{\mathrm{nl}}, \quad \phi_{\mathrm{nl}} \approx h \sum_{i=1}^{N_g} \mathcal{V}(\zeta_i), \quad \boldsymbol{\eta} = \mathbf{R}^\top \mathbf{g}$$
+
+4. **Two Sequential Sherman–Morrison Solvers:**
+   Concatenating string modal coordinates $\mathbf{q} \in \mathbb{R}^M$ and bridge compliance modes $\mathbf{r} \in \mathbb{R}^J$ into $\mathbf{y} = [\mathbf{q}; \mathbf{r}] \in \mathbb{R}^{M+J}$, the time-discretized system at sample step $k = 1/f_s$ reduces to:
+   $$\left(\mathbf{D} + \mathbf{f} \tilde{\mathbf{v}}^\top + \frac{k^2}{4\mu} \tilde{\mathbf{z}}^n (\tilde{\boldsymbol{\eta}}^n)^\top\right) \mathbf{y}^{n+1} = \mathbf{b}^n$$
+   where $\mathbf{D}$ is a diagonal matrix of exact modal frequency and loss propagators. The first rank-one update inverts the bridge coupling:
+   $$\tilde{\mathbf{D}}^{-1} = \mathbf{D}^{-1} - \frac{\mathbf{D}^{-1}\mathbf{f}\tilde{\mathbf{v}}^\top \mathbf{D}^{-1}}{1 + \tilde{\mathbf{v}}^\top \mathbf{D}^{-1}\mathbf{f}}$$
+   The second rank-one update resolves the SAV nonlinearity explicitly:
+   $$\mathbf{y}^{n+1} = \tilde{\mathbf{D}}^{-1}\mathbf{b}^n - \frac{\frac{k^2}{4\mu} \tilde{\mathbf{D}}^{-1}\tilde{\mathbf{z}}^n (\tilde{\boldsymbol{\eta}}^n)^\top \tilde{\mathbf{D}}^{-1}\mathbf{b}^n}{1 + \frac{k^2}{4\mu} (\tilde{\boldsymbol{\eta}}^n)^\top \tilde{\mathbf{D}}^{-1}\tilde{\mathbf{z}}^n}$$
+   Complexity is strictly $\mathcal{O}(M + J)$ floating-point operations per time step.
+
+5. **Drift Servo-Regulation:**
+   To prevent numerical accumulation of drift between $\psi^{n-1/2}$ and $\psi_{\mathrm{true}}^n \triangleq \sqrt{2\phi_{\mathrm{nl}}(\boldsymbol{\zeta}^n) + \varepsilon}$ over thousands of samples, the gradient is servo-corrected along the velocity displacement vector:
+   $$\bar{\mathbf{g}} = \hat{\mathbf{g}} - \frac{\psi^{n-1/2} - \psi_{\mathrm{true}}^{n-1/2}}{\|\boldsymbol{\zeta}^n - \boldsymbol{\zeta}^{n-1}\|}(\boldsymbol{\zeta}^n - \boldsymbol{\zeta}^{n-1})$$
+
+### Musical Elements Framework
+
+- **PITCH:** Dynamic pitch glide. Strong initial plucks increase string tension, temporarily raising pitch by 10–60 cents before settling exponentially back to nominal pitch. Frequency-dependent inharmonicity emerges naturally from the bending stiffness term $E I \partial_x^4 u$.
+- **RHYTHM:** Sharp, microsecond-accurate acoustic attack transients derived from triangular or raised-cosine initial pluck displacements, followed by dual-slope decay (fast early body radiation, slow sustain).
+- **HARMONY:** Modal coupling generates phantom partials and internal sum/difference intermodulation products, imparting rich acoustic warmth and non-stationary timbre to chords.
+- **STRUCTURE:** Section-level macro dynamics map velocity directly into nonlinear coupling strength. Soft passages ring linearly; aggressive strikes flare into dense, brassy metallic-string timbres.
+- **TEXTURE:** Polyphonic integration of sympathetic open strings driven by the shared bridge force vector $F_b(t)$ creates a resonant acoustic halo around solo lines.
+
+### UnitMatrix Integration
+
+- **Voices (Rows):** Assigned to plucked acoustic instruments (classical guitar, lute, acoustic bass, koto, harp). Each voice maintains an independent state vector $\mathbf{y}(t)$ and SAV scalar $\psi(t)$.
+- **Sections (Columns):** Section boundary updates configure instrument body parameters (bridge compliance modal residues $\beta_j$, bridge frequencies $\omega_j^b$, and radiation pole-zero filters).
+- **Cells (MusicUnit):** Each `MusicEvent(pitch, volume, start_tick, end_tick)` triggers an excitation impulse $f_e(t)$ with spatial pluck location $x_e/L$ and force amplitude proportional to velocity.
+- **Workflow API:**
+  ```python
+  from workflows.musicom_workflow import produce
+  produce("path/to/composition.mid", method="SP-092", params={
+      "body_preset": "torres_1888",
+      "pluck_pos": 0.22,
+      "f_nl_max": 4500.0,
+      "sympathetic": True
+  })
+  ```
+
+### Pitfalls
+
+1. **SAV Drift at Low Sampling Rates:** Standard unregularized SAV accumulates energy drift over long sustain tails. Always apply Risse-Hélie servo-regulation (equation 40).
+2. **Gradient Sign Flip:** If displacement increments are large, the discrete chain rule can cause $\psi$ to flip negative, causing instability. Clamp $\psi^{n+1/2} \ge \sqrt{\varepsilon}$.
+3. **Over-Computing High Modes:** Running SAV over all 200+ modes is wasteful. Limit nonlinear projection to modes below $f_{\mathrm{nl}}^{\max} \approx 5\text{ kHz}$; compute higher modes as uncoupled linear oscillators.
+4. **Spatial Grid Aliasing:** The spatial grid $N_g$ for evaluating slope $\zeta_i$ must have at least 2 points per spatial wavelength of the highest active mode ($N_g \ge 2 M_{\mathrm{nl}}$).
+5. **Zero-Drift Invariant:** Track lengths must be preserved by zero-padding residual decay tails up to the section boundary tick.
+
+*Appended 2026-09-21 by sound-production research cron job. Layer tag: absolute. Paradigm: Sound Production / Synthesis Engines. ID SP-092 confirmed free at append time.*

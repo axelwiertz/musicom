@@ -34,6 +34,7 @@ _INSTRUMENT_MODULES = {
     "Keys.organ.organ": "organ",
     "Keys.dulcimer.dulcimer": "dulcimer",
     "Keys.harpsichord.harpsichord": "harpsichord",
+    "Keys.celesta.celesta": "celesta",
     "Brass.trumpet.trumpet": "trumpet",
     "Brass.trombone.trombone": "trombone",
     "Brass.french_horn.french_horn": "french_horn",
@@ -70,7 +71,7 @@ _FIELDS = (
     "solo_range", "sweet_spot", "zones", "articulations",
     "synthesis", "modal_preset", "karplus_defaults", "fm_defaults",
     "bowed_defaults", "drum606_defaults", "synthesis_defaults",
-    "motor_defaults", "xylophone_modes",
+    "motor_defaults", "xylophone_modes", "celesta_modes",
     "reverb_tail", "eq_body", "eq_presence", "eq_air", "pan",
     "stem_label",
 )
@@ -194,6 +195,7 @@ PIANO = ALL_INSTRUMENTS["piano"]
 ORGAN = ALL_INSTRUMENTS["organ"]
 DULCIMER = ALL_INSTRUMENTS["dulcimer"]
 HARPSICHORD = ALL_INSTRUMENTS["harpsichord"]
+CELESTA = ALL_INSTRUMENTS["celesta"]
 TRUMPET = ALL_INSTRUMENTS["trumpet"]
 TROMBONE = ALL_INSTRUMENTS["trombone"]
 FRENCH_HORN = ALL_INSTRUMENTS["french_horn"]
@@ -283,6 +285,8 @@ def registry_table():
             role = "lead, melody, ornament, rhythm, harmony"
         elif low == "harpsichord":
             role = "harmony, continuo, melody, ornament, countermelody, accent"
+        elif low == "celesta":
+            role = "lead, melody, ornament, arpeggio, countermelody, accent"
         elif low == "drum kit":
             role = "rhythm, groove, accent"
         elif low == "marimba":
@@ -406,3 +410,7 @@ if __name__ == "__main__":
     print("  by_name('piccolo') =", by_name("piccolo"))
     print("  by_program(72) =", by_program(72))
     print("  PICCOLO.in_sweet_spot(88) =", PICCOLO.in_sweet_spot(88))
+    print("  CELESTA.midi_program =", CELESTA.midi_program, "(should be 8)")
+    print("  by_name('celesta') =", by_name("celesta"))
+    print("  by_program(8) =", by_program(8))
+    print("  CELESTA.in_sweet_spot(84) =", CELESTA.in_sweet_spot(84))

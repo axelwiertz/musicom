@@ -1,0 +1,32 @@
+{
+  "project": "SP033-supersaw-trap-half-time",
+  "date": "2026-09-21",
+  "method": "SP-033",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Trap/001-trap-half-time/MIDI/trap-half-time.mid",
+  "parameters": {
+    "osc_per_swarm": 16,
+    "swarms": 2,
+    "morph_pad": true,
+    "quantization": "Phrygian / Minor",
+    "target_lufs": -14.0,
+    "limiter_ceiling_db": -1.0
+  },
+  "artifacts": {
+    "wav": "/opt/data/repos/musicom/projects/Styles/Production/SP033-supersaw-trap-half-time/SP033-supersaw-trap-half-time.wav",
+    "ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP033-supersaw-trap-half-time/SP033-supersaw-trap-half-time.ogg",
+    "stems_dry": [
+      "/opt/data/repos/musicom/projects/Styles/Production/SP033-supersaw-trap-half-time/Audio/stems_dry/track00_Drums.wav",
+      "/opt/data/repos/musicom/projects/Styles/Production/SP033-supersaw-trap-half-time/Audio/stems_dry/track01_Drums.wav",
+      "/opt/data/repos/musicom/projects/Styles/Production/SP033-supersaw-trap-half-time/Audio/stems_dry/track02_Electric_Bass_finger.wav",
+      "/opt/data/repos/musicom/projects/Styles/Production/SP033-supersaw-trap-half-time/Audio/stems_dry/track03_String_Ensemble_2.wav",
+      "/opt/data/repos/musicom/projects/Styles/Production/SP033-supersaw-trap-half-time/Audio/stems_dry/track04_Lead_1_square.wav"
+    ],
+    "stems_wet": [
+      "/opt/data/repos/musicom/projects/Styles/Production/SP033-supersaw-trap-half-time/Audio/stems_wet/track00_Drums_SUPERSAW.wav",
+      "/opt/data/repos/musicom/projects/Styles/Production/SP033-supersaw-trap-half-time/Audio/stems_wet/track01_Drums_SUPERSAW.wav",
+      "/opt/data/repos/musicom/projects/Styles/Production/SP033-supersaw-trap-half-time/Audio/stems_wet/track02_Electric_Bass_finger_SUPERSAW.wav",
+      "/opt/data/repos/musicom/projects/Styles/Production/SP033-supersaw-trap-half-time/Audio/stems_wet/track03_String_Ensemble_2_SUPERSAW.wav",
+      "/opt/data/repos/musicom/projects/Styles/Production/SP033-supersaw-trap-half-time/Audio/stems_wet/track04_Lead_1_square_SUPERSAW.wav"
+    ]
+  }
+}

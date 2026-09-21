@@ -1,17 +1,17 @@
 {
   "job": "random-style production (SP) layer-aligned",
-  "date": "2026-09-20",
-  "seed": 20260920,
-  "method": "SP-080",
-  "method_module": "sound.generators.cadence_variator",
-  "method_desc": "Cadence Engine Rhythmic Variator w/ Flux Randomizer (Emergence Audio Envoy-style)",
-  "source_midi": "/opt/data/repos/musicom/projects/Styles/Experimental/064-markov-constraint-chorale/MIDI/064-markov-constraint-chorale.mid",
-  "output_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP080-cadence-markov-chorale/SP080-cadence-markov-chorale.wav",
-  "output_ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP080-cadence-markov-chorale/SP080-cadence-markov-chorale.ogg",
-  "lufs": -14.06,
+  "date": "2026-09-21",
+  "seed": 20260921,
+  "method": "SP-033",
+  "method_module": "sound.synthesis.supersaw_swarm",
+  "method_desc": "Detuned Saw Swarm + Scale/Chord Quantize + Morph Pad",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Trap/001-trap-half-time/MIDI/trap-half-time.mid",
+  "output_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP033-supersaw-trap-half-time/SP033-supersaw-trap-half-time.wav",
+  "output_ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP033-supersaw-trap-half-time/SP033-supersaw-trap-half-time.ogg",
+  "lufs": -14.28,
   "peak": 0.8913,
-  "silence_pct": 18.16,
+  "silence_pct": 19.23,
   "pitch_verdict": "PASS",
   "hit_rate": 1.0,
-  "he_mean": 0.4629
+  "he_mean": 0.3773
 }
