@@ -118,6 +118,8 @@ Status: `implemented` = in sound/ package · `partial` = some pieces exist · `r
 | SP-084 | Flue-Pipe Physical Model with Air-Supply Modulation (Modartt Airteq-style) | implemented | sound/synthesis/air_pipe.py |
 | SP-085 | Transient-Snapped Segment Chopper with Glitch/Reverse Probability (GlitchShredder-style) | implemented | sound/effects/glitch_chopper.py |
 | SP-086 | Rule-Based Melody Harmony Writer with Voice Leading (HarmonyKeen-style) | implemented | sound/generators/harmony_writer.py |
+| SP-090 | 3-Band Orbital Stereo Sculptor / AutoPanner (SoundGhost Orbit-style) | implemented | sound/effects/orbit_sculptor.py |
+| SP-091 | Physics-Based Delta-Sigma Converter Saturation & Circuit Strain (Mixland Grey Matter-style) | implemented | sound/effects/delta_sigma_saturator.py |
 
 ## Mastering (from MusicTech workflow)
 

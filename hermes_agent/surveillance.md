@@ -10,6 +10,21 @@ Replicability analyses from the Hermes agent's music-tech surveillance cron
 > across `SP_METHODS` ∪ `methods-registry.md` ∪ `docs/methods.md`, +1**
 > (= **SP-069** at this scan).
 
+## 2026-09-21 Scan
+
+| Item | Technique | Verdict | Musicom path |
+|------|-----------|---------|--------------|
+| SoundGhost Orbit (MusicTech / SoundGhost 2026-09-17) | 3-band orbital stereo sculptor & auto-panner: splits signal into Low, Mid, High via 4th-order Linkwitz-Riley crossovers; per-band independent pan, stereo width (M/S), and volume; dedicated tempo-synced/free LFOs (sine, triangle, square, random S&H, envelope follower) with drive saturation; per-band randomization; mono correlation meter | YES | **DONE** — sound/effects/orbit_sculptor.py (SP-090: `OrbitalStereoSculptor`, `OrbitalBandProcessor`, `LinkwitzRiley4Crossover`, `BandConfig`, `ModulatorConfig`); VST3/AU GUI wrapper not replicated |
+| Mixland Grey Matter (MusicTech / Mixland 2026-09-16) | Physics-based 90s console DAC emulation (PS1 DAC): discrete Delta-Sigma converter modeling with integrator saturation, dynamic molecular component strain, thermal drift bias, slew-rate limiting, reconstruction lowpass filter, chaotic sub-harmonic foldback when overdriven | YES | **DONE** — sound/effects/delta_sigma_saturator.py (SP-091: `DeltaSigmaSaturator`, `DeltaSigmaStage`, `SlewLimiter`, `ReconstructionFilter`); 3D GUI/AAX hosting not replicated |
+| Arturia MiniFreak 5.0 Update (MusicTech / Synthanatomy 2026-09-17) | Hardware/plugin firmware 5.0: user 12-bit/32kHz sample import (up to 6s) + user mono wavetable import into Freak engines; factory bank v5.0 | PARTIAL (no new code) | Sample playback in sample_slicer.py (SP-…), wavetable synthesis in spectral_wavetable.py; hardware firmware and preset bank content = vendor-specific, no new code |
+| RT60 iDrumTune Android (SoS 2026-09-21) | Acoustic drum tuning assistant: microphone FFT pitch detection, fundamental lug-pitch estimation, overtones/lug-clearing analysis | PARTIAL (no new code) | FFT pitch detection exists in sound/analysis/pitch.py; mobile app UI + masterclass content = app utility, no new sound production code |
+| BandLab Mastering Update (MusicTech 2026-09-16) | 11-level preset intensity scaling, 4 new mastering presets (Natural, Cinematic, Spatial, Punch), 3-band mastering EQ | PARTIAL (no new code) | Mastering pipeline covered by sound/effects/mastering.py (LUFS, DynamicEQ, PeakLimiter); proprietary cloud mastering presets = vendor content, no new code |
+| Universal Audio LUNA 3.0 & UAD Spark Studio (SoS / MusicTech 2026-09-17) | Major DAW update: workflow upgrades, native plugin subscription bundling | NO | DAW host platform / subscription bundle |
+| Rupert Neve Designs 551 / 542 / Portico II MBP (MusicTech 2026-09-16) | Console hardware plugins (MBP dynamics, 551 inductor EQ, 542 tape emulator) | PARTIAL (no new code) | Tape saturation covered by SP-088 JAMS and SP-091; tilt/dynamic EQ in sound/effects; proprietary analog circuit models = no new code |
+| Dirtywave M8 Tracker iOS (MusicTech / Synthtopia 2026-09-14) | iOS port of 8-track hardware tracker | PARTIAL (no new code) | Analyzed in 2026-09-17 scan |
+| KORG volca fm2 editor (Masaki Ono, Synthtopia 2026-09-12) | Web MIDI patch editor and librarian for Volca FM2 | NO | Web MIDI hardware editor / librarian |
+| ART Pro Audio RPC / Casio Sessions / Museum of Synthesizers (SoS 2026-09-18..20) | Power conditioners, artist competition, synthesizer exhibition event | NO | Hardware / events |
+
 ## 2026-09-17 Scan
 
 | Item | Technique | Verdict | Musicom path |

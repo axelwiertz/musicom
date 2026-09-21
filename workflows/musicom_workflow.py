@@ -164,6 +164,9 @@ SP_METHODS = {
     "SP-084": ("sound.synthesis.air_pipe", "Flue-Pipe Physical Model w/ Air-Supply Modulation (Modartt Airteq-style)"),
     "SP-085": ("sound.effects.glitch_chopper", "Transient-Snapped Segment Chopper w/ Glitch/Reverse Probability (GlitchShredder-style)"),
     "SP-086": ("sound.generators.harmony_writer", "Rule-Based Melody Harmony Writer w/ Voice Leading (HarmonyKeen-style)"),
+    # 2026-09-21 scan
+    "SP-090": ("sound.effects.orbit_sculptor", "3-Band Orbital Stereo Sculptor / AutoPanner (SoundGhost Orbit-style)"),
+    "SP-091": ("sound.effects.delta_sigma_saturator", "Physics-Based Delta-Sigma Converter Saturation & Circuit Strain (Mixland Grey Matter-style)"),
 }
 
 

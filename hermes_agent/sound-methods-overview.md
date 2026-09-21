@@ -79,6 +79,8 @@ comparable to, and how do I use it in a workflow?*
 | `sound/synthesis/air_pipe.py` | AirPipe, AirPipePatch | synthesis (physical, aerophone) | Modartt Airteq | pipe length + air pressure/mod → flue-pipe audio (open/stopped modes, overblow, MPE air) |
 | `sound/effects/glitch_chopper.py` | GlitchChopper, ChannelChopper | effects (glitch) | GlitchShredder | stereo audio + bpm + glitch/reverse prob → transient-snapped 16-slot recombination |
 | `sound/generators/harmony_writer.py` | HarmonyWriter | generators (harmony/arrangement) | HarmonyKeen | monophonic melody + key + style → rule-based harmony parts (phrase/cadence analysis, SATB voice-leading) |
+| `sound/effects/orbit_sculptor.py` | OrbitalStereoSculptor, OrbitalBandProcessor, LinkwitzRiley4Crossover | effects (spatial/modulation) | SoundGhost Orbit | audio + 3-band LR4 crossover + per-band pan/width/gain modulators → sculpted stereo audio |
+| `sound/effects/delta_sigma_saturator.py` | DeltaSigmaSaturator, DeltaSigmaStage, SlewLimiter, ReconstructionFilter | effects (distortion/saturation) | Mixland Grey Matter, PS1 DAC | audio + drive + strain + mode (clean/console/broken) → DAC-saturated audio |
 | `sound/sync/clock.py` | DAWClockBridge | sync | MTC/MIDI clock | bpm → clock pulses |
 | `sound/render/fluidsynth.py` | FluidSynthRenderer | render | SF2 synth | MIDI → WAV |
 | `sound/render/vst.py` | VSTRenderer | render | DAW VST3 | MIDI → VST audio |
