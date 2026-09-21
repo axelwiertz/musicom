@@ -1,0 +1,100 @@
+=== 100-balkan-christoffel: Kopanitsa 11/8 Grid Visualization ===
+Grid unit: 16th note = 120 ticks. Bar = 11 sixteenths = 1320 ticks.
+Sections (4 bars each): Intro | Tema_A | Tema_B | Razvivka | Tema_A_Var | Zavurshek
+
+--- Bar 01 (Intro) ---
+Beat:  1 . 2 . 3 . . 4 . 5 .
+V00:  █ █ █ █ █ █ █ █ █ █ █  (Voice)
+
+--- Bar 02 (Intro) ---
+Beat:  1 . 2 . 3 . . 4 . 5 .
+V00:  █ █ █ █ █ █ █ █ █ █ █  (Voice)
+
+--- Bar 03 (Intro) ---
+Beat:  1 . 2 . 3 . . 4 . 5 .
+V00:  █ █ █ █ █ █ █ █ █ █ █  (Voice)
+
+--- Bar 04 (Intro) ---
+Beat:  1 . 2 . 3 . . 4 . 5 .
+V00:  █ █ █ █ █ █ █ █ █ █ █  (Voice)
+
+--- Bar 05 (Tema_A) ---
+Beat:  1 . 2 . 3 . . 4 . 5 .
+V00:  █ █ █ █ █ █ █ █ █ █ █  (Voice)
+
+--- Bar 06 (Tema_A) ---
+Beat:  1 . 2 . 3 . . 4 . 5 .
+V00:  █ █ █ █ █ █ █ █ █ █ █  (Voice)
+
+--- Bar 07 (Tema_A) ---
+Beat:  1 . 2 . 3 . . 4 . 5 .
+V00:  █ █ █ █ █ █ █ █ █ █ █  (Voice)
+
+--- Bar 08 (Tema_A) ---
+Beat:  1 . 2 . 3 . . 4 . 5 .
+V00:  █ █ █ █ █ █ █ █ █ █ █  (Voice)
+
+--- Bar 09 (Tema_B) ---
+Beat:  1 . 2 . 3 . . 4 . 5 .
+V00:  █ █ █ █ █ █ █ █ █ █ █  (Voice)
+
+--- Bar 10 (Tema_B) ---
+Beat:  1 . 2 . 3 . . 4 . 5 .
+V00:  █ █ █ █ █ █ █ █ █ █ █  (Voice)
+
+--- Bar 11 (Tema_B) ---
+Beat:  1 . 2 . 3 . . 4 . 5 .
+V00:  █ █ █ █ █ █ █ █ █ █ █  (Voice)
+
+--- Bar 12 (Tema_B) ---
+Beat:  1 . 2 . 3 . . 4 . 5 .
+V00:  █ █ █ █ █ █ █ █ █ █ █  (Voice)
+
+--- Bar 13 (Razvivka) ---
+Beat:  1 . 2 . 3 . . 4 . 5 .
+V00:  █ █ █ █ █ █ █ █ █ █ █  (Voice)
+
+--- Bar 14 (Razvivka) ---
+Beat:  1 . 2 . 3 . . 4 . 5 .
+V00:  █ █ █ █ █ █ █ █ █ █ █  (Voice)
+
+--- Bar 15 (Razvivka) ---
+Beat:  1 . 2 . 3 . . 4 . 5 .
+V00:  █ █ █ █ █ █ █ █ █ █ █  (Voice)
+
+--- Bar 16 (Razvivka) ---
+Beat:  1 . 2 . 3 . . 4 . 5 .
+V00:  █ █ █ █ █ █ █ █ █ █ █  (Voice)
+
+--- Bar 17 (Tema_A_Var) ---
+Beat:  1 . 2 . 3 . . 4 . 5 .
+V00:  █ █ █ █ █ █ █ █ █ █ █  (Voice)
+
+--- Bar 18 (Tema_A_Var) ---
+Beat:  1 . 2 . 3 . . 4 . 5 .
+V00:  █ █ █ █ █ █ █ █ █ █ █  (Voice)
+
+--- Bar 19 (Tema_A_Var) ---
+Beat:  1 . 2 . 3 . . 4 . 5 .
+V00:  █ █ █ █ █ █ █ █ █ █ █  (Voice)
+
+--- Bar 20 (Tema_A_Var) ---
+Beat:  1 . 2 . 3 . . 4 . 5 .
+V00:  █ █ █ █ █ █ █ █ █ █ █  (Voice)
+
+--- Bar 21 (Zavurshek) ---
+Beat:  1 . 2 . 3 . . 4 . 5 .
+V00:  █ █ █ █ █ █ █ █ █ █ █  (Voice)
+
+--- Bar 22 (Zavurshek) ---
+Beat:  1 . 2 . 3 . . 4 . 5 .
+V00:  █ █ █ █ █ █ █ █ █ █ █  (Voice)
+
+--- Bar 23 (Zavurshek) ---
+Beat:  1 . 2 . 3 . . 4 . 5 .
+V00:  █ █ █ █ █ █ █ █ █ █ █  (Voice)
+
+--- Bar 24 (Zavurshek) ---
+Beat:  1 . 2 . 3 . . 4 . 5 .
+V00:  █ █ █ █ █ █ █ █ █ █ █  (Voice)
+

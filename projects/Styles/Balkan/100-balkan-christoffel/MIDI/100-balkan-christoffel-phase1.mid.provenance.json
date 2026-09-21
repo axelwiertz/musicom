@@ -1,0 +1,9 @@
+{
+  "project": "100-balkan-christoffel",
+  "phase": 1,
+  "method": "069 Christoffel Word Combinatorial Composition (CWCC)",
+  "layer": "concrete",
+  "description": "Raw unquantized Christoffel word walk on Clarinet",
+  "ticks": 31680,
+  "seed": 20260921
+}

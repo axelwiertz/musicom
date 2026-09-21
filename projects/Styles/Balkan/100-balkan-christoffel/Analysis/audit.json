@@ -1,0 +1,69 @@
+{
+  "phase2": {
+    "total_notes": 1032,
+    "off_grid_16": 0,
+    "out_of_scale": 0,
+    "out_of_chord": 0,
+    "tracks": [
+      {
+        "name": "",
+        "channel": 0,
+        "total_tick": 0,
+        "notes": 0,
+        "off16": 0,
+        "oos": 0,
+        "ooc": 0
+      },
+      {
+        "name": "",
+        "channel": 0,
+        "total_tick": 31680,
+        "notes": 240,
+        "off16": 0,
+        "oos": 0,
+        "ooc": 0
+      },
+      {
+        "name": "",
+        "channel": 1,
+        "total_tick": 31680,
+        "notes": 120,
+        "off16": 0,
+        "oos": 0,
+        "ooc": 0
+      },
+      {
+        "name": "",
+        "channel": 2,
+        "total_tick": 31680,
+        "notes": 216,
+        "off16": 0,
+        "oos": 0,
+        "ooc": 0
+      },
+      {
+        "name": "",
+        "channel": 3,
+        "total_tick": 31680,
+        "notes": 96,
+        "off16": 0,
+        "oos": 0,
+        "ooc": 0
+      },
+      {
+        "name": "",
+        "channel": 9,
+        "total_tick": 31680,
+        "notes": 360,
+        "off16": 0,
+        "oos": 0,
+        "ooc": 0
+      }
+    ]
+  },
+  "phase1": {
+    "total_notes": 141,
+    "off_grid_16": 134,
+    "total_tick": 31680
+  }
+}
