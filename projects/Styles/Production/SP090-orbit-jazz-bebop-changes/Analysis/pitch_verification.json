@@ -1,0 +1,9 @@
+{
+  "method": "SP-090",
+  "project": "097-jazz-bebop-changes",
+  "status": "PASS",
+  "hit_rate": 1.0,
+  "harmonic_energy_mean": 0.5389079831021575,
+  "windows_analyzed": 89,
+  "median_freq_hz": 492.0
+}

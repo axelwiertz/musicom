@@ -1,0 +1,43 @@
+{
+  "seed": 20260922,
+  "method": "SP-090",
+  "method_module": "sound.effects.orbit_sculptor",
+  "method_desc": "3-Band Orbital Stereo Sculptor / AutoPanner (SoundGhost Orbit-style)",
+  "midi_pick": "/opt/data/repos/musicom/projects/Styles/Jazz/097-jazz-bebop-changes/MIDI/097-jazz-bebop-changes.mid",
+  "eligible": [
+    "SP-001",
+    "SP-011",
+    "SP-021",
+    "SP-024",
+    "SP-026",
+    "SP-028",
+    "SP-032",
+    "SP-034",
+    "SP-035",
+    "SP-037",
+    "SP-069",
+    "SP-070",
+    "SP-071",
+    "SP-073",
+    "SP-075",
+    "SP-076",
+    "SP-077",
+    "SP-078",
+    "SP-079",
+    "SP-081",
+    "SP-082",
+    "SP-085",
+    "SP-086",
+    "SP-090",
+    "SP-091"
+  ],
+  "recent_7d": [
+    "SP-033",
+    "SP-080",
+    "SP-083",
+    "SP-084",
+    "SP-072",
+    "SP-074",
+    "SP-036"
+  ]
+}

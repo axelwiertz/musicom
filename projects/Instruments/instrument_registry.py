@@ -43,6 +43,7 @@ _INSTRUMENT_MODULES = {
     "Woodwind.flute.flute": "flute",
     "Woodwind.clarinet.clarinet": "clarinet",
     "Woodwind.oboe.oboe": "oboe",
+    "Woodwind.english_horn.english_horn": "english_horn",
     "Woodwind.bassoon.bassoon": "bassoon",
     "Woodwind.saxophone.saxophone": "saxophone",
     "Guitar.acoustic.acoustic_guitar": "acoustic_guitar",
@@ -203,6 +204,7 @@ TUBA = ALL_INSTRUMENTS["tuba"]
 FLUTE = ALL_INSTRUMENTS["flute"]
 CLARINET = ALL_INSTRUMENTS["clarinet"]
 OBOE = ALL_INSTRUMENTS["oboe"]
+ENGLISH_HORN = ALL_INSTRUMENTS["english_horn"]
 BASSOON = ALL_INSTRUMENTS["bassoon"]
 SAXOPHONE = ALL_INSTRUMENTS["saxophone"]
 ACOUSTIC_GUITAR = ALL_INSTRUMENTS["acoustic_guitar"]
@@ -287,6 +289,8 @@ def registry_table():
             role = "harmony, continuo, melody, ornament, countermelody, accent"
         elif low == "celesta":
             role = "lead, melody, ornament, arpeggio, countermelody, accent"
+        elif low == "english horn":
+            role = "lead, countermelody, melody, harmony, accent"
         elif low == "drum kit":
             role = "rhythm, groove, accent"
         elif low == "marimba":
@@ -414,3 +418,7 @@ if __name__ == "__main__":
     print("  by_name('celesta') =", by_name("celesta"))
     print("  by_program(8) =", by_program(8))
     print("  CELESTA.in_sweet_spot(84) =", CELESTA.in_sweet_spot(84))
+    print("  ENGLISH_HORN.midi_program =", ENGLISH_HORN.midi_program, "(should be 69)")
+    print("  by_name('english horn') =", by_name("english horn"))
+    print("  by_program(69) =", by_program(69))
+    print("  ENGLISH_HORN.in_sweet_spot(65) =", ENGLISH_HORN.in_sweet_spot(65))

@@ -425,6 +425,20 @@ Empirical FluidR3 pitch sweep confirms audibility across full sounding range
 comb-filtering (4–8 kHz buzz 4.5% vs 20% gate). Karplus-Strong fallback
 (`loop_gain: 0.9970`) for warm natural metallophone decay.
 
+**English Horn added** (2026-09-22): GM69, Woodwind-family tenor double-reed
+entry — the cor anglais (bulbous pear-shaped bell *liebesfuss*, curved bocal;
+famous New World Largo / Swan of Tuonela elegiac solo color) (instrument.md +
+english_horn.py), verified end-to-end UnitMatrixComposer → zero-drift ✓ →
+MIDI (144 bytes) → FluidSynth WAV (741 KB) ✓; RenderPipeline stem label
+`trackXX_English_Horn.wav` ✓ (GM_PROGRAMS[69] = "English Horn", FluidR3 preset 69
+= "English Horn" — labels match exactly, no quirk). PhaseModSynth recommended
+(saw carrier + sine mod, ratio 1.0, depth 2.2, attack 0.06 s, release 0.12 s)
+for authentic warm double-reed resonance. Sounding range 50–85 (D3–C#6); sweet spot
+57–72 (A3–C5); solo range 52–77 (E3–F5). Solo-render spectral check: 4–8 kHz buzz
+0.8% (clean single voice, well below 20% gate). Empirical FluidR3 pitch sweep
+(RMS, notes 48–87): preset 69 audible across full 50–85 compass (RMS 0.027–0.048),
+hard cutoff above note 85 (C#6 upper limit). Registered in `instrument_registry.py`.
+
 ## Python usage
 
 ```python
@@ -463,6 +477,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Woodwind | Flute | 74 | 60–96 | lead, counter, ornament |
 | Woodwind | Oboe | 68 | 52–92 | lead, counter, harmony, accent |
 | Woodwind | Clarinet | 71 | 52–96 | lead, counter, harmony, accent |
+| Woodwind | English Horn | 69 | 50–85 | lead, countermelody, melody, harmony, accent |
 | Woodwind | Piccolo | 72 | 72–108 | lead, melody, ornament, accent, countermelody |
 | Woodwind | Alto Saxophone | 65 | 49–88 | lead, counter, accent, harmony |
 | Woodwind | Bassoon | 70 | 34–88 | bass, harmony, counter, lead |
@@ -498,6 +513,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 1 | Acoustic Grand Piano | **Bright_Acoustic_Piano** ✗ (list[1]) |
 | 6 | Harpsichord | Harpsichord ✓ (GM_PROGRAMS[6] + FluidR3 preset 6 both "Harpsichord") |
 | 8 | Celesta | Celesta ✓ (GM_PROGRAMS[8] + FluidR3 preset 8 both "Celesta") |
+| 69 | English Horn | English_Horn ✓ (GM_PROGRAMS[69] + FluidR3 preset 69 both "English Horn") |
 | 9 | Glockenspiel | Glockenspiel ✓ (GM_PROGRAMS[9] + FluidR3 preset 9 both "Glockenspiel") |
 | 56 | Trumpet (correct GM) | Trumpet ✓ |
 | 57 | Trombone | Trombone ✓ |

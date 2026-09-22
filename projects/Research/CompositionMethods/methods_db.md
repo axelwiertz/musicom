@@ -100,6 +100,7 @@ Classification of active Musicom composition methods categorized by their primar
 | **090** | concrete | Golomb Ruler Distinct-Difference Composition (GRDC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Weak (ICV-invariant pool) | Grid-Locked | Macro / Ruler Span | $\mathcal{O}(S \cdot m^2)$ search, $\mathcal{O}(m^2)$ verify | Composes from a Golomb ruler / finite Sidon set — marks whose pairwise differences are ALL distinct (optimal Golomb rulers; Sidon density in $\mathbb{Z}_n$). Pitch plane: marks = pitch classes → no interval class repeats (ICV entries ≤ 1; all-interval tetrachord 4-Z15 at $m{=}4$), the maximal-interval-variety opposite of symmetric 080 MMLT subsets. Time plane: marks = onsets → no inter-onset interval repeats, a certificate-backed non-isoperiodic groove (maximal unevenness, deterministic). Harmony = union of per-voice rulers, tension = duplicate-difference count; form = transposition/reflection/mark-insert transforms per section; Shearer's bound $L \gtrsim m^2/2$ makes dense Golomb grooves demand long bars. Position-choosing complement to 089 CRCM (which permutes orderings); uniqueness foil to 011 Euclidean / 069 CWCC evenness; modular (Sidon) cousin of 065 TTSMC aggregates. |
 | **091** | concrete | Coxeter–Conway Frieze Pattern Composition (CCFPC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Weak (Cluster-algebraic) | Grid-Locked | Macro / Polygon Period | $\mathcal{O}(w \cdot n)$ generation, $\mathcal{O}(1)$ step | Generates polyphonic pitch, rhythm, and chord voicings from positive integer frieze patterns of unimodular $SL_2(\mathbb{Z})$ diamond lattices ($bc - ad = 1$) bounded by rows of 1s, classified bijectively by Conway–Coxeter triangulations of convex $(n+1)$-gons. Rows = voices/polyphonic strata (quiddity row = voice 1, interior cluster depths = inner voices); columns = temporal metric pulses; glide-reflection symmetry ($180^\circ$ rotation + $(n+1)/2$ shift) enforces exact inverted and phase-shifted polyphonic canon relationships. Unimodular determinant constraint prohibits parallel collapse and harmonic drift; macro-form develops via Ptolemy diagonal flips (cluster algebra mutations) across section boundaries. Integrable combinatorial counterpart to 083 quasicrystal / 088 Voronoi and deterministic foil to 021 CA / 033 WFCGS. |
 | **092** | concrete | Diffusion-Limited Aggregation Fractal Growth (DLACG) | **Nature-Led** | Pitch, Rhythm, Harmony, Structure, Texture | Weak (Cluster-boundary guided) | Grid-Locked / Continuous | Meso / Cluster Topology | $\mathcal{O}(N \cdot K)$ walk, $\mathcal{O}(1)$ stick | Generates dendritic polyphony, rhythmic bursts, and harmonic chord arborescences from 2D Brownian particles diffusing until sticking to seed anchors ($D_f \approx 1.71$). Branch depth = structural hierarchy; harmonic measure screening leaves internal rests (fjords) and concentrates note activity on outer tips (melodic climaxes); tree branches partition into independent UnitMatrix voice rows. Spatial connectivity prevents harmonic drift; seed schedules guide macro-form across section boundaries. Nature-led fractal growth counterpart to 048 RBMPD / 049 IFSMG and physical foil to 088 VTEP / 030 RDTP. |
+| **093** | concrete | Percolation Process Network Criticality (PPNC) | **Nature-Led** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Critical-connectivity) | Grid-Locked / Continuous | Meso / Cluster Lattice | $\mathcal{O}(V \cdot T)$ direct, $\mathcal{O}(N \alpha(N))$ DSU | Composes via site/bond percolation on a spatio-temporal UnitMatrix lattice $\mathcal{V} \times \mathcal{T}$ near the geometric percolation threshold $p \approx p_c$. Subcritical $p < p_c$ yields sparse pointillistic motifs; critical $p \approx p_c$ yields fractal spanning clusters balancing melodic continuity and rhythmic syncopation; supercritical $p > p_c$ yields dense chordal masses. Connected clusters define motivic phrases, and directed percolation enforces temporal causality. Phase-transition counterpart to 078 IMEC / 082 RBNCC and network-connectivity sibling of 035 PPTNO / 092 DLACG. |
 # Sound Production Methods Framework
 
 Sound production translates symbolic MIDI UnitMatrix data into final acoustic air pressure. Methods are categorized by execution layer: **Hardware/Acoustic Integration**, **Synthesis Engines**, or **Post-Processing / DSP**.
@@ -19401,3 +19402,194 @@ SAV-NSS overcomes this bottleneck by reformulating the non-negative nonlinear el
 5. **Zero-Drift Invariant:** Track lengths must be preserved by zero-padding residual decay tails up to the section boundary tick.
 
 *Appended 2026-09-21 by sound-production research cron job. Layer tag: absolute. Paradigm: Sound Production / Synthesis Engines. ID SP-092 confirmed free at append time.*
+
+# Percolation Process Network Criticality (PPNC) (Method 093)
+
+### Source
+- Broadbent, S. R., & Hammersley, J. M. (1957). "Percolation processes: I. Crystals and mazes." *Proceedings of the Cambridge Philosophical Society*, 53(3), 629–641.
+- Stauffer, D., & Aharony, A. (1994). *Introduction to Percolation Theory* (2nd ed.). Taylor & Francis, London.
+- Grimmett, G. (1999). *Percolation* (2nd ed.). Springer-Verlag, Berlin.
+- Hinrichsen, H. (2000). "Non-equilibrium critical phenomena and directed percolation." *Advances in Physics*, 49(7), 815–958.
+- Newman, M. E. J., & Ziff, R. M. (2000). "Efficient Monte Carlo algorithm and high-precision results for percolation." *Physical Review Letters*, 85(19), 4104–4107.
+- Buehler, M. J. (2026). "Selective Imperfection as a Generative Framework for Analysis, Creativity and Discovery." *arXiv:2601.00863v1 [cs.LG]*, MIT.
+
+### Layer
+`concrete` — generates discrete notes, polyphonic voice textures, rhythmic trigger chains, and harmonic verticalities directly into UnitMatrix cells (feeds `generators/`; operating at L3 meso section coordination and L2 voice contours).
+
+### Description
+Percolation theory analyzes the emergence, geometric connectivity, and critical transitions of clusters formed by randomly occupying sites or bonds on a graph or lattice with occupation probability $p \in [0, 1]$. In contrast to diffusion processes (e.g. Method 092 DLACG) where particles wander continuously until sticking to a seed, percolation exhibits an abrupt, non-thermal second-order phase transition at an exact geometric critical threshold $p = p_c$:
+1. **Subcritical regime ($p < p_c$):** Occupied nodes form small, exponentially bounded, disconnected islands ($s \ll \infty$, correlation length $\xi \propto (p_c - p)^{-\nu}$). Musically, this yields sparse, isolated staccato gestures, pointillistic textures, and brief fragmentary motifs separated by rests.
+2. **Critical regime ($p \approx p_c$):** The cluster size distribution follows a scale-free power law $n_s(p_c) \propto s^{-\tau}$ (Fisher exponent $\tau \approx 2.05$ on 2D lattices). Fractal spanning clusters emerge exhibiting self-similarity over multiple metric and pitch scales. Musically, this regime balances surprise and coherence, producing long-range melodic continuity intertwined with localized rhythmic syncopations without falling into either monotony or noise.
+3. **Supercritical regime ($p > p_c$):** A dense giant cluster permeates the lattice, swallowing individual voices into monolithic, highly consonant chord masses, continuous drone textures, and dense polyphonic sustained walls of sound.
+
+Method 093 maps the **UnitMatrix** as a spatio-temporal lattice $\mathcal{L} = \mathcal{V} \times \mathcal{T}$ (where $\mathcal{V} = \{0, \dots, V-1\}$ indexes voices or pitch bins, and $\mathcal{T} = \{0, \dots, T-1\}$ indexes discrete metric subdivision time slots):
+- **Bond & Directed Percolation:** Bonds between adjacent cells model horizontal melodic succession ($t \to t+1$ within the same voice) and vertical harmonic coupling ($v \to v+1$ at the same time step $t$). Directed percolation (DP) enforces causality along the positive time arrow, preventing retrocausal feedback while permitting forward motivic cascades.
+- **Invasion & Gradient Percolation:** Rather than static uniform $p$, the occupation probability $p(t, s)$ is modulated as an external control field across UnitMatrix sections (macro-form), steering musical tension: subcritical intro ($p = 0.35 < p_c$), critical development/chorus ($p \approx p_c \approx 0.5927$ for square lattice site percolation), and supercritical climax ($p = 0.85 > p_c$).
+- **Connected Component Partitioning:** Connected clusters identified via Hoshen–Kopelman or Disjoint-Set Union (DSU) define coherent musical phrases. All events within a single cluster share motivic DNA (scale degree contours, dynamics, or rhythmic groupings), while spanning clusters crossing from $t=0$ to $t=T-1$ define structural melodic cantus firmi.
+
+### Musical Elements Framework
+
+- **PITCH:** The vertical coordinate $v$ maps to pitch degrees within an active scale or pitch-class pool $\mathcal{S}$ provided by the abstract layer (e.g., ABS-002 or modal pool). Horizontal bonds within a cluster enforce parsimonious, conjunct voice-leading ($|\Delta \text{pitch}| \le 2$ scale steps). Isolated subcritical clusters choose modal pivots, while critical spanning clusters trace continuous melodic arcs spanning wide registers.
+- **RHYTHM:** Metric pulses $t \in \mathcal{T}$ correspond to integer grid ticks (e.g., 16th-note subdivisions = 120 ticks at 480 TPB). A site occupation represents an active note onset. In the subcritical regime, inter-onset intervals (IOIs) follow an exponential decay, creating sparse syncopation. At criticality ($p_c$), the cluster length distribution $s$ follows a power law $P(s) \propto s^{-\tau}$, naturally generating Zipfian/fractal rhythmic durations spanning sixteenths, eighths, dotted quarters, and whole-note ties.
+- **HARMONY:** Vertical slices of occupied sites across voices $v \in \mathcal{V}$ at time $t$ form polyphonic verticalities (chords). In bond percolation, vertical bond presence directly controls harmonic consonance: adjacent voices bonded in the same cluster are constrained to consonant intervals (3rds, 4ths, 5ths, 6ths), while unbonded co-occurrences introduce passing or suspended dissonances. Modulating $p$ dynamically acts as a harmonic tension engine: $p \to 0$ produces monophonic silence/solos; $p \approx p_c$ produces balanced triadic/seventh-chord polyphony; $p \to 1$ produces saturated pitch-class aggregates.
+- **STRUCTURE:** Macro-form corresponds to an engineered percolation trajectory $p(s)$ across UnitMatrix section columns:
+  - *Intro (Subcritical):* $p = 0.30 \ll p_c$. Fragmentary motifs, high entropy, low density.
+  - *Verse (Approaching Criticality):* $p = 0.48 \lesssim p_c$. Emergence of recurring rhythmic cells of length 3–6 pulses.
+  - *Chorus (Critical Percolation):* $p = p_c \approx 0.593$. Spanning cluster bridges the section from start to end; maximum structural complexity, self-similar motifs.
+  - *Bridge (Subcritical Breakdown):* $p = 0.25$. Fragmentation into pointillistic staccato echoes.
+  - *Outro (Decaying Tail):* $p \to 0$. System relaxes back to the absorbing zero state.
+- **TEXTURE:** Percolation naturally transitions across musical textures:
+  - Subcritical: Sparse monody / pointillism / hocket.
+  - Critical: Rich heterophony and polyphonic counterpoint where distinct clusters weave in and out independently.
+  - Supercritical: Dense homophony, organum, and sustained mass drone.
+
+### UnitMatrix Integration (Voices & Sections)
+
+- **Voices (rows):** Each voice row $v \in \{0, \dots, V-1\}$ corresponds to an instrument or registral stratum (e.g., Voice 0 = Bass/Pedal, Voice 1 = Tenor/Chords, Voice 2 = Lead/Melody, Voice 3 = High Ornament).
+- **Sections (columns):** Columns represent sequential sections (Intro, Verse, Chorus, Bridge, Outro), each evaluated with section-specific lattice dimensions $(V, T_s)$ and occupation parameter $p_s$.
+- **Cells (MusicUnit):** Within each cell $(v, s)$, contiguous horizontal runs of occupied sites within the same cluster are merged into sustained `MusicEvent` instances with duration equal to cluster run length $\times$ tick quantum.
+- **Zero-Drift Invariant:** Track lengths are strictly preserved by appending a silent padding event (`pitch=0, volume=0`) terminating exactly at `section_total_ticks`, preventing timing desynchronization across polyphonic tracks.
+- **Method Hybridization:** Subcritical sections with sparse event density are paired with continuous harmonic pads (e.g. Method 079 TINC or Method 026 DPSM) to prevent auditory dropouts, fulfilling the Musicom Method Hybridization standard.
+
+### Pitfalls
+
+1. **Subcritical Silence / Voice Starvation:** When $p \ll p_c$, large portions of the lattice remain entirely unpopulated, causing voices to drop out for several measures.
+   *Fix:* Implement minimum-event seeding: ensure each voice row receives at least one seed event per bar, or lower the cluster-pruning threshold.
+2. **Supercritical Note-Collision Clutter:** When $p > p_c$, the giant cluster can cause every voice to play simultaneously on every subdivision, creating unmusical wall-of-noise muddy clusters.
+   *Fix:* Restrict the supercritical regime to short climactic peaks, apply voice-leading consonance filters, or enforce a maximum polyphonic density cap (e.g. max 4 simultaneous voices).
+3. **Lattice Aspect Ratio Distortion:** If the time dimension $T$ is very large relative to voice count $V$ ($T \gg V$), standard 2D isotropic percolation thresholds do not apply; the effective threshold shifts toward 1D percolation ($p_c \to 1$).
+   *Fix:* Formulate percolation as **directed percolation** in $1+1$ dimensions (space $\times$ time) where the critical threshold for directed bond percolation is $p_c \approx 0.6447$, or evaluate clusters within square metric windows (e.g. 16 subdivisions $\times$ 16 pitch bins).
+4. **Fractional Tick Drift:** Non-integer subdivision mappings lead to cumulative timing drift across measures.
+   *Fix:* Strictly quantize time slots to integer tick divisions (e.g., 120 ticks per 16th note at 480 TPB) and validate total unit duration with `composer.validate()`.
+
+### Python Implementation Sketch
+
+```python
+"""
+Method 093: Percolation Process Network Criticality (PPNC)
+Generates polyphonic structures via 2D lattice percolation at critical thresholds.
+"""
+from typing import List, Tuple, Dict, Set
+import numpy as np
+from structures import MusicUnit, MusicEvent, UnitMatrix, MidiInstrument
+from workflows.unitmatrix_composer import UnitMatrixComposer
+
+def simulate_percolation_lattice(
+    num_voices: int,
+    num_steps: int,
+    p_occ: float = 0.5927,  # Critical site percolation threshold on square lattice
+    seed: int = 42
+) -> np.ndarray:
+    """
+    Simulate site percolation on a 2D (voice x time) grid.
+    Returns boolean occupancy matrix of shape (num_voices, num_steps).
+    """
+    rng = np.random.default_rng(seed)
+    return rng.random((num_voices, num_steps)) < p_occ
+
+def label_percolation_clusters(grid: np.ndarray) -> Tuple[np.ndarray, int]:
+    """
+    Label connected components (clusters) using 4-connectivity (von Neumann neighborhood).
+    """
+    rows, cols = grid.shape
+    labels = np.zeros((rows, cols), dtype=int)
+    current_label = 0
+    
+    for r in range(rows):
+        for c in range(cols):
+            if grid[r, c] and labels[r, c] == 0:
+                current_label += 1
+                # Flood fill / BFS
+                queue = [(r, c)]
+                labels[r, c] = current_label
+                while queue:
+                    curr_r, curr_c = queue.pop(0)
+                    for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+                        nr, nc = curr_r + dr, curr_c + dc
+                        if 0 <= nr < rows and 0 <= nc < cols:
+                            if grid[nr, nc] and labels[nr, nc] == 0:
+                                labels[nr, nc] = current_label
+                                queue.append((nr, nc))
+                                
+    return labels, current_label
+
+def realize_percolation_to_unitmatrix(
+    p_occ: float = 0.5927,
+    num_voices: int = 4,
+    bars: int = 4,
+    scale_pitches: List[int] = None,
+    bpm: int = 120,
+    seed: int = 42
+) -> UnitMatrixComposer:
+    """
+    Realize critical percolation into a validated zero-drift UnitMatrix.
+    """
+    if scale_pitches is None:
+        # C major diatonic pool across octaves 3-5
+        scale_pitches = [48, 50, 52, 53, 55, 57, 59, 60, 62, 64, 65, 67, 69, 71, 72]
+        
+    ticks_per_step = 120  # 16th notes
+    steps_per_bar = 16
+    total_steps = bars * steps_per_bar
+    total_ticks = bars * 1920
+    
+    grid = simulate_percolation_lattice(num_voices, total_steps, p_occ=p_occ, seed=seed)
+    labels, num_clusters = label_percolation_clusters(grid)
+    
+    composer = UnitMatrixComposer(bpm=bpm, ticks_per_beat=480, beats_per_bar=4)
+    composer.create_matrix(num_voices=num_voices, num_sections=1)
+    
+    voice_names = ["Lead", "Counter", "Tenor", "Bass"]
+    programs = [
+        MidiInstrument.FLUTE,
+        MidiInstrument.VIOLIN,
+        MidiInstrument.STRING_ENSEMBLE,
+        MidiInstrument.BASS
+    ]
+    
+    for v_idx in range(num_voices):
+        composer.add_voice(voice_names[v_idx], program=programs[v_idx], channel=v_idx)
+    composer.add_section("A", bars=bars)
+    
+    for v_idx in range(num_voices):
+        events = []
+        step = 0
+        while step < total_steps:
+            if grid[v_idx, step]:
+                # Measure run length of contiguous active pulses in this voice
+                run_len = 1
+                while (step + run_len < total_steps and 
+                       grid[v_idx, step + run_len] and 
+                       labels[v_idx, step + run_len] == labels[v_idx, step]):
+                    run_len += 1
+                    
+                start_tick = step * ticks_per_step
+                end_tick = min((step + run_len) * ticks_per_step, total_ticks)
+                
+                # Pitch mapping: map voice and cluster id to scale degrees
+                cluster_id = labels[v_idx, step]
+                pitch_idx = (v_idx * 3 + (cluster_id % 5)) % len(scale_pitches)
+                pitch = scale_pitches[pitch_idx]
+                vel = 70 + min(45, run_len * 10)
+                
+                events.append(MusicEvent(pitch=pitch, volume=vel, start_tick=start_tick, end_tick=end_tick))
+                step += run_len
+            else:
+                step += 1
+                
+        # Zero-drift padding event terminating at total_ticks
+        pad = MusicEvent(pitch=0, volume=0, start_tick=max(0, total_ticks - 1), end_tick=total_ticks)
+        composer.fill_voice_section(voice_names[v_idx], "A", MusicUnit(events=events + [pad]))
+        
+    ok, msg = composer.validate()
+    assert ok, f"Zero-drift gate failed: {msg}"
+    return composer
+```
+
+### References
+- Broadbent, S. R., & Hammersley, J. M. (1957). "Percolation processes: I. Crystals and mazes." *Proceedings of the Cambridge Philosophical Society*, 53(3), 629–641.
+- Stauffer, D., & Aharony, A. (1994). *Introduction to Percolation Theory* (2nd ed.). Taylor & Francis, London.
+- Grimmett, G. (1999). *Percolation* (2nd ed.). Springer-Verlag, Berlin.
+- Hinrichsen, H. (2000). "Non-equilibrium critical phenomena and directed percolation." *Advances in Physics*, 49(7), 815–958.
+- Newman, M. E. J., & Ziff, R. M. (2000). "Efficient Monte Carlo algorithm and high-precision results for percolation." *Physical Review Letters*, 85(19), 4104–4107.
+- Buehler, M. J. (2026). "Selective Imperfection as a Generative Framework for Analysis, Creativity and Discovery." *arXiv:2601.00863v1 [cs.LG]*, MIT.
