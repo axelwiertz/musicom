@@ -1,0 +1,22 @@
+{
+  "artifact": "103-japanese-kojo-koto.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.workflows.unitmatrix_composer",
+  "sources": [],
+  "parameters": {
+    "project": "103-japanese-kojo-koto",
+    "phase": 2,
+    "style": "Japanese",
+    "method": "019 L-System Algorithmic Composition",
+    "layer": "concrete",
+    "quantization": "16th/8th grid (120/240 ticks)",
+    "key": "A hirajoshi pentatonic",
+    "bpm": 80,
+    "seed": 20260923
+  },
+  "notes": "",
+  "sha256": "33814657b1741acfeb514ee4770693a897337b90d03f7850244e69fa46569fc0",
+  "bytes": 5089,
+  "created_utc": "2026-09-23T23:06:49.965187+00:00",
+  "provenance_version": "1.0"
+}

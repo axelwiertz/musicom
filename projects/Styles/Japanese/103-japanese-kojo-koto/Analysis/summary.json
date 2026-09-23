@@ -1,0 +1,54 @@
+{
+  "project": "103-japanese-kojo-koto",
+  "number": 103,
+  "style": "Japanese",
+  "method": "019 L-System Algorithmic Composition",
+  "method_layer": "concrete",
+  "grammar": "dragon-curve / paperfolding (A -> A+B, B -> A-B; + = +2, - = -2 semitones), 8 iterations -> 255 deltas",
+  "key": "A hirajoshi pentatonic (A Bb D E G) = pitch classes {9,10,2,4,7}",
+  "bpm": 80,
+  "meter": "4/4",
+  "tpb": 480,
+  "form": "Jo | Ha1 | Ha2 | Kyu1 | Kyu2 | Jo_Coda (6 sections x 4 bars = 24 bars)",
+  "total_ticks": 46080,
+  "duration_sec": 75.31,
+  "voices": [
+    {"name": "Koto", "program": 107, "channel": 0, "role": "lead fractal melody"},
+    {"name": "Shakuhachi", "program": 74, "channel": 1, "role": "sustained counterline"},
+    {"name": "Shamisen", "program": 106, "channel": 2, "role": "rhythmic pluck ostinato"},
+    {"name": "KotoBass", "program": 107, "channel": 3, "role": "low drone"},
+    {"name": "Taiko", "program": 0, "channel": 9, "role": "percussion"}
+  ],
+  "palettes": {
+    "A": [9, 10, 2, 4],
+    "G": [9, 10, 2, 7],
+    "Bb": [10, 2, 4, 7],
+    "E": [9, 10, 4, 7]
+  },
+  "verification": {
+    "zero_drift": "PASS (all 5 voices 46080 ticks)",
+    "grid_16th_off_grid": 0,
+    "harmony_out_of_scale": 0,
+    "harmony_out_of_chord": 0,
+    "phase2_total_notes": 556,
+    "phase1_total_notes": 192,
+    "phase1_off_grid_ratio": 0.99,
+    "phase2_silence_ratio": 0.0645,
+    "phase2_tonal_ratio": 1.0,
+    "phase1_silence_ratio": 0.074,
+    "phase1_tonal_ratio": 0.9867
+  },
+  "files": {
+    "phase2_mid": "MIDI/103-japanese-kojo-koto.mid (5089 B)",
+    "phase1_mid": "MIDI/103-japanese-kojo-koto-phase1.mid (1699 B)",
+    "phase2_wav": "Audio/103-japanese-kojo-koto.wav (13284396 B)",
+    "phase2_ogg": "Audio/103-japanese-kojo-koto.ogg (1543048 B)",
+    "phase1_wav": "Audio/103-japanese-kojo-koto-phase1.wav (13285164 B)",
+    "phase1_ogg": "Audio/103-japanese-kojo-koto-phase1.ogg (1643957 B)",
+    "grid_visualization": "Analysis/grid_visualization.txt (3685 B)",
+    "audit": "Analysis/audit.json",
+    "render_stats": "Analysis/render_stats.json"
+  },
+  "seed": 20260923,
+  "date": "2026-09-23"
+}

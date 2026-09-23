@@ -1,0 +1,21 @@
+{
+  "artifact": "103-japanese-kojo-koto-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.workflows.unitmatrix_composer",
+  "sources": [],
+  "parameters": {
+    "project": "103-japanese-kojo-koto",
+    "phase": 1,
+    "style": "Japanese",
+    "method": "019 L-System Algorithmic Composition",
+    "layer": "concrete",
+    "grammar": "dragon-curve A->A+B, B->A-B (+2/-2 semitones)",
+    "raw_timing": "unquantized",
+    "seed": 20260923
+  },
+  "notes": "",
+  "sha256": "3b5fc633b0fd90c62e566aed2afe1117b83d317718cd32c5b62828c3f68536e9",
+  "bytes": 1699,
+  "created_utc": "2026-09-23T23:06:49.936466+00:00",
+  "provenance_version": "1.0"
+}
