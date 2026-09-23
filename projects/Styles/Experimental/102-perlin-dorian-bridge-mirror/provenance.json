@@ -1,0 +1,21 @@
+{
+  "project": "102-perlin-dorian-bridge-mirror",
+  "genre": "Experimental",
+  "key": "D Dorian",
+  "bpm": 80,
+  "seed": 42,
+  "method": "040-Perlin-Noise-Composition + musicom rules",
+  "redesign_of": "056-perlin-lpc",
+  "phase_artifacts": [
+    "MIDI/102-perlin-dorian-bridge-mirror-phase1.mid",
+    "MIDI/102-perlin-dorian-bridge-mirror.mid"
+  ],
+  "variations": ["transpose(+4th)", "octave_up", "retrograde", "invert", "augment"],
+  "verification": {
+    "voice_tracks": 4,
+    "track_length_ticks": 46080,
+    "off_grid_onsets": 0,
+    "key_violations": 0,
+    "chord_violations": 0
+  }
+}

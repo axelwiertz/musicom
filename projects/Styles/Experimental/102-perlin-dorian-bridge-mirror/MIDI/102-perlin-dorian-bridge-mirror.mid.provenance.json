@@ -1,0 +1,20 @@
+{
+  "artifact": "102-perlin-dorian-bridge-mirror.mid",
+  "classification": "ai-assisted",
+  "generator": "040-Perlin-Noise-Composition + musicom rules",
+  "sources": [],
+  "parameters": {
+    "phase": 2,
+    "bpm": 80,
+    "key": "D Dorian",
+    "seed": 42,
+    "voices": 4,
+    "form": "6 sections x 4 bars = 24 bars",
+    "variations": "transpose(+4th), octave_up, retrograde, invert, augment"
+  },
+  "notes": "Redesign of 056-perlin-lpc. Correct D Dorian. Degree-space transforms. Chord-tone quantized, grid-snapped, key-disciplined.",
+  "sha256": "aa2c29a9ab4ba1a729f82c06ff633a773998405e3073f665060f609e1b72ba7b",
+  "bytes": 4470,
+  "created_utc": "2026-09-23T17:58:47.689467+00:00",
+  "provenance_version": "1.0"
+}

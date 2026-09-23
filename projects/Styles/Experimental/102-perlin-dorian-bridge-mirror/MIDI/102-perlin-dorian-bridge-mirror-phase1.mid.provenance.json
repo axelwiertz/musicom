@@ -1,0 +1,19 @@
+{
+  "artifact": "102-perlin-dorian-bridge-mirror-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "040-Perlin-Noise-Composition + musicom rules",
+  "sources": [],
+  "parameters": {
+    "phase": 1,
+    "bpm": 80,
+    "key": "D Dorian",
+    "seed": 42,
+    "voices": 1,
+    "note": "raw generative draft, diatonic, pre-rules"
+  },
+  "notes": "",
+  "sha256": "8e4b5e5745bcb5c9bbda9ab5335a97d3ac6e9c5f8922273a9b7553a217933055",
+  "bytes": 1353,
+  "created_utc": "2026-09-23T17:58:47.655346+00:00",
+  "provenance_version": "1.0"
+}
