@@ -1,0 +1,71 @@
+{
+  "phase2": {
+    "file": "101-folk-sieve.mid",
+    "total_notes": 1240,
+    "off_grid_16": 0,
+    "out_of_scale": 0,
+    "out_of_chord": 0,
+    "tracks": [
+      {
+        "name": "",
+        "channel": 0,
+        "total_tick": 0,
+        "notes": 0,
+        "off_grid_16": 0,
+        "out_of_scale": 0,
+        "out_of_chord": 0
+      },
+      {
+        "name": "",
+        "channel": 0,
+        "total_tick": 46080,
+        "notes": 192,
+        "off_grid_16": 0,
+        "out_of_scale": 0,
+        "out_of_chord": 0
+      },
+      {
+        "name": "",
+        "channel": 1,
+        "total_tick": 46080,
+        "notes": 64,
+        "off_grid_16": 0,
+        "out_of_scale": 0,
+        "out_of_chord": 0
+      },
+      {
+        "name": "",
+        "channel": 2,
+        "total_tick": 46080,
+        "notes": 480,
+        "off_grid_16": 0,
+        "out_of_scale": 0,
+        "out_of_chord": 0
+      },
+      {
+        "name": "",
+        "channel": 3,
+        "total_tick": 46080,
+        "notes": 120,
+        "off_grid_16": 0,
+        "out_of_scale": 0,
+        "out_of_chord": 0
+      },
+      {
+        "name": "",
+        "channel": 9,
+        "total_tick": 46080,
+        "notes": 384,
+        "off_grid_16": 0,
+        "out_of_scale": 0,
+        "out_of_chord": 0
+      }
+    ]
+  },
+  "phase1": {
+    "file": "101-folk-sieve-phase1.mid",
+    "total_notes": 192,
+    "off_grid_16": 191,
+    "off_grid_ratio": 0.9948
+  }
+}

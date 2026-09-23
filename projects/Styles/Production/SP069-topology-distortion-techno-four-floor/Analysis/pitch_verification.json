@@ -1,0 +1,17 @@
+{
+  "method": "SP-069",
+  "project": "001-techno-four-floor",
+  "source_key_pcs": [
+    0,
+    2,
+    3,
+    4,
+    9,
+    10
+  ],
+  "status": "PASS",
+  "hit_rate": 1.0,
+  "harmonic_energy_mean": 0.3313987781789163,
+  "windows_analyzed": 63,
+  "median_freq_hz": 330.0
+}

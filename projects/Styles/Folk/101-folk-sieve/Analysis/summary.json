@@ -1,0 +1,70 @@
+{
+  "project": "101-folk-sieve",
+  "style": "Folk (Dorian Reel / Morris Dance)",
+  "method": "025 Xenakis Sieve Theory",
+  "layer": "concrete",
+  "date": "2026-09-22",
+  "key": "D Dorian",
+  "bpm": 116,
+  "meter": "4/4",
+  "ticks_per_bar": 1920,
+  "form": "6 sections x 4 bars = 24 bars (Intro, Theme_A, Theme_B, Breakdown, Theme_A_Var, Outro)",
+  "total_ticks": 46080,
+  "artifacts": {
+    "phase1_midi": "MIDI/101-folk-sieve-phase1.mid",
+    "phase1_wav": "Audio/101-folk-sieve-phase1.wav",
+    "phase1_ogg": "Audio/101-folk-sieve-phase1.ogg",
+    "phase2_midi": "MIDI/101-folk-sieve.mid",
+    "phase2_wav": "Audio/101-folk-sieve.wav",
+    "phase2_ogg": "Audio/101-folk-sieve.ogg"
+  },
+  "verification": {
+    "validate_phase1": true,
+    "validate_phase2": true,
+    "grid_compliance_16th": {
+      "total_notes": 1240,
+      "off_grid": 0,
+      "pass": true
+    },
+    "harmony_compliance": {
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "pass": true
+    },
+    "silence_ratio": 0.1594,
+    "tonal_ratio": 0.9748,
+    "duration_sec": 59.64
+  },
+  "instruments": [
+    {
+      "name": "Fiddle",
+      "program": 40,
+      "channel": 0,
+      "role": "Lead melody driven by pitch/rhythm sieves"
+    },
+    {
+      "name": "Whistle",
+      "program": 74,
+      "channel": 1,
+      "role": "High lyrical countermelody"
+    },
+    {
+      "name": "Guitar",
+      "program": 25,
+      "channel": 2,
+      "role": "Folk reel rhythm strum (boom-chick)"
+    },
+    {
+      "name": "Bass",
+      "program": 43,
+      "channel": 3,
+      "role": "Double bass root-fifth dance pulse"
+    },
+    {
+      "name": "Drums",
+      "program": 0,
+      "channel": 9,
+      "role": "Bodhran thump and sieve accent percussion"
+    }
+  ]
+}

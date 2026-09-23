@@ -1,0 +1,20 @@
+{
+  "artifact": "101-folk-sieve-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.workflows.unitmatrix_composer",
+  "sources": [],
+  "parameters": {
+    "project": "101-folk-sieve",
+    "phase": 1,
+    "style": "Folk",
+    "method": "025 Xenakis Sieve Theory",
+    "layer": "concrete",
+    "raw_timing": "unquantized",
+    "seed": 20260922
+  },
+  "notes": "",
+  "sha256": "bd794400af540398df295b63ad3eb805826907fb2682d98739e27239e311fa37",
+  "bytes": 1700,
+  "created_utc": "2026-09-22T23:07:36.161180+00:00",
+  "provenance_version": "1.0"
+}

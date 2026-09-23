@@ -1,0 +1,22 @@
+{
+  "artifact": "101-folk-sieve.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.workflows.unitmatrix_composer",
+  "sources": [],
+  "parameters": {
+    "project": "101-folk-sieve",
+    "phase": 2,
+    "style": "Folk",
+    "method": "025 Xenakis Sieve Theory",
+    "layer": "concrete",
+    "quantization": "16th-grid (120 ticks)",
+    "key": "D Dorian",
+    "bpm": 116,
+    "seed": 20260922
+  },
+  "notes": "",
+  "sha256": "50356a0d737015dcebc233a2bdfa68716daf977ab6de016175901f15a81f1172",
+  "bytes": 9886,
+  "created_utc": "2026-09-22T23:07:36.215566+00:00",
+  "provenance_version": "1.0"
+}
