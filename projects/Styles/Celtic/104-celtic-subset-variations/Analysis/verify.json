@@ -1,0 +1,49 @@
+{
+  "project": "104-celtic-subset-variations",
+  "audit": {
+    "phase1": {
+      "n_tracks": 1,
+      "lengths": [
+        61440
+      ],
+      "channels": [
+        0
+      ],
+      "zero_drift": true,
+      "pitched_onsets": 412,
+      "off_grid": 376,
+      "scale_viol": 0,
+      "chord_viol": 0
+    },
+    "phase2": {
+      "n_tracks": 7,
+      "lengths": [
+        61440,
+        61440,
+        61440,
+        61440,
+        61440,
+        61440,
+        61440
+      ],
+      "channels": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        9
+      ],
+      "zero_drift": true,
+      "pitched_onsets": 1105,
+      "off_grid": 0,
+      "scale_viol": 0,
+      "chord_viol": 0
+    }
+  },
+  "sizes": {
+    "104-celtic-subset-variations.mid": 12958,
+    "104-celtic-subset-variations-phase1.mid": 3352
+  }
+}

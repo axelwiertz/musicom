@@ -101,7 +101,8 @@ Classification of active Musicom composition methods categorized by their primar
 | **091** | concrete | Coxeter–Conway Frieze Pattern Composition (CCFPC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Weak (Cluster-algebraic) | Grid-Locked | Macro / Polygon Period | $\mathcal{O}(w \cdot n)$ generation, $\mathcal{O}(1)$ step | Generates polyphonic pitch, rhythm, and chord voicings from positive integer frieze patterns of unimodular $SL_2(\mathbb{Z})$ diamond lattices ($bc - ad = 1$) bounded by rows of 1s, classified bijectively by Conway–Coxeter triangulations of convex $(n+1)$-gons. Rows = voices/polyphonic strata (quiddity row = voice 1, interior cluster depths = inner voices); columns = temporal metric pulses; glide-reflection symmetry ($180^\circ$ rotation + $(n+1)/2$ shift) enforces exact inverted and phase-shifted polyphonic canon relationships. Unimodular determinant constraint prohibits parallel collapse and harmonic drift; macro-form develops via Ptolemy diagonal flips (cluster algebra mutations) across section boundaries. Integrable combinatorial counterpart to 083 quasicrystal / 088 Voronoi and deterministic foil to 021 CA / 033 WFCGS. |
 | **092** | concrete | Diffusion-Limited Aggregation Fractal Growth (DLACG) | **Nature-Led** | Pitch, Rhythm, Harmony, Structure, Texture | Weak (Cluster-boundary guided) | Grid-Locked / Continuous | Meso / Cluster Topology | $\mathcal{O}(N \cdot K)$ walk, $\mathcal{O}(1)$ stick | Generates dendritic polyphony, rhythmic bursts, and harmonic chord arborescences from 2D Brownian particles diffusing until sticking to seed anchors ($D_f \approx 1.71$). Branch depth = structural hierarchy; harmonic measure screening leaves internal rests (fjords) and concentrates note activity on outer tips (melodic climaxes); tree branches partition into independent UnitMatrix voice rows. Spatial connectivity prevents harmonic drift; seed schedules guide macro-form across section boundaries. Nature-led fractal growth counterpart to 048 RBMPD / 049 IFSMG and physical foil to 088 VTEP / 030 RDTP. |
 | **093** | concrete | Percolation Process Network Criticality (PPNC) | **Nature-Led** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Critical-connectivity) | Grid-Locked / Continuous | Meso / Cluster Lattice | $\mathcal{O}(V \cdot T)$ direct, $\mathcal{O}(N \alpha(N))$ DSU | Composes via site/bond percolation on a spatio-temporal UnitMatrix lattice $\mathcal{V} \times \mathcal{T}$ near the geometric percolation threshold $p \approx p_c$. Subcritical $p < p_c$ yields sparse pointillistic motifs; critical $p \approx p_c$ yields fractal spanning clusters balancing melodic continuity and rhythmic syncopation; supercritical $p > p_c$ yields dense chordal masses. Connected clusters define motivic phrases, and directed percolation enforces temporal causality. Phase-transition counterpart to 078 IMEC / 082 RBNCC and network-connectivity sibling of 035 PPTNO / 092 DLACG. |
-| **094** | concrete | Apollonian Circle Packing Composition (ACPC) | **Nature-Led** | Pitch, Rhythm, Harmony, Structure, Texture | Strict (Descartes-quadruple consonance) | Grid-Locked / Continuous | Meso / Apollonian Tree | $\mathcal{O}(3^D)$ tree, $\mathcal{O}(1)$ step | Composes polyphony and fractal rhythmic durations from recursive integral Apollonian circle packings governed by Descartes' theorem $(k_1+k_2+k_3+k_4)^2 = 2\sum k_i^2$ and Apollonian group reflections $S_i \in GL(4, \mathbb{Z})$. Curvatures $k_i \in \mathbb{Z}^+$ map logarithmically/modally to pitch; radii $r_i = 1/k_i$ govern self-similar fractal note durations ($D_f \approx 1.3057$); mutually tangent quadruples form consonant 4-voice chords with parsimonious single-voice voice-leading pivots ($k_i' = 2\sum_{j \neq i} k_j - k_i$). Geometric packing counterpart to 088 VTEP / 092 DLACG and number-theoretic cousin of 069 CWCC / 091 CCFPC. |
+|| **094** | concrete | Apollonian Circle Packing Composition (ACPC) | **Nature-Led** | Pitch, Rhythm, Harmony, Structure, Texture | Strict (Descartes-quadruple consonance) | Grid-Locked / Continuous | Meso / Apollonian Tree | $\mathcal{O}(3^D)$ tree, $\mathcal{O}(1)$ step | Composes polyphony and fractal rhythmic durations from recursive integral Apollonian circle packings governed by Descartes' theorem $(k_1+k_2+k_3+k_4)^2 = 2\sum k_i^2$ and Apollonian group reflections $S_i \in GL(4, \mathbb{Z})$. Curvatures $k_i \in \mathbb{Z}^+$ map logarithmically/modally to pitch; radii $r_i = 1/k_i$ govern self-similar fractal note durations ($D_f \approx 1.3057$); mutually tangent quadruples form consonant 4-voice chords with parsimonious single-voice voice-leading pivots ($k_i' = 2\sum_{j \neq i} k_j - k_i$). Geometric packing counterpart to 088 VTEP / 092 DLACG and number-theoretic cousin of 069 CWCC / 091 CCFPC. |
+|| **095** | abstract | Contour Theory Composition (CTC) | **Rules-Based** | Pitch, Rhythm, Structure, Texture | None (Contour-shape-defined) | Grid-Locked / Continuous | Meso / Contour Segment | $\mathcal{O}(N^2)$ segment gen, $\mathcal{O}(N \log N)$ real | Generates abstract contour prototypes (CAS/CSeg classes) independent of exact pitch — the shape of a melody as a sequence of up/down/same relations. ContourNetwork maps via I/R/RI transformations; concrete layer maps rank → scale degree. First abstract-layer method: feeds rules/subset_network.py. |
 # Sound Production Methods Framework
 
 Sound production translates symbolic MIDI UnitMatrix data into final acoustic air pressure. Methods are categorized by execution layer: **Hardware/Acoustic Integration**, **Synthesis Engines**, or **Post-Processing / DSP**.
@@ -19934,3 +19935,89 @@ def render_paf_voice(events, sr=44100, bpm=120, ticks_per_beat=480, formants=((8
 - Puckette, M. (1995). "Formant-based audio synthesis using nonlinear distortion." *Journal of the Audio Engineering Society*, 43(1–2), 40–47.
 - Puckette, M. (2006). *The Theory and Technique of Electronic Music*. World Scientific Publishing Co., Chapter 6: Designer Spectra (Phase-Aligned Formant Generator).
 - Roads, C. (1996). *The Computer Music Tutorial*. MIT Press.
+---
+### Method 095 — Contour Theory Composition (CTC)
+**Paradigm**: Rules-Based
+**Layer**: abstract
+
+| Attribute | Value |
+|:---|:---|
+| **Method ID** | **095** |
+| **Method Name** | Contour Theory Composition |
+| **Acronym** | CTC |
+| **Paradigm** | Rules-Based |
+| **Layer** | abstract |
+| **Primary Elements** | Pitch, Rhythm, Structure, Texture |
+| **Tonal Gravity** | None (Contour-shape-defined) |
+| **Metric Binding** | Grid-Locked / Continuous |
+| **Memory Depth** | Meso / Contour Segment |
+| **Time Complexity** | $\mathcal{O}(N^2)$ segment generation, $\mathcal{O}(N \log N)$ contour realization |
+| **Description** | Generates abstract contour prototypes (CAS/CSeg classes) independent of exact pitch classes, then maps them onto concrete scale degrees in the concrete layer. Contour = the shape of a melody/rhythm as a sequence of up/down/same relations. |
+
+### Source
+
+- Friedmann, M. L. (1985). "A Methodology for the Discussion of Contour: Its Application to Schoenberg's Music." *Journal of Music Theory*, 29(2), 223–248.
+- Marvin, E. W. & Laprade, P. A. (1987). "Relating Musical Contours: Extensions of a Theory for Contour." *Journal of Music Theory*, 31(2), 225–267.
+- Morris, R. D. (1993). "New Directions in the Theory and Analysis of Musical Contour." *Music Theory Spectrum*, 15(2), 205–228.
+- Quinn, I. (1997). "Fuzzy Extensions to the Theory of Contour." *Music Theory Spectrum*, 19(2), 232–263.
+- Quinn, I. (1999). "The Combinatorial Model of Pitch Contour." *Music Perception*, 16(4), 439–456.
+- Sampaio, M. S. (2018). "Contour Similarity Algorithms." *MusMat*, II(2), 49–75.
+- Carter-Ényì, A. (2016). "Contour Recursion and Auto-Segmentation." *Music Theory Online*, 22(1).
+
+### Layer
+
+**Abstract** — CTC operates entirely in the abstract layer: it designs pure contour-shape sequences (pitch-direction patterns, combinatorial contour matrices) that are transposition- and interval-invariant. The output is a set of contour prototypes and a ContourNetwork (CAS → contour class → transformation graph) that feeds the concrete layer via `rules/subset_network.py`-style integration. No concrete pitch/velocity events are generated at this layer.
+
+### Description
+
+Contour Theory Composition (CTC) treats the **shape** of a musical line as the primary compositional parameter, decoupled from exact pitch-class content. The method is built on the following hierarchy:
+
+1. **Contour Point (CP)** — a pitch ordered in time, abstracted as its rank in a set of points (e.g., in a 4-note figure the highest pitch is 3, lowest is 0).
+2. **Comparison Function** — `CMP(a, b) =` `+` if b > a, `-` if b < a, `0` if b = a.
+3. **Contour Adjacency Series (CAS)** — a string of `+`, `-`, `0` symbols encoding only the direction between *adjacent* points. Example: `< + - + + - >`.
+4. **Combinatorial Contour** — the full upper-triangular comparison matrix encoding all *pairwise* relations (adjacent and non-adjacent). Two contours with the same matrix belong to the same **contour class**.
+5. **Contour Class** — equivalence class under renormalization (translation of pitch ranks to {0, 1, ..., n-1}), inversion, retrograde, and retrograde-inversion. The combinatorial matrix is invariant under transposition.
+6. **Contour Segment (CSeg)** — a normalized sequence of contour ranks. Example: CSeg `<0 2 1 3>` means the second point is highest, third is second-highest, fourth is highest, etc.
+7. **Contour Reduction (Morris 1993)** — an algorithm that extracts the structural skeleton of a contour by removing points that are "embellishing" (non-essential to the large-scale shape), analogous to Schenkerian reduction but operating on pure shape.
+
+The CTC method composes as follows:
+
+**Phase A — Abstract Design (this layer)**:
+1. Define a **ContourVocabulary** — a library of CSeg prototypes (e.g., `<0 1 2>` = ascending, `<0 2 1 3>` = arch, `<0 1 3 2>` = twist, `<0 3 1 2>` = leap-and-fill).
+2. Construct a **ContourNetwork** — a graph where nodes are CSeg classes and edges are contour transformations (I, R, RI, Morris reduction, Quinn fuzzy embedding). The network encodes how one contour can be derived from another.
+3. Choose a **CAS template** for each section of the piece — a string of `+`/`-`/`0` of length N that defines the large-scale directional profile of that section. Template selection can follow an arc (many + = rising section, many - = falling, alternation = stable oscillation).
+4. Generate a **contour-tension curve** from the CAS: count directional changes (peaks = high tension), max-run length (sustained rise = building tension), CAS entropy (chaotic = unstable).
+5. Output for the concrete layer: a **ContourProgression** — a sequence of `(CSeg_k, section_id, voice_id, transformation)` tuples that specify what shape each voice should play in each section.
+
+**Phase B — Concrete Realization (separate method)**:
+The concrete layer takes each CSeg and maps its ranked points {0, 1, ..., n-1} onto scale degrees within the section's key, then fills UnitMatrix cells with MusicEvents.
+
+### Musical Elements Framework
+
+- **PITCH**: Contour classes abstract pitch entirely. Only relative order matters. In realization, contour rank → scale degree (e.g., CSeg `<0 2 1 3>` in C major could map to pitches C–G–E–G'). The abstraction means the *same* contour can be realized in any key, mode, or register without changing the shape.
+- **RHYTHM**: A CAS can encode rhythmic direction too: `+` = longer/louder, `-` = shorter/softer. Alternatively, a separate rhythmic contour layer can drive note durations (the "durational contour": long→short→medium).
+- **HARMONY**: Contour polyphony emerges from aligning multiple CSegs vertically. The simultaneous turning points (all voices rising = tutti crescendo, contrary motion = textural stability) define harmonic density without pitch-class content.
+- **STRUCTURE**: The macro-form is a sequence of CAS templates per section, optionally with Morris contour reduction producing a multi-level structural skeleton (reduced contour at the section level, elaborated at the phrase level).
+- **TEXTURE**: Contour density (number of directional changes per unit time) drives textural complexity. A smooth, mostly-ascending CAS (few direction changes) produces legato, lyrical texture; a jagged CAS (frequent changes) produces angular, pointillistic texture. Parallel vs. contrary motion across voices is controlled by comparing CSeg transformation choices per voice.
+
+### UnitMatrix Integration (Voices & Sections)
+
+Each **voice** (row) gets its own ContourSequence — a list of CSeg assignments per section. The **section** (column) provides the scale/mode onto which contour ranks are mapped. The abstract ContourProgression looks like:
+
+```
+Section A (C major, 4 bars):
+  Voice 1 (Lead):  CSeg <0 2 1 3>  CSeg <0 1 2 3>  CSeg <0 3 1 2>  CSeg <0 2 3 1>
+  Voice 2 (Harmony): I(CSeg <0 2 1 3>)  R(CSeg <0 1 2 3>)  RI(CSeg <0 3 1 2>)  CSeg <0 1 2 3>
+  Voice 3 (Bass):    CSeg <0 3 2 1>  CSeg <0 2 1 3>  CSeg <0 1 2 3>  CSeg <0 3 2 1>
+```
+
+The concrete layer then fills each UnitMatrix cell with a MusicUnit whose pitch sequence is the rank→scale-degree mapping of the CSeg, and whose durations follow the durational contour associated with the CAS.
+
+### Pitfalls
+
+1. **Contour equivalence is too loose**: Two contours that sound very different can share the same combinatorial matrix if they have the same rank order but different interval sizes. The method must be paired with a concrete-layer interval filter (e.g., "never map rank 0→rank 1 to a leap > an octave").
+2. **Rhythmic contour coupling**: If the same CAS drives both pitch direction and durational contour, the two may lock into unmusical 1:1 correlation. Recommend independent CAS strings for pitch and rhythm.
+3. **CSeg length constraints**: Short CSegs (3–5 points) are easy to hear as motivic shapes; long CSegs (8+ points) lose perceptual contour coherence (Miller's law: ~7±2 chunks). Prefer CSegs of length 3–7 for motivic material, using contour reduction to compress longer lines.
+4. **Scale mapping ambiguity**: Mapping contour rank 0→tonic (1) and rank n-1→dominant (5) works for 3-note CSegs but breaks for 5+ note CSegs where the scale only has 7 degrees. Use chromatic passing tones or modal mixture for intermediate ranks.
+5. **No built-in tonal gravity**: CTC generates pure shapes with no inherent tonal function. Tonal gravity must be added by the concrete layer (e.g., anchoring rank 0 to the tonic and rank n-1 to the dominant or leading tone).
+6. **Similar methods**: CTC complements 081 NIRMC (which generates expectations from intervals at the concrete layer) by operating a layer up — CTC decides the shape, NIRMC decides the interval-level realization.

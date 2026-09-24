@@ -1,0 +1,24 @@
+{
+  "104-celtic-subset-variations": {
+    "wav_bytes": 14597676,
+    "ogg_bytes": 571497,
+    "silence_ratio": 0.0302,
+    "peak": 0.9281,
+    "rms": 0.1577,
+    "duration_s": 82.75,
+    "min_rms_sec": 0.0002,
+    "n_low_rms_secs": 1,
+    "soundfont": "FluidR3_GM.sf2"
+  },
+  "104-celtic-subset-variations-phase1": {
+    "wav_bytes": 14645804,
+    "ogg_bytes": 791876,
+    "silence_ratio": 0.0372,
+    "peak": 0.3825,
+    "rms": 0.0998,
+    "duration_s": 83.03,
+    "min_rms_sec": 0.0,
+    "n_low_rms_secs": 2,
+    "soundfont": "FluidR3_GM.sf2"
+  }
+}

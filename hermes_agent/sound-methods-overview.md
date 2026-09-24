@@ -81,6 +81,7 @@ comparable to, and how do I use it in a workflow?*
 | `sound/generators/harmony_writer.py` | HarmonyWriter | generators (harmony/arrangement) | HarmonyKeen | monophonic melody + key + style → rule-based harmony parts (phrase/cadence analysis, SATB voice-leading) |
 | `sound/effects/orbit_sculptor.py` | OrbitalStereoSculptor, OrbitalBandProcessor, LinkwitzRiley4Crossover | effects (spatial/modulation) | SoundGhost Orbit | audio + 3-band LR4 crossover + per-band pan/width/gain modulators → sculpted stereo audio |
 | `sound/effects/delta_sigma_saturator.py` | DeltaSigmaSaturator, DeltaSigmaStage, SlewLimiter, ReconstructionFilter | effects (distortion/saturation) | Mixland Grey Matter, PS1 DAC | audio + drive + strain + mode (clean/console/broken) → DAC-saturated audio |
+| `sound/effects/multiband_saturator.py` | MultibandSaturator, BandConfig | effects (saturation/distortion) | Kreuzberg Audio Oberton | audio + 6 LR4-split bands + per-band algo (15 types) + M/S mode + global trim → saturated stereo audio |
 | `sound/sync/clock.py` | DAWClockBridge | sync | MTC/MIDI clock | bpm → clock pulses |
 | `sound/render/fluidsynth.py` | FluidSynthRenderer | render | SF2 synth | MIDI → WAV |
 | `sound/render/vst.py` | VSTRenderer | render | DAW VST3 | MIDI → VST audio |

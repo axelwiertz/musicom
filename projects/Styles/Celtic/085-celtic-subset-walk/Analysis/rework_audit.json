@@ -1,0 +1,57 @@
+{
+  "chosen": "/opt/data/projects/Styles/Celtic/085-celtic-subset-walk",
+  "genre": "Celtic",
+  "primary_midi": "/opt/data/projects/Styles/Celtic/085-celtic-subset-walk/MIDI/085-celtic-subset-walk.mid",
+  "standard_failures": [
+    "std6_index: index.html missing"
+  ],
+  "redesign_required": true,
+  "source_identity": {
+    "key": "Ab major",
+    "bpm": 96,
+    "form": "6 sections x 4 bars = 24 bars",
+    "sections": [
+      "Intro",
+      "ReelA",
+      "ReelB",
+      "Lift",
+      "ReelA2",
+      "Outro"
+    ],
+    "method": "ABS-002 Subset Walker + ABS-001 tension curve + method-006 cadence close",
+    "voices": [
+      "Marimba",
+      "French Horn",
+      "Cello",
+      "Violin",
+      "Bassoon",
+      "Double Bass",
+      "Drums"
+    ]
+  },
+  "audit_numbers": {
+    "n_voice_tracks": 7,
+    "track_lengths": [
+      46080,
+      46080,
+      46080,
+      46080,
+      46080,
+      46080,
+      46080
+    ],
+    "channels": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      9
+    ],
+    "pitched_onsets": 672,
+    "off_grid_count": 0,
+    "scale_violations": 0
+  },
+  "audit_utc": "2026-09-24T01:05:43.718014+00:00"
+}

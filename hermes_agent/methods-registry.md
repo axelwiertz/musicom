@@ -120,6 +120,7 @@ Status: `implemented` = in sound/ package · `partial` = some pieces exist · `r
 | SP-086 | Rule-Based Melody Harmony Writer with Voice Leading (HarmonyKeen-style) | implemented | sound/generators/harmony_writer.py |
 | SP-090 | 3-Band Orbital Stereo Sculptor / AutoPanner (SoundGhost Orbit-style) | implemented | sound/effects/orbit_sculptor.py |
 | SP-091 | Physics-Based Delta-Sigma Converter Saturation & Circuit Strain (Mixland Grey Matter-style) | implemented | sound/effects/delta_sigma_saturator.py |
+| SP-092 | 6-Band Multiband Saturator w/ 15 Selectable Algorithms & Per-Band M/S Routing (Kreuzberg Audio Oberton-style) | implemented | sound/effects/multiband_saturator.py |
 
 ## Mastering (from MusicTech workflow)
 

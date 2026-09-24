@@ -167,6 +167,8 @@ SP_METHODS = {
     # 2026-09-21 scan
     "SP-090": ("sound.effects.orbit_sculptor", "3-Band Orbital Stereo Sculptor / AutoPanner (SoundGhost Orbit-style)"),
     "SP-091": ("sound.effects.delta_sigma_saturator", "Physics-Based Delta-Sigma Converter Saturation & Circuit Strain (Mixland Grey Matter-style)"),
+    # 2026-09-24 scan
+    "SP-092": ("sound.effects.multiband_saturator", "6-Band Multiband Saturator w/ 15 Selectable Algorithms & Per-Band M/S Routing (Kreuzberg Audio Oberton-style)"),
 }
 
 

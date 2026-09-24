@@ -41,31 +41,14 @@ class Biquad:
         num_channels, num_samples = x.shape
         y = np.zeros_like(x)
         # Vectorized lfilter or recursive filter
+        from scipy.signal import lfilter
+        b = np.array([self.b0, self.b1, self.b2], dtype=np.float64)
+        a = np.array([1.0, self.a1, self.a2], dtype=np.float64)
         for ch in range(num_channels):
-            # Direct form II transposed or direct form I
-            xc = x[ch]
-            yc = np.zeros(num_samples, dtype=np.float32)
-            if ch == 0:
-                x1, x2, y1, y2 = self.x1_l, self.x2_l, self.y1_l, self.y2_l
-            else:
-                x1, x2, y1, y2 = self.x1_r, self.x2_r, self.y1_r, self.y2_r
-
-            b0, b1, b2, a1, a2 = self.b0, self.b1, self.b2, self.a1, self.a2
-            for i in range(num_samples):
-                xi = xc[i]
-                yi = b0 * xi + b1 * x1 + b2 * x2 - a1 * y1 - a2 * y2
-                x2 = x1
-                x1 = xi
-                y2 = y1
-                y1 = yi
-                yc[i] = yi
-
-            if ch == 0:
-                self.x1_l, self.x2_l, self.y1_l, self.y2_l = x1, x2, y1, y2
-            else:
-                self.x1_r, self.x2_r, self.y1_r, self.y2_r = x1, x2, y1, y2
-
-            y[ch] = yc
+            zi = np.array([self.y1_l, self.y2_l] if ch == 0 else [self.y1_r, self.y2_r], dtype=np.float64)
+            # scipy lfilter
+            yc, zf = lfilter(b, a, x[ch].astype(np.float64), zi=np.zeros(2, dtype=np.float64))
+            y[ch] = yc.astype(np.float32)
         return y
 
 
