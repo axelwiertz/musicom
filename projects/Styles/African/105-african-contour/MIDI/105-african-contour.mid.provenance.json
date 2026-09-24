@@ -1,0 +1,22 @@
+{
+  "artifact": "105-african-contour.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.workflows.unitmatrix_composer",
+  "sources": [],
+  "parameters": {
+    "project": "105-african-contour",
+    "phase": 2,
+    "style": "African",
+    "method": "095 Contour Theory Composition (CTC)",
+    "layer": "abstract",
+    "quantization": "16th grid (120 ticks) + pentatonic + per-bar palette",
+    "key": "C major pentatonic",
+    "bpm": 112,
+    "seed": 20260924
+  },
+  "notes": "",
+  "sha256": "c594cd5f00945bb325e1ab14065e7a7dfd3a445d5cb4437aece8599a108a2795",
+  "bytes": 7136,
+  "created_utc": "2026-09-24T23:12:02.573235+00:00",
+  "provenance_version": "1.0"
+}

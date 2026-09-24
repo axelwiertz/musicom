@@ -1,0 +1,17 @@
+{
+  "artifact": "105-african-contour.wav",
+  "classification": "ai-assisted",
+  "generator": "musicom.sound.render.fluidsynth",
+  "sources": [],
+  "parameters": {
+    "project": "105-african-contour",
+    "format": "wav",
+    "soundfont": "FluidR3_GM.sf2",
+    "source_midi": "105-african-contour.mid"
+  },
+  "notes": "",
+  "sha256": "908a0f6f1543f3ff84a6646aa505692c9089c99d2a2fa85ec2dac611b06c0792",
+  "bytes": 10087980,
+  "created_utc": "2026-09-24T23:13:00.451043+00:00",
+  "provenance_version": "1.0"
+}

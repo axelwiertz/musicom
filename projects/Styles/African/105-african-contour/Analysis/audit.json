@@ -1,0 +1,107 @@
+{
+  "project": "105-african-contour",
+  "audit": {
+    "phase1": {
+      "n_tracks": 1,
+      "lengths": [
+        46080
+      ],
+      "zero_drift": true,
+      "total_notes": 160,
+      "pitched_onsets": 160,
+      "off_grid_16": 159,
+      "off_grid_8": 160,
+      "out_of_scale": 40,
+      "out_of_chord": 70,
+      "tracks": [
+        {
+          "name": "track0",
+          "channel": 0,
+          "length": 46080,
+          "notes": 160,
+          "off16": 159,
+          "off8": 160,
+          "out_of_scale": 40,
+          "out_of_chord": 70
+        }
+      ]
+    },
+    "phase2": {
+      "n_tracks": 5,
+      "lengths": [
+        46080,
+        46080,
+        46080,
+        46080,
+        46080
+      ],
+      "zero_drift": true,
+      "total_notes": 856,
+      "pitched_onsets": 424,
+      "off_grid_16": 0,
+      "off_grid_8": 216,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "tracks": [
+        {
+          "name": "track0",
+          "channel": 0,
+          "length": 46080,
+          "notes": 160,
+          "off16": 0,
+          "off8": 96,
+          "out_of_scale": 0,
+          "out_of_chord": 0
+        },
+        {
+          "name": "track1",
+          "channel": 1,
+          "length": 46080,
+          "notes": 72,
+          "off16": 0,
+          "off8": 24,
+          "out_of_scale": 0,
+          "out_of_chord": 0
+        },
+        {
+          "name": "track2",
+          "channel": 2,
+          "length": 46080,
+          "notes": 144,
+          "off16": 0,
+          "off8": 48,
+          "out_of_scale": 0,
+          "out_of_chord": 0
+        },
+        {
+          "name": "track3",
+          "channel": 3,
+          "length": 46080,
+          "notes": 48,
+          "off16": 0,
+          "off8": 0,
+          "out_of_scale": 0,
+          "out_of_chord": 0
+        },
+        {
+          "name": "track4",
+          "channel": 9,
+          "length": 46080,
+          "notes": 432,
+          "off16": 0,
+          "off8": 48,
+          "out_of_scale": 0,
+          "out_of_chord": 0
+        }
+      ]
+    }
+  },
+  "sizes": {
+    "105-african-contour.mid": 7136,
+    "105-african-contour-phase1.mid": 1445,
+    "105-african-contour-phase1.ogg": 1084422,
+    "105-african-contour-phase1.wav": 10093612,
+    "105-african-contour.ogg": 1124914,
+    "105-african-contour.wav": 10087980
+  }
+}

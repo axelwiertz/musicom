@@ -1,0 +1,18 @@
+{
+  "artifact": "105-african-contour.ogg",
+  "classification": "ai-assisted",
+  "generator": "ffmpeg libopus",
+  "sources": [],
+  "parameters": {
+    "project": "105-african-contour",
+    "format": "ogg",
+    "codec": "libopus",
+    "bitrate": "128k",
+    "source_midi": "105-african-contour.mid"
+  },
+  "notes": "",
+  "sha256": "bc5998d7995719244a43016c7e248a1f981d9af90544fdc2b86d633a31fb5f40",
+  "bytes": 1124914,
+  "created_utc": "2026-09-24T23:13:00.452670+00:00",
+  "provenance_version": "1.0"
+}

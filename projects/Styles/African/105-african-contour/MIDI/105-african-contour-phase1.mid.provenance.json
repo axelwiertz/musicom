@@ -1,0 +1,31 @@
+{
+  "artifact": "105-african-contour-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.workflows.unitmatrix_composer",
+  "sources": [],
+  "parameters": {
+    "project": "105-african-contour",
+    "phase": 1,
+    "style": "African",
+    "method": "095 Contour Theory Composition (CTC)",
+    "layer": "abstract",
+    "contour_vocabulary": [
+      "arch",
+      "chaos",
+      "falling",
+      "oscillate",
+      "rising",
+      "valley"
+    ],
+    "raw_realization": "whole-tone (rank -> base + 2*rank)",
+    "raw_timing": "off-grid (16th +-30 tick jitter)",
+    "key": "C major pentatonic",
+    "bpm": 112,
+    "seed": 20260924
+  },
+  "notes": "",
+  "sha256": "0a45386edbd6e5697e9236296cfc999c4e5b739228e4b4e4194ac779e06ce8e0",
+  "bytes": 1445,
+  "created_utc": "2026-09-24T23:12:02.527881+00:00",
+  "provenance_version": "1.0"
+}
