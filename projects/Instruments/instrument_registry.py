@@ -52,12 +52,14 @@ _INSTRUMENT_MODULES = {
     "Percussion.steel_drums.steel_drums": "steel_drums",
     "Percussion.vibraphone.vibraphone": "vibraphone",
     "Percussion.glockenspiel.glockenspiel": "glockenspiel",
+    "Keys.accordion.accordion": "accordion",
     "World.sitar.sitar": "sitar",
     "World.koto.koto": "koto",
     "World.shamisen.shamisen": "shamisen",
     "World.kalimba.kalimba": "kalimba",
     "World.banjo.banjo": "banjo",
     "Woodwind.bagpipe.bagpipe": "bagpipe",
+    "Woodwind.harmonica.harmonica": "harmonica",
     "World.shenai.shenai": "shenai",
     "World.fiddle.fiddle": "fiddle",
     "Percussion.timpani.timpani": "timpani",
@@ -197,6 +199,7 @@ ORGAN = ALL_INSTRUMENTS["organ"]
 DULCIMER = ALL_INSTRUMENTS["dulcimer"]
 HARPSICHORD = ALL_INSTRUMENTS["harpsichord"]
 CELESTA = ALL_INSTRUMENTS["celesta"]
+ACCORDION = ALL_INSTRUMENTS["accordion"]
 TRUMPET = ALL_INSTRUMENTS["trumpet"]
 TROMBONE = ALL_INSTRUMENTS["trombone"]
 FRENCH_HORN = ALL_INSTRUMENTS["french_horn"]
@@ -218,6 +221,7 @@ SHAMISEN = ALL_INSTRUMENTS["shamisen"]
 KALIMBA = ALL_INSTRUMENTS["kalimba"]
 BANJO = ALL_INSTRUMENTS["banjo"]
 BAGPIPE = ALL_INSTRUMENTS["bagpipe"]
+HARMONICA = ALL_INSTRUMENTS["harmonica"]
 SHENAI = ALL_INSTRUMENTS["shenai"]
 FIDDLE = ALL_INSTRUMENTS["fiddle"]
 TIMPANI = ALL_INSTRUMENTS["timpani"]
@@ -289,6 +293,8 @@ def registry_table():
             role = "harmony, continuo, melody, ornament, countermelody, accent"
         elif low == "celesta":
             role = "lead, melody, ornament, arpeggio, countermelody, accent"
+        elif low == "accordion":
+            role = "harmony, melody, bass, rhythm, ornament"
         elif low == "english horn":
             role = "lead, countermelody, melody, harmony, accent"
         elif low == "drum kit":
@@ -372,6 +378,10 @@ if __name__ == "__main__":
     print("  by_name('bagpipe') =", by_name("bagpipe"))
     print("  by_program(109) =", by_program(109))
     print("  BAGPIPE.in_sweet_spot(62) =", BAGPIPE.in_sweet_spot(62))
+    print("  HARMONICA.midi_program =", HARMONICA.midi_program, "(should be 22)")
+    print("  by_name('harmonica') =", by_name("harmonica"))
+    print("  by_program(22) =", by_program(22))
+    print("  HARMONICA.in_sweet_spot(69) =", HARMONICA.in_sweet_spot(69))
     print("  STEEL_DRUMS.midi_program =", STEEL_DRUMS.midi_program, "(should be 114)")
     print("  by_name('steel drums') =", by_name("steel drums"))
     print("  by_program(114) =", by_program(114))
@@ -418,6 +428,10 @@ if __name__ == "__main__":
     print("  by_name('celesta') =", by_name("celesta"))
     print("  by_program(8) =", by_program(8))
     print("  CELESTA.in_sweet_spot(84) =", CELESTA.in_sweet_spot(84))
+    print("  ACCORDION.midi_program =", ACCORDION.midi_program, "(should be 21)")
+    print("  by_name('accordion') =", by_name("accordion"))
+    print("  by_program(21) =", by_program(21))
+    print("  ACCORDION.in_sweet_spot(69) =", ACCORDION.in_sweet_spot(69))
     print("  ENGLISH_HORN.midi_program =", ENGLISH_HORN.midi_program, "(should be 69)")
     print("  by_name('english horn') =", by_name("english horn"))
     print("  by_program(69) =", by_program(69))

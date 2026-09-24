@@ -101,7 +101,8 @@ Classification of active Musicom composition methods categorized by their primar
 | **091** | concrete | Coxeter–Conway Frieze Pattern Composition (CCFPC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Weak (Cluster-algebraic) | Grid-Locked | Macro / Polygon Period | $\mathcal{O}(w \cdot n)$ generation, $\mathcal{O}(1)$ step | Generates polyphonic pitch, rhythm, and chord voicings from positive integer frieze patterns of unimodular $SL_2(\mathbb{Z})$ diamond lattices ($bc - ad = 1$) bounded by rows of 1s, classified bijectively by Conway–Coxeter triangulations of convex $(n+1)$-gons. Rows = voices/polyphonic strata (quiddity row = voice 1, interior cluster depths = inner voices); columns = temporal metric pulses; glide-reflection symmetry ($180^\circ$ rotation + $(n+1)/2$ shift) enforces exact inverted and phase-shifted polyphonic canon relationships. Unimodular determinant constraint prohibits parallel collapse and harmonic drift; macro-form develops via Ptolemy diagonal flips (cluster algebra mutations) across section boundaries. Integrable combinatorial counterpart to 083 quasicrystal / 088 Voronoi and deterministic foil to 021 CA / 033 WFCGS. |
 | **092** | concrete | Diffusion-Limited Aggregation Fractal Growth (DLACG) | **Nature-Led** | Pitch, Rhythm, Harmony, Structure, Texture | Weak (Cluster-boundary guided) | Grid-Locked / Continuous | Meso / Cluster Topology | $\mathcal{O}(N \cdot K)$ walk, $\mathcal{O}(1)$ stick | Generates dendritic polyphony, rhythmic bursts, and harmonic chord arborescences from 2D Brownian particles diffusing until sticking to seed anchors ($D_f \approx 1.71$). Branch depth = structural hierarchy; harmonic measure screening leaves internal rests (fjords) and concentrates note activity on outer tips (melodic climaxes); tree branches partition into independent UnitMatrix voice rows. Spatial connectivity prevents harmonic drift; seed schedules guide macro-form across section boundaries. Nature-led fractal growth counterpart to 048 RBMPD / 049 IFSMG and physical foil to 088 VTEP / 030 RDTP. |
 | **093** | concrete | Percolation Process Network Criticality (PPNC) | **Nature-Led** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Critical-connectivity) | Grid-Locked / Continuous | Meso / Cluster Lattice | $\mathcal{O}(V \cdot T)$ direct, $\mathcal{O}(N \alpha(N))$ DSU | Composes via site/bond percolation on a spatio-temporal UnitMatrix lattice $\mathcal{V} \times \mathcal{T}$ near the geometric percolation threshold $p \approx p_c$. Subcritical $p < p_c$ yields sparse pointillistic motifs; critical $p \approx p_c$ yields fractal spanning clusters balancing melodic continuity and rhythmic syncopation; supercritical $p > p_c$ yields dense chordal masses. Connected clusters define motivic phrases, and directed percolation enforces temporal causality. Phase-transition counterpart to 078 IMEC / 082 RBNCC and network-connectivity sibling of 035 PPTNO / 092 DLACG. |
-| **094** | concrete | Apollonian Circle Packing Composition (ACPC) | **Nature-Led** | Pitch, Rhythm, Harmony, Structure, Texture | Strict (Descartes-quadruple consonance) | Grid-Locked / Continuous | Meso / Apollonian Tree | $\mathcal{O}(3^D)$ tree, $\mathcal{O}(1)$ step | Composes polyphony and fractal rhythmic durations from recursive integral Apollonian circle packings governed by Descartes' theorem $(k_1+k_2+k_3+k_4)^2 = 2\sum k_i^2$ and Apollonian group reflections $S_i \in GL(4, \mathbb{Z})$. Curvatures $k_i \in \mathbb{Z}^+$ map logarithmically/modally to pitch; radii $r_i = 1/k_i$ govern self-similar fractal note durations ($D_f \approx 1.3057$); mutually tangent quadruples form consonant 4-voice chords with parsimonious single-voice voice-leading pivots ($k_i' = 2\sum_{j \neq i} k_j - k_i$). Geometric packing counterpart to 088 VTEP / 092 DLACG and number-theoretic cousin of 069 CWCC / 091 CCFPC. |
+|| **094** | concrete | Apollonian Circle Packing Composition (ACPC) | **Nature-Led** | Pitch, Rhythm, Harmony, Structure, Texture | Strict (Descartes-quadruple consonance) | Grid-Locked / Continuous | Meso / Apollonian Tree | $\mathcal{O}(3^D)$ tree, $\mathcal{O}(1)$ step | Composes polyphony and fractal rhythmic durations from recursive integral Apollonian circle packings governed by Descartes' theorem $(k_1+k_2+k_3+k_4)^2 = 2\sum k_i^2$ and Apollonian group reflections $S_i \in GL(4, \mathbb{Z})$. Curvatures $k_i \in \mathbb{Z}^+$ map logarithmically/modally to pitch; radii $r_i = 1/k_i$ govern self-similar fractal note durations ($D_f \approx 1.3057$); mutually tangent quadruples form consonant 4-voice chords with parsimonious single-voice voice-leading pivots ($k_i' = 2\sum_{j \neq i} k_j - k_i$). Geometric packing counterpart to 088 VTEP / 092 DLACG and number-theoretic cousin of 069 CWCC / 091 CCFPC. |
+|| **095** | abstract | Contour Theory Composition (CTC) | **Rules-Based** | Pitch, Rhythm, Structure, Texture | None (Contour-shape-defined) | Grid-Locked / Continuous | Meso / Contour Segment | $\mathcal{O}(N^2)$ segment gen, $\mathcal{O}(N \log N)$ real | Generates abstract contour prototypes (CAS/CSeg classes) independent of exact pitch — the shape of a melody as a sequence of up/down/same relations. ContourNetwork maps via I/R/RI transformations; concrete layer maps rank → scale degree. First abstract-layer method: feeds rules/subset_network.py. |
 # Sound Production Methods Framework
 
 Sound production translates symbolic MIDI UnitMatrix data into final acoustic air pressure. Methods are categorized by execution layer: **Hardware/Acoustic Integration**, **Synthesis Engines**, or **Post-Processing / DSP**.
@@ -188,7 +189,8 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 | **SP-088** | Jiles–Atherton Magnetic Tape Saturation Synthesis (JAMS) | **Post-Processing / DSP** | Analog Tape Saturation / Magnetic Hysteresis Coloration | Integrates the Jiles–Atherton ferromagnetic hysteresis ODE ($dM/dH_e$ with Langevin anhysteretic $\coth(u)-1/u$, domain pinning $a$, coupling $\alpha$, coercivity $k$, reversibility $c$) per sample against the head field $H_e=\alpha M+H$, so compression, slope-dependent harmonics, NAB head bump, gap loss, and asperity noise emerge from domain physics with real memory (hysteresis state carries across section joins). Feasible ~25 kHz HF bias, singularity-clamped, no oversampling/ADAA needed. Candidate: `sound/effects/tape_saturation.py`. |
 | **SP-089** | TR-808 Analog Cymbal Physical-Circuit Synthesis (TACS) | **Synthesis Engines** | Circuit-Faithful Analog Metallic Cymbal / Multi-Band Percussion Timbre | Synthesizes the TR-808 cymbal voice via its circuit topology: six Schmitt-trigger square-wave oscillators summed into dual active bandpass filters (~3.4 kHz and ~7.1 kHz), gated by three swing-type non-linear transistor VCAs with RC envelope generators, shaped by Sallen-Key highpass filters and an interconnected passive tone stage with a $+6\text{ dB/oct}$ differentiator buffer. Deterministic metallic sheen without sampling; $\mathcal{O}(1)$ per sample. Candidate: `sound/synthesis/drum_synth_808.py`. |
 | **SP-092** | Scalar Auxiliary Variable Nonlinear String Synthesis (SAV-NSS) | **Synthesis Engines** | Geometrically Exact Nonlinear String / Plucked Acoustic Timbre | Solves large-amplitude nonlinear string vibration coupled to bridge compliance via Scalar Auxiliary Variable (SAV) quadratisation: explicit non-iterative time-stepping via two sequential Sherman–Morrison rank-one updates in $\mathcal{O}(M+J)$ operations with servo drift regulation. Dynamic pitch glide, spectral enrichment, and measured guitar body radiation without matrix inversions. Candidate: `sound/synthesis/sav_string.py`. |
-| **SP-093** | Phase-Aligned Formant Synthesis (PAF) | **Synthesis Engines** | Formant Vocal, Brass & Resonant Timbres | Generates precise, independent formant center frequencies and bandwidths via waveshaped pulse-train modulation of a two-cosine carrier: $x[n]=g(b|\sin(\omega_0 n/2)|)[(1-q)\cos(k\omega_0 n)+q\cos((k+1)\omega_0 n)]$. Formant center $(k+q)f_0$ and Gaussian/Cauchy bandwidth $b$ decouple pitch from timbre without filters; phase alignment allows coherent additive multi-formant superposition. $\mathcal{O}(1)$ per sample. Candidate: `sound/synthesis/paf.py`. |
+|| **SP-093** | Phase-Aligned Formant Synthesis (PAF) | **Synthesis Engines** | Formant Vocal, Brass & Resonant Timbres | Generates precise, independent formant center frequencies and bandwidths via waveshaped pulse-train modulation of a two-cosine carrier: $x[n]=g(b|\sin(\omega_0 n/2)|)[(1-q)\cos(k\omega_0 n)+q\cos((k+1)\omega_0 n)]$. Formant center $(k+q)f_0$ and Gaussian/Cauchy bandwidth $b$ decouple pitch from timbre without filters; phase alignment allows coherent additive multi-formant superposition. $\mathcal{O}(1)$ per sample. Candidate: `sound/synthesis/paf.py`. |
+|| **SP-094** | Through-Zero Frequency Modulation Synthesis (TZFM) | **Synthesis Engines** | Pitch-Stable Extreme FM / Glassy Digital & Brass Timbres | Modulates carrier frequency with depth sufficient to drive the instantaneous frequency below zero, reversing the phase accumulator direction instead of stalling at 0 Hz. TZFM preserves the carrier pitch $f_c$ exactly regardless of modulation depth $d$ via bidirectional phase accumulation, enabling arbitrarily high modulation indices with zero DC drift. Produces glassy, brassy, and complex bell spectra at extreme depths where conventional FM would detune. $\mathcal{O}(1)$ per sample. Candidate: `sound/synthesis/tzfm.py`. |
 |---|
 
 
@@ -19934,3 +19936,322 @@ def render_paf_voice(events, sr=44100, bpm=120, ticks_per_beat=480, formants=((8
 - Puckette, M. (1995). "Formant-based audio synthesis using nonlinear distortion." *Journal of the Audio Engineering Society*, 43(1–2), 40–47.
 - Puckette, M. (2006). *The Theory and Technique of Electronic Music*. World Scientific Publishing Co., Chapter 6: Designer Spectra (Phase-Aligned Formant Generator).
 - Roads, C. (1996). *The Computer Music Tutorial*. MIT Press.
+---
+### Method 095 — Contour Theory Composition (CTC)
+**Paradigm**: Rules-Based
+**Layer**: abstract
+
+| Attribute | Value |
+|:---|:---|
+| **Method ID** | **095** |
+| **Method Name** | Contour Theory Composition |
+| **Acronym** | CTC |
+| **Paradigm** | Rules-Based |
+| **Layer** | abstract |
+| **Primary Elements** | Pitch, Rhythm, Structure, Texture |
+| **Tonal Gravity** | None (Contour-shape-defined) |
+| **Metric Binding** | Grid-Locked / Continuous |
+| **Memory Depth** | Meso / Contour Segment |
+| **Time Complexity** | $\mathcal{O}(N^2)$ segment generation, $\mathcal{O}(N \log N)$ contour realization |
+| **Description** | Generates abstract contour prototypes (CAS/CSeg classes) independent of exact pitch classes, then maps them onto concrete scale degrees in the concrete layer. Contour = the shape of a melody/rhythm as a sequence of up/down/same relations. |
+
+### Source
+
+- Friedmann, M. L. (1985). "A Methodology for the Discussion of Contour: Its Application to Schoenberg's Music." *Journal of Music Theory*, 29(2), 223–248.
+- Marvin, E. W. & Laprade, P. A. (1987). "Relating Musical Contours: Extensions of a Theory for Contour." *Journal of Music Theory*, 31(2), 225–267.
+- Morris, R. D. (1993). "New Directions in the Theory and Analysis of Musical Contour." *Music Theory Spectrum*, 15(2), 205–228.
+- Quinn, I. (1997). "Fuzzy Extensions to the Theory of Contour." *Music Theory Spectrum*, 19(2), 232–263.
+- Quinn, I. (1999). "The Combinatorial Model of Pitch Contour." *Music Perception*, 16(4), 439–456.
+- Sampaio, M. S. (2018). "Contour Similarity Algorithms." *MusMat*, II(2), 49–75.
+- Carter-Ényì, A. (2016). "Contour Recursion and Auto-Segmentation." *Music Theory Online*, 22(1).
+
+### Layer
+
+**Abstract** — CTC operates entirely in the abstract layer: it designs pure contour-shape sequences (pitch-direction patterns, combinatorial contour matrices) that are transposition- and interval-invariant. The output is a set of contour prototypes and a ContourNetwork (CAS → contour class → transformation graph) that feeds the concrete layer via `rules/subset_network.py`-style integration. No concrete pitch/velocity events are generated at this layer.
+
+### Description
+
+Contour Theory Composition (CTC) treats the **shape** of a musical line as the primary compositional parameter, decoupled from exact pitch-class content. The method is built on the following hierarchy:
+
+1. **Contour Point (CP)** — a pitch ordered in time, abstracted as its rank in a set of points (e.g., in a 4-note figure the highest pitch is 3, lowest is 0).
+2. **Comparison Function** — `CMP(a, b) =` `+` if b > a, `-` if b < a, `0` if b = a.
+3. **Contour Adjacency Series (CAS)** — a string of `+`, `-`, `0` symbols encoding only the direction between *adjacent* points. Example: `< + - + + - >`.
+4. **Combinatorial Contour** — the full upper-triangular comparison matrix encoding all *pairwise* relations (adjacent and non-adjacent). Two contours with the same matrix belong to the same **contour class**.
+5. **Contour Class** — equivalence class under renormalization (translation of pitch ranks to {0, 1, ..., n-1}), inversion, retrograde, and retrograde-inversion. The combinatorial matrix is invariant under transposition.
+6. **Contour Segment (CSeg)** — a normalized sequence of contour ranks. Example: CSeg `<0 2 1 3>` means the second point is highest, third is second-highest, fourth is highest, etc.
+7. **Contour Reduction (Morris 1993)** — an algorithm that extracts the structural skeleton of a contour by removing points that are "embellishing" (non-essential to the large-scale shape), analogous to Schenkerian reduction but operating on pure shape.
+
+The CTC method composes as follows:
+
+**Phase A — Abstract Design (this layer)**:
+1. Define a **ContourVocabulary** — a library of CSeg prototypes (e.g., `<0 1 2>` = ascending, `<0 2 1 3>` = arch, `<0 1 3 2>` = twist, `<0 3 1 2>` = leap-and-fill).
+2. Construct a **ContourNetwork** — a graph where nodes are CSeg classes and edges are contour transformations (I, R, RI, Morris reduction, Quinn fuzzy embedding). The network encodes how one contour can be derived from another.
+3. Choose a **CAS template** for each section of the piece — a string of `+`/`-`/`0` of length N that defines the large-scale directional profile of that section. Template selection can follow an arc (many + = rising section, many - = falling, alternation = stable oscillation).
+4. Generate a **contour-tension curve** from the CAS: count directional changes (peaks = high tension), max-run length (sustained rise = building tension), CAS entropy (chaotic = unstable).
+5. Output for the concrete layer: a **ContourProgression** — a sequence of `(CSeg_k, section_id, voice_id, transformation)` tuples that specify what shape each voice should play in each section.
+
+**Phase B — Concrete Realization (separate method)**:
+The concrete layer takes each CSeg and maps its ranked points {0, 1, ..., n-1} onto scale degrees within the section's key, then fills UnitMatrix cells with MusicEvents.
+
+### Musical Elements Framework
+
+- **PITCH**: Contour classes abstract pitch entirely. Only relative order matters. In realization, contour rank → scale degree (e.g., CSeg `<0 2 1 3>` in C major could map to pitches C–G–E–G'). The abstraction means the *same* contour can be realized in any key, mode, or register without changing the shape.
+- **RHYTHM**: A CAS can encode rhythmic direction too: `+` = longer/louder, `-` = shorter/softer. Alternatively, a separate rhythmic contour layer can drive note durations (the "durational contour": long→short→medium).
+- **HARMONY**: Contour polyphony emerges from aligning multiple CSegs vertically. The simultaneous turning points (all voices rising = tutti crescendo, contrary motion = textural stability) define harmonic density without pitch-class content.
+- **STRUCTURE**: The macro-form is a sequence of CAS templates per section, optionally with Morris contour reduction producing a multi-level structural skeleton (reduced contour at the section level, elaborated at the phrase level).
+- **TEXTURE**: Contour density (number of directional changes per unit time) drives textural complexity. A smooth, mostly-ascending CAS (few direction changes) produces legato, lyrical texture; a jagged CAS (frequent changes) produces angular, pointillistic texture. Parallel vs. contrary motion across voices is controlled by comparing CSeg transformation choices per voice.
+
+### UnitMatrix Integration (Voices & Sections)
+
+Each **voice** (row) gets its own ContourSequence — a list of CSeg assignments per section. The **section** (column) provides the scale/mode onto which contour ranks are mapped. The abstract ContourProgression looks like:
+
+```
+Section A (C major, 4 bars):
+  Voice 1 (Lead):  CSeg <0 2 1 3>  CSeg <0 1 2 3>  CSeg <0 3 1 2>  CSeg <0 2 3 1>
+  Voice 2 (Harmony): I(CSeg <0 2 1 3>)  R(CSeg <0 1 2 3>)  RI(CSeg <0 3 1 2>)  CSeg <0 1 2 3>
+  Voice 3 (Bass):    CSeg <0 3 2 1>  CSeg <0 2 1 3>  CSeg <0 1 2 3>  CSeg <0 3 2 1>
+```
+
+The concrete layer then fills each UnitMatrix cell with a MusicUnit whose pitch sequence is the rank→scale-degree mapping of the CSeg, and whose durations follow the durational contour associated with the CAS.
+
+### Pitfalls
+
+1. **Contour equivalence is too loose**: Two contours that sound very different can share the same combinatorial matrix if they have the same rank order but different interval sizes. The method must be paired with a concrete-layer interval filter (e.g., "never map rank 0→rank 1 to a leap > an octave").
+2. **Rhythmic contour coupling**: If the same CAS drives both pitch direction and durational contour, the two may lock into unmusical 1:1 correlation. Recommend independent CAS strings for pitch and rhythm.
+3. **CSeg length constraints**: Short CSegs (3–5 points) are easy to hear as motivic shapes; long CSegs (8+ points) lose perceptual contour coherence (Miller's law: ~7±2 chunks). Prefer CSegs of length 3–7 for motivic material, using contour reduction to compress longer lines.
+4. **Scale mapping ambiguity**: Mapping contour rank 0→tonic (1) and rank n-1→dominant (5) works for 3-note CSegs but breaks for 5+ note CSegs where the scale only has 7 degrees. Use chromatic passing tones or modal mixture for intermediate ranks.
+5. **No built-in tonal gravity**: CTC generates pure shapes with no inherent tonal function. Tonal gravity must be added by the concrete layer (e.g., anchoring rank 0 to the tonic and rank n-1 to the dominant or leading tone).
+6. **Similar methods**: CTC complements 081 NIRMC (which generates expectations from intervals at the concrete layer) by operating a layer up — CTC decides the shape, NIRMC decides the interval-level realization.
+
+# Sound Production Method SP-094 — Through-Zero Frequency Modulation Synthesis (TZFM)
+
+### Source
+Introduced as a practical analog technique by David A. Jaffe and Julius O. Smith (1983, "Extensions of the Karplus-Strong Plucked-String Algorithm," *CMJ* 7(2)). Modern digital TZFM formalized by Chowning (1973, continued) and later by the Yamaha FS1R (1998). Key references: Miller Puckette, *The Theory and Technique of Electronic Music* (2006), Ch. 5 ("Frequency Modulation"); T. H. Park, *Introduction to Digital Signal Processing* (2010); F. R. Moore, "Table Lookup Noise for Sinusoidal Digital Oscillators" (1975, *Computer Music Journal*). Hardware implementations: Endorphin.es Furthrrrr Generator, Intellijel Rubicon 2, Instruo Cs-L, Verbos Complex Oscillator. Candidate code path: `sound/synthesis/tzfm.py`, pluggable into `workflows.musicom_workflow.produce(method="SP-094")`.
+
+### Layer
+`absolute` (sound production — synthesis engines; maps symbolic note events with carrier-modulator frequency ratios and modulation depth into continuous time-domain audio buffers via phase-accumulator reversal). Candidate code path: `sound/synthesis/tzfm.py`.
+
+### Description
+Through-Zero Frequency Modulation (TZFM) synthesizes sound by modulating the instantaneous frequency of a carrier oscillator with a modulator signal, where the modulation depth is allowed to drive the carrier's instantaneous frequency *below zero Hz*, causing the carrier's phase accumulator to reverse direction (run backward). This is the key distinction from conventional linear FM: when a standard linear FM oscillator encounters a negative instantaneous frequency, its phase accumulator stalls or clamps at zero, introducing a DC offset that causes audible pitch drift. TZFM avoids this by permitting bidirectional phase accumulation, preserving zero-mean frequency deviation and thus maintaining stable pitch at the carrier's center frequency regardless of modulation depth.
+
+TZFM produces richer, brighter, and more "glassy" spectra than conventional linear FM at equivalent depth settings because: (1) phase reversal creates time-reversed waveform segments that introduce additional spectral energy, (2) the modulation index can be pushed arbitrarily high without pitch shift, and (3) the spectrum folds back on itself in a controlled, harmonically related way rather than producing uncorrelated noise. This makes TZFM the preferred FM variant for brass, bell, vocal formant, and "liquid" digital timbres where extreme modulation depth with pitch stability is required.
+
+### Technical Mechanics
+
+#### 1. Standard Linear FM (Non-TZ) Phase Accumulator
+
+A conventional digital oscillator computes the next phase sample as:
+
+$$ \phi[n+1] = \phi[n] + \Delta\phi[n] \pmod{1.0} $$
+
+where the per-sample phase increment is derived from the instantaneous frequency:
+
+$$ \Delta\phi[n] = \frac{f_c + d \cdot m[n]}{f_s} $$
+
+and:
+- $f_c$ = carrier center frequency (Hz)
+- $d$ = modulation depth (Hz/V or Hz/unit)
+- $m[n]$ = modulator signal at sample $n$ (dimensionless, typically [-1, 1])
+- $f_s$ = sampling rate (Hz)
+
+The modulo operation $\pmod{1.0}$ drops the sign when $\Delta\phi[n] < 0$, because in IEEE float or integer wrap, $(-0.3) \bmod 1.0 = 0.7$ — effectively reversing the direction of accumulation back to forward. The result: when the modulator pushes $f_c + d \cdot m[n] < 0$, the oscillator **stalls** — its instantaneous frequency clamps at a positive value (the phase still moves forward, just more slowly), a DC offset builds up, and the perceived pitch shifts upward from the intended $f_c$.
+
+#### 2. TZFM Phase Accumulator (Bidirectional)
+
+TZFM removes the modulo-induced sign erasure by accumulating the signed phase increment directly, using a full-range phase variable $\theta[n] \in \mathbb{R}$ (unwrapped):
+
+$$ \theta[n+1] = \theta[n] + \Delta\phi[n] $$
+
+and computing the output waveform via a **bidirectional** wavetable lookup that respects negative phase traversal:
+
+$$ y[n] = \begin{cases}
+\text{wt}\big( \lfloor \theta[n] \cdot W \rfloor \bmod W \big), & \Delta\phi[n] \ge 0 \\
+\text{wt}\big( \lfloor (1 - \theta[n] \cdot W) \rfloor \bmod W \big), & \Delta\phi[n] < 0
+\end{cases} $$
+
+where $\text{wt}[k]$ is the wavetable of length $W$. When the phase increment is negative:
+- The phase $\theta[n]$ decreases (the oscillator runs backward).
+- The table is read in reverse (or the phase is reflected via $1 - \theta[n]$), preserving the waveform shape but time-reversing it.
+- The modulo operation is still applied for table indexing, but the direction of traversal flips.
+
+An equivalent formulation uses a signed normalized phase $\psi[n] = \theta[n] \bmod 1.0$ and a direction flag:
+
+$$ \psi[n] = \big( \psi[n-1] + \Delta\phi[n-1] \big) \bmod 1.0 $$
+$$ y[n] = \text{wt}\big( \lfloor \psi[n] \cdot W \rfloor \big) $$
+
+This simpler formulation works because the modulo operation $(\psi + \Delta\phi) \bmod 1.0$ is direction-preserving for small $\Delta\phi$: when $\Delta\phi < 0$, $\psi$ **decreases** (walks backward), and the wavetable is read with descending indices. The phase still wraps at 0 and 1 boundaries in the reverse direction.
+
+#### 3. Through-Zero Condition and Pitch Stability
+
+The condition for through-zero crossing is:
+
+$$ f_c + d \cdot m[n] < 0 $$
+
+At this instant, the phase reverses. The **mean** instantaneous frequency over any interval $[n_1, n_2]$ spanning an integer number of modulator cycles is:
+
+$$ \bar{f} = f_c + d \cdot \overline{m[n]} $$
+
+If the modulator signal $m[n]$ has zero mean (true for all standard LFO/oscillator waveforms — sine, triangle, saw, pulse with 50% duty), then $\bar{f} = f_c$ exactly. This is why TZFM preserves pitch: the average frequency deviation is zero regardless of depth $d$, as long as the waveform is DC-free.
+
+#### 4. Spectral Characteristics
+
+The TZFM spectrum is conventionally described by the Bessel expansion of phase modulation:
+
+$$ y(t) = \sum_{k=-\infty}^{\infty} J_k(\beta) \cos\big( (f_c + k f_m) t \big) $$
+
+where $\beta = d / f_m$ is the modulation index. Unlike non-TZ linear FM, the Bessel expansion holds at arbitrarily high $\beta$ because the phase never stalls. The carrier amplitude $J_0(\beta)$ can vanish (first null at $\beta = 2.4048$), and the energy spreads symmetrically into sidebands at $\pm f_c \pm k f_m$ with equal total power on both sides of the carrier, maintaining a consistent average spectrum even as $\beta$ sweeps dynamically.
+
+A key advantage of TZFM is that **through-zero crossings introduce additional high-frequency content** as the waveform is effectively reflected at the zero boundary. This produces brighter spectra at high depths than clamping oscillators, more akin to the theoretical Bessel-predicted bandwidth.
+
+#### 5. Through-Zero with Non-Sinusoidal Carriers
+
+If the carrier is a non-sinusoidal waveform (saw, pulse, triangle), the TZ effect produces additional timbral modulation: when the phase reverses, the wavetable is read in reverse, which time-reverses the waveform. For symmetric waveforms (sine, triangle, even-phase pulse), reversal produces an identical shape — timbre is preserved. For asymmetric waveforms (saw, pulse < 50%), reversal produces a different shape (e.g., a falling saw becomes a rising saw), generating a doubling-like texture at each zero crossing. This is the source of the characteristic "glassy" TZFM sound with saw carriers.
+
+#### 6. Computational Complexity
+
+$$ \mathcal{O}(1) \text{ per sample per voice} $$
+
+The TZFM phase accumulator adds one sign check and one conditional branch over standard FM — negligible overhead.
+
+### Musical Elements Framework
+
+- **PITCH**: Absolute pitch stability is the defining feature of TZFM. The carrier frequency $f_c$ maps exactly to the perceived fundamental regardless of modulation depth $d$, making TZFM ideal for tonal music where FM is used as a timbre modifier rather than a percussive pitch-bend effect. Microtonal intervals and chord structures remain stable under modulation.
+- **RHYTHM**: The modulator can be an audio-rate oscillator (for spectral effects), an LFO at rhythmic subdivision frequencies (for cyclic timbral wobble), or an envelope-follower-driven signal (for dynamic accent shaping). Because TZFM preserves pitch stability, rhythmic modulation at LFO rates creates tremolo-like amplitude modulation without the pitch swoop that would accompany exponential FM.
+- **HARMONY**: The carrier-to-modulator frequency ratio $r = f_c / f_m$ determines the harmonicity of the output. Integer ratios (1:1, 2:1, 3:1, 3:2, 4:3) produce harmonic spectra suitable for tonal chords and vocal-like formants. Non-integer ratios (1:1.414, 1:2.718) produce inharmonic bell and gong spectra. TZFM's pitch stability means these ratios remain acoustically "in tune" even as the modulation depth sweeps dynamically — a critical advantage for chord voicing.
+- **STRUCTURE**: The TZFM modulation depth $d(t)$ can serve as a macro-form parameter: verse sections use low depth ($\beta \approx 0.5$, almost pure carrier), chorus sections use moderate depth ($\beta \approx 2.0$, rich sidebands), and breakdown sections sweep depth cyclically ($\beta$ from 0 to 10). The carrier-modulator ratio can be switched per section (e.g., verse = 1:1 saw bass, chorus = 3:2 brass, bridge = 1:1.618 inharmonic bell).
+- **TEXTURE**: TZFM texture spans from pure sine-like tones ($\beta \ll 1$) through bright, brassy harmonics ($\beta \approx 2$–5) to glassy, metallic, and noisy spectra ($\beta > 10$). The combination of carrier waveform choice (sine, saw, pulse, triangle) and modulator waveform (sine is standard, but triangle and pulse produce different sideband distributions) gives a rich continuous timbre palette. Feedback TZFM (where the modulator is the carrier's own output) adds spectral chaos and growling textures at high feedback gains.
+
+### UnitMatrix Integration
+
+In Musicom's UnitMatrix workflow (`Voices = rows, Sections = columns, Cells = MusicUnit`):
+
+- **Voices**: Each voice defines a TZFM voice with its own carrier waveform, modulator waveform, frequency ratio, and depth envelope. Multiple TZFM voices can be layered (e.g., Voice 1 = 1:1 sine bass, Voice 2 = 3:2 saw brass) and mixed to produce complex FM textures. The per-voice modulator can be cross-patched (Voice 1's output modulates Voice 2's frequency) for nested FM structures (up to 4 operators, as in Yamaha DX-style algorithm configurations).
+- **Sections**: Each section defines the carrier-modulator ratio $r$, initial depth $d_0$, depth envelope (attack, decay, sustain, release), and cross-patching algorithm (which operator feeds which). Section transitions change the ratio and depth envelope while maintaining phase continuity — the unwrapped phase $\theta[n]$ is preserved across section boundaries to prevent clicks.
+- **Cells**: Each `MusicUnit` triggers a TZFM note with a specific pitch $f_c$, modulation depth envelope (parameterized in the cell metadata), and note duration. The rendered audio buffer is returned with zero track drift, validated against the bar tick length. Per-cell depth variation creates micro-timbral accents (e.g., minor 3rd deeper modulation than root).
+
+```python
+import numpy as np
+from typing import Optional, Callable
+from structures import MusicEvent
+
+def render_tzfm_note(
+    f0: float,
+    duration: float,
+    sr: int = 44100,
+    fm_ratio: float = 1.0,
+    mod_depth: float = 1.0,
+    carrier_wave: str = "sine",
+    modulator_wave: str = "sine",
+    depth_envelope: Optional[Callable] = None,
+    feedback: float = 0.0
+) -> np.ndarray:
+    """
+    Renders a TZFM note with bidirectional phase accumulation.
+    
+    Args:
+        f0: Carrier fundamental frequency (Hz).
+        duration: Note duration in seconds.
+        sr: Sample rate.
+        fm_ratio: f_mod / f_carrier ratio.
+        mod_depth: Modulation depth (peak frequency deviation in Hz).
+        carrier_wave: 'sine', 'saw', 'pulse', 'triangle'.
+        modulator_wave: 'sine', 'saw', 'pulse', 'triangle'.
+        depth_envelope: Function depth(t) over 0..duration, or None for constant.
+        feedback: Feedback factor [0, 1] — routes carrier output back as modulator.
+    
+    Returns:
+        1D numpy array of float32 samples.
+    """
+    n_samples = int(duration * sr)
+    if n_samples <= 0 or f0 <= 0:
+        return np.zeros(max(0, n_samples), dtype=np.float32)
+    
+    # Wavetables (single-cycle, 256 samples)
+    W = 256
+    t = np.arange(W) / W
+    if carrier_wave == "sine":
+        wt_carrier = np.sin(2.0 * np.pi * t)
+    elif carrier_wave == "saw":
+        wt_carrier = 2.0 * t - 1.0
+    elif carrier_wave == "pulse":
+        wt_carrier = np.where(t < 0.25, 1.0, -1.0)
+    elif carrier_wave == "triangle":
+        wt_carrier = 4.0 * np.abs(t - 0.5) - 1.0
+    else:
+        wt_carrier = np.sin(2.0 * np.pi * t)
+    
+    # Modulator uses sine by default
+    t_mod = np.arange(W) / W
+    wt_mod = np.sin(2.0 * np.pi * t_mod)
+    
+    # Modulator frequency
+    fm = f0 * fm_ratio
+    phase_inc_mod = fm / sr
+    phase_inc_car = f0 / sr
+    
+    # State
+    theta_mod = 0.0
+    theta_car = 0.0
+    out = np.zeros(n_samples, dtype=np.float64)
+    fb_signal = 0.0  # for feedback
+    
+    for n in range(n_samples):
+        # Modulator phase
+        theta_mod = (theta_mod + phase_inc_mod) % 1.0
+        mod_idx = int(theta_mod * W) % W
+        
+        if feedback > 0:
+            # Use feedback from previous carrier output as modulator
+            mod_signal = fb_signal
+        else:
+            mod_signal = wt_mod[mod_idx]
+        
+        # Instantaneous frequency deviation
+        depth_env_val = depth_envelope(n / sr) if depth_envelope else 1.0
+        delta_f = mod_depth * depth_env_val * mod_signal
+        
+        # Total instant frequency
+        f_inst = f0 + delta_f
+        
+        # Phase increment (can be negative = through-zero!)
+        phase_delta = f_inst / sr
+        
+        # Bidirectional phase accumulation
+        theta_car = (theta_car + phase_delta) % 1.0
+        
+        # Read wavetable with direction awareness
+        car_idx = int(theta_car * W) % W
+        sample = wt_carrier[car_idx]
+        
+        out[n] = sample
+        fb_signal = sample * feedback
+    
+    # Normalize
+    max_val = np.max(np.abs(out))
+    if max_val > 1e-6:
+        out = (out / max_val) * 0.95
+    
+    # Fade in/out to prevent clicks
+    fade_len = min(int(0.003 * sr), n_samples // 4)
+    if fade_len > 0:
+        fade_in = np.linspace(0.0, 1.0, fade_len)
+        fade_out = np.linspace(1.0, 0.0, fade_len)
+        out[:fade_len] *= fade_in
+        out[-fade_len:] *= fade_out
+    
+    return out.astype(np.float32)
+```
+
+### Pitfalls
+
+1. **DC offset from non-zero-mean modulators**: TZFM relies on the modulator having zero mean to preserve pitch stability. Any DC bias in the modulator signal (e.g., a pulse wave with duty cycle ≠ 50%) will cause a net pitch shift. Always AC-couple or DC-block the modulator before the FM input. In digital: subtract the running mean of the modulator signal.
+
+2. **Phase-wrapping artifact at samplings system phase-delay**: The modulo operation `(theta + phase_delta) % 1.0` in floating point is numerically safe for small phase deltas, but when `|phase_delta| > 1` (very high modulation depth at low sample rates), the phase can skip whole wavetable cycles, causing aliasing. Mitigate with oversampling 2×–4× or limit max depth to keep `|phase_delta| < 0.5`.
+
+3. **Analog vs. digital TZFM implementation differences**: Analog TZFM uses a reversing VCO core (integrator with current-source reversal) which has a finite reversal time producing a smooth, rounded transition. Digital TZFM as described above instantaneously reverses the phase direction, producing a sharp corner at the zero crossing. This can sound brighter/edgier than analog TZFM. Optionally add a smoothing filter after the zero-crossing point to emulate analog behavior.
+
+4. **Feedback FM instability**: When `feedback > 0.5`, the self-modulating loop can become chaotic, producing subharmonic artifacts, harsh noise, or DC buildup. Keep feedback below 1.0 in magnitude and consider a DC blocker on the feedback path (`y[n] -= 0.999 * y[n-1]`).
+
+5. **Sideband aliasing at high indices**: At modulation indices $\beta > 10$, the theoretical Bessel bandwidth approaches $\beta \cdot f_m$ Hz, which can exceed Nyquist for high carrier frequencies. Oversampling is recommended for TZFM at extreme depths, especially with non-sinusoidal carriers.
+
+6. **Similar methods**: TZFM extends SP-010 (basic FM) by removing the phase-clamp pitch-drift artifact, making extreme modulation musically usable. TZFM contrasts with SP-017 (Feedback FM) — feedback FM introduces a self-modulation topology whereas TZFM preserves the classical feed-forward synthesis topology but with a different phase accumulation rule. TZFM can be combined with SP-017 for feedback-through-zero FM, producing the "wedge" oscillator topology found in complex oscillators (e.g., Verbos CO, Make Noise DPO).

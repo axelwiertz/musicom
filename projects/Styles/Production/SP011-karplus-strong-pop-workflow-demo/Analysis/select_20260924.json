@@ -1,0 +1,19 @@
+{
+  "date": "2026-09-24",
+  "seed": 20260924,
+  "method": "SP-011",
+  "method_module": "sound.synthesis.karplus_strong",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Pop/workflow-demo/MIDI/pop-001.mid",
+  "excluded_recent_methods": [
+    "SP-069",
+    "SP-090",
+    "SP-033",
+    "SP-080",
+    "SP-083",
+    "SP-084",
+    "SP-072"
+  ],
+  "baseline_excluded": [
+    "SP-001"
+  ]
+}

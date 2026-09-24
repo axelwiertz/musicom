@@ -439,6 +439,22 @@ for authentic warm double-reed resonance. Sounding range 50–85 (D3–C#6); swe
 (RMS, notes 48–87): preset 69 audible across full 50–85 compass (RMS 0.027–0.048),
 hard cutoff above note 85 (C#6 upper limit). Registered in `instrument_registry.py`.
 
+**Harmonica added** (2026-09-24): GM22, Woodwind-family free-reed aerophone entry —
+the mouth-blown cousin of the accordion (same free-reed physics, smaller reeds,
+breath-controlled dynamics instead of bellows) (instrument.md + harmonica.py),
+verified end-to-end UnitMatrixComposer → zero-drift ✓ → MIDI (111 bytes) →
+FluidSynth WAV (736 KB) ✓; RenderPipeline stem label `trackXX_Harmonica.wav` ✓
+(GM_PROGRAMS[22] = "Harmonica", FluidR3 preset 22 = "Harmonica" — labels match
+exactly, **no quirk**). PhaseModSynth recommended (free-reed aerophone: saw
+carrier + mod_depth 2.5 between flute 1.5 and accordion 3.2, attack 0.010 s =
+fastest reed onset in KB, release 0.04 = near-instant breath cutoff). Solo-render
+spectral check: 4–8 kHz buzz 2.3% (clean single voice, well below 20% gate).
+Empirical FluidR3 pitch sweep (notes 48–96): preset 22 audible across full range
+(13/13 notes play, no gaps). Registered in `instrument_registry.py` as HARMONICA
+convenience constant. Note: bend simulation requires MIDI pitch-bend events — GM
+patch is clean chromatic, no natural reed bend. REVERB_TAIL 1.2 s is the shortest
+in the Woodwind family (intentional dry tone).
+
 ## Python usage
 
 ```python
@@ -469,12 +485,14 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Keys | Church Organ | 19 | 36–96 | harmony, pad, bass, rhythm, accent |
 | Keys | Dulcimer | 15 | 48–96 | lead, melody, ornament, rhythm, harmony |
 | Keys | Harpsichord | 6 | 29–89 | harmony, continuo, melody, ornament, countermelody, accent |
-| Keys | Celesta | 8 | 48–108 | lead, melody, ornament, arpeggio, countermelody, accent |
-| Brass | Trumpet | 56 | 54–86 | lead, accent, fanfare |
+|| Keys | Celesta | 8 | 48–108 | lead, melody, ornament, arpeggio, countermelody, accent |
+|| Keys | Accordion | 21 | 36–96 | harmony, melody, bass, rhythm, ornament |
+|| Brass | Trumpet | 56 | 54–86 | lead, accent, fanfare |
 | Brass | Trombone | 57 | 40–78 | bass, counter, accent, harmony |
 | Brass | French Horn | 60 | 41–84 | harmony, counter, accent, lead |
 | Brass | Tuba | 58 | 26–72 | bass, harmony, accent, rhythm |
 | Woodwind | Flute | 74 | 60–96 | lead, counter, ornament |
+| Woodwind | Harmonica | 22 | 48–96 | lead, harmony, accent |
 | Woodwind | Oboe | 68 | 52–92 | lead, counter, harmony, accent |
 | Woodwind | Clarinet | 71 | 52–96 | lead, counter, harmony, accent |
 | Woodwind | English Horn | 69 | 50–85 | lead, countermelody, melody, harmony, accent |
@@ -539,9 +557,11 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 109 | Bagpipe | **Bag_pipe** ✗ (GM_PROGRAMS[109] = "Bag pipe" — two words; FluidR3 preset 109 = "BagPipe") |
 | 111 | Shanai | **Shanai** ✗ (GM_PROGRAMS[111] = "Shanai" — GM2 spec spelling; instrument = Shenai, FluidR3 preset 111 = "Shenai") |
 | 110 | Fiddle | Fiddle ✓ (GM_PROGRAMS[110] + FluidR3 preset 110 both "Fiddle") |
+| 22 | Harmonica | Harmonica ✓ (GM_PROGRAMS[22] + FluidR3 preset 22 both "Harmonica") |
 | 114 | Steel Drums | Steel Drums ✓ (GM_PROGRAMS[114] + FluidR3 preset 114 both "Steel Drums") |
-| 116 | Taiko Drum | Taiko Drum ✓ (GM_PROGRAMS[116] + FluidR3 preset 116 both "Taiko Drum") |
-| ch9/pgm0 | Drums | **Acoustic_Grand_Piano** ✗ (program-0 fallback) |
+|| 116 | Taiko Drum | Taiko Drum ✓ (GM_PROGRAMS[116] + FluidR3 preset 116 both "Taiko Drum") |
+|| 21 | Accordion | Accordion ✓ (GM_PROGRAMS[21] = "Accordion"; FluidR3 preset 21 = "Accordian" — archaic SF2 spelling, cosmetic only, no routing impact) |
+|| ch9/pgm0 | Drums | **Acoustic_Grand_Piano** ✗ (program-0 fallback) |
 
 > **Known off-by-one in existing entries**: ~~`trumpet.py` uses 57~~ **FIXED 2026-08-27**: trumpet is now 56 (SF2 preset 56=`SoloTrumpet`). `piano.py`=1 → actually Bright Acoustic Piano (GM #2) — cosmetic label difference only, no routing impact. Legacy registry rows kept as-is for piano; new instruments use 0-indexed programs matching pipeline+SF2.
 

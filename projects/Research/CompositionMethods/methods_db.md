@@ -189,7 +189,8 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 | **SP-088** | Jiles–Atherton Magnetic Tape Saturation Synthesis (JAMS) | **Post-Processing / DSP** | Analog Tape Saturation / Magnetic Hysteresis Coloration | Integrates the Jiles–Atherton ferromagnetic hysteresis ODE ($dM/dH_e$ with Langevin anhysteretic $\coth(u)-1/u$, domain pinning $a$, coupling $\alpha$, coercivity $k$, reversibility $c$) per sample against the head field $H_e=\alpha M+H$, so compression, slope-dependent harmonics, NAB head bump, gap loss, and asperity noise emerge from domain physics with real memory (hysteresis state carries across section joins). Feasible ~25 kHz HF bias, singularity-clamped, no oversampling/ADAA needed. Candidate: `sound/effects/tape_saturation.py`. |
 | **SP-089** | TR-808 Analog Cymbal Physical-Circuit Synthesis (TACS) | **Synthesis Engines** | Circuit-Faithful Analog Metallic Cymbal / Multi-Band Percussion Timbre | Synthesizes the TR-808 cymbal voice via its circuit topology: six Schmitt-trigger square-wave oscillators summed into dual active bandpass filters (~3.4 kHz and ~7.1 kHz), gated by three swing-type non-linear transistor VCAs with RC envelope generators, shaped by Sallen-Key highpass filters and an interconnected passive tone stage with a $+6\text{ dB/oct}$ differentiator buffer. Deterministic metallic sheen without sampling; $\mathcal{O}(1)$ per sample. Candidate: `sound/synthesis/drum_synth_808.py`. |
 | **SP-092** | Scalar Auxiliary Variable Nonlinear String Synthesis (SAV-NSS) | **Synthesis Engines** | Geometrically Exact Nonlinear String / Plucked Acoustic Timbre | Solves large-amplitude nonlinear string vibration coupled to bridge compliance via Scalar Auxiliary Variable (SAV) quadratisation: explicit non-iterative time-stepping via two sequential Sherman–Morrison rank-one updates in $\mathcal{O}(M+J)$ operations with servo drift regulation. Dynamic pitch glide, spectral enrichment, and measured guitar body radiation without matrix inversions. Candidate: `sound/synthesis/sav_string.py`. |
-| **SP-093** | Phase-Aligned Formant Synthesis (PAF) | **Synthesis Engines** | Formant Vocal, Brass & Resonant Timbres | Generates precise, independent formant center frequencies and bandwidths via waveshaped pulse-train modulation of a two-cosine carrier: $x[n]=g(b|\sin(\omega_0 n/2)|)[(1-q)\cos(k\omega_0 n)+q\cos((k+1)\omega_0 n)]$. Formant center $(k+q)f_0$ and Gaussian/Cauchy bandwidth $b$ decouple pitch from timbre without filters; phase alignment allows coherent additive multi-formant superposition. $\mathcal{O}(1)$ per sample. Candidate: `sound/synthesis/paf.py`. |
+|| **SP-093** | Phase-Aligned Formant Synthesis (PAF) | **Synthesis Engines** | Formant Vocal, Brass & Resonant Timbres | Generates precise, independent formant center frequencies and bandwidths via waveshaped pulse-train modulation of a two-cosine carrier: $x[n]=g(b|\sin(\omega_0 n/2)|)[(1-q)\cos(k\omega_0 n)+q\cos((k+1)\omega_0 n)]$. Formant center $(k+q)f_0$ and Gaussian/Cauchy bandwidth $b$ decouple pitch from timbre without filters; phase alignment allows coherent additive multi-formant superposition. $\mathcal{O}(1)$ per sample. Candidate: `sound/synthesis/paf.py`. |
+|| **SP-094** | Through-Zero Frequency Modulation Synthesis (TZFM) | **Synthesis Engines** | Pitch-Stable Extreme FM / Glassy Digital & Brass Timbres | Modulates carrier frequency with depth sufficient to drive the instantaneous frequency below zero, reversing the phase accumulator direction instead of stalling at 0 Hz. TZFM preserves the carrier pitch $f_c$ exactly regardless of modulation depth $d$ via bidirectional phase accumulation, enabling arbitrarily high modulation indices with zero DC drift. Produces glassy, brassy, and complex bell spectra at extreme depths where conventional FM would detune. $\mathcal{O}(1)$ per sample. Candidate: `sound/synthesis/tzfm.py`. |
 |---|
 
 
@@ -20021,3 +20022,236 @@ The concrete layer then fills each UnitMatrix cell with a MusicUnit whose pitch 
 4. **Scale mapping ambiguity**: Mapping contour rank 0→tonic (1) and rank n-1→dominant (5) works for 3-note CSegs but breaks for 5+ note CSegs where the scale only has 7 degrees. Use chromatic passing tones or modal mixture for intermediate ranks.
 5. **No built-in tonal gravity**: CTC generates pure shapes with no inherent tonal function. Tonal gravity must be added by the concrete layer (e.g., anchoring rank 0 to the tonic and rank n-1 to the dominant or leading tone).
 6. **Similar methods**: CTC complements 081 NIRMC (which generates expectations from intervals at the concrete layer) by operating a layer up — CTC decides the shape, NIRMC decides the interval-level realization.
+
+# Sound Production Method SP-094 — Through-Zero Frequency Modulation Synthesis (TZFM)
+
+### Source
+Introduced as a practical analog technique by David A. Jaffe and Julius O. Smith (1983, "Extensions of the Karplus-Strong Plucked-String Algorithm," *CMJ* 7(2)). Modern digital TZFM formalized by Chowning (1973, continued) and later by the Yamaha FS1R (1998). Key references: Miller Puckette, *The Theory and Technique of Electronic Music* (2006), Ch. 5 ("Frequency Modulation"); T. H. Park, *Introduction to Digital Signal Processing* (2010); F. R. Moore, "Table Lookup Noise for Sinusoidal Digital Oscillators" (1975, *Computer Music Journal*). Hardware implementations: Endorphin.es Furthrrrr Generator, Intellijel Rubicon 2, Instruo Cs-L, Verbos Complex Oscillator. Candidate code path: `sound/synthesis/tzfm.py`, pluggable into `workflows.musicom_workflow.produce(method="SP-094")`.
+
+### Layer
+`absolute` (sound production — synthesis engines; maps symbolic note events with carrier-modulator frequency ratios and modulation depth into continuous time-domain audio buffers via phase-accumulator reversal). Candidate code path: `sound/synthesis/tzfm.py`.
+
+### Description
+Through-Zero Frequency Modulation (TZFM) synthesizes sound by modulating the instantaneous frequency of a carrier oscillator with a modulator signal, where the modulation depth is allowed to drive the carrier's instantaneous frequency *below zero Hz*, causing the carrier's phase accumulator to reverse direction (run backward). This is the key distinction from conventional linear FM: when a standard linear FM oscillator encounters a negative instantaneous frequency, its phase accumulator stalls or clamps at zero, introducing a DC offset that causes audible pitch drift. TZFM avoids this by permitting bidirectional phase accumulation, preserving zero-mean frequency deviation and thus maintaining stable pitch at the carrier's center frequency regardless of modulation depth.
+
+TZFM produces richer, brighter, and more "glassy" spectra than conventional linear FM at equivalent depth settings because: (1) phase reversal creates time-reversed waveform segments that introduce additional spectral energy, (2) the modulation index can be pushed arbitrarily high without pitch shift, and (3) the spectrum folds back on itself in a controlled, harmonically related way rather than producing uncorrelated noise. This makes TZFM the preferred FM variant for brass, bell, vocal formant, and "liquid" digital timbres where extreme modulation depth with pitch stability is required.
+
+### Technical Mechanics
+
+#### 1. Standard Linear FM (Non-TZ) Phase Accumulator
+
+A conventional digital oscillator computes the next phase sample as:
+
+$$ \phi[n+1] = \phi[n] + \Delta\phi[n] \pmod{1.0} $$
+
+where the per-sample phase increment is derived from the instantaneous frequency:
+
+$$ \Delta\phi[n] = \frac{f_c + d \cdot m[n]}{f_s} $$
+
+and:
+- $f_c$ = carrier center frequency (Hz)
+- $d$ = modulation depth (Hz/V or Hz/unit)
+- $m[n]$ = modulator signal at sample $n$ (dimensionless, typically [-1, 1])
+- $f_s$ = sampling rate (Hz)
+
+The modulo operation $\pmod{1.0}$ drops the sign when $\Delta\phi[n] < 0$, because in IEEE float or integer wrap, $(-0.3) \bmod 1.0 = 0.7$ — effectively reversing the direction of accumulation back to forward. The result: when the modulator pushes $f_c + d \cdot m[n] < 0$, the oscillator **stalls** — its instantaneous frequency clamps at a positive value (the phase still moves forward, just more slowly), a DC offset builds up, and the perceived pitch shifts upward from the intended $f_c$.
+
+#### 2. TZFM Phase Accumulator (Bidirectional)
+
+TZFM removes the modulo-induced sign erasure by accumulating the signed phase increment directly, using a full-range phase variable $\theta[n] \in \mathbb{R}$ (unwrapped):
+
+$$ \theta[n+1] = \theta[n] + \Delta\phi[n] $$
+
+and computing the output waveform via a **bidirectional** wavetable lookup that respects negative phase traversal:
+
+$$ y[n] = \begin{cases}
+\text{wt}\big( \lfloor \theta[n] \cdot W \rfloor \bmod W \big), & \Delta\phi[n] \ge 0 \\
+\text{wt}\big( \lfloor (1 - \theta[n] \cdot W) \rfloor \bmod W \big), & \Delta\phi[n] < 0
+\end{cases} $$
+
+where $\text{wt}[k]$ is the wavetable of length $W$. When the phase increment is negative:
+- The phase $\theta[n]$ decreases (the oscillator runs backward).
+- The table is read in reverse (or the phase is reflected via $1 - \theta[n]$), preserving the waveform shape but time-reversing it.
+- The modulo operation is still applied for table indexing, but the direction of traversal flips.
+
+An equivalent formulation uses a signed normalized phase $\psi[n] = \theta[n] \bmod 1.0$ and a direction flag:
+
+$$ \psi[n] = \big( \psi[n-1] + \Delta\phi[n-1] \big) \bmod 1.0 $$
+$$ y[n] = \text{wt}\big( \lfloor \psi[n] \cdot W \rfloor \big) $$
+
+This simpler formulation works because the modulo operation $(\psi + \Delta\phi) \bmod 1.0$ is direction-preserving for small $\Delta\phi$: when $\Delta\phi < 0$, $\psi$ **decreases** (walks backward), and the wavetable is read with descending indices. The phase still wraps at 0 and 1 boundaries in the reverse direction.
+
+#### 3. Through-Zero Condition and Pitch Stability
+
+The condition for through-zero crossing is:
+
+$$ f_c + d \cdot m[n] < 0 $$
+
+At this instant, the phase reverses. The **mean** instantaneous frequency over any interval $[n_1, n_2]$ spanning an integer number of modulator cycles is:
+
+$$ \bar{f} = f_c + d \cdot \overline{m[n]} $$
+
+If the modulator signal $m[n]$ has zero mean (true for all standard LFO/oscillator waveforms — sine, triangle, saw, pulse with 50% duty), then $\bar{f} = f_c$ exactly. This is why TZFM preserves pitch: the average frequency deviation is zero regardless of depth $d$, as long as the waveform is DC-free.
+
+#### 4. Spectral Characteristics
+
+The TZFM spectrum is conventionally described by the Bessel expansion of phase modulation:
+
+$$ y(t) = \sum_{k=-\infty}^{\infty} J_k(\beta) \cos\big( (f_c + k f_m) t \big) $$
+
+where $\beta = d / f_m$ is the modulation index. Unlike non-TZ linear FM, the Bessel expansion holds at arbitrarily high $\beta$ because the phase never stalls. The carrier amplitude $J_0(\beta)$ can vanish (first null at $\beta = 2.4048$), and the energy spreads symmetrically into sidebands at $\pm f_c \pm k f_m$ with equal total power on both sides of the carrier, maintaining a consistent average spectrum even as $\beta$ sweeps dynamically.
+
+A key advantage of TZFM is that **through-zero crossings introduce additional high-frequency content** as the waveform is effectively reflected at the zero boundary. This produces brighter spectra at high depths than clamping oscillators, more akin to the theoretical Bessel-predicted bandwidth.
+
+#### 5. Through-Zero with Non-Sinusoidal Carriers
+
+If the carrier is a non-sinusoidal waveform (saw, pulse, triangle), the TZ effect produces additional timbral modulation: when the phase reverses, the wavetable is read in reverse, which time-reverses the waveform. For symmetric waveforms (sine, triangle, even-phase pulse), reversal produces an identical shape — timbre is preserved. For asymmetric waveforms (saw, pulse < 50%), reversal produces a different shape (e.g., a falling saw becomes a rising saw), generating a doubling-like texture at each zero crossing. This is the source of the characteristic "glassy" TZFM sound with saw carriers.
+
+#### 6. Computational Complexity
+
+$$ \mathcal{O}(1) \text{ per sample per voice} $$
+
+The TZFM phase accumulator adds one sign check and one conditional branch over standard FM — negligible overhead.
+
+### Musical Elements Framework
+
+- **PITCH**: Absolute pitch stability is the defining feature of TZFM. The carrier frequency $f_c$ maps exactly to the perceived fundamental regardless of modulation depth $d$, making TZFM ideal for tonal music where FM is used as a timbre modifier rather than a percussive pitch-bend effect. Microtonal intervals and chord structures remain stable under modulation.
+- **RHYTHM**: The modulator can be an audio-rate oscillator (for spectral effects), an LFO at rhythmic subdivision frequencies (for cyclic timbral wobble), or an envelope-follower-driven signal (for dynamic accent shaping). Because TZFM preserves pitch stability, rhythmic modulation at LFO rates creates tremolo-like amplitude modulation without the pitch swoop that would accompany exponential FM.
+- **HARMONY**: The carrier-to-modulator frequency ratio $r = f_c / f_m$ determines the harmonicity of the output. Integer ratios (1:1, 2:1, 3:1, 3:2, 4:3) produce harmonic spectra suitable for tonal chords and vocal-like formants. Non-integer ratios (1:1.414, 1:2.718) produce inharmonic bell and gong spectra. TZFM's pitch stability means these ratios remain acoustically "in tune" even as the modulation depth sweeps dynamically — a critical advantage for chord voicing.
+- **STRUCTURE**: The TZFM modulation depth $d(t)$ can serve as a macro-form parameter: verse sections use low depth ($\beta \approx 0.5$, almost pure carrier), chorus sections use moderate depth ($\beta \approx 2.0$, rich sidebands), and breakdown sections sweep depth cyclically ($\beta$ from 0 to 10). The carrier-modulator ratio can be switched per section (e.g., verse = 1:1 saw bass, chorus = 3:2 brass, bridge = 1:1.618 inharmonic bell).
+- **TEXTURE**: TZFM texture spans from pure sine-like tones ($\beta \ll 1$) through bright, brassy harmonics ($\beta \approx 2$–5) to glassy, metallic, and noisy spectra ($\beta > 10$). The combination of carrier waveform choice (sine, saw, pulse, triangle) and modulator waveform (sine is standard, but triangle and pulse produce different sideband distributions) gives a rich continuous timbre palette. Feedback TZFM (where the modulator is the carrier's own output) adds spectral chaos and growling textures at high feedback gains.
+
+### UnitMatrix Integration
+
+In Musicom's UnitMatrix workflow (`Voices = rows, Sections = columns, Cells = MusicUnit`):
+
+- **Voices**: Each voice defines a TZFM voice with its own carrier waveform, modulator waveform, frequency ratio, and depth envelope. Multiple TZFM voices can be layered (e.g., Voice 1 = 1:1 sine bass, Voice 2 = 3:2 saw brass) and mixed to produce complex FM textures. The per-voice modulator can be cross-patched (Voice 1's output modulates Voice 2's frequency) for nested FM structures (up to 4 operators, as in Yamaha DX-style algorithm configurations).
+- **Sections**: Each section defines the carrier-modulator ratio $r$, initial depth $d_0$, depth envelope (attack, decay, sustain, release), and cross-patching algorithm (which operator feeds which). Section transitions change the ratio and depth envelope while maintaining phase continuity — the unwrapped phase $\theta[n]$ is preserved across section boundaries to prevent clicks.
+- **Cells**: Each `MusicUnit` triggers a TZFM note with a specific pitch $f_c$, modulation depth envelope (parameterized in the cell metadata), and note duration. The rendered audio buffer is returned with zero track drift, validated against the bar tick length. Per-cell depth variation creates micro-timbral accents (e.g., minor 3rd deeper modulation than root).
+
+```python
+import numpy as np
+from typing import Optional, Callable
+from structures import MusicEvent
+
+def render_tzfm_note(
+    f0: float,
+    duration: float,
+    sr: int = 44100,
+    fm_ratio: float = 1.0,
+    mod_depth: float = 1.0,
+    carrier_wave: str = "sine",
+    modulator_wave: str = "sine",
+    depth_envelope: Optional[Callable] = None,
+    feedback: float = 0.0
+) -> np.ndarray:
+    """
+    Renders a TZFM note with bidirectional phase accumulation.
+    
+    Args:
+        f0: Carrier fundamental frequency (Hz).
+        duration: Note duration in seconds.
+        sr: Sample rate.
+        fm_ratio: f_mod / f_carrier ratio.
+        mod_depth: Modulation depth (peak frequency deviation in Hz).
+        carrier_wave: 'sine', 'saw', 'pulse', 'triangle'.
+        modulator_wave: 'sine', 'saw', 'pulse', 'triangle'.
+        depth_envelope: Function depth(t) over 0..duration, or None for constant.
+        feedback: Feedback factor [0, 1] — routes carrier output back as modulator.
+    
+    Returns:
+        1D numpy array of float32 samples.
+    """
+    n_samples = int(duration * sr)
+    if n_samples <= 0 or f0 <= 0:
+        return np.zeros(max(0, n_samples), dtype=np.float32)
+    
+    # Wavetables (single-cycle, 256 samples)
+    W = 256
+    t = np.arange(W) / W
+    if carrier_wave == "sine":
+        wt_carrier = np.sin(2.0 * np.pi * t)
+    elif carrier_wave == "saw":
+        wt_carrier = 2.0 * t - 1.0
+    elif carrier_wave == "pulse":
+        wt_carrier = np.where(t < 0.25, 1.0, -1.0)
+    elif carrier_wave == "triangle":
+        wt_carrier = 4.0 * np.abs(t - 0.5) - 1.0
+    else:
+        wt_carrier = np.sin(2.0 * np.pi * t)
+    
+    # Modulator uses sine by default
+    t_mod = np.arange(W) / W
+    wt_mod = np.sin(2.0 * np.pi * t_mod)
+    
+    # Modulator frequency
+    fm = f0 * fm_ratio
+    phase_inc_mod = fm / sr
+    phase_inc_car = f0 / sr
+    
+    # State
+    theta_mod = 0.0
+    theta_car = 0.0
+    out = np.zeros(n_samples, dtype=np.float64)
+    fb_signal = 0.0  # for feedback
+    
+    for n in range(n_samples):
+        # Modulator phase
+        theta_mod = (theta_mod + phase_inc_mod) % 1.0
+        mod_idx = int(theta_mod * W) % W
+        
+        if feedback > 0:
+            # Use feedback from previous carrier output as modulator
+            mod_signal = fb_signal
+        else:
+            mod_signal = wt_mod[mod_idx]
+        
+        # Instantaneous frequency deviation
+        depth_env_val = depth_envelope(n / sr) if depth_envelope else 1.0
+        delta_f = mod_depth * depth_env_val * mod_signal
+        
+        # Total instant frequency
+        f_inst = f0 + delta_f
+        
+        # Phase increment (can be negative = through-zero!)
+        phase_delta = f_inst / sr
+        
+        # Bidirectional phase accumulation
+        theta_car = (theta_car + phase_delta) % 1.0
+        
+        # Read wavetable with direction awareness
+        car_idx = int(theta_car * W) % W
+        sample = wt_carrier[car_idx]
+        
+        out[n] = sample
+        fb_signal = sample * feedback
+    
+    # Normalize
+    max_val = np.max(np.abs(out))
+    if max_val > 1e-6:
+        out = (out / max_val) * 0.95
+    
+    # Fade in/out to prevent clicks
+    fade_len = min(int(0.003 * sr), n_samples // 4)
+    if fade_len > 0:
+        fade_in = np.linspace(0.0, 1.0, fade_len)
+        fade_out = np.linspace(1.0, 0.0, fade_len)
+        out[:fade_len] *= fade_in
+        out[-fade_len:] *= fade_out
+    
+    return out.astype(np.float32)
+```
+
+### Pitfalls
+
+1. **DC offset from non-zero-mean modulators**: TZFM relies on the modulator having zero mean to preserve pitch stability. Any DC bias in the modulator signal (e.g., a pulse wave with duty cycle ≠ 50%) will cause a net pitch shift. Always AC-couple or DC-block the modulator before the FM input. In digital: subtract the running mean of the modulator signal.
+
+2. **Phase-wrapping artifact at samplings system phase-delay**: The modulo operation `(theta + phase_delta) % 1.0` in floating point is numerically safe for small phase deltas, but when `|phase_delta| > 1` (very high modulation depth at low sample rates), the phase can skip whole wavetable cycles, causing aliasing. Mitigate with oversampling 2×–4× or limit max depth to keep `|phase_delta| < 0.5`.
+
+3. **Analog vs. digital TZFM implementation differences**: Analog TZFM uses a reversing VCO core (integrator with current-source reversal) which has a finite reversal time producing a smooth, rounded transition. Digital TZFM as described above instantaneously reverses the phase direction, producing a sharp corner at the zero crossing. This can sound brighter/edgier than analog TZFM. Optionally add a smoothing filter after the zero-crossing point to emulate analog behavior.
+
+4. **Feedback FM instability**: When `feedback > 0.5`, the self-modulating loop can become chaotic, producing subharmonic artifacts, harsh noise, or DC buildup. Keep feedback below 1.0 in magnitude and consider a DC blocker on the feedback path (`y[n] -= 0.999 * y[n-1]`).
+
+5. **Sideband aliasing at high indices**: At modulation indices $\beta > 10$, the theoretical Bessel bandwidth approaches $\beta \cdot f_m$ Hz, which can exceed Nyquist for high carrier frequencies. Oversampling is recommended for TZFM at extreme depths, especially with non-sinusoidal carriers.
+
+6. **Similar methods**: TZFM extends SP-010 (basic FM) by removing the phase-clamp pitch-drift artifact, making extreme modulation musically usable. TZFM contrasts with SP-017 (Feedback FM) — feedback FM introduces a self-modulation topology whereas TZFM preserves the classical feed-forward synthesis topology but with a different phase accumulation rule. TZFM can be combined with SP-017 for feedback-through-zero FM, producing the "wedge" oscillator topology found in complex oscillators (e.g., Verbos CO, Make Noise DPO).

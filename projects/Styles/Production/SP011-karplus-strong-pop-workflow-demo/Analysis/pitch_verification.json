@@ -1,0 +1,30 @@
+{
+  "method": "SP-011",
+  "project": "Pop/workflow-demo",
+  "source_pc_histogram": {
+    "0": 81,
+    "2": 44,
+    "4": 34,
+    "5": 14,
+    "6": 224,
+    "7": 42,
+    "9": 35,
+    "11": 17
+  },
+  "top_pitch_classes": [
+    6,
+    0,
+    2,
+    7,
+    9,
+    4,
+    11,
+    5
+  ],
+  "status": "PASS",
+  "hit_rate": 1.0,
+  "harmonic_energy_mean": 0.22890201164329163,
+  "acf_pitched_frac": 1.0,
+  "windows_analyzed": 112,
+  "median_freq_hz": 440.0
+}
