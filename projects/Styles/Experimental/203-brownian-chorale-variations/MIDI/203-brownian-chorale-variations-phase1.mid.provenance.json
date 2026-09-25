@@ -1,0 +1,21 @@
+{
+  "artifact": "203-brownian-chorale-variations-phase1.mid",
+  "classification": "ai-generated",
+  "generator": "Reflected Brownian Motion Pitch Diffusion (RBMPD) Method 048 (raw)",
+  "sources": [
+    "Research/CompositionMethods/methods_db.md:Method 048"
+  ],
+  "parameters": {
+    "bpm": 84,
+    "key": "C aeolian",
+    "seed": 9007,
+    "bars": 16,
+    "quantized": false,
+    "voice": "single raw"
+  },
+  "notes": "Phase 1 (pre-rules): raw reflected-Brownian pitch walk, unquantized, single voice. No harmonic/scale constraints applied.",
+  "sha256": "b2168ae4e66fb750dc3c5fc323e783b08f468a732f78dac4f2e64b652438dc3e",
+  "bytes": 464,
+  "created_utc": "2026-09-25T01:09:13.145593+00:00",
+  "provenance_version": "1.0"
+}

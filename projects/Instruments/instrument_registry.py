@@ -62,6 +62,7 @@ _INSTRUMENT_MODULES = {
     "Woodwind.harmonica.harmonica": "harmonica",
     "World.shenai.shenai": "shenai",
     "World.fiddle.fiddle": "fiddle",
+    "World.shakuhachi.shakuhachi": "shakuhachi",
     "Percussion.timpani.timpani": "timpani",
     "Percussion.xylophone.xylophone": "xylophone",
     "World.taiko.taiko": "taiko",
@@ -224,6 +225,7 @@ BAGPIPE = ALL_INSTRUMENTS["bagpipe"]
 HARMONICA = ALL_INSTRUMENTS["harmonica"]
 SHENAI = ALL_INSTRUMENTS["shenai"]
 FIDDLE = ALL_INSTRUMENTS["fiddle"]
+SHAKUCHACHI = ALL_INSTRUMENTS["shakuhachi"]
 TIMPANI = ALL_INSTRUMENTS["timpani"]
 XYLOPHONE = ALL_INSTRUMENTS["xylophone"]
 GLOCKENSPIEL = ALL_INSTRUMENTS["glockenspiel"]
@@ -321,6 +323,8 @@ def registry_table():
             role = "lead, melody, ornament, drone, accent"
         elif low == "fiddle":
             role = "lead, melody, ornament, countermelody, accent"
+        elif low == "shakuhachi":
+            role = "lead, melody, ornament, drone, accent"
         elif low == "timpani":
             role = "accent, rhythm, bass, drone"
         elif low == "xylophone":
@@ -390,6 +394,10 @@ if __name__ == "__main__":
     print("  by_name('fiddle') =", by_name("fiddle"))
     print("  by_program(110) =", by_program(110))
     print("  FIDDLE.in_sweet_spot(69) =", FIDDLE.in_sweet_spot(69))
+    print("  SHAKUCHACHI.midi_program =", SHAKUCHACHI.midi_program, "(should be 77)")
+    print("  by_name('shakuhachi') =", by_name("shakuhachi"))
+    print("  by_program(77) =", by_program(77))
+    print("  SHAKUCHACHI.in_sweet_spot(74) =", SHAKUCHACHI.in_sweet_spot(74))
     print("  TIMPANI.midi_program =", TIMPANI.midi_program, "(should be 47)")
     print("  by_name('timpani') =", by_name("timpani"))
     print("  by_program(47) =", by_program(47))

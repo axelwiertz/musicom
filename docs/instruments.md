@@ -455,6 +455,25 @@ convenience constant. Note: bend simulation requires MIDI pitch-bend events — 
 patch is clean chromatic, no natural reed bend. REVERB_TAIL 1.2 s is the shortest
 in the Woodwind family (intentional dry tone).
 
+**Shakuhachi added** (2026-09-25): GM77, World-family ninth entry — the Japanese
+end-blown bamboo flute (1.8 shaku, ~54.5 cm; the Zen meditation flute that
+pairs with koto, shamisen, taiko in traditional sankyoku ensemble). Verified
+end-to-end UnitMatrixComposer → zero-drift ✓ → MIDI (150 bytes) → FluidSynth
+WAV (1.27 MB) ✓; RenderPipeline stem label `trackXX_Shakuhachi.wav` ✓
+(GM_PROGRAMS[77] = "Shakuhachi", FluidR3 preset 77 = "Shakuhachi" — labels
+match exactly, **no quirk**). PhaseModSynth recommended (end-blown bamboo
+flute: sine carrier + sine modulator, mod_freq_ratio 1.0, mod_depth 2.0,
+attack 0.06 s, release 0.20 s — breathier than flute with richer upper
+harmonics). Additive fallback with noise floor above 6 kHz for muraiki breath
+character. Range 55–100 (G3–E7, standard 2-octave D4–D6 on 1.8 shaku);
+solo range 62–86 (D4–D6). Solo-render spectral check: 4–8 kHz buzz 0.6%
+(clean single voice, well below 20% gate). Empirical FluidR3 pitch sweep
+(RMS, notes 55–100): preset 77 audible across full range (no gaps or
+dropouts). Registered in `instrument_registry.py` as SHAKUCHACHI convenience
+constant. Line-instrument quirk: monophonic bamboo flute — no dense chords
+or harmony; pentatonic writing is idiomatic (D minor pentatonic); meri/kari
+bending via MIDI pitch-bend events for authentic Zen-style glissando.
+
 ## Python usage
 
 ```python
@@ -515,6 +534,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | World | Shenai | 111 | 55–96 | lead, melody, ornament, drone, accent |
 | World | Fiddle | 110 | 55–96 | lead, melody, ornament, countermelody, accent |
 | World | Taiko Drum | 116 | 36–67 | accent, rhythm, drone, ornament |
+| World | Shakuhachi | 77 | 55–100 | lead, melody, ornament, drone, accent |
 | Woodwind | Bagpipe | 109 | 53–96 | lead, melody, ornament, drone, accent |
 
 ## Stem label quirks (RenderPipeline)
@@ -557,6 +577,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 109 | Bagpipe | **Bag_pipe** ✗ (GM_PROGRAMS[109] = "Bag pipe" — two words; FluidR3 preset 109 = "BagPipe") |
 | 111 | Shanai | **Shanai** ✗ (GM_PROGRAMS[111] = "Shanai" — GM2 spec spelling; instrument = Shenai, FluidR3 preset 111 = "Shenai") |
 | 110 | Fiddle | Fiddle ✓ (GM_PROGRAMS[110] + FluidR3 preset 110 both "Fiddle") |
+| 77 | Shakuhachi | Shakuhachi ✓ **no quirk** (GM_PROGRAMS[77] + FluidR3 preset 77 both "Shakuhachi") |
 | 22 | Harmonica | Harmonica ✓ (GM_PROGRAMS[22] + FluidR3 preset 22 both "Harmonica") |
 | 114 | Steel Drums | Steel Drums ✓ (GM_PROGRAMS[114] + FluidR3 preset 114 both "Steel Drums") |
 || 116 | Taiko Drum | Taiko Drum ✓ (GM_PROGRAMS[116] + FluidR3 preset 116 both "Taiko Drum") |

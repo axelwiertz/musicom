@@ -1,0 +1,62 @@
+{
+  "artifact": "203-brownian-chorale-variations.mid",
+  "classification": "ai-generated",
+  "generator": "Reflected Brownian Motion Pitch Diffusion (RBMPD) Method 048 + musicom rules",
+  "sources": [
+    "Research/CompositionMethods/methods_db.md:Method 048",
+    "rules/voice_leading.py:VoiceLeadingRules",
+    "rules/progression.py:Scale7ChordDegree",
+    "utilities/constants.py:SCALE_PATTERNS"
+  ],
+  "parameters": {
+    "bpm": 84,
+    "key": "C aeolian",
+    "seed": 9007,
+    "bars": 16,
+    "regions": [
+      "Intro",
+      "Verse",
+      "Chorus",
+      "Bridge"
+    ],
+    "progression": [
+      "i",
+      "VI",
+      "III",
+      "VII",
+      "III",
+      "VII",
+      "i",
+      "VI",
+      "iv",
+      "VII",
+      "VI",
+      "III",
+      "v",
+      "iv",
+      "VII",
+      "i"
+    ],
+    "variations": [
+      "harmonic_rotation",
+      "register_lift",
+      "augmentation",
+      "retrograde",
+      "counterline",
+      "density_rise"
+    ],
+    "voices": [
+      "Soprano",
+      "Alto",
+      "Tenor",
+      "Bass",
+      "Counterline",
+      "Drums"
+    ]
+  },
+  "notes": "Phase 2 (rules): chord-tone quantization per bar, classical voice leading, rhythm-grid snap, register enforcement.",
+  "sha256": "700e6700df9abca96c21551b22a63535f2564650a4060a722d9c3a19e5ed6f92",
+  "bytes": 2320,
+  "created_utc": "2026-09-25T01:09:13.145236+00:00",
+  "provenance_version": "1.0"
+}

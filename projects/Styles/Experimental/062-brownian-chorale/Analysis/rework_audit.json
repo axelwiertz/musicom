@@ -1,0 +1,30 @@
+{
+  "chosen": "Experimental/062-brownian-chorale",
+  "genre": "Experimental",
+  "primary_midi": "MIDI/062-brownian-chorale.mid",
+  "audit_date": "2026-09-25",
+  "standards": {
+    "1_engine_unitmatrix": "pass",
+    "2_zero_drift": "pass (4 voice tracks, all 15360 ticks)",
+    "3_rhythm_grid_sync": "pass (0 off-grid pitched onsets)",
+    "4_valid_track_setup": "pass (4 pitched voice tracks; no ch9 drums)",
+    "5_two_phase_artifacts": "fail (062-brownian-chorale-phase1.mid missing)",
+    "6_provenance_index": "fail (provenance.json + index.html missing)"
+  },
+  "standard_failures": [
+    "two_phase_artifacts: phase1 MIDI missing",
+    "provenance.json missing (only .mid.provenance.json sidecar)",
+    "index.html missing"
+  ],
+  "redesign_required": true,
+  "source_identity": {
+    "genre": "Experimental",
+    "key": "C aeolian (root 48)",
+    "tempo_bpm": 84,
+    "method": "Reflected Brownian Motion Pitch Diffusion (Method 048 / RBMPD)",
+    "texture": "4-voice homophonic chorale (Soprano/Alto/Tenor/Bass)",
+    "progression": "i - VI - III - VII modal cadence arc",
+    "form": "8 bars",
+    "seed": 4801
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "project": "203-brownian-chorale-variations",
+  "phase2": {
+    "num_voice": 6,
+    "lens": [
+      30720,
+      30720,
+      30720,
+      30720,
+      30720,
+      30720
+    ],
+    "offgrid": 0,
+    "scale": 3,
+    "chord": 3
+  },
+  "phase1": {
+    "num_voice": 1,
+    "lens": [
+      30720
+    ],
+    "offgrid": 0,
+    "scale": 16,
+    "chord": 29
+  },
+  "KEY_PCS": [
+    0,
+    2,
+    3,
+    5,
+    7,
+    8,
+    10
+  ]
+}

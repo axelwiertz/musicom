@@ -1,0 +1,7 @@
+{
+  "windows_checked": 256,
+  "harmonic_match_hit_rate": 0.9922,
+  "harmonic_energy_mean_8h": 0.6272,
+  "method": "FFT dominant peak per 0.5s window, 50-1000 Hz; hit = within +/-4% of k*f (k=1..8 in band) of any active non-drum MIDI fundamental; harmonic energy in 8 harmonics of lowest active fundamental",
+  "verdict": "PASS"
+}

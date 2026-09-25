@@ -1,0 +1,13 @@
+{
+  "project": "203-brownian-chorale-variations",
+  "genre": "Experimental",
+  "rework_of": "062-brownian-chorale",
+  "decision": "redesign",
+  "created_utc": "2026-09-25T01:09:13.145777Z",
+  "phase1": "203-brownian-chorale-variations-phase1.mid",
+  "phase2": "203-brownian-chorale-variations.mid",
+  "key": "C aeolian",
+  "bpm": 84,
+  "bars": 16,
+  "seed": 9007
+}

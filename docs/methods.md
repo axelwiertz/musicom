@@ -101,8 +101,9 @@ Classification of active Musicom composition methods categorized by their primar
 | **091** | concrete | Coxeter–Conway Frieze Pattern Composition (CCFPC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Weak (Cluster-algebraic) | Grid-Locked | Macro / Polygon Period | $\mathcal{O}(w \cdot n)$ generation, $\mathcal{O}(1)$ step | Generates polyphonic pitch, rhythm, and chord voicings from positive integer frieze patterns of unimodular $SL_2(\mathbb{Z})$ diamond lattices ($bc - ad = 1$) bounded by rows of 1s, classified bijectively by Conway–Coxeter triangulations of convex $(n+1)$-gons. Rows = voices/polyphonic strata (quiddity row = voice 1, interior cluster depths = inner voices); columns = temporal metric pulses; glide-reflection symmetry ($180^\circ$ rotation + $(n+1)/2$ shift) enforces exact inverted and phase-shifted polyphonic canon relationships. Unimodular determinant constraint prohibits parallel collapse and harmonic drift; macro-form develops via Ptolemy diagonal flips (cluster algebra mutations) across section boundaries. Integrable combinatorial counterpart to 083 quasicrystal / 088 Voronoi and deterministic foil to 021 CA / 033 WFCGS. |
 | **092** | concrete | Diffusion-Limited Aggregation Fractal Growth (DLACG) | **Nature-Led** | Pitch, Rhythm, Harmony, Structure, Texture | Weak (Cluster-boundary guided) | Grid-Locked / Continuous | Meso / Cluster Topology | $\mathcal{O}(N \cdot K)$ walk, $\mathcal{O}(1)$ stick | Generates dendritic polyphony, rhythmic bursts, and harmonic chord arborescences from 2D Brownian particles diffusing until sticking to seed anchors ($D_f \approx 1.71$). Branch depth = structural hierarchy; harmonic measure screening leaves internal rests (fjords) and concentrates note activity on outer tips (melodic climaxes); tree branches partition into independent UnitMatrix voice rows. Spatial connectivity prevents harmonic drift; seed schedules guide macro-form across section boundaries. Nature-led fractal growth counterpart to 048 RBMPD / 049 IFSMG and physical foil to 088 VTEP / 030 RDTP. |
 | **093** | concrete | Percolation Process Network Criticality (PPNC) | **Nature-Led** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Critical-connectivity) | Grid-Locked / Continuous | Meso / Cluster Lattice | $\mathcal{O}(V \cdot T)$ direct, $\mathcal{O}(N \alpha(N))$ DSU | Composes via site/bond percolation on a spatio-temporal UnitMatrix lattice $\mathcal{V} \times \mathcal{T}$ near the geometric percolation threshold $p \approx p_c$. Subcritical $p < p_c$ yields sparse pointillistic motifs; critical $p \approx p_c$ yields fractal spanning clusters balancing melodic continuity and rhythmic syncopation; supercritical $p > p_c$ yields dense chordal masses. Connected clusters define motivic phrases, and directed percolation enforces temporal causality. Phase-transition counterpart to 078 IMEC / 082 RBNCC and network-connectivity sibling of 035 PPTNO / 092 DLACG. |
-|| **094** | concrete | Apollonian Circle Packing Composition (ACPC) | **Nature-Led** | Pitch, Rhythm, Harmony, Structure, Texture | Strict (Descartes-quadruple consonance) | Grid-Locked / Continuous | Meso / Apollonian Tree | $\mathcal{O}(3^D)$ tree, $\mathcal{O}(1)$ step | Composes polyphony and fractal rhythmic durations from recursive integral Apollonian circle packings governed by Descartes' theorem $(k_1+k_2+k_3+k_4)^2 = 2\sum k_i^2$ and Apollonian group reflections $S_i \in GL(4, \mathbb{Z})$. Curvatures $k_i \in \mathbb{Z}^+$ map logarithmically/modally to pitch; radii $r_i = 1/k_i$ govern self-similar fractal note durations ($D_f \approx 1.3057$); mutually tangent quadruples form consonant 4-voice chords with parsimonious single-voice voice-leading pivots ($k_i' = 2\sum_{j \neq i} k_j - k_i$). Geometric packing counterpart to 088 VTEP / 092 DLACG and number-theoretic cousin of 069 CWCC / 091 CCFPC. |
-|| **095** | abstract | Contour Theory Composition (CTC) | **Rules-Based** | Pitch, Rhythm, Structure, Texture | None (Contour-shape-defined) | Grid-Locked / Continuous | Meso / Contour Segment | $\mathcal{O}(N^2)$ segment gen, $\mathcal{O}(N \log N)$ real | Generates abstract contour prototypes (CAS/CSeg classes) independent of exact pitch — the shape of a melody as a sequence of up/down/same relations. ContourNetwork maps via I/R/RI transformations; concrete layer maps rank → scale degree. First abstract-layer method: feeds rules/subset_network.py. |
+| **094** | concrete | Apollonian Circle Packing Composition (ACPC) | **Nature-Led** | Pitch, Rhythm, Harmony, Structure, Texture | Strict (Descartes-quadruple consonance) | Grid-Locked / Continuous | Meso / Apollonian Tree | $\mathcal{O}(3^D)$ tree, $\mathcal{O}(1)$ step | Composes polyphony and fractal rhythmic durations from recursive integral Apollonian circle packings governed by Descartes' theorem $(k_1+k_2+k_3+k_4)^2 = 2\sum k_i^2$ and Apollonian group reflections $S_i \in GL(4, \mathbb{Z})$. Curvatures $k_i \in \mathbb{Z}^+$ map logarithmically/modally to pitch; radii $r_i = 1/k_i$ govern self-similar fractal note durations ($D_f \approx 1.3057$); mutually tangent quadruples form consonant 4-voice chords with parsimonious single-voice voice-leading pivots ($k_i' = 2\sum_{j \neq i} k_j - k_i$). Geometric packing counterpart to 088 VTEP / 092 DLACG and number-theoretic cousin of 069 CWCC / 091 CCFPC. |
+| **095** | abstract | Contour Theory Composition (CTC) | **Rules-Based** | Pitch, Rhythm, Structure, Texture | None (Contour-shape-defined) | Grid-Locked / Continuous | Meso / Contour Segment | $\mathcal{O}(N^2)$ segment gen, $\mathcal{O}(N \log N)$ real | Generates abstract contour prototypes (CAS/CSeg classes) independent of exact pitch — the shape of a melody as a sequence of up/down/same relations. ContourNetwork maps via I/R/RI transformations; concrete layer maps rank → scale degree. First abstract-layer method: feeds rules/subset_network.py. |
+| **096** | concrete | Dynamic Time Warping Composition (DTWC) | **Rules-Based** | Pitch, Rhythm, Structure, Texture | Moderate (Source/Target-anchored) | Grid-Locked / Continuous | Meso / Warp Path | $\mathcal{O}(N \cdot M)$ | Computes the optimal non-linear alignment (warp path) between two musical sequences via DTW, then generates new material by walking the path and interpolating between matched points. Morph parameter $\alpha$ blends source→target; warp path density controls rhythmic stretch/compression. Multi-voice morphs per UnitMatrix row. |
 # Sound Production Methods Framework
 
 Sound production translates symbolic MIDI UnitMatrix data into final acoustic air pressure. Methods are categorized by execution layer: **Hardware/Acoustic Integration**, **Synthesis Engines**, or **Post-Processing / DSP**.
@@ -189,8 +190,9 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 | **SP-088** | Jiles–Atherton Magnetic Tape Saturation Synthesis (JAMS) | **Post-Processing / DSP** | Analog Tape Saturation / Magnetic Hysteresis Coloration | Integrates the Jiles–Atherton ferromagnetic hysteresis ODE ($dM/dH_e$ with Langevin anhysteretic $\coth(u)-1/u$, domain pinning $a$, coupling $\alpha$, coercivity $k$, reversibility $c$) per sample against the head field $H_e=\alpha M+H$, so compression, slope-dependent harmonics, NAB head bump, gap loss, and asperity noise emerge from domain physics with real memory (hysteresis state carries across section joins). Feasible ~25 kHz HF bias, singularity-clamped, no oversampling/ADAA needed. Candidate: `sound/effects/tape_saturation.py`. |
 | **SP-089** | TR-808 Analog Cymbal Physical-Circuit Synthesis (TACS) | **Synthesis Engines** | Circuit-Faithful Analog Metallic Cymbal / Multi-Band Percussion Timbre | Synthesizes the TR-808 cymbal voice via its circuit topology: six Schmitt-trigger square-wave oscillators summed into dual active bandpass filters (~3.4 kHz and ~7.1 kHz), gated by three swing-type non-linear transistor VCAs with RC envelope generators, shaped by Sallen-Key highpass filters and an interconnected passive tone stage with a $+6\text{ dB/oct}$ differentiator buffer. Deterministic metallic sheen without sampling; $\mathcal{O}(1)$ per sample. Candidate: `sound/synthesis/drum_synth_808.py`. |
 | **SP-092** | Scalar Auxiliary Variable Nonlinear String Synthesis (SAV-NSS) | **Synthesis Engines** | Geometrically Exact Nonlinear String / Plucked Acoustic Timbre | Solves large-amplitude nonlinear string vibration coupled to bridge compliance via Scalar Auxiliary Variable (SAV) quadratisation: explicit non-iterative time-stepping via two sequential Sherman–Morrison rank-one updates in $\mathcal{O}(M+J)$ operations with servo drift regulation. Dynamic pitch glide, spectral enrichment, and measured guitar body radiation without matrix inversions. Candidate: `sound/synthesis/sav_string.py`. |
-|| **SP-093** | Phase-Aligned Formant Synthesis (PAF) | **Synthesis Engines** | Formant Vocal, Brass & Resonant Timbres | Generates precise, independent formant center frequencies and bandwidths via waveshaped pulse-train modulation of a two-cosine carrier: $x[n]=g(b|\sin(\omega_0 n/2)|)[(1-q)\cos(k\omega_0 n)+q\cos((k+1)\omega_0 n)]$. Formant center $(k+q)f_0$ and Gaussian/Cauchy bandwidth $b$ decouple pitch from timbre without filters; phase alignment allows coherent additive multi-formant superposition. $\mathcal{O}(1)$ per sample. Candidate: `sound/synthesis/paf.py`. |
-|| **SP-094** | Through-Zero Frequency Modulation Synthesis (TZFM) | **Synthesis Engines** | Pitch-Stable Extreme FM / Glassy Digital & Brass Timbres | Modulates carrier frequency with depth sufficient to drive the instantaneous frequency below zero, reversing the phase accumulator direction instead of stalling at 0 Hz. TZFM preserves the carrier pitch $f_c$ exactly regardless of modulation depth $d$ via bidirectional phase accumulation, enabling arbitrarily high modulation indices with zero DC drift. Produces glassy, brassy, and complex bell spectra at extreme depths where conventional FM would detune. $\mathcal{O}(1)$ per sample. Candidate: `sound/synthesis/tzfm.py`. |
+| **SP-093** | Phase-Aligned Formant Synthesis (PAF) | **Synthesis Engines** | Formant Vocal, Brass & Resonant Timbres | Generates precise, independent formant center frequencies and bandwidths via waveshaped pulse-train modulation of a two-cosine carrier: $x[n]=g(b|\sin(\omega_0 n/2)|)[(1-q)\cos(k\omega_0 n)+q\cos((k+1)\omega_0 n)]$. Formant center $(k+q)f_0$ and Gaussian/Cauchy bandwidth $b$ decouple pitch from timbre without filters; phase alignment allows coherent additive multi-formant superposition. $\mathcal{O}(1)$ per sample. Candidate: `sound/synthesis/paf.py`. |
+| **SP-094** | Through-Zero Frequency Modulation Synthesis (TZFM) | **Synthesis Engines** | Pitch-Stable Extreme FM / Glassy Digital & Brass Timbres | Modulates carrier frequency with depth sufficient to drive the instantaneous frequency below zero, reversing the phase accumulator direction instead of stalling at 0 Hz. TZFM preserves the carrier pitch $f_c$ exactly regardless of modulation depth $d$ via bidirectional phase accumulation, enabling arbitrarily high modulation indices with zero DC drift. Produces glassy, brassy, and complex bell spectra at extreme depths where conventional FM would detune. $\mathcal{O}(1)$ per sample. Candidate: `sound/synthesis/tzfm.py`. |
+| **SP-095** | Tonewheel Electromagnetic Modeling Synthesis (TWEMS) | **Synthesis Engines** | Electromechanical Organ / Drawbar-Composite Timbre | Models the Hammond tonewheel generator: 91 rotating disks with magnetic pickups produce 9 drawbar partials (harmonic ratios 0.5, 1.5, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 8.0) with key-click transient (6th harmonic burst + staggered contact bounce), harmonic foldback at keyboard extremes, 5 Hz synchronous-motor tremolo, 6-position scanner vibrato/chorus (time-varying phase-shift delay), and the Leslie rotating speaker cabinet (Doppler time-varying delay + tremolo + crossover-filtered horn/drum paths). $\mathcal{O}(P)$ per sample ($P=9$ partials). Candidate: `sound/synthesis/twems.py`. |
 |---|
 
 
@@ -20255,3 +20257,241 @@ def render_tzfm_note(
 5. **Sideband aliasing at high indices**: At modulation indices $\beta > 10$, the theoretical Bessel bandwidth approaches $\beta \cdot f_m$ Hz, which can exceed Nyquist for high carrier frequencies. Oversampling is recommended for TZFM at extreme depths, especially with non-sinusoidal carriers.
 
 6. **Similar methods**: TZFM extends SP-010 (basic FM) by removing the phase-clamp pitch-drift artifact, making extreme modulation musically usable. TZFM contrasts with SP-017 (Feedback FM) — feedback FM introduces a self-modulation topology whereas TZFM preserves the classical feed-forward synthesis topology but with a different phase accumulation rule. TZFM can be combined with SP-017 for feedback-through-zero FM, producing the "wedge" oscillator topology found in complex oscillators (e.g., Verbos CO, Make Noise DPO).
+
+## 096 — Dynamic Time Warping Composition (DTWC)
+
+### Source
+Dynamic time warping (DTW) was introduced by Vintsyuk (1968) for speech recognition, formalized by Sakoe & Chiba (1978) with locality constraints, and extended to music synchronization and alignment by Müller (2007). The generative application — morphing between musical sequences by walking the DTW warp path and interpolating matched points — has been used in computer-aided composition, automatic variation generation, and style-interpolation systems (Aloupis et al. 2006; Müller et al. 2009; Ewert et al. 2009). The DTW alignment path is a classic dynamic-programming construct: a monotonic, boundary-constrained walk through the $N \times M$ cost matrix that minimizes cumulative distance.
+
+### Layer
+**concrete** — generates concrete MusicEvent sequences (pitch, onset, duration, velocity) by morphing between two input sequences. Feeds the generators/ layer directly (not the abstract subset network).
+
+### Description
+Dynamic Time Warping Composition (DTWC) treats composition as a morphing or interpolation between two musical sequences via their optimal non-linear time alignment. Given a *source* sequence $A = a_1, a_2, \dots, a_N$ and a *target* sequence $B = b_1, b_2, \dots, b_M$ (where each $a_i$ and $b_j$ is a multi-dimensional musical event vector: pitch, duration, onset-offset, velocity, voice), DTWC performs four steps:
+
+1. **Cost matrix**: Compute the $N \times M$ local distance matrix $C(i,j) = d(a_i, b_j)$ where $d$ is a weighted Euclidean distance over the musical feature vector. Pitch distance dominates; onset/duration differences add secondary cost.
+
+2. **Accumulated cost & warp path**: Solve the DP recurrence
+   $$D(i,j) = C(i,j) + \min\{D(i-1,j),\; D(i,j-1),\; D(i-1,j-1)\}$$
+   subject to Sakoe–Chiba window $|i-j| \le w$ (typically $w = \max(N,M)/2$). Backtrack from $D(N,M)$ to $D(1,1)$ following the argmin steps, yielding the warp path $P = \{(p_1,q_1), (p_2,q_2), \dots, (p_K,q_K)\}$ where $p_k \in \{1\dots N\}$, $q_k \in \{1\dots M\}$, and $K$ is the path length ($\max(N,M) \le K \le N+M-1$).
+
+3. **Interpolation along the path**: For each step $k$ along the warp path, generate an output event $o_k$ whose features are a convex combination of the matched source and target events:
+   $$o_k = (1-\alpha) \cdot a_{p_k} + \alpha \cdot b_{q_k}$$
+   where $\alpha \in [0,1]$ is the morph parameter. $\alpha=0$ reproduces the source; $\alpha=1$ reproduces the target; intermediate values create hybrids.
+   
+   When the path steps between $(p,q)$ and $(p+1,q)$ (a vertical step — multiple source events map to one target event), the source is "stretched" (temporally dilated) and the morph stays on the same target. Conversely, horizontal steps $(p,q) \to (p,q+1)$ compress the target rhythm.
+
+4. **Rhythmic decoding**: The warp path density $\rho_k = K/(N+M)$ at step $k$ determines the output inter-onset interval. Dense sections (many path steps per input beat) produce time-stretched material; sparse sections produce compressed material. The raw output $o_k$ is projected back to the nearest quantized grid (grid-locked mode) or kept in continuous time (fluid mode).
+
+For multi-voice UnitMatrix composition, each voice $v$ is processed independently with its own source-target pair and morph parameter $\alpha_v$. Cross-voice alignment cost $C_v(A_v,B_v)$ serves as a voice-independence metric. Section-level morphing uses different $\alpha$ per section; an $\alpha$ schedule $\alpha(s)$ from 0 to 1 across sections creates a macro-form arc from source-like opening to target-like close.
+
+### Musical Elements Framework
+
+| Element | DTWC Mapping |
+|---------|-------------|
+| **PITCH** | Multi-dimensional pitch vectors (MIDI note number + cents deviation) warped and interpolated along the path. Pitch contour is a weighted average of the matched source/target pitches. Scale-quantization post-filter applies if diatonic/modal gravity is desired (optional step; controlled by a scale mask). |
+| **RHYTHM** | The warp path *shape* is the rhythm: dense vertical runs = stretched durations (rubato), dense horizontal runs = compressed durations (accelerated), diagonal runs = matched pace. The output inter-onset interval is $\Delta t_k \propto \|\Delta p\| + \|\Delta q\| + f(\rho_k)$ where $f$ is a warping factor. Output onsets are quantized to the grid or kept continuous/fluid. |
+| **HARMONY** | For chord progressions, each event $a_i$ or $b_j$ is a chord vector (pitch-class profile / chromagram). The interpolated output $o_k$ is a blended chord; projection back to the nearest diatonic/symmetric chord post-filters for musicality. The cumulative cost $C(A,B)$ across voices quantifies harmonic distance. |
+| **STRUCTURE** | Macro-form = section-level $\alpha(s)$ schedule. The morph arc from $\alpha=0$ (source material) to $\alpha=1$ (target material) traces a narrative silhouette: exposition (source), development (mixing $\alpha \approx 0.3$--0.7, maximum novelty), recapitulation ($\alpha \approx 1$, target material, or modulate back for a return). Section boundaries correspond to $\alpha$ steps. Multi-section pieces use $\alpha(s) \in [\alpha_{min}, \alpha_{max}]$ interpolated linearly or via ease curves. |
+| **TEXTURE** | Voices are independently warped, each with its own $\alpha_v$. The decorrelation between voice-level morph parameters creates textural variety. When all $\alpha_v$ are equal, voices move coherently (homophonic). When $\alpha_v$ differ, voices become stratified (contrapuntal/hocket texture). Voice-level warp path length $K_v$ is a texture density indicator: $\max_v K_v / \min_v K_v$ = textural stretch, high = layered asymmetry. |
+
+### UnitMatrix Integration (Voices & Sections)
+
+**Voices (Rows)**: Each UnitMatrix voice is a separate DTW channel. Voice $v$ has its own source sequence $A_v$ (e.g., a pre-composed melody) and target sequence $B_v$ (e.g., a variation or new material). The morph parameter $\alpha_v$ per voice controls how much of source vs target that voice reflects. Voices can share source/target pairs (coherent evolution) or use different pairs (contrasting development). Cross-voice cost $C_v$ is logged for texture analysis.
+
+**Sections (Columns)**: Each section $s$ specifies the source-target pair and $\alpha(s)$ value. An $\alpha$ schedule $\alpha(s) = s/S$ (linear) or $1 - (1 - s/S)^\gamma$ (ease-in/out) arranges the morph across S sections. The warp path distance $D_{tot}(A,B) = \sum_v C_v/N_v$ per section gauges how much material has changed, serving as a section-tension indicator for the form planner.
+
+The output $o_k^{(v)}$ is assembled into MusicEvents: pitch (from interpolated vector), onset (from cumulated warped time), duration (from warped inter-onset interval), velocity (from interpolated velocity component). The sequence is validated against zero-drift constraints before insertion into the UnitMatrix.
+
+### Pitfalls
+
+1. **Path degeneracy**: When $N$ and $M$ differ greatly, the warp path becomes dominated by long vertical/horizontal runs, producing "stuttering" events (same target event repeated with slightly different source input). Mitigate with Sakoe–Chiba window $w \approx \max(N,M)/2$ and an explicit minimum path-slope constraint.
+2. **Error propagation**: A single large pitch mismatch in the cost matrix distorts alignment of neighboring events (the DP path "avoids" the mismatch by taking an extra vertical/horizontal step). Use robust distance (L1 over L2) and median pre-filtering.
+3. **Rhythmic ambiguity**: Warp path density does not directly map to a musically meaningful tempo curve. Post-hoc beat-tracking or a metronome constraint layer is needed for grid-locked output; continuous-time output may produce unperformable rubato streams.
+4. **Harmonic blur**: Linear interpolation of chord vectors produces "muddy" intermediate chords (e.g., C major averaged with G major = quasi-whole-tone). Use spherical linear interpolation (slerp) or projection to the nearest real chord instead of naive convex combination.
+5. **Texture severing**: Independent per-voice morphing can destroy vertical coherence (voices drift apart harmonically). Enforce a shared harmonic skeleton: compute one warp path from the combined multi-voice feature vector, or use a coupling penalty in the cost function.
+6. **Not from-scratch generation**: DTWC requires two input sequences. It is a *morphing* or *variation* method, not a raw generative procedure. Pair it with a seed generator (001 Skeleton-First, 002 Markov, 040 Perlin) to produce the source and target sequences first.
+
+# Sound Production Method SP-095 — Tonewheel Electromagnetic Modeling Synthesis (TWEMS)
+
+### Source
+Originates from the Hammond Organ Company (1935), designed by Laurens Hammond as an electromechanical alternative to the pipe organ. The tonewheel generator uses 91 synchronously rotating toothed steel disks (tonewheels) mounted on a common shaft, each inducing a sinusoid-like voltage in a magnetic pickup coil via reluctance variation. Digital modeling formalized by Pekonen, Pihlajamäki & Välimäki (2011, DAFx-11, "Computationally Efficient Hammond Organ Synthesis"); later extended by Savolainen (2010, "Emulating a Combo Organ Using Faust") and the modal processor literature (MDPI 2016). Hardware reference: Hammond B3, C3, A100, M3 consoles; Leslie 122/147 rotating speaker cabinets. Key technical reference: Julius O. Smith, *Physical Audio Signal Processing* (2010), Ch. 7 (time-varying delay Doppler simulation); Miller Puckette, *The Theory and Technique of Electronic Music* (2006), Ch. 2 (additive synthesis). Candidate code path: `sound/synthesis/twems.py`, pluggable into `workflows.musicom_workflow.produce(method="SP-095")`.
+
+### Layer
+`absolute` (sound production — synthesis engines; maps symbolic note events with drawbar registration, percussion switch, and vibrato/chorus selection into continuous time-domain audio buffers via additive tonewheel synthesis with electromechanical imperfection modeling). Candidate code path: `sound/synthesis/twems.py`.
+
+### Description
+Tonewheel Electromagnetic Modeling Synthesis (TWEMS) digitally replicates the Hammond tonewheel organ generator—the earliest electromechanical polyphonic synthesizer—as a complete system emulation. Unlike general-purpose additive synthesis (SP-039 IFFT fast additive), TWEMS models the specific 91-tonewheel physical generator with its mechanical constraints: harmonic foldback at keyboard extremes, key-click from 9-pole busbar contact bounce, the 5 Hz synchronous-motor tremolo, the 6-position scanner vibrato/chorus phase-shift network, and the drawbar registration system with fixed harmonic ratios. The companion Leslie rotating speaker cabinet is modeled as time-varying Doppler delay + tremolo + angle-dependent spectral filtering, completing the canonical B3/Leslie signal chain.
+
+TWEMS produces the instantly recognizable warm, punchy, and harmonically rich organ tones heard across jazz, gospel, rock, soul, and funk (Jimmy Smith, Booker T. Jones, Jon Lord, Keith Emerson, Stevie Wonder, Joey DeFrancesco). The drawbar registration system (9 sliders per manual with integer settings 0–8) provides a compact, expressive timbre space: 9^9 ≈ 387M combos reduced to ~250 classic registrations that determine the entire harmonic profile. The foldback mechanism at the top/bottom of the keyboard creates pitch-duplication artifacts that define the "Hammond sound." The Leslie rotating-horn effect adds the characteristic shimmer, chorusing, and Doppler pitch-bend that is inseparable from the classic Hammond timbre.
+
+### Technical Mechanics
+
+#### 1. Tonewheel Generator (Additive Core)
+
+Each of the 91 tonewheels produces a nearly-sinusoidal voltage with slight asymmetry due to the non-sinusoidal groove shape. For each key pressed, nine drawbar harmonics are summed with amplitudes set by drawbar position $d_k \in \{0,1,\dots,8\}$:
+
+$$ y_{key}[n] = \sum_{k=1}^{9} g_k \cdot \sin\left(2\pi \cdot r_k \cdot f_0 \cdot n / f_s\right) $$
+
+where:
+- $f_0$ = fundamental frequency of the pressed key (12-tone equal temperament, Hammond approximation)
+- $r_k$ = harmonic ratio for drawbar $k$:
+  - Drawbar 1 (16'): $r_1 = 0.5$ (sub-octave)
+  - Drawbar 2 (5⅓'): $r_2 = 1.5$ (musical fifth above)
+  - Drawbar 3 (8'): $r_3 = 1.0$ (fundamental)
+  - Drawbar 4 (4'): $r_4 = 2.0$
+  - Drawbar 5 (2⅔'): $r_5 = 3.0$
+  - Drawbar 6 (2'): $r_6 = 4.0$
+  - Drawbar 7 (1⅗'): $r_7 = 5.0$
+  - Drawbar 8 (1⅓'): $r_8 = 6.0$
+  - Drawbar 9 (1'): $r_9 = 8.0$
+- $g_k = d_k / 8$ = normalized drawbar amplitude (0 to 1), optionally scaled by the classic Hammond equal-tempered amplitude curve $a_k = 1 / \sqrt{k}$ to match the magnetic pickup sensitivity profile
+
+The original Hammond generator used a *mean-tone* temperament approximation rather than pure equal temperament; the digital model can optionally enable "Hammond tuning" where certain pitches deviate by up to 2 cents from ET to match the physical tonewheel geometry.
+
+#### 2. Harmonic Foldback
+
+Because only 91 tonewheels exist for 96 possible harmonic × key combinations, the instrument foldback: high harmonics at the top of the keyboard repeat from lower tonewheels. The foldback table for a 61-note manual (C2–C7):
+
+For octave position $o$ (0 = lowest C2, 5 = highest C7):
+- Drawbar 5 (3rd harmonic) foldback: when tonewheel index > 91, repeats from C6 down
+- Drawbar 7 (5th harmonic) foldback: repeats from tonewheel 52 (G at top octave)
+- Drawbar 8 (6th harmonic) foldback: partial repetition
+- Drawbar 9 (8th harmonic) foldback: repeats from tonewheel 44 (G)
+
+Foldback is implemented as:
+$$ \text{pitch}_{k,\text{key}} = \begin{cases}
+f_0 \cdot r_k, & \text{if tonewheel index} \le 91 \\
+f_0 \cdot r_k \cdot 2^{-m}, & \text{otherwise, where } m = \text{octaves to fold back}
+\end{cases} $$
+
+The foldback depth $m$ is determined by the number of octaves the requested harmonic exceeds the generator range.
+
+#### 3. Key-Click Transient
+
+The 9 key contacts (one per drawbar bus) switch audio-level signals, producing a characteristic percussive transient. Modeled as:
+
+$$ y_{click}[n] = w[n] \cdot \left( \sum_{k=1}^{9} \sigma_k \cdot \sin\left(2\pi \cdot 6f_0 \cdot n/f_s\right) \right) \cdot e^{-n/\tau} $$
+
+where:
+- $w[n]$ = random contact-bounce window (Bernoulli-switched on/off at ~1 kHz rate, 5 ms duration)
+- $\sigma_k \in \{0,1\}$ = contact closure state (staggered: lower drawbars close first, higher ones close later over 2–5 ms)
+- $\tau$ = click decay time constant (~10 ms, controlable)
+
+The 6th harmonic emphasis matches the classic Hammond key-click spectral peak at 6 × f₀ (Pekonen et al. 2011). The staggered contact closure (lower-to-higher drawbars) produces the characteristic "chiff" or "thwack" at note-on, while note-off click is a simple cutoff transient $e^{-n/\tau_{off}}$ with $\tau_{off} \approx 2$ ms.
+
+#### 4. Synchronous Motor Tremolo
+
+The tonewheel shaft is driven by a synchronous motor at 1200 RPM (20 Hz for 60 Hz mains, 25 Hz for 50 Hz mains), but the motor's pole geometry introduces a 5 Hz amplitude modulation on all tones:
+
+$$ y_{trem}[n] = y_{key}[n] \cdot \left(1 + m \cdot \sin\left(2\pi \cdot f_{trem} \cdot n/f_s\right)\right) $$
+
+where:
+- $f_{trem} = 5.0$ Hz (typical US Hammond; 6.25 Hz for 50 Hz mains)
+- $m$ = tremolo depth (0.0 to 0.3, classic setting ~0.1)
+
+The modulation is more pronounced at high frequencies due to the inertia of larger tonewheels at low frequencies dampening the jitter.
+
+#### 5. Scanner Vibrato/Chorus
+
+The Hammond vibrato system uses a tapped LC phase-shift delay line (spring-switched scanner moving across 12–18 tapping points). Digital model:
+
+$$ y_{vib}[n] = (1 - \alpha) \cdot y_{in}[n] + \alpha \cdot y_{in}[n - \delta[n]] $$
+
+where $\delta[n]$ is a time-varying delay that follows a sinusoidal modulation:
+
+$$ \delta[n] = \delta_{base} + \Delta \delta \cdot \sin\left(2\pi \cdot f_{vib} \cdot n/f_s\right) $$
+
+- Vibrato (V-1 to V-3): $f_{vib} \approx 6.5$ Hz, depth increasing from V-1 to V-3
+- Chorus (C-1 to C-3): same modulation but mixes dry signal with modulated delay at equal gain, producing a thicker chorus effect
+
+The 6-position selector knob maps to:
+- V-1, V-2, V-3: vibrato only (modulated delay)
+- C-1, C-2, C-3: chorus (dry + modulated delay mix at 50/50)
+
+#### 6. Leslie Rotating Speaker Cabinet
+
+The Leslie 122/147 cabinet contains two rotating elements:
+- **Rotating horn (treble)**: upper rotor, ~400 RPM (fast) / ~40 RPM (slow)
+- **Rotating drum/port (bass)**: lower rotor, opposite direction, ~340 RPM (fast) / ~40 RPM (slow)
+
+**Doppler effect** (time-varying delay for pitch modulation):
+$$ y_{dopp}[n] = x[n - D_{rotor}[n]] $$
+$$ D_{rotor}[n] = D_0 + \Delta D \cdot \sin\left(2\pi \cdot f_{rot} \cdot n/f_s\right) $$
+
+where:
+- $f_{rot}$ = rotational speed in Hz (fast ≈ 6.7 Hz treble, ≈ 5.7 Hz bass; slow ≈ 0.67 Hz)
+- $\Delta D$ = maximum delay variation (≈ 0.5–1.0 ms, giving ±1–2 semitone pitch bend)
+- $D_0$ = base delay
+
+Instantaneous frequency shift:
+$$ f_{out} = f_{in} \cdot \left(1 - \frac{d}{dt} D[n]\right) $$
+
+**Tremolo** (amplitude modulation from rotating horn directional response):
+$$ y_{leslie}[n] = y_{dopp}[n] \cdot A_{horn}(\theta[n]) $$
+
+where $A_{horn}(\theta)$ is the horn's directional gain pattern, approximated as:
+$$ A_{horn}(\theta) = G_0 + \Delta G \cdot \cos(\theta) $$
+$$ \theta[n] = 2\pi \cdot f_{rot} \cdot n/f_s $$
+
+The horn and drum signals are split at ~800 Hz via a crossover filter, processed separately, and summed.
+
+**Resultant Leslie signal per side:**
+$$ y_{L/R}[n] = \text{crossover}(y_{in}[n]) \rightarrow \begin{cases}
+\text{horn path: Doppler + tremolo + angle-filter, delay } \tau_{horn} \\
+\text{drum path: Doppler + tremolo (low-pass), delay } \tau_{drum}
+\end{cases} \rightarrow \text{sum with panning } \pm\theta $$
+
+#### 7. Percussion Circuit (Optional)
+
+The Hammond B3 percussion circuit adds a transient 2nd or 3rd harmonic burst at note-on (not present on sustained tones):
+
+$$ y_{perc}[n] = \begin{cases}
+A_{perc} \cdot \sin\left(2\pi \cdot p \cdot f_0 \cdot n/f_s\right) \cdot e^{-n/\tau_{perc}}, & n < N_{perc} \\
+0, & \text{otherwise}
+\end{cases} $$
+
+where:
+- $p \in \{2, 3\}$ = percussion harmonic (2nd: "soft", 3rd: "normal")
+- $\tau_{perc} \approx 150$ ms (decay time)
+- $A_{perc} \in [0, 1]$ = percussion level
+- Percussion only triggers if the key is not currently sustained (retrigger logic)
+
+### Musical Elements Framework
+
+**PITCH**: Drawbar registration determines the harmonic profile per key via 9 fixed ratios (0.5, 1.5, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 8.0). Hammond "Horseshoe" preset keys provide quick registration changes across sections. Foldback at keyboard extremes produces pitch-duplication artifacts. Scanner vibrato/chorus adds gentle cyclic pitch modulation (up to ~5 cents peak deviation).
+
+**RHYTHM**: Key-click transient (6th harmonic burst with contact bounce) articulates note onsets with percussive attack. Leslie speed switching (slow→fast) creates rhythmic crescendo effects. Percussion circuit (2nd/3rd harmonic burst) adds rhythmic attack emphasis independent of drawbar setting.
+
+**HARMONY**: Drawbar registration directly controls chord voicing brightness: 888000000 (full fundamental) = warm pad, 008800000 (octave+third) = reeds/piercing, 008080004 (classic jazz) = full organ. The Hammond's 12-tone equal temperament approximation (with optional sub-cent deviations) sets harmonic context. The Leslie Doppler spread (±1-2 cents) adds ensemble-like chord shimmer.
+
+**STRUCTURE**: Preset keys and drawbar changes across sections provide macro-form timbral variation. Leslie speed (slow/fast) switches define section character: fast rotors = intense/energetic, slow rotors = calm/washy. Foldback artifacts create pitch-structure boundaries at the keyboard extremes. Chorus vs vibrato selection per section.
+
+**TEXTURE**: Drawbar density determines timbral richness (9 partials per key × polyphony up to 10 fingers). Leslie rotation adds spatial movement (Doppler pitch bend + tremolo + angle-dependent filtering). Scanner chorus thickens the texture by time-varying phase shifts across the frequency spectrum. Key-click adds percussive granularity to the onset texture.
+
+### UnitMatrix Integration
+
+- **Voices** (rows): Each voice maps to one key on a Hammond manual (upper/lower/pedal). A note-on event on voice $v$ at pitch $p$ triggers the full 9-drawbar additive stack with current registration, key-click, percussion (if enabled), and tremolo. Independent vibrato/chorus per manual but shared Leslie path.
+- **Sections** (columns): Section changes trigger:
+  - Registration change (preset key or drawbar move) — macro-form timbre arc
+  - Leslie speed switch (slow→fast or fast→slow) — section energy transition
+  - Vibrato/chorus selector change — texture shift
+  - Percussion on/off toggle — rhythmic articulation mode
+- **Cells** (MusicUnit): Each cell contains a chord (multiple simultaneous keys) or single note with:
+  - Continuous drawbar vector $\mathbf{d} \in [0,8]^9$ (drawbar values for all 9 slots)
+  - Leslie speed mode $\in \{\text{stop}, \text{slow}, \text{fast}\}$
+  - Vibrato/chorus selector $\in \{\text{off}, \text{V1}, \text{V2}, \text{V3}, \text{C1}, \text{C2}, \text{C3}\}$
+  - Percussion mode $\in \{2\text{nd soft}, 3\text{rd normal}, \text{off}\}$
+- **Produce Dispatch**: `produce(midi_path, method="SP-095", params={"registration": [8,8,8,8,0,0,0,0,0], "leslie_speed": "fast", "vib_chorus": "C3", "percussion": "3rd"})`
+
+### Pitfalls
+1. **Foldback hard edges**: Naive foldback table implementation causes abrupt pitch/octave discontinuities at foldback boundaries. Smooth with 5 ms linear crossfade when the tonewheel generator transitions between source tonewheels.
+2. **Key-click DSP cost**: Per-key staggered contact closure simulation requires 9 independent gate signals per note. Pre-compute a click "signature" per note (bounce pattern determined by note number) to amortize cost.
+3. **Leslie Doppler aliasing**: Time-varying delay interpolation (Thiran or allpass fractional delay) must be bandlimited to avoid zipper noise. Use 4-point Lagrange interpolation or a first-order allpass with $|a| < 1$ stability constraint.
+4. **Polyphonic density**: With 9 partials × up to 10 simultaneous notes + 2 Leslie paths, the per-sample cost is ~90 sin calls + 2 interpolation reads. Optimize via wavetable-lookup with phase accumulation (increment per partial) instead of calling `sin()` per partial per sample. SP-039 IFFT approach is inappropriate here because only 9 sparse partials exist.
+5. **Mains frequency dependence**: The 5 Hz tremolo and tonewheel RPM are locked to mains frequency (60 Hz → 1200 RPM; 50 Hz → 1000 RPM). Export with a `mains_hz` parameter (default 60) to handle both regions.
+6. **Registration API**: Drawbar values 0–8 are discrete on the original instrument. Allow continuous 0.0–8.0 for modern interpolation, but snap to integer for authentic emulation mode.
+
+---
+
+*Appended 2026-09-25 by sound-production research cron job. Layer tag: absolute. Paradigm: Sound Production / Synthesis Engines. ID SP-095 confirmed free at append time (max SP ID was SP-094; no `sound_method_SP-095*` or `report_SP-095*` existed).*
