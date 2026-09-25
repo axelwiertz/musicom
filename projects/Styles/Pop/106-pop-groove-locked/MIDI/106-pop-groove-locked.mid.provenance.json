@@ -1,0 +1,23 @@
+{
+  "artifact": "106-pop-groove-locked.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.workflows.unitmatrix_composer",
+  "sources": [],
+  "parameters": {
+    "project": "106-pop-groove-locked",
+    "phase": 2,
+    "style": "Pop",
+    "method": "016 Groove-Locked Pattern Writing",
+    "layer": "concrete",
+    "quantization": "16th-grid (120 ticks)",
+    "key": "C Major",
+    "bpm": 120,
+    "seed": 20260925,
+    "progression": "I-V-vi-IV"
+  },
+  "notes": "",
+  "sha256": "72ce5a545f8eb0470b38161afd625dc11ef079b710a32221a64bc608ddd1ee8c",
+  "bytes": 13684,
+  "created_utc": "2026-09-25T23:07:16.984014+00:00",
+  "provenance_version": "1.0"
+}

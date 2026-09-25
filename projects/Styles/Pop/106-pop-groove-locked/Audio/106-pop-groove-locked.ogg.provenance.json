@@ -1,0 +1,18 @@
+{
+  "artifact": "106-pop-groove-locked.ogg",
+  "classification": "ai-assisted",
+  "generator": "ffmpeg libopus",
+  "sources": [],
+  "parameters": {
+    "project": "106-pop-groove-locked",
+    "format": "ogg",
+    "codec": "libopus",
+    "bitrate": "128k",
+    "source_midi": "106-pop-groove-locked.mid"
+  },
+  "notes": "",
+  "sha256": "dc4e691360154f8a5108c5d025183ee66fe3f62e611097163d15d85b2d447865",
+  "bytes": 1266301,
+  "created_utc": "2026-09-25T23:07:40.096504+00:00",
+  "provenance_version": "1.0"
+}

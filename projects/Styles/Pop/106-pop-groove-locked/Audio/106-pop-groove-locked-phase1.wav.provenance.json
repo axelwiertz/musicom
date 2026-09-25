@@ -1,0 +1,17 @@
+{
+  "artifact": "106-pop-groove-locked-phase1.wav",
+  "classification": "ai-assisted",
+  "generator": "musicom.sound.render.fluidsynth",
+  "sources": [],
+  "parameters": {
+    "project": "106-pop-groove-locked",
+    "format": "wav",
+    "soundfont": "FluidR3_GM.sf2",
+    "source_midi": "106-pop-groove-locked-phase1.mid"
+  },
+  "notes": "",
+  "sha256": "fcfc2370249de07544db76884d23963c1b8c3040bb80b99e8609821b46c20fa8",
+  "bytes": 11753516,
+  "created_utc": "2026-09-25T23:07:41.693686+00:00",
+  "provenance_version": "1.0"
+}
