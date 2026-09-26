@@ -1,0 +1,24 @@
+{
+  "zero_drift": true,
+  "track_lengths": [
+    69120,
+    69120,
+    69120,
+    69120,
+    69120,
+    69120
+  ],
+  "n_voice_tracks": 6,
+  "total_pitched": 522,
+  "offgrid": 0,
+  "scale_violations": 0,
+  "chord_tone_violations": 0,
+  "notes_per_program": {
+    "4": 160,
+    "38": 176,
+    "39": 52,
+    "108": 52,
+    "27": 82,
+    "0": 778
+  }
+}

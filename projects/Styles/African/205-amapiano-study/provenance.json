@@ -1,0 +1,35 @@
+{
+  "project": "205-amapiano-study",
+  "style": "Amapiano",
+  "substyle_of": "African (South African house)",
+  "key": "A minor (natural + harmonic leading-tone G#)",
+  "bpm": 112,
+  "time_signature": "4/4",
+  "form": "Intro(4) GrooveA(8) GrooveB(8) Breakdown(4) Climax(8) Outro(4) = 36 bars",
+  "progression": "i7 - VI7 - iv7 - V7  (Am7 | Fmaj7 | Dm7 | E7)",
+  "voices": {
+    "Rhodes":  {"program": 4,  "channel": 0, "role": "soulful 7th-chord harmonic bed"},
+    "LogDrum": {"program": 38, "channel": 1, "role": "signature tuned FM bass-percussion bassline"},
+    "Sub":     {"program": 39, "channel": 2, "role": "deep sustained sub (octave 1)"},
+    "Lead":    {"program": 108, "channel": 3, "role": "kalimba call-and-response (GrooveB)"},
+    "Guitar":  {"program": 27, "channel": 4, "role": "clean electric guitar solos (Intro + Climax)"},
+    "Drums":   {"program": 0,  "channel": 9, "role": "kick 4-floor + clap 2&4 + rolling shaker"}
+  },
+  "method": "two-phase: raw off-grid log-drum draft (phase1) -> 16th-grid snap + chord-tone quantize + 6-voice arrangement (phase2)",
+  "sources": [
+    "splice.com/blog/what-is-amapiano-music",
+    "beatstorapon.com/blog/how-to-make-amapiano-beat",
+    "edmprod.com/what-is-amapiano",
+    "inspiredbybeatz.com amapiano log drum production"
+  ],
+  "verification": {
+    "zero_drift": true,
+    "track_ticks": 69120,
+    "n_voice_tracks": 6,
+    "total_pitched": 517,
+    "offgrid": 0,
+    "scale_violations": 0,
+    "chord_tone_violations": 0
+  },
+  "classification": "AI_ASSISTED"
+}

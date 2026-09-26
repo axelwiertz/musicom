@@ -1,0 +1,345 @@
+{
+  "method": "SP-024",
+  "method_module": "sound.synthesis.bowed",
+  "method_name": "Bowed String Physical Modeling (friction-induced waveguide)",
+  "registry_source": "workflows.musicom_workflow.SP_METHODS",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Balfolk/011-balfolk-dust-on-the-dashboard/MIDI/composition_full.mid",
+  "bpm": 110.0,
+  "total_notes": 152,
+  "output_seconds": 37.409,
+  "voices": {
+    "1": {
+      "track_name": "Lead",
+      "role": "violin",
+      "notes": 80,
+      "register": "64-76",
+      "bow_velocity": 0.26,
+      "bow_force": 1.2,
+      "bow_position": 0.18,
+      "friction_decay": 5.0,
+      "rosin_noise": 0.01,
+      "gain_db": -2.0,
+      "pan": 0.42
+    },
+    "2": {
+      "track_name": "Accomp",
+      "role": "viola",
+      "notes": 48,
+      "register": "50-62",
+      "bow_velocity": 0.19,
+      "bow_force": 1.5,
+      "bow_position": 0.15,
+      "friction_decay": 5.5,
+      "rosin_noise": 0.014,
+      "gain_db": -3.5,
+      "pan": 0.5
+    },
+    "3": {
+      "track_name": "Bass",
+      "role": "bass",
+      "notes": 16,
+      "register": "38-43",
+      "bow_velocity": 0.13,
+      "bow_force": 2.2,
+      "bow_position": 0.1,
+      "friction_decay": 5.0,
+      "rosin_noise": 0.01,
+      "gain_db": -4.0,
+      "pan": 0.5
+    },
+    "4": {
+      "track_name": "Counter",
+      "role": "violin2",
+      "notes": 8,
+      "register": "74-79",
+      "bow_velocity": 0.22,
+      "bow_force": 1.3,
+      "bow_position": 0.17,
+      "friction_decay": 5.0,
+      "rosin_noise": 0.01,
+      "gain_db": -4.0,
+      "pan": 0.64
+    }
+  },
+  "verification": {
+    "silence_ratio": 0.067,
+    "peak": 0.8587,
+    "rms_per_second": [
+      0.29905,
+      0.31068,
+      0.28897,
+      0.33557,
+      0.31161,
+      0.31172,
+      0.29429,
+      0.31843,
+      0.31934,
+      0.31027,
+      0.2968,
+      0.30263,
+      0.34397,
+      0.30146,
+      0.31146,
+      0.29312,
+      0.3304,
+      0.30987,
+      0.3194,
+      0.29785,
+      0.33282,
+      0.31653,
+      0.32091,
+      0.31625,
+      0.30825,
+      0.33938,
+      0.30085,
+      0.31662,
+      0.30601,
+      0.33057,
+      0.31323,
+      0.31718,
+      0.29954,
+      0.32777,
+      0.31887,
+      0.0,
+      0.0
+    ],
+    "pitch_notes_checked": 120,
+    "pitch_notes_hit": 116,
+    "pitch_hit_pct": 96.7,
+    "per_track": {
+      "1": {
+        "role": "violin",
+        "checked": 80,
+        "hit": 80,
+        "pct": 100.0
+      },
+      "2": {
+        "role": "viola",
+        "checked": 16,
+        "hit": 12,
+        "pct": 75.0
+      },
+      "3": {
+        "role": "bass",
+        "checked": 16,
+        "hit": 16,
+        "pct": 100.0
+      },
+      "4": {
+        "role": "violin2",
+        "checked": 8,
+        "hit": 8,
+        "pct": 100.0
+      }
+    },
+    "pitch_estimate_sample": [
+      {
+        "track": 1,
+        "midi": 67,
+        "expected_hz": 392.0,
+        "detected_hz": 383.5,
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 69,
+        "expected_hz": 440.0,
+        "detected_hz": 428.2,
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 71,
+        "expected_hz": 493.9,
+        "detected_hz": 479.3,
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 67,
+        "expected_hz": 392.0,
+        "detected_hz": 383.5,
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 64,
+        "expected_hz": 329.6,
+        "detected_hz": 324.3,
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 67,
+        "expected_hz": 392.0,
+        "detected_hz": 383.5,
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 69,
+        "expected_hz": 440.0,
+        "detected_hz": 428.2,
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 71,
+        "expected_hz": 493.9,
+        "detected_hz": 479.3,
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 67,
+        "expected_hz": 392.0,
+        "detected_hz": 383.5,
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 64,
+        "expected_hz": 329.6,
+        "detected_hz": 324.3,
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 67,
+        "expected_hz": 392.0,
+        "detected_hz": 383.5,
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 69,
+        "expected_hz": 440.0,
+        "detected_hz": 428.2,
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 71,
+        "expected_hz": 493.9,
+        "detected_hz": 479.3,
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 67,
+        "expected_hz": 392.0,
+        "detected_hz": 383.5,
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 64,
+        "expected_hz": 329.6,
+        "detected_hz": 324.3,
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 67,
+        "expected_hz": 392.0,
+        "detected_hz": 383.5,
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 69,
+        "expected_hz": 440.0,
+        "detected_hz": 428.2,
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 71,
+        "expected_hz": 493.9,
+        "detected_hz": 479.3,
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 67,
+        "expected_hz": 392.0,
+        "detected_hz": 383.5,
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 64,
+        "expected_hz": 329.6,
+        "detected_hz": 324.3,
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 67,
+        "expected_hz": 392.0,
+        "detected_hz": 383.5,
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 69,
+        "expected_hz": 440.0,
+        "detected_hz": 428.2,
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 71,
+        "expected_hz": 493.9,
+        "detected_hz": 479.3,
+        "ok": true
+      },
+      {
+        "track": 1,
+        "midi": 67,
+        "expected_hz": 392.0,
+        "detected_hz": 383.5,
+        "ok": true
+      }
+    ],
+    "harmonic_energy": {
+      "1": {
+        "track": "Lead",
+        "midi": 64,
+        "f0_hz": 329.6,
+        "fundamental_present": true,
+        "harmonic_energy_8h": 0.2112
+      },
+      "2": {
+        "track": "Accomp",
+        "midi": 50,
+        "f0_hz": 146.8,
+        "fundamental_present": true,
+        "harmonic_energy_8h": 0.3634
+      },
+      "3": {
+        "track": "Bass",
+        "midi": 38,
+        "f0_hz": 73.4,
+        "fundamental_present": true,
+        "harmonic_energy_8h": 0.7685
+      },
+      "4": {
+        "track": "Counter",
+        "midi": 74,
+        "f0_hz": 587.3,
+        "fundamental_present": true,
+        "harmonic_energy_8h": 0.2139
+      }
+    }
+  },
+  "parameters": {
+    "sample_rate": 44100,
+    "engine": "sound.synthesis.bowed.BowedString",
+    "waveguide": "bidirectional delay lines (neck/bridge split at bow point)",
+    "friction": "exponential sliding model, Newton-Raphson 4 iterations",
+    "bridge_filter": "one-pole LPF (coef 0.6)",
+    "bow_envelope": "attack 80ms -> sustain -> release 150ms",
+    "mix_bus": "soft-knee saturation thresh 0.82 slope 0.32, peak -1 dBFS"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "sr": 44100,
+  "duration_s": 79.15,
+  "lufs": -14.03,
+  "peak": 0.8913,
+  "rms": 0.158,
+  "silence_ratio": 0.0277,
+  "effects": [
+    "reverb(Rhodes/Lead/Guitar/Drums)",
+    "tape_delay(Guitar)",
+    "sub_harmonic(LogDrum)",
+    "riser->Climax",
+    "subdrop->GrooveA",
+    "section LPF+fades",
+    "stereo_imager",
+    "LUFS -14",
+    "limiter -1dB"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "artifact": "204-minimalism-phase-expanded.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.workflows.unitmatrix_composer",
+  "sources": [],
+  "parameters": {
+    "project": "204-minimalism-phase-expanded",
+    "phase": 2,
+    "style": "Minimalism",
+    "method": "Euclidean phase process + musicom rules",
+    "key": "C pentatonic",
+    "bpm": 120,
+    "seed": 20260926,
+    "quantization": "16th-grid snap + per-bar chord-tone",
+    "progression": "C / Am / Gsus / Dsus (pentatonic subset)",
+    "variation": [
+      "phase-walk",
+      "transposition",
+      "inversion",
+      "retrograde",
+      "augmentation",
+      "diminution+density"
+    ],
+    "source": "001-minimalism-phase-study (redesign)"
+  },
+  "notes": "",
+  "sha256": "34b055dbb1e8a76b7e74b87305b308ad61d5636618523cb8805b3abe6b920b90",
+  "bytes": 3900,
+  "created_utc": "2026-09-26T01:10:59.303882+00:00",
+  "provenance_version": "1.0"
+}

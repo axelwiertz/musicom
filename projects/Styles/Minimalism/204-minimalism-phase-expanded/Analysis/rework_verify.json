@@ -1,0 +1,17 @@
+{
+  "phase1_size": 556,
+  "phase2_size": 3900,
+  "n_voice_tracks": 5,
+  "voice_lens": [
+    57600,
+    57600,
+    57600,
+    57600,
+    57600
+  ],
+  "zero_drift": true,
+  "total_pitched": 259,
+  "offgrid": 0,
+  "scale_violations": 0,
+  "chord_violations": 0
+}

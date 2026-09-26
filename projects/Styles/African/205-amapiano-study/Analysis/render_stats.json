@@ -1,0 +1,9 @@
+{
+  "sr": 44100,
+  "channels": 2,
+  "duration_s": 79.23,
+  "peak": 0.9999,
+  "rms": 0.1386,
+  "silence_ratio": 0.0297,
+  "silence_flag_30pct": false
+}

@@ -474,6 +474,31 @@ constant. Line-instrument quirk: monophonic bamboo flute — no dense chords
 or harmony; pentatonic writing is idiomatic (D minor pentatonic); meri/kari
 bending via MIDI pitch-bend events for authentic Zen-style glissando.
 
+**Tubular Bells added** (2026-09-26): GM14, Percussion-family seventh entry —
+the struck brass tube chimes (orchestral tintinnabuli; Tchaikovsky 1812,
+Mahler Resurrection, Mike Oldfield theme) (instrument.md + tubular_bells.py),
+verified end-to-end UnitMatrixComposer → zero-drift ✓ → MIDI (91 bytes) →
+FluidSynth WAV (4.12 MB) ✓; RenderPipeline stem label
+`trackXX_Tubular_Bells.wav` ✓ (GM_PROGRAMS[14] = "Tubular Bells", FluidR3
+preset 14 = "Tubular Bells" — labels match exactly, **no quirk**). ModalSynth
+recommended with a custom `TUBULAR_BELLS_MODES` bank at the struck-brass-tube
+ratios **1 : 2.76 : 5.40 : 8.93** (free-free bending modes) and decay rates
+0.50/0.80/1.20/2.00 (slow — brass tube rings for 1.5-3 s; between vibraphone
+0.30–1.10 and marimba 8–20). The stock `'bell'` preset is the closest bank
+but models a generic metallic bar, not a brass tube; the custom bank gives
+the warm church-bell fundamental overtone. Karplus-Strong demoted (tube is
+struck, not plucked; loop_gain 0.9970 → long metallic ring ~1.5-2.5 s,
+comparable to glockenspiel 0.9980). Solo-render spectral check: 4–8 kHz buzz
+3.1% (no comb-filtering). Range 60–78 (C4–F5, standard 1.5-octave 18-tube
+set); sweet spot 60–72 (C4–C5 fundamental octave — the bell's roundest bloom).
+Empirical FluidR3 pitch sweep (RMS, notes 60–78): preset 14 audible across
+the full span, no gaps — SF2 never clips a composition. Identity quirk:
+GM14 is a **colour instrument** with limited 1.5 octave range — used for
+accent/ceremonial punctuation, NOT for melodic passagework; use sparingly,
+one stroke at a time. Channel quirk: melodic channel (0–9) with program 14
+— channel 9 would trigger the drum-kit map and the `Acoustic_Grand_Piano`
+program-0 fallback label (timpani lesson).
+
 ## Python usage
 
 ```python
@@ -524,6 +549,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Percussion | Marimba | 12 | 45–96 | lead, melody, accent, countermelody, harmony |
 | Percussion | Steel Drums | 114 | 55–96 | lead, melody, accent, countermelody, harmony, rhythm |
 | Percussion | Timpani | 47 | 36–65 | accent, rhythm, bass, drone |
+| Percussion | Tubular Bells | 14 | 60–78 | accent, color, drone, lead, ornament |
 | Percussion | Vibraphone | 11 | 48–89 | lead, melody, harmony, countermelody, accent |
 | Percussion | Xylophone | 13 | 53–89 | lead, melody, ornament, accent, countermelody |
 | World | Sitar | 104 | 55–96 | lead, melody, ornament, drone |
@@ -566,6 +592,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 19 | Church Organ | Church Organ ✓ (GM_PROGRAMS[19] + SF2 preset 19 both "Church Organ") |
 | 25 | Acoustic Guitar (nylon) | Acoustic_Guitar_nylon ✓ |
 | 12 | Marimba | Marimba ✓ |
+| 14 | Tubular Bells | Tubular_Bells ✓ (GM_PROGRAMS[14] = "Tubular Bells"; FluidR3 preset 14 = "Tubular Bells" — labels match exactly, no quirk) |
 | 47 | Timpani | Timpani ✓ (GM_PROGRAMS[47] + FluidR3 preset 47 both "Timpani") |
 | 11 | Vibraphone | Vibraphone ✓ (GM_PROGRAMS[11] + FluidR3 preset 11 both "Vibraphone") |
 | 13 | Xylophone | Xylophone ✓ (GM_PROGRAMS[13] + FluidR3 preset 13 both "Xylophone") |

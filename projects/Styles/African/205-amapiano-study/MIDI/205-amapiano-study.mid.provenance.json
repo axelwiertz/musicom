@@ -1,0 +1,24 @@
+{
+  "artifact": "205-amapiano-study.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.workflows.unitmatrix_composer",
+  "sources": [],
+  "parameters": {
+    "project": "205-amapiano-study",
+    "phase": 2,
+    "style": "Amapiano (South African house)",
+    "key": "A minor",
+    "bpm": 112,
+    "seed": 20260926,
+    "progression": "i7 - VI7 - iv7 - V7 (Am7 Fmaj7 Dm7 E7)",
+    "log_drum": "FM synth bass (GM 38), tuned root/5th/octave, syncopated",
+    "rhodes": "Electric Piano 1 (GM 4) soulful 7th chords",
+    "form": "Intro(4) GrooveA(8) GrooveB(8) Breakdown(4) Climax(8) Outro(4)",
+    "source": "amapiano research brief"
+  },
+  "notes": "",
+  "sha256": "bb220fbe93f196eec8e09180afa06ba2d6db36faac066bffc4c04378c9b740d3",
+  "bytes": 10213,
+  "created_utc": "2026-09-26T19:23:15.481278+00:00",
+  "provenance_version": "1.0"
+}

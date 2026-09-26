@@ -1,0 +1,18 @@
+{
+  "job": "random-style production (SP) layer-aligned",
+  "date": "2026-09-26",
+  "production_method": "SP-024",
+  "production_method_name": "Bowed String Physical Modeling",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Balfolk/011-balfolk-dust-on-the-dashboard/MIDI/composition_full.mid",
+  "layer": "absolute (all voices)",
+  "outputs": {
+    "full_mix_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP024-bowed-balfolk-dashboard/Audio/SP024-bowed-balfolk-dashboard.wav",
+    "full_mix_ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP024-bowed-balfolk-dashboard/Audio/SP024-bowed-balfolk-dashboard.ogg",
+    "stems": {
+      "track01_Lead": "/opt/data/repos/musicom/projects/Styles/Production/SP024-bowed-balfolk-dashboard/Audio/stems/track01_Lead.wav",
+      "track02_Accomp": "/opt/data/repos/musicom/projects/Styles/Production/SP024-bowed-balfolk-dashboard/Audio/stems/track02_Accomp.wav",
+      "track03_Bass": "/opt/data/repos/musicom/projects/Styles/Production/SP024-bowed-balfolk-dashboard/Audio/stems/track03_Bass.wav",
+      "track04_Counter": "/opt/data/repos/musicom/projects/Styles/Production/SP024-bowed-balfolk-dashboard/Audio/stems/track04_Counter.wav"
+    }
+  }
+}

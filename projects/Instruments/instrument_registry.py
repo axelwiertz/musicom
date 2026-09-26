@@ -52,6 +52,9 @@ _INSTRUMENT_MODULES = {
     "Percussion.steel_drums.steel_drums": "steel_drums",
     "Percussion.vibraphone.vibraphone": "vibraphone",
     "Percussion.glockenspiel.glockenspiel": "glockenspiel",
+    "Percussion.xylophone.xylophone": "xylophone",
+    "Percussion.tubular_bells.tubular_bells": "tubular_bells",
+    "Percussion.timpani.timpani": "timpani",
     "Keys.accordion.accordion": "accordion",
     "World.sitar.sitar": "sitar",
     "World.koto.koto": "koto",
@@ -63,8 +66,6 @@ _INSTRUMENT_MODULES = {
     "World.shenai.shenai": "shenai",
     "World.fiddle.fiddle": "fiddle",
     "World.shakuhachi.shakuhachi": "shakuhachi",
-    "Percussion.timpani.timpani": "timpani",
-    "Percussion.xylophone.xylophone": "xylophone",
     "World.taiko.taiko": "taiko",
     "Vocal.human_voice.human_voice": "human_voice",
     "Vocal.voice_like.voice_like_voice": "voice_like",
@@ -229,6 +230,7 @@ SHAKUCHACHI = ALL_INSTRUMENTS["shakuhachi"]
 TIMPANI = ALL_INSTRUMENTS["timpani"]
 XYLOPHONE = ALL_INSTRUMENTS["xylophone"]
 GLOCKENSPIEL = ALL_INSTRUMENTS["glockenspiel"]
+TUBULAR_BELLS = ALL_INSTRUMENTS["tubular_bells"]
 PICCOLO = ALL_INSTRUMENTS["piccolo"]
 TAIKO = ALL_INSTRUMENTS["taiko"]
 HUMAN_VOICE = ALL_INSTRUMENTS["human_voice"]

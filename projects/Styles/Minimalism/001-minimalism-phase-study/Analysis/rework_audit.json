@@ -1,0 +1,48 @@
+{
+  "chosen": "Minimalism/001-minimalism-phase-study",
+  "genre": "Minimalism",
+  "source_midi": "MIDI/minimalism-phase.mid",
+  "standard_failures": [
+    "phase1_missing",
+    "provenance_missing",
+    "index_missing"
+  ],
+  "checks": {
+    "engine": true,
+    "zero_drift": true,
+    "voice_lens": [
+      46080,
+      46080,
+      46080,
+      46080,
+      46080
+    ],
+    "offgrid_count": 0,
+    "total_pitched": 128,
+    "n_voice_tracks": 5,
+    "phase1_present": false,
+    "provenance_json": false,
+    "index_html": false
+  },
+  "redesign_required": true,
+  "source_identity": {
+    "style": "Steve Reich 'Clapping Music'-style phase piece",
+    "bpm": 120,
+    "key": "C pentatonic (C D E G A) / C major triad pad",
+    "motif": "E(5,12) Euclidean marimba cell, two voices phase-walking +1 beat/section",
+    "voices": [
+      "MarimbaA",
+      "MarimbaB",
+      "Pad (C4-E4-G4)",
+      "Bass pedal C2",
+      "Perc E(5,16) kick"
+    ],
+    "form": "8 sections x 3 bars = 24 bars",
+    "instruments": {
+      "marimba": 12,
+      "pad": "STRING_ENSEMBLE",
+      "bass": "BASS",
+      "perc": "ch9"
+    }
+  }
+}

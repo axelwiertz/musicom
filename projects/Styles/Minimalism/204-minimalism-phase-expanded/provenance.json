@@ -1,0 +1,13 @@
+{
+  "project": "204-minimalism-phase-expanded",
+  "genre": "Minimalism",
+  "rework_of": "001-minimalism-phase-study",
+  "decision": "redesign",
+  "created_utc": "2026-09-26T01:10:00Z",
+  "phase1": "204-minimalism-phase-expanded-phase1.mid",
+  "phase2": "204-minimalism-phase-expanded.mid",
+  "key": "C pentatonic",
+  "bpm": 120,
+  "bars": 30,
+  "seed": 20260926
+}

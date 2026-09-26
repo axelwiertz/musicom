@@ -104,6 +104,74 @@ Classification of active Musicom composition methods categorized by their primar
 | **094** | concrete | Apollonian Circle Packing Composition (ACPC) | **Nature-Led** | Pitch, Rhythm, Harmony, Structure, Texture | Strict (Descartes-quadruple consonance) | Grid-Locked / Continuous | Meso / Apollonian Tree | $\mathcal{O}(3^D)$ tree, $\mathcal{O}(1)$ step | Composes polyphony and fractal rhythmic durations from recursive integral Apollonian circle packings governed by Descartes' theorem $(k_1+k_2+k_3+k_4)^2 = 2\sum k_i^2$ and Apollonian group reflections $S_i \in GL(4, \mathbb{Z})$. Curvatures $k_i \in \mathbb{Z}^+$ map logarithmically/modally to pitch; radii $r_i = 1/k_i$ govern self-similar fractal note durations ($D_f \approx 1.3057$); mutually tangent quadruples form consonant 4-voice chords with parsimonious single-voice voice-leading pivots ($k_i' = 2\sum_{j \neq i} k_j - k_i$). Geometric packing counterpart to 088 VTEP / 092 DLACG and number-theoretic cousin of 069 CWCC / 091 CCFPC. |
 | **095** | abstract | Contour Theory Composition (CTC) | **Rules-Based** | Pitch, Rhythm, Structure, Texture | None (Contour-shape-defined) | Grid-Locked / Continuous | Meso / Contour Segment | $\mathcal{O}(N^2)$ segment gen, $\mathcal{O}(N \log N)$ real | Generates abstract contour prototypes (CAS/CSeg classes) independent of exact pitch — the shape of a melody as a sequence of up/down/same relations. ContourNetwork maps via I/R/RI transformations; concrete layer maps rank → scale degree. First abstract-layer method: feeds rules/subset_network.py. |
 | **096** | concrete | Dynamic Time Warping Composition (DTWC) | **Rules-Based** | Pitch, Rhythm, Structure, Texture | Moderate (Source/Target-anchored) | Grid-Locked / Continuous | Meso / Warp Path | $\mathcal{O}(N \cdot M)$ | Computes the optimal non-linear alignment (warp path) between two musical sequences via DTW, then generates new material by walking the path and interpolating between matched points. Morph parameter $\alpha$ blends source→target; warp path density controls rhythmic stretch/compression. Multi-voice morphs per UnitMatrix row. |
+| **097** | concrete | Maximum Entropy Composition (MaxEnt-C) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Constraint-guided) | Grid-Locked / Continuous | Macro / Boltzmann-Gibbs Ensemble | $\mathcal{O}(K \cdot q^2 \cdot N)$ learning, $\mathcal{O}(I \cdot N \cdot q)$ sampling | Applies Jaynes' Maximum Entropy principle: finds the least-biased (maximum-entropy) probability distribution over pitch/rhythm/chord sequences consistent with pairwise moment constraints via a Boltzmann–Gibbs (Potts) model. Pairwise interactions at multiple distances capture long-range melodic structure without high-order Markov overfitting. Sampling via MCMC fills UnitMatrix cells. |
+
+### **097** | Maximum Entropy Composition (MaxEnt-C) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Constraint-guided) | Grid-Locked / Continuous | Macro / Boltzmann-Gibbs Ensemble | $\mathcal{O}(K \cdot q^2 \cdot N)$ learning, $\mathcal{O}(I \cdot N \cdot q)$ sampling
+
+### Source
+Sakellariou, J., Tria, F., Loreto, V. & Pachet, F. (2017). "Maximum entropy models capture melodic styles." *Scientific Reports* 7, 9172. arXiv:1610.03414. — Jaynes, E. T. (1957). "Information theory and statistical mechanics." *Physical Review* 106, 620–630.
+
+### Layer
+**concrete** — generates distributions over concrete pitch/rhythm/harmony events that fill UnitMatrix cells. The Boltzmann-Gibbs distribution assigns a probability to every possible sequence of musical tokens, and sampling produces the actual cell contents. Feeds generators/ directly via MCMC sampling.
+
+### Paradigm
+**Stochastic** — the probability distribution is the output of a constrained entropy-maximization problem; sampling from it is inherently stochastic, with no deterministic rewrite rules, no nature-inspired dynamics, and no learned neural parameters.
+
+### Description
+**Maximum Entropy Composition (MaxEnt-C)** applies Jaynes' principle of maximum entropy (1957) to the problem of generating musical sequences that faithfully reproduce the statistical profile of a reference corpus or of designer constraints, without overfitting.
+
+The method constructs the unique probability distribution $P(s_1, \ldots, s_N)$ over sequences of length $N$ (tokens are pitch classes, scale degrees, duration labels, or chord symbols) that:
+
+1. **Maximizes Shannon entropy** $H = -\sum P \log P$ — i.e., is maximally random given the constraints, introducing no extra structure.
+2. **Matches specified constraints** — typically the empirical frequencies of individual tokens (unary potentials, "local fields" $h_a$) and pairwise token co-occurrences at multiple distances $k$ (binary potentials, "interaction energies" $J_k(a,b)$).
+
+Solving this constrained optimization via Lagrange multipliers yields the Boltzmann-Gibbs form:
+
+$$P(s_1, \ldots, s_N) = \frac{1}{Z} \exp\left( \sum_{i=1}^{N} h(s_i) + \sum_{k=1}^{K_{\max}} \sum_{i: i+k \le N} J_k(s_i, s_{i+k}) \right)$$
+
+where:
+- $Z$ is the partition function (normalization constant).
+- $h(a)$ is the local field (bias) for token $a$ — controls the marginal frequency of each token (e.g., tonic pitch appears more often).
+- $J_k(a,b)$ is the interaction potential between tokens $a$ and $b$ at distance $k$ — captures pairwise interval preferences, harmonic tendencies, and phrase-length correlations.
+- $K_{\max}$ is the maximum interaction range (the farthest distance at which pairwise statistics are enforced).
+
+The model is a **Potts model** (multi-state generalization of the Ising model) on a one-dimensional lattice with distance-dependent couplings $J_k$. Unlike a Markov chain (which conditions only on the immediate past), MaxEnt-C enforces **simultaneous constraints at all distances $1 \ldots K_{\max}$** — a fundamentally different modeling philosophy. Long-range structure emerges from the competition of many pairwise interactions, not from high-order conditional probabilities.
+
+**Key insight — pair-wise sufficiency**: Sakellariou et al. (2017) demonstrated that pairwise interactions alone ($K_{\max} > 1$) capture melodic statistics better than high-order Markov models, because the number of parameters scales as $K_{\max} \cdot q^2$ (where $q$ = alphabet size) rather than $q^{K_{\max}+1}$. This avoids the exponential data-sparsity problem that plagues $n$-gram models for music.
+
+**Inference / generation**: Sampling from the Boltzmann-Gibbs distribution requires Markov Chain Monte Carlo (Metropolis-Hastings or Gibbs sampling). Single-site flips propose new tokens at each position; acceptance is governed by the energy difference $\Delta E$. The chain converges to the equilibrium distribution, and samples are drawn as "compositions."
+
+**Learning**: Given a corpus, the optimal $h$ and $J_k$ are found by maximizing the pseudo-likelihood (PL) or by using iterative scaling / gradient descent to match the model's expected moments to the empirical moments. PL approximates $P(s_i | s_{\setminus i})$ and avoids computing $Z$ exactly (which is intractable for $N > \sim 20$).
+
+### Musical Elements Framework
+
+**PITCH**: The primary variable. Tokens are pitch classes or scale degrees ($q \approx 7$–12). The local field $h$ encodes the pitch-class distribution (tonic > dominant > mediant > chromatic). The pairwise potentials $J_k$ encode interval preferences: $J_1$ captures step vs. leap (conjunct bias), $J_2$ captures neighbor-tone and passing-tone patterns (ornamentation), $J_{k>2}$ captures melodic arch and phrase-level contour. Higher $h$ for chord tones yields tonal gravity.
+
+**RHYTHM**: Tokenized as duration labels (1/4, 1/8, 1/16, etc.) or onset-IOI classes. The combined model uses two coupled Potts chains: one for pitch, one for duration, with cross-terms $J_{\text{cross}}(pitch_i, dur_i)$ encoding metric accent (longer notes on strong beats). The rhythm model captures syncopation patterns through $J_1$ (short–short–long motifs) and $J_k$ for periodicity (groove repetition at 2-, 4-, 8-bar scales).
+
+**HARMONY**: For chord-level composition, $s_i$ = chord symbol (C, Dm, Em, F, G, Am, Bdim) and $J_k$ encode chord transition probabilities (IV–V–I cadence as highly favorable $J_1$ patterns). The stationary distribution biases toward tonic chords. Multi-part harmony is modeled as a product of coupled Potts chains (one per voice) with inter-chain $J_k$ terms enforcing consonance constraints — a factor graph equivalent of 064 MRFCC but with learned rather than hand-crafted potentials.
+
+**STRUCTURE**: $K_{\max}$ acts as a structural dial: small $K_{\max}=2$ yields local ornamentation only (motif-level), medium $K_{\max}=8$–16 captures phrase-level arch shapes, large $K_{\max}=32$+ captures period and section-level repetition/contrast. Form emerges from non-stationarity: different $h, J_k$ sets per section (A/B/bridge), with a higher-level grammar scheduling the switches. The partition function $Z$ can be computed per section to quantify complexity/compatibility.
+
+**TEXTURE**: In multi-voice generation, texture is controlled by the coupling strength between voice-specific Potts chains. Strong inter-voice $J_k$ = homophony (all voices move together), weak inter-voice $J_k$ = polyphony/independence. The chain's inverse temperature $\beta$ (scaling $h$ and $J_k$) controls "crystallization": $\beta \to 0$ = uniform noise (pointillistic), $\beta \to \infty$ = frozen into the MAP sequence (maximally determined). Texture density is the expected number of active tokens per window under the model.
+
+### UnitMatrix Integration (Voices & Sections)
+
+**Voices**: Each voice is an independent Potts chain with its own $(h^{(v)}, J_k^{(v)})$ parameters, plus cross-chain interaction potentials $J_k^{(v,w)}$ that couple pitch $s_i^{(v)}$ and $s_i^{(w)}$ at the same time slice. These cross-terms enforce harmonic consonance (favor perfect intervals / thirds) and voice-leading parsimony (favor small inter-voice pitch differences). Voice count = number of coupled chains. Percussion is a 2-state ($\{0,1\}$) Potts chain with rhythm-only $J_k$.
+
+**Sections**: Each section $m$ defines its own parameter set $\theta_m = (h_m, J_{k,m})$. A section-switch function $f(m)$ selects parameters at section boundaries. The macro-form is a sequence $\theta_1, \theta_2, \ldots, \theta_M$. Transition sections use linear interpolation of potentials: $\theta_{\text{trans}} = (1-t)\theta_m + t\theta_{m+1}$. The full composition is generated by concatenating samples from each section's distribution.
+
+**Cell filling**: For each cell (voice $v$, section $m$), the Potts chain for that voice is conditioned on the first token of the cell (seed pitch) and on the last token of the previous cell (voice-leading continuity). Gibbs sampling sweeps through the cell's token positions until convergence. The resulting sequence maps to $MusicUnit$ events (pitch + duration) via a simple token-to-event decoder.
+
+### Pitfalls
+
+1. **Partition function intractability**: $Z$ sums over $q^N$ configurations — exact computation is impossible for $N > 20$. Alternatives: pseudolikelihood (PL) for learning, MCMC for sampling, or the Bethe-Peierls approximation via belief propagation.
+2. **MCMC mixing time**: The Potts chain may mix slowly near a phase transition (large $\beta$ or strong $J_k$), requiring many Gibbs sweeps for independent samples. Use of the Wolff cluster algorithm (instead of single-site flips) dramatically accelerates mixing for ferromagnetic $J_k$.
+3. **Over-constrained design**: Setting too many constraints (large $K_{\max}$ or aggressively specific $J_k$) drives the distribution toward a single deterministic sequence (the MAP sequence), defeating the stochastic purpose. The temperature parameter $\beta$ must be tuned to balance randomness and constraint satisfaction.
+4. **Alphabet design**: The choice of $q$ (alphabet size) critically affects model quality. Too coarse ($q=7$ diatonic) misses chromatic nuance; too fine ($q=128$ MIDI) creates exponential sparsity. A hierarchical alphabet (microtones within scale-degree classes) mitigates this.
+5. **Stationarity assumption**: Standard MaxEnt assumes the same $h, J_k$ for all positions — music is non-stationary. Section-specific parameters mitigate this but increase data requirements per section. The pseudo-likelihood approach with section-wise regularization helps.
+6. **Corpus dependency (style mode)**: When learning from a corpus, the model faithfully reproduces the corpus's statistics — including its clichés and defects. Overly rigid corpus matching risks plagiarism (the compression-based plagiarism test in Sakellariou et al. 2017 is the recommended gate).
+
 # Sound Production Methods Framework
 
 Sound production translates symbolic MIDI UnitMatrix data into final acoustic air pressure. Methods are categorized by execution layer: **Hardware/Acoustic Integration**, **Synthesis Engines**, or **Post-Processing / DSP**.
@@ -193,6 +261,7 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 | **SP-093** | Phase-Aligned Formant Synthesis (PAF) | **Synthesis Engines** | Formant Vocal, Brass & Resonant Timbres | Generates precise, independent formant center frequencies and bandwidths via waveshaped pulse-train modulation of a two-cosine carrier: $x[n]=g(b|\sin(\omega_0 n/2)|)[(1-q)\cos(k\omega_0 n)+q\cos((k+1)\omega_0 n)]$. Formant center $(k+q)f_0$ and Gaussian/Cauchy bandwidth $b$ decouple pitch from timbre without filters; phase alignment allows coherent additive multi-formant superposition. $\mathcal{O}(1)$ per sample. Candidate: `sound/synthesis/paf.py`. |
 | **SP-094** | Through-Zero Frequency Modulation Synthesis (TZFM) | **Synthesis Engines** | Pitch-Stable Extreme FM / Glassy Digital & Brass Timbres | Modulates carrier frequency with depth sufficient to drive the instantaneous frequency below zero, reversing the phase accumulator direction instead of stalling at 0 Hz. TZFM preserves the carrier pitch $f_c$ exactly regardless of modulation depth $d$ via bidirectional phase accumulation, enabling arbitrarily high modulation indices with zero DC drift. Produces glassy, brassy, and complex bell spectra at extreme depths where conventional FM would detune. $\mathcal{O}(1)$ per sample. Candidate: `sound/synthesis/tzfm.py`. |
 | **SP-095** | Tonewheel Electromagnetic Modeling Synthesis (TWEMS) | **Synthesis Engines** | Electromechanical Organ / Drawbar-Composite Timbre | Models the Hammond tonewheel generator: 91 rotating disks with magnetic pickups produce 9 drawbar partials (harmonic ratios 0.5, 1.5, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 8.0) with key-click transient (6th harmonic burst + staggered contact bounce), harmonic foldback at keyboard extremes, 5 Hz synchronous-motor tremolo, 6-position scanner vibrato/chorus (time-varying phase-shift delay), and the Leslie rotating speaker cabinet (Doppler time-varying delay + tremolo + crossover-filtered horn/drum paths). $\mathcal{O}(P)$ per sample ($P=9$ partials). Candidate: `sound/synthesis/twems.py`. |
+| **SP-096** | Hard Sync Oscillator Synthesis (HSOS) | **Synthesis Engines** | Classic Analog Sync / Aggressive Lead & Bass Timbres | Syncs a slave oscillator's phase to a master oscillator's zero-crossings: master sets the fundamental pitch while the slave-to-master frequency ratio $r = f_s / f_m$ determines the harmonic spectrum independently. Hard sync (phase reset) produces the classic tearing/screaming analog lead; soft sync (phase-reverse) gives milder octave-doubling textures. Ratio $r$ sweep is a one-knob timbre morph from pure fundamental ($r=1$) through integer subharmonics ($r=2,3,4$) to dense inharmonic buzz ($r > 5$). Bandlimited antialiasing via PolyBLEP (4-sample correction, $\mathcal{O}(1)$ per sample). Candidate: `sound/synthesis/hard_sync.py`. |
 |---|
 
 
@@ -20495,3 +20564,160 @@ where:
 ---
 
 *Appended 2026-09-25 by sound-production research cron job. Layer tag: absolute. Paradigm: Sound Production / Synthesis Engines. ID SP-095 confirmed free at append time (max SP ID was SP-094; no `sound_method_SP-095*` or `report_SP-095*` existed).*
+
+# Sound Production Method SP-096 — Hard Sync Oscillator Synthesis (HSOS)
+
+### Source
+Originates from analog subtractive synthesizer design (Minimoog Model D, 1971; Sequential Circuits Prophet-5, 1978; Roland SH-101, 1982). Hard sync was introduced as a stability feature — locking a slave oscillator's phase to a master prevented frequency drift — and was accidentally discovered to produce a striking, dynamic timbre when the slave was tuned higher than the master. The effect was popularized by Jean-Michel Jarre (*Oxygène*, 1976), Vangelis (*Blade Runner*, 1982), and later by electronic/EDM artists for screaming lead and aggressive bass sounds. Digital implementation formalized by Brandt (2001, "Hard Sync Without Aliasing", ICMC) using bandlimited step (BLEP) functions; Timoney et al. (2012, DAFx-12) derived the Fourier series for hard-synced sawtooth and proposed an efficient comb-filter model; La Pastina & D'Angelo (2022, DAFx-20in22) generalized antialiasing for sine hard sync via FIR lowpass kernels. Key references: Zavalishin, *The Art of VA Filter Design* (2018), Ch. 8 (sync oscillators); Välimäki & Huovilainen (2007, IEEE SP Mag., "Antialiasing Oscillators in Subtractive Synthesis"); Brandt (2001, "Hard Sync Without Aliasing"). Candidate code path: `sound/synthesis/hard_sync.py`, pluggable into `workflows.musicom_workflow.produce(method="SP-096")`.
+
+### Layer
+`absolute` (sound production — synthesis engines; maps symbolic note events with master/slave frequency ratio, master waveform type, and sync mode into continuous time-domain audio buffers via oscillator synchronization with bandlimited antialiasing). Candidate code path: `sound/synthesis/hard_sync.py`.
+
+### Description
+Hard Sync Oscillator Synthesis (HSOS) is a classic subtractive-synthesis technique where one oscillator (the slave) is forced to reset its phase each time a second oscillator (the master) completes a cycle. The master dictates the perceived fundamental pitch; the slave's internal frequency controls the harmonic spectrum independently from the pitch. This decoupling of pitch (from the master) from timbre (from the slave/master ratio) produces a characteristic dramatic, tearing, "screaming" sound with rich, dynamic harmonics that sweep when the slave frequency is modulated.
+
+Unlike general-purpose FM synthesis (SP-010, SP-017) or additive synthesis (SP-039), HSOS produces its spectral richness through a deterministic geometric discontinuity — the phase reset — which generates all harmonics simultaneously. The spectral centroid and peak spacing depend on the ratio $r = f_{\text{slave}} / f_{\text{master}}$, giving a one-knob timbre sweep from a pure fundamental ($r=1$) through interval-based harmonic structures ($r=2,3,4$) to dense, inharmonic, buzzy textures at non-integer ratios.
+
+Three sync modes are supported:
+1. **Hard sync (phase-reset)**: Slave phase resets to 0 at each master zero-crossing.
+2. **Soft sync (phase-reverse)**: Slave phase resets and waveform direction reverses (triangle-core oscillators).
+3. **Comb-filter approximation** (Timoney et al. 2012): Models hard sync as a comb filter on the master waveform, avoiding explicit phase reset.
+
+### Technical Mechanics
+
+#### 1. Basic Hard Sync (Sawtooth Slave)
+
+Let the master oscillator run at frequency $f_m$ and the slave oscillator at $f_s > f_m$. The slave's output $y_{\text{sync}}[n]$ at sample rate $f_{\text{sr}}$ is:
+
+$$ \phi_m[n+1] = \phi_m[n] + \frac{2\pi f_m}{f_{\text{sr}}} $$
+
+$$ \phi_m[n] \ge 2\pi \implies \phi_m[n] := \phi_m[n] - 2\pi,\quad \phi_s[n] := \phi_s[n] \bmod 2\pi $$
+
+$$ \phi_s[n+1] = \phi_s[n] + \frac{2\pi f_s}{f_{\text{sr}}} $$
+
+$$ y_{\text{naive}}[n] = \frac{\phi_s[n]}{\pi} - 1 \quad \text{(unipolar sawtooth: -1 to +1)} $$
+
+The naive output has discontinuities at phase-reset points, causing severe aliasing in digital implementation.
+
+#### 2. Normalized Sawtooth Output (with fractional phase)
+
+For a fractional slave phase $\theta_s[n] = \phi_s[n] / 2\pi \in [0,1)$ and a master period spanning $P$ samples:
+
+$$ y_{\text{saw}}[n] = 2\theta_s[n] - 1 $$
+
+At each master zero-crossing $n_k$, the slave residual phase $\theta_{\text{res}} = \theta_s[n_k^-]$ determines the discontinuity magnitude $\Delta = 2\theta_{\text{res}}$. The output can be expressed as a sum of ramp segments separated by these jumps.
+
+#### 3. Fourier Series (Timoney et al. 2012)
+
+For a hard-synced sawtooth with master frequency $f_m$ and slave frequency $f_s = r f_m$, the Fourier series coefficients are:
+
+$$ a_k = \frac{2}{k\pi} \sin\left(\frac{k\pi}{r}\right), \quad b_k = \frac{2}{k\pi} \left( \frac{1}{\tan(\pi r)} - \cos\left(\frac{k\pi}{r}\right) \right) $$
+
+where $r = f_s / f_m$ is the frequency ratio. The $k$-th harmonic amplitude is:
+
+$$ |H_k| = \sqrt{a_k^2 + b_k^2} = \frac{2}{k\pi} \frac{|\sin(k\pi/r)|}{\sin(\pi/r)} $$
+
+Key observations:
+- When $r$ is an integer, $|H_k| = 0$ for $k \neq nr$ (only harmonics at multiples of $r$ survive), giving a pure harmonic spectrum.
+- When $r$ is non-integer, all harmonics are present — the spectrum becomes dense and inharmonic.
+- The fundamental is always $f_m$, independent of $f_s$.
+
+#### 4. Comb-Filter Approximation
+
+Timoney et al. (2012) showed that hard sync can be approximated as a comb filter applied to the master sawtooth:
+
+$$ H(z) = \frac{1 - z^{-\lfloor r \rfloor}}{1 + z^{-\lfloor r \rfloor}} $$
+
+where $\lfloor r \rfloor$ is the integer part of the ratio. This yields an equivalent output without explicit phase reset, at lower computational cost (especially for high $r$).
+
+#### 5. Anti-Aliasing (BLEP / PolyBLEP Method)
+
+To avoid aliasing from the discontinuities, the BLEP (Bandlimited Step) method replaces the ideal step discontinuity with a bandlimited step:
+
+$$ \tilde{y}[n] = y_{\text{naive}}[n] + \sum_{k} \Delta_k \cdot \text{BLEP}\left(\frac{n - n_k}{f_{\text{sr}}}\right) $$
+
+where $\Delta_k$ is the jump magnitude at the $k$-th reset and BLEP($t$) is the bandlimited step residual:
+
+$$ \text{BLEP}(t) = \frac{1}{\pi} \left[ \text{Si}(\pi f_{\text{sr}} t) - \text{Si}(\pi (f_{\text{sr}}-2f_m) t) \right] $$
+
+For efficiency, the polynomial approximation (PolyBLEP: Välimäki & Huovilainen 2007) uses a 4-sample-wide polynomial correction:
+
+$$ \text{PolyBLEP}(t) = \begin{cases}
+0 & t < -2 \text{ or } t > 2 \\
+\frac{1}{2} \left( \frac{t+2}{2} \right)^2 & -2 \le t < -1 \\
+\frac{3}{4} - \left( \frac{t+1}{2} \right)^2 - \frac{t}{2} & -1 \le t < 0 \\
+\frac{3}{4} - \left( \frac{t}{2} \right)^2 + \frac{t}{2} & 0 \le t < 1 \\
+\frac{1}{2} \left( -\frac{t+2}{2} \right)^2 + 1 & 1 \le t \le 2
+\end{cases} $$
+
+where $t = (n - n_k) / f_{\text{sr}}$ in samples and all times are in samples relative to the discontinuity.
+
+#### 6. Sine Hard Sync (Antialiased, La Pastina & D'Angelo 2022)
+
+For a hard-synced sine wave, the antialiasing residual is computed as:
+
+$$ y_{\text{sine-sync}}[n] = \sin(\theta_s[n]) + \sum_{k} \text{Res}\left( \theta_s[n] - \theta_{\text{res}}^{(k)} \right) $$
+
+where Res($\theta$) is the FIR-based residual kernel. Using a triangular kernel of width $2\epsilon$ samples:
+
+$$ \text{Res}_{\text{tri}}(\theta) = \begin{cases}
+\frac{1}{\epsilon^2 \omega_0^2} \left[ \cos(\omega_0 \theta / f_{\text{sr}}) - 1 + \frac{\omega_0 \epsilon}{f_{\text{sr}}} \sin\left( \frac{\omega_0 \epsilon}{f_{\text{sr}}} \right) \cos\left( \frac{\omega_0 \theta}{f_{\text{sr}}} \right) \right. \\
+\quad \left. - \frac{\omega_0 \theta}{f_{\text{sr}}} \sin\left( \frac{\omega_0 \theta}{f_{\text{sr}}} \right) \right] & |\theta| < \epsilon
+\end{cases} $$
+
+#### 7. Soft Sync (Phase-Reverse)
+
+In triangle-core soft sync, the slave's direction inverts at each master reset instead of resetting to zero:
+
+$$ y_{\text{soft}}[n] = \begin{cases}
+y_{\text{slave}}[n] & \text{between resets} \\
+-y_{\text{slave}}[n] & \text{after reversal}
+\end{cases} $$
+
+The output is continuous (no DC jump), reducing aliasing at the cost of a less aggressive spectrum.
+
+### Musical Elements Framework
+
+| Element | Contribution |
+|---------|-------------|
+| **PITCH** | Master frequency = perceived fundamental. Slave frequency = timbre control only. The master's pitch tracks MIDI key number exactly (12-TET). Frequency ratio $r = f_{\text{slave}} / f_{\text{master}}$ is set per voice/section and can be modulated (envelope, LFO) for dynamic timbral sweeps. |
+| **RHYTHM** | The master oscillator waveform itself can be gated (note-on/off), providing rhythmic articulation. For percussive use, the master can be a retriggering envelope or LFO at audio rates, producing pitched rhythm/hocket effects. |
+| **HARMONY** | Integer ratios ($r = 2, 3, 4, \dots$) produce pure octave, twelfth, double-octave subharmonics within the spectrum — a form of virtual pitch layering. Non-integer ratios produce inharmonic spectra suitable for bell/gong timbres. Multiple voices with different $r$ values per note form chordal layering. |
+| **STRUCTURE** | Per-section $r$ values and sync mode selections drive macro-form: verse = integer $r$ (clean harmonic), chorus = high non-integer $r$ (aggressive/buzzy), bridge = modulated $r$ (sweeping transition). The master waveform type (saw, square, tri) also changes the structural timbre palette. |
+| **TEXTURE** | Density determined by $r$: low $r$ (1–2) = sparse partials, high $r$ (7–10+) = dense, buzzy. Modulating $r$ with an LFO or envelope creates evolving textural shifts. Multiple synced oscillator pairs at different master pitches = orchestral thickness. |
+
+### UnitMatrix Integration
+
+The HSOS method maps onto the UnitMatrix compositional workflow as follows:
+
+- **Voices (rows)**: Each voice is either a standalone HSOS pair (master + slave) or a single oscillator in a master/slave chain. Two design patterns:
+  - *Independent pairs per voice*: Each voice gets its own master (at the voice's pitch) and slave (at $r \times$ pitch). Different voices can have different $r$ values, sync modes, and waveform types.
+  - *Shared master across voices*: One master oscillator runs at the harmonic anchor pitch; all voice-slaves sync to it, producing a harmonically locked but timbrally varied ensemble.
+
+- **Sections (columns)**: Per-section parameters: frequency ratio $r$, sync mode (hard/soft/comb), master waveform type (saw/square/sine/triangle), slave waveform type, PolyBLEP antialiasing on/off.
+
+- **Cells (MusicUnit)**: Each cell carries:
+  - `pitch` → master oscillator frequency
+  - `r` → slave/master frequency ratio (float, ≥ 1.0)
+  - `sync_mode` → `"hard"`, `"soft"`, `"comb"`
+  - `master_wave` → `"saw"`, `"square"`, `"tri"`, `"sine"`
+  - `slave_wave` → same (typically saw for most aggressive sync)
+  - `blep` → `True`/`False` (PolyBLEP antialiasing)
+  - Velocity → output gain
+
+- **Produce Dispatch**: `produce(midi_path, method="SP-096", params={"default_r": 3.0, "sync_mode": "hard", "master_wave": "saw", "slave_wave": "saw", "blep": True, "filter_cutoff": 8000, "filter_resonance": 0.7})`
+
+- **Post-processing**: After HSOS generation, the raw buffer is typically routed through a subtractive filter stage (SP-029 subtractive or SP-020 ZDF SVF) and amplitude envelope (ADSR) to shape the final timbre. The HSOS core is the exciter; the filter + envelope are the resonator/shaping layer.
+
+### Pitfalls
+
+1. **Aliasing is severe without antialiasing**: Naive phase-reset hard sync produces extreme aliasing artifacts. Always use PolyBLEP (4-point correction) or the comb-filter approximation. For sine hard sync, use the FIR residual kernel (La Pastina & D'Angelo 2022).
+2. **Phase advance at reset**: In digital implementation, best practice resets the slave to the phase it *would have* at the reset time, not phase 0, to prevent frequency jitter. Use fractional-phase carryover: $\phi_s \leftarrow \phi_s - 2\pi \lfloor \phi_s / 2\pi \rfloor$.
+3. **Master waveform matters**: A sine master produces a less aggressive sync than a sawtooth master. For maximum effect, use sawtooth for both master and slave.
+4. **Ratio modulation artifacts**: Modulating $r$ at audio rates produces sidebands similar to FM. This can be desirable (dynamic sweeps) but unexpected (inharmonic beating at certain rate ranges). Design $r$ modulation curves in log space to avoid perceptual discontinuities.
+5. **DC offset from hard sync**: Asymmetric phase resets can introduce DC offset. Apply a DC-blocking highpass filter ($f_c \approx 20$ Hz) after the sync oscillator.
+6. **Computational cost scales with slave frequency**: At high $r$, master periods contain many slave cycles, increasing per-period reset density. The comb-filter approximation (Timoney et al.) is recommended for $r > 5$ to reduce cost.
+7. **Not a standalone complete-voice method**: HSOS generates a raw waveform with constant spectral complexity. It requires post-filtering (lowpass/highpass/bandpass) and amplitude envelopes to produce musically usable tones — pair it with SP-029 or SP-020 for the subtractive signal chain.
+---
+
+*Appended 2026-09-26 by sound-production research cron job. Layer tag: absolute. Paradigm: Sound Production / Synthesis Engines. ID SP-096 confirmed free at append time (max SP ID was SP-095; no `sound_method_SP-096*` or `report_SP-096*` existed).*

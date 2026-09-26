@@ -1,0 +1,21 @@
+{
+  "artifact": "205-amapiano-study-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.workflows.unitmatrix_composer",
+  "sources": [],
+  "parameters": {
+    "project": "205-amapiano-study",
+    "phase": 1,
+    "style": "Amapiano (South African house)",
+    "key": "A minor",
+    "bpm": 112,
+    "seed": 20260926,
+    "method": "raw off-grid log-drum chromatic walk",
+    "source": "amapiano research brief"
+  },
+  "notes": "",
+  "sha256": "4bc5648664b922a227092ddceafd0804fbe977ad79a60db40fa9c5113b08fe63",
+  "bytes": 2012,
+  "created_utc": "2026-09-26T19:23:15.429787+00:00",
+  "provenance_version": "1.0"
+}
