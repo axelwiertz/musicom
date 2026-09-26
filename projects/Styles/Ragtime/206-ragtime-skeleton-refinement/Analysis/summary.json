@@ -1,0 +1,25 @@
+{
+  "project": "206-ragtime-skeleton-refinement",
+  "grid_audit": {
+    "Melody": 0,
+    "Bass": 0,
+    "Comp": 0
+  },
+  "grid_verdict": "PASS",
+  "harmony_audit": {
+    "Melody": {
+      "out_of_scale": 0,
+      "out_of_chord": 0
+    },
+    "Bass": {
+      "out_of_scale": 0,
+      "out_of_chord": 0
+    },
+    "Comp": {
+      "out_of_scale": 0,
+      "out_of_chord": 0
+    }
+  },
+  "harmony_verdict": "PASS",
+  "zero_drift": true
+}

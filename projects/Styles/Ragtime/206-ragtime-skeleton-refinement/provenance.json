@@ -1,0 +1,15 @@
+{
+  "project": "206-ragtime-skeleton-refinement",
+  "date": "2026-09-26",
+  "style": "Ragtime",
+  "method": "001 Skeleton-First Refinement",
+  "layer": "concrete",
+  "key": "C major",
+  "bpm": 120,
+  "form": "Intro|A|B|A2|Trio|Coda",
+  "bars": 40,
+  "instruments": ["piano"],
+  "generator": "musicom.workflows.unitmatrix_composer",
+  "classification": "AI_ASSISTED",
+  "seed": 20260926
+}
