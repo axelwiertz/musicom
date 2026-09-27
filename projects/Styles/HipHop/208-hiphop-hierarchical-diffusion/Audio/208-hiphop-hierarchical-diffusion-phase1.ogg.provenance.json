@@ -1,0 +1,19 @@
+{
+  "artifact": "208-hiphop-hierarchical-diffusion-phase1.ogg",
+  "classification": "ai-assisted",
+  "generator": "ffmpeg libopus",
+  "sources": [],
+  "parameters": {
+    "project": "208-hiphop-hierarchical-diffusion",
+    "phase": "phase1",
+    "format": "ogg",
+    "codec": "libopus",
+    "bitrate": "128k",
+    "source_midi": "208-hiphop-hierarchical-diffusion-phase1.mid"
+  },
+  "notes": "",
+  "sha256": "f09546caf638263358f6dc9f4a7543c1c018a1b9996c52a65e42ca7101b4bb9e",
+  "bytes": 1636718,
+  "created_utc": "2026-09-27T23:09:23.078805+00:00",
+  "provenance_version": "1.0"
+}

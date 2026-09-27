@@ -1,0 +1,23 @@
+{
+  "artifact": "208-hiphop-hierarchical-diffusion.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.workflows.unitmatrix_composer",
+  "sources": [],
+  "parameters": {
+    "project": "208-hiphop-hierarchical-diffusion",
+    "phase": 2,
+    "style": "HipHop",
+    "method": "010 Hierarchical Diffusion",
+    "layer": "concrete",
+    "quantization": "16th-grid (120 ticks) + chord-tone snap",
+    "key": "A natural minor",
+    "bpm": 90,
+    "seed": 20260927,
+    "progression": "i-VI-III-VII (Am-F-C-G)"
+  },
+  "notes": "",
+  "sha256": "9e65ceb37b8ee9e481a9500cf8342843e9127d159a7e0379135fa70e05d0ad0b",
+  "bytes": 6502,
+  "created_utc": "2026-09-27T23:08:51.491281+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,18 @@
+{
+  "artifact": "208-hiphop-hierarchical-diffusion-phase1.wav",
+  "classification": "ai-assisted",
+  "generator": "musicom.sound.render.fluidsynth",
+  "sources": [],
+  "parameters": {
+    "project": "208-hiphop-hierarchical-diffusion",
+    "phase": "phase1",
+    "format": "wav",
+    "soundfont": "FluidR3_GM.sf2",
+    "source_midi": "208-hiphop-hierarchical-diffusion-phase1.mid"
+  },
+  "notes": "",
+  "sha256": "94779fd2572389f42f21f5bf8992caa2c5b0ca60e7ea30f640a3e531e843c0fc",
+  "bytes": 15405868,
+  "created_utc": "2026-09-27T23:09:23.077181+00:00",
+  "provenance_version": "1.0"
+}
