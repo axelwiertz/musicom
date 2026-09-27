@@ -1,0 +1,25 @@
+{
+  "job": "random-style production (SP) layer-aligned",
+  "date": "2026-09-27",
+  "seed": 20260927,
+  "method": "SP-070",
+  "method_module": "sound.effects.morph_filter",
+  "method_desc": "Morphing Five-Character Resonant Filter (ZERO9 Fusion Filter-style)",
+  "layer": "absolute",
+  "params": {
+    "cutoff": 3600.0,
+    "resonance": 0.5,
+    "position": 1.5,
+    "drive": 1.4,
+    "mix": 0.6
+  },
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Baroque/091-baroque-genetic-allemande/MIDI/091-baroque-genetic-allemande.mid",
+  "output_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP070-morph-filter-baroque-genetic-allemande/SP070-morph-filter-baroque-genetic-allemande.wav",
+  "output_ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP070-morph-filter-baroque-genetic-allemande/SP070-morph-filter-baroque-genetic-allemande.ogg",
+  "lufs": -14.01260181531913,
+  "peak": 0.8912509679794312,
+  "silence_pct": 4.314720283218105,
+  "pitch_verdict": "PASS",
+  "hit_rate": 0.9126984126984127,
+  "he_mean": 0.3884198414648832
+}

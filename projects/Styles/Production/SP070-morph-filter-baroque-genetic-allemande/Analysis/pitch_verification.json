@@ -1,0 +1,9 @@
+{
+  "method": "SP-070",
+  "project": "091-baroque-genetic-allemande",
+  "status": "PASS",
+  "hit_rate": 0.9126984126984127,
+  "harmonic_energy_mean": 0.3884198414648832,
+  "windows_analyzed": 126,
+  "median_freq_hz": 170.0
+}

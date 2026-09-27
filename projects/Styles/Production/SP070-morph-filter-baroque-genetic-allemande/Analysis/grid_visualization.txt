@@ -1,0 +1,19 @@
+SP-070 morph filter — absolute layer grid
+position=1.5 -> engines {'diode': 0.707, 'svf': 0.707}
+cutoff=3600.0Hz resonance=0.5 drive=1.4 mix=0.6
+
+character sweep (all 5 engines, reference):
+  pos=0 ladder   [█░░░░]
+  pos=1 diode    [██░░░]
+  pos=2 svf      [███░░]
+  pos=3 comb     [████░]
+  pos=4 scream   [█████]
+
+stems (wet, same absolute params):
+  track00_Violin_MORPH.wav
+  track01_Oboe_MORPH.wav
+  track02_Cello_MORPH.wav
+  track03_Bright_Acoustic_Piano_MORPH.wav
+  track04_Viola_MORPH.wav
+  track05_Contrabass_MORPH.wav
+  track06_Drums_MORPH.wav
