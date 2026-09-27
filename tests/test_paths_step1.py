@@ -56,8 +56,12 @@ def test_scale_counts_match_plan():
     # Weekly registration (2026-09-20) added 088/089/090/091 at L4 (+4 → 33),
     # 086/087 at L3 (+2 → 50); HC-035..HC-040 added HC-036/037/038/040 at L4
     # (+4 → 37) and HC-035/039 at L3 (+2 → 52).
-    assert len(methods_by_scale("L4")) == 37
-    assert len(methods_by_scale("L3")) == 52
+    # Weekly registration (2026-09-27) added 097 at L4 and HC-041/HC-046 at L4
+    # (+3 → 40); 093/094/ABS-095/096 at L3 and HC-042/043/044/045/047 at L3
+    # (+9 → 61). ABS-095 is the first abstract-layer numeric method (CTC),
+    # routed to rules.subset_network like ABS-001..005.
+    assert len(methods_by_scale("L4")) == 40
+    assert len(methods_by_scale("L3")) == 61
     assert len(methods_by_scale("L2")) == 20
     assert len(methods_by_scale("L1")) == 9
 

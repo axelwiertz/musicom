@@ -36,6 +36,7 @@ GENERATOR_REGISTRY = {
     "ABS-003": ("rules.subset_network", None, "Z-Variation (abstract: same-ICV re-harmonization)"),
     "ABS-004": ("rules.subset_network", None, "Parsimonious Voice Leading (abstract: P/L/R smooth moves)"),
     "ABS-005": ("rules.subset_network", None, "Complement Contrast (abstract: matched-tension contrast)"),
+    "ABS-095": ("rules.subset_network", None, "Contour Theory Composition (abstract: contour prototypes CAS/CSeg -> ContourNetwork)"),
     # --- Human methods (HC-*, human_methods_db.md) — spec-only until shared code ---
     "HC-018": (None, None, "Clave-Guided Montuno (Cuban son; spec in human_methods_db.md)"),
     "HC-019": (None, None, "Bulgarian Aksak Horo (spec in human_methods_db.md)"),
@@ -62,6 +63,14 @@ GENERATOR_REGISTRY = {
     "HC-038": (None, None, "Sonata Form Process (spec in human_methods_db.md)"),
     "HC-039": (None, None, "Irish Traditional Dance Tune Setting & Ornamentation Craft (spec in human_methods_db.md)"),
     "HC-040": (None, None, "Andalusi Nūbah Suite Architecture & Mīzān Metric Acceleration (spec in human_methods_db.md)"),
+    # --- Human methods weekly promotion 2026-09-27 (reports HC-041..HC-047) ---
+    "HC-041": (None, None, "Gagaku Kangen Orchestral Stratification & Jo-Ha-Kyū Acceleration (spec in human_methods_db.md)"),
+    "HC-042": (None, None, "Andean Sikuri Hocket & Communal Tropa Craft (Ira-Arka Interlocking) (spec in human_methods_db.md)"),
+    "HC-043": (None, None, "Cante Alentejano Choral Stratification & Parallel-Third Descant (spec in human_methods_db.md)"),
+    "HC-044": (None, None, "Zulu Isicathamiya/Mbube A Cappella Choral Craft (spec in human_methods_db.md)"),
+    "HC-045": (None, None, "Ethiopian Qañat Kiñit Modal System — Azmari Wax-and-Gold (spec in human_methods_db.md)"),
+    "HC-046": (None, None, "Javanese Gamelan Gending Composition — Colotomic & Pathet (spec in human_methods_db.md)"),
+    "HC-047": (None, None, "Barbershop Quartet Voicing & Overtone Ring Craft (spec in human_methods_db.md)"),
 }
 
 

@@ -168,6 +168,19 @@ SCALE = {
     "HC-038": ("L4", False),  # Sonata Form Process (spec)
     "HC-039": ("L3", False),  # Irish Traditional Dance Tune Setting & Ornamentation (spec)
     "HC-040": ("L4", False),  # Andalusi Nūbah Suite Architecture & Mīzān Metric Acceleration (spec)
+    # REGISTERED 2026-09-27 (weekly prose->code promotion, reports 093..097, HC-041..047)
+    "093": ("L3", False),  # Percolation Process Network Criticality (PPNC) (spec)
+    "094": ("L3", False),  # Apollonian Circle Packing Composition (ACPC) (spec)
+    "ABS-095": ("L3", True),  # Contour Theory Composition (CTC) — rules.subset_network (abstract)
+    "096": ("L3", False),  # Dynamic Time Warping Composition (DTWC) (spec)
+    "097": ("L4", False),  # Maximum Entropy Composition (MaxEnt-C) (spec)
+    "HC-041": ("L4", False),  # Gagaku Kangen Orchestral Stratification & Jo-Ha-Kyū (spec)
+    "HC-042": ("L3", False),  # Andean Sikuri Hocket & Communal Tropa Craft (Ira-Arka) (spec)
+    "HC-043": ("L3", False),  # Cante Alentejano Choral Stratification & Parallel-Third Descant (spec)
+    "HC-044": ("L3", False),  # Zulu Isicathamiya/Mbube A Cappella Choral Craft (spec)
+    "HC-045": ("L3", False),  # Qañat Kiñit Modal System — Azmari Wax-and-Gold (spec)
+    "HC-046": ("L4", False),  # Javanese Gamelan Gending Composition — Colotomic & Pathet (spec)
+    "HC-047": ("L3", False),  # Barbershop Quartet Voicing & Overtone Ring Craft (spec)
     # --- L1 MICRO ---
     "002": ("L1", True),   # Markov Transitions
     "011": ("L1", False),  # Voice-Leading Graph Search
