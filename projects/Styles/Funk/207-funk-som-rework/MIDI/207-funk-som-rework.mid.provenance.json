@@ -1,0 +1,29 @@
+{
+  "artifact": "207-funk-som-rework.mid",
+  "classification": "ai-assisted",
+  "generator": "Method 075 SOM-C + musicom rules (Phase 2, rework of 098)",
+  "sources": [],
+  "parameters": {
+    "m": 4,
+    "n": 4,
+    "dim": 3,
+    "seed": 20260927,
+    "phase": 2,
+    "grid": 120,
+    "key": "F minor",
+    "source": "098-funk-som",
+    "variation": [
+      "transposition",
+      "retrograde",
+      "inversion",
+      "register-shift",
+      "diminution",
+      "augmentation"
+    ]
+  },
+  "notes": "Redesign: source 098 failed std6 (no provenance.json / index.html). Rebuilt via UnitMatrixComposer preserving identity; extended 24->32 bars, 8 sections.",
+  "sha256": "02da4cb039505032f9b66c8f517ede5cb2b559198bf44d1436ecb4810e184560",
+  "bytes": 11232,
+  "created_utc": "2026-09-27T01:08:29.363020+00:00",
+  "provenance_version": "1.0"
+}

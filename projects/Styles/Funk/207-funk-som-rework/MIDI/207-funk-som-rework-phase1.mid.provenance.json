@@ -1,0 +1,19 @@
+{
+  "artifact": "207-funk-som-rework-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "Method 075 SOM-C (Phase 1 Raw, rework of 098)",
+  "sources": [],
+  "parameters": {
+    "m": 4,
+    "n": 4,
+    "dim": 3,
+    "seed": 20260927,
+    "phase": 1,
+    "source": "098-funk-som"
+  },
+  "notes": "",
+  "sha256": "ebed2f76477f5010de59cae5525187a0de08d4a2fc4703861cc148cb303643d2",
+  "bytes": 1872,
+  "created_utc": "2026-09-27T01:08:29.362389+00:00",
+  "provenance_version": "1.0"
+}

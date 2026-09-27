@@ -63,6 +63,7 @@ _INSTRUMENT_MODULES = {
     "World.banjo.banjo": "banjo",
     "Woodwind.bagpipe.bagpipe": "bagpipe",
     "Woodwind.harmonica.harmonica": "harmonica",
+    "Woodwind.ocarina.ocarina": "ocarina",
     "World.shenai.shenai": "shenai",
     "World.fiddle.fiddle": "fiddle",
     "World.shakuhachi.shakuhachi": "shakuhachi",
@@ -224,6 +225,7 @@ KALIMBA = ALL_INSTRUMENTS["kalimba"]
 BANJO = ALL_INSTRUMENTS["banjo"]
 BAGPIPE = ALL_INSTRUMENTS["bagpipe"]
 HARMONICA = ALL_INSTRUMENTS["harmonica"]
+OCARINA = ALL_INSTRUMENTS["ocarina"]
 SHENAI = ALL_INSTRUMENTS["shenai"]
 FIDDLE = ALL_INSTRUMENTS["fiddle"]
 SHAKUCHACHI = ALL_INSTRUMENTS["shakuhachi"]
@@ -446,3 +448,7 @@ if __name__ == "__main__":
     print("  by_name('english horn') =", by_name("english horn"))
     print("  by_program(69) =", by_program(69))
     print("  ENGLISH_HORN.in_sweet_spot(65) =", ENGLISH_HORN.in_sweet_spot(65))
+    print("  OCARINA.midi_program =", OCARINA.midi_program, "(should be 79)")
+    print("  by_name('ocarina') =", by_name("ocarina"))
+    print("  by_program(79) =", by_program(79))
+    print("  OCARINA.in_sweet_spot(74) =", OCARINA.in_sweet_spot(74))

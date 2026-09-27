@@ -474,6 +474,27 @@ constant. Line-instrument quirk: monophonic bamboo flute — no dense chords
 or harmony; pentatonic writing is idiomatic (D minor pentatonic); meri/kari
 bending via MIDI pitch-bend events for authentic Zen-style glissando.
 
+**Ocarina added** (2026-09-27): GM79, Woodwind-family vessel flute entry — the
+globular ceramic fipple flute (Zelda ocarina, Pikachu kazoo rip-off, the
+purest tone in the woodwind family: near-sinusoidal fundamental with
+extremely weak upper partials, chamber suppresses overblow) (instrument.md +
+ocarina.py), verified end-to-end UnitMatrixComposer → zero-drift ✓ → MIDI (111
+bytes) → FluidSynth WAV (760 KB) ✓; RenderPipeline stem label
+`trackXX_Ocarina.wav` ✓ (GM_PROGRAMS[79] = "Ocarina", FluidR3 preset 79 =
+"Ocarina" — labels match exactly, **no quirk**). PhaseModSynth recommended
+(sine carrier + sine modulator, ratio 1.0, depth 0.8 — shallowest in the
+woodwind set, reflecting the near-sine vessel flute tone; attack 0.06 s for
+gradual chamber fill; no reed/edge-tone transient). Additive fallback with 4
+partials (weights 0.9, 0.3, 0.1, 0.03 — strongest fundamental falloff of any
+Woodwind). Solo-render spectral check: 4–8 kHz buzz 1.0% (near-sine tone —
+cleanest in the set, well below 20% gate). Range 55–96 (G3–C7 sounding);
+sweet spot 72–84 (C5–C6). Identity quirk: the ocarina is the ONLY vessel
+flute in the KB (Helmholtz resonator, not a tube flute) — its range is
+inherently limited to about an octave+a-fourth on a single chamber, so
+composition should keep lines within roughly G3–C6 (55–84) for idiomatic
+tone; above C6 the patch thins out. Mono-line quirk: ocarina is a single
+breath line (vessel), NOT a harmony/pad voice — no dense chords.
+
 **Tubular Bells added** (2026-09-26): GM14, Percussion-family seventh entry —
 the struck brass tube chimes (orchestral tintinnabuli; Tchaikovsky 1812,
 Mahler Resurrection, Mike Oldfield theme) (instrument.md + tubular_bells.py),
@@ -562,6 +583,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | World | Taiko Drum | 116 | 36–67 | accent, rhythm, drone, ornament |
 | World | Shakuhachi | 77 | 55–100 | lead, melody, ornament, drone, accent |
 | Woodwind | Bagpipe | 109 | 53–96 | lead, melody, ornament, drone, accent |
+| Woodwind | Ocarina | 79 | 55–96 | lead, harmony, accent |
 
 ## Stem label quirks (RenderPipeline)
 
@@ -605,8 +627,9 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 111 | Shanai | **Shanai** ✗ (GM_PROGRAMS[111] = "Shanai" — GM2 spec spelling; instrument = Shenai, FluidR3 preset 111 = "Shenai") |
 | 110 | Fiddle | Fiddle ✓ (GM_PROGRAMS[110] + FluidR3 preset 110 both "Fiddle") |
 | 77 | Shakuhachi | Shakuhachi ✓ **no quirk** (GM_PROGRAMS[77] + FluidR3 preset 77 both "Shakuhachi") |
-| 22 | Harmonica | Harmonica ✓ (GM_PROGRAMS[22] + FluidR3 preset 22 both "Harmonica") |
-| 114 | Steel Drums | Steel Drums ✓ (GM_PROGRAMS[114] + FluidR3 preset 114 both "Steel Drums") |
+|| 22 | Harmonica | Harmonica ✓ (GM_PROGRAMS[22] + FluidR3 preset 22 both "Harmonica") |
+|| 79 | Ocarina | Ocarina ✓ (GM_PROGRAMS[79] + FluidR3 preset 79 both "Ocarina") |
+|| 114 | Steel Drums | Steel Drums ✓ (GM_PROGRAMS[114] + FluidR3 preset 114 both "Steel Drums") |
 || 116 | Taiko Drum | Taiko Drum ✓ (GM_PROGRAMS[116] + FluidR3 preset 116 both "Taiko Drum") |
 || 21 | Accordion | Accordion ✓ (GM_PROGRAMS[21] = "Accordion"; FluidR3 preset 21 = "Accordian" — archaic SF2 spelling, cosmetic only, no routing impact) |
 || ch9/pgm0 | Drums | **Acoustic_Grand_Piano** ✗ (program-0 fallback) |

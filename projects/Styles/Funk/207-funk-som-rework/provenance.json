@@ -1,0 +1,22 @@
+{
+  "project": "207-funk-som-rework",
+  "genre": "Funk",
+  "key": "F minor",
+  "bpm": 104,
+  "form": "8 sections x 4 bars = 32 bars",
+  "source": "098-funk-som",
+  "redesign_required": true,
+  "audit_failures": [
+    "std6_provenance.json",
+    "std6_index.html"
+  ],
+  "variation_techniques": [
+    "transposition (+5, Chorus)",
+    "retrograde (Bridge)",
+    "inversion (Chorus2)",
+    "register-shift +12 (Verse2)",
+    "diminution x0.5 (Solo)",
+    "augmentation x2.0 (Outro)"
+  ],
+  "seed": 20260927
+}

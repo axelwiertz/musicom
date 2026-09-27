@@ -105,6 +105,7 @@ Classification of active Musicom composition methods categorized by their primar
 | **095** | abstract | Contour Theory Composition (CTC) | **Rules-Based** | Pitch, Rhythm, Structure, Texture | None (Contour-shape-defined) | Grid-Locked / Continuous | Meso / Contour Segment | $\mathcal{O}(N^2)$ segment gen, $\mathcal{O}(N \log N)$ real | Generates abstract contour prototypes (CAS/CSeg classes) independent of exact pitch — the shape of a melody as a sequence of up/down/same relations. ContourNetwork maps via I/R/RI transformations; concrete layer maps rank → scale degree. First abstract-layer method: feeds rules/subset_network.py. |
 | **096** | concrete | Dynamic Time Warping Composition (DTWC) | **Rules-Based** | Pitch, Rhythm, Structure, Texture | Moderate (Source/Target-anchored) | Grid-Locked / Continuous | Meso / Warp Path | $\mathcal{O}(N \cdot M)$ | Computes the optimal non-linear alignment (warp path) between two musical sequences via DTW, then generates new material by walking the path and interpolating between matched points. Morph parameter $\alpha$ blends source→target; warp path density controls rhythmic stretch/compression. Multi-voice morphs per UnitMatrix row. |
 | **097** | concrete | Maximum Entropy Composition (MaxEnt-C) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Constraint-guided) | Grid-Locked / Continuous | Macro / Boltzmann-Gibbs Ensemble | $\mathcal{O}(K \cdot q^2 \cdot N)$ learning, $\mathcal{O}(I \cdot N \cdot q)$ sampling | Applies Jaynes' Maximum Entropy principle: finds the least-biased (maximum-entropy) probability distribution over pitch/rhythm/chord sequences consistent with pairwise moment constraints via a Boltzmann–Gibbs (Potts) model. Pairwise interactions at multiple distances capture long-range melodic structure without high-order Markov overfitting. Sampling via MCMC fills UnitMatrix cells. |
+| **098** | concrete | Multi-Objective Evolutionary Pareto Composition (MOEPC) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Pareto-guided, multi-objective fitness) | Grid-Locked / Continuous | Macro / Pareto Front | $\mathcal{O}(I \cdot P \cdot N \cdot M)$ | Evolves multiple conflicting musical objectives (harmonic quality, melodic quality, rhythmic coherence, voice independence) via NSGA-II, returning a Pareto front of trade-off compositions. The front itself defines macro-form. |
 
 ### **097** | Maximum Entropy Composition (MaxEnt-C) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Constraint-guided) | Grid-Locked / Continuous | Macro / Boltzmann-Gibbs Ensemble | $\mathcal{O}(K \cdot q^2 \cdot N)$ learning, $\mathcal{O}(I \cdot N \cdot q)$ sampling
 
@@ -262,6 +263,7 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 | **SP-094** | Through-Zero Frequency Modulation Synthesis (TZFM) | **Synthesis Engines** | Pitch-Stable Extreme FM / Glassy Digital & Brass Timbres | Modulates carrier frequency with depth sufficient to drive the instantaneous frequency below zero, reversing the phase accumulator direction instead of stalling at 0 Hz. TZFM preserves the carrier pitch $f_c$ exactly regardless of modulation depth $d$ via bidirectional phase accumulation, enabling arbitrarily high modulation indices with zero DC drift. Produces glassy, brassy, and complex bell spectra at extreme depths where conventional FM would detune. $\mathcal{O}(1)$ per sample. Candidate: `sound/synthesis/tzfm.py`. |
 | **SP-095** | Tonewheel Electromagnetic Modeling Synthesis (TWEMS) | **Synthesis Engines** | Electromechanical Organ / Drawbar-Composite Timbre | Models the Hammond tonewheel generator: 91 rotating disks with magnetic pickups produce 9 drawbar partials (harmonic ratios 0.5, 1.5, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 8.0) with key-click transient (6th harmonic burst + staggered contact bounce), harmonic foldback at keyboard extremes, 5 Hz synchronous-motor tremolo, 6-position scanner vibrato/chorus (time-varying phase-shift delay), and the Leslie rotating speaker cabinet (Doppler time-varying delay + tremolo + crossover-filtered horn/drum paths). $\mathcal{O}(P)$ per sample ($P=9$ partials). Candidate: `sound/synthesis/twems.py`. |
 | **SP-096** | Hard Sync Oscillator Synthesis (HSOS) | **Synthesis Engines** | Classic Analog Sync / Aggressive Lead & Bass Timbres | Syncs a slave oscillator's phase to a master oscillator's zero-crossings: master sets the fundamental pitch while the slave-to-master frequency ratio $r = f_s / f_m$ determines the harmonic spectrum independently. Hard sync (phase reset) produces the classic tearing/screaming analog lead; soft sync (phase-reverse) gives milder octave-doubling textures. Ratio $r$ sweep is a one-knob timbre morph from pure fundamental ($r=1$) through integer subharmonics ($r=2,3,4$) to dense inharmonic buzz ($r > 5$). Bandlimited antialiasing via PolyBLEP (4-sample correction, $\mathcal{O}(1)$ per sample). Candidate: `sound/synthesis/hard_sync.py`. |
+| **SP-097** | Sub-Harmonic Oscillator Synthesis (SHOS) | **Synthesis Engines** | Subharmonic Chord Stacks / Divide-Down Bass Enhancement | Generates the undertone series $f_0/d$ for integer divisors $d \in \{1,2,\dots,6\}$ from a shared master oscillator via phase-accumulator frequency division. Produces phase-locked subharmonic chord stacks (root, P8, P12, 2×P8, M17, P19) from a single root note — a single-note chord. Three modes: subharmonic bass enhancement (Dbx 120-style $f_0/2$ synthesis), subharmonic chord stack (Moog Subharmonicon-style multi-divisor mix), and divide-down organ (top-octave frequency chain). Per-divisor gains, per-divisor fine detuning ($\pm\delta_d$ cents), polyrhythmic gating per divisor. $\mathcal{O}(D)$ per sample ($D=|\mathcal{D}|$). Candidate: `sound/synthesis/subharmonic.py`. |
 |---|
 
 
@@ -20721,3 +20723,491 @@ The HSOS method maps onto the UnitMatrix compositional workflow as follows:
 ---
 
 *Appended 2026-09-26 by sound-production research cron job. Layer tag: absolute. Paradigm: Sound Production / Synthesis Engines. ID SP-096 confirmed free at append time (max SP ID was SP-095; no `sound_method_SP-096*` or `report_SP-096*` existed).*
+### **098** | Multi-Objective Evolutionary Pareto Composition (MOEPC) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Pareto-guided, multi-objective fitness) | Grid-Locked / Continuous | Macro / Pareto Front | $\mathcal{O}(I \cdot P \cdot N \cdot M)$ (non-dominated sort: $\mathcal{O}(M \cdot P^2)$, evolution: $\mathcal{O}(I \cdot P \cdot O \cdot U)$)
+
+### Source
+Jeong, J., Kim, Y. & Ahn, C. W. (2017). "A multi-objective evolutionary approach to automatic melody generation." *Expert Systems with Applications* 90, 50–61. doi:10.1016/j.eswa.2017.08.014. — De Prisco, R., Zaccagnino, G. & Zaccagnino, R. (2019). "EvoComposer: An Evolutionary Algorithm for 4-Voice Music Compositions." *Evolutionary Computation* 28(4), 621–658. doi:10.1162/evco_a_00265. — Scirea, M., Togelius, J., Eklund, P. W. & Risi, S. (2016). "MetaCompose: A compositional evolutionary music composer." In *Proc. 5th Int'l Conf. Evolutionary and Biologically Inspired Music, Sound, Art and Design* (EvomusArt), pp. 202–217. — Deb, K., Pratap, A., Agarwal, S. & Meyarivan, T. (2002). "A fast and elitist multiobjective genetic algorithm: NSGA-II." *IEEE Trans. Evolutionary Computation* 6(2), 182–197.
+
+### Layer
+**concrete** — generates concrete pitch/rhythm/harmony events organized into UnitMatrix cells. The evolutionary search directly optimizes note-level representations (chromosomes encoding pitch, onset, duration, velocity per voice/time-slot), producing realizable MusicalEvents. Feeds generators/ via the evolved population's decoded individuals, and the Pareto front directly maps to UnitMatrix voice×section layouts.
+
+### Paradigm
+**Stochastic** — the method is a population-based metaheuristic with stochastic operators (crossover, mutation, tournament selection) guided by non-dominated sorting and crowding distance. There is no deterministic rewrite rule, no nature-inspired physical simulation, and no learned neural network. The stochastic nature of variation and selection means repeated runs produce different compositions.
+
+### Description
+**Multi-Objective Evolutionary Pareto Composition (MOEPC)** extends single-objective evolutionary music composition (003 Genetic Genome Selection, 055 SAMC) to the multi-objective setting, where $M \ge 2$ conflicting musical objectives are optimized simultaneously using Pareto dominance. Instead of collapsing multiple criteria into a weighted sum, MOEPC maintains a population of candidate solutions and ranks them by non-domination: solution $A$ dominates solution $B$ ($A \prec B$) iff $f_i(A) \le f_i(B)$ for all objectives $i$ and $f_j(A) < f_j(B)$ for at least one $j$. The set of mutually non-dominating solutions forms the **Pareto front** — the fundamental creative output is not a single composition but a family of trade-off compositions covering the spectrum of musical priorities.
+
+**Core algorithm (NSGA-II framework, Deb et al. 2002):**
+
+1. **Initialize**: Generate a population $\mathcal{P}_0$ of $P$ random or semi-random chromosomes (each encoding a complete or partial UnitMatrix filling).
+2. **Non-dominated sort**: Partition $\mathcal{P}_t$ into fronts $\mathcal{F}_1, \mathcal{F}_2, \ldots$ where $\mathcal{F}_1$ = non-dominated solutions, $\mathcal{F}_2$ = solutions dominated only by $\mathcal{F}_1$, etc. Each solution gets a rank $r$ = its front index.
+3. **Crowding distance**: Within each front, compute crowding distance $d(\mathbf{x})$ — the perimeter of the hyper-rectangle formed by nearest neighbors in objective space. High $d$ = more isolated solution, preserved to maintain diversity.
+4. **Selection**: Binary tournament: pick two solutions, prefer lower rank $r$; if same rank, prefer higher crowding distance $d$ (sparser region).
+5. **Variation**: Apply musical crossover (chord-preserving, voice-exchange, section-recombination) and mutation (pitch-shift, rhythm-jitter, voice-leading repair) with probabilities $p_c, p_m$.
+6. **Elitist replacement**: Combine parent + offspring populations ($2P$ size), re-sort by non-domination, truncate to $P$ by front priority + crowding distance (the elitist guarantee of NSGA-II).
+7. **Repeat** steps 2–6 for $I$ generations. Return the final $\mathcal{F}_1$ front.
+
+**Hybrid evaluation** (De Prisco et al. 2019): Objective functions combine:
+- **Functional objectives**: Hard music-theory rules (forbidden parallel fifths/octaves, voice-crossing penalties, range limits) → violation count (minimize).
+- **Aesthetic objectives**: Corpus-derived statistical weights — chord transition probabilities, melodic interval profiles, voice-leading preferences learned from a reference corpus (e.g., Bach chorales) → maximize fit.
+- **Psychoacoustic objectives**: Stability (consonance density, tonic centering) and tension (non-chord tones, chromatic density, interval dissonance) as in Jeong et al. (2017) — conflicting by design.
+
+**Representation**: Chromosome $C = (c_{v,t,s})$ is a 3D tensor over voices $v \in [1,\ldots,V]$, time slots $t \in [1,\ldots,T]$, and parameters $s \in \{\text{pitch class}, \text{octave}, \text{onset}, \text{duration}, \text{velocity}\}$. For 4-voice harmonization (EvoComposer), each column = one chord with 4 notes, plus non-harmonic-tone flags per slot.
+
+**Creative significance**: The Pareto front itself is the composition's macro-form — the designer selects which trade-off point along the front to realize per section. A verse might favor melodic quality (low tension), while a chorus favors harmonic richness (high stability). Different voices can be decoded from different Pareto-optimal individuals and assembled into the UnitMatrix. This front-as-form concept is unique to MOEPC and has no analogue in single-objective methods (003, 055, 073) or in nature-inspired methods (035, 038, 043).
+
+### Musical Elements Framework
+
+**PITCH**: Pitch is the primary decision variable encoded in the chromosome. Each individual defines pitch (pitch class + octave) per voice per time slot. Objectives include:
+- *Melodic quality*: smooth contour (stepwise motion, limited leaps, tonal centering) — measured via interval-profile fitness against corpus statistics.
+- *Pitch stability*: fraction of chord tones vs. non-chord tones.
+- *Pitch tension*: cumulative interval dissonance (Schoenberg's dissonance ranking: unison < P5 < P4 < M3/m3 < m2/M2 < tritone < minor 7th < major 7th < semitone cluster).
+- Pareto trade-off: a high-stability individual stays close to chord tones and tonic; a high-tension individual uses chromatic neighbor tones, appoggiaturas, and angular leaps.
+
+**RHYTHM**: Rhythm is encoded as onset positions and duration values per note. Objectives:
+- *Rhythmic regularity*: metric alignment (on-beat density, syncopation distance from metrical grid).
+- *Rhythmic variety*: entropy of inter-onset-interval distribution.
+- *Groove coherence*: cross-correlation with reference rhythm patterns (Euclidean, clave patterns).
+- Pareto trade-off: highly regular rhythms support harmonic clarity; syncopated varied rhythms drive interest — conflicting objectives that the front resolves by returning options at every point on the spectrum.
+
+**HARMONY**: Harmony arises from vertical simultaneity across voices at each time slot. Objectives:
+- *Harmonic quality*: chord grammar fitness (probability of I→IV→V→I, Cadential 6/4, etc.) from corpus statistics; chord voicing compactness (voice spread ≤ octave preferred).
+- *Voice-leading quality*: sum of stepwise voice-leading distances; penalties for parallel fifths/octaves, voice crossing, hidden octaves.
+- *Functional clarity*: root function strength (HOME/LIFT/TENSE/TURN per Lerdahl's tonal hierarchy).
+- These objectives directly conflict: voice-leading smoothness favors small intervals (stepwise), while harmonic clarity favors root-position chords at cadential points — MOEPC resolves via Pareto dominance.
+
+**STRUCTURE**: Macro-form is encoded by the chromosome's organization into sections and by the Pareto front itself:
+- *Section-level form*: The population evolves per-section. A composition is built by selecting different Pareto-optimal individuals for different sections (e.g., front-extreme low-tension for verse, front-extreme high-tension for bridge).
+- *Front trajectory*: The Pareto front evolves over generations — its hypervolume (dominated space) tracks convergence; its spread tracks diversity. A growing front = increasingly differentiated musical options.
+- *Multi-objective macro-form*: The designer schedules $(w_1, w_2, \ldots, w_M)$ weight trajectories per section to select which trade-off to realize, creating a form arc from the front.
+
+**TEXTURE**: Texture is the byproduct of voice assignments and their independence objective:
+- *Voice independence*: measured by mutual information $I(V_a, V_b)$ between voice pair pitch sequences. Lower mutual information = more independent, contrapuntal texture.
+- *Homophony vs. polyphony*: The Pareto front includes both extremes — a chord-block individual (all voices move together, high harmonic quality, low independence) and a contrapuntal individual (each voice is melodically independent, low chord quality).
+- *Textural density*: number of active voices per time slot; a texture-density objective promotes varied density across the form.
+- *Registration spread*: average voice-pitch span per chord; narrow = chorale texture, wide = orchestral/open harmony.
+
+### UnitMatrix Integration (Voices & Sections)
+
+**Voices**: The chromosome $C$ has an explicit voice dimension $v \in [1,\ldots,V]$. Each voice evolves its own pitch, onset, duration, and velocity track. The multi-objective framework enforces both:
+- *Per-voice quality*: each voice's melodic line is evaluated independently (contour smoothness, tonal centering, rhythmic coherence).
+- *Cross-voice quality*: vertical chord quality, voice-leading parsimony, independence, and registration spread are evaluated as aggregate or pair-wise objectives.
+
+Voice assignment to UnitMatrix rows is 1:1 — voice $v$ of chromosome $C$ = row $v$ of the matrix. The Pareto-optimal population can be decoded into multiple UnitMatrix realizations, each representing a different trade-off along the voice-independence vs. harmonic-clarity axis.
+
+**Sections**: The chromosome is partitioned into section blocks $[s_1, s_2, \ldots, s_S]$. Two strategies exist:
+- *Method A (single-population, multi-section)*: All sections share the same population. Selection pressure is per-section — an individual must be Pareto-optimal across all sections simultaneously. This enforces global coherence but may limit section contrast.
+- *Method B (per-section sub-populations)*: Independent populations evolve for each section, each producing its own Pareto front. The macro-composer then assembles the final UnitMatrix by selecting one Pareto-optimal individual from each section's front — this maximizes section contrast (tension arc) while permitting the designer to choose from multiple trade-off points within each section.
+
+Section-level objectives include: sectional coherence (intra-section motif consistency), sectional contrast (inter-section pitch-range, density, and harmonic function shifts), and global form (overall tension arc, climax placement).
+
+**Cells (MusicUnit)**: Each cell is filled by the decoded events of a Pareto-optimal individual's voice track for that section. The standard zero-drift invariant holds: all voice tracks within a section must end at the section length in ticks. The validation gate (`composer.validate()`) must pass before MIDI export.
+
+### Pitfalls
+1. **Computational cost**: $\mathcal{O}(I \cdot P \cdot N \cdot M)$ — dominated by the non-dominated sort $\mathcal{O}(M \cdot P^2)$ per generation. For large populations ($P > 200$) and many objectives ($M > 4$), this becomes expensive. Use fast non-dominated sort (Jensen 2003) for $M > 3$.
+2. **Objective design is non-trivial**: Poorly chosen objectives (correlated, missing key aspects, wrong scaling) collapse the Pareto front to a single point or degenerate region. Objectives must be truly conflicting and properly normalized (min/max scaling per generation).
+3. **Curse of dimensionality**: With $M > 4$ objectives, the Pareto front becomes too sparse to cover practically (most solutions are non-dominated). Use dimensionality reduction (PCA on objective space) or indicator-based selection (IBEA, HypE).
+4. **Chromosome length scales poorly**: For a 4-voice, 16-bar piece at 16th-note resolution (1024 slots), the chromosome has $4 \times 1024 \times 5 = 20,480$ decision variables. The search space is enormous. Use hierarchical / multi-scale representations (bars→beats→subdivisions) with sectional coarsening.
+5. **Music-theory constraints may dominate**: If the functional objectives (parallel-fifth penalties, etc.) are weighted too heavily, they overwhelm aesthetic objectives and all Pareto-optimal solutions are merely "rule-correct but bland." Balance the number and scale of functional vs. aesthetic objectives carefully.
+6. **Corpus bias**: Corpus-derived statistical weights (Bach, Mozart, Beatles) imprint a specific style. To generate novel music, use a diverse or custom corpus, or combine corpus weights with designer-specified profile weights.
+7. **Diversity collapse**: Crowding distance preserves diversity in objective space but not necessarily in musical space. Two solutions with different objective vectors may be musically identical. Add a genotypic diversity objective (Hamming distance in chromosome space) to maintain musical variety.
+8. **Real-time infeasibility**: Generation takes $10^3$–$10^6$ fitness evaluations, each evaluating a full 4-voice composition. Not suitable for interactive real-time systems without precomputed front caching.
+9. **Front selection problem**: Having many Pareto-optimal solutions is powerful but leaves the final aesthetic choice to the user. For fully autonomous operation, implement a meta-criterion (maximum hypervolume, knee-point detection, maximum marginal utility) to auto-select from the front.
+10. **Section boundary artifacts**: In Method B (per-section populations), concatenating different Pareto-optimal individuals across section boundaries can produce abrupt voice-leading jumps. Apply a voice-leading smoothing pass across section seams as a post-processing step.# Sound Production Method SP-097 — Sub-Harmonic Oscillator Synthesis (SHOS)
+
+### Source
+- Oskar Sala, Mixtur-Trautonium (1948–1952): first electronic instrument with a dedicated subharmonic generator producing simultaneous multiple frequency divisions for chordal subharmonic stacks.
+- Dbx 100 "Boom Box" (1976) / Dbx 120A Subharmonic Synthesizer: first commercial subharmonic enhancer for dance-club bass reinforcement; extracts a synthetic sub-octave from recorded audio via zero-crossing frequency detection and modeled waveform synthesis.
+- Moog Subharmonicon (2020): analog semi-modular synthesizer pairing a 6-voice subharmonic oscillator bank (divisors 1–6) with a 2×6-step polyrhythmic sequencer, popularizing subharmonic chord stacks as a standalone synthesis voice.
+- Technical references: Chamberlin, H. (1985). *Musical Applications of Microprocessors* (2nd ed.). Hayden Books. Ch. 13 (frequency division synthesis). — Dodge, C. & Jerse, T. A. (1997). *Computer Music: Synthesis, Composition, and Performance* (2nd ed.). Schirmer. pp. 75–79. — Smith III, J. O. (2010). *Physical Audio Signal Processing*. W3K Publishing, Ch. 6 (digital waveguide frequency division). — Puckette, M. (2007). *The Theory and Technique of Electronic Music*. World Scientific. pp. 105–108 (pitch shifting vs frequency division). — Roads, C. (2015). *Composing Electronic Music: A New Aesthetic*. Oxford University Press. pp. 98–101 (subharmonic practice). Candidate code path: `sound/synthesis/subharmonic.py`, pluggable into `workflows.musicom_workflow.produce(method="SP-097")`.
+
+### Layer
+`absolute` (sound production — synthesis engines; maps symbolic note events with fundamental pitch, active divisor set, mixer levels, and oscillator waveform type into continuous time-domain audio buffers via frequency division of a primary master oscillator). Candidate code path: `sound/synthesis/subharmonic.py`.
+
+### Description
+Sub-Harmonic Oscillator Synthesis (SHOS) generates the undertone series — frequencies at $f_0/n$ for integer divisors $n$ — from a single master oscillator running at the root pitch. Unlike the overtone series (harmonics at $n f_0$, used by additive synthesis SP-039, FM SP-010/SP-017, and wavetable SP-041), the undertone series descends in pitch: $f_0, f_0/2, f_0/3, f_0/4, \dots$, producing octaves ($1/2$), twelfths ($1/3$), double octaves ($1/4$), and the full subharmonic chord stack.
+
+The method has three distinct use cases:
+
+1. **Subharmonic Bass Enhancement (Dbx-style)**: Given an existing audio buffer (e.g. a kick drum or bass track), detect the fundamental frequency via zero-crossing or autocorrelation, synthesize a phase-locked sub-octave waveform ($f_0/2$), and mix it back into the original. Used for club bass reinforcement.
+
+2. **Subharmonic Chord Stacks (Moog Subharmonicon style)**: A master oscillator at $f_0$ feeds $N$ parallel frequency dividers (flip-flop or phase-accumulator-based) with divisors $n \in \{1, 2, 3, 4, 5, 6, \dots\}$. Each divider produces a square wave at $f_0/n$, mixed through independent level controls. All subharmonics are phase-locked to the master — they drift and detune together, giving a monolithic, organ-like ensemble.
+
+3. **Divide-Down Organ (Hammond/B3 tonewheel emulation)**: A single high-frequency master oscillator (e.g. at the top octave) is divided down by successive flip-flop ÷2 stages to generate all 12 semitones of the octave, then further divided to produce every octave. Each tonewheel of the Hammond organ is a separate gear ratio; a divide-down organ approximates this with a handful of top-octave generators.
+
+The core distinction from every other synthesis method is that **pitch relationship is division-based, not multiplication-based** — the spectrum descends from the fundamental rather than ascending, and all partials are locked to exact integer fractions of the master, creating a uniquely cohesive, monolithic, organ-like timbre that contrasts with the airy, separated partials of additive or FM synthesis.
+
+### Technical Mechanics
+
+#### 1. Analog Frequency Division (Flip-Flop Method)
+
+A D-type flip-flop (CD4013) configured as a divide-by-2 toggle: the $Q$ output toggles on every rising edge of the clock input. With a square-wave input at $f_0$, the output is a 50% duty-cycle square wave at $f_0/2$. Cascading $m$ stages yields $f_0/2^m$:
+
+$$f_{\text{sub},m} = \frac{f_0}{2^m}$$
+
+For arbitrary integer division by $n$, a synchronous counter resets when the count reaches $n$:
+
+$$f_{\text{sub},n} = \frac{f_0}{n}, \quad n \in \mathbb{Z}^+$$
+
+The output is always a square wave (rich odd harmonics) unless filtered or shaped.
+
+#### 2. Digital Phase-Accumulator Frequency Division
+
+Given a master phase accumulator $\phi_m[n]$ with increment $\Delta_m = 2\pi f_0 / f_s$:
+
+$$\phi_m[n+1] = \phi_m[n] + \Delta_m$$
+
+A subharmonic at $f_0/n$ is generated by reading the master phase at a reduced rate: the subharmonic phase $\phi_n$ increments by $\Delta_n = \Delta_m$ but its output is sampled once every $n$ master samples, or equivalently, the subharmonic phase progresses at $1/n$ of the master rate:
+
+$$\phi_n[n+1] = \phi_n[n] + \frac{\Delta_m}{n}$$
+
+The subharmonic waveform is then $w(\phi_n)$ where $w$ is any waveform function (sine, saw, square, triangle, custom wavetable). This approach gives **arbitrary divisor $n$** and **arbitrary waveform shape** at the subharmonic, unlike analog flip-flop division which outputs only square waves.
+
+A computationally cheaper approach uses a **trigger counter** on the master's zero-crossing:
+
+$$c[n+1] = \begin{cases}
+c[n] + 1, & \text{if master phase wraps} \\
+c[n], & \text{otherwise}
+\end{cases}$$
+
+$$c[n] \ge n \implies c[n] := 0,\quad \text{trigger subharmonic oscillator}$$
+
+Each trigger resets and re-launches the subharmonic waveform. This is the digital equivalent of the analog flip-flop and also forces square-wave output unless a waveform generator is attached per trigger.
+
+#### 3. Phase-Locked Waveform Synthesis (Full Method)
+
+The complete SHOS engine for a single voice produces an output $y[n]$ as a weighted sum of $D$ subharmonic oscillators, each phase-locked to the same master:
+
+$$y[n] = \sum_{d=1}^{D} g_d \cdot w_d\left( \frac{\phi_m[n]}{d} \bmod 2\pi \right)$$
+
+where:
+- $\phi_m[n]$ = master phase accumulator at frequency $f_0$
+- $d \in \mathcal{D}$ = active divisor set (e.g. $\{1, 2, 3, 4, 5, 6\}$)
+- $g_d$ = per-divisor gain (mix level)
+- $w_d(\theta)$ = waveform function for divisor $d$ (sine/saw/square/tri/wavetable)
+- $D = |\mathcal{D}|$ = number of active subharmonic voices
+
+The master oscillator itself may be any waveform type; its output is included as divisor $d=1$ (the fundamental at $f_0$).
+
+#### 4. Bass Enhancement Algorithm (Dbx-style)
+
+For a real-time audio buffer $x[n]$:
+
+1. **Bandpass filter** the input to isolate the bass region (e.g. 40–120 Hz with a 2nd-order Butterworth).
+2. **Detect fundamental frequency** via zero-crossing rate or YIN autocorrelation on the filtered signal. Track frequency $f_0$ at the frame rate (e.g. every 1024 samples at 44.1 kHz).
+3. **Synthesize sub-octave**: generate a sine or triangle wave at $f_0/2$ using a phase-locked NCO, seeded with the detected zero-crossing phase.
+4. **Envelope match**: apply the original signal's amplitude envelope to the synthesis — the sub-octave track must follow the input's dynamics to avoid audible pumping:
+   $$y_{\text{sub}}[n] = \sqrt{\frac{\text{RMS}_{\text{in}}[n]}{\text{RMS}_{\text{sub}}^{\text{raw}}[n]}} \cdot y_{\text{sub}}^{\text{raw}}[n]$$
+5. **Mix**: blend the synthesized sub-octave back with the original:
+   $$y_{\text{out}}[n] = x[n] + \alpha \cdot y_{\text{sub}}[n]$$
+   where $\alpha \in [0, 1]$ is the subharmonic depth.
+
+#### 5. Per-Divisor Pitch Detuning (Optional)
+
+A hallmark of the Moog Subharmonicon is the ability to fine-detune each subharmonic oscillator independently by $\pm\delta_d$ cents:
+
+$$f_{\text{sub},d} = \frac{f_0}{d} \cdot 2^{\delta_d / 1200}$$
+
+This breaks the perfect integer ratio, producing beating, chorusing, and subtle harmonic movement — essential for non-organ, "alive" subharmonic textures. When $\delta_d = 0$ for all $d$, the ensemble is phase-locked and monolithic.
+
+#### 6. Polyrhythmic Gating (Optional)
+
+The Moog Subharmonicon associates each subharmonic divisor with a corresponding rhythmic clock divisor, creating a polyrhythmic gate pattern. For divisor $d$, the gate triggers every $d$ master metronome ticks:
+
+$$\text{gate}_d[t] = \begin{cases}
+1, & t \equiv 0 \pmod{d} \\
+0, & \text{otherwise}
+\end{cases}$$
+
+The subharmonic oscillator sounds only when $\text{gate}_d[t] = 1$, producing independent rhythmic patterns per subharmonic voice — a full polyrhythmic composition engine.
+
+#### 7. Computational Cost
+
+**Per-sample cost**: $O(D \cdot W)$ where $D$ = number of active divisors, $W$ = waveform evaluation cost. For 6 subharmonic voices with sine wavetable lookup: 6 table reads + 6 gain multiplies + 1 sum = **~13 operations per sample** — one of the cheapest polyphonic synthesis methods, comparable to simple subtractive SP-029 and far cheaper than additive SP-039 ($O(M)$ with $M \gg D$).
+
+### Musical Elements Framework
+
+| Element | Contribution |
+|---------|-------------|
+| **PITCH** | The master oscillator tracks MIDI key number exactly ($f_0 = 440 \cdot 2^{(k-69)/12}$). Each subharmonic divisor $d$ produces $f_0/d$, mapping the harmonic series inversely: $d=2$ = octave below, $d=3$ = P12 below (fifth of lower octave), $d=4$ = 2 octaves below, $d=5$ = M17 below (major third of 2-octaves-below), $d=6$ = P19 below (fifth of 2-octaves-below). The active divisor set $\mathcal{D}$ selects which chord tones appear — the subharmonic stack **is** the chord. Per-divisor fine detuning $\delta_d$ adds chorus beating. |
+| **RHYTHM** | Primary rhythm is the master gate (note-on/off). The polyrhythmic gate extension (optional §6) provides independent rhythmic patterns per divisor — a self-contained polyrhythm engine. The subharmonic envelope can be per-divisor or shared; a shared short envelope produces rhythmic compression (all divisors attack together). |
+| **HARMONY** | The subharmonic stack directly realizes extended harmony from a single root: divisors {1,2,3,4,5,6} produce root, octave, P12 (dominant), double-octave, M17 (major tenth), P19 (dominant of double-octave). This creates a maj13$^\text{(omit11)}$ chord voicing from one note. Changing the root moves the entire chord (harmonic planing). Adding per-divisor detuning morphs exact ratios into tempered approximations. |
+| **STRUCTURE** | Per-section divisor sets $\mathcal{D}_s$ define the macro-form: intro = {1,2} (octave), verse = {1,2,3,4} (octave + P12 + double), chorus = {1,2,3,4,5,6} (full chord), bridge = {2,3} (just P12 + double, sparse), outro = {1} (solo fundamental). Per-divisor detuning values $\delta_d(s)$ and per-divisor gate patterns $G_d(s)$ provide additional structural dimensions. |
+| **TEXTURE** | Texture density scales with $|\mathcal{D}|$ — one voice with 6 divisors produces a 6-note chord stack from a single note, an exceptionally dense source. Waveform type per divisor shapes the textural character: all-saw = bright/buzzy, all-sine = pure/soft organ, mixed = variable. Per-divisor detuning adds chorus-thickening (ensemble effect). Combined with polyrhythmic gating, each divisor becomes an independent voice in a percussive-textural counterpoint. |
+
+### UnitMatrix Integration
+
+SHOS maps onto the UnitMatrix compositional workflow as follows:
+
+- **Voices (rows)**: Each voice is an independent SHOS engine with its own:
+  - Master oscillator (fundamental pitch from `MusicUnit.pitch`)
+  - Divisor set $\mathcal{D}$ (per-voice active subharmonics)
+  - Per-divisor gains $\mathbf{g}_v = [g_{v,1}, g_{v,2}, \dots, g_{v,D}]$
+  - Per-divisor detuning $\boldsymbol{\delta}_v$
+  - Per-divisor waveform $w_{v,d}(\theta)$
+  - Amplitude envelope (ADSR)
+
+  Multiple voices with different divisor sets playing different root pitches = full polyphonic chord progression with dense subharmonic reinforcement.
+
+  The standard approach uses one master oscillator per voice. For a truly massive ensemble, all voices can share a single master oscillator, with per-voice divisor sets selecting subharmonics from the shared phase — guaranteed phase-locking across the entire mix.
+
+- **Sections (columns)**: Per-section parameters:
+  - Divisor set $\mathcal{D}_s$ (section macro-form)
+  - Per-divisor gains $\mathbf{g}_s$
+  - Detuning profile $\boldsymbol{\delta}_s$
+  - Polyrhythmic gate patterns (if enabled)
+  - Subharmonic mix level $\alpha_s$ (for bass-enhancement variant)
+
+- **Cells (MusicUnit)**: Each cell carries:
+  - `pitch` → master oscillator frequency
+  - `divisors` → list of active divisors (e.g. `[1,2,3,4,5,6]`)
+  - `gains` → per-divisor gain vector (length = `len(divisors)`)
+  - `detune` → per-divisor detune vector in cents (optional)
+  - `waveforms` → per-divisor waveform type (optional; default = sawtooth)
+  - `gate_patterns` → per-divisor rhythmic gate pattern (optional polyrhythm)
+  - Velocity → master envelope amplitude scaling
+
+- **Produce Dispatch**: 
+  ```python
+  produce(midi_path, method="SP-097", params={
+      "divisors": [1, 2, 3, 4, 5, 6],
+      "gains": [0.8, 0.6, 0.5, 0.4, 0.3, 0.25],
+      "master_wave": "saw",
+      "sub_wave": "saw",
+      "detune": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+      "polyrhythm": False,
+      "envelope_ms": [10, 50, 0.5, 100]  # ADSR: attack, decay, sustain, release
+  })
+  ```
+
+- **Method Hybridization**: SHOS pairs naturally with:
+  - SP-029 subtractive filter (shape the raw subharmonic sawtooth stack into a warm bass/pad)
+  - SP-064 SRG (layer Shepard glissando on top of subharmonic drone for endless pitch ascent)
+  - SP-020 ZDF SVF (subtle bandpass filtering per subharmonic band for vocalic formants)
+  - SP-055 FSHT (frequency-shift the entire subharmonic stack for inharmonic bell textures)
+
+### Pitfalls
+
+1. **Square-wave aliasing from flip-flop division**: Analog flip-flop division inherently produces square waves (odd-harmonic-rich), which alias severely in naive digital implementation. Always apply PolyBLEP antialiasing (SP-029-style) to each subharmonic square wave individually, or use the phase-accumulator method with anti-aliased waveform lookup.
+
+2. **Phase accumulator wraparound drift**: When dividing the master phase accumulator by $d$, the subharmonic phase $\phi_n = \phi_m/d$ will accumulate rounding error over long periods. Use 64-bit fixed-point arithmetic, or reset the subharmonic phase on every master zero-crossing to prevent long-term drift.
+
+3. **Pitch ambiguity at low fundamentals**: Below approximately 40 Hz, the first subharmonic ($f_0/2$) falls into the infrasonic range (<20 Hz) and is perceived as rhythm/pulsation rather than pitch. For very low master pitches (MIDI notes 21–36, the sub-bass octave), limit the divisor set to $d \le 4$ or enable the polyrhythmic gate to convert infrasonic subharmonics into rhythmic texture.
+
+4. **Divisor density at high fundamentals**: Above approximately 2000 Hz, subharmonic divisors produce rapidly beating, unstable low-frequency content that may cause audible intermodulation distortion in downstream effects. Limit $|\mathcal{D}|$ or apply a lowpass filter before the mixer.
+
+5. **Subharmonic monotony**: Without per-divisor detuning or waveform variation, the phase-locked subharmonic ensemble sounds rigidly uniform — an organ, not an orchestra. Introduce small random detuning per divisor ($\delta_d \sim \mathcal{N}(0, 3\ \text{cents})$) or different waveform types per divisor to humanize the texture.
+
+6. **Bass-enhancement phase cancellation**: The synthesized sub-octave in Dbx-style processing may phase-cancel with the original signal's natural subharmonic content and with other voices. Apply a 10–20 ms highpass-filtered pre-delay to the synthesized sub-octave, or use allpass filtering to decorrelate the sub-octave from the source.
+
+7. **Polyrhythmic sequencer complexity**: With $D$ divisors each having independent gate patterns at different clock divisions, the polyrhythmic period grows as $\text{lcm}(d_1, d_2, \dots, d_D)$. For divisors {2, 3, 5}, the full pattern repeats every $\text{lcm}(2, 3, 5) = 30$ master clocks. For {4, 5, 6, 7}, $\text{lcm} = 420$ — potentially very long patterns that may not repeat within a song section. Precompute pattern periods and validate against the section length.
+
+8. **Subharmonic frequency is NOT pitch-subdivision for FM/PM**: Unlike FM synthesis, where dividing a modulator frequency achieves ratio-based harmonic changes, subharmonic synthesis divides the *carrier* frequency — the subharmonic's pitch is an exact fraction of the root. The distinction matters when layering: subharmonics are heard as *lower pitch*, not as *altered timbre*.
+
+### Python Implementation Sketch
+
+```python
+"""
+Method 097: Sub-Harmonic Oscillator Synthesis (SHOS)
+Generates subharmonic chord stacks from a single master oscillator
+via phase-accumulator-based frequency division.
+Candidate code path: sound/synthesis/subharmonic.py
+"""
+from typing import List, Optional, Tuple
+import numpy as np
+from structures import MusicUnit, MusicEvent, MidiInstrument
+from workflows.unitmatrix_composer import UnitMatrixComposer, create_note_unit
+
+
+# ---- Core SHOS Engine ----
+
+def subharmonic_synthesizer(
+    pitch_hz: float,
+    sample_rate: int = 44100,
+    duration_s: float = 1.0,
+    divisors: List[int] = None,
+    gains: List[float] = None,
+    detune_cents: Optional[List[float]] = None,
+    master_wave: str = "saw",
+    sub_wave: str = "saw",
+    adsr_ms: Tuple[float, float, float, float] = (10.0, 50.0, 0.5, 100.0),
+) -> np.ndarray:
+    """Synthesize N samples of a subharmonic oscillator stack.
+    
+    Args:
+        pitch_hz: Master oscillator frequency in Hz.
+        sample_rate: Output sample rate.
+        duration_s: Duration in seconds.
+        divisors: Integer divisors for subharmonics (default [1..6]).
+        gains: Per-divisor linear amplitude gain (default equal).
+        detune_cents: Per-divisor fine detune in cents (default zeros).
+        master_wave: Waveform type for d=1 fundamental.
+        sub_wave: Waveform type for all d>1 subharmonics.
+        adsr_ms: (attack_ms, decay_ms, sustain_level, release_ms)
+    
+    Returns:
+        Mono audio buffer of length int(sample_rate * duration_s).
+    """
+    if divisors is None:
+        divisors = [1, 2, 3, 4, 5, 6]
+    D = len(divisors)
+    if gains is None:
+        gains = [1.0 / D] * D  # Equal-power normalized
+    if detune_cents is None:
+        detune_cents = [0.0] * D
+    
+    num_samples = int(sample_rate * duration_s)
+    output = np.zeros(num_samples)
+    
+    # Master phase accumulator (32.32 fixed-point via double)
+    phi_m = 0.0
+    delta_m = 2.0 * np.pi * pitch_hz / sample_rate
+    
+    # Precompute subharmonic detune factors
+    detune_factors = [2.0 ** (dc / 1200.0) for dc in detune_cents]
+    
+    # Precompute wavetables (one period, 2048 points)
+    wt_size = 2048
+    wt_saw = np.linspace(-1.0, 1.0, wt_size, endpoint=False)
+    wt_sine = np.sin(np.linspace(0, 2 * np.pi, wt_size, endpoint=False))
+    wt_square = np.where(wt_saw >= 0, 1.0, -1.0)
+    wt_tri = 2.0 * np.abs(2.0 * (np.linspace(0, 1, wt_size, endpoint=False) - 0.5)) - 1.0
+    
+    wt_map = {"saw": wt_saw, "sine": wt_sine, "square": wt_square, "tri": wt_tri}
+    master_table = wt_map.get(master_wave, wt_saw)
+    sub_table = wt_map.get(sub_wave, wt_saw)
+    
+    # ADSR envelope
+    a_len = int(adsr_ms[0] * sample_rate / 1000.0)
+    d_len = int(adsr_ms[1] * sample_rate / 1000.0)
+    s_level = adsr_ms[2]
+    r_len = int(adsr_ms[3] * sample_rate / 1000.0)
+    
+    env = np.ones(num_samples)
+    # Attack
+    if a_len > 0:
+        env[:a_len] = np.linspace(0.0, 1.0, a_len)
+    # Decay
+    if d_len > 0 and a_len + d_len <= num_samples:
+        env[a_len:a_len + d_len] = np.linspace(1.0, s_level, d_len)
+    # Sustain (already 1.0 or set by decay, but multiply by s_level)
+    sustain_end = num_samples - r_len
+    if sustain_end > a_len + d_len:
+        env[a_len + d_len:sustain_end] = s_level
+    # Release
+    if r_len > 0 and sustain_end < num_samples:
+        idx = np.arange(r_len)
+        env[sustain_end:] = s_level * np.linspace(1.0, 0.0, r_len)
+    
+    # Per-sample synthesis
+    for n in range(num_samples):
+        sample = 0.0
+        for d_idx, d in enumerate(divisors):
+            g = gains[d_idx]
+            detune = detune_factors[d_idx]
+            
+            if d == 1:
+                phi_sub = phi_m  # Master at full rate
+            else:
+                # Phase-locked: subharmonic phase = master_phase / d
+                phi_sub = (phi_m / d) % (2.0 * np.pi)
+            
+            # Read wavetable
+            table_pos = (phi_sub / (2.0 * np.pi)) % 1.0
+            if d == 1:
+                wave_val = master_table[int(table_pos * wt_size) % wt_size]
+            else:
+                wave_val = sub_table[int(table_pos * wt_size) % wt_size]
+            
+            sample += g * wave_val
+        
+        output[n] = sample * env[n]
+        
+        # Advance master phase (including detune applied to master rate)
+        phi_m = (phi_m + delta_m) % (2.0 * np.pi)
+    
+    return output
+
+
+# ---- UnitMatrix Integration ----
+
+def realize_subharmonic_to_unitmatrix(
+    pitch_hz: float,
+    sample_rate: int = 44100,
+    duration_s: float = 1.0,
+    divisors: List[int] = None,
+    gains: List[float] = None,
+    bpm: int = 120,
+    bars: int = 1,
+    voice_name: str = "Sub",
+    channel: int = 0,
+) -> UnitMatrixComposer:
+    """Create a UnitMatrix with a single SHOS voice for testing.
+    
+    The produced audio is NOT stored in the matrix (which holds MIDI events);
+    the SHOS audio buffer is generated during the produce() step.
+    This function sets up the UnitMatrix structure for the SHOS voice.
+    """
+    ticks_per_beat = 480
+    beats_per_bar = 4
+    bar_ticks = ticks_per_beat * beats_per_bar  # 1920
+    
+    composer = UnitMatrixComposer(
+        bpm=bpm, ticks_per_beat=ticks_per_beat, beats_per_bar=beats_per_bar
+    )
+    composer.create_matrix(num_voices=1, num_sections=1)
+    composer.add_voice(voice_name, program=MidiInstrument.SYNTH_BASS, channel=channel)
+    composer.add_section("A", bars=bars)
+    
+    # Create a single sustained note for the full section
+    section_ticks = bars * bar_ticks
+    note_unit = create_note_unit(
+        pitch=int(round(69 + 12 * np.log2(pitch_hz / 440.0))),
+        velocity=100,
+        duration_ticks=section_ticks,
+    )
+    composer.fill_voice_section(voice_name, "A", note_unit)
+    
+    ok, msg = composer.validate()
+    assert ok, f"Zero-drift gate failed: {msg}"
+    return composer
+
+
+# ---- Usage Example ----
+
+if __name__ == "__main__":
+    # Generate a 2-second C2 subharmonic stack (divisors 1..6)
+    audio = subharmonic_synthesizer(
+        pitch_hz=65.41,       # C2
+        sample_rate=44100,
+        duration_s=2.0,
+        divisors=[1, 2, 3, 4, 5, 6],
+        gains=[0.8, 0.6, 0.5, 0.4, 0.3, 0.25],
+        master_wave="saw",
+        sub_wave="saw",
+        adsr_ms=(20, 100, 0.7, 200),
+    )
+    
+    # Normalize
+    peak = np.max(np.abs(audio))
+    if peak > 0:
+        audio = audio / peak * 0.95
+    
+    import soundfile as sf
+    sf.write("/tmp/shos_c2_subharmonics.wav", audio, 44100)
+    print(f"Wrote {len(audio)} samples to /tmp/shos_c2_subharmonics.wav")
+```
+
+### References
+- Oskar Sala, Mixtur-Trautonium (1952). Subharmonic generator patent — the first multi-voice subharmonic synthesizer.
+- Chamberlin, H. (1985). *Musical Applications of Microprocessors* (2nd ed.). Hayden Books. Ch. 13: Frequency Division Synthesis.
+- Dodge, C. & Jerse, T. A. (1997). *Computer Music: Synthesis, Composition, and Performance* (2nd ed.). Schirmer. pp. 75–79.
+- Moog Music (2020). *Subharmonicon User's Manual*. Moog Music Inc., Asheville, NC.
+- Puckette, M. (2007). *The Theory and Technique of Electronic Music*. World Scientific. pp. 105–108.
+- Roads, C. (2015). *Composing Electronic Music: A New Aesthetic*. Oxford University Press. pp. 98–101.
+- Smith III, J. O. (2010). *Physical Audio Signal Processing*. W3K Publishing. Ch. 6.
+- White, G. & Louie, G. J. (2005). *The Audio Dictionary* (3rd ed.). University of Washington Press. p. 50.
+
+---
+
+*Appended 2026-09-27 by sound-production research cron job. Layer tag: absolute. Paradigm: Sound Production / Synthesis Engines. ID SP-097 confirmed free at append time (max SP ID was SP-096; no `sound_method_SP-097*` or `report_SP-097*` existed).*

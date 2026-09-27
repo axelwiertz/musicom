@@ -1,0 +1,23 @@
+{
+  "chosen": "098-funk-som",
+  "genre": "Funk",
+  "standard_failures": [
+    "std6_provenance.json",
+    "std6_index.html"
+  ],
+  "redesign_required": true,
+  "source_identity": {
+    "genre": "Funk",
+    "key": "F minor",
+    "bpm": 104,
+    "instrumentation": [
+      "Trumpet",
+      "Tenor Sax",
+      "Piano",
+      "Contrabass",
+      "Drums"
+    ],
+    "method": "SOM-C",
+    "form": "6x4=24 bars"
+  }
+}
