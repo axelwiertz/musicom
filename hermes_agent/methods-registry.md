@@ -41,6 +41,8 @@ Status: `implemented` = in sound/ package · `partial` = some pieces exist · `r
 | — | Stacked-Oscillator Memorymoog-Style Voice (Memorymode 2-style) | implemented | sound/synthesis/memorymoog_synth.py |
 | SP-033 | Detuned Saw Swarm + Harmony Engine + Morph Pad (SuperStarSaw-style) | implemented | sound/synthesis/supersaw_swarm.py |
 | — | Scale/Chord-Pitch Quantizer (SuperStarSaw harmony engine) | implemented | sound/synthesis/supersaw_swarm.py (SCALES/CHORDS + quantize) |
+| SP-094 | Random Note Generator + Note Chance Sequencer (Maschine 3.7-style) | implemented | sound/generators/random_note_gen.py |
+| SP-095 | Euclidean Fill Sequencer w/ Live Rotation (Maschine 3.7-style) | implemented | sound/generators/euclidean_fill_seq.py |
 
 ## Interval-Based Composition (NEW)
 

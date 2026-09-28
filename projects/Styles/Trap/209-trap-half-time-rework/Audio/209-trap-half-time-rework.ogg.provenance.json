@@ -1,0 +1,15 @@
+{
+  "artifact": "209-trap-half-time-rework.ogg",
+  "classification": "ai-assisted",
+  "generator": "fluidsynth FluidR3_GM render of phase2",
+  "sources": [],
+  "parameters": {
+    "source": "MIDI/209-trap-half-time-rework.mid",
+    "codec": "libopus 48k"
+  },
+  "notes": "",
+  "sha256": "ae2d98376f2b3aa66b750a72d44ffb018f4b0f776cb69a906b166bd449f0bce7",
+  "bytes": 332019,
+  "created_utc": "2026-09-28T01:13:13.088550+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,19 @@
+{
+  "artifact": "209-trap-half-time-rework-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "trap-half-time-rework phase1 (Brownian raw draft, pre-rules)",
+  "sources": [],
+  "parameters": {
+    "phase": 1,
+    "method": "brownian-walk",
+    "key": "C natural minor",
+    "bpm": 140,
+    "bars": 24,
+    "rules_applied": false
+  },
+  "notes": "",
+  "sha256": "3cc8d459642c4967f096076a28bc66cce1019be3d131bc352d86eb98f383266a",
+  "bytes": 834,
+  "created_utc": "2026-09-28T01:11:40.651283+00:00",
+  "provenance_version": "1.0"
+}

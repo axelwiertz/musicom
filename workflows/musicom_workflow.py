@@ -169,6 +169,9 @@ SP_METHODS = {
     "SP-091": ("sound.effects.delta_sigma_saturator", "Physics-Based Delta-Sigma Converter Saturation & Circuit Strain (Mixland Grey Matter-style)"),
     # 2026-09-24 scan
     "SP-092": ("sound.effects.multiband_saturator", "6-Band Multiband Saturator w/ 15 Selectable Algorithms & Per-Band M/S Routing (Kreuzberg Audio Oberton-style)"),
+    # 2026-09-28 scan
+    "SP-094": ("sound.generators.random_note_gen", "Random Note Generator + Note Chance Sequencer (Maschine 3.7 Random Note Gen / Note Event Chance-style)"),
+    "SP-095": ("sound.generators.euclidean_fill_seq", "Euclidean Fill Sequencer w/ Live Rotation (Maschine 3.7 Euclidean Sequencer-style)"),
 }
 
 

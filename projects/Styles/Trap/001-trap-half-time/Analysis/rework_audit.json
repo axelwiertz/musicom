@@ -1,0 +1,26 @@
+{
+  "chosen": "/opt/data/projects/Styles/Trap/001-trap-half-time",
+  "genre": "Trap",
+  "source_midi": "/opt/data/projects/Styles/Trap/001-trap-half-time/MIDI/trap-half-time.mid",
+  "audit_date": "2026-09-28",
+  "standard_failures": [
+    "S5 two-phase artifacts: phase1 MIDI missing (no trap-half-time-phase1.mid)",
+    "S6 provenance.json+index.html: index.html missing"
+  ],
+  "standard_passes": [
+    "S1 engine: authored via UnitMatrixComposer (compose.py imports workflows.unitmatrix_composer)",
+    "S2 zero-drift: all 5 voice tracks len 30720 ticks (equal)",
+    "S3 rhythm-grid sync: 0 off-grid pitched onsets (8 off-grid are ch9 drum roll 32nds, exempt)",
+    "S4 valid track setup: 5 voice tracks (KickSnare/Hat/808/Pad/Lead)"
+  ],
+  "redesign_required": true,
+  "redesign_reason": "2 standards failed (phase1 missing, index.html missing). Source already engine-compliant on core 1-4; only sidecar/two-phase completeness missing. Rebuild fresh via canonical workflow preserving identity.",
+  "source_identity": {
+    "genre": "Trap (half-time)",
+    "tempo_bpm": 140,
+    "key": "C minor (source pads had phrygian b9 Db + a G-major V, slightly off natural-minor)",
+    "core_motif_contour": "up-up-down (source lead intervals +5,+2,-4 semitones)",
+    "instrumentation": ["808 sub-bass", "dark sustained pad", "sparse square lead", "half-time kick+snare", "16th hi-hats with roll"],
+    "groove": "half-time: kick on 1 + and-of-3, snare on 3"
+  }
+}

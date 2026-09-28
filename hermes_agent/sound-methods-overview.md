@@ -72,8 +72,10 @@ comparable to, and how do I use it in a workflow?*
 | `sound/synthesis/tzfm.py` | TZFMVoice, SteppedOscillator | synthesis (FM) | Korg Prologue Elixir TZFM/STEPr | note + depth/direction/ringmod/bitcrush → through-zero FM audio; per-note wave stepping |
 | `sound/generators/polymetric_grid.py` | PolymetricGrid, Track, PerStepGraph | sequencing (polymetric) | Rapid Flow omniGRID | 16 tracks, per-track steps/resolution + 6 per-step graphs + shuffle → timed events/MIDI |
 | `sound/generators/acid_seq.py` | AcidSequencer, AcidVoice | sequencing (acid) | BS-203 MacroAcidizer | scale-locked random pattern → 303/202-style rendered sequence audio |
-| `sound/generators/cadence_variator.py` | CadenceEngine, CadenceLayer, FluxRandomizer | sequencing (variation) | Emergence Audio Envoy Cadence Engine | 4-block lanes + flux randomizer + per-layer LFOs → rhythmic event streams |
-| `sound/modular/random8.py` | Random8, RandomChannel | modular (random CV) | Befaco/Mylar Melodies RANDOM8 | 8 channels, 15 quantize scales, 8 styles → quantized random CV streams |
+|| `sound/generators/cadence_variator.py` | CadenceEngine, CadenceLayer, FluxRandomizer | sequencing (variation) | Emergence Audio Envoy Cadence Engine | 4-block lanes + flux randomizer + per-layer LFOs → rhythmic event streams |
+|| `sound/generators/random_note_gen.py` | RandomNoteGenerator, NoteChanceSequencer | sequencing (generative) | NI Maschine 3.7 Random Note Gen + Note Event Chance | density+range+scale → MIDI note events; per-note prob re-roll each loop → active subset |
+|| `sound/generators/euclidean_fill_seq.py` | EuclideanFillSequencer | sequencing (rhythm) | NI Maschine 3.7 Euclidean Sequencer | pulses+steps+fill_density+rotation → hit pattern w/ primary+fills → MIDI |
+|| `sound/modular/random8.py` | Random8, RandomChannel | modular (random CV) | Befaco/Mylar Melodies RANDOM8 | 8 channels, 15 quantize scales, 8 styles → quantized random CV streams |
 | `sound/synthesis/string_scales.py` | ArplusVoice, StringVoice | synthesis (strings) | Zlosynth Arplus | chord/scale pool + arpeggiation → plucked-string (KS) scale-quantized arps |
 | `sound/modular/wandering.py` | WanderingEngine, Portal, DriftCloudsVoice | modular (drift) | Sound Dust Drift Clouds | nested non-LFO wander + Portal jumps → Cloud/Shadow layer balance drift |
 | `sound/synthesis/air_pipe.py` | AirPipe, AirPipePatch | synthesis (physical, aerophone) | Modartt Airteq | pipe length + air pressure/mod → flue-pipe audio (open/stopped modes, overblow, MPE air) |

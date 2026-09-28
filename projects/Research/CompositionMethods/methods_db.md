@@ -106,6 +106,7 @@ Classification of active Musicom composition methods categorized by their primar
 | **096** | concrete | Dynamic Time Warping Composition (DTWC) | **Rules-Based** | Pitch, Rhythm, Structure, Texture | Moderate (Source/Target-anchored) | Grid-Locked / Continuous | Meso / Warp Path | $\mathcal{O}(N \cdot M)$ | Computes the optimal non-linear alignment (warp path) between two musical sequences via DTW, then generates new material by walking the path and interpolating between matched points. Morph parameter $\alpha$ blends source→target; warp path density controls rhythmic stretch/compression. Multi-voice morphs per UnitMatrix row. |
 | **097** | concrete | Maximum Entropy Composition (MaxEnt-C) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Constraint-guided) | Grid-Locked / Continuous | Macro / Boltzmann-Gibbs Ensemble | $\mathcal{O}(K \cdot q^2 \cdot N)$ learning, $\mathcal{O}(I \cdot N \cdot q)$ sampling | Applies Jaynes' Maximum Entropy principle: finds the least-biased (maximum-entropy) probability distribution over pitch/rhythm/chord sequences consistent with pairwise moment constraints via a Boltzmann–Gibbs (Potts) model. Pairwise interactions at multiple distances capture long-range melodic structure without high-order Markov overfitting. Sampling via MCMC fills UnitMatrix cells. |
 | **098** | concrete | Multi-Objective Evolutionary Pareto Composition (MOEPC) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Pareto-guided, multi-objective fitness) | Grid-Locked / Continuous | Macro / Pareto Front | $\mathcal{O}(I \cdot P \cdot N \cdot M)$ | Evolves multiple conflicting musical objectives (harmonic quality, melodic quality, rhythmic coherence, voice independence) via NSGA-II, returning a Pareto front of trade-off compositions. The front itself defines macro-form. |
+| **099** | abstract | Self-Similarity Matrix Composition (SSMC) | **Rules-Based** | Structure, Texture, Pitch, Rhythm | Weak (Template-guided) | Grid-Locked / Continuous | Macro / Form | $\mathcal{O}(N^2 \cdot M)$ | Designs macro-form repetition structure as a self-similarity matrix (SSM) — pairwise similarity targets between all time positions. Solves the inverse problem: optimize a feature sequence whose SSM matches the target, then decode to per-bar feature profiles. Novelty curve identifies section boundaries for UnitMatrix layout. First abstract-layer form-design method: feeds rules/ssm_composition.py. |
 
 ### **097** | Maximum Entropy Composition (MaxEnt-C) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Constraint-guided) | Grid-Locked / Continuous | Macro / Boltzmann-Gibbs Ensemble | $\mathcal{O}(K \cdot q^2 \cdot N)$ learning, $\mathcal{O}(I \cdot N \cdot q)$ sampling
 
@@ -21210,4 +21211,100 @@ if __name__ == "__main__":
 
 ---
 
-*Appended 2026-09-27 by sound-production research cron job. Layer tag: absolute. Paradigm: Sound Production / Synthesis Engines. ID SP-097 confirmed free at append time (max SP ID was SP-096; no `sound_method_SP-097*` or `report_SP-097*` existed).*
+*Appended 2026-09-27 by sound-production research cron job. Layer tag: absolute. Paradigm: Sound Production / Synthesis Engines. ID SP-097 confirmed free at append time (max SP ID was SP-096; no `sound_method_SP-097*` or `report_SP-097*` existed).*### **099** | Self-Similarity Matrix Composition (SSMC) | **Rules-Based** | Structure, Texture, Pitch, Rhythm | Weak (Template-guided) | Grid-Locked / Continuous | Macro / Form | $\\mathcal{O}(N^2 \\cdot M)$ target matching; $\\mathcal{O}(N^2)$ SSM construction
+
+### Source
+Foote, J. (1999). "Visualizing music and audio using self-similarity." *Proc. of ACM Multimedia* 1999, pp. 77–80. — Jhamtani, H. & Berg-Kirkpatrick, T. (2019). "Modeling Self-Repetition in Music Generation using Generative Adversarial Networks." *Proc. 36th ICML*, PMLR 97. — Hager, S., Hablutzel, K. & Kinnaird, K. (2024). "Generating Music with Structure Using Self-Similarity as Attention." arXiv:2406.15647. — Lattner, S., Grachten, M. & Widmer, G. (2016). "Imposing higher-level structure in polyphonic music generation using convolutional restricted Boltzmann machines and constraints." CoRR abs/1612.04742. — Müller, M. (2015). *Fundamentals of Music Processing*. Springer, Ch. 4: Music Structure Analysis. — Pareyon, G. (2011). *On Musical Self-Similarity: Intersemiosis as Synecdoche and Analogy*.
+
+### Layer
+**abstract** — designs the macro-form repetition structure (which sections/measures repeat, contrast, or vary) encoded as a self-similarity matrix (SSM). The SSM is a transposition- and register-invariant structural blueprint: it defines pairwise similarity relationships between all time positions in the composition without specifying concrete pitch, onset, or duration values. This abstract structural blueprint feeds concrete generators (any concrete-layer method in the DB) that fill UnitMatrix cells with events that realize the desired similarity pattern. The novelty curve (kernel correlation of the SSM) identifies structural boundaries for section layout. Candidate code path: `rules/ssm_composition.py` (alongside `rules/subset_network.py` in the abstract layer).
+
+### Paradigm
+**Rules-Based** — the SSM is a deterministic structural template defined by the composer or derived algorithmically from a reference piece. Solving the inverse problem (generate events whose SSM matches a target) is a constrained optimization with deterministic matching criteria (cosine similarity, cross-correlation, or kernel-based novelty). Unlike AI-Driven methods (046 VAE-LSI, 047 DSMG, 054 ATS), there are no learned neural parameters — the SSM is a direct algebraic encoding of repetition/contrast structure.
+
+### Description
+**Self-Similarity Matrix Composition (SSMC)** uses the self-similarity matrix (SSM, Foote 1999) — a standard tool from music information retrieval — as a generative structural blueprint. The SSM $S$ of a sequence of $N$ time positions (measures, beats, or fixed-duration segments) is an $N \\times N$ matrix where entry $S_{ij}$ encodes the similarity between position $i$ and position $j$. For symbolic MIDI data, similarity is typically cosine similarity over feature vectors (pitch-class distributions, melodic contour, onset density), or the normalized cross-correlation of chroma vectors:
+
+$$S_{ij} = \\frac{\\mathbf{f}_i \\cdot \\mathbf{f}_j}{\\|\\mathbf{f}_i\\|\\|\\mathbf{f}_j\\|}$$
+
+where $\\mathbf{f}_i \\in \\mathbb{R}^d$ is the feature vector at position $i$.
+
+**Structural encoding**: The SSM reveals every level of musical structure:
+
+1. **Diagonal blocks** (high-similarity contiguous regions $S_{[a:b],[a:b]} \\gg 0$) = repeated sections (e.g., multiple verse occurrences, chorus recurrence).
+2. **Off-diagonal stripes** ($S_{[a:b],[c:d]} \\gg 0$ for disjoint $[a:b],[c:d]$) = structural repetition — two different sections that share material (e.g., chorus and refrain).
+3. **Checkerboard patterns** (alternating high/low along the diagonal) = periodic phrase/period structure (e.g., $A_1B_1A_2B_2$ with A–B contrast).
+4. **Novelty boundaries** (sharp diagonal transitions where $S$ drops from high to low across the diagonal) = section boundaries detected by Foote's checkerboard kernel correlation:
+   $$n(t) = \\sum_{i,j} S_{ij} \\cdot K_{ij}^{(t)}$$
+   where $K^{(t)}$ is a Gaussian-tapered $2\\times 2$ checkerboard kernel centered at diagonal position $t$.
+
+**Generative workflow (inverse SSM problem)**:
+
+1. **Design the target SSM** $S^*$: The composer specifies a desired $N \\times N$ similarity structure. For a verse-chorus form (16 measures): intro (m1–4) = self-similar, verse (m5–12) = self-similar + similar to m5–12 of second verse, chorus (m13–16) = self-similar + contrasting to verse, bridge = mid-similarity to both.
+
+2. **Initialize feature sequence** $\\mathbf{f}_1 \\ldots \\mathbf{f}_N$ (random or from a seed reference).
+
+3. **Optimize** to minimize the Frobenius-norm mismatch between the current SSM $S(\\mathbf{f})$ and the target $S^*$:
+   $$\\mathcal{L}(\\mathbf{f}_1 \\ldots \\mathbf{f}_N) = \\sum_{i,j} \\left( S_{ij}(\\mathbf{f}) - S^*_{ij} \\right)^2 + \\lambda \\sum_i \\|\\mathbf{f}_i - \\mathbf{f}_{i-1}\\|^2$$
+
+   The regularization term $\\lambda$ enforces smooth temporal evolution (prevents abrupt, musically incoherent jumps between adjacent positions).
+
+4. **Optimization strategies**:
+   - *Gradient descent*: backpropagate through the cosine-similarity operation (differentiable) using Adam or L-BFGS.
+   - *Alternating projections*: iteratively project the current SSM onto the nearest matrix satisfying structural constraints (block-diagonal, rank-constrained, Toeplitz).
+   - *Dynamic programming*: for binary-similarity targets (repeat/contrast), a DP over possible section assignments (similar to 034 PCFG but using SSM similarity rather than grammar).
+
+5. **Decode to events**: Map the optimized feature vectors $\\mathbf{f}_i$ to concrete musical events (pitch class, register, onset density, velocity) via a learned or hard-coded decoder. Each $\\mathbf{f}_i$ = one bar's feature profile. A concrete-layer method (e.g., 002 Markov, 096 DTWC, 098 MOEPC) fills the actual notes per bar.
+
+**Key insight — SSM as attention without learned weights**: Unlike Transformer self-attention (054 ATS), which learns attention weights from data, the SSM directly prescribes the pairwise similarity structure — it is an *explicit, interpretable, designer-controllable* attention matrix. The SING system (Hager et al. 2024) demonstrates that using an SSM as the attention layer in an LSTM generator produces significantly better long-range repetition structure than LSTM alone, and comparably to transformer models with far less complexity.
+
+### Musical Elements Framework
+
+**PITCH**: The primary feature vector $\\mathbf{f}_i$ is typically a 12-dimensional chroma vector (pitch-class distribution over the bar). SSM similarity in chroma space captures harmonic similarity (same chords = high chroma similarity). Pitch-class sets that share many common tones or are transpositionally equivalent produce high SSM entries, enabling the encoding of tonal regions (HOME, LIFT, TENSE, TURN) as self-similar blocks. The optimization drives chroma vectors toward the target similarity pattern, producing a desired harmonic palette per section.
+
+**RHYTHM**: The feature vector can include onset-density features (number of onsets per bar, syncopation index, inter-onset-interval entropy) and duration-class histograms. SSM similarity in rhythm-feature space encodes groove repetition and rhythmic contrast. Two bars with identical clave patterns have high rhythmic SSM entries; a switch from straight to swung rhythm produces a sharp SSM boundary. The target SSM prescribes the rhythmic form: repeating chorus groove, contrasting bridge rhythm, gradual evolution across transition sections.
+
+**HARMONY**: When features include chord-quality vectors (major/minor/dim profiles per bar), the SSM captures functional harmonic similarity. Two bars of I–IV–V–I have high similarity with each other but low similarity with a ii–V–i minor cadence. The SSM's block-diagonal structure directly encodes the harmonic form: strophic (all blocks similar), binary (two contrasting blocks), ternary (ABA with A blocks similar). The optimization generates a chord-progression sequence whose self-similarity matches the target.
+
+**STRUCTURE**: This is SSMC's primary domain. The SSM is a complete structural encoding:
+
+- *Macro-form*: The $N \\times N$ SSM's block structure defines the piece's formal sections (intro, verse, chorus, bridge, outro). Section boundaries emerge from the novelty curve's peaks.
+- *Meso-form*: Within-block sub-structure (phrase-level repetition: $aab$ patterns encoded as diagonal sub-blocks within the section).
+- *Phrase structure*: Periodicity analysis of the SSM's lag-domain reveals recurrent patterns at phrase length (8-bar, 16-bar periods).
+- *Motivic development*: Off-diagonal similarity between non-adjacent bars captures motivic recall (theme re-statement, sequence, fragmentation).
+
+The target SSM is the composition's form summary — designing it IS composing the structure.
+
+**TEXTURE**: Textural contrast (dense vs. sparse, monophonic vs. polyphonic, tutti vs. solo) is encoded by including texture-density features (number of active voices, average polyphony, registration spread) in the feature vector. Two sections with similar texture produce a high texture-SSM entry; a drop from tutti to solo produces a boundary. The textural arc of the piece is a trajectory in texture-feature space, constrained to produce the desired SSM pattern.
+
+### UnitMatrix Integration (Voices & Sections)
+
+**Voices**: SSMC operates at the multi-voice level by extending the feature vector to include per-voice features concatenated into a single vector $\\mathbf{f}_i = [\\mathbf{f}_i^{(1)}, \\mathbf{f}_i^{(2)}, \\ldots, \\mathbf{f}_i^{(V)}]$ where $\\mathbf{f}_i^{(v)}$ is the feature vector for voice $v$ at position $i$. The SSM of this multi-voice feature sequence encodes:
+
+- *Per-voice similarity*: the same voice playing similar material across bars (melodic repetition).
+- *Cross-voice similarity*: two different voices playing similar material (imitation, canon, heterophony).
+- *Vertical texture similarity*: the same voicing/registration pattern recurring (orchestration recurrence).
+
+The decoder distributes the optimized feature vectors across voices, assigning $\\mathbf{f}_i^{(v)}$ to UnitMatrix row $v$, column $i$.
+
+**Sections**: Section boundaries are determined by the novelty curve of the SSM — peaks indicate structural transitions. Each section $s$ corresponds to a contiguous diagonal block $[b_s, e_s] \\times [b_s, e_s]$ in the SSM. The optimized feature vectors within each block realize the section's internal structure (self-similarity within the block defined by the target). Section-level contrast (between-block dissimilarity) is enforced by the off-diagonal target entries $S^*_{[b_s,e_s],[b_t,e_t]}$: low values for contrasting sections, high values for repeated sections.
+
+**Cell filling (MusicUnit)**: Each bar $i$ and voice $v$ is decoded from the optimized feature vector $\\mathbf{f}_i^{(v)}$ into concrete musical events. The decoder can be:
+- A *concrete matching method* (e.g., 022 MCWS, 002 Markov) conditioned on $\\mathbf{f}_i^{(v)}$ as a structural prior.
+- A *direct mapping*: chroma → pitch-class distribution sampled per beat; density → number of onsets; texture → active voices.
+- A *corpus lookup*: nearest-neighbor search over a reference corpus for bars whose feature vector matches $\\mathbf{f}_i^{(v)}$ (case-based reasoning).
+
+### Pitfalls
+1. **Inverse problem ill-posedness**: Many different feature sequences produce the same SSM (the mapping from features to SSM is many-to-one). The regularization term $\\lambda$ and good initialization are critical — without them, optimization converges to degenerate solutions (e.g., all features identical → SSM = all ones → high self-similarity everywhere, but musically flat).
+
+2. **Feature engineering**: The quality of SSMC depends entirely on the feature representation. Poor features (too coarse → misses nuance; too fine → ignores global structure) produce musically unsatisfying results. Chroma + onset-density + voice-count features are a robust minimal set; additional features (interval-class profiles, registral spread, dynamic range) improve expressiveness at the cost of optimization complexity.
+
+3. **Section boundary precision**: SSM-based novelty detection works poorly for gradual transitions (cross-fades, dissolves) — the checkerboard kernel assumes sharp boundaries. For gradual formal evolution, use a blurred kernel or multi-scale kernel approach (Kaiser & Peeters 2013).
+
+4. **Optimization cost for long pieces**: The SSM is $N \\times N$, and gradient descent over $N \\cdot d$ features has cost $\\mathcal{O}(N^2 \\cdot M)$ per iteration (where $M$ = optimizer steps). For a 64-bar piece at 16th-note resolution ($N = 256$ beats), this is $256^2 \\times$ optimizer steps ≈ 65K per iteration — tractable. For a 512-bar sonata-form movement ($N = 2048$ at beat resolution), the $2048^2 \\times$ iterations becomes expensive ($4.2 \\times 10^6$ per step). Use hierarchical SSM (coarse-to-fine: section-level SSM, then within-section SSM) to scale.
+
+5. **Note-level vs. bar-level granularity**: SSMC typically operates at the bar/beat level, not the note level. Notes are generated by a downstream concrete method. This separation of concerns (abstract structure + concrete realization) is the method's strength for the abstract layer but means SSMC alone cannot produce a playable composition — it must feed a concrete layer method.
+
+6. **Corpus dependency in decoder (style mode)**: When using a corpus-based decoder (nearest-neighbor lookup), the generated music inherits the corpus's stylistic biases. This can be desirable (style-specific composition) or limiting (lack of novelty). A hybrid approach: SSMC generates structure, a separate style-agnostic concrete method (022 MCWS) fills notes.
+
+7. **Similarity threshold sensitivity**: What counts as "similar" (cosine similarity > 0.8? 0.95?) critically affects the SSM. Low thresholds → all bars look similar (insufficient contrast). High thresholds → no repetition detected. The similarity threshold must be tuned per genre and desired repetition density. A multi-threshold approach (3 levels: repeat > 0.85, vary 0.6–0.85, contrast < 0.6) is recommended.
