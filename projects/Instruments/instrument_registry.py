@@ -68,6 +68,7 @@ _INSTRUMENT_MODULES = {
     "World.fiddle.fiddle": "fiddle",
     "World.shakuhachi.shakuhachi": "shakuhachi",
     "World.taiko.taiko": "taiko",
+    "World.pan_flute.pan_flute": "pan_flute",
     "Vocal.human_voice.human_voice": "human_voice",
     "Vocal.voice_like.voice_like_voice": "voice_like",
 }
@@ -236,6 +237,7 @@ TUBULAR_BELLS = ALL_INSTRUMENTS["tubular_bells"]
 PICCOLO = ALL_INSTRUMENTS["piccolo"]
 TAIKO = ALL_INSTRUMENTS["taiko"]
 HUMAN_VOICE = ALL_INSTRUMENTS["human_voice"]
+PAN_FLUTE = ALL_INSTRUMENTS["pan_flute"]
 # Voice-like family — one instrument per non-vocal source. The `voice_like`
 # key is the umbrella (vox humana); each member is also addressable directly.
 VOICE_LIKE = ALL_INSTRUMENTS["voice_like"]
@@ -452,3 +454,7 @@ if __name__ == "__main__":
     print("  by_name('ocarina') =", by_name("ocarina"))
     print("  by_program(79) =", by_program(79))
     print("  OCARINA.in_sweet_spot(74) =", OCARINA.in_sweet_spot(74))
+    print("  PAN_FLUTE.midi_program =", PAN_FLUTE.midi_program, "(should be 75)")
+    print("  by_name('pan flute') =", by_name("pan flute"))
+    print("  by_program(75) =", by_program(75))
+    print("  PAN_FLUTE.in_sweet_spot(72) =", PAN_FLUTE.in_sweet_spot(72))

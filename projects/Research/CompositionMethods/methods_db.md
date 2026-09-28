@@ -265,6 +265,7 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 | **SP-095** | Tonewheel Electromagnetic Modeling Synthesis (TWEMS) | **Synthesis Engines** | Electromechanical Organ / Drawbar-Composite Timbre | Models the Hammond tonewheel generator: 91 rotating disks with magnetic pickups produce 9 drawbar partials (harmonic ratios 0.5, 1.5, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 8.0) with key-click transient (6th harmonic burst + staggered contact bounce), harmonic foldback at keyboard extremes, 5 Hz synchronous-motor tremolo, 6-position scanner vibrato/chorus (time-varying phase-shift delay), and the Leslie rotating speaker cabinet (Doppler time-varying delay + tremolo + crossover-filtered horn/drum paths). $\mathcal{O}(P)$ per sample ($P=9$ partials). Candidate: `sound/synthesis/twems.py`. |
 | **SP-096** | Hard Sync Oscillator Synthesis (HSOS) | **Synthesis Engines** | Classic Analog Sync / Aggressive Lead & Bass Timbres | Syncs a slave oscillator's phase to a master oscillator's zero-crossings: master sets the fundamental pitch while the slave-to-master frequency ratio $r = f_s / f_m$ determines the harmonic spectrum independently. Hard sync (phase reset) produces the classic tearing/screaming analog lead; soft sync (phase-reverse) gives milder octave-doubling textures. Ratio $r$ sweep is a one-knob timbre morph from pure fundamental ($r=1$) through integer subharmonics ($r=2,3,4$) to dense inharmonic buzz ($r > 5$). Bandlimited antialiasing via PolyBLEP (4-sample correction, $\mathcal{O}(1)$ per sample). Candidate: `sound/synthesis/hard_sync.py`. |
 | **SP-097** | Sub-Harmonic Oscillator Synthesis (SHOS) | **Synthesis Engines** | Subharmonic Chord Stacks / Divide-Down Bass Enhancement | Generates the undertone series $f_0/d$ for integer divisors $d \in \{1,2,\dots,6\}$ from a shared master oscillator via phase-accumulator frequency division. Produces phase-locked subharmonic chord stacks (root, P8, P12, 2×P8, M17, P19) from a single root note — a single-note chord. Three modes: subharmonic bass enhancement (Dbx 120-style $f_0/2$ synthesis), subharmonic chord stack (Moog Subharmonicon-style multi-divisor mix), and divide-down organ (top-octave frequency chain). Per-divisor gains, per-divisor fine detuning ($\pm\delta_d$ cents), polyrhythmic gating per divisor. $\mathcal{O}(D)$ per sample ($D=|\mathcal{D}|$). Candidate: `sound/synthesis/subharmonic.py`. |
+| **SP-098** | TR-808 Analog Kick Drum Synthesis (AKDS) | **Synthesis Engines** | Circuit-Faithful Analog Kick / Sub-Bass Drum Voice | Renders the Roland TR-808 bass drum from its discrete transistor-circuit topology: bridged-T bandpass filter self-oscillating at ~49.4 Hz with 6 ms pitch sweep attack (49→130 Hz), feedback-buffer decay control (50–800 ms), retriggering bridge, voltage-leakage pitch sigh, passive tone lowpass, and VCA output. $\mathcal{O}(1)$ per sample. Candidate: `sound/synthesis/drum_synth_808.py`. |
 |---|
 
 
@@ -21211,7 +21212,8 @@ if __name__ == "__main__":
 
 ---
 
-*Appended 2026-09-27 by sound-production research cron job. Layer tag: absolute. Paradigm: Sound Production / Synthesis Engines. ID SP-097 confirmed free at append time (max SP ID was SP-096; no `sound_method_SP-097*` or `report_SP-097*` existed).*### **099** | Self-Similarity Matrix Composition (SSMC) | **Rules-Based** | Structure, Texture, Pitch, Rhythm | Weak (Template-guided) | Grid-Locked / Continuous | Macro / Form | $\\mathcal{O}(N^2 \\cdot M)$ target matching; $\\mathcal{O}(N^2)$ SSM construction
+*Appended 2026-09-27 by sound-production research cron job. Layer tag: absolute. Paradigm: Sound Production / Synthesis Engines. ID SP-097 confirmed free at append time (max SP ID was SP-096; no `sound_method_SP-097*` or `report_SP-097*` existed).*
+### **099** | Self-Similarity Matrix Composition (SSMC) | **Rules-Based** | Structure, Texture, Pitch, Rhythm | Weak (Template-guided) | Grid-Locked / Continuous | Macro / Form | $\\mathcal{O}(N^2 \\cdot M)$ target matching; $\\mathcal{O}(N^2)$ SSM construction
 
 ### Source
 Foote, J. (1999). "Visualizing music and audio using self-similarity." *Proc. of ACM Multimedia* 1999, pp. 77–80. — Jhamtani, H. & Berg-Kirkpatrick, T. (2019). "Modeling Self-Repetition in Music Generation using Generative Adversarial Networks." *Proc. 36th ICML*, PMLR 97. — Hager, S., Hablutzel, K. & Kinnaird, K. (2024). "Generating Music with Structure Using Self-Similarity as Attention." arXiv:2406.15647. — Lattner, S., Grachten, M. & Widmer, G. (2016). "Imposing higher-level structure in polyphonic music generation using convolutional restricted Boltzmann machines and constraints." CoRR abs/1612.04742. — Müller, M. (2015). *Fundamentals of Music Processing*. Springer, Ch. 4: Music Structure Analysis. — Pareyon, G. (2011). *On Musical Self-Similarity: Intersemiosis as Synecdoche and Analogy*.
@@ -21308,3 +21310,147 @@ The decoder distributes the optimized feature vectors across voices, assigning $
 6. **Corpus dependency in decoder (style mode)**: When using a corpus-based decoder (nearest-neighbor lookup), the generated music inherits the corpus's stylistic biases. This can be desirable (style-specific composition) or limiting (lack of novelty). A hybrid approach: SSMC generates structure, a separate style-agnostic concrete method (022 MCWS) fills notes.
 
 7. **Similarity threshold sensitivity**: What counts as "similar" (cosine similarity > 0.8? 0.95?) critically affects the SSM. Low thresholds → all bars look similar (insufficient contrast). High thresholds → no repetition detected. The similarity threshold must be tuned per genre and desired repetition density. A multi-threshold approach (3 levels: repeat > 0.85, vary 0.6–0.85, contrast < 0.6) is recommended.
+
+---
+
+*Appended 2026-09-28 by music-research cron job. Layer tag: abstract (form-design). Paradigm: Rules-Based. ID 099 confirmed free at append time (max algorithmic ID was 098; no `method_099*` or `report_099*` existed). Next free algorithmic ID: 100.*
+# SP-098 — TR-808 Analog Kick Drum Synthesis (AKDS)
+
+### Source
+Werner, K. J., Abel, J. S. & Smith III, J. O. (2014). "A Physically-Informed, Circuit-Bendable, Digital Model of the Roland TR-808 Bass Drum Circuit." *Proceedings of the 17th International Conference on Digital Audio Effects (DAFx-14)*, Erlangen, Germany. — Roland Corporation. *TR-808 Rhythm Composer Service Manual* (June 1981). — Barata, P. "808 Bass Drum Synthesis," Baratatronix (2024). — Reid, G. *Synth Secrets: Synthesizing Drums* (SOS).
+
+### Layer
+**absolute** — renders symbolic percussion trigger events into a final acoustic air-pressure waveform via circuit-accurate analog drum modeling. The candidate code path is `sound/synthesis/drum_synth_808.py` (alongside SP-087 TASS and SP-089 TACS in the 808 drum family).
+
+### Description
+**TR-808 Analog Kick Drum Synthesis (AKDS)** models the bass drum voice of the Roland TR-808 Rhythm Composer from its discrete transistor-circuit topology. Unlike sample-playback or abstract filter-sweep kick drums, AKDS is physically informed: every sub-circuit in the signal path (trigger logic, pulse shaper, bridged-T bandpass filter, envelope generator, feedback buffer, tone/level output) is individually analyzed and modeled, yielding the iconic 808 kick — the thumping, decaying pseudo-sinusoid with a characteristic sighing pitch drop — and allowing accurate circuit-bend emulation (variable pitch, extended decay, retriggering behavior).
+
+The 808 kick is built around a **bridged-T bandpass filter** that, when kickstarted by a trigger pulse through a pulse-shaper nonlinearity, self-oscillates at ~49.4 Hz (G1+14¢). A brief 6 ms attack envelope transiently sweeps the center frequency up to ~130 Hz (C3−11¢) for the punch/click, then the oscillation decays exponentially under control of the **feedback buffer** whose gain is set by the Decay potentiometer (VR6, 50–800 ms range, 300 ms center). Voltage leakage through the retriggering resistor $R_{161}$ produces the characteristic slow pitch sigh over the decay tail. The output passes through a passive lowpass tone control (VR5 for click rolloff) and a VCA level stage (VR4) with a 6.7 Hz highpass DC blocker.
+
+The result is a single-kick render whose per-hit parameters — Tune (frequency scale), Decay (feedback sustain), Tone (attack click HP), Level — map directly from symbolic percussion events. Per-hit accent modulates the trigger voltage (3.5 V base, +0–10 V accent) for dynamic velocity response without polyphonic voice stealing (coincident kicks accumulate in the stem).
+
+### Technical Mechanics
+
+#### 1. Trigger Logic and Pulse Shaper
+
+A 1 ms trigger pulse $V_{trig}$ from the CPU (amplitude $V_{ct}$ 4–14 V, depending on global accent pot VR3) is ANDed with instrument data $V_{id}$ by transistor pair Q39–Q40. The pulse drives a nonlinear low-shelf filter (pulse shaper):
+
+$$V_+(t) = V_{trig} \cdot \frac{R_{163}}{R_{162}+R_{163}} \quad\text{(rising edge passes fully)}$$
+
+The falling edge is clamped by diode D53 at $\approx 0.71$ V — the passive RC ($R_{162}C_{40}$) decay after the trigger ends. The ODE of the pulse shaper (Werner eq. 2):
+
+$$R_{162}R_{163}C_{40}\left(\frac{dV_{trig}}{dt}-\frac{dV_+}{dt}\right) - R_{162}V_{trig} + (R_{162}+R_{163})V_+ - R_{162}R_{163}I_s\left(e^{-V_+/(nV_T)}-1\right) = 0$$
+
+In practice, this is well approximated by cascading a linear low-shelf filter with a half-wave clipping nonlinearity (negative voltages clamped at $-0.71$ V):
+
+$$V_+[n] = b_0 V_{trig}[n] + b_1 V_{trig}[n-1] - a_1 V_+[n-1], \quad \text{then } V_+ = V_+ \quad\text{if } V_+ > -0.71\text{, else } -0.71$$
+
+#### 2. Bridged-T Bandpass Filter (the core synthesizer)
+
+The bridged-T network (Zobel topology) in the negative feedback path of op-amp Q43 forms a bandpass filter whose impulse response is the decaying pseudo-sinusoid:
+
+$$H_{bt}(s) = \frac{V_{bt}(s)}{V_+(s)} = \frac{\beta_2 s^2 + \beta_1 s + \beta_0}{\alpha_2 s^2 + \alpha_1 s + \alpha_0}$$
+
+with coefficients (from Werner et al. eq. 5, verified by nodal analysis):
+
+$$\begin{aligned}
+\beta_2 &= R_{eff} R_{167} C_{41} C_{42} \\
+\beta_1 &= R_{eff} C_{41} + R_{167} C_{41} + R_{eff} C_{42} \\
+\beta_0 &= 1 \\
+\alpha_2 &= R_{eff} R_{167} C_{41} C_{42} \\
+\alpha_1 &= R_{eff} (C_{41} + C_{42}) \\
+\alpha_0 &= 1
+\end{aligned}$$
+
+Center frequency (from the denominator roots):
+
+$$f_0 = \frac{1}{2\pi \sqrt{R_{eff} R_{167} C_{41} C_{42}}} \approx 49.4\text{ Hz}$$
+
+where $R_{eff} = R_{161} \parallel (R_{165} + R_{166}) \parallel R_{170} \approx 200$ k$\Omega$, $R_{167} = 150$ k$\Omega$, $C_{41} = C_{42} = 0.022$ µF (service manual values).
+
+The filter's Q is determined by the ratio of $R_{eff}$ to $R_{167}$:
+
+$$Q = \frac{\sqrt{R_{eff} R_{167} C_{41} C_{42}}}{R_{eff} C_{41} + R_{eff} C_{42}} \cdot \sqrt{R_{eff} R_{167}} \approx 15\text{—}20$$
+
+The impulse response (at $f_0$) is approximately:
+
+$$v_{bt}(t) \approx V_{pulse} \cdot e^{-\pi f_0 t / Q} \sin(2\pi f_0 t)$$
+
+#### 3. Attack Envelope (pitch sweep)
+
+A 6 ms envelope generator modulates the bridged-T center frequency via transistor Q43's effective resistance (JFET-like behavior when forward-biased). The frequency jumps to approximately:
+
+$$f_{attack} \approx f_0 \cdot \frac{C_{41}+C_{42}}{C_{41}+C_{42} - \Delta C_{eff}} \approx 130\text{ Hz} \quad (\text{C3} - 11\text{c})$$
+
+The envelope shape is a fast attack, 6 ms exponential decay back to $f_0$. After the attack, a retriggering pulse (derived from the same envelope through $R_{161}$) gives a small energy boost to bridge the attack→body transition smoothly.
+
+#### 4. Feedback Buffer (decay control)
+
+The feedback buffer (op-amp Q44 + VR6) sustains the bridged-T oscillation by feeding the output back to the input:
+
+$$H_{fb}(s) = \frac{V_{fb}(s)}{V_{bt}(s)} = \frac{\beta_1 s + \beta_0}{\alpha_1 s + \alpha_0}$$
+
+with coefficients (Werner eq. 6):
+
+$$\begin{aligned}
+\beta_1 &= -R_{169} \cdot \text{VR6}_k \cdot C_{43} \\
+\beta_0 &= -R_{169} \\
+\alpha_1 &= R_{164} (R_{169} + \text{VR6}_k) C_{43} \\
+\alpha_0 &= R_{164}
+\end{aligned}$$
+
+The Decay pot $\text{VR6}_k$ varies the feedback gain continuously; the closed-loop decay time constant:
+
+$$\tau_{decay} \in [50\text{ ms}, 800\text{ ms}], \quad \text{center } 300\text{ ms}$$
+
+The envelope $e(t) = e^{-t / \tau_{decay}}$.
+
+#### 5. Pitch Sigh (leakage through $R_{161}$)
+
+Voltage leakage through retriggering resistor $R_{161}$ during negative output swings slowly saps energy from the bridged-T, effectively detuning it downward:
+
+$$f(t) = f_0 \cdot \left(1 - \epsilon \int_0^t |v_{bt}(\tau)|\,d\tau\right), \quad \epsilon \ll 1$$
+
+This creates the characteristic sigh — a gentle downward pitch glide over the decay, unique to the 808 kick vs. generic resonant-filter kicks.
+
+#### 6. Tone, Level, and Output
+
+Tone control VR5 is a passive RC lowpass filter:
+
+$$H_{tone}(s) = \frac{1}{1 + sR_{tone} C_{47}}, \quad R_{tone} \in [0, 10\text{ k}\Omega]$$
+
+At maximum Tone (fully CW), the cutoff is high (all click passes); at minimum (fully CCW), the cutoff dips low, rolling off attack transient.
+
+Level control VR4 is the VCA gain. Final output stage includes a 6.7 Hz first-order highpass (C49 + R177 + R176) for DC offset removal — essentially inaudible but prevents subsonic woofer excursion.
+
+### Complexity
+
+$O(1)$ per sample per voice: 1 bridged-T biquad + 1 feedback-buffer biquad + 1 envelope state + 1 tone LPF + 1 level multiply. $O(N \cdot H)$ for $N$ samples per $H$ hits. Deterministic per seed/params.
+
+### Musical Elements Framework
+
+| Element | Mapping |
+|---|---|
+| **PITCH** | The kick's fundamental is the bridged-T center $f_0$ (~49.4 Hz, G1+14¢). Tune parameter scales all timing capacitors (via voltage-controlled effective resistance) to pitch the kick from ~30 Hz (B0, huge subs) to ~80 Hz (E2, tight). The attack sweep (~130 Hz) creates a transient pitch burst perceived as click/beater — the sweep range shrinks at low Tune settings. |
+| **RHYTHM** | The kick IS the rhythm event: onset = trigger time, velocity = accent voltage (modulates Level + slight Decay increase). The 300 ms center decay naturally suits 4-on-the-floor at 120–160 BPM; longer decays (800 ms, Decay fully CW) give the classic "boomy 808" that bleeds into the next beat (desirable in trap/hip-hop). Ghost notes at low velocity + short Decay. |
+| **HARMONY** | The kick is atonal subs — no harmonic function. But the pitched fundamental rings sympathetically with bass notes near G1: the kick "tunes" to the root of the bass line in classic house/techno production. |
+| **STRUCTURE** | Per-section preset (Tune, Decay, Tone, Level) = drum-mix macro-form: tight short kick in verse vs. boomy long kick in drop vs. no kick in breakdown. The transition between presets is instant (no filter smoothing needed — each trigger is a fresh bridged-T ping). |
+| **TEXTURE** | Decay is the texture fader: short (~50 ms) = staccato, almost like a synth click or rim — the kick becomes a rhythmic punctual event; long (~800 ms) = legato subs that fill the bar. Per the Method Hybridization rule, always pair a long 808 kick with a highpassed mid-range layer (the kick supplies the low-end, the mid layer supplies the articulation). Tone control further shapes texture by rolling off or preserving the attack click. |
+
+### UnitMatrix Integration
+
+- **Rows (Voices)** = each percussion row (kick row) renders through its own AKDS instance. Pitched/tonal rows (bass, leads) are independently rendered by SP-001/SP-074. One shared bridged-T state per voice (no voice stealing — coincident kicks cleanly accumulate in the stem buffer because each trigger is a fresh independent oscillation).
+- **Columns (Sections)** = per-section preset (Tune, Decay, Tone, Level) stored as four scalar parameters applied to every kick trigger in that section. Presets switch instantly (filter states are not smoothed — each trigger is an independent impulse response).
+- **Cells (MusicUnit)** = pitch → Tune (the kick's fundamental frequency); rhythm → onset times are trigger timestamps, velocity → accent voltage (modulates both Level and slight Decay boost at high velocity); texture → per-cell Decay/Custom decay envelope if the cell specifies a non-standard decay time.
+- **Flow**: `compose` (UnitMatrix → MIDI) → kick row extracted → `produce(method="SP-098", params={tune, decay, tone, level})` → per-hit render → sum into stem → SP-007 EQ (cut ~250 Hz boxiness) → SP-008 limiter → mix → WAV/OGG. Pairs: SP-009/032/071 (room/plate on the kick — classic gated kick), SP-072 (HPSS isolate tonal sub from transient click), SP-073 (TSDE attack boost for extra beater), SP-006 (humanize onsets ±2 ms, +subtle velocity scatter).
+
+### Pitfalls
+
+1. **Overfolding the bridged-T**: A simple 2-pole resonant LPF or BPF *does not* produce the 808 kick's specific ringing shape at 49.4 Hz with the correct attack→body transition. Use the full 2nd-order transfer function with $R_{eff}$, $R_{167}$, $C_{41}$, $C_{42}$ coefficients.
+2. **Ignoring the attack envelope**: Without the 6 ms pitch sweep (49→130 Hz), the kick loses its punch/click. The sweep is perceptually crucial even though it's too brief to be heard as a pitch — it adds transient energy precisely at the attack.
+3. **Missing the retriggering pulse**: Without the retriggering bump at ~6 ms, there's an audible dip/gap between attack and body. The retriggering voltage injection through $R_{161}$ bridges this.
+4. **Flat across the whole decay**: The pitch sigh (leakage through $R_{161}$) is what distinguishes a real 808 kick from a generic filtered sine. Model the voltage-dependent leakage as a slow exponential frequency drift $f(t) = f_0 e^{-t/\tau_{sigh}}$.
+5. **Confusion with the generic 606 bass drum**: The 606 kick uses a VCO sine with VCA+gated filter, not a bridged-T self-oscillating bandpass. Use AKDS when the 808's signature organic ringing and sigh are wanted.
+6. **Zero-decay click**: At the shortest Decay setting (~50 ms), the kick can sound like a short click/rim. The Tone control doesn't fully mask this — for extremely short kicks, layer with a transient designed layer.
+7. **Machine-gun effect with shared-noise phases**: The bridged-T is deterministic (bit-exact per seed) so repeated hits sound identical. Add per-hit random detune scatter $\pm 2$ cents on $f_0$ or per-hit RNG modulation to Decay for natural variation.
+8. **Subsonic energy**: At 49.4 Hz the kick has significant sub-30 Hz energy from the decay tail envelope. Always pair with a highpass at ~30 Hz on the master output (the service manual's built-in 6.7 Hz HPF is insufficient to protect subwoofers).

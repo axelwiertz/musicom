@@ -495,6 +495,26 @@ composition should keep lines within roughly G3–C6 (55–84) for idiomatic
 tone; above C6 the patch thins out. Mono-line quirk: ocarina is a single
 breath line (vessel), NOT a harmony/pad voice — no dense chords.
 
+**Pan Flute added** (2026-10-01): GM75, World-family entry — South American
+Andean panpipes (zampoña/siku/antara), the stopped-pipe breath instrument
+made of cane tubes; the only stopped-pipe aerophone in the KB (tube is
+closed at one end — only odd partials 1,3,5,7). Verified end-to-end
+UnitMatrixComposer → zero-drift ✓ → MIDI (111 bytes) → FluidSynth WAV (731
+KB) ✓; RenderPipeline stem label `trackXX_Pan_Flute.wav` ✓ (GM_PROGRAMS[75]
+= "Pan Flute", FluidR3 preset 75 = "Pan Flute" — labels match exactly, **no
+quirk**). PhaseModSynth recommended (stopped-pipe flue tone: sine carrier +
+sine modulator, mod_depth 1.2 — shallowest pure-toned flue set — between
+ocarina 0.8 and shakuhachi 2.0; attack 0.05 s for gentle breath onset;
+release 0.15 s). Additive fallback with odd-only partials
+(1:0.9, 3:0.35, 5:0.15, 7:0.05) — strongest fundamental dominance of the
+World wind set. Solo-render spectral check: 4–8 kHz buzz 1.5% (clean single
+voice, well below 20% gate). Empirical FluidR3 pitch sweep (RMS, notes
+55–100): preset 75 audible across full range (no gaps or dropouts).
+Registered in `instrument_registry.py` as PAN_FLUTE convenience constant.
+Line-instrument quirk: each tube produces one pitch — no dense chords or
+harmony; the arqa/ira siku pairs alternate rapidly for melodic lines, not
+vertical harmonies.
+
 **Tubular Bells added** (2026-09-26): GM14, Percussion-family seventh entry —
 the struck brass tube chimes (orchestral tintinnabuli; Tchaikovsky 1812,
 Mahler Resurrection, Mike Oldfield theme) (instrument.md + tubular_bells.py),
@@ -581,6 +601,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | World | Shenai | 111 | 55–96 | lead, melody, ornament, drone, accent |
 | World | Fiddle | 110 | 55–96 | lead, melody, ornament, countermelody, accent |
 | World | Taiko Drum | 116 | 36–67 | accent, rhythm, drone, ornament |
+| World | Pan Flute | 75 | 55–100 | lead, melody, ornament, drone, accent |
 | World | Shakuhachi | 77 | 55–100 | lead, melody, ornament, drone, accent |
 | Woodwind | Bagpipe | 109 | 53–96 | lead, melody, ornament, drone, accent |
 | Woodwind | Ocarina | 79 | 55–96 | lead, harmony, accent |
@@ -627,6 +648,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 111 | Shanai | **Shanai** ✗ (GM_PROGRAMS[111] = "Shanai" — GM2 spec spelling; instrument = Shenai, FluidR3 preset 111 = "Shenai") |
 | 110 | Fiddle | Fiddle ✓ (GM_PROGRAMS[110] + FluidR3 preset 110 both "Fiddle") |
 | 77 | Shakuhachi | Shakuhachi ✓ **no quirk** (GM_PROGRAMS[77] + FluidR3 preset 77 both "Shakuhachi") |
+| 75 | Pan Flute | Pan_Flute ✓ (GM_PROGRAMS[75] = "Pan Flute"; FluidR3 preset 75 = "Pan Flute" — labels match exactly, **no quirk**) |
 || 22 | Harmonica | Harmonica ✓ (GM_PROGRAMS[22] + FluidR3 preset 22 both "Harmonica") |
 || 79 | Ocarina | Ocarina ✓ (GM_PROGRAMS[79] + FluidR3 preset 79 both "Ocarina") |
 || 114 | Steel Drums | Steel Drums ✓ (GM_PROGRAMS[114] + FluidR3 preset 114 both "Steel Drums") |

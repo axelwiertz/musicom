@@ -1,0 +1,18 @@
+{
+  "method": "SP-081",
+  "project": "004-baroque-counterpoint-inversion",
+  "status": "PASS",
+  "dry_wet_hit_rate": 0.8888888888888888,
+  "harmonic_energy_mean": 0.7027606601498287,
+  "acf_unpitched": 0,
+  "acf_windows": 3,
+  "windows_analyzed": 9,
+  "median_dom_hz": 220.0,
+  "misses": [
+    {
+      "t": 0.5,
+      "dom_w": 234.0,
+      "dom_d": 294.0
+    }
+  ]
+}

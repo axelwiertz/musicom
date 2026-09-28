@@ -1,0 +1,24 @@
+SP-081 Random8 — absolute-layer modulation matrix
+seed=20260928 n_trigs=16 (eighth-note grid, 8 beats @ 120 BPM)
+
+ch  style      scale            -> destination (mapping)
+  ch0 drift     dorian           -> LPF cutoff 500-9000 Hz (log)
+      CV[░░░░░░░░░░░░░░░░]  (0.00..0.42)
+  ch1 uniform   major            -> stereo pan -1..+1 (constant power)
+      CV[░░░░░░░████░░░░█]  (0.17..0.92)
+  ch2 steps     unquantised      -> gain tremolo 0.70..1.0
+      CV[░░░░░░░░░░░░░░░░]  (0.00..0.25)
+  ch3 bell      natural_minor    -> reverb wet 0.06..0.36 (crossfade)
+      CV[█░░░██████░█░█░░]  (0.17..0.83)
+  ch4 drift     mixolydian       -> HPF cutoff 20-80 Hz
+      CV[░███████░█░░░░░░]  (0.00..0.75)
+  ch5 burst     whole_tone       -> stereo width 0.6..1.4 (mid/side)
+      CV[█░██████████████]  (0.33..1.00)
+  ch6 steps     hirajoshi        -> LPF resonance 0.15..0.70
+      CV[░██████████████░]  (0.25..0.58)
+  ch7 triangle  unquantised      -> master trim 0.92..1.0
+      CV[███████░░░░░░░░░]  (0.26..0.75)
+
+stems (wet, same absolute params):
+  track00_Acoustic_Grand_Piano_RANDOM8.wav
+  track01_Acoustic_Grand_Piano_RANDOM8.wav

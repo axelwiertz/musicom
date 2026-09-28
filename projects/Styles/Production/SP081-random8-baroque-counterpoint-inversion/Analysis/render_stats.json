@@ -1,0 +1,141 @@
+{
+  "method": "SP-081",
+  "method_module": "sound.modular.random8",
+  "layer": "absolute",
+  "random8_seed": 20260928,
+  "n_trigs": 16,
+  "channels": {
+    "ch0": {
+      "attenuate": 1.0,
+      "dividr": 1,
+      "probability": 1.0,
+      "style": "drift",
+      "offset": 0.0,
+      "scale": "dorian",
+      "slide": 0.35,
+      "steps": 32,
+      "loop_mode": "random"
+    },
+    "ch1": {
+      "attenuate": 1.0,
+      "dividr": 2,
+      "probability": 1.0,
+      "style": "uniform",
+      "offset": 0.0,
+      "scale": "major",
+      "slide": 0.0,
+      "steps": 32,
+      "loop_mode": "random"
+    },
+    "ch2": {
+      "attenuate": 1.0,
+      "dividr": 1,
+      "probability": 0.8,
+      "style": "steps",
+      "offset": 0.0,
+      "scale": null,
+      "slide": 0.0,
+      "steps": 32,
+      "loop_mode": "random"
+    },
+    "ch3": {
+      "attenuate": 1.0,
+      "dividr": 1,
+      "probability": 1.0,
+      "style": "bell",
+      "offset": 0.0,
+      "scale": "natural_minor",
+      "slide": 0.3,
+      "steps": 32,
+      "loop_mode": "random"
+    },
+    "ch4": {
+      "attenuate": 1.0,
+      "dividr": 1,
+      "probability": 1.0,
+      "style": "drift",
+      "offset": 0.0,
+      "scale": "mixolydian",
+      "slide": 0.5,
+      "steps": 32,
+      "loop_mode": "random"
+    },
+    "ch5": {
+      "attenuate": 1.0,
+      "dividr": 1,
+      "probability": 1.0,
+      "style": "burst",
+      "offset": 0.0,
+      "scale": "whole_tone",
+      "slide": 0.3,
+      "steps": 32,
+      "loop_mode": "random"
+    },
+    "ch6": {
+      "attenuate": 0.6,
+      "dividr": 1,
+      "probability": 1.0,
+      "style": "steps",
+      "offset": 0.0,
+      "scale": "hirajoshi",
+      "slide": 0.0,
+      "steps": 32,
+      "loop_mode": "random"
+    },
+    "ch7": {
+      "attenuate": 1.0,
+      "dividr": 4,
+      "probability": 1.0,
+      "style": "triangle",
+      "offset": 0.0,
+      "scale": null,
+      "slide": 0.0,
+      "steps": 32,
+      "loop_mode": "random"
+    }
+  },
+  "scales": [
+    "dorian",
+    "hanumatodi",
+    "hirajoshi",
+    "in_sen",
+    "major",
+    "maqam_bayati",
+    "maqam_hijaz",
+    "maqam_rast",
+    "mayamalavagowla",
+    "mecakalyani",
+    "mixolydian",
+    "natural_minor",
+    "quarter_tone",
+    "whole_tone",
+    "yo"
+  ],
+  "styles": [
+    "bell",
+    "burst",
+    "drift",
+    "steps",
+    "triangle",
+    "uniform"
+  ],
+  "lufs": -14.38,
+  "peak": 0.8912509381337456,
+  "silence_pct": 37.16,
+  "rms_per_second": [
+    0.0942,
+    0.1311,
+    0.1018,
+    0.0896,
+    0.011,
+    0.0
+  ],
+  "windows_checked": 9,
+  "dry_wet_hit_rate": 0.8889,
+  "harmonic_energy_mean": 0.7028,
+  "acf_windows": 3,
+  "acf_unpitched": 0,
+  "pitch_verdict": "PASS",
+  "median_dom_hz": 220.0,
+  "duration_sec": 6.91
+}
