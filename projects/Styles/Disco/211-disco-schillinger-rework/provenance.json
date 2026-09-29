@@ -1,0 +1,21 @@
+{
+  "project": "211-disco-schillinger-rework",
+  "genre": "Disco",
+  "key": "Eb major",
+  "bpm": 118,
+  "form": "8 sections x 4 bars = 32 bars",
+  "source": "092-disco-schillinger",
+  "redesign_required": true,
+  "audit_failures": ["std6_provenance.json", "std6_index.html"],
+  "variation_techniques": [
+    "transposition +5 (Chorus)",
+    "retrograde (Break)",
+    "inversion around Eb4 (Chorus2)",
+    "register-shift +12 (Verse2)",
+    "diminution x0.5 (Breakdown)",
+    "augmentation x2.0 (Outro)"
+  ],
+  "method": "018 Schillinger System + musicom rules (two-phase)",
+  "seed": 20260929,
+  "voices": ["Lead(Trumpet 56)", "Sax(65)", "Piano(1)", "Organ(19)", "Guitar(25)", "Bass(43)", "Drums(ch9)"]
+}

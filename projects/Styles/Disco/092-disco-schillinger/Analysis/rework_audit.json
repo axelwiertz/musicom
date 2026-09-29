@@ -1,0 +1,27 @@
+{
+  "chosen": "092-disco-schillinger",
+  "genre": "Disco",
+  "primary_midi": "/opt/data/repos/musicom/projects/Styles/Disco/092-disco-schillinger/MIDI/092-disco-schillinger.mid",
+  "audit_date": "2026-09-29",
+  "standard_failures": [
+    "std6_provenance.json",
+    "std6_index.html"
+  ],
+  "redesign_required": true,
+  "source_identity": {
+    "genre": "Disco",
+    "key": "Eb major",
+    "bpm": 118,
+    "method": "018 Schillinger System (resultant a=7 b=4)",
+    "instrumentation": ["Trumpet", "Sax", "Piano", "Organ", "Acoustic Guitar", "Double Bass", "Drums"],
+    "form": "6 sections x 4 bars = 24 bars"
+  },
+  "standard_results": {
+    "std1_engine": "PASS (UnitMatrixComposer)",
+    "std2_zero_drift": "PASS (7 voice tracks x 46080)",
+    "std3_rhythm_grid": "PASS (0 off-grid pitched onsets)",
+    "std4_tracks": "PASS (7 voice tracks)",
+    "std5_two_phase": "PASS (both .mid and -phase1.mid present)",
+    "std6_sidecars": "FAIL (no project-root provenance.json / index.html)"
+  }
+}

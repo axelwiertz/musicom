@@ -1,0 +1,30 @@
+{
+  "artifact": "211-disco-schillinger-rework-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "SchillingerGenerator(method 018)",
+  "sources": [],
+  "parameters": {
+    "phase": 1,
+    "seed": 20260929,
+    "generators": "a=7, b=4",
+    "resultant_pulses": [
+      4,
+      3,
+      1,
+      4,
+      2,
+      2,
+      4,
+      1,
+      3,
+      4
+    ],
+    "source": "092-disco-schillinger",
+    "method": "018 Schillinger System of Musical Design"
+  },
+  "notes": "Raw Schillinger draft (rework of 092): fractional (off-grid) onsets, coordinate-axis sine pitch, no harmony, single voice.",
+  "sha256": "db7ce4ba238e93500cc33d6071ec09e9961e86f313bbc23ab3131aaa855ae9d8",
+  "bytes": 2331,
+  "created_utc": "2026-09-29T01:07:21.057793+00:00",
+  "provenance_version": "1.0"
+}
