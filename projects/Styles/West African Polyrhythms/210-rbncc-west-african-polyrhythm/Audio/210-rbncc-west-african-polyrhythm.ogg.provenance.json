@@ -1,0 +1,19 @@
+{
+  "artifact": "210-rbncc-west-african-polyrhythm.ogg",
+  "classification": "ai-assisted",
+  "generator": "ffmpeg libopus",
+  "sources": [],
+  "parameters": {
+    "project": "210-rbncc-west-african-polyrhythm",
+    "phase": "phase2",
+    "format": "ogg",
+    "codec": "libopus",
+    "bitrate": "128k",
+    "source_midi": "210-rbncc-west-african-polyrhythm.mid"
+  },
+  "notes": "",
+  "sha256": "ca23fc61babc84de9f6ef39de10faeffb987dfb60ed41288c12f33984339382b",
+  "bytes": 1407772,
+  "created_utc": "2026-09-28T23:09:08.658902+00:00",
+  "provenance_version": "1.0"
+}

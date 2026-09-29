@@ -1,0 +1,16 @@
+SP-079 Acid Seq (BS-203 MacroAcidizer) — absolute-layer acid re-synthesis
+source: 050-pcfg-daw-sync_Lead.mid  (D Dorian, 100 BPM, 124 notes)
+
+mode   instrument       env_decay  slope  drive  res   clip  centroid
+  303  TB-303                0.24   1.0   1.6 0.72  0.98   2006.3 Hz
+  202  MC-202 / MR-202       0.11   2.0   1.4 0.68  0.95   2602.2 Hz
+  BB   Juteon Bassboy        0.18   1.6   3.2 0.88  0.62   4688.6 Hz
+
+accent map (bar downbeats, 8 bars @ 2.4s):
+  ████████  (█ = accented downbeat note present, ░ = downbeat rest)
+
+mode stems (each = full melody through that mode, peak 0.89):
+  Audio/stems/track00_Acid303.wav
+  Audio/stems/track00_Acid202.wav
+  Audio/stems/track00_AcidBB.wav
+full mix = sum(303*0.6, 202*0.5, BB*0.4) -> LUFS -14 -> Limiter -1

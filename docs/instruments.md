@@ -495,6 +495,22 @@ composition should keep lines within roughly G3–C6 (55–84) for idiomatic
 tone; above C6 the patch thins out. Mono-line quirk: ocarina is a single
 breath line (vessel), NOT a harmony/pad voice — no dense chords.
 
+**Music Box added** (2026-09-29): GM10, Percussion-family seventh entry — the
+mechanical pinned-cylinder lamellophone (steel-comb teeth plucked by pins on a
+revolving cylinder; the iconic wind-up toy and jewellery-box tinkle)
+(instrument.md + music_box.py), verified end-to-end UnitMatrixComposer →
+zero-drift ✓ → MIDI (120 bytes) → FluidSynth WAV (855 KB) ✓; RenderPipeline
+stem label `trackXX_Music_Box.wav` ✓ (GM_PROGRAMS[10] = "Music Box", FluidR3
+preset 10 = "Music Box" — labels match exactly, **no quirk**). ModalSynth
+primary with stock 'bell' preset and custom `MUSIC_BOX_MODES` bank at near-harmonic
+1:2:3:4 ratios with fast decay rates 4-12 (steel tine = clamped cantilever, not
+free-free bar). Karplus-Strong secondary (tine IS plucked — waveguide model fits;
+loop_gain 0.9950 for short steel-ring ~0.5-1.0 s). Solo-render spectral check:
+4–8 kHz buzz 9.6% (below 20% gate, no comb-filtering). Range 60–96 (C4–C7);
+sweet spot 72–84 (C5–C6). Identity quirk: music box is a MONOPHONIC mechanical
+instrument — composition jobs MUST write single-note lines, NOT chords (a real
+music box physically cannot play two notes simultaneously on the same tine).
+
 **Pan Flute added** (2026-10-01): GM75, World-family entry — South American
 Andean panpipes (zampoña/siku/antara), the stopped-pipe breath instrument
 made of cane tubes; the only stopped-pipe aerophone in the KB (tube is
@@ -653,7 +669,8 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 || 79 | Ocarina | Ocarina ✓ (GM_PROGRAMS[79] + FluidR3 preset 79 both "Ocarina") |
 || 114 | Steel Drums | Steel Drums ✓ (GM_PROGRAMS[114] + FluidR3 preset 114 both "Steel Drums") |
 || 116 | Taiko Drum | Taiko Drum ✓ (GM_PROGRAMS[116] + FluidR3 preset 116 both "Taiko Drum") |
-|| 21 | Accordion | Accordion ✓ (GM_PROGRAMS[21] = "Accordion"; FluidR3 preset 21 = "Accordian" — archaic SF2 spelling, cosmetic only, no routing impact) |
+||| 21 | Accordion | Accordion ✓ (GM_PROGRAMS[21] = "Accordion"; FluidR3 preset 21 = "Accordian" — archaic SF2 spelling, cosmetic only, no routing impact) |
+||| 10 | Music Box | Music_Box ✓ (GM_PROGRAMS[10] = "Music Box"; FluidR3 preset 10 = "Music Box" — labels match exactly, **no quirk**) |
 || ch9/pgm0 | Drums | **Acoustic_Grand_Piano** ✗ (program-0 fallback) |
 
 > **Known off-by-one in existing entries**: ~~`trumpet.py` uses 57~~ **FIXED 2026-08-27**: trumpet is now 56 (SF2 preset 56=`SoloTrumpet`). `piano.py`=1 → actually Bright Acoustic Piano (GM #2) — cosmetic label difference only, no routing impact. Legacy registry rows kept as-is for piano; new instruments use 0-indexed programs matching pipeline+SF2.

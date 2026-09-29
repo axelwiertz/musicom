@@ -1,0 +1,98 @@
+{
+  "method": "SP-079",
+  "method_module": "sound.generators.acid_seq",
+  "layer": "absolute",
+  "seed": 20260929,
+  "modes": {
+    "303": {
+      "spec": "TB-303",
+      "env_decay": 0.24,
+      "env_slope": 1.0,
+      "drive": 1.6,
+      "resonance": 0.72,
+      "clip": 0.98,
+      "spectral_centroid_hz": 2006.3,
+      "rms": 0.3623
+    },
+    "202": {
+      "spec": "MC-202 / MR-202",
+      "env_decay": 0.11,
+      "env_slope": 2.0,
+      "drive": 1.4,
+      "resonance": 0.68,
+      "clip": 0.95,
+      "spectral_centroid_hz": 2602.2,
+      "rms": 0.3582
+    },
+    "BB": {
+      "spec": "Juteon Bassboy",
+      "env_decay": 0.18,
+      "env_slope": 1.6,
+      "drive": 3.2,
+      "resonance": 0.88,
+      "clip": 0.62,
+      "spectral_centroid_hz": 4688.6,
+      "rms": 0.3964
+    }
+  },
+  "mode_gains_full_mix": {
+    "303": 0.6,
+    "202": 0.5,
+    "BB": 0.4
+  },
+  "scales_available": [
+    "dorian",
+    "major",
+    "minor",
+    "minor_pentatonic",
+    "phrygian"
+  ],
+  "step_divisions": {
+    "1/4": 1.0,
+    "1/8": 2.0,
+    "1/8T": 3.0,
+    "1/16": 4.0,
+    "1/16T": 6.0,
+    "1/32": 8.0
+  },
+  "n_notes": 124,
+  "pitch_range": [
+    62,
+    79
+  ],
+  "accent_bar_downbeats": true,
+  "slides": "none (staccato source, no legato ties)",
+  "lufs": -14.0,
+  "peak": 0.3406982421875,
+  "silence_pct": 22.85,
+  "rms_per_second": [
+    0.1533,
+    0.1488,
+    0.1349,
+    0.1545,
+    0.1474,
+    0.1491,
+    0.1543,
+    0.1481,
+    0.1488,
+    0.1408,
+    0.1492,
+    0.1492,
+    0.1534,
+    0.1491,
+    0.148,
+    0.1547,
+    0.1349,
+    0.1488,
+    0.1542,
+    0.0054
+  ],
+  "windows_checked": 39,
+  "dry_wet_hit_rate": 0.6154,
+  "harmonic_energy_mean": 0.6497,
+  "acf_windows": 10,
+  "acf_unpitched": 0,
+  "pitch_verdict": "PASS",
+  "median_dom_hz": 440.0,
+  "duration_sec": 20.02
+}

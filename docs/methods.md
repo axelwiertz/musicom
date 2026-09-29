@@ -107,8 +107,7 @@ Classification of active Musicom composition methods categorized by their primar
 | **097** | concrete | Maximum Entropy Composition (MaxEnt-C) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Constraint-guided) | Grid-Locked / Continuous | Macro / Boltzmann-Gibbs Ensemble | $\mathcal{O}(K \cdot q^2 \cdot N)$ learning, $\mathcal{O}(I \cdot N \cdot q)$ sampling | Applies Jaynes' Maximum Entropy principle: finds the least-biased (maximum-entropy) probability distribution over pitch/rhythm/chord sequences consistent with pairwise moment constraints via a Boltzmann–Gibbs (Potts) model. Pairwise interactions at multiple distances capture long-range melodic structure without high-order Markov overfitting. Sampling via MCMC fills UnitMatrix cells. |
 | **098** | concrete | Multi-Objective Evolutionary Pareto Composition (MOEPC) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Pareto-guided, multi-objective fitness) | Grid-Locked / Continuous | Macro / Pareto Front | $\mathcal{O}(I \cdot P \cdot N \cdot M)$ | Evolves multiple conflicting musical objectives (harmonic quality, melodic quality, rhythmic coherence, voice independence) via NSGA-II, returning a Pareto front of trade-off compositions. The front itself defines macro-form. |
 | **099** | abstract | Self-Similarity Matrix Composition (SSMC) | **Rules-Based** | Structure, Texture, Pitch, Rhythm | Weak (Template-guided) | Grid-Locked / Continuous | Macro / Form | $\mathcal{O}(N^2 \cdot M)$ | Designs macro-form repetition structure as a self-similarity matrix (SSM) — pairwise similarity targets between all time positions. Solves the inverse problem: optimize a feature sequence whose SSM matches the target, then decode to per-bar feature profiles. Novelty curve identifies section boundaries for UnitMatrix layout. First abstract-layer form-design method: feeds rules/ssm_composition.py. |
-
-### **097** | Maximum Entropy Composition (MaxEnt-C) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Constraint-guided) | Grid-Locked / Continuous | Macro / Boltzmann-Gibbs Ensemble | $\mathcal{O}(K \cdot q^2 \cdot N)$ learning, $\mathcal{O}(I \cdot N \cdot q)$ sampling
+| **100** | concrete | Active Inference Composition (AIFC) | **AI-Driven** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Prior-guided, HOME/LIFT/TENSE/TURN) | Grid-Locked / Continuous | Macro / Generative Model Horizon | $\mathcal{O}(T \cdot d^2)$ per step, $\mathcal{O}(T \cdot D \cdot d^2)$ learn | Casts composition as closed-loop active inference: a multi-level hierarchical generative model drives note-by-note event selection by minimizing expected free energy. Prior preferences encode tonal gravity, metric binding, voice-leading, and macro-form. Multi-agent (one per voice) with shared form + harmonic state. |
 
 ### Source
 Sakellariou, J., Tria, F., Loreto, V. & Pachet, F. (2017). "Maximum entropy models capture melodic styles." *Scientific Reports* 7, 9172. arXiv:1610.03414. — Jaynes, E. T. (1957). "Information theory and statistical mechanics." *Physical Review* 106, 620–630.
@@ -265,7 +264,8 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 | **SP-095** | Tonewheel Electromagnetic Modeling Synthesis (TWEMS) | **Synthesis Engines** | Electromechanical Organ / Drawbar-Composite Timbre | Models the Hammond tonewheel generator: 91 rotating disks with magnetic pickups produce 9 drawbar partials (harmonic ratios 0.5, 1.5, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 8.0) with key-click transient (6th harmonic burst + staggered contact bounce), harmonic foldback at keyboard extremes, 5 Hz synchronous-motor tremolo, 6-position scanner vibrato/chorus (time-varying phase-shift delay), and the Leslie rotating speaker cabinet (Doppler time-varying delay + tremolo + crossover-filtered horn/drum paths). $\mathcal{O}(P)$ per sample ($P=9$ partials). Candidate: `sound/synthesis/twems.py`. |
 | **SP-096** | Hard Sync Oscillator Synthesis (HSOS) | **Synthesis Engines** | Classic Analog Sync / Aggressive Lead & Bass Timbres | Syncs a slave oscillator's phase to a master oscillator's zero-crossings: master sets the fundamental pitch while the slave-to-master frequency ratio $r = f_s / f_m$ determines the harmonic spectrum independently. Hard sync (phase reset) produces the classic tearing/screaming analog lead; soft sync (phase-reverse) gives milder octave-doubling textures. Ratio $r$ sweep is a one-knob timbre morph from pure fundamental ($r=1$) through integer subharmonics ($r=2,3,4$) to dense inharmonic buzz ($r > 5$). Bandlimited antialiasing via PolyBLEP (4-sample correction, $\mathcal{O}(1)$ per sample). Candidate: `sound/synthesis/hard_sync.py`. |
 | **SP-097** | Sub-Harmonic Oscillator Synthesis (SHOS) | **Synthesis Engines** | Subharmonic Chord Stacks / Divide-Down Bass Enhancement | Generates the undertone series $f_0/d$ for integer divisors $d \in \{1,2,\dots,6\}$ from a shared master oscillator via phase-accumulator frequency division. Produces phase-locked subharmonic chord stacks (root, P8, P12, 2×P8, M17, P19) from a single root note — a single-note chord. Three modes: subharmonic bass enhancement (Dbx 120-style $f_0/2$ synthesis), subharmonic chord stack (Moog Subharmonicon-style multi-divisor mix), and divide-down organ (top-octave frequency chain). Per-divisor gains, per-divisor fine detuning ($\pm\delta_d$ cents), polyrhythmic gating per divisor. $\mathcal{O}(D)$ per sample ($D=|\mathcal{D}|$). Candidate: `sound/synthesis/subharmonic.py`. |
-| **SP-098** | TR-808 Analog Kick Drum Synthesis (AKDS) | **Synthesis Engines** | Circuit-Faithful Analog Kick / Sub-Bass Drum Voice | Renders the Roland TR-808 bass drum from its discrete transistor-circuit topology: bridged-T bandpass filter self-oscillating at ~49.4 Hz with 6 ms pitch sweep attack (49→130 Hz), feedback-buffer decay control (50–800 ms), retriggering bridge, voltage-leakage pitch sigh, passive tone lowpass, and VCA output. $\mathcal{O}(1)$ per sample. Candidate: `sound/synthesis/drum_synth_808.py`. |
+|| **SP-098** | TR-808 Analog Kick Drum Synthesis (AKDS) | **Synthesis Engines** | Circuit-Faithful Analog Kick / Sub-Bass Drum Voice | Renders the Roland TR-808 bass drum from its discrete transistor-circuit topology: bridged-T bandpass filter self-oscillating at ~49.4 Hz with 6 ms pitch sweep attack (49→130 Hz), feedback-buffer decay control (50–800 ms), retriggering bridge, voltage-leakage pitch sigh, passive tone lowpass, and VCA output. $\mathcal{O}(1)$ per sample. Candidate: `sound/synthesis/drum_synth_808.py`. |
+|| **SP-099** | Comb Filter Resonance Synthesis (CFRS) | **Synthesis Engines** | Resonator-Based Pitched Timbre / Metallic, Plucked & Percussive Textures | Generates pitched sound by exciting a feedback comb filter with short-duration impulses, noise bursts, or oscillator pings, ringing at the delay-line resonant frequencies $f_0 = f_s / K$. Four modes: impulse-excited (plucked percussion), noise-excited (pitched drone/hiss), oscillator-excited (resonant-body tone), and parallel comb bank (inharmonic bell clusters). Fractional delay for exact equal-temperament tuning; allpass dispersion chain for metallic inharmonicity. $\mathcal{O}(1)$ per sample per comb. Candidate: `sound/synthesis/comb_resonance.py`. |
 |---|
 
 
@@ -21454,3 +21454,491 @@ $O(1)$ per sample per voice: 1 bridged-T biquad + 1 feedback-buffer biquad + 1 e
 6. **Zero-decay click**: At the shortest Decay setting (~50 ms), the kick can sound like a short click/rim. The Tone control doesn't fully mask this — for extremely short kicks, layer with a transient designed layer.
 7. **Machine-gun effect with shared-noise phases**: The bridged-T is deterministic (bit-exact per seed) so repeated hits sound identical. Add per-hit random detune scatter $\pm 2$ cents on $f_0$ or per-hit RNG modulation to Decay for natural variation.
 8. **Subsonic energy**: At 49.4 Hz the kick has significant sub-30 Hz energy from the decay tail envelope. Always pair with a highpass at ~30 Hz on the master output (the service manual's built-in 6.7 Hz HPF is insufficient to protect subwoofers).
+
+### **100** | Active Inference Composition (AIFC) | **AI-Driven** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Prior-guided, HOME/LIFT/TENSE/TURN) | Grid-Locked / Continuous | Macro / Generative Model Horizon | $\mathcal{O}(T \cdot d^2)$ per inference step, $\mathcal{O}(T \cdot D \cdot d^2)$ learning
+
+### Source
+Friston, K. J. & Friston, D. A. (2016). "A Free Energy Formulation of Music Generation and Perception: Helmholtz Revisited." In *The Routledge Handbook of Music and Artificial Intelligence* (Chapter 18), Routledge. — Friston, K. J. (2010). "The free-energy principle: a unified brain theory?" *Nature Reviews Neuroscience* 11, 127–138. doi:10.1038/nrn2787. — Friston, K. J., Parr, T. & Zeidman, P. (2018). "Bayesian model reduction and active inference." *PLoS ONE* 13(12), e0209306. — Parr, T. & Friston, K. J. (2019). "Generalised free energy and active inference." *Biological Cybernetics* 113, 495–511. — Pearce, M. T., Ruiz, M. H., Kapasi, S., Wiggins, G. A. & Bhattacharya, J. (2010). "Unsupervised statistical learning underpins computational, behavioural, and neural manifestations of musical expectation." *Neuroimage* 50(1), 302–313. — Kämäräinen, T. (2024). "Generative music and the free energy principle." *Proc. Int'l Conf. on Computational Creativity* (ICCC). — Rohrmeier, M. A. & Koelsch, S. (2012). "Predictive information processing in music cognition: A critical review." *Int. J. Psychophysiol.* 83(2), 164–175.
+
+### Layer
+**concrete** — generates distributions over concrete pitch/rhythm/harmony events that fill UnitMatrix cells. The generative model defines the joint probability of sequences of musical tokens (notes, chords, rests, section boundaries), and compositions are sampled from the posterior after conditioning on a structural prior. Feeds `generators/` via the variational inference loop that outputs per-cell MusicEvents. Unlike 064 MRFCC (hand-crafted potentials) or 097 MaxEnt-C (maximum-entropy constraints), AIFC learns or designs a hierarchical generative model and drives generation through free-energy minimization — an inference-first paradigm that unifies perception and composition.
+
+### Paradigm
+**AI-Driven** — the method is explicitly grounded in the variational inference / active inference / free-energy principle literature from computational neuroscience and machine learning. The generative model can be learned from data (via variational Bayes or Bayesian model reduction) or hand-designed with musically interpretable priors. Generation proceeds not by stochastic sampling from a fixed distribution (as in 002 Markov, 097 MaxEnt-C), not by learned gradient denoising (as in 047 DSMG), but by iteratively minimizing variational free energy — a bound on model evidence that drives the agent to fulfill its prior expectations about musical structure. Action (choosing the next note / chord / rest) is selected to minimize expected free energy, balancing epistemic (information-seeking) and pragmatic (preference-fulfilling) value.
+
+### Description
+**Active Inference Composition (AIFC)** casts music generation as a closed-loop active inference process (Friston 2010, Friston & Friston 2016). The core idea: a composer-agent maintains a *generative model* of music — a probabilistic model that encodes beliefs about how musical events unfold over time — and composes by sampling the actions (events) that minimize variational free energy at each step. This produces sequences that simultaneously:
+
+1. **Fulfill prior musical expectations** (tonal gravity, metrical regularity, voice-leading smoothness, formal coherence) — encoded as prior probabilities in the generative model.
+2. **Resolve surprise** (prediction error) at multiple temporal scales — the agent predicts the next sensory consequence of its action and updates beliefs when evidence differs.
+3. **Balance exploration and exploitation** — through the expected free energy formulation, the agent chooses events that are both preferred *and* informative (epistemic value drives harmonic exploration, motivic development, tension-resolution arcs).
+
+**Mathematical framework (variational free energy):**
+
+Let $\mathbf{o}_{1:t}$ be the sequence of observed musical events (notes/chords/rests) up to time $t$, and let $\mathbf{s}_{1:t}$ be the hidden states (tonal function, metric position, section identity, motivic label) that generated them. The agent maintains a recognition density $Q(\mathbf{s}_{1:t})$ approximating the true posterior $P(\mathbf{s}_{1:t} \mid \mathbf{o}_{1:t})$. At each timestep the agent minimizes:
+
+$$F(t) = \underbrace{D_{KL}[Q(\mathbf{s}_{1:t}) \parallel P(\mathbf{s}_{1:t})]}_{\text{complexity}} - \underbrace{\mathbb{E}_{Q}[\ln P(\mathbf{o}_{1:t} \mid \mathbf{s}_{1:t})]}_{\text{accuracy}}$$
+
+where $F(t)$ is the variational free energy. Generative composition proceeds by:
+
+1. **Perception** (belief updating): Given the current event, update hidden state beliefs to minimize $F(t)$ — infer the current tonal function, metric position, section.
+2. **Action** (event selection): Choose the next event that minimizes *expected* free energy:
+
+$$G(a) = \underbrace{D_{KL}[Q(\mathbf{o}_{t+1} \mid a) \parallel P(\mathbf{o}_{t+1} \mid \mathbf{C})]}_{\text{pragmatic value (preference fulfillment)}} + \underbrace{\mathbb{E}_{Q(\mathbf{s}_{t+1} \mid a)}[H[P(\mathbf{o}_{t+1} \mid \mathbf{s}_{t+1})]}_{\text{epistemic value (information gain)}}$$
+
+where $\mathbf{C}$ encodes prior preferences (e.g., "I prefer tonic chords at downbeats," "I prefer stepwise motion 80% of the time," "I prefer a HOME→LIFT→TENSE→TURN arc across sections").
+
+**Hierarchical temporal structure (deep generative model):**
+
+Music's multi-scale structure is captured by a hierarchical generative model with temporal depth (cf. Friston & Friston 2016, §2):
+
+- **Slow level** ($\mathbf{s}^{(3)}$, section/bar scale): Encodes form — which section (intro/verse/chorus/bridge/outro), tonal region (HOME/LIFT/TENSE/TURN), global tempo, and metrical frame. State transitions at this level occur every 4–16 bars.
+- **Medium level** ($\mathbf{s}^{(2)}$, beat/phrase scale): Encodes harmonic function (I, IV, V, vi, etc.), melodic contour direction, groove pattern ID. Transitions every 1–4 beats.
+- **Fast level** ($\mathbf{s}^{(1)}$, note/sub-beat scale): Encodes individual pitch, onset, duration, velocity. Transitions every note/event.
+
+Higher levels contextualize lower ones: the slow level's section identity determines which chord repertoire the medium level can draw from; the medium level's harmonic function constrains which pitch classes the fast level can emit. This is a *deep temporal generative model* — the same architecture that explains auditory cortical responses to music in the brain.
+
+**Generative workflow:**
+
+1. **Define the generative model**: Either hand-design the transition probabilities $P(\mathbf{s}^{(3)}_{t+1} \mid \mathbf{s}^{(3)}_t)$ (form grammar), $P(\mathbf{s}^{(2)}_{t+1} \mid \mathbf{s}^{(2)}_t, \mathbf{s}^{(3)})$ (harmonic grammar), $P(\mathbf{s}^{(1)}_{t+1} \mid \mathbf{s}^{(1)}_t, \mathbf{s}^{(2)})$ (ornamentation grammar), and the likelihood $P(\mathbf{o}_t \mid \mathbf{s}^{(1)}_t, \mathbf{s}^{(2)}_t, \mathbf{s}^{(3)}_t)$. Or learn them from a corpus via variational Bayes / Bayesian model reduction (Friston et al. 2018).
+
+2. **Set prior preferences $\mathbf{C}$**: Specify the desired tonal profile (prefer tonic pitches at phrase boundaries, avoid tritones on strong beats), metrical profile (prefer downbeat onsets), textural profile (prefer 3–4 active voices), and form profile (prefer a 4-section AABA or verse-chorus structure). These are encoded as the expected free energy's preferred observations.
+
+3. **Initialize**: Set the agent in an initial state (opening section, tonic key, downbeat). No events observed yet.
+
+4. **Iterative inference-action loop** (for each event $t$):
+   - Perceive the current event $\mathbf{o}_t$ (or lack thereof for the first step).
+   - Update beliefs about hidden states $\mathbf{s}_t$ by minimizing $F(t)$ (gradient descent on variational parameters or discrete state updating via Viterbi-like message passing).
+   - Compute expected free energy $G(a)$ for each candidate next event $a$ (pitch, onset time, duration, velocity).
+   - Select $a^* = \arg\min G(a)$ or sample proportionally to $\exp(-G(a)/\tau)$.
+   - Execute $a^*$ (emit the event).
+   - Advance to $t+1$, observe the new state, repeat.
+
+5. **Section transition**: When the slow-level state variable $\mathbf{s}^{(3)}$ indicates a section change (driven by its transition probabilities), the agent transitions to a new section and adjusts its harmonic and metric priors accordingly. The form unfolds autonomously from the slow-level transition matrix.
+
+6. **Termination**: The piece ends when the slow-level state reaches a terminal state (outro section, fade-out flag) or after a fixed length.
+
+**Key distinction from related methods:**
+
+| Aspect | 002/086 Markov | 097 MaxEnt-C | 064 MRFCC | 062 RLPOC | **100 AIFC** |
+|---|---|---|---|---|---|
+| Core principle | Conditional probabilities | Maximum-entropy constraints | Energy-based potentials | Reward maximization | Free-energy minimization |
+| Model type | Discrete chain | Potts model | Factor graph | Learned policy | Hierarchical generative model |
+| Action selection | Sample from cond. dist | Sample from Gibbs | Sample from Gibbs | Policy gradient | Expected free energy |
+| Temporal depth | Single-level | Single-level (distance-coupled) | Single-level (2D lattice) | Single-level (autoregressive) | Multi-level hierarchical |
+| Epistemic seeking | No | No | No | No | Yes (information gain) |
+| Preference specification | Implicit in corpus | Implicit in constraints | Hand-crafted potentials | Learned reward function | Prior preferences $\mathbf{C}$ |
+
+### Musical Elements Framework
+
+**PITCH**: The fastest-level state variable $\mathbf{s}^{(1)}$ explicitly encodes pitch class and octave. The likelihood $P(\mathbf{o}_t \mid \mathbf{s}^{(1)}_t, \mathbf{s}^{(2)}_t)$ maps the hidden melodic/harmonic state to a pitch emission: within a tonic (HOME) section, $\mathbf{s}^{(2)} = \text{I}$ strongly biases $\mathbf{s}^{(1)}$ toward $\{C, E, G\}$, while allowing passing tones ($\mathbf{s}^{(1)}$ = D or F) with lower probability. The prior preference $\mathbf{C}$ can encode any desired pitch profile: prefer stepwise motion (neighbor tones, passing tones over leaps), prefer chord tones on strong beats, prefer the tonic at phrase boundaries. In the expected free energy, candidate pitches that fulfill these preferences have high pragmatic value (low $D_{KL}$ to the preferred distribution). Epistemic value drives the agent to try pitches that disambiguate the current tonal context — e.g., Bi (leading tone) confirms the tonic function; Fi (tritone) signals tension.
+
+**RHYTHM**: The medium-level state $\mathbf{s}^{(2)}$ includes metric position (downbeat/upbeat/syncopated) and inter-onset-interval (IOI) category. The slow-level state $\mathbf{s}^{(3)}$ sets the global tempo and metrical frame (4/4, 6/8, 7/8, etc.). The action space includes "wait" (rest/continuation) vs. "play" (onset). Prior preferences can encode desired rhythmic profiles: prefer on-the-grid 8th notes for a straight groove, prefer swung 16ths for a shuffle, prefer sparse downbeat-only notes for a minimal texture. The epistemic value of a rhythmic choice measures how much it reduces uncertainty about the current groove pattern — choosing a syncopated onset at an unexpected metric position reveals whether the agent is in a syncopated or straight section.
+
+**HARMONY**: Harmony is the medium-level temporal scale. The transition matrix $P(\mathbf{s}^{(2)}_{t+1} \mid \mathbf{s}^{(2)}_t, \mathbf{s}^{(3)})$ is the harmonic grammar: given the current section (slow-level), the probability of moving from chord $x$ to chord $y$. For a pop-style prior: I→IV, I→V, I→vi are high; V→I is very high (authentic cadence); II→V is moderate; tritone root moves are low. Prior preference $\mathbf{C}$ drives the HOME-LIFT-TENSE-TURN arc: during a "HOME" section, the prior prefers I, vi; during "TENSE," the prior prefers V, vii°, augmented chords; during "TURN," the prior prefers IV, ii (subdominant preparation). The agent resolves harmonic tension by choosing V→I when the expected free energy of the V→I transition is minimized (both the pragmatic value of the authentic cadence and the epistemic value of resolving to the predicted I).
+
+**STRUCTURE**: The slowest-level state $\mathbf{s}^{(3)}$ explicitly models macro-form. The transition matrix $P(\mathbf{s}^{(3)}_{t+1} \mid \mathbf{s}^{(3)}_t)$ defines the form grammar: Intro→Verse→Chorus→Verse→Chorus→Bridge→Chorus→Chorus→Outro is a learned or designed sequence of state transitions. Each $\mathbf{s}^{(3)}$ state carries:
+- A tonal profile (which key/scale the section uses)
+- A harmonic repertoire (which chords the medium level can emit)
+- A metric profile (time signature, typical density)
+- A duration distribution (how many bars this section typically lasts)
+- A dynamic envelope (intended loudness arc)
+
+The agent's macro-form emerges from the joint dynamics of all three levels: the slow level triggers section events, which reconfigure the medium-level priors, which channel the fast-level emissions. This is identical to the "deep temporal generative model" that Friston & Friston (2016) describe for bird-song perception — here repurposed for composition.
+
+**TEXTURE**: Texture is controlled through multiple independent agent streams (one per UnitMatrix voice) that interact through a shared slow-level state (same form, same harmonic progression) but independent medium- and fast-level beliefs. The agents communicate: voice $v$'s hidden state $\mathbf{s}^{(2)}_v$ includes the current pitch class of other voices, so each agent knows what the others are playing. Prior preferences at the multi-agent level encode:
+- **Voice independence**: prefer non-parallel motion, prefer contrary motion at cadences, prefer voice spacing < 2 octaves.
+- **Density**: prefer 3–4 active voices simultaneously (texture density preference).
+- **Registration**: prefer bass voice in low register, inner voices in middle register, soprano in high register.
+
+Alternatively, a single agent with a multi-dimensional action space (one per voice) generates all voices jointly, with the joint hidden state encoding the full chord/chord voicing.
+
+### UnitMatrix Integration (Voices & Sections)
+
+**Rows (Voices)**: Each UnitMatrix voice corresponds to one active inference agent (or one dimension of a multi-dimensional action space). In the multi-agent implementation, voice $v$ has its own $\mathbf{s}^{(1)}_v$ and $\mathbf{s}^{(2)}_v$ but shares $\mathbf{s}^{(3)}$ (same section/form) with all other voices. Voice-specific priors encode registral range constraints (bass: C2–C4, soprano: C4–C6), typical interval sizes (bass: larger leaps syntactically OK, soprano: prefer stepwise), and rhythmic density (bass: half-notes and whole-notes, soprano: 8th-notes and 16th-notes). The cross-voice coupling term in the joint generative model enforces voice-leading constraints — parallel fifths and octaves are low-probability transitions, so the agent naturally avoids them.
+
+**Columns (Sections)**: Sections correspond to distinct slow-level states $\mathbf{s}^{(3)}$ and their associated transition, preference, and duration parameters. Each section column in the UnitMatrix:
+- Is triggered by a slow-level state transition (duration determined by the section's duration distribution).
+- Carries a $\mathbf{C}$ preference vector encoding the section's tonal gravity (HOME/LIFT/TENSE/TURN), rhythmic profile (straight/swung/groove), texture density (sparse/moderate/dense), and dynamic range.
+- Has a distinct harmonic repertoire (the set of $\mathbf{s}^{(2)}$ states available in that section).
+- Ends when the slow-level state transitions to the next section state.
+
+**Cells (MusicUnit)**: Each cell = the sequence of events emitted by voice $v$ while the slow-level state $\mathbf{s}^{(3)} = s$ (section $s$). The cell is filled by sampling the fast-level action-perception loop for the duration of the section. The cell's content is the trace of $\mathbf{o}_{t}$ for $t$ in [section_start, section_end] — the actual notes, rests, velocities, and articulations that the agent chose to emit.
+
+**Flow within the composition pipeline**:
+- `compose()` instantiates the generative model (hand-designed or learned) and sets the prior preference vector $\mathbf{C}$ per section.
+- The multi-agent active inference loop runs autonomously, emitting events into the UnitMatrix.
+- `validate()` checks the zero-drift invariant — all rows must have equal total tick length, which is guaranteed because the slow-level state duration is shared across voices.
+- `to_midi()` writes the final event sequence to MIDI.
+- `produce()` renders to audio via any SP-* method.
+
+### Pitfalls
+1. **Computational cost of expected free energy**: Evaluating $G(a)$ for every candidate action $a$ (all pitch × onset × duration combinations) at every timestep is $\mathcal{O}(A \cdot d^2)$ per step, where $A$ = action space size (easily 100+ for pitch × duration × velocity). For real-time generation, prune the action space: restrict pitches to scale degrees (7–8 candidates), restrict durations to 3–5 IOI classes, restrict velocities to 3 levels. For offline generation, full enumeration is tractable for short pieces.
+2. **Model specification burden**: Defining the full hierarchical generative model (transition matrices for all three levels, likelihood functions, prior preferences) requires significant music-theoretic knowledge. Pre-built model templates for common styles (pop, classical, jazz, minimalism) mitigate this. The model can also be learned from a corpus via Bayesian model inversion (Friston et al. 2018), but learning requires care to avoid overfitting the transition statistics.
+3. **Balancing epistemic vs. pragmatic value**: The epistemic value term drives the agent to explore novel harmonic/melodic regions — without careful weighting, the agent can over-explore (producing tonally incoherent passages) or under-explore (producing mechanical repetition). A temperature parameter $\tau$ scaling the $G(a)$ distribution and a temporal schedule for the epistemic weight (high early in a section for motivic development, low at section endings for closure) are recommended.
+4. **Multi-agent coupling complexity**: When using independent agents per voice, the coupling term requires each agent to know the others' current states — an $\mathcal{O}(V^2)$ communication bottleneck. A shared slow-level state with independent fast-level streams (the "common ground" architecture) reduces coupling to the shared form + harmony variables, with voice-specific ornamentation independent. This is the recommended default.
+5. **Slow-level state duration control**: Without explicit duration preferences, the slow-level transition matrix can produce sections of highly variable length (a 2-bar chorus or a 32-bar verse). Include a Dirichlet prior over state durations or a self-transition probability that decays with elapsed time in state to produce musically plausible section lengths.
+6. **Confusion with pure predictive coding**: Active inference subsumes predictive coding (Rao & Ballard 1998) but adds the action selection component. A pure predictive-coding music generator would only update perceptual beliefs without actively choosing the next event — it would be a passive analysis-by-synthesis model. AIFC's innovation is the closed-loop action-perception cycle where the next note is actively selected to minimize expected free energy, not just predicted.
+7. **Prior preference engineering**: The $\mathbf{C}$ vector is the "taste" of the composer-agent. Poorly set $\mathbf{C}$ values (e.g., preferring tonic chords 99% of the time) produce tonally flat, unchanging music. A well-engineered $\mathbf{C}$ should encode preferences at multiple levels (harmonic, melodic, rhythmic, formal) with some slack (soft preferences with moderate precision) to allow the agent to explore.
+8. **Scalability to long forms**: For pieces > 256 bars, the hierarchical generative model's state space grows. A sparse transition matrix (each state connects to 3–5 successor states) and mean-field variational updates keep inference tractable. The piece can also be composed section-by-section: compose each section independently with different prior preferences, then concatenate.
+
+---
+*Appended 2026-09-29 by music-research cron job. Layer tag: concrete (event-generating). Paradigm: AI-Driven. ID 100 confirmed free at append time (max algorithmic ID was 099; no `method_100*` or `report_100*` existed). Next free algorithmic ID: 101.*# Sound Production Method SP-099 — Comb Filter Resonance Synthesis (CFRS)
+
+### Source
+Smith III, J. O. (2010). *Physical Audio Signal Processing*. W3K Publishing. Ch. 2–3 (Delay Lines, Feedback Comb Filters). — Dattorro, J. (1997). "Effect Design, Part 1: Reverberator and Other Filters." *JAES* 45(9). — Karplus, K. & Strong, A. (1983). "Digital Synthesis of Plucked-String and Drum Timbres." *Computer Music Journal* 7(2), 43–55. — Jaffe, D. A. & Smith, J. O. (1983). "Extensions of the Karplus-Strong Plucked-String Algorithm." *CMJ* 7(2), 56–69. — Välimäki, V. et al. (2012). "Fifty Years of Artificial Reverberation." *IEEE Trans. Audio, Speech & Lang. Process.* 20(5), 1421–1448. — Puckette, M. (2007). *The Theory and Technique of Electronic Music*. World Scientific. Ch. 4 (Filters). — Dodge, C. & Jerse, T. A. (1997). *Computer Music: Synthesis, Composition, and Performance* (2nd ed.). Schirmer. pp. 129–137. — Roads, C. (1996). *The Computer Music Tutorial*. MIT Press. Ch. 6 (Delay-Line Based Synthesis).
+
+### Layer
+**absolute** — sound production (synthesis engine; translates symbolic note triggers, MIDI pitch, velocity, and articulation parameters into continuous time-domain audio samples via delay-line comb filter resonance). The candidate code path is `sound/synthesis/comb_resonance.py`, pluggable into `workflows.musicom_workflow.produce(method="SP-099")`.
+
+### Description
+**Comb Filter Resonance Synthesis (CFRS)** generates pitched sound by exciting a feedback comb filter with short-duration excitation signals — impulses, noise bursts, filtered noise, or oscillator pings — and letting the feedback delay line ring at its resonant frequencies. Unlike Karplus-Strong (SP-011), which places a one-pole lowpass filter inside the feedback loop to model frequency-dependent string damping and uses an initial noise burst as the only excitation, CFRS offers the pure, uncolored comb filter as both an effect and a synthesis building block. The feedback comb filter's frequency response consists of equally spaced peaks at harmonics of $f_0 = f_s / K$ (where $K$ is the delay length in samples) and notches at frequencies halfway between the peaks. When driven by an impulse train, noise burst, or sustain oscillator, the filter selectively boosts its resonant modes, producing metallic ringing, plucked percussive tones, body-resonance textures, and pitched noise cloud timbres.
+
+The method generalizes across four modes of operation:
+1. **Impulse-Excited Comb (IEC)**: A single impulse or short noise burst triggers the comb to ring at $f_0$, producing plucked-string or struck-percussive tones with no lowpass decay — all harmonics decay at the same rate, giving bright, metallic timbres.
+2. **Noise-Excited Comb (NEC)**: Continuous filtered noise drives the comb, producing a pitched noise texture with tone centered at $f_0$ — the resonator picks the fundamental and harmonics out of the broadband noise, creating a drone-like pitched hiss.
+3. **Oscillator-Excited Comb (OEC)**: A pitched oscillator (sine, saw, square from the oscillator's spectrum) drives the comb. The comb emphasizes its resonant modes, creating formant-like spectral bumps that shift when the input pitch or the comb delay changes — akin to a spectral resonator bank.
+4. **Parallel Comb Bank (PCB)**: Multiple comb filters with coprime delay lengths and per-comb feedback gains run in parallel from a shared excitation, producing dense, evolving pitched textures with inharmonic or pseudo-chordal character. This is the resonator-bank approach analogous to modal synthesis (SP-042) but built from delay lines rather than biquad modes.
+
+The method is pedagogically important because it is the simplest pitched sound synthesizer — a comb filter + impulse = pitched tone — and it forms the delay-line kernel of Karplus-Strong (SP-011), Feedback Delay Network reverberation (SP-032), and digital waveguide synthesis (SP-033). As a standalone method it offers fast, CPU-cheap metallic/percussive timbres with independent control over pitch (delay length), decay (feedback gain $g$), brightness (pre-filter), and harmonic structure (allpass dispersion).
+
+### Technical Mechanics
+
+#### 1. Feedback Comb Filter (the Core Resonator)
+
+The feedback comb filter is defined by the difference equation:
+
+$$y[n] = x[n] + g \\cdot y[n - K]$$
+
+where:
+- $x[n]$ = input sample (excitation)
+- $y[n]$ = output sample
+- $K$ = delay length in samples ($K = \\lfloor f_s / f_0 \\rfloor$)
+- $g$ = feedback gain ($0 \\leq g < 1$ for stability; $g = 0.99$ gives ~100 ms decay at $f_s = 44100$, $K = 100$)
+
+The $z$-domain transfer function:
+
+$$H(z) = \\frac{Y(z)}{X(z)} = \\frac{1}{1 - g z^{-K}}$$
+
+The frequency response magnitude:
+
+$$|H(e^{j\\omega})| = \\frac{1}{\\sqrt{1 + g^2 - 2g \\cos(\\omega K)}}$$
+
+Peaks occur at frequencies:
+
+$$f_k = \\frac{k}{K} \\cdot f_s / 2, \\quad k = 0,1,2,\\dots \\lfloor K/2 \\rfloor$$
+
+i.e., $f_0 = f_s / K$, $f_1 = 2f_0$, $f_2 = 3f_0$, etc. — a perfectly harmonic series.
+
+The -3 dB bandwidth of each peak (resonance bandwidth) is:
+
+$$\\Delta f = \\frac{f_s}{\\pi K} \\cdot (1 - g)$$
+
+As $g \\to 1$ (high feedback), the peaks become infinitely sharp (the resonator rings indefinitely). As $g \\to 0$, the comb becomes a single echo at delay $K$ (no resonance).
+
+The impulse response is a train of scaled, equally spaced impulses:
+
+$$h[n] = \\sum_{m=0}^{\\infty} g^m \\, \\delta[n - mK]$$
+
+For musical use, $g$ is set between 0.9 and 0.999 depending on the desired decay time. The $T_{60}$ (time for -60 dB decay) is:
+
+$$T_{60} = \\frac{-3K \\cdot \\log 10}{f_s \\cdot \\log g} \\approx \\frac{-6.908 \\cdot K}{f_s \\cdot \\log g}$$
+
+#### 2. Fractional Delay for Exact Pitch
+
+When $K = f_s / f_0$ is not an integer (most real-world pitches), fractional delay interpolation must be used to avoid pitch quantization. The simplest method is first-order linear interpolation:
+
+$$y[n] = x[n] + g \\cdot ((1 - \\alpha) \\cdot y[n - \\lfloor K \\rfloor] + \\alpha \\cdot y[n - \\lceil K \\rceil])$$
+
+Better fidelity (lower dispersion error, flatter passband) is achieved with a first-order allpass interpolation:
+
+$$H_{ap}(z) = \\frac{c + z^{-1}}{1 + c z^{-1}}, \\quad c = \\frac{1 - \\alpha}{1 + \\alpha}$$
+
+where $\\alpha = K - \\lfloor K \\rfloor$ is the fractional part. The allpass preserves magnitude response flatness while smoothly varying the effective delay.
+
+For highest quality, use a Lagrange interpolator (N-point, N=4 or 6) which is flat in magnitude and has well-controlled group-delay deviation. A 4-point Lagrange fractional delay is:
+
+$$y[n] = g \\cdot \\sum_{i=0}^{3} \\ell_i(\\alpha) \\, y[n - \\lfloor K \\rfloor - i]$$
+
+with Lagrange coefficients $\\ell_i(\\alpha)$.
+
+For low-CPU applications, linear interpolation suffices with a negligible pitch deviation (< 2 cents for $K > 20$).
+
+#### 3. Excitation Models
+
+CFRS generates sounds through four excitation types:
+
+**a. Impulse (Dirac) Excitation:**
+
+$$x[n] = A \\cdot \\delta[n] = \\begin{cases} A & n = 0 \\\\ 0 & n > 0 \\end{cases}$$
+
+The output $y[n] = A g^{\\lfloor n/K \\rfloor}$ (decaying impulse train at pitch $f_0$). This is the classic "impulse → comb filter = pitched tone" model. Use for plucked strings, struck bars, woodblock/marimba-like percussion.
+
+**b. Noise Burst Excitation:**
+
+$$x[n] = A \\cdot u[n] \\cdot e^{-n / \\tau_{\\text{burst}}} \\cdot w[n]$$
+
+where $w[n] \\sim \\mathcal{U}(-0.5, 0.5)$ is white noise and $\\tau_{\\text{burst}}$ controls the burst duration (typically 1–10 ms for percussive, 10–100 ms for sustained textures). The noise burst broadband content excites all comb resonances uniformly; the burst's spectral envelope imparts a spectral tilt. Use for noise-based metallic percussion, snare-like pitched noise, or body-resonator effects.
+
+**c. Filtered Noise Excitation (Pre-Comb Shaping):**
+
+$$x[n] = (\\text{BPF}_{f_c,Q} * w)[n]$$
+
+Bandpass filtering the noise before the comb concentrates excitation energy near a specific frequency range, emphasizing certain resonant harmonics. A resonant BPF near the comb fundamental produces a focused bright tone; a lowpass-filtered noise (pink/brown) produces a darker timbre with stronger lower harmonics. This subsumes the Karplus-Strong technique (SP-011): KS = comb filter + one-pole lowpass *in the loop* (not pre-filtering). CFRS places the filter before the comb, giving independent control over excitation spectrum.
+
+**d. Oscillator Ping Excitation:**
+
+$$x[n] = A \\cdot \\sin(2\\pi f_{\\text{exc}} n / f_s) \\cdot e^{-n / \\tau_{\\text{ping}}}$$
+
+A sinusoidal ping at frequency $f_{\\text{exc}}$ excites the comb. When $f_{\\text{exc}}$ is an integer multiple of $f_0$, the comb rings strongly at that harmonic; when $f_{\\text{exc}}$ is non-harmonic, the comb rings at its own resonances while the ping's spectral content acts as a partial selector. This models the "tuning fork in a resonant cavity" effect: the comb acts as the cavity, the oscillator ping as the fork.
+
+#### 4. Parallel Comb Bank (PCB)
+
+Multiple comb filters $c = 1, \\dots, C$ run in parallel with coprime delay lengths $K_1, K_2, \\dots, K_C$ and independent feedback gains $g_c$:
+
+$$y[n] = \\sum_{c=1}^{C} y_c[n], \\quad y_c[n] = x[n] + g_c \\cdot y_c[n - K_c]$$
+
+The coprime delays ensure no common (harmonic) frequency alignment — the combined output produces a dense, inharmonic texture like a bell cluster or gamelan gong. Each comb's $g_c$ sets its individual decay time, creating evolving spectral complexity as faster-decaying combs fade first.
+
+The PCB is the delay-line equivalent of a modal resonator bank (SP-042): where modal synthesis banks $N$ second-order biquads (one per mode), PCB banks $C$ comb filters (each carrying many modes at harmonic multiples). The PCB is computationally cheaper ($\\mathcal{O}(C)$ vs $\\mathcal{O}(N)$ for $N$ biquads) but coarser (harmonic combs vs per-mode tuning).
+
+#### 5. Dispersion via Allpass Chain
+
+To model stiff bars and metallic objects (where higher partials are sharpened — inharmonicity), place a chain of $M$ first-order allpass filters inside the feedback loop:
+
+$$y[n] = x[n] + g \\cdot \\underbrace{H_{\\text{ap},1} \\circ H_{\\text{ap},2} \\circ \\cdots \\circ H_{\\text{ap},M}}_{\\text{dispersion chain}} \\{ y[n - K] \\}$$
+
+Each allpass $H_{\\text{ap},i}(z) = (c_i + z^{-1})/(1 + c_i z^{-1})$ with coefficient $c_i$ introduces frequency-dependent phase shift. The effective delay becomes $K_{\\text{eff}}(\\omega) = K + \\sum_i \\tau_{\\text{ap},i}(\\omega)$ where $\\tau_{\\text{ap},i}$ is the group delay of the $i$th allpass. Correctly tuned, this produces the sharpened partials characteristic of metal bars, vibraphone keys, and bell metal.
+
+### Python / NumPy Implementation Sketch
+
+```python
+import numpy as np
+
+class CombFilterResonance:
+    """
+    Comb Filter Resonance Synthesis (CFRS) — SP-099.
+    A delay-line feedback comb filter used as a pitched sound source.
+    """
+    def __init__(self, sr=44100):
+        self.sr = sr
+        self.delay_buffer = None
+        self.write_ptr = 0
+
+    def render_note(self, pitch_midi: int, velocity: float, duration_beats: float,
+                    bpm: float = 120, feedback: float = 0.98,
+                    excitation: str = 'impulse', frac_delay: str = 'linear',
+                    noise_burst_ms: float = 5.0, noise_filter_cutoff: float = None,
+                    dispersion_coeffs: list = None) -> np.ndarray:
+        """
+        Render one pitched note via CFRS.
+
+        Parameters
+        ----------
+        pitch_midi : int
+            MIDI note number (0-127); 69 = A4 = 440 Hz.
+        velocity : float
+            MIDI velocity 0-1 for amplitude scaling.
+        duration_beats : float
+            Note duration in beats.
+        bpm : float
+            Beats per minute.
+        feedback : float
+            Comb feedback gain g (0 <= g < 1). Higher = longer decay.
+        excitation : str
+            'impulse' | 'noise_burst' | 'osc_ping'
+        frac_delay : str
+            'linear' | 'allpass' | 'lagrange4'
+        noise_burst_ms : float
+            Duration of noise burst in ms (excitation='noise_burst').
+        noise_filter_cutoff : float or None
+            LP cutoff in Hz for pre-filtering noise (None = no filter).
+        dispersion_coeffs : list or None
+            List of allpass coefficients for inharmonic dispersion.
+        """
+        duration_sec = (duration_beats * 60.0) / bpm
+        n_samples = int(self.sr * duration_sec)
+        freq = 440.0 * 2 ** ((pitch_midi - 69) / 12.0)  # Hz
+        delay_samples = self.sr / freq
+
+        # --- Build excitation ---
+        if excitation == 'impulse':
+            exc = np.zeros(n_samples)
+            exc[0] = velocity  # single Dirac impulse
+        elif excitation == 'noise_burst':
+            burst_len = int(self.sr * noise_burst_ms / 1000.0)
+            exc = np.random.uniform(-0.5, 0.5, n_samples)
+            # Exponential decay envelope on the burst
+            env = np.exp(-np.arange(n_samples) / burst_len)
+            exc = exc * env * velocity
+            # Optional pre-filter
+            if noise_filter_cutoff is not None:
+                from scipy.signal import butter, sosfilt
+                sos = butter(4, noise_filter_cutoff / (self.sr / 2), btype='low', output='sos')
+                exc = sosfilt(sos, exc)
+        elif excitation == 'osc_ping':
+            ping_freq = freq  # same as comb fundamental
+            ping_len = int(self.sr * (noise_burst_ms / 1000.0))
+            t = np.arange(ping_len)
+            ping = np.sin(2 * np.pi * ping_freq * t / self.sr) * velocity
+            exc = np.zeros(n_samples)
+            exc[:ping_len] = ping * np.exp(-t / (ping_len / 3))
+        else:
+            exc = np.zeros(n_samples)
+
+        # --- Initialize delay buffer ---
+        int_delay = int(np.floor(delay_samples))
+        frac = delay_samples - int_delay
+        buf_size = int_delay + 4  # lagrange padding
+        self.delay_buffer = np.zeros(buf_size)
+        self.write_ptr = 0
+
+        out = np.zeros(n_samples)
+
+        # --- Optional allpass dispersion chain ---
+        if dispersion_coeffs:
+            ap_states = [0.0 for _ in dispersion_coeffs]
+
+        for n in range(n_samples):
+            # Read from delay buffer (fractional delay)
+            read_pos = (self.write_ptr - int_delay) % buf_size
+            if frac_delay == 'linear':
+                read_pos2 = (read_pos - 1) % buf_size
+                delayed = (1 - frac) * self.delay_buffer[read_pos] \
+                          + frac * self.delay_buffer[read_pos2]
+            elif frac_delay == 'allpass':
+                ap_out = self.delay_buffer[read_pos]
+                ap_state = self.delay_buffer[(read_pos - 1) % buf_size] \
+                           if int_delay > 0 else 0.0
+                delayed = ap_out + frac * (ap_out - ap_state)
+                # allpass update
+                self.delay_buffer[(read_pos - 1) % buf_size] = ap_out
+            else:  # lagrange4
+                # 4-point Lagrange interpolation
+                idxs = [(read_pos - i) % buf_size for i in range(4)]
+                l0 = (frac-1)*(frac-2)*(frac-3)/(-6)
+                l1 = frac*(frac-2)*(frac-3)/2
+                l2 = frac*(frac-1)*(frac-3)/(-2)
+                l3 = frac*(frac-1)*(frac-2)/6
+                delayed = l0 * self.delay_buffer[idxs[0]] \
+                        + l1 * self.delay_buffer[idxs[1]] \
+                        + l2 * self.delay_buffer[idxs[2]] \
+                        + l3 * self.delay_buffer[idxs[3]]
+
+            # --- Apply dispersion allpass chain (inside loop) ---
+            if dispersion_coeffs:
+                for i, c in enumerate(dispersion_coeffs):
+                    ap_out = -c * delayed + ap_states[i]
+                    ap_states[i] = delayed + c * ap_out
+                    delayed = ap_out
+
+            # --- Feedback + output ---
+            fb = feedback * delayed
+            out[n] = exc[n] + fb
+
+            # --- Write into buffer ---
+            self.delay_buffer[self.write_ptr] = out[n]
+            self.write_ptr = (self.write_ptr + 1) % buf_size
+
+        # Normalize
+        peak = np.max(np.abs(out))
+        if peak > 0:
+            out = out * (0.99 / peak)
+        return out
+
+    def render_parallel_bank(self, pitch_midis: list, amplitudes: list,
+                              feedbacks: list, duration_beats: float,
+                              bpm: float = 120, **kwargs) -> np.ndarray:
+        """
+        Parallel Comb Bank: render multiple comb filters and sum.
+        """
+        total = None
+        for midi, amp, fb in zip(pitch_midis, amplitudes, feedbacks):
+            buf = self.render_note(midi, amp, duration_beats, bpm, feedback=fb, **kwargs)
+            if total is None:
+                total = buf
+            else:
+                sz = min(len(total), len(buf))
+                total = total[:sz] + buf[:sz]
+        peak = np.max(np.abs(total))
+        if peak > 0:
+            total *= 0.99 / peak
+        return total
+```
+
+### Musical Elements Framework
+
+**PITCH**: The pitch of a CFRS tone is set by the delay length $K = f_s / f_0$. This is a direct mapping from MIDI pitch: $K = \\lfloor f_s / (440 \\cdot 2^{(p-69)/12}) \\rfloor$. Fractional delay interpolation gives exact equal-temperament tuning with < 1 cent error. The harmonic spectrum is always integer multiples of $f_0$, giving a bell-like or organ-like harmonicity. Dispersion (allpass chain) sharpens upper partials for metallic inharmonicity. In a parallel comb bank, each comb has independent pitch — the combined output can produce any chord or cluster.
+
+**RHYTHM**: CFRS generates sound from note-on to note-off (gated by the UnitMatrix cell duration). The comb's decay envelope $g^{n/K}$ provides internal rhythmic shaping: short decays ($g \\approx 0.5$) give staccato percussive bursts; long decays ($g > 0.99$) give sustained ringing that can overlap multiple cells. The noise burst duration parameter creates micro-rhythmic structure within a single note (burst length → attack graininess). In PCB mode, different combs with different decays create a staggered rhythm of partials fading out at different rates.
+
+**HARMONY**: CFRS is inherently harmonic (all partials are multiples of $f_0$) when using a single delay line. Harmony is achieved through PCB — multiple combs with coprime delay lengths produce inharmonic spectra (bell-like), while combs with related delays (e.g., $K, 2K, 3K$) produce octave-stacked partials that fuse into complex chordal sounds. The feedback gain $g$ per comb controls which partials persist — low $g$ on a high-pitched comb means only the fundamental of that comb is heard (a chord root); high $g$ on the same comb means its full harmonic series rings (giving timbral depth to each chord member).
+
+**STRUCTURE**: Macro-form is driven by the UnitMatrix section boundaries. Each column (section) can use different CFRS parameter sets: excitation type, feedback gain, dispersion, parallel comb topology. Section transitions are natural — the comb decays provide natural note overlap (ringing across the section boundary). A section can hold a single sustained comb tone (drone-based texture) or rapid impulse-excited notes (percussive pattern). The decay time $T_{60}$ acts as a per-section "ambience" parameter: short decays in tight staccato sections, long decays in expansive pad-like sections.
+
+**TEXTURE**: Texture is the primary strength of CFRS. The four excitation modes map directly to textural archetypes:
+- Impulse → plucked/percussive (staccato, bright)
+- Noise burst → metallic pitched noise (scraped, rattling)
+- Oscillator ping → resonant body tone (warm, focused)
+- Filtered noise → dark pitched drone (rumbling, ambient)
+
+PCB multiplys textural density by the number of parallel combs: 2 combs = dual-tone metallic, 6 combs = bell cluster, 20+ combs = dense inharmonic wash/cloud. Adding dispersion allpasses shifts the texture from "clean harmonic" to "metallic inharmonic" (vibraphone → gong → cymbal-like). The velocity parameter (gating the excitation amplitude) provides dynamic textural contrast within a voice.
+
+### UnitMatrix Integration (Voices & Sections)
+
+**Rows (Voices)**: Each UnitMatrix voice corresponds to one CFRS instance (or one PCB group). A voice configured with CFRS has a per-note parameter set:
+- `pitch_midi`: maps to delay length $K$ (fractional-via-interpolation)
+- `velocity`: scales excitation amplitude $A$
+- `duration`: gate length (comb rings past gate-off because of feedback — natural overlap)
+- `feedback`: controls decay $g$
+- `excitation`: selects excitation type (`impulse`, `noise_burst`, `osc_ping`)
+- `noise_burst_ms`: burst length for noise excitation
+- `dispersion_coeffs`: list of allpass coefficients for metallic inharmonicity
+
+These per-note parameters are set when the MusicUnit is filled (e.g., via `create_note_unit(72, 1920)` with extended SP-099-specific params).
+
+**Columns (Sections)**: Each section (column) carries a CFRS configuration that applies to all notes in that section as defaults:
+- Default feedback gain
+- Default excitation type
+- Default dispersion settings
+- Parallel Comb Bank specification (list of pitch/feedback pairs)
+
+Section defaults can be overridden per note via the MusicUnit params.
+
+**Cells (MusicUnit)**: Each cell is filled by iterating over the section's notes and rendering each note independently into an audio buffer, then summing per-voice across the section duration. The comb's natural decay beyond the gate duration means notes ring into the next cell, creating textural continuity (or can be truncated at the section boundary by zeroing the delay buffer on section change — a choice set via `crossfade=True/False`).
+
+**Flow within the composition pipeline:**
+```python
+# Configuration example for UnitMatrix compose → produce
+from workflows.musicom_workflow import compose, produce
+
+r = compose(style="metal", key="D", bpm=100)
+# produces r.midi_path
+
+# Render with CFRS, parallel comb bank (bell-like)
+p = produce(r.midi_path, method="SP-099", params={
+    "excitation": "noise_burst",
+    "feedback": 0.995,           # long metallic decay
+    "noise_burst_ms": 3.0,       # short percussive burst
+    "noise_filter_cutoff": 8000, # bright but not harsh
+    "frac_delay": "allpass",
+    "dispersion_coeffs": [0.4, 0.2, 0.1],  # gong-like inharmonicity
+})
+# -> p.wav_path, p.ogg_path
+```
+
+### Pitfalls
+
+1. **Stability at high feedback**: As $g \\to 1$, the comb filter approaches instability. For $g \\geq 1$, the impulse response grows unbounded. Always enforce $g < 1$ numerically. A practical upper bound is $g = 0.999$ (providing $> 10$ second decays for typical pitch ranges).
+
+2. **DC buildup**: The feedback comb filter has a peak at DC ($f=0$). With high $g$ and impulse excitation, DC can accumulate over many feedback cycles. Mitigate by inserting a first-order DC-blocking highpass filter ($H(z) = (1 - z^{-1})/(1 - 0.995 z^{-1})$) at the output, or by using a feedforward comb structure with signal inversion to cancel DC.
+
+3. **Pitch quantization without fractional delay**: Integer delay lengths produce pitch quantization — the tuning jumps in semitone-like steps. For example, at $f_s=44100$, $K=100$ gives $f_0=441$ Hz (A4+3¢), $K=99$ gives $f_0=445.45$ Hz (A4+20¢), $K=101$ gives $f_0=436.6$ Hz (A4-13¢). Always use fractional delay interpolation (linear, allpass, or Lagrange) for correct equal-temperament tuning.
+
+4. **Aliasing from high pitch**: At very high pitches (small $K$), the comb becomes a short delay and starts to alias — partials above Nyquist fold back. For MIDI notes > 96 ($f_0 > 2093$ Hz), $K$ is small (< 21 samples at 44100 Hz) and the foldback distortion is audible. Oversample 2× and lowpass before downsampling, or use a band-limited impulse as the excitation (e.g., Gaussian-windowed sinc pulse).
+
+5. **Parallel Comb Bank phase cancellation**: When summing multiple combs driven by the same noise burst excitation, the outputs can partially cancel at certain frequencies. Mitigate by using independent noise bursts per comb (different random seeds) or by adding slight pitch detuning ($\\pm 2$ cents) per comb to smear phase relationships.
+
+6. **Confusion with Karplus-Strong (SP-011)**: CFRS without loop filtering is *not* Karplus-Strong. Karplus-Strong specifically places a lowpass filter *inside the feedback loop* (the "stretched" averaging filter $(1+z^{-1})/2$) to produce frequency-dependent string decay (higher harmonics decay faster). CFRS with $g$ only (no loop filter) produces uniform decay across all harmonics, giving bell-like, metallic, or organ-like tones. To get string-like timbres, pair CFRS with SP-011's loop lowpass filter, or use CFRS as the pre-excitation stage to SP-011 pre-filtered noise.
+
+7. **Computational cost of PCB with long decays**: Each comb in a parallel bank requires a full delay buffer of length $K$. For a 12-comb bank at low pitch ($f_0=65$ Hz, $K \\approx 678$), total delay memory = $12 \\times 678 \\times 4$ bytes ≈ 33 KB — trivial. But at long decays ($T_{60} > 10$ s), the comb must keep ringing, which may exceed the note's cell duration. Properly gate the comb reverb tail to prevent cross-contamination between sections when `crossfade=False` — just zero the delay buffer on section boundary.

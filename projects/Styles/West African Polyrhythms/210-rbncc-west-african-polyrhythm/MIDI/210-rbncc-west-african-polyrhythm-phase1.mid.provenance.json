@@ -1,0 +1,33 @@
+{
+  "artifact": "210-rbncc-west-african-polyrhythm-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.workflows.unitmatrix_composer",
+  "sources": [],
+  "parameters": {
+    "project": "210-rbncc-west-african-polyrhythm",
+    "phase": 1,
+    "style": "West African Polyrhythms",
+    "method": "082 Random Boolean Network Criticality Composition",
+    "layer": "concrete",
+    "raw_timing": "unquantized micro-jitter (off-grid)",
+    "raw_pitch": "raw chromatic (48 + deg*3), no key/chord snap",
+    "rbn": {
+      "n": 16,
+      "k": 2,
+      "p": 0.5,
+      "transient": 1,
+      "cycle_len": 12,
+      "frozen_nodes": [
+        5
+      ]
+    },
+    "key": "G major",
+    "bpm": 112,
+    "seed": 20260928
+  },
+  "notes": "",
+  "sha256": "334cd7cd85769fb667058ee1cda696ddca50ac69ef2fb6e05e9cfecfa7c44133",
+  "bytes": 3044,
+  "created_utc": "2026-09-28T23:08:39.315455+00:00",
+  "provenance_version": "1.0"
+}

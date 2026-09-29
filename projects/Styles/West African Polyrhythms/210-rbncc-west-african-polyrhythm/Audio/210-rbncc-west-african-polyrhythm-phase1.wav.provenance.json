@@ -1,0 +1,18 @@
+{
+  "artifact": "210-rbncc-west-african-polyrhythm-phase1.wav",
+  "classification": "ai-assisted",
+  "generator": "musicom.sound.render.fluidsynth",
+  "sources": [],
+  "parameters": {
+    "project": "210-rbncc-west-african-polyrhythm",
+    "phase": "phase1",
+    "format": "wav",
+    "soundfont": "FluidR3_GM.sf2",
+    "source_midi": "210-rbncc-west-african-polyrhythm-phase1.mid"
+  },
+  "notes": "",
+  "sha256": "124f32018f58bd2fa0d7f7fb60b794805cde020cb7a48fc204d31f0f11f32dec",
+  "bytes": 13141804,
+  "created_utc": "2026-09-28T23:09:10.872243+00:00",
+  "provenance_version": "1.0"
+}

@@ -52,6 +52,7 @@ _INSTRUMENT_MODULES = {
     "Percussion.steel_drums.steel_drums": "steel_drums",
     "Percussion.vibraphone.vibraphone": "vibraphone",
     "Percussion.glockenspiel.glockenspiel": "glockenspiel",
+    "Percussion.music_box.music_box": "music_box",
     "Percussion.xylophone.xylophone": "xylophone",
     "Percussion.tubular_bells.tubular_bells": "tubular_bells",
     "Percussion.timpani.timpani": "timpani",
@@ -226,6 +227,7 @@ KALIMBA = ALL_INSTRUMENTS["kalimba"]
 BANJO = ALL_INSTRUMENTS["banjo"]
 BAGPIPE = ALL_INSTRUMENTS["bagpipe"]
 HARMONICA = ALL_INSTRUMENTS["harmonica"]
+MUSIC_BOX = ALL_INSTRUMENTS["music_box"]
 OCARINA = ALL_INSTRUMENTS["ocarina"]
 SHENAI = ALL_INSTRUMENTS["shenai"]
 FIDDLE = ALL_INSTRUMENTS["fiddle"]
@@ -443,6 +445,10 @@ if __name__ == "__main__":
     print("  by_program(8) =", by_program(8))
     print("  CELESTA.in_sweet_spot(84) =", CELESTA.in_sweet_spot(84))
     print("  ACCORDION.midi_program =", ACCORDION.midi_program, "(should be 21)")
+    print("  MUSIC_BOX.midi_program =", MUSIC_BOX.midi_program, "(should be 10)")
+    print("  by_name('music box') =", by_name("music box"))
+    print("  by_program(10) =", by_program(10))
+    print("  MUSIC_BOX.in_sweet_spot(74) =", MUSIC_BOX.in_sweet_spot(74))
     print("  by_name('accordion') =", by_name("accordion"))
     print("  by_program(21) =", by_program(21))
     print("  ACCORDION.in_sweet_spot(69) =", ACCORDION.in_sweet_spot(69))
