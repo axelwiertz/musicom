@@ -1,0 +1,12 @@
+{
+  "method": "SP-075",
+  "project": "049-dpsm-scanned",
+  "status": "PASS",
+  "midi_note_hit_rate": 1.0,
+  "harmonic_energy_mean": 0.9670546238177042,
+  "acf_unpitched": 0,
+  "acf_windows": 9,
+  "windows_analyzed": 35,
+  "median_dom_hz": 528.0,
+  "misses": []
+}

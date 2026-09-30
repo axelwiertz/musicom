@@ -1,0 +1,12 @@
+SP-075 Voice-Like Instrument Hybrid -- absolute layer (049-dpsm-scanned)
+seed=20260930 bpm=110.0 vowels=aoeauo
+
+track -> engine -> instrument
+  track00 Piano1     -> voice_like  singing_saw (prog 0, ch 0, 96 notes)
+  track01 Piano2     -> voice_like  talkbox (prog 0, ch 1, 96 notes)
+  track02 prog32_ch2 -> fluidsynth  soundfont (prog 32, ch 2, 16 notes)
+
+wet stems:
+  track00_Piano1_singing_saw.wav
+  track01_Piano2_talkbox.wav
+  track02_prog32_ch2_fluidsynth.wav

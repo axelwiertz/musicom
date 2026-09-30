@@ -1,0 +1,86 @@
+{
+  "method": "SP-075",
+  "method_module": "sound.render.hybrid",
+  "method_desc": "Voice-Like Instrument Hybrid Render (synthesized voice tracks + SoundFont backing)",
+  "layer": "absolute",
+  "voice_instruments": [
+    "singing_saw",
+    "talkbox",
+    null
+  ],
+  "vowels": [
+    "a",
+    "o",
+    "e",
+    "a",
+    "u",
+    "o"
+  ],
+  "voice_gain": 1.0,
+  "backing_gain": 1.0,
+  "seed": 20260930,
+  "bpm": 110.0,
+  "sr": 44100,
+  "tracks": [
+    {
+      "index": 0,
+      "midi_track": 1,
+      "channel": 0,
+      "program": 0,
+      "notes": 96
+    },
+    {
+      "index": 1,
+      "midi_track": 2,
+      "channel": 1,
+      "program": 0,
+      "notes": 96
+    },
+    {
+      "index": 2,
+      "midi_track": 3,
+      "channel": 2,
+      "program": 32,
+      "notes": 16
+    }
+  ],
+  "available_instruments": [
+    "didgeridoo",
+    "jaw_harp",
+    "kazoo",
+    "singing_saw",
+    "talkbox",
+    "vox_humana"
+  ],
+  "lufs": -14.24,
+  "peak": 0.8912509381337457,
+  "silence_pct": 4.95,
+  "rms_per_second": [
+    0.1698,
+    0.2163,
+    0.206,
+    0.2353,
+    0.2174,
+    0.2032,
+    0.2138,
+    0.2056,
+    0.2083,
+    0.2054,
+    0.1997,
+    0.2082,
+    0.2057,
+    0.2003,
+    0.21,
+    0.2388,
+    0.211,
+    0.1282
+  ],
+  "windows_checked": 35,
+  "midi_note_hit_rate": 1.0,
+  "harmonic_energy_mean": 0.9671,
+  "acf_windows": 9,
+  "acf_unpitched": 0,
+  "pitch_verdict": "PASS",
+  "median_dom_hz": 528.0,
+  "duration_sec": 18.25
+}

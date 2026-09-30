@@ -517,9 +517,11 @@ class VoiceLikeInstrument:
         env = np.ones(n, dtype=np.float64)
         a_n = max(1, int(attack * self.sr))
         if a_n > 1:
+            a_n = min(a_n, n)
             env[:a_n] = np.linspace(0.0, 1.0, a_n)
         r_n = max(1, int(self.spec.get("release", 0.12) * self.sr))
         if r_n > 1:
+            r_n = min(r_n, n)
             env[-r_n:] *= np.linspace(1.0, 0.0, r_n)
         y = y * env
 
