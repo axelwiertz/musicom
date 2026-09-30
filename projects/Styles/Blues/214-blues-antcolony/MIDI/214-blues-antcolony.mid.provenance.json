@@ -1,0 +1,38 @@
+{
+  "artifact": "214-blues-antcolony.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.workflows.unitmatrix_composer",
+  "sources": [],
+  "parameters": {
+    "project": "214-blues-antcolony",
+    "phase": 2,
+    "style": "Blues",
+    "key": "E (blues scale)",
+    "method": "041 Ant Colony Optimization Path Finding",
+    "layer": "concrete",
+    "quantization": "8th-grid (240 ticks) + blues chord-tone snap",
+    "aco": {
+      "n_ants": 8,
+      "n_iter": 60,
+      "alpha": 1.0,
+      "beta": 2.5,
+      "rho": 0.15,
+      "seed": 20260930
+    },
+    "key_pcs": [
+      2,
+      4,
+      7,
+      9,
+      10,
+      11
+    ],
+    "progression": "12-bar blues x2: I I I I / IV IV I I / V IV I V  (E)",
+    "bpm": 100
+  },
+  "notes": "",
+  "sha256": "986b7b5b932b2032d31f0c54aafa752b190d00d87a0b2c8cc838ebcee3844637",
+  "bytes": 6893,
+  "created_utc": "2026-09-30T23:11:19.283280+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,18 @@
+{
+  "artifact": "214-blues-antcolony-phase1.wav",
+  "classification": "ai-assisted",
+  "generator": "musicom.sound.render.fluidsynth",
+  "sources": [],
+  "parameters": {
+    "project": "214-blues-antcolony",
+    "phase": "phase1",
+    "format": "wav",
+    "soundfont": "FluidR3_GM.sf2",
+    "source_midi": "214-blues-antcolony-phase1.mid"
+  },
+  "notes": "",
+  "sha256": "fe6e518ebe1aa0fd8d9eaec670ba980432badfbd0120107e63de491fa112014c",
+  "bytes": 10525228,
+  "created_utc": "2026-09-30T23:12:08.945697+00:00",
+  "provenance_version": "1.0"
+}

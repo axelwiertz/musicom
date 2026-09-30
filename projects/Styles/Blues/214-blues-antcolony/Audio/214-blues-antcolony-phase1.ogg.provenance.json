@@ -1,0 +1,19 @@
+{
+  "artifact": "214-blues-antcolony-phase1.ogg",
+  "classification": "ai-assisted",
+  "generator": "ffmpeg libopus",
+  "sources": [],
+  "parameters": {
+    "project": "214-blues-antcolony",
+    "phase": "phase1",
+    "format": "ogg",
+    "codec": "libopus",
+    "bitrate": "128k",
+    "source_midi": "214-blues-antcolony-phase1.mid"
+  },
+  "notes": "",
+  "sha256": "9bbae546bc36a0d2d3b27eca67afbda5658b82584de19ddb04dd09bfc77bb936",
+  "bytes": 1279964,
+  "created_utc": "2026-09-30T23:12:08.946961+00:00",
+  "provenance_version": "1.0"
+}
