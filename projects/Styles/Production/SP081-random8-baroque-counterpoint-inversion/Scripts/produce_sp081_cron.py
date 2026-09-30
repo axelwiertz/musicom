@@ -128,10 +128,10 @@ def read_wav(p):
 def write_wav(p, audio):
     clipped = np.clip(audio, -1.0, 1.0)
     if clipped.ndim == 1:
-        nch, data = 1, clipped.astype(np.int16).tobytes()
+        nch, data = 1, (clipped * 32767.0).astype(np.int16).tobytes()
     else:
         nch = 2
-        data = clipped.astype(np.int16).reshape(-1).tobytes()
+        data = (clipped * 32767.0).astype(np.int16).reshape(-1).tobytes()
     with wave.open(str(p), "wb") as wf:
         wf.setnchannels(nch)
         wf.setsampwidth(2)

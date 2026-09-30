@@ -1,0 +1,18 @@
+{
+  "artifact": "212-indian-boids-yaman-phase1.wav",
+  "classification": "ai-assisted",
+  "generator": "musicom.sound.render.fluidsynth",
+  "sources": [],
+  "parameters": {
+    "project": "212-indian-boids-yaman",
+    "phase": "phase1",
+    "format": "wav",
+    "soundfont": "FluidR3_GM.sf2",
+    "source_midi": "212-indian-boids-yaman-phase1.mid"
+  },
+  "notes": "",
+  "sha256": "350c746f94cead18ab6172fec02d4f0990abd4e06979d54fe9af85724f55a961",
+  "bytes": 16478252,
+  "created_utc": "2026-09-29T23:09:02.104735+00:00",
+  "provenance_version": "1.0"
+}

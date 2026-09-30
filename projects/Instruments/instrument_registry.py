@@ -25,6 +25,7 @@ if _INSTR_DIR not in sys.path:
 
 # module path (relative to Instruments dir) -> registry key
 _INSTRUMENT_MODULES = {
+    "Keys.clavi.clavi": "clavi",
     "Strings.violin.violin": "violin",
     "Strings.harp.harp": "harp",
     "Strings.viola.viola": "viola",
@@ -199,6 +200,7 @@ HARP = ALL_INSTRUMENTS["harp"]
 VIOLA = ALL_INSTRUMENTS["viola"]
 CELLO = ALL_INSTRUMENTS["cello"]
 DOUBLE_BASS = ALL_INSTRUMENTS["double_bass"]
+CLAVI = ALL_INSTRUMENTS["clavi"]
 PIANO = ALL_INSTRUMENTS["piano"]
 ORGAN = ALL_INSTRUMENTS["organ"]
 DULCIMER = ALL_INSTRUMENTS["dulcimer"]
@@ -452,6 +454,11 @@ if __name__ == "__main__":
     print("  by_name('accordion') =", by_name("accordion"))
     print("  by_program(21) =", by_program(21))
     print("  ACCORDION.in_sweet_spot(69) =", ACCORDION.in_sweet_spot(69))
+    print("  CLAVI.midi_program =", CLAVI.midi_program, "(should be 7)")
+    print("  by_name('clavi') =", by_name("clavi"))
+    print("  by_program(7) =", by_program(7))
+    print("  CLAVI.in_sweet_spot(60) =", CLAVI.in_sweet_spot(60))
+    print("  CLAVI.range_min =", CLAVI.range_min, "CLAVI.range_max =", CLAVI.range_max)
     print("  ENGLISH_HORN.midi_program =", ENGLISH_HORN.midi_program, "(should be 69)")
     print("  by_name('english horn') =", by_name("english horn"))
     print("  by_program(69) =", by_program(69))

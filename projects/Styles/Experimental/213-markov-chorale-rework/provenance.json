@@ -1,0 +1,39 @@
+{
+  "project": "213-markov-chorale-rework",
+  "genre": "Experimental",
+  "classification": "ai-assisted",
+  "generator": "musicom.workflows.unitmatrix_composer + musicom rules (rework job)",
+  "source_project": "066-markov-chain-chorale",
+  "redesign_vs_extension": "extension (identity preserved; source failed only standard 6 = missing root provenance.json + index.html)",
+  "method": 20,
+  "key": "F major (ionian)",
+  "bpm": 92,
+  "meter": "4/4 (480 tpb, 1920 ticks/bar)",
+  "form": "8 sections x 2 bars = 16 bars",
+  "voices": ["Soprano (Flute ch0)", "Alto (Strings ch1)", "Tenor (Strings ch2)", "Bass (ch3)", "Drums (ch9)"],
+  "bar_degrees": [0, 3, 5, 0, 3, 1, 1, 4, 0, 4, 5, 3, 1, 2, 3, 0],
+  "variation_techniques": [
+    "transposition (VerseA2 +5, Chorus +12, Outro -12)",
+    "inversion (Chorus2 axis=69, Bridge axis=66)",
+    "diminution (PreChorus/Chorus dur x0.5)",
+    "augmentation (Outro dur x2.0)",
+    "register shift (Chorus +12, Outro -12)",
+    "density rise (Chorus 16th hi-hat)"
+  ],
+  "verification": {
+    "voice_tracks": 5,
+    "track_length_ticks": 30720,
+    "zero_drift": true,
+    "off_grid_onsets": 0,
+    "scale_violations": 0,
+    "chord_violations": 0,
+    "parallel_fifth_violations": 0
+  },
+  "audio": {
+    "wav": "Audio/213-markov-chorale-rework.wav",
+    "ogg": "Audio/213-markov-chorale-rework.ogg",
+    "duration_s": 48.93,
+    "silence_ratio": 0.117,
+    "rms_dbfs": -17.38
+  }
+}

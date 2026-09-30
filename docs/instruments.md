@@ -586,9 +586,10 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Keys | Church Organ | 19 | 36–96 | harmony, pad, bass, rhythm, accent |
 | Keys | Dulcimer | 15 | 48–96 | lead, melody, ornament, rhythm, harmony |
 | Keys | Harpsichord | 6 | 29–89 | harmony, continuo, melody, ornament, countermelody, accent |
-|| Keys | Celesta | 8 | 48–108 | lead, melody, ornament, arpeggio, countermelody, accent |
-|| Keys | Accordion | 21 | 36–96 | harmony, melody, bass, rhythm, ornament |
-|| Brass | Trumpet | 56 | 54–86 | lead, accent, fanfare |
+| Keys | Celesta | 8 | 48–108 | lead, melody, ornament, arpeggio, countermelody, accent |
+| Keys | Accordion | 21 | 36–96 | harmony, melody, bass, rhythm, ornament |
+| Keys | Clavi | 7 | 29–89 | lead, rhythm, accent, ornament, countermelody |
+| Brass | Trumpet | 56 | 54–86 | lead, accent, fanfare |
 | Brass | Trombone | 57 | 40–78 | bass, counter, accent, harmony |
 | Brass | French Horn | 60 | 41–84 | harmony, counter, accent, lead |
 | Brass | Tuba | 58 | 26–72 | bass, harmony, accent, rhythm |
@@ -635,6 +636,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 46 | Orchestral Harp | Orchestral_Harp ✓ (GM_PROGRAMS[46] = "Orchestral Harp"; FluidR3 preset 46 = "Harp" — one-word SF2 spelling, cosmetic only) |
 | 1 | Acoustic Grand Piano | **Bright_Acoustic_Piano** ✗ (list[1]) |
 | 6 | Harpsichord | Harpsichord ✓ (GM_PROGRAMS[6] + FluidR3 preset 6 both "Harpsichord") |
+| 7 | Clavi | **Clavi** ✓ (pipeline GM_PROGRAMS[7] = "Clavi"; FluidR3 preset 7 = "Clavinet" — cosmetic expansion, no routing impact; STEM_LABEL = "Clavi" matches pipeline) |
 | 8 | Celesta | Celesta ✓ (GM_PROGRAMS[8] + FluidR3 preset 8 both "Celesta") |
 | 69 | English Horn | English_Horn ✓ (GM_PROGRAMS[69] + FluidR3 preset 69 both "English Horn") |
 | 9 | Glockenspiel | Glockenspiel ✓ (GM_PROGRAMS[9] + FluidR3 preset 9 both "Glockenspiel") |
@@ -676,3 +678,23 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 > **Known off-by-one in existing entries**: ~~`trumpet.py` uses 57~~ **FIXED 2026-08-27**: trumpet is now 56 (SF2 preset 56=`SoloTrumpet`). `piano.py`=1 → actually Bright Acoustic Piano (GM #2) — cosmetic label difference only, no routing impact. Legacy registry rows kept as-is for piano; new instruments use 0-indexed programs matching pipeline+SF2.
 
 Match production code on ACTUAL labels, not intended names.
+
+**Clavi added** (2026-09-30): GM7, Keys-family seventh entry — the
+Hohner Clavinet D6 rubber-hammer struck-string electric clavichord
+(instrument.md + clavi.py), verified end-to-end UnitMatrixComposer →
+zero-drift ✓ → MIDI (145 bytes) → FluidSynth WAV (743 KB) ✓;
+RenderPipeline stem label `trackXX_Clavi.wav` ✓ (GM_PROGRAMS[7] = "Clavi",
+FluidR3 preset 7 = "Clavinet" — pipeline label "Clavi" vs SF2 "Clavinet"
+is cosmetic expansion only, **no routing impact**; STEM_LABEL "Clavi"
+matches the pipeline's real label so stem-file lookups work).
+Karplus-Strong recommended (struck waveguide with rubber mute damping,
+loop_gain 0.9960 — SHORTEST in the plucked/struck KB set between banjo
+0.9960 and harp 0.9985; noise_component 0.03 for the rubber "cluck"
+attack transient). Solo-render spectral check: 4–8 kHz buzz 3.1% (clean
+single voice, no comb-filtering). Empirical FluidR3 pitch sweep (RMS,
+notes 29–89): preset 7 audible across full range, no gaps. Identity: GM7
+= rubber-hammer clavichord — rhythm-section chord-chop voice (funk
+"Superstition" chops), NOT a sustain/pad voice; line-instrument quirk:
+the rubber mute gives it the shortest ring in the KB (0.3–1.5 s), so
+composition jobs write tight rhythmic patterns, not long sustained notes.
+Registration in `instrument_registry.py` as CLAVI convenience constant.

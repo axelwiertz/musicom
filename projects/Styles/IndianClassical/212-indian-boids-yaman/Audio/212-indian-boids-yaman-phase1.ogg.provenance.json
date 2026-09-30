@@ -1,0 +1,19 @@
+{
+  "artifact": "212-indian-boids-yaman-phase1.ogg",
+  "classification": "ai-assisted",
+  "generator": "ffmpeg libopus",
+  "sources": [],
+  "parameters": {
+    "project": "212-indian-boids-yaman",
+    "phase": "phase1",
+    "format": "ogg",
+    "codec": "libopus",
+    "bitrate": "128k",
+    "source_midi": "212-indian-boids-yaman-phase1.mid"
+  },
+  "notes": "",
+  "sha256": "122ec1ab1945957c4e45562ddd2ad9337ccabdac30cbbadc40c657dbf7f51d00",
+  "bytes": 1831729,
+  "created_utc": "2026-09-29T23:09:02.106404+00:00",
+  "provenance_version": "1.0"
+}

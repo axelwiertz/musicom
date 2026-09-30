@@ -1,0 +1,29 @@
+{
+  "chosen": "Experimental/066-markov-chain-chorale",
+  "genre": "Experimental",
+  "primary_midi": "/opt/data/projects/Styles/Experimental/066-markov-chain-chorale/MIDI/066-markov-chain-chorale.mid",
+  "audited_at": "2026-09-30",
+  "standard_failures": [
+    "provenance.json + index.html missing (only .provenance.json sidecars present; no root provenance.json, no index.html dashboard)"
+  ],
+  "redesign_required": true,
+  "source_identity": {
+    "genre": "Experimental (chorale)",
+    "method": "020 First-Order Markov Chain Sequencing",
+    "key": "F major (ionian)",
+    "bpm": 92,
+    "meter": "4/4 (480 tpb, 1920 ticks/bar)",
+    "form": "4 sections x 2 bars = 8 bars",
+    "harmony": "I-vi-IV-V (F-Dm-Bb-C)",
+    "voices": ["Soprano (Flute)", "Alto (Strings)", "Tenor (Strings)", "Bass"],
+    "motif_dna": "stepwise Markov pitch-class chain with chromatic escape states, duration chain {1/8, 1/4}"
+  },
+  "audit_notes": {
+    "engine_ok": true,
+    "zero_drift_ok": true,
+    "rhythm_grid_ok": true,
+    "track_setup_ok": true,
+    "two_phase_ok": true,
+    "provenance_index_ok": false
+  }
+}

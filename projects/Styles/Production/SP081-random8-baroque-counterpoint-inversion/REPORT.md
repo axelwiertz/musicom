@@ -3,6 +3,9 @@
 **Date (UTC):** 2026-09-28 (nightly autonomous production job)
 **Output root:** `/opt/data/repos/musicom/projects/Styles/Production/SP081-random8-baroque-counterpoint-inversion/`
 **Status:** PASS — dry-wet pitch fidelity 8/9 (0.889), harmonic energy 0.7028, ACF unpitched 0/3, silence 37.16% (tail), LUFS -14.38, peak 0.8913.
+**Post-run fix (2026-09-30):** `write_wav` int16 truncation bug — delivered WAV/OGG were
+silently zeroed (float→int16 cast without ×32767). Patched + re-rendered + verified from disk.
+See §6 item 4. All metrics below are unchanged (deterministic seed) and now backed by an audible file.
 
 ---
 
@@ -126,13 +129,25 @@ mid-track gaps.
    documented interpretation of a CV source as a production layer.
 3. **Legacy source has broken note-offs** — see §2; documented, not fixed
    (production jobs process the existing MIDI as-is).
+4. **`write_wav` int16 truncation bug (silent output — critical).** The
+   `write_wav` helper cast float audio to `np.int16` **without** scaling:
+   `clipped.astype(np.int16)` truncates every sample in (-1, 1) to 0, producing a
+   byte-identical-size but **all-zero** WAV (and a near-empty OGG). This run's
+   §4/§5 metrics were computed from the in-memory `final_master` array, never
+   re-read from disk, so the delivered WAV/OGG on 09-28 were silently zeroed.
+   Discovered during the SP-079 run (09-29) and fixed 09-30:
+   `(clipped * 32767.0).astype(np.int16)`. Re-rendered and verified from disk —
+   WAV read-back peak 0.8912, RMS 0.119, 395,110/609,024 nonzero samples; OGG
+   decode peak 0.989, RMS 0.119. (The shared `sound/utils/io.py` `write_wav` was
+   already correct — it scales ×32767; only these per-project cron scripts carried
+   the local unscaled helper.)
 
 ## 7. Artifact Manifest
 
 | Type | Path | Size |
 |---|---|---|
 | Master WAV | `SP081-random8-baroque-counterpoint-inversion.wav` | 1,218,092 B |
-| Master OGG | `SP081-random8-baroque-counterpoint-inversion.ogg` | 20,040 B |
+| Master OGG | `SP081-random8-baroque-counterpoint-inversion.ogg` | 39,131 B |
 | Dry Reference | `dry_full_mix_sp001_reference.wav` | 1,218,092 B |
 | Source MIDI | `MIDI/004_counterpoint_study.mid` | 228 B |
 | Dry Stems | `Audio/stems_dry/` (2 × Acoustic_Grand_Piano) | 1,218,092 B each |

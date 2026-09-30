@@ -1,0 +1,28 @@
+{
+  "artifact": "212-indian-boids-yaman.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.workflows.unitmatrix_composer",
+  "sources": [],
+  "parameters": {
+    "project": "212-indian-boids-yaman",
+    "phase": 2,
+    "style": "IndianClassical",
+    "raga": "Yaman (Sa=C)",
+    "method": "031 Swarm Intelligence Flocking (Boids)",
+    "layer": "concrete",
+    "quantization": "16th-grid (120 ticks) + raga-harmonic-region snap",
+    "boids": {
+      "n": 8,
+      "seed": 20260929,
+      "forces": "separation/alignment/cohesion + virtual raga leader + Sa gravity"
+    },
+    "key": "Raga Yaman on C",
+    "bpm": 90,
+    "progression": "Alap(SaPa drone) -> Jod/Gat1/Gat2/Jhala/Gat1b (full Yaman) -> Alap2/Outro(SaPa drone)"
+  },
+  "notes": "",
+  "sha256": "18b4d3db34318debaf9978513bb88975482a71f54cd4d2a17eff2305843ae2c8",
+  "bytes": 7847,
+  "created_utc": "2026-09-29T23:08:53.459819+00:00",
+  "provenance_version": "1.0"
+}

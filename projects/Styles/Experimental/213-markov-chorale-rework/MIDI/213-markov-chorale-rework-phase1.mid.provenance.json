@@ -1,0 +1,22 @@
+{
+  "artifact": "213-markov-chorale-rework-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.workflows.unitmatrix_composer + generators.chain (PRE-RULES raw draft)",
+  "sources": [],
+  "parameters": {
+    "project": "213-markov-chorale-rework",
+    "phase": 1,
+    "key": "F major (ionian)",
+    "bpm": 92,
+    "method": 20,
+    "source": "066-markov-chain-chorale",
+    "seed": 213,
+    "rules_applied": "NONE (pre-rules)",
+    "variation": "none (identity seed material)"
+  },
+  "notes": "Phase 1 raw Markov draft: first-order pitch-class chain + duration chain, chromatic (leaks non-diatonic), single voice, pre-rules.",
+  "sha256": "cd289591dc860cd9d364a5c87356ccee646a493ff19400a4be33531df72f9ab8",
+  "bytes": 912,
+  "created_utc": "2026-09-30T01:12:35.801753+00:00",
+  "provenance_version": "1.0"
+}

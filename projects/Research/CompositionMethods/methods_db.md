@@ -108,9 +108,10 @@ Classification of active Musicom composition methods categorized by their primar
 | **098** | concrete | Multi-Objective Evolutionary Pareto Composition (MOEPC) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Pareto-guided, multi-objective fitness) | Grid-Locked / Continuous | Macro / Pareto Front | $\mathcal{O}(I \cdot P \cdot N \cdot M)$ | Evolves multiple conflicting musical objectives (harmonic quality, melodic quality, rhythmic coherence, voice independence) via NSGA-II, returning a Pareto front of trade-off compositions. The front itself defines macro-form. |
 | **099** | abstract | Self-Similarity Matrix Composition (SSMC) | **Rules-Based** | Structure, Texture, Pitch, Rhythm | Weak (Template-guided) | Grid-Locked / Continuous | Macro / Form | $\mathcal{O}(N^2 \cdot M)$ | Designs macro-form repetition structure as a self-similarity matrix (SSM) — pairwise similarity targets between all time positions. Solves the inverse problem: optimize a feature sequence whose SSM matches the target, then decode to per-bar feature profiles. Novelty curve identifies section boundaries for UnitMatrix layout. First abstract-layer form-design method: feeds rules/ssm_composition.py. |
 | **100** | concrete | Active Inference Composition (AIFC) | **AI-Driven** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Prior-guided, HOME/LIFT/TENSE/TURN) | Grid-Locked / Continuous | Macro / Generative Model Horizon | $\mathcal{O}(T \cdot d^2)$ per step, $\mathcal{O}(T \cdot D \cdot d^2)$ learn | Casts composition as closed-loop active inference: a multi-level hierarchical generative model drives note-by-note event selection by minimizing expected free energy. Prior preferences encode tonal gravity, metric binding, voice-leading, and macro-form. Multi-agent (one per voice) with shared form + harmonic state. |
-
-### Source
-Sakellariou, J., Tria, F., Loreto, V. & Pachet, F. (2017). "Maximum entropy models capture melodic styles." *Scientific Reports* 7, 9172. arXiv:1610.03414. — Jaynes, E. T. (1957). "Information theory and statistical mechanics." *Physical Review* 106, 620–630.
+| **101** | concrete | Flow Matching Composition (FMC) | **AI-Driven** | Pitch, Rhythm, Harmony, Structure, Texture | Variable (Prior/Conditioning-guided) | Continuous / Continuous | Macro / Full-Sequence Trajectory | $\mathcal{O}(T \cdot d)$ training, $\mathcal{O}(T \cdot d)$ sampling | Vector-field regression (CFM) on token embeddings: deterministic ODE integration pushes noise $\rightarrow$ structured multi-voice token sequences. |
+|
+|### Source
+|Sakellariou, J., Tria, F., Loreto, V. & Pachet, F. (2017). "Maximum entropy models capture melodic styles." *Scientific Reports* 7, 9172. arXiv:1610.03414. — Jaynes, E. T. (1957). "Information theory and statistical mechanics." *Physical Review* 106, 620–630.
 
 ### Layer
 **concrete** — generates distributions over concrete pitch/rhythm/harmony events that fill UnitMatrix cells. The Boltzmann-Gibbs distribution assigns a probability to every possible sequence of musical tokens, and sampling produces the actual cell contents. Feeds generators/ directly via MCMC sampling.
@@ -266,6 +267,7 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 | **SP-097** | Sub-Harmonic Oscillator Synthesis (SHOS) | **Synthesis Engines** | Subharmonic Chord Stacks / Divide-Down Bass Enhancement | Generates the undertone series $f_0/d$ for integer divisors $d \in \{1,2,\dots,6\}$ from a shared master oscillator via phase-accumulator frequency division. Produces phase-locked subharmonic chord stacks (root, P8, P12, 2×P8, M17, P19) from a single root note — a single-note chord. Three modes: subharmonic bass enhancement (Dbx 120-style $f_0/2$ synthesis), subharmonic chord stack (Moog Subharmonicon-style multi-divisor mix), and divide-down organ (top-octave frequency chain). Per-divisor gains, per-divisor fine detuning ($\pm\delta_d$ cents), polyrhythmic gating per divisor. $\mathcal{O}(D)$ per sample ($D=|\mathcal{D}|$). Candidate: `sound/synthesis/subharmonic.py`. |
 || **SP-098** | TR-808 Analog Kick Drum Synthesis (AKDS) | **Synthesis Engines** | Circuit-Faithful Analog Kick / Sub-Bass Drum Voice | Renders the Roland TR-808 bass drum from its discrete transistor-circuit topology: bridged-T bandpass filter self-oscillating at ~49.4 Hz with 6 ms pitch sweep attack (49→130 Hz), feedback-buffer decay control (50–800 ms), retriggering bridge, voltage-leakage pitch sigh, passive tone lowpass, and VCA output. $\mathcal{O}(1)$ per sample. Candidate: `sound/synthesis/drum_synth_808.py`. |
 || **SP-099** | Comb Filter Resonance Synthesis (CFRS) | **Synthesis Engines** | Resonator-Based Pitched Timbre / Metallic, Plucked & Percussive Textures | Generates pitched sound by exciting a feedback comb filter with short-duration impulses, noise bursts, or oscillator pings, ringing at the delay-line resonant frequencies $f_0 = f_s / K$. Four modes: impulse-excited (plucked percussion), noise-excited (pitched drone/hiss), oscillator-excited (resonant-body tone), and parallel comb bank (inharmonic bell clusters). Fractional delay for exact equal-temperament tuning; allpass dispersion chain for metallic inharmonicity. $\mathcal{O}(1)$ per sample per comb. Candidate: `sound/synthesis/comb_resonance.py`. |
+|| **SP-100** | Volterra Series Synthesis (VSS) | **Post-Processing / DSP** | Nonlinear Distortion / Intermodulation Enrichment | General nonlinear synthesis framework using Volterra series expansion (Taylor series with memory). Multi-order kernels generate harmonic/inharmonic intermodulation, saturation, and spectral enrichment as a post-process on rendered audio. Laguerre pruning reduces cost to $\mathcal{O}(L^P)$ per sample. Candidate: `sound/effects/volterra_synthesis.py`. |
 |---|
 
 
@@ -21941,4 +21943,297 @@ p = produce(r.midi_path, method="SP-099", params={
 
 6. **Confusion with Karplus-Strong (SP-011)**: CFRS without loop filtering is *not* Karplus-Strong. Karplus-Strong specifically places a lowpass filter *inside the feedback loop* (the "stretched" averaging filter $(1+z^{-1})/2$) to produce frequency-dependent string decay (higher harmonics decay faster). CFRS with $g$ only (no loop filter) produces uniform decay across all harmonics, giving bell-like, metallic, or organ-like tones. To get string-like timbres, pair CFRS with SP-011's loop lowpass filter, or use CFRS as the pre-excitation stage to SP-011 pre-filtered noise.
 
-7. **Computational cost of PCB with long decays**: Each comb in a parallel bank requires a full delay buffer of length $K$. For a 12-comb bank at low pitch ($f_0=65$ Hz, $K \\approx 678$), total delay memory = $12 \\times 678 \\times 4$ bytes ≈ 33 KB — trivial. But at long decays ($T_{60} > 10$ s), the comb must keep ringing, which may exceed the note's cell duration. Properly gate the comb reverb tail to prevent cross-contamination between sections when `crossfade=False` — just zero the delay buffer on section boundary.
+7. **Computational cost of PCB with long decays**: Each comb in a parallel bank requires a full delay buffer of length $K$. For a 12-comb bank at low pitch ($f_0=65$ Hz, $K \\approx 678$), total delay memory = $12 \\times 678 \\times 4$ bytes ≈ 33 KB — trivial. But at long decays ($T_{60} > 10$ s), the comb must keep ringing, which may exceed the note's cell duration. Properly gate the comb reverb tail to prevent cross-contamination between sections when `crossfade=False` — just zero the delay buffer on section boundary.### 101. Flow Matching Composition (FMC)
+
+| Attribute | Value |
+|---|---|
+| **ID** | 101 |
+| **Layer** | concrete |
+| **Method Name** | Flow Matching Composition |
+| **Acronym** | FMC |
+| **Paradigm** | **AI-Driven** |
+| **Primary Elements** | Pitch, Rhythm, Harmony, Structure, Texture |
+| **Tonal Gravity** | Variable (Prior/Conditioning-guided) |
+| **Metric Binding** | Grid-Locked / Continuous |
+| **Memory Depth** | Macro / Full-Sequence Trajectory |
+| **Time Complexity** | $\mathcal{O}(T \cdot d)$ training CFM, $\mathcal{O}(T \cdot d)$ sampling ODE |
+
+### Source
+
+Lipman, Y., Chen, R. T. Q., Ben-Hamu, H., Nickel, M. & Le, M. (2023). "Flow Matching for Generative Modeling." *ICLR 2023*. arXiv:2210.02747.
+
+Campbell, A., Benton, J., De Bortoli, V., Hennig, P. & Doucet, A. (2024). "Discrete Flow Matching." *NeurIPS 2024*. arXiv:2407.15571.
+
+Gat, I., Lorberbom, G., Remez, T. & Adi, Y. (2024). "Discrete Flow Matching." *NeurIPS 2024*.
+
+Prajwal, S. V., et al. (2024). "MusicFlow: Cascaded Flow Matching for Text Guided Music Generation." *ICML 2024*.
+
+Albergo, M. S. & Vanden-Eijnden, E. (2023). "Building Normalizing Flows with Stochastic Interpolants." *ICLR 2023*.
+
+### Layer
+
+**concrete** — generates concrete pitch/rhythm/harmony events that fill UnitMatrix cells. The vector field operates on continuous token embeddings (or latent piano-roll representations), and the final ODE integration step produces the actual musical token sequences that decode to MusicEvents. Feeds generators/ directly via ODE sampling from a trained conditional flow matching model.
+
+### Paradigm
+
+**AI-Driven** — the flow matching model is trained via supervised regression on a corpus of symbolic music tokens embedded in a continuous latent space. The vector field $v_\theta(t, x)$ is learned by minimizing a regression loss against analytically known conditional vector fields. Generation is deterministic given the initial noise sample, differentiable, and invertible.
+
+### Description
+
+**Flow Matching Composition (FMC)** applies the Flow Matching framework (Lipman et al., 2023) — a simulation-free, continuous-time generative modeling paradigm — to the problem of generating symbolic music sequences. Flow Matching bridges and generalizes diffusion models (score matching) and normalizing flows (invertible architectures) by directly learning a **vector field** $v_\theta(t, x)$ that pushes a simple prior distribution $p_0$ (e.g., a standard Gaussian) through a **probability path** $p_t$ to the target data distribution $p_1$ (the training corpus of symbolic music).
+
+The core mathematical structure is:
+
+**Probability path.** A time-indexed family of distributions $p_t(x)$ for $t \in [0,1]$ that interpolates between $p_0$ (pure noise) and $p_1$ (data). The time-evolution of this path is governed by the **continuity equation** (transport equation):
+
+$$\partial_t p_t + \nabla \cdot (p_t u_t) = 0$$
+
+where $u_t : \mathbb{R}^d \to \mathbb{R}^d$ is the **vector field** that generates the flow. The flow is the diffeomorphism $\psi_t$ satisfying:
+
+$$\frac{d}{dt} \psi_t(x) = u_t(\psi_t(x)), \quad \psi_0(x) = x$$
+
+and $p_t = [\psi_t]_* p_0$ (the pushforward of $p_0$ by $\psi_t$).
+
+**Conditional Flow Matching (CFM).** The key insight of Lipman et al. is to avoid the intractable marginal vector field $u_t$ by decomposing it into a mixture of **conditional** vector fields, one per data point $x_1$:
+
+$$p_t(x) = \int p_1(x_1) \cdot p_t(x \mid x_1) \, dx_1$$
+
+$$u_t(x) = \mathbb{E}_{x_1 \sim p_1 \mid x_t = x} [u_t(x \mid x_1)]$$
+
+The **conditional probability path** $p_t(x \mid x_1)$ is chosen as a simple Gaussian:
+
+$$p_t(x \mid x_1) = \mathcal{N}(x \mid \mu_t(x_1), \sigma_t(x_1)^2 I)$$
+
+with the standard choice being the **optimal transport (OT) path** (linear interpolation):
+
+$$x_t = (1 - t) x_0 + t x_1, \quad x_0 \sim \mathcal{N}(0, I)$$
+
+The conditional vector field for this path is:
+
+$$u_t(x \mid x_1) = \frac{x_1 - x}{1 - t} = x_1 - x_0$$
+
+This gives the **Conditional Flow Matching (CFM) loss**:
+
+$$\mathcal{L}_{\text{CFM}}(\theta) = \mathbb{E}_{t \sim \mathcal{U}[0,1], \, x_0 \sim p_0, \, x_1 \sim p_1} \left\| v_\theta(t, x_t) - (x_1 - x_0) \right\|^2$$
+
+where $x_t = (1-t)x_0 + t x_1$ and $\theta$ are the neural network parameters. Note: **no score function, no ELBO, no invertibility constraint** — just a vector field regression.
+
+**Sampling (generation).** To generate, start with noise $x_0 \sim \mathcal{N}(0, I)$, then integrate the learned ODE forward:
+
+$$\frac{dx}{dt} = v_\theta(t, x), \quad x(0) = x_0$$
+
+using any ODE solver (Euler, RK4, Dormand-Prince). The final state $x(1)$ is the generated sample.
+
+**Discrete extension (for symbolic music).** Because symbolic music tokens are discrete (MIDI pitch/duration/velocity classes, REMI tokens), naive continuous Gaussian paths are inappropriate. **Discrete Flow Matching** (Campbell et al., 2024; Gat et al., 2024) generalizes FM to categorical data by replacing the linear Gaussian interpolation with a **probability simplex interpolation**:
+
+$$x_t = (1-t) \cdot e_{x_0} + t \cdot e_{x_1}$$
+
+where $e_{x_0}$ and $e_{x_1}$ are one-hot vectors over the token vocabulary. The vector field becomes a velocity field on the simplex, and the CFM loss becomes a cross-entropy regression toward the target token distribution.
+
+Alternatively, tokens are embedded into a continuous latent space via a trainable embedding matrix $E \in \mathbb{R}^{|\mathcal{V}| \times d}$, and FM takes place in $\mathbb{R}^d$ with the standard Gaussian path, followed by a softmax decoder at $t=1$.
+
+**Cascaded flow matching for music (MusicFlow paradigm).** Prajwal et al. (2024) use a cascaded architecture with two flow matching networks:
+1. **Prior FM**: maps text/image embeddings to a semantic music representation (MuLAN / CLAP embedding space).
+2. **Diffusion / Decoder FM**: maps the semantic representation to a mel-spectrogram or token sequence (continuous latent rendering).
+
+For symbolic music, the second stage directly decodes to discrete MIDI/REMI tokens via the discrete FM framework.
+
+### Musical Elements Framework
+
+**PITCH**: The primary dimension of the flow. Token embeddings are MIDI pitch classes or scale degrees (vocabulary size $|\mathcal{V}| \approx 128$ for raw MIDI, or $|\mathcal{V}| \approx 7\text{–}12$ for scale-quantized). Pitch evolves continuously through the latent space during integration, projecting to discrete tokens only at the final time $t=1$. The vector field's learned dynamics encode the full conditional distribution of pitch sequences — interval preferences, conjunct bias, register boundaries — without explicit Markov assumptions. Chord conditioning (harmonic) tokens steer the flow toward tonal targets.
+
+**RHYTHM**: Represented as duration and onset-interval tokens (REMIOffsets, time-shift tokens) in the vocabulary. In the discrete FM formulation, the interpolant $(1-t) e_{x_0} + t e_{x_1}$ smoothly deforms rhythmic patterns between noise and data, so onset timing and duration distributions emerge from the learned velocity field. Cascaded FM can separate rhythm (time-shift tokens) and pitch (note tokens) into parallel streams, giving independent control.
+
+**HARMONY**: Multi-voice chord symbols or chord-conditioning tokens are concatenated or cross-attended into the flow's conditioning context. The OT path ensures that each generated token trajectory moves monotonically toward its corpus-derived chord assignment. Per-voice flows with shared section/chord conditioning produce harmonically coherent output across voices. The cascaded architecture's prior FM can map text descriptions of harmony (e.g., "I–V–vi–IV in C major") to a conditioning vector that steers the decoder FM.
+
+**STRUCTURE**: The flow's trajectory through latent space inherently reflects macro-form because the conditional vector field $u_t(x \mid x_1)$ regresses the entire sequence $x_1$ from $x_0$ — the full piece is the target. Section boundaries emerge from section-embedding tokens embedded at specific time indices along the flow. Segment-wise FM (one FM per section, with cross-section conditioning) provides explicit macro-form control: each section's $x_1$ is drawn from the corresponding section type (verse/chorus/bridge), and a tempo/form schedule conditions the segment transitions. The ODE sampling is continuous and differentiable, so form-level features propagate smoothly.
+
+**TEXTURE**: In multi-voice generation, the joint data distribution $p_1(x^{(1)}, x^{(2)}, \ldots, x^{(V)})$ encodes correlation structure across voices. The flow learns this joint distribution directly: each training sample is a multi-voice concatenation, and the vector field captures inter-voice dependencies (harmonic alignment, call-response, hocket). Voice separation can be achieved by independent flows with a coupling term, or by a single flow over a flattened multi-voice token sequence. Texture density is the vocabulary activity rate at the decoded output.
+
+### UnitMatrix Integration (Voices & Sections)
+
+**Voices**: Each voice $v$ contributes its token sequence $s^{(v)} = (s^{(v)}_1, \ldots, s^{(v)}_L)$ to the flattened token sequence $s = (s^{(1)}, s^{(2)}, \ldots, s^{(V)})$ of length $V \cdot L$. The flow operates on the embedding of this flattened sequence. Voice separation emerges because each token's embedding preserves its voice identity (via a learned voice-ID embedding added to the token embedding). At generation time, the decoded output is split back per voice and decoded to MusicEvents. Percussion tracks can be handled as a separate token vocabulary or as a specialized 2-state channel.
+
+**Sections**: Each section $m$ maps to a span of token indices in the flattened sequence. Section-types (A, B, bridge, C) are encoded as section-conditioning tokens concatenated to the flow's input, or as separate prior flows in the cascaded architecture. The macro-form $\mathcal{F} = [m_1, m_2, \ldots, m_M]$ defines a sequence of section-specific conditioning vectors. Transition sections use linear interpolation of conditioning vectors $(1-\alpha)c_{m} + \alpha c_{m+1}$.
+
+**Cell filling**: For each cell (voice $v$, section $m$), the token span at indices $[(v-1) \cdot L + (m-1) \cdot l + 1, \ldots, (v-1) \cdot L + m \cdot l]$ (where $l = L/M$ is the tokens-per-section) is filled by the flow trajectory. The complete multi-voice, multi-section token sequence is generated in a single forward ODE integration pass. Post-generation, tokens are decoded to $MusicEvent$ objects: pitch from token vocabulary lookup, duration from time-shift token accumulation, onset from cumulative time-shifts.
+
+### Pitfalls
+
+1. **ODE integration cost**: Compared to autoregressive methods (054 ATS, $\mathcal{O}(N)$), FM requires $\mathcal{O}(T \cdot d)$ ODE steps ($T \approx 50\text{–}500$ steps, $d = \text{latent dimension}$). Faster solvers (DPM-Solver, consistency models) mitigate this but add implementation complexity. The CFM loss is simulation-free, but sampling requires full ODE integration.
+
+2. **Discrete token handling**: The fundamental tension between FM's continuous-time continuous-space formulation and symbolic music's discrete token space. Embedding-based approaches (project to $\mathbb{R}^d$, run FM, decode) add a learned decoding step that can introduce artifacts. Discrete FM (simplex interpolation) exactly preserves discreteness but requires specialized architectures (transformer over simplex states).
+
+3. **Voice independence control**: A single flattened sequence couples all voices into one trajectory, making independent variation challenging. Decoupled flows (one per voice) with a coupling potential (cross-attention between voice flows) is the recommended design but doubles training/sampling cost per voice.
+
+4. **Training data requirements**: FM requires a large corpus of full-length multi-voice pieces to learn the joint distribution $p_1$. Section-level conditioning reduces this requirement per section type, but the total data diversity must cover all sections.
+
+5. **Inversion cost**: Unlike 072 NFC (exact invertibility), FM's flow is only approximately invertible through the reverse ODE. The ODE integration error accumulates, so exact reconstruction of training samples requires many solver steps.
+
+6. **Long-sequence handling**: FM's latent vector dimension scales with sequence length. For pieces with $V \cdot L > 2048$ tokens, the transformer processing the flattened sequence becomes memory-bound. Hierarchical FM (segment-level + token-level) or autoregressive decoding of the FM output (hybrid FM+ATS) mitigates this.
+
+7. **Evaluation and comparison**: FM's deterministic ODE sampling (given a noise seed) is easily compared to 047 DSMG (stochastic SDE) and 072 NFC (exact density). Metrics should track both sample quality (FAD, KL divergence of pitch/rhythm distributions) and computational cost per sample. FM is typically 2–5$\times$ faster at inference than 047 DSMG with equivalent quality (due to fewer function evaluations), but slower than 054 ATS.
+
+# Sound Production Method SP-100 — Volterra Series Synthesis (VSS)
+
+### Source
+Araujo-Simon, J. (2023). "Compositional nonlinear audio signal processing with Volterra series." arXiv:2308.07229. — Schetzen, M. (1980/2006). *The Volterra and Wiener Theories of Nonlinear Systems*. Krieger / Wiley. — Rugh, W. J. (1981). *Nonlinear System Theory: The Volterra/Wiener Approach*. Johns Hopkins. — Orcioni, S. et al. (2018). "Identification of Volterra Models of Tube Audio Devices Using Multiple Tone Excitation." *J. Audio Eng. Soc.* — Bussgang, J. J., Ehrman, L. & Graham, J. W. (1974). "Analysis of nonlinear systems with multiple inputs." *Proc. IEEE* 62(8), 1088–1119.
+
+### Layer
+**absolute** — sound production (post-processing / DSP). The Volterra series is a functional expansion that generalizes the convolution integral (linear system theory) to nonlinear systems with memory. It operates on audio buffers as a post-process or inline effects module, transforming rendered UnitMatrix tracks via parallel multidimensional convolutions. The candidate code path is `sound/effects/volterra_synthesis.py`, pluggable into `workflows.musicom_workflow.produce(method="SP-100")`.
+
+### Description
+**Volterra Series Synthesis (VSS)** uses the Volterra series expansion — a Taylor series with memory — to model and generate nonlinear audio transformations in a mathematically rigorous framework. The output $y(t)$ is the sum of a linear convolution (1st-order kernel, equivalent to a standard FIR filter) plus higher-order multidimensional convolutions (2nd, 3rd, … order Volterra kernels) of the input $x(t)$:
+
+$$y(t) = h_0 + \int_{-\infty}^{\infty} h_1(\tau_1) x(t-\tau_1) \, d\tau_1$$
+$$+ \iint_{-\infty}^{\infty} h_2(\tau_1,\tau_2) x(t-\tau_1) x(t-\tau_2) \, d\tau_1 d\tau_2$$
+$$+ \iiint_{-\infty}^{\infty} h_3(\tau_1,\tau_2,\tau_3) x(t-\tau_1) x(t-\tau_2) x(t-\tau_3) \, d\tau_1 d\tau_2 d\tau_3$$
+$$+ \cdots$$
+
+where:
+- $h_p(\tau_1, \ldots, \tau_p)$ is the **$p$-th order Volterra kernel** — the nonlinear impulse response of order $p$, a $p$-dimensional function characterizing how the system interacts with $p$ delayed copies of the input.
+- $h_0$ is the DC (zero-order) term.
+- The first-order kernel $h_1(\tau)$ is the linear impulse response (standard LTI filter).
+- The second-order kernel $h_2(\tau_1,\tau_2)$ captures quadratic nonlinearities — intermodulation products, harmonic doubling, asymmetric saturation.
+- The third-order kernel $h_3(\tau_1,\tau_2,\tau_3)$ captures cubic nonlinearities — odd-harmonic generation, compression, crossover distortion.
+
+**Key insight — generalization of all polynomial nonlinearities with memory**: The Volterra series is the most general representation of a nonlinear system that is *analytic* (has a convergent power-series expansion) and *fading-memory* (the effect of past inputs decays to zero). It subsumes:
+- **Memoryless waveshaping** (SP-019, SP-062): $h_p$ becomes a $p$-dimensional diagonal (all $\tau_i$ equal) — a pure monomial $x(t)^p$ with coefficient $h_p(0,\ldots,0)$.
+- **Hammerstein models**: $h_p(\tau_1,\ldots,\tau_p) = c_p \cdot g(\tau_1)\delta(\tau_1-\tau_2)\cdots\delta(\tau_1-\tau_p)$ — static nonlinearity followed by a linear filter.
+- **Wiener models**: $h_1(\tau_1,\ldots,\tau_p) = a_p \cdot \prod_i g(\tau_i)$ — linear filter followed by static nonlinearity.
+- **Parallel bilinear filters**: second-order Volterra kernels with sparse support.
+- **Analog tape saturation** (SP-049, SP-088): hysteresis is *not* a Volterra system (it has non-fading memory), but mild saturation is well approximated by a 3rd-order kernel.
+- **Tube amplifier distortion** (SP-051 target): the Volterra kernel identification approach is a direct competitor to WDF circuit modeling, offering a black-box alternative when the circuit topology is unknown.
+
+### Technical Mechanics
+
+#### 1. Discrete-Time Volterra Series
+
+For a discrete-time system with input $x[n]$ and output $y[n]$, the Volterra series with finite memory $M$ (causal, length-$M$ kernels) is:
+
+$$y[n] = h_0 + \sum_{m_1=0}^{M-1} h_1[m_1] x[n-m_1]$$
+$$+ \sum_{m_1=0}^{M-1} \sum_{m_2=0}^{M-1} h_2[m_1,m_2] x[n-m_1] x[n-m_2]$$
+$$+ \sum_{m_1=0}^{M-1} \sum_{m_2=0}^{M-1} \sum_{m_3=0}^{M-1} h_3[m_1,m_2,m_3] x[n-m_1] x[n-m_2] x[n-m_3]$$
+$$+ \cdots$$
+
+Each kernel $h_p[m_1,\ldots,m_p]$ is a $p$-dimensional array of size $M^p$. The total number of coefficients grows as $O(M^p)$ — exponential in the kernel order $P$. Practical implementations use $P \le 5$ and $M \le 64$.
+
+#### 2. Symmetric Kernel Representation
+
+Volterra kernels can be assumed *symmetric* without loss of generality ($h_p$ is invariant under permutation of its indices), because any asymmetric kernel can be replaced by its symmetrized version without changing the input-output relationship. Symmetry reduces the number of unique coefficients from $M^p$ to $\binom{M+p-1}{p}$.
+
+#### 3. Frequency-Domain Volterra Kernels
+
+The $p$-th order Volterra kernel in the frequency domain is the $p$-dimensional Fourier transform of $h_p$:
+
+$$H_p(f_1,\ldots,f_p) = \mathcal{F}^{(p)}\{h_p(\tau_1,\ldots,\tau_p)\}$$
+
+The output spectrum at frequency $f$ receives contributions from all $p$-tuples of frequencies $(f_1,\ldots,f_p)$ such that $f_1 + \cdots + f_p = f$:
+
+$$Y(f) = H_1(f) X(f) + \sum_{f_1+f_2=f} H_2(f_1,f_2) X(f_1) X(f_2)$$
+$$+ \sum_{f_1+f_2+f_3=f} H_3(f_1,f_2,f_3) X(f_1) X(f_2) X(f_3) + \cdots$$
+
+This reveals that:
+- **Second-order kernels** produce sum/difference frequencies $f_1 \pm f_2$ — intermodulation distortion, subharmonics, and octave-doubling.
+- **Third-order kernels** produce triple-beat frequencies $f_1 \pm f_2 \pm f_3$ — the primary mechanism of tube amplifier saturation and compression.
+- The diagonal of $H_p$ (all $f_i$ equal) gives the $p$-th harmonic distortion curve.
+
+#### 4. Diagonal and Pruned Kernel Structures
+
+Because full $M^p$ kernels are computationally prohibitive, practical VSS uses **pruned kernel structures**:
+
+| Structure | # Coefficients | Typical Use |
+|---|---|---|
+| Full symmetric | $\binom{M+P}{P}$ | Highest accuracy, expensive |
+| Diagonal-only | $P \cdot M$ | Memoryless distortion + per-tap FIR |
+| Banded diagonal | $< P \cdot M \cdot W$ | $W$-width off-diagonal coupling |
+| Product-of-1D | $P \cdot M$ (separable) | Hammerstein model |
+| Parallel-trilinear | $P \cdot K \cdot M$ | $K$-term parallel decomposition |
+| Laguerre basis | $P \cdot L$ ($L\ll M$) | Orthogonal basis expansion |
+
+The **Laguerre basis expansion** is the most practical for real-time use: expand each kernel onto $L$ orthonormal Laguerre functions (Marmarelis 1993, *Nonlinear Dynamic Modeling of Physiological Systems*):
+
+$$h_p[m_1,\ldots,m_p] \approx \sum_{j_1=1}^{L} \cdots \sum_{j_p=1}^{L} c_p(j_1,\ldots,j_p) \ell_{j_1}[m_1] \cdots \ell_{j_p}[m_p]$$
+
+where $\ell_j[m]$ is the $j$-th discrete Laguerre function. With $L \approx 5$–$10$ and $P=3$, the total coefficient count drops from $M^3$ (262k for $M=64$) to $L^P$ (125 for $L=5$) — a 2000× reduction. The Laguerre filter outputs $L_j[n] = \sum_m \ell_j[m] x[n-m]$ are computed by cascaded first-order IIR filters ($\mathcal{O}(L)$ per sample), and the Volterra output is the sum over all $p$-tuples of $c_p$ times the product of the corresponding $L_j$.
+
+#### 5. Kernel Identification (Learning)
+
+Given input-output data $(x[n], y[n])$, the Volterra kernels are identified by solving a linear least-squares problem:
+
+1. Construct the $p$-th order regressor matrix $X_p$ whose rows contain all $p$-fold products of delayed inputs $x[n-m_1]\cdots x[n-m_p]$ at all $M^p$ index combinations.
+2. Stack all regressor matrices: $X = [\mathbf{1}, X_1, X_2, \ldots, X_P]$, where $\mathbf{1}$ is the DC term.
+3. Solve $\min_h \| y - X h \|_2^2$ via least squares, ridge regression (Tikhonov), or LASSO (sparse kernel selection).
+
+For *creative* (non-emulation) use, kernels can be **designed directly** rather than identified:
+- $h_1$ = user-designed FIR (linear timbre EQ).
+- $h_2$ = cross-term kernel for intermodulation texture (set specific $(\tau_1,\tau_2)$ pairs to non-zero values to create targeted harmonic sidebands).
+- $h_3$ = cubic distortion kernel with tunable compression curve.
+
+#### 6. Computational Complexity
+
+| Order $P$ | Full $M=64$ | Diagonal $M=64$ | Laguerre $L=5$ |
+|---|---|---|---|
+| 1 (linear) | 64 | 64 | 5 |
+| 2 (quadratic) | 2080 | 128 | 25 |
+| 3 (cubic) | 45,760 | 192 | 125 |
+| 4 (quartic) | 730,400 | 256 | 625 |
+| **Per-sample cost** | $O(M^P)$ | $O(P \cdot M)$ | $O(P \cdot L)$ |
+
+The **Laguerre-pruned Volterra** is $\mathcal{O}(P \cdot L)$ per sample — the same order as a modest FIR filter, enabling real-time use even at $P=5, L=10$ (50 multiply-adds per sample).
+
+### Musical Elements Framework
+
+**PITCH**: The Volterra kernels act on the *waveform* directly, so pitch relationships emerge from spectral content. The first-order kernel $h_1$ is an EQ/filter — it can boost or cut specific pitch registers. The second-order kernel $h_2$ generates sum/difference frequencies: two input pitches $f_1, f_2$ produce intermodulation products at $f_1 \pm f_2$. When $f_1 \approx f_2$, this produces subharmonics (octave doubling, phantom bass). The third-order kernel $h_3$ generates cubic intermodulation — the primary mechanism of even-order vs odd-order harmonic control. By tuning $h_2$ vs $h_3$ dominance, the user selects between even-harmonic-rich (warm, tube-like) and odd-harmonic-rich (bright, transistor-like) timbres. The kernels are *pitch-independent* — the same kernel applied to different pitches produces consistent spectral coloring, making VSS a *timbre transform* rather than a pitch-specific synthesis.
+
+**RHYTHM**: VSS is a per-sample post-process, so it is largely rhythm-transparent — the timing of onsets passes through unchanged. However, the nonlinear terms introduce *amplitude-dependent phase shifts* and *transient intermodulation*: a sharp transient (percussive hit) passed through a 3rd-order kernel generates a short burst of intermodulation products that trails the attack, creating a decay-colored \"exciter\" effect. The Laguerre basis introduces a rhythmic-smear through the $L_j[n]$ IIR cascades, which can smooth or roughen transient edges depending on the Laguerre time-scale parameter $\alpha$. Rhythm is thus indirectly shaped by the choice of kernel memory length $M$ and Laguerre pole $\alpha$.
+
+**HARMONY**: Intermodulation between simultaneously sounding pitches creates *emergent harmonic content*. A dyad $(f_1, f_2)$ passed through a 2nd-order kernel produces $f_1+f_2$ (sum tone, often dissonant) and $|f_1-f_2|$ (difference tone, can be subharmonic). In a tonal context, a perfect fifth $f_1=1.5f_1$ generates $2.5f_1$ (octave+M6 — consonant) and $0.5f_1$ (sub-octave — reinforces the root). A tritone $f_1=\sqrt{2}f_1$ generates irrational sum/difference frequencies — musically inharmonic, used for atonal/cluster textures. The VSS harmonic character is *input-spectrum-dependent*: the same kernel applied to a major chord vs a minor chord vs a cluster produces qualitatively different intermodulation spectra. This makes VSS an **adaptive harmonizer** — the output harmony is a nonlinear function of the input harmony.
+
+**STRUCTURE**: VSS operates at the sample level and is structurally transparent across sections. The macro-form applies through **parameter scheduling**: kernel coefficients $h_p$, memory length $M$, Laguerre pole $\alpha$, and kernel structure (diagonal vs full) are all time-varying per section. Each section of the UnitMatrix can have its own VSS patch — verse may use a mild 2nd-order kernel (warmth, even harmonics), chorus may switch to a strong 3rd-order kernel (bright distortion, odd harmonics), and bridge may use a designed $h_2$ cross-kernel (intermodulation texture). Section transitions interpolate kernel coefficients. The per-sample cost is constant regardless of section complexity.
+
+**TEXTURE**: VSS texture is the density and distribution of intermodulation products. A **sparse kernel** (few non-zero coefficients) produces targeted harmonic enhancement — the timbre is clearly the original instrument plus a controlled set of harmonics. A **dense kernel** (all coefficients non-zero) produces a dense intermodulation fog — the output becomes increasingly independent of the input, approaching noise at high nonlinearity. The kernel energy $\|h_p\|_2$ relative to $\|h_1\|_2$ is a one-knob texture dial: ratio near 0 → transparent; ratio near 1 → heavily processed/saturated; ratio > 1 → chaotic intermodulation. The Laguerre pole $\alpha$ controls texture *smoothing*: $\alpha \to 0$ (short memory) gives fast, localized intermodulation (gritty); $\alpha \to 1$ (long memory) gives smeared, diffuse intermodulation (washy).
+
+### UnitMatrix Integration (Voices & Sections)
+
+**Voices**: Each voice $v$ in the UnitMatrix is rendered independently through the musicom engine (FluidSynth or other SP method) to produce a stereo audio buffer $x_v[t]$. VSS is then applied as a per-voice post-process (or optionally to the master sum). Per-voice VSS parameters allow:
+- **Voice 0 (Lead)**: $h_2$ = 0.1 (gentle even-harmonic warmth), $h_3$ = 0 (transparent).
+- **Voice 1 (Bass)**: $h_2$ = 0.3 (octave doubling, subharmonic generation), $h_3$ = 0.05 (mild odd-harmonic edge).
+- **Voice 2 (Pad)**: dense Laguerre kernel ($L=8$, $\alpha=0.9$) for diffuse intermodulation wash.
+- **Voice 3 (Percussion)**: $h_1$ only (linear, transparent) — percussion does not benefit from intermodulation.
+
+For **master bus processing**, all voice renders are mixed, then VSS is applied to the summed stereo buffer. Master VSS creates cross-voice intermodulation — the nonlinear interaction between simultaneous Lead, Bass, Pad, and Percussion — producing emergent sum/difference textures that no single voice generates alone. This cross-term intermodulation is the unique contribution of VSS to the UnitMatrix workflow: **inter-voice nonlinear coupling** without explicit cross-voice routing.
+
+**Sections**: Each section $m$ carries its own VSS parameter set:
+- `kernel_structure`: "diagonal", "full", "laguerre", "hammerstein"
+- `h1_coeffs`: $M$-length array (linear FIR filter)
+- `h2_magnitude`, `h3_magnitude`: scalar or vector energy controls
+- `laguerre_pole`: $\alpha \in [0, 1)$ (0 = instantaneous, 1 = infinite memory)
+- `laguerre_order`: $L \in [3, 20]$ (kernel resolution)
+- `kernel_seed`: if using randomly designed kernels, a seed for reproducibility
+
+Section transitions use linear interpolation of all kernel parameters across the section boundary (1-bar crossfade).
+
+**Cell filling**: VSS does *not* fill MusicUnit cells — it is a post-process applied to the rendered audio output of the UnitMatrix composer. The workflow is:
+1. `UnitMatrixComposer` generates MIDI (symbolic, per-voice).
+2. `produce(method="SP-001")` or similar renders MIDI → Audio via FluidSynth.
+3. `produce(method="SP-100")` applies VSS as a post-process transform on the audio buffer(s):
+   - If `per_voice=True`: per-voice buffers are processed independently with per-voice VSS params.
+   - If `per_voice=False`: the master mix is processed with a single VSS patch.
+4. The output is a new audio buffer with intermodulation harmonics, saturation, and spectral enrichment applied while preserving the original note structure.
+
+### Pitfalls
+
+1. **Computational cost of full kernels**: A 3rd-order full Volterra kernel with $M=64$ requires 45,760 coefficients and $\mathcal{O}(M^3)$ per sample — prohibitive for real-time use. The Laguerre basis expansion ($L=5$ → 125 coefficients, $\mathcal{O}(L)$ per sample) is the only practical path for multi-voice rendering. Always prefer Laguerre-pruned or diagonal kernels in production.
+
+2. **Stability**: Unlike linear FIR filters (always stable), Volterra series can be unstable even with bounded inputs. The feedback-free (feedforward) structure is unconditionally stable, but when Volterra kernels are used *inside* a feedback loop (e.g., for self-oscillating distortion), the composed series may diverge. Use the DC-free structure (force $h_0 = 0$) and apply energy-bounding: if $\sum_p \|h_p\|_2 \cdot \|x\|_\infty^p > \text{threshold}$, normalize the output.
+
+3. **Kernel identification ill-conditioning**: The regressor matrix $X$ for kernel identification is often ill-conditioned because $x[n-m_1]x[n-m_2]$ and $x[n-m_1']x[n-m_2']$ are highly correlated for nearby delays. Ridge regression ($\lambda \|h\|_2^2$) or LASSO ($\lambda \|h\|_1$) regularization is essential. Use orthogonal multitone excitation signals (Schoenborn 2002; Orcioni et al. 2018) for well-conditioned identification.
+
+4. **Phase distortion**: Higher-order Volterra kernels introduce frequency-dependent phase shifts that are not musically intuitive. A 2nd-order kernel generating a sum tone $f_1+f_2$ with a specific phase $e^{j(\phi_1+\phi_2)}$ may cancel or reinforce the natural harmonic at that frequency depending on the original instrument's phase response. For creative use, ignore phase and use magnitude-only kernel design; for emulation, kernel identification automatically captures phase.
+
+5. **Laguerre pole sensitivity**: The Laguerre pole $\alpha$ critically affects model quality. $\alpha$ too close to 0 wastes memory (rapid decay, no long-term structure captured); $\alpha$ too close to 1 causes numerical instability (Laguerre filters approach oscillators). Typical range: $\alpha \in [0.3, 0.9]$. Marmarelis (1993) recommends $\alpha = 0.5$ as a default; tune by sweeping $\alpha$ and measuring the prediction MSE on a validation set.
+
+6. **No zero-delay feedback (ZDF) emulation**: The feedforward Volterra series cannot exactly reproduce feedback-based nonlinear circuits (e.g., the Moog ladder filter in SP-029, diode clipper with feedback in SP-051). For feedback-topology emulation, combine VSS with WDF (SP-051) or use a recurrent Volterra model (Volterra with a feedback kernel, increasing coefficient count further).
+
+7. **Separation of concerns**: As a post-process, VSS cannot fix or improve poor MIDI generation. Apply VSS *after* the symbolic layer is finalized (the UnitMatrix is filled and validated). If the symbolic content is harmonically empty, the intermodulation products will also be empty — VSS enriches existing content, it does not create content from nothing.
