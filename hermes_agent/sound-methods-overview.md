@@ -77,7 +77,10 @@ comparable to, and how do I use it in a workflow?*
 || `sound/generators/euclidean_fill_seq.py` | EuclideanFillSequencer | sequencing (rhythm) | NI Maschine 3.7 Euclidean Sequencer | pulses+steps+fill_density+rotation → hit pattern w/ primary+fills → MIDI |
 || `sound/modular/random8.py` | Random8, RandomChannel | modular (random CV) | Befaco/Mylar Melodies RANDOM8 | 8 channels, 15 quantize scales, 8 styles → quantized random CV streams |
 | `sound/synthesis/string_scales.py` | ArplusVoice, StringVoice | synthesis (strings) | Zlosynth Arplus | chord/scale pool + arpeggiation → plucked-string (KS) scale-quantized arps |
-| `sound/modular/wandering.py` | WanderingEngine, Portal, DriftCloudsVoice | modular (drift) | Sound Dust Drift Clouds | nested non-LFO wander + Portal jumps → Cloud/Shadow layer balance drift |
+|| `sound/modular/wandering.py` | WanderingEngine, Portal, DriftCloudsVoice | modular (drift) | Sound Dust Drift Clouds | nested non-LFO wander + Portal jumps → Cloud/Shadow layer balance drift |
+|| `sound/effects/haas_zone.py` | HaasZoneProcessor, ModulationLFO, EnvelopeFollower, BandpassFilter | effects (delay) | Verbos Haas Zone Processor, Marshall Time Modulator | mono audio input → multi-tap modulated short-delay with feedback BPF |
+|| `sound/effects/mega_morph.py` | MegaMorph, MultiSegmentEnv, EnvSegment | modulation | Sync Audio MegaMorph | multi-segment envelope lanes → parameter modulation dict (6 shapes, 4 modes, tempo-sync) |
+|| `sound/generators/fractal_seq.py` | FractalSequenceGenerator, ThueMorseMelody, FibonacciRhythm, SierpinskiAccent, LogisticMapMelody | generative (sequence) | Kaona B.A.C.H. FRACTAL | fractal/chaotic system params → FractalEvent list + MIDI file |
 | `sound/synthesis/air_pipe.py` | AirPipe, AirPipePatch | synthesis (physical, aerophone) | Modartt Airteq | pipe length + air pressure/mod → flue-pipe audio (open/stopped modes, overblow, MPE air) |
 | `sound/effects/glitch_chopper.py` | GlitchChopper, ChannelChopper | effects (glitch) | GlitchShredder | stereo audio + bpm + glitch/reverse prob → transient-snapped 16-slot recombination |
 | `sound/generators/harmony_writer.py` | HarmonyWriter | generators (harmony/arrangement) | HarmonyKeen | monophonic melody + key + style → rule-based harmony parts (phrase/cadence analysis, SATB voice-leading) |

@@ -108,8 +108,9 @@ Classification of active Musicom composition methods categorized by their primar
 | **098** | concrete | Multi-Objective Evolutionary Pareto Composition (MOEPC) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Pareto-guided, multi-objective fitness) | Grid-Locked / Continuous | Macro / Pareto Front | $\mathcal{O}(I \cdot P \cdot N \cdot M)$ | Evolves multiple conflicting musical objectives (harmonic quality, melodic quality, rhythmic coherence, voice independence) via NSGA-II, returning a Pareto front of trade-off compositions. The front itself defines macro-form. |
 | **099** | abstract | Self-Similarity Matrix Composition (SSMC) | **Rules-Based** | Structure, Texture, Pitch, Rhythm | Weak (Template-guided) | Grid-Locked / Continuous | Macro / Form | $\mathcal{O}(N^2 \cdot M)$ | Designs macro-form repetition structure as a self-similarity matrix (SSM) — pairwise similarity targets between all time positions. Solves the inverse problem: optimize a feature sequence whose SSM matches the target, then decode to per-bar feature profiles. Novelty curve identifies section boundaries for UnitMatrix layout. First abstract-layer form-design method: feeds rules/ssm_composition.py. |
 | **100** | concrete | Active Inference Composition (AIFC) | **AI-Driven** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Prior-guided, HOME/LIFT/TENSE/TURN) | Grid-Locked / Continuous | Macro / Generative Model Horizon | $\mathcal{O}(T \cdot d^2)$ per step, $\mathcal{O}(T \cdot D \cdot d^2)$ learn | Casts composition as closed-loop active inference: a multi-level hierarchical generative model drives note-by-note event selection by minimizing expected free energy. Prior preferences encode tonal gravity, metric binding, voice-leading, and macro-form. Multi-agent (one per voice) with shared form + harmonic state. |
-| **101** | concrete | Flow Matching Composition (FMC) | **AI-Driven** | Pitch, Rhythm, Harmony, Structure, Texture | Variable (Prior/Conditioning-guided) | Continuous / Continuous | Macro / Full-Sequence Trajectory | $\mathcal{O}(T \cdot d)$ training, $\mathcal{O}(T \cdot d)$ sampling | Vector-field regression (CFM) on token embeddings: deterministic ODE integration pushes noise $\rightarrow$ structured multi-voice token sequences. |
-|
+|| **101** | concrete | Flow Matching Composition (FMC) | **AI-Driven** | Pitch, Rhythm, Harmony, Structure, Texture | Variable (Prior/Conditioning-guided) | Continuous / Continuous | Macro / Full-Sequence Trajectory | $\mathcal{O}(T \cdot d)$ training, $\mathcal{O}(T \cdot d)$ sampling | Vector-field regression (CFM) on token embeddings: deterministic ODE integration pushes noise $\rightarrow$ structured multi-voice token sequences. |
+|| **102** | concrete | Cross-Entropy Method Composition (CEMC) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Elite-guided) | Continuous / Fluid | Macro / Distribution | $\mathcal{O}(I \cdot N \cdot L)$ | Iterative distribution optimization: sample sequences, keep elite (top fitness), refit parametric distribution via CE minimization. |
+||
 |### Source
 |Sakellariou, J., Tria, F., Loreto, V. & Pachet, F. (2017). "Maximum entropy models capture melodic styles." *Scientific Reports* 7, 9172. arXiv:1610.03414. — Jaynes, E. T. (1957). "Information theory and statistical mechanics." *Physical Review* 106, 620–630.
 
@@ -22236,4 +22237,92 @@ Section transitions use linear interpolation of all kernel parameters across the
 
 6. **No zero-delay feedback (ZDF) emulation**: The feedforward Volterra series cannot exactly reproduce feedback-based nonlinear circuits (e.g., the Moog ladder filter in SP-029, diode clipper with feedback in SP-051). For feedback-topology emulation, combine VSS with WDF (SP-051) or use a recurrent Volterra model (Volterra with a feedback kernel, increasing coefficient count further).
 
-7. **Separation of concerns**: As a post-process, VSS cannot fix or improve poor MIDI generation. Apply VSS *after* the symbolic layer is finalized (the UnitMatrix is filled and validated). If the symbolic content is harmonically empty, the intermodulation products will also be empty — VSS enriches existing content, it does not create content from nothing.
+7. **Separation of concerns**: As a post-process, VSS cannot fix or improve poor MIDI generation. Apply VSS *after* the symbolic layer is finalized (the UnitMatrix is filled and validated). If the symbolic content is harmonically empty, the intermodulation products will also be empty — VSS enriches existing content, it does not create content from nothing.### Source
+Rubinstein, R. Y. (1997). "Optimization of computer simulation models with rare events." *European Journal of Operational Research* 99, 38–45. — Rubinstein, R. Y. & Kroese, D. P. (2004). *The Cross-Entropy Method: A Unified Approach to Combinatorial Optimization, Monte-Carlo Simulation, and Machine Learning*. Springer. — de Boer, P.-T., Kroese, D. P., Mannor, S. & Rubinstein, R. Y. (2005). "A tutorial on the cross-entropy method." *Annals of Operations Research* 134, 655–680. arXiv:0408054.
+
+### Layer
+**concrete** — generates concrete pitch, rhythm, harmony, and texture events that fill UnitMatrix cells. The CEM distribution is defined directly over sequences of musical tokens (pitch classes, duration labels, chord symbols, velocity levels), and each iteration's elite samples are decoded into actual cell contents. Feeds generators/ via a stochastic optimization loop.
+
+### Paradigm
+**Stochastic** — the method is driven by random sampling from a parametric distribution, iterative selection of elite samples, and distribution update via cross-entropy minimization. There are no deterministic rewrite rules, no nature-inspired dynamics, and no learned neural parameters — the randomness is explicit and controlled by the elite ratio and smoothing factor.
+
+### Description
+**Cross-Entropy Method Composition (CEMC)** treats the task of filling a UnitMatrix as a stochastic optimization problem: find the sequence of musical tokens that maximizes a weighted musical fitness function $S(x)$. Instead of solving this directly, CEMC maintains a parametric probability distribution $f(\\cdot; \\theta)$ over the space of possible sequences and iteratively refines it toward regions of high fitness.
+
+The algorithm proceeds in four steps per iteration $t$:
+
+1. **Sample**: Draw $N$ candidate sequences $X_1, \\ldots, X_N$ i.i.d. from $f(\\cdot; \\theta_{t-1})$. Each sequence is a complete filling of the UnitMatrix: for $V$ voices and $S$ sections, the sequence concatenates per-cell token arrays (pitch-class, duration, velocity, chord-role) into a flat vector of length $L = V \\times S \\times K$ where $K$ = tokens per cell.
+
+2. **Evaluate**: Compute the musical fitness $S(X_i)$ for each candidate. The fitness function is a weighted sum of component scores:
+   $$S(X) = w_{\\text{tonal}} \\cdot S_{\\text{tonal}} + w_{\\text{rhythm}} \\cdot S_{\\text{rhythm}} + w_{\\text{harmony}} \\cdot S_{\\text{harmony}} + w_{\\text{voice}} \\cdot S_{\\text{voice}} + w_{\\text{texture}} \\cdot S_{\\text{texture}} + w_{\\text{structure}} \\cdot S_{\\text{structure}}$$
+   where:
+   - $S_{\\text{tonal}}$ rewards proximity to a target scale/key (HOME/LIFT/TENSE/TURN per section)
+   - $S_{\\text{rhythm}}$ rewards metric coherence (downbeat alignment, groove stability, syncopation balance)
+   - $S_{\\text{harmony}}$ rewards functional chord progressions (cadential closure, root motion parsimony)
+   - $S_{\\text{voice}}$ rewards voice-leading smoothness (stepwise motion, no parallel fifths, crossing avoidance)
+   - $S_{\\text{texture}}$ rewards target density and independence (bounded event count per window, voice separation)
+   - $S_{\\text{structure}}$ rewards section-contrast and form adherence (repetition index vs. novelty)
+
+3. **Select**: Sort candidates by $S(X)$ descending. Keep the top $N_{\\text{elite}} = \\lceil \\rho N \\rceil$ samples (elite set $\\mathcal{E}$), where $\\rho \\in (0,1)$ is the elite ratio (typically $\\rho = 0.05$-$0.2$). Optionally, also keep the $\\gamma_t = \\min_{i \\in \\mathcal{E}} S(X_i)$ as the threshold parameter.
+
+4. **Update**: Find new parameters $\\theta_t$ that minimize the Kullback–Leibler divergence $D_{\\text{KL}}(\\mathbb{I}_{\\{S(X) \\geq \\gamma_t\\}} \\, \\| \\, f(\\cdot; \\theta))$ between the optimal importance sampling distribution and the parametric family. When $f$ belongs to the natural exponential family (e.g., multivariate Gaussian for continuous tokens, categorical/product distribution for discrete tokens), this reduces to maximum likelihood estimation on the elite set:
+   $$\\theta_t = \\arg\\max_\\theta \\sum_{i \\in \\mathcal{E}} \\log f(X_i; \\theta)$$
+
+   To prevent premature convergence (mode collapse), a smoothing factor $\\alpha \\in (0,1)$ damps the update:
+   $$\\theta_t = \\alpha \\cdot \\theta^{\\text{MLE}} + (1-\\alpha) \\cdot \\theta_{t-1}$$
+
+   For discrete token distributions (categorical over $q$ symbols), the MLE update for a given position's categorical parameter $p_j$ (probability of symbol $j$) is:
+   $$p_j^{(t)} = \\frac{\\sum_{i \\in \\mathcal{E}} \\mathbb{I}\\{X_i = j\\} + \\lambda}{|\\mathcal{E}| + q \\lambda}$$
+   where $\\lambda$ is a Laplace-smoothing pseudo-count that prevents zero probabilities.
+
+   For continuous token distributions (e.g., velocity, microtiming offset), the MLE update for mean $\\mu$ and variance $\\sigma^2$ at each token position is:
+   $$\\mu^{(t)} = \\frac{1}{|\\mathcal{E}|} \\sum_{i \\in \\mathcal{E}} X_i$$
+   $$\\sigma^{2(t)} = \\frac{1}{|\\mathcal{E}|} \\sum_{i \\in \\mathcal{E}} (X_i - \\mu^{(t)})^2$$
+
+The algorithm iterates until one of: (a) maximum iterations $T_{\\max}$ reached, (b) the elite fitness variance drops below $\\varepsilon$, or (c) $\\|\\theta_t - \\theta_{t-1}\\| < \\delta$.
+
+**Key insight**: CEM bridges stochastic search and parametric optimization. Unlike genetic algorithms (003) which use mutation/crossover operators on a fixed-size population, CEM maintains an explicit probability distribution and updates it analytically via CE minimization. Unlike simulated annealing (055) which accepts/rejects single moves via a temperature schedule, CEM evaluates a full batch of parallel candidates and refits the distribution. Unlike reinforcement learning (062) which trains a policy via rollouts and value functions, CEM has no value network, no bootstrapping, and no temporal-difference learning — it is a pure black-box optimization with a probability-model twist.
+
+**Multi-voice extension**: For $V$ voices, the distribution factorizes as:
+$$f(X; \\theta) = \\prod_{v=1}^{V} f_v(X^{(v)}; \\theta_v) \\cdot \\prod_{v<w} \\psi_{vw}(X^{(v)}, X^{(w)})$$
+where $f_v$ are per-voice marginals and $\\psi_{vw}$ are pairwise voice-coupling factors (consonance rewards, parallel-motion penalties, voice-crossing constraints). The elite selection operates on the joint sequence, so the cross-voice couplings emerge naturally from the global fitness evaluation.
+
+**Section-level non-stationarity**: Each section $m$ has its own parameter vector $\\theta^{(m)}$, with a transition prior that biases adjacent sections toward smooth parameter evolution:
+$$\\theta^{(m)}_t = \\alpha \\theta^{\\text{MLE}}_m + (1-\\alpha)\\theta^{(m)}_{t-1} + \\beta(\\theta^{(m-1)}_t - \\theta^{(m)}_t)$$
+where $\\beta$ controls section-boundary smoothing. This lets CEMC handle contrasting sections (verse → chorus → bridge) while maintaining within-section coherence.
+
+### Musical Elements Framework
+
+**PITCH**: Tokenized as pitch-class or scale-degree symbols ($q = 7$ diatonic or $q = 12$ chromatic). The categorical distribution at each token position encodes the probability of each pitch-class, with the mode shifting during optimization toward elite sequences that satisfy tonal gravity (tonic/dominant bias). The MLE update concentrates probability mass on pitch classes that appear in high-fitness sequences. For continuous-pitch variants (MIDI number), a univariate Gaussian per position with mean drift and narrowing variance models the melodic contour. Per-voice pitch distributions are independent except through cross-voice coupling potentials $\\psi_{vw}$ that penalize parallel octaves/fifths and voice crossings.
+
+**RHYTHM**: Tokenized as duration labels (whole/half/quarter/eighth/sixteenth, tied-arpeggiation, rest). Categorical distribution over $q_{\\text{rhythm}}$ symbols at each time-slice position. The rhythm fitness component $S_{\\text{rhythm}}$ rewards downbeat alignment (strong tokens on beat 1 and 3), groove consistency (repeated short–short–long patterns in lower voices), and syncopation balance (offbeat accent density within bounds). The distribution automatically converges to rhythm patterns that maximize these rewards, producing idiomatic grooves without explicit rule coding. Microtiming offsets (swing, shuffle) use a continuous Gaussian with mean shift for the offbeat sixteenth.
+
+**HARMONY**: Modelled via a chord-symbol categorical distribution (C, Dm, Em, F, G, Am, Bdim, plus secondary dominants and modal interchange). The harmony fitness $S_{\\text{harmony}}$ rewards functional progressions: circle-of-fifths root motion, cadential closure (V–I, IV–I, ii–V–I), and section-appropriate tonal function (HOME in tonic sections, LIFT in pre-chorus, TENSE in bridge, TURN in transition). Per-chord voicing is handled by the per-voice pitch distributions conditioned on the chord-tone subset. The distribution concentrates on the elite progressions through the CE update.
+
+**STRUCTURE**: Macro-form emerges from section-specific parameter vectors $\\theta^{(m)}$. Each section defines its own distribution over pitch, rhythm, and harmony tokens. The transition prior $\\beta$ couples adjacent sections, ensuring smooth harmonic shifts and tempo changes while permitting contrast. The structure fitness $S_{\\text{structure}}$ rewards within-section coherence (low token variance within a section) and between-section contrast (distribution shift between A and B sections). Form types (strophic, binary, ternary, rondo, verse-chorus) are encoded as constraint templates on the sequence of section parameters.
+
+**TEXTURE**: Texture is the joint outcome of per-voice event densities. The texture fitness $S_{\\text{texture}}$ scores the active-note count per time window: homophony (all voices active simultaneously, correlated onsets → high reward), polyphony (independent, staggered onsets), or pointillism (sparse, isolated events). The event-density expectation per voice under the categorical distribution at each time position directly controls texture — high-entropy distributions produce dense, active textures; low-entropy distributions produce sparse, focused lines. The smoothing factor $\\alpha$ doubles as a creative-control dial: low $\\alpha$ (fast adaptation) → quickly converges to a single high-fitness texture archetype; high $\\alpha$ (slow adaptation) → explores diverse textures across iterations.
+
+### UnitMatrix Integration (Voices & Sections)
+
+**Voices**: Each voice $v$ corresponds to an independent categorical/product distribution $f_v$ over the token sequence for that voice's cells. The full sequence for voice $v$ is the concatenation of its tokens across all sections. Voice independence is enforced by the factorization; voice coupling is enforced through the joint fitness evaluation $S(X)$, which penalizes parallel forbidden intervals, voice crossings, and extreme register gaps. Percussion voice uses a 2-state rhythm-only alphabet $\\{\\text{onset}, \\text{rest}\\}$ with a separate categorical distribution. The number of voices $V$ determines the dimension of the joint sample space.
+
+**Sections**: Each section $m$ defines a block of $K_m$ token positions per voice (section length in tokens). The total sequence length is $L = V \\cdot \\sum_m K_m$. Each section has its own parameter subvector $\\theta^{(m)}$, updated independently through the CE process except for the boundary-smoothing prior. Section boundaries are encoded as index ranges in the flat token array; the fitness function accesses them via these ranges, allowing section-specific reward weights ($w_{\\text{tonal}}$, etc.) and target profiles.
+
+**Cell filling**: A cell (voice $v$, section $m$) is decoded from the optimized token sequence at the corresponding index range. The categorical distribution's mode (most probable token) or a sample from it is converted to $MusicUnit$ events: pitch class → scale degree → MIDI pitch (via register assignment), duration token → tick count (via tempo map), velocity token → MIDI velocity. The zero-drift invariant is maintained by padding cells to the section length in ticks during the token-to-event decoder step. The elite sample with the highest fitness at convergence is returned as the final composition.
+
+### Pitfalls
+
+1. **Premature convergence (mode collapse)**: If $\\alpha$ is too low and $\\rho$ too high, the distribution collapses to a single near-deterministic sequence (the greedy mode). The smoothing factor $\\alpha$ must be tuned (typically $\\alpha \\in [0.6, 0.9]$) to maintain exploration. Adding a small additive noise term to the variance (for continuous parameters) or a uniform Dirichlet prior (for categorical parameters) prevents zero-variance collapse.
+
+2. **Fitness function design**: CEMC is only as good as its fitness function $S(X)$. Poorly weighted components lead to degenerate solutions (e.g., $w_{\\text{tonal}}$ too high → monotonous tonic repetition; $w_{\\text{texture}}$ too high → all notes at every beat). The weights must be tuned, and each component must be normalized to a comparable scale (e.g., $[0,1]$). Multi-objective variants (dominance-based elite selection) mitigate weight-sensitivity but add complexity.
+
+3. **Computational cost**: Each iteration evaluates $N$ candidate sequences, each requiring full decoding and fitness computation. For $N = 1000$, $T_{\\max} = 100$, $V = 4$, $S = 8$, $K = 16$, this is $100 \\cdot 1000 \\cdot 4 \\cdot 8 \\cdot 16 = 51.2$ million token-evaluations. Gradient-based optimization is infeasible (the token space is discrete), but the embarrassingly parallel sampling and evaluation step maps trivially to multi-core or distributed computation.
+
+4. **Sequence length scaling**: The categorical distribution dimension grows linearly with sequence length $L = V \\cdot \\sum K_m$. For $V=8$, $S=16$, $K=48$ (a full pop song in 16th-note resolution), $L \\approx 6144$ tokens per sequence. Each categorical has $q \\approx 12$ (pitch) or $q_{\\text{rhythm}} \\approx 8$ classes, so the joint distribution has $\\sum q$ = $L \\cdot q \\approx 120K$ parameters. This is manageable but requires careful memory management and vectorized operations.
+
+5. **Elite ratio sensitivity**: Too small $\\rho$ (e.g., $\\rho < 0.01$) → elite set too small → high-variance parameter updates → unstable convergence. Too large $\\rho$ (e.g., $\\rho > 0.5$) → elite set includes low-fitness candidates → distribution shifts too slowly. A common heuristic: start with $\\rho = 0.1$, decrease adaptively when elite variance drops below a threshold, or use a rank-based elite scheme (top $k$ regardless of absolute fitness).
+
+6. **Categorical vs. ordinal tokens**: MIDI pitch classes and duration labels are ordinal (ordered) but CEM's categorical distribution treats them as unordered. This ignores the natural topology (e.g., C4 and D4 are closer than C4 and G#4). A wrapped Gaussian or von Mises distribution over pitch class preserves circular adjacency, and a truncated geometric distribution over duration preserves duration ordering. Using these structured distributions (still within the exponential family) improves convergence speed.
+
+7. **Comparison to existing methods**: Unlike 003 Genetic (which evolves a fixed population via crossover/mutation operators that recombine existing candidates), CEMC maintains and updates an explicit distribution — the population is regenerated from scratch each iteration. Unlike 055 SAMC (which perturbs a single candidate with temperature-based acceptance), CEMC is batch-parallel and uses analytical distribution updates. Unlike 097 MaxEnt-C (which finds the maximum-entropy distribution consistent with constraints and then samples once), CEMC iteratively refines the distribution toward higher fitness, never needing a partition function evaluation.

@@ -10,6 +10,19 @@ Replicability analyses from the Hermes agent's music-tech surveillance cron
 > across `SP_METHODS` ∪ `methods-registry.md` ∪ `docs/methods.md`, +1**
 > (= **SP-069** at this scan).
 
+## 2026-10-01 Scan
+
+| Item | Technique | Verdict | Musicom path |
+|------|-----------|---------|--------------|
+| Verbos Haas Zone Processor (Synthtopia 2026-09-29) | 3-tap modulated short-delay bank (Tap1: 0.1–20ms, Tap2 chained +1–20ms, Tap3: 9–42ms); VCO LFO modulation (sine/tri/square/saw, 0.0167Hz–audio rate); envelope follower; 2-pole HP+LP cascaded bandpass filter (sweepable freq+bandwidth); VC blender mixing dry+3 taps; feedback path through BPF. Inspired by Marshall Time Modulator. | YES | **DONE** — sound/effects/haas_zone.py (SP-096: `HaasZoneProcessor`, `ModulationLFO`, `EnvelopeFollower`, `BandpassFilter`, `TapConfig`) |
+| Sync Audio MegaMorph (SoS 2026-09-30) | Multi-segment envelope generator 'attached' to any third-party plug-in parameter. Three editions: Instrument (combine multiple VSTi into single processor), FX (3 parallel FX chains with full modulation), Warp (varispeed/time-stretch/pitch-shift/volume). Multi-segment envelopes with linear/exponential/log/step/smoothstep/bezier shapes, loop/bounce/sustain modes, tempo-synced durations. Meta-Instrument concept. | YES | **DONE** — sound/effects/mega_morph.py (SP-097: `MegaMorph`, `MultiSegmentEnv`, `EnvSegment`, `SegmentShape`, `EnvMode`, `envelope_preset()`) |
+| Kaona B.A.C.H. FRACTAL system (Synthtopia 2026-09-28) | Four-voice composition generator, FRACTAL language: "recursive sequences and chaotic systems, including Thue–Morse, Fibonacci, Sierpiński and the logistic map." Generates melodic/hythmic material from deterministic chaotic/recurrence systems. | YES | **DONE** — sound/generators/fractal_seq.py (SP-098: `FractalSequenceGenerator`, `ThueMorseMelody`, `FibonacciRhythm`, `SierpinskiAccent`, `LogisticMapMelody`, `events_to_midi`) |
+| Sampleson Backgrounds (Synthtopia 2026-09-29) | Semantic audio retrieval → maps keyword prompts to evolving soundscapes from 22,000 audio cells + 11,000 local embeddings. Local processing, no cloud. | PARTIAL (proprietary 22K sample library + embedding vectors; core algorithm = cosine-similarity retrieval) | — |
+| Våld Labs TRESSE (Synthtopia 2026-09-28) | 2-layer soft synth, 39 engines (24 Plaits-based + 15 original), VEKTE generative sequencer (7 algorithms), LFOs, MOD lanes, morphing SEM filter | PARTIAL (39 engines × 8 voices × 2 layers = integrated product; individual engine types covered across sound/synthesis/ modules) | — |
+| Spitfire Audio Phoenix BT (MusicTech/SoS 2026-10-01) | Hybrid synth: 6 engines (spectral wavetables, FM 6-operator/34-algorithm, sampler, 2OP FM transients, sub, noise); cross-modulation; 8 MetaSequencers; probability arpeggiator from StutterEdit; 37 effects; stereo dual-chain | PARTIAL (individual engine types in sound/; integrated 34 FM algorithms + spectral warping + probability arp = proprietary) | — |
+| Modartt Airteq (SoS 2026-09-16, repeat) | Physical-modelling wind pipe instrument with Dynamic Aerophone Modelling (DAM) airflow control | PARTIAL (already assessed 2026-09-17, covered by SP-084 air_pipe.py) | sound/synthesis/air_pipe.py (SP-084) |
+| Animal Factory Amps Asura (SoS 2026-09-28) | 6-voice wavetable synth, 2 osc/voice, analogue fuzz waveshaper instead of filter, 2-OP FM, dual-grained delay, 8-step param-lock sequencer | PARTIAL (wavetable synth + FM + param-lock seq already in sound/; hardware UI + analogue fuzz circuit not replicable) | — |
+
 ## 2026-09-28 Scan
 
 | Item | Technique | Verdict | Musicom path |

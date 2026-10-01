@@ -172,6 +172,10 @@ SP_METHODS = {
     # 2026-09-28 scan
     "SP-094": ("sound.generators.random_note_gen", "Random Note Generator + Note Chance Sequencer (Maschine 3.7 Random Note Gen / Note Event Chance-style)"),
     "SP-095": ("sound.generators.euclidean_fill_seq", "Euclidean Fill Sequencer w/ Live Rotation (Maschine 3.7 Euclidean Sequencer-style)"),
+    # 2026-10-01 scan
+    "SP-096": ("sound.effects.haas_zone", "Multi-Tap Modulated Short-Delay Processor / Haas Zone (Verbos Haas Zone Processor-style)"),
+    "SP-097": ("sound.effects.mega_morph", "Multi-Segment Envelope Generator for Parameter Modulation (Sync Audio MegaMorph-style)"),
+    "SP-098": ("sound.generators.fractal_seq", "Fractal Sequence Generator — Thue-Morse/Fibonacci/Sierpinski/Logistic Map (Kaona B.A.C.H. FRACTAL-style)"),
 }
 
 

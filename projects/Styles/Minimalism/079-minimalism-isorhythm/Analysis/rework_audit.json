@@ -1,0 +1,29 @@
+{
+  "chosen": "/opt/data/projects/Styles/Minimalism/079-minimalism-isorhythm",
+  "genre": "Minimalism",
+  "primary_midi": "MIDI/079-minimalism-isorhythm.mid",
+  "phase1_midi": "MIDI/079-minimalism-isorhythm-phase1.mid",
+  "audit_date_utc": "2026-10-01",
+  "standards": {
+    "1_engine_not_handrolled": "PASS — compose.py imports UnitMatrixComposer, no raw mido authoring",
+    "2_zero_drift": "PASS — 6 voice tracks all length 46080 ticks",
+    "3_rhythm_grid_sync": "PASS — 396 pitched onsets, 0 off-grid",
+    "4_valid_track_setup": "PASS — 6 voice tracks (M-Voice, T-Voice, Violin, DblBass, Bells, Drums)",
+    "5_two_phase_artifacts": "PASS — both .mid and -phase1.mid present",
+    "6_provenance_and_index": "FAIL — provenance.json present (sidecar), index.html MISSING"
+  },
+  "standard_failures": ["index.html missing"],
+  "redesign_required": false,
+  "decision": "EXTEND (identity-preserving) — all 5 musical standards pass; single failure is a documentation artifact (index.html). Musical DNA is fully compliant, so used as the seed for a longer, more varied composition.",
+  "source_identity": {
+    "genre": "Minimalism (Arvo Part holy-minimalism tintinnabuli)",
+    "key": "E natural minor",
+    "pcs": [0, 2, 4, 6, 7, 9, 11],
+    "tempo_bpm": 92,
+    "meter": "4/4, 480 TPB, BAR=1920",
+    "method": "032 Isorhythmic Talea-Color Mapping (generators.tintinnabuli)",
+    "core_motif_contour": "color=[0,2,4,7,5,7,4,2,0,-1,-3,-5] talea=[1.0,0.5,0.5,1.0,0.5,1.5,0.5,1.0,2.0,0.5,1.0,0.5]",
+    "instrumentation": ["Viola (M-voice)", "Cello (T-voice)", "Violin (pad)", "Double Bass (drone)", "Glockenspiel (color)", "minimal percussion"],
+    "form": "6 sections x 4 bars = 24 bars"
+  }
+}

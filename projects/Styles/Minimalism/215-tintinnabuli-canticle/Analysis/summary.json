@@ -1,0 +1,146 @@
+{
+  "project": "215-tintinnabuli-canticle",
+  "style": "Minimalism",
+  "method": "032 Isorhythmic Talea-Color Mapping (TintinnabuliGenerator)",
+  "rework_of": "079-minimalism-isorhythm",
+  "bpm": 92,
+  "key": "E natural minor",
+  "pcs": [
+    0,
+    2,
+    4,
+    6,
+    7,
+    9,
+    11
+  ],
+  "bars": 32,
+  "sections": 8,
+  "section_names": [
+    "Intro",
+    "TaleaA",
+    "TaleaB",
+    "Chorus",
+    "Inversio",
+    "Augm",
+    "Canon",
+    "Outro"
+  ],
+  "section_progressions": [
+    [
+      52,
+      52,
+      52,
+      52
+    ],
+    [
+      52,
+      60,
+      55,
+      57
+    ],
+    [
+      55,
+      57,
+      52,
+      60
+    ],
+    [
+      52,
+      55,
+      62,
+      52
+    ],
+    [
+      57,
+      60,
+      59,
+      55
+    ],
+    [
+      60,
+      55,
+      57,
+      52
+    ],
+    [
+      52,
+      60,
+      55,
+      57
+    ],
+    [
+      52,
+      52,
+      52,
+      52
+    ]
+  ],
+  "section_variations": [
+    "setup (sparse, no drums)",
+    "baseline talea-color",
+    "retrograde color",
+    "full texture + VII subtonic",
+    "inversion of color",
+    "augmentation (talea x2)",
+    "register shift +12 + canon",
+    "diminution x0.5, thinning"
+  ],
+  "section_midpoint_roots": [
+    "i",
+    "III",
+    "i",
+    "VII",
+    "v",
+    "iv",
+    "III",
+    "i"
+  ],
+  "progression": [
+    "i",
+    "i",
+    "i",
+    "i",
+    "i",
+    "VI",
+    "III",
+    "iv",
+    "III",
+    "iv",
+    "i",
+    "VI",
+    "i",
+    "III",
+    "VII",
+    "i",
+    "iv",
+    "VI",
+    "v",
+    "III",
+    "VI",
+    "III",
+    "iv",
+    "i",
+    "i",
+    "VI",
+    "III",
+    "iv",
+    "i",
+    "i",
+    "i",
+    "i"
+  ],
+  "voices": [
+    "M-Voice",
+    "T-Voice",
+    "Pad",
+    "DblBass",
+    "Bells",
+    "Counter",
+    "Drums"
+  ],
+  "phase1": "215-tintinnabuli-canticle-phase1.mid",
+  "phase2": "215-tintinnabuli-canticle.mid",
+  "grid": "grid_visualization.txt",
+  "seed": 20261001
+}
