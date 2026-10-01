@@ -1,0 +1,215 @@
+{
+  "job": "random-style production pass (SP) - LAYER-ALIGNED 2026-10-01",
+  "selection_source": "workflows.musicom_workflow.SP_METHODS registry (38 implemented)",
+  "seed": 20261001,
+  "composition_source": "/opt/data/repos/musicom/projects/Styles/Country/041-country-railroad-morning/MIDI/041-country-railroad-morning-v1.mid",
+  "composition_sha256": "75f24105e565bcb14bd62d37bc8e56bc064d9d680b13a2d01a15a6df06294a0d",
+  "production_method": "SP-072",
+  "production_method_name": "Three-Partial Pad Bank with Stochastic Microtonal Critters Layer (Brackish Pads-style)",
+  "registered_module": "sound.synthesis.critter_pad",
+  "layer_discipline": "absolute layer: PadPartialBank replaces timbre for ALL voices incl channel-9 drums (percussive profile); GM kit only in SP-001 reference",
+  "voice_profiles": {
+    "1": {
+      "attack_b": 0.1,
+      "release_b": 0.35,
+      "attack_c": 0.15,
+      "release_c": 0.45,
+      "wob_b": 5.0,
+      "wob_c": 12.0,
+      "density": 2.2,
+      "mset": "quarter-tone",
+      "drift": 24.0,
+      "noise_b": 0.015,
+      "noise_c": 0.03,
+      "bal": [
+        0.7,
+        0.5,
+        0.5
+      ],
+      "gain": 1.0,
+      "pan": -0.22
+    },
+    "2": {
+      "attack_b": 0.2,
+      "release_b": 0.6,
+      "attack_c": 0.35,
+      "release_c": 0.9,
+      "wob_b": 4.0,
+      "wob_c": 9.0,
+      "density": 1.3,
+      "mset": "eighth-tone",
+      "drift": 16.0,
+      "noise_b": 0.015,
+      "noise_c": 0.03,
+      "bal": [
+        0.75,
+        0.45,
+        0.3
+      ],
+      "gain": 0.8,
+      "pan": 0.18
+    },
+    "3": {
+      "attack_b": 0.04,
+      "release_b": 0.3,
+      "attack_c": 0.08,
+      "release_c": 0.4,
+      "wob_b": 3.0,
+      "wob_c": 7.0,
+      "density": 1.0,
+      "mset": "just-ish",
+      "drift": 14.0,
+      "noise_b": 0.01,
+      "noise_c": 0.02,
+      "bal": [
+        0.8,
+        0.4,
+        0.3
+      ],
+      "gain": 0.9,
+      "pan": 0.0
+    },
+    "4": {
+      "attack_b": 0.003,
+      "release_b": 0.09,
+      "attack_c": 0.005,
+      "release_c": 0.14,
+      "wob_b": 2.0,
+      "wob_c": 4.0,
+      "density": 4.0,
+      "mset": "chromatic-drift",
+      "drift": 40.0,
+      "noise_b": 0.22,
+      "noise_c": 0.15,
+      "bal": [
+        0.55,
+        0.4,
+        0.45
+      ],
+      "gain": 0.65,
+      "pan": 0.0
+    },
+    "5": {
+      "attack_b": 0.02,
+      "release_b": 0.25,
+      "attack_c": 0.04,
+      "release_c": 0.35,
+      "wob_b": 4.0,
+      "wob_c": 9.0,
+      "density": 1.8,
+      "mset": "eighth-tone",
+      "drift": 20.0,
+      "noise_b": 0.02,
+      "noise_c": 0.04,
+      "bal": [
+        0.7,
+        0.5,
+        0.45
+      ],
+      "gain": 0.85,
+      "pan": 0.15
+    }
+  },
+  "bus_chain": "voice sum -> cassette(0.30 blend) + splosh(0.20) -> peak 0.89 -> normalize_to_lufs(-14) -> Limiter(-1 dB) LAST",
+  "fixes": [
+    "render_note peak-normalizes every note to 0.8: velocity gain clip((vel/90)**1.5,0.22,1.30) reapplied at call site",
+    "outer half-cosine note envelope + 0.40 s tail per note: click safety",
+    "channel-9 percussion: fast attack (0.003/0.005s) + short release + high noise partials -> percussive pad burst, honours absolute layer"
+  ],
+  "checks": {
+    "pitch_verification": {
+      "windows_checked": 41,
+      "dominant_peak_hit_rate": 0.878,
+      "harmonic_energy_mean_8h": 0.36,
+      "acf_windows": 11,
+      "acf_unpitched": 1,
+      "lowest_midi_notes_seen": [
+        36,
+        38,
+        42,
+        43
+      ],
+      "median_dom_hz": 98.0,
+      "misses": [
+        {
+          "t": 1.5,
+          "dom": 66.0,
+          "act": [
+            38,
+            42
+          ]
+        },
+        {
+          "t": 2.0,
+          "dom": 74.0,
+          "act": [
+            42,
+            43,
+            55,
+            59,
+            67
+          ]
+        },
+        {
+          "t": 6.0,
+          "dom": 64.0,
+          "act": [
+            42,
+            43,
+            59,
+            60,
+            62,
+            67
+          ]
+        },
+        {
+          "t": 9.5,
+          "dom": 66.0,
+          "act": [
+            38,
+            42,
+            45,
+            55,
+            59,
+            62
+          ]
+        },
+        {
+          "t": 10.5,
+          "dom": 66.0,
+          "act": [
+            42,
+            45,
+            55,
+            62
+          ]
+        }
+      ],
+      "method": "FFT dominant peak per 0.5 s window, 50-2000 Hz, +/-4% vs active MIDI fund or x2/x3//2",
+      "verdict": "PASS"
+    },
+    "silence_wet": 0.0179,
+    "silence_dry": 0.1737,
+    "lufs": -14.0,
+    "peak": 0.8913
+  },
+  "artifacts": {
+    "wav": "/opt/data/repos/musicom/projects/Styles/Production/SP072-critter-country-railroad-morning/SP072-critter-country-railroad-morning.wav",
+    "ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP072-critter-country-railroad-morning/SP072-critter-country-railroad-morning.ogg",
+    "wet_stems": {
+      "track00_Electric_Guitar_jazz_CRITTER": "/opt/data/repos/musicom/projects/Styles/Production/SP072-critter-country-railroad-morning/Audio/stems_wet/track00_Electric_Guitar_jazz_CRITTER.wav",
+      "track01_Acoustic_Guitar_nylon_CRITTER": "/opt/data/repos/musicom/projects/Styles/Production/SP072-critter-country-railroad-morning/Audio/stems_wet/track01_Acoustic_Guitar_nylon_CRITTER.wav",
+      "track02_Electric_Bass_finger_CRITTER": "/opt/data/repos/musicom/projects/Styles/Production/SP072-critter-country-railroad-morning/Audio/stems_wet/track02_Electric_Bass_finger_CRITTER.wav",
+      "track03_Drums_CRITTER": "/opt/data/repos/musicom/projects/Styles/Production/SP072-critter-country-railroad-morning/Audio/stems_wet/track03_Drums_CRITTER.wav",
+      "track04_Acoustic_Guitar_steel_CRITTER": "/opt/data/repos/musicom/projects/Styles/Production/SP072-critter-country-railroad-morning/Audio/stems_wet/track04_Acoustic_Guitar_steel_CRITTER.wav"
+    },
+    "dry_stems": {
+      "track00_Electric_Guitar_jazz": "/opt/data/repos/musicom/projects/Styles/Production/SP072-critter-country-railroad-morning/Audio/stems_dry/track00_Electric_Guitar_jazz.wav",
+      "track01_Acoustic_Guitar_nylon": "/opt/data/repos/musicom/projects/Styles/Production/SP072-critter-country-railroad-morning/Audio/stems_dry/track01_Acoustic_Guitar_nylon.wav",
+      "track02_Electric_Bass_finger": "/opt/data/repos/musicom/projects/Styles/Production/SP072-critter-country-railroad-morning/Audio/stems_dry/track02_Electric_Bass_finger.wav",
+      "track03_Drums": "/opt/data/repos/musicom/projects/Styles/Production/SP072-critter-country-railroad-morning/Audio/stems_dry/track03_Drums.wav",
+      "track04_Acoustic_Guitar_steel": "/opt/data/repos/musicom/projects/Styles/Production/SP072-critter-country-railroad-morning/Audio/stems_dry/track04_Acoustic_Guitar_steel.wav"
+    },
+    "dry_reference": "/opt/data/repos/musicom/projects/Styles/Production/SP072-critter-country-railroad-morning/dry_full_mix_sp001_reference.wav"
+  }
+}

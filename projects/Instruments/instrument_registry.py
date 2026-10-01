@@ -47,6 +47,7 @@ _INSTRUMENT_MODULES = {
     "Woodwind.english_horn.english_horn": "english_horn",
     "Woodwind.bassoon.bassoon": "bassoon",
     "Woodwind.saxophone.saxophone": "saxophone",
+    "Woodwind.tenor_sax.tenor_sax": "tenor_sax",
     "Guitar.acoustic.acoustic_guitar": "acoustic_guitar",
     "Percussion.drum_kit.drum_kit": "drum_kit",
     "Percussion.marimba.marimba": "marimba",
@@ -217,6 +218,7 @@ OBOE = ALL_INSTRUMENTS["oboe"]
 ENGLISH_HORN = ALL_INSTRUMENTS["english_horn"]
 BASSOON = ALL_INSTRUMENTS["bassoon"]
 SAXOPHONE = ALL_INSTRUMENTS["saxophone"]
+TENOR_SAX = ALL_INSTRUMENTS["tenor_sax"]
 ACOUSTIC_GUITAR = ALL_INSTRUMENTS["acoustic_guitar"]
 DRUM_KIT = ALL_INSTRUMENTS["drum_kit"]
 MARIMBA = ALL_INSTRUMENTS["marimba"]
@@ -307,6 +309,10 @@ def registry_table():
             role = "lead, melody, ornament, arpeggio, countermelody, accent"
         elif low == "accordion":
             role = "harmony, melody, bass, rhythm, ornament"
+        elif low == "alto saxophone":
+            role = "lead, countermelody, accent, harmony"
+        elif low == "tenor saxophone":
+            role = "lead, countermelody, accent, harmony"
         elif low == "english horn":
             role = "lead, countermelody, melody, harmony, accent"
         elif low == "drum kit":
@@ -471,3 +477,8 @@ if __name__ == "__main__":
     print("  by_name('pan flute') =", by_name("pan flute"))
     print("  by_program(75) =", by_program(75))
     print("  PAN_FLUTE.in_sweet_spot(72) =", PAN_FLUTE.in_sweet_spot(72))
+    print("  TENOR_SAX.midi_program =", TENOR_SAX.midi_program, "(should be 66)")
+    print("  by_name('tenor sax') =", by_name("tenor sax"))
+    print("  by_program(66) =", by_program(66))
+    print("  TENOR_SAX.in_sweet_spot(64) =", TENOR_SAX.in_sweet_spot(64))
+    print("  TENOR_SAX.in_sweet_spot(30) =", TENOR_SAX.in_sweet_spot(30))

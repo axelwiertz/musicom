@@ -600,6 +600,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Woodwind | English Horn | 69 | 50–85 | lead, countermelody, melody, harmony, accent |
 | Woodwind | Piccolo | 72 | 72–108 | lead, melody, ornament, accent, countermelody |
 | Woodwind | Alto Saxophone | 65 | 49–88 | lead, counter, accent, harmony |
+| Woodwind | Tenor Saxophone | 66 | 44–88 | lead, countermelody, accent, harmony |
 | Woodwind | Bassoon | 70 | 34–88 | bass, harmony, counter, lead |
 | Guitar | Acoustic | 25 | 40–84 | harmony, rhythm, strum |
 | Percussion | Drum Kit | ch9 | 35–81 | rhythm, groove, accent |
@@ -671,6 +672,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 || 79 | Ocarina | Ocarina ✓ (GM_PROGRAMS[79] + FluidR3 preset 79 both "Ocarina") |
 || 114 | Steel Drums | Steel Drums ✓ (GM_PROGRAMS[114] + FluidR3 preset 114 both "Steel Drums") |
 || 116 | Taiko Drum | Taiko Drum ✓ (GM_PROGRAMS[116] + FluidR3 preset 116 both "Taiko Drum") |
+|| 66 | Tenor Sax | Tenor_Sax ✓ (GM_PROGRAMS[66] = "Tenor Sax"; FluidR3 preset 66 = "Tenor Sax" — labels match exactly, **no quirk**) |
 ||| 21 | Accordion | Accordion ✓ (GM_PROGRAMS[21] = "Accordion"; FluidR3 preset 21 = "Accordian" — archaic SF2 spelling, cosmetic only, no routing impact) |
 ||| 10 | Music Box | Music_Box ✓ (GM_PROGRAMS[10] = "Music Box"; FluidR3 preset 10 = "Music Box" — labels match exactly, **no quirk**) |
 || ch9/pgm0 | Drums | **Acoustic_Grand_Piano** ✗ (program-0 fallback) |
@@ -698,3 +700,19 @@ notes 29–89): preset 7 audible across full range, no gaps. Identity: GM7
 the rubber mute gives it the shortest ring in the KB (0.3–1.5 s), so
 composition jobs write tight rhythmic patterns, not long sustained notes.
 Registration in `instrument_registry.py` as CLAVI convenience constant.
+
+**Tenor Saxophone added** (2026-10-01): GM66, Woodwind-family eighth entry — the
+B♭ tenor sax (the most famous sax voice: Coltrane, Rollins, Hawkins, the
+husky/bright tenor reed wall) (instrument.md + tenor_sax.py), verified
+end-to-end UnitMatrixComposer → zero-drift ✓ → MIDI (117 bytes) → FluidSynth
+WAV (758 KB) ✓; RenderPipeline stem label `trackXX_Tenor_Sax.wav` ✓
+(GM_PROGRAMS[66] = \"Tenor Sax\", FluidR3 preset 66 = \"Tenor Sax\" — labels
+match exactly, **no quirk**). PhaseModSynth recommended (single-reed conical
+bore: saw carrier, mod_depth 3.0 — deeper than alto 2.8 for the huskier tenor
+core; attack 0.05 s for the heavier reed; carrier_shape=saw for even+odd
+harmonics). Solo-render spectral check: 4–8 kHz buzz 0.4% (clean single voice,
+no comb-filtering). Range 44–88 (A♭2–E6 concert; written B♭2–F♯6 with altissimo);
+sweet spot 53–78 (F3–F5). Registered in `instrument_registry.py` as TENOR_SAX
+convenience constant. Registration proof: `by_name('tenor sax')` → Tenor
+Saxophone, `by_program(66)` → Tenor Saxophone, `in_sweet_spot(64)` = True,
+`in_sweet_spot(30)` = False.

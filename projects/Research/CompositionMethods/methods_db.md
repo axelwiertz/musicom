@@ -269,6 +269,7 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 || **SP-098** | TR-808 Analog Kick Drum Synthesis (AKDS) | **Synthesis Engines** | Circuit-Faithful Analog Kick / Sub-Bass Drum Voice | Renders the Roland TR-808 bass drum from its discrete transistor-circuit topology: bridged-T bandpass filter self-oscillating at ~49.4 Hz with 6 ms pitch sweep attack (49→130 Hz), feedback-buffer decay control (50–800 ms), retriggering bridge, voltage-leakage pitch sigh, passive tone lowpass, and VCA output. $\mathcal{O}(1)$ per sample. Candidate: `sound/synthesis/drum_synth_808.py`. |
 || **SP-099** | Comb Filter Resonance Synthesis (CFRS) | **Synthesis Engines** | Resonator-Based Pitched Timbre / Metallic, Plucked & Percussive Textures | Generates pitched sound by exciting a feedback comb filter with short-duration impulses, noise bursts, or oscillator pings, ringing at the delay-line resonant frequencies $f_0 = f_s / K$. Four modes: impulse-excited (plucked percussion), noise-excited (pitched drone/hiss), oscillator-excited (resonant-body tone), and parallel comb bank (inharmonic bell clusters). Fractional delay for exact equal-temperament tuning; allpass dispersion chain for metallic inharmonicity. $\mathcal{O}(1)$ per sample per comb. Candidate: `sound/synthesis/comb_resonance.py`. |
 || **SP-100** | Volterra Series Synthesis (VSS) | **Post-Processing / DSP** | Nonlinear Distortion / Intermodulation Enrichment | General nonlinear synthesis framework using Volterra series expansion (Taylor series with memory). Multi-order kernels generate harmonic/inharmonic intermodulation, saturation, and spectral enrichment as a post-process on rendered audio. Laguerre pruning reduces cost to $\mathcal{O}(L^P)$ per sample. Candidate: `sound/effects/volterra_synthesis.py`. |
+|| **SP-101** | Digital Waveguide Synthesis (DWS) | **Synthesis Engines** | Physical-Modeling String/Wind/Percussion Timbre | Models acoustic wave propagation as bidirectional traveling waves in digital delay lines. A vibrating string, acoustic bore, or struck bar is realized as a pair of delay lines looped via termination filters, fractional-delay interpolators, scattering junctions, and nonlinear excitations (pluck, bow, blow, strike). Loop filter $H_L(z)$ governs decay spectrum; stiffness allpass chain produces inharmonic partials for piano/bell timbres. Generalizes Karplus-Strong (SP-011) to arbitrary terminations and multi-waveguide networks. $\mathcal{O}(1)$ per sample per waveguide. Candidate: `sound/synthesis/digital_waveguide.py`. |
 |---|
 
 
@@ -22325,4 +22326,222 @@ where $\\beta$ controls section-boundary smoothing. This lets CEMC handle contra
 
 6. **Categorical vs. ordinal tokens**: MIDI pitch classes and duration labels are ordinal (ordered) but CEM's categorical distribution treats them as unordered. This ignores the natural topology (e.g., C4 and D4 are closer than C4 and G#4). A wrapped Gaussian or von Mises distribution over pitch class preserves circular adjacency, and a truncated geometric distribution over duration preserves duration ordering. Using these structured distributions (still within the exponential family) improves convergence speed.
 
-7. **Comparison to existing methods**: Unlike 003 Genetic (which evolves a fixed population via crossover/mutation operators that recombine existing candidates), CEMC maintains and updates an explicit distribution — the population is regenerated from scratch each iteration. Unlike 055 SAMC (which perturbs a single candidate with temperature-based acceptance), CEMC is batch-parallel and uses analytical distribution updates. Unlike 097 MaxEnt-C (which finds the maximum-entropy distribution consistent with constraints and then samples once), CEMC iteratively refines the distribution toward higher fitness, never needing a partition function evaluation.
+7. **Comparison to existing methods**: Unlike 003 Genetic (which evolves a fixed population via crossover/mutation operators that recombine existing candidates), CEMC maintains and updates an explicit distribution — the population is regenerated from scratch each iteration. Unlike 055 SAMC (which perturbs a single candidate with temperature-based acceptance), CEMC is batch-parallel and uses analytical distribution updates. Unlike 097 MaxEnt-C (which finds the maximum-entropy distribution consistent with constraints and then samples once), CEMC iteratively refines the distribution toward higher fitness, never needing a partition function evaluation.# Sound Production Method SP-101 — Digital Waveguide Synthesis (DWS)
+
+### Source
+Smith, J. O. (2010). *Physical Audio Signal Processing*. W3K Publishing. https://ccrma.stanford.edu/~jos/pasp/ — Smith, J. O. (2011). "Digital Waveguide Synthesis." In *The Computer Music and Audio DSP Handbook*. — Jaffe, D. A. & Smith, J. O. (1983). "Extensions of the Karplus-Strong Plucked-String Algorithm." *Computer Music Journal* 2, 53–80. — D'Alembert, J. (1747). "Recherches sur la courbe que forme une corde tendue mise en vibration." *Mémoires de l'Académie des Sciences*. — Karplus, K. & Strong, A. (1983). "Digital Synthesis of Plucked-String and Drum Timbres." *Computer Music Journal* 2, 39–52. — Abel, G. (2023). "Digital Waveguide Synthesis: A Tutorial for Python Programmers." *arXiv:2308.07229*. — Välimäki, V. & Takala, T. (1996). "Virtual Electric Guitar." *ICMC 1996*. — Bilbao, S. (2009). *Numerical Sound Synthesis*. Wiley. §5, §7.
+
+### Layer
+**absolute** — sound production (synthesis engine). Digital Waveguide Synthesis is a physical-modeling technique that simulates wave propagation in one-dimensional acoustic media (strings, bores, acoustic tubes) using bi-directional delay lines, reflection filters, and nonlinear excitations. The candidate code path is `sound/synthesis/digital_waveguide.py`, pluggable into `workflows.musicom_workflow.produce(method="SP-101")`.
+
+### Description
+**Digital Waveguide Synthesis (DWS)** models acoustic wave propagation in one-dimensional media (vibrating strings, acoustic tube bores, vocal tracts, percussion bars) as the superposition of two traveling waves — one right-going $y^+$ and one left-going $y^-$ — in a pair of digital delay lines. This framework, formalized by Julius O. Smith III at CCRMA (1985–2010), generalizes the Karplus-Strong algorithm to arbitrary terminations, spatially distributed excitations, and multi-waveguide networks with scattering junctions. DWS is the dominant physical-modeling synthesis paradigm, used in Yamaha VL-series synthesizers and the STK (Synthesis ToolKit).
+
+The core insight is d'Alembert's solution (1747) of the one-dimensional wave equation:
+
+$$\\frac{\\partial^2 y}{\\partial t^2} = c^2 \\frac{\\partial^2 y}{\\partial x^2}$$
+
+which factors into **two** arbitrary traveling wave functions:
+
+$$y(x,t) = y^+(t - x/c) + y^-(t + x/c)$$
+
+where $y^+$ travels rightward and $y^-$ leftward, both at wave speed $c = \\sqrt{T/\\mu}$ (string tension $T$, linear density $\\mu$). No energy is lost as the waves propagate — only boundary reflections and lumped filters introduce loss and dispersion.
+
+**Sampled discrete form**: Sampling at $x = mX$, $t = nT$ (where $X = cT$ is the spatial sampling interval), the digital waveguide at position $m$ and time $n$ is:
+
+$$y(m,n) = y^+(n - m) + y^-(n + m)$$
+
+where $m$ indexes spatial samples and $n$ indexes time samples. The two traveling waves are stored in a **bidirectional delay line** — two arrays of length $K$ (the number of spatial samples for the waveguide). For a string modeled at audio quality $f_s = 44100$ Hz vibrating at $f_0 = 440$ Hz, the delay length in samples is:
+
+$$K = \\left\\lfloor \\frac{f_s}{2 f_0} \\right\\rfloor = 50$$
+
+and the total loop length is $2K = 100$ samples (the string's fundamental period).
+
+### Technical Mechanics
+
+#### 1. Ideal String Digital Waveguide
+
+The simplest digital waveguide — an ideal (lossless, non-dispersive) vibrating string fixed at both ends — consists of a single bidirectional delay line looped back on itself:
+
+- **Upper delay line** carries the right-going wave: $y^+[n]$ at input, $y^+[n-K]$ at output (after $K$ samples of delay).
+- **Lower delay line** carries the left-going wave: $y^-[n]$ at input, $y^-[n-K]$ at output.
+- **Fixed (clamped) termination** inverts the wave upon reflection: $y^+[n] = -y^-[n-K]$ at left end ($m=0$); $y^-[n] = -y^+[n-K]$ at right end ($m=K$).
+- The loop equation is therefore: $y^+[n] = -(-y^+[n-2K]) = y^+[n-2K]$ — a simple delay feedback of $2K$ samples, giving a fundamental frequency $f_0 = f_s / (2K)$.
+
+The **physical displacement** at pickup position $m=p$ (where $p$ is the spatial sample index) is:
+
+$$y(p,n) = y^+[n-p] + y^-[n+p]$$
+
+For a plucked string excitation at position $q$, the initial waves are set as:
+
+$$y^+[0..K] = -(q/K) \\cdot \\text{triangle}(0..K) \\quad \\text{(left-going segment)}$$
+$$y^-[0..K] = (1 - q/K) \\cdot \\text{triangle}(0..K) \\quad \\text{(right-going segment)}$$
+
+where triangle$(k)$ is the initial pluck shape (ramp up to peak, linear decay — a broken line shape). This is equivalent to setting the initial state of the two delay lines.
+
+#### 2. Lossy String with Loop Filter
+
+Real strings lose energy. Loss is lumped into a single **loop filter** $H_L(z)$ placed at one termination:
+
+$$H_L(z) = \\frac{g(1-a)}{1 - a z^{-1}}$$
+
+where:
+- $g \\in (0,1)$ is the overall loop gain (decay time $T_{60} = -3K / (f_s \\log g)$).
+- $a \\in [0, 1)$ controls the lowpass amount: higher $a$ = faster high-frequency decay (brighter waves attenuate quicker, mimicking felt damping).
+- The filter is a normalized one-pole lowpass: $H_L(e^{j\\omega})$ has unit DC gain when $g=1$.
+
+With the loop filter, the string recursion becomes:
+
+$$y^+[n] = H_L(z) \\cdot (-y^-[n-K]) = -H_L(z) \\cdot (-H_L(z) \\cdot y^+[n-2K])$$
+
+$$y^+[n] = H_L^2(z) \\cdot y^+[n-2K]$$
+
+Every round trip through the loop (every $2K$ samples) applies the filter twice, so the decay spectrum is: $\\hat{H}_L(f) = g^2 \\cdot |H_L(e^{j\\pi f/f_s})|^2$ per cycle. The $T_{60}(f)$ at frequency $f$ is:
+
+$$T_{60}(f) = \\frac{-3K}{f_s \\cdot \\log_{10} g \\cdot \\frac{1}{2} \\log_{10}|H_L(e^{j\\pi f/f_s})|^2}$$
+
+#### 3. Fractional Delay for Exact Pitch Tuning
+
+The loop delay $D = 2K$ samples gives integer-delay resolution of $\\Delta f = f_s / (2K+1) - f_s / (2K)$ — often too coarse for equal-temperament tuning. A **fractional delay filter** $F(z)$ (typically a first-order allpass or Lagrange interpolator) is inserted into the loop:
+
+$$H_{\\text{loop}}(z) = z^{-K} \\cdot F(z) \\cdot z^{-K} = z^{-2K} \\cdot F(z)$$
+
+where $F(z) = z^{-\\delta}$ for fractional delay $\\delta \\in [0,1)$. Implemented as:
+
+$$F(z) = \\frac{a_\\delta + z^{-1}}{1 + a_\\delta z^{-1}} \\quad \\text{(allpass, exact magnitude)}$$
+
+with coefficient $a_\\delta = (1-\\delta)/(1+\\delta)$ (Thiran allpass). This shifts the fundamental frequency smoothly between integer-delay bins.
+
+The complete string loop with loss and fractional delay:
+
+$$y^+[n] = H_L(z) \\cdot \\left(-F(z) \\cdot y^-[n-K]\\right)$$
+$$y^-[n] = H_L(z) \\cdot \\left(-F(z) \\cdot y^+[n-K]\\right)$$
+
+#### 4. Stiffness Dispersion via Allpass Chain
+
+For stiff strings (piano, harpsichord) or bars (marimba, vibraphone), wave speed depends on frequency — higher partials travel faster and are inharmonic. Dispersion is modeled by replacing the fractional-delay allpass with a **chain of $R$ first-order allpass filters** in series:
+
+$$F_{\\text{stiff}}(z) = \\prod_{r=1}^{R} \\frac{a_r + z^{-1}}{1 + a_r z^{-1}}$$
+
+The group delay $\\tau_g(\\omega)$ of this chain approximates the desired dispersion curve $\\tau_g(\\omega) \\approx \\tau_0 + \\alpha \\omega^2$ (quadratic dispersion for stiff strings). The $R$ coefficients $a_r$ are optimized (least-squares) to match the inharmonicity coefficient $B$ from:
+
+$$f_n = n f_1 \\sqrt{1 + B n^2}$$
+
+where $B$ is the stiffness parameter ($B \\approx 10^{-4}$ for piano strings, $10^{-1}$ for bar percussion). Typical $R = 4$–$12$ allpass sections suffice for audible accuracy.
+
+#### 5. Scattering Junctions (Wind Instrument Bores)
+
+For wind instruments, the waveguide models an acoustic tube bore terminated by a reed or lip valve at one end and an open/closed radiation at the other. A **bore with varying cross-section** is modeled as a series of cylindrical segments connected by scattering junctions.
+
+At a junction between two segments with characteristic impedances $Z_1 = \\rho c / A_1$ and $Z_2 = \\rho c / A_2$ (where $\\rho$ is air density, $A$ is cross-sectional area), the reflection coefficient is:
+
+$$k = \\frac{Z_2 - Z_1}{Z_2 + Z_1} = \\frac{A_1 - A_2}{A_1 + A_2}$$
+
+The scattering equations for pressure waves are:
+
+$$p^+_2 = (1+k) p^+_1 + (-k) p^-_2$$
+$$p^-_1 = k \\, p^+_1 + (1-k) p^-_2$$
+
+In velocity-wave formulation (more common):
+
+$$v^+_2 = (1 - k_v) v^+_1 - k_v v^-_2 \\quad \\text{where } k_v = \\frac{Z_1-Z_2}{Z_1+Z_2} = -k$$
+
+The junction conserves both volume velocity and pressure, enforcing Newton's third law. This scattering junction is the fundamental building block of the **waveguide mesh** (used for 2D membranes, 3D reverberation).
+
+#### 6. Excitation Types
+
+| Excitation | Implementation | SP Parallels |
+|---|---|---|
+| **Pluck** (string) | Initial displacement shape loaded into delay lines; released at $t=0$ | SP-011 (KS basic), SP-048 (reflected BM) |
+| **Bow** (violin) | Nonlinear friction model: $f_{\\text{friction}} = \\text{sgn}(\\Delta v) \\cdot \\mu(v_\\text{bow} - v_\\text{string})$ with memory (Stribeck curve) | SP-024 (bowed-string PF) |
+| **Blow** (reed) | Single-reed nonlinearity: $u = \\xi \\cdot |p_m - p|^{+} \\cdot \\text{sgn}(p_m - p)$ (Bernoulli flow through varying aperture) | SP-023 (reed PF), SP-065 (lip-reed) |
+| **Air-jet** (flute) | Jet-drive: $Q_\\text{acoustic} = b \\cdot v_\\text{jet} \\cdot \\text{clip}(|\\eta_s|/\\eta_\\text{max})$ where $\\eta_s$ is the labium displacement | SP-066 (flue PF) |
+| **Strike** (piano) | Hertz-contact hammer force: $F_h(t) = K_c \\cdot y(t)^{1.5}$ with felt hysteresis | SP-074 (struck-string PF) |
+| **Commuted synthesis** (general) | Pre-convolve excitation with body IR, inject the result at a reference point; the waveguide provides the string/bore response without explicit body filters | Smith 1990 |
+
+#### 7. Computational Complexity
+
+| Component | Cost per sample |
+|---|---|
+| Bi-directional delay read/write (2 reads, 2 writes) | $\\mathcal{O}(1)$ |
+| Loop filter $H_L(z)$ (one-pole) | $\\mathcal{O}(1)$ |
+| Fractional-delay allpass | $\\mathcal{O}(1)$ |
+| Stiffness dispersion allpass chain ($R$ sections) | $\\mathcal{O}(R)$ |
+| Scattering junction | $\\mathcal{O}(N_\\text{ports})$ |
+| Excitation nonlinearity (bow/reed/blow) | $\\mathcal{O}(1)$ |
+| Pickup readout (interpolated tap at $p$) | $\\mathcal{O}(1)$ |
+| **Total per voice** | $\\mathcal{O}(1)$ to $\\mathcal{O}(R+J)$ |
+
+The total cost per voice is $\\mathcal{O}(1)$ for a basic string or $\\mathcal{O}(R+J)$ for a stiff string with scattering junctions. A note-on creates a new waveguide instance that rings until it decays below a noise floor. The number of simultaneous voices is bounded only by CPU — on modern hardware, 16–64 polyphonic strings are feasible in real time.
+
+### Musical Elements Framework
+
+**PITCH**: The waveguide fundamental frequency is set by the delay length $K$ (and fractional delay $\\delta$): $f_0 = f_s / (2K + 2\\delta)$. Knowledge of $K$ and $f_s$ maps directly to the frequency domain. Pitch can be bent continuously in real time by interpolating the fractional-delay coefficient $a_\\delta$ (smooth portamento, no zipper noise). Pitch glide from note-on to note-off (piano hammer strike → decay) is controlled by a time-varying $\\delta(t)$. The stiffness allpass chain shifts partials upward relative to the harmonic series: $f_n = n f_0 \\sqrt{1 + B n^2}$, with $B$ selecting the instrument — $B \\approx 0$ for guitar (near-harmonic), $B \\approx 10^{-4}$ for piano, $B \\approx 10^{-1}$ for marimba. Each waveguide instance is monophonic (one pitch per note event), so polyphony requires multiple parallel waveguides (one per note in the UnitMatrix cell).
+
+**RHYTHM**: Waveguide excitation events (pluck, strike, blow start, bow change) are triggered by note-on events in the UnitMatrix. The attack transient emerges from the initial state of the delay lines, so the rhythmic feel is directly the onset timing in the MIDI score. DWS preserves the rhythm exactly — each note event triggers a fresh waveguide initialization. The decay tail ($T_{60} \\propto 1/\\log g$) can extend beyond the note-off time, providing natural legato overlap between consecutive notes. The loop gain $g$ controls the staccato/legato character: $g < 0.99$ → short, percussive decay; $g > 0.999$ → singing, sustained string. For percussive instruments, the strike position $q$ (pluck/strike point) controls the ratio of odd/even partials: pluck at $1/2$ suppresses even harmonics → nasal, thin; pluck at $1/10$ (near bridge) → bright, full.
+
+**HARMONY**: DWS is a monophonic voice model — each waveguide produces a single fundamental with its own overtone series. Harmony arises from multiple waveguides sounding simultaneously (one per pitch in a chord). The waveguide overtone structure is the primary harmonic vehicle: a $B$-controlled inharmonicity curve selects between pure-harmonic (ensemble string), piano-like (mildly inharmonic), or bell/marimba-like (strongly inharmonic) spectra. Because each waveguide evolves independently, the simultaneous overtone sets of a chord produce the natural beating and consonance/dissonance of real acoustic instruments. Unpitched noise (breath, bow scratch) adds a texture layer that can be mixed with the pitched output.
+
+**STRUCTURE**: Each section of the UnitMatrix carries a DWS parameter set: loop filter coefficients $(g, a)$, delay length $K$ (pitch), fractional delay $\\delta$, stiffness $B$, pluck position $q$, pickup position $p$, and excitation type. Section transitions interpolate these parameters over a short crossfade (1–4 bars). Because the waveguide is a true physical system (stateful delay lines), parameter interpolation must be applied to the *excitation* rather than to the state — the waveguide state is continuous across section boundaries (the string rings through the seam). The macro-form is thus a sequence of physical models per voice, each with its own section-specific timbre, decay envelope, and spectral character.
+
+**TEXTURE**: DWS texture is the combined effect of (a) the overtone richness from the stiffness/loop-filter interaction, (b) the noise component from excitation nonlinearities (bow noise, breath noise, friction artifacts), and (c) the ensemble effect of multiple parallel waveguides with slight detuning (unison strings in a piano). The loop gain $g$ and stiffness $B$ are the primary texture dials:
+- $g \\to 1$ + $B \\approx 0$ → pure, singing tone (flute-like, minimal texture)
+- $g \\approx 0.99$ + $B \\approx 10^{-4}$ → rich, piano-like decay with evolving harmonic content
+- $g \\approx 0.995$ + $B \\approx 10^{-1}$ → metallic, marimba-like with dense overtone clusters
+- Bow excitation with $g \\to 1$ → sustained with evolving friction noise texture
+Adding parallel detuned waveguides (2–3 per note with $\\pm\\delta$ cents detuning) produces a natural chorus/ensemble texture, exactly as in an acoustic instrument with multiple strings per note (piano, 12-string guitar).
+
+### UnitMatrix Integration (Voices & Sections)
+
+**Voices**: Each UnitMatrix voice $v$ maps to one or more parallel digital waveguide instances. The voice-to-waveguide mapping is:
+- **Monophonic**: One waveguide instance per voice. The voice plays one note at a time; note-off starts the decay (loop gain $g$ governs tail length). Note-on at voice-busy triggers a damping impulse followed by a new excitation — exactly like a single string being re-plucked.
+- **Polyphonic**: Multiple waveguide instances per voice (one per simultaneous pitch). The voice maintains a pool of waveguide slots. Note-on allocates an idle slot; note-off tags it for decay release. This models a piano or harp polygonally.
+- **Percussion**: Impulse-excited waveguide (no pitch) with high loop loss ($g < 0.5$) and short delay $K$ (produces a broadband transient — the Karplus-Strong drum).
+
+**Sections**: Each section $m$ carries:
+- `dws_mode`: "string", "wind", "reed", "airjet", "strike", "percussion", "commuted"
+- `delay_len`: $K$ in samples (fundamental pitch)
+- `fractional_delay`: $\\delta \\in [0,1)$
+- `loop_gain`: $g \\in [0, 1)$ (decay time)
+- `loop_lowpass`: $a \\in [0, 0.999]$ (HF damping)
+- `stiffness_B`: $B \\ge 0$ (inharmonicity coefficient)
+- `num_stiff_sections`: $R$ allpass chain length
+- `pluck_position`: $q \\in [0,1]$ fractional position
+- `pickup_position`: $p \\in [0,1]$ fractional readout
+- `excitation_type`: "pluck", "bow", "blow", "airjet", "strike"
+- `excitation_params`: dict (bow_pressure, blowing_pressure, hammer_velocity, etc.)
+- `detune_cents`: $\\pm c$ detuning per parallel string
+- `num_unisons`: $U$ parallel waveguides per note (chorus/ensemble)
+
+**Cell filling**: A UnitMatrix cell $(v, m)$ contains one or more $MusicUnit$ events. Each event triggers:
+1. Allocate a waveguide instance with section $m$'s parameters.
+2. Load the initial excitation at time $t_{\\text{start}}$ (pluck shape, blow pressure step, bow velocity/speed).
+3. Let the waveguide ring; read output at pickup position $p$ at every sample until the note-end time.
+4. On note-end or cell boundary: set loop gain $g_{\\text{release}}$ (faster decay) or zero the delay line.
+5. Convert output samples to float32 PCM for the audio buffer.
+
+The workflow is:
+1. `UnitMatrixComposer` generates MIDI (per-voice, per-section).
+2. `produce(method="SP-001")` renders MIDI → basic audio (optional — for hybrid rendering).
+3. `produce(method="SP-101")` creates per-voice waveguide instances from the MIDI events and synthesizes directly to audio.
+4. The waveguide audio is mixed into a stereo master.
+
+DWS replaces the entire sample-level audio generation, bypassing FluidSynth and other renderers. This is the **native rendering mode** for physical-modeling voices.
+
+### Pitfalls
+
+1. **Loop length limit on low frequencies**: For bass notes ($f_0 < 40$ Hz), the delay length $K = f_s / (2f_0)$ exceeds 550 samples at $f_s = 44100$. Each delay line stores $K$ floats, so a chord of 6 low bass notes uses $6 \\times 2 \\times 550 = 6600$ samples + filter state — trivial on modern hardware ($\\approx 50$ KB). At sub-bass extremes ($f_0 = 20$ Hz, $K = 1103$), the pitch resolution from integer $K$ becomes coarse: $\\Delta f \\approx 0.02$ Hz between adjacent $K$ values. Fractional-delay interpolation cleanly resolves this, but the allpass transient response at note onset must be minimized. Use a gradual fade-in of the fractional delay (1–2 ms linear ramp of $\\delta$) to suppress audible clicks when $K$ changes.
+
+2. **Loop filter design for accurate decay**: The single-pole loop filter $H_L(z)$ models frequency-independent damping only approximately. Real strings have frequency-dependent loss (higher modes decay faster). For accurate timbre over the full note duration, replace the one-pole with a measured or optimized multi-pole filter that matches $T_{60}(f)$ across the audible spectrum. Välimäki & Takala (1996) fit a 4th-order IIR to measured guitar string decay data. For creative use (non-emulation), the one-pole is fine — it sounds like a synthesizer string (the "digital waveguide" sound itself), which is musically legitimate.
+
+3. **Scattering junction stability**: The scattering junction equations are lossless and unconditionally stable when $k \\in (-1, 1)$. However, when the junction is inside a feedback loop containing filters (loop filter, fractional delay), the combined system may oscillate. Always verify that $|H_L(e^{j\\omega}) \\cdot H_F(e^{j\\omega})| \\leq 1$ at all frequencies in any closed loop containing the junction. For non-uniform bores, the scattering junction cascade satisfies the lossless condition automatically as long as all $k_i$ are real and $|k_i| < 1$.
+
+4. **Bow-string sticking artifacts**: The bow friction model is a stiff ODE (Stribeck curve: $\\mu(\\Delta v) = \\mu_k + (\\mu_s - \\mu_k) e^{-|\\Delta v|/v_s}$) with a near-discontinuity at $\\Delta v = 0$ (the stick-slip transition). Numerically integrating this at audio rate is expensive. Approximate with a sigmoid: $f_{\\text{friction}} = F_{\\text{bow}} \\cdot \\tanh(\\alpha \\cdot (v_{\\text{bow}} - v_{\\text{string}}))$ plus additive noise at the slip peak. This gives a convincing string-cello timbre at $\\mathcal{O}(1)$ per sample.
+
+5. **State migration across sections**: Because the waveguide is a true physical state (the delay line contents), changing parameters between sections must respect the ringing state. A hard parameter change (e.g., jumping $K$ from 50 to 100) will reset the pitch and likely produce an audible click. Use crossfade: run the old waveguide with old params and a new waveguide with new params simultaneously, crossfading over a short window (5–20 ms). The old waveguide's delay contents decay naturally as $g^t$; zeroing the delay lines is a hard reset that loses the continuous physical simulation — use only for section breaks with silence.
+
+6. **Fractional-delay allpass warble**: When the fractional delay $\\delta$ sweeps continuously (portamento), the Thiran allpass coefficient $a_\\delta$ changes every sample. This transient can add an audible amplitude modulation (Chamberlin 1980). Mitigate by limiting the rate of change: $|\\Delta a_\\delta / \\Delta n| < 0.01$ per sample, or use Lagrange interpolation (FIR) instead of allpass for the time-varying case — Lagrange has no state to modulate, at the cost of smaller delay range and amplitude ripple at high frequencies.
+
+7. **Percussion beyond basic Karplus-Strong**: The basic KS drum (SP-098 kick, SP-087 snare) uses a short noise-filled delay line with loss. DWS percussion extends this with (a) dual-waveguide coupling (two different delay lengths summed → two-pitch drum), (b) scattering junction coupling to a resonant body waveguide (drum head + shell), and (c) nonlinear excitation (stick impact with contact time from Hertz model). These extensions produce far richer percussion than basic KS but increase computational cost by $\\mathcal{O}(N_\\text{ports})$ per coupling junction.
+
+8. **No built-in effects**: DWS produces the raw acoustic model output — no reverb, no EQ, no spatialization. The waveguide sound is typically dry and direct. To integrate into a full mix, route the DWS output through the post-processing pipeline: SP-071 (reverb), SP-072 (EQ/HPSS), and SP-075 (spatialization). This is expected and mirrors real acoustic recording where room acoustics are essential.
