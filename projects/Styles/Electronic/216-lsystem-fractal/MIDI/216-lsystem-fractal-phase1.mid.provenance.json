@@ -1,0 +1,86 @@
+{
+  "artifact": "216-lsystem-fractal-phase1.mid",
+  "classification": "ai-generated",
+  "generator": "L-System Algorithmic Composition (Method 019, generators.interval_lsystem) + musicom rules",
+  "sources": [],
+  "parameters": {
+    "bpm": 120,
+    "key": "A natural minor",
+    "sections": 8,
+    "bars": 32,
+    "phase": "1",
+    "lsystem": {
+      "axiom": "A",
+      "rules": {
+        "A": "A+B-A-B+A",
+        "B": "A-B+A+B-A"
+      },
+      "symbols": {
+        "+": 2,
+        "-": 1
+      },
+      "iterations": 3,
+      "n_deltas": 124
+    },
+    "progression": [
+      "Am",
+      "Am",
+      "Am",
+      "Am",
+      "Am",
+      "F",
+      "C",
+      "G",
+      "F",
+      "Am",
+      "G",
+      "C",
+      "F",
+      "C",
+      "G",
+      "Am",
+      "Am",
+      "Em",
+      "F",
+      "G",
+      "F",
+      "G",
+      "Am",
+      "Em",
+      "Am",
+      "F",
+      "C",
+      "G",
+      "Am",
+      "Am",
+      "Am",
+      "Am"
+    ],
+    "section_midpoint_chords": [
+      "Am",
+      "C",
+      "G",
+      "G",
+      "F",
+      "Am",
+      "C",
+      "Am"
+    ],
+    "variations": [
+      "sparse drone, no drums",
+      "baseline L-system deltas",
+      "retrograde deltas",
+      "full texture",
+      "augmentation (durations x2)",
+      "inversion (negate deltas)",
+      "register shift +12, full drums",
+      "diminution (durations x0.5)"
+    ],
+    "seed": 20261001
+  },
+  "notes": "raw L-system interval walk, unquantized chromatic, single voice, no harmony",
+  "sha256": "7f7cff13dcd6be3ff268bfc00ec1710ce5426d02b88cc8aa40533f91eb9f9452",
+  "bytes": 2256,
+  "created_utc": "2026-10-01T23:11:48.036482+00:00",
+  "provenance_version": "1.0"
+}

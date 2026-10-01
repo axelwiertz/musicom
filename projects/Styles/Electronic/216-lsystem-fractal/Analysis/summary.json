@@ -1,0 +1,81 @@
+{
+  "audio": {
+    "phase2": {
+      "duration_sec": 68.88,
+      "silence_ratio": 0.0659,
+      "peak": 0.7717,
+      "tonal_ratio": 0.9927
+    },
+    "phase1": {
+      "duration_sec": 66.13,
+      "silence_ratio": 0.0738,
+      "peak": 0.3474,
+      "tonal_ratio": 0.9773
+    }
+  },
+  "grid_audit": {
+    "Lead": {
+      "drum_track": false,
+      "n_onsets": 271,
+      "off_16th": 0,
+      "off_8th": 31
+    },
+    "Pad": {
+      "drum_track": false,
+      "n_onsets": 96,
+      "off_16th": 0,
+      "off_8th": 0
+    },
+    "Bass": {
+      "drum_track": false,
+      "n_onsets": 256,
+      "off_16th": 0,
+      "off_8th": 0
+    },
+    "Arp": {
+      "drum_track": false,
+      "n_onsets": 512,
+      "off_16th": 0,
+      "off_8th": 256
+    },
+    "Sparkle": {
+      "drum_track": false,
+      "n_onsets": 64,
+      "off_16th": 0,
+      "off_8th": 32
+    },
+    "Drums": {
+      "drum_track": true,
+      "n_onsets": 316,
+      "off_16th": 0,
+      "off_8th": 0
+    }
+  },
+  "harmony_audit": {
+    "Lead": {
+      "n_notes": 271,
+      "out_of_scale": 0,
+      "out_of_chord": 0
+    },
+    "Pad": {
+      "n_notes": 96,
+      "out_of_scale": 0,
+      "out_of_chord": 0
+    },
+    "Bass": {
+      "n_notes": 256,
+      "out_of_scale": 0,
+      "out_of_chord": 0
+    },
+    "Arp": {
+      "n_notes": 512,
+      "out_of_scale": 0,
+      "out_of_chord": 0
+    },
+    "Sparkle": {
+      "n_notes": 64,
+      "out_of_scale": 0,
+      "out_of_chord": 0
+    }
+  }
+}

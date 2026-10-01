@@ -1,0 +1,19 @@
+{
+  "artifact": "216-lsystem-fractal-phase1.ogg",
+  "classification": "ai-assisted",
+  "generator": "ffmpeg libopus",
+  "sources": [],
+  "parameters": {
+    "project": "216-lsystem-fractal",
+    "phase": "phase1",
+    "format": "ogg",
+    "codec": "libopus",
+    "bitrate": "48k voip",
+    "source_midi": "216-lsystem-fractal-phase1.mid"
+  },
+  "notes": "",
+  "sha256": "6ce75c38aaaf64abf34c4d55fbdd3a538299de999b4138850f9c7823342409a1",
+  "bytes": 708666,
+  "created_utc": "2026-10-01T23:12:25.644255+00:00",
+  "provenance_version": "1.0"
+}

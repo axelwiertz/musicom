@@ -1,0 +1,18 @@
+{
+  "artifact": "216-lsystem-fractal-phase1.wav",
+  "classification": "ai-assisted",
+  "generator": "musicom.sound.render.fluidsynth",
+  "sources": [],
+  "parameters": {
+    "project": "216-lsystem-fractal",
+    "phase": "phase1",
+    "format": "wav",
+    "soundfont": "FluidR3_GM.sf2",
+    "source_midi": "216-lsystem-fractal-phase1.mid"
+  },
+  "notes": "",
+  "sha256": "8b8bbf95e18d43700b71e506329f5f197541cc5057f82ef862462cd4113411b6",
+  "bytes": 11666220,
+  "created_utc": "2026-10-01T23:12:25.643405+00:00",
+  "provenance_version": "1.0"
+}
