@@ -1,0 +1,88 @@
+{
+  "job": "random-style production pass (SP) - LAYER-ALIGNED 2026-10-02",
+  "selection_source": "workflows.musicom_workflow.SP_METHODS registry (38 implemented)",
+  "seed": 20261002,
+  "composition_source": "/opt/data/repos/musicom/projects/Styles/Balfolk/014-balfolk-cinematic/MIDI/balfolk_cinematic_v1.mid",
+  "composition_sha256": "aa84825ae3b9789b8a02df5ae40cc7a782fb26bdff1e4fd94dad1f94f4be6399",
+  "production_method": "SP-086",
+  "production_method_name": "Rule-Based Melody Harmony Writer w/ Voice Leading (HarmonyKeen-style)",
+  "registered_module": "sound.generators.harmony_writer",
+  "layer_discipline": "absolute layer: HarmonyWriter writes SATB harmony around the WHOLE melody, replacing the source arrangement; GM render via FluidSynth (SP-001 reference) is the acoustic realisation",
+  "harmony_params": {
+    "key": "C",
+    "style": 5,
+    "seed": 20261002,
+    "rationale": "melody is D-Dorian (D E F G A); HarmonyWriter is Ionian-only so key=C = parent major, melody tonic D lands on the ii chord"
+  },
+  "voice_map": {
+    "soprano": {
+      "program": 40,
+      "channel": 0
+    },
+    "alto": {
+      "program": 41,
+      "channel": 1
+    },
+    "tenor": {
+      "program": 42,
+      "channel": 2
+    },
+    "bass": {
+      "program": 43,
+      "channel": 3
+    },
+    "bass2": {
+      "program": 58,
+      "channel": 4
+    }
+  },
+  "tick_rescale": {
+    "source_tpb": 10080,
+    "engine_tpb": 480,
+    "scale": 0.047619047619047616
+  },
+  "fixes": [
+    "engine bug fix (sound/generators/harmony_writer.py diatonic_triads): sorted() on pitch-class set lost root/third/fifth order, so IV/V/vi/vii roots were misidentified and choose_chords collapsed the D-Dorian melody to a degenerate ii/iii alternation; fixed to return chord tones in (root,third,fifth) order transposed to the key root",
+    "source MIDI tpb=10080 (=480*21) breaks UnitMatrixComposer's 480-tpb tick model (16-bit tick truncation -> 6s render); rescaled all ticks /21 to standard 480 tpb before composing",
+    "write_wav uses (audio*32767).astype(int16) scaling, not raw astype(int16) (SP-079 silent-output bug)"
+  ],
+  "checks": {
+    "pitch_verification": {
+      "windows_checked": 96,
+      "dominant_peak_hit_rate": 1.0,
+      "harmonic_energy_mean_8h": 0.3466,
+      "acf_windows": 25,
+      "acf_unpitched": 0,
+      "lowest_midi_notes_seen": [
+        38,
+        40,
+        41
+      ],
+      "median_dom_hz": 174.0,
+      "misses": [],
+      "method": "FFT dominant peak per 0.5s window, 50-2000 Hz, +/-4% vs active MIDI fund or x2/x3//2",
+      "verdict": "PASS"
+    },
+    "silence_wet": 0.0545,
+    "silence_dry": 0.0682,
+    "lufs": -14.0,
+    "peak": 0.6509
+  },
+  "artifacts": {
+    "wav": "/opt/data/repos/musicom/projects/Styles/Production/SP086-harmony-writer-balfolk-cinematic/SP086-harmony-writer-balfolk-cinematic.wav",
+    "ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP086-harmony-writer-balfolk-cinematic/SP086-harmony-writer-balfolk-cinematic.ogg",
+    "harmonized_midi": "/opt/data/repos/musicom/projects/Styles/Production/SP086-harmony-writer-balfolk-cinematic/MIDI/balfolk_cinematic_v1_harmonized.mid",
+    "dry_reference": "/opt/data/repos/musicom/projects/Styles/Production/SP086-harmony-writer-balfolk-cinematic/dry_full_mix_sp001_reference.wav",
+    "harmony_stems": {
+      "track00_Violin": "/opt/data/repos/musicom/projects/Styles/Production/SP086-harmony-writer-balfolk-cinematic/Audio/stems_harmony/track00_Violin.wav",
+      "track01_Viola": "/opt/data/repos/musicom/projects/Styles/Production/SP086-harmony-writer-balfolk-cinematic/Audio/stems_harmony/track01_Viola.wav",
+      "track02_Cello": "/opt/data/repos/musicom/projects/Styles/Production/SP086-harmony-writer-balfolk-cinematic/Audio/stems_harmony/track02_Cello.wav",
+      "track03_Contrabass": "/opt/data/repos/musicom/projects/Styles/Production/SP086-harmony-writer-balfolk-cinematic/Audio/stems_harmony/track03_Contrabass.wav",
+      "track04_Tuba": "/opt/data/repos/musicom/projects/Styles/Production/SP086-harmony-writer-balfolk-cinematic/Audio/stems_harmony/track04_Tuba.wav"
+    },
+    "dry_stems": {
+      "track00_Violin": "/opt/data/repos/musicom/projects/Styles/Production/SP086-harmony-writer-balfolk-cinematic/Audio/stems_dry/track00_Violin.wav",
+      "track01_String_Ensemble_1": "/opt/data/repos/musicom/projects/Styles/Production/SP086-harmony-writer-balfolk-cinematic/Audio/stems_dry/track01_String_Ensemble_1.wav"
+    }
+  }
+}

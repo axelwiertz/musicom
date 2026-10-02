@@ -66,14 +66,20 @@ def key_scale(key: str) -> List[int]:
 
 
 def diatonic_triads(key: str) -> List[Tuple[int, str, Tuple[int, ...]]]:
-    """The seven diatonic triads: (degree, roman, pitch classes)."""
-    sc = key_scale(key)
+    """The seven diatonic triads: (degree, roman, (root, third, fifth)).
+
+    Pitch classes are returned in chord-tone ORDER (root, third, fifth) — not
+    sorted — so callers can identify the root at index 0. Sorting breaks the
+    root of IV/V/vi/vii°, whose root pitch-class is not the numeric minimum
+    (e.g. F major = (5, 9, 0) → sorted (0, 5, 9) loses F as the root, so
+    ``choose_chords`` and the bass voice-lead both target the wrong note).
+    """
+    root = NOTE_NAMES.index(key if len(key) == 1 else key[0].upper() + key[1:])
     qualities = [(0, 4, 7), (2, 5, 9), (4, 7, 11), (5, 9, 0),
                  (7, 11, 2), (9, 0, 4), (11, 2, 5)]
     out = []
     for d, deg in enumerate(qualities):
-        pcs = tuple((sc[d] + iv) % 12 for iv in deg[d:d + 0]) if False else \
-            tuple(sorted({(sc[(d + j) % 7]) for j in (0, 2, 4)}))
+        pcs = tuple((root + iv) % 12 for iv in deg)
         out.append((d, ROMAN[d], pcs))
     return out
 
