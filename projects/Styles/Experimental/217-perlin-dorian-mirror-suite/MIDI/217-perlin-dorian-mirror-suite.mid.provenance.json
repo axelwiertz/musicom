@@ -1,0 +1,20 @@
+{
+  "artifact": "217-perlin-dorian-mirror-suite.mid",
+  "classification": "ai-assisted",
+  "generator": "040-Perlin-Noise-Composition + musicom rules",
+  "sources": [],
+  "parameters": {
+    "phase": 2,
+    "bpm": 80,
+    "key": "D Dorian",
+    "seed": 42,
+    "voices": 5,
+    "form": "8 sections x 4 bars = 32 bars",
+    "variations": "transpose(+4th), diminution, octave_up, retrograde, invert, canon(counterline), augment"
+  },
+  "notes": "Extension of 102-perlin-dorian-bridge-mirror (all standards passed). 8-section suite, +Counter canon voice, chord-tone quantized, grid-snapped, key-disciplined.",
+  "sha256": "bb59609b3d41f3a170d2e890b80b0662dbda91abe653114b84276c462cbdb8cb",
+  "bytes": 7132,
+  "created_utc": "2026-10-02T01:07:21.021692+00:00",
+  "provenance_version": "1.0"
+}

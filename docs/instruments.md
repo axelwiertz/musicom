@@ -600,7 +600,8 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Woodwind | English Horn | 69 | 50–85 | lead, countermelody, melody, harmony, accent |
 | Woodwind | Piccolo | 72 | 72–108 | lead, melody, ornament, accent, countermelody |
 | Woodwind | Alto Saxophone | 65 | 49–88 | lead, counter, accent, harmony |
-| Woodwind | Tenor Saxophone | 66 | 44–88 | lead, countermelody, accent, harmony |
+| Woodwind | Bagpipe | 109 | 53–96 | lead, melody, ornament, drone, accent |
+| Woodwind | Baritone Saxophone | 67 | 36–80 | bass, harmony, accent, lead, countermelody |
 | Woodwind | Bassoon | 70 | 34–88 | bass, harmony, counter, lead |
 | Guitar | Acoustic | 25 | 40–84 | harmony, rhythm, strum |
 | Percussion | Drum Kit | ch9 | 35–81 | rhythm, groove, accent |
@@ -672,8 +673,9 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 || 79 | Ocarina | Ocarina ✓ (GM_PROGRAMS[79] + FluidR3 preset 79 both "Ocarina") |
 || 114 | Steel Drums | Steel Drums ✓ (GM_PROGRAMS[114] + FluidR3 preset 114 both "Steel Drums") |
 || 116 | Taiko Drum | Taiko Drum ✓ (GM_PROGRAMS[116] + FluidR3 preset 116 both "Taiko Drum") |
-|| 66 | Tenor Sax | Tenor_Sax ✓ (GM_PROGRAMS[66] = "Tenor Sax"; FluidR3 preset 66 = "Tenor Sax" — labels match exactly, **no quirk**) |
-||| 21 | Accordion | Accordion ✓ (GM_PROGRAMS[21] = "Accordion"; FluidR3 preset 21 = "Accordian" — archaic SF2 spelling, cosmetic only, no routing impact) |
+||| 66 | Tenor Sax | Tenor_Sax ✓ (GM_PROGRAMS[66] = "Tenor Sax"; FluidR3 preset 66 = "Tenor Sax" — labels match exactly, **no quirk**) |
+||| 67 | Baritone Sax | Baritone_Sax ✓ (GM_PROGRAMS[67] = "Baritone Sax"; FluidR3 preset 67 = "Baritone Sax" — labels match exactly, **no quirk**) |
+|||| 21 | Accordion | Accordion ✓ (GM_PROGRAMS[21] = "Accordion"; FluidR3 preset 21 = "Accordian" — archaic SF2 spelling, cosmetic only, no routing impact) |
 ||| 10 | Music Box | Music_Box ✓ (GM_PROGRAMS[10] = "Music Box"; FluidR3 preset 10 = "Music Box" — labels match exactly, **no quirk**) |
 || ch9/pgm0 | Drums | **Acoustic_Grand_Piano** ✗ (program-0 fallback) |
 
@@ -716,3 +718,21 @@ sweet spot 53–78 (F3–F5). Registered in `instrument_registry.py` as TENOR_SA
 convenience constant. Registration proof: `by_name('tenor sax')` → Tenor
 Saxophone, `by_program(66)` → Tenor Saxophone, `in_sweet_spot(64)` = True,
 `in_sweet_spot(30)` = False.
+
+**Baritone Saxophone added** (2026-10-02): GM67, Woodwind-family ninth entry —
+the E♭ baritone sax, the low anchor of the sax family (Gerry Mulligan, Pepper
+Adams, Serge Chaloff, Leo Parker) (instrument.md + baritone_sax.py), verified
+end-to-end UnitMatrixComposer → zero-drift ✓ → MIDI → FluidSynth WAV ✓;
+RenderPipeline stem label `trackXX_Baritone_Sax.wav` ✓ (GM_PROGRAMS[67] =
+"Baritone Sax", FluidR3 preset 67 = "Baritone Sax" — labels match exactly,
+**no quirk**). PhaseModSynth recommended (single-reed conical bore: saw carrier,
+mod_depth 3.2 — deepest in the sax set for the thickest reed; attack 0.07 s for
+the heaviest reed in the family; carrier_shape=saw for even+odd harmonics).
+Solo-render spectral check: 4–8 kHz buzz checked (clean single voice, no
+comb-filtering). Range 36–80 (C2–G5 concert; written E♭2–B5 with altissimo);
+sweet spot 48–65 (C3–F4). Registered in `instrument_registry.py` as
+BARITONE_SAX convenience constant. Registration proof: `by_name('baritone sax')`
+→ Baritone Saxophone, `by_program(67)` → Baritone Saxophone,
+`in_sweet_spot(60)` = True, `in_sweet_spot(30)` = False. Role:
+bass/harmony/accent/lead/countermelody — the bari is the bass of the sax
+section, covering the lowest voice in the woodwind family.

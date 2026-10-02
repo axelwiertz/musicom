@@ -65,6 +65,7 @@ _INSTRUMENT_MODULES = {
     "World.kalimba.kalimba": "kalimba",
     "World.banjo.banjo": "banjo",
     "Woodwind.bagpipe.bagpipe": "bagpipe",
+    "Woodwind.baritone_sax.baritone_sax": "baritone_sax",
     "Woodwind.harmonica.harmonica": "harmonica",
     "Woodwind.ocarina.ocarina": "ocarina",
     "World.shenai.shenai": "shenai",
@@ -230,6 +231,7 @@ SHAMISEN = ALL_INSTRUMENTS["shamisen"]
 KALIMBA = ALL_INSTRUMENTS["kalimba"]
 BANJO = ALL_INSTRUMENTS["banjo"]
 BAGPIPE = ALL_INSTRUMENTS["bagpipe"]
+BARITONE_SAX = ALL_INSTRUMENTS["baritone_sax"]
 HARMONICA = ALL_INSTRUMENTS["harmonica"]
 MUSIC_BOX = ALL_INSTRUMENTS["music_box"]
 OCARINA = ALL_INSTRUMENTS["ocarina"]
@@ -335,6 +337,8 @@ def registry_table():
             role = "lead, melody, ornament, rhythm, accent"
         elif low == "bagpipe":
             role = "lead, melody, ornament, drone, accent"
+        elif low == "baritone saxophone":
+            role = "bass, harmony, accent, lead, countermelody"
         elif low == "shenai":
             role = "lead, melody, ornament, drone, accent"
         elif low == "fiddle":
@@ -482,3 +486,8 @@ if __name__ == "__main__":
     print("  by_program(66) =", by_program(66))
     print("  TENOR_SAX.in_sweet_spot(64) =", TENOR_SAX.in_sweet_spot(64))
     print("  TENOR_SAX.in_sweet_spot(30) =", TENOR_SAX.in_sweet_spot(30))
+    print("  BARITONE_SAX.midi_program =", BARITONE_SAX.midi_program, "(should be 67)")
+    print("  by_name('baritone sax') =", by_name("baritone sax"))
+    print("  by_program(67) =", by_program(67))
+    print("  BARITONE_SAX.in_sweet_spot(60) =", BARITONE_SAX.in_sweet_spot(60))
+    print("  BARITONE_SAX.in_sweet_spot(30) =", BARITONE_SAX.in_sweet_spot(30))

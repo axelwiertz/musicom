@@ -1,0 +1,28 @@
+{
+  "project": "217-perlin-dorian-mirror-suite",
+  "genre": "Experimental",
+  "key": "D Dorian",
+  "bpm": 80,
+  "seed": 42,
+  "method": "040-Perlin-Noise-Composition + musicom rules",
+  "extension_of": "102-perlin-dorian-bridge-mirror",
+  "decision": "extension (audit: all 6 standards pass)",
+  "phase_artifacts": [
+    "MIDI/217-perlin-dorian-mirror-suite-phase1.mid",
+    "MIDI/217-perlin-dorian-mirror-suite.mid"
+  ],
+  "form": "8 sections x 4 bars = 32 bars",
+  "voices": ["Lead(Flute)", "Pad(StringEnsemble)", "Bass", "Counter(Trumpet)", "Drums(ch9)"],
+  "variations": ["transpose(+4th)", "diminution", "octave_up", "density_rise",
+                 "retrograde", "invert", "canon(counterline)", "augment"],
+  "verification": {
+    "voice_tracks": 5,
+    "track_length_ticks": 61440,
+    "pitched_onsets": 560,
+    "off_grid_onsets": 0,
+    "key_violations": 0,
+    "chord_violations": 0,
+    "audio_silence_pct": 6.4,
+    "audio_peak": 0.759
+  }
+}

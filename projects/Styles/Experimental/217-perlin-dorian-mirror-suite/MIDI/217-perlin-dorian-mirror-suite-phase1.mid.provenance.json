@@ -1,0 +1,19 @@
+{
+  "artifact": "217-perlin-dorian-mirror-suite-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "040-Perlin-Noise-Composition + musicom rules",
+  "sources": [],
+  "parameters": {
+    "phase": 1,
+    "bpm": 80,
+    "key": "D Dorian",
+    "seed": 42,
+    "voices": 1,
+    "note": "raw generative draft, diatonic, pre-rules"
+  },
+  "notes": "",
+  "sha256": "3c81115e9244ebfeb6d00693009468eaf04ce051855edbda5083a90fdb3d9cc7",
+  "bytes": 2080,
+  "created_utc": "2026-10-02T01:07:20.928126+00:00",
+  "provenance_version": "1.0"
+}

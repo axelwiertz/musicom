@@ -110,7 +110,8 @@ Classification of active Musicom composition methods categorized by their primar
 | **100** | concrete | Active Inference Composition (AIFC) | **AI-Driven** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Prior-guided, HOME/LIFT/TENSE/TURN) | Grid-Locked / Continuous | Macro / Generative Model Horizon | $\mathcal{O}(T \cdot d^2)$ per step, $\mathcal{O}(T \cdot D \cdot d^2)$ learn | Casts composition as closed-loop active inference: a multi-level hierarchical generative model drives note-by-note event selection by minimizing expected free energy. Prior preferences encode tonal gravity, metric binding, voice-leading, and macro-form. Multi-agent (one per voice) with shared form + harmonic state. |
 || **101** | concrete | Flow Matching Composition (FMC) | **AI-Driven** | Pitch, Rhythm, Harmony, Structure, Texture | Variable (Prior/Conditioning-guided) | Continuous / Continuous | Macro / Full-Sequence Trajectory | $\mathcal{O}(T \cdot d)$ training, $\mathcal{O}(T \cdot d)$ sampling | Vector-field regression (CFM) on token embeddings: deterministic ODE integration pushes noise $\rightarrow$ structured multi-voice token sequences. |
 || **102** | concrete | Cross-Entropy Method Composition (CEMC) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Elite-guided) | Continuous / Fluid | Macro / Distribution | $\mathcal{O}(I \cdot N \cdot L)$ | Iterative distribution optimization: sample sequences, keep elite (top fitness), refit parametric distribution via CE minimization. |
-||
+|| **103** | concrete | Graph Neural Network Composition (GNNC) | **AI-Driven** | Pitch, Rhythm, Harmony, Structure, Texture | Variable (Graph-learned) | Grid-Locked / Continuous | Macro / Graph Neighborhood | $\mathcal{O}(V \cdot T \cdot d^2)$ | Models composition as a heterogeneous graph (note, chord, bar nodes; temporal/harmonic/metric/voice edges). GNN message-passing refines node embeddings, decoded into pitch/duration/velocity/voice assignments. Relational inductive bias explicitly encodes voice-leading, harmony, and meter. |
+|||
 |### Source
 |Sakellariou, J., Tria, F., Loreto, V. & Pachet, F. (2017). "Maximum entropy models capture melodic styles." *Scientific Reports* 7, 9172. arXiv:1610.03414. — Jaynes, E. T. (1957). "Information theory and statistical mechanics." *Physical Review* 106, 620–630.
 
@@ -270,6 +271,7 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 || **SP-099** | Comb Filter Resonance Synthesis (CFRS) | **Synthesis Engines** | Resonator-Based Pitched Timbre / Metallic, Plucked & Percussive Textures | Generates pitched sound by exciting a feedback comb filter with short-duration impulses, noise bursts, or oscillator pings, ringing at the delay-line resonant frequencies $f_0 = f_s / K$. Four modes: impulse-excited (plucked percussion), noise-excited (pitched drone/hiss), oscillator-excited (resonant-body tone), and parallel comb bank (inharmonic bell clusters). Fractional delay for exact equal-temperament tuning; allpass dispersion chain for metallic inharmonicity. $\mathcal{O}(1)$ per sample per comb. Candidate: `sound/synthesis/comb_resonance.py`. |
 || **SP-100** | Volterra Series Synthesis (VSS) | **Post-Processing / DSP** | Nonlinear Distortion / Intermodulation Enrichment | General nonlinear synthesis framework using Volterra series expansion (Taylor series with memory). Multi-order kernels generate harmonic/inharmonic intermodulation, saturation, and spectral enrichment as a post-process on rendered audio. Laguerre pruning reduces cost to $\mathcal{O}(L^P)$ per sample. Candidate: `sound/effects/volterra_synthesis.py`. |
 || **SP-101** | Digital Waveguide Synthesis (DWS) | **Synthesis Engines** | Physical-Modeling String/Wind/Percussion Timbre | Models acoustic wave propagation as bidirectional traveling waves in digital delay lines. A vibrating string, acoustic bore, or struck bar is realized as a pair of delay lines looped via termination filters, fractional-delay interpolators, scattering junctions, and nonlinear excitations (pluck, bow, blow, strike). Loop filter $H_L(z)$ governs decay spectrum; stiffness allpass chain produces inharmonic partials for piano/bell timbres. Generalizes Karplus-Strong (SP-011) to arbitrary terminations and multi-waveguide networks. $\mathcal{O}(1)$ per sample per waveguide. Candidate: `sound/synthesis/digital_waveguide.py`. |
+|| **SP-102** | Amplitude Modulation Synthesis (AMS) | **Synthesis Engines** | AM Sideband / Tremolo Timbres | Modulates carrier oscillator amplitude with a modulator oscillator $m(t) = [1 + m \cos(2\pi f_m t)]$. Sub-audio $f_m$ = tremolo; audio-rate $f_m$ = DSB+Carrier sidebands at $f_c \pm f_m$. $m$ controls sideband strength; $m>1$ overmodulation. $\mathcal{O}(1)$ per sample per voice. Candidate: `sound/synthesis/am_synthesis.py`. |
 |---|
 
 
@@ -21674,7 +21676,7 @@ CFRS generates sounds through four excitation types:
 
 **a. Impulse (Dirac) Excitation:**
 
-$$x[n] = A \\cdot \\delta[n] = \\begin{cases} A & n = 0 \\\\ 0 & n > 0 \\end{cases}$$
+$$x[n] = A \\cdot \\delta[n] = \\begin{cases} A & n = 0 \ 0 & n > 0 \\end{cases}$$
 
 The output $y[n] = A g^{\\lfloor n/K \\rfloor}$ (decaying impulse train at pitch $f_0$). This is the classic "impulse → comb filter = pitched tone" model. Use for plucked strings, struck bars, woodblock/marimba-like percussion.
 
@@ -22545,3 +22547,181 @@ DWS replaces the entire sample-level audio generation, bypassing FluidSynth and 
 7. **Percussion beyond basic Karplus-Strong**: The basic KS drum (SP-098 kick, SP-087 snare) uses a short noise-filled delay line with loss. DWS percussion extends this with (a) dual-waveguide coupling (two different delay lengths summed → two-pitch drum), (b) scattering junction coupling to a resonant body waveguide (drum head + shell), and (c) nonlinear excitation (stick impact with contact time from Hertz model). These extensions produce far richer percussion than basic KS but increase computational cost by $\\mathcal{O}(N_\\text{ports})$ per coupling junction.
 
 8. **No built-in effects**: DWS produces the raw acoustic model output — no reverb, no EQ, no spatialization. The waveguide sound is typically dry and direct. To integrate into a full mix, route the DWS output through the post-processing pipeline: SP-071 (reverb), SP-072 (EQ/HPSS), and SP-075 (spatialization). This is expected and mirrors real acoustic recording where room acoustics are essential.
+
+### 103. Graph Neural Network Composition (GNNC)
+
+### Source
+Cosenza, E., Valenti, A. & Bacciu, D. (2023). "Graph-based Polyphonic Multitrack Music Generation." *Proceedings of the 32nd International Joint Conference on Artificial Intelligence (IJCAI)*, pp. 643–658. — Lim, W. Q., Liang, J. & Zhang, H. (2024). "Hierarchical Symbolic Pop Music Generation with Graph Neural Networks." *arXiv:2409.08155*. — Jeong, D. et al. (2019). "Graph Neural Network for Music Score Data and Modeling Expressive Piano Performance." *International Conference on Machine Learning*, PMLR 97.
+
+### Layer
+**concrete** — generates concrete pitch, rhythm, harmony, structure, and texture events that fill UnitMatrix cells. The GNN operates on a graph where nodes encode musical events (notes, chords, onsets) and edges encode temporal and tonal relationships; message-passing refines node features, which are decoded into per-cell MusicEvents.
+
+### Description
+**Graph Neural Network Composition (GNNC)** models the composition as a graph whose nodes are musical events (notes, chords, percussive onsets, section markers) and whose edges represent relationships: temporal adjacency (note-to-note succession), harmonic binding (chord-tone membership), voice membership (all notes in one voice/form an independent subgraph), and metric structure (bar/beat grouping). A graph neural network — typically a Gated Graph Neural Network (GGNN), Graph Convolutional Network (GCN), or Graph Attention Network (GAT) — propagates information across this graph to produce refined node embeddings, which are then decoded into musical attributes (pitch, onset, duration, velocity, instrument).
+
+The method decomposes into four phases:
+
+**Phase 1 — Graph construction**: Build a heterogeneous graph $\\mathcal{G} = (\\mathcal{V}, \\mathcal{E})$ where:
+- **Note nodes** $n_i \\in \\mathcal{V}_N$ carry attributes (pitch MIDI, onset tick, duration ticks, velocity, voice-id, section-id).
+- **Chord nodes** $c_j \\in \\mathcal{V}_C$ carry chord-root, type (major/minor/dim/etc.), and inversion.
+- **Bar nodes** $b_k \\in \\mathcal{V}_B$ carry bar number, time signature, and harmony summarization.
+- **Edges** $e \\in \\mathcal{E}$ are typed: `TEMPORAL` (note $\\to$ next note in the same voice), `HARMONIC` (note $\\to$ chord it belongs to), `METRIC` (note/bar $\\to$ containing bar/section), `SIMULTANEITY` (notes with overlapping time, same section), `VOICE` (all notes in a voice chain), and `ATTENTIONAL` (long-range similarity edges between motifs).
+
+**Phase 2 — Message passing**: For $T$ rounds (typically 4–12), each node aggregates messages from its neighbors via a type-specific message function and updates its hidden state:
+$$h_v^{(t+1)} = \\text{GRU}\\left( h_v^{(t)}, \\sum_{r \\in \\mathcal{R}} \\sum_{u \\in \\mathcal{N}_r(v)} W_r \\cdot h_u^{(t)} \\right)$$
+where $\\mathcal{R}$ is the set of edge types, $\\mathcal{N}_r(v)$ are neighbors of $v$ via relation $r$, and $W_r$ is a learned transformation matrix per relation type. After $T$ rounds, every node's representation encodes information from its $T$-hop relational neighborhood — temporal, harmonic, metric, and timbral context all mutually inform each other.
+
+**Phase 3 — Decoding**: The final node embeddings are passed through per-attribute decoders (MLPs or linear projections):
+- **Pitch decoder**: $p_i = \\text{softmax}(\\text{MLP}_p(h_i))$ — a categorical distribution over MIDI note values.
+- **Duration decoder**: $d_i = \\text{softmax}(\\text{MLP}_d(h_i))$ — categorical over discrete duration classes (1/4, 1/8, 1/16, etc.).
+- **Velocity decoder**: $v_i = \\text{MLP}_v(h_i)$ — scalar regression log-vel or discretized categories.
+- **Structure / section decoder**: $s_i = \\text{MLP}_s(h_i)$ — predicts the section label for each node, enabling macro-form control.
+- **Voice decoder**: $w_i = \\text{softmax}(\\text{MLP}_w(h_i))$ — assigns node to a voice row.
+
+**Phase 4 — UnitMatrix assembly**: Decoded nodes are placed into the UnitMatrix by voice-id (row) and section-id (column). Nodes within the same bar/section cell are merged into MusicUnits, sorted by onset. The graph structure guarantees zero drift because every note has a well-defined metric position and voice assignment.
+
+**Training**: The model is trained with a composite loss over a corpus of symbolic music (MIDI):
+$$\\mathcal{L} = \\mathcal{L}_{\\text{pitch}} + \\mathcal{L}_{\\text{dur}} + \\mathcal{L}_{\\text{vel}} + \\mathcal{L}_{\\text{struct}} + \\mathcal{L}_{\\text{KL}} + \\lambda_{\\text{graph}} \\mathcal{L}_{\\text{edge}}$$
+where $\\mathcal{L}_{\\text{edge}}$ is a link-prediction loss ensuring the generated graph structure matches the training-corpus relational patterns. Variants use a VAE framework where the graph is encoded to a latent vector then decoded (Cosenza et al. 2023), or a hierarchical VAE with separate graph generators for phrase structure and bar-level content (Lim et al. 2024).
+
+**Key advantage over sequential models**: Unlike left-to-right autoregressive models (054 ATS, 060 S4SC) which generate notes in strict temporal order and cannot revise earlier decisions, GNNC operates on the entire graph concurrently. This enables:
+- **Bidirectionality**: Each note's embedding benefits from both past and future context (like masked music modeling, but relational).
+- **Relational inductive bias**: The edge structure explicitly encodes musical relationships (voice-leading, harmony, meter) that sequential models must learn implicitly.
+- **Variable structure**: The graph can represent arbitrary polyphony, tuplets, and non-strict metric divisions that don't fit a fixed grid.
+- **Conditioning**: Section structure can be set by fixing section-node embeddings or conditioning on them.
+
+### Musical Elements Framework
+
+**PITCH**: Driven by the pitch decoder acting on node embeddings that aggregate harmonic (chord-tone membership), temporal (melodic contour), and voice (voice-leading) information. The relational inductive bias means a note "knows" its chord context, voice neighbors, and metric position simultaneously, producing tonally and contrapuntally coherent pitch choices. Edge embeddings for `HARMONIC` type propagate chord-scale constraints; `TEMPORAL` edges enforce stepwise motion; `SIMULTANEITY` edges prevent parallel unisons and regulate voice-crossing.
+
+**RHYTHM**: Emerges from the duration decoder combined with the graph's temporal adjacency structure. `TEMPORAL` edges carry inter-onset-interval information, so rhythmic cells and groove patterns are propagated across the graph. Bar nodes encode metric hierarchy (strong/weak beat), which the message-passing spreads to individual note nodes, anchoring durational choices to metric positions. Syncopation arises when a note's decoded duration disagrees with its metric-level expectation, creating tension that propagates via `METRIC` edges to neighboring notes.
+
+**HARMONY**: Encoded explicitly through chord nodes and `HARMONIC` edges linking note nodes to their parent chord node. The chord node itself is a latent (or conditioned) embedding that specifies root, quality, and inversion. During denoising/generation, chord nodes are either sampled from a prior (unconditional) or fixed from a progression (conditional). The message-passing ensures every note in a chord reflects its harmonic function (root, third, fifth, seventh), while `SIMULTANEITY` edges across notes in the same chord enforce vertical consonance constraints.
+
+**STRUCTURE**: Multi-graph hierarchy: phrase-level structure is a graph where each phrase is a node, with edges encoding phrase repetition/contrast/development relationships. Bar-level nodes aggregate into phrase nodes; the hierarchical message passing (phase-1 → phase-1 saturation → phase-2 GNN on coarser graph) propagates structural decisions down to individual notes. The section decoder can be conditioned on a structural template (AABA, verse-chorus) or learned from data.
+
+**TEXTURE**: Controlled by voice assignment (decoder $w_i$) and the density of nodes in the graph. The `VOICE` edge type ensures that all notes assigned to a voice form a connected subgraph, maintaining voice independence. Texture density (number of simultaneous nodes per cell) emerges from the decoding threshold — a temperature parameter on the pitch and voice decoders controls polyphonic density. Sparsity regularization on the node count per bar provides explicit density control.
+
+### UnitMatrix Integration (Voices & Sections)
+
+**Voices (Rows)**: Each voice corresponds to a subgraph of the full compositional graph, connected by `VOICE`-type edges. The voice decoder assigns each generated node to a voice ID. During graph construction, voice subgraphs can be initialized independently (each with its own note and bar nodes), and `SIMULTANEITY` edges are only added between nodes of different voices that temporally overlap. This makes voice separation inherent to the graph structure rather than an afterthought. Voice-count flexibility: the graph can have as many subgraphs (voices) as needed, from solo to full orchestra.
+
+**Sections (Columns)**: Section nodes are parent nodes to which bar nodes connect via `METRIC` edges. The section embedding encodes the harmonic region (key, chord progression template), typical density, and register range. During message-passing, section context flows down to every bar and note node, ensuring each cell's notes are consistent with its sectional role (verse softer, chorus brighter). Section transitions are modeled as edges between section nodes, encoding typical harmonic/pacing relationships.
+
+**Cells (MusicUnits)**: Each cell (voice × section) is the set of note nodes whose voice-id matches the row and whose metric position falls within the section's bar range. Ordered by onset tick, they form the MusicUnit sequence for that cell. Because the graph's time resolution is continuous (tick-level), tuplets and grace notes are naturally representable — edges simply capture their temporal position relative to the metric grid. After decoding, the node set per cell is sorted and packed into a MusicUnit for the UnitMatrix, preserving the zero-drift invariant because every node has an explicit metric anchor.
+
+### Pitfalls
+
+1. **Graph construction is costly**: Building the heterogeneous graph for a full piece (hundreds of bars, thousands of notes) requires careful batched encoding to avoid excessive memory. For training, pieces are often chunked into 8–32 bar segments.
+
+2. **Edge type explosion**: With 6+ edge types, the message-passing step has $O(|\\mathcal{E}| \\cdot d)$ complexity, and the attention/aggregation step per type requires storing $|\\mathcal{R}|$ adjacency matrices. Type-agnostic or relation-bundling (keeping only TEMPORAL + HARMONIC + VOICE) is a practical simplification.
+
+3. **Training data needs graph annotations**: Edge labels (e.g., chord-tone membership) require symbolic MIDI with chord annotations or inferred harmony, which limits available training data. Synthetic data augmentation using chord syntax grammar can help.
+
+4. **UnitMatrix cell boundary rounding**: Since graph nodes have continuous tick-resolution timing, aligning them to section/bar boundaries for UnitMatrix export requires a tie-breaking step. Nodes that cross section boundaries must be split or assigned to the dominant section.
+
+5. **Parallel voice collapse**: Without explicit regularization, the voice decoder may assign all nodes to one voice (mode collapse). A diversity loss (entropy bonus or contrastive loss on voice embeddings in the same bar) or separate per-voice decoders is needed.
+
+6. **Long-range dependencies**: With T message-passing rounds and a graph diameter of D ≈ (sections × bars), T must be at least D for long-range structural information to propagate. Deep GNNs suffer from oversmoothing; skip connections (GATv2/TransformerConv) or hierarchical GNNs with graph pooling are required for long-form coherence.
+
+7. **Inference is graph-construction-dependent**: Generating new music requires either autoregressive graph expansion (predict node+edge then append) or full-graph generative modeling (VAE/denoising over graph structure). Both are active research areas; the VAE approach is more stable but limits graph-size variation.---
+# Amplitude Modulation Synthesis (AMS) (Method SP-102)
+
+### Source
+Strange, Allen (1983). *Electronic Music: Systems, Techniques, and Controls*. — d'Escrivan, Julio (2012). *Amplitude Modulation Synthesis*, in *The Oxford Handbook of Computer Music*. — Roads, Curtis (2015). *Composing Electronic Music: A New Aesthetic*. Oxford University Press, pp. 144–148. — Creasey, David (2004). *Audio Processes*, pp. 560–575.
+
+### Layer
+**absolute** — sound production method. Renders symbolic note events into raw audio by applying amplitude modulation between a carrier oscillator and a modulator oscillator at synthesis-engine level. Candidate code path: `sound/synthesis/am_synthesis.py`.
+
+### Description
+**Amplitude Modulation Synthesis (AMS)** is a time-domain synthesis technique where the instantaneous amplitude of a carrier oscillator (typically a sine wave or complex waveform) is varied proportionally to the instantaneous amplitude of a modulator oscillator. At sub-audio modulator frequencies ($f_m < 20$ Hz) the effect is perceived as tremolo — a periodic volume fluctuation. At audio-rate modulator frequencies ($f_m \ge 20$ Hz) the amplitude fluctuations are too fast to perceive as volume changes; instead, the ear hears new spectral components (sidebands) at the sum and difference frequencies of the carrier and modulator partials.
+
+AMS is the simplest and most intuitive of the modulation synthesis family. It is the direct ancestor of Ring Modulation (SP-063, which suppresses the carrier) and a companion to FM (SP-010/SP-017, which modulates frequency rather than amplitude). Its distinguishing feature from RM is the **presence of the carrier** in the output and the use of a **unipolar modulating signal** (always $\ge 0$, achieved by adding a DC offset to the bipolar modulator).
+
+### Technical Mechanics
+
+**Basic AM (Double-Sideband with Carrier — DSB+Carrier):**
+
+$$y(t) = A_c \left[1 + m \cdot \cos(2\pi f_m t)\right] \cos(2\pi f_c t)$$
+
+where:
+- $A_c$ = carrier amplitude
+- $f_c$ = carrier frequency (Hz)
+- $f_m$ = modulator frequency (Hz)
+- $m$ = modulation index, $0 \le m \le 1$
+
+Expanding the product reveals the three spectral components:
+
+$$y(t) = A_c \cos(2\pi f_c t) + \frac{m A_c}{2} \cos\left[2\pi (f_c + f_m) t\right] + \frac{m A_c}{2} \cos\left[2\pi (f_c - f_m) t\right]$$
+
+1. **Carrier** at $f_c$ with amplitude $A_c$
+2. **Upper sideband (USB)** at $f_c + f_m$ with amplitude $mA_c/2$
+3. **Lower sideband (LSB)** at $f_c - f_m$ with amplitude $mA_c/2$
+
+When $f_m$ exceeds $f_c$, the lower sideband $f_c - f_m$ becomes negative — in AM synthesis it crosses through 0 Hz and is reflected back (folded) as a positive frequency (similar to FM aliasing but originating from the DC fold).
+
+**Modulation Index $m$:**
+
+$$m = \frac{\text{peak deviation}}{\text{carrier amplitude}} = \frac{A_{\max} - A_c}{A_c} = \frac{A_c - A_{\min}}{A_c}$$
+
+- $m = 0$: no modulation — pure carrier sine.
+- $m = 1$: 100% modulation — carrier envelope just touches zero.
+- $m > 1$: **overmodulation** — envelope distortion generates additional sidebands beyond the fundamental three; the carrier envelope inverts at the trough, producing a waveform discontinuity that enriches the spectrum unpredictably (Creasey 2004).
+
+**Unipolar Modulator Requirement:** To produce classic AM (DSB+Carrier), the modulator must be unipolar (positive only). This is achieved by adding a DC offset equal to the modulator's amplitude:
+
+$$m(t) = 1 + m \cdot \cos(2\pi f_m t) \quad \text{where } m \le 1 \implies m(t) \ge 0$$
+
+Ring modulation (SP-063) omits the DC offset (bipolar modulator), yielding DSB-SC.
+
+**Generalization to Complex Waves:** For a carrier with $P$ partials at frequencies $f_{c,p}$ with amplitudes $A_{c,p}$ and a modulator with $Q$ partials at $f_{m,q}$ with amplitudes $A_{m,q}$:
+
+$$y(t) = \sum_{p=1}^{P} \sum_{q=1}^{Q} A_{c,p} A_{m,q} \cos(2\pi f_{c,p} t) \left[1 + m \cdot \cos(2\pi f_{m,q} t)\right]$$
+
+Each carrier partial produces a USB at $f_{c,p} + f_{m,q}$ and an LSB at $f_{c,p} - f_{m,q}$, so $P \times Q$ sideband pairs appear. For non-harmonic ratios of $f_c/f_m$, the result is inharmonic (bell-like, metallic). For integer ratios, the sidebands land on harmonic multiples of the fundamental.
+
+**Discrete-Time Implementation:**
+
+$$y[n] = A_c \left[1 + m \cdot \cos(2\pi f_m n / f_s)\right] \cos(2\pi f_c n / f_s)$$
+
+Phase-accumulator-based oscillators for carrier and modulator, multiplied sample-by-sample:
+
+```python
+import numpy as np
+def am_synthesis(f_c, f_m, sr, duration, m=0.5, A_c=0.5):
+    n = np.arange(int(sr * duration))
+    carrier = np.cos(2 * np.pi * f_c * n / sr)
+    modulator = 1 + m * np.cos(2 * np.pi * f_m * n / sr)
+    return A_c * carrier * modulator
+```
+
+**Complexity:** $\mathcal{O}(1)$ per sample per voice — two phase accumulators, one multiplier, one addition. Suitable for real-time polyphonic rendering.
+
+### Musical Elements Framework
+
+**PITCH:** The perceived pitch of an AM tone is ambiguous. When $m$ is low ($<0.5$), the carrier frequency $f_c$ dominates and the ear hears the carrier pitch with a sideband coloration. When $m \to 1$, the sidebands approach the carrier in amplitude, and the ear may hear the sideband interval (a major/minor chord if $f_c/f_m$ is a consonant ratio) or a pitch at the GCD of $(f_c, f_m, f_c\pm f_m)$. For sub-audio tremolo ($f_m < 20$ Hz), pitch is purely $f_c$.
+
+**RHYTHM:** At sub-audio rates, the tremolo period $1/f_m$ provides a rhythmic pulsation that can lock to the bar grid. Section-based $f_m$ envelopes map to accelerando/ritardando of the tremolo rate. AM sideband spectrum changes at note onsets create rhythmic definition in the spectral domain.
+
+**HARMONY:** Audio-rate AM ($f_m > 20$ Hz) generates a three-tone chord from a single note: $f_c$, $f_c+f_m$, $|f_c-f_m|$. By controlling the $f_c/f_m$ ratio, the composer selects the harmonic quality: $f_c/f_m = 1 \to$ octave, $2 \to$ twelfth (perfect 5th + octave), $3 \to$ double octave + major 3rd, $4 \to$ double octave + major 3rd + minor 3rd, etc. Irrational ratios yield inharmonic bell/gong spectra. Carrier/modulator waveform choice (saw/square/triangle) adds $P \times Q$ denser sideband clusters.
+
+**STRUCTURE:** Section-level macro-form controls: per-section $m$ (dry→wet), $f_c$ (register), $f_m$ (harmonic density), and carrier/modulator waveform pair. AM-on/off creates a referenced structural contrast (pure tone → modulated). Overmodulation (m>1) acts as a structural intensifier (distortion climax).
+
+**TEXTURE:** Multiple AM voices with different $(f_c, f_m, m)$ produce a polyphonic AM ensemble. Voice counts and spectral overlap (sideband collision) control density. AM of noise yields sideband-filtered noise textures. When $f_m$ approaches zero (DC), the effect disappears; when $f_m$ sweeps, the texture morphs continuously from tremolo to sideband-laden chord to inharmonic clangor.
+
+### UnitMatrix Integration (Voices & Sections)
+
+**Voices:** Each UnitMatrix voice is an AM-synthesis voice with independent $(f_{c,v}, f_{m,v}, m_v, \text{waveform}_v, A_{c,v})$ parameters. Percussion AM voices use noise carriers modulated by envelope-shaped modulator bursts. The per-voice AM parameter vector is stored in the voice metadata.
+
+**Sections:** Each section $s$ defines an AM macro-envelope: $f_c(s)$, $f_m(s)$, $m(s)$, and a waveform pair selector. Section transitions interpolate these parameters linearly over a crossfade buffer, preventing clicks. A section with $m=0$ (pure sine) contrasts with $m=1$ (full AM chord), creating a structural A/B alternation.
+
+**Cell filling:** Each cell $U_{v,s}$ specifies note events (MIDI pitch $\to$ $f_c$, gate $\to$ ADSR amplitude, velocity $\to$ $m$). The AM oscillator runs during the note's gate, and the rendered buffer is placed into the cell's time slot per the zero-drift invariant. The AM sideband timbre is intrinsic to the oscillator — no post-processing needed.
+
+### Pitfalls
+
+1. **DC offset from unipolar modulator:** The $1 + m\cdot\cos(\cdot)$ term produces a DC offset if the mean deviates from zero. AC-coupling (DC-blocking filter) after the render removes DC but may introduce a transient. Alternative: use DSB-SC (Ring Mod) and re-inject the carrier separately.
+2. **Overmodulation distortion:** $m > 1$ causes carrier envelope inversion, generating unpredictable sidebands and potential aliasing. Bandlimiting the modulator or using oversampling helps. Use ADAA (SP-062) on the AM product for cleaner overmodulation.
+3. **Sideband foldover:** When $f_m > f_c$, the LSB $f_c - f_m$ goes negative. The fold-back reflection creates spectral components that may clash with intended harmonic structure. Anti-aliased frequency shifting or careful $f_c/f_m$ planning is needed.
+4. **Pitch ambiguity:** At high $m$, the ear may not track $f_c$ reliably. If the voice must carry a clear pitch (e.g., melody line), a secondary pure-tone oscillator mixed in at low level anchors the pitch.
+5. **Sideband gap:** AM produces only one sideband pair per partial pair, whereas FM (SP-010) produces theoretically infinite sidebands. AM spectra are sparser — useful for clean chords but may sound thin for dense textures. Parallel AM voice stacking fills spectral gaps.
+6. **Modulator choice:** Using a saw/square modulator instead of sine introduces $P \times Q$ partials quickly. A 10-partial carrier $\times$ 10-partial modulator = 200 sidebands + 10 carrier partials — controlled complexity versus potential muddiness.

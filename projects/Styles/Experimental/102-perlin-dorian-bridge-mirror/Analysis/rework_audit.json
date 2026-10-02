@@ -1,0 +1,32 @@
+{
+  "chosen": "102-perlin-dorian-bridge-mirror",
+  "genre": "Experimental",
+  "audited_at": "2026-10-02T01:02:00Z",
+  "primary_midi": "MIDI/102-perlin-dorian-bridge-mirror.mid",
+  "standard_failures": [],
+  "redesign_required": false,
+  "decision": "extension",
+  "standards": {
+    "1_engine_unitmatrixcomposer": "pass",
+    "2_zero_drift": "pass (4 voice tracks, len 46080)",
+    "3_rhythm_grid_sync": "pass (321 pitched onsets, 0 off-grid)",
+    "4_min_4_voice_tracks": "pass (Lead/Pad/Bass/Drums = 4)",
+    "5_two_phase_artifacts": "pass (phase1 + phase2 mid present)",
+    "6_provenance_and_index": "pass (provenance.json + index.html present)"
+  },
+  "source_identity": {
+    "genre": "Experimental",
+    "key": "D Dorian",
+    "key_pcs": [0, 2, 4, 5, 7, 9, 11],
+    "bpm": 80,
+    "method": "Perlin fBm (seed 42) -> scale-degree contour / rhythm / velocity",
+    "instruments": {
+      "Lead": "Flute (74)",
+      "Pad": "StringEnsemble (49)",
+      "Bass": "Bass (33)",
+      "Drums": "ch9"
+    },
+    "form": "6 sections x 4 bars = 24 bars",
+    "motif": "Perlin fBm driven diatonic contour, D Dorian"
+  }
+}
