@@ -1,0 +1,30 @@
+{
+  "chosen": "Japanese/103-japanese-kojo-koto",
+  "genre": "Japanese",
+  "audited_at": "2026-10-03T01:07:00Z",
+  "source_midi": "MIDI/103-japanese-kojo-koto.mid",
+  "standards": {
+    "std1_engine_authored": "pass",
+    "std2_zero_drift": "pass",
+    "std3_rhythm_grid_sync": "pass",
+    "std4_track_setup": "pass",
+    "std5_two_phase_artifacts": "pass",
+    "std6_provenance_index": "fail"
+  },
+  "standard_failures": [
+    "std6: index.html dashboard missing",
+    "std6: root provenance.json missing (only .mid.provenance.json sidecars present)"
+  ],
+  "redesign_required": false,
+  "decision": "extend",
+  "decision_rationale": "Musical core fully compliant (engine-authored via UnitMatrixComposer, zero-drift 5x46080, 0/556 off-grid, 0 scale/chord violations, two-phase MIDI present). Only documentation artifacts (index.html + root provenance.json) were missing; remediated in the new project 219 while extending form and adding variation.",
+  "source_identity": {
+    "style": "Japanese (koto + shakuhachi + shamisen + taiko)",
+    "key": "A hirajoshi pentatonic (pc {9,10,2,4,7})",
+    "bpm": 80,
+    "form": "Jo-Ha-Kyu 6 sections x 4 bars = 24 bars",
+    "method": "019 L-System (dragon-curve interval fractal)",
+    "voices": ["Koto(107,ch0)", "Shakuhachi(74,ch1)", "Shamisen(106,ch2)", "KotoBass(107,ch3)", "Taiko(ch9)"]
+  },
+  "rework_output": "Japanese/219-japanese-kojo-koto-rework"
+}

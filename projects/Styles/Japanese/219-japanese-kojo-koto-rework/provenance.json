@@ -1,0 +1,13 @@
+{
+  "project": "219-japanese-kojo-koto-rework",
+  "classification": "ai-assisted",
+  "generator": "musicom.workflows.unitmatrix_composer",
+  "style": "Japanese",
+  "key": "A hirajoshi pentatonic",
+  "bpm": 80,
+  "form": "Jo-Ha-Kyu 8x4=32 bars",
+  "phase1": "219-japanese-kojo-koto-rework-phase1.mid",
+  "phase2": "219-japanese-kojo-koto-rework.mid",
+  "reworked_from": "103-japanese-kojo-koto",
+  "seed": 20261003
+}

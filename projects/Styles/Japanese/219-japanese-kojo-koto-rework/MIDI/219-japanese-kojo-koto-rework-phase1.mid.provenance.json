@@ -1,0 +1,29 @@
+{
+  "artifact": "219-japanese-kojo-koto-rework-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.workflows.unitmatrix_composer",
+  "sources": [],
+  "parameters": {
+    "project": "219-japanese-kojo-koto-rework",
+    "phase": 1,
+    "style": "Japanese",
+    "method": "019 L-System (dragon-curve) + transforms",
+    "layer": "concrete",
+    "raw_timing": "unquantized",
+    "variation": [
+      "augmentation",
+      "inversion",
+      "arpeggio-method-change",
+      "retrograde",
+      "register-shift",
+      "canon-counterline"
+    ],
+    "seed": 20261003,
+    "reworked_from": "103-japanese-kojo-koto"
+  },
+  "notes": "",
+  "sha256": "621d7a8d56a3236be2a5287583d3682622737b84c4ec410594ed85ca3260f2aa",
+  "bytes": 2251,
+  "created_utc": "2026-10-03T01:08:28.836932+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,32 @@
+{
+  "artifact": "219-japanese-kojo-koto-rework.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.workflows.unitmatrix_composer",
+  "sources": [],
+  "parameters": {
+    "project": "219-japanese-kojo-koto-rework",
+    "phase": 2,
+    "style": "Japanese",
+    "method": "019 L-System (dragon-curve) + transforms",
+    "layer": "concrete",
+    "quantization": "16th/8th grid (120/240 ticks)",
+    "key": "A hirajoshi pentatonic",
+    "bpm": 80,
+    "form": "Jo-Ha-Kyu (8 sections x 4 bars = 32 bars)",
+    "variation": {
+      "Jo": "augmentation (quarter-note lead)",
+      "Ha2": "inversion (negated deltas)",
+      "Bridge": "method change (pentatonic arpeggio)",
+      "Kyu1": "retrograde + diminution (16ths)",
+      "Kyu2": "register shift (lead 74-90) + diminution",
+      "Interlude": "canon counterline (shamisen echo)"
+    },
+    "seed": 20261003,
+    "reworked_from": "103-japanese-kojo-koto"
+  },
+  "notes": "",
+  "sha256": "04d08224ac9d4e71a43621face9b5ef7ed6f1535272f2702992d363f95dbe8f6",
+  "bytes": 6694,
+  "created_utc": "2026-10-03T01:08:28.881881+00:00",
+  "provenance_version": "1.0"
+}
