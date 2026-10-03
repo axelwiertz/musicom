@@ -1,0 +1,17 @@
+{
+  "windows_checked": 48,
+  "dominant_peak_hit_rate": 1.0,
+  "harmonic_energy_mean_8h": 0.4327,
+  "acf_windows": 13,
+  "acf_unpitched": 0,
+  "lowest_midi_notes_seen": [
+    40,
+    41,
+    43,
+    45
+  ],
+  "median_dom_hz": 248.0,
+  "misses": [],
+  "method": "FFT dominant peak per 0.5s window, 50-2000 Hz, +/-4% vs active MIDI fund or x2/x3//2",
+  "verdict": "PASS"
+}

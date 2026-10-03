@@ -1,0 +1,5 @@
+SP-083 source rhythm DNA - flamenco_v2.mid (E Phrygian, 120 BPM)
+rows = tracks, columns = bars (16 bars), '#'=onset '.'=rest
+track 1 # # # # # # # # # # # # # # # #
+track 2 # # # # # # # # # # # # # # # # .
+track 3 # # # # # # # # # # # # # # # # .

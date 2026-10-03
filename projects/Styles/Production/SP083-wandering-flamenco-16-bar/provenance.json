@@ -1,0 +1,85 @@
+{
+  "job": "random-style production pass (SP) - LAYER-ALIGNED 2026-10-03",
+  "selection_source": "workflows.musicom_workflow.SP_METHODS registry (38 implemented)",
+  "seed": 20261003,
+  "composition_source": "/opt/data/repos/musicom/projects/Styles/Flamenco/023-flamenco-16-bar/MIDI/flamenco_v2.mid",
+  "composition_sha256": "72f01737606c885a0babdbacebfbbf46a076eac0ccff662920b7a98ee9c0383b",
+  "production_method": "SP-083",
+  "production_method_name": "Non-LFO Wandering Engine + Portal + Drift Clouds Voice (Sound Dust-style)",
+  "registered_module": "sound.modular.wandering",
+  "layer_discipline": "absolute layer: SP-083 is a modulation/effect layer applied to the WHOLE flamenco render (Cloud/Shadow band split driven by non-LFO wander + surprised modulation matrix); no new notes written; FluidSynth GM render is the acoustic carrier",
+  "sp083_params": {
+    "seed": 20261003,
+    "cloud_band_hz": 350.0,
+    "mod_wheel": 0.6,
+    "wander": {
+      "rate": 0.35,
+      "wobble": 0.5,
+      "roughness": 0.03,
+      "stall_probability": 0.3,
+      "stall_length": 0.8,
+      "slew": 0.5
+    },
+    "wander_pan": {
+      "rate": 0.18,
+      "wobble": 0.35,
+      "stall_probability": 0.25,
+      "stall_length": 1.0,
+      "slew": 0.6
+    },
+    "portal_routes": [
+      "drift->filter_cutoff 0.40",
+      "drift->pan 0.35",
+      "drift->volume 0.20",
+      "portal->eq_tilt 0.15"
+    ],
+    "surprise_times_s": [
+      4.0,
+      8.0,
+      12.0,
+      16.0,
+      20.0
+    ],
+    "filter": "cloud SVF lp 1500+6500cv Hz, shadow SVF lp 180+900(1-cv) Hz",
+    "level": "0.72+0.28cv (ebb/near-halt)",
+    "pan": "(cv2-0.5)*0.7 + portal pan offset"
+  },
+  "fixes": [],
+  "checks": {
+    "pitch_verification": {
+      "windows_checked": 48,
+      "dominant_peak_hit_rate": 1.0,
+      "harmonic_energy_mean_8h": 0.4327,
+      "acf_windows": 13,
+      "acf_unpitched": 0,
+      "lowest_midi_notes_seen": [
+        40,
+        41,
+        43,
+        45
+      ],
+      "median_dom_hz": 248.0,
+      "misses": [],
+      "method": "FFT dominant peak per 0.5s window, 50-2000 Hz, +/-4% vs active MIDI fund or x2/x3//2",
+      "verdict": "PASS"
+    },
+    "silence_wet": 0.1144,
+    "silence_dry": 0.1148,
+    "lufs": -14.3,
+    "peak": 0.8913
+  },
+  "artifacts": {
+    "wav": "/opt/data/repos/musicom/projects/Styles/Production/SP083-wandering-flamenco-16-bar/SP083-wandering-flamenco-16-bar.wav",
+    "ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP083-wandering-flamenco-16-bar/SP083-wandering-flamenco-16-bar.ogg",
+    "dry_reference": "/opt/data/repos/musicom/projects/Styles/Production/SP083-wandering-flamenco-16-bar/dry_full_mix_sp001_reference.wav",
+    "wet_stems": {
+      "cloud": "/opt/data/repos/musicom/projects/Styles/Production/SP083-wandering-flamenco-16-bar/Audio/stems_wet/cloud_band.wav",
+      "shadow": "/opt/data/repos/musicom/projects/Styles/Production/SP083-wandering-flamenco-16-bar/Audio/stems_wet/shadow_band.wav"
+    },
+    "dry_stems": {
+      "track00_Acoustic_Guitar_nylon": "/opt/data/repos/musicom/projects/Styles/Production/SP083-wandering-flamenco-16-bar/Audio/stems_dry/track00_Acoustic_Guitar_nylon.wav",
+      "track01_Acoustic_Guitar_nylon": "/opt/data/repos/musicom/projects/Styles/Production/SP083-wandering-flamenco-16-bar/Audio/stems_dry/track01_Acoustic_Guitar_nylon.wav",
+      "track02_Drums": "/opt/data/repos/musicom/projects/Styles/Production/SP083-wandering-flamenco-16-bar/Audio/stems_dry/track02_Drums.wav"
+    }
+  }
+}

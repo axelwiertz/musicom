@@ -1,21 +1,21 @@
 {
   "job": "random-style production (SP) layer-aligned",
-  "date": "2026-10-02",
-  "seed": 20261002,
-  "method": "SP-086",
-  "method_module": "sound.generators.harmony_writer",
-  "method_desc": "Rule-Based Melody Harmony Writer w/ Voice Leading (HarmonyKeen-style)",
-  "source_midi": "/opt/data/repos/musicom/projects/Styles/Balfolk/014-balfolk-cinematic/MIDI/balfolk_cinematic_v1.mid",
-  "source_project": "Balfolk/014-balfolk-cinematic/MIDI/balfolk_cinematic_v1.mid",
+  "date": "2026-10-03",
+  "seed": 20261003,
+  "method": "SP-083",
+  "method_module": "sound.modular.wandering",
+  "method_desc": "Non-LFO Wandering Engine + Portal + Drift Clouds Voice (Sound Dust-style)",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Flamenco/023-flamenco-16-bar/MIDI/flamenco_v2.mid",
+  "source_project": "Flamenco/023-flamenco-16-bar/MIDI/flamenco_v2.mid",
   "registry_size": 38,
   "recent_excluded": [
     "SP-024",
-    "SP-032",
     "SP-070",
     "SP-072",
     "SP-075",
     "SP-079",
-    "SP-081"
+    "SP-081",
+    "SP-086"
   ],
   "baseline_excluded": [
     "SP-001"
@@ -25,6 +25,7 @@
     "SP-021",
     "SP-026",
     "SP-028",
+    "SP-032",
     "SP-033",
     "SP-034",
     "SP-035",
@@ -42,7 +43,6 @@
     "SP-083",
     "SP-084",
     "SP-085",
-    "SP-086",
     "SP-090",
     "SP-091",
     "SP-092",
@@ -52,5 +52,5 @@
     "SP-097",
     "SP-098"
   ],
-  "n_candidates": 315
+  "n_candidates": 317
 }
