@@ -111,7 +111,8 @@ Classification of active Musicom composition methods categorized by their primar
 || **101** | concrete | Flow Matching Composition (FMC) | **AI-Driven** | Pitch, Rhythm, Harmony, Structure, Texture | Variable (Prior/Conditioning-guided) | Continuous / Continuous | Macro / Full-Sequence Trajectory | $\mathcal{O}(T \cdot d)$ training, $\mathcal{O}(T \cdot d)$ sampling | Vector-field regression (CFM) on token embeddings: deterministic ODE integration pushes noise $\rightarrow$ structured multi-voice token sequences. |
 || **102** | concrete | Cross-Entropy Method Composition (CEMC) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Elite-guided) | Continuous / Fluid | Macro / Distribution | $\mathcal{O}(I \cdot N \cdot L)$ | Iterative distribution optimization: sample sequences, keep elite (top fitness), refit parametric distribution via CE minimization. |
 || **103** | concrete | Graph Neural Network Composition (GNNC) | **AI-Driven** | Pitch, Rhythm, Harmony, Structure, Texture | Variable (Graph-learned) | Grid-Locked / Continuous | Macro / Graph Neighborhood | $\mathcal{O}(V \cdot T \cdot d^2)$ | Models composition as a heterogeneous graph (note, chord, bar nodes; temporal/harmonic/metric/voice edges). GNN message-passing refines node embeddings, decoded into pitch/duration/velocity/voice assignments. Relational inductive bias explicitly encodes voice-leading, harmony, and meter. |
-|||
+|| **104** | abstract | Parsimonious Subset Sequence Composition (PSSC) | **Rules-Based** | Pitch, Harmony, Structure, Texture | Moderate (Scale-subset filtered) | Grid-Locked / Continuous | Macro / Circular Sequence | $\mathcal{O}(C(n,p) \cdot p)$ | Generalises parsimonious voice leading from Neo-Riemannian triadic theory to ANY n-subsets of any p-scale. Constructs exhaustive, non-redundant, circular (nrep) chord progressions via set-theoretic relations (Rp/Re/Rf), 2D table, and lexicographic walk. Inversion-bipartition (2024) yields paired voice strands. Abstract-layer subset design: feeds rules/subset_network.py. |
+||
 |### Source
 |Sakellariou, J., Tria, F., Loreto, V. & Pachet, F. (2017). "Maximum entropy models capture melodic styles." *Scientific Reports* 7, 9172. arXiv:1610.03414. — Jaynes, E. T. (1957). "Information theory and statistical mechanics." *Physical Review* 106, 620–630.
 
@@ -272,6 +273,7 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 || **SP-100** | Volterra Series Synthesis (VSS) | **Post-Processing / DSP** | Nonlinear Distortion / Intermodulation Enrichment | General nonlinear synthesis framework using Volterra series expansion (Taylor series with memory). Multi-order kernels generate harmonic/inharmonic intermodulation, saturation, and spectral enrichment as a post-process on rendered audio. Laguerre pruning reduces cost to $\mathcal{O}(L^P)$ per sample. Candidate: `sound/effects/volterra_synthesis.py`. |
 || **SP-101** | Digital Waveguide Synthesis (DWS) | **Synthesis Engines** | Physical-Modeling String/Wind/Percussion Timbre | Models acoustic wave propagation as bidirectional traveling waves in digital delay lines. A vibrating string, acoustic bore, or struck bar is realized as a pair of delay lines looped via termination filters, fractional-delay interpolators, scattering junctions, and nonlinear excitations (pluck, bow, blow, strike). Loop filter $H_L(z)$ governs decay spectrum; stiffness allpass chain produces inharmonic partials for piano/bell timbres. Generalizes Karplus-Strong (SP-011) to arbitrary terminations and multi-waveguide networks. $\mathcal{O}(1)$ per sample per waveguide. Candidate: `sound/synthesis/digital_waveguide.py`. |
 || **SP-102** | Amplitude Modulation Synthesis (AMS) | **Synthesis Engines** | AM Sideband / Tremolo Timbres | Modulates carrier oscillator amplitude with a modulator oscillator $m(t) = [1 + m \cos(2\pi f_m t)]$. Sub-audio $f_m$ = tremolo; audio-rate $f_m$ = DSB+Carrier sidebands at $f_c \pm f_m$. $m$ controls sideband strength; $m>1$ overmodulation. $\mathcal{O}(1)$ per sample per voice. Candidate: `sound/synthesis/am_synthesis.py`. |
+|| **SP-103** | Crossover Band Distortion Synthesis (CBDS) | **Post-Processing / DSP** | Multiband Distortion / Frequency-Selective Saturation | Splits rendered audio into N frequency bands via Linkwitz-Riley crossover filters, applies independent distortion/saturation curve per band (soft clip, tape, tube, wavefolder, rectifier, bitcrush), then recombines. Prevents intermodulation between frequency regions that full-band waveshapers create. Per-band drive, envelope-follower modulation, and waveshaper type are controllable. $\mathcal{O}(N \cdot 20)$ per sample. Candidate: `sound/effects/crossover_distortion.py`. |
 |---|
 
 
@@ -22725,3 +22727,238 @@ def am_synthesis(f_c, f_m, sr, duration, m=0.5, A_c=0.5):
 4. **Pitch ambiguity:** At high $m$, the ear may not track $f_c$ reliably. If the voice must carry a clear pitch (e.g., melody line), a secondary pure-tone oscillator mixed in at low level anchors the pitch.
 5. **Sideband gap:** AM produces only one sideband pair per partial pair, whereas FM (SP-010) produces theoretically infinite sidebands. AM spectra are sparser — useful for clean chords but may sound thin for dense textures. Parallel AM voice stacking fills spectral gaps.
 6. **Modulator choice:** Using a saw/square modulator instead of sine introduces $P \times Q$ partials quickly. A 10-partial carrier $\times$ 10-partial modulator = 200 sidebands + 10 carrier partials — controlled complexity versus potential muddiness.
+
+### 104 — Parsimonious Subset Sequence Composition (PSSC)
+
+### Source
+Bedouelle, H. (2023). "Exhaustive chord progressions and their use in music composition." *Journal of Mathematics and Music* 18(1), 42–60. DOI: 10.1080/17459737.2023.2166136. — Bedouelle, H. (2024). "Parsimonious sequences of pitch-class sets: bipartition through inversion and its applications to music composition." *Journal of Mathematics and Music* 19, 108–121. DOI: 10.1080/17459737.2024.2432901. — Bedouelle, H. (2025). "A post-tonal method of music composition." HAL hal-05425426.
+
+### Layer
+**abstract** — designs pitch-class subset sequences (n-chord progressions from a p-scale) as abstract set-relations without concrete register/duration events. Outputs sequences of pc-sets that feed the concrete layer via rules/subset_network.py for voicing, rhythm, and register assignment.
+
+### Paradigm
+**Rules-Based** — the construction of exhaustive non-redundant parsimonious (nrep) sequences follows deterministic mathematical rules (set theory, lexicographic ordering, inversion bipartition, alternating concatenation). No stochastic sampling, no nature-inspired dynamics, no learned neural parameters.
+
+### Description
+**Parsimonious Subset Sequence Composition (PSSC)** generalises the classical Neo-Riemannian parsimonious voice-leading concept (P/L/R operations on triads) to ANY n-subsets of ANY p-scale, constructing chord progressions where successive chords differ by exactly one pitch class.
+
+The method defines three fundamental relations between unordered pitch-class sets of equal cardinality n (n-chords) drawn from a parent p-scale:
+
+1. **Parsimonious relation Rp**: Two n-chords A and B are in parsimonious relation iff there exists an (n−1)-chord C that is a common subset of both A and B. Equivalently, A and B share exactly n−1 pitch classes; they differ by a single pitch-class substitution.
+
+2. **Equivalence relation Re**: Two n-chords are equivalent iff one is a transposition Tn or inversion TnI of the other (Forte's set-class relation). Re is reflexive, symmetric, and transitive — it partitions n-chords into set-class equivalence classes.
+
+3. **Fuzzy relation Rf**: Two n-chords are in fuzzy relation iff there exists a transformation F (Tn or TnI) such that either F(A)RpB or ARpF(B) is true. Rf is the composition of parsimony and equivalence: chords that become parsimonious after a transposition/inversion.
+
+These three relations are **compatible with any musical transformation** (Tₙ, TₙI): applying a transformation preserves Rp, Re, and Rf. This invariance creates a 48-form symmetry group for every progression (direct, retrograde, inverted, retrograde-inverted × 12 transpositions).
+
+**The 2D Table Representation**: The n-chords of a p-scale are arranged in a two-dimensional table:
+- **Rows** are labelled by (n−1)-chord subsets — all chords in a row share the same (n−1)-subset and are pairwise in Rp relation (parsimonious neighbours).
+- **Columns** are labelled by set-class (Forte number) — all chords in a column are pairwise in Re relation (equivalent under Tn/TnI).
+
+Two chords in different columns are in Rf relation iff they form an orthogonal triangle with a third chord in the table (the row/column intersection). Mild progressions follow edges within rows or columns only; they never cross diagonals.
+
+**Exhaustive Non-Redundant Parsimonious (nrep) Sequences**: The central result is that for p-scales of cardinal p=2..9 and n-chords of cardinal n=2..5, there exists at least one sequence of n-chords that is simultaneously:
+- **Parsimonious**: every adjacent pair is in Rp (differs by 1 pitch class)
+- **Exhaustive**: every possible n-chord of the p-scale appears at least once
+- **Non-Redundant**: each n-chord appears exactly once
+- **Circular**: the first and last chords are also in Rp (repeatable as a loop)
+
+**Construction algorithm** (for a p-alphabet Up and n-words):
+1. Generate all C(n,p) n-words of Up in lexicographic order.
+2. Partition by last letter into p−n+1 subsequences X_{n,i} (i = n..p).
+3. Construct a parsimonious walk through each X_{n,i} (nrep-subsequence Y_{n,i}).
+4. Concatenate Y_{n,i} and Y_{n,i+1} in alternating direct/retrograde order:
+   - Method 1 (Z'): Y_{n,n} → Y'_{n,n+1} → Y_{n,n+2} → Y'_{n,n+3} → ... (circular when i is odd)
+   - Method 2 (Z"): Y_{n,n} → Y_{n,n+1} → Y'_{n,n+2} → Y_{n,n+3} → ... (circular when i is even)
+5. Map the alphabetic n-words to pitch-class n-chords via a bijection from Uₚ to the ordered pc-set normal form of the chosen p-scale.
+
+**Inversion Bipartition** (2024 extension): When the p-scale is invariant under a musical inversion I (i.e., I(Sp) = Sp, which holds for symmetric scales such as whole-tone, octatonic, hexatonic, and certain diatonic/modal scales), the set of n-chords bipartitions into two non-redundant parsimonious sequences related by I. This halves the sequence length per strand and guarantees invariance structure — each strand is the inverted image of the other.
+
+**Practical workflow**:
+- Choose a p-scale (e.g., C major = {0,2,4,5,7,9,11}, p=7)
+- Choose n (e.g., tetrachords, n=4)
+- Apply the nrep construction to generate a circular progression of all 35 tetrachords
+- Apply to the normal-form ordered pc-set of the scale, yielding a concrete chord progression
+- Each tetrachord is then realized in the concrete layer: voicing (register assignment), rhythm (duration per cell), dynamics, and voice-leading
+
+### Musical Elements Framework
+
+**PITCH**: The core domain. n-chords are pitch-class subsets of a parent p-scale. The Rp relation ensures single-pc changes between successive chords, generating smooth stepwise voice-leading in the chromatic subset space. The 2D table rows capture maximum parsimony, columns capture set-class invariance. Chord quality and interval-class-vector identity are inherited from Forte set-class assignments (columns).
+
+**RHYTHM**: Not directly specified at the abstract layer, but the nrep sequence imposes a natural ordering — each chord in the progression maps to one or more time slots in the UnitMatrix. The rhythm layer (concrete) assigns durations per chord: chords may be isochronous (one cell per chord), variable-length (weighted by interval vector or inversion state), or subdivided across beats.
+
+**HARMONY**: The primary output. The nrep progression IS a harmonic plan: a sequence of pitch-class subsets that exhaustively explores the harmonic resources of the chosen p-scale. Since each step changes exactly one pc, the voice-leading between successive chords is maximally smooth. The fuzzy relation Rf bridges set-class boundaries, enabling local modulatory moves. The 48-form symmetry (direct/retrograde/inverted/retrograde-inverted × 12 transpositions) gives the composer enormous flexibility.
+
+**STRUCTURE**: Macro-form arises from how the circular nrep sequence is segmented across sections. Options:
+- A single circular nrep pass = one large section
+- The circular sequence is partitioned across multiple columns (sections) of the UnitMatrix
+- Alternating direct/retrograde strands across voices creates canon-like relationships
+- Inversion-bipartition yields paired strands for two-voice or A/B binary form
+- Transposition blocks create section boundaries (each section = a different transposition of the same nrep sequence)
+
+**TEXTURE**: Abstract layer does not set texture directly. However, chord cardinality n inherently controls density (n=2 dyadic texture, n=4 tetrachordal texture, n=6 hexachordal saturation). The alternating direct/retrograde concatenation pattern in nrep construction creates natural registral arcs (direct = expanding, retrograde = contracting) when mapped to register in the concrete layer.
+
+### UnitMatrix Integration
+
+**Voices (Rows)**: Multiple voices can each carry a strand of the nrep sequence:
+- Voice 1 = direct progression Z' or Z"
+- Voice 2 = retrograde of Voice 1
+- Voice 3 = inverted (TnI) of Voice 1
+- Voice 4 = retrograde-inverted of Voice 1
+Each voice independently realises the same nrep sequence through a different 48-form variant, ensuring vertical coherence (all voices draw from the same n-chord universe of the same p-scale) while maintaining horizontal parsimony.
+
+For the inversion-bipartition case (2024): Voice 1 = strand A, Voice 2 = inversion of strand A (strand B). Additional voices = retrograde forms.
+
+**Sections (Columns)**: The nrep sequence is divided across sections:
+- Each section corresponds to a segment of the circular nrep sequence (e.g., k chords per section)
+- Section transitions occur at natural breakpoints in the nrep sequence (e.g., at the joints between X_{n,i} subsequences)
+- Macro-form = the segmentation pattern of the circular progression
+- A circular nrep sequence that returns to its starting chord naturally maps to a repeat of the form
+
+**Cells (MusicUnit)**: Each cell receives one n-chord from the nrep sequence. The concrete layer (realization) then:
+- Voices the chord (spreads pitch classes across registers)
+- Assigns a duration and rhythm
+- Sets dynamics/velocity
+- Applies ornamentation (see rules/realize.py)
+
+The zero-drift invariant is maintained because all voices progress through the same number of chords in the nrep sequence, keeping the UnitMatrix rectangular.
+
+### Pitfalls
+- **Combinatorial explosion**: C(n,p) grows quickly (e.g., 495 tetrachords for a 12-tone scale). For p > 9 or n near p/2, the nrep sequence may be impractically long. Use scale-degree subsets rather than raw pc-sets to reduce cardinality.
+- **Rhythm not specified**: PSSC provides harmonic substrate only. A companion rhythm method (e.g., 012 Euclidean, 069 CWCC for rhythmic balance) must supply durations.
+- **No register**: Since PSSC is abstract, the chord voicings (which octave each pc occupies) must be determined by the concrete layer. Default: close-position voicing within a standard vocal/choral tessitura.
+- **Tonal gravity not inherent**: nrep sequences are tonally neutral — they exhaust all subsets regardless of function. To enforce tonality, either filter the nrep sequence to chords containing the tonic/dominant, or restrict the parent scale to a mode with a strong tonal centre.
+- **Inversion invariant scales only**: The 2024 bipartition construction requires a p-scale invariant under a non-trivial inversion I. Asymmetric scales (e.g., whole-tone + one note) do not bipartition cleanly; revert to the general 2023 construction.
+- **Latex double-escape in table**: Mathematical notation in method entries uses single backslashes `\(...\)` for inline and `$$...$$` for display math, never `\\`.
+
+# Crossover Band Distortion Synthesis (CBDS) (Method SP-103)
+
+### Source
+Linkwitz, S. (1976). "Active Crossover Networks." *Journal of the Audio Engineering Society*, Preprint 1224. — Rane Corporation (2006). "Linkwitz-Riley Crossovers: A Primer." RaneNote 160. — Zölzer, U. (2022). *Digital Audio Signal Processing*, 3rd ed. Wiley, pp. 287–312 (Multiband Dynamics). — DAFx-99 Conference (Fernández-Cid et al., 1999). "MWD: Multiband Waveshaping Distortion." — Parker, J. (2020). *Multiband Processing for Music Production*. AES Convention 148, e-Brief 557. — Välimäki, V. & Bilbao, J. (2022). "Multiband Waveshaping." *DAFx* 2022, pp. 153–164.
+
+### Layer
+**absolute** — sound production (Post-Processing / DSP). Splits a rendered mono/stereo audio buffer into N frequency bands via crossover filters, applies an independent nonlinear processing chain (waveshaper/saturation/distortion/envelope) per band, then recombines to form the output. Candidate code path: `sound/effects/crossover_distortion.py`.
+
+### Description
+**Crossover Band Distortion Synthesis (CBDS)** is a general multiband nonlinear processing architecture that separates incoming audio into frequency bands through a cascade of crossover filters, applies independent distortion/saturation curves per band, and reconstructs the output via band summation (or filtered summation for phase-coherent crossover networks). By processing each frequency region independently, CBDS prevents the intermodulation distortion that occurs when a full-spectrum waveshaper processes a complex signal — low-frequency energy no longer modulates the high-frequency content through shared nonlinearity. This spectral separation allows the composer to:
+
+- Saturate the low end for warmth without clouding the mids
+- Add aggressive clipping or bitcrushing in the highs while keeping the lows clean
+- Apply tube or tape saturation to the mids while the lows and highs receive clean or other processing
+- Create "spectral distortion" where different harmonic textures emerge in each band
+
+The technique is the architectural foundation of multiband saturators (FabFilter Saturn 2, iZotope Trash 2, Soundtoys Decapitator's dual-stage mode), Korg's multiband vector synthesis (Kronos), and multiband guitar amp simulators. It is the natural post-processing generalization of single-band waveshaping (SP-019 Chebyshev), ADAA (SP-062), and WDF distortion (SP-051).
+
+### Technical Mechanics
+
+**1. Crossover Filter Bank (Linkwitz-Riley 4th Order)**
+
+The N-band split uses cascaded Linkwitz-Riley LR-4 crossover filters (two 2nd-order Butterworth filters in series, Q = 0.5, 24 dB/octave slope). For a 2-band split at crossover frequency $f_x$:
+
+$$H_{\mathrm{LP}}(z) = H^2_{\mathrm{B2,LP}}(z), \quad H_{\mathrm{HP}}(z) = H^2_{\mathrm{B2,HP}}(z)$$
+
+where $H_{\mathrm{B2}}$ is the standard biquad 2nd-order Butterworth section. The LR-4 sum is flat (0 dB) with zero phase cancellation at the crossover point because each band is $-6$ dB at $f_x$ and the phase responses are offset by 180°.
+
+For N > 2 bands, a binary tree of crossover stages is used: first split at $f_{x1}$, then split the low branch at $f_{x2}$, the high branch at $f_{x3}$, etc. Each leaf band $b$ has a bandpass response with two LR-4 slopes (low-frequency rolloff and high-frequency rolloff).
+
+The complete N-band reconstruction is:
+$$y[n] = \sum_{b=1}^{N} \mathrm{process}_b\bigl(\mathrm{filter}_b(x[n])\bigr)$$
+
+where $\mathrm{filter}_b$ is the band-$b$ crossover filter response and $\mathrm{process}_b$ is the per-band nonlinear processor.
+
+**2. Per-Band Nonlinear Processor**
+
+Each band $b$ applies an independent memoryless or one-pole-memory nonlinear function $f_b(\cdot)$:
+
+$$y_b[n] = g_{b,\text{mk}} \cdot f_b\!\left(g_{b,\text{dr}} \cdot x_b[n] + d_{b,\text{dc}}\right)$$
+
+where:
+- $g_{b,\text{dr}}$ = drive gain (pre-distortion level, pushes into the nonlinear region)
+- $f_b(\cdot)$ = waveshaping/saturation function (see below)
+- $d_{b,\text{dc}}$ = optional DC offset (asymmetric distortion)
+- $g_{b,\text{mk}}$ = makeup gain (post-distortion level matching)
+
+**Supported $f_b$ modes (per band, independently selectable):**
+
+| Mode | Equation | Character |
+|------|----------|-----------|
+| Soft Clip | $f(u) = \begin{cases} -1 & u < -1 \\ u - \frac{u^3}{3} & |u| \le 1 \\ 1 & u > 1 \end{cases}$ | Warm analog saturation, odd harmonics |
+| Hard Clip | $f(u) = \max(-1, \min(1, u))$ | Aggressive digital clipping, brickwall |
+| Tape Saturation | $f(u) = \frac{2}{\pi}\arctan(u)$ | Soft compression + even harmonics |
+| Tube/Asymmetric | $f(u) = \frac{2|u|}{u^2+2}$ with $d_{\mathrm{dc}} > 0$ | Even-order harmonics, valve warmth |
+| Wavefolder | $f(u) = 2\cdot\Bigl|\frac{u}{2} - \bigl\lfloor\frac{u}{2} + 0.5\bigr\rfloor\Bigr|$ | West-Coast folder, octave doubling |
+| Rectifier | $f(u) = \max(0, u)$ or $f(u) = |u|$ | Full-wave or half-wave, lo-fi buzz |
+| Bitcrush (quantization) | $f(u) = \mathrm{round}(u \cdot 2^{B-1}) / 2^{B-1}$ | Lo-fi quantization, $B$ bits |
+| Hard Sync (SP-096) | $f(u) = \begin{cases} 1 & u \bmod T > T/2 \\ -1 & \text{else} \end{cases}$ | Oscillator sync-style fold |
+
+**3. Frequency-Dependent Drive Envelope**
+
+The per-band drive $g_{b,\text{dr}}$ can be modulated by an envelope follower tracking the band's amplitude:
+
+$$g_{b,\text{dr}}[n] = g_{b,\text{base}} \cdot \left(1 + A_b[n] \cdot \kappa_b\right)$$
+
+where $A_b[n] = \alpha \cdot |x_b[n]| + (1-\alpha) \cdot A_b[n-1]$ is the smoothed amplitude envelope (one-pole follower) and $\kappa_b$ is the envelope-modulation depth. This creates dynamic distortion that increases when the band is loud and reduces when quiet — a "punch" distortion effect.
+
+**4. Multiband Reconstruction**
+
+After per-band processing, the bands are summed directly. For a flat LR-4 crossover, the sum is:
+$$y[n] = \sum_{b=1}^N y_b[n]$$
+
+Optionally, a final master section can apply EQ, limiting, or clipping to the summed output. The band split/reconstruct chain introduces a latency of $2 \times \text{filter\_order}$ samples (the LR-4 is a linear-phase-like IIR cascade with approximately 8-sample group delay at 48 kHz).
+
+**5. Complexity**
+
+$$C = N \cdot (4 \cdot \text{filter\_order} + O_{\text{process}})$$
+
+For $N$ bands, each with LR-4 filters (two biquads = 8 multiplications per band per crossover stage) plus the waveshaper (typically 5–10 operations): $C \approx N \cdot 20$ operations per sample. For $N=3$ (low/mid/high), this is ≈60 ops/sample — negligible on modern CPUs.
+
+### Musical Elements Framework
+
+**PITCH:** CBDS does not generate pitch directly, but band split points ($f_{x1}, f_{x2}, \dots$) define spectral regions that can be mapped to pitch ranges (e.g., bass band ≈ 20–200 Hz, mid band ≈ 200–2000 Hz, treble band > 2000 Hz). The per-band distortion type shapes the harmonic content of each register independently: a soft-clipped bass band retains fundamental weight while adding upper harmonics that audibly interact with the mid range; a wavefolded treble band generates dense high-frequency content that sounds like a separate synthesis voice. Each band's drive envelope can be gate-triggered by specific MIDI pitch ranges in the UnitMatrix voice.
+
+**RHYTHM:** The envelope follower per band creates frequency-dependent rhythmic dynamics: a loud transient in the high band (e.g., hi-hat bleed from a drum loop) triggers deeper distortion in that band, creating dynamic spectral contrast. The per-band attack/release times function as independent compressors: fast attack in the low band (punch) vs. slow attack in the high band (sustain shimmer). Per-band gate thresholds create "spectral gating" — bands turn on/off based on their input amplitude, producing rhythmic sidechain-like effects in specific frequencies.
+
+**HARMONY:** Intermodulation products are confined within each band. Unlike full-spectrum distortion (SP-019/SP-062) where low-frequency energy modulates high-frequency partials producing inharmonic sum/difference products across the whole spectrum, CBDS generates intermodulation products only between partials that coexist in the same band. This preserves harmonic clarity: a bass note at 80 Hz modulating a 2 kHz flute through a shared waveshaper produces audible sum/difference artifacts at 2080 Hz and 1920 Hz (often perceived as "muddy" or "digital"). With a 3-band split (f_x = 200 Hz, 2000 Hz), the bass is in band 1 alone and the flute in band 2 alone — no intermodulation between them. The only intermodulation is within each band: 80 Hz with its own harmonics, 2 kHz with adjacent upper partials.
+
+**STRUCTURE:** Macro-form is programmed as a per-section trajectory of:
+- Number of bands $N(s)$ (more bands per section = finer-grained textural control)
+- Crossover frequencies $f_{x,b}(s)$ (different splits per section = spectral reallocation)
+- Per-band drive $g_{b,\mathrm{dr}}(s)$, makeup $g_{b,\mathrm{mk}}(s)$, waveshaper type $f_b(s)$
+- Master wet/dry mix $\alpha(s)$ and output ceiling $L(s)$
+- Section transition interpolation (crossfade) of per-band parameters
+
+**TEXTURE:** CBDS directly controls density and spectral distribution of distortion. With $N=1$ (single band), CBDS reduces to a standard full-band waveshaper (SP-019). With $N=2$, the low/high bands can receive contrasting processing (e.g., tape on lows, bitcrush on highs — the classic "lo-fi warm" texture). With $N=3$, independent low/mid/high processing produces a "three-instrument" texture — warm bass, saturated voice, sizzling top. With $N=5+ (sub, low, low-mid, high-mid, top), the texture becomes a multi-band distortion "mosaic" where each third-octave region has its own character.
+
+### UnitMatrix Integration (Voices & Sections)
+
+**Voices (Rows):** Each UnitMatrix voice renders independently through the musicom engine (FluidSynth SP-001, Karplus-Strong SP-011, etc.) to produce a mono buffer. CBDS is a post-process applied to the summed voice mix or to individual voice groups. Two operating modes:
+
+1. **Global bus mode**: All voices are summed into a single stereo mix, and CBDS processes the mix. This is the simplest and most CPU-efficient mode. The CBDS parameters affect the entire ensemble.
+
+2. **Per-voice group mode**: Voices are grouped by register or role (bass group, pad group, lead group, percussion group). Each group is processed through an independent CBDS instance with band splits tailored to that group's frequency range. This allows the bass to receive tape-saturated lows+clean mids while the lead receives clean lows+hard-clipped mids — impossible with global processing.
+
+**Sections (Columns):** Per-section CBDS parameters define the macro-form as described under Structure above. A typical arrangement:
+- **Intro**: 3 bands, low drive (subtle warmth), `f_b` = soft clip on all bands
+- **Verse**: 3 bands, medium drive in mids, low drive in lows/highs
+- **Chorus**: 5 bands, high drive in mid-high band (hard clip), tape on lows, wavefolder on highs
+- **Bridge**: 2 bands, extreme drive on lows (rectifier), clean highs
+- **Outro**: fade band count 3→1→1 as drive reduces to zero (clean)
+
+Section transition parameters are crossfaded over 1–4 bars to prevent clicks.
+
+**Cells (MusicUnit):** Each cell's rendered audio passes through the CBDS chain at the section level. The zero-drift invariant is preserved because CBDS is sample-accurate (no control-flow changes that would shift timing). The delay introduced by the LR-4 crossover filters is constant (latency ≈ 0.17 ms at 48 kHz) and uniform across all cells, so timing relationships are maintained.
+
+### Pitfalls
+
+1. **Phase summation artifacts**: While LR-4 crossovers sum to flat magnitude, the phase response is not constant across the band split. In the crossover region ($\pm 1$ octave around $f_x$), the two adjacent bands share comparable energy, and their differing group delays create comb-filtering phase cancellation that is audible as a "hollow" or "phasey" quality on transient material. Mitigation: use linear-phase FIR crossovers for critical mix bus processing (at higher latency), or keep crossover frequencies away from the fundamental frequencies of prominent instruments.
+
+2. **Band count design**: Too few bands (N=2) may leave audible intermodulation in wide-bandwidth bands. Too many bands (N > 6) creates phase-sum artifacts at every crossover and increases CPU cost. Rule of thumb: N=3 for musical material, N=5 for broad-spectrum noise/glitch material, N=2 for simple bass+treble enhancement.
+
+3. **Drive mismatch**: If the makeup gain $g_{b,\mathrm{mk}}$ is not matched to the drive-induced level change, the band's output level changes unexpectedly, shifting the spectral balance. Unity-gain calibration: pass a -18 dBFS sine sweep through each band with drive set to 0 dB, measure output level, set makeup gain to restore -18 dBFS. Repeat for all drives.
+
+4. **Aliasing from aggressive distortion in high bands**: The highest band contains frequencies approaching $f_s/2$. If its waveshaper generates harmonics beyond Nyquist, aliasing occurs. ADAA (SP-062) applied per-band eliminates aliasing at 1× oversampling, or the high band can be oversampled 2× before waveshaping.
+
+5. **Latency**: The LR-4 cascade introduces about 8 samples of group delay per split. For N=3 bands, the total latency is approximately 24 samples (0.5 ms at 48 kHz). While negligible for mixing, this may be problematic for live monitoring with the DAW track delay compensation off. FIR linear-phase crossovers reduce phase issues but add significant latency (128–2048 samples depending on filter length).
+
+6. **Over-processing**: The independent control per band creates temptation to over-process every band, resulting in a chaotic, over-compressed sound. The "subtractive then additive" heuristic: first EQ (cut unwanted frequencies in each band with SP-007), then process (distort/saturate), then EQ again (cut harsh products). This is known as "multiband processing discipline."

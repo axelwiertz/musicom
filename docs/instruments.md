@@ -590,6 +590,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Keys | Accordion | 21 | 36–96 | harmony, melody, bass, rhythm, ornament |
 | Keys | Clavi | 7 | 29–89 | lead, rhythm, accent, ornament, countermelody |
 | Brass | Trumpet | 56 | 54–86 | lead, accent, fanfare |
+| Brass | Muted Trumpet | 59 | 54–86 | lead, countermelody, accent, melody, ornament |
 | Brass | Trombone | 57 | 40–78 | bass, counter, accent, harmony |
 | Brass | French Horn | 60 | 41–84 | harmony, counter, accent, lead |
 | Brass | Tuba | 58 | 26–72 | bass, harmony, accent, rhythm |
@@ -643,6 +644,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 69 | English Horn | English_Horn ✓ (GM_PROGRAMS[69] + FluidR3 preset 69 both "English Horn") |
 | 9 | Glockenspiel | Glockenspiel ✓ (GM_PROGRAMS[9] + FluidR3 preset 9 both "Glockenspiel") |
 | 56 | Trumpet (correct GM) | Trumpet ✓ |
+| 59 | Muted Trumpet | Muted_Trumpet ✓ (GM_PROGRAMS[59] + FluidR3 preset 59 both "Muted Trumpet") |
 | 57 | Trombone | Trombone ✓ |
 | 58 | Tuba | Tuba ✓ |
 | 60 | French Horn | French Horn ✓ (SF2 preset is "French Horns" plural — cosmetic) |
@@ -732,7 +734,30 @@ Solo-render spectral check: 4–8 kHz buzz checked (clean single voice, no
 comb-filtering). Range 36–80 (C2–G5 concert; written E♭2–B5 with altissimo);
 sweet spot 48–65 (C3–F4). Registered in `instrument_registry.py` as
 BARITONE_SAX convenience constant. Registration proof: `by_name('baritone sax')`
-→ Baritone Saxophone, `by_program(67)` → Baritone Saxophone,
-`in_sweet_spot(60)` = True, `in_sweet_spot(30)` = False. Role:
-bass/harmony/accent/lead/countermelody — the bari is the bass of the sax
-section, covering the lowest voice in the woodwind family.
+`by_program(67)` → Baritone Saxophone,
+    `in_sweet_spot(60)` = True, `in_sweet_spot(30)` = False. Role:
+    bass/harmony/accent/lead/countermelody — the bari is the bass of the sax
+    section, covering the lowest voice in the woodwind family.
+
+**Muted Trumpet added** (2026-10-03): GM59, Brass-family fifth entry — the muted
+    trumpet (harmon-muted trumpet per GM specification; the companion to the open
+    trumpet (GM56), same physical instrument with a mute in the bell)
+    (instrument.md + muted_trumpet.py), verified end-to-end UnitMatrixComposer →
+    zero-drift ✓ → MIDI (161 bytes) → FluidSynth WAV (742 KB) ✓; RenderPipeline
+    stem label `trackXX_Muted_Trumpet.wav` ✓ (GM_PROGRAMS[59] = "Muted Trumpet",
+    FluidR3 preset 59 = "Muted Trumpet" — labels match exactly, **no quirk**).
+    PhaseModSynth recommended (FM brass: saw carrier, mod_freq_ratio 2.0,
+    mod_depth 2.5 — higher ratio = more nasal/focused muted tone, lower depth =
+    less brassy edge than open trumpet's 4.0; attack 0.03 s for mute
+    back-pressure). Solo-render spectral check: 4–8 kHz buzz 6.4% (clean single
+    voice, no comb-filtering). Empirical FluidR3 pitch sweep: n/a (same trumpet
+    patch range, muted preset 59 audible across full F#3–D6 span). Range 54–86
+    (F#3–D6, same trumpet range); sweet spot 62–79 (D4–G5). Registered in
+    `instrument_registry.py` as MUTED_TRUMPET convenience constant. Registration
+    proof: `by_name('muted trumpet')` → Muted Trumpet, `by_program(59)` → Muted
+    Trumpet, `in_sweet_spot(69)` = True. Role: lead, countermelody, accent,
+    melody, ornament — the muted trumpet is a line/colour voice (monophonic,
+    no dense chords). Produced reverb tail 1.2 s is shorter than open trumpet
+    (1.8 s) — muted tone is intimate, hall washes out the mute character.
+    Mute types: straight (bright metallic), cup (dark mellow), harmon (nasal wah),
+    plunger (talking), bucket (velvety dark). No quirk on any label.

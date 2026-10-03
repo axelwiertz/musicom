@@ -1,0 +1,21 @@
+{
+  "artifact": "218-baroque-sieve-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "025-Xenakis-Sieve-Theory (raw sieve walk)",
+  "sources": [],
+  "parameters": {
+    "phase": 1,
+    "bpm": 96,
+    "key": "D minor (natural/aeolian)",
+    "seed": 20261002,
+    "voices": 1,
+    "pitch_sieve": "n%3 in {0,2} & n%4 in {0,2,3}",
+    "rhythm_sieve": "s%4 in {0,2,3} & s%8 in {0,1,3,4,6}",
+    "note": "raw generative draft, unquantized ticks, chromatic, pre-rules"
+  },
+  "notes": "",
+  "sha256": "fad3c6a5e4d36c176cf7f62fbb15fc12afbf4018230520e1f83c9d8dacf6b747",
+  "bytes": 1183,
+  "created_utc": "2026-10-02T23:10:36.735658+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,31 @@
+{
+  "project": "218-baroque-sieve",
+  "genre": "Baroque",
+  "key": "D minor (natural/aeolian)",
+  "bpm": 96,
+  "seed": 20261002,
+  "method": "025 Xenakis Sieve Theory",
+  "layer": "concrete",
+  "date": "2026-10-02",
+  "phase_artifacts": [
+    "MIDI/218-baroque-sieve-phase1.mid",
+    "MIDI/218-baroque-sieve.mid"
+  ],
+  "form": "6 sections x 4 bars = 24 bars",
+  "voices": ["Lead(Violin)", "Counter(Violin)", "Recorder(Flute)", "Harpsichord", "Cello"],
+  "variations": ["transpose(+M3)", "diminution", "octave_up", "invert", "augment"],
+  "sieve": {
+    "pitch": "n%3 in {0,2} & n%4 in {0,2,3}",
+    "rhythm": "s%4 in {0,2,3} & s%8 in {0,1,3,4,6}"
+  },
+  "verification": {
+    "voice_tracks": 5,
+    "track_length_ticks": 46080,
+    "pitched_onsets": 531,
+    "off_grid_onsets": 0,
+    "key_violations": 0,
+    "chord_violations": 0,
+    "audio_silence_pct": 4.16,
+    "audio_peak": 0.5599
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "phase2": {
+    "file": "218-baroque-sieve.mid",
+    "total_notes": 531,
+    "off_grid_16": 0,
+    "out_of_scale": 0,
+    "out_of_chord": 0,
+    "tracks": [
+      {
+        "name": "",
+        "channel": 0,
+        "total_tick": 0,
+        "notes": 0,
+        "off_grid_16": 0,
+        "out_of_scale": 0,
+        "out_of_chord": 0
+      },
+      {
+        "name": "",
+        "channel": 0,
+        "total_tick": 46080,
+        "notes": 127,
+        "off_grid_16": 0,
+        "out_of_scale": 0,
+        "out_of_chord": 0
+      },
+      {
+        "name": "",
+        "channel": 1,
+        "total_tick": 46080,
+        "notes": 92,
+        "off_grid_16": 0,
+        "out_of_scale": 0,
+        "out_of_chord": 0
+      },
+      {
+        "name": "",
+        "channel": 2,
+        "total_tick": 46080,
+        "notes": 24,
+        "off_grid_16": 0,
+        "out_of_scale": 0,
+        "out_of_chord": 0
+      },
+      {
+        "name": "",
+        "channel": 3,
+        "total_tick": 46080,
+        "notes": 192,
+        "off_grid_16": 0,
+        "out_of_scale": 0,
+        "out_of_chord": 0
+      },
+      {
+        "name": "",
+        "channel": 4,
+        "total_tick": 46080,
+        "notes": 96,
+        "off_grid_16": 0,
+        "out_of_scale": 0,
+        "out_of_chord": 0
+      }
+    ]
+  },
+  "phase1": {
+    "file": "218-baroque-sieve-phase1.mid",
+    "total_notes": 132,
+    "off_grid_16": 129,
+    "off_grid_ratio": 0.9773
+  }
+}

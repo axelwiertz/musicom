@@ -39,6 +39,7 @@ _INSTRUMENT_MODULES = {
     "Brass.trumpet.trumpet": "trumpet",
     "Brass.trombone.trombone": "trombone",
     "Brass.french_horn.french_horn": "french_horn",
+    "Brass.muted_trumpet.muted_trumpet": "muted_trumpet",
     "Brass.tuba.tuba": "tuba",
     "Woodwind.piccolo.piccolo": "piccolo",
     "Woodwind.flute.flute": "flute",
@@ -212,6 +213,7 @@ ACCORDION = ALL_INSTRUMENTS["accordion"]
 TRUMPET = ALL_INSTRUMENTS["trumpet"]
 TROMBONE = ALL_INSTRUMENTS["trombone"]
 FRENCH_HORN = ALL_INSTRUMENTS["french_horn"]
+MUTED_TRUMPET = ALL_INSTRUMENTS["muted_trumpet"]
 TUBA = ALL_INSTRUMENTS["tuba"]
 FLUTE = ALL_INSTRUMENTS["flute"]
 CLARINET = ALL_INSTRUMENTS["clarinet"]
@@ -491,3 +493,8 @@ if __name__ == "__main__":
     print("  by_program(67) =", by_program(67))
     print("  BARITONE_SAX.in_sweet_spot(60) =", BARITONE_SAX.in_sweet_spot(60))
     print("  BARITONE_SAX.in_sweet_spot(30) =", BARITONE_SAX.in_sweet_spot(30))
+
+    print("  MUTED_TRUMPET.midi_program =", MUTED_TRUMPET.midi_program, "(should be 59)")
+    print("  by_name('muted trumpet') =", by_name("muted trumpet"))
+    print("  by_program(59) =", by_program(59))
+    print("  MUTED_TRUMPET.in_sweet_spot(69) =", MUTED_TRUMPET.in_sweet_spot(69))

@@ -1,0 +1,56 @@
+{
+  "project": "218-baroque-sieve",
+  "genre": "Baroque",
+  "style": "D minor chamber suite (Prelude/Allemande/Courante/Sarabande/Gigue/Finale)",
+  "method": "025 Xenakis Sieve Theory",
+  "layer": "concrete",
+  "key": "D minor (natural/aeolian)",
+  "pcs": [2, 4, 5, 7, 9, 10, 0],
+  "bpm": 96,
+  "meter": "4/4",
+  "ticks_per_beat": 480,
+  "bar_ticks": 1920,
+  "seed": 20261002,
+  "form": "6 sections x 4 bars = 24 bars",
+  "sections": ["Prelude", "Allemande", "Courante", "Sarabande", "Gigue", "Finale"],
+  "progression": [
+    "Prelude: i VI iv i",
+    "Allemande: i iv VII III",
+    "Courante: III VII i iv",
+    "Sarabande: iv v i i",
+    "Gigue: i iv VI v",
+    "Finale: v i iv i"
+  ],
+  "sieve": {
+    "pitch": "n mod 3 in {0,2} & n mod 4 in {0,2,3} -> residues mod 12 {0,2,3,6,8,11}",
+    "rhythm": "s mod 4 in {0,2,3} & s mod 8 in {0,1,3,4,6} -> 16th-steps {0,3,4,6,8,11,12,14}"
+  },
+  "voices": [
+    {"name": "Lead", "instrument": "Violin", "program": 40, "channel": 0},
+    {"name": "Counter", "instrument": "Violin", "program": 40, "channel": 1},
+    {"name": "Recorder", "instrument": "Flute (Recorder)", "program": 74, "channel": 2},
+    {"name": "Harpsichord", "instrument": "Harpsichord", "program": 6, "channel": 3},
+    {"name": "Cello", "instrument": "Cello", "program": 42, "channel": 4}
+  ],
+  "verification": {
+    "phase2": {
+      "total_notes": 531,
+      "off_grid_16": 0,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "track_length_ticks": 46080,
+      "voice_notes": {"Lead": 127, "Counter": 92, "Recorder": 24, "Harpsichord": 192, "Cello": 96}
+    },
+    "phase1": {
+      "total_notes": 132,
+      "off_grid_16": 129,
+      "off_grid_ratio": 0.9773
+    },
+    "audio": {
+      "duration_sec": 62.75,
+      "silence_ratio": 0.0416,
+      "peak": 0.5599,
+      "mean_rms": 0.0921
+    }
+  }
+}

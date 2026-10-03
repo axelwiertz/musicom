@@ -1,0 +1,21 @@
+{
+  "artifact": "218-baroque-sieve.mid",
+  "classification": "ai-assisted",
+  "generator": "025-Xenakis-Sieve-Theory + musicom rules",
+  "sources": [],
+  "parameters": {
+    "phase": 2,
+    "bpm": 96,
+    "key": "D minor (natural/aeolian)",
+    "seed": 20261002,
+    "voices": 5,
+    "form": "6 sections x 4 bars = 24 bars",
+    "quantization": "16th-grid (120 ticks)",
+    "variations": "transpose(+M3), diminution, octave_up, invert, augment"
+  },
+  "notes": "Baroque D minor. Two-phase: raw Xenakis sieve walk -> chord-tone quantized + grid-snapped 5-voice texture (Violin/Violin2/Recorder/Harpsichord/Cello). All pitches are D-minor chord tones.",
+  "sha256": "782fd82a1236992f282528e67ea918238dd192507a55789ccb5791d376df816c",
+  "bytes": 4749,
+  "created_utc": "2026-10-02T23:10:36.764263+00:00",
+  "provenance_version": "1.0"
+}
