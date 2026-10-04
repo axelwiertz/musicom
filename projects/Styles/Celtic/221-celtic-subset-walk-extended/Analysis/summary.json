@@ -1,0 +1,263 @@
+{
+  "project": "221-celtic-subset-walk-extended",
+  "style": "Celtic",
+  "method": "ABS-002 Subset Walker",
+  "layer": "abstract",
+  "bpm": 96,
+  "key": "Ab major",
+  "bars": 40,
+  "seed": 20261004,
+  "walk_seed": 13,
+  "sections": {
+    "Intro": 4,
+    "ReelA": 4,
+    "ReelB": 4,
+    "Lift": 4,
+    "Bridge": 4,
+    "ReelA2": 4,
+    "ReelC": 4,
+    "Hornpipe": 4,
+    "Finale": 4,
+    "Outro": 4
+  },
+  "subset_walk": [
+    "maj0",
+    "min4",
+    "min2",
+    "maj5",
+    "min4",
+    "maj0",
+    "maj5",
+    "maj0",
+    "maj5",
+    "maj0",
+    "maj70",
+    "maj7",
+    "min2",
+    "min72",
+    "dom77",
+    "min72",
+    "min9",
+    "maj0",
+    "maj5",
+    "min2",
+    "maj0",
+    "min4",
+    "maj0",
+    "maj5",
+    "min4",
+    "maj70",
+    "min4",
+    "maj0",
+    "maj70",
+    "min4",
+    "min2",
+    "maj5",
+    "min2",
+    "dom77",
+    "maj5",
+    "min2",
+    "maj0",
+    "min4",
+    "dom77",
+    "maj0"
+  ],
+  "progression": [
+    "I",
+    "iii",
+    "ii",
+    "IV",
+    "iii",
+    "I",
+    "IV",
+    "I",
+    "IV",
+    "I",
+    "I7",
+    "V",
+    "ii",
+    "ii7",
+    "V7",
+    "ii7",
+    "vi",
+    "I",
+    "IV",
+    "ii",
+    "I",
+    "iii",
+    "I",
+    "IV",
+    "iii",
+    "I7",
+    "iii",
+    "I",
+    "I7",
+    "iii",
+    "ii",
+    "IV",
+    "ii",
+    "V7",
+    "IV",
+    "ii",
+    "I",
+    "iii",
+    "V7",
+    "I"
+  ],
+  "section_midpoint": {
+    "Intro": {
+      "midpoint_bar": 2,
+      "subset": "min2",
+      "degree": "ii",
+      "quality": "minor",
+      "root_pc": 10,
+      "bars": [
+        "I",
+        "iii",
+        "ii",
+        "IV"
+      ]
+    },
+    "ReelA": {
+      "midpoint_bar": 6,
+      "subset": "maj5",
+      "degree": "IV",
+      "quality": "major",
+      "root_pc": 1,
+      "bars": [
+        "iii",
+        "I",
+        "IV",
+        "I"
+      ]
+    },
+    "ReelB": {
+      "midpoint_bar": 10,
+      "subset": "maj70",
+      "degree": "I7",
+      "quality": "maj7",
+      "root_pc": 8,
+      "bars": [
+        "IV",
+        "I",
+        "I7",
+        "V"
+      ]
+    },
+    "Lift": {
+      "midpoint_bar": 14,
+      "subset": "dom77",
+      "degree": "V7",
+      "quality": "dom7",
+      "root_pc": 3,
+      "bars": [
+        "ii",
+        "ii7",
+        "V7",
+        "ii7"
+      ]
+    },
+    "Bridge": {
+      "midpoint_bar": 18,
+      "subset": "maj5",
+      "degree": "IV",
+      "quality": "major",
+      "root_pc": 1,
+      "bars": [
+        "vi",
+        "I",
+        "IV",
+        "ii"
+      ]
+    },
+    "ReelA2": {
+      "midpoint_bar": 22,
+      "subset": "maj0",
+      "degree": "I",
+      "quality": "major",
+      "root_pc": 8,
+      "bars": [
+        "I",
+        "iii",
+        "I",
+        "IV"
+      ]
+    },
+    "ReelC": {
+      "midpoint_bar": 26,
+      "subset": "min4",
+      "degree": "iii",
+      "quality": "minor",
+      "root_pc": 0,
+      "bars": [
+        "iii",
+        "I7",
+        "iii",
+        "I"
+      ]
+    },
+    "Hornpipe": {
+      "midpoint_bar": 30,
+      "subset": "min2",
+      "degree": "ii",
+      "quality": "minor",
+      "root_pc": 10,
+      "bars": [
+        "I7",
+        "iii",
+        "ii",
+        "IV"
+      ]
+    },
+    "Finale": {
+      "midpoint_bar": 34,
+      "subset": "maj5",
+      "degree": "IV",
+      "quality": "major",
+      "root_pc": 1,
+      "bars": [
+        "ii",
+        "V7",
+        "IV",
+        "ii"
+      ]
+    },
+    "Outro": {
+      "midpoint_bar": 38,
+      "subset": "dom77",
+      "degree": "V7",
+      "quality": "dom7",
+      "root_pc": 3,
+      "bars": [
+        "I",
+        "iii",
+        "V7",
+        "I"
+      ]
+    }
+  },
+  "voices": [
+    "Marimba",
+    "Horns",
+    "Cello",
+    "Violin",
+    "Bassoon",
+    "Bass",
+    "Drums",
+    "Flute"
+  ],
+  "variation_techniques": [
+    "V1 retrograde (Bridge lead)",
+    "V2 inversion (Bridge violin, pivot 74)",
+    "V3 register shift (Bridge lead low 60-76 / ReelC+Hornpipe lead +12)",
+    "V4 transposition (Finale violin +7)",
+    "V5 augmentation (Outro bassoon 8th->whole)",
+    "V6 diminution (Hornpipe bassoon 8th->16th)",
+    "V7 density/method change (drum curve + Hornpipe offbeat clap)",
+    "V8 counterline (NEW flute ornament + Finale doubling)"
+  ],
+  "rework_of": "104-celtic-subset-variations",
+  "phase1": "221-celtic-subset-walk-extended-phase1.mid",
+  "phase2": "221-celtic-subset-walk-extended.mid",
+  "grid": "grid_visualization.txt"
+}

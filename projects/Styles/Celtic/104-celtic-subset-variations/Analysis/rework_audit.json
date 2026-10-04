@@ -1,0 +1,29 @@
+{
+  "chosen": "/opt/data/projects/Styles/Celtic/104-celtic-subset-variations",
+  "genre": "Celtic",
+  "primary_midi": "MIDI/104-celtic-subset-variations.mid",
+  "audit_date": "2026-10-04",
+  "standard_failures": [],
+  "redesign_required": false,
+  "decision": "extension",
+  "source_identity": {
+    "genre": "Celtic",
+    "key": "Ab major",
+    "bpm": 96,
+    "meter": "4/4",
+    "ticks_per_beat": 480,
+    "method": "ABS-002 Subset Walker + ABS-001 tension-curve + method-006 cadence",
+    "form": "8 sections x 4 bars = 32 bars",
+    "voices": ["Marimba", "Horns", "Cello", "Violin", "Bassoon", "Bass", "Drums"],
+    "programs": {"Marimba": 12, "Horns": 60, "Cello": 42, "Violin": 40, "Bassoon": 70, "Bass": 43, "Drums": 0},
+    "motif": "subset-field pitch stream (walked pitch-class field), violin answer line [74,72,70,77,74,72,70,67]"
+  },
+  "audit_detail": {
+    "std1_engine": "PASS (compose.py imports workflows.unitmatrix_composer.UnitMatrixComposer; no raw mido authoring)",
+    "std2_zero_drift": "PASS (7 voice tracks all length 61440)",
+    "std3_rhythm_grid": "PASS (0 off-grid pitched onsets)",
+    "std4_track_setup": "PASS (7 voice tracks)",
+    "std5_two_phase": "PASS (.mid + -phase1.mid both present)",
+    "std6_sidecars": "PASS (provenance.json + index.html present)"
+  }
+}
