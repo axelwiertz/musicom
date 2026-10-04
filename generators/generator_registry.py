@@ -71,6 +71,17 @@ GENERATOR_REGISTRY = {
     "HC-045": (None, None, "Ethiopian Qañat Kiñit Modal System — Azmari Wax-and-Gold (spec in human_methods_db.md)"),
     "HC-046": (None, None, "Javanese Gamelan Gending Composition — Colotomic & Pathet (spec in human_methods_db.md)"),
     "HC-047": (None, None, "Barbershop Quartet Voicing & Overtone Ring Craft (spec in human_methods_db.md)"),
+    # --- Abstract layer weekly promotion 2026-10-04 (reports 099, 104) ---
+    "ABS-099": ("rules.subset_network", None, "Self-Similarity Matrix Composition (SSMC) — abstract form design (rules.subset_network)"),
+    "ABS-104": ("rules.subset_network", None, "Parsimonious Subset Sequence Composition (PSSC) — abstract subset sequences (rules.subset_network)"),
+    # --- Human methods weekly promotion 2026-10-04 (reports HC-048..HC-054) ---
+    "HC-048": (None, None, "Cuban Rumba — Guaguancó/Yambú/Columbia Drum-Dance-Song Integration (spec in human_methods_db.md)"),
+    "HC-049": (None, None, "Kecak (Ramayana Monkey Chant) — Balinese Vocal Interlocking & Dramatic Architecture (spec in human_methods_db.md)"),
+    "HC-050": (None, None, "Yoruba Dùndún Talking-Drum Ensemble — Àyàn Speech-Surrogate & Praise Poetry Craft (spec in human_methods_db.md)"),
+    "HC-051": (None, None, "Ragtime Stride Piano — Multi-Strain March Form & Oompah Craft (spec in human_methods_db.md)"),
+    "HC-052": (None, None, "Reggae Riddim Construction — Bass-Led One-Drop/Rockers/Rub-a-Dub (spec in human_methods_db.md)"),
+    "HC-053": (None, None, "Bossa Nova Guitar Beat & Vocal Fraseado (Batida + Tempo Rubato) (spec in human_methods_db.md)"),
+    "HC-054": (None, None, "Bluegrass Ensemble Arrangement — Scruggs Banjo Roll & High Lonesome Harmony (spec in human_methods_db.md)"),
 }
 
 

@@ -60,8 +60,12 @@ def test_scale_counts_match_plan():
     # (+3 → 40); 093/094/ABS-095/096 at L3 and HC-042/043/044/045/047 at L3
     # (+9 → 61). ABS-095 is the first abstract-layer numeric method (CTC),
     # routed to rules.subset_network like ABS-001..005.
-    assert len(methods_by_scale("L4")) == 40
-    assert len(methods_by_scale("L3")) == 61
+    # Weekly registration (2026-10-04) added 098/ABS-099/100/101/102/103/ABS-104
+    # at L4 (+7 → 47) and HC-049/051/054 at L4 (+3 → 50); HC-048/050/052/053 at L3
+    # (+4 → 65). ABS-099 (SSMC) and ABS-104 (PSSC) are abstract-layer numeric
+    # methods routed to rules.subset_network like ABS-001..005 and ABS-095.
+    assert len(methods_by_scale("L4")) == 50
+    assert len(methods_by_scale("L3")) == 65
     assert len(methods_by_scale("L2")) == 20
     assert len(methods_by_scale("L1")) == 9
 

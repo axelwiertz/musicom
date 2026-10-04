@@ -181,6 +181,21 @@ SCALE = {
     "HC-045": ("L3", False),  # Qañat Kiñit Modal System — Azmari Wax-and-Gold (spec)
     "HC-046": ("L4", False),  # Javanese Gamelan Gending Composition — Colotomic & Pathet (spec)
     "HC-047": ("L3", False),  # Barbershop Quartet Voicing & Overtone Ring Craft (spec)
+    # REGISTERED 2026-10-04 (weekly prose->code promotion, reports 098..104, HC-048..054)
+    "098": ("L4", False),   # Multi-Objective Evolutionary Pareto Composition (MOEPC) (spec)
+    "ABS-099": ("L4", True),  # Self-Similarity Matrix Composition (SSMC) — rules.subset_network (abstract)
+    "100": ("L4", False),   # Active Inference Composition (AIFC) (spec)
+    "101": ("L4", False),   # Flow Matching Composition (FMC) (spec)
+    "102": ("L4", False),   # Cross-Entropy Method Composition (CEMC) (spec)
+    "103": ("L4", False),   # Graph Neural Network Composition (GNNC) (spec)
+    "ABS-104": ("L4", True),  # Parsimonious Subset Sequence Composition (PSSC) — rules.subset_network (abstract)
+    "HC-048": ("L3", False),  # Cuban Rumba Guaguancó/Yambú/Columbia Drum-Dance-Song (spec)
+    "HC-049": ("L4", False),  # Kecak Ramayana Monkey Chant (spec)
+    "HC-050": ("L3", False),  # Yoruba Dùndún Talking-Drum Ensemble (spec)
+    "HC-051": ("L4", False),  # Ragtime Stride Piano Composition (spec)
+    "HC-052": ("L3", False),  # Reggae Riddim Construction (spec)
+    "HC-053": ("L3", False),  # Bossa Nova Batida & Fraseado (spec)
+    "HC-054": ("L4", False),  # Bluegrass Ensemble Arrangement (spec)
     # --- L1 MICRO ---
     "002": ("L1", True),   # Markov Transitions
     "011": ("L1", False),  # Voice-Leading Graph Search
