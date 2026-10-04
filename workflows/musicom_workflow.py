@@ -106,6 +106,14 @@ STYLE_REGISTRY = {
         "default_voices": [("Bass", "Double Bass"), ("Arp", "Clarinet"),
                            ("Drums", "Drum Kit")],
     },
+    "chanson": {
+        "bpm": 126, "time_sig": "4/4",
+        "form": "intro-verse-chorus-verse-chorus-outro",
+        "motion": "march-like 4/4, strummed acoustic guitar, musette accordion, light brass",
+        "default_voices": [("Lead", "Trumpet"), ("Accordion", "Accordion"),
+                           ("Bass", "Double Bass"), ("Guitar", "Acoustic Guitar"),
+                           ("Drums", "Drum Kit")],
+    },
 }
 
 # --- method defaults (composition methods by ID → short description) -------

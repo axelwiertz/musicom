@@ -1,0 +1,26 @@
+{
+  "artifact": "chanson-champs-study.mid",
+  "classification": "ai-assisted",
+  "generator": "chanson_study.compose",
+  "sources": [
+    "STYLE_REGISTRY:chanson",
+    "user:chanson-francaise-brief"
+  ],
+  "parameters": {
+    "bpm": 126,
+    "key": "C",
+    "form": [
+      "Intro",
+      "Verse1",
+      "Chorus1",
+      "Verse2",
+      "Chorus2",
+      "Outro"
+    ]
+  },
+  "notes": "",
+  "sha256": "af3bdf4383a6869013c386faa6313b361ba94aa98023d2e5cad458eb688f8984",
+  "bytes": 11124,
+  "created_utc": "2026-10-04T21:23:37.669799+00:00",
+  "provenance_version": "1.0"
+}
