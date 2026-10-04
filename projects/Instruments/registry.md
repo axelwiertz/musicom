@@ -761,3 +761,25 @@ BARITONE_SAX convenience constant. Registration proof: `by_name('baritone sax')`
     (1.8 s) — muted tone is intimate, hall washes out the mute character.
     Mute types: straight (bright metallic), cup (dark mellow), harmon (nasal wah),
     plunger (talking), bucket (velvety dark). No quirk on any label.
+
+**Whistle added** (2026-10-04): GM78, Woodwind-family tin whistle entry — the
+    Irish/Celtic folk fipple flue (penny whistle, open-tube aerophone with all
+    harmonics present; companion to the existing flutes/whistles: flute (GM74 =
+    Recorder patch), pan flute (GM75), shakuhachi (GM77), ocarina (GM79))
+    (instrument.md + whistle.py), verified end-to-end UnitMatrixComposer →
+    zero-drift ✓ → MIDI (120 bytes) → FluidSynth WAV (810 KB) ✓; RenderPipeline
+    stem label `trackXX_Whistle.wav` ✓ (GM_PROGRAMS[78] = "Whistle",
+    FluidR3 preset 78 = "Whistle" — labels match exactly, **no quirk**).
+    PhaseModSynth recommended (open-tube flue: sine carrier + sine modulator,
+    mod_freq_ratio 1.0, mod_depth 1.5 — between ocarina 0.8 and shakuhachi 2.0;
+    attack 0.04 s for fast fipple onset; release 0.10 s for clean breath cutoff).
+    Solo-render spectral check: 4–8 kHz buzz 0.4% (clean single voice, no
+    comb-filtering). PhaseModSynth whistle tone confirmed: C5 = 0.794 peak.
+    Range 62–93 (D4–A6, standard D whistle 2 octaves + overblow); sweet spot
+    67–86 (G4–D6). Registered in `instrument_registry.py` as WHISTLE convenience
+    constant. Registration proof: `by_name('whistle')` → Whistle, `by_program(78)`
+    → Whistle, `in_sweet_spot(72)` = True, `in_sweet_spot(48)` = False. Role:
+    lead, melody, ornament, accent — the whistle is a monophonic breath line
+    (folk voice, no dense chords). REVERB_TAIL 1.6 s (intimate folk room, not
+    hall — keeps the cutting articulation clear). Stem label: GM_PROGRAMS[78] =
+    "Whistle" → `trackXX_Whistle.wav` (matches exactly, no quirk).

@@ -1,0 +1,17 @@
+{
+  "artifact": "220-funk-contour-groove.wav",
+  "classification": "ai-assisted",
+  "generator": "musicom.sound.render.fluidsynth",
+  "sources": [],
+  "parameters": {
+    "project": "220-funk-contour-groove",
+    "format": "wav",
+    "soundfont": "FluidR3_GM.sf2",
+    "source_midi": "220-funk-contour-groove.mid"
+  },
+  "notes": "",
+  "sha256": "a54ce20cdc2f57030358069491a3217530818b18305f7c29b1ffa0dc56e1de04",
+  "bytes": 10613292,
+  "created_utc": "2026-10-03T23:08:45.742705+00:00",
+  "provenance_version": "1.0"
+}

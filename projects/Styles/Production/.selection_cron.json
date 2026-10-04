@@ -1,20 +1,20 @@
 {
   "job": "random-style production (SP) layer-aligned",
-  "date": "2026-10-03",
-  "seed": 20261003,
-  "method": "SP-083",
-  "method_module": "sound.modular.wandering",
-  "method_desc": "Non-LFO Wandering Engine + Portal + Drift Clouds Voice (Sound Dust-style)",
-  "source_midi": "/opt/data/repos/musicom/projects/Styles/Flamenco/023-flamenco-16-bar/MIDI/flamenco_v2.mid",
-  "source_project": "Flamenco/023-flamenco-16-bar/MIDI/flamenco_v2.mid",
+  "date": "2026-10-04",
+  "seed": 20261004,
+  "method": "SP-021",
+  "method_module": "sound.synthesis.binaural",
+  "method_desc": "Binaural HRTF Spatialization",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Ragtime/001-ragtime-maple-leaf/MIDI/ragtime-maple-leaf.mid",
+  "source_project": "Ragtime/001-ragtime-maple-leaf/MIDI/ragtime-maple-leaf.mid",
   "registry_size": 38,
   "recent_excluded": [
-    "SP-024",
     "SP-070",
     "SP-072",
     "SP-075",
     "SP-079",
     "SP-081",
+    "SP-083",
     "SP-086"
   ],
   "baseline_excluded": [
@@ -23,6 +23,7 @@
   "pool_methods": [
     "SP-011",
     "SP-021",
+    "SP-024",
     "SP-026",
     "SP-028",
     "SP-032",
@@ -40,7 +41,6 @@
     "SP-078",
     "SP-080",
     "SP-082",
-    "SP-083",
     "SP-084",
     "SP-085",
     "SP-090",
@@ -52,5 +52,5 @@
     "SP-097",
     "SP-098"
   ],
-  "n_candidates": 317
+  "n_candidates": 320
 }

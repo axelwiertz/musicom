@@ -76,6 +76,7 @@ _INSTRUMENT_MODULES = {
     "World.pan_flute.pan_flute": "pan_flute",
     "Vocal.human_voice.human_voice": "human_voice",
     "Vocal.voice_like.voice_like_voice": "voice_like",
+    "Woodwind.whistle.whistle": "whistle",
 }
 
 _FIELDS = (
@@ -248,6 +249,7 @@ PICCOLO = ALL_INSTRUMENTS["piccolo"]
 TAIKO = ALL_INSTRUMENTS["taiko"]
 HUMAN_VOICE = ALL_INSTRUMENTS["human_voice"]
 PAN_FLUTE = ALL_INSTRUMENTS["pan_flute"]
+WHISTLE = ALL_INSTRUMENTS["whistle"]
 # Voice-like family — one instrument per non-vocal source. The `voice_like`
 # key is the umbrella (vox humana); each member is also addressable directly.
 VOICE_LIKE = ALL_INSTRUMENTS["voice_like"]
@@ -483,6 +485,11 @@ if __name__ == "__main__":
     print("  by_name('pan flute') =", by_name("pan flute"))
     print("  by_program(75) =", by_program(75))
     print("  PAN_FLUTE.in_sweet_spot(72) =", PAN_FLUTE.in_sweet_spot(72))
+    print("  WHISTLE.midi_program =", WHISTLE.midi_program, "(should be 78)")
+    print("  by_name('whistle') =", by_name("whistle"))
+    print("  by_program(78) =", by_program(78))
+    print("  WHISTLE.in_sweet_spot(72) =", WHISTLE.in_sweet_spot(72))
+    print("  WHISTLE.in_sweet_spot(48) =", WHISTLE.in_sweet_spot(48))
     print("  TENOR_SAX.midi_program =", TENOR_SAX.midi_program, "(should be 66)")
     print("  by_name('tenor sax') =", by_name("tenor sax"))
     print("  by_program(66) =", by_program(66))

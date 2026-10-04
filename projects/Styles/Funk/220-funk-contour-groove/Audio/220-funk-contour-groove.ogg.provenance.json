@@ -1,0 +1,18 @@
+{
+  "artifact": "220-funk-contour-groove.ogg",
+  "classification": "ai-assisted",
+  "generator": "ffmpeg libopus",
+  "sources": [],
+  "parameters": {
+    "project": "220-funk-contour-groove",
+    "format": "ogg",
+    "codec": "libopus",
+    "bitrate": "128k",
+    "source_midi": "220-funk-contour-groove.mid"
+  },
+  "notes": "",
+  "sha256": "8e1bc3307b67ee73f1a8c0c7dfc0c98424cd7fdfbcfc189aac9f30bad92dbeed",
+  "bytes": 1173894,
+  "created_utc": "2026-10-03T23:08:45.743906+00:00",
+  "provenance_version": "1.0"
+}

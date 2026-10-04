@@ -1,0 +1,75 @@
+{
+  "job": "random-style production pass (SP) - LAYER-ALIGNED 2026-10-04",
+  "selection_source": "workflows.musicom_workflow.SP_METHODS registry (38 implemented)",
+  "seed": 20261004,
+  "composition_source": "/opt/data/repos/musicom/projects/Styles/Ragtime/001-ragtime-maple-leaf/MIDI/ragtime-maple-leaf.mid",
+  "composition_sha256": "8aaf815ca4a35376e0f969ac2aa87685ac23d9e338c513807c4ff9b097e71dbf",
+  "production_method": "SP-021",
+  "production_method_name": "Binaural HRTF Spatialization",
+  "registered_module": "sound.synthesis.binaural",
+  "layer_discipline": "absolute layer: SP-021 is a spatialization layer applied to the WHOLE ragtime render (per-voice Woodworth-Schlosberg ITD+ILD positioning, summed to stereo binaural image); no new notes written; FluidSynth GM render is the acoustic carrier",
+  "sp021_params": {
+    "head_radius_m": 0.0875,
+    "speed_of_sound_ms": 343.0,
+    "ild_f_min_hz": 1000.0,
+    "ild_f_max_hz": 20000.0,
+    "ild_exponent": 2.0,
+    "track_config": {
+      "PianoLH": {
+        "azimuth_rad": 0.0,
+        "azimuth_deg": 0.0,
+        "distance": 1.3
+      },
+      "PianoRH": {
+        "azimuth_rad": 0.55,
+        "azimuth_deg": 31.51,
+        "distance": 1.0
+      },
+      "Banjo": {
+        "azimuth_rad": -0.65,
+        "azimuth_deg": -37.24,
+        "distance": 1.1
+      }
+    }
+  },
+  "fixes": [],
+  "checks": {
+    "pitch_verification": {
+      "windows_checked": 64,
+      "dominant_peak_hit_rate": 1.0,
+      "harmonic_energy_mean_8h": 0.3155,
+      "acf_windows": 17,
+      "acf_unpitched": 3,
+      "lowest_midi_notes_seen": [
+        29,
+        36,
+        41,
+        43,
+        48
+      ],
+      "median_dom_hz": 213.0,
+      "misses": [],
+      "method": "FFT dominant peak per 0.5s window, 50-2000 Hz, +/-4% vs active MIDI fund or x2/x3//2",
+      "verdict": "PASS"
+    },
+    "silence_wet": 0.0434,
+    "silence_dry": 0.0597,
+    "lufs": -14.29,
+    "peak": 0.8913
+  },
+  "artifacts": {
+    "wav": "/opt/data/repos/musicom/projects/Styles/Production/SP021-binaural-ragtime-maple-leaf/SP021-binaural-ragtime-maple-leaf.wav",
+    "ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP021-binaural-ragtime-maple-leaf/SP021-binaural-ragtime-maple-leaf.ogg",
+    "dry_reference": "/opt/data/repos/musicom/projects/Styles/Production/SP021-binaural-ragtime-maple-leaf/dry_full_mix_sp001_reference.wav",
+    "stems_mono": {
+      "PianoLH": "/opt/data/repos/musicom/projects/Styles/Production/SP021-binaural-ragtime-maple-leaf/Audio/stems_mono/pianolh_mono.wav",
+      "PianoRH": "/opt/data/repos/musicom/projects/Styles/Production/SP021-binaural-ragtime-maple-leaf/Audio/stems_mono/pianorh_mono.wav",
+      "Banjo": "/opt/data/repos/musicom/projects/Styles/Production/SP021-binaural-ragtime-maple-leaf/Audio/stems_mono/banjo_mono.wav"
+    },
+    "stems_binaural": {
+      "PianoLH": "/opt/data/repos/musicom/projects/Styles/Production/SP021-binaural-ragtime-maple-leaf/Audio/stems_binaural/pianolh_binaural.wav",
+      "PianoRH": "/opt/data/repos/musicom/projects/Styles/Production/SP021-binaural-ragtime-maple-leaf/Audio/stems_binaural/pianorh_binaural.wav",
+      "Banjo": "/opt/data/repos/musicom/projects/Styles/Production/SP021-binaural-ragtime-maple-leaf/Audio/stems_binaural/banjo_binaural.wav"
+    }
+  }
+}

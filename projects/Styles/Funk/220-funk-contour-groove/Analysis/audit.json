@@ -1,0 +1,103 @@
+{
+  "project": "220-funk-contour-groove",
+  "audit": {
+    "phase1": {
+      "n_tracks": 1,
+      "lengths": [
+        46080
+      ],
+      "zero_drift": true,
+      "total_notes": 160,
+      "pitched_onsets": 160,
+      "off_grid_16": 159,
+      "off_grid_8": 160,
+      "out_of_scale": 120,
+      "out_of_chord": 131,
+      "tracks": [
+        {
+          "name": "track0",
+          "channel": 0,
+          "length": 46080,
+          "notes": 160,
+          "off16": 159,
+          "off8": 160,
+          "out_of_scale": 120,
+          "out_of_chord": 131
+        }
+      ]
+    },
+    "phase2": {
+      "n_tracks": 5,
+      "lengths": [
+        46080,
+        46080,
+        46080,
+        46080,
+        46080
+      ],
+      "zero_drift": true,
+      "total_notes": 1048,
+      "pitched_onsets": 496,
+      "off_grid_16": 0,
+      "off_grid_8": 360,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "tracks": [
+        {
+          "name": "track0",
+          "channel": 0,
+          "length": 46080,
+          "notes": 160,
+          "off16": 0,
+          "off8": 96,
+          "out_of_scale": 0,
+          "out_of_chord": 0
+        },
+        {
+          "name": "track1",
+          "channel": 1,
+          "length": 46080,
+          "notes": 72,
+          "off16": 0,
+          "off8": 0,
+          "out_of_scale": 0,
+          "out_of_chord": 0
+        },
+        {
+          "name": "track2",
+          "channel": 2,
+          "length": 46080,
+          "notes": 144,
+          "off16": 0,
+          "off8": 48,
+          "out_of_scale": 0,
+          "out_of_chord": 0
+        },
+        {
+          "name": "track3",
+          "channel": 3,
+          "length": 46080,
+          "notes": 120,
+          "off16": 0,
+          "off8": 24,
+          "out_of_scale": 0,
+          "out_of_chord": 0
+        },
+        {
+          "name": "track4",
+          "channel": 9,
+          "length": 46080,
+          "notes": 552,
+          "off16": 0,
+          "off8": 192,
+          "out_of_scale": 0,
+          "out_of_chord": 0
+        }
+      ]
+    }
+  },
+  "sizes": {
+    "220-funk-contour-groove.mid": 8776,
+    "220-funk-contour-groove-phase1.mid": 1436
+  }
+}

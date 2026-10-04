@@ -1,0 +1,15 @@
+{
+  "project": "220-funk-contour-groove",
+  "classification": "ai-assisted",
+  "generator": "musicom.workflows.unitmatrix_composer",
+  "style": "Funk",
+  "method": "095 Contour Theory Composition (CTC)",
+  "layer": "abstract",
+  "key": "E minor pentatonic",
+  "bpm": 100,
+  "form": "Intro/Theme/Variation/Development/Climax/Outro 6x4=24 bars",
+  "phase1": "220-funk-contour-groove-phase1.mid",
+  "phase2": "220-funk-contour-groove.mid",
+  "seed": 20261003,
+  "date": "2026-10-03"
+}

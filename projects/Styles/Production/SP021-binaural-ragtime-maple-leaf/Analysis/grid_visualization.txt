@@ -1,0 +1,5 @@
+SP-021 source rhythm DNA - ragtime-maple-leaf.mid (C major, 120 BPM, 16 bars)
+rows = voices, columns = bars, '#'=onset '.'=rest
+PianoLH # # # # # # # # # # # # # # # # .
+PianoRH # # # # # # # # # # # # # # # # .
+Banjo # # # # # # # # # # # # # # # # .

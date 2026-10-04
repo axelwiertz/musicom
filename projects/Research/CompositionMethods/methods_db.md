@@ -112,6 +112,7 @@ Classification of active Musicom composition methods categorized by their primar
 || **102** | concrete | Cross-Entropy Method Composition (CEMC) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Elite-guided) | Continuous / Fluid | Macro / Distribution | $\mathcal{O}(I \cdot N \cdot L)$ | Iterative distribution optimization: sample sequences, keep elite (top fitness), refit parametric distribution via CE minimization. |
 || **103** | concrete | Graph Neural Network Composition (GNNC) | **AI-Driven** | Pitch, Rhythm, Harmony, Structure, Texture | Variable (Graph-learned) | Grid-Locked / Continuous | Macro / Graph Neighborhood | $\mathcal{O}(V \cdot T \cdot d^2)$ | Models composition as a heterogeneous graph (note, chord, bar nodes; temporal/harmonic/metric/voice edges). GNN message-passing refines node embeddings, decoded into pitch/duration/velocity/voice assignments. Relational inductive bias explicitly encodes voice-leading, harmony, and meter. |
 || **104** | abstract | Parsimonious Subset Sequence Composition (PSSC) | **Rules-Based** | Pitch, Harmony, Structure, Texture | Moderate (Scale-subset filtered) | Grid-Locked / Continuous | Macro / Circular Sequence | $\mathcal{O}(C(n,p) \cdot p)$ | Generalises parsimonious voice leading from Neo-Riemannian triadic theory to ANY n-subsets of any p-scale. Constructs exhaustive, non-redundant, circular (nrep) chord progressions via set-theoretic relations (Rp/Re/Rf), 2D table, and lexicographic walk. Inversion-bipartition (2024) yields paired voice strands. Abstract-layer subset design: feeds rules/subset_network.py. |
+|| **105** | concrete | Pólya Urn Reinforcement Composition (PURC) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Reinforcement-guided, HOME/LIFT/TENSE/TURN via prior) | Grid-Locked / Continuous | Meso / Urn State | $\mathcal{O}(N \cdot K)$ per section | Generates musical sequences via self-reinforcing Pólya urn draws: each pitch/rhythm/token becomes more likely the more it is used (rich-get-richer). Urn prior encodes tonal gravity and metric binding; innovation parameter controls novelty rate; Pitman-Yor discount controls power-law tail of token distribution. Coupled per-voice urns enforce vertical harmonic coherence. Self-reinforcing stochastic counterpart to 002 Markov (fixed-probability) and 086 HMM (latent-state); sequential generative sibling of 084 ZMRC (static rank-frequency law). |
 ||
 |### Source
 |Sakellariou, J., Tria, F., Loreto, V. & Pachet, F. (2017). "Maximum entropy models capture melodic styles." *Scientific Reports* 7, 9172. arXiv:1610.03414. — Jaynes, E. T. (1957). "Information theory and statistical mechanics." *Physical Review* 106, 620–630.
@@ -274,6 +275,7 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 || **SP-101** | Digital Waveguide Synthesis (DWS) | **Synthesis Engines** | Physical-Modeling String/Wind/Percussion Timbre | Models acoustic wave propagation as bidirectional traveling waves in digital delay lines. A vibrating string, acoustic bore, or struck bar is realized as a pair of delay lines looped via termination filters, fractional-delay interpolators, scattering junctions, and nonlinear excitations (pluck, bow, blow, strike). Loop filter $H_L(z)$ governs decay spectrum; stiffness allpass chain produces inharmonic partials for piano/bell timbres. Generalizes Karplus-Strong (SP-011) to arbitrary terminations and multi-waveguide networks. $\mathcal{O}(1)$ per sample per waveguide. Candidate: `sound/synthesis/digital_waveguide.py`. |
 || **SP-102** | Amplitude Modulation Synthesis (AMS) | **Synthesis Engines** | AM Sideband / Tremolo Timbres | Modulates carrier oscillator amplitude with a modulator oscillator $m(t) = [1 + m \cos(2\pi f_m t)]$. Sub-audio $f_m$ = tremolo; audio-rate $f_m$ = DSB+Carrier sidebands at $f_c \pm f_m$. $m$ controls sideband strength; $m>1$ overmodulation. $\mathcal{O}(1)$ per sample per voice. Candidate: `sound/synthesis/am_synthesis.py`. |
 || **SP-103** | Crossover Band Distortion Synthesis (CBDS) | **Post-Processing / DSP** | Multiband Distortion / Frequency-Selective Saturation | Splits rendered audio into N frequency bands via Linkwitz-Riley crossover filters, applies independent distortion/saturation curve per band (soft clip, tape, tube, wavefolder, rectifier, bitcrush), then recombines. Prevents intermodulation between frequency regions that full-band waveshapers create. Per-band drive, envelope-follower modulation, and waveshaper type are controllable. $\mathcal{O}(N \cdot 20)$ per sample. Candidate: `sound/effects/crossover_distortion.py`. |
+|| **SP-104** | Bitcrushing / Sample Rate Reduction Synthesis (SRR) | **Post-Processing / DSP** | Lo-Fi Degradation / Quantization Noise & Aliasing | Intentionally reduces bit depth and/or sample rate of a rendered buffer via re-quantization (rounding to $b$ bits) and sample-and-hold decimation (crush factor $R$). Produces characteristic quantization noise, aliased metallic artifacts, and lo-fi texture. Per-voice $b$ and $R$ create a "degradation stage." $\mathcal{O}(1)$ per sample. Candidate: `sound/effects/bitcrusher.py`. |
 |---|
 
 
@@ -22961,4 +22963,276 @@ Section transition parameters are crossfaded over 1–4 bars to prevent clicks.
 
 5. **Latency**: The LR-4 cascade introduces about 8 samples of group delay per split. For N=3 bands, the total latency is approximately 24 samples (0.5 ms at 48 kHz). While negligible for mixing, this may be problematic for live monitoring with the DAW track delay compensation off. FIR linear-phase crossovers reduce phase issues but add significant latency (128–2048 samples depending on filter length).
 
-6. **Over-processing**: The independent control per band creates temptation to over-process every band, resulting in a chaotic, over-compressed sound. The "subtractive then additive" heuristic: first EQ (cut unwanted frequencies in each band with SP-007), then process (distort/saturate), then EQ again (cut harsh products). This is known as "multiband processing discipline."
+6. **Over-processing**: The independent control per band creates temptation to over-process every band, resulting in a chaotic, over-compressed sound. The "subtractive then additive" heuristic: first EQ (cut unwanted frequencies in each band with SP-007), then process (distort/saturate), then EQ again (cut harsh products). This is known as "multiband processing discipline."### Source
+
+Pólya, G. (1923). "Über verschiedene Aufgaben der Wahrscheinlichkeitsrechnung." — Eggenberger, J. & Pólya, G. (1923). "Über die Statistik verketteter Vorgänge." *Zeitschrift für Angewandte Mathematik und Mechanik* 1, 279–289. — Pitman, J. & Yor, M. (1997). "The two-parameter Poisson-Dirichlet distribution derived from a stable subordinator." *Annals of Probability* 25, 855–900. — Mahmoud, H. (2008). "Pólya Urn Models." Chapman and Hall/CRC. ISBN 978-1420059830. — Simon, H. A. (1955). "On a class of skew distribution functions." *Biometrika* 42, 425–440. — Manaris, B. et al. (2003). "Zipf's law, power laws, and music." Empirical basis: pitch-interval and duration distributions in tonal music follow power laws that Pólya urns naturally generate.
+
+### Layer
+**concrete** — generates sequences of discrete pitch, rhythm, and harmony tokens that directly fill UnitMatrix cells via sequential random drawing from self-reinforcing urns. The urn state tracks the running multinomial count vector; each draw samples a token and updates the urn. Feeds generators/ via an urn-state-driven sampler.
+
+### Paradigm
+**Stochastic** — the sequence is generated by a random process with evolving probabilities driven by self-reinforcement. No deterministic rewrite rules, no nature-inspired equations of motion, no learned neural parameters. The randomness is inherent to the draw mechanism and only biased by the accumulated history.
+
+### Description
+**Pólya Urn Reinforcement Composition (PURC)** generates musical material by simulating a Pólya urn process for each musical dimension (pitch, rhythm, harmony, texture). An urn containing balls of $K$ colors (the token vocabulary) evolves under the classic Pólya reinforcement scheme: draw a ball, record its color, return it to the urn **plus an additional ball of the same color**. This positive feedback loop — "the rich get richer" — creates sequences with strong motif persistence, power-law token distributions, and exchangeability.
+
+The core drawing probability for token $i$ at step $n+1$, given that it has been drawn $n_i$ times so far, is:
+
+$$P(i \mid n_1, \ldots, n_K) = \frac{a_i + n_i}{A + n}$$
+
+where:
+- $a_i$ = initial number of balls of color $i$ (the prior bias/temperature),
+- $A = \sum_{i=1}^K a_i$ = total initial balls,
+- $n = \sum_{i=1}^K n_i$ = total draws so far.
+
+**Key properties:**
+1. **Exchangeability**: The joint distribution of any permutation of the sequence is identical (de Finetti's theorem — the Pólya urn is the finite-dimensional analogue of the Dirichlet process). The marginal probability of seeing a particular sequence depends only on the counts, not the order.
+
+2. **Dirichlet-multinomial marginal**: After $n$ draws, the count vector $(n_1, \ldots, n_K)$ follows a Dirichlet-multinomial (or Pólya) distribution:
+   $$P(n_1, \ldots, n_K) = \frac{n!}{\prod_i n_i!} \cdot \frac{\prod_i (a_i)^{\overline{n_i}}}{A^{\overline{n}}}$$
+   where $x^{\overline{n}}$ denotes the rising factorial $x(x+1)\cdots(x+n-1)$.
+
+3. **Reinforcement strength**: The parameter $A$ (total initial balls) controls the reinforcement strength. Small $A$ (e.g., $a_i=1$) → strong reinforcement, early draws dominate, motif-heavy sequences. Large $A$ (e.g., $a_i=10$) → weak reinforcement, sequence closer to i.i.d. uniform (the limit $A \to \infty$ with $a_i/A \to 1/K$ is drawing with replacement).
+
+4. **Innovation rate**: In the pure Pólya urn, no genuinely new colors appear (all colors are present at the start). To allow novelty, a **triggering mechanism** (Tria et al. 2014, UMT model) adds a small probability $p_{\rm new}$ of sampling a token not previously observed, proportional to $\nu$ (the innovation drive). This creates a **Pólya urn with expanding colors**:
+   $$P(\text{new token}) \propto \nu, \quad P(\text{existing token } i) \propto a_i + n_i$$
+
+5. **Pitman-Yor generalization** (Pitman & Yor 1997): The two-parameter version introduces a discount parameter $d \in [0,1)$ and a strength $\theta > -d$:
+   $$P(i \mid \text{history}) = \frac{n_i - d}{\theta + n}$$
+   where the discount $d$ creates power-law tails (faster than the Dirichlet process's exponential tails). The standard Pólya urn corresponds to $d=0, \theta = A$.
+
+**Generation workflow for the UnitMatrix:**
+1. Initialize urns for each voice × dimension (pitch urn, duration urn, velocity urn) with per-section prior counts $a_i$.
+2. For each UnitMatrix cell (voice $v$, section $s$):
+   a. Let the urn state reflect draws already made within this section.
+   b. For each note in the cell: draw pitch from the pitch urn; draw duration (in ticks) from the duration urn; draw velocity from the velocity urn.
+3. At section boundaries: optionally reset the urns (fresh section) or carry over the state (continuous development).
+
+### Musical Elements Framework
+
+**PITCH**: Each pitch class (C, C#, D, …) or scale degree (1–7 in a diatonic context) has an urn ball count. The reinforcement mechanism ensures that once a pitch is used, it becomes more likely to be used again — creating self-repeating motifs, neighbor-tone patterns, and tonic gravity. The prior $a_i$ encodes the tonal hierarchy: set $a_{\text{tonic}} > a_{\text{dominant}} > a_{\text{mediant}} > a_{\text{chromatic}}$ so that tonic and dominant gravities emerge even before any draws. Pitch-interval behavior: the urn on scale degrees naturally produces step-wise motion in the early draws (many available scale steps), but as the piece progresses, long leaps become rare (consistent with real music). The Pitman-Yor discount $d$ controls the tail weight of interval distribution.
+
+**RHYTHM**: Duration tokens (e.g., whole, half, quarter, eighth, sixteenth note) are drawn from a duration urn. The reinforcement mechanism encodes the "groove inertia": once a particular rhythmic value is used, it tends to recur, creating consistent rhythmic cells. The on-beat vs off-beat bias is encoded in the prior: set $a_{\text{on-beat}} > a_{\text{off-beat}}$ for downbeat stability, or vice versa for syncopation. Cross-rhythm: two coupled urns per voice (one for downbeat-weighted durations, one for upbeat) with shared innovation parameter. The Pitman-Yor discount $d$ generates the heavy-tailed duration distribution observed in natural music (more very short and very long notes than a geometric distribution would produce).
+
+**HARMONY**: Chord symbols or functional regions (tonic, subdominant, dominant, chromatic) live in a chord-function urn per voice or per section. The transition inertia (Pólya reinforcement on chord-function pairs) creates harmonic "momentum": once a I–IV progression is used, it is more likely to recur, building a characteristic harmonic vocabulary for the piece. Multi-voice harmony: separate urns per voice but with cross-urn coupling: when voice 1 draws chord C, a parameter $\gamma$ increases the likelihood that voice 2 draws a compatible chord (consonance coupling). This is mathematically equivalent to a coupled Pólya urn system. The prior $a_i$ per chord function encodes HOME/LIFT/TENSE/TURN functional roles directly.
+
+**STRUCTURE**: The macro-form is governed by per-section urn parameters. Each section $s$ has its own prior vector $\mathbf{a}^{(s)}$, innovation rate $\nu^{(s)}$, and Pitman-Yor discount $d^{(s)}$. The trajectory of these parameters across sections defines the form:
+- **Intro** ($s=1$): small $A$ (strong reinforcement → short motifs stabilize quickly), high $a_{\text{tonic}}$, low innovation $\nu$.
+- **Verse** ($s=2$): medium $A$, moderate innovation, expanding vocabulary.
+- **Chorus** ($s=3$): lower $d$ (more focused, less exploration), higher $A$ (less wild variation), repeated draws of the same pitch/rhythm set create the "hook" through strong reinforcement.
+- **Bridge** ($s=4$): high innovation $\nu$, high discount $d$, low $A$ — maximal exploration and variety.
+- **Outro**: progressive decay of all $a_i$ toward a single tonally stable color (tonic).
+
+Section transition: urns can either reset (fresh start) or carry over state with a dampening multiplier $\lambda \in [0,1]$ that scales down all counts before the next section, providing continuity without over-constraining.
+
+**TEXTURE**: Texture density (number of simultaneous notes) is controlled by a separate "activity urn" that determines how many notes are active in each cell. The per-voice note density follows the reinforcement pattern: once a dense texture is established (many simultaneous events), it tends to persist until a rare "silence" event is drawn (innovation or a very long sequence of emptiness). Voice coupling: the degree of coupling between voice urns (via the consonance parameter $\gamma$) directly controls vertical texture — high $\gamma$ = homophonic block chords (voices draw compatible tokens simultaneously), low $\gamma$ = independent polyphonic lines.
+
+### UnitMatrix Integration (Voices & Sections)
+
+**Voices (Rows):** Each voice has its own set of urns: pitch urn, duration urn, velocity urn, and an optional chord-function urn. The urns are initialized per voice with priors:
+- **Lead voice**: high $a_{\text{tonic}}$, high $a_{\text{quarter}}$, medium $d$ (melodic focus).
+- **Harmonic pad**: high $a_{\text{chord-tone}}$, low $a_{\text{rhythm}}$, long durations, low innovation (stable).
+- **Bass voice**: very high $a_{\text{tonic}}$, $a_{\text{dominant}}$, low $d$, very low innovation (grounding function).
+- **Percussion voice**: 2-color urn (hit/silence), with $a_{\text{hit}}$ on Euclidean grid positions encoding the groove pattern.
+
+Voices are **coupled** through a shared harmonic state urn: when one voice draws a chord function, the consonance parameter $\gamma > 1$ temporarily boosts the count of compatible pitches in all other voices' urns. This enforces vertical coherence without hard constraint. Mathematically, after voice $v$ draws chord $c$ at time $t$, the pitch urn of voice $w$ is updated as:
+
+$$a_{i}^{(w)} \leftarrow a_{i}^{(w)} + \gamma \cdot \mathbf{1}[\text{pitch } i \text{ in chord } c]$$
+
+**Sections (Columns):** Each section defines a distinct urn configuration:
+- **Prior vector** $\mathbf{a}_s$: initial ball counts per token type, setting the section's tonal center, rhythmic density, and register.
+- **Innovation rate** $\nu_s$: probability of drawing a novel token — higher = more exploratory (bridge/development).
+- **Pitman-Yor discount** $d_s$: controls the power-law exponent of the token distribution — lower = more focused on a few core tokens (motif repetition), higher = more distributed (varied vocabulary).
+- **Carry-over factor** $\lambda_s$: fraction of the previous section's urn state to retain at the section boundary. $\lambda = 0$ = fresh urns (clean section reset), $\lambda = 1$ = continue as if no boundary (through-composed).
+
+**Cells (MusicUnit):** Each cell is filled by drawing a sequence of notes from the voice's urns until the cell's time allocation (in ticks) is consumed. The number of notes in the cell follows a Poisson-gamma mixture (the Pólya urn's count distribution). The total tick duration constrains how many draws are made per cell; the last note's off-tick may be shortened to fit the cell boundary (consistent with the musicom zero-drift invariant). The urn state is updated per draw and persists across cells within the same section.
+
+### Pitfalls
+
+1. **Reinforcement lock-in**: The "rich-get-richer" property can cause a single pitch or rhythm token to dominate the entire piece once it has been drawn a few times, leading to monotonous repetition. **Mitigation**: set a minimum $A$ (total initial balls) per dimension, use the innovation parameter $\nu$ to periodically introduce novelty, and apply the Pitman-Yor discount $d$ which actively reduces the probability of the most frequent tokens (a counter-reinforcement mechanism at the heavy tail).
+
+2. **Over-fitting to the prior**: If the prior $a_i$ is too strong (large absolute counts relative to the number of draws), the urn never learns from its own output — it's effectively sampling from the prior distribution. **Mitigation**: ensure $n$ (total draws per section) exceeds $A$ (total initial balls) by at least 5× for the reinforcement to be meaningful; use adaptive priors where $a_i$ is normalized to sum to a small value (e.g., $A \approx 5$).
+
+3. **Section transition artifacts**: If the carry-over factor $\lambda$ is too large, consecutive sections sound identical (no form development). If $\lambda$ is zero and priors are indistinguishable, the piece sounds like disconnected sections. **Mitigation**: design a clear $\lambda_s$ and $\mathbf{a}_s$ trajectory across sections (e.g., $\lambda = 0.3, 0.2, 0.1, 0.0$), and ensure the pitch priors per section shift tonal center if modulation is desired.
+
+4. **Computational cost of large vocabularies**: The drawing probability depends on the full vocabulary size $K$. With $K = 128+ pitches, 10+ durations, 10+ velocities, and $V$ voices, the per-draw complexity is $\mathcal{O}(K + V)$ if implemented with a naive linear scan of all urn components. **Mitigation**: use an **alias method** ($\mathcal{O}(1)$ per draw) or a **binary indexed tree** over the urn's multinomial vector ($\mathcal{O}(\log K)$ per draw). For the alias method, the urn update (increment one component) requires an alias table rebuild in $\mathcal{O}(K)$ after each draw — accept this for small $K$ ($< 256$) or use Fenwick trees.
+
+5. **Timing determinism**: The Pólya urn is a discrete-time process (one token per draw). Mapping to continuous tick time requires a decision: does each draw correspond to a metric subdivision (e.g., one eighth-note), or is the inter-onset interval also sampled? The simple approach (each draw = one metric slot) works for grid-locked rhythm but cannot generate rubato. **Mitigation**: hybrid approach — the duration urn determines the inter-onset interval in ticks, drawn from a self-reinforcing set of possible tie lengths (1, 2, 3, 4 sixteenths, etc.), allowing fluid rhythm within the zero-drift constraint.
+
+6. **Independence vs. coupling trade-off**: Strong coupling ($\gamma$ large) between voice urns may cause all voices to converge to the same pitch set — losing voice independence. Weak coupling ($\gamma \approx 0$) produces no vertical harmonic coherence. The optimal $\gamma$ depends on the texture goal. **Rule of thumb**: $\gamma \approx 0.5$ for moderate homophony, $\gamma \approx 0.1$ for polyphonic independence, $\gamma \approx 2.0$ for block chords.
+
+7. **The "spurious motif" problem**: Because of exchangeability, any random sequence from a Pólya urn looks like a motif sequence — every locally repeated pattern is "explained" by the urn's reinforcement, making it hard to distinguish intentional repetition from random clustering. This is not a bug (it mimics real music's distribution), but it means PURC cannot enforce canonical motivic development (inversion, augmentation, retrograde) without an external rule layer. **Mitigation**: combine PURC with method 013 (Inversion/Retrograde Transform) or 049 (IFSMG) as a post-processing motivic development step.
+# Bitcrushing / Sample Rate Reduction Synthesis (SRR) (Method SP-104)
+
+### Source
+Wikipedia — "Bitcrusher." *Wikipedia, The Free Encyclopedia*. Accessed 2026-10-04. — Zölzer, U. (2022). *Digital Audio Signal Processing*, 3rd ed. Wiley, pp. 205–232 (Quantization and Re-quantization). — Pohlmann, K. (2005). *Principles of Digital Audio*, 5th ed. McGraw-Hill, pp. 85–112 (A/D Conversion and Quantization Noise). — DAFx-02 Conference (Holters, M. & Zölzer, U., 2002). "Bitcrushing: An Audio Effect." — Välimäki, V. & Bilbao, J. (2024). "Alias-Free Sample-Rate Reduction." *DAFx* 2024, pp. 47–58. — Bennett, W. R. (1948). "Spectra of Quantized Signals." *Bell System Technical Journal* 27, 446–472 (origin of quantization noise theory).
+
+### Layer
+**absolute** — sound production (Post-Processing / DSP). Applies bit-depth reduction (re-quantization) and/or sample-rate reduction (sample-and-hold decimation) to a rendered mono/stereo audio buffer, producing characteristic lo-fi quantization noise, aliasing artifacts, and digital distortion. Candidate code path: `sound/effects/bitcrusher.py`.
+
+### Description
+**Bitcrushing / Sample Rate Reduction Synthesis (SRR)** is a dual-method degradation architecture that intentionally reduces the digital audio resolution of a rendered signal through two independent mechanisms:
+
+1. **Bit-depth reduction (re-quantization)**: decreases the number of bits per sample from the standard 16/24/32-bit representation down to as few as 1 bit, introducing quantization noise and rounding error that manifests as a gritty, lo-fi texture with amplitude-dependent harmonic distortion.
+
+2. **Sample-rate reduction (decimation with sample-and-hold)**: reduces the effective sampling rate below the original \(f_s\) by holding each output sample for \(R\) consecutive sample periods, producing aliased high-frequency components that fold back into the audible spectrum as metallic, inharmonic artifacts.
+
+These two mechanisms can be applied independently or jointly. When combined, they produce the classic "bitcrusher" effect heard in chiptune, lo-fi hip-hop, glitch, noise, and industrial electronic music. SRR emulates the sound of early digital audio hardware — 8-bit samplers (Akai S900, Emu SP-1200), low-bitrate DSP chips (Sega Genesis, NES APU), and crude A/D converters of the 1980s.
+
+SRR is the **intentional degradation** counterpart to the unintentional-resolution limitations handled by dithering (SP-008 DRC) and the spectral-shaping approach of SP-007 (Spectral Masking EQ). It is the post-processing sibling of SP-068 (Bytebeat Synthesis — which generates lo-fi timbres directly), SP-054 (Waveset Distortion — a zero-crossing decomposition alternative), and SP-103 (CBDS — which includes bitcrush as one of its per-band processing options). Unlike these, SRR treats bit-depth reduction and sample-rate reduction as independent, first-class synthesis post-processes rather than incidental modes of a larger architecture.
+
+### Technical Mechanics
+
+**1. Bit-Depth Reduction (Re-quantization)**
+
+A standard digital audio signal \(x[n]\) is represented with \(B\) bits per sample, giving \(2^B\) equally spaced quantization levels spanning the range \([-1, 1)\). Reducing to \(b < B\) bits re-quantizes the signal:
+
+\[
+x_b[n] = \frac{\mathrm{round}\bigl(x[n] \cdot 2^{b-1}\bigr)}{2^{b-1}}
+\]
+
+where:
+- \(b\) = target bit depth (typically 1–16 bits)
+- \(\mathrm{round}(\cdot)\) = rounding to nearest integer (or truncation, see Pitfalls)
+- The denominator \(2^{b-1}\) normalizes back to floating-point range (one sign bit + \(b-1\) magnitude bits is the standard \(b\)-bit signed integer convention)
+
+**Quantization error (noise):** The difference \(q[n] = x_b[n] - x[n]\) is bounded by \(\pm 2^{-b}\) (half the least-significant-bit step size). For a broadband signal, this error approximates uniform white noise with RMS amplitude:
+
+\[
+\sigma_q = \frac{2^{-b}}{\sqrt{12}} \approx 0.29 \cdot 2^{-b}
+\]
+
+Signal-to-quantization-noise ratio (SQNR):
+
+\[
+\mathrm{SQNR} \approx 6.02b + 1.76 \;\text{dB}
+\]
+
+At \(b=16\) (CD quality): SQNR ≈ 98 dB. At \(b=4\): SQNR ≈ 26 dB — severe audible noise. At \(b=1\): only two levels (−1, +1), producing a square-wave approximation of the input.
+
+**Dithering (optional enhancement):** Adding triangular probability density function (TPDF) dither noise \(d[n] \sim \triangle(-\Delta, +\Delta)\) with peak-to-peak amplitude \(\Delta = 2^{-b}\) before re-quantization decorrelates the quantization error from the signal, eliminating audible "grittiness" at the cost of a constant noise floor:
+
+\[
+x_b[n] = \frac{\mathrm{round}\bigl((x[n] + d[n]) \cdot 2^{b-1}\bigr)}{2^{b-1}}
+\]
+
+**2. Sample-Rate Reduction (Decimation with Sample-and-Hold)**
+
+Given an original sample rate \(f_s\), the effective rate is reduced by factor \(R \in \mathbb{Z}^+\) (the "crush factor"):
+
+\[
+y[n] = x\!\left[R \cdot \left\lfloor\frac{n}{R}\right\rfloor\right]
+\]
+
+Each output sample is held for \(R\) consecutive indices — a zero-order hold (nearest-neighbor interpolation). This is equivalent to:
+1. Decimating by \(R\): keep every \(R^{\mathrm{th}}\) sample, discard the rest.
+2. Upsampling by \(R\) via zero-order hold (sample replication).
+
+**Aliasing analysis:** The downsampling step creates frequency copies at multiples of the new Nyquist frequency \(f_s / 2R\). Without an anti-aliasing lowpass filter before decimation, all frequencies above \(f_s / 2R\) alias into the baseband. The sample-and-hold reconstruction (frequency-domain sinc-squared rolloff) further introduces spectral tilt:
+
+\[
+|H_{\mathrm{sh}}(f)| = \left|\frac{\sin(\pi f/f_s)}{\pi f/f_s}\right| \cdot \mathrm{sinc}\!\left(\frac{f}{f_s/R}\right)
+\]
+
+At extreme \(R\) values (e.g., \(R=50\) at 44.1 kHz → effective rate 882 Hz), the aliased components create a dense, metallic, ring-modulated texture.
+
+**Anti-aliasing mode:** An optional lowpass filter at \(f_s / 2R\) before decimation produces a bandlimited downsampled signal (telephone-quality) instead of aliasing artifacts. This produces a "muffled" rather than "metallic" effect.
+
+**3. Combined Operation (Full Bitcrusher)**
+
+The two mechanisms stack (order matters for aliasing):
+
+\[
+y[n] = \mathrm{requantize}_b\!\left( \mathrm{hold}_R\bigl(x[n]\bigr) \right)
+\]
+
+Holding before re-quantization spreads the quantization error over \(R\) repeated samples, making the noise periodic at the original sample rate. Reversing the order (requantize then hold) produces different spectral characteristics because the quantization noise is introduced at the original rate before decimation.
+
+**4. Complexity**
+
+Both operations are \(\mathcal{O}(1)\) per sample with zero memory (except the hold buffer):
+- Bit reduction: 1 multiply + 1 round + 1 divide per sample
+- Sample-rate reduction: 1 integer counter + conditional sample-copy per sample
+- Combined: ≈5–10 operations per sample, negligible CPU
+
+### Musical Elements Framework
+
+**PITCH:** SRR does not generate pitch but alters the perceived pitch content. Sample-rate reduction aliases high-frequency partials into the audible band, creating inharmonic pitch artifacts that sound like additional notes or metallic overtones. At extreme reduction (\(R > 16\)), the aliased components form recognizable pitch relationships: the first aliased copy of a 440 Hz tone at \(f_s/2R = 1102.5\) Hz produces a mirror at \(2 \times 440 - 1102.5 = -222.5\) Hz → folded to 222.5 Hz (a pitch roughly a minor third below 440). This means **SRR effectively creates new pitches from aliasing**, which can be musically exploited by choosing \(R\) such that the aliased copies land on scale degrees. Bit-depth reduction, by contrast, does not shift pitch but adds an amplitude-dependent harmonic grit: low-amplitude signals are more severely quantized (larger relative error), creating a dynamic spectral noise floor that follows the signal envelope.
+
+**RHYTHM:** SRR operates sample-by-sample and preserves timing exactly (no latency modulation, no temporal smearing). However, the sample-and-hold mechanism creates an audible rhythmic side effect: at \(R > 10\), the held samples create a staircase waveform whose step transitions produce audible ticks and clicks at a rate proportional to \(f_s / R\). At \(R = f_s / \text{(BPM-based rate)}\), these ticks land on musical grid subdivisions, producing unintentional rhythmic patterns. The quantization noise floor also has an amplitude envelope that follows the input, creating rhythmic "noise breaths" at note onsets. For percussive material, the aliased high-frequency content can add extra "snap" or "crunch" to transients.
+
+**HARMONY:** Harmonies are disrupted by both mechanisms. Sample-rate reduction folds upper partials downward, creating sum/difference intermodulation between the original frequencies and their aliased images — this produces simultaneous pitch combinations that are not present in the original signal. If a chord contains notes at 400 Hz and 600 Hz, reducing the sample rate so that the 3rd harmonic of 400 Hz (1200 Hz) aliases below \(f_s/2R\) creates new audible tones in the bass/mid register, potentially clashing with the original chord voicing. Bit-depth reduction at low bit depths (1–4 bits) effectively inverts the sensitivity: a quiet chord tone may be entirely quantized away (rounding to zero), causing notes to "drop out" of the texture based on their level rather than their pitch. Both mechanisms break the harmonic ratio relationships of the original signal, making SRR intrinsically **inharmonic** — the counterpart to harmonic-aware methods like SP-032 FDN, SP-014 Waveguide Mesh, and SP-019 Chebyshev.
+
+**STRUCTURE:** Macro-form is programmed as a per-section trajectory of crusher parameters:
+- Bit depth \(b(s)\) across sections (e.g., intro=16 bits clean, verse=8 bits grit, chorus=4 bits extreme, bridge=12 bits, outro=16→8→4→2 fade)
+- Crush factor \(R(s)\) (e.g., 1=full bandwidth → 4 → 8 → 16 → back to 1)
+- Processing order \(o(s)\) (hold-then-quantize vs quantize-then-hold)
+- Dither on/off \(d(s)\) (per-section dither toggle)
+- Anti-alias filter \(a(s)\) on/off (bandlimited vs aliasing mode)
+- Wet/dry mix \(w(s) \in [0,1]\) (parallel blend with dry signal preserves low-end)
+- Crossfade intervals between sections prevent clicks from abrupt parameter changes
+
+**TEXTURE:** SRR texture is a continuum controlled by the \((b, R)\) pair:
+- (16, 1): transparent (no effect)
+- (8, 1): warm quantization grit, like a low-bit portable recorder
+- (4, 1): extreme lo-fi, noise floor dominates quiet passages, loud sounds remain
+- (16, 8): metallic aliasing texture, partials fold inward creating a "ring-mod" quality
+- (8, 4): combined effects — "classic bitcrusher" — digital grunge with aliased shimmer
+- (2, 2): extreme degradation — signal is barely recognizable, PWM-like texture
+- (1, 1): sign-only output — square wave at zero crossings, producing the "1-bit" sound
+
+At moderate settings (b=6–8, R=2–4), SRR produces the signature lo-fi warmth heard in lo-fi hip-hop beats and vaporwave. At extreme settings (b=1–3, R=8–50), it produces the glitch/industrial/chiptune texture that defines the sound of 8-bit videogame music emulation.
+
+### UnitMatrix Integration (Voices & Sections)
+
+**Voices (Rows):** SRR is applied as a per-voice or per-group post-process after the voice has been rendered through its primary synthesis method (SP-001 FluidSynth, SP-011 Karplus-Strong, SP-029 Subtractive, etc.). Each voice can receive its own \((b_v, R_v)\) pair — for example:
+- Bass: b=16, R=1 (clean, full bandwidth — preserves sub energy)
+- Pad: b=8, R=4 (lo-fi warmth, aliased shimmer)
+- Lead: b=4, R=2 (gritty digital lead, aggressive)
+- Percussion: b=3, R=1 (maximum crunch on transients, no timing smear)
+
+This per-voice assignment allows the composer to create a "degradation stage" where different instruments are differently degraded, mimicking the effect of a mixing desk where channels pass through different-quality D/A converters.
+
+**Sections (Columns):** Per-section crusher parameters define the macro-form narrative:
+- **Intro**: Clean (b=16, R=1, dry=100%) — establish the source material
+- **Verse A**: Subtle crush (b=12, R=2, dry=80%) — introduce texture
+- **Verse B**: Medium crush (b=8, R=4, dry=60%) — lo-fi warmth
+- **Chorus**: Heavy crush (b=6, R=8, dry=40%) — aggressive digital wall
+- **Bridge**: Extreme (b=4, R=16, dry=20%) — near-unrecognizable, glitch
+- **Outro**: Ramp b:4→16, R:16→1 over 8 bars as wet→dry — gradual "return to clarity"
+
+The bitcrusher parameters transition linearly (or with an eased curve) between sections. Abrupt changes (especially in \(R\)) produce audible pops from waveform discontinuities — mitigated by 2–4 sample crossfade at section boundaries.
+
+**Cells (MusicUnit):** SRR operates at the sample level and is fully stateless between cells (except the hold counter for sample-rate reduction, which resets at each cell boundary). The zero-drift invariant is preserved: the operation is deterministic, sample-accurate, and introduces no variable delay. All cells in a section share the same \((b, R)\) unless per-cell automation is enabled (per-cell \(b, R\) values carried as metadata in the UnitMatrix cell).
+
+**Produce dispatch:**
+```python
+produce(midi_path, method="SP-104", params={
+    "bit_depth": 8,         # 1–16 bits
+    "crush_factor": 4,      # R = sample rate divisor (1=none, 2, 4, 8, ...)
+    "order": "hold_then_quantize",  # or "quantize_then_hold"
+    "dither": True,         # TPDF dither on/off
+    "anti_alias": False,    # bandlimited decimation on/off
+    "mix": 0.7,             # wet/dry blend
+    "per_voice": {          # optional per-voice overrides
+        "Bass": {"bit_depth": 16, "crush_factor": 1, "mix": 0.0},
+        "Lead": {"bit_depth": 4, "crush_factor": 2, "mix": 0.8}
+    }
+})
+```
+
+### Pitfalls
+
+1. **DC offset from asymmetric quantization**: Simple truncation (floor/ceil instead of round) introduces a negative DC offset proportional to the LSB size. Always use `round()` (or dither) to keep the error zero-mean. Truncation at 4 bits produces a −3% DC shift — audible as a subsonic thump at section boundaries. Mitigation: a DC-blocking highpass filter at 10 Hz after the crusher stage.
+
+2. **Aliasing is not always desirable**: The metallic, inharmonic artifacts from extreme sample-rate reduction can clash with acoustic instruments or tonal harmony. Use the anti-alias filter mode for bandlimited degradation (telephone-quality) when the target sound is "lo-fi bandlimited" rather than "aliasing chaos." When aliasing is desired, choose \(R\) such that the first aliased band folds onto harmonically related frequencies (e.g., \(R = f_s / (2 \cdot f_{\text{target}})\) to pitch the fold).
+
+3. **Perceptual loudness change**: Reducing bit depth reduces the peak-to-average ratio — a 4-bit signal sounds louder than its 16-bit equivalent at the same RMS level because the quantization steps act like additional noise. Uncompensated, this creates sections that sound subjectively 3–6 dB louder, breaking the mix balance. Use automatic peak-normalization or RMS-bridging: after crushing, measure RMS and scale the output to match the input RMS.
+
+4. **Sample-hold comb filtering**: The zero-order hold introduces a \((\sin x)/x\) spectral rolloff with notches at multiples of \(f_s / R\). At \(R=4\) (11 kHz effective rate at 44.1 kHz), notches appear at 11 kHz, 22 kHz, etc. — the 11 kHz notch is clearly audible as a loss of air and shimmer. Compensation: apply an inverse-sinc FIR filter post-crusher when \(R \geq 4\) and dry mix < 100%.
+
+5. **Stereo field narrowing**: If the same crush factor \(R\) is applied to both channels with independent sample selection (different initial phases), the left and right channels may decouple in time, introducing phasing artifacts. Mitigation: hold the same selected sample index across both channels (linked stereo mode); if independent crushing is desired per channel, monitor in mono to check for phase cancellation.
+
+6. **Tonal dependency across sections**: A parameter change from R=4 to R=8 between sections causes the aliased harmonics to shift, potentially making a chord sound like it resolves differently than intended. Always audition parameter transitions on the actual material — the "crush trajectory" should be evaluated harmonically, not just texturally.
+
+7. **Pitched aliasing musicality**: The aliased copies of a pitched note land at \(f_{\text{alias}} = |k \cdot f_s/R - f_{\text{orig}}|\) for integer \(k\). These folded frequencies are deterministic given \(f_s, R, f_{\text{orig}}\). For tonal music, choose \(R\) so that the most prominent aliased harmonics map to scale degrees of the current key — turning a flaw into a compositional feature. For example, at \(f_s = 44100\) Hz, \(R=15\) gives \(f_s/R = 2940\) Hz; a fundamental at 440 Hz aliases through the \(k=15\) copy: \(|15 \cdot 2940 - 440| = 43660\) → folded again → 880 Hz (one octave up — consonant).
