@@ -1,0 +1,46 @@
+{
+  "artifact": "222-flamenco-arc-register-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "007-Narrative-Arc-Register-Planning (raw register walk)",
+  "sources": [],
+  "parameters": {
+    "phase": 1,
+    "bpm": 120,
+    "key": "E flamenco (por arriba) composite",
+    "seed": 20261004,
+    "voices": 1,
+    "arc": "register-led narrative arc (calm->rise->climax->fall->resolve)",
+    "register_bands": {
+      "Entrada": [
+        48,
+        60
+      ],
+      "Letra": [
+        60,
+        72
+      ],
+      "Falseta": [
+        64,
+        79
+      ],
+      "Cumbre": [
+        76,
+        88
+      ],
+      "Bajada": [
+        64,
+        76
+      ],
+      "Cierre": [
+        52,
+        64
+      ]
+    },
+    "note": "raw generative draft, unquantized ticks, register-wandered, pre-rules"
+  },
+  "notes": "",
+  "sha256": "2203fa982bcde75db860e052bdf2c2229d910beafc3afc4b100049a654961bb1",
+  "bytes": 1069,
+  "created_utc": "2026-10-04T23:08:17.022671+00:00",
+  "provenance_version": "1.0"
+}

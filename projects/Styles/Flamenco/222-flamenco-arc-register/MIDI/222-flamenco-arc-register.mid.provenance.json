@@ -1,0 +1,47 @@
+{
+  "artifact": "222-flamenco-arc-register.mid",
+  "classification": "ai-assisted",
+  "generator": "007-Narrative-Arc-Register-Planning + musicom rules",
+  "sources": [],
+  "parameters": {
+    "phase": 2,
+    "bpm": 120,
+    "key": "E flamenco (por arriba) composite",
+    "seed": 20261004,
+    "voices": 5,
+    "form": "6 sections x 4 bars = 24 bars",
+    "quantization": "16th-grid (120 ticks)",
+    "chord_cycle": "Andalusian cadence Am-G-F-E",
+    "register_bands": {
+      "Entrada": [
+        48,
+        60
+      ],
+      "Letra": [
+        60,
+        72
+      ],
+      "Falseta": [
+        64,
+        79
+      ],
+      "Cumbre": [
+        76,
+        88
+      ],
+      "Bajada": [
+        64,
+        76
+      ],
+      "Cierre": [
+        52,
+        64
+      ]
+    }
+  },
+  "notes": "Flamenco 'por arriba'. Two-phase: register-led narrative arc walk -> chord-tone quantized + grid-snapped 5-voice flamenco texture (guitar/cante violin/compas clavi/bajo bass/palmas). All pitched voices are E-flamenco chord tones.",
+  "sha256": "aad87d880ffdacb566582932fee17733e255117a83f0e53e306faa3652aca179",
+  "bytes": 6203,
+  "created_utc": "2026-10-04T23:08:17.068132+00:00",
+  "provenance_version": "1.0"
+}

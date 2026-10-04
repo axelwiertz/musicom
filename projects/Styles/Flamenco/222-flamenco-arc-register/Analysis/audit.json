@@ -1,0 +1,105 @@
+{
+  "project": "222-flamenco-arc-register",
+  "audit": {
+    "phase1": {
+      "n_tracks": 1,
+      "lengths": [
+        46080
+      ],
+      "zero_drift": true,
+      "total_notes": 112,
+      "pitched_onsets": 112,
+      "off_grid_16": 110,
+      "off_grid_8": 110,
+      "out_of_scale": 25,
+      "out_of_chord": 81,
+      "tracks": [
+        {
+          "name": "track0",
+          "channel": 0,
+          "length": 46080,
+          "notes": 112,
+          "off16": 110,
+          "off8": 110,
+          "out_of_scale": 25,
+          "out_of_chord": 81
+        }
+      ]
+    },
+    "phase2": {
+      "n_tracks": 5,
+      "lengths": [
+        46080,
+        46080,
+        46080,
+        46080,
+        46080
+      ],
+      "zero_drift": true,
+      "total_notes": 712,
+      "pitched_onsets": 424,
+      "off_grid_16": 0,
+      "off_grid_8": 0,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "tracks": [
+        {
+          "name": "track0",
+          "channel": 0,
+          "length": 46080,
+          "notes": 112,
+          "off16": 0,
+          "off8": 0,
+          "out_of_scale": 0,
+          "out_of_chord": 0
+        },
+        {
+          "name": "track1",
+          "channel": 1,
+          "length": 46080,
+          "notes": 24,
+          "off16": 0,
+          "off8": 0,
+          "out_of_scale": 0,
+          "out_of_chord": 0
+        },
+        {
+          "name": "track2",
+          "channel": 2,
+          "length": 46080,
+          "notes": 192,
+          "off16": 0,
+          "off8": 0,
+          "out_of_scale": 0,
+          "out_of_chord": 0
+        },
+        {
+          "name": "track3",
+          "channel": 3,
+          "length": 46080,
+          "notes": 96,
+          "off16": 0,
+          "off8": 0,
+          "out_of_scale": 0,
+          "out_of_chord": 0
+        },
+        {
+          "name": "track4",
+          "channel": 9,
+          "length": 46080,
+          "notes": 288,
+          "off16": 0,
+          "off8": 0,
+          "out_of_scale": 0,
+          "out_of_chord": 0
+        }
+      ]
+    }
+  },
+  "sizes": {
+    "222-flamenco-arc-register.mid": 6203,
+    "222-flamenco-arc-register-phase1.mid": 1069,
+    "222-flamenco-arc-register.ogg": 1122001,
+    "222-flamenco-arc-register.wav": 10711084
+  }
+}
