@@ -52,9 +52,10 @@ from structures import MidiInstrument, MidiPercussion
 from workflows.unitmatrix_composer import UnitMatrixComposer, create_note_unit
 from workflows.provenance import write_provenance
 from sound.render.fluidsynth import discover_soundfont
+from utilities.env import repo_root
 
 # --- instruments (Phase 1b: real Instrument objects) ------------------------
-_INSTR_DIR = "/opt/data/projects/Instruments"
+_INSTR_DIR = str(Path(repo_root()) / "projects" / "Instruments")
 if _INSTR_DIR not in sys.path:
     sys.path.insert(0, _INSTR_DIR)
 try:
@@ -242,7 +243,7 @@ def compose(style="pop", method=None, form=None, key="C", bpm=None,
               ("Arp", "Clarinet"), ("Drums", "Drum Kit")])
     method = method or "001"  # Skeleton-First default
 
-    out_dir = Path(out_dir or f"/opt/data/projects/Styles/{style.title()}/workflow-demo")
+    out_dir = Path(out_dir or f"outputs/{style.title()}/workflow-demo")
     midi_dir = out_dir / "MIDI"
     midi_dir.mkdir(parents=True, exist_ok=True)
     midi_path = midi_dir / f"{style}-{method}.mid"

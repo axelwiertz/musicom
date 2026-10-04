@@ -1,0 +1,14 @@
+include README.md
+include LICENSE
+include pyproject.toml
+include REPO_MAP.md
+recursive-include docs *.md
+prune projects
+prune examples
+prune research
+prune skills
+prune hermes_agent
+prune .kilo
+prune plans
+global-exclude *.wav *.log *.ogg
+global-exclude __pycache__ *.pyc *.pyo

@@ -155,7 +155,7 @@ def generate_hitl_candidates(style="pop", key="C", bpm=120, progression=None,
 
     w = weights or STYLE_WEIGHTS.get(style, FitnessWeights())
 
-    out_dir = Path(out_dir or f"/opt/data/projects/Styles/{style.title()}/hitl")
+    out_dir = Path(out_dir or f"outputs/{style.title()}/hitl")
     cand_dir = out_dir / "candidates"
     cand_dir.mkdir(parents=True, exist_ok=True)
 

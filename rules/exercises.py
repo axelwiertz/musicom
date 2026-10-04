@@ -463,7 +463,7 @@ def _export_midi(ex: Exercise, result: ExerciseResult,
         from structures.unit import MusicUnit
         return MusicUnit()
 
-    out = out_dir or "/opt/data/projects/Research/outputs/exercises"
+    out = out_dir or "outputs/exercises"
     os.makedirs(out, exist_ok=True)
 
     composer = UnitMatrixComposer(bpm=120, ticks_per_beat=480, beats_per_bar=4)

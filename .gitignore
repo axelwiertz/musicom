@@ -30,6 +30,7 @@ Thumbs.db
 # Generated artifacts
 release.html
 *.tar.gz
+/outputs/
 
 # Agent operational files (not part of library)
 check_assignments.py

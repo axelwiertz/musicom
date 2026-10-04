@@ -1,9 +1,9 @@
-# Musicom
+# Musicom 1.0.0 — composition + production + analysis
 
 [![Python 3.11+](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/axelwiertz/musicom)
-[![Version](https://img.shields.io/badge/version-0.1.0-green.svg)](https://github.com/axelwiertz/musicom)
-[![Tests](https://img.shields.io/badge/tests-357%20passing-brightgreen.svg)](tests/)
+[![Version](https://img.shields.io/badge/version-1.0.0-green.svg)](https://github.com/axelwiertz/musicom)
+[![Tests](https://img.shields.io/badge/tests-688%20passing-brightgreen.svg)](tests/)
 
 **Musicom** is an educational framework for **AI-assisted music composition
 and production with full control of every step**. It exists to teach — and to
@@ -101,6 +101,23 @@ p2 = produce(r.midi_path, method="SP-011")   # Karplus-Strong plucked strings
 outro from a style template; `produce()` dispatches SP methods to the shared
 `sound/` modules. For full control drop to the low-level composer (next
 section) — every intermediate value is yours.
+
+### Reverse — analyze a MIDI back into its plan
+
+```python
+from workflows.analyze import analyze_midi
+
+rep = analyze_midi("out.mid")           # headless, mido READ-only
+rep.key                                # "C"
+rep.mode                               # "major"
+rep.roman_progression                  # ["I", "V", "vi", "IV", ...]
+rep.forte_names                        # ["3-11", ...]
+print(rep.grid)                        # █/░ high-contrast timeline
+```
+
+Forward and reverse are symmetric — `MIDI/audio → UnitMatrix → key/chords/sets/grid`
+mirrors `plan → UnitMatrix → MIDI/audio`. Folder layout lives in
+**[REPO_MAP.md](REPO_MAP.md)**.
 
 ---
 
@@ -226,7 +243,7 @@ musicom/
 │   ├── Instruments/       #   18-instrument registry (instrument_registry.py)
 │   ├── Production/        #   nightly SP-method productions
 │   └── Legacy/            #   archived pre-restructure projects (read-only)
-├── tests/                 # 357 tests incl. zero-drift golden MIDI harness
+├── tests/                 # 688 tests incl. zero-drift golden MIDI harness
 ├── environment.yml        # env spec (micromamba/conda)
 ├── requirements.lock      # full pip freeze
 ├── scripts/setup_env.sh   # idempotent env setup + verification
@@ -388,11 +405,11 @@ this repo, grown by scheduled autonomous agents and fully git-tracked:
 ## Testing
 
 ```bash
-pytest tests/                                    # 357 passing
+pytest tests/                                    # 688 passing
 pytest tests/ --cov=structures --cov=workflows   # with coverage
 ```
 
-> **Suite status:** green — 357 passed, 0 skipped. Highlights:
+> **Suite status:** green — 688 passed, 1 skipped. Highlights:
 > - `tests/test_harness_golden.py` — **zero-drift golden MIDI**: a fixed
 >   composition must export byte-identical, deterministic, equal-length tracks.
 > - `tests/test_phase2_bugfixes.py` — regression guards for the fixed engine bugs.
@@ -430,7 +447,7 @@ knowledge all live in this one repo.
 ### Workflow
 
 1. Fork + clone; `bash scripts/setup_env.sh`.
-2. `pytest tests/` — the suite must stay green (357 tests).
+2. `pytest tests/` — the suite must stay green (688 tests).
 3. Follow the flat-package layout; never hand-roll raw mido authoring (the
    `UnitMatrixComposer.validate()` zero-drift gate is the whole point).
 4. Add tests for new modules; keep the golden harness intact.

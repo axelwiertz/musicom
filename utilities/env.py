@@ -40,9 +40,8 @@ def env_dir() -> Path:
     env = os.environ.get("MUSICOM_ENV")
     if env:
         return Path(env)
-    # repo is /opt/data/repos/musicom -> env is /opt/data/micromamba/envs/musicom
-    cand = repo_root().parent.parent / "micromamba" / "envs" / "musicom"
-    return cand if cand.exists() else Path("/opt/data/micromamba/envs/musicom")
+    # repo-relative: repo root is <prefix>/repos/musicom -> env at <prefix>/micromamba/envs/musicom
+    return repo_root().parent.parent / "micromamba" / "envs" / "musicom"
 
 
 def python_bin() -> str:

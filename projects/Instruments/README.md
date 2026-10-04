@@ -1,5 +1,10 @@
 # Instruments Reference — Musicom-Compatible Format
 
+> **Folder purpose** (see `REPO_MAP.md`): instrument reference tree — 18
+> instruments + `registry.md`. Ranges, articulations, synthesis presets per
+> instrument; each has an `instrument.md` (doc) + `.py` constants. The engine
+> resolves this tree via `utilities.env.repo_root()` — no hardcoded host paths.
+
 Structured instrument definitions for use in musicom compositions.
 
 ## Purpose

@@ -8,6 +8,32 @@ commit clusters.
 The project is stable and testable since the 2026-07 hardening pass
 (Phase 0-5); earlier eras are retained for historical accuracy.
 
+## [1.0.0] — 2026-10-04
+
+Public 1.0.0 — composition + production + analysis library, shipped with a
+Hermes-agent skill. Single educational repo (no public/private split); folder
+map in `REPO_MAP.md`.
+
+### Added
+- **Reverse analysis path** `workflows/analyze.py`: `analyze_midi(path)` reports
+  key (Krumhansl-Schmuckler), roman-numeral progression, Forte set-classes,
+  high-contrast grid, voice-leading violations, per-voice density. Headless,
+  mido READ-only, music21 only behind `to_score=True`.
+- `docs/AGENT_MANUAL.md` + root `CLAUDE.md` — manual for code agents.
+- Root `SKILL.md` + reworked `skills/music/musicom-onboarding/`.
+- `REPO_MAP.md` — single-source folder map.
+- Curated examples: `compose_simple.py`, `produce_simple.py`,
+  `transform_simple.py`, `analyze_simple.py` (+ `examples/README.md` index).
+
+### Changed
+- De-hosted `/opt/data` literals from engine defaults (workflow out dirs,
+  `_INSTR_DIR`, `utilities/env.py`) → repo-relative / `outputs/`.
+- `examples/Audio/interval-methods-demo.wav` untracked (derived artifact);
+  `outputs/` added to `.gitignore`.
+
+### Fixed
+- Reverse entry point supersedes the `midifile_to_piece` stub.
+
 ## [Unreleased]
 
 ### Added

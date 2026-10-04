@@ -1,66 +1,72 @@
 ---
 name: musicom-onboarding
-description: Use when adding a new human composer to the musicom framework project. Standardizes environment setup, repository access, and the first DNA-centric composition run.
+description: Use when starting fresh with the musicom engine — first-time environment setup, the canonical forward compose→produce and reverse analyze recipes, and the zero-drift/verify-don't-trust gates. Pairs the codebase with a Hermes agent.
 version: 1.0.0
 author: Musicom Agent
 license: MIT
 metadata:
   hermes:
-    tags: [musicom, onboarding, setup, composer, workflow]
+    tags: [musicom, onboarding, workflow, composition, analysis]
     related_skills: [musicom-composer, music-project-workflow]
 ---
 
-# Musicom Onboarding — Composer Setup
+# Musicom Onboarding
 
-Welcome to the **White Box** music composition framework. This skill guides the initial setup for human composers joining the `musicom` project.
+Musicom is a transparent composition + production + analysis library: every
+stage is an explicit, inspectable transformation (no black-box prompt→audio).
+It runs together with a Hermes agent.
 
-## Overview
-Musicom is not a "black box" generator. It is a systematic composition environment where you control the **Musical DNA** (Pitch/Rhythm matrices) and the **Synthesis Stack** (Logic/Rules/VST).
+## Canonical recipes
 
-## Initial Setup Checklist
+### Forward — compose → produce
+```python
+from workflows.musicom_workflow import compose, produce
 
-### 1. Repository Access
-Ensure you have access to the canonical repositories:
-- **Core Library**: `axelwiertz/musicom` (The logic)
-- **Portfolio**: `musicom-agent/music-projects` (The creative output)
-
-### 2. Environment Verification
-Run the validation script to ensure your local or containerized environment has the necessary audio stack:
-```bash
-python3 /opt/data/repos/musicom/skills/music/musicom-onboarding/scripts/validate_env.py
-```
-**Required stack:**
-- `music21`, `musicpy`, `mido` (Symbolic logic)
-- `Pedalboard`, `numpy` (Audio/VST logic)
-- `FluidSynth` + `FluidR3_GM.sf2` (High-fidelity fallback rendering)
-
-### 3. Project Initialization
-Always start from the template to ensure your metrics and dashboards are auto-generated.
-```bash
-cp -r /opt/data/projects/000-project-template /opt/data/projects/NNN-my-first-project
+r = compose(style="pop", key="C", bpm=120)      # -> r.midi_path, r.provenance_path
+p = produce(r.midi_path, method="SP-011")       # Karplus-Strong (no SoundFont)
 ```
 
-## Your First Composition (DNA-First)
+### Reverse — analyze
+```python
+from workflows.analyze import analyze_midi
 
-Musicom works by defining **MusicUnits** within a **UnitMatrix**.
+rep = analyze_midi(r.midi_path)
+print(rep.key, rep.roman_progression, rep.grid)
+```
 
-1.  **Define Pitch DNA**: Open `src/composition.py` and define your scale/set.
-    ```python
-    scale = [0, 2, 4, 7, 9] # A Major Pentatonic
-    ```
-2.  **Define Rhythm DNA**: Set your Euclidean pattern.
-    ```python
-    rhythm = E(5, 8) # 5 hits in 8 pulses
-    ```
-3.  **Apply Rules**: Choice between Hindemith (Tension/Resolution) or Schoenberg (Variation).
-4.  **Render**: Running the script generates `.mid`, `.wav`, and the `index.html` dashboard.
+### Low-level — full control
+```python
+from structures import MidiInstrument
+from workflows.unitmatrix_composer import UnitMatrixComposer, create_note_unit
 
-## Common Pitfalls
-- **Relative Paths**: Always use absolute paths (e.g., `/opt/data/projects/...`) to avoid script failures.
-- **WAV Delivery**: When sharing via Telegram, always use OGG/Opus for instant playback. RAW WAV is for archive/high-fidelity only.
-- **DNA drift**: Ensure your `theory.md` matches the code. Use `musicom-agent` to audit the harmonic accuracy.
+composer = UnitMatrixComposer(bpm=120, ticks_per_beat=480, beats_per_bar=4)
+composer.create_matrix(num_voices=2, num_sections=1)
+composer.add_voice("Lead", program=MidiInstrument.FLUTE, channel=0)
+composer.add_voice("Bass", program=MidiInstrument.PIANO, channel=1)
+composer.add_section("A", bars=1)
+composer.fill_voice_section("Lead", "A", create_note_unit(72, 1920))
+composer.fill_voice_section("Bass", "A", create_note_unit(48, 1920))
+ok, msg = composer.validate()            # MUST be True
+composer.to_midi("outputs/out.mid")
+```
 
-## Verification Checklist
-- [ ] Repositories cloned to `/opt/data/repos/`
-- [ ] `validate_env.py` returns all checks as PASSED
-- [ ] First test render produces a playable `.wav` and an `index.html` with ASCII visualizations.
+Order is fixed: `create_matrix → add_voice → add_section →
+fill_voice_section → validate → to_midi`.
+
+## Environment
+
+Resolve binaries/paths through `utilities.env` (`repo_root`, `python_bin`,
+`fluidsynth_bin`, `soundfont_path`) — never hardcode host paths. Flat imports:
+`from structures import …` (never `from musicom import …`).
+
+## Hard rules
+
+1. `validate()` MUST pass before `to_midi()` (zero-drift invariant).
+2. Size-assert artifacts: `assert os.path.getsize(p) > 40`.
+3. Keep imports pure — don't eagerly load `musicpy`/`music21`; use mido
+   READ-only for MIDI parsing.
+4. Outputs go to `./outputs/` (gitignored); the living corpus is `projects/`.
+
+## Read next
+
+`AGENTS.md` → `docs/AGENT_MANUAL.md` → `REPO_MAP.md`.

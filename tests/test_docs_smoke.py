@@ -71,7 +71,21 @@ def test_composer_zero_drift_export():
         assert os.path.getsize(out) > 40
 
 
+def test_analyze_reverse_snippet():
+    # mirrors the README / QUICK_REFERENCE reverse snippet
+    import tempfile
+    from workflows.musicom_workflow import compose
+    from workflows.analyze import analyze_midi
+    with tempfile.TemporaryDirectory() as d:
+        r = compose(style="pop", key="C", bpm=120, out_dir=d)
+        rep = analyze_midi(r.midi_path, key="C")
+        assert rep.key == "C"
+        assert rep.roman_progression
+        assert rep.grid
+
+
 def test_blues_form_helper():
     composer, info = create_blues_form_matrix(bpm=80, num_bars=12)
     assert info["form"] == "12-bar blues"
     assert len(info["sections"]) == 3
+

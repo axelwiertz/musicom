@@ -1,7 +1,8 @@
 [project]
 name = "musicom"
-version = "0.1.0"
-description = "Music Composition Library"
+version = "1.0.0"
+description = "Music composition, production and analysis library (educational; ships with a Hermes-agent skill)"
+readme = "README.md"
 dependencies = [
     "numpy",
     "mido",
@@ -26,6 +27,6 @@ where = ["."]
 include = [
     "analysis*", "converters*", "generators*", "rules*",
     "sound*", "structures*", "transformers*", "utilities*", "visualization*",
-    "workflows*",
+    "workflows*", "legacy*",
 ]
 exclude = ["musicom*", "tests*", "examples*", "projects*", "research*"]

@@ -129,7 +129,7 @@ cd /opt/data/repos/musicom
 /opt/data/micromamba/envs/musicom/bin/python -m pytest tests/ -q
 ```
 
-Suite is **green** (626 passed, 1 skipped + the voice-hybrid file run
+Suite is **green** (688 passed, 1 skipped + the voice-hybrid file run
 separately). Key files:
 - `tests/test_harness_golden.py` — **zero-drift regression net**: a fixed
   composition must export byte-identical MIDI (`GOLDEN_SHA256`), be deterministic,

@@ -176,6 +176,19 @@ fluidsynth -ni -g 1.2 -F out.wav /path/to/soundfont.sf2 out.mid
 ffmpeg -y -i out.wav out.ogg
 ```
 
+## Reverse analysis (MIDI → key/chords/grid)
+
+```python
+from workflows.analyze import analyze_midi
+
+rep = analyze_midi("out.mid")           # headless, mido READ-only
+rep.key                                # "C"
+rep.mode                               # "major"
+rep.roman_progression                  # ["I", "V", "vi", "IV", ...]
+rep.forte_names                        # ["3-11", ...]
+print(rep.grid)                        # █/░ high-contrast timeline
+```
+
 ## Troubleshooting
 
 | Symptom | Fix |

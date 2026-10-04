@@ -363,7 +363,7 @@ def evolve_anchor(style="pop", key="C", bpm=120, progression=None,
     w = weights or STYLE_WEIGHTS.get(style, FitnessWeights())
     judge = judge or rule_judge
 
-    out_dir = Path(out_dir or f"/opt/data/projects/Styles/{style.title()}/evolution")
+    out_dir = Path(out_dir or f"outputs/{style.title()}/evolution")
     evo_dir = out_dir / "evolution"
     evo_dir.mkdir(parents=True, exist_ok=True)
 

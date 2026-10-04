@@ -551,7 +551,7 @@ def compose_middle_out(style="pop", key="C", bpm=120, progression=None,
         raise RuntimeError(f"validate() failed: {msg}")
 
     # ---- export ----
-    out_dir = Path(out_dir or f"/opt/data/projects/Styles/{style.title()}/path-C")
+    out_dir = Path(out_dir or f"outputs/{style.title()}/path-C")
     midi_dir = out_dir / "MIDI"
     midi_dir.mkdir(parents=True, exist_ok=True)
     midi_path = midi_dir / f"{style}-C-{seed}.mid"

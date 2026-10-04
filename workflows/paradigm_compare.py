@@ -150,7 +150,7 @@ def run_comparison(output_dir: str, bpm: int = 120, seed: int = 42) -> Dict:
 
 if __name__ == "__main__":
     import json
-    out = "/opt/data/projects/Research/outputs/paradigm_compare"
+    out = "outputs/paradigm_compare"
     r = run_comparison(out)
     print(r["table"])
     print("\nArtifacts:")
