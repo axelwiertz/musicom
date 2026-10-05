@@ -30,6 +30,28 @@ Française / Variété sound the way it does, encoded as inspectable DNA.
 3. **The chorus lift** — strings swell + the trumpet climbs to the `5-6-5-3` hook; the melody rises above the verse register.
 4. **The resolve** — the chorus ends on two bars of I (C), the "everyone sings along" landing.
 
+## Production pass (`produce.py`)
+
+Per-voice chanson FX → section polish → stereo image → master. Idiomatic to
+1960s French pop (no EDM risers/drops — space and lift instead).
+
+| Layer | Effect |
+|---|---|
+| Accordion | lush Schroeder reverb (the musette cabaret wash) |
+| Strings | reverb (air, an octave up) |
+| Lead (trumpet) | vintage slap echo (120 ms) + light reverb |
+| Guitar | light reverb |
+| Bass | clean, centered (tight oom-pah) |
+| Drums | light room reverb |
+
+| Section | Polish |
+|---|---|
+| Intro | fade-in + gentle LPF 2400 Hz (muffled build-in) |
+| Chorus ×2 | stereo widen (mid/side 1.5×) + high-shelf +1.5 dB (the lift) |
+| Outro | LPF 1300 Hz + fade-out |
+
+Master: stereo imager (mono sub <100 Hz, wide highs >3 kHz) → LUFS −14 → limiter −1 dB.
+
 ## Verification (real numbers)
 
 - `analyze_midi` → key **C major**, 1344 notes, 76.2 s, Forte **3-11** (diatonic triads).
@@ -38,10 +60,20 @@ Française / Variété sound the way it does, encoded as inspectable DNA.
 - WAV: peak 0.906, RMS 0.149, **silence 7.7%** (continuous flow — no sparse/staccato gaps).
 - FFT dominant peaks 97/132/148 Hz = bass G2/C3/D3 fundamentals (tonal, not noise).
 
+**Production verification (after `produce.py`):**
+
+- LUFS −14.00 · peak 0.891 · RMS 0.146 (no clipping) · **silence 1.6%** (was 7.7% dry — reverb tails fill gaps).
+- Intro 6–12 kHz energy **0.81 vs verse 8.69** → intro filtered/muffled ✓.
+- Side-energy ratio verse **0.19 vs chorus 0.42** → chorus genuinely wider ✓.
+- Bass fundamentals still G2/C3 (96.5 / 132.3 Hz) — tonal, not noise ✓.
+
 ## Files
 
 - `compose.py` — the generator (engine-native, zero-drift).
+- `produce.py` — production pass (per-voice FX + section polish + mastering).
 - `MIDI/chanson-champs-study.mid` — editable DAW source.
-- `Audio/chanson-champs-study.ogg` — Opus render (FluidSynth, gain 1.2).
+- `Audio/chanson-champs-study.ogg` — mastered Opus render (LUFS −14).
+- `Audio/stems/` — per-track FluidSynth stems (WAV, gitignored).
 - `Analysis/grid_visualization.txt` — high-contrast █/░ timeline.
+- `Analysis/production_stats.json` — production verification numbers.
 - `Analysis/verify.py` — the verification script (re-runnable).

@@ -1,0 +1,28 @@
+{
+  "sr": 44100,
+  "duration_s": 78.28,
+  "lufs": -14.0,
+  "peak": 0.8913,
+  "rms": 0.1458,
+  "silence_ratio": 0.0164,
+  "intro_hi_vs_verse": 0.807,
+  "verse_hi": 8.692,
+  "side_verse": 0.189,
+  "side_chorus": 0.418,
+  "bass_fft_peaks_hz": [
+    96.5,
+    96.6,
+    132.3
+  ],
+  "effects": [
+    "reverb(Accordion/Strings/Guitar/Drums)",
+    "slap_delay(Lead 120ms)",
+    "bass clean",
+    "intro fade-in + LPF 2400",
+    "chorus widen 1.5 + bright +1.5dB",
+    "outro LPF 1300 + fade-out",
+    "stereo_imager",
+    "LUFS -14",
+    "limiter -1dB"
+  ]
+}
