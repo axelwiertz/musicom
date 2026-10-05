@@ -783,3 +783,27 @@ BARITONE_SAX convenience constant. Registration proof: `by_name('baritone sax')`
     (folk voice, no dense chords). REVERB_TAIL 1.6 s (intimate folk room, not
     hall — keeps the cutting articulation clear). Stem label: GM_PROGRAMS[78] =
     "Whistle" → `trackXX_Whistle.wav` (matches exactly, no quirk).
+
+**Soprano Saxophone added** (2026-10-05): GM64, Woodwind-family soprano single-reed entry -- the
+smallest and brightest standard saxophone (Bb soprano sax, straight conical tube, highest member
+of the SATB sax quartet; instrument.md + soprano_sax.py), verified end-to-end UnitMatrixComposer →
+zero-drift ✓ → MIDI (111 bytes) → FluidSynth WAV (758 KB) ✓; RenderPipeline stem label
+`trackXX_Soprano_Sax.wav` ✓ (GM_PROGRAMS[64] = "Soprano Sax", FluidR3 preset 64 = "Soprano Sax"
+-- labels match exactly, **no quirk**). PhaseModSynth recommended (conical bore single reed: saw
+carrier + sine modulator, mod_depth 2.6 between clarinet 2.0 and alto 2.8 -- the soprano reed is
+the lightest and fastest in the sax family; attack 0.03 s for fast reed onset; release 0.08 s for
+smallest air column cutoff). Solo-render spectral check: 4-8 kHz buzz 0.3% (clean single voice,
+well below 20% gate, no comb-filtering). Range 54-89 (F#3/F#3-F6 concert); sweet spot 67-79
+(G4-G5 -- bright piercing lead register that cuts through any mix). Solo range 62-84 (D4-C6).
+Completes the saxophone quartet: Soprano Sax (GM64) + Alto Sax (GM65) + Tenor Sax (GM66) +
+Baritone Sax (GM67) -- all four SATB members now registered. Identity quirk: soprano sax is the
+brightest most penetrating member of the sax family -- used as the classical lead voice in the
+sax quartet (S in SATB) and as the frontline lead in New Orleans brass bands (Bechet, Bigard).
+MONOPHONIC line voice -- no dense chords; piercing register sits ABOVE most melodic voices in a mix.
+Registered in `instrument_registry.py` as SOPRANO_SAX convenience constant. Registration proof:
+`by_name('soprano sax')` → Soprano Saxophone, `by_program(64)` → Soprano Saxophone,
+`in_sweet_spot(72)` = True, `in_sweet_spot(50)` = False. Role: lead, countermelody, ornament,
+accent -- bright lead voice that cuts through any ensemble. REVERB_TAIL 1.4 s (dry, keep the
+bright attack clear -- shortest in the Woodwind family). EQ body cut 800 Hz (soprano reed honk
+is higher than alto's 400 Hz). Stem label: GM_PROGRAMS[64] = "Soprano Sax" →
+`trackXX_Soprano_Sax.wav` (matches exactly, **no quirk**).

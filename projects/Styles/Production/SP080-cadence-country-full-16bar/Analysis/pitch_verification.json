@@ -1,0 +1,29 @@
+{
+  "windows_checked": 70,
+  "dominant_peak_hit_rate": 0.9857,
+  "harmonic_energy_mean_8h": 0.2838,
+  "pitched_only_hit_rate": 0.9857,
+  "pitched_only_harmonic_energy": 0.3288,
+  "acf_windows": 18,
+  "acf_unpitched": 2,
+  "lowest_midi_notes_seen": [
+    55,
+    60,
+    62
+  ],
+  "median_dom_hz": 522.0,
+  "misses": [
+    {
+      "t": 20.0,
+      "dom": 988.0,
+      "act": [
+        60,
+        72,
+        76
+      ]
+    }
+  ],
+  "method": "FFT dominant peak per 0.5s window, 50-2000 Hz, +/-4% vs active MIDI fund or x2/x3/x4//2",
+  "verdict": "PASS",
+  "verdict_rationale": "full-mix harmonic_energy_mean_8h is diluted by the drum kit broadband energy (drums excluded from pitched-note reference but present in mix); pitched_only_harmonic_energy is the tonal-coherence metric"
+}

@@ -277,6 +277,7 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 || **SP-102** | Amplitude Modulation Synthesis (AMS) | **Synthesis Engines** | AM Sideband / Tremolo Timbres | Modulates carrier oscillator amplitude with a modulator oscillator $m(t) = [1 + m \cos(2\pi f_m t)]$. Sub-audio $f_m$ = tremolo; audio-rate $f_m$ = DSB+Carrier sidebands at $f_c \pm f_m$. $m$ controls sideband strength; $m>1$ overmodulation. $\mathcal{O}(1)$ per sample per voice. Candidate: `sound/synthesis/am_synthesis.py`. |
 || **SP-103** | Crossover Band Distortion Synthesis (CBDS) | **Post-Processing / DSP** | Multiband Distortion / Frequency-Selective Saturation | Splits rendered audio into N frequency bands via Linkwitz-Riley crossover filters, applies independent distortion/saturation curve per band (soft clip, tape, tube, wavefolder, rectifier, bitcrush), then recombines. Prevents intermodulation between frequency regions that full-band waveshapers create. Per-band drive, envelope-follower modulation, and waveshaper type are controllable. $\mathcal{O}(N \cdot 20)$ per sample. Candidate: `sound/effects/crossover_distortion.py`. |
 || **SP-104** | Bitcrushing / Sample Rate Reduction Synthesis (SRR) | **Post-Processing / DSP** | Lo-Fi Degradation / Quantization Noise & Aliasing | Intentionally reduces bit depth and/or sample rate of a rendered buffer via re-quantization (rounding to $b$ bits) and sample-and-hold decimation (crush factor $R$). Produces characteristic quantization noise, aliased metallic artifacts, and lo-fi texture. Per-voice $b$ and $R$ create a "degradation stage." $\mathcal{O}(1)$ per sample. Candidate: `sound/effects/bitcrusher.py`. |
+|| **SP-105** | Coupled Resonant Filter Bank Synthesis (CRFBS) | **Synthesis Engines** | Nonlinear Modal Interaction / Impact, Cymbal & Plate Timbres | Banks of $N$ parallel Mathews-Smith complex-format IIR resonators exchanging energy through a redistribution matrix $\mathbf{M}$ to model nonlinear modal coupling. Captures delayed tonal components, spectral enrichment during impacts, and energy cascades that linear modal synthesis cannot produce. $\mathcal{O}(N)$ per sample. Candidate: `sound/synthesis/coupled_resonator.py`. |
 |---|
 
 
@@ -23328,3 +23329,132 @@ The probability distribution at each position is over $q$ tokens (e.g., 128 MIDI
 6. **Harmonic coherence at low unmasking densities**: In early refinement steps (90%+ masked), the model has very little context, so the first few unmasked tokens can drift harmonically. If a wrong chord tone is selected early, later unmasking must "correct" it — but the model cannot change already-unmasked tokens. Fix: allow **token revision** by reserving a small budget of tokens to be re-masked and re-predicted each step, or by using the mask-predict *replace* strategy: at each step, unmask $K_t$ *and* re-mask $K_{t-1}/2$ of the previous step's least-confident predictions.
 
 7. **Conditioning on long-range structure**: Since all positions see all other positions, the model must learn that a chord in section D depends on the cadence in section C, which in turn depends on the key established in section A. This long-range dependency is captured by the attention mechanism but requires sufficient training data to learn. Fix: use relative positional encodings with section-aware bias terms, or augment the training data with structural perturbations (mask entire sections) to force the model to attend across section boundaries.
+# Coupled Resonant Filter Bank Synthesis (CRFBS) (Sound Production Method SP-105)
+
+### Source
+Poirot, S., Kronland-Martinet, R., & Bilbao, S. (2023). "A Coupled Resonant Filter Bank for the Sound Synthesis of Nonlinear Sources." In *Proceedings of the 26th International Conference on Digital Audio Effects (DAFx23)*, Copenhagen, Denmark.
+
+Also: Mathews, M. & Smith, J. O. "Methods for Synthesizing Very High Q Parametrically Well Behaved Two Pole Filters."
+
+### Layer
+absolute — Sound Production (Synthesis Engines)
+
+### Description
+Coupled Resonant Filter Bank Synthesis (CRFBS) models nonlinear vibrating objects (thin plates, crash cymbals, colliding structures) as a bank of N parallel second-order digital resonators that exchange vibrational energy through a controllable redistribution matrix. Each resonator represents one vibration mode (natural frequency $\omega_i$, damping $\alpha_i$) using the Mathews-Smith coupled-form complex filter — a numerically stable, constant-Q IIR structure with independent frequency and decay control.
+
+Unlike standard linear modal synthesis (where modes oscillate independently and the output is a fixed weighted sum), CRFBS allows energy to flow between modes through a redistribution matrix $\mathbf{M}$. When a mode's instantaneous power $P_i(n)$ exceeds a threshold $\tau_i$, the surplus power is proportionally redistributed to other modes according to matrix weights. This models the nonlinear mode coupling observed in real-world objects at moderate vibration amplitudes: delayed tonal components that grow over time (rather than decaying), spectral enrichment during impacts, energy cascades from low to high frequencies in crash cymbals, and the "pitch glide" of colliding plates — effects that independent linear modes cannot produce.
+
+The method is perception-driven rather than physically exact: the coupling matrix is a design tool, not a physical PDE solution. This makes CRFBS computationally efficient ($\mathcal{O}(N)$ per sample per voice, no matrix inversions at runtime) while capturing the salient acoustic signatures of nonlinear sources. It fills the gap between linear modal synthesis (SP-003/SP-042), full FDTD simulation (SP-040), and wave digital filters (SP-051) — offering nonlinear mode interaction at modal-synthesis cost.
+
+### Technical Mechanics
+
+**Modal decomposition of linear vibration.** For a linear vibrating object, the displacement $w(\mathbf{r}, t)$ is a sum of spatial mode shapes $\phi_i(\mathbf{r})$ with damped sinusoidal temporal responses:
+
+$$w(\mathbf{r}, t) = \sum_{i=1}^{\infty} e^{-\alpha_i t}[A_i \cos(\omega_i t + \varphi_i)] \phi_i(\mathbf{r}) + \sum_{i=1}^{\infty} (g_i(t) * h_i(t)) \phi_i(\mathbf{r})$$
+
+Each mode's impulse response is:
+$$h_i(t) = \frac{1}{\omega_i} e^{-\alpha_i t} \sin(\omega_i t)$$
+
+**Mathews-Smith complex resonator (coupled form).** Each mode is implemented as a complex first-order recurrence whose real part gives the output signal and whose imaginary part tracks the quadrature component:
+
+$$z_i(n+1) = Z_i z_i(n) + u_i(n), \quad y_i(n) = \operatorname{Im}(z_i(n))$$
+
+where $Z_i = e^{-\alpha_i/f_s} e^{j\omega_i/f_s} = X_i + jY_i$ with $X_i = e^{-\alpha_i/f_s}\cos(\omega_i/f_s)$ and $Y_i = e^{-\alpha_i/f_s}\sin(\omega_i/f_s)$.
+
+The recurrence in real/imaginary form (coupled-form resonator):
+$$\begin{aligned}
+x_i(n+1) &= X_i \tilde{x}_i(n) - Y_i \tilde{y}_i(n) + u_i(n) \\
+y_i(n+1) &= Y_i \tilde{x}_i(n) + X_i \tilde{y}_i(n)
+\end{aligned}$$
+
+where $x_i = \operatorname{Re}(z_i)$ and $y_i = \operatorname{Im}(z_i)$.
+
+**Power and energy equivalent.** The instantaneous power of the $i$-th tonal component is:
+
+$$P_i(n) = \frac{|z_i(n)|^2}{2} = \frac{1}{2}\bigl(x_i(n)^2 + y_i(n)^2\bigr)$$
+
+Power evolves under losses and energy transfer:
+$$P_i(n+1) = \bigl(P_i(n) + T_i(n)\bigr)\, e^{-2\alpha_i/f_s}$$
+
+where $T_i(n)$ is the energy transferred from/to mode $i$ at step $n$.
+
+**Energy transfer modifies magnitude only (phase preserved).** The coupling operation scales the complex resonator state's magnitude without affecting its phase:
+
+$$|z_i(n+1)| = \sqrt{|z_i(n)|^2 + 2 T_i(n)} \; e^{-\alpha_i/f_s}$$
+
+Equivalently, the amplitude ratio:
+$$\frac{|z_i(n+1)|}{|z_i(n)|} = \sqrt{1 + \frac{2 T_i(n)}{|z_i(n)|^2}} \; e^{-\alpha_i/f_s}$$
+
+The full recurrence incorporating transfer:
+$$z_i(n+1) = \begin{cases}
+\sqrt{2 T_i(n)}\, Z_i + u_i(n), & \text{if } z_i(n) = 0\\[4pt]
+\sqrt{1 + \dfrac{2 T_i(n)}{|z_i(n)|^2}} \; Z_i z_i(n) + u_i(n), & \text{else}
+\end{cases}$$
+
+**Redistribution matrix $\mathbf{M}$.** The transfer terms across all $N$ modes are computed from the power vector $\mathbf{p}(n) = [P_1(n), \dots, P_N(n)]^\mathsf{T}$ and the redistribution matrix:
+
+$$\mathbf{t}(n) = \mathbf{M} \left[ \mathbf{p}(n) - \boldsymbol{\tau} \right]_+$$
+
+where $[\zeta]_+ = \tfrac12(\zeta + |\zeta|)$ is the positive-part operator and $\boldsymbol{\tau} = [\tau_1,\dots,\tau_N]^\mathsf{T}$ is the per-mode energy threshold. Transfer is only activated when a mode's power exceeds its threshold.
+
+**Matrix coefficient parametrization.** The $N \times N$ matrix $\mathbf{M}$ is constructed to ensure column sums $\leq 0$ (stability — total energy does not increase):
+
+$$M_{ij} = \eta \lambda \frac{a_{ij}}{\sum_{i=1}^{N} a_{ij}} - \lambda \delta_{ij}$$
+
+where:
+- $a_{ij}$ = weight coefficients defining redistribution from mode $j$ to mode $i$ (design parameters)
+- $\eta \in [0,1]$ = transfer efficiency (1 = all excess power redistributed, 0 = no coupling)
+- $\lambda \in [0,1]$ = transfer rate per time step (controls coupling speed)
+- $\delta_{ij}$ = Kronecker delta (diagonal subtraction ensures sum $\leq 0$)
+
+Column sum: $\sum_{i=1}^{N} M_{ij} \leq 0$ ensures $\sum_i T_i(n) \leq 0$ (no energy creation).
+
+**Output summation.** The filter bank output is the sum of all resonator outputs:
+$$s(n) = \sum_{i=1}^{N} y_i(n)$$
+
+**Complexity.** $\mathcal{O}(N)$ per sample — no matrix inversions, no FFT, no iterative solvers. For $N=30\text{–}100$ modes the method is real-time capable on consumer CPU.
+
+### Musical Elements Framework
+
+- **PITCH**: Mode frequencies $\omega_i$ define the harmonic/inharmonic spectrum. Choose inharmonic series (e.g., thin plate: $\omega_i \propto i^2$) for metallic/crash timbres or stretched harmonics for stiff objects. The coupling can shift perceived pitch when energy transfers to lower/higher modes.
+
+- **RHYTHM**: The excitation envelope $u_i(n)$ per mode controls onset characteristics — impulsive (struck) for transient attacks, continuous (bowed/scraped) for sustained texture. Energy transfer creates delayed "aftershock" rhythm: a quiet mode that receives late energy produces a second onset after the initial attack.
+
+- **HARMONY**: Mode clusters naturally define chord structures. Coupling matrix topology determines the harmonic grammar — modes that share energy produce correlated amplitude contours (functional harmony), isolated modes remain independent (pedal tones).
+
+- **STRUCTURE**: Section-level macro-form is controlled by swapping the coupling matrix $\mathbf{M}_s$ and threshold vector $\boldsymbol{\tau}_s$ per section. A piece can move from uncoupled (linear modal ring) to dense coupling (crash resonance) to sparse coupling (isolated mode decay). The coupling ``temperature'' $\eta\lambda$ is a one-knob macro-form control.
+
+- **TEXTURE**: Texture density = number of active modes with $P_i(n) > \tau_i$. Sparse coupling = few dominant modes (thin, clear texture); dense coupling = energy distributed across many modes (wash, cloud, rumble). The redistribution weights $a_{ij}$ can be set to favor neighbor-frequency coupling (smooth spectral evolution) or distant-frequency coupling (inharmonic jumps, spectral jumps).
+
+### UnitMatrix Integration
+
+- **Rows (Voices)**: Each voice $v$ is an independent coupled resonator bank with its own mode set $\{(\omega_{v,i}, \alpha_{v,i})\}$, coupling matrix $\mathbf{M}_v$, and excitation $u_v(n)$. Voices can share coupling topology (ensemble coupling) or be fully independent (section coupling). A voice can also be a single mode — down to a single oscillator.
+
+- **Columns (Sections)**: Each section $s$ defines a coupling regime: matrix $\mathbf{M}_{v,s}$, threshold vector $\boldsymbol{\tau}_{v,s}$, efficiency $\eta_s$, and rate $\lambda_s$. A crescendo section might increase $\eta$ from 0 to 1 (uncoupled $\to$ fully coupled, producing a spectral bloom). A cadence section sets $\mathbf{M} = \mathbf{0}$ all modes decay linearly (clean release).
+
+- **Cells $U_{v,s}$**: Contains:
+  - `mode_table`: array of $(\omega_i, \alpha_i, \tau_i)$ for $i=1,\dots,N$
+  - `coupling_matrix`: $N \times N$ weight matrix $a_{ij}$ (or None for uncoupled)
+  - `coupling_params`: $\eta$, $\lambda$ scalar knobs
+  - `excitation`: envelope $u(n)$ or strike impulse location vector
+  - Mapping flow: section $\to$ load $(\mathbf{M}, \boldsymbol{\tau}, \eta, \lambda)$ $\to$ run coupled resonator loop $\to$ sum $N$ mode outputs $\to$ voice audio stream.
+
+- **Zero-drift**: The coupled-form complex resonator is exactly zero-drift (rotation preserves $|z_i|$ without DC accumulation). Energy transfer only scales magnitude, never adds DC.
+
+### Pitfalls
+
+1. **Stability requires $\sum_i M_{ij} \leq 0$.** If this condition is violated, energy can grow unboundedly. Use the parametrization $M_{ij} = \eta\lambda a_{ij}/(\sum_i a_{ij}) - \lambda\delta_{ij}$ which guarantees column sum $= -\lambda(1-\eta) \leq 0$ for $a_{ij} \geq 0$.
+
+2. **Phase is preserved during transfer.** The method modifies only magnitude $|z_i|$ without changing phase rotation. This means mode phase relationships are statically determined by initial excitation and phase accumulators. For some nonlinear effects (frequency shifts) this is insufficient — see Pitfall 6.
+
+3. **Energy threshold $\tau_i$ tuning.** Too-low thresholds cause continuous cross-talk between all modes (muddy wash). Too-high thresholds eliminate the coupling entirely (back to independent linear modes). Tune $\tau_i$ relative to $P_i$ at steady state (typically $0.01$–$0.1$ of mean power).
+
+4. **Mode count vs. perceptual density.** More modes ($N > 50$) improve realism but increase cost and parameter complexity. For impact/collision sounds, $N=20\text{–}30$ modes with dense coupling suffice. For cymbal/crash textures, $N=50\text{–}100$ modes needed.
+
+5. **Excitation design matters.** A single impulse at $n=0$ creates a linear ring+transfer response. To model continuous nonlinear behavior (bowed cymbal, scraping), the excitation $u_i(n)$ must be a noise burst or continuous stochastic process. The paper recommends Poisson-distributed micro-impulses for realistic texture.
+
+6. **No frequency shift.** The coupled resonator model does not capture frequency modulation effects (e.g., pitch glide in a struck plate due to large-amplitude nonlinearity). FDTD or nonlinear waveguide methods (SP-040/SP-092) are needed for that. CRFBS captures *amplitude* coupling only.
+
+7. **Parameter correlation.** The coupling matrix $\mathbf{M}$ has $N^2$ entries — a 50-mode bank has 2500 parameters. This is too many for manual design. Use reduced-parameter schemes: nearest-neighbor coupling (tridiagonal $\mathbf{M}$), banded coupling (top-Doppler), or spectral distance weighting $a_{ij} = \exp(-|\omega_i-\omega_j|/\sigma)$. 
+
+8. **Latency.** The method is sample-accurate (one-sample latency). No lookahead needed. But the coupling computation ($\sqrt{\cdot}$ and division per mode) may be expensive on embedded hardware without FPU — use approximation $\sqrt{1+\epsilon} \approx 1+\epsilon/2$ for small $|2T_i|/|z_i|^2$.

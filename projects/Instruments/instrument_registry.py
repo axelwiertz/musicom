@@ -77,6 +77,7 @@ _INSTRUMENT_MODULES = {
     "Vocal.human_voice.human_voice": "human_voice",
     "Vocal.voice_like.voice_like_voice": "voice_like",
     "Woodwind.whistle.whistle": "whistle",
+    "Woodwind.soprano_sax.soprano_sax": "soprano_sax",
 }
 
 _FIELDS = (
@@ -250,6 +251,7 @@ TAIKO = ALL_INSTRUMENTS["taiko"]
 HUMAN_VOICE = ALL_INSTRUMENTS["human_voice"]
 PAN_FLUTE = ALL_INSTRUMENTS["pan_flute"]
 WHISTLE = ALL_INSTRUMENTS["whistle"]
+SOPRANO_SAX = ALL_INSTRUMENTS["soprano_sax"]
 # Voice-like family — one instrument per non-vocal source. The `voice_like`
 # key is the umbrella (vox humana); each member is also addressable directly.
 VOICE_LIKE = ALL_INSTRUMENTS["voice_like"]
@@ -361,6 +363,8 @@ def registry_table():
             role = "accent, rhythm, drone, ornament"
         elif low == "human voice":
             role = "lead, melody, countermelody"
+        elif low == "soprano saxophone":
+            role = "lead, countermelody, ornament, accent"
         else:
             role = "lead, harmony, accent"
         rng = f"{inst.range_min}–{inst.range_max}" if inst.range_min else "-"
@@ -505,3 +509,8 @@ if __name__ == "__main__":
     print("  by_name('muted trumpet') =", by_name("muted trumpet"))
     print("  by_program(59) =", by_program(59))
     print("  MUTED_TRUMPET.in_sweet_spot(69) =", MUTED_TRUMPET.in_sweet_spot(69))
+    print("  SOPRANO_SAX.midi_program =", SOPRANO_SAX.midi_program, "(should be 64)")
+    print("  by_name('soprano sax') =", by_name("soprano sax"))
+    print("  by_program(64) =", by_program(64))
+    print("  SOPRANO_SAX.in_sweet_spot(72) =", SOPRANO_SAX.in_sweet_spot(72))
+    print("  SOPRANO_SAX.in_sweet_spot(50) =", SOPRANO_SAX.in_sweet_spot(50))

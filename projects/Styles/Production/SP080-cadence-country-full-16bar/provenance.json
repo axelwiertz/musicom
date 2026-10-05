@@ -1,0 +1,165 @@
+{
+  "job": "random-style production pass (SP) - LAYER-ALIGNED 2026-10-05",
+  "selection_source": "workflows.musicom_workflow.SP_METHODS registry (40 implemented)",
+  "seed": 20261005,
+  "composition_source": "/opt/data/repos/musicom/projects/Styles/Country/012-country-full-16bar/MIDI/16bar_country.mid",
+  "composition_sha256": "5b7dba7e1a4e0901ee8620fc32d3c0b9f4e6556e1c1ab1ab74ba176907aba01a",
+  "selector_note": "random selector landed on Country/012-country-full-16bar; country_pop_v1.mid is a 2s/12-note/1-track stub (prog0 piano) so the project's full 16-bar composition 16bar_country.mid was used as the source",
+  "production_method": "SP-080",
+  "production_method_name": "Cadence Engine Rhythmic Variator w/ Flux Randomizer (Emergence Audio Envoy-style)",
+  "registered_module": "sound.generators.cadence_variator",
+  "layer_discipline": "absolute layer: CadenceEngine polyrhythmic variator (4 blocks per voice, per-step velocity/pitch/length/pan/combi-LP-HP lanes, per-layer rate/direction/feel, master LFO, FluxRandomizer) applied as time-varying gain/pan/LP-filter modulation across ALL voices; FluidSynth GM render (SP-001 reference) is the acoustic carrier",
+  "sp080_params": {
+    "seed": 20261005,
+    "bpm": 110.0,
+    "master_lfo_rate_hz": 0.7,
+    "reverb": {
+      "room_size": 0.55,
+      "damping": 0.45,
+      "wet_dry": 0.16,
+      "width": 0.85
+    },
+    "voices": {
+      "0": {
+        "role": "Accordion Melody Lead",
+        "block_steps": [
+          8,
+          6,
+          8,
+          7
+        ],
+        "rate": 2.0,
+        "direction": "forward",
+        "feel": "straight",
+        "flux_depth": 0.22,
+        "flux_blocks": [
+          0,
+          2
+        ],
+        "hp_base": 250.0,
+        "lp_base": 4500.0,
+        "pan_width": 0.25,
+        "gain": 1.05
+      },
+      "1": {
+        "role": "Acoustic Guitar Rhythm",
+        "block_steps": [
+          7,
+          8,
+          6,
+          8
+        ],
+        "rate": 1.5,
+        "direction": "pingpong",
+        "feel": "swing",
+        "flux_depth": 0.28,
+        "flux_blocks": [
+          1,
+          3
+        ],
+        "hp_base": 180.0,
+        "lp_base": 3800.0,
+        "pan_width": -0.4,
+        "gain": 0.95
+      },
+      "2": {
+        "role": "Choir Pad",
+        "block_steps": [
+          6,
+          8,
+          7,
+          5
+        ],
+        "rate": 1.0,
+        "direction": "forward",
+        "feel": "lurch",
+        "flux_depth": 0.25,
+        "flux_blocks": [
+          0,
+          1,
+          2
+        ],
+        "hp_base": 120.0,
+        "lp_base": 3200.0,
+        "pan_width": 0.4,
+        "gain": 0.9
+      },
+      "3": {
+        "role": "Drum Kit",
+        "block_steps": [
+          8,
+          8,
+          4,
+          8
+        ],
+        "rate": 2.0,
+        "direction": "forward",
+        "feel": "straight",
+        "flux_depth": 0.15,
+        "flux_blocks": [
+          0
+        ],
+        "hp_base": 40.0,
+        "lp_base": 9000.0,
+        "pan_width": 0.0,
+        "gain": 1.0
+      }
+    }
+  },
+  "fixes": [
+    "per-voice fresh CadenceEngine (not one shared engine) so FluxRandomizer jitter is not re-applied/accumulated across voices",
+    "write_wav scales by 32767 then astype(int16) (SP-079 int16 truncation bug)"
+  ],
+  "checks": {
+    "pitch_verification": {
+      "windows_checked": 70,
+      "dominant_peak_hit_rate": 0.9857,
+      "harmonic_energy_mean_8h": 0.2838,
+      "pitched_only_hit_rate": 0.9857,
+      "pitched_only_harmonic_energy": 0.3288,
+      "acf_windows": 18,
+      "acf_unpitched": 2,
+      "lowest_midi_notes_seen": [
+        55,
+        60,
+        62
+      ],
+      "median_dom_hz": 522.0,
+      "misses": [
+        {
+          "t": 20.0,
+          "dom": 988.0,
+          "act": [
+            60,
+            72,
+            76
+          ]
+        }
+      ],
+      "method": "FFT dominant peak per 0.5s window, 50-2000 Hz, +/-4% vs active MIDI fund or x2/x3/x4//2",
+      "verdict": "PASS",
+      "verdict_rationale": "full-mix harmonic_energy_mean_8h is diluted by the drum kit broadband energy (drums excluded from pitched-note reference but present in mix); pitched_only_harmonic_energy is the tonal-coherence metric"
+    },
+    "silence_wet": 0.0857,
+    "silence_dry": 0.0993,
+    "lufs": -14.0,
+    "peak": 0.8913
+  },
+  "artifacts": {
+    "wav": "/opt/data/repos/musicom/projects/Styles/Production/SP080-cadence-country-full-16bar/SP080-cadence-country-full-16bar.wav",
+    "ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP080-cadence-country-full-16bar/SP080-cadence-country-full-16bar.ogg",
+    "dry_reference": "/opt/data/repos/musicom/projects/Styles/Production/SP080-cadence-country-full-16bar/dry_full_mix_sp001_reference.wav",
+    "wet_stems": {
+      "track00_Accordion": "/opt/data/repos/musicom/projects/Styles/Production/SP080-cadence-country-full-16bar/Audio/stems_wet/track00_Accordion_CADENCE.wav",
+      "track01_Acoustic_Guitar_nylon": "/opt/data/repos/musicom/projects/Styles/Production/SP080-cadence-country-full-16bar/Audio/stems_wet/track01_Acoustic_Guitar_nylon_CADENCE.wav",
+      "track02_Choir_Aahs": "/opt/data/repos/musicom/projects/Styles/Production/SP080-cadence-country-full-16bar/Audio/stems_wet/track02_Choir_Aahs_CADENCE.wav",
+      "track03_Drums": "/opt/data/repos/musicom/projects/Styles/Production/SP080-cadence-country-full-16bar/Audio/stems_wet/track03_Drums_CADENCE.wav"
+    },
+    "dry_stems": {
+      "track00_Accordion": "/opt/data/repos/musicom/projects/Styles/Production/SP080-cadence-country-full-16bar/Audio/stems_dry/track00_Accordion.wav",
+      "track01_Acoustic_Guitar_nylon": "/opt/data/repos/musicom/projects/Styles/Production/SP080-cadence-country-full-16bar/Audio/stems_dry/track01_Acoustic_Guitar_nylon.wav",
+      "track02_Choir_Aahs": "/opt/data/repos/musicom/projects/Styles/Production/SP080-cadence-country-full-16bar/Audio/stems_dry/track02_Choir_Aahs.wav",
+      "track03_Drums": "/opt/data/repos/musicom/projects/Styles/Production/SP080-cadence-country-full-16bar/Audio/stems_dry/track03_Drums.wav"
+    }
+  }
+}

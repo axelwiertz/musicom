@@ -1,0 +1,6 @@
+SP-080 source rhythm DNA - 16bar_country.mid (110 BPM, 16 bars, 4/4)
+rows = tracks, columns = bars, '#'=onset '.'=rest
+track 0 (prog 21) # # # # # # # # # # # # # # # # .
+track 1 (prog 24) # # # # # # # # # # # # # # # # .
+track 2 (prog 52) # # # # # # # # # # # # # # # # .
+track 3 (prog None) # # # # # # # # # # # # # # # # .

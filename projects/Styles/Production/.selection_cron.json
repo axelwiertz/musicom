@@ -1,15 +1,15 @@
 {
   "job": "random-style production (SP) layer-aligned",
-  "date": "2026-10-04",
-  "seed": 20261004,
-  "method": "SP-021",
-  "method_module": "sound.synthesis.binaural",
-  "method_desc": "Binaural HRTF Spatialization",
-  "source_midi": "/opt/data/repos/musicom/projects/Styles/Ragtime/001-ragtime-maple-leaf/MIDI/ragtime-maple-leaf.mid",
-  "source_project": "Ragtime/001-ragtime-maple-leaf/MIDI/ragtime-maple-leaf.mid",
-  "registry_size": 38,
+  "date": "2026-10-05",
+  "seed": 20261005,
+  "method": "SP-080",
+  "method_module": "sound.generators.cadence_variator",
+  "method_desc": "Cadence Engine Rhythmic Variator w/ Flux Randomizer (Emergence Audio Envoy-style)",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Country/012-country-full-16bar/MIDI/country_pop_v1.mid",
+  "source_project": "Country/012-country-full-16bar/MIDI/country_pop_v1.mid",
+  "registry_size": 40,
   "recent_excluded": [
-    "SP-070",
+    "SP-021",
     "SP-072",
     "SP-075",
     "SP-079",
@@ -22,7 +22,6 @@
   ],
   "pool_methods": [
     "SP-011",
-    "SP-021",
     "SP-024",
     "SP-026",
     "SP-028",
@@ -33,6 +32,7 @@
     "SP-036",
     "SP-037",
     "SP-069",
+    "SP-070",
     "SP-071",
     "SP-073",
     "SP-074",
@@ -50,7 +50,10 @@
     "SP-095",
     "SP-096",
     "SP-097",
-    "SP-098"
+    "SP-098",
+    "SP-099",
+    "SP-100"
   ],
-  "n_candidates": 320
+  "n_candidates": 322,
+  "n_with_src": 240
 }
