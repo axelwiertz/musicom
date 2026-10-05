@@ -1,0 +1,20 @@
+{
+  "artifact": "224-blues-otvl-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "050-Optimal-Transport-Voice-Leading (raw transport walk)",
+  "sources": [],
+  "parameters": {
+    "phase": 1,
+    "bpm": 100,
+    "key": "E blues (12-bar dominant blues)",
+    "seed": 20261005,
+    "voices": 1,
+    "transport": "monotone 1D-optimal transport between per-bar chord masses",
+    "note": "raw generative draft: off-grid ticks, chromatic micro-jitter, pre-rules"
+  },
+  "notes": "",
+  "sha256": "e6464d4f254b21676118cffa066a76e6991f837401aaa284c96132b228702c44",
+  "bytes": 1768,
+  "created_utc": "2026-10-05T23:12:44.044707+00:00",
+  "provenance_version": "1.0"
+}

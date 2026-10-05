@@ -1,0 +1,27 @@
+{
+  "artifact": "224-blues-otvl.mid",
+  "classification": "ai-assisted",
+  "generator": "050-Optimal-Transport-Voice-Leading + musicom rules",
+  "sources": [],
+  "parameters": {
+    "phase": 2,
+    "bpm": 100,
+    "key": "E blues (12-bar dominant blues)",
+    "seed": 20261005,
+    "voices": 5,
+    "form": "6 sections x 4 bars = 24 bars (2 x 12-bar blues)",
+    "quantization": "16th-grid (120 ticks) + per-bar chord-tone",
+    "instruments": [
+      "harmonica",
+      "piano",
+      "acoustic guitar",
+      "double bass",
+      "drum kit"
+    ]
+  },
+  "notes": "Blues in E. Two-phase: raw OTVL transport walk -> chord-tone quantized + grid-snapped 5-voice blues texture. All pitched notes are E-blues chord tones.",
+  "sha256": "eddf7cdc3727e3de08a9f768212fd7ff05af5ae52bc7cc1f8605421767877472",
+  "bytes": 8956,
+  "created_utc": "2026-10-05T23:12:44.112215+00:00",
+  "provenance_version": "1.0"
+}

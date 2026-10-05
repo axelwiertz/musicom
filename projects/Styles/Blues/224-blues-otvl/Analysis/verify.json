@@ -1,0 +1,103 @@
+{
+  "project": "224-blues-otvl",
+  "audit": {
+    "phase1": {
+      "n_tracks": 1,
+      "lengths": [
+        46080
+      ],
+      "zero_drift": true,
+      "total_notes": 192,
+      "pitched_onsets": 0,
+      "off_grid_16": 177,
+      "off_grid_8": 177,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "tracks": [
+        {
+          "name": "track0",
+          "channel": 0,
+          "length": 46080,
+          "notes": 192,
+          "off16": 177,
+          "off8": 177,
+          "out_of_scale": 0,
+          "out_of_chord": 0
+        }
+      ]
+    },
+    "phase2": {
+      "n_tracks": 5,
+      "lengths": [
+        46080,
+        46080,
+        46080,
+        46080,
+        46080
+      ],
+      "zero_drift": true,
+      "total_notes": 1068,
+      "pitched_onsets": 768,
+      "off_grid_16": 0,
+      "off_grid_8": 0,
+      "out_of_scale": 0,
+      "out_of_chord": 0,
+      "tracks": [
+        {
+          "name": "track0",
+          "channel": 0,
+          "length": 46080,
+          "notes": 192,
+          "off16": 0,
+          "off8": 0,
+          "out_of_scale": 0,
+          "out_of_chord": 0
+        },
+        {
+          "name": "track1",
+          "channel": 1,
+          "length": 46080,
+          "notes": 96,
+          "off16": 0,
+          "off8": 0,
+          "out_of_scale": 0,
+          "out_of_chord": 0
+        },
+        {
+          "name": "track2",
+          "channel": 2,
+          "length": 46080,
+          "notes": 384,
+          "off16": 0,
+          "off8": 0,
+          "out_of_scale": 0,
+          "out_of_chord": 0
+        },
+        {
+          "name": "track3",
+          "channel": 3,
+          "length": 46080,
+          "notes": 96,
+          "off16": 0,
+          "off8": 0,
+          "out_of_scale": 0,
+          "out_of_chord": 0
+        },
+        {
+          "name": "track4",
+          "channel": 9,
+          "length": 46080,
+          "notes": 300,
+          "off16": 0,
+          "off8": 0,
+          "out_of_scale": 0,
+          "out_of_chord": 0
+        }
+      ]
+    }
+  },
+  "sizes": {
+    "224-blues-otvl-phase1.mid": 1768,
+    "224-blues-otvl.mid": 8956
+  }
+}
