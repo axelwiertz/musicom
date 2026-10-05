@@ -84,9 +84,14 @@ comparable to, and how do I use it in a workflow?*
 | `sound/synthesis/air_pipe.py` | AirPipe, AirPipePatch | synthesis (physical, aerophone) | Modartt Airteq | pipe length + air pressure/mod → flue-pipe audio (open/stopped modes, overblow, MPE air) |
 | `sound/effects/glitch_chopper.py` | GlitchChopper, ChannelChopper | effects (glitch) | GlitchShredder | stereo audio + bpm + glitch/reverse prob → transient-snapped 16-slot recombination |
 | `sound/generators/harmony_writer.py` | HarmonyWriter | generators (harmony/arrangement) | HarmonyKeen | monophonic melody + key + style → rule-based harmony parts (phrase/cadence analysis, SATB voice-leading) |
-| `sound/effects/orbit_sculptor.py` | OrbitalStereoSculptor, OrbitalBandProcessor, LinkwitzRiley4Crossover | effects (spatial/modulation) | SoundGhost Orbit | audio + 3-band LR4 crossover + per-band pan/width/gain modulators → sculpted stereo audio |
-| `sound/effects/delta_sigma_saturator.py` | DeltaSigmaSaturator, DeltaSigmaStage, SlewLimiter, ReconstructionFilter | effects (distortion/saturation) | Mixland Grey Matter, PS1 DAC | audio + drive + strain + mode (clean/console/broken) → DAC-saturated audio |
-| `sound/effects/multiband_saturator.py` | MultibandSaturator, BandConfig | effects (saturation/distortion) | Kreuzberg Audio Oberton | audio + 6 LR4-split bands + per-band algo (15 types) + M/S mode + global trim → saturated stereo audio |
+|| `sound/effects/orbit_sculptor.py` | OrbitalStereoSculptor, OrbitalBandProcessor, LinkwitzRiley4Crossover | effects (spatial/modulation) | SoundGhost Orbit | audio + 3-band LR4 crossover + per-band pan/width/gain modulators → sculpted stereo audio |
+|| `sound/effects/delta_sigma_saturator.py` | DeltaSigmaSaturator, DeltaSigmaStage, SlewLimiter, ReconstructionFilter | effects (distortion/saturation) | Mixland Grey Matter, PS1 DAC | audio + drive + strain + mode (clean/console/broken) → DAC-saturated audio |
+|| `sound/effects/multiband_saturator.py` | MultibandSaturator, BandConfig | effects (saturation/distortion) | Kreuzberg Audio Oberton | audio + 6 LR4-split bands + per-band algo (15 types) + M/S mode + global trim → saturated stereo audio |
+|| `sound/effects/haas_zone.py` | HaasZoneProcessor, ModulationLFO, EnvelopeFollower, BandpassFilter | effects (delay) | Verbos Haas Zone Processor | mono audio → multi-tap modulated short-delay w/ feedback BPF |
+|| `sound/effects/mega_morph.py` | MegaMorph, MultiSegmentEnv, EnvSegment, SegmentShape, EnvMode | modulation | Sync Audio MegaMorph | multi-segment envelope → parameter modulation dict |
+|| `sound/effects/ir_designer.py` | design_ir, IR_RECIPES (10 generators) | effects (IR synthesis) | Convolution Playground | recipe + duration + optional params → IR array + sr |
+|| `sound/generators/fractal_seq.py` | FractalSequenceGenerator, ThueMorseMelody, FibonacciRhythm, SierpinskiAccent, LogisticMapMelody | generative (fractal seq) | Kaona B.A.C.H. FRACTAL | fractal/chaotic params → FractalEvent[] + MIDI |
+|| `sound/generators/bach_composer.py` | compose_with, BACH_ENGINES (11 engines) | generative (composition) | Kaona B.A.C.H. (11 languages) | engine name + overrides → BachEvent[] |
 | `sound/sync/clock.py` | DAWClockBridge | sync | MTC/MIDI clock | bpm → clock pulses |
 | `sound/render/fluidsynth.py` | FluidSynthRenderer | render | SF2 synth | MIDI → WAV |
 | `sound/render/vst.py` | VSTRenderer | render | DAW VST3 | MIDI → VST audio |

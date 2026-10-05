@@ -185,6 +185,9 @@ SP_METHODS = {
     "SP-096": ("sound.effects.haas_zone", "Multi-Tap Modulated Short-Delay Processor / Haas Zone (Verbos Haas Zone Processor-style)"),
     "SP-097": ("sound.effects.mega_morph", "Multi-Segment Envelope Generator for Parameter Modulation (Sync Audio MegaMorph-style)"),
     "SP-098": ("sound.generators.fractal_seq", "Fractal Sequence Generator — Thue-Morse/Fibonacci/Sierpinski/Logistic Map (Kaona B.A.C.H. FRACTAL-style)"),
+    # 2026-10-05 scan
+    "SP-099": ("sound.effects.ir_designer", "Impulse Response Designer — 10 algorithmic IR synthesis techniques (Convolution Playground-style)"),
+    "SP-100": ("sound.generators.bach_composer", "B.A.C.H. Composition Generator — 11 algorithmic composition engines: FUGUE/CANON/PROBA/TINTINNABULI/MINIMAL/CELLULAR/TREE/MOTIF/HYBRID/GROOVE/GROOVE_MIX (Kaona B.A.C.H.-style)"),
 }
 
 

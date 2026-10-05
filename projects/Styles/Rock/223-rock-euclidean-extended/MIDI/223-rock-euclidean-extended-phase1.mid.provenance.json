@@ -1,0 +1,20 @@
+{
+  "artifact": "223-rock-euclidean-extended-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "generators.rhythm.euclidian (method 012)",
+  "sources": [],
+  "parameters": {
+    "phase": 1,
+    "seed": 20261005,
+    "bpm": 128,
+    "key": "E aeolian",
+    "method": "012 Euclidean Groove Locking",
+    "sections": 8,
+    "bars": 32
+  },
+  "notes": "Raw Euclidean draft: euclidian() intervals at a fractional (off-grid) tick unit + unquantized pitch walk. Single voice, no harmony.",
+  "sha256": "594ed067392f318ce73db07aeb906483c3a857510260d6c0b7a54429470e9b4f",
+  "bytes": 981,
+  "created_utc": "2026-10-05T01:14:10.225458+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,30 @@
+{
+  "artifact": "223-rock-euclidean-extended.mid",
+  "classification": "ai-assisted",
+  "generator": "generators.rhythm.euclidian + musicom rules layer",
+  "sources": [],
+  "parameters": {
+    "phase": 2,
+    "seed": 20261005,
+    "bpm": 128,
+    "key": "E aeolian",
+    "method": "012 Euclidean Groove Locking",
+    "sections": 8,
+    "bars": 32,
+    "rework_of": "093-rock-euclidean",
+    "variation": [
+      "augmentation",
+      "transposition",
+      "register_shift",
+      "inversion",
+      "diminution",
+      "retrograde",
+      "density_rise"
+    ]
+  },
+  "notes": "Rework of 093-rock-euclidean (audit: index.html missing). Extended 6->8 sections, 24->32 bars, +1 flute counterline, 6 variation techniques, per-section harmonic regions.",
+  "sha256": "aebcecf1d2811a1a19bff749890b8ea029eb6cbe3e3b3a64e1a0f80340ce2e00",
+  "bytes": 10633,
+  "created_utc": "2026-10-05T01:14:10.225754+00:00",
+  "provenance_version": "1.0"
+}

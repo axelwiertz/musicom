@@ -14,6 +14,7 @@ from .tape_delay import TapeDelay, SamplePlayer, DrumMachine
 from .fdn_reverb import FDN
 from .multiband import LinkwitzRiley, MultibandCompressor, MultibandSynth
 from .quantize_mod import QuantizeModulator, ModRouter, QuantizeChain
+from .ir_designer import design_ir, IR_RECIPES
 
 __all__ = [
     "AlgorithmicReverb", "Freeverb", "apply_reverb",

@@ -31,5 +31,7 @@ __all__ = [
     'WeightedRandomCore',
     'PatternSequencer',
     'DiceVariation',
-    'ParamScope'
+    'ParamScope',
+    'compose_with',
+    'BACH_ENGINES',
 ]

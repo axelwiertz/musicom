@@ -1,0 +1,38 @@
+{
+  "chosen": "093-rock-euclidean",
+  "genre": "Rock",
+  "source_path": "/opt/data/projects/Styles/Rock/093-rock-euclidean",
+  "primary_midi": "/opt/data/projects/Styles/Rock/093-rock-euclidean/MIDI/093-rock-euclidean.mid",
+  "rework_date": "2026-10-05",
+  "audit": {
+    "1_engine_not_handrolled": "PASS",
+    "2_zero_drift": "PASS",
+    "3_rhythm_grid_sync": "PASS",
+    "4_valid_track_setup": "PASS",
+    "5_two_phase_artifacts": "PASS",
+    "6_provenance_and_index_html": "FAIL"
+  },
+  "standard_failures": [
+    "index.html missing (provenance.json present)"
+  ],
+  "redesign_required": true,
+  "redesign_note": "Only the dashboard (index.html) was missing; all 5 engine/code standards passed. Rebuilt preserving identity, extended form, added the missing dashboard.",
+  "source_identity": {
+    "genre": "Rock",
+    "key": "E aeolian",
+    "tempo": 128,
+    "method": "012 Euclidean Groove Locking",
+    "motif": "syncopated euclidian(6,16) lead cell + scale-degree contour",
+    "instrumentation": ["Fiddle (lead)", "Acoustic Guitar", "Piano", "Organ", "Double Bass", "Drum Kit"],
+    "form": ["Intro", "Verse", "Chorus", "Bridge", "Chorus2", "Outro"],
+    "bars": 24,
+    "sections": 6
+  },
+  "source_verification": {
+    "voice_tracks": 6,
+    "track_length_ticks": 46080,
+    "zero_drift": true,
+    "pitched_onsets": 648,
+    "off_grid": 0
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "artifact": "223-rock-euclidean-extended.ogg",
+  "classification": "ai-assisted",
+  "generator": "SP-001 FluidSynth (FluidR3_GM.sf2) -> ffmpeg Opus",
+  "sources": [],
+  "parameters": {
+    "phase": 2,
+    "bpm": 128,
+    "key": "E aeolian",
+    "method": "012",
+    "render": "fluidsynth -g 1.0 -> volume 0.895 -> libopus 48k voip",
+    "source_midi": "MIDI/223-rock-euclidean-extended.mid"
+  },
+  "notes": "Phase-2 rules render. Peak normalized 0.994 -> -1 dBFS.",
+  "sha256": "bd64961f620943a69eb02bc75fb7bc3443ef9595209901e6b26cd62080c28ec1",
+  "bytes": 501848,
+  "created_utc": "2026-10-05T01:18:09.730283+00:00",
+  "provenance_version": "1.0"
+}

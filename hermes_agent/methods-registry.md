@@ -20,32 +20,34 @@ Status: `implemented` = in sound/ package · `partial` = some pieces exist · `r
 | — | Modular Node-Graph DSP (SynthEdit-style) | implemented | sound/modular/graph.py |
 | — | Math Modulators + 24-step Sequencer (Altitude-style) | implemented | sound/modular/math_mod.py |
 | — | Digital Chaos CV (Sofia2 / Leibniz-style) | implemented | sound/modular/chaos_cv.py |
-| — | JSON Patch Loader/Builder (Karst-style) | implemented | sound/modular/patch_loader.py |
-| — | Scale Quantizer + Probability Engine (Synterra-style) | implemented | sound/synthesis/scale_quantizer.py |
-| — | Voice Allocator + Modulation Matrix (ECHON-6-style) | implemented | sound/synthesis/voice_allocator.py |
-| — | Polyrhythmic Arpeggiator (Memory-V-style) | implemented | sound/synthesis/polyrhythm.py |
-| — | Binaural / Haas / Play Modes (DMNO-style) | implemented | sound/synthesis/binaural.py |
-| — | West Coast Wavefolder + LPG (Obsidian-style) | implemented | sound/synthesis/west_coast.py |
-| — | FDN Reverb (Rev-Ocean-style) | implemented | sound/effects/fdn_reverb.py |
-| — | Multiband Compressor + Synth (Rumble-style) | implemented | sound/effects/multiband.py |
-| — | Quantize Modulators + Routing (Radical1-style) | implemented | sound/effects/quantize_mod.py |
-| — | Dice Variation + Param Scopes (Karst-style) | implemented | sound/generators/dice.py |
-| — | Microtonal MIDI Export (KHÔRA-style) | implemented | sound/utils/midi.py |
-| — | Just Intonation / Microtonal (KHÔRA-style) | implemented | sound/tuning/just_intonation.py |
-| — | Polyphonic Multi-Engine (Astrolab-style) | implemented | sound/synthesis/polysynth.py |
-| SP-004 | Formant Vocal Synthesis | implemented | sound/synthesis/vocal.py |
-| — | Additive Synthesis (SoundWave) | implemented | sound/synthesis/additive.py |
-| — | Mono Subtractive Synth (AD-202 / MC-202-style) | implemented | sound/synthesis/mono_synth.py |
-| — | DX7 Voice Format Parser (Rithmatic-style) | implemented | sound/synthesis/dx7_voice.py |
-| — | Equation→Waveform Synthesis (MathSynth-style) | implemented | sound/synthesis/equation_synth.py |
-| — | Stacked-Oscillator Memorymoog-Style Voice (Memorymode 2-style) | implemented | sound/synthesis/memorymoog_synth.py |
-| SP-033 | Detuned Saw Swarm + Harmony Engine + Morph Pad (SuperStarSaw-style) | implemented | sound/synthesis/supersaw_swarm.py |
-| — | Scale/Chord-Pitch Quantizer (SuperStarSaw harmony engine) | implemented | sound/synthesis/supersaw_swarm.py (SCALES/CHORDS + quantize) |
-| SP-094 | Random Note Generator + Note Chance Sequencer (Maschine 3.7-style) | implemented | sound/generators/random_note_gen.py |
-|| SP-095 | Euclidean Fill Sequencer w/ Live Rotation (Maschine 3.7-style) | implemented | sound/generators/euclidean_fill_seq.py |
-|| SP-096 | Multi-Tap Modulated Short-Delay Processor / Haas Zone (Verbos Haas Zone Processor-style) | implemented | sound/effects/haas_zone.py |
-|| SP-097 | Multi-Segment Envelope Generator for Parameter Modulation (Sync Audio MegaMorph-style) | implemented | sound/effects/mega_morph.py |
-|| SP-098 | Fractal Sequence Generator — Thue-Morse/Fibonacci/Sierpinski/Logistic Map (Kaona B.A.C.H. FRACTAL-style) | implemented | sound/generators/fractal_seq.py |
+|| — | JSON Patch Loader/Builder (Karst-style) | implemented | sound/modular/patch_loader.py |
+|| — | Scale Quantizer + Probability Engine (Synterra-style) | implemented | sound/synthesis/scale_quantizer.py |
+|| — | Voice Allocator + Modulation Matrix (ECHON-6-style) | implemented | sound/synthesis/voice_allocator.py |
+|| — | Polyrhythmic Arpeggiator (Memory-V-style) | implemented | sound/synthesis/polyrhythm.py |
+|| — | Binaural / Haas / Play Modes (DMNO-style) | implemented | sound/synthesis/binaural.py |
+|| — | West Coast Wavefolder + LPG (Obsidian-style) | implemented | sound/synthesis/west_coast.py |
+|| — | FDN Reverb (Rev-Ocean-style) | implemented | sound/effects/fdn_reverb.py |
+|| — | Multiband Compressor + Synth (Rumble-style) | implemented | sound/effects/multiband.py |
+|| — | Quantize Modulators + Routing (Radical1-style) | implemented | sound/effects/quantize_mod.py |
+|| — | Dice Variation + Param Scopes (Karst-style) | implemented | sound/generators/dice.py |
+|| — | Microtonal MIDI Export (KHÔRA-style) | implemented | sound/utils/midi.py |
+|| — | Just Intonation / Microtonal (KHÔRA-style) | implemented | sound/tuning/just_intonation.py |
+|| — | Polyphonic Multi-Engine (Astrolab-style) | implemented | sound/synthesis/polysynth.py |
+|| SP-004 | Formant Vocal Synthesis | implemented | sound/synthesis/vocal.py |
+|| — | Additive Synthesis (SoundWave) | implemented | sound/synthesis/additive.py |
+|| — | Mono Subtractive Synth (AD-202 / MC-202-style) | implemented | sound/synthesis/mono_synth.py |
+|| — | DX7 Voice Format Parser (Rithmatic-style) | implemented | sound/synthesis/dx7_voice.py |
+|| — | Equation→Waveform Synthesis (MathSynth-style) | implemented | sound/synthesis/equation_synth.py |
+|| — | Stacked-Oscillator Memorymoog-Style Voice (Memorymode 2-style) | implemented | sound/synthesis/memorymoog_synth.py |
+|| SP-033 | Detuned Saw Swarm + Harmony Engine + Morph Pad (SuperStarSaw-style) | implemented | sound/synthesis/supersaw_swarm.py |
+|| — | Scale/Chord-Pitch Quantizer (SuperStarSaw harmony engine) | implemented | sound/synthesis/supersaw_swarm.py (SCALES/CHORDS + quantize) |
+|| SP-094 | Random Note Generator + Note Chance Sequencer (Maschine 3.7-style) | implemented | sound/generators/random_note_gen.py |
+||| SP-095 | Euclidean Fill Sequencer w/ Live Rotation (Maschine 3.7-style) | implemented | sound/generators/euclidean_fill_seq.py |
+||| SP-096 | Multi-Tap Modulated Short-Delay Processor / Haas Zone (Verbos Haas Zone Processor-style) | implemented | sound/effects/haas_zone.py |
+||| SP-097 | Multi-Segment Envelope Generator for Parameter Modulation (Sync Audio MegaMorph-style) | implemented | sound/effects/mega_morph.py |
+||| SP-098 | Fractal Sequence Generator — Thue-Morse/Fibonacci/Sierpinski/Logistic Map (Kaona B.A.C.H. FRACTAL-style) | implemented | sound/generators/fractal_seq.py |
+||| SP-099 | Impulse Response Designer — 10 algorithmic IR synthesis techniques (Convolution Playground-style) | implemented | sound/effects/ir_designer.py |
+||| SP-100 | B.A.C.H. Composition Generator — 11 composition engines: FUGUE/CANON/PROBA/TINTINNABULI/MINIMAL/CELLULAR/TREE/MOTIF/HYBRID/GROOVE/GROOVE_MIX (Kaona B.A.C.H.-style) | implemented | sound/generators/bach_composer.py |
 
 ## Interval-Based Composition (NEW)
 

@@ -1,0 +1,30 @@
+{
+  "phase2": {
+    "size": 10633,
+    "nvoice": 7,
+    "lengths": [
+      61440,
+      61440,
+      61440,
+      61440,
+      61440,
+      61440,
+      61440
+    ],
+    "off_grid": 0,
+    "scale_viol": 0,
+    "chord_viol": 0,
+    "pitched": 896
+  },
+  "phase1": {
+    "size": 981,
+    "nvoice": 1,
+    "lengths": [
+      61440
+    ],
+    "off_grid": 93,
+    "scale_viol": 0,
+    "chord_viol": 0,
+    "pitched": 102
+  }
+}

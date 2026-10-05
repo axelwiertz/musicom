@@ -112,8 +112,9 @@ Classification of active Musicom composition methods categorized by their primar
 || **102** | concrete | Cross-Entropy Method Composition (CEMC) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Elite-guided) | Continuous / Fluid | Macro / Distribution | $\mathcal{O}(I \cdot N \cdot L)$ | Iterative distribution optimization: sample sequences, keep elite (top fitness), refit parametric distribution via CE minimization. |
 || **103** | concrete | Graph Neural Network Composition (GNNC) | **AI-Driven** | Pitch, Rhythm, Harmony, Structure, Texture | Variable (Graph-learned) | Grid-Locked / Continuous | Macro / Graph Neighborhood | $\mathcal{O}(V \cdot T \cdot d^2)$ | Models composition as a heterogeneous graph (note, chord, bar nodes; temporal/harmonic/metric/voice edges). GNN message-passing refines node embeddings, decoded into pitch/duration/velocity/voice assignments. Relational inductive bias explicitly encodes voice-leading, harmony, and meter. |
 || **104** | abstract | Parsimonious Subset Sequence Composition (PSSC) | **Rules-Based** | Pitch, Harmony, Structure, Texture | Moderate (Scale-subset filtered) | Grid-Locked / Continuous | Macro / Circular Sequence | $\mathcal{O}(C(n,p) \cdot p)$ | Generalises parsimonious voice leading from Neo-Riemannian triadic theory to ANY n-subsets of any p-scale. Constructs exhaustive, non-redundant, circular (nrep) chord progressions via set-theoretic relations (Rp/Re/Rf), 2D table, and lexicographic walk. Inversion-bipartition (2024) yields paired voice strands. Abstract-layer subset design: feeds rules/subset_network.py. |
-|| **105** | concrete | Pólya Urn Reinforcement Composition (PURC) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Reinforcement-guided, HOME/LIFT/TENSE/TURN via prior) | Grid-Locked / Continuous | Meso / Urn State | $\mathcal{O}(N \cdot K)$ per section | Generates musical sequences via self-reinforcing Pólya urn draws: each pitch/rhythm/token becomes more likely the more it is used (rich-get-richer). Urn prior encodes tonal gravity and metric binding; innovation parameter controls novelty rate; Pitman-Yor discount controls power-law tail of token distribution. Coupled per-voice urns enforce vertical harmonic coherence. Self-reinforcing stochastic counterpart to 002 Markov (fixed-probability) and 086 HMM (latent-state); sequential generative sibling of 084 ZMRC (static rank-frequency law). |
-||
+| **105** | concrete | Pólya Urn Reinforcement Composition (PURC) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Reinforcement-guided, HOME/LIFT/TENSE/TURN via prior) | Grid-Locked / Continuous | Meso / Urn State | $\mathcal{O}(N \cdot K)$ per section | Generates musical sequences via self-reinforcing Pólya urn draws: each pitch/rhythm/token becomes more likely the more it is used (rich-get-richer). Urn prior encodes tonal gravity and metric binding; innovation parameter controls novelty rate; Pitman-Yor discount controls power-law tail of token distribution. Coupled per-voice urns enforce vertical harmonic coherence. Self-reinforcing stochastic counterpart to 002 Markov (fixed-probability) and 086 HMM (latent-state); sequential generative sibling of 084 ZMRC (static rank-frequency law). |
+| **106** | concrete | Non-Autoregressive Parallel Composition (NAPC) | **AI-Driven** | Pitch, Rhythm, Harmony, Structure, Texture | Variable (Bidir-context-guided) | Grid-Locked / Continuous | Macro / Mask-Predict Iterations | $\mathcal{O}(R \cdot V \cdot T \cdot d)$ | Generates all musical tokens in parallel via iterative mask-refinement (mask-predict): start from a fully masked UnitMatrix and iteratively unmask the most confident predictions. Bidirectional transformer provides full left-right context per token. Non-autoregressive counterpart to 054 ATS; discrete refinement foil to 047 DSMG. |
+|||
 |### Source
 |Sakellariou, J., Tria, F., Loreto, V. & Pachet, F. (2017). "Maximum entropy models capture melodic styles." *Scientific Reports* 7, 9172. arXiv:1610.03414. — Jaynes, E. T. (1957). "Information theory and statistical mechanics." *Physical Review* 106, 620–630.
 
@@ -23235,4 +23236,95 @@ produce(midi_path, method="SP-104", params={
 
 6. **Tonal dependency across sections**: A parameter change from R=4 to R=8 between sections causes the aliased harmonics to shift, potentially making a chord sound like it resolves differently than intended. Always audition parameter transitions on the actual material — the "crush trajectory" should be evaluated harmonically, not just texturally.
 
-7. **Pitched aliasing musicality**: The aliased copies of a pitched note land at \(f_{\text{alias}} = |k \cdot f_s/R - f_{\text{orig}}|\) for integer \(k\). These folded frequencies are deterministic given \(f_s, R, f_{\text{orig}}\). For tonal music, choose \(R\) so that the most prominent aliased harmonics map to scale degrees of the current key — turning a flaw into a compositional feature. For example, at \(f_s = 44100\) Hz, \(R=15\) gives \(f_s/R = 2940\) Hz; a fundamental at 440 Hz aliases through the \(k=15\) copy: \(|15 \cdot 2940 - 440| = 43660\) → folded again → 880 Hz (one octave up — consonant).
+7. **Pitched aliasing musicality**: The aliased copies of a pitched note land at \(f_{\text{alias}} = |k \cdot f_s/R - f_{\text{orig}}|\) for integer \(k\). These folded frequencies are deterministic given \(f_s, R, f_{\text{orig}}\). For tonal music, choose \(R\) so that the most prominent aliased harmonics map to scale degrees of the current key — turning a flaw into a compositional feature. For example, at \(f_s = 44100\) Hz, \(R=15\) gives \(f_s/R = 2940\) Hz; a fundamental at 440 Hz aliases through the \(k=15\) copy: \(|15 \cdot 2940 - 440| = 43660\) → folded again → 880 Hz (one octave up — consonant).### Source
+
+Gu, J., Bradbury, J., Xiong, C., Li, V. O. & Socher, R. (2018). "Non-autoregressive neural machine translation." *ICLR 2018*. — Ghazvininejad, M., Levy, O. & Zettlemoyer, L. (2019). "Mask-Predict: Parallel Decoding of Conditional Masked Language Models." *EMNLP 2019*. — Devlin, J., Chang, M.-W., Lee, K. & Toutanova, K. (2019). "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding." *NAACL 2019*. — Hsiao, T., Liu, Y., Yang, Y., et al. (2021). "Compound Word Transformer: Inferno and the Masked Music Model." arXiv:2101.09152. — Huang, C.-Z. A., Hawthorne, C., et al. (2021). "Hierarchical denoising masked language modeling for music generation." *ISMIR 2021*.
+
+### Layer
+
+**concrete** — generates discrete musical tokens (pitch, duration, velocity, onset position) that directly fill UnitMatrix cells. NAPC's iterative refinement works at the token level: each refinement step predicts concrete event tokens for all voices and time positions simultaneously. The output plugs directly into `generators/` as a parallel, voice-synchronous token-to-MusicUnit decoder.
+
+### Paradigm
+
+**AI-Driven** — the core of NAPC is a trained bidirectional transformer (masked language model, MLM) that predicts probability distributions over the musical token vocabulary at every masked position. The network is trained on a corpus of symbolic music by randomly masking a proportion of tokens and minimizing cross-entropy loss on the masked positions. At generation time, the trained model drives iterative refinement. This is neural, data-driven, and non-symbolic in its learning — paradigmatically AI-Driven.
+
+### Description
+
+**Non-Autoregressive Parallel Composition (NAPC)** generates symbolic music by reframing composition as a **masked language modeling (MLM) decoding problem**: all tokens of the piece are generated in parallel rather than left-to-right, using an iterative mask-predict refinement schedule.
+
+**The core idea.** Instead of generating notes one-by-one in sequence (as in 054 ATS), NAPC starts with a **fully masked** UnitMatrix — every position is filled with a special `[MASK]` token. Then, in a fixed number of refinement steps $R$ (typically 4–16), the model:
+1. **Predicts** a probability distribution over the token vocabulary for every masked position simultaneously via a single forward pass through a bidirectional encoder-only transformer (e.g., BERT/mBart with absolute or relative positional encodings extending over all voices × time steps).
+2. **Unmasks** a subset $K_t$ of positions — those with the highest prediction confidence (maximum softmax probability) — replacing `[MASK]` with argmax tokens. The remaining positions stay masked for the next iteration.
+3. **Repeats** until all positions are unmasked.
+
+This is the **Mask-Predict** algorithm (Ghazvininejad et al. 2019), adapted from non-autoregressive machine translation to the musical domain.
+
+**The un-masking schedule.** The count of tokens to un-mask per iteration follows a **cosine schedule** or **linear decay**:
+
+$$K_t = \\left\\lceil N \\cdot \\frac{\\cos\\left(\\frac{\\pi t}{2R}\\right)}{\\cos\\left(\\frac{\\pi (t-1)}{2R}\\right)} \\right\\rceil$$
+
+where $N$ = total token count per refinement step (sum of all tokens in all voices), $t$ = current refinement iteration, $R$ = total iterations. In practice, a simple **linear** schedule also works well:
+
+$$K_t = \\left\\lceil \\frac{N}{R} \\right\\rceil \\quad \\forall t$$ (constant unmask count per step)
+
+A **confidence-based** refinement step proposes tokens for all positions, but only the top $K_t$ by model confidence (softmax max-probability) are accepted. This avoids early commitment to incorrect tokens.
+
+**Why parallel?** Autoregressive decoding (054 ATS) requires $O(N)$ sequential forward passes — one per token. NAPC requires $O(R)$ forward passes (typically $R \\ll N$, e.g., $R=10$ for a piece with $N=1024$ tokens), plus all positions are computed in parallel within each pass. End-to-end: $O(N)$ serial work for 054 ATS vs. $O(\\log N)$–$O(R)$ serial work for NAPC. The bidirectional context means each token is predicted with **full left-and-right context**, unlike autoregressive models which only see the past.
+
+**Training.** The model is trained by randomly masking a fraction of tokens in each training sequence (typically 15–35%, following BERT's protocol) and optimizing:
+
+$$\\mathcal{L}_{\\text{MLM}} = -\\mathbb{E}_{x \\sim \\mathcal{D}} \\mathbb{E}_{\\mathcal{M} \\sim p_{\\text{mask}}} \\sum_{i \\in \\mathcal{M}} \\log P(x_i \\mid x_{\\setminus \\mathcal{M}})$$
+
+where $\\mathcal{M}$ is the set of masked positions, $x_{\\setminus \\mathcal{M}}$ are the unmasked observed tokens, and $P$ is the model's predicted distribution. **Multi-mask training**: for NAPC to learn to refine from many masked states, a **discrete diffusion training** variant masks a random number of tokens per training step (not just 15%), spanning the full range from 0% to 100% masking, so the model learns to denoise at all masking densities — mirroring the iterative refinement process at test time.
+
+**Voice-aware encoding.** The input sequence is a flat concatenation of all voice token sequences, interleaved with a **voice embedding** (learned per-voice token) and **position embedding**. The bidirectional transformer attends across both time and voice dimensions, so harmonic and voice-leading constraints are captured from the full context at every refinement step.
+
+### Musical Elements Framework
+
+**PITCH**: Each time-voice position predicts a pitch class or MIDI note number. The bidirectional context allows pitch to be influenced by:
+- **Left and right melodic context**: neighbor tones, passing tones, and archetypal contours are learned from both directions, resulting in smoother melodies than left-to-right generation.
+- **Vertical harmonic context**: all voices at the same time step are simultaneously predicted, so the model learns to produce consonant verticalities and parsimonious voice-leading.
+- **Section-level context**: tokens in distant sections affect each other through the full attention mechanism, enabling the model to recall and vary motifs across movements.
+
+The probability distribution at each position is over $q$ tokens (e.g., 128 MIDI note numbers + `[MASK]` + `[PAD]` + `[SEP]`). The softmax temperature $T$ at prediction time controls the pitch creativity: $T=0$ = argmax (deterministic), $T>0$ = stochastic sampling from the smoothed distribution (variation).
+
+**RHYTHM**: Rhythm is encoded as **duration tokens** (1/4, 1/8, 1/16, dotted values, triplets) or as **time-shift tokens** (REMI-style delta times between note onsets). Each voice has its own rhythm channel, predicted in parallel with the pitch channel. Voice-specific duration embeddings ensure rhythm is independent per voice. The mask-predict process automatically captures cross-rhythm relations: if voice 1 plays syncopated 16ths and voice 2 plays steady quarters, the attention mechanism learns to align them at the downbeat.
+
+**HARMONY**: Harmonic structure emerges from the joint distribution of simultaneously predicted pitch tokens across voices. At full mask-predict completion, the vertical alignment of pitch classes automatically satisfies harmonic constraints learned from the training corpus:
+- **Tonal gravity**: chord tones at strong metric positions have higher probability due to corpus statistics.
+- **HOME/LIFT/TENSE/TURN**: functional roles are encoded in the co-occurrence patterns of pitch tokens across voices.
+- **Conditional harmony**: a harmonic conditioning token (chord label at each time step) can be provided as an unmasked input, guiding the refinement toward a designed harmonic plan.
+
+**STRUCTURE**: NAPC's parallel generation produces **all sections simultaneously**:
+- **Macro-form tokens**: special `[SECTION]` tokens or section embeddings define the form (intro, verse, chorus, bridge, outro). These are either provided as conditioning (unmasked throughout) or predicted like any other token.
+- **Repetition via shared embeddings**: the model learns to produce the same material for repeated sections (e.g., two verses with the same chords) through the attention mechanism's capacity to copy from unmasked position embeddings.
+- **Self-attention span**: the full sequence length $N = V \\cdot T$ (voices × time steps) fits within the transformer's maximum context (e.g., 2048 tokens). For longer pieces, a sliding-window refinement or hierarchical chunking (generate structure tokens coarse, then fill detailed tokens fine) extends scope.
+
+**TEXTURE**: Texture is controlled by the **confidence threshold schedule** and **unmasking ratio**:
+- **Dense texture (homophony)**: all voices unmask at a similar rate; the joint distribution converges to a coherent harmonic block.
+- **Sparse texture (pointillism)**: early unmasking concentrates in a single voice (e.g., melody), while other voices remain `[MASK]`-ed, emerging later as background fills.
+- **Rest tokens**: a special `[REST]` token allows voices to be silent, with the model learning which voices are active at each time step. Voice activity is an emergent property of the trained distribution.
+
+### UnitMatrix Integration (Voices & Sections)
+
+**Voices (Rows)**: The UnitMatrix's $V$ voices are flattened into a single token sequence for the transformer: $[S_{11}, S_{12}, \\ldots, S_{1T}, S_{21}, S_{22}, \\ldots, S_{VT}]$ where $S_{vt}$ is the token for voice $v$ at time $t$. Each position carries a **learned voice embedding** + **learned time embedding** + **token embedding**. This flat ordering with voice-attribution embeddings lets the transformer attend freely across both dimensions — the voice split is a decoding convenience, not a modeling constraint. After iterative refinement, the token sequence is reshaped back into $V \\times T$ and each token is decoded to a `MusicUnit` (pitch, duration, velocity) via a simple event decoder.
+
+**Sections (Columns)**: Section boundaries are marked by a `[SECTION]` token or by learned **section embeddings** that are added to the time embeddings for positions within each section. These embeddings carry section-level information (key, tempo, style, dynamics). The model learns that tokens within the same section share harmonic and rhythmic characteristics. Section embeddings are **conditioned** (provided as fixed, unmasked input) so that the macro-form is deterministically designed by the composer. The mask-predict process then fills in the musical detail consistent with each section's identity.
+
+**Refinement as composition**: The iterative refinement mirrors a composer's process: start with a rough sketch (high-level form and a few anchor pitches/rhythms), then progressively add detail — first filling in strong-beat chord tones, then melodic passing tones, then ornamentation. Each refinement step adds one "layer of detail," controlled by which positions are unmasked at that step. The result is a fully populated UnitMatrix whose $V \\times S$ cells contain voice-synchronous `MusicUnit` events with zero-drift guaranteed by construction (all tokens predicted in the same flattened pass).
+
+### Pitfalls
+
+1. **Exposure bias from iterative refinement**: Unlike autoregressive models (which are always trained on ground-truth contexts), NAPC must refine from its own predicted tokens at test time. If the model never sees highly masked inputs with mostly *wrong* tokens during training, it accumulates errors through the refinement chain. Fix: use discrete diffusion training (mask at all densities 0–100% during training), and add noise-based token corruption to the unmasked tokens during training so the model learns to correct errors.
+
+2. **Token order ambiguity**: With parallel generation, there is no natural "order" to the notes within a time step — the model must learn that chordal tones sound simultaneously, but the token representation is sequentialized. Fix: use a **voice-time interleaving** where tokens within the same time step are ordered by voice index, and the attention mask allows full visibility within the same time step (no causal masking across voices).
+
+3. **Repetition mode collapse**: Because every position has full context of every other position (bidirectional attention), the model can easily fall into a "copy-paste" mode where all sections sound identical — the extreme form of autoregressive repetition. Fix: force different section embeddings to be far apart in the embedding space; use a diversity-promoting regularization during training (contrastive loss between sections); or schedule the unmasking so that different voices unmask at different rates per section.
+
+4. **Computational cost of full attention**: The full self-attention over $V \\cdot T$ tokens has $O((VT)^2)$ complexity. For $V=8$ voices, $T=256$ time steps (4 bars at 16th-note resolution), we have 2048 tokens — near the limit of typical transformers. Longer pieces require chunked refinement (generate in overlapping windows) or linear-complexity attention (Linformer/Performer/Mamba). Fix: use a sliding-window local attention + global token approach, or adopt a structured state-space layer (060 S4SC) as the bidirectional encoder.
+
+5. **No incremental generation**: Unlike 054 ATS which can stop at any point, NAPC requires all positions to be generated — you cannot "hear as you go." The piece emerges only after all $R$ refinement steps complete. Fix: for interactive use, replace the full refinement with a **progressive decoding** where visible tokens are played as they are unmasked (though this changes the generative dynamics).
+
+6. **Harmonic coherence at low unmasking densities**: In early refinement steps (90%+ masked), the model has very little context, so the first few unmasked tokens can drift harmonically. If a wrong chord tone is selected early, later unmasking must "correct" it — but the model cannot change already-unmasked tokens. Fix: allow **token revision** by reserving a small budget of tokens to be re-masked and re-predicted each step, or by using the mask-predict *replace* strategy: at each step, unmask $K_t$ *and* re-mask $K_{t-1}/2$ of the previous step's least-confident predictions.
+
+7. **Conditioning on long-range structure**: Since all positions see all other positions, the model must learn that a chord in section D depends on the cadence in section C, which in turn depends on the key established in section A. This long-range dependency is captured by the attention mechanism but requires sufficient training data to learn. Fix: use relative positional encodings with section-aware bias terms, or augment the training data with structural perturbations (mask entire sections) to force the model to attend across section boundaries.
