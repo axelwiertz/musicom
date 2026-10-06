@@ -1,0 +1,19 @@
+{
+  "artifact": "226-apollonian-packing-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "094-Apollonian-Circle-Packing (raw curvature-stream walk)",
+  "sources": [],
+  "parameters": {
+    "phase": 1,
+    "bpm": 90,
+    "key": "D Dorian (D E F G A B C)",
+    "seed": 20261006,
+    "voices": 1,
+    "note": "raw generative draft: single lead voice walking a deep Apollonian curvature stream (every positive curvature, depth 7), off-grid ticks, fractal radii durations, register drift + micro-jitter, pre-rules"
+  },
+  "notes": "",
+  "sha256": "8b289f7b68656b27e3bd135a40aec269a276f1e28b80d1a73315a25315971737",
+  "bytes": 1154,
+  "created_utc": "2026-10-06T23:12:40.965558+00:00",
+  "provenance_version": "1.0"
+}

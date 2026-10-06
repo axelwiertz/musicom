@@ -1,0 +1,26 @@
+{
+  "artifact": "226-apollonian-packing.mid",
+  "classification": "ai-assisted",
+  "generator": "094-Apollonian-Circle-Packing + musicom rules",
+  "sources": [],
+  "parameters": {
+    "phase": 2,
+    "bpm": 90,
+    "key": "D Dorian (D E F G A B C)",
+    "seed": 20261006,
+    "voices": 4,
+    "form": "6 sections x 4 bars = 24 bars",
+    "quantization": "16th-grid (120 ticks) + per-bar Descartes-quadruple chord-tone",
+    "instruments": [
+      "double bass",
+      "cello",
+      "violin",
+      "flute"
+    ]
+  },
+  "notes": "Experimental sacred-minimal fractal counterpoint in D Dorian. Descartes quadruples -> 4-voice chords; Apollonian reflections -> parsimonious single-voice pivots; radii -> fractal durations.",
+  "sha256": "3a97a09d8c185f82fbcc1140838de4527890fc9937b4b3c2ac4ab82499ea760b",
+  "bytes": 3786,
+  "created_utc": "2026-10-06T23:12:40.987429+00:00",
+  "provenance_version": "1.0"
+}

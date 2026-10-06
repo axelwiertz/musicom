@@ -1,26 +1,23 @@
 {
   "job": "nightly composition (two-phase)",
-  "date": "2026-10-03",
-  "seed": 20261003,
-  "style": "Funk",
-  "method_id": "095",
-  "method_name": "Contour Theory Composition (CTC)",
-  "layer": "abstract",
-  "layer_roll": 0.028164495600748074,
+  "date": "2026-10-06",
+  "seed": 20261006,
+  "style": "Experimental",
+  "method_id": "094",
+  "method_name": "Apollonian Circle Packing Composition (ACPC)",
+  "layer": "concrete",
+  "layer_roll": 0.4948010003665161,
   "excluded_last7d": [
-    "001",
-    "010",
-    "018",
+    "007",
     "019",
     "025",
     "031",
     "041",
-    "082",
-    "092",
-    "098",
+    "050",
+    "095",
     "213",
     "217"
   ],
-  "candidate_methods": 2,
-  "n_styles": 45
+  "candidate_methods": 94,
+  "n_styles": 46
 }
