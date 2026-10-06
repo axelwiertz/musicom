@@ -114,7 +114,7 @@ Classification of active Musicom composition methods categorized by their primar
 || **104** | abstract | Parsimonious Subset Sequence Composition (PSSC) | **Rules-Based** | Pitch, Harmony, Structure, Texture | Moderate (Scale-subset filtered) | Grid-Locked / Continuous | Macro / Circular Sequence | $\mathcal{O}(C(n,p) \cdot p)$ | Generalises parsimonious voice leading from Neo-Riemannian triadic theory to ANY n-subsets of any p-scale. Constructs exhaustive, non-redundant, circular (nrep) chord progressions via set-theoretic relations (Rp/Re/Rf), 2D table, and lexicographic walk. Inversion-bipartition (2024) yields paired voice strands. Abstract-layer subset design: feeds rules/subset_network.py. |
 | **105** | concrete | Pólya Urn Reinforcement Composition (PURC) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Reinforcement-guided, HOME/LIFT/TENSE/TURN via prior) | Grid-Locked / Continuous | Meso / Urn State | $\mathcal{O}(N \cdot K)$ per section | Generates musical sequences via self-reinforcing Pólya urn draws: each pitch/rhythm/token becomes more likely the more it is used (rich-get-richer). Urn prior encodes tonal gravity and metric binding; innovation parameter controls novelty rate; Pitman-Yor discount controls power-law tail of token distribution. Coupled per-voice urns enforce vertical harmonic coherence. Self-reinforcing stochastic counterpart to 002 Markov (fixed-probability) and 086 HMM (latent-state); sequential generative sibling of 084 ZMRC (static rank-frequency law). |
 | **106** | concrete | Non-Autoregressive Parallel Composition (NAPC) | **AI-Driven** | Pitch, Rhythm, Harmony, Structure, Texture | Variable (Bidir-context-guided) | Grid-Locked / Continuous | Macro / Mask-Predict Iterations | $\mathcal{O}(R \cdot V \cdot T \cdot d)$ | Generates all musical tokens in parallel via iterative mask-refinement (mask-predict): start from a fully masked UnitMatrix and iteratively unmask the most confident predictions. Bidirectional transformer provides full left-right context per token. Non-autoregressive counterpart to 054 ATS; discrete refinement foil to 047 DSMG. |
-|||
+| **107** | concrete | Stochastic Differential Equation Composition (SDEC) | **Nature-Led** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Drift-field-guided) | Continuous / Fluid | Macro / Trajectory Horizon | $\mathcal{O}(V^2 d^2 \cdot T)$ | Models each musical parameter as a continuous-time Itō SDE with designed drift and diffusion fields. Drift = tonal gravity, diffusion = creative uncertainty. Multi-voice correlated SDEs encode harmonic coherence and voice-leading. Continuous-time Nature-Led counterpart to 048 RBMPD (generalized) and 097 MaxEnt-C (dynamical foil). |
 |### Source
 |Sakellariou, J., Tria, F., Loreto, V. & Pachet, F. (2017). "Maximum entropy models capture melodic styles." *Scientific Reports* 7, 9172. arXiv:1610.03414. — Jaynes, E. T. (1957). "Information theory and statistical mechanics." *Physical Review* 106, 620–630.
 
@@ -277,7 +277,8 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 || **SP-102** | Amplitude Modulation Synthesis (AMS) | **Synthesis Engines** | AM Sideband / Tremolo Timbres | Modulates carrier oscillator amplitude with a modulator oscillator $m(t) = [1 + m \cos(2\pi f_m t)]$. Sub-audio $f_m$ = tremolo; audio-rate $f_m$ = DSB+Carrier sidebands at $f_c \pm f_m$. $m$ controls sideband strength; $m>1$ overmodulation. $\mathcal{O}(1)$ per sample per voice. Candidate: `sound/synthesis/am_synthesis.py`. |
 || **SP-103** | Crossover Band Distortion Synthesis (CBDS) | **Post-Processing / DSP** | Multiband Distortion / Frequency-Selective Saturation | Splits rendered audio into N frequency bands via Linkwitz-Riley crossover filters, applies independent distortion/saturation curve per band (soft clip, tape, tube, wavefolder, rectifier, bitcrush), then recombines. Prevents intermodulation between frequency regions that full-band waveshapers create. Per-band drive, envelope-follower modulation, and waveshaper type are controllable. $\mathcal{O}(N \cdot 20)$ per sample. Candidate: `sound/effects/crossover_distortion.py`. |
 || **SP-104** | Bitcrushing / Sample Rate Reduction Synthesis (SRR) | **Post-Processing / DSP** | Lo-Fi Degradation / Quantization Noise & Aliasing | Intentionally reduces bit depth and/or sample rate of a rendered buffer via re-quantization (rounding to $b$ bits) and sample-and-hold decimation (crush factor $R$). Produces characteristic quantization noise, aliased metallic artifacts, and lo-fi texture. Per-voice $b$ and $R$ create a "degradation stage." $\mathcal{O}(1)$ per sample. Candidate: `sound/effects/bitcrusher.py`. |
-|| **SP-105** | Coupled Resonant Filter Bank Synthesis (CRFBS) | **Synthesis Engines** | Nonlinear Modal Interaction / Impact, Cymbal & Plate Timbres | Banks of $N$ parallel Mathews-Smith complex-format IIR resonators exchanging energy through a redistribution matrix $\mathbf{M}$ to model nonlinear modal coupling. Captures delayed tonal components, spectral enrichment during impacts, and energy cascades that linear modal synthesis cannot produce. $\mathcal{O}(N)$ per sample. Candidate: `sound/synthesis/coupled_resonator.py`. |
+||| **SP-105** | Coupled Resonant Filter Bank Synthesis (CRFBS) | **Synthesis Engines** | Nonlinear Modal Interaction / Impact, Cymbal & Plate Timbres | Banks of $N$ parallel Mathews-Smith complex-format IIR resonators exchanging energy through a redistribution matrix $\mathbf{M}$ to model nonlinear modal coupling. Captures delayed tonal components, spectral enrichment during impacts, and energy cascades that linear modal synthesis cannot produce. $\mathcal{O}(N)$ per sample. Candidate: `sound/synthesis/coupled_resonator.py`. |
+||| **SP-106** | Phaser / Allpass Modulation Synthesis (APS) | **Post-Processing / DSP** | Phase-Swept Modulation / Spectral Notch Filtering | Classic modulation effect using a cascade of allpass filters with LFO-modulated break frequencies to create moving spectral notches through phase cancellation when mixed with dry signal. $N/2$ notches for $N$ stages, depth/rate/feedback/sweep controls. $\mathcal{O}(N)$ per sample. Candidate: `sound/effects/phaser.py`. |
 |---|
 
 
@@ -23457,4 +23458,278 @@ $$s(n) = \sum_{i=1}^{N} y_i(n)$$
 
 7. **Parameter correlation.** The coupling matrix $\mathbf{M}$ has $N^2$ entries — a 50-mode bank has 2500 parameters. This is too many for manual design. Use reduced-parameter schemes: nearest-neighbor coupling (tridiagonal $\mathbf{M}$), banded coupling (top-Doppler), or spectral distance weighting $a_{ij} = \exp(-|\omega_i-\omega_j|/\sigma)$. 
 
-8. **Latency.** The method is sample-accurate (one-sample latency). No lookahead needed. But the coupling computation ($\sqrt{\cdot}$ and division per mode) may be expensive on embedded hardware without FPU — use approximation $\sqrt{1+\epsilon} \approx 1+\epsilon/2$ for small $|2T_i|/|z_i|^2$.
+8. **Latency.** The method is sample-accurate (one-sample latency). No lookahead needed. But the coupling computation ($\sqrt{\cdot}$ and division per mode) may be expensive on embedded hardware without FPU — use approximation $\sqrt{1+\epsilon} \approx 1+\epsilon/2$ for small $|2T_i|/|z_i|^2$.### Source
+Oksendal, B. (2003). *Stochastic Differential Equations: An Introduction with Applications*, 6th ed. Springer. — Gardiner, C. W. (2009). *Handbook of Stochastic Methods*, 4th ed. Springer. — Risken, H. (1996). *The Fokker-Planck Equation*, 2nd ed. Springer. — Temko, A. (2005). "Drift-diffusion models for musical pitch and rhythm generation." *Proc. Int. Conf. Music and AI*, Edinburgh. — Wannenmacher, T. & Purwins, H. (2006). "Stochastic differential equations for audio synthesis and composition." *DAFx-06*, Montreal.
+
+### Layer
+**concrete** — generates concrete events (pitch, onset, duration, velocity) that fill UnitMatrix cells. The SDE integrator produces actual note trajectories at the sample rate of the composition grid (ticks per beat), and these are decoded into MusicUnits. Feeds generators/ via the layer-2 SDE event stream or directly into UnitMatrix cells via path discretization.
+
+### Paradigm
+**Nature-Led** — the SDE framework is a mathematical formalism borrowed directly from statistical physics (Brownian motion, drift-diffusion in potential landscapes) to model the continuous-time evolution of musical parameters. The drift field pushes toward tonal centres (gravity), the diffusion term injects organic stochasticity (thermal fluctuation analog), and coupled SDEs model physical interactions between voices (entanglement). No learning, no symbolic rules — just nature's own stochastic dynamics.
+
+### Description
+**Stochastic Differential Equation Composition (SDEC)** models each musical parameter as a continuous-time stochastic process governed by an Itō SDE:
+
+$$dX_t = \mu(X_t, t)\,dt + \sigma(X_t, t)\,dW_t$$
+
+where:
+- $X_t \in \mathbb{R}^d$ is the $d$-dimensional musical state vector at time $t$ (e.g., pitch, log-duration, velocity, harmonic interval, metric phase)
+- $\mu: \mathbb{R}^d \times [0,T] \to \mathbb{R}^d$ is the **drift field** — the deterministic tendency of each parameter. Drift encodes tonal gravity (pull toward tonic), metric binding (pull toward downbeat), voice-leading parsimony (pull toward nearest chord tone), and section structure (time-dependent drift switching at form boundaries)
+- $\sigma: \mathbb{R}^d \times [0,T] \to \mathbb{R}^{d \times m}$ is the **diffusion field** — the state- and time-dependent noise amplitude. Diffusion encodes ornamentation intensity, stochastic variation, and textural density (higher $\sigma$ = more random ornamentation/pointillism, lower $\sigma$ = more deterministic/legato)
+- $W_t \in \mathbb{R}^m$ is an $m$-dimensional Wiener process (independent Brownian motions)
+
+**Key idea — drift-as-musical-intent**: Unlike 048 RBMPD (constant drift toward a single tonic), SDEC supports arbitrary drift fields that can be *designed* as musical potential landscapes:
+- $\mu(x,t) = -\nabla \Phi(x,t)$ — gradient flow on a time-varying potential $\Phi$. The potential can have multiple wells (multiple tonal centres), wells of different depths (HOME > LIFT > TENSE > TURN), and time-dependent well positions (modulation, section changes)
+- $\mu(x,t) = A(t)x + b(t)$ — linear drift (Ornstein-Uhlenbeck generalization) where $A(t)$ controls mean-reversion strength and $b(t)$ controls the target
+- Coupled drift: $\mu_i(X,t) = -\nabla_{x_i}\Phi(x_i,t) - \sum_{j \neq i} \kappa_{ij} \nabla_{x_i} \Psi(x_i, x_j)$ — each voice's drift includes self-potential + pairwise voice-leading potential (parallel motion penalty, contrary motion reward)
+
+**Diffusion-as-creative-uncertainty**: The diffusion coefficient $\sigma(X,t)$ controls the local "temperature" of generation:
+- $\sigma \to 0$: deterministic ODE (voice unfolding, strict counterpoint)
+- $\sigma > 0$ small: controlled ornamentation (neighbor tones, passing tones, micro-timing jitter)
+- $\sigma \gg 0$: chaotic, highly random generation (aleatoric sections, glissando clouds)
+- State-dependent $\sigma(X)$: different parameters get different noise levels (pitch might be low-noise legato while rhythm is high-noise syncopation)
+
+**Multi-voice coupling**: For $V$ voices, we use a $V\cdot d$-dimensional SDE:
+
+$$dX_t^{(v)} = \mu_v(X_t^{(1)},\ldots,X_t^{(V)}, t)\,dt + \sum_{u=1}^V \sigma_{vu}(X_t^{(u)},t)\,dW_t^{(u)}$$
+
+The drift of voice $v$ depends on all voices (voice-leading rules, harmonic coherence), and the noise process can be correlated across voices via the Cholesky factor of a shared covariance matrix $\Sigma_{vu} = \mathbb{E}[dW^{(v)} dW^{(u)}]$. The correlation structure encodes ensemble texture: high positive correlation → parallel motion (homophony), negative correlation → contrary motion, zero correlation → independent polyphonic strands.
+
+**Inference / generation**: The SDE is integrated forward in time using an Euler-Maruyama or Milstein scheme at the tick resolution of the composition (e.g., 1/16th note = 120 ticks at 480 tpb). Each integration step:
+
+$$X_{t+\Delta t} = X_t + \mu(X_t,t)\Delta t + \sigma(X_t,t) \sqrt{\Delta t}\, \xi$$
+
+where $\xi \sim \mathcal{N}(0,1)$ is a standard normal increment. The state $X_t$ is decoded at each step (or on onset boundaries) into pitch class (quantize to nearest scale degree), onset (threshold crossing of a "firing potential"), duration (dwell time below threshold), and velocity (clipped amplitude of $X_t$'s energy coordinate).
+
+**Relation to existing methods**:
+- **Generalizes 048 RBMPD**: RBMPD = 1D SDEC with constant $\mu$ and $\sigma$, reflecting barriers at 0 and 1. SDEC allows arbitrary dimensions, state-dependent $\mu$ and $\sigma$, arbitrary potentials, and correlated multi-voice noise.
+- **Generalizes 053 LFC**: Lévy flights replace the Wiener $W_t$ with an $\alpha$-stable process. SDEC accepts any Lévy process as the noise driver — the framework is noise-agnostic.
+- **Complementary to 061 GPC**: GPC places a *prior over functions* (Bayesian nonparametric) while SDEC *simulates a stochastic process* (frequentist dynamical). GPC gives closed-form posterior variance; SDEC gives pathwise sample trajectories.
+- **Complementary to 097 MaxEnt-C**: MaxEnt finds the stationary equilibrium distribution; SDEC models the *transient dynamics* toward equilibrium — the path, not just the destination. The Fokker-Planck equation of the SDE gives the time-dependent density $p(x,t)$ that converges to the Boltzmann-Gibbs stationary distribution as $t\to\infty$.
+
+### Musical Elements Framework
+
+**PITCH**: The primary coordinate $X_t^{(p)}$ is a continuous pitch value (e.g., MIDI + microtonal offset, or a log-frequency in Hz). The drift $\mu_p$ encodes:
+- Tonal gravity: $\mu_p(x) = -\gamma \cdot (x - c)$ where $c$ is the tonic/centre — a linear restoring force (Ornstein-Uhlenbeck) anchoring the pitch around the key centre. HOME sections have large $\gamma$ (tight around tonic), TENSE sections have small $\gamma$ (wide wander) or a shifted centre
+- Scale boundaries: reflecting/absorbing barriers at the lowest/highest scale degrees within the octave, or a periodic potential $\Phi(x) = \frac{1}{2}\sin(12x)$ with 12 wells per octave for chromatic modulation
+- Melodic contour: time-dependent centre $c(t)$ following the melodic arch (rise to climax, fall to cadence). The drift dynamically pulls the pitch trajectory along the contour
+
+The pitch trajectory is quantized to the nearest scale degree for event output, with the fractional part retained as microtonal ornamentation or pitch-bend velocity.
+
+**RHYTHM**: Rhythm is governed by both a separate "firing potential" $X_t^{(r)}$ and the dwell-time mechanism. Two complementary approaches:
+
+1. **Threshold-crossing model**: A single SDE $dY_t = \mu_Y dt + \sigma_Y dW_t$ evolves a "charge" variable. When $Y_t$ crosses threshold $\theta$, an onset fires, $Y_t$ resets to 0, and the inter-onset-interval (IOI) $=\inf\{t: Y_t \geq \theta\}$ is the note duration. Drift $\mu_Y > 0$ biases toward faster firing (shorter notes), diffusion $\sigma_Y$ adds irregularity. This is a stochastic integrate-and-fire model.
+2. **Log-IOI model**: A secondary SDE $dZ_t = \mu_Z dt + \sigma_Z dW_t$ directly encodes the log of the inter-onset-interval. On each onset, $Z_t$ is sampled, and the next onset is scheduled $e^{Z_t}$ ticks later. Mean-reverting $\mu_Z$ enforces a target density (e.g., 8th notes at 120 BPM).
+
+Both models naturally produce the micro-timing fluctuations (swing, groove) that distinguish human from quantized performance. The drift/diffusion of the rhythm SDE is the "groove dial."
+
+**HARMONY**: Harmony emerges from the multi-voice coupling terms in the drift. For each pair of voices $(v,w)$, the drift includes:
+
+$$\mu_v^{(harm)} = -\kappa_{vw} \cdot \nabla_{x_v} \, C(x_v, x_w)$$
+
+where $C(x_v, x_w)$ is a consonance cost function with minima at consonant intervals (unison, third, fifth, sixth) and maxima at dissonant intervals (minor second, tritone). The coupling strength $\kappa_{vw}$ controls the harmonic strictness:
+- Large $\kappa$ = strict harmonic rules (voices lock into consonant intervals — homophonic/chordal texture)
+- Small $\kappa$ = free counterpoint (voices move independently within their tonal potential)
+- Time-dependent $\kappa(t)$ = section-by-section harmonic plan
+
+For chord-level composition (beyond voice pairs), a "harmonic field" $H(X,t)$ defines the ideal chord at time $t$ as a multi-well potential over the $V\cdot d$ dimensional space. The gradient of $H$ pulls the full ensemble toward agreed chord voicings.
+
+**STRUCTURE**: Structure enters SDEC through time-dependent drift/diffusion fields:
+
+- Per-section parameters: $\mu(t) = \mu_s$, $\sigma(t) = \sigma_s$ for $t \in \text{section } s$. The piece is a sequence of parameter regimes
+- **Potential switching**: At section boundaries, the tonal potential $\Phi(x,t)$ changes abruptly (e.g., from C major to G major) or smoothly (modulation via linear interpolation of potential parameters over $\sim 2$ bars)
+- **Macro-form from drift envelopes**: The drift centre $c(t)$ traces the structural arc — rising over the chorus, plateauing in the bridge, falling in the outro. The diffusion envelope $\sigma(t)$ controls section density: $\sigma \approx 0$ in the intro (sparse, deterministic), $\sigma \gg 0$ in the breakdown (chaotic), moderate in verses/choruses
+- **Noise-driven form events**: Rare large noise excursions (jumps > 3 standard deviations) can trigger form events — section transitions, cadential arrivals, or sudden textural shifts — analogous to the "critical events" in self-organized criticality (036 ASAR)
+
+**TEXTURE**: Texture is the multi-dimensional consequence of the SDE parameter configuration:
+
+- Homophony: large cross-voice coupling $\kappa_{vw}$, small independent noise $\sigma_{vv}$, high positive noise correlation $\rho_{vw}$
+- Polyphony: small $\kappa_{vw}$, moderate $\sigma_{vv}$, zero $\rho_{vw}$
+- Pointillism: large $\sigma$ across all voices, small coupling, fast mean-reversion (short correlation time)
+- Mass/sound-cloud: large $\sigma$, high drift towards the center, large noise correlation
+- The *entropy rate* of the SDE (Kolmogorov-Sinai entropy of the sample paths) is a quantitative texture metric: $h_{KS} = \frac{1}{2}\mathbb{E}[\log(2\pi e \sigma^2)]$ for a 1D SDE, generalizing to $h_{KS} = \frac{1}{2}\mathbb{E}[\log\det(2\pi e \Sigma)]$ in $d$ dimensions
+
+### UnitMatrix Integration (Voices & Sections)
+
+**Voices**: Each UnitMatrix row (voice) is one $d$-dimensional SDE $X_t^{(v)}$ integrated forward over the piece's duration. The initial condition $X_0^{(v)}$ per voice sets the starting pitch, rhythm phase, and velocity. Drift and diffusion parameters $\mu_v, \sigma_v$ are per-voice knobs. Cross-voice coupling terms $\kappa_{vw}$ in the drift and noise correlation $\rho_{vw}$ in the diffusion matrix enforce vertical coherence (harmonic agreement, voice-leading parsimony). The percussion voice is a 1D or 2D SDE (firing-rate + log-IOI) with no pitch coordinate, only rhythm and velocity.
+
+**Sections**: A piece has $M$ sections, each defining a rectangular block $[t_{s-1}, t_s]$ in time. Within each block, the SDE parameters $(\mu, \sigma, \kappa, \Phi)$ may be constant or smoothly varying. At section boundaries:
+- Drift field $\mu$ may change (key change, tempo change, density change)
+- Diffusion field $\sigma$ may change (textural shift)
+- Coupling $\kappa_{vw}$ may change (homophony vs. polyphony)
+- The SDE state $X_t$ is continuous across boundaries — no jumps in pitch or phase unless the potential's minima shift discontinuously (a "hard" modulation that the drift will resolve over a relaxation time $\tau \approx 1/\gamma$)
+
+**Cell filling**: The continuous SDE trajectory is partitioned by the section-time grid. In each cell (voice $v$, section $s$), the trajectory segment $X_t^{(v)}$ for $t \in [t_{s-1}, t_s]$ is decoded to a MusicUnit by:
+1. Identifying onset events (threshold crossings or local maxima of the firing potential)
+2. Quantizing the pitch at each onset to the section's scale (or leaving as continuous MIDI+cents)
+3. Reading the duration from the interval between onset and next onset or the dwell time in the firing model
+4. Reading velocity from the amplitude/energy coordinate at the onset time
+5. Optionally reading control-change data (pitch bend, modulation) from the continuous trajectory between onsets
+
+The decoded events are packed into a MusicEvent list per voice-section cell; the composer's validation ensures equal-length tracks.
+
+### Pitfalls
+
+1. **Euler-Maruyama discretization bias**: The Euler-Maruyama scheme has strong order 0.5 and weak order 1.0. For complex drift fields (steep potentials), the discretization may introduce bias (overshooting minima, slow convergence). Use the Milstein scheme (strong order 1.0) for multi-dimensional systems with state-dependent diffusion, or a Runge-Kutta SDE scheme (order 2.0) for high-precision needs. Always test with $\Delta t \to \Delta t/2$ halving to verify stability.
+
+2. **Quantization loss**: SDEs produce continuous trajectories; quantizing to discrete pitch/rhythm bins loses microtonal and micro-timing information that is the main aesthetic advantage of the method. Mitigation: preserve fractional pitch as pitch-bend events (MIDI pitch bend at ~14-bit resolution) and preserve fractional IOI as a swing/feel parameter. The quantization should be the *last* step before MIDI export, with all internal operations in continuous space.
+
+3. **Drift/diffusion parameter count**: Per-voice, per-section drift fields can be high-dimensional (pitch, log-IOI, velocity, energy, harmonic offset × coupling coefficients). Without careful design, the parameter space becomes too large to tune by hand. Recommended: start with 1D per-voice (pitch only) + shared rhythm SDE, then incrementally add dimensions. Use a parametrized potential family (e.g., double-well with 4 parameters) rather than free-form drift.
+
+4. **Noise correlation matrix positive definiteness**: The multi-voice noise correlation matrix $\Sigma$ must be positive semi-definite. Naively setting $\rho_{vw}$ for all pairs can produce an invalid matrix. Use a Cholesky decomposition $L$ such that $dW = L\,d\tilde{W}$ for independent increments $d\tilde{W}$, or use a factor model $\Sigma = FF^T + D$ with $F \in \mathbb{R}^{V \times r}$ (rank $r \ll V$) and $D$ diagonal.
+
+5. **Boundary conditions**: Without boundaries, an SDE with pure drift (no reflecting/absorbing barriers) can wander arbitrarily far from the tonal centre. Appropriate boundary types:
+   - **Reflecting**: bounce at the scale boundary (truncated, velocity-reversed) — preserves total probability. Same as 048 RBMPD.
+   - **Absorbing**: stop at the boundary — kills the voice (rare in practice).
+   - **Periodic**: wrap around at octave boundaries — good for pitch-class (chromatic) space.
+   - **Unbounded with strong drift**: mean-reverting drift keeps the process near the centre without explicit walls — most natural for tonal music.
+   Choose based on the musical context: periodic for atonal/chromatic, reflecting for modal, mean-reverting for tonal.
+
+6. **Noise-induced events**: Rare large noise excursions (greater than $3\sigma$) can produce musically unintuitive events — extreme register jumps, sudden very short/long notes. While these can be exploited as creative "happy accidents," a clipping/saturation function $f_\text{clip}(x) = \min(\max(x, x_\text{min}), x_\text{max})$ at the decoding stage prevents extreme outliers. Alternatively, replace the Wiener noise with a truncated Gaussian or sub-Gaussian noise for stricter control.
+
+7. **Computational cost**: Integrating an SDE at tick resolution (480 ticks/beat × 4 beats/bar × 32 bars × $V$ voices = 61,440 integration steps per voice for a short piece) is inexpensive per step ($\approx 10$ FLOPs for Euler-Maruyama), but multi-dimensional coupled SDEs with $V$ voices and $d$ dimensions per voice require $\mathcal{O}(V^2 d^2)$ operations per step for the coupling terms. Use sparse coupling (only adjacent voices interact, or a tree-structured coupling) to keep the cost $\mathcal{O}(V d^2)$.
+
+Candidate code path: `generators/sde_composition.py` — implements a base `SdeEngine` class with Euler-Maruyama/Milstein integrators, a `TonalPotential` family (parameterizable well potentials), a `CouplingMatrix` class for voice interaction, and a `SdeComposer` class that wraps the UnitMatrix workflow.
+
+# Phaser / Allpass Modulation Synthesis (APS) (Sound Production Method SP-106)
+
+### Source
+Zölzer, U. (2011). *DAFX: Digital Audio Effects*, 2nd ed. John Wiley & Sons, Ch. 8 "Modulation Effects." — Smith, J. O. (2010). *Physical Audio Signal Processing*, online edition, Ch. 8 "Phasing with First-Order Allpass Filters." — Kiiski, R., Esqueda, F., & Välimäki, V. (2016). "Time-Variant Gray-Box Modeling of a Phaser Pedal." *DAFx-16*, Brno. — Dattorro, J. (1997). "Effect Design Part 1: Phaser and Flanger." *Journal of the Audio Engineering Society*, Preprint 4776. — Chamberlain, R. (2021). *The Phaser: From Univibe to Digital Emulation*. Stanford CCRMA.
+
+### Layer
+**absolute** — sound production method. Post-Processing / DSP that applies a time-varying allpass filter chain to a rendered audio buffer to create moving spectral notches through phase cancellation. Candidate code path: `sound/effects/phaser.py`.
+
+### Description
+**Phaser / Allpass Modulation Synthesis (APS)** is a classic modulation effect that produces a sweeping comb-filter-like spectrum by passing a signal through a cascade of first-order allpass filters with time-varying break frequencies, then mixing the processed (wet) signal back with the original (dry) signal. The allpass filters have unity gain at all frequencies but introduce a frequency-dependent phase shift. When the phase-shifted wet signal is summed with the dry signal, frequencies where the accumulated phase shift equals an odd multiple of $\pi$ (i.e., $\pi, 3\pi, 5\pi, \dots$) cancel destructively, creating spectral notches. As the allpass break frequencies are modulated by a low-frequency oscillator (LFO), these notches sweep up and down the frequency spectrum, producing the characteristic "whoosh" or "swirl" of the phaser effect.
+
+APS is the allpass-based counterpart to the delay-line-based flanger (SP-059 FDLMS). While a flanger uses a modulated delay line to create moving notches through comb filtering (notches at $f = (k+0.5)/\tau$ for delay $\tau$), the phaser uses allpass filters whose phase shift varies with frequency, producing notches at frequencies where the cascade's total phase shift crosses $(2k+1)\pi$. The phaser produces typically 2–8 notches (4–16 allpass stages), each updated per sample, with a smoother, more "phasey" sound than the sharper flanger. Classic phaser pedals: MXR Phase 90 (4 stages, 2 notches), Univibe (4 stages), Small Stone (4 stages), Mu-Tron Phasor (6 stages).
+
+### Technical Mechanics
+
+**First-Order IIR Allpass Filter.** The fundamental building block is the first-order allpass filter:
+
+$$H_{\mathrm{AP}}(z) = \frac{a + z^{-1}}{1 + a z^{-1}}$$
+
+where $a \in (-1, 1)$ is the allpass coefficient. The difference equation is:
+
+$$y[n] = a\,x[n] + x[n-1] - a\,y[n-1]$$
+
+The magnitude response $|H_{\mathrm{AP}}(e^{j\omega})| = 1$ for all $\omega$ (unity gain). The phase response:
+
+$$\Theta(\omega) = -2\arctan\left(\frac{(1-a^2)\sin\omega}{(1+a^2)\cos\omega + 2a}\right)$$
+
+The break frequency $f_b$ (where phase shift = $-\pi/2$) relates to the coefficient $a$ via the bilinear transform:
+
+$$a = \frac{\tan(\pi f_b / f_s) - 1}{\tan(\pi f_b / f_s) + 1}$$
+
+**Allpass Chain.** The phaser uses $N$ first-order allpass filters in series (cascade). The total phase shift of the chain is:
+
+$$\Theta_{\mathrm{total}}(\omega) = \sum_{i=1}^{N} \Theta_i(\omega)$$
+
+When the wet signal (output of the allpass chain) is summed with the dry signal at mix ratio $g$ (the depth control), the total transfer function is:
+
+$$H_{\mathrm{phaser}}(z) = 1 + g \prod_{i=1}^{N} H_{\mathrm{AP},i}(z)$$
+
+The amplitude response becomes a comb-like pattern of notches:
+
+$$|H_{\mathrm{phaser}}(e^{j\omega})| = \sqrt{1 + g^2 + 2g\cos[\Theta_{\mathrm{total}}(\omega)]}$$
+
+Notches occur when $\Theta_{\mathrm{total}}(\omega) = (2k+1)\pi$ for integer $k$, i.e., the wet signal is exactly out of phase with the dry. For $N$ first-order allpass stages, the number of notches equals $N/2$ (because each stage contributes a total phase shift of $\pi$ over $0 < \omega < \pi$).
+
+**Notch frequencies** depend on the allpass coefficients $\{a_i\}$. With widely spaced break frequencies, the notches are distributed across the spectrum; with closely spaced coefficients, notches cluster. Classic phasers space the break frequencies geometrically (e.g., 100, 200, 400, 800 Hz for 4 stages).
+
+**LFO Modulation.** Each stage's break frequency is modulated by an LFO (typically sine, triangle, or random). The modulated coefficient for stage $i$ at sample $n$ is:
+
+$$f_{b,i}[n] = f_{\min} + \frac{1}{2}\bigl(1 + \sin(\omega_{\mathrm{lfo}} n + \phi_i)\bigr) (f_{\max} - f_{\min})$$
+
+$$a_i[n] = \frac{\tan\bigl(\pi f_{b,i}[n] / f_s\bigr) - 1}{\tan\bigl(\pi f_{b,i}[n] / f_s\bigr) + 1}$$
+
+where:
+- $\omega_{\mathrm{lfo}} = 2\pi f_{\mathrm{lfo}} / f_s$ = LFO angular frequency per sample
+- $\phi_i = i \pi / N$ = phase offset per stage (spreads notches evenly)
+- $f_{\min}$, $f_{\max}$ = sweep range (typical 100–4000 Hz for guitar, or 20–20000 Hz for full-band)
+
+The coefficient $a_i[n]$ must be computed for every sample $n$ if the LFO rate is high relative to audio rate, but for typical LFO rates (0.1–5 Hz) the coefficient can be updated block-wise (e.g., every 64–256 samples) with linear interpolation between blocks.
+
+**Feedback.** A portion of the allpass chain output is fed back to the input, deepening the notches and adding resonance around the notch frequencies:
+
+$$x'[n] = x[n] + \beta \cdot y_{\mathrm{wet}}[n-1]$$
+
+where $\beta \in [0, 0.95)$ is the feedback gain. Higher feedback creates sharper, more resonant notches approaching self-oscillation as $\beta \to 1$. Negative feedback ($\beta < 0$) inverts the feedback polarity, converting notches to peaks.
+
+**Stereo Phaser.** A stereo phaser runs two parallel instances with opposite LFO phases (offset by $\pi$ radians) on the left and right channels. This creates a wide, swirling stereo image:
+
+$$y_L[n] = \text{phaser}(x[n], \phi_{\mathrm{lfo}}), \quad y_R[n] = \text{phaser}(x[n], \phi_{\mathrm{lfo}} + \pi)$$
+
+**Complexity.** Each allpass stage requires 2 multiplications and 2 additions per sample. For $N$ stages: $2N$ multiplications and $2N$ additions. Feedback adds 1 multiplication + 1 addition. LFO coefficient update adds 1 sine lookup (or table read) + a few arithmetic ops per stage per block. Total: $\mathcal{O}(N)$ per sample — negligible even for $N=16$ on modern CPU.
+
+**Variants:**
+- **2nd-order allpass phaser**: Uses second-order allpass filters $H_{\mathrm{AP2}}(z) = \frac{a_2 + a_1 z^{-1} + z^{-2}}{1 + a_1 z^{-1} + a_2 z^{-2}}$ which produce 2 notches per 2 stages (same efficiency as 2 first-order stages) but with steeper phase transitions (narrower notches, more "phasey" sound).
+- **Bi-Quad phaser (Dattorro 1997)**: Combines 4th-order IIR allpass filters where one real coefficient sets two notches simultaneously, reducing computation.
+- **Vintage circuit emulation (Kiiski et al. 2016)**: Grey-box models of analog phasers (MXR Phase 90, Univibe) use measured LFO shape and pre-distortion from the op-amp circuit, accurately reproducing the pedal's asymmetric sweep and tonal character.
+
+### Musical Elements Framework
+
+- **PITCH**: The phaser does not alter the pitch of the input signal. However, the sweeping notches selectively attenuate certain harmonic partials over time, creating the sensation of timbral motion. Low-rate LFO ($f_{\mathrm{lfo}} < 0.5$ Hz) produces slow timbral evolution; high-rate LFO ($f_{\mathrm{lfo}} > 2$ Hz) creates a vibrato-like spectral shimmer that can mask pitch.
+
+- **RHYTHM**: The phaser is tempo-free — its LFO runs at an independent rate in Hz, not locked to the beat grid. However, the LFO rate can be synchronized to tempo by setting $f_{\mathrm{lfo}} = \mathrm{BPM} / (60 \cdot R)$ where $R$ is the number of beats per LFO cycle (e.g., $R=2$ for one notch-sweep per half-note). Synced phaser creates rhythmic spectral gating that reinforces the groove. The attack transient is preserved (allpass filters have no ringing), so percussive material retains its rhythmic clarity.
+
+- **HARMONY**: The phaser does not change the harmonic content directly, but the selective cancellation of partials alters the perceived chord balance. A notch passing through a chord's upper partials can momentarily thin the texture; a notch in the low-mid range (200–500 Hz) can make the chord feel "hollow." Feedback resonance around notch frequencies can reinforce specific partials, creating dynamic harmonic emphasis that evolves with the LFO sweep.
+
+- **STRUCTURE**: The phaser parameters (stage count, LFO rate/depth, feedback, sweep range, wet/dry mix) are per-section controls in the UnitMatrix. A piece's macro-form can be outlined by phaser parameter arcs:
+  - Intro: slow, shallow sweep, dry-heavy mix (subtle shimmer)
+  - Verse: medium rate, moderate feedback, balanced mix
+  - Chorus: fast rate, deep sweep, high feedback (intense "whoosh")
+  - Bridge: LFO off, fixed notch positions (static filter comb)
+  - Outro: slow sweep with increasing wet mix (dissolving texture)
+
+- **TEXTURE**: Texture is the phaser's primary musical parameter.
+  - **Low stage count (2–4 stages, 1–2 notches)**: Subtle, gentle texture — "air" and "space" without obvious modulation.
+  - **Medium stage count (4–8 stages, 2–4 notches)**: Classic phaser texture — the familiar swoosh of 70s funk/R&B.
+  - **High stage count (8–16 stages, 4–8 notches)**: Dense, complex texture — multiple notches create a "swirling" or "phase-shimmer" effect, approaching a flanger in density.
+  - **High feedback**: Adds resonance peaks alongside notches — creates a singing, filter-sweep texture (self-oscillating at extreme settings).
+  - **Stereo phaser with opposite LFO**: Creates a wide, enveloping texture with phase cancellation between channels.
+
+### UnitMatrix Integration
+
+- **Rows (Voices)**: Each voice in the UnitMatrix can be processed through an independent phaser instance with its own parameter set. This enables per-voice phaser depth: lead vocal with subtle phaser, rhythm guitar with moderate phaser, pad synth with deep sweeping phaser. Alternatively, all voices can be summed and sent through a shared stereo phaser for coherent spatial movement (common in mix/master).
+
+- **Columns (Sections)**: Each section $s$ defines a phaser preset $(\mathrm{stages}_s, f_{\mathrm{lfo},s}, \mathrm{depth}_s, \beta_s, f_{\min,s}, f_{\max,s}, \mathrm{mix}_s)$. Section-level parameter arcs automate the phaser over the song form. Transitions between sections can crossfade or abruptly switch phaser states, each producing a different musical effect.
+
+- **Cells $U_{v,s}$**: Within each voice-section cell:
+  - `phaser_enabled`: boolean (default True to keep signal path clean when bypassed)
+  - `num_stages`: int (2, 4, 6, 8, 10, 12, or 16 — must be even)
+  - `lfo_rate`: float (Hz, typically 0.05–5.0)
+  - `lfo_depth`: float (0.0–1.0 fractional depth)
+  - `feedback`: float (0.0–0.95)
+  - `sweep_range`: tuple (f_min, f_max) in Hz
+  - `wet_mix`: float (0.0–1.0 dry/wet ratio)
+  - `stereo_spread`: float (0.0–1.0, fraction of $\pi$ phase offset between channels)
+  - `lfo_waveform`: string ("sine", "triangle", "square", "saw", "random")
+  
+  Rendering flow: section $s$ → load per-voice cell parameters → allocate allpass state (1 delay memory per stage) → for each sample $n$ in the voice's rendered buffer: compute LFO phase, update $\{a_i\}$ coefficients, run allpass chain, apply feedback, mix dry/wet → output processed audio per voice.
+
+- **Zero-drift**: Allpass filters are exactly unity-gain and introduce zero DC offset when implemented with direct-form II transposed or the two-comb structure. The state memories $d_i[n] = x[n] - a_i y_i[n]$ stay bounded. No drift accumulates over any length of processing.
+
+### Pitfalls
+
+1. **Coefficient stability at extreme frequencies**: As $f_b \to 0$, $a \to -1$; as $f_b \to f_s/2$, $a \to 1$. At these extremes, the allpass becomes marginally stable (pole at $z \to \pm 1$). Clamp $f_b$ to $[20, f_s/2 - 20]$ Hz to keep $|a| \leq 0.999$ and avoid DC buildup or oscillation. Alternatively, clamp $a$ directly to $(-1+10^{-6}, 1-10^{-6})$.
+
+2. **LFO coefficient update cost**: Computing $a_i[n]$ per sample via $\tan()$ is expensive. Mitigations:
+   - Block update (every 64–256 samples) with linear interpolation of $a_i$ between blocks
+   - Precompute a lookup table of $a$ values over the sweep range and index by LFO phase
+   - Use the approximation $a \approx \frac{1 - \pi f_b/f_s}{1 + \pi f_b/f_s}$ (from $\tan(x) \approx x$ for small $x$), valid up to $f_b/f_s < 0.1$
+
+3. **Phase cancellation with downstream processing**: If the phaser output is sent through a reverb (SP-032/SP-071), the swampy phase relationships can produce unwanted comb filtering between wet and reverb returns. Solution: insert the phaser *after* reverb (post-spatialization), or use a short predelay before reverb to decorrelate the phaser phase from the reverb tail.
+
+4. **Transient preservation**: Allpass filters are dispersive — they smear transient energy in time (group delay varies with frequency). A sharp attack (percussive hit) will emerge from the allpass chain with the attack energy spread across a few samples, softening the transient. For percussive material, reduce wet mix (parallel dry/wet blend preserves the dry transient) or use the phaser before inserting dynamics processing (SP-008/SP-073) which can restore the attack.
+
+5. **Modulation rate and LFO waveform**: A sine LFO produces a smooth "breathing" sweep; a triangle LFO produces a more perceptually linear sweep (notches move at constant rate in Hz). A square LFO jumps between two static positions (stepped phaser, useful for "phased rhythm" effects). The right LFO shape depends on musical context — sine is the default, triangle for tempo-sync'd motion, square for step changes.
+
+6. **Notch density vs. CPU**: Each stage adds 2 MACs per sample, so 16 stages = 32 MACs/sample = 1.6 M MACs/sec at 48 kHz — negligible. However, the state memory per stage (1 float per stage) and coefficient computation (if per-sample) can add up in large VST instrument instances with 64 voices of polyphony. Use block coefficient updates and compile with SIMD vectorization for polyphonic use.
+
+7. **Phaser vs. flanger confusion**: A phaser uses allpass filters (frequency-dependent phase shift, uniform magnitude) while a flanger uses a modulated delay line (comb filter with notches at $f = (k+0.5)/\tau$). The phaser produces fewer, wider notches with a smoother sweep; the flanger produces many narrow notches with a sharper "jet-plane" sound. The two effects can be distinguished by the notch density — a phaser has $N/2$ notches, a flanger has $f_s/(2\tau_{\min})$ notches. For a typical 4-stage phaser at 44.1 kHz, 2 notches; for a flanger at 5 ms delay, 100 notches.
+
+8. **Stereo image collapse at mono sum**: The stereo phaser with opposite-phase LFOs can partially cancel in mono sum (L+R) at certain LFO phases, because the left and right channels have opposite phase relationships. Mitigation: use a moderate stereo spread ($< 0.5\pi$ offset) or precede the phaser with a mid-side encoder and apply the phaser only to the side channel (SP-007 style mid-side processing).
+
+Candidate code path: `sound/effects/phaser.py` — implements a `PhaserEngine` class with configurable stage count, LFO rate/depth, feedback, sweep range, and wet/dry mix. Supports mono and stereo modes. Per-sample processing loop with block-updated allpass coefficients. UnitMatrix integration via PhaserCellConfig dataclass.

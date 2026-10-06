@@ -589,6 +589,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Keys | Celesta | 8 | 48–108 | lead, melody, ornament, arpeggio, countermelody, accent |
 | Keys | Accordion | 21 | 36–96 | harmony, melody, bass, rhythm, ornament |
 | Keys | Clavi | 7 | 29–89 | lead, rhythm, accent, ornament, countermelody |
+| Keys | Electric Piano 1 (Rhodes) | 4 | 36–96 | harmony, melody, bass, accent, color |
 | Brass | Trumpet | 56 | 54–86 | lead, accent, fanfare |
 | Brass | Muted Trumpet | 59 | 54–86 | lead, countermelody, accent, melody, ornament |
 | Brass | Trombone | 57 | 40–78 | bass, counter, accent, harmony |
@@ -679,6 +680,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 ||| 67 | Baritone Sax | Baritone_Sax ✓ (GM_PROGRAMS[67] = "Baritone Sax"; FluidR3 preset 67 = "Baritone Sax" — labels match exactly, **no quirk**) |
 |||| 21 | Accordion | Accordion ✓ (GM_PROGRAMS[21] = "Accordion"; FluidR3 preset 21 = "Accordian" — archaic SF2 spelling, cosmetic only, no routing impact) |
 ||| 10 | Music Box | Music_Box ✓ (GM_PROGRAMS[10] = "Music Box"; FluidR3 preset 10 = "Music Box" — labels match exactly, **no quirk**) |
+||| 4 | Electric Piano 1 | Electric_Piano_1 ✓ (GM_PROGRAMS[4] = "Electric Piano 1"; FluidR3 preset 4 = "Rhodes EP" — internal SF2 name, cosmetic only, no routing impact) |
 || ch9/pgm0 | Drums | **Acoustic_Grand_Piano** ✗ (program-0 fallback) |
 
 > **Known off-by-one in existing entries**: ~~`trumpet.py` uses 57~~ **FIXED 2026-08-27**: trumpet is now 56 (SF2 preset 56=`SoloTrumpet`). `piano.py`=1 → actually Bright Acoustic Piano (GM #2) — cosmetic label difference only, no routing impact. Legacy registry rows kept as-is for piano; new instruments use 0-indexed programs matching pipeline+SF2.
@@ -807,3 +809,27 @@ accent -- bright lead voice that cuts through any ensemble. REVERB_TAIL 1.4 s (d
 bright attack clear -- shortest in the Woodwind family). EQ body cut 800 Hz (soprano reed honk
 is higher than alto's 400 Hz). Stem label: GM_PROGRAMS[64] = "Soprano Sax" →
 `trackXX_Soprano_Sax.wav` (matches exactly, **no quirk**).
+
+**Rhodes (Electric Piano 1) added** (2026-10-06): GM4, Keys-family eighth
+entry — the Fender Rhodes electromechanical tine piano, the classic 70s
+warm/bell-like electric piano (electric pianos 1 in GM spec: Rhodes/Wurlitzer
+family) (instrument.md + rhodes.py), verified end-to-end UnitMatrixComposer →
+zero-drift ✓ → MIDI (82 bytes) → FluidSynth WAV (731 KB) ✓; RenderPipeline
+stem label `trackXX_Electric_Piano_1.wav` ✓ (GM_PROGRAMS[4] = "Electric Piano
+1", FluidR3 preset 4 = "Rhodes EP" — internal SF2 name "Rhodes EP" vs pipeline
+"Electric Piano 1" is cosmetic only, **no routing impact**). ModalSynth primary
+with stock 'string' preset and custom `RHODES_MODES` bank at compressed
+inharmonic ratios 1:2.3:4.1:6.8 with decay rates 1.5–3.0. Karplus-Strong
+secondary (tine IS a struck waveguide; loop_gain 0.9965 between clavi 0.9960
+and sitar 0.9975, with lowpass_hz 2000 for pickup bandwidth). PhaseModSynth
+tertiary (FM synth, ratio 2.3, depth 1.8). Solo-render spectral check:
+4–8 kHz buzz 1.4% (no comb-filtering). Empirical FluidR3 pitch sweep (RMS,
+notes 36–96): preset 4 audible across full range, no gaps — SF2 never clips a
+composition. Registration proof: `by_name('rhodes')` → Electric Piano 1,
+`by_program(4)` → Electric Piano 1, `in_sweet_spot(69)` = True,
+`in_sweet_spot(30)` = False. Registration in `instrument_registry.py` as RHODES
+convenience constant. Identity quirk: pickup compression narrows dynamic range
+by ~3-4 dB per octave vs acoustic piano — phrase with REGISTRATION (voicing
+density, chord spacing) as much as with velocity. Stem label: no pipeline quirk
+but FluidR3 internal name is "Rhodes EP" vs pipeline "Electric Piano 1"
+(cosmetic, no routing impact).

@@ -1,0 +1,19 @@
+{
+  "method": "SP-091",
+  "project": "212-indian-boids-yaman",
+  "scale": "Yaman raga (C Lydian)",
+  "pcs": [
+    0,
+    2,
+    4,
+    6,
+    7,
+    9,
+    11
+  ],
+  "status": "PASS",
+  "hit_rate": 0.9675675675675676,
+  "harmonic_energy_mean": 0.38876678785587254,
+  "windows_analyzed": 185,
+  "median_freq_hz": 262.0
+}

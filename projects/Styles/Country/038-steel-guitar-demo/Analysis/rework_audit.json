@@ -1,0 +1,58 @@
+{
+  "chosen": "Country/038-steel-guitar-demo",
+  "genre": "Country",
+  "primary_midi": "MIDI/country_ensemble_16bar.mid",
+  "audited_utc": "2026-10-06T01:14:09.493723",
+  "standard_failures": [
+    {
+      "id": 1,
+      "standard": "engine-not-hand-rolled",
+      "result": "FAIL",
+      "evidence": "src/16bar_ensemble.py authors MIDI via raw mido.MidiTrack()/Message('note_on')/mid.save(); no UnitMatrixComposer import."
+    },
+    {
+      "id": 2,
+      "standard": "zero-drift",
+      "result": "FAIL",
+      "evidence": "voice track lengths differ: Acoustic Bass=30480 ticks vs Rhythm Guitar=34330 ticks (15.88 vs 17.88 bars)."
+    },
+    {
+      "id": 3,
+      "standard": "rhythm-grid-sync",
+      "result": "FAIL",
+      "evidence": "448 of 576 pitched onsets off the 120/240 grid (chord strum notes drift +10..110 ticks due to delta-time stacking)."
+    },
+    {
+      "id": 4,
+      "standard": "valid-track-setup",
+      "result": "FAIL",
+      "evidence": "only 2 voice tracks (Bass, Rhythm Guitar); requirement >= 4 (Lead/Pad/Bass/Drums ch9)."
+    },
+    {
+      "id": 5,
+      "standard": "two-phase-artifacts",
+      "result": "FAIL",
+      "evidence": "no <id>-phase1.mid present."
+    },
+    {
+      "id": 6,
+      "standard": "provenance+index",
+      "result": "FAIL",
+      "evidence": "provenance.json and index.html both missing."
+    }
+  ],
+  "redesign_required": true,
+  "source_identity": {
+    "genre": "Country",
+    "key": "G major",
+    "bpm": 90,
+    "progression": "G-C-D (I-IV-V)",
+    "core_motif": "steel-slide bend up a third (1->3->5, G->B->D); ascending slide contour with one descending reset",
+    "instrumentation": [
+      "steel guitar (lead, GM 25)",
+      "acoustic guitar (rhythm comp)",
+      "acoustic bass (GM 32)",
+      "drums (ch9, implied)"
+    ]
+  }
+}

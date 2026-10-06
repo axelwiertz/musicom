@@ -1,0 +1,32 @@
+{
+  "phase1": {
+    "file": "225-country-steel-rework-phase1.mid",
+    "bytes": 1320,
+    "n_voice_tracks": 1,
+    "voice_track_lengths": [
+      46080
+    ],
+    "zero_drift": true,
+    "pitched_onsets": 141,
+    "off_grid": 141,
+    "scale_violations": 25,
+    "chord_violations": 55
+  },
+  "phase2": {
+    "file": "225-country-steel-rework.mid",
+    "bytes": 6842,
+    "n_voice_tracks": 5,
+    "voice_track_lengths": [
+      46080,
+      46080,
+      46080,
+      46080,
+      46080
+    ],
+    "zero_drift": true,
+    "pitched_onsets": 555,
+    "off_grid": 0,
+    "scale_violations": 0,
+    "chord_violations": 0
+  }
+}

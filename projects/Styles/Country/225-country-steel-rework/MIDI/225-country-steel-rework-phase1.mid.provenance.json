@@ -1,0 +1,20 @@
+{
+  "artifact": "225-country-steel-rework-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "steel-slide random walk (jittered raw draft, SEED=20261006)",
+  "sources": [
+    "/opt/data/projects/Styles/Country/038-steel-guitar-demo/MIDI/country_ensemble_16bar.mid"
+  ],
+  "parameters": {
+    "phase": 1,
+    "seed": 20261006,
+    "key": "G major",
+    "bpm": 90,
+    "rules": "none (pre-rules)"
+  },
+  "notes": "Raw generative draft. Off-grid onsets + out-of-key pitches by design; single voice.",
+  "sha256": "d497727cb5355abfd44cd8562b880303d091e053ae4004e99e8f42c14d7ac436",
+  "bytes": 1320,
+  "created_utc": "2026-10-06T01:13:52.145062+00:00",
+  "provenance_version": "1.0"
+}

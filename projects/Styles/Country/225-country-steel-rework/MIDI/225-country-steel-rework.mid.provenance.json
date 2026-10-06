@@ -1,0 +1,21 @@
+{
+  "artifact": "225-country-steel-rework.mid",
+  "classification": "ai-assisted",
+  "generator": "steel-slide random walk + musicom rules (chord-tone quantize, grid snap)",
+  "sources": [
+    "/opt/data/projects/Styles/Country/038-steel-guitar-demo/MIDI/country_ensemble_16bar.mid",
+    "/opt/data/projects/Styles/Country/225-country-steel-rework/MIDI/225-country-steel-rework-phase1.mid"
+  ],
+  "parameters": {
+    "phase": 2,
+    "seed": 20261006,
+    "key": "G major",
+    "bpm": 90,
+    "rules": "chord-tone quantize + 120-tick grid snap + dedup + register enforcement"
+  },
+  "notes": "Rules-processed full arrangement. 5 voices, 24 bars, per-section harmonic regions.",
+  "sha256": "84da82fba9aff26a280489ca9b89a67da05201560f8d6dea2065917b08062a7f",
+  "bytes": 6842,
+  "created_utc": "2026-10-06T01:13:52.145393+00:00",
+  "provenance_version": "1.0"
+}

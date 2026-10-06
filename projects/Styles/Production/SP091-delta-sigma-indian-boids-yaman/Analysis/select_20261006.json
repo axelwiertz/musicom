@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-06",
+  "method": "SP-091",
+  "method_module": "sound.effects.delta_sigma_saturator",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/IndianClassical/212-indian-boids-yaman/MIDI/212-indian-boids-yaman.mid",
+  "recent_excluded": [
+    "SP021",
+    "SP072",
+    "SP075",
+    "SP079",
+    "SP080",
+    "SP081",
+    "SP083",
+    "SP086"
+  ],
+  "registry_total": 40
+}

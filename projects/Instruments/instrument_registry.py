@@ -60,6 +60,7 @@ _INSTRUMENT_MODULES = {
     "Percussion.tubular_bells.tubular_bells": "tubular_bells",
     "Percussion.timpani.timpani": "timpani",
     "Keys.accordion.accordion": "accordion",
+    "Keys.rhodes.rhodes": "rhodes",
     "World.sitar.sitar": "sitar",
     "World.koto.koto": "koto",
     "World.shamisen.shamisen": "shamisen",
@@ -212,6 +213,7 @@ DULCIMER = ALL_INSTRUMENTS["dulcimer"]
 HARPSICHORD = ALL_INSTRUMENTS["harpsichord"]
 CELESTA = ALL_INSTRUMENTS["celesta"]
 ACCORDION = ALL_INSTRUMENTS["accordion"]
+RHODES = ALL_INSTRUMENTS["rhodes"]
 TRUMPET = ALL_INSTRUMENTS["trumpet"]
 TROMBONE = ALL_INSTRUMENTS["trombone"]
 FRENCH_HORN = ALL_INSTRUMENTS["french_horn"]
@@ -365,6 +367,8 @@ def registry_table():
             role = "lead, melody, countermelody"
         elif low == "soprano saxophone":
             role = "lead, countermelody, ornament, accent"
+        elif low == "electric piano 1":
+            role = "harmony, melody, bass, accent, color"
         else:
             role = "lead, harmony, accent"
         rng = f"{inst.range_min}–{inst.range_max}" if inst.range_min else "-"
@@ -514,3 +518,13 @@ if __name__ == "__main__":
     print("  by_program(64) =", by_program(64))
     print("  SOPRANO_SAX.in_sweet_spot(72) =", SOPRANO_SAX.in_sweet_spot(72))
     print("  SOPRANO_SAX.in_sweet_spot(50) =", SOPRANO_SAX.in_sweet_spot(50))
+    print()
+    print("=== Rhodes (Electric Piano 1, GM4) ===")
+    print("  RHODES.midi_program =", RHODES.midi_program, "(should be 4)")
+    print("  by_name('rhodes') =", by_name("rhodes"))
+    print("  by_name('electric piano 1') =", by_name("electric piano 1"))
+    print("  by_program(4) =", by_program(4))
+    print("  RHODES.in_sweet_spot(69) =", RHODES.in_sweet_spot(69))
+    print("  RHODES.in_sweet_spot(30) =", RHODES.in_sweet_spot(30))
+    print("  RHODES.range_min =", RHODES.range_min, "RHODES.range_max =", RHODES.range_max)
+    print("  RHODES.stem_label =", repr(RHODES.stem_label))
