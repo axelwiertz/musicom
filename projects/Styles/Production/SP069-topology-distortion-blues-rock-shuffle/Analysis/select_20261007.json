@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-07",
+  "method": "SP-069",
+  "method_module": "sound.effects.topology_distortion",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Hybrid/018-rock-apprenticeship/MIDI/study-02-blues-rock-shuffle-engine.mid",
+  "recent_excluded": [
+    "SP-021",
+    "SP-072",
+    "SP-075",
+    "SP-080",
+    "SP-083",
+    "SP-086",
+    "SP-091"
+  ],
+  "registry_total": 40,
+  "note": "first draw landed on Country/012-country-country-uke/MIDI/country_uke_8bars.mid (degenerate: tpb 10080, no programs) -> re-rolled to well-formed candidate"
+}

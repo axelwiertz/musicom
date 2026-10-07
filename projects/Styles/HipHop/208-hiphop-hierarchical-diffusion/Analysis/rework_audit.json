@@ -1,0 +1,36 @@
+{
+  "chosen": "208-hiphop-hierarchical-diffusion",
+  "genre": "HipHop",
+  "source_path": "/opt/data/repos/musicom/projects/Styles/HipHop/208-hiphop-hierarchical-diffusion",
+  "source_midi": "MIDI/208-hiphop-hierarchical-diffusion.mid",
+  "audit_date": "2026-10-07",
+  "standard_failures": [],
+  "redesign_required": false,
+  "decision": "extension",
+  "standards": {
+    "1_engine": {"pass": true, "note": "compose.py imports from workflows.unitmatrix_composer.UnitMatrixComposer"},
+    "2_zero_drift": {"pass": true, "note": "5 voice tracks all length 61440 ticks"},
+    "3_rhythm_grid_sync": {"pass": true, "note": "0 off-grid of 359 pitched onsets"},
+    "4_valid_track_setup": {"pass": true, "note": "5 voice tracks (4 pitched + ch9 drums)"},
+    "5_two_phase_artifacts": {"pass": true, "note": "both .mid and -phase1.mid present"},
+    "6_provenance_and_dashboard": {"pass": true, "note": "provenance.json + index.html present"}
+  },
+  "source_identity": {
+    "genre": "HipHop (boom-bap backbeat, sub bass, chord stabs, swung 16ths)",
+    "key": "A natural minor",
+    "pitch_classes": [9, 11, 0, 2, 4, 5, 7],
+    "tempo_bpm": 90,
+    "meter": "4/4",
+    "form": "8 sections x 4 bars = 32 bars",
+    "progression": "i-VI-III-VII (Am-F-C-G), bridge F-C-G-Am",
+    "method": "010 Hierarchical Diffusion (Ornstein-Uhlenbeck drift + Galton-Watson onset branching)",
+    "instrumentation": {
+      "LeadHook": "Piano (GM 1, ch 0)",
+      "KeysPad": "Church Organ (GM 19, ch 1)",
+      "SubBass": "Double Bass (GM 43, ch 2)",
+      "SparkleStab": "Celesta (GM 8, ch 3)",
+      "Drums": "Drum Kit (ch 9)"
+    },
+    "core_motif": "diffused chord-tone hook, OU drift toward each bar's chord root"
+  }
+}

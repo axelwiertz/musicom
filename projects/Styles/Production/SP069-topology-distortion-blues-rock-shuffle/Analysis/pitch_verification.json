@@ -1,0 +1,24 @@
+{
+  "method": "SP-069",
+  "project": "018-rock-apprenticeship",
+  "scale": "E blues (source PCS)",
+  "pcs": [
+    0,
+    1,
+    2,
+    4,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "status": "PASS",
+  "hit_rate": 0.9903846153846154,
+  "harmonic_energy_mean": 0.20667083216412327,
+  "dry_harmonic_energy_mean": 0.2442115643543308,
+  "he_retention": 0.8462778276308855,
+  "windows_analyzed": 104,
+  "median_freq_hz": 262.0
+}

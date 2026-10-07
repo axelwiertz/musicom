@@ -114,7 +114,8 @@ Classification of active Musicom composition methods categorized by their primar
 || **104** | abstract | Parsimonious Subset Sequence Composition (PSSC) | **Rules-Based** | Pitch, Harmony, Structure, Texture | Moderate (Scale-subset filtered) | Grid-Locked / Continuous | Macro / Circular Sequence | $\mathcal{O}(C(n,p) \cdot p)$ | Generalises parsimonious voice leading from Neo-Riemannian triadic theory to ANY n-subsets of any p-scale. Constructs exhaustive, non-redundant, circular (nrep) chord progressions via set-theoretic relations (Rp/Re/Rf), 2D table, and lexicographic walk. Inversion-bipartition (2024) yields paired voice strands. Abstract-layer subset design: feeds rules/subset_network.py. |
 | **105** | concrete | Pólya Urn Reinforcement Composition (PURC) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Reinforcement-guided, HOME/LIFT/TENSE/TURN via prior) | Grid-Locked / Continuous | Meso / Urn State | $\mathcal{O}(N \cdot K)$ per section | Generates musical sequences via self-reinforcing Pólya urn draws: each pitch/rhythm/token becomes more likely the more it is used (rich-get-richer). Urn prior encodes tonal gravity and metric binding; innovation parameter controls novelty rate; Pitman-Yor discount controls power-law tail of token distribution. Coupled per-voice urns enforce vertical harmonic coherence. Self-reinforcing stochastic counterpart to 002 Markov (fixed-probability) and 086 HMM (latent-state); sequential generative sibling of 084 ZMRC (static rank-frequency law). |
 | **106** | concrete | Non-Autoregressive Parallel Composition (NAPC) | **AI-Driven** | Pitch, Rhythm, Harmony, Structure, Texture | Variable (Bidir-context-guided) | Grid-Locked / Continuous | Macro / Mask-Predict Iterations | $\mathcal{O}(R \cdot V \cdot T \cdot d)$ | Generates all musical tokens in parallel via iterative mask-refinement (mask-predict): start from a fully masked UnitMatrix and iteratively unmask the most confident predictions. Bidirectional transformer provides full left-right context per token. Non-autoregressive counterpart to 054 ATS; discrete refinement foil to 047 DSMG. |
-| **107** | concrete | Stochastic Differential Equation Composition (SDEC) | **Nature-Led** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Drift-field-guided) | Continuous / Fluid | Macro / Trajectory Horizon | $\mathcal{O}(V^2 d^2 \cdot T)$ | Models each musical parameter as a continuous-time Itō SDE with designed drift and diffusion fields. Drift = tonal gravity, diffusion = creative uncertainty. Multi-voice correlated SDEs encode harmonic coherence and voice-leading. Continuous-time Nature-Led counterpart to 048 RBMPD (generalized) and 097 MaxEnt-C (dynamical foil). |
+|| **107** | concrete | Stochastic Differential Equation Composition (SDEC) | **Nature-Led** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Drift-field-guided) | Continuous / Fluid | Macro / Trajectory Horizon | $\mathcal{O}(V^2 d^2 \cdot T)$ | Models each musical parameter as a continuous-time Itō SDE with designed drift and diffusion fields. Drift = tonal gravity, diffusion = creative uncertainty. Multi-voice correlated SDEs encode harmonic coherence and voice-leading. Continuous-time Nature-Led counterpart to 048 RBMPD (generalized) and 097 MaxEnt-C (dynamical foil). |
+|| **108** | concrete | Hyperdimensional Computing Composition (HDCC) | **AI-Driven** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Prototype-similarity-guided) | Grid-Locked / Continuous | Macro / Hypervector Trajectory | $\mathcal{O}(D \cdot N)$ | Encodes every musical element as a quasi-orthogonal high-dimensional random vector ($D \geq 10{,}000$) and composes via explicit algebraic operations (binding $\otimes$, bundling $+$, permutation $\rho$) over hypervectors. Binding creates role–filler structures (pitch $\otimes$ chord), bundling superpositions multi-voice polyphony, permutation encodes sequence order. Composition = encode section hypervectors $\rightarrow$ decode via similarity search item memory $\rightarrow$ fill UnitMatrix cells. No training — the HD algebra is the generative process. Brain-inspired, non-connectionist AI-Driven counterpart to 002 Markov / 054 ATS / 046 VAE-LSI. |
 |### Source
 |Sakellariou, J., Tria, F., Loreto, V. & Pachet, F. (2017). "Maximum entropy models capture melodic styles." *Scientific Reports* 7, 9172. arXiv:1610.03414. — Jaynes, E. T. (1957). "Information theory and statistical mechanics." *Physical Review* 106, 620–630.
 
@@ -277,8 +278,9 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 || **SP-102** | Amplitude Modulation Synthesis (AMS) | **Synthesis Engines** | AM Sideband / Tremolo Timbres | Modulates carrier oscillator amplitude with a modulator oscillator $m(t) = [1 + m \cos(2\pi f_m t)]$. Sub-audio $f_m$ = tremolo; audio-rate $f_m$ = DSB+Carrier sidebands at $f_c \pm f_m$. $m$ controls sideband strength; $m>1$ overmodulation. $\mathcal{O}(1)$ per sample per voice. Candidate: `sound/synthesis/am_synthesis.py`. |
 || **SP-103** | Crossover Band Distortion Synthesis (CBDS) | **Post-Processing / DSP** | Multiband Distortion / Frequency-Selective Saturation | Splits rendered audio into N frequency bands via Linkwitz-Riley crossover filters, applies independent distortion/saturation curve per band (soft clip, tape, tube, wavefolder, rectifier, bitcrush), then recombines. Prevents intermodulation between frequency regions that full-band waveshapers create. Per-band drive, envelope-follower modulation, and waveshaper type are controllable. $\mathcal{O}(N \cdot 20)$ per sample. Candidate: `sound/effects/crossover_distortion.py`. |
 || **SP-104** | Bitcrushing / Sample Rate Reduction Synthesis (SRR) | **Post-Processing / DSP** | Lo-Fi Degradation / Quantization Noise & Aliasing | Intentionally reduces bit depth and/or sample rate of a rendered buffer via re-quantization (rounding to $b$ bits) and sample-and-hold decimation (crush factor $R$). Produces characteristic quantization noise, aliased metallic artifacts, and lo-fi texture. Per-voice $b$ and $R$ create a "degradation stage." $\mathcal{O}(1)$ per sample. Candidate: `sound/effects/bitcrusher.py`. |
-||| **SP-105** | Coupled Resonant Filter Bank Synthesis (CRFBS) | **Synthesis Engines** | Nonlinear Modal Interaction / Impact, Cymbal & Plate Timbres | Banks of $N$ parallel Mathews-Smith complex-format IIR resonators exchanging energy through a redistribution matrix $\mathbf{M}$ to model nonlinear modal coupling. Captures delayed tonal components, spectral enrichment during impacts, and energy cascades that linear modal synthesis cannot produce. $\mathcal{O}(N)$ per sample. Candidate: `sound/synthesis/coupled_resonator.py`. |
-||| **SP-106** | Phaser / Allpass Modulation Synthesis (APS) | **Post-Processing / DSP** | Phase-Swept Modulation / Spectral Notch Filtering | Classic modulation effect using a cascade of allpass filters with LFO-modulated break frequencies to create moving spectral notches through phase cancellation when mixed with dry signal. $N/2$ notches for $N$ stages, depth/rate/feedback/sweep controls. $\mathcal{O}(N)$ per sample. Candidate: `sound/effects/phaser.py`. |
+| **SP-105** | Coupled Resonant Filter Bank Synthesis (CRFBS) | **Synthesis Engines** | Nonlinear Modal Interaction / Impact, Cymbal & Plate Timbres | Banks of $N$ parallel Mathews-Smith complex-format IIR resonators exchanging energy through a redistribution matrix $\mathbf{M}$ to model nonlinear modal coupling. Captures delayed tonal components, spectral enrichment during impacts, and energy cascades that linear modal synthesis cannot produce. $\mathcal{O}(N)$ per sample. Candidate: `sound/synthesis/coupled_resonator.py`. |
+| **SP-106** | Phaser / Allpass Modulation Synthesis (APS) | **Post-Processing / DSP** | Phase-Swept Modulation / Spectral Notch Filtering | Classic modulation effect using a cascade of allpass filters with LFO-modulated break frequencies to create moving spectral notches through phase cancellation when mixed with dry signal. $N/2$ notches for $N$ stages, depth/rate/feedback/sweep controls. $\mathcal{O}(N)$ per sample. Candidate: `sound/effects/phaser.py`. |
+| **SP-107** | Look-Ahead Brickwall Limiter (LBL) | **Post-Processing / DSP** | Peak Control / Loudness Maximization | Look-ahead brickwall limiter that delays the input signal, computes gain reduction via peak detection with attack/hold/release envelope shaping, applies the smoothed gain curve to the delayed signal, and ensures no sample exceeds the threshold. The final dynamics-control stage before render. |
 |---|
 
 
@@ -23733,3 +23735,231 @@ $$y_L[n] = \text{phaser}(x[n], \phi_{\mathrm{lfo}}), \quad y_R[n] = \text{phaser
 8. **Stereo image collapse at mono sum**: The stereo phaser with opposite-phase LFOs can partially cancel in mono sum (L+R) at certain LFO phases, because the left and right channels have opposite phase relationships. Mitigation: use a moderate stereo spread ($< 0.5\pi$ offset) or precede the phaser with a mid-side encoder and apply the phaser only to the side channel (SP-007 style mid-side processing).
 
 Candidate code path: `sound/effects/phaser.py` — implements a `PhaserEngine` class with configurable stage count, LFO rate/depth, feedback, sweep range, and wet/dry mix. Supports mono and stereo modes. Per-sample processing loop with block-updated allpass coefficients. UnitMatrix integration via PhaserCellConfig dataclass.
+# Look-Ahead Brickwall Limiter (LBL) (Sound Production Method SP-107)
+
+### Source
+Zölzer, U. (2011). *DAFX: Digital Audio Effects*, 2nd ed. John Wiley & Sons, Ch. 7 "Dynamic Range Control." — Velsberg, M. (2022). "Designing a Straightforward Limiter." *Signalsmith Audio Blog* — Smith, J. O. (2024). *Physical Audio Signal Processing* (online), Ch. 1 "Amplitude Response." — Rudrich, D. (2019). "LookAhead Limiters." *SimpleCompressor Docs*, GitHub. — Giannoulis, M., & Davies, J. (2014). "Digital Dynamic Range Compressor Design." *Proc. DAFx-14*, Erlangen. — Brix, L. (2019). *Digital Dynamic Range Processing*. Springer, Ch. 6 "Brickwall Limiting." — ITU-R BS.1770-4 (2015). "Algorithms to Measure Audio Programme Loudness and True-Peak Level." — Wiesner, A. (2019). "Lookahead Limiter Design Thoughts." *KVR DSP Forum.*
+
+### Layer
+**absolute** — sound production method. Post-Processing / DSP that applies a look-ahead brickwall limiter to a rendered audio buffer: delays the signal, computes per-sample gain reduction via peak detection and an envelope follower with attack/hold/release stages, then applies the smoothed gain curve before the peak arrives. Guarantees no sample exceeds the threshold. Candidate code path: `sound/effects/brickwall_limiter.py`.
+
+### Description
+**Look-Ahead Brickwall Limiter (LBL)** is the final dynamic-range control stage in a mastering chain, ensuring that no sample exceeds a specified amplitude threshold while preserving waveform integrity and maximizing perceived loudness. Unlike hard clipping (which introduces high-order harmonics) or full-band compression (SP-008, which uses ratio-based gain reduction), the brickwall limiter employs a predictive look-ahead strategy: it delays the input signal by a short window (typically 1–10 ms), analyzes the upcoming signal to compute gain reduction values, smooths them with configurable attack/hold/release envelope shaping, and applies the smoothed gain curve to the delayed signal. By gain-riding the envelope rather than saturating individual samples, it prevents audible intermodulation distortion while containing true-peak levels.
+
+The limiter consists of four cascaded stages: (1) a gain computer that converts the input envelope to a per-sample maximum-allowed gain $g_{\max}[n] = \\text{threshold} / |x[n]|$; (2) a peak-hold buffer that prevents the gain from rising too quickly after a peak (converting instantaneous thresholds into a sustained minimum gain); (3) an exponential release filter that controls how fast gain recovers after the peak-hold window expires; (4) a smoothing filter (boxcar cascade) that rounds the sharp corners of the gain curve. The processed gain curve is then multiplied with the delayed input buffer.
+
+LBL is the dynamics-control counterpart to SP-008 (multi-band dynamic range compression, which reduces the dynamic range of specific frequency bands) and SP-073 (transient/sustain shaping, which reshapes attack vs. sustain without threshold limiting). Where SP-008 operates with ratio-based gain reduction and SP-073 with differential envelope processing, LBL enforces a hard ceiling with zero overshoot by design. It is the essential last stage before final render (WAV/OGG export in the musicom pipeline).
+
+### Technical Mechanics
+
+**Gain Computer.** For each input sample $x[n]$ (mono or the maximum over all channels), the instantaneous required gain to stay below the threshold $T$ (linear amplitude, $T \\in (0, 1)$) is:
+
+$$g_{\\max}[n] = \\min\\left(1,\\, \\frac{T}{|x[n]|}\\right)$$
+
+In the logarithmic (dB) domain:
+
+$$G_{\\max}[n] = \\min\\left(0,\\, T_{\\text{dB}} - 20\\log_{10}|x[n]|\\right)$$
+
+where $T_{\\text{dB}} = 20\\log_{10} T$.
+
+If $|x[n]| \\leq T$, $g_{\\max} = 1$ (no reduction); if $|x[n]| > T$, $g_{\\max} < 1$.
+
+**Peak-Hold (Moving Minimum).** A peak-hold buffer of length $H = \\tau_{\\text{hold}} \\cdot f_s$ samples holds the minimum of $g_{\\max}$ over the look-ahead window. This prevents the gain envelope from recovering prematurely between closely spaced transients:
+
+$$g_{\\text{PH}}[n] = -\\text{peakHold}\\left(-g_{\\max}[n]\\right)$$
+
+Implemented as a circular buffer of $H$ samples: each sample writes $g_{\\max}[n]$ and reads the minimum over $[n-H+1, n]$. Constant-time via the two-stack min-queue or O(log H) via a priority queue. For a 15 ms hold at 48 kHz: $H = 720$ samples.
+
+**Exponential Release.** After the peak-hold window, the gain recovers toward 1 (no reduction) with an exponential time constant $\\tau_{\\text{release}}$:
+
+$$g_{\\text{rel}}[n] = g_{\\text{rel}}[n-1] + \\alpha \\cdot \\left(g_{\\text{PH}}[n] - g_{\\text{rel}}[n-1]\\right)$$
+
+where the release slew factor $\\alpha$ relates to $\\tau_{\\text{release}}$ by:
+
+$$\\alpha = 1 - \\exp\\left(-\\frac{1}{\\tau_{\\text{release}} \\cdot f_s}\\right)$$
+
+The release ensures that:
+
+$$g_{\\text{rel}}[n] \\leq g_{\\text{PH}}[n] \\quad \\text{(envelope never exceeds the instantaneous maximum gain)}$$
+
+Typical release times: 20–200 ms. Shorter release = faster recovery (more pumping), longer = smoother (less modulation distortion).
+
+**FIR Smoothing (Attack Shaping).** The attack phase of the gain curve is smoothed by a cascade of $K$ box-averaging filters (moving average, implemented as CIC/boxstack) of length $L_a = \\tau_{\\text{attack}} \\cdot f_s$:
+
+$$g_{\\text{smooth}}[n] = \\text{boxStack}_K\\left(g_{\\text{rel}}[n]\\right)$$
+
+$K=3$ or $4$ stages gives a Gaussian-like smoothing kernel with zero overshoot and fast spectral roll-off. The smoothing guarantees that the gain curve changes continuously (no step discontinuities), eliminating the high-frequency distortion that instantaneous gain changes would produce. The effective attack time $\\tau_{\\text{attack}}$ (1–15 ms) determines how far ahead the limiter begins reducing gain before a transient — longer attack = more transparent limiting but more latency.
+
+**Look-Ahead Delay.** The input signal is delayed by $D = \\tau_{\\text{attack}} \\cdot f_s$ samples (the same length as the FIR smoothing filter). The delayed signal is multiplied by the smoothed gain curve:
+
+$$y[n] = x[n - D] \\cdot g_{\\text{smooth}}[n]$$
+
+The look-ahead ensures that the gain reduction begins $\\tau_{\\text{attack}}$ milliseconds *before* the transient reaches the gain multiplier at the output, eliminating the "blunt attack" that zero-latency limiters produce.
+
+**Make-Up Gain.** After limiting, a fixed makeup gain $G_{\\text{MU}}$ (linear gain, typically 0–6 dB) is applied to restore the perceived loudness lost to gain reduction:
+
+$$y_{\\text{out}}[n] = G_{\\text{MU}} \\cdot y[n]$$
+
+**True-Peak (Inter-Sample Peak) Detection.** An optional true-peak mode oversamples the signal by 2× or 4× (or uses analytic peak estimation via the Hilbert transform) to detect samples that would exceed the threshold after reconstruction (ITU-R BS.1770). The gain reduction is computed on the true-peak estimate rather than the sampled envelope, preventing inter-sample overshoot:
+
+$$|x|_{\\text{true}}[n] = \\max\\left(|x[n]|,\\, |x[n-1]|,\\, |x[n]| + 0.5|x[n] - x[n-1]|\\right)$$
+
+**Complexity.** Each sample requires: peak-hold insert/query $\\mathcal{O}(\\log H)$ (or $\\mathcal{O}(1)$ with min-queue), release $\\mathcal{O}(1)$, box-stack $\\mathcal{O}(K)$ (usually 3–4 taps at a lower sub-rate, or a single cumulative-sum update), delay buffer write/read $\\mathcal{O}(1)$. Total: $\\mathcal{O}(1)$ per sample in practice. Total latency: $\\tau_{\\text{attack}}$ (typically 1.5–10 ms).
+
+### Musical Elements Framework
+
+- **PITCH**: The limiter does not alter the pitch of the input. However, aggressive limiting (high gain reduction, >6 dB) compresses the dynamic envelope so severely that the amplitude envelope of partials is flattened, reducing the perceptual salience of pitch definition — the sound becomes uniformly loud, which can obscure fine pitch inflections and vibrato. For pitch-critical material (lead melodies, exposed solos), limit no more than 2–3 dB gain reduction.
+
+- **RHYTHM**: The limiter's attack/hold/release settings interact directly with rhythmic feel. Fast attack + short release (1 ms / 10 ms) preserves transient clarity but can "pump" rhythmically with the beat, producing a heavily compressed dance-music feel. Slow attack + long release (10 ms / 100 ms) preserves the natural envelope of percussive hits but may allow brief overshoots. The hold time prevents the limiter from "breathing" between fast rhythmic hits — a 15 ms hold at 120 BPM (125 ms per beat) keeps the gain steady across a 16th-note hi-hat pattern (31 ms intervals), preventing flutter. Tempo-synced hold = BPM / (60 * R) where R is the shortest note subdivision.
+
+- **HARMONY**: The limiter is harmony-agnostic — it processes the broadband sum of all frequencies equally. However, when a keyboard or guitar chord strikes at high velocity, the limiter gain-reduction triggered by the chord's attack will reduce the entire spectrum momentarily, causing an apparent "ducking" of sustained notes in other voices. This broadband interaction means the limiter's release time determines how quickly harmonic rebalancing occurs after chordal attack transients. For complex harmonic textures (jazz chords with many extensions), use longer release (100–200 ms) to avoid audible gain-pumping against chord changes.
+
+- **STRUCTURE**: The limiter's parameters (threshold, attack, hold, release, makeup gain) are per-section controls in the UnitMatrix. A piece's macro-form is articulated by limiter parameter arcs:
+  - Intro: high threshold (-3 dB), slow attack, long release (transparent)
+  - Verse: moderate threshold (-6 dB), moderate attack/release (controlled)
+  - Chorus: low threshold (-10 dB), fast attack, short hold, moderate release (loud, dense)
+  - Bridge: higher threshold, long release (opening up dynamics)
+  - Outro: fade coupled with limiter threshold increase (natural decay)
+  
+  Per-section limiting allows the form to "breathe" dynamically while maintaining peak control throughout.
+
+- **TEXTURE**: Texture is the limiter's primary musical dimension.
+  - **Transparent limiting** (1–2 dB GR, slow attack, long release): Preserves original texture. Essential for classical, acoustic, and jazz material.
+  - **Moderate limiting** (3–6 dB GR, moderate attack, 50 ms release): Tightens the texture by reducing macro-dynamic range. The "glued" pop/rock sound.
+  - **Aggressive limiting** (6–12+ dB GR, fast attack, short release): Flattens all dynamics. The "brickwall" EDM/radio sound. Sustains mix elements into a uniform loudness wall; micro-dynamics (transient contrasts) are replaced by macro-leveling.
+  - **Release-time shaping**: Short release (20 ms) creates rhythmic pumping — the texture pulses with the beat. Long release (500 ms) smooths out texture to a continuous, breathing swell.
+
+### UnitMatrix Integration
+
+- **Rows (Voices)**: The limiter processes the summed mix bus (all voices summed to stereo), not individual voices. Per-voice limiting is not recommended because independent voice limiters would fight each other (one voice's gain reduction pulling down others' uncompressed signal). However, each voice can be pre-limited individually (*channel strip limiting*) before the mix bus master limiter:
+  - Voice 0 (Kick): -3 dB threshold, 2 ms attack, 150 ms release (tight, punchy)
+  - Voice 1 (Snare): -6 dB threshold, 1 ms attack, 200 ms release (smack control)
+  - Voice 2 (Bass): -4 dB threshold, 5 ms attack, 100 ms release (sub control)
+  - Voice 3 (Chords): -8 dB threshold, 10 ms attack, 80 ms release (sustain leveling)
+  - Sum bus master limiter: -0.5 dB threshold, 5 ms attack, 15 ms hold, 40 ms release
+
+- **Columns (Sections)**: Each section $s$ defines a limiter preset $(T_s, \\tau_{\\text{attack},s}, \\tau_{\\text{hold},s}, \\tau_{\\text{release},s}, G_{\\text{MU},s})$. Section transitions can crossfade limiter parameters over N sample overlap to avoid abrupt gain jumps. The master limiter state (release envelope value) carries across section boundaries to prevent clicks at section seams.
+
+- **Cells (MusicUnit integration per voice)**: Within each voice-section cell:
+  - `limiter_enabled`: boolean (default: False for per-voice, True for master bus)
+  - `threshold_db`: float (-24.0 to 0.0 dB, default -0.5 for master, -6.0 for per-voice)
+  - `attack_ms`: float (0.5–20.0, default 5.0)
+  - `hold_ms`: float (0.0–50.0, default 15.0)
+  - `release_ms`: float (10.0–500.0, default 40.0)
+  - `makeup_gain_db`: float (0.0–12.0, default 2.0)
+  - `true_peak`: boolean (default: True)
+  - `auto_makeup`: boolean (default: True — estimate makeup gain from integrated GR)
+  - `link_mode`: string ("max", "sum", "left", "right")
+  
+  Rendering flow: section $s$ → for each sample block: accumulate summed stereo buffer from all voices → compute gain curve (peak-hold + release + smoothing) using the summed envelope → apply to delayed summed buffer → output limited stereo master buffer.
+
+- **Zero-drift**: The limiter gain multiplier is real and positive, so it introduces zero phase delay and zero DC offset. The delay line is a simple buffer with no filtering, so no drift accumulates.
+
+### Pitfalls
+
+1. **Latency budget**: The look-ahead delay adds $\tau_{\text{attack}}$ of latency (typically 1.5–10 ms). For offline rendering this is irrelevant, but for real-time monitoring or latency-sensitive workflows, a look-ahead of >5 ms may be unacceptable. Mitigation: use a zero-latency limiter with instantaneous gain reduction (sacrificing transparency) for monitoring, and the full look-ahead limiter for the final render.
+
+2. **Inter-sample peaks**: A sample-level limiter ($T = -0.5$ dB) may still produce true-peak overshoots of 1–3 dB after D/A conversion. True-peak detection via 2× oversampling or analytic peak estimation (Hilbert envelope) is essential for broadcast compliance (ITU-R BS.1770). Without true-peak, an extra 1–3 dB of headroom must be reserved, reducing loudness.
+
+3. **Pumping artifacts**: A short release time combined with frequent gain reduction creates audible gain modulation (pumping), where the background (noise floor, reverb tail, sustained pad) audibly rises and falls with the transient. Mitigation: increase hold time (gives the transient more time to pass before recovery begins) or increase release time (slower recovery smooths the modulation).
+
+4. **Over-limiting**: Gain reduction > 10 dB flattens macro-dynamics so severely that the waveform resembles a square wave, producing distortion, listener fatigue, and loss of musical expression. The musicom pipeline should flag any section where integrated GR > 10 dB and suggest reducing makeup gain or increasing threshold.
+
+5. **Makeup gain vs. threshold interaction**: If makeup gain $G_{\text{MU}} > 1/T$ in linear amplitude, the output can exceed the threshold again after makeup gain. Mitigation: apply makeup gain *after* the limiter (post-gain) and clip the final output to prevent numeric wrap-around. Or compute makeup gain as the inverse of average GR: $G_{\text{MU}} = 1 / \overline{g_{\text{smooth}}}$.
+
+6. **DFKI-1 attack/smoothing conflict**: If the smoothing filter length exceeds the look-ahead delay (i.e., the FIR kernel is longer than the delay buffer), the gain curve will not have "settled" before the signal arrives — the peak will clip. Constrain: $\tau_{\text{attack}} \geq L_{\text{smooth}} / f_s$ where $L_{\text{smooth}}$ is the boxstack impulse response length.
+
+7. **Stereo linking**: In stereo mode, the gain reduction must be computed from the max or sum of both channels to preserve stereo image (linked mode). Unlinked limiting (left and right channels independently) shifts the stereo balance and can cause image wander. Default: link_mode = "max" (safest).
+
+8. **DC from asymmetric gain envelopes**: If the gain envelope has an asymmetric shape (very fast attack, slow release), and the signal has a DC component, the gain modulation can amplify the DC offset, causing a momentary subsonic thump. Mitigation: highpass filter the input at 20–40 Hz before the limiter (SP-020 style), or use a limiter with DC-blocking in the gain path.
+
+Candidate code path: `sound/effects/brickwall_limiter.py` — implements a `LookAheadLimiter` class with configurable threshold, attack/hold/release times, true-peak detection, auto makeup gain, and stereo link mode. UnitMatrix integration via `LimiterCellConfig` dataclass.
+
+### 108. Hyperdimensional Computing Composition (HDCC)
+
+### Source
+Kanerva, P. (2009). "Hyperdimensional Computing: An Introduction to Computing in Distributed Representation with High-Dimensional Random Vectors." *Cognitive Computation* 1, 139–159. — Plate, T. A. (2003). *Holographic Reduced Representation: Distributed Representation for Cognitive Structures*. CSLI Publications. — Gayler, R. W. (2003). "Vector Symbolic Architectures Answer Jackendoff's Challenges for Cognitive Neuroscience." *Proc. Joint Int. Conf. Cognitive Science*, 133–138. — Kleyko, D. et al. (2021). "A Survey on Hyperdimensional Computing aka Vector Symbolic Architectures, Part I: Models and Data Transformations." *ACM Computing Surveys* 55(6), 1–40. — Kleyko, D. et al. (2023). "A Survey on Hyperdimensional Computing aka Vector Symbolic Architectures, Part II: Applications." *ACM Computing Surveys* 55(9), 1–38. — Frady, E. P., Kleyko, D., Kymn, C. J., Olshausen, B. A., & Sommer, F. T. (2022). "Computing on Functions Using Randomized Vector Representations." *arXiv:2109.03429*. — Rahimi, A. et al. (2016). "A Robust and Energy Efficient Classifier Using Brain-Inspired Hyperdimensional Computing." *Proc. IEEE/ACM ISLPED*, 64–69.
+
+### Layer
+**concrete** — generates concrete pitch/rhythm/harmony/velocity events that fill UnitMatrix cells. Hypervectors encode specific note, chord, onset, and voice attributes; decoding them via similarity search produces the cell content. Feeds generators/ via the HD encoder→decoder pipeline.
+
+### Paradigm
+**AI-Driven** — hyperdimensional computing is a brain-inspired cognitive architecture (Kanerva 2009) that uses high-dimensional vector spaces and explicit algebraic operations (binding, bundling, permutation) rather than gradient-based optimization for generation. The HD/VSA framework provides a learned or designed item memory whose fixed operations produce musical structure.
+
+### Description
+**Hyperdimensional Computing Composition (HDCC)** represents every musical element as a hypervector — a high-dimensional vector (typically $D = 10{,}000$, binary $\{+1,-1\}$ or bipolar $\{\pm1\}$) in a quasi-orthogonal space where $P(\cos\theta \approx 0) \to 1$ as $D$ grows. The key VSA operations are:
+
+1. **Bundling** ($+$, sum + threshold): $\mathbf{z} = \text{sgn}(\mathbf{x} + \mathbf{y})$ — creates a set or superposition. Bundling $k$ items yields a hypervector similar to each, so an auto-associative memory can cleanly separate them via Hamming/cosine similarity.
+2. **Binding** ($\otimes$, elementwise XOR for binary, circular convolution for real): $\mathbf{z} = \mathbf{x} \otimes \mathbf{y}$ — creates a structured role–filler pair. Binding is invertible (unbinding): $\mathbf{x} \approx \mathbf{z} \oslash \mathbf{y}$ (using the inverse/correlation).
+3. **Permutation** ($\rho$, rotation): $\mathbf{z} = \rho(\mathbf{x})$ — encodes sequential order. Permutation iterated $k$ times $\rho^k(\mathbf{x})$ represents the $k$-th position in a sequence.
+
+These operations form an algebra over hypervectors, making it possible to compose, decompose, and transform musical representations without any training (learning is in the encoding of base symbols and, optionally, in the associative memory).
+
+**Encoding pipeline**: A musical vocabulary is built by assigning each atomic symbol a random hypervector (i.i.d. $\{\pm1\}^D$): pitch classes $p_0, p_1, \ldots, p_{11}$, scale degrees $s_0,\ldots,s_6$, chord types $c_{\text{maj}}, c_{\text{min}}, c_{\text{dim}}, c_{\text{aug}}$, duration classes $d_{1/4}, d_{1/8}, d_{1/16}$, velocity levels $v_{pp}, v_p, v_f, v_{ff}$, voice roles $r_{\text{lead}}, r_{\text{bass}}, r_{\text{chord}}$, section labels $S_{\text{intro}}, S_{\text{verse}}, S_{\text{chorus}}, S_{\text{bridge}}, S_{\text{outro}}$, and metric positions $m_0, m_1, \ldots, m_{15}$ (16th positions in a bar).
+
+A chord is a bundled hypervector of its constituent pitch-class vectors:
+$$\mathbf{H}_{\text{Cmaj}} = p_0 + p_4 + p_7$$
+
+A melody is a sequence of bound role–filler pairs chained via permutation:
+$$\mathbf{M} = \rho(\mathbf{H}_{p_1}) \otimes m_0 + \rho^2(\mathbf{H}_{p_2}) \otimes m_1 + \rho^3(\mathbf{H}_{p_3}) \otimes m_2 + \cdots$$
+
+A section is a bundling of voice-specific music hypervectors:
+$$\mathbf{Section} = \mathbf{M}_{\text{lead}} + \mathbf{M}_{\text{chord}} + \mathbf{M}_{\text{bass}}$$
+
+A voice's full trajectory across a section is the bundled sequence of beat-wise chord/note hypervectors, each bound to its metric position.
+
+**Decoding**: Given the composed section hypervector $\mathbf{S}$, decoding recovers individual notes. For each metric position $m_i$, unbinding yields the expected pitch hypervector:
+$$\mathbf{H}_{p_i} = \rho^{-i}(\mathbf{S} \oslash m_i)$$
+The item memory $\mathcal{M}$ (associative memory of all atomic hypervectors) identifies the nearest neighbor via Hamming distance (binary) or cosine similarity (real): $p^* = \arg\min_{p \in \mathcal{M}} d_H(\mathbf{H}_{p_i}, \mathbf{H}_p)$. The decoded pitches, durations, and velocities fill the UnitMatrix cells.
+
+**Multi-voice coherence**: Voice roles $r_v$ are bound to each voice's note hypervectors: $\mathbf{cell}_{v,i} = \mathbf{n}_{v,i} \otimes r_v + m_i \otimes \text{bar}_b$. The bundled section keeps voices separable through the quasi-orthogonality of random role vectors — voice isolation is simply $\rho^{-i}(\mathbf{S} \oslash r_v \oslash m_i)$.
+
+**Macro-form**: Section labels $S_k$ are bound to the section hypervector: $\mathbf{S}_k = \mathbf{content}_k \otimes S_k$. Transitions between sections use the bundle of the previous-content-to-next-content as a smooth interpolation, or they are gated by form-level hypervectors planning the section sequence.
+
+### Musical Elements Framework
+
+**PITCH**: Pitch classes $p_0\ldots p_{11}$ are random hypervectors in $\{\pm1\}^D$. Their quasi-orthogonality means intervals are approximate XOR patterns; chromatic proximity has no geometric correlate in HD space (unlike VAE latents). Intervals emerge from binding: $\mathbf{interval}_{(i,j)} = p_i \otimes p_j$ produces a "transposition hypervector" that, when bound to a pitch, produces the target pitch: $p_j = p_i \otimes \mathbf{interval}_{(i,j)}$. Modal gravity is encoded as a bias vector added to the accumulated note-sequence hypervector — the tonic $p_0$ appears more frequently in bundling. Scale filtering is a post-decode step: the decoded candidate pitch class is quantized to the nearest diatonic/chromatic degree via the scale-mask hypervector.
+
+**RHYTHM**: Duration classes $d_{\tau}$ and metric positions $m_i$ are atomic hypervectors. Onset density is controlled by the number of non-zero entries in the metric-position bundle per bar. Rhythmic accent is a binding of a metric position to a velocity level: $\mathbf{accented}_i = m_i \otimes v_f$. Groove replication uses the same bound structure across bars; syncopation is the absence of a metric-position binding at the expected location (a zero vector in the bundle). Euclidean rhythms (012) are directly encodable as a set of filled metric positions.
+
+**HARMONY**: Chord types $c_T$ bound with root $p_r$: $\mathbf{chord}_{r,T} = p_r \otimes c_T$. The chord progression across a section is a sequence of bound chord × position pairs: $\mathbf{prog} = \sum_i \rho^i(\mathbf{chord}_{r_i,T_i}) \otimes m_i$. Harmonic function (HOME/LIFT/TENSE/TURN) is a property of the chord hypervector's similarity to stored prototype hypervectors — e.g., $\cos(\mathbf{chord}_{I}, \mathbf{HOME})$ close to 1. Voice-leading continuity arises from the similarity of adjacent chord hypervectors: a root motion by fifth produces a higher cosine than motion by tritone, so unbinding and re-binding transitions naturally favour parsimonious voice leading.
+
+**STRUCTURE**: Macro-form is the sequence of section hypervectors $\mathbf{S}_0, \mathbf{S}_1, \ldots, \mathbf{S}_{M-1}$, each a bundled content + section label. The form-level plan $\mathbf{Form} = \sum_k \rho^k(\mathbf{S}_k) \otimes f_k$ where $f_k$ are form-position hypervectors (intro, development, climax, coda). Section similarity (e.g., two verses) appears as high cosine between their section hypervectors; variation is a controlled perturbation: $\mathbf{S}' = \mathbf{S} + \mu\mathbf{\delta}$ where $\mu$ scales the novelty. Repetition structure emerges from identical section hypervectors.
+
+**TEXTURE**: Texture is encoded as the number and identity of active voice roles: $\mathbf{Texture} = \sum_{v \in \text{active}} r_v$. Sparse texture (single voice) is one role; dense texture bundles all roles. Polyphonic density is the bundled count of voice+metric-position pairs per time step. Voice intersection (overlap in pitch register) is decoded from the cosine between voice-pitch bundles: high overlap = homophony, low overlap = heterophony/polyphony. The HD space's quasi-orthogonality guarantees that $k$ active voices can be separated by similarity search as long as $k \ll D$.
+
+### UnitMatrix Integration (Voices & Sections)
+
+**Voices**: Each voice $v$ is assigned a unique role hypervector $r_v \in \{\pm1\}^D$ (stored in the item memory). A voice's entire section content is the bundle of its metric-position-bound note hypervectors:
+
+$$\mathbf{V}_v = \sum_{i=0}^{N_v-1} \rho^i(\mathbf{note}_{v,i}) \otimes r_v$$
+
+where $\mathbf{note}_{v,i}$ encodes pitch $p_{v,i}$, duration $d_{v,i}$, velocity $v_{v,i}$, and articulation as a bundled composite: $\mathbf{note}_{v,i} = p_{v,i} + d_{v,i} + v_{v,i}$. The full matrix is $\mathbf{Matrix} = \sum_v \mathbf{V}_v$. Decoding per-voice content from the matrix requires only the voice role: $\mathbf{V}_v \approx \mathbf{Matrix} \oslash r_v$. A separate rhythm-only voice for percussion uses a simplified hypervector (binary onset/rest).
+
+**Sections**: Each section $s$ in the UnitMatrix defines a set of section-parameter hypervectors: key vector $\mathbf{K}_s$ (a scale mask), tempo vector $\mathbf{T}_s$, section-label vector $L_s$. The section's per-voice cells are the voice hypervectors for that section's time range. Section transitions are managed by form hypervectors: $\mathbf{FormSection}_s = \text{SectionContent}_s \otimes L_s$. The macro-form emerges from the trajectory of bundled section hypervectors across columns.
+
+**Cell filling**: Each cell (voice $v$, section $s$, bar range $b \in [b_{\text{start}}, b_{\text{end}})$) maps to a decoding sweep over metric positions within the bar. For each 16th-position $m_i$:
+1. Unbind the voice role: $\mathbf{h}_v = \mathbf{Matrix} \oslash r_v$
+2. Unbind the metric position: $\mathbf{h}_{v,i} = \rho^{-i}(\mathbf{h}_v) \oslash m_i$  
+3. Identify the nearest pitch hypervector in item memory: $p^* = \arg\max_{p} \cos(p, \mathbf{h}_{v,i})$
+4. If $\max\cos > \theta_{\text{onset}}$ (typically 0.3–0.5), a note-on event is decoded at this position; otherwise the cell has a rest.
+5. Duration and velocity are decoded similarly via nearest-neighbor in their respective sub-spaces.
+6. The resulting $\text{(pitch, onset_tick, duration_ticks, velocity)}$ fills a $MusicEvent$ in the cell's $MusicUnit$.
+
+The threshold $\theta_{\text{onset}}$ controls rhythmic density. A low threshold yields dense texture (many notes); a high threshold yields sparse texture (few notes).
+
+### Pitfalls
+
+1. **Dimensionality choice**: $D$ must be large enough for quasi-orthogonality (typically $D \ge 10{,}000$ for binary, $D \ge 4{,}000$ for real bipolar). Too low $D$ causes collisions — distinct musical symbols become confusable. Computational cost scales linearly with $D$ (cheap for binary: XOR + popcount), but memory for the item memory is $\mathcal{O}(|\mathcal{M}| \cdot D)$ — $|\mathcal{M}| \approx 50\text{–}200$ for typical musical works.
+
+2. **Sparsity vs. density**: Binary hypervectors with 50% active bits are standard, but sparser representations (few % active) improve binding uniqueness at the cost of reduced noise tolerance. The tradeoff must be tuned per musical task (harmonic vocabulary vs. rhythmic density).
+
+3. **Rigid metric grid**: The permutation-based sequence encoding is inherently grid-locked — every metric position must be aligned to a discrete step. Continuous-time or micro-timing deviations require a dedicated time-shift hypervector that offsets positions (approximated as a rotation by $k$ steps). For swing/groove micro-timing, fractional permutation via time-warped binding is an open research area.
+
+4. **Scale quantization step**: HDCC's pitch output is an unbounded hypervector — it must be quantized to a scale via nearest-neighbor in item memory. This quantization introduces rounding error that can accumulate over long sequences. A scale-mask pre-filter (checking the nearest in-scale pitch before committing the event) mitigates this but adds a hyper-parameter (scale mask width).
+
+5. **Voice crosstalk**: In a dense multi-voice matrix (10+ voices), the bundle superposition $\sum_v \mathbf{V}_v$ may degrade voice isolation because the role hypervectors, while quasi-orthogonal, are not perfectly orthogonal. Decoding a voice with $r_v$ introduces noise from other voices. Mitigation: use sparse-hypervector encoding or divide by voice count. In practice, 4–6 voices are cleanly separable; 12+ voices require hierarchical bundling (group voices into families first).
+
+6. **Long-range structure**: The permutation approach uses $\rho^k$ to encode sequence position — $k$ can grow to thousands (macro-form), and the accumulated permutation noise (each application is $k$ XORs for binary) degrades symbol recovery. Mitigation: use hierarchical bundling (section→phrase→note) or timing hypervectors that reset at phrase boundaries rather than accumulating a single permutation chain.
+
+7. **No learning loop**: Unlike trained neural methods (054 ATS / 046 VAE-LSI), HDCC relies on the quality of the hand-designed item memory. If the vocabulary lacks expressive symbols (e.g., no ornamentation hypervectors), the output is musically flat. Adaptive/learned hypervectors (via iterative bundling of corpus-derived prototypes) is an extension flagged by Kleyko et al. (2021).

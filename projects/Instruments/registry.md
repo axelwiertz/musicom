@@ -588,6 +588,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Keys | Harpsichord | 6 | 29–89 | harmony, continuo, melody, ornament, countermelody, accent |
 | Keys | Celesta | 8 | 48–108 | lead, melody, ornament, arpeggio, countermelody, accent |
 | Keys | Accordion | 21 | 36–96 | harmony, melody, bass, rhythm, ornament |
+| Keys | Reed Organ | 20 | 36–96 | harmony, pad, melody, drone, ornament |
 | Keys | Clavi | 7 | 29–89 | lead, rhythm, accent, ornament, countermelody |
 | Keys | Electric Piano 1 (Rhodes) | 4 | 36–96 | harmony, melody, bass, accent, color |
 | Brass | Trumpet | 56 | 54–86 | lead, accent, fanfare |
@@ -655,8 +656,9 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 65 | Alto Sax (correct GM) | **Alto_Sax** (labeled "Alto Sax", not "Saxophone") |
 | 74 | Flute | **Recorder** ✗ |
 | 15 | Dulcimer | Dulcimer ✓ (GM_PROGRAMS[15] + FluidR3 preset 15 both "Dulcimer") |
-| 19 | Church Organ | Church Organ ✓ (GM_PROGRAMS[19] + SF2 preset 19 both "Church Organ") |
-| 25 | Acoustic Guitar (nylon) | Acoustic_Guitar_nylon ✓ |
+| 19 | Church Organ | Church_Organ ✓ (GM_PROGRAMS[19] + SF2 preset 19 both "Church Organ") |
+| 20 | Reed Organ | Reed_Organ ✓ (GM_PROGRAMS[20] + FluidR3 preset 20 both "Reed Organ" — labels match exactly, **no quirk**) |
+| 25 | Acoustic Guitar (nylon) |
 | 12 | Marimba | Marimba ✓ |
 | 14 | Tubular Bells | Tubular_Bells ✓ (GM_PROGRAMS[14] = "Tubular Bells"; FluidR3 preset 14 = "Tubular Bells" — labels match exactly, no quirk) |
 | 47 | Timpani | Timpani ✓ (GM_PROGRAMS[47] + FluidR3 preset 47 both "Timpani") |
@@ -833,3 +835,25 @@ by ~3-4 dB per octave vs acoustic piano — phrase with REGISTRATION (voicing
 density, chord spacing) as much as with velocity. Stem label: no pipeline quirk
 but FluidR3 internal name is "Rhodes EP" vs pipeline "Electric Piano 1"
 (cosmetic, no routing impact).
+
+**Reed Organ added** (2026-10-07): GM20, Keys-family free-reed entry — the
+cabinet-enclosed free-reed keyboard operated by foot-pumped or hand-pumped
+bellows (instrument.md + reed_organ.py), verified end-to-end UnitMatrixComposer
+→ zero-drift ✓ → MIDI → FluidSynth WAV ✓; RenderPipeline stem label
+`trackXX_Reed_Organ.wav` ✓ (GM_PROGRAMS[20] = "Reed Organ", FluidR3 preset 20
+= "Reed Organ" — labels match exactly, **no quirk**). PhaseModSynth recommended
+(free-reed aerophone: saw carrier + sine modulator, mod_depth 3.5 — between
+accordion 3.2 and bagpipe 4.5 for the cabinet-resonant harmonium buzz; attack
+0.04 s for wind chest fill; release 0.06 s). Range 36–96 (C2–C7); sweet spot
+60–84 (C4–C6). Role: harmony, pad, melody, drone, ornament — fully polyphonic
+chord instrument. Registration proof: `by_name('reed organ')` → Reed Organ,
+`by_program(20)` → Reed Organ, `in_sweet_spot(72)` = True,
+`in_sweet_spot(30)` = False. Registration in `instrument_registry.py` as
+REED_ORGAN convenience constant. Identity quirk: the reed organ is the only
+free-reed keyboard instrument where the entire keyboard shares ONE unified wind
+chest and cabinet resonator (unlike accordion's separate bass/treble systems)
+— the instrument is fully polyphonic with a characteristic "cabinet honk" body
+resonance at ~250 Hz. The Indian hand-pumped harmonium adds drone stops (Sa-Pa)
+and a darker 3-octave range; the American reed organ (suction) is softer with
+sweeter trebles; the European harmonium (pressure) is louder with sharper
+attack. Composition jobs may write full 3-5 note chords.

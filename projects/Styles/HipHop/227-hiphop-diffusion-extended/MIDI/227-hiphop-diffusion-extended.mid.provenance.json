@@ -1,0 +1,37 @@
+{
+  "artifact": "227-hiphop-diffusion-extended.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.workflows.unitmatrix_composer",
+  "sources": [],
+  "parameters": {
+    "project": "227-hiphop-diffusion-extended",
+    "phase": 2,
+    "style": "HipHop",
+    "method": "010 Hierarchical Diffusion",
+    "layer": "concrete",
+    "source": "208-hiphop-hierarchical-diffusion",
+    "decision": "extension",
+    "quantization": "16th-grid (120 ticks) + chord-tone snap + dedup",
+    "key": "A natural minor",
+    "bpm": 90,
+    "seed": 20261007,
+    "progression": "per-section harmonic regions (10 regions)",
+    "variations": {
+      "1": "identity (reference hook, OU drift-diffusion)",
+      "2": "density rise (chorus denser than verse)",
+      "3": "inversion (lead pitch mirrored around E4 axis = 142 - p)",
+      "4": "density peak (0.85, densest section)",
+      "5": "augmentation (half note-rate, doubled durations) + counterline (flute desc.)",
+      "6": "register shift (lead +1 octave)",
+      "7": "mode shift (relative major C, progression C-G-Am-F)",
+      "8": "transposition (lead +perfect 4th = +5 semitones)",
+      "9": "retrograde (Intro motif reversed)"
+    },
+    "form": "10 sections x 4 bars = 40 bars"
+  },
+  "notes": "",
+  "sha256": "d0df41c9be884cfe639e2bb09e16d848baae22d0be6941f1bb8123fa9020ebfa",
+  "bytes": 8273,
+  "created_utc": "2026-10-07T01:10:40.079636+00:00",
+  "provenance_version": "1.0"
+}

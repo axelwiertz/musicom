@@ -60,6 +60,7 @@ _INSTRUMENT_MODULES = {
     "Percussion.tubular_bells.tubular_bells": "tubular_bells",
     "Percussion.timpani.timpani": "timpani",
     "Keys.accordion.accordion": "accordion",
+    "Keys.reed_organ.reed_organ": "reed_organ",
     "Keys.rhodes.rhodes": "rhodes",
     "World.sitar.sitar": "sitar",
     "World.koto.koto": "koto",
@@ -213,6 +214,7 @@ DULCIMER = ALL_INSTRUMENTS["dulcimer"]
 HARPSICHORD = ALL_INSTRUMENTS["harpsichord"]
 CELESTA = ALL_INSTRUMENTS["celesta"]
 ACCORDION = ALL_INSTRUMENTS["accordion"]
+REED_ORGAN = ALL_INSTRUMENTS["reed_organ"]
 RHODES = ALL_INSTRUMENTS["rhodes"]
 TRUMPET = ALL_INSTRUMENTS["trumpet"]
 TROMBONE = ALL_INSTRUMENTS["trombone"]
@@ -319,6 +321,8 @@ def registry_table():
             role = "lead, melody, ornament, arpeggio, countermelody, accent"
         elif low == "accordion":
             role = "harmony, melody, bass, rhythm, ornament"
+        elif low == "reed organ":
+            role = "harmony, pad, melody, drone, ornament"
         elif low == "alto saxophone":
             role = "lead, countermelody, accent, harmony"
         elif low == "tenor saxophone":
@@ -528,3 +532,12 @@ if __name__ == "__main__":
     print("  RHODES.in_sweet_spot(30) =", RHODES.in_sweet_spot(30))
     print("  RHODES.range_min =", RHODES.range_min, "RHODES.range_max =", RHODES.range_max)
     print("  RHODES.stem_label =", repr(RHODES.stem_label))
+    print()
+    print("=== Reed Organ (Harmonium, GM20) ===")
+    print("  REED_ORGAN.midi_program =", REED_ORGAN.midi_program, "(should be 20)")
+    print("  by_name('reed organ') =", by_name("reed organ"))
+    print("  by_program(20) =", by_program(20))
+    print("  REED_ORGAN.in_sweet_spot(72) =", REED_ORGAN.in_sweet_spot(72))
+    print("  REED_ORGAN.in_sweet_spot(30) =", REED_ORGAN.in_sweet_spot(30))
+    print("  REED_ORGAN.range_min =", REED_ORGAN.range_min, "REED_ORGAN.range_max =", REED_ORGAN.range_max)
+    print("  REED_ORGAN.stem_label =", repr(REED_ORGAN.stem_label))

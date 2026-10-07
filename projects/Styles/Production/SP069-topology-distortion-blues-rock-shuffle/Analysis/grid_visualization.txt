@@ -1,0 +1,9 @@
+grid_visualization.txt — SP-069 source MIDI (24 bars, 112 BPM, 4/4)
+rows = MIDI tracks (tpb 480), cols = bars; '#' = note onset in bar
+
+track01 |########################|
+track02 |########################|
+track03 |............##########..|
+track04 |########################|
+
+bars 0-23: 12-bar blues x2 (I I I I | IV IV I I | V IV I I), E blues

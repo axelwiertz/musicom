@@ -1,0 +1,25 @@
+{
+  "artifact": "227-hiphop-diffusion-extended-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.workflows.unitmatrix_composer",
+  "sources": [],
+  "parameters": {
+    "project": "227-hiphop-diffusion-extended",
+    "phase": 1,
+    "style": "HipHop",
+    "method": "010 Hierarchical Diffusion",
+    "layer": "concrete",
+    "source": "208-hiphop-hierarchical-diffusion",
+    "decision": "extension",
+    "raw_timing": "unquantized micro-jitter (off-grid)",
+    "raw_pitch": "Ornstein-Uhlenbeck drift-diffusion (chromatic)",
+    "key": "A natural minor",
+    "bpm": 90,
+    "seed": 20261007
+  },
+  "notes": "",
+  "sha256": "ea903f10db0bb5afd18b6ce01430a5d5b047a5f358c43dc170ddd0c347d6c901",
+  "bytes": 1349,
+  "created_utc": "2026-10-07T01:10:40.038774+00:00",
+  "provenance_version": "1.0"
+}
