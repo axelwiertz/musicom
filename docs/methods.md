@@ -112,11 +112,12 @@ Classification of active Musicom composition methods categorized by their primar
 || **102** | concrete | Cross-Entropy Method Composition (CEMC) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Elite-guided) | Continuous / Fluid | Macro / Distribution | $\mathcal{O}(I \cdot N \cdot L)$ | Iterative distribution optimization: sample sequences, keep elite (top fitness), refit parametric distribution via CE minimization. |
 || **103** | concrete | Graph Neural Network Composition (GNNC) | **AI-Driven** | Pitch, Rhythm, Harmony, Structure, Texture | Variable (Graph-learned) | Grid-Locked / Continuous | Macro / Graph Neighborhood | $\mathcal{O}(V \cdot T \cdot d^2)$ | Models composition as a heterogeneous graph (note, chord, bar nodes; temporal/harmonic/metric/voice edges). GNN message-passing refines node embeddings, decoded into pitch/duration/velocity/voice assignments. Relational inductive bias explicitly encodes voice-leading, harmony, and meter. |
 || **104** | abstract | Parsimonious Subset Sequence Composition (PSSC) | **Rules-Based** | Pitch, Harmony, Structure, Texture | Moderate (Scale-subset filtered) | Grid-Locked / Continuous | Macro / Circular Sequence | $\mathcal{O}(C(n,p) \cdot p)$ | Generalises parsimonious voice leading from Neo-Riemannian triadic theory to ANY n-subsets of any p-scale. Constructs exhaustive, non-redundant, circular (nrep) chord progressions via set-theoretic relations (Rp/Re/Rf), 2D table, and lexicographic walk. Inversion-bipartition (2024) yields paired voice strands. Abstract-layer subset design: feeds rules/subset_network.py. |
-| **105** | concrete | Pólya Urn Reinforcement Composition (PURC) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Reinforcement-guided, HOME/LIFT/TENSE/TURN via prior) | Grid-Locked / Continuous | Meso / Urn State | $\mathcal{O}(N \cdot K)$ per section | Generates musical sequences via self-reinforcing Pólya urn draws: each pitch/rhythm/token becomes more likely the more it is used (rich-get-richer). Urn prior encodes tonal gravity and metric binding; innovation parameter controls novelty rate; Pitman-Yor discount controls power-law tail of token distribution. Coupled per-voice urns enforce vertical harmonic coherence. Self-reinforcing stochastic counterpart to 002 Markov (fixed-probability) and 086 HMM (latent-state); sequential generative sibling of 084 ZMRC (static rank-frequency law). |
-| **106** | concrete | Non-Autoregressive Parallel Composition (NAPC) | **AI-Driven** | Pitch, Rhythm, Harmony, Structure, Texture | Variable (Bidir-context-guided) | Grid-Locked / Continuous | Macro / Mask-Predict Iterations | $\mathcal{O}(R \cdot V \cdot T \cdot d)$ | Generates all musical tokens in parallel via iterative mask-refinement (mask-predict): start from a fully masked UnitMatrix and iteratively unmask the most confident predictions. Bidirectional transformer provides full left-right context per token. Non-autoregressive counterpart to 054 ATS; discrete refinement foil to 047 DSMG. |
-|| **107** | concrete | Stochastic Differential Equation Composition (SDEC) | **Nature-Led** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Drift-field-guided) | Continuous / Fluid | Macro / Trajectory Horizon | $\mathcal{O}(V^2 d^2 \cdot T)$ | Models each musical parameter as a continuous-time Itō SDE with designed drift and diffusion fields. Drift = tonal gravity, diffusion = creative uncertainty. Multi-voice correlated SDEs encode harmonic coherence and voice-leading. Continuous-time Nature-Led counterpart to 048 RBMPD (generalized) and 097 MaxEnt-C (dynamical foil). |
-|| **108** | concrete | Hyperdimensional Computing Composition (HDCC) | **AI-Driven** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Prototype-similarity-guided) | Grid-Locked / Continuous | Macro / Hypervector Trajectory | $\mathcal{O}(D \cdot N)$ | Encodes every musical element as a quasi-orthogonal high-dimensional random vector ($D \geq 10{,}000$) and composes via explicit algebraic operations (binding $\otimes$, bundling $+$, permutation $\rho$) over hypervectors. Binding creates role–filler structures (pitch $\otimes$ chord), bundling superpositions multi-voice polyphony, permutation encodes sequence order. Composition = encode section hypervectors $\rightarrow$ decode via similarity search item memory $\rightarrow$ fill UnitMatrix cells. No training — the HD algebra is the generative process. Brain-inspired, non-connectionist AI-Driven counterpart to 002 Markov / 054 ATS / 046 VAE-LSI. |
-|### Source
+|| **105** | concrete | Pólya Urn Reinforcement Composition (PURC) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Reinforcement-guided, HOME/LIFT/TENSE/TURN via prior) | Grid-Locked / Continuous | Meso / Urn State | $\mathcal{O}(N \cdot K)$ per section | Generates musical sequences via self-reinforcing Pólya urn draws: each pitch/rhythm/token becomes more likely the more it is used (rich-get-richer). Urn prior encodes tonal gravity and metric binding; innovation parameter controls novelty rate; Pitman-Yor discount controls power-law tail of token distribution. Coupled per-voice urns enforce vertical harmonic coherence. Self-reinforcing stochastic counterpart to 002 Markov (fixed-probability) and 086 HMM (latent-state); sequential generative sibling of 084 ZMRC (static rank-frequency law). |
+|| **106** | concrete | Non-Autoregressive Parallel Composition (NAPC) | **AI-Driven** | Pitch, Rhythm, Harmony, Structure, Texture | Variable (Bidir-context-guided) | Grid-Locked / Continuous | Macro / Mask-Predict Iterations | $\mathcal{O}(R \cdot V \cdot T \cdot d)$ | Generates all musical tokens in parallel via iterative mask-refinement (mask-predict): start from a fully masked UnitMatrix and iteratively unmask the most confident predictions. Bidirectional transformer provides full left-right context per token. Non-autoregressive counterpart to 054 ATS; discrete refinement foil to 047 DSMG. |
+||| **107** | concrete | Stochastic Differential Equation Composition (SDEC) | **Nature-Led** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Drift-field-guided) | Continuous / Fluid | Macro / Trajectory Horizon | $\mathcal{O}(V^2 d^2 \cdot T)$ | Models each musical parameter as a continuous-time Itō SDE with designed drift and diffusion fields. Drift = tonal gravity, diffusion = creative uncertainty. Multi-voice correlated SDEs encode harmonic coherence and voice-leading. Continuous-time Nature-Led counterpart to 048 RBMPD (generalized) and 097 MaxEnt-C (dynamical foil). |
+||| **108** | concrete | Hyperdimensional Computing Composition (HDCC) | **AI-Driven** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Prototype-similarity-guided) | Grid-Locked / Continuous | Macro / Hypervector Trajectory | $\mathcal{O}(D \cdot N)$ | Encodes every musical element as a quasi-orthogonal high-dimensional random vector ($D \geq 10{,}000$) and composes via explicit algebraic operations (binding $\otimes$, bundling $+$, permutation $\rho$) over hypervectors. Binding creates role–filler structures (pitch $\otimes$ chord), bundling superpositions multi-voice polyphony, permutation encodes sequence order. Composition = encode section hypervectors $\rightarrow$ decode via similarity search item memory $\rightarrow$ fill UnitMatrix cells. No training — the HD algebra is the generative process. Brain-inspired, non-connectionist AI-Driven counterpart to 002 Markov / 054 ATS / 046 VAE-LSI. |
+|| **109** | concrete | Spiking Neural Network Composition (SNN-C) | **Nature-Led** | Pitch, Rhythm, Harmony, Structure, Texture | Strict (Mode/Synaptic-guided) | Grid-Locked / Continuous | Meso / Spike-Train | $\mathcal{O}(N \cdot T)$ simulation | Generates musical compositions using a multi-region spiking neural network of Izhikevich neurons with STDP learning. Hippocampal memory stores motif sequences via spike-timing-dependent plasticity; prefrontal cortex encodes mode/scale/style knowledge; thalamic theta-gamma oscillators drive metric hierarchy; insula system controls tension/release trajectory. Spike trains decoded to pitch (population-rate), duration (ISI), velocity (peak firing). Biologically-plausible Nature-Led counterpart to 059 ESN-RC / 037 FHN; non-backpropagation foil to 054 ATS / 046 VAE-LSI. |
+|||### Source
 |Sakellariou, J., Tria, F., Loreto, V. & Pachet, F. (2017). "Maximum entropy models capture melodic styles." *Scientific Reports* 7, 9172. arXiv:1610.03414. — Jaynes, E. T. (1957). "Information theory and statistical mechanics." *Physical Review* 106, 620–630.
 
 ### Layer
@@ -281,6 +282,7 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 | **SP-105** | Coupled Resonant Filter Bank Synthesis (CRFBS) | **Synthesis Engines** | Nonlinear Modal Interaction / Impact, Cymbal & Plate Timbres | Banks of $N$ parallel Mathews-Smith complex-format IIR resonators exchanging energy through a redistribution matrix $\mathbf{M}$ to model nonlinear modal coupling. Captures delayed tonal components, spectral enrichment during impacts, and energy cascades that linear modal synthesis cannot produce. $\mathcal{O}(N)$ per sample. Candidate: `sound/synthesis/coupled_resonator.py`. |
 | **SP-106** | Phaser / Allpass Modulation Synthesis (APS) | **Post-Processing / DSP** | Phase-Swept Modulation / Spectral Notch Filtering | Classic modulation effect using a cascade of allpass filters with LFO-modulated break frequencies to create moving spectral notches through phase cancellation when mixed with dry signal. $N/2$ notches for $N$ stages, depth/rate/feedback/sweep controls. $\mathcal{O}(N)$ per sample. Candidate: `sound/effects/phaser.py`. |
 | **SP-107** | Look-Ahead Brickwall Limiter (LBL) | **Post-Processing / DSP** | Peak Control / Loudness Maximization | Look-ahead brickwall limiter that delays the input signal, computes gain reduction via peak detection with attack/hold/release envelope shaping, applies the smoothed gain curve to the delayed signal, and ensures no sample exceeds the threshold. The final dynamics-control stage before render. |
+| **SP-108** | McAulay-Quatieri Sinusoidal Analysis/Synthesis (MQSAS) | **Post-Processing / DSP** | Sinusoidal Resynthesis / Spectral Editing | Decomposes a signal into time-varying sinusoidal partials via FFT peak tracking with parabolic interpolation and frame-to-frame partial matching (birth/continuation/death). Resynthesizes with cubic phase interpolation for continuous instantaneous frequency. Enables independent partial editing, pitch-shift, time-stretch, and cross-synthesis. The foundational analysis-resynthesis method for spectral editing (SPEAR, SNDAN, Loris). O(K) synthesis per sample. Candidate: `sound/effects/sinusoidal_modeling.py`. |
 |---|
 
 
@@ -23963,3 +23965,241 @@ The threshold $\theta_{\text{onset}}$ controls rhythmic density. A low threshold
 6. **Long-range structure**: The permutation approach uses $\rho^k$ to encode sequence position — $k$ can grow to thousands (macro-form), and the accumulated permutation noise (each application is $k$ XORs for binary) degrades symbol recovery. Mitigation: use hierarchical bundling (section→phrase→note) or timing hypervectors that reset at phrase boundaries rather than accumulating a single permutation chain.
 
 7. **No learning loop**: Unlike trained neural methods (054 ATS / 046 VAE-LSI), HDCC relies on the quality of the hand-designed item memory. If the vocabulary lacks expressive symbols (e.g., no ornamentation hypervectors), the output is musically flat. Adaptive/learned hypervectors (via iterative bundling of corpus-derived prototypes) is an extension flagged by Kleyko et al. (2021).
+
+### 109. Spiking Neural Network Composition (SNN-C)
+
+### Source
+
+Liang, Q. & Zeng, Y. (2021). "Stylistic Composition of Melodies Based on a Brain-Inspired Spiking Neural Network." *Frontiers in Systems Neuroscience* 15, 639484. — Liang, Q., Zeng, Y. & Tang, M. (2025). "Mode-conditioned music learning and composition: a spiking neural network inspired by neuroscience and psychology." *arXiv:2411.14773*. — Zeng, Y. et al. (2023). "BrainCog: A spiking neural network based, brain-inspired cognitive intelligence engine." *Patterns* 4, 100789. — Izhikevich, E. M. (2003). "Simple model of spiking neurons." *IEEE Transactions on Neural Networks* 14(6), 1569–1572. — Bi, G. & Poo, M.-M. (1998). "Synaptic modifications in cultured hippocampal neurons: dependence on spike timing, synaptic strength, and postsynaptic cell type." *Journal of Neuroscience* 18(24), 10464–10472.
+
+### Layer
+
+**concrete** — generates sequences of spike-train-decoded pitch/duration/velocity events that fill UnitMatrix cells. The multi-region spiking neural network produces discrete spike trains; a readout layer decodes population firing rates or exact spike times into per-voice MusicEvents. Feeds generators/ via `generators/snn_composer.py`.
+
+### Paradigm
+
+**Nature-Led** — the entire architecture is biologically inspired: Izhikevich spiking neurons model cortical dynamics, STDP (spike-timing-dependent plasticity) models Hebbian synaptic learning, brain oscillation rhythms (theta/gamma) drive temporal structure, and multi-region circuits (hippocampus, prefrontal cortex, thalamus, insula) collaborate as they do in the human brain. No backpropagation training—STDP is local, unsupervised, and spike-timing dependent. No explicit musical rewrite rules—musical knowledge emerges from the learned synaptic connectivity matrices.
+
+### Description
+
+**Spiking Neural Network Composition (SNN-C)** is a brain-inspired computational model that generates musical compositions using a multi-region spiking neural network of Izhikevich neurons with STDP learning. Unlike rate-coded neural networks (RNNs, transformers, ESNs), SNNs communicate via discrete spike events (action potentials) in continuous time, where the *exact timing* of each spike carries information—offering a fundamentally different computational substrate for music generation that is closer to biological neural computation.
+
+The architecture comprises four collaborating brain-region subsystems:
+
+1. **Hippocampal Memory System** — a recurrent spiking network that stores musical sequences (note transitions, chord progressions, rhythmic patterns) via STDP. The CA3 region's recurrent collaterals form auto-associative memories of motif patterns; the CA1 region's feed-forward connections pattern-complete partial cues into full motifs. The dentate gyrus separates overlapping musical patterns (pattern separation). Memory recall is triggered by injecting a partial spike-train pattern; the network completes the sequence.
+
+2. **Prefrontal Knowledge System** — a feed-forward spiking network encoding stylistic rules, mode/scale constraints, and structural form templates. Synaptic weights encode the probability distributions of pitch transitions, interval classes, and duration classes from a training corpus. This system biases the hippocampal memory toward style-appropriate outputs (genre, composer, mode).
+
+3. **Thalamic Clock/Oscillation System** — a pacemaker network of intrinsically bursting (IB) Izhikevich neurons that generate theta (4–8 Hz) and gamma (30–80 Hz) band oscillations. Theta oscillations encode bar-level / section-level periodicity; gamma oscillations encode note-level timing. Phase-locking between theta and gamma provides hierarchical metric binding (nested rhythms). Oscillation frequencies adapt to tempo via thalamocortical relay cells.
+
+4. **Insula Emotion System** — a spiking network that encodes the emotional valence trajectory (tension/release) over the composition. Emotional states modulate the gain of prefrontal-PC connections and the threshold of hippocampal CA3 neurons, biasing generation toward higher HOME/LIFT/TENSE/TURN dynamics.
+
+### Musical Elements Framework
+
+**PITCH**: Pitch is encoded via spike-train population-rate decoding over a pitch-selective neural sheet (tonotopic organization in A1). For each time window (e.g., one 16th note), the firing rates of 12 pitch-class-selective neural columns are decoded to a pitch-class probability distribution. The most active column (winner-take-all + softmax) selects the pitch. Contour is encoded as the relative spike-timing difference between adjacent pitch-column populations — a "synfire chain" of sequential column activations produces smooth melodic contour. Pitch ranges are encoded via the spatial position of the activated columns along the tonotopic axis (low→high = anterior→posterior A1). Intervals emerge naturally from the distance between winning columns in the tonotopic map.
+
+**RHYTHM**: Rhythm is generated by the thalamic theta–gamma phase coupling network. Each gamma cycle within a theta phase window gates an onset-permissive window. The phase-locking value (PLV) between theta and gamma oscillators determines the rhythmic density: high PLV = rigid metric grid, low PLV = swung/fluid time. Inter-onset intervals (IOIs) are distributed as the intervals between gamma-burst peaks. The number of gamma cycles per theta cycle sets the subdivision (4 gamma/theta = sixteenth notes, 3 gamma/theta = eighth-note triplets). Theta amplitude modulation across sections encodes ritardando/accelerando via gradual frequency modulation of the theta oscillator's membrane time constant.
+
+**HARMONY**: Harmony is realized as co-activated pitch-class columns during the same theta-gamma time window. STDP-learned connections between pitch-column populations encode interval preferences — strong excitatory connections form between consonant intervals (fifths, thirds) and weak or inhibitory connections form between dissonant intervals (tritones, semitones). A chord = the set of pitch-class columns whose firing rates simultaneously exceed threshold within a single gamma cycle. Chord progression = the sequence of co-activation patterns across successive theta cycles. The hippocampal CA3 region stores common chord-progression sequences (I→IV→V→I) as synfire chains, and the prefrontal knowledge system biases transitions toward the mode's tonic.
+
+**STRUCTURE**: Macro-form is encoded as a theta-band oscillation envelope across the composition duration — each section corresponds to one or more cycles of a "form theta" oscillator (0.1–0.5 Hz, modulating section identity). The prefrontal system generates a form template: a sequence of "section tokens" each encoded as a distinct firing pattern in a population of prefrontal neurons. Each section token gates: (a) which hippocampal memory traces are active, (b) which pitch ranges are permitted, (c) the theta-gamma coupling strength (metric density), and (d) the insula's target tension level. The form template can be learned from corpus analysis or hand-designed (e.g., AABA, verse-chorus).
+
+**TEXTURE**: Texture (monophony vs. polyphony, voice independence) is controlled by the correlation between spike trains of different voice-populations in the spiking network. Low inter-population spike correlation (< 0.1) produces independent voices; high correlation (> 0.5) produces homophonic/chorale texture. Voice count = number of active neural populations with distinct tonotopic ranges and independent STDP trajectories. The hippocampus learns multi-voice patterns as separate synfire chains with controlled cross-correlation via shared inhibitory interneuron gating.
+
+### UnitMatrix Integration (Voices & Sections)
+
+Each UnitMatrix **voice** corresponds to one spiking neural population with its own tonotopic pitch range (e.g., 12–24 pitch-class columns), STDP-weight matrix, and population-rate decoder. Voices are instantiated as distinct cortical minicolumns in the spiking network model — they receive shared thalamic clock input for synchronized timing but maintain separate synaptic weight matrices and separate recurrent connectivity for independent pattern evolution.
+
+Each UnitMatrix **section** corresponds to a theta-band oscillation cycle of the "form theta" oscillator, with a distinct section-token firing pattern in prefrontal cortex. The section token modulates:
+- **HOME/LIFT/TENSE/TURN**: via insula emotion system output modulating the thresholds of prefrontal→hippocampal excitatory connections
+- **Metric binding**: via the target theta–gamma phase-locking value set by thalamic relay neurons
+- **Voicing**: via which voice populations are gated active (e.g., verse = lead + chord + bass; bridge = lead + bass only)
+- **Register**: via the active tonotopic range (center frequency + spread) set by prefrontal cortex
+
+The **cell** content (MusicUnit) is decoded from the spike-train output of each voice-population during each section window: a sequence of (pitch, onset_tick, duration, velocity) events is extracted from the spike raster via population-rate decoding for pitch and inter-spike-interval decoding for duration.
+
+### Pitfalls
+
+1. **STDP training requires sequential data not orderless batches** — musical sequences must be presented as ordered spike-train patterns, requiring conversion of MIDI or symbolic notation to spike trains via Poisson rate encoding or temporal coding. This preprocessing pipeline is non-trivial.
+
+2. **Spike raster stochasticity** — the same synaptic weights can produce different spike trains on different runs due to noise currents and initial conditions. For deterministic output, freeze the random seed and disable noise terms.
+
+3. **Izhikevich parameter sensitivity** — the four Izhikevich parameters (a, b, c, d) govern neuron type (regular spiking, intrinsically bursting, fast spiking, etc.). Selecting the wrong neuron-type mix can produce epileptic-like runaway excitation or dead-silent networks. Tune per region: RS = regular spiking for hippocampus, IB = intrinsically bursting for thalamus, FS = fast spiking for inhibitory interneurons.
+
+4. **Theta-gamma coupling drift** — over long compositions (> 60 seconds) the phase-locking between theta and gamma oscillators can drift due to accumulated numerical error. Implement a phase-resetting mechanism at section boundaries or periodic phase correction.
+
+5. **Voice independence vs. harmonic coherence trade-off** — lowering inter-population spike correlation to achieve independent voices can produce harmonic chaos (no vertical alignment). A shared inhibitory interneuron pool with adjustable gain controls this trade-off; gain must be set per section.
+
+6. **Computational cost** — a network with 10,000+ Izhikevich neurons run at 0.1 ms timestep for a 3-minute composition requires ~18 million timesteps × 10k neurons = 180 billion state updates. Use Brian2 or custom CUDA kernels for efficiency, or sub-sample to 1 ms timestep with hybrid Izhikevich-LIF neurons.
+
+7. **No closed-form convergence guarantee** — unlike 061 GPC or 061 NFC, there is no guarantee the spiking network's dynamics will converge to a desired output within a fixed number of simulation steps. Run a timeout + re-seed fallback if the network enters a silent or saturated state.
+
+8. **Decoding latency** — spike-train decoders (population rate estimation) require a finite time window for accurate rate estimation. The decoding window introduces a minimum lookahead latency equal to the window size (typically 10–50 ms), which must be accounted for in onset-tick alignment.
+# McAulay-Quatieri Sinusoidal Analysis/Synthesis (MQSAS) — Sound Production Method SP-108
+
+### Source
+McAulay, R. J. & Quatieri, T. F. (1986). "Speech Analysis/Synthesis Based on a Sinusoidal Representation." *IEEE Transactions on Acoustics, Speech, and Signal Processing*, 34(4), 744–754. — Quatieri, T. F. & McAulay, R. J. (1992). "Shape-Invariant Time-Scale and Pitch Modification of Speech." *IEEE Trans. Signal Processing*, 40(3), 497–510. — Smith, J. O. & Serra, X. (1987). "PARSHL: An Analysis/Synthesis Program for Non-Harmonic Sounds Based on a Sinusoidal Representation." *Proc. ICMC*. — Serra, X. & Smith, J. O. (1990). "Spectral Modeling Synthesis." *Computer Music Journal*, 14(4), 12–24 (distinction from MQ). — Lagrange, M., Marchand, S., Raspaud, M. & Rault, J. (2003). "Enhanced Partial Tracking Using Linear Prediction." *Proc. DAFx-03*. — Klingbeil, M. (2005). "SPEAR: Sinusoidal Partial Editing Analysis and Resynthesis." *Proc. ICMC*. — Glover, J., Lazzarini, V. & Timoney, J. (2010). "Simpl: A Python Library for Sinusoidal Modelling." *Proc. DAFx-10*.
+
+### Layer
+**absolute** — sound production method. Post-Processing / DSP layer that analyzes a rendered audio buffer into time-varying sinusoidal parameters (amplitude, frequency, phase per partial), enables arbitrary spectral editing in the parameter domain (partial stretching, transposition, morphing, filtering), and resynthesizes the modified audio via an oscillator bank with cubic phase interpolation. Candidate code path: `sound/effects/sinusoidal_modeling.py`.
+
+### Description
+**McAulay-Quatieri Sinusoidal Analysis/Synthesis (MQSAS)** is the foundational sinusoidal modeling technique for audio analysis, spectral editing, and high-quality resynthesis. Unlike the channel vocoder (SP-046), which uses a fixed filter bank, or the phase vocoder (SP-026), which operates on fixed STFT bins, MQSAS tracks the *exact frequency, amplitude, and phase* of each spectral peak over time, producing a collection of continuous partial trajectories. Unlike SMS (SP-027), which adds a separate stochastic residual model, MQSAS models the *entire signal* as a sum of sinusoids alone — every sample is reconstructed from partials, with no residual component, making it a pure sinusoidal representation.
+
+The method is based on Fourier's theorem (any waveform can be represented as a sum of sinusoids) but extends it to time-varying parameters: each sinusoid has its own amplitude and frequency that evolve slowly over time. The key innovation over earlier additive synthesis (MAT-FET, Risset 1969) is the automatic extraction of these parameters from a natural audio recording via STFT peak tracking with parabolic interpolation and, critically, **cubic phase interpolation** at the synthesis stage to guarantee continuous instantaneous frequency at frame boundaries.
+
+MQSAS is the analysis-resynthesis engine behind the SPEAR, SNDAN, Lemur, and Loris spectral editing platforms, and is the standard method for high-quality partial editing, time-stretching/pitch-shifting with formant preservation, spectral morphing, and cross-synthesis. It is the analysis counterpart to SP-039 (IFFT Fast Additive Synthesis): SP-039 builds spectra from scratch, while MQSAS extracts them from existing audio.
+
+### Technical Mechanics
+
+The MQSAS pipeline has three stages: **peak detection**, **partial tracking**, and **oscillator bank synthesis**.
+
+#### Stage 1: Peak Detection (Analysis)
+
+The input signal $x[n]$ is windowed into overlapping frames of length $M$ with hop size $R$ (typically $M = 4f_s/f_a$, $R = M/4$, where $f_a$ is the minimum analysis frequency). The STFT frame $m$ is:
+
+$$X_m[k] = \sum_{n=0}^{M-1} w[n]\, x[n+mR]\, e^{-j2\pi kn / N}$$
+
+where $w[n]$ is a Hanning/Hamming window and $N$ is the FFT size (zero-padded from $M$ to $N = 2^{\lceil\log_2 M\rceil+1}$ for 2× oversampling).
+
+**Peak Selection.** For frame $m$, local magnitude maxima are found in $|X_m[k]|$. For each candidate peak at bin $k^*$:
+
+1. The three bins $k^*-1, k^*, k^*+1$ with magnitudes $\alpha={|X_m[k^*-1]|}, \beta={|X_m[k^*]|}, \gamma={|X_m[k^*+1]|}$ are fitted to a parabola. The interpolated peak location in bins is:
+
+   $$p = \frac{1}{2}\,\frac{\alpha - \gamma}{\alpha - 2\beta + \gamma} \in [-1/2, 1/2]$$
+
+2. The interpolated frequency is:
+
+   $$f_k = (k^* + p)\,\frac{f_s}{N}$$
+
+3. The interpolated magnitude in dB is:
+
+   $$|X|_{\text{dB}} = \beta - \frac{1}{4}(\alpha - \gamma)\,p$$
+
+4. The phase at the peak is obtained by evaluating the parabola on the real and imaginary spectra separately, producing a complex interpolated spectral value, then taking the angle:
+
+   $$\phi_k = \angle\left(X_m^{\text{interp}}[k^*+p]\right)$$
+
+**Unwrapping.** The measured phase $\phi_k^{(m)}$ at frame $m$ is unwrapped relative to frame $m-1$ using the predicted phase from the previous frame's frequency:
+
+$$\hat{\phi}_k^{(m)} = \phi_k^{(m-1)} + 2\pi R\, f_k^{(m-1)} / f_s$$
+
+$$\Delta\phi = \phi_k^{(m)} - \hat{\phi}_k^{(m)}$$
+
+$$\phi_k^{\text{unwrapped}} = \phi_k^{(m)} - 2\pi\,\text{round}(\Delta\phi / 2\pi)$$
+
+This ensures the phase trajectory is continuous.
+
+#### Stage 2: Partial Tracking
+
+For each frame $m$, the set of detected peaks $\{f_j, A_j, \phi_j\}_{j=1}^{N_m}$ must be matched to the set of partial tracks $\{T_i\}_{i=1}^{K}$ active from frame $m-1$.
+
+**Prediction.** For each active track $T_i$, the predicted frequency $\hat{f}_i^{(m)}$ and amplitude $\hat{A}_i^{(m)}$ at frame $m$ are extrapolated from the track's recent history. MQ (1986) uses a simple forward extension (linear extrapolation from the past two frames). Lagrange et al. (2003) improve this with Burg-method LP of order 6 over the last 64 values. The prediction provides the expected continuation state.
+
+**Matching Cost.** The cost of matching track $i$ to peak $j$ is a Euclidean distance in the (frequency, amplitude) plane, weighted to semitone and dB units:
+
+$$E_{ij} = \sqrt{\left[12\log_2\left(\frac{f_j}{\hat{f}_i}\right)\right]^2 + \left[\frac{1}{12}\,20\log_{10}\left(\frac{A_j}{\hat{A}_i}\right)\right]^2}$$
+
+**Assignment.** Tracks and peaks are matched via a nearest-neighbor algorithm subject to a frequency deviation constraint $|f_j - \hat{f}_i| < \Delta f_{\max}$. MQ uses $\Delta f_{\max} \approx 3f_a/4$ where $f_a$ is the minimum analysis frequency.
+
+Three outcomes for each track:
+- **Continuation**: a peak is matched within the tolerance → track extended with the new peak's parameters.
+- **Death**: no peak matched → the track is terminated (optionally faded out over 1–2 frames).
+- **Birth**: an unmatched peak exceeding a dynamic amplitude threshold $T_b$ starts a new track. The birth threshold is frequency-dependent to compensate for spectral rolloff:
+
+  $$T_b(f) = A_{\max} + A_L + A_R\,b^{f/20000}$$
+
+  where $A_L = -24$ dB, $A_R = 32$ dB, $b = 0.0075$ (Klingbeil 2005 defaults).
+
+#### Stage 3: Oscillator Bank Synthesis
+
+The signal is resynthesized as the sum of $K$ partials, each driven by the tracked parameter trajectories:
+
+$$y[n] = \sum_{i=1}^{K} A_i[n] \cos\big(\theta_i[n]\big)$$
+
+where $\theta_i[n]$ is the instantaneous phase of partial $i$ at sample $n$.
+
+**Cubic Phase Interpolation (McAulay-Quatieri 1986).** Between analysis frames at sample indices $n_0$ and $n_1 = n_0 + R$, the phase is interpolated by a cubic polynomial that matches both phase AND instantaneous frequency at both boundaries — guaranteeing that the sinusoidal oscillator's frequency varies smoothly across frame boundaries with no discontinuities.
+
+At frame $m$, partial $i$ has phase $\phi_i^{(m)}$ and frequency $f_i^{(m)}$. The instantaneous radian frequency is $\omega_i^{(m)} = 2\pi f_i^{(m)} / f_s$. Over the hop interval $t \in [0, R]$, define the cubic polynomial:
+
+$$\theta_i(t) = a + bt + ct^2 + dt^3$$
+
+With constraints:
+
+$$\theta_i(0) = \phi_i^{(m)}, \quad \theta_i'(0) = \omega_i^{(m)}$$
+$$\theta_i(R) = \phi_i^{(m+1)}, \quad \theta_i'(R) = \omega_i^{(m+1)}$$
+
+Solving the four linear equations:
+
+$$a = \phi_i^{(m)}$$
+$$b = \omega_i^{(m)}$$
+$$c = \frac{3}{R^2}(\phi_i^{(m+1)} - \phi_i^{(m)}) - \frac{1}{R}(\omega_i^{(m+1)} + 2\omega_i^{(m)})$$
+$$d = \frac{2}{R^3}(\phi_i^{(m)} - \phi_i^{(m+1)}) + \frac{1}{R^2}(\omega_i^{(m+1)} + \omega_i^{(m)})$$
+
+This cubic interpolation ensures $C^1$ continuity (continuous phase and continuous frequency) at every frame boundary. Linear phase interpolation (which is equivalent to constant-frequency per frame) produces frequency discontinuities and audible clicks; cubic phase interpolation eliminates them.
+
+**Amplitude Interpolation.** Amplitude is linearly interpolated between frames (or quadratically for higher quality):
+
+$$A_i(t) = A_i^{(m)} + \frac{t}{R}(A_i^{(m+1)} - A_i^{(m)})$$
+
+**Synthesis Equation.** Per-sample output at index $n = n_0 + t$:
+
+$$y[n] = \sum_{i=1}^{K} A_i(t)\, \cos\big(\theta_i(t)\big)$$
+
+The oscillator bank runs at audio rate. Overlapping frames are overlap-added using the hop size $R$ as the synthesis stride.
+
+**Complexity.** Analysis: $\mathcal{O}(N \log N)$ per frame for FFT + $\mathcal{O}(N_m \log N_m)$ for peak matching. Synthesis: $\mathcal{O}(K)$ per sample for the oscillator bank. For a typical analysis with $K=50$–$200$ partials at $f_s=44100$, synthesis is ~200–800 FMAs per sample.
+
+### Musical Elements Framework
+
+- **PITCH**: MQSAS preserves the exact pitch (fundamental frequency $f_0$) of the analyzed signal because it tracks individual partials. Pitch modification is a first-class operation: multiply all partial frequencies by a constant factor $\alpha$ (pitch shift) or apply a per-partial transposition map. Because the model makes no harmonicity assumption, pitch-shifting inharmonic sounds (bells, gongs, piano) preserves their characteristic inharmonic ratios — each partial's frequency ratio to $f_0$ shifts independently. Formant-preserving pitch shift is achieved by leaving the amplitude envelope $A(f)$ stationary in the frequency axis while sliding the partial frequencies underneath (the "true" spectral envelope approach). For UnitMatrix integration, a `pitch_shift_cents` parameter per cell drives a multiplicative factor on all partial frequencies: $f_i' = f_i \cdot 2^{\Delta/1200}\$.
+
+- **RHYTHM**: MQSAS operates on the spectral domain, but time-stretching (changing the pace of spectral evolution without changing pitch) is implemented by altering the sample-clock speed at which the partial breakpoint functions are read. Time-stretch factor $\beta$: the synthesis reads track parameters at sample-rate $f_s/\beta$ while outputting at $f_s$, effectively slowing or accelerating the spectral evolution. Because the model tracks continuous partials, time-stretching preserves transients, attacks, and the temporal envelope — unlike the phase vocoder (SP-026) which blurs attacks through the STFT window. The onset density and rhythmic feel of the original performance are preserved in the stretched output. For UnitMatrix cells, a `time_stretch_factor` parameter controls per-section temporal compression/expansion.
+
+- **HARMONY**: MQSAS faithfully reproduces the harmonic content of the analyzed signal: the tracked partials include all spectral peaks, both harmonic and inharmonic. Harmony editing is a key application: individual partials can be silenced, amplified, transposed, or frequency-modulated independently, enabling harmonic restructuring (e.g., modifying a minor chord analysis to produce a major triad by shifting the third partial). Cross-synthesis (source A's partial amplitudes × source B's partial frequencies) produces novel hybrid spectra. For UnitMatrix, a `partial_filter` mask per section selects which partial bands to preserve, attenuate, or amplify.
+
+- **STRUCTURE**: Macro-form is encoded as the sequence of section-specific MQSAS processing parameters. Each section in the UnitMatrix defines its own analysis or resynthesis parameters: number of partials to track $K^{(s)}$, partial retention threshold (which partials survive from the previous section), pitch-shift amount, time-stretch factor, and harmonic filter mask. Structural contrast (verse vs. chorus) is achieved by dramatically changing the spectral filter mask (e.g., verse = full spectrum, chorus = boosted upper partials). Section transitions blend the partial parameter sets via crossfade of the resynthesis buffers or via morphed partial trajectories across the section boundary.
+
+- **TEXTURE**: Texture is the number, density, and spectral spread of the tracked partials. Dense sounds (orchestral tutti, noise) produce many partials (200+); sparse sounds (solo flute, pure tone) produce few (5–20). The partial count $K$ per frame is the primary textural knob: increasing $K$ adds spectral resolution (richer texture), decreasing $K$ smooths and thins the sound. The partial death threshold $T_d$ indirectly controls textural density: a higher threshold kills quiet partials, producing a sparser, cleaner texture; a lower threshold retains all partials, producing a dense, detailed texture. For UnitMatrix, `partial_density` (target partial count per section) maps to a frame-by-frame partial retention logic.
+
+### UnitMatrix Integration (Voices & Sections)
+
+**Voices.** Each voice in the UnitMatrix corresponds to an independently analyzed-and-resynthesized audio track (stem). A multi-track composition has $V$ audio stems $x_v[n]$ ($v=1,\ldots,V$). Each stem is analyzed independently by the MQSAS pipeline, producing per-voice partial sets $\{T_i^{(v)}\}$. Synthesis then sums across voices:
+
+$$y[n] = \sum_{v=1}^{V} \sum_{i=1}^{K_v} A_i^{(v)}(t_v) \cos\big(\theta_i^{(v)}(t_v)\big)$$
+
+where $t_v$ is the section-mapped time coordinate for voice $v$ (allowing per-voice time-stretch). Voice-independent parameters (pitch-shift $\Delta_v$, stretch $\beta_v$, filter mask $M_v$) are per-voice, per-section controls stored in the UnitMatrix cell.
+
+**Sections.** Each section $s$ in the UnitMatrix defines a parameter vector $P^{(s)} = \{\Delta^{(s)}, \beta^{(s)}, K_{\max}^{(s)}, T_d^{(s)}, M^{(s)}\}$. The MQSAS partial trajectories are segmented by section: within a section, parameters are constant or follow a per-section envelope. Section transitions interpolate the parameter vectors over a transition window of length $L_{\text{xfade}}$ samples: $\hat{P}(t) = (1-\lambda)P^{(s)} + \lambda P^{(s+1)}$ with $\lambda = t/L_{\text{xfade}}$.
+
+**Cell Filling.** Each cell (voice $v$, section $s$) defines the audio processing applied to that stem. In a real MQSAS pipeline, the audio audio stems are pre-analyzed once, then every cell reads the same partial trajectory database with different section-controlled parameters. Cell properties:
+
+| Parameter | Type | Unit | Description |
+|-----------|------|------|-------------|
+| `pitch_shift_cents` | float | cents | Δ, additive factor on all partial frequencies |
+| `time_stretch_factor` | float | ratio | β, temporal compression/expansion (>1 = slower) |
+| `partial_density` | int | count | Kmax, max partials retained per frame |
+| `partial_death_threshold` | float | dB | Td, amplitude threshold for partial retention |
+| `harmonic_filter_mask` | array | bool[Kmax] | M, per-partial booleans for selective silencing |
+| `spectral_morph_target` | string | — | optional path to a second analysis file for morphing |
+
+**Rendering flow:** Per section $s$, for each voice $v$: load the partial trajectory database → apply parameter set $P_v^{(s)}$ → generate per-voice audio buffer via oscillator bank → sum voices → apply MQSAS section buffer as a stem in the master mix.
+
+### Pitfalls
+
+1. **No assumption of harmonicity → noisy sounds require many partials.** MQSAS models the *entire signal* as sinusoids, so noise-like signals (breath, cymbal, sibilance, reverb tails) require hundreds of partials to sound natural. With too few partials, noise is "tonalized" — it sounds like a chorus of sine tones (the classic "swarm of sinusoids" artifact). Mitigation: use an adaptive partial count threshold where noise-dominated frames allow more partials, or combine MQSAS with a residual noise model (SP-027 SMS style).
+
+2. **Cubic phase interpolation can produce overshoots between frames with large frequency jumps.** If a partial's frequency changes abruptly (e.g., a vocal vibrato trough-to-peak), the cubic polynomial can overshoot beyond the intended frequency, producing a "chirp" artifact. Mitigation: constrain the cubic coefficients so the polynomial's derivative stays within [min($\omega_m, \omega_{m+1}$), max($\omega_m, \omega_{m+1}$)] (monotonic frequency constraint), or replace cubic with constrained Hermite interpolation.
+
+3. **Birth/death threshold tuning is signal-dependent.** Setting $T_d$ (death threshold) too high kills valid partials during quiet sections, producing "thinning" where the sound audibly loses detail. Setting it too low retains noise-floor peaks as partials, increasing computational cost and potentially "tonalizing" noise. The frequency-dependent birth threshold $T_b(f)$ compensates for spectral tilt but requires default values tuned to the source type (vocal, instrumental, percussive).
+
+4. **Fixed analysis frame rate vs. time-varying spectra.** The analysis frame hop $R$ is fixed during analysis. For rapidly evolving sounds (attacks, transients), the frame rate may be too slow to capture the spectral evolution, causing pre-echo or smeared attacks. Mitigation: use a smaller hop size ($R = M/8$ for transient-rich material) or switch to transient detection→separate transient layer (MQSAS for steady-state + transient model).
+
+5. **Computational cost scales with partial count.** Synthesis cost is $\mathcal{O}(K)$ per sample. At $K=200$ and $f_s=44100$, that's 8.82 million cosine evaluations per second. The cubic phase evaluation adds multiply-accumulate operations per partial per sample. Mitigation: use the IFFT synthesis method (SP-039) for real-time playback where partial counts are high, reserving oscillator-bank synthesis (with cubic phase) for offline high-quality renders.
+
+6. **Phase coherence across section boundaries.** When section parameters cause an abrupt change in the partial set (e.g., silencing a subset of partials), the oscillator phases at the section seam may be discontinuous, producing a click. Mitigation: crossfade the section transition over 5–10 ms, or carry the oscillator phase states across the boundary and only apply the new parameter set to newly born partials.
+
+7. **vs. SP-027 SMS (Spectral Modeling Synthesis).** MQSAS models the signal as a sum of pure sinusoids with no residual. SMS explicitly separates deterministic sinusoids from a stochastic noise component. MQSAS is better for sounds with clear sinusoidal structure (sustained notes, vocal, brass, string); SMS is better for sounds with significant noise content (breath, sibilance, bowed textures, ambient field recordings). For UnitMatrix integration, MQSAS is preferred for melodic/harmonic voices; SMS or a combined MQSAS+noise scheme for textural/ambient voices.
+
+Candidate code path: `sound/effects/sinusoidal_modeling.py` — implements a `SinusoidalModelingEngine` class with three stages: `PeakDetector` (STFT frame processor with parabolic interpolation), `PartialTracker` (frame-to-frame peak matching with birth/continuation/death logic), and `OscillatorBankSynthesizer` (cubic-phase-interpolated partial summation). NumPy/SciPy dependencies: `scipy.signal` for STFT frames, `numpy.fft` for FFT. UnitMatrix integration via `MQCellConfig` dataclass.

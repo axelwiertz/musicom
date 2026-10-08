@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-08",
+  "method": "SP-092",
+  "method_module": "sound.effects.multiband_saturator",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/HipHop/boom-bap/v1/hiphop_boom_bap.mid",
+  "recent_excluded": [
+    "SP-021",
+    "SP-069",
+    "SP-072",
+    "SP-080",
+    "SP-083",
+    "SP-086",
+    "SP-091"
+  ],
+  "registry_total": 42,
+  "n_well_formed": 219,
+  "note": "first draw landed on Country/001-country-hope-loop/MIDI/country-hope-loop-v7.mid (degenerate: mido delta-time bug -> 7916 ticks/bar, 82.5s for 8-bar 96 BPM loop, no program changes) -> re-rolled to well-formed candidate"
+}

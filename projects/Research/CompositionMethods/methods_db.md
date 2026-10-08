@@ -282,6 +282,7 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 | **SP-105** | Coupled Resonant Filter Bank Synthesis (CRFBS) | **Synthesis Engines** | Nonlinear Modal Interaction / Impact, Cymbal & Plate Timbres | Banks of $N$ parallel Mathews-Smith complex-format IIR resonators exchanging energy through a redistribution matrix $\mathbf{M}$ to model nonlinear modal coupling. Captures delayed tonal components, spectral enrichment during impacts, and energy cascades that linear modal synthesis cannot produce. $\mathcal{O}(N)$ per sample. Candidate: `sound/synthesis/coupled_resonator.py`. |
 | **SP-106** | Phaser / Allpass Modulation Synthesis (APS) | **Post-Processing / DSP** | Phase-Swept Modulation / Spectral Notch Filtering | Classic modulation effect using a cascade of allpass filters with LFO-modulated break frequencies to create moving spectral notches through phase cancellation when mixed with dry signal. $N/2$ notches for $N$ stages, depth/rate/feedback/sweep controls. $\mathcal{O}(N)$ per sample. Candidate: `sound/effects/phaser.py`. |
 | **SP-107** | Look-Ahead Brickwall Limiter (LBL) | **Post-Processing / DSP** | Peak Control / Loudness Maximization | Look-ahead brickwall limiter that delays the input signal, computes gain reduction via peak detection with attack/hold/release envelope shaping, applies the smoothed gain curve to the delayed signal, and ensures no sample exceeds the threshold. The final dynamics-control stage before render. |
+| **SP-108** | McAulay-Quatieri Sinusoidal Analysis/Synthesis (MQSAS) | **Post-Processing / DSP** | Sinusoidal Resynthesis / Spectral Editing | Decomposes a signal into time-varying sinusoidal partials via FFT peak tracking with parabolic interpolation and frame-to-frame partial matching (birth/continuation/death). Resynthesizes with cubic phase interpolation for continuous instantaneous frequency. Enables independent partial editing, pitch-shift, time-stretch, and cross-synthesis. The foundational analysis-resynthesis method for spectral editing (SPEAR, SNDAN, Loris). O(K) synthesis per sample. Candidate: `sound/effects/sinusoidal_modeling.py`. |
 |---|
 
 
@@ -24034,3 +24035,171 @@ The **cell** content (MusicUnit) is decoded from the spike-train output of each 
 7. **No closed-form convergence guarantee** — unlike 061 GPC or 061 NFC, there is no guarantee the spiking network's dynamics will converge to a desired output within a fixed number of simulation steps. Run a timeout + re-seed fallback if the network enters a silent or saturated state.
 
 8. **Decoding latency** — spike-train decoders (population rate estimation) require a finite time window for accurate rate estimation. The decoding window introduces a minimum lookahead latency equal to the window size (typically 10–50 ms), which must be accounted for in onset-tick alignment.
+# McAulay-Quatieri Sinusoidal Analysis/Synthesis (MQSAS) — Sound Production Method SP-108
+
+### Source
+McAulay, R. J. & Quatieri, T. F. (1986). "Speech Analysis/Synthesis Based on a Sinusoidal Representation." *IEEE Transactions on Acoustics, Speech, and Signal Processing*, 34(4), 744–754. — Quatieri, T. F. & McAulay, R. J. (1992). "Shape-Invariant Time-Scale and Pitch Modification of Speech." *IEEE Trans. Signal Processing*, 40(3), 497–510. — Smith, J. O. & Serra, X. (1987). "PARSHL: An Analysis/Synthesis Program for Non-Harmonic Sounds Based on a Sinusoidal Representation." *Proc. ICMC*. — Serra, X. & Smith, J. O. (1990). "Spectral Modeling Synthesis." *Computer Music Journal*, 14(4), 12–24 (distinction from MQ). — Lagrange, M., Marchand, S., Raspaud, M. & Rault, J. (2003). "Enhanced Partial Tracking Using Linear Prediction." *Proc. DAFx-03*. — Klingbeil, M. (2005). "SPEAR: Sinusoidal Partial Editing Analysis and Resynthesis." *Proc. ICMC*. — Glover, J., Lazzarini, V. & Timoney, J. (2010). "Simpl: A Python Library for Sinusoidal Modelling." *Proc. DAFx-10*.
+
+### Layer
+**absolute** — sound production method. Post-Processing / DSP layer that analyzes a rendered audio buffer into time-varying sinusoidal parameters (amplitude, frequency, phase per partial), enables arbitrary spectral editing in the parameter domain (partial stretching, transposition, morphing, filtering), and resynthesizes the modified audio via an oscillator bank with cubic phase interpolation. Candidate code path: `sound/effects/sinusoidal_modeling.py`.
+
+### Description
+**McAulay-Quatieri Sinusoidal Analysis/Synthesis (MQSAS)** is the foundational sinusoidal modeling technique for audio analysis, spectral editing, and high-quality resynthesis. Unlike the channel vocoder (SP-046), which uses a fixed filter bank, or the phase vocoder (SP-026), which operates on fixed STFT bins, MQSAS tracks the *exact frequency, amplitude, and phase* of each spectral peak over time, producing a collection of continuous partial trajectories. Unlike SMS (SP-027), which adds a separate stochastic residual model, MQSAS models the *entire signal* as a sum of sinusoids alone — every sample is reconstructed from partials, with no residual component, making it a pure sinusoidal representation.
+
+The method is based on Fourier's theorem (any waveform can be represented as a sum of sinusoids) but extends it to time-varying parameters: each sinusoid has its own amplitude and frequency that evolve slowly over time. The key innovation over earlier additive synthesis (MAT-FET, Risset 1969) is the automatic extraction of these parameters from a natural audio recording via STFT peak tracking with parabolic interpolation and, critically, **cubic phase interpolation** at the synthesis stage to guarantee continuous instantaneous frequency at frame boundaries.
+
+MQSAS is the analysis-resynthesis engine behind the SPEAR, SNDAN, Lemur, and Loris spectral editing platforms, and is the standard method for high-quality partial editing, time-stretching/pitch-shifting with formant preservation, spectral morphing, and cross-synthesis. It is the analysis counterpart to SP-039 (IFFT Fast Additive Synthesis): SP-039 builds spectra from scratch, while MQSAS extracts them from existing audio.
+
+### Technical Mechanics
+
+The MQSAS pipeline has three stages: **peak detection**, **partial tracking**, and **oscillator bank synthesis**.
+
+#### Stage 1: Peak Detection (Analysis)
+
+The input signal $x[n]$ is windowed into overlapping frames of length $M$ with hop size $R$ (typically $M = 4f_s/f_a$, $R = M/4$, where $f_a$ is the minimum analysis frequency). The STFT frame $m$ is:
+
+$$X_m[k] = \sum_{n=0}^{M-1} w[n]\, x[n+mR]\, e^{-j2\pi kn / N}$$
+
+where $w[n]$ is a Hanning/Hamming window and $N$ is the FFT size (zero-padded from $M$ to $N = 2^{\lceil\log_2 M\rceil+1}$ for 2× oversampling).
+
+**Peak Selection.** For frame $m$, local magnitude maxima are found in $|X_m[k]|$. For each candidate peak at bin $k^*$:
+
+1. The three bins $k^*-1, k^*, k^*+1$ with magnitudes $\alpha={|X_m[k^*-1]|}, \beta={|X_m[k^*]|}, \gamma={|X_m[k^*+1]|}$ are fitted to a parabola. The interpolated peak location in bins is:
+
+   $$p = \frac{1}{2}\,\frac{\alpha - \gamma}{\alpha - 2\beta + \gamma} \in [-1/2, 1/2]$$
+
+2. The interpolated frequency is:
+
+   $$f_k = (k^* + p)\,\frac{f_s}{N}$$
+
+3. The interpolated magnitude in dB is:
+
+   $$|X|_{\text{dB}} = \beta - \frac{1}{4}(\alpha - \gamma)\,p$$
+
+4. The phase at the peak is obtained by evaluating the parabola on the real and imaginary spectra separately, producing a complex interpolated spectral value, then taking the angle:
+
+   $$\phi_k = \angle\left(X_m^{\text{interp}}[k^*+p]\right)$$
+
+**Unwrapping.** The measured phase $\phi_k^{(m)}$ at frame $m$ is unwrapped relative to frame $m-1$ using the predicted phase from the previous frame's frequency:
+
+$$\hat{\phi}_k^{(m)} = \phi_k^{(m-1)} + 2\pi R\, f_k^{(m-1)} / f_s$$
+
+$$\Delta\phi = \phi_k^{(m)} - \hat{\phi}_k^{(m)}$$
+
+$$\phi_k^{\text{unwrapped}} = \phi_k^{(m)} - 2\pi\,\text{round}(\Delta\phi / 2\pi)$$
+
+This ensures the phase trajectory is continuous.
+
+#### Stage 2: Partial Tracking
+
+For each frame $m$, the set of detected peaks $\{f_j, A_j, \phi_j\}_{j=1}^{N_m}$ must be matched to the set of partial tracks $\{T_i\}_{i=1}^{K}$ active from frame $m-1$.
+
+**Prediction.** For each active track $T_i$, the predicted frequency $\hat{f}_i^{(m)}$ and amplitude $\hat{A}_i^{(m)}$ at frame $m$ are extrapolated from the track's recent history. MQ (1986) uses a simple forward extension (linear extrapolation from the past two frames). Lagrange et al. (2003) improve this with Burg-method LP of order 6 over the last 64 values. The prediction provides the expected continuation state.
+
+**Matching Cost.** The cost of matching track $i$ to peak $j$ is a Euclidean distance in the (frequency, amplitude) plane, weighted to semitone and dB units:
+
+$$E_{ij} = \sqrt{\left[12\log_2\left(\frac{f_j}{\hat{f}_i}\right)\right]^2 + \left[\frac{1}{12}\,20\log_{10}\left(\frac{A_j}{\hat{A}_i}\right)\right]^2}$$
+
+**Assignment.** Tracks and peaks are matched via a nearest-neighbor algorithm subject to a frequency deviation constraint $|f_j - \hat{f}_i| < \Delta f_{\max}$. MQ uses $\Delta f_{\max} \approx 3f_a/4$ where $f_a$ is the minimum analysis frequency.
+
+Three outcomes for each track:
+- **Continuation**: a peak is matched within the tolerance → track extended with the new peak's parameters.
+- **Death**: no peak matched → the track is terminated (optionally faded out over 1–2 frames).
+- **Birth**: an unmatched peak exceeding a dynamic amplitude threshold $T_b$ starts a new track. The birth threshold is frequency-dependent to compensate for spectral rolloff:
+
+  $$T_b(f) = A_{\max} + A_L + A_R\,b^{f/20000}$$
+
+  where $A_L = -24$ dB, $A_R = 32$ dB, $b = 0.0075$ (Klingbeil 2005 defaults).
+
+#### Stage 3: Oscillator Bank Synthesis
+
+The signal is resynthesized as the sum of $K$ partials, each driven by the tracked parameter trajectories:
+
+$$y[n] = \sum_{i=1}^{K} A_i[n] \cos\big(\theta_i[n]\big)$$
+
+where $\theta_i[n]$ is the instantaneous phase of partial $i$ at sample $n$.
+
+**Cubic Phase Interpolation (McAulay-Quatieri 1986).** Between analysis frames at sample indices $n_0$ and $n_1 = n_0 + R$, the phase is interpolated by a cubic polynomial that matches both phase AND instantaneous frequency at both boundaries — guaranteeing that the sinusoidal oscillator's frequency varies smoothly across frame boundaries with no discontinuities.
+
+At frame $m$, partial $i$ has phase $\phi_i^{(m)}$ and frequency $f_i^{(m)}$. The instantaneous radian frequency is $\omega_i^{(m)} = 2\pi f_i^{(m)} / f_s$. Over the hop interval $t \in [0, R]$, define the cubic polynomial:
+
+$$\theta_i(t) = a + bt + ct^2 + dt^3$$
+
+With constraints:
+
+$$\theta_i(0) = \phi_i^{(m)}, \quad \theta_i'(0) = \omega_i^{(m)}$$
+$$\theta_i(R) = \phi_i^{(m+1)}, \quad \theta_i'(R) = \omega_i^{(m+1)}$$
+
+Solving the four linear equations:
+
+$$a = \phi_i^{(m)}$$
+$$b = \omega_i^{(m)}$$
+$$c = \frac{3}{R^2}(\phi_i^{(m+1)} - \phi_i^{(m)}) - \frac{1}{R}(\omega_i^{(m+1)} + 2\omega_i^{(m)})$$
+$$d = \frac{2}{R^3}(\phi_i^{(m)} - \phi_i^{(m+1)}) + \frac{1}{R^2}(\omega_i^{(m+1)} + \omega_i^{(m)})$$
+
+This cubic interpolation ensures $C^1$ continuity (continuous phase and continuous frequency) at every frame boundary. Linear phase interpolation (which is equivalent to constant-frequency per frame) produces frequency discontinuities and audible clicks; cubic phase interpolation eliminates them.
+
+**Amplitude Interpolation.** Amplitude is linearly interpolated between frames (or quadratically for higher quality):
+
+$$A_i(t) = A_i^{(m)} + \frac{t}{R}(A_i^{(m+1)} - A_i^{(m)})$$
+
+**Synthesis Equation.** Per-sample output at index $n = n_0 + t$:
+
+$$y[n] = \sum_{i=1}^{K} A_i(t)\, \cos\big(\theta_i(t)\big)$$
+
+The oscillator bank runs at audio rate. Overlapping frames are overlap-added using the hop size $R$ as the synthesis stride.
+
+**Complexity.** Analysis: $\mathcal{O}(N \log N)$ per frame for FFT + $\mathcal{O}(N_m \log N_m)$ for peak matching. Synthesis: $\mathcal{O}(K)$ per sample for the oscillator bank. For a typical analysis with $K=50$–$200$ partials at $f_s=44100$, synthesis is ~200–800 FMAs per sample.
+
+### Musical Elements Framework
+
+- **PITCH**: MQSAS preserves the exact pitch (fundamental frequency $f_0$) of the analyzed signal because it tracks individual partials. Pitch modification is a first-class operation: multiply all partial frequencies by a constant factor $\alpha$ (pitch shift) or apply a per-partial transposition map. Because the model makes no harmonicity assumption, pitch-shifting inharmonic sounds (bells, gongs, piano) preserves their characteristic inharmonic ratios — each partial's frequency ratio to $f_0$ shifts independently. Formant-preserving pitch shift is achieved by leaving the amplitude envelope $A(f)$ stationary in the frequency axis while sliding the partial frequencies underneath (the "true" spectral envelope approach). For UnitMatrix integration, a `pitch_shift_cents` parameter per cell drives a multiplicative factor on all partial frequencies: $f_i' = f_i \cdot 2^{\Delta/1200}\$.
+
+- **RHYTHM**: MQSAS operates on the spectral domain, but time-stretching (changing the pace of spectral evolution without changing pitch) is implemented by altering the sample-clock speed at which the partial breakpoint functions are read. Time-stretch factor $\beta$: the synthesis reads track parameters at sample-rate $f_s/\beta$ while outputting at $f_s$, effectively slowing or accelerating the spectral evolution. Because the model tracks continuous partials, time-stretching preserves transients, attacks, and the temporal envelope — unlike the phase vocoder (SP-026) which blurs attacks through the STFT window. The onset density and rhythmic feel of the original performance are preserved in the stretched output. For UnitMatrix cells, a `time_stretch_factor` parameter controls per-section temporal compression/expansion.
+
+- **HARMONY**: MQSAS faithfully reproduces the harmonic content of the analyzed signal: the tracked partials include all spectral peaks, both harmonic and inharmonic. Harmony editing is a key application: individual partials can be silenced, amplified, transposed, or frequency-modulated independently, enabling harmonic restructuring (e.g., modifying a minor chord analysis to produce a major triad by shifting the third partial). Cross-synthesis (source A's partial amplitudes × source B's partial frequencies) produces novel hybrid spectra. For UnitMatrix, a `partial_filter` mask per section selects which partial bands to preserve, attenuate, or amplify.
+
+- **STRUCTURE**: Macro-form is encoded as the sequence of section-specific MQSAS processing parameters. Each section in the UnitMatrix defines its own analysis or resynthesis parameters: number of partials to track $K^{(s)}$, partial retention threshold (which partials survive from the previous section), pitch-shift amount, time-stretch factor, and harmonic filter mask. Structural contrast (verse vs. chorus) is achieved by dramatically changing the spectral filter mask (e.g., verse = full spectrum, chorus = boosted upper partials). Section transitions blend the partial parameter sets via crossfade of the resynthesis buffers or via morphed partial trajectories across the section boundary.
+
+- **TEXTURE**: Texture is the number, density, and spectral spread of the tracked partials. Dense sounds (orchestral tutti, noise) produce many partials (200+); sparse sounds (solo flute, pure tone) produce few (5–20). The partial count $K$ per frame is the primary textural knob: increasing $K$ adds spectral resolution (richer texture), decreasing $K$ smooths and thins the sound. The partial death threshold $T_d$ indirectly controls textural density: a higher threshold kills quiet partials, producing a sparser, cleaner texture; a lower threshold retains all partials, producing a dense, detailed texture. For UnitMatrix, `partial_density` (target partial count per section) maps to a frame-by-frame partial retention logic.
+
+### UnitMatrix Integration (Voices & Sections)
+
+**Voices.** Each voice in the UnitMatrix corresponds to an independently analyzed-and-resynthesized audio track (stem). A multi-track composition has $V$ audio stems $x_v[n]$ ($v=1,\ldots,V$). Each stem is analyzed independently by the MQSAS pipeline, producing per-voice partial sets $\{T_i^{(v)}\}$. Synthesis then sums across voices:
+
+$$y[n] = \sum_{v=1}^{V} \sum_{i=1}^{K_v} A_i^{(v)}(t_v) \cos\big(\theta_i^{(v)}(t_v)\big)$$
+
+where $t_v$ is the section-mapped time coordinate for voice $v$ (allowing per-voice time-stretch). Voice-independent parameters (pitch-shift $\Delta_v$, stretch $\beta_v$, filter mask $M_v$) are per-voice, per-section controls stored in the UnitMatrix cell.
+
+**Sections.** Each section $s$ in the UnitMatrix defines a parameter vector $P^{(s)} = \{\Delta^{(s)}, \beta^{(s)}, K_{\max}^{(s)}, T_d^{(s)}, M^{(s)}\}$. The MQSAS partial trajectories are segmented by section: within a section, parameters are constant or follow a per-section envelope. Section transitions interpolate the parameter vectors over a transition window of length $L_{\text{xfade}}$ samples: $\hat{P}(t) = (1-\lambda)P^{(s)} + \lambda P^{(s+1)}$ with $\lambda = t/L_{\text{xfade}}$.
+
+**Cell Filling.** Each cell (voice $v$, section $s$) defines the audio processing applied to that stem. In a real MQSAS pipeline, the audio audio stems are pre-analyzed once, then every cell reads the same partial trajectory database with different section-controlled parameters. Cell properties:
+
+| Parameter | Type | Unit | Description |
+|-----------|------|------|-------------|
+| `pitch_shift_cents` | float | cents | Δ, additive factor on all partial frequencies |
+| `time_stretch_factor` | float | ratio | β, temporal compression/expansion (>1 = slower) |
+| `partial_density` | int | count | Kmax, max partials retained per frame |
+| `partial_death_threshold` | float | dB | Td, amplitude threshold for partial retention |
+| `harmonic_filter_mask` | array | bool[Kmax] | M, per-partial booleans for selective silencing |
+| `spectral_morph_target` | string | — | optional path to a second analysis file for morphing |
+
+**Rendering flow:** Per section $s$, for each voice $v$: load the partial trajectory database → apply parameter set $P_v^{(s)}$ → generate per-voice audio buffer via oscillator bank → sum voices → apply MQSAS section buffer as a stem in the master mix.
+
+### Pitfalls
+
+1. **No assumption of harmonicity → noisy sounds require many partials.** MQSAS models the *entire signal* as sinusoids, so noise-like signals (breath, cymbal, sibilance, reverb tails) require hundreds of partials to sound natural. With too few partials, noise is "tonalized" — it sounds like a chorus of sine tones (the classic "swarm of sinusoids" artifact). Mitigation: use an adaptive partial count threshold where noise-dominated frames allow more partials, or combine MQSAS with a residual noise model (SP-027 SMS style).
+
+2. **Cubic phase interpolation can produce overshoots between frames with large frequency jumps.** If a partial's frequency changes abruptly (e.g., a vocal vibrato trough-to-peak), the cubic polynomial can overshoot beyond the intended frequency, producing a "chirp" artifact. Mitigation: constrain the cubic coefficients so the polynomial's derivative stays within [min($\omega_m, \omega_{m+1}$), max($\omega_m, \omega_{m+1}$)] (monotonic frequency constraint), or replace cubic with constrained Hermite interpolation.
+
+3. **Birth/death threshold tuning is signal-dependent.** Setting $T_d$ (death threshold) too high kills valid partials during quiet sections, producing "thinning" where the sound audibly loses detail. Setting it too low retains noise-floor peaks as partials, increasing computational cost and potentially "tonalizing" noise. The frequency-dependent birth threshold $T_b(f)$ compensates for spectral tilt but requires default values tuned to the source type (vocal, instrumental, percussive).
+
+4. **Fixed analysis frame rate vs. time-varying spectra.** The analysis frame hop $R$ is fixed during analysis. For rapidly evolving sounds (attacks, transients), the frame rate may be too slow to capture the spectral evolution, causing pre-echo or smeared attacks. Mitigation: use a smaller hop size ($R = M/8$ for transient-rich material) or switch to transient detection→separate transient layer (MQSAS for steady-state + transient model).
+
+5. **Computational cost scales with partial count.** Synthesis cost is $\mathcal{O}(K)$ per sample. At $K=200$ and $f_s=44100$, that's 8.82 million cosine evaluations per second. The cubic phase evaluation adds multiply-accumulate operations per partial per sample. Mitigation: use the IFFT synthesis method (SP-039) for real-time playback where partial counts are high, reserving oscillator-bank synthesis (with cubic phase) for offline high-quality renders.
+
+6. **Phase coherence across section boundaries.** When section parameters cause an abrupt change in the partial set (e.g., silencing a subset of partials), the oscillator phases at the section seam may be discontinuous, producing a click. Mitigation: crossfade the section transition over 5–10 ms, or carry the oscillator phase states across the boundary and only apply the new parameter set to newly born partials.
+
+7. **vs. SP-027 SMS (Spectral Modeling Synthesis).** MQSAS models the signal as a sum of pure sinusoids with no residual. SMS explicitly separates deterministic sinusoids from a stochastic noise component. MQSAS is better for sounds with clear sinusoidal structure (sustained notes, vocal, brass, string); SMS is better for sounds with significant noise content (breath, sibilance, bowed textures, ambient field recordings). For UnitMatrix integration, MQSAS is preferred for melodic/harmonic voices; SMS or a combined MQSAS+noise scheme for textural/ambient voices.
+
+Candidate code path: `sound/effects/sinusoidal_modeling.py` — implements a `SinusoidalModelingEngine` class with three stages: `PeakDetector` (STFT frame processor with parabolic interpolation), `PartialTracker` (frame-to-frame peak matching with birth/continuation/death logic), and `OscillatorBankSynthesizer` (cubic-phase-interpolated partial summation). NumPy/SciPy dependencies: `scipy.signal` for STFT frames, `numpy.fft` for FFT. UnitMatrix integration via `MQCellConfig` dataclass.

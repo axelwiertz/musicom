@@ -849,7 +849,7 @@ accordion 3.2 and bagpipe 4.5 for the cabinet-resonant harmonium buzz; attack
 chord instrument. Registration proof: `by_name('reed organ')` → Reed Organ,
 `by_program(20)` → Reed Organ, `in_sweet_spot(72)` = True,
 `in_sweet_spot(30)` = False. Registration in `instrument_registry.py` as
-REED_ORGAN convenience constant. Identity quirk: the reed organ is the only
+Registration in `instrument_registry.py` as REED_ORGAN convenience constant. Identity quirk: the reed organ is the only
 free-reed keyboard instrument where the entire keyboard shares ONE unified wind
 chest and cabinet resonator (unlike accordion's separate bass/treble systems)
 — the instrument is fully polyphonic with a characteristic "cabinet honk" body
@@ -857,3 +857,28 @@ resonance at ~250 Hz. The Indian hand-pumped harmonium adds drone stops (Sa-Pa)
 and a darker 3-octave range; the American reed organ (suction) is softer with
 sweeter trebles; the European harmonium (pressure) is louder with sharper
 attack. Composition jobs may write full 3-5 note chords.
+
+**Electric Bass added** (2026-10-08): GM33, new **Bass** family first entry — the
+solidbody electric bass guitar played fingerstyle (the foundational modern
+rhythm-section bass voice; instrument.md + electric_bass.py), verified end-to-end
+UnitMatrixComposer → zero-drift ✓ → MIDI (111 bytes) → FluidSynth WAV (742 KB) ✓;
+RenderPipeline stem label `trackXX_Electric_Bass_finger.wav` ✓ (GM_PROGRAMS[33] =
+"Electric Bass (finger)", FluidR3 preset 33 = "Fingered Bass" — internal SF2 name
+"Fingered Bass" vs pipeline "Electric Bass (finger)" is cosmetic only, **no
+routing impact**). Karplus-Strong recommended (plucked waveguide — the exact
+physical model for a stiff wound-steel string with magnetic pickup; loop_gain
+0.9970 — moderate damping between sitar 0.9975 and shamisen 0.9955; wound steel
+rings 1-3 s, shorter than harp 0.9985 and longer than shamisen 0.9955). Solo-render
+spectral check: 4-8 kHz buzz **0.4%** (the lowest of the set — electric bass has
+virtually no energy above 4 kHz). Empirical FluidR3 pitch sweep: preset 33
+audible across full range 24-84 (C1-C5), no gaps — SF2 never clips a composition.
+Range 24-84 is the GM-patch span (real 4-string E1-G4 = 28-67; the patch plays the
+full GM range). Registration proof: `by_name('electric bass')` → Electric Bass (finger),
+`by_program(33)` → Electric Bass (finger), `in_sweet_spot(52)` = True,
+`in_sweet_spot(20)` = False. Registration in `instrument_registry.py` as ELECTRIC_BASS
+convenience constant. Stem label: no pipeline quirk. Identity: GM33 = Electric Bass
+(finger) — monophonic fingerstyle line/riff instrument; CHANNEL quirk: melodic
+channel (0-9) with program 33 — channel 9 would trigger the drum-kit map.
+Line/rhythm quirk: bass is a monophonic groove line (double-stops possible on
+adjacent strings but not idiomatic), NOT a chord/comping voice and NOT a melodic
+lead voice — its role is bass/rhythm foundation with the kick drum.

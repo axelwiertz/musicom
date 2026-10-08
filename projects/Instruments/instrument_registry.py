@@ -80,6 +80,7 @@ _INSTRUMENT_MODULES = {
     "Vocal.voice_like.voice_like_voice": "voice_like",
     "Woodwind.whistle.whistle": "whistle",
     "Woodwind.soprano_sax.soprano_sax": "soprano_sax",
+    "Bass.electric_bass.electric_bass": "electric_bass",
 }
 
 _FIELDS = (
@@ -256,6 +257,7 @@ HUMAN_VOICE = ALL_INSTRUMENTS["human_voice"]
 PAN_FLUTE = ALL_INSTRUMENTS["pan_flute"]
 WHISTLE = ALL_INSTRUMENTS["whistle"]
 SOPRANO_SAX = ALL_INSTRUMENTS["soprano_sax"]
+ELECTRIC_BASS = ALL_INSTRUMENTS["electric_bass"]
 # Voice-like family — one instrument per non-vocal source. The `voice_like`
 # key is the umbrella (vox humana); each member is also addressable directly.
 VOICE_LIKE = ALL_INSTRUMENTS["voice_like"]
@@ -373,6 +375,8 @@ def registry_table():
             role = "lead, countermelody, ornament, accent"
         elif low == "electric piano 1":
             role = "harmony, melody, bass, accent, color"
+        elif low == "electric bass (finger)":
+            role = "bass, rhythm, countermelody, accent"
         else:
             role = "lead, harmony, accent"
         rng = f"{inst.range_min}–{inst.range_max}" if inst.range_min else "-"

@@ -1,0 +1,22 @@
+{
+  "method": "SP-092",
+  "project": "HipHop/boom-bap/v1",
+  "scale": "Em (source PCS, non-drum)",
+  "pcs": [
+    0,
+    2,
+    4,
+    5,
+    6,
+    7,
+    9,
+    11
+  ],
+  "status": "PASS",
+  "hit_rate": 1.0,
+  "harmonic_energy_mean": 0.30201862727640855,
+  "dry_harmonic_energy_mean": 0.3158929771890112,
+  "he_retention": 0.9560789542203051,
+  "windows_analyzed": 186,
+  "median_freq_hz": 196.0
+}
