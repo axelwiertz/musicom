@@ -188,6 +188,9 @@ SP_METHODS = {
     # 2026-10-05 scan
     "SP-099": ("sound.effects.ir_designer", "Impulse Response Designer — 10 algorithmic IR synthesis techniques (Convolution Playground-style)"),
     "SP-100": ("sound.generators.bach_composer", "B.A.C.H. Composition Generator — 11 algorithmic composition engines: FUGUE/CANON/PROBA/TINTINNABULI/MINIMAL/CELLULAR/TREE/MOTIF/HYBRID/GROOVE/GROOVE_MIX (Kaona B.A.C.H.-style)"),
+    # 2026-10-08 scan
+    "SP-101": ("sound.synthesis.modal_blot", "BLOT-style Geometric Modal Resonator Network — 8-mode just-intonation resonators, waveguide strings, formant filters, ring modulation, multiband saturation, FDN memory (Laboratory 0 BLOT-style)"),
+    "SP-102": ("sound.effects.raspel_filter", "Raspel-style Saturated Cascade Filter + Wavefolder — 6 filter types (LP2/4/6, HP2/4, BP4), per-stage saturation drive, post-filter Character wavefolder (Kreuzberg Audio Raspel-style)"),
 }
 
 

@@ -1,0 +1,366 @@
+{
+  "project": "228-balkan-spectral",
+  "genre": "Balkan",
+  "method": "051 Spectral Graph Laplacian Mapping (SGLM)",
+  "layer": "concrete",
+  "key": "G Dorian (G A Bb C D E F)",
+  "key_pcs": [
+    0,
+    2,
+    4,
+    5,
+    7,
+    9,
+    10
+  ],
+  "bpm": 132,
+  "meter": "7/8",
+  "form": "6 sections x 4 bars = 24 bars",
+  "sections": [
+    "Intro",
+    "VerseA",
+    "LiftA",
+    "VerseB",
+    "Dance",
+    "Coda"
+  ],
+  "section_functions": [
+    "HOME",
+    "HOME",
+    "TURN",
+    "TENSE",
+    "TURN",
+    "HOME"
+  ],
+  "spectra": [
+    {
+      "section": "Intro",
+      "function": "HOME",
+      "lambda1": 2.922694679489308,
+      "lambda2": 3.2781296672662683,
+      "gap": 0.3554349877769605
+    },
+    {
+      "section": "VerseA",
+      "function": "HOME",
+      "lambda1": 2.922694679489308,
+      "lambda2": 3.2781296672662683,
+      "gap": 0.3554349877769605
+    },
+    {
+      "section": "LiftA",
+      "function": "TURN",
+      "lambda1": 2.1508862756425153,
+      "lambda2": 2.3996907670863883,
+      "gap": 0.24880449144387295
+    },
+    {
+      "section": "VerseB",
+      "function": "TENSE",
+      "lambda1": 1.5077126057701888,
+      "lambda2": 1.6676583502698192,
+      "gap": 0.1599457444996304
+    },
+    {
+      "section": "Dance",
+      "function": "TURN",
+      "lambda1": 2.1508862756425153,
+      "lambda2": 2.3996907670863883,
+      "gap": 0.24880449144387295
+    },
+    {
+      "section": "Coda",
+      "function": "HOME",
+      "lambda1": 2.922694679489308,
+      "lambda2": 3.2781296672662683,
+      "gap": 0.3554349877769605
+    }
+  ],
+  "progression": [
+    {
+      "bar": 0,
+      "chord": "i",
+      "deg": [
+        0,
+        2,
+        4
+      ],
+      "name": "GBbD"
+    },
+    {
+      "bar": 1,
+      "chord": "i",
+      "deg": [
+        0,
+        2,
+        4
+      ],
+      "name": "GBbD"
+    },
+    {
+      "bar": 2,
+      "chord": "i",
+      "deg": [
+        0,
+        2,
+        4
+      ],
+      "name": "GBbD"
+    },
+    {
+      "bar": 3,
+      "chord": "i",
+      "deg": [
+        0,
+        2,
+        4
+      ],
+      "name": "GBbD"
+    },
+    {
+      "bar": 4,
+      "chord": "i",
+      "deg": [
+        0,
+        2,
+        4
+      ],
+      "name": "GBbD"
+    },
+    {
+      "bar": 5,
+      "chord": "VII",
+      "deg": [
+        6,
+        1,
+        3
+      ],
+      "name": "FAC"
+    },
+    {
+      "bar": 6,
+      "chord": "IV",
+      "deg": [
+        3,
+        5,
+        0
+      ],
+      "name": "CEG"
+    },
+    {
+      "bar": 7,
+      "chord": "i",
+      "deg": [
+        0,
+        2,
+        4
+      ],
+      "name": "GBbD"
+    },
+    {
+      "bar": 8,
+      "chord": "IV",
+      "deg": [
+        3,
+        5,
+        0
+      ],
+      "name": "CEG"
+    },
+    {
+      "bar": 9,
+      "chord": "v",
+      "deg": [
+        4,
+        6,
+        1
+      ],
+      "name": "DFA"
+    },
+    {
+      "bar": 10,
+      "chord": "VII",
+      "deg": [
+        6,
+        1,
+        3
+      ],
+      "name": "FAC"
+    },
+    {
+      "bar": 11,
+      "chord": "v",
+      "deg": [
+        4,
+        6,
+        1
+      ],
+      "name": "DFA"
+    },
+    {
+      "bar": 12,
+      "chord": "i",
+      "deg": [
+        0,
+        2,
+        4
+      ],
+      "name": "GBbD"
+    },
+    {
+      "bar": 13,
+      "chord": "III",
+      "deg": [
+        2,
+        4,
+        6
+      ],
+      "name": "BbDF"
+    },
+    {
+      "bar": 14,
+      "chord": "VII",
+      "deg": [
+        6,
+        1,
+        3
+      ],
+      "name": "FAC"
+    },
+    {
+      "bar": 15,
+      "chord": "IV",
+      "deg": [
+        3,
+        5,
+        0
+      ],
+      "name": "CEG"
+    },
+    {
+      "bar": 16,
+      "chord": "IV",
+      "deg": [
+        3,
+        5,
+        0
+      ],
+      "name": "CEG"
+    },
+    {
+      "bar": 17,
+      "chord": "VII",
+      "deg": [
+        6,
+        1,
+        3
+      ],
+      "name": "FAC"
+    },
+    {
+      "bar": 18,
+      "chord": "i",
+      "deg": [
+        0,
+        2,
+        4
+      ],
+      "name": "GBbD"
+    },
+    {
+      "bar": 19,
+      "chord": "v",
+      "deg": [
+        4,
+        6,
+        1
+      ],
+      "name": "DFA"
+    },
+    {
+      "bar": 20,
+      "chord": "i",
+      "deg": [
+        0,
+        2,
+        4
+      ],
+      "name": "GBbD"
+    },
+    {
+      "bar": 21,
+      "chord": "VII",
+      "deg": [
+        6,
+        1,
+        3
+      ],
+      "name": "FAC"
+    },
+    {
+      "bar": 22,
+      "chord": "IV",
+      "deg": [
+        3,
+        5,
+        0
+      ],
+      "name": "CEG"
+    },
+    {
+      "bar": 23,
+      "chord": "i",
+      "deg": [
+        0,
+        2,
+        4
+      ],
+      "name": "GBbD"
+    }
+  ],
+  "voices": [
+    "Bass(43)",
+    "Accordion(21)",
+    "Clarinet(71)",
+    "Violin(40)"
+  ],
+  "audit": {
+    "off16": 0,
+    "off8": 0,
+    "out_key": 0,
+    "out_chord": 0,
+    "notes": 532,
+    "per_track": {
+      "1": {
+        "notes": 96,
+        "off16": 0,
+        "off8": 0,
+        "out_key": 0,
+        "out_chord": 0
+      },
+      "2": {
+        "notes": 216,
+        "off16": 0,
+        "off8": 0,
+        "out_key": 0,
+        "out_chord": 0
+      },
+      "3": {
+        "notes": 152,
+        "off16": 0,
+        "off8": 0,
+        "out_key": 0,
+        "out_chord": 0
+      },
+      "4": {
+        "notes": 68,
+        "off16": 0,
+        "off8": 0,
+        "out_key": 0,
+        "out_chord": 0
+      }
+    }
+  },
+  "voice_leading_flags": 7,
+  "seed": 20261007
+}

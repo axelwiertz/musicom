@@ -1,0 +1,27 @@
+{
+  "artifact": "228-balkan-spectral.mid",
+  "classification": "ai-assisted",
+  "generator": "051-SGLM + musicom rules",
+  "sources": [],
+  "parameters": {
+    "phase": 2,
+    "bpm": 132,
+    "meter": "7/8",
+    "key": "G Dorian (G A Bb C D E F)",
+    "seed": 20261007,
+    "voices": 4,
+    "form": "6 sections x 4 bars = 24 bars",
+    "quantization": "16th-grid (120 ticks) + per-bar chord-tone",
+    "instruments": [
+      "double bass",
+      "accordion",
+      "clarinet",
+      "violin"
+    ]
+  },
+  "notes": "Balkan dajcovo 7/8 dance in G Dorian. Fiedler vector -> lead melody ordering; 2nd eigenvector -> violin counter-axis; algebraic connectivity -> harmonic tension; eigenvalue gaps -> rhythm density.",
+  "sha256": "365f5f592aa5e33e6713be40630a19659042afe9bf5895b5f0d62cc70beb1d19",
+  "bytes": 4686,
+  "created_utc": "2026-10-07T23:11:18.221443+00:00",
+  "provenance_version": "1.0"
+}

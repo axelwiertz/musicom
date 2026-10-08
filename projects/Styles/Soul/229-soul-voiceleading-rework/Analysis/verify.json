@@ -1,0 +1,146 @@
+{
+  "phase1": {
+    "path": "/opt/data/projects/Styles/Soul/229-soul-voiceleading-rework/MIDI/229-soul-voiceleading-rework-phase1.mid",
+    "size": 1792,
+    "n_tracks": 2,
+    "voice_lens": [
+      61440
+    ],
+    "zero_drift": true,
+    "n_pitched_onsets": 192,
+    "off_grid": 176,
+    "scale_viol": 59,
+    "chord_viol": 138,
+    "chord_viol_examples": [
+      [
+        1,
+        0,
+        55,
+        53,
+        [
+          53,
+          56,
+          60
+        ]
+      ],
+      [
+        1,
+        295,
+        57,
+        53,
+        [
+          53,
+          56,
+          60
+        ]
+      ],
+      [
+        1,
+        886,
+        58,
+        53,
+        [
+          53,
+          56,
+          60
+        ]
+      ],
+      [
+        1,
+        1182,
+        55,
+        53,
+        [
+          53,
+          56,
+          60
+        ]
+      ],
+      [
+        1,
+        1477,
+        58,
+        53,
+        [
+          53,
+          56,
+          60
+        ]
+      ],
+      [
+        1,
+        2068,
+        64,
+        61,
+        [
+          61,
+          65,
+          68
+        ]
+      ],
+      [
+        1,
+        2363,
+        62,
+        61,
+        [
+          61,
+          65,
+          68
+        ]
+      ],
+      [
+        1,
+        2954,
+        59,
+        61,
+        [
+          61,
+          65,
+          68
+        ]
+      ],
+      [
+        1,
+        3249,
+        58,
+        61,
+        [
+          61,
+          65,
+          68
+        ]
+      ],
+      [
+        1,
+        4135,
+        55,
+        58,
+        [
+          58,
+          61,
+          65
+        ]
+      ]
+    ]
+  },
+  "phase2": {
+    "path": "/opt/data/projects/Styles/Soul/229-soul-voiceleading-rework/MIDI/229-soul-voiceleading-rework.mid",
+    "size": 9318,
+    "n_tracks": 7,
+    "voice_lens": [
+      61440,
+      61440,
+      61440,
+      61440,
+      61440,
+      61440
+    ],
+    "zero_drift": true,
+    "n_pitched_onsets": 708,
+    "off_grid": 0,
+    "scale_viol": 0,
+    "chord_viol": 0,
+    "chord_viol_examples": []
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "phase1": {
+    "sr": 44100,
+    "duration_s": 40.2,
+    "peak": 0.462,
+    "silence_ratio": 0.0411,
+    "rms_mean": 0.0958,
+    "rms_max": 0.1196,
+    "mid_gap_seconds": 0,
+    "n_windows": 40,
+    "sf2": "/opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2",
+    "midi_bytes": 1340,
+    "wav_bytes": 7091500,
+    "ogg_bytes": 378542
+  },
+  "phase2": {
+    "sr": 44100,
+    "duration_s": 40.77,
+    "peak": 0.4196,
+    "silence_ratio": 0.0628,
+    "rms_mean": 0.0731,
+    "rms_max": 0.0886,
+    "mid_gap_seconds": 0,
+    "n_windows": 40,
+    "sf2": "/opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2",
+    "midi_bytes": 4686,
+    "wav_bytes": 7192620,
+    "ogg_bytes": 295198
+  }
+}

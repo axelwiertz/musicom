@@ -1,0 +1,20 @@
+{
+  "artifact": "228-balkan-spectral-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "051-SGLM (raw Fiedler-ordering walk)",
+  "sources": [],
+  "parameters": {
+    "phase": 1,
+    "bpm": 132,
+    "meter": "7/8",
+    "key": "G Dorian (G A Bb C D E F)",
+    "seed": 20261007,
+    "voices": 1,
+    "note": "raw generative draft: single clarinet walking the HOME-graph Fiedler ordering, off-grid ticks, register drift + micro-jitter, pre-rules"
+  },
+  "notes": "",
+  "sha256": "760c994de526f358ebb48434adcd128d9f84a268c85a0066cdd09e1cb8ec01bc",
+  "bytes": 1340,
+  "created_utc": "2026-10-07T23:11:18.187752+00:00",
+  "provenance_version": "1.0"
+}

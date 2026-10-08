@@ -43,11 +43,13 @@ Status: `implemented` = in sound/ package · `partial` = some pieces exist · `r
 || — | Scale/Chord-Pitch Quantizer (SuperStarSaw harmony engine) | implemented | sound/synthesis/supersaw_swarm.py (SCALES/CHORDS + quantize) |
 || SP-094 | Random Note Generator + Note Chance Sequencer (Maschine 3.7-style) | implemented | sound/generators/random_note_gen.py |
 ||| SP-095 | Euclidean Fill Sequencer w/ Live Rotation (Maschine 3.7-style) | implemented | sound/generators/euclidean_fill_seq.py |
-||| SP-096 | Multi-Tap Modulated Short-Delay Processor / Haas Zone (Verbos Haas Zone Processor-style) | implemented | sound/effects/haas_zone.py |
-||| SP-097 | Multi-Segment Envelope Generator for Parameter Modulation (Sync Audio MegaMorph-style) | implemented | sound/effects/mega_morph.py |
-||| SP-098 | Fractal Sequence Generator — Thue-Morse/Fibonacci/Sierpinski/Logistic Map (Kaona B.A.C.H. FRACTAL-style) | implemented | sound/generators/fractal_seq.py |
-||| SP-099 | Impulse Response Designer — 10 algorithmic IR synthesis techniques (Convolution Playground-style) | implemented | sound/effects/ir_designer.py |
-||| SP-100 | B.A.C.H. Composition Generator — 11 composition engines: FUGUE/CANON/PROBA/TINTINNABULI/MINIMAL/CELLULAR/TREE/MOTIF/HYBRID/GROOVE/GROOVE_MIX (Kaona B.A.C.H.-style) | implemented | sound/generators/bach_composer.py |
+|||| SP-096 | Multi-Tap Modulated Short-Delay Processor / Haas Zone (Verbos Haas Zone Processor-style) | implemented | sound/effects/haas_zone.py |
+|||| SP-097 | Multi-Segment Envelope Generator for Parameter Modulation (Sync Audio MegaMorph-style) | implemented | sound/effects/mega_morph.py |
+|||| SP-098 | Fractal Sequence Generator — Thue-Morse/Fibonacci/Sierpinski/Logistic Map (Kaona B.A.C.H. FRACTAL-style) | implemented | sound/generators/fractal_seq.py |
+|||| SP-099 | Impulse Response Designer — 10 algorithmic IR synthesis techniques (Convolution Playground-style) | implemented | sound/effects/ir_designer.py |
+|||| SP-100 | B.A.C.H. Composition Generator — 11 composition engines: FUGUE/CANON/PROBA/TINTINNABULI/MINIMAL/CELLULAR/TREE/MOTIF/HYBRID/GROOVE/GROOVE_MIX (Kaona B.A.C.H.-style) | implemented | sound/generators/bach_composer.py |
+||||| SP-101 | BLOT-style Geometric Modal Resonator Network — 8-mode just-intonation resonators, waveguide strings, formant filters, ring modulation, multiband saturation, FDN memory (Laboratory 0 BLOT-style) | implemented | sound/synthesis/modal_blot.py |
+||||| SP-102 | Raspel-style Saturated Cascade Filter + Wavefolder — 6 filter types (LP2/4/6, HP2/4, BP4), per-stage saturation drive, post-filter Character wavefolder (Kreuzberg Audio Raspel-style) | implemented | sound/effects/raspel_filter.py |
 
 ## Interval-Based Composition (NEW)
 

@@ -1,0 +1,28 @@
+{
+  "chosen": "/opt/data/projects/Styles/Soul/078-soul-voiceleading",
+  "genre": "Soul",
+  "primary_midi": "/opt/data/projects/Styles/Soul/078-soul-voiceleading/MIDI/078-soul-voiceleading.mid",
+  "source_identity": {
+    "key": "F natural minor",
+    "bpm": 96,
+    "method": "007 Voice-Leading Graph Search (TonalNetworkGenerator)",
+    "sections": 6,
+    "bars": 24,
+    "voices": ["Lead(TenorSax)", "Horns(Brass)", "Rhodes", "Violin", "Bass", "Drums"],
+    "lead_program": 65,
+    "chord_pool": ["Fm", "Gdim", "Ab", "Bbm", "Cm", "Db", "Eb"]
+  },
+  "standard_failures": [
+    "3-rhythm-grid-sync: 32 pitched onsets off-grid (violin counterline 480+k*180 triplet-ish offsets; 180 not multiple of 120)",
+    "6-sidecars: index.html missing AND top-level provenance.json missing (only .mid.provenance.json sidecars present)",
+    "EXTRA chord-attribution: 30 lead notes quantized against pre-snap bar -> post-snap bar mismatch (floor t//BAR on final tick fails)"
+  ],
+  "standard_passes": [
+    "1-engine: UnitMatrixComposer used, no raw mido authoring",
+    "2-zero-drift: all 6 voice tracks length 46080 ticks",
+    "4-valid-track-setup: 6 voice tracks >= 4",
+    "5-two-phase-artifacts: both 078-soul-voiceleading.mid and -phase1.mid present",
+    "EXTRA scale-discipline: 0 out-of-key notes"
+  ],
+  "redesign_required": true
+}

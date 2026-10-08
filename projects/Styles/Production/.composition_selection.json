@@ -1,23 +1,22 @@
 {
   "job": "nightly composition (two-phase)",
-  "date": "2026-10-06",
-  "seed": 20261006,
-  "style": "Experimental",
-  "method_id": "094",
-  "method_name": "Apollonian Circle Packing Composition (ACPC)",
+  "date": "2026-10-07",
+  "seed": 20261007,
+  "style": "Balkan",
+  "method_id": "051",
+  "method_name": "Spectral Graph Laplacian Mapping (SGLM)",
   "layer": "concrete",
-  "layer_roll": 0.4948010003665161,
+  "layer_roll": 0.22843970966220284,
   "excluded_last7d": [
     "007",
     "019",
     "025",
-    "031",
     "041",
     "050",
+    "094",
     "095",
-    "213",
     "217"
   ],
-  "candidate_methods": 94,
+  "candidate_methods": 93,
   "n_styles": 46
 }

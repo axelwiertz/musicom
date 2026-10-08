@@ -91,7 +91,9 @@ comparable to, and how do I use it in a workflow?*
 || `sound/effects/mega_morph.py` | MegaMorph, MultiSegmentEnv, EnvSegment, SegmentShape, EnvMode | modulation | Sync Audio MegaMorph | multi-segment envelope → parameter modulation dict |
 || `sound/effects/ir_designer.py` | design_ir, IR_RECIPES (10 generators) | effects (IR synthesis) | Convolution Playground | recipe + duration + optional params → IR array + sr |
 || `sound/generators/fractal_seq.py` | FractalSequenceGenerator, ThueMorseMelody, FibonacciRhythm, SierpinskiAccent, LogisticMapMelody | generative (fractal seq) | Kaona B.A.C.H. FRACTAL | fractal/chaotic params → FractalEvent[] + MIDI |
-|| `sound/generators/bach_composer.py` | compose_with, BACH_ENGINES (11 engines) | generative (composition) | Kaona B.A.C.H. (11 languages) | engine name + overrides → BachEvent[] |
+||| `sound/generators/bach_composer.py` | compose_with, BACH_ENGINES (11 engines) | generative (composition) | Kaona B.A.C.H. (11 languages) | engine name + overrides → BachEvent[] |
+||| `sound/synthesis/modal_blot.py` | BLOTEngine, ModalResonator, WaveguideString, FormantFilter, MultibandSaturator, FeedbackDelayNetwork | synthesis (modal) | Laboratory 0 BLOT | lump geometry + midi_root + seed → modal resonator audio (8-mode just-intonation, waveguide, formant, ring mod, saturator, FDN) |
+||| `sound/effects/raspel_filter.py` | RaspelProcessor, CascadeFilter, SVF2Pole, Wavefolder | effects (filter/waveshaping) | Kreuzberg Audio Raspel | audio + filter_type/cutoff/resonance/drive/character → saturated filtered + wavefolded audio |
 | `sound/sync/clock.py` | DAWClockBridge | sync | MTC/MIDI clock | bpm → clock pulses |
 | `sound/render/fluidsynth.py` | FluidSynthRenderer | render | SF2 synth | MIDI → WAV |
 | `sound/render/vst.py` | VSTRenderer | render | DAW VST3 | MIDI → VST audio |
@@ -101,8 +103,8 @@ comparable to, and how do I use it in a workflow?*
 
 | Category | Purpose | Key files |
 |---|---|---|
-| **synthesis/** | create audio from scratch | phase_mod, modal, granular, vocal, additive, bowed, mass_spring, polysynth, west_coast, mono_synth, dx7_voice, equation_synth, drum_synth_606, spectral_wavetable, memorymoog_synth, supersaw_swarm, formant_voice |
-| **effects/** | transform existing audio | filter, reverb, fdn_reverb, vowel_filter, tape_delay, multiband, quantize_mod, mastering, production_chain, spectral_gate, tilt_eq, liminal_reverb, scale_locked_granular, overlap_comp, room_reverb, bbd_chorus, shimmer_reverb, subharmonic |
+|| **synthesis/** | create audio from scratch | phase_mod, modal, granular, vocal, additive, bowed, mass_spring, polysynth, west_coast, mono_synth, dx7_voice, equation_synth, drum_synth_606, spectral_wavetable, memorymoog_synth, supersaw_swarm, formant_voice, modal_blot |
+| **effects/** | transform existing audio | filter, reverb, fdn_reverb, vowel_filter, tape_delay, multiband, quantize_mod, mastering, production_chain, spectral_gate, tilt_eq, liminal_reverb, scale_locked_granular, overlap_comp, room_reverb, bbd_chorus, shimmer_reverb, subharmonic, raspel_filter |
 | **modular/** | node-graph DSP | graph, math_mod, patch_loader |
 | **generators/** | generative event/pattern engines | event_core, dice, ratchet_seq, complex_noise, micro_timing_seq, trig_cond_seq, param_lock_seq, sample_slicer |
 | **analysis/** | extract info from audio | pitch, rhythm, chroma |
