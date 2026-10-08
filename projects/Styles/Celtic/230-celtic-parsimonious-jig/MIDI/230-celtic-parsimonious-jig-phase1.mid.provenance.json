@@ -1,0 +1,20 @@
+{
+  "artifact": "230-celtic-parsimonious-jig-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "104-PSSC (raw parsimonious subset-network walk)",
+  "sources": [],
+  "parameters": {
+    "phase": 1,
+    "bpm": 138,
+    "meter": "6/8",
+    "key": "D Dorian (D E F G A B C)",
+    "seed": 20261008,
+    "voices": 1,
+    "note": "raw generative draft: single fiddle walking the parsimonious common-tone chain, off-grid ticks, register drift + micro-jitter, pre-rules"
+  },
+  "notes": "",
+  "sha256": "e53ef0ed9debf5ed224f782fded6ebb9c845dae8d337f150b2e7415f09b0b69f",
+  "bytes": 1262,
+  "created_utc": "2026-10-08T23:15:06.271318+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,30 @@
+{
+  "phase1": {
+    "sr": 44100,
+    "duration_s": 32.12,
+    "peak": 0.1644,
+    "silence_ratio": 0.0795,
+    "rms_mean": 0.0269,
+    "rms_max": 0.0349,
+    "mid_gap_seconds": 0,
+    "n_windows": 32,
+    "sf2": "FluidR3_GM.sf2",
+    "midi_bytes": 1262,
+    "wav_bytes": 5666630,
+    "ogg_bytes": 258206
+  },
+  "phase2": {
+    "sr": 44100,
+    "duration_s": 33.24,
+    "peak": 0.3594,
+    "silence_ratio": 0.0209,
+    "rms_mean": 0.0606,
+    "rms_max": 0.0734,
+    "mid_gap_seconds": 0,
+    "n_windows": 33,
+    "sf2": "FluidR3_GM.sf2",
+    "midi_bytes": 5032,
+    "wav_bytes": 5863558,
+    "ogg_bytes": 258732
+  }
+}

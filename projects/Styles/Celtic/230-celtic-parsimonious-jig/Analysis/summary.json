@@ -1,0 +1,602 @@
+{
+  "project": "230-celtic-parsimonious-jig",
+  "genre": "Celtic",
+  "method": "104 Parsimonious Subset Sequence Composition (PSSC)",
+  "layer": "abstract",
+  "key": "D Dorian (D E F G A B C)",
+  "key_pcs": [
+    0,
+    2,
+    4,
+    5,
+    7,
+    9,
+    11
+  ],
+  "bpm": 138,
+  "meter": "6/8",
+  "form": "6 sections x 4 bars = 24 bars",
+  "sections": [
+    "Intro",
+    "Theme",
+    "Turn",
+    "Development",
+    "Dance",
+    "Coda"
+  ],
+  "section_functions": [
+    "HOME",
+    "HOME",
+    "LIFT",
+    "TENSE",
+    "TURN",
+    "HOME"
+  ],
+  "progression": [
+    {
+      "bar": 0,
+      "chord": "i",
+      "deg": [
+        0,
+        2,
+        4
+      ],
+      "pcs": [
+        2,
+        5,
+        9
+      ],
+      "name": "DFA"
+    },
+    {
+      "bar": 1,
+      "chord": "i",
+      "deg": [
+        0,
+        2,
+        4
+      ],
+      "pcs": [
+        2,
+        5,
+        9
+      ],
+      "name": "DFA"
+    },
+    {
+      "bar": 2,
+      "chord": "VII",
+      "deg": [
+        6,
+        1,
+        3
+      ],
+      "pcs": [
+        0,
+        4,
+        7
+      ],
+      "name": "CEG"
+    },
+    {
+      "bar": 3,
+      "chord": "i",
+      "deg": [
+        0,
+        2,
+        4
+      ],
+      "pcs": [
+        2,
+        5,
+        9
+      ],
+      "name": "DFA"
+    },
+    {
+      "bar": 4,
+      "chord": "i",
+      "deg": [
+        0,
+        2,
+        4
+      ],
+      "pcs": [
+        2,
+        5,
+        9
+      ],
+      "name": "DFA"
+    },
+    {
+      "bar": 5,
+      "chord": "III",
+      "deg": [
+        2,
+        4,
+        6
+      ],
+      "pcs": [
+        0,
+        5,
+        9
+      ],
+      "name": "FAC"
+    },
+    {
+      "bar": 6,
+      "chord": "VII",
+      "deg": [
+        6,
+        1,
+        3
+      ],
+      "pcs": [
+        0,
+        4,
+        7
+      ],
+      "name": "CEG"
+    },
+    {
+      "bar": 7,
+      "chord": "i",
+      "deg": [
+        0,
+        2,
+        4
+      ],
+      "pcs": [
+        2,
+        5,
+        9
+      ],
+      "name": "DFA"
+    },
+    {
+      "bar": 8,
+      "chord": "v",
+      "deg": [
+        4,
+        6,
+        1
+      ],
+      "pcs": [
+        0,
+        4,
+        9
+      ],
+      "name": "ACE"
+    },
+    {
+      "bar": 9,
+      "chord": "VII",
+      "deg": [
+        6,
+        1,
+        3
+      ],
+      "pcs": [
+        0,
+        4,
+        7
+      ],
+      "name": "CEG"
+    },
+    {
+      "bar": 10,
+      "chord": "IV",
+      "deg": [
+        3,
+        5,
+        0
+      ],
+      "pcs": [
+        2,
+        7,
+        11
+      ],
+      "name": "GBD"
+    },
+    {
+      "bar": 11,
+      "chord": "v",
+      "deg": [
+        4,
+        6,
+        1
+      ],
+      "pcs": [
+        0,
+        4,
+        9
+      ],
+      "name": "ACE"
+    },
+    {
+      "bar": 12,
+      "chord": "vio",
+      "deg": [
+        5,
+        0,
+        2
+      ],
+      "pcs": [
+        2,
+        5,
+        11
+      ],
+      "name": "BDF"
+    },
+    {
+      "bar": 13,
+      "chord": "i",
+      "deg": [
+        0,
+        2,
+        4
+      ],
+      "pcs": [
+        2,
+        5,
+        9
+      ],
+      "name": "DFA"
+    },
+    {
+      "bar": 14,
+      "chord": "III",
+      "deg": [
+        2,
+        4,
+        6
+      ],
+      "pcs": [
+        0,
+        5,
+        9
+      ],
+      "name": "FAC"
+    },
+    {
+      "bar": 15,
+      "chord": "VII",
+      "deg": [
+        6,
+        1,
+        3
+      ],
+      "pcs": [
+        0,
+        4,
+        7
+      ],
+      "name": "CEG"
+    },
+    {
+      "bar": 16,
+      "chord": "i",
+      "deg": [
+        0,
+        2,
+        4
+      ],
+      "pcs": [
+        2,
+        5,
+        9
+      ],
+      "name": "DFA"
+    },
+    {
+      "bar": 17,
+      "chord": "VII",
+      "deg": [
+        6,
+        1,
+        3
+      ],
+      "pcs": [
+        0,
+        4,
+        7
+      ],
+      "name": "CEG"
+    },
+    {
+      "bar": 18,
+      "chord": "v",
+      "deg": [
+        4,
+        6,
+        1
+      ],
+      "pcs": [
+        0,
+        4,
+        9
+      ],
+      "name": "ACE"
+    },
+    {
+      "bar": 19,
+      "chord": "VII",
+      "deg": [
+        6,
+        1,
+        3
+      ],
+      "pcs": [
+        0,
+        4,
+        7
+      ],
+      "name": "CEG"
+    },
+    {
+      "bar": 20,
+      "chord": "VII",
+      "deg": [
+        6,
+        1,
+        3
+      ],
+      "pcs": [
+        0,
+        4,
+        7
+      ],
+      "name": "CEG"
+    },
+    {
+      "bar": 21,
+      "chord": "i",
+      "deg": [
+        0,
+        2,
+        4
+      ],
+      "pcs": [
+        2,
+        5,
+        9
+      ],
+      "name": "DFA"
+    },
+    {
+      "bar": 22,
+      "chord": "i",
+      "deg": [
+        0,
+        2,
+        4
+      ],
+      "pcs": [
+        2,
+        5,
+        9
+      ],
+      "name": "DFA"
+    },
+    {
+      "bar": 23,
+      "chord": "i",
+      "deg": [
+        0,
+        2,
+        4
+      ],
+      "pcs": [
+        2,
+        5,
+        9
+      ],
+      "name": "DFA"
+    }
+  ],
+  "progression_edges": [
+    {
+      "from": "i",
+      "to": "i",
+      "vl": 0,
+      "common_tones": 3
+    },
+    {
+      "from": "i",
+      "to": "VII",
+      "vl": 5,
+      "common_tones": 0
+    },
+    {
+      "from": "VII",
+      "to": "i",
+      "vl": 5,
+      "common_tones": 0
+    },
+    {
+      "from": "i",
+      "to": "i",
+      "vl": 0,
+      "common_tones": 3
+    },
+    {
+      "from": "i",
+      "to": "III",
+      "vl": 2,
+      "common_tones": 2
+    },
+    {
+      "from": "III",
+      "to": "VII",
+      "vl": 3,
+      "common_tones": 1
+    },
+    {
+      "from": "VII",
+      "to": "i",
+      "vl": 5,
+      "common_tones": 0
+    },
+    {
+      "from": "i",
+      "to": "v",
+      "vl": 3,
+      "common_tones": 1
+    },
+    {
+      "from": "v",
+      "to": "VII",
+      "vl": 2,
+      "common_tones": 2
+    },
+    {
+      "from": "VII",
+      "to": "IV",
+      "vl": 3,
+      "common_tones": 1
+    },
+    {
+      "from": "IV",
+      "to": "v",
+      "vl": 5,
+      "common_tones": 0
+    },
+    {
+      "from": "v",
+      "to": "vio",
+      "vl": 5,
+      "common_tones": 0
+    },
+    {
+      "from": "vio",
+      "to": "i",
+      "vl": 2,
+      "common_tones": 2
+    },
+    {
+      "from": "i",
+      "to": "III",
+      "vl": 2,
+      "common_tones": 2
+    },
+    {
+      "from": "III",
+      "to": "VII",
+      "vl": 3,
+      "common_tones": 1
+    },
+    {
+      "from": "VII",
+      "to": "i",
+      "vl": 5,
+      "common_tones": 0
+    },
+    {
+      "from": "i",
+      "to": "VII",
+      "vl": 5,
+      "common_tones": 0
+    },
+    {
+      "from": "VII",
+      "to": "v",
+      "vl": 2,
+      "common_tones": 2
+    },
+    {
+      "from": "v",
+      "to": "VII",
+      "vl": 2,
+      "common_tones": 2
+    },
+    {
+      "from": "VII",
+      "to": "VII",
+      "vl": 0,
+      "common_tones": 3
+    },
+    {
+      "from": "VII",
+      "to": "i",
+      "vl": 5,
+      "common_tones": 0
+    },
+    {
+      "from": "i",
+      "to": "i",
+      "vl": 0,
+      "common_tones": 3
+    },
+    {
+      "from": "i",
+      "to": "i",
+      "vl": 0,
+      "common_tones": 3
+    }
+  ],
+  "max_voice_leading_distance": 5,
+  "voices": [
+    "Cello(42)",
+    "Harp(46)",
+    "Fiddle(110)",
+    "Flute(74)",
+    "Drums(0/ch9)"
+  ],
+  "audit": {
+    "off16": 0,
+    "off8": 0,
+    "out_key": 0,
+    "out_chord": 0,
+    "notes": 524,
+    "pitched_notes": 420,
+    "per_track": {
+      "1": {
+        "notes": 72,
+        "off16": 0,
+        "off8": 0,
+        "out_key": 0,
+        "out_chord": 0,
+        "channel": 0,
+        "percussion": false
+      },
+      "2": {
+        "notes": 144,
+        "off16": 0,
+        "off8": 0,
+        "out_key": 0,
+        "out_chord": 0,
+        "channel": 1,
+        "percussion": false
+      },
+      "3": {
+        "notes": 132,
+        "off16": 0,
+        "off8": 0,
+        "out_key": 0,
+        "out_chord": 0,
+        "channel": 2,
+        "percussion": false
+      },
+      "4": {
+        "notes": 72,
+        "off16": 0,
+        "off8": 0,
+        "out_key": 0,
+        "out_chord": 0,
+        "channel": 3,
+        "percussion": false
+      },
+      "5": {
+        "notes": 104,
+        "off16": 0,
+        "off8": 0,
+        "out_key": null,
+        "out_chord": null,
+        "channel": 9,
+        "percussion": true
+      }
+    }
+  },
+  "voice_leading_flags": 34,
+  "seed": 20261008
+}

@@ -1,0 +1,28 @@
+{
+  "artifact": "230-celtic-parsimonious-jig.mid",
+  "classification": "ai-assisted",
+  "generator": "104-PSSC + musicom rules",
+  "sources": [],
+  "parameters": {
+    "phase": 2,
+    "bpm": 138,
+    "meter": "6/8",
+    "key": "D Dorian (D E F G A B C)",
+    "seed": 20261008,
+    "voices": 5,
+    "form": "6 sections x 4 bars = 24 bars",
+    "quantization": "8th-grid (240 ticks) + per-bar chord-tone",
+    "instruments": [
+      "cello",
+      "harp",
+      "fiddle",
+      "flute",
+      "bodhran-kit"
+    ]
+  },
+  "notes": "Celtic double jig in D Dorian. Parsimonious subset walk -> chord progression; common-tone pivot -> fiddle melody; moving tone -> flute paired strand (inversion-bipartition).",
+  "sha256": "a9206c72f7734a43debdacbb8f41039531ad3ee38d26ed3bc4da7782e1248502",
+  "bytes": 5032,
+  "created_utc": "2026-10-08T23:15:06.295515+00:00",
+  "provenance_version": "1.0"
+}
