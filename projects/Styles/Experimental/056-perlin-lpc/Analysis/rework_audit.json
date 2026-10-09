@@ -2,11 +2,12 @@
   "chosen": "/opt/data/projects/Styles/Experimental/056-perlin-lpc",
   "genre": "Experimental",
   "primary_midi": "/opt/data/projects/Styles/Experimental/056-perlin-lpc/MIDI/056-perlin-lpc.mid",
-  "audit_date": "2026-09-23",
+  "audit_date": "2026-10-09",
+  "rework_project": "231-perlin-lpc-rework",
   "standard_failures": [
     "standard_3_rhythm_grid_sync: 14 pitched onsets off-grid (must be multiple of 120/240 ticks)",
     "standard_5_two_phase_artifacts: missing 056-perlin-lpc-phase1.mid",
-    "standard_6_provenance: missing provenance.json (only *.mid.provenance.json sidecars present)"
+    "standard_6_provenance: missing root provenance.json (only *.mid.provenance.json sidecars present)"
   ],
   "standards_passed": [
     "standard_1_engine: authored via UnitMatrixComposer (not hand-rolled mido)",
@@ -17,8 +18,7 @@
   "source_identity": {
     "genre": "Experimental",
     "key": "D Dorian",
-    "key_pcs_actual": [0, 2, 4, 5, 7, 9, 11],
-    "note_on_source_key_label": "source mislabeled pcs as [2,4,5,7,9,11,1] (C# instead of C natural) and emitted 14 off-key notes",
+    "key_pcs": [0, 2, 4, 5, 7, 9, 11],
     "tempo_bpm": 80,
     "method": "Perlin noise fBm (seed 42) driving pitch/rhythm/velocity",
     "voices": ["Lead=Flute(74)", "Pad=StringEnsemble(49)", "Bass=Bass(33)", "Drums=ch9"],

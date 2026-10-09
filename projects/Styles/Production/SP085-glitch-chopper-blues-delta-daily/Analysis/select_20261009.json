@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-09",
+  "method": "SP-085",
+  "method_module": "sound.effects.glitch_chopper",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Blues/blues-delta-daily-2026-06-24/MIDI/blues-delta-daily-2026-06-24.mid",
+  "recent_excluded": [
+    "SP-021",
+    "SP-069",
+    "SP-080",
+    "SP-083",
+    "SP-086",
+    "SP-091",
+    "SP-092"
+  ],
+  "registry_total": 42,
+  "n_well_formed": 221,
+  "note": "first draw SP-074 x blues-delta-daily-2026-06-24 == existing Production/SP074-drummachine-delta-blues (exact source+method dup) -> re-rolled method to SP-085"
+}

@@ -1,0 +1,16 @@
+{
+  "lufs": -14.15086365291495,
+  "peak": 0.8912509083747864,
+  "silence_pct": 12.823695878130378,
+  "rms": 0.11534025520086288,
+  "dry_silence_pct": 15.46244153376425,
+  "dry_rms": 0.13211801648139954,
+  "valid_windows": 80,
+  "hit_rate": 1.0,
+  "mean_harmonic_energy": 0.40215551018316553,
+  "pitch_verdict": "PASS",
+  "dry_mean_harmonic_energy": 0.4375677001296336,
+  "he_retention": 0.9190703748563323,
+  "transients_detected": 447,
+  "bpm": 72.00002880001152
+}

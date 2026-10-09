@@ -117,6 +117,7 @@ Classification of active Musicom composition methods categorized by their primar
 ||| **107** | concrete | Stochastic Differential Equation Composition (SDEC) | **Nature-Led** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Drift-field-guided) | Continuous / Fluid | Macro / Trajectory Horizon | $\mathcal{O}(V^2 d^2 \cdot T)$ | Models each musical parameter as a continuous-time Itō SDE with designed drift and diffusion fields. Drift = tonal gravity, diffusion = creative uncertainty. Multi-voice correlated SDEs encode harmonic coherence and voice-leading. Continuous-time Nature-Led counterpart to 048 RBMPD (generalized) and 097 MaxEnt-C (dynamical foil). |
 ||| **108** | concrete | Hyperdimensional Computing Composition (HDCC) | **AI-Driven** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Prototype-similarity-guided) | Grid-Locked / Continuous | Macro / Hypervector Trajectory | $\mathcal{O}(D \cdot N)$ | Encodes every musical element as a quasi-orthogonal high-dimensional random vector ($D \geq 10{,}000$) and composes via explicit algebraic operations (binding $\otimes$, bundling $+$, permutation $\rho$) over hypervectors. Binding creates role–filler structures (pitch $\otimes$ chord), bundling superpositions multi-voice polyphony, permutation encodes sequence order. Composition = encode section hypervectors $\rightarrow$ decode via similarity search item memory $\rightarrow$ fill UnitMatrix cells. No training — the HD algebra is the generative process. Brain-inspired, non-connectionist AI-Driven counterpart to 002 Markov / 054 ATS / 046 VAE-LSI. |
 || **109** | concrete | Spiking Neural Network Composition (SNN-C) | **Nature-Led** | Pitch, Rhythm, Harmony, Structure, Texture | Strict (Mode/Synaptic-guided) | Grid-Locked / Continuous | Meso / Spike-Train | $\mathcal{O}(N \cdot T)$ simulation | Generates musical compositions using a multi-region spiking neural network of Izhikevich neurons with STDP learning. Hippocampal memory stores motif sequences via spike-timing-dependent plasticity; prefrontal cortex encodes mode/scale/style knowledge; thalamic theta-gamma oscillators drive metric hierarchy; insula system controls tension/release trajectory. Spike trains decoded to pitch (population-rate), duration (ISI), velocity (peak firing). Biologically-plausible Nature-Led counterpart to 059 ESN-RC / 037 FHN; non-backpropagation foil to 054 ATS / 046 VAE-LSI. |
+| **110** | concrete | Neural Cellular Automata Composition (NCA-C) | **AI-Driven** | Pitch, Rhythm, Harmony, Structure, Texture | Variable (Seed/Section-conditioned) | Grid-Locked / Continuous | Macro / NCA Timesteps | $\mathcal{O}(T \cdot V \cdot C \cdot K)$ | Differentiable local CNN update rules trained via gradient descent through time (BPTT) generate musical structure on a 2D grid (voices × time slots). Seed → iterative self-organization → decoded events fill UnitMatrix. AI-Driven counterpart to 021 CA/070 CML-C: learned rather than hand-crafted local rules. |
 |||### Source
 |Sakellariou, J., Tria, F., Loreto, V. & Pachet, F. (2017). "Maximum entropy models capture melodic styles." *Scientific Reports* 7, 9172. arXiv:1610.03414. — Jaynes, E. T. (1957). "Information theory and statistical mechanics." *Physical Review* 106, 620–630.
 
@@ -283,6 +284,7 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 | **SP-106** | Phaser / Allpass Modulation Synthesis (APS) | **Post-Processing / DSP** | Phase-Swept Modulation / Spectral Notch Filtering | Classic modulation effect using a cascade of allpass filters with LFO-modulated break frequencies to create moving spectral notches through phase cancellation when mixed with dry signal. $N/2$ notches for $N$ stages, depth/rate/feedback/sweep controls. $\mathcal{O}(N)$ per sample. Candidate: `sound/effects/phaser.py`. |
 | **SP-107** | Look-Ahead Brickwall Limiter (LBL) | **Post-Processing / DSP** | Peak Control / Loudness Maximization | Look-ahead brickwall limiter that delays the input signal, computes gain reduction via peak detection with attack/hold/release envelope shaping, applies the smoothed gain curve to the delayed signal, and ensures no sample exceeds the threshold. The final dynamics-control stage before render. |
 | **SP-108** | McAulay-Quatieri Sinusoidal Analysis/Synthesis (MQSAS) | **Post-Processing / DSP** | Sinusoidal Resynthesis / Spectral Editing | Decomposes a signal into time-varying sinusoidal partials via FFT peak tracking with parabolic interpolation and frame-to-frame partial matching (birth/continuation/death). Resynthesizes with cubic phase interpolation for continuous instantaneous frequency. Enables independent partial editing, pitch-shift, time-stretch, and cross-synthesis. The foundational analysis-resynthesis method for spectral editing (SPEAR, SNDAN, Loris). O(K) synthesis per sample. Candidate: `sound/effects/sinusoidal_modeling.py`. |
+|| **SP-109** | Spectral Gating Adaptive Noise Reduction (SG-ANR) | **Post-Processing / DSP** | Noise Suppression / Spectral Cleanup | Frequency-domain noise reduction via per-bin STFT gain masking. Estimates noise profile from silent/noise-only segment (stationary mode) or via continuous EMA noise floor tracking (non-stationary mode), computes a sigmoid gain mask from the per-bin SNR, and applies it to the magnitude STFT while preserving original phase. Reconstructs via overlap-add IFFT. Produces cleaned audio with reduced background hiss, rumble, and ambience. Candidate: `sound/effects/spectral_gate.py`. |
 |---|
 
 
@@ -24202,4 +24204,221 @@ where $t_v$ is the section-mapped time coordinate for voice $v$ (allowing per-vo
 
 7. **vs. SP-027 SMS (Spectral Modeling Synthesis).** MQSAS models the signal as a sum of pure sinusoids with no residual. SMS explicitly separates deterministic sinusoids from a stochastic noise component. MQSAS is better for sounds with clear sinusoidal structure (sustained notes, vocal, brass, string); SMS is better for sounds with significant noise content (breath, sibilance, bowed textures, ambient field recordings). For UnitMatrix integration, MQSAS is preferred for melodic/harmonic voices; SMS or a combined MQSAS+noise scheme for textural/ambient voices.
 
-Candidate code path: `sound/effects/sinusoidal_modeling.py` — implements a `SinusoidalModelingEngine` class with three stages: `PeakDetector` (STFT frame processor with parabolic interpolation), `PartialTracker` (frame-to-frame peak matching with birth/continuation/death logic), and `OscillatorBankSynthesizer` (cubic-phase-interpolated partial summation). NumPy/SciPy dependencies: `scipy.signal` for STFT frames, `numpy.fft` for FFT. UnitMatrix integration via `MQCellConfig` dataclass.
+Candidate code path: `sound/effects/sinusoidal_modeling.py` — implements a `SinusoidalModelingEngine` class with three stages: `PeakDetector` (STFT frame processor with parabolic interpolation), `PartialTracker` (frame-to-frame peak matching with birth/continuation/death logic), and `OscillatorBankSynthesizer` (cubic-phase-interpolated partial summation). NumPy/SciPy dependencies: `scipy.signal` for STFT frames, `numpy.fft` for FFT. UnitMatrix integration via `MQCellConfig` dataclass.### 110. Neural Cellular Automata Composition (NCA-C)
+
+### Source
+
+Mordvintsev, A., Randazzo, E., Niklasson, E. & Levin, M. (2020). "Growing Neural Cellular Automata." *Distill*. doi:10.23915/distill.00023. — Delarosa, O. (2021). "Growing MIDI Music Files Using Convolutional Cellular Automata." *ICMLC 2021 Workshop*. — Spitznagel, M. & Keuper, J. (2026). "Review and Reference Implementation of Neural Cellular Automata." *Transactions on Machine Learning Research*. — Mordvintsev, A. & Niklasson, E. (2021). "Differentiable Logic Cellular Automata." *Google Research*. — Variengien, A. & Glanois, C. (2024). "Illuminating Diverse Neural Cellular Automata for Level Generation." *GECCO 2022*.
+
+### Layer
+
+**concrete** — the trained NCA generates events (pitch, duration, velocity) per cell on a 2D grid where rows = voices and columns = time slots. The final grid state is decoded into MusicEvents that fill UnitMatrix cells. Feeds generators/ via `generators/nca_composer.py`.
+
+### Paradigm
+
+**AI-Driven** — the local CNN update rule is trained end-to-end via gradient descent (backpropagation through time, BPTT) to minimize a reconstruction or style-loss objective. No hand-crafted rules (unlike 021 CA), no chaotic/Nature-Led equations (unlike 070 CML-C, 030 RDTP, 082 RBNCC). The learned neural update rule is shared across all cells and discovers optimal local interactions from data.
+
+### Description
+
+**Neural Cellular Automata Composition (NCA-C)** uses a 2D grid of continuous-state cells, where each cell's state is a vector in $\mathbb{R}^{C}$ (typically $C=12$–$16$ channels). All cells share a single local neural network update rule $f_\theta$ (a small CNN with 3×3 convolutional filters and ReLU hidden layers) that computes the state delta:
+
+$$s_{i,j}^{(t+1)} = s_{i,j}^{(t)} + \text{mask}_{i,j} \cdot f_\theta(\mathcal{N}(s_{i,j}^{(t)}))$$
+
+where:
+- $s_{i,j}^{(t)} \in \mathbb{R}^C$ is the state vector of cell at row $i$, column $j$ at timestep $t$.
+- $\mathcal{N}(s_{i,j})$ is the perception vector: the 3×3 neighborhood of cell states, flattened and optionally augmented with gradient channels ($\partial s/\partial x$, $\partial s/\partial y$) computed via Sobel-like fixed kernels. The perception vector has dimension $3 \times 3 \times C + 2 \times C = 9C + 2C = 11C$ (for standard Sobel gradient perception).
+- $f_\theta$ is a small multi-layer perceptron or convolutional network with parameters $\theta$: perception → hidden → output of $C$ deltas. A typical architecture is: 128 neurons → ReLU → 128 neurons → ReLU → $C$ linear.
+- $\text{mask}_{i,j} \in \{0,1\}$ is a stochastic per-cell mask (probability $p_{\text{update}}$ typically 0.5) that implements asynchronous cell updates — a crucial self-organisation feature (cells update independently at random intervals). Without masking, the grid updates synchronously and loses the robustness property.
+
+The grid has dimensions $V \times T$, where $V$ = number of UnitMatrix voices (rows) and $T$ = number of time slots (columns). The grid is initialized from a **seed**: one or a few cells at position $(0,0)$ are set to a learned seed state $s_{\text{seed}}$, and all other cells are zero. The NCA is then run for a fixed number of timesteps $K$ (typically 128–512). The final state $s^{(K)}$ is decoded to musical events.
+
+**Training**: The NCA is trained by gradient descent to minimize:
+
+$$\mathcal{L} = \mathcal{L}_{\text{recon}}(D(s^{(K)}), \text{target}) + \lambda_1 \mathcal{L}_{\text{style}}(D(s^{(K)})) + \lambda_2 \mathcal{L}_{\text{reg}}(s)$$
+
+where:
+- $D$ is a decoder (readout) function that maps each cell's state $s_{i,j}^{(K)}$ to musical parameters:
+  - **Pitch**: one channel → softmax over pitch classes (12), another → octave offset
+  - **Duration**: one channel → sigmoid-scaled onset duration in ticks
+  - **Velocity**: one channel → sigmoid → MIDI velocity (1–127)
+  - **Active**: one channel → sigmoid → onset probability (gates whether the note is present)
+- $\mathcal{L}_{\text{recon}}$ is the reconstruction loss between the decoded music and a target sequence (for supervised training), typically cross-entropy for pitch + MSE for duration/velocity.
+- $\mathcal{L}_{\text{reg}}$ is a state regularization term (e.g., L2 penalty on state magnitudes to prevent runaway activation).
+- $\lambda_1, \lambda_2$ are loss weights.
+
+**Gradient flow**: Gradients flow backward through all $K$ timesteps (truncated BPTT) and through the shared $f_\theta$ update rule, enabling the network to discover local update rules that produce globally coherent musical structure. The stochastic cell-update mask acts as a powerful regularizer — the network cannot rely on synchronous global updates and must learn robust local rules.
+
+**Seed-to-growth**: After training, composition proceeds by:
+1. Selecting a seed state pattern (learned or hand-designed) at the initial column.
+2. Running the NCA for $K$ timesteps to propagate musical information across the grid.
+3. Optionally conditioning on section parameters by modulating cell states at specific rows/columns (voice/section boundaries).
+4. Decoding each cell to a MusicEvent and assembling into the UnitMatrix.
+
+### Musical Elements Framework
+
+**PITCH**: Each cell's state channels encode pitch via softmax over 12 pitch classes plus an octave offset channel. As the NCA propagates information left-to-right across the grid, pitch patterns emerge from the local update rules — adjacent columns learn interval preferences (stepwise motion bias emerges from the training data), note clusters form motifs, and the repeating structure of the grid induces self-similar melodic phrases. The perception field (3×3) means each cell's pitch is influenced by: (a) the same voice's previous time slot (melodic context), (b) adjacent voices at the same time (harmonic context), and (c) diagonal neighbors (cross-voice rhythmic coordination). Pitch range is bounded by the octave offset channel activation.
+
+**RHYTHM**: Rhythm is encoded through the "active" channel (onset gate) per cell, which determines whether a note event occurs at that grid position. The NCA learns to pattern these active/inactive states across the time axis (columns): clusters of consecutive active cells = sustained notes, alternating active/inactive = pulsed rhythms. The stochastic update mask forces the NCA to learn robust rhythmic patterns that emerge regardless of the exact update schedule — a form of learned metric binding. Section-conditioned input channels modulate rhythmic density by scaling the activation threshold of the active channel. Syncopation emerges naturally as the pattern of active/inactive cells across layers of the grid.
+
+**HARMONY**: Harmony is encoded through cross-voice (vertical) interactions in the NCA's perception field. At each column $j$, the states of all voices $i$ at that column define a vertical slice of the grid. The CNN update rule processes each cell's 3×3 neighborhood, which includes adjacent rows (voices) at the same column — so each cell's update is influenced by the current pitches of neighboring voices. This vertical coupling teaches the NCA harmonic relationships: consonant chords (triads, seventh chords) form when multiple voice cells at the same column activate with pitches that form consonant intervals. The network learns these voicings from the training data via the reconstruction loss. Since the perception field is only 3 cells high, harmony is local (max 3 simultaneous voices in receptive field), but deeper layers of the CNN could encode broader harmonic contexts via stacked convolutions.
+
+**STRUCTURE**: Macro-form is controlled by **section-conditioning**: before the NCA timestep loop, the initial state of cells in specified columns is modified to carry section-identity information (e.g., add a "section-id" one-hot channel to the state vector for all cells in that column range). This conditions the entire subsequent evolution on the section identity. Alternatively, a separate "form seed" at the top of the grid encodes the section sequence, and the 3×3 perception propagates this information downward like a morphogen gradient. Short-range 3×3 perception means that propagation takes $T$ timesteps to travel $T$ columns — the NCA must run for at least as many timesteps as the grid width to allow section information to propagate across the composition. Form emerges from: seed content (initial conditions) → trained local rules → final decoded state.
+
+**TEXTURE**: Texture (monophony vs. homophony vs. polyphony) is controlled by the degree of cross-voice coupling in the update rule. During training, if the NCA is trained on polyphonic data with independent voices (each voice row has its own melodic line), the update rule learns to minimize cross-row coupling (columns evolve quasi-independently). If trained on homophonic data (chorale textures), the update rule learns strong vertical coupling where all voices at the same column share chordal pitch relationships. The perception field size (3×3) limits the maximum texture complexity to three-voice interactions per cell; multi-step propagation enables larger textures. Voice density (number of simultaneously active cells per column) is governed by the threshold on the active-channel decoder: high threshold = sparse texture (few simultaneous events), low threshold = dense texture (chord masses).
+
+### UnitMatrix Integration (Voices & Sections)
+
+**Voices**: Each row $i$ of the NCA grid corresponds to one UnitMatrix voice. The row index determines the voice's MIDI channel/program assignment, but the actual musical content (pitch, rhythm) emerges from the NCA's learned dynamics. Voice count $V$ is fixed at grid creation time. The perception field's vertical extent (3 rows) means each voice interacts directly only with its immediate upper/lower neighbors — voices more than 1 row apart interact only through multi-step propagation, which produces hierarchical voicing structures (bass = bottom row, inner voices = middle rows, melody = top row). If independent voices are desired (e.g., percussion + lead + chord), train the NCA with a reduced vertical perception field (1×3, no row neighbors) or train per-voice NCAs independently and combine by strict cell concatenation.
+
+**Sections**: Each section $m$ conditions the NCA in one of two ways:
+1. **Input conditioning**: Add an extra channel to each cell's state encoding a section-ID one-hot vector. This channel is set at initialization and held constant throughout the timesteps. The update rule $f_\theta$ learns to interpret this channel as a "what section are we in" signal, adjusting melodic/harmonic behavior accordingly.
+2. **Separate seed per section**: A distinct seed state $s_{\text{seed}}^{(m)}$ is learned per section. The grid for section $m$ is initialized with seed $s_{\text{seed}}^{(m)}$ at the first column, run for $K$ timesteps to produce the section's music, then concatenated with adjacent sections at the UnitMatrix level. This approach gives maximum section independence at the cost of cross-section continuity.
+
+The **cell** content (MusicUnit) at position (voice $i$, section-column $j$) is decoded from the trained NCA's final state $s_{i,j}^{(K)}$ across all channels to produce a triple (pitch, duration, velocity) with onset gating via the active-channel threshold. Optionally, post-process with voice-leading smoothing (050 OTVL or 011 Voice-Leading Graph Search) to eliminate artifacts from the grid decoding.
+
+### Pitfalls
+
+1. **Training instability**: BPTT through $K=128$+ timesteps with shared weights across all cells produces vanishing or exploding gradients — the repeated application of $f_\theta$ creates an effective $K$-layer recurrent network. Use gradient clipping (max norm 1.0), L2 regularization, and truncation ($K \le 64$ for the first training phase, then increase). The stochastic update mask acts as a natural gradient stabilizer.
+
+2. **Grid size vs. timestep budget**: The 3×3 perception field means information propagates at most 1 column per timestep in the horizontal direction. To fill a grid of $T$ columns requires at least $T$ timesteps. For a 32-bar composition at 16th-note resolution (512 columns), $K \ge 512$ timesteps are needed — making training very expensive. Mitigate by: (a) coarser time quantization (eighth notes = 128 columns), (b) dilated perception kernels that skip columns, or (c) training on shorter segments and concatenating.
+
+3. **Cell state interpretability**: Unlike 021 CA's binary states, NCA continuous vectors ($\mathbb{R}^{12+}$) have no direct musical meaning — channels become mixed encodings of pitch, rhythm, harmony, and structure. The decoder $D$ is an essential learned component; changing the decoder architecture requires retraining the full NCA. Visualization requires PCA or t-SNE projections of the state channels.
+
+4. **Grid resolution — time quantization**: The grid discretizes time into uniform columns. This forces note onsets onto a fixed grid, losing expressive micro-timing. For fluid/continuous-time music, use a finer column resolution (e.g., 1/32 notes) and decode duration as a continuous value from a dedicated channel, allowing notes to span multiple columns.
+
+5. **Determinism vs. diversity**: A trained NCA with fixed seed and fixed mask generates the exact same output every time — useful for reproducibility but not for creative exploration. Inject diversity by: (a) randomly perturbing the seed state (Gaussian noise $\sigma=0.01$), (b) varying the stochastic mask's random seed, or (c) training an ensemble of NCAs with different $\theta$ and sampling from the ensemble per section.
+
+6. **Voice count fixed at training time**: Changing $V$ (number of voices) after training produces undefined behavior for the decoder — cells in unanticipated positions fall outside the trained distribution. Train with the maximum expected voice count and mask unused rows to zero during composition, or train a separate NCA per voice count.
+
+7. **Computational cost**: Training requires differentiating through $K$ steps of the NCA on a grid of $V \times T$ cells with $C$ channels each — memory scales as $\mathcal{O}(K \cdot V \cdot T \cdot C)$. Use checkpointing (recompute forward pass during backward) to trade compute for memory. Inference is cheap — only one forward pass through $K$ timesteps.
+
+Candidate code path: `generators/nca_composer.py` — implements an `NCAComposer` class with three components: `NCAUpdateRule` (small CNN), `NCAStateDecoder` (per-cell readout layers), and `NCAGridState` (continuous 2D grid buffer). Uses PyTorch for autograd + BPTT through the NCA timesteps. UnitMatrix integration via `NCAComposer.compose(seed, sections, voices, n_steps)` which runs the NCA forward, decodes each cell, and fills a UnitMatrix.
+# Spectral Gating Adaptive Noise Reduction (SG-ANR) — Sound Production Method SP-109
+
+### Source
+Boll, S. F. (1979). "Suppression of acoustic noise in speech using spectral subtraction." *IEEE Transactions on Acoustics, Speech, and Signal Processing* 27(2), 113–120. — Sainburg, T., Thielk, M., & Gentner, T. Q. (2020). "Finding, visualizing, and quantifying latent structure across diverse animal vocal repertoires." *PLoS Computational Biology* 16(10), e1008228. — Audacity Team. "How Audacity Noise Reduction Works." Audacity Manual.
+
+### Layer
+**absolute** — operates on rendered audio buffers (WAV/OGG stems) from any upstream Concrete-layer composition. The input is a fully realized mix; the output is a cleaned, noise-suppressed version of that mix. Belongs to the Post-Processing / DSP family within the Absolute layer (sound production). Candidate code path: `sound/effects/spectral_gate.py`.
+
+### Description
+**Spectral Gating Adaptive Noise Reduction (SG-ANR)** is a frequency-domain audio post-processing technique that reduces stationary or slowly varying background noise from a rendered audio buffer. It operates by:
+
+1. **Noise profiling**: Analyzing a noise-only segment of the audio (or an explicit noise reference) to estimate the noise magnitude spectrum per frequency bin.
+2. **Gain computation**: Computing a time-varying, frequency-dependent gain mask that attenuates bins where the signal-to-noise ratio (SNR) is low while preserving bins where the signal dominates.
+3. **Masking**: Applying the gain mask to the magnitude STFT, preserving the original phase, and reconstructing via inverse STFT with overlap-add.
+
+Two operational modes exist:
+- **Stationary mode**: A single noise profile is estimated from a silent/noise-only region and applied uniformly across the entire signal. Suitable for constant background hums, fan noise, or tape hiss.
+- **Non-stationary mode**: The noise floor is tracked continuously via exponential moving average (EMA) of the per-bin magnitude, with a time constant $\tau$ controlling adaptation rate. Suitable for varying backgrounds (crowd noise, wind, changing room ambience).
+
+The key innovation over simple noise gating is that SG-ANR applies **frequency-selective** attenuation — each frequency bin gets its own time-varying gain, preserving the signal's spectral content in bands where noise is absent.
+
+### Technical Mechanics
+
+**Signal model**: The observed noisy signal $y[n]$ is modeled as the sum of the clean signal $x[n]$ and uncorrelated additive noise $d[n]$:
+
+$$y[n] = x[n] + d[n]$$
+
+**STFT analysis**: The signal is framed into overlapping windows (typically 20–50 ms, 50–75% overlap) with a Hann or Blackman window, then transformed to the frequency domain:
+
+$$Y_m[k] = \sum_{n=0}^{N-1} y[mH + n]\,w[n]\,e^{-j2\pi kn/N}$$
+
+where $m$ is the frame index, $H$ is the hop size, $w[n]$ is the window function, and $N$ is the FFT size.
+
+**Noise profile estimation (stationary)**: Given a noise-only segment $y_{\text{noise}}[n]$ (detected via voice activity detection or manually selected), the noise magnitude spectrum is estimated as the per-bin mean across $M$ noise frames:
+
+$$|\hat{D}[k]| = \frac{1}{M} \sum_{m=0}^{M-1} |Y_m^{\text{(noise)}}[k]|$$
+
+Optionally with a standard deviation per bin $\sigma_D[k]$ for a more conservative threshold.
+
+**Noise profile estimation (non-stationary)**: The noise floor is tracked via per-bin exponential moving average:
+
+$$|\hat{D}_m[k]| = \alpha\,|\hat{D}_{m-1}[k]| + (1-\alpha)\,|Y_m[k]|$$
+
+where $\alpha = \exp(-H / (\tau \cdot f_s))$ sets the time constant $\tau$ in seconds, and $f_s$ is the sample rate. For non-stationary mode, the gate threshold is typically set to $|\hat{D}_m[k]|$ plus a multiplier $n_{\text{std}}$ (e.g., 1–3) of the local standard deviation estimate.
+
+**Gain mask computation**: A time-frequency gain mask $G_m[k] \in [0, 1]$ is computed from the ratio of the noisy magnitude to the noise threshold:
+
+$$G_m[k] = \text{sigmoid}\left( s \cdot \left( \frac{|Y_m[k]|}{|\hat{D}[k]|} - t \right) \right)$$
+
+where:
+- $s$ = sigmoid slope (steepness of the gate, typically 10–50)
+- $t$ = threshold ratio (typically 1.0–3.0; values below this ratio are attenuated)
+- The sigmoid function $\sigma(z) = 1 / (1 + e^{-z})$ provides a smooth transition between pass and suppress regions, avoiding hard-knee artifacts
+
+Alternatively, a power-spectral subtraction gain (Boll 1979) can be used:
+
+$$G_m[k] = \sqrt{\frac{|Y_m[k]|^2 - \beta\,|\hat{D}[k]|^2}{|Y_m[k]|^2}}$$
+
+where $\beta$ is an over-subtraction factor ($\beta \ge 1$ increases suppression) with a spectral floor to prevent negative magnitudes:
+
+$$|\hat{X}_m[k]| = \max\left(G_m[k] \cdot |Y_m[k]|,\; \gamma \cdot |\hat{D}[k]|\right)$$
+
+where $\gamma$ is the spectral floor coefficient (typically 0.01–0.05), which masks residual "musical noise" artifacts.
+
+**Reconstruction**: The clean magnitude estimate is recombined with the original phase $\angle Y_m[k]$ and transformed back via inverse STFT with overlap-add:
+
+$$\hat{x}[n] = \sum_m \left( \frac{1}{N} \sum_{k=0}^{N-1} |\hat{X}_m[k]|\,e^{j\angle Y_m[k]}\,e^{j2\pi kn/N} \right) w_{\text{synth}}[n - mH]$$
+
+**Frequency-domain smoothing**: To further reduce musical noise artifacts, the gain mask can be smoothed across frequency bins (e.g., a moving-average filter of width $f_{\text{smooth}}$ Hz) and across time frames (e.g., a one-pole IIR smoother with time constant $\tau_{\text{smooth}}$ ms):
+
+$$\bar{G}_m[k] = \eta \bar{G}_{m-1}[k] + (1-\eta) G_m[k]$$
+
+where $\eta$ controls the temporal smoothing rate.
+
+**Complexity**: $O(N \log N)$ per frame (FFT) + $O(N)$ per frame (gain + multiply). For a buffer of $L$ samples with hop size $H$, total frames $F = L/H$, total cost $O(F \cdot N \log N) = O(L \cdot \log N)$.
+
+### Musical Elements Framework
+
+**PITCH**: Pitch is indirectly affected — the spectral gate attenuates frequency bins where noise energy exceeds signal energy. Tonal content (harmonic partials) with sufficient energy above the noise floor passes through unaffected. Weak partials near or below the noise floor are attenuated, which can subtly alter perceived brightness. No pitch transposition occurs.
+
+**RHYTHM**: Rhythm is preserved in the time domain because the STFT overlap-add reconstruction maintains temporal alignment. However, aggressive gating with long time constants can smear transient attacks (drum hits, percussive onsets) if the gate closes too slowly after a transient. The temporal smoothing parameter $\tau_{\text{smooth}}$ directly affects transient preservation — lower values ($<10$ ms) preserve transients but may introduce musical noise.
+
+**HARMONY**: Harmonic relationships are preserved because the gate operates per frequency bin on the magnitude spectrum without altering frequency ratios. If a chord's partials are all above the noise floor, the chord passes through unchanged. If some chord tones fall below the noise threshold (e.g., quiet inner voices in a noisy recording), they may be attenuated, subtly altering the chord voicing.
+
+**STRUCTURE**: Macro-form is unaffected — the gate operates uniformly (stationary mode) or adaptively (non-stationary mode) across the entire audio buffer. Section boundaries are preserved. Non-stationary mode with a short time constant ($\tau < 1$ s) can track changing noise conditions across sections (e.g., quieter noise during a breakdown section).
+
+**TEXTURE**: Texture is the primary affected element. The spectral gate selectively removes noise components, cleaning up the perceived texture. Key textural effects:
+- **Noise floor reduction**: The overall background hiss, rumble, or ambience is reduced, making the texture feel "cleaner" or "drier."
+- **Spectral enhancement**: By suppressing noisy frequency regions, the perceived clarity of the tonal signal increases.
+- **Musical noise**: Over-aggressive gating ($t$ too high, $\beta$ too large, insufficient frequency smoothing) produces random isolated spectral peaks — the characteristic "musical noise" artifact (random tones bubbling in and out). This is the primary textural pitfall.
+- **Transient smearing**: Long time constants on the gain smoother blur percussive attacks, making the texture feel "soggy" or less defined.
+
+### UnitMatrix Integration (Voices & Sections)
+
+SG-ANR is a **post-production** method — it operates on rendered audio after the UnitMatrix has been realized by an upstream production method (e.g., SP-001 FluidSynth, SP-011 Karplus-Strong, SP-057 Chua). Integration into the UnitMatrix workflow:
+
+**Voices**: Each UnitMatrix voice renders to its own audio stem via the configured production method. SG-ANR can be applied per-voice or to the final mix:
+- **Per-voice gating**: Each voice stem is independently gated with its own noise profile and threshold. Useful for cleaning individual microphone recordings or isolating specific voices from background noise.
+- **Mix gating**: The summed mix buffer is gated as a whole. Simpler but can introduce cross-voice artifacts if one voice's noise profile differs from another's.
+
+The per-voice approach is preferred for production: each voice row in the UnitMatrix maps to a stem processed independently, preserving the multi-track nature of the matrix.
+
+**Sections**: The gate operates uniformly across all sections in stationary mode. In non-stationary mode, the EMA-based noise tracker automatically adapts to changing noise levels per section — the gate opens or closes as the noise floor changes across intro/verse/chorus/bridge sections. For section-specific noise profiles, pre-compute separate noise profiles per section and apply them via section-index lookup.
+
+**Cells (MusicUnits)**: SG-ANR is transparent to the UnitMatrix cell structure — it operates on audio, not on symbolic music events. The rendering pipeline is:
+
+```
+UnitMatrix → [SP-001/SP-011/...] → per-voice WAV stems → SG-ANR → cleaned stems → mix → final WAV/OGG
+```
+
+A `SpectralGateConfig` dataclass per voice specifies: `mode` (stationary/nonstationary), `n_fft`, `hop_length`, `noise_profile_path` (for stationary), `time_constant_s` (for nonstationary), `threshold_ratio`, `sigmoid_slope`, `freq_smooth_hz`, `time_smooth_ms`, `floor_gamma`.
+
+### Pitfalls
+
+1. **Musical noise artifacts** — The most notorious pitfall. When the spectral gate aggressively attenuates bins near the noise threshold, the randomness of the residual noise spectrum produces isolated spectral peaks that sound like random high-Q resonant tones ("musical noise" or "birdies"). Mitigation: use frequency-domain smoothing (moving average across bins), time-domain smoothing (IIR on gain values), spectral flooring ($\gamma = 0.01$–0.05), and over-subtraction factors ($\beta < 2$).
+
+2. **Transient smearing** — Aggressive gating with long time constants causes the gate to close slowly after a transient (drum hit, pluck), cutting off the tail or smearing the decay. Mitigation: use a shorter time constant for the gain smoother ($\tau_{\text{smooth}} < 10$ ms), or implement a transient-preservation mode that detects onsets and reduces gating during transient frames.
+
+3. **Voice activity / noise-only segment detection** — Stationary mode requires a clean noise-only segment. If the segment contains signal bleed (e.g., a quiet instrument during the "silent" section), the noise profile will be contaminated, causing the gate to attenuate desired signal. Mitigation: use manual noise-region selection, or implement an energy-based VAD that identifies the quietest frames automatically.
+
+4. **Low SNR threshold** — When the signal is only slightly above the noise floor, the gate cannot distinguish signal from noise, and both are equally attenuated. Below about 6 dB SNR per bin, spectral gating becomes ineffective — the gain approaches 0.5 even for signal bins. Mitigation: combine with pre-filtering (SP-020 ZDF filter) or use a neural denoiser (SP-060 DDAS) for very noisy signals.
+
+5. **Phase distortion** — Reusing the original noisy phase $\angle Y_m[k]$ with the cleaned magnitude $|\hat{X}_m[k]|$ produces a phase-magnitude mismatch that can cause audible artifacts (phasiness, metallic quality). Mitigation: use a phase-aware reconstruction (e.g., Griffin-Lim iterative phase reconstruction) or use the noisy phase with light gating only.
+
+6. **Per-voice parameter tuning** — Different voices (bass drum vs. flute vs. cymbals) have different noise characteristics and spectral distributions. A single global gate setting will over-suppress some voices and under-suppress others. Mitigation: tune noise profiles and gate parameters per voice, or bypass the gate entirely for voices with high SNR.
+
+7. **Computational cost** — The FFT-based processing is $O(L \log N)$ for a buffer of length $L$, which is acceptable for offline rendering but may be too expensive for real-time use on constrained hardware. Mitigation: use a smaller FFT size ($N = 512$), larger hop size, or downsample before processing.
+
+Candidate code path: `sound/effects/spectral_gate.py` — implements a `SpectralGate` class with stationary and non-stationary modes, per-bin EMA noise tracking, sigmoid gain computation with frequency/time smoothing, and overlap-add reconstruction. Accepts a `noise_profile` array or an audio buffer for automatic noise estimation. UnitMatrix integration via `SpectralGateCellConfig` dataclass.

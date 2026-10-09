@@ -1,0 +1,58 @@
+{
+  "artifact": "231-perlin-lpc-rework.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.workflows.unitmatrix_composer + musicom rules",
+  "sources": [],
+  "parameters": {
+    "project": "231-perlin-lpc-rework",
+    "phase": 2,
+    "key": "D Dorian",
+    "bpm": 80,
+    "method": 40,
+    "source": "056-perlin-lpc",
+    "seed": 42,
+    "sections": [
+      "Intro",
+      "VerseA",
+      "VerseA2",
+      "VerseB",
+      "PreChorus",
+      "Chorus",
+      "Bridge",
+      "Outro"
+    ],
+    "bars": 16,
+    "variation_techniques": [
+      "transposition (VerseA2 +5, Chorus +12, Outro -12)",
+      "inversion (VerseB axis=67, Bridge axis=65)",
+      "diminution (PreChorus/Chorus dur x0.5)",
+      "augmentation (Outro dur x2.0)",
+      "register shift (Chorus +12, Outro -12)",
+      "density rise (Chorus 16th hi-hat)"
+    ],
+    "bar_degrees": [
+      0,
+      6,
+      0,
+      3,
+      3,
+      2,
+      1,
+      4,
+      4,
+      3,
+      0,
+      6,
+      6,
+      4,
+      3,
+      0
+    ],
+    "rules_applied": "per-bar chord quantization, rhythm-grid snap, diatonic block harmony, voice-leading + Phase 2c correction"
+  },
+  "notes": "Phase 2 rules-processed multi-voice rework. Extended 12->16 bars, >=3 variation techniques.",
+  "sha256": "f10fc40ded3ec9f828260841f0788669fc2d376327c803f6c593ff340be9bb62",
+  "bytes": 2251,
+  "created_utc": "2026-10-09T01:09:12.026652+00:00",
+  "provenance_version": "1.0"
+}

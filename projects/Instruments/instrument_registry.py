@@ -50,6 +50,7 @@ _INSTRUMENT_MODULES = {
     "Woodwind.saxophone.saxophone": "saxophone",
     "Woodwind.tenor_sax.tenor_sax": "tenor_sax",
     "Guitar.acoustic.acoustic_guitar": "acoustic_guitar",
+    "Guitar.steel_acoustic.steel_acoustic": "steel_acoustic",
     "Percussion.drum_kit.drum_kit": "drum_kit",
     "Percussion.marimba.marimba": "marimba",
     "Percussion.steel_drums.steel_drums": "steel_drums",
@@ -233,6 +234,8 @@ ACOUSTIC_GUITAR = ALL_INSTRUMENTS["acoustic_guitar"]
 DRUM_KIT = ALL_INSTRUMENTS["drum_kit"]
 MARIMBA = ALL_INSTRUMENTS["marimba"]
 STEEL_DRUMS = ALL_INSTRUMENTS["steel_drums"]
+SITAR = ALL_INSTRUMENTS["sitar"]
+STEEL_ACOUSTIC = ALL_INSTRUMENTS["steel_acoustic"]
 VIBRAPHONE = ALL_INSTRUMENTS["vibraphone"]
 SITAR = ALL_INSTRUMENTS["sitar"]
 KOTO = ALL_INSTRUMENTS["koto"]
@@ -377,6 +380,8 @@ def registry_table():
             role = "harmony, melody, bass, accent, color"
         elif low == "electric bass (finger)":
             role = "bass, rhythm, countermelody, accent"
+        elif low == "acoustic guitar (steel)":
+            role = "harmony, rhythm, strum, lead, melody, ornament, countermelody"
         else:
             role = "lead, harmony, accent"
         rng = f"{inst.range_min}–{inst.range_max}" if inst.range_min else "-"
@@ -402,6 +407,10 @@ if __name__ == "__main__":
     print("  by_name('sitar') =", by_name("sitar"))
     print("  by_program(104) =", by_program(104))
     print("  SITAR.in_sweet_spot(69) =", SITAR.in_sweet_spot(69))
+    print("  STEEL_ACOUSTIC.midi_program =", STEEL_ACOUSTIC.midi_program, "(should be 25)")
+    print("  by_name('steel acoustic') =", by_name("steel acoustic"))
+    print("  by_program(25) =", by_program(25))
+    print("  STEEL_ACOUSTIC.in_sweet_spot(65) =", STEEL_ACOUSTIC.in_sweet_spot(65))
     print("  KOTO.midi_program =", KOTO.midi_program, "(should be 107)")
     print("  by_name('koto') =", by_name("koto"))
     print("  by_program(107) =", by_program(107))

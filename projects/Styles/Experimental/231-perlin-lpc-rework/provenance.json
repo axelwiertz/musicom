@@ -1,0 +1,46 @@
+{
+  "project": "231-perlin-lpc-rework",
+  "genre": "Experimental",
+  "classification": "ai-assisted",
+  "generator": "musicom.workflows.unitmatrix_composer + musicom rules (rework job)",
+  "source_project": "056-perlin-lpc",
+  "redesign_vs_extension": "redesign (identity preserved; source failed standards 3/5/6 = grid-sync, two-phase, root provenance)",
+  "method": 40,
+  "key": "D Dorian",
+  "bpm": 80,
+  "meter": "4/4 (480 tpb, 1920 ticks/bar)",
+  "form": "8 sections x 2 bars = 16 bars",
+  "voices": ["Lead (Flute ch0)", "Pad (String Ensemble ch1)", "Bass (Electric Bass ch2)", "Drums (ch9)"],
+  "bar_degrees": [0, 6, 0, 3, 3, 2, 1, 4, 4, 3, 0, 6, 6, 4, 3, 0],
+  "midpoint_degrees": [6, 3, 2, 4, 3, 6, 4, 0],
+  "variation_techniques": [
+    "transposition (VerseA2 +5, Chorus +12, Outro -12)",
+    "inversion (VerseB axis=67, Bridge axis=65)",
+    "diminution (PreChorus/Chorus dur x0.5)",
+    "augmentation (Outro dur x2.0)",
+    "register shift (Chorus +12, Outro -12)",
+    "density rise (Chorus 16th hi-hat)"
+  ],
+  "verification": {
+    "voice_tracks": 4,
+    "track_length_ticks": 30720,
+    "zero_drift": true,
+    "off_grid_onsets": 0,
+    "scale_violations": 0,
+    "chord_violations": 0,
+    "parallel_fifth_violations": 0
+  },
+  "raw_phase1": {
+    "voice_tracks": 1,
+    "events": 64,
+    "non_diatonic_leak": 34,
+    "off_grid_onsets": 62
+  },
+  "audio": {
+    "wav": "Audio/231-perlin-lpc-rework.wav",
+    "ogg": "Audio/231-perlin-lpc-rework.ogg",
+    "duration_s": 55.59,
+    "silence_ratio": 0.109,
+    "rms_dbfs": -18.8
+  }
+}

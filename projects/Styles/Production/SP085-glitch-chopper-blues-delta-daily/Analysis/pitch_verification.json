@@ -1,0 +1,25 @@
+{
+  "method": "SP-085",
+  "project": "Blues/blues-delta-daily-2026-06-24",
+  "scale": "A blues hexatonic (source PCS, non-drum)",
+  "pcs": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    6,
+    7,
+    8,
+    9,
+    11
+  ],
+  "status": "PASS",
+  "hit_rate": 1.0,
+  "harmonic_energy_mean": 0.40215551018316553,
+  "dry_harmonic_energy_mean": 0.4375677001296336,
+  "he_retention": 0.9190703748563323,
+  "windows_analyzed": 80,
+  "median_freq_hz": 442.0,
+  "transients_detected": 447
+}

@@ -606,7 +606,8 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Woodwind | Bagpipe | 109 | 53–96 | lead, melody, ornament, drone, accent |
 | Woodwind | Baritone Saxophone | 67 | 36–80 | bass, harmony, accent, lead, countermelody |
 | Woodwind | Bassoon | 70 | 34–88 | bass, harmony, counter, lead |
-| Guitar | Acoustic | 25 | 40–84 | harmony, rhythm, strum |
+| Guitar | Acoustic Guitar (nylon) | 24 | 40–84 | harmony, rhythm, strum |
+| Guitar | Acoustic Guitar (steel) | 25 | 40–86 | harmony, rhythm, strum, lead, melody, ornament, countermelody |
 | Percussion | Drum Kit | ch9 | 35–81 | rhythm, groove, accent |
 | Percussion | Glockenspiel | 9 | 79–108 | lead, melody, ornament, accent, countermelody |
 | Percussion | Marimba | 12 | 45–96 | lead, melody, accent, countermelody, harmony |
@@ -683,7 +684,9 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 |||| 21 | Accordion | Accordion ✓ (GM_PROGRAMS[21] = "Accordion"; FluidR3 preset 21 = "Accordian" — archaic SF2 spelling, cosmetic only, no routing impact) |
 ||| 10 | Music Box | Music_Box ✓ (GM_PROGRAMS[10] = "Music Box"; FluidR3 preset 10 = "Music Box" — labels match exactly, **no quirk**) |
 ||| 4 | Electric Piano 1 | Electric_Piano_1 ✓ (GM_PROGRAMS[4] = "Electric Piano 1"; FluidR3 preset 4 = "Rhodes EP" — internal SF2 name, cosmetic only, no routing impact) |
-|| ch9/pgm0 | Drums | **Acoustic_Grand_Piano** ✗ (program-0 fallback) |
+||| ch9/pgm0 | Drums | **Acoustic_Grand_Piano** ✗ (program-0 fallback) |
+||| 24 | Acoustic Guitar (nylon) | Acoustic_Guitar_nylon ✓ (GM_PROGRAMS[24] = "Acoustic Guitar (nylon)"; FluidR3 preset 24 = "Nylon String Guitar" — internal SF2 name differs cosmetically, no routing impact) |
+||| 25 | Acoustic Guitar (steel) | Acoustic_Guitar_steel ✓ (GM_PROGRAMS[25] = "Acoustic Guitar (steel)"; FluidR3 preset 25 = "Steel String Guitar" — internal SF2 name differs cosmetically, no routing impact) |
 
 > **Known off-by-one in existing entries**: ~~`trumpet.py` uses 57~~ **FIXED 2026-08-27**: trumpet is now 56 (SF2 preset 56=`SoloTrumpet`). `piano.py`=1 → actually Bright Acoustic Piano (GM #2) — cosmetic label difference only, no routing impact. Legacy registry rows kept as-is for piano; new instruments use 0-indexed programs matching pipeline+SF2.
 
@@ -882,3 +885,22 @@ channel (0-9) with program 33 — channel 9 would trigger the drum-kit map.
 Line/rhythm quirk: bass is a monophonic groove line (double-stops possible on
 adjacent strings but not idiomatic), NOT a chord/comping voice and NOT a melodic
 lead voice — its role is bass/rhythm foundation with the kick drum.
+
+**Acoustic Guitar (steel) added** (2026-10-09): GM25, Guitar-family second entry
+— the steel-string flat-top acoustic guitar, the dominant folk/country/rock
+rhythm and fingerpicking voice (instrument.md + steel_acoustic.py), verified
+end-to-end UnitMatrixComposer → zero-drift ✓ → MIDI (111 bytes) → FluidSynth
+WAV (1.53 MB) ✓; RenderPipeline stem label
+`trackXX_Acoustic_Guitar_steel.wav` ✓ (GM_PROGRAMS[25] = "Acoustic Guitar
+(steel)", FluidR3 preset 25 = "Steel String Guitar" — internal SF2 name
+"Steel String Guitar" vs pipeline "Acoustic Guitar (steel)" is cosmetic only,
+**no routing impact**). Karplus-Strong recommended (plucked steel waveguide,
+loop_gain 0.9970 — steel strings ring 1–3 s, between clavi 0.9960 and harp
+0.9985; excitation="pick" for the bright steel-string attack). Solo-render
+spectral check: 4–8 kHz buzz 8.8% (clean single voice, well within 20% gate,
+no comb-filtering). Range 40–86 (E2–C#6), sweet spot 50–79 (D3–G5). Role:
+harmony, rhythm, strum, lead, melody, ornament, countermelody — fully
+polyphonic chord/strum/arpeggio instrument. Registration in
+`instrument_registry.py` as STEEL_ACOUSTIC convenience constant. Fix: existing
+acoustic_guitar (nylon) corrected from program 25 → 24 (FluidR3 preset 24 =
+"Nylon String Guitar") so steel is at program 25 where it belongs.

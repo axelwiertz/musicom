@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Acoustic Guitar — musicom instrument constants."""
 
-MIDI_PROGRAM = 25
+MIDI_PROGRAM = 24
 GM_NAME = "Acoustic Guitar (nylon)"
 
 RANGE_MIN = 40       # E2

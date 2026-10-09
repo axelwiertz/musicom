@@ -1,0 +1,22 @@
+{
+  "artifact": "231-perlin-lpc-rework-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.workflows.unitmatrix_composer + Perlin fBm (PRE-RULES raw draft)",
+  "sources": [],
+  "parameters": {
+    "project": "231-perlin-lpc-rework",
+    "phase": 1,
+    "key": "D Dorian",
+    "bpm": 80,
+    "method": 40,
+    "source": "056-perlin-lpc",
+    "seed": 42,
+    "rules_applied": "NONE (pre-rules)",
+    "variation": "none (identity seed material)"
+  },
+  "notes": "Phase 1 raw Perlin fBm draft: chromatic pitch (60..76), unquantized durations, single voice, pre-rules.",
+  "sha256": "ae90670fda388573f603a9f4d929a848eb1b3619b8563182dd71dabe00bb60fc",
+  "bytes": 685,
+  "created_utc": "2026-10-09T01:09:12.026022+00:00",
+  "provenance_version": "1.0"
+}
