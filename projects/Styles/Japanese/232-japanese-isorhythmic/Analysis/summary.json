@@ -1,0 +1,82 @@
+{
+  "project": "232-japanese-isorhythmic",
+  "style": "Japanese",
+  "method": 32,
+  "method_name": "Isorhythmic Talea-Color Mapping",
+  "layer": "concrete",
+  "key": "D Phrygian",
+  "bpm": 76,
+  "bars": 16,
+  "verdict": {
+    "grid": "PASS",
+    "scale": "PASS",
+    "chord": "PASS"
+  },
+  "totals": {
+    "off_grid": 0,
+    "out_of_scale": 0,
+    "out_of_chord": 0
+  },
+  "voices": {
+    "Koto": {
+      "channel": 0,
+      "program": 107,
+      "pitched": true,
+      "n_notes": 80,
+      "off_grid": 0,
+      "off_grid_onsets": [],
+      "out_of_scale": 0,
+      "out_of_scale_notes": [],
+      "out_of_chord": 0,
+      "out_of_chord_notes": []
+    },
+    "Shakuhachi": {
+      "channel": 1,
+      "program": 77,
+      "pitched": true,
+      "n_notes": 16,
+      "off_grid": 0,
+      "off_grid_onsets": [],
+      "out_of_scale": 0,
+      "out_of_scale_notes": [],
+      "out_of_chord": 0,
+      "out_of_chord_notes": []
+    },
+    "Shamisen": {
+      "channel": 2,
+      "program": 106,
+      "pitched": true,
+      "n_notes": 128,
+      "off_grid": 0,
+      "off_grid_onsets": [],
+      "out_of_scale": 0,
+      "out_of_scale_notes": [],
+      "out_of_chord": 0,
+      "out_of_chord_notes": []
+    },
+    "Taiko": {
+      "channel": 3,
+      "program": 116,
+      "pitched": false,
+      "n_notes": 18,
+      "off_grid": 0,
+      "off_grid_onsets": [],
+      "out_of_scale": 0,
+      "out_of_scale_notes": [],
+      "out_of_chord": 0,
+      "out_of_chord_notes": []
+    },
+    "Drums": {
+      "channel": 9,
+      "program": 0,
+      "pitched": false,
+      "n_notes": 48,
+      "off_grid": 0,
+      "off_grid_onsets": [],
+      "out_of_scale": 0,
+      "out_of_scale_notes": [],
+      "out_of_chord": 0,
+      "out_of_chord_notes": []
+    }
+  }
+}

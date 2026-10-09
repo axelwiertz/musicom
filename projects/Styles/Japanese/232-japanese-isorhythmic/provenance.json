@@ -1,0 +1,31 @@
+{
+  "project": "232-japanese-isorhythmic",
+  "style": "Japanese",
+  "method_id": "032",
+  "method_name": "Isorhythmic Talea-Color Mapping (ITCM)",
+  "layer": "concrete",
+  "paradigm": "Rules-Based",
+  "key": "D Phrygian",
+  "bpm": 76,
+  "bars": 16,
+  "form": ["Intro", "TaleaA", "TaleaB", "Dev", "TaleaA2", "Climax", "Coda1", "Coda2"],
+  "color": [0, 1, 3, 4, 6, 4, 3],
+  "talea": [480, 240, 480, 240, 480],
+  "coprime": "gcd(7,5)=1",
+  "voices": {
+    "Koto": {"program": 107, "channel": 0},
+    "Shakuhachi": {"program": 77, "channel": 1},
+    "Shamisen": {"program": 106, "channel": 2},
+    "Taiko": {"program": 116, "channel": 3},
+    "Drums": {"program": 0, "channel": 9}
+  },
+  "verification": {
+    "zero_drift": "PASS (both phases)",
+    "grid_off_grid": 0,
+    "out_of_scale": 0,
+    "out_of_chord": 0,
+    "voice_leading_violations": 0
+  },
+  "date": "2026-10-09",
+  "seed": 20261009
+}

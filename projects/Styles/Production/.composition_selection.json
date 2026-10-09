@@ -1,22 +1,25 @@
 {
-  "job": "nightly composition (two-phase)",
-  "date": "2026-10-07",
-  "seed": 20261007,
-  "style": "Balkan",
-  "method_id": "051",
-  "method_name": "Spectral Graph Laplacian Mapping (SGLM)",
+  "date": "2026-10-09",
+  "seed": 20261009,
+  "layer_roll": 0.6671329806093301,
   "layer": "concrete",
-  "layer_roll": 0.22843970966220284,
+  "method_id": "032",
+  "style": "Japanese",
   "excluded_last7d": [
-    "007",
-    "019",
-    "025",
-    "041",
-    "050",
-    "094",
-    "095",
-    "217"
+    7,
+    10,
+    11,
+    12,
+    19,
+    25,
+    39,
+    40,
+    41,
+    50,
+    94,
+    95,
+    104
   ],
-  "candidate_methods": 93,
-  "n_styles": 46
+  "n_styles": 47,
+  "n_concrete_avail": 96
 }

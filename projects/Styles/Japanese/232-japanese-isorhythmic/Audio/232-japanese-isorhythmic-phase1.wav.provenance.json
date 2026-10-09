@@ -1,0 +1,18 @@
+{
+  "artifact": "232-japanese-isorhythmic-phase1.wav",
+  "classification": "ai-assisted",
+  "generator": "SP-001 FluidSynth SoundFont render",
+  "sources": [],
+  "parameters": {
+    "project": "232-japanese-isorhythmic",
+    "method": 32,
+    "phase": "phase1",
+    "key": "D Phrygian",
+    "bpm": 76
+  },
+  "notes": "FluidSynth (discover_soundfont) render of phase MIDI.",
+  "sha256": "15a498e848c56ffce465add7af40593882490b049eca5ff075fd9962eb4f62e2",
+  "bytes": 9542956,
+  "created_utc": "2026-10-09T23:12:44.664827+00:00",
+  "provenance_version": "1.0"
+}
