@@ -116,6 +116,79 @@ STYLE_REGISTRY = {
     },
 }
 
+# --- form palette: name -> (section names, bars per section, hint styles) ---
+# Single source of truth for form/section layout, shared by compose() and the
+# nightly composition cron (which imports pick_form()). Every entry is a
+# (names, bars, style-hints) triple. Style-hints are substring-matched against
+# the style name. Loop forms are special-cased in pick_form() (occasional).
+FORM_PALETTE = {
+    "loop":            (["Loop"], [8], ["loop"]),
+    "loop4":           (["Loop"], [4], ["loop"]),
+    "loop16":          (["Loop"], [16], ["loop"]),
+    "aabb":            (["A", "A", "B", "B"], [4, 4, 4, 4], ["folk", "country", "chanson"]),
+    "intro-a-a-b-a":   (["Intro", "A", "A", "B", "A"], [4, 8, 8, 8, 8], ["bossa", "jazz", "latin"]),
+    "aba":             (["A", "B", "A"], [8, 8, 8], ["jazz", "classical", "chanson"]),
+    "blues-12":        (["Blues"], [12], ["blues"]),
+    "verse-chorus":    (["Intro", "Verse", "Chorus", "Verse2", "Chorus2", "Outro"],
+                        [4, 8, 8, 8, 8, 4],
+                        ["pop", "rock", "soul", "country", "chanson"]),
+    "intro-verse-chorus-bridge-outro":
+                       (["Intro", "Verse", "Chorus", "Bridge", "Outro"],
+                        [4, 8, 8, 4, 4], ["pop"]),
+    "head-solos-head": (["Head", "Solo1", "Solo2", "Head"], [8, 8, 8, 8], ["jazz"]),
+    "intro-falseta-letra-falseta-cierre":
+                       (["Intro", "Falseta", "Letra", "Falseta", "Cierre"],
+                        [4, 8, 8, 8, 4], ["flamenco"]),
+    "intro-break-drop-outro":
+                       (["Intro", "Break", "Drop", "Outro"], [4, 8, 8, 4],
+                        ["techno", "edm", "house"]),
+    "intro-verse-chorus-verse-chorus-outro":
+                       (["Intro", "Verse", "Chorus", "Verse", "Chorus", "Outro"],
+                        [4, 8, 8, 8, 8, 4], ["chanson"]),
+    "through-composed": (["S1", "S2", "S3", "S4", "S5", "S6"], [4] * 6,
+                         ["ambient", "experimental", "classical"]),
+    "rondo":           (["A", "B", "A", "C", "A"], [4] * 5, ["classical"]),
+    "cinematic-build": (["Intro", "Build", "Rise", "Peak", "Resolve"],
+                        [4, 8, 8, 8, 4], ["cinematic", "ambient"]),
+    "strophic":        (["Verse", "Verse", "Verse", "Verse"], [8, 8, 8, 8],
+                        ["folk", "chanson"]),
+}
+
+
+def form_to_sections(form_name):
+    """Resolve a form name to (section_names, bars_per). Returns None if unknown."""
+    if not form_name:
+        return None
+    key = str(form_name).lower().replace(" ", "-")
+    entry = FORM_PALETTE.get(key)
+    if entry is None:
+        return None
+    names, bars, _ = entry
+    return list(names), list(bars)
+
+
+LOOP_FORMS = ("loop", "loop4", "loop16")
+
+
+def pick_form(style=None, rng=None, loop_prob=1.0 / 7.0):
+    """Pick a random form, weighted by style-hints. Loops are occasional.
+
+    Loops are an occasional option (loop_prob, default ~1/7) — NOT the default;
+    otherwise every style's candidate pool would be loop-dominated. Style is
+    substring-matched against each non-loop form's hint-styles; if nothing
+    matches (or style is None), the full non-loop palette is the pool.
+    """
+    rng = rng or __import__("random")
+    if rng.random() < loop_prob:
+        return rng.choice(LOOP_FORMS)
+    s = (style or "").lower()
+    candidates = [n for n, (_, _, hints) in FORM_PALETTE.items()
+                  if n not in LOOP_FORMS and any(h in s for h in hints)]
+    if not candidates:
+        candidates = [n for n in FORM_PALETTE if n not in LOOP_FORMS]
+    return rng.choice(candidates)
+
+
 # --- method defaults (composition methods by ID → short description) -------
 # Keys = methods_db.md method IDs. Values = (short desc, style hint).
 COMPOSITION_METHODS = {
@@ -354,8 +427,12 @@ def compose(style="pop", method=None, form=None, key="C", bpm=None,
         section_names = ["Loop"]
         bars_per = [num_bars]
     else:
-        section_names = sections or ["Intro", "Verse", "Chorus", "Bridge", "Outro"]
-        bars_per = [4, 8, 8, 4, 4] if len(section_names) == 5 else [num_bars // len(section_names)] * len(section_names)
+        resolved = form_to_sections(form)
+        if resolved is not None:
+            section_names, bars_per = resolved
+        else:
+            section_names = sections or ["Intro", "Verse", "Chorus", "Bridge", "Outro"]
+            bars_per = [4, 8, 8, 4, 4] if len(section_names) == 5 else [num_bars // len(section_names)] * len(section_names)
     for sname, nbars in zip(section_names, bars_per):
         composer.add_section(sname, bars=nbars)
 
@@ -391,9 +468,15 @@ def compose(style="pop", method=None, form=None, key="C", bpm=None,
         anchor_ids = ["maj0", "min9", "maj5", "min2", "dom70", "maj70"]
         anchor_pats = [net_lib.patterns[i] for i in anchor_ids]
         net = PatternNetwork(anchor_pats)
-        # tension curve over the 5 sections: rise into chorus, peak bridge,
-        # resolve outro (values are tension deltas; walk picks by closeness)
-        curve = [0.0, 0.5, 1.0, 1.5, 0.2]
+        # tension curve over the sections: rise into chorus, peak bridge,
+        # resolve outro (values are tension deltas; walk picks by closeness).
+        # Pop's 5-section curve is pinned byte-identical (ABS golden hash);
+        # other section counts get a smooth ramp of the same span.
+        if len(section_names) == 5:
+            curve = [0.0, 0.5, 1.0, 1.5, 0.2]
+        else:
+            n = max(len(section_names), 2)
+            curve = [1.5 * i / (n - 1) for i in range(n)]
         walk = net.walk("maj0", len(section_names), rng=rng,
                         tension_curve=curve, home="maj0")
         # per-section chord tones: pattern subset transposed into a register
