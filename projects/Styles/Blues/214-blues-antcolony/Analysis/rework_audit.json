@@ -1,0 +1,25 @@
+{
+  "chosen": "Blues/214-blues-antcolony",
+  "genre": "Blues",
+  "primary_midi": "/opt/data/projects/Styles/Blues/214-blues-antcolony/MIDI/214-blues-antcolony.mid",
+  "standard_failures": [
+    "std6_provenance_json_missing",
+    "std6_index_html_missing"
+  ],
+  "redesign_required": true,
+  "source_identity": {
+    "key": "E blues scale {2,4,7,9,10,11}",
+    "bpm": 100,
+    "meter": "4/4",
+    "form": "12-bar blues x2 (24 bars, 6 sections)",
+    "method": "041 ACOPF",
+    "voices": [
+      "Piano",
+      "Bass",
+      "Harmonica",
+      "Trumpet",
+      "Drums"
+    ],
+    "core_motif": "ACO best-tour contour (smooth chromatic wander)"
+  }
+}

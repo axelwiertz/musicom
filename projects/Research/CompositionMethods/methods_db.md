@@ -118,6 +118,7 @@ Classification of active Musicom composition methods categorized by their primar
 ||| **108** | concrete | Hyperdimensional Computing Composition (HDCC) | **AI-Driven** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Prototype-similarity-guided) | Grid-Locked / Continuous | Macro / Hypervector Trajectory | $\mathcal{O}(D \cdot N)$ | Encodes every musical element as a quasi-orthogonal high-dimensional random vector ($D \geq 10{,}000$) and composes via explicit algebraic operations (binding $\otimes$, bundling $+$, permutation $\rho$) over hypervectors. Binding creates role–filler structures (pitch $\otimes$ chord), bundling superpositions multi-voice polyphony, permutation encodes sequence order. Composition = encode section hypervectors $\rightarrow$ decode via similarity search item memory $\rightarrow$ fill UnitMatrix cells. No training — the HD algebra is the generative process. Brain-inspired, non-connectionist AI-Driven counterpart to 002 Markov / 054 ATS / 046 VAE-LSI. |
 || **109** | concrete | Spiking Neural Network Composition (SNN-C) | **Nature-Led** | Pitch, Rhythm, Harmony, Structure, Texture | Strict (Mode/Synaptic-guided) | Grid-Locked / Continuous | Meso / Spike-Train | $\mathcal{O}(N \cdot T)$ simulation | Generates musical compositions using a multi-region spiking neural network of Izhikevich neurons with STDP learning. Hippocampal memory stores motif sequences via spike-timing-dependent plasticity; prefrontal cortex encodes mode/scale/style knowledge; thalamic theta-gamma oscillators drive metric hierarchy; insula system controls tension/release trajectory. Spike trains decoded to pitch (population-rate), duration (ISI), velocity (peak firing). Biologically-plausible Nature-Led counterpart to 059 ESN-RC / 037 FHN; non-backpropagation foil to 054 ATS / 046 VAE-LSI. |
 | **110** | concrete | Neural Cellular Automata Composition (NCA-C) | **AI-Driven** | Pitch, Rhythm, Harmony, Structure, Texture | Variable (Seed/Section-conditioned) | Grid-Locked / Continuous | Macro / NCA Timesteps | $\mathcal{O}(T \cdot V \cdot C \cdot K)$ | Differentiable local CNN update rules trained via gradient descent through time (BPTT) generate musical structure on a 2D grid (voices × time slots). Seed → iterative self-organization → decoded events fill UnitMatrix. AI-Driven counterpart to 021 CA/070 CML-C: learned rather than hand-crafted local rules. |
+| **111** | concrete | Vuza Tiling Canon Composition (VTCC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Weak (Scale-mapped) | Grid-Locked | Macro / Canon Period | $\mathcal{O}(n \log n)$ FFT division, $\mathcal{O}(n^2)$ search | Group-theoretic rhythmic canon as an exact tiling A ⊕ B = ℤ_n: |A| notes × |B| entry-voices interlock so every beat is struck exactly once (no collisions, no gaps — perfect hocket). Vuza (RCMC) canons are non-periodic factorizations: neither motif nor entries repeat (smallest n = 72 = 2³·3²); duality/affine/zoom morphs = sections. Deterministic combinatorial sibling of 012 Euclidean / 069 CWCC (evenness) and 089 CRCM (interlock); aperiodic foil to 077 DBUC. |
 |||### Source
 |Sakellariou, J., Tria, F., Loreto, V. & Pachet, F. (2017). "Maximum entropy models capture melodic styles." *Scientific Reports* 7, 9172. arXiv:1610.03414. — Jaynes, E. T. (1957). "Information theory and statistical mechanics." *Physical Review* 106, 620–630.
 
@@ -284,7 +285,8 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 | **SP-106** | Phaser / Allpass Modulation Synthesis (APS) | **Post-Processing / DSP** | Phase-Swept Modulation / Spectral Notch Filtering | Classic modulation effect using a cascade of allpass filters with LFO-modulated break frequencies to create moving spectral notches through phase cancellation when mixed with dry signal. $N/2$ notches for $N$ stages, depth/rate/feedback/sweep controls. $\mathcal{O}(N)$ per sample. Candidate: `sound/effects/phaser.py`. |
 | **SP-107** | Look-Ahead Brickwall Limiter (LBL) | **Post-Processing / DSP** | Peak Control / Loudness Maximization | Look-ahead brickwall limiter that delays the input signal, computes gain reduction via peak detection with attack/hold/release envelope shaping, applies the smoothed gain curve to the delayed signal, and ensures no sample exceeds the threshold. The final dynamics-control stage before render. |
 | **SP-108** | McAulay-Quatieri Sinusoidal Analysis/Synthesis (MQSAS) | **Post-Processing / DSP** | Sinusoidal Resynthesis / Spectral Editing | Decomposes a signal into time-varying sinusoidal partials via FFT peak tracking with parabolic interpolation and frame-to-frame partial matching (birth/continuation/death). Resynthesizes with cubic phase interpolation for continuous instantaneous frequency. Enables independent partial editing, pitch-shift, time-stretch, and cross-synthesis. The foundational analysis-resynthesis method for spectral editing (SPEAR, SNDAN, Loris). O(K) synthesis per sample. Candidate: `sound/effects/sinusoidal_modeling.py`. |
-|| **SP-109** | Spectral Gating Adaptive Noise Reduction (SG-ANR) | **Post-Processing / DSP** | Noise Suppression / Spectral Cleanup | Frequency-domain noise reduction via per-bin STFT gain masking. Estimates noise profile from silent/noise-only segment (stationary mode) or via continuous EMA noise floor tracking (non-stationary mode), computes a sigmoid gain mask from the per-bin SNR, and applies it to the magnitude STFT while preserving original phase. Reconstructs via overlap-add IFFT. Produces cleaned audio with reduced background hiss, rumble, and ambience. Candidate: `sound/effects/spectral_gate.py`. |
+||| **SP-109** | Spectral Gating Adaptive Noise Reduction (SG-ANR) | **Post-Processing / DSP** | Noise Suppression / Spectral Cleanup | Frequency-domain noise reduction via per-bin STFT gain masking. Estimates noise profile from silent/noise-only segment (stationary mode) or via continuous EMA noise floor tracking (non-stationary mode), computes a sigmoid gain mask from the per-bin SNR, and applies it to the magnitude STFT while preserving original phase. Reconstructs via overlap-add IFFT. Produces cleaned audio with reduced background hiss, rumble, and ambience. Candidate: `sound/effects/spectral_gate.py`. |
+|| **SP-110** | Pulse Width Modulation Synthesis (PWM) | **Synthesis Engines** | Variable-Duty-Cycle Pulse / Analog Pad & String Timbres | Variable duty-cycle pulse wave oscillator with PolyBLEP bandlimited antialiasing. Two sawtooth waves with phase offset $D$ produce pulse wave via subtraction, containing both even and odd harmonics. LFO-modulated duty cycle creates evolving timbre — the classic analog string pad sound. Forms the source oscillator for subtractive signal chains. Candidate: `sound/synthesis/pwm_synthesis.py`. |
 |---|
 
 
@@ -24422,3 +24424,206 @@ A `SpectralGateConfig` dataclass per voice specifies: `mode` (stationary/nonstat
 7. **Computational cost** — The FFT-based processing is $O(L \log N)$ for a buffer of length $L$, which is acceptable for offline rendering but may be too expensive for real-time use on constrained hardware. Mitigation: use a smaller FFT size ($N = 512$), larger hop size, or downsample before processing.
 
 Candidate code path: `sound/effects/spectral_gate.py` — implements a `SpectralGate` class with stationary and non-stationary modes, per-bin EMA noise tracking, sigmoid gain computation with frequency/time smoothing, and overlap-add reconstruction. Accepts a `noise_profile` array or an audio buffer for automatic noise estimation. UnitMatrix integration via `SpectralGateCellConfig` dataclass.
+### Source
+
+Vuza, D. T. (1991–1993). "Supplementary Sets and Regular Complementary Unending Canons." *Perspectives of New Music*, Part 1: 29(2), 22–49; Part 2: 30(1), 184–207; Part 3: 30(2), 102–125; Part 4: 31(1), 270–305. — Andreatta, M. & Agon, C. (2011). "Modeling and Implementing Tiling Rhythmic Canons in the OpenMusic Visual Programming Language." *Perspectives of New Music* 49(2), 66–91. — de Bruijn, N. G. (1950). "On bases for the set of integers." *Publ. Math. Debrecen* 1, 232–242; (1955). "On the factorisation of cyclic groups." *Indag. Math.* 17, 370–377. — Hajós, G. (1950). "Sur la factorisation des groupes abéliens." *Časopis Pěst. Mat. Fys.* 74, 157–162. — Sands, A. D. (1962). "The factorisation of Abelian groups." *Quart. J. Math. Oxford* 13, 45–54. — Coven, E. M. & Meyerowitz, A. (1999). "Tiling the integers with translates of one finite set." *J. Algebra* 212, 161–174. — Lagarias, J. C. & Wang, Y. (1996). "Tiling the line with translates of one tile." *Invent. Math.* 124, 341–365. — Amiot, E. (2009). "Some reformulations and extensions of the theory of rhythmic canons." *Journal of Mathematics and Music* 3(2) (Tiling Problems special issue, eds. Andreatta, Agon, Amiot); Amiot, E., "About Vuza canons" arXiv:1304.6609 (2013/14). — Fripertinger, H. (2001). "Enumeration of non-isomorphic canons." *Tatra Mt. Math. Publ.* 23, 47–57. — Johnson, T. (2001). "Tiling the Line." *Proceedings of the Johnson-Mazzola conference* (J.I.M.). — Lanzarotto, G. (2022). "Extended Vuza canons." PhD thesis, Sorbonne Université / IRCAM (HAL tel-03843916).
+
+### Layer
+
+**concrete** — the canon is a full rhythmic realization plan: it decides, for every voice and every time slot, whether a note onset occurs and how the voices interlock. The output is a set of concrete onset events (one per (motif element, entry offset) pair) that are routed directly into UnitMatrix cells. Feeds generators/ (candidate module `generators/tiling_canon.py`), exactly like its rhythm-design siblings 012 Euclidean Groove Locking and 089 Change-Ringing Combinatorial Method.
+
+### Paradigm
+
+**Rules-Based** — deterministic, group-theoretic combinatorial construction with no probabilistic sampling, no nature-inspired dynamics, and no learned parameters. The tiling property (every beat struck exactly once) is a mathematical invariant enforced by construction and verified by a counting check. Given the same (n, A) the same canon results; the only "choices" are compositional ones (which n, which motif, which pitch mapping) — never stochastic draws.
+
+### Description
+
+**Vuza Tiling Canon Composition (VTCC)** generates polyphonic rhythm-and-pitch structures from *rhythmic tiling canons*: a finite rhythmic motif $A \subset \mathbb{Z}_n$ (the "inner rhythm", $|A| = k$ onsets) is played verbatim by $|B| = m$ voices whose starting offbeats form the "outer rhythm" $B \subset \mathbb{Z}_n$, such that the translates $A + b$ ($b \in B$) *partition* the cyclic timeline $\mathbb{Z}_n$:
+
+$$A \oplus B = \mathbb{Z}_n, \qquad\text{i.e. every } t \in \mathbb{Z}_n \text{ has exactly one representation } t = a + b \pmod n.$$
+
+Two musical guarantees follow from the algebra alone:
+
+1. **No collisions** — two distinct voices never strike the same beat (direct-sum uniqueness), so the canon is a *perfect hocket*: $k \cdot m = n$ notes are distributed over $n$ slots, exactly one per slot.
+2. **No gaps** — every beat is covered (the sum equals all of $\mathbb{Z}_n$), so the composite stream is a continuous, unbroken pulse stream — zero-drift by construction at the onset level.
+
+**Polynomial form.** With generating polynomials $A(x) = \sum_{a \in A} x^a$, $B(x) = \sum_{b \in B} x^b \in \mathbb{Z}[x]/(x^n - 1)$, the tiling is equivalent (Amiot, Prop. 1) to
+
+$$A(x)\,B(x) \;\equiv\; 1 + x + x^2 + \cdots + x^{n-1} \pmod{x^n - 1},$$
+
+i.e. the product has only 0/1 coefficients: the *equirepartition* of $\mathbb{Z}_n$. Since $x^n - 1 = \prod_{d \mid n} \Phi_d(x)$ (cyclotomic factorization), the algebra of tilings lives in the cyclotomic world: Coven–Meyerowitz (1999) characterize which motifs tile $\mathbb{Z}$ by two conditions on the cyclotomic orders ($S_A$, $T1$, $T2$), and the same machinery drives complement search here.
+
+**Periodicity and Vuza canons.** Say the canon is *periodic* if the motif or the entries repeat over a shorter span: $\exists p \not\equiv 0$ with $A + p = A$ or $B + p = B$ mod $n$. A factorization of $\mathbb{Z}_n$ with a periodic factor is structurally trivial (it is a "zoom" of a smaller canon, de Bruijn 1955). Vuza (1991–93) called the non-periodic ones **Regular Complementary Canons of Maximal Category (RCMC)** — a.k.a. **Vuza canons**. Rediscovering Hajós–de Bruijn–Rédei–Sands, Vuza proved that non-periodic factorizations exist **iff** $n$ is *not* of the form $p^\alpha$, $p^\alpha q$, $p^2 q^2$, $p^\alpha q r$, or $p q r s$ (distinct primes). Smallest Vuza period: $n = 72 = 2^3 \cdot 3^2$ (the first historically found was $n = 108$, restored by Andreatta). Canonical $n = 72$ example (Vuza):
+
+$$A = \{0,1,5,6,12,25,29,36,42,48,49,53\},\qquad B = \{0,8,16,18,26,34\},$$
+
+with $|A| = 12$, $|B| = 6$, $12 \cdot 6 = 72$ ✓; neither set is periodic (verified: no $p$ shift fixes either set). Vuza's original algorithm produced 36 RCMCs for $n = 72$, collapsing to **2 orbits** under the affine group (Noll, Fripertinger); extended-Vuza enumeration (Lanzarotto 2022) catalogues 281,232 extended Vuza rhythms for the $(p_1,n_1,p_2,n_2) = (2,2,3,3)$ family.
+
+**Generative transformations (the composer's toolbox).** Three operations map a canon to a *different but still valid* canon — the macro-form pivots:
+
+- **Duality**: $A \oplus B = B \oplus A$ — swap roles; the entries pattern becomes the motif and vice versa (same timeline, different inner rhythm → same covered grid, "inside-out" texture).
+- **Affine (multiplicative) transform** (Vuza part 3, Tijdeman): if $\gcd(p, n) = 1$ then $(pA) \oplus B = \mathbb{Z}_n$ still tiles. Multiplying every motif onset by $p$ mod $n$ permutes the motif's rhythm while keeping the entry schedule fixed — e.g. $A = \{0,1,4,5\}$ becomes $\{0,3,4,7\}$ under $\times 3$ mod 8.
+- **m-zoom** (de Bruijn 1955): $A'(x) = (1 + x + \cdots + x^{m-1}) A(x^m)$, $B'(x) = B(x^m)$ — every note becomes $m$ consecutive notes and the tempo multiplies by $m$; the line-tiling analogue classifies *all* finite line tilings (they are recursive m-zooms of a single note — so loops, i.e. cyclic groups, are where the interesting aperiodic material lives).
+
+**Construction algorithm used here.** For a chosen period $n$: (1) pick a candidate motif $A$ (hand-composed riff, random subset of size $k \mid n$, or a shifted/truncated Vuza example); (2) prune with the cardinality test $k \cdot m = n$ and the Coven–Meyerowitz sanity checks; (3) solve for the complement $B$ by exact-cover search over $\mathbb{Z}_n$: candidates $b$ added greedily, keeping every beat covered at most once, backtracking on dead ends; (4) verify $A \oplus B = \mathbb{Z}_n$ by a counting pass; (5) test non-periodicity of both factors ($A + p \ne A$, $B + p \ne B$ for all $p$) — pass ⇒ **Vuza canon** (RCMC), guaranteed aperiodic groove; (6) decorate: assign pitch per voice/slot and lay out sections via duality/affine/zoom morphs.
+
+### Musical Elements Framework
+
+**PITCH**: The tiling is pitch-agnostic — pitch is a *decoration layer* over the guaranteed-perfect rhythm skeleton, so it is fully under composer control. Natural mappings: (a) *diatonic projection* — slot index $t \bmod 12$ (or $t$ mod scale length) → scale degree, giving a continuous modal stream that inherits the canon's aperiodicity; (b) *voice-degree* — each entry voice $b_j$ is pinned to one scale degree (bass = $b_0$, …, soprano = $b_{m-1}$), so the vertical sonority at every beat is a single scale degree moving stepwise through a fixed registration (a "camera canon" on degrees); (c) *motif-carried* — the motif $A$ carries a pitch contour (its $i$-th onset = degree $d_i$), repeated identically by every voice at its own transposition $+t_j \bmod 12$: a true pitch canon riding a rhythmic tiling. Because the composite is exactly one note per beat, a single-voice-style pitch contour can be *distributed* across the hocket without ever sounding two notes at once — ideal for klangfarbenmelodie.
+
+**RHYTHM**: Primary element. The motif $A$ is a genuinely unusual rhythm (e.g. $\{0,1,5,6,12,25,29,36,42,48,49,53\}$: pairs, singles, long silences), and the tiling property enforces that $k \cdot m$ onsets fill $n$ slots exactly — a *perfectly interlocking hocket* with zero rests and zero simultaneities in the composite stream. Per-voice sparsity is extreme ($k$ onsets per $n$ slots: a voice rests ~83% of the time for the $n=72$ example) — the classic colotomic/kotekan-like interlock. Non-periodicity kills short-range repetition: no smaller rhythm repeats inside the canon, so the groove never "locks" into a loop — the aperiodic counterpart to 012 Euclidean's maximal evenness and 069 CWCC's balanced words.
+
+**HARMONY**: Emerges from the pitch decoration, not the tiling itself. Voice-degree mapping makes every time-slice a single scale degree → the *harmonic rhythm is the canon itself*: a complete, gap-free traversal of degrees over the period, unambiguous and collision-free (no chance of a dissonant vertical coincidence since there are no vertical coincidences). Stacking two *independent* tilings of the same $n$ (two different RCMCs, e.g. the two affine orbits for $n=72$) with different voice-degree maps yields a two-layer canonic polyphony whose layer-crossing intervals are controlled (choose degree maps with a fixed dyad at each aligned slot). The dual canon $B \oplus A$ re-voices the same harmonic rhythm with a different inner rhythm — a reharmonization-by-repartition.
+
+**STRUCTURE**: The canon period $n$ is the macro-formal unit: one full statement of the tiling = one section (e.g. 72 beats ≈ a 24-bar section at 3 beats/bar, or an 18-bar section at 4 beats/bar). Non-periodicity gives *form without exact repetition* — the section is self-similar (perfectly regular coverage) yet never internally repetitive, the rhythmic analogue of 083 QTSC's aperiodic tilings in pitch space. Section-to-section form: concatenate cycles (A⊕B, then affine-transformed (pA)⊕B, then dual B⊕A, then an m-zoom variant — a menu of guaranteed-correct morphs); Vuza's own "column-shift mutation" (shift one entry column, e.g. the $n=180$ construction) produces a *new* RCMC with the same entries — a development section derived from the exposition. Tension arcs are free (pitch decoration controls them); the canon guarantees the rhythmic skeleton stays structurally intact under every morph.
+
+**TEXTURE**: Perfect hocket texture by construction: $m$ voices, each sparse ($k$ of $n$ slots), together forming one unbroken stream — the density of the composite is exactly 1 onsets/slot always, so texture density is *invariant* and the *distribution* of activity across voices is the only dial (motif shape A controls it: clustered motifs concentrate per-voice bursts, spread motifs give steady tick-tock interlock). Alternating canon/dual across sections flips which rhythm is "inner" vs "outer" — a textural inversion. Adding a pitch contour that leaps between voice registers turns the hocket into pointillistic klangfarbenmelodie (Webernian); keeping each voice in its own octave keeps the interlock audible as polyphony.
+
+### UnitMatrix Integration (Voices & Sections)
+
+**Voices** = the canon's entry voices: one UnitMatrix voice per $b_j \in B$ ($m$ voices, e.g. 6 for the $n=72$ Vuza canon), each row carrying the same motif $A$ shifted by $b_j$: onsets at $\{(b_j + a) \bmod n : a \in A\}$. Row $j$ thus has exactly $k$ notes in the canon period; per-voice sparsity is guaranteed and equal across voices (perfectly balanced rows = even voice utilization). Row order can be mapped to register (entry $b_0$ = bass … $b_{m-1}$ = lead) — the voice-degree pitch mapping — or all voices can share one scale with per-voice transposition (motif-carried mapping). Percussion: the *composite* stream (one onset per slot) can be routed to a single percussive voice to expose the pure tiling rhythm.
+
+**Sections** = canon statements and morphs. Section $s$ holds a (possibly transformed) canon over its own period $n_s$: the section is $n_s$ ticks/beats long, filled by the $m$ voice rows. Typical macro-form plan: Exposition = full RCMC statement (e.g. $n=72$); Development = Vuza column-shift mutation or affine transform ($pA \oplus B$, $\gcd(p,n)=1$) keeping the same entries; Re-exposition = dual canon $B \oplus A$ (inner/outer swap); Coda = m-zoom fragment (each note × m, tempo × m) or a truncation of a line tiling. Every section independently satisfies $k_s \cdot m = n_s$ — so every section is complete (no gaps) and collision-free (no overlaps) within itself; between sections, concatenation is exact because the last beat of section $s$ and the first of $s+1$ are disjoint slots.
+
+**Cell filling** (per musicom engine): for cell $(v, s)$ = (voice $b_v$, section with canon $(A_s, B_s)$), emit one `create_note_unit(pitch, dur, start_tick)` per $a \in A_s$ with `start_tick = (b_v + a) mod n_s` scaled to the section's tick grid (480 ticks/beat), and pad the cell to the section length (terminal landmark at `section_len` per the zero-drift invariant). Because $(A_s \oplus B_s)$ covers $\{0,\dots,n_s-1\}$ exactly once, the union of all units in section $s$ is a complete, gapless, non-overlapping partition of the section's timeline — the zero-drift gate `composer.validate()` passes by construction at the onset level; only duration tails need the usual padding. `Voices` = rows $0..m-1$, `Sections` = columns $0..S-1$, `Cells` = per-voice per-section MusicUnits.
+
+### Pitfalls
+
+1. **Wrong period kills the canon**: a Vuza (non-periodic) canon exists *only* for periods $n$ that are not $p^\alpha$, $p^\alpha q$, $p^2 q^2$, $p^\alpha q r$, $pqrs$. For "clean" numbers (e.g. $n = 96 = 2^5 \cdot 3$) every tiling has a periodic factor and the aperiodic property silently degrades to a zoom of a smaller canon — the composer gets repetition they didn't ask for. Use $n$ with ≥ 3 distinct prime factors (72, 108, 120, 144, 168, 180, 200, 216, 240, 252, …). If $n < 72$, non-periodic canons are *impossible* — fall back to periodic canons or line tilings (Johnson).
+2. **Complement search is exponential in the worst case**: exact-cover backtracking over $2^m$ subsets can blow up for large sparse motifs. Mitigations: restrict to $n \le 240$; prune with the cardinality identity $|A||B| = n$ and the Coven–Meyerowitz T1/T2 tests; seed from known RCMC tables (Vuza's 36 for $n=72$, the 2 affine orbits); use the polynomial route $B(x) \equiv \Delta_n(x)\,A(x)^{-1} \bmod (x^n - 1)$ (circular deconvolution via FFT, $O(n \log n)$) when $A$ is invertible, and verify the 0/1 coefficient condition.
+3. **Pitch decoration can destroy the effect**: if pitches are mapped per-slot from the composite index, the ear hears a scalar line and the hocket structure disappears; if mapped per-voice with wide registers, the interlock becomes pointillistic and the groove hides. Decide the perceptual target first (groove-hocket vs klangfarbenmelodie vs canon-melody) and pick the mapping accordingly; mix mappings per section for contrast.
+4. **Duration tails violate the perfect partition**: the tiling guarantees *onsets* are collision-free, not note endings. Long held notes (durations > 1 slot) will overlap the next slot's onset — musically fine (sustain pedal effect) but it breaks the "one note per beat" invariant if that matters; use staccato/1-slot durations for pure hocket, and always pad cells to `section_len` for the zero-drift gate.
+5. **Metric mismatch**: RCMC periods (72, 108, 180…) rarely align with 4/4 hypermeter — 72 = 18 four-beat bars works, but 108 = 27 four-beat bars does not. Choose $\text{bars} = n/\text{beats-per-bar}$ to be an integer (set beats-per-bar = any divisor of $n$, or use $n = 4 \cdot \text{bars}$-compatible forms like 72/4 = 18) or embrace odd meters (3/4, 6/8, 9/8 divide 72 nicely).
+6. **Affine transforms are not all pitch-safe**: $\times p \bmod n$ can map two motif onsets onto the same slot if $p(a_1 - a_2) \equiv 0 \bmod n$ — requires $\gcd(p, n) = 1$ (guaranteed by the theorem) but verify by re-running the tiling check after every morph; the 0/1 product test catches any violation cheaply.
+7. **The "no repetition" property is subtle**: Vuza canons are aperiodic *within one period*, but the whole canon still loops every $n$ (or every $L$ line-length) — they are the lo-fi analogue of 083 QTSC's aperiodic tilings, not literally endless; concatenating *different* RCMC statements (different orbits/morphs) per section is what defeats periodicity at the macro level.---
+# Pulse Width Modulation Synthesis (PWM) — SP-110
+
+### Source
+[1] Välimäki, V., & Huovilainen, J. (2007). "Antialiasing Oscillators in Subtractive Synthesis." *IEEE Signal Processing Magazine*, 24(5), 1–8. — PolyBLEP method for bandlimited PWM.  
+[2] Zölzer, U. (2011). *DAFX: Digital Audio Effects*. 2nd ed. Wiley. — Pulse waveform generation via sawtooth phase-shift subtraction.  
+[3] Puckette, M. (2007). *The Theory and Technique of Electronic Music*. World Scientific. — Sawtooth subtraction method for PWM generation.  
+[4] Stilson, T. (2022). "Bandlimited Pulse Width Modulation." *Sound on Sound* Synth Secrets series, March 2022. — Classic analog PWM technique, LFO modulation, and audio examples.  
+[5] Lane, P. (1998). "Synthesizing Strings: PWM & String Sounds." *Sound on Sound*, June 1998. — Practical PWM patch design for ensemble string pads.
+
+### Layer
+**absolute** — Sound Production (Synthesis Engines)
+Code path: `sound/synthesis/pwm_synthesis.py`
+
+### Description
+Pulse Width Modulation (PWM) Synthesis is a classic analog synthesis technique that varies the duty cycle of a pulse waveform over time to create evolving, harmonically rich timbres. A pulse wave is a rectangular wave where the duty cycle $D$ (the fraction of the period the waveform is at its high value) is variable: $D = 0.5$ yields a symmetric square wave (odd harmonics only); $D < 0.5$ or $D > 0.5$ introduces even harmonics, giving a brighter, thinner timbre. Modulating $D$ with an LFO produces the characteristic "throbbing" pad/string sound — the PWM signature of classic polysynths (Roland Juno-60, Jupiter-8, Prophet-5, Oberheim OB-X, Korg Polysix).
+
+The core DSP insight: a pulse wave with duty cycle $D$ is exactly the difference of two phase-shifted bandlimited sawtooth waves. A bandlimited sawtooth is trivial to generate with PolyBLEP antialiasing; subtracting two such sawtooths offset by $D$ cycles yields a bandlimited pulse wave without explicit discontinuity handling. The duty cycle itself becomes a continuous, sample-rate parameter — perfect for LFO, envelope, or MIDI-CC modulation.
+
+PWM is rarely used as a standalone timbre — it is most powerful as a *source oscillator* feeding a subtractive signal chain (SP-029 PolyBLEP Analog Filter, SP-020 ZDF State Variable Filter). The method produces the classic warm pad, string ensemble, and evolving lead sounds that define the analog polysynth era (1970s–1980s).
+
+### Technical Mechanics
+
+**Sawtooth subtraction method**: A bipolar pulse wave $p_D(t)$ of duty cycle $D \in (0, 1)$ is constructed from two phase-shifted bandlimited sawtooth waves $s(t)$:
+
+$$p_D(t) = s(t) - s(t - D)$$
+
+where $s(t)$ is a unit-amplitude bandlimited sawtooth with period $T = 1/f$:
+
+$$s(t) = \frac{2(t \bmod T)}{T} - 1, \quad s(t) \in [-1, 1]$$
+
+**Fourier series expansion**: The pulse wave's harmonic amplitudes for a given duty cycle $D$:
+
+$$p_D(t) = \sum_{n=1}^{\infty} \frac{2\sin(\pi n D)}{\pi n} \cos(2\pi n f_0 t)$$
+
+Key spectral properties:
+- **$D = 0.5$**: $\sin(\pi n / 2) = 0$ for even $n$ → only odd harmonics (square wave, amplitude $2/(\pi n)$) — the classic "hollow" square wave
+- **$D = 0.25$**: $\sin(\pi n/4)$ → all harmonics present, amplitude envelope $|\sin(\pi n D)|/(\pi n)$ — brighter, reedy
+- **$D \to 0$ or $D \to 1$**: fundamental amplitude $\propto \sin(\pi D) \to 0$, higher harmonics dominate — extremely thin/narrow pulse (impulse-like)
+- **$D = 0.5 \pm \varepsilon$**: even harmonics grow linearly with $\varepsilon$ — small PWM deviations add subtle warmth
+- The DC component (average value) of the unipolar pulse is $D$; in the bipolar subtraction method this cancels exactly to zero
+
+**PolyBLEP antialiasing for PWM**: The sawtooth subtraction method inherits antialiasing from each bandlimited sawtooth. The PolyBLEP correction for a standard sawtooth adds a polynomial residual at each phase discontinuity:
+
+$$\hat{s}(t) = s(t) + \sum_{\text{discontinuities}} c_{\text{BLEP}}(t - \tau, \Delta\phi)$$
+
+where $c_{\text{BLEP}}$ is the correction residual (a 2nd-order polynomial bandlimited step function). For the subtracted pulse wave, the two sawtooth discontinuities — one at phase 0 (rising edge) and one at phase $D$ (falling edge) — each receive an independent PolyBLEP correction:
+
+$$\hat{p}_D(t) = \hat{s}(t) - \hat{s}(t - D)$$
+
+The PolyBLEP correction for a bipolar step at location $t=0$ with step height $h$:
+
+$$c_{\text{BLEP}}(t, \Delta) = h \cdot \begin{cases}
+\frac{1}{2\Delta^2} (t+\Delta)^2, & -\Delta < t < 0 \\
+\frac{1}{2\Delta^2} (\Delta - t)^2, & 0 < t < \Delta \\
+0, & \text{otherwise}
+\end{cases}$$
+
+where $\Delta = f_0/f_s$ is the fractional sample increment (phase increment per sample). For the PWM case, the step height at phase 0 is $+2$ (sawtooth resets from $+1$ to $-1$) and at phase $D$ it is $-2$ (the polarity of the second sawtooth's reset is inverted by subtraction).
+
+**Two-oscillator analog method** (classic polysynth implementation): Two detuned pulse wave oscillators with slightly different duty cycles are mixed to produce a rich, animated ensemble sound:
+
+$$p_{\text{mix}}(t) = p_{D_1}(t) + p_{D_2}(t), \quad D_2 = D_1 + \delta$$
+
+where $\delta \approx 0.02$–$0.10$ is the duty-cycle spread. The slight offset causes the harmonic nulls of each oscillator to land at different partial numbers, filling in spectral gaps.
+
+**LFO modulation**: The duty cycle $D$ is a time-varying parameter controlled by a low-frequency oscillator:
+
+$$D(t) = D_0 + \Delta D \cdot \text{LFO}(t)$$
+
+where $\text{LFO}(t)$ is typically a triangle, sine, or sawtooth wave (rate $f_{\text{LFO}} = 0.05$–$20$ Hz), $\Delta D$ is the modulation depth (typically 0.05–0.45), and $D_0$ the center duty cycle (typically 0.25–0.75). The duty cycle is hard-clamped to $[0.01, 0.99]$ to prevent polarity flip.
+
+**Complexity**: $\mathcal{O}(1)$ per sample per voice — two sawtooth evaluations + one subtraction + two PolyBLEP corrections. For $V$ voices at $f_s = 48000$, total cost $\mathcal{O}(2V)$ per sample, or $\mathcal{O}(96000V)$ per second of audio.
+
+### Musical Elements Framework
+
+**PITCH**: PWM is a pitched synthesis method — the fundamental frequency $f_0$ is determined by the master phase accumulator rate ($f_0 = f_s / N_{\text{samples-per-cycle}}$). The pitch-to-timbre coupling is weak (unlike FM/PM): duty cycle modulation does not alter the fundamental frequency, only the harmonic spectrum, making it ideal for expressive pads where pitch stability is paramount. Pitch bend and vibrato are applied via standard phase-accumulator rate modulation (independent of $D$).
+
+**RHYTHM**: PWM is not intrinsically rhythmic, but LFO modulation rates can be tempo-synced ($f_{\text{LFO}} = BPM/60 \cdot N_{\text{bars}}$) to create evolving harmonic motion that follows the grid. Slow rates (0.05–0.5 Hz) produce long timbral arcs that track phrase boundaries; moderate rates (0.5–5 Hz) produce the classic "pulsating pad" rhythm; fast rates (5–20 Hz) produce spectral sidebands similar to pulse-train modulation. Gating the PWM output with rhythmic envelope shapes (SP-006 Zero-Drift Humanization) adds rhythmic articulation to the evolving timbre.
+
+**HARMONY**: PWM does not generate chords directly, but multi-voice PWM (several pulse oscillators at different pitches, each with independent or linked $D$ modulation) creates rich, ensemble-like harmonic textures. The harmonic series of a pulse wave contains both even and odd partials (except at $D=0.5$), providing a neutral-to-bright harmonic foundation that accepts filtering well. The classic subtractive pad chain: PWM oscillator → resonant lowpass filter (SP-029, SP-020) → reverb (SP-009, SP-032) → stereo chorus (SP-059). Per-voice duty-cycle detune (different $D$ per voice) acts as a spectral chorus without pitch detuning.
+
+**STRUCTURE**: The duty cycle modulation trajectory $D(t)$ across sections defines macro-form:
+- **Static-per-section**: different $D$ per section (intro $D=0.15$ thin, verse $D=0.25$ mellow, chorus $D=0.50$ full, bridge $D=0.35$ mixed) → timbral form map
+- **Slow arc**: single LFO sweep from $D=0.1$ to $D=0.9$ across a whole movement → timbral development
+- **Abrupt jumps**: instantaneous $D$ changes at section seams → structural contrast (like changing instrument registration)
+- **Envelope-shaped**: ADSR applied to $D$ per note → per-note PWM sweeps (each note starts bright, thins over its duration)
+- **Random walk**: stochastic $D$ trajectory (SP-053 Lévy / SP-040 Perlin) → organic, evolving texture
+
+**TEXTURE**: Texture density is directly controlled by duty cycle:
+- **Narrow pulses** ($D < 0.2$): thin, reedy, nasal — single-reed-like (clarinet, kazoo)
+- **Medium pulses** ($D \approx 0.25$–$0.40$): warm, vocal-like, present — ideal for lead voices
+- **Near-square** ($D \approx 0.50$): full, hollow, fundamental-rich — classic pad/organ
+- **Wide pulses** ($D > 0.5$): mirrors narrow case via polarity symmetry (same spectrum as $1-D$)
+- **LFO-modulated**: evolving pseudo-ensemble texture — spectrum expands and contracts cyclically, creating motion without pitch drift
+- **Two-oscillator detuned PWM** (different $D$ and $f_0 + detune cents per voice): classic lush string pad texture (the Juno-60/Jupiter-8 sound)
+
+### UnitMatrix Integration (Voices & Sections)
+
+**Voices**: Each UnitMatrix voice carries its own PWM oscillator (or detuned oscillator pair). Voice-level parameters in cell $U_{v,s}$:
+- $f_0^{(v,s)}$ = MIDI note frequency (from MusicEvent pitch)
+- $D^{(v,s)}$ = base duty cycle (from per-voice parameter automation, or a per-section preset)
+- $\text{LFO}_{\text{rate}}^{(v)}$, $\text{LFO}_{\text{depth}}^{(v)}$ = LFO modulation parameters for this voice
+- $D_{\text{detune}}^{(v)}$, $f_{\text{detune}}^{(v)}$ = two-oscillator detune amount in duty-cycle and pitch offsets
+- $V^{(v,s)}$ = velocity / amplitude envelope (attack/release shaping)
+
+**Sections**: Each section $s$ defines a parameter cluster $\theta_s = (D_s, \text{LFO}_{\text{rate},s}, \text{LFO}_{\text{depth},s}, \text{detune}_s)$. The PWM synthesis engine generates a sample stream from these parameters and fills the corresponding audio buffer. Transition between sections uses linear interpolation of $D$ across the section boundary (crossfade region of 8–64 samples) to prevent clicks.
+
+**Pipeline**: MIDI note events → UnitMatrix per-voice stream → note scheduler (onset/release → amplitude envelope) → PWM synthesis render ($\hat{p}_D(t)$ per voice) → per-voice audio buffers → mix bus (sum to stereo with panning per SP-053 VBAP) → post-processing chain (SP-029 filter, SP-007 EQ, SP-009 reverb, SP-059 chorus).
+
+**Cell filling**: For each active cell $(v, s)$, the PWM engine:
+1. Reads $f_0$, $D_s$, LFO parameters from the section/voice configuration
+2. For each sample in the cell's duration, computes $D(t) = D_s + \Delta D \cdot \text{LFO}(t)$
+3. Generates $\hat{p}_D(t)$ = bandlimited PWM sample via sawtooth subtraction + PolyBLEP
+4. Applies velocity-scaled amplitude envelope (ADSR from MusicEvent velocity/articulation)
+5. Outputs the voiced stream to the per-voice audio buffer
+
+### Pitfalls
+
+1. **Aliasing at narrow duty cycles**: As $D \to 0$ or $D \to 1$, the pulse becomes an impulse train with near-infinite bandwidth. At $D=0.02$, harmonics extend beyond 50 kHz before the sinc envelope drops 60 dB. Standard PolyBLEP (2nd-order) may alias for $D < 0.05$ at 48 kHz. Mitigations: (a) clamp duty cycle to $[0.03, 0.97]$ for safe overage; (b) use 4th-order PolyBLEP for extreme PWM; (c) 2× oversampling + decimation for narrow-pulse sections.
+
+2. **DC offset**: The unipolar pulse wave has a DC component proportional to $D$ (average value $2D-1$ in the $\\{-1,1\\}$ representation). The sawtooth subtraction method cancels this naturally (±floating-point precision), but direct PWM via threshold comparison (if phase >= D then 1 else -1) will accumulate DC. Always use the subtraction method or apply a DC-blocking filter after generation.
+
+3. **Phase discontinuity clicks during LFO modulation**: When $D$ changes every sample (sample-rate modulation), the pulse edges shift continuously, creating a mild phase-modulation side-effect analogous to FM. This is musically benign for $f_{\text{LFO}} < 100$ Hz. However, block-based $D$ updates (every $N$ samples) cause abrupt edge jumps → audible clicks. Always interpolate $D$ linearly between sample frames (per-sample update) or use a one-pole smoother on $D$ with $\tau \approx 0.5$ ms.
+
+4. **Duty cycle at 0 or 1**: At $D=0$ or $D=1$, the two sawtooth discontinuities coincide exactly, producing a null signal (silence) or extreme aliasing. Always clamp $D$ to $[D_{\min}, D_{\max}]$ with $D_{\min} \ge 0.01$, $D_{\max} \le 0.99$. For PWM-LFO going past these limits, hard-clamp or use an inverse-sigmoid mapping $D' = \sigma^{-1}(D, D_{\min}, D_{\max})$.
+
+5. **Not a standalone timbre**: PWM in isolation (dry, unfiltered) sounds thin, buzzy, and fatiguing — it is primarily a *source oscillator* for subtractive synthesis and effects processing. The method produces its characteristic warm sound only when: (a) a lowpass/resonant filter removes harsh upper harmonics (SP-029/SP-020), (b) a chorus/ensemble effect spreads the voice across the stereo field (SP-059), and (c) reverb provides spatial depth (SP-009/SP-032). The method's strength is as a *source material generator* for the UnitMatrix's sound-production pipeline, not a final output.
+
+6. **CPU cost for dense polyphony**: Two PolyBLEP sawtooths per voice × $V$ voices = $2V$ sawtooth evaluations + $4V$ PolyBLEP corrections per sample. For $V=8$ at $f_s=48000$, this is ~768,000 operations/second — comfortable on modern CPUs but heavy for real-time embedded systems. Alternatives for high-voice-count sections: wavetable-lookup PWM (SP-041 BLW-MI with pre-computed duty-cycle tables) or DPW (differentiated parabolic wave) for $D > 0.2$ at lower cost.
+
+7. **PolyBLEP correction gets cheaper with more oscillators**: Sharing the same PolyBLEP tables across all voices (pre-computed $\Delta$ bins) reduces the per-correction cost to a table lookup + multiply. Always pre-compute the PolyBLEP correction polynomial coefficients for all expected $\Delta$ values (phase increments).

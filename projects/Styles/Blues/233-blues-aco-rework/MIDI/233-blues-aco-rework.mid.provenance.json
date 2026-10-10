@@ -1,0 +1,47 @@
+{
+  "artifact": "233-blues-aco-rework.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.workflows.unitmatrix_composer",
+  "sources": [],
+  "parameters": {
+    "project": "233-blues-aco-rework",
+    "phase": 2,
+    "style": "Blues",
+    "key": "E (blues scale)",
+    "method": "041 ACOPF",
+    "layer": "concrete",
+    "quantization": "8th-grid (240) + blues chord-tone snap",
+    "aco": {
+      "n_ants": 8,
+      "n_iter": 60,
+      "alpha": 1.0,
+      "beta": 2.5,
+      "rho": 0.15,
+      "seed": 20261010
+    },
+    "key_pcs": [
+      2,
+      4,
+      7,
+      9,
+      10,
+      11
+    ],
+    "per_section_roots": [
+      45,
+      40,
+      45,
+      45,
+      45,
+      40,
+      47,
+      47
+    ],
+    "bpm": 100
+  },
+  "notes": "",
+  "sha256": "f39952b04421fec625afd407d9dbe04a5f7b2a1ad3bbe93d5630f0ec7a52ffe1",
+  "bytes": 7837,
+  "created_utc": "2026-10-10T01:07:25.306567+00:00",
+  "provenance_version": "1.0"
+}

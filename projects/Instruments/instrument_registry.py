@@ -31,6 +31,7 @@ _INSTRUMENT_MODULES = {
     "Strings.viola.viola": "viola",
     "Strings.cello.cello": "cello",
     "Strings.double_bass.double_bass": "double_bass",
+    "Strings.pizzicato_strings.pizzicato_strings": "pizzicato_strings",
     "Keys.piano.piano": "piano",
     "Keys.organ.organ": "organ",
     "Keys.dulcimer.dulcimer": "dulcimer",
@@ -261,6 +262,7 @@ PAN_FLUTE = ALL_INSTRUMENTS["pan_flute"]
 WHISTLE = ALL_INSTRUMENTS["whistle"]
 SOPRANO_SAX = ALL_INSTRUMENTS["soprano_sax"]
 ELECTRIC_BASS = ALL_INSTRUMENTS["electric_bass"]
+PIZZICATO_STRINGS = ALL_INSTRUMENTS["pizzicato_strings"]
 # Voice-like family — one instrument per non-vocal source. The `voice_like`
 # key is the umbrella (vox humana); each member is also addressable directly.
 VOICE_LIKE = ALL_INSTRUMENTS["voice_like"]
@@ -312,6 +314,8 @@ def registry_table():
             role = "bass, counter, accent, harmony"
         elif low == "violin":
             role = "lead, counter, accent"
+        elif low == "pizzicato strings":
+            role = "rhythm, ostinato, bass, accompaniment, countermelody, accent"
         elif low == "orchestral harp":
             role = "harmony, arpeggio, glissando, melody, countermelody, accent"
         elif low == "piano":
@@ -554,3 +558,12 @@ if __name__ == "__main__":
     print("  REED_ORGAN.in_sweet_spot(30) =", REED_ORGAN.in_sweet_spot(30))
     print("  REED_ORGAN.range_min =", REED_ORGAN.range_min, "REED_ORGAN.range_max =", REED_ORGAN.range_max)
     print("  REED_ORGAN.stem_label =", repr(REED_ORGAN.stem_label))
+    print()
+    print("=== Pizzicato Strings (GM45) ===")
+    print("  PIZZICATO_STRINGS.midi_program =", PIZZICATO_STRINGS.midi_program, "(should be 45)")
+    print("  by_name('pizzicato strings') =", by_name("pizzicato strings"))
+    print("  by_program(45) =", by_program(45))
+    print("  PIZZICATO_STRINGS.in_sweet_spot(64) =", PIZZICATO_STRINGS.in_sweet_spot(64))
+    print("  PIZZICATO_STRINGS.in_sweet_spot(30) =", PIZZICATO_STRINGS.in_sweet_spot(30))
+    print("  PIZZICATO_STRINGS.range_min =", PIZZICATO_STRINGS.range_min, "PIZZICATO_STRINGS.range_max =", PIZZICATO_STRINGS.range_max)
+    print("  PIZZICATO_STRINGS.stem_label =", repr(PIZZICATO_STRINGS.stem_label))

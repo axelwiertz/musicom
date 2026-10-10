@@ -582,6 +582,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Strings | Viola | 41 | 48–91 | harmony, counter, lead, accent |
 | Strings | Cello | 42 | 36–84 | bass, lead, counter, harmony |
 | Strings | Double Bass | 43 | 28–74 | bass, rhythm, accent, harmony |
+| Strings | Pizzicato Strings | 45 | 36–96 | rhythm, ostinato, bass, accompaniment, countermelody, accent |
 | Keys | Piano | 1 | 21–108 | harmony, melody, bass, rhythm |
 | Keys | Church Organ | 19 | 36–96 | harmony, pad, bass, rhythm, accent |
 | Keys | Dulcimer | 15 | 48–96 | lead, melody, ornament, rhythm, harmony |
@@ -639,6 +640,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 41 | Viola | Viola ✓ |
 | 42 | Cello | Cello ✓ |
 | 43 | Contrabass | Contrabass ✓ (labeled "Contrabass", not "Double_Bass") |
+| 45 | Pizzicato Strings | Pizzicato_Strings ✓ (GM_PROGRAMS[45] = "Pizzicato Strings"; FluidR3 preset 45 = "Pizzicato Section" — internal SF2 name differs cosmetically, **no routing impact**) |
 | 46 | Orchestral Harp | Orchestral_Harp ✓ (GM_PROGRAMS[46] = "Orchestral Harp"; FluidR3 preset 46 = "Harp" — one-word SF2 spelling, cosmetic only) |
 | 1 | Acoustic Grand Piano | **Bright_Acoustic_Piano** ✗ (list[1]) |
 | 6 | Harpsichord | Harpsichord ✓ (GM_PROGRAMS[6] + FluidR3 preset 6 both "Harpsichord") |
@@ -904,3 +906,34 @@ polyphonic chord/strum/arpeggio instrument. Registration in
 `instrument_registry.py` as STEEL_ACOUSTIC convenience constant. Fix: existing
 acoustic_guitar (nylon) corrected from program 25 → 24 (FluidR3 preset 24 =
 "Nylon String Guitar") so steel is at program 25 where it belongs.
+
+**Pizzicato Strings added** (2026-10-10): GM45, Strings-family sixth entry —
+the string section playing pizzicato (plucked, NOT bowed): the rhythmic/
+ostinato colour voice, from Tchaikovsky 4 scherzo to film-score plucked
+figures (instrument.md + pizzicato_strings.py), verified end-to-end
+UnitMatrixComposer → zero-drift ✓ → MIDI (120 bytes) → FluidSynth WAV
+(921 KB) ✓; RenderPipeline stem label `trackXX_Pizzicato_Strings.wav` ✓
+(GM_PROGRAMS[45] = "Pizzicato Strings", FluidR3 preset 45 = "Pizzicato
+Section" — internal SF2 name differs cosmetically, **no routing impact**).
+Karplus-Strong recommended (finger-plucked waveguide — the exact physical
+model; loop_gain 0.9960 = deliberately DRY section pluck, 0.3–1.5 s ring,
+between clavi 0.9960 and electric bass 0.9970; excitation "pluck",
+lowpass_hz 7500 for wooden-body warmth; ring test: 1.56× tail energy vs
+0.990 dull control). Solo-render spectral check: 4–8 kHz buzz **0.2%** (the
+cleanest of the set — no bow noise, dry plucks). Empirical FluidR3 pitch
+sweep: preset 45 audible across full documented range 36–96 (C2–C7), no
+gaps; **silent at 103+ (patch ceiling — never write above C7=96)**. Range
+36–96 (C2–C7, GM spec span of the whole section); sweet spot 55–79
+(G3–G5). Registration proof: `by_name('pizzicato strings')` → Pizzicato
+Strings, `by_program(45)` → Pizzicato Strings, `in_sweet_spot(64)` = True,
+`in_sweet_spot(30)` = False. Registration in `instrument_registry.py` as
+PIZZICATO_STRINGS convenience constant. Role: rhythm, ostinato, bass,
+accompaniment, countermelody, accent — the section-pizz voice, NOT a
+sustain/lead voice. Register physics quirks: (1) loudest real pizz ≈ a
+bow's mezzo-forte — do NOT balance pizz against full arco/brass at forte;
+(2) bass/cello pizz is the longest-ringing, most present register — low
+ostinato/bass figures are the #1 idiomatic use; (3) high violin pizz is a
+dry no-sustain effect — write sparkle/accent above ~E5, not carried melody;
+(4) real section pizz has natural timing looseness — write with a rhythmic
+lift, and keep chords small (1–4 notes; dense multi-stop section pizz gets
+messy and players divide anyway).

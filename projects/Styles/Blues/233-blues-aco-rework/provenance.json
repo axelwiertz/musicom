@@ -1,0 +1,52 @@
+{
+  "project": "233-blues-aco-rework",
+  "source": "Blues/214-blues-antcolony (redesign: std6 provenance.json + index.html missing)",
+  "decision": "redesign",
+  "genre": "Blues",
+  "key": "E blues scale {2,4,7,9,10,11}",
+  "bpm": 100,
+  "meter": "4/4",
+  "bars": 32,
+  "sections": [
+    "Intro",
+    "Verse1",
+    "Verse2",
+    "Chorus",
+    "Solo1",
+    "Solo2",
+    "Bridge",
+    "Outro"
+  ],
+  "method": "041 ACOPF",
+  "seed": 20261010,
+  "best_fitness": 0.21836,
+  "variation_techniques": {
+    "Intro": "augmentation (half-speed sparse)",
+    "Solo1": "register shift (+12, octave up)",
+    "Solo2": "transposition (+5, perfect 4th)",
+    "Bridge": "inversion + augmentation",
+    "Outro": "retrograde + thinning",
+    "Chorus": "density rise (full band)"
+  },
+  "per_section_roots": [
+    45,
+    40,
+    45,
+    45,
+    45,
+    40,
+    47,
+    47
+  ],
+  "per_section_midpoint_degree": [
+    "IV",
+    "I",
+    "IV",
+    "IV",
+    "IV",
+    "I",
+    "V",
+    "V"
+  ],
+  "engine": "musicom.workflows.unitmatrix_composer"
+}
