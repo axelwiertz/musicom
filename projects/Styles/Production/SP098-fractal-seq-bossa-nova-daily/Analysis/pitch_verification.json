@@ -1,0 +1,13 @@
+{
+  "method": "SP-098",
+  "project": "Latin/bossa-nova-daily-2026-06-15",
+  "key": "A natural minor",
+  "status": "PASS",
+  "hit_rate": 1.0,
+  "harmonic_energy_mean": 0.6013,
+  "acf_unpitched": 0,
+  "acf_windows": 12,
+  "windows_analyzed": 46,
+  "median_dom_hz": 440.0,
+  "misses": []
+}

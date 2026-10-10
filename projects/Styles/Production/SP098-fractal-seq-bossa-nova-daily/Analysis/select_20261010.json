@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-10",
+  "method": "SP-098",
+  "method_module": "sound.generators.fractal_seq",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Latin/bossa-nova-daily-2026-06-15/composition.mid",
+  "recent_excluded": [
+    "SP-021",
+    "SP-069",
+    "SP-080",
+    "SP-083",
+    "SP-085",
+    "SP-091",
+    "SP-092"
+  ],
+  "registry_total": 42,
+  "n_well_formed": 223,
+  "n_candidates": 332
+}

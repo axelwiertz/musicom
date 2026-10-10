@@ -1,0 +1,86 @@
+{
+  "method": "SP-098",
+  "method_module": "sound.generators.fractal_seq",
+  "layer": "absolute",
+  "seed": 20261010,
+  "key": "A natural minor",
+  "bpm": 84.0,
+  "bars": 8,
+  "ticks_per_beat": 480,
+  "voices": [
+    {
+      "name": "Lead",
+      "program": 74,
+      "channel": 0,
+      "n_notes": 64
+    },
+    {
+      "name": "Bass",
+      "program": 33,
+      "channel": 1,
+      "n_notes": 32
+    },
+    {
+      "name": "Comp",
+      "program": 25,
+      "channel": 2,
+      "n_notes": 128
+    },
+    {
+      "name": "Counter",
+      "program": 12,
+      "channel": 3,
+      "n_notes": 29
+    }
+  ],
+  "n_notes_total": 253,
+  "pitch_range": [
+    33,
+    86
+  ],
+  "duration_sec": 30.35,
+  "lufs": -14.0,
+  "peak": 0.8913,
+  "silence_pct": 21.39,
+  "rms": 0.133,
+  "rms_per_second": [
+    0.1366,
+    0.1515,
+    0.1296,
+    0.1417,
+    0.16,
+    0.1242,
+    0.1421,
+    0.1309,
+    0.1222,
+    0.1747,
+    0.1909,
+    0.1288,
+    0.1461,
+    0.172,
+    0.1534,
+    0.1482,
+    0.1471,
+    0.1472,
+    0.1416,
+    0.146,
+    0.1772,
+    0.173,
+    0.1966,
+    0.0217,
+    0.0006,
+    0.0001,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "windows_checked": 46,
+  "hit_rate": 1.0,
+  "harmonic_energy_mean": 0.6013,
+  "acf_windows": 12,
+  "acf_unpitched": 0,
+  "pitch_verdict": "PASS",
+  "median_dom_hz": 440.0
+}
