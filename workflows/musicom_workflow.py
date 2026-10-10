@@ -237,13 +237,93 @@ def _resolve_instrument(voice_name, instrument_name):
     return voice_name, inst.midi_program, 0
 
 
+def _fill_loop_section(composer, voices, chord_roots, num_bars):
+    """Fill the single 'Loop' section with per-bar chords (loop mode).
+
+    Progressions cycle I–V–vi–IV; the IV→I plagal return at the seam is the
+    loop's harmonic closure. Continuous arpeggio/pad voices run across the
+    seam so the restart reads as continuous, not cut. Zero-drift: every voice
+    is padded to the exact section boundary by _unit_from_events.
+    """
+    from structures import MusicEvent
+    BAR = 1920
+    section_len = num_bars * BAR
+
+    def bar_tones(b):
+        root_midi, qual = chord_roots[b % len(chord_roots)]
+        third = 3 if qual == "min" else 4
+        return [root_midi, root_midi + third, root_midi + 7]
+
+    def _clip(events):
+        # clamp any note tail that crosses the section seam so all voices
+        # land exactly on section_len (zero-drift invariant).
+        for e in events:
+            if e.end_tick > section_len:
+                e.end_tick = section_len
+        return events
+
+    # Lead: 8th-note arpeggio, chord tones per bar (octave up)
+    lead_evs = []
+    for b in range(num_bars):
+        tones = bar_tones(b)
+        base = b * BAR
+        for e in range(8):
+            step = tones[e % 3] + 12
+            lead_evs.append(MusicEvent(step, 90, base + e * 240, base + e * 240 + 480))
+    composer.fill_voice_section(voices[0][0], "Loop", _unit_from_events(_clip(lead_evs), section_len))
+
+    # Pad: sustained chord per bar
+    pad_evs = []
+    for b in range(num_bars):
+        tones = bar_tones(b)
+        base = b * BAR
+        for t in tones:
+            pad_evs.append(MusicEvent(t, 60, base, base + BAR))
+    composer.fill_voice_section(voices[1][0], "Loop", _unit_from_events(_clip(pad_evs), section_len))
+
+    # Bass: root on beats 1 & 3
+    bass_evs = []
+    for b in range(num_bars):
+        root_midi, _ = chord_roots[b % len(chord_roots)]
+        base = b * BAR
+        bass_evs.append(MusicEvent(root_midi, 95, base, base + 900))
+        bass_evs.append(MusicEvent(root_midi, 90, base + 960, base + 960 + 900))
+    composer.fill_voice_section(voices[2][0], "Loop", _unit_from_events(_clip(bass_evs), section_len))
+
+    # Arp: 16th-note arpeggio (if 4th voice present)
+    if len(voices) > 3:
+        arp_evs = []
+        for b in range(num_bars):
+            tones = bar_tones(b)
+            base = b * BAR
+            for e in range(16):
+                note = tones[e % 3] + 12
+                arp_evs.append(MusicEvent(note, 70, base + e * 120, base + e * 120 + 240))
+        composer.fill_voice_section(voices[3][0], "Loop", _unit_from_events(_clip(arp_evs), section_len))
+
+    # Drums: kick 1, snare 3, hats 8ths
+    if len(voices) > 4 and voices[4][1].lower() in ("drum kit", "drums", "percussion"):
+        drum_evs = []
+        for b in range(num_bars):
+            base = b * BAR
+            drum_evs.append(MusicEvent(36, 100, base, base + 120))
+            drum_evs.append(MusicEvent(38, 90, base + 960, base + 1080))
+            for h in range(8):
+                drum_evs.append(MusicEvent(42, 60, base + h * 240, base + h * 240 + 120))
+        composer.fill_voice_section(voices[4][0], "Loop", _unit_from_events(_clip(drum_evs), section_len))
+
+
 def compose(style="pop", method=None, form=None, key="C", bpm=None,
             voices=None, num_bars=32, seed=None, out_dir=None,
-            sections=None):
+            sections=None, loop=False):
     """Compose a piece through the musicom engine (zero-drift guaranteed).
 
     Uses the UnitMatrixComposer with the requested voices. If `method` is
     None, picks a default per style. Returns ComposeResult with paths.
+
+    loop=True composes a single seamless loop of `num_bars` (default off —
+    multi-section form otherwise). The I–V–vi–IV cycle closes IV→I at the
+    seam, and continuous arp/pad voices run across it.
 
     Note: the UnitMatrixComposer needs actual note material per section.
     This entry point sets up the framework; a composition agent fills the
@@ -263,15 +343,19 @@ def compose(style="pop", method=None, form=None, key="C", bpm=None,
     midi_path = midi_dir / f"{style}-{method}.mid"
 
     composer = UnitMatrixComposer(bpm=bpm, ticks_per_beat=480, beats_per_bar=4)
-    num_sections = 5
+    num_sections = 1 if loop else 5
     composer.create_matrix(num_voices=len(voices), num_sections=num_sections)
     for i, (vname, inst_name) in enumerate(voices):
         label, prog, ch = _resolve_instrument(vname, inst_name)
         composer.add_voice(label, program=prog, channel=ch)
 
     # sections per form (default pop: intro/verse/chorus/bridge/outro)
-    section_names = sections or ["Intro", "Verse", "Chorus", "Bridge", "Outro"]
-    bars_per = [4, 8, 8, 4, 4] if len(section_names) == 5 else [num_bars // len(section_names)] * len(section_names)
+    if loop:
+        section_names = ["Loop"]
+        bars_per = [num_bars]
+    else:
+        section_names = sections or ["Intro", "Verse", "Chorus", "Bridge", "Outro"]
+        bars_per = [4, 8, 8, 4, 4] if len(section_names) == 5 else [num_bars // len(section_names)] * len(section_names)
     for sname, nbars in zip(section_names, bars_per):
         composer.add_section(sname, bars=nbars)
 
@@ -334,6 +418,9 @@ def compose(style="pop", method=None, form=None, key="C", bpm=None,
     # build per-voice material
     from structures import MusicEvent
     for s, sname in enumerate(section_names):
+        if loop:
+            _fill_loop_section(composer, voices, chord_roots, num_bars)
+            continue
         # find the chord for this section's first bar (framework: hold chord per section)
         if _is_abs:
             # abstract path: chord tones come from the walked subset
