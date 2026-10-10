@@ -42,16 +42,45 @@ class RenderPipeline:
         )
 
     def render_to_wav(self, midi_path: str, output_path: str,
-                      soundfont: Optional[str] = None) -> str:
-        """Render MIDI to WAV."""
-        return self.renderer.render(midi_path, output_path, soundfont=soundfont)
+                      soundfont: Optional[str] = None,
+                      master_bus: bool = False,
+                      target_lufs: float = -14.0) -> str:
+        """Render MIDI to WAV.
+
+        master_bus=True applies the unified mastering stage (high-pass →
+        glue comp → stereo image → LUFS normalize → true-peak limit) to the
+        rendered WAV in place before returning. Default off (no behavior
+        change for existing callers).
+        """
+        path = self.renderer.render(midi_path, output_path, soundfont=soundfont)
+        if master_bus:
+            from sound.effects.mastering import master as _master
+            from sound.utils.io import read_wav, write_wav
+            audio, sr = read_wav(path)
+            mastered, _report = _master(audio, target_lufs=target_lufs,
+                                        sample_rate=sr)
+            write_wav(path, mastered, sr, normalize=False)
+        return path
 
     def render_to_ogg(self, midi_path: str, output_path: str,
                       soundfont: Optional[str] = None,
-                      bitrate: str = "128k") -> str:
-        """Render MIDI to OGG (via WAV intermediate)."""
+                      bitrate: str = "128k",
+                      master_bus: bool = False,
+                      target_lufs: float = -14.0) -> str:
+        """Render MIDI to OGG (via WAV intermediate).
+
+        master_bus=True masters the intermediate WAV (see render_to_wav)
+        before the lossy encode, so the OGG is codec-safe + loudness-targeted.
+        """
         wav_path = output_path.rsplit('.', 1)[0] + '.wav'
         self.renderer.render(midi_path, wav_path, soundfont=soundfont)
+        if master_bus:
+            from sound.effects.mastering import master as _master
+            from sound.utils.io import read_wav, write_wav
+            audio, sr = read_wav(wav_path)
+            mastered, _report = _master(audio, target_lufs=target_lufs,
+                                        sample_rate=sr)
+            write_wav(wav_path, mastered, sr, normalize=False)
         
         cmd = [
             "ffmpeg", "-y", "-loglevel", "error",

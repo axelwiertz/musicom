@@ -7,7 +7,9 @@ from .reverb import AlgorithmicReverb, Freeverb, apply_reverb
 from .filter import (StateVariableFilter, BiquadFilter, SubtractiveVoice, 
                      apply_filter)
 from .mastering import (LUFSMeter, LoudnessMetrics, measure_lufs, normalize_to_lufs,
-                        StereoImager, Limiter, DynamicEQ, MasteringChain)
+                        StereoImager, Limiter, DynamicEQ, MasteringChain,
+                        master, true_peak_limit, glue_compress, high_pass,
+                        target_for_style, LOUDNESS_TARGETS, GENRE_LUFS)
 from .production_chain import ProductionChain, ProductionReport, StageResult
 from .vowel_filter import VowelFilterBank, VOWEL_FORMANTS
 from .tape_delay import TapeDelay, SamplePlayer, DrumMachine
@@ -21,6 +23,8 @@ __all__ = [
     "StateVariableFilter", "BiquadFilter", "SubtractiveVoice", "apply_filter",
     "LUFSMeter", "LoudnessMetrics", "measure_lufs", "normalize_to_lufs",
     "StereoImager", "Limiter", "DynamicEQ", "MasteringChain",
+    "master", "true_peak_limit", "glue_compress", "high_pass",
+    "target_for_style", "LOUDNESS_TARGETS", "GENRE_LUFS",
     "ProductionChain", "ProductionReport", "StageResult",
     "VowelFilterBank", "VOWEL_FORMANTS",
     "TapeDelay", "SamplePlayer", "DrumMachine",

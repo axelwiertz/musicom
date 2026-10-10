@@ -599,6 +599,161 @@ class MasteringChain:
         return output
 
 
+# =============================================================================
+# Unified Master Stage (2026 streaming practice)
+# =============================================================================
+
+import math
+
+LOUDNESS_TARGETS = {
+    "streaming": -14.0,   # Spotify / YouTube / Tidal / Amazon
+    "apple": -16.0,       # Apple Music
+    "loud": -9.0,         # dense pop/hiphop (platform turns it down, sound stays dense)
+    "dynamic": -18.0,     # folk / jazz / ambient / classical
+}
+
+# Genre → integrated LUFS target. Loud-first genres legitimately sit hotter
+# (the platform normalizes them DOWN but the limiting that produced the
+# loudness is baked in). Dynamic genres stay quiet on purpose.
+GENRE_LUFS = {
+    # dense / loud-first
+    "pop": -9.0, "hiphop": -9.0, "trap": -8.0, "drill": -8.0, "phonk": -8.0,
+    "edm": -9.0, "house": -10.0, "techno": -10.0, "disco": -11.0,
+    "rock": -11.0, "amapiano": -11.0,
+    # balanced
+    "jazz": -14.0, "blues": -14.0, "soul": -13.0, "funk": -13.0,
+    "chanson": -14.0, "country": -14.0, "reggae": -14.0, "latin": -13.0,
+    # dynamic / quiet
+    "ambient": -18.0, "classical": -18.0, "minimal": -18.0,
+    "folk": -16.0, "solo": -16.0,
+}
+
+
+def target_for_style(style: Optional[str], fallback: float = -14.0) -> float:
+    """Map a style name to its genre LUFS target (substring match)."""
+    s = (style or "").lower().replace("_", " ").replace("-", " ")
+    for key, val in GENRE_LUFS.items():
+        if key in s:
+            return float(val)
+    return float(fallback)
+
+
+def high_pass(audio: np.ndarray, cutoff_hz: float = 30.0,
+              sample_rate: int = 44100) -> np.ndarray:
+    """High-pass filter — remove inaudible sub-bass before the limiter.
+
+    Sub energy below ~20-30 Hz wastes headroom and confuses lossy encoders
+    (AAC/Ogg). Codec-safe mastering always trims it first.
+    """
+    from scipy.signal import butter, lfilter
+    b, a = butter(2, cutoff_hz, btype="high", fs=sample_rate)
+    if audio.ndim == 2:
+        return np.column_stack([lfilter(b, a, audio[:, 0]),
+                                lfilter(b, a, audio[:, 1])])
+    return lfilter(b, a, audio)
+
+
+def glue_compress(audio: np.ndarray, threshold_db: float = -18.0,
+                  ratio: float = 2.0, attack_ms: float = 10.0,
+                  release_ms: float = 150.0, sample_rate: int = 44100) -> np.ndarray:
+    """Gentle soft-knee bus compressor — glue the mix (1-3 dB GR).
+
+    Soft-knee gain computer on the peak envelope, then a one-pole smoothed
+    gain-reduction signal. Fully vectorized; deterministic. Not a limiter.
+    """
+    from scipy.signal import lfilter
+    mono = audio if audio.ndim == 1 else np.max(np.abs(audio), axis=1)
+    env = np.abs(mono) + 1e-12
+    env_db = 20.0 * np.log10(env)
+    knee = 6.0
+    over = env_db - threshold_db
+    gr = np.zeros_like(env_db)
+    hard = over > knee / 2.0
+    soft = np.abs(over) <= knee / 2.0
+    slope = 1.0 - 1.0 / ratio
+    gr[hard] = (over[hard] - knee / 2.0) * slope
+    gr[soft] = ((over[soft] + knee / 2.0) ** 2) / (2.0 * knee) * slope
+    gr = np.maximum(gr, 0.0)
+    # smooth gain reduction (one-pole, release-dominant)
+    alpha = np.exp(-1.0 / (release_ms * 0.001 * sample_rate))
+    gr_s = lfilter([1.0 - alpha], [1.0, -alpha], gr)
+    gain = 10.0 ** (-gr_s / 20.0)
+    if audio.ndim == 2:
+        return audio * gain[:, None]
+    return audio * gain
+
+
+def true_peak_limit(audio: np.ndarray, ceiling_db: float = -1.0,
+                    oversample: int = 4, release_ms: float = 50.0,
+                    sample_rate: int = 44100) -> np.ndarray:
+    """True-peak limiter — inter-sample peak aware (ceil -1 dBTP).
+
+    Oversamples the peak envelope 4x to reconstruct inter-sample peaks
+    (the hidden spikes lossy encoders create), then peak-holds over the
+    release window and applies a ceiling gain. Vectorized (np.interp +
+    scipy.ndimage). Keeps reconstructed peaks at or below ceiling_db.
+    """
+    from scipy.ndimage import maximum_filter1d
+    ceiling = 10.0 ** (ceiling_db / 20.0)
+    mono = audio if audio.ndim == 1 else np.max(np.abs(audio), axis=1)
+    n = len(mono)
+    t = np.arange(n) / sample_rate
+    t_up = np.arange(n * oversample) / (sample_rate * oversample)
+    env_up = np.interp(t_up, t, mono)
+    env = env_up[: n * oversample].reshape(n, oversample).max(axis=1)
+    win = max(1, int(release_ms * 0.001 * sample_rate))
+    peak = maximum_filter1d(env, size=win, mode="nearest")
+    gain = np.minimum(1.0, ceiling / np.maximum(peak, 1e-12))
+    if audio.ndim == 2:
+        return audio * gain[:, None]
+    return audio * gain
+
+
+def master(audio: np.ndarray, target_lufs: float = -14.0,
+           ceiling_db: float = -1.0, hp_hz: float = 30.0,
+           glue: bool = True, stereo: bool = True,
+           sample_rate: int = 44100):
+    """Unified modern mastering stage (2026 streaming practice).
+
+    Codec-safe chain order:
+      1. high-pass sub cleanup (hp_hz)
+      2. gentle glue compression (bus)
+      3. mono-safe stereo imaging (mono sub, widened highs)
+      4. LUFS normalization to target
+      5. true-peak limiting to ceiling (-1 dBTP)
+
+    Returns (mastered_audio, report) where report carries measured
+    integrated LUFS, true-peak dBTP, and per-stage LUFS deltas.
+    """
+    out = np.asarray(audio, dtype=np.float64).copy()
+    meter = LUFSMeter(sample_rate)
+    report = {"stages": [], "target_lufs": float(target_lufs)}
+
+    def snap(name):
+        report["stages"].append({
+            "name": name,
+            "lufs": round(float(meter.measure(out).integrated_lufs), 2),
+        })
+
+    snap("input")
+    out = high_pass(out, hp_hz, sample_rate); snap("highpass")
+    if glue:
+        out = glue_compress(out, sample_rate=sample_rate); snap("glue")
+    if stereo:
+        imager = StereoImager(sample_rate)
+        imager.set_width(0.0, below_hz=100.0)
+        imager.set_width(1.3, above_hz=3000.0)
+        out = imager.process(out); snap("stereo")
+    out = normalize_to_lufs(out, target_lufs, sample_rate); snap("lufs_norm")
+    out = true_peak_limit(out, ceiling_db=ceiling_db, sample_rate=sample_rate)
+    out = np.clip(out, -1.0, 1.0)
+    snap("true_peak_limit")
+
+    report["integrated_lufs"] = round(float(meter.measure(out).integrated_lufs), 2)
+    report["true_peak_db"] = round(20.0 * math.log10(max(float(np.max(np.abs(out))), 1e-12)), 2)
+    return out, report
+
+
 if __name__ == "__main__":
     # Smoke test
     sr = 44100
