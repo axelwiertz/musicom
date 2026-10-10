@@ -1,0 +1,83 @@
+{
+  "artifact": "234-ambient-pareto-build.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.workflows.unitmatrix_composer + musicom rules",
+  "sources": [],
+  "parameters": {
+    "project": "234-ambient-pareto-build",
+    "phase": 2,
+    "key": "D Aeolian",
+    "bpm": 70,
+    "method": 98,
+    "form": "cinematic-build",
+    "sections": [
+      "Intro",
+      "Build",
+      "Rise",
+      "Peak",
+      "Resolve"
+    ],
+    "bars": 32,
+    "section_archetypes": {
+      "Intro": "smooth",
+      "Build": "balanced",
+      "Rise": "active",
+      "Peak": "active",
+      "Resolve": "smooth"
+    },
+    "section_octaves": {
+      "Intro": -12,
+      "Build": 0,
+      "Rise": 0,
+      "Peak": 12,
+      "Resolve": -12
+    },
+    "bar_degrees": [
+      0,
+      0,
+      5,
+      5,
+      0,
+      5,
+      6,
+      5,
+      3,
+      0,
+      5,
+      6,
+      3,
+      4,
+      5,
+      6,
+      3,
+      4,
+      0,
+      6,
+      0,
+      5,
+      3,
+      4,
+      5,
+      6,
+      0,
+      0,
+      0,
+      0,
+      5,
+      0
+    ],
+    "instruments": {
+      "Lead": 8,
+      "Pad": 19,
+      "Bass": 42,
+      "Sparkle": 46,
+      "Drums": 0
+    },
+    "rules_applied": "per-bar chord-tone quantization, 120-tick grid snap, diatonic block harmony, voice-leading + correction"
+  },
+  "notes": "Phase 2 rules-processed ambient cinematic build. NSGA-II Pareto-front archetypes (smooth/balanced/active) mapped to form sections; chord-tone quantized + grid-snapped against D-Aeolian modal progression.",
+  "sha256": "30e3bcbdaf8679c9b79f66aa7d0a5210efcb636262313c67cb5678740542c4c9",
+  "bytes": 4468,
+  "created_utc": "2026-10-10T23:09:19.002602+00:00",
+  "provenance_version": "1.0"
+}

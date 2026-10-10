@@ -1,0 +1,70 @@
+{
+  "tpb": 480,
+  "per_voice": [
+    {
+      "voice": "Lead(Celesta)",
+      "channel": 0,
+      "program": 8,
+      "notes": 89,
+      "off_grid_16th": 0,
+      "off_grid_8th": 0,
+      "out_of_scale": 0,
+      "out_of_chord": 0
+    },
+    {
+      "voice": "Pad(Organ)",
+      "channel": 1,
+      "program": 19,
+      "notes": 112,
+      "off_grid_16th": 0,
+      "off_grid_8th": 0,
+      "out_of_scale": 0,
+      "out_of_chord": 0
+    },
+    {
+      "voice": "Bass(Cello)",
+      "channel": 2,
+      "program": 42,
+      "notes": 64,
+      "off_grid_16th": 0,
+      "off_grid_8th": 0,
+      "out_of_scale": 0,
+      "out_of_chord": 0
+    },
+    {
+      "voice": "Sparkle(Harp)",
+      "channel": 3,
+      "program": 46,
+      "notes": 192,
+      "off_grid_16th": 0,
+      "off_grid_8th": 0,
+      "out_of_scale": 0,
+      "out_of_chord": 0
+    },
+    {
+      "voice": "Drums",
+      "channel": 9,
+      "program": 0,
+      "notes": 52,
+      "off_grid_16th": 0,
+      "off_grid_8th": 0,
+      "out_of_scale": 0,
+      "out_of_chord": 0
+    }
+  ],
+  "totals": {
+    "notes": 509,
+    "off_grid_16th": 0,
+    "off_grid_8th": 0,
+    "out_of_scale": 0,
+    "out_of_chord": 0
+  },
+  "track_lengths": [
+    61440,
+    61440,
+    61440,
+    61440,
+    61440
+  ],
+  "zero_drift_equal": true
+}

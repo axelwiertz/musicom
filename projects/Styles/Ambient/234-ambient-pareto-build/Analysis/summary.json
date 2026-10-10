@@ -1,0 +1,71 @@
+{
+  "front_size": 58,
+  "objective_names": [
+    "harmonic_quality",
+    "melodic_quality",
+    "rhythmic_coherence",
+    "voice_independence"
+  ],
+  "archetypes": {
+    "smooth": {
+      "objectives": [
+        0.0704,
+        0.8594,
+        0.4791,
+        0.1952
+      ]
+    },
+    "balanced": {
+      "objectives": [
+        0.0654,
+        1.1585,
+        0.4346,
+        0.1238
+      ]
+    },
+    "active": {
+      "objectives": [
+        0.0731,
+        1.1837,
+        0.4376,
+        0.1117
+      ]
+    }
+  },
+  "bar_degrees": [
+    0,
+    0,
+    5,
+    5,
+    0,
+    5,
+    6,
+    5,
+    3,
+    0,
+    5,
+    6,
+    3,
+    4,
+    5,
+    6,
+    3,
+    4,
+    0,
+    6,
+    0,
+    5,
+    3,
+    4,
+    5,
+    6,
+    0,
+    0,
+    0,
+    0,
+    5,
+    0
+  ],
+  "voice_leading_corrections": 0,
+  "violations": 0
+}

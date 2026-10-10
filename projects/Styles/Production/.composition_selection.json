@@ -1,25 +1,42 @@
 {
-  "date": "2026-10-09",
-  "seed": 20261009,
-  "layer_roll": 0.6671329806093301,
+  "date": "2026-10-10",
+  "seed": 20261010,
+  "layer_roll": 0.3502,
   "layer": "concrete",
-  "method_id": "032",
-  "style": "Japanese",
-  "excluded_last7d": [
+  "method_id": "098",
+  "style": "Ambient",
+  "form": "cinematic-build",
+  "section_names": [
+    "Intro",
+    "Build",
+    "Rise",
+    "Peak",
+    "Resolve"
+  ],
+  "bars_per": [
+    4,
+    8,
+    8,
+    8,
+    4
+  ],
+  "recent_methods_excluded": [
+    1,
+    2,
+    6,
     7,
     10,
-    11,
     12,
-    19,
-    25,
-    39,
+    32,
     40,
     41,
     50,
+    51,
     94,
     95,
     104
   ],
   "n_styles": 47,
-  "n_concrete_avail": 96
+  "n_concrete_avail": 95,
+  "n_abstract_avail": 1
 }

@@ -1,0 +1,30 @@
+{
+  "artifact": "234-ambient-pareto-build-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.workflows.unitmatrix_composer + NSGA-II MOEPC (PRE-RULES raw draft)",
+  "sources": [],
+  "parameters": {
+    "project": "234-ambient-pareto-build",
+    "phase": 1,
+    "key": "D Aeolian",
+    "bpm": 70,
+    "method": 98,
+    "objectives": [
+      "harmonic_quality",
+      "melodic_quality",
+      "rhythmic_coherence",
+      "voice_independence"
+    ],
+    "pop": 64,
+    "generations": 70,
+    "genome_notes": 96,
+    "front_size": 58,
+    "archetype_used": "balanced",
+    "rules_applied": "NONE (pre-rules)"
+  },
+  "notes": "Phase 1 raw NSGA-II draft: balanced Pareto-front melody, single celesta voice, unquantized onsets + unquantized pitch (float genome).",
+  "sha256": "486d591294dd9baa38f7b09641a76695d26085512cc74352734321a2c9996762",
+  "bytes": 857,
+  "created_utc": "2026-10-10T23:09:19.002284+00:00",
+  "provenance_version": "1.0"
+}
