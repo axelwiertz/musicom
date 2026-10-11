@@ -64,8 +64,11 @@ def test_scale_counts_match_plan():
     # at L4 (+7 → 47) and HC-049/051/054 at L4 (+3 → 50); HC-048/050/052/053 at L3
     # (+4 → 65). ABS-099 (SSMC) and ABS-104 (PSSC) are abstract-layer numeric
     # methods routed to rules.subset_network like ABS-001..005 and ABS-095.
-    assert len(methods_by_scale("L4")) == 50
-    assert len(methods_by_scale("L3")) == 65
+    # Weekly registration (2026-10-11) added 106/107/108/110/111 at L4 and
+    # HC-055/056/060 at L4 (+8 → 58); 105/109 at L3 and HC-057/058/059/061 at L3
+    # (+6 → 71). All spec-only (no generator modules yet).
+    assert len(methods_by_scale("L4")) == 58
+    assert len(methods_by_scale("L3")) == 71
     assert len(methods_by_scale("L2")) == 20
     assert len(methods_by_scale("L1")) == 9
 

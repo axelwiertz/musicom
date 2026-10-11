@@ -82,6 +82,14 @@ GENERATOR_REGISTRY = {
     "HC-052": (None, None, "Reggae Riddim Construction — Bass-Led One-Drop/Rockers/Rub-a-Dub (spec in human_methods_db.md)"),
     "HC-053": (None, None, "Bossa Nova Guitar Beat & Vocal Fraseado (Batida + Tempo Rubato) (spec in human_methods_db.md)"),
     "HC-054": (None, None, "Bluegrass Ensemble Arrangement — Scruggs Banjo Roll & High Lonesome Harmony (spec in human_methods_db.md)"),
+    # --- Human methods weekly promotion 2026-10-11 (reports HC-055..HC-061) ---
+    "HC-055": (None, None, "Fugue Composition — Baroque Fugal Craft (Subject/Answer/Exposition/Episodes/Stretto) (spec in human_methods_db.md)"),
+    "HC-056": (None, None, "Qawwali Composition — Sufi Devotional Song-Craft (Sama/Qaul/Takrar/Wajd) (spec in human_methods_db.md)"),
+    "HC-057": (None, None, "Fado — Portuguese Urban Song (Fado Castiço & Canção) (spec in human_methods_db.md)"),
+    "HC-058": (None, None, "Samba Batucada Bateria Arrangement — Carnival Percussion Suite (spec in human_methods_db.md)"),
+    "HC-059": (None, None, "Hawaiian Slack-Key Guitar (Kī Hōʻalu) Open-Tuning Fingerstyle (spec in human_methods_db.md)"),
+    "HC-060": (None, None, "Verbunkos Composition — Lassú–Friss Recruiting-Dance Architecture (spec in human_methods_db.md)"),
+    "HC-061": (None, None, "Corsican Paghjella Polyphony — Three-Voice Staggered-Entry Craft (spec in human_methods_db.md)"),
 }
 
 

@@ -196,6 +196,21 @@ SCALE = {
     "HC-052": ("L3", False),  # Reggae Riddim Construction (spec)
     "HC-053": ("L3", False),  # Bossa Nova Batida & Fraseado (spec)
     "HC-054": ("L4", False),  # Bluegrass Ensemble Arrangement (spec)
+    # REGISTERED 2026-10-11 (weekly prose->code promotion, reports 105..111, HC-055..061)
+    "105": ("L3", False),  # Pólya Urn Reinforcement Composition (PURC) (spec)
+    "106": ("L4", False),  # Non-Autoregressive Parallel Composition (NAPC) (spec)
+    "107": ("L4", False),  # Stochastic Differential Equation Composition (SDEC) (spec)
+    "108": ("L4", False),  # Hyperdimensional Computing Composition (HDCC) (spec)
+    "109": ("L3", False),  # Spiking Neural Network Composition (SNN-C) (spec)
+    "110": ("L4", False),  # Neural Cellular Automata Composition (NCA-C) (spec)
+    "111": ("L4", False),  # Vuza Tiling Canon Composition (VTCC) (spec)
+    "HC-055": ("L4", False),  # Fugue Composition — Baroque Fugal Craft (spec)
+    "HC-056": ("L4", False),  # Qawwali Composition — Sufi Devotional Song-Craft (spec)
+    "HC-057": ("L3", False),  # Fado — Portuguese Urban Song (Castiço & Canção) (spec)
+    "HC-058": ("L3", False),  # Samba Batucada Bateria Arrangement (spec)
+    "HC-059": ("L3", False),  # Hawaiian Slack-Key Guitar (Kī Hōʻalu) (spec)
+    "HC-060": ("L4", False),  # Verbunkos — Lassú–Friss Recruiting-Dance (spec)
+    "HC-061": ("L3", False),  # Corsican Paghjella Polyphony (spec)
     # --- L1 MICRO ---
     "002": ("L1", True),   # Markov Transitions
     "011": ("L1", False),  # Voice-Leading Graph Search
