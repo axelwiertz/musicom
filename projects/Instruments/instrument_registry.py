@@ -32,6 +32,7 @@ _INSTRUMENT_MODULES = {
     "Strings.cello.cello": "cello",
     "Strings.double_bass.double_bass": "double_bass",
     "Strings.pizzicato_strings.pizzicato_strings": "pizzicato_strings",
+    "Strings.string_ensemble.string_ensemble": "string_ensemble",
     "Keys.piano.piano": "piano",
     "Keys.organ.organ": "organ",
     "Keys.dulcimer.dulcimer": "dulcimer",
@@ -263,6 +264,7 @@ WHISTLE = ALL_INSTRUMENTS["whistle"]
 SOPRANO_SAX = ALL_INSTRUMENTS["soprano_sax"]
 ELECTRIC_BASS = ALL_INSTRUMENTS["electric_bass"]
 PIZZICATO_STRINGS = ALL_INSTRUMENTS["pizzicato_strings"]
+STRING_ENSEMBLE = ALL_INSTRUMENTS["string_ensemble"]
 # Voice-like family — one instrument per non-vocal source. The `voice_like`
 # key is the umbrella (vox humana); each member is also addressable directly.
 VOICE_LIKE = ALL_INSTRUMENTS["voice_like"]
@@ -316,6 +318,8 @@ def registry_table():
             role = "lead, counter, accent"
         elif low == "pizzicato strings":
             role = "rhythm, ostinato, bass, accompaniment, countermelody, accent"
+        elif low == "string ensemble 1":
+            role = "harmony, pad, melody, countermelody, accent"
         elif low == "orchestral harp":
             role = "harmony, arpeggio, glissando, melody, countermelody, accent"
         elif low == "piano":
@@ -559,6 +563,17 @@ if __name__ == "__main__":
     print("  REED_ORGAN.range_min =", REED_ORGAN.range_min, "REED_ORGAN.range_max =", REED_ORGAN.range_max)
     print("  REED_ORGAN.stem_label =", repr(REED_ORGAN.stem_label))
     print()
+    print("=== String Ensemble 1 (GM48) ===")
+    print("  STRING_ENSEMBLE.midi_program =", STRING_ENSEMBLE.midi_program, "(should be 48)")
+    print("  by_name('string ensemble') =", by_name("string ensemble"))
+    print("  by_name('string ensemble 1') =", by_name("string ensemble 1"))
+    print("  by_program(48) =", by_program(48))
+    print("  STRING_ENSEMBLE.in_sweet_spot(72) =", STRING_ENSEMBLE.in_sweet_spot(72))
+    print("  STRING_ENSEMBLE.in_sweet_spot(20) =", STRING_ENSEMBLE.in_sweet_spot(20))
+    print("  STRING_ENSEMBLE.range_min =", STRING_ENSEMBLE.range_min, "STRING_ENSEMBLE.range_max =", STRING_ENSEMBLE.range_max)
+    print("  STRING_ENSEMBLE.stem_label =", repr(STRING_ENSEMBLE.stem_label))
+    print()
+
     print("=== Pizzicato Strings (GM45) ===")
     print("  PIZZICATO_STRINGS.midi_program =", PIZZICATO_STRINGS.midi_program, "(should be 45)")
     print("  by_name('pizzicato strings') =", by_name("pizzicato strings"))

@@ -1,0 +1,31 @@
+{
+  "artifact": "235-arabic-rast-rework.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.method041.ant_colony_phase2 + musicom rules (rework of 071)",
+  "sources": [
+    "methods_db.md:Method 041 ACOPF",
+    "source:071-arabic-rast-ant-colony"
+  ],
+  "parameters": {
+    "bpm": 100,
+    "bars": 24,
+    "seed": 20261011,
+    "phase": 2,
+    "quantized": true,
+    "key": "D Rast (12-TET approx = D Phrygian)",
+    "rhythm": "Maqsum 3+3+2",
+    "form": "6 sections (extended)",
+    "variation_techniques": [
+      "register_shift_down",
+      "transposition_P4",
+      "retrograde",
+      "augmentation+counterline",
+      "inversion+diminution"
+    ]
+  },
+  "notes": "Rules post-process: per-bar chord-tone quantization, 120-tick grid snap, dedup, voice-leading, per-section harmonic regions (midpoint root).",
+  "sha256": "ce8a91c42e831ca0de5669b3e108807340786f0921d1cc0e25103273d2c2a1b4",
+  "bytes": 7528,
+  "created_utc": "2026-10-11T01:11:37.479864+00:00",
+  "provenance_version": "1.0"
+}

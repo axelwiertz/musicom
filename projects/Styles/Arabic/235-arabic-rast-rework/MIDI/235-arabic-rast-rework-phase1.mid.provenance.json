@@ -1,0 +1,23 @@
+{
+  "artifact": "235-arabic-rast-rework-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.method041.ant_colony_phase1 (rework of 071)",
+  "sources": [
+    "methods_db.md:Method 041 ACOPF",
+    "source:071-arabic-rast-ant-colony"
+  ],
+  "parameters": {
+    "bpm": 100,
+    "bars": 24,
+    "seed": 20261011,
+    "phase": 1,
+    "quantized": false,
+    "key": "D Rast (12-TET approx = D Phrygian)",
+    "form": "6 sections (extended)"
+  },
+  "notes": "Raw ant-colony pitch trajectory, unquantized, single voice, pre-rules. Rework of 071 (redesign: source failed rhythm-grid + index/provenance).",
+  "sha256": "d6f97310e27dab4fdd43cd93482e96a81b7119ee79840ca053e12e47e38f3826",
+  "bytes": 533,
+  "created_utc": "2026-10-11T01:11:37.418094+00:00",
+  "provenance_version": "1.0"
+}

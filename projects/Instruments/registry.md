@@ -583,6 +583,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Strings | Cello | 42 | 36–84 | bass, lead, counter, harmony |
 | Strings | Double Bass | 43 | 28–74 | bass, rhythm, accent, harmony |
 | Strings | Pizzicato Strings | 45 | 36–96 | rhythm, ostinato, bass, accompaniment, countermelody, accent |
+| Strings | String Ensemble 1 | 48 | 28–96 | harmony, pad, melody, countermelody, accent |
 | Keys | Piano | 1 | 21–108 | harmony, melody, bass, rhythm |
 | Keys | Church Organ | 19 | 36–96 | harmony, pad, bass, rhythm, accent |
 | Keys | Dulcimer | 15 | 48–96 | lead, melody, ornament, rhythm, harmony |
@@ -689,6 +690,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 ||| ch9/pgm0 | Drums | **Acoustic_Grand_Piano** ✗ (program-0 fallback) |
 ||| 24 | Acoustic Guitar (nylon) | Acoustic_Guitar_nylon ✓ (GM_PROGRAMS[24] = "Acoustic Guitar (nylon)"; FluidR3 preset 24 = "Nylon String Guitar" — internal SF2 name differs cosmetically, no routing impact) |
 ||| 25 | Acoustic Guitar (steel) | Acoustic_Guitar_steel ✓ (GM_PROGRAMS[25] = "Acoustic Guitar (steel)"; FluidR3 preset 25 = "Steel String Guitar" — internal SF2 name differs cosmetically, no routing impact) |
+|| 48 | String Ensemble 1 | String_Ensemble_1 ✓ (GM_PROGRAMS[48] = "String Ensemble 1"; FluidR3 preset 48 = "Strings" — one-word SF2 spelling, cosmetic only, **no quirk**) |
 
 > **Known off-by-one in existing entries**: ~~`trumpet.py` uses 57~~ **FIXED 2026-08-27**: trumpet is now 56 (SF2 preset 56=`SoloTrumpet`). `piano.py`=1 → actually Bright Acoustic Piano (GM #2) — cosmetic label difference only, no routing impact. Legacy registry rows kept as-is for piano; new instruments use 0-indexed programs matching pipeline+SF2.
 
@@ -937,3 +939,48 @@ dry no-sustain effect — write sparkle/accent above ~E5, not carried melody;
 (4) real section pizz has natural timing looseness — write with a rhythmic
 lift, and keep chords small (1–4 notes; dense multi-stop section pizz gets
 messy and players divide anyway).
+
+**String Ensemble 1 added** (2026-10-11): GM48, Strings-family seventh entry
+— the sustained bowed STRING SECTION, the "Strings (sustained)" voice that
+orchestration.md's Pad role has referenced since the beginning with NO KB
+entry behind it (the family had solo bowed voices — violin/viola/cello/
+double_bass/fiddle — and the plucked section — pizzicato_strings — but no
+sustained-section pad) (instrument.md + string_ensemble.py), verified
+end-to-end UnitMatrixComposer → zero-drift ✓ → MIDI (75 bytes) → FluidSynth
+WAV (1.04 MB) ✓; RenderPipeline stem label `trackXX_String_Ensemble_1.wav` ✓
+(GM_PROGRAMS[48] = "String Ensemble 1", FluidR3 preset 48 = "Strings" —
+one-word SF2 spelling is cosmetic only, **no quirk**, distinct from the
+"Shanai"/"Bag pipe" quirks at 111/109). Additive recommended (section =
+detuned harmonic stack, ADDITIVE_HARMONICS section_full
+[1.0,0.9,0.7,0.5,0.35,0.25,0.18], SYNTHESIS_DEFAULTS attack 0.35 s, detune
+±0.006, stack 3 voices, release 0.4 s); BowedString models ONE string so it
+is the single-string alternative (stack 4–8 renders for section mass);
+PhaseModSynth saw = the cheap 70s string-machine pad; ModalSynth 'string' =
+section pizz fallback. Solo-render spectral check: 4–8 kHz buzz **1.4%**
+(clean single voice, no comb-filtering). **Additive engine bug FIXED
+2026-10-11** (`sound/synthesis/additive.py` `get_adsr_weights`): the tail
+fill computed `tail` against the PRE-repeat `weights` array (len ≈ intervals
+≈ 3662) but concat'd that same pre-repeat envelope + near-zero ramp into
+`self.weights` — the smoothing/repeat result (len 43932) was DISCARDED, so
+EVERY note collapsed to ~0 after ~0.17 s regardless of sustain_level (organ
+entry's 2026-08-31 "sustain confirmed" missed it — it only checked the
+onset peak 2873, ratio used the wrong array). Fix: compute `tail` from
+`self.weights.shape[0]` and concat the repeated envelope with a linear
+release ramp (`self.weights[-1] * np.linspace(1,0,tail+1)[1:]`). Post-fix:
+organ-style params sustain 1.0 for the full 2.0 s; string-pad params hold
+late(1.0–1.5 s) rms/peak 0.295. Full suite re-run: **693 passed, 1 skipped
+(no golden regressions)**. Empirical FluidR3 pitch sweep (RMS, notes
+24–108): preset 48 audible 24–96 (13/13, no gaps), SILENT at 102+ — never
+write above C7=96. Range 28–96 = full-section span (contrabass E1 → violin
+C7); sweet spot 60–84 (C4–C6, violin/viola lead zone). Registration proof:
+`by_name('string ensemble')` → String Ensemble 1, `by_program(48)` → String
+Ensemble 1, `in_sweet_spot(72)` = True, `in_sweet_spot(20)` = False.
+Registered in `instrument_registry.py` as STRING_ENSEMBLE convenience
+constant. Enum quirk: `MidiInstrument.STRING_ENSEMBLE = 49` is the legacy
+1-indexed GM number — 49 is actually String Ensemble 2 (FluidR3 "Slow
+Strings"); use registry GM48. Role: harmony, pad, melody, countermelody,
+accent — the section pad, NOT a rhythm voice (use pizzicato_strings for
+plucked rhythm). REVERB_TAIL 2.6 s is the longest in the Strings family
+(violin 2.0, harp 2.2) — the pad blooms in space. Layering quirk: idiomatic
+doubling is octaves, NOT unison with another melodic patch (section already
+IS many unison strings — the 2026-09-01 comb-filter lesson).

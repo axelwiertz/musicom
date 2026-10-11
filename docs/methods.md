@@ -119,6 +119,7 @@ Classification of active Musicom composition methods categorized by their primar
 || **109** | concrete | Spiking Neural Network Composition (SNN-C) | **Nature-Led** | Pitch, Rhythm, Harmony, Structure, Texture | Strict (Mode/Synaptic-guided) | Grid-Locked / Continuous | Meso / Spike-Train | $\mathcal{O}(N \cdot T)$ simulation | Generates musical compositions using a multi-region spiking neural network of Izhikevich neurons with STDP learning. Hippocampal memory stores motif sequences via spike-timing-dependent plasticity; prefrontal cortex encodes mode/scale/style knowledge; thalamic theta-gamma oscillators drive metric hierarchy; insula system controls tension/release trajectory. Spike trains decoded to pitch (population-rate), duration (ISI), velocity (peak firing). Biologically-plausible Nature-Led counterpart to 059 ESN-RC / 037 FHN; non-backpropagation foil to 054 ATS / 046 VAE-LSI. |
 | **110** | concrete | Neural Cellular Automata Composition (NCA-C) | **AI-Driven** | Pitch, Rhythm, Harmony, Structure, Texture | Variable (Seed/Section-conditioned) | Grid-Locked / Continuous | Macro / NCA Timesteps | $\mathcal{O}(T \cdot V \cdot C \cdot K)$ | Differentiable local CNN update rules trained via gradient descent through time (BPTT) generate musical structure on a 2D grid (voices × time slots). Seed → iterative self-organization → decoded events fill UnitMatrix. AI-Driven counterpart to 021 CA/070 CML-C: learned rather than hand-crafted local rules. |
 | **111** | concrete | Vuza Tiling Canon Composition (VTCC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Weak (Scale-mapped) | Grid-Locked | Macro / Canon Period | $\mathcal{O}(n \log n)$ FFT division, $\mathcal{O}(n^2)$ search | Group-theoretic rhythmic canon as an exact tiling A ⊕ B = ℤ_n: |A| notes × |B| entry-voices interlock so every beat is struck exactly once (no collisions, no gaps — perfect hocket). Vuza (RCMC) canons are non-periodic factorizations: neither motif nor entries repeat (smallest n = 72 = 2³·3²); duality/affine/zoom morphs = sections. Deterministic combinatorial sibling of 012 Euclidean / 069 CWCC (evenness) and 089 CRCM (interlock); aperiodic foil to 077 DBUC. |
+| **112** | concrete | Costas Array Distinct-Displacement Composition (CADDC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Weak (Scale-mapped) | Grid-Locked / Continuous | Meso / Array Order | $\mathcal{O}(n^2)$ verify, $\mathcal{O}(n \log n)$ Welch construction | 2D Costas arrays (Costas 1965): n dots on an n×n pitch-time grid, one per row and column, all n(n−1)/2 displacement vectors (lag, interval) pairwise distinct — the 2D generalization of 090 Golomb Ruler GRDC. Every pair of notes has a unique (lag, interval) signature: no interval repeats at any fixed lag (verified: Welch p=13 melody = 11 distinct stepwise intervals), thumbtack self-similarity = no hidden transposition at any offset. Deterministic Welch (primitive roots, order p−1) and Lempel–Golomb (finite fields, order q−2/q−3) constructions; dihedral/time-reversal/pitch-inversion morphs = sections; NAKCA variant forbids stepwise motion in both axes. Sibling of 090 GRDC (1D→2D), 065 TTSMC (aggregate rows) and 111 VTCC (hocket); deterministic foil to 053 LFC leaps. |
 |||### Source
 |Sakellariou, J., Tria, F., Loreto, V. & Pachet, F. (2017). "Maximum entropy models capture melodic styles." *Scientific Reports* 7, 9172. arXiv:1610.03414. — Jaynes, E. T. (1957). "Information theory and statistical mechanics." *Physical Review* 106, 620–630.
 
@@ -287,6 +288,7 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 | **SP-108** | McAulay-Quatieri Sinusoidal Analysis/Synthesis (MQSAS) | **Post-Processing / DSP** | Sinusoidal Resynthesis / Spectral Editing | Decomposes a signal into time-varying sinusoidal partials via FFT peak tracking with parabolic interpolation and frame-to-frame partial matching (birth/continuation/death). Resynthesizes with cubic phase interpolation for continuous instantaneous frequency. Enables independent partial editing, pitch-shift, time-stretch, and cross-synthesis. The foundational analysis-resynthesis method for spectral editing (SPEAR, SNDAN, Loris). O(K) synthesis per sample. Candidate: `sound/effects/sinusoidal_modeling.py`. |
 ||| **SP-109** | Spectral Gating Adaptive Noise Reduction (SG-ANR) | **Post-Processing / DSP** | Noise Suppression / Spectral Cleanup | Frequency-domain noise reduction via per-bin STFT gain masking. Estimates noise profile from silent/noise-only segment (stationary mode) or via continuous EMA noise floor tracking (non-stationary mode), computes a sigmoid gain mask from the per-bin SNR, and applies it to the magnitude STFT while preserving original phase. Reconstructs via overlap-add IFFT. Produces cleaned audio with reduced background hiss, rumble, and ambience. Candidate: `sound/effects/spectral_gate.py`. |
 || **SP-110** | Pulse Width Modulation Synthesis (PWM) | **Synthesis Engines** | Variable-Duty-Cycle Pulse / Analog Pad & String Timbres | Variable duty-cycle pulse wave oscillator with PolyBLEP bandlimited antialiasing. Two sawtooth waves with phase offset $D$ produce pulse wave via subtraction, containing both even and odd harmonics. LFO-modulated duty cycle creates evolving timbre — the classic analog string pad sound. Forms the source oscillator for subtractive signal chains. Candidate: `sound/synthesis/pwm_synthesis.py`. |
+| **SP-111** | Duffing Oscillator Nonlinear Synthesis (DONS) | **Synthesis Engines** | Forced-Nonlinear-Oscillator / Chaotic & Harmonic Organic Timbres | Integrates the forced damped Duffing oscillator $\ddot{x}+\delta\dot{x}+\alpha x+\beta x^3=\gamma\cos(\omega t)$ at audio rate; displacement $x(t)$ IS the sample. Drive frequency $\omega$ = pitch; drive amplitude $\gamma$ = one-knob chaos sweep (pure sine → odd-harmonic mode-locked → double-well strange attractor); seedable initial conditions give deterministic-per-note organic variation. $\mathcal{O}(1)$ per sample. Candidate: `sound/synthesis/duffing_synth.py`. |
 |---|
 
 
@@ -24627,3 +24629,172 @@ where $\text{LFO}(t)$ is typically a triangle, sine, or sawtooth wave (rate $f_{
 6. **CPU cost for dense polyphony**: Two PolyBLEP sawtooths per voice × $V$ voices = $2V$ sawtooth evaluations + $4V$ PolyBLEP corrections per sample. For $V=8$ at $f_s=48000$, this is ~768,000 operations/second — comfortable on modern CPUs but heavy for real-time embedded systems. Alternatives for high-voice-count sections: wavetable-lookup PWM (SP-041 BLW-MI with pre-computed duty-cycle tables) or DPW (differentiated parabolic wave) for $D > 0.2$ at lower cost.
 
 7. **PolyBLEP correction gets cheaper with more oscillators**: Sharing the same PolyBLEP tables across all voices (pre-computed $\Delta$ bins) reduces the per-correction cost to a table lookup + multiply. Always pre-compute the PolyBLEP correction polynomial coefficients for all expected $\Delta$ values (phase increments).
+---
+### Source
+
+Costas, J. P. (1984). "A Study of a Class of Detection Waveforms Having Nearly Ideal Range–Doppler Ambiguity Properties." *Proceedings of the IEEE* 72(8), 996–1009 (based on his 1965 GE Class 1 Report R65EMH33). — Gilbert, E. N. (1965). "Latin Squares Which Contain No Repeated Digrams." *SIAM Review* 7(2), 189–198. — Golomb, S. W. & Taylor, H. (1984). "Construction and Properties of Costas Arrays." *Proceedings of the IEEE* 72(9), 1143–1163. — Golomb, S. W. (1984). "Algebraic Constructions for Costas Arrays." *J. Combin. Theory Ser. A* 37(1), 13–21. — Drakakis, K., Rickard, S., Beard, J., Caballero, R., Iorio, F., O'Brien, G., & Walsh, J. (2008). "Results of the Enumeration of Costas Arrays of Order 27." *IEEE Trans. Inf. Theory* 54(10), 4684–4687; (2011) orders 28 and 29, *Adv. Math. Commun.* 5(3). — Beard, J. (2006/2008/2017). "Generating Costas Arrays to Order 200"; "Costas Array Generator Polynomials in Finite Fields"; *Costas Arrays and Enumeration to Order 1030* (IEEE Dataport). — Warnke, L., Correll, B., & Swanson, C. (2023). "The Density of Costas Arrays Decays Exponentially." *IEEE Trans. Inf. Theory* 69(1), 575–581. — Barker, L., Drakakis, K., & Rickard, S. (2009). "On the Complexity of the Verification of the Costas Property." *Proc. IEEE* 97(3), 586–593. — Blackburn, S. R., Panoui, A., Paterson, M. B., & Stinson, D. R. (2010). "Honeycomb Arrays." *Electron. J. Combin.* 17, R172. — OEIS A008404 (number of Costas arrays of order n) and A001441 (inequivalent under the dihedral group).
+
+### Layer
+
+**concrete** — the array is a complete note-placement plan: one dot per (row, column) decides, for every time slot and every pitch degree, exactly where a note onset occurs and which pitch it carries. The output is a set of n concrete note events that fill UnitMatrix cells directly, exactly like its 1D sibling 090 Golomb Ruler Distinct-Difference Composition. Feeds generators/ (candidate module `generators/costas_array_generator.py`).
+
+### Paradigm
+
+**Rules-Based** — deterministic, combinatorial, number-theoretic construction with no probabilistic sampling, no nature-inspired dynamics, and no learned parameters. The distinct-displacement property is a mathematical invariant enforced either by construction (Welch, Lempel–Golomb) or by exhaustive verification (backtracking search for small n). Given the same (n, construction, seed), the same melody results; the only "choices" are compositional ones (which order n, which primitive root, which pitch mapping, which dihedral morph) — never stochastic draws.
+
+### Description
+
+**Costas Array Distinct-Displacement Composition (CADDC)** generates melodies, rhythmic skeletons, and polyphonic layouts from *Costas arrays*: an $n \times n$ set of dots, one per row and one per column, such that all $\binom{n}{2} = n(n-1)/2$ displacement vectors between pairs of dots are **pairwise distinct**. As a permutation $\pi$ of $\{1,\dots,n\}$ (dot in row $i$, column $\pi(i)$), the defining property is
+
+$$\forall\, i<j,\ k<l:\quad \big(j-i,\ \pi(j)-\pi(i)\big) = \big(l-k,\ \pi(l)-\pi(k)\big) \ \Longrightarrow\ (i,j)=(k,l).$$
+
+Musically, reading rows as **time slots** and columns as **pitch degrees**: every ordered pair of notes in the melody has a *unique* (time-lag, pitch-interval) signature. Two consequences follow from the algebra alone:
+
+1. **No repeated interval at any fixed lag** — for every time-lag $\Delta t = d$, the $n-d$ melodic intervals $\pi(i+d)-\pi(i)$ are all distinct (verified: the Welch $p{=}13$ melody has 11 stepwise intervals $\{+2,+4,-5,+3,+6,-1,-2,-4,+5,-3,-6\}$ — all 11 distinct). The melody never "restates" an interval at the same rhythmic distance, the 2D generalization of the 1D Golomb-ruler property (090).
+2. **Thumbtack autocorrelation** — no non-zero lag has any pair of notes sharing both lag and interval; the ambiguity-function ideal that made Costas arrays the standard for sonar/radar waveforms (Costas 1984) becomes a musical "no hidden transposition at any offset" guarantee: the melody's self-similarity at every rhythmic offset is minimal.
+
+**Constructions.** Deterministic generators produce valid arrays of any practical order:
+- **Welch (exponential)**: for prime $p$ and primitive root $g \bmod p$, set $\pi(i) = g^{i} \bmod p$, $i = 1\dots p-1$ — a Costas array of order $n = p-1$. Example $p=5, g=3$: $[3,4,2,1]$ (verified). Transposing gives the logarithmic Welch array (also Costas — verified for all $p \in \{5,7,11,13\}$).
+- **Lempel–Golomb**: for prime power $q$ and primitive elements $\alpha, \beta$ of $\mathrm{GF}(q)$, set a dot at $(i,j)$ iff $\alpha^i + \beta^j = 1$ — order $q-2$ (verified for $\mathrm{GF}(4)$, giving the order-2 arrays $[2,1],[1,2]$). If $\alpha+\beta=1$, deleting the first row and column yields order $q-3$.
+
+**Enumeration & rarity.** The count $C(n)$ is known to order 29 (OEIS A008404): $C(4)=12$, $C(5)=40$, $C(6)=116$, $C(8)=444$ — a tiny fraction of the $n!$ permutations (verified by brute force for $n \le 8$); Warnke–Correll–Swanson (2023) proved $C(n)/n! \le e^{-\Theta(n)}$. The full enumeration is an open problem — but for composition this rarity is a *feature*: generic random permutations almost never satisfy the property, so a Costas melody is a genuinely special object, and verification (Barker–Drakakis–Rickard 2009) is only $O(n^2 \log n)$.
+
+**Morphs (the section menu).** Every transform below provably preserves the Costas property and therefore maps one valid melody to another — the macro-form pivots:
+- **Dihedral group**: rotation by 90°, horizontal/vertical reflection, and the four combinations — 8 variants per array (verified).
+- **Anti-diagonal (time reversal)**: $\pi'(i) = \pi(n+1-i)$ — retrogrades the melody (verified).
+- **Pitch inversion**: $\pi'(i) = n+1-\pi(i)$ — inverts intervals (verified).
+- **Column/row deletion & insertion** (Golomb–Taylor 1984; Golomb 1992 $T_4/G_4$): surgically edit order, usable to fit bar counts.
+- **Affine re-mapping of the decoding** (not the array): transpose/rotate the pitch map per section — tonal contrast without breaking the construction.
+
+### Musical Elements Framework
+
+**PITCH**: The permutation $\pi$ supplies a degree sequence over the rows. For order 12 (Welch $p=13$), rows map 1:1 to the 12 chromatic pitch classes — a 12-note melody that uses every pitch class exactly once (an aggregate, like 065 TTSMC's rows) *and* enjoys the distinct-interval property. For diatonic writing, wrap rows into a 7-degree modal scale via $\text{row} \bmod 7$ (rows 1..14 → two passes). Because columns are one dot each, the melody is a **12-tone row with the extra guarantee that every interval occurs at a unique lag** — the strongest form of "no premature repetition". Pitch inversion and time reversal morphs give I/R row-form analogues without any serial-theory apparatus.
+
+**RHYTHM**: Primary element alongside pitch. The isochronous reading (one dot per time slot) yields a constant-pulse melody whose *internal* rhythm is implicit: grouping by lag $d$, the distinct-interval property means each rhythmic offset carries a unique interval, so the ear hears maximal "metrical variety". For explicit rhythm, split the composite into voices (below): each voice's dots form a sparse subset of the $n$ slots, and the union is a complete partition of the timeline — a perfect hocket again, but one whose *pitch* skeleton is interval-distinct (contrast 111 VTCC, which guarantees onset uniqueness but is pitch-agnostic). Non-isochronous option: assign a duration to each row proportional to row index, producing accelerating/decelerating tuplet streams while preserving the array.
+
+**HARMONY**: The vertical dimension is empty by construction (one dot per column = monophonic). Harmony is created by *stacking independent Costas arrays* on the same time axis (one per UnitMatrix voice), choosing arrays with mutually coprime orders or different primitive roots so their vertical dyads at each slot form controlled intervals (e.g., pin dyads to thirds/sixths by decoding voice-specific pitch maps). Because each layer individually has the thumbtack property, the union is a polyphony where every *within-voice* gesture is unique at its lag; cross-voice intervals are then the only repetition-prone surface and can be constrained by the usual voice-leading filters (`rules/realize.py`, `smooth=True`). The $q-3$ Lempel–Golomb variant is handy for 4-voice writing (order 13 → delete → 4-chord aggregates).
+
+**STRUCTURE**: The order $n$ of the array is the formal unit: one statement of the array = one section. A 12-order section = 12 time slots (e.g. 3 bars of 4/4 at quarter-note slots, or 12 beats); larger orders (Welch $p=17 \to n=16$, $p=29 \to n=28$) give full phrases. Section-to-section form = the morph menu: Exposition (array $A$), Development (time-reversed $A$), Re-exposition (pitch-inverted $A$), Coda (rotated $A$ or a $T_4/G_4$-edited truncation) — every section provably valid, so form is guaranteed coherent. Since Costas arrays of a given order are distinct objects (12 of order 4, 40 of order 5 …), different sections of the *same* order can use *different* arrays for "variation without transformation". Tension arcs are free — pitch-map register expansion handles them.
+
+**TEXTURE**: Homophonic-melodic by default (single stream, one note per slot — maximal clarity, the Webern pointillist extreme when pitches jump: Welch arrays produce large leaps, e.g. the $p=13$ melody spans a tritone + minor 2nd in stepwise motion). Multi-voice stacking (above) converts the pure stream into interlocking hocket polyphony with guaranteed within-voice uniqueness. The NAKCA variant — Costas arrays with *no diagonally adjacent dots* ("non-attacking kings", Golomb–Taylor 1984) — forbids stepwise motion in both axes simultaneously, forcing a pointillist texture by construction; the NAQCA variant (also an $n$-queens solution) is conjectured to exist only for $n=1$, a fun impossibility to cite.
+
+### UnitMatrix Integration (Voices & Sections)
+
+**Voices** = either (a) the single melodic stream itself, or (b) one UnitMatrix voice per *stacked* Costas array (a for polyphonic hocket). In the stacked layout each voice row $v$ carries its own order-$n_v$ array $\pi_v$ decoded through its own pitch map; the zero-drift invariant holds because each array covers exactly one dot per time slot, so every section's composite timeline is fully and disjointly populated (union of dots = one per slot if the arrays are coprime-aligned, otherwise schedule them on disjoint slot subsets).
+
+**Sections** = array statements and morphs. Section $s$ holds an order-$n_s$ array (or a morph of the exposition array) and is $n_s$ slots long. Typical macro-form: Exposition = Welch $p{=}13$ order-12 array (12-tone aggregate melody); Development = time-reversed array (retrograde); Re-exposition = pitch-inverted array (I-form); Coda = 90°-rotated array or a $T_4$ column-deletion editing down to 12→8 slots. Every section independently satisfies the Costas property, so every section is interval-distinct within itself; between sections the morphs guarantee the same.
+
+**Cell filling** (per musicom engine): for cell $(v, s)$ = (voice $v$, section with array $\pi_s$), emit `create_note_unit(pitch, dur, start_tick)` for each dot: `start_tick = i * slot_len`, `pitch = decode(pi_s[i])` (chromatic degree, modal wrap, or register-mapped), `dur = slot_len * articulation` (staccato for pure hocket), and pad the cell to the section length (terminal landmark at `section_len` per the zero-drift invariant). Because each array has exactly one dot per column (= time slot), the union of units in a section is a complete, non-overlapping covering of the slot grid — the zero-drift gate `composer.validate()` passes by construction at the onset level. `Voices` = rows, `Sections` = columns, `Cells` = per-voice per-section MusicUnits.
+
+### Pitfalls
+
+1. **Unverified permutations are almost never Costas**: for $n \ge 8$, fewer than $444/8! \approx 0.011$ of permutations qualify (density decays exponentially, Warnke 2023). Never hand-pick a melody "by ear" and assume the property — always run the $O(n^2 \log n)$ distinct-visitor check (a set of displacement vectors) before relying on the guarantee. Conversely, brute-force search is only practical for $n \le 12$ ($12! = 479$M); use Welch/Lempel–Golomb constructions for larger orders.
+2. **Row/column orientation is a musical decision**: rows = time, columns = pitch is the natural reading, but swapping them yields the (also valid, transposed) array — a melody whose *intervals become rhythms* and vice versa (logarithmic Welch). Decide deliberately; don't let the coordinate convention silently flip the piece's character.
+3. **Large leaps dominate**: Welch arrays are pseudorandom permutations of $\{1..n\}$ — stepwise intervals are large and often disjunct (the verified $p{=}13$ melody has no step smaller than a minor 2nd and reaches a tritone in adjacent notes). For conjunct music, decode through a modal wrap (row $\bmod 7$) or apply a mild post-filter (retain only arrays whose stepwise interval histogram is acceptable, or use NAKCAs, which by construction forbid 2nds in both axes).
+4. **Aggregate ≠ tonality**: an order-12 array uses all 12 pitch classes once, which is neither tonal nor atonal by itself — it is *pre-tonal material*. Tonal gravity must be installed at the pitch-map level (bias register, tonic anchoring, cadence slots), exactly as with 065 TTSMC rows; the array guarantees only the interval-uniqueness skeleton.
+5. **Order flexibility is limited**: Welch gives only $n = p-1$ for primes $p$; Lempel–Golomb only $q-2$/$q-3$ for prime powers $q$. There is no Welch array of order 11 or 13, so bar-count fit requires morphing (delete/insert columns, $T_4/G_4$ edits, or choose $n$ = beats per bar × bars with $n+1$ or $n+2$ prime). Check that the desired $n$ is realizable before committing the form.
+6. **Stacking requires alignment discipline**: two arrays stacked on the same slot grid will collide (two dots → same slot) unless their orders are coprime (then the union covers one dot per slot for $n = \mathrm{lcm}$) or their slot subsets are disjoint. Verify the union covering per section; if a collision appears, shift one array's slots (a column insertion) or drop one dot.
+7. **The property is fragile to post-editing**: transposing all pitches is safe (it preserves differences), but adding/removing a single note, or reordering two rows, destroys the distinct-displacement guarantee silently. If you edit by hand, re-verify; if you want a variant, use the proven morphs instead of ad-hoc edits.
+
+Candidate code path: `generators/costas_array_generator.py` — implements `welch_array(p, g)`, `lempel_golomb_array(q, alpha, beta)`, `is_costas(perm)` (distinct-visitor check, O(n² log n)), `costas_morph(perm, dihedral=True, reverse=True, invert=True)`, plus the UnitMatrix decoding helpers (chromatic/modal/register pitch maps) and a `CostasArrayCellConfig` for per-cell `slot_len`, `articulation`, and pitch-map selection.
+# Duffing Oscillator Nonlinear Synthesis (DONS) — SP-111
+
+### Source
+[1] Duffing, G. (1918). *Erzwungene Schwingungen bei veränderlicher Eigenfrequenz und ihre technische Bedeutung.* Vieweg & Sohn (Braunschweig). — The original nonlinear spring oscillator with cubic restoring force.
+[2] Wikipedia contributors. "Duffing equation." *Wikipedia, The Free Encyclopedia.* — Canonical equation form, parameter semantics ($\delta$ damping, $\alpha$ linear stiffness, $\beta$ cubic nonlinearity, $\gamma$ drive amplitude, $\omega$ drive frequency), jump resonance/hysteresis, double-well chaos, Poincaré section.
+[3] Essl, G. (2019). "Exploring the Sound of Chaotic Oscillators via Parameter Spaces." *Proc. 22nd Int. Conf. on Digital Audio Effects (DAFx 2019)*, Birmingham, UK. — Perceptually-motivated parameter planes (PeakSparsity, winding number) for musically controlling chaotic oscillators; the control-atlas framework.
+[4] Spanedda, L. (2025). "Emergent Behaviors in Sound Synthesis: The RITI Project and Other Systemic Approaches in Electronic Music." *ECHO — A Journal of Music, Thought and Technology* 7. — The Duffing equation as an emergent-behavior source in live electronics; systemic/cybernetic synthesis lineage.
+[5] Risto Holopainen. "Nonlinear Oscillators and Frequency Modulation." *ristoid.net/modular/nonlin_osc.html* (archived web essay). — Musically-oriented treatment of nonlinear oscillators incl. Duffing/van der Pol.
+
+### Layer
+**absolute** — Sound Production (Synthesis Engines)
+Code path: `sound/synthesis/duffing_synth.py`
+
+### Description
+**Duffing Oscillator Nonlinear Synthesis (DONS)** renders audio directly from the state trajectory $x(t)$ of the forced, damped Duffing oscillator — a second-order nonlinear ODE whose restoring force contains a cubic term $-\beta x^3$. Displacement $x(t)$ IS the audio sample, exactly in the chaotic-oscillator-as-instrument lineage of SP-057 Chua's circuit and SP-035 GENDYN, but with a *smooth, continuous-time* nonlinearity instead of a map or breakpoints.
+
+The method's musical power comes from its three dynamical regimes, all reachable by a single "chaos knob" (the drive amplitude $\gamma$):
+
+1. **Linear-ish / small-drive** ($\gamma$ small, $\beta x^3 \ll \alpha x$): a near-sinusoidal tone at the linear resonance $\omega_0 = \sqrt{\alpha}$, with slight amplitude-dependent detuning — the classic "softening/hardening spring" pitch bend.
+2. **Periodic / mode-locked** ($\gamma$ moderate): the cubic term generates odd harmonics ($3\omega$, $5\omega$, …) and subharmonics; the nonlinear resonance curve bends (the famous *jump resonance* / hysteresis: sweeping $\omega$ up and down yields two different amplitudes at the same frequency — a spectral analog of musical dynamics).
+3. **Chaotic** ($\gamma$ large, especially in the double-well $\alpha < 0$ regime): the trajectory wanders on a strange attractor — broadband, inharmonic, "live" texture with 1/f-like energy; sensitive dependence on initial conditions makes every note slightly different, like breath.
+
+Because the system is deterministic, DONS is **seedable**: the initial condition $(x_0, v_0)$ and the parameter set $(\alpha, \beta, \delta, \gamma, \omega)$ fully determine the note. This gives reproducible renders while retaining organic, non-repeating fine structure — the SP-057/SP-068 property of "deterministic per seed, chaotic per note".
+
+Compared to the existing chaotic family: SP-057 Chua integrates three coupled autonomous ODEs (self-oscillating, no external pitch reference); DONS adds the *external driving term* $\gamma\cos(\omega t)$, which makes the pitch **externally controllable** — the driving frequency $\omega$ is the note's fundamental, while the response's spectral character (harmonic vs inharmonic vs chaotic) is set by how the drive interacts with the natural resonance. This forced-oscillator architecture makes DONS the natural chaotic source for **pitched** voices (leads, basses, bells) rather than pure noise/wind.
+
+### Technical Mechanics
+
+The DONS core is the 2D first-order system (state $[x, v] = [\text{displacement}, \text{velocity}]$, drive phase $\theta$ accumulated separately):
+
+$$\ddot{x} + \delta \dot{x} + \alpha x + \beta x^3 = \gamma \cos(\omega t)$$
+
+which integrates as:
+
+$$\frac{dx}{dt} = v, \qquad \frac{dv}{dt} = -\delta v - \alpha x - \beta x^3 + \gamma \cos(\omega t)$$
+
+**Discretization.** The standard audio-rate stiff-integrator choice is the **semi-implicit (symplectic) Euler** step with step $h = 1/f_s$ (stable enough for audio-rate parameters, $O(1)$ per sample):
+
+$$v_{n+1} = v_n + h\left(-\delta v_n - \alpha x_n - \beta x_n^3 + \gamma\cos(\omega t_n)\right)$$
+$$x_{n+1} = x_n + h\,v_{n+1}$$
+
+For $\beta = 0$ this reduces to a damped harmonic oscillator; with $\beta < 0$ (softening spring) large amplitudes *lower* the effective frequency; with $\beta > 0$ (hardening) they raise it. In the double-well regime $\alpha < 0$, $\beta > 0$, the potential $V(x) = \alpha x^2/2 + \beta x^4/4$ has two minima — the classic two-well "snap-through" system whose chaotic attractor produces the richest spectra.
+
+**Pitch control.** The fundamental tracks the **driving frequency** $\omega = 2\pi f_{\text{note}}$ (not the natural frequency). The response amplitude is governed by the nonlinear frequency-response curve (backbone curve). For weak nonlinearity the resonance peak bends, giving amplitude-dependent detuning:
+
+$$\omega_{\text{eff}}(A) = \sqrt{\alpha + \tfrac{3}{4}\beta A^2}$$
+
+where $A$ is the oscillation amplitude. Large drive amplitude = wider spectral spread + possible chaos.
+
+**Bistability / jump resonance.** For fixed drive $\gamma$, sweeping $\omega$ upward follows the upper branch of the resonance curve then *jumps down*; sweeping down jumps up at a different frequency. This hysteresis is a built-in spectral envelope — a natural "growl" when $\omega$ is swept by vibrato/portamento.
+
+**Initial condition = seed.** $(x_0, v_0)$ is derived from a per-note seed hash so every note has reproducible but unique micro-trajectory. Re-render with the same seed = identical audio.
+
+**Amplitude envelope & output shaping.** Because the oscillator is self-sustaining only while driven, the amplitude follows the drive envelope: $x(t)$ grows to the steady-state amplitude with time constant $\approx 2/\delta$ (inverse of damping). A per-note amplitude ADSR is applied *at the drive level* (scaling $\gamma$) rather than on the output, so attack = the physical transient of the resonator, release = exponential decay with rate $\delta/2$:
+
+$$A(t) \propto e^{-\delta t/2}\ \text{after drive stops}$$
+
+**Complexity.** $\mathcal{O}(1)$ per sample per voice: 1 cos evaluation (or phase-accumulator lookup), 4 multiplies, 2 adds for the velocity update, 1 multiply-add for position. For $V$ voices at $f_s = 48000$: $\mathcal{O}(V)$ per sample ≈ 96,000 $V$ ops/sec — lighter than an FFT-based or waveguide method, comparable to SP-057.
+
+### Musical Elements Framework
+
+**PITCH**: The driving frequency $\omega$ IS the pitch — a MIDI note maps $f_{\text{note}} \to \omega = 2\pi f_{\text{note}}/f_s$. Pitch stability is excellent in the linear regime; in the chaotic regime the *perceived* pitch softens into a noisy fundamental with broadband haze (pitchiness knob = $\gamma/\gamma_{\text{chaos}}$). Portamento/vibrato = smooth $\omega$ sweeps, which additionally trigger the jump-resonance spectral envelope (pitch bend that also bends timbre). In the double-well regime, $\alpha < 0$ lets the oscillator "snap" between wells — an audible sub-audio thump (tension/release in one note).
+
+**RHYTHM**: DONS is a continuous oscillator — rhythm comes from the amplitude envelope and from *parametric gating*: re-seeding the oscillator (resetting $x, v$ to fresh seed values) at each note onset regenerates the unique micro-trajectory, so repeated notes are never bit-identical. Percussive use: strike the oscillator with a *non-resonant drive* (a short pulse or noise burst) and let the natural resonance ring — the classic "pluck the chaos" — producing gong-like or drum-like decays with inharmonic partials. The jump-resonance hysteresis also gives a natural envelope asymmetry: quick attack, slower release (or vice versa) depending on sweep direction.
+
+**HARMONY**: Per-voice DONS oscillators at chord frequencies sum on the mix bus; each voice retains its own chaos knob, so a chord can blend stable sine-like voices (small $\gamma$) with chaotic ones (large $\gamma$) — controlled density contrast within one harmony. The odd-harmonic-only spectrum of the cubic term (in the weakly driven regime) makes DONS a natural *sub-octave* harmonic consonant partner: $x^3$ produces $3\omega$, $5\omega$, … odd partials, which over a root give P8, P8+P5, 2×P8, … — the same harmonic skeleton as the subharmonic stacks (SP-097 SHOS) without frequency division. Bells: $\alpha \approx \omega_0^2$ tuned near the note, strong $\beta$, moderate $\gamma$ → inharmonic metallic partials that decay at different rates (each partial sees a different effective damping via the amplitude-dependent detuning).
+
+**STRUCTURE**: The macro-form is a **parameter schedule** $\theta_s = (\alpha_s, \beta_s, \delta_s, \gamma_s, \omega_s)$ per section — the "chaos atlas" (Essl 2019) becomes the form map:
+- Intro: small $\gamma$ (pure sine drone at $\omega$), $\alpha = \omega^2$ (resonant)
+- Verse: moderate $\gamma$ (harmonic-rich, mode-locked) 
+- Chorus: large $\gamma$, $\alpha < 0$ (double-well chaos → full broadband wash)
+- Bridge: $\gamma$ swept slowly through the chaos threshold — onset of chaos as a formal event (the "phase transition" section)
+- Outro: back to small $\gamma$, dying away
+
+**TEXTURE**: Texture = position on the parameter plane. Low $\gamma$ = thin, pure, sine-like (solo flute-adjacent); mid $\gamma$ = warm, odd-harmonic, vocal-like (brass/cello-adjacent); high $\gamma$ = dense, noisy, "live" (breath/wind/cymbal). Coupling voices via shared drive phase ($\omega$ locked, $\gamma$ shared) gives synchronized ensemble texture; independent per-voice $\gamma$ gives stratified/pointillistic texture. The seed-driven micro-variation adds organic "performer" texture — each repeated note is a fresh improvisation within the same deterministic class.
+
+### UnitMatrix Integration (Voices & Sections)
+
+**Voices**: Each UnitMatrix voice = one DONS integrator with its own initial-condition seed and parameter set. Voice-level state in cell $U_{v,s}$:
+- $f^{(v,s)}$ = MIDI note frequency (→ drive $\omega = 2\pi f/f_s$)
+- $\theta^{(v)} = (\alpha_v, \beta_v, \delta_v, \gamma_v)$ = per-voice chaos parameters (from a preset, or automated)
+- seed$(v)$ = initial condition $(x_0, v_0)$ hash — deterministic per (voice, note index)
+- velocity → drive amplitude $\gamma \cdot (\text{vel}/127)$
+
+**Sections**: Each section $s$ defines a parameter cluster $\theta_s = (\alpha_s, \beta_s, \delta_s, \gamma_s)$ and optionally a chaos-sweep trajectory across the section (linear ramp of $\gamma$, or an LFO on $\omega$ for vibrato). Section transitions interpolate $\theta$ linearly over 8–64 samples (or crossfade the buffers) to avoid clicks — the state $x, v$ carries over across the seam (continuous integration), so the zero-drift invariant holds at the buffer level and there is no discontinuity by construction.
+
+**Cell filling**: 1. read $f^{(v,s)}$ from MusicEvent pitch → $\omega$; 2. pick/continue section parameters $\theta_s$; 3. for each sample in the cell: semi-implicit Euler update; emit $x_n$ (scaled) as the sample; 4. apply drive-envelope (ADSR on $\gamma$, physical attack/decay); 5. write to voice buffer; sum to mix bus; post-process (SP-009 reverb, SP-007 EQ, SP-053 panning).
+
+### Pitfalls
+
+1. **Numerical stability / blow-up**: the double-well + strong drive can eject the trajectory to $\pm\infty$ (the quartic potential can't contain a very large $\gamma$). Mitigate: clamp $|x|$ to a sane bound (e.g. 4× the linear amplitude) and/or use a smaller step via 2×-oversampling; monitor the Lyapunov-style growth of $|x|$ per block. The symplectic Euler is only conditionally stable — keep $h\sqrt{\alpha} < 2$ (always true at $f_s = 44100$+ for audio-range $\alpha$).
+2. **Aliasing in the chaotic regime**: chaotic spectra are broadband; at $\gamma > \gamma_{\text{chaos}}$ the spectrum can approach Nyquist. Standard mitigations: 2×–4× oversampling with decimation, or lowpass the output (the natural $1/\omega^2$ rolloff of the second-order system + a one-pole LPF at 18 kHz usually tames it).
+3. **Chaos threshold varies with every parameter**: $\gamma_{\text{chaos}}$ depends on $(\alpha, \beta, \delta, \omega)$ — setting "the same chaos knob" in two sections can give pure sine in one and full noise in the other. Use the Essl parameter-plane (PeakSparsity / spectral centroid) to *measure* the regime, or pre-scan the atlas offline and pick $(\alpha, \beta, \delta, \gamma)$ from a labeled map.
+4. **Pitch ambiguity in chaos**: in the chaotic regime the driving frequency is still the spectral center but the "note" blurs; do not expect clean fundamental tracking for $\gamma$ far above threshold. If the score demands clear pitch, keep $\gamma$ below the chaos threshold and use the mode-locked region instead.
+5. **DC offset / asymmetric output**: the double-well oscillation is not symmetric about 0 in general — the time-average of $x(t)$ can be nonzero, causing a DC thump. Apply a DC-blocking highpass (or subtract the running mean) before mixing.
+6. **Envelope vs drive coupling**: because amplitude is set by the drive level, a mid-note velocity change (expression) must ramp $\gamma$ smoothly; step changes in $\gamma$ cause amplitude steps (clicks). Always smooth $\gamma$ with a one-pole (τ ≈ 1–5 ms).
+7. **Not a substitute for the linear synth family**: DONS shines at *organic/chaotic* textures; for clean, stable, perfectly-pitched tones the linear oscillators (SP-110 PWM, SP-029 subtractive, SP-041 wavetable) are cheaper and more controllable. Reserve DONS for the material that needs "liveness" — the chaotic pad, the gong, the breath — and hybridize (e.g. a stable PWM layer + a DONS layer crossfaded by section).
+
+---
+
+Candidate code path: `sound/synthesis/duffing_synth.py` — implements `DuffingVoice` (state $x, v, \theta$ accumulator; `render_block(n_samples, f, vel, gamma_env)` via semi-implicit Euler), `duffing_parameter_preset(name)` (the atlas: linear/mode-locked/chaotic/double-well), `seed_from_note(voice, note_idx)` (deterministic initial conditions), and a `DuffingCellConfig` for per-cell $\theta_s$ interpolation.

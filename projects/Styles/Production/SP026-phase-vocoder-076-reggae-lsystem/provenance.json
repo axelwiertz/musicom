@@ -1,0 +1,38 @@
+{
+  "job": "random-style production (SP) layer-aligned",
+  "date": "2026-10-11",
+  "seed": 20261011,
+  "method": "SP-026",
+  "method_module": "sound.effects.phase_vocoder",
+  "method_desc": "Spectral Phase Vocoder Resynthesis",
+  "layer": "absolute (phase vocoder re-synthesizes the WHOLE mix: time-stretch + sharpen)",
+  "selection_source": "workflows.musicom_workflow.SP_METHODS registry (42 implemented)",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Reggae/076-reggae-lsystem/MIDI/076-reggae-lsystem.mid",
+  "source_sha256": "a7a2377a39fd20d93817b9f3221ae7d22bbc1f6af2e2fd0aebc68a240fc60d11",
+  "output_midi": "/opt/data/repos/musicom/projects/Styles/Production/SP026-phase-vocoder-076-reggae-lsystem/MIDI/076-reggae-lsystem.mid",
+  "output_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP026-phase-vocoder-076-reggae-lsystem/SP026-phase-vocoder-076-reggae-lsystem.wav",
+  "output_ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP026-phase-vocoder-076-reggae-lsystem/SP026-phase-vocoder-076-reggae-lsystem.ogg",
+  "params": {
+    "key": "A natural minor",
+    "bpm": 96.0,
+    "bars": 24,
+    "alpha": 1.2,
+    "sharpness": 1.12,
+    "freeze": false,
+    "n_fft": 2048,
+    "hop": 512
+  },
+  "preflight": {
+    "grid_off": 0,
+    "out_of_scale": 0,
+    "zero_drift": true
+  },
+  "lufs": -14.01,
+  "peak": 0.8913,
+  "silence_pct": 7.7,
+  "rms": 0.1449,
+  "pitch_verdict": "PASS",
+  "hit_rate": 0.8542,
+  "he_mean": 0.4553,
+  "phase2_notes": "freeze=False because phase_vocoder()'s freeze branch applies the exponential decay envelope to y[tail_len*sr:] (i.e. from 2 s to END), which for a 60 s source would suppress ~97% of the audio (verified empirically: a steady 4 s chord's RMS fell 0.54->0.03 by second 3). Pure Flanagan time-stretch (alpha=1.2) + |X|^1.12 spectral sharpening is used instead; freeze omitted. Pitch verification maps source note times by alpha=1.2 (linear stretch)."
+}

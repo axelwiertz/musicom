@@ -1,0 +1,24 @@
+{
+ "chosen": "Arabic/071-arabic-rast-ant-colony",
+ "genre": "Arabic",
+ "standard_failures": [
+  "std3_offgrid_count=32",
+  "std6_missing prov=False index=False"
+ ],
+ "redesign_required": true,
+ "source_identity": {
+  "key": "D (Rast maqam, quarter-flat E/B -> 63/70 approx)",
+  "tempo": 100,
+  "meter": "4/4",
+  "form": "A(4) B(4) A2(4) C(4) = 16 bars",
+  "voices": [
+   "Lead(flute)",
+   "Harmony(strings)",
+   "Bass",
+   "Drums(ch9)",
+   "Pad"
+  ],
+  "motif": "ant-colony pitch trajectory -> Rast maqam tones",
+  "rhythm": "Maqsum 3+3+2"
+ }
+}

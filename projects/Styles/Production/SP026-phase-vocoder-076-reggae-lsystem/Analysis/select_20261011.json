@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-11",
+  "method": "SP-026",
+  "method_module": "sound.effects.phase_vocoder",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Reggae/076-reggae-lsystem/MIDI/076-reggae-lsystem.mid",
+  "recent_excluded": [
+    "SP-021",
+    "SP-069",
+    "SP-080",
+    "SP-085",
+    "SP-091",
+    "SP-092",
+    "SP-098"
+  ],
+  "registry_total": 42,
+  "n_well_formed": 225,
+  "n_candidates": 334
+}

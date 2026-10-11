@@ -1,61 +1,62 @@
 {
   "job": "random-style production (SP) layer-aligned",
-  "date": "2026-10-10",
-  "seed": 20261010,
-  "method": "SP-098",
-  "method_module": "sound.generators.fractal_seq",
-  "method_desc": "Fractal Sequence Generator \u2014 Thue-Morse/Fibonacci/Sierpinski/Logistic Map (Kaona B.A.C.H. FRACTAL-style)",
-  "layer": "absolute (fractal engine replaces melodic/harmonic production for ALL voices)",
-  "selection_source": "workflows.musicom_workflow.SP_METHODS registry (42 implemented)",
-  "source_midi": "/opt/data/repos/musicom/projects/Styles/Latin/bossa-nova-daily-2026-06-15/composition.mid",
-  "source_sha256": "0ee95ec24f2a1fe0d451d0d11737c43d8ca93327e21645a9d3141b36612680af",
-  "output_midi": "/opt/data/repos/musicom/projects/Styles/Production/SP098-fractal-seq-bossa-nova-daily/MIDI/SP098-fractal-seq-bossa-nova-daily.mid",
-  "output_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP098-fractal-seq-bossa-nova-daily/SP098-fractal-seq-bossa-nova-daily.wav",
-  "output_ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP098-fractal-seq-bossa-nova-daily/SP098-fractal-seq-bossa-nova-daily.ogg",
-  "params": {
-    "key": "A natural minor",
-    "bpm": 84.0,
-    "bars": 8,
-    "thue_morse": {
-      "length": 64,
-      "ticks_per_note": 240,
-      "contour": "+/-1 scale degree"
-    },
-    "fibonacci": {
-      "fib_indices": [
-        2,
-        3,
-        5
-      ],
-      "base_ticks": 480,
-      "root_pitch": 33,
-      "repeats": 4
-    },
-    "sierpinski": {
-      "rows": 8,
-      "beats_per_bar": 16,
-      "pitches": [
-        69,
-        64,
-        57
-      ]
-    },
-    "logistic": {
-      "r": 3.9,
-      "x0": 0.5,
-      "length": 64,
-      "pitch_range": [
-        40,
-        88
-      ]
-    }
-  },
-  "lufs": -14.0,
-  "peak": 0.8913,
-  "silence_pct": 21.39,
-  "rms": 0.133,
-  "pitch_verdict": "PASS",
-  "hit_rate": 1.0,
-  "he_mean": 0.6013,
-  "phase2_notes": "Thue-Morse module default emits +/-1 SEMITONE steps from root (collapses to a 2-note G/A oscillation once snapped to A natural minor); Phase-2 re-maps the binary contour to +/-1 SCALE-DEGREE steps so it walks the full diatonic scale. Logistic-map chaotic durations re-timed monotonically (clamped 120-960 ticks) to guarantee a valid zero-drift MIDI timeline. All pitches snapped to A natural minor via snap_to_scale()."
+  "date": "2026-10-11",
+  "seed": 20261011,
+  "method": "SP-026",
+  "method_module": "sound.effects.phase_vocoder",
+  "method_desc": "Spectral Phase Vocoder Resynthesis",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Reggae/076-reggae-lsystem/MIDI/076-reggae-lsystem.mid",
+  "source_project": "Reggae/076-reggae-lsystem/MIDI/076-reggae-lsystem.mid",
+  "registry_size": 42,
+  "recent_excluded": [
+    "SP-021",
+    "SP-069",
+    "SP-080",
+    "SP-085",
+    "SP-091",
+    "SP-092",
+    "SP-098"
+  ],
+  "already_on_source": [],
+  "baseline_excluded": [
+    "SP-001"
+  ],
+  "pool_methods": [
+    "SP-011",
+    "SP-024",
+    "SP-026",
+    "SP-028",
+    "SP-032",
+    "SP-033",
+    "SP-034",
+    "SP-035",
+    "SP-036",
+    "SP-037",
+    "SP-070",
+    "SP-071",
+    "SP-072",
+    "SP-073",
+    "SP-074",
+    "SP-075",
+    "SP-076",
+    "SP-077",
+    "SP-078",
+    "SP-079",
+    "SP-081",
+    "SP-082",
+    "SP-083",
+    "SP-084",
+    "SP-086",
+    "SP-090",
+    "SP-094",
+    "SP-095",
+    "SP-096",
+    "SP-097",
+    "SP-099",
+    "SP-100",
+    "SP-101",
+    "SP-102"
+  ],
+  "n_candidates": 334,
+  "n_well_formed": 225
 }
