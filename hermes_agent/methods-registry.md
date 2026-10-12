@@ -129,7 +129,10 @@ Status: `implemented` = in sound/ package · `partial` = some pieces exist · `r
 | SP-086 | Rule-Based Melody Harmony Writer with Voice Leading (HarmonyKeen-style) | implemented | sound/generators/harmony_writer.py |
 | SP-090 | 3-Band Orbital Stereo Sculptor / AutoPanner (SoundGhost Orbit-style) | implemented | sound/effects/orbit_sculptor.py |
 | SP-091 | Physics-Based Delta-Sigma Converter Saturation & Circuit Strain (Mixland Grey Matter-style) | implemented | sound/effects/delta_sigma_saturator.py |
-| SP-092 | 6-Band Multiband Saturator w/ 15 Selectable Algorithms & Per-Band M/S Routing (Kreuzberg Audio Oberton-style) | implemented | sound/effects/multiband_saturator.py |
+|| SP-092 | 6-Band Multiband Saturator w/ 15 Selectable Algorithms & Per-Band M/S Routing (Kreuzberg Audio Oberton-style) | implemented | sound/effects/multiband_saturator.py |
+|| SP-103 | 5-Parallel SEM Filter Bank — 5×12dB/oct parallel filters, Oberheim SEM-style, per-slot cutoff offset/resonance, LP/BP switching (Analogue Solutions Filtopia-style) | implemented | sound/effects/parallel_filter_bank.py |
+|| SP-104 | Parameter Animator — 16-step modulation pattern generator for 4 synth parameters (cutoff/resonance/pitch_mod/gain), interpolation/depth/loop modes (Cherry Audio Pentaphonic-style) | implemented | sound/generators/param_animator.py |
+|| SP-105 | Spectral Brightness Panner — frequency-dependent auto-panner driven by spectral centroid/brightness, per-channel paths, virtual centre, LFO blend, 3 pan profiles (Sound Particles Brightness Panner 2-style) | implemented | sound/effects/spectral_panner.py |
 
 ## Mastering (from MusicTech workflow)
 

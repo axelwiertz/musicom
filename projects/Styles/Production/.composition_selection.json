@@ -1,17 +1,17 @@
 {
-  "date": "2026-10-10",
-  "seed": 20261010,
-  "layer_roll": 0.3502,
+  "date": "2026-10-11",
+  "seed": 20261011,
+  "layer_roll": 0.4919,
   "layer": "concrete",
-  "method_id": "098",
-  "style": "Ambient",
-  "form": "cinematic-build",
+  "method_id": "074",
+  "style": "Flamenco",
+  "form": "intro-falseta-letra-falseta-cierre",
   "section_names": [
     "Intro",
-    "Build",
-    "Rise",
-    "Peak",
-    "Resolve"
+    "Falseta",
+    "Letra",
+    "Falseta",
+    "Cierre"
   ],
   "bars_per": [
     4,
@@ -22,7 +22,6 @@
   ],
   "recent_methods_excluded": [
     1,
-    2,
     6,
     7,
     10,
@@ -34,6 +33,7 @@
     51,
     94,
     95,
+    98,
     104
   ],
   "n_styles": 47,

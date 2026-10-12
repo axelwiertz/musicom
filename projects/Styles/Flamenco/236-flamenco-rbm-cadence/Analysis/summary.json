@@ -1,0 +1,16 @@
+{
+  "method": 74,
+  "method_name": "Restricted Boltzmann Machine Composition (RBM-C)",
+  "layer": "concrete",
+  "paradigm": "AI-Driven (energy-based)",
+  "visible_units": 2560,
+  "hidden_units": 48,
+  "raw_notes": 128,
+  "voice_leading_violations": 38,
+  "cadence": [
+    "Am",
+    "G",
+    "F",
+    "Em"
+  ]
+}

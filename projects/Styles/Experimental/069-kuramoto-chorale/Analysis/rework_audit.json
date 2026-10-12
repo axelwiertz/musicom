@@ -1,0 +1,29 @@
+{
+  "chosen": "/opt/data/projects/Styles/Experimental/069-kuramoto-chorale",
+  "genre": "Experimental",
+  "primary_midi": "MIDI/069-kuramoto-chorale.mid",
+  "standard_failures": [
+    {
+      "standard": 3,
+      "name": "rhythm-grid sync",
+      "detail": "124 off-grid pitched onsets in phase-2 MIDI (raw KOPS phase-wrap onsets never snapped to 120/240 grid)"
+    },
+    {
+      "standard": 6,
+      "name": "provenance.json + index.html",
+      "detail": "no index.html; provenance only as MIDI sidecars (no project-level provenance.json)"
+    }
+  ],
+  "redesign_required": true,
+  "source_identity": {
+    "genre": "Experimental",
+    "method": "Method 038 Kuramoto Oscillator Phase Synchronization (KOPS)",
+    "key": "F dorian",
+    "tempo_bpm": 92,
+    "form": "4 sections x 2 bars (8 bars)",
+    "progression": "i - IV - VII - i (Fm - Bb - Eb - Fm) [source mislabeled 'Bbm'; diatonic 3rds yield Bb MAJOR]",
+    "instrumentation": ["Soprano(Flute)", "Alto(StringEnsemble)", "Tenor(StringEnsemble)", "Bass(Bass)"],
+    "core_motif": "synchronization transition: coupling K rises 0.5->4.0, desync -> phase lock",
+    "notes": "phase-2 scale discipline clean (0 scale violations); defect is purely grid-snap + missing dashboard/provenance"
+  }
+}

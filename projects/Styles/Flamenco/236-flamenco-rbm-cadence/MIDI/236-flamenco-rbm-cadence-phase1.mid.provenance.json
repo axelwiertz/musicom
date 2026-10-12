@@ -1,0 +1,24 @@
+{
+  "artifact": "236-flamenco-rbm-cadence-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.workflows.unitmatrix_composer + RBM-C (PRE-RULES raw draft)",
+  "sources": [],
+  "parameters": {
+    "project": "236-flamenco-rbm-cadence",
+    "phase": 1,
+    "key": "A Aeolian (Andalusian cadence)",
+    "bpm": 108,
+    "method": 74,
+    "visible_units": 2560,
+    "hidden_units": 48,
+    "cd_k": 1,
+    "gibbs_steps": 90,
+    "seeds": 12,
+    "rules_applied": "NONE (pre-rules)"
+  },
+  "notes": "Phase 1 raw RBM block-Gibbs draft: chromatic pitch bins, unquantized onsets (off-grid jitter), single nylon-guitar voice, no harmony, no chord-tone snapping.",
+  "sha256": "07d3ecb6e3d6bcaa92a0153a33a3e685074e642f1ba74272bf52b4fb3eb3917c",
+  "bytes": 1243,
+  "created_utc": "2026-10-11T23:13:12.295640+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,34 @@
+{
+  "artifact": "237-kuramoto-chorale-extended.mid",
+  "classification": "ai-generated",
+  "generator": "Method 038 Kuramoto Oscillator Phase Synchronization (KOPS) + musicom rules (grid snap, chord-tone quantization, block harmony, voice leading)",
+  "sources": [
+    "Research/CompositionMethods/methods_db.md:Method 038",
+    "rules/progression.py",
+    "rules/voice_leading.py",
+    "workflows/unitmatrix_composer.py",
+    "Styles/Experimental/069-kuramoto-chorale/compose.py (source)"
+  ],
+  "parameters": {
+    "method": 38,
+    "phase": 2,
+    "key": "F dorian",
+    "bpm": 92,
+    "sections": 8,
+    "total_bars": 18,
+    "seed": 237,
+    "rework_of": "069-kuramoto-chorale",
+    "variation_techniques": [
+      "augment+octave",
+      "diminish",
+      "double",
+      "invert",
+      "retrograde"
+    ]
+  },
+  "notes": "Phase 2 (rework): grid-snap every onset to 120 ticks, per-bar chord-tone quantization, register enforcement, SATB block harmony, ch9 drum groove, 8 variation techniques.",
+  "sha256": "e0c6310ead9617f9c630e6a40a65a77ae8ad48a69b85b2c669d249480bb72417",
+  "bytes": 4224,
+  "created_utc": "2026-10-12T01:14:13.772531+00:00",
+  "provenance_version": "1.0"
+}

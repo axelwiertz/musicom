@@ -1,0 +1,46 @@
+{
+  "project": "237-kuramoto-chorale-extended",
+  "genre": "Experimental",
+  "method": "Method 038 Kuramoto Oscillator Phase Synchronization (KOPS)",
+  "rework_of": "069-kuramoto-chorale",
+  "rework_decision": "redesign",
+  "classification": "ai-generated",
+  "key": "F dorian",
+  "bpm": 92,
+  "form": "18 bars / 8 sections",
+  "two_phase": true,
+  "variation_techniques": [
+    "rhythm augmentation",
+    "register shift +12",
+    "density rise (drums)",
+    "contour inversion",
+    "modal color (III Ab)",
+    "melodic retrograde",
+    "octave doubling",
+    "diminution"
+  ],
+  "artifacts": {
+    "phase2_midi": "MIDI/237-kuramoto-chorale-extended.mid",
+    "phase1_midi": "MIDI/237-kuramoto-chorale-extended-phase1.mid",
+    "audio_ogg": "Audio/237-kuramoto-chorale-extended.ogg",
+    "audio_wav": "Audio/237-kuramoto-chorale-extended.wav"
+  },
+  "verification": {
+    "voice_tracks": 5,
+    "track_length_ticks": 34560,
+    "zero_drift": true,
+    "off_grid": 0,
+    "scale_violations": 0,
+    "chord_violations": 0,
+    "voice_leading_violations": 0,
+    "silence_ratio": 0.109
+  },
+  "soundfont": "FluidR3_GM.sf2",
+  "sources": [
+    "Research/CompositionMethods/methods_db.md:Method 038",
+    "rules/progression.py",
+    "rules/voice_leading.py",
+    "workflows/unitmatrix_composer.py",
+    "Styles/Experimental/069-kuramoto-chorale/compose.py"
+  ]
+}

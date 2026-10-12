@@ -102,9 +102,10 @@ class SoundWave:
         self.weights = np.convolve(weights, smoothing, mode='same')
 
         self.weights = np.repeat(weights, int(self.sample_rate * self.duration / intervals))
-        tail = int(self.sample_rate * self.duration - weights.shape[0])
+        tail = int(self.sample_rate * self.duration - self.weights.shape[0])
         if tail > 0:
-            self.weights = np.concatenate((weights, weights[-1] - weights[-1] / tail * np.arange(tail)))
+            self.weights = np.concatenate((self.weights,
+                                           self.weights[-1] * np.linspace(1, 0, tail + 1)[1:]))
 
     def save(self, wave_file: str) -> str:
         """Write wave data to WAV file."""

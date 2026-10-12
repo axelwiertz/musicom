@@ -1,0 +1,13 @@
+{
+  "sr": 44100,
+  "ch": 2,
+  "duration_s": 74.38,
+  "peak": 0.7689,
+  "silence_ratio": 0.0543,
+  "quiet_secs_mid": 0,
+  "mid_secs": 72,
+  "max_quiet_run_s": 0,
+  "rms_mean": 0.1012,
+  "rms_min": 0.0,
+  "rms_max": 0.1363
+}

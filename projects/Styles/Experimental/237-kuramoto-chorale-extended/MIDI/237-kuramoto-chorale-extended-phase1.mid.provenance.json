@@ -1,0 +1,41 @@
+{
+  "artifact": "237-kuramoto-chorale-extended-phase1.mid",
+  "classification": "ai-generated",
+  "generator": "Method 038 Kuramoto Oscillator Phase Synchronization (KOPS) - PRE-RULES raw draft",
+  "sources": [
+    "Research/CompositionMethods/methods_db.md:Method 038",
+    "workflows/unitmatrix_composer.py",
+    "Styles/Experimental/069-kuramoto-chorale/compose.py (source)"
+  ],
+  "parameters": {
+    "method": 38,
+    "phase": 1,
+    "key": "F dorian",
+    "bpm": 92,
+    "sections": 8,
+    "total_bars": 18,
+    "natural_frequencies_events_per_beat": [
+      0.85,
+      1.0,
+      1.15,
+      1.35
+    ],
+    "coupling_per_section": [
+      0.5,
+      0.8,
+      1.2,
+      1.5,
+      2.0,
+      2.5,
+      3.2,
+      4.0
+    ],
+    "seed": 237,
+    "rework_of": "069-kuramoto-chorale"
+  },
+  "notes": "Phase 1 (rework): raw KOPS draft, single voice, unquantized chromatic pitch, off-grid rhythm by design.",
+  "sha256": "a71d77ad709c3eda001f516f8a86080a278ddab382f5622cc202b4631209be81",
+  "bytes": 700,
+  "created_utc": "2026-10-12T01:14:13.772200+00:00",
+  "provenance_version": "1.0"
+}

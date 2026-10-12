@@ -264,6 +264,10 @@ SP_METHODS = {
     # 2026-10-08 scan
     "SP-101": ("sound.synthesis.modal_blot", "BLOT-style Geometric Modal Resonator Network — 8-mode just-intonation resonators, waveguide strings, formant filters, ring modulation, multiband saturation, FDN memory (Laboratory 0 BLOT-style)"),
     "SP-102": ("sound.effects.raspel_filter", "Raspel-style Saturated Cascade Filter + Wavefolder — 6 filter types (LP2/4/6, HP2/4, BP4), per-stage saturation drive, post-filter Character wavefolder (Kreuzberg Audio Raspel-style)"),
+    # 2026-10-12 scan
+    "SP-103": ("sound.effects.parallel_filter_bank", "Filtopia-style 5-Parallel SEM Filter Bank — 5 parallel 12dB/oct filters (Oberheim SEM-inspired), per-filter cutoff offset/resonance, switchable LP/BP on slots 1&5 (Analogue Solutions Filtopia-style)"),
+    "SP-104": ("sound.generators.param_animator", "Pentaphonic-style Parameter Animator — 16-step modulation pattern generator for 4 synthesis parameters (cutoff/resonance/pitch_mod/gain), per-lane interpolation/depth/speed, 4 loop modes (Cherry Audio Pentaphonic-style)"),
+    "SP-105": ("sound.effects.spectral_panner", "Spectral Brightness Panner — frequency-dependent auto-panner driven by spectral centroid/brightness analysis, independent per-channel paths, virtual centre mode, LFO blend, 3 pan profiles (Sound Particles Brightness Panner 2-style)"),
 }
 
 

@@ -94,7 +94,11 @@ comparable to, and how do I use it in a workflow?*
 ||| `sound/generators/bach_composer.py` | compose_with, BACH_ENGINES (11 engines) | generative (composition) | Kaona B.A.C.H. (11 languages) | engine name + overrides → BachEvent[] |
 ||| `sound/synthesis/modal_blot.py` | BLOTEngine, ModalResonator, WaveguideString, FormantFilter, MultibandSaturator, FeedbackDelayNetwork | synthesis (modal) | Laboratory 0 BLOT | lump geometry + midi_root + seed → modal resonator audio (8-mode just-intonation, waveguide, formant, ring mod, saturator, FDN) |
 ||| `sound/effects/raspel_filter.py` | RaspelProcessor, CascadeFilter, SVF2Pole, Wavefolder | effects (filter/waveshaping) | Kreuzberg Audio Raspel | audio + filter_type/cutoff/resonance/drive/character → saturated filtered + wavefolded audio |
-| `sound/sync/clock.py` | DAWClockBridge | sync | MTC/MIDI clock | bpm → clock pulses |
+|||| `sound/effects/multiband_saturator.py` | MultibandSaturator, BandConfig | effects (saturation/distortion) | Kreuzberg Audio Oberton | audio + 6 LR4-split bands + per-band algo (15 types) + M/S mode + global trim → saturated stereo audio |
+|||| `sound/effects/parallel_filter_bank.py` | ParallelSEMFilterBank, SEMFilter2Pole, FilterSlot | effects (filter) | Analogue Solutions Filtopia | audio + base cutoff → 5 parallel 12dB/oct SEM-style filters with per-slot offset/resonance/mix, summed |
+|||| `sound/generators/param_animator.py` | ParameterAnimator, ParamLane, LoopMode | modulation (sequencer) | Cherry Audio Pentaphonic | 4×16-step modulation patterns → per-sample CV signals (cutoff/resonance/pitch_mod/gain) |
+|||| `sound/effects/spectral_panner.py` | SpectralBrightnessPanner, BrightnessTracker, PanLaw, LFO | effects (spatial) | Sound Particles Brightness Panner 2 | stereo audio → brightness-controlled auto-panned stereo with virtual centre, LFO blend |
+|| `sound/sync/clock.py` | DAWClockBridge | sync | MTC/MIDI clock | bpm → clock pulses |
 | `sound/render/fluidsynth.py` | FluidSynthRenderer | render | SF2 synth | MIDI → WAV |
 | `sound/render/vst.py` | VSTRenderer | render | DAW VST3 | MIDI → VST audio |
 | `sound/render/pipeline.py` | RenderPipeline | render | export chain | MIDI → WAV/OGG/stems |
@@ -104,9 +108,9 @@ comparable to, and how do I use it in a workflow?*
 | Category | Purpose | Key files |
 |---|---|---|
 || **synthesis/** | create audio from scratch | phase_mod, modal, granular, vocal, additive, bowed, mass_spring, polysynth, west_coast, mono_synth, dx7_voice, equation_synth, drum_synth_606, spectral_wavetable, memorymoog_synth, supersaw_swarm, formant_voice, modal_blot |
-| **effects/** | transform existing audio | filter, reverb, fdn_reverb, vowel_filter, tape_delay, multiband, quantize_mod, mastering, production_chain, spectral_gate, tilt_eq, liminal_reverb, scale_locked_granular, overlap_comp, room_reverb, bbd_chorus, shimmer_reverb, subharmonic, raspel_filter |
+|| **effects/** | transform existing audio | filter, reverb, fdn_reverb, vowel_filter, tape_delay, multiband, quantize_mod, mastering, production_chain, spectral_gate, tilt_eq, liminal_reverb, scale_locked_granular, overlap_comp, room_reverb, bbd_chorus, shimmer_reverb, subharmonic, raspel_filter, spectral_panner, parallel_filter_bank |
 | **modular/** | node-graph DSP | graph, math_mod, patch_loader |
-| **generators/** | generative event/pattern engines | event_core, dice, ratchet_seq, complex_noise, micro_timing_seq, trig_cond_seq, param_lock_seq, sample_slicer |
+|| **generators/** | generative event/pattern engines | event_core, dice, ratchet_seq, complex_noise, micro_timing_seq, trig_cond_seq, param_lock_seq, sample_slicer, param_animator |
 | **analysis/** | extract info from audio | pitch, rhythm, chroma |
 | **render/** | symbolic → audio | fluidsynth, vst, pipeline |
 | **tuning/** | microtonal / just intonation | just_intonation |

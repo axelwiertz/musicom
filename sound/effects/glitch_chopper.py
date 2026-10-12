@@ -130,7 +130,10 @@ class ChannelChopper:
             end = min(out_len, start + qstep)
             if self.rng.random() < glitch_p:
                 cur_slot = int(self.rng.integers(0, self.slots))
-            seg = self.bank[cur_slot].copy()
+            # NOTE: bank rows are bar-length with only the first ``step``
+            # samples filled (see capture()); slice to the real slot content
+            # so a window shorter than the bar does not pick up zero padding.
+            seg = self.bank[cur_slot][:step].copy()
             if self.rng.random() < reverse_p:
                 seg = seg[::-1]
             # tile the slot over the quantized window
