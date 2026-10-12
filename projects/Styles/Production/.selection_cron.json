@@ -1,15 +1,15 @@
 {
   "job": "random-style production (SP) layer-aligned",
-  "date": "2026-10-11",
-  "seed": 20261011,
-  "method": "SP-026",
-  "method_module": "sound.effects.phase_vocoder",
-  "method_desc": "Spectral Phase Vocoder Resynthesis",
-  "source_midi": "/opt/data/repos/musicom/projects/Styles/Reggae/076-reggae-lsystem/MIDI/076-reggae-lsystem.mid",
-  "source_project": "Reggae/076-reggae-lsystem/MIDI/076-reggae-lsystem.mid",
-  "registry_size": 42,
+  "date": "2026-10-12",
+  "seed": 20261012,
+  "method": "SP-074",
+  "method_module": "sound.generators.drum_machine",
+  "method_desc": "Eight-Channel Sample Drum Machine + Sequencer (Bullfrog Drums-style)",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Fanfare/006-fanfare-showband-32bar/MIDI/showband32.mid",
+  "source_project": "Fanfare/006-fanfare-showband-32bar/MIDI/showband32.mid",
+  "registry_size": 45,
   "recent_excluded": [
-    "SP-021",
+    "SP-026",
     "SP-069",
     "SP-080",
     "SP-085",
@@ -23,8 +23,8 @@
   ],
   "pool_methods": [
     "SP-011",
+    "SP-021",
     "SP-024",
-    "SP-026",
     "SP-028",
     "SP-032",
     "SP-033",
@@ -55,8 +55,11 @@
     "SP-099",
     "SP-100",
     "SP-101",
-    "SP-102"
+    "SP-102",
+    "SP-103",
+    "SP-104",
+    "SP-105"
   ],
-  "n_candidates": 334,
-  "n_well_formed": 225
+  "n_candidates": 336,
+  "n_well_formed": 227
 }

@@ -290,6 +290,7 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 ||| **SP-109** | Spectral Gating Adaptive Noise Reduction (SG-ANR) | **Post-Processing / DSP** | Noise Suppression / Spectral Cleanup | Frequency-domain noise reduction via per-bin STFT gain masking. Estimates noise profile from silent/noise-only segment (stationary mode) or via continuous EMA noise floor tracking (non-stationary mode), computes a sigmoid gain mask from the per-bin SNR, and applies it to the magnitude STFT while preserving original phase. Reconstructs via overlap-add IFFT. Produces cleaned audio with reduced background hiss, rumble, and ambience. Candidate: `sound/effects/spectral_gate.py`. |
 || **SP-110** | Pulse Width Modulation Synthesis (PWM) | **Synthesis Engines** | Variable-Duty-Cycle Pulse / Analog Pad & String Timbres | Variable duty-cycle pulse wave oscillator with PolyBLEP bandlimited antialiasing. Two sawtooth waves with phase offset $D$ produce pulse wave via subtraction, containing both even and odd harmonics. LFO-modulated duty cycle creates evolving timbre — the classic analog string pad sound. Forms the source oscillator for subtractive signal chains. Candidate: `sound/synthesis/pwm_synthesis.py`. |
 | **SP-111** | Duffing Oscillator Nonlinear Synthesis (DONS) | **Synthesis Engines** | Forced-Nonlinear-Oscillator / Chaotic & Harmonic Organic Timbres | Integrates the forced damped Duffing oscillator $\ddot{x}+\delta\dot{x}+\alpha x+\beta x^3=\gamma\cos(\omega t)$ at audio rate; displacement $x(t)$ IS the sample. Drive frequency $\omega$ = pitch; drive amplitude $\gamma$ = one-knob chaos sweep (pure sine → odd-harmonic mode-locked → double-well strange attractor); seedable initial conditions give deterministic-per-note organic variation. $\mathcal{O}(1)$ per sample. Candidate: `sound/synthesis/duffing_synth.py`. |
+| **SP-112** | Linear Arithmetic Synthesis (LASS) | **Synthesis Engines** | Hybrid PCM-Attack + Subtractive-Sustain (LA) Timbres | Hybrid synthesis (Roland D-50, 1987): a one-shot PCM attack transient (hammer, pluck, breath "chiff") is crossfaded via an enveloped equal-power balance into a subtractive sustain body (PolyBLEP saw/PWM through a resonant lowpass). Partial = PCM or synth source + TVA/TVF envelopes; two partials = tone. Sampler-grade attack realism, synthesizer-grade sustain control. $\mathcal{O}(1)$ per sample per partial. Candidate: `sound/synthesis/la_synthesis.py`. |
 |---|
 
 
@@ -24878,3 +24879,92 @@ This is Amiot's "Fourier space" (2016): every pc-set becomes a vector of complex
 8. **Rhythm-side duality has its own conventions** — the 16-pulse DFT uses $\mathbb{Z}_{16}$, so its "tonic phase" behaves differently from $\mathbb{Z}_{12}$; don't mix anchor-phase semantics across grids, and remember onset sets are usually *sparse* (few pcs) so magnitudes are small — normalize for comparison.
 
 Candidate code path: `rules/fourier_pc_spectra.py` — `pc_set_dft(pcs)` (vectorized $f_A(k)$, returns complex 12-vector), `profile(pcs)` (normalized magnitudes $|f|/n$), `match_profile(target_mags, cardinality=None, weights=None)` (exhaustive 4096-set scan with normalized distance), `me_set(n, g)` (maximally-even pool by generator window), `phase_walk(phi0, v, ks, n_steps)` (designed phase schedule per coefficient), `fourier_tension(fA, fB)` (weighted Fourier distance, the TIV-style tension channel), and `complement_pair(pcs)` (the magnitude-twin). Feeds `rules/subset_network.py` (abstract layer) with per-section (pool, phase schedule, tension) records; concrete realization via `rules/realize.py`.
+# Linear Arithmetic Synthesis (LASS) — SP-112
+
+### Source
+[1] Wikipedia contributors. "Linear arithmetic synthesis." *Wikipedia, The Free Encyclopedia.* — LA synthesis definition (Roland D-50, March 1987), hybrid oscillator technique, PCM attack + synthesized sustain, partial/tone/patch hierarchy, LA32 chip (MT-32), hardware list (D-50/D-550/D-10/D-110/MT-32/JD-800/D-70).
+[2] Roland Corporation. *D-50 Owner's Manual* and *D-50 Structure Diagram* (P= PCM partials, S= synthesizer partials). — Canonical signal-flow: two partials per tone, two tones per patch; TVA (time-variant amplifier) and TVF (time-variant filter) envelopes; balance; pitch envelope; up to 3 LFOs per tone; internal chorus/reverb.
+[3] Vail, M. (2014). *The Synthesizer: A Comprehensive Guide to Understanding, Programming, Playing, and Recording the Ultimate Electronic Music Instrument.* Oxford University Press, pp. 53–54 ("Trend Setting All-Stars: Linear Arithmetic"). — Historical and technical overview of LA synthesis.
+[4] Russ, M. (1987). "Roland D-50 (Parts 1 & 2): Is the Future Linear?" *Sound On Sound*, May/June. — Contemporary two-part explainer of LA synthesis mechanics + Ikutaro Kakehashi interview (the "linear arithmetic" name: timeline assembly of sound elements, no additive connotation).
+[5] SoundBridge (2023). "Linear Arithmetic (LA) Synthesis." soundbridge.io. — Tutorial framing: attack transient as the perceptual key; piano imitation argument (PCM attack for hammer/harmonics, subtractive body for string decay); three components: attack, subtractive body, looped embellishment.
+[6] Munt — *MT-32 Emulator* (open-source LA32 reimplementation, munt.sourceforge.net). — Reference implementation of the LA32 chip: partial summing, TVA/TVF envelope rate tables, PCM interpolation, hardware quirks.
+
+### Layer
+**absolute** — Sound Production (Synthesis Engines)
+Code path: `sound/synthesis/la_synthesis.py`
+
+### Description
+**Linear Arithmetic Synthesis (LASS)** is the Roland D-50 hybrid (1987): it assembles a note's sound **along a timeline** from two complementary partial types. A **PCM partial** plays a one-shot sampled attack transient (hammer strike, pluck, breath "chiff", mallet, voice onset) — the perceptual fingerprint of an instrument — while a **synthesizer partial** generates the sustained body (PolyBLEP saw or PWM pulse through a resonant lowpass) that the listener's ear fills in after the transient decays. An enveloped **balance** law crossfades between the two, so the attack has sampler-grade realism and the sustain has synthesizer-grade control.
+
+The method sits in the hybrid gap of the SP table: full sampling (SP-002 VST3, SP-044 concatenative) keeps real audio but cannot reshape sustain; pure subtractive synthesis (SP-029) has full sustain control but weak attack realism; wavetable/vector (SP-041/SP-047) morph spectra but not transient-vs-body identity. LASS is the classic architecture that splits the two jobs: **memory goes to the transient, synthesis goes to the tail**. It also inherits a third component — the **looped embellishment waveform** (single-cycle PCM loops, synthetic additive-derived waves, inharmonic cycles) — which layers a secondary texture under the subtractive body.
+
+The "linear arithmetic" name comes from Roland's own framing: unlike additive synthesis (spectral summation), LA places *time-line elements* (attack event + body + embellishment) and mixes them with the arithmetic of gains and envelopes — addition (partial mix), subtraction (filtering removes harmonics), and ring-modulation sum/difference on request.
+
+### Technical Mechanics
+
+**Voice architecture** (per UnitMatrix voice = one LA "tone"): two partials — P (PCM) and S (synth) — each with its own TVA envelope, plus a shared balance law $b(t) \in [0,1]$:
+
+$$y(n) = g_P(b(n)) \cdot E_P(n) \cdot x_P(n) \;+\; g_S(b(n)) \cdot E_S(n) \cdot x_S(n)$$
+
+with equal-power (constant-gain) balance gains — the linear-crossfade $-3\,\text{dB}$ dip is avoided:
+
+$$g_P(b) = \cos\!\big(\tfrac{\pi}{2} b\big), \qquad g_S(b) = \sin\!\big(\tfrac{\pi}{2} b\big)$$
+
+**PCM partial** $x_P(n)$ — sample playback with fractional read position $p_n$:
+
+$$p_{n+1} = p_n + r(n), \qquad r(n) = \frac{f_0 \cdot \Pi(n)}{f_{\text{sample}}}$$
+
+where $f_0$ is the note pitch and $\Pi(n)$ is the pitch-envelope multiplier (scoop/chirp). One-shot mode: $x_P = \text{interp}(\text{table}, p_n)$ until $p_n$ passes the table end, then the partial's TVA closes (or balance has already handed over to $S$). Looped mode (embellishment waves): wrap $p_n$ from loop-end back to loop-start. Interpolation is linear (minimum) or cubic (recommended); for $r > 2$ a band-limited mipmap (SP-041 technique) prevents aliasing of the sampled harmonics.
+
+**Synth partial** $x_S(n)$ — phase-accumulator oscillator through a resonant lowpass (ZDF state-variable filter, SP-020, or one-pole-with-resonance approximation):
+
+$$\phi_{n+1} = \big(\phi_n + 2\pi f_0 \Pi(n)/f_s\big) \bmod 2\pi$$
+
+$$\text{saw: } s(\phi) = \tfrac{2\phi}{\pi} - 1, \qquad \text{pulse: } p(\phi) = \begin{cases}+1 & \phi < 2\pi D \\ -1 & \text{else}\end{cases}$$
+
+Both with PolyBLEP edge correction (SP-029/SP-110 convention) so the sustain body is alias-free; duty $D$ is PWM/LFO-modulatable. The filter cutoff follows the TVF envelope plus key tracking:
+
+$$f_c(n) = f_{c0} + (f_{c1} - f_{c0})\, E_{TVF}(n) + k_t\,(f_0 - f_{\text{ref}}), \qquad k_t = \text{key-track amount}$$
+
+**Envelopes** ($E_P$, $E_S$, $E_{TVF}$): D-50-style segment envelopes — 4 time/level pairs (T1..T4, L1..L4 with L4 = sustain level) — piecewise **linear in dB** for TVA (exponential amplitude feel) and linear in Hz for TVF. Velocity scales the peak TVA level and the TVF amount (a hard hit opens the filter and emphasizes the transient):
+
+$$L_{\text{peak}} = L_0 \cdot (\text{vel}/127)^{\gamma}, \qquad \gamma \approx 0.5\text{–}1.0$$
+
+**Balance envelope**: $b(n)$ may be static, enveloped, or LFO-driven — the "timeline" idea: a pluck starts $b \approx 0$ (PCM forward), then blooms to $b \approx 1$ (body forward) over the note; a pad holds $b \approx 1$; a stab holds $b \approx 0$ for its whole short life.
+
+**Cost**: $\mathcal{O}(1)$ per sample per partial, $\mathcal{O}(2)$ per voice (one PCM read + interpolation, one accumulator + PolyBLEP + 2nd-order filter) — roughly 3–4× the cost of a bare SP-110 PWM voice, far below FFT or physical-model methods, comfortably real-time for dozens of voices at 48 kHz in NumPy vectorized blocks.
+
+### Musical Elements Framework
+
+**PITCH**: One pitch source drives both partials — the synth phase accumulator *and* the PCM read rate $r = f_0/f_{\text{sample}}$ — so transient and body are automatically in tune (the D-50's central trick). Pitch envelope $\Pi(n)$ gives scoops/chirps/glides on both layers simultaneously. Key tracking $k_t$ on the filter keeps brightness register-consistent (low notes dark, high notes bright). Per-voice detune between the two partials adds slow beating (chorus-like thickness).
+
+**RHYTHM**: The TVA envelope IS the articulation: a short T1/T2 (5–20 ms) + fast release = stab/percussive; slow attack + long release = pad swells. The attack transient gives each onset a *physical identity* (hammer, pick, breath) so rhythmic passages read as performed rather than synthesized. The balance envelope is a **within-note gesture**: transient-forward attacks that bloom into body create the classic D-50 "breathing" phrase shape — a micro-rhythmic contour inside every held note. Velocity → TVA level + filter opening gives natural accent hierarchy across a groove.
+
+**HARMONY**: Per-voice LA tones at chord frequencies sum on the bus — the D-50 "Fantasia"-style stack: PCM attack partial carries the *pitch-specific* transient (e.g., a plucked 5th), synth partials carry the sustained chord; detune partials per voice for ensemble chorusing. The looped embellishment partial layers inharmonic cycles (SP-063 ring-mod character, SP-017 FM-ish metallic cycles) *under* harmonic bodies — controlled inharmonicity inside a consonant stack.
+
+**STRUCTURE**: Macro-form = a per-section parameter schedule over (balance style, TVF cutoff target $f_{c1}$, key-track amount, PWM duty, embellishment on/off): Intro — stabs, balance pinned PCM; Verse — hybrid, enveloped balance (bloom); Chorus — pads, balance pinned synth, wide filter, embellishment loops on; Bridge — filtered/dark, narrow cutoff; Outro — back to stabs. The balance axis alone defines an entire tension arc (transient-forward = percussive/tense, body-forward = warm/resolved).
+
+**TEXTURE**: Texture is the **transient-vs-body balance position** $b$: $b \to 0$ = pointillistic, articulated, "plucked" texture; $b \to 1$ = sustained, warm, "string" texture; in-between = the layered hybrid. The embellishment loop is a second texture stratum (breath/string/inharmonic shimmer) mixed under the body. Detune + chorus (SP-059) convert solo LA voices into ensemble texture; per-voice independent $b$ trajectories give stratified, section-by-section textural counterpoint.
+
+### UnitMatrix Integration (Voices & Sections)
+
+**Voices** = rows, each an LA tone (PCM partial + synth partial): per-voice state = PCM table id + loop points, synth waveform (saw/pulse + duty), TVA/TVF envelope shapes, balance style, detune, key-track amount, LFO phase (seedable). Voice-level timbre can be automated per section like every other SP engine.
+
+**Sections** = columns, each a parameter cluster $\theta_s$: $f_{c1}$ (brightness target), $k_t$, balance style (pinned-PCM / enveloped-bloom / pinned-synth / LFO-wobble), PWM duty target, embellishment loop id + level, TVA attack/release shape (stab vs pad). Section transitions interpolate $\theta$ over 8–64 samples (one-pole on $f_c$, crossfade on balance) to avoid clicks.
+
+**Cell filling**: for cell $(v,s)$: 1. read pitch → $f_0$, velocity → $L_{\text{peak}}$ + TVF amount, duration → TVA release; 2. load/continue section parameters $\theta_s$; 3. render the cell's sample block (PCM read + synth oscillator + filter + envelopes + balance mix) into the voice buffer; 4. optionally carry LFO phase across cells for seam continuity; 5. sum to mix bus; post-chain (SP-009/SP-032 reverb, SP-007 M/S EQ, SP-053 VBAP panning, SP-059 chorus for ensemble). The zero-drift invariant is untouched — cells stay `MusicUnit` events; audio buffers are per-cell renders padded to `section_len` exactly as in SP-029/SP-110.
+
+### Pitfalls
+
+1. **Naive PCM interpolation aliases/zippers**: nearest-neighbor at high $r$ is gritty; linear is the minimum, cubic recommended; pitch-envelope sweeps move $r$ and can chirp — band-limit with the SP-041 mipmap approach when $r > 2$ or when the table contains high harmonics.
+2. **One-shot transient truncation click**: if the TVA doesn't close before the PCM table end, the attack cuts hard. Start the release before $p_n$ reaches the end, or hand the note fully to the synth partial ($b \to 1$) before the table expires.
+3. **Linear balance dip**: a straight linear crossfade of two uncorrelated signals dips ~3 dB mid-mix (the "hole"). Use the equal-power cosine/sine law — this is one place where the naive implementation audibly fails.
+4. **Aliased sustain body**: a raw saw/pulse without PolyBLEP reintroduces exactly the aliasing the D-50's era suffered; SP-029/SP-110 already set the convention — reuse it.
+5. **Filter zipper noise**: stepping $f_c$ (envelope corner, section change, velocity change) clicks. One-pole-smooth $f_c$ with $\tau \approx 1$–5 ms; also apply key tracking or bass notes will be disproportionately bright (the classic LA mistake).
+6. **Envelope segment shape**: linear-in-amplitude TVA segments sound lumpy; linear-in-dB (exponential) is the D-50 behavior and sounds natural. Keep TVF linear in Hz.
+7. **Transient/body tuning drift**: the read rate $r$ and oscillator frequency must share the *same* $\Pi(n)$ pitch envelope; a mismatch makes the attack audibly out-of-tune with the body (a "double-hit" effect).
+8. **Per-cell state policy**: decide explicitly whether LFO/balance phase is per-cell (fresh, seedable, fully deterministic) or voice-continuous across cells (seamless but stateful); the zero-drift gate concerns MIDI events, not audio — either policy passes, but document it per voice.
+9. **Not a sampler**: LA gives attack realism, not whole-instrument realism — long notes rest on the synthesized body plus embellishment loop; add SP-059 chorus (detune spread) to hide loop sameness and SP-009/SP-032 verb to glue the transient into the space.
+
+---
+Candidate code path: `sound/synthesis/la_synthesis.py` — implements `LAPartial` (PCM read with interpolation/loop modes and synth oscillator with PolyBLEP), `LAVoice` (two partials + balance law + TVA/TVF segment envelopes + key tracking), `balance_gains(b, law="equal_power")`, `la_preset(name)` (D-50 archetypes: stab/pluck/pad/breath/Fantasia-style stack), and a `LACellConfig` for per-cell $\theta_s$ interpolation.

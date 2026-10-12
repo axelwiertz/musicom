@@ -628,6 +628,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | World | Taiko Drum | 116 | 36–67 | accent, rhythm, drone, ornament |
 | World | Pan Flute | 75 | 55–100 | lead, melody, ornament, drone, accent |
 | World | Shakuhachi | 77 | 55–100 | lead, melody, ornament, drone, accent |
+| Synth | Pad 1 (new age) | 88 | 36–96 | pad, harmony, texture, drone, accent |
 | Woodwind | Bagpipe | 109 | 53–96 | lead, melody, ornament, drone, accent |
 | Woodwind | Ocarina | 79 | 55–96 | lead, harmony, accent |
 
@@ -690,7 +691,8 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 ||| ch9/pgm0 | Drums | **Acoustic_Grand_Piano** ✗ (program-0 fallback) |
 ||| 24 | Acoustic Guitar (nylon) | Acoustic_Guitar_nylon ✓ (GM_PROGRAMS[24] = "Acoustic Guitar (nylon)"; FluidR3 preset 24 = "Nylon String Guitar" — internal SF2 name differs cosmetically, no routing impact) |
 ||| 25 | Acoustic Guitar (steel) | Acoustic_Guitar_steel ✓ (GM_PROGRAMS[25] = "Acoustic Guitar (steel)"; FluidR3 preset 25 = "Steel String Guitar" — internal SF2 name differs cosmetically, no routing impact) |
-|| 48 | String Ensemble 1 | String_Ensemble_1 ✓ (GM_PROGRAMS[48] = "String Ensemble 1"; FluidR3 preset 48 = "Strings" — one-word SF2 spelling, cosmetic only, **no quirk**) |
+| 48 | String Ensemble 1 | String_Ensemble_1 ✓ (GM_PROGRAMS[48] = "String Ensemble 1"; FluidR3 preset 48 = "Strings" — one-word SF2 spelling, cosmetic only, **no quirk**) |
+| 88 | Pad 1 (new age) | Pad_1_new_age ✓ (GM_PROGRAMS[88] = "Pad 1 (new age)" → sanitized `Pad_1_new_age` — parens stripped, spaces → underscore; FluidR3 preset 88 = **"Fantasia"** — SF2 internal name differs from GM label, cosmetic only, **no routing impact**; preset 89 = "Warm Pad" is the darker sibling) |
 
 > **Known off-by-one in existing entries**: ~~`trumpet.py` uses 57~~ **FIXED 2026-08-27**: trumpet is now 56 (SF2 preset 56=`SoloTrumpet`). `piano.py`=1 → actually Bright Acoustic Piano (GM #2) — cosmetic label difference only, no routing impact. Legacy registry rows kept as-is for piano; new instruments use 0-indexed programs matching pipeline+SF2.
 
@@ -984,3 +986,50 @@ plucked rhythm). REVERB_TAIL 2.6 s is the longest in the Strings family
 (violin 2.0, harp 2.2) — the pad blooms in space. Layering quirk: idiomatic
 doubling is octaves, NOT unison with another melodic patch (section already
 IS many unison strings — the 2026-09-01 comb-filter lesson).
+
+**Synth Pad added** (2026-10-12): GM88, new **Synth** family first entry — the
+classic slow-attack digital synth pad ("Pad 1 (new age)", the Roland
+D-50-era LA-synthesis choir pad: detuned oscillator stack + chorus + long
+swell), the "Synth Pad" voice that orchestration.md's Pad role lists
+("Strings (sustained), Synth Pad, Organ") — the LAST pad-role voice with NO
+KB entry after string_ensemble landed 2026-10-11. Composition jobs had been
+sending `MidiInstrument.SYNTH_PAD` (= 88) for Pad voices for months (Arabic
+235/071, Ambient evolving v1, Experimental 044) with no KB entry behind it
+(instrument.md + synth_pad.py), verified end-to-end UnitMatrixComposer →
+zero-drift ✓ → MIDI (75 bytes) → FluidSynth WAV (1.63 MB) ✓; RenderPipeline
+stem label `track00_Pad_1_new_age.wav` ✓ (GM_PROGRAMS[88] = "Pad 1 (new
+age)" → sanitized — parens stripped; FluidR3 preset 88 = **"Fantasia"** —
+SF2 internal name differs from the GM label, cosmetic only, **no routing
+impact**; preset 89 = "Warm Pad" is the darker sibling). Enum note: for ONCE
+`MidiInstrument.SYNTH_PAD = 88` matches the raw GM program exactly (unlike
+FLUTE=74 / STRING_ENSEMBLE=49) — do NOT "correct" it. Additive recommended
+(the pad IS a detuned harmonic stack, organ/string-ensemble engine
+precedent: ADDITIVE_HARMONICS pad_warm [1.0,0.8,0.6,0.45,0.3,0.2,0.12] /
+pad_newage [1.0,0.65,0.5,0.35,0.22,0.15,0.1,0.06], SYNTHESIS_DEFAULTS attack
+0.55 s, detune ±0.012 — 2× the string section chorus, stack 4 voices,
+release 0.5 s, sustain 0.9); PhaseModSynth saw-stack is the analog-pad alt
+(FM_DEFAULTS: saw carrier, ratio 1.0, depth 2.0, attack 0.6). Solo-render
+spectral check: 4–8 kHz buzz **8.2%** (clean single patch, no
+comb-filtering). **Additive engine quirk FOUND 2026-10-12**:
+`SoundWave.apply_overtones` leaves `self.frequency` at the TOP partial
+(~7× fundamental), so `get_adsr_weights`' grid step ≈
+1/(duration×top_partial) s and decay_S is PER-GRID-STEP — a pad recipe must
+use decay_S ~1e-4 to hold a 2 s chord (verified: late-sustain envelope max
+0.79 with decay_S 1e-4 vs collapse without; docs updated in instrument.md).
+PhaseModSynth pad smoke: onset/late RMS 0.065 — slow attack confirmed.
+Empirical FluidR3 pitch sweep (RMS, notes 36–108 step 12): preset 88
+audible EVERYWHERE — 36–96 strong (RMS 603–865), 108 audible but soft (RMS
+392) — GM pad patches are full-keyboard, no patch ceiling; range 36–96 is
+the idiomatic WRITING band (mud below C2, noise-shimmer above C7), sweet
+spot 60–84 (C4–C6). Registration proof: `by_name('synth pad')` → Pad 1 (new
+age), `by_program(88)` → Pad 1 (new age), `in_sweet_spot(72)` = True,
+`in_sweet_spot(24)` = False. Registration in `instrument_registry.py` as
+SYNTH_PAD convenience constant. Role: pad, harmony, texture, drone, accent
+— the harmonic canvas, NOT a rhythm/lead voice. REVERB_TAIL 3.2 s is the
+LONGEST in the KB (string ensemble 2.6, harp 2.2) — the pad blooms in
+space. EQ: cut 300 Hz (synth chords pile low-mid), boost 3.8 kHz presence,
+highshelf +9.5 kHz — the new-age AIR is the identity (contrast: string
+ensemble CUTS 8.5 kHz). Layering quirk: idiomatic doubling is octaves or
+zone-splitting (55–79 + 80–96), NEVER unison with another melodic patch
+(the 2026-09-01 comb-filter lesson). Pad-writing quirk: hold chords ≥ 2 s
+or the slow attack never speaks.

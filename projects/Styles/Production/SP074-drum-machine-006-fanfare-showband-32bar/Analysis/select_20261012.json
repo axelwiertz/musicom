@@ -1,0 +1,18 @@
+{
+  "date": "2026-10-12",
+  "method": "SP-074",
+  "method_module": "sound.generators.drum_machine",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Fanfare/006-fanfare-showband-32bar/MIDI/showband32.mid",
+  "recent_excluded": [
+    "SP-026",
+    "SP-069",
+    "SP-080",
+    "SP-085",
+    "SP-091",
+    "SP-092",
+    "SP-098"
+  ],
+  "registry_total": 45,
+  "n_well_formed": 227,
+  "n_candidates": 336
+}

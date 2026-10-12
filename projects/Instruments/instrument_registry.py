@@ -84,6 +84,7 @@ _INSTRUMENT_MODULES = {
     "Woodwind.whistle.whistle": "whistle",
     "Woodwind.soprano_sax.soprano_sax": "soprano_sax",
     "Bass.electric_bass.electric_bass": "electric_bass",
+    "Synth.synth_pad.synth_pad": "synth_pad",
 }
 
 _FIELDS = (
@@ -265,6 +266,7 @@ SOPRANO_SAX = ALL_INSTRUMENTS["soprano_sax"]
 ELECTRIC_BASS = ALL_INSTRUMENTS["electric_bass"]
 PIZZICATO_STRINGS = ALL_INSTRUMENTS["pizzicato_strings"]
 STRING_ENSEMBLE = ALL_INSTRUMENTS["string_ensemble"]
+SYNTH_PAD = ALL_INSTRUMENTS["synth_pad"]
 # Voice-like family — one instrument per non-vocal source. The `voice_like`
 # key is the umbrella (vox humana); each member is also addressable directly.
 VOICE_LIKE = ALL_INSTRUMENTS["voice_like"]
@@ -390,6 +392,8 @@ def registry_table():
             role = "bass, rhythm, countermelody, accent"
         elif low == "acoustic guitar (steel)":
             role = "harmony, rhythm, strum, lead, melody, ornament, countermelody"
+        elif low == "pad 1 (new age)":
+            role = "pad, harmony, texture, drone, accent"
         else:
             role = "lead, harmony, accent"
         rng = f"{inst.range_min}–{inst.range_max}" if inst.range_min else "-"
@@ -582,3 +586,13 @@ if __name__ == "__main__":
     print("  PIZZICATO_STRINGS.in_sweet_spot(30) =", PIZZICATO_STRINGS.in_sweet_spot(30))
     print("  PIZZICATO_STRINGS.range_min =", PIZZICATO_STRINGS.range_min, "PIZZICATO_STRINGS.range_max =", PIZZICATO_STRINGS.range_max)
     print("  PIZZICATO_STRINGS.stem_label =", repr(PIZZICATO_STRINGS.stem_label))
+    print()
+    print("=== Synth Pad (Pad 1 new age, GM88) ===")
+    print("  SYNTH_PAD.midi_program =", SYNTH_PAD.midi_program, "(should be 88)")
+    print("  by_name('synth pad') =", by_name("synth pad"))
+    print("  by_name('pad 1 (new age)') =", by_name("pad 1 (new age)"))
+    print("  by_program(88) =", by_program(88))
+    print("  SYNTH_PAD.in_sweet_spot(72) =", SYNTH_PAD.in_sweet_spot(72))
+    print("  SYNTH_PAD.in_sweet_spot(24) =", SYNTH_PAD.in_sweet_spot(24))
+    print("  SYNTH_PAD.range_min =", SYNTH_PAD.range_min, "SYNTH_PAD.range_max =", SYNTH_PAD.range_max)
+    print("  SYNTH_PAD.stem_label =", repr(SYNTH_PAD.stem_label))

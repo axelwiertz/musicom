@@ -120,6 +120,7 @@ Classification of active Musicom composition methods categorized by their primar
 | **110** | concrete | Neural Cellular Automata Composition (NCA-C) | **AI-Driven** | Pitch, Rhythm, Harmony, Structure, Texture | Variable (Seed/Section-conditioned) | Grid-Locked / Continuous | Macro / NCA Timesteps | $\mathcal{O}(T \cdot V \cdot C \cdot K)$ | Differentiable local CNN update rules trained via gradient descent through time (BPTT) generate musical structure on a 2D grid (voices × time slots). Seed → iterative self-organization → decoded events fill UnitMatrix. AI-Driven counterpart to 021 CA/070 CML-C: learned rather than hand-crafted local rules. |
 | **111** | concrete | Vuza Tiling Canon Composition (VTCC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Weak (Scale-mapped) | Grid-Locked | Macro / Canon Period | $\mathcal{O}(n \log n)$ FFT division, $\mathcal{O}(n^2)$ search | Group-theoretic rhythmic canon as an exact tiling A ⊕ B = ℤ_n: |A| notes × |B| entry-voices interlock so every beat is struck exactly once (no collisions, no gaps — perfect hocket). Vuza (RCMC) canons are non-periodic factorizations: neither motif nor entries repeat (smallest n = 72 = 2³·3²); duality/affine/zoom morphs = sections. Deterministic combinatorial sibling of 012 Euclidean / 069 CWCC (evenness) and 089 CRCM (interlock); aperiodic foil to 077 DBUC. |
 | **112** | concrete | Costas Array Distinct-Displacement Composition (CADDC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Weak (Scale-mapped) | Grid-Locked / Continuous | Meso / Array Order | $\mathcal{O}(n^2)$ verify, $\mathcal{O}(n \log n)$ Welch construction | 2D Costas arrays (Costas 1965): n dots on an n×n pitch-time grid, one per row and column, all n(n−1)/2 displacement vectors (lag, interval) pairwise distinct — the 2D generalization of 090 Golomb Ruler GRDC. Every pair of notes has a unique (lag, interval) signature: no interval repeats at any fixed lag (verified: Welch p=13 melody = 11 distinct stepwise intervals), thumbtack self-similarity = no hidden transposition at any offset. Deterministic Welch (primitive roots, order p−1) and Lempel–Golomb (finite fields, order q−2/q−3) constructions; dihedral/time-reversal/pitch-inversion morphs = sections; NAKCA variant forbids stepwise motion in both axes. Sibling of 090 GRDC (1D→2D), 065 TTSMC (aggregate rows) and 111 VTCC (hocket); deterministic foil to 053 LFC leaps. |
+| **113** | abstract | Pitch-Class Fourier Spectrum Composition (PCFSC) | **Rules-Based** | Pitch, Harmony, Structure, Texture | Strong (Fourier-phase-guided) | Grid-Locked / Continuous | Meso / Phase Trajectory | $\mathcal{O}(4096 \cdot 12)$ profile match, $\mathcal{O}(12)$/step gen | Designs pitch-class sets and progressions in the DFT over $\mathbb{Z}_{12}$ (Amiot 2016): chord/scale quality = magnitude spectrum $\lvert f_A(k) \rvert$ of the pc-set — whole-tone energy only at k=0,6; octatonic only at k=0,4,8; the 7-note ME (diatonic class) attains the max fifth-coefficient $\lvert f(5) \rvert = 2+\sqrt{3}$ (verified by exhaustive $\binom{12}{7}$ search); major/minor triads are magnitude-twins — mode lives in PHASE, not magnitude (verified: identical $|f|$ arrays, different $\arg f_5$). Tonic position/function = Fourier phase; transposition = phase rotation (verified: $T_7$ rotates $\arg f_1$ by $7\pi/6$). Composition = a trajectory in Fourier space: per-section target magnitude profile + designed phase walk yield the pitch-pool sequence and tension curve; tension = weighted Fourier-space distance between successive sets (Bernardes TIV 2016); magnitude-twin complement pairs (diatonic $\cong$ pentatonic) drive subset pairing. Abstract layer: feeds rules/subset_network.py. Fourier cousin of 039 SMA (audio-domain) and 051 SGLM (spectral-graph); phase-driven foil to 095 CTC and 104 PSSC. |
 |||### Source
 |Sakellariou, J., Tria, F., Loreto, V. & Pachet, F. (2017). "Maximum entropy models capture melodic styles." *Scientific Reports* 7, 9172. arXiv:1610.03414. — Jaynes, E. T. (1957). "Information theory and statistical mechanics." *Physical Review* 106, 620–630.
 
@@ -289,6 +290,7 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 ||| **SP-109** | Spectral Gating Adaptive Noise Reduction (SG-ANR) | **Post-Processing / DSP** | Noise Suppression / Spectral Cleanup | Frequency-domain noise reduction via per-bin STFT gain masking. Estimates noise profile from silent/noise-only segment (stationary mode) or via continuous EMA noise floor tracking (non-stationary mode), computes a sigmoid gain mask from the per-bin SNR, and applies it to the magnitude STFT while preserving original phase. Reconstructs via overlap-add IFFT. Produces cleaned audio with reduced background hiss, rumble, and ambience. Candidate: `sound/effects/spectral_gate.py`. |
 || **SP-110** | Pulse Width Modulation Synthesis (PWM) | **Synthesis Engines** | Variable-Duty-Cycle Pulse / Analog Pad & String Timbres | Variable duty-cycle pulse wave oscillator with PolyBLEP bandlimited antialiasing. Two sawtooth waves with phase offset $D$ produce pulse wave via subtraction, containing both even and odd harmonics. LFO-modulated duty cycle creates evolving timbre — the classic analog string pad sound. Forms the source oscillator for subtractive signal chains. Candidate: `sound/synthesis/pwm_synthesis.py`. |
 | **SP-111** | Duffing Oscillator Nonlinear Synthesis (DONS) | **Synthesis Engines** | Forced-Nonlinear-Oscillator / Chaotic & Harmonic Organic Timbres | Integrates the forced damped Duffing oscillator $\ddot{x}+\delta\dot{x}+\alpha x+\beta x^3=\gamma\cos(\omega t)$ at audio rate; displacement $x(t)$ IS the sample. Drive frequency $\omega$ = pitch; drive amplitude $\gamma$ = one-knob chaos sweep (pure sine → odd-harmonic mode-locked → double-well strange attractor); seedable initial conditions give deterministic-per-note organic variation. $\mathcal{O}(1)$ per sample. Candidate: `sound/synthesis/duffing_synth.py`. |
+| **SP-112** | Linear Arithmetic Synthesis (LASS) | **Synthesis Engines** | Hybrid PCM-Attack + Subtractive-Sustain (LA) Timbres | Hybrid synthesis (Roland D-50, 1987): a one-shot PCM attack transient (hammer, pluck, breath "chiff") is crossfaded via an enveloped equal-power balance into a subtractive sustain body (PolyBLEP saw/PWM through a resonant lowpass). Partial = PCM or synth source + TVA/TVF envelopes; two partials = tone. Sampler-grade attack realism, synthesizer-grade sustain control. $\mathcal{O}(1)$ per sample per partial. Candidate: `sound/synthesis/la_synthesis.py`. |
 |---|
 
 
@@ -24798,3 +24800,171 @@ $$A(t) \propto e^{-\delta t/2}\ \text{after drive stops}$$
 ---
 
 Candidate code path: `sound/synthesis/duffing_synth.py` — implements `DuffingVoice` (state $x, v, \theta$ accumulator; `render_block(n_samples, f, vel, gamma_env)` via semi-implicit Euler), `duffing_parameter_preset(name)` (the atlas: linear/mode-locked/chaotic/double-well), `seed_from_note(voice, note_idx)` (deterministic initial conditions), and a `DuffingCellConfig` for per-cell $\theta_s$ interpolation.
+---
+
+### Source
+
+Emmanuel Amiot, *Music through Fourier Space: Discrete Fourier Transform in Music Theory* (Springer, 2016) — the definitive treatment: pc-set DFT, magnitudes/phases, maximally even sets, complement isospectrality. — Amiot, E. (2007). "David Lewin and Maximally Even Sets." *Journal of Mathematics and Music* 1(2), 63–93. — Lewin, D. (1959). "Intervallic Relations between Two Collections of Integers." *Journal of Music Theory* 3(2), 298–301 (the original Fourier-system idea); Lewin, D. (2001). "Special Cases of the Interval Function between Pitch-Class Sets x and y." *JMT* 45(1). — Quinn, I. (2006). "General Equal-Tempered Harmony: Parts 2 and 3." *Perspectives of New Music* 44(2) / *Iowa City* 45(1); Quinn, I. (2004). *A Unified Theory of Chord Quality in Equal Temperaments* (PhD diss., University of Rochester) — chord quality = Fourier magnitudes. — Yust, J. (2019). "Stylistic Information in Pitch-Class Distributions." *Journal of New Music Research* 48(2), with the phase-side results; Yust, J. (2017). "Review of Amiot, Music through Fourier Space." *Music Theory Online* 23(3); Chiu, Y.-M. (2021). "Macroharmonic Progressions through the Discrete Fourier Transform." *Music Theory Online* 27(3). — Bernardes, G., Cocharro, D., Guedes, C., & Davies, M. E. P. (2016). "Harmony Generation Driven by a Perceptually Motivated Tonal Interval Space." *ACM Computers in Entertainment* 14(2), 6 — the Tonal Interval Vector (weighted DFT of chroma) as a working harmony-generation objective. — Amiot, E. & Sethares, W. (2011). "An Algebra for Periodic Rhythms and Scales." *Computer Music Journal* 35(1) — the rhythm-side DFT dual.
+
+### Layer
+
+**abstract** — PCFSC designs pitch-class *pools* (subsets of $\mathbb{Z}_{12}$), their *progressions* (Fourier-space trajectories), and the *tension curve* (Fourier distance between successive sets). It emits no concrete events: no pitches, onsets, or durations are fixed until a realize layer maps each pool to actual notes (register, voicing, voice-leading via `rules/realize.py`). Output contract matches the abstract layer exactly — a transposition- and register-invariant plan — and feeds `rules/subset_network.py` like 095 CTC / 099 SSMC / 104 PSSC. Candidate module `rules/fourier_pc_spectra.py` (rules/, not generators/).
+
+### Paradigm
+
+**Rules-Based** — deterministic, algebraic construction. The DFT over $\mathbb{Z}_{12}$ is exact mathematics: given a target Fourier profile and phase schedule, the pc-set sequence is found by exhaustive search (2¹² = 4096 subsets — closed-form, no randomness) or by direct maximally-even/coset construction; the phase walk is a designed curve. No stochastic sampling (contrast 084 ZMRC), no nature dynamics (contrast 040 Perlin), no learned parameters (contrast 042 NST / 046 VAE-LSI). The only freedom is compositional: which profile, which phase anchors, which walk — all chosen deterministically; same inputs, same plan.
+
+### Description
+
+**Pitch-Class Fourier Spectrum Composition (PCFSC)** composes from the **discrete Fourier transform of a pitch-class set** — the map that sends a subset $A \subseteq \mathbb{Z}_{12}$ to its 12 Fourier coefficients
+
+$$f_A(k) = \sum_{a \in A} e^{2\pi i k a / 12}, \qquad k = 0, 1, \dots, 11.$$
+
+This is Amiot's "Fourier space" (2016): every pc-set becomes a vector of complex numbers; two views of the same vector carry two different musical readings:
+
+- **Magnitude $|f_A(k)|$ = the *quality* spectrum.** $|f_A(k)|$ measures how strongly the set is structured by the $k$-th even division of the octave (whole-tone for $k=6$, diminished-seventh for $k=3$, augmented-triad for $k=4$, ...). Verified spectra (all computed with $e^{2\pi i/12}$):
+
+  | set | $|f|$ profile (k=0..11) | reading |
+  |---|---|---|
+  | whole-tone $\{0,2,4,6,8,10\}$ | $[6,0,0,0,0,0,6,0,0,0,0,0]$ | energy only at $k=0,6$ — pure tritone/whole-tone division |
+  | octatonic $\{0,1,3,4,6,7,9,10\}$ | $[8,0,0,0,4,0,0,0,4,0,0,0]$ | energy only at $k=0,4,8$ — the diminished-seventh lattice |
+  | diatonic (Ionian) $\{0,2,4,5,7,9,11\}$ | $[7,\,{.}27,\,1,\,1,\,1,\,3.73,\,1,\,3.73,\,1,\,1,\,1,\,{.}27]$ | peak at $k=5,7$ = the fourth/fifth direction |
+  | pentatonic $\{0,2,4,7,9\}$ | same as diatonic at $k{=}1..11$ (cardinality 5 at $k{=}0$) | complement twin |
+  | major triad $\{0,4,7\}$ | $[3,\;{.}52,\;1,\;2.24,\;1.73,\;1.93,\;1,\;1.93,\;1.73,\;2.24,\;1,\;{.}52]$ | broad spread |
+  | minor triad $\{0,3,7\}$ | **identical to major** | magnitude cannot see mode! |
+
+  The magnitude spectrum is a *Fourier transform of the interval-class vector* — verified: $|f_A(k)|^2 = n + 2\sum_{j=0}^{5} \mathrm{icv}(j)\cos(2\pi k(j{+}1)/12)$ holds for every tested set (maj/min/diatonic) — which is why major and minor triads, sharing the ICV $[001110]$, are magnitude-twins (Lewin 1959; Quinn 2006: chord quality *is* the magnitude profile).
+
+- **Phase $\arg f_A(k)$ = the *position*/function.** Transposition by $t$ rotates every phase by exactly $2\pi k t/12$ (verified numerically: $T_7$ shifts $\arg f_1$ by $7\pi/6$), so phase pins the set's *location* on the transposition circle; magnitudes are invariant. Major vs minor differ *only* in phase (verified: $\arg f_5$ = $-0.785$ for C major vs $+0.262$ for C minor) — Yust's reading of Fourier phase as tonal function (2019): the phase of the dominant coefficient tracks where the collection "hears" its tonic, dominant, and mode.
+
+**Compositional machinery** (all steps deterministic):
+
+1. **Profile design.** A section's harmony is a target magnitude profile $\{T_k\}$, $k \in 1..11$ (with $T_0$ = cardinality). Style knowledge lives here as *spectral archetypes*: tonal = energy at $k=5,7$; whole-tone/haze = energy at $k=6$; octatonic/dramatic = energy at $k=4,8$; atonal noise = flat profile. Verified extremal facts: the 7-note maximally-even class (Lydian/Ionian) *attains* the maximum possible fifth-coefficient, $|f_5| = 2+\sqrt{3} \approx 3.732$ (exhaustive check over all $\binom{12}{7} = 792$ sets; the $k{=}5$ max is also attained by the non-ME set $\{0,1,3,5,6,8,10\}$, so "fifthiness" alone does not pin the diatonic — combine with Me). The regular divisions are exact: $|f_4(\text{aug triads})| = 3$, $|f_3(\dim7)| = 4$, $|f_6(\text{whole-tone})| = 6$, $|f_4(\text{octatonic})| = 4$.
+2. **Set matching.** Match pc-sets by normalized profile distance $D(A) = \sum_k w_k (|f_A(k)|/n - T_k)^2$, minimized by exhaustive search over all 4096 subsets (trivial cost) — or direct construction: cosets of the kernel of $k \mapsto ka$ for the regular divisions, and the one-generator window $\{0, g, 2g, \dots, (n{-}1)g\} \bmod 12$ ($\gcd(g,12)=1$) for ME pools. Either way the pool list is closed-form.
+3. **Phase trajectory (the actual composition).** The tonic/anchor position is a designed phase curve $\phi(k, t)$ for the dominant coefficients — a continuous walk $\phi(t) = \phi_0 + v \cdot t$ *is* a transposition drift (TURN), a step to a new anchor *is* a modulation (LIFT/TENSE), a return to the opening phase *is* a resolution (HOME). Because phase rotates phases at rate $k$ per transposition step, a single designed phase curve yields *coefficient-specific* motion — e.g. $+|f_5|$ weight pulls the fifth-layer, $-|f_6|$ suppresses the tritone layer — a genuinely new control surface: you steer harmony by *directly specifying which Fourier layers are active and where they point*.
+4. **Tension curve.** Tension between successive sets = weighted distance in Fourier space, $\|f_{A_{t+1}} - f_{A_t}\|$ (the Bernardes Tonal-Interval-Space distance, 2016); harmonic rhythm = the phase velocity $v = \Delta\phi/\Delta t$. Both are outputs of the abstract layer, delivered with the pool sequence.
+5. **Complement pairing.** $A$ and its complement have identical magnitudes at all $k \neq 0$ (verified: diatonic $\cong$ pentatonic), so a pool and its complement are two *densities of the same harmony* — the abstract layer exposes this pair structure for texture layering.
+
+**Complexity.** Profile match: $\mathcal{O}(4096 \cdot 12)$ one-time per section (closed-form; or $\mathcal{O}(n)$ by construction). Phase walk and tension: $\mathcal{O}(1)$ per step. Total $\mathcal{O}(12)$ per generated position — cheaper than any trained method and cheaper than 051 SGLM's eigendecomposition; only the 4096-subset profile scan is non-constant, and it is per-section, not per-event.
+
+### Musical Elements Framework
+
+**PITCH**: The abstract output is a *sequence of pc-pools* (one per position) plus a phase schedule; actual pitch events are realized downstream (`rules/realize.py`, register/voicing). The pool's cardinality (the $T_0$ constraint) sets the pitch vocabulary per position — sparse pools (triads) for melody, full pools (7–8 note ME sets) for drones. Pitch *role* is Fourier-native: scale steps weighted by their contribution to $|f_5|$ are "fifth-functional" (dominant-side), steps contributing to $|f_6|$ are tritone/tension carriers. Conjunctness is *not* guaranteed by the abstract layer — the phase walk is pitch-set motion, not step motion; stepwise leading is installed at realize time (or by choosing pools whose successive intersection is large, which *is* controllable in Fourier space: overlapping magnitude profiles yield parsimonious pool overlaps).
+
+**RHYTHM**: Two channels. (a) **Harmonic rhythm** = phase velocity $v = \Delta\phi/\Delta t$ of the anchor coefficient: slow $v$ = long pools (static harmony), fast $v$ = fast-changing pools (harmonic density); a $v$-curve over the piece is a designed tension/rhythm envelope. (b) **Onset patterns** via the rhythm-side DFT dual (Amiot–Sethares 2011): an onset set $R \subseteq \mathbb{Z}_{16}$ has the same Fourier algebra; the same profile machinery schedules accents/onsets with a chosen evenness spectrum (e.g. energy at $k=4$ of a 16-grid = 4-on-the-floor, energy at odd $k$ = swung/limping). The two channels are independent profiles — meter and harmony each get their own spectrum.
+
+**HARMONY**: The core element. Chord/scale quality = magnitude profile (Quinn); harmonic function = phase of the dominant coefficient (Yust); progression = a path through Fourier space; voice-leading smoothness = overlap between consecutive pools (profile similarity); resolution = phase return to the opening anchor; mode (major/minor) = *phase choice*, since magnitude is mode-blind — a fact most harmonic theories miss and PCFSC exposes directly. The TIV distance of Bernardes et al. (2016) is exactly the tension channel here, which is the same machinery their *automatic harmony generator* uses.
+
+**STRUCTURE**: Macro-form = a designed trajectory through *quality space*: each section is a (profile target, anchor phase, phase-velocity) triple. Verified-typical arc: Intro — whole-tone-ish profile (energy at 6, ambiguous gravity), anchor $\phi_0$; Verse — diatonic profile (energy at 5,7), anchor T, slow $v$; Chorus — triad-profile pools with dominant-phase excursions (an excursion is a temporary phase target, i.e. a temporary transposition/function); Bridge — octatonic profile (energy at 4,8), high phase velocity; Outro — return to the intro profile at anchor $\phi_0$ (HOME). Modulation = a phase step to a new anchor; the step size *is* the transposition interval, visible in every coefficient.
+
+**TEXTURE**: Complement twins give built-in layering: a diatonic pool and its pentatonic complement are the "same harmony at two densities", so a melody pool (pentatonic, sparse) over a drone pool (diatonic, full) cannot clash — they share one quality spectrum. Per-voice phase roles (below) create heterophonic drift — voices exploring the same quality at different phase rates. The magnitude profile's *flatness* sets textural evenness: peaked profiles = one dominant sonority (homophony), flat profiles = non-hierarchical pointillism.
+
+### UnitMatrix Integration (Voices & Sections)
+
+**Voices** = rows, each with a *Fourier role*: assign voice $v$ the phase target of coefficient $k_v$ — e.g. Voice 1 (Melody) tracks the $k=1$ phase (tonic-drift contour), Voice 2 (Harmony) tracks $k=5$ (fifth/dominant side), Voice 3 (Bass) tracks $k=7$ (= $|f_7| = |f_5|$, the fourth side, grounding), higher voices track $k=3,4$ for color layers. Voices share the section's magnitude profile (same quality region) but walk their coefficient's phase at per-voice rates — shared quality, independent position = coherent-but-independent polyphony. Each cell $(v,s)$ then holds a *realized pool*: the abstract layer hands `rules/subset_network.py` the pool sequence + phase schedule; the concrete layer realizes each pool into `MusicUnit`s (voicing, register, articulation via `create_note_unit`/`create_chord_unit` or `rules/realize.py`'s `realize_progression(..., smooth=True)` for voice-leading continuity).
+
+**Sections** = columns, each a (profile, anchor, velocity) triple: the abstract-section map. A typical 5-section form in quality space: Intro (whole-tone profile, anchor $\phi_A$, $v{=}0$), Verse (diatonic profile, $\phi_T$, slow), Chorus (triad-profile pools + dominant excursions, medium $v$), Bridge (octatonic profile, wandering $\phi$, fast), Outro (return to Intro triple — HOME). Section seams = phase-step events or profile swaps; because every section is a closed-form set family, the transition between any two sections is a *computed* minimal-phase-step modulation rather than a hand-written pivot.
+
+**Cell filling** (concrete layer, zero-drift invariant untouched): 1. read section triple $s$; 2. match (or construct) the pc-pool for the section's positions; 3. per voice, walk the coefficient-$k_v$ phase schedule → pool transposition/selection per position; 4. realize each pool to events with `rules/realize.py` (register wraps octaves, smooth voice-leading across positions), pack into `MusicUnit`s and pad to `section_len` (terminal landmark) so `composer.validate()` passes. `Voices` = rows, `Sections` = columns, `Cells` = per-voice per-section MusicUnits, exactly per the abstract→concrete contract in LAYER_ARCHITECTURE.md.
+
+### Pitfalls
+
+1. **Magnitude is mode-blind (and quality-blind to inversion of the ICV)**. Major and minor triads have *identical* magnitudes (verified), and any two sets with the same ICV do. Design only magnitude profiles and the piece is a mode-less "neutral" harmony; mode, function, and position live in phase. Always specify phase targets for the dominant coefficients, not just magnitudes.
+2. **Phase is only meaningful where magnitude is large** (Yust). $|f_A(6)| = 0$ for the whole-tone set — a phase target there is noise. Gate phase constraints by magnitude: constrain $\arg f_k$ only when $|f_k| > \varepsilon$ (e.g. half the coefficient's extremum).
+3. **Profiles are not unique** — the $k{=}5$ maximum $2+\sqrt3$ is attained by several 7-note sets (verified), and complements share all $k\neq0$ magnitudes. A magnitude target is a *family* of pools; pin the family with cardinality ($T_0$), ME-ness, or explicit phase checks, or the same profile will silently produce unrelated sonorities.
+4. **The ICV identity double-counts** — $|f(k)|^2$ is determined by the ICV, so imposing both a full ICV target *and* a magnitude profile is redundant at best, contradictory at worst. Pick one representation; the Fourier one is the better-conditioned (it diagonalizes transposition).
+5. **$k=0$ (cardinality) dominates naive profile distance** — a 12-note profile distance grossly exaggerates cardinality mismatch. Normalize by $n$ (use $|f|/n$) and drop or down-weight $k=0$ when the goal is *quality*, not density.
+6. **Phase walk = transposition drift by construction** — a continuous phase curve continuously transposes the pool, which the ear hears as panning/shimmer, not melody. This is desirable only in controlled doses; for stable tonality use piecewise-constant phase with steps, or slow $v$ and let the realize layer re-anchor registers.
+7. **Abstract layer delivers pools, not notes** — a pool sequence has no durations, velocities, or voicings; skipping the realize step produces a plan, not a piece. Pair PCFSC with a concrete voice-leading realizer (001, 011, 050, 056) and keep the zero-drift gate.
+8. **Rhythm-side duality has its own conventions** — the 16-pulse DFT uses $\mathbb{Z}_{16}$, so its "tonic phase" behaves differently from $\mathbb{Z}_{12}$; don't mix anchor-phase semantics across grids, and remember onset sets are usually *sparse* (few pcs) so magnitudes are small — normalize for comparison.
+
+Candidate code path: `rules/fourier_pc_spectra.py` — `pc_set_dft(pcs)` (vectorized $f_A(k)$, returns complex 12-vector), `profile(pcs)` (normalized magnitudes $|f|/n$), `match_profile(target_mags, cardinality=None, weights=None)` (exhaustive 4096-set scan with normalized distance), `me_set(n, g)` (maximally-even pool by generator window), `phase_walk(phi0, v, ks, n_steps)` (designed phase schedule per coefficient), `fourier_tension(fA, fB)` (weighted Fourier distance, the TIV-style tension channel), and `complement_pair(pcs)` (the magnitude-twin). Feeds `rules/subset_network.py` (abstract layer) with per-section (pool, phase schedule, tension) records; concrete realization via `rules/realize.py`.
+# Linear Arithmetic Synthesis (LASS) — SP-112
+
+### Source
+[1] Wikipedia contributors. "Linear arithmetic synthesis." *Wikipedia, The Free Encyclopedia.* — LA synthesis definition (Roland D-50, March 1987), hybrid oscillator technique, PCM attack + synthesized sustain, partial/tone/patch hierarchy, LA32 chip (MT-32), hardware list (D-50/D-550/D-10/D-110/MT-32/JD-800/D-70).
+[2] Roland Corporation. *D-50 Owner's Manual* and *D-50 Structure Diagram* (P= PCM partials, S= synthesizer partials). — Canonical signal-flow: two partials per tone, two tones per patch; TVA (time-variant amplifier) and TVF (time-variant filter) envelopes; balance; pitch envelope; up to 3 LFOs per tone; internal chorus/reverb.
+[3] Vail, M. (2014). *The Synthesizer: A Comprehensive Guide to Understanding, Programming, Playing, and Recording the Ultimate Electronic Music Instrument.* Oxford University Press, pp. 53–54 ("Trend Setting All-Stars: Linear Arithmetic"). — Historical and technical overview of LA synthesis.
+[4] Russ, M. (1987). "Roland D-50 (Parts 1 & 2): Is the Future Linear?" *Sound On Sound*, May/June. — Contemporary two-part explainer of LA synthesis mechanics + Ikutaro Kakehashi interview (the "linear arithmetic" name: timeline assembly of sound elements, no additive connotation).
+[5] SoundBridge (2023). "Linear Arithmetic (LA) Synthesis." soundbridge.io. — Tutorial framing: attack transient as the perceptual key; piano imitation argument (PCM attack for hammer/harmonics, subtractive body for string decay); three components: attack, subtractive body, looped embellishment.
+[6] Munt — *MT-32 Emulator* (open-source LA32 reimplementation, munt.sourceforge.net). — Reference implementation of the LA32 chip: partial summing, TVA/TVF envelope rate tables, PCM interpolation, hardware quirks.
+
+### Layer
+**absolute** — Sound Production (Synthesis Engines)
+Code path: `sound/synthesis/la_synthesis.py`
+
+### Description
+**Linear Arithmetic Synthesis (LASS)** is the Roland D-50 hybrid (1987): it assembles a note's sound **along a timeline** from two complementary partial types. A **PCM partial** plays a one-shot sampled attack transient (hammer strike, pluck, breath "chiff", mallet, voice onset) — the perceptual fingerprint of an instrument — while a **synthesizer partial** generates the sustained body (PolyBLEP saw or PWM pulse through a resonant lowpass) that the listener's ear fills in after the transient decays. An enveloped **balance** law crossfades between the two, so the attack has sampler-grade realism and the sustain has synthesizer-grade control.
+
+The method sits in the hybrid gap of the SP table: full sampling (SP-002 VST3, SP-044 concatenative) keeps real audio but cannot reshape sustain; pure subtractive synthesis (SP-029) has full sustain control but weak attack realism; wavetable/vector (SP-041/SP-047) morph spectra but not transient-vs-body identity. LASS is the classic architecture that splits the two jobs: **memory goes to the transient, synthesis goes to the tail**. It also inherits a third component — the **looped embellishment waveform** (single-cycle PCM loops, synthetic additive-derived waves, inharmonic cycles) — which layers a secondary texture under the subtractive body.
+
+The "linear arithmetic" name comes from Roland's own framing: unlike additive synthesis (spectral summation), LA places *time-line elements* (attack event + body + embellishment) and mixes them with the arithmetic of gains and envelopes — addition (partial mix), subtraction (filtering removes harmonics), and ring-modulation sum/difference on request.
+
+### Technical Mechanics
+
+**Voice architecture** (per UnitMatrix voice = one LA "tone"): two partials — P (PCM) and S (synth) — each with its own TVA envelope, plus a shared balance law $b(t) \in [0,1]$:
+
+$$y(n) = g_P(b(n)) \cdot E_P(n) \cdot x_P(n) \;+\; g_S(b(n)) \cdot E_S(n) \cdot x_S(n)$$
+
+with equal-power (constant-gain) balance gains — the linear-crossfade $-3\,\text{dB}$ dip is avoided:
+
+$$g_P(b) = \cos\!\big(\tfrac{\pi}{2} b\big), \qquad g_S(b) = \sin\!\big(\tfrac{\pi}{2} b\big)$$
+
+**PCM partial** $x_P(n)$ — sample playback with fractional read position $p_n$:
+
+$$p_{n+1} = p_n + r(n), \qquad r(n) = \frac{f_0 \cdot \Pi(n)}{f_{\text{sample}}}$$
+
+where $f_0$ is the note pitch and $\Pi(n)$ is the pitch-envelope multiplier (scoop/chirp). One-shot mode: $x_P = \text{interp}(\text{table}, p_n)$ until $p_n$ passes the table end, then the partial's TVA closes (or balance has already handed over to $S$). Looped mode (embellishment waves): wrap $p_n$ from loop-end back to loop-start. Interpolation is linear (minimum) or cubic (recommended); for $r > 2$ a band-limited mipmap (SP-041 technique) prevents aliasing of the sampled harmonics.
+
+**Synth partial** $x_S(n)$ — phase-accumulator oscillator through a resonant lowpass (ZDF state-variable filter, SP-020, or one-pole-with-resonance approximation):
+
+$$\phi_{n+1} = \big(\phi_n + 2\pi f_0 \Pi(n)/f_s\big) \bmod 2\pi$$
+
+$$\text{saw: } s(\phi) = \tfrac{2\phi}{\pi} - 1, \qquad \text{pulse: } p(\phi) = \begin{cases}+1 & \phi < 2\pi D \\ -1 & \text{else}\end{cases}$$
+
+Both with PolyBLEP edge correction (SP-029/SP-110 convention) so the sustain body is alias-free; duty $D$ is PWM/LFO-modulatable. The filter cutoff follows the TVF envelope plus key tracking:
+
+$$f_c(n) = f_{c0} + (f_{c1} - f_{c0})\, E_{TVF}(n) + k_t\,(f_0 - f_{\text{ref}}), \qquad k_t = \text{key-track amount}$$
+
+**Envelopes** ($E_P$, $E_S$, $E_{TVF}$): D-50-style segment envelopes — 4 time/level pairs (T1..T4, L1..L4 with L4 = sustain level) — piecewise **linear in dB** for TVA (exponential amplitude feel) and linear in Hz for TVF. Velocity scales the peak TVA level and the TVF amount (a hard hit opens the filter and emphasizes the transient):
+
+$$L_{\text{peak}} = L_0 \cdot (\text{vel}/127)^{\gamma}, \qquad \gamma \approx 0.5\text{–}1.0$$
+
+**Balance envelope**: $b(n)$ may be static, enveloped, or LFO-driven — the "timeline" idea: a pluck starts $b \approx 0$ (PCM forward), then blooms to $b \approx 1$ (body forward) over the note; a pad holds $b \approx 1$; a stab holds $b \approx 0$ for its whole short life.
+
+**Cost**: $\mathcal{O}(1)$ per sample per partial, $\mathcal{O}(2)$ per voice (one PCM read + interpolation, one accumulator + PolyBLEP + 2nd-order filter) — roughly 3–4× the cost of a bare SP-110 PWM voice, far below FFT or physical-model methods, comfortably real-time for dozens of voices at 48 kHz in NumPy vectorized blocks.
+
+### Musical Elements Framework
+
+**PITCH**: One pitch source drives both partials — the synth phase accumulator *and* the PCM read rate $r = f_0/f_{\text{sample}}$ — so transient and body are automatically in tune (the D-50's central trick). Pitch envelope $\Pi(n)$ gives scoops/chirps/glides on both layers simultaneously. Key tracking $k_t$ on the filter keeps brightness register-consistent (low notes dark, high notes bright). Per-voice detune between the two partials adds slow beating (chorus-like thickness).
+
+**RHYTHM**: The TVA envelope IS the articulation: a short T1/T2 (5–20 ms) + fast release = stab/percussive; slow attack + long release = pad swells. The attack transient gives each onset a *physical identity* (hammer, pick, breath) so rhythmic passages read as performed rather than synthesized. The balance envelope is a **within-note gesture**: transient-forward attacks that bloom into body create the classic D-50 "breathing" phrase shape — a micro-rhythmic contour inside every held note. Velocity → TVA level + filter opening gives natural accent hierarchy across a groove.
+
+**HARMONY**: Per-voice LA tones at chord frequencies sum on the bus — the D-50 "Fantasia"-style stack: PCM attack partial carries the *pitch-specific* transient (e.g., a plucked 5th), synth partials carry the sustained chord; detune partials per voice for ensemble chorusing. The looped embellishment partial layers inharmonic cycles (SP-063 ring-mod character, SP-017 FM-ish metallic cycles) *under* harmonic bodies — controlled inharmonicity inside a consonant stack.
+
+**STRUCTURE**: Macro-form = a per-section parameter schedule over (balance style, TVF cutoff target $f_{c1}$, key-track amount, PWM duty, embellishment on/off): Intro — stabs, balance pinned PCM; Verse — hybrid, enveloped balance (bloom); Chorus — pads, balance pinned synth, wide filter, embellishment loops on; Bridge — filtered/dark, narrow cutoff; Outro — back to stabs. The balance axis alone defines an entire tension arc (transient-forward = percussive/tense, body-forward = warm/resolved).
+
+**TEXTURE**: Texture is the **transient-vs-body balance position** $b$: $b \to 0$ = pointillistic, articulated, "plucked" texture; $b \to 1$ = sustained, warm, "string" texture; in-between = the layered hybrid. The embellishment loop is a second texture stratum (breath/string/inharmonic shimmer) mixed under the body. Detune + chorus (SP-059) convert solo LA voices into ensemble texture; per-voice independent $b$ trajectories give stratified, section-by-section textural counterpoint.
+
+### UnitMatrix Integration (Voices & Sections)
+
+**Voices** = rows, each an LA tone (PCM partial + synth partial): per-voice state = PCM table id + loop points, synth waveform (saw/pulse + duty), TVA/TVF envelope shapes, balance style, detune, key-track amount, LFO phase (seedable). Voice-level timbre can be automated per section like every other SP engine.
+
+**Sections** = columns, each a parameter cluster $\theta_s$: $f_{c1}$ (brightness target), $k_t$, balance style (pinned-PCM / enveloped-bloom / pinned-synth / LFO-wobble), PWM duty target, embellishment loop id + level, TVA attack/release shape (stab vs pad). Section transitions interpolate $\theta$ over 8–64 samples (one-pole on $f_c$, crossfade on balance) to avoid clicks.
+
+**Cell filling**: for cell $(v,s)$: 1. read pitch → $f_0$, velocity → $L_{\text{peak}}$ + TVF amount, duration → TVA release; 2. load/continue section parameters $\theta_s$; 3. render the cell's sample block (PCM read + synth oscillator + filter + envelopes + balance mix) into the voice buffer; 4. optionally carry LFO phase across cells for seam continuity; 5. sum to mix bus; post-chain (SP-009/SP-032 reverb, SP-007 M/S EQ, SP-053 VBAP panning, SP-059 chorus for ensemble). The zero-drift invariant is untouched — cells stay `MusicUnit` events; audio buffers are per-cell renders padded to `section_len` exactly as in SP-029/SP-110.
+
+### Pitfalls
+
+1. **Naive PCM interpolation aliases/zippers**: nearest-neighbor at high $r$ is gritty; linear is the minimum, cubic recommended; pitch-envelope sweeps move $r$ and can chirp — band-limit with the SP-041 mipmap approach when $r > 2$ or when the table contains high harmonics.
+2. **One-shot transient truncation click**: if the TVA doesn't close before the PCM table end, the attack cuts hard. Start the release before $p_n$ reaches the end, or hand the note fully to the synth partial ($b \to 1$) before the table expires.
+3. **Linear balance dip**: a straight linear crossfade of two uncorrelated signals dips ~3 dB mid-mix (the "hole"). Use the equal-power cosine/sine law — this is one place where the naive implementation audibly fails.
+4. **Aliased sustain body**: a raw saw/pulse without PolyBLEP reintroduces exactly the aliasing the D-50's era suffered; SP-029/SP-110 already set the convention — reuse it.
+5. **Filter zipper noise**: stepping $f_c$ (envelope corner, section change, velocity change) clicks. One-pole-smooth $f_c$ with $\tau \approx 1$–5 ms; also apply key tracking or bass notes will be disproportionately bright (the classic LA mistake).
+6. **Envelope segment shape**: linear-in-amplitude TVA segments sound lumpy; linear-in-dB (exponential) is the D-50 behavior and sounds natural. Keep TVF linear in Hz.
+7. **Transient/body tuning drift**: the read rate $r$ and oscillator frequency must share the *same* $\Pi(n)$ pitch envelope; a mismatch makes the attack audibly out-of-tune with the body (a "double-hit" effect).
+8. **Per-cell state policy**: decide explicitly whether LFO/balance phase is per-cell (fresh, seedable, fully deterministic) or voice-continuous across cells (seamless but stateful); the zero-drift gate concerns MIDI events, not audio — either policy passes, but document it per voice.
+9. **Not a sampler**: LA gives attack realism, not whole-instrument realism — long notes rest on the synthesized body plus embellishment loop; add SP-059 chorus (detune spread) to hide loop sameness and SP-009/SP-032 verb to glue the transient into the space.
+
+---
+Candidate code path: `sound/synthesis/la_synthesis.py` — implements `LAPartial` (PCM read with interpolation/loop modes and synth oscillator with PolyBLEP), `LAVoice` (two partials + balance law + TVA/TVF segment envelopes + key tracking), `balance_gains(b, law="equal_power")`, `la_preset(name)` (D-50 archetypes: stab/pluck/pad/breath/Fantasia-style stack), and a `LACellConfig` for per-cell $\theta_s$ interpolation.

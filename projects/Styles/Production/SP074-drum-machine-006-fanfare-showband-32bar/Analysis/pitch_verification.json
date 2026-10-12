@@ -1,0 +1,17 @@
+{
+  "method": "SP-074",
+  "project": "Fanfare/006-fanfare-showband-32bar",
+  "key": "Bb major",
+  "synth_verdict": "PASS",
+  "synth_hit_rate": 1.0,
+  "synth_harmonic_energy": 0.4739,
+  "synth_windows": 117,
+  "synth_misses": [],
+  "drum_envelope_grid_peak_hz": 8.8,
+  "drum_expected_16th_hz": 8.8,
+  "drum_on_grid": true,
+  "mix_hit_rate": 1.0,
+  "mix_harmonic_energy": 0.4671,
+  "acf_unpitched": 0,
+  "acf_windows": 30
+}

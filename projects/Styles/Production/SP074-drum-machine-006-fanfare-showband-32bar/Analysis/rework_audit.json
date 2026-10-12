@@ -1,0 +1,21 @@
+{
+  "before": {
+    "grid_off": 246,
+    "out_scale": 0,
+    "out_chord": 0,
+    "zero_drift": true,
+    "track_ends": [
+      61440
+    ]
+  },
+  "after": {
+    "grid_off": 0,
+    "out_scale": 0,
+    "out_chord": 0,
+    "zero_drift": true,
+    "track_ends": [
+      61440
+    ]
+  },
+  "rework": "snap pitched note_on onsets to nearest 16th grid (120 ticks); drums (ch9) untouched; humanized original preserved as phase1 sidecar"
+}

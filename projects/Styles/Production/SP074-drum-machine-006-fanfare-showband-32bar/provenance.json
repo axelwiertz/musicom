@@ -1,0 +1,56 @@
+{
+  "job": "random-style production (SP) layer-aligned",
+  "date": "2026-10-12",
+  "seed": 20261012,
+  "method": "SP-074",
+  "method_module": "sound.generators.drum_machine",
+  "method_desc": "Eight-Channel Sample Drum Machine + Sequencer (Bullfrog Drums-style)",
+  "layer": "absolute (generator): 7 drum channels replace percussion; CV lane drives Bb-major trumpet synth",
+  "selection_source": "workflows.musicom_workflow.SP_METHODS registry (45 implemented)",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Fanfare/006-fanfare-showband-32bar/MIDI/showband32.mid",
+  "source_sha256": "9613c86f4a43d2fb42ac4b2bfd6c7dc88b5a36fcbe36795d8fbb5649f76627de",
+  "phase1_midi": "/opt/data/repos/musicom/projects/Styles/Production/SP074-drum-machine-006-fanfare-showband-32bar/MIDI/showband32-phase1.mid",
+  "reworked_midi": "/opt/data/repos/musicom/projects/Styles/Production/SP074-drum-machine-006-fanfare-showband-32bar/MIDI/showband32.mid",
+  "synth_midi": "/opt/data/repos/musicom/projects/Styles/Production/SP074-drum-machine-006-fanfare-showband-32bar/MIDI/showband32-cv-synth.mid",
+  "output_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP074-drum-machine-006-fanfare-showband-32bar/SP074-drum-machine-006-fanfare-showband-32bar.wav",
+  "output_ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP074-drum-machine-006-fanfare-showband-32bar/SP074-drum-machine-006-fanfare-showband-32bar.ogg",
+  "soundfont": "/opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2",
+  "params": {
+    "key": "Bb major",
+    "bpm": 132.0,
+    "bars": 32,
+    "swing": 0.12,
+    "drum_channels": 7,
+    "kit": "demo_kit (kick/snare/hat/tom/clap/rim/cymbal)",
+    "cv_base": "Bb major scale degrees -> FluidSynth trumpet (prog 56)"
+  },
+  "preflight": {
+    "before": {
+      "grid_off": 246,
+      "out_scale": 0,
+      "out_chord": 0,
+      "zero_drift": true,
+      "track_ends": [
+        61440
+      ]
+    },
+    "after": {
+      "grid_off": 0,
+      "out_scale": 0,
+      "out_chord": 0,
+      "zero_drift": true,
+      "track_ends": [
+        61440
+      ]
+    }
+  },
+  "rework": "pitched note_on onsets snapped to 16th grid (120 ticks); drums untouched; humanized original preserved as showband32-phase1.mid",
+  "lufs": -14.0,
+  "peak": 0.8913,
+  "silence_pct": 2.74,
+  "rms": 0.1468,
+  "pitch_verdict": "PASS",
+  "synth_hit_rate": 1.0,
+  "synth_he": 0.4739,
+  "drum_grid_ok": true
+}

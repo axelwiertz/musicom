@@ -1,0 +1,95 @@
+{
+  "description": "Bullfrog Drums CV lane (channel 8): 64-step X0X pattern (4-bar Bb-major harmonic cell I-IV-vii*-iii), looped 8x over 32 bars. (step, volts) -> scale degree -> Bb-major trumpet note (FluidSynth prog 56).",
+  "max_volts": 5.0,
+  "cell_bars": 4,
+  "cell_chords": [
+    1,
+    4,
+    7,
+    3
+  ],
+  "mapped": [
+    {
+      "step": 0,
+      "volts": 0.0,
+      "scale_degree": 0,
+      "midi_note": 70
+    },
+    {
+      "step": 8,
+      "volts": 3.3333,
+      "scale_degree": 4,
+      "midi_note": 77
+    },
+    {
+      "step": 16,
+      "volts": 2.5,
+      "scale_degree": 3,
+      "midi_note": 75
+    },
+    {
+      "step": 24,
+      "volts": 0.0,
+      "scale_degree": 0,
+      "midi_note": 70
+    },
+    {
+      "step": 32,
+      "volts": 5.0,
+      "scale_degree": 6,
+      "midi_note": 81
+    },
+    {
+      "step": 40,
+      "volts": 2.5,
+      "scale_degree": 3,
+      "midi_note": 75
+    },
+    {
+      "step": 48,
+      "volts": 1.6667,
+      "scale_degree": 2,
+      "midi_note": 74
+    },
+    {
+      "step": 56,
+      "volts": 5.0,
+      "scale_degree": 6,
+      "midi_note": 81
+    }
+  ],
+  "raw": [
+    [
+      0,
+      0.0
+    ],
+    [
+      8,
+      3.333333333333333
+    ],
+    [
+      16,
+      2.5
+    ],
+    [
+      24,
+      0.0
+    ],
+    [
+      32,
+      5.0
+    ],
+    [
+      40,
+      2.5
+    ],
+    [
+      48,
+      1.6666666666666665
+    ],
+    [
+      56,
+      5.0
+    ]
+  ]
+}
