@@ -1,0 +1,57 @@
+{
+  "midi": "/opt/data/repos/musicom/projects/Styles/African/238-neoriemannian-afro-drop/MIDI/238-neoriemannian-afro-drop.mid",
+  "zero_drift": true,
+  "track_lengths_ticks": [
+    46080,
+    46080,
+    46080,
+    46080,
+    46080
+  ],
+  "voices": [
+    {
+      "track": 1,
+      "program_changed": true,
+      "channel": 0,
+      "n_notes": 116,
+      "off_grid_16th": 0,
+      "off_grid_8th": 0,
+      "out_of_scale": 0,
+      "out_of_chord": 0
+    },
+    {
+      "track": 2,
+      "program_changed": true,
+      "channel": 1,
+      "n_notes": 72,
+      "off_grid_16th": 0,
+      "off_grid_8th": 0,
+      "out_of_scale": 0,
+      "out_of_chord": 0
+    },
+    {
+      "track": 3,
+      "program_changed": true,
+      "channel": 2,
+      "n_notes": 160,
+      "off_grid_16th": 0,
+      "off_grid_8th": 0,
+      "out_of_scale": 0,
+      "out_of_chord": 0
+    },
+    {
+      "track": 4,
+      "program_changed": true,
+      "channel": 3,
+      "n_notes": 64,
+      "off_grid_16th": 0,
+      "off_grid_8th": 0,
+      "out_of_scale": 0,
+      "out_of_chord": 0
+    }
+  ],
+  "total_off_grid_16th": 0,
+  "total_off_grid_8th": 0,
+  "total_out_of_scale": 0,
+  "total_out_of_chord": 0
+}

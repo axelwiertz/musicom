@@ -1,0 +1,473 @@
+{
+  "key": "G major",
+  "root_pc": 7,
+  "scale_intervals": [
+    0,
+    2,
+    4,
+    5,
+    7,
+    9,
+    11
+  ],
+  "bpm": 124,
+  "ticks_per_beat": 480,
+  "beats_per_bar": 4,
+  "bar_ticks": 1920,
+  "grid": 120,
+  "form": "intro-break-drop-outro",
+  "sections": [
+    {
+      "name": "Intro",
+      "bars": 4
+    },
+    {
+      "name": "Break",
+      "bars": 8
+    },
+    {
+      "name": "Drop",
+      "bars": 8
+    },
+    {
+      "name": "Outro",
+      "bars": 4
+    }
+  ],
+  "total_bars": 24,
+  "total_ticks": 46080,
+  "voices": [
+    {
+      "name": "Lead",
+      "program": 12,
+      "channel": 0
+    },
+    {
+      "name": "Harmony",
+      "program": 48,
+      "channel": 1
+    },
+    {
+      "name": "Kalimba",
+      "program": 108,
+      "channel": 2
+    },
+    {
+      "name": "Bass",
+      "program": 43,
+      "channel": 3
+    },
+    {
+      "name": "Drums",
+      "program": 0,
+      "channel": 9
+    }
+  ],
+  "chord_path": [
+    {
+      "bar": 0,
+      "mode": "maj",
+      "root_pc": 7,
+      "degree": "I",
+      "chord_tone_pcs": [
+        7,
+        11,
+        2
+      ]
+    },
+    {
+      "bar": 1,
+      "mode": "min",
+      "root_pc": 4,
+      "degree": "vi",
+      "chord_tone_pcs": [
+        4,
+        7,
+        11
+      ]
+    },
+    {
+      "bar": 2,
+      "mode": "maj",
+      "root_pc": 0,
+      "degree": "IV",
+      "chord_tone_pcs": [
+        0,
+        4,
+        7
+      ]
+    },
+    {
+      "bar": 3,
+      "mode": "min",
+      "root_pc": 9,
+      "degree": "ii",
+      "chord_tone_pcs": [
+        9,
+        0,
+        4
+      ]
+    },
+    {
+      "bar": 4,
+      "mode": "maj",
+      "root_pc": 0,
+      "degree": "IV",
+      "chord_tone_pcs": [
+        0,
+        4,
+        7
+      ]
+    },
+    {
+      "bar": 5,
+      "mode": "min",
+      "root_pc": 4,
+      "degree": "vi",
+      "chord_tone_pcs": [
+        4,
+        7,
+        11
+      ]
+    },
+    {
+      "bar": 6,
+      "mode": "maj",
+      "root_pc": 7,
+      "degree": "I",
+      "chord_tone_pcs": [
+        7,
+        11,
+        2
+      ]
+    },
+    {
+      "bar": 7,
+      "mode": "min",
+      "root_pc": 11,
+      "degree": "iii",
+      "chord_tone_pcs": [
+        11,
+        2,
+        6
+      ]
+    },
+    {
+      "bar": 8,
+      "mode": "maj",
+      "root_pc": 2,
+      "degree": "V",
+      "chord_tone_pcs": [
+        2,
+        6,
+        9
+      ]
+    },
+    {
+      "bar": 9,
+      "mode": "min",
+      "root_pc": 11,
+      "degree": "iii",
+      "chord_tone_pcs": [
+        11,
+        2,
+        6
+      ]
+    },
+    {
+      "bar": 10,
+      "mode": "maj",
+      "root_pc": 7,
+      "degree": "I",
+      "chord_tone_pcs": [
+        7,
+        11,
+        2
+      ]
+    },
+    {
+      "bar": 11,
+      "mode": "min",
+      "root_pc": 4,
+      "degree": "vi",
+      "chord_tone_pcs": [
+        4,
+        7,
+        11
+      ]
+    },
+    {
+      "bar": 12,
+      "mode": "maj",
+      "root_pc": 7,
+      "degree": "I",
+      "chord_tone_pcs": [
+        7,
+        11,
+        2
+      ]
+    },
+    {
+      "bar": 13,
+      "mode": "min",
+      "root_pc": 11,
+      "degree": "iii",
+      "chord_tone_pcs": [
+        11,
+        2,
+        6
+      ]
+    },
+    {
+      "bar": 14,
+      "mode": "maj",
+      "root_pc": 2,
+      "degree": "V",
+      "chord_tone_pcs": [
+        2,
+        6,
+        9
+      ]
+    },
+    {
+      "bar": 15,
+      "mode": "min",
+      "root_pc": 11,
+      "degree": "iii",
+      "chord_tone_pcs": [
+        11,
+        2,
+        6
+      ]
+    },
+    {
+      "bar": 16,
+      "mode": "maj",
+      "root_pc": 7,
+      "degree": "I",
+      "chord_tone_pcs": [
+        7,
+        11,
+        2
+      ]
+    },
+    {
+      "bar": 17,
+      "mode": "min",
+      "root_pc": 4,
+      "degree": "vi",
+      "chord_tone_pcs": [
+        4,
+        7,
+        11
+      ]
+    },
+    {
+      "bar": 18,
+      "mode": "maj",
+      "root_pc": 0,
+      "degree": "IV",
+      "chord_tone_pcs": [
+        0,
+        4,
+        7
+      ]
+    },
+    {
+      "bar": 19,
+      "mode": "min",
+      "root_pc": 9,
+      "degree": "ii",
+      "chord_tone_pcs": [
+        9,
+        0,
+        4
+      ]
+    },
+    {
+      "bar": 20,
+      "mode": "maj",
+      "root_pc": 0,
+      "degree": "IV",
+      "chord_tone_pcs": [
+        0,
+        4,
+        7
+      ]
+    },
+    {
+      "bar": 21,
+      "mode": "min",
+      "root_pc": 4,
+      "degree": "vi",
+      "chord_tone_pcs": [
+        4,
+        7,
+        11
+      ]
+    },
+    {
+      "bar": 22,
+      "mode": "maj",
+      "root_pc": 7,
+      "degree": "I",
+      "chord_tone_pcs": [
+        7,
+        11,
+        2
+      ]
+    },
+    {
+      "bar": 23,
+      "mode": "maj",
+      "root_pc": 7,
+      "degree": "I",
+      "chord_tone_pcs": [
+        7,
+        11,
+        2
+      ]
+    }
+  ],
+  "voice_leading_steps": [
+    {
+      "from_bar": 0,
+      "to_bar": 1,
+      "label": "R",
+      "move_semitones": 2
+    },
+    {
+      "from_bar": 1,
+      "to_bar": 2,
+      "label": "L",
+      "move_semitones": 1
+    },
+    {
+      "from_bar": 2,
+      "to_bar": 3,
+      "label": "R",
+      "move_semitones": 2
+    },
+    {
+      "from_bar": 3,
+      "to_bar": 4,
+      "label": "R",
+      "move_semitones": 2
+    },
+    {
+      "from_bar": 4,
+      "to_bar": 5,
+      "label": "L",
+      "move_semitones": 1
+    },
+    {
+      "from_bar": 5,
+      "to_bar": 6,
+      "label": "R",
+      "move_semitones": 2
+    },
+    {
+      "from_bar": 6,
+      "to_bar": 7,
+      "label": "L",
+      "move_semitones": 1
+    },
+    {
+      "from_bar": 7,
+      "to_bar": 8,
+      "label": "R",
+      "move_semitones": 2
+    },
+    {
+      "from_bar": 8,
+      "to_bar": 9,
+      "label": "R",
+      "move_semitones": 2
+    },
+    {
+      "from_bar": 9,
+      "to_bar": 10,
+      "label": "L",
+      "move_semitones": 1
+    },
+    {
+      "from_bar": 10,
+      "to_bar": 11,
+      "label": "R",
+      "move_semitones": 2
+    },
+    {
+      "from_bar": 11,
+      "to_bar": 12,
+      "label": "R",
+      "move_semitones": 2
+    },
+    {
+      "from_bar": 12,
+      "to_bar": 13,
+      "label": "L",
+      "move_semitones": 1
+    },
+    {
+      "from_bar": 13,
+      "to_bar": 14,
+      "label": "R",
+      "move_semitones": 2
+    },
+    {
+      "from_bar": 14,
+      "to_bar": 15,
+      "label": "R",
+      "move_semitones": 2
+    },
+    {
+      "from_bar": 15,
+      "to_bar": 16,
+      "label": "L",
+      "move_semitones": 1
+    },
+    {
+      "from_bar": 16,
+      "to_bar": 17,
+      "label": "R",
+      "move_semitones": 2
+    },
+    {
+      "from_bar": 17,
+      "to_bar": 18,
+      "label": "L",
+      "move_semitones": 1
+    },
+    {
+      "from_bar": 18,
+      "to_bar": 19,
+      "label": "R",
+      "move_semitones": 2
+    },
+    {
+      "from_bar": 19,
+      "to_bar": 20,
+      "label": "R",
+      "move_semitones": 2
+    },
+    {
+      "from_bar": 20,
+      "to_bar": 21,
+      "label": "L",
+      "move_semitones": 1
+    },
+    {
+      "from_bar": 21,
+      "to_bar": 22,
+      "label": "R",
+      "move_semitones": 2
+    },
+    {
+      "from_bar": 22,
+      "to_bar": 23,
+      "label": "hold",
+      "move_semitones": 0
+    }
+  ],
+  "vl_violations": []
+}

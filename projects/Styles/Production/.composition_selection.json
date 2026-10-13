@@ -1,21 +1,20 @@
 {
-  "date": "2026-10-11",
-  "seed": 20261011,
-  "layer_roll": 0.4919,
+  "date": "2026-10-12",
+  "seed": 20261012,
+  "layer_roll": 0.4066,
   "layer": "concrete",
-  "method_id": "074",
-  "style": "Flamenco",
-  "form": "intro-falseta-letra-falseta-cierre",
+  "method_id": "011",
+  "method_name": "Voice-Leading Graph Search",
+  "style": "African",
+  "form": "intro-break-drop-outro",
   "section_names": [
     "Intro",
-    "Falseta",
-    "Letra",
-    "Falseta",
-    "Cierre"
+    "Break",
+    "Drop",
+    "Outro"
   ],
   "bars_per": [
     4,
-    8,
     8,
     8,
     4
@@ -25,18 +24,18 @@
     6,
     7,
     10,
-    12,
     32,
+    38,
     40,
     41,
     50,
     51,
+    74,
     94,
     95,
-    98,
-    104
+    98
   ],
-  "n_styles": 47,
-  "n_concrete_avail": 95,
-  "n_abstract_avail": 1
+  "n_styles": 46,
+  "n_concrete_avail": 87,
+  "n_abstract_avail": 2
 }

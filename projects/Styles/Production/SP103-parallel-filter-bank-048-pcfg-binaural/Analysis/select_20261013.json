@@ -1,0 +1,8 @@
+{
+  "date": "2026-10-13",
+  "method": "SP-103",
+  "method_module": "sound.effects.parallel_filter_bank",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Experimental/048-pcfg-binaural/MIDI/048-pcfg-binaural.mid",
+  "registry_total": 45,
+  "n_well_formed": 229
+}

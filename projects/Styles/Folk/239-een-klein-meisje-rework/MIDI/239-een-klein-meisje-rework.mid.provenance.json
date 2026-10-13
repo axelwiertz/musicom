@@ -1,0 +1,31 @@
+{
+  "artifact": "239-een-klein-meisje-rework.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.method.markov_interval_walk_phase2 + musicom rules (rework of 029)",
+  "sources": [
+    "source:029-een-klein-meisje (Dutch Folk nursery)",
+    "methods_db.md:Markov interval walk"
+  ],
+  "parameters": {
+    "bpm": 105,
+    "bars": 24,
+    "seed": 20261013,
+    "phase": 2,
+    "quantized": true,
+    "key": "G Major",
+    "rhythm": "nursery 8th-note lilt",
+    "form": "6 sections (extended)",
+    "variation_techniques": [
+      "register_shift_down",
+      "transposition_P5",
+      "retrograde",
+      "augmentation+counterline",
+      "inversion+diminution"
+    ]
+  },
+  "notes": "Rules post-process: per-bar chord-tone quantization, 120-tick grid snap, dedup, voice-leading, per-section harmonic regions (midpoint root).",
+  "sha256": "65f67e43675454938c587cf838bcfeb46f2460c7bb26f9aa785edb62a8721522",
+  "bytes": 8023,
+  "created_utc": "2026-10-13T01:10:13.937897+00:00",
+  "provenance_version": "1.0"
+}

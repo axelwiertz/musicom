@@ -53,6 +53,7 @@ _INSTRUMENT_MODULES = {
     "Woodwind.tenor_sax.tenor_sax": "tenor_sax",
     "Guitar.acoustic.acoustic_guitar": "acoustic_guitar",
     "Guitar.steel_acoustic.steel_acoustic": "steel_acoustic",
+    "Guitar.clean_electric.clean_electric": "clean_electric",
     "Percussion.drum_kit.drum_kit": "drum_kit",
     "Percussion.marimba.marimba": "marimba",
     "Percussion.steel_drums.steel_drums": "steel_drums",
@@ -239,6 +240,7 @@ MARIMBA = ALL_INSTRUMENTS["marimba"]
 STEEL_DRUMS = ALL_INSTRUMENTS["steel_drums"]
 SITAR = ALL_INSTRUMENTS["sitar"]
 STEEL_ACOUSTIC = ALL_INSTRUMENTS["steel_acoustic"]
+CLEAN_ELECTRIC = ALL_INSTRUMENTS["clean_electric"]
 VIBRAPHONE = ALL_INSTRUMENTS["vibraphone"]
 SITAR = ALL_INSTRUMENTS["sitar"]
 KOTO = ALL_INSTRUMENTS["koto"]
@@ -392,6 +394,8 @@ def registry_table():
             role = "bass, rhythm, countermelody, accent"
         elif low == "acoustic guitar (steel)":
             role = "harmony, rhythm, strum, lead, melody, ornament, countermelody"
+        elif low == "electric guitar (clean)":
+            role = "harmony, rhythm, strum, lead, melody, ornament, countermelody, accent"
         elif low == "pad 1 (new age)":
             role = "pad, harmony, texture, drone, accent"
         else:

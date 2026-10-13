@@ -1033,3 +1033,30 @@ ensemble CUTS 8.5 kHz). Layering quirk: idiomatic doubling is octaves or
 zone-splitting (55–79 + 80–96), NEVER unison with another melodic patch
 (the 2026-09-01 comb-filter lesson). Pad-writing quirk: hold chords ≥ 2 s
 or the slow attack never speaks.
+
+**Clean Electric Guitar added** (2026-10-13): GM27, Guitar-family third entry
+— the solidbody electric guitar played through a clean amplifier, the classic
+rhythm-section chord/strum/arpeggio voice for pop/rock/funk/R&B (instrument.md
++ clean_electric.py), verified end-to-end UnitMatrixComposer → zero-drift ✓ →
+MIDI (84 bytes) → FluidSynth WAV (812 KB) ✓; RenderPipeline stem label
+`trackXX_Electric_Guitar_clean.wav` ✓ (GM_PROGRAMS[27] = "Electric Guitar
+(clean)", FluidR3 preset 27 = "Clean Guitar" — internal SF2 name "Clean
+Guitar" vs pipeline "Electric Guitar (clean)" is cosmetic only, **no routing
+impact**; STEM_LABEL = "Electric_Guitar_clean" matches the pipeline's sanitized
+label). Karplus-Strong recommended (plucked steel waveguide — the exact
+physical model for a stiff steel string with magnetic pickup; loop_gain 0.9960
+— between clavi 0.9960 and steel_acoustic 0.9970; excitation "pick" with
+noise_component 0.025 for pick scratch transient; lowpass_hz 5000 for pickup
+bandwidth). Solo-render spectral check: 4–8 kHz buzz **1.0%** (clean single
+voice, well below 20% gate, no comb-filtering). Empirical FluidR3 pitch sweep:
+preset 27 audible across full range 28–84 (E1–C6), no gaps — SF2 never clips
+a composition. Registration proof: `by_name('clean electric')` → Electric
+Guitar (clean), `by_program(27)` → Electric Guitar (clean),
+`in_sweet_spot(52)` = True, `in_sweet_spot(30)` = False. Registration in
+`instrument_registry.py` as CLEAN_ELECTRIC convenience constant. Role:
+harmony, rhythm, strum, lead, melody, ornament, countermelody, accent — the
+clean electric guitar is a fully polyphonic chord/strum/arpeggio instrument,
+NOT a sustain/pad voice. REVERB_TAIL 1.8 s (room/spring reverb — Fender-style
+amp spring tank). EQ: cut 300 Hz box resonance, boost 3.5 kHz presence, gentle
+8 kHz air. PAN -0.2 centre-left. Completes the Guitar family trio: nylon
+acoustic (GM24), steel acoustic (GM25), clean electric (GM27).

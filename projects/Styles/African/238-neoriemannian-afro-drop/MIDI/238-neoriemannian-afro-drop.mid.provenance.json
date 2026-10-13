@@ -1,0 +1,34 @@
+{
+  "artifact": "238-neoriemannian-afro-drop.mid",
+  "classification": "ai-generated",
+  "generator": "Method 011 Voice-Leading Graph Search (Neo-Riemannian) + musicom rules",
+  "sources": [
+    "Research/CompositionMethods/methods_db.md:Method 011",
+    "rules/voice_leading.py",
+    "workflows/unitmatrix_composer.py",
+    "projects/Instruments/instrument_registry.py"
+  ],
+  "parameters": {
+    "method": 11,
+    "phase": 2,
+    "key": "G major",
+    "bpm": 124,
+    "sections": 4,
+    "total_bars": 24,
+    "seed": 238,
+    "style": "African",
+    "form": "intro-break-drop-outro",
+    "voices": [
+      "Lead",
+      "Harmony",
+      "Kalimba",
+      "Bass",
+      "Drums"
+    ]
+  },
+  "notes": "Phase 2: BFS shortest voice-leading path (2 common tones held, 1 voice moves by step), grid-snap 120 ticks, per-bar chord-tone quantization, voice-led string pad, marimba lead, kalimba mbira ostinato, double-bass roots, ch9 African polyrhythm.",
+  "sha256": "da014caa104330a4134a3dbac0a56a9ebb6f695df614129276fc56953b70fe15",
+  "bytes": 6846,
+  "created_utc": "2026-10-12T23:19:33.217640+00:00",
+  "provenance_version": "1.0"
+}

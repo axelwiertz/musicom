@@ -1,0 +1,12 @@
+{
+  "wav": "/opt/data/repos/musicom/projects/Styles/African/238-neoriemannian-afro-drop/Audio/238-neoriemannian-afro-drop.wav",
+  "sr": 44100,
+  "duration_s": 52.06,
+  "silence_ratio": 0.1009,
+  "peak": 1.0,
+  "rms": 0.11936,
+  "rms_db": -18.46,
+  "n_seconds": 53,
+  "active_seconds": 48,
+  "mid_track_gaps": 0
+}

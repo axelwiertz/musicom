@@ -1,0 +1,25 @@
+{
+  "artifact": "238-neoriemannian-afro-drop-phase1.mid",
+  "classification": "ai-generated",
+  "generator": "Method 011 Voice-Leading Graph Search (Neo-Riemannian) - PRE-RULES raw draft",
+  "sources": [
+    "Research/CompositionMethods/methods_db.md:Method 011",
+    "workflows/unitmatrix_composer.py"
+  ],
+  "parameters": {
+    "method": 11,
+    "phase": 1,
+    "key": "G major",
+    "bpm": 124,
+    "sections": 4,
+    "total_bars": 24,
+    "seed": 238,
+    "style": "African",
+    "form": "intro-break-drop-outro"
+  },
+  "notes": "Phase 1: single-voice random-walk draft over the neo-Riemannian graph, unquantized rhythm, raw octave-jittered chord tones, off-grid by design, no harmony.",
+  "sha256": "5525f2e2209cd5c1f5d094118adaad1c4a16d865ecfbdc577f5f77df499fd601",
+  "bytes": 703,
+  "created_utc": "2026-10-12T23:19:33.217406+00:00",
+  "provenance_version": "1.0"
+}

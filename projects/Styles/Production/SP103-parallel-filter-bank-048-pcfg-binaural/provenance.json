@@ -1,0 +1,61 @@
+{
+  "job": "random-style production (SP) layer-aligned",
+  "date": "2026-10-13",
+  "seed": 20261013,
+  "method": "SP-103",
+  "method_module": "sound.effects.parallel_filter_bank",
+  "method_desc": "Filtopia-style 5-Parallel SEM Filter Bank",
+  "params": {
+    "base_cutoff": 1400.0,
+    "slots": [
+      {
+        "slot": 1,
+        "cutoff_offset": -300.0,
+        "resonance": 0.5,
+        "mode": "lp",
+        "mix": 0.8
+      },
+      {
+        "slot": 2,
+        "cutoff_offset": -100.0,
+        "resonance": 0.3,
+        "mode": "bp",
+        "mix": 0.6
+      },
+      {
+        "slot": 3,
+        "cutoff_offset": 0.0,
+        "resonance": 0.4,
+        "mode": "bp",
+        "mix": 1.0
+      },
+      {
+        "slot": 4,
+        "cutoff_offset": 200.0,
+        "resonance": 0.3,
+        "mode": "bp",
+        "mix": 0.6
+      },
+      {
+        "slot": 5,
+        "cutoff_offset": 500.0,
+        "resonance": 0.5,
+        "mode": "lp",
+        "mix": 0.8
+      }
+    ],
+    "fs": 44100
+  },
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Experimental/048-pcfg-binaural/MIDI/048-pcfg-binaural.mid",
+  "output_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP103-parallel-filter-bank-048-pcfg-binaural/SP103-parallel-filter-bank-048-pcfg-binaural.wav",
+  "output_ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP103-parallel-filter-bank-048-pcfg-binaural/SP103-parallel-filter-bank-048-pcfg-binaural.ogg",
+  "lufs": -14.000000004599059,
+  "peak": 0.7512665390968323,
+  "silence_pct": 16.864938092097372,
+  "mono_correlation": 0.779793508933871,
+  "pitch_verdict": "PASS",
+  "hit_rate": 1.0,
+  "he_mean": 0.29942649090115253,
+  "dry_he_mean": 0.31158495582126866,
+  "he_retention": 0.9609786522328425
+}

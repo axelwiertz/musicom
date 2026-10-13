@@ -1,0 +1,44 @@
+{
+  "project": "238-neoriemannian-afro-drop",
+  "genre": "African",
+  "method": "Method 011 Voice-Leading Graph Search (Neo-Riemannian)",
+  "layer": "concrete",
+  "classification": "ai-generated",
+  "key": "G major",
+  "bpm": 124,
+  "form": "intro-break-drop-outro",
+  "bars": 24,
+  "sections": ["Intro", "Break", "Drop", "Outro"],
+  "two_phase": true,
+  "voices": {
+    "Lead": {"program": 12, "instrument": "Marimba", "channel": 0},
+    "Harmony": {"program": 48, "instrument": "String Ensemble 1", "channel": 1},
+    "Kalimba": {"program": 108, "instrument": "Kalimba", "channel": 2},
+    "Bass": {"program": 43, "instrument": "Double Bass", "channel": 3},
+    "Drums": {"program": 0, "instrument": "GM percussion", "channel": 9}
+  },
+  "artifacts": {
+    "phase2_midi": "MIDI/238-neoriemannian-afro-drop.mid",
+    "phase1_midi": "MIDI/238-neoriemannian-afro-drop-phase1.mid",
+    "audio_ogg": "Audio/238-neoriemannian-afro-drop.ogg",
+    "audio_wav": "Audio/238-neoriemannian-afro-drop.wav"
+  },
+  "verification": {
+    "voice_tracks": 5,
+    "track_length_ticks": 46080,
+    "zero_drift": true,
+    "off_grid_16th": 0,
+    "off_grid_8th": 0,
+    "scale_violations": 0,
+    "chord_violations": 0,
+    "voice_leading_violations": 0,
+    "silence_ratio": 0.101
+  },
+  "soundfont": "FluidR3_GM.sf2",
+  "sources": [
+    "Research/CompositionMethods/methods_db.md:Method 011",
+    "rules/voice_leading.py",
+    "workflows/unitmatrix_composer.py",
+    "projects/Instruments/instrument_registry.py"
+  ]
+}

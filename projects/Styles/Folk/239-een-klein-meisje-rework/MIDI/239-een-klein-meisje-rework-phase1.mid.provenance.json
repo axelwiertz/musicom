@@ -1,0 +1,23 @@
+{
+  "artifact": "239-een-klein-meisje-rework-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.method.markov_interval_walk_phase1 (rework of 029)",
+  "sources": [
+    "source:029-een-klein-meisje (Dutch Folk nursery)",
+    "methods_db.md:Markov interval walk"
+  ],
+  "parameters": {
+    "bpm": 105,
+    "bars": 24,
+    "seed": 20261013,
+    "phase": 1,
+    "quantized": false,
+    "key": "G Major",
+    "form": "6 sections (extended)"
+  },
+  "notes": "Raw Markov interval walk over G-major scale degrees (transition table estimated from source melody), unquantized, single voice, pre-rules. Rework of 029 (redesign: source failed engine + zero-drift + grid + tracks + two-phase + provenance).",
+  "sha256": "fd46bdb662e7f5420b1ab45a03f2662deb888b423747c30beba9e54488432cbf",
+  "bytes": 1263,
+  "created_utc": "2026-10-13T01:10:13.884914+00:00",
+  "provenance_version": "1.0"
+}
