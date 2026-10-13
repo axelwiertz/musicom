@@ -1,34 +1,35 @@
 {
-  "date": "2026-10-12",
-  "seed": 20261012,
-  "layer_roll": 0.4066,
+  "date": "2026-10-13",
+  "seed": 20261013,
+  "layer_roll": 0.6103,
   "layer": "concrete",
-  "method_id": "011",
-  "method_name": "Voice-Leading Graph Search",
-  "style": "African",
-  "form": "intro-break-drop-outro",
+  "method_id": "029",
+  "method_name": "Continuous Polyphonic Portamento Glide (CPPG)",
+  "style": "Ragtime",
+  "form": "rondo",
   "section_names": [
-    "Intro",
-    "Break",
-    "Drop",
-    "Outro"
+    "A",
+    "B",
+    "A",
+    "C",
+    "A"
   ],
   "bars_per": [
     4,
-    8,
-    8,
+    4,
+    4,
+    4,
     4
   ],
   "recent_methods_excluded": [
-    1,
     6,
     7,
     10,
+    11,
     32,
     38,
     40,
     41,
-    50,
     51,
     74,
     94,
@@ -36,6 +37,6 @@
     98
   ],
   "n_styles": 46,
-  "n_concrete_avail": 87,
+  "n_concrete_avail": 89,
   "n_abstract_avail": 2
 }

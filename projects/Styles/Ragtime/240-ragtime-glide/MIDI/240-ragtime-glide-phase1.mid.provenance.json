@@ -1,0 +1,25 @@
+{
+  "artifact": "240-ragtime-glide-phase1.mid",
+  "classification": "ai-generated",
+  "generator": "Method 029 Continuous Polyphonic Portamento Glide (CPPG) - PRE-RULES raw draft",
+  "sources": [
+    "Research/CompositionMethods/methods_db.md:Method 029",
+    "workflows/unitmatrix_composer.py"
+  ],
+  "parameters": {
+    "method": 29,
+    "phase": 1,
+    "key": "F major",
+    "bpm": 100,
+    "sections": 5,
+    "total_bars": 20,
+    "seed": 240,
+    "style": "Ragtime",
+    "form": "rondo"
+  },
+  "notes": "Phase 1: single-voice theremin-style portamento glide (sine contour + jitter), unquantized onsets, off-grid by design, no harmony.",
+  "sha256": "e99dd87306b3d448ae2500b973bea2cb94ecae0574c888f8a6f7a5ce9942b557",
+  "bytes": 1490,
+  "created_utc": "2026-10-13T23:17:02.835598+00:00",
+  "provenance_version": "1.0"
+}

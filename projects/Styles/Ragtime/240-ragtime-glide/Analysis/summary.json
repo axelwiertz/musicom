@@ -1,0 +1,530 @@
+{
+  "key": "F major",
+  "root_pc": 5,
+  "scale_intervals": [
+    0,
+    2,
+    4,
+    5,
+    7,
+    9,
+    11
+  ],
+  "bpm": 100,
+  "ticks_per_beat": 480,
+  "beats_per_bar": 4,
+  "bar_ticks": 1920,
+  "grid": 120,
+  "form": "rondo",
+  "sections": [
+    {
+      "name": "A1",
+      "bars": 4
+    },
+    {
+      "name": "B",
+      "bars": 4
+    },
+    {
+      "name": "A2",
+      "bars": 4
+    },
+    {
+      "name": "C",
+      "bars": 4
+    },
+    {
+      "name": "A3",
+      "bars": 4
+    }
+  ],
+  "total_bars": 20,
+  "total_ticks": 38400,
+  "voices": [
+    {
+      "name": "Lead",
+      "program": 1,
+      "channel": 0
+    },
+    {
+      "name": "Glide",
+      "program": 48,
+      "channel": 1
+    },
+    {
+      "name": "Stride",
+      "program": 1,
+      "channel": 2
+    },
+    {
+      "name": "Drums",
+      "program": 0,
+      "channel": 9
+    }
+  ],
+  "chord_path": [
+    {
+      "bar": 0,
+      "roman": "I",
+      "root_pc": 5,
+      "chord_tone_pcs": [
+        5,
+        9,
+        0,
+        4
+      ]
+    },
+    {
+      "bar": 1,
+      "roman": "vi",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        5,
+        9,
+        0
+      ]
+    },
+    {
+      "bar": 2,
+      "roman": "ii",
+      "root_pc": 7,
+      "chord_tone_pcs": [
+        7,
+        10,
+        2,
+        5
+      ]
+    },
+    {
+      "bar": 3,
+      "roman": "V7",
+      "root_pc": 0,
+      "chord_tone_pcs": [
+        0,
+        4,
+        7,
+        10
+      ]
+    },
+    {
+      "bar": 4,
+      "roman": "IV",
+      "root_pc": 10,
+      "chord_tone_pcs": [
+        10,
+        2,
+        5,
+        9
+      ]
+    },
+    {
+      "bar": 5,
+      "roman": "I",
+      "root_pc": 5,
+      "chord_tone_pcs": [
+        5,
+        9,
+        0,
+        4
+      ]
+    },
+    {
+      "bar": 6,
+      "roman": "ii",
+      "root_pc": 7,
+      "chord_tone_pcs": [
+        7,
+        10,
+        2,
+        5
+      ]
+    },
+    {
+      "bar": 7,
+      "roman": "V7",
+      "root_pc": 0,
+      "chord_tone_pcs": [
+        0,
+        4,
+        7,
+        10
+      ]
+    },
+    {
+      "bar": 8,
+      "roman": "I",
+      "root_pc": 5,
+      "chord_tone_pcs": [
+        5,
+        9,
+        0,
+        4
+      ]
+    },
+    {
+      "bar": 9,
+      "roman": "vi",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        5,
+        9,
+        0
+      ]
+    },
+    {
+      "bar": 10,
+      "roman": "ii",
+      "root_pc": 7,
+      "chord_tone_pcs": [
+        7,
+        10,
+        2,
+        5
+      ]
+    },
+    {
+      "bar": 11,
+      "roman": "V7",
+      "root_pc": 0,
+      "chord_tone_pcs": [
+        0,
+        4,
+        7,
+        10
+      ]
+    },
+    {
+      "bar": 12,
+      "roman": "vi",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        5,
+        9,
+        0
+      ]
+    },
+    {
+      "bar": 13,
+      "roman": "IV",
+      "root_pc": 10,
+      "chord_tone_pcs": [
+        10,
+        2,
+        5,
+        9
+      ]
+    },
+    {
+      "bar": 14,
+      "roman": "ii",
+      "root_pc": 7,
+      "chord_tone_pcs": [
+        7,
+        10,
+        2,
+        5
+      ]
+    },
+    {
+      "bar": 15,
+      "roman": "V7",
+      "root_pc": 0,
+      "chord_tone_pcs": [
+        0,
+        4,
+        7,
+        10
+      ]
+    },
+    {
+      "bar": 16,
+      "roman": "I",
+      "root_pc": 5,
+      "chord_tone_pcs": [
+        5,
+        9,
+        0,
+        4
+      ]
+    },
+    {
+      "bar": 17,
+      "roman": "vi",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        5,
+        9,
+        0
+      ]
+    },
+    {
+      "bar": 18,
+      "roman": "ii",
+      "root_pc": 7,
+      "chord_tone_pcs": [
+        7,
+        10,
+        2,
+        5
+      ]
+    },
+    {
+      "bar": 19,
+      "roman": "I",
+      "root_pc": 5,
+      "chord_tone_pcs": [
+        5,
+        9,
+        0,
+        4
+      ]
+    }
+  ],
+  "voicings": [
+    [
+      64,
+      65,
+      69,
+      72
+    ],
+    [
+      62,
+      65,
+      69,
+      72
+    ],
+    [
+      62,
+      65,
+      67,
+      70
+    ],
+    [
+      60,
+      64,
+      67,
+      70
+    ],
+    [
+      62,
+      65,
+      69,
+      70
+    ],
+    [
+      64,
+      65,
+      69,
+      72
+    ],
+    [
+      65,
+      67,
+      70,
+      74
+    ],
+    [
+      64,
+      67,
+      70,
+      72
+    ],
+    [
+      64,
+      65,
+      69,
+      72
+    ],
+    [
+      62,
+      65,
+      69,
+      72
+    ],
+    [
+      62,
+      65,
+      67,
+      70
+    ],
+    [
+      60,
+      64,
+      67,
+      70
+    ],
+    [
+      60,
+      62,
+      65,
+      69
+    ],
+    [
+      58,
+      62,
+      65,
+      69
+    ],
+    [
+      58,
+      62,
+      65,
+      67
+    ],
+    [
+      58,
+      60,
+      64,
+      67
+    ],
+    [
+      57,
+      60,
+      64,
+      65
+    ],
+    [
+      57,
+      60,
+      62,
+      65
+    ],
+    [
+      55,
+      58,
+      62,
+      65
+    ],
+    [
+      57,
+      60,
+      64,
+      65
+    ]
+  ],
+  "portamento_steps": [
+    [
+      -2,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      -2,
+      -2
+    ],
+    [
+      -2,
+      -1,
+      0,
+      0
+    ],
+    [
+      2,
+      1,
+      2,
+      0
+    ],
+    [
+      2,
+      0,
+      0,
+      2
+    ],
+    [
+      1,
+      2,
+      1,
+      2
+    ],
+    [
+      -1,
+      0,
+      0,
+      -2
+    ],
+    [
+      0,
+      -2,
+      -1,
+      0
+    ],
+    [
+      -2,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      -2,
+      -2
+    ],
+    [
+      -2,
+      -1,
+      0,
+      0
+    ],
+    [
+      0,
+      -2,
+      -2,
+      -1
+    ],
+    [
+      -2,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      -2
+    ],
+    [
+      0,
+      -2,
+      -1,
+      0
+    ],
+    [
+      -1,
+      0,
+      0,
+      -2
+    ],
+    [
+      0,
+      0,
+      -2,
+      0
+    ],
+    [
+      -2,
+      -2,
+      0,
+      0
+    ],
+    [
+      2,
+      2,
+      2,
+      0
+    ]
+  ],
+  "vl_violations": [
+    "Parallel fifths between voices 1 and 3",
+    "Parallel fifths between voices 2 and 4",
+    "Parallel fifths between voices 1 and 3"
+  ]
+}

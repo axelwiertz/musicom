@@ -1,0 +1,33 @@
+{
+  "artifact": "240-ragtime-glide.mid",
+  "classification": "ai-generated",
+  "generator": "Method 029 Continuous Polyphonic Portamento Glide (CPPG) + musicom rules",
+  "sources": [
+    "Research/CompositionMethods/methods_db.md:Method 029",
+    "rules/voice_leading.py",
+    "workflows/unitmatrix_composer.py",
+    "projects/Instruments/instrument_registry.py"
+  ],
+  "parameters": {
+    "method": 29,
+    "phase": 2,
+    "key": "F major",
+    "bpm": 100,
+    "sections": 5,
+    "total_bars": 20,
+    "seed": 240,
+    "style": "Ragtime",
+    "form": "rondo",
+    "voices": [
+      "Lead",
+      "Glide",
+      "Stride",
+      "Drums"
+    ]
+  },
+  "notes": "Phase 2: min-motion 4-voice string-ensemble glide choir (quarter-note inversion re-voicing), syncopated ragtime piano lead with chord-tone glissando transitions at rondo section boundaries, stride left hand, light brushed kit. Grid-snap 120 ticks, per-bar chord-tone quantization.",
+  "sha256": "5816130d2fc2b57aa53416ee0d9a7b2cd63b94d6156cb58aa8674f7efd99bce2",
+  "bytes": 5747,
+  "created_utc": "2026-10-13T23:17:02.835803+00:00",
+  "provenance_version": "1.0"
+}
