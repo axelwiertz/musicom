@@ -12,7 +12,7 @@ Design rules honored:
   implementation status, never by DB presence. A spec-only method is a dead
   end — the selector filters it out regardless of how well it matches.
 - **Derives, doesn't duplicate**: memory-depth factor is computed from the
-  SCALE registry (workflows/paths.py), so methods added daily to SCALE flow
+  level registry (workflows/paths.py), so methods added daily to the level registry flow
   in automatically. Only the trait tags that can't be derived (tonal gravity,
   metric binding, corpus use, determinism, cost) live here — and unknown/new
   methods get level-derived defaults so they stay selectable.
@@ -27,14 +27,14 @@ so provenance can record why a method was picked.
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional, Tuple
 
-from workflows.paths import SCALE, LEVELS, methods_by_scale, impl_status, scale_of
+from workflows.paths import METHOD_LEVELS, LEVELS, methods_by_level, impl_status, level_of
 
-# Neutral default level for registry-only methods not yet classified in SCALE
+# Neutral default level for registry-only methods not yet classified in METHOD_LEVELS
 # (daily additions land in the registry first; classification follows).
 _DEFAULT_LEVEL = "L3"  # meso — the safest default (anchors, loops, motifs)
 
 # --- reality check: implementation truth lives in generator_registry --------
-# paths.SCALE mirrors it, but generator_registry is the ground truth; consult
+# paths.METHOD_LEVELS mirrors it, but generator_registry is the ground truth; consult
 # it directly so the selector can't be lied to by a stale mirror.
 try:
     from generators.generator_registry import GENERATOR_REGISTRY
@@ -79,7 +79,7 @@ class TaskProfile:
 
 
 # ============================================================================
-# Trait tags — the factors that CANNOT be derived from SCALE level.
+# Trait tags — the factors that CANNOT be derived from the level registry.
 # memory_depth is derived (L4->macro, L3->meso, L2/L1->local/voice) so it is
 # NOT here. Methods missing from TRAITS get level-derived defaults and stay
 # selectable (daily additions degrade gracefully instead of vanishing).
@@ -185,16 +185,16 @@ STYLE_HC_MAP = {
     "baroque": "HC-001",
 }
 
-# SCALE level -> memory_depth factor value (derived, never hand-maintained)
+# level -> memory_depth factor value (derived, never hand-maintained)
 _LEVEL_TO_DEPTH = {"L4": "macro", "L3": "meso", "L2": "local", "L1": "local"}
 
 # ============================================================================
 # Layer tags (LAYER_ARCHITECTURE.md) — abstract | concrete | absolute
 # ============================================================================
-# Concrete = every existing SCALE method (L4/L3 structure, L2/L1 material).
+# Concrete = every existing level-registry method (L4/L3 structure, L2/L1 material).
 # Abstract = subset-network methods (rules/subset_network.py): ABS-001..005.
 # Absolute = sound production SP-* methods (workflows/musicom_workflow.SP_METHODS).
-# Derived for SCALE methods (all concrete); explicit map for the rest.
+# Derived for level-registry methods (all concrete); explicit map for the rest.
 _ABSTRACT_IDS = {"ABS-001", "ABS-002", "ABS-003", "ABS-004", "ABS-005"}
 _ABSOLUTE_PREFIX = "SP-"
 
@@ -205,7 +205,7 @@ def layer_of(method_id: str) -> str:
         return "abstract"
     if method_id.startswith(_ABSOLUTE_PREFIX):
         return "absolute"
-    return "concrete"   # all SCALE L1-L4 methods realize concrete material
+    return "concrete"   # all L1–L4 methods realize concrete material
 
 # Level-derived defaults for methods with no TRAITS entry (daily additions).
 # Keeps new methods selectable instead of silently unroutable.
@@ -231,7 +231,7 @@ def _traits_of(method_id: str) -> Dict:
 def select(profile: TaskProfile, limit: Optional[int] = None) -> List[Selection]:
     """Route a task profile to an ordered list of implemented methods.
 
-    Pure function. Reads reality (SCALE + generator_registry) on every call,
+    Pure function. Reads reality (METHOD_LEVELS + generator_registry) on every call,
     so methods added daily are picked up automatically.
 
     Hard filters (a method is dropped if ANY fails):
@@ -239,21 +239,21 @@ def select(profile: TaskProfile, limit: Optional[int] = None) -> List[Selection]
       - headless profile -> method must be headless_ok (cost guard)
       - corpus=False profile -> method must not require a corpus
       - determinism=True profile -> method must be deterministic
-      - memory_depth set -> method's SCALE level must match
+      - memory_depth set -> method's level must match
       - metric_binding set -> method's metric tag must match
       - tonal_gravity set -> method's gravity tag must match
 
     Scoring (after filters): style affinity (+3 HC match), implemented-in-
-    SCALE-mirror (+1, breaks ties toward curated entries). Ordered by
+    level-mirror (+1, breaks ties toward curated entries). Ordered by
     (-score, method_id) for stable, auditable output.
     """
     results: List[Selection] = []
-    # Candidate universe = union of SCALE (classified levels) + generator
+    # Candidate universe = union of METHOD_LEVELS (classified levels) + generator
     # registry (reality). Methods added daily to either source are routable;
     # registry-only methods get a neutral default level until classified.
-    candidates = set(SCALE) | set(GENERATOR_REGISTRY)
+    candidates = set(METHOD_LEVELS) | set(GENERATOR_REGISTRY)
     for method_id in sorted(candidates):
-        level = scale_of(method_id) or _DEFAULT_LEVEL
+        level = level_of(method_id) or _DEFAULT_LEVEL
         reasons: List[str] = []
 
         # --- hard gate: real code (registry truth, not the mirror) ---
@@ -292,7 +292,7 @@ def select(profile: TaskProfile, limit: Optional[int] = None) -> List[Selection]
         if profile.style and STYLE_HC_MAP.get(profile.style) == method_id:
             score += 3
             reasons.append(f"style-affinity:{profile.style}")
-        if impl_status(method_id):  # curated SCALE mirror agrees
+        if impl_status(method_id):  # curated level-registry mirror agrees
             score += 1
 
         results.append(Selection(method_id=method_id, level=level,
@@ -328,7 +328,7 @@ def select_chain(profile: TaskProfile, per_layer: int = 2) -> Dict[str, List[Sel
     out: Dict[str, List[Selection]] = {}
     for layer in profile.layers_needed:
         layer_results = []
-        # absolute layer: SP methods aren't in SCALE/registry; pull from SP_METHODS
+        # absolute layer: SP methods aren't in METHOD_LEVELS/registry; pull from SP_METHODS
         if layer == "absolute":
             for mid in sorted(SP_METHODS):
                 layer_results.append(Selection(method_id=mid, level="SP",
@@ -348,7 +348,7 @@ def selector_table() -> str:
     """Markdown table of trait tags (for docs/)."""
     rows = ["| Method ID | Gravity | Metric | Corpus | Deterministic | Headless |",
             "|---|---|---|---|---|---|"]
-    for mid in sorted(set(list(TRAITS) + list(SCALE))):
+    for mid in sorted(set(list(TRAITS) + list(METHOD_LEVELS))):
         t = _traits_of(mid)
         rows.append(f"| {mid} | {t['gravity']} | {t['metric']} | "
                     f"{t['corpus']} | {t['deterministic']} | {t['headless_ok']} |")

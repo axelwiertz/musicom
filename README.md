@@ -26,7 +26,7 @@ transformation you can inspect, modify, or swap out**:
 | Stage | What you control | Where |
 |---|---|---|
 | **Plan the harmony** | pc-sets, subset walks, tension curves, form | `rules/subset_network.py` |
-| **Choose the method** | 100+ catalogued methods, each documented with its layer, paradigm, complexity | `projects/Research/CompositionMethods/methods_db.md` |
+| **Choose the method** | 150+ catalogued methods, each documented with its layer, paradigm, complexity | `projects/Research/CompositionMethods/methods_db.md` |
 | **Realize the notes** | voices × sections UnitMatrix, grid lock, chord quantize, voice-leading | `workflows/unitmatrix_composer.py`, `rules/voice_leading.py` |
 | **Assign instruments** | 18-instrument registry (ranges, articulations, synthesis presets) | `projects/Instruments/` |
 | **Produce the sound** | 12+ production methods (SoundFont render, Karplus-Strong, physical modeling, …) | `sound/`, `workflows/musicom_workflow.py` |
@@ -54,7 +54,7 @@ flows *abstract → concrete → absolute* — and you can intervene at every ho
 │  CONCRETE   realization plan — voices × sections UnitMatrix      │
 │             resolved MusicEvents (pitch, onset, dur, velocity)   │
 │             grid lock · chord-tone quantize · voice leading      │
-│             code: generators/*, workflows/*, rules/*, SCALE L1–L4│
+│             code: generators/*, workflows/*, rules/*, level L1–L4│
 └──────────────────────────┬───────────────────────────────────────┘
                            ▼  production
 ┌──────────────────────────────────────────────────────────────────┐
@@ -67,20 +67,20 @@ flows *abstract → concrete → absolute* — and you can intervene at every ho
 
 ### Method layers at a glance
 
-Every method in the DB carries a **Layer** tag. Current catalog (2026-09-08):
+Every method in the DB carries a **Layer** tag. Current catalog (2026-10-14):
 
 | Layer | DB | Count | Examples |
 |---|---|---|---|
-| **Abstract** | `ABS-001…005` | 5 | Subset Walker, Tension Curve Planner, Z-Variation, Parsimonious Voice Leading |
-| **Concrete** | `001…081` | 95 rows | Markov transitions, Euclidean groove locking, genetic selection, FHN spiking |
-| **Human (→ concrete)** | `HC-001…029` | 29 | Flamenco compás, Ewe cross-rhythm, raga-tala, species counterpoint |
-| **Absolute (sound)** | `SP-001…SP-096+` | 71 | FluidSynth render, Karplus-Strong, modal/physical modeling, granular, FM |
-| — implemented in engine | `SCALE` registry | 14 concrete + 12 SP | routable right now via selector/produce() |
+| **Abstract** | `ABS-001…005` (+ `ABS-095/099/104`) | 8 | Subset Walker, Tension Curve Planner, Z-Variation, Parsimonious Voice Leading |
+| **Concrete** | `001…115` | 102 rows | Markov transitions, Euclidean groove locking, genetic selection, FHN spiking |
+| **Human (→ concrete)** | `HC-001…064` | 56 | Flamenco compás, Ewe cross-rhythm, raga-tala, species counterpoint |
+| **Absolute (sound)** | `SP-001…SP-113` | 91 | FluidSynth render, Karplus-Strong, modal/physical modeling, granular, FM |
+| — implemented in engine | `METHOD_LEVELS` registry | 10 concrete + 8 ABS + 45 SP | routable right now via selector/produce() |
 
 The catalog is **living research**: nightly jobs research one new method per
 day (composition, sound-production, human-comp), classify its layer, write a
 full report, and a weekly job promotes implemented methods into code registries
-(`workflows/paths.py` SCALE + `SP_METHODS`). See
+(`workflows/paths.py` METHOD_LEVELS + `SP_METHODS`). See
 [Projects & Research](#projects--the-living-research-tree).
 
 ### The composition pipeline in one call (and underneath)
@@ -225,7 +225,7 @@ pip install numpy mido scipy music21 networkx pandas matplotlib
 ```
 musicom/
 ├── structures/            # MusicEvent / MusicUnit / UnitMatrix core
-├── workflows/             # composers, selector, paths (SCALE), provenance
+├── workflows/             # composers, selector, paths (level registry), provenance
 ├── generators/            # algorithmic generators + generator_registry
 ├── rules/                 # harmony, voice_leading, subset_network, set_theory
 ├── sound/                 # 77-module synthesis/effects/render stack (Absolute layer)
@@ -357,7 +357,7 @@ Voice 4:   [D₁]       [D₂]        [D₃]        [D₁]
 **Zero-drift invariant**: every voice's section units must end exactly at the
 section boundary; `validate()` gates every export.
 
-### SCALE levels (within the concrete layer)
+### Level registry (within the concrete layer)
 
 | Level | Scope | Example methods |
 |---|---|---|
@@ -380,7 +380,7 @@ this repo, grown by scheduled autonomous agents and fully git-tracked:
 | Tree | Contents |
 |---|---|
 | `projects/Styles/` | 55+ genre folders, 100+ numbered compositions — each with MIDI (phase 1 raw + phase 2 arrangement), audio, grid/harmony audits, provenance, REPORT.md |
-| `projects/Research/` | **methods_db.md** (95 algorithmic methods), **human_methods_db.md** (29 human-composition methods), sound SP methods, per-method research reports, LAYER_ARCHITECTURE.md |
+| `projects/Research/` | **methods_db.md** (105 algorithmic methods), **human_methods_db.md** (56 human-composition methods), sound SP methods, per-method research reports, LAYER_ARCHITECTURE.md |
 | `projects/Instruments/` | 18 researched instruments — importable registry with GM program, ranges, sweet spots, articulations, synthesis presets |
 | `projects/Production/` | nightly SP-method production outputs |
 | `projects/Legacy/` | archived pre-restructure projects (read-only) |
@@ -392,7 +392,7 @@ this repo, grown by scheduled autonomous agents and fully git-tracked:
 2. **DB**: one row per method in `methods_db.md` (Layer column included) or
    `human_methods_db.md`.
 3. **Registration** (weekly): implemented methods are promoted into code —
-   `workflows/paths.py` SCALE + `generators/generator_registry.py` (concrete),
+   `workflows/paths.py` METHOD_LEVELS + `generators/generator_registry.py` (concrete),
    `SP_METHODS` in `workflows/musicom_workflow.py` (absolute) — via
    `register_method()`, keeping DB and code in sync.
 4. **Production** (nightly): compositions pick implemented methods, run the
@@ -434,7 +434,7 @@ knowledge all live in this one repo.
 1. **Selector layer-chaining** — `workflows/selector.py` currently picks
    single methods; wire `layers_needed` → ordered abstract→concrete→absolute
    chains.
-2. **More SP-method adapters** — 12 SP methods are routable via
+2. **More SP-method adapters** — 45 SP methods are routable via
    `produce()`; most of the 77 `sound/` modules await workflow adapters
    (`SP_METHODS` registry in `workflows/musicom_workflow.py`).
 3. **Abstract-layer methods** — implement more ABS-* subset-network plans

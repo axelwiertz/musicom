@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-"""Composition Path Layer — SCALE registry + middle-out (Path C) orchestrator.
+"""Composition Path Layer — level registry + middle-out (Path C) orchestrator.
 
 Build order step 1 of the PATH_LAYER_PLAN (projects/Research/CompositionMethods):
 
-    workflows/paths.py   # SCALE registry (L1–L4 per method) + Path C orchestrator
+    workflows/paths.py   # level registry (L1–L4 per method) + Path C orchestrator
 
-The abstraction scale comes from the methods DB's Memory Depth column, split
+The abstraction level comes from the methods DB's Memory Depth column, split
 into 4 levels:
 
     L4 MACRO — form, sections, tonal plans      (output: skeleton)
@@ -13,7 +13,7 @@ into 4 levels:
     L2 VOICE — one line at a time, contour      (output: melodic lines)
     L1 MICRO — one note -> next note            (output: transitions)
 
-Sequence paths (directions through the scale):
+Sequence paths (directions through the levels):
 
     Path A TOP-DOWN    L4 -> L3 -> L2 -> L1   (skeleton first)
     Path B BOTTOM-UP   L1/L2 -> L3 -> L4      (structure induced)
@@ -41,13 +41,13 @@ from workflows.unitmatrix_composer import UnitMatrixComposer
 from workflows.provenance import write_provenance
 
 # ============================================================================
-# 1. SCALE registry — method ID -> (level, impl status)
+# 1. Level registry — method ID -> (level, impl status)
 # ============================================================================
 # Level is the method's PRIMARY abstraction level (plan §1).
 # `impl` mirrors generator_registry implementation status so the selector
 # (step 2) can filter spec-only methods without touching the DB.
 
-SCALE = {
+METHOD_LEVELS = {
     # --- Abstract layer (subset network, LAYER_ARCHITECTURE.md) ---
     # Registered at L4/L3: they produce structural plan (subset sequences,
     # tension targets), not note material. Level only matters for selector
@@ -227,7 +227,7 @@ LEVELS = ("L4", "L3", "L2", "L1")
 
 # Path C uses this chain (plan Example A / recommendation matrix):
 #   L3 anchor (groove) -> L4 form around it -> L2 lines on top -> L1 micro-fills
-# Each entry: (scale_label, method_id, description)
+# Each entry: (level_label, method_id, description)
 MIDDLE_OUT_CHAIN = [
     ("L3", "012", "Euclidean Groove Locking — anchor rhythm"),
     ("L3", "018", "Schillinger Resultants — groove variation"),
@@ -237,28 +237,28 @@ MIDDLE_OUT_CHAIN = [
 ]
 
 
-def methods_by_scale(level: str) -> List[str]:
-    """Method IDs at one scale level (plan §1 tables, auto-generated)."""
-    return sorted(mid for mid, (lv, _) in SCALE.items() if lv == level)
+def methods_by_level(level: str) -> List[str]:
+    """Method IDs at one level (plan §1 tables, auto-generated)."""
+    return sorted(mid for mid, (lv, _) in METHOD_LEVELS.items() if lv == level)
 
 
-def scale_of(method_id: str) -> Optional[str]:
+def level_of(method_id: str) -> Optional[str]:
     """Primary abstraction level of a method ID, or None if unknown."""
-    entry = SCALE.get(method_id)
+    entry = METHOD_LEVELS.get(method_id)
     return entry[0] if entry else None
 
 
 def impl_status(method_id: str) -> bool:
     """True if the method has working shared code (registry-aware routing)."""
-    entry = SCALE.get(method_id)
+    entry = METHOD_LEVELS.get(method_id)
     return entry[1] if entry else False
 
 
-def scale_table() -> str:
-    """Markdown table of the SCALE registry (for docs/)."""
+def level_table() -> str:
+    """Markdown table of the level registry (for docs/)."""
     rows = ["| Method ID | Level | Implemented |", "|---|---|---|"]
-    for mid in sorted(SCALE):
-        lv, impl = SCALE[mid]
+    for mid in sorted(METHOD_LEVELS):
+        lv, impl = METHOD_LEVELS[mid]
         rows.append(f"| {mid} | {lv} | {'yes' if impl else 'spec-only'} |")
     return "\n".join(rows)
 
@@ -266,25 +266,25 @@ def scale_table() -> str:
 # ============================================================================
 # Registration helper — one call, three places (LAYER_ARCHITECTURE.md)
 # ============================================================================
-# A method is registered in: SCALE (level + impl), GENERATOR_REGISTRY (code
+# A method is registered in: METHOD_LEVELS (level + impl), GENERATOR_REGISTRY (code
 # resolution). Editing all three by hand drifts (ABS-* landed in two, missed
 # the prose DB). Use register_method() so the machine-readable stores stay in
 # sync; the long-form methods_db.md prose stays manual (documented there).
 
 def register_method(method_id: str, level: str, registry_mod_path: str,
                     description: str) -> None:
-    """Register a method in SCALE + generator_registry in one call.
+    """Register a method in METHOD_LEVELS + generator_registry in one call.
 
     Args:
         method_id: e.g. "ABS-006" or "HC-023".
-        level: SCALE level, one of LEVELS ("L1".."L4").
+        level: abstraction level, one of LEVELS ("L1".."L4").
         registry_mod_path: import path for the implementation module (or None
-            for spec-only — registers in SCALE only, not routable).
+            for spec-only — registers in METHOD_LEVELS only, not routable).
         description: short description for the registry.
     """
     if level not in LEVELS:
         raise ValueError(f"level must be one of {LEVELS}, got {level!r}")
-    SCALE[method_id] = (level, registry_mod_path is not None)
+    METHOD_LEVELS[method_id] = (level, registry_mod_path is not None)
     if registry_mod_path is not None:
         from generators.generator_registry import GENERATOR_REGISTRY
         GENERATOR_REGISTRY[method_id] = (registry_mod_path, None, description)
@@ -508,7 +508,7 @@ class PathResult:
     midi_path: str
     provenance_path: str
     path: str                 # "C"
-    chain: List[Dict]         # [(scale, method_id, desc, status)]
+    chain: List[Dict]         # [(level, method_id, desc, status)]
     seed: int
     bpm: int
     key: str
@@ -573,9 +573,9 @@ def compose_middle_out(style="pop", key="C", bpm=120, progression=None,
     composer.to_midi(str(midi_path))
 
     chain = [
-        {"scale": sc, "method": mid, "desc": desc,
+        {"level": lv, "method": mid, "desc": desc,
          "impl": impl_status(mid)}
-        for sc, mid, desc in MIDDLE_OUT_CHAIN
+        for lv, mid, desc in MIDDLE_OUT_CHAIN
     ]
     prov = write_provenance(
         artifact_path=str(midi_path),
@@ -600,15 +600,15 @@ def compose_middle_out(style="pop", key="C", bpm=120, progression=None,
 
 
 if __name__ == "__main__":
-    print("=== SCALE REGISTRY (methods by level) ===")
+    print("=== LEVEL REGISTRY (methods by level) ===")
     for lv in LEVELS:
-        print(f"{lv}: {methods_by_scale(lv)}")
+        print(f"{lv}: {methods_by_level(lv)}")
     print()
     print("=== Path C demo ===")
     r = compose_middle_out(style="pop", key="C", bpm=120, seed=42)
     print(f"MIDI: {r.midi_path}")
     print(f"seed: {r.seed}")
     for step in r.chain:
-        print(f"  {step['scale']} {step['method']}: {step['desc']} "
+        print(f"  {step['level']} {step['method']}: {step['desc']} "
               f"({'impl' if step['impl'] else 'spec-only'})")
     print(f"provenance: {r.provenance_path}")

@@ -228,12 +228,12 @@ See `hermes_agent/README.md`.
   copies. The engine is installed **editable** from this repo
   (`/opt/data/repos/musicom`); those vendored trees are frozen snapshots.
 - **Method DB code truth**: the canonical, machine-readable method catalog is
-  `generators/generator_registry.py` + `workflows/paths.py` (`SCALE`). The
+  `generators/generator_registry.py` + `workflows/paths.py` (`METHOD_LEVELS`). The
   long-form `methods_db.md` / `human_methods_db.md` prose (synced to `docs/`)
   is human-readable reference and may lag code — when they disagree, code wins.
 - **Abstract layer** (`rules/subset_network.py`, `ABS-001..005`) is the newest
   addition (see `projects/Research/CompositionMethods/LAYER_ARCHITECTURE.md`).
-  ABS methods are registered in `SCALE` + `GENERATOR_REGISTRY`; they are NOT
+  ABS methods are registered in `METHOD_LEVELS` + `GENERATOR_REGISTRY`; they are NOT
   yet listed in the prose `methods_db.md`.
 
 ## Agent execution contract

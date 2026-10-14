@@ -2,7 +2,7 @@
 """Tests for the composition path layer (workflows/paths.py) — build step 1.
 
 Covers:
-- SCALE registry: every method has a level, levels are the 4 valid ones,
+- level registry: every method has a level, levels are the 4 valid ones,
   implementation status matches generator_registry reality (no routing to
   spec-only dead ends).
 - Path C middle-out orchestrator: deterministic (same seed -> byte-identical
@@ -18,28 +18,28 @@ import pytest
 sys.path.insert(0, "/opt/data/projects/Instruments")
 
 from workflows.paths import (
-    SCALE, LEVELS, MIDDLE_OUT_CHAIN,
-    methods_by_scale, scale_of, impl_status, scale_table,
+    METHOD_LEVELS, LEVELS, MIDDLE_OUT_CHAIN,
+    methods_by_level, level_of, impl_status, level_table,
     compose_middle_out, PathResult, POP_FORM,
 )
 
 
-# ---------------------------------------------------------------- SCALE ---
+# --------------------------------------------------------------- LEVEL ---
 
-def test_scale_levels_valid():
-    for mid, (lv, impl) in SCALE.items():
+def test_levels_valid():
+    for mid, (lv, impl) in METHOD_LEVELS.items():
         assert lv in LEVELS, f"{mid} has invalid level {lv}"
         assert isinstance(impl, bool)
 
 
-def test_scale_has_all_four_levels():
-    assert methods_by_scale("L4"), "L4 empty"
-    assert methods_by_scale("L3"), "L3 empty"
-    assert methods_by_scale("L2"), "L2 empty"
-    assert methods_by_scale("L1"), "L1 empty"
+def test_level_has_all_four_levels():
+    assert methods_by_level("L4"), "L4 empty"
+    assert methods_by_level("L3"), "L3 empty"
+    assert methods_by_level("L2"), "L2 empty"
+    assert methods_by_level("L1"), "L1 empty"
 
 
-def test_scale_counts_match_plan():
+def test_level_counts_match_plan():
     # plan §1: 13 L4, 25 L3, 20 L2, 9 L1 — L3 has 26 rows in the plan table
     # (the doc's count column says 25; the table lists 26). Step 2 added 003
     # (Genetic, L3) → L3 = 27. Registry matches the table + later additions.
@@ -67,17 +67,17 @@ def test_scale_counts_match_plan():
     # Weekly registration (2026-10-11) added 106/107/108/110/111 at L4 and
     # HC-055/056/060 at L4 (+8 → 58); 105/109 at L3 and HC-057/058/059/061 at L3
     # (+6 → 71). All spec-only (no generator modules yet).
-    assert len(methods_by_scale("L4")) == 58
-    assert len(methods_by_scale("L3")) == 71
-    assert len(methods_by_scale("L2")) == 20
-    assert len(methods_by_scale("L1")) == 9
+    assert len(methods_by_level("L4")) == 58
+    assert len(methods_by_level("L3")) == 71
+    assert len(methods_by_level("L2")) == 20
+    assert len(methods_by_level("L1")) == 9
 
 
-def test_scale_of_known_and_unknown():
-    assert scale_of("001") == "L4"
-    assert scale_of("002") == "L1"
-    assert scale_of("HC-012") == "L3"
-    assert scale_of("nope") is None
+def test_level_of_known_and_unknown():
+    assert level_of("001") == "L4"
+    assert level_of("002") == "L1"
+    assert level_of("HC-012") == "L3"
+    assert level_of("nope") is None
 
 
 def test_impl_status_reflects_registry():
@@ -93,8 +93,8 @@ def test_impl_status_reflects_registry():
     assert impl_status("HC-007") is False
 
 
-def test_scale_table_is_markdown():
-    t = scale_table()
+def test_level_table_is_markdown():
+    t = level_table()
     assert t.startswith("| Method ID | Level | Implemented |")
     assert "| 001 | L4 |" in t
     assert "spec-only" in t

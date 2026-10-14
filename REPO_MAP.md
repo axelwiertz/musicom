@@ -7,7 +7,7 @@ what it contains, who it's for, and whether it ships in the pip wheel.
 |---|---|---|---|
 | `structures/` | `MusicUnit`, `MusicEvent`, `UnitMatrix`, `MidiInstrument` | engine users | ✅ |
 | `workflows/` | `UnitMatrixComposer`, `compose()`, `produce()`, `analyze_midi()` | engine users | ✅ |
-| `generators/` | method registry (SCALE/GENERATOR), interval chains, L-systems | engine users | ✅ |
+| `generators/` | method registry (level/GENERATOR), interval chains, L-systems | engine users | ✅ |
 | `rules/` | set theory, harmony, voice leading, patterns, realize | engine users | ✅ |
 | `sound/` | render (FluidSynth/KS), analysis, effects, tuning, modular | engine users | ✅ |
 | `transformers/` | transpose, retrograde, negative harmony, canon | engine users | ✅ |

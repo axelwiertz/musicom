@@ -7,8 +7,8 @@ Covers (plan §4 + advice #3/#7):
   corpus requirement, determinism requirement, memory-depth level match,
   metric binding, tonal gravity.
 - Scoring: style affinity (HC method wins for matching style), curated
-  SCALE-mirror tie-break.
-- Daily-additions resilience: union of SCALE + registry; registry-only
+  level-mirror tie-break.
+- Daily-additions resilience: union of level registry + registry; registry-only
   methods are selectable with a default level.
 - Audit trail: every selection carries reasons.
 """
@@ -19,7 +19,7 @@ import pytest
 sys.path.insert(0, "/opt/data/projects/Instruments")
 
 from generators.generator_registry import GENERATOR_REGISTRY
-from workflows.paths import SCALE, impl_status
+from workflows.paths import METHOD_LEVELS, impl_status
 from workflows.selector import (
     TRAITS, STYLE_HC_MAP, TaskProfile, Selection, select, select_for_cron,
     selector_table,
@@ -82,7 +82,7 @@ def test_headless_cost_guard():
         assert mid not in cron_sel, f"{mid} must not run in cron"
     # ...but remain selectable interactively
     interactive = {s.method_id for s in select(TaskProfile(headless=False))}
-    # heavy methods aren't in SCALE/registry, so they can't be selected anyway;
+    # heavy methods aren't in METHOD_LEVELS/registry, so they can't be selected anyway;
     # the guard is about the trait, checked at the profile level:
     assert all(not t["headless_ok"] for mid, t in TRAITS.items()
                if mid in ("042", "046", "047", "054", "057", "059", "060", "062", "063"))
@@ -106,7 +106,7 @@ def test_determinism_gate():
 
 def test_memory_depth_gate():
     meso = {s.method_id for s in select(TaskProfile(memory_depth="meso"))}
-    for mid, (level, _) in SCALE.items():
+    for mid, (level, _) in METHOD_LEVELS.items():
         if level != "L3" and impl_status(mid):
             assert mid not in meso, f"{mid} is {level} but selected for meso"
 
@@ -150,7 +150,7 @@ def test_union_of_scale_and_registry():
 
 
 def test_registry_only_method_gets_default_level():
-    # simulate a method newly added to the registry but not yet in SCALE
+    # simulate a method newly added to the registry but not yet in METHOD_LEVELS
     import generators.generator_registry as gr
     orig = dict(gr.GENERATOR_REGISTRY)
     gr.GENERATOR_REGISTRY["999"] = ("generators.base", "FunctionGenerator", "new")
