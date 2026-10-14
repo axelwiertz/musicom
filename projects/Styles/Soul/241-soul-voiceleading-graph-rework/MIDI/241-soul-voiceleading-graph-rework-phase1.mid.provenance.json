@@ -1,0 +1,23 @@
+{
+  "artifact": "241-soul-voiceleading-graph-rework-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.method.011_voiceleading_graph_walk_phase1 (rework of 084)",
+  "sources": [
+    "source:084-soul-voiceleading-graph (Soul, Method 011)",
+    "methods_db.md:Voice-Leading Graph Search"
+  ],
+  "parameters": {
+    "bpm": 92,
+    "bars": 32,
+    "seed": 20261014,
+    "phase": 1,
+    "quantized": false,
+    "key": "D minor (aeolian)",
+    "form": "8 sections (extended from 6)"
+  },
+  "notes": "Raw weighted walk over a D-aeolian tonal-function graph (weighted degree transitions biased to chord tones), fractional-tick rhythm, single voice, pre-rules. Rework of 084 (redesign: source compose.py missing + no provenance/index).",
+  "sha256": "13245599e8ba6c18f4249cc82c349f205a68f291dd874a69defaacf4c82e54a7",
+  "bytes": 1430,
+  "created_utc": "2026-10-14T01:09:58.867494+00:00",
+  "provenance_version": "1.0"
+}

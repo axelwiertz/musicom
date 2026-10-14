@@ -1,6 +1,6 @@
 # Layer Architecture — Abstract → Concrete → Absolute
 
-Migrate the unitmatrix/SCALE system into 3 named layers (not "matrices").
+Migrate the unitmatrix/level system into 3 named layers (not "matrices").
 Sound is reserved for the Absolute layer (sound production, synthesis, mix).
 
 ## The 3 layers
@@ -15,10 +15,10 @@ Sound is reserved for the Absolute layer (sound production, synthesis, mix).
 
 The engine already has these — they are NOT new:
 
-- **SCALE L1–L4** (`workflows/paths.py`): macro (L4) = form/skeleton; meso (L3) = groove/motif; voice (L2) = contour; micro (L1) = note-to-note. These are **Concrete-layer** levels.
+- **METHOD_LEVELS L1–L4** (`workflows/paths.py`): macro (L4) = form/skeleton; meso (L3) = groove/motif; voice (L2) = contour; micro (L1) = note-to-note. These are **Concrete-layer** levels.
 - **selector** (`workflows/selector.py`): (TaskProfile) → ordered method list. Currently single methods, no layer chaining.
 - **rules/set_theory.py**: normal_form, prime_form, interval_vector — the **subset-theory kernel** exists.
-- **methods_db.md / SCALE**: the method database (algorithmic, human HC-*, sound production SP-*) — has `methods_db.md`, `human_methods_db.md`, sound SP-* docs.
+- **methods_db.md / METHOD_LEVELS**: the method database (algorithmic, human HC-*, sound production SP-*) — has `methods_db.md`, `human_methods_db.md`, sound SP-* docs.
 
 ## Gaps (what this plan adds)
 
@@ -33,14 +33,14 @@ The engine already has these — they are NOT new:
 |---|---|
 | `rules/subset_network.py` (new) | Pattern (subset), PatternNetwork (Tn/I/Z/complement/parsimonious), tension-from-ICV, progression_path |
 | `workflows/selector.py` | add `LAYERS` map (method_id → layer), `layers_needed` on TaskProfile, `select_chain()` |
-| `workflows/paths.py` | map SCALE L1–L4 → layers (L4/L3 = concrete-structure, L2/L1 = concrete-material); document 3-layer composition paths |
+| `workflows/paths.py` | map level L1–L4 → layers (L4/L3 = concrete-structure, L2/L1 = concrete-material); document 3-layer composition paths |
 | `projects/Research/CompositionMethods/methods_db.md` | add Layer column |
 | `docs/` | regenerate tables |
 
 ## Layer tags (initial mapping)
 
 - **Abstract**: (new methods) subset-walk, tension-curve, z-relation variation
-- **Concrete**: all existing SCALE L1–L4 (001 Skeleton-First L4, 012 Euclidean L3, 023 Tendency Masking L2, 002 Markov L1, ...)
+- **Concrete**: all existing level L1–L4 (001 Skeleton-First L4, 012 Euclidean L3, 023 Tendency Masking L2, 002 Markov L1, ...)
 - **Absolute**: all SP-* sound production methods
 
 ## Composition paths (the "full" pipeline)

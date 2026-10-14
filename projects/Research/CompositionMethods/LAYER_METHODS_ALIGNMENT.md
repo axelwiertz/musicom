@@ -5,14 +5,14 @@ the path selectors aligned with the 3-layer composition paths?
 
 ## Methods database → layer alignment
 
-The methods DB (`methods_db.md`, SCALE registry in `workflows/paths.py`,
-`generator_registry.py`, skill master-map) splits by **abstraction scale**
+The methods DB (`methods_db.md`, level registry in `workflows/paths.py`,
+`generator_registry.py`, skill master-map) splits by **abstraction level**
 L4→L1. Under LAYER_ARCHITECTURE.md these map onto the 3 layers:
 
 | Layer | Holds | Methods | Registry |
 |---|---|---|---|
-| **Abstract** | 12TET subset sequences, tension curves, pattern network (z/P/L/R) | ABS-001..005 (new) | `rules/subset_network.py` + registry + SCALE (L4/L3) |
-| **Concrete** | realized unitmatrix cells, resolved events | all SCALE L1–L4: 001, 002, 012, 018, 023, 040, HC-012, ... | `generators/*` |
+| **Abstract** | 12TET subset sequences, tension curves, pattern network (z/P/L/R) | ABS-001..005 (new) | `rules/subset_network.py` + registry + METHOD_LEVELS (L4/L3) |
+| **Concrete** | realized unitmatrix cells, resolved events | all level L1–L4: 001, 002, 012, 018, 023, 040, HC-012, ... | `generators/*` |
 | **Absolute** | audio stems → WAV/OGG | SP-001..SP-060 | `sound/render/*`, `sound/synthesis/*` |
 
 Human methods (HC-*) sit in Concrete (they realize material) with style
@@ -54,6 +54,6 @@ validated zero-drift MIDI 4333 B, provenance records
   `rules/subset_network.py` suffice for walks; Z-variation/complement want
   proper class wrappers when used as standalone generators).
 - `docs/methods.md` + `methods_db.md` tables don't list ABS rows yet (large
-  manual tables; generator_registry + SCALE are the code truth).
+  manual tables; generator_registry + METHOD_LEVELS are the code truth).
 - Audit (`subset membership` per section) exists in project 084's
   audit_084.py pattern; not yet a shared engine rule.

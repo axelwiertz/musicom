@@ -1,0 +1,33 @@
+{
+ "chosen": "Soul/084-soul-voiceleading-graph",
+ "genre": "Soul",
+ "standard_failures": [
+  "std1_no_compose_py_evidence",
+  "std6_missing prov=False index=False"
+ ],
+ "redesign_required": true,
+ "source_identity": {
+  "key": "D minor (aeolian)",
+  "tempo": 92,
+  "meter": "4/4",
+  "form": "Intro(4) Verse(4) Chorus(4) Verse2(4) Chorus2(4) Outro(4) = 24 bars",
+  "voices": [
+   "TenorSax(lead)",
+   "Rhodes/Piano",
+   "Violin",
+   "AcousticGuitar",
+   "ElectricBass",
+   "Drums(ch9)"
+  ],
+  "method": "011 Voice-Leading Graph Search (TonalNetworkGenerator weighted walk)",
+  "progression": "i i VI VII | i VII iv VI | i iv III i | VI VII i VII | i iv v III | VI iv v i",
+  "programs": {
+   "lead": 56,
+   "piano": 1,
+   "violin": 40,
+   "guitar": 25,
+   "bass": 43,
+   "drums": 0
+  }
+ }
+}

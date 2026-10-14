@@ -1,0 +1,151 @@
+{
+  "project": "241-soul-voiceleading-graph-rework",
+  "source": "084-soul-voiceleading-graph",
+  "key": "D minor (aeolian)",
+  "key_pcs": [
+    0,
+    2,
+    4,
+    5,
+    7,
+    9,
+    10
+  ],
+  "bpm": 92,
+  "bars": 32,
+  "sections": [
+    {
+      "name": "Intro",
+      "bars": 4,
+      "technique": "register_shift_down_thin"
+    },
+    {
+      "name": "Verse",
+      "bars": 4,
+      "technique": "identity"
+    },
+    {
+      "name": "Chorus",
+      "bars": 4,
+      "technique": "transpose_up_m3"
+    },
+    {
+      "name": "Bridge",
+      "bars": 4,
+      "technique": "retrograde"
+    },
+    {
+      "name": "Verse2",
+      "bars": 4,
+      "technique": "augmentation"
+    },
+    {
+      "name": "Chorus2",
+      "bars": 4,
+      "technique": "inversion_density_rise"
+    },
+    {
+      "name": "Break",
+      "bars": 4,
+      "technique": "diminution"
+    },
+    {
+      "name": "Outro",
+      "bars": 4,
+      "technique": "recapitulation"
+    }
+  ],
+  "bar_degrees": [
+    "i",
+    "VI",
+    "iv",
+    "VII",
+    "i",
+    "III",
+    "VII",
+    "iv",
+    "III",
+    "VII",
+    "VI",
+    "VII",
+    "iv",
+    "v",
+    "III",
+    "VI",
+    "i",
+    "iv",
+    "VI",
+    "VII",
+    "III",
+    "VII",
+    "VI",
+    "VII",
+    "v",
+    "iv",
+    "III",
+    "VII",
+    "iv",
+    "v",
+    "i",
+    "i"
+  ],
+  "section_roots": [
+    {
+      "name": "Intro",
+      "chord": "Gm",
+      "root_pc": 7,
+      "quality": "min"
+    },
+    {
+      "name": "Verse",
+      "chord": "C",
+      "root_pc": 0,
+      "quality": "maj"
+    },
+    {
+      "name": "Chorus",
+      "chord": "Bb",
+      "root_pc": 10,
+      "quality": "maj"
+    },
+    {
+      "name": "Bridge",
+      "chord": "F",
+      "root_pc": 5,
+      "quality": "maj"
+    },
+    {
+      "name": "Verse2",
+      "chord": "Bb",
+      "root_pc": 10,
+      "quality": "maj"
+    },
+    {
+      "name": "Chorus2",
+      "chord": "Bb",
+      "root_pc": 10,
+      "quality": "maj"
+    },
+    {
+      "name": "Break",
+      "chord": "F",
+      "root_pc": 5,
+      "quality": "maj"
+    },
+    {
+      "name": "Outro",
+      "chord": "Dm",
+      "root_pc": 2,
+      "quality": "min"
+    }
+  ],
+  "variation_techniques": [
+    "register_shift_down_thin",
+    "transposition_up_m3",
+    "retrograde",
+    "augmentation",
+    "inversion_density_rise",
+    "diminution",
+    "recapitulation"
+  ]
+}

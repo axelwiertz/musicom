@@ -1,0 +1,8 @@
+{
+  "date": "2026-10-14",
+  "method": "SP-028",
+  "method_module": "sound.effects.lpc_synth",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Techno/083-techno-brownian/MIDI/083-techno-brownian.mid",
+  "registry_total": 45,
+  "n_well_formed": 231
+}

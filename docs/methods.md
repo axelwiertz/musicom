@@ -122,6 +122,7 @@ Classification of active Musicom composition methods categorized by their primar
 | **112** | concrete | Costas Array Distinct-Displacement Composition (CADDC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Weak (Scale-mapped) | Grid-Locked / Continuous | Meso / Array Order | $\mathcal{O}(n^2)$ verify, $\mathcal{O}(n \log n)$ Welch construction | 2D Costas arrays (Costas 1965): n dots on an n×n pitch-time grid, one per row and column, all n(n−1)/2 displacement vectors (lag, interval) pairwise distinct — the 2D generalization of 090 Golomb Ruler GRDC. Every pair of notes has a unique (lag, interval) signature: no interval repeats at any fixed lag (verified: Welch p=13 melody = 11 distinct stepwise intervals), thumbtack self-similarity = no hidden transposition at any offset. Deterministic Welch (primitive roots, order p−1) and Lempel–Golomb (finite fields, order q−2/q−3) constructions; dihedral/time-reversal/pitch-inversion morphs = sections; NAKCA variant forbids stepwise motion in both axes. Sibling of 090 GRDC (1D→2D), 065 TTSMC (aggregate rows) and 111 VTCC (hocket); deterministic foil to 053 LFC leaps. |
 | **113** | abstract | Pitch-Class Fourier Spectrum Composition (PCFSC) | **Rules-Based** | Pitch, Harmony, Structure, Texture | Strong (Fourier-phase-guided) | Grid-Locked / Continuous | Meso / Phase Trajectory | $\mathcal{O}(4096 \cdot 12)$ profile match, $\mathcal{O}(12)$/step gen | Designs pitch-class sets and progressions in the DFT over $\mathbb{Z}_{12}$ (Amiot 2016): chord/scale quality = magnitude spectrum $\lvert f_A(k) \rvert$ of the pc-set — whole-tone energy only at k=0,6; octatonic only at k=0,4,8; the 7-note ME (diatonic class) attains the max fifth-coefficient $\lvert f(5) \rvert = 2+\sqrt{3}$ (verified by exhaustive $\binom{12}{7}$ search); major/minor triads are magnitude-twins — mode lives in PHASE, not magnitude (verified: identical $|f|$ arrays, different $\arg f_5$). Tonic position/function = Fourier phase; transposition = phase rotation (verified: $T_7$ rotates $\arg f_1$ by $7\pi/6$). Composition = a trajectory in Fourier space: per-section target magnitude profile + designed phase walk yield the pitch-pool sequence and tension curve; tension = weighted Fourier-space distance between successive sets (Bernardes TIV 2016); magnitude-twin complement pairs (diatonic $\cong$ pentatonic) drive subset pairing. Abstract layer: feeds rules/subset_network.py. Fourier cousin of 039 SMA (audio-domain) and 051 SGLM (spectral-graph); phase-driven foil to 095 CTC and 104 PSSC. |
 | **114** | concrete | Farey–Stern–Brocot Composition (FSBC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Tenney-graded) | Grid-Locked / Continuous | Macro / Tree | $O(N)$ per event, $O(N^2)$ one-time Farey prefix | Hierarchical rational architecture: Farey sequences enumerate ALL reduced fractions a/b with b≤N (sorted) → maximal rational subdivision of the bar (every tuplet order ≤ N simultaneously, Cowell/Tenney rhythmicon arrays); the Stern–Brocot tree holds every positive rational exactly once with depth = Tenney-height consonance gradation → JI/12-TET pitch generation; paths encode continued fractions (a₀ R, a₁ L…); Calkin–Wilf enumeration (Stern diatomic s(n)/s(n+1)) yields a linear non-repeating rational timeline. Form = Farey-order arc (N=3→5→7→4→3) or tree walk. Concrete cousin of 012 Euclidean (single k/n rhythm); sibling of 069 Christoffel (primitive tree paths) and 076 Thue–Morse (other automatic sequence); deterministic number-theoretic foil to 053 Lévy leaps and 084 Zipf–Mandelbrot. |
+| **115** | concrete | Keplerian Orbital Resonance Composition (KORC) | **Nature-Led** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Kepler interval-graded) | Continuous / Fluid | Macro / Orbital Period | $O(N)$ per event (closed-form Kepler time) | Each UnitMatrix voice = a planet on an elliptical orbit; Kepler's 1st law r(ν)=a(1−e²)/(1+e·cos ν) sweeps pitch contour; 2nd law (equal areas) yields exact onset times t=(P/2π)(E−e·sin E) — events crowd at perihelion, spread at aphelion ("rush/linger" rubato, ratio ((1+e)/(1−e))² = the Harmonice Mundi interval table: Saturn 5:4, Jupiter 6:5, Mars 3:2, Earth 16:15, Venus 24:25); 3rd law P²∝a³ → log₂P register scale (NASA exoplanet sonification practice); mean-motion resonances (2:1, 3:2, Laplace 4:2:1 Io–Europa–Ganymede) → polyrhythmic hierarchy, periodic conjunction epochs = cadence schedule, anti-aligned apsides = tension oscillation. Section = synodic cycle / orbital year; macro-form = resonance-capture chain (3:2→2:1→4:2:1). Nature-Led foil to 020 SMSTC (unbound clouds) / 043 SATM (chaotic attractors); physically-sourced continuous-time sibling of 012 Euclidean / 069 Christoffel; deterministic counterpart to 045 Hawkes / 038 KOPS. |
 |||### Source
 |Sakellariou, J., Tria, F., Loreto, V. & Pachet, F. (2017). "Maximum entropy models capture melodic styles." *Scientific Reports* 7, 9172. arXiv:1610.03414. — Jaynes, E. T. (1957). "Information theory and statistical mechanics." *Physical Review* 106, 620–630.
 
@@ -292,7 +293,8 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 || **SP-110** | Pulse Width Modulation Synthesis (PWM) | **Synthesis Engines** | Variable-Duty-Cycle Pulse / Analog Pad & String Timbres | Variable duty-cycle pulse wave oscillator with PolyBLEP bandlimited antialiasing. Two sawtooth waves with phase offset $D$ produce pulse wave via subtraction, containing both even and odd harmonics. LFO-modulated duty cycle creates evolving timbre — the classic analog string pad sound. Forms the source oscillator for subtractive signal chains. Candidate: `sound/synthesis/pwm_synthesis.py`. |
 | **SP-111** | Duffing Oscillator Nonlinear Synthesis (DONS) | **Synthesis Engines** | Forced-Nonlinear-Oscillator / Chaotic & Harmonic Organic Timbres | Integrates the forced damped Duffing oscillator $\ddot{x}+\delta\dot{x}+\alpha x+\beta x^3=\gamma\cos(\omega t)$ at audio rate; displacement $x(t)$ IS the sample. Drive frequency $\omega$ = pitch; drive amplitude $\gamma$ = one-knob chaos sweep (pure sine → odd-harmonic mode-locked → double-well strange attractor); seedable initial conditions give deterministic-per-note organic variation. $\mathcal{O}(1)$ per sample. Candidate: `sound/synthesis/duffing_synth.py`. |
 | **SP-112** | Linear Arithmetic Synthesis (LASS) | **Synthesis Engines** | Hybrid PCM-Attack + Subtractive-Sustain (LA) Timbres | Hybrid synthesis (Roland D-50, 1987): a one-shot PCM attack transient (hammer, pluck, breath "chiff") is crossfaded via an enveloped equal-power balance into a subtractive sustain body (PolyBLEP saw/PWM through a resonant lowpass). Partial = PCM or synth source + TVA/TVF envelopes; two partials = tone. Sampler-grade attack realism, synthesizer-grade sustain control. $\mathcal{O}(1)$ per sample per partial. Candidate: `sound/synthesis/la_synthesis.py`. |
-| **SP-113** | Psychoacoustic Bass Enhancement Synthesis (PBES) | **Post-Processing / DSP** | Virtual Bass Perception | Post-process that generates harmonics of bass content via controlled nonlinearity to create the missing-fundamental illusion of low bass on bandwidth-limited speakers. Applies to rendered audio buffers or mix stems; per-voice or shared bus configuration. $\mathcal{O}(1)$ per sample. Candidate: `sound/effects/bass_enhancer.py`. |
+|| **SP-113** | Psychoacoustic Bass Enhancement Synthesis (PBES) | **Post-Processing / DSP** | Virtual Bass Perception | Post-process that generates harmonics of bass content via controlled nonlinearity to create the missing-fundamental illusion of low bass on bandwidth-limited speakers. Applies to rendered audio buffers or mix stems; per-voice or shared bus configuration. $\mathcal{O}(1)$ per sample. Candidate: `sound/effects/bass_enhancer.py`. |
+|| **SP-114** | Spectral Dynamics Compression/Expansion (SDCX) | **Post-Processing / DSP** | Spectral Dynamics / Per-Band Compression, Expansion & Gating | STFT-domain dynamics processor that applies independent compression, expansion, limiting, and gating to each of $N$ perceptually-scaled frequency bands (ERB grouping). Per-band threshold, ratio, attack, release, and knee parameters. Frame-by-frame STFT analysis → band grouping → level detection → gain computer → magnitude masking → ISTFT overlap-add. Preserves phase. $O(W \log W + B)$ per hop. Candidate: `sound/effects/spectral_dynamics.py`. |
 |---|
 
 
@@ -18695,7 +18697,7 @@ $\mathcal{O}(H \cdot D)$ for $H$ hits of $D$ samples. Deterministic per
 
 ### Layer
 
-Concrete (L2/L1 on the SCALE abstraction ladder). The ruler is designed abstractly, but every consumer here produces concrete events: L2 for pitch pools (which scale degrees are *in*), L3 for onset lattices and groove interlocks, L4 for section-marker placement. No subset-network (ABS-\*) machinery is required; the construction is standalone and realizes directly into `MusicUnit` events. Registered in `workflows/paths.py` SCALE as L3 (onset lattice) with pitch-pool use at L2.
+Concrete (L2/L1 on the level ladder). The ruler is designed abstractly, but every consumer here produces concrete events: L2 for pitch pools (which scale degrees are *in*), L3 for onset lattices and groove interlocks, L4 for section-marker placement. No subset-network (ABS-\*) machinery is required; the construction is standalone and realizes directly into `MusicUnit` events. Registered in `workflows/paths.py` METHOD_LEVELS as L3 (onset lattice) with pitch-pool use at L2.
 
 ### Description
 
@@ -18956,7 +18958,7 @@ SP-076..SP-086, no `sound_method_SP-088*` / `report_SP-088*` files existed).*
 
 ### Layer
 
-Concrete (L3/L2 on the SCALE abstraction ladder). The frieze pattern is generated deterministically from an underlying triangulated $(n+1)$-gon seed, but every musical consumer realizes directly into concrete musical structures: L3 for voice coordination and phrase periods, L2 for polyphonic voice contours, L1 for local intervallic voice leading and metric subdivisions. Registered in `workflows/paths.py` SCALE as L3 (frieze polyphonic coordinate matrix) with pitch/rhythm mapping at L2/L1.
+Concrete (L3/L2 on the level ladder). The frieze pattern is generated deterministically from an underlying triangulated $(n+1)$-gon seed, but every musical consumer realizes directly into concrete musical structures: L3 for voice coordination and phrase periods, L2 for polyphonic voice contours, L1 for local intervallic voice leading and metric subdivisions. Registered in `workflows/paths.py` METHOD_LEVELS as L3 (frieze polyphonic coordinate matrix) with pitch/rhythm mapping at L2/L1.
 
 ### Description
 
@@ -25186,4 +25188,267 @@ Section transitions ramp $g_{harm}$ and $f_c$ smoothly to avoid audible disconti
 
 ---
 
-Candidate code path: `sound/effects/bass_enhancer.py` — implements `PBEConfig` dataclass (LPF/BPF taps, method selector, $\alpha_{rise}$, $\alpha_{fall}$, $g_{harm}$, delay samples), `PBESingleVoice` (per-voice state: envelope follower state $y_{ef}[n-1]$, DC blocker state, integrator phase $y_{int}[n-1]$), `PBEStereoBus` (shared processing: L+R summed → PBES → distribute back to L+R), `PBEZyler` (oversampled chain generator for aggressive settings), and `pbe_preset(name)` (warm/subtle/full/aggressive/bridge) for quick drop-in within the production pipeline at `sound/render/pipeline.py`.
+Candidate code path: `sound/effects/bass_enhancer.py` — implements `PBEConfig` dataclass (LPF/BPF taps, method selector, $\alpha_{rise}$, $\alpha_{fall}$, $g_{harm}$, delay samples), `PBESingleVoice` (per-voice state: envelope follower state $y_{ef}[n-1]$, DC blocker state, integrator phase $y_{int}[n-1]$), `PBEStereoBus` (shared processing: L+R summed → PBES → distribute back to L+R), `PBEZyler` (oversampled chain generator for aggressive settings), and `pbe_preset(name)` (warm/subtle/full/aggressive/bridge) for quick drop-in within the production pipeline at `sound/render/pipeline.py`.---
+
+### Source
+
+[1] Kepler, J. (1619). *Harmonice Mundi* [The Harmony of the World], Book V. Linz: Johann Planck. — The founding document of algorithmic celestial music: Kepler assigns to each planet a musical interval equal to the ratio of its maximum angular velocity (perihelion) to its minimum (aphelion), measured from the Sun — Saturn ≈ 4:5 (major third), Jupiter ≈ 5:6 (minor third), Mars ≈ 2:3, Earth ≈ 15:16 (semitone, mi–fa), Venus ≈ 24:25 (diesis); all within one diesis except Mars–Jupiter (18:19). English trans. Aiton, Duncan & Field (1997), American Philosophical Society.
+[2] Walker, D. P. (1964). "Kepler's Celestial Music." *Journal of the Warburg and Courtauld Institutes* 30, 249–. — Historical reconstruction of Kepler's tuning scheme (whether the "sounds" were monochords struck by planetary angels — his sectio canonis) and its derivation from Book III harmonic ratios.
+[3] Voelkel, J. R. (1995). "The Music of the Heavens: Kepler's Harmonic Astronomy." *Physics Today* 48(6), 59–60. — Modern summary of Kepler's harmonic astronomy; the max/min angular-velocity ratio table.
+[4] Grove Music Online, "Kepler, Johannes" — his harmony of the spheres is based on the relative maximum and minimum angular velocities of the planets measured from the Sun.
+[5] "An even more 'harmonic' version of Kepler's third law." *The Physics Teacher* 61(2), 150 (AIP). — The sesquialtera form: the ratio of any two planets' periodic times is precisely the 3:2 power (sesquialtera) of the ratio of their mean distances (Kepler's own statement, *Harmonice Mundi* p. 189); period ratios derived from distance ratios.
+[6] Wikipedia: "Orbital resonance." — Mean-motion commensurability p:q (n₁·p ≈ n₂·q); the Laplace resonance: Io–Europa–Ganymede mean motions in 4:2:1 commensurability (two coupled 2:1 resonances; triples satisfy n₁ − 2n₂ + ϖ ≈ 0 with anti-aligned apsides); libration about 180°.
+[7] NASA SVS (2024). "Sonification of Exoplanet Discoveries by Month" (svs.gsfc.nasa.gov/5653) and NASA "5000 Exoplanets: Listen to the Sounds of Discovery." — Modern practice precedent: orbital period → guitar-note pitch (shorter period = higher pitch); the direct scientific-sonification ancestor of the P→pitch mapping below.
+
+### Layer
+
+**concrete** — KORC generates concrete `MusicUnit` events that fill UnitMatrix cells: onset ticks derived from the true-anomaly time law (Kepler's 2nd law, solved exactly via Kepler's equation), pitch from period/radius ratios (Kepler's 3rd law + per-planet velocity ratios), velocity from the 2nd-law areal speed. Feeds `generators/kepler_orbit_composer.py` (composite generator: `PlanetVoice`, `ResonanceChain`, `SynodicForm`). Not abstract: it emits events with pitch/onset/duration/velocity, not pitch-pool subsets. Not absolute: no sound production.
+
+### Paradigm
+
+**Nature-Led** — celestial mechanics. The generator integrates the real physical laws of two-body orbital motion: Kepler's 1st law (elliptical orbit, Sun at a focus), 2nd law (equal areas in equal times → non-uniform angular velocity), and 3rd law (P² ∝ a³). No randomness in the core (deterministic given orbital elements), no learning, no stochastic transition kernels — the dynamics of an actual natural system (the Solar System, any exoplanet system, or any synthetic orbital architecture) produce the music. Contrast stochastic (002 Markov, 053 Lévy), rules-based (012 Euclidean), and AI-driven (054 ATS) methods.
+
+### Description
+
+**Keplerian Orbital Resonance Composition (KORC)** composes by placing each UnitMatrix voice on a Keplerian orbit and reading the notation directly off the orbital dynamics. A voice = a body (planet, moon, or exoplanet) characterized by orbital elements (semi-major axis $a$, eccentricity $e$, period $P$). Three physical laws become three compositional operators:
+
+**Kepler's 1st law — the orbit is an ellipse.** Position (radial distance and true anomaly $\nu$) at any time:
+$$r(\nu) = \frac{a(1-e^2)}{1 + e\cos\nu}$$
+The radial sweep $r(\nu)$ maps to pitch contour: perihelion (near the star) is the register's lowest peri-approach, aphelion the highest; the flattening of the ellipse stretches/compresses intervals.
+
+**Kepler's 2nd law — equal areas in equal times.** Angular velocity is not constant; the planet rushes at perihelion and lingers at aphelion. The areal-speed law gives the time-position relation exactly:
+$$\frac{\mathrm{d}\nu}{\mathrm{d}t} = \frac{h}{r^2}, \qquad h = \frac{2\pi a^2\sqrt{1-e^2}}{P}$$
+so the time at which the body reaches true anomaly $\nu_k$ is
+$$t(\nu_k) = \frac{P}{2\pi}\Big(M(\nu_k)\Big), \qquad M = E - e\sin E, \qquad \tan\frac{E}{2} = \sqrt{\frac{1-e}{1+e}}\,\tan\frac{\nu}{2}$$
+($M$ = mean anomaly, $E$ = eccentric anomaly — Kepler's equation). Sampling $N$ evenly spaced true anomalies per orbit and converting to $t$ yields onsets that *crowd at perihelion* (fast, dense passages — the "rush") and *spread at aphelion* (slow, sparse — the "linger"): built-in rubato with physically exact timing, no quantization needed. Eccentricity $e$ controls rubato depth: $e=0$ (circular) = metronomic grid; $e \to 0.5$+ = dramatic Ionian-style agogic swells. **The ratio of max to min angular velocity is $((1+e)/(1-e))^2$** — and this is precisely the ratio Kepler heard as the planet's interval in *Harmonice Mundi*: Saturn $e{=}0.054 \Rightarrow \approx 5{:}4$ major third; Jupiter $e{=}0.048 \Rightarrow \approx 6{:}5$ minor third; Mars $e{=}0.093 \Rightarrow \approx 3{:}2$ fifth; Earth $e{=}0.017 \Rightarrow \approx 16{:}15$ semitone; Venus $e{=}0.007 \Rightarrow \approx 24{:}25$ diesis — all within one diesis, exactly as Kepler tabulated (Walker 1964; Voelkel 1995). KORC therefore reproduces the historical Keplerian interval table as a *direct consequence of the physics*, then turns it into composition.
+
+**Kepler's 3rd law — P² ∝ a³.** Period governs the rate of the whole orbital cycle; the sesquialtera form (Kepler's own phrasing, AIT: the ratio of periods is the 3:2 power of the ratio of mean distances) means period ratios follow distance ratios as $P_1/P_2 = (a_1/a_2)^{3/2}$. Mapping $\log_2 P$ to pitch (NASA exoplanet-sonification practice: shorter period = higher pitch; SVS 2024) converts orbital architecture into a *scale*: a chain of bodies whose distances grow by $r$ yields periods growing by $r^{3/2}$, so pitch classes step by $\tfrac32 \log_2 r$ — the harmonic series emerges from real orbital ratios.
+
+**Mean-motion resonance — the harmony engine.** When two bodies' mean motions are commensurable, $p\, n_1 = q\, n_2$ (period ratio $P_1:P_2 = p:q$, e.g., the 2:1 Io–Europa, 3:2 Neptune–Pluto, or the 4:2:1 Laplace chain Io–Europa–Ganymede), their conjunctions (longitude alignments) recur periodically — a physical *cadence schedule*. The Laplace resonance is two coupled 2:1 resonances with anti-aligned apsides ($\varpi_1 - \varpi_2 \approx \pi$) and libration about 180°, which in music becomes a recurring *anti-phase* two-against-one groove that periodically snaps to alignment (conjunction) — a deterministic tension/release oscillator. Chained resonances (4:2:1) give polyrhythmic hierarchies exactly like 4:2:1 over a common stroke: three voices in 4:2:1 (Io:Europa:Ganymede) produce the polyrhythm of 4 against 2 against 1 events per cycle.
+
+**Compositional mapping summary.** Per voice $v$ (planet) and per section $s$ (one orbital "year" or synodic cycle): events $k = 1..N_v$; $\nu_k = 2\pi k / N_v$; onset $t_k$ from the 2nd-law time law (above); pitch from $r(\nu_k)$ or from $\log_2 P_v$ register; velocity from areal speed $h/r^2$ (louder through perihelion); durations from dwell time until the next event (or legato fraction of it); section boundaries at conjunction epochs of the controlling resonance or at the outer body's period; macro-form from a resonance chain (capture sequence 3:2 → 2:1 → 4:2:1) or from a synthetic exoplanet system parameterized by $(a, e)$ per section.
+
+KORC is the celestial-mechanics foil to 020 SMSTC (kinematic *clouds* with gravity as an attractor — KORC uses *bound orbits* with exact time laws) and 043 SATM (chaotic self-same attractors — Keplerian orbits are regular, closed, deterministic); a continuous-time, physically-sourced sibling of 012 Euclidean / 069 Christoffel (which abstractly distribute $k$ onsets — KORC gets its distribution from $r^{-2}$ dynamics); and the deterministic Nature-Led counterpart to 045 Hawkes (stochastic self-excitation vs deterministic areal-speed clustering) and 038 KOPS (phase oscillators coupling vs true resonance commensurability).
+
+### Musical Elements Framework
+
+**PITCH** — Three layers. (i) *Register from orbit scale*: bodies ordered by semi-major axis $a$ get registers by $\log_2 P = \tfrac32\log_2 a$ (3rd law), so orbital architecture = pitch architecture (outer = low, inner = high; NASA practice). (ii) *Contour from ellipse*: within one orbit, pitch follows $r(\nu_k)$ — falling toward perihelion, rising toward aphelion; eccentricity deepens the contour amplitude. (iii) *Intervals from velocity ratios*: each voice's perihelion:aphelion speed ratio $((1+e)/(1-e))^2$ sets its characteristic span (Kepler's table), quantized to the nearest just interval (5:4, 6:5, 3:2, 16:15, 24:25, ...) or 12-TET semitone. Optional strict mode: pitch CLASS from $\tfrac32\log_2(P_v) \bmod 12$ over a chosen root = the star.
+
+**RHYTHM** — Onset times are the physical answer to "when does the planet pass angle $\nu_k$?": $t_k = \frac{P}{2\pi}(E_k - e\sin E_k)$ with $E_k$ from $\nu_k$. The resulting inter-onset interval is $\Delta t(\nu) \propto r(\nu)^2 \propto (1+e\cos\nu)^{-2}$: shortest at perihelion ($\nu=0$), longest at aphelion ($\nu=\pi$), ratio $((1+e)/(1-e))^2$ exactly. So eccentricity is a *rhythmic* dial: $e=0$ → isochronous; $e=0.3$ → 3.4:1 rush/linger; $e=0.6$ → 16:1 (dramatic cadenza swells). Number of events per orbit $N_v$ controls density per voice; the ratio $N_v$ across resonant voices implements the p:q polyrhythm directly (4:2:1 Laplace = 4/2/1 events per common cycle). Continuous-time output; optional quantization to a tick grid preserves zero-drift.
+
+**HARMONY** — Resonances ARE chords. A p:q mean-motion commensurability makes the two bodies re-align every $q$ orbits of the inner body: the recurrence of conjunction is the harmonic rhythm, and the stack of bodies' simultaneous pitch classes at conjunction is the sonority. Two-body 2:1 → octave-framed periodic re-affirmation; 3:2 → fifth-cycle cadence; Laplace 4:2:1 → the three-body chord set with anti-aligned apsides producing the alternation of a "conjunctive" sonority (all three aligned) and a "disjunctive" one (libration peak), a physical chord-tension pendulum. Superposed velocity-ratio intervals (5:4, 6:5, 3:2) are just intervals built from the harmonic series — self-consistent consonance without a scale table.
+
+**STRUCTURE** — Sections map to orbital epochs: a section = one outer-body orbit ("year"), or one synodic cycle $T_\mathrm{syn} = P_1 P_2 / |P_1 - P_2|$ of a controlling pair (the recurrence period of the harmonic situation), or one conjunction-to-conjunction arc. Macro-form = a *resonance chain*: compose sections whose bodies are captured into successively lower resonances (3:2 → 2:1 → 4:2:1, the differential-migration capture sequence the real Galilean system followed; Peale & Lee 2002), giving a deterministic tension arc: sparse wide conjunctions → locked dense polyrhythm → three-way alignment climax → release (dephased, higher section). Alternatively a synthetic exoplanet system: each section varies $(a_v, e_v)$ of the voice ensemble, so the same resonator morphs across sections (form as orbital evolution).
+
+**TEXTURE** — Voice count = body count; each voice is a separate resonator with its own $\theta_v = (a_v, e_v, N_v)$: bass voices on slow outer orbits (low $N$, deep sub-rhythms), leads on fast inner orbits (high $N$, perihelion rushes), mid voices in 2:1/3:2 couplings. Density surges through perihelion = internal textural crescendo per cycle; the apsidal anti-alignment of Laplace-type chains makes voices' dense phases interleave (one voice rushes while another lingers) → hocket-like textural counterpoint. Areal-speed velocity mapping gives a per-event dynamic swells; the star (focus) is the textural center of gravity.
+
+### UnitMatrix Integration (Voices & Sections)
+
+**Voices** = rows, each a Keplerian body with parameter cluster $\theta_v = (a_v, e_v, P_v, N_v, \mathrm{root}_v, \mathrm{mode})$:
+- Voice 1 (Lead): inner, fast orbit — small $a$, $e \approx 0.2$–0.5, high $N_v$ (16–32 events/orbit), register mid-high; pitch from $r(\nu)$ contour.
+- Voice 2 (Harmony): 2:1 resonant with Lead (e.g., $P_2 = 2P_1$), $e$ low, $N_2 = N_1/2$ — its conjunction with Lead every Lead-orbit creates the harmonic anchor.
+- Voice 3 (Bass): outer, slow — $P_3 = 4P_1$ (completing a Laplace 4:2:1 chain), $N_3 = N_1/4$, low register from $\log_2 P$; sparse downbeats.
+- Additional voices take further commensurabilities (3:2, 5:4) or independent eccentricities for texture; apsidal orientation $\varpi_v$ controls phase (anti-aligned = hocket, aligned = tutti rushes).
+
+**Sections** = columns, each with a target orbit architecture $\theta_s = ((a_v, e_v)_{v=1..V}, \text{resonance chain}_s, T_s, \text{quantize})$: section length $T_s$ = one outer "year" or one synodic/recurrence period of the section's controlling resonance; resonance chains ascend (3:2 → 2:1 → 4:2:1) across the form for a capture-sequence arc, or descend for release. A 5-section form: Intro (circular orbits, $e \approx 0$, sparse $N$), Verse (2:1 locked, $e=0.1$), Pre-Chorus (capture toward Laplace, $e$ rising), Chorus (full 4:2:1 Laplace, $e$ peak — perihelion rushes + triple conjunction), Outro (release: dephase apsides, circularize $e \to 0$).
+
+**Cell filling** (zero-drift invariant preserved) for cell $(v, s)$:
+1. Read $\theta_v$, $\theta_s$; set section start tick $T_{\text{start}}$, section length $L_s$ ticks; scale the outer period to $L_s$: $P_v^{(\text{ticks})} = L_s \cdot P_v / P_{\text{outer}}$.
+2. Generate events $k = 1..N_v$: $\nu_k = 2\pi k/N_v$; solve $E_k$ from $\tan\frac{E_k}{2} = \sqrt{\frac{1-e}{1+e}}\tan\frac{\nu_k}{2}$; $M_k = E_k - e\sin E_k$; tick offset $t_k = T_{\text{start}} + \mathrm{round}(\frac{P_v^{(\text{ticks})}}{2\pi} M_k + \phi_v)$ ($\phi_v$ = apsidal phase).
+3. Pitch: register from $\log_2 P_v$; contour $p_k = \mathrm{root}_v + \mathrm{round}(\mathrm{span}_v \cdot \frac{r(\nu_k) - r_{\min}}{r_{\max} - r_{\min}})$ (span_v from the velocity-ratio interval) — or strict mode: pitch class from $\frac32 \log_2 P_v \bmod 12$.
+4. Velocity: $v_k \propto h/r(\nu_k)^2$ normalized to 40–127; duration = min(dwell to next onset, legato cap).
+5. Pack into `create_note_unit` sequences; pad the cell to exactly `section_len` ticks (terminal landmark at `sum(events+durations) == section_len`) so `composer.validate()` passes.
+6. Export via `UnitMatrixComposer.to_midi(path)` (quantize to 480 tpb grid or continuous ticks).
+
+### Pitfalls
+
+1. **Kepler solves for time-from-angle, not angle-from-time.** The closed form maps $\nu \to t$ (via $E \to M$); if you instead need the body's position at a fixed clock time you must invert Kepler's equation $M = E - e\sin E$ by Newton iteration (converges in ~5 iterations for $e<0.9$ from $E_0 = M$). Prefer event-driven generation (angle-sampled, time-solved) — it is exact, cheap, and avoids iteration entirely.
+2. **Zero-drift vs continuous-time onsets.** The 2nd-law times are generally not on the 480-tpb grid. Quantize with `round()` AND pad the last event to the section terminal landmark (per AGENTS.md); or generate in continuous ticks and let `create_note_unit` carry micro-timing — but never let the last onset+duration fall short of `section_len` (validate() fails on track-length mismatch).
+3. **Eccentricity blow-up.** $e \ge 1$ is unbound (parabolic/hyperbolic escape); the $(1-e)^{-2}$ factors diverge. Clamp $e \le 0.7$ for musical rubato; near $e \to 1$ the perihelion rush becomes a single degenerate cluster — musically a scrape/roll, useful only deliberately.
+4. **Density explosion at perihelion.** $\Delta t \propto (1+e\cos\nu)^{-2}$ concentrates events: at $e=0.5$, perihelion inter-onset spacing is 9× tighter than aphelion. With $N_v = 32$ events/orbit the perihelion cluster can exceed human/articulation rates or exceed tick resolution (inter-onset < 1 tick at 480 tpb). **Fix**: cap effective $N_v$ per cell so $\min \Delta t \ge 2$ ticks, or resample with a minimum-dwell floor, or lower $e$.
+5. **Period-scaling quantization.** Mapping $P_v$ to ticks by $L_s \cdot P_v / P_{\mathrm{outer}}$ is exact only when the period ratio is rational (real orbits are slightly incommensurable — Io/Europa/Ganymede librate, they are not exact integers). **Fix**: snap the working periods to exact rationals (2:1, 3:2, 4:2:1, ...) for generation; report the real system's libration amplitude as a *micro-timing Jitter knob* (deterministic phase wobble), which is physically honest and musically alive.
+6. **Register collision in strict 3rd-law mode.** $\log_2 P$ grows slowly ($\Delta \log_2 P = 1.5\,\Delta\log_2 a$); a 10× distance span = only ~5 octaves of register. Wide systems cram many voices into few octaves. **Fix**: distribute voices across octaves by integer transposition after the $\log_2 P$ ranking.
+7. **Conjunction ≠ always consonance.** A real conjunction is an alignment of longitudes — the *chord quality* depends on the pitch mapping (often a $\sqrt{}$-octave stack = a cluster). Deliberately choose the pitch mapping (velocity-ratio intervals vs $\log P$ classes) so that conjunction epochs land on the sonorities you want; the physics gives the *timing* of harmonic rhythm, not its quality.
+8. **Relation to existing methods.** Document the siblings in prose to avoid duplication accusations: KORC is the *bound-orbit, exact-time-law* cousin of 020 SMSTC (which uses gravity/kinematics for *unbound event clouds*) and 043 SATM (chaotic self-same attractors); the continuous-time ratio source of 012 Euclidean / 069 Christoffel rhythms (which distribute $k$ onsets abstractly); the deterministic foil of 045 Hawkes (stochastic self-exciting events) and 038 KOPS (coupled phase oscillators, no two-body gravity); and the *rhythm/pitch* partner of 039 SMA (audio-domain spectra; KORC's intervals come from orbital velocity ratios). Kepler's own 1619 *Harmonice Mundi* is the historical anchor, not a duplicate of any DB entry.
+
+---
+
+Candidate code path: `generators/kepler_orbit_composer.py` — implements `PlanetVoice(semi_major_axis_a, eccentricity_e, n_events, period_ratio, root_midi, span_interval)` (body state: $\nu_k$, per-event $t_k$ via the analytic $\nu \to E \to M$ chain, $r(\nu)$ pitch contour, areal-speed velocity), `ResonanceChain(pairs)` (checks $p\,n_1 = q\,n_2$ commensurability, returns conjunction epochs + libration phase), `SynodicForm(section_architectures)` (per-section $\theta_s$: period scaling to section ticks, resonance-capture arc), `kepler_time(nu, e, P)` (the closed-form onset law), `kepler_interval(e)` (the $((1+e)/(1-e))^2$ → nearest just ratio / semitone), `period_from_axis(a, GM)` (3rd law) and `pitch_from_period(P, root)` ($\frac32 \log_2 P$ class or register). Feeds UnitMatrix cells as `MusicUnit` sequences like `generators/farey_composer.py` does for FSBC.---
+### SP-114 — Spectral Dynamics Compression/Expansion (SDCX)
+
+### Source
+
+[1] Zölzer, U. (2011). *DAFX: Digital Audio Effects* (2nd ed.). John Wiley & Sons. — Chapter 8: Spectral Processing.
+[2] Smith, J. O. (2011). *Spectral Audio Signal Processing*. CCRMA, Stanford University. https://ccrma.stanford.edu/~jos/sasp/
+[3] Moore, B. C. J. & Glasberg, B. R. (1983). "Suggested formulae for calculating auditory-filter bandwidths and excitation patterns." *J. Acoust. Soc. Am.* 74(3), 750–753. — ERB scale for perceptual band grouping.
+[4] Dahl, M. (2010). "Spectral Dynamics Processing — A New Approach to Dynamics in the Frequency Domain." *Proc. 128th AES Convention*, London.
+[5] Vinton, M. S. & Atlas, L. E. (2005). "An Introduction to Data-Driven and Model-Based Signal Processing for Audio." *IEEE Signal Processing Magazine* 22(2), 30–42.
+[6] Moffat, D., Sandler, M. & Smith, J. O. (2012). "Spectral Dynamics: An Exploration of Frequency-Domain Dynamic Range Compression." *Proc. 15th Int. Conf. on Digital Audio Effects (DAFx-12)*.
+[7] Jia, S. et al. (2023). "High-Fidelity Noise Reduction with Differentiable Signal Processing." arXiv:2310.11364.
+[8] Průša, Z. & Holighaus, N. (2015). "Phase vocoder with spectral smoothing." *Proc. 18th Int. Conf. on Digital Audio Effects (DAFx-15)*.
+
+### Layer
+
+**absolute** — Post-Processing / DSP
+Code path: `sound/effects/spectral_dynamics.py`
+
+### Description
+
+Spectral Dynamics Compression/Expansion (SDCX) is an STFT-domain dynamics processing framework that applies independent dynamic-range control (compression, expansion, limiting, gating) to each of $N$ perceptually scaled frequency bands — ranging from a few dozen ERB-scale bands up to the full FFT bin resolution. Unlike broadband compression (one gain for the entire spectrum) or multiband compression (3–6 bands via crossover filters with phase artifacts at seam points), SDCX operates directly on the STFT magnitude spectrum: the analysis frames are transformed to the frequency domain, grouped into bands, each band's envelope is detected, a per-band time-varying gain is computed from independent threshold/ratio/attack/release/knee parameters, and the gain-modified magnitude spectrum is recombined with the original phase and resynthesized via ISTFT overlap-add.
+
+SDCX is a **post-processing DSP** method: it always acts on a previously rendered audio buffer. It consumes a stereo or mono audio buffer and outputs a buffer of the same dimensions. When used per-voice in a UnitMatrix context, each voice can carry its own spectral dynamics profile (band-specific thresholds, compression style), enabling frequency-selective voice arrangement — e.g., compressing only the low-mid resonance of a bass voice while leaving the lead voice's highs untouched.
+
+**Distinction from related methods:**
+- **SP-008 (Dynamic Range Compression)**: broadband single-stage DRC — one threshold, one ratio, one attack/release for the entire spectrum. SDCX has $N$ independent DRC stages.
+- **SP-103 (Crossover Band Distortion)**: splits into N bands via Linkwitz-Riley filters, applies *distortion* per band, recombines via L-R filters. SDCX splits via STFT, applies *dynamics* per band, recombines via ISTFT with no crossover-phase artifacts.
+- **SP-109 (Spectral Gating / Noise Reduction)**: applies binary/sigmoid noise-suppression gain *relative to a noise floor estimate*. SDCX applies compression/expansion gain *relative to each band's own threshold* — a classic dynamics curve, not a noise floor.
+- **SP-072 (HPSS)**: splits audio into harmonic/percussive stems via time/frequency median filtering. SDCX shapes dynamics across frequency, not separates.
+
+SDCX sits alongside SP-026 (Phase Vocoder), SP-031 (Spectral Cross-Synthesis), and SP-050 (Spectral Delay) as an STFT-domain processing method, but where those modify the spectrum for timbre/pitch/time transformations, SDCX modifies it for *dynamics control* — the STFT-domain analog of a compressor/expander/gate.
+
+### Technical Mechanics
+
+#### Signal Flow (mono)
+
+```
+x[n] → [STFT: window, FFT] → |X[k,l]| → [Group Bins into Bands b=1..B] → [Band Level Envelope Detector] → [Gain Computer: T,R,Knee,Attack,Release] → G[b,l]
+                                                                                                                              ↓
+↑ ← [ISTFT: IFFT, OLA window, OLA] ← x_out[n] ← [Recombine: G[b,l]·|X[k,l]|·exp(j∠X[k,l])] ← Apply Gain Mask ——— ←——— ———— ———— ┘
+```
+
+**Step 1 — STFT Analysis.** Input $x[n]$ (length $L$ samples at sample rate $f_s$) is segmented into overlapping frames of length $W$ (typically 2048–8192) with 75% overlap (hop size $H = W/4$), windowed by a Hann window:
+
+$$X[k,l] = \sum_{n=0}^{W-1} x[lH + n] \, w[n] \, e^{-2\pi j kn / W}$$
+
+where $k = 0..W-1$ (FFT size = $W$), $l = 0..\lfloor L/H\rfloor$ (frame index). Magnitude $|X[k,l]|$ and phase $\angle X[k,l]$ are preserved for later resynthesis.
+
+**Step 2 — Band Grouping.** Raw FFT bins $k=0..W-1$ are grouped into $B$ bands per the ERB (Equivalent Rectangular Bandwidth, Moore & Glasberg 1983) scale. Per-band magnitude:
+
+$$M[b,l] = \sqrt{\frac{1}{|\text{band}[b]|}\sum_{k \in \text{band}[b]} |X[k,l]|^2} \quad \text{(RMS per band)}$$
+
+Two resolution modes:
+
+- **Full-bin mode** ($B = W/2+1$, bypass grouping): one compressor per FFT bin — maximum frequency resolution, highest artifact risk (metallic "musical noise" from isolated bin modulation).
+- **Perceptual band mode** ($B \approx 20–40$ ERB bands): bins RMS-summed into psychoacoustic bands — smoother, artifact-free, matches human hearing. ERB bandwidth at center frequency $f$: $\text{ERB}(f) = 24.7 \times (4.37f/1000 + 1)$.
+- **Hybrid mode**: fine band grouping in low frequencies, wider in highs.
+
+**Step 3 — Per-Band Envelope Detection.** A level detector follows each band, using the classic analog-style envelope follower:
+
+$$E[b,l] = \begin{cases}
+\alpha_{\text{attack}}[b]\, M[b,l] + (1-\alpha_{\text{attack}}[b])\, E[b,l-1], & M[b,l] > E[b,l-1] \\
+\alpha_{\text{release}}[b]\, M[b,l] + (1-\alpha_{\text{release}}[b])\, E[b,l-1], & \text{else}
+\end{cases}$$
+
+where $\alpha_{\text{attack}}[b] = 1 - \exp(-H / (\tau_{\text{attack}}[b] \cdot f_s))$ and $\alpha_{\text{release}}[b] = 1 - \exp(-H / (\tau_{\text{release}}[b] \cdot f_s))$, with $H = W/4$ hops in samples. Each band $b$ has independent $\tau_{\text{attack}}[b] \in [0.1, 100]\,\text{ms}$ and $\tau_{\text{release}}[b] \in [1, 2000]\,\text{ms}$.
+
+**Step 4 — Gain Computer.** The classic static compression/expansion curve is applied per band in the log domain:
+
+$$E_{\text{dB}}[b,l] = 20 \log_{10} E[b,l]$$
+
+$$G_{\text{dB}}[b,l] = \begin{cases}
+0, & E_{\text{dB}}[b,l] \le T[b] - \frac{W_{\text{knee}}[b]}{2} \\
+\frac{E_{\text{dB}}[b,l] - T[b] + W_{\text{knee}}[b]/2}{W_{\text{knee}}[b]} \cdot \frac{W_{\text{knee}}[b]}{2}\left(\frac{1}{R[b]} - 1\right), & T[b] - \frac{W_{\text{knee}}[b]}{2} < E_{\text{dB}}[b,l] < T[b] + \frac{W_{\text{knee}}[b]}{2} \\
+(E_{\text{dB}}[b,l] - T[b])\left(\frac{1}{R[b]} - 1\right), & E_{\text{dB}}[b,l] \ge T[b] + \frac{W_{\text{knee}}[b]}{2}
+\end{cases}$$
+
+where $T[b]$ is the threshold (dB), $R[b]$ is the compression ratio ($R>1$ compresses, $0<R<1$ expands/upward-compresses), and $W_{\text{knee}}[b]$ is the knee width (dB). The middle branch is the soft-knee region (raised-cosine transition).
+
+Standard dynamics modes per band:
+- **Downward Compression** ($R > 1$, $G < 0$ above $T$): attenuates loud content in that band.
+- **Upward Compression** ($R < 1$, $G > 0$ below $T$): boosts quiet content in that band.
+- **Expansion / Gate** ($R > 1$, gate mode: $G < 0$ below $T$): attenuates quiet content.
+- **Limiter** ($R \to \infty$): clamps band magnitude to $T$.
+
+**Step 5 — Temporal Gain Smoothing.** The raw per-band gain is smoothed across frames with a one-pole lowpass to prevent zipper artifacts:
+
+$$G_{\text{smooth}}[b,l] = \alpha_{\text{smooth}}[b]\, G_{\text{smooth}}[b,l-1] + (1-\alpha_{\text{smooth}}[b])\, G_{\text{dB}}[b,l]$$
+
+with $\alpha_{\text{smooth}}[b]$ corresponding to ~1–10 ms smoothing time, fast enough to track envelope changes but slow enough to suppress frame-rate graininess.
+
+**Step 6 — Gain-to-Bin Interpolation.** The $B$ per-band gains are interpolated back to $W/2+1$ FFT bin resolution via linear interpolation:
+
+$$G_{\text{bin}}[k,l] = \text{interp}(G_{\text{smooth}}[\,\cdot\,, l],\ \text{bin\_centers},\ k)$$
+
+**Step 7 — Magnitude Masking.** The gain mask is applied to the magnitude STFT (phase untouched):
+
+$$Y[k,l] = 10^{G_{\text{bin}}[k,l] / 20} \cdot X[k,l]$$
+
+**Step 8 — ISTFT Resynthesis.** The modified complex STFT is inverse-transformed and overlap-added:
+
+$$x_{\text{out}}[n] = \sum_l \left( \frac{1}{W} \sum_{k=0}^{W-1} Y[k,l] \, e^{2\pi j kn / W} \right) w_{\text{synth}}[n - lH]$$
+
+with synthesis window satisfying the COLA condition (Hann with 75% overlap, constant-overlap-add).
+
+#### Complexity
+
+Per stereo frame: $\mathcal{O}(W \log W)$ for the two FFTs + $\mathcal{O}(B)$ for band grouping and gain compute + $\mathcal{O}(W)$ for bin→band mapping (table lookup). For typical parameters $W=4096$, $B=40$, $B \ll W$, so cost is dominated by the two FFTs. Total: $\mathcal{O}(2W \log W + W)$ per hop (≈ 1–5 ms at 44.1 kHz with 75% overlap). Fast FFT libraries (FFTW/pyFFTW, NumPy) achieve real-time on a single core.
+
+### Musical Elements Framework
+
+**PITCH** — SDCX does not generate pitch, but shapes the dynamics of existing pitch bands. Because each ERB/perceptual band tracks a specific frequency region, per-band compression sculpts the spectral balance of individual pitch ranges. Low threshold on a fundamental band attenuates it relative to its partials, subtly shifting timbral brightness; high threshold on an overtone band preserves shimmer. The per-band threshold vector is therefore a *spectral balance controller* analogous to a 40-band dynamic EQ.
+
+**RHYTHM** — Attack and release times per band create frequency-dependent rhythmic response. A short attack on the transient band (2–8 kHz band) tightens percussive attacks; a long release on the low band (20–200 Hz) sustains kick/sub-bass tail. The per-band envelope followers track the spectral envelope of transient events — each band's gain modulation follows the spectral rhythm of the source independently.
+
+**HARMONY** — Per-band thresholds can be mapped to chord-tone frequency regions: set low threshold (more attenuation) on fundamental bands, high threshold (less compression) on third/seventh overtone bands to emphasize harmonic content. The threshold vector can be time-varying, following chord changes: a spectral dynamics *harmony follower* that ducks non-chord-tone bands during each chord's duration.
+
+**STRUCTURE** — The spectral dynamics profile (band thresholds, ratios, attack/release times per band) is a *parameter vector* that varies per section. A typical 5-section arc: Intro (transparent, minimal compression on all bands); Verse (gentle mid-band compression); Pre-Chorus (moderate compression on low-mid, short attack on highs); Chorus (heavy compression across all bands for spectral glue + slight upwards expansion on highs for air); Breakdown (extreme expansion on highs, gate-like on lows). This spectral parameter vector is the per-section "spectral compressor snapshot."
+
+**TEXTURE** — SDCX is a texture-sculpting tool. Upward spectral compression (boosting quiet bands) brings out room noise, breath, and air. Downward spectral compression tames harshness without sacrificing definition. Heavy low-band compression with a short release creates pulsing sub-bass (spectral "pumping"). Gate-mode expansion on a narrow band creates spasmodic frequency-stuttering effects. The SDCX output texture is the sum of all band envelopes interacting with the signal.
+
+### UnitMatrix Integration (Voices & Sections)
+
+**Voices** = rows, each voice carries its own SDCX parameter profile `SDCXParams[v]`:
+
+```python
+SDCXParams = {
+    'b_groups': 40,                              # number of ERB bands
+    'threshold': np.linspace(-10, -30, 40),      # dB per band
+    'ratio': np.linspace(2.5, 1.2, 40),          # compression ratio per band
+    'knee': 6.,                                   # dB (constant across bands)
+    'attack_ms': np.linspace(3, 0.5, 40),         # ms per band
+    'release_ms': np.linspace(80, 20, 40),        # ms per band
+    'mode': 'downward',                           # 'downward' | 'upward' | 'gate' | 'limiter'
+}
+```
+
+Voice parses:
+- Voice 1 (Lead): moderate compression on all bands, tight attack on highs (2–8 kHz), gentle release on mids — preserves vocal-like dynamics while taming sibilant peaks.
+- Voice 2 (Harmony): gentle low compression, open highs — lets pads breathe.
+- Voice 3 (Bass): heavy low-band compression (sub-200 Hz), high ratio there — a spectral bass compressor.
+- Voice 4 (Drums): hard attack on high-mid bands (no snap), fast release on lows (pumping kick interplay).
+
+**Sections** = columns, each with a per-section SDCX profile that blends with the voice profile:
+
+```python
+section_params = SDCXParams[v] * (1 - α) + section_params[s] * α
+```
+
+where $α \in [0, 1]$ is the section influence factor per voice (allows section-specific auto-sculpting without losing voice identity).
+
+**Cell filling** for cell $(v, s)$:
+1. The voice's audio buffer for section $s$ has already been rendered (by SP-001, SP-029, etc.).
+2. Load the voice's `SDCXParams[v]` and section's `SDCXParams[s]`, blend per the $α$ weight.
+3. Run the STFT analysis → band grouping → envelope detection → gain computer → gain smoothing → gain mask → ISTFT overlap-add pipeline.
+4. Write the processed buffer back as the cell's audio.
+
+Because SDCX is a real-time post-process, it can be applied as the *last stage* in a production chain (after the synthesis engine but before mixdown/spatialization) or as a per-voice insert.
+
+### Pitfalls
+
+1. **Metallic ("Musical") Noise.** When full-bin mode ($B = W/2$) is used with aggressive gain reduction, adjacent FFT bins' independent gain curves produce correlated spectral scalloping — a metallic, watery artifact ("musical noise"). **Fix**: always use ERB-scale band grouping ($B \geq 20$) for musical content; reserve full-bin mode only for special FX.
+
+2. **Pre-echo / Windowing Ring.** A rapid per-band gain change (short attack, single-frame) causes time-domain windowing artifacts — audible as a pre-echo ghost before the transient. **Fix**: ensure the temporal gain smoothing step ($\alpha_{\text{smooth}}$) operates at least 2–5 ms; use a gentler attack time on high-frequency bands where pre-echo is more audible.
+
+3. **Time-Smearing of Transients.** The STFT Hann window (~93 ms at 4096/44.1k) smears rapid temporal events across the frame. A snare hit that lasts 5 ms is spread across the full analysis window — slow attack times on transient-heavy content can smear attacks. **Fix**: use a shorter window (2048, ~46 ms) or reduce spectral dynamics on the band containing the transient material.
+
+4. **Per-Band Attack Mismatch Artifacts.** If adjacent bands have very different attack/release times (e.g., band $b$: 10 ms release, band $b+1$: 100 ms release), their gain envelopes diverge after a transient, creating a temporal spectral "hole" that sounds like a notch filter sweeping erratically. **Fix**: explicitly smooth per-band attack/release arrays with a spatial (cross-band) Gaussian blur of ~3–5 bands to ensure adjacent bands have similar temporal responses.
+
+5. **Expansion Noise Floor Breathing.** Upward spectral expansion on quiet bands boosts noise, creating a "breathing" or "swirling" noise floor that follows the signal envelope. **Fix**: set a noise-floor floor per band (minimum gain for upward expansion) or couple upward expansion to the overall signal crest factor.
+
+6. **CPU Cost.** At 44.1 kHz with 4096-frame FFT (75% overlap), each 64-sample hop incurs two FFTs (~µs each with optimized FFTW). For a 10-voice composition, per-voice SDCX at 44.1 kHz is ~2× real-time on one core. **Fix**: pre-render per-voice SDCX as a batch offline process, or limit spectral dynamics to the master buss for online use. For offline production renders, CPU is not a concern.
+
+7. **Pipeline Confusion.** SDCX modifies *dynamics* of existing audio — it does not generate new timbre (unlike SP-026 phase vocoder for time-stretch, SP-031 cross-synthesis for timbre morph, SP-050 spectral delay for frequency-dependent echo). All four share the STFT pipeline but apply fundamentally different modifications to the STFT magnitude/phase. SDCX's mask is *gain-per-band* from a DRC curve, not a reallocation of energy across bins.
+
+8. **Gain bandwidth interaction.** When compression gain falls rapidly across a narrow band edge (adjacent bands with different thresholds), the transition creates a "brick-wall" discontinuity in the frequency domain that sounds like a narrow-band filter. **Fix**: soften band-edge transitions by applying cross-band smoothing to the threshold/ratio arrays, using the same $B$-band Gaussian kernel as Pitfall #4.
+
+---

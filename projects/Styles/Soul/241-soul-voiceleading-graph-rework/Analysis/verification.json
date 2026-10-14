@@ -1,0 +1,27 @@
+{
+ "phase2": {
+  "tracks": 6,
+  "lens": [
+   61440,
+   61440,
+   61440,
+   61440,
+   61440,
+   61440
+  ],
+  "pitched": 1318,
+  "offgrid": 0,
+  "scale_viol": 0,
+  "chord_viol": 0
+ },
+ "phase1": {
+  "tracks": 1,
+  "lens": [
+   61440
+  ],
+  "pitched": 150,
+  "offgrid": 142,
+  "scale_viol": 0,
+  "chord_viol": 74
+ }
+}

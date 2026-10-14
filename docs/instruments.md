@@ -1060,3 +1060,35 @@ NOT a sustain/pad voice. REVERB_TAIL 1.8 s (room/spring reverb — Fender-style
 amp spring tank). EQ: cut 300 Hz box resonance, boost 3.5 kHz presence, gentle
 8 kHz air. PAN -0.2 centre-left. Completes the Guitar family trio: nylon
 acoustic (GM24), steel acoustic (GM25), clean electric (GM27).
+
+**Overdriven Guitar added** (2026-10-14): GM29, Guitar-family fourth entry
+— the solidbody electric guitar pushed into tube-amp saturation, the classic
+rock lead/rhythm voice (instrument.md + overdriven.py), verified end-to-end
+UnitMatrixComposer → zero-drift ✓ → MIDI (111 bytes) → FluidSynth WAV
+(731 KB) ✓; RenderPipeline stem label `trackXX_Overdriven_Guitar.wav` ✓
+(GM_PROGRAMS[29] = "Overdriven Guitar", FluidR3 preset 29 = "Overdrive Guitar"
+— internal SF2 name "Overdrive Guitar" vs pipeline "Overdriven Guitar" is
+cosmetic only, **no routing impact**; STEM_LABEL = "Overdriven_Guitar" matches
+the pipeline's sanitized label). Karplus-Strong recommended (plucked steel
+waveguide + non-linear saturation stage — the exact physical model for a steel
+string through a distorted tube amp; loop_gain **0.9990** — the HIGHEST in the
+plucked set, reflecting overdrive compression sustain ~5-10 s; noise_component
+0.060 for tube hiss/amp floor; lowpass_hz 4000 for speaker roll-off warmth;
+saturation 0.60 soft-clip). PhaseModSynth secondary (saw carrier, mod_depth
+4.0 — highest FM depth in the Guitar family for harmonic foldover). Solo-render
+spectral check: 4–8 kHz buzz **1.6%** (clean single voice, well below 20%
+gate, no comb-filtering). Empirical FluidR3 pitch sweep: preset 29 audible
+across full range 28–84 (E1–C6), no gaps — SF2 never clips a composition.
+Registration proof: `by_name('overdriven guitar')` → Overdriven Guitar,
+`by_program(29)` → Overdriven Guitar, `in_sweet_spot(64)` = True,
+`in_sweet_spot(24)` = False. Registration in `instrument_registry.py` as
+OVERDRIVEN_GUITAR convenience constant. Role: lead, melody, accent, rhythm,
+strum, countermelody — the overdriven guitar is a fully polyphonic instrument
+(6 strings) but the compression/intermoldulation of full chords on high gain
+makes POWER CHORDS (root-fifth, no 3rd) the idiomatic rhythm texture and
+single-note LEADS the idiomatic melody texture. REVERB_TAIL 2.2 s (hall/room
+— overdrive typically uses amp spring reverb + room ambience; 2.2 s for solo
+leads). EQ: cut 400 Hz (reduce mud from compression buildup), boost 2.2 kHz
+presence (cutting edge pick attack), gentle 6 kHz air. PAN -0.15 centre-left.
+Completes the Guitar family: nylon acoustic (GM24), steel acoustic (GM25),
+clean electric (GM27), overdriven (GM29).

@@ -54,6 +54,7 @@ _INSTRUMENT_MODULES = {
     "Guitar.acoustic.acoustic_guitar": "acoustic_guitar",
     "Guitar.steel_acoustic.steel_acoustic": "steel_acoustic",
     "Guitar.clean_electric.clean_electric": "clean_electric",
+    "Guitar.overdriven.overdriven": "overdriven",
     "Percussion.drum_kit.drum_kit": "drum_kit",
     "Percussion.marimba.marimba": "marimba",
     "Percussion.steel_drums.steel_drums": "steel_drums",
@@ -241,6 +242,7 @@ STEEL_DRUMS = ALL_INSTRUMENTS["steel_drums"]
 SITAR = ALL_INSTRUMENTS["sitar"]
 STEEL_ACOUSTIC = ALL_INSTRUMENTS["steel_acoustic"]
 CLEAN_ELECTRIC = ALL_INSTRUMENTS["clean_electric"]
+OVERDRIVEN_GUITAR = ALL_INSTRUMENTS["overdriven"]
 VIBRAPHONE = ALL_INSTRUMENTS["vibraphone"]
 SITAR = ALL_INSTRUMENTS["sitar"]
 KOTO = ALL_INSTRUMENTS["koto"]
@@ -600,3 +602,13 @@ if __name__ == "__main__":
     print("  SYNTH_PAD.in_sweet_spot(24) =", SYNTH_PAD.in_sweet_spot(24))
     print("  SYNTH_PAD.range_min =", SYNTH_PAD.range_min, "SYNTH_PAD.range_max =", SYNTH_PAD.range_max)
     print("  SYNTH_PAD.stem_label =", repr(SYNTH_PAD.stem_label))
+    print()
+    print("=== Overdriven Guitar (GM29) ===")
+    print("  OVERDRIVEN_GUITAR.midi_program =", OVERDRIVEN_GUITAR.midi_program, "(should be 29)")
+    print("  by_name('overdriven guitar') =", by_name("overdriven guitar"))
+    print("  by_program(29) =", by_program(29))
+    print("  OVERDRIVEN_GUITAR.in_sweet_spot(64) =", OVERDRIVEN_GUITAR.in_sweet_spot(64))
+    print("  OVERDRIVEN_GUITAR.in_sweet_spot(24) =", OVERDRIVEN_GUITAR.in_sweet_spot(24))
+    print("  OVERDRIVEN_GUITAR.range_min =", OVERDRIVEN_GUITAR.range_min, "OVERDRIVEN_GUITAR.range_max =", OVERDRIVEN_GUITAR.range_max)
+    print("  OVERDRIVEN_GUITAR.stem_label =", repr(OVERDRIVEN_GUITAR.stem_label))
+    print()

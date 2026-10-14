@@ -1,39 +1,31 @@
 {
   "job": "random-style production (SP) layer-aligned",
-  "date": "2026-10-13",
-  "seed": 20261013,
-  "method": "SP-103",
-  "method_module": "sound.effects.parallel_filter_bank",
-  "method_desc": "Filtopia-style 5-Parallel SEM Filter Bank",
-  "source_midi": "/opt/data/repos/musicom/projects/Styles/Experimental/048-pcfg-binaural/MIDI/048-pcfg-binaural.mid",
-  "source_project": "Experimental/048-pcfg-binaural/MIDI/048-pcfg-binaural.mid",
-  "registry_size": 45,
-  "recent_excluded": [
-    "SP-026",
-    "SP-069",
-    "SP-074",
-    "SP-085",
-    "SP-091",
-    "SP-092",
-    "SP-098"
-  ],
-  "already_on_source": [],
-  "baseline_excluded": [
-    "SP-001"
-  ],
-  "n_candidates": 338,
-  "n_well_formed": 229,
-  "audit": {
-    "verdict": "FAIL -> rework -> PASS",
-    "before": {"offgrid": 0, "scale_viol": 1, "chord_viol": 56, "zero_drift": "PASS"},
-    "after": {"offgrid": 0, "scale_viol": 0, "chord_viol": 0, "zero_drift": "PASS"},
-    "fixes": "lead chord-tone quantize (51 notes), bar-8 pad E->Eb (1 note)"
+  "date": "2026-10-14",
+  "seed": 20261014,
+  "method": "SP-028",
+  "method_module": "sound.effects.lpc_synth",
+  "method_desc": "Linear Predictive Coding Synthesis (source-filter vocoder)",
+  "params": {
+    "order": 16,
+    "frame_ms": 30,
+    "hop_ms": 10,
+    "pitch_shift": 1.0,
+    "voiced_gain": 1.0,
+    "unvoiced_gain": 0.15,
+    "wet_mix": 0.6,
+    "dry_mix": 0.4,
+    "fs": 44100
   },
-  "output": "projects/Styles/Production/SP103-parallel-filter-bank-048-pcfg-binaural",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Techno/083-techno-brownian/MIDI/083-techno-brownian.mid",
+  "output_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP028-lpc-synth-083-techno-brownian/SP028-lpc-synth-083-techno-brownian.wav",
+  "output_ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP028-lpc-synth-083-techno-brownian/SP028-lpc-synth-083-techno-brownian.ogg",
+  "lufs": -14.19906446834598,
+  "peak": 0.8912509679794312,
+  "silence_pct": 6.4487516178551,
+  "mono_correlation": 0.4708459939997277,
   "pitch_verdict": "PASS",
   "hit_rate": 1.0,
-  "he_retention": 0.961,
-  "silence_pct": 16.86,
-  "lufs": -14.0,
-  "peak": 0.7513
+  "he_mean": 0.3908170783059613,
+  "dry_he_mean": 0.4735696742360078,
+  "he_retention": 0.8252578228039028
 }

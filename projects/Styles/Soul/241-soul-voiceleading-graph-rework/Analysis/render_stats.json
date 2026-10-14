@@ -1,0 +1,14 @@
+{
+ "241-soul-voiceleading-graph-rework": {
+  "dur": 44.56,
+  "peak": 0.821,
+  "rms_db": -16.95,
+  "silence_pct": 6.02
+ },
+ "241-soul-voiceleading-graph-rework-phase1": {
+  "dur": 42.85,
+  "peak": 0.3988,
+  "rms_db": -24.93,
+  "silence_pct": 13.43
+ }
+}

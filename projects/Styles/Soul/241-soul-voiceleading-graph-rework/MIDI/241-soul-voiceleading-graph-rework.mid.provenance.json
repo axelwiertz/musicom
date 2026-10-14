@@ -1,0 +1,33 @@
+{
+  "artifact": "241-soul-voiceleading-graph-rework.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.method.011_voiceleading_graph_walk_phase2 + musicom rules (rework of 084)",
+  "sources": [
+    "source:084-soul-voiceleading-graph (Soul, Method 011)",
+    "methods_db.md:Voice-Leading Graph Search"
+  ],
+  "parameters": {
+    "bpm": 92,
+    "bars": 32,
+    "seed": 20261014,
+    "phase": 2,
+    "quantized": true,
+    "key": "D minor (aeolian)",
+    "rhythm": "soul backbeat 8th",
+    "form": "8 sections (extended)",
+    "variation_techniques": [
+      "register_shift_down_thin",
+      "transposition_up_m3",
+      "retrograde",
+      "augmentation",
+      "inversion_density_rise",
+      "diminution",
+      "recapitulation"
+    ]
+  },
+  "notes": "Rules post-process: per-bar chord-tone quantization (floor t//BAR), 120-tick grid snap, dedup, leap-cap voice-leading, per-section harmonic regions (midpoint root), min-motion violin pad + chorus counterline.",
+  "sha256": "f96c87c0119e8ce438fc66dd10bdfa7517a597e9750ee70b2d0c1b6877adc09b",
+  "bytes": 13278,
+  "created_utc": "2026-10-14T01:09:58.971921+00:00",
+  "provenance_version": "1.0"
+}
