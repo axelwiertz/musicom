@@ -1,0 +1,25 @@
+{
+  "artifact": "242-trap-phase-phase1.mid",
+  "classification": "ai-generated",
+  "generator": "Method 026 Deconstructive Phase-Shift Minimalism (DPSM) - PRE-RULES raw draft",
+  "sources": [
+    "Research/CompositionMethods/methods_db.md:Method 026",
+    "workflows/unitmatrix_composer.py"
+  ],
+  "parameters": {
+    "method": 26,
+    "phase": 1,
+    "key": "D minor",
+    "bpm": 140,
+    "sections": 5,
+    "total_bars": 32,
+    "seed": 242,
+    "style": "Trap",
+    "form": "cinematic-build"
+  },
+  "notes": "Phase 1: single deconstructive loop (sine contour + jitter), unquantized onsets, off-grid by design, no harmony.",
+  "sha256": "18c383aac4bd470a07e3c02e82b41a82767363666aa6a296f07b42612a11ccfc",
+  "bytes": 2339,
+  "created_utc": "2026-10-14T23:09:53.040019+00:00",
+  "provenance_version": "1.0"
+}

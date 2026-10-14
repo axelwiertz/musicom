@@ -1,0 +1,36 @@
+{
+  "artifact": "242-trap-phase.mid",
+  "classification": "ai-generated",
+  "generator": "Method 026 Deconstructive Phase-Shift Minimalism (DPSM) + musicom rules",
+  "sources": [
+    "Research/CompositionMethods/methods_db.md:Method 026",
+    "rules/voice_leading.py",
+    "workflows/unitmatrix_composer.py",
+    "projects/Instruments/instrument_registry.py"
+  ],
+  "parameters": {
+    "method": 26,
+    "phase": 2,
+    "key": "D minor",
+    "bpm": 140,
+    "sections": 5,
+    "total_bars": 32,
+    "seed": 242,
+    "style": "Trap",
+    "form": "cinematic-build",
+    "voices": [
+      "Loop1",
+      "Loop2",
+      "Loop3",
+      "Loop4",
+      "Bass",
+      "Pad",
+      "Drums"
+    ]
+  },
+  "notes": "Phase 2: four identical 8-event loops (Rhodes) with dynamic phase offsets (8th-note units; drift/peak/converge), electric bass sub, synth-pad swell, trap drum kit. Onset grid-snap at 8th-note (240 ticks), per-bar chord-tone quantization.",
+  "sha256": "b0b71a27583776a61556d45c505a8046c7852d37532ec0463eff295b1b6d99c5",
+  "bytes": 11695,
+  "created_utc": "2026-10-14T23:09:53.040625+00:00",
+  "provenance_version": "1.0"
+}

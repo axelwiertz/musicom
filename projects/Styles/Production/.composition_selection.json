@@ -1,42 +1,40 @@
 {
-  "date": "2026-10-13",
-  "seed": 20261013,
-  "layer_roll": 0.6103,
+  "date": "2026-10-14",
+  "seed": 20261014,
+  "layer_roll": 0.7275,
   "layer": "concrete",
-  "method_id": "029",
-  "method_name": "Continuous Polyphonic Portamento Glide (CPPG)",
-  "style": "Ragtime",
-  "form": "rondo",
+  "method_id": "026",
+  "method_name": "Deconstructive Phase-Shift Minimalism (DPSM)",
+  "style": "Trap",
+  "form": "cinematic-build",
   "section_names": [
-    "A",
-    "B",
-    "A",
-    "C",
-    "A"
+    "Intro",
+    "Build",
+    "Rise",
+    "Peak",
+    "Resolve"
   ],
   "bars_per": [
     4,
-    4,
-    4,
-    4,
+    8,
+    8,
+    8,
     4
   ],
   "recent_methods_excluded": [
     6,
     7,
-    10,
     11,
+    29,
     32,
     38,
     40,
     41,
     51,
     74,
-    94,
-    95,
     98
   ],
   "n_styles": 46,
-  "n_concrete_avail": 89,
-  "n_abstract_avail": 2
+  "n_concrete_avail": 91,
+  "n_abstract_avail": 3
 }

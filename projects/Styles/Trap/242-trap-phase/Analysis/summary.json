@@ -1,0 +1,558 @@
+{
+  "key": "D minor",
+  "root_pc": 2,
+  "scale_intervals": [
+    0,
+    2,
+    3,
+    5,
+    7,
+    8,
+    10
+  ],
+  "bpm": 140,
+  "ticks_per_beat": 480,
+  "beats_per_bar": 4,
+  "bar_ticks": 1920,
+  "grid": 120,
+  "eighth": 240,
+  "form": "cinematic-build",
+  "sections": [
+    {
+      "name": "Intro",
+      "bars": 4
+    },
+    {
+      "name": "Build",
+      "bars": 8
+    },
+    {
+      "name": "Rise",
+      "bars": 8
+    },
+    {
+      "name": "Peak",
+      "bars": 8
+    },
+    {
+      "name": "Resolve",
+      "bars": 4
+    }
+  ],
+  "total_bars": 32,
+  "total_ticks": 61440,
+  "voices": [
+    {
+      "name": "Loop1",
+      "program": 4,
+      "channel": 0
+    },
+    {
+      "name": "Loop2",
+      "program": 4,
+      "channel": 1
+    },
+    {
+      "name": "Loop3",
+      "program": 4,
+      "channel": 2
+    },
+    {
+      "name": "Loop4",
+      "program": 4,
+      "channel": 3
+    },
+    {
+      "name": "Bass",
+      "program": 33,
+      "channel": 4
+    },
+    {
+      "name": "Pad",
+      "program": 88,
+      "channel": 5
+    },
+    {
+      "name": "Drums",
+      "program": 0,
+      "channel": 9
+    }
+  ],
+  "chord_path": [
+    {
+      "bar": 0,
+      "roman": "i",
+      "name": "Dm7",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        5,
+        9,
+        0
+      ]
+    },
+    {
+      "bar": 1,
+      "roman": "i",
+      "name": "Dm7",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        5,
+        9,
+        0
+      ]
+    },
+    {
+      "bar": 2,
+      "roman": "i",
+      "name": "Dm7",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        5,
+        9,
+        0
+      ]
+    },
+    {
+      "bar": 3,
+      "roman": "i",
+      "name": "Dm7",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        5,
+        9,
+        0
+      ]
+    },
+    {
+      "bar": 4,
+      "roman": "i",
+      "name": "Dm7",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        5,
+        9,
+        0
+      ]
+    },
+    {
+      "bar": 5,
+      "roman": "VI",
+      "name": "Bbmaj7",
+      "root_pc": 10,
+      "chord_tone_pcs": [
+        10,
+        2,
+        5,
+        9
+      ]
+    },
+    {
+      "bar": 6,
+      "roman": "i",
+      "name": "Dm7",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        5,
+        9,
+        0
+      ]
+    },
+    {
+      "bar": 7,
+      "roman": "VI",
+      "name": "Bbmaj7",
+      "root_pc": 10,
+      "chord_tone_pcs": [
+        10,
+        2,
+        5,
+        9
+      ]
+    },
+    {
+      "bar": 8,
+      "roman": "i",
+      "name": "Dm7",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        5,
+        9,
+        0
+      ]
+    },
+    {
+      "bar": 9,
+      "roman": "VII",
+      "name": "C7",
+      "root_pc": 0,
+      "chord_tone_pcs": [
+        0,
+        4,
+        7,
+        10
+      ]
+    },
+    {
+      "bar": 10,
+      "roman": "i",
+      "name": "Dm7",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        5,
+        9,
+        0
+      ]
+    },
+    {
+      "bar": 11,
+      "roman": "VII",
+      "name": "C7",
+      "root_pc": 0,
+      "chord_tone_pcs": [
+        0,
+        4,
+        7,
+        10
+      ]
+    },
+    {
+      "bar": 12,
+      "roman": "VI",
+      "name": "Bbmaj7",
+      "root_pc": 10,
+      "chord_tone_pcs": [
+        10,
+        2,
+        5,
+        9
+      ]
+    },
+    {
+      "bar": 13,
+      "roman": "III",
+      "name": "Fmaj7",
+      "root_pc": 5,
+      "chord_tone_pcs": [
+        5,
+        9,
+        0,
+        4
+      ]
+    },
+    {
+      "bar": 14,
+      "roman": "VI",
+      "name": "Bbmaj7",
+      "root_pc": 10,
+      "chord_tone_pcs": [
+        10,
+        2,
+        5,
+        9
+      ]
+    },
+    {
+      "bar": 15,
+      "roman": "III",
+      "name": "Fmaj7",
+      "root_pc": 5,
+      "chord_tone_pcs": [
+        5,
+        9,
+        0,
+        4
+      ]
+    },
+    {
+      "bar": 16,
+      "roman": "VII",
+      "name": "C7",
+      "root_pc": 0,
+      "chord_tone_pcs": [
+        0,
+        4,
+        7,
+        10
+      ]
+    },
+    {
+      "bar": 17,
+      "roman": "VI",
+      "name": "Bbmaj7",
+      "root_pc": 10,
+      "chord_tone_pcs": [
+        10,
+        2,
+        5,
+        9
+      ]
+    },
+    {
+      "bar": 18,
+      "roman": "VII",
+      "name": "C7",
+      "root_pc": 0,
+      "chord_tone_pcs": [
+        0,
+        4,
+        7,
+        10
+      ]
+    },
+    {
+      "bar": 19,
+      "roman": "III",
+      "name": "Fmaj7",
+      "root_pc": 5,
+      "chord_tone_pcs": [
+        5,
+        9,
+        0,
+        4
+      ]
+    },
+    {
+      "bar": 20,
+      "roman": "III",
+      "name": "Fmaj7",
+      "root_pc": 5,
+      "chord_tone_pcs": [
+        5,
+        9,
+        0,
+        4
+      ]
+    },
+    {
+      "bar": 21,
+      "roman": "VII",
+      "name": "C7",
+      "root_pc": 0,
+      "chord_tone_pcs": [
+        0,
+        4,
+        7,
+        10
+      ]
+    },
+    {
+      "bar": 22,
+      "roman": "i",
+      "name": "Dm7",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        5,
+        9,
+        0
+      ]
+    },
+    {
+      "bar": 23,
+      "roman": "VI",
+      "name": "Bbmaj7",
+      "root_pc": 10,
+      "chord_tone_pcs": [
+        10,
+        2,
+        5,
+        9
+      ]
+    },
+    {
+      "bar": 24,
+      "roman": "VII",
+      "name": "C7",
+      "root_pc": 0,
+      "chord_tone_pcs": [
+        0,
+        4,
+        7,
+        10
+      ]
+    },
+    {
+      "bar": 25,
+      "roman": "i",
+      "name": "Dm7",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        5,
+        9,
+        0
+      ]
+    },
+    {
+      "bar": 26,
+      "roman": "VI",
+      "name": "Bbmaj7",
+      "root_pc": 10,
+      "chord_tone_pcs": [
+        10,
+        2,
+        5,
+        9
+      ]
+    },
+    {
+      "bar": 27,
+      "roman": "VII",
+      "name": "C7",
+      "root_pc": 0,
+      "chord_tone_pcs": [
+        0,
+        4,
+        7,
+        10
+      ]
+    },
+    {
+      "bar": 28,
+      "roman": "i",
+      "name": "Dm7",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        5,
+        9,
+        0
+      ]
+    },
+    {
+      "bar": 29,
+      "roman": "i",
+      "name": "Dm7",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        5,
+        9,
+        0
+      ]
+    },
+    {
+      "bar": 30,
+      "roman": "i",
+      "name": "Dm7",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        5,
+        9,
+        0
+      ]
+    },
+    {
+      "bar": 31,
+      "roman": "i",
+      "name": "Dm7",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        5,
+        9,
+        0
+      ]
+    }
+  ],
+  "contour": [
+    0,
+    1,
+    2,
+    3,
+    2,
+    1,
+    3,
+    0
+  ],
+  "phase_schedule": {
+    "Loop1": {
+      "Intro": 0,
+      "Build": 0,
+      "Rise": 0,
+      "Peak": 0,
+      "Resolve": 0
+    },
+    "Loop2": {
+      "Intro": null,
+      "Build": 0,
+      "Rise": 4,
+      "Peak": 2,
+      "Resolve": null
+    },
+    "Loop3": {
+      "Intro": null,
+      "Build": null,
+      "Rise": 0,
+      "Peak": 4,
+      "Resolve": null
+    },
+    "Loop4": {
+      "Intro": null,
+      "Build": null,
+      "Rise": null,
+      "Peak": 6,
+      "Resolve": null
+    }
+  },
+  "vl_violations": [],
+  "inline_audit": {
+    "Loop1": {
+      "name": "Loop1",
+      "n_notes": 256,
+      "off16": 0,
+      "off8": 0,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "Loop2": {
+      "name": "Loop2",
+      "n_notes": 192,
+      "off16": 0,
+      "off8": 0,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "Loop3": {
+      "name": "Loop3",
+      "n_notes": 128,
+      "off16": 0,
+      "off8": 0,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "Loop4": {
+      "name": "Loop4",
+      "n_notes": 64,
+      "off16": 0,
+      "off8": 0,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "Bass": {
+      "name": "Bass",
+      "n_notes": 100,
+      "off16": 0,
+      "off8": 0,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "Pad": {
+      "name": "Pad",
+      "n_notes": 128,
+      "off16": 0,
+      "off8": 0,
+      "out_scale": 0,
+      "out_chord": 0
+    }
+  }
+}
