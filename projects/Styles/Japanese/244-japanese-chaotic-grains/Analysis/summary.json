@@ -1,0 +1,500 @@
+{
+  "key": "D Hirajoshi",
+  "root_pc": 2,
+  "scale_intervals": [
+    0,
+    2,
+    3,
+    7,
+    8
+  ],
+  "key_pcs": [
+    2,
+    4,
+    5,
+    9,
+    10
+  ],
+  "bpm": 80,
+  "ticks_per_beat": 480,
+  "beats_per_bar": 4,
+  "bar_ticks": 1920,
+  "grid": 120,
+  "eighth": 240,
+  "form": "strophic",
+  "sections": [
+    {
+      "name": "Verse1",
+      "bars": 8
+    },
+    {
+      "name": "Verse2",
+      "bars": 8
+    },
+    {
+      "name": "Verse3",
+      "bars": 8
+    },
+    {
+      "name": "Verse4",
+      "bars": 8
+    }
+  ],
+  "total_bars": 32,
+  "total_ticks": 61440,
+  "regime": {
+    "0": {
+      "name": "stable/periodic",
+      "a": 1.4,
+      "b": 0.3,
+      "density": 4
+    },
+    "1": {
+      "name": "bifurcation",
+      "a": 1.4,
+      "b": 0.3,
+      "density": 8
+    },
+    "2": {
+      "name": "full chaos",
+      "a": 1.4,
+      "b": 0.3,
+      "density": 12
+    },
+    "3": {
+      "name": "return",
+      "a": 1.4,
+      "b": 0.3,
+      "density": 5
+    }
+  },
+  "voices": [
+    {
+      "name": "Koto",
+      "program": 107,
+      "channel": 0,
+      "pitched": true
+    },
+    {
+      "name": "Shakuhachi",
+      "program": 77,
+      "channel": 1,
+      "pitched": true
+    },
+    {
+      "name": "Shamisen",
+      "program": 106,
+      "channel": 2,
+      "pitched": true
+    },
+    {
+      "name": "Taiko",
+      "program": 116,
+      "channel": 3,
+      "pitched": false
+    },
+    {
+      "name": "Drums",
+      "program": 0,
+      "channel": 9,
+      "pitched": false
+    }
+  ],
+  "chord_path": [
+    {
+      "bar": 0,
+      "roman": "i",
+      "name": "Dm",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        5,
+        9
+      ]
+    },
+    {
+      "bar": 1,
+      "roman": "bVI",
+      "name": "Bb",
+      "root_pc": 10,
+      "chord_tone_pcs": [
+        10,
+        2,
+        5
+      ]
+    },
+    {
+      "bar": 2,
+      "roman": "bIII",
+      "name": "F6",
+      "root_pc": 5,
+      "chord_tone_pcs": [
+        5,
+        9,
+        2
+      ]
+    },
+    {
+      "bar": 3,
+      "roman": "v",
+      "name": "Asus",
+      "root_pc": 9,
+      "chord_tone_pcs": [
+        9,
+        2,
+        4
+      ]
+    },
+    {
+      "bar": 4,
+      "roman": "i",
+      "name": "Dm",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        5,
+        9
+      ]
+    },
+    {
+      "bar": 5,
+      "roman": "bVI",
+      "name": "Bb",
+      "root_pc": 10,
+      "chord_tone_pcs": [
+        10,
+        2,
+        5
+      ]
+    },
+    {
+      "bar": 6,
+      "roman": "bIII",
+      "name": "F6",
+      "root_pc": 5,
+      "chord_tone_pcs": [
+        5,
+        9,
+        2
+      ]
+    },
+    {
+      "bar": 7,
+      "roman": "i",
+      "name": "Dm",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        5,
+        9
+      ]
+    },
+    {
+      "bar": 8,
+      "roman": "i",
+      "name": "Dm",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        5,
+        9
+      ]
+    },
+    {
+      "bar": 9,
+      "roman": "bVI",
+      "name": "Bb",
+      "root_pc": 10,
+      "chord_tone_pcs": [
+        10,
+        2,
+        5
+      ]
+    },
+    {
+      "bar": 10,
+      "roman": "bIII",
+      "name": "F6",
+      "root_pc": 5,
+      "chord_tone_pcs": [
+        5,
+        9,
+        2
+      ]
+    },
+    {
+      "bar": 11,
+      "roman": "v",
+      "name": "Asus",
+      "root_pc": 9,
+      "chord_tone_pcs": [
+        9,
+        2,
+        4
+      ]
+    },
+    {
+      "bar": 12,
+      "roman": "i",
+      "name": "Dm",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        5,
+        9
+      ]
+    },
+    {
+      "bar": 13,
+      "roman": "bVI",
+      "name": "Bb",
+      "root_pc": 10,
+      "chord_tone_pcs": [
+        10,
+        2,
+        5
+      ]
+    },
+    {
+      "bar": 14,
+      "roman": "bIII",
+      "name": "F6",
+      "root_pc": 5,
+      "chord_tone_pcs": [
+        5,
+        9,
+        2
+      ]
+    },
+    {
+      "bar": 15,
+      "roman": "i",
+      "name": "Dm",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        5,
+        9
+      ]
+    },
+    {
+      "bar": 16,
+      "roman": "i",
+      "name": "Dm",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        5,
+        9
+      ]
+    },
+    {
+      "bar": 17,
+      "roman": "bVI",
+      "name": "Bb",
+      "root_pc": 10,
+      "chord_tone_pcs": [
+        10,
+        2,
+        5
+      ]
+    },
+    {
+      "bar": 18,
+      "roman": "bIII",
+      "name": "F6",
+      "root_pc": 5,
+      "chord_tone_pcs": [
+        5,
+        9,
+        2
+      ]
+    },
+    {
+      "bar": 19,
+      "roman": "v",
+      "name": "Asus",
+      "root_pc": 9,
+      "chord_tone_pcs": [
+        9,
+        2,
+        4
+      ]
+    },
+    {
+      "bar": 20,
+      "roman": "i",
+      "name": "Dm",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        5,
+        9
+      ]
+    },
+    {
+      "bar": 21,
+      "roman": "bVI",
+      "name": "Bb",
+      "root_pc": 10,
+      "chord_tone_pcs": [
+        10,
+        2,
+        5
+      ]
+    },
+    {
+      "bar": 22,
+      "roman": "bIII",
+      "name": "F6",
+      "root_pc": 5,
+      "chord_tone_pcs": [
+        5,
+        9,
+        2
+      ]
+    },
+    {
+      "bar": 23,
+      "roman": "i",
+      "name": "Dm",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        5,
+        9
+      ]
+    },
+    {
+      "bar": 24,
+      "roman": "i",
+      "name": "Dm",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        5,
+        9
+      ]
+    },
+    {
+      "bar": 25,
+      "roman": "bVI",
+      "name": "Bb",
+      "root_pc": 10,
+      "chord_tone_pcs": [
+        10,
+        2,
+        5
+      ]
+    },
+    {
+      "bar": 26,
+      "roman": "bIII",
+      "name": "F6",
+      "root_pc": 5,
+      "chord_tone_pcs": [
+        5,
+        9,
+        2
+      ]
+    },
+    {
+      "bar": 27,
+      "roman": "v",
+      "name": "Asus",
+      "root_pc": 9,
+      "chord_tone_pcs": [
+        9,
+        2,
+        4
+      ]
+    },
+    {
+      "bar": 28,
+      "roman": "i",
+      "name": "Dm",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        5,
+        9
+      ]
+    },
+    {
+      "bar": 29,
+      "roman": "bVI",
+      "name": "Bb",
+      "root_pc": 10,
+      "chord_tone_pcs": [
+        10,
+        2,
+        5
+      ]
+    },
+    {
+      "bar": 30,
+      "roman": "bIII",
+      "name": "F6",
+      "root_pc": 5,
+      "chord_tone_pcs": [
+        5,
+        9,
+        2
+      ]
+    },
+    {
+      "bar": 31,
+      "roman": "i",
+      "name": "Dm",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        5,
+        9
+      ]
+    }
+  ],
+  "vl_violations": 0,
+  "inline_audit": {
+    "Koto": {
+      "name": "Koto",
+      "n_notes": 179,
+      "off16": 0,
+      "off8": 0,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "Shakuhachi": {
+      "name": "Shakuhachi",
+      "n_notes": 32,
+      "off16": 0,
+      "off8": 0,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "Shamisen": {
+      "name": "Shamisen",
+      "n_notes": 256,
+      "off16": 0,
+      "off8": 0,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "Taiko": {
+      "name": "Taiko",
+      "n_notes": 40,
+      "off16": 0,
+      "off8": 0,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "Drums": {
+      "name": "Drums",
+      "n_notes": 128,
+      "off16": 0,
+      "off8": 0,
+      "out_scale": 0,
+      "out_chord": 0
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "phase1": {
+    "Koto": {
+      "n_notes": 257,
+      "off16": 256,
+      "off8": 256,
+      "out_scale": 161,
+      "out_chord": 207
+    }
+  },
+  "phase2": {
+    "Koto": {
+      "n_notes": 179,
+      "off16": 0,
+      "off8": 0,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "Shakuhachi": {
+      "n_notes": 32,
+      "off16": 0,
+      "off8": 0,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "Shamisen": {
+      "n_notes": 256,
+      "off16": 0,
+      "off8": 0,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "Taiko": {
+      "n_notes": 40,
+      "off16": 0,
+      "off8": 0,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "Drums": {
+      "n_notes": 128,
+      "off16": 0,
+      "off8": 0,
+      "out_scale": 0,
+      "out_chord": 0
+    }
+  }
+}

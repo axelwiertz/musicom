@@ -1,0 +1,29 @@
+{
+  "artifact": "244-japanese-chaotic-grains.mid",
+  "classification": "ai-assisted",
+  "generator": "Method 028 CMCG + musicom rules",
+  "sources": [],
+  "parameters": {
+    "method": 28,
+    "phase": 2,
+    "key": "D Hirajoshi",
+    "bpm": 80,
+    "sections": 4,
+    "total_bars": 32,
+    "seed": 244,
+    "style": "Japanese",
+    "form": "strophic",
+    "voices": [
+      "Koto",
+      "Shakuhachi",
+      "Shamisen",
+      "Taiko",
+      "Drums"
+    ]
+  },
+  "notes": "Phase 2: Henon grain cloud (koto lead) chord-tone-quantized per bar + 8th-grid onset snap; shakuhachi sustained counterline, shamisen arpeggio, taiko + ch9 drums. Chaotic regime sweeps across the four strophic verses (stable -> chaos -> return).",
+  "sha256": "f2e6a037843658d805b9151908978a6b82ab1c169ae7bcd3273b61be195b2858",
+  "bytes": 5867,
+  "created_utc": "2026-10-15T23:15:00.964776+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,23 @@
+{
+  "artifact": "244-japanese-chaotic-grains-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "Method 028 Chaotically Modulated Cellular Grains (CMCG) - PRE-RULES raw draft",
+  "sources": [],
+  "parameters": {
+    "method": 28,
+    "phase": 1,
+    "key": "D Hirajoshi",
+    "bpm": 80,
+    "sections": 4,
+    "total_bars": 32,
+    "seed": 244,
+    "style": "Japanese",
+    "form": "strophic",
+    "chaotic_map": "Henon (a=1.4, b=0.3)"
+  },
+  "notes": "Phase 1: single koto voice, pure Henon grain cloud. x -> raw unquantized pitch, y -> micro-timing jitter, off-grid by design, no harmony.",
+  "sha256": "592c9a08158626ab84f58f91058c415f1d2188ecc3a3d8bb6558d97a4433b071",
+  "bytes": 2232,
+  "created_utc": "2026-10-15T23:15:00.964193+00:00",
+  "provenance_version": "1.0"
+}

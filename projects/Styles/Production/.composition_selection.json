@@ -1,40 +1,36 @@
 {
-  "date": "2026-10-14",
-  "seed": 20261014,
-  "layer_roll": 0.7275,
+  "date": "2026-10-15",
+  "seed": 20261015,
+  "layer_roll": 0.9143,
   "layer": "concrete",
-  "method_id": "026",
-  "method_name": "Deconstructive Phase-Shift Minimalism (DPSM)",
-  "style": "Trap",
-  "form": "cinematic-build",
+  "method_id": "028",
+  "method_name": "Chaotically Modulated Cellular Grains (CMCG)",
+  "style": "Japanese",
+  "form": "strophic",
   "section_names": [
-    "Intro",
-    "Build",
-    "Rise",
-    "Peak",
-    "Resolve"
+    "Verse",
+    "Verse",
+    "Verse",
+    "Verse"
   ],
   "bars_per": [
-    4,
     8,
     8,
     8,
-    4
+    8
   ],
   "recent_methods_excluded": [
-    6,
-    7,
     11,
+    26,
     29,
     32,
     38,
     40,
     41,
-    51,
     74,
     98
   ],
   "n_styles": 46,
-  "n_concrete_avail": 91,
+  "n_concrete_avail": 94,
   "n_abstract_avail": 3
 }
