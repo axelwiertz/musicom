@@ -268,6 +268,10 @@ SP_METHODS = {
     "SP-103": ("sound.effects.parallel_filter_bank", "Filtopia-style 5-Parallel SEM Filter Bank — 5 parallel 12dB/oct filters (Oberheim SEM-inspired), per-filter cutoff offset/resonance, switchable LP/BP on slots 1&5 (Analogue Solutions Filtopia-style)"),
     "SP-104": ("sound.generators.param_animator", "Pentaphonic-style Parameter Animator — 16-step modulation pattern generator for 4 synthesis parameters (cutoff/resonance/pitch_mod/gain), per-lane interpolation/depth/speed, 4 loop modes (Cherry Audio Pentaphonic-style)"),
     "SP-105": ("sound.effects.spectral_panner", "Spectral Brightness Panner — frequency-dependent auto-panner driven by spectral centroid/brightness analysis, independent per-channel paths, virtual centre mode, LFO blend, 3 pan profiles (Sound Particles Brightness Panner 2-style)"),
+    # 2026-10-15 scan
+    "SP-106": ("sound.effects.frequency_shifter", "SSB Frequency Shifter w/ Spiral Feedback — stereo/mono quadrature modes, ratio-coupled channels, delay+blur+shelf filter feedback path (FAC Gravity-style)"),
+    "SP-107": ("sound.effects.bit_crusher", "Bit Crusher / Fidelity Reducer — linked sample-rate/bit-depth macro, Iron/Worn character voicing, aliasing foldover emphasis (Modbap Fidelity Theory-style)"),
+    "SP-108": ("sound.generators.poly_arp_seq", "Polyphonic Arpeggiator + Step Sequencer — Up/Down/UpDown/Random/Assign arp modes, 1-4 octave, dotted/triplet/swing; 512-step polyphonic sequencer with forward/backward/pendulum, chord recording, transpose (Prophet Rev4 firmware-mod-style)"),
 }
 
 

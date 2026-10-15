@@ -97,7 +97,10 @@ comparable to, and how do I use it in a workflow?*
 |||| `sound/effects/multiband_saturator.py` | MultibandSaturator, BandConfig | effects (saturation/distortion) | Kreuzberg Audio Oberton | audio + 6 LR4-split bands + per-band algo (15 types) + M/S mode + global trim → saturated stereo audio |
 |||| `sound/effects/parallel_filter_bank.py` | ParallelSEMFilterBank, SEMFilter2Pole, FilterSlot | effects (filter) | Analogue Solutions Filtopia | audio + base cutoff → 5 parallel 12dB/oct SEM-style filters with per-slot offset/resonance/mix, summed |
 |||| `sound/generators/param_animator.py` | ParameterAnimator, ParamLane, LoopMode | modulation (sequencer) | Cherry Audio Pentaphonic | 4×16-step modulation patterns → per-sample CV signals (cutoff/resonance/pitch_mod/gain) |
-|||| `sound/effects/spectral_panner.py` | SpectralBrightnessPanner, BrightnessTracker, PanLaw, LFO | effects (spatial) | Sound Particles Brightness Panner 2 | stereo audio → brightness-controlled auto-panned stereo with virtual centre, LFO blend |
+||||| `sound/effects/spectral_panner.py` | SpectralBrightnessPanner, BrightnessTracker, PanLaw, LFO | effects (spatial) | Sound Particles Brightness Panner 2 | stereo audio → brightness-controlled auto-panned stereo with virtual centre, LFO blend |
+||||| `sound/effects/frequency_shifter.py` | FrequencyShifter, QuadOsc, SpiralProcessor, ShelfFilter | effects (frequency shift) | FAC Gravity | audio + shift_hz → complex SSB frequency-shifted (stereo/mono/quadrature modes, spiral feedback with delay+blur+shelf) |
+||||| `sound/effects/bit_crusher.py` | BitCrusher, FidelityConfig | effects (lo-fi) | Modbap Fidelity Theory | audio → sample-rate/bit-depth reduced with Iron/Worn character voicing + ring aliasing |
+||||| `sound/generators/poly_arp_seq.py` | Arpeggiator, PolySequencer, ArpSeqCombined | sequencing (arp+seq) | Prophet Rev4 firmware mod | held notes/chords → Up/Down/UpDown/Random/Assign arpeggios + polyphonic step sequence (512 steps, chords≤10 notes, forward/backward/pendulum, transpose) |
 || `sound/sync/clock.py` | DAWClockBridge | sync | MTC/MIDI clock | bpm → clock pulses |
 | `sound/render/fluidsynth.py` | FluidSynthRenderer | render | SF2 synth | MIDI → WAV |
 | `sound/render/vst.py` | VSTRenderer | render | DAW VST3 | MIDI → VST audio |

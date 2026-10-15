@@ -132,7 +132,10 @@ Status: `implemented` = in sound/ package · `partial` = some pieces exist · `r
 || SP-092 | 6-Band Multiband Saturator w/ 15 Selectable Algorithms & Per-Band M/S Routing (Kreuzberg Audio Oberton-style) | implemented | sound/effects/multiband_saturator.py |
 || SP-103 | 5-Parallel SEM Filter Bank — 5×12dB/oct parallel filters, Oberheim SEM-style, per-slot cutoff offset/resonance, LP/BP switching (Analogue Solutions Filtopia-style) | implemented | sound/effects/parallel_filter_bank.py |
 || SP-104 | Parameter Animator — 16-step modulation pattern generator for 4 synth parameters (cutoff/resonance/pitch_mod/gain), interpolation/depth/loop modes (Cherry Audio Pentaphonic-style) | implemented | sound/generators/param_animator.py |
-|| SP-105 | Spectral Brightness Panner — frequency-dependent auto-panner driven by spectral centroid/brightness, per-channel paths, virtual centre, LFO blend, 3 pan profiles (Sound Particles Brightness Panner 2-style) | implemented | sound/effects/spectral_panner.py |
+||| SP-105 | Spectral Brightness Panner — frequency-dependent auto-panner driven by spectral centroid/brightness, per-channel paths, virtual centre, LFO blend, 3 pan profiles (Sound Particles Brightness Panner 2-style) | implemented | sound/effects/spectral_panner.py |
+||| SP-106 | SSB Frequency Shifter w/ Spiral Feedback — stereo/mono quadrature modes, ratio-coupled channels, delay+blur+shelf filter feedback path (FAC Gravity-style) | implemented | sound/effects/frequency_shifter.py |
+||| SP-107 | Bit Crusher / Fidelity Reducer — linked sample-rate/bit-depth macro, Iron/Worn character voicing, aliasing foldover emphasis (Modbap Fidelity Theory-style) | implemented | sound/effects/bit_crusher.py |
+||| SP-108 | Polyphonic Arpeggiator + Step Sequencer — Up/Down/UpDown/Random/Assign arp, 1-4 octave, dotted/triplet/swing; 512-step poly seq, chords up to 10 notes, forward/backward/pendulum, transpose (Prophet Rev4 firmware-mod-style) | implemented | sound/generators/poly_arp_seq.py |
 
 ## Mastering (from MusicTech workflow)
 

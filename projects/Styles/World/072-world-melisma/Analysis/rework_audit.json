@@ -1,0 +1,25 @@
+{
+  "chosen": "/opt/data/projects/Styles/World/072-world-melisma",
+  "genre": "World",
+  "primary_midi": "MIDI/072-world-melisma.mid",
+  "standard_failures": [
+    "rhythm-grid-sync: 100 pitched onsets off-grid (counter at +60/+1020, pad at +30 per section)",
+    "index.html: missing"
+  ],
+  "redesign_required": true,
+  "source_identity": {
+    "key": "D dorian",
+    "bpm": 100,
+    "method": "markov-harmony (M-022 Markov-Constraint Wavefront)",
+    "motif": "markov swimming melody, stepwise <=7 semitone meandering contour",
+    "instrumentation": ["Lead Pan Flute 75", "Counter String Ensemble 48", "Pad Synth Warm 89", "Bass Fretless 35", "Perc ch9"],
+    "chord_palette": ["i(Dm)", "ii(Em)", "III(F)", "IV(G)", "v(Am)"]
+  },
+  "audit_notes": {
+    "engine": "pass (UnitMatrixComposer)",
+    "zero_drift": "pass (5 voice tracks @ 38400 ticks)",
+    "track_setup": "pass (5 tracks incl ch9 drums)",
+    "two_phase": "pass (phase1 + phase2 MIDI present)",
+    "provenance_json": "pass (both phases have .provenance.json)"
+  }
+}
