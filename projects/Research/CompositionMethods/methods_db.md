@@ -123,6 +123,7 @@ Classification of active Musicom composition methods categorized by their primar
 | **113** | abstract | Pitch-Class Fourier Spectrum Composition (PCFSC) | **Rules-Based** | Pitch, Harmony, Structure, Texture | Strong (Fourier-phase-guided) | Grid-Locked / Continuous | Meso / Phase Trajectory | $\mathcal{O}(4096 \cdot 12)$ profile match, $\mathcal{O}(12)$/step gen | Designs pitch-class sets and progressions in the DFT over $\mathbb{Z}_{12}$ (Amiot 2016): chord/scale quality = magnitude spectrum $\lvert f_A(k) \rvert$ of the pc-set — whole-tone energy only at k=0,6; octatonic only at k=0,4,8; the 7-note ME (diatonic class) attains the max fifth-coefficient $\lvert f(5) \rvert = 2+\sqrt{3}$ (verified by exhaustive $\binom{12}{7}$ search); major/minor triads are magnitude-twins — mode lives in PHASE, not magnitude (verified: identical $|f|$ arrays, different $\arg f_5$). Tonic position/function = Fourier phase; transposition = phase rotation (verified: $T_7$ rotates $\arg f_1$ by $7\pi/6$). Composition = a trajectory in Fourier space: per-section target magnitude profile + designed phase walk yield the pitch-pool sequence and tension curve; tension = weighted Fourier-space distance between successive sets (Bernardes TIV 2016); magnitude-twin complement pairs (diatonic $\cong$ pentatonic) drive subset pairing. Abstract layer: feeds rules/subset_network.py. Fourier cousin of 039 SMA (audio-domain) and 051 SGLM (spectral-graph); phase-driven foil to 095 CTC and 104 PSSC. |
 | **114** | concrete | Farey–Stern–Brocot Composition (FSBC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Tenney-graded) | Grid-Locked / Continuous | Macro / Tree | $O(N)$ per event, $O(N^2)$ one-time Farey prefix | Hierarchical rational architecture: Farey sequences enumerate ALL reduced fractions a/b with b≤N (sorted) → maximal rational subdivision of the bar (every tuplet order ≤ N simultaneously, Cowell/Tenney rhythmicon arrays); the Stern–Brocot tree holds every positive rational exactly once with depth = Tenney-height consonance gradation → JI/12-TET pitch generation; paths encode continued fractions (a₀ R, a₁ L…); Calkin–Wilf enumeration (Stern diatomic s(n)/s(n+1)) yields a linear non-repeating rational timeline. Form = Farey-order arc (N=3→5→7→4→3) or tree walk. Concrete cousin of 012 Euclidean (single k/n rhythm); sibling of 069 Christoffel (primitive tree paths) and 076 Thue–Morse (other automatic sequence); deterministic number-theoretic foil to 053 Lévy leaps and 084 Zipf–Mandelbrot. |
 | **115** | concrete | Keplerian Orbital Resonance Composition (KORC) | **Nature-Led** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Kepler interval-graded) | Continuous / Fluid | Macro / Orbital Period | $O(N)$ per event (closed-form Kepler time) | Each UnitMatrix voice = a planet on an elliptical orbit; Kepler's 1st law r(ν)=a(1−e²)/(1+e·cos ν) sweeps pitch contour; 2nd law (equal areas) yields exact onset times t=(P/2π)(E−e·sin E) — events crowd at perihelion, spread at aphelion ("rush/linger" rubato, ratio ((1+e)/(1−e))² = the Harmonice Mundi interval table: Saturn 5:4, Jupiter 6:5, Mars 3:2, Earth 16:15, Venus 24:25); 3rd law P²∝a³ → log₂P register scale (NASA exoplanet sonification practice); mean-motion resonances (2:1, 3:2, Laplace 4:2:1 Io–Europa–Ganymede) → polyrhythmic hierarchy, periodic conjunction epochs = cadence schedule, anti-aligned apsides = tension oscillation. Section = synodic cycle / orbital year; macro-form = resonance-capture chain (3:2→2:1→4:2:1). Nature-Led foil to 020 SMSTC (unbound clouds) / 043 SATM (chaotic attractors); physically-sourced continuous-time sibling of 012 Euclidean / 069 Christoffel; deterministic counterpart to 045 Hawkes / 038 KOPS. |
+| **116** | concrete | Petri Net Composition (PNC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Token-guided) | Grid-Locked / Continuous | Meso / Net State | $\mathcal{O}(P \cdot T \cdot F)$ | P-timed Petri net with probabilistic arc weights: places = music objects (notes, chords, motifs), transitions = music operators (transposition, inversion, concatenation), tokens = active threads/playback triggers. Net topology = macro-form, firing schedule = rhythm, concurrent tokens = polyphonic voices, place timing $	au(p)$ = note duration and IOI. Reconfigurable on-the-fly for live composition (minimalist phasing). Formal-model counterpoint to 002 Markov / 021 CA; deterministic-stochastic hybrid foil to 034 PCFG / 078 IMEC. |
 |||### Source
 |Sakellariou, J., Tria, F., Loreto, V. & Pachet, F. (2017). "Maximum entropy models capture melodic styles." *Scientific Reports* 7, 9172. arXiv:1610.03414. — Jaynes, E. T. (1957). "Information theory and statistical mechanics." *Physical Review* 106, 620–630.
 
@@ -293,8 +294,9 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 || **SP-110** | Pulse Width Modulation Synthesis (PWM) | **Synthesis Engines** | Variable-Duty-Cycle Pulse / Analog Pad & String Timbres | Variable duty-cycle pulse wave oscillator with PolyBLEP bandlimited antialiasing. Two sawtooth waves with phase offset $D$ produce pulse wave via subtraction, containing both even and odd harmonics. LFO-modulated duty cycle creates evolving timbre — the classic analog string pad sound. Forms the source oscillator for subtractive signal chains. Candidate: `sound/synthesis/pwm_synthesis.py`. |
 | **SP-111** | Duffing Oscillator Nonlinear Synthesis (DONS) | **Synthesis Engines** | Forced-Nonlinear-Oscillator / Chaotic & Harmonic Organic Timbres | Integrates the forced damped Duffing oscillator $\ddot{x}+\delta\dot{x}+\alpha x+\beta x^3=\gamma\cos(\omega t)$ at audio rate; displacement $x(t)$ IS the sample. Drive frequency $\omega$ = pitch; drive amplitude $\gamma$ = one-knob chaos sweep (pure sine → odd-harmonic mode-locked → double-well strange attractor); seedable initial conditions give deterministic-per-note organic variation. $\mathcal{O}(1)$ per sample. Candidate: `sound/synthesis/duffing_synth.py`. |
 | **SP-112** | Linear Arithmetic Synthesis (LASS) | **Synthesis Engines** | Hybrid PCM-Attack + Subtractive-Sustain (LA) Timbres | Hybrid synthesis (Roland D-50, 1987): a one-shot PCM attack transient (hammer, pluck, breath "chiff") is crossfaded via an enveloped equal-power balance into a subtractive sustain body (PolyBLEP saw/PWM through a resonant lowpass). Partial = PCM or synth source + TVA/TVF envelopes; two partials = tone. Sampler-grade attack realism, synthesizer-grade sustain control. $\mathcal{O}(1)$ per sample per partial. Candidate: `sound/synthesis/la_synthesis.py`. |
-|| **SP-113** | Psychoacoustic Bass Enhancement Synthesis (PBES) | **Post-Processing / DSP** | Virtual Bass Perception | Post-process that generates harmonics of bass content via controlled nonlinearity to create the missing-fundamental illusion of low bass on bandwidth-limited speakers. Applies to rendered audio buffers or mix stems; per-voice or shared bus configuration. $\mathcal{O}(1)$ per sample. Candidate: `sound/effects/bass_enhancer.py`. |
-|| **SP-114** | Spectral Dynamics Compression/Expansion (SDCX) | **Post-Processing / DSP** | Spectral Dynamics / Per-Band Compression, Expansion & Gating | STFT-domain dynamics processor that applies independent compression, expansion, limiting, and gating to each of $N$ perceptually-scaled frequency bands (ERB grouping). Per-band threshold, ratio, attack, release, and knee parameters. Frame-by-frame STFT analysis → band grouping → level detection → gain computer → magnitude masking → ISTFT overlap-add. Preserves phase. $O(W \log W + B)$ per hop. Candidate: `sound/effects/spectral_dynamics.py`. |
+||| **SP-113** | Psychoacoustic Bass Enhancement Synthesis (PBES) | **Post-Processing / DSP** | Virtual Bass Perception | Post-process that generates harmonics of bass content via controlled nonlinearity to create the missing-fundamental illusion of low bass on bandwidth-limited speakers. Applies to rendered audio buffers or mix stems; per-voice or shared bus configuration. $\mathcal{O}(1)$ per sample. Candidate: `sound/effects/bass_enhancer.py`. |
+||| **SP-114** | Spectral Dynamics Compression/Expansion (SDCX) | **Post-Processing / DSP** | Spectral Dynamics / Per-Band Compression, Expansion & Gating | STFT-domain dynamics processor that applies independent compression, expansion, limiting, and gating to each of $N$ perceptually-scaled frequency bands (ERB grouping). Per-band threshold, ratio, attack, release, and knee parameters. Frame-by-frame STFT analysis → band grouping → level detection → gain computer → magnitude masking → ISTFT overlap-add. Preserves phase. $O(W \log W + B)$ per hop. Candidate: `sound/effects/spectral_dynamics.py`. |
+|| **SP-115** | Auto-Wah / Envelope-Controlled Filter Synthesis (AWEFS) | **Post-Processing / DSP** | Dynamic Filter Sweep / Envelope-Controlled Wah Effect | Envelope follower modulates a resonant filter cutoff in response to input dynamics. Signal amplitude controls filter frequency via asymmetric attack/release level detection, creating a vowel-like automatic wah-wah effect without pedal control. Lowpass/bandpass/peaking filter modes; per-voice or shared-bus configuration. $\mathcal{O}(1)$ per sample. Candidate: `sound/effects/envelope_filter.py`. |
 |---|
 
 
@@ -25451,4 +25453,322 @@ Because SDCX is a real-time post-process, it can be applied as the *last stage* 
 
 8. **Gain bandwidth interaction.** When compression gain falls rapidly across a narrow band edge (adjacent bands with different thresholds), the transition creates a "brick-wall" discontinuity in the frequency domain that sounds like a narrow-band filter. **Fix**: soften band-edge transitions by applying cross-band smoothing to the threshold/ratio arrays, using the same $B$-band Gaussian kernel as Pitfall #4.
 
----
+---### Source
+Haus, G. & Rodriguez, A. (1988). "Music description and processing by Petri nets." *Advances in Petri Nets 1988*, LNCS 340, pp. 175–199, Springer. — Baratè, A., Haus, G. & Ludovico, L.A. (2007). "Petri Nets Applicability to Music Analysis and Composition." *Proceedings of the International Computer Music Conference (ICMC 2007)*, Copenhagen, pp. 97–100. — Baratè, A., Haus, G. & Ludovico, L.A. (2014). "Real-time Music Composition through P-timed Petri Nets." *Proceedings of the ICMC-SMC 2014*, Athens, pp. 408–415. — Haus, G. & Rodriguez, A. (1993). "Formal music representation; a case study: the model of Ravel's Bolero by Petri nets." In *Music Processing*, G. Haus (Ed.), Computer Music and Digital Audio Series, pp. 165–232, A-R Editions, Madison.
+
+### Layer
+**concrete** — generates events that fill UnitMatrix cells. The firing schedule of transitions and the content of place music objects produce concrete pitch/duration/velocity events. Feeds generators/ directly via net simulation (token-game engine).
+
+### Paradigm
+**Rules-Based** — the Petri net is a formal model with a precise firing rule (enabled transitions, token movement, place capacity) and probabilistic arc-weight branching. Composition is the execution trace of the net. No learned neural parameters and no nature-inspired dynamics beyond the formal concurrency model; the net topology and initial marking are the composer's design input.
+
+### Description
+**Petri Net Composition (PNC)** uses P-timed Petri nets with probabilistic arc weights as the generative engine for symbolic music. A Petri net is a directed bipartite graph with two node types — places (circles) and transitions (bars) — connected by directed arcs. Tokens reside in places; the distribution of tokens across all places is the *marking*. A transition is *enabled* when every input place has at least as many tokens as the arc weight; a fired transition consumes tokens from its input places and deposits tokens into its output places, advancing the marking.
+
+**Music Petri Nets** (Haus & Rodriguez 1988) extend the formalism for music:
+
+- **Places** hold *music objects* — any entity with musical meaning: a single note, a chord, a motif, a phrase, a section, or a silence. The duration of the object (its temporal extent) is the place's *P-timing* parameter $\tau(p)$: tokens arriving at $p$ are blocked for $\tau(p)$ ticks before they can enable outgoing transitions. During this blocked period the object is played.
+- **Transitions** carry *music operators* — algorithmic transformations applied to input music objects before passing them on: transposition ($T_n$), inversion ($I$), retrogradation ($R$), concatenation (sequence), fusion (superposition of concurrent objects), split (decompose into constituents), time-scale, and silence insertion. A null operator (identity) simply passes the object through unchanged.
+- **Arc probabilistic weights** $w_p(a)$ control non-deterministic branching: when multiple transitions are enabled from the same marking, the firing probability of each is proportional to its probabilistic arc weights. Weight $w_p=0$ makes a transition fire only when no alternatives exist (default/else behaviour).
+- **Refinement** (hierarchical substitution): a macro-place can contain an entire subnet, enabling hierarchical composition design — the composer builds the large-scale form as a high-level net, then refines each place into a detailed subnet.
+
+**Generative model**: starting from an initial marking (tokens in one or more seed places), the net executes under the P-timed firing rule:
+
+1. Record each token's arrival time at its current place.
+2. At each simulation step, identify all transitions enabled by the current marking (respecting arc weights and place timings $\tau(p)$ whose windows have expired).
+3. Choose a transition to fire, weighted by $w_p$ (stochastic choice from the conflict group).
+4. Apply the transition's music operator to the input objects, producing output objects delivered to output places.
+5. Update the marking: remove tokens from input places, deposit tokens in output places.
+6. Advance the simulation clock by $\Delta t$ (fixed step, or jump to the next scheduled token release).
+7. Emit events: each place receiving a token with a music object triggers that object's playback — a set of `MusicEvent` structures (pitch, onset, duration, velocity) is emitted at the current simulation time.
+
+The composition is the temporal trace of all music objects emitted during net execution.
+
+**Key innovation over related methods**: unlike Markov models (002) or cellular automata (021), Petri nets natively model *concurrency* — multiple tokens can reside in multiple places simultaneously, representing independent polyphonic voices. One net topology encodes both vertical (harmonic/polyphonic) and horizontal (temporal/sequential) structure through concurrent places in the same marking. On-the-fly reconfiguration (transition/place addition/deletion during execution) enables real-time compositional change, suited to minimalist phasing, gradual transformation, and improvisation systems.
+
+### Musical Elements Framework
+
+**PITCH**: Pitch is encoded in the music objects stored in places. A place may hold a single pitch (e.g. MIDI 60), a chord (set of pitches, e.g. $\{60,64,67\}$), a melodic contour, or a transformation target. Transitions with transposition operators $(+n)$ shift all pitches in the input object by an interval. The resulting pitch trajectory is the accumulation of transformations along the firing path from initial place to each emitting place. Tonal gravity is enforced by designing pitch objects around a tonal centre and limiting transposition operators to scale-step distances; atonality is achieved by allowing arbitrary transposition intervals.
+
+**RHYTHM**: Rhythm is governed by the P-timing parameters $\tau(p)$ on each place — the duration (in ticks) that tokens are blocked before freeing. $\tau(p)$ directly sets the inter-onset interval (IOI) of the place's music object: a place holding a quarter-note object has $\tau = 480$ ticks (at 480 ticks/beat). Transition firing itself is instantaneous (zero-time event). Compound rhythms emerge from: (a) sequential chains of places with different $\tau$ values producing isochronous or non-isochronous streams; (b) concurrent places with independent $\tau$ values producing polyrhythms; (c) probabilistic branching at conflict transitions producing irregular/aleatoric timing. A music operator may also apply time-scale factors to modify duration (accelerando/ritardando by multiplying $\tau$).
+
+**HARMONY**: Harmony is the set of simultaneously active music objects across all places at a given marking. When two independent token paths converge into the same output place (via fusion transitions), the resulting music object is an ordered superposition of the constituent pitch sets — a chord. Harmonic progression is the sequence of these fused/concurrent pitch sets over time. Multi-place harmony: different places in the same marking represent different voice-stacks whose pitch sets combine into an aggregate harmony. Transition operators like $T_5$ explicitly encode functional harmonic relations (dominant, subdominant); arc conflict probabilities weight chord-choice likelihoods.
+
+**STRUCTURE**: Macro-form is the net topology itself. A net's shape determines the piece's architecture: acyclic net = through-composed (no repeats), cycle = ostinato/rondo, tree = hierarchical binary form, refinement hierarchy = nested sections (movement $\to$ section $\to$ phrase $\to$ motif). Section boundaries are marked by high-level transitions that shift token flow between major subnetworks. A three-part ABA form corresponds to a net with a central subnet (B) between two A-subnets, with the B subnet routing back to A. Refinement allows each section's internal macro/meso structure to be a full subnet with its own firing dynamics.
+
+**TEXTURE**: Texture is the density and distribution of active tokens across the net at any point. Token count across all places = polyphonic density; one active place = monophonic; many active places with independent objects = thick counterpoint. Fusion transitions that merge objects = homophony/synchronized texture; split transitions = hocket/antiphonal. Refinement depth at a given point = hierarchical density (melody + accompaniment at multiple structural levels). Conflicting transitions create suspension/resolution texture patterns (preparation $\to$ conflict $\to$ delayed resolution).
+
+### UnitMatrix Integration (Voices & Sections)
+
+**Voices**: Each UnitMatrix voice corresponds to an independent token path through the net — tracked by token lineage. A voice $v$ is the temporal projection of one token lineage's emitted music objects onto that voice's row. A split transition divides a token into $k$ tokens in $k$ different places, creating $k$ voice branches (each with independent subsequent behaviour); a fusion transition merges $k$ tokens back into one, representing voice convergence (unison). The composer designs the net so the number of independent active token lineages at any time equals the number of UnitMatrix voices. Vertical coherence: tokens that converge into a fusion transition produce pitch sets that form the harmony for that time slice.
+
+**Sections**: Sections correspond to subnetworks of the net. A section boundary is any token crossing a transition that transfers token flow from one subnetwork to another. The composer maps each subnetwork to a UnitMatrix section: the section's cells are the music objects emitted from its places during its active period. Each section receives its initial marking from the preceding section's closing marking. The macro-form schedule is the sequence of subnetwork activations ordered by transition firings.
+
+**Cell filling**: each cell (voice $v$, section $m$) is the temporal interval during which voice $v$'s token resides inside place $p$ in subnetwork $m$ — the interval $[t_{\text{arrival}},\, t_{\text{arrival}}+\tau(p)]$. The cell's `MusicUnit` content is the place's music object decoded into `MusicEvent` structures: pitch from the object, start_tick = simulation time at emission, end_tick = start_tick + $\tau(p)$, velocity from the place's dynamic tag. Zero-drift is guaranteed if each section's subnetwork emits exactly one terminal landmark at the section length — pad the final place's object to end at `section_len` (see `_unit_from_events(events, section_len)` in `musicom_workflow.py`).
+
+### Pitfalls
+
+1. **Net design complexity**: designing a net that produces musically satisfying output requires careful engineering of topology, place timings, arc weights, and initial markings. Without appropriate constraints a net may deadlock (no enabled transitions), livelock (infinite cycle with no output), or produce chaotic output. Reachability analysis tools are essential for debugging.
+2. **Timing granularity**: P-timed nets with discrete time steps require a careful choice of timing resolution. Too coarse (whole notes) misses sub-beat nuance; too fine (480 ppqn) blows out simulation length. Hierarchical timing (coarse at high net levels, fine inside refined subnets) mitigates this but complicates implementation.
+3. **State explosion**: the number of distinct markings in a $k$-bounded net grows combinatorially with token count and place count — up to $(k+1)^{|P|}$ for a $k$-bounded net, and reachability analysis is $\mathcal{O}(2^{|P|})$ in general. Keep place counts modest and bound token counts.
+4. **Probabilistic weight tuning**: arc weights in a conflict group should be normalized so their ratio encodes the intended firing likelihood. Poorly set weights make the net effectively deterministic (one weight dominates) or too uniform (loses stylistic bias).
+5. **Music-object granularity**: mixing music objects at different abstraction levels (a single note in one place, an eight-bar phrase in another) conflates timing semantics. Use a tiered music-object library — one abstraction level per net tier — and let refinement bridge levels.
+6. **Real-time reconfiguration soundness**: on-the-fly modifications (transition insertion/deletion during execution) can break running net properties — deleting a transition without redirecting its arcs, or inserting a transition that removes tokens with no input arc, breaks token conservation and deadlocks the net. The Baratè et al. (2014) substitution endomorphism must preserve structural soundness.
+7. **Tonal control is explicit, not implicit**: the net has no intrinsic functional-harmony engine. Tonal gravity must be encoded by choosing music objects around a tonal centre and constraining transposition operators to scale-step intervals; letting arbitrary $T_n$ operators fire will drift toward atonality.
+
+### SP-115 — Auto-Wah / Envelope-Controlled Filter Synthesis (AWEFS)
+
+### Source
+
+[1] Zölzer, U. (2011). *DAFX: Digital Audio Effects* (2nd ed.). John Wiley & Sons. — Chapter 4: Modulation Effects; Chapter 6: Filtering Effects.
+[2] Bristow-Johnson, R. (1996–2003). "Audio EQ Cookbook." https://webaudio.github.io/Audio-EQ-Cookbook/
+[3] Reiss, R. & McPherson, A. P. (2015). *Audio Effects: Theory, Implementation and Application*. CRC Press. — Chapter 4: Wah Effects.
+[4] Dutilleux, P. & Zölzer, U. (2011). "Envelope Filters." In U. Zölzer (Ed.), *DAFX: Digital Audio Effects*.
+[5] Hoch Strasser Electronics. "Introduction to Envelope Filters." https://www.hochstrasserelectronics.com/news/introductiontoenvelopefilters
+[6] Smith, J. O. (2019). *Physical Audio Signal Processing*. CCRMA, Stanford University. https://ccrma.stanford.edu/~jos/pasp/
+
+### Layer
+
+**absolute** — Post-Processing / DSP
+Code path: `sound/effects/envelope_filter.py`
+
+### Description
+
+Auto-Wah / Envelope-Controlled Filter Synthesis (AWEFS) is a post-processing DSP effect that dynamically modulates the cutoff frequency of a resonant filter in response to the instantaneous amplitude envelope of an input audio signal. As the input gets louder, the filter opens (cutoff rises toward $f_{\max}$), producing a vowel-like "wah" sweep; as it decays, the filter closes back toward $f_{\min}$. This is the automated counterpart of a foot-pedal wah-wah (which requires manual rocking of the pedal), driven entirely by the performer's playing dynamics — hence "auto-wah" or "envelope filter."
+
+The effect is deeply rooted in funk, soul, R&B, and psychedelic rock (pedals like the Dunlop Cry Baby, MXR Envelope Filter, Mu-Tron III, Q-Tron, and DOD FX25). Auto-wah gives bass, guitar, and keys a vocal, quacking, or talking quality that tracks the natural dynamics of performance.
+
+**How it works in one sentence**: a level detector (envelope follower) extracts a smoothed amplitude signal from the input; that control signal is mapped onto the cutoff-frequency range of a resonant biquad filter (lowpass, bandpass, or peaking), so louder playing opens the filter and softer playing closes it.
+
+**Distinction from related methods:**
+- **SP-020 (ZDF State Variable Filter)**: provides the underlying SVF *filter technology* but does not include envelope-follower modulation — SP-020 focuses on the analog-emulation filter implementation, not the auto-wah modulation application. AWEFS can use ZDF or biquad as its filter kernel.
+- **SP-006 (Zero-Drift Humanization)**: micro-timing jitter and velocity randomization, no frequency-selective filtering.
+- **SP-106 (Phaser / APS)**: allpass-based notch-sweep effect, phase-cancellation notches vs. AWEFS's resonant-filter magnitude sweep.
+- **SP-059 (FDLMS)**: modulated-delay effects (chorus/flanger/vibrato), no envelope-controlled filter.
+- **SP-029 (Subtractive Synthesis)**: uses a static (or LFO-modulated) filter on a synthesizer oscillator — the modulation source is an LFO, not the input signal's own dynamics.
+
+### Technical Mechanics
+
+#### Signal Flow
+
+$$\text{Input } x[n] \;\xrightarrow{\;|\cdot|\;}\; \text{Rectified } |x[n]| \;\xrightarrow{\;\text{Dual-TC Envelope Follower}\;}\; e[n] \;\xrightarrow{\;f_{\min} + s\cdot\hat{e}[n]\cdot(f_{\max}-f_{\min})\;}\; f_c[n] \;\xrightarrow{\;\text{RBJ Biquad}\;}\; y[n]$$
+
+#### Stage 1 — Envelope Follower (Dual Time Constant)
+
+The asymmetric envelope follower uses separate attack and release coefficients to track the amplitude envelope:
+
+$$e[n] = \begin{cases}
+\alpha_A \, e[n-1] + (1-\alpha_A) \, |x[n]| & \text{if } |x[n]| > e[n-1] \quad\text{(attack)} \\[4pt]
+\alpha_R \, e[n-1] + (1-\alpha_R) \, |x[n]| & \text{otherwise} \quad\text{(release)}
+\end{cases}$$
+
+The time constants $\tau_A$ (attack) and $\tau_R$ (release) set how fast the follower responds:
+
+$$\alpha_A = \exp\!\left(-\frac{1}{\tau_A \, f_s}\right), \qquad
+\alpha_R = \exp\!\left(-\frac{1}{\tau_R \, f_s}\right)$$
+
+where:
+- $\tau_A$ is typically 1–10 ms (fast attack catches transients),
+- $\tau_R$ is typically 50–500 ms (slower release sustains the wah after the note decays),
+- $f_s$ = sample rate in Hz.
+
+The rectified input $|x[n]|$ may be pre-filtered by a 2nd- or 3rd-order Butterworth lowpass at ~30 Hz to suppress $2f_0$ ripple, trading transient response for smoothness.
+
+#### Stage 2 — Envelope Normalization and Cutoff Mapping
+
+The raw envelope $e[n]$ is normalized to $[0,1]$:
+
+$$\hat{e}[n] = \frac{e[n] - e_{\min}}{e_{\max} - e_{\min}}$$
+
+Or, for real-time use without look-ahead, a running peak-normalization:
+
+$$e_{\max}[n] = \max\!\bigl(\,|x[n]|,\; e_{\max}[n-1] \cdot \lambda_{\text{decay}}\bigr) \quad (\text{leaky peak-tracker})$$
+
+The instantaneous filter cutoff frequency is then:
+
+$$f_c[n] = f_{\min} + s \, \hat{e}[n] \, (f_{\max} - f_{\min})$$
+
+where:
+- $f_{\min}$ = minimum cutoff (heel-down position), typically 180–400 Hz,
+- $f_{\max}$ = maximum cutoff (toe-down position), typically 1500–3000 Hz,
+- $s \in [0, 1]$ = sensitivity (scales the envelope's influence).
+
+#### Stage 3 — Resonant Biquad Filter (RBJ Cookbook)
+
+The time-varying filter is a second-order IIR biquad with coefficients recalculated whenever $f_c$ changes (per sample or per block with interpolation).
+
+**Resonant Lowpass mode** (RBJ lowpass with Q):
+
+$$\omega_0[n] = 2\pi \, f_c[n] / f_s$$
+
+$$\alpha[n] = \frac{\sin\omega_0[n]}{2Q}$$
+
+$$b_0 = \frac{1 - \cos\omega_0}{2},\qquad b_1 = 1 - \cos\omega_0,\qquad b_2 = b_0$$
+
+$$a_0 = 1 + \alpha,\qquad a_1 = -2\cos\omega_0,\qquad a_2 = 1 - \alpha$$
+
+Normalized difference equation:
+
+$$y[n] = \frac{b_0}{a_0}x[n] + \frac{b_1}{a_0}x[n-1] + \frac{b_2}{a_0}x[n-2] - \frac{a_1}{a_0}y[n-1] - \frac{a_2}{a_0}y[n-2]$$
+
+**Resonant Bandpass mode** (constant-skirt BPF):
+
+$$b_0 = \alpha,\qquad b_1 = 0,\qquad b_2 = -\alpha$$
+
+(all other coefficients same as lowpass)
+
+**Peaking EQ mode** (RBJ peaking with adjustable gain $G$ dB):
+
+$$A = 10^{G/40}$$
+
+$$b_0 = 1 + \alpha A,\qquad b_1 = -2\cos\omega_0,\qquad b_2 = 1 - \alpha A$$
+
+$$a_0 = 1 + \alpha/A,\qquad a_1 = -2\cos\omega_0,\qquad a_2 = 1 - \alpha/A$$
+
+#### Stage 4 — Dry/Wet Mix
+
+Standard parallel blend:
+
+$$y_{\text{out}}[n] = (1 - m)\,x[n] + m\,y[n], \quad m \in [0,1]$$
+
+#### Complexity
+
+The AWEFS baseline implementation is $\mathcal{O}(1)$ per sample when filter coefficients are updated per block (every $N_{\text{block}}$ samples with linear interpolation of coefs between blocks). Per-sample update is also $\mathcal{O}(1)$ but requires evaluating one $\tan$ and two transcendental functions per sample per voice, which is feasible at base sample rate on modern CPUs for a few voices.
+
+### Python/NumPy Implementation Sketch
+
+```python
+import numpy as np
+
+class EnvelopeFollower:
+    """Dual-time-constant envelope follower (attack/release)."""
+    def __init__(self, tau_attack=0.003, tau_release=0.150, sample_rate=44100.0):
+        self.alpha_A = np.exp(-1.0 / (tau_attack * sample_rate))
+        self.alpha_R = np.exp(-1.0 / (tau_release * sample_rate))
+        self.envelope = 0.0
+
+    def process(self, x):
+        abs_x = abs(x)
+        if abs_x > self.envelope:
+            self.envelope = self.alpha_A * self.envelope + (1 - self.alpha_A) * abs_x
+        else:
+            self.envelope = self.alpha_R * self.envelope + (1 - self.alpha_R) * abs_x
+        return self.envelope
+
+
+class AutoWah:
+    """Auto-wah / envelope-controlled resonant filter."""
+    def __init__(self, f_min=300.0, f_max=2000.0, Q=2.0, sensitivity=0.8,
+                 filter_mode='lowpass', mix=0.5, sample_rate=44100.0,
+                 tau_attack=0.003, tau_release=0.150, block_size=64):
+        self.f_min = f_min
+        self.f_max = f_max
+        self.f_range = f_max - f_min
+        self.Q = Q
+        self.sensitivity = sensitivity
+        self.filter_mode = filter_mode
+        self.mix = mix
+        self.sample_rate = sample_rate
+        self.block_size = block_size  # coeff update interval
+
+        self.env = EnvelopeFollower(tau_attack, tau_release, sample_rate)
+        self.z1 = 0.0  # x[n-1]
+        self.z2 = 0.0  # x[n-2]
+        self.y1 = 0.0  # y[n-1]
+        self.y2 = 0.0  # y[n-2]
+        self.coeffs = self._compute_coeffs(f_min)
+        self.coeffs_target = self.coeffs
+
+    def _compute_coeffs(self, fc):
+        """RBJ resonant lowpass/bpf/peaking coefficients."""
+        w0 = 2.0 * np.pi * fc / self.sample_rate
+        cos_w0 = np.cos(w0)
+        sin_w0 = np.sin(w0)
+        alpha = sin_w0 / (2.0 * self.Q)
+        cos_m2 = -2.0 * cos_w0
+
+        if self.filter_mode == 'bandpass':
+            b0, b1, b2 = alpha, 0.0, -alpha
+        elif self.filter_mode == 'lowpass':
+            half_cos = (1.0 - cos_w0) / 2.0
+            b0, b1, b2 = half_cos, 2.0 * half_cos, half_cos
+        else:  # peaking with G=6 dB
+            A = 10.0 ** (6.0 / 40.0)
+            b0, b1, b2 = 1.0 + alpha * A, cos_m2, 1.0 - alpha * A
+            a0 = 1.0 + alpha / A
+            return (b0 / a0, b1 / a0, b2 / a0, cos_m2 / a0, (1.0 - alpha) / a0)
+
+        a0 = 1.0 + alpha
+        return (b0 / a0, b1 / a0, b2 / a0, cos_m2 / a0, (1.0 - alpha) / a0)
+
+    def process_block(self, x_block):
+        """Process a block of samples through the auto-wah."""
+        n = len(x_block)
+        y = np.zeros(n)
+        for i in range(n):
+            # Update envelope
+            env_val = self.env.process(x_block[i])
+
+            # Update cutoff and filter coefs at block boundaries (interpolated)
+            fc = self.f_min + self.sensitivity * env_val * self.f_range
+            self.coeffs_target = self._compute_coeffs(fc)
+
+            # One-pole smooth coefficient transition (prevents zipper noise)
+            b0, b1, b2, a1, a2 = self.coeffs
+            tb0, tb1, tb2, ta1, ta2 = self.coeffs_target
+            smooth = 0.3
+            self.coeffs = (
+                b0 + smooth * (tb0 - b0),
+                b1 + smooth * (tb1 - b1),
+                b2 + smooth * (tb2 - b2),
+                a1 + smooth * (ta1 - a1),
+                a2 + smooth * (ta2 - a2),
+            )
+            b0c, b1c, b2c, a1c, a2c = self.coeffs
+
+            # Biquad difference equation
+            out = (b0c * x_block[i] + b1c * self.z1 + b2c * self.z2
+                   - a1c * self.y1 - a2c * self.y2)
+            self.z2, self.z1 = self.z1, x_block[i]
+            self.y2, self.y1 = self.y1, out
+
+            # Wet/dry mix
+            y[i] = (1 - self.mix) * x_block[i] + self.mix * out
+        return y
+```
+
+### Musical Elements Framework
+
+**PITCH**: The envelope follower measures amplitude, not frequency, so the filter sweep is nominally pitch-independent. However, at low fundamentals ($f_0 < 100$ Hz) the $2f_0$ envelope ripple creates subtle cyclic pitch-dependent modulation — a desirable "bouncy" artifact in bass auto-wah. Higher Q values create audible pitch coloration at the resonant peak as the filter sweeps across harmonics.
+
+**RHYTHM**: The attack and release time constants directly encode rhythmic articulation. Fast $\tau_A$ (1–3 ms) + fast $\tau_R$ (20–50 ms) = per-note articulation, where every note trigger produces a complete wah cycle (open→close). Slow $\tau_R$ (>200 ms) creates phrase-level envelope following, where sustained chords or legato lines hold the filter open continuously. Sensitivity $s$ scales how much the performer's dynamic accenting translates to rhythmic filter modulation — higher sensitivity makes ghost notes and accents more pronounced.
+
+**HARMONY**: In multi-voice UnitMatrix context, each voice with its own independent AWEFS produces per-voice filter modulation, creating vertical harmonic contrast (bright voice vs. dark voice simultaneously). Shared-bus AWEFS (envelope derived from the composite mix) applies uniform filter modulation to the entire ensemble, creating a synchronized "band wah" effect. Per-voice $f_{\min}$ offsets can implement frequency-region carving (e.g., bass AWEFS sweeps 200–800 Hz, lead AWEFS sweeps 800–2500 Hz).
+
+**STRUCTURE**: Macro-form is expressed as per-section AWEFS parameter presets: Intro = low sensitivity, slow release, $f_{\min}=400$ Hz, $f_{\max}=1200$ Hz (subtle shimmer); Verse = $\tau_A=5$ ms, $\tau_R=150$ ms, sensitivity 0.6 (groove wah); Chorus = $\tau_A=2$ ms, $\tau_R=80$ ms, high Q=8, bandpass mode (aggressive quack); Bridge = bypass AWEFS or set sensitivity=0 (dry, static). Parameter interpolation across section boundaries enables morphing filter behavior (verse wah gradually opens to chorus aggression).
+
+**TEXTURE**: The Q (resonance) parameter is the primary texture control: low Q (0.5–1.0) produces gentle roll-off, broad bandwidth, transparent texture (subtle wah); medium Q (2–6) gives the classic vocal/quack resonance, creating a focused mid-range bump that cuts through a mix; high Q (8–20) approaches self-oscillation, producing a pure sine-like tone at the resonant frequency — the texture becomes a pitched filter-sweep rather than a filtered source. Bandpass mode at high Q creates the thinnest texture (only the resonant band passes); lowpass mode at moderate Q preserves body (low frequencies always pass).
+
+### UnitMatrix Integration (Voices & Sections)
+
+**Voices**: Each UnitMatrix voice row can be routed through an independent AWEFS instance with its own $\{f_{\min}, f_{\max}, Q, \tau_A, \tau_R, \text{sensitivity}, \text{mix}\}$ parameter set. This enables per-voice dynamic filter assignment: e.g., Voice 1 (lead) = moderate wah, Voice 2 (bass) = subtle low-register awareness with $f_{\max}=800$ Hz to preserve sub-bass, Voice 3 (percussion) = bandpass mode with fast attack for tambourine-like filter accents. A shared-bus post-mix AWEFS sums all rendered voices and applies a master envelope-filter for gelling the mix.
+
+**Sections**: Each UnitMatrix section $m$ carries an AWEFS parameter preset $\Theta_m$. During production, the AWEFS engine crossfades between $\Theta_m$ and $\Theta_{m+1}$ across the section boundary (typically over 1–4 bars). The envelope filter's state (envelope follower level, filter zi state) is preserved across section boundaries for click-free transitions, or reset for dramatic section contrasts.
+
+**Cell filling**: AWEFS is a **post-render DSP layer** — the symbolic UnitMatrix content is first rendered to audio buffers via any synthesis engine method (e.g., SP-001 SoundFont, SP-029 Subtractive, SP-063 Ring Mod). The rendered buffer per-voice (or summed mix) is then fed through the AWEFS process block-by-block. The envelope filter does not generate its own events; it shapes existing audio. The candidate code path is `sound/effects/envelope_filter.py`, accepting a `(buffer, sample_rate, params_dict)` API.
+
+### Pitfalls
+
+1. **Envelope ripple at low frequencies**: The rectified signal $|x[n]|$ contains a strong $2f_0$ component for periodic waveforms. If the envelope follower's lowpass corner frequency is near or above $f_0$, this ripple bleeds through, causing cyclic "wobble" in the filter sweep instead of smooth dynamic tracking. Mitigations: (a) set envelope LPF $\ll$ lowest $f_0$ (costs transient response); (b) use a polyphonic envelope separator (e.g., Hilbert transform); (c) use the envelope to control a noise gate + static filter combo (not true AWEFS, but practical).
+
+2. **Zipper noise / step artifacts**: Updating the biquad coefficients discontinuously (per block without interpolation) produces audible clicks and zipper artifacts as the filter transfer function jumps between states. Mitigations: (a) linear or crossfade interpolation of coefficients over $N$ samples; (b) per-sample coefficient update using pre-computed wavetables for $\cos\omega_0$ and $\sin\omega_0$; (c) use a state-variable filter (Chamberlin/Arboretum) whose cutoff can be modulated by tuning one multiplier per sample — no coefficient recalculation needed.
+
+3. **Q-dependent amplitude variation**: The overall output level changes dramatically with filter Q and cutoff position — a peaking or bandpass filter at high Q near the resonant frequency can boost or cut by 10–15 dB relative to the unfiltered signal. Automatic gain compensation (measure RMS of filtered vs. dry, normalize) or limiting the sensitivity range is essential to prevent level jumps.
+
+4. **Latency from envelope follower smoothing**: A low-bandwidth envelope follower (e.g., 20 Hz Butterworth LPF) introduces ~20–50 ms of group delay in the control path. This means the filter cutoff lags the transient that triggered it. For most bass/guitar applications this lag is inaudible or even desirable (smooths the sweep), but for percussive or fast-articulated material it dulls the attack transients. Use fast attack $\tau_A$ with a pre-filter highpass (200 Hz) before rectification for cleaner transient detection.
+
+5. **Stereo image collapse**: Independent per-channel AWEFS with independent envelope followers produces uncorrelated filter modulation in L/R, which smears stereo imaging and can cause phasing artifacts in the summed mix. Linked stereo mode (envelope from mid side only, or sum-signal envelope shared across channels) preserves the stereo image.
+
+6. **Feedback / runaway with very resonant filters**: At Q $\gtrsim$ 10 the biquad approaches instability, especially in bandpass mode. The coefficient $a_0 = 1 + \alpha$ keeps the denominator stable for Q as high as ~20, but coefficient quantization in fixed-point or single-precision float can push the poles outside the unit circle. Mitigation: clamp Q $\leq$ 20 or use double-precision for coefficient calculation.
+
+7. **Parameter design space complexity**: AWEFS has 7+ interdependent parameters ($f_{\min}, f_{\max}$, Q, sensitivity, $\tau_A$, $\tau_R$, filter mode, mix). Many combinations sound similar (e.g., lowering $f_{\min}$ vs. decreasing sensitivity). A good starting point is the classic funk auto-wah: LP mode, Q=4, $f_{\min}=350$ Hz, $f_{\max}=1800$ Hz, sensitivity=0.7, $\tau_A=3$ ms, $\tau_R=200$ ms, mix=1.0.

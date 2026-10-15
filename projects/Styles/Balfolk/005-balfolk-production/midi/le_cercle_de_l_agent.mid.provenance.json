@@ -1,0 +1,18 @@
+{
+  "artifact": "le_cercle_de_l_agent.mid",
+  "classification": "ai-assisted (reworked)",
+  "generator": "Balfolk/005-balfolk-production/_cron_rework_le_cercle.py",
+  "parameters": {
+    "bpm": 120,
+    "key": "G major (G6/9 pentatonic drone)",
+    "meter": "6/8",
+    "bars": 16,
+    "rework": "pre-flight 3-rule gate: re-harmonize comp G-B -> G6/9 (G B D E A), add GM programs (Violin 40/Guitar 25/Piano 1), tempo 120, 6/8 time sig, zero-drift pad all tracks to 23040"
+  },
+  "rework_stats": {
+    "melody_preserved": 96,
+    "bass_preserved": 32,
+    "comp_notes_new": 80
+  },
+  "rework_utc": "2026-10-15T22:11:24.680609+00:00"
+}

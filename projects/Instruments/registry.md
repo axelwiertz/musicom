@@ -556,6 +556,20 @@ one stroke at a time. Channel quirk: melodic channel (0–9) with program 14
 — channel 9 would trigger the drum-kit map and the `Acoustic_Grand_Piano`
 program-0 fallback label (timpani lesson).
 
+**Brass Section added** (2026-10-15): GM61, Brass-family ensemble entry — the
+full brass tutti patch (trumpets, trombones, french horns, tuba) in a single
+multi-sample patch; the iconic fanfare/orchestral stab voice (instrument.md +
+brass_section.py), verified end-to-end UnitMatrixComposer → zero-drift ✓ →
+MIDI (92 bytes) → FluidSynth WAV (795 KB) ✓; RenderPipeline stem label
+`trackXX_Brass_Section.wav` ✓ (GM_PROGRAMS[61] = "Brass Section", FluidR3
+preset 61 = "Brass Section" — labels match exactly, **no quirk**).
+PhaseModSynth recommended (saw carrier, mod_depth 2.8, attack 0.06 s —
+sustained multi-brass ensemble). Solo-render spectral check: 4–8 kHz buzz
+1.5% (clean single voice, well below 20% gate). Empirical FluidR3 pitch sweep
+confirms audibility across full 36–96 span. Registered in `instrument_registry.py`
+as BRASS_SECTION convenience constant. Ensemble voice quirk: use for tutti
+fanfares/harmonies, NOT for solo lines (use individual brass patches for that).
+
 ## Python usage
 
 ```python
@@ -596,6 +610,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Brass | Trumpet | 56 | 54–86 | lead, accent, fanfare |
 | Brass | Muted Trumpet | 59 | 54–86 | lead, countermelody, accent, melody, ornament |
 | Brass | Trombone | 57 | 40–78 | bass, counter, accent, harmony |
+| Brass | Brass Section | 61 | 36–96 | lead, accent, fanfare, counter, harmony, pad |
 | Brass | French Horn | 60 | 41–84 | harmony, counter, accent, lead |
 | Brass | Tuba | 58 | 26–72 | bass, harmony, accent, rhythm |
 | Woodwind | Flute | 74 | 60–96 | lead, counter, ornament |
@@ -655,6 +670,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 57 | Trombone | Trombone ✓ |
 | 58 | Tuba | Tuba ✓ |
 | 60 | French Horn | French Horn ✓ (SF2 preset is "French Horns" plural — cosmetic) |
+| 61 | Brass Section | Brass_Section ✓ (GM_PROGRAMS[61] + FluidR3 preset 61 both "Brass Section" — labels match exactly, **no quirk**) |
 | 70 | Bassoon | Bassoon ✓ |
 | 72 | Piccolo | Piccolo ✓ (GM_PROGRAMS[72] + FluidR3 preset 72 both "Piccolo") |
 | 68 | Oboe | Oboe ✓ (SF2 preset is "Oboe (Orch)" — cosmetic suffix only) |

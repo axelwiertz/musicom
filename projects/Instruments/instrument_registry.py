@@ -43,6 +43,7 @@ _INSTRUMENT_MODULES = {
     "Brass.french_horn.french_horn": "french_horn",
     "Brass.muted_trumpet.muted_trumpet": "muted_trumpet",
     "Brass.tuba.tuba": "tuba",
+    "Brass.brass_section.brass_section": "brass_section",
     "Woodwind.piccolo.piccolo": "piccolo",
     "Woodwind.flute.flute": "flute",
     "Woodwind.clarinet.clarinet": "clarinet",
@@ -228,6 +229,7 @@ TROMBONE = ALL_INSTRUMENTS["trombone"]
 FRENCH_HORN = ALL_INSTRUMENTS["french_horn"]
 MUTED_TRUMPET = ALL_INSTRUMENTS["muted_trumpet"]
 TUBA = ALL_INSTRUMENTS["tuba"]
+BRASS_SECTION = ALL_INSTRUMENTS["brass_section"]
 FLUTE = ALL_INSTRUMENTS["flute"]
 CLARINET = ALL_INSTRUMENTS["clarinet"]
 OBOE = ALL_INSTRUMENTS["oboe"]
@@ -347,6 +349,12 @@ def registry_table():
         elif low == "tenor saxophone":
             role = "lead, countermelody, accent, harmony"
         elif low == "english horn":
+            role = "lead, countermelody, melody, harmony, accent"
+        elif low == "muted trumpet":
+            role = "lead, countermelody, accent, fanfare, ornament"
+        elif low == "brass section":
+            role = "lead, accent, fanfare, counter, harmony, pad"
+        elif low == "french horn":
             role = "lead, countermelody, melody, harmony, accent"
         elif low == "drum kit":
             role = "rhythm, groove, accent"
@@ -612,3 +620,12 @@ if __name__ == "__main__":
     print("  OVERDRIVEN_GUITAR.range_min =", OVERDRIVEN_GUITAR.range_min, "OVERDRIVEN_GUITAR.range_max =", OVERDRIVEN_GUITAR.range_max)
     print("  OVERDRIVEN_GUITAR.stem_label =", repr(OVERDRIVEN_GUITAR.stem_label))
     print()
+
+    print("=== Brass Section (GM61) ===")
+    print("  BRASS_SECTION.midi_program =", BRASS_SECTION.midi_program, "(should be 61)")
+    print("  by_name('brass section') =", by_name("brass section"))
+    print("  by_program(61) =", by_program(61))
+    print("  BRASS_SECTION.in_sweet_spot(67) =", BRASS_SECTION.in_sweet_spot(67))
+    print("  BRASS_SECTION.in_sweet_spot(30) =", BRASS_SECTION.in_sweet_spot(30))
+    print("  BRASS_SECTION.range_min =", BRASS_SECTION.range_min, "BRASS_SECTION.range_max =", BRASS_SECTION.range_max)
+    print("  BRASS_SECTION.stem_label =", repr(BRASS_SECTION.stem_label))

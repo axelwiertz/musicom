@@ -1,0 +1,33 @@
+{
+  "job": "random-style production (SP) layer-aligned",
+  "date": "2026-10-15",
+  "seed": 20261015,
+  "method": "SP-032",
+  "method_module": "sound.effects.fdn_reverb",
+  "method_desc": "Feedback Delay Network Reverb (Rev Ocean Tidal-style)",
+  "params": {
+    "n_delays": 8,
+    "size": 0.55,
+    "decay": 0.8,
+    "brightness": 0.72,
+    "modulation": 0.25,
+    "width": 0.85,
+    "duck_amount": 0.12,
+    "wet_dry": 0.35,
+    "fs": 44100,
+    "trim_tail_s": 1.5,
+    "fdn_tail_s": 3.5
+  },
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Balfolk/005-balfolk-production/midi/le_cercle_de_l_agent.mid",
+  "output_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP032-fdn-le-cercle-de-l-agent/SP032-fdn-le-cercle-de-l-agent.wav",
+  "output_ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP032-fdn-le-cercle-de-l-agent/SP032-fdn-le-cercle-de-l-agent.ogg",
+  "lufs": -14.001419061137465,
+  "peak": 0.8912509083747864,
+  "silence_pct": 20.651403045021663,
+  "mono_correlation": 0.8674420876221467,
+  "pitch_verdict": "PASS",
+  "hit_rate": 1.0,
+  "he_mean": 0.5776167888385935,
+  "dry_he_mean": 0.5497865692458895,
+  "he_retention": 1.050620042666515
+}
