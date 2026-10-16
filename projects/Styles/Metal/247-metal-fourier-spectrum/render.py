@@ -13,6 +13,9 @@ from compose import (  # noqa: E402
     CHORDS, POOL_BY_SECTION, section_of_bar, TOTAL_BARS, BAR, SIXTEENTH,
     PITCHED_VOICES, BASE, MIDI_PATH, PHASE1_PATH,
 )
+# Engine types — this script only READS the exported MIDI back for verification
+# (mido is used strictly for readback analysis, never for authoring).
+from structures import MusicEvent, MusicUnit  # noqa: E402,F401
 
 AUDIO_DIR = os.path.join(PROJECT_DIR, "Audio")
 ANALYSIS_DIR = os.path.join(PROJECT_DIR, "Analysis")
@@ -73,6 +76,9 @@ def to_ogg(wav_path, ogg_path):
 
 
 def verify_midi(midi_path):
+    # READING ONLY (analysis) — mido is used to read the exported MIDI back for
+    # zero-drift / grid / harmony auditing; the MIDI itself was authored by the
+    # musicom engine (UnitMatrixComposer.to_midi), never hand-rolled here.
     import mido
     mid = mido.MidiFile(midi_path)
     tracks = []
