@@ -1,0 +1,24 @@
+{
+  "artifact": "245-attractor-chorale-rework-phase1.mid",
+  "classification": "ai-generated",
+  "generator": "Lorenz strange attractor (RK4) - PRE-RULES raw draft",
+  "sources": [],
+  "parameters": {
+    "method": 43,
+    "phase": 1,
+    "key": "E dorian",
+    "bpm": 92,
+    "sections": 10,
+    "total_bars": 32,
+    "seed": 245,
+    "style": "Experimental",
+    "form": "chorale",
+    "source": "061-attractor-chorale",
+    "rework": "redesign"
+  },
+  "notes": "Phase 1: single flute voice, pure Lorenz trajectory. z -> raw unquantized pitch, speed-triggered off-grid onsets, no harmony.",
+  "sha256": "e64806c067b81e579a84c1449806ea42c40342a6a8fb305369e4ae17ce035b31",
+  "bytes": 1843,
+  "created_utc": "2026-10-16T01:12:39.540159+00:00",
+  "provenance_version": "1.0"
+}

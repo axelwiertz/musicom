@@ -1,0 +1,31 @@
+{
+  "job": "random-style production (SP) layer-aligned",
+  "date": "2026-10-16",
+  "seed": 20261016,
+  "method": "SP-099",
+  "method_module": "sound.effects.ir_designer",
+  "method_desc": "Impulse Response Designer \u2014 10 algorithmic IR synthesis techniques (Convolution Playground-style)",
+  "params": {
+    "recipe": "reverb",
+    "rt60_s": 2.0,
+    "duration_s": 3.0,
+    "wet_gain": 0.35,
+    "dry_gain": 0.8,
+    "fs": 44100,
+    "target_lufs": -14.0,
+    "ceiling_db": -1.0
+  },
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Production/SP099-ir-designer-ballad-hitl-cand3/MIDI/cand3-pViol-ldX-ar4-pdpuls-drful-bXo0.mid",
+  "output_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP099-ir-designer-ballad-hitl-cand3/SP099-ir-designer-ballad-hitl-cand3.wav",
+  "output_ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP099-ir-designer-ballad-hitl-cand3/SP099-ir-designer-ballad-hitl-cand3.ogg",
+  "lufs": -14.0,
+  "peak": 0.7798033354624883,
+  "silence_pct": 5.078381111549225,
+  "mono_correlation": 0.6489393693571281,
+  "rms": 0.1341975316408308,
+  "pitch_verdict": "PASS",
+  "hit_rate": 1.0,
+  "he_mean": 0.641949884613689,
+  "dry_he_mean": 0.5306642283803958,
+  "he_retention": 1.209710114761156
+}

@@ -124,6 +124,7 @@ Classification of active Musicom composition methods categorized by their primar
 | **114** | concrete | Farey–Stern–Brocot Composition (FSBC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Tenney-graded) | Grid-Locked / Continuous | Macro / Tree | $O(N)$ per event, $O(N^2)$ one-time Farey prefix | Hierarchical rational architecture: Farey sequences enumerate ALL reduced fractions a/b with b≤N (sorted) → maximal rational subdivision of the bar (every tuplet order ≤ N simultaneously, Cowell/Tenney rhythmicon arrays); the Stern–Brocot tree holds every positive rational exactly once with depth = Tenney-height consonance gradation → JI/12-TET pitch generation; paths encode continued fractions (a₀ R, a₁ L…); Calkin–Wilf enumeration (Stern diatomic s(n)/s(n+1)) yields a linear non-repeating rational timeline. Form = Farey-order arc (N=3→5→7→4→3) or tree walk. Concrete cousin of 012 Euclidean (single k/n rhythm); sibling of 069 Christoffel (primitive tree paths) and 076 Thue–Morse (other automatic sequence); deterministic number-theoretic foil to 053 Lévy leaps and 084 Zipf–Mandelbrot. |
 | **115** | concrete | Keplerian Orbital Resonance Composition (KORC) | **Nature-Led** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Kepler interval-graded) | Continuous / Fluid | Macro / Orbital Period | $O(N)$ per event (closed-form Kepler time) | Each UnitMatrix voice = a planet on an elliptical orbit; Kepler's 1st law r(ν)=a(1−e²)/(1+e·cos ν) sweeps pitch contour; 2nd law (equal areas) yields exact onset times t=(P/2π)(E−e·sin E) — events crowd at perihelion, spread at aphelion ("rush/linger" rubato, ratio ((1+e)/(1−e))² = the Harmonice Mundi interval table: Saturn 5:4, Jupiter 6:5, Mars 3:2, Earth 16:15, Venus 24:25); 3rd law P²∝a³ → log₂P register scale (NASA exoplanet sonification practice); mean-motion resonances (2:1, 3:2, Laplace 4:2:1 Io–Europa–Ganymede) → polyrhythmic hierarchy, periodic conjunction epochs = cadence schedule, anti-aligned apsides = tension oscillation. Section = synodic cycle / orbital year; macro-form = resonance-capture chain (3:2→2:1→4:2:1). Nature-Led foil to 020 SMSTC (unbound clouds) / 043 SATM (chaotic attractors); physically-sourced continuous-time sibling of 012 Euclidean / 069 Christoffel; deterministic counterpart to 045 Hawkes / 038 KOPS. |
 | **116** | concrete | Petri Net Composition (PNC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Token-guided) | Grid-Locked / Continuous | Meso / Net State | $\mathcal{O}(P \cdot T \cdot F)$ | P-timed Petri net with probabilistic arc weights: places = music objects (notes, chords, motifs), transitions = music operators (transposition, inversion, concatenation), tokens = active threads/playback triggers. Net topology = macro-form, firing schedule = rhythm, concurrent tokens = polyphonic voices, place timing $	au(p)$ = note duration and IOI. Reconfigurable on-the-fly for live composition (minimalist phasing). Formal-model counterpoint to 002 Markov / 021 CA; deterministic-stochastic hybrid foil to 034 PCFG / 078 IMEC. |
+| **117** | concrete | Particle Swarm Optimization Composition (PSOC) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Fitness-guided, Key-bound) | Grid-Locked / Continuous | Macro / Global Optimum | $\mathcal{O}(I \cdot P \cdot D \cdot N)$ | Population of particles (candidate compositions) evolves via velocity-attraction to personal/global best positions. Continuous-valued positions encode note parameters per-voice per-section; fitness landscape guides convergence toward tonal, melodic, rhythmic, harmonic, textural, and structural objectives. Continuous-velocity metaheuristic counterpart to GA (003), SA (055), ACO (041) with fundamentally different search dynamics — vector-field guidance rather than recombination, cooling, or pheromone. |
 |||### Source
 |Sakellariou, J., Tria, F., Loreto, V. & Pachet, F. (2017). "Maximum entropy models capture melodic styles." *Scientific Reports* 7, 9172. arXiv:1610.03414. — Jaynes, E. T. (1957). "Information theory and statistical mechanics." *Physical Review* 106, 620–630.
 
@@ -296,7 +297,8 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 | **SP-112** | Linear Arithmetic Synthesis (LASS) | **Synthesis Engines** | Hybrid PCM-Attack + Subtractive-Sustain (LA) Timbres | Hybrid synthesis (Roland D-50, 1987): a one-shot PCM attack transient (hammer, pluck, breath "chiff") is crossfaded via an enveloped equal-power balance into a subtractive sustain body (PolyBLEP saw/PWM through a resonant lowpass). Partial = PCM or synth source + TVA/TVF envelopes; two partials = tone. Sampler-grade attack realism, synthesizer-grade sustain control. $\mathcal{O}(1)$ per sample per partial. Candidate: `sound/synthesis/la_synthesis.py`. |
 ||| **SP-113** | Psychoacoustic Bass Enhancement Synthesis (PBES) | **Post-Processing / DSP** | Virtual Bass Perception | Post-process that generates harmonics of bass content via controlled nonlinearity to create the missing-fundamental illusion of low bass on bandwidth-limited speakers. Applies to rendered audio buffers or mix stems; per-voice or shared bus configuration. $\mathcal{O}(1)$ per sample. Candidate: `sound/effects/bass_enhancer.py`. |
 ||| **SP-114** | Spectral Dynamics Compression/Expansion (SDCX) | **Post-Processing / DSP** | Spectral Dynamics / Per-Band Compression, Expansion & Gating | STFT-domain dynamics processor that applies independent compression, expansion, limiting, and gating to each of $N$ perceptually-scaled frequency bands (ERB grouping). Per-band threshold, ratio, attack, release, and knee parameters. Frame-by-frame STFT analysis → band grouping → level detection → gain computer → magnitude masking → ISTFT overlap-add. Preserves phase. $O(W \log W + B)$ per hop. Candidate: `sound/effects/spectral_dynamics.py`. |
-|| **SP-115** | Auto-Wah / Envelope-Controlled Filter Synthesis (AWEFS) | **Post-Processing / DSP** | Dynamic Filter Sweep / Envelope-Controlled Wah Effect | Envelope follower modulates a resonant filter cutoff in response to input dynamics. Signal amplitude controls filter frequency via asymmetric attack/release level detection, creating a vowel-like automatic wah-wah effect without pedal control. Lowpass/bandpass/peaking filter modes; per-voice or shared-bus configuration. $\mathcal{O}(1)$ per sample. Candidate: `sound/effects/envelope_filter.py`. |
+||| **SP-115** | Auto-Wah / Envelope-Controlled Filter Synthesis (AWEFS) | **Post-Processing / DSP** | Dynamic Filter Sweep / Envelope-Controlled Wah Effect | Envelope follower modulates a resonant filter cutoff in response to input dynamics. Signal amplitude controls filter frequency via asymmetric attack/release level detection, creating a vowel-like automatic wah-wah effect without pedal control. Lowpass/bandpass/peaking filter modes; per-voice or shared-bus configuration. $\mathcal{O}(1)$ per sample. Candidate: `sound/effects/envelope_filter.py`. |
+|| **SP-116** | Discrete Summation Formula Synthesis (DSFS) | **Synthesis Engines** | Closed-Form Bandlimited Harmonic / Inharmonic Timbre Generation | Generates complex harmonic/inharmonic spectra via closed-form trigonometric summation (Moorer 1976). Parameters $a$ (harmonic rolloff), $f_c$ (center frequency), $f_m$ (partial spacing), and $N$ (partial count) control the spectrum directly, with exact bandlimiting via $N$. Supports one-sided, two-sided, infinite-sum, and quadrature-stereo forms at $\mathcal{O}(1)$ per sample, zero oversampling, zero wavetable memory. Candidate: `sound/synthesis/dsf_synthesis.py`. |
 |---|
 
 
@@ -25772,3 +25774,353 @@ class AutoWah:
 6. **Feedback / runaway with very resonant filters**: At Q $\gtrsim$ 10 the biquad approaches instability, especially in bandpass mode. The coefficient $a_0 = 1 + \alpha$ keeps the denominator stable for Q as high as ~20, but coefficient quantization in fixed-point or single-precision float can push the poles outside the unit circle. Mitigation: clamp Q $\leq$ 20 or use double-precision for coefficient calculation.
 
 7. **Parameter design space complexity**: AWEFS has 7+ interdependent parameters ($f_{\min}, f_{\max}$, Q, sensitivity, $\tau_A$, $\tau_R$, filter mode, mix). Many combinations sound similar (e.g., lowering $f_{\min}$ vs. decreasing sensitivity). A good starting point is the classic funk auto-wah: LP mode, Q=4, $f_{\min}=350$ Hz, $f_{\max}=1800$ Hz, sensitivity=0.7, $\tau_A=3$ ms, $\tau_R=200$ ms, mix=1.0.
+
+# Particle Swarm Optimization Composition (PSOC) (Method 117)
+
+### Source
+
+Kennedy, J. & Eberhart, R. (1995). "Particle swarm optimization." *Proceedings of IEEE International Conference on Neural Networks (ICNN 1995)*, vol. 4, pp. 1942–1948, IEEE Press. — Shi, Y. & Eberhart, R. (1998). "A modified particle swarm optimizer." *Proceedings of IEEE International Conference on Evolutionary Computation (ICEC 1998)*, pp. 69–73. — Clerc, M. & Kennedy, J. (2002). "The particle swarm: explosion, stability, and convergence in a multidimensional complex space." *IEEE Trans. Evolutionary Computation* 6(1), 58–73. — Bratton, D. & Kennedy, J. (2007). "Defining a standard for particle swarm optimization." *Proc. IEEE Swarm Intelligence Symposium*, pp. 1–6. (SPSO-2007/2011 standard.) — He, Y. (2023). "Application of Particle Swarm Optimization Algorithm in the Production of Original Songs for College Students on Campus." *ICIEAI 2023*, ACM, https://doi.org/10.1145/3660043.3660094. — GitHub: modbrin/music-pso, "Composing music algorithmically using Particle Swarm Optimization" (2019).
+
+### Layer
+
+**concrete** — generates concrete pitch, rhythm, and harmony events that fill UnitMatrix cells. Each particle's position vector directly encodes note parameters (pitch, onset, duration, velocity) across all voices; the converged global-best solution is decoded into per-cell MusicUnit contents. Feeds generators/ directly via particle-position decoding and fitness evaluation.
+
+### Paradigm
+
+**Stochastic** — population-based metaheuristic with stochastic velocity/position updates. Composition emerges from the guided random movement of the swarm through a continuous-dimensional search space, driven by personal-best attraction and global-best emulation. No deterministic rewrite rules, no neural training, and no nature-inspired dynamics beyond the swarm abstraction.
+
+### Description
+
+**Particle Swarm Optimization Composition (PSOC)** frames composition as a continuous-valued optimization problem. A population of $P$ particles (candidate compositions) moves through a $D$-dimensional search space where each dimension encodes one musical parameter. The swarm iteratively refines positions under a fitness landscape that encodes tonal, melodic, rhythmic, harmonic, textural, and structural musical preferences. PSOC is the continuous-valued, population-based, velocity-driven metaheuristic counterpart to GA (003, discrete crossover/mutation), SA (055, single-trajectory temperature-cooling), ACO (041, discrete-pheromone graph), Boids (031, no objective — flocking kinematics only), and HSIC (073, music-inspired operator per solution slot, not velocity).
+
+**Particle encoding**: Each particle $\vec{x}_i \in \mathbb{R}^D$ concatenates per-note parameter vectors across all voices and sections. For $V$ voices each with $N$ notes:
+
+$$\vec{x}_i = [\underbrace{p_{1,1}, o_{1,1}, d_{1,1}, v_{1,1}}_{\text{note 1}}, \ldots, \underbrace{p_{V,N}, o_{V,N}, d_{V,N}, v_{V,N}}_{\text{note }V\cdot N}]$$
+
+where $p \in [0,127]$ = MIDI pitch, $o \in [0,1]$ = fractional onset within the bar, $d \in [0,1]$ = fractional duration, $v \in [0,127]$ = MIDI velocity. Total dimensionality $D = 4 \cdot V \cdot N$.
+
+**Swarm dynamics** (standard PSO, Shi & Eberhart 1998 with linear inertia decay):
+
+$$\vec{v}_i(t+1) = w(t)\, \vec{v}_i(t) + c_1 r_1 \odot (\vec{p}_i - \vec{x}_i(t)) + c_2 r_2 \odot (\vec{g} - \vec{x}_i(t))$$
+
+$$\vec{x}_i(t+1) = \vec{x}_i(t) + \vec{v}_i(t+1)$$
+
+where $\vec{v}_i$ = velocity, $\vec{x}_i$ = position, $\vec{p}_i$ = personal best (best fitness found by particle $i$), $\vec{g}$ = global best (best fitness found by any particle), $r_1, r_2 \sim U(0,1)$ element-wise, $c_1 = c_2 = 2.0$ (cognitive/social coefficients), $w(t) = 0.9 - 0.5 \cdot (t/T_{\max})$ (linearly decreasing inertia for exploration→exploitation). A velocity clamping $\lVert \vec{v}_i \rVert_\infty \leq V_{\max}$ prevents particles from leaving the $[0,1]$^D unit hypercube.
+
+**Fitness function** $f(\vec{x})$ is a convex combination of six normalized sub-scores ($[0,1]$ each):
+
+$$f(\vec{x}) = \sum_{k} w_k f_k(\vec{x}),\quad \sum_k w_k = 1$$
+
+| Sub-score | Weight $w_k$ (default) | What it evaluates |
+|---|---|---|
+| $f_{\rm tonal}$ | 0.25 | Deviation from target scale: $\sum\min_{s \in {\rm scale}} |p - s|^2$, per-section scale profiles |
+| $f_{\rm melodic}$ | 0.15 | Stepwise preference $\propto\max(0,|\Delta p|-2)$, contour arch/trough target, repetition aversion |
+| $f_{\rm rhythmic}$ | 0.15 | Metric alignment (strong-beat weight), syncopation tolerance, Euclidean-groove target, min-gap overlap penalty |
+| $f_{\rm harmonic}$ | 0.25 | Chord-tone alignment on strong beats, parallel-motion penalty, voice-leading parsimony, direct 5th/octave penalty |
+| $f_{\rm texture}$ | 0.10 | Per-voice event-density target (notes/bar), registral-span range, call-response balance |
+| $f_{\rm structure}$ | 0.10 | Within-section autocorrelation (motivic coherence), between-section dissimilarity (development), section-boundary transition smoothness |
+
+**Key innovation**: Unlike GA (003) which combines solutions via crossover/mutation of discrete genes, PSOC particles move through a CONTINUOUS space where each dimension's update is a weighted sum of inertia, personal-attraction, and social-attraction. This means melodic contour, rhythmic offset, and velocity can be smoothly interpolated between personal and global solutions — the composition emerges from VECTOR-FIELD GUIDANCE rather than combinatorial recombination. The inertia-weight schedule $w(t)$ controls the exploration--exploitation balance analogously to SA's temperature but operates on a population, not a single chain.
+
+**Convergence**: The swarm runs for $T_{\max} = 200$--$1000$ iterations or until $f(\vec{g})$ plateaus ($\Delta f < 10^{-4}$ for 20 iterations). The global-best $\vec{g}$ is decoded to a UnitMatrix: each 4-tuple $(p, o, d, v)$ becomes a MusicEvent, grouped into MusicUnit cells per-voice per-section. For multi-section forms, each section is optimized independently with the global-best ending frame of section $m{-}1$ seeding initial personal bests of section $m$ for voice-leading continuity.
+
+### Musical Elements Framework
+
+**PITCH**: Pitch is encoded as a continuous $p \in [0,128)$ quantized at decode. The velocity-attraction dynamics naturally interpolate between personal-best and global-best pitch sequences — if particle $i$ has a good motif at $p_i = \{60,62,64\}$ and the global best has $p_g = \{67,64,60\}$, any particle's pitch path is attracted to the vector sum, producing pitch sets that blend both motifs. $f_{\rm tonal}$ penalizes scale deviation: at each section, a scale mask defines acceptable pitch classes; pitches outside incur a squared-distance penalty proportional to $\min_{s \in {\rm scale}}(p - s)^2$. This creates a gradient toward scale tones while allowing chromatic inflections as passing tones. Note overlap (pitch-velocity conflict) is penalized by a harmonic interference term when two notes at the same pitch and velocity-class overlap in time.
+
+**RHYTHM**: Rhythm encoding via $(o_j, d_j)$ pairs naturally supports both quantization (strong-beat locking) and swing/ rubato (micro-timing offsets). The rhythmic sub-score $f_{\rm rhythmic}$ evaluates metric alignment via a kernel $g(\tau) = \cos^2(\pi \tau / T_{\rm beat})$ where $\tau$ is the offset from the nearest downbeat — onsets within $\pm T_{\rm beat}/6$ of a downbeat incur no penalty, while mid-bar onsets incur full penalty (adjustable per-style; jazz/swing styles reduce this penalty). Syncopation is modeled as specific target offset patterns (the 'e' and 'a' of 16th-note grid). The overlap penalty $\sum_j \max(0, o_j{+}d_j - o_{j+1})$ prevents rhythmic collisions; a silence gap penalty $\max(0, o_{j+1} - (o_j{+}d_j) - \epsilon)$ prevents seams between consecutive sounds. Groove patterns (Euclidean rhythms, clave patterns) can be encoded as target templates that $f_{\rm rhythmic}$ rewards.
+
+**HARMONY**: Harmony emerges from the coupled multi-voice pitch search. $f_{\rm harmonic}$ evaluates chordal quality per time slice $t$ by looking at the simultaneous pitch vector across voices at $t$. For each strong beat (every 1 or 2 quarter-beats), $f_{\rm harmonic}$ computes: (a) chord-tone membership: are the active pitches within the target chord for this section? (b) root presence: does the bass voice hold the chord root on the downbeat? (c) sonority type: is the voicing open (spread, preferred for strings) or close (dense, preferred for rhythmic punches)? (d) parallel motion: are fifths/octaves moving in parallel between successive downbeats? (penalty) (e) voice-leading: sum of absolute pitch differences between consecutive downbeats across all voices — smooth motion is rewarded, leaps penalized. Unlike 011 Voice-Leading Graph (which finds shortest paths in a discrete graph), PSOC harmony is a VECTOR-FIELD optimization over continuous pitch values — the harmonic progression is the swarm-converged attractor of the combined force fields, not a graph traversal.
+
+**STRUCTURE**: Macro-form is a sequence of section-specific fitness landscapes $f^{(m)}$ optimized in order. Each section's landscape is defined by a different set of weight parameters $\vec{w}^{(m)}$ and target profiles (scale, chord, density, texture). The macro-form structure (section order and repetition) can itself be optimized by a discrete binary/permutation PSO at the form layer. Per-section seed inheritance: the global best of section $m{-}1$ is projected onto the section $m$ dimensionality (padding/truncation) and injected as one particle's initial personal best — this propagates motifs while allowing transformation. The $f_{\rm structure}$ sub-score rewards within-section autocorrelation peaks (the same contour shape reappearing at shifted positions = motivic development) and between-section dissimilarity (AC of pitch sequences between sections $m$ and $m{-}1$ negative = contrast). This is the UnitMatrix-form counterpart to 001 Skeleton-First (deterministic scheme) and 099 SSMC (target-SSM matching).
+
+**TEXTURE**: Texture emerges from $f_{\rm texture}$ which enforces per-voice target densities $\rho_v$ (notes per beat). For voice $v$, $f_{\rm texture}^{(v)} = (\rho_{\rm actual} - \rho_{\rm target})^2$ — the swarm self-regulates note density through the velocity-attraction on onset spacing. High target density = closely packed onsets, low = sparse/restful. Registral texture $f_{\rm texture}^{(span)} = (\max(p_v) - \min(p_v) - {\rm span}_{\rm target})^2$ controls the pitch-range footprint per voice. Registral separation between voices (range overlap penalty) prevents all voices from occupying the same octave — promoting the distinct contrapuntal rows of the UnitMatrix. Texture evolution across the piece: $\rho_v^{(m)}$ decreases or increases per section (Intro: sparse → Chorus: dense), and the swarm tracks this through the parameter grid.
+
+### UnitMatrix Integration (Voices & Sections)
+
+**Voices**: Each voice $v$ occupies $4 \cdot N$ contiguous dimensions in the particle vector. The velocity-attraction dynamics are per-dimension, so voices evolve independently yet are coupled through $f_{\rm harmonic}$ (which evaluates all voices at each time slice) and $f_{\rm texture}$ (which enforces cross-voice density and registral separation). This distributed coupling means the swarm naturally discovers coordinated multi-voice solutions — the vertical harmonic fitness couples the otherwise independent voice dimensions. Voice count $V$ determines the total particle length $D = 4VN$; adding a voice increases the dimension count proportionally. Percussion is handled as a separate voice with pitch restricted to MIDI percussion keys (35--81) and $f_{\rm rhythmic}$ dominates $f_{\rm tonal} \equiv 0$.
+
+**Sections**: Each section $m$ has its own fitness landscape $f^{(m)}$ with per-section parameters (tempo, scale, target chord, density, texture, weight vector). The swarm runs independently per section, but section $m$ receives the decoded ending events of section $m-1$ as a seed: $\vec{x}_{\rm seed} = \text{encode}(\text{decode}(\vec{g}^{(m-1)})_{\rm last\,frame})$. This seed is padded to section $m$'s dimensionality (repeating the final note pattern if $N_m > N_{m-1}$) and replaces one particle's initial personal best. The form schedule (which sections in which order, how many repeats) is designed by the composer or optimized by an outer discrete PSO loop over section-type sequences.
+
+**Cell filling**: Each cell (voice $v$, section $m$) gets its own segment of the decoded $\vec{g}$ vector: dimensions for voice $v$ in section $m$ collect $N$ 4-tuples $(p, o, d, v)$. These are post-processed: (1) pitch is rounded to nearest integer MIDI and clamped to $[0,127]$; (2) onset $o$ is multiplied by bar_ticks and aligned to the global tick grid; (3) duration $d$ is multiplied by bar_ticks; (4) velocity is rounded and clamped. Zero-drift is guaranteed because the total tick extent of each section's events sum to `section_len` ticks — the count $N$ per voice is set so $\sum d_j \cdot \text{bar\_ticks} = \text{section\_ticks}$. Remaining drift is absorbed by padding the final note to the section boundary (see `_unit_from_events(events, section_len)` pattern).
+
+### Pitfalls
+
+1. **Premature convergence**: The entire swarm may collapse to a single (possibly suboptimal) solution if $\vec{g}$'s influence dominates early — the diversity mechanism (inertia + random $r_1, r_2$) is insufficient. Mitigations: (a) maintain a particle diversity archive (replacing particles too close to $\vec{g}$); (b) use a ring/lattice social topology instead of fully connected (each particle only sees neighbors); (c) add turbulence $\vec{v}_i \leftarrow \vec{v}_i + \mathcal{N}(0, \sigma^2)$ periodically.
+2. **Fitness function design**: Musical quality is notoriously hard to encode as a scalar. Poorly balanced weights cause the swarm to exploit one dimension (e.g., perfect scale adherence producing a static monotone). Weight tuning via grid search or a meta-optimizer (a higher-level PSO) is recommended.
+3. **Dimensionality explosion**: With $V=4$ voices and $N=16$ notes/voice/section across $M=5$ sections, $D = 4 \cdot 4 \cdot 16 \cdot 5 = 1280$ dimensions. Standard PSO performance degrades above $\sim 50$ dimensions. Mitigations: (a) use cooperative coevolution (separate sub-swarms for each voice, with a coordination fitness); (b) use section-level decomposition (optimize sections independently then concatenate); (c) use the CCPSO2 cooperative coevolution variant.
+4. **Velocity explosion** (swarm divergence): Without velocity clamping, particles can fly out of the $[0,1]^D$ cube. The standard clamping $|v_i^d| \leq V_{\max}=0.2 \cdot (x_{\max}^d - x_{\min}^d)$ and position reflection (bounce at boundaries) are essential. The SPSO-2011 standard (rotation-invariant) replaces velocity clamping with a randomized center-of-mass update.
+5. **Rhythm collision**: Without the overlap penalty, the swarm learns to allocate all onsets at the same time (trivially high $f_{\rm metric}$ from every onset being on the downbeat). The overlap penalty and silence-gap terms must be aggressively weighted to spread events across the bar.
+6. **Per-section seeding breaks voice-leading**: If section $m$'s initial seed from $m-1$ is too sparse (too few notes), the pitch memory carries no contour — the swarm must discover it from scratch. Encode at minimum the final two bars of the seed section to preserve cadential contour.
+7. **Tuning the balance $c_1 \approx c_2$**: When $c_1 \gg c_2$ every particle pursues its own motif (balkanization → no harmonic agreement). When $c_2 \gg c_1$ the whole swarm collapses to one melody. The Clerc-PSO constriction factor $\chi = 2/|2 - \varphi - \sqrt{\varphi^2 - 4\varphi}|$, $\varphi = c_1 + c_2$, $\varphi > 4$ (typically $c_1=c_2=2.05$, $\chi \approx 0.729$) guarantees convergence without clamping.
+8. **Determinism / reproducibility**: PSO is stochastic — same seed, same result. Set `rng` seed for reproducible runs. Use mean-final-fitness over $K$ independent runs to evaluate method quality.
+# Sound Production Method SP-116 — Discrete Summation Formula Synthesis (DSFS)
+
+### Source
+Moorer, J. A. (1976). "The Synthesis of Complex Audio Spectra by Means of Discrete Summation Formulae." *Stanford CCRMA Report STAN-M-5*, Stanford University. Also: Moorer, J. A. (1978). *Journal of the Audio Engineering Society* (reprint). Foundational reference; all subsequent DSF work descends from this paper. Extended to quadrature-stereo complex DSF by Burkhard (2022) in the Tetra/Sonitarium open-source synthesizers.
+
+### Layer
+**absolute** — sound production (Synthesis Engines). DSFS renders symbolic note events (pitch, onset, duration, velocity) into audio buffers directly at audio rate via closed-form trigonometric summations. The candidate code path is `sound/synthesis/dsf_synthesis.py`, pluggable into `workflows.musicom_workflow.produce(method="SP-116")`.
+
+### Description
+Discrete Summation Formula Synthesis (DSFS) is a spectral synthesis technique that generates complex harmonic or inharmonic audio spectra from a closed-form evaluation of a trigonometric series summation, avoiding both per-partial additive bank overhead and modulation-based aliasing. Instead of summing $N$ individual sine oscillators (additive synthesis) or relying on frequency modulation with its intrinsic anti-aliasing burden, DSFS evaluates a single rational expression whose numerator and denominator are each a handful of trigonometric terms — delivering an exactly bandlimited spectrum with exponentially decaying partial amplitudes in constant time per sample.
+
+DSFS was discovered by James A. Moorer at Stanford CCRMA in 1975–76 as a generalization of Chowning's frequency modulation synthesis. The core identity is a closed-form sum of a geometric series of sinusoids, parameterized by four controls: center frequency $f_c$, modulation frequency $f_m$ (which sets the spacing between partials), ratio $a$ (the amplitude multiplier between successive partials), and partial count $N$ (the bandlimit parameter). Setting $f_c$ and $f_m$ to integer ratios yields a harmonic spectrum; irrational ratios produce glassy, bell-like, or metallic inharmonic spectra.
+
+Three distinct families are available: (1) **single-sided** (partials extend upward from $f_c$ in steps of $f_m$), (2) **two-sided** (partials extend both above and below $f_c$ symmetrically), and (3) **complex quadrature** (simultaneous sine + cosine streams for stereo/hilbert-pair textures). The infinite-sum form ($N \\to \\infty$, $a < 1$) provides the simplest expression and a natural spectral-rolloff behavior analogous to an exponentially damped comb filter.
+
+DSFS historically influenced early digital synthesis languages (MUSIC V, cmusic) and the design of wavetable oscillator interpolation. Its direct algebraic spectral control makes it a natural sibling of SP-010 FM, SP-019 Chebyshev Waveshaping, SP-039 IFFT Additive, and SP-041 Wavetable Synthesis — occupying the niche of *algebraic spectral control without banks, without modulation, and without wavetables*.
+
+### Technical Mechanics
+
+#### Core Identity (Finite Single-Sided DSF)
+
+The fundamental DSF synthesis equation generates $N{+}1$ partials spaced $f_m$ apart starting at $f_c$, with partial amplitudes decaying by factor $a$ each step:
+
+$$x[n] = \\sum_{k=0}^{N} a^k \\sin(\\theta[n] + k \\beta[n])$$
+
+where:
+- $\\theta[n] = 2\\pi f_c n / f_s$ (carrier phase)
+- $\\beta[n] = 2\\pi f_m n / f_s$ (modulator phase increment)
+- $a \\in [0, 1)$ (ratio; spectral rolloff, $a=0$ = pure sine)
+- $N$ = number of partials minus 1 (bandlimit control)
+
+This sum has the exact closed form (Jolley 1961, Moorer 1976):
+
+$$x[n] = \\frac{\\sin\\theta - a\\sin(\\theta-\\beta) - a^{N+1}[\\sin(\\theta+(N+1)\\beta) - a\\sin(\\theta+N\\beta)]}{1 + a^2 - 2a\\cos\\beta}$$
+
+Complexity: $\\mathcal{O}(1)$ per sample — 5 trig calls + ~10 arithmetic operations (or fewer with phasor recurrence).
+
+#### Infinite-Sum Form (a < 1)
+
+Permitting the sum to infinity ($N \\to \\infty$) eliminates the numerator's $a^{N+1}$ terms, giving:
+
+$$x[n] = \\frac{\\sin\\theta - a\\sin(\\theta-\\beta)}{1 + a^2 - 2a\\cos\\beta}$$
+
+This is the simplest DSF expression. The constraint $a < 1$ guarantees convergence. The spectrum is two-sided in sense that all partials exist up to Nyquist, but their amplitudes decay geometrically so aliasing is negligible for sufficiently small $a$. The form is a rational function of three sine/cosine terms — roughly 3 trig calls + 8 arithmetic ops per sample.
+
+#### Two-Sided DSF (Symmetric Spectra)
+
+To generate spectral energy on both sides of the carrier symmetrically:
+
+$$x[n] = \\sin\\theta + \\sum_{k=1}^{N} a^k [\\sin(\\theta+k\\beta) + \\sin(\\theta-k\\beta)]$$
+
+Closed form (Moorer 1976, eq. 3):
+
+$$x[n] = \\frac{\\sin\\theta \\left(1 - a^2 - 2a^{N+1}[\\cos((N+1)\\beta) - a\\cos(N\\beta)]\\right)}{1 + a^2 - 2a\\cos\\beta}$$
+
+This produces partials at $f_c \\pm k f_m$, $k = 0, 1, \\dots, N$, with the carrier present at full amplitude. The spectrum is symmetric around $f_c$. At $a = 0$ the carrier alone remains; as $a \\to 1$ the sidebands grow toward the carrier amplitude.
+
+#### Harmonic vs. Inharmonic Spectra
+
+The spectral character is determined by the ratio $f_c : f_m$:
+
+- **Harmonic** (integer ratio): $f_c / f_m = p/q \\in \\mathbb{Q}$ yields partials at multiples of $f_0 = f_c / p = f_m / q$. When $f_c = f_m$, partials are $f_c, 2f_c, 3f_c, \\dots$ — a classic harmonic series.
+- **Inharmonic** (irrational ratio): $f_c / f_m \\notin \\mathbb{Q}$ yields sideband frequencies that never align to a common fundamental — bell-like, metallic, or glassy timbres.
+- **Subharmonic emphasis**: $f_c < f_m$ places the carrier below the first sideband, emphasizing subharmonic and difference-tone components.
+
+#### Complex (Quadrature-Stereo) DSF
+
+The complex phasor formulation simultaneously generates a cosine (real) and sine (imag) signal:
+
+$$c[n] = [\\cos u,\\; \\sin u] \\cdot \\frac{1 - [w\\cos v,\\; w\\sin v]^{N+1}}{1 - [w\\cos v,\\; w\\sin v]}$$
+
+where $u = 2\\pi f_c n / f_s$, $v = 2\\pi f_m n / f_s$, and $w = a$. The real part is a cosine sum, the imaginary part the sine sum. Outputting $\\Re(c)$ and $\\Im(c)$ to left and right channels yields a quadrature stereo signal whose partials are pairwise 90° out of phase — a spacious, constantly rotating stereo field derived from a single computation.
+
+#### Amplitude Normalization
+
+The peak amplitude of the DSF signal grows with $a$ and $N$. A practical normalizer:
+
+$$A_{\\max} = \\sum_{k=0}^{N} a^k = \\frac{1 - a^{N+1}}{1 - a}$$
+
+Divide each sample by $A_{\\max}$ to normalize to unit amplitude. For the infinite form ($a < 1$), $A_{\\max} = 1/(1-a)$.
+
+#### Efficient Recurrence (Phasor-Based)
+
+The classic DSF formula requires evaluating $\\sin$ and $\\cos$ of $\\theta$ and $\\beta$ every sample. For real-time use, the complex phasor method eliminates per-sample trig calls:
+
+1. Initialize $z_c = e^{j\\theta_0}$ and $z_m = e^{j\\beta_0}$ as complex phasors.
+2. Per sample: multiply $z_c \\leftarrow z_c \\cdot e^{j\\Delta_c}$, $z_m \\leftarrow z_m \\cdot e^{j\\Delta_m}$ (two complex multiplications).
+3. Evaluate the DSF closed form using $\\cos\\theta = \\Re(z_c)$, $\\sin\\theta = \\Im(z_c)$, $\\cos\\beta = \\Re(z_m)$, $\\sin\\beta = \\Im(z_m)$.
+4. Occasional phasor renormalization (every ~1000 samples) prevents magnitude drift from FP rounding.
+
+This reduces per-sample cost to ~4 multiplications + ~4 additions for phasor rotation plus ~6 ops for the DSF rational expression — roughly 10 arithmetic ops per sample, zero trig.
+
+#### Relation to FM Synthesis
+
+When $a$ is large (near 1) and $N$ is large, the DSF spectrum approaches that of frequency modulation (Chowning 1973) with modulation index $\\beta \\propto a/(1-a)$. However, DSF provides:
+
+- **Exact bandlimiting**: set $N$ such that $f_c + N f_m < f_s/2$ — no aliasing, no oversampling.
+- **One-sided spectra**: convenient for efficient spectral sculpting without mirror-image sidebands.
+- **Direct partial control**: $a$ is an exact amplitude ratio between adjacent partials, not an indirect modulation index.
+
+#### Python/NumPy Implementation Sketch
+
+```python
+import numpy as np
+
+def dsf_infinite(fc, fm, a, duration, sr=44100):
+    \"\"\"
+    Infinite-sum DSF synthesis (a < 1).
+    Parameters:
+        fc: center frequency (Hz)
+        fm: modulation frequency (Hz) — partial spacing
+        a: ratio (0 ≤ a < 1) — spectral rolloff
+        duration: seconds
+        sr: sample rate (Hz)
+    Returns:
+        signal: ndarray of shape (N,)
+    \"\"\"
+    n = np.arange(int(sr * duration))
+    theta = 2 * np.pi * fc * n / sr
+    beta  = 2 * np.pi * fm * n / sr
+    
+    sin_t = np.sin(theta)
+    sin_t_b = np.sin(theta - beta)
+    cos_b = np.cos(beta)
+    
+    denom = 1 + a*a - 2*a * cos_b
+    numer = sin_t - a * sin_t_b
+    
+    signal = numer / denom
+    
+    # Normalize
+    norm = 1.0 / (1.0 - a)
+    return signal * norm
+
+def dsf_finite(fc, fm, a, N, duration, sr=44100):
+    \"\"\"
+    Finite-sum DSF synthesis with exact bandlimiting.
+    \"\"\"
+    n = np.arange(int(sr * duration))
+    theta = 2 * np.pi * fc * n / sr
+    beta  = 2 * np.pi * fm * n / sr
+    
+    sin_t = np.sin(theta)
+    sin_t_b = np.sin(theta - beta)
+    cos_b = np.cos(beta)
+    
+    # a^{N+1} terms
+    aN1 = a**(N+1)
+    sin_t_N1b = np.sin(theta + (N+1)*beta)
+    sin_t_Nb  = np.sin(theta + N*beta)
+    
+    denom = 1 + a*a - 2*a * cos_b
+    numer = (sin_t - a*sin_t_b - aN1*(sin_t_N1b - a*sin_t_Nb))
+    
+    signal = numer / denom
+    
+    # Normalize
+    norm = (1 - a) / (1 - a**(N+1))
+    return signal * norm
+
+def dsf_two_sided(fc, fm, a, N, duration, sr=44100):
+    \"\"\"
+    Two-sided (symmetric) DSF synthesis.
+    \"\"\"
+    n = np.arange(int(sr * duration))
+    theta = 2 * np.pi * fc * n / sr
+    beta  = 2 * np.pi * fm * n / sr
+    
+    cos_b = np.cos(beta)
+    sin_t = np.sin(theta)
+    
+    aN1 = a**(N+1)
+    cos_N1b = np.cos((N+1)*beta)
+    cos_Nb  = np.cos(N*beta)
+    
+    denom = 1 + a*a - 2*a * cos_b
+    numer = sin_t * (1 - a*a - 2*aN1*(cos_N1b - a*cos_Nb))
+    
+    signal = numer / denom
+    return signal
+
+def dsf_complex_stereo(fc, fm, a, N, duration, sr=44100):
+    \"\"\"
+    Quadrature-stereo DSF using complex phasor formulation.
+    Returns (left, right) as ndarrays.
+    \"\"\"
+    n = np.arange(int(sr * duration))
+    u = 2 * np.pi * fc * n / sr
+    v = 2 * np.pi * fm * n / sr
+    
+    # Complex numerator: 1 - (a*e^{jv})^{N+1}
+    # Complex denominator: 1 - a*e^{jv}
+    ejv  = np.cos(v) + 1j * np.sin(v)
+    num  = 1.0 - (a * ejv)**(N+1)
+    den  = 1.0 - a * ejv
+    ratio = num / den
+    
+    # Multiply by e^{ju}
+    eju  = np.cos(u) + 1j * np.sin(u)
+    c = eju * ratio
+    
+    left  = np.real(c)
+    right = np.imag(c)
+    
+    norm = (1 - a) / (1 - a**(N+1))
+    return left * norm, right * norm
+```
+
+#### Complexity
+- **Infinite DSF**: $\\mathcal{O}(1)$ per sample: 3 trig calls + 8 arithmetic ops (or 0 trig with phasor recurrence).
+- **Finite DSF**: $\\mathcal{O}(1)$ per sample: 5 trig calls + ~12 arithmetic ops.
+- **Two-sided DSF**: $\\mathcal{O}(1)$ per sample: 5 trig calls + ~10 arithmetic ops.
+- **Complex stereo DSF**: $\\mathcal{O}(1)$ per sample: 2 complex multiplies + 1 complex division (~10 arithmetic ops) + occasional renormalization.
+
+All forms are sample-rate independent and require zero oversampling, zero FFT, zero wavetable memory.
+
+### Musical Elements Framework
+
+**PITCH**: The fundamental pitch is set by $f_c$. Harmonic spectra result from integer $f_c/f_m$ ratios ($f_c = f_m$ gives partials at $f_0, 2f_0, 3f_0, \\dots$). Inharmonic spectra use irrational $f_c/f_m$. The rolloff parameter $a$ controls how many perceptually significant partials exist — low $a$ = dark/muted/fundamental-dominant, high $a$ = bright/buzzy/rich. Per-note pitch bend is achieved by gliding $f_c$ over the note duration. The partial count $N$ sets the upper spectral limit — higher $N$ extends brightness, but must respect $f_c + N f_m < f_s/2$ to prevent aliasing.
+
+**RHYTHM**: DSFS generates pitched, continuous audio with no intrinsic rhythmic articulation — rhythm is supplied by the note-event schedule (onsets and durations from the UnitMatrix). The attack transient of each note is the instantaneous onset of the DSF waveform; for softer attacks, $f_c$ or $a$ can be ramped from zero. Percussive effects are produced by high-$a$ bursts on short $N$ with $f_c$ sweep (trumpet-like stabs, bell strikes). Tremolo (amplitude modulation) can be applied as a post-DSF amplitude envelope.
+
+**HARMONY**: A single DSF oscillator produces a monophonic spectrum with a defined harmonic/inharmonic structure determined by $f_c : f_m$. Polyphony is achieved by summing multiple DSF oscillators, one per UnitMatrix voice. The two-sided DSF form produces self-contained harmonic spectra with symmetric sidebands around the carrier. The complex (quadrature) DSF form can be listen to as mono-sum (stereo collapsed) where the 90° phase offset between sine/cosine streams produces a unique combined spectrum with no perfect cancellations.
+
+**STRUCTURE**: Macro-form is determined by the UnitMatrix section schedule — each section can have its own DSF parameter set $(f_c, f_m, a, N)$. Section transitions can crossfade between parameter sets by interpolating $a$, $f_c$, and $f_m$ across the boundary. A spline or linear-parameter trajectory over the piece defines the timbral macro-form: rise $a$ during tension, increase $N$ for brightness, set $f_m$ per section to control harmonic density.
+
+**TEXTURE**: Texture emerges from the DSF spectral density (partial count $N$ times the number of active voices), the spectral rolloff $a$ (high $a$ = dense, bright texture; low $a$ = sparse, dark), and the choice of one-sided vs two-sided spectrum (two-sided gives more spectral density for the same $N$). The quadrature-stereo DSF form yields a uniquely wide stereo texture from a single computation — each partial is 90° out of phase between channels, producing a non-localizable, enveloping spatial texture without explicit reverb or panning.
+
+### UnitMatrix Integration (Voices & Sections)
+
+**Voices**: Each UnitMatrix voice maps to one DSF oscillator (or a summed group for unison/octave doubling). Per-voice parameters $(f_c^{(v)}, f_m^{(v)}, a^{(v)}, N^{(v)})$ are derived from the voice's assigned instrument/role:
+- **Lead voice**: harmonic DSF ($f_c = f_m$), moderate $a$ (~0.7), $N$ such that $f_c + N f_c < 22$ kHz.
+- **Bass voice**: low $f_c$, $f_c = f_m$ (harmonic), high $a$ (~0.85) for rich low-end, low $N$ (fundamental-heavy).
+- **Pad/Texture voice**: two-sided or quadrature DSF, low-to-moderate $a$, $f_c/f_m$ set to produce a chord spread (e.g. $f_c = 1.5 f_0$, $f_m = 0.5 f_0$ for a fifth-rich pad).
+- **Percussive/bell voice**: inharmonic DSF ($f_c/f_m$ irrational, e.g. $\\pi/2$), high $a$ for dense partials, moderate $N$.
+
+The produce workflow (`workflows.musicom_workflow.produce(method="SP-116")`) processes the rendered UnitMatrix track per voice: iterates each voice's MusicUnits, converts them to note events, renders each note as a DSF buffer segment with its own $(f_c, f_m, a, N)$, applies the note's velocity as amplitude scaling, concatenates segments with per-note onset/decay envelopes, and sums all voices to the output stereo bus.
+
+**Sections**: Section boundaries reset or transition parameters. Each section $m$ defines a parameter tuple $(f_c^{(m)}, f_m^{(m)}, a^{(m)}, N^{(m)})$ that either holds constant across the section (static timbre) or is interpolated from section $m{-1}$'s end state to section $m$'s target (morphing). The parameter trajectory is a set of breakpoints at section boundaries with linear/cubic interpolation per note:
+
+$$p(t) = \\begin{cases}
+p_{m} & \\text{static per section} \\\\
+p_{m-1} + (p_m - p_{m-1}) \\cdot (t - t_{m-1})/(t_m - t_{m-1}) & \\text{linear morph}
+\\end{cases}$$
+
+where $p \\in \\{f_c, f_m, a, N\\}$. Morphing $N$ requires care — fractional $N$ is not meaningful; instead morph between two DSF oscillators at different $N$ (crossfade).
+
+**Cell filling**: Each cell (voice $v$, section $m$) contains a MusicUnit with 0..K note events. Each note event $(pitch, onset, duration, velocity)$ is rendered by:
+1. Converting pitch (MIDI) to $f_c = 440 \\cdot 2^{(p-69)/12}$.
+2. Setting $f_m$ either equal to $f_c$ (harmonic) or to a section-specified ratio $f_m = f_c / r_m$.
+3. Looking up $(a, N)$ from a timbre map keyed by voice+section.
+4. Generating the DSF buffer for `duration` samples with these parameters.
+5. Applying velocity-scaled amplitude envelope (1 ms linear attack from 0, sustain at velocity/127, release from `duration - 1 ms` to zero).
+6. Placing the buffer at the note's onset tick in the voice's output track.
+
+Zero-drift is guaranteed because each note's buffer length equals its MIDI duration in samples — the concatenated output per voice sums to the section tick count, preserving the UnitMatrix's equal-length invariant.
+
+### Pitfalls
+
+1. **Denominator singularity**: The DSF denominator $1 + a^2 - 2a\\cos\\beta$ approaches zero when $a \\to 1$ and $\\beta \\to 0$ (i.e., $f_m \\to 0$). At $\\beta = 0$, the denominator is exactly $(1-a)^2$ and the numerator is also zero — the expression is indeterminate 0/0. Implementation must detect $|\\beta| < \\epsilon$ and fall back to the limiting case $x[n] = \\sin(\\theta) \\cdot (N+1)$ (for finite sum) or $x[n] = \\sin(\\theta) / (1-a)$ (infinite sum), both derived via L'Hôpital's rule. Similarly, guard against $a = 0$ (degenerates to pure sine) and $a \\geq 1$ with finite $N$ (OK only for finite $N$; diverges for infinite sum).
+
+2. **Numerical instability at high $N$**: $a^{N+1}$ underflows to zero for large $N$ and moderate $a$ (e.g., $a=0.5, N=1075$ in double precision). This effectively truncates the spectrum earlier than $N$ specifies. Mitigation: detect when $a^{N+1} < 10^{-15}$ and clip $N$ to the effective range, or switch to the infinite-sum form (which assumes $N = \\infty$ and is correct in this regime).
+
+3. **Bandlimit vs. aliasing**: DSFS is alias-free *only if* $f_c + N f_m < f_s/2$. For high pitches (e.g., MIDI note 100 ~ 2637 Hz) with a bright setting ($N=20$, $f_m = f_c$), $21 \\cdot 2637 = 55.4$ kHz exceeds 24 kHz (half of 48 kHz). Reduce $N$ adaptively: $N_{\\max} = \\lfloor (f_s/2 - f_c) / f_m \\rfloor$. Unlike FM, DSFS knows exactly where the cutoff is and truncates cleanly.
+
+4. **Clicks at note boundaries**: Abrupt onset/offset of the DSF waveform causes clicks unless ramp envelopes are applied. The attack ramp should be 1–5 ms (linear or cosine), the release ramp 1–10 ms. Parameter changes ($f_c$ glide, $a$ sweep) should be interpolated over a few samples to avoid zipper noise. The phasor-recurrence variant must reset phasor state at each new note to prevent phase discontinuity clicks.
+
+5. **Lack of dynamic complexity**: Because DSFS generates a static spectrum for a fixed $(f_c, f_m, a, N)$ set, unmodulated tones can sound static and synthetic compared to sampled or physical-modeled instruments. Mitigation: modulate $a$ and $f_m$ with low-frequency envelopes (ADSR on $a$, LFO on $f_m$ for vibrato-like shimmer), or crossfade between two DSF streams with different $a$ values for evolving brightness.
+
+6. **Relation to existing SP methods**: DSFS is the *algebraic-spectral sibling* of SP-010 FM (FM uses Bessel-function sidebands, DSF uses geometric amplitude series), SP-019 Chebyshev Waveshaping (generates harmonics through polynomial evaluation vs. closed-form trig sum), SP-039 IFFT Additive (builds spectrum in frequency domain vs. evaluating closed-form in time domain), and SP-041 BLW-MI Wavetable (reads pre-computed wavetables vs. computing spectral sum on the fly). It is distinct in providing closed-form, alias-free, variable-bandwidth spectra with explicit partial-amplitude control and zero wavetable memory — the ideal middle ground between additive and modulation synthesis.

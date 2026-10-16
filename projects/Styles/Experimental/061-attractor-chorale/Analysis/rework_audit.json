@@ -1,0 +1,31 @@
+{
+  "chosen": "/opt/data/projects/Styles/Experimental/061-attractor-chorale",
+  "genre": "Experimental",
+  "audit_date": "2026-10-16",
+  "standard_failures": [
+    "std5: two-phase artifacts — missing 061-attractor-chorale-phase1.mid (only phase-2 MIDI present)",
+    "std6: index.html missing (provenance sidecar present in MIDI/)"
+  ],
+  "redesign_required": true,
+  "audit_details": {
+    "std1_engine": "PASS — compose.py imports UnitMatrixComposer from workflows.unitmatrix_composer",
+    "std2_zero_drift": "PASS — 4 voice tracks @ 15360 ticks (tracks[1:4] all equal)",
+    "std3_rhythm_grid": "PASS — 156 pitched onsets, 0 off-grid",
+    "std4_track_setup": "PASS — 4 voice tracks (Soprano/Alto/Tenor/Bass), no ch9 drums",
+    "std5_two_phase": "FAIL — no -phase1.mid",
+    "std6_provenance_index": "FAIL — index.html missing (MIDI/061-attractor-chorale.mid.provenance.json present)"
+  },
+  "source_identity": {
+    "genre": "Experimental (chorale)",
+    "method": "043 Strange Attractor Trajectory Mapping (Lorenz, RK4)",
+    "key": "E dorian",
+    "key_pcs": [1, 2, 4, 6, 7, 9, 11],
+    "bpm": 92,
+    "form": "8-bar homophonic 4-voice chorale",
+    "texture": "homophonic SATB, flute-timbre upper voices + bass",
+    "instrumentation": ["Soprano: Flute(74) ch0", "Alto: Flute(74) ch1", "Tenor: Flute(74) ch2", "Bass: Bass(33) ch3"],
+    "progression": ["i", "ii", "IV", "VI", "i", "ii", "IV", "i"],
+    "rhythm_dna": "8 eighth-note slots/bar, attractor-speed-triggered masks, downbeat + bar-end anchors",
+    "coord_mapping": {"Soprano": "z", "Alto": "x", "Tenor": "y", "Bass": "z-24"}
+  }
+}

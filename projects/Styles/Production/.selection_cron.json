@@ -1,19 +1,20 @@
 {
   "job": "random-style production (SP) layer-aligned",
-  "date": "2026-10-15",
-  "seed": 20261015,
-  "method": "SP-032",
-  "method_module": "sound.effects.fdn_reverb",
-  "method_desc": "Feedback Delay Network Reverb",
-  "source_midi": "/opt/data/repos/musicom/projects/Styles/Balfolk/005-balfolk-production/midi/le_cercle_de_l_agent.mid",
-  "source_project": "Balfolk/005-balfolk-production/midi/le_cercle_de_l_agent.mid",
+  "date": "2026-10-16",
+  "seed": 20261016,
+  "method": "SP-099",
+  "method_module": "sound.effects.ir_designer",
+  "method_desc": "Impulse Response Designer \u2014 10 algorithmic IR synthesis techniques (Convolution Playground-style)",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Pop/ballad-hitl/HITL/round0/candidates/cand3-pViol-ldX-ar4-pdpuls-drful-bXo0.mid",
+  "source_project": "Pop/ballad-hitl/HITL/round0/candidates/cand3-pViol-ldX-ar4-pdpuls-drful-bXo0.mid",
   "registry_size": 48,
   "recent_excluded": [
+    "SP-006",
     "SP-026",
     "SP-028",
+    "SP-032",
     "SP-074",
     "SP-085",
-    "SP-092",
     "SP-098",
     "SP-103"
   ],
@@ -25,7 +26,6 @@
     "SP-011",
     "SP-021",
     "SP-024",
-    "SP-032",
     "SP-033",
     "SP-034",
     "SP-035",
@@ -49,6 +49,7 @@
     "SP-086",
     "SP-090",
     "SP-091",
+    "SP-092",
     "SP-094",
     "SP-095",
     "SP-096",
@@ -63,6 +64,6 @@
     "SP-107",
     "SP-108"
   ],
-  "n_candidates": 342,
-  "n_well_formed": 233
+  "n_candidates": 345,
+  "n_well_formed": 235
 }

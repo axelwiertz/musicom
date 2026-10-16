@@ -1108,3 +1108,34 @@ leads). EQ: cut 400 Hz (reduce mud from compression buildup), boost 2.2 kHz
 presence (cutting edge pick attack), gentle 6 kHz air. PAN -0.15 centre-left.
 Completes the Guitar family: nylon acoustic (GM24), steel acoustic (GM25),
 clean electric (GM27), overdriven (GM29).
+
+**Recorder added** (2026-10-16): GM74, Woodwind-family Woodwind entry — the
+Renaissance/Baroque duct flute (fipple flute), the most prominent end-blown
+flute in Western art music from the 14th–18th century; the GM74 patch is
+modelled on the soprano/descant recorder in C (instrument.md + recorder.py),
+verified end-to-end UnitMatrixComposer → zero-drift ✓ → MIDI (111 bytes) →
+FluidSynth WAV (739 KB) ✓; RenderPipeline stem label `trackXX_Recorder.wav` ✓
+(GM_PROGRAMS[74] = "Recorder", FluidR3 preset 74 = "Recorder" — labels match
+exactly, **no quirk**). PhaseModSynth recommended (fipple duct flute: sine
+carrier + sine modulator, mod_freq_ratio 1.0, mod_depth 1.5 — between flute
+1.2 and ocarina 0.8, reflecting fipple purity; attack 0.03 s for near-instant
+fipple response; release 0.08 s). AirPipe physical aerophone model (stopped=False,
+open pipe, length_scale 0.45 for soprano ~33 cm, pressure 0.60 for moderate wind).
+Additive fallback with odd-harmonic stack (1:1.0, 3:0.40, 5:0.22, 7:0.10) —
+fipple edge in centre yields odd-dominant spectrum. Range 60–100 (C4–E7);
+solo range 72–89 (C5–C7); sweet spot 76–84 (E5–C6). Solo-render spectral check:
+4–8 kHz buzz 1.3% (clean single voice, well below 20% gate, no comb-filtering).
+Empirical FluidR3 pitch sweep: preset 74 Recorder audible across full range,
+no gaps. Registration proof: `by_name('recorder')` → Recorder GM74,
+`by_program(74)` → Recorder (fixed from prior misregistration of Flute at
+GM74 — Flute corrected to GM73, Recorder now occupies its proper GM74 slot),
+`in_sweet_spot(79)` = True, `in_sweet_spot(40)` = False. Registration in
+`instrument_registry.py` as RECORDER convenience constant. Role: lead, melody,
+ornament, countermelody, accent — the recorder is a MONOPHONIC line wind
+instrument (no chords). REVERB_TAIL 1.6 s (intimate chamber/room for the
+Baroque intimate sound). EQ: cut 600 Hz −1.5 dB (reduce duct body resonance),
+boost 3 kHz +2.5 dB (articulation clarity), shelf 9 kHz +1.5 dB (fipple
+breath shimmer). PAN -0.1 (slightly left, classical woodwind seating).
+Completes the GM73/74 Flute/Recorder swap fix: Flute was incorrectly
+registered at GM74 with STEM_LABEL "Recorder"; corrected to GM73 with
+STEM_LABEL "Flute", and Recorder added at its proper GM74 slot.

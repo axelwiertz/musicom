@@ -1,0 +1,195 @@
+{
+  "project": "245-attractor-chorale-rework",
+  "style": "Experimental",
+  "method": 43,
+  "bpm": 92,
+  "key": "E dorian",
+  "bars": 32,
+  "sections": [
+    [
+      "Intro",
+      2
+    ],
+    [
+      "VerseA",
+      4
+    ],
+    [
+      "VerseB",
+      4
+    ],
+    [
+      "Chorus",
+      4
+    ],
+    [
+      "VerseA2",
+      4
+    ],
+    [
+      "Bridge",
+      4
+    ],
+    [
+      "Chorus2",
+      4
+    ],
+    [
+      "Development",
+      2
+    ],
+    [
+      "Climax",
+      2
+    ],
+    [
+      "Outro",
+      2
+    ]
+  ],
+  "chord_walk": [
+    "i",
+    "IV",
+    "i",
+    "ii",
+    "IV",
+    "i",
+    "i",
+    "v",
+    "III",
+    "VII",
+    "IV",
+    "v",
+    "VII",
+    "i",
+    "i",
+    "ii",
+    "IV",
+    "i",
+    "vi\u00b0",
+    "ii",
+    "v",
+    "VII",
+    "v",
+    "vi\u00b0",
+    "i",
+    "ii",
+    "vi\u00b0",
+    "v",
+    "IV",
+    "VII",
+    "i",
+    "IV"
+  ],
+  "section_roots_midpoint": [
+    [
+      "Intro",
+      9
+    ],
+    [
+      "VerseA",
+      9
+    ],
+    [
+      "VerseB",
+      7
+    ],
+    [
+      "Chorus",
+      2
+    ],
+    [
+      "VerseA2",
+      9
+    ],
+    [
+      "Bridge",
+      11
+    ],
+    [
+      "Chorus2",
+      4
+    ],
+    [
+      "Development",
+      11
+    ],
+    [
+      "Climax",
+      2
+    ],
+    [
+      "Outro",
+      9
+    ]
+  ],
+  "voices": [
+    "Soprano",
+    "Alto",
+    "Tenor",
+    "Bass",
+    "Descant",
+    "Perc"
+  ],
+  "source": "061-attractor-chorale",
+  "decision": "redesign (missing -phase1.mid + index.html)",
+  "variation_techniques": [
+    "density-ramp",
+    "register-shift(+12)",
+    "diatonic-transposition(+1deg)",
+    "augmentation(outro)",
+    "counterline(descant)",
+    "inversion(bridge descant)"
+  ],
+  "audit": {
+    "Soprano": {
+      "n_notes": 129,
+      "off_grid": 0,
+      "out_scale": 0,
+      "out_chord": 0,
+      "pitched": true
+    },
+    "Alto": {
+      "n_notes": 129,
+      "off_grid": 0,
+      "out_scale": 0,
+      "out_chord": 0,
+      "pitched": true
+    },
+    "Tenor": {
+      "n_notes": 129,
+      "off_grid": 0,
+      "out_scale": 0,
+      "out_chord": 0,
+      "pitched": true
+    },
+    "Bass": {
+      "n_notes": 129,
+      "off_grid": 0,
+      "out_scale": 0,
+      "out_chord": 0,
+      "pitched": true
+    },
+    "Descant": {
+      "n_notes": 112,
+      "off_grid": 0,
+      "out_scale": 0,
+      "out_chord": 0,
+      "pitched": true
+    },
+    "Perc": {
+      "n_notes": 4,
+      "off_grid": 0,
+      "out_scale": 0,
+      "out_chord": 0,
+      "pitched": false
+    }
+  },
+  "totals": {
+    "off_grid": 0,
+    "out_scale": 0,
+    "out_chord": 0
+  },
+  "phase1": "245-attractor-chorale-rework-phase1.mid",
+  "phase2": "245-attractor-chorale-rework.mid"
+}
