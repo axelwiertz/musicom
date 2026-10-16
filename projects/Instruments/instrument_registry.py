@@ -87,6 +87,7 @@ _INSTRUMENT_MODULES = {
     "Woodwind.whistle.whistle": "whistle",
     "Woodwind.soprano_sax.soprano_sax": "soprano_sax",
     "Bass.electric_bass.electric_bass": "electric_bass",
+    "Woodwind.recorder.recorder": "recorder",
     "Synth.synth_pad.synth_pad": "synth_pad",
 }
 
@@ -99,6 +100,25 @@ _FIELDS = (
     "reverb_tail", "eq_body", "eq_presence", "eq_air", "pan",
     "stem_label",
 )
+
+
+# Humanization DNA per family: (timing_sigma_ms, velocity_sigma, layback_ms,
+# duration_sigma). Timing in ms is tempo-correct when converted to ticks; a
+# larger sigma = looser player. Layback > 0 = this role sits slightly behind
+# the grid (bass/brass lag; drums anchor). See transformers/humanize.py.
+HUMANIZE_DNA_FAMILY = {
+    "Strings":    (10.0, 6.0, 2.0, 0.03),
+    "Woodwind":   (8.0, 7.0, 1.0, 0.02),
+    "Brass":      (7.0, 8.0, 4.0, 0.02),
+    "Percussion": (2.5, 5.0, 0.0, 0.01),
+    "Keys":       (6.0, 5.0, 0.0, 0.015),
+    "Guitar":     (6.0, 6.0, 1.0, 0.02),
+    "Bass":       (5.0, 4.0, 8.0, 0.01),
+    "Vocal":      (9.0, 8.0, 0.0, 0.03),
+    "Synth":      (3.0, 4.0, 0.0, 0.01),
+    "World":      (8.0, 6.0, 1.0, 0.02),
+}
+HUMANIZE_DNA_DEFAULT = (7.0, 6.0, 0.0, 0.02)
 
 
 class Instrument:
@@ -114,6 +134,24 @@ class Instrument:
     @property
     def program(self):
         return self.midi_program
+
+    @property
+    def humanize_dna(self):
+        """(timing_sigma_ms, velocity_sigma, layback_ms, duration_sigma).
+
+        Family baseline, with role-level tuning on top: bass sits back, the
+        drum kit anchors the grid, voices breathe. Feed into
+        ``transformers.humanize.profile_for_style(style, instrument_dna=...)``.
+        """
+        fam = HUMANIZE_DNA_FAMILY.get(self.family, HUMANIZE_DNA_DEFAULT)
+        name = (self.name or "").lower()
+        if "drum" in name or "kit" in name or "percussion" in name:
+            return (2.0, 4.0, 0.0, 0.008)
+        if "bass" in name:                      # double bass / electric bass lay back
+            return (fam[0], fam[1], 8.0, fam[3])
+        if "voice" in name or "vocal" in name or "singing" in name:
+            return (10.0, 9.0, 0.0, 0.04)
+        return fam
 
     def in_range(self, midi_note):
         if self.range_min is None or self.range_max is None:
@@ -270,6 +308,7 @@ PAN_FLUTE = ALL_INSTRUMENTS["pan_flute"]
 WHISTLE = ALL_INSTRUMENTS["whistle"]
 SOPRANO_SAX = ALL_INSTRUMENTS["soprano_sax"]
 ELECTRIC_BASS = ALL_INSTRUMENTS["electric_bass"]
+RECORDER = ALL_INSTRUMENTS["recorder"]
 PIZZICATO_STRINGS = ALL_INSTRUMENTS["pizzicato_strings"]
 STRING_ENSEMBLE = ALL_INSTRUMENTS["string_ensemble"]
 SYNTH_PAD = ALL_INSTRUMENTS["synth_pad"]
@@ -402,6 +441,8 @@ def registry_table():
             role = "harmony, melody, bass, accent, color"
         elif low == "electric bass (finger)":
             role = "bass, rhythm, countermelody, accent"
+        elif low == "recorder":
+            role = "lead, melody, ornament, countermelody, accent"
         elif low == "acoustic guitar (steel)":
             role = "harmony, rhythm, strum, lead, melody, ornament, countermelody"
         elif low == "electric guitar (clean)":
@@ -541,6 +582,12 @@ if __name__ == "__main__":
     print("  by_program(78) =", by_program(78))
     print("  WHISTLE.in_sweet_spot(72) =", WHISTLE.in_sweet_spot(72))
     print("  WHISTLE.in_sweet_spot(48) =", WHISTLE.in_sweet_spot(48))
+    print("  RECORDER.midi_program =", RECORDER.midi_program, "(should be 74)")
+    print("  by_name('recorder') =", by_name("recorder"))
+    print("  by_program(74) =", by_program(74))
+    print("  RECORDER.in_sweet_spot(79) =", RECORDER.in_sweet_spot(79))
+    print("  RECORDER.in_sweet_spot(40) =", RECORDER.in_sweet_spot(40))
+    print()
     print("  TENOR_SAX.midi_program =", TENOR_SAX.midi_program, "(should be 66)")
     print("  by_name('tenor sax') =", by_name("tenor sax"))
     print("  by_program(66) =", by_program(66))

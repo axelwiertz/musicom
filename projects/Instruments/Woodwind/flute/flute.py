@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 """Flute — musicom instrument constants."""
 
-MIDI_PROGRAM = 74
+MIDI_PROGRAM = 73
 GM_NAME = "Flute"
-# RenderPipeline stem label quirk: GM74 is labeled "Recorder" in the
-# GM_PROGRAMS list used by sound/render/pipeline.py
-STEM_LABEL = "Recorder"
+# RenderPipeline stem label: GM_PROGRAMS[73] = "Flute"
+STEM_LABEL = "Flute"
 
 RANGE_MIN = 60       # C4
 RANGE_MAX = 96       # C7

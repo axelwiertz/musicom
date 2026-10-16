@@ -111,6 +111,30 @@ subfolder under the Hermes working FS: `/opt/data/projects/Styles/<Genre>/<proje
 experiments). **Never** write outputs into the repo or a raw root folder.
 The daily sync mirrors them into this repo's `projects/`.
 
+## Humanization (always-on, concrete → absolute)
+
+Grid-quantized MIDI reads as machine playing. The canonical humanizer converts
+the perfect concrete layer into human-like absolute-tick events, zero-drift
+safe:
+
+```python
+from transformers.humanize import HumanizeProfile, profile_for_style
+from workflows.humanize import humanize_composer   # humanizes a whole UnitMatrixComposer
+# instruments: {voice_name: instrument.humanize_dna} (timing/velocity/layback/duration 4-tuple)
+hz = humanize_composer(composer, style=style, seed=hz_seed, bpm=bpm, instruments=hz_instruments)
+```
+
+- `compose(humanize=True)` applies it by default (style-derived, seeded,
+  provenance-recorded); pass `humanize=False` for byte-neutral engine tests.
+- Timing jitter is in **ms**, converted to ticks by tempo. `phrase_corr` splits
+  jitter into correlated phrase drift vs per-note white noise. Style map in
+  `STYLE_HUMANIZE`; instrument role DNA in `Instrument.humanize_dna`
+  (`projects/Instruments/instrument_registry.py`).
+- Invariants preserved: forward-clamp (no backtracking), boundary-clamp (no
+  note crosses a section seam), terminal landmark untouched → `validate()`
+  still passes. Apply AFTER grid/chord quantization, BEFORE validate()+to_midi().
+- Deterministic per seed (per-voice child seed `seed * 101 + row`).
+
 ## Verify-don't-trust (mandatory)
 
 After ANY MIDI/WAV write:

@@ -394,9 +394,28 @@ def _fill_loop_section(composer, voices, chord_roots, num_bars):
         composer.fill_voice_section(voices[4][0], "Loop", _unit_from_events(_clip(drum_evs), section_len))
 
 
+def _humanize_seed(seed, style, method, key, bpm, form):
+    """Stable humanization seed.
+
+    An explicit ``seed`` wins (so ``compose(..., seed=7)`` is reproducible
+    exactly). When ``seed`` is None, derive a deterministic seed from the
+    piece identity (style/method/key/bpm/form) so always-on humanization is
+    still reproducible run-to-run. Uses hashlib, not Python's per-process
+    ``hash()``, so it is stable across interpreter restarts.
+    """
+    import hashlib
+    if seed is not None:
+        try:
+            return int(seed) & 0x7FFFFFFF
+        except (TypeError, ValueError):
+            pass
+    ident = repr((style, method, key, bpm, form))
+    return int(hashlib.md5(ident.encode("utf-8")).hexdigest()[:8], 16)
+
+
 def compose(style="pop", method=None, form=None, key="C", bpm=None,
             voices=None, num_bars=32, seed=None, out_dir=None,
-            sections=None, loop=False):
+            sections=None, loop=False, humanize=True):
     """Compose a piece through the musicom engine (zero-drift guaranteed).
 
     Uses the UnitMatrixComposer with the requested voices. If `method` is
@@ -405,6 +424,11 @@ def compose(style="pop", method=None, form=None, key="C", bpm=None,
     loop=True composes a single seamless loop of `num_bars` (default off —
     multi-section form otherwise). The I–V–vi–IV cycle closes IV→I at the
     seam, and continuous arp/pad voices run across it.
+
+    humanize=True (default) applies always-on, style-derived, seeded
+    humanization (timing/velocity/duration imperfection) to every voice
+    BEFORE validate()+to_midi(), preserving zero-drift. Pass humanize=False
+    for byte-neutral engine tests (golden hashes) or raw/quantized output.
 
     Note: the UnitMatrixComposer needs actual note material per section.
     This entry point sets up the framework; a composition agent fills the
@@ -556,6 +580,24 @@ def compose(style="pop", method=None, form=None, key="C", bpm=None,
                     drum_evs.append(MusicEvent(42, 60, bar_start + h * 240, bar_start + h * 240 + 120))  # hats
             composer.fill_voice_section(voices[4][0], sname, _unit_from_events(drum_evs, section_len))
 
+    # --- always-on humanization (style-derived, seeded, zero-drift safe) ----
+    humanize_summary = None
+    humanize_seed = None
+    if humanize:
+        from workflows.humanize import humanize_composer
+        humanize_seed = _humanize_seed(seed, style, method, key, bpm, form)
+        hz_instruments = {}
+        for vname, inst_name in voices:
+            dna = None
+            try:
+                dna = _instr_by_name(inst_name).humanize_dna
+            except Exception:
+                dna = None
+            hz_instruments[vname] = dna
+        humanize_summary = humanize_composer(
+            composer, style=style, seed=humanize_seed, bpm=bpm,
+            instruments=hz_instruments)
+
     ok, msg = composer.validate()
     if not ok:
         raise RuntimeError(f"validate() failed: {msg}")
@@ -566,7 +608,12 @@ def compose(style="pop", method=None, form=None, key="C", bpm=None,
         classification="ai-assisted",
         generator=f"musicom_workflow.compose(style={style}, method={method})",
         sources=[f"style_registry:{style}", f"method:{method}"],
-        parameters={"bpm": bpm, "form": form, "voices": voices, "seed": seed},
+        parameters={
+            "bpm": bpm, "form": form, "voices": voices, "seed": seed,
+            "humanize": humanize_summary is not None,
+            "humanize_seed": humanize_seed,
+            "humanize_profiles": humanize_summary,
+        },
     )
     return ComposeResult(
         midi_path=str(midi_path),

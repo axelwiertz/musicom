@@ -2,6 +2,18 @@
 """
 SP-006 - Zero-Drift Humanization production pass.
 
+NOTE (2026-10-16): the inline `humanize_notes()` below is this project's
+historical, VERIFIED implementation. The same job is now available as a
+canonical, reusable engine layer — prefer it for new work:
+
+    from transformers.humanize import HumanizeProfile, humanize_events, profile_for_style
+    from workflows.humanize import humanize_composer   # humanizes a whole UnitMatrixComposer
+
+`humanize_composer(composer, style=..., seed=..., instruments={voice: dna})`
+is always-on in `workflows.musicom_workflow.compose()` (humanize=True default)
+and is zero-drift safe (forward-clamp + boundary-clamp + pinned terminal
+landmark). This script is left byte-stable on purpose.
+
 Source: /opt/data/projects/Styles/Latin/cumbia-daily-2026-06-22/composition.mid
         (Colombian Cumbia, D Dorian, 100 BPM, 2/4, 2-bar loop = 1920 ticks)
 

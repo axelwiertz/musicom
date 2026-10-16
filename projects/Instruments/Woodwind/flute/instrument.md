@@ -2,7 +2,7 @@
 type: instrument
 family: Woodwind
 name: Flute
-midi_program: 74
+midi_program: 73
 gms: "Flute"
 range_min: 60
 range_max: 96
@@ -15,10 +15,10 @@ synthesis: [additive, phase_mod, noise+filter]
 
 ## MIDI / GM
 
-- **Program**: 74 (GM1 Flute)
+- **Program**: 73 (GM1 Flute, 0-indexed GM 73 / 1-indexed GM #74)
 - **Channel**: melodic channel; monophonic, breathy
-- **FluidSynth**: TimGM6mb.sf2 renders GM74 → flute. NOTE: RenderPipeline stems
-  label program 74 as **Recorder** (GM list mismatch — see pop 5-part project)
+- **FluidSynth**: FluidR3_GM.sf2 renders GM73 → Flute. Pipeline stem label
+  `trackXX_Flute.wav` (GM_PROGRAMS[73] = "Flute", exact match, no quirk).
 
 ## Range
 
@@ -73,5 +73,5 @@ synthesis: [additive, phase_mod, noise+filter]
 
 ## Verification
 
-- GM74 renders as `trackXX_Recorder.wav` in RenderPipeline stems (name quirk)
-- Airy check: noise energy above 8 kHz present (breath component)
+- GM73 renders as `trackXX_Flute.wav` in RenderPipeline stems (exact match,
+  no quirk — corrected from GM74 data bug).

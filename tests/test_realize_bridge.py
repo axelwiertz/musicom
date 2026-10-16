@@ -34,9 +34,10 @@ from rules.realize import (
     voicing_spread,
 )
 
-# Captured from the pre-refactor inline implementation. Do not update
-# casually — this is the proof the P3 refactor was output-neutral.
-ABS_GOLDEN_SHA256 = "7a43efa9290dcea3476e8b35ecbe020795c13d562ac3069125b39612df79abf4"
+# Captured from the pre-refactor inline implementation — proof the P3 refactor
+# was output-neutral. Refreshed for the flute program correction (GM 74
+# "Recorder" → GM 73 "Flute"), which changes the exported program_change bytes.
+ABS_GOLDEN_SHA256 = "a7a10393f6248bee99ed4542f6efa8b8e9e1bbf0b72a61d59ac17feceb1b35e9"
 ABS_GOLDEN_SIZE = 4333
 
 
@@ -45,11 +46,15 @@ ABS_GOLDEN_SIZE = 4333
 # ---------------------------------------------------------------------------
 
 def test_abs_compose_midi_hash_unchanged():
-    """compose()'s abstract path must still emit byte-identical MIDI."""
+    """compose()'s abstract path must still emit byte-identical MIDI.
+
+    humanize=False: this gate pins the realize bridge / export path exactly,
+    independent of the (now always-on) humanization layer.
+    """
     from workflows.musicom_workflow import compose
 
     with tempfile.TemporaryDirectory() as d:
-        r = compose(style="pop", method="ABS-002", seed=7, out_dir=d)
+        r = compose(style="pop", method="ABS-002", seed=7, out_dir=d, humanize=False)
         data = open(r.midi_path, "rb").read()
     assert len(data) > 40, "empty/corrupt output"
     assert len(data) == ABS_GOLDEN_SIZE, (
