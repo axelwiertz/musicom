@@ -1,0 +1,23 @@
+{
+  "artifact": "247-metal-fourier-spectrum-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "Method 113 Pitch-Class Fourier Spectrum Composition (PCFSC) - PRE-RULES raw draft (abstract)",
+  "sources": [],
+  "parameters": {
+    "method": 113,
+    "phase": 1,
+    "layer": "abstract",
+    "key": "E minor",
+    "bpm": 140,
+    "sections": 4,
+    "total_bars": 32,
+    "seed": 247,
+    "style": "metal",
+    "form": "head-solos-head"
+  },
+  "notes": "Phase 1 (abstract layer raw): single overdriven-guitar voice, raw random walk over the per-section Fourier pc-pools. Unquantized pitch + off-grid micro-timing, NO harmony, off-grid by design.",
+  "sha256": "02837ba06e551a4f99ad86b467da27bb3b30a5303a295fe27a171b52e8221892",
+  "bytes": 2247,
+  "created_utc": "2026-10-16T23:30:55.429513+00:00",
+  "provenance_version": "1.0"
+}

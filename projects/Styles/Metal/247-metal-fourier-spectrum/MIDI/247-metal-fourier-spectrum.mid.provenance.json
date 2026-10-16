@@ -1,0 +1,30 @@
+{
+  "artifact": "247-metal-fourier-spectrum.mid",
+  "classification": "ai-assisted",
+  "generator": "Method 113 Pitch-Class Fourier Spectrum Composition (PCFSC) + musicom rules",
+  "sources": [],
+  "parameters": {
+    "method": 113,
+    "phase": 2,
+    "layer": "abstract",
+    "key": "E minor",
+    "bpm": 140,
+    "sections": 4,
+    "total_bars": 32,
+    "seed": 247,
+    "style": "metal",
+    "form": "head-solos-head",
+    "voices": [
+      "Lead",
+      "Rhythm",
+      "Bass",
+      "Drums"
+    ],
+    "humanize_seed": 247
+  },
+  "notes": "Phase 2 (rules): chord-tone quantization per bar + 16th-grid onset snap; voice-leading check; full texture (lead arpeggio, rhythm power chords, bass lock, metal kit); always-on seeded humanization. Fourier quality trajectory: natural minor (HOME) -> harmonic minor (LIFT) -> octatonic dim lattice (TENSE) -> natural minor (HOME).",
+  "sha256": "7bbb1ff579082fda6c3e559aa2ef779518b6c9ba02b0d3cac320e994f0cfd83e",
+  "bytes": 19431,
+  "created_utc": "2026-10-16T23:30:55.429762+00:00",
+  "provenance_version": "1.0"
+}

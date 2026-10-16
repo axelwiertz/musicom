@@ -1,17 +1,17 @@
 {
-  "date": "2026-10-15",
-  "seed": 20261015,
-  "layer_roll": 0.9143,
-  "layer": "concrete",
-  "method_id": "028",
-  "method_name": "Chaotically Modulated Cellular Grains (CMCG)",
-  "style": "Japanese",
-  "form": "strophic",
+  "date": "2026-10-16",
+  "seed": 20261016,
+  "layer_roll": 0.1334,
+  "layer": "abstract",
+  "method_id": "113",
+  "method_name": "Pitch-Class Fourier Spectrum Composition (PCFSC)",
+  "style": "Metal",
+  "form": "head-solos-head",
   "section_names": [
-    "Verse",
-    "Verse",
-    "Verse",
-    "Verse"
+    "Head",
+    "Solo1",
+    "Solo2",
+    "Head"
   ],
   "bars_per": [
     8,
@@ -22,11 +22,12 @@
   "recent_methods_excluded": [
     11,
     26,
+    28,
     29,
     32,
     38,
-    40,
     41,
+    43,
     74,
     98
   ],

@@ -1,0 +1,685 @@
+{
+  "method_id": 113,
+  "method_name": "Pitch-Class Fourier Spectrum Composition (PCFSC)",
+  "layer": "abstract",
+  "style": "metal",
+  "key": "E minor",
+  "root_pc": 4,
+  "bpm": 140,
+  "ticks_per_beat": 480,
+  "beats_per_bar": 4,
+  "bar_ticks": 1920,
+  "grid": 120,
+  "eighth": 240,
+  "form": "head-solos-head",
+  "sections": [
+    {
+      "name": "Head1",
+      "bars": 8
+    },
+    {
+      "name": "Solo1",
+      "bars": 8
+    },
+    {
+      "name": "Solo2",
+      "bars": 8
+    },
+    {
+      "name": "Head2",
+      "bars": 8
+    }
+  ],
+  "total_bars": 32,
+  "total_ticks": 61440,
+  "spectra": {
+    "0": {
+      "section": "Head1",
+      "pool": [
+        0,
+        2,
+        4,
+        6,
+        7,
+        9,
+        11
+      ],
+      "pool_name": "E natural minor (aeolian)",
+      "cardinality": 7,
+      "f5": 3.7321,
+      "f7": 3.7321,
+      "f6": 1.0,
+      "f3": 1.0,
+      "f4": 1.0,
+      "profile": [
+        1.0,
+        0.0383,
+        0.1429,
+        0.1429,
+        0.1429,
+        0.5332,
+        0.1429,
+        0.5332,
+        0.1429,
+        0.1429,
+        0.1429,
+        0.0383
+      ]
+    },
+    "1": {
+      "section": "Solo1",
+      "pool": [
+        0,
+        3,
+        4,
+        6,
+        7,
+        9,
+        11
+      ],
+      "pool_name": "E harmonic minor",
+      "cardinality": 7,
+      "f5": 1.9319,
+      "f7": 1.9319,
+      "f6": 1.0,
+      "f3": 2.2361,
+      "f4": 2.6458,
+      "profile": [
+        1.0,
+        0.0739,
+        0.1429,
+        0.3194,
+        0.378,
+        0.276,
+        0.1429,
+        0.276,
+        0.378,
+        0.3194,
+        0.1429,
+        0.0739
+      ]
+    },
+    "2": {
+      "section": "Solo2",
+      "pool": [
+        1,
+        2,
+        4,
+        5,
+        7,
+        8,
+        10,
+        11
+      ],
+      "pool_name": "E half-whole octatonic",
+      "cardinality": 8,
+      "f5": 0.0,
+      "f7": 0.0,
+      "f6": 0.0,
+      "f3": 0.0,
+      "f4": 4.0,
+      "profile": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.5,
+        0.0,
+        0.0,
+        0.0,
+        0.5,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "3": {
+      "section": "Head2",
+      "pool": [
+        0,
+        2,
+        4,
+        6,
+        7,
+        9,
+        11
+      ],
+      "pool_name": "E natural minor (aeolian, HOME)",
+      "cardinality": 7,
+      "f5": 3.7321,
+      "f7": 3.7321,
+      "f6": 1.0,
+      "f3": 1.0,
+      "f4": 1.0,
+      "profile": [
+        1.0,
+        0.0383,
+        0.1429,
+        0.1429,
+        0.1429,
+        0.5332,
+        0.1429,
+        0.5332,
+        0.1429,
+        0.1429,
+        0.1429,
+        0.0383
+      ]
+    }
+  },
+  "tension_curve": [
+    {
+      "from": "Head1",
+      "to": "Solo1",
+      "fourier_tension": 15.1915
+    },
+    {
+      "from": "Solo1",
+      "to": "Solo2",
+      "fourier_tension": 26.486
+    },
+    {
+      "from": "Solo2",
+      "to": "Head2",
+      "fourier_tension": 24.0
+    },
+    {
+      "from": "Head2",
+      "to": "end (loop to Head)",
+      "fourier_tension": 0.0
+    }
+  ],
+  "voices": [
+    {
+      "name": "Lead",
+      "program": 29,
+      "channel": 0,
+      "pitched": true
+    },
+    {
+      "name": "Rhythm",
+      "program": 29,
+      "channel": 1,
+      "pitched": true
+    },
+    {
+      "name": "Bass",
+      "program": 33,
+      "channel": 2,
+      "pitched": true
+    },
+    {
+      "name": "Drums",
+      "program": 0,
+      "channel": 9,
+      "pitched": false
+    }
+  ],
+  "chord_path": [
+    {
+      "bar": 0,
+      "roman": "i",
+      "name": "Em",
+      "root_pc": 4,
+      "chord_tone_pcs": [
+        4,
+        7,
+        11
+      ]
+    },
+    {
+      "bar": 1,
+      "roman": "i",
+      "name": "Em",
+      "root_pc": 4,
+      "chord_tone_pcs": [
+        4,
+        7,
+        11
+      ]
+    },
+    {
+      "bar": 2,
+      "roman": "bVI",
+      "name": "C",
+      "root_pc": 0,
+      "chord_tone_pcs": [
+        0,
+        4,
+        7
+      ]
+    },
+    {
+      "bar": 3,
+      "roman": "bIII",
+      "name": "G",
+      "root_pc": 7,
+      "chord_tone_pcs": [
+        7,
+        11,
+        2
+      ]
+    },
+    {
+      "bar": 4,
+      "roman": "bVII",
+      "name": "D",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        6,
+        9
+      ]
+    },
+    {
+      "bar": 5,
+      "roman": "bVI",
+      "name": "C",
+      "root_pc": 0,
+      "chord_tone_pcs": [
+        0,
+        4,
+        7
+      ]
+    },
+    {
+      "bar": 6,
+      "roman": "bVII",
+      "name": "D",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        6,
+        9
+      ]
+    },
+    {
+      "bar": 7,
+      "roman": "i",
+      "name": "Em",
+      "root_pc": 4,
+      "chord_tone_pcs": [
+        4,
+        7,
+        11
+      ]
+    },
+    {
+      "bar": 8,
+      "roman": "i",
+      "name": "Em",
+      "root_pc": 4,
+      "chord_tone_pcs": [
+        4,
+        7,
+        11
+      ]
+    },
+    {
+      "bar": 9,
+      "roman": "iv",
+      "name": "Am",
+      "root_pc": 9,
+      "chord_tone_pcs": [
+        9,
+        0,
+        4
+      ]
+    },
+    {
+      "bar": 10,
+      "roman": "V",
+      "name": "B",
+      "root_pc": 11,
+      "chord_tone_pcs": [
+        11,
+        3,
+        6
+      ]
+    },
+    {
+      "bar": 11,
+      "roman": "i",
+      "name": "Em",
+      "root_pc": 4,
+      "chord_tone_pcs": [
+        4,
+        7,
+        11
+      ]
+    },
+    {
+      "bar": 12,
+      "roman": "bVI",
+      "name": "C",
+      "root_pc": 0,
+      "chord_tone_pcs": [
+        0,
+        4,
+        7
+      ]
+    },
+    {
+      "bar": 13,
+      "roman": "ii\u00b0",
+      "name": "F#dim",
+      "root_pc": 6,
+      "chord_tone_pcs": [
+        6,
+        9,
+        0
+      ]
+    },
+    {
+      "bar": 14,
+      "roman": "V",
+      "name": "B",
+      "root_pc": 11,
+      "chord_tone_pcs": [
+        11,
+        3,
+        6
+      ]
+    },
+    {
+      "bar": 15,
+      "roman": "i",
+      "name": "Em",
+      "root_pc": 4,
+      "chord_tone_pcs": [
+        4,
+        7,
+        11
+      ]
+    },
+    {
+      "bar": 16,
+      "roman": "i",
+      "name": "Em",
+      "root_pc": 4,
+      "chord_tone_pcs": [
+        4,
+        7,
+        11
+      ]
+    },
+    {
+      "bar": 17,
+      "roman": "i\u00b07",
+      "name": "Edim7",
+      "root_pc": 4,
+      "chord_tone_pcs": [
+        4,
+        7,
+        10,
+        1
+      ]
+    },
+    {
+      "bar": 18,
+      "roman": "\u00b07",
+      "name": "Fdim7",
+      "root_pc": 5,
+      "chord_tone_pcs": [
+        5,
+        8,
+        11,
+        2
+      ]
+    },
+    {
+      "bar": 19,
+      "roman": "i",
+      "name": "Em",
+      "root_pc": 4,
+      "chord_tone_pcs": [
+        4,
+        7,
+        11
+      ]
+    },
+    {
+      "bar": 20,
+      "roman": "i\u00b07",
+      "name": "Edim7",
+      "root_pc": 4,
+      "chord_tone_pcs": [
+        4,
+        7,
+        10,
+        1
+      ]
+    },
+    {
+      "bar": 21,
+      "roman": "bvdim",
+      "name": "Bdim",
+      "root_pc": 11,
+      "chord_tone_pcs": [
+        11,
+        2,
+        5
+      ]
+    },
+    {
+      "bar": 22,
+      "roman": "\u00b07",
+      "name": "Fdim7",
+      "root_pc": 5,
+      "chord_tone_pcs": [
+        5,
+        8,
+        11,
+        2
+      ]
+    },
+    {
+      "bar": 23,
+      "roman": "i",
+      "name": "Em",
+      "root_pc": 4,
+      "chord_tone_pcs": [
+        4,
+        7,
+        11
+      ]
+    },
+    {
+      "bar": 24,
+      "roman": "i",
+      "name": "Em",
+      "root_pc": 4,
+      "chord_tone_pcs": [
+        4,
+        7,
+        11
+      ]
+    },
+    {
+      "bar": 25,
+      "roman": "i",
+      "name": "Em",
+      "root_pc": 4,
+      "chord_tone_pcs": [
+        4,
+        7,
+        11
+      ]
+    },
+    {
+      "bar": 26,
+      "roman": "bVI",
+      "name": "C",
+      "root_pc": 0,
+      "chord_tone_pcs": [
+        0,
+        4,
+        7
+      ]
+    },
+    {
+      "bar": 27,
+      "roman": "bIII",
+      "name": "G",
+      "root_pc": 7,
+      "chord_tone_pcs": [
+        7,
+        11,
+        2
+      ]
+    },
+    {
+      "bar": 28,
+      "roman": "bVII",
+      "name": "D",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        6,
+        9
+      ]
+    },
+    {
+      "bar": 29,
+      "roman": "bVI",
+      "name": "C",
+      "root_pc": 0,
+      "chord_tone_pcs": [
+        0,
+        4,
+        7
+      ]
+    },
+    {
+      "bar": 30,
+      "roman": "bVII",
+      "name": "D",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        6,
+        9
+      ]
+    },
+    {
+      "bar": 31,
+      "roman": "i",
+      "name": "Em",
+      "root_pc": 4,
+      "chord_tone_pcs": [
+        4,
+        7,
+        11
+      ]
+    }
+  ],
+  "vl_violations": 64,
+  "inline_audit": {
+    "Lead": {
+      "name": "Lead",
+      "n_notes": 448,
+      "off16": 0,
+      "off8": 192,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "Rhythm": {
+      "name": "Rhythm",
+      "n_notes": 1152,
+      "off16": 0,
+      "off8": 384,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "Bass": {
+      "name": "Bass",
+      "n_notes": 384,
+      "off16": 0,
+      "off8": 128,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "Drums": {
+      "name": "Drums",
+      "n_notes": 676,
+      "off16": 0,
+      "off8": 192,
+      "out_scale": 0,
+      "out_chord": 0
+    }
+  },
+  "humanize": {
+    "Lead": {
+      "seed": 24947,
+      "profile": {
+        "timing_sigma_ms": 6.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 448,
+      "mean_abs_shift_ticks": 4.734,
+      "max_abs_shift_ticks": 15,
+      "mean_abs_vel_delta": 4.752
+    },
+    "Rhythm": {
+      "seed": 24948,
+      "profile": {
+        "timing_sigma_ms": 6.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 1152,
+      "mean_abs_shift_ticks": 5.058,
+      "max_abs_shift_ticks": 20,
+      "mean_abs_vel_delta": 4.794
+    },
+    "Bass": {
+      "seed": 24949,
+      "profile": {
+        "timing_sigma_ms": 5.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 384,
+      "mean_abs_shift_ticks": 8.057,
+      "max_abs_shift_ticks": 20,
+      "mean_abs_vel_delta": 3.334
+    },
+    "Drums": {
+      "seed": 24950,
+      "profile": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.008,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 676,
+      "mean_abs_shift_ticks": 1.429,
+      "max_abs_shift_ticks": 6,
+      "mean_abs_vel_delta": 3.145
+    }
+  }
+}
