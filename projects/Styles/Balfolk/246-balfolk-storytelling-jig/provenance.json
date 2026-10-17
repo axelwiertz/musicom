@@ -17,15 +17,28 @@
   ],
   "form": "3 passes x AABB, 24 sentences x (4 bars storytelling + 1 bar melody-rest)",
   "rest_bar": "melody rests, accompaniment (guitar/bass/drums) plays on a V turnaround",
-  "humanization": {
-    "applied": true,
-    "style": "balfolk",
-    "seed": 246,
-    "profiles": {
-      "Lead": "violin 10ms layback+2",
-      "Chords": "guitar 6ms layback+1",
-      "Bass": "double_bass 10ms layback+8",
-      "Drums": "drum_kit 2ms anchor"
+  "workflow": "dual-version render (perfect + humanized), 2026-10-17",
+  "versions": {
+    "perfect": {
+      "midi": "MIDI/246-balfolk-storytelling-jig-perfect.mid",
+      "audio": "Audio/246-balfolk-storytelling-jig-perfect.ogg",
+      "humanization": "none — grid-locked concrete layer",
+      "off_grid_onsets": 0
+    },
+    "humanized": {
+      "midi": "MIDI/246-balfolk-storytelling-jig-humanized.mid",
+      "audio": "Audio/246-balfolk-storytelling-jig-humanized.ogg",
+      "humanization": {
+        "style": "balfolk",
+        "seed": 246,
+        "profiles": {
+          "Lead": "violin 10ms layback+2",
+          "Chords": "guitar 6ms layback+1",
+          "Bass": "double_bass 10ms layback+8",
+          "Drums": "drum_kit 2ms anchor"
+        }
+      },
+      "off_grid_onsets": 1389
     }
   },
   "voices": {
@@ -38,15 +51,14 @@
   "render": "fluidsynth -g 1.2 -R no -C no",
   "master": {
     "target_lufs": -16.0,
-    "measured_lufs": -16.0,
-    "true_peak_dbtp": -1.46
+    "perfect": {"measured_lufs": -16.0, "true_peak_dbtp": -3.87},
+    "humanized": {"measured_lufs": -16.0, "true_peak_dbtp": -2.93}
   },
   "verify": {
     "zero_drift": true,
     "out_of_scale": 0,
     "melody_rest_violations": 0,
     "accomp_bars_with_rest_content": 72,
-    "humanized_off_grid": 1389,
     "duration_s": 124.0
   }
 }

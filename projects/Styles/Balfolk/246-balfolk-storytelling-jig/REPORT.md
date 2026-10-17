@@ -1,7 +1,7 @@
 # 246 — Balfolk Storytelling Jig
 
 2-minute balfolk dance piece in **6/8 jig**, **D major**, dotted-quarter = 118 BPM.
-Built through the musicom engine (UnitMatrixComposer → humanize → validate → to_midi).
+Built through the musicom engine (UnitMatrixComposer → validate → to_midi).
 
 ## Requirement → solution
 
@@ -48,27 +48,47 @@ B part = G-centred lift (IV). 120 bars × 1.017 s = ~2:04.
 Onsets all on the 16th grid (120 ticks) **before humanization**. ticks_per_beat
 = 720 (dotted quarter), beats_per_bar = 2 → BAR = 1440 = one 6/8 measure.
 
-## Humanization (always-on)
+## Dual-version render (2026-10-17)
 
-Style `balfolk` → folk profile, overridden per voice by instrument DNA:
+Two artifacts side by side for A/B listening:
 
-| Voice | timing σ | layback | mean shift |
+| Version | MIDI | Audio | Description |
 |---|---|---|---|
-| Lead (violin) | 10 ms | +2 ms | 9.3 ticks |
-| Chords (guitar) | 6 ms | +1 ms | 7.0 ticks |
-| Bass (double bass) | 10 ms | +8 ms | 12.9 ticks (lays back) |
-| Drums (kit) | 2 ms | 0 ms | 1.9 ticks (anchors) |
+| **perfect** | `...-perfect.mid` | `...-perfect.ogg` | grid-locked concrete layer, no humanization |
+| **humanized** | `...-humanized.mid` | `...-humanized.ogg` | style=balfolk folk profile + instrument DNA, seeded 246 |
+
+### Humanization profile (humanized only)
+
+| Voice | timing σ | layback | mean shift | max shift |
+|---|---|---|---|---|
+| Lead (violin) | 10 ms | +2 ms | 9.3 ticks | **46 ticks** |
+| Chords (guitar) | 6 ms | +1 ms | 7.0 ticks | 28 ticks |
+| Bass (double bass) | 10 ms | +8 ms | 12.9 ticks (lays back) | **48 ticks** |
+| Drums (kit) | 2 ms | 0 ms | 1.9 ticks (anchors) | 9 ticks |
 
 Seeded (246), zero-drift safe (forward-clamp + boundary-clamp + pinned landmark).
+Note: max shift up to 48 ticks ≈ a full 16th-note (120t) / third of an 8th —
+audibly loosens the jig lilt.
 
 ## Verification (measured)
 
-| Check | Result |
-|---|---|
-| Zero-drift (track lengths) | ✅ 4 tracks × 172800 ticks, equal |
-| Harmony (out-of-scale, D major) | ✅ 0 / 1536 pitched notes |
-| Melody rest | ✅ 0 lead onsets in the 24 rest bars |
-| Accompaniment through rest | ✅ 72/72 rest bars (3 tracks × 24) have content |
-| Humanization applied | ✅ 1389 onsets off-grid (jitter ran) |
-| Duration | ✅ 124 s (~2:04) |
-| Master loudness | ✅ LUFS −16.0 (target −16, balfolk→folk), peak −1.46 dBTP |
+| Check | perfect | humanized |
+|---|---|---|
+| Zero-drift (track lengths) | ✅ 4 × 172800 | ✅ 4 × 172800 |
+| Harmony (out-of-scale, D major) | ✅ 0 / 1536 | ✅ 0 / 1536 |
+| Melody rest | ✅ 0 lead onsets in 24 rest bars | ✅ 0 |
+| Accompaniment through rest | ✅ 72/72 rest bars | ✅ 72/72 |
+| Off-grid onsets | ✅ 0 (grid-locked) | 1389 (jitter ran) |
+| Duration | ✅ 124 s (~2:04) | ✅ 124 s (~2:04) |
+| Master loudness | −16.0 LUFS, −3.87 dBTP | −16.0 LUFS, −2.93 dBTP |
+
+## Sustain fix (2026-10-17)
+
+"Too much staccato" → lengthened the accompaniment sustain (lead jig lilt kept):
+
+| Voice | before | after |
+|---|---|---|
+| Chords (guitar strum) | 240t / 170 ms | 480t / **339 ms** (rings) |
+| Bass (double bass) | 360t / 254 ms | 600t / **424 ms** (sustains beat) |
+| Lead (violin) | 85–254 ms | unchanged (jig lilt) |
+| Drums | 85 ms | unchanged (hits) |

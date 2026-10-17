@@ -601,6 +601,8 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Keys | Piano | 1 | 21–108 | harmony, melody, bass, rhythm |
 | Keys | Church Organ | 19 | 36–96 | harmony, pad, bass, rhythm, accent |
 | Keys | Dulcimer | 15 | 48–96 | lead, melody, ornament, rhythm, harmony |
+| Keys | Electric Piano 1 | 4 | 36–96 | harmony, melody, bass, accent, color |
+| Keys | Electric Piano 2 | 5 | 36–96 | harmony, melody, bass, accent, color |
 | Keys | Harpsichord | 6 | 29–89 | harmony, continuo, melody, ornament, countermelody, accent |
 | Keys | Celesta | 8 | 48–108 | lead, melody, ornament, arpeggio, countermelody, accent |
 | Keys | Accordion | 21 | 36–96 | harmony, melody, bass, rhythm, ornament |
@@ -659,7 +661,8 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 43 | Contrabass | Contrabass ✓ (labeled "Contrabass", not "Double_Bass") |
 | 45 | Pizzicato Strings | Pizzicato_Strings ✓ (GM_PROGRAMS[45] = "Pizzicato Strings"; FluidR3 preset 45 = "Pizzicato Section" — internal SF2 name differs cosmetically, **no routing impact**) |
 | 46 | Orchestral Harp | Orchestral_Harp ✓ (GM_PROGRAMS[46] = "Orchestral Harp"; FluidR3 preset 46 = "Harp" — one-word SF2 spelling, cosmetic only) |
-| 1 | Acoustic Grand Piano | **Bright_Acoustic_Piano** ✗ (list[1]) |
+| 5 | Electric Piano 2 | Electric_Piano_2 ✓ (GM_PROGRAMS[5] + FluidR3 preset 5 both "Electric Piano 2"; internal SF2 name "Legend EP 2" — cosmetic only, **no routing impact**) |
+|| 1 | Acoustic Grand Piano | **Bright_Acoustic_Piano** ✗ (list[1]) |
 | 6 | Harpsichord | Harpsichord ✓ (GM_PROGRAMS[6] + FluidR3 preset 6 both "Harpsichord") |
 | 7 | Clavi | **Clavi** ✓ (pipeline GM_PROGRAMS[7] = "Clavi"; FluidR3 preset 7 = "Clavinet" — cosmetic expansion, no routing impact; STEM_LABEL = "Clavi" matches pipeline) |
 | 8 | Celesta | Celesta ✓ (GM_PROGRAMS[8] + FluidR3 preset 8 both "Celesta") |
@@ -1139,3 +1142,27 @@ breath shimmer). PAN -0.1 (slightly left, classical woodwind seating).
 Completes the GM73/74 Flute/Recorder swap fix: Flute was incorrectly
 registered at GM74 with STEM_LABEL "Recorder"; corrected to GM73 with
 STEM_LABEL "Flute", and Recorder added at its proper GM74 slot.
+
+**Electric Piano 2 added** (2026-10-17): GM5, Keys-family ninth entry — the
+Yamaha DX7 FM electric piano (the iconic 1980s bright percussive bell-like
+FM piano; instrument.md + electric_piano_2.py), verified end-to-end
+UnitMatrixComposer → zero-drift ✓ → MIDI (111 bytes) → FluidSynth WAV
+(812 KB) ✓; RenderPipeline stem label `trackXX_Electric_Piano_2.wav` ✓
+(GM_PROGRAMS[5] = "Electric Piano 2", FluidR3 preset 5 = "Legend EP 2" —
+SF2 internal name differs cosmetically from GM label, **no routing impact**).
+PhaseModSynth recommended (FM synthesis — the exact synthesis model for the
+DX7: sine carrier + sine modulator, mod_freq_ratio 3.1, mod_depth 2.8,
+attack 0.003 s, release 1.2 s; PhaseModSynth FM EP2 note smoke test:
+A4 0.5 s peak=0.799). Karplus-Strong secondary (metallic struck waveguide,
+loop_gain 0.9960). ModalSynth 'bell' preset fallback. Solo-render spectral
+check: 4–8 kHz buzz **1.0%** (clean single voice, well below 20% gate, no
+comb-filtering). Zero-drift: True. Registered in `instrument_registry.py` as
+ELECTRIC_PIANO_2 convenience constant. Registration proof:
+`by_name('electric piano 2')` → Electric Piano 2, `by_program(5)` → Electric
+Piano 2, `in_sweet_spot(69)` = True, `in_sweet_spot(30)` = False. Role:
+harmony, melody, bass, accent, color — fully polyphonic chord/strum/arpeggio
+instrument. FM bell quirk: the DX7 signature has prominent 4-8 kHz energy at
+the onset by design (not comb-filtering). REVERB_TAIL 2.0 s (80s Lexicon hall
+shimmer). EQ: cut 400 Hz (mud), boost 3.2 kHz (bright bell articulation),
+high shelf 9 kHz (air). Complements the Rhodes (GM4) as the bright/cold FM
+counterpart to the warm/tine Rhodes.

@@ -1,0 +1,405 @@
+{
+  "project": "248-cuban-son-montuno",
+  "source": "005-cuban-son-clave-lift",
+  "style": "cuban-son",
+  "key": "D dorian",
+  "bpm": 104,
+  "ticks_per_beat": 480,
+  "beats_per_bar": 4,
+  "bar_ticks": 1920,
+  "form": "intro-canto-montuno-canto'-mambo",
+  "sections": [
+    {
+      "name": "Intro",
+      "bars": 2
+    },
+    {
+      "name": "Canto",
+      "bars": 4
+    },
+    {
+      "name": "Montuno",
+      "bars": 4
+    },
+    {
+      "name": "Canto'",
+      "bars": 4
+    },
+    {
+      "name": "Mambo",
+      "bars": 4
+    }
+  ],
+  "total_bars": 18,
+  "total_ticks": 34560,
+  "section_roots": [
+    {
+      "section": "Intro",
+      "midpoint_degree": "i",
+      "midpoint_chord": "Dm",
+      "root_pc": 2
+    },
+    {
+      "section": "Canto",
+      "midpoint_degree": "IV",
+      "midpoint_chord": "G",
+      "root_pc": 7
+    },
+    {
+      "section": "Montuno",
+      "midpoint_degree": "IV",
+      "midpoint_chord": "G",
+      "root_pc": 7
+    },
+    {
+      "section": "Canto'",
+      "midpoint_degree": "i",
+      "midpoint_chord": "Dm",
+      "root_pc": 2
+    },
+    {
+      "section": "Mambo",
+      "midpoint_degree": "IV",
+      "midpoint_chord": "G",
+      "root_pc": 7
+    }
+  ],
+  "variation_techniques": {
+    "retrograde": "Montuno section answers the Canto Dm arpeggio reversed (74-69-65-62)",
+    "inversion": "Canto' bar 10 inverts Dm arpeggio around D4 -> D B G D (G-major sonority)",
+    "register_shift": "Mambo lead up an octave (E5/D5 register)",
+    "augmentation": "Mambo lead half-notes/whole-note (2x/4x durations)",
+    "density_rise": "Mambo adds maracas eighth-note pulse"
+  },
+  "voices": [
+    {
+      "name": "Lead",
+      "program": 73,
+      "channel": 0,
+      "pitched": true
+    },
+    {
+      "name": "Montuno",
+      "program": 24,
+      "channel": 1,
+      "pitched": true
+    },
+    {
+      "name": "Bass",
+      "program": 33,
+      "channel": 2,
+      "pitched": true
+    },
+    {
+      "name": "Drums",
+      "program": 0,
+      "channel": 9,
+      "pitched": false
+    }
+  ],
+  "chord_path": [
+    {
+      "bar": 0,
+      "roman": "i",
+      "name": "Dm",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        5,
+        9
+      ]
+    },
+    {
+      "bar": 1,
+      "roman": "i",
+      "name": "Dm",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        5,
+        9
+      ]
+    },
+    {
+      "bar": 2,
+      "roman": "i",
+      "name": "Dm",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        5,
+        9
+      ]
+    },
+    {
+      "bar": 3,
+      "roman": "IV",
+      "name": "G",
+      "root_pc": 7,
+      "chord_tone_pcs": [
+        7,
+        11,
+        2
+      ]
+    },
+    {
+      "bar": 4,
+      "roman": "v",
+      "name": "Am",
+      "root_pc": 9,
+      "chord_tone_pcs": [
+        9,
+        0,
+        4
+      ]
+    },
+    {
+      "bar": 5,
+      "roman": "i",
+      "name": "Dm",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        5,
+        9
+      ]
+    },
+    {
+      "bar": 6,
+      "roman": "i",
+      "name": "Dm",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        5,
+        9
+      ]
+    },
+    {
+      "bar": 7,
+      "roman": "IV",
+      "name": "G",
+      "root_pc": 7,
+      "chord_tone_pcs": [
+        7,
+        11,
+        2
+      ]
+    },
+    {
+      "bar": 8,
+      "roman": "VII",
+      "name": "C",
+      "root_pc": 0,
+      "chord_tone_pcs": [
+        0,
+        4,
+        7
+      ]
+    },
+    {
+      "bar": 9,
+      "roman": "i",
+      "name": "Dm",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        5,
+        9
+      ]
+    },
+    {
+      "bar": 10,
+      "roman": "IV",
+      "name": "G",
+      "root_pc": 7,
+      "chord_tone_pcs": [
+        7,
+        11,
+        2
+      ]
+    },
+    {
+      "bar": 11,
+      "roman": "i",
+      "name": "Dm",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        5,
+        9
+      ]
+    },
+    {
+      "bar": 12,
+      "roman": "v",
+      "name": "Am",
+      "root_pc": 9,
+      "chord_tone_pcs": [
+        9,
+        0,
+        4
+      ]
+    },
+    {
+      "bar": 13,
+      "roman": "IV",
+      "name": "G",
+      "root_pc": 7,
+      "chord_tone_pcs": [
+        7,
+        11,
+        2
+      ]
+    },
+    {
+      "bar": 14,
+      "roman": "i",
+      "name": "Dm",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        5,
+        9
+      ]
+    },
+    {
+      "bar": 15,
+      "roman": "IV",
+      "name": "G",
+      "root_pc": 7,
+      "chord_tone_pcs": [
+        7,
+        11,
+        2
+      ]
+    },
+    {
+      "bar": 16,
+      "roman": "v",
+      "name": "Am",
+      "root_pc": 9,
+      "chord_tone_pcs": [
+        9,
+        0,
+        4
+      ]
+    },
+    {
+      "bar": 17,
+      "roman": "i",
+      "name": "Dm",
+      "root_pc": 2,
+      "chord_tone_pcs": [
+        2,
+        5,
+        9
+      ]
+    }
+  ],
+  "vl_violations": 0,
+  "inline_audit": {
+    "Lead": {
+      "name": "Lead",
+      "n_notes": 91,
+      "off_grid": 0,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "Montuno": {
+      "name": "Montuno",
+      "n_notes": 136,
+      "off_grid": 0,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "Bass": {
+      "name": "Bass",
+      "n_notes": 69,
+      "off_grid": 0,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "Drums": {
+      "name": "Drums",
+      "n_notes": 131,
+      "off_grid": 0,
+      "out_scale": 0,
+      "out_chord": 0
+    }
+  },
+  "humanize": {
+    "Lead": {
+      "seed": 25048,
+      "profile": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 7.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 91,
+      "mean_abs_shift_ticks": 3.967,
+      "max_abs_shift_ticks": 11,
+      "mean_abs_vel_delta": 6.56
+    },
+    "Montuno": {
+      "seed": 25049,
+      "profile": {
+        "timing_sigma_ms": 6.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 136,
+      "mean_abs_shift_ticks": 2.787,
+      "max_abs_shift_ticks": 10,
+      "mean_abs_vel_delta": 4.728
+    },
+    "Bass": {
+      "seed": 25050,
+      "profile": {
+        "timing_sigma_ms": 5.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 69,
+      "mean_abs_shift_ticks": 6.435,
+      "max_abs_shift_ticks": 14,
+      "mean_abs_vel_delta": 3.493
+    },
+    "Drums": {
+      "seed": 25051,
+      "profile": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.008,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 131,
+      "mean_abs_shift_ticks": 1.221,
+      "max_abs_shift_ticks": 3,
+      "mean_abs_vel_delta": 2.985
+    }
+  }
+}

@@ -68,6 +68,7 @@ _INSTRUMENT_MODULES = {
     "Keys.accordion.accordion": "accordion",
     "Keys.reed_organ.reed_organ": "reed_organ",
     "Keys.rhodes.rhodes": "rhodes",
+    "Keys.electric_piano_2.electric_piano_2": "electric_piano_2",
     "World.sitar.sitar": "sitar",
     "World.koto.koto": "koto",
     "World.shamisen.shamisen": "shamisen",
@@ -262,6 +263,7 @@ CELESTA = ALL_INSTRUMENTS["celesta"]
 ACCORDION = ALL_INSTRUMENTS["accordion"]
 REED_ORGAN = ALL_INSTRUMENTS["reed_organ"]
 RHODES = ALL_INSTRUMENTS["rhodes"]
+ELECTRIC_PIANO_2 = ALL_INSTRUMENTS["electric_piano_2"]
 TRUMPET = ALL_INSTRUMENTS["trumpet"]
 TROMBONE = ALL_INSTRUMENTS["trombone"]
 FRENCH_HORN = ALL_INSTRUMENTS["french_horn"]
@@ -438,6 +440,8 @@ def registry_table():
         elif low == "soprano saxophone":
             role = "lead, countermelody, ornament, accent"
         elif low == "electric piano 1":
+            role = "harmony, melody, bass, accent, color"
+        elif low == "electric piano 2":
             role = "harmony, melody, bass, accent, color"
         elif low == "electric bass (finger)":
             role = "bass, rhythm, countermelody, accent"
@@ -618,6 +622,15 @@ if __name__ == "__main__":
     print("  RHODES.in_sweet_spot(30) =", RHODES.in_sweet_spot(30))
     print("  RHODES.range_min =", RHODES.range_min, "RHODES.range_max =", RHODES.range_max)
     print("  RHODES.stem_label =", repr(RHODES.stem_label))
+    print()
+    print("=== Electric Piano 2 (DX7 FM Piano, GM5) ===")
+    print("  ELECTRIC_PIANO_2.midi_program =", ELECTRIC_PIANO_2.midi_program, "(should be 5)")
+    print("  by_name('electric piano 2') =", by_name("electric piano 2"))
+    print("  by_program(5) =", by_program(5))
+    print("  ELECTRIC_PIANO_2.in_sweet_spot(69) =", ELECTRIC_PIANO_2.in_sweet_spot(69))
+    print("  ELECTRIC_PIANO_2.in_sweet_spot(30) =", ELECTRIC_PIANO_2.in_sweet_spot(30))
+    print("  ELECTRIC_PIANO_2.range_min =", ELECTRIC_PIANO_2.range_min, "ELECTRIC_PIANO_2.range_max =", ELECTRIC_PIANO_2.range_max)
+    print("  ELECTRIC_PIANO_2.stem_label =", repr(ELECTRIC_PIANO_2.stem_label))
     print()
     print("=== Reed Organ (Harmonium, GM20) ===")
     print("  REED_ORGAN.midi_program =", REED_ORGAN.midi_program, "(should be 20)")

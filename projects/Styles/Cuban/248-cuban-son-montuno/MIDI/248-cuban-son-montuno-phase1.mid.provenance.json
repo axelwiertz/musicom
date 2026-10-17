@@ -1,0 +1,20 @@
+{
+  "artifact": "248-cuban-son-montuno-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "Cuban son montuno - PRE-RULES raw draft (D-dorian random walk)",
+  "sources": [],
+  "parameters": {
+    "phase": 1,
+    "key": "D dorian",
+    "bpm": 104,
+    "seed": 248,
+    "style": "cuban-son",
+    "total_bars": 18,
+    "sections": 5
+  },
+  "notes": "Phase 1 raw: single flute voice, random walk over D-dorian pc pool, unquantized pitch + off-grid micro-timing, NO harmony, off-grid by design.",
+  "sha256": "ed2fff30d8828651eebe703b028936dfd76b9aea768a8ed5056b8c5610de057c",
+  "bytes": 1309,
+  "created_utc": "2026-10-17T01:07:56.875228+00:00",
+  "provenance_version": "1.0"
+}

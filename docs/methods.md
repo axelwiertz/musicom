@@ -125,6 +125,7 @@ Classification of active Musicom composition methods categorized by their primar
 | **115** | concrete | Keplerian Orbital Resonance Composition (KORC) | **Nature-Led** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Kepler interval-graded) | Continuous / Fluid | Macro / Orbital Period | $O(N)$ per event (closed-form Kepler time) | Each UnitMatrix voice = a planet on an elliptical orbit; Kepler's 1st law r(ν)=a(1−e²)/(1+e·cos ν) sweeps pitch contour; 2nd law (equal areas) yields exact onset times t=(P/2π)(E−e·sin E) — events crowd at perihelion, spread at aphelion ("rush/linger" rubato, ratio ((1+e)/(1−e))² = the Harmonice Mundi interval table: Saturn 5:4, Jupiter 6:5, Mars 3:2, Earth 16:15, Venus 24:25); 3rd law P²∝a³ → log₂P register scale (NASA exoplanet sonification practice); mean-motion resonances (2:1, 3:2, Laplace 4:2:1 Io–Europa–Ganymede) → polyrhythmic hierarchy, periodic conjunction epochs = cadence schedule, anti-aligned apsides = tension oscillation. Section = synodic cycle / orbital year; macro-form = resonance-capture chain (3:2→2:1→4:2:1). Nature-Led foil to 020 SMSTC (unbound clouds) / 043 SATM (chaotic attractors); physically-sourced continuous-time sibling of 012 Euclidean / 069 Christoffel; deterministic counterpart to 045 Hawkes / 038 KOPS. |
 | **116** | concrete | Petri Net Composition (PNC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Token-guided) | Grid-Locked / Continuous | Meso / Net State | $\mathcal{O}(P \cdot T \cdot F)$ | P-timed Petri net with probabilistic arc weights: places = music objects (notes, chords, motifs), transitions = music operators (transposition, inversion, concatenation), tokens = active threads/playback triggers. Net topology = macro-form, firing schedule = rhythm, concurrent tokens = polyphonic voices, place timing $	au(p)$ = note duration and IOI. Reconfigurable on-the-fly for live composition (minimalist phasing). Formal-model counterpoint to 002 Markov / 021 CA; deterministic-stochastic hybrid foil to 034 PCFG / 078 IMEC. |
 | **117** | concrete | Particle Swarm Optimization Composition (PSOC) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Fitness-guided, Key-bound) | Grid-Locked / Continuous | Macro / Global Optimum | $\mathcal{O}(I \cdot P \cdot D \cdot N)$ | Population of particles (candidate compositions) evolves via velocity-attraction to personal/global best positions. Continuous-valued positions encode note parameters per-voice per-section; fitness landscape guides convergence toward tonal, melodic, rhythmic, harmonic, textural, and structural objectives. Continuous-velocity metaheuristic counterpart to GA (003), SA (055), ACO (041) with fundamentally different search dynamics — vector-field guidance rather than recombination, cooling, or pheromone. |
+| **118** | concrete | Discrete Denoising Diffusion Probabilistic Model Composition (D3PM-C) | **AI-Driven** | Pitch, Rhythm, Harmony, Structure, Texture | Variable (Classifier-guided, Context-guided) | Grid-Locked / Continuous | Macro / Denoising Trajectory | $\mathcal{O}(T \cdot N \cdot D^2 \cdot H)$ | Applies discrete-state diffusion (absorbing/uniform transition matrices) directly to symbolic music tokens. Forward corruption via Markov transition matrix; reverse process learns to denoise step-by-step. Supports unconditional generation, flexible note-level infilling, and post-hoc classifier guidance. Discrete-token AI-Driven counterpart to 047 DSMG (continuous diffusion) and 106 NAPC (confidence-based refinement). |
 |||### Source
 |Sakellariou, J., Tria, F., Loreto, V. & Pachet, F. (2017). "Maximum entropy models capture melodic styles." *Scientific Reports* 7, 9172. arXiv:1610.03414. — Jaynes, E. T. (1957). "Information theory and statistical mechanics." *Physical Review* 106, 620–630.
 
@@ -298,7 +299,8 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 ||| **SP-113** | Psychoacoustic Bass Enhancement Synthesis (PBES) | **Post-Processing / DSP** | Virtual Bass Perception | Post-process that generates harmonics of bass content via controlled nonlinearity to create the missing-fundamental illusion of low bass on bandwidth-limited speakers. Applies to rendered audio buffers or mix stems; per-voice or shared bus configuration. $\mathcal{O}(1)$ per sample. Candidate: `sound/effects/bass_enhancer.py`. |
 ||| **SP-114** | Spectral Dynamics Compression/Expansion (SDCX) | **Post-Processing / DSP** | Spectral Dynamics / Per-Band Compression, Expansion & Gating | STFT-domain dynamics processor that applies independent compression, expansion, limiting, and gating to each of $N$ perceptually-scaled frequency bands (ERB grouping). Per-band threshold, ratio, attack, release, and knee parameters. Frame-by-frame STFT analysis → band grouping → level detection → gain computer → magnitude masking → ISTFT overlap-add. Preserves phase. $O(W \log W + B)$ per hop. Candidate: `sound/effects/spectral_dynamics.py`. |
 ||| **SP-115** | Auto-Wah / Envelope-Controlled Filter Synthesis (AWEFS) | **Post-Processing / DSP** | Dynamic Filter Sweep / Envelope-Controlled Wah Effect | Envelope follower modulates a resonant filter cutoff in response to input dynamics. Signal amplitude controls filter frequency via asymmetric attack/release level detection, creating a vowel-like automatic wah-wah effect without pedal control. Lowpass/bandpass/peaking filter modes; per-voice or shared-bus configuration. $\mathcal{O}(1)$ per sample. Candidate: `sound/effects/envelope_filter.py`. |
-|| **SP-116** | Discrete Summation Formula Synthesis (DSFS) | **Synthesis Engines** | Closed-Form Bandlimited Harmonic / Inharmonic Timbre Generation | Generates complex harmonic/inharmonic spectra via closed-form trigonometric summation (Moorer 1976). Parameters $a$ (harmonic rolloff), $f_c$ (center frequency), $f_m$ (partial spacing), and $N$ (partial count) control the spectrum directly, with exact bandlimiting via $N$. Supports one-sided, two-sided, infinite-sum, and quadrature-stereo forms at $\mathcal{O}(1)$ per sample, zero oversampling, zero wavetable memory. Candidate: `sound/synthesis/dsf_synthesis.py`. |
+|| **SP-116** | Discrete Summation Formula Synthesis (DSFS) | **Synthesis Engines** | Closed-Form Bandlimited Harmonic / Inharmonic Timbre Generation | Generates complex harmonic/inharmonic spectra via closed-form trigonometric summation (Moorer 1976). Parameters $a$ (harmonic rolloff), $f_c$ (center frequency), $f_m$ (partial spacing), and $N$ (partial count) control the spectrum directly, with exact bandlimiting via $N$. Supports one-sided, two-sided, infinite-sum, and quadrature-stereo forms
+|| **SP-117** | Harmonic Exciter Synthesis (HEX) | **Post-Processing / DSP** | Split-Band Harmonic Enhancement / Presence & Air Restoration | Post-processing DSP that enhances brightness and presence by generating low-order harmonics from the high-frequency band only (crossover 1–10 kHz). Asymmetric cubic soft clipper produces both odd and even harmonics; allpass phase shifter adds air. Per-voice or bus configuration, $O(1)$ per sample, zero latency. Candidate: `sound/effects/harmonic_exciter.py`. |
 |---|
 
 
@@ -26124,3 +26126,322 @@ Zero-drift is guaranteed because each note's buffer length equals its MIDI durat
 5. **Lack of dynamic complexity**: Because DSFS generates a static spectrum for a fixed $(f_c, f_m, a, N)$ set, unmodulated tones can sound static and synthetic compared to sampled or physical-modeled instruments. Mitigation: modulate $a$ and $f_m$ with low-frequency envelopes (ADSR on $a$, LFO on $f_m$ for vibrato-like shimmer), or crossfade between two DSF streams with different $a$ values for evolving brightness.
 
 6. **Relation to existing SP methods**: DSFS is the *algebraic-spectral sibling* of SP-010 FM (FM uses Bessel-function sidebands, DSF uses geometric amplitude series), SP-019 Chebyshev Waveshaping (generates harmonics through polynomial evaluation vs. closed-form trig sum), SP-039 IFFT Additive (builds spectrum in frequency domain vs. evaluating closed-form in time domain), and SP-041 BLW-MI Wavetable (reads pre-computed wavetables vs. computing spectral sum on the fly). It is distinct in providing closed-form, alias-free, variable-bandwidth spectra with explicit partial-amplitude control and zero wavetable memory — the ideal middle ground between additive and modulation synthesis.
+### Source
+Plasser, M., Peter, S. & Widmer, G. (2023). "Discrete Diffusion Probabilistic Models for Symbolic Music Generation." *Proceedings of the 32nd International Joint Conference on Artificial Intelligence (IJCAI-23)*, Macau, China. arXiv:2305.09489. — Austin, J., Johnson, D. D., Ho, J., Tarlow, D. & van den Berg, R. (2021). "Structured Denoising Diffusion Models in Discrete State-Spaces." *Advances in Neural Information Processing Systems* 34 (NeurIPS 2021). arXiv:2107.03006.
+
+### Layer
+**concrete** — generates discrete symbolic tokens (pitch class, duration, velocity, instrument) directly in the token domain. The reverse diffusion process is learned over a discrete vocabulary — tokens are corrupted by a Markov transition matrix and then denoised step by step. The output fills UnitMatrix cells with discrete music events via token decoding. Feeds generators/ directly via the learned reverse schedule.
+
+### Paradigm
+**AI-Driven** — the transition probabilities of the reverse diffusion process are parameterized by a neural network (transformer encoder or U-Net) trained with a variational bound + auxiliary cross-entropy loss on a symbolic music corpus. Generation is stochastic with a learned denoising schedule, not a deterministic rewrite rule, not nature-inspired dynamics, and not a hand-crafted distribution family.
+
+### Description
+**Discrete Denoising Diffusion Probabilistic Model Composition (D3PM-C)** applies structured discrete-state diffusion (Austin et al. 2021; Plasser et al. 2023) to the generation of symbolic music as tokens over a categorical vocabulary. Unlike continuous diffusion models (047 DSMG) which add Gaussian noise to continuous values (piano-roll amplitudes, latent vectors), D3PM-C works directly in the discrete token space with a forward corruption process defined by a Markov transition matrix $Q_t \in \mathbb{R}^{K \times K}$ over $K$ token types (pitch classes, duration labels, velocity bins, instrument codes, special tokens).
+
+**Forward process.** Each token $x_0$ (a one-hot vector over $K$ categories) is corrupted over $T$ timesteps by repeatedly applying the transition matrix:
+
+$$q(x_t \mid x_{t-1}) = \mathrm{Cat}(x_t; \mathbf{p} = x_{t-1} Q_t)$$
+
+The cumulative transition after $t$ steps is $\overline{Q}_t = Q_1 Q_2 \cdots Q_t$, yielding the closed-form marginal:
+
+$$q(x_t \mid x_0) = \mathrm{Cat}(x_t; \mathbf{p} = x_0 \overline{Q}_t)$$
+
+Three transition-matrix designs are available:
+
+1. **Uniform diffusion:** $[Q_t]_{ij} = (1-\beta_t)\mathbf{1}_{i=j} + \beta_t/K$ — tokens diffuse to any category with equal probability.
+
+2. **Absorbing-state diffusion:** $[Q_t]_{ij} = (1-\beta_t)\mathbf{1}_{i=j \neq m} + \beta_t\mathbf{1}_{j=m} + \mathbf{1}_{i=j=m}$ — each token transitions to a special [MASK] absorbing state with probability $\beta_t$. This is the discrete analogue of Gaussian diffusion and establishes a formal connection to BERT-style masked language models: at high noise levels the sequence is fully masked, and generation proceeds by progressive unmasking.
+
+3. **Discretized Gaussian:** transition probabilities decay with distance $|i-j|$ in an ordinal token ordering (e.g., MIDI pitch numbers), mimicking continuous Gaussian diffusion on discrete ordinal data.
+
+**Reverse process.** The model learns $p_\theta(x_{t-1} \mid x_t)$ by predicting a "clean" estimate $\tilde{x}_0$ and computing the posterior:
+
+$$p_\theta(x_{t-1} \mid x_t) \propto \sum_{\tilde{x}_0} q(x_{t-1} \mid x_t, \tilde{x}_0) \cdot \tilde{p}_\theta(\tilde{x}_0 \mid x_t)$$
+
+The loss combines the variational lower bound (VLB) with an auxiliary cross-entropy loss on the $x_0$ prediction:
+
+$$\mathcal{L} = \mathcal{L}_{\mathrm{VLB}} + \lambda \mathcal{L}_{\mathrm{CE}}$$
+
+where $\mathcal{L}_{\mathrm{CE}}$ reweights the cross-entropy to focus on early timesteps, stabilising training and improving sample quality.
+
+**Key innovation — SCHmUBERT.** Plasser et al. (2023) implement D3PM for music as SCHmUBERT, a bidirectional transformer encoder that predicts the clean token distribution $\tilde{p}_\theta(\tilde{x}_0 \mid x_t)$ from the corrupted sequence at timestep $t$. The token vocabulary encodes notes as 4-tuples $\langle \text{pitch}, \text{duration}, \text{velocity}, \text{instrument} \rangle$ arranged in a rectangular grid over time. A 16-bar context window with 16th-note resolution yields 1024 time positions per batch. The absorbing-state variant masks arbitrary subsets of tokens, enabling flexible infilling: mask a single note, a motif, or an entire instrument track.
+
+**Generation / infilling.** Sampling starts from $x_T \sim \mathrm{Uniform}(1..K)$ (uniform diffusion) or $x_T = \text{[MASK]}^D$ (absorbing). The reverse process iteratively denoises $x_T \to x_{T-1} \to \cdots \to x_0$ where $x_0$ is the generated token sequence. For infilling, unmasked tokens are clamped to their known values at each step; only the masked tokens are resampled. The model uses $T=256$ steps for generation and as few as $T=20$ for conditioned infilling.
+
+**Classifier guidance.** A separately trained classifier $p_\phi(c \mid x_t)$ on note density, genre, or register can guide the reverse process post-hoc without retraining:
+
+$$\tilde{p}_\theta(x_{t-1} \mid x_t, c) \propto p_\theta(x_{t-1} \mid x_t) \cdot p_\phi(c \mid x_{t-1})^\gamma$$
+
+where $\gamma$ is the guidance strength. Plasser et al. (2023) demonstrate guiding to a user-specified note density per measure with moderate loss of sample quality.
+
+### Musical Elements Framework
+
+**PITCH**: Tokens are drawn from a discrete pitch-class vocabulary (MIDI note numbers 0–127). The absorbing-state corruption progressively masks pitch tokens; the reverse process learns the conditional pitch distribution given partially masked context. Pitch infilling preserves local melodic shape and harmonic compatibility because the bidirectional transformer sees both left and right context at each denoising step. The transition matrix induces a prior: uniform diffusion assigns equal probability to all pitches at $x_T$, while the learned reverse process concentrates probability on scale-appropriate pitches.
+
+**RHYTHM**: Duration tokens are discrete categories (whole, half, quarter, eighth, sixteenth notes and dotted/triplet variants). The forward process corrupts duration independently per position. The reverse process learns typical duration patterns (longer on strong beats, syncopation at phrase boundaries) from the corpus. Infilling can generate rhythmically appropriate continuations by masking only duration tokens and sampling the reverse process. The rectangular time grid (16th-note resolution) ensures that rhythm is captured as a sequence of discrete duration labels, not continuous times — a key difference from continuous diffusion models that must quantize to a grid.
+
+**HARMONY**: Harmonic coherence emerges from the bidirectional context: at low noise levels ($t \approx 0$) the model sees most original notes and learns to fill in harmonically compatible voices. At high noise levels ($t \approx T$) the model learns global distributions (key, mode, harmonic density). Multi-voice tokens are interleaved in the sequence; the transformer's self-attention over all positions learns cross-voice harmonic dependencies (consonance, chord voicings, parallel-motion avoidance). Absorbing-state D3PM naturally supports chord-conditioning: chord tokens are prepended or interleaved and only partially masked during infilling.
+
+**STRUCTURE**: Macro-form emerges from the denoising schedule itself. Early reverse steps ($T \to \text{mid}$) resolve global structure (key, harmonic rhythm, section type), while later steps ($\text{mid} \to 0$) fill in surface detail (ornamentation, register, velocity). This coarse-to-fine hierarchical generation is baked into the diffusion process, not externally imposed. For explicit section control, section-conditioning tokens can be inserted per-bar and kept unmasked throughout. The bidirectional context of approximately 16 bars gives a local structure window; longer forms use a sliding window with overlap.
+
+**TEXTURE**: Texture density is controlled by the note-density classifier guidance ($\gamma$ parameter) and by the number of concurrently active instrument tokens per time step. During absorbing-state generation, instruments are unmasked according to the learned joint distribution over instrument co-occurrence — a solo piano texture emerges when only piano tokens are unmasked; a chamber texture emerges when overlapping wind/string/percussion tokens co-occur. The uniform diffusion variant can generate any permutation of instruments because the prior is fully mixed. Post-hoc classifier guidance on instrument density adds fine-grained control.
+
+### UnitMatrix Integration (Voices & Sections)
+
+**Voices**: Each UnitMatrix voice corresponds to a sequence of token positions in the rectangular grid. A voice is a contiguous block of tokens over time for a single instrument. The transformer processes all voice tokens together, so cross-voice dependencies (harmonic intervals, voice-leading, rhythmic coordination) are captured by self-attention across the entire grid. For generation, all voices are sampled simultaneously from the same reverse diffusion trajectory — no sequential voice-by-voice generation is needed. To condition one voice on another (e.g., generate a bass line given a melody), the known voice's tokens are clamped unmasked during infilling while the target voice tokens are resampled.
+
+**Sections**: The diffusion process generates the entire piece (all sections) in one reverse trajectory. Section boundaries are encoded as special [SEP] tokens or as a section-id token prepended to each bar. During infilling, section identities can be kept fixed (unmasked) while the content within sections is regenerated. For section-by-section control, the composition can be generated in segments: generate Section A (clamping no tokens), then infill Section B with Section A as contextual context, etc. The absorbing-state formulation is particularly flexible: any subset of tokens across any voices and sections can be masked and regenerated while the rest stays fixed, enabling iterative refinement of specific cells in the UnitMatrix without regenerating the whole piece.
+
+### Pitfalls
+1. **Computational cost**: Training the D3PM transformer requires substantial GPU resources (Plasser et al. 2023 trained on TPUs). Inference with T=256 steps, while faster than autoregressive models, is slower than single-pass generators. The 16-bar context window limits long-range structure; longer pieces require sliding-window or hierarchical extensions.
+2. **Token grid resolution**: The 16th-note grid is coarse for triplet-heavy rhythms (12th-note would be better) and expensive for 32nd-note ornaments. Higher temporal resolution quadruples the sequence length and quadratically increases attention cost.
+3. **Metric evaluation fragility**: Plasser et al. (2023) show that standard music generation metrics (FAD, KL-divergence of pitch/duration distributions) can be confounded by adversarial non-musical samples; quantitative results must be interpreted with caution and accompanied by listening tests.
+4. **Classifier guidance trade-off**: Strong guidance ($\gamma > 1$) improves conditional control but degrades sample diversity and can cause mode-collapse toward the classifier's preferred features. The guidance classifier itself needs separate training and domain-specific labels.
+5. **Absorbing vs. uniform choice**: Absorbing-state D3PM excels at infilling but tends to under-explore in unconditional generation (samples cluster near masked-language-model modes). Uniform diffusion explores more but produces noisier samples at low step counts. The choice depends on the task.
+6. **Redundancy with 106 NAPC / 047 DSMG**: D3PM occupies the discrete-diffusion niche between continuous diffusion (047) and confidence-based mask-refinement (106). Implementors must carefully compare the three to choose the right tool: D3PM for principled probabilistic generation with controlled corruption, NAPC for fast deterministic refinement, DSMG for continuous-parameter generation.
+
+# Sound Production Method SP-117 — Harmonic Exciter Synthesis (HEX)
+
+### Source
+Knoppel, C. A. (1979). "Signal Distortion Circuit and Method of Use." U.S. Patent US4150253A, filed Jan 26, 1977, granted Apr 17, 1979. Assigned to Aphex Systems Ltd. (Original APHEX Aural Exciter patent.) See also: Shekar, P. & Smith, J. (2013). "Modeling the Harmonic Exciter." *AES Convention 135, e-Brief 104*, CCRMA, Stanford University. (Digital FAUST model specification with asymmetric cubic soft-clipper and variable highpass cutoff.) See also: Zölzer, U. (2011). *DAFX: Digital Audio Effects*, 2nd ed., Wiley, Ch. 6 (Nonlinear Processing). See also: Chalupper, J. (2000). "Aural Exciter and Loudness Maximizer: What's Psychoacoustic about 'Psychoacoustic Processors'?" *AES 109th Convention*, Paper 5222.
+
+### Layer
+**absolute** — sound production (Post-Processing / DSP). HEX applies split-band harmonic enhancement as a post-processing stage on rendered audio buffers. The candidate code path is `sound/effects/harmonic_exciter.py`, pluggable into `workflows.musicom_workflow.produce(method="SP-117")` as a post-render DSP stage in the produce pipeline.
+
+### Description
+A Harmonic Exciter (also known as an Aural Exciter) is a post-processing DSP effect that enhances the brightness, presence, air, and perceived clarity of an audio signal by generating a measured amount of low-order, phase-shifted harmonics from the high-frequency content only. Unlike broadband EQ (which boosts existing frequencies), an exciter *synthesizes new harmonics* — enriching the spectral density above the crossover region. Unlike full-band distortion (SP-062 ADAA, SP-103 CBDS), the exciter operates only on the high-frequency band, preserving the low-mid fundamental body untouched.
+
+The classic Aphex Aural Exciter (Knoppel 1979) splits the signal into a dry path and an excite path. The excite path: (1) extracts high frequencies via a 2nd-order Butterworth highpass filter (crossover typically 1–10 kHz, default ~5 kHz), (2) optionally compresses the HF band for level normalization, (3) applies a pre-distortion gain (controlling harmonic richness), (4) passes through an asymmetric soft clipper that generates both odd and even low-order harmonics, (5) applies a post-distortion gain to restore the level, (6) shifts the phase via an allpass filter (the "air" or phase-shift control), and (7) mixes the processed HF band back with the dry signal at a user-set blend ratio (typically 20–70% wet for vocals).
+
+The digital model (Shekar & Smith 2013) replaces the original vacuum-tube asymmetric clipper with a cubic soft clipper $f(x) = x - x^3/3$ run asymmetrically (or with DC offset) to produce both odd and even harmonics, and adds user controls for crossover frequency, harmonic count (via pre-gain), blend, and output gain.
+
+### Technical Mechanics
+
+#### Split-Band Architecture
+
+Let the input signal be $x[n]$. The dry path preserves the full-band signal unchanged:
+$$y_{\text{dry}}[n] = x[n]$$
+
+The excite path processes only the high-frequency band:
+$$x_{\text{HF}}[n] = H_{\text{HP}}(z) \, x[n]$$
+
+where $H_{\text{HP}}(z)$ is a 2nd-order Butterworth highpass filter with cutoff $f_c$ (default 5 kHz, user range 1–10 kHz). The analog prototype bilinear-transformed:
+
+$$H_{\text{HP}}(s) = \frac{s^2}{s^2 + \sqrt{2}\,s + 1}, \quad s \leftarrow \frac{2f_s}{z-1}{z+1}$$
+
+#### Compressor (Level Normalization)
+
+An optional RMS compressor stabilizes the input level to the clipper, ensuring consistent harmonic generation across varying input dynamics:
+
+$$x_{\text{comp}}[n] = x_{\text{HF}}[n] \cdot g[n], \quad g[n] = \min\!\left(1,\; \frac{T}{\sqrt{\langle x_{\text{HF}}^2 \rangle[n]}}\right)^{1-1/R}$$
+
+where $T$ is the threshold (dB), $R$ is the ratio (typically 4:1–10:1), and $\langle \cdot \rangle$ is a one-pole EMA envelope follower with $t_a \approx 1\text{ ms}$, $t_r \approx 50\text{ ms}$.
+
+#### Pre-Distortion Gain (Harmonic Density Control)
+
+$$x_g[n] = G \cdot x_{\text{comp}}[n]$$
+
+where $G$ controls the amplitude before the clipper. Higher $G$ drives deeper into the nonlinear region, generating more harmonics. $G$ is normalized so that at unity gain $G=1$ the RMS of a steady-state sinusoid at 0 dBFS lands at the clipper's threshold.
+
+#### Asymmetric Cubic Soft Clipper
+
+The harmonic creator is the core of the exciter. An asymmetric clipper generates *both* odd and even harmonics, which is critical for the "exciter" sound (symmetric clippers produce only odd harmonics, sounding harsher). The Shekar-Smith model uses a cubic soft-clipper with an asymmetry offset:
+
+$$f_{\text{clip}}(x) = \begin{cases}
+-\frac{2}{3}, & x < -1 \\
+x - \frac{x^3}{3}, & -1 \leq x \leq 1 \\
+\frac{2}{3}, & x > 1
+\end{cases}$$
+
+Asymmetry is introduced by adding a DC offset before clipping or by shifting the clipping thresholds:
+
+$$x_{\text{asym}}[n] = x_g[n] + \delta$$
+
+where $\delta$ is a small asymmetry offset (typically $\delta = 0.05$–$0.15$). The output is:
+
+$$x_h[n] = f_{\text{clip}}(x_{\text{asym}}[n])$$
+
+**Harmonic analysis**: For a sine input $\sin(\omega_0 n)$ at pre-gain $G$, the cubic term generates harmonics via:
+$$(\sin\theta + \delta) - \frac{1}{3}(\sin\theta + \delta)^3 = \left(\delta - \frac{\delta^3}{3}\right) + \left(1 - \frac{\delta^2}{2}\right)\sin\theta + \frac{\delta}{2}\cos 2\theta + \frac{1}{12}\sin 3\theta + \text{(higher terms)}$$
+
+Terms:
+- DC offset: $\delta - \delta^3/3$
+- Fundamental: $(1 - \delta^2/2)\sin\theta$
+- 2nd harmonic (even): $(\delta/2)\cos 2\theta$ — produced by asymmetry $\delta \neq 0$
+- 3rd harmonic (odd): $(1/12)\sin 3\theta$
+- Higher harmonics at diminishing amplitude
+
+The even/odd harmonic ratio is controlled by $\delta$: $\delta = 0$ → pure odd; $\delta > 0$ → both odd and even. This is the critical musical control: even harmonics add warmth and roundness, odd harmonics add edge and presence.
+
+#### Post-Distortion Gain (Make-Up)
+
+After clipping, the signal is attenuated by the same factor $G$ to restore the original crest factor:
+
+$$x_{\text{post}}[n] = \frac{1}{G} \cdot x_h[n]$$
+
+This reverses the amplification so that only the nonlinear distortion component remains at the harmonic level relative to the input.
+
+#### Allpass Phase Shifter ("Air" Control)
+
+The processed HF band is passed through a first-order allpass filter whose break frequency $f_b$ is user-controlled (typically 2–8 kHz). The allpass imparts a frequency-dependent phase shift without altering the magnitude spectrum, creating the characteristic "airy" spatial feel:
+
+$$H_{\text{AP}}(z) = \frac{a_1 + z^{-1}}{1 + a_1 z^{-1}}$$
+
+where:
+$$a_1 = \frac{\tan(\pi f_b / f_s) - 1}{\tan(\pi f_b / f_s) + 1}$$
+
+The phase shift at frequency $f$:
+$$\Phi(f) = -2\pi f/f_s + 2\arctan\!\left(\frac{a_1 \sin(2\pi f/f_s)}{1 + a_1 \cos(2\pi f/f_s)}\right)$$
+
+At $f = f_b$, the phase shift is $-\pi/2$; at Nyquist, $-\pi$.
+
+The excite-path output is:
+$$x_{\text{excite}}[n] = H_{\text{AP}}(z) \, x_{\text{post}}[n]$$
+
+#### Wet/Dry Mix (Blend)
+
+The final output is a blend of the dry full-band signal and the processed excite signal:
+
+$$y[n] = (1-\alpha) \cdot y_{\text{dry}}[n] + \alpha \cdot x_{\text{excite}}[n]$$
+
+where $\alpha \in [0, 1]$ is the blend (typically 0.2–0.7 for vocals). For stereo signals, the exciter processes each channel independently with the same parameters.
+
+#### Output Gain
+
+A final master gain $G_{\text{out}}$ compensates for any level change (typically $G_{\text{out}}$ adjusted to match the bypass level for A/B comparison).
+
+#### Python/NumPy Implementation Sketch
+
+```python
+import numpy as np
+from scipy.signal import butter, sosfilt, lfilter
+
+class HarmonicExciter:
+    """
+    Digital Harmonic Exciter (Aural Exciter model).
+    Split-band HF harmonic enhancement via asymmetric soft clipping.
+    """
+    def __init__(self, sr=44100):
+        self.sr = sr
+        self.crossover_hz = 5000.0       # HPF cutoff
+        self.pre_gain = 1.0              # harmonic density
+        self.asymmetry = 0.1             # δ: even/odd balance
+        self.blend = 0.5                 # α: wet/dry mix
+        self.ap_break_hz = 4000.0        # allpass break freq
+        self.output_gain = 1.0
+        self._update_filters()
+
+    def _update_filters(self):
+        # 2nd-order Butterworth highpass
+        self._hp_sos = butter(2, self.crossover_hz / (self.sr/2), btype='high', output='sos')
+        # 1st-order allpass
+        a1 = (np.tan(np.pi * self.ap_break_hz / self.sr) - 1) / \
+             (np.tan(np.pi * self.ap_break_hz / self.sr) + 1)
+        self._ap_b = [a1, 1.0]
+        self._ap_a = [1.0, a1]
+        # Reset filter states
+        self._hp_zi = np.zeros((self._hp_sos.shape[0], 2))
+        self._ap_zi = np.zeros(2)
+
+    def _asymmetric_cubic_clipper(self, x):
+        """Asymmetric cubic soft clipper, generates odd + even harmonics."""
+        x_off = x + self.asymmetry           # add DC offset for asymmetry
+        clipped = np.where(x_off < -1, -2/3,
+                   np.where(x_off > 1,  2/3,
+                            x_off - x_off**3 / 3))
+        return clipped
+
+    def process(self, x):
+        """Process a mono audio buffer. x: ndarray shape (N,) float64 [-1,1]"""
+        # 1. High-pass filter
+        x_hf, self._hp_zi = sosfilt(self._hp_sos, x, zi=self._hp_zi)
+        # 2. Pre-gain
+        x_hf = x_hf * self.pre_gain
+        # 3. Asymmetric soft clipping
+        x_h = self._asymmetric_cubic_clipper(x_hf)
+        # 4. Post-gain (restore level)
+        x_h = x_h / self.pre_gain
+        # 5. Allpass phase shift
+        x_ap, self._ap_zi = lfilter(self._ap_b, self._ap_a, x_h, zi=self._ap_zi)
+        # 6. Wet/dry mix
+        y = (1 - self.blend) * x + self.blend * x_ap
+        return y * self.output_gain
+```
+
+#### Complexity
+
+| Stage | Operations | Notes |
+|---|---|---|
+| HPF (biquad) | $5$ mult + $4$ add/sample | SOS second-order section |
+| Compressor | $\sim 6$ mult + $4$ add/sample | Env follower + gain compute |
+| Pre-gain | $1$ mult/sample | Scalar multiply |
+| Cubic clipper | $\sim 5$ mult + $3$ add/sample | Polynomial eval + bounds check |
+| Post-gain | $1$ mult/sample | Reciprocal multiply |
+| Allpass | $2$ mult + $2$ add/sample | First-order IIR |
+| Blend | $2$ mult + $1$ add/sample | Lerp |
+| **Total** | **$\sim 22$ mult + $\sim 16$ add/sample** | Without compressor: $\sim 16+12$ |
+
+All operations are $O(1)$ per sample, entirely deterministic, zero latency (no FFT frame), zero memory beyond filter states.
+
+### Musical Elements Framework
+
+**PITCH**: HEX does not alter pitch content. It operates on the high-frequency band of whatever signal is present, enhancing existing harmonic structure. If the input has strong high partials (e.g., cymbal, string harmonics), they are enriched with new low-order harmonics that reinforce the perception of "air" and "sparkle" without shifting the fundamental. The allpass phase shifter does not change pitch but adds a subtle spatial smear that can enhance pitch perception by adding temporal decorrelation.
+
+**RHYTHM**: HEX preserves the input's exact rhythm and timing — it is a sample-by-sample process with no buffering delay. The compressor envelope follower introduces a slight temporal smearing on transient attacks (1 ms attack, 50 ms release) that can soften aggressive high-frequency transients (e.g., hi-hats) while enhancing the sustain HF content. Reducing the crossover frequency pushes more percussive content into the excite path, making transients "breathe" with harmonic enrichment.
+
+**HARMONY**: HEX generates harmonics that are integer multiples of the input frequencies. For a fundamental at $f_0$, the exciter adds $2f_0$, $3f_0$ (and higher, with diminishing amplitude) to the high-frequency band only. If $f_0$ lies below the crossover, its harmonics above the crossover are enhanced; if $f_0$ lies above the crossover, the fundamental itself is clipped and its harmonics generated. This spectral enrichment is musically additive: it thickens the harmonic texture without altering the underlying chord progression. The asymmetry control $\delta$ lets the user tune the odd/even balance: more even = warmer (tube-like), more odd = edgier (transistor-like).
+
+**STRUCTURE**: Macro-form control is achieved by automating the four HEX parameters over time:
+- **Crossover $f_c$**: Sweep down for increasing harmonic density (build tension), sweep up for airy release
+- **Pre-gain $G$** / **harmonic count**: Increases with intensity; low during verses, higher during choruses
+- **Asymmetry $\delta$**: Even-heavy (warm) for verses/ballads; odd-heavy (edgy) for bridges/climaxes
+- **Blend $\alpha$**: Subtle (0.1–0.2) for background pads, aggressive (0.5–0.7) for lead vocals or solos
+
+These parameter trajectories map cleanly to the section structure of a UnitMatrix composition.
+
+**TEXTURE**: HEX texture is defined by the ratio of even to odd harmonics and the crossover-dependent HF spectral density:
+- Low crossover (1 kHz) + high blend: dense, bright, almost distortion-like texture (use sparingly)
+- High crossover (8 kHz) + low blend: subtle air/sparkle, preserving the core timbre
+- High asymmetry + high pre-gain: warm, tube-like saturation in the HF band
+- Low asymmetry + high pre-gain: edgy, transistor-like presence
+
+The texture sits in the "spectral enrichment" family alongside SP-049 (tape saturation), SP-062 (ADAA waveshaping), SP-103 (multi-band distortion), and SP-100 (Volterra series). The key difference: HEX is limited to the HF band, generates only *low-order* harmonics, and always blends with the clean dry signal — it is designed to *enhance* clarity, not to color or degrade.
+
+### UnitMatrix Integration
+
+**Voices**: HEX is applied per-voice or as a shared bus effect:
+- **Lead Voice** (v=0): Moderate blend $\alpha = 0.3$–$0.5$, medium crossover 5 kHz, medium asymmetry $\delta = 0.1$ (even-leaning for warmth)
+- **Pad Voice** (v=2): Subtle blend $\alpha = 0.1$–$0.2$, high crossover 7–8 kHz (preserve lushness without harshness), low pre-gain
+- **Percussion Voice** (v=3): Moderate blend $\alpha = 0.2$–$0.3$, high crossover 8–10 kHz (treat only the cymbal/shimmer), low asymmetry for naturalness
+- **Bass Voice** (v=1): Little to no exciter (bass content below crossover), but a low crossover (1–2 kHz) can add harmonic overtones to bass for speakers with weak sub response
+
+When applied as a shared bus, all voices are summed first, then HEX processes the mono or stereo mix bus.
+
+**Sections**: Each section $m$ defines a parameter tuple $(f_c^{(m)}, G^{(m)}, \delta^{(m)}, \alpha^{(m)})$. Parameter trajectories use linear interpolation across section boundaries:
+
+| Section | $f_c$ (Hz) | $G$ | $\delta$ | $\alpha$ | Effect |
+|---|---|---|---|---|---|
+| Intro | 8000 | 0.5 | 0.05 | 0.1 | Subtle air only |
+| Verse | 6000 | 0.8 | 0.10 | 0.25 | Warm presence |
+| Pre-Chorus | 4000 | 1.2 | 0.08 | 0.35 | Build harmonic density |
+| Chorus | 3000 | 1.5 | 0.12 | 0.50 | Full exciter, rich |
+| Bridge | 5000 | 1.0 | 0.15 | 0.20 | Warm, even-heavy, restrained |
+| Outro | 7000 | 0.5 | 0.05 | 0.1 | Fade air back |
+
+**Cell Filling**: HEX operates on the rendered audio buffer, not on individual MIDI events. In the produce pipeline, after each voice is rendered to a sample buffer (via its synthesis engine), HEX is applied as a post-render DSP stage per voice or on the summed master bus. Zero-drift is maintained because HEX does not change the buffer length — it is a sample-by-sample processor with no delay.
+
+### Pitfalls
+
+1. **Phase cancellation from allpass**: The allpass filter imparts a frequency-dependent delay. When the processed HF band is recombined with the dry full-band signal, frequencies near the allpass break frequency $f_b$ can experience cancellation (notch filtering in the magnitude response — unlike a clean allpass, the parallel dry+wet structure creates a comb filter). Mitigate by keeping the allpass shallow ($|a_1|$ not too close to 1) and by monitoring the summed response during design.
+
+2. **DC offset from asymmetric clipping**: The asymmetric cubic clipper generates a DC offset proportional to $\delta - \delta^3/3$. Even a small DC offset (0.01–0.02) can cause audible pops when the exciter is bypassed/engaged, and may saturate downstream gear. Mitigate by subtracting the estimated DC offset: compute the per-frame mean of $x_h[n]$ and remove it before the allpass.
+
+3. **Over-enhancement / sibilance boost**: Aggressive exciter settings (low crossover + high blend + high asymmetry) amplify sibilants ("s" and "sh" sounds) in vocal recordings, making them spitty or harsh. Keep crossover above 4 kHz for vocals, or cascade HEX after a de-esser (which is not yet an SP method). The compressor pre-clipper helps but does not eliminate the issue.
+
+4. **Latency-free but stateful**: The filter states ($H_{\text{HP}}$ and $H_{\text{AP}}$) carry across processing calls. If HEX is applied piecewise (per-section), the filter states must be properly initialized/reset at section boundaries to avoid clicks. Use per-section filter state snapshots or zero-state initialization with a 1 ms fade-in.
+
+5. **Distinction from related methods**: HEX is NOT SP-049 (tape saturation — full-band, memoryful hysteresis); NOT SP-062 (ADAA waveshaping — aliasing-free but full-band); NOT SP-103 (multi-band distortion — independent per-band curves, typically more aggressive); NOT SP-100 (Volterra series — general nonlinear model, includes memory). HEX is the *narrow* method: HF-only, low-order harmonics only, gentle asymmetric cubic clip, always blended with dry. It is designed to enhance, not transform.
+
+6. **Tuning the compressor**: If the compressor threshold is set too low, the exciter loses dynamic expression (everything clips the same amount). If too high, quiet passages get no enhancement. The classic setting: threshold just below the average RMS of the vocal HF band (≈ −18 dBFS for typical mixes), ratio 8:1, attack 1 ms, release 50 ms. For instruments (e.g., acoustic guitar), a higher threshold (−12 dBFS) and gentler ratio 4:1 works better.
+
+7. **Stereo balance**: When applied independently to left and right channels, slight asymmetry in the compressor envelopes can shift the stereo image. Either link the compressor detectors across channels (summed sidechain) or apply HEX to a summed mono bus and leave the L/R balance untouched.

@@ -1,0 +1,32 @@
+{
+  "chosen": "/opt/data/projects/Styles/Cuban/005-cuban-son-clave-lift",
+  "genre": "Cuban (son / rumba-clave)",
+  "rework_date": "2026-10-17",
+  "primary_midi": "MIDI/005-cuban-son-clave-lift-v4.mid",
+  "source_identity": {
+    "key": "D dorian",
+    "tempo_bpm": 104,
+    "meter": "4/4",
+    "actual_length": "2 bars (3840 ticks, 8 quarter notes) — README claim '8-bar loop' is inaccurate",
+    "lead_contour": "D E F G A G F D (arch, degrees 1 2 3 4 5 4 3 1)",
+    "montuno_contour": "D F G A G F E D (dorian raised-6th color)",
+    "bass_motion": "D D F D G F D C (root-5th, anticipatory, dorian b7)",
+    "instrumentation": ["flute lead (73)", "nylon-guitar montuno (24)", "electric bass (33)", "percussion ch9"]
+  },
+  "standards": {
+    "1_engine_not_hand_rolled": {"pass": false, "detail": "src/regen.py authors MIDI with raw mido MidiTrack/Message note_on/note_off/.save(); no UnitMatrixComposer import"},
+    "2_zero_drift": {"pass": false, "detail": "voice track lengths [3840,3840,3840,2880]; drums track is 1.5 bars vs 2 bars for pitched tracks"},
+    "3_rhythm_grid_sync": {"pass": true, "detail": "all pitched onsets %240==0; 0 off-grid"},
+    "4_valid_track_setup": {"pass": true, "detail": "4 voice tracks (lead, montuno, bass, drums ch9)"},
+    "5_two_phase_artifacts": {"pass": false, "detail": "no -phase1.mid present"},
+    "6_provenance_and_index": {"pass": false, "detail": "no provenance.json, no index.html"}
+  },
+  "standard_failures": [
+    "1_engine_not_hand_rolled",
+    "2_zero_drift",
+    "5_two_phase_artifacts",
+    "6_provenance_and_index"
+  ],
+  "redesign_required": true,
+  "rework_target": "248-cuban-son-montuno"
+}

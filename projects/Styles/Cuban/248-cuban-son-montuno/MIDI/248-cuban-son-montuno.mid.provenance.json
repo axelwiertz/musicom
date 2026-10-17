@@ -1,0 +1,28 @@
+{
+  "artifact": "248-cuban-son-montuno.mid",
+  "classification": "ai-assisted",
+  "generator": "Cuban son montuno + musicom rules",
+  "sources": [],
+  "parameters": {
+    "phase": 2,
+    "key": "D dorian",
+    "bpm": 104,
+    "seed": 248,
+    "style": "cuban-son",
+    "total_bars": 18,
+    "sections": 5,
+    "voices": [
+      "Lead",
+      "Montuno",
+      "Bass",
+      "Drums"
+    ],
+    "humanize_seed": 248,
+    "source": "005-cuban-son-clave-lift (redesign)"
+  },
+  "notes": "Phase 2 (rules): chord-tone quantization per bar (t//BAR) + 8th-grid onset snap; voice-leading check; full texture (flute lead, nylon-guitar montuno, e-bass, clave/conga/maracas kit); seeded humanization. Reworked from hand-rolled source. 5 variation techniques: retrograde, inversion, register shift, augmentation, density rise.",
+  "sha256": "338de61b5e839daf574ba8931e27e4ace4c222d105502a06a86629652d9edd8f",
+  "bytes": 3823,
+  "created_utc": "2026-10-17T01:07:56.876430+00:00",
+  "provenance_version": "1.0"
+}

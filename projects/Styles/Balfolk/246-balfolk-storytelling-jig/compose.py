@@ -19,8 +19,11 @@ Form: 24 phrase-sentences, each = 4 bars storytelling + 1 bar melody-rest
 (accompaniment continues). 3 passes x AABB, A=D-major home, B=G-centred lift.
 120 bars of 6/8 at dotted-quarter=118 -> ~2:04.
 
-Humanization: always-on (style=balfolk -> folk profile + per-instrument DNA),
-seeded, zero-drift safe.
+Rendering: TWO versions side by side (workflow 2026-10-17):
+  * `-perfect`   — grid-locked concrete layer, NO humanization (the
+      compositional truth).
+  * `-humanized` — style=balfolk folk profile + per-instrument DNA, seeded,
+      zero-drift safe (applied in place on the same composer).
 
 Ticks: ticks_per_beat=720 (1 beat = dotted quarter), beats_per_bar=2 ->
 BAR = 1440 = one 6/8 measure. 8th = 240, 16th = 120 (grid-locked).
@@ -55,6 +58,7 @@ D_PC = {1, 2, 4, 6, 7, 9, 11}     # D major pitch classes (D E F# G A B C#)
 LEAD, CHORDS, BASS, DRUMS = "Lead", "Chords", "Bass", "Drums"
 
 HUMANIZE_SEED = 246
+BASE = "246-balfolk-storytelling-jig"
 
 
 def chord_tones(root_pc_deg, base=43):
@@ -140,7 +144,7 @@ def build():
             lead_evs.append(MusicEvent(pitch=pitch, volume=vel,
                                        start_tick=start, end_tick=start + dur))
 
-        # ---- Chords: guitar off-beat strum, 5 bars (plays through the rest) ----
+        # ---- Chords: guitar off-beat strum, 5 bars; strum rings (sustain) ----
         chord_evs = []
         for bar in range(5):
             cd = chords_deg[bar] if bar < 4 else BREATH_CHORD
@@ -149,9 +153,9 @@ def build():
                 for tone in (r, th, fi):
                     chord_evs.append(MusicEvent(pitch=tone, volume=70,
                                                 start_tick=bar * BAR + off,
-                                                end_tick=bar * BAR + off + EIGHTH))
+                                                end_tick=bar * BAR + off + 2 * EIGHTH))
 
-        # ---- Bass: dotted-quarter pulse, 5 bars ----
+        # ---- Bass: dotted-quarter pulse, 5 bars; rings most of the beat ----
         bass_evs = []
         for bar in range(5):
             cd = chords_deg[bar] if bar < 4 else BREATH_CHORD
@@ -159,7 +163,7 @@ def build():
             for beat in (0, BAR // 2):
                 bass_evs.append(MusicEvent(pitch=root, volume=92,
                                            start_tick=bar * BAR + beat,
-                                           end_tick=bar * BAR + beat + 3 * SIXTEENTH))
+                                           end_tick=bar * BAR + beat + 5 * SIXTEENTH))
 
         # ---- Drums: tapan (kick 1, rim 4), 5 bars ----
         drum_evs = []
@@ -183,28 +187,27 @@ def build():
         composer.set_unit(2, p, wrap(bass_evs))
         composer.set_unit(3, p, wrap(drum_evs))
 
-    # ---- always-on humanization (balfolk style + per-instrument DNA) ----
-    from workflows.humanize import humanize_composer
+    os.makedirs(f"{PROJ}/MIDI", exist_ok=True)
+
+    # ---- dual-version export: perfect (grid-locked) + humanized (DNA) ----
+    from workflows.humanize import export_dual
     hz_instruments = {
         LEAD: by_name("violin").humanize_dna,
         CHORDS: by_name("acoustic_guitar").humanize_dna,
         BASS: by_name("double_bass").humanize_dna,
         DRUMS: by_name("drum_kit").humanize_dna,
     }
-    hz = humanize_composer(composer, style="balfolk", seed=HUMANIZE_SEED,
-                           bpm=BPM, instruments=hz_instruments)
+    perfect_path = f"{PROJ}/MIDI/{BASE}-perfect.mid"
+    humanized_path = f"{PROJ}/MIDI/{BASE}-humanized.mid"
+    hz = export_dual(composer, perfect_path, humanized_path,
+                     style="balfolk", seed=HUMANIZE_SEED, bpm=BPM,
+                     instruments=hz_instruments)
 
-    ok, msg = composer.validate()
-    if not ok:
-        raise RuntimeError(f"validate() failed: {msg}")
-
-    os.makedirs(f"{PROJ}/MIDI", exist_ok=True)
-    midi_path = f"{PROJ}/MIDI/246-balfolk-storytelling-jig.mid"
-    composer.to_midi(midi_path)
-    return midi_path, meta, hz
+    paths = {"perfect": perfect_path, "humanized": humanized_path}
+    return paths, meta, hz
 
 
-def render_and_master(midi_path):
+def render_and_master(midi_path, label):
     from utilities.env import fluidsynth_bin
     from sound.render.fluidsynth import discover_soundfont
     from sound.effects.mastering import master, target_for_style
@@ -213,7 +216,7 @@ def render_and_master(midi_path):
 
     os.makedirs(f"{PROJ}/Audio", exist_ok=True)
     sf = discover_soundfont()
-    wav_path = f"{PROJ}/Audio/246-balfolk-storytelling-jig.wav"
+    wav_path = f"{PROJ}/Audio/{BASE}-{label}.wav"
     # -R no -C no: dry render — the melody-rest bar must read as a real gap.
     r = subprocess.run([fluidsynth_bin(), "-ni", "-g", "1.2", "-R", "no", "-C", "no",
                         "-F", wav_path, sf, midi_path], capture_output=True, text=True)
@@ -225,7 +228,7 @@ def render_and_master(midi_path):
     mastered, rep = master(audio, target_lufs=target, ceiling_db=-1.0, sample_rate=sr)
     write_wav(wav_path, mastered, sr, normalize=False)
 
-    ogg_path = f"{PROJ}/Audio/246-balfolk-storytelling-jig.ogg"
+    ogg_path = f"{PROJ}/Audio/{BASE}-{label}.ogg"
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", wav_path,
                     "-codec:a", "libopus", "-b:a", "128k", ogg_path],
                    capture_output=True, text=True)
@@ -278,7 +281,7 @@ def verify(midi_path):
         acc_in_rest += sum(1 for lo, hi in zip(rest_bar_lo, rest_bar_hi)
                            if any(lo <= o < hi for o in onsets))
 
-    # humanization proof: onsets should be OFF the 16th grid (jitter applied)
+    # grid audit: onsets OFF the 16th grid prove humanization ran (perfect=0).
     off_grid = sum(1 for onsets in track_onsets.values()
                    for o in onsets if o % SIXTEENTH != 0)
 
@@ -289,21 +292,24 @@ def verify(midi_path):
         "total_pitched": total_pitched,
         "melody_rest_violations": lead_in_rest,     # must be 0
         "accomp_bars_with_rest_content": acc_in_rest,  # should be 24 (one per rest bar)
-        "humanized_off_grid_onsets": off_grid,      # > 0 proves humanization ran
+        "off_grid_onsets": off_grid,                # perfect=0, humanized>0
     }
 
 
 if __name__ == "__main__":
-    midi_path, meta, hz = build()
-    wav_path, ogg_path, target, rep = render_and_master(midi_path)
-    v = verify(midi_path)
-    print("MIDI:", midi_path, os.path.getsize(midi_path), "bytes")
-    print("OGG:", ogg_path, os.path.getsize(ogg_path), "bytes")
-    print("MASTER target", target, "-> LUFS", rep["integrated_lufs"],
-          "dBTP", rep["true_peak_db"])
+    paths, meta, hz = build()
+    for label in ("perfect", "humanized"):
+        midi_path = paths[label]
+        wav_path, ogg_path, target, rep = render_and_master(midi_path, label)
+        v = verify(midi_path)
+        print(f"[{label.upper()}]")
+        print("  MIDI:", midi_path, os.path.getsize(midi_path), "bytes")
+        print("  OGG:", ogg_path, os.path.getsize(ogg_path), "bytes")
+        print("  MASTER target", target, "-> LUFS", rep["integrated_lufs"],
+              "dBTP", rep["true_peak_db"])
+        print("  VERIFY:", v)
     for voice, s in hz.items():
         print(f"  HUMANIZE {voice}: seed={s['seed']} mean_shift={s['mean_abs_shift_ticks']}t "
               f"max={s['max_abs_shift_ticks']}t vel_delta={s['mean_abs_vel_delta']} "
               f"(timing_ms={s['profile']['timing_sigma_ms']} layback={s['profile']['layback_ms']})")
-    print("VERIFY:", v)
     print("DONE")

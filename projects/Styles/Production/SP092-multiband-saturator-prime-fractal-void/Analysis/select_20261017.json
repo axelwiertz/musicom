@@ -1,0 +1,8 @@
+{
+  "date": "2026-10-17",
+  "method": "SP-092",
+  "method_module": "sound.effects.multiband_saturator",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Experimental/032-prime-fractal-void/MIDI/fractal_void.mid",
+  "n_well_formed": 237,
+  "registry_total": 48
+}

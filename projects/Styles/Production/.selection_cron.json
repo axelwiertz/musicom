@@ -1,12 +1,12 @@
 {
   "job": "random-style production (SP) layer-aligned",
-  "date": "2026-10-16",
-  "seed": 20261016,
-  "method": "SP-099",
-  "method_module": "sound.effects.ir_designer",
-  "method_desc": "Impulse Response Designer \u2014 10 algorithmic IR synthesis techniques (Convolution Playground-style)",
-  "source_midi": "/opt/data/repos/musicom/projects/Styles/Pop/ballad-hitl/HITL/round0/candidates/cand3-pViol-ldX-ar4-pdpuls-drful-bXo0.mid",
-  "source_project": "Pop/ballad-hitl/HITL/round0/candidates/cand3-pViol-ldX-ar4-pdpuls-drful-bXo0.mid",
+  "date": "2026-10-17",
+  "seed": 20261017,
+  "method": "SP-092",
+  "method_module": "sound.effects.multiband_saturator",
+  "method_desc": "6-Band Multiband Saturator w/ 15 Selectable Algorithms & Per-Band M/S Routing (Kreuzberg Audio Oberton-style)",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Experimental/032-prime-fractal-void/MIDI/fractal_void.mid",
+  "source_project": "Experimental/032-prime-fractal-void/MIDI/fractal_void.mid",
   "registry_size": 48,
   "recent_excluded": [
     "SP-006",
@@ -14,8 +14,8 @@
     "SP-028",
     "SP-032",
     "SP-074",
-    "SP-085",
     "SP-098",
+    "SP-099",
     "SP-103"
   ],
   "already_on_source": [],
@@ -46,6 +46,7 @@
     "SP-082",
     "SP-083",
     "SP-084",
+    "SP-085",
     "SP-086",
     "SP-090",
     "SP-091",
@@ -54,7 +55,6 @@
     "SP-095",
     "SP-096",
     "SP-097",
-    "SP-099",
     "SP-100",
     "SP-101",
     "SP-102",
@@ -64,6 +64,6 @@
     "SP-107",
     "SP-108"
   ],
-  "n_candidates": 345,
-  "n_well_formed": 235
+  "n_candidates": 349,
+  "n_well_formed": 237
 }

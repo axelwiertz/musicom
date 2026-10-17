@@ -1,0 +1,13 @@
+{
+  "lufs": -14.0,
+  "peak": 0.46493361075751916,
+  "silence_pct": 3.8695589919816724,
+  "rms": 0.1462421103820899,
+  "valid_windows": 32,
+  "hit_rate": 0.90625,
+  "mean_harmonic_energy": 0.6188194669797953,
+  "pitch_verdict": "PASS",
+  "dry_mean_harmonic_energy": 0.4930651190906009,
+  "he_retention": 1.2550461247819216,
+  "dry_hit_rate": 1.0
+}
