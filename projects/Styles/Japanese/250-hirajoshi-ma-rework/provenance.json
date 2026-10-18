@@ -1,0 +1,28 @@
+{
+  "project": "250-hirajoshi-ma-rework",
+  "classification": "ai-assisted",
+  "generator": "hirajoshi stochastic contour walk (phase1) + musicom rules (phase2) + humanize",
+  "style": "japanese hogaku",
+  "paradigm": "classical (sparse, ma, dynamic)",
+  "key": "D hirajoshi",
+  "bpm": 70,
+  "sources": ["Japanese/001-japanese-hirajoshi"],
+  "decision": "redesign (audit S5 two-phase + S6 provenance/index failed)",
+  "seed": 2971897743,
+  "form": "8 sections x 4 bars = 32 bars",
+  "variation_techniques": [
+    "transposition / register +12 (Ha2, Kyu)",
+    "density rise: koto arpeggio + shamisen 16th (Kyu, Kyu2)",
+    "augmentation x2 (Bridge)",
+    "inversion axis 74 (Kyu2)",
+    "retrograde + re-harmonize (Develop)"
+  ],
+  "artifacts": {
+    "phase1": "MIDI/250-hirajoshi-ma-rework-phase1.mid",
+    "perfect": "MIDI/250-hirajoshi-ma-rework-perfect.mid",
+    "humanized": "MIDI/250-hirajoshi-ma-rework-humanized.mid",
+    "perfect_ogg": "Audio/250-hirajoshi-ma-rework-perfect.ogg",
+    "humanized_ogg": "Audio/250-hirajoshi-ma-rework-humanized.ogg"
+  },
+  "provenance_version": "1.0"
+}

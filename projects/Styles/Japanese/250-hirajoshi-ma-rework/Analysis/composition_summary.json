@@ -1,0 +1,140 @@
+{
+  "seed": 2971897743,
+  "bpm": 70,
+  "key": "D hirajoshi",
+  "sections": 8,
+  "bars": 32,
+  "section_roots_midpoint": [
+    0,
+    2,
+    2,
+    3,
+    2,
+    3,
+    1,
+    0
+  ],
+  "global_deg": [
+    0,
+    0,
+    4,
+    4,
+    0,
+    2,
+    4,
+    0,
+    3,
+    2,
+    0,
+    4,
+    4,
+    3,
+    2,
+    1,
+    1,
+    2,
+    3,
+    4,
+    4,
+    3,
+    2,
+    1,
+    2,
+    1,
+    4,
+    3,
+    0,
+    0,
+    0,
+    0
+  ],
+  "voice_leading_fixed": 0,
+  "humanize": {
+    "Koto": {
+      "seed": 300161672043,
+      "profile": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.6,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 95,
+      "mean_abs_shift_ticks": 2.969,
+      "max_abs_shift_ticks": 11,
+      "mean_abs_vel_delta": 5.252,
+      "timing_sigma_ticks": 4.48
+    },
+    "Shakuhachi": {
+      "seed": 300161672044,
+      "profile": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.6,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 73,
+      "mean_abs_shift_ticks": 2.945,
+      "max_abs_shift_ticks": 9,
+      "mean_abs_vel_delta": 4.932,
+      "timing_sigma_ticks": 4.48
+    },
+    "Shamisen": {
+      "seed": 300161672045,
+      "profile": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.6,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 272,
+      "mean_abs_shift_ticks": 3.356,
+      "max_abs_shift_ticks": 16,
+      "mean_abs_vel_delta": 4.754,
+      "timing_sigma_ticks": 4.48
+    },
+    "Taiko": {
+      "seed": 300161672046,
+      "profile": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.008,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.6,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 60,
+      "mean_abs_shift_ticks": 0.783,
+      "max_abs_shift_ticks": 2,
+      "mean_abs_vel_delta": 3.1,
+      "timing_sigma_ticks": 1.12
+    }
+  },
+  "variations": {
+    "Jo": "sparse ma intro",
+    "Ha": "theme A (quantized raw contour)",
+    "Ha2": "transposition / register +12",
+    "Kyu": "climax: register +12, koto arpeggio, shamisen 16th (density rise)",
+    "Bridge": "augmentation (durations x2, half-speed koto)",
+    "Kyu2": "inversion around axis 74, re-quantized",
+    "Develop": "retrograde + re-harmonize",
+    "Jo2": "sparse ma outro, fade"
+  }
+}

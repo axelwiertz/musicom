@@ -1,0 +1,23 @@
+{
+  "artifact": "250-hirajoshi-ma-rework-perfect.mid",
+  "classification": "ai-assisted",
+  "generator": "hirajoshi stochastic contour walk + musicom rules",
+  "sources": [
+    "Japanese/001-japanese-hirajoshi"
+  ],
+  "parameters": {
+    "phase": 2,
+    "variant": "perfect",
+    "seed": 2971897743,
+    "bpm": 70,
+    "key": "D hirajoshi",
+    "style": "japanese hogaku",
+    "humanize_seed": 2971897743,
+    "humanize": "off"
+  },
+  "notes": "",
+  "sha256": "958872e01cd54973ca52206dddd82f19217cd961e91d681c63c2426c5d12e606",
+  "bytes": 4511,
+  "created_utc": "2026-10-18T01:15:20.378286+00:00",
+  "provenance_version": "1.0"
+}

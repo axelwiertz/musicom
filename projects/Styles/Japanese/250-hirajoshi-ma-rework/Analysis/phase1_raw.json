@@ -1,0 +1,695 @@
+[
+  {
+    "section": 0,
+    "section_name": "Jo",
+    "bar": 0,
+    "tick": 1057.0162419619105,
+    "pitch_index": 0.7550681257606126,
+    "velocity": 69,
+    "duration": 567.445680468677
+  },
+  {
+    "section": 0,
+    "section_name": "Jo",
+    "bar": 0,
+    "tick": 852.0915422491242,
+    "pitch_index": 0.9532672435971271,
+    "velocity": 73,
+    "duration": 870.8268254004448
+  },
+  {
+    "section": 0,
+    "section_name": "Jo",
+    "bar": 1,
+    "tick": 2903.941057494247,
+    "pitch_index": 0.6770009515922677,
+    "velocity": 85,
+    "duration": 1265.9889401639084
+  },
+  {
+    "section": 0,
+    "section_name": "Jo",
+    "bar": 1,
+    "tick": 2702.3629157279274,
+    "pitch_index": 0.5575056762924856,
+    "velocity": 79,
+    "duration": 1187.0939414148984
+  },
+  {
+    "section": 0,
+    "section_name": "Jo",
+    "bar": 1,
+    "tick": 3352.938603830389,
+    "pitch_index": 0.9433391906299559,
+    "velocity": 73,
+    "duration": 741.3716814587523
+  },
+  {
+    "section": 0,
+    "section_name": "Jo",
+    "bar": 2,
+    "tick": 4347.201274237269,
+    "pitch_index": 0.28708977728167395,
+    "velocity": 74,
+    "duration": 1949.0197554033396
+  },
+  {
+    "section": 0,
+    "section_name": "Jo",
+    "bar": 2,
+    "tick": 5469.391049518484,
+    "pitch_index": 0.3620579436778595,
+    "velocity": 58,
+    "duration": 2775.109446705339
+  },
+  {
+    "section": 0,
+    "section_name": "Jo",
+    "bar": 3,
+    "tick": 6207.42146430514,
+    "pitch_index": 0.24828188128262277,
+    "velocity": 72,
+    "duration": 2245.03334642633
+  },
+  {
+    "section": 0,
+    "section_name": "Jo",
+    "bar": 3,
+    "tick": 6281.34293702196,
+    "pitch_index": 0.14358888792539445,
+    "velocity": 84,
+    "duration": 1550.386529790073
+  },
+  {
+    "section": 1,
+    "section_name": "Ha",
+    "bar": 0,
+    "tick": 9400.164773622799,
+    "pitch_index": 0.9515822227772148,
+    "velocity": 89,
+    "duration": 2470.27995780705
+  },
+  {
+    "section": 1,
+    "section_name": "Ha",
+    "bar": 0,
+    "tick": 9206.526627255009,
+    "pitch_index": 0.9665004116023284,
+    "velocity": 69,
+    "duration": 1716.9779078141646
+  },
+  {
+    "section": 1,
+    "section_name": "Ha",
+    "bar": 1,
+    "tick": 10383.02237944369,
+    "pitch_index": 0.8480948968849557,
+    "velocity": 94,
+    "duration": 979.8523016131296
+  },
+  {
+    "section": 1,
+    "section_name": "Ha",
+    "bar": 1,
+    "tick": 11189.433423576691,
+    "pitch_index": 0.5982795818350718,
+    "velocity": 87,
+    "duration": 690.1292115125997
+  },
+  {
+    "section": 1,
+    "section_name": "Ha",
+    "bar": 2,
+    "tick": 12714.138815462653,
+    "pitch_index": 0.8891087833500297,
+    "velocity": 74,
+    "duration": 2790.5625702509274
+  },
+  {
+    "section": 1,
+    "section_name": "Ha",
+    "bar": 2,
+    "tick": 12981.713618603131,
+    "pitch_index": 0.6633573440648479,
+    "velocity": 60,
+    "duration": 2249.7105614410593
+  },
+  {
+    "section": 1,
+    "section_name": "Ha",
+    "bar": 2,
+    "tick": 13231.01030507466,
+    "pitch_index": 0.9138907880138024,
+    "velocity": 93,
+    "duration": 2876.186586238141
+  },
+  {
+    "section": 1,
+    "section_name": "Ha",
+    "bar": 3,
+    "tick": 14457.001117077585,
+    "pitch_index": 0.040153233766271515,
+    "velocity": 77,
+    "duration": 2693.4922735577697
+  },
+  {
+    "section": 1,
+    "section_name": "Ha",
+    "bar": 3,
+    "tick": 13742.677750350635,
+    "pitch_index": 0.7994451299992871,
+    "velocity": 66,
+    "duration": 1713.4560424810218
+  },
+  {
+    "section": 1,
+    "section_name": "Ha",
+    "bar": 3,
+    "tick": 13770.616847289113,
+    "pitch_index": 0.7749400281677499,
+    "velocity": 93,
+    "duration": 618.3394343960391
+  },
+  {
+    "section": 2,
+    "section_name": "Ha2",
+    "bar": 0,
+    "tick": 16722.363870454887,
+    "pitch_index": 0.8085112802128421,
+    "velocity": 93,
+    "duration": 1998.5528809639995
+  },
+  {
+    "section": 2,
+    "section_name": "Ha2",
+    "bar": 0,
+    "tick": 16400.578917117266,
+    "pitch_index": 0.9108293276228181,
+    "velocity": 66,
+    "duration": 2801.26769481731
+  },
+  {
+    "section": 2,
+    "section_name": "Ha2",
+    "bar": 0,
+    "tick": 16697.79653094248,
+    "pitch_index": 0.7462803297614311,
+    "velocity": 69,
+    "duration": 912.7437847579608
+  },
+  {
+    "section": 2,
+    "section_name": "Ha2",
+    "bar": 1,
+    "tick": 17342.554254294235,
+    "pitch_index": 0.880203467312402,
+    "velocity": 74,
+    "duration": 586.2738464318124
+  },
+  {
+    "section": 2,
+    "section_name": "Ha2",
+    "bar": 1,
+    "tick": 18757.267005889626,
+    "pitch_index": 0.02673760741938729,
+    "velocity": 76,
+    "duration": 2078.9730005784513
+  },
+  {
+    "section": 2,
+    "section_name": "Ha2",
+    "bar": 1,
+    "tick": 17796.123160639432,
+    "pitch_index": 0.0784810631003289,
+    "velocity": 94,
+    "duration": 2236.7318327821185
+  },
+  {
+    "section": 2,
+    "section_name": "Ha2",
+    "bar": 2,
+    "tick": 19816.171840684703,
+    "pitch_index": 0.130009326585904,
+    "velocity": 63,
+    "duration": 1877.5760822483264
+  },
+  {
+    "section": 2,
+    "section_name": "Ha2",
+    "bar": 2,
+    "tick": 20317.659764947348,
+    "pitch_index": 0.9504692337396314,
+    "velocity": 63,
+    "duration": 1834.968022632162
+  },
+  {
+    "section": 2,
+    "section_name": "Ha2",
+    "bar": 3,
+    "tick": 22775.42175227465,
+    "pitch_index": 0.9314436280081406,
+    "velocity": 79,
+    "duration": 778.2601005321861
+  },
+  {
+    "section": 2,
+    "section_name": "Ha2",
+    "bar": 3,
+    "tick": 22090.23160334268,
+    "pitch_index": 0.8873834723499889,
+    "velocity": 79,
+    "duration": 560.2770124057461
+  },
+  {
+    "section": 2,
+    "section_name": "Ha2",
+    "bar": 3,
+    "tick": 22358.925774784515,
+    "pitch_index": 0.850275395378775,
+    "velocity": 75,
+    "duration": 1892.0875911059143
+  },
+  {
+    "section": 3,
+    "section_name": "Kyu",
+    "bar": 0,
+    "tick": 24633.69734961126,
+    "pitch_index": 0.5450326759087212,
+    "velocity": 88,
+    "duration": 2114.098279581291
+  },
+  {
+    "section": 3,
+    "section_name": "Kyu",
+    "bar": 0,
+    "tick": 24601.742199742657,
+    "pitch_index": 0.6901722790504685,
+    "velocity": 72,
+    "duration": 2081.735216024221
+  },
+  {
+    "section": 3,
+    "section_name": "Kyu",
+    "bar": 1,
+    "tick": 25932.912651665654,
+    "pitch_index": 0.8359140392492332,
+    "velocity": 95,
+    "duration": 1969.3794826220987
+  },
+  {
+    "section": 3,
+    "section_name": "Kyu",
+    "bar": 1,
+    "tick": 26483.50546641775,
+    "pitch_index": 0.6471430476164244,
+    "velocity": 89,
+    "duration": 1415.3494455082584
+  },
+  {
+    "section": 3,
+    "section_name": "Kyu",
+    "bar": 2,
+    "tick": 27823.042299395096,
+    "pitch_index": 0.4807910383183792,
+    "velocity": 65,
+    "duration": 2086.1195318348873
+  },
+  {
+    "section": 3,
+    "section_name": "Kyu",
+    "bar": 2,
+    "tick": 28185.96845353167,
+    "pitch_index": 0.6229635264296991,
+    "velocity": 72,
+    "duration": 1939.314003290255
+  },
+  {
+    "section": 3,
+    "section_name": "Kyu",
+    "bar": 3,
+    "tick": 29311.830647323986,
+    "pitch_index": 0.8625324168364077,
+    "velocity": 84,
+    "duration": 2013.1534546500839
+  },
+  {
+    "section": 3,
+    "section_name": "Kyu",
+    "bar": 3,
+    "tick": 30377.94939189081,
+    "pitch_index": 0.01397846473373896,
+    "velocity": 87,
+    "duration": 2552.5382628648554
+  },
+  {
+    "section": 4,
+    "section_name": "Bridge",
+    "bar": 0,
+    "tick": 31539.442930337253,
+    "pitch_index": 0.1483136992780068,
+    "velocity": 72,
+    "duration": 1652.3745741828825
+  },
+  {
+    "section": 4,
+    "section_name": "Bridge",
+    "bar": 0,
+    "tick": 30792.535064074942,
+    "pitch_index": 0.16927801168083895,
+    "velocity": 80,
+    "duration": 2097.063094292559
+  },
+  {
+    "section": 4,
+    "section_name": "Bridge",
+    "bar": 1,
+    "tick": 33063.102449416365,
+    "pitch_index": 0.923619434035442,
+    "velocity": 61,
+    "duration": 2641.904899032698
+  },
+  {
+    "section": 4,
+    "section_name": "Bridge",
+    "bar": 1,
+    "tick": 32847.32311825896,
+    "pitch_index": 0.9886312132073953,
+    "velocity": 95,
+    "duration": 512.9350004723854
+  },
+  {
+    "section": 4,
+    "section_name": "Bridge",
+    "bar": 2,
+    "tick": 35953.08093027154,
+    "pitch_index": 0.3218637497125002,
+    "velocity": 84,
+    "duration": 2773.0989224629707
+  },
+  {
+    "section": 4,
+    "section_name": "Bridge",
+    "bar": 2,
+    "tick": 34781.20262041976,
+    "pitch_index": 0.4373643525637384,
+    "velocity": 70,
+    "duration": 2053.1395622342216
+  },
+  {
+    "section": 4,
+    "section_name": "Bridge",
+    "bar": 2,
+    "tick": 34820.52667255512,
+    "pitch_index": 0.4920393618020988,
+    "velocity": 64,
+    "duration": 2739.979375432629
+  },
+  {
+    "section": 4,
+    "section_name": "Bridge",
+    "bar": 3,
+    "tick": 37915.830644358895,
+    "pitch_index": 0.1628393138531635,
+    "velocity": 63,
+    "duration": 1315.2065920279795
+  },
+  {
+    "section": 4,
+    "section_name": "Bridge",
+    "bar": 3,
+    "tick": 37279.693791009784,
+    "pitch_index": 0.22978515674774727,
+    "velocity": 62,
+    "duration": 2878.3938993752786
+  },
+  {
+    "section": 5,
+    "section_name": "Kyu2",
+    "bar": 0,
+    "tick": 39080.06450750618,
+    "pitch_index": 0.276547004120831,
+    "velocity": 79,
+    "duration": 783.2363474535946
+  },
+  {
+    "section": 5,
+    "section_name": "Kyu2",
+    "bar": 0,
+    "tick": 39277.12133922273,
+    "pitch_index": 0.3589729702816225,
+    "velocity": 78,
+    "duration": 1446.5597318508794
+  },
+  {
+    "section": 5,
+    "section_name": "Kyu2",
+    "bar": 1,
+    "tick": 41275.21163016757,
+    "pitch_index": 0.1539702988407754,
+    "velocity": 65,
+    "duration": 2267.6800965727525
+  },
+  {
+    "section": 5,
+    "section_name": "Kyu2",
+    "bar": 1,
+    "tick": 41326.07306690365,
+    "pitch_index": 0.8546974823479715,
+    "velocity": 60,
+    "duration": 2327.1200884490554
+  },
+  {
+    "section": 5,
+    "section_name": "Kyu2",
+    "bar": 2,
+    "tick": 42891.90482616205,
+    "pitch_index": 0.5744006492069484,
+    "velocity": 75,
+    "duration": 1403.7042665793933
+  },
+  {
+    "section": 5,
+    "section_name": "Kyu2",
+    "bar": 2,
+    "tick": 42579.28023823543,
+    "pitch_index": 0.8341074394790653,
+    "velocity": 78,
+    "duration": 2113.9003479964476
+  },
+  {
+    "section": 5,
+    "section_name": "Kyu2",
+    "bar": 3,
+    "tick": 44545.3457515769,
+    "pitch_index": 0.6244054935660792,
+    "velocity": 84,
+    "duration": 1676.8190411539554
+  },
+  {
+    "section": 5,
+    "section_name": "Kyu2",
+    "bar": 3,
+    "tick": 44699.741044586815,
+    "pitch_index": 0.7992746259353591,
+    "velocity": 85,
+    "duration": 2107.9946079750416
+  },
+  {
+    "section": 5,
+    "section_name": "Kyu2",
+    "bar": 3,
+    "tick": 44949.87552702671,
+    "pitch_index": 0.9309345656130799,
+    "velocity": 95,
+    "duration": 2187.44211176271
+  },
+  {
+    "section": 6,
+    "section_name": "Develop",
+    "bar": 0,
+    "tick": 47046.631925941074,
+    "pitch_index": 0.6842109319631657,
+    "velocity": 89,
+    "duration": 2106.798177797134
+  },
+  {
+    "section": 6,
+    "section_name": "Develop",
+    "bar": 0,
+    "tick": 47807.14983759224,
+    "pitch_index": 0.8517821096723388,
+    "velocity": 88,
+    "duration": 1318.4950890548548
+  },
+  {
+    "section": 6,
+    "section_name": "Develop",
+    "bar": 0,
+    "tick": 47518.258798373936,
+    "pitch_index": 0.6453285124520587,
+    "velocity": 88,
+    "duration": 920.7051539712528
+  },
+  {
+    "section": 6,
+    "section_name": "Develop",
+    "bar": 1,
+    "tick": 49171.27050239857,
+    "pitch_index": 0.5533948353151951,
+    "velocity": 84,
+    "duration": 2779.850947407374
+  },
+  {
+    "section": 6,
+    "section_name": "Develop",
+    "bar": 1,
+    "tick": 49199.29478487385,
+    "pitch_index": 0.5436054882007211,
+    "velocity": 81,
+    "duration": 2656.241001103073
+  },
+  {
+    "section": 6,
+    "section_name": "Develop",
+    "bar": 1,
+    "tick": 48303.35349883739,
+    "pitch_index": 0.7230171519263934,
+    "velocity": 90,
+    "duration": 1988.9105697503185
+  },
+  {
+    "section": 6,
+    "section_name": "Develop",
+    "bar": 2,
+    "tick": 51210.73240336827,
+    "pitch_index": 0.889704437260734,
+    "velocity": 82,
+    "duration": 1781.946818906526
+  },
+  {
+    "section": 6,
+    "section_name": "Develop",
+    "bar": 2,
+    "tick": 51125.73101610952,
+    "pitch_index": 0.9644812711133536,
+    "velocity": 76,
+    "duration": 496.90523737709697
+  },
+  {
+    "section": 6,
+    "section_name": "Develop",
+    "bar": 3,
+    "tick": 52125.852158441485,
+    "pitch_index": 0.7094597465575078,
+    "velocity": 63,
+    "duration": 533.7556291910626
+  },
+  {
+    "section": 6,
+    "section_name": "Develop",
+    "bar": 3,
+    "tick": 53230.2887471016,
+    "pitch_index": 0.8443415538688364,
+    "velocity": 66,
+    "duration": 1870.2342655073012
+  },
+  {
+    "section": 6,
+    "section_name": "Develop",
+    "bar": 3,
+    "tick": 51952.30913205452,
+    "pitch_index": 0.5609764447732077,
+    "velocity": 81,
+    "duration": 1445.361842768105
+  },
+  {
+    "section": 7,
+    "section_name": "Jo2",
+    "bar": 0,
+    "tick": 54746.159880327796,
+    "pitch_index": 0.7360764157873533,
+    "velocity": 75,
+    "duration": 713.4880096020132
+  },
+  {
+    "section": 7,
+    "section_name": "Jo2",
+    "bar": 0,
+    "tick": 54902.41760175533,
+    "pitch_index": 0.6183322721371723,
+    "velocity": 84,
+    "duration": 2547.8429573774415
+  },
+  {
+    "section": 7,
+    "section_name": "Jo2",
+    "bar": 1,
+    "tick": 56856.87187961787,
+    "pitch_index": 0.9820702111960589,
+    "velocity": 95,
+    "duration": 1954.79478094352
+  },
+  {
+    "section": 7,
+    "section_name": "Jo2",
+    "bar": 1,
+    "tick": 57175.861273039685,
+    "pitch_index": 0.11141527804467373,
+    "velocity": 72,
+    "duration": 967.229844755145
+  },
+  {
+    "section": 7,
+    "section_name": "Jo2",
+    "bar": 2,
+    "tick": 57987.541202992965,
+    "pitch_index": 0.1158645127719609,
+    "velocity": 66,
+    "duration": 2768.0037582759264
+  },
+  {
+    "section": 7,
+    "section_name": "Jo2",
+    "bar": 2,
+    "tick": 57727.81349746052,
+    "pitch_index": 0.010163760397188425,
+    "velocity": 61,
+    "duration": 1770.203987914693
+  },
+  {
+    "section": 7,
+    "section_name": "Jo2",
+    "bar": 2,
+    "tick": 59055.449502700154,
+    "pitch_index": 0.13717733132701254,
+    "velocity": 68,
+    "duration": 2371.176079862282
+  },
+  {
+    "section": 7,
+    "section_name": "Jo2",
+    "bar": 3,
+    "tick": 59901.14203480989,
+    "pitch_index": 0.14452158077770108,
+    "velocity": 85,
+    "duration": 1015.13203652756
+  },
+  {
+    "section": 7,
+    "section_name": "Jo2",
+    "bar": 3,
+    "tick": 60625.426466392506,
+    "pitch_index": 0.8569861005695618,
+    "velocity": 94,
+    "duration": 2541.6067009308463
+  },
+  {
+    "section": 7,
+    "section_name": "Jo2",
+    "bar": 3,
+    "tick": 60991.01026599911,
+    "pitch_index": 0.020807276768509554,
+    "velocity": 67,
+    "duration": 1429.650383954162
+  }
+]

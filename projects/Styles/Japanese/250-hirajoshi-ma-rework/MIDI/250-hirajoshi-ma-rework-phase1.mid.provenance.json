@@ -1,0 +1,21 @@
+{
+  "artifact": "250-hirajoshi-ma-rework-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "hirajoshi stochastic contour walk (raw) + musicom rules (phase2)",
+  "sources": [
+    "Japanese/001-japanese-hirajoshi"
+  ],
+  "parameters": {
+    "phase": 1,
+    "seed": 2971897743,
+    "bpm": 70,
+    "key": "D hirajoshi",
+    "style": "japanese hogaku",
+    "notes": "pre-rules raw generative draft (single voice)"
+  },
+  "notes": "",
+  "sha256": "7c29de6465115aa6e751da70827136b9f6681d5e435aa29c1928b46382e0041f",
+  "bytes": 703,
+  "created_utc": "2026-10-18T01:15:20.341220+00:00",
+  "provenance_version": "1.0"
+}

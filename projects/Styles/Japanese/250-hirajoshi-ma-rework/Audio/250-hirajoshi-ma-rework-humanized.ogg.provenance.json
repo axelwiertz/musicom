@@ -1,0 +1,20 @@
+{
+  "artifact": "250-hirajoshi-ma-rework-humanized.ogg",
+  "classification": "ai-assisted",
+  "generator": "hirajoshi contour + musicom rules + FluidSynth + master()",
+  "sources": [
+    "Japanese/001-japanese-hirajoshi"
+  ],
+  "parameters": {
+    "variant": "humanized",
+    "format": "ogg",
+    "target_lufs": -18.0,
+    "ceiling_db": -1.0,
+    "soundfont": "FluidR3_GM.sf2"
+  },
+  "notes": "",
+  "sha256": "57afac1b14077ef92891f275acd5eb0963b6c0fd798b87d998a2e71ce8e03afd",
+  "bytes": 883100,
+  "created_utc": "2026-10-18T01:27:51.401886+00:00",
+  "provenance_version": "1.0"
+}

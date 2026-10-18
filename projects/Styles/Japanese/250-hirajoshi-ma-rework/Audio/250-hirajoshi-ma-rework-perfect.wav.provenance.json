@@ -1,0 +1,20 @@
+{
+  "artifact": "250-hirajoshi-ma-rework-perfect.wav",
+  "classification": "ai-assisted",
+  "generator": "hirajoshi contour + musicom rules + FluidSynth + master()",
+  "sources": [
+    "Japanese/001-japanese-hirajoshi"
+  ],
+  "parameters": {
+    "variant": "perfect",
+    "format": "wav",
+    "target_lufs": -18.0,
+    "ceiling_db": -1.0,
+    "soundfont": "FluidR3_GM.sf2"
+  },
+  "notes": "",
+  "sha256": "f523685360e39acb44842ef86b15fbeef7e4203d86cca69f6f211f59da04034d",
+  "bytes": 19904812,
+  "created_utc": "2026-10-18T01:27:51.385772+00:00",
+  "provenance_version": "1.0"
+}

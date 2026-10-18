@@ -1,0 +1,29 @@
+{
+  "chosen": "Japanese/001-japanese-hirajoshi",
+  "genre": "Japanese h\u014dgaku",
+  "primary_midi": "MIDI/japanese-hirajoshi.mid",
+  "standard_failures": [
+    "S5 two-phase artifacts: missing japanese-hirajoshi-phase1.mid",
+    "S6 provenance.json + index.html missing (only per-artifact .provenance.json sidecars present)"
+  ],
+  "passed": [
+    "S1 engine (UnitMatrixComposer)",
+    "S2 zero-drift (4 voice tracks @30720)",
+    "S3 rhythm-grid (0 off-grid)",
+    "S4 >=4 tracks (4 voices)"
+  ],
+  "redesign_required": true,
+  "source_identity": {
+    "genre": "Japanese h\u014dgaku",
+    "key": "D hirajoshi (D-Eb-G-Ab-C)",
+    "tempo_bpm": 70,
+    "instruments": [
+      "koto(108)",
+      "shakuhachi(75/pan-flute)",
+      "shamisen(106)",
+      "taiko(ch9)"
+    ],
+    "core_motif": "koto sparse plucks (0,2.5,3.5,4.0,6.5 beats); shakuhachi sustained wide-leap ornamented melody; shamisen 8th ostinato root+4th; ma (silence) structural"
+  },
+  "notes": "Sections=4 x 4 bars = 16 bars. Engine-compliant but pre-phase1, pre-index.html era."
+}
