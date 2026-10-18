@@ -1,0 +1,29 @@
+{
+  "artifact": "249-gamelan-parsimonious-subset-humanized.mid",
+  "classification": "ai-assisted",
+  "generator": "Gamelan parsimonious subset sequence (ABS-104) + musicom rules",
+  "sources": [],
+  "parameters": {
+    "phase": 2,
+    "version": "humanized",
+    "key": "D pentatonic (slendro-like)",
+    "bpm": 108,
+    "seed": 249,
+    "style": "gamelan",
+    "method": "ABS-104",
+    "total_bars": 32,
+    "sections": 4,
+    "voices": [
+      "Balungan",
+      "Gender",
+      "Kenong",
+      "Kendang"
+    ],
+    "humanize_seed": 249
+  },
+  "notes": "Phase 2 humanized: same concrete layer + style-derived seeded humanization (per-instrument DNA). Zero-drift safe.",
+  "sha256": "03edf2f8f7ae162f6a0bb433ee73d340412f4d403cde42b8821bfd0e248711a1",
+  "bytes": 7983,
+  "created_utc": "2026-10-17T23:17:41.296324+00:00",
+  "provenance_version": "1.0"
+}

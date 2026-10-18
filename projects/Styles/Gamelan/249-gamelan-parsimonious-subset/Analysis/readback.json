@@ -1,0 +1,119 @@
+{
+  "phase1": {
+    "size": 2245,
+    "n_tracks": 1,
+    "track_lengths": [
+      61440
+    ],
+    "zero_drift": true,
+    "audit": [
+      {
+        "channel": 0,
+        "n_onsets": 256,
+        "n_pitched": 246,
+        "off_grid": 253,
+        "out_scale": 0,
+        "out_chord": 117,
+        "track_length": 61440
+      }
+    ]
+  },
+  "perfect": {
+    "size": 7969,
+    "n_tracks": 4,
+    "track_lengths": [
+      61440,
+      61440,
+      61440,
+      61440
+    ],
+    "zero_drift": true,
+    "audit": [
+      {
+        "channel": 0,
+        "n_onsets": 192,
+        "n_pitched": 192,
+        "off_grid": 0,
+        "out_scale": 0,
+        "out_chord": 0,
+        "track_length": 61440
+      },
+      {
+        "channel": 1,
+        "n_onsets": 512,
+        "n_pitched": 512,
+        "off_grid": 0,
+        "out_scale": 0,
+        "out_chord": 0,
+        "track_length": 61440
+      },
+      {
+        "channel": 2,
+        "n_onsets": 48,
+        "n_pitched": 44,
+        "off_grid": 0,
+        "out_scale": 0,
+        "out_chord": 0,
+        "track_length": 61440
+      },
+      {
+        "channel": 9,
+        "n_onsets": 192,
+        "n_pitched": 0,
+        "off_grid": 0,
+        "out_scale": 0,
+        "out_chord": 0,
+        "track_length": 61440
+      }
+    ]
+  },
+  "humanized": {
+    "size": 7983,
+    "n_tracks": 4,
+    "track_lengths": [
+      61440,
+      61440,
+      61440,
+      61440
+    ],
+    "zero_drift": true,
+    "audit": [
+      {
+        "channel": 0,
+        "n_onsets": 192,
+        "n_pitched": 192,
+        "off_grid": 146,
+        "out_scale": 0,
+        "out_chord": 2,
+        "track_length": 61440
+      },
+      {
+        "channel": 1,
+        "n_onsets": 512,
+        "n_pitched": 512,
+        "off_grid": 396,
+        "out_scale": 0,
+        "out_chord": 3,
+        "track_length": 61440
+      },
+      {
+        "channel": 2,
+        "n_onsets": 48,
+        "n_pitched": 44,
+        "off_grid": 30,
+        "out_scale": 0,
+        "out_chord": 4,
+        "track_length": 61440
+      },
+      {
+        "channel": 9,
+        "n_onsets": 192,
+        "n_pitched": 0,
+        "off_grid": 140,
+        "out_scale": 0,
+        "out_chord": 0,
+        "track_length": 61440
+      }
+    ]
+  }
+}

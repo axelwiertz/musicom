@@ -1,0 +1,21 @@
+{
+  "artifact": "249-gamelan-parsimonious-subset-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "Gamelan parsimonious subsets - PRE-RULES raw draft (D-pentatonic random walk)",
+  "sources": [],
+  "parameters": {
+    "phase": 1,
+    "key": "D pentatonic (slendro-like)",
+    "bpm": 108,
+    "seed": 249,
+    "style": "gamelan",
+    "method": "ABS-104",
+    "total_bars": 32,
+    "sections": 4
+  },
+  "notes": "Phase 1 raw: single vibraphone voice, stochastic walk over the D-pentatonic pc pool, unquantized pitch + off-grid micro-timing, NO harmony, off-grid by design.",
+  "sha256": "2c4b6b3e08fad546491c6ce3131be8d732eb5d614d45dd99b1d3b264ce9ae4c7",
+  "bytes": 2245,
+  "created_utc": "2026-10-17T23:17:41.295717+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,47 @@
+{
+  "job": "random-style production (SP) layer-aligned",
+  "date": "2026-10-18",
+  "seed": 20261018,
+  "method": "SP-105",
+  "method_module": "sound.effects.spectral_panner",
+  "method_desc": "Spectral Brightness Panner - frequency-dependent auto-panner driven by spectral centroid/brightness analysis (Sound Particles Brightness Panner 2-style)",
+  "layer": "ABSOLUTE",
+  "params": {
+    "sample_rate": 44100,
+    "pan_params": {
+      "profile": "circular",
+      "mode": "direct",
+      "brightness_smooth": 0.85,
+      "virtual_center": true,
+      "virtual_center_threshold": 0.6,
+      "lfo_blend": 0.2,
+      "lfo_rate": 0.25,
+      "lfo_waveform": "sine"
+    },
+    "target_lufs": -14.0,
+    "ceiling_db": -1.0
+  },
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Japanese/001-japanese-hirajoshi/MIDI/japanese-hirajoshi.mid",
+  "source_bpm": 70.0,
+  "source_pitch_classes": [
+    0,
+    1,
+    2,
+    3,
+    7,
+    8
+  ],
+  "output_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP105-spectral-panner-japanese-hirajoshi/SP105-spectral-panner-japanese-hirajoshi.wav",
+  "output_ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP105-spectral-panner-japanese-hirajoshi/SP105-spectral-panner-japanese-hirajoshi.ogg",
+  "lufs": -14.015355805337615,
+  "peak": 0.8912509381337456,
+  "silence_pct": 5.470019436042297,
+  "rms": 0.1356489480320052,
+  "mono_corr": 0.9755913676799317,
+  "pitch_verdict": "PASS",
+  "hit_rate": 0.8545454545454545,
+  "he_mean": 0.5406190950015611,
+  "dry_he_mean": 0.5429335028514969,
+  "he_retention": 0.9957372167350506,
+  "dry_hit_rate": 0.8545454545454545
+}

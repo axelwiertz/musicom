@@ -1,0 +1,515 @@
+{
+  "project": "249-gamelan-parsimonious-subset",
+  "project_number": 249,
+  "style": "gamelan",
+  "method_id": "ABS-104",
+  "method_name": "Parsimonious Subset Sequence Composition (PSSC)",
+  "method_layer": "abstract",
+  "form": "head-solos-head",
+  "key": "D pentatonic (slendro-like)",
+  "key_pcs": [
+    2,
+    4,
+    6,
+    9,
+    11
+  ],
+  "bpm": 108,
+  "ticks_per_beat": 480,
+  "beats_per_bar": 4,
+  "bar_ticks": 1920,
+  "sections": [
+    {
+      "name": "Head",
+      "bars": 8
+    },
+    {
+      "name": "Solo1",
+      "bars": 8
+    },
+    {
+      "name": "Solo2",
+      "bars": 8
+    },
+    {
+      "name": "HeadReprise",
+      "bars": 8
+    }
+  ],
+  "total_bars": 32,
+  "total_ticks": 61440,
+  "seed": 249,
+  "subset_walk": [
+    {
+      "bar": 0,
+      "pattern": "p3_269",
+      "subset": [
+        2,
+        6,
+        9
+      ],
+      "tension": 2.0,
+      "target": 1.2
+    },
+    {
+      "bar": 1,
+      "pattern": "p2_26",
+      "subset": [
+        2,
+        6
+      ],
+      "tension": 0.5,
+      "target": 1.286
+    },
+    {
+      "bar": 2,
+      "pattern": "p2_24",
+      "subset": [
+        2,
+        4
+      ],
+      "tension": 1.5,
+      "target": 1.371
+    },
+    {
+      "bar": 3,
+      "pattern": "p3_2411",
+      "subset": [
+        2,
+        4,
+        11
+      ],
+      "tension": 3.0,
+      "target": 1.457
+    },
+    {
+      "bar": 4,
+      "pattern": "p2_411",
+      "subset": [
+        4,
+        11
+      ],
+      "tension": 1.0,
+      "target": 1.543
+    },
+    {
+      "bar": 5,
+      "pattern": "p2_611",
+      "subset": [
+        6,
+        11
+      ],
+      "tension": 1.0,
+      "target": 1.629
+    },
+    {
+      "bar": 6,
+      "pattern": "p2_49",
+      "subset": [
+        4,
+        9
+      ],
+      "tension": 1.0,
+      "target": 1.714
+    },
+    {
+      "bar": 7,
+      "pattern": "p2_611",
+      "subset": [
+        6,
+        11
+      ],
+      "tension": 1.0,
+      "target": 1.8
+    },
+    {
+      "bar": 8,
+      "pattern": "p2_49",
+      "subset": [
+        4,
+        9
+      ],
+      "tension": 1.0,
+      "target": 2.0
+    },
+    {
+      "bar": 9,
+      "pattern": "p2_611",
+      "subset": [
+        6,
+        11
+      ],
+      "tension": 1.0,
+      "target": 2.171
+    },
+    {
+      "bar": 10,
+      "pattern": "p3_4611",
+      "subset": [
+        4,
+        6,
+        11
+      ],
+      "tension": 3.5,
+      "target": 2.343
+    },
+    {
+      "bar": 11,
+      "pattern": "p2_46",
+      "subset": [
+        4,
+        6
+      ],
+      "tension": 1.5,
+      "target": 2.514
+    },
+    {
+      "bar": 12,
+      "pattern": "p3_469",
+      "subset": [
+        4,
+        6,
+        9
+      ],
+      "tension": 3.0,
+      "target": 2.686
+    },
+    {
+      "bar": 13,
+      "pattern": "p3_2411",
+      "subset": [
+        2,
+        4,
+        11
+      ],
+      "tension": 3.0,
+      "target": 2.857
+    },
+    {
+      "bar": 14,
+      "pattern": "p3_469",
+      "subset": [
+        4,
+        6,
+        9
+      ],
+      "tension": 3.0,
+      "target": 3.029
+    },
+    {
+      "bar": 15,
+      "pattern": "p3_6911",
+      "subset": [
+        6,
+        9,
+        11
+      ],
+      "tension": 3.0,
+      "target": 3.2
+    },
+    {
+      "bar": 16,
+      "pattern": "p3_2911",
+      "subset": [
+        2,
+        9,
+        11
+      ],
+      "tension": 3.0,
+      "target": 3.2
+    },
+    {
+      "bar": 17,
+      "pattern": "p3_2411",
+      "subset": [
+        2,
+        4,
+        11
+      ],
+      "tension": 3.0,
+      "target": 3.429
+    },
+    {
+      "bar": 18,
+      "pattern": "p3_469",
+      "subset": [
+        4,
+        6,
+        9
+      ],
+      "tension": 3.0,
+      "target": 3.657
+    },
+    {
+      "bar": 19,
+      "pattern": "p3_6911",
+      "subset": [
+        6,
+        9,
+        11
+      ],
+      "tension": 3.0,
+      "target": 3.886
+    },
+    {
+      "bar": 20,
+      "pattern": "p4_26911",
+      "subset": [
+        2,
+        6,
+        9,
+        11
+      ],
+      "tension": 5.0,
+      "target": 4.114
+    },
+    {
+      "bar": 21,
+      "pattern": "p3_4911",
+      "subset": [
+        4,
+        9,
+        11
+      ],
+      "tension": 3.5,
+      "target": 4.343
+    },
+    {
+      "bar": 22,
+      "pattern": "p4_26911",
+      "subset": [
+        2,
+        6,
+        9,
+        11
+      ],
+      "tension": 5.0,
+      "target": 4.571
+    },
+    {
+      "bar": 23,
+      "pattern": "p3_6911",
+      "subset": [
+        6,
+        9,
+        11
+      ],
+      "tension": 3.0,
+      "target": 4.8
+    },
+    {
+      "bar": 24,
+      "pattern": "p3_2911",
+      "subset": [
+        2,
+        9,
+        11
+      ],
+      "tension": 3.0,
+      "target": 3.0
+    },
+    {
+      "bar": 25,
+      "pattern": "p3_2411",
+      "subset": [
+        2,
+        4,
+        11
+      ],
+      "tension": 3.0,
+      "target": 2.714
+    },
+    {
+      "bar": 26,
+      "pattern": "p3_2911",
+      "subset": [
+        2,
+        9,
+        11
+      ],
+      "tension": 3.0,
+      "target": 2.429
+    },
+    {
+      "bar": 27,
+      "pattern": "p3_2411",
+      "subset": [
+        2,
+        4,
+        11
+      ],
+      "tension": 3.0,
+      "target": 2.143
+    },
+    {
+      "bar": 28,
+      "pattern": "p2_411",
+      "subset": [
+        4,
+        11
+      ],
+      "tension": 1.0,
+      "target": 1.857
+    },
+    {
+      "bar": 29,
+      "pattern": "p2_49",
+      "subset": [
+        4,
+        9
+      ],
+      "tension": 1.0,
+      "target": 1.571
+    },
+    {
+      "bar": 30,
+      "pattern": "p2_611",
+      "subset": [
+        6,
+        11
+      ],
+      "tension": 1.0,
+      "target": 1.286
+    },
+    {
+      "bar": 31,
+      "pattern": "p2_49",
+      "subset": [
+        4,
+        9
+      ],
+      "tension": 1.0,
+      "target": 1.0
+    }
+  ],
+  "voices": [
+    {
+      "name": "Balungan",
+      "program": 9,
+      "channel": 0,
+      "pitched": true
+    },
+    {
+      "name": "Gender",
+      "program": 11,
+      "channel": 1,
+      "pitched": true
+    },
+    {
+      "name": "Kenong",
+      "program": 12,
+      "channel": 2,
+      "pitched": true
+    },
+    {
+      "name": "Kendang",
+      "program": 0,
+      "channel": 9,
+      "pitched": false
+    }
+  ],
+  "inline_audit": {
+    "Balungan": {
+      "name": "Balungan",
+      "n_notes": 192,
+      "off_grid": 0,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "Gender": {
+      "name": "Gender",
+      "n_notes": 512,
+      "off_grid": 0,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "Kenong": {
+      "name": "Kenong",
+      "n_notes": 48,
+      "off_grid": 0,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "Kendang": {
+      "name": "Kendang",
+      "n_notes": 192,
+      "off_grid": 0,
+      "out_scale": 0,
+      "out_chord": 0
+    }
+  },
+  "humanize": {
+    "Balungan": {
+      "seed": 25149,
+      "profile": {
+        "timing_sigma_ms": 2.5,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 192,
+      "mean_abs_shift_ticks": 1.391,
+      "max_abs_shift_ticks": 5,
+      "mean_abs_vel_delta": 3.604
+    },
+    "Gender": {
+      "seed": 25150,
+      "profile": {
+        "timing_sigma_ms": 2.5,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 512,
+      "mean_abs_shift_ticks": 1.326,
+      "max_abs_shift_ticks": 5,
+      "mean_abs_vel_delta": 4.069
+    },
+    "Kenong": {
+      "seed": 25151,
+      "profile": {
+        "timing_sigma_ms": 2.5,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 48,
+      "mean_abs_shift_ticks": 1.0,
+      "max_abs_shift_ticks": 3,
+      "mean_abs_vel_delta": 4.438
+    },
+    "Kendang": {
+      "seed": 25152,
+      "profile": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.008,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 192,
+      "mean_abs_shift_ticks": 1.135,
+      "max_abs_shift_ticks": 5,
+      "mean_abs_vel_delta": 3.36
+    }
+  }
+}

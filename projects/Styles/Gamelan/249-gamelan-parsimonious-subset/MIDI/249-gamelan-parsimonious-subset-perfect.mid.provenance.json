@@ -1,0 +1,28 @@
+{
+  "artifact": "249-gamelan-parsimonious-subset-perfect.mid",
+  "classification": "ai-assisted",
+  "generator": "Gamelan parsimonious subset sequence (ABS-104) + musicom rules",
+  "sources": [],
+  "parameters": {
+    "phase": 2,
+    "version": "perfect",
+    "key": "D pentatonic (slendro-like)",
+    "bpm": 108,
+    "seed": 249,
+    "style": "gamelan",
+    "method": "ABS-104",
+    "total_bars": 32,
+    "sections": 4,
+    "voices": [
+      "Balungan",
+      "Gender",
+      "Kenong",
+      "Kendang"
+    ]
+  },
+  "notes": "Phase 2 perfect: grid-locked concrete layer (no humanization). Abstract parsimonious subset walk -> 4-voice gamelan texture, chord-tone quantized, 16th-grid snapped, zero-drift gated.",
+  "sha256": "7e129a4e9a5215361e142d3c50b1e4cc88ad843282894b869a866b3dcbc987a5",
+  "bytes": 7969,
+  "created_utc": "2026-10-17T23:17:41.295984+00:00",
+  "provenance_version": "1.0"
+}

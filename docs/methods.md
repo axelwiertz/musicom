@@ -126,6 +126,7 @@ Classification of active Musicom composition methods categorized by their primar
 | **116** | concrete | Petri Net Composition (PNC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Token-guided) | Grid-Locked / Continuous | Meso / Net State | $\mathcal{O}(P \cdot T \cdot F)$ | P-timed Petri net with probabilistic arc weights: places = music objects (notes, chords, motifs), transitions = music operators (transposition, inversion, concatenation), tokens = active threads/playback triggers. Net topology = macro-form, firing schedule = rhythm, concurrent tokens = polyphonic voices, place timing $	au(p)$ = note duration and IOI. Reconfigurable on-the-fly for live composition (minimalist phasing). Formal-model counterpoint to 002 Markov / 021 CA; deterministic-stochastic hybrid foil to 034 PCFG / 078 IMEC. |
 | **117** | concrete | Particle Swarm Optimization Composition (PSOC) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Fitness-guided, Key-bound) | Grid-Locked / Continuous | Macro / Global Optimum | $\mathcal{O}(I \cdot P \cdot D \cdot N)$ | Population of particles (candidate compositions) evolves via velocity-attraction to personal/global best positions. Continuous-valued positions encode note parameters per-voice per-section; fitness landscape guides convergence toward tonal, melodic, rhythmic, harmonic, textural, and structural objectives. Continuous-velocity metaheuristic counterpart to GA (003), SA (055), ACO (041) with fundamentally different search dynamics — vector-field guidance rather than recombination, cooling, or pheromone. |
 | **118** | concrete | Discrete Denoising Diffusion Probabilistic Model Composition (D3PM-C) | **AI-Driven** | Pitch, Rhythm, Harmony, Structure, Texture | Variable (Classifier-guided, Context-guided) | Grid-Locked / Continuous | Macro / Denoising Trajectory | $\mathcal{O}(T \cdot N \cdot D^2 \cdot H)$ | Applies discrete-state diffusion (absorbing/uniform transition matrices) directly to symbolic music tokens. Forward corruption via Markov transition matrix; reverse process learns to denoise step-by-step. Supports unconditional generation, flexible note-level infilling, and post-hoc classifier guidance. Discrete-token AI-Driven counterpart to 047 DSMG (continuous diffusion) and 106 NAPC (confidence-based refinement). |
+|| **119** | concrete | Tensor Decomposition Composition (TDC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Factor-guided) | Grid-Locked / Continuous | Macro / Low-Rank Core | $\mathcal{O}(R \cdot V \cdot T \cdot P)$ | Generates polyphonic music from CP/Tucker low-rank decomposition of a 3-way music tensor (voices x time x pitch). Factor matrices define voice character, rhythmic profile, and pitch vocabulary; core tensor controls their multiplicative interaction. Deterministic, designable, no-training counterpart to 085 NMF-C (2D to 3D), 046 VAE-LSI (learned vs designed), and 097 MaxEnt-C (structure via low-rank rather than constraints). |
 |||### Source
 |Sakellariou, J., Tria, F., Loreto, V. & Pachet, F. (2017). "Maximum entropy models capture melodic styles." *Scientific Reports* 7, 9172. arXiv:1610.03414. — Jaynes, E. T. (1957). "Information theory and statistical mechanics." *Physical Review* 106, 620–630.
 
@@ -301,6 +302,7 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 ||| **SP-115** | Auto-Wah / Envelope-Controlled Filter Synthesis (AWEFS) | **Post-Processing / DSP** | Dynamic Filter Sweep / Envelope-Controlled Wah Effect | Envelope follower modulates a resonant filter cutoff in response to input dynamics. Signal amplitude controls filter frequency via asymmetric attack/release level detection, creating a vowel-like automatic wah-wah effect without pedal control. Lowpass/bandpass/peaking filter modes; per-voice or shared-bus configuration. $\mathcal{O}(1)$ per sample. Candidate: `sound/effects/envelope_filter.py`. |
 || **SP-116** | Discrete Summation Formula Synthesis (DSFS) | **Synthesis Engines** | Closed-Form Bandlimited Harmonic / Inharmonic Timbre Generation | Generates complex harmonic/inharmonic spectra via closed-form trigonometric summation (Moorer 1976). Parameters $a$ (harmonic rolloff), $f_c$ (center frequency), $f_m$ (partial spacing), and $N$ (partial count) control the spectrum directly, with exact bandlimiting via $N$. Supports one-sided, two-sided, infinite-sum, and quadrature-stereo forms
 || **SP-117** | Harmonic Exciter Synthesis (HEX) | **Post-Processing / DSP** | Split-Band Harmonic Enhancement / Presence & Air Restoration | Post-processing DSP that enhances brightness and presence by generating low-order harmonics from the high-frequency band only (crossover 1–10 kHz). Asymmetric cubic soft clipper produces both odd and even harmonics; allpass phase shifter adds air. Per-voice or bus configuration, $O(1)$ per sample, zero latency. Candidate: `sound/effects/harmonic_exciter.py`. |
+|| **SP-118** | Transient Envelope Synthesis (TES) | **Post-Processing / DSP** | Transient/Sustain Envelope Sculpting | Level-independent transient and sustain shaping via Differential Envelope Technology (DET). Two envelope followers (fast attack ~1ms, slow attack ~15ms) in parallel; their difference isolates transient onsets and sustain decay without threshold parameters. Independent Attack (+/−) and Sustain (+/−) controls reshape the amplitude envelope sample-by-sample. Multiband (24 Bark bands) variant enables frequency-selective transient manipulation. Per-voice or shared-bus configuration, $O(1)$ per sample, zero latency. Candidate: `sound/effects/transient_shaper.py`. |
 |---|
 
 
@@ -26444,4 +26446,406 @@ When applied as a shared bus, all voices are summed first, then HEX processes th
 
 6. **Tuning the compressor**: If the compressor threshold is set too low, the exciter loses dynamic expression (everything clips the same amount). If too high, quiet passages get no enhancement. The classic setting: threshold just below the average RMS of the vocal HF band (≈ −18 dBFS for typical mixes), ratio 8:1, attack 1 ms, release 50 ms. For instruments (e.g., acoustic guitar), a higher threshold (−12 dBFS) and gentler ratio 4:1 works better.
 
-7. **Stereo balance**: When applied independently to left and right channels, slight asymmetry in the compressor envelopes can shift the stereo image. Either link the compressor detectors across channels (summed sidechain) or apply HEX to a summed mono bus and leave the L/R balance untouched.
+either link the compressor detectors across channels (summed sidechain) or apply HEX to a summed mono bus and leave the L/R balance untouched.
+
+### Source
+
+Hitchcock, F. L. (1927). "The expression of a tensor or a polyadic as a sum of products." *Journal of Mathematics and Physics* 6(1-4), 164–189. — Tucker, L. R. (1966). "Some mathematical notes on three-mode factor analysis." *Psychometrika* 31(3), 279–311. — Carroll, J. D. & Chang, J. J. (1970). "Analysis of individual differences in multidimensional scaling via an N-way generalization of 'Eckart–Young' decomposition." *Psychometrika* 35(3), 283–319. — Kolda, T. G. & Bader, B. W. (2009). "Tensor decompositions and applications." *SIAM Review* 51(3), 455–500.
+
+### Layer
+
+**concrete** — generates events that fill UnitMatrix cells. The reconstructed tensor entries decode directly to pitch/onset/duration/velocity values for each voice×time cell. Feeds generators/ directly via tensor reconstruction and thresholding.
+
+### Paradigm
+
+**Rules-Based** — all factor matrices ($\mathbf{A}$, $\mathbf{B}$, $\mathbf{C}$) and the core tensor ($\mathcal{G}$) are **explicitly designed** as structural templates by the composer or a higher-level planning method (e.g., 099 SSMC for form, 095 CTC for contour). No training, no stochastic sampling at decomposition time, no nature-inspired dynamics.
+
+### Description
+
+**Tensor Decomposition Composition (TDC)** represents a full polyphonic composition as a 3-way tensor:
+
+$$\mathcal{X} \in \mathbb{R}^{V \times T \times P}$$
+
+where $V$ = number of voices, $T$ = number of time slots (ticks/16th-notes), and $P$ = number of pitch classes or MIDI note numbers (typically 12 for chroma or 128 for full MIDI). The entry $\mathcal{X}_{v,t,p}$ indicates whether voice $v$ plays pitch $p$ at time $t$ (binary for piano-roll) or encodes a continuous velocity/intensity value.
+
+The method composes by **designing low-rank factor matrices and optionally a core tensor**, then **reconstructing** $\mathcal{X}$ via the chosen decomposition and **thresholding** entries to produce symbolic note events.
+
+**CP decomposition** (CANDECOMP/PARAFAC, 1927/1970):
+
+$$\mathcal{X} \approx \sum_{r=1}^{R} \mathbf{a}_r \circ \mathbf{b}_r \circ \mathbf{c}_r
+\quad\Leftrightarrow\quad
+\mathcal{X}_{v,t,p} \approx \sum_{r=1}^{R} a_{v,r} \, b_{t,r} \, c_{p,r}$$
+
+Each rank-1 component is an outer product of three factor vectors:
+- **Voice factor** $\mathbf{a}_r \in \mathbb{R}^{V}$: weights how each voice participates in component $r$. One-hot vectors give independent voices; overlapping entries give shared material.
+- **Time factor** $\mathbf{b}_r \in \mathbb{R}^{T}$: the rhythmic/profile envelope — where in time component $r$ fires. Periodic patterns = meter; clustered bursts = motifs; block structure = section boundaries.
+- **Pitch factor** $\mathbf{c}_r \in \mathbb{R}^{P}$: the pitch-class content. Sparse = single pitch or interval; dense = chord/scale.
+
+Summing $R$ such components builds the complete multi-layered fabric. Rank $R$ is the **compositional complexity dial**: $R=1$ = unison homophony, $R$ = number of simultaneous texture layers.
+
+**Tucker decomposition** (1966):
+
+$$\mathcal{X} \approx \mathcal{G} \times_1 \mathbf{A} \times_2 \mathbf{B} \times_3 \mathbf{C}
+\quad\Leftrightarrow\quad
+\mathcal{X}_{v,t,p} \approx \sum_{r_1=1}^{R_1} \sum_{r_2=1}^{R_2} \sum_{r_3=1}^{R_3}
+g_{r_1 r_2 r_3} \, a_{v,r_1} \, b_{t,r_2} \, c_{p,r_3}$$
+
+Tucker generalizes CP by allowing each mode its own rank $(R_1, R_2, R_3)$ and introducing a **core tensor** $\mathcal{G} \in \mathbb{R}^{R_1 \times R_2 \times R_3}$ that captures multiplicative interactions. CP is the special case where $R_1 = R_2 = R_3 = R$ and $\mathcal{G}$ is super-diagonal ($g_{r_1 r_2 r_3} = 1$ if $r_1 = r_2 = r_3$, else 0).
+
+**Key musical mappings:**
+
+| Tensor mode | Musical meaning | Design approach |
+|---|---|---|
+| $\mathbf{A}$ ($V \times R$) | Voice participation weights | One-hot = independent voice, mixed = shared material, sparse = solo/tutti |
+| $\mathbf{B}$ ($T \times R$) | Rhythmic envelope per component | Sinusoidal = periodic meter, Gaussian envelope = motif, boxcar = section on/off |
+| $\mathbf{C}$ ($P \times R$) | Pitch vocabulary per component | Sparse binary = scale tones, continuous = chord tones with weights |
+| $\mathcal{G}$ ($R_1 \times R_2 \times R_3$) | Cross-mode interaction weights | Diagonal = independent textures, dense = coupled voice-time-pitch clusters |
+
+**Section structure:**
+
+The macro-form is designed as a **block-diagonal tensor**:
+
+$$\mathcal{X} = \mathrm{diag}(\mathcal{X}_1, \mathcal{X}_2, \ldots, \mathcal{X}_S)$$
+
+where each section $s$ has its own factor triplet $(\mathbf{A}_s, \mathbf{B}_s, \mathbf{C}_s, \mathcal{G}_s)$. Sections can:
+- **Share** factor matrices (thematic unity, same pitch vocab across sections)
+- **Transform** factors (transpose $\mathbf{C}$ for modulation, stretch $\mathbf{B}$ for rhythmic augmentation)
+- **Replace** factors (contrast — new material for bridge/development)
+- **Interpolate** factors (smooth transition between section identities via convex combination)
+
+This is the **tensor-based algebraic** counterpart to:
+- **085 NMF-C**: generalizes from 2D matrix factorization to multi-way tensor decomposition; adds the core tensor interaction mode.
+- **046 VAE-LSI**: deterministic/designable alternative to learned latent spaces.
+- **097 MaxEnt-C**: structural complexity via low-rank approximation rather than constrained entropy maximization.
+- **024 Additive Mass**: symbolic-polyphonic sibling of additive-synthesis sinusoid stacks, but operating on pitch×time×voice rather than frequency×time.
+
+### Musical Elements Framework
+
+- **PITCH**: Factor matrix $\mathbf{C}$ defines the pitch vocabulary (scale/chord content) per component. The number of non-zero entries in $\mathbf{c}_r$ governs interval-class variety. Core tensor $\mathcal{G}$ controls which component-pitch combinations activate together, producing chord structures and voice-leading.
+- **RHYTHM**: Factor matrix $\mathbf{B}$ encodes onset patterns via non-zero entries and relative magnitudes. Periodic $\mathbf{b}_r$ = metered patterns; clustered non-zero blocks = motivic cells; exponentially decaying envelopes = resonant/damped patterns. $\mathbf{B}$ can encode tuplets, syncopation, and cross-rhythms through its row sparsity pattern.
+- **HARMONY**: Emerges from multi-component interaction: when $R > 1$, simultaneous $\mathbf{c}_r$ vectors with overlapping pitches = chord voicings. The core tensor $\mathcal{G}$ determines which components are co-active (non-zero core entries = simultaneous voices/chords). A $1 \times 1 \times 1$ core produces no harmonic interaction (pure monophony); dense core = rich harmonic combinations.
+- **STRUCTURE**: Section-level block-diagonal form. Factor sharing across sections = thematic development; factor replacement = section contrast. The rank $R$ itself can vary per section (simple intro → complex development → sparse coda).
+- **TEXTURE**: Governed by tensor density (fraction of nonzero $\mathcal{X}$ entries after thresholding) and rank $R$. Low density + low rank = pointillistic sparse texture; high density + high rank = dense polyphonic mass. The distribution of non-zeros across the three modes determines homophony vs. polyphony vs. monody.
+
+### UnitMatrix Integration
+
+- **Voices** = Mode 1 of the tensor. Each slice $\mathcal{X}_{v,:,:}$ is the complete piano-roll for voice $v$. Independent voices arise from one-hot rows in $\mathbf{A}$; shared material from mixed rows.
+- **Sections** = Block-diagonal structure in time mode. Each section $s$ occupies a contiguous column block $[t_{\text{start}}, t_{\text{end}}]$ with its own factor design. Adjacent sections can share factors (smooth) or use disjoint factors (contrast).
+- **Cells** = Individual entries $\mathcal{X}_{v,t,p}$. After thresholding ($\mathcal{X}_{v,t,p} > \theta$), each active entry maps to a note-on event at pitch $p$, time $t$, in voice $v$. Continuous values before threshold encode velocity.
+- **Section boundaries** are enforced by zero-buffer regions in $\mathbf{B}$ or by designing $\mathbf{B}_s$ to have compact support within the section.
+
+### Pitfalls
+
+- **CP rank selection**: The optimal CP rank $R$ for a given structural design is unknown a priori. Too low ($R < \text{true complexity}$) → merged voices, lost texture layers. Too high ($R \gg \text{true complexity}$) → hallucinated spurious activations. Use core consistency diagnostic (CORCONDIA, Bro & Kiers 2003) or cross-validation on a held-out section.
+- **Tucker core explosion**: Core size grows as $\prod_k R_k$. For three modes with $R = 8$, the core has $8^3 = 512$ entries — manageable. For Tucker-2 (two modes reduced), the third mode is left full-rank.
+- **Quantization gap**: The real-valued reconstruction $\hat{\mathcal{X}}$ must be thresholded to produce binary piano-roll entries. A fixed threshold $\theta$ may produce too many (voice bleed) or too few (missing notes) activations. Adaptive thresholding (per-voice mean + $k \cdot \sigma$) is recommended.
+- **Sign problem**: Standard CP/Tucker produces negative entries. These have no musical interpretation as note activations. Use non-negative tensor factorization (NNCP, NNTF) with multiplicative update rules (Lee & Seung style), or apply rectification $\max(0, \cdot)$ after reconstruction.
+- **Sparsity hallucination**: Real music tensors are extremely sparse ($<1\%$ non-zero). Low-rank decompositions of sparse tensors can overfit by distributing small amounts of mass across many components. Regularize with L1 penalty on the reconstruction or use binary tensor decomposition (BTD, Makhzani & Frey 2015).
+- **Computational scaling**: CP-ALS (alternating least squares) is $\mathcal{O}(R \cdot V \cdot T \cdot P)$ per iteration. Tucker HOSVD is $\mathcal{O}(V \cdot T \cdot P \cdot \min(V,T,P))$. For compositions with $V=16$ voices, $T=10^4$ time slots, $P=128$, Tucker HOSVD is $\sim 10^9$ operations — feasible but demanding. Use randomized SVD (Halko et al. 2011) for the initial HOSVD truncation.
+
+### Candidate code path
+
+`generators/tensor_decomposition_composer.py` — implements CP-ALS, Tucker-HOSVD, and NNCP reconstruction; factor design DSL; thresholding pipeline; and section-block assembler that feeds directly into the UnitMatrix composer validation gate.
+
+# Sound Production Method SP-118 — Transient Envelope Synthesis (TES)
+
+### Source
+
+[1] Tilgner, R. (1998). "Transient Designer." SPL Audio / elysia GmbH. Differential Envelope Technology (DET) — U.S. Patent/design covered by SPL's analog and digital transient shaping implementations. See: SPL Transient Designer 2 Manual (9946), https://spl.audio/wp-content/uploads/transient_designer_2_9946_manual.pdf
+
+[2] elysia GmbH. "The Transient Designer Story, Part 1 & 2." https://www.elysia.com/transient-designer-story/
+
+[3] Audio Toolkit Blog. (2015–2016). "Anatomy of a Transient Shaper." Parts 1 & 2. https://blog.audio-tk.com/
+
+[4] HackAudio. (2017). "Transient Shaper." *HackAudio Textbook*, Chapter 17. https://github.com/HackAudio/textbookcode/tree/master/Ch_17
+
+[5] Zölzer, U. (2011). *DAFX: Digital Audio Effects* (2nd ed.). John Wiley & Sons. — Chapter 3: Dynamics Processing.
+
+[6] Sadik, A. & Oklobdzija, V. G. (2011). "Transient Shaper for Audio Signals." *IEEE International Symposium on Circuits and Systems (ISCAS)*, 1203–1206.
+
+[7] Sevagh. (2020). "Bark-scale multi-band transient shaper." Python/NumPy implementation. https://github.com/sevagh/multiband-transient-shaper
+
+### Layer
+
+**absolute** — sound production (Post-Processing / DSP). TES applies differential-envelope transient shaping as a post-processing stage on rendered audio buffers. The candidate code path is `sound/effects/transient_shaper.py`, pluggable into `workflows.musicom_workflow.produce(method="SP-118")` as a post-render DSP stage in the produce pipeline.
+
+### Description
+
+Transient Envelope Synthesis (TES) is a post-processing DSP effect that independently manipulates the attack (transient) and sustain (decay/body) portions of a sound's amplitude envelope. Unlike a compressor (SP-008 DRC), TES uses **level-independent detection** — it measures the *rate of change* of the amplitude envelope rather than absolute level, so a quiet transient and a loud transient are processed with proportional accuracy without any threshold parameter.
+
+The core innovation is **Differential Envelope Technology (DET)**: two envelope followers run in parallel with different attack time constants. Their difference isolates the transient onset region from the steady-state body. Attack and sustain gains are applied independently, giving the user two knobs (Attack + / − and Sustain + / −) that reshape the envelope without the threshold, ratio, attack, and release complexity of a compressor.
+
+TES operates sample-by-sample with zero latency, making it suitable for real-time monitoring. A multiband variant splits the signal into 24 Bark-scale frequency bands and processes each band independently, enabling frequency-selective transient shaping (e.g., shorten the sustain of a kick while leaving the hi-hat untouched).
+
+**Key differentiators from related methods:**
+- **SP-008 DRC (Multi-band Compression)**: threshold-based; attack/release control the *timing of gain reduction*, not separate envelope components. TES has no threshold and processes attack vs. sustain independently.
+- **SP-104 SRR (Bitcrushing)**: lo-fi degradation effect. TES is a dynamics effect that reshapes the existing envelope.
+- **SP-107 LBL (Brickwall Limiter)**: prevents peaks from exceeding a threshold. TES modifies the attack/sustain character.
+- **SP-114 SDCX (Spectral Dynamics)**: per-band compression with thresholds. TES is threshold-free, uses DET rather than level detection.
+
+### Technical Mechanics
+
+#### Differential Envelope Technology (DET)
+
+Let the input signal be $x[n]$. Two first-order peak envelope followers run in parallel:
+
+**Fast envelope** (attack time constant $\\tau_f \\approx 1$ ms):
+$$e_f[n] = \\alpha_f \\cdot e_f[n-1] + (1 - \\alpha_f) \\cdot |x[n]|$$
+
+**Slow envelope** (attack time constant $\\tau_s \\approx 15$–$20$ ms):
+$$e_s[n] = \\alpha_s \\cdot e_s[n-1] + (1 - \\alpha_s) \\cdot |x[n]|$$
+
+where the one-pole coefficients are derived from the time constants:
+$$\\alpha_f = e^{-1/(\\tau_f \\cdot f_s)}, \\qquad \\alpha_s = e^{-1/(\\tau_s \\cdot f_s)}$$
+
+**Attack control signal**: the difference between the fast and slow envelopes captures the transient onset:
+$$d_a[n] = \\max(e_f[n] - e_s[n], \\, 0)$$
+
+When $d_a[n] > 0$, a transient is in progress (fast envelope ahead of slow). When the signal is steady-state, both envelopes converge and $d_a[n] \\to 0$.
+
+**Sustain control signal**: after the peak, the signal decays. The fast envelope chases the falling signal faster than the slow envelope, so the difference inverts:
+$$d_s[n] = \\max(e_s[n] - e_f[n], \\, 0)$$
+
+During steady-state decay, $d_s[n] > 0$ indicates the sustain/body region.
+
+#### Normalization and Gain Application
+
+The difference signals are normalized to $[0, 1]$ using a peak-tracking normalizer:
+$$\\hat{d}_a[n] = \\frac{d_a[n]}{\\max(\\bar{d}_a, \\, \\varepsilon)}, \\qquad \\bar{d}_a = \\max_k d_a[k] \\text{ over a sliding window}$$
+
+In practice, exponential moving-average normalization avoids gain pumping:
+$$\\bar{d}_a[n] = \\max(\\beta \\cdot \\bar{d}_a[n-1] + (1-\\beta) \\cdot d_a[n], \\, \\varepsilon)$$
+
+**Attack gain shaping**:
+$$g_a[n] = 1 + A \\cdot \\hat{d}_a[n]$$
+
+where $A \\in [-1, 1]$ is the attack parameter (negative = attenuate attack, positive = boost attack).
+
+**Sustain gain shaping**:
+$$g_s[n] = 1 + S \\cdot \\hat{d}_s[n]$$
+
+where $S \\in [-1, 1]$ is the sustain parameter.
+
+#### Combined Output
+
+The total gain is the product of attack and sustain gains, blended smoothly:
+$$g[n] = g_a[n] \\cdot g_s[n]$$
+$$y[n] = x[n] \\cdot g[n]$$
+
+This yields four quadrants of operation:
+| Attack $A$ | Sustain $S$ | Effect | Typical Use |
+|:---|:---|:---|:---|
+$> 0$ | $0$ | Boost only attack | More punch/snap |
+$< 0$ | $0$ | Soften attack | Mellow percussive hits |
+$0$ | $> 0$ | Lengthen sustain | More body/decay |
+$0$ | $< 0$ | Shorten sustain/Tight | Gate-like decay |
+|$> 0$ | $< 0$ | Punchy + tight | Drums: boost attack + shorten tail |
+$< 0$ | $> 0$ | Soft attack + lush sustain | Pads/legato strings |
+
+#### Release Smoothing
+
+To prevent discontinuities when the gain switches between attack and sustain regions, the gain envelope is smoothed with a one-pole lowpass filter:
+$$g_{\text{smooth}}[n] = \gamma \cdot g_{\text{smooth}}[n-1] + (1-\gamma) \cdot g[n]$$
+
+with release time constant $\\tau_r \\approx 1$ ms, $\\gamma = e^{-1/(\\tau_r \\cdot f_s)}$.
+
+#### Complexity
+
+All operations are $\\mathcal{O}(1)$ per sample:
+| Stage | Operations | Notes |
+|:---|:---|:---|
+| Rectification | $1$ abs/sample | $|x[n]|$ |
+| Fast env follower | $2$ mult + $1$ add/sample | One-pole IIR |
+| Slow env follower | $2$ mult + $1$ add/sample | One-pole IIR |
+| Difference + rectification | $2$ sub + $2$ max/sample | $d_a$, $d_s$ |
+| Gain compute | $2$ mult + $2$ add/sample | $A \\cdot \\hat{d}_a$, $S \\cdot \\hat{d}_s$ |
+| Gain smoothing | $2$ mult + $1$ add/sample | One-pole LPF |
+| Output | $1$ mult/sample | $y = x \\cdot g$ |
+| **Total** | **$\\sim 12$ mult + $\\sim 6$ add/sample** | No FFT, no filter banks in single-band mode |
+
+#### Multiband Extension (Bark-Scale)
+
+For frequency-selective transient shaping, the signal is split into $B = 24$ Bark-scale frequency bands via a constant-Q filterbank (or STFT-based decomposition). Steps:
+
+1. Filter $x[n]$ into $B$ band signals $x_b[n]$ via Gammatone or biquad bandpass filters centered at Bark-scale frequencies $f_b$ (20 Hz – 20 kHz, 24 bands).
+2. For each band $b$, compute $d_{a,b}[n]$, $d_{s,b}[n]$, $g_{a,b}[n]$, $g_{s,b}[n]$ independently using the same DET core.
+3. Apply per-band gain: $y_b[n] = x_b[n] \\cdot g_b[n]$.
+4. Sum all bands: $y[n] = \\sum_{b=1}^{B} y_b[n]$.
+
+Multiband TES enables sculpting attack/sustain independently per frequency region: e.g., boost attack of high-frequencies (snare crack) while shortening sustain of low-frequencies (kick rumble). Cost scales as $\\mathcal{O}(B)$ per sample (~$24\\times$ single-band cost).
+
+#### Python/NumPy Implementation Sketch
+
+```python
+import numpy as np
+
+class TransientShaper:
+    """
+    Single-band transient shaper using Differential Envelope Technology (DET).
+    Level-independent attack/sustain shaping.
+    """
+    def __init__(self, sr=44100):
+        self.sr = sr
+        # Time constants (seconds)
+        self.attack_time_fast = 0.001    # 1 ms fast attack
+        self.attack_time_slow = 0.015   # 15 ms slow attack
+        self.release_time = 0.001       # 1 ms gain smoothing
+        
+        # One-pole coefficients
+        self.alpha_f = np.exp(-1.0 / (self.attack_time_fast * self.sr))
+        self.alpha_s = np.exp(-1.0 / (self.attack_time_slow * self.sr))
+        self.gamma = np.exp(-1.0 / (self.release_time * self.sr))
+        
+        # State
+        self.env_fast = 0.0
+        self.env_slow = 0.0
+        self.gain_smooth = 1.0
+        self.peak_norm = 1e-6  # running peak for normalization
+        
+        # Parameters (-1..1)
+        self.attack = 0.0
+        self.sustain = 0.0
+
+    def process(self, x):
+        \"\"\"
+        Process mono audio buffer.
+        x: ndarray shape (N,) float32/float64
+        Returns: ndarray same shape
+        \"\"\"
+        n = len(x)
+        y = np.empty_like(x)
+        
+        for i in range(n):
+            # 1. Rectify
+            s = abs(x[i])
+
+            # 2. Envelope followers
+            self.env_fast = self.alpha_f * self.env_fast + (1 - self.alpha_f) * s
+            self.env_slow = self.alpha_s * self.env_slow + (1 - self.alpha_s) * s
+
+            # 3. Differential signals
+            d_a = max(self.env_fast - self.env_slow, 0.0)
+            d_s = max(self.env_slow - self.env_fast, 0.0)
+
+            # 4. Running normalization
+            self.peak_norm = max(0.999 * self.peak_norm + 0.001 * (d_a + d_s), 1e-12)
+
+            # 5. Gain computation
+            nd_a = d_a / self.peak_norm
+            nd_s = d_s / self.peak_norm
+            g = (1.0 + self.attack * nd_a) * (1.0 + self.sustain * nd_s)
+
+            # 6. Gain smoothing
+            self.gain_smooth = self.gamma * self.gain_smooth + (1.0 - self.gamma) * g
+
+            # 7. Output
+            y[i] = x[i] * self.gain_smooth
+
+        return y
+```
+
+#### Multiband Python Sketch
+
+```python
+from scipy.signal import butter, sosfilt
+
+class MultibandTransientShaper:
+    def __init__(self, sr=44100, n_bands=24):
+        self.sr = sr
+        self.n_bands = n_bands
+        self.bands = [TransientShaper(sr) for _ in range(n_bands)]
+        # Bark-scale center frequencies (Hz)
+        self.bark_freqs = [
+            50, 150, 250, 350, 450, 570, 700, 840, 1000, 1170,
+            1370, 1600, 1850, 2150, 2500, 2900, 3400, 4000, 4800,
+            5800, 7000, 8500, 10500, 13500
+        ]
+        # Build 2nd-order Butterworth bandpass filters
+        self._build_filterbank()
+
+    def _build_filterbank(self):
+        self._sos = []
+        freqs = [0] + self.bark_freqs + [self.sr/2]
+        for i in range(self.n_bands):
+            low = freqs[i]
+            high = freqs[i+2]
+            sos = butter(2, [low / (self.sr/2), high / (self.sr/2)],
+                         btype='band', output='sos')
+            self._sos.append(sos)
+
+    def process(self, x):
+        y = np.zeros_like(x)
+        zi = [np.zeros((sos.shape[0], 2)) for sos in self._sos]
+        for b in range(self.n_bands):
+            band, zi[b] = sosfilt(self._sos[b], x, zi=zi[b])
+            y += self.bands[b].process(band)
+        return y
+```
+
+### Musical Elements Framework
+
+**PITCH**: TES does not generate or alter pitch. It operates on the amplitude envelope of each frequency band independently (multiband mode) or the full-band signal. Pitch perception is unaffected because the spectral content is preserved — only the temporal envelope is reshaped. The *perception* of pitch can be enhanced: boosting attack on a bass note makes the pitch onset clearer; extending sustain on a chord makes the pitch blend more resonant.
+
+**RHYTHM**: TES directly affects rhythmic perception by reshaping the transient-to-sustain ratio of each note/event:
+- Attack boost ($A > 0$): crisper, more defined rhythmic articulation — each note has a sharper onset, improving percussive clarity in fast passages.
+- Attack cut ($A < 0$): softer, more legato feel — notes blend together, smoothing rhythmic transitions.
+- Sustain boost ($S > 0$): longer ring — notes bleed into the following beat, creating a washier, more continuous rhythmic texture.
+- Sustain cut ($S < 0$): shorter, tighter notes — staccato effect even without changing note durations.
+The resulting rhythmic feel is the *interaction* of the programmed note rhythm and the transient shape applied by TES.
+
+**HARMONY**: TES does not generate harmony but enhances or suppresses harmonic components by shaping their temporal evolution. In multiband mode:
+- Boosting attack in the midrange (500–2000 Hz) makes each chord change more defined (clear harmonic transitions).
+- Boosting sustain in the bass region (< 200 Hz) extends chord roots, creating fuller harmonic foundations.
+- Cutting sustain in overlapping registers reduces harmonic mud in dense voicings.
+
+**STRUCTURE**: Macro-form control via per-section parameter trajectories:
+- **Intro**: $A=-0.3$, $S=-0.2$ — soft attack, slightly shortened (ambient, unobtrusive)
+- **Verse**: $A=0.0$, $S=0.0$ — neutral (clean)
+- **Pre-Chorus**: $A=+0.2$, $S=-0.1$ — increasing punch, tightening decay (building energy)
+- **Chorus**: $A=+0.5$, $S=+0.3$ — aggressive attack, extended sustain (full, powerful)
+- **Bridge**: $A=+0.1$, $S=+0.5$ — mild attack, lush sustain (atmospheric)
+- **Outro**: $A=-0.2$, $S=-0.4$ — softening attack, shortening (dissolving)
+
+**TEXTURE**: Texture density controlled by the attack/sustain balance:
+- **$A > 0$, $S < 0$**: Clean, punchy, tight — percussive texture (drums, rhythmic gtr)
+- **$A < 0$, $S > 0$**: Smooth, washy, ambient — legato texture (pads, strings, vocals)
+- **$A > 0$, $S > 0$**: Aggressive, present, full — powerful texture (lead instruments)
+- **$A < 0$, $S < 0$**: Muted, tight, restrained — subtle texture (background layers, sparse sections)
+- **Multiband variation**: different (A, S) per band creates psychoacoustic texture layering — e.g., tight lows + punchy mids + airy highs.
+
+### UnitMatrix Integration
+
+**Voices**: Each UnitMatrix voice can have an independent TES instance (or share a single instance on the mix bus). Per-voice TES parameters $(A_v, S_v)$ are part of the voice's DSP chain:
+
+| Voice Role | $A$ | $S$ | Effect |
+|:---|:---:|:---:|:---|
+| Kick (v=0) | +0.6 | -0.4 | Boos attack (punch), tighten decay |
+| Snare (v=1) | +0.5 | -0.2 | Clear crack, moderate tail |
+| Hi-hat (v=2) | +0.3 | 0.0 | Slightly crisper |
+| Bass (v=3) | 0.0 | +0.3 | Maintain attack, extend sustain |
+| Pad (v=4) | -0.2 | +0.4 | Soft attack, lush decay |
+
+**Sections**: Per-section TES parameters $\\theta_m = (A^{(m)}, S^{(m)})$ stored in the section configuration. Linear interpolation between section boundaries avoids parameter snaps. Parameter automation across the piece defines the macro-form through envelope manipulation alone.
+
+**Cell filling**: TES operates on already-rendered audio buffers from the voice's synthesis engine (e.g., SP-001 FluidSynth, SP-029 Subtractive, SP-110 PWM). In the produce pipeline:
+1. Render cell $(v, m)$ via voice's synthesis engine $\\rightarrow$ audio buffer $b_{v,m}[n]$ of length $L_m$ (the section's duration in samples).
+2. Apply TES to $b_{v,m}[n]$ (or to the summed voice buffer for the whole section) $\\rightarrow b'_{v,m}[n]$.
+3. Pass to the next post-processing stage (SP-115 auto-wah, SP-007 EQ, SP-009 reverb).
+
+Zero-drift is maintained: TES does not change the buffer length, only its envelope shape, so $\\text{len}(b'_{v,m}) = \\text{len}(b_{v,m}) = L_m$.
+
+### Pitfalls
+
+1. **DC offset from asymmetric gain**: If attack and sustain gains are imbalanced over a sustained passage, the gain modulation can introduce a net DC offset. Mitigate with a DC-blocking filter ($H(z) = \\frac{1 - z^{-1}}{1 - \\alpha z^{-1}}$, $\\alpha \\approx 0.995$) after TES.
+
+2. **Gain ripple at note boundaries**: When a loud note decays and a quiet note follows, the slow envelope may still hold energy from the loud note, causing the difference signal to mis-classify the quiet note's onset. Mitigate with per-band envelope reset flags triggered by note-off events (MIDI gate signals).
+
+3. **Over-boosting noise**: Boosting attack ($A > 0.5$) on noisy signals (cymbals, room ambience) boosts the noise transient, causing audible artifacts. Mitigate by limiting the maximum gain boost ($g_{\\max} \\leq 4$ = +12 dB) and using multiband mode to avoid processing noisy bands.
+
+4. **Phase issues in multiband mode**: The Bark-scale filterbank introduces per-band phase shifts that cause comb filtering upon recombination. Mitigate with linear-phase FIR filters (higher latency, $\mathcal{O}(W)$ per sample) or use Linkwitz-Riley crossovers (zero-phase at crossover frequencies). The STFT-based approach (FFT frame, per-bin gain, overlap-add) avoids phase issues but adds frame latency.
+
+5. **Not a substitute for a compressor**: TES does not control peak levels — it reshapes the envelope proportionally. If the input has extreme dynamic range, follow TES with a limiter (SP-107 LBL) to prevent clipping.
+
+6. **Tuning time constants**: The default $\\tau_f = 1$ ms and $\\tau_s = 15$ ms work for most percussive material. For very slow attacks (bowed strings, pads), widen the gap ($\\tau_f = 5$ ms, $\\tau_s = 50$ ms) to catch the slower onsets. For extremely fast transients (rim shots, clicks), narrow ($\\tau_f = 0.3$ ms, $\\tau_s = 10$ ms).
+
+7. **Normalization instablity**: The peak-normalization EMA can drift during long silences. Reset the running peak $\\bar{d}_a$ when the signal level falls below a noise floor threshold ($|x[n]| < 10^{-6}$ for $> 100$ ms).

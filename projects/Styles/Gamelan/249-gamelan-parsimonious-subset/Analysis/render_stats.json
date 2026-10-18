@@ -1,0 +1,53 @@
+[
+  {
+    "label": "phase1",
+    "midi": "/opt/data/repos/musicom/projects/Styles/Gamelan/249-gamelan-parsimonious-subset/MIDI/249-gamelan-parsimonious-subset-phase1.mid",
+    "wav": "/opt/data/repos/musicom/projects/Styles/Gamelan/249-gamelan-parsimonious-subset/Audio/249-gamelan-parsimonious-subset-phase1.wav",
+    "ogg": "/opt/data/repos/musicom/projects/Styles/Gamelan/249-gamelan-parsimonious-subset/Audio/249-gamelan-parsimonious-subset-phase1.ogg",
+    "soundfont": "/opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2",
+    "target_lufs": -14.0,
+    "integrated_lufs": -14.13,
+    "true_peak_db": -1.0,
+    "wav_bytes": 12962092,
+    "ogg_bytes": 1584078,
+    "sr": 44100,
+    "duration_s": 73.48,
+    "silence_ratio": 0.0448,
+    "low_rms_seconds": 1,
+    "n_seconds": 73
+  },
+  {
+    "label": "perfect",
+    "midi": "/opt/data/repos/musicom/projects/Styles/Gamelan/249-gamelan-parsimonious-subset/MIDI/249-gamelan-parsimonious-subset-perfect.mid",
+    "wav": "/opt/data/repos/musicom/projects/Styles/Gamelan/249-gamelan-parsimonious-subset/Audio/249-gamelan-parsimonious-subset-perfect.wav",
+    "ogg": "/opt/data/repos/musicom/projects/Styles/Gamelan/249-gamelan-parsimonious-subset/Audio/249-gamelan-parsimonious-subset-perfect.ogg",
+    "soundfont": "/opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2",
+    "target_lufs": -14.0,
+    "integrated_lufs": -14.13,
+    "true_peak_db": -1.0,
+    "wav_bytes": 13873708,
+    "ogg_bytes": 1815187,
+    "sr": 44100,
+    "duration_s": 78.65,
+    "silence_ratio": 0.0858,
+    "low_rms_seconds": 6,
+    "n_seconds": 78
+  },
+  {
+    "label": "humanized",
+    "midi": "/opt/data/repos/musicom/projects/Styles/Gamelan/249-gamelan-parsimonious-subset/MIDI/249-gamelan-parsimonious-subset-humanized.mid",
+    "wav": "/opt/data/repos/musicom/projects/Styles/Gamelan/249-gamelan-parsimonious-subset/Audio/249-gamelan-parsimonious-subset-humanized.wav",
+    "ogg": "/opt/data/repos/musicom/projects/Styles/Gamelan/249-gamelan-parsimonious-subset/Audio/249-gamelan-parsimonious-subset-humanized.ogg",
+    "soundfont": "/opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2",
+    "target_lufs": -14.0,
+    "integrated_lufs": -14.16,
+    "true_peak_db": -1.0,
+    "wav_bytes": 13872428,
+    "ogg_bytes": 1805209,
+    "sr": 44100,
+    "duration_s": 78.64,
+    "silence_ratio": 0.0866,
+    "low_rms_seconds": 6,
+    "n_seconds": 78
+  }
+]

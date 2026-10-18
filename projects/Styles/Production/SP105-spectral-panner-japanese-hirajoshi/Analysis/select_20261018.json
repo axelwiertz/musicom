@@ -1,0 +1,8 @@
+{
+  "date": "2026-10-18",
+  "method": "SP-105",
+  "method_module": "sound.effects.spectral_panner",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Japanese/001-japanese-hirajoshi/MIDI/japanese-hirajoshi.mid",
+  "n_well_formed": 241,
+  "registry_total": 48
+}
