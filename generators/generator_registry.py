@@ -90,6 +90,16 @@ GENERATOR_REGISTRY = {
     "HC-059": (None, None, "Hawaiian Slack-Key Guitar (Kī Hōʻalu) Open-Tuning Fingerstyle (spec in human_methods_db.md)"),
     "HC-060": (None, None, "Verbunkos Composition — Lassú–Friss Recruiting-Dance Architecture (spec in human_methods_db.md)"),
     "HC-061": (None, None, "Corsican Paghjella Polyphony — Three-Voice Staggered-Entry Craft (spec in human_methods_db.md)"),
+    # --- Abstract layer weekly promotion 2026-10-18 (report 113) ---
+    "ABS-113": ("rules.subset_network", None, "Pitch-Class Fourier Spectrum Composition (PCFSC) — abstract Fourier quality-magnitude + phase design (rules.subset_network)"),
+    # --- Human methods weekly promotion 2026-10-18 (reports HC-062..HC-068) ---
+    "HC-062": (None, None, "Twelve-Tone Serial Composition — Dodecaphonic Row-Based Architecture (spec in human_methods_db.md)"),
+    "HC-063": (None, None, "Improvisation-to-Notation Composition Workflow — Capture the Gesture, Fix on Paper (spec in human_methods_db.md)"),
+    "HC-064": (None, None, "Funk Groove Construction — The One / Chicken Scratch / Horn-Stab Interlock (spec in human_methods_db.md)"),
+    "HC-065": (None, None, "Thai Piphat Thang Elaboration — One Melody, Many Paths (spec in human_methods_db.md)"),
+    "HC-066": (None, None, "Ground-Bass Variation Set — Chaconne & Passacaglia Continuous-Variation Craft (spec in human_methods_db.md)"),
+    "HC-067": (None, None, "Call-and-Response (Antiphonal) Composition — Leader/Chorus Exchange Craft (spec in human_methods_db.md)"),
+    "HC-068": (None, None, "Musical-Rhetorical Figures Composition (Figurenlehre / Musica Poetica) (spec in human_methods_db.md)"),
 }
 
 

@@ -211,6 +211,21 @@ METHOD_LEVELS = {
     "HC-059": ("L3", False),  # Hawaiian Slack-Key Guitar (Kī Hōʻalu) (spec)
     "HC-060": ("L4", False),  # Verbunkos — Lassú–Friss Recruiting-Dance (spec)
     "HC-061": ("L3", False),  # Corsican Paghjella Polyphony (spec)
+    # REGISTERED 2026-10-18 (weekly prose->code promotion, reports 112..118, HC-062..068)
+    "112": ("L3", False),   # Costas Array Distinct-Displacement Composition (CADDC) (spec)
+    "ABS-113": ("L3", True),  # Pitch-Class Fourier Spectrum Composition (PCFSC) — rules.subset_network (abstract)
+    "114": ("L4", False),   # Farey–Stern–Brocot Composition (FSBC) (spec)
+    "115": ("L4", False),   # Keplerian Orbital Resonance Composition (KORC) (spec)
+    "116": ("L3", False),   # Petri Net Composition (PNC) (spec)
+    "117": ("L4", False),   # Particle Swarm Optimization Composition (PSOC) (spec)
+    "118": ("L4", False),   # Discrete Denoising Diffusion Probabilistic Model Composition (D3PM-C) (spec)
+    "HC-062": ("L4", False),  # Twelve-Tone Serial Composition — Dodecaphonic Row Architecture (spec)
+    "HC-063": ("L3", False),  # Improvisation-to-Notation Composition Workflow (spec)
+    "HC-064": ("L3", False),  # Funk Groove Construction (spec)
+    "HC-065": ("L4", False),  # Thai Piphat Thang Elaboration (spec)
+    "HC-066": ("L4", False),  # Ground-Bass Variation Set — Chaconne & Passacaglia (spec)
+    "HC-067": ("L3", False),  # Call-and-Response (Antiphonal) Composition (spec)
+    "HC-068": ("L3", False),  # Musical-Rhetorical Figures Composition (Figurenlehre) (spec)
     # --- L1 MICRO ---
     "002": ("L1", True),   # Markov Transitions
     "011": ("L1", False),  # Voice-Leading Graph Search

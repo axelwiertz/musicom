@@ -67,8 +67,12 @@ def test_level_counts_match_plan():
     # Weekly registration (2026-10-11) added 106/107/108/110/111 at L4 and
     # HC-055/056/060 at L4 (+8 → 58); 105/109 at L3 and HC-057/058/059/061 at L3
     # (+6 → 71). All spec-only (no generator modules yet).
-    assert len(methods_by_level("L4")) == 58
-    assert len(methods_by_level("L3")) == 71
+    # Weekly registration (2026-10-18) added 114/115/117/118 at L4 and
+    # HC-062/065/066 at L4 (+7 → 65); 112/ABS-113/116 at L3 and
+    # HC-063/064/067/068 at L3 (+7 → 78). ABS-113 (PCFSC) is abstract-layer,
+    # routed to rules.subset_network like ABS-001..005/095/099/104.
+    assert len(methods_by_level("L4")) == 65
+    assert len(methods_by_level("L3")) == 78
     assert len(methods_by_level("L2")) == 20
     assert len(methods_by_level("L1")) == 9
 
