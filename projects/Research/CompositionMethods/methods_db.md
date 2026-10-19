@@ -304,6 +304,7 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 || **SP-116** | Discrete Summation Formula Synthesis (DSFS) | **Synthesis Engines** | Closed-Form Bandlimited Harmonic / Inharmonic Timbre Generation | Generates complex harmonic/inharmonic spectra via closed-form trigonometric summation (Moorer 1976). Parameters $a$ (harmonic rolloff), $f_c$ (center frequency), $f_m$ (partial spacing), and $N$ (partial count) control the spectrum directly, with exact bandlimiting via $N$. Supports one-sided, two-sided, infinite-sum, and quadrature-stereo forms
 || **SP-117** | Harmonic Exciter Synthesis (HEX) | **Post-Processing / DSP** | Split-Band Harmonic Enhancement / Presence & Air Restoration | Post-processing DSP that enhances brightness and presence by generating low-order harmonics from the high-frequency band only (crossover 1–10 kHz). Asymmetric cubic soft clipper produces both odd and even harmonics; allpass phase shifter adds air. Per-voice or bus configuration, $O(1)$ per sample, zero latency. Candidate: `sound/effects/harmonic_exciter.py`. |
 || **SP-118** | Transient Envelope Synthesis (TES) | **Post-Processing / DSP** | Transient/Sustain Envelope Sculpting | Level-independent transient and sustain shaping via Differential Envelope Technology (DET). Two envelope followers (fast attack ~1ms, slow attack ~15ms) in parallel; their difference isolates transient onsets and sustain decay without threshold parameters. Independent Attack (+/−) and Sustain (+/−) controls reshape the amplitude envelope sample-by-sample. Multiband (24 Bark bands) variant enables frequency-selective transient manipulation. Per-voice or shared-bus configuration, $O(1)$ per sample, zero latency. Candidate: `sound/effects/transient_shaper.py`. |
+|| **SP-119** | Auto-Pan / Dynamic Stereo Modulation Synthesis (APMS) | **Post-Processing / DSP** | Stereo Field Modulation / Spatial Animation | Continuously varies the stereo pan position of a mono (or stereo) signal via LFO-driven constant-power panning law. Multiple waveforms (sine, triangle, square, sawtooth, random S&H) control the pan trajectory; stereo phase offset sets rotation style; rate can be tempo-synced. Per-voice independent parameters, $O(1)$ per sample, zero latency. Candidate: `sound/effects/autopan.py`. |
 |---|
 
 
@@ -26966,3 +26967,257 @@ Each UnitMatrix cell $(v, s)$ — voice $v$, section $s$ — is filled by:
 6. **Eigenvector interpretation**: While eigenvalues have a clear musical interpretation (pitch/pitch-class), eigenvectors provide weights that require careful mapping to dynamics/timbre. The squared eigenvector components $\sum_i |v_i^{(j)}|^2 = 1$ by orthonormality — normalise to MIDI velocity range [0, 127] via $vel_j = \text{round}(|v_i^{(j)}|^2 \cdot 100 + 20)$.
 
 7. **Overly uniform spacing**: Spectral rigidity means eigenvalues are *more* evenly spaced than random — this produces chord/interval distributions that may sound "too balanced" for some styles (e.g., avant-garde or aleatoric music may prefer the Poisson level-spacing of uncorrelated random numbers). Use the Poisson (integrable) spacing $P(s) = e^{-s}$ as an alternative for styles needing less coherence.
+
+# Sound Production Method SP-119 — Auto-Pan / Dynamic Stereo Modulation Synthesis (APMS)
+
+### Source
+
+[1] Tarr, E. (2018-2022). "Auto Pan." *Hack Audio: An Introduction to Computer Programming and Digital Signal Processing*. https://hackaudio.com/digital-signal-processing/stereo-audio/auto-pan/
+
+[2] Zölzer, U. (2011). *DAFX: Digital Audio Effects* (2nd ed.). John Wiley & Sons. — Chapter 7: Modulation Effects, Section 7.5: Panning and Spatial Effects.
+
+[3] DAFX-10 Project. (2014). "Panning." *DAFX-10 Virtual Studio*. https://dafx10.iem.at/projects/panning/
+
+[4] Peters, C. A. & van der Hulst, J. (2020). "Stereo Panning Laws: Constant Power vs. Constant Gain." *Journal of the Audio Engineering Society* (preprint), AES Convention 148.
+
+[5] Behrens, S. (2024). "Audio Signal Processing in Python: Panning and Stereo Width." https://www.sbehrens4d.com/posts/python_dsp_1_panning.html
+
+[6] CMU Music Informatics. "Pan Laws." *Carnegie Mellon University Music Informatics Course Readings*. https://www.cs.cmu.edu/~music/icm-online/readings/panlaws/
+
+[7] OxiMedia Project. (2026). "auto_pan — Automatic panning effect for stereo audio." Rust DSP library. https://docs.rs/oximedia-effects/latest/oximedia_effects/auto_pan/
+
+### Layer
+
+**absolute** — sound production (Post-Processing / DSP). APMS applies continuous LFO-driven stereo pan modulation as a post-processing stage on rendered audio buffers. The candidate code path is `sound/effects/autopan.py`, pluggable into `workflows.musicom_workflow.produce(method="SP-119")` as a post-render DSP stage in the produce pipeline.
+
+### Description
+
+Auto-pan (also called autopanner, tremolo pan, or cyclic panning) is a stereo modulation effect that continuously varies the stereo position of a mono (or stereo) input signal according to a low-frequency oscillator (LFO) waveform. The LFO drives a pan law (typically constant-power sine/cosine) that distributes the signal between the left and right channels with equal perceived loudness at every pan position. This creates the auditory illusion of a sound source moving back and forth across the stereo image.
+
+Auto-pan is the stereo/spatial counterpart of the tremolo effect (SP-102 Amplitude Modulation Synthesis): where tremolo modulates volume equally in both channels (two-quadrant), auto-pan modulates volume in opposite proportion between channels (four-quadrant pan law). It is also distinct from the phaser (SP-106, allpass comb-filter sweep) which creates moving spectral notches through phase cancellation rather than amplitude-based panning.
+
+**Key differentiators from related methods:**
+- **SP-007 (Spectral Masking EQ)** uses mid/side separation for EQ, not continuous pan modulation.
+- **SP-021 (Binaural Woodworth-Schlosberg)** is psychoacoustic HRTF 3D positioning; APMS is simple amplitude panning on a stereo stage.
+- **SP-034 (Higher-Order Ambisonics)** is full-sphere B-format encoding; APMS is 2-channel stereo panning only.
+- **SP-043 (Wave Field Synthesis)** reconstructs physical wavefronts for large arrays; APMS is pair-wise amplitude panning.
+- **SP-053 (VBAP)** is a static vector-based discrete loudspeaker panning method; APMS uses continuous LFO-driven pan modulation.
+- **SP-059 (FDLMS)** uses modulated delay lines; APMS uses amplitude panning without delay modulation.
+- **SP-102 (AMS)** is two-quadrant modulation (volume up/down together); APMS is four-quadrant (volume splits opposite across channels).
+
+### Technical Mechanics
+
+#### Core Algorithm
+
+A mono input signal $x[n]$ is converted to a stereo signal $y_L[n], y_R[n]$ by time-varying gain coefficients $g_L[n], g_R[n]$ derived from an LFO $p(t) \in [-1, 1]$ that represents the instantaneous pan position:
+
+$$g_L[n] = f_{\text{gain}}(p[n]), \qquad
+g_R[n] = f_{\text{gain}}(-p[n]), \qquad
+y_L[n] = g_L[n] \cdot x[n], \qquad
+y_R[n] = g_R[n] \cdot x[n]$$
+
+where $p[n] = D \cdot w(\phi[n])$ is the depth-scaled LFO output ($D \in [0, 1]$) and $w(\phi)$ is a unit-amplitude LFO waveform.
+
+#### Constant-Power Panning Law
+
+To maintain equal perceived loudness at any pan position, the gains must satisfy $g_L^2 + g_R^2 = 1$ (constant power) rather than $g_L + g_R = 1$ (constant gain, which produces a $-3$ dB dip at center). The sine/cosine law achieves this:
+
+Define the pan angle $\theta[n]$ from the LFO output $p[n]$:
+
+$$\theta[n] = \frac{\pi}{4}(1 + p[n]) \in [0, \pi/2]$$
+$$g_L[n] = \cos(\theta[n]), \qquad g_R[n] = \sin(\theta[n])$$
+
+When $p = 0$ (center), $\theta = \pi/4$, $g_L = g_R = \sqrt{2}/2 \approx 0.7071$ (−3 dB each). When $p = 1$ (hard right), $\theta = \pi/2$, $g_L = 0$, $g_R = 1$. Since $\cos^2\theta + \sin^2\theta = 1$, the power sum is constant.
+
+Alternative pan laws:
+- **Square-root law**: $g_L = \sqrt{1 - p}, g_R = \sqrt{1 + p}$ (also constant-power)
+- **Tangent law**: $g_L = 1, g_R = \tan(\theta)$ normalized for $g_L^2 + g_R^2 = 1$ — psychoacoustically more accurate for 60° stereo base (Bauer 1969; PMAP variant)
+- **-3 dB center attenuation**: standard for broadcast compliance
+
+#### LFO Waveforms
+
+The LFO $w(\phi)$ at normalised phase $\phi = 2\pi f_m t + \phi_0$ produces the pan trajectory. Supported waveforms:
+
+| Waveform | Equation $w(\phi)$ | Character |
+|---|---|---|
+| Sine | $\sin(\phi)$ | Smooth, natural pendulum motion — the most musical, mimics a swinging mass |
+| Triangle | $\frac{2}{\pi}\arcsin(\sin(\phi))$ | Constant-velocity sweep — uniform dwell time at every position |
+| Square | $\operatorname{sgn}(\sin(\phi))$ | Hard L/R jumps — instantaneous hard-pan swap (ping-pong) |
+| Sawtooth down | $1 - \frac{\phi}{\pi}$ (mod 1) × 2 − 1 | Slow-right → snap-left sweep (reverse for up-saw) |
+| Random S&H | $\text{rand}_{k}$ between LFO ticks at rate $f_m$ | Stepped random positions — unpredictable spatial hopping |
+| Ramp up | $-1 + \frac{\phi}{\pi}$ (mod 1) × 2 | Slow rotation from left to right |
+
+Each waveform has a distinct spatial character. The triangle wave provides equal time at every pan position (useful for measuring), while sine wave lingers at the extremes (smoother).
+
+#### Stereo Phase Offset
+
+For a stereo input signal (or when applying the effect to an already-stereo source), the left and right LFOs can have a phase offset $\Delta\phi$:
+
+- $\Delta\phi = 0^\circ$: Both channels pan identically — pure positional modulation, no width change.
+- $\Delta\phi = 90^\circ$: One channel reaches extreme as the other is mid-position — pseudo-rotary motion.
+- $\Delta\phi = 180^\circ$: Channels move opposite — maximum stereo width modulation (widening/narrowing effect).
+- $\Delta\phi = 360^\circ$: Identical to $0^\circ$.
+
+For stereo inputs, the LFO can optionally modulate the mid-side matrix:
+$$M[n] = \frac{x_L[n] + x_R[n]}{2}, \qquad S[n] = \frac{x_L[n] - x_R[n]}{2}$$
+$$S'[n] = S[n] \cdot \left(1 - D \cdot |p[n]|\right)$$
+$$y_L[n] = M[n] + S'[n], \qquad y_R[n] = M[n] - S'[n]$$
+
+This reduces side content as the sound pans to center, preventing phase cancellation in mono.
+
+#### Tempo Sync
+
+The modulation rate $f_m$ can be synchronised to the music tempo $T$ (BPM). The rate maps as:
+
+$$f_m = \frac{T}{60 \cdot d}$$
+
+where $d$ is the note division: $d = 1$ (whole note), $2$ (half), $4$ (quarter), $8$ (eighth), $16$ (sixteenth), or triplet equivalents ($d/3$). Dotted values: $f_m = T/(60 \cdot d) \cdot 1.5$.
+
+#### Implementation Requirements
+
+Python / NumPy implementation sketch:
+
+```python
+import numpy as np
+
+class AutoPan:
+    """Auto-pan / dynamic stereo modulation synthesis."""
+    
+    WAVEFORMS = ('sine', 'triangle', 'square', 'sawdown', 'sawup', 'random_sh', 'ramp')
+    
+    def __init__(self, rate_hz=0.3, depth=1.0, phase_deg=0.0, 
+                 waveform='sine', pan_law='sine', center=-3.0):
+        self.rate = rate_hz          # LFO rate in Hz
+        self.depth = depth           # [0, 1]
+        self.phase = np.radians(phase_deg)
+        self.waveform = waveform
+        self.pan_law = pan_law
+        self.center = center         # dB attenuation at center
+        self._lfo_phase = 0.0
+        
+    def _lfo(self, phases):
+        """Generate unit-amplitude LFO waveform from phase array."""
+        if self.waveform == 'sine':
+            return np.sin(phases)
+        elif self.waveform == 'triangle':
+            return 2.0 * np.abs(2.0 * ((phases + np.pi) / (2*np.pi) % 1.0) - 1.0) - 1.0
+        elif self.waveform == 'square':
+            return np.where(np.sin(phases) >= 0, 1.0, -1.0)
+        elif self.waveform == 'sawdown':
+            return 1.0 - 2.0 * ((phases + np.pi) / (2*np.pi) % 1.0)
+        elif self.waveform == 'sawup':
+            return 2.0 * ((phases + np.pi) / (2*np.pi) % 1.0) - 1.0
+        elif self.waveform == 'random_sh':
+            # Sample-and-hold: quantize phase to LFO period chunks
+            idx = np.floor(phases / (2*np.pi)).astype(int)
+            return 2.0 * np.random.RandomState(seed=42).rand(np.max(idx)+1)[idx] - 1.0
+        elif self.waveform == 'ramp':
+            return -1.0 + 2.0 * ((phases + np.pi) / (2*np.pi) % 1.0)
+    
+    def _pan_gains(self, p):
+        """Compute left/right gains from pan position p in [-1, 1]."""
+        if self.pan_law == 'sine':
+            theta = np.pi/4 * (1.0 + p)
+            return np.cos(theta), np.sin(theta)
+        elif self.pan_law == 'sqrt':
+            return np.sqrt(0.5 * (1.0 - p)), np.sqrt(0.5 * (1.0 + p))
+        elif self.pan_law == 'linear':
+            return 0.5 * (1.0 - p), 0.5 * (1.0 + p)
+    
+    def process(self, x, sr=48000):
+        """Process mono signal x into stereo auto-panned output.
+        
+        Args:
+            x: 1D numpy array of shape (N,)
+            sr: sample rate
+            
+        Returns:
+            2D numpy array of shape (2, N) — left and right channels
+        """
+        n = len(x)
+        t = np.arange(n) / sr
+        phases = 2 * np.pi * self.rate * t + self.phase
+        p = self._lfo(phases) * self.depth
+        
+        gL, gR = self._pan_gains(p)
+        y = np.stack([gL * x, gR * x])
+        return y
+```
+
+Complexity: $\mathcal{O}(1)$ per sample (a few trig evaluations + multiplies). The LFO lookup can be precomputed for efficiency. The process is zero-latency (sample-by-sample).
+
+### Musical Elements Framework
+
+**PITCH**: No direct pitch modification. With rapid modulation rates ($f_m > 5$ Hz) on sustained tones, the apparent pitch may fluctuate slightly due to comb-filter interaction between delayed channels (especially with nonzero phase offset). This is a mild phasing artifact rather than intentional pitch manipulation.
+
+**RHYTHM**: The auto-pan rate $f_m$ imposes an independent rhythmic layer. When tempo-synced, it creates spatial accent patterns that reinforce or counterpoint the musical rhythm:
+- Syncopated: odd note divisions (triplet, dotted eighth) create polyrhythmic interaction with the meter.
+- Rate acceleration across a section builds spatial tension (rhythmic accelerando in the pan domain).
+- Square-wave auto-pan at half-note rate produces a steady ping-pong effect that doubles as a spatial tempo marker.
+
+**HARMONY**: Minimal direct effect on tonal harmony. However:
+- Different auto-pan rates per voice create *spatial counterpoint* — a non-pitch-based polyphony where voices move independently in the stereo field.
+- Concurrent slow sine pans on multiple voices with offset phases create emergent "spatial chord" textures (e.g., three voices at 0°, 120°, 240° phase forming a balanced rotating triangle).
+- Harmonic partials spreading across the stereo field via per-band auto-pan (frequency-dependent pan position) enriches the timbral-harmonic space.
+
+**STRUCTURE**: Macro-form through per-section auto-pan parameter trajectories:
+| Section | Rate | Depth | Waveform | Phase | Spatial Character |
+|---|---|---|---|---|---|
+| Intro | 0.1 Hz | 0.3 | sine | 0° | Gentle, barely perceptible drift |
+| Verse | 0.2 Hz | 0.5 | triangle | 45° | Slow constant sweep, motion established |
+| Pre-Chorus | 0.5 Hz | 0.7 | sine | 90° | Accelerating, widening |
+| Chorus | 1.0 Hz | 1.0 | triangle | 180° | Full wide sweep, most active |
+| Bridge | Off | 0.0 | — | — | Static, centered (release from motion) |
+| Outro | 0.05 Hz | 0.2 | sine | 0° | Fading drift to silence |
+
+Auto-pan can be turned off entirely in a section for static contrast.
+
+**TEXTURE**: The primary contribution. Auto-pan texturizes the spatial dimension:
+- Slow sine (≤ 0.2 Hz): organic, ambient, hypnotic — the sound "breathes" across the field.
+- Medium triangle (0.3–0.8 Hz): rhythmic, engaging — uniform spatial coverage.
+- Fast square (≥ 1 Hz): aggressive ping-pong, disorienting — creates a spatial "stutter."
+- Random S&H: chaotic, unpredictable — suitable for aleatoric passages.
+- Rotary (phase=90°, medium rate): simulated rotating speaker — adds dimensional swirl.
+- Depth 0→1 sweep: the sound goes from monophonic center to full wide — a spatial crescendo.
+
+### UnitMatrix Integration
+
+**Voices**: Each UnitMatrix voice can have an independent APMS instance or share a bus-level instance. Per-voice APMS parameters $(f_m^{(v)}, D^{(v)}, \text{waveform}^{(v)}, \phi^{(v)})$ are stored as part of the voice's spatialization configuration in the UnitMatrix.
+
+Example per-voice auto-pan routing:
+
+| Voice | Instrument | Rate | Depth | Waveform | Phase | Rationale |
+|---|---|---|---|---|---|---|
+| Lead (v=0) | Synth Lead | 0.25 Hz | 0.4 | sine | 0° | Subtle movement, focused center |
+| Pad (v=1) | String Pad | 0.15 Hz | 0.6 | triangle | 180° | Wide ambient wash, side-heavy |
+| Arp (v=2) | Plucked Synth | 0.5 Hz | 0.8 | triangle | 90° | Rhythmic spatial bounce |
+| Bass (v=3) | Sub-Bass | off | 0.0 | — | — | Mono centered — no panning (bass loses energy when panned) |
+| Perc (v=4) | Hi-Hat | 0.33 Hz | 1.0 | square | 0° | Aggressive hard ping-pong |
+
+**Sections**: Per-section APMS parameters $\theta_m = (f_m, D, \text{wf}, \phi, \text{law})$ stored in the section configuration. Rate can be tempo-synced to the section's BPM. Parameter automation between sections uses linear interpolation. A section can disable auto-pan entirely ($D=0$).
+
+**Cell filling**: APMS operates on already-rendered audio buffers from the voice's synthesis engine. In the produce pipeline:
+
+1. Render cell $(v, m)$ via voice's synthesis engine → buffer $b_{v,m}[n]$ (mono or stereo).
+2. Apply APMS to $b_{v,m}[n]$ using the voice's and section's auto-pan parameters → $b'_{v,m}[n]$ (stereo, 2 × N samples, 2 channels).
+3. Pass to the next post-processing stage (SP-009 reverb, SP-007 EQ, SP-008 compression).
+
+Zero-drift maintained: APMS converts mono to 2-channel stereo without changing the sample count. Stereo input preserves buffer length. The number of samples per channel remains identical to the input.
+
+### Pitfalls
+
+1. **Mono compatibility**: Auto-pan with nonzero depth causes phase cancellation when the stereo signal is summed to mono. Extreme panning (depth=1.0) can make the signal partially or fully disappear in mono. Mitigate: use a mono-compatible downmix $m = (y_L + y_R)/\sqrt{2}$ for monitoring; apply APMS primarily to non-critical elements (pads, effects) rather than lead/bass.
+
+2. **Over-wide master bus**: Applying auto-pan to the entire mix creates a seasick, disorienting effect and destroys the center anchor. Never auto-pan the master stereo bus. Use on individual voices only.
+
+3. **Hard waveform clicks**: Square wave LFO causes instantaneous gain jumps that can click. Mitigate with bandlimited square (transition over 1-2 samples) or a one-sample crossfade at the discontinuity.
+
+4. **Rate-too-fast psychedelia**: Modulation rates above 2 Hz on full-depth auto-pan create an unpleasant, disorienting wobble (the "seasick" effect). Psychoacoustic upper limit for pleasant panning is ≈ 0.5–2 Hz depending on depth. Above 5 Hz it becomes an audible tremolo/amplitude modulation indistinguishable from SP-102 AMS.
+
+5. **Bass energy loss**: Frequencies below ≈ 100 Hz have poor directional localization. Panning the bass wastes mix energy and causes uneven sub-bass distribution in the listening environment. Remedy: always set depth=0 for bass voices, or use a crossover bass-managed auto-pan (highpass > 120 Hz).
+
+6. **Stereo input phase issues**: On material that is already stereo (e.g., a stereo pad from SP-025 FOF), applying the standard mono-to-stereo auto-pan doubles the existing width modulation. Use M/S mode instead (modulate side component only) or bypass the effect.
+
+7. **Tempo sync drift**: If the LFO rate is not an exact divisor of the section duration, the pan position at section boundaries may be discontinuous. Mitigate: snap LFO phase to section boundaries by computing the LFO phase from the section's start sample rather than running free across boundaries.
+
+8. **Psychoacoustic overuse**: The auto-pan effect is highly salient — even subtle settings draw the listener's ear to the movement. Overuse across many voices creates a chaotic, unfocused mix. Reserve auto-pan for 1–2 voices at a time to preserve its impact.
