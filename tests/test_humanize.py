@@ -238,3 +238,50 @@ def test_humanize_composer_no_backtracking_per_voice():
         row_events = composer.matrix.get_row_events(voice["row"])
         starts = [e.start_tick for e in row_events if getattr(e, "pitch", 0) != 0]
         assert starts == sorted(starts)
+
+
+# ---------------------------------------------------------------------------
+# dual-version export (workflows/humanize.py::export_dual)
+# ---------------------------------------------------------------------------
+
+def _offsets_off_grid(midi_path):
+    import mido  # READING ONLY (analysis)
+    mid = mido.MidiFile(str(midi_path))
+    off = 0
+    total = 0
+    for tr in mid.tracks[1:]:
+        t = 0
+        for m in tr:
+            t += m.time
+            if m.type == "note_on" and m.velocity > 0 and m.note > 0:
+                total += 1
+                if t % 120 != 0 and t % 240 != 0:
+                    off += 1
+    return off, total
+
+
+def test_export_dual_writes_perfect_and_humanized(tmp_path):
+    from workflows.humanize import export_dual
+
+    composer = _build_composer()
+    perfect = tmp_path / "x-perfect.mid"
+    humanized = tmp_path / "x-humanized.mid"
+    hz = export_dual(composer, perfect, humanized, style="jazz", seed=123, bpm=120.0)
+
+    assert perfect.exists() and humanized.exists()
+    assert perfect.stat().st_size > 40 and humanized.stat().st_size > 40
+    assert set(hz) == {"Lead", "Bass", "Drums"}
+
+    # perfect == the un-humanized composer bytes (grid-locked, no jitter)
+    fresh = _build_composer()
+    assert perfect.read_bytes() == fresh.to_midi_bytes()
+
+    # humanized differs from perfect
+    assert humanized.read_bytes() != perfect.read_bytes()
+
+    # grid audit: perfect 0 off-grid, humanized > 0 (jitter ran)
+    p_off, p_tot = _offsets_off_grid(perfect)
+    h_off, h_tot = _offsets_off_grid(humanized)
+    assert p_tot == h_tot          # same note count
+    assert p_off == 0, "perfect version must stay grid-locked"
+    assert h_off > 0, "humanized version must move onsets off-grid"

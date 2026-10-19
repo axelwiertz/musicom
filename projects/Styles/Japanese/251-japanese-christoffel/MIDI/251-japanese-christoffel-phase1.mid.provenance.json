@@ -1,0 +1,21 @@
+{
+  "artifact": "251-japanese-christoffel-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "Japanese Christoffel word - PRE-RULES raw draft (E-pentatonic random walk)",
+  "sources": [],
+  "parameters": {
+    "phase": 1,
+    "key": "E yo pentatonic (major pentatonic)",
+    "bpm": 88,
+    "seed": 251,
+    "style": "japanese",
+    "method": "069",
+    "total_bars": 20,
+    "sections": 5
+  },
+  "notes": "Phase 1 raw: single koto voice, stochastic walk over the E-yo-pentatonic pc pool, off-grid micro-timing, NO harmony.",
+  "sha256": "aa8ded337d7635481328e2524ad58f6859335fae34c08ccbf2bbd14c5c05b597",
+  "bytes": 1157,
+  "created_utc": "2026-10-18T23:12:13.800978+00:00",
+  "provenance_version": "1.0"
+}

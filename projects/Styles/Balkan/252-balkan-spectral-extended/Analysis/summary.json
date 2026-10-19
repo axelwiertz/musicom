@@ -1,0 +1,214 @@
+{
+  "project": "252-balkan-spectral-extended",
+  "genre": "Balkan",
+  "source": "228-balkan-spectral",
+  "method": "051 Spectral Graph Laplacian Mapping (SGLM)",
+  "layer": "concrete",
+  "rework": "extended (longer + more varied)",
+  "key": "G Dorian (G A Bb C D E F)",
+  "key_pcs": [
+    0,
+    2,
+    4,
+    5,
+    7,
+    9,
+    10
+  ],
+  "bpm": 132,
+  "meter": "7/8",
+  "form": "8 sections x 4 bars = 32 bars",
+  "sections": [
+    "Intro",
+    "VerseA",
+    "LiftA",
+    "VerseB",
+    "Dance",
+    "Bridge",
+    "Climax",
+    "Coda"
+  ],
+  "section_functions": [
+    "HOME",
+    "HOME",
+    "TURN",
+    "TENSE",
+    "TURN",
+    "TENSE",
+    "HOME",
+    "HOME"
+  ],
+  "section_start_roots": [
+    0,
+    0,
+    3,
+    2,
+    4,
+    6,
+    3,
+    0
+  ],
+  "spectra": [
+    {
+      "section": "Intro",
+      "function": "HOME",
+      "lambda1": 2.922694679489308,
+      "lambda2": 3.2781296672662683,
+      "gap": 0.3554349877769605
+    },
+    {
+      "section": "VerseA",
+      "function": "HOME",
+      "lambda1": 2.922694679489308,
+      "lambda2": 3.2781296672662683,
+      "gap": 0.3554349877769605
+    },
+    {
+      "section": "LiftA",
+      "function": "TURN",
+      "lambda1": 2.1508862756425153,
+      "lambda2": 2.3996907670863883,
+      "gap": 0.24880449144387295
+    },
+    {
+      "section": "VerseB",
+      "function": "TENSE",
+      "lambda1": 1.5077126057701888,
+      "lambda2": 1.6676583502698192,
+      "gap": 0.1599457444996304
+    },
+    {
+      "section": "Dance",
+      "function": "TURN",
+      "lambda1": 2.1508862756425153,
+      "lambda2": 2.3996907670863883,
+      "gap": 0.24880449144387295
+    },
+    {
+      "section": "Bridge",
+      "function": "TENSE",
+      "lambda1": 1.5077126057701888,
+      "lambda2": 1.6676583502698192,
+      "gap": 0.1599457444996304
+    },
+    {
+      "section": "Climax",
+      "function": "HOME",
+      "lambda1": 2.922694679489308,
+      "lambda2": 3.2781296672662683,
+      "gap": 0.3554349877769605
+    },
+    {
+      "section": "Coda",
+      "function": "HOME",
+      "lambda1": 2.922694679489308,
+      "lambda2": 3.2781296672662683,
+      "gap": 0.3554349877769605
+    }
+  ],
+  "variation_techniques": [
+    {
+      "section": "Intro",
+      "technique": "sparse intro (counter tacet)"
+    },
+    {
+      "section": "VerseA",
+      "technique": "baseline full texture"
+    },
+    {
+      "section": "LiftA",
+      "technique": "register shift UP (+12)"
+    },
+    {
+      "section": "VerseB",
+      "technique": "counterline prominence (violin eig2 lead)"
+    },
+    {
+      "section": "Dance",
+      "technique": "diminution (16th subdivision)"
+    },
+    {
+      "section": "Bridge",
+      "technique": "retrograde contour + register DOWN (-12)"
+    },
+    {
+      "section": "Climax",
+      "technique": "augmentation (sustain x2) + octave doubling"
+    },
+    {
+      "section": "Coda",
+      "technique": "diminution fade to tonic"
+    }
+  ],
+  "voices": [
+    "Bass(43)",
+    "Accordion(21)",
+    "Clarinet(71)",
+    "Violin(40)"
+  ],
+  "perfect_audit": {
+    "off16": 0,
+    "off8": 24,
+    "out_key": 0,
+    "out_chord": 0,
+    "notes": 708
+  },
+  "humanized_audit": {
+    "off16": 641,
+    "off8": 644,
+    "out_key": 0,
+    "out_chord": 17,
+    "notes": 708
+  },
+  "zero_drift": {
+    "perfect_tracks": 4,
+    "humanized_tracks": 4,
+    "perfect_span": [
+      53760,
+      53760,
+      53760,
+      53760
+    ],
+    "humanized_span": [
+      53760,
+      53760,
+      53760,
+      53760
+    ]
+  },
+  "humanize": {
+    "style": "folk",
+    "seed": 20513007,
+    "per_voice": {
+      "Bass": {
+        "seed": 2071813707,
+        "n_notes": 128,
+        "mean_abs_shift_ticks": 10.977,
+        "max_abs_shift_ticks": 33,
+        "mean_abs_vel_delta": 4.008
+      },
+      "Accordion": {
+        "seed": 2071813708,
+        "n_notes": 312,
+        "mean_abs_shift_ticks": 4.368,
+        "max_abs_shift_ticks": 14,
+        "mean_abs_vel_delta": 3.792
+      },
+      "Clarinet": {
+        "seed": 2071813709,
+        "n_notes": 176,
+        "mean_abs_shift_ticks": 5.034,
+        "max_abs_shift_ticks": 25,
+        "mean_abs_vel_delta": 6.08
+      },
+      "Violin": {
+        "seed": 2071813710,
+        "n_notes": 92,
+        "mean_abs_shift_ticks": 7.25,
+        "max_abs_shift_ticks": 26,
+        "mean_abs_vel_delta": 5.467
+      }
+    }
+  },
+  "seed": 20261007
+}

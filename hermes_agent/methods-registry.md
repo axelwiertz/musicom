@@ -136,6 +136,12 @@ Status: `implemented` = in sound/ package · `partial` = some pieces exist · `r
 ||| SP-106 | SSB Frequency Shifter w/ Spiral Feedback — stereo/mono quadrature modes, ratio-coupled channels, delay+blur+shelf filter feedback path (FAC Gravity-style) | implemented | sound/effects/frequency_shifter.py |
 ||| SP-107 | Bit Crusher / Fidelity Reducer — linked sample-rate/bit-depth macro, Iron/Worn character voicing, aliasing foldover emphasis (Modbap Fidelity Theory-style) | implemented | sound/effects/bit_crusher.py |
 ||| SP-108 | Polyphonic Arpeggiator + Step Sequencer — Up/Down/UpDown/Random/Assign arp, 1-4 octave, dotted/triplet/swing; 512-step poly seq, chords up to 10 notes, forward/backward/pendulum, transpose (Prophet Rev4 firmware-mod-style) | implemented | sound/generators/poly_arp_seq.py |
+||| SP-109 | Tape-Stop / Turntable-Stop Processor — Classic (rate-ramp resample: pitch+time drop together), Modern (granular pitch-only drop, time-locked), Loop (capture+retrigger stutter); automatable speed curve (Cableguys TimeStop-style) | implemented | sound/effects/tape_stop.py |
+||| SP-110 | Graph-Sequenced Granular Warp — drawable step graph (speed/direction/size/pitch/filter) driving granular engine; 7 per-grain sonic-imprint profiles (Clean/Flange/Degrade/Filter Spam/Harmo-Nicer/Fauxcoder/Lo-Fizzly); random patches (Baby Audio HyperWarp-style) | implemented | sound/effects/hyperwarp_granular.py |
+||| SP-111 | Multi-Playhead Microsonic Granular Engine — 2 layers × 4 playheads, TIME PATH (forward/backward/freeze), independent pitch/speed, per-grain frequency-selective filter; SYNTH/LIVE (60 s rolling buffer)/LOOPS (phase-locked) modes (Oddment ODD-1-style) | implemented | sound/synthesis/odd1_engine.py |
+||| SP-112 | Auto Divisi — chord-note distribution across instrument parts: per-part ranges, workload balancing, minimal-motion voice-leading, unison doublings; Note-off Revoice (Forma Labs Filament 1.2-style) | implemented | sound/generators/auto_divisi.py |
+||| SP-113 | Supervariable VCF — 4-D filter (cutoff/resonance/bandwidth/profile): continuous HP↔notch↔LP character morph via SVF blending, 2/3/4-pole LP cascade, BP/X/lp24 modes (Shear Electronics Relic-style) | implemented | sound/effects/supervariable_filter.py |
+||| SP-114 | Generic Modulation Matrix — 16 slots × 20 sources × 56 destinations, per-slot amount/enable, uni/bipolar-aware summing, A/B snapshot morph (Sequential Take 5 editor-style) | implemented | sound/modular/mod_matrix.py |
 
 ## Mastering (from MusicTech workflow)
 

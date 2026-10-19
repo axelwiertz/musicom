@@ -1,0 +1,29 @@
+{
+  "artifact": "251-japanese-christoffel-humanized.mid",
+  "classification": "ai-assisted",
+  "generator": "Japanese Christoffel word (069 CWCC) + musicom rules",
+  "sources": [],
+  "parameters": {
+    "phase": 2,
+    "version": "humanized",
+    "key": "E yo pentatonic (major pentatonic)",
+    "bpm": 88,
+    "seed": 251,
+    "style": "japanese",
+    "method": "069",
+    "total_bars": 20,
+    "sections": 5,
+    "voices": [
+      "Koto",
+      "Shakuhachi",
+      "Shamisen",
+      "Taiko"
+    ],
+    "humanize_seed": 251
+  },
+  "notes": "Phase 2 humanized: same concrete layer + style-derived seeded humanization (per-instrument DNA). Zero-drift safe.",
+  "sha256": "147863c63926b3366ec2a509cd3a98542204124ead2b11a8d80ffb64953513bb",
+  "bytes": 2643,
+  "created_utc": "2026-10-18T23:12:13.801423+00:00",
+  "provenance_version": "1.0"
+}

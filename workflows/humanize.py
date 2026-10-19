@@ -24,7 +24,7 @@ from transformers.humanize import (
     profile_for_style,
 )
 
-__all__ = ["humanize_composer"]
+__all__ = ["humanize_composer", "export_dual"]
 
 
 def humanize_composer(composer, style: Optional[str] = None, seed: int = 0,
@@ -93,3 +93,40 @@ def humanize_composer(composer, style: Optional[str] = None, seed: int = 0,
             "timing_sigma_ticks": agg["timing_sigma_ticks"],
         }
     return summary
+
+
+def export_dual(composer, perfect_path, humanized_path, style: Optional[str] = None,
+                seed: int = 0, bpm: Optional[float] = None,
+                instruments: Optional[Dict[str, object]] = None) -> dict:
+    """Export a filled composer as BOTH perfect and humanized MIDI.
+
+    The standard dual-version contract (2026-10-17): every composition ships
+    a grid-locked `-perfect` artifact (the compositional truth) AND a
+    humanized `-humanized` artifact, so the listener can A/B the humanization.
+
+    Order is load-bearing: the composer is validated + exported while still
+    grid-perfect, THEN humanized in place, re-validated, and exported a second
+    time. Both exports go through the zero-drift gate (`validate()`).
+
+    Args:
+        composer: a filled UnitMatrixComposer (duck-typed, as humanize_composer).
+        perfect_path: output path for the grid-locked (pre-humanization) MIDI.
+        humanized_path: output path for the humanized MIDI.
+        style, seed, bpm, instruments: forwarded to humanize_composer.
+
+    Returns:
+        The humanize_composer summary (per-voice stats dict).
+    """
+    ok, msg = composer.validate()
+    if not ok:
+        raise RuntimeError(f"validate() failed (perfect): {msg}")
+    composer.to_midi(str(perfect_path))
+
+    hz = humanize_composer(composer, style=style, seed=seed, bpm=bpm,
+                           instruments=instruments)
+
+    ok, msg = composer.validate()
+    if not ok:
+        raise RuntimeError(f"validate() failed (humanized): {msg}")
+    composer.to_midi(str(humanized_path))
+    return hz

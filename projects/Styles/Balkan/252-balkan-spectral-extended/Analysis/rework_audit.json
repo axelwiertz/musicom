@@ -1,0 +1,27 @@
+{
+  "chosen": "/opt/data/projects/Styles/Balkan/228-balkan-spectral/",
+  "genre": "Balkan",
+  "primary_midi": "MIDI/228-balkan-spectral.mid",
+  "standard_failures": [
+    "index.html missing (standard 6: provenance.json + index.html required)"
+  ],
+  "redesign_required": true,
+  "standards_checked": {
+    "1_engine_not_handrolled": "PASS (UnitMatrixComposer)",
+    "2_zero_drift": "PASS (4 voice tracks len 40320)",
+    "3_rhythm_grid_sync": "PASS (off-grid 0/532)",
+    "4_valid_track_setup": "PASS (4 voice tracks)",
+    "5_two_phase_artifacts": "PASS (mid + phase1.mid present)",
+    "6_provenance_plus_indexhtml": "FAIL (index.html missing; provenance present as .mid sidecars)"
+  },
+  "source_identity": {
+    "genre": "Balkan",
+    "key": "G Dorian (G A Bb C D E F)",
+    "tempo": 132,
+    "meter": "7/8 DAJCovo 2+2+3 (BAR=1680)",
+    "method": "051 Spectral Graph Laplacian Mapping (SGLM)",
+    "motif": "Fiedler-vector spectral ordering of scale degrees -> lead contour; 2nd eigenvector -> violin counter-axis",
+    "instrumentation": ["double bass (43)", "accordion (21)", "clarinet (71)", "violin (40)"],
+    "form": "6 sections x 4 bars = 24 bars"
+  }
+}

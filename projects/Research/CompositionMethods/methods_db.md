@@ -125,9 +125,10 @@ Classification of active Musicom composition methods categorized by their primar
 | **115** | concrete | Keplerian Orbital Resonance Composition (KORC) | **Nature-Led** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Kepler interval-graded) | Continuous / Fluid | Macro / Orbital Period | $O(N)$ per event (closed-form Kepler time) | Each UnitMatrix voice = a planet on an elliptical orbit; Kepler's 1st law r(ν)=a(1−e²)/(1+e·cos ν) sweeps pitch contour; 2nd law (equal areas) yields exact onset times t=(P/2π)(E−e·sin E) — events crowd at perihelion, spread at aphelion ("rush/linger" rubato, ratio ((1+e)/(1−e))² = the Harmonice Mundi interval table: Saturn 5:4, Jupiter 6:5, Mars 3:2, Earth 16:15, Venus 24:25); 3rd law P²∝a³ → log₂P register scale (NASA exoplanet sonification practice); mean-motion resonances (2:1, 3:2, Laplace 4:2:1 Io–Europa–Ganymede) → polyrhythmic hierarchy, periodic conjunction epochs = cadence schedule, anti-aligned apsides = tension oscillation. Section = synodic cycle / orbital year; macro-form = resonance-capture chain (3:2→2:1→4:2:1). Nature-Led foil to 020 SMSTC (unbound clouds) / 043 SATM (chaotic attractors); physically-sourced continuous-time sibling of 012 Euclidean / 069 Christoffel; deterministic counterpart to 045 Hawkes / 038 KOPS. |
 | **116** | concrete | Petri Net Composition (PNC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Token-guided) | Grid-Locked / Continuous | Meso / Net State | $\mathcal{O}(P \cdot T \cdot F)$ | P-timed Petri net with probabilistic arc weights: places = music objects (notes, chords, motifs), transitions = music operators (transposition, inversion, concatenation), tokens = active threads/playback triggers. Net topology = macro-form, firing schedule = rhythm, concurrent tokens = polyphonic voices, place timing $	au(p)$ = note duration and IOI. Reconfigurable on-the-fly for live composition (minimalist phasing). Formal-model counterpoint to 002 Markov / 021 CA; deterministic-stochastic hybrid foil to 034 PCFG / 078 IMEC. |
 | **117** | concrete | Particle Swarm Optimization Composition (PSOC) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Strong (Fitness-guided, Key-bound) | Grid-Locked / Continuous | Macro / Global Optimum | $\mathcal{O}(I \cdot P \cdot D \cdot N)$ | Population of particles (candidate compositions) evolves via velocity-attraction to personal/global best positions. Continuous-valued positions encode note parameters per-voice per-section; fitness landscape guides convergence toward tonal, melodic, rhythmic, harmonic, textural, and structural objectives. Continuous-velocity metaheuristic counterpart to GA (003), SA (055), ACO (041) with fundamentally different search dynamics — vector-field guidance rather than recombination, cooling, or pheromone. |
-| **118** | concrete | Discrete Denoising Diffusion Probabilistic Model Composition (D3PM-C) | **AI-Driven** | Pitch, Rhythm, Harmony, Structure, Texture | Variable (Classifier-guided, Context-guided) | Grid-Locked / Continuous | Macro / Denoising Trajectory | $\mathcal{O}(T \cdot N \cdot D^2 \cdot H)$ | Applies discrete-state diffusion (absorbing/uniform transition matrices) directly to symbolic music tokens. Forward corruption via Markov transition matrix; reverse process learns to denoise step-by-step. Supports unconditional generation, flexible note-level infilling, and post-hoc classifier guidance. Discrete-token AI-Driven counterpart to 047 DSMG (continuous diffusion) and 106 NAPC (confidence-based refinement). |
-|| **119** | concrete | Tensor Decomposition Composition (TDC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Factor-guided) | Grid-Locked / Continuous | Macro / Low-Rank Core | $\mathcal{O}(R \cdot V \cdot T \cdot P)$ | Generates polyphonic music from CP/Tucker low-rank decomposition of a 3-way music tensor (voices x time x pitch). Factor matrices define voice character, rhythmic profile, and pitch vocabulary; core tensor controls their multiplicative interaction. Deterministic, designable, no-training counterpart to 085 NMF-C (2D to 3D), 046 VAE-LSI (learned vs designed), and 097 MaxEnt-C (structure via low-rank rather than constraints). |
-|||### Source
+|| **118** | concrete | Discrete Denoising Diffusion Probabilistic Model Composition (D3PM-C) | **AI-Driven** | Pitch, Rhythm, Harmony, Structure, Texture | Variable (Classifier-guided, Context-guided) | Grid-Locked / Continuous | Macro / Denoising Trajectory | $\mathcal{O}(T \cdot N \cdot D^2 \cdot H)$ | Applies discrete-state diffusion (absorbing/uniform transition matrices) directly to symbolic music tokens. Forward corruption via Markov transition matrix; reverse process learns to denoise step-by-step. Supports unconditional generation, flexible note-level infilling, and post-hoc classifier guidance. Discrete-token AI-Driven counterpart to 047 DSMG (continuous diffusion) and 106 NAPC (confidence-based refinement). |
+||| **119** | concrete | Tensor Decomposition Composition (TDC) | **Rules-Based** | Pitch, Rhythm, Harmony, Structure, Texture | Moderate (Factor-guided) | Grid-Locked / Continuous | Macro / Low-Rank Core | $\mathcal{O}(R \cdot V \cdot T \cdot P)$ | Generates polyphonic music from CP/Tucker low-rank decomposition of a 3-way music tensor (voices x time x pitch). Factor matrices define voice character, rhythmic profile, and pitch vocabulary; core tensor controls their multiplicative interaction. Deterministic, designable, no-training counterpart to 085 NMF-C (2D to 3D), 046 VAE-LSI (learned vs designed), and 097 MaxEnt-C (structure via low-rank rather than constraints). |
+|| **120** | concrete | Random Matrix Theory Composition (RMTC) | **Stochastic** | Pitch, Rhythm, Harmony, Structure, Texture | Weak (Eigenvalue-guided) | Continuous / Fluid | Meso / Spectral | $\mathcal{O}(N^3)$ | Generates composition parameters from eigenvalue statistics of random matrices (GOE/GUE/GSE): Wigner semicircle law drives pitch distribution; Wigner surmise (level repulsion) drives melodic intervals; Dyson-Mehta spectral rigidity drives chord voicing balance; Tracy-Widom extremes drive climax/range; ensemble-type switching drives macro-form. Stochastic-spectral counterpart to 002 Markov / 048 RBMPD / 085 NMF-C. |
+||### Source
 |Sakellariou, J., Tria, F., Loreto, V. & Pachet, F. (2017). "Maximum entropy models capture melodic styles." *Scientific Reports* 7, 9172. arXiv:1610.03414. — Jaynes, E. T. (1957). "Information theory and statistical mechanics." *Physical Review* 106, 620–630.
 
 ### Layer
@@ -26848,4 +26849,120 @@ Zero-drift is maintained: TES does not change the buffer length, only its envelo
 
 6. **Tuning time constants**: The default $\\tau_f = 1$ ms and $\\tau_s = 15$ ms work for most percussive material. For very slow attacks (bowed strings, pads), widen the gap ($\\tau_f = 5$ ms, $\\tau_s = 50$ ms) to catch the slower onsets. For extremely fast transients (rim shots, clicks), narrow ($\\tau_f = 0.3$ ms, $\\tau_s = 10$ ms).
 
-7. **Normalization instablity**: The peak-normalization EMA can drift during long silences. Reset the running peak $\\bar{d}_a$ when the signal level falls below a noise floor threshold ($|x[n]| < 10^{-6}$ for $> 100$ ms).
+7. **Normalization instablity**: The peak-normalization EMA can drift during long silences. Reset the running peak $\\bar{d}_a$ when the signal level falls below a noise floor threshold ($|x[n]| < 10^{-6}$ for $> 100$ ms).### Source
+
+Wigner, E. P. (1955). "Characteristic vectors of bordered matrices with infinite dimensions." *Annals of Mathematics* 62(3), 548–564. — Dyson, F. J. (1962). "Statistical theory of the energy levels of complex systems." *Journal of Mathematical Physics* 3(1), 140–156. — Mehta, M. L. (2004). *Random Matrices* (3rd ed.), Elsevier/Academic Press. — Tracy, C. A. & Widom, H. (1994). "Level-spacing distributions and the Airy kernel." *Communications in Mathematical Physics* 159(1), 151–174. — Bohigas, O., Giannoni, M. J. & Schmit, C. (1984). "Characterization of chaotic quantum spectra and universality of level fluctuation laws." *Physical Review Letters* 52(1), 1–4.
+
+### Layer
+
+**concrete** — random eigenvalue ensemble statistics are sampled to produce concrete pitch values (scaled and quantized to scale degrees), inter-onset intervals (from eigenvalue gaps), chord voicings (from spectral rigidity), and macro-form templates (from ensemble-type switching). The output directly fills UnitMatrix cells with MusicEvents. Feeds generators/ via eigenvalue-sampling subroutines.
+
+### Description
+
+**Random Matrix Theory Composition (RMTC)** treats musical parameters as the eigenvalue statistics of large random matrices drawn from the classical invariant ensembles (GOE/GUE/GSE). The core insight, originating from Wigner's nuclear physics (1955) and formalized by Dyson (1962) and Mehta (2004), is that eigenvalue spectra of large random matrices exhibit *universal* statistical properties that depend only on symmetry class, not on the specific probability distribution of matrix entries. These universal laws — the Wigner semicircle, the Wigner surmise for nearest-neighbor spacing, Dyson-Mehta spectral rigidity, and Tracy-Widom extreme-value statistics — provide a complete generative framework for pitch, rhythm, harmony, structure, and texture.
+
+**The three ensembles mirror three harmonic characters**:
+- **GOE** (Gaussian Orthogonal Ensemble, $\beta=1$, real symmetric matrices): eigenvalues repel quadratically; the spacing distribution $P(s) = (\pi s/2)\exp(-\pi s^2/4)$ produces interval distributions closest to diatonic/tonal music (few unisons, moderate leaps, no extremely large gaps). *Default for tonal sections.*
+- **GUE** (Gaussian Unitary Ensemble, $\beta=2$, complex Hermitian): quartic repulsion $P(s) = (32s^2/\pi^2)\exp(-4s^2/\pi)$; eigenvalues spread further apart on average, producing more chromatic and atonal intervalic landscapes. *Default for chromatic/atonal sections.*
+- **GSE** (Gaussian Symplectic Ensemble, $\beta=4$, quaternion self-dual): sextic repulsion; the strongest level repulsion, producing maximally dispersed spectra that map to microtonal or dense-cluster textures.
+
+#### Wigner Semicircle Law — Pitch Distribution
+
+For an $N \times N$ Wigner matrix $H$ (symmetric, zero-mean entries with variance $\sigma^2 = 1/N$), the normalised eigenvalue density in the limit $N \to \infty$ is:
+
+$$\rho(\lambda) = \frac{1}{2\pi} \sqrt{4 - \lambda^2}, \quad |\lambda| \le 2$$
+
+The semicircle density maps to pitch: eigenvales near the center ($\lambda \approx 0$) are the most probable and correspond to tonic/dominant pitch classes; eigenvalues near the edges ($\lambda \approx \pm 2$) are rare and correspond to chromatic extremes. Concretely:
+
+$$p_{\text{MIDI}}(i) = \text{round}\left(p_0 + K \cdot \lambda_i\right) \mod 12$$
+
+where $\lambda_i$ is the $i$-th eigenvalue of the sampled matrix, $p_0$ is the tonic MIDI note, and $K$ is a scaling factor (typically $K \approx 2{-}5$ semitones per eigenvalue unit). The semicircle envelope ensures the pitch distribution peaks at the tonic and tapers toward the chromatic extremes — a universal spectral analogue of tonal gravity.
+
+#### Wigner Surmise — Melodic Interval Spacing
+
+The nearest-neighbor eigenvalue spacing distribution for GOE (Wigner surmise):
+
+$$P_{\beta}(s) = a_\beta s^\beta e^{-b_\beta s^2}$$
+
+with $\beta = 1$ (GOE), $a_1 = \pi/2$, $b_1 = \pi/4$. The key property is **level repulsion**: $P(s) \to 0$ as $s \to 0$ (no zero spacings = no unisons), and $P(s) \to 0$ exponentially as $s \to \infty$ (very large intervals are rare). The normalised spacing $s_i = (\lambda_{i+1} - \lambda_i)/\Delta$ where $\Delta$ is the local mean spacing. Mapped to music:
+
+$$\text{interval}_{\text{semitones}}(i) = \text{round}(s_i \cdot M)$$
+
+where $M$ is a scale factor (typically $M \approx 3{-}7$) that sets the average melodic interval size. The Wigner distribution naturally produces the hallmarks of good melodic writing: predominantly small intervals (seconds and thirds), occasional fourths and fifths, rare larger leaps, and virtually no zero-interval repetitions (unless $M$ is made very small). This is a stochastic, parameter-free model of the melodic interval distribution — a novel counterpart to the rule-based 081 NIRMC and the Gaussian-based 048 RBMPD.
+
+#### Dyson-Mehta Spectral Rigidity — Chord Voicing and Harmonic Coherence
+
+The $\Delta_3(L)$ statistic measures the variance of the number of eigenvalues in an interval of length $L$ (in units of mean spacing):
+
+$$\langle \Delta_3(L) \rangle_{\text{GOE}} \approx \frac{1}{\pi^2} \log L + 0.057, \quad L \gg 1$$
+
+Spectral rigidity means that eigenvalues are *more evenly spaced* than independent Poisson points ($\Delta_3 \sim L/15$ for Poisson). Applied to chord voicing: the spacing of simultaneous eigenvalues from a single matrix sample imposes a **minimum spacing constraint** between chord tones, preventing voicing collisions and enforcing balanced voicing spread. For an $n$-voice chord, the first $n$ eigenvalues of a freshly sampled matrix, sorted and normalized, give the $n$ chord tones' scale degrees. The rigidity ensures that no two chord tones are too close (no voice-crossing or doubling collisions), while the level repulsion ensures voicing diversity across successive chords.
+
+#### Tracy-Widom Law — Climax and Dynamic Range
+
+The largest eigenvalue $\lambda_{\max}$ of an $N \times N$ GOE matrix fluctuates around $2\sqrt{N}$ according to:
+
+$$\lim_{N \to \infty} \mathbb{P}\left(N^{2/3}(\lambda_{\max} - 2) \le t\right) = F_1(t)$$
+
+The Tracy-Widom distribution $F_1$ (GOE) has mean $\approx -1.21 N^{-2/3}$ and standard deviation $\approx 1.27 N^{-2/3}$. This governs climactic extreme-register events: the height of the maximum eigenvalue determines the highest pitch in a section; its rarity (the right tail of $F_1$) controls how often extreme leaps occur. The difference between $\lambda_{\max}$ and $\lambda_{\min}$ (spectral width) maps to the overall registral range of the section.
+
+#### Ensemble-Type Switching — Macro-Form
+
+Each section of the composition selects an ensemble type (GOE/GUE/GSE), a matrix dimension $N_s$ (vocabulary size), and a scaling factor $M_s$ (interval spread). The macro-form emerges as:
+
+- **Intro/Outro**: GOE, small $N$ ($N=4{-}6$), small $M$ — tight diatonic range
+- **Verse**: GOE, moderate $N$ ($N=7{-}10$), moderate $M$ — standard melodic profile
+- **Chorus**: GUE, large $N$ ($N=10{-}16$), large $M$ — wider intervals, more chromatic
+- **Bridge**: GSE, moderate $N$ ($N=8{-}12$), extreme $M$ — microtonal/dense voicings
+- **Development**: GUE, $N$ ramps up (increasing chromatic complexity)
+
+The Tracy-Widom extreme of each section's spectrum sets the climactic peak of that section; the overall composition's climax is the global maximum over all sections.
+
+### Musical Elements Framework
+
+**PITCH**: Derived from eigenvalues of random matrices via the semicircle density. The eigenvalue distribution naturally peaks near tonic (center of semicircle) and tapers to chromatic extremes (edges). Interval sizes follow the Wigner surmise: predominantly small intervals with rare large leaps, zero unisons under level repulsion, controlled by ensemble type ($\beta$) and scaling factor $M$.
+
+**RHYTHM**: Inter-onset intervals (IOIs) are derived from the normalised eigenvalue gaps $s_i$. The level repulsion ensures no two onsets are identical (no exact repetitions of the same IOI). The gap distribution shape ($P(s) \propto s^\beta e^{-b s^2}$) controls the rhythmic "feel": GOE ($\beta=1$) = natural groove with moderate syncopation; GUE ($\beta=2$) = more syncopated, wider IOI spread; GSE ($\beta=4$) = maximal rhythmic diversity. Continuous-time by default (gaps are real-valued), with optional quantization to a grid.
+
+**HARMONY**: Chord voicings from simultaneous eigenvalues per matrix sample. Spectral rigidity ($\Delta_3(L)$) ensures balanced voicing with no collisions. Per-section ensemble type selects the harmonic palette: GOE → diatonic/tonal, GUE → chromatic/atonal, GSE → microtonal/dense. Harmonic tension is controlled by the cumulative spectral width (distance between $\lambda_{\max}$ and $\lambda_{\min}$ across successive chords).
+
+**STRUCTURE**: Macro-form from per-section ensemble trajectories: each section defines $(N_s, \beta_s, M_s, K_s)$ parameters. The form arc is a designed sequence through ensemble space (e.g., GOE→GOE→GUE→GUE→GSE→GOE for Intro→Verse→Chorus→Bridge→Climax→Outro). The Tracy-Widom extreme eigenvalues of each section's spectrum anchor the section's registral climax.
+
+**TEXTURE**: Texture density from matrix dimension $N$ (vocabulary size) and number of eigenvalues used per chord. Low $N$ (4–6) = sparse, thin texture; high $N$ (12–20) = dense, thick texture; ensemble crossover (mixing GOE/GUE eigenvalues from independently sampled matrices) = polytextural layering. Eigenvector components (the matrix columns) provide per-voice mixing weights, enabling correlated but independent voice assignments.
+
+### UnitMatrix Integration
+
+Each UnitMatrix cell $(v, s)$ — voice $v$, section $s$ — is filled by:
+
+1. **Sample a matrix** for section $s$: $H_s$ of size $N_s$ from ensemble $\beta_s$, with variance $\sigma^2 = 1/N_s$.
+2. **Compute eigenvalues** $\{\lambda_i^{(s)}\}$ via symmetric QR (GOE) or Hermitian eigenvalue decomposition (GUE/GSE).
+3. **Sort and normalise** eigenvalues: $\tilde{\lambda}_i = (\lambda_i - \mu)/\sigma_\lambda$ where $\mu$ is the mean eigenvalue and $\sigma_\lambda$ the standard deviation.
+4. **Assign to voices**: For voice $v$ in section $s$, pick the $v$-th eigenvalue (mod $N_s$) as the pitch seed. Apply the semicircle scaling:
+   $$p_{v,s} = \text{quantize}\big(p_0 + K_s \cdot \tilde{\lambda}_{v \bmod N_s}, \; \text{scale}(s)\big)$$
+   where $\text{scale}(s)$ is the section's scale/mode and $\text{quantize}$ rounds to the nearest scale degree.
+5. **Derive interval sequence** from successive eigenvalue gaps $s_i^{(s)}$:
+   $$\text{intervals}^{(s)} = \{\text{round}(s_i \cdot M_s)\}_{i=1}^{N_s-1}$$
+   giving the per-voice melodic contour for the section.
+6. **Build events**: For each voice $v$, accumulate the interval sequence into a pitch contour starting from $p_{v,s}$, with duration from normalised Tracy-Widom fluctuation (small = short, large = long). Create MusicEvents with the appropriate tick offsets.
+
+**Voices**: Each UnitMatrix voice gets its own eigenvalue index (cycling through the eigenvalue stream mod $N_s$). Voices on the same eigenvalue are harmonically related (share the same pitch seed). The eigenvector components provide per-voice amplitude weights $|v_i|^2$ for dynamics/velocity.
+
+**Sections**: Each section defines a distinct RMT parameter tuple $(N_s, \beta_s, M_s, K_s)$. The macro-form is the sequence of these tuples. Section transitions correspond to re-sampling the random matrix — new eigenvalues, new intervals, new voice seeds.
+
+**Cell filling**: A single matrix sample per section generates all events for all voices in that section. The number of generated events per voice is $N_s - 1$ intervals; shorter sections use fewer eigenvalues (truncate the sorted eigenvalue list). The total events in a section = $\sum_v (N_{s,v} - 1)$ where each voice can have its own matrix dimension.
+
+### Pitfalls
+
+1. **Eigenvalue scaling sensitivity**: The semicircle law gives eigenvalues in $[-2, 2]$ for normalised Wigner matrices. If the variance is not set to $\sigma^2 = 1/N$, the spectral width changes, affecting the pitch range. Always scale to unit variance before deriving pitch values.
+
+2. **Determinism vs stochasticity**: Each matrix sample is stochastic; different seeds give different compositions. For reproducible output, fix the random seed per composition and store it in provenance. The same seed + same parameters = identical eigenvalue set.
+
+3. **Ensemble boundary transitions**: Switching ensemble types mid-piece (e.g., GOE→GUE) causes a discontinuous jump in eigenvalue statistics. Mitigate by linearly interpolating the interval scaling $M$ and pitch scaling $K$ across section boundaries, or by constructing a smooth Dyson Brownian motion bridge between the two spectral distributions.
+
+4. **Matrix diagonalisation cost**: Symmetric eigenvalue decomposition is $\mathcal{O}(N^3)$ per matrix. For large $N$ ($>100$) this becomes expensive. Use $N$ in the range 6–20 for typical sections; this is negligible ($\mathcal{O}(10^2)$–$\mathcal{O}(10^4)$ operations per section). For quick melody generation, pre-compute a library of eigenvalue sequencers.
+
+5. **No fine-grained pitch control**: The semicircle distribution controls *distribution* but not *exact* pitch trajectories. If specific motivic shapes are required, use RMTC to generate the interval distribution and phrase structure, then constrain the contour with 095 CTC (Contour Theory) as a post-filter. RMTC is a stochastic-spectral method, not a deterministic-motivic one.
+
+6. **Eigenvector interpretation**: While eigenvalues have a clear musical interpretation (pitch/pitch-class), eigenvectors provide weights that require careful mapping to dynamics/timbre. The squared eigenvector components $\sum_i |v_i^{(j)}|^2 = 1$ by orthonormality — normalise to MIDI velocity range [0, 127] via $vel_j = \text{round}(|v_i^{(j)}|^2 \cdot 100 + 20)$.
+
+7. **Overly uniform spacing**: Spectral rigidity means eigenvalues are *more* evenly spaced than random — this produces chord/interval distributions that may sound "too balanced" for some styles (e.g., avant-garde or aleatoric music may prefer the Poisson level-spacing of uncorrelated random numbers). Use the Poisson (integrable) spacing $P(s) = e^{-s}$ as an alternative for styles needing less coherence.

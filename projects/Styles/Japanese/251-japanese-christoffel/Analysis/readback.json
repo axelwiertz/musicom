@@ -1,0 +1,47 @@
+{
+  "phase1": {
+    "path": "251-japanese-christoffel-phase1.mid",
+    "n_note_tracks": 1,
+    "track_lengths": [
+      38400
+    ],
+    "zero_drift": true,
+    "total_onsets": 120,
+    "pitched_onsets": 120,
+    "off16": 119,
+    "off8": 120,
+    "out_scale": 0,
+    "out_chord": 41,
+    "size_bytes": 1157
+  },
+  "perfect": {
+    "path": "251-japanese-christoffel-perfect.mid",
+    "n_note_tracks": 4,
+    "track_lengths": [
+      38400
+    ],
+    "zero_drift": true,
+    "total_onsets": 272,
+    "pitched_onsets": 200,
+    "off16": 0,
+    "off8": 0,
+    "out_scale": 0,
+    "out_chord": 0,
+    "size_bytes": 2649
+  },
+  "humanized": {
+    "path": "251-japanese-christoffel-humanized.mid",
+    "n_note_tracks": 4,
+    "track_lengths": [
+      38400
+    ],
+    "zero_drift": true,
+    "total_onsets": 272,
+    "pitched_onsets": 200,
+    "off16": 225,
+    "off8": 225,
+    "out_scale": 0,
+    "out_chord": 2,
+    "size_bytes": 2643
+  }
+}

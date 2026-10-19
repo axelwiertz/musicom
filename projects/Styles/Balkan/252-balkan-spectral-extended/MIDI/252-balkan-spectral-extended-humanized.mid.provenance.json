@@ -1,0 +1,29 @@
+{
+  "artifact": "252-balkan-spectral-extended-humanized.mid",
+  "classification": "ai-assisted",
+  "generator": "051-SGLM + rules + humanize",
+  "sources": [],
+  "parameters": {
+    "phase": "2-humanized",
+    "bpm": 132,
+    "meter": "7/8",
+    "key": "G Dorian (G A Bb C D E F)",
+    "seed": 20261007,
+    "humanize_seed": 20513007,
+    "style": "folk",
+    "voices": 4,
+    "bars": 32,
+    "form": "8 sections x 4 bars = 32 bars",
+    "instruments": [
+      "Double Bass",
+      "Accordion",
+      "Clarinet",
+      "Violin"
+    ]
+  },
+  "notes": "Balkan dajcovo 7/8 in G Dorian, rework of 228-balkan-spectral. Fiedler vector -> lead, 2nd eigenvector -> violin counter, algebraic connectivity -> harmonic tension.",
+  "sha256": "b7fb7ab79065c90674d3b286dd9794089a209b1ae239c656634f93e3acdf8c3a",
+  "bytes": 6079,
+  "created_utc": "2026-10-19T01:22:17.960442+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,19 @@
+{
+  "artifact": "251-japanese-christoffel-phase1.wav",
+  "classification": "ai-assisted",
+  "generator": "FluidSynth + master(target=-14.0 LUFS) - 251 CWCC",
+  "sources": [],
+  "parameters": {
+    "tag": "phase1",
+    "style": "japanese",
+    "target_lufs": -14.0,
+    "integrated_lufs": -15.54,
+    "true_peak_db": -1.0,
+    "soundfont": "FluidR3_GM.sf2"
+  },
+  "notes": "Mastered render of phase1 (SoundFont render, LUFS-normalized, -1 dBTP ceiling).",
+  "sha256": "57f61025f71befdc9205b19b49021b9a9757b7b32efef93aabaaa10dc48d3418",
+  "bytes": 10251308,
+  "created_utc": "2026-10-18T23:15:25.437156+00:00",
+  "provenance_version": "1.0"
+}

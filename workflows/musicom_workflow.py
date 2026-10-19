@@ -272,6 +272,13 @@ SP_METHODS = {
     "SP-106": ("sound.effects.frequency_shifter", "SSB Frequency Shifter w/ Spiral Feedback — stereo/mono quadrature modes, ratio-coupled channels, delay+blur+shelf filter feedback path (FAC Gravity-style)"),
     "SP-107": ("sound.effects.bit_crusher", "Bit Crusher / Fidelity Reducer — linked sample-rate/bit-depth macro, Iron/Worn character voicing, aliasing foldover emphasis (Modbap Fidelity Theory-style)"),
     "SP-108": ("sound.generators.poly_arp_seq", "Polyphonic Arpeggiator + Step Sequencer — Up/Down/UpDown/Random/Assign arp modes, 1-4 octave, dotted/triplet/swing; 512-step polyphonic sequencer with forward/backward/pendulum, chord recording, transpose (Prophet Rev4 firmware-mod-style)"),
+    # 2026-10-19 scan
+    "SP-109": ("sound.effects.tape_stop", "Tape-Stop / Turntable-Stop Processor — Classic (rate-ramp resample: pitch+time drop together), Modern (granular pitch-only drop, time-locked), Loop (capture+retrigger stutter) modes; automatable speed curve (Cableguys TimeStop-style)"),
+    "SP-110": ("sound.effects.hyperwarp_granular", "Graph-Sequenced Granular Warp — 16-step drawable graph (speed/direction/size/pitch/filter lanes) driving a granular engine; 7 per-grain sonic-imprint profiles: Clean/Flange/Degrade/Filter Spam/Harmo-Nicer/Fauxcoder/Lo-Fizzly; one-click random patches (Baby Audio HyperWarp-style)"),
+    "SP-111": ("sound.synthesis.odd1_engine", "Multi-Playhead Microsonic Granular Engine — 2 layers x 4 playheads with TIME PATH (forward/backward/freeze), independent pitch/speed, grain spacing/size morph, per-grain frequency-selective filter; SYNTH/LIVE (60s rolling buffer)/LOOPS (phase-locked independent loops) modes (Oddment ODD-1-style)"),
+    "SP-112": ("sound.generators.auto_divisi", "Auto Divisi — chord-note distribution across N instrument parts: per-part ranges, workload balancing, minimal-motion voice-leading, unison doublings; Note-off Revoice (Forma Labs Filament 1.2-style)"),
+    "SP-113": ("sound.effects.supervariable_filter", "Supervariable VCF — 4-D filter (cutoff/resonance/bandwidth/profile): continuous HP->notch->LP character morph via SVF output blending, 2/3/4-pole LP cascade, BP/X/lp24 modes, voltage-controlled profile modulation (Shear Electronics Relic-style)"),
+    "SP-114": ("sound.modular.mod_matrix", "Generic Modulation Matrix — 16 slots x 20 sources x 56 destinations, per-slot amount/enable, uni/bipolar-aware summing, seeded S&H/noise, A/B snapshot morph slider (Sequential Take 5 editor-style)"),
 }
 
 
@@ -282,6 +289,7 @@ class ComposeResult:
     method: str
     voices: list
     bpm: int
+    perfect_midi_path: str = ""   # grid-locked twin (humanize=True only)
 
 
 @dataclass
@@ -580,11 +588,16 @@ def compose(style="pop", method=None, form=None, key="C", bpm=None,
                     drum_evs.append(MusicEvent(42, 60, bar_start + h * 240, bar_start + h * 240 + 120))  # hats
             composer.fill_voice_section(voices[4][0], sname, _unit_from_events(drum_evs, section_len))
 
-    # --- always-on humanization (style-derived, seeded, zero-drift safe) ----
+    # --- humanization (style-derived, seeded, zero-drift safe) -------------
+    # Dual-version contract (2026-10-17): humanize=True exports BOTH a
+    # grid-locked `-perfect` MIDI AND a `-humanized` MIDI, so the listener can
+    # A/B the humanization. humanize=False keeps the single-file byte-identical
+    # path (pinned by the golden-hash gates).
     humanize_summary = None
     humanize_seed = None
+    perfect_midi_path = ""
     if humanize:
-        from workflows.humanize import humanize_composer
+        from workflows.humanize import export_dual
         humanize_seed = _humanize_seed(seed, style, method, key, bpm, form)
         hz_instruments = {}
         for vname, inst_name in voices:
@@ -594,14 +607,20 @@ def compose(style="pop", method=None, form=None, key="C", bpm=None,
             except Exception:
                 dna = None
             hz_instruments[vname] = dna
-        humanize_summary = humanize_composer(
-            composer, style=style, seed=humanize_seed, bpm=bpm,
-            instruments=hz_instruments)
-
-    ok, msg = composer.validate()
-    if not ok:
-        raise RuntimeError(f"validate() failed: {msg}")
-    composer.to_midi(str(midi_path))
+        base = str(midi_path)
+        if base.endswith(".mid"):
+            base = base[:-4]
+        perfect_midi_path = base + "-perfect.mid"
+        humanized_midi_path = base + "-humanized.mid"
+        humanize_summary = export_dual(
+            composer, perfect_midi_path, humanized_midi_path,
+            style=style, seed=humanize_seed, bpm=bpm, instruments=hz_instruments)
+        midi_path = humanized_midi_path
+    else:
+        ok, msg = composer.validate()
+        if not ok:
+            raise RuntimeError(f"validate() failed: {msg}")
+        composer.to_midi(str(midi_path))
 
     prov_path = write_provenance(
         artifact_path=str(midi_path),
@@ -613,6 +632,7 @@ def compose(style="pop", method=None, form=None, key="C", bpm=None,
             "humanize": humanize_summary is not None,
             "humanize_seed": humanize_seed,
             "humanize_profiles": humanize_summary,
+            "perfect_midi_path": perfect_midi_path or None,
         },
     )
     return ComposeResult(
@@ -621,6 +641,7 @@ def compose(style="pop", method=None, form=None, key="C", bpm=None,
         method=method,
         voices=voices,
         bpm=bpm,
+        perfect_midi_path=perfect_midi_path,
     )
 
 

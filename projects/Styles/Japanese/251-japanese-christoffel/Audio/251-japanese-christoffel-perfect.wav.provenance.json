@@ -1,0 +1,19 @@
+{
+  "artifact": "251-japanese-christoffel-perfect.wav",
+  "classification": "ai-assisted",
+  "generator": "FluidSynth + master(target=-14.0 LUFS) - 251 CWCC",
+  "sources": [],
+  "parameters": {
+    "tag": "perfect",
+    "style": "japanese",
+    "target_lufs": -14.0,
+    "integrated_lufs": -14.28,
+    "true_peak_db": -1.0,
+    "soundfont": "FluidR3_GM.sf2"
+  },
+  "notes": "Mastered render of perfect (SoundFont render, LUFS-normalized, -1 dBTP ceiling).",
+  "sha256": "a32f77eb4894177a4e543795457faba51474cd185ef39e0decf28fa6e3061e61",
+  "bytes": 10210604,
+  "created_utc": "2026-10-18T23:17:54.441325+00:00",
+  "provenance_version": "1.0"
+}

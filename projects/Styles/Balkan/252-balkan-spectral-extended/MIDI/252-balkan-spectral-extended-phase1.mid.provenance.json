@@ -1,0 +1,21 @@
+{
+  "artifact": "252-balkan-spectral-extended-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "051-SGLM (raw Fiedler walk)",
+  "sources": [],
+  "parameters": {
+    "phase": 1,
+    "bpm": 132,
+    "meter": "7/8",
+    "key": "G Dorian (G A Bb C D E F)",
+    "seed": 20261007,
+    "voices": 1,
+    "bars": 32,
+    "note": "raw generative draft (single clarinet, off-grid)"
+  },
+  "notes": "",
+  "sha256": "bf8278e46077084c202941138a615ba9f4dbbfaec0fcdff731b80ace1e283644",
+  "bytes": 1769,
+  "created_utc": "2026-10-19T01:22:17.895050+00:00",
+  "provenance_version": "1.0"
+}

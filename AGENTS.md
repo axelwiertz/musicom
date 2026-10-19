@@ -125,7 +125,12 @@ hz = humanize_composer(composer, style=style, seed=hz_seed, bpm=bpm, instruments
 ```
 
 - `compose(humanize=True)` applies it by default (style-derived, seeded,
-  provenance-recorded); pass `humanize=False` for byte-neutral engine tests.
+  provenance-recorded) and now exports **BOTH** `<base>-perfect.mid` (grid-
+  locked, no jitter) AND `<base>-humanized.mid` (humanized) via
+  `workflows.humanize.export_dual` — the dual-version contract (2026-10-17).
+  Pass `humanize=False` for byte-neutral engine tests (single file, golden
+  hashes). Per-project bespoke compose.py must call `export_dual` too, not
+  hand-roll export→humanize→export.
 - Timing jitter is in **ms**, converted to ticks by tempo. `phrase_corr` splits
   jitter into correlated phrase drift vs per-note white noise. Style map in
   `STYLE_HUMANIZE`; instrument role DNA in `Instrument.humanize_dna`

@@ -1,0 +1,441 @@
+{
+  "project": "251-japanese-christoffel",
+  "project_number": 251,
+  "style": "japanese",
+  "method_id": "069",
+  "method_name": "Christoffel Word Combinatorial Composition (CWCC)",
+  "method_layer": "concrete",
+  "form": "rondo (A-B-A-C-A)",
+  "key": "E yo pentatonic (major pentatonic)",
+  "root_pc": 4,
+  "key_pcs": [
+    1,
+    4,
+    6,
+    8,
+    11
+  ],
+  "scale_step_word": [
+    0,
+    0,
+    1,
+    0,
+    1
+  ],
+  "scale_steps": [
+    2,
+    2,
+    3,
+    2,
+    3
+  ],
+  "koto_rhythm_mask": [
+    1,
+    1,
+    0,
+    1,
+    1,
+    0,
+    1,
+    0
+  ],
+  "shamisen_rhythm_mask": [
+    1,
+    0,
+    1,
+    0,
+    0,
+    1,
+    0,
+    0
+  ],
+  "bpm": 88,
+  "ticks_per_beat": 480,
+  "beats_per_bar": 4,
+  "bar_ticks": 1920,
+  "sections": [
+    {
+      "name": "A1",
+      "bars": 4
+    },
+    {
+      "name": "B",
+      "bars": 4
+    },
+    {
+      "name": "A2",
+      "bars": 4
+    },
+    {
+      "name": "C",
+      "bars": 4
+    },
+    {
+      "name": "A3",
+      "bars": 4
+    }
+  ],
+  "total_bars": 20,
+  "total_ticks": 38400,
+  "seed": 251,
+  "chord_path": [
+    {
+      "bar": 0,
+      "section": "A1",
+      "roman": "I",
+      "name": "E major",
+      "pcs": [
+        4,
+        8,
+        11
+      ]
+    },
+    {
+      "bar": 1,
+      "section": "A1",
+      "roman": "I",
+      "name": "E major",
+      "pcs": [
+        4,
+        8,
+        11
+      ]
+    },
+    {
+      "bar": 2,
+      "section": "A1",
+      "roman": "I",
+      "name": "E major",
+      "pcs": [
+        4,
+        8,
+        11
+      ]
+    },
+    {
+      "bar": 3,
+      "section": "A1",
+      "roman": "I",
+      "name": "E major",
+      "pcs": [
+        4,
+        8,
+        11
+      ]
+    },
+    {
+      "bar": 4,
+      "section": "B",
+      "roman": "vi",
+      "name": "C# minor",
+      "pcs": [
+        1,
+        4,
+        6
+      ]
+    },
+    {
+      "bar": 5,
+      "section": "B",
+      "roman": "vi",
+      "name": "C# minor",
+      "pcs": [
+        1,
+        4,
+        6
+      ]
+    },
+    {
+      "bar": 6,
+      "section": "B",
+      "roman": "V",
+      "name": "B sus",
+      "pcs": [
+        1,
+        4,
+        11
+      ]
+    },
+    {
+      "bar": 7,
+      "section": "B",
+      "roman": "V",
+      "name": "B sus",
+      "pcs": [
+        1,
+        4,
+        11
+      ]
+    },
+    {
+      "bar": 8,
+      "section": "A2",
+      "roman": "I",
+      "name": "E major",
+      "pcs": [
+        4,
+        8,
+        11
+      ]
+    },
+    {
+      "bar": 9,
+      "section": "A2",
+      "roman": "I",
+      "name": "E major",
+      "pcs": [
+        4,
+        8,
+        11
+      ]
+    },
+    {
+      "bar": 10,
+      "section": "A2",
+      "roman": "I",
+      "name": "E major",
+      "pcs": [
+        4,
+        8,
+        11
+      ]
+    },
+    {
+      "bar": 11,
+      "section": "A2",
+      "roman": "I",
+      "name": "E major",
+      "pcs": [
+        4,
+        8,
+        11
+      ]
+    },
+    {
+      "bar": 12,
+      "section": "C",
+      "roman": "ii",
+      "name": "F# sus2 (tense)",
+      "pcs": [
+        6,
+        8,
+        11
+      ]
+    },
+    {
+      "bar": 13,
+      "section": "C",
+      "roman": "ii",
+      "name": "F# sus2 (tense)",
+      "pcs": [
+        6,
+        8,
+        11
+      ]
+    },
+    {
+      "bar": 14,
+      "section": "C",
+      "roman": "V",
+      "name": "B sus",
+      "pcs": [
+        1,
+        4,
+        11
+      ]
+    },
+    {
+      "bar": 15,
+      "section": "C",
+      "roman": "V",
+      "name": "B sus",
+      "pcs": [
+        1,
+        4,
+        11
+      ]
+    },
+    {
+      "bar": 16,
+      "section": "A3",
+      "roman": "I",
+      "name": "E major",
+      "pcs": [
+        4,
+        8,
+        11
+      ]
+    },
+    {
+      "bar": 17,
+      "section": "A3",
+      "roman": "I",
+      "name": "E major",
+      "pcs": [
+        4,
+        8,
+        11
+      ]
+    },
+    {
+      "bar": 18,
+      "section": "A3",
+      "roman": "I",
+      "name": "E major",
+      "pcs": [
+        4,
+        8,
+        11
+      ]
+    },
+    {
+      "bar": 19,
+      "section": "A3",
+      "roman": "I",
+      "name": "E major",
+      "pcs": [
+        4,
+        8,
+        11
+      ]
+    }
+  ],
+  "voices": [
+    {
+      "name": "Koto",
+      "program": 107,
+      "channel": 0,
+      "pitched": true
+    },
+    {
+      "name": "Shakuhachi",
+      "program": 77,
+      "channel": 1,
+      "pitched": true
+    },
+    {
+      "name": "Shamisen",
+      "program": 106,
+      "channel": 2,
+      "pitched": true
+    },
+    {
+      "name": "Taiko",
+      "program": 116,
+      "channel": 3,
+      "pitched": false
+    }
+  ],
+  "inline_audit": {
+    "Koto": {
+      "name": "Koto",
+      "n_notes": 100,
+      "off16": 0,
+      "off8": 0,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "Shakuhachi": {
+      "name": "Shakuhachi",
+      "n_notes": 40,
+      "off16": 0,
+      "off8": 0,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "Shamisen": {
+      "name": "Shamisen",
+      "n_notes": 60,
+      "off16": 0,
+      "off8": 0,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "Taiko": {
+      "name": "Taiko",
+      "n_notes": 72,
+      "off16": 0,
+      "off8": 0,
+      "out_scale": 0,
+      "out_chord": 0
+    }
+  },
+  "humanize": {
+    "Koto": {
+      "seed": 25351,
+      "profile": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 100,
+      "mean_abs_shift_ticks": 3.82,
+      "max_abs_shift_ticks": 12,
+      "mean_abs_vel_delta": 4.63,
+      "timing_sigma_ticks": 5.632
+    },
+    "Shakuhachi": {
+      "seed": 25352,
+      "profile": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 40,
+      "mean_abs_shift_ticks": 3.0,
+      "max_abs_shift_ticks": 9,
+      "mean_abs_vel_delta": 5.1,
+      "timing_sigma_ticks": 5.632
+    },
+    "Shamisen": {
+      "seed": 25353,
+      "profile": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 60,
+      "mean_abs_shift_ticks": 3.883,
+      "max_abs_shift_ticks": 16,
+      "mean_abs_vel_delta": 5.267,
+      "timing_sigma_ticks": 5.632
+    },
+    "Taiko": {
+      "seed": 25354,
+      "profile": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.008,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 72,
+      "mean_abs_shift_ticks": 0.722,
+      "max_abs_shift_ticks": 3,
+      "mean_abs_vel_delta": 2.958,
+      "timing_sigma_ticks": 1.408
+    }
+  }
+}

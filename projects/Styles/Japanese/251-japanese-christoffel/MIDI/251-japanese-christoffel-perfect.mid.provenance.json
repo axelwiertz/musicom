@@ -1,0 +1,28 @@
+{
+  "artifact": "251-japanese-christoffel-perfect.mid",
+  "classification": "ai-assisted",
+  "generator": "Japanese Christoffel word (069 CWCC) + musicom rules",
+  "sources": [],
+  "parameters": {
+    "phase": 2,
+    "version": "perfect",
+    "key": "E yo pentatonic (major pentatonic)",
+    "bpm": 88,
+    "seed": 251,
+    "style": "japanese",
+    "method": "069",
+    "total_bars": 20,
+    "sections": 5,
+    "voices": [
+      "Koto",
+      "Shakuhachi",
+      "Shamisen",
+      "Taiko"
+    ]
+  },
+  "notes": "Phase 2 perfect: grid-locked concrete layer (no humanization). Christoffel step word -> E-pentatonic; Euclidean/Christoffel rhythms; chord-tone quantized, 8th-grid snapped, zero-drift gated.",
+  "sha256": "2099ba24430074e4e60a5304b8db13c5185844a59552b58be6f94967640d13e5",
+  "bytes": 2649,
+  "created_utc": "2026-10-18T23:12:13.801176+00:00",
+  "provenance_version": "1.0"
+}
