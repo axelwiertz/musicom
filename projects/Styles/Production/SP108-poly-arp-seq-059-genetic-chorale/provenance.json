@@ -1,0 +1,68 @@
+{
+  "job": "random-style production (SP) layer-aligned",
+  "date": "2026-10-20",
+  "seed": 2026102022,
+  "method": "SP-108",
+  "method_module": "sound.generators.poly_arp_seq",
+  "method_desc": "Polyphonic Arpeggiator + Step Sequencer (Prophet Rev4 firmware-mod-style)",
+  "layer": "ABSOLUTE",
+  "params": {
+    "sample_rate": 44100,
+    "bpm": 88.0,
+    "ppqn": 480,
+    "arp_mode": "updown",
+    "octave_range": 2,
+    "division": "1/16",
+    "step_ticks": 120,
+    "gate": 0.8,
+    "carrier_program": 0,
+    "carrier": "FluidSynth SP-001",
+    "target_lufs": -14.0,
+    "ceiling_db": -1.0
+  },
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Experimental/059-genetic-chorale/MIDI/059-genetic-chorale.mid",
+  "normalized_midi": "/opt/data/repos/musicom/projects/Styles/Production/SP108-poly-arp-seq-059-genetic-chorale/MIDI/composition.mid",
+  "arp_midi": "/opt/data/repos/musicom/projects/Styles/Production/SP108-poly-arp-seq-059-genetic-chorale/MIDI/SP108-arp.mid",
+  "source_bpm": 88.0,
+  "source_pitch_classes": [
+    0,
+    2,
+    3,
+    5,
+    7,
+    9,
+    10
+  ],
+  "rework": "Tenor bar1 48->50",
+  "output_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP108-poly-arp-seq-059-genetic-chorale/SP108-poly-arp-seq-059-genetic-chorale.wav",
+  "output_ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP108-poly-arp-seq-059-genetic-chorale/SP108-poly-arp-seq-059-genetic-chorale.ogg",
+  "lufs": -14.000000000000004,
+  "peak": 0.704941506789578,
+  "silence_pct": 11.137818157770985,
+  "rms": 0.10840257146367618,
+  "pitch_verdict": "PASS",
+  "hit_rate": 1.0,
+  "he_mean": 0.5797997717039522,
+  "dry_he": 0.5789007952759488,
+  "he_retention": 1.001552902389044,
+  "preflight_before": {
+    "grid_off": 0,
+    "out_scale": 0,
+    "out_chord": 1,
+    "zero_drift": true,
+    "track_ends": [
+      15360
+    ],
+    "total_notes": 32
+  },
+  "preflight_after": {
+    "grid_off": 0,
+    "out_scale": 0,
+    "out_chord": 0,
+    "zero_drift": true,
+    "track_ends": [
+      15360
+    ],
+    "total_notes": 32
+  }
+}

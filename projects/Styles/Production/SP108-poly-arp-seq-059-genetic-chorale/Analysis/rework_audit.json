@@ -1,0 +1,23 @@
+{
+  "before": {
+    "grid_off": 0,
+    "out_scale": 0,
+    "out_chord": 1,
+    "zero_drift": true,
+    "track_ends": [
+      15360
+    ],
+    "total_notes": 32
+  },
+  "after": {
+    "grid_off": 0,
+    "out_scale": 0,
+    "out_chord": 0,
+    "zero_drift": true,
+    "track_ends": [
+      15360
+    ],
+    "total_notes": 32
+  },
+  "rework": "snap Tenor bar1 note 48 (C3, non-chord) to 50 (D3, chord tone of Gm); all other notes untouched; source preserved as source_original.mid"
+}
