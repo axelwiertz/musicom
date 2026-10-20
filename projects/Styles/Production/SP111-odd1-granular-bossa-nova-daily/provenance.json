@@ -1,0 +1,103 @@
+{
+  "job": "random-style production (SP) layer-aligned",
+  "date": "2026-10-20",
+  "seed": 20261020,
+  "method": "SP-111",
+  "method_module": "sound.synthesis.odd1_engine",
+  "method_desc": "Multi-Playhead Microsonic Granular Engine (Oddment ODD-1-style)",
+  "layer": "ABSOLUTE",
+  "params": {
+    "sample_rate": 44100,
+    "mode": "synth",
+    "time_path": "forward",
+    "grain_spacing_ms": 40.0,
+    "hop_samples": 1764,
+    "playhead_speed": 1764,
+    "heads": [
+      {
+        "layer": 0,
+        "head": 0,
+        "pitch_st": 0,
+        "grain_size_ms": 80.0,
+        "filter_cutoff": 1.0
+      },
+      {
+        "layer": 0,
+        "head": 1,
+        "pitch_st": 0,
+        "grain_size_ms": 80.0,
+        "filter_cutoff": 0.7
+      },
+      {
+        "layer": 0,
+        "head": 2,
+        "pitch_st": -12,
+        "grain_size_ms": 50.0,
+        "filter_cutoff": 0.6
+      },
+      {
+        "layer": 0,
+        "head": 3,
+        "pitch_st": 12,
+        "grain_size_ms": 100.0,
+        "filter_cutoff": 0.4
+      },
+      {
+        "layer": 1,
+        "head": 0,
+        "pitch_st": 0,
+        "grain_size_ms": 40.0,
+        "filter_cutoff": 0.8
+      },
+      {
+        "layer": 1,
+        "head": 1,
+        "pitch_st": 0,
+        "grain_size_ms": 120.0,
+        "filter_cutoff": 0.5
+      },
+      {
+        "layer": 1,
+        "head": 2,
+        "pitch_st": -12,
+        "grain_size_ms": 60.0,
+        "filter_cutoff": 0.55
+      },
+      {
+        "layer": 1,
+        "head": 3,
+        "pitch_st": 12,
+        "grain_size_ms": 90.0,
+        "filter_cutoff": 0.4
+      }
+    ],
+    "stereo_seeds": [
+      20261020,
+      20261021
+    ],
+    "target_lufs": -14.0,
+    "ceiling_db": -1.0
+  },
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Latin/bossa-nova-daily-2026-06-15/composition.mid",
+  "normalized_midi": "/opt/data/repos/musicom/projects/Styles/Production/SP111-odd1-granular-bossa-nova-daily/MIDI/composition.mid",
+  "source_bpm": 84.0,
+  "source_pitch_classes": [
+    0,
+    4,
+    7,
+    9
+  ],
+  "output_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP111-odd1-granular-bossa-nova-daily/SP111-odd1-granular-bossa-nova-daily.wav",
+  "output_ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP111-odd1-granular-bossa-nova-daily/SP111-odd1-granular-bossa-nova-daily.ogg",
+  "lufs": -14.040924056640067,
+  "peak": 0.8912509381337456,
+  "silence_pct": 8.85816692268305,
+  "rms": 0.10597290068419228,
+  "mono_corr": 0.08933972326498482,
+  "pitch_verdict": "PASS",
+  "hit_rate": 0.8333333333333334,
+  "he_mean": 0.37452599830195293,
+  "dry_he_mean": 0.24252714237162673,
+  "he_retention": 1.5442642610618116,
+  "dry_hit_rate": 1.0
+}

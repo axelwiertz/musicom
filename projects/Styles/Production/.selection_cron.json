@@ -1,24 +1,25 @@
 {
   "job": "random-style production (SP) layer-aligned",
-  "date": "2026-10-18",
-  "seed": 20261018,
-  "method": "SP-105",
-  "method_module": "sound.effects.spectral_panner",
-  "method_desc": "Spectral Brightness Panner \u2014 frequency-dependent auto-panner driven by spectral centroid/brightness analysis, independent per-channel paths, virtual centre mode, LFO blend, 3 pan profiles (Sound Particles Brightness Panner 2-style)",
-  "source_midi": "/opt/data/repos/musicom/projects/Styles/Japanese/001-japanese-hirajoshi/MIDI/japanese-hirajoshi.mid",
-  "source_project": "Japanese/001-japanese-hirajoshi/MIDI/japanese-hirajoshi.mid",
-  "registry_size": 48,
+  "date": "2026-10-20",
+  "seed": 20261020,
+  "method": "SP-111",
+  "method_module": "sound.synthesis.odd1_engine",
+  "method_desc": "Multi-Playhead Microsonic Granular Engine \u2014 2 layers x 4 playheads with TIME PATH (forward/backward/freeze), independent pitch/speed, grain spacing/size morph, per-grain frequency-selective filter; SYNTH/LIVE (60s rolling buffer)/LOOPS (phase-locked independent loops) modes (Oddment ODD-1-style)",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Latin/bossa-nova-daily-2026-06-15/composition.mid",
+  "source_project": "Latin/bossa-nova-daily-2026-06-15/composition.mid",
+  "registry_size": 54,
   "recent_excluded": [
     "SP-006",
-    "SP-026",
     "SP-028",
     "SP-032",
-    "SP-074",
     "SP-092",
     "SP-099",
-    "SP-103"
+    "SP-103",
+    "SP-105"
   ],
-  "already_on_source": [],
+  "already_on_source": [
+    "SP-098"
+  ],
   "baseline_excluded": [
     "SP-001"
   ],
@@ -26,6 +27,7 @@
     "SP-011",
     "SP-021",
     "SP-024",
+    "SP-026",
     "SP-033",
     "SP-034",
     "SP-035",
@@ -36,6 +38,7 @@
     "SP-071",
     "SP-072",
     "SP-073",
+    "SP-074",
     "SP-075",
     "SP-076",
     "SP-077",
@@ -54,16 +57,20 @@
     "SP-095",
     "SP-096",
     "SP-097",
-    "SP-098",
     "SP-100",
     "SP-101",
     "SP-102",
     "SP-104",
-    "SP-105",
     "SP-106",
     "SP-107",
-    "SP-108"
+    "SP-108",
+    "SP-109",
+    "SP-110",
+    "SP-111",
+    "SP-112",
+    "SP-113",
+    "SP-114"
   ],
-  "n_candidates": 353,
-  "n_well_formed": 241
+  "n_candidates": 357,
+  "n_well_formed": 245
 }
