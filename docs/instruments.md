@@ -608,6 +608,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Keys | Accordion | 21 | 36–96 | harmony, melody, bass, rhythm, ornament |
 | Keys | Reed Organ | 20 | 36–96 | harmony, pad, melody, drone, ornament |
 | Keys | Clavi | 7 | 29–89 | lead, rhythm, accent, ornament, countermelody |
+| Keys | Drawbar Organ | 16 | 24–89 | harmony, pad, comp, lead, bass, rhythm, drone, accent |
 | Keys | Electric Piano 1 (Rhodes) | 4 | 36–96 | harmony, melody, bass, accent, color |
 | Brass | Trumpet | 56 | 54–86 | lead, accent, fanfare |
 | Brass | Muted Trumpet | 59 | 54–86 | lead, countermelody, accent, melody, ornament |
@@ -615,7 +616,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Brass | Brass Section | 61 | 36–96 | lead, accent, fanfare, counter, harmony, pad |
 | Brass | French Horn | 60 | 41–84 | harmony, counter, accent, lead |
 | Brass | Tuba | 58 | 26–72 | bass, harmony, accent, rhythm |
-| Woodwind | Flute | 74 | 60–96 | lead, counter, ornament |
+| Woodwind | Flute | 73 | 60–96 | lead, counter, ornament |
 | Woodwind | Harmonica | 22 | 48–96 | lead, harmony, accent |
 | Woodwind | Oboe | 68 | 52–92 | lead, counter, harmony, accent |
 | Woodwind | Clarinet | 71 | 52–96 | lead, counter, harmony, accent |
@@ -665,6 +666,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 || 1 | Acoustic Grand Piano | **Bright_Acoustic_Piano** ✗ (list[1]) |
 | 6 | Harpsichord | Harpsichord ✓ (GM_PROGRAMS[6] + FluidR3 preset 6 both "Harpsichord") |
 | 7 | Clavi | **Clavi** ✓ (pipeline GM_PROGRAMS[7] = "Clavi"; FluidR3 preset 7 = "Clavinet" — cosmetic expansion, no routing impact; STEM_LABEL = "Clavi" matches pipeline) |
+| 16 | Drawbar Organ | Drawbar_Organ ✓ (GM_PROGRAMS[16] = "Drawbar Organ"; FluidR3 bank-0 preset 16 = "DrawbarOrgan" — no space in the SF2 name, cosmetic only, **no routing impact**; STEM_LABEL = "Drawbar_Organ") |
 | 8 | Celesta | Celesta ✓ (GM_PROGRAMS[8] + FluidR3 preset 8 both "Celesta") |
 | 69 | English Horn | English_Horn ✓ (GM_PROGRAMS[69] + FluidR3 preset 69 both "English Horn") |
 | 9 | Glockenspiel | Glockenspiel ✓ (GM_PROGRAMS[9] + FluidR3 preset 9 both "Glockenspiel") |
@@ -1166,3 +1168,40 @@ the onset by design (not comb-filtering). REVERB_TAIL 2.0 s (80s Lexicon hall
 shimmer). EQ: cut 400 Hz (mud), boost 3.2 kHz (bright bell articulation),
 high shelf 9 kHz (air). Complements the Rhodes (GM4) as the bright/cold FM
 counterpart to the warm/tine Rhodes.
+
+**Drawbar Organ added** (2026-10-21): GM16, Keys-family tenth entry — the
+Hammond tonewheel organ (B-3/C-3): 91 toothed wheels, nine drawbars per
+manual, and the only common instrument whose timbre *is* additive synthesis
+(instrument.md + drawbar_organ.py), verified end-to-end UnitMatrixComposer →
+zero-drift ✓ → MIDI (109 bytes) → FluidSynth WAV (720 KB, solo render) ✓;
+RenderPipeline stem label `track00_Drawbar_Organ.wav` ✓ (GM_PROGRAMS[16] =
+"Drawbar Organ"; FluidR3 bank-0 preset 16 = "DrawbarOrgan" — no space in the
+SF2 internal name, cosmetic only, **no routing impact**). Additive engine
+recommended (`sound/synthesis/additive.py` SoundWave): nine sine partials at
+`DRAWBAR_FOOTAGES` ratios 16' (0.5x), 5 1/3' (1.5x), 8' (1.0x), 4' (2x),
+2 2/3' (3x), 2' (4x), 1 3/5' (5x), 1 1/3' (6x), 1' (8x);
+`drawbar_harmonics()` converts a console registration (levels 0-8) into
+{ratio: gain}; `ADDITIVE_HARMONICS` holds engine-compatible integer-partial
+banks (apply_overtones sums 1x,2x,3x… so the 0.5x sub-octave and 1.5x quint
+need the custom sum). ADSR attack 0.004 s, **no decay, sustain 1.0**, release
+0.05 s — a tonewheel tone is flat while the key is held. PhaseModSynth
+secondary (sine carrier, mod_freq_ratio 2.0, mod_depth 2.5 — the DX7 organ
+family). `MOTOR_DEFAULTS` models the Leslie 122: 6.9 Hz tremolo / 0.7 Hz
+chorale, depth 0.30, 6 cents Doppler, 1.0 s spin-up. Range 24-89 (25-note
+pedal board C1-C3 + two 61-key manuals F1-F6); solo range 48-84 (C3-C6);
+sweet spot 55-79 (G3-G5). Solo-render spectral check: 4-8 kHz buzz **5.8%**
+(clean single voice, well below 20% gate, no comb-filtering). Empirical
+FluidR3 pitch sweep: preset 16 audible 20-96 with no gaps (rms 0.060-0.082).
+Registration proof: `by_name('drawbar organ')` → Drawbar Organ,
+`by_program(16)` → Drawbar Organ, `in_sweet_spot(67)` = True,
+`in_sweet_spot(24)` = False. Registration in `instrument_registry.py` as
+DRAWBAR_ORGAN convenience constant + a `registry_table()` role row. Role:
+harmony, pad, comp, lead, bass, rhythm, drone, accent — polyphonic, dense,
+sustained. **Velocity quirk**: a real tonewheel organ has a binary key
+contact and no velocity response, so velocity is a mix-balance value only
+(keep 70-100; get dynamics from drawbars/swell). REVERB_TAIL 1.8 s (live
+room, not the 2.2 s cathedral of Church Organ GM19). EQ: cut 200 Hz
+(16'-drawbar mud), boost 2.5 kHz (key click + percussion), shelf 8 kHz (air).
+PAN 0.0 (Leslie is a mono source). Distinct from Church Organ (GM19, pipe
+chiff) and Reed Organ (GM20, harmonium). Drive-by fix: registry table's
+stale "Flute | 74" row corrected to 73 (the 2026-10-16 GM73/74 swap).

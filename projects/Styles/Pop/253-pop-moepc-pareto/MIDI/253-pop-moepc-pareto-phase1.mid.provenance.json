@@ -1,0 +1,34 @@
+{
+  "artifact": "253-pop-moepc-pareto-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.workflows.unitmatrix_composer + NSGA-II MOEPC (PRE-RULES raw draft)",
+  "sources": [],
+  "parameters": {
+    "project": "253-pop-moepc-pareto",
+    "phase": 1,
+    "key": "C major (ionian)",
+    "bpm": 112,
+    "method": "098",
+    "objectives": [
+      "harmonic_quality",
+      "melodic_quality",
+      "rhythmic_coherence",
+      "voice_independence"
+    ],
+    "pop": 64,
+    "generations": 70,
+    "genome_notes": 84,
+    "front_size": 47,
+    "archetype_used": "balanced",
+    "style": "pop",
+    "seed": 253,
+    "form": "intro-verse-chorus-bridge-outro",
+    "total_bars": 28,
+    "rules_applied": "NONE (pre-rules)"
+  },
+  "notes": "Phase 1 raw NSGA-II draft: balanced Pareto-front melody, single piano voice, unquantized onsets + unquantized pitch (float genome).",
+  "sha256": "bc2af531878ed070a0dad3c13c32c97b2f797f6b2670e077dc9f258d279dea53",
+  "bytes": 769,
+  "created_utc": "2026-10-20T23:10:17.347929+00:00",
+  "provenance_version": "1.0"
+}

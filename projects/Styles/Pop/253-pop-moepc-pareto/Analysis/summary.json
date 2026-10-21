@@ -1,0 +1,285 @@
+{
+  "project": "253-pop-moepc-pareto",
+  "project_number": 253,
+  "style": "pop",
+  "method_id": "098",
+  "method_name": "Multi-Objective Evolutionary Pareto Composition (MOEPC)",
+  "method_layer": "concrete",
+  "form": "intro-verse-chorus-bridge-outro (4+8+8+4+4 = 28 bars)",
+  "key": "C major (ionian)",
+  "key_pcs": [
+    0,
+    2,
+    4,
+    5,
+    7,
+    9,
+    11
+  ],
+  "bpm": 112,
+  "meter": "4/4",
+  "bar_ticks": 1920,
+  "total_bars": 28,
+  "total_ticks": 53760,
+  "sections": [
+    {
+      "name": "Intro",
+      "bars": 4
+    },
+    {
+      "name": "Verse",
+      "bars": 8
+    },
+    {
+      "name": "Chorus",
+      "bars": 8
+    },
+    {
+      "name": "Bridge",
+      "bars": 4
+    },
+    {
+      "name": "Outro",
+      "bars": 4
+    }
+  ],
+  "section_start_roots": [
+    0,
+    0,
+    3,
+    5,
+    0
+  ],
+  "progression_degrees": [
+    0,
+    0,
+    4,
+    4,
+    0,
+    4,
+    5,
+    3,
+    0,
+    4,
+    5,
+    3,
+    3,
+    4,
+    0,
+    5,
+    3,
+    4,
+    0,
+    4,
+    5,
+    4,
+    3,
+    4,
+    0,
+    3,
+    4,
+    0
+  ],
+  "pop": 64,
+  "generations": 70,
+  "genome_notes": 84,
+  "front_size": 47,
+  "archetypes": {
+    "smooth": {
+      "f1_harmonic": 0.0712,
+      "f2_melodic": 0.7755,
+      "f3_rhythmic": 0.4106,
+      "f4_indep": 0.251,
+      "notes": 84
+    },
+    "balanced": {
+      "f1_harmonic": 0.0673,
+      "f2_melodic": 0.8537,
+      "f3_rhythmic": 0.3622,
+      "f4_indep": 0.184,
+      "notes": 84
+    },
+    "active": {
+      "f1_harmonic": 0.0702,
+      "f2_melodic": 1.0374,
+      "f3_rhythmic": 0.4762,
+      "f4_indep": 0.1177,
+      "notes": 84
+    }
+  },
+  "voices": [
+    {
+      "name": "Lead",
+      "program": 1,
+      "channel": 0,
+      "instrument": "Piano",
+      "pitched": true
+    },
+    {
+      "name": "Pad",
+      "program": 88,
+      "channel": 1,
+      "instrument": "Synth Pad",
+      "pitched": true
+    },
+    {
+      "name": "Bass",
+      "program": 33,
+      "channel": 2,
+      "instrument": "Electric Bass",
+      "pitched": true
+    },
+    {
+      "name": "Sparkle",
+      "program": 9,
+      "channel": 3,
+      "instrument": "Glockenspiel",
+      "pitched": true
+    },
+    {
+      "name": "Drums",
+      "program": 0,
+      "channel": 9,
+      "instrument": "Drum Kit",
+      "pitched": false
+    }
+  ],
+  "perfect_audit": {
+    "Lead": {
+      "notes": 76,
+      "off16": 0,
+      "off8": 0,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "Pad": {
+      "notes": 100,
+      "off16": 0,
+      "off8": 0,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "Bass": {
+      "notes": 84,
+      "off16": 0,
+      "off8": 0,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "Sparkle": {
+      "notes": 168,
+      "off16": 0,
+      "off8": 0,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "Drums": {
+      "notes": 297,
+      "off16": 0,
+      "off8": 0,
+      "out_scale": 0,
+      "out_chord": 0
+    }
+  },
+  "humanized_audit": {
+    "Lead": {
+      "notes": 76,
+      "off16": 67,
+      "off8": 67,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "Pad": {
+      "notes": 100,
+      "off16": 79,
+      "off8": 79,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "Bass": {
+      "notes": 84,
+      "off16": 84,
+      "off8": 84,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "Sparkle": {
+      "notes": 168,
+      "off16": 137,
+      "off8": 137,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "Drums": {
+      "notes": 297,
+      "off16": 224,
+      "off8": 224,
+      "out_scale": 0,
+      "out_chord": 0
+    }
+  },
+  "zero_drift": {
+    "perfect_tracks": 5,
+    "humanized_tracks": 5,
+    "perfect_span": [
+      53760,
+      53760,
+      53760,
+      53760,
+      53760
+    ],
+    "humanized_span": [
+      53760,
+      53760,
+      53760,
+      53760,
+      53760
+    ]
+  },
+  "voice_leading": {
+    "corrections": 0,
+    "parallel_hidden_fifth_violations": 0
+  },
+  "humanize": {
+    "style": "pop",
+    "seed": 25554,
+    "per_voice": {
+      "Lead": {
+        "seed": 2580954,
+        "n_notes": 76,
+        "mean_abs_shift_ticks": 3.29,
+        "max_abs_shift_ticks": 11,
+        "mean_abs_vel_delta": 4.408
+      },
+      "Pad": {
+        "seed": 2580955,
+        "n_notes": 100,
+        "mean_abs_shift_ticks": 1.81,
+        "max_abs_shift_ticks": 6,
+        "mean_abs_vel_delta": 3.33
+      },
+      "Bass": {
+        "seed": 2580956,
+        "n_notes": 84,
+        "mean_abs_shift_ticks": 7.893,
+        "max_abs_shift_ticks": 18,
+        "mean_abs_vel_delta": 3.083
+      },
+      "Sparkle": {
+        "seed": 2580957,
+        "n_notes": 168,
+        "mean_abs_shift_ticks": 1.5,
+        "max_abs_shift_ticks": 5,
+        "mean_abs_vel_delta": 4.047
+      },
+      "Drums": {
+        "seed": 2580958,
+        "n_notes": 297,
+        "mean_abs_shift_ticks": 1.31,
+        "max_abs_shift_ticks": 4,
+        "mean_abs_vel_delta": 3.263
+      }
+    }
+  },
+  "seed": 253
+}

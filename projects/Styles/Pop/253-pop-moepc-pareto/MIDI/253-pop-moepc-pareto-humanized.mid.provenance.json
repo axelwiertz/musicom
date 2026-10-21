@@ -1,0 +1,39 @@
+{
+  "artifact": "253-pop-moepc-pareto-humanized.mid",
+  "classification": "ai-assisted",
+  "generator": "098 MOEPC + musicom rules + humanize",
+  "sources": [],
+  "parameters": {
+    "project": "253-pop-moepc-pareto",
+    "phase": 2,
+    "version": "humanized",
+    "key": "C major (ionian)",
+    "bpm": 112,
+    "method": "098",
+    "style": "pop",
+    "seed": 253,
+    "humanize_seed": 25554,
+    "form": "intro-verse-chorus-bridge-outro",
+    "total_bars": 28,
+    "voices": [
+      "Lead",
+      "Pad",
+      "Bass",
+      "Sparkle",
+      "Drums"
+    ],
+    "instruments": [
+      "Piano",
+      "Synth Pad",
+      "Electric Bass",
+      "Glockenspiel",
+      "Drum Kit"
+    ],
+    "front_size": 47
+  },
+  "notes": "Phase 2 humanized: same concrete layer + style-derived seeded humanization (per-instrument DNA). Zero-drift safe.",
+  "sha256": "38a7d2e43f97930749606f16cf7dac674c11367778a51d54c5549c85a06e27a6",
+  "bytes": 6276,
+  "created_utc": "2026-10-20T23:10:17.348296+00:00",
+  "provenance_version": "1.0"
+}

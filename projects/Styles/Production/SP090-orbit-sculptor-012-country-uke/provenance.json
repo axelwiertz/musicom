@@ -1,0 +1,66 @@
+{
+  "job": "random-style production (SP) layer-aligned",
+  "date": "2026-10-21",
+  "seed": 20261021,
+  "method": "SP-090",
+  "method_module": "sound.effects.orbit_sculptor",
+  "method_desc": "3-Band Orbital Stereo Sculptor / AutoPanner (SoundGhost Orbit-style)",
+  "layer": "ABSOLUTE",
+  "params": {
+    "sample_rate": 44100,
+    "low_mid_cross": 250.0,
+    "mid_high_cross": 3500.0,
+    "low": {
+      "pan": 0.0,
+      "width": 0.0,
+      "gain_db": 0.0
+    },
+    "mid": {
+      "pan": 0.0,
+      "width": 1.15,
+      "gain_db": 0.0,
+      "pan_mod": {
+        "shape": "sine",
+        "division": "1/2",
+        "depth": 0.45
+      }
+    },
+    "high": {
+      "pan": 0.0,
+      "width": 1.5,
+      "gain_db": 0.0,
+      "pan_mod": {
+        "shape": "sine",
+        "division": "1/8",
+        "depth": 0.35
+      }
+    },
+    "target_lufs": -14.0,
+    "ceiling_db": -1.0
+  },
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Country/012-country-country-uke/MIDI/v2_country_unitmatrix.mid",
+  "normalized_midi": "/opt/data/repos/musicom/projects/Styles/Production/SP090-orbit-sculptor-012-country-uke/MIDI/composition.mid",
+  "source_bpm": 96.0,
+  "source_pitch_classes": [
+    0,
+    2,
+    4,
+    6,
+    7,
+    9,
+    11
+  ],
+  "output_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP090-orbit-sculptor-012-country-uke/SP090-orbit-sculptor-012-country-uke.wav",
+  "output_ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP090-orbit-sculptor-012-country-uke/SP090-orbit-sculptor-012-country-uke.ogg",
+  "lufs": -14.020977175693584,
+  "peak": 0.8912509381337457,
+  "silence_pct": 3.685901644606298,
+  "rms": 0.13392545790988955,
+  "mono_corr": 0.6312180115883599,
+  "pitch_verdict": "PASS",
+  "hit_rate": 1.0,
+  "he_mean": 0.5136641986367453,
+  "dry_he_mean": 0.49036530702219644,
+  "he_retention": 1.047513336039277,
+  "dry_hit_rate": 1.0
+}

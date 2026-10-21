@@ -69,6 +69,7 @@ _INSTRUMENT_MODULES = {
     "Keys.reed_organ.reed_organ": "reed_organ",
     "Keys.rhodes.rhodes": "rhodes",
     "Keys.electric_piano_2.electric_piano_2": "electric_piano_2",
+    "Keys.drawbar_organ.drawbar_organ": "drawbar_organ",
     "World.sitar.sitar": "sitar",
     "World.koto.koto": "koto",
     "World.shamisen.shamisen": "shamisen",
@@ -264,6 +265,7 @@ ACCORDION = ALL_INSTRUMENTS["accordion"]
 REED_ORGAN = ALL_INSTRUMENTS["reed_organ"]
 RHODES = ALL_INSTRUMENTS["rhodes"]
 ELECTRIC_PIANO_2 = ALL_INSTRUMENTS["electric_piano_2"]
+DRAWBAR_ORGAN = ALL_INSTRUMENTS["drawbar_organ"]
 TRUMPET = ALL_INSTRUMENTS["trumpet"]
 TROMBONE = ALL_INSTRUMENTS["trombone"]
 FRENCH_HORN = ALL_INSTRUMENTS["french_horn"]
@@ -375,6 +377,8 @@ def registry_table():
             role = "harmony, melody, bass, rhythm"
         elif low == "church organ":
             role = "harmony, pad, bass, rhythm, accent"
+        elif low == "drawbar organ":
+            role = "harmony, pad, comp, lead, bass, rhythm, drone, accent"
         elif low == "dulcimer":
             role = "lead, melody, ornament, rhythm, harmony"
         elif low == "harpsichord":
@@ -689,3 +693,14 @@ if __name__ == "__main__":
     print("  BRASS_SECTION.in_sweet_spot(30) =", BRASS_SECTION.in_sweet_spot(30))
     print("  BRASS_SECTION.range_min =", BRASS_SECTION.range_min, "BRASS_SECTION.range_max =", BRASS_SECTION.range_max)
     print("  BRASS_SECTION.stem_label =", repr(BRASS_SECTION.stem_label))
+    print()
+
+    print("=== Drawbar Organ (Hammond tonewheel, GM16) ===")
+    print("  DRAWBAR_ORGAN.midi_program =", DRAWBAR_ORGAN.midi_program, "(should be 16)")
+    print("  by_name('drawbar organ') =", by_name("drawbar organ"))
+    print("  by_program(16) =", by_program(16))
+    print("  DRAWBAR_ORGAN.in_sweet_spot(67) =", DRAWBAR_ORGAN.in_sweet_spot(67))
+    print("  DRAWBAR_ORGAN.in_sweet_spot(24) =", DRAWBAR_ORGAN.in_sweet_spot(24))
+    print("  DRAWBAR_ORGAN.range_min =", DRAWBAR_ORGAN.range_min,
+          "DRAWBAR_ORGAN.range_max =", DRAWBAR_ORGAN.range_max)
+    print("  DRAWBAR_ORGAN.stem_label =", repr(DRAWBAR_ORGAN.stem_label))

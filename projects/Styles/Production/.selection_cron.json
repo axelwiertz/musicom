@@ -1,12 +1,12 @@
 {
   "job": "random-style production (SP) layer-aligned",
-  "date": "2026-10-20",
-  "seed": 20261020,
-  "method": "SP-111",
-  "method_module": "sound.synthesis.odd1_engine",
-  "method_desc": "Multi-Playhead Microsonic Granular Engine \u2014 2 layers x 4 playheads with TIME PATH (forward/backward/freeze), independent pitch/speed, grain spacing/size morph, per-grain frequency-selective filter; SYNTH/LIVE (60s rolling buffer)/LOOPS (phase-locked independent loops) modes (Oddment ODD-1-style)",
-  "source_midi": "/opt/data/repos/musicom/projects/Styles/Latin/bossa-nova-daily-2026-06-15/composition.mid",
-  "source_project": "Latin/bossa-nova-daily-2026-06-15/composition.mid",
+  "date": "2026-10-21",
+  "seed": 20261021,
+  "method": "SP-090",
+  "method_module": "sound.effects.orbit_sculptor",
+  "method_desc": "3-Band Orbital Stereo Sculptor / AutoPanner (SoundGhost Orbit-style)",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Country/012-country-country-uke/MIDI/v2_country_unitmatrix.mid",
+  "source_project": "Country/012-country-country-uke/MIDI/v2_country_unitmatrix.mid",
   "registry_size": 54,
   "recent_excluded": [
     "SP-006",
@@ -14,12 +14,11 @@
     "SP-032",
     "SP-092",
     "SP-099",
-    "SP-103",
-    "SP-105"
+    "SP-105",
+    "SP-108",
+    "SP-111"
   ],
-  "already_on_source": [
-    "SP-098"
-  ],
+  "already_on_source": [],
   "baseline_excluded": [
     "SP-001"
   ],
@@ -57,20 +56,20 @@
     "SP-095",
     "SP-096",
     "SP-097",
+    "SP-098",
     "SP-100",
     "SP-101",
     "SP-102",
+    "SP-103",
     "SP-104",
     "SP-106",
     "SP-107",
-    "SP-108",
     "SP-109",
     "SP-110",
-    "SP-111",
     "SP-112",
     "SP-113",
     "SP-114"
   ],
-  "n_candidates": 357,
-  "n_well_formed": 245
+  "n_candidates": 361,
+  "n_well_formed": 249
 }

@@ -1,0 +1,39 @@
+{
+  "artifact": "253-pop-moepc-pareto-perfect.mid",
+  "classification": "ai-assisted",
+  "generator": "098 MOEPC + musicom rules (grid-locked)",
+  "sources": [],
+  "parameters": {
+    "project": "253-pop-moepc-pareto",
+    "phase": 2,
+    "version": "perfect",
+    "key": "C major (ionian)",
+    "bpm": 112,
+    "method": "098",
+    "style": "pop",
+    "seed": 253,
+    "humanize_seed": 25554,
+    "form": "intro-verse-chorus-bridge-outro",
+    "total_bars": 28,
+    "voices": [
+      "Lead",
+      "Pad",
+      "Bass",
+      "Sparkle",
+      "Drums"
+    ],
+    "instruments": [
+      "Piano",
+      "Synth Pad",
+      "Electric Bass",
+      "Glockenspiel",
+      "Drum Kit"
+    ],
+    "front_size": 47
+  },
+  "notes": "Phase 2 perfect: grid-locked concrete layer (no humanization). Pareto archetypes mapped to sections, chord-tone quantized per bar (C-major I-V-vi-IV), 8th/16th grid snap, voice-leading optimized, zero-drift gated.",
+  "sha256": "f45a7504ab28cc1f33ea11c10a171ff033ef4f108cca1734990fb734640f2a93",
+  "bytes": 6275,
+  "created_utc": "2026-10-20T23:10:17.348134+00:00",
+  "provenance_version": "1.0"
+}
