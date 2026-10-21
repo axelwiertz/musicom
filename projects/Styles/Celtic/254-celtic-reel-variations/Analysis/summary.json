@@ -1,0 +1,294 @@
+{
+  "project": "254-celtic-reel-variations",
+  "genre": "Celtic",
+  "source": "085-celtic-subset-walk",
+  "method": "ABS-002 Subset Walker + ABS-001 tension + method-006 close",
+  "layer": "abstract -> concrete",
+  "rework": "extended (longer + more varied)",
+  "decision": "identity-preserving extension",
+  "key": "Ab major",
+  "key_pcs": [
+    0,
+    1,
+    3,
+    5,
+    7,
+    8,
+    10
+  ],
+  "bpm": 96,
+  "meter": "4/4",
+  "form": "8 sections x 4 bars = 32 bars",
+  "sections": [
+    "Intro",
+    "ReelA",
+    "ReelB",
+    "Lift",
+    "ReelA2",
+    "Bridge",
+    "Climax",
+    "Outro"
+  ],
+  "section_roots": [
+    {
+      "section": "Intro",
+      "mid_bar": 1,
+      "pid": "maj5",
+      "degree": "IV",
+      "root_pc": 1
+    },
+    {
+      "section": "ReelA",
+      "mid_bar": 5,
+      "pid": "min2",
+      "degree": "ii",
+      "root_pc": 10
+    },
+    {
+      "section": "ReelB",
+      "mid_bar": 9,
+      "pid": "min2",
+      "degree": "ii",
+      "root_pc": 10
+    },
+    {
+      "section": "Lift",
+      "mid_bar": 13,
+      "pid": "dom77",
+      "degree": "V7",
+      "root_pc": 3
+    },
+    {
+      "section": "ReelA2",
+      "mid_bar": 17,
+      "pid": "maj0",
+      "degree": "I",
+      "root_pc": 8
+    },
+    {
+      "section": "Bridge",
+      "mid_bar": 21,
+      "pid": "min2",
+      "degree": "ii",
+      "root_pc": 10
+    },
+    {
+      "section": "Climax",
+      "mid_bar": 25,
+      "pid": "maj5",
+      "degree": "IV",
+      "root_pc": 1
+    },
+    {
+      "section": "Outro",
+      "mid_bar": 29,
+      "pid": "min4",
+      "degree": "iii",
+      "root_pc": 0
+    }
+  ],
+  "variation_techniques": [
+    {
+      "section": "Intro",
+      "technique": "sparse intro (drums tacet)"
+    },
+    {
+      "section": "ReelA",
+      "technique": "baseline full texture (8th lead)"
+    },
+    {
+      "section": "ReelB",
+      "technique": "counterline prominence (violin full line)"
+    },
+    {
+      "section": "Lift",
+      "technique": "diminution (16th subdivision, dense)"
+    },
+    {
+      "section": "ReelA2",
+      "technique": "transposition (diatonic sequence +2 degrees)"
+    },
+    {
+      "section": "Bridge",
+      "technique": "inversion + retrograde (palindromic bridge)"
+    },
+    {
+      "section": "Climax",
+      "technique": "register shift (+12) + octave doubling"
+    },
+    {
+      "section": "Outro",
+      "technique": "augmentation (sustain x2) fade to tonic"
+    }
+  ],
+  "subset_walk": [
+    "maj0",
+    "maj5",
+    "min2",
+    "maj5",
+    "min4",
+    "min2",
+    "maj5",
+    "min4",
+    "maj0",
+    "min2",
+    "min72",
+    "min2",
+    "min4",
+    "dom77",
+    "maj70",
+    "min4",
+    "maj5",
+    "maj0",
+    "maj5",
+    "maj0",
+    "min4",
+    "min2",
+    "min72",
+    "maj5",
+    "min72",
+    "maj5",
+    "min72",
+    "maj5",
+    "min2",
+    "min4",
+    "dom77",
+    "maj0"
+  ],
+  "progression": [
+    "I",
+    "IV",
+    "ii",
+    "IV",
+    "iii",
+    "ii",
+    "IV",
+    "iii",
+    "I",
+    "ii",
+    "ii7",
+    "ii",
+    "iii",
+    "V7",
+    "I7",
+    "iii",
+    "IV",
+    "I",
+    "IV",
+    "I",
+    "iii",
+    "ii",
+    "ii7",
+    "IV",
+    "ii7",
+    "IV",
+    "ii7",
+    "IV",
+    "ii",
+    "iii",
+    "V7",
+    "I"
+  ],
+  "voices": [
+    "Marimba(12)",
+    "Horns(60)",
+    "Cello(42)",
+    "Violin(40)",
+    "Bassoon(70)",
+    "Bass(43)",
+    "Drums(0)"
+  ],
+  "perfect_audit": {
+    "off16": 0,
+    "off8": 36,
+    "out_key": 0,
+    "out_chord": 0,
+    "notes": 1310
+  },
+  "humanized_audit": {
+    "off16": 1052,
+    "off8": 1056,
+    "out_key": 0,
+    "out_chord": 21,
+    "notes": 1310
+  },
+  "zero_drift": {
+    "perfect_tracks": 7,
+    "humanized_tracks": 7,
+    "perfect_span": [
+      61440,
+      61440,
+      61440,
+      61440,
+      61440,
+      61440,
+      61440
+    ],
+    "humanized_span": [
+      61440,
+      61440,
+      61440,
+      61440,
+      61440,
+      61440,
+      61440
+    ]
+  },
+  "humanize": {
+    "style": "folk",
+    "seed": 20515021,
+    "per_voice": {
+      "Marimba": {
+        "seed": 2072017121,
+        "n_notes": 264,
+        "mean_abs_shift_ticks": 1.42,
+        "max_abs_shift_ticks": 5,
+        "mean_abs_vel_delta": 4.042
+      },
+      "Horns": {
+        "seed": 2072017122,
+        "n_notes": 142,
+        "mean_abs_shift_ticks": 4.521,
+        "max_abs_shift_ticks": 13,
+        "mean_abs_vel_delta": 7.056
+      },
+      "Cello": {
+        "seed": 2072017123,
+        "n_notes": 48,
+        "mean_abs_shift_ticks": 3.771,
+        "max_abs_shift_ticks": 14,
+        "mean_abs_vel_delta": 4.917
+      },
+      "Violin": {
+        "seed": 2072017124,
+        "n_notes": 144,
+        "mean_abs_shift_ticks": 4.868,
+        "max_abs_shift_ticks": 17,
+        "mean_abs_vel_delta": 4.944
+      },
+      "Bassoon": {
+        "seed": 2072017125,
+        "n_notes": 152,
+        "mean_abs_shift_ticks": 6.763,
+        "max_abs_shift_ticks": 19,
+        "mean_abs_vel_delta": 5.776
+      },
+      "Bass": {
+        "seed": 2072017126,
+        "n_notes": 140,
+        "mean_abs_shift_ticks": 7.021,
+        "max_abs_shift_ticks": 21,
+        "mean_abs_vel_delta": 4.943
+      },
+      "Drums": {
+        "seed": 2072017127,
+        "n_notes": 420,
+        "mean_abs_shift_ticks": 0.981,
+        "max_abs_shift_ticks": 4,
+        "mean_abs_vel_delta": 3.0
+      }
+    }
+  },
+  "seed": 20261021,
+  "walk_seed": 7
+}

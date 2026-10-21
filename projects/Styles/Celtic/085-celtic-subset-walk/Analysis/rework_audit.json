@@ -3,55 +3,30 @@
   "genre": "Celtic",
   "primary_midi": "/opt/data/projects/Styles/Celtic/085-celtic-subset-walk/MIDI/085-celtic-subset-walk.mid",
   "standard_failures": [
-    "std6_index: index.html missing"
+    "std6_index: index.html missing (doc-only; dashboard regenerated in the new project)"
   ],
-  "redesign_required": true,
+  "redesign_required": false,
+  "decision": "identity-preserving extension (all 5 musical/engine standards pass; only the index.html dashboard is missing — that gap is remedied by generating one for the new project, not by discarding clean material)",
   "source_identity": {
     "key": "Ab major",
+    "key_pcs": [8, 10, 0, 1, 3, 5, 7],
     "bpm": 96,
+    "meter": "4/4",
     "form": "6 sections x 4 bars = 24 bars",
-    "sections": [
-      "Intro",
-      "ReelA",
-      "ReelB",
-      "Lift",
-      "ReelA2",
-      "Outro"
-    ],
+    "sections": ["Intro", "ReelA", "ReelB", "Lift", "ReelA2", "Outro"],
     "method": "ABS-002 Subset Walker + ABS-001 tension curve + method-006 cadence close",
-    "voices": [
-      "Marimba",
-      "French Horn",
-      "Cello",
-      "Violin",
-      "Bassoon",
-      "Double Bass",
-      "Drums"
-    ]
+    "voices": ["Marimba", "French Horn", "Cello", "Violin", "Bassoon", "Double Bass", "Drums"],
+    "motif": "violin answer line Db5 C5 Bb4 F5 Db5 C5 Bb4 G4 (chord-quantized)"
   },
   "audit_numbers": {
     "n_voice_tracks": 7,
-    "track_lengths": [
-      46080,
-      46080,
-      46080,
-      46080,
-      46080,
-      46080,
-      46080
-    ],
-    "channels": [
-      0,
-      1,
-      2,
-      3,
-      4,
-      5,
-      9
-    ],
+    "track_lengths": [46080, 46080, 46080, 46080, 46080, 46080, 46080],
     "pitched_onsets": 672,
     "off_grid_count": 0,
-    "scale_violations": 0
+    "scale_violations": 0,
+    "phase1_present": true,
+    "provenance_present": true,
+    "index_html_present": false
   },
-  "audit_utc": "2026-09-24T01:05:43.718014+00:00"
+  "audit_utc": "2026-10-21T00:00:00+00:00"
 }

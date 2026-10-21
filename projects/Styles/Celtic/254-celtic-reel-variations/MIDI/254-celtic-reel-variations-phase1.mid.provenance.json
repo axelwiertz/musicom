@@ -1,0 +1,21 @@
+{
+  "artifact": "254-celtic-reel-variations-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "ABS-002 Subset Walker (raw subset-field draft)",
+  "sources": [],
+  "parameters": {
+    "phase": 1,
+    "bpm": 96,
+    "meter": "4/4",
+    "key": "Ab major",
+    "seed": 20261021,
+    "voices": 1,
+    "bars": 32,
+    "note": "raw generative draft (single marimba, off-grid)"
+  },
+  "notes": "",
+  "sha256": "a68fe67e95be51017e7acaa1cace2b625560996a9c3192c8d9e2bde49f2007da",
+  "bytes": 2442,
+  "created_utc": "2026-10-21T01:11:35.440952+00:00",
+  "provenance_version": "1.0"
+}
