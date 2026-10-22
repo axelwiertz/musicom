@@ -55,6 +55,7 @@ _INSTRUMENT_MODULES = {
     "Guitar.acoustic.acoustic_guitar": "acoustic_guitar",
     "Guitar.steel_acoustic.steel_acoustic": "steel_acoustic",
     "Guitar.clean_electric.clean_electric": "clean_electric",
+    "Guitar.jazz_guitar.jazz_guitar": "jazz_guitar",
     "Guitar.overdriven.overdriven": "overdriven",
     "Percussion.drum_kit.drum_kit": "drum_kit",
     "Percussion.marimba.marimba": "marimba",
@@ -286,6 +287,7 @@ STEEL_DRUMS = ALL_INSTRUMENTS["steel_drums"]
 SITAR = ALL_INSTRUMENTS["sitar"]
 STEEL_ACOUSTIC = ALL_INSTRUMENTS["steel_acoustic"]
 CLEAN_ELECTRIC = ALL_INSTRUMENTS["clean_electric"]
+JAZZ_GUITAR = ALL_INSTRUMENTS["jazz_guitar"]
 OVERDRIVEN_GUITAR = ALL_INSTRUMENTS["overdriven"]
 VIBRAPHONE = ALL_INSTRUMENTS["vibraphone"]
 SITAR = ALL_INSTRUMENTS["sitar"]
@@ -455,6 +457,10 @@ def registry_table():
             role = "harmony, rhythm, strum, lead, melody, ornament, countermelody"
         elif low == "electric guitar (clean)":
             role = "harmony, rhythm, strum, lead, melody, ornament, countermelody, accent"
+        elif low == "electric guitar (jazz)":
+            role = "harmony, rhythm, comp, lead, melody, ornament, countermelody, accent"
+        elif low == "overdriven guitar":
+            role = "lead, melody, accent, rhythm, strum, countermelody"
         elif low == "pad 1 (new age)":
             role = "pad, harmony, texture, drone, accent"
         else:
@@ -703,4 +709,15 @@ if __name__ == "__main__":
     print("  DRAWBAR_ORGAN.in_sweet_spot(24) =", DRAWBAR_ORGAN.in_sweet_spot(24))
     print("  DRAWBAR_ORGAN.range_min =", DRAWBAR_ORGAN.range_min,
           "DRAWBAR_ORGAN.range_max =", DRAWBAR_ORGAN.range_max)
+    print()
+    print("=== Jazz Guitar (Electric Guitar jazz, GM26) ===")
+    print("  JAZZ_GUITAR.midi_program =", JAZZ_GUITAR.midi_program, "(should be 26)")
+    print("  by_name('jazz guitar') =", by_name("jazz guitar"))
+    print("  by_name('electric guitar (jazz)') =", by_name("electric guitar (jazz)"))
+    print("  by_program(26) =", by_program(26))
+    print("  JAZZ_GUITAR.in_sweet_spot(60) =", JAZZ_GUITAR.in_sweet_spot(60))
+    print("  JAZZ_GUITAR.in_sweet_spot(24) =", JAZZ_GUITAR.in_sweet_spot(24))
+    print("  JAZZ_GUITAR.range_min =", JAZZ_GUITAR.range_min,
+          "JAZZ_GUITAR.range_max =", JAZZ_GUITAR.range_max)
+    print("  JAZZ_GUITAR.stem_label =", repr(JAZZ_GUITAR.stem_label))
     print("  DRAWBAR_ORGAN.stem_label =", repr(DRAWBAR_ORGAN.stem_label))

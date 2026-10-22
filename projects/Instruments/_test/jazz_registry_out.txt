@@ -1,0 +1,318 @@
+| Family | Instrument | Program | Range | Role |
+|---|---|---|---|---|
+| Bass | Electric Bass (finger) | 33 | 24–84 | bass, rhythm, countermelody, accent |
+| Brass | Brass Section | 61 | 36–96 | lead, accent, fanfare, counter, harmony, pad |
+| Brass | French Horn | 60 | 41–84 | lead, countermelody, melody, harmony, accent |
+| Brass | Muted Trumpet | 59 | 54–86 | lead, countermelody, accent, fanfare, ornament |
+| Brass | Trombone | 57 | 40–78 | bass, counter, accent, harmony |
+| Brass | Trumpet | 56 | 54–86 | lead, harmony, accent |
+| Brass | Tuba | 58 | 26–72 | bass, counter, accent, harmony |
+| Guitar | Acoustic Guitar (nylon) | 24 | 40–84 | lead, harmony, accent |
+| Guitar | Acoustic Guitar (steel) | 25 | 40–86 | harmony, rhythm, strum, lead, melody, ornament, countermelody |
+| Guitar | Electric Guitar (clean) | 27 | 28–84 | harmony, rhythm, strum, lead, melody, ornament, countermelody, accent |
+| Guitar | Electric Guitar (jazz) | 26 | 28–84 | harmony, rhythm, comp, lead, melody, ornament, countermelody, accent |
+| Guitar | Overdriven Guitar | 29 | 28–84 | lead, melody, accent, rhythm, strum, countermelody |
+| Keys | Accordion | 21 | 36–96 | harmony, melody, bass, rhythm, ornament |
+| Keys | Acoustic Grand Piano | 1 | 21–108 | lead, harmony, accent |
+| Keys | Celesta | 8 | 48–108 | lead, melody, ornament, arpeggio, countermelody, accent |
+| Keys | Church Organ | 19 | 36–96 | harmony, pad, bass, rhythm, accent |
+| Keys | Clavi | 7 | 29–89 | lead, harmony, accent |
+| Keys | Drawbar Organ | 16 | 24–89 | harmony, pad, comp, lead, bass, rhythm, drone, accent |
+| Keys | Dulcimer | 15 | 48–96 | lead, melody, ornament, rhythm, harmony |
+| Keys | Electric Piano 1 | 4 | 36–96 | harmony, melody, bass, accent, color |
+| Keys | Electric Piano 2 | 5 | 36–96 | harmony, melody, bass, accent, color |
+| Keys | Harpsichord | 6 | 29–89 | harmony, continuo, melody, ornament, countermelody, accent |
+| Keys | Reed Organ | 20 | 36–96 | harmony, pad, melody, drone, ornament |
+| Percussion | Drum Kit | 0 | - | rhythm, groove, accent |
+| Percussion | Glockenspiel | 9 | 79–108 | lead, melody, ornament, accent, countermelody |
+| Percussion | Marimba | 12 | 45–96 | lead, melody, accent, countermelody, harmony |
+| Percussion | Music Box | 10 | 60–96 | lead, harmony, accent |
+| Percussion | Steel Drums | 114 | 55–96 | lead, melody, accent, countermelody, harmony, rhythm |
+| Percussion | Timpani | 47 | 36–65 | accent, rhythm, bass, drone |
+| Percussion | Tubular Bells | 14 | 60–78 | lead, harmony, accent |
+| Percussion | Vibraphone | 11 | 48–89 | lead, melody, harmony, countermelody, accent |
+| Percussion | Xylophone | 13 | 53–89 | lead, melody, ornament, accent, countermelody |
+| Strings | Cello | 42 | 36–84 | bass, counter, accent, harmony |
+| Strings | Double Bass | 43 | 28–74 | bass, counter, accent, harmony |
+| Strings | Orchestral Harp | 46 | 24–103 | harmony, arpeggio, glissando, melody, countermelody, accent |
+| Strings | Pizzicato Strings | 45 | 36–96 | rhythm, ostinato, bass, accompaniment, countermelody, accent |
+| Strings | String Ensemble 1 | 48 | 28–96 | harmony, pad, melody, countermelody, accent |
+| Strings | Viola | 41 | 48–91 | lead, harmony, accent |
+| Strings | Violin | 40 | 55–103 | lead, counter, accent |
+| Synth | Pad 1 (new age) | 88 | 36–96 | pad, harmony, texture, drone, accent |
+| Vocal | Didgeridoo | 20 | 24–55 | lead, harmony, accent |
+| Vocal | Human Voice | 53 | 48–84 | lead, melody, countermelody |
+| Vocal | Jaw Harp | 106 | 36–74 | lead, harmony, accent |
+| Vocal | Kazoo | 59 | 50–86 | lead, harmony, accent |
+| Vocal | Singing Saw | 81 | 55–91 | lead, harmony, accent |
+| Vocal | Talkbox | 80 | 45–84 | lead, harmony, accent |
+| Vocal | Vox Humana | 20 | 48–84 | lead, harmony, accent |
+| Vocal | Vox Humana | 20 | 48–84 | lead, harmony, accent |
+| Woodwind | Alto Saxophone | 65 | 49–88 | lead, countermelody, accent, harmony |
+| Woodwind | Bagpipe | 109 | 53–96 | lead, melody, ornament, drone, accent |
+| Woodwind | Baritone Saxophone | 67 | 36–80 | bass, harmony, accent, lead, countermelody |
+| Woodwind | Bassoon | 70 | 34–88 | lead, harmony, accent |
+| Woodwind | Clarinet | 71 | 52–96 | lead, harmony, accent |
+| Woodwind | English Horn | 69 | 50–85 | lead, countermelody, melody, harmony, accent |
+| Woodwind | Flute | 73 | 60–96 | lead, harmony, accent |
+| Woodwind | Harmonica | 22 | 48–96 | lead, harmony, accent |
+| Woodwind | Oboe | 68 | 52–92 | lead, harmony, accent |
+| Woodwind | Ocarina | 79 | 55–96 | lead, harmony, accent |
+| Woodwind | Piccolo | 72 | 72–108 | lead, melody, ornament, accent, countermelody |
+| Woodwind | Recorder | 74 | 60–100 | lead, melody, ornament, countermelody, accent |
+| Woodwind | Soprano Saxophone | 64 | 54–89 | lead, countermelody, ornament, accent |
+| Woodwind | Tenor Saxophone | 66 | 44–88 | lead, countermelody, accent, harmony |
+| Woodwind | Whistle | 78 | 62–93 | lead, harmony, accent |
+| World | Banjo | 105 | 46–93 | lead, melody, ornament, rhythm, accent |
+| World | Fiddle | 110 | 55–96 | lead, melody, ornament, countermelody, accent |
+| World | Kalimba | 108 | 48–96 | lead, melody, ornament, drone, harmony |
+| World | Koto | 107 | 51–90 | lead, melody, ornament, drone, harmony |
+| World | Pan Flute | 75 | 55–100 | lead, harmony, accent |
+| World | Shakuhachi | 77 | 55–100 | lead, melody, ornament, drone, accent |
+| World | Shamisen | 106 | 45–89 | lead, melody, ornament, drone, countermelody |
+| World | Shenai | 111 | 55–96 | lead, melody, ornament, drone, accent |
+| World | Sitar | 104 | 55–96 | lead, melody, ornament, drone |
+| World | Taiko Drum | 116 | 36–67 | accent, rhythm, drone, ornament |
+
+Verification:
+  VIOLIN.midi_program = 40
+  ORGAN.midi_program = 19 (Church Organ, GM19)
+  DULCIMER.midi_program = 15 (should be 15)
+  by_name('dulcimer') = <Instrument Dulcimer (family=Keys, program=15, range=48-96)>
+  by_program(15) = <Instrument Dulcimer (family=Keys, program=15, range=48-96)>
+  DULCIMER.in_sweet_spot(69) = True
+  TRUMPET.midi_program = 56 (should be 56)
+  by_name('double bass') = <Instrument Double Bass (family=Strings, program=43, range=28-74)>
+  by_program(56) = <Instrument Trumpet (family=Brass, program=56, range=54-86)>
+  FLUTE.in_sweet_spot(72) = True
+  SITAR.midi_program = 104 (should be 104)
+  by_name('sitar') = <Instrument Sitar (family=World, program=104, range=55-96)>
+  by_program(104) = <Instrument Sitar (family=World, program=104, range=55-96)>
+  SITAR.in_sweet_spot(69) = True
+  STEEL_ACOUSTIC.midi_program = 25 (should be 25)
+  by_name('steel acoustic') = <Instrument Acoustic Guitar (steel) (family=Guitar, program=25, range=40-86)>
+  by_program(25) = <Instrument Acoustic Guitar (steel) (family=Guitar, program=25, range=40-86)>
+  STEEL_ACOUSTIC.in_sweet_spot(65) = True
+  KOTO.midi_program = 107 (should be 107)
+  by_name('koto') = <Instrument Koto (family=World, program=107, range=51-90)>
+  by_program(107) = <Instrument Koto (family=World, program=107, range=51-90)>
+  KOTO.in_sweet_spot(69) = True
+  SHAMISEN.midi_program = 106 (should be 106)
+  by_name('shamisen') = <Instrument Shamisen (family=World, program=106, range=45-89)>
+  by_program(106) = <Instrument Shamisen (family=World, program=106, range=45-89)>
+  SHAMISEN.in_sweet_spot(69) = True
+  KALIMBA.midi_program = 108 (should be 108)
+  by_name('kalimba') = <Instrument Kalimba (family=World, program=108, range=48-96)>
+  by_program(108) = <Instrument Kalimba (family=World, program=108, range=48-96)>
+  KALIMBA.in_sweet_spot(69) = True
+  BANJO.midi_program = 105 (should be 105)
+  by_name('banjo') = <Instrument Banjo (family=World, program=105, range=46-93)>
+  by_program(105) = <Instrument Banjo (family=World, program=105, range=46-93)>
+  BANJO.in_sweet_spot(69) = True
+  BAGPIPE.midi_program = 109 (should be 109)
+  by_name('bagpipe') = <Instrument Bagpipe (family=Woodwind, program=109, range=53-96)>
+  by_program(109) = <Instrument Bagpipe (family=Woodwind, program=109, range=53-96)>
+  BAGPIPE.in_sweet_spot(62) = True
+  HARMONICA.midi_program = 22 (should be 22)
+  by_name('harmonica') = <Instrument Harmonica (family=Woodwind, program=22, range=48-96)>
+  by_program(22) = <Instrument Harmonica (family=Woodwind, program=22, range=48-96)>
+  HARMONICA.in_sweet_spot(69) = True
+  STEEL_DRUMS.midi_program = 114 (should be 114)
+  by_name('steel drums') = <Instrument Steel Drums (family=Percussion, program=114, range=55-96)>
+  by_program(114) = <Instrument Steel Drums (family=Percussion, program=114, range=55-96)>
+  STEEL_DRUMS.in_sweet_spot(69) = True
+  FIDDLE.midi_program = 110 (should be 110)
+  by_name('fiddle') = <Instrument Fiddle (family=World, program=110, range=55-96)>
+  by_program(110) = <Instrument Fiddle (family=World, program=110, range=55-96)>
+  FIDDLE.in_sweet_spot(69) = True
+  SHAKUCHACHI.midi_program = 77 (should be 77)
+  by_name('shakuhachi') = <Instrument Shakuhachi (family=World, program=77, range=55-100)>
+  by_program(77) = <Instrument Shakuhachi (family=World, program=77, range=55-100)>
+  SHAKUCHACHI.in_sweet_spot(74) = True
+  TIMPANI.midi_program = 47 (should be 47)
+  by_name('timpani') = <Instrument Timpani (family=Percussion, program=47, range=36-65)>
+  by_program(47) = <Instrument Timpani (family=Percussion, program=47, range=36-65)>
+  TIMPANI.in_sweet_spot(45) = True
+  VIBRAPHONE.midi_program = 11 (should be 11)
+  by_name('vibraphone') = <Instrument Vibraphone (family=Percussion, program=11, range=48-89)>
+  by_program(11) = <Instrument Vibraphone (family=Percussion, program=11, range=48-89)>
+  VIBRAPHONE.in_sweet_spot(69) = True
+  HARP.midi_program = 46 (should be 46)
+  by_name('harp') = <Instrument Orchestral Harp (family=Strings, program=46, range=24-103)>
+  by_name('orchestral harp') = <Instrument Orchestral Harp (family=Strings, program=46, range=24-103)>
+  by_program(46) = <Instrument Orchestral Harp (family=Strings, program=46, range=24-103)>
+  HARP.in_sweet_spot(69) = True
+  XYLOPHONE.midi_program = 13 (should be 13)
+  by_name('xylophone') = <Instrument Xylophone (family=Percussion, program=13, range=53-89)>
+  by_program(13) = <Instrument Xylophone (family=Percussion, program=13, range=53-89)>
+  XYLOPHONE.in_sweet_spot(72) = True
+  TAIKO.midi_program = 116 (should be 116)
+  by_name('taiko') = <Instrument Taiko Drum (family=World, program=116, range=36-67)>
+  by_name('taiko drum') = <Instrument Taiko Drum (family=World, program=116, range=36-67)>
+  by_program(116) = <Instrument Taiko Drum (family=World, program=116, range=36-67)>
+  TAIKO.in_sweet_spot(50) = True
+  GLOCKENSPIEL.midi_program = 9 (should be 9)
+  by_name('glockenspiel') = <Instrument Glockenspiel (family=Percussion, program=9, range=79-108)>
+  by_program(9) = <Instrument Glockenspiel (family=Percussion, program=9, range=79-108)>
+  GLOCKENSPIEL.in_sweet_spot(84) = True
+  HARPSICHORD.midi_program = 6 (should be 6)
+  by_name('harpsichord') = <Instrument Harpsichord (family=Keys, program=6, range=29-89)>
+  by_program(6) = <Instrument Harpsichord (family=Keys, program=6, range=29-89)>
+  HARPSICHORD.in_sweet_spot(69) = True
+  PICCOLO.midi_program = 72 (should be 72)
+  by_name('piccolo') = <Instrument Piccolo (family=Woodwind, program=72, range=72-108)>
+  by_program(72) = <Instrument Piccolo (family=Woodwind, program=72, range=72-108)>
+  PICCOLO.in_sweet_spot(88) = True
+  CELESTA.midi_program = 8 (should be 8)
+  by_name('celesta') = <Instrument Celesta (family=Keys, program=8, range=48-108)>
+  by_program(8) = <Instrument Celesta (family=Keys, program=8, range=48-108)>
+  CELESTA.in_sweet_spot(84) = True
+  ACCORDION.midi_program = 21 (should be 21)
+  MUSIC_BOX.midi_program = 10 (should be 10)
+  by_name('music box') = <Instrument Music Box (family=Percussion, program=10, range=60-96)>
+  by_program(10) = <Instrument Music Box (family=Percussion, program=10, range=60-96)>
+  MUSIC_BOX.in_sweet_spot(74) = True
+  by_name('accordion') = <Instrument Accordion (family=Keys, program=21, range=36-96)>
+  by_program(21) = <Instrument Accordion (family=Keys, program=21, range=36-96)>
+  ACCORDION.in_sweet_spot(69) = True
+  CLAVI.midi_program = 7 (should be 7)
+  by_name('clavi') = <Instrument Clavi (family=Keys, program=7, range=29-89)>
+  by_program(7) = <Instrument Clavi (family=Keys, program=7, range=29-89)>
+  CLAVI.in_sweet_spot(60) = True
+  CLAVI.range_min = 29 CLAVI.range_max = 89
+  ENGLISH_HORN.midi_program = 69 (should be 69)
+  by_name('english horn') = <Instrument English Horn (family=Woodwind, program=69, range=50-85)>
+  by_program(69) = <Instrument English Horn (family=Woodwind, program=69, range=50-85)>
+  ENGLISH_HORN.in_sweet_spot(65) = True
+  OCARINA.midi_program = 79 (should be 79)
+  by_name('ocarina') = <Instrument Ocarina (family=Woodwind, program=79, range=55-96)>
+  by_program(79) = <Instrument Ocarina (family=Woodwind, program=79, range=55-96)>
+  OCARINA.in_sweet_spot(74) = True
+  PAN_FLUTE.midi_program = 75 (should be 75)
+  by_name('pan flute') = <Instrument Pan Flute (family=World, program=75, range=55-100)>
+  by_program(75) = <Instrument Pan Flute (family=World, program=75, range=55-100)>
+  PAN_FLUTE.in_sweet_spot(72) = True
+  WHISTLE.midi_program = 78 (should be 78)
+  by_name('whistle') = <Instrument Whistle (family=Woodwind, program=78, range=62-93)>
+  by_program(78) = <Instrument Whistle (family=Woodwind, program=78, range=62-93)>
+  WHISTLE.in_sweet_spot(72) = True
+  WHISTLE.in_sweet_spot(48) = False
+  RECORDER.midi_program = 74 (should be 74)
+  by_name('recorder') = <Instrument Recorder (family=Woodwind, program=74, range=60-100)>
+  by_program(74) = <Instrument Recorder (family=Woodwind, program=74, range=60-100)>
+  RECORDER.in_sweet_spot(79) = True
+  RECORDER.in_sweet_spot(40) = False
+
+  TENOR_SAX.midi_program = 66 (should be 66)
+  by_name('tenor sax') = <Instrument Tenor Saxophone (family=Woodwind, program=66, range=44-88)>
+  by_program(66) = <Instrument Tenor Saxophone (family=Woodwind, program=66, range=44-88)>
+  TENOR_SAX.in_sweet_spot(64) = True
+  TENOR_SAX.in_sweet_spot(30) = False
+  BARITONE_SAX.midi_program = 67 (should be 67)
+  by_name('baritone sax') = <Instrument Baritone Saxophone (family=Woodwind, program=67, range=36-80)>
+  by_program(67) = <Instrument Baritone Saxophone (family=Woodwind, program=67, range=36-80)>
+  BARITONE_SAX.in_sweet_spot(60) = True
+  BARITONE_SAX.in_sweet_spot(30) = False
+  MUTED_TRUMPET.midi_program = 59 (should be 59)
+  by_name('muted trumpet') = <Instrument Muted Trumpet (family=Brass, program=59, range=54-86)>
+  by_program(59) = <Instrument Muted Trumpet (family=Brass, program=59, range=54-86)>
+  MUTED_TRUMPET.in_sweet_spot(69) = True
+  SOPRANO_SAX.midi_program = 64 (should be 64)
+  by_name('soprano sax') = <Instrument Soprano Saxophone (family=Woodwind, program=64, range=54-89)>
+  by_program(64) = <Instrument Soprano Saxophone (family=Woodwind, program=64, range=54-89)>
+  SOPRANO_SAX.in_sweet_spot(72) = True
+  SOPRANO_SAX.in_sweet_spot(50) = False
+
+=== Rhodes (Electric Piano 1, GM4) ===
+  RHODES.midi_program = 4 (should be 4)
+  by_name('rhodes') = <Instrument Electric Piano 1 (family=Keys, program=4, range=36-96)>
+  by_name('electric piano 1') = <Instrument Electric Piano 1 (family=Keys, program=4, range=36-96)>
+  by_program(4) = <Instrument Electric Piano 1 (family=Keys, program=4, range=36-96)>
+  RHODES.in_sweet_spot(69) = True
+  RHODES.in_sweet_spot(30) = False
+  RHODES.range_min = 36 RHODES.range_max = 96
+  RHODES.stem_label = 'Electric_Piano_1'
+
+=== Electric Piano 2 (DX7 FM Piano, GM5) ===
+  ELECTRIC_PIANO_2.midi_program = 5 (should be 5)
+  by_name('electric piano 2') = <Instrument Electric Piano 2 (family=Keys, program=5, range=36-96)>
+  by_program(5) = <Instrument Electric Piano 2 (family=Keys, program=5, range=36-96)>
+  ELECTRIC_PIANO_2.in_sweet_spot(69) = True
+  ELECTRIC_PIANO_2.in_sweet_spot(30) = False
+  ELECTRIC_PIANO_2.range_min = 36 ELECTRIC_PIANO_2.range_max = 96
+  ELECTRIC_PIANO_2.stem_label = 'Electric_Piano_2'
+
+=== Reed Organ (Harmonium, GM20) ===
+  REED_ORGAN.midi_program = 20 (should be 20)
+  by_name('reed organ') = <Instrument Reed Organ (family=Keys, program=20, range=36-96)>
+  by_program(20) = <Instrument Reed Organ (family=Keys, program=20, range=36-96)>
+  REED_ORGAN.in_sweet_spot(72) = True
+  REED_ORGAN.in_sweet_spot(30) = False
+  REED_ORGAN.range_min = 36 REED_ORGAN.range_max = 96
+  REED_ORGAN.stem_label = 'Reed Organ'
+
+=== String Ensemble 1 (GM48) ===
+  STRING_ENSEMBLE.midi_program = 48 (should be 48)
+  by_name('string ensemble') = <Instrument String Ensemble 1 (family=Strings, program=48, range=28-96)>
+  by_name('string ensemble 1') = <Instrument String Ensemble 1 (family=Strings, program=48, range=28-96)>
+  by_program(48) = <Instrument String Ensemble 1 (family=Strings, program=48, range=28-96)>
+  STRING_ENSEMBLE.in_sweet_spot(72) = True
+  STRING_ENSEMBLE.in_sweet_spot(20) = False
+  STRING_ENSEMBLE.range_min = 28 STRING_ENSEMBLE.range_max = 96
+  STRING_ENSEMBLE.stem_label = 'String_Ensemble_1'
+
+=== Pizzicato Strings (GM45) ===
+  PIZZICATO_STRINGS.midi_program = 45 (should be 45)
+  by_name('pizzicato strings') = <Instrument Pizzicato Strings (family=Strings, program=45, range=36-96)>
+  by_program(45) = <Instrument Pizzicato Strings (family=Strings, program=45, range=36-96)>
+  PIZZICATO_STRINGS.in_sweet_spot(64) = True
+  PIZZICATO_STRINGS.in_sweet_spot(30) = False
+  PIZZICATO_STRINGS.range_min = 36 PIZZICATO_STRINGS.range_max = 96
+  PIZZICATO_STRINGS.stem_label = 'Pizzicato_Strings'
+
+=== Synth Pad (Pad 1 new age, GM88) ===
+  SYNTH_PAD.midi_program = 88 (should be 88)
+  by_name('synth pad') = <Instrument Pad 1 (new age) (family=Synth, program=88, range=36-96)>
+  by_name('pad 1 (new age)') = <Instrument Pad 1 (new age) (family=Synth, program=88, range=36-96)>
+  by_program(88) = <Instrument Pad 1 (new age) (family=Synth, program=88, range=36-96)>
+  SYNTH_PAD.in_sweet_spot(72) = True
+  SYNTH_PAD.in_sweet_spot(24) = False
+  SYNTH_PAD.range_min = 36 SYNTH_PAD.range_max = 96
+  SYNTH_PAD.stem_label = 'Pad_1_new_age'
+
+=== Overdriven Guitar (GM29) ===
+  OVERDRIVEN_GUITAR.midi_program = 29 (should be 29)
+  by_name('overdriven guitar') = <Instrument Overdriven Guitar (family=Guitar, program=29, range=28-84)>
+  by_program(29) = <Instrument Overdriven Guitar (family=Guitar, program=29, range=28-84)>
+  OVERDRIVEN_GUITAR.in_sweet_spot(64) = True
+  OVERDRIVEN_GUITAR.in_sweet_spot(24) = False
+  OVERDRIVEN_GUITAR.range_min = 28 OVERDRIVEN_GUITAR.range_max = 84
+  OVERDRIVEN_GUITAR.stem_label = 'Overdriven_Guitar'
+
+=== Brass Section (GM61) ===
+  BRASS_SECTION.midi_program = 61 (should be 61)
+  by_name('brass section') = <Instrument Brass Section (family=Brass, program=61, range=36-96)>
+  by_program(61) = <Instrument Brass Section (family=Brass, program=61, range=36-96)>
+  BRASS_SECTION.in_sweet_spot(67) = True
+  BRASS_SECTION.in_sweet_spot(30) = False
+  BRASS_SECTION.range_min = 36 BRASS_SECTION.range_max = 96
+  BRASS_SECTION.stem_label = 'Brass_Section'
+
+=== Drawbar Organ (Hammond tonewheel, GM16) ===
+  DRAWBAR_ORGAN.midi_program = 16 (should be 16)
+  by_name('drawbar organ') = <Instrument Drawbar Organ (family=Keys, program=16, range=24-89)>
+  by_program(16) = <Instrument Drawbar Organ (family=Keys, program=16, range=24-89)>
+  DRAWBAR_ORGAN.in_sweet_spot(67) = True
+  DRAWBAR_ORGAN.in_sweet_spot(24) = False
+  DRAWBAR_ORGAN.range_min = 24 DRAWBAR_ORGAN.range_max = 89
+
+=== Jazz Guitar (Electric Guitar jazz, GM26) ===
+  JAZZ_GUITAR.midi_program = 26 (should be 26)
+  by_name('jazz guitar') = <Instrument Electric Guitar (jazz) (family=Guitar, program=26, range=28-84)>
+  by_name('electric guitar (jazz)') = <Instrument Electric Guitar (jazz) (family=Guitar, program=26, range=28-84)>
+  by_program(26) = <Instrument Electric Guitar (jazz) (family=Guitar, program=26, range=28-84)>
+  JAZZ_GUITAR.in_sweet_spot(60) = True
+  JAZZ_GUITAR.in_sweet_spot(24) = False
+  JAZZ_GUITAR.range_min = 28 JAZZ_GUITAR.range_max = 84
+  JAZZ_GUITAR.stem_label = 'Electric_Guitar_jazz'
+  DRAWBAR_ORGAN.stem_label = 'Drawbar_Organ'

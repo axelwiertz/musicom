@@ -628,6 +628,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Woodwind | Bassoon | 70 | 34–88 | bass, harmony, counter, lead |
 | Guitar | Acoustic Guitar (nylon) | 24 | 40–84 | harmony, rhythm, strum |
 | Guitar | Acoustic Guitar (steel) | 25 | 40–86 | harmony, rhythm, strum, lead, melody, ornament, countermelody |
+| Guitar | Electric Guitar (jazz) | 26 | 28–84 | harmony, rhythm, comp, lead, melody, ornament, countermelody, accent |
 | Percussion | Drum Kit | ch9 | 35–81 | rhythm, groove, accent |
 | Percussion | Glockenspiel | 9 | 79–108 | lead, melody, ornament, accent, countermelody |
 | Percussion | Marimba | 12 | 45–96 | lead, melody, accent, countermelody, harmony |
@@ -711,6 +712,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 ||| 4 | Electric Piano 1 | Electric_Piano_1 ✓ (GM_PROGRAMS[4] = "Electric Piano 1"; FluidR3 preset 4 = "Rhodes EP" — internal SF2 name, cosmetic only, no routing impact) |
 ||| ch9/pgm0 | Drums | **Acoustic_Grand_Piano** ✗ (program-0 fallback) |
 ||| 24 | Acoustic Guitar (nylon) | Acoustic_Guitar_nylon ✓ (GM_PROGRAMS[24] = "Acoustic Guitar (nylon)"; FluidR3 preset 24 = "Nylon String Guitar" — internal SF2 name differs cosmetically, no routing impact) |
+|| 26 | Electric Guitar (jazz) | Electric_Guitar_jazz ✓ (GM_PROGRAMS[26] = "Electric Guitar (jazz)" — GM2 spec spelling; FluidR3 preset 26 = "Jazz Guitar" — SF2 uses the common name, cosmetic only, **no routing impact**; STEM_LABEL = "Electric_Guitar_jazz" matches pipeline) |
 ||| 25 | Acoustic Guitar (steel) | Acoustic_Guitar_steel ✓ (GM_PROGRAMS[25] = "Acoustic Guitar (steel)"; FluidR3 preset 25 = "Steel String Guitar" — internal SF2 name differs cosmetically, no routing impact) |
 | 48 | String Ensemble 1 | String_Ensemble_1 ✓ (GM_PROGRAMS[48] = "String Ensemble 1"; FluidR3 preset 48 = "Strings" — one-word SF2 spelling, cosmetic only, **no quirk**) |
 | 88 | Pad 1 (new age) | Pad_1_new_age ✓ (GM_PROGRAMS[88] = "Pad 1 (new age)" → sanitized `Pad_1_new_age` — parens stripped, spaces → underscore; FluidR3 preset 88 = **"Fantasia"** — SF2 internal name differs from GM label, cosmetic only, **no routing impact**; preset 89 = "Warm Pad" is the darker sibling) |
@@ -1205,3 +1207,45 @@ room, not the 2.2 s cathedral of Church Organ GM19). EQ: cut 200 Hz
 PAN 0.0 (Leslie is a mono source). Distinct from Church Organ (GM19, pipe
 chiff) and Reed Organ (GM20, harmonium). Drive-by fix: registry table's
 stale "Flute | 74" row corrected to 73 (the 2026-10-16 GM73/74 swap).
+
+**Jazz Guitar added** (2026-10-22): GM26, Guitar-family fifth entry — the
+archtop hollow-body electric guitar (Gibson ES-175/L-5/Super 400 lineage),
+the warm/round jazz voice: f-hole hollow body + flatwound strings + THUMB
+attack (Wes Montgomery octaves, Freddie Green comping) (instrument.md +
+jazz_guitar.py), verified end-to-end UnitMatrixComposer → zero-drift ✓ →
+MIDI (153 bytes) → FluidSynth WAV (718 KB, solo render) ✓; RenderPipeline
+stem label `trackXX_Electric_Guitar_jazz.wav` ✓ (GM_PROGRAMS[26] =
+"Electric Guitar (jazz)" — GM2 spec spelling; FluidR3 preset 26 = "Jazz
+Guitar" — SF2 uses the common name, cosmetic only, **no routing impact**;
+STEM_LABEL = "Electric_Guitar_jazz" matches the pipeline's real label so
+stem-file lookups work — same discipline as the "Bag pipe"/"Shanai" quirks
+at 109/111). Karplus-Strong recommended (plucked waveguide — the exact
+physical model: loop_gain 0.9975 — flatwound strings ring long & smooth
+(2–4 s), between steel_acoustic 0.9970 and harp 0.9985, overdriven 0.9990
+is the compression sustain; excitation "thumb" for the round Wes attack,
+no pick click; lowpass_hz 3500 — DARKER than clean electric 5000: archtop
++ flatwounds absorb the highs; noise_component 0.015 — thumb is quiet).
+Ring test: late(1–2 s) rms/peak 0.0010 vs 0.0001 dull control, **6.7×** —
+flatwound ring clearly above the damped control. ModalSynth 'string'
+preset is the fallback; PhaseModSynth alt (mod_depth 1.5 — gentle twang,
+jazz tone is NOT brassy). Solo-render spectral check: 4–8 kHz buzz **0.1%**
+(the cleanest of the set — the dark archtop tone has virtually no energy
+above 4 kHz). Empirical FluidR3 pitch sweep (RMS, notes 24–96): preset 26
+audible 13/13, no gaps, no treble cliff (bottom 0.070, top 0.065) — SF2
+never clips a composition. Range 28–84 = GM-patch span (real 22-fret guitar
+E2–E6 = 40–76); sweet spot 48–72 (C3–C5) — the comping heart. Registration
+proof: `by_name('jazz guitar')` → Electric Guitar (jazz), `by_program(26)`
+→ Electric Guitar (jazz), `in_sweet_spot(60)` = True, `in_sweet_spot(24)` =
+False. Registration in `instrument_registry.py` as JAZZ_GUITAR convenience
+constant + a `registry_table()` role row. Role: harmony, rhythm, comp,
+lead, melody, ornament, countermelody, accent — fully polyphonic with two
+idiomatic faces: comping (Freddie Green chords on 2 & 4, shell voicings
+root-7th-3rd, 2–4 notes NOT dense barre chords) and melody (thumb single
+lines + Wes-style octave melodies). REVERB_TAIL 2.0 s (jazz-club room/warm
+hall). EQ: cut 250 Hz (archtop boxiness), boost 2.8 kHz presence (neck-
+pickup warmth, thumb definition), gentle 7.5 kHz air — the jazz tone is
+DARK by design (vs clean electric 8 kHz). PAN -0.2. Complements the Guitar
+family: nylon (24), steel (25), jazz (26), clean (27), overdriven (29).
+Drive-by fix: registry_table() overdriven-guitar role row corrected from
+the generic default to its documented role (lead, melody, accent, rhythm,
+strum, countermelody).

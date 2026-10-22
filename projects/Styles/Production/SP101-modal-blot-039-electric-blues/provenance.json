@@ -1,0 +1,56 @@
+{
+  "job": "random-style production (SP) layer-aligned",
+  "date": "2026-10-22",
+  "seed": 20261022,
+  "method": "SP-101",
+  "method_module": "sound.synthesis.modal_blot",
+  "method_desc": "BLOT-style Geometric Modal Resonator Network \u2014 8-mode just-intonation resonators, waveguide strings, formant filters, ring modulation, multiband saturation, FDN memory (Laboratory 0 BLOT-style)",
+  "layer": "ABSOLUTE",
+  "params": {
+    "sample_rate": 48000,
+    "bpm": 80.0,
+    "ppqn": 480,
+    "ring_tail": 0.15,
+    "patch": "pluck_patch: 3 pieces size=[1.0,0.5,2.0] shape=[0.15,0.1,0.2] brightness=[0.7,0.4,0.5] ring_time=[0.4,0.25,0.5] heat=[0.03,0.02,0.0]",
+    "ring_mod_pair": [
+      0,
+      1
+    ],
+    "fdn_mix": 0.12,
+    "breath_noise_amp": 0.004,
+    "droplet_rate": 0.0,
+    "strike_velocity": 0.6,
+    "pan_range": 0.3,
+    "target_lufs": -14.0,
+    "ceiling_db": -1.0
+  },
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Blues/039-electric-blues/daily-2026-06-27_blues_039-electric-blues-v5.mid",
+  "source_bpm": 80.0,
+  "source_pitch_classes": [
+    0,
+    4,
+    7,
+    9
+  ],
+  "key": "A natural minor (Am7 vamp)",
+  "output_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP101-modal-blot-039-electric-blues/SP101-modal-blot-039-electric-blues.wav",
+  "output_ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP101-modal-blot-039-electric-blues/SP101-modal-blot-039-electric-blues.ogg",
+  "raw_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP101-modal-blot-039-electric-blues/SP101_modal_blot_raw.wav",
+  "lufs": -14.00392753084121,
+  "peak": 0.8912509083747864,
+  "silence_pct": 15.305764840182649,
+  "rms": 0.14038677513599396,
+  "pitch_verdict": "PASS",
+  "hit_rate": 1.0,
+  "he_mean": 0.42007046150560895,
+  "preflight": {
+    "notes": 144,
+    "off_grid": 0,
+    "out_scale": 0,
+    "out_chord": 0,
+    "zero_drift": true,
+    "track_ends": [
+      23040
+    ]
+  }
+}
