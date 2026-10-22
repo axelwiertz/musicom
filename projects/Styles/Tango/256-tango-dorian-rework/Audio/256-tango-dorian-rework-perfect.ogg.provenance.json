@@ -1,0 +1,20 @@
+{
+  "artifact": "256-tango-dorian-rework-perfect.ogg",
+  "classification": "ai-generated",
+  "generator": "musicom nightly 256-tango-dorian-rework SP-001 fluidsynth + master",
+  "sources": [
+    "SP-001 fluidsynth FluidR3_GM.sf2",
+    "256-tango-dorian-rework-perfect.mid"
+  ],
+  "parameters": {
+    "render": "SP-001",
+    "phase": "2-perfect",
+    "master_target_lufs": -14.0,
+    "ceiling_db": -1.0
+  },
+  "notes": "",
+  "sha256": "e032b313aa82221c3356947a249e23d3717c8e1709f9cb3af9d50ade15454184",
+  "bytes": 504567,
+  "created_utc": "2026-10-22T01:16:59.455888+00:00",
+  "provenance_version": "1.0"
+}

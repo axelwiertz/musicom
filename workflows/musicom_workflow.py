@@ -279,6 +279,13 @@ SP_METHODS = {
     "SP-112": ("sound.generators.auto_divisi", "Auto Divisi — chord-note distribution across N instrument parts: per-part ranges, workload balancing, minimal-motion voice-leading, unison doublings; Note-off Revoice (Forma Labs Filament 1.2-style)"),
     "SP-113": ("sound.effects.supervariable_filter", "Supervariable VCF — 4-D filter (cutoff/resonance/bandwidth/profile): continuous HP->notch->LP character morph via SVF output blending, 2/3/4-pole LP cascade, BP/X/lp24 modes, voltage-controlled profile modulation (Shear Electronics Relic-style)"),
     "SP-114": ("sound.modular.mod_matrix", "Generic Modulation Matrix — 16 slots x 20 sources x 56 destinations, per-slot amount/enable, uni/bipolar-aware summing, seeded S&H/noise, A/B snapshot morph slider (Sequential Take 5 editor-style)"),
+    # 2026-10-22 scan
+    "SP-115": ("sound.generators.chord_arranger", "Chord-Driven 3-Track Generative Arranger — input chords -> chord/rhythm + arpeggiated melody + harmony-following bass tracks; ratchets/trills/swing/probability/accents/Euclidean muting; 8-macro + 16-step-lane modulation bus (Midicake UNA-style)"),
+    "SP-116": ("sound.generators.multimode_sample_player", "Seven-Mode Sample Playback Engine — oneshot/loop/slice/granular/stretch/pluck/wave; equal/transient/manual slicing; WSOLA time-stretch; KS pluck from sample attack; wavetable scan; slide-trig parameter glide (Elektron Model-TG firmware-style)"),
+    "SP-117": ("sound.effects.reverse_reverb", "Reverse Reverb — reverse -> IR convolution (decaying-noise reverb, pre-delay) -> reverse back -> wet/dry mix, align-to-hit trimming + boundary fades (Bixlab Reverse Reverb-style)"),
+    "SP-118": ("sound.effects.resonant_filterbank", "10-Band Fixed-Frequency Resonant Filterbank — 29Hz..11kHz log-spaced BPFs, per-band boost/cut + bipolar resonance, global feedback loop, stereo Spread, LP/HP/BP/notch Filter mode, self-oscillating drone (Erica Synths Resonant Filterbank-style)"),
+    "SP-119": ("sound.effects.spectral_resonance_suppressor", "Spectral Resonance Suppressor — STFT de-resonator: median-baseline excess peak detection, shaped suppression gains, freq+time smoothing, midrange band focus (Newfangled Audio Fixate:Midrange-style)"),
+    "SP-120": ("sound.synthesis.waveshaper_voice", "Wavetable Scan + Nonlinear Wave-Shaper Voice — phase-accumulator frame-interpolated scan, tanh/soft-clip/asym/Chebyshev transfer functions (harmonic generation), 16-step LFO on drive/position/pitch, two-layer blend, stereo spread (Roland n/vision-style)"),
 }
 
 

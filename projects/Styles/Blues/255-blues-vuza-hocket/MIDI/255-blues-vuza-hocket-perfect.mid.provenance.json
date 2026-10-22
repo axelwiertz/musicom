@@ -1,0 +1,46 @@
+{
+  "artifact": "255-blues-vuza-hocket-perfect.mid",
+  "classification": "ai-assisted",
+  "generator": "111 VTCC + musicom rules (grid-locked)",
+  "sources": [],
+  "parameters": {
+    "project": "255-blues-vuza-hocket",
+    "phase": 2,
+    "version": "perfect",
+    "key": "E major (ionian)",
+    "bpm": 112,
+    "method": "111",
+    "style": "blues",
+    "seed": 255,
+    "humanize_seed": 25756,
+    "form": "blues-12",
+    "total_bars": 12,
+    "voices": [
+      "Lead",
+      "E0",
+      "E1",
+      "E2",
+      "E3",
+      "E4",
+      "E5",
+      "Bass",
+      "Drums"
+    ],
+    "instruments": [
+      "Harmonica",
+      "Clean Electric",
+      "Electric Piano 2",
+      "Drawbar Organ",
+      "Vibraphone",
+      "Steel Acoustic",
+      "Marimba",
+      "Electric Bass",
+      "Drum Kit"
+    ]
+  },
+  "notes": "Phase 2 perfect: grid-locked concrete layer (no humanization). 72-onset hocket split over 6 entry voices, chord-tone quantized per bar (E-major I-IV-V), 8th/16th grid, voice-leading optimized, zero-drift gated.",
+  "sha256": "ce404668d002cfa61bcd5464e07d2ad6e22b0e481bb2761cf05ee9ddb8e0f9d1",
+  "bytes": 3326,
+  "created_utc": "2026-10-21T23:13:06.968412+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,28 @@
+{
+  "style": "Tango",
+  "target_lufs": -14.0,
+  "renders": {
+    "perfect": {
+      "wav": "/opt/data/projects/Styles/Tango/256-tango-dorian-rework/Audio/256-tango-dorian-rework-perfect.wav",
+      "ogg": "/opt/data/projects/Styles/Tango/256-tango-dorian-rework/Audio/256-tango-dorian-rework-perfect.ogg",
+      "wav_bytes": 12581932,
+      "ogg_bytes": 504567,
+      "silence_ratio": 0.0413,
+      "peak": 0.8825,
+      "duration_s": 71.33,
+      "integrated_lufs": -14.01,
+      "true_peak_db": -1.0
+    },
+    "humanized": {
+      "wav": "/opt/data/projects/Styles/Tango/256-tango-dorian-rework/Audio/256-tango-dorian-rework-humanized.wav",
+      "ogg": "/opt/data/projects/Styles/Tango/256-tango-dorian-rework/Audio/256-tango-dorian-rework-humanized.ogg",
+      "wav_bytes": 12581932,
+      "ogg_bytes": 504180,
+      "silence_ratio": 0.0418,
+      "peak": 0.8838,
+      "duration_s": 71.33,
+      "integrated_lufs": -14.0,
+      "true_peak_db": -1.0
+    }
+  }
+}

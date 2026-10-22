@@ -1,0 +1,32 @@
+{
+  "artifact": "256-tango-dorian-rework-phase1.mid",
+  "classification": "ai-generated",
+  "generator": "musicom nightly 256-tango-dorian-rework",
+  "sources": [
+    "methods_db:ABS-002 subset walk (pitch-index random walk)",
+    "style:Tango",
+    "phase:1 raw draft"
+  ],
+  "parameters": {
+    "phase": 1,
+    "seed": 20261022,
+    "key": "D dorian",
+    "bpm": 112,
+    "form": [
+      "Intro",
+      "TangoA",
+      "TangoB",
+      "Lift",
+      "TangoA2",
+      "Bridge",
+      "Finale",
+      "Coda"
+    ],
+    "notes": "raw pitch-index reflected random walk"
+  },
+  "notes": "",
+  "sha256": "590bebae6af259a375ea6925c617910bcbc410e929a58c3c535ee35e6a271d18",
+  "bytes": 2680,
+  "created_utc": "2026-10-22T01:10:54.022922+00:00",
+  "provenance_version": "1.0"
+}

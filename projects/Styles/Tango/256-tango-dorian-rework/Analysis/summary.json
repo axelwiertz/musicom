@@ -1,0 +1,49 @@
+{
+  "project": "256-tango-dorian-rework",
+  "genre": "Tango",
+  "key": "D dorian",
+  "bpm": 112,
+  "form": [
+    "Intro",
+    "TangoA",
+    "TangoB",
+    "Lift",
+    "TangoA2",
+    "Bridge",
+    "Finale",
+    "Coda"
+  ],
+  "bars": 32,
+  "total_ticks": 61440,
+  "source": "087-tango-abstract-dorian",
+  "decision": "redesign (index.html missing)",
+  "variations": {
+    "Intro": "register shift (low) + sparse",
+    "TangoA": "base motif",
+    "TangoB": "transposition (+2 degrees)",
+    "Lift": "diminution (16th) + density rise + 7th chords",
+    "TangoA2": "inversion (pivot degree 4)",
+    "Bridge": "retrograde + register shift + violin counterline",
+    "Finale": "augmentation (x2) + tutti",
+    "Coda": "diminution fragment + fade"
+  },
+  "section_roots_midpoint": {
+    "Intro": "C",
+    "TangoA": "G",
+    "TangoB": "Em",
+    "Lift": "Dm",
+    "TangoA2": "F",
+    "Bridge": "Am",
+    "Finale": "C",
+    "Coda": "Dm"
+  },
+  "voices": [
+    "LeadSax",
+    "Violin",
+    "Cello",
+    "Piano",
+    "Bass",
+    "Drums"
+  ],
+  "humanize_seed": 20261023
+}

@@ -1,0 +1,36 @@
+{
+  "style": "blues",
+  "target_lufs": -14.0,
+  "render": {
+    "phase1": {
+      "raw_wav_bytes": 4889132,
+      "target_lufs": -14.0,
+      "integrated_lufs": -14.0,
+      "true_peak_db": -5.43,
+      "silence_ratio": 0.2899,
+      "sample_rate": 44100,
+      "wav_bytes": 4889132,
+      "ogg_bytes": 229911
+    },
+    "perfect": {
+      "raw_wav_bytes": 4991788,
+      "target_lufs": -14.0,
+      "integrated_lufs": -14.0,
+      "true_peak_db": -1.0,
+      "silence_ratio": 0.0828,
+      "sample_rate": 44100,
+      "wav_bytes": 4991788,
+      "ogg_bytes": 248938
+    },
+    "humanized": {
+      "raw_wav_bytes": 4991788,
+      "target_lufs": -14.0,
+      "integrated_lufs": -14.0,
+      "true_peak_db": -1.0,
+      "silence_ratio": 0.0847,
+      "sample_rate": 44100,
+      "wav_bytes": 4991788,
+      "ogg_bytes": 247373
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "phase1": {
+    "path": "256-tango-dorian-rework-phase1.mid",
+    "bytes": 2680,
+    "n_tracks": 2,
+    "voice_tracks": 1,
+    "voice_len": 61440,
+    "drift_ok": true,
+    "length_seconds": 68.57,
+    "total_notes": 325,
+    "pitched_notes": 325,
+    "offgrid": 322,
+    "scale_viol": 0,
+    "chord_viol": 198
+  },
+  "perfect": {
+    "path": "256-tango-dorian-rework-perfect.mid",
+    "bytes": 9634,
+    "n_tracks": 7,
+    "voice_tracks": 6,
+    "voice_len": 61440,
+    "drift_ok": true,
+    "length_seconds": 68.57,
+    "total_notes": 1217,
+    "pitched_notes": 757,
+    "offgrid": 0,
+    "scale_viol": 0,
+    "chord_viol": 0
+  },
+  "humanized": {
+    "path": "256-tango-dorian-rework-humanized.mid",
+    "bytes": 9522,
+    "n_tracks": 7,
+    "voice_tracks": 6,
+    "voice_len": 61440,
+    "drift_ok": true,
+    "length_seconds": 68.57,
+    "total_notes": 1217,
+    "pitched_notes": 757,
+    "offgrid": 702,
+    "scale_viol": 0,
+    "chord_viol": 34
+  }
+}

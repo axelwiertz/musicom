@@ -1,0 +1,361 @@
+{
+  "project": "255-blues-vuza-hocket",
+  "project_number": 255,
+  "style": "blues",
+  "method_id": "111",
+  "method_name": "Vuza Tiling Canon Composition (VTCC)",
+  "method_layer": "concrete",
+  "method_paradigm": "Rules-Based",
+  "form": "blues-12 (12 bars)",
+  "key": "E major (ionian)",
+  "key_pcs": [
+    4,
+    6,
+    8,
+    9,
+    11,
+    1,
+    3
+  ],
+  "bpm": 112,
+  "meter": "4/4",
+  "bar_ticks": 1920,
+  "total_bars": 12,
+  "total_ticks": 23040,
+  "canon": {
+    "n": 72,
+    "motif_A": [
+      0,
+      1,
+      5,
+      6,
+      12,
+      25,
+      29,
+      36,
+      42,
+      48,
+      49,
+      53
+    ],
+    "entries_B": [
+      0,
+      8,
+      16,
+      18,
+      26,
+      34
+    ],
+    "onsets": 72,
+    "aperiodic": true
+  },
+  "progression_degrees": [
+    0,
+    0,
+    0,
+    0,
+    3,
+    3,
+    0,
+    0,
+    4,
+    3,
+    0,
+    4
+  ],
+  "voices": [
+    {
+      "name": "Lead",
+      "program": 22,
+      "channel": 0,
+      "instrument": "Harmonica",
+      "pitched": true
+    },
+    {
+      "name": "E0",
+      "program": 27,
+      "channel": 1,
+      "instrument": "Clean Electric",
+      "pitched": true
+    },
+    {
+      "name": "E1",
+      "program": 5,
+      "channel": 2,
+      "instrument": "Electric Piano 2",
+      "pitched": true
+    },
+    {
+      "name": "E2",
+      "program": 16,
+      "channel": 3,
+      "instrument": "Drawbar Organ",
+      "pitched": true
+    },
+    {
+      "name": "E3",
+      "program": 11,
+      "channel": 4,
+      "instrument": "Vibraphone",
+      "pitched": true
+    },
+    {
+      "name": "E4",
+      "program": 25,
+      "channel": 5,
+      "instrument": "Steel Acoustic",
+      "pitched": true
+    },
+    {
+      "name": "E5",
+      "program": 12,
+      "channel": 6,
+      "instrument": "Marimba",
+      "pitched": true
+    },
+    {
+      "name": "Bass",
+      "program": 33,
+      "channel": 7,
+      "instrument": "Electric Bass",
+      "pitched": true
+    },
+    {
+      "name": "Drums",
+      "program": 0,
+      "channel": 9,
+      "instrument": "Drum Kit",
+      "pitched": false
+    }
+  ],
+  "perfect_audit": {
+    "Lead": {
+      "notes": 84,
+      "off16": 0,
+      "off8": 0,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "E0": {
+      "notes": 15,
+      "off16": 0,
+      "off8": 0,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "E1": {
+      "notes": 15,
+      "off16": 0,
+      "off8": 0,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "E2": {
+      "notes": 15,
+      "off16": 0,
+      "off8": 0,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "E3": {
+      "notes": 12,
+      "off16": 0,
+      "off8": 0,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "E4": {
+      "notes": 12,
+      "off16": 0,
+      "off8": 0,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "E5": {
+      "notes": 12,
+      "off16": 0,
+      "off8": 0,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "Bass": {
+      "notes": 48,
+      "off16": 0,
+      "off8": 0,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "Drums": {
+      "notes": 145,
+      "off16": 0,
+      "off8": 48,
+      "out_scale": 0,
+      "out_chord": 0
+    }
+  },
+  "humanized_audit": {
+    "Lead": {
+      "notes": 84,
+      "off16": 78,
+      "off8": 78,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "E0": {
+      "notes": 15,
+      "off16": 13,
+      "off8": 13,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "E1": {
+      "notes": 15,
+      "off16": 13,
+      "off8": 13,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "E2": {
+      "notes": 15,
+      "off16": 13,
+      "off8": 13,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "E3": {
+      "notes": 12,
+      "off16": 9,
+      "off8": 9,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "E4": {
+      "notes": 12,
+      "off16": 8,
+      "off8": 8,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "E5": {
+      "notes": 12,
+      "off16": 9,
+      "off8": 9,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "Bass": {
+      "notes": 48,
+      "off16": 48,
+      "off8": 48,
+      "out_scale": 0,
+      "out_chord": 0
+    },
+    "Drums": {
+      "notes": 145,
+      "off16": 116,
+      "off8": 125,
+      "out_scale": 0,
+      "out_chord": 0
+    }
+  },
+  "zero_drift": {
+    "perfect_tracks": 9,
+    "humanized_tracks": 9,
+    "perfect_span": [
+      23040,
+      23040,
+      23040,
+      23040,
+      23040,
+      23040,
+      23040,
+      23040,
+      23040
+    ],
+    "humanized_span": [
+      23040,
+      23040,
+      23040,
+      23040,
+      23040,
+      23040,
+      23040,
+      23040,
+      23040
+    ]
+  },
+  "voice_leading": {
+    "corrections": 0,
+    "parallel_hidden_fifth_violations": 0
+  },
+  "humanize": {
+    "style": "blues",
+    "seed": 25756,
+    "per_voice": {
+      "Lead": {
+        "seed": 2601356,
+        "n_notes": 84,
+        "mean_abs_shift_ticks": 3.964,
+        "max_abs_shift_ticks": 12,
+        "mean_abs_vel_delta": 5.548
+      },
+      "E0": {
+        "seed": 2601357,
+        "n_notes": 15,
+        "mean_abs_shift_ticks": 3.533,
+        "max_abs_shift_ticks": 6,
+        "mean_abs_vel_delta": 3.6
+      },
+      "E1": {
+        "seed": 2601358,
+        "n_notes": 15,
+        "mean_abs_shift_ticks": 2.6,
+        "max_abs_shift_ticks": 6,
+        "mean_abs_vel_delta": 3.6
+      },
+      "E2": {
+        "seed": 2601359,
+        "n_notes": 15,
+        "mean_abs_shift_ticks": 3.267,
+        "max_abs_shift_ticks": 9,
+        "mean_abs_vel_delta": 4.0
+      },
+      "E3": {
+        "seed": 2601360,
+        "n_notes": 12,
+        "mean_abs_shift_ticks": 1.25,
+        "max_abs_shift_ticks": 3,
+        "mean_abs_vel_delta": 3.5
+      },
+      "E4": {
+        "seed": 2601361,
+        "n_notes": 12,
+        "mean_abs_shift_ticks": 2.0,
+        "max_abs_shift_ticks": 7,
+        "mean_abs_vel_delta": 3.167
+      },
+      "E5": {
+        "seed": 2601362,
+        "n_notes": 12,
+        "mean_abs_shift_ticks": 1.417,
+        "max_abs_shift_ticks": 5,
+        "mean_abs_vel_delta": 4.25
+      },
+      "Bass": {
+        "seed": 2601363,
+        "n_notes": 48,
+        "mean_abs_shift_ticks": 8.083,
+        "max_abs_shift_ticks": 14,
+        "mean_abs_vel_delta": 2.833
+      },
+      "Drums": {
+        "seed": 2601364,
+        "n_notes": 145,
+        "mean_abs_shift_ticks": 1.283,
+        "max_abs_shift_ticks": 4,
+        "mean_abs_vel_delta": 3.359
+      }
+    }
+  },
+  "seed": 255
+}

@@ -1,0 +1,149 @@
+{
+  "artifact": "256-tango-dorian-rework-perfect.mid",
+  "classification": "ai-generated",
+  "generator": "musicom nightly 256-tango-dorian-rework",
+  "sources": [
+    "methods_db:ABS-002 subset walk",
+    "style:Tango",
+    "phase:2 rules",
+    "humanize_seed:20261023"
+  ],
+  "parameters": {
+    "phase": "2-perfect",
+    "seed": 20261022,
+    "key": "D dorian",
+    "bpm": 112,
+    "form": [
+      "Intro",
+      "TangoA",
+      "TangoB",
+      "Lift",
+      "TangoA2",
+      "Bridge",
+      "Finale",
+      "Coda"
+    ],
+    "humanize": {
+      "LeadSax": {
+        "seed": 2046363323,
+        "profile": {
+          "timing_sigma_ms": 8.0,
+          "velocity_sigma": 7.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.02,
+          "layback_ms": 1.0,
+          "phrase_corr": 0.4,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 309,
+        "mean_abs_shift_ticks": 4.466,
+        "max_abs_shift_ticks": 22,
+        "mean_abs_vel_delta": 5.521,
+        "timing_sigma_ticks": 7.168
+      },
+      "Violin": {
+        "seed": 2046363324,
+        "profile": {
+          "timing_sigma_ms": 10.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.03,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.4,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 136,
+        "mean_abs_shift_ticks": 6.206,
+        "max_abs_shift_ticks": 23,
+        "mean_abs_vel_delta": 4.801,
+        "timing_sigma_ticks": 8.96
+      },
+      "Cello": {
+        "seed": 2046363325,
+        "profile": {
+          "timing_sigma_ms": 10.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.03,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.4,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 64,
+        "mean_abs_shift_ticks": 4.5,
+        "max_abs_shift_ticks": 16,
+        "mean_abs_vel_delta": 4.156,
+        "timing_sigma_ticks": 8.96
+      },
+      "Piano": {
+        "seed": 2046363326,
+        "profile": {
+          "timing_sigma_ms": 6.0,
+          "velocity_sigma": 5.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.015,
+          "layback_ms": 0.0,
+          "phrase_corr": 0.4,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 192,
+        "mean_abs_shift_ticks": 3.625,
+        "max_abs_shift_ticks": 11,
+        "mean_abs_vel_delta": 3.943,
+        "timing_sigma_ticks": 5.376
+      },
+      "Bass": {
+        "seed": 2046363327,
+        "profile": {
+          "timing_sigma_ms": 10.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.03,
+          "layback_ms": 8.0,
+          "phrase_corr": 0.4,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 56,
+        "mean_abs_shift_ticks": 10.143,
+        "max_abs_shift_ticks": 24,
+        "mean_abs_vel_delta": 5.089,
+        "timing_sigma_ticks": 8.96
+      },
+      "Drums": {
+        "seed": 2046363328,
+        "profile": {
+          "timing_sigma_ms": 2.0,
+          "velocity_sigma": 4.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.008,
+          "layback_ms": 0.0,
+          "phrase_corr": 0.4,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 460,
+        "mean_abs_shift_ticks": 1.115,
+        "max_abs_shift_ticks": 4,
+        "mean_abs_vel_delta": 3.067,
+        "timing_sigma_ticks": 1.792
+      }
+    },
+    "note": "grid-locked, no jitter"
+  },
+  "notes": "",
+  "sha256": "f33a6c028d6c5dc8a5313eabe4e54d6f0957fe33e1963367c8737c706a4a37c2",
+  "bytes": 9634,
+  "created_utc": "2026-10-22T01:10:54.139023+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,46 @@
+{
+  "artifact": "255-blues-vuza-hocket-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.workflows.unitmatrix_composer + Vuza tiling canon (PRE-RULES raw draft)",
+  "sources": [],
+  "parameters": {
+    "project": "255-blues-vuza-hocket",
+    "phase": 1,
+    "key": "E major (ionian)",
+    "bpm": 112,
+    "method": "111",
+    "canon_n": 72,
+    "motif_A": [
+      0,
+      1,
+      5,
+      6,
+      12,
+      25,
+      29,
+      36,
+      42,
+      48,
+      49,
+      53
+    ],
+    "entries_B": [
+      0,
+      8,
+      16,
+      18,
+      26,
+      34
+    ],
+    "style": "blues",
+    "seed": 255,
+    "form": "blues-12",
+    "total_bars": 12,
+    "rules_applied": "NONE (pre-rules)"
+  },
+  "notes": "Phase 1 raw Vuza tiling-canon draft: 72-onset perfect hocket flattened to one voice, scale-mapped pitch (not chord-tone quantized), 8th-note slots.",
+  "sha256": "e65ad3619f814fbb4b10a59b3d3dc3c89950253a7a556e89cdbbd6453bb20217",
+  "bytes": 705,
+  "created_utc": "2026-10-21T23:13:06.967667+00:00",
+  "provenance_version": "1.0"
+}

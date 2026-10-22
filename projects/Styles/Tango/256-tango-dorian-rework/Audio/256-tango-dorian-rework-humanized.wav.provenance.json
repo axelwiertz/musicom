@@ -1,0 +1,20 @@
+{
+  "artifact": "256-tango-dorian-rework-humanized.wav",
+  "classification": "ai-generated",
+  "generator": "musicom nightly 256-tango-dorian-rework SP-001 fluidsynth + master",
+  "sources": [
+    "SP-001 fluidsynth FluidR3_GM.sf2",
+    "256-tango-dorian-rework-humanized.mid"
+  ],
+  "parameters": {
+    "render": "SP-001",
+    "phase": "2-humanized",
+    "master_target_lufs": -14.0,
+    "ceiling_db": -1.0
+  },
+  "notes": "",
+  "sha256": "6dae97d43cebae5f5fc9b8116f45f756f693eb4ab592e2a069f620255ac84ece",
+  "bytes": 12581932,
+  "created_utc": "2026-10-22T01:16:59.465785+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,39 @@
+{
+  "chosen": "/opt/data/projects/Styles/Tango/087-tango-abstract-dorian",
+  "genre": "Tango",
+  "primary_midi": "MIDI/087-tango-abstract-dorian.mid",
+  "audit_date": "2026-10-22",
+  "standard_failures": [
+    "index.html missing (standard 6: provenance.json + index.html required)"
+  ],
+  "standard_pass": [
+    "engine-authored (UnitMatrixComposer, no raw mido authoring)",
+    "zero-drift (6 voice tracks == 46080 ticks)",
+    "rhythm-grid sync (0 off-grid pitched onsets on 16th/8th grid)",
+    ">=4 voice tracks (6 voices: sax/violin/cello/piano/bass/drums)",
+    "two-phase artifacts (phase1.mid + main.mid both present)"
+  ],
+  "notes": [
+    "Dorian chord LABELS incorrect (ii labeled Edim -> actually Em; IV labeled Gm -> actually G major). Math (DORIAN_OFFS) correct; labels wrong.",
+    "No humanization / dual-version (-perfect/-humanized) — predates 2026-10-17 contract.",
+    "compose.py uses sys.path.insert for instrument registry + repo (code smell, not a hard fail)."
+  ],
+  "redesign_required": true,
+  "source_identity": {
+    "genre": "Tango",
+    "key": "D dorian (D E F G A B C)",
+    "tonic_pc": 2,
+    "tempo_bpm": 112,
+    "form": ["Intro", "TangoA", "TangoB", "Lift", "TangoA2", "Outro"],
+    "bars": 24,
+    "core_motif": "subset-walk dorian progression; VII (C major) = dorian half-cadence home",
+    "instrumentation": {
+      "lead": "Alto Saxophone (65)",
+      "counter": "Violin (40)",
+      "pad": "Cello (42)",
+      "comp": "Piano (1)",
+      "bass": "Double Bass (43)",
+      "drums": "Drum Kit (ch9)"
+    }
+  }
+}

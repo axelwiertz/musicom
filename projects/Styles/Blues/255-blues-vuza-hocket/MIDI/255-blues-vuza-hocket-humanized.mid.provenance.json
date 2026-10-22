@@ -1,0 +1,46 @@
+{
+  "artifact": "255-blues-vuza-hocket-humanized.mid",
+  "classification": "ai-assisted",
+  "generator": "111 VTCC + musicom rules + humanize",
+  "sources": [],
+  "parameters": {
+    "project": "255-blues-vuza-hocket",
+    "phase": 2,
+    "version": "humanized",
+    "key": "E major (ionian)",
+    "bpm": 112,
+    "method": "111",
+    "style": "blues",
+    "seed": 255,
+    "humanize_seed": 25756,
+    "form": "blues-12",
+    "total_bars": 12,
+    "voices": [
+      "Lead",
+      "E0",
+      "E1",
+      "E2",
+      "E3",
+      "E4",
+      "E5",
+      "Bass",
+      "Drums"
+    ],
+    "instruments": [
+      "Harmonica",
+      "Clean Electric",
+      "Electric Piano 2",
+      "Drawbar Organ",
+      "Vibraphone",
+      "Steel Acoustic",
+      "Marimba",
+      "Electric Bass",
+      "Drum Kit"
+    ]
+  },
+  "notes": "Phase 2 humanized: same concrete layer + style-derived seeded humanization (per-instrument DNA). Zero-drift safe.",
+  "sha256": "86a4b0d9a12398ad7533a82bd525426001b667fbbd472839d38312f0e751937b",
+  "bytes": 3314,
+  "created_utc": "2026-10-21T23:13:06.968729+00:00",
+  "provenance_version": "1.0"
+}
