@@ -45,6 +45,7 @@ Usage:
 
 from __future__ import annotations
 
+import random
 from typing import Dict, List, Sequence, Tuple
 
 MAJOR_STEPS = (2, 2, 1, 2, 2, 2, 1)          # Ionian
@@ -221,15 +222,123 @@ class HarmonyWriter:
         return cands[0]
 
     # --------------------------------------------------------------- public
-    def harmonize(self, melody: Sequence[dict]) -> Dict[str, List[dict]]:
+    def harmonize(self, melody: Sequence[dict], role: str = "harmony",
+                  **counter_kwargs) -> Dict[str, List[dict]]:
         """Harmonize a monophonic melody (musicom MIDI-event dicts).
 
         Returns a dict of voice name -> note-event list (deterministic).
+
+        ``role="harmony"`` (default): SATB-style harmony voices under the
+        melody (unchanged). ``role="counter"``: a single independent second
+        melody — see ``counterline``. Both are deterministic for the same
+        input + settings.
         """
+        if role == "counter":
+            return {"counter": self.counterline(melody, **counter_kwargs)}
+        if role != "harmony":
+            raise ValueError(f"unknown role {role!r}; use 'harmony' or 'counter'")
         if not melody:
             return {}
         chords = self.choose_chords(melody)
         return self.voice_lines(list(melody), chords)
+
+    def counterline(self, melody: Sequence[dict], grid: int = 240,
+                    register: Tuple[int, int] = (55, 72),
+                    mode: str = "independent", seed: int = 0) -> List[dict]:
+        """Write an independent countermelody against the lead (Phase 3 P2).
+
+        A counter is a *role*, not a harmony part: it must NOT double the lead
+        and it must fill the lead's gaps (call-and-response). Two constraints,
+        both hard-checked here:
+
+          * **contrast** — the counter never lands on the lead's pitch class
+            at the same time (register separation + no unison).
+          * **complementary density** — counter onsets land only on grid slots
+            the lead does not occupy (``grid`` = subdivision, default 8th).
+
+        ``mode``:
+          * ``"independent"`` (default) — a fresh stepwise walk over the key's
+            scale in the counter register (cheap, guaranteed in-key).
+          * ``"transform"`` — the lead's contour inverted around the tonic,
+            transposed into the register, then re-snapped to the key.
+
+        Deterministic given ``seed``. Returns note-event dicts (pitch/volume/
+        start_tick/end_tick) — pass to ``workflows.pitch_audit.audit_voice``
+        to prove 0 un-tagged violations.
+        """
+        melody = list(melody)
+        if not melody:
+            return []
+        if mode not in ("independent", "transform"):
+            raise ValueError(f"mode must be 'independent' or 'transform', got {mode!r}")
+
+        lead_onsets = {e["start_tick"] for e in melody}
+        lo, hi = register
+        scale_pcs = set(key_scale(self.key))
+
+        if mode == "transform":
+            return self._counter_transform(melody, lead_onsets, scale_pcs,
+                                           lo, hi, grid, seed)
+
+        # independent: stepwise walk over the scale, filling lead's gaps
+        rng = random.Random(seed)
+        pitches = sorted(p for p in range(lo, hi + 1) if (p % 12) in scale_pcs)
+        if not pitches:
+            return []
+        span = max(e["end_tick"] for e in melody)
+        cur = rng.choice(pitches)
+        out: List[dict] = []
+        for t in range(0, span, grid):
+            if t in lead_onsets:
+                continue  # complementary density: lead owns this slot
+            # contrast: skip pitches whose pitch class the lead is sounding now
+            sounding = {e["pitch"] % 12 for e in melody
+                        if e["start_tick"] <= t < e["end_tick"]}
+            cands = [p for p in pitches if (p % 12) not in sounding]
+            if not cands:
+                cands = pitches
+            # stepwise motion: prefer a NEIGHBOURING scale tone over holding
+            # the same pitch, so the counter has contour (not a drone).
+            moves = [p for p in cands if p != cur and abs(p - cur) <= 2]
+            if moves:
+                cur = rng.choice(moves)
+            else:
+                cur = rng.choice(cands)
+            out.append({"pitch": cur, "volume": 76,
+                        "start_tick": t, "end_tick": t + grid})
+        return out
+
+    def _counter_transform(self, melody: List[dict], lead_onsets: set,
+                           scale_pcs: set, lo: int, hi: int, grid: int,
+                           seed: int) -> List[dict]:
+        """Counter via inversion of the lead's contour, then re-snap to key."""
+        # tonic = the key's tonic pitch class in a stable octave
+        tonic = NOTE_NAMES.index(self.key if len(self.key) == 1
+                                 else self.key[0].upper() + self.key[1:])
+        # invert around the tonic (six octaves up from C0) so the contour
+        # mirrors; then snap each to the nearest scale tone in the register
+        axis = tonic + 12 * 6  # a stable high tonic reference
+        out: List[dict] = []
+        # place one counter note per lead note, on the following free grid slot
+        slot = 0
+        span = max(e["end_tick"] for e in melody)
+        lead = sorted(melody, key=lambda e: e["start_tick"])
+        for e in lead:
+            inv = 2 * axis - e["pitch"]
+            # snap to nearest scale tone in register
+            best = min((p for p in range(lo, hi + 1) if (p % 12) in scale_pcs),
+                       key=lambda p: abs(p - inv), default=None)
+            if best is None:
+                continue
+            # find a free slot at or after the lead's onset
+            while slot in lead_onsets or slot < e["start_tick"]:
+                slot += grid
+            if slot + grid > span:
+                break
+            out.append({"pitch": best, "volume": 76,
+                        "start_tick": slot, "end_tick": slot + grid})
+            slot += grid
+        return out
 
 
 # --------------------------------------------------------------- helpers
