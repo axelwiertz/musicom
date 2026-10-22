@@ -551,8 +551,9 @@ def compose(style="pop", method=None, form=None, key="C", bpm=None,
     for s in range(5):
         for b in range(4):
             slots.append(chord_roots[(b) % 4])
-    # build per-voice material
-    from structures import MusicEvent
+    # build per-voice material — role-first cell engine (VOICE_ROLE_WORKFLOW_PLAN.md P0)
+    from workflows.cell_engine import CellComposer, CellContext, default_resolve_role
+    cell = CellComposer(composer)
     for s, sname in enumerate(section_names):
         if loop:
             _fill_loop_section(composer, voices, chord_roots, num_bars)
@@ -562,7 +563,6 @@ def compose(style="pop", method=None, form=None, key="C", bpm=None,
             # abstract path: chord tones come from the walked subset
             chord_tones = chord_tones_by_section[s]
             root_midi = chord_tones[0]
-            qual = "min" if len(chord_tones) > 0 else "maj"  # unused below on this path
         else:
             root_midi, qual = chord_roots[s % 4]
             third = 3 if qual == "min" else 4
@@ -570,36 +570,17 @@ def compose(style="pop", method=None, form=None, key="C", bpm=None,
             chord_tones = [root_midi, root_midi + third, root_midi + fifth]
         section_bars = bars_per[s]
         section_len = section_bars * BAR
-        # Lead: arpeggio of chord tones (8th notes)
-        lead_evs = []
-        for b in range(section_bars * 2):
-            step = chord_tones[b % 3] + 12  # octave up for lead
-            lead_evs.append(MusicEvent(step, 90, b * 960, b * 960 + 480))
-        lead_unit = _unit_from_events(lead_evs, section_len)
-        composer.fill_voice_section(voices[0][0], sname, lead_unit)
-        # Pad: sustained chord (whole-section)
-        pad_evs = [MusicEvent(chord_tones[i], 60, 0, section_len) for i in range(3)]
-        composer.fill_voice_section(voices[1][0], sname, _unit_from_events(pad_evs, section_len))
-        # Bass: root on beats 1 & 3
-        bass_evs = [MusicEvent(root_midi, 95, b * BAR, b * BAR + 900) for b in range(section_bars)]
-        composer.fill_voice_section(voices[2][0], sname, _unit_from_events(bass_evs, section_len))
-        # Arp (if present): 16th-note arpeggio
-        if len(voices) > 3:
-            arp_evs = []
-            for b in range(section_bars * 4):
-                note = chord_tones[b % 3] + 12
-                arp_evs.append(MusicEvent(note, 70, b * 480, b * 480 + 240))
-            composer.fill_voice_section(voices[3][0], sname, _unit_from_events(arp_evs, section_len))
-        # Drums (if present): kick on 1&3, snare on 2&4, hat on 8ths
-        if len(voices) > 4 and voices[4][1].lower() in ("drum kit", "drums", "percussion"):
-            drum_evs = []
-            for b in range(section_bars):
-                bar_start = b * BAR
-                drum_evs.append(MusicEvent(36, 100, bar_start, bar_start + 120))       # kick 1
-                drum_evs.append(MusicEvent(38, 90, bar_start + 960, bar_start + 1080))  # snare 3
-                for h in range(8):
-                    drum_evs.append(MusicEvent(42, 60, bar_start + h * 240, bar_start + h * 240 + 120))  # hats
-            composer.fill_voice_section(voices[4][0], sname, _unit_from_events(drum_evs, section_len))
+        ctx = CellContext(
+            key=key, pattern="major", chord_tones=tuple(chord_tones),
+            register=(0, 127), density=1.0, root_midi=root_midi,
+            section_bars=section_bars, section_len=section_len, bar_ticks=BAR,
+            seed=seed if seed is not None else 0,
+        )
+        for vi, (vname, inst_name) in enumerate(voices):
+            role = default_resolve_role(vi, inst_name, ctx)
+            if role is None:
+                continue
+            cell.fill_cell(vname, sname, ctx, role)
 
     # --- humanization (style-derived, seeded, zero-drift safe) -------------
     # Dual-version contract (2026-10-17): humanize=True exports BOTH a
