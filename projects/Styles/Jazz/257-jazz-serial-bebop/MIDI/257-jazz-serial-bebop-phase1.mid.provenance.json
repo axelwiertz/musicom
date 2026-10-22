@@ -1,0 +1,37 @@
+{
+  "artifact": "257-jazz-serial-bebop-phase1.mid",
+  "classification": "ai-generated",
+  "generator": "musicom nightly 257-jazz-serial-bebop",
+  "sources": [
+    "methods_db:065 Twelve-Tone Serial Matrix (P/R/I/RI)",
+    "style:Jazz",
+    "phase:1 raw draft"
+  ],
+  "parameters": {
+    "phase": 1,
+    "seed": 20261022,
+    "key": "F major",
+    "bpm": 120,
+    "form": "intro-a-a-b-a",
+    "row_p0": [
+      10,
+      5,
+      9,
+      4,
+      2,
+      0,
+      1,
+      11,
+      8,
+      6,
+      7,
+      3
+    ],
+    "notes": "12-tone row P0 -> chromatic raw draft; sections are row-form regions"
+  },
+  "notes": "",
+  "sha256": "d69400e85b4a4692a9437e7e95a2714516574af1445081a37228a99d2730dba1",
+  "bytes": 2319,
+  "created_utc": "2026-10-22T20:50:31.045243+00:00",
+  "provenance_version": "1.0"
+}

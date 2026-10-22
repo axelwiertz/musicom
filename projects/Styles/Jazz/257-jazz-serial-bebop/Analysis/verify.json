@@ -1,0 +1,114 @@
+{
+  "phase1": {
+    "bytes": 2319,
+    "serial_all_12_pcs": true,
+    "serial_ok": true,
+    "raw_pc_count": 12,
+    "offgrid": 256,
+    "pitched": 259
+  },
+  "perfect": {
+    "bytes": 9405,
+    "n_tracks": 6,
+    "voice_tracks": 5,
+    "voice_len": 69120,
+    "drift_ok": true,
+    "total_notes": 1185,
+    "pitched": 761,
+    "offgrid": 0,
+    "harmony": {
+      "ch0": {
+        "audible": 257,
+        "strong_ok": 37,
+        "weak_in_scale": 220,
+        "tagged": 0,
+        "untagged_out": 0,
+        "non_resolving": 0,
+        "strong_viol": 0,
+        "passes": true
+      },
+      "ch1": {
+        "audible": 72,
+        "strong_ok": 0,
+        "weak_in_scale": 72,
+        "tagged": 0,
+        "untagged_out": 0,
+        "non_resolving": 0,
+        "strong_viol": 0,
+        "passes": true
+      },
+      "ch2": {
+        "audible": 288,
+        "strong_ok": 0,
+        "weak_in_scale": 288,
+        "tagged": 0,
+        "untagged_out": 0,
+        "non_resolving": 0,
+        "strong_viol": 0,
+        "passes": true
+      },
+      "ch3": {
+        "audible": 144,
+        "strong_ok": 72,
+        "weak_in_scale": 72,
+        "tagged": 0,
+        "untagged_out": 0,
+        "non_resolving": 0,
+        "strong_viol": 0,
+        "passes": true
+      }
+    }
+  },
+  "humanized": {
+    "bytes": 9293,
+    "n_tracks": 6,
+    "voice_tracks": 5,
+    "voice_len": 69120,
+    "drift_ok": true,
+    "total_notes": 1185,
+    "pitched": 761,
+    "offgrid": 726,
+    "harmony": {
+      "ch0": {
+        "audible": 257,
+        "strong_ok": 3,
+        "weak_in_scale": 254,
+        "tagged": 0,
+        "untagged_out": 0,
+        "non_resolving": 0,
+        "strong_viol": 0,
+        "passes": true
+      },
+      "ch1": {
+        "audible": 72,
+        "strong_ok": 0,
+        "weak_in_scale": 72,
+        "tagged": 0,
+        "untagged_out": 0,
+        "non_resolving": 0,
+        "strong_viol": 0,
+        "passes": true
+      },
+      "ch2": {
+        "audible": 288,
+        "strong_ok": 0,
+        "weak_in_scale": 288,
+        "tagged": 0,
+        "untagged_out": 0,
+        "non_resolving": 0,
+        "strong_viol": 0,
+        "passes": true
+      },
+      "ch3": {
+        "audible": 144,
+        "strong_ok": 1,
+        "weak_in_scale": 143,
+        "tagged": 0,
+        "untagged_out": 0,
+        "non_resolving": 0,
+        "strong_viol": 0,
+        "passes": true
+      }
+    }
+  }
+}

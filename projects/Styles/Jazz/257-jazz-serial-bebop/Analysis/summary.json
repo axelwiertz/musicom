@@ -1,0 +1,97 @@
+{
+  "project": "257-jazz-serial-bebop",
+  "genre": "Jazz",
+  "method": "065 Twelve-Tone Serial Matrix",
+  "layer": "concrete",
+  "key": "F major",
+  "bpm": 120,
+  "form": "intro-a-a-b-a",
+  "form_sections": [
+    "Intro",
+    "A1",
+    "A2",
+    "B",
+    "A3"
+  ],
+  "bars": 36,
+  "total_ticks": 69120,
+  "tonic": 5,
+  "row_p0": [
+    10,
+    5,
+    9,
+    4,
+    2,
+    0,
+    1,
+    11,
+    8,
+    6,
+    7,
+    3
+  ],
+  "row_i0": [
+    2,
+    7,
+    3,
+    8,
+    10,
+    0,
+    11,
+    1,
+    4,
+    6,
+    5,
+    9
+  ],
+  "row_r0": [
+    3,
+    7,
+    6,
+    8,
+    11,
+    1,
+    0,
+    2,
+    4,
+    9,
+    5,
+    10
+  ],
+  "row_ri0": [
+    9,
+    5,
+    6,
+    4,
+    1,
+    11,
+    0,
+    10,
+    8,
+    3,
+    7,
+    2
+  ],
+  "row_form_by_section": {
+    "Intro": "P0",
+    "A1": "P0",
+    "A2": "R0",
+    "B": "I0",
+    "A3": "RI0"
+  },
+  "section_roots_midpoint": {
+    "Intro": "Gm7",
+    "A1": "Gm7",
+    "A2": "Gm7",
+    "B": "Am7",
+    "A3": "Gm7"
+  },
+  "voices": [
+    "LeadSax",
+    "Trumpet",
+    "Piano",
+    "Bass",
+    "Drums"
+  ],
+  "humanize_seed": 20261023
+}
