@@ -1,6 +1,10 @@
 # Voice-Role Workflow Plan — Phase 3 (2026-10-22)
 
-**Status: PLAN ONLY. No structural changes made.** Review, then approve in parts.
+**Status: P0 + P1 BUILT. P2 pending.**
+
+- P0 (cell engine) — `workflows/cell_engine.py` + `compose()` rewire, output-neutral.
+- P1 (tiered pitch discipline) — `scale_quantizer.tiered_quantize`/`classify_weight`/`StructuralNote` + `rules/ornament.py` + `workflows/pitch_audit.py`, 22 tests.
+- P2 (variation operators + countermelody role) — pending.
 
 Extends the simple workflow (`method → 1 voice → snap to scale → harmonize`)
 into a **role-first, method-independent cell recipe engine**: the method decides

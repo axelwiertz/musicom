@@ -12,10 +12,12 @@ Usage:
 """
 
 import numpy as np
-from typing import List, Optional, Set
+from typing import Dict, List, Optional, Set, Tuple
 import random
+from dataclasses import dataclass
 
-__all__ = ["ScaleQuantizer", "ProbabilityEngine", "ScaleModeMIDI"]
+__all__ = ["ScaleQuantizer", "ProbabilityEngine", "ScaleModeMIDI",
+           "STRONG_GRID", "classify_weight", "StructuralNote"]
 
 # Scale intervals in semitones from root
 _SCALES = {
@@ -26,6 +28,51 @@ _SCALES = {
     "dorian":     [0, 2, 3, 5, 7, 9, 10],
     "mixolydian": [0, 2, 4, 5, 7, 9, 10],
 }
+
+# Default strong-beat grids (tick offsets within one bar that count as
+# "strong"; VOICE_ROLE_WORKFLOW_PLAN.md §9-Q1). A style may override via
+# STYLE_REGISTRY[style]["strong_beats"] — e.g. backbeat pop/rock/soul flips
+# to beats 2 & 4 = (480, 1440).
+STRONG_GRID: Dict[str, Tuple[int, ...]] = {
+    "4/4":  (0, 960),        # beats 1 & 3 (downbeats)
+    "2/4":  (0,),            # beat 1 only
+    "3/4":  (0,),            # beat 1 only
+    "6/8":  (0, 960),        # two dotted-quarter pulses
+    "12/8": (0, 960),
+}
+
+
+def classify_weight(onset_tick: int, strong_grid: Tuple[int, ...],
+                    bar_ticks: int = 1920,
+                    tagged_weight: Optional[str] = None) -> str:
+    """Structural weight of a note onset: "strong" or "weak".
+
+    Default is derived from the onset grid — a note whose onset falls on a
+    strong-grid tick within its bar is Strong, else Weak. A method MAY tag a
+    note (``tagged_weight`` in ("strong", "weak")) to override the grid
+    default (fork 1 of the plan). No tag -> grid default.
+    """
+    if tagged_weight in ("strong", "weak"):
+        return tagged_weight
+    return "strong" if (onset_tick % bar_ticks) in strong_grid else "weak"
+
+
+@dataclass
+class StructuralNote:
+    """A note carrying its structural weight + optional ornament tag.
+
+    This is the "tag path" of the tiered pitch discipline: a method emits a
+    StructuralNote with ``weight`` (strong/weak) and, when it is a deliberate
+    chromatic ornament, ``ornament`` (passing/neighbor/approach/leading_tone).
+    The audit (workflows.pitch_audit) reads these tags to apply the
+    tagged-ornament exemption.
+    """
+    pitch: int
+    weight: str = "strong"           # "strong" | "weak"
+    ornament: Optional[str] = None   # None | passing|neighbor|approach|leading_tone
+    start_tick: int = 0
+    end_tick: int = 0
+    volume: int = 100
 
 
 class ScaleQuantizer:
@@ -65,6 +112,24 @@ class ScaleQuantizer:
         """Check if a MIDI pitch belongs to this scale."""
         pc = ((pitch - self.root) % 12 + 12) % 12
         return pc in self._intervals
+
+    def tiered_quantize(self, value: float, weight: str = "strong",
+                        chord_tones: Optional[List[int]] = None) -> int:
+        """Weight-aware snap (VOICE_ROLE_WORKFLOW_PLAN.md §3).
+
+        Strong notes snap to the nearest scale degree, THEN (if ``chord_tones``
+        given) to the nearest chord tone — a hard in-scale AND in-chord snap.
+        Weak notes snap to the nearest scale degree only; a weak note MAY be
+        left chromatic by the ornament layer (rules.ornament), which is a
+        separate, tagged pass — this method never emits chromatic pitches on
+        its own.
+
+        ``weight`` is one of "strong"/"weak" (see ``classify_weight``).
+        """
+        pitch = self.quantize(value)
+        if weight == "strong" and chord_tones:
+            pitch = min(chord_tones, key=lambda c: abs(c - pitch))
+        return pitch
 
 
 class ProbabilityEngine:
