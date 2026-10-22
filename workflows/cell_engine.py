@@ -65,6 +65,8 @@ class CellContext:
     section_bars: int = 4      # bars in this section
     section_len: int = 0       # section length in ticks (= section_bars * BAR)
     bar_ticks: int = 1920      # ticks per bar (BAR)
+    voice_idx: int = -1        # this voice's matrix row (for method role resolution)
+    instrument_name: str = ""  # this voice's instrument name (for drum guard)
     # --- P1/P2 (reserved; default fillers ignore these) ---
     density_budget: float = 1.0
     strong_beat_grid: tuple = (0, 960)
