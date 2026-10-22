@@ -286,6 +286,12 @@ SP_METHODS = {
     "SP-118": ("sound.effects.resonant_filterbank", "10-Band Fixed-Frequency Resonant Filterbank — 29Hz..11kHz log-spaced BPFs, per-band boost/cut + bipolar resonance, global feedback loop, stereo Spread, LP/HP/BP/notch Filter mode, self-oscillating drone (Erica Synths Resonant Filterbank-style)"),
     "SP-119": ("sound.effects.spectral_resonance_suppressor", "Spectral Resonance Suppressor — STFT de-resonator: median-baseline excess peak detection, shaped suppression gains, freq+time smoothing, midrange band focus (Newfangled Audio Fixate:Midrange-style)"),
     "SP-120": ("sound.synthesis.waveshaper_voice", "Wavetable Scan + Nonlinear Wave-Shaper Voice — phase-accumulator frame-interpolated scan, tanh/soft-clip/asym/Chebyshev transfer functions (harmonic generation), 16-step LFO on drive/position/pitch, two-layer blend, stereo spread (Roland n/vision-style)"),
+    # 2026-10-22 scan, late additions (SP-121/SP-122 held by in-flight
+    # CompositionMethods drafts — VDPS, HCSC — at scan time; not in the
+    # registries; skipped to avoid collision, see surveillance.md)
+    "SP-123": ("sound.effects.scale_eq", "Scale-Aware Harmonic EQ — key/scale-locked peaking bank: boosts only in-key note freqs, cuts only out-of-key; Live Band (bands at played MIDI notes); dynamic comp/exp per band; M/S Magic Shelf (low shelf on Mid, high shelf on Sides) (Scaler EQ Pro-style)"),
+    "SP-124": ("sound.synthesis.circle_drone", "Six-Oscillator Always-On Drone Voice — per-osc tuning ±3600 cents + Random Tune, per-osc tanh waveshaping, unison (More), Thick detune/stereo width, Unity knob scaling all tuning offsets, drone-length A/R envelope, resonant LP + Schroeder tail (Impact Soundworks Circle Drone Of Doom-style)"),
+    "SP-125": ("sound.effects.lofi_reverb", "Multi-Mode Algorithmic Reverb w/ Period-Accurate Lo-Fi Rates — 11 modes (plate/room/hall/cloud/flanged-hall/spring-tank/snappy/alternate-tank), two 32 kHz Abstract Hall modes (dark/gritty), gain-into-clipping drive (Synthesizers.com Q215-style)"),
 }
 
 

@@ -113,6 +113,9 @@ comparable to, and how do I use it in a workflow?*
 |||||| `sound/effects/resonant_filterbank.py` | ResonantFilterbank, band_centers | effects (filterbank) | Erica Synths Resonant Filterbank | audio + band gains/resonance/feedback/spread → 10-band BP filterbank render (Filter mode LP/HP/BP/notch, self-osc drone) |
 |||||| `sound/effects/spectral_resonance_suppressor.py` | SpectralResonanceSuppressor | effects (spectral) | Newfangled Audio Fixate:Midrange, Soothe | audio + amount/threshold/band → STFT de-resonated audio (midrange resonant-peak suppression) |
 |||||| `sound/synthesis/waveshaper_voice.py` | WaveShaperVoice, chebyshev, WAVESHAPERS | synthesis (wavetable + waveshaping) | Roland n/vision | wavetable + freq/drive/shaper/step-LFO → two-layer shaped stereo render (Chebyshev harmonic generation) |
+|||||| `sound/effects/scale_eq.py` | ScaleEQ, DynamicBand, SCALES, note_freq | effects (spectral/musical EQ) | Scaler EQ Pro | audio + root/scale/boost/cut/Q (+live MIDI notes, dynamic per band) → key-locked harmonic-EQ render: in-key boosted, out-of-key cut; M/S Magic Shelf |
+|||||| `sound/synthesis/circle_drone.py` | CircleDrone, DETUNE_RANGE_CENTS | synthesis (drone) | Impact Soundworks Circle Drone Of Doom | root + per-osc detune (±3600 c) / waveshape / unison / thick / unity → 6-osc always-on stereo drone w/ A/R env + LP + Schroeder tail |
+|||||| `sound/effects/lofi_reverb.py` | LoFiReverb, MODES, rt60 | effects (reverb) | Synthesizers.com Q215 | audio + mode/wet/damp/gain → 11-mode algorithmic reverb (plate/room/hall/cloud/flanged/spring/snappy; 32 kHz Abstract Hall lo-fi modes), stereo decorrelated |
 || `sound/sync/clock.py` | DAWClockBridge | sync | MTC/MIDI clock | bpm → clock pulses |
 | `sound/render/fluidsynth.py` | FluidSynthRenderer | render | SF2 synth | MIDI → WAV |
 | `sound/render/vst.py` | VSTRenderer | render | DAW VST3 | MIDI → VST audio |
