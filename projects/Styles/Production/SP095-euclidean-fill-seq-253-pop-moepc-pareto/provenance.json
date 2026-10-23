@@ -1,0 +1,146 @@
+{
+  "job": "random-style production (SP) layer-aligned",
+  "date": "2026-10-23",
+  "seed": 20261023,
+  "method": "SP-095",
+  "method_module": "sound.generators.euclidean_fill_seq",
+  "method_desc": "Euclidean Fill Sequencer w/ Live Rotation (Maschine 3.7 Euclidean Sequencer-style)",
+  "layer": "ABSOLUTE",
+  "params": {
+    "sample_rate": 44100,
+    "bpm": 112.0,
+    "ppqn": 480,
+    "step_ticks": 120,
+    "step_resolution": "16th",
+    "voices": {
+      "Bass": {
+        "pulses": 4,
+        "steps": 16,
+        "fill_density": 0.0,
+        "dur": 300,
+        "program": 33,
+        "channel": 2,
+        "oct_shift": -24,
+        "cycle": [
+          0,
+          2
+        ]
+      },
+      "Chord": {
+        "pulses": 5,
+        "steps": 16,
+        "fill_density": 0.25,
+        "dur": 200,
+        "program": 88,
+        "channel": 1,
+        "oct_shift": 0,
+        "cycle": [
+          0,
+          1,
+          2
+        ]
+      },
+      "Sparkle": {
+        "pulses": 7,
+        "steps": 16,
+        "fill_density": 0.4,
+        "dur": 120,
+        "program": 9,
+        "channel": 3,
+        "oct_shift": 12,
+        "cycle": [
+          0,
+          1,
+          2,
+          0
+        ]
+      }
+    },
+    "carrier_program": {
+      "Bass": 33,
+      "Chord": 88,
+      "Sparkle": 9
+    },
+    "carrier": "FluidSynth SP-001 (FluidR3_GM)",
+    "fill_velocity_factor": 0.6,
+    "swing": 0.0,
+    "target_lufs": -9.0,
+    "ceiling_db": -1.0
+  },
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Pop/253-pop-moepc-pareto/MIDI/253-pop-moepc-pareto-perfect.mid",
+  "groove_midi": "/opt/data/repos/musicom/projects/Styles/Production/SP095-euclidean-fill-seq-253-pop-moepc-pareto/MIDI/SP095-euclidean-groove.mid",
+  "source_bpm": 112.0,
+  "source_key": "C major (ionian)",
+  "source_pitch_classes": [
+    0,
+    2,
+    4,
+    5,
+    7,
+    9,
+    11
+  ],
+  "bar_degrees": [
+    0,
+    0,
+    4,
+    4,
+    0,
+    4,
+    5,
+    3,
+    0,
+    4,
+    5,
+    3,
+    3,
+    4,
+    0,
+    5,
+    3,
+    4,
+    0,
+    4,
+    5,
+    4,
+    3,
+    4,
+    0,
+    3,
+    4,
+    0
+  ],
+  "output_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP095-euclidean-fill-seq-253-pop-moepc-pareto/SP095-euclidean-fill-seq-253-pop-moepc-pareto.wav",
+  "output_ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP095-euclidean-fill-seq-253-pop-moepc-pareto/SP095-euclidean-fill-seq-253-pop-moepc-pareto.ogg",
+  "raw_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP095-euclidean-fill-seq-253-pop-moepc-pareto/SP095_euclidean_fill_raw.wav",
+  "dry_reference_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP095-euclidean-fill-seq-253-pop-moepc-pareto/dry_full_mix_source_reference.wav",
+  "lufs": -10.127588323596894,
+  "peak": 0.8912509381337457,
+  "silence_pct": 9.547816074367956,
+  "rms": 0.21899564493751736,
+  "pitch_verdict": "PASS",
+  "hit_rate": 1.0,
+  "he_mean": 0.40072569481056264,
+  "dry_he": 0.37042062174255463,
+  "he_retention": 1.0818125970564088,
+  "preflight_source": {
+    "grid_off": 0,
+    "out_scale": 0,
+    "out_chord": 0,
+    "zero_drift": true,
+    "track_ends": [
+      53760
+    ],
+    "total_notes": 725
+  },
+  "output_audit": {
+    "grid_off": 0,
+    "out_scale": 0,
+    "out_chord": 0,
+    "zero_drift": true,
+    "track_ends": [
+      53760
+    ],
+    "total_notes": 627
+  }
+}

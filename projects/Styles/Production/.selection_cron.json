@@ -1,19 +1,18 @@
 {
   "job": "random-style production (SP) layer-aligned",
-  "date": "2026-10-22",
-  "seed": 20261022,
-  "method": "SP-101",
-  "method_module": "sound.synthesis.modal_blot",
-  "method_desc": "BLOT-style Geometric Modal Resonator Network \u2014 8-mode just-intonation resonators, waveguide strings, formant filters, ring modulation, multiband saturation, FDN memory (Laboratory 0 BLOT-style)",
-  "source_midi": "/opt/data/repos/musicom/projects/Styles/Blues/039-electric-blues/daily-2026-06-27_blues_039-electric-blues-v5.mid",
-  "source_project": "Blues/039-electric-blues/daily-2026-06-27_blues_039-electric-blues-v5.mid",
+  "date": "2026-10-23",
+  "seed": 20261023,
+  "method": "SP-095",
+  "method_module": "sound.generators.euclidean_fill_seq",
+  "method_desc": "Euclidean Fill Sequencer w/ Live Rotation (Maschine 3.7 Euclidean Sequencer-style)",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Pop/253-pop-moepc-pareto/MIDI/253-pop-moepc-pareto-humanized.mid",
+  "source_project": "Pop/253-pop-moepc-pareto/MIDI/253-pop-moepc-pareto-humanized.mid",
   "registry_size": 63,
   "recent_excluded": [
-    "SP-006",
-    "SP-032",
     "SP-090",
     "SP-092",
     "SP-099",
+    "SP-101",
     "SP-105",
     "SP-108",
     "SP-111"
@@ -28,6 +27,7 @@
     "SP-024",
     "SP-026",
     "SP-028",
+    "SP-032",
     "SP-033",
     "SP-034",
     "SP-035",
@@ -58,7 +58,6 @@
     "SP-097",
     "SP-098",
     "SP-100",
-    "SP-101",
     "SP-102",
     "SP-103",
     "SP-104",
@@ -79,6 +78,10 @@
     "SP-124",
     "SP-125"
   ],
-  "n_candidates": 367,
-  "n_well_formed": 255
+  "n_candidates": 373,
+  "n_well_formed": 261,
+  "n_meaningful": 260,
+  "rejected_degenerate": [
+    "Other/unknown-daily-2026-06-05/composition.mid (single pitch class C5 x300 \u2014 rejected by >=3 pitch-class gate)"
+  ]
 }
