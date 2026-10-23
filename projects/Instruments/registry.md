@@ -629,6 +629,8 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Guitar | Acoustic Guitar (nylon) | 24 | 40–84 | harmony, rhythm, strum |
 | Guitar | Acoustic Guitar (steel) | 25 | 40–86 | harmony, rhythm, strum, lead, melody, ornament, countermelody |
 | Guitar | Electric Guitar (jazz) | 26 | 28–84 | harmony, rhythm, comp, lead, melody, ornament, countermelody, accent |
+| Bass | Electric Bass (finger) | 33 | 24–84 | bass, rhythm, countermelody, accent |
+| Bass | Synth Bass 1 | 38 | 24–84 | bass, rhythm, groove, accent |
 | Percussion | Drum Kit | ch9 | 35–81 | rhythm, groove, accent |
 | Percussion | Glockenspiel | 9 | 79–108 | lead, melody, ornament, accent, countermelody |
 | Percussion | Marimba | 12 | 45–96 | lead, melody, accent, countermelody, harmony |
@@ -715,7 +717,8 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 || 26 | Electric Guitar (jazz) | Electric_Guitar_jazz ✓ (GM_PROGRAMS[26] = "Electric Guitar (jazz)" — GM2 spec spelling; FluidR3 preset 26 = "Jazz Guitar" — SF2 uses the common name, cosmetic only, **no routing impact**; STEM_LABEL = "Electric_Guitar_jazz" matches pipeline) |
 ||| 25 | Acoustic Guitar (steel) | Acoustic_Guitar_steel ✓ (GM_PROGRAMS[25] = "Acoustic Guitar (steel)"; FluidR3 preset 25 = "Steel String Guitar" — internal SF2 name differs cosmetically, no routing impact) |
 | 48 | String Ensemble 1 | String_Ensemble_1 ✓ (GM_PROGRAMS[48] = "String Ensemble 1"; FluidR3 preset 48 = "Strings" — one-word SF2 spelling, cosmetic only, **no quirk**) |
-| 88 | Pad 1 (new age) | Pad_1_new_age ✓ (GM_PROGRAMS[88] = "Pad 1 (new age)" → sanitized `Pad_1_new_age` — parens stripped, spaces → underscore; FluidR3 preset 88 = **"Fantasia"** — SF2 internal name differs from GM label, cosmetic only, **no routing impact**; preset 89 = "Warm Pad" is the darker sibling) |
+|| 88 | Pad 1 (new age) | Pad_1_new_age ✓ (GM_PROGRAMS[88] = "Pad 1 (new age)" → sanitized `Pad_1_new_age` — parens stripped, spaces → underscore; FluidR3 preset 88 = **"Fantasia"** — SF2 internal name differs from GM label, cosmetic only, **no routing impact**; preset 89 = "Warm Pad" is the darker sibling) |
+|| 38 | Synth Bass 1 | Synth_Bass_1 ✓ (GM_PROGRAMS[38] = "Synth Bass 1"; FluidR3 preset 38 = "Synth Bass 1" — labels match exactly, **no quirk**) |
 
 > **Known off-by-one in existing entries**: ~~`trumpet.py` uses 57~~ **FIXED 2026-08-27**: trumpet is now 56 (SF2 preset 56=`SoloTrumpet`). `piano.py`=1 → actually Bright Acoustic Piano (GM #2) — cosmetic label difference only, no routing impact. Legacy registry rows kept as-is for piano; new instruments use 0-indexed programs matching pipeline+SF2.
 
@@ -1249,3 +1252,39 @@ family: nylon (24), steel (25), jazz (26), clean (27), overdriven (29).
 Drive-by fix: registry_table() overdriven-guitar role row corrected from
 the generic default to its documented role (lead, melody, accent, rhythm,
 strum, countermelody).
+
+**Synth Bass 1 added** (2026-10-23): GM38, Bass-family second entry — the
+classic analog synth bass (VCO → resonant low-pass → ADSR; TB-303 /
+Minimoog / MC-202 lineage), the electronic/pop/disco/funk bass foundation,
+distinct from the plucked Electric Bass (finger) GM33 — there is NO string,
+the tone is oscillator + filter (instrument.md + synth_bass_1.py), verified
+end-to-end UnitMatrixComposer → zero-drift ✓ → MIDI (111 bytes) →
+FluidSynth WAV (798 KB, solo render) ✓; RenderPipeline stem label
+`trackXX_Synth_Bass_1.wav` ✓ (GM_PROGRAMS[38] = "Synth Bass 1", FluidR3
+preset 38 = "Synth Bass 1" — labels match exactly, **no quirk**). MonoSynth
+recommended (`sound/synthesis/mono_synth.py` — the exact subtractive
+architecture of the classic analog bass: saw VCO, sub_level 0.3,
+filter_cutoff 1800, resonance 0.55, env_a 0.005 gate click, env_d 0.18
+pluck, env_s 0.75, env_r 0.12; SYNTHESIS_DEFAULTS load through the
+registry). PhaseModSynth secondary (FM "Solid Bass" patch, ratio 1.0,
+depth 2.5); Karplus-Strong tertiary ("rubber band" fallback, loop_gain
+0.9960, lowpass_hz 1500 — dark, tight). Solo-render spectral check: 4–8 kHz
+buzz **1.8%** (clean single voice, no comb-filtering). MonoSynth smoke: D2
+peak 0.800, sustain_rms/peak 0.338 (gate sustain confirmed, no collapse).
+Empirical FluidR3 pitch sweep (RMS, notes 24–84): preset 38 audible 6/6,
+smooth rolloff 0.0355→0.0201, no gaps — SF2 never clips a composition.
+Range 24–84 = GM-patch span (the core line register is 36–60 = E2–C4);
+sweet spot 38–62 (D2–D4). Registration proof: `by_name('synth bass 1')` →
+Synth Bass 1, `by_program(38)` → Synth Bass 1, `in_sweet_spot(48)` = True,
+`in_sweet_spot(20)` = False. Registration in `instrument_registry.py` as
+SYNTH_BASS_1 convenience constant. Role: bass, rhythm, groove, accent —
+the electronic bass foundation, locks with the kick like the electric bass
+but with filter color. Line-instrument quirk: monophonic oscillator voice —
+one note at a time, NO chords; gate time (note length) IS the articulation
+(velocity triggers the filter-envelope amount on many synths, but the gate
+is the signature). Channel quirk: melodic channel (0–9) with program 38 —
+channel 9 would trigger the drum-kit map. REVERB_TAIL 1.0 s (small
+room/plate — the shortest in the Bass family; synth bass is almost always
+dry). EQ: cut 250 Hz (mud), boost 900 Hz (growl), gentle 6 kHz air — DARK
+by design (vs electric bass 5 kHz shelf). Completes the Bass family pair:
+finger electric (GM33) + synth (GM38).

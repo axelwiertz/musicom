@@ -1,23 +1,28 @@
 {
-  "chosen": "098-funk-som",
+  "chosen": "/opt/data/projects/Styles/Funk/098-funk-som",
   "genre": "Funk",
-  "standard_failures": [
-    "std6_provenance.json",
-    "std6_index.html"
-  ],
+  "source_midi": "/opt/data/projects/Styles/Funk/098-funk-som/MIDI/098-funk-som.mid",
+  "source_phase1_midi": "/opt/data/projects/Styles/Funk/098-funk-som/MIDI/098-funk-som-phase1.mid",
+  "audit_date": "2026-10-23",
+  "standards": {
+    "1_engine": {"pass": true, "note": "compose.py uses UnitMatrixComposer.to_midi(), no raw mido authoring"},
+    "2_zero_drift": {"pass": true, "note": "5 voice tracks all len 46080 ticks"},
+    "3_rhythm_grid_sync": {"pass": true, "note": "0 pitched off-grid onsets"},
+    "4_valid_track_setup": {"pass": true, "note": "5 voice tracks (Lead/Sax/Piano/Bass/Drums)"},
+    "5_two_phase_artifacts": {"pass": true, "note": "098-funk-som.mid + 098-funk-som-phase1.mid present"},
+    "6_provenance_index": {"pass": false, "note": "index.html MISSING, root provenance.json MISSING (only per-artifact .provenance.json sidecars)"}
+  },
+  "standard_failures": ["6_provenance_index: index.html missing + no root provenance.json"],
   "redesign_required": true,
   "source_identity": {
     "genre": "Funk",
-    "key": "F minor",
+    "method": "075 Self-Organizing Map Composition (SOM-C)",
+    "key": "F minor (aeolian/pentatonic)",
+    "tonic_pc": 5,
     "bpm": 104,
-    "instrumentation": [
-      "Trumpet",
-      "Tenor Sax",
-      "Piano",
-      "Contrabass",
-      "Drums"
-    ],
-    "method": "SOM-C",
-    "form": "6x4=24 bars"
+    "meter": "4/4",
+    "form_sections": ["Intro", "Verse", "Chorus", "Bridge", "Chorus2", "Outro"],
+    "bars": 24,
+    "instrumentation": ["Lead Trumpet (GM56)", "Tenor Sax (GM65)", "Piano (GM1)", "Double Bass (GM43)", "Drums (ch9)"]
   }
 }

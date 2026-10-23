@@ -90,6 +90,7 @@ _INSTRUMENT_MODULES = {
     "Woodwind.whistle.whistle": "whistle",
     "Woodwind.soprano_sax.soprano_sax": "soprano_sax",
     "Bass.electric_bass.electric_bass": "electric_bass",
+    "Bass.synth_bass_1.synth_bass_1": "synth_bass_1",
     "Woodwind.recorder.recorder": "recorder",
     "Synth.synth_pad.synth_pad": "synth_pad",
 }
@@ -317,6 +318,7 @@ PAN_FLUTE = ALL_INSTRUMENTS["pan_flute"]
 WHISTLE = ALL_INSTRUMENTS["whistle"]
 SOPRANO_SAX = ALL_INSTRUMENTS["soprano_sax"]
 ELECTRIC_BASS = ALL_INSTRUMENTS["electric_bass"]
+SYNTH_BASS_1 = ALL_INSTRUMENTS["synth_bass_1"]
 RECORDER = ALL_INSTRUMENTS["recorder"]
 PIZZICATO_STRINGS = ALL_INSTRUMENTS["pizzicato_strings"]
 STRING_ENSEMBLE = ALL_INSTRUMENTS["string_ensemble"]
@@ -454,6 +456,8 @@ def registry_table():
             role = "harmony, melody, bass, accent, color"
         elif low == "electric bass (finger)":
             role = "bass, rhythm, countermelody, accent"
+        elif low == "synth bass 1":
+            role = "bass, rhythm, groove, accent"
         elif low == "recorder":
             role = "lead, melody, ornament, countermelody, accent"
         elif low == "acoustic guitar (steel)":
@@ -724,3 +728,14 @@ if __name__ == "__main__":
           "JAZZ_GUITAR.range_max =", JAZZ_GUITAR.range_max)
     print("  JAZZ_GUITAR.stem_label =", repr(JAZZ_GUITAR.stem_label))
     print("  DRAWBAR_ORGAN.stem_label =", repr(DRAWBAR_ORGAN.stem_label))
+    print()
+    print("=== Synth Bass 1 (GM38) ===")
+    print("  SYNTH_BASS_1.midi_program =", SYNTH_BASS_1.midi_program, "(should be 38)")
+    print("  by_name('synth bass 1') =", by_name("synth bass 1"))
+    print("  by_name('SYNTH BASS 1') =", by_name("SYNTH BASS 1"))
+    print("  by_program(38) =", by_program(38))
+    print("  SYNTH_BASS_1.in_sweet_spot(48) =", SYNTH_BASS_1.in_sweet_spot(48))
+    print("  SYNTH_BASS_1.in_sweet_spot(20) =", SYNTH_BASS_1.in_sweet_spot(20))
+    print("  SYNTH_BASS_1.range_min =", SYNTH_BASS_1.range_min,
+          "SYNTH_BASS_1.range_max =", SYNTH_BASS_1.range_max)
+    print("  SYNTH_BASS_1.stem_label =", repr(SYNTH_BASS_1.stem_label))
