@@ -1,0 +1,44 @@
+{
+  "phase1": {
+    "path": "259-funk-som-extended-phase1.mid",
+    "bytes": 1176,
+    "n_tracks": 2,
+    "voice_tracks": 1,
+    "voice_len": 61440,
+    "drift_ok": true,
+    "length_seconds": 73.85,
+    "total_notes": 134,
+    "pitched_notes": 134,
+    "offgrid": 133,
+    "scale_viol": 0,
+    "chord_viol": 83
+  },
+  "perfect": {
+    "path": "259-funk-som-extended-perfect.mid",
+    "bytes": 10183,
+    "n_tracks": 6,
+    "voice_tracks": 5,
+    "voice_len": 61440,
+    "drift_ok": true,
+    "length_seconds": 73.85,
+    "total_notes": 1314,
+    "pitched_notes": 614,
+    "offgrid": 0,
+    "scale_viol": 0,
+    "chord_viol": 0
+  },
+  "humanized": {
+    "path": "259-funk-som-extended-humanized.mid",
+    "bytes": 10176,
+    "n_tracks": 6,
+    "voice_tracks": 5,
+    "voice_len": 61440,
+    "drift_ok": true,
+    "length_seconds": 73.85,
+    "total_notes": 1314,
+    "pitched_notes": 614,
+    "offgrid": 562,
+    "scale_viol": 0,
+    "chord_viol": 14
+  }
+}

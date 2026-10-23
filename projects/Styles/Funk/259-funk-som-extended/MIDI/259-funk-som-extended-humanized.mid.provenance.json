@@ -1,0 +1,130 @@
+{
+  "artifact": "259-funk-som-extended-humanized.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom nightly 259-funk-som-extended",
+  "sources": [
+    "methods_db:075 Self-Organizing Map Composition (SOM-C)",
+    "style:Funk",
+    "phase:2 rules",
+    "humanize_seed:20261024"
+  ],
+  "parameters": {
+    "phase": "2-humanized",
+    "seed": 20261023,
+    "key": "F minor (aeolian)",
+    "bpm": 104,
+    "form": [
+      "Intro",
+      "Verse",
+      "Chorus",
+      "Bridge",
+      "Verse2",
+      "Chorus2",
+      "Break",
+      "Outro"
+    ],
+    "humanize": {
+      "Lead": {
+        "seed": 2046363424,
+        "profile": {
+          "timing_sigma_ms": 4.0,
+          "velocity_sigma": 8.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.02,
+          "layback_ms": 0.0,
+          "phrase_corr": 0.4,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 122,
+        "mean_abs_shift_ticks": 2.164,
+        "max_abs_shift_ticks": 7,
+        "mean_abs_vel_delta": 7.303,
+        "timing_sigma_ticks": 3.328
+      },
+      "Sax": {
+        "seed": 2046363425,
+        "profile": {
+          "timing_sigma_ms": 8.0,
+          "velocity_sigma": 7.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.02,
+          "layback_ms": 1.0,
+          "phrase_corr": 0.4,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 40,
+        "mean_abs_shift_ticks": 3.65,
+        "max_abs_shift_ticks": 10,
+        "mean_abs_vel_delta": 6.3,
+        "timing_sigma_ticks": 6.656
+      },
+      "Piano": {
+        "seed": 2046363426,
+        "profile": {
+          "timing_sigma_ms": 6.0,
+          "velocity_sigma": 5.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.015,
+          "layback_ms": 0.0,
+          "phrase_corr": 0.4,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 324,
+        "mean_abs_shift_ticks": 3.469,
+        "max_abs_shift_ticks": 13,
+        "mean_abs_vel_delta": 3.951,
+        "timing_sigma_ticks": 4.992
+      },
+      "Bass": {
+        "seed": 2046363427,
+        "profile": {
+          "timing_sigma_ms": 10.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.03,
+          "layback_ms": 8.0,
+          "phrase_corr": 0.4,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 128,
+        "mean_abs_shift_ticks": 7.844,
+        "max_abs_shift_ticks": 25,
+        "mean_abs_vel_delta": 5.133,
+        "timing_sigma_ticks": 8.32
+      },
+      "Drums": {
+        "seed": 2046363428,
+        "profile": {
+          "timing_sigma_ms": 2.0,
+          "velocity_sigma": 4.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.008,
+          "layback_ms": 0.0,
+          "phrase_corr": 0.4,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 700,
+        "mean_abs_shift_ticks": 1.114,
+        "max_abs_shift_ticks": 4,
+        "mean_abs_vel_delta": 2.994,
+        "timing_sigma_ticks": 1.664
+      }
+    },
+    "note": "style+instrument humanized"
+  },
+  "notes": "",
+  "sha256": "fdcce26e20a35fa37fa6d8b2f6897dc8378a81e4072f67bfa42dd469d8e03369",
+  "bytes": 10176,
+  "created_utc": "2026-10-23T10:23:53.647381+00:00",
+  "provenance_version": "1.0"
+}

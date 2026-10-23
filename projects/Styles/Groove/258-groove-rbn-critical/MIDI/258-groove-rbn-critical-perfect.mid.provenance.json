@@ -1,0 +1,121 @@
+{
+  "artifact": "258-groove-rbn-critical-perfect.mid",
+  "classification": "ai-generated",
+  "generator": "musicom nightly 258-groove-rbn-critical",
+  "sources": [
+    "methods_db:082 RBN Criticality",
+    "style:Groove",
+    "phase:2 rules",
+    "humanize_seed:20261023"
+  ],
+  "parameters": {
+    "phase": "2-perfect",
+    "seed": 20261022,
+    "key": "A natural minor",
+    "bpm": 104,
+    "form": "aba",
+    "humanize": {
+      "Clavi": {
+        "seed": 2046363323,
+        "profile": {
+          "timing_sigma_ms": 3.0,
+          "velocity_sigma": 5.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.015,
+          "layback_ms": 0.0,
+          "phrase_corr": 0.4,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 138,
+        "mean_abs_shift_ticks": 1.645,
+        "max_abs_shift_ticks": 8,
+        "mean_abs_vel_delta": 3.862,
+        "timing_sigma_ticks": 2.496
+      },
+      "Rhodes": {
+        "seed": 2046363324,
+        "profile": {
+          "timing_sigma_ms": 6.0,
+          "velocity_sigma": 5.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.015,
+          "layback_ms": 0.0,
+          "phrase_corr": 0.4,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 192,
+        "mean_abs_shift_ticks": 3.88,
+        "max_abs_shift_ticks": 12,
+        "mean_abs_vel_delta": 3.844,
+        "timing_sigma_ticks": 4.992
+      },
+      "Bass": {
+        "seed": 2046363325,
+        "profile": {
+          "timing_sigma_ms": 5.0,
+          "velocity_sigma": 4.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.01,
+          "layback_ms": 8.0,
+          "phrase_corr": 0.4,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 96,
+        "mean_abs_shift_ticks": 6.51,
+        "max_abs_shift_ticks": 15,
+        "mean_abs_vel_delta": 3.011,
+        "timing_sigma_ticks": 4.16
+      },
+      "Pad": {
+        "seed": 2046363326,
+        "profile": {
+          "timing_sigma_ms": 3.0,
+          "velocity_sigma": 4.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.01,
+          "layback_ms": 0.0,
+          "phrase_corr": 0.4,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 32,
+        "mean_abs_shift_ticks": 2.0,
+        "max_abs_shift_ticks": 4,
+        "mean_abs_vel_delta": 3.312,
+        "timing_sigma_ticks": 2.496
+      },
+      "Drums": {
+        "seed": 2046363327,
+        "profile": {
+          "timing_sigma_ms": 2.0,
+          "velocity_sigma": 4.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.008,
+          "layback_ms": 0.0,
+          "phrase_corr": 0.4,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 512,
+        "mean_abs_shift_ticks": 1.049,
+        "max_abs_shift_ticks": 4,
+        "mean_abs_vel_delta": 3.049,
+        "timing_sigma_ticks": 1.664
+      }
+    },
+    "note": "grid-locked, no jitter"
+  },
+  "notes": "",
+  "sha256": "a5eceeeed803fefea4b214889902e9a51fbb5e096ee469861f4474b94ea8390b",
+  "bytes": 7557,
+  "created_utc": "2026-10-23T10:23:51.076841+00:00",
+  "provenance_version": "1.0"
+}

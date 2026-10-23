@@ -1,0 +1,31 @@
+{
+  "artifact": "258-groove-rbn-critical-phase1.mid",
+  "classification": "ai-generated",
+  "generator": "musicom nightly 258-groove-rbn-critical",
+  "sources": [
+    "methods_db:082 RBN Criticality (Kauffman Boolean net)",
+    "style:Groove",
+    "phase:1 raw draft"
+  ],
+  "parameters": {
+    "phase": 1,
+    "seed": 20261022,
+    "key": "A natural minor",
+    "bpm": 104,
+    "form": "aba",
+    "rbn": {
+      "N": 24,
+      "K": 2,
+      "p": 0.5,
+      "mu": 6,
+      "lam": 22,
+      "slots": 384
+    },
+    "notes": "RBN trajectory -> chromatic off-grid raw line; transient=connective, attractor=groove"
+  },
+  "notes": "",
+  "sha256": "cd579f9fb6c956f4d4659f154b6e35b6ee7d12dc56e1f0dcfe88b1ead0891cb2",
+  "bytes": 1198,
+  "created_utc": "2026-10-23T10:23:50.913725+00:00",
+  "provenance_version": "1.0"
+}

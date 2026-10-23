@@ -1,0 +1,32 @@
+{
+  "artifact": "259-funk-som-extended-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom nightly 259-funk-som-extended",
+  "sources": [
+    "methods_db:075 Self-Organizing Map Composition (SOM-C)",
+    "style:Funk",
+    "phase:1 raw draft"
+  ],
+  "parameters": {
+    "phase": 1,
+    "seed": 20261023,
+    "key": "F minor (aeolian)",
+    "bpm": 104,
+    "form": [
+      "Intro",
+      "Verse",
+      "Chorus",
+      "Bridge",
+      "Verse2",
+      "Chorus2",
+      "Break",
+      "Outro"
+    ],
+    "notes": "raw SOM-C pitch-index trajectory, off-grid"
+  },
+  "notes": "",
+  "sha256": "510140b1904ae3780a2b67e984a957ac54eb5223ffd26439b5e5e2107bc1e4ad",
+  "bytes": 1176,
+  "created_utc": "2026-10-23T10:23:53.523804+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,39 @@
+{
+  "style": "Funk",
+  "target_lufs": -13.0,
+  "renders": {
+    "perfect": {
+      "wav": "/opt/data/projects/Styles/Funk/259-funk-som-extended/Audio/259-funk-som-extended-perfect.wav",
+      "ogg": "/opt/data/projects/Styles/Funk/259-funk-som-extended/Audio/259-funk-som-extended-perfect.ogg",
+      "wav_bytes": 13480492,
+      "ogg_bytes": 513209,
+      "silence_ratio": 0.0718,
+      "peak": 0.8908,
+      "duration_s": 76.42,
+      "integrated_lufs": -13.71,
+      "true_peak_db": -1.0
+    },
+    "humanized": {
+      "wav": "/opt/data/projects/Styles/Funk/259-funk-som-extended/Audio/259-funk-som-extended-humanized.wav",
+      "ogg": "/opt/data/projects/Styles/Funk/259-funk-som-extended/Audio/259-funk-som-extended-humanized.ogg",
+      "wav_bytes": 13480492,
+      "ogg_bytes": 515571,
+      "silence_ratio": 0.0705,
+      "peak": 0.8909,
+      "duration_s": 76.42,
+      "integrated_lufs": -13.73,
+      "true_peak_db": -1.0
+    },
+    "phase1": {
+      "wav": "/opt/data/projects/Styles/Funk/259-funk-som-extended/Audio/259-funk-som-extended-phase1.wav",
+      "ogg": "/opt/data/projects/Styles/Funk/259-funk-som-extended/Audio/259-funk-som-extended-phase1.ogg",
+      "wav_bytes": 13379628,
+      "ogg_bytes": 400635,
+      "silence_ratio": 0.64,
+      "peak": 0.8912,
+      "duration_s": 75.85,
+      "integrated_lufs": -15.79,
+      "true_peak_db": -1.0
+    }
+  }
+}

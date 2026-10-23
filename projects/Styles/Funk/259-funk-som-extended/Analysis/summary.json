@@ -1,0 +1,48 @@
+{
+  "project": "259-funk-som-extended",
+  "genre": "Funk",
+  "key": "F minor (aeolian)",
+  "bpm": 104,
+  "form": [
+    "Intro",
+    "Verse",
+    "Chorus",
+    "Bridge",
+    "Verse2",
+    "Chorus2",
+    "Break",
+    "Outro"
+  ],
+  "bars": 32,
+  "total_ticks": 61440,
+  "source": "098-funk-som",
+  "decision": "redesign (index.html + root provenance missing)",
+  "variations": {
+    "Intro": "register shift (low) + sparse",
+    "Verse": "base motif (SOM-C contour)",
+    "Chorus": "transposition (+3 degrees) + density rise",
+    "Bridge": "retrograde + register shift (upper)",
+    "Verse2": "inversion (pivot degree 3)",
+    "Chorus2": "augmentation (x2) + 7th color",
+    "Break": "diminution (16th) + sax counterline",
+    "Outro": "diminution fragment + fade"
+  },
+  "section_roots_midpoint": {
+    "Intro": "Bbm",
+    "Verse": "Bbm",
+    "Chorus": "Eb",
+    "Bridge": "Fm",
+    "Verse2": "Ab",
+    "Chorus2": "Eb",
+    "Break": "Db",
+    "Outro": "Cm"
+  },
+  "voices": [
+    "Lead",
+    "Sax",
+    "Piano",
+    "Bass",
+    "Drums"
+  ],
+  "humanize_seed": 20261024
+}
