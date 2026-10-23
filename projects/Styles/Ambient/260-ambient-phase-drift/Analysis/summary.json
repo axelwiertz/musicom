@@ -1,0 +1,76 @@
+{
+  "project": "260-ambient-phase-drift",
+  "genre": "Ambient",
+  "method": "026 DPSM (Phase-Shift Minimalism)",
+  "layer": "concrete",
+  "paradigm": "Nature-Led",
+  "key": "D dorian",
+  "bpm": 72,
+  "form": "s1-s2-s3-s4-s5-s6",
+  "bars": 24,
+  "total_ticks": 46080,
+  "tonic": 2,
+  "scale_pcs": [
+    2,
+    4,
+    5,
+    7,
+    9,
+    11,
+    0
+  ],
+  "chords": {
+    "S1": [
+      2,
+      5,
+      9,
+      0
+    ],
+    "S2": [
+      0,
+      4,
+      7,
+      11
+    ],
+    "S3": [
+      2,
+      5,
+      9,
+      0
+    ],
+    "S4": [
+      7,
+      11,
+      2
+    ],
+    "S5": [
+      9,
+      0,
+      4
+    ],
+    "S6": [
+      2,
+      5,
+      9,
+      0
+    ]
+  },
+  "voices": [
+    "Lead",
+    "ArpA",
+    "ArpB",
+    "Pad",
+    "Bass"
+  ],
+  "percussion": "none",
+  "humanize_seed": 20261024,
+  "axis_combo": [
+    "layer=concrete-only",
+    "paradigm=Nature-Led(DPSM)",
+    "percussion=none",
+    "lead=1+arp-texture",
+    "harmonization=pad+arp",
+    "form=6-section",
+    "humanization=ambient(6ms)"
+  ]
+}

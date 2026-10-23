@@ -1,0 +1,22 @@
+{
+  "perfect": {
+    "bytes": 6758,
+    "voice_tracks": 5,
+    "voice_len": 46080,
+    "drift_ok": true,
+    "pitched": 828,
+    "offgrid": 0,
+    "scale_viol": 0,
+    "chord_viol": 0
+  },
+  "humanized": {
+    "bytes": 6328,
+    "voice_tracks": 5,
+    "voice_len": 46080,
+    "drift_ok": true,
+    "pitched": 828,
+    "offgrid": 731,
+    "scale_viol": 0,
+    "chord_viol": 0
+  }
+}

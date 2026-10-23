@@ -1,0 +1,28 @@
+{
+  "style": "Ambient",
+  "target_lufs": -18.0,
+  "renders": {
+    "perfect": {
+      "wav": "/opt/data/repos/musicom/projects/Styles/Ambient/260-ambient-phase-drift/Audio/260-ambient-phase-drift-perfect.wav",
+      "ogg": "/opt/data/repos/musicom/projects/Styles/Ambient/260-ambient-phase-drift/Audio/260-ambient-phase-drift-perfect.ogg",
+      "wav_bytes": 14959404,
+      "ogg_bytes": 696060,
+      "silence_ratio": 0.0583,
+      "peak": 0.4027,
+      "duration_s": 84.8,
+      "integrated_lufs": -18.0,
+      "true_peak_db": -7.55
+    },
+    "humanized": {
+      "wav": "/opt/data/repos/musicom/projects/Styles/Ambient/260-ambient-phase-drift/Audio/260-ambient-phase-drift-humanized.wav",
+      "ogg": "/opt/data/repos/musicom/projects/Styles/Ambient/260-ambient-phase-drift/Audio/260-ambient-phase-drift-humanized.ogg",
+      "wav_bytes": 14959404,
+      "ogg_bytes": 698852,
+      "silence_ratio": 0.0583,
+      "peak": 0.384,
+      "duration_s": 84.8,
+      "integrated_lufs": -18.0,
+      "true_peak_db": -6.99
+    }
+  }
+}
