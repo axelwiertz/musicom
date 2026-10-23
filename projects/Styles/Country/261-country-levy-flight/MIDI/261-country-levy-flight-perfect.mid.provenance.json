@@ -1,0 +1,105 @@
+{
+  "artifact": "261-country-levy-flight-perfect.mid",
+  "classification": "ai-generated",
+  "generator": "musicom 261-country-levy-flight",
+  "sources": [
+    "methods_db:053 Levy Flight Composition (LFC)",
+    "style:Country",
+    "phase:2-rules",
+    "humanize_seed:20261024"
+  ],
+  "parameters": {
+    "phase": "perfect",
+    "seed": 20261023,
+    "key": "G major",
+    "bpm": 112,
+    "form": "aabb",
+    "humanize": {
+      "Lead": {
+        "seed": 2046363424,
+        "profile": {
+          "timing_sigma_ms": 9.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.02,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.5,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 102,
+        "mean_abs_shift_ticks": 5.657,
+        "max_abs_shift_ticks": 21,
+        "mean_abs_vel_delta": 5.245,
+        "timing_sigma_ticks": 8.064
+      },
+      "Guitar": {
+        "seed": 2046363425,
+        "profile": {
+          "timing_sigma_ms": 9.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.02,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.5,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 128,
+        "mean_abs_shift_ticks": 6.562,
+        "max_abs_shift_ticks": 25,
+        "mean_abs_vel_delta": 5.094,
+        "timing_sigma_ticks": 8.064
+      },
+      "Bass": {
+        "seed": 2046363426,
+        "profile": {
+          "timing_sigma_ms": 10.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.03,
+          "layback_ms": 8.0,
+          "phrase_corr": 0.5,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 64,
+        "mean_abs_shift_ticks": 8.499,
+        "max_abs_shift_ticks": 27,
+        "mean_abs_vel_delta": 4.891,
+        "timing_sigma_ticks": 8.96
+      },
+      "Drums": {
+        "seed": 2046363427,
+        "profile": {
+          "timing_sigma_ms": 2.0,
+          "velocity_sigma": 4.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.008,
+          "layback_ms": 0.0,
+          "phrase_corr": 0.5,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 192,
+        "mean_abs_shift_ticks": 1.156,
+        "max_abs_shift_ticks": 4,
+        "mean_abs_vel_delta": 3.422,
+        "timing_sigma_ticks": 1.792
+      }
+    },
+    "note": "grid-locked, no jitter",
+    "method": "053 Levy Flight Composition (LFC)",
+    "layer": "concrete",
+    "paradigm": "Stochastic"
+  },
+  "notes": "",
+  "sha256": "496709043f553b0ee0e10419678d4e810e39a091681a7f24fc1c3424b503fe37",
+  "bytes": 3997,
+  "created_utc": "2026-10-23T23:08:39.639171+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,23 @@
+{
+  "artifact": "261-country-levy-flight-phase1.mid",
+  "classification": "ai-generated",
+  "generator": "musicom 261-country-levy-flight",
+  "sources": [
+    "methods_db:053 Levy Flight Composition (LFC)",
+    "style:Country",
+    "phase:1-raw"
+  ],
+  "parameters": {
+    "phase": "1",
+    "seed": 20261023,
+    "key": "G major",
+    "bpm": 112,
+    "form": "aabb",
+    "note": "raw generative draft: unquantized chromatic pitches, off-grid onsets, single voice, no harmony"
+  },
+  "notes": "",
+  "sha256": "69a617546b169ab99d86270c091577f2abde85a9ff4b959ec93f5e27bbd91490",
+  "bytes": 939,
+  "created_utc": "2026-10-23T23:08:39.549324+00:00",
+  "provenance_version": "1.0"
+}

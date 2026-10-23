@@ -1,0 +1,38 @@
+{
+  "perfect": {
+    "bytes": 3997,
+    "voice_tracks": 4,
+    "voice_len": 30720,
+    "drift_ok": true,
+    "pitched_notes": 294,
+    "drum_notes": 192,
+    "offgrid_pitched": 0,
+    "offgrid_drums": 0,
+    "offgrid_total": 0,
+    "scale_viol_naive": 3
+  },
+  "humanized": {
+    "bytes": 3993,
+    "voice_tracks": 4,
+    "voice_len": 30720,
+    "drift_ok": true,
+    "pitched_notes": 294,
+    "drum_notes": 192,
+    "offgrid_pitched": 275,
+    "offgrid_drums": 140,
+    "offgrid_total": 415,
+    "scale_viol_naive": 3
+  },
+  "phase1": {
+    "bytes": 939,
+    "voice_tracks": 1,
+    "voice_len": 30720,
+    "drift_ok": true,
+    "pitched_notes": 100,
+    "drum_notes": 0,
+    "offgrid_pitched": 39,
+    "offgrid_drums": 0,
+    "offgrid_total": 39,
+    "scale_viol_naive": 34
+  }
+}
