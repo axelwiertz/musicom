@@ -135,6 +135,13 @@ hz = humanize_composer(composer, style=style, seed=hz_seed, bpm=bpm, instruments
   jitter into correlated phrase drift vs per-note white noise. Style map in
   `STYLE_HUMANIZE`; instrument role DNA in `Instrument.humanize_dna`
   (`projects/Instruments/instrument_registry.py`).
+- **Timing authority (2026-10-23):** the STYLE governs `timing_sigma_ms` +
+  `layback_ms` for melodic voices (groove/funk = tight, jazz/blues = loose);
+  rhythm-section roles keep their DNA (drums anchor 2 ms / 0 layback, bass
+  lays back 8 ms). `Instrument.humanize_dna` returns `None` for timing/layback
+  on melodic voices so `profile_for_style` lets the style value win — do NOT
+  re-add absolute timing/layback to melodic `humanize_dna`; use a per-project
+  `hz_instruments` override for a specific voice.
 - Invariants preserved: forward-clamp (no backtracking), boundary-clamp (no
   note crosses a section seam), terminal landmark untouched → `validate()`
   still passes. Apply AFTER grid/chord quantization, BEFORE validate()+to_midi().

@@ -142,19 +142,22 @@ class Instrument:
     def humanize_dna(self):
         """(timing_sigma_ms, velocity_sigma, layback_ms, duration_sigma).
 
-        Family baseline, with role-level tuning on top: bass sits back, the
-        drum kit anchors the grid, voices breathe. Feed into
-        ``transformers.humanize.profile_for_style(style, instrument_dna=...)``.
+        Rhythm-section roles keep their functional timing: drums anchor the
+        grid (2 ms / 0 layback), bass lays back (8 ms). Melodic voices return
+        ``None`` for timing_sigma_ms and layback_ms so the STYLE governs the
+        genre's tightness (groove = locked, organic = loose); they keep only
+        velocity + duration character. ``profile_for_style`` ignores ``None``
+        entries, letting the style value win.
         """
         fam = HUMANIZE_DNA_FAMILY.get(self.family, HUMANIZE_DNA_DEFAULT)
         name = (self.name or "").lower()
         if "drum" in name or "kit" in name or "percussion" in name:
-            return (2.0, 4.0, 0.0, 0.008)
+            return (2.0, 4.0, 0.0, 0.008)       # drums anchor the grid
         if "bass" in name:                      # double bass / electric bass lay back
             return (fam[0], fam[1], 8.0, fam[3])
         if "voice" in name or "vocal" in name or "singing" in name:
-            return (10.0, 9.0, 0.0, 0.04)
-        return fam
+            return (None, 9.0, None, 0.04)      # voice: style governs timing/layback
+        return (None, fam[1], None, fam[3])     # melodic: style governs timing/layback
 
     def in_range(self, midi_note):
         if self.range_min is None or self.range_max is None:
