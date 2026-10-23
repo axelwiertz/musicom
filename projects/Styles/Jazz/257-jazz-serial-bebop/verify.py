@@ -23,6 +23,14 @@ BAR = 1920
 STRONG_GRID = (0, 960)
 
 
+def on_grid(st):
+    """On-grid for a swing tune: 16th grid (0/120/240/360) OR the swung 8th
+    off-beat (320). The ride swings 2:1, so pitched voices that swing land on
+    320, not the straight 240."""
+    pos = st % 480
+    return (pos % 120 == 0) or (pos == 320)
+
+
 def section_of_bar(b):
     acc = 0
     for sname, nbars in FORM:
@@ -101,7 +109,7 @@ def audit(path, strict_chord):
         pitched += len(t["notes"])
         for n in t["notes"]:
             st = n["start_tick"]
-            if not (st % 120 == 0 or st % 240 == 0):
+            if not on_grid(st):
                 offgrid += 1
         r = audit_voice(t["notes"], SCALE_DEG_PCS,
                         chord_pcs_by_bar=(CHORD_BY_BAR if strict_chord else None),

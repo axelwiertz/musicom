@@ -8,7 +8,7 @@
     "pitched": 259
   },
   "perfect": {
-    "bytes": 9405,
+    "bytes": 9433,
     "n_tracks": 6,
     "voice_tracks": 5,
     "voice_len": 69120,
@@ -60,7 +60,7 @@
     }
   },
   "humanized": {
-    "bytes": 9293,
+    "bytes": 9330,
     "n_tracks": 6,
     "voice_tracks": 5,
     "voice_len": 69120,

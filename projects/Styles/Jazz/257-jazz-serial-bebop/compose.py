@@ -57,6 +57,7 @@ BAR = 1920
 EIGHTH = 240
 SIXTEENTH = 120
 BEAT = BAR // 4                 # 480
+SWING_OFF = int(2 * BEAT / 3)   # 320 — swung 8th off-beat (2:1, matches ride)
 SEED = 20261022
 rng = random.Random(SEED)
 
@@ -416,9 +417,31 @@ def cap_leaps(events, pool_by_bar, max_leap=11):
     return evs
 
 
-lead_q = cap_leaps(finalize_pitched(lead_events(), LEAD_POOL), LEAD_POOL)
+def swing8(events):
+    """Swing straight 8th-note off-beats (pos 240) to the 2:1 swing position
+    (320), matching the ride's swing. 16th subdivisions (120/360) stay
+    straight — bebop convention: straight 16ths over swing 8ths. Re-dedupe
+    after the shift since two straight notes may land on the same swing slot."""
+    out = []
+    seen = {}
+    for e in events:
+        beat = e.start_tick // BEAT
+        pos = e.start_tick % BEAT
+        if pos == EIGHTH:
+            e.start_tick = beat * BEAT + SWING_OFF
+        key = (e.start_tick, e.pitch)
+        if key in seen:
+            seen[key].end_tick = max(seen[key].end_tick, e.end_tick)
+        else:
+            seen[key] = e
+            out.append(e)
+    out.sort(key=lambda e: (e.start_tick, e.pitch))
+    return out
+
+
+lead_q = swing8(cap_leaps(finalize_pitched(lead_events(), LEAD_POOL), LEAD_POOL))
 trumpet_q = finalize_pitched(trumpet_events(), TRUMPET_POOL)
-piano_q = finalize_pitched(piano_events(), PIANO_POOL)
+piano_q = swing8(finalize_pitched(piano_events(), PIANO_POOL))
 bass_q = finalize_bass(bass_events())
 drums_q = drums_events()
 

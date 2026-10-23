@@ -52,7 +52,9 @@ classes present** (raw_pc_count = 12), 259 notes, 256 off-grid, deliberately
 out-of-scale (chromatic) — the serial identity, not a bug.
 
 **Phase 2 (`-perfect.mid`)** — musicom rules post-process:
-1. Onset snap to 16th grid (120 ticks).
+1. Onset snap to 16th grid (120 ticks), then **swing the 8th-note off-beats**
+   to the 2:1 swing position (320 ticks = 2/3 beat), matching the ride's
+   swing. 16th subdivisions stay straight (bebop convention).
 2. Row pc → nearest F-major scale degree → nearest chord tone of the bar's
    7th chord (ii-V-I family).
 3. Section variation (B = density/16th runs, A3 = fade, Intro = sparse).
@@ -179,6 +181,13 @@ design).
 
 ## 9. Fixes applied this run
 
+- **Lead timing off (straight vs swing)** — the lead (and piano comp) played
+  straight 8th off-beats at tick 240 while the ride swung at 320 (2/3 beat),
+  an ~83 ms early clash on every off-beat. Added `swing8()` in `compose.py`
+  (240 → 320 for lead + piano off-beats; 16th subdivisions stay straight per
+  bebop convention) and taught `verify.py`'s `on_grid()` that 320 is a legal
+  swing grid point. Post-fix onset audit: lead swing-slot mean 321.6 vs ride
+  320.0 (n=71 vs 136) — locked to the groove.
 - **verify.py KeyError** (dict key `serial_all_12_pcs` vs assert `serial_ok`)
   → added `serial_ok` alias to the phase1 result dict.
 - Humanized harmony audit runs **scale-only** (`chord_pcs_by_bar=None`) because
