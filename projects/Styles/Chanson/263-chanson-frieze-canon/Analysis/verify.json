@@ -1,0 +1,150 @@
+{
+  "phase1": {
+    "bytes": 2045,
+    "pitched": 213,
+    "distinct_pcs": 12,
+    "offscale_pcs": [
+      0,
+      3,
+      5,
+      8,
+      10
+    ],
+    "chromatic_ok": true,
+    "offgrid": 213
+  },
+  "perfect": {
+    "bytes": 10858,
+    "n_tracks": 7,
+    "voice_tracks": 6,
+    "voice_len": 76800,
+    "drift_ok": true,
+    "total_notes": 1341,
+    "pitched": 1005,
+    "offgrid": 0,
+    "harmony": {
+      "ch0": {
+        "audible": 213,
+        "strong_ok": 51,
+        "weak_in_scale": 162,
+        "tagged": 0,
+        "untagged_out": 0,
+        "non_resolving": 0,
+        "strong_viol": 0,
+        "collisions": 0,
+        "passes": true
+      },
+      "ch1": {
+        "audible": 216,
+        "strong_ok": 0,
+        "weak_in_scale": 216,
+        "tagged": 0,
+        "untagged_out": 0,
+        "non_resolving": 0,
+        "strong_viol": 0,
+        "collisions": 0,
+        "passes": true
+      },
+      "ch2": {
+        "audible": 320,
+        "strong_ok": 0,
+        "weak_in_scale": 320,
+        "tagged": 0,
+        "untagged_out": 0,
+        "non_resolving": 0,
+        "strong_viol": 0,
+        "collisions": 0,
+        "passes": true
+      },
+      "ch3": {
+        "audible": 96,
+        "strong_ok": 96,
+        "weak_in_scale": 0,
+        "tagged": 0,
+        "untagged_out": 0,
+        "non_resolving": 0,
+        "strong_viol": 0,
+        "collisions": 0,
+        "passes": true
+      },
+      "ch4": {
+        "audible": 160,
+        "strong_ok": 80,
+        "weak_in_scale": 80,
+        "tagged": 0,
+        "untagged_out": 0,
+        "non_resolving": 0,
+        "strong_viol": 0,
+        "collisions": 0,
+        "passes": true
+      }
+    }
+  },
+  "humanized": {
+    "bytes": 10863,
+    "n_tracks": 7,
+    "voice_tracks": 6,
+    "voice_len": 76800,
+    "drift_ok": true,
+    "total_notes": 1341,
+    "pitched": 1005,
+    "offgrid": 936,
+    "harmony": {
+      "ch0": {
+        "audible": 213,
+        "strong_ok": 6,
+        "weak_in_scale": 207,
+        "tagged": 0,
+        "untagged_out": 0,
+        "non_resolving": 0,
+        "strong_viol": 0,
+        "collisions": 0,
+        "passes": true
+      },
+      "ch1": {
+        "audible": 216,
+        "strong_ok": 0,
+        "weak_in_scale": 216,
+        "tagged": 0,
+        "untagged_out": 0,
+        "non_resolving": 0,
+        "strong_viol": 0,
+        "collisions": 0,
+        "passes": true
+      },
+      "ch2": {
+        "audible": 320,
+        "strong_ok": 0,
+        "weak_in_scale": 320,
+        "tagged": 0,
+        "untagged_out": 0,
+        "non_resolving": 0,
+        "strong_viol": 0,
+        "collisions": 0,
+        "passes": true
+      },
+      "ch3": {
+        "audible": 96,
+        "strong_ok": 6,
+        "weak_in_scale": 90,
+        "tagged": 0,
+        "untagged_out": 0,
+        "non_resolving": 0,
+        "strong_viol": 0,
+        "collisions": 0,
+        "passes": true
+      },
+      "ch4": {
+        "audible": 160,
+        "strong_ok": 4,
+        "weak_in_scale": 156,
+        "tagged": 0,
+        "untagged_out": 0,
+        "non_resolving": 0,
+        "strong_viol": 0,
+        "collisions": 0,
+        "passes": true
+      }
+    }
+  }
+}

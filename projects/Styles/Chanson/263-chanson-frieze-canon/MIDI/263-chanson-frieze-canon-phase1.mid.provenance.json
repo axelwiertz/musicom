@@ -1,0 +1,80 @@
+{
+  "artifact": "263-chanson-frieze-canon-phase1.mid",
+  "classification": "ai-generated",
+  "generator": "musicom nightly 263-chanson-frieze-canon",
+  "sources": [
+    "methods_db:091 Coxeter-Conway Frieze Pattern (CCFPC)",
+    "style:Chanson",
+    "phase:1 raw draft"
+  ],
+  "parameters": {
+    "phase": 1,
+    "seed": 20261024,
+    "key": "D major (ionian)",
+    "bpm": 92,
+    "form": "verse-chorus",
+    "frieze": {
+      "period": 16,
+      "fan_quiddity": [
+        14,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1
+      ],
+      "verse_quiddity": [
+        13,
+        2,
+        1,
+        3,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1
+      ],
+      "chorus_quiddity": [
+        12,
+        3,
+        1,
+        2,
+        3,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1
+      ]
+    },
+    "notes": "frieze row/column contour -> chromatic off-grid raw line; Ptolemy flips per section"
+  },
+  "notes": "",
+  "sha256": "ef78cfde4c229c708c29447eb5b853c983283e5b3b6d9f4a61169962a70a7db9",
+  "bytes": 2045,
+  "created_utc": "2026-10-24T23:08:20.413253+00:00",
+  "provenance_version": "1.0"
+}

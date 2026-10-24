@@ -1,0 +1,140 @@
+{
+  "artifact": "263-chanson-frieze-canon-perfect.mid",
+  "classification": "ai-generated",
+  "generator": "musicom nightly 263-chanson-frieze-canon",
+  "sources": [
+    "methods_db:091 Coxeter-Conway Frieze",
+    "style:Chanson",
+    "phase:2 rules",
+    "humanize_seed:20261025"
+  ],
+  "parameters": {
+    "phase": "2-perfect",
+    "seed": 20261024,
+    "key": "D major (ionian)",
+    "bpm": 92,
+    "form": "verse-chorus",
+    "humanize": {
+      "Oboe": {
+        "seed": 2046363525,
+        "profile": {
+          "timing_sigma_ms": 8.0,
+          "velocity_sigma": 7.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.02,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.45,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 213,
+        "mean_abs_shift_ticks": 4.272,
+        "max_abs_shift_ticks": 16,
+        "mean_abs_vel_delta": 5.54,
+        "timing_sigma_ticks": 5.888
+      },
+      "Clarinet": {
+        "seed": 2046363526,
+        "profile": {
+          "timing_sigma_ms": 8.0,
+          "velocity_sigma": 7.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.02,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.45,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 216,
+        "mean_abs_shift_ticks": 4.199,
+        "max_abs_shift_ticks": 18,
+        "mean_abs_vel_delta": 5.667,
+        "timing_sigma_ticks": 5.888
+      },
+      "Piano": {
+        "seed": 2046363527,
+        "profile": {
+          "timing_sigma_ms": 8.0,
+          "velocity_sigma": 5.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.015,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.45,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 320,
+        "mean_abs_shift_ticks": 4.744,
+        "max_abs_shift_ticks": 14,
+        "mean_abs_vel_delta": 4.003,
+        "timing_sigma_ticks": 5.888
+      },
+      "Strings": {
+        "seed": 2046363528,
+        "profile": {
+          "timing_sigma_ms": 8.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.03,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.45,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 96,
+        "mean_abs_shift_ticks": 4.677,
+        "max_abs_shift_ticks": 13,
+        "mean_abs_vel_delta": 5.042,
+        "timing_sigma_ticks": 5.888
+      },
+      "Bass": {
+        "seed": 2046363529,
+        "profile": {
+          "timing_sigma_ms": 10.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.03,
+          "layback_ms": 8.0,
+          "phrase_corr": 0.45,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 160,
+        "mean_abs_shift_ticks": 6.981,
+        "max_abs_shift_ticks": 27,
+        "mean_abs_vel_delta": 4.956,
+        "timing_sigma_ticks": 7.36
+      },
+      "Drums": {
+        "seed": 2046363530,
+        "profile": {
+          "timing_sigma_ms": 2.0,
+          "velocity_sigma": 4.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.008,
+          "layback_ms": 0.0,
+          "phrase_corr": 0.45,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 336,
+        "mean_abs_shift_ticks": 0.994,
+        "max_abs_shift_ticks": 5,
+        "mean_abs_vel_delta": 3.229,
+        "timing_sigma_ticks": 1.472
+      }
+    },
+    "note": "grid-locked, no jitter"
+  },
+  "notes": "",
+  "sha256": "6f3968d79547b16ca8256317ff38bd2484481b96cf262a59bdf05a89911d9dbf",
+  "bytes": 10858,
+  "created_utc": "2026-10-24T23:08:20.590392+00:00",
+  "provenance_version": "1.0"
+}
