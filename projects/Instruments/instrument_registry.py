@@ -33,6 +33,7 @@ _INSTRUMENT_MODULES = {
     "Strings.double_bass.double_bass": "double_bass",
     "Strings.pizzicato_strings.pizzicato_strings": "pizzicato_strings",
     "Strings.string_ensemble.string_ensemble": "string_ensemble",
+    "Strings.tremolo_strings.tremolo_strings": "tremolo_strings",
     "Keys.piano.piano": "piano",
     "Keys.organ.organ": "organ",
     "Keys.dulcimer.dulcimer": "dulcimer",
@@ -322,6 +323,7 @@ SYNTH_BASS_1 = ALL_INSTRUMENTS["synth_bass_1"]
 RECORDER = ALL_INSTRUMENTS["recorder"]
 PIZZICATO_STRINGS = ALL_INSTRUMENTS["pizzicato_strings"]
 STRING_ENSEMBLE = ALL_INSTRUMENTS["string_ensemble"]
+TREMOLO_STRINGS = ALL_INSTRUMENTS["tremolo_strings"]
 SYNTH_PAD = ALL_INSTRUMENTS["synth_pad"]
 # Voice-like family — one instrument per non-vocal source. The `voice_like`
 # key is the umbrella (vox humana); each member is also addressable directly.
@@ -378,6 +380,8 @@ def registry_table():
             role = "rhythm, ostinato, bass, accompaniment, countermelody, accent"
         elif low == "string ensemble 1":
             role = "harmony, pad, melody, countermelody, accent"
+        elif low == "tremolo strings":
+            role = "accent, tension, texture, harmony, pad, countermelody"
         elif low == "orchestral harp":
             role = "harmony, arpeggio, glissando, melody, countermelody, accent"
         elif low == "piano":
@@ -503,6 +507,10 @@ if __name__ == "__main__":
     print("  by_name('koto') =", by_name("koto"))
     print("  by_program(107) =", by_program(107))
     print("  KOTO.in_sweet_spot(69) =", KOTO.in_sweet_spot(69))
+    print("  TREMOLO_STRINGS.midi_program =", TREMOLO_STRINGS.midi_program, "(should be 44)")
+    print("  by_name('tremolo strings') =", by_name("tremolo strings"))
+    print("  by_program(44) =", by_program(44))
+    print("  TREMOLO_STRINGS.in_sweet_spot(72) =", TREMOLO_STRINGS.in_sweet_spot(72))
     print("  SHAMISEN.midi_program =", SHAMISEN.midi_program, "(should be 106)")
     print("  by_name('shamisen') =", by_name("shamisen"))
     print("  by_program(106) =", by_program(106))

@@ -1,0 +1,33 @@
+{
+  "artifact": "262-harmonic-chorale-variations-phase1.mid",
+  "classification": "ai-generated",
+  "generator": "musicom 262-harmonic-chorale-variations",
+  "sources": [
+    "generators/harmonics.py (overtone staircase, 12-TET)",
+    "methods_db:023 Harmonic Series / Overtone Composition",
+    "style:Experimental",
+    "phase:1-raw"
+  ],
+  "parameters": {
+    "phase": "1",
+    "seed": 262,
+    "key": "F major (ionian)",
+    "bpm": 92,
+    "bars": 24,
+    "fundamental": 55,
+    "variations": [
+      "theme",
+      "retrograde",
+      "transpose",
+      "invert",
+      "diminish",
+      "augment"
+    ],
+    "note": "raw generative draft: unquantized chromatic overtone staircase, off-grid onsets, single voice, no harmony"
+  },
+  "notes": "",
+  "sha256": "a620d448dd74dc8c09bf769387a324b9ceab0c861c91e46a174561ac8e626d49",
+  "bytes": 1246,
+  "created_utc": "2026-10-24T01:09:42.003041+00:00",
+  "provenance_version": "1.0"
+}

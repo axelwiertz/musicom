@@ -1,0 +1,115 @@
+{
+  "artifact": "262-harmonic-chorale-variations-perfect.mid",
+  "classification": "ai-generated",
+  "generator": "musicom 262-harmonic-chorale-variations",
+  "sources": [
+    "methods_db:023 Harmonic Series / Overtone Composition",
+    "rules/progression.py (Scale7ChordDegree.get_diatonic_note)",
+    "style:Experimental",
+    "phase:2-rules",
+    "humanize_seed:263"
+  ],
+  "parameters": {
+    "phase": "perfect",
+    "seed": 262,
+    "key": "F major (ionian)",
+    "bpm": 92,
+    "bars": 24,
+    "humanize": {
+      "Soprano": {
+        "seed": 26563,
+        "profile": {
+          "timing_sigma_ms": 8.0,
+          "velocity_sigma": 7.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.02,
+          "layback_ms": 0.0,
+          "phrase_corr": 0.5,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 143,
+        "mean_abs_shift_ticks": 3.469,
+        "max_abs_shift_ticks": 12,
+        "mean_abs_vel_delta": 5.937,
+        "timing_sigma_ticks": 5.888
+      },
+      "Alto": {
+        "seed": 26564,
+        "profile": {
+          "timing_sigma_ms": 8.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.03,
+          "layback_ms": 0.0,
+          "phrase_corr": 0.5,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 24,
+        "mean_abs_shift_ticks": 2.458,
+        "max_abs_shift_ticks": 9,
+        "mean_abs_vel_delta": 3.667,
+        "timing_sigma_ticks": 5.888
+      },
+      "Tenor": {
+        "seed": 26565,
+        "profile": {
+          "timing_sigma_ms": 8.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.03,
+          "layback_ms": 0.0,
+          "phrase_corr": 0.5,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 24,
+        "mean_abs_shift_ticks": 3.083,
+        "max_abs_shift_ticks": 8,
+        "mean_abs_vel_delta": 4.292,
+        "timing_sigma_ticks": 5.888
+      },
+      "Bass": {
+        "seed": 26566,
+        "profile": {
+          "timing_sigma_ms": 10.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.03,
+          "layback_ms": 8.0,
+          "phrase_corr": 0.5,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 24,
+        "mean_abs_shift_ticks": 6.167,
+        "max_abs_shift_ticks": 14,
+        "mean_abs_vel_delta": 4.833,
+        "timing_sigma_ticks": 7.36
+      }
+    },
+    "note": "grid-locked, no jitter",
+    "method": "023 Harmonic Series / Overtone Composition",
+    "layer": "concrete",
+    "paradigm": "Deterministic physics",
+    "variations": [
+      "theme",
+      "retrograde",
+      "transpose",
+      "invert",
+      "diminish",
+      "augment"
+    ],
+    "redesign": "rebuild of 067-harmonic-chorale (audit fail: missing index.html)"
+  },
+  "notes": "",
+  "sha256": "3e838e01c43eaed11638ec1409f62a0799ebe2f261ba87d052f7a8623f9c1e4d",
+  "bytes": 2004,
+  "created_utc": "2026-10-24T01:09:42.027087+00:00",
+  "provenance_version": "1.0"
+}

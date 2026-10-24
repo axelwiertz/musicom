@@ -1,0 +1,32 @@
+{
+  "perfect": {
+    "bytes": 2004,
+    "voice_tracks": 4,
+    "voice_len": 46080,
+    "drift_ok": true,
+    "pitched_notes": 215,
+    "offgrid_pitched": 0,
+    "scale_viol": 0,
+    "chord_viol": 0
+  },
+  "humanized": {
+    "bytes": 1906,
+    "voice_tracks": 4,
+    "voice_len": 46080,
+    "drift_ok": true,
+    "pitched_notes": 215,
+    "offgrid_pitched": 182,
+    "scale_viol": 0,
+    "chord_viol": 17
+  },
+  "phase1": {
+    "bytes": 1246,
+    "voice_tracks": 1,
+    "voice_len": 46080,
+    "drift_ok": true,
+    "pitched_notes": 146,
+    "offgrid_pitched": 142,
+    "scale_viol": 32,
+    "chord_viol": 97
+  }
+}

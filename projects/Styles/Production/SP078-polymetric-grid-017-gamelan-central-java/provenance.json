@@ -1,0 +1,182 @@
+{
+  "job": "random-style production (SP) layer-aligned",
+  "date": "2026-10-24",
+  "seed": 20261024,
+  "method": "SP-078",
+  "method_module": "sound.generators.polymetric_grid",
+  "method_desc": "16-Track Polymetric Step Sequencer w/ Per-Step Graphs (Rapid Flow omniGRID-style)",
+  "layer": "ABSOLUTE",
+  "params": {
+    "sample_rate": 44100,
+    "bpm": 80.0,
+    "ppqn": 480,
+    "total_beats": 96,
+    "total_ticks": 46080,
+    "shuffle": "straight",
+    "shuffle_amount": 0.0,
+    "master_shift_ms": 0.0,
+    "scale": "D Slendro (manual via set_pitch)",
+    "tracks": {
+      "1_gong": {
+        "steps": 16,
+        "res": 4,
+        "note": 38,
+        "euclidean": [
+          1,
+          16
+        ]
+      },
+      "2_kenong": {
+        "steps": 16,
+        "res": 4,
+        "note": 50,
+        "euclidean": [
+          4,
+          16,
+          3
+        ]
+      },
+      "3_kempul": {
+        "steps": 16,
+        "res": 4,
+        "note": 45,
+        "euclidean": [
+          3,
+          16
+        ]
+      },
+      "4_kethuk": {
+        "steps": 16,
+        "res": 4,
+        "note": 50,
+        "euclidean": [
+          8,
+          16
+        ],
+        "probability": 88.0,
+        "repeats_step6": 2
+      },
+      "5_balungan": {
+        "steps": 12,
+        "res": 8,
+        "contour": [
+          62,
+          64,
+          66,
+          64,
+          62,
+          64,
+          69,
+          71,
+          69,
+          66,
+          64,
+          62
+        ],
+        "euclidean": [
+          7,
+          12
+        ]
+      },
+      "6_peking": {
+        "steps": 12,
+        "res": 16,
+        "contour": [
+          74,
+          71,
+          69,
+          71,
+          74,
+          71,
+          69,
+          66,
+          69,
+          71,
+          69,
+          66
+        ],
+        "euclidean": [
+          9,
+          12
+        ],
+        "probability": 92.0
+      }
+    },
+    "periods_beats": {
+      "1": 16.0,
+      "2": 16.0,
+      "3": 16.0,
+      "4": 16.0,
+      "5": 6.0,
+      "6": 3.0
+    },
+    "loops": {
+      "1": 6,
+      "2": 6,
+      "3": 6,
+      "4": 6,
+      "5": 16,
+      "6": 32
+    },
+    "ensemble_rephase_beats": 48.0,
+    "carrier": "FluidSynth SP-001 (FluidR3_GM)",
+    "target_lufs": -14.0,
+    "ceiling_db": -1.0
+  },
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Gamelan/017-gamelan-central-java/MIDI/gamelan_live_render.mid",
+  "source_reworked_midi": "/opt/data/repos/musicom/projects/Styles/Production/SP078-polymetric-grid-017-gamelan-central-java/MIDI/source_reworked.mid",
+  "groove_midi": "/opt/data/repos/musicom/projects/Styles/Production/SP078-polymetric-grid-017-gamelan-central-java/MIDI/SP078-polymetric-gamelan.mid",
+  "source_bpm": 80.0,
+  "source_key": "D Slendro pentatonic (D E F# A B)",
+  "source_pitch_classes": [
+    2,
+    4,
+    6,
+    9,
+    11
+  ],
+  "output_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP078-polymetric-grid-017-gamelan-central-java/SP078-polymetric-grid-017-gamelan-central-java.wav",
+  "output_ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP078-polymetric-grid-017-gamelan-central-java/SP078-polymetric-grid-017-gamelan-central-java.ogg",
+  "raw_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP078-polymetric-grid-017-gamelan-central-java/SP078_polymetric_raw.wav",
+  "dry_reference_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP078-polymetric-grid-017-gamelan-central-java/dry_full_mix_source_reference.wav",
+  "lufs": -14.015111939137592,
+  "peak": 0.8912509381337456,
+  "silence_pct": 17.104489972310436,
+  "rms": 0.13634880584269468,
+  "pitch_verdict": "PASS",
+  "hit_rate": 1.0,
+  "he_mean": 0.4241053658120245,
+  "dry_he": 0.42388242115010233,
+  "he_retention": 1.0005259587347768,
+  "preflight_source": {
+    "grid_off": 0,
+    "out_scale": 0,
+    "out_chord": 0,
+    "zero_drift": false,
+    "track_ends": [
+      61440,
+      61920
+    ],
+    "total_notes": 512
+  },
+  "preflight_reworked": {
+    "grid_off": 0,
+    "out_scale": 0,
+    "out_chord": 0,
+    "zero_drift": true,
+    "track_ends": [
+      61440
+    ],
+    "total_notes": 512
+  },
+  "output_audit": {
+    "grid_off": 0,
+    "out_scale": 0,
+    "out_chord": 0,
+    "zero_drift": true,
+    "track_ends": [
+      46080
+    ],
+    "total_notes": 463
+  }
+}

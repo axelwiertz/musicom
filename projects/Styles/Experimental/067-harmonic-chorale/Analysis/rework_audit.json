@@ -1,0 +1,30 @@
+{
+  "chosen": "/opt/data/projects/Styles/Experimental/067-harmonic-chorale",
+  "genre": "Experimental",
+  "source_midi": "/opt/data/projects/Styles/Experimental/067-harmonic-chorale/MIDI/067-harmonic-chorale.mid",
+  "audit_date": "2026-10-24",
+  "standards": {
+    "engine_authoring": "PASS (compose.py imports workflows.unitmatrix_composer.UnitMatrixComposer)",
+    "zero_drift": "PASS (4 voice tracks x 15360 ticks, equal)",
+    "rhythm_grid_sync": "PASS (0 off-grid pitched onsets)",
+    "track_setup": "PASS (Soprano/Alto/Tenor/Bass = 4 voice tracks)",
+    "two_phase_artifacts": "PASS (067-harmonic-chorale.mid + 067-harmonic-chorale-phase1.mid)",
+    "provenance_and_index": "FAIL (provenance.json sidecars present, index.html MISSING)"
+  },
+  "standard_failures": ["index.html missing in project root"],
+  "redesign_required": true,
+  "source_identity": {
+    "genre": "Experimental",
+    "method": "023 Harmonic Series / Overtone Composition",
+    "key": "F major (ionian)",
+    "tonic_pc": 5,
+    "bpm": 92,
+    "meter": "4/4",
+    "core_motif": "natural overtone staircase of G3 fundamental (12-TET quantized partials 1..16)",
+    "instrumentation": "SATB chorale: Soprano (Flute), Alto (String Ensemble), Tenor (String Ensemble), Bass",
+    "harmonic_dna": "I - vi - IV - V (F - Dm - Bb - C)",
+    "form": "4 sections x 2 bars = 8 bars",
+    "seed": 67
+  },
+  "rework_decision": "REDESIGN (rebuild from scratch through canonical UnitMatrixComposer, preserving identity; index.html was the only failure but the task mandates redesign on any standard failure)"
+}

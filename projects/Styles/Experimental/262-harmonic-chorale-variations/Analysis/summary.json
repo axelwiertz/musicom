@@ -1,0 +1,152 @@
+{
+  "project": "262-harmonic-chorale-variations",
+  "genre": "Experimental",
+  "method": "023 Harmonic Series / Overtone Composition",
+  "layer": "concrete",
+  "paradigm": "Deterministic physics",
+  "key": "F major (ionian)",
+  "bpm": 92,
+  "bars": 24,
+  "sections": [
+    "A Theme",
+    "B Retrograde",
+    "C Transposed",
+    "D Inversion",
+    "E Diminution",
+    "F Coda Augm"
+  ],
+  "total_ticks": 46080,
+  "tonic": 5,
+  "scale_pcs": [
+    0,
+    2,
+    4,
+    5,
+    7,
+    9,
+    10
+  ],
+  "chord_degree_by_bar": [
+    0,
+    5,
+    3,
+    4,
+    4,
+    3,
+    5,
+    0,
+    4,
+    0,
+    1,
+    4,
+    3,
+    1,
+    4,
+    0,
+    0,
+    3,
+    1,
+    4,
+    3,
+    4,
+    0,
+    0
+  ],
+  "variations": {
+    "A Theme": "theme",
+    "B Retrograde": "retrograde",
+    "C Transposed": "transpose",
+    "D Inversion": "invert",
+    "E Diminution": "diminish",
+    "F Coda Augm": "augment"
+  },
+  "voices": [
+    "Soprano",
+    "Alto",
+    "Tenor",
+    "Bass"
+  ],
+  "humanize_seed": 263,
+  "composition_seed": 262,
+  "humanize_profiles": {
+    "Soprano": {
+      "seed": 26563,
+      "profile": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 7.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.5,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 143,
+      "mean_abs_shift_ticks": 3.469,
+      "max_abs_shift_ticks": 12,
+      "mean_abs_vel_delta": 5.937,
+      "timing_sigma_ticks": 5.888
+    },
+    "Alto": {
+      "seed": 26564,
+      "profile": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.03,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.5,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 24,
+      "mean_abs_shift_ticks": 2.458,
+      "max_abs_shift_ticks": 9,
+      "mean_abs_vel_delta": 3.667,
+      "timing_sigma_ticks": 5.888
+    },
+    "Tenor": {
+      "seed": 26565,
+      "profile": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.03,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.5,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 24,
+      "mean_abs_shift_ticks": 3.083,
+      "max_abs_shift_ticks": 8,
+      "mean_abs_vel_delta": 4.292,
+      "timing_sigma_ticks": 5.888
+    },
+    "Bass": {
+      "seed": 26566,
+      "profile": {
+        "timing_sigma_ms": 10.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.03,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.5,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 24,
+      "mean_abs_shift_ticks": 6.167,
+      "max_abs_shift_ticks": 14,
+      "mean_abs_vel_delta": 4.833,
+      "timing_sigma_ticks": 7.36
+    }
+  },
+  "raw_events": 147,
+  "raw_offgrid": 145,
+  "raw_scale_violations": 32
+}

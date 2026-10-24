@@ -719,6 +719,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 48 | String Ensemble 1 | String_Ensemble_1 ✓ (GM_PROGRAMS[48] = "String Ensemble 1"; FluidR3 preset 48 = "Strings" — one-word SF2 spelling, cosmetic only, **no quirk**) |
 || 88 | Pad 1 (new age) | Pad_1_new_age ✓ (GM_PROGRAMS[88] = "Pad 1 (new age)" → sanitized `Pad_1_new_age` — parens stripped, spaces → underscore; FluidR3 preset 88 = **"Fantasia"** — SF2 internal name differs from GM label, cosmetic only, **no routing impact**; preset 89 = "Warm Pad" is the darker sibling) |
 || 38 | Synth Bass 1 | Synth_Bass_1 ✓ (GM_PROGRAMS[38] = "Synth Bass 1"; FluidR3 preset 38 = "Synth Bass 1" — labels match exactly, **no quirk**) |
+|| 44 | Tremolo Strings | Tremolo_Strings ✓ (GM_PROGRAMS[44] = "Tremolo Strings"; FluidR3 preset 44 = "Tremolo" — one-word SF2 spelling, cosmetic only, **no routing impact**) |
 
 > **Known off-by-one in existing entries**: ~~`trumpet.py` uses 57~~ **FIXED 2026-08-27**: trumpet is now 56 (SF2 preset 56=`SoloTrumpet`). `piano.py`=1 → actually Bright Acoustic Piano (GM #2) — cosmetic label difference only, no routing impact. Legacy registry rows kept as-is for piano; new instruments use 0-indexed programs matching pipeline+SF2.
 
@@ -1288,3 +1289,49 @@ room/plate — the shortest in the Bass family; synth bass is almost always
 dry). EQ: cut 250 Hz (mud), boost 900 Hz (growl), gentle 6 kHz air — DARK
 by design (vs electric bass 5 kHz shelf). Completes the Bass family pair:
 finger electric (GM33) + synth (GM38).
+
+**Tremolo Strings added** (2026-10-24): GM44, Strings-family eighth entry —
+the bowed STRING SECTION playing rapid repeated bow strokes (the
+film-score tension texture; the "bathroom mirror" / every-thriller-
+underscore staple) (instrument.md + tremolo_strings.py), verified
+end-to-end UnitMatrixComposer → zero-drift ✓ → MIDI (93 bytes) →
+FluidSynth WAV (1.24 MB, solo render) ✓; RenderPipeline stem label
+`trackXX_Tremolo_Strings.wav` ✓ (GM_PROGRAMS[44] = "Tremolo Strings",
+FluidR3 preset 44 = "Tremolo" — one-word SF2 spelling, cosmetic only,
+**no routing impact**). Additive recommended (section = detuned harmonic
+stack, String Ensemble 1 precedent; SYNTHESIS_DEFAULTS attack 0.02 — the
+bow is ALREADY moving, no slow onset; detune ±0.006, stack 3, release
+0.2; `tremolo_hz` 7.0 documented — the tremolo is NOT a musicom synthesis
+parameter, write it at the note layer (fast repeated 16ths/32nds) or AM a
+long note at 7 Hz in production; the FluidR3 patch carries deep built-in
+AM, measured trem-ripple 1.00 on every note). BowedString secondary
+(bow_velocity 0.26 — tremolo bowing is driven — faster than fiddle 0.24
+and section 0.2; bow_force 1.6); PhaseModSynth saw "string machine" +
+AM alt; ModalSynth 'string' = section pizz fallback. Additive smoke:
+A3 note late(1.0–1.5 s) rms/peak 0.241 (sustain holds, no collapse);
+envelope-AM peak measured at exactly 7.00 Hz (the documented tremolo
+rate). Solo-render spectral check: 4–8 kHz buzz **1.5%** (clean single
+voice, no comb-filtering). Empirical FluidR3 pitch sweep (RMS, notes
+24–96): preset 44 audible EVERY note (rms 0.030–0.045, no gaps), SILENT
+at 108+ — never write above C7=96. Range 24–96 = full-section span
+(contrabass C1 → violin C7; patch plays the full span, unlike String
+Ensemble 1's 28 floor); sweet spot 60–84 (C4–C6); solo range 53–89
+(F3–A6). Registration proof: `by_name('tremolo strings')` → Tremolo
+Strings, `by_program(44)` → Tremolo Strings, `in_sweet_spot(72)` = True,
+`in_sweet_spot(24)` = True (24–96 full range), `in_sweet_spot(100)` =
+False. Registration in `instrument_registry.py` as TREMOLO_STRINGS
+convenience constant + a `registry_table()` role row. Role: accent,
+tension, texture, harmony, pad, countermelody — the chattering tension
+voice, NOT a solo melody voice (the AM masks pitch clarity — solo lines
+go to violin/string_ensemble) and NOT a bass voice (low tremolo is
+rumble, not pitch). REVERB_TAIL 2.4 s (between string_ensemble 2.6 and
+violin 2.0 — 2.6 is TOO long, the tremolo muddies in a huge tail). EQ:
+cut 250 Hz (tremolo doubles section mass in the low-mid), boost 3 kHz
+bow-stroke bite, gentle 8.5 kHz air. Channel quirk: melodic channel (0–9)
+with program 44 — channel 9 would trigger the drum-kit map. Layering
+quirk: idiomatic doubling is octaves or a low sustained string BELOW —
+NEVER unison with another melodic patch (the 2026-09-01 comb-filter
+lesson; a section tremolo + unison flute on the same pitch is a buzz
+machine). Completes the Strings family bowed block: violin/viola/cello/
+double_bass/fiddle (solo) + pizzicato (plucked section) + string_ensemble
+(sustained section) + tremolo (chattering section).
