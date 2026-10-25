@@ -1,0 +1,142 @@
+{
+  "phase1": {
+    "bytes": 1213,
+    "pitched": 125,
+    "offgrid": 122,
+    "pc_in_subset": 124,
+    "pc_total": 125,
+    "pc_in_subset_ratio": 0.992
+  },
+  "walk": {
+    "walk": [
+      "maj0",
+      "min2",
+      "maj0",
+      "maj5",
+      "maj0",
+      "maj70",
+      "maj0",
+      "min2",
+      "min72",
+      "min74",
+      "min72",
+      "maj75",
+      "min72",
+      "min79",
+      "min74",
+      "min72",
+      "maj75",
+      "min79",
+      "min74",
+      "min72",
+      "maj5",
+      "min4",
+      "dom77",
+      "maj0"
+    ],
+    "walk_ok": true,
+    "n_bars": 24,
+    "cadence": [
+      "dom77",
+      "maj0"
+    ]
+  },
+  "perfect": {
+    "bytes": 8686,
+    "drift_ok": true,
+    "voice_len": 46080,
+    "voice_tracks": 5,
+    "offgrid": 0,
+    "harmony": {
+      "ch0": {
+        "n": 125,
+        "passes": true,
+        "untagged_out": 0,
+        "non_resolving": 0,
+        "strong_viol": 0,
+        "collisions": 0
+      },
+      "ch1": {
+        "n": 72,
+        "passes": true,
+        "untagged_out": 0,
+        "non_resolving": 0,
+        "strong_viol": 0,
+        "collisions": 0
+      },
+      "ch2": {
+        "n": 128,
+        "passes": true,
+        "untagged_out": 0,
+        "non_resolving": 0,
+        "strong_viol": 0,
+        "collisions": 0
+      },
+      "ch3": {
+        "n": 384,
+        "passes": true,
+        "untagged_out": 0,
+        "non_resolving": 0,
+        "strong_viol": 0,
+        "collisions": 0
+      },
+      "ch9": {
+        "n": 0,
+        "passes": true,
+        "untagged_out": 0,
+        "non_resolving": 0,
+        "strong_viol": 0,
+        "collisions": 0
+      }
+    }
+  },
+  "humanized": {
+    "bytes": 8689,
+    "drift_ok": true,
+    "voice_len": 46080,
+    "voice_tracks": 5,
+    "offgrid": 647,
+    "harmony": {
+      "ch0": {
+        "n": 125,
+        "passes": true,
+        "untagged_out": 0,
+        "non_resolving": 0,
+        "strong_viol": 0,
+        "collisions": 0
+      },
+      "ch1": {
+        "n": 72,
+        "passes": true,
+        "untagged_out": 0,
+        "non_resolving": 0,
+        "strong_viol": 0,
+        "collisions": 0
+      },
+      "ch2": {
+        "n": 128,
+        "passes": true,
+        "untagged_out": 0,
+        "non_resolving": 0,
+        "strong_viol": 0,
+        "collisions": 0
+      },
+      "ch3": {
+        "n": 384,
+        "passes": true,
+        "untagged_out": 0,
+        "non_resolving": 0,
+        "strong_viol": 0,
+        "collisions": 0
+      },
+      "ch9": {
+        "n": 0,
+        "passes": true,
+        "untagged_out": 0,
+        "non_resolving": 0,
+        "strong_viol": 0,
+        "collisions": 0
+      }
+    }
+  }
+}

@@ -1,0 +1,577 @@
+{
+  "project": "266-pop-subset-walker",
+  "genre": "Pop",
+  "style_key": "Pop",
+  "method": "ABS-002 Subset Walker (abstract) -> concrete pop fill",
+  "layer": "abstract+concrete",
+  "paradigm": "ABS (tonal)",
+  "key": "C major (ionian)",
+  "bpm": 120,
+  "form": [
+    "Intro",
+    "Verse",
+    "Chorus",
+    "Bridge",
+    "Chorus2",
+    "Outro"
+  ],
+  "bars": 24,
+  "tension_curve": [
+    2.5,
+    2.5,
+    2.5,
+    2.5,
+    4.0,
+    4.0,
+    4.0,
+    4.0,
+    6.5,
+    6.5,
+    6.5,
+    6.5,
+    4.5,
+    4.5,
+    4.5,
+    4.5,
+    6.5,
+    6.5,
+    6.5,
+    6.5,
+    2.5,
+    2.5,
+    2.5,
+    2.5
+  ],
+  "walk": [
+    "maj0",
+    "min2",
+    "maj0",
+    "maj5",
+    "maj0",
+    "maj70",
+    "maj0",
+    "min2",
+    "min72",
+    "min74",
+    "min72",
+    "maj75",
+    "min72",
+    "min79",
+    "min74",
+    "min72",
+    "maj75",
+    "min79",
+    "min74",
+    "min72",
+    "maj5",
+    "min4",
+    "dom77",
+    "maj0"
+  ],
+  "chord_labels": [
+    "I",
+    "ii",
+    "I",
+    "IV",
+    "I",
+    "Imaj7",
+    "I",
+    "ii",
+    "ii7",
+    "iii7",
+    "ii7",
+    "IVmaj7",
+    "ii7",
+    "vi7",
+    "iii7",
+    "ii7",
+    "IVmaj7",
+    "vi7",
+    "iii7",
+    "ii7",
+    "IV",
+    "iii",
+    "V7",
+    "I"
+  ],
+  "walk_detail": [
+    {
+      "bar": 0,
+      "pattern": "maj0",
+      "label": "I",
+      "pcs": [
+        0,
+        4,
+        7
+      ],
+      "tension": 2.0,
+      "icv": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "bar": 1,
+      "pattern": "min2",
+      "label": "ii",
+      "pcs": [
+        2,
+        5,
+        9
+      ],
+      "tension": 2.0,
+      "icv": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "bar": 2,
+      "pattern": "maj0",
+      "label": "I",
+      "pcs": [
+        0,
+        4,
+        7
+      ],
+      "tension": 2.0,
+      "icv": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "bar": 3,
+      "pattern": "maj5",
+      "label": "IV",
+      "pcs": [
+        0,
+        5,
+        9
+      ],
+      "tension": 2.0,
+      "icv": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "bar": 4,
+      "pattern": "maj0",
+      "label": "I",
+      "pcs": [
+        0,
+        4,
+        7
+      ],
+      "tension": 2.0,
+      "icv": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "bar": 5,
+      "pattern": "maj70",
+      "label": "Imaj7",
+      "pcs": [
+        0,
+        4,
+        7,
+        11
+      ],
+      "tension": 5.5,
+      "icv": [
+        1,
+        0,
+        1,
+        2,
+        2,
+        0
+      ]
+    },
+    {
+      "bar": 6,
+      "pattern": "maj0",
+      "label": "I",
+      "pcs": [
+        0,
+        4,
+        7
+      ],
+      "tension": 2.0,
+      "icv": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "bar": 7,
+      "pattern": "min2",
+      "label": "ii",
+      "pcs": [
+        2,
+        5,
+        9
+      ],
+      "tension": 2.0,
+      "icv": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "bar": 8,
+      "pattern": "min72",
+      "label": "ii7",
+      "pcs": [
+        0,
+        2,
+        5,
+        9
+      ],
+      "tension": 5.0,
+      "icv": [
+        0,
+        1,
+        2,
+        1,
+        2,
+        0
+      ]
+    },
+    {
+      "bar": 9,
+      "pattern": "min74",
+      "label": "iii7",
+      "pcs": [
+        2,
+        4,
+        7,
+        11
+      ],
+      "tension": 5.0,
+      "icv": [
+        0,
+        1,
+        2,
+        1,
+        2,
+        0
+      ]
+    },
+    {
+      "bar": 10,
+      "pattern": "min72",
+      "label": "ii7",
+      "pcs": [
+        0,
+        2,
+        5,
+        9
+      ],
+      "tension": 5.0,
+      "icv": [
+        0,
+        1,
+        2,
+        1,
+        2,
+        0
+      ]
+    },
+    {
+      "bar": 11,
+      "pattern": "maj75",
+      "label": "IVmaj7",
+      "pcs": [
+        0,
+        4,
+        5,
+        9
+      ],
+      "tension": 5.5,
+      "icv": [
+        1,
+        0,
+        1,
+        2,
+        2,
+        0
+      ]
+    },
+    {
+      "bar": 12,
+      "pattern": "min72",
+      "label": "ii7",
+      "pcs": [
+        0,
+        2,
+        5,
+        9
+      ],
+      "tension": 5.0,
+      "icv": [
+        0,
+        1,
+        2,
+        1,
+        2,
+        0
+      ]
+    },
+    {
+      "bar": 13,
+      "pattern": "min79",
+      "label": "vi7",
+      "pcs": [
+        0,
+        4,
+        7,
+        9
+      ],
+      "tension": 5.0,
+      "icv": [
+        0,
+        1,
+        2,
+        1,
+        2,
+        0
+      ]
+    },
+    {
+      "bar": 14,
+      "pattern": "min74",
+      "label": "iii7",
+      "pcs": [
+        2,
+        4,
+        7,
+        11
+      ],
+      "tension": 5.0,
+      "icv": [
+        0,
+        1,
+        2,
+        1,
+        2,
+        0
+      ]
+    },
+    {
+      "bar": 15,
+      "pattern": "min72",
+      "label": "ii7",
+      "pcs": [
+        0,
+        2,
+        5,
+        9
+      ],
+      "tension": 5.0,
+      "icv": [
+        0,
+        1,
+        2,
+        1,
+        2,
+        0
+      ]
+    },
+    {
+      "bar": 16,
+      "pattern": "maj75",
+      "label": "IVmaj7",
+      "pcs": [
+        0,
+        4,
+        5,
+        9
+      ],
+      "tension": 5.5,
+      "icv": [
+        1,
+        0,
+        1,
+        2,
+        2,
+        0
+      ]
+    },
+    {
+      "bar": 17,
+      "pattern": "min79",
+      "label": "vi7",
+      "pcs": [
+        0,
+        4,
+        7,
+        9
+      ],
+      "tension": 5.0,
+      "icv": [
+        0,
+        1,
+        2,
+        1,
+        2,
+        0
+      ]
+    },
+    {
+      "bar": 18,
+      "pattern": "min74",
+      "label": "iii7",
+      "pcs": [
+        2,
+        4,
+        7,
+        11
+      ],
+      "tension": 5.0,
+      "icv": [
+        0,
+        1,
+        2,
+        1,
+        2,
+        0
+      ]
+    },
+    {
+      "bar": 19,
+      "pattern": "min72",
+      "label": "ii7",
+      "pcs": [
+        0,
+        2,
+        5,
+        9
+      ],
+      "tension": 5.0,
+      "icv": [
+        0,
+        1,
+        2,
+        1,
+        2,
+        0
+      ]
+    },
+    {
+      "bar": 20,
+      "pattern": "maj5",
+      "label": "IV",
+      "pcs": [
+        0,
+        5,
+        9
+      ],
+      "tension": 2.0,
+      "icv": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "bar": 21,
+      "pattern": "min4",
+      "label": "iii",
+      "pcs": [
+        4,
+        7,
+        11
+      ],
+      "tension": 2.0,
+      "icv": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "bar": 22,
+      "pattern": "dom77",
+      "label": "V7",
+      "pcs": [
+        2,
+        5,
+        7,
+        11
+      ],
+      "tension": 7.0,
+      "icv": [
+        0,
+        1,
+        2,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "bar": 23,
+      "pattern": "maj0",
+      "label": "I",
+      "pcs": [
+        0,
+        4,
+        7
+      ],
+      "tension": 2.0,
+      "icv": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        0
+      ]
+    }
+  ],
+  "voices": [
+    "Flute",
+    "Piano",
+    "Bass",
+    "Clarinet",
+    "Drums"
+  ],
+  "humanize_seed": 20261027
+}

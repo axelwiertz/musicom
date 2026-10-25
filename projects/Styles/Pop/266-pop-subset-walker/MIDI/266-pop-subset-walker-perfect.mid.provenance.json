@@ -1,0 +1,171 @@
+{
+  "artifact": "266-pop-subset-walker-perfect.mid",
+  "classification": "ai-generated",
+  "generator": "musicom 266-pop-subset-walker",
+  "sources": [
+    "methods_db:ABS-002 Subset Walker",
+    "style:Pop",
+    "phase:2 rules"
+  ],
+  "parameters": {
+    "phase": "2-perfect",
+    "seed": 20261026,
+    "key": "C major (ionian)",
+    "bpm": 120,
+    "walk": [
+      "maj0",
+      "min2",
+      "maj0",
+      "maj5",
+      "maj0",
+      "maj70",
+      "maj0",
+      "min2",
+      "min72",
+      "min74",
+      "min72",
+      "maj75",
+      "min72",
+      "min79",
+      "min74",
+      "min72",
+      "maj75",
+      "min79",
+      "min74",
+      "min72",
+      "maj5",
+      "min4",
+      "dom77",
+      "maj0"
+    ],
+    "tension_curve": [
+      2.5,
+      2.5,
+      2.5,
+      2.5,
+      4.0,
+      4.0,
+      4.0,
+      4.0,
+      6.5,
+      6.5,
+      6.5,
+      6.5,
+      4.5,
+      4.5,
+      4.5,
+      4.5,
+      6.5,
+      6.5,
+      6.5,
+      6.5,
+      2.5,
+      2.5,
+      2.5,
+      2.5
+    ],
+    "humanize": {
+      "Flute": {
+        "seed": 2046363727,
+        "profile": {
+          "timing_sigma_ms": 4.0,
+          "velocity_sigma": 7.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.02,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.25,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 125,
+        "mean_abs_shift_ticks": 2.888,
+        "max_abs_shift_ticks": 8,
+        "mean_abs_vel_delta": 5.528,
+        "timing_sigma_ticks": 3.84
+      },
+      "Piano": {
+        "seed": 2046363728,
+        "profile": {
+          "timing_sigma_ms": 4.0,
+          "velocity_sigma": 5.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.015,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.25,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 72,
+        "mean_abs_shift_ticks": 3.333,
+        "max_abs_shift_ticks": 11,
+        "mean_abs_vel_delta": 4.319,
+        "timing_sigma_ticks": 3.84
+      },
+      "Bass": {
+        "seed": 2046363729,
+        "profile": {
+          "timing_sigma_ms": 10.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.03,
+          "layback_ms": 8.0,
+          "phrase_corr": 0.25,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 128,
+        "mean_abs_shift_ticks": 8.312,
+        "max_abs_shift_ticks": 25,
+        "mean_abs_vel_delta": 4.492,
+        "timing_sigma_ticks": 9.6
+      },
+      "Clarinet": {
+        "seed": 2046363730,
+        "profile": {
+          "timing_sigma_ms": 4.0,
+          "velocity_sigma": 7.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.02,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.25,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 384,
+        "mean_abs_shift_ticks": 2.927,
+        "max_abs_shift_ticks": 10,
+        "mean_abs_vel_delta": 5.883,
+        "timing_sigma_ticks": 3.84
+      },
+      "Drums": {
+        "seed": 2046363731,
+        "profile": {
+          "timing_sigma_ms": 2.0,
+          "velocity_sigma": 4.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.008,
+          "layback_ms": 0.0,
+          "phrase_corr": 0.25,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 352,
+        "mean_abs_shift_ticks": 1.281,
+        "max_abs_shift_ticks": 5,
+        "mean_abs_vel_delta": 3.179,
+        "timing_sigma_ticks": 1.92
+      }
+    },
+    "note": "grid-locked"
+  },
+  "notes": "",
+  "sha256": "cbf2bbc3953e02b251a424c74d276ba87a6517643ed3a5fe1a234e9644ff92db",
+  "bytes": 8686,
+  "created_utc": "2026-10-25T21:18:36.006959+00:00",
+  "provenance_version": "1.0"
+}
