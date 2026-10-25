@@ -1,0 +1,277 @@
+{
+  "project": "267-blues-interval-exchange",
+  "genre": "Blues",
+  "style_key": "Blues",
+  "method": "121 Interval Exchange Transformation Composition (IETC)",
+  "layer": "concrete",
+  "paradigm": "Rules-Based (ergodic/deterministic)",
+  "key": "Ab natural minor (aeolian)",
+  "tonic_pc": 8,
+  "scale_pcs": [
+    8,
+    10,
+    11,
+    1,
+    3,
+    4,
+    6
+  ],
+  "bpm": 100,
+  "form": "blues-12",
+  "sections": [
+    "Blues"
+  ],
+  "bars": 12,
+  "iet": {
+    "widths": [
+      0.2791121239515654,
+      0.049841450705636677,
+      0.1395560619757827,
+      0.14952435211691004,
+      0.20103474276321326,
+      0.06031042282896397,
+      0.12062084565792794
+    ],
+    "perm": [
+      3,
+      4,
+      5,
+      6,
+      0,
+      1,
+      2
+    ],
+    "alpha": 0.3819660112501052,
+    "alpha_is_irrational": true,
+    "degree_pc": [
+      8,
+      10,
+      11,
+      1,
+      3,
+      4,
+      6
+    ],
+    "degree_name": [
+      "1 (tonic)",
+      "2",
+      "b3",
+      "4",
+      "5",
+      "b6",
+      "b7"
+    ],
+    "ergodic_max_err": 5.4228289639718374e-06,
+    "ergodic_n_iterates": 400000,
+    "note": "width = tonal gravity; unique ergodicity forces visit-frequency == width"
+  },
+  "chords": {
+    "roots_pc": [
+      8,
+      8,
+      8,
+      8,
+      1,
+      1,
+      8,
+      8,
+      3,
+      1,
+      8,
+      8
+    ],
+    "labels": [
+      "i7",
+      "i7",
+      "i7",
+      "i7",
+      "iv7",
+      "iv7",
+      "i7",
+      "i7",
+      "v7",
+      "iv7",
+      "i7",
+      "i7"
+    ],
+    "roots_midi": [
+      44,
+      44,
+      44,
+      44,
+      49,
+      49,
+      44,
+      44,
+      51,
+      49,
+      44,
+      44
+    ],
+    "pcs_by_bar": {
+      "0": [
+        3,
+        6,
+        8,
+        11
+      ],
+      "1": [
+        3,
+        6,
+        8,
+        11
+      ],
+      "2": [
+        3,
+        6,
+        8,
+        11
+      ],
+      "3": [
+        3,
+        6,
+        8,
+        11
+      ],
+      "4": [
+        1,
+        4,
+        8,
+        11
+      ],
+      "5": [
+        1,
+        4,
+        8,
+        11
+      ],
+      "6": [
+        3,
+        6,
+        8,
+        11
+      ],
+      "7": [
+        3,
+        6,
+        8,
+        11
+      ],
+      "8": [
+        1,
+        3,
+        6,
+        10
+      ],
+      "9": [
+        1,
+        4,
+        8,
+        11
+      ],
+      "10": [
+        3,
+        6,
+        8,
+        11
+      ],
+      "11": [
+        3,
+        6,
+        8,
+        11
+      ]
+    }
+  },
+  "voices": [
+    "Harmonica",
+    "Organ",
+    "Bass",
+    "Drums"
+  ],
+  "instruments": [
+    "Harmonica",
+    "Drawbar Organ",
+    "Double Bass",
+    "Drum Kit"
+  ],
+  "humanize_seed": 20261026,
+  "humanize_stats": {
+    "Harmonica": {
+      "seed": 2046363626,
+      "profile": {
+        "timing_sigma_ms": 10.0,
+        "velocity_sigma": 7.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 3.0,
+        "phrase_corr": 0.55,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 57,
+      "mean_abs_shift_ticks": 4.789,
+      "max_abs_shift_ticks": 18,
+      "mean_abs_vel_delta": 5.789,
+      "timing_sigma_ticks": 8.0
+    },
+    "Organ": {
+      "seed": 2046363627,
+      "profile": {
+        "timing_sigma_ms": 10.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.015,
+        "layback_ms": 3.0,
+        "phrase_corr": 0.55,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 48,
+      "mean_abs_shift_ticks": 6.479,
+      "max_abs_shift_ticks": 16,
+      "mean_abs_vel_delta": 4.479,
+      "timing_sigma_ticks": 8.0
+    },
+    "Bass": {
+      "seed": 2046363628,
+      "profile": {
+        "timing_sigma_ms": 10.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.03,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.55,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 96,
+      "mean_abs_shift_ticks": 7.323,
+      "max_abs_shift_ticks": 20,
+      "mean_abs_vel_delta": 4.823,
+      "timing_sigma_ticks": 8.0
+    },
+    "Drums": {
+      "seed": 2046363629,
+      "profile": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.008,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.55,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 146,
+      "mean_abs_shift_ticks": 1.103,
+      "max_abs_shift_ticks": 4,
+      "mean_abs_vel_delta": 3.205,
+      "timing_sigma_ticks": 1.6
+    }
+  }
+}

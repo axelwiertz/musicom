@@ -1,0 +1,41 @@
+{
+  "artifact": "267-blues-interval-exchange-phase1.mid",
+  "classification": "ai-generated",
+  "generator": "musicom 267-blues-interval-exchange",
+  "sources": [
+    "methods_db:121 Interval Exchange Transformation",
+    "style:Blues",
+    "phase:1 raw draft"
+  ],
+  "parameters": {
+    "phase": 1,
+    "seed": 20261025,
+    "key": "Ab natural minor (aeolian)",
+    "bpm": 100,
+    "iet_widths": [
+      0.2791121239515654,
+      0.049841450705636677,
+      0.1395560619757827,
+      0.14952435211691004,
+      0.20103474276321326,
+      0.06031042282896397,
+      0.12062084565792794
+    ],
+    "iet_perm": [
+      3,
+      4,
+      5,
+      6,
+      0,
+      1,
+      2
+    ],
+    "alpha": 0.3819660112501052,
+    "notes": "IET degree pc -> off-grid raw harmonica"
+  },
+  "notes": "",
+  "sha256": "0694bc7502c7f49921b8e33de3e8d19af4945e00e847a4e2842c80a2634d592c",
+  "bytes": 580,
+  "created_utc": "2026-10-25T23:08:48.646784+00:00",
+  "provenance_version": "1.0"
+}

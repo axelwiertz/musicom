@@ -1,0 +1,110 @@
+{
+  "artifact": "267-blues-interval-exchange-humanized.mid",
+  "classification": "ai-generated",
+  "generator": "musicom 267-blues-interval-exchange",
+  "sources": [
+    "methods_db:121 Interval Exchange Transformation",
+    "style:Blues",
+    "phase:2 rules"
+  ],
+  "parameters": {
+    "phase": "2-humanized",
+    "seed": 20261025,
+    "key": "Ab natural minor (aeolian)",
+    "bpm": 100,
+    "iet_widths": [
+      0.2791121239515654,
+      0.049841450705636677,
+      0.1395560619757827,
+      0.14952435211691004,
+      0.20103474276321326,
+      0.06031042282896397,
+      0.12062084565792794
+    ],
+    "alpha": 0.3819660112501052,
+    "humanize": {
+      "Harmonica": {
+        "seed": 2046363626,
+        "profile": {
+          "timing_sigma_ms": 10.0,
+          "velocity_sigma": 7.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.02,
+          "layback_ms": 3.0,
+          "phrase_corr": 0.55,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 57,
+        "mean_abs_shift_ticks": 4.789,
+        "max_abs_shift_ticks": 18,
+        "mean_abs_vel_delta": 5.789,
+        "timing_sigma_ticks": 8.0
+      },
+      "Organ": {
+        "seed": 2046363627,
+        "profile": {
+          "timing_sigma_ms": 10.0,
+          "velocity_sigma": 5.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.015,
+          "layback_ms": 3.0,
+          "phrase_corr": 0.55,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 48,
+        "mean_abs_shift_ticks": 6.479,
+        "max_abs_shift_ticks": 16,
+        "mean_abs_vel_delta": 4.479,
+        "timing_sigma_ticks": 8.0
+      },
+      "Bass": {
+        "seed": 2046363628,
+        "profile": {
+          "timing_sigma_ms": 10.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.03,
+          "layback_ms": 8.0,
+          "phrase_corr": 0.55,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 96,
+        "mean_abs_shift_ticks": 7.323,
+        "max_abs_shift_ticks": 20,
+        "mean_abs_vel_delta": 4.823,
+        "timing_sigma_ticks": 8.0
+      },
+      "Drums": {
+        "seed": 2046363629,
+        "profile": {
+          "timing_sigma_ms": 2.0,
+          "velocity_sigma": 4.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.008,
+          "layback_ms": 0.0,
+          "phrase_corr": 0.55,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 146,
+        "mean_abs_shift_ticks": 1.103,
+        "max_abs_shift_ticks": 4,
+        "mean_abs_vel_delta": 3.205,
+        "timing_sigma_ticks": 1.6
+      }
+    },
+    "note": "blues humanized"
+  },
+  "notes": "",
+  "sha256": "15f7debbb1a730339b6625d1376d6940f39751c7621a30cd04ea6605b31d6dfe",
+  "bytes": 2820,
+  "created_utc": "2026-10-25T23:08:48.685273+00:00",
+  "provenance_version": "1.0"
+}
