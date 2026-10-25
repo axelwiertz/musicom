@@ -1,0 +1,32 @@
+{
+  "artifact": "264-rbncc-west-african-polyrhythm-rework (project)",
+  "classification": "ai-generated",
+  "generator": "musicom nightly rework job (UnitMatrixComposer + Method 082 RBNCC)",
+  "sources": [
+    "source:West African Polyrhythms/210-rbncc-west-african-polyrhythm",
+    "methods_db:082 Random Boolean Network Criticality Composition",
+    "style:West African Polyrhythms"
+  ],
+  "parameters": {
+    "project": "264-rbncc-west-african-polyrhythm-rework",
+    "key": "G major",
+    "bpm": 112,
+    "meter": "4/4",
+    "form": ["Intro", "Verse", "Chorus", "Verse2", "Chorus2",
+             "Break", "Bridge", "Chorus3", "Finale", "Coda"],
+    "bars": 40,
+    "seed": 20260928,
+    "init_seed": 20260935,
+    "humanize_seed": 20260929,
+    "rbn": {"n": 16, "k": 2, "p": 0.5, "transient": 1, "cycle_len": 12,
+            "frozen_nodes": [5]},
+    "decision": "redesign (source failed std6: provenance.json + index.html missing)",
+    "variation_techniques": ["transposition", "inversion", "retrograde",
+                             "augmentation", "diminution", "register shift",
+                             "counterline", "density rise"],
+    "voices": ["Gankogui(Marimba12)", "LeadKora(Kalimba108)",
+               "BassDunun(DoubleBass43)", "Balafon(Xylophone13)", "Drums(ch9)"]
+  },
+  "notes": "Longer (40 vs 32 bars) + more varied (8 techniques) rework, dual-version export.",
+  "provenance_version": "1.0"
+}

@@ -58,6 +58,7 @@ _INSTRUMENT_MODULES = {
     "Guitar.clean_electric.clean_electric": "clean_electric",
     "Guitar.jazz_guitar.jazz_guitar": "jazz_guitar",
     "Guitar.overdriven.overdriven": "overdriven",
+    "Guitar.distortion_guitar.distortion_guitar": "distortion_guitar",
     "Percussion.drum_kit.drum_kit": "drum_kit",
     "Percussion.marimba.marimba": "marimba",
     "Percussion.steel_drums.steel_drums": "steel_drums",
@@ -294,6 +295,7 @@ STEEL_ACOUSTIC = ALL_INSTRUMENTS["steel_acoustic"]
 CLEAN_ELECTRIC = ALL_INSTRUMENTS["clean_electric"]
 JAZZ_GUITAR = ALL_INSTRUMENTS["jazz_guitar"]
 OVERDRIVEN_GUITAR = ALL_INSTRUMENTS["overdriven"]
+DISTORTION_GUITAR = ALL_INSTRUMENTS["distortion_guitar"]
 VIBRAPHONE = ALL_INSTRUMENTS["vibraphone"]
 SITAR = ALL_INSTRUMENTS["sitar"]
 KOTO = ALL_INSTRUMENTS["koto"]
@@ -472,6 +474,8 @@ def registry_table():
             role = "harmony, rhythm, comp, lead, melody, ornament, countermelody, accent"
         elif low == "overdriven guitar":
             role = "lead, melody, accent, rhythm, strum, countermelody"
+        elif low == "distortion guitar":
+            role = "lead, melody, accent, rhythm, power-chord strum, countermelody"
         elif low == "pad 1 (new age)":
             role = "pad, harmony, texture, drone, accent"
         else:
@@ -747,3 +751,15 @@ if __name__ == "__main__":
     print("  SYNTH_BASS_1.range_min =", SYNTH_BASS_1.range_min,
           "SYNTH_BASS_1.range_max =", SYNTH_BASS_1.range_max)
     print("  SYNTH_BASS_1.stem_label =", repr(SYNTH_BASS_1.stem_label))
+
+    print()
+    print("=== Distortion Guitar (GM30) ===")
+    print("  DISTORTION_GUITAR.midi_program =", DISTORTION_GUITAR.midi_program, "(should be 30)")
+    print("  by_name('distortion guitar') =", by_name("distortion guitar"))
+    print("  by_name('DISTORTION GUITAR') =", by_name("DISTORTION GUITAR"))
+    print("  by_program(30) =", by_program(30))
+    print("  DISTORTION_GUITAR.in_sweet_spot(64) =", DISTORTION_GUITAR.in_sweet_spot(64))
+    print("  DISTORTION_GUITAR.in_sweet_spot(24) =", DISTORTION_GUITAR.in_sweet_spot(24))
+    print("  DISTORTION_GUITAR.range_min =", DISTORTION_GUITAR.range_min,
+          "DISTORTION_GUITAR.range_max =", DISTORTION_GUITAR.range_max)
+    print("  DISTORTION_GUITAR.stem_label =", repr(DISTORTION_GUITAR.stem_label))

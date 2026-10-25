@@ -1,0 +1,64 @@
+{
+  "project": "264-rbncc-west-african-polyrhythm-rework",
+  "genre": "West African Polyrhythms",
+  "key": "G major",
+  "bpm": 112,
+  "form": [
+    "Intro",
+    "Verse",
+    "Chorus",
+    "Verse2",
+    "Chorus2",
+    "Break",
+    "Bridge",
+    "Chorus3",
+    "Finale",
+    "Coda"
+  ],
+  "bars": 40,
+  "total_ticks": 76800,
+  "source": "210-rbncc-west-african-polyrhythm",
+  "decision": "redesign (provenance.json + index.html missing)",
+  "rbn": {
+    "n": 16,
+    "k": 2,
+    "p": 0.5,
+    "transient": 1,
+    "cycle_len": 12,
+    "frozen_nodes": [
+      5
+    ]
+  },
+  "variations": {
+    "Intro": "register shift (low) + sparse",
+    "Verse": "base motif (3:4 polyrhythm)",
+    "Chorus": "density rise (tutti)",
+    "Verse2": "transposition (+2 degrees)",
+    "Chorus2": "inversion (pivot degree 4)",
+    "Break": "retrograde + darker progression (vi-IV-ii-I)",
+    "Bridge": "register shift (high) + balafon counterline",
+    "Chorus3": "augmentation (x2 durations)",
+    "Finale": "diminution (16th runs) + density rise",
+    "Coda": "retrograde recap + diminution fragment + fade"
+  },
+  "section_roots_midpoint": {
+    "Intro": "D",
+    "Verse": "D",
+    "Chorus": "C",
+    "Verse2": "D",
+    "Chorus2": "G",
+    "Break": "Am",
+    "Bridge": "Bm",
+    "Chorus3": "C",
+    "Finale": "D",
+    "Coda": "G"
+  },
+  "voices": [
+    "Gankogui",
+    "LeadKora",
+    "BassDunun",
+    "Balafon",
+    "Drums"
+  ],
+  "humanize_seed": 20260929
+}

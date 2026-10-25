@@ -629,6 +629,9 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Guitar | Acoustic Guitar (nylon) | 24 | 40–84 | harmony, rhythm, strum |
 | Guitar | Acoustic Guitar (steel) | 25 | 40–86 | harmony, rhythm, strum, lead, melody, ornament, countermelody |
 | Guitar | Electric Guitar (jazz) | 26 | 28–84 | harmony, rhythm, comp, lead, melody, ornament, countermelody, accent |
+| Guitar | Electric Guitar (clean) | 27 | 28–84 | harmony, rhythm, strum, lead, melody, ornament, countermelody, accent |
+| Guitar | Overdriven Guitar | 29 | 28–84 | lead, melody, accent, rhythm, strum, countermelody |
+| Guitar | Distortion Guitar | 30 | 28–84 | lead, melody, accent, rhythm, power-chord strum, countermelody |
 | Bass | Electric Bass (finger) | 33 | 24–84 | bass, rhythm, countermelody, accent |
 | Bass | Synth Bass 1 | 38 | 24–84 | bass, rhythm, groove, accent |
 | Percussion | Drum Kit | ch9 | 35–81 | rhythm, groove, accent |
@@ -719,7 +722,8 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 48 | String Ensemble 1 | String_Ensemble_1 ✓ (GM_PROGRAMS[48] = "String Ensemble 1"; FluidR3 preset 48 = "Strings" — one-word SF2 spelling, cosmetic only, **no quirk**) |
 || 88 | Pad 1 (new age) | Pad_1_new_age ✓ (GM_PROGRAMS[88] = "Pad 1 (new age)" → sanitized `Pad_1_new_age` — parens stripped, spaces → underscore; FluidR3 preset 88 = **"Fantasia"** — SF2 internal name differs from GM label, cosmetic only, **no routing impact**; preset 89 = "Warm Pad" is the darker sibling) |
 || 38 | Synth Bass 1 | Synth_Bass_1 ✓ (GM_PROGRAMS[38] = "Synth Bass 1"; FluidR3 preset 38 = "Synth Bass 1" — labels match exactly, **no quirk**) |
-|| 44 | Tremolo Strings | Tremolo_Strings ✓ (GM_PROGRAMS[44] = "Tremolo Strings"; FluidR3 preset 44 = "Tremolo" — one-word SF2 spelling, cosmetic only, **no routing impact**) |
+||| 44 | Tremolo Strings | Tremolo_Strings ✓ (GM_PROGRAMS[44] = "Tremolo Strings"; FluidR3 preset 44 = "Tremolo" — one-word SF2 spelling, cosmetic only, **no routing impact**) |
+|| 30 | Distortion Guitar | Distortion_Guitar ✓ (GM_PROGRAMS[30] + FluidR3 preset 30 both "Distortion Guitar" — labels match exactly, **no quirk**) |
 
 > **Known off-by-one in existing entries**: ~~`trumpet.py` uses 57~~ **FIXED 2026-08-27**: trumpet is now 56 (SF2 preset 56=`SoloTrumpet`). `piano.py`=1 → actually Bright Acoustic Piano (GM #2) — cosmetic label difference only, no routing impact. Legacy registry rows kept as-is for piano; new instruments use 0-indexed programs matching pipeline+SF2.
 
@@ -1335,3 +1339,43 @@ lesson; a section tremolo + unison flute on the same pitch is a buzz
 machine). Completes the Strings family bowed block: violin/viola/cello/
 double_bass/fiddle (solo) + pizzicato (plucked section) + string_ensemble
 (sustained section) + tremolo (chattering section).
+
+**Distortion Guitar added** (2026-10-25): GM30, Guitar-family sixth entry —
+the high-gain rock/metal guitar, the HEAVIER sibling of Overdriven Guitar
+GM29 (harder clipping, more compression sustain, darker speaker roll-off)
+(instrument.md + distortion_guitar.py), verified end-to-end
+UnitMatrixComposer → zero-drift ✓ → MIDI (93 bytes) → FluidSynth WAV (743 KB,
+solo render) ✓; RenderPipeline stem label `trackXX_Distortion_Guitar.wav` ✓
+(GM_PROGRAMS[30] = "Distortion Guitar", FluidR3 preset 30 = "Distortion
+Guitar" — labels match exactly, **no quirk**). Karplus-Strong recommended
+(plucked waveguide + HARD non-linear saturation stage — the exact physical
+model; loop_gain **0.9992** — HIGHEST in the plucked set, above overdriven
+0.9990: late(1–2 s) rms/peak 0.0069 vs 0.0013 dull control, **5.4×** —
+hard-clip compression sustain; saturation 0.85 hard clip vs overdriven 0.60
+soft knee; lowpass_hz 3800 darker than overdriven 4000; noise_component
+0.080 highest in the Guitar family). PhaseModSynth secondary (mod_depth 4.5
+— highest FM depth in the family — harmonic foldover = the scream);
+additive tertiary (clipped-wave harmonic stack). Solo-render spectral check:
+4–8 kHz buzz **1.6%** (clean single voice, no comb-filtering). Empirical
+FluidR3 pitch sweep (RMS, notes 28–84): preset 30 audible 6/6, no gaps —
+SF2 never clips a composition. Range 28–84 = GM-patch span (real 22-fret
+guitar E2–E6 = 40–76); sweet spot 52–72 (E3–C5). Registration proof:
+`by_name('distortion guitar')` → Distortion Guitar, `by_program(30)` →
+Distortion Guitar, `in_sweet_spot(64)` = True, `in_sweet_spot(24)` = False.
+Registration in `instrument_registry.py` as DISTORTION_GUITAR convenience
+constant. Role: lead, melody, accent, rhythm, power-chord strum,
+countermelody — the heavy rock/metal voice; single-note leads + root-fifth
+power chords idiomatic, dense chords intermodulate into a wash (never
+full-position chords on high gain). Writing quirks: dynamic range compressed
+to ~10 dB — crescendos via note density, not velocity; vel ≤ 50 =
+clean/crunch sample layer, 60–100 = classic distortion, ≥ 110 = max gain
+(sustain up, separation down); palm-muted 16th chugs (vel 55–70, short
+durations) are the metal rhythm engine; low E (41 Hz) weak on distortion
+(speaker roll-off) — keep lines above MIDI 40. REVERB_TAIL 2.4 s (big
+rock/metal stage — longest in the Guitar family). Selection note: GM80
+"Lead 1 (square)" was the first candidate but the voice_like **talkbox**
+member already claims program 80 / stem `Lead_1_square` as its FluidSynth
+MIDI-export stand-in — a real registration there would collide on
+`by_program(80)` and on the stem filename; GM30 has zero collisions.
+Completes the Guitar family: nylon (24), steel (25), jazz (26), clean (27),
+overdriven (29), distortion (30).

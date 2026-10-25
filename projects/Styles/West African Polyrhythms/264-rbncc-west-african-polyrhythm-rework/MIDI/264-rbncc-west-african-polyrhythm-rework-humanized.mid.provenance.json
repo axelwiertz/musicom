@@ -1,0 +1,143 @@
+{
+  "artifact": "264-rbncc-west-african-polyrhythm-rework-humanized.mid",
+  "classification": "ai-generated",
+  "generator": "musicom nightly 264-rbncc-west-african-polyrhythm-rework",
+  "sources": [
+    "methods_db:082 RBNCC",
+    "style:West African Polyrhythms",
+    "phase:2 rules",
+    "humanize_seed:20260929",
+    "source:210-rbncc-west-african-polyrhythm"
+  ],
+  "parameters": {
+    "phase": "2-humanized",
+    "seed": 20260928,
+    "key": "G major",
+    "bpm": 112,
+    "form": [
+      "Intro",
+      "Verse",
+      "Chorus",
+      "Verse2",
+      "Chorus2",
+      "Break",
+      "Bridge",
+      "Chorus3",
+      "Finale",
+      "Coda"
+    ],
+    "humanize": {
+      "Gankogui": {
+        "seed": 2046353829,
+        "profile": {
+          "timing_sigma_ms": 7.0,
+          "velocity_sigma": 5.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.01,
+          "layback_ms": 1.0,
+          "phrase_corr": 0.4,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 220,
+        "mean_abs_shift_ticks": 4.114,
+        "max_abs_shift_ticks": 16,
+        "mean_abs_vel_delta": 3.982,
+        "timing_sigma_ticks": 6.272
+      },
+      "LeadKora": {
+        "seed": 2046353830,
+        "profile": {
+          "timing_sigma_ms": 7.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.02,
+          "layback_ms": 1.0,
+          "phrase_corr": 0.4,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 479,
+        "mean_abs_shift_ticks": 3.952,
+        "max_abs_shift_ticks": 18,
+        "mean_abs_vel_delta": 5.058,
+        "timing_sigma_ticks": 6.272
+      },
+      "BassDunun": {
+        "seed": 2046353831,
+        "profile": {
+          "timing_sigma_ms": 10.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.03,
+          "layback_ms": 8.0,
+          "phrase_corr": 0.4,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 104,
+        "mean_abs_shift_ticks": 8.365,
+        "max_abs_shift_ticks": 27,
+        "mean_abs_vel_delta": 5.096,
+        "timing_sigma_ticks": 8.96
+      },
+      "Balafon": {
+        "seed": 2046353832,
+        "profile": {
+          "timing_sigma_ms": 7.0,
+          "velocity_sigma": 5.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.01,
+          "layback_ms": 1.0,
+          "phrase_corr": 0.4,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 161,
+        "mean_abs_shift_ticks": 3.851,
+        "max_abs_shift_ticks": 15,
+        "mean_abs_vel_delta": 4.298,
+        "timing_sigma_ticks": 6.272
+      },
+      "Drums": {
+        "seed": 2046353833,
+        "profile": {
+          "timing_sigma_ms": 2.0,
+          "velocity_sigma": 4.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.008,
+          "layback_ms": 0.0,
+          "phrase_corr": 0.4,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 763,
+        "mean_abs_shift_ticks": 1.153,
+        "max_abs_shift_ticks": 5,
+        "mean_abs_vel_delta": 3.092,
+        "timing_sigma_ticks": 1.792
+      }
+    },
+    "note": "style+instrument humanized",
+    "rbn": {
+      "n": 16,
+      "k": 2,
+      "p": 0.5,
+      "transient": 1,
+      "cycle_len": 12,
+      "frozen_nodes": [
+        5
+      ]
+    }
+  },
+  "notes": "",
+  "sha256": "206ecd27e6436002fe1f16cb80771d02c521af846b1e50e727b122dc8d8f5151",
+  "bytes": 13882,
+  "created_utc": "2026-10-25T01:07:34.889874+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,133 @@
+{
+  "job": "random-style production (SP) layer-aligned",
+  "date": "2026-10-25",
+  "seed": 20261025,
+  "method": "SP-119",
+  "method_module": "sound.effects.spectral_resonance_suppressor",
+  "method_desc": "Spectral Resonance Suppressor \u2014 STFT de-resonator: median-baseline excess peak detection, shaped suppression gains, freq+time smoothing, midrange band focus (Newfangled Audio Fixate:Midrange-style)",
+  "layer": "ABSOLUTE",
+  "params": {
+    "sample_rate": 44100,
+    "bpm": 100.0,
+    "ppqn": 480,
+    "rs_amount": 0.7,
+    "rs_threshold_db": 6.0,
+    "rs_width_bins": 24,
+    "rs_band_hz": [
+      200.0,
+      6000.0
+    ],
+    "rs_attack_s": 0.05,
+    "rs_release_s": 0.3,
+    "carrier": "FluidSynth SP-001 (FluidR3_GM, dry -R 0 -C 0 -g 1.2)",
+    "target_lufs": -13.0,
+    "ceiling_db": -1.0
+  },
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Funk/081-funk-schillinger/MIDI/081-funk-schillinger.mid",
+  "source_bpm": 100.0,
+  "source_key": "Bb major",
+  "source_pitch_classes": [
+    0,
+    2,
+    3,
+    5,
+    7,
+    9,
+    10
+  ],
+  "output_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP119-spectral-resonance-suppressor-081-funk-schillinger/SP119-spectral-resonance-suppressor-081-funk-schillinger.wav",
+  "output_ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP119-spectral-resonance-suppressor-081-funk-schillinger/SP119-spectral-resonance-suppressor-081-funk-schillinger.ogg",
+  "raw_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP119-spectral-resonance-suppressor-081-funk-schillinger/SP119_resonance_suppressed_raw.wav",
+  "dry_reference_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP119-spectral-resonance-suppressor-081-funk-schillinger/dry_full_mix_source_reference.wav",
+  "lufs": -13.171117897984804,
+  "peak": 0.8912509381337457,
+  "silence_pct": 6.588639248156654,
+  "rms": 0.1640631144307229,
+  "pitch_verdict": "PASS",
+  "hit_rate": 0.9827586206896551,
+  "he_mean": 0.4221732475315061,
+  "he_dry": 0.4119058495296834,
+  "he_retention": 1.0249265651690698,
+  "resonance_reduction_pct": 0.23720002157412434,
+  "preflight_source": {
+    "grid_off": 0,
+    "off8": 114,
+    "out_scale": 0,
+    "out_chord": 0,
+    "zero_drift": true,
+    "track_ends": [
+      46080
+    ],
+    "total_notes": 811
+  },
+  "resonance_characterization": {
+    "top_resonances_dry": [
+      {
+        "freq_hz": 699.8,
+        "excess_db": 19.02,
+        "note": "F5",
+        "pc_in_Bb": 1
+      },
+      {
+        "freq_hz": 1044.4,
+        "excess_db": 17.6,
+        "note": "C6",
+        "pc_in_Bb": 1
+      },
+      {
+        "freq_hz": 786.0,
+        "excess_db": 17.42,
+        "note": "G5",
+        "pc_in_Bb": 1
+      },
+      {
+        "freq_hz": 1399.7,
+        "excess_db": 13.14,
+        "note": "F6",
+        "pc_in_Bb": 1
+      },
+      {
+        "freq_hz": 882.9,
+        "excess_db": 11.37,
+        "note": "A5",
+        "pc_in_Bb": 1
+      },
+      {
+        "freq_hz": 1571.9,
+        "excess_db": 11.29,
+        "note": "G6",
+        "pc_in_Bb": 1
+      },
+      {
+        "freq_hz": 2799.3,
+        "excess_db": 11.14,
+        "note": "F7",
+        "pc_in_Bb": 1
+      },
+      {
+        "freq_hz": 1862.6,
+        "excess_db": 10.78,
+        "note": "A#6",
+        "pc_in_Bb": 1
+      },
+      {
+        "freq_hz": 2088.7,
+        "excess_db": 10.76,
+        "note": "C7",
+        "pc_in_Bb": 1
+      },
+      {
+        "freq_hz": 3143.8,
+        "excess_db": 10.28,
+        "note": "G7",
+        "pc_in_Bb": 1
+      }
+    ],
+    "all_top_resonances_in_key": true,
+    "peakiness_sum_dry": 901.15,
+    "peakiness_sum_processed_default": 901.63,
+    "peakiness_reduction_default_pct": -0.054,
+    "peakiness_reduction_aggressive_w4_pct": 5.9,
+    "note": "dry FluidSynth GM funk render has no non-musical resonances; top midrange spectral peaks are in-key Bb-major sustained tones (F/C/G/A/Bb + octaves) which a Fixate:Midrange-style de-resonator correctly preserves"
+  }
+}

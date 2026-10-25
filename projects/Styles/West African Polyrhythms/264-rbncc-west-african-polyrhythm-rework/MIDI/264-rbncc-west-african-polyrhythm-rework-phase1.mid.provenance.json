@@ -1,0 +1,46 @@
+{
+  "artifact": "264-rbncc-west-african-polyrhythm-rework-phase1.mid",
+  "classification": "ai-generated",
+  "generator": "musicom nightly 264-rbncc-west-african-polyrhythm-rework",
+  "sources": [
+    "methods_db:082 RBNCC",
+    "style:West African Polyrhythms",
+    "phase:1 raw draft",
+    "source:210-rbncc-west-african-polyrhythm"
+  ],
+  "parameters": {
+    "phase": 1,
+    "seed": 20260928,
+    "init_seed": 20260935,
+    "key": "G major",
+    "bpm": 112,
+    "form": [
+      "Intro",
+      "Verse",
+      "Chorus",
+      "Verse2",
+      "Chorus2",
+      "Break",
+      "Bridge",
+      "Chorus3",
+      "Finale",
+      "Coda"
+    ],
+    "rbn": {
+      "n": 16,
+      "k": 2,
+      "p": 0.5,
+      "transient": 1,
+      "cycle_len": 12,
+      "frozen_nodes": [
+        5
+      ]
+    },
+    "notes": "raw RBN pitch-index, off-grid, chromatic"
+  },
+  "notes": "",
+  "sha256": "6d6a6e6b723eb06de90304d629525c5738acdf8692a081f96acf2a19ea0bf891",
+  "bytes": 3787,
+  "created_utc": "2026-10-25T01:07:34.922217+00:00",
+  "provenance_version": "1.0"
+}

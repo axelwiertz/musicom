@@ -1,0 +1,24 @@
+{
+ "chosen": "West African Polyrhythms/210-rbncc-west-african-polyrhythm",
+ "genre": "West African Polyrhythms",
+ "standard_failures": [
+  "std6_missing prov=False index=False"
+ ],
+ "redesign_required": true,
+ "source_identity": {
+  "key": "G major (pitch classes {7,9,11,0,2,4,6})",
+  "tempo": 112,
+  "meter": "4/4",
+  "form": "Intro/Verse/Chorus/Verse2/Chorus2/Break/Chorus3/Outro = 8 x 4 = 32 bars",
+  "voices": [
+   "Gankogui(Marimba12/ch0)",
+   "LeadKora(Kalimba108/ch1)",
+   "BassDunun(DoubleBass43/ch2)",
+   "Balafon(Xylophone13/ch3)",
+   "Drums(ch9)"
+  ],
+  "method": "082 RBNCC (Random Boolean Network Criticality Composition, N=16 K=2 p=0.5, transient=1 cycle=12 -> 3:4 cross-rhythm)",
+  "progression": "I-IV-V-I (Verse) / I-vi-IV-V (Chorus) / vi-IV-I-V (Break) / G pedal Intro-Outro",
+  "signature": "12-step RBN attractor cycle vs 16-sixteenth bar = 3:4 polyrhythm"
+ }
+}

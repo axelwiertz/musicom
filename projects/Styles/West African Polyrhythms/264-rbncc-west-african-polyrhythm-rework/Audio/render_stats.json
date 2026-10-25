@@ -1,0 +1,28 @@
+{
+  "style": "West African Polyrhythms",
+  "target_lufs": -14.0,
+  "renders": {
+    "perfect": {
+      "wav": "/opt/data/repos/musicom/projects/Styles/West African Polyrhythms/264-rbncc-west-african-polyrhythm-rework/Audio/264-rbncc-west-african-polyrhythm-rework-perfect.wav",
+      "ogg": "/opt/data/repos/musicom/projects/Styles/West African Polyrhythms/264-rbncc-west-african-polyrhythm-rework/Audio/264-rbncc-west-african-polyrhythm-rework-perfect.ogg",
+      "wav_bytes": 16169772,
+      "ogg_bytes": 668713,
+      "silence_ratio": 0.0678,
+      "peak": 0.8895,
+      "duration_s": 91.67,
+      "integrated_lufs": -14.13,
+      "true_peak_db": -1.0
+    },
+    "humanized": {
+      "wav": "/opt/data/repos/musicom/projects/Styles/West African Polyrhythms/264-rbncc-west-african-polyrhythm-rework/Audio/264-rbncc-west-african-polyrhythm-rework-humanized.wav",
+      "ogg": "/opt/data/repos/musicom/projects/Styles/West African Polyrhythms/264-rbncc-west-african-polyrhythm-rework/Audio/264-rbncc-west-african-polyrhythm-rework-humanized.ogg",
+      "wav_bytes": 16171820,
+      "ogg_bytes": 660976,
+      "silence_ratio": 0.0679,
+      "peak": 0.8909,
+      "duration_s": 91.68,
+      "integrated_lufs": -14.14,
+      "true_peak_db": -1.0
+    }
+  }
+}

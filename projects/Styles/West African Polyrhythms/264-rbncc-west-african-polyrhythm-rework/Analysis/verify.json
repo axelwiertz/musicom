@@ -1,0 +1,44 @@
+{
+  "phase1": {
+    "path": "264-rbncc-west-african-polyrhythm-rework-phase1.mid",
+    "bytes": 3787,
+    "n_tracks": 2,
+    "voice_tracks": 1,
+    "voice_len": 76800,
+    "drift_ok": true,
+    "length_seconds": 85.71,
+    "total_notes": 479,
+    "pitched_notes": 479,
+    "offgrid": 442,
+    "scale_viol": 106,
+    "chord_viol": 384
+  },
+  "perfect": {
+    "path": "264-rbncc-west-african-polyrhythm-rework-perfect.mid",
+    "bytes": 13975,
+    "n_tracks": 6,
+    "voice_tracks": 5,
+    "voice_len": 76800,
+    "drift_ok": true,
+    "length_seconds": 85.71,
+    "total_notes": 1727,
+    "pitched_notes": 964,
+    "offgrid": 0,
+    "scale_viol": 0,
+    "chord_viol": 0
+  },
+  "humanized": {
+    "path": "264-rbncc-west-african-polyrhythm-rework-humanized.mid",
+    "bytes": 13882,
+    "n_tracks": 6,
+    "voice_tracks": 5,
+    "voice_len": 76800,
+    "drift_ok": true,
+    "length_seconds": 85.71,
+    "total_notes": 1727,
+    "pitched_notes": 964,
+    "offgrid": 893,
+    "scale_viol": 0,
+    "chord_viol": 21
+  }
+}
