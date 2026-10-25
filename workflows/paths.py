@@ -226,6 +226,20 @@ METHOD_LEVELS = {
     "HC-066": ("L4", False),  # Ground-Bass Variation Set — Chaconne & Passacaglia (spec)
     "HC-067": ("L3", False),  # Call-and-Response (Antiphonal) Composition (spec)
     "HC-068": ("L3", False),  # Musical-Rhetorical Figures Composition (Figurenlehre) (spec)
+    # REGISTERED 2026-10-25 (weekly prose->code promotion, reports 119..125, HC-069..074)
+    "119": ("L4", False),   # Tensor Decomposition Composition (TDC) (spec)
+    "120": ("L3", False),   # Random Matrix Theory Composition (RMTC) (spec)
+    "121": ("L1", False),   # Interval Exchange Transformation Composition (IETC) (spec)
+    "122": ("L1", False),   # Hilbert Curve Space-Filling Composition (HCSC) (spec)
+    "123": ("L2", False),   # Game-Theoretic Best-Response Composition (GTBRC) (spec)
+    "124": ("L2", False),   # Determinantal Point Process Composition (DPPC) (spec)
+    "125": ("L1", False),   # Low-Discrepancy Sequence Composition (LDSC) (spec)
+    "HC-069": ("L4", False),  # Afrobeat Layer-Vamp Architecture & Interlocking Groove Craft (spec)
+    "HC-070": ("L4", False),  # Carnatic Kriti — Sangati-Built Sahitya Architecture (spec)
+    "HC-071": ("L3", False),  # Chorale Harmonization (Four-Part SATB Setting) (spec)
+    "HC-072": ("L4", False),  # Tabla Solo — Gharana Theme-and-Variation Architecture (spec)
+    "HC-073": ("L3", False),  # Lithuanian Sutartinės Secondal-Cluster Interlock (spec)
+    "HC-074": ("L4", False),  # Isorhythmic Motet — Talea & Color Cyclic Architecture (spec)
     # --- L1 MICRO ---
     "002": ("L1", True),   # Markov Transitions
     "011": ("L1", False),  # Voice-Leading Graph Search

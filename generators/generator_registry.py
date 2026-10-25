@@ -100,6 +100,13 @@ GENERATOR_REGISTRY = {
     "HC-066": (None, None, "Ground-Bass Variation Set — Chaconne & Passacaglia Continuous-Variation Craft (spec in human_methods_db.md)"),
     "HC-067": (None, None, "Call-and-Response (Antiphonal) Composition — Leader/Chorus Exchange Craft (spec in human_methods_db.md)"),
     "HC-068": (None, None, "Musical-Rhetorical Figures Composition (Figurenlehre / Musica Poetica) (spec in human_methods_db.md)"),
+    # --- Human methods weekly promotion 2026-10-25 (reports HC-069..HC-074) ---
+    "HC-069": (None, None, "Afrobeat Layer-Vamp Architecture & Interlocking Groove Craft (spec in human_methods_db.md)"),
+    "HC-070": (None, None, "Carnatic Kriti Composition — Sangati-Built Sahitya Architecture (spec in human_methods_db.md)"),
+    "HC-071": (None, None, "Chorale Harmonization (Four-Part Chorale Setting) — SATB Cantus-Firmus Realization (spec in human_methods_db.md)"),
+    "HC-072": (None, None, "Tabla Solo Composition — Gharana Theme-and-Variation Architecture (spec in human_methods_db.md)"),
+    "HC-073": (None, None, "Lithuanian Sutartinės Polyphonic Craft — Secondal-Cluster Interlock (spec in human_methods_db.md)"),
+    "HC-074": (None, None, "Isorhythmic Motet Composition — Talea & Color Cyclic Architecture (spec in human_methods_db.md)"),
 }
 
 
