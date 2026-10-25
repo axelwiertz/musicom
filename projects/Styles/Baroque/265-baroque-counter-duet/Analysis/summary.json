@@ -1,0 +1,152 @@
+{
+  "project": "265-baroque-counter-duet",
+  "genre": "Baroque",
+  "style_key": "Classical",
+  "method": "002 Markov (stochastic degree walk)",
+  "layer": "concrete",
+  "paradigm": "Stochastic",
+  "axis_combo": "concrete-only x Stochastic(Markov 002) x 1+counter x no-perc x harpsichord-continuo x 4-voice x non-crossing x A-A2-B-B2",
+  "key": "D major (ionian)",
+  "bpm": 96,
+  "form": "binary (A A2 B B2)",
+  "form_sections": [
+    "A",
+    "A2",
+    "B",
+    "B2"
+  ],
+  "bars": 16,
+  "total_ticks": 30720,
+  "tonic": 2,
+  "scale_pcs": [
+    2,
+    4,
+    6,
+    7,
+    9,
+    11,
+    1
+  ],
+  "chord_degrees": [
+    0,
+    4,
+    5,
+    3,
+    1,
+    4,
+    0,
+    4,
+    5,
+    3,
+    1,
+    4,
+    0,
+    3,
+    4,
+    0
+  ],
+  "chord_labels": [
+    "D",
+    "A",
+    "Bm",
+    "G",
+    "Em",
+    "A",
+    "D",
+    "A",
+    "Bm",
+    "G",
+    "Em",
+    "A",
+    "D",
+    "G",
+    "A",
+    "D"
+  ],
+  "voices": [
+    "Violin",
+    "Viola",
+    "Harpsichord",
+    "Cello"
+  ],
+  "counter": {
+    "register": [
+      55,
+      72
+    ],
+    "mode": "independent",
+    "constraints": [
+      "contrast (no lead pc doubling)",
+      "complementary density (free 8th slots)"
+    ]
+  },
+  "markov_weights": [
+    [
+      2.0,
+      5.0,
+      2.5,
+      0.4,
+      0.4,
+      0.4,
+      0.4
+    ],
+    [
+      5.0,
+      2.0,
+      5.0,
+      2.5,
+      0.4,
+      0.4,
+      0.4
+    ],
+    [
+      2.5,
+      5.0,
+      2.0,
+      5.0,
+      2.5,
+      0.4,
+      0.4
+    ],
+    [
+      0.4,
+      2.5,
+      5.0,
+      2.0,
+      5.0,
+      2.5,
+      0.4
+    ],
+    [
+      0.4,
+      0.4,
+      2.5,
+      5.0,
+      2.0,
+      5.0,
+      2.5
+    ],
+    [
+      0.4,
+      0.4,
+      0.4,
+      2.5,
+      5.0,
+      2.0,
+      5.0
+    ],
+    [
+      6.4,
+      0.4,
+      0.4,
+      0.4,
+      8.5,
+      5.0,
+      2.0
+    ]
+  ],
+  "raw_event_count": 63,
+  "lead_note_count": 87,
+  "counter_note_count": 40,
+  "humanize_seed": 20261026
+}

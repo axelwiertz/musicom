@@ -1,0 +1,23 @@
+{
+  "artifact": "265-baroque-counter-duet-phase1.mid",
+  "classification": "ai-generated",
+  "generator": "musicom 265-baroque-counter-duet",
+  "sources": [
+    "methods_db:002 Markov (stochastic)",
+    "style:Classical",
+    "phase:1 raw draft"
+  ],
+  "parameters": {
+    "phase": 1,
+    "seed": 20261025,
+    "key": "D major (ionian)",
+    "bpm": 96,
+    "form": "binary (A A2 B B2)",
+    "notes": "raw Markov pitch_index walk -> chromatic off-grid line; pre-rules"
+  },
+  "notes": "",
+  "sha256": "fe2a00b43b3d9c60b92b185cbc4426c8e0930c7ba1b03e70cee6874b04a0fd6c",
+  "bytes": 650,
+  "created_utc": "2026-10-25T21:03:56.639280+00:00",
+  "provenance_version": "1.0"
+}

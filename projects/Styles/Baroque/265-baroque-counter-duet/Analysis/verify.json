@@ -1,0 +1,104 @@
+{
+  "phase1": {
+    "bytes": 650,
+    "pitched": 63,
+    "distinct_pcs": 12,
+    "offscale_pcs": [
+      0,
+      3,
+      5,
+      8,
+      10
+    ],
+    "chromatic_ok": true,
+    "offgrid": 63
+  },
+  "perfect": {
+    "bytes": 2068,
+    "drift_ok": true,
+    "voice_len": 30720,
+    "voice_tracks": 4,
+    "offgrid": 0,
+    "harmony": {
+      "ch0": {
+        "n": 87,
+        "passes": true,
+        "untagged_out": 0,
+        "non_resolving": 0,
+        "strong_viol": 0,
+        "collisions": 0
+      },
+      "ch1": {
+        "n": 40,
+        "passes": true,
+        "untagged_out": 0,
+        "non_resolving": 0,
+        "strong_viol": 0,
+        "collisions": 0
+      },
+      "ch2": {
+        "n": 64,
+        "passes": true,
+        "untagged_out": 0,
+        "non_resolving": 0,
+        "strong_viol": 0,
+        "collisions": 0
+      },
+      "ch3": {
+        "n": 32,
+        "passes": true,
+        "untagged_out": 0,
+        "non_resolving": 0,
+        "strong_viol": 0,
+        "collisions": 0
+      }
+    }
+  },
+  "humanized": {
+    "bytes": 2020,
+    "drift_ok": true,
+    "voice_len": 30720,
+    "voice_tracks": 4,
+    "offgrid": 200,
+    "harmony": {
+      "ch0": {
+        "n": 87,
+        "passes": true,
+        "untagged_out": 0,
+        "non_resolving": 0,
+        "strong_viol": 0,
+        "collisions": 0
+      },
+      "ch1": {
+        "n": 40,
+        "passes": true,
+        "untagged_out": 0,
+        "non_resolving": 0,
+        "strong_viol": 0,
+        "collisions": 0
+      },
+      "ch2": {
+        "n": 64,
+        "passes": true,
+        "untagged_out": 0,
+        "non_resolving": 0,
+        "strong_viol": 0,
+        "collisions": 0
+      },
+      "ch3": {
+        "n": 32,
+        "passes": true,
+        "untagged_out": 0,
+        "non_resolving": 0,
+        "strong_viol": 0,
+        "collisions": 0
+      }
+    }
+  },
+  "counter_contract": {
+    "lead_notes": 87,
+    "counter_notes": 40,
+    "onset_collisions": 0,
+    "pc_doubling": 0
+  }
+}
