@@ -292,6 +292,13 @@ SP_METHODS = {
     "SP-123": ("sound.effects.scale_eq", "Scale-Aware Harmonic EQ — key/scale-locked peaking bank: boosts only in-key note freqs, cuts only out-of-key; Live Band (bands at played MIDI notes); dynamic comp/exp per band; M/S Magic Shelf (low shelf on Mid, high shelf on Sides) (Scaler EQ Pro-style)"),
     "SP-124": ("sound.synthesis.circle_drone", "Six-Oscillator Always-On Drone Voice — per-osc tuning ±3600 cents + Random Tune, per-osc tanh waveshaping, unison (More), Thick detune/stereo width, Unity knob scaling all tuning offsets, drone-length A/R envelope, resonant LP + Schroeder tail (Impact Soundworks Circle Drone Of Doom-style)"),
     "SP-125": ("sound.effects.lofi_reverb", "Multi-Mode Algorithmic Reverb w/ Period-Accurate Lo-Fi Rates — 11 modes (plate/room/hall/cloud/flanged-hall/spring-tank/snappy/alternate-tank), two 32 kHz Abstract Hall modes (dark/gritty), gain-into-clipping drive (Synthesizers.com Q215-style)"),
+    # 2026-10-26 scan
+    "SP-126": ("sound.effects.spectral_journey", "8-Slot Granular × Spectral Morph Engine — complex-STFT journey crossfade across 8 slots, 15 partial effects (shift/stretch/compress/freeze/blur/prune/inharmonic/comb/tilt/formant/phase_rand/gate/mirror/ring), grain length sets time-frequency uncertainty (Blinksonic Holodrift-style)"),
+    "SP-127": ("sound.generators.drumline", "Ten-Model Drum Synthesizer + Funk Humaniser — kick/snare/rim/closed+open hat/conga low+high/shaker/clap/tom, four params each (tone/decay/pitch/snap), per-hit timing+pitch variation, dynamic HPF+LPF+compressor+drive filter (Teenage Engineering OP-XY drumline-style)"),
+    "SP-128": ("sound.effects.quadra_morph", "Four-Corner XY Morph Multi-Effect — 4 effect chains of up to 4 processors (10 implemented), bilinear morph weights, manual/auto/draw/16-step motion, smoothed weights for click-free gestures (Sample Logic Quadra-style)"),
+    "SP-129": ("sound.synthesis.keys_engine", "Tine/Reed/Clav Keys Engine — inharmonic modal tine w/ bark, asymmetric-reed + body resonance, Karplus-Strong clav w/ pickup comb, diatonic Chord mode + scale quantise (TE OP-1 alt-firmware Keys-style)"),
+    "SP-130": ("sound.generators.sample_flipper", "16-Slot Sample Flipper — resample 'grab' into 16 slots, 16 flip modes (reverse/alternate/random/pingpong/ratchet2-4/gates/pitch/stutter/chop-ladder), deterministic playback plan rendering (Knobula Drum Farm Player-style)"),
+    "SP-131": ("sound.generators.key_chord_transformer", "In-Key Chord Transformer — white key -> stacked scale thirds, black key -> 9th/11th/13th colour, exact vs compact voicing, octave shift, seeded randomisation, strum + arpeggiate, performance list capture (Denormal Guardrail-style)"),
 }
 
 
