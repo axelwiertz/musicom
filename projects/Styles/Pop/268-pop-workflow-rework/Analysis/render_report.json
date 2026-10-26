@@ -1,0 +1,25 @@
+{
+  "soundfont": "/opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2",
+  "style": "pop",
+  "target_lufs": -9.0,
+  "perfect": {
+    "lufs": -9.13,
+    "true_peak_db": -1.0,
+    "target_lufs": -9.0,
+    "silence_ratio": 0.0268,
+    "wav": "/opt/data/repos/musicom/projects/Styles/Pop/268-pop-workflow-rework/Audio/268-pop-workflow-rework-perfect.wav",
+    "ogg": "/opt/data/repos/musicom/projects/Styles/Pop/268-pop-workflow-rework/Audio/268-pop-workflow-rework-perfect.ogg",
+    "wav_bytes": 11728172,
+    "ogg_bytes": 525720
+  },
+  "humanized": {
+    "lufs": -9.22,
+    "true_peak_db": -1.0,
+    "target_lufs": -9.0,
+    "silence_ratio": 0.0266,
+    "wav": "/opt/data/repos/musicom/projects/Styles/Pop/268-pop-workflow-rework/Audio/268-pop-workflow-rework-humanized.wav",
+    "ogg": "/opt/data/repos/musicom/projects/Styles/Pop/268-pop-workflow-rework/Audio/268-pop-workflow-rework-humanized.ogg",
+    "wav_bytes": 11727148,
+    "ogg_bytes": 520061
+  }
+}

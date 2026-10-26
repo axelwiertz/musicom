@@ -1,0 +1,121 @@
+{
+  "artifact": "268-pop-workflow-rework-perfect.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom two-phase (phase=2 musicom rules: chord-tone quantize + grid snap + dedup)",
+  "sources": [
+    "Styles/Pop/workflow-demo/pop-001.mid",
+    "/opt/data/repos/musicom/projects/Styles/Pop/268-pop-workflow-rework/MIDI/268-pop-workflow-rework-phase1.mid"
+  ],
+  "parameters": {
+    "bpm": 120,
+    "key": "C",
+    "mode": "major",
+    "style": "pop",
+    "form": "intro-verseA-verseB-prechorus-chorusA-bridge-chorusB-outro",
+    "bars": 32,
+    "sections": [
+      "Intro",
+      "VerseA",
+      "VerseB",
+      "PreChorus",
+      "ChorusA",
+      "Bridge",
+      "ChorusB",
+      "Outro"
+    ],
+    "voices": [
+      [
+        "Lead",
+        "Flute",
+        74
+      ],
+      [
+        "Pad",
+        "Piano",
+        1
+      ],
+      [
+        "Bass",
+        "Contrabass",
+        43
+      ],
+      [
+        "Arp",
+        "Clarinet",
+        71
+      ],
+      [
+        "Drums",
+        "ch9",
+        0
+      ]
+    ],
+    "humanize_seed": 44111,
+    "raw_seed": 97313,
+    "humanize_profiles": {
+      "Lead": {
+        "timing_sigma_ms": 4.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Pad": {
+        "timing_sigma_ms": 4.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.015,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Bass": {
+        "timing_sigma_ms": 5.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Arp": {
+        "timing_sigma_ms": 4.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Drums": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.008,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      }
+    },
+    "phase": 2,
+    "version": "perfect",
+    "off_grid": 0
+  },
+  "notes": "Grid-locked perfect layer.",
+  "sha256": "13a850d68c6bdc2691ef01042b81b4a6571b94a2700be9bebf5c3d933f750a67",
+  "bytes": 10743,
+  "created_utc": "2026-10-26T01:11:27.915094+00:00",
+  "provenance_version": "1.0"
+}

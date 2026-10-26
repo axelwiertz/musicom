@@ -1,0 +1,77 @@
+{
+  "chosen_source": "Styles/Pop/workflow-demo",
+  "chosen_genre": "Pop",
+  "audit_failures": [
+    "no compose.py (engine-authorship evidence missing)",
+    "phase1.mid missing",
+    "project provenance.json + index.html missing"
+  ],
+  "redesign_required": true,
+  "new_project": "/opt/data/repos/musicom/projects/Styles/Pop/268-pop-workflow-rework",
+  "form_bars": 32,
+  "form_sections": 8,
+  "variation_techniques": [
+    "transposition",
+    "inversion",
+    "retrograde",
+    "augmentation",
+    "diminution",
+    "register_shift"
+  ],
+  "section_roots": [
+    "G",
+    "A",
+    "C",
+    "A",
+    "A",
+    "A",
+    "A",
+    "C"
+  ],
+  "hz_seed": 44111,
+  "hz": {
+    "Lead": {
+      "seed": 4455211,
+      "n_notes": 272,
+      "mean_abs_shift_ticks": 3.25,
+      "max_abs_shift_ticks": 11,
+      "mean_abs_vel_delta": 4.522,
+      "timing_sigma_ticks": 3.84
+    },
+    "Pad": {
+      "seed": 4455212,
+      "n_notes": 96,
+      "mean_abs_shift_ticks": 3.75,
+      "max_abs_shift_ticks": 8,
+      "mean_abs_vel_delta": 4.0,
+      "timing_sigma_ticks": 3.84
+    },
+    "Bass": {
+      "seed": 4455213,
+      "n_notes": 160,
+      "mean_abs_shift_ticks": 7.294,
+      "max_abs_shift_ticks": 17,
+      "mean_abs_vel_delta": 3.344,
+      "timing_sigma_ticks": 4.8
+    },
+    "Arp": {
+      "seed": 4455214,
+      "n_notes": 352,
+      "mean_abs_shift_ticks": 2.895,
+      "max_abs_shift_ticks": 11,
+      "mean_abs_vel_delta": 4.034,
+      "timing_sigma_ticks": 3.84
+    },
+    "Drums": {
+      "seed": 4455215,
+      "n_notes": 432,
+      "mean_abs_shift_ticks": 1.164,
+      "max_abs_shift_ticks": 4,
+      "mean_abs_vel_delta": 3.407,
+      "timing_sigma_ticks": 1.92
+    }
+  },
+  "phase1_path": "/opt/data/repos/musicom/projects/Styles/Pop/268-pop-workflow-rework/MIDI/268-pop-workflow-rework-phase1.mid",
+  "perfect_path": "/opt/data/repos/musicom/projects/Styles/Pop/268-pop-workflow-rework/MIDI/268-pop-workflow-rework-perfect.mid",
+  "humanized_path": "/opt/data/repos/musicom/projects/Styles/Pop/268-pop-workflow-rework/MIDI/268-pop-workflow-rework-humanized.mid"
+}

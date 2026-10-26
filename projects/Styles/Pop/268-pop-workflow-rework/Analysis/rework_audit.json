@@ -1,0 +1,23 @@
+{
+  "chosen": "Pop/workflow-demo",
+  "genre": "Pop",
+  "standard_failures": [
+    "no compose.py (engine-authorship evidence missing)",
+    "phase1.mid missing",
+    "project provenance.json + index.html missing"
+  ],
+  "redesign_required": true,
+  "source_identity": {
+    "key": "C major",
+    "bpm": 120,
+    "motif": "C-E-G-C arpeggio (0,2,4,7)",
+    "voices": [
+      "Lead/Flute",
+      "Pad/Piano",
+      "Bass/Contrabass",
+      "Arp/Clarinet",
+      "Drums"
+    ],
+    "form": "intro-verse-chorus-bridge-outro"
+  }
+}
