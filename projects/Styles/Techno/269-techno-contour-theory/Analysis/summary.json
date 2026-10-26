@@ -1,0 +1,214 @@
+{
+  "project": "269-techno-contour-theory",
+  "genre": "Techno",
+  "style_key": "Techno",
+  "method": "095 Contour Theory Composition (CTC)",
+  "layer": "abstract",
+  "paradigm": "Rules-Based (contour class network)",
+  "key": "A natural minor (aeolian)",
+  "tonic_pc": 9,
+  "scale_pcs": [
+    9,
+    11,
+    0,
+    2,
+    4,
+    5,
+    7
+  ],
+  "bpm": 128,
+  "form": "intro-break-drop-outro",
+  "sections": [
+    "Intro",
+    "Break",
+    "Drop",
+    "Outro"
+  ],
+  "bars_per_section": [
+    4,
+    8,
+    8,
+    4
+  ],
+  "total_bars": 24,
+  "contour": {
+    "base_cseg": [
+      0,
+      3,
+      1,
+      2,
+      4,
+      1
+    ],
+    "maxrank": 4,
+    "contour_class": {
+      "P": [
+        0,
+        3,
+        1,
+        2,
+        4,
+        1
+      ],
+      "I": [
+        4,
+        1,
+        3,
+        2,
+        0,
+        3
+      ],
+      "R": [
+        1,
+        4,
+        2,
+        1,
+        3,
+        0
+      ],
+      "RI": [
+        3,
+        0,
+        2,
+        3,
+        1,
+        4
+      ]
+    },
+    "rank_pitch": [
+      57,
+      60,
+      62,
+      64,
+      67
+    ],
+    "note": "contour class P/I/R/RI (up/down/same shape); rank -> pentatonic degree"
+  },
+  "chords": {
+    "labels": [
+      "i",
+      "bVI",
+      "bVII",
+      "i"
+    ],
+    "pcs_by_degree": {
+      "0": [
+        9,
+        0,
+        4
+      ],
+      "1": [
+        5,
+        9,
+        0
+      ],
+      "2": [
+        7,
+        11,
+        2
+      ],
+      "3": [
+        9,
+        0,
+        4
+      ]
+    },
+    "roots_midi": {
+      "0": 45,
+      "1": 41,
+      "2": 43,
+      "3": 45
+    }
+  },
+  "voices": [
+    "Lead",
+    "Pad",
+    "Bass",
+    "Drums"
+  ],
+  "instruments": [
+    "Clavi",
+    "Pad 1 (new age)",
+    "Synth Bass 1",
+    "Drum Kit"
+  ],
+  "humanize_seed": 20261027,
+  "humanize_stats": {
+    "Lead": {
+      "seed": 2046363727,
+      "profile": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.015,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.1,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 144,
+      "mean_abs_shift_ticks": 1.354,
+      "max_abs_shift_ticks": 5,
+      "mean_abs_vel_delta": 3.806,
+      "timing_sigma_ticks": 2.048
+    },
+    "Pad": {
+      "seed": 2046363728,
+      "profile": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.1,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 72,
+      "mean_abs_shift_ticks": 1.389,
+      "max_abs_shift_ticks": 5,
+      "mean_abs_vel_delta": 3.389,
+      "timing_sigma_ticks": 2.048
+    },
+    "Bass": {
+      "seed": 2046363729,
+      "profile": {
+        "timing_sigma_ms": 5.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.1,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 176,
+      "mean_abs_shift_ticks": 7.665,
+      "max_abs_shift_ticks": 20,
+      "mean_abs_vel_delta": 2.949,
+      "timing_sigma_ticks": 5.12
+    },
+    "Drums": {
+      "seed": 2046363730,
+      "profile": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.008,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.1,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 420,
+      "mean_abs_shift_ticks": 1.381,
+      "max_abs_shift_ticks": 5,
+      "mean_abs_vel_delta": 3.383,
+      "timing_sigma_ticks": 2.048
+    }
+  }
+}

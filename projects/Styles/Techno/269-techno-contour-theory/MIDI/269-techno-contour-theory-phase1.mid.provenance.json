@@ -1,0 +1,63 @@
+{
+  "artifact": "269-techno-contour-theory-phase1.mid",
+  "classification": "ai-generated",
+  "generator": "musicom 269-techno-contour-theory",
+  "sources": [
+    "methods_db:095 Contour Theory Composition",
+    "style:Techno",
+    "phase:1 raw draft"
+  ],
+  "parameters": {
+    "phase": 1,
+    "seed": 20261026,
+    "key": "A natural minor (aeolian)",
+    "bpm": 128,
+    "contour_class": {
+      "P": [
+        0,
+        3,
+        1,
+        2,
+        4,
+        1
+      ],
+      "I": [
+        4,
+        1,
+        3,
+        2,
+        0,
+        3
+      ],
+      "R": [
+        1,
+        4,
+        2,
+        1,
+        3,
+        0
+      ],
+      "RI": [
+        3,
+        0,
+        2,
+        3,
+        1,
+        4
+      ]
+    },
+    "rank_pitch": [
+      57,
+      60,
+      62,
+      64,
+      67
+    ],
+    "notes": "contour network P/I/R/RI -> off-grid raw clavi"
+  },
+  "notes": "",
+  "sha256": "3ff4acfbc3ad0c709008925a34508e4edfe30b2456af9b09e3d59d3aaabaf3b0",
+  "bytes": 1072,
+  "created_utc": "2026-10-26T23:08:07.843745+00:00",
+  "provenance_version": "1.0"
+}

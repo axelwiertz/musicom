@@ -1,0 +1,90 @@
+{
+  "artifact": "269-techno-contour-theory-perfect.mid",
+  "classification": "ai-generated",
+  "generator": "musicom 269-techno-contour-theory",
+  "sources": [
+    "methods_db:095 Contour Theory Composition",
+    "style:Techno",
+    "phase:2 rules"
+  ],
+  "parameters": {
+    "phase": "2-perfect",
+    "seed": 20261026,
+    "key": "A natural minor (aeolian)",
+    "bpm": 128,
+    "contour_class": {
+      "P": [
+        0,
+        3,
+        1,
+        2,
+        4,
+        1
+      ],
+      "I": [
+        4,
+        1,
+        3,
+        2,
+        0,
+        3
+      ],
+      "R": [
+        1,
+        4,
+        2,
+        1,
+        3,
+        0
+      ],
+      "RI": [
+        3,
+        0,
+        2,
+        3,
+        1,
+        4
+      ]
+    },
+    "humanize": {
+      "Lead": {
+        "seed": 2046363727,
+        "n_notes": 144,
+        "mean_abs_shift_ticks": 1.354,
+        "max_abs_shift_ticks": 5,
+        "mean_abs_vel_delta": 3.806,
+        "timing_sigma_ticks": 2.048
+      },
+      "Pad": {
+        "seed": 2046363728,
+        "n_notes": 72,
+        "mean_abs_shift_ticks": 1.389,
+        "max_abs_shift_ticks": 5,
+        "mean_abs_vel_delta": 3.389,
+        "timing_sigma_ticks": 2.048
+      },
+      "Bass": {
+        "seed": 2046363729,
+        "n_notes": 176,
+        "mean_abs_shift_ticks": 7.665,
+        "max_abs_shift_ticks": 20,
+        "mean_abs_vel_delta": 2.949,
+        "timing_sigma_ticks": 5.12
+      },
+      "Drums": {
+        "seed": 2046363730,
+        "n_notes": 420,
+        "mean_abs_shift_ticks": 1.381,
+        "max_abs_shift_ticks": 5,
+        "mean_abs_vel_delta": 3.383,
+        "timing_sigma_ticks": 2.048
+      }
+    },
+    "note": "grid-locked"
+  },
+  "notes": "",
+  "sha256": "0067e6bb40118c0b8bf6a0e7eba39776199dc8b5c1c1ca45a15985746fd5a257",
+  "bytes": 6560,
+  "created_utc": "2026-10-26T23:08:07.975069+00:00",
+  "provenance_version": "1.0"
+}
