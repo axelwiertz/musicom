@@ -88,6 +88,7 @@ _INSTRUMENT_MODULES = {
     "World.taiko.taiko": "taiko",
     "World.pan_flute.pan_flute": "pan_flute",
     "Vocal.human_voice.human_voice": "human_voice",
+    "Vocal.choir.choir": "choir",
     "Vocal.voice_like.voice_like_voice": "voice_like",
     "Woodwind.whistle.whistle": "whistle",
     "Woodwind.soprano_sax.soprano_sax": "soprano_sax",
@@ -317,6 +318,7 @@ TUBULAR_BELLS = ALL_INSTRUMENTS["tubular_bells"]
 PICCOLO = ALL_INSTRUMENTS["piccolo"]
 TAIKO = ALL_INSTRUMENTS["taiko"]
 HUMAN_VOICE = ALL_INSTRUMENTS["human_voice"]
+CHOIR = ALL_INSTRUMENTS["choir"]
 PAN_FLUTE = ALL_INSTRUMENTS["pan_flute"]
 WHISTLE = ALL_INSTRUMENTS["whistle"]
 SOPRANO_SAX = ALL_INSTRUMENTS["soprano_sax"]
@@ -454,6 +456,8 @@ def registry_table():
             role = "accent, rhythm, drone, ornament"
         elif low == "human voice":
             role = "lead, melody, countermelody"
+        elif low == "choir aahs":
+            role = "pad, harmony, melody, countermelody, anthem, texture"
         elif low == "soprano saxophone":
             role = "lead, countermelody, ornament, accent"
         elif low == "electric piano 1":
@@ -558,6 +562,12 @@ if __name__ == "__main__":
     print("  HARP.midi_program =", HARP.midi_program, "(should be 46)")
     print("  by_name('harp') =", by_name("harp"))
     print("  by_name('orchestral harp') =", by_name("orchestral harp"))
+    print("  CHOIR.midi_program =", CHOIR.midi_program, "(should be 52)")
+    print("  by_name('choir') =", by_name("choir"))
+    print("  by_name('choir aahs') =", by_name("choir aahs"))
+    print("  by_program(52) =", by_program(52))
+    print("  CHOIR.in_sweet_spot(64) =", CHOIR.in_sweet_spot(64))
+    print("  CHOIR.in_sweet_spot(24) =", CHOIR.in_sweet_spot(24))
     print("  by_program(46) =", by_program(46))
     print("  HARP.in_sweet_spot(69) =", HARP.in_sweet_spot(69))
     print("  XYLOPHONE.midi_program =", XYLOPHONE.midi_program, "(should be 13)")

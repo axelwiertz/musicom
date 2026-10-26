@@ -1,0 +1,56 @@
+Registered: choir -> <Instrument Choir Aahs (family=Vocal, program=52, range=40-88)>
+Registry table (Vocal rows):
+  | Vocal | Choir Aahs | 52 | 40–88 | pad, harmony, melody, countermelody, anthem, texture |
+  | Vocal | Didgeridoo | 20 | 24–55 | lead, harmony, accent |
+  | Vocal | Human Voice | 53 | 48–84 | lead, melody, countermelody |
+  | Vocal | Jaw Harp | 106 | 36–74 | lead, harmony, accent |
+  | Vocal | Kazoo | 59 | 50–86 | lead, harmony, accent |
+  | Vocal | Singing Saw | 81 | 55–91 | lead, harmony, accent |
+  | Vocal | Talkbox | 80 | 45–84 | lead, harmony, accent |
+  | Vocal | Vox Humana | 20 | 48–84 | lead, harmony, accent |
+  | Vocal | Vox Humana | 20 | 48–84 | lead, harmony, accent |
+
+Constants:
+  CHOIR.midi_program = 52 (GM 'Choir Aahs')
+  range              = 40–88
+  solo_range         = (55, 79), sweet_spot = (48, 76)
+  by_name('choir')   = <Instrument Choir Aahs (family=Vocal, program=52, range=40-88)>
+  by_name('choir aahs') = <Instrument Choir Aahs (family=Vocal, program=52, range=40-88)>
+  by_program(52)     = <Instrument Choir Aahs (family=Vocal, program=52, range=40-88)>
+  by_program(53)     = <Instrument Human Voice (family=Vocal, program=53, range=48-84)>  (human_voice — distinct)
+  stem_label         = 'Choir_Aahs'
+  zones              = {'bass': (40, 55), 'tenor': (48, 64), 'alto': (53, 72), 'soprano': (60, 88)}
+  articulations      = ['ah', 'legato', 'swell', 'staccato', 'marcato', 'decrescendo', 'hum']
+  synthesis          = additive
+  reverb_tail        = 2.8s, pan = 0.0
+  A4 = 440.0 Hz, C4 = 261.6 Hz
+
+Zero-drift: True (OK)
+MIDI: /opt/data/projects/Instruments/_test/choir_test.mid (81 bytes)
+WAV (solo): /opt/data/projects/Instruments/_test/choir_test.wav (1077292 bytes)
+Spectral check: 4-8kHz buzz energy = 2.0% (OK)
+
+SoundFont: /opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2
+Pitch sweep (RMS, velocity 74, 1-bar held notes):
+  note  24: RMS =    963.5 AUDIBLE
+  note  36: RMS =    987.7 AUDIBLE
+  note  40: RMS =    903.5 AUDIBLE
+  note  48: RMS =   1065.4 AUDIBLE
+  note  60: RMS =   1015.0 AUDIBLE
+  note  72: RMS =   1167.3 AUDIBLE
+  note  84: RMS =   1360.2 AUDIBLE
+  note  88: RMS =   1363.4 AUDIBLE
+  note  96: RMS =   1387.9 AUDIBLE
+  audible notes: [24, 36, 40, 48, 60, 72, 84, 88, 96] (no gaps — SF2 never clips a composition)
+
+SF2 preset 52 -> 'Ahh Choir' (53 -> 'Ohh Voices')
+  GM_PROGRAMS[52] = 'Choir Aahs'
+
+Stems rendered (1 files):
+  track00_Choir_Aahs.wav (1077292 bytes)
+
+Additive choir envelope: weights_len=44100 late-sustain max=0.718 (target ≥ 0.45 — the 2026-10-11 collapse-bug gate)
+SingingVoice section voice (alto, E4): peak=0.800 sustain_rms=0.2318 sustain/peak=0.290
+Section stack (5 voices, ±0.90% detune): rms=0.0878, max=1.722
+
+ALL CHECKS PASSED

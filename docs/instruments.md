@@ -653,6 +653,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | World | Pan Flute | 75 | 55–100 | lead, melody, ornament, drone, accent |
 | World | Shakuhachi | 77 | 55–100 | lead, melody, ornament, drone, accent |
 | Synth | Pad 1 (new age) | 88 | 36–96 | pad, harmony, texture, drone, accent |
+| Vocal | Choir Aahs | 52 | 40–88 | pad, harmony, melody, countermelody, anthem, texture |
 | Woodwind | Bagpipe | 109 | 53–96 | lead, melody, ornament, drone, accent |
 | Woodwind | Ocarina | 79 | 55–96 | lead, harmony, accent |
 
@@ -706,6 +707,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 110 | Fiddle | Fiddle ✓ (GM_PROGRAMS[110] + FluidR3 preset 110 both "Fiddle") |
 | 77 | Shakuhachi | Shakuhachi ✓ **no quirk** (GM_PROGRAMS[77] + FluidR3 preset 77 both "Shakuhachi") |
 | 75 | Pan Flute | Pan_Flute ✓ (GM_PROGRAMS[75] = "Pan Flute"; FluidR3 preset 75 = "Pan Flute" — labels match exactly, **no quirk**) |
+| 52 | Choir Aahs | Choir_Aahs ✓ (GM_PROGRAMS[52] = "Choir Aahs"; FluidR3 preset 52 = "Ahh Choir" — cosmetic SF2 spelling, **no routing impact**) |
 || 22 | Harmonica | Harmonica ✓ (GM_PROGRAMS[22] + FluidR3 preset 22 both "Harmonica") |
 || 79 | Ocarina | Ocarina ✓ (GM_PROGRAMS[79] + FluidR3 preset 79 both "Ocarina") |
 || 114 | Steel Drums | Steel Drums ✓ (GM_PROGRAMS[114] + FluidR3 preset 114 both "Steel Drums") |
@@ -1379,3 +1381,53 @@ MIDI-export stand-in — a real registration there would collide on
 `by_program(80)` and on the stem filename; GM30 has zero collisions.
 Completes the Guitar family: nylon (24), steel (25), jazz (26), clean (27),
 overdriven (29), distortion (30).
+
+**Choir added** (2026-10-26): GM52, Vocal-family third entry — the sampled
+**mixed chorus** singing a wordless open "ah" (SATB ensemble, the anthem/
+pad/cinematic voice), distinct from the formant-synth SOLO `human_voice`
+(GM53 stand-in) and from the six non-vocal `voice_like` members
+(instrument.md + choir.py), verified end-to-end UnitMatrixComposer →
+zero-drift ✓ → MIDI (81 bytes) → FluidSynth WAV (1.08 MB, solo render,
+FluidR3 via `discover_soundfont()`) ✓; RenderPipeline stem label
+`trackXX_Choir_Aahs.wav` ✓ (GM_PROGRAMS[52] = "Choir Aahs", FluidR3 preset 52
+= "Ahh Choir" — cosmetic SF2 spelling, **no routing impact**). Additive
+recommended (`additive.py` SoundWave — a chorus IS a formant-shaped harmonic
+stack: choir_ah weights [1.0, 0.72, 0.55, 0.60, 0.34, 0.22, 0.14, 0.09] with
+the "ah" formants F1 730 / F2 1090 / F3 2440 Hz; attack 0.18 s — a section
+breathes in together, slower than a soloist 0.05 s, faster than a pad 0.55 s;
+detune ±0.009 between string-section ±0.006 and synth-pad ±0.012; stack 5;
+release 0.45; sustain 0.88; breath 0.10). Additive smoke: late-sustain
+envelope weight 0.718 (collapse gate ≥ 0.45; decay_S 1e-4 per-grid-step quirk
+inherited from synth_pad — and `get_adsr_weights` length proportions MUST sum
+to 1.0, it asserts). SingingVoice secondary: 4–5 voices, alto profile,
+vibrato 5.2 Hz ±0.28 st (narrower than a soloist's ±0.45), aspiration 0.22,
+shimmer 0.05, per-voice seeds; single voice peak 0.800 sustain/peak 0.290,
+5-voice detuned stack rms 0.0878 but raw sum peaks 1.722 → **normalize the
+stack** before summing. PhaseModSynth tertiary (sine FM "vocal pad", ratio
+2.0, depth 1.6). Solo-render spectral check: 4–8 kHz buzz **2.0%** (clean
+single voice, no comb-filtering). Empirical FluidR3 pitch sweep (RMS, notes
+24–96): preset 52 audible EVERY note (963 / 988 / 904 / 1065 / 1015 / 1167 /
+1360 / 1363 / 1388 for 24/36/40/48/60/72/84/88/96 — no gaps), RMS RISES with
+pitch, so balance soprano ~8–12 velocity units under the bass. Range 40–88 =
+real SATB span E2–E6 (patch plays wider; extremes thin out); sweet spot 48–76
+(C3–E5), solo range 55–79. Registration proof: `by_name('choir')` and
+`by_name('choir aahs')` → Choir Aahs, `by_program(52)` → Choir Aahs,
+`by_program(53)` → Human Voice (distinct), `in_sweet_spot(64)` = True,
+`in_sweet_spot(24)` = False. Registration in `instrument_registry.py` as
+CHOIR convenience constant + a `registry_table()` role row. Role: pad,
+harmony, melody (slow sustained lines only), countermelody, anthem, texture —
+NOT a bass voice below E2, NOT a comping/rhythm voice (every onset is a
+~100–300 ms breath, so fast stabs blur), NOT a melisma soloist (use
+`human_voice`). REVERB_TAIL 2.8 s (hall/church; between string_ensemble 2.6
+and synth_pad 3.2 — dry choir sounds like a Mellotron). EQ: cut 350 Hz
+(stacked "ah" formants mud up the low-mid), boost 3 kHz vowel presence,
+gentle 7 kHz air (a choir is not a cymbal). Layering quirk: octaves or
+thirds/sixths with a different patch — NEVER unison with another melodic
+patch on the same pitches (choir + string ensemble unison = the 2026-09-01
+comb-filter buzz). Channel quirk: melodic channel (0–9); channel 9 triggers
+the drum map. Selection note: the first candidate was a Synth Lead at GM81
+"Lead 2 (sawtooth)", but **both GM80 and GM81 are claimed by voice_like
+stand-ins** (talkbox / singing_saw — the latter also owns the
+`Lead_2_sawtooth` stem filename), so that registration failed
+`by_program(81)` uniqueness; GM52 has zero collisions. Opens the Vocal
+family beyond `human_voice` + `voice_like`.

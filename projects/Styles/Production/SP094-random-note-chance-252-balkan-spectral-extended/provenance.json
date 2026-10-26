@@ -1,0 +1,192 @@
+{
+  "job": "random-style production (SP) layer-aligned",
+  "date": "2026-10-26",
+  "seed": 20261026,
+  "method": "SP-094",
+  "method_module": "sound.generators.random_note_gen",
+  "method_desc": "Random Note Generator + Note Chance Sequencer (Maschine 3.7 Random Note Gen / Note Event Chance-style)",
+  "layer": "ABSOLUTE",
+  "params": {
+    "sample_rate": 44100,
+    "bpm": 132.0,
+    "ppqn": 480,
+    "meter": "7/8",
+    "bar_ticks": 1680,
+    "n_bars": 32,
+    "voices": {
+      "Bass": {
+        "density": 0.8,
+        "step": 240,
+        "chance": 0.92,
+        "register": [
+          43,
+          55
+        ],
+        "program": 43,
+        "channel": 1,
+        "chord": [
+          0,
+          2
+        ],
+        "dur": 320,
+        "sequential": false,
+        "vel": [
+          80,
+          112
+        ]
+      },
+      "Accordion": {
+        "density": 0.45,
+        "step": 120,
+        "chance": 0.8,
+        "register": [
+          55,
+          67
+        ],
+        "program": 21,
+        "channel": 2,
+        "chord": [
+          0,
+          1,
+          2
+        ],
+        "dur": 200,
+        "sequential": false,
+        "vel": [
+          72,
+          104
+        ]
+      },
+      "Clarinet": {
+        "density": 0.38,
+        "step": 120,
+        "chance": 0.72,
+        "register": [
+          67,
+          86
+        ],
+        "program": 71,
+        "channel": 3,
+        "chord": [
+          0,
+          1,
+          2
+        ],
+        "dur": 180,
+        "sequential": true,
+        "vel": [
+          88,
+          118
+        ]
+      },
+      "Violin": {
+        "density": 0.28,
+        "step": 120,
+        "chance": 0.62,
+        "register": [
+          79,
+          91
+        ],
+        "program": 40,
+        "channel": 4,
+        "chord": [
+          0,
+          1,
+          2
+        ],
+        "dur": 120,
+        "sequential": true,
+        "vel": [
+          64,
+          96
+        ]
+      }
+    },
+    "generator_scale_pool": "minor@D3 == G Dorian pitch-class set",
+    "carrier": "FluidSynth SP-001 (FluidR3_GM, dry -R 0 -C 0 -g 1.2)",
+    "target_lufs": -16.0,
+    "ceiling_db": -1.0
+  },
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Balkan/252-balkan-spectral-extended/MIDI/252-balkan-spectral-extended-perfect.mid",
+  "groove_midi": "/opt/data/repos/musicom/projects/Styles/Production/SP094-random-note-chance-252-balkan-spectral-extended/MIDI/SP094-random-note-chance.mid",
+  "source_bpm": 132.0,
+  "source_key": "G Dorian",
+  "source_pitch_classes": [
+    0,
+    2,
+    4,
+    5,
+    7,
+    9,
+    10
+  ],
+  "bar_degrees": [
+    "i",
+    "i",
+    "VII",
+    "VII",
+    "i",
+    "VII",
+    "IV",
+    "i",
+    "IV",
+    "ii",
+    "VII",
+    "v",
+    "III",
+    "VII",
+    "IV",
+    "i",
+    "v",
+    "IV",
+    "ii",
+    "VII",
+    "VII",
+    "IV",
+    "ii",
+    "v",
+    "IV",
+    "VII",
+    "i",
+    "IV",
+    "i",
+    "VII",
+    "IV",
+    "i"
+  ],
+  "output_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP094-random-note-chance-252-balkan-spectral-extended/SP094-random-note-chance-252-balkan-spectral-extended.wav",
+  "output_ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP094-random-note-chance-252-balkan-spectral-extended/SP094-random-note-chance-252-balkan-spectral-extended.ogg",
+  "raw_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP094-random-note-chance-252-balkan-spectral-extended/SP094_random_note_chance_raw.wav",
+  "dry_reference_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP094-random-note-chance-252-balkan-spectral-extended/dry_full_mix_source_reference.wav",
+  "lufs": -16.006918477014302,
+  "peak": 0.8912509381337456,
+  "silence_pct": 7.486101694915254,
+  "rms": 0.12311272519729403,
+  "pitch_verdict": "PASS",
+  "hit_rate": 0.9901960784313726,
+  "he_mean": 0.5427986081240329,
+  "dry_he": 0.5096864655034734,
+  "he_retention": 1.0649657090420304,
+  "preflight_source": {
+    "grid_off": 0,
+    "off8": 24,
+    "out_scale": 0,
+    "out_chord": 0,
+    "zero_drift": true,
+    "track_ends": [
+      53760
+    ],
+    "total_notes": 708
+  },
+  "output_audit": {
+    "grid_off": 0,
+    "off8": 185,
+    "out_scale": 0,
+    "out_chord": 0,
+    "zero_drift": true,
+    "track_ends": [
+      53760
+    ],
+    "total_notes": 533
+  }
+}

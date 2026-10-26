@@ -88,10 +88,11 @@ Fiddle.
 (`Bagpipe` lives under `Woodwind/` — it was filed there for the double-reed
 chanter; the count above follows `instrument_registry.ALL_INSTRUMENTS`.)
 
-> Registry load count is **38** — the Vocal voice-like family registers six
+> Registry load count is **77** — the Vocal voice-like family registers six
 > members individually (vox_humana, kazoo, jaw_harp, didgeridoo, singing_saw,
-> talkbox) on top of the per-instrument entries. `registry.md` carries the
-> curated per-family table.
+> talkbox) on top of the per-instrument entries, and the instrument tree itself
+> is now 71 folders (latest: Vocal/choir, GM52 Choir Aahs, 2026-10-26).
+> `registry.md` carries the curated per-family table.
 
 ## Musicom Integration
 
