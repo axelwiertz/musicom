@@ -1,0 +1,22 @@
+{
+  "artifact": "270-een-klein-meisje-suite-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.method.markov_interval_walk_phase1 (extension of 239)",
+  "sources": [
+    "source:239-een-klein-meisje-rework (Dutch Folk nursery)"
+  ],
+  "parameters": {
+    "bpm": 105,
+    "bars": 32,
+    "seed": 85854,
+    "phase": 1,
+    "quantized": false,
+    "key": "G Major",
+    "form": "8 sections (extended from 6)"
+  },
+  "notes": "Raw Markov interval walk over G-major scale degrees, unquantized, single voice, pre-rules. Extension of 239.",
+  "sha256": "e316cbd9f1180cc1db1ee99bb3655270cc149961041f8a26a4fb53ac8095845f",
+  "bytes": 1737,
+  "created_utc": "2026-10-27T01:08:24.743625+00:00",
+  "provenance_version": "1.0"
+}

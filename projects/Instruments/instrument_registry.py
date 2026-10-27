@@ -94,6 +94,7 @@ _INSTRUMENT_MODULES = {
     "Woodwind.soprano_sax.soprano_sax": "soprano_sax",
     "Bass.electric_bass.electric_bass": "electric_bass",
     "Bass.synth_bass_1.synth_bass_1": "synth_bass_1",
+    "Bass.fretless_bass.fretless_bass": "fretless_bass",
     "Woodwind.recorder.recorder": "recorder",
     "Synth.synth_pad.synth_pad": "synth_pad",
 }
@@ -324,6 +325,7 @@ WHISTLE = ALL_INSTRUMENTS["whistle"]
 SOPRANO_SAX = ALL_INSTRUMENTS["soprano_sax"]
 ELECTRIC_BASS = ALL_INSTRUMENTS["electric_bass"]
 SYNTH_BASS_1 = ALL_INSTRUMENTS["synth_bass_1"]
+FRETLESS_BASS = ALL_INSTRUMENTS["fretless_bass"]
 RECORDER = ALL_INSTRUMENTS["recorder"]
 PIZZICATO_STRINGS = ALL_INSTRUMENTS["pizzicato_strings"]
 STRING_ENSEMBLE = ALL_INSTRUMENTS["string_ensemble"]
@@ -468,6 +470,8 @@ def registry_table():
             role = "bass, rhythm, countermelody, accent"
         elif low == "synth bass 1":
             role = "bass, rhythm, groove, accent"
+        elif low == "fretless bass":
+            role = "bass, melody, countermelody, groove, slide, color"
         elif low == "recorder":
             role = "lead, melody, ornament, countermelody, accent"
         elif low == "acoustic guitar (steel)":
@@ -773,3 +777,15 @@ if __name__ == "__main__":
     print("  DISTORTION_GUITAR.range_min =", DISTORTION_GUITAR.range_min,
           "DISTORTION_GUITAR.range_max =", DISTORTION_GUITAR.range_max)
     print("  DISTORTION_GUITAR.stem_label =", repr(DISTORTION_GUITAR.stem_label))
+
+    print()
+    print("=== Fretless Bass (GM35) ===")
+    print("  FRETLESS_BASS.midi_program =", FRETLESS_BASS.midi_program, "(should be 35)")
+    print("  by_name('fretless bass') =", by_name("fretless bass"))
+    print("  by_name('FRETLESS BASS') =", by_name("FRETLESS BASS"))
+    print("  by_program(35) =", by_program(35))
+    print("  FRETLESS_BASS.in_sweet_spot(43) =", FRETLESS_BASS.in_sweet_spot(43))
+    print("  FRETLESS_BASS.in_sweet_spot(24) =", FRETLESS_BASS.in_sweet_spot(24))
+    print("  FRETLESS_BASS.range_min =", FRETLESS_BASS.range_min,
+          "FRETLESS_BASS.range_max =", FRETLESS_BASS.range_max)
+    print("  FRETLESS_BASS.stem_label =", repr(FRETLESS_BASS.stem_label))

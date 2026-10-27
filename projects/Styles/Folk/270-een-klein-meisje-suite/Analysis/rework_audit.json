@@ -1,0 +1,21 @@
+{
+  "chosen": "Folk/239-een-klein-meisje-rework",
+  "genre": "Folk",
+  "standard_failures": [],
+  "redesign_required": false,
+  "source_identity": {
+    "key": "G Major",
+    "bpm": 105,
+    "meter": "4/4",
+    "motif": "I-arpeggio 1-3-5-5-3-1 + neighbor 2-3; IV/dominant cadence",
+    "voices": [
+      "Lead/Choir Aahs 53",
+      "Counter/Violin 41",
+      "Harmony/Steel Guitar 25",
+      "Bass/33",
+      "Drums ch9"
+    ],
+    "form": "6 sections / 24 bars (Intro-A-B-A2-C-Outro)",
+    "note": "pre-2026-10-17: single phase-2 MIDI, no perfect/humanized pair"
+  }
+}

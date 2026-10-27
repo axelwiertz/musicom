@@ -633,6 +633,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Guitar | Overdriven Guitar | 29 | 28–84 | lead, melody, accent, rhythm, strum, countermelody |
 | Guitar | Distortion Guitar | 30 | 28–84 | lead, melody, accent, rhythm, power-chord strum, countermelody |
 | Bass | Electric Bass (finger) | 33 | 24–84 | bass, rhythm, countermelody, accent |
+| Bass | Fretless Bass | 35 | 24–72 | bass, melody, countermelody, groove, slide, color |
 | Bass | Synth Bass 1 | 38 | 24–84 | bass, rhythm, groove, accent |
 | Percussion | Drum Kit | ch9 | 35–81 | rhythm, groove, accent |
 | Percussion | Glockenspiel | 9 | 79–108 | lead, melody, ornament, accent, countermelody |
@@ -724,6 +725,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 48 | String Ensemble 1 | String_Ensemble_1 ✓ (GM_PROGRAMS[48] = "String Ensemble 1"; FluidR3 preset 48 = "Strings" — one-word SF2 spelling, cosmetic only, **no quirk**) |
 || 88 | Pad 1 (new age) | Pad_1_new_age ✓ (GM_PROGRAMS[88] = "Pad 1 (new age)" → sanitized `Pad_1_new_age` — parens stripped, spaces → underscore; FluidR3 preset 88 = **"Fantasia"** — SF2 internal name differs from GM label, cosmetic only, **no routing impact**; preset 89 = "Warm Pad" is the darker sibling) |
 || 38 | Synth Bass 1 | Synth_Bass_1 ✓ (GM_PROGRAMS[38] = "Synth Bass 1"; FluidR3 preset 38 = "Synth Bass 1" — labels match exactly, **no quirk**) |
+| 35 | Fretless Bass | Fretless_Bass ✓ (GM_PROGRAMS[35] + FluidR3 preset 35 both "Fretless Bass" — labels match exactly, **no quirk**) |
 ||| 44 | Tremolo Strings | Tremolo_Strings ✓ (GM_PROGRAMS[44] = "Tremolo Strings"; FluidR3 preset 44 = "Tremolo" — one-word SF2 spelling, cosmetic only, **no routing impact**) |
 || 30 | Distortion Guitar | Distortion_Guitar ✓ (GM_PROGRAMS[30] + FluidR3 preset 30 both "Distortion Guitar" — labels match exactly, **no quirk**) |
 
@@ -1431,3 +1433,60 @@ stand-ins** (talkbox / singing_saw — the latter also owns the
 `Lead_2_sawtooth` stem filename), so that registration failed
 `by_program(81)` uniqueness; GM52 has zero collisions. Opens the Vocal
 family beyond `human_voice` + `voice_like`.
+
+**Fretless Bass added** (2026-10-27): GM35, **Bass-family third entry** — the
+solidbody bass with the frets pulled and the board filled/sanded, so pitch
+comes from finger POSITION: continuous portamento slides, a nasal vocal
+"mwah" midrange from the compliant fingerboard stop, and no fretwire click
+on attack (Jaco Pastorius, Pino Palladino, Mick Karn, Sting, Tony Franklin,
+Gary Willis are the reference players). Distinct from the fretted Electric
+Bass (finger) GM33 — same body/electronics family, different string stop —
+and from the fretted-adjacent Synth Bass 1 GM38 (oscillator + filter, no
+string at all). GM35 was completely unclaimed (33, 38 were the only Bass
+rows), so `by_program(35)` and the `trackXX_Fretless_Bass.wav` filename are
+collision-free. Files: `Bass/fretless_bass/instrument.md` +
+`fretless_bass.py`. Verified end-to-end UnitMatrixComposer (1 bar, 1 section,
+Fretless Bass + drum-kit context) → **zero-drift ✓** → MIDI 172 bytes →
+FluidSynth WAV **751,148 bytes** SOLO render (FluidR3 via
+`discover_soundfont()`) ✓; RenderPipeline stems on disk
+`track00_Fretless_Bass.wav` (751,148 B) + `track01_Drums.wav` (706,092 B) ✓;
+stem label `GM_PROGRAMS[35]` = **"Fretless Bass"** and FluidR3 preset 35 =
+**"Fretless Bass"** — labels match exactly, **no quirk**; solo-render
+spectral 4–8 kHz buzz **4.6%** (clean single voice, dark mid-forward
+timbre). Empirical FluidR3 pitch sweep (RMS at velocity 90, notes
+24/28/33/40/45/50/55/60/62/67/72): 1817 / 1740 / 1826 / 1940 / 2430 / 1877 /
+1842 / 1809 / 1766 / 1519 / 1043 — every note audible, **no gaps**, level
+essentially flat 24–62 (the 45 peak is the patch's own "mwah" sample) and
+falling at 72 where the fundamental thins → keep sustained lines at or below
+C4 and use 63–72 only for exposed fills. Range 24–72 (C1–C5; standard
+4-string is E1–G3 = 28–55, 5-string adds B0 = 23), sweet spot 33–55 (A1–G3),
+solo range 28–60. Registration proof: `by_name('fretless bass')` /
+`by_name('FRETLESS BASS')` → Fretless Bass, `by_program(35)` → Fretless Bass
+(distinct from 33 / 38), `in_sweet_spot(43)` = True, `in_sweet_spot(24)` =
+False, `stem_label = 'Fretless_Bass'`; `registry_table()` row
+"| Bass | Fretless Bass | 35 | 24–72 | bass, melody, countermelody, groove,
+slide, color |". Synthesis: **Karplus-Strong primary** (SP-011 — a plucked
+string waveguide IS the physical model; `loop_gain` 0.9975, slightly longer
+than the fretted bass 0.9970 because the bare board damps the top of the
+string less than a fret crown; `lowpass_hz` 2200 — darker than the fretted
+bass, which is where the nasal "mwah" lives; width 0.55; role bass),
+**BowedString secondary for ARCO only** (bow_velocity 0.18, bow_force 1.4,
+bow_position 0.18 sul tasto, lpf_coef 0.6, slow 0.16 s attack — a bowed
+electric bass reads as a cello), **ModalSynth `'string'` weak fallback**.
+Smoke tests: Karplus E2 peak 0.290, head_rms 0.0069 → tail_rms 0.0005 (real
+string decay, not a DC plateau); BowedString constructs and renders.
+Production: REVERB_TAIL 1.6 s (a touch longer than the fretted bass 1.4 —
+the vocal quality wants air), EQ cut 250 Hz / **boost 800 Hz +3 dB** (the
+"mwah" formant — THE fretless EQ move) / 5 kHz air shelf for fingerboard
+squeak, PAN centre. Quirks: (1) **SF2 does not honour portamento** — FluidR3
+preset 35 bakes some slides into velocity layers but a MIDI CC5/CC65
+portamento assignment is ignored, so write a slide as a fast chromatic run of
+short notes (e.g. 44 → 45 at 16th-note spacing) unless the renderer applies
+pitch-bend; (2) monotimbral and effectively monophonic — no chords (thumb-
+position dyads are an overdub, not a patch behaviour), so never ask the
+composer for a 3-note "fretless chord"; (3) **no unison doubling** with
+another melodic patch on the same pitches (the 2026-09-01 comb-filter rule) —
+octaves or a low bass note an octave+ below are fine, and a drum kit is fine.
+Role: bass, melody (mid register 51–62 only), countermelody, groove, slide,
+color — NOT a pad/chord voice, NOT a slap voice (slap needs frets), NOT a
+high lead above C4.

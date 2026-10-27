@@ -1,0 +1,161 @@
+{
+  "artifact": "270-een-klein-meisje-suite-humanized.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom two-phase (phase=2 + humanization) (extension of 239)",
+  "sources": [
+    "/opt/data/projects/Styles/Folk/270-een-klein-meisje-suite/MIDI/270-een-klein-meisje-suite-perfect.mid"
+  ],
+  "parameters": {
+    "bpm": 105,
+    "key": "G",
+    "mode": "major",
+    "style": "folk",
+    "form": "Intro-A-Ap-B-C-D-E-Outro",
+    "bars": 32,
+    "sections": [
+      "Intro",
+      "A",
+      "Ap",
+      "B",
+      "C",
+      "D",
+      "E",
+      "Outro"
+    ],
+    "voices": [
+      [
+        "Lead",
+        "Choir Aahs",
+        53
+      ],
+      [
+        "Counter",
+        "Violin",
+        41
+      ],
+      [
+        "Harmony",
+        "Steel Guitar",
+        25
+      ],
+      [
+        "Bass",
+        "Electric Bass",
+        33
+      ],
+      [
+        "Drums",
+        "ch9",
+        0
+      ]
+    ],
+    "humanize_seed": 78280,
+    "raw_seed": 85854,
+    "humanize_profiles": {
+      "Lead": {
+        "timing_sigma_ms": 9.0,
+        "velocity_sigma": 9.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.04,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.5,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Counter": {
+        "timing_sigma_ms": 9.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.5,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Harmony": {
+        "timing_sigma_ms": 9.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.5,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Bass": {
+        "timing_sigma_ms": 5.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.5,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Drums": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.008,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.5,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      }
+    },
+    "phase": 2,
+    "version": "humanized",
+    "humanize_stats": {
+      "Lead": {
+        "seed": 7906280,
+        "n_notes": 188,
+        "mean_abs_shift_ticks": 4.495,
+        "max_abs_shift_ticks": 14,
+        "mean_abs_vel_delta": 7.665,
+        "timing_sigma_ticks": 7.56
+      },
+      "Counter": {
+        "seed": 7906281,
+        "n_notes": 240,
+        "mean_abs_shift_ticks": 5.788,
+        "max_abs_shift_ticks": 18,
+        "mean_abs_vel_delta": 4.617,
+        "timing_sigma_ticks": 7.56
+      },
+      "Harmony": {
+        "seed": 7906282,
+        "n_notes": 512,
+        "mean_abs_shift_ticks": 5.832,
+        "max_abs_shift_ticks": 21,
+        "mean_abs_vel_delta": 4.791,
+        "timing_sigma_ticks": 7.56
+      },
+      "Bass": {
+        "seed": 7906283,
+        "n_notes": 128,
+        "mean_abs_shift_ticks": 6.5,
+        "max_abs_shift_ticks": 15,
+        "mean_abs_vel_delta": 3.445,
+        "timing_sigma_ticks": 4.2
+      },
+      "Drums": {
+        "seed": 7906284,
+        "n_notes": 384,
+        "mean_abs_shift_ticks": 1.198,
+        "max_abs_shift_ticks": 5,
+        "mean_abs_vel_delta": 3.323,
+        "timing_sigma_ticks": 1.68
+      }
+    }
+  },
+  "notes": "Humanized layer (style folk + per-instrument DNA).",
+  "sha256": "6c7b3eb9009055c6e727a9628ed99f256b1d8ad319d41e01b9405ea1d01226df",
+  "bytes": 11136,
+  "created_utc": "2026-10-27T01:08:24.855830+00:00",
+  "provenance_version": "1.0"
+}

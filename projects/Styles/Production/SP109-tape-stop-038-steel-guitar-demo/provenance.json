@@ -1,0 +1,90 @@
+{
+  "job": "random-style production (SP) layer-aligned",
+  "date": "2026-10-27",
+  "seed": 20261027,
+  "method": "SP-109",
+  "method_module": "sound.effects.tape_stop",
+  "method_desc": "Tape-Stop / Turntable-Stop Processor \u2014 Classic mode (rate-ramp resample: pitch+time drop together) (Cableguys TimeStop-style)",
+  "layer": "ABSOLUTE",
+  "params": {
+    "sample_rate": 44100,
+    "bpm": 120.0,
+    "ppqn": 480,
+    "meter": "4/4",
+    "bar_ticks": 1920,
+    "n_bars": 16,
+    "tape_stop_mode": "classic",
+    "tape_stop_seconds": 2.5,
+    "tape_stop_gain_comp": true,
+    "carrier": "FluidSynth SP-001 (FluidR3_GM, dry -R 0 -C 0 -g 1.2)",
+    "target_lufs": -14.0,
+    "ceiling_db": -1.0
+  },
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Country/038-steel-guitar-demo/MIDI/country_ensemble_16bar.mid",
+  "reworked_midi": "/opt/data/repos/musicom/projects/Styles/Production/SP109-tape-stop-038-steel-guitar-demo/MIDI/reworked.mid",
+  "source_bpm": 120.0,
+  "source_key": "G major",
+  "source_pitch_classes": [
+    0,
+    2,
+    4,
+    6,
+    7,
+    9,
+    11
+  ],
+  "bar_roots": [
+    7,
+    7,
+    7,
+    7,
+    0,
+    0,
+    7,
+    7,
+    2,
+    2,
+    0,
+    0,
+    7,
+    7,
+    7,
+    7
+  ],
+  "output_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP109-tape-stop-038-steel-guitar-demo/SP109-tape-stop-038-steel-guitar-demo.wav",
+  "output_ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP109-tape-stop-038-steel-guitar-demo/SP109-tape-stop-038-steel-guitar-demo.ogg",
+  "raw_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP109-tape-stop-038-steel-guitar-demo/SP109_tape_stop_raw.wav",
+  "dry_reference_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP109-tape-stop-038-steel-guitar-demo/dry_full_mix_reworked_reference.wav",
+  "lufs": -14.000000000000004,
+  "peak": 0.7444538543406163,
+  "silence_pct": 15.090649213871963,
+  "rms": 0.13656512651020594,
+  "pitch_verdict": "PASS",
+  "hit_rate": 1.0,
+  "he_mean": 0.7619041818171488,
+  "he_dry": 0.761974132832261,
+  "he_retention": 0.9999081976512088,
+  "preflight_source_before_rework": {
+    "grid_off": 448,
+    "off8": 480,
+    "out_scale": 0,
+    "out_chord": 105,
+    "zero_drift": false,
+    "track_ends": [
+      30480,
+      34330
+    ],
+    "total_notes": 576
+  },
+  "preflight_source_after_rework": {
+    "grid_off": 0,
+    "off8": 0,
+    "out_scale": 0,
+    "out_chord": 0,
+    "zero_drift": true,
+    "track_ends": [
+      30720
+    ],
+    "total_notes": 320
+  }
+}

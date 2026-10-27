@@ -1,0 +1,25 @@
+{
+  "soundfont": "/opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2",
+  "style": "folk",
+  "target_lufs": -16.0,
+  "perfect": {
+    "lufs": -16.0,
+    "true_peak_db": -3.33,
+    "target_lufs": -16.0,
+    "silence_ratio": 0.0644,
+    "wav": "/opt/data/projects/Styles/Folk/270-een-klein-meisje-suite/Audio/270-een-klein-meisje-suite-perfect.wav",
+    "ogg": "/opt/data/projects/Styles/Folk/270-een-klein-meisje-suite/Audio/270-een-klein-meisje-suite-perfect.ogg",
+    "wav_bytes": 13795372,
+    "ogg_bytes": 566603
+  },
+  "humanized": {
+    "lufs": -16.0,
+    "true_peak_db": -3.4,
+    "target_lufs": -16.0,
+    "silence_ratio": 0.0683,
+    "wav": "/opt/data/projects/Styles/Folk/270-een-klein-meisje-suite/Audio/270-een-klein-meisje-suite-humanized.wav",
+    "ogg": "/opt/data/projects/Styles/Folk/270-een-klein-meisje-suite/Audio/270-een-klein-meisje-suite-humanized.ogg",
+    "wav_bytes": 13868076,
+    "ogg_bytes": 565555
+  }
+}

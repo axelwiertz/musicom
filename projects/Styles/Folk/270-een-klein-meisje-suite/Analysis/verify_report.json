@@ -1,0 +1,52 @@
+{
+  "phase1": {
+    "size": 1737,
+    "size_ok": true,
+    "tracks": 2,
+    "voice": 1,
+    "lens": [
+      61440
+    ],
+    "drift": true,
+    "pitched": 188,
+    "offgrid": 172,
+    "scale_viol": 24,
+    "chord_viol": 103
+  },
+  "perfect": {
+    "size": 11413,
+    "size_ok": true,
+    "tracks": 6,
+    "voice": 5,
+    "lens": [
+      61440,
+      61440,
+      61440,
+      61440,
+      61440
+    ],
+    "drift": true,
+    "pitched": 1068,
+    "offgrid": 0,
+    "scale_viol": 0,
+    "chord_viol": 0
+  },
+  "humanized": {
+    "size": 11136,
+    "size_ok": true,
+    "tracks": 6,
+    "voice": 5,
+    "lens": [
+      61440,
+      61440,
+      61440,
+      61440,
+      61440
+    ],
+    "drift": true,
+    "pitched": 1068,
+    "offgrid": 1007,
+    "scale_viol": 0,
+    "chord_viol": 12
+  }
+}
