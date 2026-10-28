@@ -1,0 +1,41 @@
+{
+  "soundfont": "/opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2",
+  "style": "funk",
+  "target_lufs": -13.0,
+  "phase1": {
+    "lufs": -13.0,
+    "true_peak_db": -4.6,
+    "target_lufs": -13.0,
+    "silence_ratio": 0.7943,
+    "rms_mean": 0.0335,
+    "rms_max": 0.1776,
+    "wav_bytes": 8417068,
+    "ogg_bytes": 94662,
+    "wav": "/opt/data/projects/Styles/Funk/271-funk-snn-spiking/Audio/271-funk-snn-spiking-phase1.wav",
+    "ogg": "/opt/data/projects/Styles/Funk/271-funk-snn-spiking/Audio/271-funk-snn-spiking-phase1.ogg"
+  },
+  "perfect": {
+    "lufs": -13.0,
+    "true_peak_db": -1.0,
+    "target_lufs": -13.0,
+    "silence_ratio": 0.0487,
+    "rms_mean": 0.1591,
+    "rms_max": 0.1842,
+    "wav_bytes": 8518188,
+    "ogg_bytes": 372671,
+    "wav": "/opt/data/projects/Styles/Funk/271-funk-snn-spiking/Audio/271-funk-snn-spiking-perfect.wav",
+    "ogg": "/opt/data/projects/Styles/Funk/271-funk-snn-spiking/Audio/271-funk-snn-spiking-perfect.ogg"
+  },
+  "humanized": {
+    "lufs": -13.01,
+    "true_peak_db": -1.0,
+    "target_lufs": -13.0,
+    "silence_ratio": 0.0497,
+    "rms_mean": 0.1593,
+    "rms_max": 0.1864,
+    "wav_bytes": 8518188,
+    "ogg_bytes": 366718,
+    "wav": "/opt/data/projects/Styles/Funk/271-funk-snn-spiking/Audio/271-funk-snn-spiking-humanized.wav",
+    "ogg": "/opt/data/projects/Styles/Funk/271-funk-snn-spiking/Audio/271-funk-snn-spiking-humanized.ogg"
+  }
+}

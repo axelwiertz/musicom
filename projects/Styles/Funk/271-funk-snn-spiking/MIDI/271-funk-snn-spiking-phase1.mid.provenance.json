@@ -1,0 +1,22 @@
+{
+  "artifact": "271-funk-snn-spiking-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.method.109_snn_spiking_phase1",
+  "sources": [],
+  "parameters": {
+    "bpm": 105,
+    "bars": 20,
+    "seed": 2034316830,
+    "phase": 1,
+    "quantized": false,
+    "key": "F Major",
+    "form": "rondo A-B-A-C-A",
+    "style": "funk",
+    "method": "109 SNN-C (Izhikevich, theta-gamma, STDP-decode)"
+  },
+  "notes": "Raw Izhikevich SNN spike-train decode: 12 tonotopic columns, theta (bar) + gamma (16th) clock, insula tension envelope. Float pitch, off-grid onsets, single voice, pre-rules.",
+  "sha256": "24fd632b2b9c61349e54b8b9f9bfd76e52d357e1c978f263acd53828e5887383",
+  "bytes": 544,
+  "created_utc": "2026-10-28T23:14:50.694798+00:00",
+  "provenance_version": "1.0"
+}

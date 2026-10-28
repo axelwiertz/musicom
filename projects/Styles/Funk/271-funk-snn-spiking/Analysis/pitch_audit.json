@@ -1,0 +1,47 @@
+{
+  "Lead": {
+    "audible": 255,
+    "strong_ok": 39,
+    "weak_in_scale": 212,
+    "tagged_ornaments": 4,
+    "tagged_resolving": 4,
+    "tagged_non_resolving": 0,
+    "untagged_out_of_scale": 0,
+    "strong_violations": 0,
+    "passes": true
+  },
+  "Guitar": {
+    "audible": 360,
+    "strong_ok": 0,
+    "weak_in_scale": 360,
+    "tagged_ornaments": 0,
+    "tagged_resolving": 0,
+    "tagged_non_resolving": 0,
+    "untagged_out_of_scale": 0,
+    "strong_violations": 0,
+    "passes": true
+  },
+  "Brass": {
+    "audible": 120,
+    "strong_ok": 0,
+    "weak_in_scale": 120,
+    "tagged_ornaments": 0,
+    "tagged_resolving": 0,
+    "tagged_non_resolving": 0,
+    "untagged_out_of_scale": 0,
+    "strong_violations": 0,
+    "passes": true
+  },
+  "Bass": {
+    "audible": 180,
+    "strong_ok": 40,
+    "weak_in_scale": 140,
+    "tagged_ornaments": 0,
+    "tagged_resolving": 0,
+    "tagged_non_resolving": 0,
+    "untagged_out_of_scale": 0,
+    "strong_violations": 0,
+    "passes": true
+  },
+  "all_pass": true
+}

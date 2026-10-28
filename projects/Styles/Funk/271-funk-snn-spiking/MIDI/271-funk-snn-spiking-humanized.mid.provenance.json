@@ -1,0 +1,161 @@
+{
+  "artifact": "271-funk-snn-spiking-humanized.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom two-phase (phase=2 + humanization) (method 109 SNN-C)",
+  "sources": [
+    "/opt/data/projects/Styles/Funk/271-funk-snn-spiking/MIDI/271-funk-snn-spiking-perfect.mid"
+  ],
+  "parameters": {
+    "bpm": 105,
+    "key": "F",
+    "mode": "major",
+    "style": "funk",
+    "form": "rondo A-B-A-C-A",
+    "bars": 20,
+    "sections": [
+      "A1",
+      "B",
+      "A2",
+      "C",
+      "A3"
+    ],
+    "method": "109 SNN-C",
+    "layer": "concrete",
+    "paradigm": "Nature-Led",
+    "voices": [
+      [
+        "Lead",
+        "Clavinet",
+        7
+      ],
+      [
+        "Guitar",
+        "Clean Electric",
+        27
+      ],
+      [
+        "Brass",
+        "Brass Section",
+        61
+      ],
+      [
+        "Bass",
+        "Electric Bass",
+        33
+      ],
+      [
+        "Drums",
+        "ch9",
+        0
+      ]
+    ],
+    "humanize_seed": 38252,
+    "raw_seed": 2034316830,
+    "humanize_profiles": {
+      "Lead": {
+        "timing_sigma_ms": 4.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.015,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Guitar": {
+        "timing_sigma_ms": 4.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Brass": {
+        "timing_sigma_ms": 4.0,
+        "velocity_sigma": 8.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Bass": {
+        "timing_sigma_ms": 5.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Drums": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.008,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      }
+    },
+    "phase": 2,
+    "version": "humanized",
+    "humanize_stats": {
+      "Lead": {
+        "seed": 3863452,
+        "n_notes": 255,
+        "mean_abs_shift_ticks": 2.592,
+        "max_abs_shift_ticks": 8,
+        "mean_abs_vel_delta": 4.059,
+        "timing_sigma_ticks": 3.36
+      },
+      "Guitar": {
+        "seed": 3863453,
+        "n_notes": 360,
+        "mean_abs_shift_ticks": 3.186,
+        "max_abs_shift_ticks": 10,
+        "mean_abs_vel_delta": 4.864,
+        "timing_sigma_ticks": 3.36
+      },
+      "Brass": {
+        "seed": 3863454,
+        "n_notes": 120,
+        "mean_abs_shift_ticks": 3.367,
+        "max_abs_shift_ticks": 8,
+        "mean_abs_vel_delta": 6.583,
+        "timing_sigma_ticks": 3.36
+      },
+      "Bass": {
+        "seed": 3863455,
+        "n_notes": 180,
+        "mean_abs_shift_ticks": 6.95,
+        "max_abs_shift_ticks": 17,
+        "mean_abs_vel_delta": 3.105,
+        "timing_sigma_ticks": 4.2
+      },
+      "Drums": {
+        "seed": 3863456,
+        "n_notes": 450,
+        "mean_abs_shift_ticks": 1.113,
+        "max_abs_shift_ticks": 4,
+        "mean_abs_vel_delta": 3.167,
+        "timing_sigma_ticks": 1.68
+      }
+    }
+  },
+  "notes": "Humanized layer (style funk + per-instrument DNA).",
+  "sha256": "0c2e1bee848e3f8e17051cd4d93558d73e9ce3ea15fd128a0a367cb360fb060c",
+  "bytes": 10142,
+  "created_utc": "2026-10-28T23:14:50.875694+00:00",
+  "provenance_version": "1.0"
+}
