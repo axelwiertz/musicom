@@ -1,0 +1,32 @@
+{
+  "perfect": {
+    "tracks": 5,
+    "all_equal_len": true,
+    "len": 49920,
+    "pitched_onsets": 352,
+    "off_grid": 0,
+    "scale_viol": 0,
+    "chord_viol": 0,
+    "size_bytes": 5531
+  },
+  "humanized": {
+    "tracks": 5,
+    "all_equal_len": true,
+    "len": 49920,
+    "pitched_onsets": 352,
+    "off_grid": 325,
+    "scale_viol": 0,
+    "chord_viol": 7,
+    "size_bytes": 5501
+  },
+  "phase1": {
+    "tracks": 1,
+    "all_equal_len": true,
+    "len": 49920,
+    "pitched_onsets": 138,
+    "off_grid": 133,
+    "scale_viol": 0,
+    "chord_viol": 70,
+    "size_bytes": 1295
+  }
+}

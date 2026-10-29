@@ -1,0 +1,116 @@
+{
+  "artifact": "272-indie-pop-sunset-rework-humanized.mid",
+  "classification": "ai-assisted",
+  "generator": "two-phase: original pitch-pattern (2,3,-2,0,5) dorian motif + musicom rules",
+  "sources": [],
+  "parameters": {
+    "phase": 2,
+    "humanized": true,
+    "humanize_seed": 1622159179,
+    "style": "pop",
+    "humanize_summary": {
+      "Lead": {
+        "seed": 163838077079,
+        "profile": {
+          "timing_sigma_ms": 4.0,
+          "velocity_sigma": 7.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.02,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.25,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 138,
+        "mean_abs_shift_ticks": 2.79,
+        "max_abs_shift_ticks": 8,
+        "mean_abs_vel_delta": 6.152,
+        "timing_sigma_ticks": 3.84
+      },
+      "Pad": {
+        "seed": 163838077080,
+        "profile": {
+          "timing_sigma_ms": 4.0,
+          "velocity_sigma": 4.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.01,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.25,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 78,
+        "mean_abs_shift_ticks": 4.244,
+        "max_abs_shift_ticks": 9,
+        "mean_abs_vel_delta": 2.808,
+        "timing_sigma_ticks": 3.84
+      },
+      "Bass": {
+        "seed": 163838077081,
+        "profile": {
+          "timing_sigma_ms": 5.0,
+          "velocity_sigma": 4.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.01,
+          "layback_ms": 8.0,
+          "phrase_corr": 0.25,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 104,
+        "mean_abs_shift_ticks": 7.875,
+        "max_abs_shift_ticks": 16,
+        "mean_abs_vel_delta": 3.173,
+        "timing_sigma_ticks": 4.8
+      },
+      "Counter": {
+        "seed": 163838077082,
+        "profile": {
+          "timing_sigma_ms": 4.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.03,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.25,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 32,
+        "mean_abs_shift_ticks": 2.375,
+        "max_abs_shift_ticks": 6,
+        "mean_abs_vel_delta": 6.188,
+        "timing_sigma_ticks": 3.84
+      },
+      "Drums": {
+        "seed": 163838077083,
+        "profile": {
+          "timing_sigma_ms": 2.0,
+          "velocity_sigma": 4.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.008,
+          "layback_ms": 0.0,
+          "phrase_corr": 0.25,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 326,
+        "mean_abs_shift_ticks": 1.163,
+        "max_abs_shift_ticks": 5,
+        "mean_abs_vel_delta": 3.11,
+        "timing_sigma_ticks": 1.92
+      }
+    },
+    "key": "D dorian",
+    "bpm": 120
+  },
+  "notes": "phase=2 humanized layer",
+  "sha256": "0833014272ff9d4e3ba2fac964d2f9169bb302c94fb02daf3c0f1f952e384973",
+  "bytes": 5501,
+  "created_utc": "2026-10-29T01:11:55.817836+00:00",
+  "provenance_version": "1.0"
+}

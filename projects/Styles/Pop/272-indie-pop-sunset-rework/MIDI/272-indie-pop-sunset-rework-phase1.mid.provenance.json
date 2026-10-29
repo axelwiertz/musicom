@@ -1,0 +1,16 @@
+{
+  "artifact": "272-indie-pop-sunset-rework-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "two-phase: original pitch-pattern (2,3,-2,0,5) dorian motif + musicom rules",
+  "sources": [],
+  "parameters": {
+    "phase": 1,
+    "key": "D dorian",
+    "bpm": 120
+  },
+  "notes": "phase=1 pre-rules raw draft, off-grid, scale-tone only",
+  "sha256": "84e156c93953f890a6d3e92e6b96d940466b7698402d731c0ba4c74043a38609",
+  "bytes": 1295,
+  "created_utc": "2026-10-29T01:11:55.817195+00:00",
+  "provenance_version": "1.0"
+}

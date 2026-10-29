@@ -1,0 +1,222 @@
+{
+  "project": "272-indie-pop-sunset-rework",
+  "pid": "272",
+  "genre": "pop",
+  "style": "pop",
+  "key": "D dorian",
+  "key_pcs": [
+    2,
+    4,
+    5,
+    7,
+    9,
+    11,
+    0
+  ],
+  "bpm": 120,
+  "bars": 26,
+  "sections": [
+    {
+      "name": "Intro",
+      "bars": 2,
+      "prog": [
+        "i",
+        "VII"
+      ]
+    },
+    {
+      "name": "VerseA",
+      "bars": 4,
+      "prog": [
+        "i",
+        "IV",
+        "i",
+        "v"
+      ]
+    },
+    {
+      "name": "PreChorus",
+      "bars": 2,
+      "prog": [
+        "VII",
+        "IV"
+      ]
+    },
+    {
+      "name": "Chorus",
+      "bars": 4,
+      "prog": [
+        "i",
+        "III",
+        "VII",
+        "IV"
+      ]
+    },
+    {
+      "name": "VerseB",
+      "bars": 4,
+      "prog": [
+        "i",
+        "VII",
+        "IV",
+        "v"
+      ]
+    },
+    {
+      "name": "Bridge",
+      "bars": 4,
+      "prog": [
+        "v",
+        "ii",
+        "VII",
+        "IV"
+      ]
+    },
+    {
+      "name": "FinalChorus",
+      "bars": 4,
+      "prog": [
+        "i",
+        "III",
+        "VII",
+        "IV"
+      ]
+    },
+    {
+      "name": "Outro",
+      "bars": 2,
+      "prog": [
+        "i",
+        "i"
+      ]
+    }
+  ],
+  "voices": [
+    [
+      "Lead",
+      73,
+      1
+    ],
+    [
+      "Pad",
+      88,
+      2
+    ],
+    [
+      "Bass",
+      35,
+      3
+    ],
+    [
+      "Counter",
+      48,
+      4
+    ],
+    [
+      "Drums",
+      0,
+      9
+    ]
+  ],
+  "humanize_seed": 1622159179,
+  "humanize_summary": {
+    "Lead": {
+      "seed": 163838077079,
+      "profile": {
+        "timing_sigma_ms": 4.0,
+        "velocity_sigma": 7.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 138,
+      "mean_abs_shift_ticks": 2.79,
+      "max_abs_shift_ticks": 8,
+      "mean_abs_vel_delta": 6.152,
+      "timing_sigma_ticks": 3.84
+    },
+    "Pad": {
+      "seed": 163838077080,
+      "profile": {
+        "timing_sigma_ms": 4.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 78,
+      "mean_abs_shift_ticks": 4.244,
+      "max_abs_shift_ticks": 9,
+      "mean_abs_vel_delta": 2.808,
+      "timing_sigma_ticks": 3.84
+    },
+    "Bass": {
+      "seed": 163838077081,
+      "profile": {
+        "timing_sigma_ms": 5.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 104,
+      "mean_abs_shift_ticks": 7.875,
+      "max_abs_shift_ticks": 16,
+      "mean_abs_vel_delta": 3.173,
+      "timing_sigma_ticks": 4.8
+    },
+    "Counter": {
+      "seed": 163838077082,
+      "profile": {
+        "timing_sigma_ms": 4.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.03,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 32,
+      "mean_abs_shift_ticks": 2.375,
+      "max_abs_shift_ticks": 6,
+      "mean_abs_vel_delta": 6.188,
+      "timing_sigma_ticks": 3.84
+    },
+    "Drums": {
+      "seed": 163838077083,
+      "profile": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.008,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 326,
+      "mean_abs_shift_ticks": 1.163,
+      "max_abs_shift_ticks": 5,
+      "mean_abs_vel_delta": 3.11,
+      "timing_sigma_ticks": 1.92
+    }
+  },
+  "perfect_mid": "/opt/data/repos/musicom/projects/Styles/Pop/272-indie-pop-sunset-rework/MIDI/272-indie-pop-sunset-rework-perfect.mid",
+  "humanized_mid": "/opt/data/repos/musicom/projects/Styles/Pop/272-indie-pop-sunset-rework/MIDI/272-indie-pop-sunset-rework-humanized.mid",
+  "phase1_mid": "/opt/data/repos/musicom/projects/Styles/Pop/272-indie-pop-sunset-rework/MIDI/272-indie-pop-sunset-rework-phase1.mid"
+}

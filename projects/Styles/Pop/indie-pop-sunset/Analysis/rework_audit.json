@@ -1,0 +1,30 @@
+{
+  "chosen": "indie-pop-sunset",
+  "genre": "Pop",
+  "audit_date": "2026-10-29",
+  "standard_failures": [
+    "engine_not_unitmatrixcomposer: uses legacy music21+RhythmGenerator via src/regen.py with sys.path.insert('/root/musicom'); no UnitMatrixComposer/musicom_workflow",
+    "track_setup: only 3 tracks (1 conductor + 2 voice), fewer than 4 voice tracks; no ch9 drum kit",
+    "two_phase_artifacts: no -phase1.mid present",
+    "provenance: provenance.json missing"
+  ],
+  "passes": [
+    "zero_drift: 2 voice tracks equal 15360 ticks",
+    "rhythm_grid: 0 off-grid pitched onsets"
+  ],
+  "redesign_required": true,
+  "source_identity": {
+    "key": "D dorian (initial=2, rotation=1)",
+    "pitch_motif": "semitones (2,3,-2,0,5)",
+    "rhythm": "Euclidean 5-in-8 clave",
+    "tempo": "120 BPM (MIDI default, no tempo meta)",
+    "pitch_classes_present": [
+      0,
+      2,
+      4,
+      7
+    ],
+    "genre": "indie pop",
+    "bars": 8
+  }
+}
