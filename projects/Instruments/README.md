@@ -91,7 +91,8 @@ chanter; the count above follows `instrument_registry.ALL_INSTRUMENTS`.)
 > Registry load count is **78** — the Vocal voice-like family registers six
 > members individually (vox_humana, kazoo, jaw_harp, didgeridoo, singing_saw,
 > talkbox) on top of the per-instrument entries, and the instrument tree itself
-> is now 72 folders (latest: Bass/fretless_bass, GM35 Fretless Bass, 2026-10-27).
+> is now 72 folders (latest: Bass/fretless_bass, GM35 Fretless Bass, 2026-10-27;
+> Synth/synth_brass_1, GM62 Synth Brass 1, 2026-10-29).
 > `registry.md` carries the curated per-family table.
 
 ## Musicom Integration

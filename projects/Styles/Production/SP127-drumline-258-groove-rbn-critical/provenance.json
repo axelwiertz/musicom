@@ -1,0 +1,188 @@
+{
+  "job": "random-style production (SP) layer-aligned",
+  "date": "2026-10-29",
+  "seed": 20261029,
+  "method": "SP-127",
+  "method_module": "sound.generators.drumline",
+  "method_desc": "Ten-Model Drum Synthesizer + Funk Humaniser (OP-XY drumline-style)",
+  "layer": "ABSOLUTE (drum/percussion layer re-synthesised by drumline; pitched A-minor layer carried by FluidSynth SP-001)",
+  "params": {
+    "sample_rate": 44100,
+    "bpm": 104.0,
+    "ppqn": 480,
+    "meter": "4/4",
+    "bar_ticks": 1920,
+    "n_bars": 24,
+    "funk": 0.35,
+    "drum_models": [
+      "kick",
+      "snare",
+      "rim",
+      "hat_closed",
+      "hat_open",
+      "conga_low",
+      "conga_high",
+      "shaker",
+      "clap",
+      "tom"
+    ],
+    "per_model_params": {
+      "kick": {
+        "tone": 0.55,
+        "decay": 0.45,
+        "pitch": 0.3,
+        "snap": 0.6
+      },
+      "snare": {
+        "tone": 0.5,
+        "decay": 0.4,
+        "pitch": 0.5,
+        "snap": 0.7
+      },
+      "hat_closed": {
+        "tone": 0.6,
+        "decay": 0.3,
+        "pitch": 0.5,
+        "snap": 0.6
+      },
+      "hat_open": {
+        "tone": 0.6,
+        "decay": 0.7,
+        "pitch": 0.5,
+        "snap": 0.5
+      },
+      "clap": {
+        "tone": 0.5,
+        "decay": 0.4,
+        "pitch": 0.5,
+        "snap": 0.6
+      },
+      "shaker": {
+        "tone": 0.6,
+        "decay": 0.5,
+        "pitch": 0.5,
+        "snap": 0.4
+      },
+      "rim": {
+        "tone": 0.5,
+        "decay": 0.4,
+        "pitch": 0.6,
+        "snap": 0.6
+      },
+      "conga_low": {
+        "tone": 0.5,
+        "decay": 0.5,
+        "pitch": 0.4,
+        "snap": 0.5
+      },
+      "conga_high": {
+        "tone": 0.5,
+        "decay": 0.5,
+        "pitch": 0.6,
+        "snap": 0.5
+      },
+      "tom": {
+        "tone": 0.5,
+        "decay": 0.5,
+        "pitch": 0.5,
+        "snap": 0.5
+      }
+    },
+    "color_models": {
+      "clap": "idiomatic funk layer",
+      "shaker": "idiomatic funk layer",
+      "conga_low": "idiomatic funk layer",
+      "conga_high": "idiomatic funk layer",
+      "rim": "idiomatic funk layer",
+      "tom": "idiomatic funk layer"
+    },
+    "dynamic_filter": {
+      "hp": 25.0,
+      "lp": 14000.0,
+      "drive": 0.12,
+      "comp": 0.45
+    },
+    "carrier": "FluidSynth SP-001 (FluidR3_GM, dry -R 0 -C 0 -g 1.2), ch9 stripped",
+    "target_lufs": -14.0,
+    "ceiling_db": -1.0
+  },
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Groove/258-groove-rbn-critical/MIDI/258-groove-rbn-critical-perfect.mid",
+  "source_humanized_midi": "/opt/data/repos/musicom/projects/Styles/Groove/258-groove-rbn-critical/MIDI/258-groove-rbn-critical-humanized.mid",
+  "carrier_midi": "/opt/data/repos/musicom/projects/Styles/Production/SP127-drumline-258-groove-rbn-critical/MIDI/pitched_carrier.mid",
+  "source_bpm": 104.0,
+  "source_key": "A natural minor",
+  "source_pitch_classes": [
+    0,
+    2,
+    4,
+    5,
+    7,
+    9,
+    11
+  ],
+  "bar_degrees": [
+    "i7",
+    "i7",
+    "VI7",
+    "VII7",
+    "i7",
+    "i7",
+    "VI7",
+    "VII7",
+    "III7",
+    "VI7",
+    "iv7",
+    "v7",
+    "III7",
+    "VI7",
+    "iv7",
+    "v7",
+    "i7",
+    "i7",
+    "VI7",
+    "VII7",
+    "i7",
+    "i7",
+    "VI7",
+    "VII7"
+  ],
+  "output_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP127-drumline-258-groove-rbn-critical/SP127-drumline-258-groove-rbn-critical.wav",
+  "output_ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP127-drumline-258-groove-rbn-critical/SP127-drumline-258-groove-rbn-critical.ogg",
+  "carrier_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP127-drumline-258-groove-rbn-critical/pitched_carrier_sp001.wav",
+  "dry_reference_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP127-drumline-258-groove-rbn-critical/dry_full_mix_sp001_reference.wav",
+  "lufs": -13.999999999999996,
+  "peak": 0.7714741025293017,
+  "silence_pct": 0.9582567710533988,
+  "rms": 0.15172017561079593,
+  "pitch_verdict": "PASS",
+  "pitched_hit_rate": 1.0,
+  "pitched_he": 0.37936563117167,
+  "drum_env_period_ms": 31.0,
+  "drum_grid_ok": false,
+  "preflight_humanized": {
+    "grid_off": 408,
+    "out_scale": 0,
+    "strong_out_chord": 0,
+    "weak_scale_only": 58,
+    "strong_total": 7,
+    "weak_total": 451,
+    "zero_drift": true,
+    "track_ends": [
+      46080
+    ],
+    "total_notes": 970
+  },
+  "preflight_perfect": {
+    "grid_off": 0,
+    "out_scale": 0,
+    "strong_out_chord": 0,
+    "weak_scale_only": 57,
+    "strong_total": 90,
+    "weak_total": 368,
+    "zero_drift": true,
+    "track_ends": [
+      46080
+    ],
+    "total_notes": 970
+  }
+}

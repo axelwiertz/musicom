@@ -654,6 +654,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | World | Pan Flute | 75 | 55–100 | lead, melody, ornament, drone, accent |
 | World | Shakuhachi | 77 | 55–100 | lead, melody, ornament, drone, accent |
 | Synth | Pad 1 (new age) | 88 | 36–96 | pad, harmony, texture, drone, accent |
+| Synth | Synth Brass 1 | 62 | 36–96 | lead, harmony, accent, stab, pad, countermelody |
 | Vocal | Choir Aahs | 52 | 40–88 | pad, harmony, melody, countermelody, anthem, texture |
 | Woodwind | Bagpipe | 109 | 53–96 | lead, melody, ornament, drone, accent |
 | Woodwind | Ocarina | 79 | 55–96 | lead, harmony, accent |
@@ -727,7 +728,8 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 || 38 | Synth Bass 1 | Synth_Bass_1 ✓ (GM_PROGRAMS[38] = "Synth Bass 1"; FluidR3 preset 38 = "Synth Bass 1" — labels match exactly, **no quirk**) |
 | 35 | Fretless Bass | Fretless_Bass ✓ (GM_PROGRAMS[35] + FluidR3 preset 35 both "Fretless Bass" — labels match exactly, **no quirk**) |
 ||| 44 | Tremolo Strings | Tremolo_Strings ✓ (GM_PROGRAMS[44] = "Tremolo Strings"; FluidR3 preset 44 = "Tremolo" — one-word SF2 spelling, cosmetic only, **no routing impact**) |
-|| 30 | Distortion Guitar | Distortion_Guitar ✓ (GM_PROGRAMS[30] + FluidR3 preset 30 both "Distortion Guitar" — labels match exactly, **no quirk**) |
+||| 30 | Distortion Guitar | Distortion_Guitar ✓ (GM_PROGRAMS[30] + FluidR3 preset 30 both "Distortion Guitar" — labels match exactly, **no quirk**) |
+||| 62 | Synth Brass 1 | Synth_Brass_1 ✓ (GM_PROGRAMS[62] = "Synth Brass 1"; FluidR3 preset 62 = "Synth Brass 1" — labels match exactly, **no quirk**) |
 
 > **Known off-by-one in existing entries**: ~~`trumpet.py` uses 57~~ **FIXED 2026-08-27**: trumpet is now 56 (SF2 preset 56=`SoloTrumpet`). `piano.py`=1 → actually Bright Acoustic Piano (GM #2) — cosmetic label difference only, no routing impact. Legacy registry rows kept as-is for piano; new instruments use 0-indexed programs matching pipeline+SF2.
 
@@ -1490,3 +1492,52 @@ octaves or a low bass note an octave+ below are fine, and a drum kit is fine.
 Role: bass, melody (mid register 51–62 only), countermelody, groove, slide,
 color — NOT a pad/chord voice, NOT a slap voice (slap needs frets), NOT a
 high lead above C4.
+
+**Synth Brass 1 added** (2026-10-29): GM62, **Synth-family second entry** —
+the classic analog synth brass (saw stack + resonant low-pass + fast-ADSR;
+the "brassy stab" voice of funk/disco/synth-pop/film — Prophet-5/OB-Xa
+brass patches, EW&F "Shining Star" stab, Gary Numan/Depeche Mode brass
+swells), distinct from the acoustic Brass family (PhaseModSynth saw carriers
+at 56–61): GM62's tone is an oscillator + filter, no physical instrument
+(instrument.md + synth_brass_1.py), verified end-to-end UnitMatrixComposer →
+**zero-drift ✓** → MIDI 184 bytes → FluidSynth WAV **794,668 bytes** SOLO
+render (FluidR3 via `discover_soundfont()`) ✓; RenderPipeline stems on disk
+`track00_Synth_Brass_1.wav` (794,668 B) + `track01_Drums.wav` (706,092 B) ✓;
+stem label `GM_PROGRAMS[62]` = **"Synth Brass 1"** and FluidR3 preset 62 =
+**"Synth Brass 1"** — labels match exactly, **no quirk** (contrast: GM74
+Flute → "Recorder", GM109 → "Bag pipe", GM111 → "Shanai"); solo-render
+spectral 4–8 kHz buzz **2.6%** (clean single voice, no comb-filtering).
+Synthesis: **Polysynth primary** (`sound/synthesis/polysynth.py` PolyVoice —
+polyBLEP subtractive, THE analog-brass architecture: saw osc stack, osc2
+detuned +7 cents, thin square sub, 24dB low-pass cutoff 2800 Hz resonance
+0.45, ADSR attack 0.015 s / decay 0.18 / sustain 0.75 / release 0.25, 2
+unison voices; POLYSYNTH_DEFAULTS/SYNTHESIS_DEFAULTS load through the
+registry), **PhaseModSynth secondary** (FM brass, saw carrier ratio 1.0
+depth 3.2 — between brass_section 2.8 and overdriven 4.0, the synth edge),
+**Additive tertiary** (brass rolloff stack). Smoke tests: Polysynth G4 peak
+1.404 sustain/peak 0.162 (holds, no collapse); PhaseModSynth G4 peak 0.764.
+Empirical FluidR3 pitch sweep (RMS, velocity 90, notes 36/48/60/72/84/96/
+108): preset 62 audible **7/7, no gaps** (RMS 2153–2427, essentially flat
+across the whole span — full-keyboard patch, no ceiling) — SF2 never clips a
+composition. Range 36–96 = idiomatic writing band (C2–C7; patch plays the
+full keyboard); sweet spot 55–79 (G3–G5 — the funk stab/punch zone), solo
+range 48–84 (C3–C6). Registration proof: `by_name('synth brass 1')` /
+`by_name('SYNTH BRASS 1')` → Synth Brass 1, `by_program(62)` → Synth Brass 1
+(distinct from 61 brass_section / 63 synth brass 2), `in_sweet_spot(67)` =
+True, `in_sweet_spot(24)` = False, `stem_label = 'Synth_Brass_1'`;
+`registry_table()` row "| Synth | Synth Brass 1 | 62 | 36–96 | lead,
+harmony, accent, stab, pad, countermelody |". Role: lead (unison brass,
+72–84 piercing top), harmony (stab chords + brass-pad swells), accent (sfz
+hits, marcato downbeats, risers), stab (the signature — short gates ≤ 0.3
+bar), pad (sustained swells), countermelody — **NOT** a bass voice (use
+synth_bass_1 / electric_bass), NOT an acoustic-brass substitute (no
+physical articulation). Polyphonic: 3–5 note stab chords fully idiomatic.
+REVERB_TAIL 2.2 s (hall/plate — shorter than brass_section 2.5: synth stabs
+want a drier punch than a real brass tutti; longer than synth bass 1.0). EQ:
+cut 300 Hz (saw + square sub crowd the low-mid), boost 2.8 kHz (the brassy
+bite band), 8 kHz air shelf. Enum note: `MidiInstrument` has NO synth-brass
+constant (10-instrument legacy enum) — use raw GM 62; the registry is the
+full KB. Channel quirk: melodic channel (0–9) — channel 9 triggers the drum
+map (timpani lesson). Layering quirk: octave doubling (+ brass_section for
+the hybrid analog/acoustic wall) — NEVER unison with another melodic patch
+on the same pitches (the 2026-09-01 comb-filter rule).

@@ -97,6 +97,7 @@ _INSTRUMENT_MODULES = {
     "Bass.fretless_bass.fretless_bass": "fretless_bass",
     "Woodwind.recorder.recorder": "recorder",
     "Synth.synth_pad.synth_pad": "synth_pad",
+    "Synth.synth_brass_1.synth_brass_1": "synth_brass_1",
 }
 
 _FIELDS = (
@@ -331,6 +332,7 @@ PIZZICATO_STRINGS = ALL_INSTRUMENTS["pizzicato_strings"]
 STRING_ENSEMBLE = ALL_INSTRUMENTS["string_ensemble"]
 TREMOLO_STRINGS = ALL_INSTRUMENTS["tremolo_strings"]
 SYNTH_PAD = ALL_INSTRUMENTS["synth_pad"]
+SYNTH_BRASS_1 = ALL_INSTRUMENTS["synth_brass_1"]
 # Voice-like family — one instrument per non-vocal source. The `voice_like`
 # key is the umbrella (vox humana); each member is also addressable directly.
 VOICE_LIKE = ALL_INSTRUMENTS["voice_like"]
@@ -486,6 +488,8 @@ def registry_table():
             role = "lead, melody, accent, rhythm, power-chord strum, countermelody"
         elif low == "pad 1 (new age)":
             role = "pad, harmony, texture, drone, accent"
+        elif low == "synth brass 1":
+            role = "lead, harmony, accent, stab, pad, countermelody"
         else:
             role = "lead, harmony, accent"
         rng = f"{inst.range_min}–{inst.range_max}" if inst.range_min else "-"
@@ -713,6 +717,17 @@ if __name__ == "__main__":
     print("  SYNTH_PAD.in_sweet_spot(24) =", SYNTH_PAD.in_sweet_spot(24))
     print("  SYNTH_PAD.range_min =", SYNTH_PAD.range_min, "SYNTH_PAD.range_max =", SYNTH_PAD.range_max)
     print("  SYNTH_PAD.stem_label =", repr(SYNTH_PAD.stem_label))
+    print()
+    print("=== Synth Brass 1 (GM62) ===")
+    print("  SYNTH_BRASS_1.midi_program =", SYNTH_BRASS_1.midi_program, "(should be 62)")
+    print("  by_name('synth brass 1') =", by_name("synth brass 1"))
+    print("  by_name('SYNTH BRASS 1') =", by_name("SYNTH BRASS 1"))
+    print("  by_program(62) =", by_program(62))
+    print("  SYNTH_BRASS_1.in_sweet_spot(67) =", SYNTH_BRASS_1.in_sweet_spot(67))
+    print("  SYNTH_BRASS_1.in_sweet_spot(24) =", SYNTH_BRASS_1.in_sweet_spot(24))
+    print("  SYNTH_BRASS_1.range_min =", SYNTH_BRASS_1.range_min,
+          "SYNTH_BRASS_1.range_max =", SYNTH_BRASS_1.range_max)
+    print("  SYNTH_BRASS_1.stem_label =", repr(SYNTH_BRASS_1.stem_label))
     print()
     print("=== Overdriven Guitar (GM29) ===")
     print("  OVERDRIVEN_GUITAR.midi_program =", OVERDRIVEN_GUITAR.midi_program, "(should be 29)")
