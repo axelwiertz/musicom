@@ -299,6 +299,10 @@ SP_METHODS = {
     "SP-129": ("sound.synthesis.keys_engine", "Tine/Reed/Clav Keys Engine — inharmonic modal tine w/ bark, asymmetric-reed + body resonance, Karplus-Strong clav w/ pickup comb, diatonic Chord mode + scale quantise (TE OP-1 alt-firmware Keys-style)"),
     "SP-130": ("sound.generators.sample_flipper", "16-Slot Sample Flipper — resample 'grab' into 16 slots, 16 flip modes (reverse/alternate/random/pingpong/ratchet2-4/gates/pitch/stutter/chop-ladder), deterministic playback plan rendering (Knobula Drum Farm Player-style)"),
     "SP-131": ("sound.generators.key_chord_transformer", "In-Key Chord Transformer — white key -> stacked scale thirds, black key -> 9th/11th/13th colour, exact vs compact voicing, octave shift, seeded randomisation, strum + arpeggiate, performance list capture (Denormal Guardrail-style)"),
+    # 2026-10-29 scan
+    "SP-132": ("sound.synthesis.plaits_models", "Plaits-Style Multi-Model Synthesis Voice — 10 models (VA/wavefold/FM/formant/harmonic/wavetable/modal/string/drum/noise) sharing Harmonics/Timbre/Morph macros, ADSR or Plaits-style LPG envelope (Push and Groove MICRONIX-style)"),
+    "SP-133": ("sound.effects.lexicon_224_reverb", "Lexicon 224-Style Diffuse Delay-Network Reverb — predelay, all-pass diffusers, 8 cross-coupled modulated delay lines, bass/treble decay in feedback loop, 6 programs, converter 'dirt' bit-depth + ZOH (Cineol-X 224-style)"),
+    "SP-134": ("sound.synthesis.bbd_resonator", "BBD Resonator Voice — tuned clocked bucket-brigade delay line: stages*f0 clock, per-tick charge-transfer lowpass, ZOH grain, clock jitter, pre-emphasis, impulse/click/noise exciter (Morphor ECHON 6-style)"),
 }
 
 

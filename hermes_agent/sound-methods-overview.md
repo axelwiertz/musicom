@@ -122,6 +122,9 @@ comparable to, and how do I use it in a workflow?*
 |||||| `sound/synthesis/keys_engine.py` | KeysEngine, chord_notes, SCALES, CHORDS | synthesis (keys/physical modelling) | TE OP-1 Keys engine, Rhodes/Wurli/Clavinet | model + midi + dur + velocity (+ chord/scale/strum) → keyboard instrument audio |
 |||||| `sound/generators/sample_flipper.py` | SampleFlipper, Flip, FLIP_MODES | sequencing (sample flipper) | Knobula Drum Farm Player | 16-slot bank + slot_map + flip mode + steps/bpm → flipped drum audio + plan |
 |||||| `sound/generators/key_chord_transformer.py` | KeyChordTransformer, ChordEvent | orchestration/harmony (MIDI transformer) | Denormal Guardrail, zplane Tonic 2 | incoming note + key/scale + spacing (+ strum/arp) → in-key chord events |
+|||||| `sound/synthesis/plaits_models.py` | PlaitsVoice, LowpassGate, MODEL_NAMES | synthesis (multi-model voice) | Mutable Instruments Plaits, Push and Groove MICRONIX | model (0..23 subset) + pitch/dur + Harmonics/Timbre/Morph macros + ADSR/LPG → mono voice render (VA/wavefold/FM/formant/harmonic/wavetable/modal/string/drum/noise) |
+|||||| `sound/effects/lexicon_224_reverb.py` | Lexicon224Reverb, PROGRAMS | effects (reverb) | Lexicon 224, Cineol-X 224, Dattorro | audio + program/decay/bass-decay/treble-decay/diffusion/mod/dirt → stereo diffuse reverb render (8 cross-coupled modulated delay lines, all-pass diffusers) |
+|||||| `sound/synthesis/bbd_resonator.py` | BBDResonatorVoice, estimate_f0 | synthesis (BBD physical modelling) | Morphor ECHON 6, analogue BBD resonators | pitch/dur + decay/tone/excite → clocked bucket-brigade resonator voice (stage-charge-transfer lowpass, ZOH grain, clock jitter, pre-emphasis) |
 || `sound/sync/clock.py` | DAWClockBridge | sync | MTC/MIDI clock | bpm → clock pulses |
 | `sound/render/fluidsynth.py` | FluidSynthRenderer | render | SF2 synth | MIDI → WAV |
 | `sound/render/vst.py` | VSTRenderer | render | DAW VST3 | MIDI → VST audio |
