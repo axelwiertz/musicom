@@ -1,0 +1,29 @@
+{
+  "chosen": "080-groove-sieve",
+  "genre": "Groove",
+  "audit_date": "2026-10-30",
+  "primary_midi": "/opt/data/projects/Styles/Groove/080-groove-sieve/MIDI/080-groove-sieve.mid",
+  "standard_failures": [
+    "index_html: dashboard index.html missing (required; only MIDI/*.mid.provenance.json sidecars present, no project-root provenance.json and no index.html dashboard)"
+  ],
+  "passes": [
+    "engine: compose.py imports UnitMatrixComposer (flat structures/workflows), no raw mido authoring",
+    "zero_drift: 5 voice tracks all equal 46080 ticks",
+    "rhythm_grid: 0 off-grid pitched onsets (480 pitched, 0 off-grid)",
+    "track_setup: 6 tracks (1 conductor + 5 voice), ch9 drum kit present",
+    "two_phase_artifacts: 080-groove-sieve.mid + 080-groove-sieve-phase1.mid present"
+  ],
+  "redesign_required": true,
+  "source_identity": {
+    "genre": "Groove",
+    "key": "G natural minor (G A Bb C D Eb F; pcs {7,9,10,0,2,3,5})",
+    "tempo": 110,
+    "meter": "4/4, 480 TPB, bar 1920",
+    "bars": 24,
+    "sections": ["Intro", "Verse", "Chorus", "Verse2", "Chorus2", "Outro"],
+    "method": "025 Xenakis Sieve Theory (sieve C = A mod 8 {0,2,5} \u2229 B mod 7 {0,1,4}, period lcm 56, offsets [0,8,18,21,29,32,42,50,53])",
+    "progression": "i III iv V | i III iv V | i iv V i | i V i VI | i III iv V | i V iv i",
+    "voices": [["Lead", 65, "Soprano Sax"], ["Horns", 61, "Brass Section"], ["Rhodes", 4, "Electric Piano"], ["Bass", 33, "Electric Bass"], ["Drums", 0, "ch9"]],
+    "seed": 20260828
+  }
+}

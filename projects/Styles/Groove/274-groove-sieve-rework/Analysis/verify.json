@@ -1,0 +1,123 @@
+{
+  "phase1": {
+    "tracks": 1,
+    "all_equal_len": true,
+    "len": 61440,
+    "lens": [
+      61440
+    ],
+    "pitched_onsets": 252,
+    "off_grid": 243,
+    "scale_viol": 36,
+    "chord_viol": 176,
+    "per_voice": [
+      {
+        "pitched": 252,
+        "off_grid": 243,
+        "scale_viol": 36,
+        "chord_viol": 176
+      }
+    ],
+    "size_bytes": 2316
+  },
+  "perfect": {
+    "tracks": 6,
+    "all_equal_len": true,
+    "len": 61440,
+    "lens": [
+      61440,
+      61440,
+      61440,
+      61440,
+      61440,
+      61440
+    ],
+    "pitched_onsets": 652,
+    "off_grid": 0,
+    "scale_viol": 0,
+    "chord_viol": 0,
+    "per_voice": [
+      {
+        "pitched": 252,
+        "off_grid": 0,
+        "scale_viol": 0,
+        "chord_viol": 0
+      },
+      {
+        "pitched": 104,
+        "off_grid": 0,
+        "scale_viol": 0,
+        "chord_viol": 0
+      },
+      {
+        "pitched": 128,
+        "off_grid": 0,
+        "scale_viol": 0,
+        "chord_viol": 0
+      },
+      {
+        "pitched": 136,
+        "off_grid": 0,
+        "scale_viol": 0,
+        "chord_viol": 0
+      },
+      {
+        "pitched": 32,
+        "off_grid": 0,
+        "scale_viol": 0,
+        "chord_viol": 0
+      }
+    ],
+    "size_bytes": 8971
+  },
+  "humanized": {
+    "tracks": 6,
+    "all_equal_len": true,
+    "len": 61440,
+    "lens": [
+      61440,
+      61440,
+      61440,
+      61440,
+      61440,
+      61440
+    ],
+    "pitched_onsets": 652,
+    "off_grid": 570,
+    "scale_viol": 0,
+    "chord_viol": 18,
+    "per_voice": [
+      {
+        "pitched": 252,
+        "off_grid": 212,
+        "scale_viol": 0,
+        "chord_viol": 4
+      },
+      {
+        "pitched": 104,
+        "off_grid": 90,
+        "scale_viol": 0,
+        "chord_viol": 4
+      },
+      {
+        "pitched": 128,
+        "off_grid": 105,
+        "scale_viol": 0,
+        "chord_viol": 8
+      },
+      {
+        "pitched": 136,
+        "off_grid": 136,
+        "scale_viol": 0,
+        "chord_viol": 0
+      },
+      {
+        "pitched": 32,
+        "off_grid": 27,
+        "scale_viol": 0,
+        "chord_viol": 2
+      }
+    ],
+    "size_bytes": 8969
+  }
+}

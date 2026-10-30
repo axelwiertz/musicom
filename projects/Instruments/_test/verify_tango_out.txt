@@ -1,0 +1,38 @@
+Registry: <Instrument Tango Accordion (family=Keys, program=23, range=41-96)>
+Tango Accordion: program=23 gm='Tango Accordion' stem='Tango_Accordion' range=41-96 sweet=(57, 84) A4=440.0Hz
+Tango Accordion: zones={'bass': (41, 59), 'low_mid': (60, 67), 'cantabile': (68, 79), 'high': (80, 91), 'top': (92, 96)}
+Tango Accordion: art=['cantabile', 'sustain', 'marcato', 'picado', 'fuelle', 'lloron', 'arrastre', 'chasquido', 'golpe', 'sforzando'] synth=phase_mod modal_preset=tube reverb=1.8s pan=0.0
+Tango Accordion: F2=87.31Hz C4=261.63Hz C6=1046.50Hz C7=2093.00Hz
+Distinct from: ACCORDION program=21
+
+Zero-drift: True (OK)
+MIDI: /opt/data/projects/Instruments/_test/tango_accordion_test.mid (181 bytes)
+SoundFont: /opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2
+WAV (solo): /opt/data/projects/Instruments/_test/tango_accordion_test.wav (777004 bytes)
+Spectral check: 4-8kHz buzz energy = 8.0% (OK)
+
+Stem label: GM_PROGRAMS[23] = 'Tango Accordion'
+SF2 preset 23 -> 'Bandoneon'
+
+Stems rendered (2 files):
+  track00_Tango_Accordion.wav (777004 bytes)
+  track01_Drums.wav (706092 bytes)
+
+PhaseModSynth bandoneón A4 + octave reed: peak=1.135 sustain_rms=0.3412 sustain/peak=0.301
+Additive bandoneón stack: peak=63.0 (h2/h1 = 0.55 — the octave reed)
+
+Pitch sweep (RMS, velocity 90, 1-bar held notes):
+  note  24: RMS =   1613.3 AUDIBLE
+  note  36: RMS =   1559.1 AUDIBLE
+  note  41: RMS =   1478.9 AUDIBLE
+  note  48: RMS =   1433.7 AUDIBLE
+  note  60: RMS =   1362.1 AUDIBLE
+  note  72: RMS =   1054.7 AUDIBLE
+  note  84: RMS =   1530.3 AUDIBLE
+  note  96: RMS =   1569.1 AUDIBLE
+  note 108: RMS =   1360.4 AUDIBLE
+  audible notes: [24, 36, 41, 48, 60, 72, 84, 96, 108] (no gaps — SF2 never clips a composition)
+Spectral centroid note 60: 3568 Hz
+Spectral centroid note 84: 5999 Hz
+
+ALL CHECKS PASSED

@@ -73,6 +73,7 @@ _INSTRUMENT_MODULES = {
     "Keys.rhodes.rhodes": "rhodes",
     "Keys.electric_piano_2.electric_piano_2": "electric_piano_2",
     "Keys.drawbar_organ.drawbar_organ": "drawbar_organ",
+    "Keys.tango_accordion.tango_accordion": "tango_accordion",
     "World.sitar.sitar": "sitar",
     "World.koto.koto": "koto",
     "World.shamisen.shamisen": "shamisen",
@@ -272,6 +273,7 @@ DULCIMER = ALL_INSTRUMENTS["dulcimer"]
 HARPSICHORD = ALL_INSTRUMENTS["harpsichord"]
 CELESTA = ALL_INSTRUMENTS["celesta"]
 ACCORDION = ALL_INSTRUMENTS["accordion"]
+TANGO_ACCORDION = ALL_INSTRUMENTS["tango_accordion"]
 REED_ORGAN = ALL_INSTRUMENTS["reed_organ"]
 RHODES = ALL_INSTRUMENTS["rhodes"]
 ELECTRIC_PIANO_2 = ALL_INSTRUMENTS["electric_piano_2"]
@@ -406,6 +408,8 @@ def registry_table():
             role = "lead, melody, ornament, arpeggio, countermelody, accent"
         elif low == "accordion":
             role = "harmony, melody, bass, rhythm, ornament"
+        elif low == "tango accordion":
+            role = "lead, melody, ornament, harmony, accent, pad"
         elif low == "reed organ":
             role = "harmony, pad, melody, drone, ornament"
         elif low == "alto saxophone":
@@ -804,3 +808,16 @@ if __name__ == "__main__":
     print("  FRETLESS_BASS.range_min =", FRETLESS_BASS.range_min,
           "FRETLESS_BASS.range_max =", FRETLESS_BASS.range_max)
     print("  FRETLESS_BASS.stem_label =", repr(FRETLESS_BASS.stem_label))
+
+    print()
+    print("=== Tango Accordion (Bandoneon, GM23) ===")
+    print("  TANGO_ACCORDION.midi_program =", TANGO_ACCORDION.midi_program, "(should be 23)")
+    print("  by_name('tango accordion') =", by_name("tango accordion"))
+    print("  by_name('TANGO ACCORDION') =", by_name("TANGO ACCORDION"))
+    print("  by_program(23) =", by_program(23))
+    print("  by_program(21) =", by_program(21), "(distinct: piano accordion)")
+    print("  TANGO_ACCORDION.in_sweet_spot(72) =", TANGO_ACCORDION.in_sweet_spot(72))
+    print("  TANGO_ACCORDION.in_sweet_spot(30) =", TANGO_ACCORDION.in_sweet_spot(30))
+    print("  TANGO_ACCORDION.range_min =", TANGO_ACCORDION.range_min,
+          "TANGO_ACCORDION.range_max =", TANGO_ACCORDION.range_max)
+    print("  TANGO_ACCORDION.stem_label =", repr(TANGO_ACCORDION.stem_label))

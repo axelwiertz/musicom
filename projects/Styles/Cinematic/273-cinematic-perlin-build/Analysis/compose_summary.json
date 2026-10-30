@@ -1,0 +1,87 @@
+{
+  "style": "cinematic",
+  "genre": "Cinematic",
+  "method": "040 Perlin Noise Composition",
+  "method_layer": "concrete",
+  "method_paradigm": "Nature-Led",
+  "form": "cinematic-build",
+  "key": "D Minor (aeolian)",
+  "bpm": 76,
+  "bars": 32,
+  "sections": [
+    "Intro",
+    "Build",
+    "Rise",
+    "Peak",
+    "Resolve"
+  ],
+  "pnc_raw_events": 328,
+  "phase1_path": "/opt/data/projects/Styles/Cinematic/273-cinematic-perlin-build/MIDI/273-cinematic-perlin-build-phase1.mid",
+  "perfect_path": "/opt/data/projects/Styles/Cinematic/273-cinematic-perlin-build/MIDI/273-cinematic-perlin-build-perfect.mid",
+  "humanized_path": "/opt/data/projects/Styles/Cinematic/273-cinematic-perlin-build/MIDI/273-cinematic-perlin-build-humanized.mid",
+  "hz_seed": 34304,
+  "hz": {
+    "Lead": {
+      "seed": 3464704,
+      "n_notes": 330,
+      "mean_abs_shift_ticks": 3.139,
+      "max_abs_shift_ticks": 11,
+      "mean_abs_vel_delta": 4.839,
+      "timing_sigma_ticks": 4.256
+    },
+    "Counter": {
+      "seed": 3464705,
+      "n_notes": 164,
+      "mean_abs_shift_ticks": 2.976,
+      "max_abs_shift_ticks": 11,
+      "mean_abs_vel_delta": 5.573,
+      "timing_sigma_ticks": 4.256
+    },
+    "Pad": {
+      "seed": 3464706,
+      "n_notes": 96,
+      "mean_abs_shift_ticks": 2.865,
+      "max_abs_shift_ticks": 11,
+      "mean_abs_vel_delta": 3.406,
+      "timing_sigma_ticks": 4.256
+    },
+    "Bass": {
+      "seed": 3464707,
+      "n_notes": 64,
+      "mean_abs_shift_ticks": 5.359,
+      "max_abs_shift_ticks": 12,
+      "mean_abs_vel_delta": 3.969,
+      "timing_sigma_ticks": 3.648
+    },
+    "Drums": {
+      "seed": 3464708,
+      "n_notes": 68,
+      "mean_abs_shift_ticks": 0.838,
+      "max_abs_shift_ticks": 4,
+      "mean_abs_vel_delta": 2.515,
+      "timing_sigma_ticks": 1.216
+    }
+  },
+  "section_tension": [
+    [
+      "Intro",
+      0.15
+    ],
+    [
+      "Build",
+      0.4
+    ],
+    [
+      "Rise",
+      0.65
+    ],
+    [
+      "Peak",
+      0.9
+    ],
+    [
+      "Resolve",
+      0.35
+    ]
+  ]
+}

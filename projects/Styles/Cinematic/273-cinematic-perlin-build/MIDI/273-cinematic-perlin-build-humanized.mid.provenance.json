@@ -1,0 +1,161 @@
+{
+  "artifact": "273-cinematic-perlin-build-humanized.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom two-phase (phase=2 + humanization) (method 040 Perlin)",
+  "sources": [
+    "/opt/data/projects/Styles/Cinematic/273-cinematic-perlin-build/MIDI/273-cinematic-perlin-build-perfect.mid"
+  ],
+  "parameters": {
+    "bpm": 76,
+    "key": "D",
+    "mode": "minor",
+    "style": "cinematic",
+    "form": "cinematic-build",
+    "bars": 32,
+    "sections": [
+      "Intro",
+      "Build",
+      "Rise",
+      "Peak",
+      "Resolve"
+    ],
+    "method": "040 Perlin Noise Composition",
+    "layer": "concrete",
+    "paradigm": "Nature-Led",
+    "voices": [
+      [
+        "Lead",
+        "Violin",
+        40
+      ],
+      [
+        "Counter",
+        "Flute",
+        73
+      ],
+      [
+        "Pad",
+        "String Ensemble",
+        48
+      ],
+      [
+        "Bass",
+        "Cello",
+        42
+      ],
+      [
+        "Drums",
+        "ch9",
+        0
+      ]
+    ],
+    "humanize_seed": 34304,
+    "raw_seed": 928473,
+    "humanize_profiles": {
+      "Lead": {
+        "timing_sigma_ms": 7.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.03,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.6,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Counter": {
+        "timing_sigma_ms": 7.0,
+        "velocity_sigma": 7.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.6,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Pad": {
+        "timing_sigma_ms": 7.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.6,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Bass": {
+        "timing_sigma_ms": 6.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.6,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Drums": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 3.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.005,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.6,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      }
+    },
+    "phase": 2,
+    "version": "humanized",
+    "humanize_stats": {
+      "Lead": {
+        "seed": 3464704,
+        "n_notes": 330,
+        "mean_abs_shift_ticks": 3.139,
+        "max_abs_shift_ticks": 11,
+        "mean_abs_vel_delta": 4.839,
+        "timing_sigma_ticks": 4.256
+      },
+      "Counter": {
+        "seed": 3464705,
+        "n_notes": 164,
+        "mean_abs_shift_ticks": 2.976,
+        "max_abs_shift_ticks": 11,
+        "mean_abs_vel_delta": 5.573,
+        "timing_sigma_ticks": 4.256
+      },
+      "Pad": {
+        "seed": 3464706,
+        "n_notes": 96,
+        "mean_abs_shift_ticks": 2.865,
+        "max_abs_shift_ticks": 11,
+        "mean_abs_vel_delta": 3.406,
+        "timing_sigma_ticks": 4.256
+      },
+      "Bass": {
+        "seed": 3464707,
+        "n_notes": 64,
+        "mean_abs_shift_ticks": 5.359,
+        "max_abs_shift_ticks": 12,
+        "mean_abs_vel_delta": 3.969,
+        "timing_sigma_ticks": 3.648
+      },
+      "Drums": {
+        "seed": 3464708,
+        "n_notes": 68,
+        "mean_abs_shift_ticks": 0.838,
+        "max_abs_shift_ticks": 4,
+        "mean_abs_vel_delta": 2.515,
+        "timing_sigma_ticks": 1.216
+      }
+    }
+  },
+  "notes": "Humanized layer (style cinematic + per-instrument DNA).",
+  "sha256": "a3133d7480508f29e5cf27cd65c1ad92a760b64dfc9e80a7bff5c17a75eefcc1",
+  "bytes": 5812,
+  "created_utc": "2026-10-29T23:10:42.980022+00:00",
+  "provenance_version": "1.0"
+}

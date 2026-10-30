@@ -1,20 +1,20 @@
 {
   "job": "random-style production (SP) layer-aligned",
-  "date": "2026-10-29",
-  "seed": 20261029,
-  "method": "SP-127",
-  "method_module": "sound.generators.drumline",
-  "method_desc": "Ten-Model Drum Synthesizer + Funk Humaniser \u2014 kick/snare/rim/closed+open hat/conga low+high/shaker/clap/tom, four params each (tone/decay/pitch/snap), per-hit timing+pitch variation, dynamic HPF+LPF+compressor+drive filter (Teenage Engineering OP-XY drumline-style)",
-  "source_midi": "/opt/data/repos/musicom/projects/Styles/Groove/258-groove-rbn-critical/MIDI/258-groove-rbn-critical-humanized.mid",
-  "source_project": "Groove/258-groove-rbn-critical/MIDI/258-groove-rbn-critical-humanized.mid",
+  "date": "2026-10-30",
+  "seed": 20261030,
+  "method": "SP-092",
+  "method_module": "sound.effects.multiband_saturator",
+  "method_desc": "6-Band Multiband Saturator w/ 15 Selectable Algorithms & Per-Band M/S Routing (Kreuzberg Audio Oberton-style)",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Experimental/032-prime-fractal-full/daily-2026-06-26_experimental_032-prime-fractal-v6.mid",
+  "source_project": "Experimental/032-prime-fractal-full/daily-2026-06-26_experimental_032-prime-fractal-v6.mid",
   "registry_size": 72,
   "recent_excluded": [
     "SP-078",
     "SP-094",
     "SP-095",
-    "SP-101",
     "SP-109",
-    "SP-119"
+    "SP-119",
+    "SP-127"
   ],
   "already_on_source": [],
   "baseline_excluded": [
@@ -57,6 +57,7 @@
     "SP-098",
     "SP-099",
     "SP-100",
+    "SP-101",
     "SP-102",
     "SP-103",
     "SP-104",
@@ -78,7 +79,6 @@
     "SP-124",
     "SP-125",
     "SP-126",
-    "SP-127",
     "SP-128",
     "SP-129",
     "SP-130",
@@ -87,8 +87,8 @@
     "SP-133",
     "SP-134"
   ],
-  "n_candidates": 397,
-  "n_well_formed": 285,
-  "n_meaningful": 284,
+  "n_candidates": 401,
+  "n_well_formed": 289,
+  "n_meaningful": 288,
   "rejected_degenerate": []
 }

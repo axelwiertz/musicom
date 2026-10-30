@@ -606,6 +606,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Keys | Harpsichord | 6 | 29–89 | harmony, continuo, melody, ornament, countermelody, accent |
 | Keys | Celesta | 8 | 48–108 | lead, melody, ornament, arpeggio, countermelody, accent |
 | Keys | Accordion | 21 | 36–96 | harmony, melody, bass, rhythm, ornament |
+| Keys | Tango Accordion | 23 | 41–96 | lead, melody, ornament, harmony, accent, pad |
 | Keys | Reed Organ | 20 | 36–96 | harmony, pad, melody, drone, ornament |
 | Keys | Clavi | 7 | 29–89 | lead, rhythm, accent, ornament, countermelody |
 | Keys | Drawbar Organ | 16 | 24–89 | harmony, pad, comp, lead, bass, rhythm, drone, accent |
@@ -727,6 +728,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 || 88 | Pad 1 (new age) | Pad_1_new_age ✓ (GM_PROGRAMS[88] = "Pad 1 (new age)" → sanitized `Pad_1_new_age` — parens stripped, spaces → underscore; FluidR3 preset 88 = **"Fantasia"** — SF2 internal name differs from GM label, cosmetic only, **no routing impact**; preset 89 = "Warm Pad" is the darker sibling) |
 || 38 | Synth Bass 1 | Synth_Bass_1 ✓ (GM_PROGRAMS[38] = "Synth Bass 1"; FluidR3 preset 38 = "Synth Bass 1" — labels match exactly, **no quirk**) |
 | 35 | Fretless Bass | Fretless_Bass ✓ (GM_PROGRAMS[35] + FluidR3 preset 35 both "Fretless Bass" — labels match exactly, **no quirk**) |
+| 23 | Tango Accordion | Tango_Accordion ✓ (GM_PROGRAMS[23] = "Tango Accordion"; FluidR3 preset 23 = "Bandoneon" — SF2 internal name differs, cosmetic only, **no routing impact**) |
 ||| 44 | Tremolo Strings | Tremolo_Strings ✓ (GM_PROGRAMS[44] = "Tremolo Strings"; FluidR3 preset 44 = "Tremolo" — one-word SF2 spelling, cosmetic only, **no routing impact**) |
 ||| 30 | Distortion Guitar | Distortion_Guitar ✓ (GM_PROGRAMS[30] + FluidR3 preset 30 both "Distortion Guitar" — labels match exactly, **no quirk**) |
 ||| 62 | Synth Brass 1 | Synth_Brass_1 ✓ (GM_PROGRAMS[62] = "Synth Brass 1"; FluidR3 preset 62 = "Synth Brass 1" — labels match exactly, **no quirk**) |
@@ -1541,3 +1543,60 @@ full KB. Channel quirk: melodic channel (0–9) — channel 9 triggers the drum
 map (timpani lesson). Layering quirk: octave doubling (+ brass_section for
 the hybrid analog/acoustic wall) — NEVER unison with another melodic patch
 on the same pitches (the 2026-09-01 comb-filter rule).
+
+**Tango Accordion / Bandoneón added** (2026-10-30): GM23, **Keys-family free-
+reed entry** — the bandoneón, the bisonoric German concertina (Heinrich Band,
+Krefeld ~1846) that German/Italian emigrants carried to the Río de la Plata
+around 1870 and that became the melodic soul of the orquesta típica (Arolas,
+Troilo, Piazzolla). Distinct from `accordion` GM21: button-operated,
+bisonoric (different note on push vs pull, no register switches), and every
+note sounds TWO reeds tuned an octave apart — the octave coupling is the
+timbre identity, not musette detune. Files: `Keys/tango_accordion/
+instrument.md` + `tango_accordion.py`. Verified end-to-end
+UnitMatrixComposer (1 bar, 1 section, bandoneón SOLO + drum-kit context) →
+**zero-drift ✓** → MIDI **181 bytes** → FluidSynth WAV **777,004 bytes**
+SOLO render (FluidR3 via `discover_soundfont()`) ✓; RenderPipeline stems on
+disk `track00_Tango_Accordion.wav` (777,004 B) + `track01_Drums.wav`
+(706,092 B) ✓; solo-render spectral 4–8 kHz buzz **8.0%** (clean single
+voice, no comb-filtering). Stem-label **quirk**: `GM_PROGRAMS[23]` =
+**"Tango Accordion"** but FluidR3 preset 23 = **"Bandoneon"** — internal SF2
+name differs from the GM label, cosmetic only (the pipeline names stems from
+GM_PROGRAMS), no routing impact. Synthesis: **PhaseModSynth primary** (a free
+reed is a phase-modulated oscillator — saw carrier, sine modulator ratio 1.0,
+depth 3.4: edgier than accordion 3.2, below bagpipe 4.5; attack 0.018 s,
+release 0.07 s, sustain 0.82) **plus the octave-coupled second reed as a
+second PhaseModSynth voice one octave up at amplitude 0.45**
+(`FM_DEFAULTS["octave_double"]`) — do NOT detune it, the pair is tuned in
+octaves. Smoke: A4 + octave reed peak 1.135, sustain/peak 0.301 (holds, no
+collapse). Additive secondary (octave-heavy stack h2/h1 = 0.55; normalize
+before `apply_overtones()` — the API asserts the weights sum to 1.0),
+ModalSynth `'tube'` fallback. Empirical FluidR3 pitch sweep (RMS, velocity
+90, notes 24/36/41/48/60/72/84/96/108): **9/9 audible, no gaps**
+(1613/1559/1479/1434/1362/1055/1530/1569/1360 — flat, dip at C5, rise above
+C6) — full-keyboard patch, SF2 never clips a composition. Spectral centroid
+(solo, held notes): **C4 3568 Hz, C6 5999 Hz** (vs synth brass 1744 Hz at
+C4 — a genuinely bright, nasal voice). Range 41–96 = F2–C7 practical written
+band (physical 142-tone/71-key Rheinische system spans "fast fünf Oktaven" per
+de.wikipedia; fr.wikipedia says the tessitura approaches six octaves once the
+octave-coupled voice is counted; endpoints vary by system), sweet spot 57–84
+(A3–C6, the cantabile tango register), solo range 53–91. Registration proof:
+`by_name('tango accordion')` / `by_name('TANGO ACCORDION')` → Tango Accordion,
+`by_program(23)` → Tango Accordion (distinct from 21 Accordion), 
+`in_sweet_spot(72)` = True, `in_sweet_spot(30)` = False, `stem_label =
+'Tango_Accordion'`; `registry_table()` row "| Keys | Tango Accordion | 23 |
+41–96 | lead, melody, ornament, harmony, accent, pad |"; convenience constant
+`TANGO_ACCORDION`. Articulations use tango vocabulary: cantabile, marcato
+(acento), picado, fuelle, llorón (the cry), arrastre (drag/slide), chasquido
+(bellows whip), golpe (box tap), sforzando. Production: REVERB_TAIL 1.8 s
+(tango salon/hall — longer than accordion 1.4, shorter than string_ensemble
+2.6), EQ cut 250 Hz (wooden-box boom), boost 3 kHz (reed edge), 7.5 kHz air
+shelf, PAN centre (±0.2 for left/right-hand spread). Writing quirks: (1) SF2
+ignores portamento — write `arrastre` as a fast chromatic grace run; (2) the
+real instrument is bisonoric and its layout is not scale-friendly (players
+work almost entirely on the draw stroke) — write the sounding line, not
+push/pull alternation; (3) ensemble role is a single melodic line or two-note
+dyads even though the patch is polyphonic — dense low chords mud; (4) NEVER
+unison doubling with another melodic patch on the same pitches (2026-09-01
+comb-filter rule) — octaves/thirds/sixths or a drum kit are fine. Role: lead,
+melody, ornament, harmony, accent, pad — NOT a bass voice, NOT a Stradella
+chord-comp voice, NOT a folk-musette accordion (that is GM21).

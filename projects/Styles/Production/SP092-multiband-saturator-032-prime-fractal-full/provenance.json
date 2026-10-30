@@ -1,0 +1,125 @@
+{
+  "job": "random-style production (SP) layer-aligned",
+  "date": "2026-10-30",
+  "seed": 20261030,
+  "method": "SP-092",
+  "method_module": "sound.effects.multiband_saturator",
+  "method_desc": "6-Band Multiband Saturator w/ 15 Selectable Algorithms & Per-Band M/S Routing (Kreuzberg Audio Oberton-style)",
+  "layer": "ABSOLUTE - one 6-band saturator applied to the whole piece",
+  "params": {
+    "sample_rate": 44100,
+    "bpm": 120.0,
+    "ppqn": 480,
+    "meter": "4/4",
+    "bar_ticks": 1920,
+    "crossover_freqs": [
+      120.0,
+      400.0,
+      1200.0,
+      4000.0,
+      10000.0
+    ],
+    "global_trim": 0.85,
+    "band_configs": [
+      {
+        "freq": 60,
+        "q": 1.0,
+        "drive": 1.0,
+        "mix": 1.0,
+        "algo": "bypass",
+        "mode": "stereo"
+      },
+      {
+        "freq": 250,
+        "q": 1.0,
+        "drive": 1.2,
+        "mix": 1.0,
+        "algo": "tube",
+        "mode": "stereo"
+      },
+      {
+        "freq": 800,
+        "q": 1.0,
+        "drive": 1.3,
+        "mix": 1.0,
+        "algo": "tanh",
+        "mode": "stereo"
+      },
+      {
+        "freq": 2500,
+        "q": 1.0,
+        "drive": 1.1,
+        "mix": 1.0,
+        "algo": "soft_clip",
+        "mode": "mid"
+      },
+      {
+        "freq": 6000,
+        "q": 1.0,
+        "drive": 0.45,
+        "mix": 1.0,
+        "algo": "sine_foldback",
+        "mode": "stereo"
+      },
+      {
+        "freq": 12000,
+        "q": 1.0,
+        "drive": 1.0,
+        "mix": 1.0,
+        "algo": "bypass",
+        "mode": "stereo"
+      }
+    ],
+    "target_lufs": -14.0,
+    "ceiling_db": -1.0
+  },
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Experimental/032-prime-fractal-full/daily-2026-06-26_experimental_032-prime-fractal-v6.mid",
+  "source_bpm": 120.0,
+  "source_key": "prime-fractal (3 harmonic centres A/B/C; no C#/A/A#)",
+  "source_pitch_classes": [
+    0,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    11
+  ],
+  "source_form": "ABCBA",
+  "output_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP092-multiband-saturator-032-prime-fractal-full/SP092-multiband-saturator-032-prime-fractal-full.wav",
+  "output_ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP092-multiband-saturator-032-prime-fractal-full/SP092-multiband-saturator-032-prime-fractal-full.ogg",
+  "dry_reference_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP092-multiband-saturator-032-prime-fractal-full/dry_full_mix_sp001_reference.wav",
+  "lufs": -14.000000000000002,
+  "peak": 0.3473342533669706,
+  "silence_pct": 6.441407147782119,
+  "rms": 0.10723125072291786,
+  "pitch_verdict": "PASS",
+  "wet_hit_rate": 1.0,
+  "wet_he": 0.7118286369566031,
+  "dry_hit_rate": 1.0,
+  "dry_he": 0.6542067953696176,
+  "he_retention": 1.08807894077962,
+  "preflight": {
+    "grid_off": 0,
+    "out_scale": 0,
+    "out_section": 7,
+    "total_notes": 65,
+    "zero_drift": true,
+    "track_ends": [
+      10200
+    ],
+    "pcs_seen": [
+      0,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      11
+    ]
+  }
+}

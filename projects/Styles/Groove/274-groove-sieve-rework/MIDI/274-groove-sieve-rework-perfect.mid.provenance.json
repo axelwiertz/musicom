@@ -1,0 +1,219 @@
+{
+  "artifact": "274-groove-sieve-rework-perfect.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom two-phase rework (phase=2 rules: grid snap + scale/chord-tone quantize + voice-leading + range) (Method 025 Xenakis Sieve)",
+  "sources": [
+    "/opt/data/projects/Styles/Groove/274-groove-sieve-rework/MIDI/274-groove-sieve-rework-phase1.mid"
+  ],
+  "parameters": {
+    "bpm": 110,
+    "key": "G natural minor",
+    "mode": "aeolian",
+    "style": "groove",
+    "genre": "Groove",
+    "form": "32 bars / 8 sections",
+    "bars": 32,
+    "sections": [
+      {
+        "name": "Intro",
+        "bars": 4,
+        "prog": [
+          "i",
+          "VII",
+          "i",
+          "VII"
+        ],
+        "technique": "rise"
+      },
+      {
+        "name": "VerseA",
+        "bars": 4,
+        "prog": [
+          "i",
+          "III",
+          "iv",
+          "v"
+        ],
+        "technique": "rise"
+      },
+      {
+        "name": "VerseB",
+        "bars": 4,
+        "prog": [
+          "i",
+          "iv",
+          "v",
+          "VI"
+        ],
+        "technique": "rise"
+      },
+      {
+        "name": "Chorus",
+        "bars": 4,
+        "prog": [
+          "III",
+          "VII",
+          "i",
+          "iv"
+        ],
+        "technique": "rise"
+      },
+      {
+        "name": "Bridge",
+        "bars": 4,
+        "prog": [
+          "VI",
+          "III",
+          "VII",
+          "v"
+        ],
+        "technique": "invert"
+      },
+      {
+        "name": "VerseC",
+        "bars": 4,
+        "prog": [
+          "i",
+          "III",
+          "iv",
+          "v"
+        ],
+        "technique": "retro"
+      },
+      {
+        "name": "Chorus2",
+        "bars": 4,
+        "prog": [
+          "III",
+          "VII",
+          "i",
+          "iv"
+        ],
+        "technique": "rise"
+      },
+      {
+        "name": "Outro",
+        "bars": 4,
+        "prog": [
+          "i",
+          "VI",
+          "VII",
+          "i"
+        ],
+        "technique": "rise"
+      }
+    ],
+    "method": "025 Xenakis Sieve Theory",
+    "rework_source": "080-groove-sieve",
+    "seed": 20260828,
+    "humanize_seed": 62194,
+    "voices": [
+      [
+        "Lead",
+        65,
+        0
+      ],
+      [
+        "Horns",
+        61,
+        1
+      ],
+      [
+        "Rhodes",
+        4,
+        2
+      ],
+      [
+        "Bass",
+        33,
+        3
+      ],
+      [
+        "Counter",
+        48,
+        4
+      ],
+      [
+        "Drums",
+        0,
+        9
+      ]
+    ],
+    "humanize_profiles": {
+      "Lead": {
+        "timing_sigma_ms": 3.0,
+        "velocity_sigma": 7.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.15,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Horns": {
+        "timing_sigma_ms": 3.0,
+        "velocity_sigma": 8.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.15,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Rhodes": {
+        "timing_sigma_ms": 3.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.015,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.15,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Bass": {
+        "timing_sigma_ms": 5.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.15,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Counter": {
+        "timing_sigma_ms": 3.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.03,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.15,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Drums": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.008,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.15,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      }
+    },
+    "phase": 2,
+    "version": "perfect",
+    "off_grid": 0
+  },
+  "notes": "Grid-locked perfect layer (32 bars / 8 sections).",
+  "sha256": "06b0d8705667d518b78cb6510de752af5ec43ee593b9d794636d56e0fb7f2f87",
+  "bytes": 8971,
+  "created_utc": "2026-10-30T01:08:45.817229+00:00",
+  "provenance_version": "1.0"
+}

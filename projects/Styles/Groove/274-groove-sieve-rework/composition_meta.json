@@ -1,0 +1,164 @@
+{
+  "project": "274-groove-sieve-rework",
+  "pid": "274",
+  "genre": "Groove",
+  "style": "groove",
+  "key": "G natural minor",
+  "key_pcs": [
+    0,
+    2,
+    3,
+    5,
+    7,
+    9,
+    10
+  ],
+  "bpm": 110,
+  "bars": 32,
+  "sections": [
+    {
+      "name": "Intro",
+      "bars": 4,
+      "prog": [
+        "i",
+        "VII",
+        "i",
+        "VII"
+      ],
+      "technique": "rise"
+    },
+    {
+      "name": "VerseA",
+      "bars": 4,
+      "prog": [
+        "i",
+        "III",
+        "iv",
+        "v"
+      ],
+      "technique": "rise"
+    },
+    {
+      "name": "VerseB",
+      "bars": 4,
+      "prog": [
+        "i",
+        "iv",
+        "v",
+        "VI"
+      ],
+      "technique": "rise"
+    },
+    {
+      "name": "Chorus",
+      "bars": 4,
+      "prog": [
+        "III",
+        "VII",
+        "i",
+        "iv"
+      ],
+      "technique": "rise"
+    },
+    {
+      "name": "Bridge",
+      "bars": 4,
+      "prog": [
+        "VI",
+        "III",
+        "VII",
+        "v"
+      ],
+      "technique": "invert"
+    },
+    {
+      "name": "VerseC",
+      "bars": 4,
+      "prog": [
+        "i",
+        "III",
+        "iv",
+        "v"
+      ],
+      "technique": "retro"
+    },
+    {
+      "name": "Chorus2",
+      "bars": 4,
+      "prog": [
+        "III",
+        "VII",
+        "i",
+        "iv"
+      ],
+      "technique": "rise"
+    },
+    {
+      "name": "Outro",
+      "bars": 4,
+      "prog": [
+        "i",
+        "VI",
+        "VII",
+        "i"
+      ],
+      "technique": "rise"
+    }
+  ],
+  "phase1_path": "/opt/data/projects/Styles/Groove/274-groove-sieve-rework/MIDI/274-groove-sieve-rework-phase1.mid",
+  "perfect_path": "/opt/data/projects/Styles/Groove/274-groove-sieve-rework/MIDI/274-groove-sieve-rework-perfect.mid",
+  "humanized_path": "/opt/data/projects/Styles/Groove/274-groove-sieve-rework/MIDI/274-groove-sieve-rework-humanized.mid",
+  "hz_seed": 62194,
+  "hz": {
+    "Lead": {
+      "seed": 6281594,
+      "n_notes": 252,
+      "mean_abs_shift_ticks": 1.861,
+      "max_abs_shift_ticks": 7,
+      "mean_abs_vel_delta": 5.675,
+      "timing_sigma_ticks": 2.64
+    },
+    "Horns": {
+      "seed": 6281595,
+      "n_notes": 104,
+      "mean_abs_shift_ticks": 2.0,
+      "max_abs_shift_ticks": 8,
+      "mean_abs_vel_delta": 5.692,
+      "timing_sigma_ticks": 2.64
+    },
+    "Rhodes": {
+      "seed": 6281596,
+      "n_notes": 128,
+      "mean_abs_shift_ticks": 1.984,
+      "max_abs_shift_ticks": 8,
+      "mean_abs_vel_delta": 4.438,
+      "timing_sigma_ticks": 2.64
+    },
+    "Bass": {
+      "seed": 6281597,
+      "n_notes": 136,
+      "mean_abs_shift_ticks": 7.375,
+      "max_abs_shift_ticks": 15,
+      "mean_abs_vel_delta": 2.654,
+      "timing_sigma_ticks": 4.4
+    },
+    "Counter": {
+      "seed": 6281598,
+      "n_notes": 32,
+      "mean_abs_shift_ticks": 2.375,
+      "max_abs_shift_ticks": 6,
+      "mean_abs_vel_delta": 4.125,
+      "timing_sigma_ticks": 2.64
+    },
+    "Drums": {
+      "seed": 6281599,
+      "n_notes": 416,
+      "mean_abs_shift_ticks": 1.216,
+      "max_abs_shift_ticks": 5,
+      "mean_abs_vel_delta": 3.236,
+      "timing_sigma_ticks": 1.76
+    }
+  },
+  "raw_event_count": 252,
+  "lead_event_count": 252
+}

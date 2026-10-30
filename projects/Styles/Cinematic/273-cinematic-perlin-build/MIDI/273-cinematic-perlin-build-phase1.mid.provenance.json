@@ -1,0 +1,22 @@
+{
+  "artifact": "273-cinematic-perlin-build-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.method.040_perlin_noise_phase1",
+  "sources": [],
+  "parameters": {
+    "bpm": 76,
+    "bars": 32,
+    "seed": 928473,
+    "phase": 1,
+    "quantized": false,
+    "key": "D Minor (aeolian)",
+    "form": "cinematic-build",
+    "style": "cinematic",
+    "method": "040 Perlin Noise Composition (fBm gradient noise)"
+  },
+  "notes": "Raw Perlin fBm decode: 4-octave gradient-noise pitch contour + activity-density field. Float pitch, off-grid onsets, single voice, pre-rules.",
+  "sha256": "17c0447be1c5cb91c9c0ad3b3ac65e48b43bffe9ed1ec65f890d8d6dbc5dd1b8",
+  "bytes": 462,
+  "created_utc": "2026-10-29T23:10:50.109071+00:00",
+  "provenance_version": "1.0"
+}
