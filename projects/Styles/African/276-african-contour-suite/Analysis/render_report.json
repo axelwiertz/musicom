@@ -1,0 +1,41 @@
+{
+  "soundfont": "/opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2",
+  "style": "african",
+  "target_lufs": -14.0,
+  "phase1": {
+    "lufs": -16.09,
+    "true_peak_db": -1.0,
+    "target_lufs": -14.0,
+    "silence_ratio": 0.0838,
+    "rms_mean": 0.1238,
+    "rms_max": 0.2371,
+    "wav_bytes": 13067308,
+    "ogg_bytes": 556263,
+    "wav": "/opt/data/projects/Styles/African/276-african-contour-suite/Audio/276-african-contour-suite-phase1.wav",
+    "ogg": "/opt/data/projects/Styles/African/276-african-contour-suite/Audio/276-african-contour-suite-phase1.ogg"
+  },
+  "perfect": {
+    "lufs": -14.01,
+    "true_peak_db": -1.0,
+    "target_lufs": -14.0,
+    "silence_ratio": 0.0715,
+    "rms_mean": 0.1334,
+    "rms_max": 0.1988,
+    "wav_bytes": 13059372,
+    "ogg_bytes": 557717,
+    "wav": "/opt/data/projects/Styles/African/276-african-contour-suite/Audio/276-african-contour-suite-perfect.wav",
+    "ogg": "/opt/data/projects/Styles/African/276-african-contour-suite/Audio/276-african-contour-suite-perfect.ogg"
+  },
+  "humanized": {
+    "lufs": -14.02,
+    "true_peak_db": -1.0,
+    "target_lufs": -14.0,
+    "silence_ratio": 0.0713,
+    "rms_mean": 0.1337,
+    "rms_max": 0.1964,
+    "wav_bytes": 13059372,
+    "ogg_bytes": 560555,
+    "wav": "/opt/data/projects/Styles/African/276-african-contour-suite/Audio/276-african-contour-suite-humanized.wav",
+    "ogg": "/opt/data/projects/Styles/African/276-african-contour-suite/Audio/276-african-contour-suite-humanized.ogg"
+  }
+}

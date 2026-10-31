@@ -1,0 +1,54 @@
+{
+  "phase1": {
+    "path": "/opt/data/projects/Styles/African/276-african-contour-suite/MIDI/276-african-contour-suite-phase1.mid",
+    "size": 1883,
+    "n_tracks": 2,
+    "voice_track_lengths": [
+      61440
+    ],
+    "zero_drift": true,
+    "pitched_onsets": 208,
+    "drum_onsets": 0,
+    "off_grid": 205,
+    "scale_violations": 52,
+    "chord_violations": 96
+  },
+  "perfect": {
+    "path": "/opt/data/projects/Styles/African/276-african-contour-suite/MIDI/276-african-contour-suite-perfect.mid",
+    "size": 7855,
+    "n_tracks": 7,
+    "voice_track_lengths": [
+      61440,
+      61440,
+      61440,
+      61440,
+      61440,
+      61440
+    ],
+    "zero_drift": true,
+    "pitched_onsets": 460,
+    "drum_onsets": 472,
+    "off_grid": 0,
+    "scale_violations": 0,
+    "chord_violations": 0
+  },
+  "humanized": {
+    "path": "/opt/data/projects/Styles/African/276-african-contour-suite/MIDI/276-african-contour-suite-humanized.mid",
+    "size": 7804,
+    "n_tracks": 7,
+    "voice_track_lengths": [
+      61440,
+      61440,
+      61440,
+      61440,
+      61440,
+      61440
+    ],
+    "zero_drift": true,
+    "pitched_onsets": 460,
+    "drum_onsets": 472,
+    "off_grid": 420,
+    "scale_violations": 0,
+    "chord_violations": 5
+  }
+}

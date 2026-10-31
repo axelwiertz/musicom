@@ -1,0 +1,153 @@
+{
+  "project": "276-african-contour-suite",
+  "pid": "276",
+  "genre": "African",
+  "style": "african",
+  "key": "C major pentatonic",
+  "key_pcs": [
+    0,
+    2,
+    4,
+    7,
+    9
+  ],
+  "bpm": 112,
+  "bars": 32,
+  "total_ticks": 61440,
+  "sections": [
+    {
+      "name": "Intro",
+      "template": "oscillate",
+      "transform": "id",
+      "register_base": 60,
+      "density": 1,
+      "mode": "sync",
+      "midpoint_chord": "G"
+    },
+    {
+      "name": "Theme",
+      "template": "arch",
+      "transform": "id",
+      "register_base": 60,
+      "density": 2,
+      "mode": "sync",
+      "midpoint_chord": "Am"
+    },
+    {
+      "name": "Variation",
+      "template": "valley",
+      "transform": "R",
+      "register_base": 60,
+      "density": 2,
+      "mode": "sync",
+      "midpoint_chord": "G"
+    },
+    {
+      "name": "Development",
+      "template": "chaos",
+      "transform": "I",
+      "register_base": 72,
+      "density": 2,
+      "mode": "sync",
+      "midpoint_chord": "G"
+    },
+    {
+      "name": "Bridge",
+      "template": "arch",
+      "transform": "id",
+      "register_base": 48,
+      "density": 1,
+      "mode": "aug",
+      "midpoint_chord": "D"
+    },
+    {
+      "name": "Climax",
+      "template": "rising",
+      "transform": "RI",
+      "register_base": 72,
+      "density": 3,
+      "mode": "dense",
+      "midpoint_chord": "C"
+    },
+    {
+      "name": "Outro",
+      "template": "falling",
+      "transform": "id",
+      "register_base": 48,
+      "density": 2,
+      "mode": "sync",
+      "midpoint_chord": "G"
+    },
+    {
+      "name": "Coda",
+      "template": "oscillate",
+      "transform": "R",
+      "register_base": 48,
+      "density": 1,
+      "mode": "aug",
+      "midpoint_chord": "G"
+    }
+  ],
+  "phase1_path": "/opt/data/projects/Styles/African/276-african-contour-suite/MIDI/276-african-contour-suite-phase1.mid",
+  "perfect_path": "/opt/data/projects/Styles/African/276-african-contour-suite/MIDI/276-african-contour-suite-perfect.mid",
+  "humanized_path": "/opt/data/projects/Styles/African/276-african-contour-suite/MIDI/276-african-contour-suite-humanized.mid",
+  "hz_seed": 66700,
+  "hz": {
+    "Kalimba": {
+      "seed": 6736700,
+      "n_notes": 208,
+      "mean_abs_shift_ticks": 4.389,
+      "max_abs_shift_ticks": 16,
+      "mean_abs_vel_delta": 4.668,
+      "timing_sigma_ticks": 6.272
+    },
+    "Flute": {
+      "seed": 6736701,
+      "n_notes": 60,
+      "mean_abs_shift_ticks": 4.267,
+      "max_abs_shift_ticks": 16,
+      "mean_abs_vel_delta": 6.117,
+      "timing_sigma_ticks": 6.272
+    },
+    "Marimba": {
+      "seed": 6736702,
+      "n_notes": 96,
+      "mean_abs_shift_ticks": 4.031,
+      "max_abs_shift_ticks": 12,
+      "mean_abs_vel_delta": 4.167,
+      "timing_sigma_ticks": 6.272
+    },
+    "Bass": {
+      "seed": 6736703,
+      "n_notes": 64,
+      "mean_abs_shift_ticks": 8.641,
+      "max_abs_shift_ticks": 25,
+      "mean_abs_vel_delta": 4.328,
+      "timing_sigma_ticks": 8.96
+    },
+    "Counter": {
+      "seed": 6736704,
+      "n_notes": 32,
+      "mean_abs_shift_ticks": 4.25,
+      "max_abs_shift_ticks": 15,
+      "mean_abs_vel_delta": 4.344,
+      "timing_sigma_ticks": 6.272
+    },
+    "Drums": {
+      "seed": 6736705,
+      "n_notes": 472,
+      "mean_abs_shift_ticks": 1.176,
+      "max_abs_shift_ticks": 6,
+      "mean_abs_vel_delta": 3.142,
+      "timing_sigma_ticks": 1.792
+    }
+  },
+  "event_counts": {
+    "lead": 208,
+    "flute": 60,
+    "marimba": 96,
+    "bass": 64,
+    "counter": 32,
+    "drums": 472
+  }
+}

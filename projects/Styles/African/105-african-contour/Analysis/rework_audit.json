@@ -1,0 +1,49 @@
+{
+  "chosen": "/opt/data/projects/Styles/African/105-african-contour",
+  "genre": "African",
+  "audit_date": "2026-10-31T01:05:00Z",
+  "source_midi": "MIDI/105-african-contour.mid",
+  "source_phase1_midi": "MIDI/105-african-contour-phase1.mid",
+  "standard_failures": [],
+  "redesign_required": false,
+  "decision": "extension",
+  "standards": {
+    "1_engine_not_handrolled": {
+      "pass": true,
+      "evidence": "compose.py imports UnitMatrixComposer from workflows.unitmatrix_composer; no raw mido.MidiTrack/note_on authoring"
+    },
+    "2_zero_drift": {
+      "pass": true,
+      "evidence": "5 voice tracks all length 46080 ticks"
+    },
+    "3_rhythm_grid_sync": {
+      "pass": true,
+      "evidence": "pitched off-grid onsets = 0 (tracks 1-4); ch9 drums excluded"
+    },
+    "4_valid_track_setup": {
+      "pass": true,
+      "evidence": "6 tracks total (conductor + 5 voices: Kalimba/Flute/Marimba/Bass/Drums)"
+    },
+    "5_two_phase_artifacts": {
+      "pass": true,
+      "evidence": "both 105-african-contour.mid and 105-african-contour-phase1.mid present"
+    },
+    "6_provenance_and_index": {
+      "pass": true,
+      "evidence": "index.html + per-artifact .provenance.json sidecars present"
+    }
+  },
+  "source_identity": {
+    "genre": "African",
+    "method": "095 Contour Theory Composition (CTC, abstract layer)",
+    "key": "C major pentatonic",
+    "key_pcs": [0, 2, 4, 7, 9],
+    "bpm": 112,
+    "meter": "4/4",
+    "tpb": 480,
+    "form": "Intro/Theme/Variation/Development/Climax/Outro (6 x 4 = 24 bars)",
+    "voices": ["Kalimba(108)", "Flute(73)", "Marimba(12)", "DoubleBass(43)", "Drums(ch9)"],
+    "contour_vocabulary": ["oscillate", "arch", "valley", "chaos", "rising", "falling"],
+    "contour_transforms": ["id", "I", "R", "RI"]
+  }
+}

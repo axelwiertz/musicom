@@ -1,0 +1,25 @@
+{
+  "artifact": "276-african-contour-suite-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom two-phase rework (phase=1 raw whole-tone contour, Method 095 CTC)",
+  "sources": [
+    "/opt/data/projects/Styles/African/105-african-contour/MIDI/105-african-contour.mid"
+  ],
+  "parameters": {
+    "bpm": 112,
+    "key": "C major pentatonic",
+    "phase": 1,
+    "quantized": false,
+    "bars": 32,
+    "style": "african",
+    "genre": "African",
+    "seed": 20261031,
+    "realization": "whole-tone (rank -> base + 2*rank)",
+    "timing": "off-grid (16th +-30 tick jitter)"
+  },
+  "notes": "Raw contour walk, single Kalimba voice, off-grid, pre-rules.",
+  "sha256": "fc0eaa769bb95c4924485855aa541ed031e061e303387ddcf43949ecd0dcc5d8",
+  "bytes": 1883,
+  "created_utc": "2026-10-31T01:09:44.813872+00:00",
+  "provenance_version": "1.0"
+}

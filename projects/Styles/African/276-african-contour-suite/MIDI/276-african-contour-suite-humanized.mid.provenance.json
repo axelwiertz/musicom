@@ -1,0 +1,324 @@
+{
+  "artifact": "276-african-contour-suite-humanized.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom two-phase rework (phase=2 + humanization) (Method 095 CTC)",
+  "sources": [
+    "/opt/data/projects/Styles/African/276-african-contour-suite/MIDI/276-african-contour-suite-perfect.mid"
+  ],
+  "parameters": {
+    "bpm": 112,
+    "key": "C major pentatonic",
+    "key_pcs": [
+      0,
+      2,
+      4,
+      7,
+      9
+    ],
+    "style": "african",
+    "genre": "African",
+    "form": "32 bars / 8 sections",
+    "bars": 32,
+    "sections": [
+      {
+        "name": "Intro",
+        "bars": 4,
+        "palette": [
+          "C",
+          "G",
+          "C",
+          "C"
+        ],
+        "midpoint_chord": "G",
+        "template": "oscillate",
+        "transform": "id",
+        "register_base": 60,
+        "density": 1,
+        "mode": "sync"
+      },
+      {
+        "name": "Theme",
+        "bars": 4,
+        "palette": [
+          "C",
+          "Am",
+          "C",
+          "G"
+        ],
+        "midpoint_chord": "Am",
+        "template": "arch",
+        "transform": "id",
+        "register_base": 60,
+        "density": 2,
+        "mode": "sync"
+      },
+      {
+        "name": "Variation",
+        "bars": 4,
+        "palette": [
+          "Am",
+          "G",
+          "D",
+          "G"
+        ],
+        "midpoint_chord": "G",
+        "template": "valley",
+        "transform": "R",
+        "register_base": 60,
+        "density": 2,
+        "mode": "sync"
+      },
+      {
+        "name": "Development",
+        "bars": 4,
+        "palette": [
+          "D",
+          "G",
+          "Am",
+          "D"
+        ],
+        "midpoint_chord": "G",
+        "template": "chaos",
+        "transform": "I",
+        "register_base": 72,
+        "density": 2,
+        "mode": "sync"
+      },
+      {
+        "name": "Bridge",
+        "bars": 4,
+        "palette": [
+          "Am",
+          "D",
+          "G",
+          "Am"
+        ],
+        "midpoint_chord": "D",
+        "template": "arch",
+        "transform": "id",
+        "register_base": 48,
+        "density": 1,
+        "mode": "aug"
+      },
+      {
+        "name": "Climax",
+        "bars": 4,
+        "palette": [
+          "G",
+          "C",
+          "D",
+          "C"
+        ],
+        "midpoint_chord": "C",
+        "template": "rising",
+        "transform": "RI",
+        "register_base": 72,
+        "density": 3,
+        "mode": "dense"
+      },
+      {
+        "name": "Outro",
+        "bars": 4,
+        "palette": [
+          "C",
+          "G",
+          "Am",
+          "C"
+        ],
+        "midpoint_chord": "G",
+        "template": "falling",
+        "transform": "id",
+        "register_base": 48,
+        "density": 2,
+        "mode": "sync"
+      },
+      {
+        "name": "Coda",
+        "bars": 4,
+        "palette": [
+          "C",
+          "G",
+          "C",
+          "C"
+        ],
+        "midpoint_chord": "G",
+        "template": "oscillate",
+        "transform": "R",
+        "register_base": 48,
+        "density": 1,
+        "mode": "aug"
+      }
+    ],
+    "method": "095 Contour Theory Composition (CTC)",
+    "extension_source": "105-african-contour",
+    "audit_result": "all pass (extension)",
+    "seed": 20261031,
+    "humanize_seed": 66700,
+    "voices": [
+      [
+        "Kalimba",
+        108,
+        0
+      ],
+      [
+        "Flute",
+        73,
+        1
+      ],
+      [
+        "Marimba",
+        12,
+        2
+      ],
+      [
+        "Bass",
+        43,
+        3
+      ],
+      [
+        "Counter",
+        75,
+        4
+      ],
+      [
+        "Drums",
+        0,
+        9
+      ]
+    ],
+    "humanize_profiles": {
+      "Kalimba": {
+        "timing_sigma_ms": 7.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Flute": {
+        "timing_sigma_ms": 7.0,
+        "velocity_sigma": 7.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Marimba": {
+        "timing_sigma_ms": 7.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Bass": {
+        "timing_sigma_ms": 10.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.03,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Counter": {
+        "timing_sigma_ms": 7.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Drums": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.008,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      }
+    },
+    "variation_techniques": [
+      "retrograde (Variation)",
+      "inversion (Development)",
+      "register shift +12 (Development/Climax)",
+      "rhythmic augmentation (Bridge/Coda)",
+      "rhythmic diminution (Climax)",
+      "counterline Pan Flute (Bridge/Climax)",
+      "density rise + thinning (Climax/Coda)"
+    ],
+    "phase": 2,
+    "version": "humanized",
+    "humanize_stats": {
+      "Kalimba": {
+        "seed": 6736700,
+        "n_notes": 208,
+        "mean_abs_shift_ticks": 4.389,
+        "max_abs_shift_ticks": 16,
+        "mean_abs_vel_delta": 4.668,
+        "timing_sigma_ticks": 6.272
+      },
+      "Flute": {
+        "seed": 6736701,
+        "n_notes": 60,
+        "mean_abs_shift_ticks": 4.267,
+        "max_abs_shift_ticks": 16,
+        "mean_abs_vel_delta": 6.117,
+        "timing_sigma_ticks": 6.272
+      },
+      "Marimba": {
+        "seed": 6736702,
+        "n_notes": 96,
+        "mean_abs_shift_ticks": 4.031,
+        "max_abs_shift_ticks": 12,
+        "mean_abs_vel_delta": 4.167,
+        "timing_sigma_ticks": 6.272
+      },
+      "Bass": {
+        "seed": 6736703,
+        "n_notes": 64,
+        "mean_abs_shift_ticks": 8.641,
+        "max_abs_shift_ticks": 25,
+        "mean_abs_vel_delta": 4.328,
+        "timing_sigma_ticks": 8.96
+      },
+      "Counter": {
+        "seed": 6736704,
+        "n_notes": 32,
+        "mean_abs_shift_ticks": 4.25,
+        "max_abs_shift_ticks": 15,
+        "mean_abs_vel_delta": 4.344,
+        "timing_sigma_ticks": 6.272
+      },
+      "Drums": {
+        "seed": 6736705,
+        "n_notes": 472,
+        "mean_abs_shift_ticks": 1.176,
+        "max_abs_shift_ticks": 6,
+        "mean_abs_vel_delta": 3.142,
+        "timing_sigma_ticks": 1.792
+      }
+    }
+  },
+  "notes": "Humanized layer (style african + per-instrument DNA).",
+  "sha256": "3615c63d51e219688db04df95f7f32e4642d19d3438796dfaaa9a66e68b57193",
+  "bytes": 7804,
+  "created_utc": "2026-10-31T01:09:44.926912+00:00",
+  "provenance_version": "1.0"
+}
