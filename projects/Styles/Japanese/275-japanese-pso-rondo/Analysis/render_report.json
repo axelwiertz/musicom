@@ -1,0 +1,41 @@
+{
+  "soundfont": "/opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2",
+  "style": "japanese",
+  "target_lufs": -14.0,
+  "phase1": {
+    "lufs": -17.83,
+    "true_peak_db": -1.0,
+    "target_lufs": -14.0,
+    "silence_ratio": 0.3705,
+    "rms_mean": 0.0967,
+    "rms_max": 0.2441,
+    "wav_bytes": 11309868,
+    "ogg_bytes": 553676,
+    "wav": "/opt/data/projects/Styles/Japanese/275-japanese-pso-rondo/Audio/275-japanese-pso-rondo-phase1.wav",
+    "ogg": "/opt/data/projects/Styles/Japanese/275-japanese-pso-rondo/Audio/275-japanese-pso-rondo-phase1.ogg"
+  },
+  "perfect": {
+    "lufs": -15.27,
+    "true_peak_db": -1.0,
+    "target_lufs": -14.0,
+    "silence_ratio": 0.0696,
+    "rms_mean": 0.1412,
+    "rms_max": 0.3067,
+    "wav_bytes": 11556652,
+    "ogg_bytes": 489648,
+    "wav": "/opt/data/projects/Styles/Japanese/275-japanese-pso-rondo/Audio/275-japanese-pso-rondo-perfect.wav",
+    "ogg": "/opt/data/projects/Styles/Japanese/275-japanese-pso-rondo/Audio/275-japanese-pso-rondo-perfect.ogg"
+  },
+  "humanized": {
+    "lufs": -15.43,
+    "true_peak_db": -1.0,
+    "target_lufs": -14.0,
+    "silence_ratio": 0.07,
+    "rms_mean": 0.1389,
+    "rms_max": 0.2964,
+    "wav_bytes": 11558700,
+    "ogg_bytes": 488035,
+    "wav": "/opt/data/projects/Styles/Japanese/275-japanese-pso-rondo/Audio/275-japanese-pso-rondo-humanized.wav",
+    "ogg": "/opt/data/projects/Styles/Japanese/275-japanese-pso-rondo/Audio/275-japanese-pso-rondo-humanized.ogg"
+  }
+}

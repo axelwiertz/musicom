@@ -1,0 +1,88 @@
+{
+  "style": "japanese",
+  "genre": "Japanese",
+  "method": "117 Particle Swarm Optimization Composition",
+  "method_layer": "concrete",
+  "method_paradigm": "Stochastic",
+  "form": "rondo",
+  "key": "A Yo Pentatonic (major pentatonic)",
+  "bpm": 78,
+  "bars": 20,
+  "sections": [
+    "A1",
+    "B",
+    "A2",
+    "C",
+    "A3"
+  ],
+  "pso_raw_events": 40,
+  "pso_best_fitness": 99.76,
+  "phase1_path": "/opt/data/projects/Styles/Japanese/275-japanese-pso-rondo/MIDI/275-japanese-pso-rondo-phase1.mid",
+  "perfect_path": "/opt/data/projects/Styles/Japanese/275-japanese-pso-rondo/MIDI/275-japanese-pso-rondo-perfect.mid",
+  "humanized_path": "/opt/data/projects/Styles/Japanese/275-japanese-pso-rondo/MIDI/275-japanese-pso-rondo-humanized.mid",
+  "hz_seed": 84037,
+  "hz": {
+    "Lead": {
+      "seed": 8487737,
+      "n_notes": 43,
+      "mean_abs_shift_ticks": 3.209,
+      "max_abs_shift_ticks": 10,
+      "mean_abs_vel_delta": 4.814,
+      "timing_sigma_ticks": 4.368
+    },
+    "Counter": {
+      "seed": 8487738,
+      "n_notes": 20,
+      "mean_abs_shift_ticks": 2.45,
+      "max_abs_shift_ticks": 6,
+      "mean_abs_vel_delta": 6.25,
+      "timing_sigma_ticks": 4.368
+    },
+    "Harmony": {
+      "seed": 8487739,
+      "n_notes": 80,
+      "mean_abs_shift_ticks": 2.812,
+      "max_abs_shift_ticks": 8,
+      "mean_abs_vel_delta": 3.45,
+      "timing_sigma_ticks": 4.368
+    },
+    "Bass": {
+      "seed": 8487740,
+      "n_notes": 40,
+      "mean_abs_shift_ticks": 5.45,
+      "max_abs_shift_ticks": 13,
+      "mean_abs_vel_delta": 3.25,
+      "timing_sigma_ticks": 3.744
+    },
+    "Drums": {
+      "seed": 8487741,
+      "n_notes": 52,
+      "mean_abs_shift_ticks": 0.615,
+      "max_abs_shift_ticks": 2,
+      "mean_abs_vel_delta": 2.538,
+      "timing_sigma_ticks": 1.248
+    }
+  },
+  "section_tension": [
+    [
+      "A1",
+      0.45
+    ],
+    [
+      "B",
+      0.65
+    ],
+    [
+      "A2",
+      0.5
+    ],
+    [
+      "C",
+      0.8
+    ],
+    [
+      "A3",
+      0.55
+    ]
+  ]
+}

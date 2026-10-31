@@ -1,0 +1,37 @@
+Registry: <Instrument Synth Voice (family=Synth, program=54, range=36-96)>
+Synth Voice: program=54 gm='Synth Voice' stem='Synth_Voice' sweet=(55, 79) A4=440.0Hz
+Synth Voice: zones={'low': (36, 55), 'mid': (56, 71), 'high': (72, 84), 'top_extension': (85, 96)}
+Synth Voice: art=['ah', 'legato', 'swell', 'marcato', 'staccato', 'vibrato', 'accent', 'decay_fade'] synth=phase_mod reverb=2.8s pan=0.0
+Synth Voice: C2=65.41Hz C4=261.63Hz C6=1046.50Hz
+
+Zero-drift: True (OK)
+MIDI: /opt/data/projects/Instruments/_test/synth_voice_test.mid (155 bytes)
+SoundFont: /opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2
+WAV (solo): /opt/data/projects/Instruments/_test/synth_voice_test.wav (971052 bytes)
+Spectral check: 4-8kHz buzz energy = 15.7% (OK)
+
+Stem label: GM_PROGRAMS[54] = 'Synth Voice'
+SF2 preset 54 -> 'Synth Voice'
+
+Stems rendered (2 files):
+  track00_Synth_Voice.wav (971052 bytes)
+  track01_Drums.wav (706092 bytes)
+
+PhaseModSynth voice G4: peak=0.768 sustain_rms=0.2163 sustain/peak=0.282
+Additive formant voice G4: envelope peak=1.000
+Polysynth oscillator-voice G4: peak=1.439
+
+Pitch sweep (RMS, velocity 90, 1-bar held notes):
+  note  24: RMS =   2066.9 AUDIBLE
+  note  36: RMS =   1885.1 AUDIBLE
+  note  48: RMS =   1818.2 AUDIBLE
+  note  60: RMS =   1308.5 AUDIBLE
+  note  72: RMS =   1627.8 AUDIBLE
+  note  84: RMS =   1449.5 AUDIBLE
+  note  96: RMS =   1805.3 AUDIBLE
+  note 108: RMS =   1882.6 AUDIBLE
+  audible notes: [24, 36, 48, 60, 72, 84, 96, 108] (no gaps — SF2 never clips a composition)
+
+Spectral centroid: C4 = 4626 Hz, C6 = 6068 Hz
+
+ALL CHECKS PASSED

@@ -1,0 +1,246 @@
+{
+  "job": "random-style production (SP) layer-aligned",
+  "date": "2026-10-31",
+  "seed": 20261031,
+  "method": "SP-115",
+  "method_module": "sound.generators.chord_arranger",
+  "method_desc": "Chord-Driven 3-Track Generative Arranger (Midicake UNA-style)",
+  "layer": "ABSOLUTE - whole production layer replaced by a chord-driven 3-track generative arrangement (chord pad + arp melody + bass) fed by the source's F-major harmony",
+  "params": {
+    "sample_rate": 44100,
+    "bpm": 92.0,
+    "ppqn": 480,
+    "meter": "4/4",
+    "bar_ticks": 1920,
+    "n_bars": 24,
+    "macros": {
+      "density": 0.5,
+      "probability": 0.7,
+      "swing": 0.0,
+      "accent": 0.4,
+      "ratchet": 0.0,
+      "octave": 0.0,
+      "gate": 0.6,
+      "spread": 0.3
+    },
+    "programs": {
+      "chord": 48,
+      "melody": 73,
+      "bass": 43
+    },
+    "channels": {
+      "chord": 0,
+      "melody": 1,
+      "bass": 2
+    },
+    "chord_plan_degrees": [
+      "I",
+      "vi",
+      "IV",
+      "V",
+      "V",
+      "IV",
+      "vi",
+      "I",
+      "V",
+      "I",
+      "ii",
+      "V",
+      "IV",
+      "ii",
+      "V",
+      "I",
+      "I",
+      "IV",
+      "ii",
+      "V",
+      "IV",
+      "V",
+      "I",
+      "I"
+    ],
+    "chord_plan": [
+      {
+        "root": 53,
+        "quality": "maj"
+      },
+      {
+        "root": 50,
+        "quality": "min"
+      },
+      {
+        "root": 58,
+        "quality": "maj"
+      },
+      {
+        "root": 60,
+        "quality": "maj"
+      },
+      {
+        "root": 60,
+        "quality": "maj"
+      },
+      {
+        "root": 58,
+        "quality": "maj"
+      },
+      {
+        "root": 50,
+        "quality": "min"
+      },
+      {
+        "root": 53,
+        "quality": "maj"
+      },
+      {
+        "root": 60,
+        "quality": "maj"
+      },
+      {
+        "root": 53,
+        "quality": "maj"
+      },
+      {
+        "root": 55,
+        "quality": "min"
+      },
+      {
+        "root": 60,
+        "quality": "maj"
+      },
+      {
+        "root": 58,
+        "quality": "maj"
+      },
+      {
+        "root": 55,
+        "quality": "min"
+      },
+      {
+        "root": 60,
+        "quality": "maj"
+      },
+      {
+        "root": 53,
+        "quality": "maj"
+      },
+      {
+        "root": 53,
+        "quality": "maj"
+      },
+      {
+        "root": 58,
+        "quality": "maj"
+      },
+      {
+        "root": 55,
+        "quality": "min"
+      },
+      {
+        "root": 60,
+        "quality": "maj"
+      },
+      {
+        "root": 58,
+        "quality": "maj"
+      },
+      {
+        "root": 60,
+        "quality": "maj"
+      },
+      {
+        "root": 53,
+        "quality": "maj"
+      },
+      {
+        "root": 53,
+        "quality": "maj"
+      }
+    ],
+    "target_lufs": -14.0,
+    "ceiling_db": -1.0
+  },
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Experimental/262-harmonic-chorale-variations/MIDI/262-harmonic-chorale-variations-perfect.mid",
+  "source_humanized_midi": "/opt/data/repos/musicom/projects/Styles/Experimental/262-harmonic-chorale-variations/MIDI/262-harmonic-chorale-variations-humanized.mid",
+  "arrangement_midi": "/opt/data/repos/musicom/projects/Styles/Production/SP115-chord-arranger-262-harmonic-chorale-variations/MIDI/SP115-arrangement.mid",
+  "source_bpm": 92.0,
+  "source_key": "F major",
+  "source_pitch_classes": [
+    0,
+    2,
+    4,
+    5,
+    7,
+    9,
+    10
+  ],
+  "output_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP115-chord-arranger-262-harmonic-chorale-variations/SP115-chord-arranger-262-harmonic-chorale-variations.wav",
+  "output_ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP115-chord-arranger-262-harmonic-chorale-variations/SP115-chord-arranger-262-harmonic-chorale-variations.ogg",
+  "dry_reference_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP115-chord-arranger-262-harmonic-chorale-variations/dry_sp115_arrangement.wav",
+  "lufs": -14.059663528112157,
+  "peak": 0.8912509381337456,
+  "silence_pct": 5.240234854743988,
+  "rms": 0.12108367685058681,
+  "pitch_verdict": "PASS",
+  "wet_hit_rate": 0.9920634920634921,
+  "wet_he": 0.49344542990814844,
+  "dry_hit_rate": 0.9920634920634921,
+  "dry_he": 0.49055273972761854,
+  "preflight_humanized": {
+    "grid_off": 182,
+    "out_scale": 0,
+    "out_chord": 17,
+    "total_notes": 215,
+    "zero_drift": true,
+    "track_ends": [
+      46080
+    ],
+    "pcs_seen": [
+      0,
+      2,
+      4,
+      5,
+      7,
+      9,
+      10
+    ]
+  },
+  "preflight_perfect": {
+    "grid_off": 0,
+    "out_scale": 0,
+    "out_chord": 0,
+    "total_notes": 215,
+    "zero_drift": true,
+    "track_ends": [
+      46080
+    ],
+    "pcs_seen": [
+      0,
+      2,
+      4,
+      5,
+      7,
+      9,
+      10
+    ]
+  },
+  "arrangement_audit": {
+    "grid_off": 0,
+    "out_scale": 0,
+    "out_chord": 0,
+    "total_notes": 1417,
+    "zero_drift": true,
+    "track_ends": [
+      46080
+    ],
+    "pcs_seen": [
+      0,
+      2,
+      4,
+      5,
+      7,
+      9,
+      10
+    ]
+  }
+}

@@ -1,0 +1,162 @@
+{
+  "artifact": "275-japanese-pso-rondo-humanized.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom two-phase (phase=2 + humanization) (method 117 PSOC)",
+  "sources": [
+    "/opt/data/projects/Styles/Japanese/275-japanese-pso-rondo/MIDI/275-japanese-pso-rondo-perfect.mid"
+  ],
+  "parameters": {
+    "bpm": 78,
+    "key": "A",
+    "mode": "pentatonic",
+    "style": "japanese",
+    "form": "rondo",
+    "bars": 20,
+    "sections": [
+      "A1",
+      "B",
+      "A2",
+      "C",
+      "A3"
+    ],
+    "method": "117 Particle Swarm Optimization Composition",
+    "layer": "concrete",
+    "paradigm": "Stochastic",
+    "voices": [
+      [
+        "Lead",
+        "Koto",
+        107
+      ],
+      [
+        "Counter",
+        "Shakuhachi",
+        77
+      ],
+      [
+        "Harmony",
+        "Shamisen",
+        106
+      ],
+      [
+        "Bass",
+        "Koto",
+        107
+      ],
+      [
+        "Drums",
+        "ch9",
+        0
+      ]
+    ],
+    "humanize_seed": 84037,
+    "raw_seed": 731029,
+    "pso_best_fitness": 99.76,
+    "humanize_profiles": {
+      "Lead": {
+        "timing_sigma_ms": 7.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Counter": {
+        "timing_sigma_ms": 7.0,
+        "velocity_sigma": 7.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.03,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Harmony": {
+        "timing_sigma_ms": 7.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Bass": {
+        "timing_sigma_ms": 6.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Drums": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 3.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.005,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      }
+    },
+    "phase": 2,
+    "version": "humanized",
+    "humanize_stats": {
+      "Lead": {
+        "seed": 8487737,
+        "n_notes": 43,
+        "mean_abs_shift_ticks": 3.209,
+        "max_abs_shift_ticks": 10,
+        "mean_abs_vel_delta": 4.814,
+        "timing_sigma_ticks": 4.368
+      },
+      "Counter": {
+        "seed": 8487738,
+        "n_notes": 20,
+        "mean_abs_shift_ticks": 2.45,
+        "max_abs_shift_ticks": 6,
+        "mean_abs_vel_delta": 6.25,
+        "timing_sigma_ticks": 4.368
+      },
+      "Harmony": {
+        "seed": 8487739,
+        "n_notes": 80,
+        "mean_abs_shift_ticks": 2.812,
+        "max_abs_shift_ticks": 8,
+        "mean_abs_vel_delta": 3.45,
+        "timing_sigma_ticks": 4.368
+      },
+      "Bass": {
+        "seed": 8487740,
+        "n_notes": 40,
+        "mean_abs_shift_ticks": 5.45,
+        "max_abs_shift_ticks": 13,
+        "mean_abs_vel_delta": 3.25,
+        "timing_sigma_ticks": 3.744
+      },
+      "Drums": {
+        "seed": 8487741,
+        "n_notes": 52,
+        "mean_abs_shift_ticks": 0.615,
+        "max_abs_shift_ticks": 2,
+        "mean_abs_vel_delta": 2.538,
+        "timing_sigma_ticks": 1.248
+      }
+    }
+  },
+  "notes": "Humanized layer (style japanese + per-instrument DNA).",
+  "sha256": "fd05a30aeeaa24c48d740f2eb9238c53fe7791371eb85c7c071f8a7032f62ee0",
+  "bytes": 2259,
+  "created_utc": "2026-10-30T23:09:13.102320+00:00",
+  "provenance_version": "1.0"
+}

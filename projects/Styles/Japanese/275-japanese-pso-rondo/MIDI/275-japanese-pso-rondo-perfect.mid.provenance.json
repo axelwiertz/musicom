@@ -1,0 +1,121 @@
+{
+  "artifact": "275-japanese-pso-rondo-perfect.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom two-phase (phase=2 rules: tiered quantize + grid snap + dedup + voice-leading + tagged ornaments) (method 117 PSOC)",
+  "sources": [
+    "/opt/data/projects/Styles/Japanese/275-japanese-pso-rondo/MIDI/275-japanese-pso-rondo-phase1.mid"
+  ],
+  "parameters": {
+    "bpm": 78,
+    "key": "A",
+    "mode": "pentatonic",
+    "style": "japanese",
+    "form": "rondo",
+    "bars": 20,
+    "sections": [
+      "A1",
+      "B",
+      "A2",
+      "C",
+      "A3"
+    ],
+    "method": "117 Particle Swarm Optimization Composition",
+    "layer": "concrete",
+    "paradigm": "Stochastic",
+    "voices": [
+      [
+        "Lead",
+        "Koto",
+        107
+      ],
+      [
+        "Counter",
+        "Shakuhachi",
+        77
+      ],
+      [
+        "Harmony",
+        "Shamisen",
+        106
+      ],
+      [
+        "Bass",
+        "Koto",
+        107
+      ],
+      [
+        "Drums",
+        "ch9",
+        0
+      ]
+    ],
+    "humanize_seed": 84037,
+    "raw_seed": 731029,
+    "pso_best_fitness": 99.76,
+    "humanize_profiles": {
+      "Lead": {
+        "timing_sigma_ms": 7.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Counter": {
+        "timing_sigma_ms": 7.0,
+        "velocity_sigma": 7.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.03,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Harmony": {
+        "timing_sigma_ms": 7.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Bass": {
+        "timing_sigma_ms": 6.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Drums": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 3.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.005,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      }
+    },
+    "phase": 2,
+    "version": "perfect",
+    "off_grid": 0
+  },
+  "notes": "Grid-locked perfect layer (rondo, 20 bars).",
+  "sha256": "1ef3484d8f0700804f782fb27ebb5f678021c839fb14524afb7a79675e5a9476",
+  "bytes": 2249,
+  "created_utc": "2026-10-30T23:09:13.101986+00:00",
+  "provenance_version": "1.0"
+}

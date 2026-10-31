@@ -656,6 +656,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | World | Shakuhachi | 77 | 55–100 | lead, melody, ornament, drone, accent |
 | Synth | Pad 1 (new age) | 88 | 36–96 | pad, harmony, texture, drone, accent |
 | Synth | Synth Brass 1 | 62 | 36–96 | lead, harmony, accent, stab, pad, countermelody |
+| Synth | Synth Voice | 54 | 36–96 | lead, melody, harmony, pad, countermelody, accent |
 | Vocal | Choir Aahs | 52 | 40–88 | pad, harmony, melody, countermelody, anthem, texture |
 | Woodwind | Bagpipe | 109 | 53–96 | lead, melody, ornament, drone, accent |
 | Woodwind | Ocarina | 79 | 55–96 | lead, harmony, accent |
@@ -702,6 +703,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 13 | Xylophone | Xylophone ✓ (GM_PROGRAMS[13] + FluidR3 preset 13 both "Xylophone") |
 | 104 | Sitar | Sitar ✓ (GM_PROGRAMS[104] + FluidR3 preset 104 both "Sitar") |
 | 105 | Banjo | Banjo ✓ (GM_PROGRAMS[105] + FluidR3 preset 105 both "Banjo") |
+| 54 | Synth Voice | Synth_Voice ✓ (GM_PROGRAMS[54] + FluidR3 preset 54 both "Synth Voice" — labels match exactly, **no quirk**) |
 | 107 | Koto | Koto ✓ (GM_PROGRAMS[107] + FluidR3 preset 107 both "Koto") |
 | 106 | Shamisen | Shamisen ✓ (GM_PROGRAMS[106] + FluidR3 preset 106 both "Shamisen") |
 | 108 | Kalimba | Kalimba ✓ (GM_PROGRAMS[108] + FluidR3 preset 108 both "Kalimba") |
@@ -1600,3 +1602,62 @@ unison doubling with another melodic patch on the same pitches (2026-09-01
 comb-filter rule) — octaves/thirds/sixths or a drum kit are fine. Role: lead,
 melody, ornament, harmony, accent, pad — NOT a bass voice, NOT a Stradella
 chord-comp voice, NOT a folk-musette accordion (that is GM21).
+
+**Synth Voice added** (2026-10-31): GM54, **Synth-family voice-lead entry** —
+the classic analog/digital synthesizer "choir" (Roland VP-330 choir preset,
+CS-80 "voice", Vangelis Blade Runner / Jarre Oxygene synthwave leads): a
+detuned saw/square oscillator stack through a vowel (formant) filter, slow
+breathy attack, delayed LFO vibrato. Files: `Synth/synth_voice/
+instrument.md` + `synth_voice.py`. Verified end-to-end UnitMatrixComposer
+(1 bar, 1 section, Synth Voice SOLO + drum-kit context) → **zero-drift ✓** →
+MIDI **155 bytes** → FluidSynth WAV **971,052 bytes** SOLO render (FluidR3
+via `discover_soundfont()`) ✓; RenderPipeline stems on disk
+`track00_Synth_Voice.wav` (971,052 B) + `track01_Drums.wav` (706,092 B) ✓;
+solo-render spectral 4–8 kHz buzz **15.7%** (clean single voice, no
+comb-filtering; the patch is genuinely bright — centroid C4 4626 Hz / C6
+6068 Hz — so the buzz band carries real formant energy, still under the 20%
+gate). Stem-label: **no quirk** — `GM_PROGRAMS[54]` = "Synth Voice" AND
+FluidR3 preset 54 = "Synth Voice", labels match exactly. Synthesis:
+**PhaseModSynth primary** (`sound/synthesis/phase_mod.py` — saw carrier,
+sine modulator ratio 1.0, depth 2.6: between synth_pad 2.0 and synth_brass_1
+3.2 — a voice is softer than a horn, edgier than a pad; attack 0.25 s = the
+breath, release 0.35, sustain 0.85; FM_DEFAULTS/SYNTHESIS_DEFAULTS load
+through the registry), **Additive secondary** (formant-weighted harmonic
+stack, choir.py precedent: weights [1.0, 0.78, 0.62, 0.55, 0.40, 0.28, 0.18,
+0.10] — brighter top than the real choir, normalized to sum 1.0 for
+`apply_overtones`), **Polysynth tertiary** (saw + square stack, 6-cent
+detune, low-pass 3200 Hz resonance 0.6 = the vowel peak, slow gate 0.25 s,
+3 unison voices). Smoke tests: PhaseModSynth G4 peak 0.768 sustain/peak
+0.282 (holds, no collapse); Additive envelope peak 1.000; Polysynth G4 peak
+1.439. Empirical FluidR3 pitch sweep (RMS, velocity 90, notes 24/36/48/60/
+72/84/96/108): preset 54 audible **8/8, no gaps** (RMS 1308–2067 — bottom
+24 loudest at 2067, C4 dips to 1308, treble recovers) — full-keyboard patch,
+SF2 never clips a composition. Range 36–96 = idiomatic writing band (C2–C7;
+patch plays the full keyboard), sweet spot 55–79 (G3–G5 — the vocal-register
+heart), solo range 60–84 (C4–C6 — the "singing" band). Registration proof:
+`by_name('synth voice')` / `by_name('SYNTH VOICE')` → Synth Voice,
+`by_program(54)` → Synth Voice (distinct from 52 Choir Aahs / 53 Voice
+Oohs), `in_sweet_spot(67)` = True, `in_sweet_spot(24)` = False,
+`stem_label = 'Synth_Voice'`; `registry_table()` row "| Synth | Synth Voice
+| 54 | 36–96 | lead, melody, harmony, pad, countermelody, accent |";
+convenience constant `SYNTH_VOICE`. Role: lead (sustained voice-lead lines,
+60–84), melody (the "singing" patch of synthwave/retro-pop/film), harmony
+(2–3 note voice pads), pad (sustained vowel beds — slow attack hides chord
+entrances), countermelody, accent — NOT a bass voice (use synth_bass_1 /
+electric_bass), NOT a real-choir substitute (that is GM52 Choir Aahs), NOT a
+stab patch (slow attack — stabs bloom, write gaps). Polyphonic: pads and
+2–3 note harmonies fully idiomatic; unison melody + octave doubling is the
+width trick. REVERB_TAIL 2.8 s (hall/plate — same as choir: a voice is
+ALWAYS in a room; shorter than synth_pad 3.2 so leads keep presence). EQ:
+cut 350 Hz (oscillator stack + vowel formants pile up in the low-mid), boost
+2.4 kHz (the F3 vowel band — "ah" intelligibility), gentle 8.5 kHz air shelf
+(bright but NOT sibilant). PAN centre (±0.3 L/R spread on wide doubled-lead
+swells). Enum note: `MidiInstrument` has NO synth-voice constant (10-
+instrument legacy enum, 1-based) — use raw GM 54; the registry is the full
+KB. Channel quirk: melodic channel (0–9) — channel 9 triggers the drum map.
+Writing quirks: (1) the slow attack means short staccato notes bloom into
+the next — write stabs with a gap or accept the smear; (2) GM55 "Orchestra
+Hit" is the one-shot stab sibling and GM53 "Voice Oohs" the sampled solo
+voice — both still future candidates; (3) NEVER unison doubling with another
+melodic patch on the same pitches (2026-09-01 comb-filter rule) — octaves/
+thirds or a drum kit are fine.

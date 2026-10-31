@@ -99,6 +99,7 @@ _INSTRUMENT_MODULES = {
     "Woodwind.recorder.recorder": "recorder",
     "Synth.synth_pad.synth_pad": "synth_pad",
     "Synth.synth_brass_1.synth_brass_1": "synth_brass_1",
+    "Synth.synth_voice.synth_voice": "synth_voice",
 }
 
 _FIELDS = (
@@ -335,6 +336,7 @@ STRING_ENSEMBLE = ALL_INSTRUMENTS["string_ensemble"]
 TREMOLO_STRINGS = ALL_INSTRUMENTS["tremolo_strings"]
 SYNTH_PAD = ALL_INSTRUMENTS["synth_pad"]
 SYNTH_BRASS_1 = ALL_INSTRUMENTS["synth_brass_1"]
+SYNTH_VOICE = ALL_INSTRUMENTS["synth_voice"]
 # Voice-like family — one instrument per non-vocal source. The `voice_like`
 # key is the umbrella (vox humana); each member is also addressable directly.
 VOICE_LIKE = ALL_INSTRUMENTS["voice_like"]
@@ -494,6 +496,8 @@ def registry_table():
             role = "pad, harmony, texture, drone, accent"
         elif low == "synth brass 1":
             role = "lead, harmony, accent, stab, pad, countermelody"
+        elif low == "synth voice":
+            role = "lead, melody, harmony, pad, countermelody, accent"
         else:
             role = "lead, harmony, accent"
         rng = f"{inst.range_min}–{inst.range_max}" if inst.range_min else "-"
@@ -820,4 +824,16 @@ if __name__ == "__main__":
     print("  TANGO_ACCORDION.in_sweet_spot(30) =", TANGO_ACCORDION.in_sweet_spot(30))
     print("  TANGO_ACCORDION.range_min =", TANGO_ACCORDION.range_min,
           "TANGO_ACCORDION.range_max =", TANGO_ACCORDION.range_max)
+
+    print()
+    print("=== Synth Voice (GM54) ===")
+    print("  SYNTH_VOICE.midi_program =", SYNTH_VOICE.midi_program, "(should be 54)")
+    print("  by_name('synth voice') =", by_name("synth voice"))
+    print("  by_name('SYNTH VOICE') =", by_name("SYNTH VOICE"))
+    print("  by_program(54) =", by_program(54))
+    print("  SYNTH_VOICE.in_sweet_spot(67) =", SYNTH_VOICE.in_sweet_spot(67))
+    print("  SYNTH_VOICE.in_sweet_spot(24) =", SYNTH_VOICE.in_sweet_spot(24))
+    print("  SYNTH_VOICE.range_min =", SYNTH_VOICE.range_min,
+          "SYNTH_VOICE.range_max =", SYNTH_VOICE.range_max)
+    print("  SYNTH_VOICE.stem_label =", repr(SYNTH_VOICE.stem_label))
     print("  TANGO_ACCORDION.stem_label =", repr(TANGO_ACCORDION.stem_label))

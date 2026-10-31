@@ -1,17 +1,17 @@
 {
   "job": "random-style production (SP) layer-aligned",
-  "date": "2026-10-30",
-  "seed": 20261030,
-  "method": "SP-092",
-  "method_module": "sound.effects.multiband_saturator",
-  "method_desc": "6-Band Multiband Saturator w/ 15 Selectable Algorithms & Per-Band M/S Routing (Kreuzberg Audio Oberton-style)",
-  "source_midi": "/opt/data/repos/musicom/projects/Styles/Experimental/032-prime-fractal-full/daily-2026-06-26_experimental_032-prime-fractal-v6.mid",
-  "source_project": "Experimental/032-prime-fractal-full/daily-2026-06-26_experimental_032-prime-fractal-v6.mid",
+  "date": "2026-10-31",
+  "seed": 20261031,
+  "method": "SP-115",
+  "method_module": "sound.generators.chord_arranger",
+  "method_desc": "Chord-Driven 3-Track Generative Arranger \u2014 input chords -> chord/rhythm + arpeggiated melody + harmony-following bass tracks; ratchets/trills/swing/probability/accents/Euclidean muting; 8-macro + 16-step-lane modulation bus (Midicake UNA-style)",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Experimental/262-harmonic-chorale-variations/MIDI/262-harmonic-chorale-variations-humanized.mid",
+  "source_project": "Experimental/262-harmonic-chorale-variations/MIDI/262-harmonic-chorale-variations-humanized.mid",
   "registry_size": 72,
   "recent_excluded": [
     "SP-078",
+    "SP-092",
     "SP-094",
-    "SP-095",
     "SP-109",
     "SP-119",
     "SP-127"
@@ -51,7 +51,7 @@
     "SP-086",
     "SP-090",
     "SP-091",
-    "SP-092",
+    "SP-095",
     "SP-096",
     "SP-097",
     "SP-098",
@@ -87,8 +87,8 @@
     "SP-133",
     "SP-134"
   ],
-  "n_candidates": 401,
-  "n_well_formed": 289,
-  "n_meaningful": 288,
+  "n_candidates": 405,
+  "n_well_formed": 293,
+  "n_meaningful": 292,
   "rejected_degenerate": []
 }

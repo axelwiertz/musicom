@@ -1,0 +1,24 @@
+{
+  "artifact": "275-japanese-pso-rondo-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.method.117_pso_phase1",
+  "sources": [],
+  "parameters": {
+    "bpm": 78,
+    "bars": 20,
+    "seed": 731029,
+    "phase": 1,
+    "quantized": false,
+    "key": "A Yo Pentatonic (major pentatonic)",
+    "form": "rondo",
+    "style": "japanese",
+    "pso_population": 40,
+    "pso_iterations": 90,
+    "method": "117 Particle Swarm Optimization Composition"
+  },
+  "notes": "Raw PSO decode: swarm-optimized continuous (pitch x onset x velocity) lead. Float pitch (rounded, not snapped), off-grid onsets, single voice, pre-rules.",
+  "sha256": "b7b121a38c141fbabcf178278ca34849729351c29b751c00a55c7f6301f6a4dd",
+  "bytes": 448,
+  "created_utc": "2026-10-30T23:09:13.028215+00:00",
+  "provenance_version": "1.0"
+}
