@@ -107,6 +107,15 @@ GENERATOR_REGISTRY = {
     "HC-072": (None, None, "Tabla Solo Composition — Gharana Theme-and-Variation Architecture (spec in human_methods_db.md)"),
     "HC-073": (None, None, "Lithuanian Sutartinės Polyphonic Craft — Secondal-Cluster Interlock (spec in human_methods_db.md)"),
     "HC-074": (None, None, "Isorhythmic Motet Composition — Talea & Color Cyclic Architecture (spec in human_methods_db.md)"),
+    # --- Abstract layer weekly promotion 2026-11-01 (report 127) ---
+    "ABS-127": ("rules.subset_network", None, "Sprague-Grundy Nimber Composition (SGNC) — abstract nimber tension curves + P-position cadence schedule (rules.subset_network)"),
+    # --- Human methods weekly promotion 2026-11-01 (reports HC-075..HC-080) ---
+    "HC-075": (None, None, "Bel Canto Aria Construction — La Solita Forma (spec in human_methods_db.md)"),
+    "HC-076": (None, None, "Pansori Madang Composition — Sori/Aniri/Ballim over Jangdan Cycles (spec in human_methods_db.md)"),
+    "HC-077": (None, None, "Kulintang/Palabunibunyan — Rhythmic-Mode Binding & Ornamental Improvisation (spec in human_methods_db.md)"),
+    "HC-078": (None, None, "Tin Pan Alley 32-Bar AABA Song Form (spec in human_methods_db.md)"),
+    "HC-079": (None, None, "Musique Concrète Tape-Music Composition — Studio Montage of Sound Objects (spec in human_methods_db.md)"),
+    "HC-080": (None, None, "Notre-Dame Organum & Rhythmic-Mode Composition (spec in human_methods_db.md)"),
 }
 
 

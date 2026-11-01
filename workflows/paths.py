@@ -240,6 +240,18 @@ METHOD_LEVELS = {
     "HC-072": ("L4", False),  # Tabla Solo — Gharana Theme-and-Variation Architecture (spec)
     "HC-073": ("L3", False),  # Lithuanian Sutartinės Secondal-Cluster Interlock (spec)
     "HC-074": ("L4", False),  # Isorhythmic Motet — Talea & Color Cyclic Architecture (spec)
+    # REGISTERED 2026-11-01 (weekly prose->code promotion, reports 126..130, HC-075..080)
+    "126": ("L4", False),   # Knight's Tour Composition (KTC) (spec)
+    "ABS-127": ("L3", True),  # Sprague-Grundy Nimber Composition (SGNC) — rules.subset_network (abstract)
+    "128": ("L4", False),   # Van Eck Sequence Composition (VESC) (spec)
+    "129": ("L4", False),   # Artin Braid Group Composition (ABGC) (spec)
+    "130": ("L1", False),   # Subshift of Finite Type Composition (SFT-C) (spec)
+    "HC-075": ("L4", False),  # Bel Canto Aria Construction — La Solita Forma (spec)
+    "HC-076": ("L4", False),  # Pansori Madang Composition — Sori/Aniri/Ballim over Jangdan (spec)
+    "HC-077": ("L3", False),  # Kulintang/Palabunibunyan — Rhythmic-Mode Binding (spec)
+    "HC-078": ("L4", False),  # Tin Pan Alley 32-Bar AABA Song Form (spec)
+    "HC-079": ("L4", False),  # Musique Concrète Tape-Music Montage (spec)
+    "HC-080": ("L3", False),  # Notre-Dame Organum & Rhythmic-Mode Composition (spec)
     # --- L1 MICRO ---
     "002": ("L1", True),   # Markov Transitions
     "011": ("L1", False),  # Voice-Leading Graph Search
