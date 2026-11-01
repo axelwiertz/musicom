@@ -1,0 +1,108 @@
+{
+  "job": "random-style production (SP) layer-aligned",
+  "date": "2026-11-01",
+  "seed": 20261101,
+  "method": "SP-111",
+  "method_module": "sound.synthesis.odd1_engine",
+  "method_desc": "Multi-Playhead Microsonic Granular Engine (Oddment ODD-1-style)",
+  "layer": "ABSOLUTE",
+  "params": {
+    "sample_rate": 44100,
+    "mode": "synth",
+    "time_path": "forward",
+    "grain_spacing_ms": 40.0,
+    "hop_samples": 1764,
+    "playhead_speed": 1764,
+    "heads": [
+      {
+        "layer": 0,
+        "head": 0,
+        "pitch_st": 0,
+        "grain_size_ms": 80.0,
+        "filter_cutoff": 1.0
+      },
+      {
+        "layer": 0,
+        "head": 1,
+        "pitch_st": 0,
+        "grain_size_ms": 80.0,
+        "filter_cutoff": 0.7
+      },
+      {
+        "layer": 0,
+        "head": 2,
+        "pitch_st": -12,
+        "grain_size_ms": 50.0,
+        "filter_cutoff": 0.6
+      },
+      {
+        "layer": 0,
+        "head": 3,
+        "pitch_st": 12,
+        "grain_size_ms": 100.0,
+        "filter_cutoff": 0.4
+      },
+      {
+        "layer": 1,
+        "head": 0,
+        "pitch_st": 0,
+        "grain_size_ms": 40.0,
+        "filter_cutoff": 0.8
+      },
+      {
+        "layer": 1,
+        "head": 1,
+        "pitch_st": 0,
+        "grain_size_ms": 120.0,
+        "filter_cutoff": 0.5
+      },
+      {
+        "layer": 1,
+        "head": 2,
+        "pitch_st": -12,
+        "grain_size_ms": 60.0,
+        "filter_cutoff": 0.55
+      },
+      {
+        "layer": 1,
+        "head": 3,
+        "pitch_st": 12,
+        "grain_size_ms": 90.0,
+        "filter_cutoff": 0.4
+      }
+    ],
+    "stereo_seeds": [
+      20261101,
+      20261102
+    ],
+    "target_lufs": -18.0,
+    "ceiling_db": -1.0,
+    "trim_sec": 69.5
+  },
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Classical/studio_grand_extended/v1/studio_grand_extended.mid",
+  "source_bpm": 110.0,
+  "source_pitch_classes": [
+    0,
+    2,
+    4,
+    5,
+    7,
+    9,
+    11
+  ],
+  "source_key": "C major",
+  "source_bars": 32,
+  "output_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP111-odd1-studio-grand-extended/SP111-odd1-studio-grand-extended.wav",
+  "output_ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP111-odd1-studio-grand-extended/SP111-odd1-studio-grand-extended.ogg",
+  "lufs": -18.0,
+  "peak": 0.7064457996741456,
+  "silence_pct": 2.0318112856653454,
+  "rms": 0.07639681568035298,
+  "mono_corr": 0.06092548894191931,
+  "pitch_verdict": "PASS",
+  "hit_rate": 1.0,
+  "he_mean": 0.3214725496745762,
+  "dry_he_mean": 0.4644856161941381,
+  "he_retention": 0.6921044236173126,
+  "dry_hit_rate": 1.0
+}

@@ -634,6 +634,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Guitar | Overdriven Guitar | 29 | 28–84 | lead, melody, accent, rhythm, strum, countermelody |
 | Guitar | Distortion Guitar | 30 | 28–84 | lead, melody, accent, rhythm, power-chord strum, countermelody |
 | Bass | Electric Bass (finger) | 33 | 24–84 | bass, rhythm, countermelody, accent |
+| Bass | Acoustic Bass | 32 | 24–72 | bass, rhythm, countermelody, accent, melody |
 | Bass | Fretless Bass | 35 | 24–72 | bass, melody, countermelody, groove, slide, color |
 | Bass | Synth Bass 1 | 38 | 24–84 | bass, rhythm, groove, accent |
 | Percussion | Drum Kit | ch9 | 35–81 | rhythm, groove, accent |
@@ -734,6 +735,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 ||| 44 | Tremolo Strings | Tremolo_Strings ✓ (GM_PROGRAMS[44] = "Tremolo Strings"; FluidR3 preset 44 = "Tremolo" — one-word SF2 spelling, cosmetic only, **no routing impact**) |
 ||| 30 | Distortion Guitar | Distortion_Guitar ✓ (GM_PROGRAMS[30] + FluidR3 preset 30 both "Distortion Guitar" — labels match exactly, **no quirk**) |
 ||| 62 | Synth Brass 1 | Synth_Brass_1 ✓ (GM_PROGRAMS[62] = "Synth Brass 1"; FluidR3 preset 62 = "Synth Brass 1" — labels match exactly, **no quirk**) |
+||| 32 | Acoustic Bass | Acoustic_Bass ✓ (GM_PROGRAMS[32] = "Acoustic Bass"; FluidR3 preset 32 = "Acoustic Bass" — labels match exactly, **no quirk**) |
 
 > **Known off-by-one in existing entries**: ~~`trumpet.py` uses 57~~ **FIXED 2026-08-27**: trumpet is now 56 (SF2 preset 56=`SoloTrumpet`). `piano.py`=1 → actually Bright Acoustic Piano (GM #2) — cosmetic label difference only, no routing impact. Legacy registry rows kept as-is for piano; new instruments use 0-indexed programs matching pipeline+SF2.
 
@@ -1661,3 +1663,55 @@ Hit" is the one-shot stab sibling and GM53 "Voice Oohs" the sampled solo
 voice — both still future candidates; (3) NEVER unison doubling with another
 melodic patch on the same pitches (2026-09-01 comb-filter rule) — octaves/
 thirds or a drum kit are fine.
+
+**Acoustic Bass added** (2026-11-01): GM32, **Bass-family fourth entry** — the
+upright double bass played PIZZICATO: the jazz walking-bass / bluegrass slap /
+rockabilly thump voice (Ray Brown, Paul Chambers, Ron Carter, Charlie Haden,
+NHØP, Stanley Clarke). The same instrument as the orchestral Contrabass
+(GM43) but in its plucked idiom — finger-plucked gut/steel strings over a huge
+wooden body, fundamental-rich woody thump, NO electronics in the signal path
+(instrument.md + acoustic_bass.py), verified end-to-end UnitMatrixComposer
+(1 bar, 1 section, Acoustic Bass SOLO + drum-kit context) → **zero-drift ✓** →
+MIDI **172 bytes** → FluidSynth WAV **727,852 bytes** SOLO render (FluidR3 via
+`discover_soundfont()`) ✓; RenderPipeline stems on disk
+`track00_Acoustic_Bass.wav` (727,852 B) + `track01_Drums.wav` (706,092 B) ✓;
+stem label `GM_PROGRAMS[32]` = **"Acoustic Bass"** and FluidR3 preset 32 =
+**"Acoustic Bass"** — labels match exactly, **no quirk**; solo-render spectral
+4–8 kHz buzz **5.3%** (clean single voice, no comb-filtering). Synthesis:
+**Karplus-Strong primary** (SP-011 — a plucked string waveguide IS the physical
+model: loop_gain 0.9975 — long pizz ring, between electric bass 0.9970 and
+harp 0.9985, matching the sitar/fretless class; `lowpass_hz` 1600 — the DARKEST
+of the plucked basses: the huge wooden body rolls the top off into the woody
+thump band, THE acoustic-bass signature; noise_component 0.02 finger scrape),
+**BowedString secondary for ARCO only** (bow_velocity 0.18, bow_force 1.3,
+bow_position 0.20 sul tasto, lpf_coef 0.6, attack 0.14 s — a bowed acoustic
+bass reads as a woody cello), **ModalSynth `'string'` weak fallback**.
+Smoke tests: Karplus E2 peak 0.290, head_rms 0.0069 → tail_rms 0.0005 (real
+string decay, not a DC plateau); BowedString constructs and renders.
+Empirical FluidR3 pitch sweep (RMS, velocity 90, notes 24/28/33/36/40/45/48/
+52/55/60/64/67/72): preset 32 audible **13/13, no gaps** (0.1274 → 0.0497,
+smooth rolloff, no treble cliff; patch also plays 20–96, wider than the
+idiomatic band) — SF2 never clips a composition. Range 24–72 = idiomatic
+writing band (C1–C5; real 4-string upright is E1–G4 = 28–67, 5-string adds
+B0 = 23), sweet spot 40–57 (E2–A3 — the jazz walking pocket), solo range
+36–60 (C2–C4). Registration proof: `by_name('acoustic bass')` /
+`by_name('ACOUSTIC BASS')` → Acoustic Bass, `by_program(32)` → Acoustic Bass
+(distinct from 33 electric / 35 fretless / 38 synth / 43 contrabass),
+`in_sweet_spot(48)` = True, `in_sweet_spot(20)` = False, `stem_label =
+'Acoustic_Bass'`; `registry_table()` row "| Bass | Acoustic Bass | 32 | 24–72 |
+bass, rhythm, countermelody, accent, melody |"; convenience constant
+`ACOUSTIC_BASS`. Role: bass, rhythm, countermelody, accent, melody — the
+acoustic bass is a monophonic line instrument (walking bass, root-fifth
+groove, slap patterns), NOT a chord/comping voice and NOT a pad; the pizz
+ring IS the identity (long, woody, fundamental-rich). Production: REVERB_TAIL
+1.8 s (jazz-club room — the upright lives in a small wooden room, not a hall;
+double_bass 1.8 precedent), EQ cut 220 Hz (body boxiness — the woody thump
+itself is LOWER ~100 Hz, keep it), boost 700 Hz (finger attack / pizz growl),
+4 kHz air shelf (finger scrape), PAN centre. Writing quirks: (1) monophonic —
+never ask the composer for a 3-note "acoustic bass chord" (double-stops on
+adjacent strings are a rare overdub); (2) SF2 honours no portamento — write a
+slide as a fast chromatic run or pitch-bend; (3) slap is velocity-hungry
+(vel ≥ 90 for the rockabilly thwack) while the walking line sits 65–80;
+(4) **no unison doubling** with another melodic patch on the same pitches
+(2026-09-01 comb-filter rule) — octaves or a low bass note an octave+ below
+are fine, and a drum kit is fine.

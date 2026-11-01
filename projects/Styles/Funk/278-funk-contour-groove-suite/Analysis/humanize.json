@@ -1,0 +1,101 @@
+{
+  "seed": 4153695084,
+  "style": "funk",
+  "per_voice": {
+    "Trumpet": {
+      "seed": 419523203484,
+      "profile": {
+        "timing_sigma_ms": 4.0,
+        "velocity_sigma": 8.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 224,
+      "mean_abs_shift_ticks": 2.308,
+      "max_abs_shift_ticks": 9,
+      "mean_abs_vel_delta": 6.937,
+      "timing_sigma_ticks": 3.2
+    },
+    "Sax": {
+      "seed": 419523203485,
+      "profile": {
+        "timing_sigma_ms": 4.0,
+        "velocity_sigma": 7.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 92,
+      "mean_abs_shift_ticks": 2.608,
+      "max_abs_shift_ticks": 8,
+      "mean_abs_vel_delta": 5.294,
+      "timing_sigma_ticks": 3.2
+    },
+    "Clav": {
+      "seed": 419523203486,
+      "profile": {
+        "timing_sigma_ms": 4.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.015,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 192,
+      "mean_abs_shift_ticks": 2.24,
+      "max_abs_shift_ticks": 8,
+      "mean_abs_vel_delta": 4.036,
+      "timing_sigma_ticks": 3.2
+    },
+    "Bass": {
+      "seed": 419523203487,
+      "profile": {
+        "timing_sigma_ms": 10.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.03,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 148,
+      "mean_abs_shift_ticks": 7.405,
+      "max_abs_shift_ticks": 20,
+      "mean_abs_vel_delta": 5.209,
+      "timing_sigma_ticks": 8.0
+    },
+    "Drums": {
+      "seed": 419523203488,
+      "profile": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.008,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 736,
+      "mean_abs_shift_ticks": 1.018,
+      "max_abs_shift_ticks": 4,
+      "mean_abs_vel_delta": 3.234,
+      "timing_sigma_ticks": 1.6
+    }
+  }
+}

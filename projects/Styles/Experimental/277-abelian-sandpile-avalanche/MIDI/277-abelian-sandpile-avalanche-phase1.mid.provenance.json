@@ -1,0 +1,22 @@
+{
+  "artifact": "277-abelian-sandpile-avalanche-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.method.036_abelian_sandpile_phase1",
+  "sources": [],
+  "parameters": {
+    "bpm": 88,
+    "bars": 24,
+    "seed": 20261031,
+    "phase": 1,
+    "quantized": false,
+    "key": "D minor (aeolian)",
+    "form": "through-composed S1..S6",
+    "style": "experimental",
+    "method": "036 ASAR (BTW abelian sandpile, 14x192 lattice)"
+  },
+  "notes": "Raw BTW abelian sandpile: advancing drop site arches the register, per-section grain density 4/6/8/10/8/4. Float pitch + chromatic jitter, off-grid onsets, single voice, pre-rules.",
+  "sha256": "4505f8e557c7f0d8335f37761d3b2a240298ec00220c11895d6eae07bcd9ae42",
+  "bytes": 2058,
+  "created_utc": "2026-10-31T23:10:16.696189+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,22 @@
+{
+  "278-funk-contour-groove-suite-perfect": {
+    "name": "278-funk-contour-groove-suite-perfect",
+    "style": "funk",
+    "target_lufs": -13.0,
+    "integrated_lufs": -13.29,
+    "true_peak_db": -1.0,
+    "silence_ratio": 0.0529,
+    "wav_bytes": 14000172,
+    "ogg_bytes": 616604
+  },
+  "278-funk-contour-groove-suite-humanized": {
+    "name": "278-funk-contour-groove-suite-humanized",
+    "style": "funk",
+    "target_lufs": -13.0,
+    "integrated_lufs": -13.26,
+    "true_peak_db": -1.0,
+    "silence_ratio": 0.0522,
+    "wav_bytes": 14000684,
+    "ogg_bytes": 614538
+  }
+}

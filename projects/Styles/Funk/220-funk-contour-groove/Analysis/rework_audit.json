@@ -1,0 +1,29 @@
+{
+  "chosen": "/opt/data/projects/Styles/Funk/220-funk-contour-groove",
+  "primary_midi": "MIDI/220-funk-contour-groove.mid",
+  "genre": "Funk",
+  "audit_date": "2026-11-01",
+  "standard_failures": ["index.html missing (documentation, not composition)"],
+  "redesign_required": false,
+  "decision": "extension",
+  "rationale": "Standards 1-5 all pass with live read-only mido verification. Only standard 6 (index.html) fails, and that is a docs-only gap remedied by the new project. Composition is engine-compliant; extension chosen over from-scratch redesign.",
+  "standards": {
+    "1_engine_not_handrolled": {"pass": true, "evidence": "compose.py imports UnitMatrixComposer; mido READ-ONLY in verify.py"},
+    "2_zero_drift": {"pass": true, "evidence": "5 voice tracks all length 46080 ticks (verified live)"},
+    "3_rhythm_grid_sync": {"pass": true, "evidence": "0 off-16th pitched onsets tracked (all onset%120==0)"},
+    "4_track_setup": {"pass": true, "evidence": "5 voices (Trumpet/Sax/Clav/Bass/Drums-ch9)"},
+    "5_two_phase": {"pass": true, "evidence": "both .mid and -phase1.mid present"},
+    "6_provenance_index": {"pass": false, "evidence": "provenance.json present, index.html MISSING"}
+  },
+  "source_identity": {
+    "genre": "Funk",
+    "key": "E minor pentatonic (E G A B D) = pc {4,7,9,11,2}",
+    "bpm": 100,
+    "meter": "4/4 · 480 TPB · BAR=1920",
+    "method": "095 Contour Theory Composition (CTC) — abstract layer",
+    "form": "6 sections x 4 bars = 24 bars",
+    "voices": ["Trumpet (56)","Tenor Sax (66)","Clavi (7)","Contrabass (43)","Drum Kit (ch9)"],
+    "motif_vocabulary": {"arch":"+ + -","valley":"- - +","oscillate":"+ - +","rising":"+ + +","falling":"- - -","chaos":"+ - +"},
+    "palettes": {"Em":"{4,7,11,2}","G":"{7,9,11,2}","A":"{9,4,11,2}","D":"{2,7,9,4}"}
+  }
+}

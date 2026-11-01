@@ -1,0 +1,41 @@
+{
+  "soundfont": "/opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2",
+  "style": "experimental",
+  "target_lufs": -14.0,
+  "phase1": {
+    "lufs": -14.02,
+    "true_peak_db": -1.0,
+    "target_lufs": -14.0,
+    "silence_ratio": 0.0551,
+    "rms_mean": 0.1544,
+    "rms_max": 0.3126,
+    "wav_bytes": 12102700,
+    "ogg_bytes": 549804,
+    "wav": "/opt/data/projects/Styles/Experimental/277-abelian-sandpile-avalanche/Audio/277-abelian-sandpile-avalanche-phase1.wav",
+    "ogg": "/opt/data/projects/Styles/Experimental/277-abelian-sandpile-avalanche/Audio/277-abelian-sandpile-avalanche-phase1.ogg"
+  },
+  "perfect": {
+    "lufs": -14.0,
+    "true_peak_db": -1.96,
+    "target_lufs": -14.0,
+    "silence_ratio": 0.0577,
+    "rms_mean": 0.1324,
+    "rms_max": 0.2063,
+    "wav_bytes": 12310572,
+    "ogg_bytes": 449259,
+    "wav": "/opt/data/projects/Styles/Experimental/277-abelian-sandpile-avalanche/Audio/277-abelian-sandpile-avalanche-perfect.wav",
+    "ogg": "/opt/data/projects/Styles/Experimental/277-abelian-sandpile-avalanche/Audio/277-abelian-sandpile-avalanche-perfect.ogg"
+  },
+  "humanized": {
+    "lufs": -14.0,
+    "true_peak_db": -2.25,
+    "target_lufs": -14.0,
+    "silence_ratio": 0.0579,
+    "rms_mean": 0.1327,
+    "rms_max": 0.222,
+    "wav_bytes": 12310572,
+    "ogg_bytes": 452012,
+    "wav": "/opt/data/projects/Styles/Experimental/277-abelian-sandpile-avalanche/Audio/277-abelian-sandpile-avalanche-humanized.wav",
+    "ogg": "/opt/data/projects/Styles/Experimental/277-abelian-sandpile-avalanche/Audio/277-abelian-sandpile-avalanche-humanized.ogg"
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "artifact": "277-abelian-sandpile-avalanche-perfect.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom two-phase (phase=2 rules: tiered quantize + grid snap + dedup + voice-leading + tagged ornaments) (method 036 ASAR)",
+  "sources": [
+    "/opt/data/projects/Styles/Experimental/277-abelian-sandpile-avalanche/MIDI/277-abelian-sandpile-avalanche-phase1.mid"
+  ],
+  "parameters": {
+    "bpm": 88,
+    "key": "D",
+    "mode": "aeolian",
+    "style": "experimental",
+    "form": "through-composed S1..S6",
+    "bars": 24,
+    "sections": [
+      "S1",
+      "S2",
+      "S3",
+      "S4",
+      "S5",
+      "S6"
+    ],
+    "method": "036 ASAR",
+    "layer": "concrete",
+    "paradigm": "Nature-Led",
+    "voices": [
+      [
+        "Lead",
+        "Marimba",
+        12
+      ],
+      [
+        "Counter",
+        "Celesta",
+        8
+      ],
+      [
+        "Harmony",
+        "Piano",
+        1
+      ],
+      [
+        "Pad",
+        "String Ensemble",
+        48
+      ],
+      [
+        "Bass",
+        "Double Bass",
+        43
+      ]
+    ],
+    "humanize_seed": 37846,
+    "raw_seed": 20261031,
+    "humanize_profiles": {
+      "Lead": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.5,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Counter": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.015,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.5,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Harmony": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.015,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.5,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Pad": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.03,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.5,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Bass": {
+        "timing_sigma_ms": 10.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.03,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.5,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      }
+    },
+    "phase": 2,
+    "version": "perfect",
+    "off_grid": 0
+  },
+  "notes": "Grid-locked perfect layer (through-composed, 24 bars).",
+  "sha256": "110c8a7a58b45dd90cd2631b2b5be247107d1a042fb43e1b1292db9dfe74b203",
+  "bytes": 4868,
+  "created_utc": "2026-10-31T23:10:16.768681+00:00",
+  "provenance_version": "1.0"
+}

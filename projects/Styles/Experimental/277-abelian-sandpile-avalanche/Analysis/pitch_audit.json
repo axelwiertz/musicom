@@ -1,0 +1,58 @@
+{
+  "Lead": {
+    "audible": 262,
+    "strong_ok": 48,
+    "weak_in_scale": 207,
+    "tagged_ornaments": 7,
+    "tagged_resolving": 7,
+    "tagged_non_resolving": 0,
+    "untagged_out_of_scale": 0,
+    "strong_violations": 0,
+    "passes": true
+  },
+  "Counter": {
+    "audible": 96,
+    "strong_ok": 0,
+    "weak_in_scale": 96,
+    "tagged_ornaments": 0,
+    "tagged_resolving": 0,
+    "tagged_non_resolving": 0,
+    "untagged_out_of_scale": 0,
+    "strong_violations": 0,
+    "passes": true
+  },
+  "Harmony": {
+    "audible": 144,
+    "strong_ok": 144,
+    "weak_in_scale": 0,
+    "tagged_ornaments": 0,
+    "tagged_resolving": 0,
+    "tagged_non_resolving": 0,
+    "untagged_out_of_scale": 0,
+    "strong_violations": 0,
+    "passes": true
+  },
+  "Pad": {
+    "audible": 72,
+    "strong_ok": 72,
+    "weak_in_scale": 0,
+    "tagged_ornaments": 0,
+    "tagged_resolving": 0,
+    "tagged_non_resolving": 0,
+    "untagged_out_of_scale": 0,
+    "strong_violations": 0,
+    "passes": true
+  },
+  "Bass": {
+    "audible": 24,
+    "strong_ok": 24,
+    "weak_in_scale": 0,
+    "tagged_ornaments": 0,
+    "tagged_resolving": 0,
+    "tagged_non_resolving": 0,
+    "untagged_out_of_scale": 0,
+    "strong_violations": 0,
+    "passes": true
+  },
+  "all_pass": true
+}

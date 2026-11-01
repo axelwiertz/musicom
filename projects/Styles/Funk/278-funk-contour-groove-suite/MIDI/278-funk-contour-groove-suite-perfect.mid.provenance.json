@@ -1,0 +1,26 @@
+{
+  "artifact": "278-funk-contour-groove-suite-perfect.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.workflows.unitmatrix_composer + workflows.humanize",
+  "sources": [],
+  "parameters": {
+    "project": "278-funk-contour-groove-suite",
+    "phase": "phase2-perfect",
+    "style": "Funk",
+    "method": "095 Contour Theory Composition (CTC)",
+    "layer": "abstract",
+    "source": "extension of 220-funk-contour-groove",
+    "decision": "extension (audit: standards 1-5 pass; index.html gap)",
+    "quantization": "16th grid (120) + E-minor-pentatonic + per-bar palette",
+    "humanize_seed": 4153695084,
+    "humanize_style": "funk",
+    "key": "E minor pentatonic",
+    "bpm": 100,
+    "seed": 20261101
+  },
+  "notes": "",
+  "sha256": "4bc3c9c3432e38224398583af34d9901883e12c5ed4a8b980d802647174710cf",
+  "bytes": 11508,
+  "created_utc": "2026-11-01T01:20:05.457509+00:00",
+  "provenance_version": "1.0"
+}

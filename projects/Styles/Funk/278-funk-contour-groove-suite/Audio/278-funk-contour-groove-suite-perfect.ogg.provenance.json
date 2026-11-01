@@ -1,0 +1,22 @@
+{
+  "artifact": "278-funk-contour-groove-suite-perfect.ogg",
+  "classification": "ai-assisted",
+  "generator": "ffmpeg Opus",
+  "sources": [],
+  "parameters": {
+    "name": "278-funk-contour-groove-suite-perfect",
+    "style": "funk",
+    "target_lufs": -13.0,
+    "integrated_lufs": -13.29,
+    "true_peak_db": -1.0,
+    "silence_ratio": 0.0529,
+    "wav_bytes": 14000172,
+    "ogg_bytes": 616604,
+    "project": "278-funk-contour-groove-suite"
+  },
+  "notes": "",
+  "sha256": "8286c1dbef7cc4c82deee8e8b8d461a5fa1603967be2977906e20232e212dd4b",
+  "bytes": 616604,
+  "created_utc": "2026-11-01T01:16:41.733885+00:00",
+  "provenance_version": "1.0"
+}

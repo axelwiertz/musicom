@@ -1,0 +1,24 @@
+{
+  "artifact": "278-funk-contour-groove-suite-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.workflows.unitmatrix_composer",
+  "sources": [],
+  "parameters": {
+    "project": "278-funk-contour-groove-suite",
+    "phase": 1,
+    "style": "Funk",
+    "method": "095 Contour Theory Composition (CTC)",
+    "layer": "abstract",
+    "source": "extension of 220-funk-contour-groove",
+    "raw_realization": "whole-tone (rank -> base + 2*rank)",
+    "raw_timing": "off-grid (16th +-30 tick jitter)",
+    "key": "E minor pentatonic",
+    "bpm": 100,
+    "seed": 20261101
+  },
+  "notes": "",
+  "sha256": "52778038a78bc01c6afe4348d02f0ac6f7335468593e30928d3b8d9f41a6b7d4",
+  "bytes": 1939,
+  "created_utc": "2026-11-01T01:20:05.332038+00:00",
+  "provenance_version": "1.0"
+}

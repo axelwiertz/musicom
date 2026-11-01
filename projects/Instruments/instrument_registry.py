@@ -94,6 +94,7 @@ _INSTRUMENT_MODULES = {
     "Woodwind.whistle.whistle": "whistle",
     "Woodwind.soprano_sax.soprano_sax": "soprano_sax",
     "Bass.electric_bass.electric_bass": "electric_bass",
+    "Bass.acoustic_bass.acoustic_bass": "acoustic_bass",
     "Bass.synth_bass_1.synth_bass_1": "synth_bass_1",
     "Bass.fretless_bass.fretless_bass": "fretless_bass",
     "Woodwind.recorder.recorder": "recorder",
@@ -328,6 +329,7 @@ PAN_FLUTE = ALL_INSTRUMENTS["pan_flute"]
 WHISTLE = ALL_INSTRUMENTS["whistle"]
 SOPRANO_SAX = ALL_INSTRUMENTS["soprano_sax"]
 ELECTRIC_BASS = ALL_INSTRUMENTS["electric_bass"]
+ACOUSTIC_BASS = ALL_INSTRUMENTS["acoustic_bass"]
 SYNTH_BASS_1 = ALL_INSTRUMENTS["synth_bass_1"]
 FRETLESS_BASS = ALL_INSTRUMENTS["fretless_bass"]
 RECORDER = ALL_INSTRUMENTS["recorder"]
@@ -476,6 +478,8 @@ def registry_table():
             role = "harmony, melody, bass, accent, color"
         elif low == "electric bass (finger)":
             role = "bass, rhythm, countermelody, accent"
+        elif low == "acoustic bass":
+            role = "bass, rhythm, countermelody, accent, melody"
         elif low == "synth bass 1":
             role = "bass, rhythm, groove, accent"
         elif low == "fretless bass":
@@ -836,4 +840,16 @@ if __name__ == "__main__":
     print("  SYNTH_VOICE.range_min =", SYNTH_VOICE.range_min,
           "SYNTH_VOICE.range_max =", SYNTH_VOICE.range_max)
     print("  SYNTH_VOICE.stem_label =", repr(SYNTH_VOICE.stem_label))
+
+    print()
+    print("=== Acoustic Bass (Upright pizz, GM32) ===")
+    print("  ACOUSTIC_BASS.midi_program =", ACOUSTIC_BASS.midi_program, "(should be 32)")
+    print("  by_name('acoustic bass') =", by_name("acoustic bass"))
+    print("  by_name('ACOUSTIC BASS') =", by_name("ACOUSTIC BASS"))
+    print("  by_program(32) =", by_program(32))
+    print("  ACOUSTIC_BASS.in_sweet_spot(48) =", ACOUSTIC_BASS.in_sweet_spot(48))
+    print("  ACOUSTIC_BASS.in_sweet_spot(20) =", ACOUSTIC_BASS.in_sweet_spot(20))
+    print("  ACOUSTIC_BASS.range_min =", ACOUSTIC_BASS.range_min,
+          "ACOUSTIC_BASS.range_max =", ACOUSTIC_BASS.range_max)
+    print("  ACOUSTIC_BASS.stem_label =", repr(ACOUSTIC_BASS.stem_label))
     print("  TANGO_ACCORDION.stem_label =", repr(TANGO_ACCORDION.stem_label))

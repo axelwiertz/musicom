@@ -1,0 +1,162 @@
+{
+  "artifact": "277-abelian-sandpile-avalanche-humanized.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom two-phase (phase=2 + humanization) (method 036 ASAR)",
+  "sources": [
+    "/opt/data/projects/Styles/Experimental/277-abelian-sandpile-avalanche/MIDI/277-abelian-sandpile-avalanche-perfect.mid"
+  ],
+  "parameters": {
+    "bpm": 88,
+    "key": "D",
+    "mode": "aeolian",
+    "style": "experimental",
+    "form": "through-composed S1..S6",
+    "bars": 24,
+    "sections": [
+      "S1",
+      "S2",
+      "S3",
+      "S4",
+      "S5",
+      "S6"
+    ],
+    "method": "036 ASAR",
+    "layer": "concrete",
+    "paradigm": "Nature-Led",
+    "voices": [
+      [
+        "Lead",
+        "Marimba",
+        12
+      ],
+      [
+        "Counter",
+        "Celesta",
+        8
+      ],
+      [
+        "Harmony",
+        "Piano",
+        1
+      ],
+      [
+        "Pad",
+        "String Ensemble",
+        48
+      ],
+      [
+        "Bass",
+        "Double Bass",
+        43
+      ]
+    ],
+    "humanize_seed": 37846,
+    "raw_seed": 20261031,
+    "humanize_profiles": {
+      "Lead": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.5,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Counter": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.015,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.5,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Harmony": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.015,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.5,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Pad": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.03,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.5,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Bass": {
+        "timing_sigma_ms": 10.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.03,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.5,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      }
+    },
+    "phase": 2,
+    "version": "humanized",
+    "humanize_stats": {
+      "Lead": {
+        "seed": 3822446,
+        "n_notes": 262,
+        "mean_abs_shift_ticks": 4.481,
+        "max_abs_shift_ticks": 15,
+        "mean_abs_vel_delta": 4.279,
+        "timing_sigma_ticks": 5.632
+      },
+      "Counter": {
+        "seed": 3822447,
+        "n_notes": 96,
+        "mean_abs_shift_ticks": 4.469,
+        "max_abs_shift_ticks": 13,
+        "mean_abs_vel_delta": 4.26,
+        "timing_sigma_ticks": 5.632
+      },
+      "Harmony": {
+        "seed": 3822448,
+        "n_notes": 144,
+        "mean_abs_shift_ticks": 3.812,
+        "max_abs_shift_ticks": 15,
+        "mean_abs_vel_delta": 4.639,
+        "timing_sigma_ticks": 5.632
+      },
+      "Pad": {
+        "seed": 3822449,
+        "n_notes": 72,
+        "mean_abs_shift_ticks": 3.486,
+        "max_abs_shift_ticks": 11,
+        "mean_abs_vel_delta": 4.444,
+        "timing_sigma_ticks": 5.632
+      },
+      "Bass": {
+        "seed": 3822450,
+        "n_notes": 24,
+        "mean_abs_shift_ticks": 7.458,
+        "max_abs_shift_ticks": 14,
+        "mean_abs_vel_delta": 4.458,
+        "timing_sigma_ticks": 7.04
+      }
+    }
+  },
+  "notes": "Humanized layer (style experimental + per-instrument DNA).",
+  "sha256": "bc488a983417d533e9ded87fe3ace5cc6b435d98254f3ff9f8064a0d72b3aa1e",
+  "bytes": 4776,
+  "created_utc": "2026-10-31T23:10:16.769204+00:00",
+  "provenance_version": "1.0"
+}

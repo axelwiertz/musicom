@@ -1,0 +1,99 @@
+{
+  "project": "278-funk-contour-groove-suite",
+  "style": "Funk",
+  "method": "095 Contour Theory Composition (CTC)",
+  "layer": "abstract",
+  "decision": "extension of 220-funk-contour-groove",
+  "key": "E minor pentatonic",
+  "scale_pcs": [
+    2,
+    4,
+    7,
+    9,
+    11
+  ],
+  "bpm": 100,
+  "tpb": 480,
+  "sections": [
+    "Intro",
+    "ThemeA",
+    "ThemeB",
+    "Variation",
+    "Development",
+    "Bridge",
+    "Climax",
+    "Outro"
+  ],
+  "bars": 32,
+  "total_ticks": 61440,
+  "variation_techniques": {
+    "Inversion": "ThemeB = invert(arch)",
+    "Retrograde": "Variation = retrograde(arch)",
+    "Augmentation": "Climax = half-time 8th onsets, ~2x durations",
+    "Diminution": "Development = 3 motifs/bar dense 16th",
+    "Register shift": "E4->E5 (Dev/Climax), E3 (Bridge/Outro)",
+    "Counterline": "Climax sax rises + Bridge bass pedal",
+    "Palette color": "Bridge D-pedal (dominant-ish pull)"
+  },
+  "section_roots_midpoint_pcs": [
+    4,
+    9,
+    7,
+    7,
+    4,
+    9,
+    2,
+    7
+  ],
+  "progression": {
+    "0": [
+      "Em",
+      "Em",
+      "G",
+      "Em"
+    ],
+    "1": [
+      "Em",
+      "A",
+      "Em",
+      "G"
+    ],
+    "2": [
+      "A",
+      "G",
+      "D",
+      "G"
+    ],
+    "3": [
+      "D",
+      "G",
+      "A",
+      "D"
+    ],
+    "4": [
+      "G",
+      "Em",
+      "D",
+      "Em"
+    ],
+    "5": [
+      "D",
+      "A",
+      "G",
+      "D"
+    ],
+    "6": [
+      "A",
+      "D",
+      "G",
+      "D"
+    ],
+    "7": [
+      "Em",
+      "G",
+      "Em",
+      "Em"
+    ]
+  },
+  "seed": 20261101
+}

@@ -1,0 +1,165 @@
+{
+  "phase1": {
+    "path": "/opt/data/projects/Styles/Funk/278-funk-contour-groove-suite/MIDI/278-funk-contour-groove-suite-phase1.mid",
+    "tag": "phase1",
+    "n_voice_tracks": 1,
+    "track_lengths_ticks": [
+      61440
+    ],
+    "zero_drift": true,
+    "pitched_onsets": 224,
+    "off_grid": 221,
+    "scale_violations": 168,
+    "chord_violations": 181,
+    "tracks": [
+      {
+        "track": 1,
+        "channels": [
+          0
+        ],
+        "n_onset": 224,
+        "off_grid": 221,
+        "scale_viol": 168,
+        "chord_viol": 181
+      }
+    ]
+  },
+  "perfect": {
+    "path": "/opt/data/projects/Styles/Funk/278-funk-contour-groove-suite/MIDI/278-funk-contour-groove-suite-perfect.mid",
+    "tag": "perfect",
+    "n_voice_tracks": 5,
+    "track_lengths_ticks": [
+      61440,
+      61440,
+      61440,
+      61440,
+      61440
+    ],
+    "zero_drift": true,
+    "pitched_onsets": 656,
+    "off_grid": 0,
+    "scale_violations": 0,
+    "chord_violations": 0,
+    "tracks": [
+      {
+        "track": 1,
+        "channels": [
+          0
+        ],
+        "n_onset": 224,
+        "off_grid": 0,
+        "scale_viol": 0,
+        "chord_viol": 0
+      },
+      {
+        "track": 2,
+        "channels": [
+          1
+        ],
+        "n_onset": 92,
+        "off_grid": 0,
+        "scale_viol": 0,
+        "chord_viol": 0
+      },
+      {
+        "track": 3,
+        "channels": [
+          2
+        ],
+        "n_onset": 192,
+        "off_grid": 0,
+        "scale_viol": 0,
+        "chord_viol": 0
+      },
+      {
+        "track": 4,
+        "channels": [
+          3
+        ],
+        "n_onset": 148,
+        "off_grid": 0,
+        "scale_viol": 0,
+        "chord_viol": 0
+      },
+      {
+        "track": 5,
+        "channels": [
+          9
+        ],
+        "n_onset": 736,
+        "off_grid": 0,
+        "scale_viol": 0,
+        "chord_viol": 0
+      }
+    ]
+  },
+  "humanized": {
+    "path": "/opt/data/projects/Styles/Funk/278-funk-contour-groove-suite/MIDI/278-funk-contour-groove-suite-humanized.mid",
+    "tag": "humanized",
+    "n_voice_tracks": 5,
+    "track_lengths_ticks": [
+      61440,
+      61440,
+      61440,
+      61440,
+      61440
+    ],
+    "zero_drift": true,
+    "pitched_onsets": 656,
+    "off_grid": 586,
+    "scale_violations": 0,
+    "chord_violations": 2,
+    "tracks": [
+      {
+        "track": 1,
+        "channels": [
+          0
+        ],
+        "n_onset": 224,
+        "off_grid": 197,
+        "scale_viol": 0,
+        "chord_viol": 1
+      },
+      {
+        "track": 2,
+        "channels": [
+          1
+        ],
+        "n_onset": 92,
+        "off_grid": 84,
+        "scale_viol": 0,
+        "chord_viol": 1
+      },
+      {
+        "track": 3,
+        "channels": [
+          2
+        ],
+        "n_onset": 192,
+        "off_grid": 162,
+        "scale_viol": 0,
+        "chord_viol": 0
+      },
+      {
+        "track": 4,
+        "channels": [
+          3
+        ],
+        "n_onset": 148,
+        "off_grid": 143,
+        "scale_viol": 0,
+        "chord_viol": 0
+      },
+      {
+        "track": 5,
+        "channels": [
+          9
+        ],
+        "n_onset": 736,
+        "off_grid": 0,
+        "scale_viol": 0,
+        "chord_viol": 0
+      }
+    ]
+  }
+}

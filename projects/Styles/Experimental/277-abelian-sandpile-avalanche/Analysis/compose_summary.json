@@ -1,0 +1,105 @@
+{
+  "style": "experimental",
+  "genre": "Experimental",
+  "method": "036 ASAR",
+  "method_layer": "concrete",
+  "method_paradigm": "Nature-Led",
+  "form": "through-composed S1..S6",
+  "key": "D minor (aeolian)",
+  "bpm": 88,
+  "bars": 24,
+  "sections": [
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5",
+    "S6"
+  ],
+  "sandpile_topplings": 662,
+  "raw_events": 255,
+  "phase1_path": "/opt/data/projects/Styles/Experimental/277-abelian-sandpile-avalanche/MIDI/277-abelian-sandpile-avalanche-phase1.mid",
+  "perfect_path": "/opt/data/projects/Styles/Experimental/277-abelian-sandpile-avalanche/MIDI/277-abelian-sandpile-avalanche-perfect.mid",
+  "humanized_path": "/opt/data/projects/Styles/Experimental/277-abelian-sandpile-avalanche/MIDI/277-abelian-sandpile-avalanche-humanized.mid",
+  "hz_seed": 37846,
+  "hz": {
+    "Lead": {
+      "seed": 3822446,
+      "n_notes": 262,
+      "mean_abs_shift_ticks": 4.481,
+      "max_abs_shift_ticks": 15,
+      "mean_abs_vel_delta": 4.279,
+      "timing_sigma_ticks": 5.632
+    },
+    "Counter": {
+      "seed": 3822447,
+      "n_notes": 96,
+      "mean_abs_shift_ticks": 4.469,
+      "max_abs_shift_ticks": 13,
+      "mean_abs_vel_delta": 4.26,
+      "timing_sigma_ticks": 5.632
+    },
+    "Harmony": {
+      "seed": 3822448,
+      "n_notes": 144,
+      "mean_abs_shift_ticks": 3.812,
+      "max_abs_shift_ticks": 15,
+      "mean_abs_vel_delta": 4.639,
+      "timing_sigma_ticks": 5.632
+    },
+    "Pad": {
+      "seed": 3822449,
+      "n_notes": 72,
+      "mean_abs_shift_ticks": 3.486,
+      "max_abs_shift_ticks": 11,
+      "mean_abs_vel_delta": 4.444,
+      "timing_sigma_ticks": 5.632
+    },
+    "Bass": {
+      "seed": 3822450,
+      "n_notes": 24,
+      "mean_abs_shift_ticks": 7.458,
+      "max_abs_shift_ticks": 14,
+      "mean_abs_vel_delta": 4.458,
+      "timing_sigma_ticks": 7.04
+    }
+  },
+  "progression": {
+    "S1": [
+      "Dm",
+      "F",
+      "Bb",
+      "C"
+    ],
+    "S2": [
+      "Dm",
+      "Gm",
+      "Dm",
+      "Am"
+    ],
+    "S3": [
+      "Bb",
+      "C",
+      "Dm",
+      "Am"
+    ],
+    "S4": [
+      "Gm",
+      "Dm",
+      "C",
+      "Bb"
+    ],
+    "S5": [
+      "Dm",
+      "Bb",
+      "Gm",
+      "Am"
+    ],
+    "S6": [
+      "Dm",
+      "Gm",
+      "C",
+      "Dm"
+    ]
+  }
+}
