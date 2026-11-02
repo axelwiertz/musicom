@@ -1,0 +1,28 @@
+{
+  "artifact": "280-ambient-pareto-variations-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.method.098_moepc_phase1",
+  "sources": [
+    "/opt/data/projects/Styles/Ambient/234-ambient-pareto-build/MIDI/234-ambient-pareto-build-phase1.mid"
+  ],
+  "parameters": {
+    "bpm": 70,
+    "bars": 44,
+    "seed": 20261102,
+    "phase": 1,
+    "quantized": false,
+    "key": "D Aeolian",
+    "form": "intro-build-rise-peak-bridge-resolve-coda",
+    "style": "ambient",
+    "method": "098 MOEPC (NSGA-II, pop 64 x gen 70)",
+    "notes": 132,
+    "front_size": 43,
+    "archetype_used": "balanced",
+    "rules_applied": "NONE (pre-rules)"
+  },
+  "notes": "Raw NSGA-II MOEPC draft: balanced Pareto-front melody, single celesta voice, unquantized float pitch + off-grid onsets, 44 bars, pre-rules. Rework source: 234-ambient-pareto-build (identity-preserving extension).",
+  "sha256": "e271c54c6c4fa01f248ca3c12682b13925d5fccea2773c2c8318b9184b920895",
+  "bytes": 1155,
+  "created_utc": "2026-11-02T01:11:14.503999+00:00",
+  "provenance_version": "1.0"
+}

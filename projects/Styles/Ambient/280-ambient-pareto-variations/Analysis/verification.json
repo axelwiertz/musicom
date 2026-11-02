@@ -1,0 +1,42 @@
+{
+  "project": "280-ambient-pareto-variations",
+  "report": {
+    "phase1": {
+      "tracks": 1,
+      "track_len": 84480,
+      "zero_drift": true,
+      "pitched": 132,
+      "drum": 0,
+      "off120": 132,
+      "off240": 132,
+      "scale_violations": 41,
+      "chord_violations_blanket": 93,
+      "strong_beat_violations": 0
+    },
+    "perfect": {
+      "tracks": 5,
+      "track_len": 84480,
+      "zero_drift": true,
+      "pitched": 684,
+      "drum": 86,
+      "off120": 0,
+      "off240": 48,
+      "scale_violations": 0,
+      "chord_violations_blanket": 0,
+      "strong_beat_violations": 0
+    },
+    "humanized": {
+      "tracks": 5,
+      "track_len": 84480,
+      "zero_drift": true,
+      "pitched": 684,
+      "drum": 86,
+      "off120": 581,
+      "off240": 585,
+      "scale_violations": 0,
+      "chord_violations_blanket": 46,
+      "strong_beat_violations": 0
+    }
+  },
+  "verdict": "PASS"
+}

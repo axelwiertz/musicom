@@ -1,0 +1,232 @@
+{
+  "artifact": "280-ambient-pareto-variations-perfect.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom two-phase (phase=2 rules: chord-tone quantization + 8th grid snap + dedup + voice-leading + variation techniques) (method 098 MOEPC)",
+  "sources": [
+    "/opt/data/projects/Styles/Ambient/280-ambient-pareto-variations/MIDI/280-ambient-pareto-variations-phase1.mid"
+  ],
+  "parameters": {
+    "bpm": 70,
+    "key": "D",
+    "mode": "aeolian",
+    "style": "ambient",
+    "form": "intro-build-rise-peak-bridge-resolve-coda",
+    "bars": 44,
+    "sections": [
+      "Intro",
+      "Build",
+      "Rise",
+      "Peak",
+      "Bridge",
+      "Resolve",
+      "Coda"
+    ],
+    "section_bars": {
+      "Intro": 4,
+      "Build": 8,
+      "Rise": 8,
+      "Peak": 8,
+      "Bridge": 8,
+      "Resolve": 4,
+      "Coda": 4
+    },
+    "section_techniques": {
+      "Intro": "register-shift (-12)",
+      "Build": "baseline (balanced motif)",
+      "Rise": "diminution (dur x0.5) + density-rise (harp 16ths, drums/bar)",
+      "Peak": "register-shift (+12) + full density",
+      "Bridge": "retrograde + inversion counterline + relative-major re-orientation",
+      "Resolve": "register-shift (-12)",
+      "Coda": "augmentation (dur x2) fade"
+    },
+    "section_midpoint_chords": {
+      "Intro": {
+        "degree": 5,
+        "chord": "Bb"
+      },
+      "Build": {
+        "degree": 3,
+        "chord": "Gm"
+      },
+      "Rise": {
+        "degree": 3,
+        "chord": "Gm"
+      },
+      "Peak": {
+        "degree": 5,
+        "chord": "Bb"
+      },
+      "Bridge": {
+        "degree": 5,
+        "chord": "Bb"
+      },
+      "Resolve": {
+        "degree": 5,
+        "chord": "Bb"
+      },
+      "Coda": {
+        "degree": 0,
+        "chord": "Dm"
+      }
+    },
+    "bar_degrees": [
+      0,
+      0,
+      5,
+      5,
+      0,
+      5,
+      6,
+      5,
+      3,
+      0,
+      5,
+      6,
+      3,
+      4,
+      5,
+      6,
+      3,
+      4,
+      0,
+      6,
+      0,
+      5,
+      3,
+      4,
+      5,
+      6,
+      0,
+      0,
+      5,
+      5,
+      0,
+      3,
+      5,
+      6,
+      0,
+      3,
+      0,
+      0,
+      5,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "method": "098 MOEPC",
+    "layer": "concrete",
+    "paradigm": "Stochastic",
+    "rework": {
+      "source": "234-ambient-pareto-build",
+      "decision": "extension",
+      "standard_failures": [
+        "index.html missing (docs only)"
+      ]
+    },
+    "variation_techniques": {
+      "retrograde": "Bridge lead (balanced motif reversed)",
+      "inversion": "Bridge harp counter-line (active motif around D4)",
+      "augmentation": "Coda lead+pad durations x2",
+      "diminution": "Rise lead durations x0.5",
+      "register_shift": "Peak +12 / Intro-Resolve-Coda -12",
+      "relative_major": "Bridge harmonic center -> VI (Bb) region",
+      "density_rise": "Rise harp 16ths + drums every bar"
+    },
+    "voices": [
+      [
+        "Lead",
+        8,
+        0
+      ],
+      [
+        "Pad",
+        19,
+        1
+      ],
+      [
+        "Bass",
+        42,
+        2
+      ],
+      [
+        "Sparkle",
+        46,
+        3
+      ],
+      [
+        "Drums",
+        0,
+        9
+      ]
+    ],
+    "humanize_seed": 51229,
+    "raw_seed": 20261102,
+    "humanize_profiles": {
+      "Lead": {
+        "timing_sigma_ms": 6.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.015,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.6,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Pad": {
+        "timing_sigma_ms": 6.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.015,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.6,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Bass": {
+        "timing_sigma_ms": 6.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.03,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.6,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Sparkle": {
+        "timing_sigma_ms": 6.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.03,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.6,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Drums": {
+        "timing_sigma_ms": 6.0,
+        "velocity_sigma": 3.5,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.6,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      }
+    },
+    "phase": 2,
+    "version": "perfect",
+    "off_grid": 0
+  },
+  "notes": "Grid-locked perfect layer (intro-build-rise-peak-bridge-resolve-coda, 44 bars). Identity-preserving extension of 234-ambient-pareto-build.",
+  "sha256": "549ad3ee13a0de3fef3ee2001da4a1984566806661b7937f839318e21d093b1e",
+  "bytes": 6610,
+  "created_utc": "2026-11-02T01:11:14.576092+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,22 @@
+{
+  "artifact": "279-kuramoto-techno-sync-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.method.038_kuramoto_phase1",
+  "sources": [],
+  "parameters": {
+    "bpm": 128,
+    "bars": 24,
+    "seed": 20261101,
+    "phase": 1,
+    "quantized": false,
+    "key": "A minor (aeolian)",
+    "form": "intro-break-drop-outro",
+    "style": "techno",
+    "method": "038 KOPS (Kuramoto, N=16 mean-field, K arc 0.7->3.5)"
+  },
+  "notes": "Raw Kuramoto ensemble: 16 coupled phase oscillators over 24 bars; coupling arc desync->partial-lock->full-lock->decay; velocity from order parameter. Float pitch + chromatic jitter, off-grid onsets, single voice, pre-rules.",
+  "sha256": "7bb9734703ae1cf9b4cba0765edae88e62ab636af4b3ccb376b62b2e34ca61d2",
+  "bytes": 2991,
+  "created_utc": "2026-11-01T23:08:33.888113+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,147 @@
+{
+  "style": "ambient",
+  "genre": "Ambient",
+  "method": "098 MOEPC",
+  "form": "intro-build-rise-peak-bridge-resolve-coda",
+  "key": "D Aeolian",
+  "bpm": 70,
+  "bars": 44,
+  "sections": [
+    "Intro",
+    "Build",
+    "Rise",
+    "Peak",
+    "Bridge",
+    "Resolve",
+    "Coda"
+  ],
+  "section_bars": [
+    4,
+    8,
+    8,
+    8,
+    8,
+    4,
+    4
+  ],
+  "section_techniques": {
+    "Intro": "register-shift (-12)",
+    "Build": "baseline (balanced motif)",
+    "Rise": "diminution (dur x0.5) + density-rise (harp 16ths, drums/bar)",
+    "Peak": "register-shift (+12) + full density",
+    "Bridge": "retrograde + inversion counterline + relative-major re-orientation",
+    "Resolve": "register-shift (-12)",
+    "Coda": "augmentation (dur x2) fade"
+  },
+  "front_size": 43,
+  "raw_notes": 132,
+  "voice_leading_corrections": 0,
+  "phase1_path": "/opt/data/projects/Styles/Ambient/280-ambient-pareto-variations/MIDI/280-ambient-pareto-variations-phase1.mid",
+  "perfect_path": "/opt/data/projects/Styles/Ambient/280-ambient-pareto-variations/MIDI/280-ambient-pareto-variations-perfect.mid",
+  "humanized_path": "/opt/data/projects/Styles/Ambient/280-ambient-pareto-variations/MIDI/280-ambient-pareto-variations-humanized.mid",
+  "hz_seed": 51229,
+  "hz": {
+    "Lead": {
+      "seed": 5174129,
+      "n_notes": 128,
+      "mean_abs_shift_ticks": 2.531,
+      "max_abs_shift_ticks": 8,
+      "mean_abs_vel_delta": 4.437,
+      "timing_sigma_ticks": 3.36
+    },
+    "Pad": {
+      "seed": 5174130,
+      "n_notes": 156,
+      "mean_abs_shift_ticks": 2.295,
+      "max_abs_shift_ticks": 8,
+      "mean_abs_vel_delta": 4.032,
+      "timing_sigma_ticks": 3.36
+    },
+    "Bass": {
+      "seed": 5174131,
+      "n_notes": 104,
+      "mean_abs_shift_ticks": 2.452,
+      "max_abs_shift_ticks": 9,
+      "mean_abs_vel_delta": 5.635,
+      "timing_sigma_ticks": 3.36
+    },
+    "Sparkle": {
+      "seed": 5174132,
+      "n_notes": 296,
+      "mean_abs_shift_ticks": 2.615,
+      "max_abs_shift_ticks": 10,
+      "mean_abs_vel_delta": 4.987,
+      "timing_sigma_ticks": 3.36
+    },
+    "Drums": {
+      "seed": 5174133,
+      "n_notes": 86,
+      "mean_abs_shift_ticks": 2.023,
+      "max_abs_shift_ticks": 7,
+      "mean_abs_vel_delta": 3.0,
+      "timing_sigma_ticks": 3.36
+    }
+  },
+  "progression": {
+    "Intro": [
+      "Dm",
+      "Dm",
+      "Bb",
+      "Bb"
+    ],
+    "Build": [
+      "Dm",
+      "Bb",
+      "C",
+      "Bb",
+      "Gm",
+      "Dm",
+      "Bb",
+      "C"
+    ],
+    "Rise": [
+      "Gm",
+      "Am",
+      "Bb",
+      "C",
+      "Gm",
+      "Am",
+      "Dm",
+      "C"
+    ],
+    "Peak": [
+      "Dm",
+      "Bb",
+      "Gm",
+      "Am",
+      "Bb",
+      "C",
+      "Dm",
+      "Dm"
+    ],
+    "Bridge": [
+      "Bb",
+      "Bb",
+      "Dm",
+      "Gm",
+      "Bb",
+      "C",
+      "Dm",
+      "Gm"
+    ],
+    "Resolve": [
+      "Dm",
+      "Dm",
+      "Bb",
+      "Dm"
+    ],
+    "Coda": [
+      "Dm",
+      "Dm",
+      "Dm",
+      "Dm"
+    ]
+  },
+  "rework_source": "234-ambient-pareto-build",
+  "rework_decision": "extension"
+}

@@ -1,0 +1,41 @@
+{
+  "soundfont": "/opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2",
+  "style": "techno",
+  "target_lufs": -10.0,
+  "phase1": {
+    "lufs": -11.82,
+    "true_peak_db": -1.0,
+    "target_lufs": -10.0,
+    "silence_ratio": 0.0794,
+    "rms_mean": 0.191,
+    "rms_max": 0.2842,
+    "wav_bytes": 8629036,
+    "ogg_bytes": 257324,
+    "wav": "/opt/data/projects/Styles/Techno/279-kuramoto-techno-sync/Audio/279-kuramoto-techno-sync-phase1.wav",
+    "ogg": "/opt/data/projects/Styles/Techno/279-kuramoto-techno-sync/Audio/279-kuramoto-techno-sync-phase1.ogg"
+  },
+  "perfect": {
+    "lufs": -10.91,
+    "true_peak_db": -1.0,
+    "target_lufs": -10.0,
+    "silence_ratio": 0.1201,
+    "rms_mean": 0.1815,
+    "rms_max": 0.254,
+    "wav_bytes": 9223468,
+    "ogg_bytes": 296394,
+    "wav": "/opt/data/projects/Styles/Techno/279-kuramoto-techno-sync/Audio/279-kuramoto-techno-sync-perfect.wav",
+    "ogg": "/opt/data/projects/Styles/Techno/279-kuramoto-techno-sync/Audio/279-kuramoto-techno-sync-perfect.ogg"
+  },
+  "humanized": {
+    "lufs": -10.86,
+    "true_peak_db": -1.0,
+    "target_lufs": -10.0,
+    "silence_ratio": 0.1198,
+    "rms_mean": 0.1835,
+    "rms_max": 0.2519,
+    "wav_bytes": 9223468,
+    "ogg_bytes": 297178,
+    "wav": "/opt/data/projects/Styles/Techno/279-kuramoto-techno-sync/Audio/279-kuramoto-techno-sync-humanized.wav",
+    "ogg": "/opt/data/projects/Styles/Techno/279-kuramoto-techno-sync/Audio/279-kuramoto-techno-sync-humanized.ogg"
+  }
+}

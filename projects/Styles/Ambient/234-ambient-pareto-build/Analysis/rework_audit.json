@@ -1,0 +1,29 @@
+{
+  "chosen": "/opt/data/projects/Styles/Ambient/234-ambient-pareto-build",
+  "primary_midi": "MIDI/234-ambient-pareto-build.mid",
+  "genre": "Ambient",
+  "audit_date": "2026-11-02",
+  "standard_failures": ["index.html missing (documentation, not composition)"],
+  "redesign_required": false,
+  "decision": "extension",
+  "rationale": "Standards 1-5 all pass with live read-only mido verification (5 voice tracks all 61440 ticks, 0 off-grid pitched onsets, 457 pitched onsets, engine-authored via UnitMatrixComposer, both .mid and -phase1.mid present). Only standard 6 (index.html) fails, a docs-only gap remedied by the new project. Composition is engine-compliant; extension chosen over from-scratch redesign.",
+  "standards": {
+    "1_engine_not_handrolled": {"pass": true, "evidence": "compose.py imports UnitMatrixComposer; mido READ-ONLY in verify.py"},
+    "2_zero_drift": {"pass": true, "evidence": "5 voice tracks all length 61440 ticks (verified live)"},
+    "3_rhythm_grid_sync": {"pass": true, "evidence": "0 off-16th pitched onsets (457 pitched onsets, all onset%120==0)"},
+    "4_track_setup": {"pass": true, "evidence": "5 voices (Celesta 8 / Organ 19 / Cello 42 / Harp 46 / Drums ch9)"},
+    "5_two_phase": {"pass": true, "evidence": "both 234-ambient-pareto-build.mid and -phase1.mid present"},
+    "6_provenance_index": {"pass": false, "evidence": "provenance.json present, index.html MISSING"}
+  },
+  "source_identity": {
+    "genre": "Ambient",
+    "key": "D Aeolian (D E F G A Bb C) = pc {2,4,5,7,9,10,0}",
+    "bpm": 70,
+    "meter": "4/4 · 480 TPB · BAR=1920",
+    "method": "098 Multi-Objective Evolutionary Pareto Composition (MOEPC / NSGA-II)",
+    "form": "cinematic-build: Intro(4) Build(8) Rise(8) Peak(8) Resolve(4) = 32 bars, 5 sections",
+    "voices": ["Lead=Celesta (8) ch0", "Pad=Organ (19) ch1", "Bass=Cello (42) ch2", "Sparkle=Harp (46) ch3", "Drums=GM kit ch9"],
+    "archetypes": {"smooth": "Intro/Resolve", "balanced": "Build + phase1 raw", "active": "Rise/Peak"},
+    "progression_degrees": [0,0,5,5, 0,5,6,5,3,0,5,6, 3,4,5,6,3,4,0,6, 0,5,3,4,5,6,0,0, 0,0,5,0]
+  }
+}

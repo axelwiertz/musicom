@@ -1,0 +1,41 @@
+{
+  "soundfont": "/opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2",
+  "style": "ambient",
+  "target_lufs": -18.0,
+  "phase1": {
+    "lufs": -18.36,
+    "true_peak_db": -1.0,
+    "target_lufs": -18.0,
+    "silence_ratio": 0.2667,
+    "rms_mean": 0.0922,
+    "rms_max": 0.263,
+    "wav_bytes": 27396908,
+    "ogg_bytes": 1321789,
+    "wav": "/opt/data/projects/Styles/Ambient/280-ambient-pareto-variations/Audio/280-ambient-pareto-variations-phase1.wav",
+    "ogg": "/opt/data/projects/Styles/Ambient/280-ambient-pareto-variations/Audio/280-ambient-pareto-variations-phase1.ogg"
+  },
+  "perfect": {
+    "lufs": -18.0,
+    "true_peak_db": -4.56,
+    "target_lufs": -18.0,
+    "silence_ratio": 0.0701,
+    "rms_mean": 0.0806,
+    "rms_max": 0.1087,
+    "wav_bytes": 28466732,
+    "ogg_bytes": 1403671,
+    "wav": "/opt/data/projects/Styles/Ambient/280-ambient-pareto-variations/Audio/280-ambient-pareto-variations-perfect.wav",
+    "ogg": "/opt/data/projects/Styles/Ambient/280-ambient-pareto-variations/Audio/280-ambient-pareto-variations-perfect.ogg"
+  },
+  "humanized": {
+    "lufs": -18.0,
+    "true_peak_db": -3.06,
+    "target_lufs": -18.0,
+    "silence_ratio": 0.0699,
+    "rms_mean": 0.081,
+    "rms_max": 0.1141,
+    "wav_bytes": 28469548,
+    "ogg_bytes": 1418390,
+    "wav": "/opt/data/projects/Styles/Ambient/280-ambient-pareto-variations/Audio/280-ambient-pareto-variations-humanized.wav",
+    "ogg": "/opt/data/projects/Styles/Ambient/280-ambient-pareto-variations/Audio/280-ambient-pareto-variations-humanized.ogg"
+  }
+}

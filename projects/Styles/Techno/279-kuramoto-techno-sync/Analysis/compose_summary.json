@@ -1,0 +1,101 @@
+{
+  "style": "techno",
+  "genre": "Techno",
+  "method": "038 KOPS",
+  "method_layer": "concrete",
+  "method_paradigm": "Nature-Led",
+  "form": "intro-break-drop-outro",
+  "key": "A minor (aeolian)",
+  "bpm": 128,
+  "bars": 24,
+  "sections": [
+    "Intro",
+    "Break",
+    "Drop",
+    "Outro"
+  ],
+  "kuramoto_firings": 425,
+  "raw_events": 425,
+  "oscillators": 16,
+  "omega0_hz": 0.6,
+  "phase1_path": "/opt/data/projects/Styles/Techno/279-kuramoto-techno-sync/MIDI/279-kuramoto-techno-sync-phase1.mid",
+  "perfect_path": "/opt/data/projects/Styles/Techno/279-kuramoto-techno-sync/MIDI/279-kuramoto-techno-sync-perfect.mid",
+  "humanized_path": "/opt/data/projects/Styles/Techno/279-kuramoto-techno-sync/MIDI/279-kuramoto-techno-sync-humanized.mid",
+  "hz_seed": 4649,
+  "hz": {
+    "Lead": {
+      "seed": 469549,
+      "n_notes": 393,
+      "mean_abs_shift_ticks": 1.524,
+      "max_abs_shift_ticks": 6,
+      "mean_abs_vel_delta": 7.092,
+      "timing_sigma_ticks": 2.048
+    },
+    "Harmony": {
+      "seed": 469550,
+      "n_notes": 144,
+      "mean_abs_shift_ticks": 1.625,
+      "max_abs_shift_ticks": 5,
+      "mean_abs_vel_delta": 2.986,
+      "timing_sigma_ticks": 2.048
+    },
+    "Pad": {
+      "seed": 469551,
+      "n_notes": 72,
+      "mean_abs_shift_ticks": 1.486,
+      "max_abs_shift_ticks": 4,
+      "mean_abs_vel_delta": 3.82,
+      "timing_sigma_ticks": 2.048
+    },
+    "Bass": {
+      "seed": 469552,
+      "n_notes": 192,
+      "mean_abs_shift_ticks": 7.979,
+      "max_abs_shift_ticks": 22,
+      "mean_abs_vel_delta": 3.266,
+      "timing_sigma_ticks": 5.12
+    },
+    "Drums": {
+      "seed": 469553,
+      "n_notes": 264,
+      "mean_abs_shift_ticks": 1.345,
+      "max_abs_shift_ticks": 5,
+      "mean_abs_vel_delta": 3.292,
+      "timing_sigma_ticks": 2.048
+    }
+  },
+  "progression": {
+    "Intro": [
+      "Am",
+      "Am",
+      "F",
+      "G"
+    ],
+    "Break": [
+      "Am",
+      "F",
+      "C",
+      "G",
+      "Am",
+      "F",
+      "C",
+      "G"
+    ],
+    "Drop": [
+      "Am",
+      "F",
+      "Am",
+      "G",
+      "Am",
+      "F",
+      "Am",
+      "G"
+    ],
+    "Outro": [
+      "Am",
+      "F",
+      "G",
+      "Am"
+    ]
+  }
+}

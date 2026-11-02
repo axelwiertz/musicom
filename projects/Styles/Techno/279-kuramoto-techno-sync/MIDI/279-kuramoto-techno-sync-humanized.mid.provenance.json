@@ -1,0 +1,161 @@
+{
+  "artifact": "279-kuramoto-techno-sync-humanized.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom two-phase (phase=2 + humanization) (method 038 KOPS)",
+  "sources": [
+    "/opt/data/projects/Styles/Techno/279-kuramoto-techno-sync/MIDI/279-kuramoto-techno-sync-perfect.mid"
+  ],
+  "parameters": {
+    "bpm": 128,
+    "key": "A",
+    "mode": "aeolian",
+    "style": "techno",
+    "form": "intro-break-drop-outro",
+    "bars": 24,
+    "sections": [
+      "Intro",
+      "Break",
+      "Drop",
+      "Outro"
+    ],
+    "method": "038 KOPS",
+    "layer": "concrete",
+    "paradigm": "Nature-Led",
+    "voices": [
+      [
+        "Lead",
+        "Synth Voice",
+        54
+      ],
+      [
+        "Harmony",
+        "Synth Brass 1",
+        62
+      ],
+      [
+        "Pad",
+        "Synth Pad",
+        88
+      ],
+      [
+        "Bass",
+        "Synth Bass 1",
+        38
+      ],
+      [
+        "Drums",
+        "Drum Kit",
+        0,
+        9
+      ]
+    ],
+    "humanize_seed": 4649,
+    "raw_seed": 20261101,
+    "humanize_profiles": {
+      "Lead": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 9.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.04,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.1,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Harmony": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.1,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Pad": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.1,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Bass": {
+        "timing_sigma_ms": 5.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.1,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Drums": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.008,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.1,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      }
+    },
+    "phase": 2,
+    "version": "humanized",
+    "humanize_stats": {
+      "Lead": {
+        "seed": 469549,
+        "n_notes": 393,
+        "mean_abs_shift_ticks": 1.524,
+        "max_abs_shift_ticks": 6,
+        "mean_abs_vel_delta": 7.092,
+        "timing_sigma_ticks": 2.048
+      },
+      "Harmony": {
+        "seed": 469550,
+        "n_notes": 144,
+        "mean_abs_shift_ticks": 1.625,
+        "max_abs_shift_ticks": 5,
+        "mean_abs_vel_delta": 2.986,
+        "timing_sigma_ticks": 2.048
+      },
+      "Pad": {
+        "seed": 469551,
+        "n_notes": 72,
+        "mean_abs_shift_ticks": 1.486,
+        "max_abs_shift_ticks": 4,
+        "mean_abs_vel_delta": 3.82,
+        "timing_sigma_ticks": 2.048
+      },
+      "Bass": {
+        "seed": 469552,
+        "n_notes": 192,
+        "mean_abs_shift_ticks": 7.979,
+        "max_abs_shift_ticks": 22,
+        "mean_abs_vel_delta": 3.266,
+        "timing_sigma_ticks": 5.12
+      },
+      "Drums": {
+        "seed": 469553,
+        "n_notes": 264,
+        "mean_abs_shift_ticks": 1.345,
+        "max_abs_shift_ticks": 5,
+        "mean_abs_vel_delta": 3.292,
+        "timing_sigma_ticks": 2.048
+      }
+    }
+  },
+  "notes": "Humanized layer (style techno + per-instrument DNA).",
+  "sha256": "e14371ccd0fa72e1f896d1e2923690803b19b3faa3c6e89584485050f3b5830b",
+  "bytes": 8217,
+  "created_utc": "2026-11-01T23:08:33.971591+00:00",
+  "provenance_version": "1.0"
+}

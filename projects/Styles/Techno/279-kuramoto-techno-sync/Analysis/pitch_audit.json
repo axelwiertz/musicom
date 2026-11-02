@@ -1,0 +1,47 @@
+{
+  "Lead": {
+    "audible": 393,
+    "strong_ok": 42,
+    "weak_in_scale": 348,
+    "tagged_ornaments": 3,
+    "tagged_resolving": 3,
+    "tagged_non_resolving": 0,
+    "untagged_out_of_scale": 0,
+    "strong_violations": 0,
+    "passes": true
+  },
+  "Harmony": {
+    "audible": 144,
+    "strong_ok": 144,
+    "weak_in_scale": 0,
+    "tagged_ornaments": 0,
+    "tagged_resolving": 0,
+    "tagged_non_resolving": 0,
+    "untagged_out_of_scale": 0,
+    "strong_violations": 0,
+    "passes": true
+  },
+  "Pad": {
+    "audible": 72,
+    "strong_ok": 72,
+    "weak_in_scale": 0,
+    "tagged_ornaments": 0,
+    "tagged_resolving": 0,
+    "tagged_non_resolving": 0,
+    "untagged_out_of_scale": 0,
+    "strong_violations": 0,
+    "passes": true
+  },
+  "Bass": {
+    "audible": 192,
+    "strong_ok": 48,
+    "weak_in_scale": 144,
+    "tagged_ornaments": 0,
+    "tagged_resolving": 0,
+    "tagged_non_resolving": 0,
+    "untagged_out_of_scale": 0,
+    "strong_violations": 0,
+    "passes": true
+  },
+  "all_pass": true
+}
