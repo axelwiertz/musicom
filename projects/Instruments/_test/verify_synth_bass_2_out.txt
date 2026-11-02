@@ -1,0 +1,24 @@
+Registry: <Instrument Synth Bass 2 (family=Bass, program=39, range=21-96)>
+Synth Bass 2: program=39 gm='Synth Bass 2' stem='Synth_Bass_2' sweet=(36, 55) A4=440.0Hz
+Synth Bass 2: zones={'sub': (21, 35), 'groove': (36, 50), 'mid': (51, 62), 'high': (63, 96)}
+Synth Bass 2: art=['accent', 'slide', 'squelch', 'staccato', 'legato', 'octave_jump', 'ghost'] synth=mono_synth modal_preset=string reverb=0.9s pan=0.0
+Synth Bass 2: A1=55.00Hz E2=82.41Hz A2=110.00Hz C3=130.81Hz
+
+Zero-drift: True (OK)
+MIDI: /opt/data/projects/Instruments/_test/synth_bass_2_test.mid (190 bytes)
+SoundFont: /opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2
+WAV (solo): /opt/data/projects/Instruments/_test/synth_bass_2_test.wav (715308 bytes)
+Spectral check: 4-8kHz buzz energy = 4.8% (OK)
+
+Stem label: GM_PROGRAMS[39] = 'Synth Bass 2'
+SF2 preset 39 -> 'Synth Bass 2'
+
+Stems rendered (2 files):
+  track00_Synth_Bass_2.wav (715308 bytes)
+  track01_Drums.wav (706092 bytes)
+
+MonoSynth E2 (resonance 0.85): peak=0.800 head_rms=0.6638 mid_rms=0.6059 tail_rms=0.5143
+Squelch band (0.8-3 kHz) energy = 27.5% of audible
+PhaseModSynth E2: peak=0.771
+
+ALL CHECKS PASSED

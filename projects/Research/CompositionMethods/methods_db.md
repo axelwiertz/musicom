@@ -332,6 +332,7 @@ Sound production translates symbolic MIDI UnitMatrix data into final acoustic ai
 | **SP-129** | Transaural Crosstalk-Cancelled Binaural Rendering (TCCR) | **Post-Processing / DSP** | 2-Channel Loudspeaker Binaural Render / Sweet-Spot Spatialization | Two-speaker binaural reproduction: the symmetric 2×2 plant $h_{es}(f)=(A_{es}/r_{es})e^{-j2\pi f r_{es}/c}$ (ipsilateral $h_s$, contralateral $h_o$ with head shadow $f_c\approx c/2\pi a\approx 624$ Hz) is inverted so the far-ear paths cancel acoustically: $\mathbf{C}=\mathbf{H}^{H}(\mathbf{H}\mathbf{H}^{H}+\beta\mathbf{I})^{-1}$, or in Cooper–Bauck shuffler form two scalar filters $1/(h_s+h_o)$ (sum) and $1/(h_s-h_o)$ (difference, the ill-conditioned one). Measured (48 kHz, ±30° at 1 m, head radius 8.75 cm): shuffler ≡ matrix inverse to −292 dB; $\beta=10^{-4}$ gives −37 dB worst-case crosstalk for +18.4 dB corrective gain; 1–8 kHz suppression −59…−69 dB. Low frequency is the limit ($|h_s|/|h_o|$ within 0.4 dB at 80–200 Hz → $|h_s-h_o|$ 24 dB down → clamp $|C_{diff}|\le +18$ dB, giving −11.9 dB there). Sweet spot fails asymmetrically: 5 cm lateral −22 dB, yaw 10° −24 dB, but 5 cm sagittal → +0.1 dB (cancellation inverts into reinforcement); a ±15° array under ±30° filters → −1 dB. Source-independent, so one 2×2 inverse serves the whole UnitMatrix (rows = seats, columns = scenes, cells need no filters); apply after per-row HRTF placement (SP-021) and before any room simulation (SP-009/SP-032). |
 |---|
 || **SP-130** | Colored Noise Synthesis (CNS) | **Synthesis Engines** | Pitchless Noise-Texture / Ambient Bed, Riser, Impact & Percussive-Noise Timbres | Generates noise textures with a controllable power-law spectral slope: white (flat), pink $1/f$ ($-3$ dB/oct — Voss–McCartney octave-stream sum or Paul Kellet 3-cascade one-pole filter), brown $1/f^2$ ($-6$, leaky cumsum), blue/violet ($+3/+6$, differencers), and exact arbitrary $1/f^\alpha$ via FFT powernoise (Little et al. 2007). One knob (color $\alpha$) sweeps spectral centroid; per-row colors layer into wind/sea/rain beds, risers, impacts, and percussion noise tails; filtered noise (LP pink = wind, BP = breath) adds the musical textures. Deterministic per seed, sample-count preserving (zero-drift safe); the positive counterpart to SP-109 (noise reduction) and the raw-color stage behind SP-087/089/120. Candidate: `sound/generators/complex_noise.py`. |
+|| **SP-131** | Two-Mass Vocal Fold Physical Modeling Synthesis (TMVF) | **Synthesis Engines** | Physical Self-Oscillating Glottal Source / Voice Timbre | Implements the Ishizaka–Flanagan (1972) two-mass vocal fold model: two coupled nonlinear masses per fold ($m_1{=}1.25\times10^{-4}$ kg, $m_2{=}2.5\times10^{-5}$ kg, $k_1{=}80$ N/m, $k_2{=}8$ N/m, $k_c{=}25$ N/m), subglottal pressure $P_s$ driving a Bernoulli glottal flow $u_g=a_{\min}\sqrt{2P_s/\rho}$ with flow-separation pressures $P_1=P_s(1-(a_{\min}/a_{g1})^2)$, $P_2=0$ after the vena contracta, and collision springs ($3k$ when the gap closes). Myoelastic-aerodynamic self-oscillation — no vibratory input; RK4 at audio rate. Emergent pitch f0=126.2 Hz at IF72 defaults (measured), f0~k^0.84 tension law, closed quotient 0.18, flow slope −7.7 dB/oct (measured); registers (chest/falsetto/fry) from parameter regimes; breathiness from noise mix. The physical voice-source replacement for the parametric glottal pulses in SP-015/028/038/067; feeds SP-067 KLAT / SP-015 formants / SP-028 LPC unchanged. Deterministic per seed, sample-count preserving (zero-drift safe). Candidate: `sound/synthesis/vocal_fold_model.py`. |
 
 
 # Higher-Order Ambisonics (HOA) Spatialization (Method SP-034)
@@ -29611,3 +29612,84 @@ Each of the 21 pairs occurs exactly once, each voice appears 3 times, and — th
 8. **Automorphism $\neq$ transposition.** The 168 Fano automorphisms are voice relabelings (who sits where), not pitch transpositions; a transposition is a post-hoc pitch map. Conflating them produces "the same piece twice" and an inflated claim of variety.
 9. **Disjoint complements don't exist in STS(7).** All blocks intersect (verified min $|B_i\cap B_j|=1$), so a complement is a 4-voice tacet set, never a block. For $v\ge9$ disjoint blocks do occur (that's exactly what a parallel class is) — don't generalize the $v=7$ intuition.
 10. **Not a game, a difference set, or a tiling.** 123 GTBRC optimizes individual incentives; 090 GRDC / 112 CADDC make *within-set differences* distinct; 111 VTCC / 083 QTSC partition a space. BIBDC balances *pairwise co-incidence across voices* — a 2-$(v,k,\lambda)$ property. Any "we already have combinatorics" objection confuses the object being balanced.
+# Sound Production Method SP-131 — Two-Mass Vocal Fold Physical Modeling Synthesis (TMVF)
+
+### Source
+
+- Ishizaka, K., & Flanagan, J. L. (1972). "Synthesis of Voiced Sounds From a Two-Mass Model of the Vocal Cords." *Bell System Technical Journal* 51(6), 1233–1268 — the canonical model: two coupled masses per fold, Bernoulli glottal flow, nonlinear collision springs. The 1972 parameter set (m1 = 0.125 g, m2 = 0.025 g, k1 = 80 N/m, k2 = 8 N/m, kc = 25 N/m) is still the default for voice-source physical modeling.
+- van den Berg, J. (1958). "Myoelastic-Aerodynamic Theory of Voice Production." *Journal of Speech and Hearing Research* 1(3), 227–244 — the mechanism: Bernoulli pressure in the glottis sustains self-oscillation without any vibratory driver.
+- Flanagan, J. L., & Landgraf, L. L. (1968). "Self-Oscillating Source for Vocal-Tract Synthesizers." *IEEE Trans. Audio Electroacoustics* AU-16(1), 57–64 — the single-mass precursor that established the self-oscillating laryngeal source paradigm.
+- Titze, I. R. (1988). "The Physics of Small-Amplitude Oscillation of the Vocal Folds." *JASA* 83(4), 1536–1552 — the eigenmode analysis (f0 ≈ √(k/m)/2π with aerodynamic loading) and the oscillation-threshold pressure law.
+- Story, B. H., & Titze, I. R. (1995). "Voice Simulation With a Body-Cover Model of the Vocal Folds." *JASA* 97(2), 1249–1260 — the body-cover refinement (16 masses), source of the register (chest/falsetto) control discussion.
+- Pelorson, X., et al. (1994). "Theoretical and Experimental Study of Quasisteady-Flow Separation Within the Glottis During Phonation." *JASA* 96(6), 3416–3431 — refined flow-separation criterion used in research-grade implementations (cf. Yoshinaga 2022 two_mass.m).
+- Fant, G., Liljencrants, J., & Lin, Q. (1985). "A Four-Parameter Model of Glottal Flow." *STL-QPSR* 26(4) — the LF pulse model: the parametric *target shape* that TMVF's emergent glottal flow approximates; the bridge between physical source and SP-015/SP-067's parametric pulse sources.
+- Reference implementations verified for this document: kazm00th, "ishizaka-flanagan-realtime" (JS/AudioWorklet, canonical IF72 values, MIT); Yoshinaga, T. (2022), "two_mass.m" (MATLAB, IF72 + subglottal/supraglottal tract loading + Pelorson separation, MIT).
+
+### Layer
+
+**absolute** (sound production — LAYER_ARCHITECTURE.md). TMVF emits audio buffers at sample rate; it writes no note events and holds no symbolic state. It is the **voice-source (glottal excitation) stage** of the production chain: it replaces the parametric glottal pulse train (Rosenberg/LF) used by SP-015 (formant filters), SP-028 (LPC), SP-038 (VOSIM) and SP-067 (Kelly–Lochbaum tract) with a physically self-oscillating laryngeal source, and it is the physical counterpart of SP-004's neural voice engines. Candidate code path: `sound/synthesis/vocal_fold_model.py` (new module), consumed by `sound/synthesis/kelly_lochbaum.py` (SP-067 tract) or any formant/LPC resonator downstream; dispatch via `workflows/musicom_workflow.py::produce(method="SP-131", ...)`.
+
+### Description
+
+Two-Mass Vocal Fold Physical Modeling is a **Synthesis Engines** method that renders the human voice source as a pair of coupled nonlinear oscillators — the classic Ishizaka–Flanagan two-mass model. Each vocal fold is two lumped masses (lower m1, upper m2) connected by springs (stiffness k1, k2, coupling kc, damping r1, r2); subglottal lung pressure Ps drives a Bernoulli glottal flow u_g through the fold gap; the flow's pressure distribution pushes the folds apart during the convergent phase and sucks them closed during the divergent phase (van den Berg's myoelastic-aerodynamic mechanism), so the system **self-oscillates with no vibratory input**. Collision springs (k → 3k when the gap closes) cap the amplitude and generate the crisp closure transient. The emergent glottal volume velocity u_g(t) — unipolar, skewed, with a −7.7 dB/oct flow spectral slope (measured) — is the voice source; radiated sound is the differentiated flow dU_g/dt through the tract (SP-067 KLAT for vowels, SP-015 formants, SP-028 LPC), exactly as a parametric Rosenberg/LF pulse would excite those resonators, but with physical coupling: pitch emerges from stiffness/mass (f0 = 126.2 Hz at IF72 defaults, measured), registers emerge from parameter regimes (chest vs falsetto vs fry), and breathiness/pressed phonation emerge from noise mix and closed quotient — no lookup tables, no hand-drawn glottal pulses. Deterministic per seed (RK4 at audio rate, bit-reproducible), sample-count preserving (zero-drift safe).
+
+### Technical Mechanics
+
+**State and equations of motion.** Two masses per fold, simulated per-fold with symmetric geometry (the other fold mirrors; areas are doubled):
+
+$$m_1 \ddot{\xi}_1 + r_1 \dot{\xi}_1 + k_1 \xi_1 + k_c(\xi_1 - \xi_2) + f_{c1} = F_1, \qquad m_2 \ddot{\xi}_2 + r_2 \dot{\xi}_2 + k_2 \xi_2 + k_c(\xi_2 - \xi_1) + f_{c2} = F_2$$
+
+with $\xi_i$ the medial-lateral displacement of mass $i$ (positive = open), $r_i = 2\zeta_i\sqrt{m_i k_i}$ ($\zeta_1{=}0.1$ open / $\zeta_2{=}0.6$ closed damping ratios), and collision force $f_{ci} = 3 k_i\,(\xi_i + x_{0i})$ active only when $\xi_i + x_{0i} < 0$ (gap closed). Canonical IF72 parameters: $m_1{=}1.25\times10^{-4}$ kg, $m_2{=}2.5\times10^{-5}$ kg, $k_1{=}80$ N/m, $k_2{=}8$ N/m, $k_c{=}25$ N/m, $x_{01}{=}x_{02}{=}2\times10^{-4}$ m (rest half-openings), fold length $L{=}0.014$ m, thicknesses $T_1{=}2.5\times10^{-3}$ m, $T_2{=}5\times10^{-4}$ m, $\rho{=}1.14$ kg/m³.
+
+**Glottal geometry.** Areas at each mass: $a_{g1} = 2L(\xi_1 + x_{01})$, $a_{g2} = 2L(\xi_2 + x_{02})$, clamped ≥ 0.
+
+**Flow and pressures (Bernoulli + separation).** With minimum area $a_{\min} = \min(a_{g1}, a_{g2})$:
+
+$$u_g = a_{\min}\sqrt{\frac{2P_s}{\rho}} \quad (\text{orifice equation}), \qquad P_1 = P_s\left(1 - \left(\tfrac{a_{\min}}{a_{g1}}\right)^2\right), \qquad P_2 = \begin{cases} 0 & a_{g2} \ge a_{g1} \\ P_s\left(1 - \left(\tfrac{a_{\min}}{a_{g2}}\right)^2\right) & a_{g2} < a_{g1} \end{cases}$$
+
+The asymmetric pressure (near-subglottal on the lower mass, ~0 after the vena contracta on the upper) is what makes the flow pulse **skewed** — the canonical Rosenberg/LF shape emerges, not by design but by physics. Driving forces $F_i = P_i\, L\, T_i$.
+
+**Integration.** Classic RK4 at audio rate ($dt = 1/f_s$; verified stable at 48 kHz with the IF72 defaults; explicit Euler is not stable at the collision-spring stiffness). Flow, pressure, and collision state are re-evaluated at every RK4 stage.
+
+**Measured behaviour (verification run, 48 kHz, NumPy implementation of the above):**
+
+| Quantity | Measured | Expectation |
+|---|---|---|
+| Self-oscillation from rest | limit cycle, amp($\xi_1$) = 4.45e-4 m | sustained phonation |
+| f0 at IF72 defaults, Ps=800 Pa | 126.2 Hz | male range (~100–160) |
+| f0 at kscale=2 | 226.5 Hz (ratio 1.79) | super-linear: f0 ~ k^0.84 (aerodynamic loading adds effective stiffness) |
+| closed quotient | 0.18 | skewed pulse, 0.1–0.9 |
+| u_g polarity | min = 0.0 (unipolar) | volume velocity ≥ 0 |
+| flow spectral slope (200 Hz–4 kHz) | −7.7 dB/oct | canonical glottal rolloff −6…−14 |
+| radiated dU_g/dt slope | −1.7 dB/oct | differentiated flow, brighter |
+| determinism | bit-identical | yes |
+| Ps=80 Pa | amplitude decays to 1.4e-9 m (no phonation) | below oscillation threshold |
+
+### Musical Elements Framework
+
+- **PITCH.** f0 is *emergent*, not dialed: $f_0 \approx \frac{1}{2\pi}\sqrt{\frac{k_1+k_c}{m_1}}$ at small amplitude, super-linearly stiffened by aerodynamic loading (measured law f0 ~ k^0.84). Pitch control = tension (scale k1, k2, kc — the cricothyroid muscle analog); vibrato = slow LFO (±3–7%) on tension; glissando = continuous tension ramp (the physical analog of SP-029's glide, but inside the source); register = parameter regime (chest: strong collision, low ζ2; falsetto: mass-2 dominant, weak collision; fry: low Ps near threshold, period-doubling).
+- **RHYTHM.** Onset = subglottal-pressure ramp (note-on); offset = Ps release; articulation lives in the attack transient (~5–10 ms for the limit cycle to build from rest — the physical "voice onset time"); breathiness = aspiration noise added to u_g; creak/fry = subharmonic (period-doubled) rhythmic microstructure. The self-oscillator *cannot* start instantly — that onset shape is part of the timbre.
+- **HARMONY.** Single-voice source by construction; harmony is downstream (the tract) or polyphonic (N independent TMVF instances per UnitMatrix row = an N-voice choir, each with its own f0/tension/Ps). Chord voicing = per-voice tension mapping; unison detune = ±0.5% tension offsets (chorus effect from physical beating).
+- **STRUCTURE.** Macro-form = per-section parameter states: section = (tension register, Ps dynamics, breathiness, closed-quotient target). A song arc = chest → falsetto → fry traversal; a riser = Ps ramp into collision saturation; a breakdown = drop below oscillation threshold (silence by physics, not by gate).
+- **TEXTURE.** The source *is* the texture knob: closed quotient (collision strength + ζ2) → harmonic richness; breathiness (noise gain) → spectral floor; pressed vs flow phonation → crest factor; subharmonic fry → granular texture. Spectral tilt is fixed by physics (−7.7 dB/oct flow, measured) — downstream resonators (SP-015/SP-067/SP-028) shape it into vowels/timbre.
+
+### UnitMatrix Integration
+
+**Voices = rows = independent laryngeal sources.** Row v = one TMVF instance with per-row params: `{tension (kscale), ps_pa, breathiness, zeta_close, register, seed}`. Per-voice child seed (`seed * 101 + row`, same recipe as humanize) keeps every voice reproducible; per-voice tension offsets create physical detune/chorus.
+
+**Sections = columns = parameter states.** Column j carries the section's source state: tension register, Ps envelope, breathiness, vibrato depth/rate, and the downstream tract/vowel selection (SP-067 KLAT area function or SP-015 formant set). Section seams = parameter crossfades over a short ramp (the source has no zipper: parameters enter the ODE continuously, so a linear ramp is click-free — a physical advantage over table-based sources).
+
+**Cells = MusicUnit.** Cell (v,j) = the note events of row v in section j: pitch → tension (via the measured k^0.84 law, calibrated per voice), velocity → Ps (louder = more pressure = brighter + higher f0, the real "shout" coupling), duration → Ps gate. `create_note_unit`/`_unit_from_events` fill cells as usual; `validate()` gates drift before `to_midi()`.
+
+**Produce dispatch:** `produce(midi_path, method="SP-131", params={"rows": [{"tension": 1.0, "ps_pa": 800, "register": "chest", "seed": 7}, ...], "columns": {"A": {"vowel": "a", "ps_pa": 700}, "B": {"vowel": "i", "tension": 1.4}, ...}, "tract": "kelly_lochbaum"|"formant", "fs": 48000})`. Stage order: TMVF source → tract (SP-067 KLAT / SP-015 formants / SP-028 LPC) → per-row filters/EQ (SP-007) → spatialization (SP-021/SP-129) → dynamics (SP-008/SP-107) → loudness (SP-126) → dither (SP-122). Chaining convention: TMVF is the *physical source* replacement for the parametric glottal pulses in SP-015/028/038/067; its radiated flow feeds any existing resonator chain unchanged.
+
+### Pitfalls
+
+1. **Pitch is not a dial.** f0 emerges from (k, m, Ps, collision) — you cannot set 440 Hz directly. Calibrate a tension→f0 table per voice by simulation (measured law f0 ~ k^0.84, not k^0.5 — the aerodynamic loading super-stiffens; a naive sqrt(k/m) tuning is off by ~30%). Always pitch via tension scaling, never by resampling the output.
+2. **RK4 required; explicit Euler blows up.** The collision springs (3k) push the fastest eigenvalue up; forward Euler at 48 kHz is unstable at the closed phase (verified in development). Use classic RK4 (stable at 48 kHz with IF72 defaults) or a stiff solver (LSODA via scipy) if you raise collision stiffness.
+3. **Zero-area division.** When the glottis closes, a_g → 0 and the orifice equation divides; branch to u_g = 0 when a_min ≤ 0 (both reference implementations do this) — do not clamp areas to a tiny epsilon and keep dividing.
+4. **DC and the unipolar flow.** u_g is unipolar (min = 0): the raw flow has a large DC component. Radiate the *derivative* dU_g/dt (physically the mouth radiation) or run a DC blocker before the tract; feeding raw u_g into KLAT produces a DC-biased tube.
+5. **The attack transient is physical.** The limit cycle needs ~5–10 ms to build from rest; below-threshold Ps (≈ 80–300 Pa with these defaults) never phonates (verified: 80 Pa decays to 1e-9 m). If a note must start instantly, pre-sustain the oscillator (keep Ps active one cell before onset) — or embrace the onset as the "voice onset time" feature.
+6. **Closed quotient is set by collision, not by you.** The default ζ2=0.6 / contact-ratio 3 gives CQ ≈ 0.18 (measured) — a bright, buzzy "IF72 voice". Natural speech CQ is 0.4–0.6: raise ζ_close or add a larger rest gap x0 to darken; lower for fry. CQ is a *result* of (ζ2, contact ratio, Ps), so tune those, not CQ directly.
+7. **Two masses ≠ two formants.** m1/m2 are mechanical modes, not acoustic resonances; the source's −7.7 dB/oct flow slope still needs the tract (SP-067/SP-015/SP-028) to sound like a voice at all. TMVF without a resonator is a buzzy saw — document the chain, not the source alone.
+8. **Stiff ODEs are expensive.** Per-sample RK4 with per-stage Bernoulli evaluation is ~10–30× realtime in NumPy (loop-bound); a C/cython or `solve_ivp`-blocked implementation runs realtime. The model state is only 4 floats — ideal for AudioWorklet (as the JS reference shows) or for a 2×-oversampled block integration.

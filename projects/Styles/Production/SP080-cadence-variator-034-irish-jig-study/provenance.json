@@ -1,0 +1,103 @@
+{
+  "job": "random-style production (SP) layer-aligned",
+  "date": "2026-11-02",
+  "seed": 20261102,
+  "method": "SP-080",
+  "method_module": "sound.generators.cadence_variator",
+  "method_desc": "Cadence Engine Rhythmic Variator w/ Flux Randomizer (Emergence Audio Envoy-style)",
+  "layer": "ABSOLUTE",
+  "params": {
+    "sample_rate": 44100,
+    "bpm": 120.0,
+    "ppqn": 480,
+    "master_lfo_rate": 0.7,
+    "layers": [
+      {
+        "name": "low",
+        "block_steps": [
+          8,
+          6,
+          8,
+          7
+        ],
+        "rate": 2.0,
+        "direction": "forward",
+        "feel": "straight",
+        "root": 62,
+        "gain": 1.05
+      },
+      {
+        "name": "high",
+        "block_steps": [
+          7,
+          5,
+          8,
+          8
+        ],
+        "rate": 3.0,
+        "direction": "pingpong",
+        "feel": "swing",
+        "root": 74,
+        "gain": 0.95
+      }
+    ],
+    "flux_depth": 0.22,
+    "flux_blocks": [
+      0,
+      2
+    ],
+    "carrier": "FluidSynth SP-001 (flute program 73)",
+    "reverb": {
+      "room_size": 0.55,
+      "damping": 0.45,
+      "wet_dry": 0.1,
+      "width": 0.85
+    },
+    "target_lufs": -14.0,
+    "ceiling_db": -1.0
+  },
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Celtic / Irish Traditional/034-irish-jig-study/MIDI/irish_jig.mid",
+  "normalized_midi": "/opt/data/repos/musicom/projects/Styles/Production/SP080-cadence-variator-034-irish-jig-study/MIDI/composition.mid",
+  "source_bpm": 120.0,
+  "source_pitch_classes": [
+    0,
+    2,
+    4,
+    6,
+    7,
+    9,
+    11
+  ],
+  "progression": [
+    "G",
+    "D",
+    "C",
+    "G",
+    "C",
+    "D"
+  ],
+  "rework": "dropped 8 ornament cuts; 73->74, 68->69",
+  "output_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP080-cadence-variator-034-irish-jig-study/SP080-cadence-variator-034-irish-jig-study.wav",
+  "output_ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP080-cadence-variator-034-irish-jig-study/SP080-cadence-variator-034-irish-jig-study.ogg",
+  "lufs": -14.00312824290882,
+  "peak": 0.8912509381337456,
+  "silence_pct": 11.167214133522728,
+  "rms": 0.1306054420471837,
+  "pitch_verdict": "PASS",
+  "hit_rate": 1.0,
+  "he_mean": 0.8340874168914407,
+  "dry_he": 0.8394125331265033,
+  "he_retention": 0.9936561392343899,
+  "preflight_before": {
+    "grid_off": 8,
+    "out_scale": 2,
+    "out_chord": 1,
+    "total_notes": 56
+  },
+  "preflight_after": {
+    "grid_off": 0,
+    "out_scale": 0,
+    "out_chord": 0,
+    "total_notes": 48
+  }
+}

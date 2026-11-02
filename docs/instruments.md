@@ -1715,3 +1715,65 @@ slide as a fast chromatic run or pitch-bend; (3) slap is velocity-hungry
 (4) **no unison doubling** with another melodic patch on the same pitches
 (2026-09-01 comb-filter rule) — octaves or a low bass note an octave+ below
 are fine, and a drum kit is fine.
+
+**Synth Bass 2 added** (2026-09-02): GM39, **Bass-family fifth entry** — the
+RESONANT analog synth bass: the Roland TB-303 acid voice (pulse oscillator
+through a self-oscillating 24 dB/oct low-pass, accent + slide gesture
+buttons), the sound that birthed acid house (Phuture "Acid Tracks", DJ
+Pierre, Armando) and the bass of techno/electro/synthwave. The squelch
+sibling of Synth Bass 1 (GM38, Minimoog-ish analog): HIGHER filter resonance
+(0.85 vs 0.55), BRIGHTER cutoff (2400 vs 1800 Hz), BIGGER filter-env
+re-open (0.8 vs 0.5 — the accent), pulse waveform vs saw. Files:
+`Bass/synth_bass_2/instrument.md` + `synth_bass_2.py`. Verified end-to-end
+UnitMatrixComposer (1 bar, 1 section, Synth Bass 2 SOLO + drum-kit context)
+→ **zero-drift ✓** → MIDI **190 bytes** → FluidSynth WAV **715,308 bytes**
+SOLO render (FluidR3 via `discover_soundfont()`) ✓; RenderPipeline stems on
+disk `track00_Synth_Bass_2.wav` (715,308 B) + `track01_Drums.wav` (706,092 B)
+✓; solo-render spectral 4–8 kHz buzz **4.8%** (clean single voice, no
+comb-filtering — the acid resonance lives in the 0.8–3 kHz squelch band,
+below the buzz gate). Stem-label: **no quirk** — `GM_PROGRAMS[39]` =
+"Synth Bass 2" AND FluidR3 preset 39 = "Synth Bass 2", labels match exactly.
+Synthesis: **MonoSynth primary** (`sound/synthesis/mono_synth.py` — the
+subtractive VCO → 24dB ladder → ADSR architecture IS the 303; pulse
+waveform, resonance 0.85 near self-oscillation, filter_env_amount 0.8 =
+the accent, cutoff 2400; SYNTHESIS_DEFAULTS load through the registry),
+**PhaseModSynth secondary** (FM acid "rubber 303": saw carrier, sine mod
+ratio 1.0, depth 2.8, attack 0.004), **Karplus-Strong tertiary** (loop_gain
+0.9955 — snappier than SB1's 0.9960; the acid is punchy/tight), ModalSynth
+`'string'` weak fallback. Smoke tests: MonoSynth E2 peak 0.800, head_rms
+0.664 → mid_rms 0.606 → tail_rms 0.514 (sustain holds, no collapse — gate
+release only), squelch band 0.8–3 kHz = **27.5%** of audible energy (the
+resonance peak is REAL); PhaseModSynth E2 peak 0.771. Empirical FluidR3
+pitch sweep (RMS, velocity 90, notes 21/24/28/33/36/40/45/48/52/55/60/64/
+67/72/77/84/96/108): preset 39 audible **17/18, one gap at C8=108 only**
+(RMS 0.2533 at A0 → 0.1246 at C7, remarkably even rolloff, no gaps in the
+writing band; bottom 21–35 sub band is LOUD) — full-keyboard patch down to
+A0, SF2 never clips a composition. Range 21–96 = GM patch span (A0–C7;
+idiomatic writing band 28–72 E1–C5), sweet spot 36–55 (C2–G3 — the acid
+groove pocket: 16th-note sequences, root-fifth riffs), solo range 48–72
+(C3–C5 — the acid-lead squelch band). Registration proof:
+`by_name('synth bass 2')` / `by_name('SYNTH BASS 2')` → Synth Bass 2,
+`by_program(39)` → Synth Bass 2 (distinct from 38 synth bass 1 / 32
+acoustic / 33 finger / 35 fretless), `in_sweet_spot(48)` = True,
+`in_sweet_spot(20)` = False, `stem_label = 'Synth_Bass_2'`;
+`registry_table()` row "| Bass | Synth Bass 2 | 39 | 21–96 | bass, rhythm,
+groove, accent, lead |"; convenience constant `SYNTH_BASS_2`. Role: bass
+(acid bass lines, root-fifth sequences, sub pedals — locks with the kick),
+rhythm (16th-note acid sequences — the pattern IS the melody), groove
+(offbeat accent = the acid rhythm signature), accent (squelch stabs,
+octave-jump hits), lead (acid-lead solos 63–84 — screaming resonant lines)
+— NOT a harmony/pad voice (true monophonic instrument; chords are NOT
+idiomatic), NOT a sub-only voice (the resonance is the identity, sub is
+just the bottom), NOT a warm/fat voice (that is Synth Bass 1). Production:
+REVERB_TAIL 0.9 s (the DRIEST bass in the library — the 303 is direct-inject
+and the resonance IS the effect; verb smears 16th-note sequences), EQ cut
+220 Hz −3 dB (bigger than SB1 — resonance pushes energy into the low-mid
+mud against the kick), boost 1.1 kHz (the squelch band — the ~1 kHz filter
+peak when the env opens, the acid "growl"), 6.5 kHz air shelf (the 303 has
+a natural top roll-off), PAN centre. Writing quirks: (1) monophonic —
+never ask the composer for a 3-note "acid bass chord"; (2) the accent IS
+the performance — velocity ≥ 95 for the offbeat squelch, keep the 16ths at
+72–82; (3) SF2 honours no portamento — write a 303 slide as pitch-bend or
+a fast chromatic run; (4) **no unison doubling** with another melodic patch
+on the same pitches (2026-09-01 comb-filter rule) — octaves or a low bass
+note an octave+ below are fine, and a drum kit is fine.

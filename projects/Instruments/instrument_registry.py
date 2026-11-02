@@ -96,6 +96,7 @@ _INSTRUMENT_MODULES = {
     "Bass.electric_bass.electric_bass": "electric_bass",
     "Bass.acoustic_bass.acoustic_bass": "acoustic_bass",
     "Bass.synth_bass_1.synth_bass_1": "synth_bass_1",
+    "Bass.synth_bass_2.synth_bass_2": "synth_bass_2",
     "Bass.fretless_bass.fretless_bass": "fretless_bass",
     "Woodwind.recorder.recorder": "recorder",
     "Synth.synth_pad.synth_pad": "synth_pad",
@@ -331,6 +332,7 @@ SOPRANO_SAX = ALL_INSTRUMENTS["soprano_sax"]
 ELECTRIC_BASS = ALL_INSTRUMENTS["electric_bass"]
 ACOUSTIC_BASS = ALL_INSTRUMENTS["acoustic_bass"]
 SYNTH_BASS_1 = ALL_INSTRUMENTS["synth_bass_1"]
+SYNTH_BASS_2 = ALL_INSTRUMENTS["synth_bass_2"]
 FRETLESS_BASS = ALL_INSTRUMENTS["fretless_bass"]
 RECORDER = ALL_INSTRUMENTS["recorder"]
 PIZZICATO_STRINGS = ALL_INSTRUMENTS["pizzicato_strings"]
@@ -482,6 +484,8 @@ def registry_table():
             role = "bass, rhythm, countermelody, accent, melody"
         elif low == "synth bass 1":
             role = "bass, rhythm, groove, accent"
+        elif low == "synth bass 2":
+            role = "bass, rhythm, groove, accent, lead"
         elif low == "fretless bass":
             role = "bass, melody, countermelody, groove, slide, color"
         elif low == "recorder":
@@ -853,3 +857,16 @@ if __name__ == "__main__":
           "ACOUSTIC_BASS.range_max =", ACOUSTIC_BASS.range_max)
     print("  ACOUSTIC_BASS.stem_label =", repr(ACOUSTIC_BASS.stem_label))
     print("  TANGO_ACCORDION.stem_label =", repr(TANGO_ACCORDION.stem_label))
+
+    print()
+    print("=== Synth Bass 2 (Acid/TB-303, GM39) ===")
+    print("  SYNTH_BASS_2.midi_program =", SYNTH_BASS_2.midi_program, "(should be 39)")
+    print("  by_name('synth bass 2') =", by_name("synth bass 2"))
+    print("  by_name('SYNTH BASS 2') =", by_name("SYNTH BASS 2"))
+    print("  by_program(39) =", by_program(39))
+    print("  by_program(38) =", by_program(38), "(distinct: synth bass 1)")
+    print("  SYNTH_BASS_2.in_sweet_spot(48) =", SYNTH_BASS_2.in_sweet_spot(48))
+    print("  SYNTH_BASS_2.in_sweet_spot(20) =", SYNTH_BASS_2.in_sweet_spot(20))
+    print("  SYNTH_BASS_2.range_min =", SYNTH_BASS_2.range_min,
+          "SYNTH_BASS_2.range_max =", SYNTH_BASS_2.range_max)
+    print("  SYNTH_BASS_2.stem_label =", repr(SYNTH_BASS_2.stem_label))
