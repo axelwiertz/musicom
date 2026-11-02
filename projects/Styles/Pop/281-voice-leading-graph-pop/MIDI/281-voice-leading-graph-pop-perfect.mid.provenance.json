@@ -1,0 +1,161 @@
+{
+  "artifact": "281-voice-leading-graph-pop-perfect.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom two-phase (phase=2 rules: tiered quantize + grid snap + dedup + voice-leading + tagged ornaments) (method 011 VLG)",
+  "sources": [
+    "/opt/data/projects/Styles/Pop/281-voice-leading-graph-pop/MIDI/281-voice-leading-graph-pop-phase1.mid"
+  ],
+  "parameters": {
+    "bpm": 118,
+    "key": "C",
+    "mode": "ionian",
+    "style": "pop",
+    "form": "intro-verse-chorus-bridge-outro",
+    "bars": 28,
+    "sections": [
+      "Intro",
+      "Verse",
+      "Chorus",
+      "Bridge",
+      "Outro"
+    ],
+    "method": "011 VLG",
+    "layer": "concrete",
+    "paradigm": "Rules-Based",
+    "progression": {
+      "Intro": [
+        "C",
+        "Em",
+        "C",
+        "G"
+      ],
+      "Verse": [
+        "C",
+        "Em",
+        "C",
+        "Am",
+        "F",
+        "G",
+        "C",
+        "F"
+      ],
+      "Chorus": [
+        "F",
+        "G",
+        "Am",
+        "G",
+        "Am",
+        "G",
+        "Am",
+        "C"
+      ],
+      "Bridge": [
+        "Am",
+        "G",
+        "Am",
+        "G"
+      ],
+      "Outro": [
+        "F",
+        "C",
+        "G",
+        "C"
+      ]
+    },
+    "voices": [
+      [
+        "Lead",
+        "Piano",
+        1
+      ],
+      [
+        "Harmony",
+        "Rhodes",
+        4
+      ],
+      [
+        "Pad",
+        "Synth Pad",
+        88
+      ],
+      [
+        "Bass",
+        "Electric Bass",
+        33
+      ],
+      [
+        "Drums",
+        "Drum Kit",
+        0,
+        9
+      ]
+    ],
+    "humanize_seed": 87653,
+    "raw_seed": 20261102,
+    "humanize_profiles": {
+      "Lead": {
+        "timing_sigma_ms": 4.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.015,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Harmony": {
+        "timing_sigma_ms": 4.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.015,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Pad": {
+        "timing_sigma_ms": 4.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Bass": {
+        "timing_sigma_ms": 5.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Drums": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.008,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      }
+    },
+    "phase": 2,
+    "version": "perfect",
+    "off_grid": 0
+  },
+  "notes": "Grid-locked perfect layer (intro-verse-chorus-bridge-outro, 28 bars).",
+  "sha256": "8ac594c0b8ec43c3f192715185ebd7ef541b9bf552fbb3288380b0a673fa870d",
+  "bytes": 8300,
+  "created_utc": "2026-11-02T23:08:04.157146+00:00",
+  "provenance_version": "1.0"
+}

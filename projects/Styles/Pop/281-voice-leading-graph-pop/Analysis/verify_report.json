@@ -1,0 +1,138 @@
+{
+  "phase1": {
+    "size": 1592,
+    "size_ok": true,
+    "tracks": 2,
+    "voice": 1,
+    "lens": [
+      53760
+    ],
+    "drift": true,
+    "per_voice": [
+      {
+        "pitched": 168,
+        "offgrid16": 166,
+        "offgrid8": 166,
+        "out_of_scale": 56,
+        "strong_viol": 0
+      }
+    ],
+    "pitched": 168,
+    "offgrid16": 166,
+    "offgrid8": 166,
+    "out_of_scale": 56,
+    "strong_viol": 0
+  },
+  "perfect": {
+    "size": 8300,
+    "size_ok": true,
+    "tracks": 6,
+    "voice": 5,
+    "lens": [
+      53760,
+      53760,
+      53760,
+      53760,
+      53760
+    ],
+    "drift": true,
+    "per_voice": [
+      {
+        "pitched": 187,
+        "offgrid16": 0,
+        "offgrid8": 19,
+        "out_of_scale": 19,
+        "strong_viol": 0
+      },
+      {
+        "pitched": 168,
+        "offgrid16": 0,
+        "offgrid8": 0,
+        "out_of_scale": 0,
+        "strong_viol": 0
+      },
+      {
+        "pitched": 84,
+        "offgrid16": 0,
+        "offgrid8": 0,
+        "out_of_scale": 0,
+        "strong_viol": 0
+      },
+      {
+        "pitched": 224,
+        "offgrid16": 0,
+        "offgrid8": 0,
+        "out_of_scale": 0,
+        "strong_viol": 0
+      },
+      {
+        "pitched": 0,
+        "offgrid16": 0,
+        "offgrid8": 0,
+        "out_of_scale": 0,
+        "strong_viol": 0
+      }
+    ],
+    "pitched": 663,
+    "offgrid16": 0,
+    "offgrid8": 19,
+    "out_of_scale": 19,
+    "strong_viol": 0
+  },
+  "humanized": {
+    "size": 8289,
+    "size_ok": true,
+    "tracks": 6,
+    "voice": 5,
+    "lens": [
+      53760,
+      53760,
+      53760,
+      53760,
+      53760
+    ],
+    "drift": true,
+    "per_voice": [
+      {
+        "pitched": 187,
+        "offgrid16": 170,
+        "offgrid8": 172,
+        "out_of_scale": 19,
+        "strong_viol": 0
+      },
+      {
+        "pitched": 168,
+        "offgrid16": 152,
+        "offgrid8": 152,
+        "out_of_scale": 0,
+        "strong_viol": 0
+      },
+      {
+        "pitched": 84,
+        "offgrid16": 81,
+        "offgrid8": 81,
+        "out_of_scale": 0,
+        "strong_viol": 0
+      },
+      {
+        "pitched": 224,
+        "offgrid16": 221,
+        "offgrid8": 221,
+        "out_of_scale": 0,
+        "strong_viol": 0
+      },
+      {
+        "pitched": 0,
+        "offgrid16": 0,
+        "offgrid8": 0,
+        "out_of_scale": 0,
+        "strong_viol": 0
+      }
+    ],
+    "pitched": 663,
+    "offgrid16": 624,
+    "offgrid8": 626,
+    "out_of_scale": 19,
+    "strong_viol": 0
+  }
+}

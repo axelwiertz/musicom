@@ -1,0 +1,22 @@
+{
+  "artifact": "281-voice-leading-graph-pop-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.method.011_voice_leading_graph_phase1",
+  "sources": [],
+  "parameters": {
+    "bpm": 118,
+    "bars": 28,
+    "seed": 20261102,
+    "phase": 1,
+    "quantized": false,
+    "key": "C major (ionian)",
+    "form": "intro-verse-chorus-bridge-outro",
+    "style": "pop",
+    "method": "011 VLG (Neo-Riemannian graph walk, weighted, section cadence anchors)"
+  },
+  "notes": "Raw voice-leading graph search: weighted walk over the diatonic Neo-Riemannian graph (R/L/plagal/authentic edges) generates the 28-bar chord sequence; the minimal-movement voice note + triad arpeggio is emitted as a single raw voice. Float pitch + chromatic jitter, off-grid onsets, pre-rules.",
+  "sha256": "7b8c23d0efe450f2fd6e69896023735decedcb91511af56da5d5fa6729243b5a",
+  "bytes": 1592,
+  "created_utc": "2026-11-02T23:08:03.999774+00:00",
+  "provenance_version": "1.0"
+}

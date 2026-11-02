@@ -1,0 +1,202 @@
+{
+  "artifact": "281-voice-leading-graph-pop-humanized.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom two-phase (phase=2 + humanization) (method 011 VLG)",
+  "sources": [
+    "/opt/data/projects/Styles/Pop/281-voice-leading-graph-pop/MIDI/281-voice-leading-graph-pop-perfect.mid"
+  ],
+  "parameters": {
+    "bpm": 118,
+    "key": "C",
+    "mode": "ionian",
+    "style": "pop",
+    "form": "intro-verse-chorus-bridge-outro",
+    "bars": 28,
+    "sections": [
+      "Intro",
+      "Verse",
+      "Chorus",
+      "Bridge",
+      "Outro"
+    ],
+    "method": "011 VLG",
+    "layer": "concrete",
+    "paradigm": "Rules-Based",
+    "progression": {
+      "Intro": [
+        "C",
+        "Em",
+        "C",
+        "G"
+      ],
+      "Verse": [
+        "C",
+        "Em",
+        "C",
+        "Am",
+        "F",
+        "G",
+        "C",
+        "F"
+      ],
+      "Chorus": [
+        "F",
+        "G",
+        "Am",
+        "G",
+        "Am",
+        "G",
+        "Am",
+        "C"
+      ],
+      "Bridge": [
+        "Am",
+        "G",
+        "Am",
+        "G"
+      ],
+      "Outro": [
+        "F",
+        "C",
+        "G",
+        "C"
+      ]
+    },
+    "voices": [
+      [
+        "Lead",
+        "Piano",
+        1
+      ],
+      [
+        "Harmony",
+        "Rhodes",
+        4
+      ],
+      [
+        "Pad",
+        "Synth Pad",
+        88
+      ],
+      [
+        "Bass",
+        "Electric Bass",
+        33
+      ],
+      [
+        "Drums",
+        "Drum Kit",
+        0,
+        9
+      ]
+    ],
+    "humanize_seed": 87653,
+    "raw_seed": 20261102,
+    "humanize_profiles": {
+      "Lead": {
+        "timing_sigma_ms": 4.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.015,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Harmony": {
+        "timing_sigma_ms": 4.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.015,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Pad": {
+        "timing_sigma_ms": 4.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Bass": {
+        "timing_sigma_ms": 5.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Drums": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.008,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      }
+    },
+    "phase": 2,
+    "version": "humanized",
+    "humanize_stats": {
+      "Lead": {
+        "seed": 8852953,
+        "n_notes": 187,
+        "mean_abs_shift_ticks": 2.824,
+        "max_abs_shift_ticks": 11,
+        "mean_abs_vel_delta": 4.433,
+        "timing_sigma_ticks": 3.776
+      },
+      "Harmony": {
+        "seed": 8852954,
+        "n_notes": 168,
+        "mean_abs_shift_ticks": 3.071,
+        "max_abs_shift_ticks": 9,
+        "mean_abs_vel_delta": 4.0,
+        "timing_sigma_ticks": 3.776
+      },
+      "Pad": {
+        "seed": 8852955,
+        "n_notes": 84,
+        "mean_abs_shift_ticks": 4.059,
+        "max_abs_shift_ticks": 10,
+        "mean_abs_vel_delta": 2.928,
+        "timing_sigma_ticks": 3.776
+      },
+      "Bass": {
+        "seed": 8852956,
+        "n_notes": 224,
+        "mean_abs_shift_ticks": 7.317,
+        "max_abs_shift_ticks": 16,
+        "mean_abs_vel_delta": 3.264,
+        "timing_sigma_ticks": 4.72
+      },
+      "Drums": {
+        "seed": 8852957,
+        "n_notes": 364,
+        "mean_abs_shift_ticks": 1.2,
+        "max_abs_shift_ticks": 5,
+        "mean_abs_vel_delta": 3.327,
+        "timing_sigma_ticks": 1.888
+      }
+    }
+  },
+  "notes": "Humanized layer (style pop + per-instrument DNA).",
+  "sha256": "b20a1201e11aed3ccbd00027ebdfac2b9aa0e8550a410be995b7941bb69ff7be",
+  "bytes": 8289,
+  "created_utc": "2026-11-02T23:08:04.157598+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,152 @@
+{
+  "style": "pop",
+  "genre": "Pop",
+  "method": "011 VLG",
+  "method_layer": "concrete",
+  "method_paradigm": "Rules-Based",
+  "form": "intro-verse-chorus-bridge-outro",
+  "key": "C major (ionian)",
+  "bpm": 118,
+  "bars": 28,
+  "sections": [
+    "Intro",
+    "Verse",
+    "Chorus",
+    "Bridge",
+    "Outro"
+  ],
+  "progression": {
+    "Intro": [
+      "C",
+      "Em",
+      "C",
+      "G"
+    ],
+    "Verse": [
+      "C",
+      "Em",
+      "C",
+      "Am",
+      "F",
+      "G",
+      "C",
+      "F"
+    ],
+    "Chorus": [
+      "F",
+      "G",
+      "Am",
+      "G",
+      "Am",
+      "G",
+      "Am",
+      "C"
+    ],
+    "Bridge": [
+      "Am",
+      "G",
+      "Am",
+      "G"
+    ],
+    "Outro": [
+      "F",
+      "C",
+      "G",
+      "C"
+    ]
+  },
+  "raw_events": 168,
+  "phase1_path": "/opt/data/projects/Styles/Pop/281-voice-leading-graph-pop/MIDI/281-voice-leading-graph-pop-phase1.mid",
+  "perfect_path": "/opt/data/projects/Styles/Pop/281-voice-leading-graph-pop/MIDI/281-voice-leading-graph-pop-perfect.mid",
+  "humanized_path": "/opt/data/projects/Styles/Pop/281-voice-leading-graph-pop/MIDI/281-voice-leading-graph-pop-humanized.mid",
+  "hz_seed": 87653,
+  "hz": {
+    "Lead": {
+      "seed": 8852953,
+      "n_notes": 187,
+      "mean_abs_shift_ticks": 2.824,
+      "max_abs_shift_ticks": 11,
+      "mean_abs_vel_delta": 4.433,
+      "timing_sigma_ticks": 3.776
+    },
+    "Harmony": {
+      "seed": 8852954,
+      "n_notes": 168,
+      "mean_abs_shift_ticks": 3.071,
+      "max_abs_shift_ticks": 9,
+      "mean_abs_vel_delta": 4.0,
+      "timing_sigma_ticks": 3.776
+    },
+    "Pad": {
+      "seed": 8852955,
+      "n_notes": 84,
+      "mean_abs_shift_ticks": 4.059,
+      "max_abs_shift_ticks": 10,
+      "mean_abs_vel_delta": 2.928,
+      "timing_sigma_ticks": 3.776
+    },
+    "Bass": {
+      "seed": 8852956,
+      "n_notes": 224,
+      "mean_abs_shift_ticks": 7.317,
+      "max_abs_shift_ticks": 16,
+      "mean_abs_vel_delta": 3.264,
+      "timing_sigma_ticks": 4.72
+    },
+    "Drums": {
+      "seed": 8852957,
+      "n_notes": 364,
+      "mean_abs_shift_ticks": 1.2,
+      "max_abs_shift_ticks": 5,
+      "mean_abs_vel_delta": 3.327,
+      "timing_sigma_ticks": 1.888
+    }
+  },
+  "tiered_audit": {
+    "Lead": {
+      "audible": 187,
+      "strong_ok": 56,
+      "weak_in_scale": 112,
+      "tagged_ornaments": 19,
+      "tagged_resolving": 19,
+      "tagged_non_resolving": 0,
+      "untagged_out_of_scale": 0,
+      "strong_violations": 0,
+      "passes": true
+    },
+    "Harmony": {
+      "audible": 168,
+      "strong_ok": 168,
+      "weak_in_scale": 0,
+      "tagged_ornaments": 0,
+      "tagged_resolving": 0,
+      "tagged_non_resolving": 0,
+      "untagged_out_of_scale": 0,
+      "strong_violations": 0,
+      "passes": true
+    },
+    "Pad": {
+      "audible": 84,
+      "strong_ok": 84,
+      "weak_in_scale": 0,
+      "tagged_ornaments": 0,
+      "tagged_resolving": 0,
+      "tagged_non_resolving": 0,
+      "untagged_out_of_scale": 0,
+      "strong_violations": 0,
+      "passes": true
+    },
+    "Bass": {
+      "audible": 224,
+      "strong_ok": 56,
+      "weak_in_scale": 168,
+      "tagged_ornaments": 0,
+      "tagged_resolving": 0,
+      "tagged_non_resolving": 0,
+      "untagged_out_of_scale": 0,
+      "strong_violations": 0,
+      "passes": true
+    },
+    "all_pass": true
+  }
+}
