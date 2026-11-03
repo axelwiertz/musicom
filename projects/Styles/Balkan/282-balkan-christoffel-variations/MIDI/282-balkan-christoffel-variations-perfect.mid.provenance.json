@@ -1,0 +1,22 @@
+{
+  "artifact": "282-balkan-christoffel-variations-perfect.mid",
+  "classification": "ai-assisted",
+  "generator": "069 Christoffel Word Combinatorial Composition (CWCC) + musicom rules",
+  "sources": [],
+  "parameters": {
+    "phase": 2,
+    "version": "perfect",
+    "seed": 20261103,
+    "key": "D Dorian + b6",
+    "bpm": 160,
+    "style": "balkan-folk",
+    "time_signature": "11/8 (2+2+3+2+2)",
+    "bars": 32,
+    "ticks": 42240
+  },
+  "notes": "Grid-locked rules-processed layer (no humanization)",
+  "sha256": "a00294d58d77b0ea21b85efd591908b7da25751d18f12abe29fab6d261e0ef2c",
+  "bytes": 10482,
+  "created_utc": "2026-11-03T01:09:23.843003+00:00",
+  "provenance_version": "1.0"
+}

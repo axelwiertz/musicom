@@ -102,6 +102,7 @@ _INSTRUMENT_MODULES = {
     "Synth.synth_pad.synth_pad": "synth_pad",
     "Synth.synth_brass_1.synth_brass_1": "synth_brass_1",
     "Synth.synth_voice.synth_voice": "synth_voice",
+    "Synth.calliope.calliope": "calliope",
 }
 
 _FIELDS = (
@@ -341,6 +342,7 @@ TREMOLO_STRINGS = ALL_INSTRUMENTS["tremolo_strings"]
 SYNTH_PAD = ALL_INSTRUMENTS["synth_pad"]
 SYNTH_BRASS_1 = ALL_INSTRUMENTS["synth_brass_1"]
 SYNTH_VOICE = ALL_INSTRUMENTS["synth_voice"]
+CALIOPE = ALL_INSTRUMENTS["calliope"]
 # Voice-like family — one instrument per non-vocal source. The `voice_like`
 # key is the umbrella (vox humana); each member is also addressable directly.
 VOICE_LIKE = ALL_INSTRUMENTS["voice_like"]
@@ -506,6 +508,8 @@ def registry_table():
             role = "lead, harmony, accent, stab, pad, countermelody"
         elif low == "synth voice":
             role = "lead, melody, harmony, pad, countermelody, accent"
+        elif low == "lead 3 (calliope)":
+            role = "lead, melody, ornament, accent, countermelody"
         else:
             role = "lead, harmony, accent"
         rng = f"{inst.range_min}–{inst.range_max}" if inst.range_min else "-"
@@ -870,3 +874,15 @@ if __name__ == "__main__":
     print("  SYNTH_BASS_2.range_min =", SYNTH_BASS_2.range_min,
           "SYNTH_BASS_2.range_max =", SYNTH_BASS_2.range_max)
     print("  SYNTH_BASS_2.stem_label =", repr(SYNTH_BASS_2.stem_label))
+
+    print()
+    print("=== Calliope (Lead 3, GM82) ===")
+    print("  CALIOPE.midi_program =", CALIOPE.midi_program, "(should be 82)")
+    print("  by_name('calliope') =", by_name("calliope"))
+    print("  by_name('LEAD 3 (CALLIOPE)') =", by_name("lead 3 (calliope)"))
+    print("  by_program(82) =", by_program(82))
+    print("  CALIOPE.in_sweet_spot(72) =", CALIOPE.in_sweet_spot(72))
+    print("  CALIOPE.in_sweet_spot(48) =", CALIOPE.in_sweet_spot(48))
+    print("  CALIOPE.range_min =", CALIOPE.range_min,
+          "CALIOPE.range_max =", CALIOPE.range_max)
+    print("  CALIOPE.stem_label =", repr(CALIOPE.stem_label))

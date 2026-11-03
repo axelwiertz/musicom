@@ -656,6 +656,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | World | Pan Flute | 75 | 55–100 | lead, melody, ornament, drone, accent |
 | World | Shakuhachi | 77 | 55–100 | lead, melody, ornament, drone, accent |
 | Synth | Pad 1 (new age) | 88 | 36–96 | pad, harmony, texture, drone, accent |
+| Synth | Lead 3 (calliope) | 82 | 60–96 | lead, melody, ornament, accent, countermelody |
 | Synth | Synth Brass 1 | 62 | 36–96 | lead, harmony, accent, stab, pad, countermelody |
 | Synth | Synth Voice | 54 | 36–96 | lead, melody, harmony, pad, countermelody, accent |
 | Vocal | Choir Aahs | 52 | 40–88 | pad, harmony, melody, countermelody, anthem, texture |
@@ -736,6 +737,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 ||| 30 | Distortion Guitar | Distortion_Guitar ✓ (GM_PROGRAMS[30] + FluidR3 preset 30 both "Distortion Guitar" — labels match exactly, **no quirk**) |
 ||| 62 | Synth Brass 1 | Synth_Brass_1 ✓ (GM_PROGRAMS[62] = "Synth Brass 1"; FluidR3 preset 62 = "Synth Brass 1" — labels match exactly, **no quirk**) |
 ||| 32 | Acoustic Bass | Acoustic_Bass ✓ (GM_PROGRAMS[32] = "Acoustic Bass"; FluidR3 preset 32 = "Acoustic Bass" — labels match exactly, **no quirk**) |
+||| 82 | Lead 3 (calliope) | Lead_3_calliope ✓ (GM_PROGRAMS[82] = "Lead 3 (calliope)" → sanitized `Lead_3_calliope` — parens stripped, spaces → underscore; FluidR3 preset 82 = **"Calliope Lead"** — SF2 internal name differs from the GM label, cosmetic only, **no routing impact**; stems are labelled from GM_PROGRAMS) |
 
 > **Known off-by-one in existing entries**: ~~`trumpet.py` uses 57~~ **FIXED 2026-08-27**: trumpet is now 56 (SF2 preset 56=`SoloTrumpet`). `piano.py`=1 → actually Bright Acoustic Piano (GM #2) — cosmetic label difference only, no routing impact. Legacy registry rows kept as-is for piano; new instruments use 0-indexed programs matching pipeline+SF2.
 
@@ -1777,3 +1779,66 @@ the performance — velocity ≥ 95 for the offbeat squelch, keep the 16ths at
 a fast chromatic run; (4) **no unison doubling** with another melodic patch
 on the same pitches (2026-09-01 comb-filter rule) — octaves or a low bass
 note an octave+ below are fine, and a drum kit is fine.
+
+**Calliope added** (2026-11-03): GM82, **Synth-family fourth entry** — the
+GM Lead-family patch modelled on the steam calliope ("steam piano"): a bank
+of steam-driven organ pipes / brass whistles played from a keyboard, the
+sound of circus, carnival, fairground and Mississippi riverboat. The patch
+reads as a mellow, slightly breathy pipe lead: near-sine pipe fundamentals
+with a touch of chiff, fast valve-like attack, sustained while held. Files:
+`Synth/calliope/instrument.md` + `calliope.py`. Verified end-to-end
+UnitMatrixComposer (1 bar, 1 section, Calliope SOLO + drum-kit context)
+→ **zero-drift ✓** → MIDI **188 bytes** → FluidSynth WAV **1,001,772 bytes**
+SOLO render (FluidR3 via `discover_soundfont()`) ✓; RenderPipeline stems on
+disk `track00_Lead_3_calliope.wav` (1,001,772 B) + `track01_Drums.wav`
+(706,092 B) ✓; stem label `GM_PROGRAMS[82]` = **"Lead 3 (calliope)"** →
+sanitized `Lead_3_calliope` (parens stripped, spaces → underscore) and
+FluidR3 preset 82 = **"Calliope Lead"** — SF2 internal name differs
+cosmetically, **no routing quirk** (stems are labelled from GM_PROGRAMS);
+solo-render spectral 4–8 kHz buzz **3.5%** (clean single voice, no
+comb-filtering — measured 11.2% at the C6 probe, lower in the mid
+register). Synthesis: **PhaseModSynth primary** (the pipe recipe: sine
+carrier + sine modulator, mod_freq_ratio 1.0, mod_depth **1.8** — between
+flute 1.5 and shakuhachi 2.0: a pipe is brighter than a flute, mellower
+than the reed voices 2.2–4.5; attack 0.02 s = fast valve opening, release
+0.12 s = dry pipe cutoff, sustain 0.9; SYNTHESIS_DEFAULTS load through the
+registry), **Additive secondary** (mellow harmonic pipe stack [1.0, 0.55,
+0.30, 0.18, 0.10, 0.05] — strong fundamental, gentle rolloff, no reed
+brightness), **AirPipe tertiary** (the physical model — a pressure-driven
+flue pipe IS the calliope physics: steam pressure = the air supply; open
+pipe stopped=False, pressure 0.6 below the 0.75 overblow threshold so the
+pipe stays on the fundamental, length_scale 1.0; AIRPIPE_DEFAULTS). Smoke
+tests: PhaseModSynth C5 peak 0.796, mid_rms 0.3795 → tail_rms 0.2940
+(sustain holds, release decays — no collapse); AirPipe C5 peak 1.704;
+Additive C5 peak 2753. Empirical FluidR3 pitch sweep (RMS, velocity 90,
+notes 24–108 step 6): preset 82 audible **15/15, no gaps** (RMS 670–2125,
+even; bottom C1 loudest 2125, treble rolls gently to 670 at C8; spectral
+centroid ~2230 Hz at C6 — mellow for a lead) — full-keyboard patch, SF2
+never clips a composition. Range 60–96 = idiomatic writing band (C4–C7,
+the real steam rack ~3 octaves; the GM patch plays 24–108), sweet spot
+72–84 (C5–C6 — the classic fairground tune register), solo range 67–89
+(G4–A6). Registration proof: `by_name('calliope')` /
+`by_name('LEAD 3 (CALLIOPE)')` → Calliope, `by_program(82)` → Calliope
+(distinct from 88 pad / 62 brass / 54 voice / 80–81 lead-1/lead-2
+voice-like members), `in_sweet_spot(72)` = True, `in_sweet_spot(48)` =
+False, `stem_label = 'Lead_3_calliope'`; `registry_table()` row
+"| Synth | Lead 3 (calliope) | 82 | 60–96 | lead, melody, ornament, accent,
+countermelody |"; convenience constant `CALIOPE`. Role: lead (carnival/
+circus cue melodies — the oom-pah tune, "Entrance of the Gladiators"
+register), melody (retro/fantasy top lines, the "toy town" voice),
+ornament (trills + chiff blips ARE the idiom), accent (downbeat pipe
+stabs), countermelody (second pipe voice, thirds/sixths) — NOT a bass
+voice, NOT a pad (pipes are rhythmic and per-key; the slow-attack pad role
+is synth_pad GM88); light 2–3 note pipe chords are OK (calliopes are
+played two-handed) but dense harmony smears. Production: REVERB_TAIL 2.0 s
+(fairground space — shorter than the pad family 3.2 s because calliope
+phrases are rhythmic and the pipes carry their own steam), EQ cut 400 Hz
+−2.5 dB (pipe-stack low-mid boxiness), boost 3 kHz (the whistle/chiff
+presence band), 9 kHz air shelf (steam shimmer), PAN centre. Writing
+quirks: (1) the fast attack keeps short chiff notes dry and separated —
+no smear (contrast the synth-voice bloom); (2) no built-in vibrato (steam
+pressure is constant) — MIDI pitch-bend is the only idiomatic wobble;
+(3) **no unison doubling** with another melodic patch on the same pitches
+(2026-09-01 comb-filter rule) — octaves or thirds (+ same patch 8va = the
+full pipe rack) or a drum kit are fine, and a tuba/bass oom-pah an octave+
+below + snare = the complete circus band.

@@ -1,0 +1,47 @@
+{
+  "chosen": "/opt/data/projects/Styles/Balkan/100-balkan-christoffel",
+  "genre": "Balkan",
+  "primary_midi": "MIDI/100-balkan-christoffel.mid",
+  "audit_date": "2026-11-03",
+  "standards": {
+    "1_engine_not_handrolled": {
+      "result": "PASS",
+      "evidence": "compose.py imports UnitMatrixComposer, uses validate() + to_midi(); no raw mido authoring"
+    },
+    "2_zero_drift": {
+      "result": "PASS",
+      "evidence": "5 voice tracks all length 31680 ticks"
+    },
+    "3_rhythm_grid_sync": {
+      "result": "PASS",
+      "evidence": "672 pitched onsets, 0 off-grid (all on 120/240 tick grid)"
+    },
+    "4_valid_track_setup": {
+      "result": "PASS",
+      "evidence": "5 voice tracks (Clarinet/Fiddle/Tambura/Bass/Drums-ch9) + conductor"
+    },
+    "5_two_phase_artifacts": {
+      "result": "PASS",
+      "evidence": "both 100-balkan-christoffel.mid and -phase1.mid present"
+    },
+    "6_provenance_and_index": {
+      "result": "FAIL",
+      "evidence": "no index.html dashboard; no standalone provenance.json (only .mid.provenance.json sidecars)"
+    }
+  },
+  "standard_failures": [
+    "6: index.html missing (no dashboard), no standalone provenance.json",
+    "aux: 6 out-of-key pitches (Bb pc=10 borrowing never folded into declared D-Dorian key set)",
+    "aux: no dual-version export (-perfect/-humanized) — pre-2026-10-17 contract"
+  ],
+  "redesign_required": true,
+  "source_identity": {
+    "genre": "Balkan (Bulgarian Kopanitsa dance)",
+    "key": "D Dorian (+ Folk-Minor b6 borrowing)",
+    "tempo": 160,
+    "meter": "11/8 (2+2+3+2+2)",
+    "core_motif": "Christoffel word C(5,2)='aaabaab' step pattern (a=up, b=down)",
+    "instrumentation": ["Clarinet (lead)", "Fiddle/Violin (countermelody)", "Tambura/Acoustic Guitar (comping)", "Double Bass", "Tupan/Drum Kit (ch9)"],
+    "form": "6 sections x 4 bars = 24 bars"
+  }
+}

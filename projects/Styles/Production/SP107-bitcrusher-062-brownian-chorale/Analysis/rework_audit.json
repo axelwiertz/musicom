@@ -1,0 +1,15 @@
+{
+  "before": {
+    "grid_off": 0,
+    "out_scale": 0,
+    "out_chord": 0,
+    "total_notes": 96
+  },
+  "after": {
+    "grid_off": 0,
+    "out_scale": 0,
+    "out_chord": 0,
+    "total_notes": 96
+  },
+  "rework": "NONE \u2014 source 062-brownian-chorale already passes the 3-rule gate (0 off-grid, 0 out-of-scale, 0 out-of-chord, zero-drift 15360-tick tracks). composition.mid is a byte copy of source."
+}

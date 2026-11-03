@@ -1,0 +1,16 @@
+{
+  "artifact": "282-balkan-christoffel-variations-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "069 Christoffel Word Combinatorial Composition (CWCC) + musicom rules",
+  "sources": [],
+  "parameters": {
+    "phase": 1,
+    "seed": 20261103,
+    "ticks": 42240
+  },
+  "notes": "Raw unquantized Christoffel/Sturmian walk, single voice (pre-rules generative draft)",
+  "sha256": "f1484f617fef931db4f43fa4ac2aefc12a3d08a6395ffa6431333fc9bef12ebf",
+  "bytes": 1776,
+  "created_utc": "2026-11-03T01:09:23.735415+00:00",
+  "provenance_version": "1.0"
+}

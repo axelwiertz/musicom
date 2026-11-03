@@ -1,0 +1,32 @@
+{
+  "project": "282-balkan-christoffel-variations",
+  "classification": "ai-assisted",
+  "generator": "069 Christoffel Word Combinatorial Composition (CWCC) + musicom rules + dual-version humanization",
+  "source_project": "100-balkan-christoffel",
+  "decision": "redesign (audit standard 6 fail: no index.html / standalone provenance.json)",
+  "key": "D Dorian + b6 (Bb Folk-Minor borrowing)",
+  "bpm": 160,
+  "time_signature": "11/8 (2+2+3+2+2)",
+  "form": "8 sections x 4 bars = 32 bars",
+  "ticks": 42240,
+  "seed": 20261103,
+  "style": "balkan-folk",
+  "variation_techniques": [
+    "inversion (Tema_A_Inv)",
+    "augmentation (Tema_B_Aug)",
+    "retrograde (Tema_A_Retro)",
+    "register shift (Razvivka)",
+    "density rise (Razvivka)",
+    "mode shift / b6 borrowing (Zavurshek)"
+  ],
+  "voices": ["Clarinet", "Fiddle", "Tambura", "Bass", "Drums"],
+  "artifacts": [
+    "MIDI/282-balkan-christoffel-variations-phase1.mid",
+    "MIDI/282-balkan-christoffel-variations-perfect.mid",
+    "MIDI/282-balkan-christoffel-variations-humanized.mid",
+    "Audio/282-balkan-christoffel-variations-perfect.ogg",
+    "Audio/282-balkan-christoffel-variations-humanized.ogg",
+    "Audio/282-balkan-christoffel-variations-phase1.ogg"
+  ],
+  "provenance_version": "1.0"
+}

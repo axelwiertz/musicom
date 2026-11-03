@@ -1,0 +1,52 @@
+{
+  "phase1": {
+    "path": "/opt/data/projects/Styles/Balkan/282-balkan-christoffel-variations/MIDI/282-balkan-christoffel-variations-phase1.mid",
+    "bytes": 1776,
+    "ntracks": 2,
+    "voice_tracks": 1,
+    "track_lengths": [
+      42240
+    ],
+    "zero_drift": true,
+    "pitched_notes": 205,
+    "off_grid": 196,
+    "scale_violations": 26,
+    "chord_violations": 114
+  },
+  "perfect": {
+    "path": "/opt/data/projects/Styles/Balkan/282-balkan-christoffel-variations/MIDI/282-balkan-christoffel-variations-perfect.mid",
+    "bytes": 10482,
+    "ntracks": 6,
+    "voice_tracks": 5,
+    "track_lengths": [
+      42240,
+      42240,
+      42240,
+      42240,
+      42240
+    ],
+    "zero_drift": true,
+    "pitched_notes": 816,
+    "off_grid": 0,
+    "scale_violations": 0,
+    "chord_violations": 0
+  },
+  "humanized": {
+    "path": "/opt/data/projects/Styles/Balkan/282-balkan-christoffel-variations/MIDI/282-balkan-christoffel-variations-humanized.mid",
+    "bytes": 10048,
+    "ntracks": 6,
+    "voice_tracks": 5,
+    "track_lengths": [
+      42240,
+      42240,
+      42240,
+      42240,
+      42240
+    ],
+    "zero_drift": true,
+    "pitched_notes": 816,
+    "off_grid": 786,
+    "scale_violations": 0,
+    "chord_violations": 20
+  }
+}

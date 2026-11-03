@@ -1,0 +1,24 @@
+Registry: <Instrument Lead 3 (calliope) (family=Synth, program=82, range=60-96)>
+Calliope: program=82 gm='Lead 3 (calliope)' stem='Lead_3_calliope' sweet=(72, 84) A4=440.0Hz
+Calliope: zones={'low': (60, 71), 'mid': (72, 83), 'high': (84, 96)}
+Calliope: art=['pipe', 'chiff', 'marcato', 'trill', 'swell', 'accent'] synth=phase_mod reverb=2.0s pan=0.0
+Calliope: C5=523.25Hz G5=783.99Hz C6=1046.50Hz
+
+Zero-drift: True (OK)
+MIDI: /opt/data/projects/Instruments/_test/calliope_test.mid (188 bytes)
+SoundFont: /opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2
+WAV (solo): /opt/data/projects/Instruments/_test/calliope_test.wav (1001772 bytes)
+Spectral check: 4-8kHz buzz energy = 3.5% (OK)
+
+Stem label: GM_PROGRAMS[82] = 'Lead 3 (calliope)'
+SF2 preset 82 -> 'Calliope Lead'
+
+Stems rendered (2 files):
+  track00_Lead_3_calliope.wav (1001772 bytes)
+  track01_Drums.wav (706092 bytes)
+
+PhaseModSynth C5 (depth 1.8): peak=0.796 head_rms=0.3789 mid_rms=0.3795 tail_rms=0.2940
+AirPipe C5 (pressure 0.6): peak=1.704 rms=0.3866
+Additive C5: peak=2753.158
+
+ALL CHECKS PASSED

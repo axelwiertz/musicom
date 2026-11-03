@@ -1,0 +1,119 @@
+{
+  "perfect": {
+    "tag": "perfect",
+    "midi": "/opt/data/projects/Styles/Balkan/282-balkan-christoffel-variations/MIDI/282-balkan-christoffel-variations-perfect.mid",
+    "wav": "/opt/data/projects/Styles/Balkan/282-balkan-christoffel-variations/Audio/282-balkan-christoffel-variations-perfect.wav",
+    "ogg": "/opt/data/projects/Styles/Balkan/282-balkan-christoffel-variations/Audio/282-balkan-christoffel-variations-perfect.ogg",
+    "wav_bytes": 6421804,
+    "ogg_bytes": 265904,
+    "sample_rate": 44100,
+    "target_lufs": -16.0,
+    "integrated_lufs": -16.0,
+    "true_peak_db": -4.11,
+    "silence_ratio": 0.0886,
+    "stages": [
+      {
+        "name": "input",
+        "lufs": -11.06
+      },
+      {
+        "name": "highpass",
+        "lufs": -11.09
+      },
+      {
+        "name": "glue",
+        "lufs": -12.21
+      },
+      {
+        "name": "stereo",
+        "lufs": -12.22
+      },
+      {
+        "name": "lufs_norm",
+        "lufs": -16.0
+      },
+      {
+        "name": "true_peak_limit",
+        "lufs": -16.0
+      }
+    ]
+  },
+  "humanized": {
+    "tag": "humanized",
+    "midi": "/opt/data/projects/Styles/Balkan/282-balkan-christoffel-variations/MIDI/282-balkan-christoffel-variations-humanized.mid",
+    "wav": "/opt/data/projects/Styles/Balkan/282-balkan-christoffel-variations/Audio/282-balkan-christoffel-variations-humanized.wav",
+    "ogg": "/opt/data/projects/Styles/Balkan/282-balkan-christoffel-variations/Audio/282-balkan-christoffel-variations-humanized.ogg",
+    "wav_bytes": 6457132,
+    "ogg_bytes": 256712,
+    "sample_rate": 44100,
+    "target_lufs": -16.0,
+    "integrated_lufs": -16.0,
+    "true_peak_db": -3.19,
+    "silence_ratio": 0.0945,
+    "stages": [
+      {
+        "name": "input",
+        "lufs": -12.23
+      },
+      {
+        "name": "highpass",
+        "lufs": -12.26
+      },
+      {
+        "name": "glue",
+        "lufs": -13.16
+      },
+      {
+        "name": "stereo",
+        "lufs": -13.18
+      },
+      {
+        "name": "lufs_norm",
+        "lufs": -16.0
+      },
+      {
+        "name": "true_peak_limit",
+        "lufs": -16.0
+      }
+    ]
+  },
+  "phase1": {
+    "tag": "phase1",
+    "midi": "/opt/data/projects/Styles/Balkan/282-balkan-christoffel-variations/MIDI/282-balkan-christoffel-variations-phase1.mid",
+    "wav": "/opt/data/projects/Styles/Balkan/282-balkan-christoffel-variations/Audio/282-balkan-christoffel-variations-phase1.wav",
+    "ogg": "/opt/data/projects/Styles/Balkan/282-balkan-christoffel-variations/Audio/282-balkan-christoffel-variations-phase1.ogg",
+    "wav_bytes": 6174508,
+    "ogg_bytes": 297572,
+    "sample_rate": 44100,
+    "target_lufs": -16.0,
+    "integrated_lufs": -16.0,
+    "true_peak_db": -2.04,
+    "silence_ratio": 0.2852,
+    "stages": [
+      {
+        "name": "input",
+        "lufs": -17.53
+      },
+      {
+        "name": "highpass",
+        "lufs": -17.53
+      },
+      {
+        "name": "glue",
+        "lufs": -17.81
+      },
+      {
+        "name": "stereo",
+        "lufs": -17.81
+      },
+      {
+        "name": "lufs_norm",
+        "lufs": -16.0
+      },
+      {
+        "name": "true_peak_limit",
+        "lufs": -16.0
+      }
+    ]
+  }
+}

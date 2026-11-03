@@ -1,0 +1,117 @@
+{
+  "artifact": "282-balkan-christoffel-variations-humanized.mid",
+  "classification": "ai-assisted",
+  "generator": "069 Christoffel Word Combinatorial Composition (CWCC) + musicom rules",
+  "sources": [],
+  "parameters": {
+    "phase": 2,
+    "version": "humanized",
+    "seed": 20261103,
+    "key": "D Dorian + b6",
+    "bpm": 160,
+    "style": "balkan-folk",
+    "humanize_seed": 20261103,
+    "humanize_profiles": {
+      "Clarinet": {
+        "seed": 2046371403,
+        "profile": {
+          "timing_sigma_ms": 9.0,
+          "velocity_sigma": 7.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.02,
+          "layback_ms": 1.0,
+          "phrase_corr": 0.5,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 260,
+        "mean_abs_shift_ticks": 7.912,
+        "max_abs_shift_ticks": 32,
+        "mean_abs_vel_delta": 5.442,
+        "timing_sigma_ticks": 11.52
+      },
+      "Fiddle": {
+        "seed": 2046371404,
+        "profile": {
+          "timing_sigma_ms": 9.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.03,
+          "layback_ms": 1.0,
+          "phrase_corr": 0.5,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 160,
+        "mean_abs_shift_ticks": 7.331,
+        "max_abs_shift_ticks": 32,
+        "mean_abs_vel_delta": 4.394,
+        "timing_sigma_ticks": 11.52
+      },
+      "Tambura": {
+        "seed": 2046371405,
+        "profile": {
+          "timing_sigma_ms": 9.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.02,
+          "layback_ms": 1.0,
+          "phrase_corr": 0.5,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 272,
+        "mean_abs_shift_ticks": 8.044,
+        "max_abs_shift_ticks": 25,
+        "mean_abs_vel_delta": 4.794,
+        "timing_sigma_ticks": 11.52
+      },
+      "Bass": {
+        "seed": 2046371406,
+        "profile": {
+          "timing_sigma_ms": 10.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.03,
+          "layback_ms": 8.0,
+          "phrase_corr": 0.5,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 124,
+        "mean_abs_shift_ticks": 11.677,
+        "max_abs_shift_ticks": 40,
+        "mean_abs_vel_delta": 5.097,
+        "timing_sigma_ticks": 12.8
+      },
+      "Drums": {
+        "seed": 2046371407,
+        "profile": {
+          "timing_sigma_ms": 2.0,
+          "velocity_sigma": 4.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.008,
+          "layback_ms": 0.0,
+          "phrase_corr": 0.5,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 495,
+        "mean_abs_shift_ticks": 1.844,
+        "max_abs_shift_ticks": 6,
+        "mean_abs_vel_delta": 3.238,
+        "timing_sigma_ticks": 2.56
+      }
+    }
+  },
+  "notes": "Humanized (style balkan-folk, per-instrument DNA)",
+  "sha256": "18dfdbf1b34640a51d678c4435911dd7eb1c0f599e485f25697fd211fb028ec3",
+  "bytes": 10048,
+  "created_utc": "2026-11-03T01:09:23.843467+00:00",
+  "provenance_version": "1.0"
+}
