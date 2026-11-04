@@ -1,0 +1,203 @@
+{
+  "artifact": "285-flamenco-boids-falseta-humanized.mid",
+  "classification": "ai-assisted",
+  "generator": "Boids Swarm Flocking (Method 031) + musicom rules",
+  "sources": [],
+  "parameters": {
+    "bpm": 100,
+    "key": "E Phrygian (por arriba)",
+    "scale": "major",
+    "scale_pcs": [
+      0,
+      2,
+      4,
+      5,
+      7,
+      9,
+      11
+    ],
+    "style": "flamenco",
+    "method_id": "031",
+    "method": "Boids Swarm Flocking (Reynolds separation/alignment/cohesion)",
+    "layer": "concrete",
+    "form": "intro-falseta-letra-falseta-cierre",
+    "sections": 5,
+    "bars": 32,
+    "progression_per_section": {
+      "Intro": [
+        "Am",
+        "G",
+        "F",
+        "Em"
+      ],
+      "Falseta1": [
+        "G",
+        "F",
+        "Em",
+        "Am"
+      ],
+      "Letra": [
+        "F",
+        "Em",
+        "Am",
+        "G"
+      ],
+      "Falseta2": [
+        "Em",
+        "Am",
+        "G",
+        "F"
+      ],
+      "Cierre": [
+        "Am",
+        "G",
+        "F",
+        "Em"
+      ]
+    },
+    "section_roots_midpoint": [
+      "G",
+      "F",
+      "Em",
+      "Am",
+      "G"
+    ],
+    "seed": 20261104,
+    "humanize_seed": 20261104,
+    "voices": [
+      {
+        "name": "Falseta",
+        "instrument": "acoustic_guitar",
+        "program": 24,
+        "channel": 0
+      },
+      {
+        "name": "Rasgueado",
+        "instrument": "steel_acoustic",
+        "program": 25,
+        "channel": 1
+      },
+      {
+        "name": "Bass",
+        "instrument": "acoustic_bass",
+        "program": 32,
+        "channel": 2
+      },
+      {
+        "name": "Violin",
+        "instrument": "violin",
+        "program": 40,
+        "channel": 3
+      },
+      {
+        "name": "Drums",
+        "instrument": "drum_kit",
+        "program": 0,
+        "channel": 9
+      }
+    ],
+    "phase": "2-humanized",
+    "humanize_profiles": {
+      "Falseta": {
+        "seed": 2046371504,
+        "profile": {
+          "timing_sigma_ms": 8.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.02,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.45,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 140,
+        "mean_abs_shift_ticks": 4.607,
+        "max_abs_shift_ticks": 13,
+        "mean_abs_vel_delta": 5.1,
+        "timing_sigma_ticks": 6.4
+      },
+      "Rasgueado": {
+        "seed": 2046371505,
+        "profile": {
+          "timing_sigma_ms": 8.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.02,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.45,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 256,
+        "mean_abs_shift_ticks": 4.445,
+        "max_abs_shift_ticks": 17,
+        "mean_abs_vel_delta": 4.844,
+        "timing_sigma_ticks": 6.4
+      },
+      "Bass": {
+        "seed": 2046371506,
+        "profile": {
+          "timing_sigma_ms": 5.0,
+          "velocity_sigma": 4.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.01,
+          "layback_ms": 8.0,
+          "phrase_corr": 0.45,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 128,
+        "mean_abs_shift_ticks": 6.461,
+        "max_abs_shift_ticks": 15,
+        "mean_abs_vel_delta": 3.461,
+        "timing_sigma_ticks": 4.0
+      },
+      "Violin": {
+        "seed": 2046371507,
+        "profile": {
+          "timing_sigma_ms": 8.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.03,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.45,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 52,
+        "mean_abs_shift_ticks": 3.461,
+        "max_abs_shift_ticks": 12,
+        "mean_abs_vel_delta": 5.75,
+        "timing_sigma_ticks": 6.4
+      },
+      "Drums": {
+        "seed": 2046371508,
+        "profile": {
+          "timing_sigma_ms": 2.0,
+          "velocity_sigma": 4.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.008,
+          "layback_ms": 0.0,
+          "phrase_corr": 0.45,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 257,
+        "mean_abs_shift_ticks": 0.957,
+        "max_abs_shift_ticks": 4,
+        "mean_abs_vel_delta": 3.066,
+        "timing_sigma_ticks": 1.6
+      }
+    }
+  },
+  "notes": "humanized layer: flamenco style profile + per-instrument DNA",
+  "sha256": "063184bb06ff550619a672b867a7a4b67b2da1b4557ed0cc06b567a14b6baa90",
+  "bytes": 7395,
+  "created_utc": "2026-11-04T23:11:22.904221+00:00",
+  "provenance_version": "1.0"
+}

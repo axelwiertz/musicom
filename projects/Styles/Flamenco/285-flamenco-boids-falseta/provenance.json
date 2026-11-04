@@ -1,0 +1,94 @@
+{
+  "bpm": 100,
+  "key": "E Phrygian (por arriba)",
+  "scale": "major",
+  "scale_pcs": [
+    0,
+    2,
+    4,
+    5,
+    7,
+    9,
+    11
+  ],
+  "style": "flamenco",
+  "method_id": "031",
+  "method": "Boids Swarm Flocking (Reynolds separation/alignment/cohesion)",
+  "layer": "concrete",
+  "form": "intro-falseta-letra-falseta-cierre",
+  "sections": 5,
+  "bars": 32,
+  "progression_per_section": {
+    "Intro": [
+      "Am",
+      "G",
+      "F",
+      "Em"
+    ],
+    "Falseta1": [
+      "G",
+      "F",
+      "Em",
+      "Am"
+    ],
+    "Letra": [
+      "F",
+      "Em",
+      "Am",
+      "G"
+    ],
+    "Falseta2": [
+      "Em",
+      "Am",
+      "G",
+      "F"
+    ],
+    "Cierre": [
+      "Am",
+      "G",
+      "F",
+      "Em"
+    ]
+  },
+  "section_roots_midpoint": [
+    "G",
+    "F",
+    "Em",
+    "Am",
+    "G"
+  ],
+  "seed": 20261104,
+  "humanize_seed": 20261104,
+  "voices": [
+    {
+      "name": "Falseta",
+      "instrument": "acoustic_guitar",
+      "program": 24,
+      "channel": 0
+    },
+    {
+      "name": "Rasgueado",
+      "instrument": "steel_acoustic",
+      "program": 25,
+      "channel": 1
+    },
+    {
+      "name": "Bass",
+      "instrument": "acoustic_bass",
+      "program": 32,
+      "channel": 2
+    },
+    {
+      "name": "Violin",
+      "instrument": "violin",
+      "program": 40,
+      "channel": 3
+    },
+    {
+      "name": "Drums",
+      "instrument": "drum_kit",
+      "program": 0,
+      "channel": 9
+    }
+  ]
+}

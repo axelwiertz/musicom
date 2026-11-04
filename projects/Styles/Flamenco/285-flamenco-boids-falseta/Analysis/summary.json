@@ -1,0 +1,197 @@
+{
+  "perfect_grid": {
+    "Falseta": {
+      "onsets": 140,
+      "off_16th": 0,
+      "off_8th": 71
+    },
+    "Rasgueado": {
+      "onsets": 256,
+      "off_16th": 0,
+      "off_8th": 0
+    },
+    "Bass": {
+      "onsets": 128,
+      "off_16th": 0,
+      "off_8th": 0
+    },
+    "Violin": {
+      "onsets": 52,
+      "off_16th": 0,
+      "off_8th": 0
+    },
+    "Drums": {
+      "onsets": 257,
+      "off_16th": 0,
+      "off_8th": 0
+    }
+  },
+  "humanized_grid": {
+    "Falseta": {
+      "onsets": 140,
+      "off_16th": 134,
+      "off_8th": 138
+    },
+    "Rasgueado": {
+      "onsets": 256,
+      "off_16th": 237,
+      "off_8th": 237
+    },
+    "Bass": {
+      "onsets": 128,
+      "off_16th": 127,
+      "off_8th": 127
+    },
+    "Violin": {
+      "onsets": 52,
+      "off_16th": 43,
+      "off_8th": 43
+    },
+    "Drums": {
+      "onsets": 257,
+      "off_16th": 161,
+      "off_8th": 161
+    }
+  },
+  "harmony": {
+    "Falseta": {
+      "total": 140,
+      "untagged_out_of_scale": 0,
+      "tagged_non_resolving": 0,
+      "strong_violations": 0,
+      "tagged_resolving": 0,
+      "weak_in_scale": 110,
+      "strong_ok": 30
+    },
+    "Rasgueado": {
+      "total": 256,
+      "untagged_out_of_scale": 0,
+      "tagged_non_resolving": 0,
+      "strong_violations": 0,
+      "tagged_resolving": 0,
+      "weak_in_scale": 192,
+      "strong_ok": 64
+    },
+    "Bass": {
+      "total": 128,
+      "untagged_out_of_scale": 0,
+      "tagged_non_resolving": 0,
+      "strong_violations": 0,
+      "tagged_resolving": 0,
+      "weak_in_scale": 64,
+      "strong_ok": 64
+    },
+    "Violin": {
+      "total": 52,
+      "untagged_out_of_scale": 0,
+      "tagged_non_resolving": 0,
+      "strong_violations": 0,
+      "tagged_resolving": 0,
+      "weak_in_scale": 0,
+      "strong_ok": 52
+    }
+  },
+  "humanize": {
+    "Falseta": {
+      "seed": 2046371504,
+      "profile": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.45,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 140,
+      "mean_abs_shift_ticks": 4.607,
+      "max_abs_shift_ticks": 13,
+      "mean_abs_vel_delta": 5.1,
+      "timing_sigma_ticks": 6.4
+    },
+    "Rasgueado": {
+      "seed": 2046371505,
+      "profile": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.45,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 256,
+      "mean_abs_shift_ticks": 4.445,
+      "max_abs_shift_ticks": 17,
+      "mean_abs_vel_delta": 4.844,
+      "timing_sigma_ticks": 6.4
+    },
+    "Bass": {
+      "seed": 2046371506,
+      "profile": {
+        "timing_sigma_ms": 5.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.45,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 128,
+      "mean_abs_shift_ticks": 6.461,
+      "max_abs_shift_ticks": 15,
+      "mean_abs_vel_delta": 3.461,
+      "timing_sigma_ticks": 4.0
+    },
+    "Violin": {
+      "seed": 2046371507,
+      "profile": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.03,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.45,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 52,
+      "mean_abs_shift_ticks": 3.461,
+      "max_abs_shift_ticks": 12,
+      "mean_abs_vel_delta": 5.75,
+      "timing_sigma_ticks": 6.4
+    },
+    "Drums": {
+      "seed": 2046371508,
+      "profile": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.008,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.45,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 257,
+      "mean_abs_shift_ticks": 0.957,
+      "max_abs_shift_ticks": 4,
+      "mean_abs_vel_delta": 3.066,
+      "timing_sigma_ticks": 1.6
+    }
+  },
+  "zero_drift": {
+    "perfect": true,
+    "humanized": true,
+    "phase1": true,
+    "length_ticks": 61440
+  }
+}

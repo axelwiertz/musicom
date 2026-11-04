@@ -1,0 +1,107 @@
+{
+  "artifact": "285-flamenco-boids-falseta-perfect.mid",
+  "classification": "ai-assisted",
+  "generator": "Boids Swarm Flocking (Method 031) + musicom rules",
+  "sources": [],
+  "parameters": {
+    "bpm": 100,
+    "key": "E Phrygian (por arriba)",
+    "scale": "major",
+    "scale_pcs": [
+      0,
+      2,
+      4,
+      5,
+      7,
+      9,
+      11
+    ],
+    "style": "flamenco",
+    "method_id": "031",
+    "method": "Boids Swarm Flocking (Reynolds separation/alignment/cohesion)",
+    "layer": "concrete",
+    "form": "intro-falseta-letra-falseta-cierre",
+    "sections": 5,
+    "bars": 32,
+    "progression_per_section": {
+      "Intro": [
+        "Am",
+        "G",
+        "F",
+        "Em"
+      ],
+      "Falseta1": [
+        "G",
+        "F",
+        "Em",
+        "Am"
+      ],
+      "Letra": [
+        "F",
+        "Em",
+        "Am",
+        "G"
+      ],
+      "Falseta2": [
+        "Em",
+        "Am",
+        "G",
+        "F"
+      ],
+      "Cierre": [
+        "Am",
+        "G",
+        "F",
+        "Em"
+      ]
+    },
+    "section_roots_midpoint": [
+      "G",
+      "F",
+      "Em",
+      "Am",
+      "G"
+    ],
+    "seed": 20261104,
+    "humanize_seed": 20261104,
+    "voices": [
+      {
+        "name": "Falseta",
+        "instrument": "acoustic_guitar",
+        "program": 24,
+        "channel": 0
+      },
+      {
+        "name": "Rasgueado",
+        "instrument": "steel_acoustic",
+        "program": 25,
+        "channel": 1
+      },
+      {
+        "name": "Bass",
+        "instrument": "acoustic_bass",
+        "program": 32,
+        "channel": 2
+      },
+      {
+        "name": "Violin",
+        "instrument": "violin",
+        "program": 40,
+        "channel": 3
+      },
+      {
+        "name": "Drums",
+        "instrument": "drum_kit",
+        "program": 0,
+        "channel": 9
+      }
+    ],
+    "phase": "2-perfect",
+    "humanize": null
+  },
+  "notes": "grid-locked perfect layer: tiered quantize (strong->scale+chord, weak->scale), voice-leading checked, zero humanization",
+  "sha256": "f94f80569ec0a76024e0017b9a3da5609f426afe4ce7db90b8d419cb9bf5dad5",
+  "bytes": 7391,
+  "created_utc": "2026-11-04T23:11:22.903802+00:00",
+  "provenance_version": "1.0"
+}
