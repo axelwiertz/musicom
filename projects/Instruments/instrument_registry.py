@@ -87,6 +87,7 @@ _INSTRUMENT_MODULES = {
     "World.fiddle.fiddle": "fiddle",
     "World.shakuhachi.shakuhachi": "shakuhachi",
     "World.taiko.taiko": "taiko",
+    "World.agogo.agogo": "agogo",
     "World.pan_flute.pan_flute": "pan_flute",
     "Vocal.human_voice.human_voice": "human_voice",
     "Vocal.choir.choir": "choir",
@@ -111,6 +112,7 @@ _FIELDS = (
     "synthesis", "modal_preset", "karplus_defaults", "fm_defaults",
     "bowed_defaults", "drum606_defaults", "synthesis_defaults",
     "motor_defaults", "xylophone_modes", "celesta_modes",
+    "agogo_modes",
     "reverb_tail", "eq_body", "eq_presence", "eq_air", "pan",
     "stem_label",
 )
@@ -325,6 +327,7 @@ GLOCKENSPIEL = ALL_INSTRUMENTS["glockenspiel"]
 TUBULAR_BELLS = ALL_INSTRUMENTS["tubular_bells"]
 PICCOLO = ALL_INSTRUMENTS["piccolo"]
 TAIKO = ALL_INSTRUMENTS["taiko"]
+AGOGO = ALL_INSTRUMENTS["agogo"]
 HUMAN_VOICE = ALL_INSTRUMENTS["human_voice"]
 CHOIR = ALL_INSTRUMENTS["choir"]
 PAN_FLUTE = ALL_INSTRUMENTS["pan_flute"]
@@ -470,6 +473,8 @@ def registry_table():
             role = "lead, melody, ornament, accent, countermelody"
         elif low == "taiko drum":
             role = "accent, rhythm, drone, ornament"
+        elif low == "agogo":
+            role = "rhythm, accent, ornament, drone"
         elif low == "human voice":
             role = "lead, melody, countermelody"
         elif low == "choir aahs":
@@ -624,6 +629,10 @@ if __name__ == "__main__":
     print("  by_program(8) =", by_program(8))
     print("  CELESTA.in_sweet_spot(84) =", CELESTA.in_sweet_spot(84))
     print("  ACCORDION.midi_program =", ACCORDION.midi_program, "(should be 21)")
+    print("  AGOGO.midi_program =", AGOGO.midi_program, "(should be 113)")
+    print("  by_name('agogo') =", by_name("agogo"))
+    print("  by_program(113) =", by_program(113))
+    print("  AGOGO.in_sweet_spot(72) =", AGOGO.in_sweet_spot(72))
     print("  MUSIC_BOX.midi_program =", MUSIC_BOX.midi_program, "(should be 10)")
     print("  by_name('music box') =", by_name("music box"))
     print("  by_program(10) =", by_program(10))

@@ -1,0 +1,93 @@
+{
+  "artifact": "284-funk-schillinger-suite-perfect.mid",
+  "classification": "ai-assisted",
+  "generator": "Schillinger System of Musical Design (Method 018) + musicom rules",
+  "sources": [],
+  "parameters": {
+    "bpm": 100,
+    "key": "Bb major",
+    "sections": 8,
+    "bars": 32,
+    "rework_of": "081-funk-schillinger",
+    "rework_kind": "redesign (missing index.html/provenance; full rebuild preserving identity)",
+    "per_section_progs": {
+      "Intro": [
+        "I",
+        "IV",
+        "V",
+        "I"
+      ],
+      "Verse": [
+        "I",
+        "vi",
+        "ii",
+        "V"
+      ],
+      "Chorus": [
+        "IV",
+        "V",
+        "I",
+        "vi"
+      ],
+      "Verse2": [
+        "I",
+        "vi",
+        "ii",
+        "V"
+      ],
+      "Chorus2": [
+        "IV",
+        "V",
+        "I",
+        "vi"
+      ],
+      "Bridge": [
+        "vi",
+        "IV",
+        "I",
+        "V"
+      ],
+      "Chorus3": [
+        "IV",
+        "V",
+        "I",
+        "vi"
+      ],
+      "Outro": [
+        "I",
+        "IV",
+        "I",
+        "V"
+      ]
+    },
+    "section_roots_midpoint": [
+      "IV",
+      "vi",
+      "V",
+      "vi",
+      "V",
+      "IV",
+      "V",
+      "IV"
+    ],
+    "variation_techniques": [
+      "augmentation (Intro: resultant durations x2)",
+      "register shift (lead center 66->78->66)",
+      "transposition (Verse2: lead up perfect 4th)",
+      "per-section method change (Bridge: Schillinger a=7,b=4)",
+      "inversion (Bridge: contour mirrored)",
+      "mode shift (Bridge: relative-minor Gm region)",
+      "retrograde (Outro: reversed resultant)",
+      "counterline (Chorus3: diatonic-third harmony in Clav)"
+    ],
+    "seed": 20261104,
+    "humanize_seed": 20261104,
+    "phase": "2-perfect",
+    "humanize": null
+  },
+  "notes": "grid-locked perfect layer: 16th grid, chord-tone quantized, voice-leading checked, zero humanization",
+  "sha256": "edc898d264821e9bab9216ecc6a61538e064855f31f182321887efafc751cec3",
+  "bytes": 9220,
+  "created_utc": "2026-11-04T01:09:53.444732+00:00",
+  "provenance_version": "1.0"
+}

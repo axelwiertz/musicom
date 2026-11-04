@@ -1,0 +1,20 @@
+{
+  "artifact": "284-funk-schillinger-suite-humanized.ogg",
+  "classification": "ai-assisted",
+  "generator": "FluidSynth (FluidR3_GM) -> master() LUFS -> Opus OGG",
+  "sources": [],
+  "parameters": {
+    "style": "funk",
+    "target_lufs": -13.0,
+    "tag": "humanized",
+    "source_midi": "284-funk-schillinger-suite-humanized.mid",
+    "integrated_lufs": -13.19,
+    "true_peak_db": -1.0,
+    "silence_ratio": 0.0342
+  },
+  "notes": "humanized render: master() to -13.0 LUFS, -1 dBTP ceiling",
+  "sha256": "35958dd54165c9c97db0ed6cedc3a2820802b2d985711f73e9a85543be9d2b76",
+  "bytes": 621397,
+  "created_utc": "2026-11-04T01:19:15.274841+00:00",
+  "provenance_version": "1.0"
+}

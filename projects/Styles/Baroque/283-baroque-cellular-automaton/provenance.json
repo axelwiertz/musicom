@@ -1,0 +1,49 @@
+{
+  "project": "283-baroque-cellular-automaton",
+  "date": "2026-11-03",
+  "seed": 20261103,
+  "style": "Baroque",
+  "style_target": "baroque-classical",
+  "method": "021 Cellular Automata Grid Evolution (CAGE)",
+  "layer": "concrete",
+  "paradigm": "Rules-Based / Grid-Locked",
+  "form": "aba",
+  "sections": ["A1", "B", "A2"],
+  "bars_per_section": 8,
+  "total_bars": 24,
+  "key": "D minor (harmonic/melodic mixture)",
+  "key_pcs": [0, 1, 2, 4, 5, 7, 9, 10],
+  "bpm": 96,
+  "time_signature": "4/4",
+  "ticks_per_beat": 480,
+  "total_ticks": 46080,
+  "ca": {"rule": "Rule30", "width": 24, "steps": 192},
+  "voices": {
+    "Violin": {"program": 40, "role": "lead", "humanize_dna": [null, 6.0, null, 0.03]},
+    "Oboe": {"program": 68, "role": "counter", "humanize_dna": [null, 7.0, null, 0.02]},
+    "Harpsichord": {"program": 6, "role": "continuo", "humanize_dna": [null, 5.0, null, 0.015]},
+    "Viola": {"program": 41, "role": "inner pedal", "humanize_dna": [null, 6.0, null, 0.03]},
+    "Cello": {"program": 42, "role": "ground bass", "humanize_dna": [10.0, 6.0, 8.0, 0.03]}
+  },
+  "progression": {
+    "A1": ["Dm", "C", "Bb", "A", "Dm", "Gm", "A", "Dm"],
+    "B": ["F", "C", "Dm", "A", "Bb", "Gm", "A", "Dm"],
+    "A2": ["Dm", "C", "Bb", "A", "Dm", "Gm", "A", "Dm"]
+  },
+  "verification": {
+    "perfect_off_grid": 0,
+    "humanized_off_grid": 582,
+    "harmony_untagged_out_of_scale": 0,
+    "harmony_tagged_non_resolving": 0,
+    "harmony_strong_violations": 0,
+    "zero_drift": true,
+    "master_lufs": -18.0,
+    "master_true_peak_db": -6.35,
+    "silence_ratio": 0.0498
+  },
+  "artifacts": {
+    "phase1": "MIDI/283-baroque-cellular-automaton-phase1.mid",
+    "perfect": "MIDI/283-baroque-cellular-automaton-perfect.mid",
+    "humanized": "MIDI/283-baroque-cellular-automaton-humanized.mid"
+  }
+}

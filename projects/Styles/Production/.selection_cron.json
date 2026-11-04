@@ -1,12 +1,12 @@
 {
   "job": "random-style production (SP) layer-aligned",
-  "date": "2026-11-03",
-  "seed": 20261103,
-  "method": "SP-107",
-  "method_module": "sound.effects.bit_crusher",
-  "method_desc": "Bit Crusher / Fidelity Reducer \u2014 linked sample-rate/bit-depth macro, Iron/Worn character voicing, aliasing foldover emphasis (Modbap Fidelity Theory-style)",
-  "source_midi": "/opt/data/repos/musicom/projects/Styles/Experimental/062-brownian-chorale/MIDI/062-brownian-chorale.mid",
-  "source_project": "Experimental/062-brownian-chorale/MIDI/062-brownian-chorale.mid",
+  "date": "2026-11-04",
+  "seed": 20261104,
+  "method": "SP-117",
+  "method_module": "sound.effects.reverse_reverb",
+  "method_desc": "Reverse Reverb \u2014 reverse -> IR convolution (decaying-noise reverb, pre-delay) -> reverse back -> wet/dry mix, align-to-hit trimming + boundary fades (Bixlab Reverse Reverb-style)",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Electronic/089-electronic-subset-minor/MIDI/089-electronic-subset-minor.mid",
+  "source_project": "Electronic/089-electronic-subset-minor/MIDI/089-electronic-subset-minor.mid",
   "registry_size": 79,
   "recent_excluded": [
     "SP-009",
@@ -46,8 +46,8 @@
     "SP-101",
     "SP-103",
     "SP-105",
+    "SP-107",
     "SP-108",
-    "SP-109",
     "SP-111",
     "SP-115",
     "SP-127"
@@ -68,7 +68,7 @@
     "SP-102",
     "SP-104",
     "SP-106",
-    "SP-107",
+    "SP-109",
     "SP-110",
     "SP-112",
     "SP-113",
@@ -97,8 +97,8 @@
     "SP-140",
     "SP-141"
   ],
-  "n_candidates": 417,
-  "n_well_formed": 305,
-  "n_meaningful": 304,
+  "n_candidates": 421,
+  "n_well_formed": 309,
+  "n_meaningful": 308,
   "rejected_degenerate": []
 }

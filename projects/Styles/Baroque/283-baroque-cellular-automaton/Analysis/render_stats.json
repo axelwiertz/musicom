@@ -1,0 +1,47 @@
+{
+  "perfect": {
+    "tag": "perfect",
+    "midi": "/opt/data/projects/Styles/Baroque/283-baroque-cellular-automaton/MIDI/283-baroque-cellular-automaton-perfect.mid",
+    "wav": "/opt/data/projects/Styles/Baroque/283-baroque-cellular-automaton/Audio/283-baroque-cellular-automaton-perfect.wav",
+    "ogg": "/opt/data/projects/Styles/Baroque/283-baroque-cellular-automaton/Audio/283-baroque-cellular-automaton-perfect.ogg",
+    "wav_bytes": 11069996,
+    "ogg_bytes": 450757,
+    "sample_rate": 44100,
+    "target_lufs": -18.0,
+    "integrated_lufs": -18.0,
+    "true_peak_db": -6.35,
+    "silence_ratio": 0.0498,
+    "mid_gap_secs": 0,
+    "duration_sec": 62.75
+  },
+  "humanized": {
+    "tag": "humanized",
+    "midi": "/opt/data/projects/Styles/Baroque/283-baroque-cellular-automaton/MIDI/283-baroque-cellular-automaton-humanized.mid",
+    "wav": "/opt/data/projects/Styles/Baroque/283-baroque-cellular-automaton/Audio/283-baroque-cellular-automaton-humanized.wav",
+    "ogg": "/opt/data/projects/Styles/Baroque/283-baroque-cellular-automaton/Audio/283-baroque-cellular-automaton-humanized.ogg",
+    "wav_bytes": 11068460,
+    "ogg_bytes": 455420,
+    "sample_rate": 44100,
+    "target_lufs": -18.0,
+    "integrated_lufs": -18.0,
+    "true_peak_db": -6.55,
+    "silence_ratio": 0.0499,
+    "mid_gap_secs": 0,
+    "duration_sec": 62.75
+  },
+  "phase1": {
+    "tag": "phase1",
+    "midi": "/opt/data/projects/Styles/Baroque/283-baroque-cellular-automaton/MIDI/283-baroque-cellular-automaton-phase1.mid",
+    "wav": "/opt/data/projects/Styles/Baroque/283-baroque-cellular-automaton/Audio/283-baroque-cellular-automaton-phase1.wav",
+    "ogg": "/opt/data/projects/Styles/Baroque/283-baroque-cellular-automaton/Audio/283-baroque-cellular-automaton-phase1.ogg",
+    "wav_bytes": 11041068,
+    "ogg_bytes": 503488,
+    "sample_rate": 44100,
+    "target_lufs": -18.0,
+    "integrated_lufs": -18.0,
+    "true_peak_db": -3.14,
+    "silence_ratio": 0.0548,
+    "mid_gap_secs": 0,
+    "duration_sec": 62.59
+  }
+}

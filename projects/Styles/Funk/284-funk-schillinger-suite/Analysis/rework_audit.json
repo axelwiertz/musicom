@@ -1,0 +1,73 @@
+{
+  "chosen": "081-funk-schillinger",
+  "genre": "Funk",
+  "standard_failures": [
+    "missing index.html + root provenance.json"
+  ],
+  "redesign_required": true,
+  "source_identity": {
+    "key": "Bb major",
+    "tempo": 100,
+    "method": "018 Schillinger",
+    "voices": [
+      "trumpet",
+      "rhodes",
+      "guitar",
+      "bass",
+      "clav",
+      "drums"
+    ]
+  },
+  "new_project": "284-funk-schillinger-suite",
+  "verification": {
+    "phase1": {
+      "path": "/opt/data/projects/Styles/Funk/284-funk-schillinger-suite/MIDI/284-funk-schillinger-suite-phase1.mid",
+      "size": 2197,
+      "voice_tracks": 1,
+      "track_lens": [
+        61440
+      ],
+      "zero_drift": true,
+      "pitched": 244,
+      "offgrid": 235,
+      "scale_viol": 98,
+      "chord_viol": 177
+    },
+    "perfect": {
+      "path": "/opt/data/projects/Styles/Funk/284-funk-schillinger-suite/MIDI/284-funk-schillinger-suite-perfect.mid",
+      "size": 9220,
+      "voice_tracks": 6,
+      "track_lens": [
+        61440,
+        61440,
+        61440,
+        61440,
+        61440,
+        61440
+      ],
+      "zero_drift": true,
+      "pitched": 679,
+      "offgrid": 0,
+      "scale_viol": 0,
+      "chord_viol": 0
+    },
+    "humanized": {
+      "path": "/opt/data/projects/Styles/Funk/284-funk-schillinger-suite/MIDI/284-funk-schillinger-suite-humanized.mid",
+      "size": 9215,
+      "voice_tracks": 6,
+      "track_lens": [
+        61440,
+        61440,
+        61440,
+        61440,
+        61440,
+        61440
+      ],
+      "zero_drift": true,
+      "pitched": 679,
+      "offgrid": 598,
+      "scale_viol": 0,
+      "chord_viol": 7
+    }
+  }
+}

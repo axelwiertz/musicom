@@ -1,0 +1,238 @@
+{
+  "phase1": {
+    "path": "/opt/data/projects/Styles/Baroque/283-baroque-cellular-automaton/MIDI/283-baroque-cellular-automaton-phase1.mid",
+    "bytes": 1664,
+    "ntracks": 2,
+    "voice_tracks": 1,
+    "track_lengths": [
+      46080
+    ],
+    "zero_drift": true,
+    "total_off_8th": 185,
+    "total_off_16th": 185,
+    "voices": [
+      {
+        "track": 0,
+        "n_notes": 188,
+        "off_8th": 185,
+        "off_16th": 185
+      }
+    ]
+  },
+  "perfect": {
+    "path": "/opt/data/projects/Styles/Baroque/283-baroque-cellular-automaton/MIDI/283-baroque-cellular-automaton-perfect.mid",
+    "bytes": 5852,
+    "ntracks": 6,
+    "voice_tracks": 5,
+    "track_lengths": [
+      46080,
+      46080,
+      46080,
+      46080,
+      46080
+    ],
+    "zero_drift": true,
+    "total_off_8th": 0,
+    "total_off_16th": 0,
+    "voices": [
+      {
+        "track": 0,
+        "n_notes": 192,
+        "off_8th": 0,
+        "off_16th": 0,
+        "audit": {
+          "passes": true,
+          "audible": 192,
+          "strong_ok": 48,
+          "weak_in_scale": 144,
+          "tagged_ornaments": 0,
+          "tagged_resolving": 0,
+          "tagged_non_resolving": 0,
+          "untagged_out_of_scale": 0,
+          "strong_violations": 0,
+          "collisions": 0
+        }
+      },
+      {
+        "track": 1,
+        "n_notes": 96,
+        "off_8th": 0,
+        "off_16th": 0,
+        "audit": {
+          "passes": true,
+          "audible": 96,
+          "strong_ok": 48,
+          "weak_in_scale": 48,
+          "tagged_ornaments": 0,
+          "tagged_resolving": 0,
+          "tagged_non_resolving": 0,
+          "untagged_out_of_scale": 0,
+          "strong_violations": 0,
+          "collisions": 0
+        }
+      },
+      {
+        "track": 2,
+        "n_notes": 240,
+        "off_8th": 0,
+        "off_16th": 0,
+        "audit": {
+          "passes": true,
+          "audible": 240,
+          "strong_ok": 96,
+          "weak_in_scale": 144,
+          "tagged_ornaments": 0,
+          "tagged_resolving": 0,
+          "tagged_non_resolving": 0,
+          "untagged_out_of_scale": 0,
+          "strong_violations": 0,
+          "collisions": 0
+        }
+      },
+      {
+        "track": 3,
+        "n_notes": 24,
+        "off_8th": 0,
+        "off_16th": 0,
+        "audit": {
+          "passes": true,
+          "audible": 24,
+          "strong_ok": 24,
+          "weak_in_scale": 0,
+          "tagged_ornaments": 0,
+          "tagged_resolving": 0,
+          "tagged_non_resolving": 0,
+          "untagged_out_of_scale": 0,
+          "strong_violations": 0,
+          "collisions": 0
+        }
+      },
+      {
+        "track": 4,
+        "n_notes": 96,
+        "off_8th": 0,
+        "off_16th": 0,
+        "audit": {
+          "passes": true,
+          "audible": 96,
+          "strong_ok": 48,
+          "weak_in_scale": 48,
+          "tagged_ornaments": 0,
+          "tagged_resolving": 0,
+          "tagged_non_resolving": 0,
+          "untagged_out_of_scale": 0,
+          "strong_violations": 0,
+          "collisions": 0
+        }
+      }
+    ]
+  },
+  "humanized": {
+    "path": "/opt/data/projects/Styles/Baroque/283-baroque-cellular-automaton/MIDI/283-baroque-cellular-automaton-humanized.mid",
+    "bytes": 5594,
+    "ntracks": 6,
+    "voice_tracks": 5,
+    "track_lengths": [
+      46080,
+      46080,
+      46080,
+      46080,
+      46080
+    ],
+    "zero_drift": true,
+    "total_off_8th": 582,
+    "total_off_16th": 582,
+    "voices": [
+      {
+        "track": 0,
+        "n_notes": 181,
+        "off_8th": 170,
+        "off_16th": 170,
+        "audit": {
+          "passes": true,
+          "audible": 181,
+          "strong_ok": 4,
+          "weak_in_scale": 177,
+          "tagged_ornaments": 0,
+          "tagged_resolving": 0,
+          "tagged_non_resolving": 0,
+          "untagged_out_of_scale": 0,
+          "strong_violations": 0,
+          "collisions": 0
+        }
+      },
+      {
+        "track": 1,
+        "n_notes": 96,
+        "off_8th": 89,
+        "off_16th": 89,
+        "audit": {
+          "passes": true,
+          "audible": 96,
+          "strong_ok": 2,
+          "weak_in_scale": 94,
+          "tagged_ornaments": 0,
+          "tagged_resolving": 0,
+          "tagged_non_resolving": 0,
+          "untagged_out_of_scale": 0,
+          "strong_violations": 0,
+          "collisions": 0
+        }
+      },
+      {
+        "track": 2,
+        "n_notes": 224,
+        "off_8th": 209,
+        "off_16th": 209,
+        "audit": {
+          "passes": true,
+          "audible": 224,
+          "strong_ok": 7,
+          "weak_in_scale": 217,
+          "tagged_ornaments": 0,
+          "tagged_resolving": 0,
+          "tagged_non_resolving": 0,
+          "untagged_out_of_scale": 0,
+          "strong_violations": 0,
+          "collisions": 0
+        }
+      },
+      {
+        "track": 3,
+        "n_notes": 22,
+        "off_8th": 20,
+        "off_16th": 20,
+        "audit": {
+          "passes": true,
+          "audible": 22,
+          "strong_ok": 2,
+          "weak_in_scale": 20,
+          "tagged_ornaments": 0,
+          "tagged_resolving": 0,
+          "tagged_non_resolving": 0,
+          "untagged_out_of_scale": 0,
+          "strong_violations": 0,
+          "collisions": 0
+        }
+      },
+      {
+        "track": 4,
+        "n_notes": 96,
+        "off_8th": 94,
+        "off_16th": 94,
+        "audit": {
+          "passes": true,
+          "audible": 96,
+          "strong_ok": 2,
+          "weak_in_scale": 94,
+          "tagged_ornaments": 0,
+          "tagged_resolving": 0,
+          "tagged_non_resolving": 0,
+          "untagged_out_of_scale": 0,
+          "strong_violations": 0,
+          "collisions": 0
+        }
+      }
+    ]
+  }
+}

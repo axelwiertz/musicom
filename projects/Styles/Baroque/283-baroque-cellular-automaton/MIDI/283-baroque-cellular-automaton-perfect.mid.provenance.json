@@ -1,0 +1,23 @@
+{
+  "artifact": "283-baroque-cellular-automaton-perfect.mid",
+  "classification": "ai-assisted",
+  "generator": "021 Cellular Automata Grid Evolution (CAGE) + musicom rules",
+  "sources": [],
+  "parameters": {
+    "phase": 2,
+    "version": "perfect",
+    "seed": 20261103,
+    "key": "D minor (harmonic/melodic mixture)",
+    "bpm": 96,
+    "style": "baroque",
+    "form": "aba",
+    "time_signature": "4/4",
+    "bars": 24,
+    "ticks": 46080
+  },
+  "notes": "Grid-locked rules-processed layer (no humanization)",
+  "sha256": "571a4ea1aa441b6f523421fa6b7b7aa16ccb5acd822ee3a39ce57f6b1177d3ca",
+  "bytes": 5852,
+  "created_utc": "2026-11-03T23:11:24.904097+00:00",
+  "provenance_version": "1.0"
+}

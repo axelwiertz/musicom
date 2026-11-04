@@ -1,0 +1,11 @@
+[1] heterodyne LP beat = 1000 Hz (theory |f2-f1| = 1000 Hz)
+[2] C_A(inf) = 6.61 pF (Skeldon eq.6 -> ~7 pF)
+[3] dC_A(0.10 m) = 0.38 pF (Skeldon eq.7 -> 0.4 pF)
+[4] f_pitch@1m = 1638 kHz; beat x=1 m -> 0 Hz, x=0.06 m -> 3561 Hz; beat at 10 cm = 2514 Hz
+    mid-range [0.15,0.8] m: linear fit slope -2252 Hz/m, max|resid| 433 Hz over 157-1856 Hz
+    steepening near antenna: d(fT)/dx at 0.08 m vs 0.6 m = 19.1x
+[5] op point x0=0.517 m: beat 500.0 -> 674 Hz after +0.01 pF (ratio 1.35 ~ octave)
+[6] const 440 Hz tone: meas 440.0 Hz; max step 0.0583 (bound 0.0576)
+    gliss 220->440+vib: meas@0.3s 242 Hz (want ~244), meas@1.7s 398 Hz (want ~397); len 96000 == 96000
+[7] RF 170/171 kHz product LP'd at 48 kHz: measured 4717 Hz (theory 1000 Hz; alias of sum 341 kHz -> 5 kHz contaminates)
+ALL CHECKS DONE

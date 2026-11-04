@@ -1,0 +1,25 @@
+{
+  "project": "283-baroque-cellular-automaton",
+  "date": "2026-11-03",
+  "seed": 20261103,
+  "style": "Baroque",
+  "method": "021 Cellular Automata Grid Evolution (CAGE)",
+  "layer": "concrete",
+  "form": "aba",
+  "key": "D minor (harmonic/melodic mixture)",
+  "key_pcs": [0, 1, 2, 4, 5, 7, 9, 10],
+  "bpm": 96,
+  "bars": 24,
+  "total_ticks": 46080,
+  "voices": ["Violin", "Oboe", "Harpsichord", "Viola", "Cello"],
+  "progression": {
+    "A1": ["Dm", "C", "Bb", "A", "Dm", "Gm", "A", "Dm"],
+    "B": ["F", "C", "Dm", "A", "Bb", "Gm", "A", "Dm"],
+    "A2": ["Dm", "C", "Bb", "A", "Dm", "Gm", "A", "Dm"]
+  },
+  "grid_audit": {"perfect_off_8th": 0, "perfect_off_16th": 0, "humanized_off_8th": 582},
+  "harmony_audit": {"untagged_out_of_scale": 0, "tagged_non_resolving": 0, "strong_violations": 0},
+  "humanize_seed": 20261103,
+  "zero_drift": true,
+  "master": {"target_lufs": -18.0, "perfect_lufs": -18.0, "perfect_peak_db": -6.35, "silence_ratio": 0.0498}
+}

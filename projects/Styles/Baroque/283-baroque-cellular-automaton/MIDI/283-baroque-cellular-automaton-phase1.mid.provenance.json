@@ -1,0 +1,18 @@
+{
+  "artifact": "283-baroque-cellular-automaton-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "021 Cellular Automata Grid Evolution (CAGE) + musicom rules",
+  "sources": [],
+  "parameters": {
+    "phase": 1,
+    "seed": 20261103,
+    "ticks": 46080,
+    "ca_rule": "Rule30",
+    "ca_width": 24
+  },
+  "notes": "Raw unquantized Rule-30 CA walk, single violin voice (pre-rules generative draft)",
+  "sha256": "ec78fcc3f847fb1de2f94fe0c14ebb9f494c9d51c43afeb9acbd0efc638ee5a6",
+  "bytes": 1664,
+  "created_utc": "2026-11-03T23:11:24.729412+00:00",
+  "provenance_version": "1.0"
+}

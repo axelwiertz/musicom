@@ -653,6 +653,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | World | Shenai | 111 | 55–96 | lead, melody, ornament, drone, accent |
 | World | Fiddle | 110 | 55–96 | lead, melody, ornament, countermelody, accent |
 | World | Taiko Drum | 116 | 36–67 | accent, rhythm, drone, ornament |
+| World | Agogo | 113 | 55–96 | rhythm, accent, ornament, drone |
 | World | Pan Flute | 75 | 55–100 | lead, melody, ornament, drone, accent |
 | World | Shakuhachi | 77 | 55–100 | lead, melody, ornament, drone, accent |
 | Synth | Pad 1 (new age) | 88 | 36–96 | pad, harmony, texture, drone, accent |
@@ -719,6 +720,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 || 79 | Ocarina | Ocarina ✓ (GM_PROGRAMS[79] + FluidR3 preset 79 both "Ocarina") |
 || 114 | Steel Drums | Steel Drums ✓ (GM_PROGRAMS[114] + FluidR3 preset 114 both "Steel Drums") |
 || 116 | Taiko Drum | Taiko Drum ✓ (GM_PROGRAMS[116] + FluidR3 preset 116 both "Taiko Drum") |
+|| 113 | Agogo | Agogo ✓ (GM_PROGRAMS[113] = "Agogo"; FluidR3 preset 113 = "Agogo" — labels match exactly, **no quirk**) |
 ||| 66 | Tenor Sax | Tenor_Sax ✓ (GM_PROGRAMS[66] = "Tenor Sax"; FluidR3 preset 66 = "Tenor Sax" — labels match exactly, **no quirk**) |
 ||| 67 | Baritone Sax | Baritone_Sax ✓ (GM_PROGRAMS[67] = "Baritone Sax"; FluidR3 preset 67 = "Baritone Sax" — labels match exactly, **no quirk**) |
 |||| 21 | Accordion | Accordion ✓ (GM_PROGRAMS[21] = "Accordion"; FluidR3 preset 21 = "Accordian" — archaic SF2 spelling, cosmetic only, no routing impact) |
@@ -1842,3 +1844,60 @@ pressure is constant) — MIDI pitch-bend is the only idiomatic wobble;
 (2026-09-01 comb-filter rule) — octaves or thirds (+ same patch 8va = the
 full pipe rack) or a drum kit are fine, and a tuba/bass oom-pah an octave+
 below + snare = the complete circus band.
+
+**Agogo added** (2026-09-02): GM113, **World-family eleventh entry** — the
+Yoruba-derived Brazilian multiple hand-bell (two-to-four conical sheet-metal
+bells on a curved handle, struck with one stick), the TIMEKEEPER of samba,
+batucada, samba de roda, capoeira and candomblé (instrument.md + agogo.py),
+verified end-to-end UnitMatrixComposer (1 bar, 1 section, Agogo SOLO +
+drum-kit context) → **zero-drift ✓** → MIDI **263 bytes** → FluidSynth WAV
+**813,100 bytes** SOLO render (FluidR3 via `discover_soundfont()`) ✓;
+RenderPipeline stems on disk `track00_Agogo.wav` (813,100 B) +
+`track01_Drums.wav` (849,708 B) ✓; stem label `GM_PROGRAMS[113]` =
+**"Agogo"** and FluidR3 preset 113 = **"Agogo"** — labels match exactly,
+**no quirk**. ModalSynth recommended with a custom `AGOGO_MODES` bank
+(tuned fundamental 440 Hz + near-octave 2.0× partner + inharmonic 2.72× /
+4.07× / 5.4× metal tail, decay rates 2.2–7.0 = the ~1 s agogo ring, between
+vibraphone 0.30–1.10 and taiko 2.6–6.0); stock `'bell'` preset is the
+closest bank but models a Western CAST bell (minor-third tierce).
+PhaseModSynth fallback uses a NON-integer mod ratio 2.72 (inharmonic FM bell
+recipe); **Karplus-Strong EXPLICITLY REJECTED** (struck metal, no string —
+the timpani/taiko precedent). ModalSynth smoke test: peak 0.900, head_rms
+0.4124 → mid_rms 0.1452 → late(1.0–1.5 s) rms 0.0295 (late/peak 0.0328 —
+still ringing at 1 s), partials 2.0× = 29.5%, 2.72× = 11.2%, 4.07× = 4.8%
+of f0 (PITCHED bell, fundamental dominant). Solo-render spectral check:
+4–8 kHz buzz **19.6%** — passes the 20% gate but is the BRIGHTEST reading in
+the KB: the agogo's stick-on-sheet-metal clank is genuinely broadband
+(top bins 446 Hz = the A4 low bell, 1660 Hz, 2284 Hz), and the render is a
+single voice so there is no comb-filtering; production EQ (+2.5 dB at
+3.2 kHz presence, +1 dB at 9 kHz air) is what keeps it cutting through a
+bateria. Empirical FluidR3 pitch sweep (RMS, velocity 100, notes
+43/48/52/55/58/60/64/67/72/76/79/84/88/91/96): preset 113 audible
+**15/15, no gaps**, smooth rolloff 0.0125 → 0.0039 — SF2 never clips a
+composition. Range 55–96 = GM patch span (G3–C7); solo range 67–84
+(G4–C6) is the REAL two-bell pair (low bell ~A4–C5, high bell a fourth up);
+sweet spot 69–81 (A4–A5). Registration proof: `by_name('agogo')` /
+`by_name('Agogo')` → Agogo, `by_program(113)` → Agogo (distinct from 112
+Tinkle Bell / 114 Steel Drums / 115 Woodblock / 116 Taiko Drum),
+`in_sweet_spot(72)` = True, `in_sweet_spot(48)` = False,
+`stem_label = 'Agogo'`; `registry_table()` row "| World | Agogo | 113 |
+55–96 | rhythm, accent, ornament, drone |"; convenience constant `AGOGO`.
+Registry `_FIELDS` extended with `agogo_modes` so the custom bank loads
+through the registry. Role: rhythm (the timeline — a fixed cyclic 16th
+figure, the Brazilian analogue of the Afro-Cuban clave), accent (hard
+downbeat strokes on the "1"), ornament (rim ticks, flams, short rolls at
+viradas), drone (repeated single-bell offbeat pedal) — NOT a melodic lead,
+NOT a harmony/chord voice (ONE stick, two bells, one note at a time — never
+simultaneous strikes), NOT a bass voice (bells sit above 400 Hz).
+Production: REVERB_TAIL 1.3 s (street/roda instrument — dry and cutting,
+shorter than the taiko 1.6), EQ cut 420 Hz −1.5 dB (boxy low-mid under the
+bell fundamental), boost 3.2 kHz (stick-on-metal clank), 9 kHz air shelf
+(sheet-metal shimmer — never low-pass a bell), PAN centre (bateria spread
++0.15, opposite the tamborim). Writing quirks: (1) TIMELINE not fills —
+write 1–2 bar patterns and loop them; (2) two pitches alternating (low bell
+root, high bell a fourth above), never struck together; (3) straight 16ths,
+metronomic — humanize with a tiny timing sigma, accents carry the groove;
+(4) ghost 16ths at velocity 30–48 are what make the pattern breathe;
+(5) **no unison doubling** with another melodic patch on the same pitches
+(2026-09-01 comb-filter rule) — octaves or a different bell pitch are fine,
+drums are fine.

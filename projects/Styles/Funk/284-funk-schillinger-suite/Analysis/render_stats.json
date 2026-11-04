@@ -1,0 +1,24 @@
+{
+  "perfect": {
+    "wav": "/opt/data/projects/Styles/Funk/284-funk-schillinger-suite/Audio/284-funk-schillinger-suite-perfect.wav",
+    "ogg": "/opt/data/projects/Styles/Funk/284-funk-schillinger-suite/Audio/284-funk-schillinger-suite-perfect.ogg",
+    "wav_bytes": 13974060,
+    "ogg_bytes": 626198,
+    "target_lufs": -13.0,
+    "integrated_lufs": -13.23,
+    "true_peak_db": -1.0,
+    "silence_ratio": 0.0335,
+    "sample_rate": 44100
+  },
+  "humanized": {
+    "wav": "/opt/data/projects/Styles/Funk/284-funk-schillinger-suite/Audio/284-funk-schillinger-suite-humanized.wav",
+    "ogg": "/opt/data/projects/Styles/Funk/284-funk-schillinger-suite/Audio/284-funk-schillinger-suite-humanized.ogg",
+    "wav_bytes": 13972780,
+    "ogg_bytes": 621397,
+    "target_lufs": -13.0,
+    "integrated_lufs": -13.19,
+    "true_peak_db": -1.0,
+    "silence_ratio": 0.0342,
+    "sample_rate": 44100
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "artifact": "284-funk-schillinger-suite-perfect.ogg",
+  "classification": "ai-assisted",
+  "generator": "FluidSynth (FluidR3_GM) -> master() LUFS -> Opus OGG",
+  "sources": [],
+  "parameters": {
+    "style": "funk",
+    "target_lufs": -13.0,
+    "tag": "perfect",
+    "source_midi": "284-funk-schillinger-suite-perfect.mid",
+    "integrated_lufs": -13.23,
+    "true_peak_db": -1.0,
+    "silence_ratio": 0.0335
+  },
+  "notes": "perfect render: master() to -13.0 LUFS, -1 dBTP ceiling",
+  "sha256": "77483bd553a9b3bfdb3d3f1d190f6bf56f6bcfbf7d71e69c4711bc22ce9d161b",
+  "bytes": 626198,
+  "created_utc": "2026-11-04T01:15:50.755957+00:00",
+  "provenance_version": "1.0"
+}

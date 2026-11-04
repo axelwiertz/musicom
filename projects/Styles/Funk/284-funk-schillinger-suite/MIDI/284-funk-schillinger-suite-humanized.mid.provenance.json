@@ -1,0 +1,208 @@
+{
+  "artifact": "284-funk-schillinger-suite-humanized.mid",
+  "classification": "ai-assisted",
+  "generator": "Schillinger System of Musical Design (Method 018) + musicom rules",
+  "sources": [],
+  "parameters": {
+    "bpm": 100,
+    "key": "Bb major",
+    "sections": 8,
+    "bars": 32,
+    "rework_of": "081-funk-schillinger",
+    "rework_kind": "redesign (missing index.html/provenance; full rebuild preserving identity)",
+    "per_section_progs": {
+      "Intro": [
+        "I",
+        "IV",
+        "V",
+        "I"
+      ],
+      "Verse": [
+        "I",
+        "vi",
+        "ii",
+        "V"
+      ],
+      "Chorus": [
+        "IV",
+        "V",
+        "I",
+        "vi"
+      ],
+      "Verse2": [
+        "I",
+        "vi",
+        "ii",
+        "V"
+      ],
+      "Chorus2": [
+        "IV",
+        "V",
+        "I",
+        "vi"
+      ],
+      "Bridge": [
+        "vi",
+        "IV",
+        "I",
+        "V"
+      ],
+      "Chorus3": [
+        "IV",
+        "V",
+        "I",
+        "vi"
+      ],
+      "Outro": [
+        "I",
+        "IV",
+        "I",
+        "V"
+      ]
+    },
+    "section_roots_midpoint": [
+      "IV",
+      "vi",
+      "V",
+      "vi",
+      "V",
+      "IV",
+      "V",
+      "IV"
+    ],
+    "variation_techniques": [
+      "augmentation (Intro: resultant durations x2)",
+      "register shift (lead center 66->78->66)",
+      "transposition (Verse2: lead up perfect 4th)",
+      "per-section method change (Bridge: Schillinger a=7,b=4)",
+      "inversion (Bridge: contour mirrored)",
+      "mode shift (Bridge: relative-minor Gm region)",
+      "retrograde (Outro: reversed resultant)",
+      "counterline (Chorus3: diatonic-third harmony in Clav)"
+    ],
+    "seed": 20261104,
+    "humanize_seed": 20261104,
+    "phase": "2-humanized",
+    "humanize_profiles": {
+      "Lead": {
+        "seed": 2046371504,
+        "profile": {
+          "timing_sigma_ms": 4.0,
+          "velocity_sigma": 8.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.02,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.25,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 241,
+        "mean_abs_shift_ticks": 2.415,
+        "max_abs_shift_ticks": 8,
+        "mean_abs_vel_delta": 6.324,
+        "timing_sigma_ticks": 3.2
+      },
+      "Rhodes": {
+        "seed": 2046371505,
+        "profile": {
+          "timing_sigma_ms": 4.0,
+          "velocity_sigma": 5.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.015,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.25,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 128,
+        "mean_abs_shift_ticks": 2.539,
+        "max_abs_shift_ticks": 9,
+        "mean_abs_vel_delta": 4.063,
+        "timing_sigma_ticks": 3.2
+      },
+      "Guitar": {
+        "seed": 2046371506,
+        "profile": {
+          "timing_sigma_ms": 4.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.02,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.25,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 108,
+        "mean_abs_shift_ticks": 2.204,
+        "max_abs_shift_ticks": 9,
+        "mean_abs_vel_delta": 5.056,
+        "timing_sigma_ticks": 3.2
+      },
+      "Bass": {
+        "seed": 2046371507,
+        "profile": {
+          "timing_sigma_ms": 5.0,
+          "velocity_sigma": 4.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.01,
+          "layback_ms": 8.0,
+          "phrase_corr": 0.25,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 128,
+        "mean_abs_shift_ticks": 6.344,
+        "max_abs_shift_ticks": 14,
+        "mean_abs_vel_delta": 3.445,
+        "timing_sigma_ticks": 4.0
+      },
+      "Clav": {
+        "seed": 2046371508,
+        "profile": {
+          "timing_sigma_ms": 4.0,
+          "velocity_sigma": 5.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.015,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.25,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 74,
+        "mean_abs_shift_ticks": 2.676,
+        "max_abs_shift_ticks": 8,
+        "mean_abs_vel_delta": 3.892,
+        "timing_sigma_ticks": 3.2
+      },
+      "Drums": {
+        "seed": 2046371509,
+        "profile": {
+          "timing_sigma_ms": 2.0,
+          "velocity_sigma": 4.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.008,
+          "layback_ms": 0.0,
+          "phrase_corr": 0.25,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 407,
+        "mean_abs_shift_ticks": 0.995,
+        "max_abs_shift_ticks": 5,
+        "mean_abs_vel_delta": 3.101,
+        "timing_sigma_ticks": 1.6
+      }
+    }
+  },
+  "notes": "humanized layer: style profile (funk) + per-instrument DNA",
+  "sha256": "ede8a652e8ad938b9950051ef7f8d1733305e2d1f1ac282d01b0b3e71fd8c09a",
+  "bytes": 9215,
+  "created_utc": "2026-11-04T01:09:53.444966+00:00",
+  "provenance_version": "1.0"
+}

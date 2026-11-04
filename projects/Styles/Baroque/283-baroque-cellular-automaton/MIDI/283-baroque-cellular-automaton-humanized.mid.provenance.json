@@ -1,0 +1,117 @@
+{
+  "artifact": "283-baroque-cellular-automaton-humanized.mid",
+  "classification": "ai-assisted",
+  "generator": "021 Cellular Automata Grid Evolution (CAGE) + musicom rules",
+  "sources": [],
+  "parameters": {
+    "phase": 2,
+    "version": "humanized",
+    "seed": 20261103,
+    "key": "D minor (harmonic/melodic mixture)",
+    "bpm": 96,
+    "style": "baroque",
+    "humanize_seed": 20261103,
+    "humanize_profiles": {
+      "Violin": {
+        "seed": 2046371403,
+        "profile": {
+          "timing_sigma_ms": 7.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.03,
+          "layback_ms": 1.0,
+          "phrase_corr": 0.6,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 192,
+        "mean_abs_shift_ticks": 3.838,
+        "max_abs_shift_ticks": 12,
+        "mean_abs_vel_delta": 4.537,
+        "timing_sigma_ticks": 5.376
+      },
+      "Oboe": {
+        "seed": 2046371404,
+        "profile": {
+          "timing_sigma_ms": 7.0,
+          "velocity_sigma": 7.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.02,
+          "layback_ms": 1.0,
+          "phrase_corr": 0.6,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 96,
+        "mean_abs_shift_ticks": 3.948,
+        "max_abs_shift_ticks": 13,
+        "mean_abs_vel_delta": 5.385,
+        "timing_sigma_ticks": 5.376
+      },
+      "Harpsichord": {
+        "seed": 2046371405,
+        "profile": {
+          "timing_sigma_ms": 7.0,
+          "velocity_sigma": 5.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.015,
+          "layback_ms": 1.0,
+          "phrase_corr": 0.6,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 240,
+        "mean_abs_shift_ticks": 4.158,
+        "max_abs_shift_ticks": 13,
+        "mean_abs_vel_delta": 3.996,
+        "timing_sigma_ticks": 5.376
+      },
+      "Viola": {
+        "seed": 2046371406,
+        "profile": {
+          "timing_sigma_ms": 7.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.03,
+          "layback_ms": 1.0,
+          "phrase_corr": 0.6,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 24,
+        "mean_abs_shift_ticks": 3.375,
+        "max_abs_shift_ticks": 12,
+        "mean_abs_vel_delta": 5.042,
+        "timing_sigma_ticks": 5.376
+      },
+      "Cello": {
+        "seed": 2046371407,
+        "profile": {
+          "timing_sigma_ms": 10.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.03,
+          "layback_ms": 8.0,
+          "phrase_corr": 0.6,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 96,
+        "mean_abs_shift_ticks": 7.823,
+        "max_abs_shift_ticks": 25,
+        "mean_abs_vel_delta": 4.219,
+        "timing_sigma_ticks": 7.68
+      }
+    }
+  },
+  "notes": "Humanized (style baroque-classical, per-instrument DNA)",
+  "sha256": "62b7cb931892f7ed48cf56bd4a5b65db1f12cd551e495ee6fddd82fdf4e69e00",
+  "bytes": 5594,
+  "created_utc": "2026-11-03T23:11:24.904292+00:00",
+  "provenance_version": "1.0"
+}

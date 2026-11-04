@@ -1,0 +1,33 @@
+{
+  "project": "284-funk-schillinger-suite",
+  "genre": "Funk",
+  "key": "Bb major",
+  "tempo": 100,
+  "method": "018 Schillinger System of Musical Design",
+  "rework_of": "081-funk-schillinger",
+  "rework_kind": "redesign (missing index.html + root provenance.json; full rebuild preserving identity)",
+  "seed": 20261104,
+  "humanize_seed": 20261104,
+  "form": ["Intro", "Verse", "Chorus", "Verse2", "Chorus2", "Bridge", "Chorus3", "Outro"],
+  "bars": 32,
+  "sections": 8,
+  "voices": ["Lead", "Rhodes", "Guitar", "Bass", "Clav", "Drums"],
+  "variation_techniques": [
+    "augmentation (Intro)",
+    "register shift (Chorus)",
+    "transposition (Verse2)",
+    "per-section method change (Bridge a=7,b=4)",
+    "inversion (Bridge)",
+    "mode shift (Bridge, relative minor)",
+    "retrograde (Outro)",
+    "counterline (Chorus3)"
+  ],
+  "artifacts": {
+    "phase1": "MIDI/284-funk-schillinger-suite-phase1.mid",
+    "perfect": "MIDI/284-funk-schillinger-suite-perfect.mid",
+    "humanized": "MIDI/284-funk-schillinger-suite-humanized.mid",
+    "perfect_ogg": "Audio/284-funk-schillinger-suite-perfect.ogg",
+    "humanized_ogg": "Audio/284-funk-schillinger-suite-humanized.ogg"
+  },
+  "classification": "ai-assisted"
+}
