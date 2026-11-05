@@ -1,0 +1,374 @@
+{
+  "artifact": "287-celtic-tonality-diamond-humanized.mid",
+  "classification": "ai-assisted",
+  "generator": "TDRPC tonality diamond walk + musicom rules",
+  "sources": [],
+  "parameters": {
+    "bpm": 112,
+    "key": "D Mixolydian (harmonic 7th via Partch 7/4)",
+    "scale": "mixolydian",
+    "scale_pcs": [
+      0,
+      2,
+      4,
+      6,
+      7,
+      9,
+      11
+    ],
+    "style": "celtic",
+    "method_id": "131",
+    "method": "Tonality Diamond Ratio-Pool Composition (TDRPC)",
+    "layer": "abstract",
+    "form": "intro-verse-chorus-verse-chorus-outro",
+    "diamond_limit": 7,
+    "diamond_size": 13,
+    "diamond": [
+      {
+        "ratio": "1",
+        "cents": 0.0,
+        "height": 0.0,
+        "nearest_semi_from_tonic": 0
+      },
+      {
+        "ratio": "8/7",
+        "cents": 231.17,
+        "height": 5.807,
+        "nearest_semi_from_tonic": 2
+      },
+      {
+        "ratio": "7/6",
+        "cents": 266.87,
+        "height": 5.392,
+        "nearest_semi_from_tonic": 3
+      },
+      {
+        "ratio": "6/5",
+        "cents": 315.64,
+        "height": 4.907,
+        "nearest_semi_from_tonic": 3
+      },
+      {
+        "ratio": "5/4",
+        "cents": 386.31,
+        "height": 4.322,
+        "nearest_semi_from_tonic": 4
+      },
+      {
+        "ratio": "4/3",
+        "cents": 498.04,
+        "height": 3.585,
+        "nearest_semi_from_tonic": 5
+      },
+      {
+        "ratio": "7/5",
+        "cents": 582.51,
+        "height": 5.129,
+        "nearest_semi_from_tonic": 6
+      },
+      {
+        "ratio": "10/7",
+        "cents": 617.49,
+        "height": 6.129,
+        "nearest_semi_from_tonic": 6
+      },
+      {
+        "ratio": "3/2",
+        "cents": 701.96,
+        "height": 2.585,
+        "nearest_semi_from_tonic": 7
+      },
+      {
+        "ratio": "8/5",
+        "cents": 813.69,
+        "height": 5.322,
+        "nearest_semi_from_tonic": 8
+      },
+      {
+        "ratio": "5/3",
+        "cents": 884.36,
+        "height": 3.907,
+        "nearest_semi_from_tonic": 9
+      },
+      {
+        "ratio": "12/7",
+        "cents": 933.13,
+        "height": 6.392,
+        "nearest_semi_from_tonic": 9
+      },
+      {
+        "ratio": "7/4",
+        "cents": 968.83,
+        "height": 4.807,
+        "nearest_semi_from_tonic": 10
+      }
+    ],
+    "hexads": {
+      "1": {
+        "oto": [
+          "1",
+          "8/7",
+          "4/3",
+          "8/5"
+        ],
+        "uto": [
+          "1",
+          "5/4",
+          "3/2",
+          "7/4"
+        ]
+      },
+      "3": {
+        "oto": [
+          "1",
+          "6/5",
+          "3/2",
+          "12/7"
+        ],
+        "uto": [
+          "1",
+          "7/6",
+          "4/3",
+          "5/3"
+        ]
+      },
+      "5": {
+        "oto": [
+          "1",
+          "5/4",
+          "10/7",
+          "5/3"
+        ],
+        "uto": [
+          "1",
+          "6/5",
+          "7/5",
+          "8/5"
+        ]
+      },
+      "7": {
+        "oto": [
+          "1",
+          "7/6",
+          "7/5",
+          "7/4"
+        ],
+        "uto": [
+          "1",
+          "8/7",
+          "10/7",
+          "12/7"
+        ]
+      }
+    },
+    "identity_lattice": {
+      "1-3": {
+        "oto-oto": 1,
+        "oto-uto": 2
+      },
+      "3-5": {
+        "oto-oto": 1,
+        "oto-uto": 2
+      },
+      "5-7": {
+        "oto-oto": 1,
+        "oto-uto": 2
+      }
+    },
+    "sections": 6,
+    "bars": 40,
+    "progression_per_section": {
+      "Intro": [
+        "D",
+        "D",
+        "G",
+        "D"
+      ],
+      "Verse": [
+        "D",
+        "Am",
+        "G",
+        "D"
+      ],
+      "Chorus": [
+        "C",
+        "G",
+        "D",
+        "G"
+      ],
+      "Outro": [
+        "G",
+        "D",
+        "G",
+        "D"
+      ]
+    },
+    "section_roots_midpoint": [
+      "D",
+      "G",
+      "G",
+      "Am",
+      "G",
+      "D"
+    ],
+    "chord_ratio_map": {
+      "D": {
+        "ratio": "1/1",
+        "height": 0.0,
+        "role": "identity 1 nexus (HOME)"
+      },
+      "Am": {
+        "ratio": "3/2",
+        "height": 2.585,
+        "role": "identity 3 dominant fifth"
+      },
+      "G": {
+        "ratio": "4/3",
+        "height": 3.585,
+        "role": "subdominant (utonality)"
+      },
+      "C": {
+        "ratio": "7/4",
+        "height": 4.807,
+        "role": "identity 7 harmonic seventh (TENSE)"
+      }
+    },
+    "seed": 20261105,
+    "humanize_seed": 20261105,
+    "voices": [
+      {
+        "name": "Fiddle",
+        "instrument": "violin",
+        "program": 40,
+        "channel": 0
+      },
+      {
+        "name": "Flute",
+        "instrument": "flute",
+        "program": 73,
+        "channel": 1
+      },
+      {
+        "name": "Guitar",
+        "instrument": "steel_acoustic",
+        "program": 25,
+        "channel": 2
+      },
+      {
+        "name": "Bass",
+        "instrument": "acoustic_bass",
+        "program": 32,
+        "channel": 3
+      },
+      {
+        "name": "Drums",
+        "instrument": "drum_kit",
+        "program": 0,
+        "channel": 9
+      }
+    ],
+    "phase": "2-humanized",
+    "humanize_profiles": {
+      "Fiddle": {
+        "seed": 2046371605,
+        "profile": {
+          "timing_sigma_ms": 7.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.03,
+          "layback_ms": 1.0,
+          "phrase_corr": 0.4,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 228,
+        "mean_abs_shift_ticks": 3.851,
+        "max_abs_shift_ticks": 14,
+        "mean_abs_vel_delta": 4.798,
+        "timing_sigma_ticks": 6.272
+      },
+      "Flute": {
+        "seed": 2046371606,
+        "profile": {
+          "timing_sigma_ms": 7.0,
+          "velocity_sigma": 7.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.02,
+          "layback_ms": 1.0,
+          "phrase_corr": 0.4,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 52,
+        "mean_abs_shift_ticks": 3.692,
+        "max_abs_shift_ticks": 11,
+        "mean_abs_vel_delta": 4.5,
+        "timing_sigma_ticks": 6.272
+      },
+      "Guitar": {
+        "seed": 2046371607,
+        "profile": {
+          "timing_sigma_ms": 7.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.02,
+          "layback_ms": 1.0,
+          "phrase_corr": 0.4,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 320,
+        "mean_abs_shift_ticks": 4.543,
+        "max_abs_shift_ticks": 13,
+        "mean_abs_vel_delta": 5.022,
+        "timing_sigma_ticks": 6.272
+      },
+      "Bass": {
+        "seed": 2046371608,
+        "profile": {
+          "timing_sigma_ms": 5.0,
+          "velocity_sigma": 4.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.01,
+          "layback_ms": 8.0,
+          "phrase_corr": 0.4,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 160,
+        "mean_abs_shift_ticks": 6.562,
+        "max_abs_shift_ticks": 18,
+        "mean_abs_vel_delta": 2.844,
+        "timing_sigma_ticks": 4.48
+      },
+      "Drums": {
+        "seed": 2046371609,
+        "profile": {
+          "timing_sigma_ms": 2.0,
+          "velocity_sigma": 4.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.008,
+          "layback_ms": 0.0,
+          "phrase_corr": 0.4,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 361,
+        "mean_abs_shift_ticks": 1.144,
+        "max_abs_shift_ticks": 5,
+        "mean_abs_vel_delta": 3.396,
+        "timing_sigma_ticks": 1.792
+      }
+    }
+  },
+  "notes": "humanized layer: celtic style profile + per-instrument DNA",
+  "sha256": "7c8970d7b980c10585f12b96769f84f711ff7fbcdb50acf0dfe78361dece9ae0",
+  "bytes": 9529,
+  "created_utc": "2026-11-05T23:07:26.857146+00:00",
+  "provenance_version": "1.0"
+}
