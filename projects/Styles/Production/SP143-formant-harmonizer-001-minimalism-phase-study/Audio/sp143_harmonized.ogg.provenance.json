@@ -1,0 +1,25 @@
+{
+  "artifact": "sp143_harmonized.ogg",
+  "method": "SP-143",
+  "module": "sound.effects.formant_harmonizer",
+  "source_midi": "Minimalism/001-minimalism-phase-study/MIDI/minimalism-phase.mid",
+  "source_sha256": "3ec4584c649d83f81953f77e82d6a88beb9a9b7fc7dc1e01fdc799e580f3012b",
+  "parameters": {
+    "key": "C",
+    "scale": "major",
+    "intervals": [2, 4, -3],
+    "style": 0.35,
+    "target_lufs": -18.0,
+    "ceiling_db": -1.0,
+    "sample_rate": 44100
+  },
+  "mastering": {"integrated_lufs": -18.0, "true_peak_db": -3.58},
+  "verification": {
+    "harmonic_energy_ratio": 0.427,
+    "silence_ratio": 0.111,
+    "median_peak_hz": 66.0,
+    "dominant_pc_diatonic_frac": 0.167
+  },
+  "soundfont": "FluidR3_GM.sf2",
+  "created_utc": "2026-11-05T22:08:00+00:00"
+}

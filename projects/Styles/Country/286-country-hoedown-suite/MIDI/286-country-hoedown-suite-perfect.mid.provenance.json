@@ -1,0 +1,122 @@
+{
+  "artifact": "286-country-hoedown-suite-perfect.mid",
+  "classification": "ai-assisted",
+  "generator": "Country Contour Walk + musicom rules",
+  "sources": [],
+  "parameters": {
+    "bpm": 120,
+    "key": "G major",
+    "scale": "major",
+    "scale_pcs": [
+      0,
+      2,
+      4,
+      6,
+      7,
+      9,
+      11
+    ],
+    "style": "country",
+    "method_id": "CW",
+    "method": "Country Contour Walk (arpeggiated triad + neighbor-tone ornament)",
+    "layer": "concrete",
+    "form": "intro-verse-chorus-verse2-bridge-chorus2-outro",
+    "source": "001-country-loop-seamless",
+    "sections": 7,
+    "bars": 32,
+    "progression_per_section": {
+      "Intro": [
+        "G",
+        "C",
+        "G",
+        "D"
+      ],
+      "Verse": [
+        "G",
+        "Em",
+        "C",
+        "D"
+      ],
+      "Chorus": [
+        "C",
+        "G",
+        "D",
+        "G"
+      ],
+      "Verse2": [
+        "Em",
+        "Am",
+        "C",
+        "D"
+      ],
+      "Bridge": [
+        "Am",
+        "Em",
+        "C",
+        "D"
+      ],
+      "Chorus2": [
+        "C",
+        "G",
+        "D",
+        "G"
+      ],
+      "Outro": [
+        "G",
+        "C",
+        "D",
+        "G"
+      ]
+    },
+    "section_roots_midpoint": [
+      "C",
+      "Em",
+      "G",
+      "Am",
+      "Em",
+      "G",
+      "C"
+    ],
+    "seed": 20261105,
+    "humanize_seed": 20261105,
+    "voices": [
+      {
+        "name": "Fiddle",
+        "instrument": "violin",
+        "program": 40,
+        "channel": 0
+      },
+      {
+        "name": "Guitar",
+        "instrument": "steel_acoustic",
+        "program": 25,
+        "channel": 1
+      },
+      {
+        "name": "Bass",
+        "instrument": "acoustic_bass",
+        "program": 32,
+        "channel": 2
+      },
+      {
+        "name": "Harmony",
+        "instrument": "acoustic_guitar",
+        "program": 24,
+        "channel": 3
+      },
+      {
+        "name": "Drums",
+        "instrument": "drum_kit",
+        "program": 0,
+        "channel": 9
+      }
+    ],
+    "phase": "2-perfect",
+    "humanize": null
+  },
+  "notes": "grid-locked perfect layer: blanket chord-tone quantize per bar, voice-leading checked, zero humanization",
+  "sha256": "0bf1fa530f2831946d80446a2366f49bfbf5ef228687ee05062df338ce6cae83",
+  "bytes": 7933,
+  "created_utc": "2026-11-05T01:10:14.540031+00:00",
+  "provenance_version": "1.0"
+}

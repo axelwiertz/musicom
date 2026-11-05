@@ -56,6 +56,7 @@ _INSTRUMENT_MODULES = {
     "Guitar.acoustic.acoustic_guitar": "acoustic_guitar",
     "Guitar.steel_acoustic.steel_acoustic": "steel_acoustic",
     "Guitar.clean_electric.clean_electric": "clean_electric",
+    "Guitar.muted_guitar.muted_guitar": "muted_guitar",
     "Guitar.jazz_guitar.jazz_guitar": "jazz_guitar",
     "Guitar.overdriven.overdriven": "overdriven",
     "Guitar.distortion_guitar.distortion_guitar": "distortion_guitar",
@@ -305,6 +306,7 @@ SITAR = ALL_INSTRUMENTS["sitar"]
 STEEL_ACOUSTIC = ALL_INSTRUMENTS["steel_acoustic"]
 CLEAN_ELECTRIC = ALL_INSTRUMENTS["clean_electric"]
 JAZZ_GUITAR = ALL_INSTRUMENTS["jazz_guitar"]
+MUTED_GUITAR = ALL_INSTRUMENTS["muted_guitar"]
 OVERDRIVEN_GUITAR = ALL_INSTRUMENTS["overdriven"]
 DISTORTION_GUITAR = ALL_INSTRUMENTS["distortion_guitar"]
 VIBRAPHONE = ALL_INSTRUMENTS["vibraphone"]
@@ -503,6 +505,8 @@ def registry_table():
             role = "harmony, rhythm, strum, lead, melody, ornament, countermelody, accent"
         elif low == "electric guitar (jazz)":
             role = "harmony, rhythm, comp, lead, melody, ornament, countermelody, accent"
+        elif low == "electric guitar (muted)":
+            role = "rhythm, comp, groove, accent, texture, melody"
         elif low == "overdriven guitar":
             role = "lead, melody, accent, rhythm, strum, countermelody"
         elif low == "distortion guitar":
@@ -895,3 +899,16 @@ if __name__ == "__main__":
     print("  CALIOPE.range_min =", CALIOPE.range_min,
           "CALIOPE.range_max =", CALIOPE.range_max)
     print("  CALIOPE.stem_label =", repr(CALIOPE.stem_label))
+
+    print()
+    print("=== Muted Guitar (Palm Mute, GM28) ===")
+    print("  MUTED_GUITAR.midi_program =", MUTED_GUITAR.midi_program, "(should be 28)")
+    print("  by_name('muted guitar') =", by_name("muted guitar"))
+    print("  by_name('Electric Guitar (muted)') =", by_name("Electric Guitar (muted)"))
+    print("  by_program(28) =", by_program(28))
+    print("  by_program(27) =", by_program(27), "(distinct: clean electric)")
+    print("  MUTED_GUITAR.in_sweet_spot(45) =", MUTED_GUITAR.in_sweet_spot(45))
+    print("  MUTED_GUITAR.in_sweet_spot(80) =", MUTED_GUITAR.in_sweet_spot(80))
+    print("  MUTED_GUITAR.range_min =", MUTED_GUITAR.range_min,
+          "MUTED_GUITAR.range_max =", MUTED_GUITAR.range_max)
+    print("  MUTED_GUITAR.stem_label =", repr(MUTED_GUITAR.stem_label))

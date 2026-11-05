@@ -1,0 +1,24 @@
+{
+  "chosen": "/opt/data/projects/Styles/Country/001-country-loop-seamless",
+  "genre": "Country",
+  "audit_date": "2026-11-05",
+  "primary_midi": "/opt/data/projects/Styles/Country/001-country-loop-seamless/MIDI/loop.mid",
+  "standard_failures": [
+    "1. Engine: hand-rolled music21 (stream.Part/note.Note), not UnitMatrixComposer",
+    "2. Zero-drift: voice track lengths differ (312480/322560/332640/1275120)",
+    "4. Track setup: drums on channel 3 (program 0), not channel 9",
+    "5. Two-phase artifacts: no -phase1.mid present",
+    "6. provenance.json missing (index.html is a trivial stub)"
+  ],
+  "redesign_required": true,
+  "source_identity": {
+    "key": "G major",
+    "tempo": 120,
+    "progression": "I-IV-V-I (G-C-G-D | C-G-D-G)",
+    "voices": ["fiddle (violin lead)", "acoustic guitar (chords)", "acoustic bass (walking)", "drums"],
+    "core_motif": "arpeggiated triads + neighbor tones (G-B-D-B contour)",
+    "form": "16 bars, seamless loop, 4x4-bar phrases",
+    "mood": "upbeat, danceable, nostalgic"
+  },
+  "new_project": "286-country-hoedown-suite"
+}

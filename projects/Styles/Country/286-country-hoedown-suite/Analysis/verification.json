@@ -1,0 +1,42 @@
+{
+  "project": "286-country-hoedown-suite",
+  "report": {
+    "phase1": {
+      "tracks": 1,
+      "track_len": 61440,
+      "zero_drift": true,
+      "pitched": 256,
+      "drum": 0,
+      "off120": 252,
+      "off240": 252,
+      "scale_violations": 122,
+      "chord_violations_blanket": 214,
+      "strong_beat_violations": 4
+    },
+    "perfect": {
+      "tracks": 5,
+      "track_len": 61440,
+      "zero_drift": true,
+      "pitched": 672,
+      "drum": 265,
+      "off120": 0,
+      "off240": 95,
+      "scale_violations": 0,
+      "chord_violations_blanket": 0,
+      "strong_beat_violations": 0
+    },
+    "humanized": {
+      "tracks": 5,
+      "track_len": 61440,
+      "zero_drift": true,
+      "pitched": 672,
+      "drum": 265,
+      "off120": 640,
+      "off240": 645,
+      "scale_violations": 0,
+      "chord_violations_blanket": 17,
+      "strong_beat_violations": 0
+    }
+  },
+  "verdict": "PASS"
+}

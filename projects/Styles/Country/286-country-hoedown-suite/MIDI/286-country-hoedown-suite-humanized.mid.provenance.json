@@ -1,0 +1,218 @@
+{
+  "artifact": "286-country-hoedown-suite-humanized.mid",
+  "classification": "ai-assisted",
+  "generator": "Country Contour Walk + musicom rules",
+  "sources": [],
+  "parameters": {
+    "bpm": 120,
+    "key": "G major",
+    "scale": "major",
+    "scale_pcs": [
+      0,
+      2,
+      4,
+      6,
+      7,
+      9,
+      11
+    ],
+    "style": "country",
+    "method_id": "CW",
+    "method": "Country Contour Walk (arpeggiated triad + neighbor-tone ornament)",
+    "layer": "concrete",
+    "form": "intro-verse-chorus-verse2-bridge-chorus2-outro",
+    "source": "001-country-loop-seamless",
+    "sections": 7,
+    "bars": 32,
+    "progression_per_section": {
+      "Intro": [
+        "G",
+        "C",
+        "G",
+        "D"
+      ],
+      "Verse": [
+        "G",
+        "Em",
+        "C",
+        "D"
+      ],
+      "Chorus": [
+        "C",
+        "G",
+        "D",
+        "G"
+      ],
+      "Verse2": [
+        "Em",
+        "Am",
+        "C",
+        "D"
+      ],
+      "Bridge": [
+        "Am",
+        "Em",
+        "C",
+        "D"
+      ],
+      "Chorus2": [
+        "C",
+        "G",
+        "D",
+        "G"
+      ],
+      "Outro": [
+        "G",
+        "C",
+        "D",
+        "G"
+      ]
+    },
+    "section_roots_midpoint": [
+      "C",
+      "Em",
+      "G",
+      "Am",
+      "Em",
+      "G",
+      "C"
+    ],
+    "seed": 20261105,
+    "humanize_seed": 20261105,
+    "voices": [
+      {
+        "name": "Fiddle",
+        "instrument": "violin",
+        "program": 40,
+        "channel": 0
+      },
+      {
+        "name": "Guitar",
+        "instrument": "steel_acoustic",
+        "program": 25,
+        "channel": 1
+      },
+      {
+        "name": "Bass",
+        "instrument": "acoustic_bass",
+        "program": 32,
+        "channel": 2
+      },
+      {
+        "name": "Harmony",
+        "instrument": "acoustic_guitar",
+        "program": 24,
+        "channel": 3
+      },
+      {
+        "name": "Drums",
+        "instrument": "drum_kit",
+        "program": 0,
+        "channel": 9
+      }
+    ],
+    "phase": "2-humanized",
+    "humanize_profiles": {
+      "Fiddle": {
+        "seed": 2046371605,
+        "profile": {
+          "timing_sigma_ms": 9.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.03,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.5,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 252,
+        "mean_abs_shift_ticks": 5.782,
+        "max_abs_shift_ticks": 19,
+        "mean_abs_vel_delta": 4.905,
+        "timing_sigma_ticks": 8.64
+      },
+      "Guitar": {
+        "seed": 2046371606,
+        "profile": {
+          "timing_sigma_ms": 9.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.02,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.5,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 256,
+        "mean_abs_shift_ticks": 6.399,
+        "max_abs_shift_ticks": 21,
+        "mean_abs_vel_delta": 4.395,
+        "timing_sigma_ticks": 8.64
+      },
+      "Bass": {
+        "seed": 2046371607,
+        "profile": {
+          "timing_sigma_ms": 5.0,
+          "velocity_sigma": 4.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.01,
+          "layback_ms": 8.0,
+          "phrase_corr": 0.5,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 128,
+        "mean_abs_shift_ticks": 7.656,
+        "max_abs_shift_ticks": 17,
+        "mean_abs_vel_delta": 3.047,
+        "timing_sigma_ticks": 4.8
+      },
+      "Harmony": {
+        "seed": 2046371608,
+        "profile": {
+          "timing_sigma_ms": 9.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.02,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.5,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 36,
+        "mean_abs_shift_ticks": 4.583,
+        "max_abs_shift_ticks": 15,
+        "mean_abs_vel_delta": 5.278,
+        "timing_sigma_ticks": 8.64
+      },
+      "Drums": {
+        "seed": 2046371609,
+        "profile": {
+          "timing_sigma_ms": 2.0,
+          "velocity_sigma": 4.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.008,
+          "layback_ms": 0.0,
+          "phrase_corr": 0.5,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 265,
+        "mean_abs_shift_ticks": 1.253,
+        "max_abs_shift_ticks": 4,
+        "mean_abs_vel_delta": 3.351,
+        "timing_sigma_ticks": 1.92
+      }
+    }
+  },
+  "notes": "humanized layer: country style profile + per-instrument DNA",
+  "sha256": "4b4a14d3c39e3a2f976ea349969f795eadbf4714b97e6ecbe51bfaf109a52946",
+  "bytes": 7918,
+  "created_utc": "2026-11-05T01:10:14.540447+00:00",
+  "provenance_version": "1.0"
+}

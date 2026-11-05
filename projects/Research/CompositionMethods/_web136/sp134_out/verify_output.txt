@@ -1,0 +1,27 @@
+geometry: apex x0=0.102 m, truncated length 1.370 m, r_mouth=4.50 mm, r_bell=65.0 mm
+c/(2*L_full) = 116.51 Hz
+cone poles (Hz):  [ 116.65  233.99  352.29  471.99  592.53  714.15  836.34  959.2  1082.29
+ 1205.89 1329.72 1453.71]
+cone ratios/f1:   [ 1.     2.006  3.02   4.046  5.079  6.122  7.169  8.223  9.278 10.337
+ 11.399 12.462]
+cone stretch vs n*f1 (cents): [ 0.   5.1 11.5 19.8 27.3 34.8 41.4 47.5 52.6 57.4 61.7 65.4]
+cyl poles (Hz):   [  62.53  187.75  313.    438.18  563.27  688.5   813.74  938.84 1064.01
+ 1189.25 1314.47 1439.54]
+cyl ratios/f1:    [ 1.     3.002  5.005  7.007  9.007 11.01  13.013 15.014 17.015 19.018
+ 21.02  23.02 ]
+2nd partial: cone 233.99 Hz (+1205.1 cents above f1), cylinder 187.75 Hz (+1903.4 cents = 3rd harmonic)
+
+reed: k=1500 N/m, S=1.00 cm^2, H0=0.80 mm -> closing pressure 12000 Pa
+flow maximum at dp=4000 Pa (theory k*H0/(3S)=4000 Pa), u_max=0.366 L/s; zero at 12000 Pa
+negative differential resistance above 4000 Pa -> self-oscillation band
+
+--- time-domain modal bore + nonlinear reed ---
+cone : f0= 116.25 Hz  rms= 410.7 Pa  centroid=  135 Hz  minH= 0.28 mm  wav=76844 B
+        harmonics dB: [   0.   -23.5  -38.   -50.9  -65.2  -79.4  -92.  -103.3 -113.5 -123.7]
+        h2-h3 span: +14.5 dB
+cyl  : f0=  63.75 Hz  rms=1214.9 Pa  centroid=   68 Hz  minH= 0.28 mm  wav=76844 B
+        harmonics dB: [   0.   -64.5  -36.9  -96.5  -57.1 -114.   -74.4 -126.6  -88.7 -136. ]
+
+
+cone vs cylinder even-harmonic (h2) level: -23.5 dB vs -64.5 dB
+cone h2,h4 present: -23.5, -50.9 dB; cylinder h2,h4: -64.5, -96.5 dB

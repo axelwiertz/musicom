@@ -631,6 +631,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Guitar | Acoustic Guitar (steel) | 25 | 40–86 | harmony, rhythm, strum, lead, melody, ornament, countermelody |
 | Guitar | Electric Guitar (jazz) | 26 | 28–84 | harmony, rhythm, comp, lead, melody, ornament, countermelody, accent |
 | Guitar | Electric Guitar (clean) | 27 | 28–84 | harmony, rhythm, strum, lead, melody, ornament, countermelody, accent |
+| Guitar | Electric Guitar (muted) | 28 | 28–84 | rhythm, comp, groove, accent, texture, melody |
 | Guitar | Overdriven Guitar | 29 | 28–84 | lead, melody, accent, rhythm, strum, countermelody |
 | Guitar | Distortion Guitar | 30 | 28–84 | lead, melody, accent, rhythm, power-chord strum, countermelody |
 | Bass | Electric Bass (finger) | 33 | 24–84 | bass, rhythm, countermelody, accent |
@@ -1901,3 +1902,60 @@ metronomic — humanize with a tiny timing sigma, accents carry the groove;
 (5) **no unison doubling** with another melodic patch on the same pitches
 (2026-09-01 comb-filter rule) — octaves or a different bell pitch are fine,
 drums are fine.
+
+**Muted Guitar added** (2026-11-05): GM28, **Guitar-family seventh entry** —
+the palm-muted / fret-hand-damped solid-body electric guitar (instrument.md +
+muted_guitar.py), the shortest, most percussive guitar voice: a pitched
+"chunk" instead of a sustaining note. Verified end-to-end UnitMatrixComposer
+(1 bar, 1 section, 104 bpm, Muted Guitar 16th-note funk chops SOLO on ch0 +
+drum-kit context on ch9) → **zero-drift ✓** → MIDI **467 bytes** → FluidSynth
+WAV **791,340 bytes** SOLO render (track 0 = muted guitar only, FluidR3 via
+`discover_soundfont()` — no second melodic patch on the same pitches) →
+solo-render spectral check 4–8 kHz buzz **0.1%** (cleanest guitar reading in
+the KB; the mute removes high-frequency sustain rather than adding buzz).
+RenderPipeline stems on disk `track00_Electric_Guitar_muted.wav`
+(791,340 B) + `track01_Drums.wav` (835,628 B) ✓. Stem label
+`GM_PROGRAMS[28]` = **"Electric Guitar (muted)"** → sanitized
+`Electric_Guitar_muted`; FluidR3 preset 28 = **"Palm Muted Guitar"** — the
+SF2 names the TECHNIQUE, the pipeline names the GM2 program; **cosmetic name
+quirk only, no routing impact** (same class as "Jazz Guitar" / "Bag pipe" /
+"Shanai"). STEM_LABEL = `Electric_Guitar_muted` matches the pipeline's real
+label. Karplus-Strong recommended — muted guitar is still a plucked string,
+but with a very lossy waveguide loop: **loop_gain 0.9850** (the lowest in the
+guitar family; ~0.2–0.4 s decay vs 0.9970+ open strings), excitation "pick",
+width 0.30, lowpass_hz 2200, noise_component 0.030 (pick scrape + palm slap
+are part of the sound). KS smoke test (A2, 0.6 s, vel 100): peak 0.693,
+late-200 ms tail_rms/peak **0.013** — the mute actually damps. ModalSynth
+fallback = stock `'string'` bank with very fast decay rates (~12/26/44/66/90,
+several times faster than jazz guitar 4/10/18/28/40); PhaseMod fallback =
+saw carrier, mod_depth 2.0, attack 0.004 s, release 0.08 s (the mute).
+Empirical FluidR3 pitch sweep (28/33/38/40/43/45/48/52/55/59/62/64/67/71/74/
+76/79/84, velocity 100): preset 28 audible **18/18, no gaps**, RMS 0.12 at
+E1 → 0.0055 at C6; real writing zone 40–76 (E2–E6), money zone 40–55.
+Range 28–84 = GM patch span; SOLO_RANGE (40, 76); SWEET_SPOT (40, 64).
+Registration proof: `by_name('muted_guitar')` / `by_name('muted guitar')` /
+`by_name('Electric Guitar (muted)')` → Electric Guitar (muted),
+`by_program(28)` → Electric Guitar (muted) (distinct from 27 Clean Electric
+and 29 Overdriven), `in_sweet_spot(45)` = True, `in_sweet_spot(80)` = False,
+`stem_label = 'Electric_Guitar_muted'`; `registry_table()` row "| Guitar |
+Electric Guitar (muted) | 28 | 28–84 | rhythm, comp, groove, accent,
+texture, melody |"; convenience constant `MUTED_GUITAR`. Role: rhythm (16th
+chops/scratches — the guitar as percussion), comp (3–4 note chops, NOT
+6-string barres), groove (the mute duration IS the subdivision), accent
+(palm-release open chords as contrast), texture (dead-string "chika"),
+melody (short staccato single notes / octave hooks only) — NOT a sustaining
+lead, NOT a pad, NOT a bass. Production: REVERB_TAIL 0.9 s (deliberately dry
+— long tails blur the 16th detail), EQ cut 220 Hz −1.5 dB (palm-mute thump
+vs bass), boost 3.2 kHz +2.5 dB (pick-attack click — the instrument has no
+sustained energy so this is what makes it audible), 8 kHz air shelf only
++0.5 dB (damping removes the top by design), PAN −0.25 (double hard L/R at
+±0.6 in funk/metal). Writing quirks: (1) NOT a sustain voice — every note is
+attack + decay; if a phrase needs sustain, wrong patch; (2) alternate
+funk_chop 0.12 / scratch 0.05 / ghost_note 0.04 durations so the hand-motion
+groove reads, all-identical durations sound mechanical; (3) velocity IS the
+dynamic (30–40 ghosts, 75–82 chops, 90+ accents) because the patch has little
+natural sustain; (4) the FluidR3 patch is a one-shot — a long MIDI note does
+NOT ring, use `open_accent` when you want the chord to ring; (5) **no unison
+doubling** of two different melodic patches on the same pitches (2026-09-01
+comb-filter rule) — two takes of the SAME part hard L/R is the standard
+funk/metal production technique, not unison doubling.
