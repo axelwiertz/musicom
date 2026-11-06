@@ -1,0 +1,197 @@
+{
+  "perfect_grid": {
+    "Lead": {
+      "onsets": 206,
+      "off_16th": 0,
+      "off_8th": 83
+    },
+    "Counter": {
+      "onsets": 44,
+      "off_16th": 0,
+      "off_8th": 0
+    },
+    "Pad": {
+      "onsets": 112,
+      "off_16th": 0,
+      "off_8th": 0
+    },
+    "808": {
+      "onsets": 60,
+      "off_16th": 0,
+      "off_8th": 0
+    },
+    "Drums": {
+      "onsets": 493,
+      "off_16th": 16,
+      "off_8th": 184
+    }
+  },
+  "humanized_grid": {
+    "Lead": {
+      "onsets": 206,
+      "off_16th": 198,
+      "off_8th": 200
+    },
+    "Counter": {
+      "onsets": 44,
+      "off_16th": 42,
+      "off_8th": 42
+    },
+    "Pad": {
+      "onsets": 112,
+      "off_16th": 111,
+      "off_8th": 111
+    },
+    "808": {
+      "onsets": 60,
+      "off_16th": 58,
+      "off_8th": 58
+    },
+    "Drums": {
+      "onsets": 493,
+      "off_16th": 380,
+      "off_8th": 421
+    }
+  },
+  "harmony": {
+    "Lead": {
+      "total": 206,
+      "untagged_out_of_scale": 0,
+      "tagged_non_resolving": 0,
+      "strong_violations": 0,
+      "tagged_resolving": 0,
+      "weak_in_scale": 161,
+      "strong_ok": 45
+    },
+    "Counter": {
+      "total": 44,
+      "untagged_out_of_scale": 0,
+      "tagged_non_resolving": 0,
+      "strong_violations": 0,
+      "tagged_resolving": 0,
+      "weak_in_scale": 8,
+      "strong_ok": 36
+    },
+    "Pad": {
+      "total": 112,
+      "untagged_out_of_scale": 0,
+      "tagged_non_resolving": 0,
+      "strong_violations": 0,
+      "tagged_resolving": 0,
+      "weak_in_scale": 0,
+      "strong_ok": 112
+    },
+    "808": {
+      "total": 60,
+      "untagged_out_of_scale": 0,
+      "tagged_non_resolving": 0,
+      "strong_violations": 0,
+      "tagged_resolving": 0,
+      "weak_in_scale": 0,
+      "strong_ok": 60
+    }
+  },
+  "humanize": {
+    "Lead": {
+      "seed": 2046371706,
+      "profile": {
+        "timing_sigma_ms": 4.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 6.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 206,
+      "mean_abs_shift_ticks": 6.524,
+      "max_abs_shift_ticks": 18,
+      "mean_abs_vel_delta": 3.257,
+      "timing_sigma_ticks": 4.48
+    },
+    "Counter": {
+      "seed": 2046371707,
+      "profile": {
+        "timing_sigma_ms": 4.0,
+        "velocity_sigma": 9.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.04,
+        "layback_ms": 6.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 44,
+      "mean_abs_shift_ticks": 6.318,
+      "max_abs_shift_ticks": 17,
+      "mean_abs_vel_delta": 7.909,
+      "timing_sigma_ticks": 4.48
+    },
+    "Pad": {
+      "seed": 2046371708,
+      "profile": {
+        "timing_sigma_ms": 4.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 6.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 112,
+      "mean_abs_shift_ticks": 8.866,
+      "max_abs_shift_ticks": 16,
+      "mean_abs_vel_delta": 3.277,
+      "timing_sigma_ticks": 4.48
+    },
+    "808": {
+      "seed": 2046371709,
+      "profile": {
+        "timing_sigma_ms": 5.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 60,
+      "mean_abs_shift_ticks": 8.817,
+      "max_abs_shift_ticks": 19,
+      "mean_abs_vel_delta": 3.5,
+      "timing_sigma_ticks": 5.6
+    },
+    "Drums": {
+      "seed": 2046371710,
+      "profile": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.008,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 493,
+      "mean_abs_shift_ticks": 1.436,
+      "max_abs_shift_ticks": 6,
+      "mean_abs_vel_delta": 3.099,
+      "timing_sigma_ticks": 2.24
+    }
+  },
+  "zero_drift": {
+    "perfect": true,
+    "humanized": true,
+    "phase1": true,
+    "length_ticks": 61440
+  }
+}

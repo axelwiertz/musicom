@@ -1,0 +1,41 @@
+{
+  "phase1": {
+    "midi_bytes": 1823,
+    "wav_bytes": 10069804,
+    "ogg_bytes": 537067,
+    "duration_s": 57.08,
+    "silence_ratio": 0.0746,
+    "rms_per_sec_min": 0.0,
+    "rms_per_sec_max": 0.13,
+    "rms_per_sec_mean": 0.0669,
+    "target_lufs": -8.0,
+    "integrated_lufs": -9.17,
+    "true_peak_db": -1.0
+  },
+  "perfect": {
+    "midi_bytes": 7337,
+    "wav_bytes": 11495980,
+    "ogg_bytes": 461512,
+    "duration_s": 65.17,
+    "silence_ratio": 0.1372,
+    "rms_per_sec_min": 0.0,
+    "rms_per_sec_max": 0.1296,
+    "rms_per_sec_mean": 0.0875,
+    "target_lufs": -8.0,
+    "integrated_lufs": -9.46,
+    "true_peak_db": -1.0
+  },
+  "humanized": {
+    "midi_bytes": 7300,
+    "wav_bytes": 11496492,
+    "ogg_bytes": 461680,
+    "duration_s": 65.17,
+    "silence_ratio": 0.1368,
+    "rms_per_sec_min": 0.0,
+    "rms_per_sec_max": 0.1395,
+    "rms_per_sec_mean": 0.0904,
+    "target_lufs": -8.0,
+    "integrated_lufs": -9.45,
+    "true_peak_db": -1.0
+  }
+}

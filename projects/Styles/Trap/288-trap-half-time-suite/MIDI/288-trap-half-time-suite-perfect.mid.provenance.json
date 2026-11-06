@@ -1,0 +1,129 @@
+{
+  "artifact": "288-trap-half-time-suite-perfect.mid",
+  "classification": "ai-assisted",
+  "generator": "Trap Brownian Walk + musicom rules",
+  "sources": [],
+  "parameters": {
+    "bpm": 140,
+    "key": "C natural minor",
+    "scale": "minor",
+    "scale_pcs": [
+      0,
+      2,
+      3,
+      5,
+      7,
+      8,
+      10
+    ],
+    "style": "trap",
+    "method_id": "BW",
+    "method": "Trap Brownian Walk (dark-minor interval pool + half-time groove)",
+    "layer": "concrete",
+    "form": "intro-verse-chorus-verse2-bridge-chorus2-break-outro",
+    "source": "209-trap-half-time-rework",
+    "sections": 8,
+    "bars": 32,
+    "progression_per_section": {
+      "Intro": [
+        "Cm",
+        "Ab",
+        "Cm",
+        "Ab"
+      ],
+      "Verse": [
+        "Cm",
+        "Gm",
+        "Ab",
+        "Bb"
+      ],
+      "Chorus": [
+        "Ab",
+        "Eb",
+        "Bb",
+        "Cm"
+      ],
+      "Verse2": [
+        "Fm",
+        "Ab",
+        "Gm",
+        "Cm"
+      ],
+      "Bridge": [
+        "Ddim",
+        "Gm",
+        "Cm",
+        "Bb"
+      ],
+      "Chorus2": [
+        "Ab",
+        "Eb",
+        "Bb",
+        "Cm"
+      ],
+      "Break": [
+        "Cm",
+        "Cm",
+        "Ab",
+        "Cm"
+      ],
+      "Outro": [
+        "Cm",
+        "Ab",
+        "Cm",
+        "Cm"
+      ]
+    },
+    "section_roots_midpoint": [
+      "Ab",
+      "Gm",
+      "Eb",
+      "Ab",
+      "Gm",
+      "Eb",
+      "Cm",
+      "Ab"
+    ],
+    "seed": 20261106,
+    "humanize_seed": 20261106,
+    "voices": [
+      {
+        "name": "Lead",
+        "instrument": "synth_brass_1",
+        "program": 80,
+        "channel": 0
+      },
+      {
+        "name": "Counter",
+        "instrument": "synth_voice",
+        "program": 81,
+        "channel": 1
+      },
+      {
+        "name": "Pad",
+        "instrument": "synth_pad",
+        "program": 88,
+        "channel": 2
+      },
+      {
+        "name": "808",
+        "instrument": "synth_bass_1",
+        "program": 38,
+        "channel": 3
+      },
+      {
+        "name": "Drums",
+        "instrument": "drum_kit",
+        "program": 0,
+        "channel": 9
+      }
+    ],
+    "phase": "2-perfect",
+    "humanize": null
+  },
+  "notes": "grid-locked perfect layer: blanket chord-tone quantize per bar, voice-leading checked, zero humanization",
+  "sha256": "ad93cb42f33d349ea2fc4667e3a3722816a2dcfeed803b1ab1125b2850800e53",
+  "bytes": 7337,
+  "created_utc": "2026-11-06T01:08:15.648514+00:00",
+  "provenance_version": "1.0"
+}

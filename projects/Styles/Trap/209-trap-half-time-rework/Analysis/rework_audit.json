@@ -1,0 +1,35 @@
+{
+  "chosen": {
+    "path": "/opt/data/projects/Styles/Trap/209-trap-half-time-rework",
+    "genre": "Trap",
+    "proj": "209-trap-half-time-rework",
+    "primary_midi": "MIDI/209-trap-half-time-rework.mid",
+    "rework_date": "2026-11-06"
+  },
+  "standards": {
+    "S1_engine": {"result": "PASS", "detail": "compose.py imports UnitMatrixComposer; no raw mido authoring"},
+    "S2_zero_drift": {"result": "PASS", "detail": "6 voice tracks all length 46080 ticks"},
+    "S3_rhythm_grid": {"result": "PASS", "detail": "0 off-16th pitched onsets (ch9 32nd rolls exempt)"},
+    "S4_track_setup": {"result": "PASS", "detail": "6 voice tracks (KickSnare, Hat, 808, Pad, Lead, Counter)"},
+    "S5_two_phase": {"result": "PASS", "detail": "both 209-...mid and 209-...-phase1.mid present"},
+    "S6_provenance_index": {"result": "FAIL", "detail": "root provenance.json missing (only MIDI/*.mid.provenance.json sidecars); index.html present"}
+  },
+  "additional_current_standard_gaps": [
+    "no dual-version export (-perfect/-humanized) — predates 2026-10-17 dual-version contract",
+    "no humanization (export_dual / humanize_composer) — predates always-on humanization",
+    "no blanket chord-tone quantization via scale_quantizer tiered path (uses own quantize_lead)"
+  ],
+  "redesign_required": true,
+  "decision": "redesign (S6 fails; source also lacks dual-version + humanization)",
+  "source_identity": {
+    "genre": "Trap (half-time)",
+    "key": "C natural minor",
+    "scale_pcs": [0, 2, 3, 5, 7, 8, 10],
+    "tempo_bpm": 140,
+    "form_bars": 24,
+    "form_sections": 6,
+    "motif": "sparse square-lead contour (up-up-down, dark-minor interval pool)",
+    "instrumentation": ["808 sub (33)", "dark pad (49)", "square lead (80)", "counter (81)", "kick(1+and-of-3)/snare(3)/16th hats (ch9)"],
+    "method": "Brownian-walk pitch_index"
+  }
+}

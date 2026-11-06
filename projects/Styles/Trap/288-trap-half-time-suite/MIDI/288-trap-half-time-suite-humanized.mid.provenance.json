@@ -1,0 +1,225 @@
+{
+  "artifact": "288-trap-half-time-suite-humanized.mid",
+  "classification": "ai-assisted",
+  "generator": "Trap Brownian Walk + musicom rules",
+  "sources": [],
+  "parameters": {
+    "bpm": 140,
+    "key": "C natural minor",
+    "scale": "minor",
+    "scale_pcs": [
+      0,
+      2,
+      3,
+      5,
+      7,
+      8,
+      10
+    ],
+    "style": "trap",
+    "method_id": "BW",
+    "method": "Trap Brownian Walk (dark-minor interval pool + half-time groove)",
+    "layer": "concrete",
+    "form": "intro-verse-chorus-verse2-bridge-chorus2-break-outro",
+    "source": "209-trap-half-time-rework",
+    "sections": 8,
+    "bars": 32,
+    "progression_per_section": {
+      "Intro": [
+        "Cm",
+        "Ab",
+        "Cm",
+        "Ab"
+      ],
+      "Verse": [
+        "Cm",
+        "Gm",
+        "Ab",
+        "Bb"
+      ],
+      "Chorus": [
+        "Ab",
+        "Eb",
+        "Bb",
+        "Cm"
+      ],
+      "Verse2": [
+        "Fm",
+        "Ab",
+        "Gm",
+        "Cm"
+      ],
+      "Bridge": [
+        "Ddim",
+        "Gm",
+        "Cm",
+        "Bb"
+      ],
+      "Chorus2": [
+        "Ab",
+        "Eb",
+        "Bb",
+        "Cm"
+      ],
+      "Break": [
+        "Cm",
+        "Cm",
+        "Ab",
+        "Cm"
+      ],
+      "Outro": [
+        "Cm",
+        "Ab",
+        "Cm",
+        "Cm"
+      ]
+    },
+    "section_roots_midpoint": [
+      "Ab",
+      "Gm",
+      "Eb",
+      "Ab",
+      "Gm",
+      "Eb",
+      "Cm",
+      "Ab"
+    ],
+    "seed": 20261106,
+    "humanize_seed": 20261106,
+    "voices": [
+      {
+        "name": "Lead",
+        "instrument": "synth_brass_1",
+        "program": 80,
+        "channel": 0
+      },
+      {
+        "name": "Counter",
+        "instrument": "synth_voice",
+        "program": 81,
+        "channel": 1
+      },
+      {
+        "name": "Pad",
+        "instrument": "synth_pad",
+        "program": 88,
+        "channel": 2
+      },
+      {
+        "name": "808",
+        "instrument": "synth_bass_1",
+        "program": 38,
+        "channel": 3
+      },
+      {
+        "name": "Drums",
+        "instrument": "drum_kit",
+        "program": 0,
+        "channel": 9
+      }
+    ],
+    "phase": "2-humanized",
+    "humanize_profiles": {
+      "Lead": {
+        "seed": 2046371706,
+        "profile": {
+          "timing_sigma_ms": 4.0,
+          "velocity_sigma": 4.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.01,
+          "layback_ms": 6.0,
+          "phrase_corr": 0.25,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 206,
+        "mean_abs_shift_ticks": 6.524,
+        "max_abs_shift_ticks": 18,
+        "mean_abs_vel_delta": 3.257,
+        "timing_sigma_ticks": 4.48
+      },
+      "Counter": {
+        "seed": 2046371707,
+        "profile": {
+          "timing_sigma_ms": 4.0,
+          "velocity_sigma": 9.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.04,
+          "layback_ms": 6.0,
+          "phrase_corr": 0.25,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 44,
+        "mean_abs_shift_ticks": 6.318,
+        "max_abs_shift_ticks": 17,
+        "mean_abs_vel_delta": 7.909,
+        "timing_sigma_ticks": 4.48
+      },
+      "Pad": {
+        "seed": 2046371708,
+        "profile": {
+          "timing_sigma_ms": 4.0,
+          "velocity_sigma": 4.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.01,
+          "layback_ms": 6.0,
+          "phrase_corr": 0.25,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 112,
+        "mean_abs_shift_ticks": 8.866,
+        "max_abs_shift_ticks": 16,
+        "mean_abs_vel_delta": 3.277,
+        "timing_sigma_ticks": 4.48
+      },
+      "808": {
+        "seed": 2046371709,
+        "profile": {
+          "timing_sigma_ms": 5.0,
+          "velocity_sigma": 4.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.01,
+          "layback_ms": 8.0,
+          "phrase_corr": 0.25,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 60,
+        "mean_abs_shift_ticks": 8.817,
+        "max_abs_shift_ticks": 19,
+        "mean_abs_vel_delta": 3.5,
+        "timing_sigma_ticks": 5.6
+      },
+      "Drums": {
+        "seed": 2046371710,
+        "profile": {
+          "timing_sigma_ms": 2.0,
+          "velocity_sigma": 4.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.008,
+          "layback_ms": 0.0,
+          "phrase_corr": 0.25,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 493,
+        "mean_abs_shift_ticks": 1.436,
+        "max_abs_shift_ticks": 6,
+        "mean_abs_vel_delta": 3.099,
+        "timing_sigma_ticks": 2.24
+      }
+    }
+  },
+  "notes": "humanized layer: trap style profile + per-instrument DNA",
+  "sha256": "bbd9c22790ea00d824357af5946633dceabde2334924767711d2cee91abb8cde",
+  "bytes": 7300,
+  "created_utc": "2026-11-06T01:08:15.648936+00:00",
+  "provenance_version": "1.0"
+}
