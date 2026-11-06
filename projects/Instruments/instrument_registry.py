@@ -105,6 +105,7 @@ _INSTRUMENT_MODULES = {
     "Synth.synth_brass_1.synth_brass_1": "synth_brass_1",
     "Synth.synth_voice.synth_voice": "synth_voice",
     "Synth.calliope.calliope": "calliope",
+    "Synth.warm_pad.warm_pad": "warm_pad",
 }
 
 _FIELDS = (
@@ -348,6 +349,7 @@ SYNTH_PAD = ALL_INSTRUMENTS["synth_pad"]
 SYNTH_BRASS_1 = ALL_INSTRUMENTS["synth_brass_1"]
 SYNTH_VOICE = ALL_INSTRUMENTS["synth_voice"]
 CALIOPE = ALL_INSTRUMENTS["calliope"]
+WARM_PAD = ALL_INSTRUMENTS["warm_pad"]
 # Voice-like family — one instrument per non-vocal source. The `voice_like`
 # key is the umbrella (vox humana); each member is also addressable directly.
 VOICE_LIKE = ALL_INSTRUMENTS["voice_like"]
@@ -512,6 +514,8 @@ def registry_table():
         elif low == "distortion guitar":
             role = "lead, melody, accent, rhythm, power-chord strum, countermelody"
         elif low == "pad 1 (new age)":
+            role = "pad, harmony, texture, drone, accent"
+        elif low == "pad 2 (warm)":
             role = "pad, harmony, texture, drone, accent"
         elif low == "synth brass 1":
             role = "lead, harmony, accent, stab, pad, countermelody"
@@ -899,6 +903,20 @@ if __name__ == "__main__":
     print("  CALIOPE.range_min =", CALIOPE.range_min,
           "CALIOPE.range_max =", CALIOPE.range_max)
     print("  CALIOPE.stem_label =", repr(CALIOPE.stem_label))
+
+    print()
+    print("=== Warm Pad (Pad 2 warm, GM89) ===")
+    print("  WARM_PAD.midi_program =", WARM_PAD.midi_program, "(should be 89)")
+    print("  by_name('warm pad') =", by_name("warm pad"))
+    print("  by_name('Pad 2 (warm)') =", by_name("Pad 2 (warm)"))
+    print("  by_program(89) =", by_program(89))
+    print("  WARM_PAD.in_sweet_spot(72) =", WARM_PAD.in_sweet_spot(72))
+    print("  WARM_PAD.in_sweet_spot(24) =", WARM_PAD.in_sweet_spot(24))
+    print("  WARM_PAD.range_min =", WARM_PAD.range_min,
+          "WARM_PAD.range_max =", WARM_PAD.range_max)
+    print("  WARM_PAD.stem_label =", repr(WARM_PAD.stem_label))
+    print("  WARM_PAD.synthesis =", repr(WARM_PAD.synthesis))
+    print("  WARM_PAD.synthesis_defaults =", WARM_PAD.synthesis_defaults)
 
     print()
     print("=== Muted Guitar (Palm Mute, GM28) ===")

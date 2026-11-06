@@ -1,7 +1,7 @@
 # Instruments Reference — Musicom-Compatible Format
 
-> **Folder purpose** (see `REPO_MAP.md`): instrument reference tree — 79
-> instrument folders + `registry.md` (85 registry keys). Ranges, articulations, synthesis presets per
+> **Folder purpose** (see `REPO_MAP.md`): instrument reference tree — 81
+> instrument folders + `registry.md` (87 registry keys). Ranges, articulations, synthesis presets per
 > instrument; each has an `instrument.md` (doc) + `.py` constants. The engine
 > resolves this tree via `utilities.env.repo_root()` — no hardcoded host paths.
 
@@ -80,7 +80,7 @@ Instruments/
     └── fiddle/
 ```
 
-Current instruments (80 folders / 86 registry keys): Violin, Viola, Cello,
+Current instruments (81 folders / 87 registry keys): Violin, Viola, Cello,
 Double Bass, Piano, Church Organ, Dulcimer, Trumpet, Trombone, French Horn,
 Tuba, Flute, Oboe, Clarinet, Bassoon, Alto Saxophone, Acoustic Guitar, Drum
 Kit, Marimba, Steel Drums, Timpani, Vibraphone, Sitar, Koto, Shamisen,
@@ -88,10 +88,10 @@ Kalimba, Banjo, Bagpipe, Shenai, Fiddle, … (full list in `instrument_registry.
 (`Bagpipe` lives under `Woodwind/` — it was filed there for the double-reed
 chanter; the count above follows `instrument_registry.ALL_INSTRUMENTS`.)
 
-> Registry load count is **86** — the Vocal voice-like family registers six
+> Registry load count is **87** — the Vocal voice-like family registers six
 > members individually (vox_humana, kazoo, jaw_harp, didgeridoo, singing_saw,
 > talkbox) on top of the per-instrument entries, and the instrument tree itself
-> is now 80 folders (latest: Guitar/muted_guitar, GM28 Muted Guitar, 2026-11-05).
+> is now 81 folders (latest: Synth/warm_pad, GM89 Warm Pad, 2026-11-06).
 > `registry.md` carries the curated per-family table.
 
 ## Musicom Integration

@@ -1,0 +1,46 @@
+registry: by_name('warm pad') -> <Instrument Pad 2 (warm) (family=Synth, program=89, range=36-96)>
+registry: by_name('Pad 2 (warm)') -> <Instrument Pad 2 (warm) (family=Synth, program=89, range=36-96)>
+registry: by_program(89) -> <Instrument Pad 2 (warm) (family=Synth, program=89, range=36-96)>
+registry: WARM_PAD is ALL_INSTRUMENTS['warm_pad'] -> True
+registry: family=Synth program=89 range=36-96 solo=(55, 84) sweet=(60, 84)
+registry: stem_label='Pad_2_warm' reverb=3.0 pan=0.0
+registry: synthesis=additive synthesis_defaults={'instrument': 'warm_pad', 'attack': 0.45, 'detune': 0.015, 'stack': 3, 'release': 0.6, 'sustain_level': 0.9, 'decay_S': 0.0001}
+registry: in_sweet_spot(72)=True in_sweet_spot(24)=False in_range(60)=True
+Warm Pad: program=89 gm='Pad 2 (warm)' stem='Pad_2_warm' sweet=(55, 84) A4=440.0Hz
+Warm Pad: zones={'low': (36, 55), 'mid': (56, 79), 'high': (80, 96)}
+Warm Pad: art=['sustain', 'legato', 'swell', 'staccato', 'marcato', 'drone', 'accent', 'bloom'] synth=additive reverb=3.0s pan=0.0
+Warm Pad: A3=220.0Hz C4=261.6Hz C5=523.3Hz
+
+Zero-drift: True (OK)
+MIDI: /opt/data/projects/Instruments/_test/warm_pad_test.mid (177 bytes)
+WAV (solo): /opt/data/projects/Instruments/_test/warm_pad_test.wav (1305900 bytes)
+Spectral check: 4-8kHz buzz energy = 5.2% (OK)
+
+Stem labels (pipeline GM_PROGRAMS, 0-indexed):
+  [88] = 'Pad 1 (new age)'
+  [89] = 'Pad 2 (warm)'
+  [90] = 'Pad 3 (polysynth)'
+  [92] = 'Pad 5 (bowed)'
+  Warm Pad -> 'Pad 2 (warm)'
+SF2: /opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2
+SF2 preset 89 -> 'Warm Pad'
+
+Stems rendered (2 files):
+  track00_Pad_2_warm.wav (1305900 bytes)
+  track01_Drums.wav (849708 bytes)
+
+Additive pad_warm: late(1.0-1.5s) env max with decay_S=1e-4 = 0.828 (gate >= 0.45)
+Additive pad_warm: same with decay_S=0.005 (wrong) = 0.014 (collapse)
+
+Polysynth warm pad (A3): peak=0.927 sustain_rms=0.1784 release_rms=0.0940 hold_ratio=1.90
+
+Empirical FluidR3 pitch sweep (RMS, velocity 90):
+  note  36 (  C2)  rms=1186.9118
+  note  48 (  C3)  rms=1353.7792
+  note  60 (  C4)  rms=1143.74
+  note  72 (  C5)  rms=1076.2701
+  note  84 (  C6)  rms=815.4295
+  note  96 (  C7)  rms=773.3848
+  note 108 (  C8)  rms=760.1678
+
+ALL CHECKS PASSED

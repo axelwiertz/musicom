@@ -1,0 +1,35 @@
+{
+  "artifact": "chc136_demo.mid",
+  "classification": "ai-generated",
+  "generator": "compose_chc136_demo.py (method 136, Collatz Hailstone Composition)",
+  "sources": [
+    "Wikipedia 'Collatz conjecture' (rev. 2026-11-05)",
+    "OEIS A006877 record-holder seeds",
+    "_web137/verify_136_CHC.py (12 fact-checks)"
+  ],
+  "parameters": {
+    "method": "136",
+    "name": "Collatz Hailstone Composition (CHC)",
+    "seeds": [
+      27,
+      54,
+      73,
+      97
+    ],
+    "steps": [
+      71,
+      72,
+      74,
+      76
+    ],
+    "slots_per_section": 20,
+    "num_sections": 6,
+    "fold": "register=bit_length//3, degree=residue mod 7, clamp 120",
+    "tail_ostinato": "4-2-1 loop after trajectory end (zero-drift padding)"
+  },
+  "notes": "validate()=True; longest row 76 steps (seed 97)",
+  "sha256": "9075c4813071c841b136bc7362b15e0a91c321834859ac846ac0889a659c1245",
+  "bytes": 2847,
+  "created_utc": "2026-11-06T09:08:46.227399+00:00",
+  "provenance_version": "1.0"
+}

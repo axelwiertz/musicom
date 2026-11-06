@@ -1,13 +1,13 @@
 {
   "job": "random-style production (SP) layer-aligned",
-  "date": "2026-11-04",
-  "seed": 20261104,
-  "method": "SP-117",
-  "method_module": "sound.effects.reverse_reverb",
-  "method_desc": "Reverse Reverb \u2014 reverse -> IR convolution (decaying-noise reverb, pre-delay) -> reverse back -> wet/dry mix, align-to-hit trimming + boundary fades (Bixlab Reverse Reverb-style)",
-  "source_midi": "/opt/data/repos/musicom/projects/Styles/Electronic/089-electronic-subset-minor/MIDI/089-electronic-subset-minor.mid",
-  "source_project": "Electronic/089-electronic-subset-minor/MIDI/089-electronic-subset-minor.mid",
-  "registry_size": 79,
+  "date": "2026-11-06",
+  "seed": 20261106,
+  "method": "SP-097",
+  "method_module": "sound.effects.mega_morph",
+  "method_desc": "Multi-Segment Envelope Generator for Parameter Modulation (Sync Audio MegaMorph-style)",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Gamelan/249-gamelan-parsimonious-subset/MIDI/249-gamelan-parsimonious-subset-humanized.mid",
+  "source_project": "Gamelan/249-gamelan-parsimonious-subset/MIDI/249-gamelan-parsimonious-subset-humanized.mid",
+  "registry_size": 84,
   "recent_excluded": [
     "SP-009",
     "SP-011",
@@ -50,7 +50,8 @@
     "SP-108",
     "SP-111",
     "SP-115",
-    "SP-127"
+    "SP-117",
+    "SP-143"
   ],
   "already_on_source": [],
   "baseline_excluded": [
@@ -74,7 +75,6 @@
     "SP-113",
     "SP-114",
     "SP-116",
-    "SP-117",
     "SP-118",
     "SP-119",
     "SP-120",
@@ -82,6 +82,7 @@
     "SP-124",
     "SP-125",
     "SP-126",
+    "SP-127",
     "SP-128",
     "SP-129",
     "SP-130",
@@ -95,10 +96,14 @@
     "SP-138",
     "SP-139",
     "SP-140",
-    "SP-141"
+    "SP-141",
+    "SP-142",
+    "SP-144",
+    "SP-145",
+    "SP-146"
   ],
-  "n_candidates": 421,
-  "n_well_formed": 309,
-  "n_meaningful": 308,
+  "n_candidates": 429,
+  "n_well_formed": 317,
+  "n_meaningful": 316,
   "rejected_degenerate": []
 }

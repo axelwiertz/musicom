@@ -658,6 +658,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | World | Pan Flute | 75 | 55–100 | lead, melody, ornament, drone, accent |
 | World | Shakuhachi | 77 | 55–100 | lead, melody, ornament, drone, accent |
 | Synth | Pad 1 (new age) | 88 | 36–96 | pad, harmony, texture, drone, accent |
+| Synth | Pad 2 (warm) | 89 | 36–96 | pad, harmony, texture, drone, accent |
 | Synth | Lead 3 (calliope) | 82 | 60–96 | lead, melody, ornament, accent, countermelody |
 | Synth | Synth Brass 1 | 62 | 36–96 | lead, harmony, accent, stab, pad, countermelody |
 | Synth | Synth Voice | 54 | 36–96 | lead, melody, harmony, pad, countermelody, accent |
@@ -740,7 +741,8 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 ||| 30 | Distortion Guitar | Distortion_Guitar ✓ (GM_PROGRAMS[30] + FluidR3 preset 30 both "Distortion Guitar" — labels match exactly, **no quirk**) |
 ||| 62 | Synth Brass 1 | Synth_Brass_1 ✓ (GM_PROGRAMS[62] = "Synth Brass 1"; FluidR3 preset 62 = "Synth Brass 1" — labels match exactly, **no quirk**) |
 ||| 32 | Acoustic Bass | Acoustic_Bass ✓ (GM_PROGRAMS[32] = "Acoustic Bass"; FluidR3 preset 32 = "Acoustic Bass" — labels match exactly, **no quirk**) |
-||| 82 | Lead 3 (calliope) | Lead_3_calliope ✓ (GM_PROGRAMS[82] = "Lead 3 (calliope)" → sanitized `Lead_3_calliope` — parens stripped, spaces → underscore; FluidR3 preset 82 = **"Calliope Lead"** — SF2 internal name differs from the GM label, cosmetic only, **no routing impact**; stems are labelled from GM_PROGRAMS) |
+|||| 82 | Lead 3 (calliope) | Lead_3_calliope ✓ (GM_PROGRAMS[82] = "Lead 3 (calliope)" → sanitized `Lead_3_calliope` — parens stripped, spaces → underscore; FluidR3 preset 82 = **"Calliope Lead"** — SF2 internal name differs from the GM label, cosmetic only, **no routing impact**; stems are labelled from GM_PROGRAMS) |
+|||| 89 | Pad 2 (warm) | Pad_2_warm ✓ (GM_PROGRAMS[89] = "Pad 2 (warm)" → sanitized `Pad_2_warm` — parens stripped, spaces → underscore; FluidR3 preset 89 = **"Warm Pad"** — SF2 internal name differs from the GM label, cosmetic only, **no routing impact**; STEM_LABEL = "Pad_2_warm" matches the pipeline's real label) |
 
 > **Known off-by-one in existing entries**: ~~`trumpet.py` uses 57~~ **FIXED 2026-08-27**: trumpet is now 56 (SF2 preset 56=`SoloTrumpet`). `piano.py`=1 → actually Bright Acoustic Piano (GM #2) — cosmetic label difference only, no routing impact. Legacy registry rows kept as-is for piano; new instruments use 0-indexed programs matching pipeline+SF2.
 
@@ -1959,3 +1961,63 @@ NOT ring, use `open_accent` when you want the chord to ring; (5) **no unison
 doubling** of two different melodic patches on the same pitches (2026-09-01
 comb-filter rule) — two takes of the SAME part hard L/R is the standard
 funk/metal production technique, not unison doubling.
+
+**Warm Pad added** (2026-11-06): GM89, **Synth-family fifth entry** — the
+classic WARM ANALOG synth pad ("Pad 2 (warm)": detuned triangle/saw stack
+through a low-pass with slow attack + wide chorus — the 80s ballad /
+synthwave / ambient bed; Juno-60 warm programs, OB-X pads, Vangelis
+*Charlots of Fire* beds). The **DARK sibling of synth_pad GM88** ("Pad 1
+(new age)") — the synth_pad entry already flagged FluidR3 preset 89 =
+"Warm Pad" as the darker sibling; this entry claims it. Files:
+`Synth/warm_pad/instrument.md` + `warm_pad.py`. Verified end-to-end
+UnitMatrixComposer (1 bar, 1 section, 100 bpm, Warm Pad SOLO on ch0 —
+C major / A minor pad chords — + drum-kit context on ch9) → **zero-drift ✓**
+→ MIDI **177 bytes** → FluidSynth WAV **1,305,900 bytes** SOLO render
+(FluidR3 via `discover_soundfont()`) ✓; RenderPipeline stems on disk
+`track00_Pad_2_warm.wav` (1,305,900 B) + `track01_Drums.wav` (849,708 B) ✓;
+solo-render spectral 4–8 kHz buzz **5.2%** (clean single voice, no
+comb-filtering — a DARK pad, well under the 20% gate). Stem-label:
+GM_PROGRAMS[89] = **"Pad 2 (warm)"** → sanitized `Pad_2_warm` (parens
+stripped, spaces → underscore; STEM_LABEL matches the pipeline's real
+sanitization, **no routing quirk**) and FluidR3 preset 89 = **"Warm Pad"**
+(SF2 internal name differs cosmetically, no routing impact). Synthesis:
+**Additive primary** (`sound/synthesis/additive.py` — the pad IS a detuned
+harmonic stack, synth_pad/string_ensemble/organ precedent:
+`ADDITIVE_HARMONICS["pad_warm"]` = [1.0, 0.78, 0.58, 0.40, 0.26, 0.15,
+0.08] — strong fundamental, FASTER rolloff than pad_newage; weights are
+RELATIVE, normalize to sum 1.0 before `apply_overtones()`), SYNTHESIS_DEFAULTS
+attack 0.45 s (between string_ensemble 0.35 and synth_pad 0.55), detune
+±0.015 (widest in the pad family — the analog chorus IS the identity),
+stack 3, release 0.6, **decay_S 1e-4** (the 2026-10-12 additive quirk:
+late-sustain envelope max **0.828** with decay_S 1e-4 vs **0.014** with
+0.005 — collapse; measured). **Polysynth secondary** (PolyVoice — the
+polyBLEP subtractive architecture IS the analog warm-pad model:
+triangle core + 2 detuned saws ±7c, **low-pass 1400 Hz** — half of
+synth_brass_1's 2800, the darkness IS the point —, resonance 0.35, env
+attack 0.45/sustain 0.8/release 0.6, filter env follows the amp;
+sustain holds: hold_ratio 1.90 vs release window). **PhaseModSynth
+tertiary** (FM pad, saw carrier ratio 1.0, depth 1.5 — gentle, warm pads
+are NOT brassy). Empirical FluidR3 pitch sweep (RMS, velocity 90, notes
+36–108 step 12): preset 89 audible **7/7, no gaps** (RMS 760–1354,
+essentially flat across the whole span, gentle treble rolloff; C8=108
+still audible) — full-keyboard patch, SF2 never clips a composition.
+Range 36–96 = idiomatic writing band (C2–C7), sweet spot 60–84 (C4–C6),
+solo range 55–84. Registration proof: `by_name('warm pad')` /
+`by_name('Pad 2 (warm)')` → Warm Pad, `by_program(89)` → Warm Pad (distinct
+from 88 synth_pad), `in_sweet_spot(72)` = True, `in_sweet_spot(24)` =
+False, `stem_label = 'Pad_2_warm'`; `registry_table()` row "| Synth | Pad 2
+(warm) | 89 | 36–96 | pad, harmony, texture, drone, accent |"; convenience
+constant `WARM_PAD`. Role: pad, harmony, texture, drone, accent — the
+anti-new-age dark bed (ballads, synthwave verses, ambient underscores);
+NOT a lead (slow attack smears), NOT rhythm/comp, NOT bass. Production:
+REVERB_TAIL 3.0 s (between string_ensemble 2.6 and synth_pad 3.2 — blooms
+in a big hall but keeps more body than the new-age shimmer), EQ cut 250 Hz
+(the strong fundamental piles the low-mid fast — lower than synth_pad's
+300), boost 2.4 kHz (the warm BODY band, contrast new-age 3.8 kHz), gentle
+7.5 kHz air shelf (warmth rolls the top off, contrast new-age 9.5 kHz
++2.0), PAN centre. Writing quirks: (1) hold chords ≥ 1.5–2 s or the slow
+attack never speaks; (2) pad-stacking unison (warm pad + another pad/
+string on the same pitches) is the definitive comb-filter buzz — octaves
+or zone-splitting only; (3) GM90 "Pad 3 (polysynth)" / GM92 "Pad 5
+(bowed)" / GM93 "Pad 6 (metallic)" / GM94 "Pad 7 (halo)" remain future
+sibling candidates.
