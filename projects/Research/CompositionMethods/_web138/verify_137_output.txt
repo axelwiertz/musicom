@@ -1,0 +1,12 @@
+0. semiring axioms (2000 random triples): idempotent=True commutative=True associative=True distributive=True identities=True
+1. max-plus power == exact-length-k max walk weight, verified k=1..4 on 3x3 (brute force all n^(k+1) paths)
+2. Karp max-cycle-mean formula == brute-force over all simple cycles, 50 random 3x3 matrices (all sources agree)
+3. cyclicity: c-cycle graph has lambda=1 and A^(k+c) = A^k + lambda*c exactly (c=2,3,4; k=3c) -> period c
+   trop_det sample = 11  perms checked = 6
+   trop_det(6x6) = 48 (brute force over 720 permutations)
+5. tropical roots of 0 (+) 3x (+) 0x^2 : [-3.0, 3.0] -> factorization roots r1+r2 = a0-a2 = 0, max(r1,r2)=a1-a2=3
+   upper envelope is convex piecewise-linear; at both roots two terms are tied (verified by evaluation)
+6. Kleene star on a DAG == all-pairs longest path (0->2 = 5 direct; 0->3 = 8 via 2) verified
+7. asymptotic per-step increment of A^k (k=40) : [2]  lambda = 2.0
+
+ALL CHECKS PASSED

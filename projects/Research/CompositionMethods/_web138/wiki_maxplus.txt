@@ -1,0 +1,4 @@
+#REDIRECT [[Tropical semiring#max-plus algebra]] {{R to anchor}} {{R from alternative name}} {{R from merge}}
+[[Category:Algebras]]
+[[Category:Tropical analysis]]
+[[fr:Algèbre max-plus]]

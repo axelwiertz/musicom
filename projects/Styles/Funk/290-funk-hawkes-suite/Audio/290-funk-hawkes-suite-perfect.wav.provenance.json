@@ -1,0 +1,18 @@
+{
+  "artifact": "290-funk-hawkes-suite-perfect.wav",
+  "classification": "ai-assisted",
+  "generator": "FluidSynth render + master() LUFS -13 + Opus encode",
+  "sources": [],
+  "parameters": {
+    "layer": "perfect",
+    "style": "funk",
+    "soundfont": "FluidR3_GM.sf2",
+    "target_lufs": -13,
+    "ceiling_db": -1.0
+  },
+  "notes": "",
+  "sha256": "1538c7ae6b00008074a40f606e9ccefc1e51dd61864ebe5a4dc8bd35cee2f826",
+  "bytes": 14013740,
+  "created_utc": "2026-11-07T01:21:28.588123+00:00",
+  "provenance_version": "1.0"
+}

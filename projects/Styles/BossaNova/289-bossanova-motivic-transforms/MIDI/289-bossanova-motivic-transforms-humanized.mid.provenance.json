@@ -1,0 +1,237 @@
+{
+  "artifact": "289-bossanova-motivic-transforms-humanized.mid",
+  "classification": "ai-assisted",
+  "generator": "Inversion/Retrograde Transform + musicom rules",
+  "sources": [],
+  "parameters": {
+    "bpm": 120,
+    "key": "F major",
+    "scale": "major",
+    "scale_pcs": [
+      0,
+      2,
+      4,
+      5,
+      7,
+      9,
+      10
+    ],
+    "style": "BossaNova",
+    "method_id": "013",
+    "method": "Inversion / Retrograde Transform",
+    "layer": "concrete",
+    "form": "intro-a-a-b-a",
+    "motif_prime": [
+      0,
+      1,
+      3,
+      2,
+      4,
+      2,
+      1,
+      0
+    ],
+    "motif_retrograde": [
+      0,
+      1,
+      2,
+      4,
+      2,
+      3,
+      1,
+      0
+    ],
+    "motif_inversion": [
+      4,
+      3,
+      1,
+      2,
+      0,
+      2,
+      3,
+      4
+    ],
+    "motif_retro_inversion": [
+      4,
+      3,
+      2,
+      0,
+      2,
+      1,
+      3,
+      4
+    ],
+    "inversion_axis": 2.0,
+    "section_transforms": {
+      "Intro": "P",
+      "A": "P",
+      "B": "I"
+    },
+    "sections": 5,
+    "bars": 36,
+    "progression_per_section": {
+      "Intro": [
+        "Fmaj7",
+        "Bbmaj7",
+        "Gm7",
+        "C7"
+      ],
+      "A": [
+        "Fmaj7",
+        "Dm7",
+        "Gm7",
+        "C7"
+      ],
+      "B": [
+        "Bbmaj7",
+        "Gm7",
+        "Am7",
+        "Dm7"
+      ]
+    },
+    "section_roots_midpoint": [
+      "Bbmaj7",
+      "Dm7",
+      "Dm7",
+      "Gm7",
+      "Dm7"
+    ],
+    "seed": 20261106,
+    "humanize_seed": 20261106,
+    "voices": [
+      {
+        "name": "Flute",
+        "instrument": "flute",
+        "program": 73,
+        "channel": 0
+      },
+      {
+        "name": "Guitar",
+        "instrument": "acoustic_guitar",
+        "program": 24,
+        "channel": 1
+      },
+      {
+        "name": "Rhodes",
+        "instrument": "rhodes",
+        "program": 4,
+        "channel": 2
+      },
+      {
+        "name": "Bass",
+        "instrument": "acoustic_bass",
+        "program": 32,
+        "channel": 3
+      },
+      {
+        "name": "Drums",
+        "instrument": "drum_kit",
+        "program": 0,
+        "channel": 9
+      }
+    ],
+    "phase": "2-humanized",
+    "humanize_profiles": {
+      "Flute": {
+        "seed": 2046371706,
+        "profile": {
+          "timing_sigma_ms": 7.0,
+          "velocity_sigma": 7.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.02,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.4,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 204,
+        "mean_abs_shift_ticks": 4.931,
+        "max_abs_shift_ticks": 17,
+        "mean_abs_vel_delta": 5.755,
+        "timing_sigma_ticks": 6.72
+      },
+      "Guitar": {
+        "seed": 2046371707,
+        "profile": {
+          "timing_sigma_ms": 7.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.02,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.4,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 528,
+        "mean_abs_shift_ticks": 4.955,
+        "max_abs_shift_ticks": 20,
+        "mean_abs_vel_delta": 5.182,
+        "timing_sigma_ticks": 6.72
+      },
+      "Rhodes": {
+        "seed": 2046371708,
+        "profile": {
+          "timing_sigma_ms": 7.0,
+          "velocity_sigma": 5.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.015,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.4,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 144,
+        "mean_abs_shift_ticks": 5.993,
+        "max_abs_shift_ticks": 18,
+        "mean_abs_vel_delta": 3.979,
+        "timing_sigma_ticks": 6.72
+      },
+      "Bass": {
+        "seed": 2046371709,
+        "profile": {
+          "timing_sigma_ms": 5.0,
+          "velocity_sigma": 4.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.01,
+          "layback_ms": 8.0,
+          "phrase_corr": 0.4,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 100,
+        "mean_abs_shift_ticks": 7.1,
+        "max_abs_shift_ticks": 17,
+        "mean_abs_vel_delta": 3.43,
+        "timing_sigma_ticks": 4.8
+      },
+      "Drums": {
+        "seed": 2046371710,
+        "profile": {
+          "timing_sigma_ms": 2.0,
+          "velocity_sigma": 4.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.008,
+          "layback_ms": 0.0,
+          "phrase_corr": 0.4,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 432,
+        "mean_abs_shift_ticks": 1.28,
+        "max_abs_shift_ticks": 5,
+        "mean_abs_vel_delta": 3.067,
+        "timing_sigma_ticks": 1.92
+      }
+    }
+  },
+  "notes": "humanized layer: bossa style profile + per-instrument DNA",
+  "sha256": "5f3835f499150bf93d9e3f947fd8b848b97b83dcabefcef13b0422cdb53b8201",
+  "bytes": 10758,
+  "created_utc": "2026-11-06T23:09:17.410768+00:00",
+  "provenance_version": "1.0"
+}

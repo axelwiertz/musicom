@@ -1,0 +1,38 @@
+{
+  "chosen": "/opt/data/projects/Styles/Funk/088-funk-hawkes",
+  "genre": "Funk",
+  "primary_midi": "/opt/data/projects/Styles/Funk/088-funk-hawkes/MIDI/088-funk-hawkes.mid",
+  "audited_at_utc": "2026-11-07",
+  "standard_failures": [
+    "std6: index.html missing (dashboard required)",
+    "std6: top-level provenance.json missing (only per-artifact .provenance.json sidecars present)"
+  ],
+  "redesign_required": true,
+  "standard_results": {
+    "1_engine": "PASS (compose.py imports workflows.unitmatrix_composer.UnitMatrixComposer)",
+    "2_zero_drift": "PASS (6 voice tracks x 46080 ticks, identical)",
+    "3_rhythm_grid_sync": "PASS (off-grid pitched onsets = 0)",
+    "4_track_setup": "PASS (6 voice tracks: Lead/Sax/Cello/Piano/Bass/Drums ch9)",
+    "5_two_phase": "PASS (both 088-funk-hawkes.mid and 088-funk-hawkes-phase1.mid present)",
+    "6_provenance_and_index": "FAIL"
+  },
+  "source_identity": {
+    "genre": "Funk",
+    "key": "F minor (natural minor, blues/pentatonic colour on lead)",
+    "bpm": 100,
+    "meter": "4/4",
+    "method": "045 Hawkes Process Self-Exciting Composition (HPSEC)",
+    "sections": ["Intro", "Verse", "Chorus", "Break", "Chorus2", "Outro"],
+    "bars": 24,
+    "instrumentation": {
+      "Lead": "Trumpet (56)",
+      "Sax": "Alto Sax (65)",
+      "Cello": "Cello (42)",
+      "Piano": "Acoustic Grand Piano (1)",
+      "Bass": "Double Bass (43)",
+      "Drums": "Drum Kit (ch9)"
+    },
+    "core_motif": "self-exciting point-process bursts (contagion -> pitch burst, exponential relaxation)",
+    "harmony": "F minor diatonic triads: i VI III VII iv v"
+  }
+}

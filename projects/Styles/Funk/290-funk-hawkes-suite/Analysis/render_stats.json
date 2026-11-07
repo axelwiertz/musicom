@@ -1,0 +1,18 @@
+{
+  "perfect": {
+    "target_lufs": -13.0,
+    "integrated_lufs": -13.07,
+    "true_peak_db": -1.0,
+    "silence_ratio": 0.023969693648270948,
+    "wav_bytes": 14013740,
+    "ogg_bytes": 542276
+  },
+  "humanized": {
+    "target_lufs": -13.0,
+    "integrated_lufs": -13.07,
+    "true_peak_db": -1.0,
+    "silence_ratio": 0.024711768247076635,
+    "wav_bytes": 14033196,
+    "ogg_bytes": 544976
+  }
+}

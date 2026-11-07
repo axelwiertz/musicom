@@ -1,0 +1,32 @@
+{
+  "artifact": "290-funk-hawkes-suite-perfect.mid",
+  "classification": "ai-assisted",
+  "generator": "Hawkes HPSEC + musicom rules (phase 2, grid-locked)",
+  "sources": [
+    "/opt/data/projects/Styles/Funk/088-funk-hawkes"
+  ],
+  "parameters": {
+    "phase": "2",
+    "layer": "perfect",
+    "style": "funk",
+    "key": "F minor",
+    "bpm": 100,
+    "seed": 20261107,
+    "humanize_seed": 141827750,
+    "sections": 8,
+    "bars": 32,
+    "variation": [
+      "transposition",
+      "retrograde",
+      "inversion",
+      "augmentation",
+      "diminution",
+      "density-rise"
+    ]
+  },
+  "notes": "grid-locked concrete layer; off-grid onsets == 0.",
+  "sha256": "a99dae61e68123b328805dc364c692a765b9a84e73d7aef05e0644e99e14d6d6",
+  "bytes": 11422,
+  "created_utc": "2026-11-07T01:12:56.772989+00:00",
+  "provenance_version": "1.0"
+}

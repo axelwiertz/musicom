@@ -1,0 +1,14 @@
+lambda (beats/step) = 1.0
+eigenvector (groove offsets, beats) = [0, 0.0, 0.5, 0.0]
+cyclicity (bar, steps) = 4
+  k=0 onsets=[0.0, 0.0, 0.0, 0.0]
+  k=1 onsets=[1.0, 0.5, 1.5, 1.0]
+  k=2 onsets=[1.5, 2.0, 2.5, 2.0]
+  k=3 onsets=[3.0, 3.0, 3.5, 2.5]
+  k=4 onsets=[4.0, 4.0, 4.0, 4.0]
+  k=5 onsets=[5.0, 4.5, 5.5, 5.0]
+  k=6 onsets=[5.5, 6.0, 6.5, 6.0]
+  k=7 onsets=[7.0, 7.0, 7.5, 6.5]
+  k=8 onsets=[8.0, 8.0, 8.0, 8.0]
+tropical determinant (best bijective voice exchange) = 20
+tropical roots of 0 (+) 3x (+) 0x^2 = [-3.0, 3.0]

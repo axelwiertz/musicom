@@ -1,0 +1,197 @@
+{
+  "perfect_grid": {
+    "Flute": {
+      "onsets": 204,
+      "off_16th": 0,
+      "off_8th": 68
+    },
+    "Guitar": {
+      "onsets": 528,
+      "off_16th": 0,
+      "off_8th": 0
+    },
+    "Rhodes": {
+      "onsets": 144,
+      "off_16th": 0,
+      "off_8th": 0
+    },
+    "Bass": {
+      "onsets": 100,
+      "off_16th": 0,
+      "off_8th": 0
+    },
+    "Drums": {
+      "onsets": 432,
+      "off_16th": 0,
+      "off_8th": 0
+    }
+  },
+  "humanized_grid": {
+    "Flute": {
+      "onsets": 204,
+      "off_16th": 190,
+      "off_8th": 193
+    },
+    "Guitar": {
+      "onsets": 528,
+      "off_16th": 489,
+      "off_8th": 489
+    },
+    "Rhodes": {
+      "onsets": 144,
+      "off_16th": 137,
+      "off_8th": 137
+    },
+    "Bass": {
+      "onsets": 100,
+      "off_16th": 99,
+      "off_8th": 99
+    },
+    "Drums": {
+      "onsets": 432,
+      "off_16th": 321,
+      "off_8th": 321
+    }
+  },
+  "harmony": {
+    "Flute": {
+      "total": 204,
+      "untagged_out_of_scale": 0,
+      "tagged_non_resolving": 0,
+      "strong_violations": 0,
+      "tagged_resolving": 0,
+      "weak_in_scale": 135,
+      "strong_ok": 69
+    },
+    "Guitar": {
+      "total": 528,
+      "untagged_out_of_scale": 0,
+      "tagged_non_resolving": 0,
+      "strong_violations": 0,
+      "tagged_resolving": 0,
+      "weak_in_scale": 256,
+      "strong_ok": 272
+    },
+    "Rhodes": {
+      "total": 144,
+      "untagged_out_of_scale": 0,
+      "tagged_non_resolving": 0,
+      "strong_violations": 0,
+      "tagged_resolving": 0,
+      "weak_in_scale": 0,
+      "strong_ok": 144
+    },
+    "Bass": {
+      "total": 100,
+      "untagged_out_of_scale": 0,
+      "tagged_non_resolving": 0,
+      "strong_violations": 0,
+      "tagged_resolving": 0,
+      "weak_in_scale": 32,
+      "strong_ok": 68
+    }
+  },
+  "humanize": {
+    "Flute": {
+      "seed": 2046371706,
+      "profile": {
+        "timing_sigma_ms": 7.0,
+        "velocity_sigma": 7.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 204,
+      "mean_abs_shift_ticks": 4.931,
+      "max_abs_shift_ticks": 17,
+      "mean_abs_vel_delta": 5.755,
+      "timing_sigma_ticks": 6.72
+    },
+    "Guitar": {
+      "seed": 2046371707,
+      "profile": {
+        "timing_sigma_ms": 7.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 528,
+      "mean_abs_shift_ticks": 4.955,
+      "max_abs_shift_ticks": 20,
+      "mean_abs_vel_delta": 5.182,
+      "timing_sigma_ticks": 6.72
+    },
+    "Rhodes": {
+      "seed": 2046371708,
+      "profile": {
+        "timing_sigma_ms": 7.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.015,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 144,
+      "mean_abs_shift_ticks": 5.993,
+      "max_abs_shift_ticks": 18,
+      "mean_abs_vel_delta": 3.979,
+      "timing_sigma_ticks": 6.72
+    },
+    "Bass": {
+      "seed": 2046371709,
+      "profile": {
+        "timing_sigma_ms": 5.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 100,
+      "mean_abs_shift_ticks": 7.1,
+      "max_abs_shift_ticks": 17,
+      "mean_abs_vel_delta": 3.43,
+      "timing_sigma_ticks": 4.8
+    },
+    "Drums": {
+      "seed": 2046371710,
+      "profile": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.008,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 432,
+      "mean_abs_shift_ticks": 1.28,
+      "max_abs_shift_ticks": 5,
+      "mean_abs_vel_delta": 3.067,
+      "timing_sigma_ticks": 1.92
+    }
+  },
+  "zero_drift": {
+    "perfect": true,
+    "humanized": true,
+    "phase1": true,
+    "length_ticks": 69120
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "artifact": "290-funk-hawkes-suite-humanized.wav",
+  "classification": "ai-assisted",
+  "generator": "FluidSynth render + master() LUFS -13 + Opus encode",
+  "sources": [],
+  "parameters": {
+    "layer": "humanized",
+    "style": "funk",
+    "soundfont": "FluidR3_GM.sf2",
+    "target_lufs": -13,
+    "ceiling_db": -1.0
+  },
+  "notes": "",
+  "sha256": "0a0ca3d04e4a5c6d59cbc5abab00069a4738c776a1daae6c498765d747a80b1a",
+  "bytes": 14033196,
+  "created_utc": "2026-11-07T01:21:28.598608+00:00",
+  "provenance_version": "1.0"
+}

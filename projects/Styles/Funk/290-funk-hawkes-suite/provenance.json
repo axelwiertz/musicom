@@ -1,0 +1,36 @@
+{
+  "project": "290-funk-hawkes-suite",
+  "genre": "Funk",
+  "method": "045 Hawkes Process Self-Exciting Composition (HPSEC)",
+  "key": "F minor",
+  "bpm": 100,
+  "bars": 32,
+  "sections": [
+    "Intro",
+    "Verse",
+    "Chorus",
+    "Break",
+    "Verse2",
+    "Chorus2",
+    "Bridge",
+    "Outro"
+  ],
+  "source": "/opt/data/projects/Styles/Funk/088-funk-hawkes",
+  "redesign": true,
+  "audit_failure": [
+    "index.html missing",
+    "top-level provenance.json missing"
+  ],
+  "seed": 20261107,
+  "variation": [
+    "transposition",
+    "retrograde",
+    "inversion",
+    "augmentation",
+    "diminution",
+    "density-rise",
+    "counterline"
+  ],
+  "generator": "Hawkes HPSEC + musicom rules + humanize (export_dual)",
+  "created_utc": "2026-11-07"
+}

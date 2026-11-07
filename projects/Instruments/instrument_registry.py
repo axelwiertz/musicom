@@ -26,6 +26,7 @@ if _INSTR_DIR not in sys.path:
 # module path (relative to Instruments dir) -> registry key
 _INSTRUMENT_MODULES = {
     "Keys.clavi.clavi": "clavi",
+    "Keys.honky_tonk.honky_tonk": "honky_tonk",
     "Strings.violin.violin": "violin",
     "Strings.harp.harp": "harp",
     "Strings.viola.viola": "viola",
@@ -286,6 +287,7 @@ REED_ORGAN = ALL_INSTRUMENTS["reed_organ"]
 RHODES = ALL_INSTRUMENTS["rhodes"]
 ELECTRIC_PIANO_2 = ALL_INSTRUMENTS["electric_piano_2"]
 DRAWBAR_ORGAN = ALL_INSTRUMENTS["drawbar_organ"]
+HONKY_TONK = ALL_INSTRUMENTS["honky_tonk"]
 TRUMPET = ALL_INSTRUMENTS["trumpet"]
 TROMBONE = ALL_INSTRUMENTS["trombone"]
 FRENCH_HORN = ALL_INSTRUMENTS["french_horn"]
@@ -417,6 +419,8 @@ def registry_table():
             role = "harmony, pad, comp, lead, bass, rhythm, drone, accent"
         elif low == "dulcimer":
             role = "lead, melody, ornament, rhythm, harmony"
+        elif low == "honky-tonk piano":
+            role = "rhythm, harmony, melody, bass, ornament, color"
         elif low == "harpsichord":
             role = "harmony, continuo, melody, ornament, countermelody, accent"
         elif low == "celesta":
@@ -930,3 +934,15 @@ if __name__ == "__main__":
     print("  MUTED_GUITAR.range_min =", MUTED_GUITAR.range_min,
           "MUTED_GUITAR.range_max =", MUTED_GUITAR.range_max)
     print("  MUTED_GUITAR.stem_label =", repr(MUTED_GUITAR.stem_label))
+
+    print()
+    print("=== Honky-tonk Piano (Tack Piano, GM3) ===")
+    print("  HONKY_TONK.midi_program =", HONKY_TONK.midi_program, "(should be 3)")
+    print("  by_name('honky tonk') =", by_name("honky tonk"))
+    print("  by_name('Honky-tonk Piano') =", by_name("Honky-tonk Piano"))
+    print("  by_program(3) =", by_program(3))
+    print("  HONKY_TONK.in_sweet_spot(67) =", HONKY_TONK.in_sweet_spot(67))
+    print("  HONKY_TONK.in_sweet_spot(24) =", HONKY_TONK.in_sweet_spot(24))
+    print("  HONKY_TONK.range_min =", HONKY_TONK.range_min,
+          "HONKY_TONK.range_max =", HONKY_TONK.range_max)
+    print("  HONKY_TONK.stem_label =", repr(HONKY_TONK.stem_label))

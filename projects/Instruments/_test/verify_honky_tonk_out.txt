@@ -1,0 +1,46 @@
+registry: by_name('honky tonk') -> <Instrument Honky-tonk Piano (family=Keys, program=3, range=33-96)>
+registry: by_name('Honky-tonk Piano') -> <Instrument Honky-tonk Piano (family=Keys, program=3, range=33-96)>
+registry: by_program(3) -> <Instrument Honky-tonk Piano (family=Keys, program=3, range=33-96)>
+registry: HONKY_TONK is ALL_INSTRUMENTS['honky_tonk'] -> True
+registry: family=Keys program=3 range=33-96 solo=(48, 84) sweet=(55, 84)
+registry: stem_label='Honky-tonk_Piano' reverb=1.4 pan=0.0
+registry: synthesis=modal synthesis_defaults={'instrument': 'honky_tonk', 'attack': 0.004, 'detune': 0.01, 'stack': 2, 'release': 0.25, 'sustain_level': 0.55, 'decay_S': 0.0001}
+registry: in_sweet_spot(67)=True in_sweet_spot(24)=False in_range(60)=True
+Honky-tonk: program=3 gm='Honky-tonk Piano' stem='Honky-tonk_Piano' sweet=(48, 84) A4=440.0Hz
+Honky-tonk: zones={'bass': (33, 47), 'mid_low': (48, 59), 'mid': (60, 71), 'high': (72, 96)}
+Honky-tonk: art=['ragtime_melody', 'stride_bass', 'stride_chord', 'boogie_ostinato', 'comp_chop', 'octave_tremolo', 'glissando', 'tack_accent', 'sustain_wash', 'dead_thud'] synth=modal reverb=1.4s pan=0.0
+
+Zero-drift: True (OK)
+MIDI: /opt/data/projects/Instruments/_test/honky_tonk_test.mid (245 bytes)
+WAV (solo): /opt/data/projects/Instruments/_test/honky_tonk_test.wav (808748 bytes)
+Spectral check: 4-8kHz buzz energy = 0.5% (OK)
+
+Stem labels (pipeline GM_PROGRAMS, 0-indexed):
+  [0] = 'Acoustic Grand Piano'
+  [1] = 'Bright Acoustic Piano'
+  [2] = 'Electric Grand Piano'
+  [3] = 'Honky-tonk Piano'
+  [4] = 'Electric Piano 1'
+  Honky-tonk -> 'Honky-tonk Piano'
+SF2: /opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2
+SF2 preset 3 -> 'Honky Tonk'
+
+Stems rendered (2 files):
+  track00_Honky-tonk_Piano.wav (808748 bytes)
+  track01_Drums.wav (835628 bytes)
+
+Modal honky bank: measured beat 4.50 Hz (gate 3.5-5.5), AM depth 1.25
+Control (no detuned twin): dominant envelope peak 8.50 Hz
+Additive honky_tonk stack: peak=62.5 (weights sum 1.0, no assert)
+
+Empirical FluidR3 pitch sweep (RMS, velocity 90):
+  note  24 (  C1)  rms=968.4359
+  note  36 (  C2)  rms=582.4634
+  note  48 (  C3)  rms=593.7088
+  note  60 (  C4)  rms=469.0244
+  note  72 (  C5)  rms=238.6199
+  note  84 (  C6)  rms=167.0508
+  note  96 (  C7)  rms=69.3784
+  note 108 (  C8)  rms=99.9496
+
+ALL CHECKS PASSED

@@ -609,6 +609,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Keys | Tango Accordion | 23 | 41–96 | lead, melody, ornament, harmony, accent, pad |
 | Keys | Reed Organ | 20 | 36–96 | harmony, pad, melody, drone, ornament |
 | Keys | Clavi | 7 | 29–89 | lead, rhythm, accent, ornament, countermelody |
+| Keys | Honky-tonk Piano | 3 | 33–96 | rhythm, harmony, melody, bass, ornament, color |
 | Keys | Drawbar Organ | 16 | 24–89 | harmony, pad, comp, lead, bass, rhythm, drone, accent |
 | Keys | Electric Piano 1 (Rhodes) | 4 | 36–96 | harmony, melody, bass, accent, color |
 | Brass | Trumpet | 56 | 54–86 | lead, accent, fanfare |
@@ -679,6 +680,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 45 | Pizzicato Strings | Pizzicato_Strings ✓ (GM_PROGRAMS[45] = "Pizzicato Strings"; FluidR3 preset 45 = "Pizzicato Section" — internal SF2 name differs cosmetically, **no routing impact**) |
 | 46 | Orchestral Harp | Orchestral_Harp ✓ (GM_PROGRAMS[46] = "Orchestral Harp"; FluidR3 preset 46 = "Harp" — one-word SF2 spelling, cosmetic only) |
 | 5 | Electric Piano 2 | Electric_Piano_2 ✓ (GM_PROGRAMS[5] + FluidR3 preset 5 both "Electric Piano 2"; internal SF2 name "Legend EP 2" — cosmetic only, **no routing impact**) |
+| 3 | Honky-tonk Piano | Honky-tonk_Piano ✓ (GM_PROGRAMS[3] = "Honky-tonk Piano"; the sanitizer keeps the HYPHEN — only spaces/parens/slashes are rewritten. FluidR3 preset 3 = "Honky Tonk" — hyphen dropped in the SF2 name, cosmetic only, **no routing impact**; STEM_LABEL = "Honky-tonk_Piano") |
 || 1 | Acoustic Grand Piano | **Bright_Acoustic_Piano** ✗ (list[1]) |
 | 6 | Harpsichord | Harpsichord ✓ (GM_PROGRAMS[6] + FluidR3 preset 6 both "Harpsichord") |
 | 7 | Clavi | **Clavi** ✓ (pipeline GM_PROGRAMS[7] = "Clavi"; FluidR3 preset 7 = "Clavinet" — cosmetic expansion, no routing impact; STEM_LABEL = "Clavi" matches pipeline) |
@@ -2021,3 +2023,39 @@ string on the same pitches) is the definitive comb-filter buzz — octaves
 or zone-splitting only; (3) GM90 "Pad 3 (polysynth)" / GM92 "Pad 5
 (bowed)" / GM93 "Pad 6 (metallic)" / GM94 "Pad 7 (halo)" remain future
 sibling candidates.
+
+**Honky-tonk Piano added** (2026-11-07): GM3 (0-based program 3 = 4th GM
+entry), **Keys-family eleventh entry** — the deliberate-detune tack/saloon
+piano (ragtime, stride, boogie-woogie, country honky-tonk). Verified end-to-end
+through the registry: UnitMatrixComposer stride bar → zero-drift ✓ → MIDI
+(245 B) → FluidSynth WAV solo (808,748 B) ✓; RenderPipeline stem label
+`track00_Honky-tonk_Piano.wav` ✓ (GM_PROGRAMS[3] = "Honky-tonk Piano" — the
+sanitizer keeps the HYPHEN, only spaces/parens/slashes are rewritten; FluidR3
+preset 3 = "Honky Tonk", hyphen dropped, cosmetic only, no routing impact).
+Synthesis **ModalSynth primary** with a custom `HONKY_TONK_MODES` bank where
+every partial is DOUBLED at a +17-cent twin (440.0 / 444.3 Hz): envelope-AM
+measurement on the rendered bank gives a **4.50 Hz beat** (gate 3.5–5.5) with
+AM depth 1.25, vs the no-twin control whose dominant envelope peak is 8.50 Hz
+— the beating IS the instrument, not an artifact. Additive secondary
+(`ADDITIVE_HARMONICS["honky_tonk"]` = [1.0, 0.62, 0.44, 0.27, 0.16, 0.09, 0.04],
+stack 2, detune ±0.010); PhaseModSynth tertiary (ratio 2.01, depth 1.6). Range
+33–96 (A1–C7 — real piano A0–C8, but the patch is mud below A1 and tack-noise
+above C7), sweet spot 55–84, solo 48–84; zones bass 33–47 / mid_low 48–59 /
+mid 60–71 / high 72–96. Role: rhythm, harmony, melody, bass, ornament, color.
+Solo render 4–8 kHz buzz 0.5% (clean, no comb filtering). Empirical FluidR3
+pitch sweep (RMS, notes 24–108 step 12): audible 8/8, no gaps (968→100, the
+natural upright rolloff). Production: REVERB_TAIL 1.4 s (small wooden ROOM,
+not a hall — a hall smears the tack attack), EQ cut 300 Hz cabinet boom, boost
+1800 Hz nasal honk, air shelf 8 kHz +1.5. Registration proof:
+`by_name('honky tonk')` / `by_name('Honky-tonk Piano')` → Honky-tonk Piano,
+`by_program(3)` → Honky-tonk Piano, `in_sweet_spot(67)` True /
+`in_sweet_spot(24)` False, `stem_label = 'Honky-tonk_Piano'`; `registry_table()`
+row "| Keys | Honky-tonk Piano | 3 | 33–96 | rhythm, harmony, melody, bass,
+ornament, color |"; convenience constant `HONKY_TONK`. Writing quirks: (1) the
+detuned unisons mean sustained notes inherently wobble — do NOT also stack a
+second melodic patch on the same pitches (double beating = seasick); (2) keep
+tack-piano chords OPEN (3 notes max in the mid) — thick closed voicings turn the
+dense detuned spectrum to mush; (3) it is a rhythmic/piercing voice, not a
+sub-bass foundation — pair with a real bass below A1. Remaining sibling
+candidates: GM31 "Guitar harmonics", GM55 "Orchestra Hit", GM49 "String
+Ensemble 2", GM36 "Slap Bass 1".

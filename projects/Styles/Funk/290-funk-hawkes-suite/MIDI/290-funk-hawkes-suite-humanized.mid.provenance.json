@@ -1,0 +1,90 @@
+{
+  "artifact": "290-funk-hawkes-suite-humanized.mid",
+  "classification": "ai-assisted",
+  "generator": "Hawkes HPSEC + musicom rules + humanize (phase 2, humanized)",
+  "sources": [
+    "/opt/data/projects/Styles/Funk/088-funk-hawkes"
+  ],
+  "parameters": {
+    "phase": "2",
+    "layer": "humanized",
+    "style": "funk",
+    "key": "F minor",
+    "bpm": 100,
+    "seed": 20261107,
+    "humanize_seed": 141827750,
+    "humanize_profiles": {
+      "Lead": {
+        "timing_sigma_ms": 4.0,
+        "velocity_sigma": 8.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Sax": {
+        "timing_sigma_ms": 4.0,
+        "velocity_sigma": 7.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Cello": {
+        "timing_sigma_ms": 4.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.03,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Piano": {
+        "timing_sigma_ms": 4.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.015,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Bass": {
+        "timing_sigma_ms": 10.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.03,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Drums": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.008,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      }
+    }
+  },
+  "notes": "style-derived seeded humanization (funk profile + per-instrument DNA).",
+  "sha256": "c154d7975f7c3721cdfd2ba931bd7f88dbe12f89b0c942a3426ad233bea010cf",
+  "bytes": 11386,
+  "created_utc": "2026-11-07T01:12:56.773203+00:00",
+  "provenance_version": "1.0"
+}

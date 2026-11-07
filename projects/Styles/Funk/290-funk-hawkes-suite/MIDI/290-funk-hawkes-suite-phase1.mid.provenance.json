@@ -1,0 +1,23 @@
+{
+  "artifact": "290-funk-hawkes-suite-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "Hawkes Process Self-Exciting Composition (Method 045)",
+  "sources": [
+    "/opt/data/projects/Styles/Funk/088-funk-hawkes"
+  ],
+  "parameters": {
+    "phase": "1",
+    "layer": "raw",
+    "style": "funk",
+    "key": "F minor",
+    "bpm": 100,
+    "seed": 20261107,
+    "sections": 8,
+    "bars": 32
+  },
+  "notes": "phase1 raw draft: single voice, OFF-GRID fractional sojourn times, unquantized pitch, no harmony/bass/drums; rework of 088-funk-hawkes (audit FAIL index.html missing).",
+  "sha256": "049b362170f5824d4661a60b21a2a9fef0987558e2ae808e3571775a3755b6fb",
+  "bytes": 2106,
+  "created_utc": "2026-11-07T01:12:56.772703+00:00",
+  "provenance_version": "1.0"
+}
