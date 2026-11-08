@@ -1,0 +1,21 @@
+{
+  "artifact": "291-hiphop-ostinato-loop-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "Ostinato Constraint Writing (Method 015)",
+  "sources": [],
+  "parameters": {
+    "phase": "1",
+    "layer": "raw",
+    "style": "hiphop",
+    "key": "A natural minor",
+    "bpm": 92,
+    "seed": 20261108,
+    "sections": 4,
+    "bars": 16
+  },
+  "notes": "phase1 raw draft: single-voice 8th-note bass ostinato, OFF-GRID fractional onset jitter + unquantized pitch drift; no harmony/pad/lead/drums.",
+  "sha256": "0c902d5b2dc5a91f8de3ee1b80150b308af82a342f04afc6e543e23d878b3abb",
+  "bytes": 1145,
+  "created_utc": "2026-11-08T03:28:41.581522+00:00",
+  "provenance_version": "1.0"
+}

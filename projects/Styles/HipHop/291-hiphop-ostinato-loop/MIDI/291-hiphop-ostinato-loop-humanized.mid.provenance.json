@@ -1,0 +1,66 @@
+{
+  "artifact": "291-hiphop-ostinato-loop-humanized.mid",
+  "classification": "ai-assisted",
+  "generator": "Ostinato 015 + musicom rules + humanize (phase 2, humanized)",
+  "sources": [],
+  "parameters": {
+    "phase": "2",
+    "layer": "humanized",
+    "style": "hiphop",
+    "key": "A natural minor",
+    "bpm": 92,
+    "seed": 20261108,
+    "humanize_seed": 141827757,
+    "humanize_profiles": {
+      "Lead": {
+        "timing_sigma_ms": 4.0,
+        "velocity_sigma": 7.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 6.0,
+        "phrase_corr": 0.3,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Bass": {
+        "timing_sigma_ms": 5.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.3,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Pad": {
+        "timing_sigma_ms": 4.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.015,
+        "layback_ms": 6.0,
+        "phrase_corr": 0.3,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Drums": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.008,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.3,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      }
+    }
+  },
+  "notes": "style-derived seeded humanization (hiphop profile + per-instrument DNA).",
+  "sha256": "4712752b0c60f2fde3fb323b1a4640af493fde241cce080d4acddfed24db8d76",
+  "bytes": 3938,
+  "created_utc": "2026-11-08T03:28:41.582386+00:00",
+  "provenance_version": "1.0"
+}

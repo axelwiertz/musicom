@@ -1,0 +1,30 @@
+{
+  "artifact": "291-hiphop-ostinato-loop-perfect.mid",
+  "classification": "ai-assisted",
+  "generator": "Ostinato 015 + musicom rules (phase 2, grid-locked)",
+  "sources": [],
+  "parameters": {
+    "phase": "2",
+    "layer": "perfect",
+    "style": "hiphop",
+    "key": "A natural minor",
+    "bpm": 92,
+    "seed": 20261108,
+    "humanize_seed": 141827757,
+    "sections": 4,
+    "bars": 16,
+    "form": "aabb",
+    "variation": [
+      "theme",
+      "diminution",
+      "register-shift",
+      "retrograde",
+      "new-contour"
+    ]
+  },
+  "notes": "grid-locked concrete layer; off-grid onsets == 0; static bass ostinato + 4 lead variation passes on top.",
+  "sha256": "a02a5a973f840aa1f0b94b66c46aed8e4ff6ded09bb9d5707bdfe3ee4042e5e5",
+  "bytes": 3941,
+  "created_utc": "2026-11-08T03:28:41.581967+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,172 @@
+{
+  "project": "291-hiphop-ostinato-loop",
+  "genre": "HipHop",
+  "method": "015 Ostinato Constraint Writing",
+  "layer": "concrete",
+  "form": "aabb",
+  "key": "A natural minor",
+  "key_pcs": [
+    0,
+    2,
+    4,
+    5,
+    7,
+    9,
+    11
+  ],
+  "bpm": 92,
+  "bars": 16,
+  "sections": [
+    "A",
+    "A",
+    "B",
+    "B"
+  ],
+  "progression": [
+    "i",
+    "VI",
+    "III",
+    "VII",
+    "i",
+    "VI",
+    "III",
+    "VII",
+    "iv",
+    "v",
+    "VI",
+    "VII",
+    "iv",
+    "v",
+    "VI",
+    "VII"
+  ],
+  "seed": 20261108,
+  "hz_seed": 141827757,
+  "phase1_midi": "/opt/data/projects/Styles/HipHop/291-hiphop-ostinato-loop/MIDI/291-hiphop-ostinato-loop-phase1.mid",
+  "perfect_midi": "/opt/data/projects/Styles/HipHop/291-hiphop-ostinato-loop/MIDI/291-hiphop-ostinato-loop-perfect.mid",
+  "humanized_midi": "/opt/data/projects/Styles/HipHop/291-hiphop-ostinato-loop/MIDI/291-hiphop-ostinato-loop-humanized.mid",
+  "grid_audit": {
+    "Lead:16th": "0/48",
+    "Lead:8th": "0/48",
+    "Bass:16th": "0/140",
+    "Bass:8th": "12/140",
+    "Pad:16th": "0/42",
+    "Pad:8th": "0/42"
+  },
+  "harmony_audit": {
+    "Lead": {
+      "passes": true,
+      "audible": 48,
+      "strong_ok": 32,
+      "weak_in_scale": 16,
+      "tagged": 0,
+      "resolving": 0,
+      "non_resolving": 0,
+      "untagged_out_of_scale": 0,
+      "strong_violations": 0,
+      "collisions": 0
+    },
+    "Bass": {
+      "passes": true,
+      "audible": 140,
+      "strong_ok": 32,
+      "weak_in_scale": 108,
+      "tagged": 0,
+      "resolving": 0,
+      "non_resolving": 0,
+      "untagged_out_of_scale": 0,
+      "strong_violations": 0,
+      "collisions": 0
+    },
+    "Pad": {
+      "passes": true,
+      "audible": 42,
+      "strong_ok": 42,
+      "weak_in_scale": 0,
+      "tagged": 0,
+      "resolving": 0,
+      "non_resolving": 0,
+      "untagged_out_of_scale": 0,
+      "strong_violations": 0,
+      "collisions": 0
+    }
+  },
+  "hz_summary": {
+    "Lead": {
+      "seed": 14324603457,
+      "profile": {
+        "timing_sigma_ms": 4.0,
+        "velocity_sigma": 7.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 6.0,
+        "phrase_corr": 0.3,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 48,
+      "mean_abs_shift_ticks": 4.042,
+      "max_abs_shift_ticks": 9,
+      "mean_abs_vel_delta": 5.375,
+      "timing_sigma_ticks": 2.944
+    },
+    "Bass": {
+      "seed": 14324603458,
+      "profile": {
+        "timing_sigma_ms": 5.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.3,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 140,
+      "mean_abs_shift_ticks": 6.207,
+      "max_abs_shift_ticks": 14,
+      "mean_abs_vel_delta": 3.093,
+      "timing_sigma_ticks": 3.68
+    },
+    "Pad": {
+      "seed": 14324603459,
+      "profile": {
+        "timing_sigma_ms": 4.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.015,
+        "layback_ms": 6.0,
+        "phrase_corr": 0.3,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 42,
+      "mean_abs_shift_ticks": 4.953,
+      "max_abs_shift_ticks": 10,
+      "mean_abs_vel_delta": 3.81,
+      "timing_sigma_ticks": 2.944
+    },
+    "Drums": {
+      "seed": 14324603460,
+      "profile": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.008,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.3,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 240,
+      "mean_abs_shift_ticks": 0.992,
+      "max_abs_shift_ticks": 4,
+      "mean_abs_vel_delta": 3.034,
+      "timing_sigma_ticks": 1.472
+    }
+  }
+}
