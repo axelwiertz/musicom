@@ -1,0 +1,54 @@
+{
+  "job": "random-style production (SP) layer-aligned",
+  "date": "2026-11-08",
+  "method": "SP-119",
+  "method_module": "sound.effects.spectral_resonance_suppressor",
+  "method_desc": "Spectral Resonance Suppressor (Newfangled Audio Fixate:Midrange-style)",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Soul/241-soul-voiceleading-graph-rework/MIDI/241-soul-voiceleading-graph-rework.mid",
+  "source_project": "Soul/241-soul-voiceleading-graph-rework",
+  "style": "soul",
+  "bpm": 92,
+  "key": "D minor (aeolian)",
+  "sp119_params": {
+    "amount": 0.7,
+    "threshold_db": 5.0,
+    "width_bins": 24,
+    "min_freq": 200.0,
+    "max_freq": 6000.0,
+    "attack": 0.05,
+    "release": 0.3
+  },
+  "sample_rate": 44100,
+  "duration_s": 89.12,
+  "effect_metrics": {
+    "waveform_rms_diff": 0.0119,
+    "waveform_max_abs_diff": 0.0819,
+    "midrange_crest_before_db": 50.73,
+    "midrange_crest_after_db": 50.66,
+    "crest_reduction_db": 0.07
+  },
+  "pitch_verification": {
+    "dominant_peak_hz": 294.0,
+    "dominant_note": "D4",
+    "diatonic_frac_before": 0.553,
+    "diatonic_frac_after": 0.559,
+    "per_window_harmonic_energy_before": 0.383,
+    "per_window_harmonic_energy_after": 0.381
+  },
+  "demo_self_test": {
+    "injected_1500hz_resonance_suppression_ratio": 0.0416,
+    "note": "module demo() confirms the tool works hard on a real resonance (96% suppression)"
+  },
+  "master": {
+    "target_lufs": -13.0,
+    "integrated_lufs": -13.0,
+    "true_peak_db": -1.0
+  },
+  "silence_ratio": 0.0595,
+  "outputs": {
+    "full_mix.wav": 15721004,
+    "full_mix.ogg": 1643249,
+    "sp119_suppressed.wav": 15721004,
+    "sp119_suppressed.ogg": 1631045
+  }
+}

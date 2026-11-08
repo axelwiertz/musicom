@@ -1,0 +1,60 @@
+{
+  "full_mix": {
+    "label": "full_mix",
+    "dur_s": 89.12,
+    "frames": 178,
+    "voiced_frames": 170,
+    "median_peak_hz": 294.0,
+    "dominant_pc_in_D_aeolian_frac": 0.553,
+    "median_harmonic_energy_ratio": 0.383,
+    "silence_ratio": 0.0602,
+    "rms_per_sec_first_10": [
+      0.125,
+      0.1111,
+      0.1527,
+      0.1639,
+      0.1288,
+      0.1806,
+      0.134,
+      0.1498,
+      0.1522,
+      0.1204
+    ],
+    "rms_per_sec_last_5": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "sp119_suppressed": {
+    "label": "sp119_suppressed",
+    "dur_s": 89.12,
+    "frames": 178,
+    "voiced_frames": 170,
+    "median_peak_hz": 294.0,
+    "dominant_pc_in_D_aeolian_frac": 0.559,
+    "median_harmonic_energy_ratio": 0.381,
+    "silence_ratio": 0.0595,
+    "rms_per_sec_first_10": [
+      0.1388,
+      0.1205,
+      0.16,
+      0.1707,
+      0.1366,
+      0.1866,
+      0.1414,
+      0.159,
+      0.1558,
+      0.1283
+    ],
+    "rms_per_sec_last_5": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  }
+}
