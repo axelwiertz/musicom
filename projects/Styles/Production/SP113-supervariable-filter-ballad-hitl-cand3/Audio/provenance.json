@@ -1,0 +1,52 @@
+{
+  "method": "SP-113",
+  "module": "sound.effects.supervariable_filter",
+  "style": "pop",
+  "bpm": 72.0,
+  "filter": {
+    "profile": "voltage-controlled morph HP->notch->LP (classic arc)",
+    "cutoff_hz": 1200.0,
+    "res": 0.35,
+    "bandwidth": 0.2,
+    "order": 2,
+    "profile_mod": "cos(2pi t/72.0s) * 0.85",
+    "lp24_variant": {
+      "cutoff_hz": 2600.0,
+      "res": 0.2,
+      "order": 4
+    }
+  },
+  "soundfont": "/opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2",
+  "master": {
+    "svcf_sweep": {
+      "target_lufs": -9.0,
+      "integrated_lufs": -11.03,
+      "true_peak_db": -1.0
+    },
+    "svcf_lp24": {
+      "target_lufs": -9.0,
+      "integrated_lufs": -9.33,
+      "true_peak_db": -1.0
+    },
+    "full_mix": {
+      "target_lufs": -9.0,
+      "integrated_lufs": -9.47,
+      "true_peak_db": -1.0
+    }
+  },
+  "dur_s": 95.79,
+  "pitch": {
+    "full_mix": {
+      "dominant_hz": 232.8,
+      "band_energy_frac": 0.8196
+    },
+    "svcf_sweep": {
+      "dominant_hz": 232.8,
+      "band_energy_frac": 0.6337
+    },
+    "svcf_lp24": {
+      "dominant_hz": 232.8,
+      "band_energy_frac": 0.8797
+    }
+  }
+}

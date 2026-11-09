@@ -41,8 +41,9 @@
 [PASS] binary always possible 
 == 9. in-order walk = gap-free timeline partition of [0,2^L) ==
 [PASS] in-order covers all leaves 
-[PASS] in-order onsets gap-free & ordered 
-  onsets (slots of 8 ): [0, 1, 2, 6]
+[PASS] in-order onsets ordered 
+[PASS] spans tile [0,2^L) gap-free 
+  (sym, onset, span) of 8 slots: [('a1', 0, 4), ('a4', 4, 1), ('a3', 5, 1), ('a2', 6, 2)]
 == 10. min-variance tie-break vs comb (unbalanced) ==
   maxlen balanced-tiebreak=4 (theoretical min 4) comb=8 (n-1=8)
 [PASS] min-variance tie-break reaches min possible maxlen 

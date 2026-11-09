@@ -1,0 +1,41 @@
+registry: by_name('orchestra hit') -> <Instrument Orchestra Hit (family=Synth, program=55, range=36-96)>
+registry: by_program(55) -> <Instrument Orchestra Hit (family=Synth, program=55, range=36-96)>
+registry: ORCHESTRA_HIT is ALL_INSTRUMENTS['orchestra_hit'] -> True
+registry: family=Synth program=55 range=36-96 solo=(48, 84) sweet=(55, 79)
+registry: stem_label='Orchestra_Hit' reverb=1.8 pan=0.0
+registry: synthesis=additive synthesis_defaults={'instrument': 'orchestra_hit', 'attack': 0.005, 'release': 0.35, 'sustain_level': 0.35, 'decay_S': 0.002, 'detune': 0.008, 'stack': 3}
+registry: in_sweet_spot(67)=True in_sweet_spot(24)=False in_range(60)=True
+Orchestra Hit: program=55 gm='Orchestra Hit' stem='Orchestra_Hit' sweet=(48, 84) A4=440.0Hz
+Orchestra Hit: zones={'low': (36, 47), 'mid': (48, 71), 'high': (72, 84), 'top_extension': (85, 96)}
+Orchestra Hit: art=['hit', 'accent', 'stab', 'sfz', 'repeat', 'swell', 'light', 'tick'] synth=additive reverb=1.8s pan=0.0
+
+Zero-drift: True (OK)
+MIDI: /opt/data/projects/Instruments/_test/orchestra_hit_test.mid (205 bytes)
+WAV (solo): /opt/data/projects/Instruments/_test/orchestra_hit_test.wav (851500 bytes)
+Spectral check: 4-8kHz buzz energy = 2.4% (OK)
+
+Stem labels (pipeline GM_PROGRAMS, 0-indexed):
+  [54] = 'Synth Voice'
+  [55] = 'Orchestra Hit'
+  [56] = 'Trumpet'
+  [62] = 'Synth Brass 1'
+  Orchestra Hit -> 'Orchestra Hit'
+SF2: /opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2
+SF2 preset 55 -> 'Orchestra Hit'
+
+Stems rendered (2 files):
+  track00_Orchestra_Hit.wav (851500 bytes)
+  track01_Drums.wav (835628 bytes)
+
+Additive orchestra_hit stack: peak=113.8 (weights sum 1.0, no assert)
+PhaseModSynth hit stab: peak=0.750
+
+Empirical FluidR3 pitch sweep (RMS, velocity 90):
+  note  36 (  C2)  rms=1345.6928
+  note  48 (  C3)  rms=1235.1643
+  note  60 (  C4)  rms=926.6957
+  note  72 (  C5)  rms=756.5326
+  note  84 (  C6)  rms=526.7865
+  note  96 (  C7)  rms=374.3859
+
+ALL CHECKS PASSED

@@ -1,0 +1,10 @@
+{
+  "source": "/opt/data/repos/musicom/projects/Styles/Pop/ballad-hitl/HITL/round0/candidates/cand3-pViol-ldX-ar4-pdpuls-drful-bXo0.mid",
+  "rework": "chord-tone quantize (all pitched voices)",
+  "key": "Dm",
+  "bpm": 72,
+  "bar_ticks": 1920,
+  "pitched_notes": 362,
+  "snapped": 104,
+  "rule": "harmony: snap to nearest chord tone (preserve register + timing)"
+}

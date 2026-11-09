@@ -660,6 +660,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | World | Shakuhachi | 77 | 55–100 | lead, melody, ornament, drone, accent |
 | Synth | Pad 1 (new age) | 88 | 36–96 | pad, harmony, texture, drone, accent |
 | Synth | Pad 2 (warm) | 89 | 36–96 | pad, harmony, texture, drone, accent |
+| Synth | Orchestra Hit | 55 | 36–96 | accent, stab, rhythm, punctuation, texture, lead |
 | Synth | Lead 3 (calliope) | 82 | 60–96 | lead, melody, ornament, accent, countermelody |
 | Synth | Synth Brass 1 | 62 | 36–96 | lead, harmony, accent, stab, pad, countermelody |
 | Synth | Synth Voice | 54 | 36–96 | lead, melody, harmony, pad, countermelody, accent |
@@ -745,6 +746,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 ||| 32 | Acoustic Bass | Acoustic_Bass ✓ (GM_PROGRAMS[32] = "Acoustic Bass"; FluidR3 preset 32 = "Acoustic Bass" — labels match exactly, **no quirk**) |
 |||| 82 | Lead 3 (calliope) | Lead_3_calliope ✓ (GM_PROGRAMS[82] = "Lead 3 (calliope)" → sanitized `Lead_3_calliope` — parens stripped, spaces → underscore; FluidR3 preset 82 = **"Calliope Lead"** — SF2 internal name differs from the GM label, cosmetic only, **no routing impact**; stems are labelled from GM_PROGRAMS) |
 |||| 89 | Pad 2 (warm) | Pad_2_warm ✓ (GM_PROGRAMS[89] = "Pad 2 (warm)" → sanitized `Pad_2_warm` — parens stripped, spaces → underscore; FluidR3 preset 89 = **"Warm Pad"** — SF2 internal name differs from the GM label, cosmetic only, **no routing impact**; STEM_LABEL = "Pad_2_warm" matches the pipeline's real label) |
+|||| 55 | Orchestra Hit | Orchestra_Hit ✓ (GM_PROGRAMS[55] = "Orchestra Hit"; FluidR3 preset 55 = "Orchestra Hit" — labels match exactly, **no quirk**) |
 
 > **Known off-by-one in existing entries**: ~~`trumpet.py` uses 57~~ **FIXED 2026-08-27**: trumpet is now 56 (SF2 preset 56=`SoloTrumpet`). `piano.py`=1 → actually Bright Acoustic Piano (GM #2) — cosmetic label difference only, no routing impact. Legacy registry rows kept as-is for piano; new instruments use 0-indexed programs matching pipeline+SF2.
 
@@ -2059,3 +2061,56 @@ dense detuned spectrum to mush; (3) it is a rhythmic/piercing voice, not a
 sub-bass foundation — pair with a real bass below A1. Remaining sibling
 candidates: GM31 "Guitar harmonics", GM55 "Orchestra Hit", GM49 "String
 Ensemble 2", GM36 "Slap Bass 1".
+
+**Orchestra Hit added** (2026-11-09): GM55, **Synth-family sixth entry** —
+the iconic ONE-SHOT ensemble stab (dense layered brass + strings + choir
+stack fired with a razor attack + fast exponential decay — the
+punctuation of 80s pop, hip-hop, film trailers and game scores: Yes
+"Owner of a Lonely Heart", MTV/network ident stabs, beat drops)
+(instrument.md + orchestra_hit.py), verified end-to-end UnitMatrixComposer
+(1 bar, 1 section, Orchestra Hit SOLO on ch0 + drum-kit context on ch9)
+→ **zero-drift ✓** → MIDI **205 bytes** → FluidSynth WAV **851,500 bytes**
+SOLO render (FluidR3 via `discover_soundfont()`) ✓; RenderPipeline stems
+on disk `track00_Orchestra_Hit.wav` (851,500 B) + `track01_Drums.wav`
+(835,628 B) ✓; stem label `GM_PROGRAMS[55]` = **"Orchestra Hit"** AND
+FluidR3 preset 55 = **"Orchestra Hit"** — labels match exactly, **no
+quirk** (contrast GM74 Flute → "Recorder", GM109 → "Bag pipe", GM111 →
+"Shanai"); solo-render spectral 4–8 kHz buzz **2.4%** (clean single
+voice, no comb-filtering). Synthesis: **Additive primary**
+(`sound/synthesis/additive.py` — the classic recipe IS a dense harmonic
+stack with a razor attack + fast exponential decay:
+`ADDITIVE_HARMONICS["orchestra_hit"]` [1.0, 0.88, 0.75, 0.60, 0.45,
+0.32, 0.20, 0.12], SYNTHESIS_DEFAULTS attack 0.005 s, decay_S 0.002 —
+FAST collapse = the one-shot behaviour, contrast the pads' 1e-4 hold
+recipe —, sustain_level 0.35, detune ±0.008, stack 3), **PhaseModSynth
+secondary** (saw carrier ratio 1.0, depth 3.5 — between synth_brass_1
+3.2 and overdriven 4.0 —, attack 0.005, release 0.40, sustain 0.30),
+**Polysynth tertiary** (saw stack, low-pass 3500, razor gate 0.005,
+decay 0.4, sustain 0.3, 3 unison). Smoke tests: Additive stack peak
+113.8; PhaseModSynth stab peak 0.750. Empirical FluidR3 pitch sweep
+(RMS, velocity 90, notes 36/48/60/72/84/96): preset 55 audible **6/6,
+no gaps** (1345 → 374, smooth rolloff, loudest at the bottom) —
+full-keyboard patch, SF2 never clips a composition. Range 36–96 =
+idiomatic writing band, sweet spot 55–79 (G3–G5 — the classic hit
+register), solo range 48–84. Registration proof: `by_name('orchestra
+hit')` → Orchestra Hit, `by_program(55)` → Orchestra Hit (distinct from
+54 Synth Voice / 56 Trumpet / 62 Synth Brass 1), `in_sweet_spot(67)` =
+True, `in_sweet_spot(24)` = False, `stem_label = 'Orchestra_Hit'`;
+`registry_table()` row "| Synth | Orchestra Hit | 55 | 36–96 | accent,
+stab, rhythm, punctuation, texture, lead |"; convenience constant
+`ORCHESTRA_HIT`. Role: accent (downbeat hits, drop stabs, sfz smashes —
+the punctuation voice), stab (rhythmic hit patterns), rhythm (the hit
+can BE the rhythmic hook), punctuation/texture (riser bottoms, section
+markers — sparse use = maximum impact), lead (rare unison-hit accents
+72–84) — NOT a pad/harmony voice (no sustain — use synth_pad/warm_pad/
+string_ensemble), NOT a bass voice. **One-shot quirk**: the FluidR3
+patch is a sample — it fires once per note-on and decays; a long MIDI
+note does NOT sustain (the muted-guitar lesson). Write short strikes
+(≤ 0.2 bar) and let the decay + reverb work. Production: REVERB_TAIL
+1.8 s (hits want PUNCH, not wash — a one-shot in a 3 s verb is a
+smear), EQ cut 300 Hz / boost 2.5 kHz presence (the stab bite band) /
+9 kHz air shelf, PAN centre (±0.3 L/R spread on wide doubled hits).
+Selection note: GM55 was collision-free — `by_program(55)` had no owner
+and the stem `Orchestra_Hit` was unclaimed. Remaining sibling
+candidates: GM31 "Guitar harmonics", GM49 "String Ensemble 2", GM36
+"Slap Bass 1".

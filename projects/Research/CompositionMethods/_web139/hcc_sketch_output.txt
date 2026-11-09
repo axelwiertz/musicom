@@ -1,0 +1,49 @@
+=== Huffman Coding Composition — sketch ===
+
+--- section A: L=6 (slots=64, slot=30 ticks), H=2.400 bits, L=2.460, Kraft=1.000000 ---
+   motif code  onset dur  pitch-offset
+   M0         0     0  960  -1
+   M3       100   960  240  -1
+   M2       101  1200  240  +1
+   M4      1100  1440  120  +0
+   M7    110100  1560   30  +0
+   M6    110101  1590   30  +2
+   M5     11011  1620   60  +3
+   M1       111  1680  240  +3
+
+--- section B: L=4 (slots=16, slot=120 ticks), H=2.942 bits, L=2.980, Kraft=1.000000 ---
+   motif code  onset dur  pitch-offset
+   M0        00     0  480  -2
+   M5       010   480  240  -1
+   M4       011   720  240  +1
+   M3       100   960  240  -1
+   M2       101  1200  240  +1
+   M7      1100  1440  120  +0
+   M6      1101  1560  120  +2
+   M1       111  1680  240  +3
+
+--- section A': L=5 (slots=32, slot=60 ticks), H=2.518 bits, L=2.580, Kraft=1.000000 ---
+   motif code  onset dur  pitch-offset
+   M4       000     0  240  -3
+   M7     00100   240   60  -3
+   M6     00101   300   60  -1
+   M5      0011   360  120  +0
+   M1        01   480  480  +0
+   M3       100   960  240  -1
+   M2       101  1200  240  +1
+   M0        11  1440  480  +2
+
+--- section C: L=5 (slots=32, slot=60 ticks), H=2.749 bits, L=2.800, Kraft=1.000000 ---
+   motif code  onset dur  pitch-offset
+   M1        00     0  480  -2
+   M3       010   480  240  -1
+   M4       011   720  240  +1
+   M0        10   960  480  +0
+   M2       110  1440  240  +1
+   M5      1110  1680  120  +2
+   M7     11110  1800   60  +3
+   M6     11111  1860   60  +5
+
+validate() -> True: OK
+midi: /opt/data/repos/musicom/projects/Research/outputs/method138_hcc/hcc_sketch.mid (906 bytes)
+SKETCH OK

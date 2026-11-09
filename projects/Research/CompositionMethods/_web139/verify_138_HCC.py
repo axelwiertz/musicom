@@ -158,20 +158,22 @@ check('binary always possible', all(nary_possible(n, 2) for n in range(2, 12)))
 
 print('== 9. in-order walk = gap-free timeline partition of [0,2^L) ==')
 codes, root = huffman(sets['four'])
-def inorder(node, pos, depth, L, out):
+def in_order_sched(node, start, span, L, out):   # each internal node halves its span
     if node.sym is not None:
-        out.append((node.sym, pos * 2 ** (L - depth)))
-        return pos + 1
-    pos = inorder(node.left, pos, depth + 1, L, out)
-    pos = inorder(node.right, pos, depth + 1, L, out)
-    return pos
+        out.append((node.sym, start, span))
+        return
+    half = span // 2
+    in_order_sched(node.left, start, half, L, out)
+    in_order_sched(node.right, start + half, half, L, out)
 L = max(len(c) for c in codes.values())
 out = []
-nleaves = inorder(root, 0, 0, L, out)
-onsets = sorted(o for _, o in out)
-check('in-order covers all leaves', nleaves == len(sets['four']))
-check('in-order onsets gap-free & ordered', onsets == sorted(onsets) and all(onsets[i] < onsets[i+1] for i in range(len(onsets)-1)))
-print('  onsets (slots of', 2 ** L, '):', onsets)
+in_order_sched(root, 0, 2 ** L, L, out)
+onsets = sorted(o for _, o, _ in out)
+spans = [s for _, _, s in out]
+check('in-order covers all leaves', len(out) == len(sets['four']))
+check('in-order onsets ordered', onsets == sorted(onsets))
+check('spans tile [0,2^L) gap-free', sum(spans) == 2 ** L and onsets[0] == 0)
+print('  (sym, onset, span) of', 2 ** L, 'slots:', sorted(out, key=lambda t: t[1]))
 
 print('== 10. min-variance tie-break vs comb (unbalanced) ==')
 ws10 = [(f'k{i}', 1.0) for i in range(9)]            # 9 equal weights

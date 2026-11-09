@@ -1,0 +1,14 @@
+{
+  "full_mix": {
+    "dominant_hz": 232.8,
+    "band_energy_frac": 0.8196
+  },
+  "svcf_sweep": {
+    "dominant_hz": 232.8,
+    "band_energy_frac": 0.6337
+  },
+  "svcf_lp24": {
+    "dominant_hz": 232.8,
+    "band_energy_frac": 0.8797
+  }
+}

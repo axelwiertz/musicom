@@ -1,0 +1,20 @@
+{
+  "method_id": 138,
+  "method": "Huffman Coding Composition (HCC)",
+  "paradigm": "Rules-Based",
+  "layer": "concrete",
+  "registered": "2026-11-09",
+  "engine": "musicom (UnitMatrixComposer, zero-drift gate)",
+  "artifacts": {
+    "midi": "/opt/data/repos/musicom/projects/Research/outputs/method138_hcc/hcc_sketch.mid",
+    "sketch": "/opt/data/repos/musicom/projects/Research/CompositionMethods/_web139/hcc_sketch.py",
+    "sketch_log": "/opt/data/repos/musicom/projects/Research/CompositionMethods/_web139/hcc_sketch_output.txt",
+    "verify": "/opt/data/repos/musicom/projects/Research/CompositionMethods/_web139/verify_138_HCC.py",
+    "verify_log": "/opt/data/repos/musicom/projects/Research/CompositionMethods/_web139/verify_138_output.txt",
+    "wiki_cache": "/opt/data/repos/musicom/projects/Research/CompositionMethods/_web138/wiki_huffman.html",
+    "arxiv_queries": "/opt/data/repos/musicom/projects/Research/CompositionMethods/_web139/q_*.xml"
+  },
+  "verify_summary": "24 fact-checks pass: prefix-free, Kraft equality to 1e-9, brute-force optimality, entropy bound H<=L<H+1, dyadic L=H, depth<=n-1, Zipf usage slope -0.938, n-ary completeness, in-order tiling, min-variance maxlen",
+  "validate": "True (zero-drift gate OK)",
+  "midi_bytes": 906
+}

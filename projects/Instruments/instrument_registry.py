@@ -107,6 +107,7 @@ _INSTRUMENT_MODULES = {
     "Synth.synth_voice.synth_voice": "synth_voice",
     "Synth.calliope.calliope": "calliope",
     "Synth.warm_pad.warm_pad": "warm_pad",
+    "Synth.orchestra_hit.orchestra_hit": "orchestra_hit",
 }
 
 _FIELDS = (
@@ -352,6 +353,7 @@ SYNTH_BRASS_1 = ALL_INSTRUMENTS["synth_brass_1"]
 SYNTH_VOICE = ALL_INSTRUMENTS["synth_voice"]
 CALIOPE = ALL_INSTRUMENTS["calliope"]
 WARM_PAD = ALL_INSTRUMENTS["warm_pad"]
+ORCHESTRA_HIT = ALL_INSTRUMENTS["orchestra_hit"]
 # Voice-like family — one instrument per non-vocal source. The `voice_like`
 # key is the umbrella (vox humana); each member is also addressable directly.
 VOICE_LIKE = ALL_INSTRUMENTS["voice_like"]
@@ -527,6 +529,8 @@ def registry_table():
             role = "lead, melody, harmony, pad, countermelody, accent"
         elif low == "lead 3 (calliope)":
             role = "lead, melody, ornament, accent, countermelody"
+        elif low == "orchestra hit":
+            role = "accent, stab, rhythm, punctuation, texture, lead"
         else:
             role = "lead, harmony, accent"
         rng = f"{inst.range_min}–{inst.range_max}" if inst.range_min else "-"
@@ -946,3 +950,16 @@ if __name__ == "__main__":
     print("  HONKY_TONK.range_min =", HONKY_TONK.range_min,
           "HONKY_TONK.range_max =", HONKY_TONK.range_max)
     print("  HONKY_TONK.stem_label =", repr(HONKY_TONK.stem_label))
+
+    print()
+    print("=== Orchestra Hit (GM55) ===")
+    print("  ORCHESTRA_HIT.midi_program =", ORCHESTRA_HIT.midi_program, "(should be 55)")
+    print("  by_name('orchestra hit') =", by_name("orchestra hit"))
+    print("  by_program(55) =", by_program(55))
+    print("  ORCHESTRA_HIT.in_sweet_spot(67) =", ORCHESTRA_HIT.in_sweet_spot(67))
+    print("  ORCHESTRA_HIT.in_sweet_spot(24) =", ORCHESTRA_HIT.in_sweet_spot(24))
+    print("  ORCHESTRA_HIT.range_min =", ORCHESTRA_HIT.range_min,
+          "ORCHESTRA_HIT.range_max =", ORCHESTRA_HIT.range_max)
+    print("  ORCHESTRA_HIT.stem_label =", repr(ORCHESTRA_HIT.stem_label))
+    print("  ORCHESTRA_HIT.synthesis =", repr(ORCHESTRA_HIT.synthesis))
+    print("  ORCHESTRA_HIT.synthesis_defaults =", ORCHESTRA_HIT.synthesis_defaults)

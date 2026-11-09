@@ -1,0 +1,14 @@
+[PASS] 1 delay law tau=d/v: pred 200.0 ms -> peak at sample 8920 (expect 8920)
+[PASS] 2 halve speed -> double delay: peak at 17740 (expect 17740)
+[PASS] 3 multi-head 1:2:3 readout: peaks at [ 8920 17740 26560] (expect 8920, 17740, 26560)
+[PASS] 4 wow Doppler FM depth: measured peak dev 12.74 Hz vs theory f0*tau*m*w_w = 12.57 Hz (1.4%)
+[PASS] 5 saturation THD drive=0.3: h2 -181.6 dB, h3 -51.4 dB, h5 -101.3 dB (odd-only growth)
+[PASS] 5 saturation THD drive=1.2: h2 -181.2 dB, h3 -28.3 dB, h5 -54.9 dB (odd-only growth)
+[PASS] 6 feedback decay ratio ~ g_fb: echo1 1.0000, echo2 0.6000 (r=0.600), echo3 0.3600 (r=0.600), g_fb=0.6
+[PASS] 6b HF damping lowers centroid per echo: centroid echo1 9655 Hz -> echo3 7065 Hz
+[PASS] 7 hiss accumulates in feedback: tail RMS no-fb 6.91e-04 vs fb 8.68e-04 (126%; theory 1/(1-fb^2) -> 140%)
+[PASS] 8 motor inertia delays first echo: first echo at 9067 (> nominal 8920, ramp start)
+[PASS] 9 zero-drift + determinism: len 50000 == 50000, byte-identical rerun
+[PASS] 10 demo WAV written: /opt/data/repos/musicom/projects/Research/CompositionMethods/_web137/sp137_demo.wav (238184 B, 119070 frames)
+
+=== 12/12 checks passed ===
