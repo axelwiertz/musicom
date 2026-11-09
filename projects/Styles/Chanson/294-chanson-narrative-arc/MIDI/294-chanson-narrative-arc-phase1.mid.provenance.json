@@ -1,0 +1,40 @@
+{
+  "artifact": "294-chanson-narrative-arc-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "Narrative Arc Register Planning (Method 007)",
+  "sources": [],
+  "parameters": {
+    "phase": "1",
+    "layer": "raw",
+    "style": "chanson",
+    "key": "F major",
+    "bpm": 72,
+    "seed": 20261109,
+    "sections": 4,
+    "bars": 32,
+    "form": "strophic",
+    "register_center": [
+      67,
+      72,
+      77,
+      69
+    ],
+    "register_width": [
+      7,
+      7,
+      7,
+      7
+    ],
+    "verse_mean_pitch": {
+      "Verse1": 67.22,
+      "Verse2": 72.0,
+      "Verse3": 76.81,
+      "Verse4": 68.86
+    }
+  },
+  "notes": "phase1 raw draft: single-voice narrative-arc stream; register rises V1->V3 (climax) then falls V4; off-grid onset jitter + unquantized pitch drift; no harmony/counter/bass/pad.",
+  "sha256": "72ada6bcdf33b9077acfcdbe604e5a91c40967420477abd0ba1f824e2d905f83",
+  "bytes": 2229,
+  "created_utc": "2026-11-09T23:04:47.261082+00:00",
+  "provenance_version": "1.0"
+}

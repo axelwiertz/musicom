@@ -1,0 +1,66 @@
+{
+  "artifact": "294-chanson-narrative-arc-humanized.mid",
+  "classification": "ai-assisted",
+  "generator": "Narrative Arc Register Planning 007 + rules + humanize (phase 2, humanized)",
+  "sources": [],
+  "parameters": {
+    "phase": "2",
+    "layer": "humanized",
+    "style": "chanson",
+    "key": "F major",
+    "bpm": 72,
+    "seed": 20261109,
+    "humanize_seed": 263394711,
+    "humanize_profiles": {
+      "Lead": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.03,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.45,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Counter": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 7.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.45,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Accordion": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.015,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.45,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Bass": {
+        "timing_sigma_ms": 10.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.03,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.45,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      }
+    }
+  },
+  "notes": "style-derived seeded humanization (default profile + per-instrument DNA).",
+  "sha256": "5ff73a246e61057f6ded550bea6700cf6741f5f47effa7a4c3f63bf168170bc8",
+  "bytes": 5458,
+  "created_utc": "2026-11-09T23:04:47.262015+00:00",
+  "provenance_version": "1.0"
+}

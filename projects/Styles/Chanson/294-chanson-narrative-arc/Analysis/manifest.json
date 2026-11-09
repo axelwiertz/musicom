@@ -1,0 +1,383 @@
+{
+  "project": "294-chanson-narrative-arc",
+  "genre": "Chanson",
+  "method": "007 Narrative Arc Register Planning",
+  "layer": "concrete",
+  "form": "strophic",
+  "key": "F major",
+  "key_pcs": [
+    0,
+    2,
+    4,
+    5,
+    7,
+    9,
+    10
+  ],
+  "bpm": 72,
+  "bars": 32,
+  "sections": [
+    "Verse1",
+    "Verse2",
+    "Verse3",
+    "Verse4"
+  ],
+  "progression": [
+    1,
+    6,
+    2,
+    5,
+    1,
+    6,
+    4,
+    5,
+    1,
+    6,
+    2,
+    5,
+    1,
+    6,
+    4,
+    5,
+    1,
+    6,
+    2,
+    5,
+    1,
+    6,
+    4,
+    5,
+    1,
+    6,
+    2,
+    5,
+    1,
+    6,
+    4,
+    1
+  ],
+  "progression_pcs": {
+    "0": [
+      0,
+      5,
+      9
+    ],
+    "1": [
+      2,
+      5,
+      9
+    ],
+    "2": [
+      2,
+      7,
+      10
+    ],
+    "3": [
+      0,
+      4,
+      7
+    ],
+    "4": [
+      0,
+      5,
+      9
+    ],
+    "5": [
+      2,
+      5,
+      9
+    ],
+    "6": [
+      2,
+      5,
+      10
+    ],
+    "7": [
+      0,
+      4,
+      7
+    ],
+    "8": [
+      0,
+      5,
+      9
+    ],
+    "9": [
+      2,
+      5,
+      9
+    ],
+    "10": [
+      2,
+      7,
+      10
+    ],
+    "11": [
+      0,
+      4,
+      7
+    ],
+    "12": [
+      0,
+      5,
+      9
+    ],
+    "13": [
+      2,
+      5,
+      9
+    ],
+    "14": [
+      2,
+      5,
+      10
+    ],
+    "15": [
+      0,
+      4,
+      7
+    ],
+    "16": [
+      0,
+      5,
+      9
+    ],
+    "17": [
+      2,
+      5,
+      9
+    ],
+    "18": [
+      2,
+      7,
+      10
+    ],
+    "19": [
+      0,
+      4,
+      7
+    ],
+    "20": [
+      0,
+      5,
+      9
+    ],
+    "21": [
+      2,
+      5,
+      9
+    ],
+    "22": [
+      2,
+      5,
+      10
+    ],
+    "23": [
+      0,
+      4,
+      7
+    ],
+    "24": [
+      0,
+      5,
+      9
+    ],
+    "25": [
+      2,
+      5,
+      9
+    ],
+    "26": [
+      2,
+      7,
+      10
+    ],
+    "27": [
+      0,
+      4,
+      7
+    ],
+    "28": [
+      0,
+      5,
+      9
+    ],
+    "29": [
+      2,
+      5,
+      9
+    ],
+    "30": [
+      2,
+      5,
+      10
+    ],
+    "31": [
+      0,
+      5,
+      9
+    ]
+  },
+  "register_center": [
+    67,
+    72,
+    77,
+    69
+  ],
+  "register_width": [
+    7,
+    7,
+    7,
+    7
+  ],
+  "verse_mean_pitch_phase1": {
+    "Verse1": 67.22,
+    "Verse2": 72.0,
+    "Verse3": 76.81,
+    "Verse4": 68.86
+  },
+  "seed": 20261109,
+  "hz_seed": 263394711,
+  "phase1_midi": "/opt/data/projects/Styles/Chanson/294-chanson-narrative-arc/MIDI/294-chanson-narrative-arc-phase1.mid",
+  "perfect_midi": "/opt/data/projects/Styles/Chanson/294-chanson-narrative-arc/MIDI/294-chanson-narrative-arc-perfect.mid",
+  "humanized_midi": "/opt/data/projects/Styles/Chanson/294-chanson-narrative-arc/MIDI/294-chanson-narrative-arc-humanized.mid",
+  "grid_audit": {
+    "Lead:16th": "0/253",
+    "Lead:8th": "142/253",
+    "Counter:16th": "0/128",
+    "Counter:8th": "0/128",
+    "Accordion:16th": "0/203",
+    "Accordion:8th": "0/203",
+    "Bass:16th": "0/64",
+    "Bass:8th": "0/64"
+  },
+  "harmony_audit": {
+    "Lead": {
+      "passes": true,
+      "audible": 253,
+      "strong_ok": 27,
+      "weak_in_scale": 226,
+      "tagged": 0,
+      "resolving": 0,
+      "non_resolving": 0,
+      "untagged_out_of_scale": 0,
+      "strong_violations": 0,
+      "collisions": 0
+    },
+    "Counter": {
+      "passes": true,
+      "audible": 128,
+      "strong_ok": 0,
+      "weak_in_scale": 128,
+      "tagged": 0,
+      "resolving": 0,
+      "non_resolving": 0,
+      "untagged_out_of_scale": 0,
+      "strong_violations": 0,
+      "collisions": 0
+    },
+    "Accordion": {
+      "passes": true,
+      "audible": 203,
+      "strong_ok": 203,
+      "weak_in_scale": 0,
+      "tagged": 0,
+      "resolving": 0,
+      "non_resolving": 0,
+      "untagged_out_of_scale": 0,
+      "strong_violations": 0,
+      "collisions": 0
+    },
+    "Bass": {
+      "passes": true,
+      "audible": 64,
+      "strong_ok": 64,
+      "weak_in_scale": 0,
+      "tagged": 0,
+      "resolving": 0,
+      "non_resolving": 0,
+      "untagged_out_of_scale": 0,
+      "strong_violations": 0,
+      "collisions": 0
+    }
+  },
+  "hz_summary": {
+    "Lead": {
+      "seed": 26602865811,
+      "profile": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.03,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.45,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 253,
+      "mean_abs_shift_ticks": 3.004,
+      "max_abs_shift_ticks": 12,
+      "mean_abs_vel_delta": 4.371,
+      "timing_sigma_ticks": 4.608
+    },
+    "Counter": {
+      "seed": 26602865812,
+      "profile": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 7.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.45,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 128,
+      "mean_abs_shift_ticks": 3.211,
+      "max_abs_shift_ticks": 9,
+      "mean_abs_vel_delta": 5.359,
+      "timing_sigma_ticks": 4.608
+    },
+    "Accordion": {
+      "seed": 26602865813,
+      "profile": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.015,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.45,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 203,
+      "mean_abs_shift_ticks": 4.621,
+      "max_abs_shift_ticks": 10,
+      "mean_abs_vel_delta": 3.847,
+      "timing_sigma_ticks": 4.608
+    },
+    "Bass": {
+      "seed": 26602865814,
+      "profile": {
+        "timing_sigma_ms": 10.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.03,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.45,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 64,
+      "mean_abs_shift_ticks": 5.266,
+      "max_abs_shift_ticks": 13,
+      "mean_abs_vel_delta": 4.891,
+      "timing_sigma_ticks": 5.76
+    }
+  },
+  "phase1_offgrid": 252
+}
