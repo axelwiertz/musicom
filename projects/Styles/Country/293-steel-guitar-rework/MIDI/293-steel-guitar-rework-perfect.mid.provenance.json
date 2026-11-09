@@ -1,0 +1,118 @@
+{
+  "artifact": "293-steel-guitar-rework-perfect.mid",
+  "classification": "ai-assisted",
+  "generator": "random-walk + musicom rules (grid-locked)",
+  "sources": [
+    "038-steel-guitar-demo/MIDI/country_ensemble_16bar.mid",
+    "293-steel-guitar-rework-phase1.mid"
+  ],
+  "parameters": {
+    "phase": "2-perfect",
+    "key": "G",
+    "bpm": 90,
+    "style": "country",
+    "humanize_seed": 3258718210,
+    "humanize_profiles": {
+      "Steel Guitar": {
+        "seed": 329130539210,
+        "profile": {
+          "timing_sigma_ms": 9.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.02,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.5,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 78,
+        "mean_abs_shift_ticks": 3.59,
+        "max_abs_shift_ticks": 17,
+        "mean_abs_vel_delta": 5.692,
+        "timing_sigma_ticks": 6.48
+      },
+      "Fiddle": {
+        "seed": 329130539211,
+        "profile": {
+          "timing_sigma_ms": 9.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.02,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.5,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 32,
+        "mean_abs_shift_ticks": 4.781,
+        "max_abs_shift_ticks": 13,
+        "mean_abs_vel_delta": 5.562,
+        "timing_sigma_ticks": 6.48
+      },
+      "Rhythm Guitar": {
+        "seed": 329130539212,
+        "profile": {
+          "timing_sigma_ms": 9.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.02,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.5,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 120,
+        "mean_abs_shift_ticks": 5.492,
+        "max_abs_shift_ticks": 14,
+        "mean_abs_vel_delta": 4.625,
+        "timing_sigma_ticks": 6.48
+      },
+      "Bass": {
+        "seed": 329130539213,
+        "profile": {
+          "timing_sigma_ms": 5.0,
+          "velocity_sigma": 4.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.01,
+          "layback_ms": 8.0,
+          "phrase_corr": 0.5,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 40,
+        "mean_abs_shift_ticks": 6.4,
+        "max_abs_shift_ticks": 12,
+        "mean_abs_vel_delta": 3.225,
+        "timing_sigma_ticks": 3.6
+      },
+      "Drums": {
+        "seed": 329130539214,
+        "profile": {
+          "timing_sigma_ms": 2.0,
+          "velocity_sigma": 4.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.008,
+          "layback_ms": 0.0,
+          "phrase_corr": 0.5,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 256,
+        "mean_abs_shift_ticks": 0.984,
+        "max_abs_shift_ticks": 4,
+        "mean_abs_vel_delta": 3.031,
+        "timing_sigma_ticks": 1.44
+      }
+    }
+  },
+  "notes": "Redesign of 038-steel-guitar-demo (all 6 standards failed).",
+  "sha256": "35eac3be9074f8a651458349b043d78ceb1b5e7367ce10a053c63609a301d525",
+  "bytes": 4443,
+  "created_utc": "2026-11-09T01:17:11.813885+00:00",
+  "provenance_version": "1.0"
+}

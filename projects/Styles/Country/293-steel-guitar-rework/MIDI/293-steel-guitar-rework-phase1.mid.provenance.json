@@ -1,0 +1,20 @@
+{
+  "artifact": "293-steel-guitar-rework-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "random-walk (raw, pre-rules)",
+  "sources": [
+    "038-steel-guitar-demo/MIDI/country_ensemble_16bar.mid"
+  ],
+  "parameters": {
+    "phase": 1,
+    "key": "G",
+    "bpm": 90,
+    "seed": 293,
+    "note": "unquantized + out-of-key by construction"
+  },
+  "notes": "Phase 1 raw generative draft (single voice).",
+  "sha256": "dc901698d347a921dad74893c8965515864fb670be9ca0f49a6f250e78e99ecd",
+  "bytes": 1035,
+  "created_utc": "2026-11-09T01:17:11.771112+00:00",
+  "provenance_version": "1.0"
+}
