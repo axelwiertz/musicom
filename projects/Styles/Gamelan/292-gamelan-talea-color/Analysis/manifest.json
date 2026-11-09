@@ -1,0 +1,333 @@
+{
+  "project": "292-gamelan-talea-color",
+  "genre": "Gamelan",
+  "method": "032 Isorhythmic Talea-Color Mapping",
+  "layer": "concrete",
+  "form": "through-composed",
+  "key": "C major pentatonic (slendro)",
+  "key_pcs": [
+    0,
+    2,
+    4,
+    7,
+    9
+  ],
+  "bpm": 100,
+  "bars": 24,
+  "sections": [
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5",
+    "S6"
+  ],
+  "talea": [
+    2,
+    3,
+    2,
+    2,
+    3,
+    2,
+    2
+  ],
+  "color": [
+    72,
+    76,
+    81,
+    79,
+    74
+  ],
+  "gong_degrees": [
+    0,
+    3,
+    2,
+    0,
+    4,
+    2,
+    1,
+    4,
+    2,
+    0,
+    3,
+    2,
+    1,
+    4,
+    0,
+    1,
+    3,
+    1,
+    4,
+    3,
+    0,
+    3,
+    4,
+    0
+  ],
+  "progression_pcs": {
+    "0": [
+      0,
+      4,
+      9
+    ],
+    "1": [
+      0,
+      4,
+      7
+    ],
+    "2": [
+      2,
+      4,
+      9
+    ],
+    "3": [
+      0,
+      4,
+      9
+    ],
+    "4": [
+      2,
+      7,
+      9
+    ],
+    "5": [
+      2,
+      4,
+      9
+    ],
+    "6": [
+      0,
+      2,
+      7
+    ],
+    "7": [
+      2,
+      7,
+      9
+    ],
+    "8": [
+      2,
+      4,
+      9
+    ],
+    "9": [
+      0,
+      4,
+      9
+    ],
+    "10": [
+      0,
+      4,
+      7
+    ],
+    "11": [
+      2,
+      4,
+      9
+    ],
+    "12": [
+      0,
+      2,
+      7
+    ],
+    "13": [
+      2,
+      7,
+      9
+    ],
+    "14": [
+      0,
+      4,
+      9
+    ],
+    "15": [
+      0,
+      2,
+      7
+    ],
+    "16": [
+      0,
+      4,
+      7
+    ],
+    "17": [
+      0,
+      2,
+      7
+    ],
+    "18": [
+      2,
+      7,
+      9
+    ],
+    "19": [
+      0,
+      4,
+      7
+    ],
+    "20": [
+      0,
+      4,
+      9
+    ],
+    "21": [
+      0,
+      4,
+      7
+    ],
+    "22": [
+      2,
+      7,
+      9
+    ],
+    "23": [
+      0,
+      4,
+      9
+    ]
+  },
+  "seed": 20261108,
+  "hz_seed": 263394696,
+  "phase1_midi": "/opt/data/projects/Styles/Gamelan/292-gamelan-talea-color/MIDI/292-gamelan-talea-color-phase1.mid",
+  "perfect_midi": "/opt/data/projects/Styles/Gamelan/292-gamelan-talea-color/MIDI/292-gamelan-talea-color-perfect.mid",
+  "humanized_midi": "/opt/data/projects/Styles/Gamelan/292-gamelan-talea-color/MIDI/292-gamelan-talea-color-humanized.mid",
+  "grid_audit": {
+    "Balungan:16th": "0/167",
+    "Balungan:8th": "72/167",
+    "Kotekan:16th": "0/384",
+    "Kotekan:8th": "192/384",
+    "Saron:16th": "0/159",
+    "Saron:8th": "0/159",
+    "Gong:16th": "0/24",
+    "Gong:8th": "0/24"
+  },
+  "harmony_audit": {
+    "Balungan": {
+      "passes": true,
+      "audible": 167,
+      "strong_ok": 23,
+      "weak_in_scale": 144,
+      "tagged": 0,
+      "resolving": 0,
+      "non_resolving": 0,
+      "untagged_out_of_scale": 0,
+      "strong_violations": 0,
+      "collisions": 0
+    },
+    "Kotekan": {
+      "passes": true,
+      "audible": 384,
+      "strong_ok": 48,
+      "weak_in_scale": 336,
+      "tagged": 0,
+      "resolving": 0,
+      "non_resolving": 0,
+      "untagged_out_of_scale": 0,
+      "strong_violations": 0,
+      "collisions": 0
+    },
+    "Saron": {
+      "passes": true,
+      "audible": 159,
+      "strong_ok": 159,
+      "weak_in_scale": 0,
+      "tagged": 0,
+      "resolving": 0,
+      "non_resolving": 0,
+      "untagged_out_of_scale": 0,
+      "strong_violations": 0,
+      "collisions": 0
+    },
+    "Gong": {
+      "passes": true,
+      "audible": 24,
+      "strong_ok": 24,
+      "weak_in_scale": 0,
+      "tagged": 0,
+      "resolving": 0,
+      "non_resolving": 0,
+      "untagged_out_of_scale": 0,
+      "strong_violations": 0,
+      "collisions": 0
+    }
+  },
+  "hz_summary": {
+    "Balungan": {
+      "seed": 26602864296,
+      "profile": {
+        "timing_sigma_ms": 7.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 167,
+      "mean_abs_shift_ticks": 3.748,
+      "max_abs_shift_ticks": 12,
+      "mean_abs_vel_delta": 3.862,
+      "timing_sigma_ticks": 5.6
+    },
+    "Kotekan": {
+      "seed": 26602864297,
+      "profile": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.008,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 384,
+      "mean_abs_shift_ticks": 1.052,
+      "max_abs_shift_ticks": 5,
+      "mean_abs_vel_delta": 3.068,
+      "timing_sigma_ticks": 1.6
+    },
+    "Saron": {
+      "seed": 26602864298,
+      "profile": {
+        "timing_sigma_ms": 7.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.015,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 159,
+      "mean_abs_shift_ticks": 3.881,
+      "max_abs_shift_ticks": 13,
+      "mean_abs_vel_delta": 3.893,
+      "timing_sigma_ticks": 5.6
+    },
+    "Gong": {
+      "seed": 26602864299,
+      "profile": {
+        "timing_sigma_ms": 10.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.03,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 24,
+      "mean_abs_shift_ticks": 9.042,
+      "max_abs_shift_ticks": 21,
+      "mean_abs_vel_delta": 4.875,
+      "timing_sigma_ticks": 8.0
+    }
+  },
+  "phase1_offgrid": 162
+}

@@ -1,0 +1,214 @@
+===== _web138/wiki_langton.html =====
+ 
+ Langton's ant - Wikipedia 
+ Jump to content 
+ Main menu 
+ Main menu
+ move to sidebar 
+ hide 
+ Navigation
+ Main page 
+ Contents 
+ Current events 
+ Random article 
+ About Wikipedia 
+ Contact us 
+ Contribute
+ Help 
+ Learn to edit 
+ Community portal 
+ Recent changes 
+ Upload file 
+ Special pages 
+ Search 
+ Search 
+ Appearance 
+ Donate 
+ Create account 
+ Log in 
+ Personal tools 
+ Donate 
+ Create account 
+ Log in 
+ Contents
+ move to sidebar 
+ hide 
+ (Top)
+ 1 
+ Rules 
+ 2 
+ Modes of behavior 
+ 3 
+ Computational properties 
+ 4 
+ Extension to multiple colors 
+ 5 
+ Extension to multiple states 
+ 6 
+ Extension to multiple ants 
+ 7 
+ See also 
+ 8 
+ References 
+ 9 
+ External links 
+ Toggle the table of contents 
+ Langton's ant 
+ 16 languages 
+ Català 
+ Deutsch 
+ Español 
+ فارسی 
+ Français 
+ עברית 
+ Հայերեն 
+ Italiano 
+ 日本語 
+ 한국어 
+ Polski 
+ Português 
+ Русский 
+ Svenska 
+ Українська 
+ 中文 
+ Edit links 
+ Article 
+ Talk 
+ English 
+ Read 
+ Edit 
+ View history 
+ Save 
+ Tools 
+ Tools
+ move to sidebar 
+ hide 
+ Actions
+ Read 
+ Edit 
+ View history 
+ Save 
+ General
+ What links here 
+ Related changes 
+ Upload file 
+ Permanent link 
+ Page information 
+ Cite this page 
+ Get shortened URL 
+ Switch to legacy parser 
+ Print/export
+ Download as PDF 
+ Printable version 
+ In other projects
+ Wikimedia Commons 
+ Wikidata item 
+ Appearance
+ move to sidebar 
+ hide 
+ From Wikipedia, the free encyclopedia
+ Two-dimensional Turing machine with emergent behavior
+ Langton's ant after 11,000 steps. A red pixel shows the ant's location. 
+ Langton's ant is a two-dimensional Turing machine with a very simple set of rules but complex emergent behavior. It was invented by Chris Langton in 1986 and runs on a square lattice of black and white cells. [ 1 ] The idea has been generalized in several different ways, such as turmites which add more colors and more states.
+ Rules
+ [ edit ] 
+ Animation of first 200 steps of Langton's ant 
+ Squares on a plane are colored variously either black or white. One square is arbitrarily identified as the "ant". The ant can travel in any of the four cardinal directions at each step it takes. The "ant" moves according to the rules below:
+ At a white square, turn 90° clockwise, flip the color of the square, move forward one unit
+ At a black square, turn 90° counter-clockwise, flip the color of the square, move forward one unit
+ Langton's ant can also be described as a cellular automaton , where the grid is colored black or white and the "ant" square has one of eight different colors assigned to encode the combination of black/white state and the current direction of motion of the ant. [ 2 ] 
+ Modes of behavior
+ [ edit ] 
+ These simple rules lead to complex behavior. Three distinct modes of behavior are apparent, [ 3 ] when starting on a completely white grid.
+ Simplicity. During the first few hundred moves it creates very simple patterns which are often symmetric .
+ Chaos. After a few hundred moves, a large, irregular pattern of black and white squares appears. The ant traces a pseudo-random path until 9,977 steps.
+ Emergent order. Finally the ant starts building a recurrent "highway" pattern of 104 steps that repeats indefinitely.
+ All finite initial configurations tested eventually converge to the same repetitive pattern, suggesting that the "highway" is an attractor of Langton's ant, but no one has been able to prove that this is true for all such initial configurations. It is only known that the ant's trajectory is always unbounded regardless of the initial configuration [ 4 ]   – this result was incorrectly attributed and is known as the Cohen -Kong theorem. [ 5 ] 
+ Computational properties
+ [ edit ] 
+ In 2000, Gajardo et al. showed a construction that calculates any boolean circuit using the trajectory of a single instance of Langton's ant. [ 2 ] 
+ Extension to multiple colors
+ [ edit ] 
+ Greg Turk and Jim Propp considered a simple extension to Langton's ant where instead of just two colors, more colors are used. [ 6 ] The colors are modified in a cyclic fashion. A simple naming scheme is used: for each of the successive colors, a letter "L" or "R" is used to indicate whether a left or right turn should be taken. Langton's ant has the name "RL" in this naming scheme.
+ Some of these extended Langton's ants produce patterns that become symmetric over and over again. One of the simplest examples is the ant "RLLR". One sufficient condition for this to happen is that the ant's name, seen as a cyclic list, consists of consecutive pairs of identical letters "LL" or "RR". The proof involves Truchet tiles .
+ Some example patterns in the multiple-color extension of Langton's ants:
+ RLR: Grows chaotically. It is not known whether this ant ever produces a highway.
+ LLRR: Grows symmetrically.
+ LRRRRRLLR: Fills space in a square around itself.
+ LLRRRLRLRLLR: Creates a convoluted highway.
+ RRLLLRLLLRRR: Creates a filled triangle shape that grows and moves after 15900~ iterations.
+ L 2 NNL 1 L 2 L 1 : Hexagonal grid, grows circularly.
+ L 1 L 2 NUL 2 L 1 R 2 : Hexagonal grid, spiral growth.
+ R 1 R 2 NUR 2 R 1 L 2 : Animation.
+ The hexagonal grid permits up to six different rotations, which are notated here as N (no change), R 1 (60° clockwise), R 2 (120° clockwise), U (180°), L 2 (120° counter-clockwise), L 1 (60° counter-clockwise).
+ Extension to multiple states
+ [ edit ] 
+ Main article: Turmite 
+ A further extension of Langton's ants is to consider multiple states of the Turing machine – as if the ant itself has a color that can change. These ants are called turmites , a contraction of "Turing machine termites ". Common behaviours include the production of highways, chaotic growth and spiral growth. [ 7 ] 
+ Some example turmites:
+ Spiral growth.
+ Semi-chaotic growth.
+ Production of a highway after a period of chaotic growth.
+ Chaotic growth with a distinctive texture.
+ Growth with a distinctive texture inside an expanding frame.
+ Constructing a Fibonacci spiral .
+ Constructing a growing diamond
+ Extension to multiple ants
+ [ edit ] 
+ A colony (as an absolute oscillator) builds a triangle 
+ Multiple Langton's ants can co-exist on the 2D plane, and their interactions give rise to complex, higher-order automata that collectively build a wide variety of organized structures. 
+ There are different ways of modelling their interaction and the results of the simulation may strongly depend on the choices made. [ 8 ] 
+ Multiple turmites can co-exist on the 2D plane as long as there is a rule that defines what happens when they meet. Ed Pegg, Jr. considered ants that can turn for example both left and right, splitting in two and annihilating each other when they meet. [ 9 ] 
+ See also
+ [ edit ] 
+ Conway's Game of Life   – Two-dimensional cellular automaton 
+ Langton's loops   – Self-reproducing cellular automaton patterns 
+ Paterson's worms   – Family of cellular automata to model feeding behaviour 
+ References
+ [ edit ] 
+ ↑ Langton, Chris G. (1986). "Studying artificial life with cellular automata" (PDF) . Physica D: Nonlinear Phenomena . 22 ( 1– 3): 120– 149. Bibcode : 1986PhyD...22..120L . doi : 10.1016/0167-2789(86)90237-X . hdl : 2027.42/26022 . 
+ 1 2 Gajardo, A.; Moreira, A.; Goles, E. (15 March 2002). "Complexity of Langton's ant" (PDF) . Discrete Applied Mathematics . 117 ( 1– 3): 41– 50. arXiv : nlin/0306022 . doi : 10.1016/S0166-218X(00)00334-6 . S2CID   1107883 . 
+ ↑ Pratchett, Terry; Stewart, Ian; Cohen, Jack (1999). The Science Of Discworld . Ebury Press . ISBN   978-0091865153 . 
+ ↑ Bunimovich, Leonid A.; Troubetzkoy, Serge E. (1992). "Recurrence properties of Lorentz lattice gas cellular automata". Journal of Statistical Physics . 67 ( 1– 2): 289– 302. Bibcode : 1992JSP....67..289B . doi : 10.1007/BF01049035 . S2CID   121346477 . 
+ ↑ Stewart, I. (1994). "The Ultimate in Anty-Particles" (PDF) . Sci. Am . 271 (1): 104– 107. Bibcode : 1994SciAm.271a.104S . doi : 10.1038/scientificamerican0794-104 . Archived from the original (PDF) on 3 March 2016 . Retrieved 6 May 2013 . 
+ ↑ Gale, D.; Propp, J.; Sutherland, S.; Troubetzkoy, S. (1995). "Further Travels with My Ant". Mathematical Entertainments Column, Mathematical Intelligencer . 17 : 48– 56. arXiv : math/9501233 . doi : 10.1007/BF03024370 . S2CID   123800756 . 
+ ↑ Pegg, Jr., Ed. "Turmite" . From MathWorld--A Wolfram Web Resource, created by Eric W. Weisstein . Retrieved 15 October 2009 . . 
+ ↑ Belgacem, S.; Fatès, N. (2012). "Robustness of Multi-agent Models: The Example of Collaboration between Turmites with Synchronous and Asynchronous Updating" (PDF) . Complex Systems . 21 (3): 165– 182. doi : 10.25088/ComplexSystems.21.3.165 . 
+ ↑ Pegg, Jr., Ed. "Math Puzzle" . Retrieved 15 October 2009 . . 
+ External links
+ [ edit ] 
+ Wikimedia Commons has media related to Langton's ant and Turmite .
+ Weisstein, Eric W. "Langton's ant" . MathWorld . 
+ Chris Langton demonstrating multiple ants interacting in a "colony" 
+ Mathematical Recreations column by Ian Stewart using Langton's ant as a metaphor for a theory of everything . Contains the proof that Langton's ant is unbounded.
+ Golly script for generating rules in the multiple color extension of Langton's ant 
+ DataGenetics, Langton's Ant (and Life) 
+ Retrieved from " https://en.wikipedia.org/w/index.php?title=Langton%27s_ant&oldid=1380847088 "
+ Categories : Artificial life 
+ Cellular automaton rules 
+ Turing machine 
+ Metaphors referring to insects 
+ Hidden categories: Articles with short description 
+ Short description matches Wikidata 
+ Use dmy dates from April 2018 
+ This page was last edited on 18 October 2026, at 09:04  (UTC) .
+ Page was rendered with Parsoid .
+ Text is available under the Creative Commons Attribution-ShareAlike 4.0 License ;
+additional terms may apply. By using this site, you agree to the Terms of Use and Privacy Policy . Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc. , a non-profit organization.
+ Privacy policy 
+ About Wikipedia 
+ Disclaimers 
+ Contact Wikipedia 
+ Legal & safety contacts 
+ Code of Conduct 
+ Developers 
+ Statistics 
+ Cookie statement 
+ Mobile view 
+ Search 
+ Search 
+ Toggle the table of contents 
+ Langton's ant 
+ 16 languages 
+ Add topic 
+ 

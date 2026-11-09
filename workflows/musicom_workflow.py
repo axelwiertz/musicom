@@ -317,6 +317,10 @@ SP_METHODS = {
     "SP-144": ("sound.generators.arp1601_seq", "ARP 1601 Sequencer — 16 steps splittable into 2x8 patterns, per-step Skip/Reset switch positions, 3 gate buses w/ clocked Gate-1 accents, pulse-width + per-step PW CV for staccato→legato, scale quantiser after transpose, position-1 CV trigger (Behringer 1601-style)"),
     "SP-145": ("sound.generators.strum_stretch", "Key Editor Strum + Stretch Selection — chord-onset spreading (up/down/alternate/random, linear/ease/exp/s-curve, velocity ramp, jitter, chord grouping) and time-warp of a passage to a target length with accel/rit/s-curve onsets and derivative-scaled note lengths (Steinberg Cubase 16-style)"),
     "SP-146": ("sound.effects.feedback_loop_fx", "Feedback-Loop Echo + Codec Loss — fractional delay whose wobble (wow/flutter/drift), tanh drive, tone band-limiting, all-pass smear and bitrate-derived bit-depth/bandwidth reduction run inside the feedback path, plus offline spectral codec (log-magnitude quantisation + band limit) (XLN Audio RC-20 V2 Echo/Loss-style)"),
+    # 2026-11-09 scan
+    "SP-147": ("sound.synthesis.boids_wavetable", "Boid-Flock Wavetable Synthesis — 1..24 wavetable oscillators per note flying over an nxn grid of single-cycle frames with Reynolds flocking (separation/alignment/cohesion), 12 attractor trajectories, up to 9 predators, tempo-synced motion, per-boid detune + own FM modulator, flock metrics as modulation sources (Morpheral Machines The Swarm-style)"),
+    "SP-148": ("sound.modular.mod_functions", "Modulation Function Generators — 4 multi-segment ramps with linear→exponential per-segment curves and tempo sync, 3 breakpoint trackers incl. 4-step stepped mode, one-pole lag processor with independent rise/fall (Oberheim Matrix-12-style)"),
+    "SP-149": ("sound.generators.perf_seq", "On-The-Fly Performance Sequencer — 8-step cell expanded to 16/32/64 steps, 8-pattern live chain, 24 sequence memories (pitch+duty), forward/reverse/bounce switchable while running, 6 step effects (skip/rest/tie/slide/ratchet/random), swing/lead-lag/note+gate length, 128-step loop recorder into 24 loop memories (Stylophone On-The-Fly-style)"),
 }
 
 

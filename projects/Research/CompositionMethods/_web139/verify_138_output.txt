@@ -1,0 +1,51 @@
+== 1. prefix-free + 2. Kraft equality ==
+  wiki5: kraft=1.000000 prefix_free=True lens=[2, 3]
+[PASS] wiki5 prefix-free 
+[PASS] wiki5 kraft~1 
+  four: kraft=1.000000 prefix_free=True lens=[1, 2, 3]
+[PASS] four prefix-free 
+[PASS] four kraft~1 
+  dyadic: kraft=1.000000 prefix_free=True lens=[1, 2, 3]
+[PASS] dyadic prefix-free 
+[PASS] dyadic kraft~1 
+  zipf10: kraft=1.000000 prefix_free=True lens=[2, 3, 4, 5]
+[PASS] zipf10 prefix-free 
+[PASS] zipf10 kraft~1 
+  flat8: kraft=1.000000 prefix_free=True lens=[3]
+[PASS] flat8 prefix-free 
+[PASS] flat8 kraft~1 
+== 3. optimality vs brute force (n<=6) ==
+[PASS] wiki5 optimal (L=2.2500 == brute best 2.2500) 
+[PASS] four optimal (L=1.8500 == brute best 1.8500) 
+== 4. entropy bound H <= L < H+1 (normalized weights) ==
+[PASS] wiki5 H<=L<H+1 (H=2.2047 L=2.2500) 
+[PASS] four H<=L<H+1 (H=1.7394 L=1.8500) 
+[PASS] dyadic H<=L<H+1 (H=1.7500 L=1.7500) 
+[PASS] zipf10 H<=L<H+1 (H=2.8765 L=2.9340) 
+[PASS] flat8 H<=L<H+1 (H=3.0000 L=3.0000) 
+== 5. dyadic => L == H ==
+[PASS] dyadic L==H 
+== 6. depth <= n-1; len_i <= n-1 ==
+[PASS] wiki5 maxlen 3 <= n-1 4 
+[PASS] four maxlen 3 <= n-1 3 
+[PASS] dyadic maxlen 3 <= n-1 3 
+[PASS] zipf10 maxlen 5 <= n-1 9 
+[PASS] flat8 maxlen 3 <= n-1 7 
+== 7. Zipf weights => usage ~ Zipf (rank-frequency of 2^-len) ==
+  least-squares log-log slope of usage vs rank = -0.938 (Zipf ~ -1)
+[PASS] zipf usage slope ~ -1 (within 0.35) 
+== 8. n-ary completeness ==
+[PASS] ternary n=5 possible (5==1 mod 2) 
+[PASS] ternary n=6 impossible 
+[PASS] quaternary n=10 possible (10==1 mod 3) 
+[PASS] binary always possible 
+== 9. in-order walk = gap-free timeline partition of [0,2^L) ==
+[PASS] in-order covers all leaves 
+[PASS] in-order onsets gap-free & ordered 
+  onsets (slots of 8 ): [0, 1, 2, 6]
+== 10. min-variance tie-break vs comb (unbalanced) ==
+  maxlen balanced-tiebreak=4 (theoretical min 4) comb=8 (n-1=8)
+[PASS] min-variance tie-break reaches min possible maxlen 
+[PASS] comb variant is dramatically longer 
+
+ALL PASS

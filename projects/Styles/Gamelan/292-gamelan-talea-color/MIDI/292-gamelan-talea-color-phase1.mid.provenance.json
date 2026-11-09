@@ -1,0 +1,37 @@
+{
+  "artifact": "292-gamelan-talea-color-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "Isorhythmic Talea-Color Mapping (Method 032)",
+  "sources": [],
+  "parameters": {
+    "phase": "1",
+    "layer": "raw",
+    "style": "gamelan",
+    "key": "C major pentatonic (slendro)",
+    "bpm": 100,
+    "seed": 20261108,
+    "talea": [
+      2,
+      3,
+      2,
+      2,
+      3,
+      2,
+      2
+    ],
+    "color": [
+      72,
+      76,
+      81,
+      79,
+      74
+    ],
+    "sections": 6,
+    "bars": 24
+  },
+  "notes": "phase1 raw draft: single-voice isorhythmic stream, COLOR (5) x TALEA (7) coprime -> shifting alignment; off-grid onset jitter + unquantized pitch drift; no harmony/kotekan/saron/gong.",
+  "sha256": "dfa9a01cab1e54a12edb204c4f5c88a223c9b253451fe440a691928c77adfe97",
+  "bytes": 1521,
+  "created_utc": "2026-11-08T23:12:39.489310+00:00",
+  "provenance_version": "1.0"
+}

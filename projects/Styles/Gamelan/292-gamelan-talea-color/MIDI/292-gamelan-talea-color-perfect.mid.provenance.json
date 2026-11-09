@@ -1,0 +1,39 @@
+{
+  "artifact": "292-gamelan-talea-color-perfect.mid",
+  "classification": "ai-assisted",
+  "generator": "Isorhythmic Talea-Color 032 + musicom rules (phase 2, grid-locked)",
+  "sources": [],
+  "parameters": {
+    "phase": "2",
+    "layer": "perfect",
+    "style": "gamelan",
+    "key": "C major pentatonic (slendro)",
+    "bpm": 100,
+    "seed": 20261108,
+    "humanize_seed": 263394696,
+    "sections": 6,
+    "bars": 24,
+    "form": "through-composed",
+    "talea": [
+      2,
+      3,
+      2,
+      2,
+      3,
+      2,
+      2
+    ],
+    "color": [
+      72,
+      76,
+      81,
+      79,
+      74
+    ]
+  },
+  "notes": "grid-locked concrete layer; off-grid onsets == 0; tiered snap (strong->slendro trichord, weak->pentatonic).",
+  "sha256": "410a209951bf5100d04f0e97dd4e8702fa76e267a4c3cf7d63aa84f597e9f9fc",
+  "bytes": 5940,
+  "created_utc": "2026-11-08T23:12:39.489670+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,66 @@
+{
+  "artifact": "292-gamelan-talea-color-humanized.mid",
+  "classification": "ai-assisted",
+  "generator": "Isorhythmic Talea-Color 032 + rules + humanize (phase 2, humanized)",
+  "sources": [],
+  "parameters": {
+    "phase": "2",
+    "layer": "humanized",
+    "style": "gamelan",
+    "key": "C major pentatonic (slendro)",
+    "bpm": 100,
+    "seed": 20261108,
+    "humanize_seed": 263394696,
+    "humanize_profiles": {
+      "Balungan": {
+        "timing_sigma_ms": 7.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Kotekan": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.008,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Saron": {
+        "timing_sigma_ms": 7.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.015,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Gong": {
+        "timing_sigma_ms": 10.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.03,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      }
+    }
+  },
+  "notes": "style-derived seeded humanization (default profile + per-instrument DNA).",
+  "sha256": "4ca971fe88ded9adb76cc91150c1c808ec3f3137ab322c2b553a3a2e387f2402",
+  "bytes": 5939,
+  "created_utc": "2026-11-08T23:12:39.489867+00:00",
+  "provenance_version": "1.0"
+}
