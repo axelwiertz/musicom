@@ -1,0 +1,27 @@
+{
+  "chosen": "/opt/data/projects/Styles/Blues/233-blues-aco-rework",
+  "genre": "Blues",
+  "primary_midi": "MIDI/233-blues-aco-rework.mid",
+  "standard_failures": [],
+  "redesign_required": false,
+  "decision": "extend",
+  "source_identity": {
+    "genre": "Blues",
+    "key": "E blues scale {2,4,7,9,10,11}",
+    "bpm": 100,
+    "meter": "4/4",
+    "method": "041 ACOPF",
+    "voices": ["Piano", "Bass", "Harmonica", "Trumpet", "Drums"],
+    "sections": 8,
+    "bars": 32
+  },
+  "audit_evidence": {
+    "engine": "UnitMatrixComposer (pass)",
+    "zero_drift": "5 voice tracks all len 61440 ticks (pass)",
+    "off_grid_pitched": 0,
+    "voice_tracks": 5,
+    "phase1_present": true,
+    "provenance_and_index_present": true,
+    "gap_vs_current_standard": "no dual-version -perfect/-humanized export; no humanization layer (added in rework 295)"
+  }
+}

@@ -638,7 +638,9 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Bass | Electric Bass (finger) | 33 | 24–84 | bass, rhythm, countermelody, accent |
 | Bass | Acoustic Bass | 32 | 24–72 | bass, rhythm, countermelody, accent, melody |
 | Bass | Fretless Bass | 35 | 24–72 | bass, melody, countermelody, groove, slide, color |
+| Bass | Slap Bass 1 | 36 | 24–84 | bass, rhythm, groove, accent, ornament, lead |
 | Bass | Synth Bass 1 | 38 | 24–84 | bass, rhythm, groove, accent |
+| Bass | Synth Bass 2 | 39 | 21–96 | bass, rhythm, groove, accent, lead |
 | Percussion | Drum Kit | ch9 | 35–81 | rhythm, groove, accent |
 | Percussion | Glockenspiel | 9 | 79–108 | lead, melody, ornament, accent, countermelody |
 | Percussion | Marimba | 12 | 45–96 | lead, melody, accent, countermelody, harmony |
@@ -739,6 +741,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 || 88 | Pad 1 (new age) | Pad_1_new_age ✓ (GM_PROGRAMS[88] = "Pad 1 (new age)" → sanitized `Pad_1_new_age` — parens stripped, spaces → underscore; FluidR3 preset 88 = **"Fantasia"** — SF2 internal name differs from GM label, cosmetic only, **no routing impact**; preset 89 = "Warm Pad" is the darker sibling) |
 || 38 | Synth Bass 1 | Synth_Bass_1 ✓ (GM_PROGRAMS[38] = "Synth Bass 1"; FluidR3 preset 38 = "Synth Bass 1" — labels match exactly, **no quirk**) |
 | 35 | Fretless Bass | Fretless_Bass ✓ (GM_PROGRAMS[35] + FluidR3 preset 35 both "Fretless Bass" — labels match exactly, **no quirk**) |
+| 36 | Slap Bass 1 | Slap_Bass_1 ✓ (GM_PROGRAMS[36] = "Slap Bass 1"; FluidR3 preset 36 = "Slap Bass" — SF2 drops the number, cosmetic only, **no routing impact**) |
 | 23 | Tango Accordion | Tango_Accordion ✓ (GM_PROGRAMS[23] = "Tango Accordion"; FluidR3 preset 23 = "Bandoneon" — SF2 internal name differs, cosmetic only, **no routing impact**) |
 ||| 44 | Tremolo Strings | Tremolo_Strings ✓ (GM_PROGRAMS[44] = "Tremolo Strings"; FluidR3 preset 44 = "Tremolo" — one-word SF2 spelling, cosmetic only, **no routing impact**) |
 ||| 30 | Distortion Guitar | Distortion_Guitar ✓ (GM_PROGRAMS[30] + FluidR3 preset 30 both "Distortion Guitar" — labels match exactly, **no quirk**) |
@@ -2114,3 +2117,75 @@ Selection note: GM55 was collision-free — `by_program(55)` had no owner
 and the stem `Orchestra_Hit` was unclaimed. Remaining sibling
 candidates: GM31 "Guitar harmonics", GM49 "String Ensemble 2", GM36
 "Slap Bass 1".
+
+**Slap Bass 1 added** (2026-11-10): GM36, **Bass-family sixth entry** — the
+thumb-slap + finger-pop FUNK/DISCO bass voice: slap = strike the string so
+it smacks the fretboard (bright percussive thump + clack), pop = pull and
+release so it snaps back (harmonic-rich bright click). On the double bass
+the technique goes back to New Orleans jazz bands (early 1900s, spread via
+western swing/rockabilly); on the electric bass it is credited to **Larry
+Graham** (Sly and the Family Stone, late 1960s), then funk/disco — Bootsy
+Collins, Louis Johnson, Mark King, Stanley Clarke, Victor Wooten, Flea.
+Files: `Bass/slap_bass/instrument.md` + `slap_bass.py`. Verified end-to-end
+UnitMatrixComposer (1 bar, 1 section, 104 bpm, Slap Bass SOLO on ch0 —
+A-minor 16th-note funk groove with thumb slaps/offbeat pops/ghosts — +
+drum-kit context on ch9) → **zero-drift ✓** → MIDI **247 bytes** →
+FluidSynth WAV **795,948 bytes** SOLO render (FluidR3 via
+`discover_soundfont()`) ✓; RenderPipeline stems on disk
+`track00_Slap_Bass_1.wav` (795,948 B) + `track01_Drums.wav` (760,364 B) ✓;
+solo-render spectral 4–8 kHz buzz **3.5%** (clean single voice, no
+comb-filtering). Stem label: `GM_PROGRAMS[36]` = **"Slap Bass 1"** AND
+FluidR3 preset 36 = **"Slap Bass"** — the SF2 drops the number, cosmetic
+only, **no routing impact** (stems are labelled from GM_PROGRAMS);
+STEM_LABEL = `Slap_Bass_1` matches the pipeline's real label. Synthesis:
+**Karplus-Strong primary** (SP-011 — a plucked string waveguide IS the
+physical model; `loop_gain` **0.9955** — the SHORTEST in the Bass family,
+between muted_guitar 0.9850 and electric bass 0.9970: the slap idiom is
+tight, the muting hand stops the string fast, 0.3–1.0 s ring; `lowpass_hz`
+5500 — BRIGHTER than fingerstyle electric bass 5000: the string-on-
+fretboard clack top-end IS the identity; `excitation` "slap" with
+`noise_component` 0.05 for the clack transient), **PhaseModSynth secondary**
+(FM bright pluck, sine carrier, ratio 2.0 = the pop's octave-ish snap
+sideband, depth 2.2, attack 0.003), **ModalSynth `'string'` weak fallback**.
+Smoke tests: Karplus E2 peak 0.290, head_rms 0.0073 → tail_rms 0.0010 (real
+string decay, not a DC plateau); PhaseModSynth E2 peak 0.799. Empirical
+FluidR3 pitch sweep (RMS, velocity 90, notes 24/28/33/36/40/45/48/52/55/60/
+64/67/72/77/84/86): preset 36 audible **15/15 from 24 to 84** (RMS 1272 →
+423, smooth rolloff, no gaps), **SILENT at 86 (D6)** — the patch ceiling is
+C6=84, never write above it; the patch also plays 21+ (A0–B0 sub-bass
+rumble below the real 4-string instrument). Range 24–84 = idiomatic writing
+band (C1–C6; real 4-string is E1–G4 = 28–67, 5-string adds B0 = 23), sweet
+spot 33–55 (A1–G3 — the E/A/D-string thumb-slap money zone), solo range
+36–60 (C2–C4). Registration proof: `by_name('slap bass')` /
+`by_name('slap bass 1')` → Slap Bass 1, `by_program(36)` → Slap Bass 1
+(distinct from 32 acoustic / 33 electric / 35 fretless / 38–39 synth),
+`in_sweet_spot(48)` = True, `in_sweet_spot(20)` = False, `stem_label =
+'Slap_Bass_1'`; `registry_table()` row "| Bass | Slap Bass 1 | 36 | 24–84 |
+bass, rhythm, groove, accent, ornament, lead |"; convenience constant
+`SLAP_BASS`. Role: bass (slap lines, root-fifth groove, locks with the
+kick — the pattern IS the melody), rhythm (16th-note funk grooves, octave-
+pop fills, ghost-note subdivisions — the bass as percussion), groove
+(syncopated offbeat pops + muted 16ths — the funk engine), accent (hard
+downbeat slaps, sfz hits), ornament (hammer/pull-off runs, double-thumb,
+ghost chattering), lead (rare: slap solos in the 56–72 pop zone) — NOT a
+harmony/pad voice (monophonic — never ask the composer for a 3-note "slap
+chord"), NOT a warm fingerstyle voice (that is GM33), NOT a sub-only voice
+(the snap IS the identity). Production: REVERB_TAIL 1.2 s (tight funk room/
+DI — the slap voice is injected and dry; verb smears the 16th snap;
+synth_bass_1 1.0 / electric_bass 1.4 bracket), EQ cut 250 Hz (low-mid mud
+against the kick — the thump itself is ~100 Hz, keep it), boost **2.8 kHz
++3 dB** (THE slap EQ move — the 2–3 kHz snap/click band where the string
+meets the fretboard), 8 kHz air shelf (string clack — never low-pass a
+slap bass), PAN centre. Writing quirks: (1) monophonic — one note at a
+time; (2) velocity IS the articulation map — slap 85–105, pop 90–110,
+ghost 30–50, accent 95–110 (the transient is 20–30 dB hotter than the
+ring — compress in production); (3) the pop is usually a fourth/fifth/octave
+ABOVE the slap root — write alternating low-slap/high-pop patterns, not
+parallel lines; (4) SF2 honours no portamento — write a slide as a fast
+chromatic run or pitch-bend; (5) **no unison doubling** with another
+melodic patch on the same pitches (2026-09-01 comb-filter rule) — octaves
+or a low bass note an octave+ below are fine, and a drum kit is fine.
+Drive-by fix: registry.md Registry table gained the missing **Synth Bass 2
+| 39** row (added with Slap Bass 1's row; the 2026-09-02 entry never got a
+table row). Remaining sibling candidates: GM31 "Guitar harmonics", GM49
+"String Ensemble 2", GM63 "Synth Brass 2".

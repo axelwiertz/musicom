@@ -1,0 +1,158 @@
+{
+  "project": "295-blues-aco-suite",
+  "source": "Blues/233-blues-aco-rework (extend: all 6 standards pass)",
+  "decision": "extend",
+  "genre": "Blues",
+  "key": "E blues scale {2,4,7,9,10,11}",
+  "bpm": 100,
+  "meter": "4/4",
+  "bars": 40,
+  "sections": [
+    "Intro",
+    "Verse1",
+    "Verse2",
+    "Verse3",
+    "Chorus",
+    "Solo1",
+    "Solo2",
+    "ShoutChorus",
+    "Bridge",
+    "Outro"
+  ],
+  "method": "041 ACOPF",
+  "seed": 20261110,
+  "humanize_seed": 20261110,
+  "best_fitness": 0.21741,
+  "variation_techniques": {
+    "Intro": "augmentation (half-speed sparse)",
+    "Verse3": "diminution (16th pickup feel)",
+    "Solo1": "register shift (+12, octave up)",
+    "Solo2": "transposition (+7, perfect fifth)",
+    "ShoutChorus": "transposition (+5) + density rise",
+    "Bridge": "inversion + augmentation",
+    "Outro": "retrograde + thinning",
+    "Chorus": "density rise (full band)"
+  },
+  "per_section_roots": [
+    45,
+    40,
+    45,
+    45,
+    45,
+    45,
+    40,
+    47,
+    47,
+    47
+  ],
+  "per_section_midpoint_degree": [
+    "IV",
+    "I",
+    "IV",
+    "IV",
+    "IV",
+    "IV",
+    "I",
+    "V",
+    "V",
+    "V"
+  ],
+  "humanize": {
+    "Piano": {
+      "seed": 2046372110,
+      "profile": {
+        "timing_sigma_ms": 10.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.015,
+        "layback_ms": 3.0,
+        "phrase_corr": 0.55,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 320,
+      "mean_abs_shift_ticks": 7.525,
+      "max_abs_shift_ticks": 25,
+      "mean_abs_vel_delta": 3.859,
+      "timing_sigma_ticks": 8.0
+    },
+    "Bass": {
+      "seed": 2046372111,
+      "profile": {
+        "timing_sigma_ms": 10.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.03,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.55,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 160,
+      "mean_abs_shift_ticks": 6.838,
+      "max_abs_shift_ticks": 21,
+      "mean_abs_vel_delta": 4.931,
+      "timing_sigma_ticks": 8.0
+    },
+    "Harmonica": {
+      "seed": 2046372112,
+      "profile": {
+        "timing_sigma_ms": 10.0,
+        "velocity_sigma": 7.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 3.0,
+        "phrase_corr": 0.55,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 288,
+      "mean_abs_shift_ticks": 5.483,
+      "max_abs_shift_ticks": 21,
+      "mean_abs_vel_delta": 5.705,
+      "timing_sigma_ticks": 8.0
+    },
+    "Trumpet": {
+      "seed": 2046372113,
+      "profile": {
+        "timing_sigma_ms": 10.0,
+        "velocity_sigma": 8.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 3.0,
+        "phrase_corr": 0.55,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 84,
+      "mean_abs_shift_ticks": 5.631,
+      "max_abs_shift_ticks": 18,
+      "mean_abs_vel_delta": 6.393,
+      "timing_sigma_ticks": 8.0
+    },
+    "Drums": {
+      "seed": 2046372114,
+      "profile": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.008,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.55,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 388,
+      "mean_abs_shift_ticks": 1.131,
+      "max_abs_shift_ticks": 5,
+      "mean_abs_vel_delta": 3.147,
+      "timing_sigma_ticks": 1.6
+    }
+  },
+  "engine": "musicom.workflows.unitmatrix_composer"
+}

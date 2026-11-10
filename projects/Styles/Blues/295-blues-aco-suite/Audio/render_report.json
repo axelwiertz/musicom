@@ -1,0 +1,20 @@
+[
+  {
+    "base": "295-blues-aco-suite-perfect",
+    "lufs": -14.03,
+    "true_peak_db": -1.0,
+    "silence_ratio": 0.0502,
+    "sr": 44100,
+    "wav_size": 17793836,
+    "ogg_size": 825107
+  },
+  {
+    "base": "295-blues-aco-suite-humanized",
+    "lufs": -14.03,
+    "true_peak_db": -1.0,
+    "silence_ratio": 0.0518,
+    "sr": 44100,
+    "wav_size": 17793836,
+    "ogg_size": 815895
+  }
+]

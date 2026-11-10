@@ -1,0 +1,48 @@
+==============================================================================
+SP-138 STEPS prototype verification — 1.26.4
+==============================================================================
+
+[1-3] two-mass fork ODE: f0=220.00 Hz, mu=8.00, rho=0.020 -> upper mode theory 222.46 Hz
+  measured fork modes: ['222.50 Hz', '220.00 Hz']
+  check1 in-phase mode = f0 present: PASS
+  check2 out-of-phase mode = theory present: PASS
+  beat freq measured 2.500 Hz vs theory 2.461 Hz (period 0.400 vs 0.406 s)
+  check3 energy slosh (beating): PASS
+
+[4] pickup EMF vs tine velocity (small motion): r=1.0000
+  check4 velocity sensing: PASS
+
+[5] pickup intermodulation: |fb-fa|=240 Hz rel 0.277, fb+fa=640 Hz rel 0.746
+  check5 mode intermodulation (JASA 2020 effect): PASS
+
+[6] inharmonic stretch: rendering C4 (261.63 Hz), vel 0.8; linear pickup (pickup_d=100); FFT over 400 ms attack window
+  partials (attack window): f1=262.50 f2=575.00 f3=1177.50 | ratios 2.190 4.486
+  check6 inharmonic stretch (2nd partial in (2.0,2.6), not 2.0): PASS
+
+[7] velocity -> brightness (pickup output, preamp bypassed)
+  mode2/mode1 band ratio: soft 0.3 dB, hard 8.3 dB, delta 7.9 dB
+  check7 velocity->brightness (hard > soft by >6 dB): PASS
+
+[8] damper release (key release at 0.8 s of a 2.0 s note)
+  RMS in [1.0,2.0] s: free 0.7996, damped 0.00232 -> ratio 345.2 (50.8 dB)
+  check8 damper shortens decay (RMS ratio > 10): PASS
+
+[9] tanh preamp odd-only harmonics
+  h2=-326.8 dB, h3=-26.7 dB (tanh: odd-only)
+  check9 preamp saturation: PASS
+
+[10] stereo tremolo anti-phase
+  L/R envelope correlation r=-0.997 (anti-phase -> ~ -1)
+  check10 tremolo: PASS
+
+[11] zero-drift + determinism
+  length exact: 54441 == 54441 (PASS)
+  same seed identical: PASS
+  diff seed differs: PASS
+  check11: PASS
+
+[12] demo phrase -> sp138_demo.wav
+  wrote sp138_demo.wav: 238140 frames, 952604 bytes
+  check12 demo file: PASS
+
+=== 12/12 checks PASS (0 FAIL) ===

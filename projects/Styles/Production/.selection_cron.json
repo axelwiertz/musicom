@@ -1,25 +1,23 @@
 {
   "job": "random-style production (SP) layer-aligned",
-  "date": "2026-11-09",
-  "seed": 20261109,
-  "method": "SP-113",
-  "method_module": "sound.effects.supervariable_filter",
-  "method_desc": "Supervariable VCF \u2014 4-D filter (cutoff/resonance/bandwidth/profile): continuous HP->notch->LP character morph via SVF output blending, 2/3/4-pole LP cascade, BP/X/lp24 modes, voltage-controlled profile modulation (Shear Electronics Relic-style)",
-  "source_midi": "/opt/data/repos/musicom/projects/Styles/Pop/ballad-hitl/HITL/round0/candidates/cand3-pViol-ldX-ar4-pdpuls-drful-bXo0.mid",
-  "source_project": "Pop/ballad-hitl/HITL/round0/candidates/cand3-pViol-ldX-ar4-pdpuls-drful-bXo0.mid",
+  "date": "2026-11-10",
+  "seed": 20261110,
+  "method": "SP-138",
+  "method_module": "sound.effects.spectral_sidechain",
+  "method_desc": "Spectral Sidechain \u2014 STFT log-band ducking driven by competing-track band energy (threshold/ratio/knee, attack/release smoothing), plus blob-map pan/height/depth analysis (Art DSP Canvas 2.0-style)",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Ragtime/206-ragtime-skeleton-refinement/MIDI/206-ragtime-skeleton-refinement.mid",
+  "source_project": "Ragtime/206-ragtime-skeleton-refinement/MIDI/206-ragtime-skeleton-refinement.mid",
   "registry_size": 87,
   "recent_excluded": [
-    "SP-080",
     "SP-097",
     "SP-107",
+    "SP-113",
     "SP-117",
     "SP-119",
     "SP-143",
     "SP-146"
   ],
-  "already_on_source": [
-    "SP-099"
-  ],
+  "already_on_source": [],
   "baseline_excluded": [
     "SP-001"
   ],
@@ -46,6 +44,7 @@
     "SP-077",
     "SP-078",
     "SP-079",
+    "SP-080",
     "SP-081",
     "SP-082",
     "SP-083",
@@ -59,6 +58,7 @@
     "SP-095",
     "SP-096",
     "SP-098",
+    "SP-099",
     "SP-100",
     "SP-101",
     "SP-102",
@@ -71,7 +71,6 @@
     "SP-110",
     "SP-111",
     "SP-112",
-    "SP-113",
     "SP-114",
     "SP-115",
     "SP-116",
@@ -103,8 +102,8 @@
     "SP-148",
     "SP-149"
   ],
-  "n_candidates": 439,
-  "n_well_formed": 327,
-  "n_meaningful": 326,
+  "n_candidates": 443,
+  "n_well_formed": 331,
+  "n_meaningful": 330,
   "rejected_degenerate": []
 }

@@ -1,0 +1,75 @@
+{
+  "method": "SP-138",
+  "module": "sound.effects.spectral_sidechain",
+  "style": "ragtime",
+  "bpm": 120.0,
+  "soundfont": "/opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2",
+  "stem_order": {
+    "track00": "Melody (ch0)",
+    "track01": "Bass (ch1)",
+    "track02": "Comp (ch2)"
+  },
+  "sidechain_params": {
+    "fft_size": 2048,
+    "n_bands": 12,
+    "f_lo": 40.0,
+    "f_hi": 16000.0,
+    "threshold_db": -35.0,
+    "ratio": 8.0,
+    "knee_db": 6.0,
+    "attack_ms": 5.0,
+    "release_ms": 120.0,
+    "mix": 1.0
+  },
+  "treatments": {
+    "canvas2mix": "Canvas2Mix separation across 3 stems (each ducked by loudest competing track)",
+    "bass_duck": "stride bass sidechains melody+comp (classic spectral pump)"
+  },
+  "blob_map": {
+    "dry_avg": [
+      -0.004,
+      0.088,
+      0.055
+    ],
+    "treated_avg": [
+      0.0,
+      0.166,
+      0.003
+    ]
+  },
+  "master": {
+    "canvas2mix": {
+      "target_lufs": -14.0,
+      "integrated_lufs": -15.57,
+      "true_peak_db": -1.0
+    },
+    "bass_duck": {
+      "target_lufs": -14.0,
+      "integrated_lufs": -14.76,
+      "true_peak_db": -1.0
+    },
+    "full_mix": {
+      "target_lufs": -14.0,
+      "integrated_lufs": -14.0,
+      "true_peak_db": -1.0
+    }
+  },
+  "dur_s": 82.48,
+  "pitch": {
+    "full_mix": {
+      "dominant_hz": 392.0,
+      "band_energy_frac": 0.8483,
+      "low_energy_frac": 0.4353
+    },
+    "canvas2mix": {
+      "dominant_hz": 392.0,
+      "band_energy_frac": 0.5312,
+      "low_energy_frac": 0.1969
+    },
+    "bass_duck": {
+      "dominant_hz": 524.1,
+      "band_energy_frac": 0.4857,
+      "low_energy_frac": 0.1345
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "artifact": "295-blues-aco-suite-perfect.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.workflows.unitmatrix_composer",
+  "sources": [],
+  "parameters": {
+    "project": "295-blues-aco-suite",
+    "phase": 2,
+    "style": "Blues",
+    "key": "E (blues scale)",
+    "method": "041 ACOPF",
+    "layer": "concrete",
+    "humanized": false,
+    "quantization": "8th-grid (240) + blues chord-tone snap",
+    "key_pcs": [
+      2,
+      4,
+      7,
+      9,
+      10,
+      11
+    ],
+    "per_section_roots": [
+      45,
+      40,
+      45,
+      45,
+      45,
+      45,
+      40,
+      47,
+      47,
+      47
+    ],
+    "humanize_seed": 20261110,
+    "humanize_style": "blues",
+    "bpm": 100
+  },
+  "notes": "",
+  "sha256": "6a8d64692d1aaceb979487f0bb75b0f9ed3dc44e7ce9455f34cb70c39175398d",
+  "bytes": 10301,
+  "created_utc": "2026-11-10T01:09:08.226374+00:00",
+  "provenance_version": "1.0"
+}

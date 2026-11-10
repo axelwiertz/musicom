@@ -100,6 +100,7 @@ _INSTRUMENT_MODULES = {
     "Bass.acoustic_bass.acoustic_bass": "acoustic_bass",
     "Bass.synth_bass_1.synth_bass_1": "synth_bass_1",
     "Bass.synth_bass_2.synth_bass_2": "synth_bass_2",
+    "Bass.slap_bass.slap_bass": "slap_bass",
     "Bass.fretless_bass.fretless_bass": "fretless_bass",
     "Woodwind.recorder.recorder": "recorder",
     "Synth.synth_pad.synth_pad": "synth_pad",
@@ -343,6 +344,7 @@ ELECTRIC_BASS = ALL_INSTRUMENTS["electric_bass"]
 ACOUSTIC_BASS = ALL_INSTRUMENTS["acoustic_bass"]
 SYNTH_BASS_1 = ALL_INSTRUMENTS["synth_bass_1"]
 SYNTH_BASS_2 = ALL_INSTRUMENTS["synth_bass_2"]
+SLAP_BASS = ALL_INSTRUMENTS["slap_bass"]
 FRETLESS_BASS = ALL_INSTRUMENTS["fretless_bass"]
 RECORDER = ALL_INSTRUMENTS["recorder"]
 PIZZICATO_STRINGS = ALL_INSTRUMENTS["pizzicato_strings"]
@@ -503,6 +505,8 @@ def registry_table():
             role = "bass, rhythm, groove, accent"
         elif low == "synth bass 2":
             role = "bass, rhythm, groove, accent, lead"
+        elif low == "slap bass 1":
+            role = "bass, rhythm, groove, accent, ornament, lead"
         elif low == "fretless bass":
             role = "bass, melody, countermelody, groove, slide, color"
         elif low == "recorder":
@@ -899,6 +903,20 @@ if __name__ == "__main__":
     print("  SYNTH_BASS_2.range_min =", SYNTH_BASS_2.range_min,
           "SYNTH_BASS_2.range_max =", SYNTH_BASS_2.range_max)
     print("  SYNTH_BASS_2.stem_label =", repr(SYNTH_BASS_2.stem_label))
+
+    print()
+    print("=== Slap Bass 1 (GM36) ===")
+    print("  SLAP_BASS.midi_program =", SLAP_BASS.midi_program, "(should be 36)")
+    print("  by_name('slap bass') =", by_name("slap bass"))
+    print("  by_name('slap bass 1') =", by_name("slap bass 1"))
+    print("  by_program(36) =", by_program(36))
+    print("  by_program(33) =", by_program(33), "(distinct: electric bass finger)")
+    print("  SLAP_BASS.in_sweet_spot(48) =", SLAP_BASS.in_sweet_spot(48))
+    print("  SLAP_BASS.in_sweet_spot(20) =", SLAP_BASS.in_sweet_spot(20))
+    print("  SLAP_BASS.range_min =", SLAP_BASS.range_min,
+          "SLAP_BASS.range_max =", SLAP_BASS.range_max)
+    print("  SLAP_BASS.stem_label =", repr(SLAP_BASS.stem_label))
+    print("  SLAP_BASS.synthesis =", repr(SLAP_BASS.synthesis))
 
     print()
     print("=== Calliope (Lead 3, GM82) ===")

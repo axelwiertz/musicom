@@ -1,0 +1,17 @@
+{
+  "full_mix": {
+    "dominant_hz": 392.0,
+    "band_energy_frac": 0.8483,
+    "low_energy_frac": 0.4353
+  },
+  "canvas2mix": {
+    "dominant_hz": 392.0,
+    "band_energy_frac": 0.5312,
+    "low_energy_frac": 0.1969
+  },
+  "bass_duck": {
+    "dominant_hz": 524.1,
+    "band_energy_frac": 0.4857,
+    "low_energy_frac": 0.1345
+  }
+}
