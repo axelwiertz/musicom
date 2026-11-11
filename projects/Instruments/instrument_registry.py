@@ -35,6 +35,7 @@ _INSTRUMENT_MODULES = {
     "Strings.pizzicato_strings.pizzicato_strings": "pizzicato_strings",
     "Strings.string_ensemble.string_ensemble": "string_ensemble",
     "Strings.tremolo_strings.tremolo_strings": "tremolo_strings",
+    "Strings.string_ensemble_2.string_ensemble_2": "string_ensemble_2",
     "Keys.piano.piano": "piano",
     "Keys.organ.organ": "organ",
     "Keys.dulcimer.dulcimer": "dulcimer",
@@ -116,7 +117,8 @@ _FIELDS = (
     "solo_range", "sweet_spot", "zones", "articulations",
     "synthesis", "modal_preset", "karplus_defaults", "fm_defaults",
     "bowed_defaults", "drum606_defaults", "synthesis_defaults",
-    "motor_defaults", "xylophone_modes", "celesta_modes",
+    "motor_defaults", "string_ensemble_defaults",
+    "xylophone_modes", "celesta_modes",
     "agogo_modes",
     "reverb_tail", "eq_body", "eq_presence", "eq_air", "pan",
     "stem_label",
@@ -349,6 +351,7 @@ FRETLESS_BASS = ALL_INSTRUMENTS["fretless_bass"]
 RECORDER = ALL_INSTRUMENTS["recorder"]
 PIZZICATO_STRINGS = ALL_INSTRUMENTS["pizzicato_strings"]
 STRING_ENSEMBLE = ALL_INSTRUMENTS["string_ensemble"]
+STRING_ENSEMBLE_2 = ALL_INSTRUMENTS["string_ensemble_2"]
 TREMOLO_STRINGS = ALL_INSTRUMENTS["tremolo_strings"]
 SYNTH_PAD = ALL_INSTRUMENTS["synth_pad"]
 SYNTH_BRASS_1 = ALL_INSTRUMENTS["synth_brass_1"]
@@ -411,6 +414,8 @@ def registry_table():
             role = "rhythm, ostinato, bass, accompaniment, countermelody, accent"
         elif low == "string ensemble 1":
             role = "harmony, pad, melody, countermelody, accent"
+        elif low == "string ensemble 2":
+            role = "pad, harmony, texture, melody, countermelody, accent"
         elif low == "tremolo strings":
             role = "accent, tension, texture, harmony, pad, countermelody"
         elif low == "orchestral harp":
@@ -981,3 +986,19 @@ if __name__ == "__main__":
     print("  ORCHESTRA_HIT.stem_label =", repr(ORCHESTRA_HIT.stem_label))
     print("  ORCHESTRA_HIT.synthesis =", repr(ORCHESTRA_HIT.synthesis))
     print("  ORCHESTRA_HIT.synthesis_defaults =", ORCHESTRA_HIT.synthesis_defaults)
+
+    print()
+    print("=== String Ensemble 2 (Slow Strings, GM49) ===")
+    print("  STRING_ENSEMBLE_2.midi_program =", STRING_ENSEMBLE_2.midi_program, "(should be 49)")
+    print("  by_name('string ensemble 2') =", by_name("string ensemble 2"))
+    print("  by_name('String Ensemble 2') =", by_name("String Ensemble 2"))
+    print("  by_program(49) =", by_program(49))
+    print("  by_program(48) =", by_program(48), "(distinct: string ensemble 1)")
+    print("  STRING_ENSEMBLE_2.in_sweet_spot(72) =", STRING_ENSEMBLE_2.in_sweet_spot(72))
+    print("  STRING_ENSEMBLE_2.in_sweet_spot(24) =", STRING_ENSEMBLE_2.in_sweet_spot(24))
+    print("  STRING_ENSEMBLE_2.range_min =", STRING_ENSEMBLE_2.range_min,
+          "STRING_ENSEMBLE_2.range_max =", STRING_ENSEMBLE_2.range_max)
+    print("  STRING_ENSEMBLE_2.stem_label =", repr(STRING_ENSEMBLE_2.stem_label))
+    print("  STRING_ENSEMBLE_2.synthesis =", repr(STRING_ENSEMBLE_2.synthesis))
+    print("  STRING_ENSEMBLE_2.synthesis_defaults =", STRING_ENSEMBLE_2.synthesis_defaults)
+    print("  STRING_ENSEMBLE_2.string_ensemble_defaults =", STRING_ENSEMBLE_2.string_ensemble_defaults)

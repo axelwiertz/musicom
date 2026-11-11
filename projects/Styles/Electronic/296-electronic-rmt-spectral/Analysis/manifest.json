@@ -1,0 +1,260 @@
+{
+  "project": "296-electronic-rmt-spectral",
+  "genre": "Electronic",
+  "method": "120 Random Matrix Theory Composition (RMTC)",
+  "paradigm": "Stochastic",
+  "layer": "concrete",
+  "form": "cinematic-build",
+  "key": "C natural minor",
+  "key_pcs": [
+    0,
+    2,
+    3,
+    5,
+    7,
+    8,
+    10
+  ],
+  "bpm": 128,
+  "bars": 32,
+  "sections": [
+    "Intro",
+    "Build",
+    "Rise",
+    "Peak",
+    "Resolve"
+  ],
+  "bars_per_section": [
+    4,
+    8,
+    8,
+    8,
+    4
+  ],
+  "progression": [
+    "i",
+    "VI",
+    "III",
+    "VII",
+    "i",
+    "VI",
+    "III",
+    "VII",
+    "i",
+    "VI",
+    "III",
+    "VII",
+    "i",
+    "VI",
+    "III",
+    "VII",
+    "i",
+    "VI",
+    "III",
+    "VII",
+    "i",
+    "VI",
+    "III",
+    "VII",
+    "i",
+    "VI",
+    "III",
+    "VII",
+    "i",
+    "VII",
+    "VI",
+    "i"
+  ],
+  "ensemble_per_section": {
+    "Intro": "GOE",
+    "Build": "GUE",
+    "Rise": "GUE",
+    "Peak": "GSE",
+    "Resolve": "GOE"
+  },
+  "matrix_dim_per_section": {
+    "Intro": 8,
+    "Build": 12,
+    "Rise": 16,
+    "Peak": 20,
+    "Resolve": 8
+  },
+  "lambda_max_per_section": {
+    "Intro": 1.8837,
+    "Build": 1.8559,
+    "Rise": 1.5788,
+    "Peak": 1.8718,
+    "Resolve": 1.2004
+  },
+  "section_mean_pitch_phase1": {
+    "Intro": 44.03,
+    "Build": 47.59,
+    "Rise": 50.86,
+    "Peak": 59.36,
+    "Resolve": 48.28
+  },
+  "seed": 20261110,
+  "hz_seed": 263394726,
+  "form_seed": 202611103,
+  "phase1_midi": "/opt/data/projects/Styles/Electronic/296-electronic-rmt-spectral/MIDI/296-electronic-rmt-spectral-phase1.mid",
+  "perfect_midi": "/opt/data/projects/Styles/Electronic/296-electronic-rmt-spectral/MIDI/296-electronic-rmt-spectral-perfect.mid",
+  "humanized_midi": "/opt/data/projects/Styles/Electronic/296-electronic-rmt-spectral/MIDI/296-electronic-rmt-spectral-humanized.mid",
+  "phase1_offgrid": 253,
+  "grid_audit": {
+    "Lead:16th": "0/248",
+    "Lead:8th": "0/248",
+    "Bass:16th": "0/64",
+    "Bass:8th": "0/64",
+    "Pad:16th": "0/208",
+    "Pad:8th": "0/208",
+    "Arp:16th": "0/384",
+    "Arp:8th": "128/384"
+  },
+  "harmony_audit": {
+    "Lead": {
+      "passes": true,
+      "audible": 248,
+      "strong_ok": 64,
+      "weak_in_scale": 184,
+      "tagged": 0,
+      "resolving": 0,
+      "non_resolving": 0,
+      "untagged_out_of_scale": 0,
+      "strong_violations": 0,
+      "collisions": 0
+    },
+    "Bass": {
+      "passes": true,
+      "audible": 64,
+      "strong_ok": 64,
+      "weak_in_scale": 0,
+      "tagged": 0,
+      "resolving": 0,
+      "non_resolving": 0,
+      "untagged_out_of_scale": 0,
+      "strong_violations": 0,
+      "collisions": 0
+    },
+    "Pad": {
+      "passes": true,
+      "audible": 208,
+      "strong_ok": 208,
+      "weak_in_scale": 0,
+      "tagged": 0,
+      "resolving": 0,
+      "non_resolving": 0,
+      "untagged_out_of_scale": 0,
+      "strong_violations": 0,
+      "collisions": 0
+    },
+    "Arp": {
+      "passes": true,
+      "audible": 384,
+      "strong_ok": 64,
+      "weak_in_scale": 320,
+      "tagged": 0,
+      "resolving": 0,
+      "non_resolving": 0,
+      "untagged_out_of_scale": 0,
+      "strong_violations": 0,
+      "collisions": 0
+    }
+  },
+  "hz_summary": {
+    "Lead": {
+      "seed": 26602867326,
+      "profile": {
+        "timing_sigma_ms": 7.0,
+        "velocity_sigma": 9.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.04,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 248,
+      "mean_abs_shift_ticks": 4.693,
+      "max_abs_shift_ticks": 18,
+      "mean_abs_vel_delta": 7.355,
+      "timing_sigma_ticks": 7.168
+    },
+    "Bass": {
+      "seed": 26602867327,
+      "profile": {
+        "timing_sigma_ms": 5.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 64,
+      "mean_abs_shift_ticks": 7.594,
+      "max_abs_shift_ticks": 17,
+      "mean_abs_vel_delta": 3.094,
+      "timing_sigma_ticks": 5.12
+    },
+    "Pad": {
+      "seed": 26602867328,
+      "profile": {
+        "timing_sigma_ms": 7.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 208,
+      "mean_abs_shift_ticks": 6.418,
+      "max_abs_shift_ticks": 19,
+      "mean_abs_vel_delta": 3.438,
+      "timing_sigma_ticks": 7.168
+    },
+    "Arp": {
+      "seed": 26602867329,
+      "profile": {
+        "timing_sigma_ms": 7.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 384,
+      "mean_abs_shift_ticks": 4.69,
+      "max_abs_shift_ticks": 18,
+      "mean_abs_vel_delta": 3.159,
+      "timing_sigma_ticks": 7.168
+    },
+    "Drums": {
+      "seed": 26602867330,
+      "profile": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.008,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 320,
+      "mean_abs_shift_ticks": 1.328,
+      "max_abs_shift_ticks": 7,
+      "mean_abs_vel_delta": 3.216,
+      "timing_sigma_ticks": 2.048
+    }
+  }
+}

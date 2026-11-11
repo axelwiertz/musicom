@@ -1,0 +1,52 @@
+{
+  "artifact": "296-electronic-rmt-spectral-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "Random Matrix Theory Composition (Method 120) -- raw draft",
+  "sources": [],
+  "parameters": {
+    "phase": "1",
+    "layer": "raw",
+    "style": "electronic",
+    "key": "C natural minor",
+    "bpm": 128,
+    "seed": 20261110,
+    "sections": 5,
+    "bars": 32,
+    "form": "cinematic-build",
+    "ensemble_per_section": {
+      "Intro": "GOE",
+      "Build": "GUE",
+      "Rise": "GUE",
+      "Peak": "GSE",
+      "Resolve": "GOE"
+    },
+    "matrix_dim_per_section": {
+      "Intro": 8,
+      "Build": 12,
+      "Rise": 16,
+      "Peak": 20,
+      "Resolve": 8
+    },
+    "pitch_scale_K": 4.0,
+    "interval_scale_M": 4.0,
+    "lambda_max_per_section": {
+      "Intro": 1.8837,
+      "Build": 1.8559,
+      "Rise": 1.5788,
+      "Peak": 1.8718,
+      "Resolve": 1.2004
+    },
+    "section_mean_pitch": {
+      "Intro": 44.03,
+      "Build": 47.59,
+      "Rise": 50.86,
+      "Peak": 59.36,
+      "Resolve": 48.28
+    }
+  },
+  "notes": "phase1 raw draft: single-voice RMTC chromatic contour; eigenvalue spectrum -> semicircle pitch pool; Wigner-surmise spacings -> level-repulsion intervals; GOE/GUE/GSE ensemble switching -> macro-form; off-grid onset jitter + unquantized pitch; no harmony.",
+  "sha256": "9ccbc1a485732656a8b55357d713b9af8f08639654714245fc12f4cc18e431b4",
+  "bytes": 2293,
+  "created_utc": "2026-11-10T23:07:04.438552+00:00",
+  "provenance_version": "1.0"
+}

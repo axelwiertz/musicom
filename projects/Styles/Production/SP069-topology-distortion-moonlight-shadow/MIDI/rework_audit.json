@@ -1,0 +1,16 @@
+{
+  "off_grid": 0,
+  "out_scale": 0,
+  "total_pitched_onsets": 678,
+  "track_end_ticks": [
+    0,
+    61440,
+    61440,
+    61440,
+    61440,
+    61440,
+    61440
+  ],
+  "zero_drift": true,
+  "removed_stub_notes": 59
+}

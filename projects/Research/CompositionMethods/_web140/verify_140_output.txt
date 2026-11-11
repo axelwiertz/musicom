@@ -1,0 +1,14 @@
+PASS | 1 topic->archetype recovery (cosine, 1-1 match) | cos=[0.991, 0.9938, 0.9976] match=[2, 0, 1]
+PASS | 2 per-section mixture recovery (cosine) | mean cos=0.9944 min=0.9410
+PASS | 3 perplexity < uniform | ppl=9.282 vs uniform=30.0
+PASS | 4 exchangeability (order-invariant likelihood) | |dl|=0.00e+00
+PASS | 5 determinism (same seed) | max|dphi|=0.00e+00
+PASS | 6 alpha -> theta entropy monotone | a=0.05:H=0.289 a=1.0:H=0.551 a=8.0:H=0.943
+PASS | 7a every cell fills exactly (zero drift) | cells=32 all end at 7680
+PASS | 7b tension curve varies (KL spread) | KL=[0.441, 0.111, 0.029, 0.314, 0.765, 0.116, 0.094, 0.441] spread=26x
+     generated 1049 events over 32 cells
+PASS | 8 engine build validates + non-empty MIDI | validate=True 'OK' size=8983B
+PASS | 9 held-out section mixture inferred (cosine) | mean=0.9950 min=0.9774
+PASS | 10 K=5 over-specification keeps archetypes covered | best cos per archetype=[0.995, 0.998, 0.991] (extra topics=2 absorb splits/outliers)
+
+11/11 checks passed

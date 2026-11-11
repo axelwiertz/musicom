@@ -598,6 +598,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Strings | Double Bass | 43 | 28–74 | bass, rhythm, accent, harmony |
 | Strings | Pizzicato Strings | 45 | 36–96 | rhythm, ostinato, bass, accompaniment, countermelody, accent |
 | Strings | String Ensemble 1 | 48 | 28–96 | harmony, pad, melody, countermelody, accent |
+| Strings | String Ensemble 2 | 49 | 28–96 | pad, harmony, texture, melody, countermelody, accent |
 | Keys | Piano | 1 | 21–108 | harmony, melody, bass, rhythm |
 | Keys | Church Organ | 19 | 36–96 | harmony, pad, bass, rhythm, accent |
 | Keys | Dulcimer | 15 | 48–96 | lead, melody, ornament, rhythm, harmony |
@@ -738,6 +739,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 || 26 | Electric Guitar (jazz) | Electric_Guitar_jazz ✓ (GM_PROGRAMS[26] = "Electric Guitar (jazz)" — GM2 spec spelling; FluidR3 preset 26 = "Jazz Guitar" — SF2 uses the common name, cosmetic only, **no routing impact**; STEM_LABEL = "Electric_Guitar_jazz" matches pipeline) |
 ||| 25 | Acoustic Guitar (steel) | Acoustic_Guitar_steel ✓ (GM_PROGRAMS[25] = "Acoustic Guitar (steel)"; FluidR3 preset 25 = "Steel String Guitar" — internal SF2 name differs cosmetically, no routing impact) |
 | 48 | String Ensemble 1 | String_Ensemble_1 ✓ (GM_PROGRAMS[48] = "String Ensemble 1"; FluidR3 preset 48 = "Strings" — one-word SF2 spelling, cosmetic only, **no quirk**) |
+| 49 | String Ensemble 2 | String_Ensemble_2 ✓ (GM_PROGRAMS[49] = "String Ensemble 2"; FluidR3 preset 49 = "Slow Strings" — SF2 character name, cosmetic only, **no routing impact**; STEM_LABEL = "String_Ensemble_2") |
 || 88 | Pad 1 (new age) | Pad_1_new_age ✓ (GM_PROGRAMS[88] = "Pad 1 (new age)" → sanitized `Pad_1_new_age` — parens stripped, spaces → underscore; FluidR3 preset 88 = **"Fantasia"** — SF2 internal name differs from GM label, cosmetic only, **no routing impact**; preset 89 = "Warm Pad" is the darker sibling) |
 || 38 | Synth Bass 1 | Synth_Bass_1 ✓ (GM_PROGRAMS[38] = "Synth Bass 1"; FluidR3 preset 38 = "Synth Bass 1" — labels match exactly, **no quirk**) |
 | 35 | Fretless Bass | Fretless_Bass ✓ (GM_PROGRAMS[35] + FluidR3 preset 35 both "Fretless Bass" — labels match exactly, **no quirk**) |
@@ -2189,3 +2191,85 @@ Drive-by fix: registry.md Registry table gained the missing **Synth Bass 2
 | 39** row (added with Slap Bass 1's row; the 2026-09-02 entry never got a
 table row). Remaining sibling candidates: GM31 "Guitar harmonics", GM49
 "String Ensemble 2", GM63 "Synth Brass 2".
+
+**String Ensemble 2 added** (2026-11-11): GM49, **Strings-family ninth
+entry** — the SLOW-ATTACK string ensemble, the analog "string machine"
+(ARP Solina String Ensemble 1974, Mellotron string tapes, Elka Rhapsody
+610, Crumar Performer, Logan String Melody, Roland RS-202): a divide-down
+keyboard whose every note fires 3 detuned saw sub-oscillators through a
+band-limiting filter, a slow attack swell and a chorus "ensemble" effect.
+FluidR3 preset 49 = **"Slow Strings"** — the SF2 name IS the character. It
+is the SLOW sibling of String Ensemble 1 GM48 (bowed orchestral section,
+fast attack): same ensemble-pad family, machine timbre, slow swell, no
+bow. Files: `Strings/string_ensemble_2/instrument.md` +
+`string_ensemble_2.py`. Verified end-to-end through the registry:
+UnitMatrixComposer (1 bar, 1 section, 100 bpm, String Ensemble 2 SOLO on
+ch0 — C major / A minor slow pad chords — + drum-kit context on ch9) →
+**zero-drift ✓** → MIDI **177 bytes** → FluidSynth WAV **1,693,996 bytes**
+SOLO render (FluidR3 via `discover_soundfont()`) ✓; RenderPipeline stems
+on disk `track00_String_Ensemble_2.wav` (1,693,996 B) + `track01_Drums.wav`
+(849,708 B) ✓; solo-render spectral 4–8 kHz buzz **0.8%** (clean single
+voice, no comb-filtering — the cleanest of the pad set). Stem label:
+`GM_PROGRAMS[49]` = **"String Ensemble 2"** AND FluidR3 preset 49 =
+**"Slow Strings"** — the SF2 uses the character name, cosmetic only, **no
+routing impact** (stems are labelled from GM_PROGRAMS); STEM_LABEL =
+`String_Ensemble_2` matches the pipeline's real label. Synthesis:
+**StringEnsembleVoice primary** (`sound/synthesis/string_ensemble.py` —
+the dedicated divide-down string-machine model: per note 3 detuned saw
+sub-oscillators at 8'/4'/2' octave mix, slow random-walk drift, A/R
+envelope, Streichfett-style 3-tap ensemble chorus;
+`STRING_ENSEMBLE_DEFAULTS` n_voices 3, octave_mix (0.6, 0.35, 0.15),
+detune_cents 8, attack_s 0.8 — the SLOW swell IS the identity —,
+release_s 1.5, layer_mix 0.2, flavour 0.35; smoke: Cmaj chord peak 0.900,
+onset_rms 0.026 → late_rms 0.135, **5.2× slow swell**, no collapse),
+**Polysynth secondary** (3 detuned SAWS ±8c through band-limiting low-pass
+2200 Hz — between warm_pad 1400 and synth_brass_1 2800 —, resonance 0.3,
+env attack 0.8/sustain 0.85/release 0.8; smoke: A3 hold_ratio **2.39**
+sustain vs release, no collapse), **Additive tertiary** (`slow_strings`
+stack [1.0, 0.85, 0.62, 0.42, 0.28, 0.18, 0.11] — saw-ish, brighter than
+warm_pad's rolloff —, SYNTHESIS_DEFAULTS attack 0.8, detune ±0.010, stack
+3, **decay_S 1e-4** pad-hold recipe; smoke: late env max **0.883**),
+**PhaseModSynth quaternary** (saw carrier, ratio 1.0, depth 1.8 — the
+string_ensemble FM recipe). Empirical FluidR3 pitch sweep (RMS, velocity
+90, notes 24–108 step 12): preset 49 audible **8/8 from 24 to 96** (RMS
+932–1817, essentially FLAT — no rolloff, no gaps), **SILENT at 108 (C8)**
+(0.99 vs ~1200 median = 0.06% — the patch ceiling; the sweep script's
+original absolute-0.01 assertion was too strict, fixed to a fraction-of-
+median check). Full-keyboard patch, SF2 never clips a composition;
+real-instrument note: the archetypal Solina is a 49-key divide-down ≈
+C2–C6 (MIDI 36–84), below C2 the machine is rumble — keep chord roots at
+C3+ in dense writing. Range 28–96 = idiomatic writing band (C1–C7; the
+C1 floor matches the string_ensemble sibling convention), sweet spot
+60–84 (C4–C6), solo range 53–89 (F3–A6); zones low 28–47 (divide-down
+rumble — roots/drone, write sparingly) / mid 48–71 (primary chord-pad
+body) / high 72–96 (ensemble top — cutting but warm). Registration proof:
+`by_name('string ensemble 2')` / `by_name('String Ensemble 2')` → String
+Ensemble 2, `by_program(49)` → String Ensemble 2 (distinct from
+`by_program(48)` String Ensemble 1), `in_sweet_spot(72)` = True,
+`in_sweet_spot(24)` = False, `stem_label = 'String_Ensemble_2'`;
+`registry_table()` row "| Strings | String Ensemble 2 | 49 | 28–96 | pad,
+harmony, texture, melody, countermelody, accent |"; convenience constant
+`STRING_ENSEMBLE_2`. Registry `_FIELDS` extended with
+`string_ensemble_defaults` so the primary engine preset loads through the
+registry. Role: pad (slow-attack sustained chords — the 70s/80s ballad,
+lofi, synthwave, ambient bed), harmony (dense 4–6 note voicings are
+idiomatic — divide-down machines love fat chords), texture (slow-blooming
+washes, whole-bar swells), melody/countermelody (high register 72–96 cuts
+warm, no bow attack), accent (marcato entrances only — the 0.8 s attack
+smears fast rhythm) — NOT a bass voice (the divide-down low is rumble),
+NOT a rhythm voice (staccato "blips" at 1/4 are the fastest gesture).
+Production: REVERB_TAIL 2.8 s (between string_ensemble 2.6 and warm_pad
+3.0 — the machine blooms in a hall but keeps more body than the new-age
+shimmer), EQ cut 300 Hz (saw stack + octave mix piles the low-mid fast),
+boost 2.8 kHz (ensemble clarity / chorus edge), gentle 8 kHz air shelf,
+PAN centre (±0.4 L/R spread on wide stereo swells — the Solina's ensemble
+output is already stereo). Writing quirks: (1) hold chords ≥ 1.5–2 s or
+the slow attack never speaks; (2) the attack is the identity — never ask
+this patch for a pluck; (3) **no unison doubling** with another melodic
+patch on the same pitches (2026-09-01 comb-filter rule) — a slow-strings
+pad + unison bowed strings is a beating wash; octaves or a low sustained
+bass BELOW are fine, and it layers beautifully UNDER a lead as a harmony
+bed; (4) `MidiInstrument.STRING_ENSEMBLE = 49` — the legacy enum's value
+happens to equal GM49 (Slow Strings), NOT GM48; the registry is the truth.
+Remaining sibling candidates: GM31 "Guitar harmonics", GM63 "Synth Brass
+2", GM50/51 "Synth Strings 1/2".

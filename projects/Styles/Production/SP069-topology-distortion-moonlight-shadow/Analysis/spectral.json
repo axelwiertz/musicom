@@ -1,0 +1,17 @@
+{
+  "full_mix": {
+    "dominant_hz": 184.8,
+    "band_energy_frac": 0.9394,
+    "low_energy_frac": 0.6458
+  },
+  "fuzz_ge": {
+    "dominant_hz": 184.8,
+    "band_energy_frac": 0.907,
+    "low_energy_frac": 0.5985
+  },
+  "fuzz_hard": {
+    "dominant_hz": 184.8,
+    "band_energy_frac": 0.8813,
+    "low_energy_frac": 0.5649
+  }
+}

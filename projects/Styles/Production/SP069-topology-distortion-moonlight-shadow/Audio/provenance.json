@@ -1,0 +1,97 @@
+{
+  "method": "SP-069",
+  "module": "sound.effects.topology_distortion",
+  "style": "pop",
+  "bpm": 126,
+  "soundfont": "/opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2",
+  "engine": "FuzzBillion (11-switch discrete distortion topology bank)",
+  "distinct_circuits": 100000000000,
+  "circuits": {
+    "fuzz_ge": {
+      "code": [
+        3,
+        5,
+        8,
+        1,
+        3,
+        4,
+        5,
+        7,
+        6,
+        0,
+        5
+      ],
+      "name": "jfet-squarelaw -> silicon-pair -> cmos-inverter -> transformer-saturation -> jfet-squarelaw -> germanium-pair -> silicon-pair -> led-pair -> single-diode-clamp -> bypass -> silicon-pair",
+      "gain": 2.0,
+      "io_mode": "inst",
+      "profile": {
+        "centroid": 239.82787702446635,
+        "harmonic_ratio": 1.9198978994075653,
+        "peak": 0.43218923886947563
+      }
+    },
+    "fuzz_hard": {
+      "code": [
+        2,
+        0,
+        3,
+        9,
+        6,
+        2,
+        3,
+        7,
+        7,
+        6,
+        0
+      ],
+      "name": "tube-asymmetric -> bypass -> jfet-squarelaw -> opamp-rail-foldback -> single-diode-clamp -> tube-asymmetric -> jfet-squarelaw -> led-pair -> led-pair -> single-diode-clamp -> bypass",
+      "gain": 3.0,
+      "io_mode": "line",
+      "profile": {
+        "centroid": 242.02775422192877,
+        "harmonic_ratio": 2.6046450187841743,
+        "peak": 0.5618400373251115
+      }
+    }
+  },
+  "treatments": {
+    "fuzz_ge": "germanium-soft 11-stage chain, instrument level (main)",
+    "fuzz_hard": "transformer+CMOS+opamp hard-clip chain, line level (alt)",
+    "full_mix": "dry FluidSynth reference (no distortion)"
+  },
+  "master": {
+    "fuzz_ge": {
+      "target_lufs": -9.0,
+      "integrated_lufs": -9.0,
+      "true_peak_db": -1.99
+    },
+    "fuzz_hard": {
+      "target_lufs": -9.0,
+      "integrated_lufs": -9.0,
+      "true_peak_db": -2.4
+    },
+    "full_mix": {
+      "target_lufs": -9.0,
+      "integrated_lufs": -9.79,
+      "true_peak_db": -1.0
+    }
+  },
+  "dur_s": 68.87,
+  "pitch": {
+    "full_mix": {
+      "dominant_hz": 184.8,
+      "band_energy_frac": 0.9394,
+      "low_energy_frac": 0.6458
+    },
+    "fuzz_ge": {
+      "dominant_hz": 184.8,
+      "band_energy_frac": 0.907,
+      "low_energy_frac": 0.5985
+    },
+    "fuzz_hard": {
+      "dominant_hz": 184.8,
+      "band_energy_frac": 0.8813,
+      "low_energy_frac": 0.5649
+    }
+  }
+}

@@ -1,0 +1,53 @@
+registry: by_name('string ensemble 2') -> <Instrument String Ensemble 2 (family=Strings, program=49, range=28-96)>
+registry: by_name('String Ensemble 2') -> <Instrument String Ensemble 2 (family=Strings, program=49, range=28-96)>
+registry: by_program(49) -> <Instrument String Ensemble 2 (family=Strings, program=49, range=28-96)>
+registry: by_program(48) -> <Instrument String Ensemble 1 (family=Strings, program=48, range=28-96)> (distinct: string ensemble 1)
+registry: STRING_ENSEMBLE_2 is ALL_INSTRUMENTS['string_ensemble_2'] -> True
+registry: family=Strings program=49 range=28-96 solo=(53, 89) sweet=(60, 84)
+registry: stem_label='String_Ensemble_2' reverb=2.8 pan=0.0
+registry: synthesis=string_ensemble synthesis_defaults={'instrument': 'string_ensemble_2', 'attack': 0.8, 'detune': 0.01, 'stack': 3, 'release': 0.8, 'sustain_level': 0.9, 'decay_S': 0.0001}
+registry: string_ensemble_defaults={'instrument': 'string_ensemble_2', 'n_voices': 3, 'octave_mix': (0.6, 0.35, 0.15), 'detune_cents': 8.0, 'drift_rate': 0.4, 'attack_s': 0.8, 'release_s': 1.5, 'layer_mix': 0.2, 'flavour': 0.35}
+registry: in_sweet_spot(72)=True in_sweet_spot(24)=False in_range(60)=True
+
+String Ensemble 2: program=49 gm='String Ensemble 2' stem='String_Ensemble_2' sweet=(53, 89) A4=440.0Hz
+String Ensemble 2: zones={'low': (28, 47), 'mid': (48, 71), 'high': (72, 96)}
+String Ensemble 2: art=['sustain', 'legato', 'swell', 'staccato', 'marcato', 'drone', 'accent', 'bloom'] synth=string_ensemble reverb=2.8s pan=0.0
+String Ensemble 2: A3=220.0Hz C4=261.6Hz C5=523.3Hz
+
+Zero-drift: True (OK)
+MIDI: /opt/data/projects/Instruments/_test/string_ensemble_2_test.mid (177 bytes)
+WAV (solo): /opt/data/projects/Instruments/_test/string_ensemble_2_test.wav (1693996 bytes)
+Spectral check: 4-8kHz buzz energy = 0.8% (OK)
+
+Stem labels (pipeline GM_PROGRAMS, 0-indexed):
+  [48] = 'String Ensemble 1'
+  [49] = 'String Ensemble 2'
+  [50] = 'Synth Strings 1'
+  [51] = 'Synth Strings 2'
+  String Ensemble 2 -> 'String Ensemble 2'
+
+SF2: /opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2
+SF2 preset 49 -> 'Slow Strings'
+
+Stems rendered (2 files):
+  track00_String_Ensemble_2.wav (1693996 bytes)
+  track01_Drums.wav (849708 bytes)
+
+StringEnsembleVoice Cmaj (2.5s): peak=0.900 onset_rms=0.0259 late_rms=0.1351
+Polysynth slow strings (A3): peak=1.107 sustain_rms=0.1916 release_rms=0.0803 hold_ratio=2.39
+Additive slow_strings: late(1.0-1.5s) env max = 0.883 (gate >= 0.45)
+
+Empirical FluidR3 pitch sweep (RMS, velocity 90):
+  note  24 (  C1)  rms=1817.4371
+  note  36 (  C2)  rms=932.0722
+  note  48 (  C3)  rms=1153.099
+  note  60 (  C4)  rms=1200.6767
+  note  72 (  C5)  rms=1168.2029
+  note  84 (  C6)  rms=1388.6887
+  note  96 (  C7)  rms=1407.2955
+  note 108 (  C8)  rms=0.9947
+Traceback (most recent call last):
+  File "/opt/data/repos/musicom/projects/Instruments/_test/verify_string_ensemble_2.py", line 263, in <module>
+    assert all(r < 0.01 for n, r in sweep if n >= 108), "108+ should be silent (patch ceiling)"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 108+ should be silent (patch ceiling)

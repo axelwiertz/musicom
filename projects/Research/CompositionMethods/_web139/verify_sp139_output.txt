@@ -1,0 +1,27 @@
+PM_COLL analytic 7484 Pa, measured 8000 Pa
+opening@2kPa: meas 0.733 mm vs anl 0.733 mm
+asym opening: meas 0.644 mm vs anl 0.644 mm
+reed resonance: meas 2300 Hz vs 2200.0 Hz
+onset: floor(2.5k) 2.81e-04, 3.0k 7.39e-03, 3.5k 1.28e-01, 5.0k 5.30e+02 -> threshold 3000.0 Pa
+pitch: 294.7 Hz vs f0 295.7 Hz (-5.9 cents)
+conical hdB: ['0.0', '-15.0', '-32.6', '-26.7', '-43.1', '-37.6']
+cylinder h2: -44.4 dB | h2 contrast 29.4 dB
+centroid @4kPa 860 Hz, @6.5kPa 1916 Hz (ratio 2.23)
+valve harmonics: h2 -14.4 dB, h3 -39.7 dB
+chanter: 463.6 Hz vs 466 Hz (-8.8 cents)
+WAV sizes 141164 / 105884 B
+
+  [PASS] static-opening
+  [PASS] asym-blades
+  [PASS] collapse
+  [PASS] reed-res
+  [PASS] onset
+  [PASS] pitch
+  [PASS] complete-series+contrast
+  [PASS] brightness
+  [PASS] valve-harms
+  [PASS] determinism
+  [PASS] chanter-pitch
+  [PASS] wav-artifacts
+
+12/12 checks pass
