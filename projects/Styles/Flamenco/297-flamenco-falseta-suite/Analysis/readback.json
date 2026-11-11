@@ -1,0 +1,43 @@
+{
+  "perfect": {
+    "n_voice_tracks": 5,
+    "track_lengths": [
+      61440,
+      61440,
+      61440,
+      61440,
+      61440
+    ],
+    "zero_drift": true,
+    "off_grid": 0,
+    "pitched_notes": 480,
+    "scale_violations": 0,
+    "chord_violations": 0
+  },
+  "humanized": {
+    "n_voice_tracks": 5,
+    "track_lengths": [
+      61440,
+      61440,
+      61440,
+      61440,
+      61440
+    ],
+    "zero_drift": true,
+    "off_grid": 446,
+    "pitched_notes": 480,
+    "scale_violations": 0,
+    "chord_violations": 14
+  },
+  "phase1": {
+    "n_voice_tracks": 1,
+    "track_lengths": [
+      61440
+    ],
+    "zero_drift": true,
+    "off_grid": 162,
+    "pitched_notes": 164,
+    "scale_violations": 73,
+    "chord_violations": 119
+  }
+}

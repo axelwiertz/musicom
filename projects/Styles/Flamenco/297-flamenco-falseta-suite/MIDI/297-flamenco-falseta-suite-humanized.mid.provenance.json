@@ -1,0 +1,118 @@
+{
+  "artifact": "297-flamenco-falseta-suite-humanized.mid",
+  "classification": "ai-assisted",
+  "generator": "random-walk + musicom rules + humanize",
+  "sources": [
+    "/opt/data/projects/Styles/Flamenco/random-flamenco-001/MIDI/flamenco-001.mid",
+    "297-flamenco-falseta-suite-phase1.mid"
+  ],
+  "parameters": {
+    "phase": "2-humanized",
+    "key": "A",
+    "bpm": 130,
+    "style": "flamenco",
+    "humanize_seed": 3312682339,
+    "humanize_profiles": {
+      "Lead Flute": {
+        "seed": 334580916239,
+        "profile": {
+          "timing_sigma_ms": 8.0,
+          "velocity_sigma": 7.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.02,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.45,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 108,
+        "mean_abs_shift_ticks": 5.213,
+        "max_abs_shift_ticks": 17,
+        "mean_abs_vel_delta": 5.111,
+        "timing_sigma_ticks": 8.32
+      },
+      "Guitar": {
+        "seed": 334580916240,
+        "profile": {
+          "timing_sigma_ms": 8.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.02,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.45,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 288,
+        "mean_abs_shift_ticks": 6.615,
+        "max_abs_shift_ticks": 22,
+        "mean_abs_vel_delta": 4.677,
+        "timing_sigma_ticks": 8.32
+      },
+      "Bass": {
+        "seed": 334580916241,
+        "profile": {
+          "timing_sigma_ms": 10.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.03,
+          "layback_ms": 8.0,
+          "phrase_corr": 0.45,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 64,
+        "mean_abs_shift_ticks": 9.078,
+        "max_abs_shift_ticks": 27,
+        "mean_abs_vel_delta": 4.594,
+        "timing_sigma_ticks": 10.4
+      },
+      "Counterline": {
+        "seed": 334580916242,
+        "profile": {
+          "timing_sigma_ms": 8.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.03,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.45,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 20,
+        "mean_abs_shift_ticks": 7.0,
+        "max_abs_shift_ticks": 20,
+        "mean_abs_vel_delta": 4.55,
+        "timing_sigma_ticks": 8.32
+      },
+      "Drums": {
+        "seed": 334580916243,
+        "profile": {
+          "timing_sigma_ms": 2.0,
+          "velocity_sigma": 4.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.008,
+          "layback_ms": 0.0,
+          "phrase_corr": 0.45,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 324,
+        "mean_abs_shift_ticks": 1.33,
+        "max_abs_shift_ticks": 5,
+        "mean_abs_vel_delta": 3.111,
+        "timing_sigma_ticks": 2.08
+      }
+    }
+  },
+  "notes": "Redesign of random-flamenco-001 (two-phase artifacts + provenance + index missing).",
+  "sha256": "9de2fda203d61f88febb528ab7da6de4694775ccb406d88fb903c4179f8ee647",
+  "bytes": 6809,
+  "created_utc": "2026-11-11T01:11:28.271357+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,59 @@
+{
+  "chosen": "Flamenco/random-flamenco-001",
+  "genre": "Flamenco",
+  "primary_midi": "MIDI/flamenco-001.mid",
+  "audited_utc": "2026-11-11T00:00:00Z",
+  "standard_failures": [
+    {
+      "id": 1,
+      "standard": "engine-not-hand-rolled",
+      "result": "PASS",
+      "evidence": "provenance sidecar records generator musicom_workflow.compose(style=flamenco, method=001); no hand-rolled mido authoring found."
+    },
+    {
+      "id": 2,
+      "standard": "zero-drift",
+      "result": "PASS",
+      "evidence": "all 4 voice tracks equal length 53760 ticks (28 bars x 1920)."
+    },
+    {
+      "id": 3,
+      "standard": "rhythm-grid-sync",
+      "result": "PASS",
+      "evidence": "0 of 99 pitched onsets off the 120/240 grid."
+    },
+    {
+      "id": 4,
+      "standard": "valid-track-setup",
+      "result": "PASS",
+      "evidence": "4 voice tracks (Flute 74, Guitar 25, Bass 43, Drums ch9)."
+    },
+    {
+      "id": 5,
+      "standard": "two-phase-artifacts",
+      "result": "FAIL",
+      "evidence": "no <id>-phase1.mid present (only flamenco-001.mid)."
+    },
+    {
+      "id": 6,
+      "standard": "provenance+index",
+      "result": "FAIL",
+      "evidence": "only per-artifact flamenco-001.mid.provenance.json; project-level provenance.json and index.html both missing."
+    }
+  ],
+  "redesign_required": true,
+  "source_identity": {
+    "genre": "Flamenco",
+    "key": "A major",
+    "bpm": 130,
+    "form": "intro-falseta-letra-falseta-cierre (28 bars, 5 sections)",
+    "progression": "A - E - F#m - D - A  (I - V - vi - IV - I)",
+    "core_motif": "ascending triad arpeggio 1->3->5 (A->C#->E), half-note ostinato",
+    "instrumentation": [
+      "Flute (lead, GM 74)",
+      "Acoustic steel guitar (comp, GM 25)",
+      "Double bass (roots, GM 43)",
+      "ch9 percussion (palmas ostinato)"
+    ]
+  }
+}

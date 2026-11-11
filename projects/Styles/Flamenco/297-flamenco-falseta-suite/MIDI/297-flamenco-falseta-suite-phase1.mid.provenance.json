@@ -1,0 +1,21 @@
+{
+  "artifact": "297-flamenco-falseta-suite-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "random-walk (raw, pre-rules)",
+  "sources": [
+    "/opt/data/projects/Styles/Flamenco/random-flamenco-001/MIDI/flamenco-001.mid"
+  ],
+  "parameters": {
+    "phase": 1,
+    "key": "A",
+    "bpm": 130,
+    "seed": 20261111,
+    "style": "flamenco",
+    "note": "unquantized + out-of-key by construction"
+  },
+  "notes": "Phase 1 raw generative draft (single voice).",
+  "sha256": "b8720aa7fc4621f257543c32fefab0fdabc48fa4250695e823385d50520bb6cb",
+  "bytes": 1520,
+  "created_utc": "2026-11-11T01:11:28.216764+00:00",
+  "provenance_version": "1.0"
+}
