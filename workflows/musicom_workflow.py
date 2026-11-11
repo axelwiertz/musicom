@@ -463,9 +463,48 @@ def _humanize_seed(seed, style, method, key, bpm, form):
     return int(hashlib.md5(ident.encode("utf-8")).hexdigest()[:8], 16)
 
 
+# per-section method table (P2): style -> {section_name: method_id}. IDs MUST
+# resolve via registry_method() (implemented methods only). Opt-in via
+# compose(section_methods=SECTION_METHODS["pop"]).
+SECTION_METHODS = {
+    "pop": {"Intro": "023", "Verse": "002", "Chorus": "040",
+            "Bridge": "018", "Outro": "012"},
+    "jazz": {"Head": "002", "Solo1": "023", "Solo2": "040"},
+}
+
+
+def _fill_method_cell(composer, vname, sname, ctx, role, method_id,
+                      voice_idx, instrument_name):
+    """Fill one (voice, section) cell from a method, realized through the spine.
+
+    Builds a method CellContext with a role-appropriate register, runs the
+    method's ``generate``, and realizes raw notes via ``realize_spine.realize``
+    (snap -> harmonize -> grid-lock -> zero-drift landmark). 16th-note grid
+    lock so 8th/16th method onsets all land on-grid.
+    """
+    from workflows.cell_engine import CellContext
+    from workflows.method_adapters import ROLE_REGISTER
+    from workflows.method_contract import registry_method
+    from workflows.realize_spine import realize
+
+    reg = ROLE_REGISTER.get(role, (48, 72))
+    mctx = CellContext(
+        key=ctx.key, pattern=ctx.pattern, chord_tones=ctx.chord_tones,
+        register=reg, density=ctx.density, root_midi=ctx.root_midi,
+        section_bars=ctx.section_bars, section_len=ctx.section_len,
+        bar_ticks=ctx.bar_ticks, seed=ctx.seed, style=ctx.style,
+        voice_idx=voice_idx, instrument_name=instrument_name,
+    )
+    method = registry_method(method_id)
+    resolved = method.resolve_role(mctx)
+    raw = method.generate(mctx, resolved)
+    unit = realize(raw, mctx, resolved, grid=120)
+    composer.fill_voice_section(vname, sname, unit)
+
+
 def compose(style="pop", method=None, form=None, key="C", bpm=None,
             voices=None, num_bars=32, seed=None, out_dir=None,
-            sections=None, loop=False, humanize=True):
+            sections=None, loop=False, humanize=True, section_methods=None):
     """Compose a piece through the musicom engine (zero-drift guaranteed).
 
     Uses the UnitMatrixComposer with the requested voices. If `method` is
@@ -487,9 +526,11 @@ def compose(style="pop", method=None, form=None, key="C", bpm=None,
     """
     bpm = bpm or STYLE_REGISTRY.get(style, {}).get("bpm", 120)
     form = form or STYLE_REGISTRY.get(style, {}).get("form", "intro-verse-chorus-bridge-outro")
-    voices = voices or STYLE_REGISTRY.get(style, {}).get("default_voices",
-             [("Lead", "Flute"), ("Pad", "Piano"), ("Bass", "Double Bass"),
-              ("Arp", "Clarinet"), ("Drums", "Drum Kit")])
+    from workflows.style_instruments import instrument_palette
+    voices = voices or instrument_palette(style) or STYLE_REGISTRY.get(
+        style, {}).get("default_voices",
+        [("Lead", "Flute"), ("Pad", "Piano"), ("Bass", "Double Bass"),
+         ("Arp", "Clarinet"), ("Drums", "Drum Kit")])
     method = method or "001"  # Skeleton-First default
 
     out_dir = Path(out_dir or f"outputs/{style.title()}/workflow-demo")
@@ -603,13 +644,20 @@ def compose(style="pop", method=None, form=None, key="C", bpm=None,
             key=key, pattern="major", chord_tones=tuple(chord_tones),
             register=(0, 127), density=1.0, root_midi=root_midi,
             section_bars=section_bars, section_len=section_len, bar_ticks=BAR,
-            seed=seed if seed is not None else 0,
+            seed=seed if seed is not None else 0, style=style,
         )
+        method_id = (section_methods or {}).get(sname)
         for vi, (vname, inst_name) in enumerate(voices):
             role = default_resolve_role(vi, inst_name, ctx)
             if role is None:
                 continue
-            cell.fill_cell(vname, sname, ctx, role)
+            if method_id is not None and role != "rhythm":
+                # method drives this section's pitched voices (P2); drums keep
+                # the style grid (methods don't generate percussion).
+                _fill_method_cell(composer, vname, sname, ctx, role, method_id,
+                                  vi, inst_name)
+            else:
+                cell.fill_cell(vname, sname, ctx, role)
 
     # --- humanization (style-derived, seeded, zero-drift safe) -------------
     # Dual-version contract (2026-10-17): humanize=True exports BOTH a

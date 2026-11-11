@@ -85,9 +85,11 @@ class DefaultMethod:
         return role
 
     def generate(self, ctx: CellContext, role: str) -> List[MusicEvent]:
-        if role not in ROLE_FILLERS:
-            raise KeyError(f"unknown role {role!r}; available: {sorted(ROLE_FILLERS)}")
-        return ROLE_FILLERS[role](ctx)
+        from workflows.style_rhythm import style_fillers
+        fillers = style_fillers(getattr(ctx, "style", "") or "")
+        if role not in fillers:
+            raise KeyError(f"unknown role {role!r}; available: {sorted(fillers)}")
+        return fillers[role](ctx)
 
 
 def registry_method(method_id: str) -> CellMethod:
@@ -104,17 +106,5 @@ def registry_method(method_id: str) -> CellMethod:
     if method_id == "default":
         return DefaultMethod()
 
-    from generators.generator_registry import GENERATOR_REGISTRY
-    if method_id not in GENERATOR_REGISTRY:
-        raise KeyError(
-            f"method {method_id!r} is not in generator_registry "
-            f"(spec-only, no shared code). The composition cron's bespoke "
-            f"generate() is the realization for these methods.")
-    mod_path, class_name, _ = GENERATOR_REGISTRY[method_id]
-    if mod_path is None:
-        raise NotImplementedError(
-            f"method {method_id!r} is spec-only (no code) — cannot adapt to a "
-            f"CellMethod.")
-    raise NotImplementedError(
-        f"method {method_id!r} has code ({mod_path}.{class_name or ''}) but no "
-        f"CellMethod adapter yet — lands in P1.")
+    from workflows import method_adapters
+    return method_adapters.adapter_for(method_id)

@@ -67,6 +67,7 @@ class CellContext:
     bar_ticks: int = 1920      # ticks per bar (BAR)
     voice_idx: int = -1        # this voice's matrix row (for method role resolution)
     instrument_name: str = ""  # this voice's instrument name (for drum guard)
+    style: str = ""            # rhythm family key ("" = pop default fillers)
     # --- P1/P2 (reserved; default fillers ignore these) ---
     density_budget: float = 1.0
     strong_beat_grid: tuple = (0, 960)
@@ -190,10 +191,17 @@ class CellComposer:
 
     def fill_cell(self, voice_name: str, section_name: str,
                   ctx: CellContext, role: str) -> None:
-        """Generate + fill one (voice, section) cell under ``role``."""
-        if role not in ROLE_FILLERS:
-            raise KeyError(f"unknown role {role!r}; available: {sorted(ROLE_FILLERS)}")
-        events = ROLE_FILLERS[role](ctx)
+        """Generate + fill one (voice, section) cell under ``role``.
+
+        The role filler is resolved STYLE-AWARE: ``style_fillers(ctx.style)``
+        picks the rhythm recipe for the cell's style (pop default). Lazy import
+        avoids a module cycle (style_rhythm imports ROLE_FILLERS from here).
+        """
+        from workflows.style_rhythm import style_fillers
+        fillers = style_fillers(getattr(ctx, "style", "") or "")
+        if role not in fillers:
+            raise KeyError(f"unknown role {role!r}; available: {sorted(fillers)}")
+        events = fillers[role](ctx)
         self.composer.fill_voice_section(
             voice_name, section_name, _unit_from_events(events, ctx.section_len))
 

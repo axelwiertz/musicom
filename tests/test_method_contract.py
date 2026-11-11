@@ -155,6 +155,20 @@ def test_registry_method_spec_only_in_registry_no_code():
         registry_method("026")  # DPSM — registered but mod_path None
 
 
-def test_registry_method_implemented_but_adapter_pending():
+def test_registry_method_implemented_returns_adapter():
+    # P1 built the adapters — the 9 implemented methods now resolve.
+    for mid in ("001", "002", "003", "010", "012", "018", "023", "040", "079"):
+        m = registry_method(mid)
+        assert hasattr(m, "resolve_role") and hasattr(m, "generate"), mid
+        # resolve_role + generate must both work (smoke)
+        ctx = _ctx(0)
+        role = m.resolve_role(ctx)
+        assert role == "lead"
+        assert len(m.generate(ctx, role)) > 0
+
+
+def test_registry_method_code_but_no_adapter_still_pending():
+    # a method with code but NOT yet adapted (e.g. HC-012 chord-degrees) still
+    # raises NotImplementedError rather than silently mis-routing.
     with pytest.raises(NotImplementedError):
-        registry_method("023")  # tendency-masking — has code, adapter is P1
+        registry_method("HC-012")

@@ -403,15 +403,10 @@ def build_framework(style="pop", key="C", bpm=120, form=None, num_bars=None,
     form = form or POP_FORM
     composer = UnitMatrixComposer(bpm=bpm, ticks_per_beat=480, beats_per_bar=4)
 
-    # --- voices (pop default stack, or a caller-supplied palette) ---
+    # --- voices (style palette, or a caller-supplied override) ---
     if not voices:
-        voices = [
-            ("Lead", "Flute"),
-            ("Pad", "Piano"),
-            ("Bass", "Double Bass"),
-            ("Arp", "Clarinet"),
-            ("Drums", "Drum Kit"),
-        ]
+        from workflows.style_instruments import instrument_palette
+        voices = instrument_palette(style)
     from workflows.musicom_workflow import _resolve_instrument
     composer.create_matrix(num_voices=len(voices), num_sections=len(form))
     for vname, inst in voices:
