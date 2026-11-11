@@ -170,6 +170,14 @@ def humanize_events(events: Sequence[MusicEvent],
     sigma_t = ticks_from_ms(profile.timing_sigma_ms, bpm, tpb)
     layback = ticks_from_ms(profile.layback_ms, bpm, tpb)
 
+    # Forward-clamping (``ns = max(prev_start, ...)``) requires time-ordered
+    # input. Builders may append events out of ascending order (e.g. a drum
+    # filler emitting kick + snare before 8th-note hats), which otherwise
+    # collapses dense voices onto a single late tick. Sort first, keeping the
+    # silent terminal landmark (pitch 0, largest start_tick) last.
+    events = sorted(events, key=lambda e: (getattr(e, "start_tick", 0),
+                                           getattr(e, "pitch", 0)))
+
     out: List[MusicEvent] = []
     prev_start = 0
     phrase = 0.0
