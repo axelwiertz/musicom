@@ -43,6 +43,7 @@ STYLE_ALIASES: Dict[str, List[str]] = {
     "flamenco":   ["flamenco"],
     "latin":      ["latin", "bossa", "bossa nova", "bossanova", "samba", "cuban",
                    "tango", "balkan", "reggae", "ska", "kizomba"],
+    "lounge":     ["lounge", "chillout", "chill", "cocktail", "exotica", "downtempo"],
     "ambient":    ["ambient", "minimal", "minimalism", "cinematic", "drone",
                    "experimental", "world", "other"],
     "chanson":    ["chanson", "country", "folk", "celtic", "bluegrass", "balfolk",
@@ -138,6 +139,20 @@ def _bass_oompah(ctx: CellContext) -> List[MusicEvent]:
 def _bass_drone(ctx: CellContext) -> List[MusicEvent]:
     """ambient/minimal: sustained root across the whole section."""
     return [MusicEvent(ctx.root_midi, 84, 0, ctx.section_len)]
+
+
+def _bass_bossa(ctx: CellContext) -> List[MusicEvent]:
+    """lounge/bossa: root on 1 & 3, fifth anticipated on the 'and' of 2 & 4."""
+    root = ctx.root_midi
+    fifth = root + 7
+    evs = []
+    for b in range(ctx.section_bars):
+        base = b * ctx.bar_ticks
+        evs.append(MusicEvent(root, 92, base, base + 420))
+        evs.append(MusicEvent(fifth, 86, base + 720, base + 720 + 250))
+        evs.append(MusicEvent(root, 92, base + 960, base + 960 + 420))
+        evs.append(MusicEvent(fifth, 86, base + 1680, base + 1680 + 240))  # bar seam
+    return evs
 
 
 # ---------------------------------------------------------------------------
@@ -284,6 +299,21 @@ def _drums_classical(ctx: CellContext) -> List[MusicEvent]:
     return evs
 
 
+def _drums_bossa(ctx: CellContext) -> List[MusicEvent]:
+    """lounge/bossa: soft kick 1&3, cross-stick 2&4, airy off-beat ride."""
+    evs = []
+    for b in range(ctx.section_bars):
+        base = b * ctx.bar_ticks
+        evs.append(MusicEvent(36, 78, base, base + 90))               # soft kick 1
+        evs.append(MusicEvent(36, 72, base + 960, base + 960 + 90))   # soft kick 3
+        evs.append(MusicEvent(37, 75, base + 480, base + 480 + 80))   # cross-stick 2
+        evs.append(MusicEvent(37, 75, base + 1440, base + 1440 + 80))  # cross-stick 4
+        for e in range(8):
+            if e % 2 == 1:  # airy ride off-beats (bossa float)
+                evs.append(MusicEvent(51, 55, base + e * 240, base + e * 240 + 60))
+    return evs
+
+
 # ---------------------------------------------------------------------------
 # Lead / pad overrides (only where idiomatic — otherwise pop recipes)
 # ---------------------------------------------------------------------------
@@ -326,6 +356,7 @@ RHYTHM_BY_STYLE: Dict[str, Dict[str, Callable]] = {
     "funk":      _recipe(bass=_bass_funk, rhythm=_drums_funk),
     "flamenco":  _recipe(rhythm=_drums_flamenco),
     "latin":     _recipe(rhythm=_drums_latin),
+    "lounge":    _recipe(bass=_bass_bossa, rhythm=_drums_bossa),
     "ambient":   _recipe(pad=_pad_drone, bass=_bass_drone, rhythm=_drums_ambient),
     "chanson":   _recipe(bass=_bass_oompah, rhythm=_drums_march),
     "metal":     _recipe(rhythm=_drums_metal),

@@ -1,0 +1,47 @@
+{
+  "artifact": "298-lounge-bossa-cocktail-humanized.mid",
+  "classification": "ai-assisted",
+  "generator": "298-lounge-bossa-cocktail/compose.py",
+  "sources": [
+    "style:lounge",
+    "key:F major",
+    "bpm:92",
+    "harmony:ii-V-I+7ths",
+    "groove:bossa"
+  ],
+  "parameters": {
+    "bpm": 92,
+    "form": [
+      [
+        "Intro",
+        4
+      ],
+      [
+        "A1",
+        8
+      ],
+      [
+        "A2",
+        8
+      ],
+      [
+        "B",
+        8
+      ],
+      [
+        "A3",
+        8
+      ],
+      [
+        "Outro",
+        4
+      ]
+    ],
+    "seed": 298
+  },
+  "notes": "",
+  "sha256": "5584027afd53708bb7113ec93177e7cd57195325e24fda5afdbe8a770f81b42a",
+  "bytes": 9819,
+  "created_utc": "2026-11-11T20:11:11.431209+00:00",
+  "provenance_version": "1.0"
+}
