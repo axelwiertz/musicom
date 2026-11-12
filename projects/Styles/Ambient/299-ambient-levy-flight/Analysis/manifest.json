@@ -1,0 +1,250 @@
+{
+  "project": "299-ambient-levy-flight",
+  "genre": "Ambient",
+  "method": "053 Levy Flight Composition (LFC)",
+  "paradigm": "Stochastic",
+  "layer": "concrete",
+  "form": "through-composed",
+  "key": "A natural minor",
+  "key_pcs": [
+    0,
+    2,
+    4,
+    5,
+    7,
+    9,
+    11
+  ],
+  "bpm": 72,
+  "bars": 24,
+  "sections": [
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5",
+    "S6"
+  ],
+  "bars_per_section": [
+    4,
+    4,
+    4,
+    4,
+    4,
+    4
+  ],
+  "progression": [
+    "i",
+    "VI",
+    "III",
+    "VII",
+    "i",
+    "VI",
+    "III",
+    "VII",
+    "i",
+    "VI",
+    "III",
+    "VII",
+    "i",
+    "VI",
+    "III",
+    "VII",
+    "i",
+    "VI",
+    "III",
+    "VII",
+    "i",
+    "VI",
+    "III",
+    "VII"
+  ],
+  "alpha_per_section": {
+    "S1": 1.3,
+    "S2": 1.6,
+    "S3": 1.9,
+    "S4": 1.4,
+    "S5": 2.0,
+    "S6": 2.5
+  },
+  "section_mean_pitch_phase1": {
+    "S1": 90.66,
+    "S2": 63.94,
+    "S3": 64.44,
+    "S4": 57.34,
+    "S5": 53.28,
+    "S6": 57.78
+  },
+  "section_max_leap_phase1": {
+    "S1": 28,
+    "S2": 4,
+    "S3": 10,
+    "S4": 9,
+    "S5": 13,
+    "S6": 4
+  },
+  "seed": 20261111,
+  "hz_seed": 263394742,
+  "form_seed": 202611117,
+  "phase1_midi": "/opt/data/projects/Styles/Ambient/299-ambient-levy-flight/MIDI/299-ambient-levy-flight-phase1.mid",
+  "perfect_midi": "/opt/data/projects/Styles/Ambient/299-ambient-levy-flight/MIDI/299-ambient-levy-flight-perfect.mid",
+  "humanized_midi": "/opt/data/projects/Styles/Ambient/299-ambient-levy-flight/MIDI/299-ambient-levy-flight-humanized.mid",
+  "phase1_offgrid": 189,
+  "grid_audit": {
+    "Lead:16th": "0/191",
+    "Lead:8th": "0/191",
+    "Bass:16th": "0/48",
+    "Bass:8th": "0/48",
+    "Pad:16th": "0/144",
+    "Pad:8th": "0/144",
+    "Arp:16th": "0/128",
+    "Arp:8th": "0/128"
+  },
+  "harmony_audit": {
+    "Lead": {
+      "passes": true,
+      "audible": 191,
+      "strong_ok": 48,
+      "weak_in_scale": 143,
+      "tagged": 0,
+      "resolving": 0,
+      "non_resolving": 0,
+      "untagged_out_of_scale": 0,
+      "strong_violations": 0,
+      "collisions": 0
+    },
+    "Bass": {
+      "passes": true,
+      "audible": 48,
+      "strong_ok": 48,
+      "weak_in_scale": 0,
+      "tagged": 0,
+      "resolving": 0,
+      "non_resolving": 0,
+      "untagged_out_of_scale": 0,
+      "strong_violations": 0,
+      "collisions": 0
+    },
+    "Pad": {
+      "passes": true,
+      "audible": 144,
+      "strong_ok": 144,
+      "weak_in_scale": 0,
+      "tagged": 0,
+      "resolving": 0,
+      "non_resolving": 0,
+      "untagged_out_of_scale": 0,
+      "strong_violations": 0,
+      "collisions": 0
+    },
+    "Arp": {
+      "passes": true,
+      "audible": 128,
+      "strong_ok": 48,
+      "weak_in_scale": 80,
+      "tagged": 0,
+      "resolving": 0,
+      "non_resolving": 0,
+      "untagged_out_of_scale": 0,
+      "strong_violations": 0,
+      "collisions": 0
+    }
+  },
+  "hz_summary": {
+    "Lead": {
+      "seed": 26602868942,
+      "profile": {
+        "timing_sigma_ms": 6.0,
+        "velocity_sigma": 7.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.6,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 191,
+      "mean_abs_shift_ticks": 2.701,
+      "max_abs_shift_ticks": 9,
+      "mean_abs_vel_delta": 4.979,
+      "timing_sigma_ticks": 3.456
+    },
+    "Pad": {
+      "seed": 26602868943,
+      "profile": {
+        "timing_sigma_ms": 6.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.6,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 48,
+      "mean_abs_shift_ticks": 1.771,
+      "max_abs_shift_ticks": 6,
+      "mean_abs_vel_delta": 2.979,
+      "timing_sigma_ticks": 3.456
+    },
+    "Bass": {
+      "seed": 26602868944,
+      "profile": {
+        "timing_sigma_ms": 5.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.6,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 144,
+      "mean_abs_shift_ticks": 5.403,
+      "max_abs_shift_ticks": 12,
+      "mean_abs_vel_delta": 3.472,
+      "timing_sigma_ticks": 2.88
+    },
+    "Arp": {
+      "seed": 26602868945,
+      "profile": {
+        "timing_sigma_ms": 6.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.6,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 128,
+      "mean_abs_shift_ticks": 2.852,
+      "max_abs_shift_ticks": 9,
+      "mean_abs_vel_delta": 4.226,
+      "timing_sigma_ticks": 3.456
+    },
+    "Drums": {
+      "seed": 26602868946,
+      "profile": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.008,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.6,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 120,
+      "mean_abs_shift_ticks": 0.817,
+      "max_abs_shift_ticks": 3,
+      "mean_abs_vel_delta": 3.042,
+      "timing_sigma_ticks": 1.152
+    }
+  }
+}

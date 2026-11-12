@@ -140,6 +140,13 @@ comparable to, and how do I use it in a workflow?*
 |||||||| `sound/synthesis/boids_wavetable.py` | BoidFlock, WavetableGrid, Boid | synthesis (flocking wavetable) | Morpheral Machines The Swarm, Reynolds boids | note freq + boid count + attractor/predators → stereo WAV whose timbre is the flock's motion over an nxn frame grid |
 |||||||| `sound/modular/mod_functions.py` | ModFunctionBank, Ramp, Tracker, LagProcessor | modulation (function generators) | Oberheim Matrix-12 ramps/trackers/lag | bpm + ramp segments/tracker points/lag times → control-rate modulation streams per destination |
 |||||||| `sound/generators/perf_seq.py` | Pattern, Sequencer, MemoryBank, LoopRecorder | sequencing (performance step seq) | Stylophone On-The-Fly | 8-step cell + memories + live direction/effects/swing → absolute-tick NoteEvents + MIDI |
+|||||||| `sound/synthesis/sandbender_fm.py` | SandbenderFM, wavefold, svf | synthesis (4-op FM + waveshaping) | Audio Damage Sandbender, DX-style FM with arbitrary routing | ratios/matrix/env → audio |
+|||||||| `sound/synthesis/anukari_modal.py` | AnukariScene, ResonatorObject | physical modeling (3D object network) | Anukari 1.1, modal bar/bell banks | objects + 3D positions + hits → audio |
+|||||||| `sound/synthesis/slot_morph_synth.py` | SlotMorphSynth, SlotSystem | synthesis (slot-sequenced subtractive) | Unusable Engineering Currents & Nostalgia | osc/filter slot lists + note → audio |
+|||||||| `sound/effects/phrase_delay_midgar.py` | Midgar, PhraseDelay, Shimmer, pt2399_delay | effects (phrase capture + lo-fi delay) | Bram Bos MIDGAR | audio → stereo ambient audio |
+|||||||| `sound/effects/wax_theory_vinyl.py` | WaxTheory | effects (media/playback model) | Modbap Wax Theory, vinyl sims | audio + side/format/stylus → vinyl audio |
+|||||||| `sound/effects/hose_delay.py` | CooperTimeCube, Hose, FractionalDelay | effects (acoustic tube delay) | UAD Cooper Time Cube | audio → stereo hose slapback |
+|||||||| `sound/generators/gilla_arp.py` | GillaArp, ClassicArp, ModMatrix | sequencing (harmonic arp) + modulation | quietformat CERNION GILLA ARP | chord + steps → note list / audio |
 || `sound/sync/clock.py` | DAWClockBridge | sync | MTC/MIDI clock | bpm → clock pulses |
 | `sound/render/fluidsynth.py` | FluidSynthRenderer | render | SF2 synth | MIDI → WAV |
 | `sound/render/vst.py` | VSTRenderer | render | DAW VST3 | MIDI → VST audio |
