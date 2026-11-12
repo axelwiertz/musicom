@@ -1,0 +1,13 @@
+{
+  "before_out_of_chord": 34,
+  "after": {
+    "off_grid": 0,
+    "out_scale": 0,
+    "out_chord": 0,
+    "total_onsets": 72,
+    "track_spans": [
+      23040
+    ],
+    "zero_drift": true
+  }
+}
