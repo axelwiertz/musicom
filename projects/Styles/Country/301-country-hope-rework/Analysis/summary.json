@@ -1,0 +1,159 @@
+{
+  "perfect_grid": {
+    "Lead Guitar": {
+      "onsets": 92,
+      "off_16th": 0,
+      "off_8th": 36
+    },
+    "Steel Pad": {
+      "onsets": 72,
+      "off_16th": 0,
+      "off_8th": 0
+    },
+    "Piano": {
+      "onsets": 68,
+      "off_16th": 0,
+      "off_8th": 0
+    },
+    "Bass": {
+      "onsets": 40,
+      "off_16th": 0,
+      "off_8th": 0
+    },
+    "Drums": {
+      "onsets": 149,
+      "off_16th": 0,
+      "off_8th": 16
+    }
+  },
+  "humanized_grid": {
+    "Lead Guitar": {
+      "onsets": 92,
+      "off_16th": 81,
+      "off_8th": 82
+    },
+    "Steel Pad": {
+      "onsets": 72,
+      "off_16th": 68,
+      "off_8th": 68
+    },
+    "Piano": {
+      "onsets": 68,
+      "off_16th": 65,
+      "off_8th": 65
+    },
+    "Bass": {
+      "onsets": 40,
+      "off_16th": 39,
+      "off_8th": 39
+    },
+    "Drums": {
+      "onsets": 149,
+      "off_16th": 102,
+      "off_8th": 109
+    }
+  },
+  "humanize": {
+    "Lead Guitar": {
+      "seed": 2046372413,
+      "profile": {
+        "timing_sigma_ms": 9.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.5,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 92,
+      "mean_abs_shift_ticks": 4.631,
+      "max_abs_shift_ticks": 14,
+      "mean_abs_vel_delta": 5.13,
+      "timing_sigma_ticks": 6.912
+    },
+    "Steel Pad": {
+      "seed": 2046372414,
+      "profile": {
+        "timing_sigma_ms": 9.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.5,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 72,
+      "mean_abs_shift_ticks": 6.945,
+      "max_abs_shift_ticks": 15,
+      "mean_abs_vel_delta": 4.903,
+      "timing_sigma_ticks": 6.912
+    },
+    "Piano": {
+      "seed": 2046372415,
+      "profile": {
+        "timing_sigma_ms": 9.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.5,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 68,
+      "mean_abs_shift_ticks": 5.25,
+      "max_abs_shift_ticks": 15,
+      "mean_abs_vel_delta": 4.162,
+      "timing_sigma_ticks": 6.912
+    },
+    "Bass": {
+      "seed": 2046372416,
+      "profile": {
+        "timing_sigma_ms": 5.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.5,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 40,
+      "mean_abs_shift_ticks": 6.9,
+      "max_abs_shift_ticks": 13,
+      "mean_abs_vel_delta": 2.6,
+      "timing_sigma_ticks": 3.84
+    },
+    "Drums": {
+      "seed": 2046372417,
+      "profile": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.008,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.5,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 149,
+      "mean_abs_shift_ticks": 1.007,
+      "max_abs_shift_ticks": 4,
+      "mean_abs_vel_delta": 3.054,
+      "timing_sigma_ticks": 1.536
+    }
+  },
+  "zero_drift": {
+    "perfect": true,
+    "humanized": true,
+    "phase1": true,
+    "length_ticks": 38400
+  }
+}

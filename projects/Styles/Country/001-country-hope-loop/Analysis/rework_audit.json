@@ -1,0 +1,28 @@
+{
+  "chosen": "/opt/data/projects/Styles/Country/001-country-hope-loop",
+  "genre": "Country",
+  "primary_midi": "/opt/data/projects/Styles/Country/001-country-hope-loop/MIDI/country-hope-loop-v7.mid",
+  "standard_failures": [
+    "1-engine: render_v7.py authors MIDI with raw mido.MidiTrack()/note_on/.save() (hand-rolled, no UnitMatrixComposer)",
+    "2-zero-drift: 2 tracks total (1 meta + 1 mono voice), no multi-voice alignment",
+    "3-rhythm-grid: single voice track length 63328 ticks (delta-time bug, onsets stacked at time=0)",
+    "4-track-setup: only 1 voice track (need >=4); all 5 roles collapsed into one channel",
+    "5-two-phase: <id>-phase1.mid missing",
+    "6-sidecars: provenance.json and index.html missing"
+  ],
+  "redesign_required": true,
+  "source_identity": {
+    "genre": "Country",
+    "key_label": "G mixolydian (realized as G major I-IV-V with D-major V)",
+    "key": "G",
+    "scale_pcs": [7, 9, 11, 0, 2, 4, 6],
+    "tempo": 96,
+    "meter": "4/4",
+    "bars": 8,
+    "backbone": "I-IV-V (G-C-D)",
+    "groove": "boom-chick (kick 1&3, snare 2&4)",
+    "motif": "hopeful ascending major arpeggio G-B-D (1-3-5)",
+    "instruments": ["Lead Acoustic Guitar (25)", "Steel Guitar Pad (26)", "Piano (0)", "Electric Bass (33)", "Drums (ch9)"]
+  },
+  "redesign_note": "All 6 standards failed. Source is a legacy hand-rolled mido loop (8 bars, single merged voice). Rebuild from scratch through UnitMatrixComposer preserving identity only."
+}

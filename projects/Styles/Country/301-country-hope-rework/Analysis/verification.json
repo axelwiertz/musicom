@@ -1,0 +1,39 @@
+{
+  "project": "301-country-hope-rework",
+  "report": {
+    "phase1": {
+      "tracks": 1,
+      "track_len": 38400,
+      "zero_drift": true,
+      "pitched": 92,
+      "drum": 0,
+      "off120": 86,
+      "scale_violations": 33,
+      "chord_violations_blanket": 71,
+      "strong_beat_violations": 4
+    },
+    "perfect": {
+      "tracks": 5,
+      "track_len": 38400,
+      "zero_drift": true,
+      "pitched": 272,
+      "drum": 149,
+      "off120": 0,
+      "scale_violations": 0,
+      "chord_violations_blanket": 0,
+      "strong_beat_violations": 0
+    },
+    "humanized": {
+      "tracks": 5,
+      "track_len": 38400,
+      "zero_drift": true,
+      "pitched": 272,
+      "drum": 149,
+      "off120": 253,
+      "scale_violations": 0,
+      "chord_violations_blanket": 5,
+      "strong_beat_violations": 0
+    }
+  },
+  "verdict": "PASS"
+}

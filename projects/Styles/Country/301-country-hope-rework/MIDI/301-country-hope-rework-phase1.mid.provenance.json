@@ -1,0 +1,132 @@
+{
+  "artifact": "301-country-hope-rework-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "Country Contour Walk (raw, pre-rules)",
+  "sources": [
+    "001-country-hope-loop/MIDI/country-hope-loop-v7.mid"
+  ],
+  "parameters": {
+    "bpm": 96,
+    "key": "G",
+    "key_label": "G major (I-IV-V backbone; source labelled 'mixolydian' but realised D-major V)",
+    "scale": "major",
+    "scale_pcs": [
+      0,
+      2,
+      4,
+      6,
+      7,
+      9,
+      11
+    ],
+    "style": "country",
+    "source": "001-country-hope-loop",
+    "sections": 6,
+    "bars": 20,
+    "progression_per_section": {
+      "Intro": [
+        "G",
+        "C"
+      ],
+      "Verse": [
+        "G",
+        "C",
+        "G",
+        "D"
+      ],
+      "Chorus": [
+        "C",
+        "G",
+        "D",
+        "G"
+      ],
+      "Verse2": [
+        "Em",
+        "Em",
+        "C",
+        "D"
+      ],
+      "Bridge": [
+        "C",
+        "Am",
+        "D",
+        "G"
+      ],
+      "Outro": [
+        "D",
+        "G"
+      ]
+    },
+    "section_roots_midpoint": [
+      [
+        "C",
+        "major"
+      ],
+      [
+        "C",
+        "major"
+      ],
+      [
+        "G",
+        "major"
+      ],
+      [
+        "Em",
+        "minor"
+      ],
+      [
+        "Am",
+        "minor"
+      ],
+      [
+        "G",
+        "major"
+      ]
+    ],
+    "variation_techniques": [
+      "augmentation (Intro+Outro)",
+      "baseline contour (Verse)",
+      "diminution + register shift (Chorus)",
+      "inversion + vi shade (Verse2)",
+      "retrograde + counterline (Bridge)",
+      "density rise (Chorus)",
+      "counterline (Bridge piano)",
+      "authentic cadence V-I (Outro)"
+    ],
+    "seed": 20261113,
+    "humanize_seed": 20261113,
+    "voices": [
+      {
+        "name": "Lead Guitar",
+        "program": 25,
+        "channel": 0
+      },
+      {
+        "name": "Steel Pad",
+        "program": 26,
+        "channel": 1
+      },
+      {
+        "name": "Piano",
+        "program": 0,
+        "channel": 2
+      },
+      {
+        "name": "Bass",
+        "program": 33,
+        "channel": 3
+      },
+      {
+        "name": "Drums",
+        "program": 0,
+        "channel": 9
+      }
+    ],
+    "phase": "1"
+  },
+  "notes": "raw single-voice arpeggio+neighbor contour walk, unquantized pitch + jittered off-grid rhythm, no harmony",
+  "sha256": "b43d66e00d2010ef0b4834d550ab7f2bbd832cb5c1ddf9b484df241b1d5faba5",
+  "bytes": 884,
+  "created_utc": "2026-11-13T01:08:48.174863+00:00",
+  "provenance_version": "1.0"
+}

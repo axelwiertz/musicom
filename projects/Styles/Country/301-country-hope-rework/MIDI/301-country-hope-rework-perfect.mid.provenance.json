@@ -1,0 +1,134 @@
+{
+  "artifact": "301-country-hope-rework-perfect.mid",
+  "classification": "ai-assisted",
+  "generator": "Country Contour Walk + musicom rules (grid-locked)",
+  "sources": [
+    "001-country-hope-loop/MIDI/country-hope-loop-v7.mid",
+    "301-country-hope-rework-phase1.mid"
+  ],
+  "parameters": {
+    "bpm": 96,
+    "key": "G",
+    "key_label": "G major (I-IV-V backbone; source labelled 'mixolydian' but realised D-major V)",
+    "scale": "major",
+    "scale_pcs": [
+      0,
+      2,
+      4,
+      6,
+      7,
+      9,
+      11
+    ],
+    "style": "country",
+    "source": "001-country-hope-loop",
+    "sections": 6,
+    "bars": 20,
+    "progression_per_section": {
+      "Intro": [
+        "G",
+        "C"
+      ],
+      "Verse": [
+        "G",
+        "C",
+        "G",
+        "D"
+      ],
+      "Chorus": [
+        "C",
+        "G",
+        "D",
+        "G"
+      ],
+      "Verse2": [
+        "Em",
+        "Em",
+        "C",
+        "D"
+      ],
+      "Bridge": [
+        "C",
+        "Am",
+        "D",
+        "G"
+      ],
+      "Outro": [
+        "D",
+        "G"
+      ]
+    },
+    "section_roots_midpoint": [
+      [
+        "C",
+        "major"
+      ],
+      [
+        "C",
+        "major"
+      ],
+      [
+        "G",
+        "major"
+      ],
+      [
+        "Em",
+        "minor"
+      ],
+      [
+        "Am",
+        "minor"
+      ],
+      [
+        "G",
+        "major"
+      ]
+    ],
+    "variation_techniques": [
+      "augmentation (Intro+Outro)",
+      "baseline contour (Verse)",
+      "diminution + register shift (Chorus)",
+      "inversion + vi shade (Verse2)",
+      "retrograde + counterline (Bridge)",
+      "density rise (Chorus)",
+      "counterline (Bridge piano)",
+      "authentic cadence V-I (Outro)"
+    ],
+    "seed": 20261113,
+    "humanize_seed": 20261113,
+    "voices": [
+      {
+        "name": "Lead Guitar",
+        "program": 25,
+        "channel": 0
+      },
+      {
+        "name": "Steel Pad",
+        "program": 26,
+        "channel": 1
+      },
+      {
+        "name": "Piano",
+        "program": 0,
+        "channel": 2
+      },
+      {
+        "name": "Bass",
+        "program": 33,
+        "channel": 3
+      },
+      {
+        "name": "Drums",
+        "program": 0,
+        "channel": 9
+      }
+    ],
+    "phase": "2-perfect",
+    "humanize": null
+  },
+  "notes": "grid-locked perfect layer: blanket chord-tone quantize per bar, voice-leading checked, zero humanization",
+  "sha256": "ff02a6c524b51e1ea3af37356c145ec11dbd34936af3667920178d1f5147de99",
+  "bytes": 3742,
+  "created_utc": "2026-11-13T01:08:48.175337+00:00",
+  "provenance_version": "1.0"
+}

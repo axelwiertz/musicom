@@ -1,0 +1,230 @@
+{
+  "artifact": "301-country-hope-rework-humanized.mid",
+  "classification": "ai-assisted",
+  "generator": "Country Contour Walk + musicom rules + humanize",
+  "sources": [
+    "001-country-hope-loop/MIDI/country-hope-loop-v7.mid",
+    "301-country-hope-rework-phase1.mid"
+  ],
+  "parameters": {
+    "bpm": 96,
+    "key": "G",
+    "key_label": "G major (I-IV-V backbone; source labelled 'mixolydian' but realised D-major V)",
+    "scale": "major",
+    "scale_pcs": [
+      0,
+      2,
+      4,
+      6,
+      7,
+      9,
+      11
+    ],
+    "style": "country",
+    "source": "001-country-hope-loop",
+    "sections": 6,
+    "bars": 20,
+    "progression_per_section": {
+      "Intro": [
+        "G",
+        "C"
+      ],
+      "Verse": [
+        "G",
+        "C",
+        "G",
+        "D"
+      ],
+      "Chorus": [
+        "C",
+        "G",
+        "D",
+        "G"
+      ],
+      "Verse2": [
+        "Em",
+        "Em",
+        "C",
+        "D"
+      ],
+      "Bridge": [
+        "C",
+        "Am",
+        "D",
+        "G"
+      ],
+      "Outro": [
+        "D",
+        "G"
+      ]
+    },
+    "section_roots_midpoint": [
+      [
+        "C",
+        "major"
+      ],
+      [
+        "C",
+        "major"
+      ],
+      [
+        "G",
+        "major"
+      ],
+      [
+        "Em",
+        "minor"
+      ],
+      [
+        "Am",
+        "minor"
+      ],
+      [
+        "G",
+        "major"
+      ]
+    ],
+    "variation_techniques": [
+      "augmentation (Intro+Outro)",
+      "baseline contour (Verse)",
+      "diminution + register shift (Chorus)",
+      "inversion + vi shade (Verse2)",
+      "retrograde + counterline (Bridge)",
+      "density rise (Chorus)",
+      "counterline (Bridge piano)",
+      "authentic cadence V-I (Outro)"
+    ],
+    "seed": 20261113,
+    "humanize_seed": 20261113,
+    "voices": [
+      {
+        "name": "Lead Guitar",
+        "program": 25,
+        "channel": 0
+      },
+      {
+        "name": "Steel Pad",
+        "program": 26,
+        "channel": 1
+      },
+      {
+        "name": "Piano",
+        "program": 0,
+        "channel": 2
+      },
+      {
+        "name": "Bass",
+        "program": 33,
+        "channel": 3
+      },
+      {
+        "name": "Drums",
+        "program": 0,
+        "channel": 9
+      }
+    ],
+    "phase": "2-humanized",
+    "humanize_profiles": {
+      "Lead Guitar": {
+        "seed": 2046372413,
+        "profile": {
+          "timing_sigma_ms": 9.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.02,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.5,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 92,
+        "mean_abs_shift_ticks": 4.631,
+        "max_abs_shift_ticks": 14,
+        "mean_abs_vel_delta": 5.13,
+        "timing_sigma_ticks": 6.912
+      },
+      "Steel Pad": {
+        "seed": 2046372414,
+        "profile": {
+          "timing_sigma_ms": 9.0,
+          "velocity_sigma": 5.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.02,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.5,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 72,
+        "mean_abs_shift_ticks": 6.945,
+        "max_abs_shift_ticks": 15,
+        "mean_abs_vel_delta": 4.903,
+        "timing_sigma_ticks": 6.912
+      },
+      "Piano": {
+        "seed": 2046372415,
+        "profile": {
+          "timing_sigma_ms": 9.0,
+          "velocity_sigma": 5.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.02,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.5,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 68,
+        "mean_abs_shift_ticks": 5.25,
+        "max_abs_shift_ticks": 15,
+        "mean_abs_vel_delta": 4.162,
+        "timing_sigma_ticks": 6.912
+      },
+      "Bass": {
+        "seed": 2046372416,
+        "profile": {
+          "timing_sigma_ms": 5.0,
+          "velocity_sigma": 4.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.01,
+          "layback_ms": 8.0,
+          "phrase_corr": 0.5,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 40,
+        "mean_abs_shift_ticks": 6.9,
+        "max_abs_shift_ticks": 13,
+        "mean_abs_vel_delta": 2.6,
+        "timing_sigma_ticks": 3.84
+      },
+      "Drums": {
+        "seed": 2046372417,
+        "profile": {
+          "timing_sigma_ms": 2.0,
+          "velocity_sigma": 4.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.008,
+          "layback_ms": 0.0,
+          "phrase_corr": 0.5,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 149,
+        "mean_abs_shift_ticks": 1.007,
+        "max_abs_shift_ticks": 4,
+        "mean_abs_vel_delta": 3.054,
+        "timing_sigma_ticks": 1.536
+      }
+    }
+  },
+  "notes": "humanized layer: country style profile + per-instrument DNA",
+  "sha256": "725e6bd8894d774a2cb804978470e514ed04828017ddbbe3bdd5ad1bf1d4744f",
+  "bytes": 3744,
+  "created_utc": "2026-11-13T01:08:48.175743+00:00",
+  "provenance_version": "1.0"
+}
