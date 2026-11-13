@@ -1,0 +1,55 @@
+{
+  "job": "random-style production (SP) layer-aligned",
+  "date": "2026-11-13",
+  "seed": 20261113,
+  "method": "SP-084",
+  "method_module": "sound.synthesis.air_pipe",
+  "method_desc": "Flue-Pipe Physical Model w/ Air-Supply Modulation \u2014 open/stopped cylindrical pipe resonators (c/2L, c/4L with end correction), saturating flue-jet drive, turbulence breath, overblow migration, DAM air-supply modulation (Modartt Airteq-style)",
+  "layer": "ABSOLUTE",
+  "params": {
+    "sample_rate": 44100,
+    "bpm": 120.0,
+    "ppqn": 480,
+    "ring_tail": 0.12,
+    "pressure_base": 0.32,
+    "pressure_range": 0.4,
+    "overblow_threshold": 0.75,
+    "voice_map": "melody=open, comp=open, bass=stopped (odd harmonics)",
+    "global_air": "0.10*sin(2pi*0.15t) + 0.06*sin(2pi*0.37t)",
+    "pan_range": 0.35,
+    "target_lufs": -14.0,
+    "ceiling_db": -1.0
+  },
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Ragtime/206-ragtime-skeleton-refinement/MIDI/206-ragtime-skeleton-refinement.mid",
+  "source_bpm": 120.0,
+  "source_pitch_classes": [
+    0,
+    2,
+    4,
+    5,
+    7,
+    9,
+    11
+  ],
+  "key": "C major",
+  "output_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP084-air-pipe-206-ragtime-skeleton-refinement/SP084-air-pipe-206-ragtime-skeleton-refinement.wav",
+  "output_ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP084-air-pipe-206-ragtime-skeleton-refinement/SP084-air-pipe-206-ragtime-skeleton-refinement.ogg",
+  "raw_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP084-air-pipe-206-ragtime-skeleton-refinement/SP084_air_pipe_raw.wav",
+  "lufs": -14.136847524192756,
+  "peak": 0.8912509083747864,
+  "silence_pct": 1.5521632303457404,
+  "rms": 0.11919384449720383,
+  "pitch_verdict": "PASS",
+  "hit_rate": 1.0,
+  "he_mean": 0.3410823431205633,
+  "preflight": {
+    "notes": 600,
+    "off_grid": 0,
+    "out_scale": 0,
+    "out_chord": 0,
+    "zero_drift": true,
+    "track_ends": [
+      76800
+    ]
+  }
+}

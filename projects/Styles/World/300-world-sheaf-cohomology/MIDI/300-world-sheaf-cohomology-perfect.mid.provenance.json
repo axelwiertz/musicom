@@ -1,0 +1,232 @@
+{
+  "artifact": "300-world-sheaf-cohomology-perfect.mid",
+  "classification": "ai-assisted",
+  "generator": "Cellular Sheaf Cohomology 134 + musicom rules (phase 2, grid-locked)",
+  "sources": [],
+  "parameters": {
+    "phase": "2",
+    "layer": "perfect",
+    "style": "world",
+    "key": "D natural minor",
+    "bpm": 100,
+    "seed": 20261112,
+    "humanize_seed": 263394756,
+    "sections": 6,
+    "bars": 40,
+    "form": "verse-chorus",
+    "progression": [
+      "Dm7",
+      "Dm7",
+      "Dm7",
+      "Dm7",
+      "Gm7",
+      "Gm7",
+      "Gm7",
+      "Gm7",
+      "Gm7",
+      "Gm7",
+      "Gm7",
+      "Gm7",
+      "Bbmaj7",
+      "Bbmaj7",
+      "Bbmaj7",
+      "Bbmaj7",
+      "Bbmaj7",
+      "Bbmaj7",
+      "Bbmaj7",
+      "Bbmaj7",
+      "Fmaj7",
+      "Fmaj7",
+      "Fmaj7",
+      "Fmaj7",
+      "Fmaj7",
+      "Fmaj7",
+      "Fmaj7",
+      "Fmaj7",
+      "Bbmaj7",
+      "Bbmaj7",
+      "Bbmaj7",
+      "Bbmaj7",
+      "Bbmaj7",
+      "Bbmaj7",
+      "Bbmaj7",
+      "Bbmaj7",
+      "Dm7",
+      "Dm7",
+      "Dm7",
+      "Dm7"
+    ],
+    "sheaf": {
+      "vertices": [
+        "Dm7",
+        "Gm7",
+        "Bbmaj7",
+        "Fmaj7",
+        "Bbmaj7",
+        "Dm7"
+      ],
+      "vertex_pcs": [
+        [
+          0,
+          2,
+          5,
+          9
+        ],
+        [
+          2,
+          5,
+          7,
+          10
+        ],
+        [
+          2,
+          5,
+          9,
+          10
+        ],
+        [
+          0,
+          4,
+          5,
+          9
+        ],
+        [
+          2,
+          5,
+          9,
+          10
+        ],
+        [
+          0,
+          2,
+          5,
+          9
+        ]
+      ],
+      "edges": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          0
+        ]
+      ],
+      "seam_commons": [
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          5,
+          10
+        ],
+        [
+          5,
+          9
+        ],
+        [
+          5,
+          9
+        ],
+        [
+          2,
+          5,
+          9
+        ],
+        [
+          0,
+          2,
+          5,
+          9
+        ]
+      ],
+      "stalk_dim": 4,
+      "sum_dv": 24,
+      "sum_de": 16,
+      "rank_delta": 15,
+      "dim_H0": 9,
+      "dim_H1": 1,
+      "euler_poincare": "9-1=8 (sum dv - sum de = 8)",
+      "holonomy": "identity (T_0) -- loop closes, Outro returns to Intro chord",
+      "spanning_trees_C6": 6,
+      "seam_lift": [
+        2,
+        1,
+        -1,
+        1,
+        -3,
+        0
+      ],
+      "demand_per_seam": [
+        [
+          2,
+          2
+        ],
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          -1,
+          -1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          -3,
+          -3,
+          -3
+        ],
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "seam_residual": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "section_lift": [
+        0,
+        2,
+        3,
+        2,
+        3,
+        0
+      ]
+    }
+  },
+  "notes": "grid-locked concrete layer; off-grid onsets == 0; tiered snap (strong->chord tone, weak->D-minor scale).",
+  "sha256": "83bf168128329d367b30d5477b094bb5db191594fa59744429f2847c60999ddb",
+  "bytes": 10317,
+  "created_utc": "2026-11-12T23:09:32.976280+00:00",
+  "provenance_version": "1.0"
+}

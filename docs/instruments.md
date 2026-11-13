@@ -636,6 +636,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Guitar | Electric Guitar (muted) | 28 | 28–84 | rhythm, comp, groove, accent, texture, melody |
 | Guitar | Overdriven Guitar | 29 | 28–84 | lead, melody, accent, rhythm, strum, countermelody |
 | Guitar | Distortion Guitar | 30 | 28–84 | lead, melody, accent, rhythm, power-chord strum, countermelody |
+| Guitar | Guitar Harmonics | 31 | 40–84 | lead, melody, ornament, texture, accent, countermelody |
 | Bass | Electric Bass (finger) | 33 | 24–84 | bass, rhythm, countermelody, accent |
 | Bass | Acoustic Bass | 32 | 24–72 | bass, rhythm, countermelody, accent, melody |
 | Bass | Fretless Bass | 35 | 24–72 | bass, melody, countermelody, groove, slide, color |
@@ -752,6 +753,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 |||| 82 | Lead 3 (calliope) | Lead_3_calliope ✓ (GM_PROGRAMS[82] = "Lead 3 (calliope)" → sanitized `Lead_3_calliope` — parens stripped, spaces → underscore; FluidR3 preset 82 = **"Calliope Lead"** — SF2 internal name differs from the GM label, cosmetic only, **no routing impact**; stems are labelled from GM_PROGRAMS) |
 |||| 89 | Pad 2 (warm) | Pad_2_warm ✓ (GM_PROGRAMS[89] = "Pad 2 (warm)" → sanitized `Pad_2_warm` — parens stripped, spaces → underscore; FluidR3 preset 89 = **"Warm Pad"** — SF2 internal name differs from the GM label, cosmetic only, **no routing impact**; STEM_LABEL = "Pad_2_warm" matches the pipeline's real label) |
 |||| 55 | Orchestra Hit | Orchestra_Hit ✓ (GM_PROGRAMS[55] = "Orchestra Hit"; FluidR3 preset 55 = "Orchestra Hit" — labels match exactly, **no quirk**) |
+|||| 31 | Guitar Harmonics | Guitar_harmonics ✓ (GM_PROGRAMS[31] = "Guitar harmonics" — GM2 spec spelling, lowercase "h" + a SPACE, sanitized to `Guitar_harmonics`; FluidR3 preset 31 = "Guitar Harmonics" — capitalisation only, **no routing impact**; STEM_LABEL = "Guitar_harmonics" matches the pipeline's real label). **PITCH quirk**: FluidR3 preset 31 sounds ONE OCTAVE ABOVE the written note (written C4 → peak 522 Hz; control presets 25/105 → 262 Hz) — write an octave below the desired sound (`TRANSPOSE_SEMITONES = 12`) |
 
 > **Known off-by-one in existing entries**: ~~`trumpet.py` uses 57~~ **FIXED 2026-08-27**: trumpet is now 56 (SF2 preset 56=`SoloTrumpet`). `piano.py`=1 → actually Bright Acoustic Piano (GM #2) — cosmetic label difference only, no routing impact. Legacy registry rows kept as-is for piano; new instruments use 0-indexed programs matching pipeline+SF2.
 
@@ -2273,3 +2275,58 @@ bed; (4) `MidiInstrument.STRING_ENSEMBLE = 49` — the legacy enum's value
 happens to equal GM49 (Slow Strings), NOT GM48; the registry is the truth.
 Remaining sibling candidates: GM31 "Guitar harmonics", GM63 "Synth Brass
 2", GM50/51 "Synth Strings 1/2".
+
+**Guitar Harmonics added** (2026-11-13): GM31, **Guitar-family eighth entry**
+— the guitar's node-touched chiming voice (natural 12th/7th/5th-fret
+harmonics, artificial + pinch harmonics); the ONLY KB guitar whose
+fundamental partial is removed by physics (instrument.md + guitar_harmonics.py),
+verified end-to-end UnitMatrixComposer → zero-drift ✓ → MIDI (219 bytes) →
+FluidSynth WAV (709 KB) ✓; RenderPipeline stem label
+`trackXX_Guitar_harmonics.wav` ✓ (GM_PROGRAMS[31] = "Guitar harmonics" — GM2
+spec spelling with a lowercase "h" and a SPACE, sanitized to
+`Guitar_harmonics`; FluidR3 preset 31 = "Guitar Harmonics" — capitalisation
+only, **no routing quirk**). **PITCH QUIRK (new class)**: FluidR3 preset 31
+sounds ONE OCTAVE ABOVE the written note — measured peak 522.0 Hz for written
+C4 (261.6 Hz) vs 262.0 Hz for control presets 25 (steel guitar) and 105
+(banjo), so it is a patch property, not a render-path bug;
+`TRANSPOSE_SEMITONES = 12` (+ written 40–84 → sounding 52–96; patch is
+SILENT ≥ MIDI 86, sweep 18–96 audible 18–85). This mirrors real physics
+(a 12th-fret node halves the string) but composition jobs MUST write an
+octave below the desired sound. ModalSynth recommended with custom
+`GUITAR_HARMONICS_MODES` — the measured ODD-harmonic spectrum of the
+sounding pitch **1 : 3 : 5 : 7** (even partials killed by the node; measured
+on the solo render: peaks at 2x/6x/10x/14x of the written note, 28%/10%/11%/1%
+of band energy) with decay rates 0.35/0.60/0.95/1.30 — the SLOWEST in the
+struck/plucked set: late(1.0–1.5 s) rms/peak **0.489** vs the marimba
+preset's 0.0001 = 6280x longer ring (one surviving partial has nowhere to
+leak energy; the SF2 patch is looped and holds a flat envelope while the key
+is down). Karplus-Strong remains a legitimate fallback (the string IS
+plucked, unlike struck bars): loop_gain 0.9988 — the highest in the KB, just
+above harp 0.9985, tail(1–2 s) 0.00156 vs 0.00015 for a 0.990 dull control =
+10.7x and 1.11x the harp's; width 0.22 (narrow glassy pulse), noise 0.004
+(a finger touch, not a pick scrape). PhaseMod alt ratio 2.0 / depth 0.8.
+Range 40–84 = written E2–C6 (the GM patch span; patch dies at 86), solo
+48–76 (written C3–E5 = sounding C4–E6, the real 22-fret harmonic compass),
+sweet spot 52–72 (written E3–C5 = sounding E4–C6); zones low 40–47 (12th-fret
+harmonics on wound bass strings), mid 48–64 (7th/5th-fret nodes, primary
+melody), high 65–84 (artificial/pinch harmonics, glassy). Registration proof:
+`by_name('guitar harmonics')` / `by_name('Guitar harmonics')` → Guitar
+Harmonics, `by_program(31)` → Guitar Harmonics (distinct from `by_program(30)`
+Distortion Guitar), `in_sweet_spot(60)` = True, `in_sweet_spot(24)` = False,
+`stem_label = 'Guitar_harmonics'`, `synthesis = 'modal'`; `registry_table()`
+row "| Guitar | Guitar Harmonics | 31 | 40–84 | lead, melody, ornament,
+texture, accent, countermelody |"; convenience constant `GUITAR_HARMONICS`.
+Role: lead/melody (artificial-harmonic lines floating an octave above the
+arrangement), ornament/accent (12th-fret chimes, pinch squeals), texture
+(arpeggiated harmonic chords, "ice intro" ambient layers, let-ring cascades),
+countermelody (answers a vocal from above, glockenspiel register but with
+guitar attack) — NOT a bass voice (lowest sound E3, fundamental is missing by
+design), NOT a rhythm/chord bed (2–3 note harmonic dyads only; the tone is
+too pure and too long for strummed harmony). Production: REVERB_TAIL 2.6 s
+(longest guitar tail in the KB — the chime floats; pull to ~1.2 s in a dense
+mix), EQ cut 240 Hz −2 dB (body thump under the chime), boost 5 kHz +2 dB
+(the 5f/7f glass band IS the identity), 10.5 kHz air shelf +2 dB (above the
+steel guitar's 9 kHz shelf), PAN −0.15 (±0.5 doubles for the classic stereo
+shimmer — different octaves/pitches, never unison copies). No-unison rule
+applies with extra force here: the near-pure odd-harmonic tone beats audibly
+against a piano/harp unison (2026-09-01 comb-filter lesson).

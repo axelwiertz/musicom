@@ -62,6 +62,7 @@ _INSTRUMENT_MODULES = {
     "Guitar.jazz_guitar.jazz_guitar": "jazz_guitar",
     "Guitar.overdriven.overdriven": "overdriven",
     "Guitar.distortion_guitar.distortion_guitar": "distortion_guitar",
+    "Guitar.guitar_harmonics.guitar_harmonics": "guitar_harmonics",
     "Percussion.drum_kit.drum_kit": "drum_kit",
     "Percussion.marimba.marimba": "marimba",
     "Percussion.steel_drums.steel_drums": "steel_drums",
@@ -316,6 +317,7 @@ JAZZ_GUITAR = ALL_INSTRUMENTS["jazz_guitar"]
 MUTED_GUITAR = ALL_INSTRUMENTS["muted_guitar"]
 OVERDRIVEN_GUITAR = ALL_INSTRUMENTS["overdriven"]
 DISTORTION_GUITAR = ALL_INSTRUMENTS["distortion_guitar"]
+GUITAR_HARMONICS = ALL_INSTRUMENTS["guitar_harmonics"]
 VIBRAPHONE = ALL_INSTRUMENTS["vibraphone"]
 SITAR = ALL_INSTRUMENTS["sitar"]
 KOTO = ALL_INSTRUMENTS["koto"]
@@ -528,6 +530,8 @@ def registry_table():
             role = "lead, melody, accent, rhythm, strum, countermelody"
         elif low == "distortion guitar":
             role = "lead, melody, accent, rhythm, power-chord strum, countermelody"
+        elif low == "guitar harmonics":
+            role = "lead, melody, ornament, texture, accent, countermelody"
         elif low == "pad 1 (new age)":
             role = "pad, harmony, texture, drone, accent"
         elif low == "pad 2 (warm)":
@@ -1002,3 +1006,17 @@ if __name__ == "__main__":
     print("  STRING_ENSEMBLE_2.synthesis =", repr(STRING_ENSEMBLE_2.synthesis))
     print("  STRING_ENSEMBLE_2.synthesis_defaults =", STRING_ENSEMBLE_2.synthesis_defaults)
     print("  STRING_ENSEMBLE_2.string_ensemble_defaults =", STRING_ENSEMBLE_2.string_ensemble_defaults)
+
+    print()
+    print("=== Guitar Harmonics (GM31) ===")
+    print("  GUITAR_HARMONICS.midi_program =", GUITAR_HARMONICS.midi_program, "(should be 31)")
+    print("  by_name('guitar harmonics') =", by_name("guitar harmonics"))
+    print("  by_name('Guitar harmonics') =", by_name("Guitar harmonics"))
+    print("  by_program(31) =", by_program(31))
+    print("  by_program(30) =", by_program(30), "(distinct: distortion guitar)")
+    print("  GUITAR_HARMONICS.in_sweet_spot(60) =", GUITAR_HARMONICS.in_sweet_spot(60))
+    print("  GUITAR_HARMONICS.in_sweet_spot(24) =", GUITAR_HARMONICS.in_sweet_spot(24))
+    print("  GUITAR_HARMONICS.range_min =", GUITAR_HARMONICS.range_min,
+          "GUITAR_HARMONICS.range_max =", GUITAR_HARMONICS.range_max)
+    print("  GUITAR_HARMONICS.stem_label =", repr(GUITAR_HARMONICS.stem_label))
+    print("  GUITAR_HARMONICS.synthesis =", repr(GUITAR_HARMONICS.synthesis))

@@ -1,0 +1,16 @@
+CHECK 01 comb echo spacing = m                          PASS  spacing 1310 samples (m=1310)
+CHECK 02 comb geometric decay g                         PASS  ratio 0.770000 (g=0.77)
+CHECK 03 allpass |H| flat (colorless)                   PASS  max |H| deviation 0.0000 dB over 20 Hz-20 kHz
+CHECK 04 network RT60 vs design (longest comb)          PASS  RT60 1.065 s vs design 1.155 s (-7.8 %)
+CHECK 05 echo density grows with time                   PASS  1240 -> 18960 -> 16380 echos/s ([0,50) [100,150) [150,200) ms)
+CHECK 06 late echo density >= 500/s                     PASS  16380 echos/s at 150-200 ms (Schroeder target ~1000/s)
+CHECK 07 no dominant periodic comb ripple (network)     PASS  dB-spectrum autocorr @33.7 Hz: comb 1.00 -> network 0.02
+CHECK 08 quasi-stereo L/R decorrelated                  PASS  corr(L,R) = 0.23 (rms ratio 1.000)
+CHECK 09 deterministic (bit-identical)                  PASS  two renders identical
+CHECK 10 bounded output (g<1)                           PASS  noise peak out/in = 0.71 (comb resonance 1/(1-g)=4.35)
+CHECK 11 sine gain == |H_net(f)| (t/f consistency)      PASS  sine gain 0.768 vs |H(fk)| 0.768 @ 10099 Hz
+CHECK 12 in-loop damping darkens tail                   PASS  tail centroid 11052 Hz (damp=0) -> 9282 Hz (damp=0.5)
+CHECK 13 WAV artifact + frame count                     PASS  388124 B = 44 + 4*97020 frames (2.20 s)
+
+SUMMARY: 13/13 checks pass
+RT60=1.065s  autocorr_comb=1.00 autocorr_net=0.02 corr=0.23 gain=0.768

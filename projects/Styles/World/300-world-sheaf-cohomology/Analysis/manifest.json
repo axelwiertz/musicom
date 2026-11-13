@@ -1,0 +1,425 @@
+{
+  "project": "300-world-sheaf-cohomology",
+  "genre": "World",
+  "method": "134 Cellular Sheaf Cohomology Composition (CSCC)",
+  "paradigm": "Rules-Based",
+  "layer": "abstract",
+  "form": "verse-chorus",
+  "key": "D natural minor",
+  "key_pcs": [
+    0,
+    2,
+    4,
+    5,
+    7,
+    9,
+    10
+  ],
+  "bpm": 100,
+  "bars": 40,
+  "sections": [
+    "Intro",
+    "Verse",
+    "Chorus",
+    "Verse2",
+    "Chorus2",
+    "Outro"
+  ],
+  "bars_per_section": [
+    4,
+    8,
+    8,
+    8,
+    8,
+    4
+  ],
+  "section_chord": [
+    "Dm7",
+    "Gm7",
+    "Bbmaj7",
+    "Fmaj7",
+    "Bbmaj7",
+    "Dm7"
+  ],
+  "progression": [
+    "Dm7",
+    "Dm7",
+    "Dm7",
+    "Dm7",
+    "Gm7",
+    "Gm7",
+    "Gm7",
+    "Gm7",
+    "Gm7",
+    "Gm7",
+    "Gm7",
+    "Gm7",
+    "Bbmaj7",
+    "Bbmaj7",
+    "Bbmaj7",
+    "Bbmaj7",
+    "Bbmaj7",
+    "Bbmaj7",
+    "Bbmaj7",
+    "Bbmaj7",
+    "Fmaj7",
+    "Fmaj7",
+    "Fmaj7",
+    "Fmaj7",
+    "Fmaj7",
+    "Fmaj7",
+    "Fmaj7",
+    "Fmaj7",
+    "Bbmaj7",
+    "Bbmaj7",
+    "Bbmaj7",
+    "Bbmaj7",
+    "Bbmaj7",
+    "Bbmaj7",
+    "Bbmaj7",
+    "Bbmaj7",
+    "Dm7",
+    "Dm7",
+    "Dm7",
+    "Dm7"
+  ],
+  "sheaf": {
+    "vertices": [
+      "Dm7",
+      "Gm7",
+      "Bbmaj7",
+      "Fmaj7",
+      "Bbmaj7",
+      "Dm7"
+    ],
+    "vertex_pcs": [
+      [
+        0,
+        2,
+        5,
+        9
+      ],
+      [
+        2,
+        5,
+        7,
+        10
+      ],
+      [
+        2,
+        5,
+        9,
+        10
+      ],
+      [
+        0,
+        4,
+        5,
+        9
+      ],
+      [
+        2,
+        5,
+        9,
+        10
+      ],
+      [
+        0,
+        2,
+        5,
+        9
+      ]
+    ],
+    "edges": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        5,
+        0
+      ]
+    ],
+    "seam_commons": [
+      [
+        2,
+        5
+      ],
+      [
+        2,
+        5,
+        10
+      ],
+      [
+        5,
+        9
+      ],
+      [
+        5,
+        9
+      ],
+      [
+        2,
+        5,
+        9
+      ],
+      [
+        0,
+        2,
+        5,
+        9
+      ]
+    ],
+    "stalk_dim": 4,
+    "sum_dv": 24,
+    "sum_de": 16,
+    "rank_delta": 15,
+    "dim_H0": 9,
+    "dim_H1": 1,
+    "euler_poincare": "9-1=8 (sum dv - sum de = 8)",
+    "holonomy": "identity (T_0) -- loop closes, Outro returns to Intro chord",
+    "spanning_trees_C6": 6,
+    "seam_lift": [
+      2,
+      1,
+      -1,
+      1,
+      -3,
+      0
+    ],
+    "demand_per_seam": [
+      [
+        2,
+        2
+      ],
+      [
+        1,
+        1,
+        1
+      ],
+      [
+        -1,
+        -1
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        -3,
+        -3,
+        -3
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "seam_residual": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "section_lift": [
+      0,
+      2,
+      3,
+      2,
+      3,
+      0
+    ]
+  },
+  "section_mean_pitch_phase1": {
+    "Intro": 65.59,
+    "Verse": 79.42,
+    "Chorus": 75.98,
+    "Verse2": 77.56,
+    "Chorus2": 78.02,
+    "Outro": 70.53
+  },
+  "seed": 20261112,
+  "hz_seed": 263394756,
+  "form_seed": 202611127,
+  "phase1_midi": "/opt/data/projects/Styles/World/300-world-sheaf-cohomology/MIDI/300-world-sheaf-cohomology-phase1.mid",
+  "perfect_midi": "/opt/data/projects/Styles/World/300-world-sheaf-cohomology/MIDI/300-world-sheaf-cohomology-perfect.mid",
+  "humanized_midi": "/opt/data/projects/Styles/World/300-world-sheaf-cohomology/MIDI/300-world-sheaf-cohomology-humanized.mid",
+  "phase1_offgrid": 312,
+  "grid_audit": {
+    "Lead:16th": "0/318",
+    "Lead:8th": "0/318",
+    "Bass:16th": "0/80",
+    "Bass:8th": "0/80",
+    "Drone:16th": "0/368",
+    "Drone:8th": "0/368",
+    "Koto:16th": "0/224",
+    "Koto:8th": "0/224"
+  },
+  "harmony_audit": {
+    "Lead": {
+      "passes": true,
+      "audible": 318,
+      "strong_ok": 79,
+      "weak_in_scale": 239,
+      "tagged": 0,
+      "resolving": 0,
+      "non_resolving": 0,
+      "untagged_out_of_scale": 0,
+      "strong_violations": 0,
+      "collisions": 0
+    },
+    "Bass": {
+      "passes": true,
+      "audible": 80,
+      "strong_ok": 80,
+      "weak_in_scale": 0,
+      "tagged": 0,
+      "resolving": 0,
+      "non_resolving": 0,
+      "untagged_out_of_scale": 0,
+      "strong_violations": 0,
+      "collisions": 0
+    },
+    "Drone": {
+      "passes": true,
+      "audible": 368,
+      "strong_ok": 368,
+      "weak_in_scale": 0,
+      "tagged": 0,
+      "resolving": 0,
+      "non_resolving": 0,
+      "untagged_out_of_scale": 0,
+      "strong_violations": 0,
+      "collisions": 0
+    },
+    "Koto": {
+      "passes": true,
+      "audible": 224,
+      "strong_ok": 80,
+      "weak_in_scale": 144,
+      "tagged": 0,
+      "resolving": 0,
+      "non_resolving": 0,
+      "untagged_out_of_scale": 0,
+      "strong_violations": 0,
+      "collisions": 0
+    }
+  },
+  "hz_summary": {
+    "Lead": {
+      "seed": 26602870356,
+      "profile": {
+        "timing_sigma_ms": 7.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 318,
+      "mean_abs_shift_ticks": 3.692,
+      "max_abs_shift_ticks": 14,
+      "mean_abs_vel_delta": 4.84,
+      "timing_sigma_ticks": 5.6
+    },
+    "Bass": {
+      "seed": 26602870357,
+      "profile": {
+        "timing_sigma_ms": 5.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 80,
+      "mean_abs_shift_ticks": 6.825,
+      "max_abs_shift_ticks": 12,
+      "mean_abs_vel_delta": 2.7,
+      "timing_sigma_ticks": 4.0
+    },
+    "Drone": {
+      "seed": 26602870358,
+      "profile": {
+        "timing_sigma_ms": 7.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 368,
+      "mean_abs_shift_ticks": 5.348,
+      "max_abs_shift_ticks": 14,
+      "mean_abs_vel_delta": 4.769,
+      "timing_sigma_ticks": 5.6
+    },
+    "Koto": {
+      "seed": 26602870359,
+      "profile": {
+        "timing_sigma_ms": 7.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 224,
+      "mean_abs_shift_ticks": 3.862,
+      "max_abs_shift_ticks": 17,
+      "mean_abs_vel_delta": 4.768,
+      "timing_sigma_ticks": 5.6
+    },
+    "Drums": {
+      "seed": 26602870360,
+      "profile": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.008,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 264,
+      "mean_abs_shift_ticks": 0.989,
+      "max_abs_shift_ticks": 3,
+      "mean_abs_vel_delta": 3.447,
+      "timing_sigma_ticks": 1.6
+    }
+  }
+}

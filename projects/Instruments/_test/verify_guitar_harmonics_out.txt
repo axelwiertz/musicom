@@ -1,0 +1,30 @@
+registry: <Instrument Guitar Harmonics (family=Guitar, program=31, range=40-84)>
+GH.midi_program=31 name='Guitar Harmonics' stem='Guitar_harmonics' range=40-84 sweet=(52, 72) synth=modal
+by_name('guitar harmonics') = <Instrument Guitar Harmonics (family=Guitar, program=31, range=40-84)>
+by_program(31) = <Instrument Guitar Harmonics (family=Guitar, program=31, range=40-84)>
+
+zones={'low': (40, 47), 'mid': (48, 64), 'high': (65, 84)}
+articulations=['harmonic_12', 'harmonic_7', 'harmonic_5', 'artificial', 'pinch_squeal', 'harp_harmonic', 'chime_double_stop', 'tap_harmonic', 'let_ring', 'muted']
+transpose=+12 semitones (SF2 patch sounds octave up)
+reverb=2.6s eq_body=(240, -2.0) eq_presence=(5000, 2.0) eq_air=(10500, 2.0) pan=-0.15
+freq: written 48=130.8Hz sounds 261.6Hz
+
+Zero-drift: True (OK)
+MIDI: /opt/data/projects/Instruments/_test/guitar_harmonics_test.mid (219 bytes)
+soundfont: /opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2
+WAV (solo): /opt/data/projects/Instruments/_test/guitar_harmonics_test.wav (709164 bytes)
+Spectral check: 4-8kHz buzz energy = 0.7% (OK)
+
+Written 48 (130.8 Hz) rendered peak 264.0 Hz (expected octave-up 261.6 Hz, ratio 2.02x)
+partials re sounding pitch: 1x=118 2x=85 3x=44 5x=23 -> odd share 69%
+
+ModalSynth custom bank: peak=0.900 late(1.0-1.5s) rms/peak=0.489
+  reference marimba preset late rms/peak=0.0001 -> harmonics ring 6280x longer
+Karplus loop_gain=0.9988: peak=0.369 tail(1-2s)=0.00156 vs 0.990 dull control 0.00015 -> 10.7x
+Stem label: GM_PROGRAMS[31] = 'Guitar harmonics' -> file 'Guitar_harmonics'
+SF2 preset 31 -> 'Guitar Harmonics'
+Stems (2):
+  track00_Guitar_harmonics.wav (709164 bytes)
+  track01_Drums.wav (787756 bytes)
+
+ALL CHECKS PASSED
