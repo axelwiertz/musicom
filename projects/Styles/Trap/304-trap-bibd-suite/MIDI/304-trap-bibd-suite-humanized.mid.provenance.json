@@ -1,0 +1,77 @@
+{
+  "artifact": "304-trap-bibd-suite-humanized.mid",
+  "classification": "ai-assisted",
+  "generator": "BIBDC (Method 132) + rules + humanize (phase 2, humanized)",
+  "sources": [],
+  "parameters": {
+    "phase": "2",
+    "layer": "humanized",
+    "style": "trap",
+    "key": "E natural minor",
+    "bpm": 140,
+    "seed": 20261114,
+    "humanize_seed": 263394786,
+    "humanize_profiles": {
+      "Lead": {
+        "timing_sigma_ms": 4.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 6.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Pluck": {
+        "timing_sigma_ms": 4.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 6.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Pad": {
+        "timing_sigma_ms": 4.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 6.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Bass": {
+        "timing_sigma_ms": 5.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Drums": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.008,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      }
+    }
+  },
+  "notes": "style-derived seeded humanization (trap profile + per-instrument DNA).",
+  "sha256": "1de62aee593fbc81f796db3b70d4142a8b7f00739284f960a18d0883815ec123",
+  "bytes": 8617,
+  "created_utc": "2026-11-14T23:10:52.114106+00:00",
+  "provenance_version": "1.0"
+}

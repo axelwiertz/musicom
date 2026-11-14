@@ -1,0 +1,28 @@
+{
+  "artifact": "304-trap-bibd-suite-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "BIBDC (Method 132) -- raw melodic walk (phase 1)",
+  "sources": [],
+  "parameters": {
+    "phase": "1",
+    "layer": "raw",
+    "style": "trap",
+    "key": "E natural minor",
+    "bpm": 140,
+    "seed": 20261114,
+    "sections": 4,
+    "bars": 32,
+    "form": "strophic",
+    "section_mean_pitch": {
+      "Verse1": 68.93,
+      "Verse2": 78.0,
+      "Verse3": 72.05,
+      "Verse4": 68.87
+    }
+  },
+  "notes": "phase1 raw draft: single-voice stochastic walk (Kalimba), unquantized chromatic pitch + off-grid rhythm; no harmony, no BIBD schedule yet.",
+  "sha256": "cb9648b2e8cb99dd4b811a67149944e2842ec7d0e705e623b09ad18cd6160a7c",
+  "bytes": 1462,
+  "created_utc": "2026-11-14T23:10:52.113342+00:00",
+  "provenance_version": "1.0"
+}

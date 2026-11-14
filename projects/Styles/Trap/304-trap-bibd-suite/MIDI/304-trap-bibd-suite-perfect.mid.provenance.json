@@ -1,0 +1,85 @@
+{
+  "artifact": "304-trap-bibd-suite-perfect.mid",
+  "classification": "ai-assisted",
+  "generator": "BIBDC (Method 132) + musicom rules (phase 2, grid-locked)",
+  "sources": [],
+  "parameters": {
+    "phase": "2",
+    "layer": "perfect",
+    "style": "trap",
+    "key": "E natural minor",
+    "bpm": 140,
+    "seed": 20261114,
+    "humanize_seed": 263394786,
+    "sections": 4,
+    "bars": 32,
+    "form": "strophic",
+    "progression": [
+      "i",
+      "VI",
+      "III",
+      "VII",
+      "i",
+      "VI",
+      "III",
+      "VII",
+      "i",
+      "VI",
+      "III",
+      "VII",
+      "i",
+      "VI",
+      "III",
+      "VII",
+      "i",
+      "VI",
+      "III",
+      "VII",
+      "i",
+      "VI",
+      "III",
+      "VII",
+      "i",
+      "VI",
+      "III",
+      "VII",
+      "i",
+      "VI",
+      "III",
+      "VII"
+    ],
+    "bibd_active": {
+      "0": [
+        "Lead",
+        "Pad",
+        "Pluck"
+      ],
+      "1": [
+        "Bass",
+        "Lead",
+        "Pluck"
+      ],
+      "2": [
+        "Bass",
+        "Lead",
+        "Pad"
+      ],
+      "3": [
+        "Bass",
+        "Pad",
+        "Pluck"
+      ]
+    },
+    "pair_novelty": [
+      3,
+      2,
+      1,
+      0
+    ]
+  },
+  "notes": "grid-locked concrete layer; off-grid onsets == 0; tiered snap (strong->chord tone, weak->E-minor scale); BIBD ensemble schedule v=4,k=3,lambda=2,b=4,r=3.",
+  "sha256": "fa520bea94c070f8ea1b6ed87d48f573ab688d9bee850bcb584f6c781ef2f990",
+  "bytes": 8615,
+  "created_utc": "2026-11-14T23:10:52.113892+00:00",
+  "provenance_version": "1.0"
+}

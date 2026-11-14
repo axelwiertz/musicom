@@ -1,0 +1,313 @@
+{
+  "project": "304-trap-bibd-suite",
+  "genre": "Trap",
+  "method": "132 Balanced Incomplete Block Design Composition (BIBDC)",
+  "paradigm": "Rules-Based",
+  "layer": "concrete",
+  "form": "strophic",
+  "key": "E natural minor",
+  "key_pcs": [
+    0,
+    2,
+    4,
+    6,
+    7,
+    9,
+    11
+  ],
+  "bpm": 140,
+  "bars": 32,
+  "sections": [
+    "Verse1",
+    "Verse2",
+    "Verse3",
+    "Verse4"
+  ],
+  "bars_per_section": [
+    8,
+    8,
+    8,
+    8
+  ],
+  "progression": [
+    "i",
+    "VI",
+    "III",
+    "VII",
+    "i",
+    "VI",
+    "III",
+    "VII",
+    "i",
+    "VI",
+    "III",
+    "VII",
+    "i",
+    "VI",
+    "III",
+    "VII",
+    "i",
+    "VI",
+    "III",
+    "VII",
+    "i",
+    "VI",
+    "III",
+    "VII",
+    "i",
+    "VI",
+    "III",
+    "VII",
+    "i",
+    "VI",
+    "III",
+    "VII"
+  ],
+  "progression_per_section": {
+    "Verse1": [
+      "Em",
+      "C",
+      "G",
+      "D",
+      "Em",
+      "C",
+      "G",
+      "D"
+    ],
+    "Verse2": [
+      "Em",
+      "C",
+      "G",
+      "D",
+      "Em",
+      "C",
+      "G",
+      "D"
+    ],
+    "Verse3": [
+      "Em",
+      "C",
+      "G",
+      "D",
+      "Em",
+      "C",
+      "G",
+      "D"
+    ],
+    "Verse4": [
+      "Em",
+      "C",
+      "G",
+      "D",
+      "Em",
+      "C",
+      "G",
+      "D"
+    ]
+  },
+  "bibd": {
+    "v": 4,
+    "k": 3,
+    "lambda": 2,
+    "b": 4,
+    "r": 3,
+    "active_by_section": {
+      "0": [
+        "Lead",
+        "Pad",
+        "Pluck"
+      ],
+      "1": [
+        "Bass",
+        "Lead",
+        "Pluck"
+      ],
+      "2": [
+        "Bass",
+        "Lead",
+        "Pad"
+      ],
+      "3": [
+        "Bass",
+        "Pad",
+        "Pluck"
+      ]
+    },
+    "pair_novelty": [
+      3,
+      2,
+      1,
+      0
+    ]
+  },
+  "seed": 20261114,
+  "hz_seed": 263394786,
+  "form_seed": 202611147,
+  "phase1_midi": "/opt/data/projects/Styles/Trap/304-trap-bibd-suite/MIDI/304-trap-bibd-suite-phase1.mid",
+  "perfect_midi": "/opt/data/projects/Styles/Trap/304-trap-bibd-suite/MIDI/304-trap-bibd-suite-perfect.mid",
+  "humanized_midi": "/opt/data/projects/Styles/Trap/304-trap-bibd-suite/MIDI/304-trap-bibd-suite-humanized.mid",
+  "phase1_offgrid": 150,
+  "phase1_mean_pitch": {
+    "Verse1": 68.93,
+    "Verse2": 78.0,
+    "Verse3": 72.05,
+    "Verse4": 68.87
+  },
+  "grid_audit": {
+    "Lead:16th": "0/119",
+    "Lead:8th": "60/119",
+    "Pluck:16th": "0/96",
+    "Pluck:8th": "24/96",
+    "Pad:16th": "0/132",
+    "Pad:8th": "0/132",
+    "Bass:16th": "0/48",
+    "Bass:8th": "0/48"
+  },
+  "harmony_audit": {
+    "Lead": {
+      "passes": true,
+      "audible": 119,
+      "strong_ok": 22,
+      "weak_in_scale": 97,
+      "tagged": 0,
+      "resolving": 0,
+      "non_resolving": 0,
+      "untagged_out_of_scale": 0,
+      "strong_violations": 0,
+      "collisions": 0
+    },
+    "Pluck": {
+      "passes": true,
+      "audible": 96,
+      "strong_ok": 0,
+      "weak_in_scale": 96,
+      "tagged": 0,
+      "resolving": 0,
+      "non_resolving": 0,
+      "untagged_out_of_scale": 0,
+      "strong_violations": 0,
+      "collisions": 0
+    },
+    "Pad": {
+      "passes": true,
+      "audible": 132,
+      "strong_ok": 132,
+      "weak_in_scale": 0,
+      "tagged": 0,
+      "resolving": 0,
+      "non_resolving": 0,
+      "untagged_out_of_scale": 0,
+      "strong_violations": 0,
+      "collisions": 0
+    },
+    "Bass": {
+      "passes": true,
+      "audible": 48,
+      "strong_ok": 24,
+      "weak_in_scale": 24,
+      "tagged": 0,
+      "resolving": 0,
+      "non_resolving": 0,
+      "untagged_out_of_scale": 0,
+      "strong_violations": 0,
+      "collisions": 0
+    }
+  },
+  "hz_summary": {
+    "Lead": {
+      "seed": 26602873386,
+      "profile": {
+        "timing_sigma_ms": 4.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 6.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 119,
+      "mean_abs_shift_ticks": 6.823,
+      "max_abs_shift_ticks": 14,
+      "mean_abs_vel_delta": 5.412,
+      "timing_sigma_ticks": 4.48
+    },
+    "Pluck": {
+      "seed": 26602873387,
+      "profile": {
+        "timing_sigma_ms": 4.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 6.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 96,
+      "mean_abs_shift_ticks": 6.49,
+      "max_abs_shift_ticks": 15,
+      "mean_abs_vel_delta": 4.198,
+      "timing_sigma_ticks": 4.48
+    },
+    "Pad": {
+      "seed": 26602873388,
+      "profile": {
+        "timing_sigma_ms": 4.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 6.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 132,
+      "mean_abs_shift_ticks": 8.879,
+      "max_abs_shift_ticks": 17,
+      "mean_abs_vel_delta": 2.78,
+      "timing_sigma_ticks": 4.48
+    },
+    "Bass": {
+      "seed": 26602873389,
+      "profile": {
+        "timing_sigma_ms": 5.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 48,
+      "mean_abs_shift_ticks": 8.396,
+      "max_abs_shift_ticks": 19,
+      "mean_abs_vel_delta": 3.771,
+      "timing_sigma_ticks": 5.6
+    },
+    "Drums": {
+      "seed": 26602873390,
+      "profile": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.008,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 705,
+      "mean_abs_shift_ticks": 1.503,
+      "max_abs_shift_ticks": 6,
+      "mean_abs_vel_delta": 3.17,
+      "timing_sigma_ticks": 2.24
+    }
+  }
+}

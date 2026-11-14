@@ -1,0 +1,71 @@
+{
+  "project": "304-trap-bibd-suite",
+  "report": {
+    "phase1": {
+      "tracks": 1,
+      "track_len": 61440,
+      "zero_drift": true,
+      "pitched": 158,
+      "drum": 0,
+      "off120": 150,
+      "scale_violations": 72,
+      "chord_violations_blanket": 123,
+      "strong_beat_violations": 1,
+      "per_voice_note_counts": [
+        158
+      ]
+    },
+    "perfect": {
+      "tracks": 5,
+      "track_len": 61440,
+      "zero_drift": true,
+      "pitched": 395,
+      "drum": 705,
+      "off120": 0,
+      "scale_violations": 0,
+      "chord_violations_blanket": 60,
+      "strong_beat_violations": 0,
+      "per_voice_note_counts": [
+        119,
+        96,
+        132,
+        48,
+        705
+      ]
+    },
+    "humanized": {
+      "tracks": 5,
+      "track_len": 61440,
+      "zero_drift": true,
+      "pitched": 395,
+      "drum": 705,
+      "off120": 386,
+      "scale_violations": 0,
+      "chord_violations_blanket": 60,
+      "strong_beat_violations": 0,
+      "per_voice_note_counts": [
+        119,
+        96,
+        132,
+        48,
+        705
+      ]
+    }
+  },
+  "bibd_schedule_violations": 0,
+  "bibd_voice_section_counts": {
+    "Bass@1": 16,
+    "Bass@2": 16,
+    "Bass@3": 16,
+    "Lead@0": 41,
+    "Lead@1": 37,
+    "Lead@2": 41,
+    "Pad@0": 44,
+    "Pad@2": 44,
+    "Pad@3": 44,
+    "Pluck@0": 32,
+    "Pluck@1": 32,
+    "Pluck@3": 32
+  },
+  "verdict": "PASS"
+}
