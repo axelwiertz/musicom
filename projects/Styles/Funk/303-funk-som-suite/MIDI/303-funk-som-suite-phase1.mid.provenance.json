@@ -1,0 +1,157 @@
+{
+  "artifact": "303-funk-som-suite-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "Funk SOM-C trajectory walk (raw, pre-rules)",
+  "sources": [
+    "/opt/data/projects/Styles/Funk/098-funk-som/MIDI/098-funk-som.mid"
+  ],
+  "parameters": {
+    "bpm": 104,
+    "key": "F",
+    "key_label": "F natural minor (aeolian/pentatonic)",
+    "scale": "minor",
+    "scale_pcs": [
+      0,
+      1,
+      3,
+      5,
+      7,
+      8,
+      10
+    ],
+    "style": "funk",
+    "source": "098-funk-som",
+    "source_midi": "/opt/data/projects/Styles/Funk/098-funk-som/MIDI/098-funk-som.mid",
+    "method": "075 Self-Organizing Map Composition (SOM-C), extended",
+    "sections": 8,
+    "bars": 32,
+    "bars_per_section": 4,
+    "progression_per_section": {
+      "Intro": [
+        "5m",
+        "5m",
+        "10m",
+        "0m"
+      ],
+      "Verse": [
+        "5m",
+        "1M",
+        "10m",
+        "0m"
+      ],
+      "Chorus": [
+        "5m",
+        "8M",
+        "3M",
+        "10m"
+      ],
+      "Bridge": [
+        "1M",
+        "3M",
+        "5m",
+        "0m"
+      ],
+      "Verse2": [
+        "10m",
+        "5m",
+        "1M",
+        "0m"
+      ],
+      "Chorus2": [
+        "5m",
+        "8M",
+        "3M",
+        "10m"
+      ],
+      "Breakdown": [
+        "1M",
+        "3M",
+        "5m",
+        "5m"
+      ],
+      "Outro": [
+        "5m",
+        "1M",
+        "0m",
+        "5m"
+      ]
+    },
+    "section_roots_midpoint": [
+      [
+        10,
+        "m"
+      ],
+      [
+        10,
+        "m"
+      ],
+      [
+        3,
+        "M"
+      ],
+      [
+        5,
+        "m"
+      ],
+      [
+        1,
+        "M"
+      ],
+      [
+        3,
+        "M"
+      ],
+      [
+        5,
+        "m"
+      ],
+      [
+        0,
+        "m"
+      ]
+    ],
+    "variation_techniques": [
+      "transposition +4th / subdominant Bb region (Verse2)",
+      "register shift +1 octave (Chorus2)",
+      "retrograde contour (Bridge)",
+      "augmentation x2 durations (Breakdown)",
+      "density contrast (Breakdown sparse vs Chorus full)",
+      "sax counterline offbeat punches (Verse/Chorus/Bridge/Verse2/Chorus2)"
+    ],
+    "seed": 20261114,
+    "humanize_seed": 596548972,
+    "voices": [
+      {
+        "name": "Lead",
+        "program": 56,
+        "channel": 0
+      },
+      {
+        "name": "Sax",
+        "program": 65,
+        "channel": 1
+      },
+      {
+        "name": "Piano",
+        "program": 1,
+        "channel": 2
+      },
+      {
+        "name": "Bass",
+        "program": 43,
+        "channel": 3
+      },
+      {
+        "name": "Drums",
+        "program": 0,
+        "channel": 9
+      }
+    ],
+    "phase": "1"
+  },
+  "notes": "raw single-voice SOM walk (4x4 toroidal lattice), unquantized pitch + continuous rhythm, no harmony",
+  "sha256": "cb4780961be26ce25df567cd415e95ea7903ddcef4e81cba5e2f417281da17d6",
+  "bytes": 2164,
+  "created_utc": "2026-11-14T01:11:00.151059+00:00",
+  "provenance_version": "1.0"
+}

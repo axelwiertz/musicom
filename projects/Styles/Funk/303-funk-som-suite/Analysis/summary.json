@@ -1,0 +1,149 @@
+{
+  "perfect_grid": {
+    "Lead": {
+      "onsets": 228,
+      "off_grid": 0
+    },
+    "Sax": {
+      "onsets": 40,
+      "off_grid": 0
+    },
+    "Piano": {
+      "onsets": 252,
+      "off_grid": 0
+    },
+    "Bass": {
+      "onsets": 176,
+      "off_grid": 0
+    },
+    "Drums": {
+      "onsets": 665,
+      "off_grid": 0
+    }
+  },
+  "humanized_grid": {
+    "Lead": {
+      "onsets": 228,
+      "off_grid": 200
+    },
+    "Sax": {
+      "onsets": 40,
+      "off_grid": 32
+    },
+    "Piano": {
+      "onsets": 252,
+      "off_grid": 234
+    },
+    "Bass": {
+      "onsets": 176,
+      "off_grid": 168
+    },
+    "Drums": {
+      "onsets": 665,
+      "off_grid": 473
+    }
+  },
+  "humanize": {
+    "Lead": {
+      "seed": 60251446172,
+      "profile": {
+        "timing_sigma_ms": 4.0,
+        "velocity_sigma": 8.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 228,
+      "mean_abs_shift_ticks": 2.526,
+      "max_abs_shift_ticks": 8,
+      "mean_abs_vel_delta": 6.539,
+      "timing_sigma_ticks": 3.328
+    },
+    "Sax": {
+      "seed": 60251446173,
+      "profile": {
+        "timing_sigma_ms": 4.0,
+        "velocity_sigma": 7.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 40,
+      "mean_abs_shift_ticks": 2.3,
+      "max_abs_shift_ticks": 7,
+      "mean_abs_vel_delta": 5.3,
+      "timing_sigma_ticks": 3.328
+    },
+    "Piano": {
+      "seed": 60251446174,
+      "profile": {
+        "timing_sigma_ms": 4.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.015,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 252,
+      "mean_abs_shift_ticks": 3.385,
+      "max_abs_shift_ticks": 9,
+      "mean_abs_vel_delta": 3.77,
+      "timing_sigma_ticks": 3.328
+    },
+    "Bass": {
+      "seed": 60251446175,
+      "profile": {
+        "timing_sigma_ms": 10.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.03,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 176,
+      "mean_abs_shift_ticks": 8.449,
+      "max_abs_shift_ticks": 26,
+      "mean_abs_vel_delta": 4.847,
+      "timing_sigma_ticks": 8.32
+    },
+    "Drums": {
+      "seed": 60251446176,
+      "profile": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.008,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.25,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 665,
+      "mean_abs_shift_ticks": 1.029,
+      "max_abs_shift_ticks": 4,
+      "mean_abs_vel_delta": 3.203,
+      "timing_sigma_ticks": 1.664
+    }
+  },
+  "zero_drift": {
+    "perfect": true,
+    "humanized": true,
+    "phase1": true,
+    "length_ticks": 61440
+  }
+}

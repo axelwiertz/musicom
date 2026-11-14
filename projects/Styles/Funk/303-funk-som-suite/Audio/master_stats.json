@@ -1,0 +1,16 @@
+{
+  "perfect": {
+    "wav": "/opt/data/projects/Styles/Funk/303-funk-som-suite/Audio/303-funk-som-suite-perfect.wav",
+    "ogg": "/opt/data/projects/Styles/Funk/303-funk-som-suite/Audio/303-funk-som-suite-perfect.ogg",
+    "integrated_lufs": -13.28,
+    "true_peak_db": -1.0,
+    "silence_ratio": 0.10447742276492923
+  },
+  "humanized": {
+    "wav": "/opt/data/projects/Styles/Funk/303-funk-som-suite/Audio/303-funk-som-suite-humanized.wav",
+    "ogg": "/opt/data/projects/Styles/Funk/303-funk-som-suite/Audio/303-funk-som-suite-humanized.ogg",
+    "integrated_lufs": -13.34,
+    "true_peak_db": -1.0,
+    "silence_ratio": 0.1054630192961563
+  }
+}

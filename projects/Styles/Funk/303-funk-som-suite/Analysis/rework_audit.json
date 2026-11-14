@@ -1,0 +1,57 @@
+{
+  "chosen": "Funk/098-funk-som",
+  "genre": "Funk",
+  "primary_midi": "MIDI/098-funk-som.mid",
+  "audited_utc": "2026-11-14T00:00:00Z",
+  "standard_failures": [
+    {
+      "id": 1,
+      "standard": "engine-not-hand-rolled",
+      "result": "PASS",
+      "evidence": "compose.py imports UnitMatrixComposer; MIDI authored via to_midi(); no raw mido note_on authoring."
+    },
+    {
+      "id": 2,
+      "standard": "zero-drift",
+      "result": "PASS",
+      "evidence": "all 5 voice tracks equal length 46080 ticks (24 bars x 1920)."
+    },
+    {
+      "id": 3,
+      "standard": "rhythm-grid-sync",
+      "result": "PASS",
+      "evidence": "0 of 576 pitched onsets off the 120/240 grid."
+    },
+    {
+      "id": 4,
+      "standard": "valid-track-setup",
+      "result": "PASS",
+      "evidence": "5 voice tracks (Lead Trumpet 56, Sax 65, Piano 1, Double Bass 43, Drums ch9)."
+    },
+    {
+      "id": 5,
+      "standard": "two-phase-artifacts",
+      "result": "PASS",
+      "evidence": "098-funk-som.mid + 098-funk-som-phase1.mid both present."
+    },
+    {
+      "id": 6,
+      "standard": "provenance+index",
+      "result": "FAIL",
+      "evidence": "only per-artifact .provenance.json sidecars; project-level provenance.json and index.html both missing."
+    }
+  ],
+  "redesign_required": true,
+  "redesign_note": "musical core fully compliant (standards 1-5 pass); failure is packaging-only (index.html + root provenance.json). Identity + SOM-C method + F-minor framework reused as DNA seed for the extended suite.",
+  "source_identity": {
+    "genre": "Funk",
+    "method": "075 Self-Organizing Map Composition (SOM-C)",
+    "key": "F minor (aeolian/pentatonic)",
+    "tonic_pc": 5,
+    "bpm": 104,
+    "meter": "4/4",
+    "form_sections": ["Intro", "Verse", "Chorus", "Bridge", "Chorus2", "Outro"],
+    "bars": 24,
+    "instrumentation": ["Lead Trumpet (GM 56)", "Tenor Sax (GM 65)", "Piano (GM 1)", "Double Bass (GM 43)", "Drums (ch9)"]
+  }
+}

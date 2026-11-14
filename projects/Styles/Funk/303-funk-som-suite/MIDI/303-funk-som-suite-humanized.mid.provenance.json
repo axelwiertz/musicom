@@ -1,0 +1,256 @@
+{
+  "artifact": "303-funk-som-suite-humanized.mid",
+  "classification": "ai-assisted",
+  "generator": "Funk SOM-C + musicom rules + humanize",
+  "sources": [
+    "/opt/data/projects/Styles/Funk/098-funk-som/MIDI/098-funk-som.mid",
+    "303-funk-som-suite-phase1.mid",
+    "303-funk-som-suite-perfect.mid"
+  ],
+  "parameters": {
+    "bpm": 104,
+    "key": "F",
+    "key_label": "F natural minor (aeolian/pentatonic)",
+    "scale": "minor",
+    "scale_pcs": [
+      0,
+      1,
+      3,
+      5,
+      7,
+      8,
+      10
+    ],
+    "style": "funk",
+    "source": "098-funk-som",
+    "source_midi": "/opt/data/projects/Styles/Funk/098-funk-som/MIDI/098-funk-som.mid",
+    "method": "075 Self-Organizing Map Composition (SOM-C), extended",
+    "sections": 8,
+    "bars": 32,
+    "bars_per_section": 4,
+    "progression_per_section": {
+      "Intro": [
+        "5m",
+        "5m",
+        "10m",
+        "0m"
+      ],
+      "Verse": [
+        "5m",
+        "1M",
+        "10m",
+        "0m"
+      ],
+      "Chorus": [
+        "5m",
+        "8M",
+        "3M",
+        "10m"
+      ],
+      "Bridge": [
+        "1M",
+        "3M",
+        "5m",
+        "0m"
+      ],
+      "Verse2": [
+        "10m",
+        "5m",
+        "1M",
+        "0m"
+      ],
+      "Chorus2": [
+        "5m",
+        "8M",
+        "3M",
+        "10m"
+      ],
+      "Breakdown": [
+        "1M",
+        "3M",
+        "5m",
+        "5m"
+      ],
+      "Outro": [
+        "5m",
+        "1M",
+        "0m",
+        "5m"
+      ]
+    },
+    "section_roots_midpoint": [
+      [
+        10,
+        "m"
+      ],
+      [
+        10,
+        "m"
+      ],
+      [
+        3,
+        "M"
+      ],
+      [
+        5,
+        "m"
+      ],
+      [
+        1,
+        "M"
+      ],
+      [
+        3,
+        "M"
+      ],
+      [
+        5,
+        "m"
+      ],
+      [
+        0,
+        "m"
+      ]
+    ],
+    "variation_techniques": [
+      "transposition +4th / subdominant Bb region (Verse2)",
+      "register shift +1 octave (Chorus2)",
+      "retrograde contour (Bridge)",
+      "augmentation x2 durations (Breakdown)",
+      "density contrast (Breakdown sparse vs Chorus full)",
+      "sax counterline offbeat punches (Verse/Chorus/Bridge/Verse2/Chorus2)"
+    ],
+    "seed": 20261114,
+    "humanize_seed": 596548972,
+    "voices": [
+      {
+        "name": "Lead",
+        "program": 56,
+        "channel": 0
+      },
+      {
+        "name": "Sax",
+        "program": 65,
+        "channel": 1
+      },
+      {
+        "name": "Piano",
+        "program": 1,
+        "channel": 2
+      },
+      {
+        "name": "Bass",
+        "program": 43,
+        "channel": 3
+      },
+      {
+        "name": "Drums",
+        "program": 0,
+        "channel": 9
+      }
+    ],
+    "phase": "2-humanized",
+    "humanize_profiles": {
+      "Lead": {
+        "seed": 60251446172,
+        "profile": {
+          "timing_sigma_ms": 4.0,
+          "velocity_sigma": 8.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.02,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.25,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 228,
+        "mean_abs_shift_ticks": 2.526,
+        "max_abs_shift_ticks": 8,
+        "mean_abs_vel_delta": 6.539,
+        "timing_sigma_ticks": 3.328
+      },
+      "Sax": {
+        "seed": 60251446173,
+        "profile": {
+          "timing_sigma_ms": 4.0,
+          "velocity_sigma": 7.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.02,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.25,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 40,
+        "mean_abs_shift_ticks": 2.3,
+        "max_abs_shift_ticks": 7,
+        "mean_abs_vel_delta": 5.3,
+        "timing_sigma_ticks": 3.328
+      },
+      "Piano": {
+        "seed": 60251446174,
+        "profile": {
+          "timing_sigma_ms": 4.0,
+          "velocity_sigma": 5.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.015,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.25,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 252,
+        "mean_abs_shift_ticks": 3.385,
+        "max_abs_shift_ticks": 9,
+        "mean_abs_vel_delta": 3.77,
+        "timing_sigma_ticks": 3.328
+      },
+      "Bass": {
+        "seed": 60251446175,
+        "profile": {
+          "timing_sigma_ms": 10.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.03,
+          "layback_ms": 8.0,
+          "phrase_corr": 0.25,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 176,
+        "mean_abs_shift_ticks": 8.449,
+        "max_abs_shift_ticks": 26,
+        "mean_abs_vel_delta": 4.847,
+        "timing_sigma_ticks": 8.32
+      },
+      "Drums": {
+        "seed": 60251446176,
+        "profile": {
+          "timing_sigma_ms": 2.0,
+          "velocity_sigma": 4.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.008,
+          "layback_ms": 0.0,
+          "phrase_corr": 0.25,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 665,
+        "mean_abs_shift_ticks": 1.029,
+        "max_abs_shift_ticks": 4,
+        "mean_abs_vel_delta": 3.203,
+        "timing_sigma_ticks": 1.664
+      }
+    }
+  },
+  "notes": "humanized layer: funk style profile + per-instrument DNA",
+  "sha256": "3a19ac289f73a9380202f08bc60bbed277dcb8e2554d0c41744827fd113e139f",
+  "bytes": 10634,
+  "created_utc": "2026-11-14T01:11:00.153434+00:00",
+  "provenance_version": "1.0"
+}
