@@ -1,0 +1,60 @@
+{
+  "artifact": "302-techno-tendency-mask-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "Tendency Masking Stochastic Bounds (Method 023) -- raw draft",
+  "sources": [],
+  "parameters": {
+    "phase": "1",
+    "layer": "raw",
+    "style": "techno",
+    "key": "A natural minor",
+    "bpm": 128,
+    "seed": 20261113,
+    "sections": 4,
+    "bars": 24,
+    "form": "intro-break-drop-outro",
+    "tendency_mask": {
+      "Intro": [
+        45,
+        43,
+        60,
+        74
+      ],
+      "Break": [
+        48,
+        50,
+        58,
+        66
+      ],
+      "Drop": [
+        57,
+        62,
+        84,
+        96
+      ],
+      "Outro": [
+        62,
+        55,
+        96,
+        68
+      ]
+    },
+    "section_mean_pitch": {
+      "Intro": 60.59,
+      "Break": 52.56,
+      "Drop": 64.42,
+      "Outro": 79.31
+    },
+    "section_max_leap": {
+      "Intro": 9,
+      "Break": 5,
+      "Drop": 9,
+      "Outro": 7
+    }
+  },
+  "notes": "phase1 raw draft: single-voice stochastic walk clipped into a dynamic tendency mask [lo(t),hi(t)] per section; off-grid onset jitter + unquantized chromatic pitch; no harmony.",
+  "sha256": "c1afb2fda8db110e17bddc69cbac39f28ccf8594a245808e6cb882f992c59c0d",
+  "bytes": 1750,
+  "created_utc": "2026-11-13T23:08:59.134585+00:00",
+  "provenance_version": "1.0"
+}

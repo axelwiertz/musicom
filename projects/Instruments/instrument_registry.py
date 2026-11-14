@@ -99,6 +99,7 @@ _INSTRUMENT_MODULES = {
     "Woodwind.whistle.whistle": "whistle",
     "Woodwind.soprano_sax.soprano_sax": "soprano_sax",
     "Bass.electric_bass.electric_bass": "electric_bass",
+    "Bass.pick_bass.pick_bass": "pick_bass",
     "Bass.acoustic_bass.acoustic_bass": "acoustic_bass",
     "Bass.synth_bass_1.synth_bass_1": "synth_bass_1",
     "Bass.synth_bass_2.synth_bass_2": "synth_bass_2",
@@ -345,6 +346,7 @@ PAN_FLUTE = ALL_INSTRUMENTS["pan_flute"]
 WHISTLE = ALL_INSTRUMENTS["whistle"]
 SOPRANO_SAX = ALL_INSTRUMENTS["soprano_sax"]
 ELECTRIC_BASS = ALL_INSTRUMENTS["electric_bass"]
+PICK_BASS = ALL_INSTRUMENTS["pick_bass"]
 ACOUSTIC_BASS = ALL_INSTRUMENTS["acoustic_bass"]
 SYNTH_BASS_1 = ALL_INSTRUMENTS["synth_bass_1"]
 SYNTH_BASS_2 = ALL_INSTRUMENTS["synth_bass_2"]
@@ -506,6 +508,8 @@ def registry_table():
             role = "harmony, melody, bass, accent, color"
         elif low == "electric bass (finger)":
             role = "bass, rhythm, countermelody, accent"
+        elif low == "electric bass (pick)":
+            role = "bass, rhythm, groove, countermelody, accent"
         elif low == "acoustic bass":
             role = "bass, rhythm, countermelody, accent, melody"
         elif low == "synth bass 1":
@@ -1020,3 +1024,18 @@ if __name__ == "__main__":
           "GUITAR_HARMONICS.range_max =", GUITAR_HARMONICS.range_max)
     print("  GUITAR_HARMONICS.stem_label =", repr(GUITAR_HARMONICS.stem_label))
     print("  GUITAR_HARMONICS.synthesis =", repr(GUITAR_HARMONICS.synthesis))
+
+    print()
+    print("=== Electric Bass (pick) (GM34) ===")
+    print("  PICK_BASS.midi_program =", PICK_BASS.midi_program, "(should be 34)")
+    print("  by_name('electric bass (pick)') =", by_name("electric bass (pick)"))
+    print("  by_name('pick bass') =", by_name("pick bass"))
+    print("  by_program(34) =", by_program(34))
+    print("  by_program(33) =", by_program(33), "(distinct: electric bass finger)")
+    print("  PICK_BASS.in_sweet_spot(45) =", PICK_BASS.in_sweet_spot(45))
+    print("  PICK_BASS.in_sweet_spot(90) =", PICK_BASS.in_sweet_spot(90))
+    print("  PICK_BASS.range_min =", PICK_BASS.range_min,
+          "PICK_BASS.range_max =", PICK_BASS.range_max)
+    print("  PICK_BASS.stem_label =", repr(PICK_BASS.stem_label))
+    print("  PICK_BASS.synthesis =", repr(PICK_BASS.synthesis))
+    print("  PICK_BASS.karplus_defaults =", PICK_BASS.karplus_defaults)

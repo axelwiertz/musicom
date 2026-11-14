@@ -1,0 +1,15 @@
+=== verify_142_GFNC ===
+C1  Pearson corr P_T vs R/Z        : 0.985796
+C1  max |P_T - R/Z|                : 0.001066
+C1  KL(P_true || P_emp)            : 0.004933
+C2  top-8 reward states covered    : 8/8, min rel freq ratio 0.9319
+C3  distinct states from greedy argmax over 50 runs: 1 (GFN sampled modes: 8)
+C5  E[R] measured / E[R] predicted : 4.9108 / 4.9510  (max R = 13.00)
+    log Z learned / log Z_true    : 6.8669 / 6.8943
+    DAG states / terminal / edges : 625 / 256 / 2000
+    top-5 pieces:
+      R=13.00  cells=(0, 0, 0, 0)  P_emp=0.01326  P_true=0.01318
+      R=9.50  cells=(1, 0, 0, 0)  P_emp=0.00940  P_true=0.00963
+      R=9.50  cells=(0, 1, 0, 0)  P_emp=0.00964  P_true=0.00963
+      R=9.33  cells=(0, 2, 0, 0)  P_emp=0.01028  P_true=0.00946
+      R=9.33  cells=(2, 0, 0, 0)  P_emp=0.00944  P_true=0.00946

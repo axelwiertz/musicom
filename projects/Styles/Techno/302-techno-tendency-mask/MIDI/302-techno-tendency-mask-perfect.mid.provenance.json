@@ -1,0 +1,75 @@
+{
+  "artifact": "302-techno-tendency-mask-perfect.mid",
+  "classification": "ai-assisted",
+  "generator": "Tendency Masking 023 + musicom rules (phase 2, grid-locked)",
+  "sources": [],
+  "parameters": {
+    "phase": "2",
+    "layer": "perfect",
+    "style": "techno",
+    "key": "A natural minor",
+    "bpm": 128,
+    "seed": 20261113,
+    "humanize_seed": 263394771,
+    "sections": 4,
+    "bars": 24,
+    "form": "intro-break-drop-outro",
+    "progression": [
+      "i",
+      "i",
+      "i",
+      "i",
+      "i",
+      "i",
+      "i",
+      "i",
+      "i",
+      "i",
+      "i",
+      "i",
+      "i",
+      "i",
+      "VI",
+      "VII",
+      "i",
+      "i",
+      "VI",
+      "VII",
+      "i",
+      "i",
+      "i",
+      "i"
+    ],
+    "tendency_mask": {
+      "Intro": [
+        45,
+        43,
+        60,
+        74
+      ],
+      "Break": [
+        48,
+        50,
+        58,
+        66
+      ],
+      "Drop": [
+        57,
+        62,
+        84,
+        96
+      ],
+      "Outro": [
+        62,
+        55,
+        96,
+        68
+      ]
+    }
+  },
+  "notes": "grid-locked concrete layer; off-grid onsets == 0; tiered snap (strong->chord tone, weak->A-minor scale).",
+  "sha256": "8b556999d93034b53262e800e804476d95aca20f480318bf2dd23a41b110020e",
+  "bytes": 6861,
+  "created_utc": "2026-11-13T23:08:59.134878+00:00",
+  "provenance_version": "1.0"
+}

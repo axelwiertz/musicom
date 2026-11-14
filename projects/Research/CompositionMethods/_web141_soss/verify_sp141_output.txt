@@ -1,0 +1,15 @@
+[PASS] check 1: detune ladder geometry — ladder=[  0.  -4.   4.  -8.   8. -12.  12.] sum=0.00e+00 max=12.0
+[PASS] check 2: oscillator frequencies from ladder — zero=440.0000 (expect 440.0000) outer=443.0604 (expect 443.0604)
+[PASS] check 3: envelope beating frequency in predicted band — measured beat 0.500 Hz, predicted band [0.254, 0.764] Hz
+[PASS] check 4: fb>0 random-walks the oscillator phases (the swirl) — phase-deviation std fb=0: 1.34e-14 cycles, fb=0.08: 0.057 cycles
+[PASS] check 5: phase modulation accumulates only when fb>0 — accumulated phase fb=0: 0.00e+00, fb=0.08: -2.68 rad
+[PASS] check 6: deterministic per seed — same-seed identical: True, diff-seed differs: True
+[PASS] check 7: polyBLEP cuts the alias floor between harmonics — median suppression 33.4 dB over 202 alias bins (min 9.5 near-Nyquist, max 75.2)
+[PASS] check 8: single-saw harmonic ratios 1/k — H1:H2:H3 = 1:0.500:0.332 (expect 1:0.5:0.333)
+[PASS] check 9: detune spread splits partial 1 into a cluster — cluster peaks at [109.0, 109.5, 110.0, 110.5, 111.0], width 2.00 Hz
+[PASS] check 10: harmony quantizer snaps oscillators to scale — offsets (semitones) = [0.0, -1.0, 0.0, -1.0, 2.0, -3.0, 2.0]
+[PASS] check 11: O(N) per sample cost — t7=262 ms t16=429 ms t32=754 ms (linear ~2.2x/8x)
+[PASS] check 12: soft-normalized peak — peak=1.000000
+[PASS] check 13: stereo WAV artifact exact — 6.60 s, 291060 frames/ch, 1164284 B (expect 1164284)
+
+RESULT: 13/13 checks pass

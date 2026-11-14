@@ -1,0 +1,46 @@
+{
+  "phase1": {
+    "size": 1750,
+    "ticks_per_beat": 480,
+    "n_tracks": 2,
+    "track_lengths": [
+      0,
+      46080
+    ],
+    "note_ons": 192,
+    "offgrid_16": 187,
+    "offgrid_8": 187
+  },
+  "perfect": {
+    "size": 6861,
+    "ticks_per_beat": 480,
+    "n_tracks": 6,
+    "track_lengths": [
+      0,
+      46080,
+      46080,
+      46080,
+      46080,
+      46080
+    ],
+    "note_ons": 863,
+    "offgrid_16": 0,
+    "offgrid_8": 64
+  },
+  "humanized": {
+    "size": 6849,
+    "ticks_per_beat": 480,
+    "n_tracks": 6,
+    "track_lengths": [
+      0,
+      46080,
+      46080,
+      46080,
+      46080,
+      46080
+    ],
+    "note_ons": 863,
+    "offgrid_16": 702,
+    "offgrid_8": 712
+  }
+}

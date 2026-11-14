@@ -1,0 +1,30 @@
+registry: <Instrument Electric Bass (pick) (family=Bass, program=34, range=21-84)>
+PB.midi_program=34 name='Electric Bass (pick)' stem='Electric_Bass_pick' range=21-84 sweet=(40, 55) synth=karplus
+by_name('pick bass') = <Instrument Electric Bass (pick) (family=Bass, program=34, range=21-84)>
+by_program(34) = <Instrument Electric Bass (pick) (family=Bass, program=34, range=21-84)>
+
+zones={'sub': (21, 35), 'groove': (36, 50), 'mid': (51, 64), 'high': (65, 84)}
+articulations=['pick', 'alt_pick', 'downstroke', 'palm_mute', 'staccato', 'ghost', 'slide', 'accent']
+reverb=1.2s eq_body=(200, -2.5) eq_presence=(1200, 3.0) eq_air=(6000, 2.0) pan=0.0
+freq: E1(28)=41.2Hz E2(40)=82.4Hz A4(69)=440.0Hz
+
+Zero-drift: True (OK)
+MIDI: /opt/data/projects/Instruments/_test/pick_bass_test.mid (219 bytes)
+soundfont: /opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2
+WAV (solo): /opt/data/projects/Instruments/_test/pick_bass_test.wav (741676 bytes)
+Spectral check: 4-8kHz buzz energy = 0.2% (OK)
+
+Written 40 (82.4 Hz) rendered fundamental peak 82.1 Hz (ratio 1.00x — pick bass is NON-transposing)
+note 40: centroid finger(GM33)=   593 Hz pick(GM34)=   796 Hz (+  34%)
+note 45: centroid finger(GM33)=   697 Hz pick(GM34)=  1309 Hz (+  88%)
+note 50: centroid finger(GM33)=   738 Hz pick(GM34)=  1119 Hz (+  52%)
+
+Karplus loop_gain=0.9965: peak=0.290 tail(1-2s)=0.00219 vs 0.990 dull 0.00104 (2.1x) and vs finger 0.9970 0.00232 (0.94x — SHORTER, as intended)
+
+Stem label: GM_PROGRAMS[34] = 'Electric Bass (pick)' -> file 'Electric_Bass_pick'
+SF2 preset 34 -> 'Picked Bass'
+Stems (2):
+  track00_Electric_Bass_pick.wav (741676 bytes)
+  track01_Drums.wav (787756 bytes)
+
+ALL CHECKS PASSED

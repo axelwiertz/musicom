@@ -1,0 +1,278 @@
+{
+  "project": "302-techno-tendency-mask",
+  "genre": "Techno",
+  "method": "023 Tendency Masking Stochastic Bounds (TM-SB)",
+  "paradigm": "Stochastic",
+  "layer": "concrete",
+  "form": "intro-break-drop-outro",
+  "key": "A natural minor",
+  "key_pcs": [
+    0,
+    2,
+    4,
+    5,
+    7,
+    9,
+    11
+  ],
+  "bpm": 128,
+  "bars": 24,
+  "sections": [
+    "Intro",
+    "Break",
+    "Drop",
+    "Outro"
+  ],
+  "bars_per_section": [
+    4,
+    8,
+    8,
+    4
+  ],
+  "tendency_mask": {
+    "Intro": [
+      45,
+      43,
+      60,
+      74
+    ],
+    "Break": [
+      48,
+      50,
+      58,
+      66
+    ],
+    "Drop": [
+      57,
+      62,
+      84,
+      96
+    ],
+    "Outro": [
+      62,
+      55,
+      96,
+      68
+    ]
+  },
+  "mask_width_start_end": {
+    "Intro": [
+      29,
+      17
+    ],
+    "Break": [
+      18,
+      8
+    ],
+    "Drop": [
+      39,
+      22
+    ],
+    "Outro": [
+      6,
+      41
+    ]
+  },
+  "progression": [
+    "i",
+    "i",
+    "i",
+    "i",
+    "i",
+    "i",
+    "i",
+    "i",
+    "i",
+    "i",
+    "i",
+    "i",
+    "i",
+    "i",
+    "VI",
+    "VII",
+    "i",
+    "i",
+    "VI",
+    "VII",
+    "i",
+    "i",
+    "i",
+    "i"
+  ],
+  "section_mean_pitch_phase1": {
+    "Intro": 60.59,
+    "Break": 52.56,
+    "Drop": 64.42,
+    "Outro": 79.31
+  },
+  "section_max_leap_phase1": {
+    "Intro": 9,
+    "Break": 5,
+    "Drop": 9,
+    "Outro": 7
+  },
+  "seed": 20261113,
+  "hz_seed": 263394771,
+  "form_seed": 202611137,
+  "phase1_midi": "/opt/data/projects/Styles/Techno/302-techno-tendency-mask/MIDI/302-techno-tendency-mask-phase1.mid",
+  "perfect_midi": "/opt/data/projects/Styles/Techno/302-techno-tendency-mask/MIDI/302-techno-tendency-mask-perfect.mid",
+  "humanized_midi": "/opt/data/projects/Styles/Techno/302-techno-tendency-mask/MIDI/302-techno-tendency-mask-humanized.mid",
+  "phase1_offgrid": 187,
+  "grid_audit": {
+    "Lead:16th": "0/191",
+    "Lead:8th": "0/191",
+    "Bass:16th": "0/88",
+    "Bass:8th": "0/88",
+    "Pad:16th": "0/112",
+    "Pad:8th": "0/112",
+    "Stab:16th": "0/104",
+    "Stab:8th": "0/104"
+  },
+  "harmony_audit": {
+    "Lead": {
+      "passes": true,
+      "audible": 191,
+      "strong_ok": 48,
+      "weak_in_scale": 143,
+      "tagged": 0,
+      "resolving": 0,
+      "non_resolving": 0,
+      "untagged_out_of_scale": 0,
+      "strong_violations": 0,
+      "collisions": 0
+    },
+    "Bass": {
+      "passes": true,
+      "audible": 88,
+      "strong_ok": 40,
+      "weak_in_scale": 48,
+      "tagged": 0,
+      "resolving": 0,
+      "non_resolving": 0,
+      "untagged_out_of_scale": 0,
+      "strong_violations": 0,
+      "collisions": 0
+    },
+    "Pad": {
+      "passes": true,
+      "audible": 112,
+      "strong_ok": 112,
+      "weak_in_scale": 0,
+      "tagged": 0,
+      "resolving": 0,
+      "non_resolving": 0,
+      "untagged_out_of_scale": 0,
+      "strong_violations": 0,
+      "collisions": 0
+    },
+    "Stab": {
+      "passes": true,
+      "audible": 104,
+      "strong_ok": 0,
+      "weak_in_scale": 104,
+      "tagged": 0,
+      "resolving": 0,
+      "non_resolving": 0,
+      "untagged_out_of_scale": 0,
+      "strong_violations": 0,
+      "collisions": 0
+    }
+  },
+  "hz_summary": {
+    "Lead": {
+      "seed": 26602871871,
+      "profile": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 9.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.04,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.1,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 191,
+      "mean_abs_shift_ticks": 1.466,
+      "max_abs_shift_ticks": 5,
+      "mean_abs_vel_delta": 6.623,
+      "timing_sigma_ticks": 2.048
+    },
+    "Bass": {
+      "seed": 26602871872,
+      "profile": {
+        "timing_sigma_ms": 5.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.1,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 88,
+      "mean_abs_shift_ticks": 8.057,
+      "max_abs_shift_ticks": 19,
+      "mean_abs_vel_delta": 3.023,
+      "timing_sigma_ticks": 5.12
+    },
+    "Pad": {
+      "seed": 26602871873,
+      "profile": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.1,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 112,
+      "mean_abs_shift_ticks": 1.706,
+      "max_abs_shift_ticks": 5,
+      "mean_abs_vel_delta": 3.25,
+      "timing_sigma_ticks": 2.048
+    },
+    "Stab": {
+      "seed": 26602871874,
+      "profile": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.1,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 104,
+      "mean_abs_shift_ticks": 1.779,
+      "max_abs_shift_ticks": 5,
+      "mean_abs_vel_delta": 2.913,
+      "timing_sigma_ticks": 2.048
+    },
+    "Drums": {
+      "seed": 26602871875,
+      "profile": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.008,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.1,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 368,
+      "mean_abs_shift_ticks": 1.494,
+      "max_abs_shift_ticks": 6,
+      "mean_abs_vel_delta": 3.318,
+      "timing_sigma_ticks": 2.048
+    }
+  }
+}

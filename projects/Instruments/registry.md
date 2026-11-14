@@ -638,6 +638,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Guitar | Distortion Guitar | 30 | 28–84 | lead, melody, accent, rhythm, power-chord strum, countermelody |
 | Guitar | Guitar Harmonics | 31 | 40–84 | lead, melody, ornament, texture, accent, countermelody |
 | Bass | Electric Bass (finger) | 33 | 24–84 | bass, rhythm, countermelody, accent |
+| Bass | Electric Bass (pick) | 34 | 21–84 | bass, rhythm, groove, countermelody, accent |
 | Bass | Acoustic Bass | 32 | 24–72 | bass, rhythm, countermelody, accent, melody |
 | Bass | Fretless Bass | 35 | 24–72 | bass, melody, countermelody, groove, slide, color |
 | Bass | Slap Bass 1 | 36 | 24–84 | bass, rhythm, groove, accent, ornament, lead |
@@ -745,6 +746,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 || 38 | Synth Bass 1 | Synth_Bass_1 ✓ (GM_PROGRAMS[38] = "Synth Bass 1"; FluidR3 preset 38 = "Synth Bass 1" — labels match exactly, **no quirk**) |
 | 35 | Fretless Bass | Fretless_Bass ✓ (GM_PROGRAMS[35] + FluidR3 preset 35 both "Fretless Bass" — labels match exactly, **no quirk**) |
 | 36 | Slap Bass 1 | Slap_Bass_1 ✓ (GM_PROGRAMS[36] = "Slap Bass 1"; FluidR3 preset 36 = "Slap Bass" — SF2 drops the number, cosmetic only, **no routing impact**) |
+| 34 | Electric Bass (pick) | Electric_Bass_pick ✓ (GM_PROGRAMS[34] = "Electric Bass (pick)" → sanitized `Electric_Bass_pick` — parens stripped, inner word kept, same convention as GM33; FluidR3 preset 34 = "Picked Bass" — cosmetic SF2 spelling, **no routing impact**) |
 | 23 | Tango Accordion | Tango_Accordion ✓ (GM_PROGRAMS[23] = "Tango Accordion"; FluidR3 preset 23 = "Bandoneon" — SF2 internal name differs, cosmetic only, **no routing impact**) |
 ||| 44 | Tremolo Strings | Tremolo_Strings ✓ (GM_PROGRAMS[44] = "Tremolo Strings"; FluidR3 preset 44 = "Tremolo" — one-word SF2 spelling, cosmetic only, **no routing impact**) |
 ||| 30 | Distortion Guitar | Distortion_Guitar ✓ (GM_PROGRAMS[30] + FluidR3 preset 30 both "Distortion Guitar" — labels match exactly, **no quirk**) |
@@ -2330,3 +2332,60 @@ steel guitar's 9 kHz shelf), PAN −0.15 (±0.5 doubles for the classic stereo
 shimmer — different octaves/pitches, never unison copies). No-unison rule
 applies with extra force here: the near-pure odd-harmonic tone beats audibly
 against a piano/harp unison (2026-09-01 comb-filter lesson).
+
+**Electric Bass (pick) added** (2026-11-14): GM34, **Bass-family seventh entry**
+— the PLECTRUM voice of the solidbody electric bass (same instrument as GM33
+finger, different right-hand tool; instrument.md + pick_bass.py), verified
+end-to-end UnitMatrixComposer → zero-drift ✓ → MIDI (219 bytes) → FluidSynth
+WAV (741,676 bytes) ✓; RenderPipeline stem label
+`trackXX_Electric_Bass_pick.wav` ✓ (GM_PROGRAMS[34] = "Electric Bass (pick)"
+→ parens stripped, inner word kept → `Electric_Bass_pick`, same convention as
+GM33; FluidR3 preset 34 = **"Picked Bass"** — cosmetic SF2 spelling,
+**no routing quirk**). Identity: a hard plastic/nylon pick strikes the string
+at a sharper angle with a stiffer contact than a fingertip → a bright
+broadband CLICK, leaner fundamental, even note-to-note dynamics, and
+palm-mute as a first-class articulation. **Measured pick brightness** (same
+notes, GM33 vs GM34, solo renders): spectral centroid E2 593 → 796 Hz
+(+34%), A2 697 → 1309 Hz (+88%), D3 738 → 1119 Hz (+52%) — the patch is
+objectively the brighter of the two electric-bass voices. **Karplus-Strong**
+recommended (plucked waveguide is the exact model; the pick is the
+excitation): `loop_gain` 0.9965 — slightly SHORTER ring than finger 0.9970
+(measured tail 1–2 s 0.00219 vs 0.00232 = 0.94×) and longer than slap 0.9955;
+`lowpass_hz` 5600 (brighter than finger 5000); `excitation` "pick";
+`width` 0.5 (DI mono). Damping ladder harp 0.9985 > acoustic 0.9975 >
+finger 0.9970 > **pick 0.9965** > slap 0.9955 confirmed. ModalSynth 'string'
+= fallback; PhaseMod alt (saw carrier, ratio 1.0, depth 2.4, attack 3 ms).
+Range 21–84 = empirical FluidR3 span (sweep: RMS 0.067–0.099 FLAT from 21 to
+84, **SILENT from 87 up** — hard patch ceiling); real 4-string E1–G4 =
+28–67; sweet spot 40–55 (E2–G3), solo range 36–57 (C2–A3); zones sub 21–35 /
+groove 36–50 (pick 8ths/16ths + palm-mute chug) / mid 51–64 (pick-bass hooks)
+/ high 65–84 (accents only). Articulations: pick 84/0.90, alt_pick 80/0.85,
+downstroke 92/0.80, palm_mute 48/0.25, staccato 86/0.30, ghost 36/0.18,
+slide 64/1.05, accent 96/0.75. Production: REVERB_TAIL 1.2 s (drier than
+finger 1.4 — DI click upfront), EQ cut 200 Hz −2.5 dB (low-mid box; lower and
+deeper than finger's 250), boost 1.2 kHz +3 dB (the pick CLICK band, above
+finger's 800 Hz growl), 6 kHz air shelf +2 dB (plectrum scrape), PAN centre.
+Solo-render spectral check: 4–8 kHz buzz **0.2%**. Empirical FluidR3 pitch
+sweep (RMS, notes 21–108): preset 34 audible 21–84, 0.000 at 87+ — SF2 never
+clips a composition, but do NOT write above C6. Registration proof:
+`by_name('electric bass (pick)')` / `by_name('pick bass')` → Electric Bass
+(pick), `by_program(34)` → Electric Bass (pick) (distinct from
+`by_program(33)` Electric Bass (finger)), `in_sweet_spot(45)` = True,
+`in_sweet_spot(90)` = False, `stem_label = 'Electric_Bass_pick'`,
+`synthesis = 'karplus'`; `registry_table()` row "| Bass | Electric Bass
+(pick) | 34 | 21–84 | bass, rhythm, groove, countermelody, accent |";
+convenience constant `PICK_BASS`. Role: bass (root-fifth 8ths/16ths, pedal
+tones), rhythm (palm-muted chug, alternate-picked engines), groove
+(post-punk/new-wave melodic grooves — Peter Hook's high-register hooks are
+the reference), countermelody, accent (downstroke digs, pick scrapes) — NOT a
+lead voice, NOT a harmony/pad voice (monophonic), NOT a high-register
+sustain voice. **Quirk (new)**: the FluidR3 "Picked Bass" sample attack is
+SOFTER than physics — envelope reaches ~90% at 50–80 ms vs the fingered
+patch's ~30 ms (a real plectrum transient is 3–5 ms), so write staccato /
+palm-mute notes ≥ 100 ms; and on low notes the 3rd partial rivals the
+fundamental (E2: 125 Hz = 0.835× the 82 Hz fundamental) — that is the pick
+brightness, but pitch checks MUST use a band-limited peak search (±10% of
+f0), not the global FFT argmax. Same-pitch doubling rule applies: never
+layer pick + finger bass on the same pitches (comb filtering). Remaining
+sibling candidates: GM37 "Slap Bass 2" (FluidR3 "Pop Bass"), GM50/51 Synth
+Strings 1/2, GM63 Synth Brass 2, GM17/18 Percussive/Rock Organ.

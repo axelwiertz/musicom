@@ -1,0 +1,109 @@
+{
+  "job": "random-style production (SP) layer-aligned",
+  "date": "2026-11-14",
+  "seed": 20261114,
+  "method": "SP-100",
+  "method_module": "sound.generators.bach_composer",
+  "method_desc": "B.A.C.H. Composition Generator \u2014 11 algorithmic composition engines: FUGUE/CANON/PROBA/TINTINNABULI/MINIMAL/CELLULAR/TREE/MOTIF/HYBRID/GROOVE/GROOVE_MIX (Kaona B.A.C.H.-style)",
+  "layer": "ABSOLUTE - generator re-composes the whole piece in the source's key/tempo; TINTINNABULI engine (Arvo P\u00e4rt-style) drives 4 voices",
+  "engine": "tintinnabuli",
+  "engine_params": {
+    "triad": [
+      0,
+      5,
+      10
+    ],
+    "triad_desc": "D-G-C quartal (all hirajoshi)",
+    "melody_pcs": [
+      0,
+      2,
+      3,
+      7,
+      8
+    ],
+    "total_ticks": 30720,
+    "total_bars": 16
+  },
+  "target_lufs": -14.0,
+  "ceiling_db": -1.0,
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Japanese/001-japanese-hirajoshi/MIDI/japanese-hirajoshi.mid",
+  "source_bpm": 70.0,
+  "source_key": "D hirajoshi (D-Eb-G-Ab-C)",
+  "source_pitch_classes": [
+    0,
+    2,
+    3,
+    7,
+    8
+  ],
+  "source_form": "16 bars (4 phrases x 4 bars), static D-root hirajoshi region",
+  "output_midi": "/opt/data/repos/musicom/projects/Styles/Production/SP100-bach-composer-001-japanese-hirajoshi/MIDI/001-japanese-hirajoshi.mid",
+  "phase1_midi": "/opt/data/repos/musicom/projects/Styles/Production/SP100-bach-composer-001-japanese-hirajoshi/MIDI/001-japanese-hirajoshi-phase1.mid",
+  "output_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP100-bach-composer-001-japanese-hirajoshi/Audio/SP100-bach-composer-001-japanese-hirajoshi.wav",
+  "output_ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP100-bach-composer-001-japanese-hirajoshi/Audio/SP100-bach-composer-001-japanese-hirajoshi.ogg",
+  "dry_reference_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP100-bach-composer-001-japanese-hirajoshi/Audio/dry_full_mix_sp001_reference.wav",
+  "lufs": -14.0,
+  "peak": 0.6340025975548736,
+  "silence_pct": 8.928597695874227,
+  "rms": 0.12456248333174741,
+  "pitch_verdict": "PASS",
+  "final_hit_rate": 1.0,
+  "final_he": 0.6854211673219851,
+  "dry_hit_rate": 1.0,
+  "dry_he": 0.6884924182594282,
+  "he_retention": 0.9955391652021275,
+  "source_preflight": {
+    "grid_off": 0,
+    "out_scale": 4,
+    "out_chord": 0,
+    "total_notes": 212,
+    "zero_drift": true,
+    "track_ends": [
+      30720
+    ]
+  },
+  "phase1_audit": {
+    "grid_off": 0,
+    "out_scale": 0,
+    "out_chord": 0,
+    "total_notes": 120,
+    "zero_drift": true,
+    "track_ends": [
+      30720
+    ]
+  },
+  "final_audit": {
+    "grid_off": 0,
+    "out_scale": 0,
+    "out_chord": 0,
+    "total_notes": 120,
+    "zero_drift": true,
+    "track_ends": [
+      30720
+    ]
+  },
+  "stems_ok": true,
+  "n_stems": 4,
+  "instruments": [
+    [
+      "Shakuhachi",
+      77,
+      0
+    ],
+    [
+      "Koto",
+      107,
+      1
+    ],
+    [
+      "Strings",
+      49,
+      2
+    ],
+    [
+      "Bass",
+      43,
+      3
+    ]
+  ]
+}
