@@ -116,6 +116,24 @@ GENERATOR_REGISTRY = {
     "HC-078": (None, None, "Tin Pan Alley 32-Bar AABA Song Form (spec in human_methods_db.md)"),
     "HC-079": (None, None, "Musique Concrète Tape-Music Composition — Studio Montage of Sound Objects (spec in human_methods_db.md)"),
     "HC-080": (None, None, "Notre-Dame Organum & Rhythmic-Mode Composition (spec in human_methods_db.md)"),
+    # --- Abstract layer weekly promotion 2026-11-15 (reports 131, 133, 134, 139) ---
+    "ABS-131": ("rules.subset_network", None, "Tonality Diamond Ratio-Pool Composition (TDRPC) — abstract just-intonation pitch-pool design (rules.subset_network)"),
+    "ABS-133": ("rules.subset_network", None, "Z-Relation Network Composition (ZRNC) — abstract z-twin set-class network (rules.subset_network)"),
+    "ABS-134": ("rules.subset_network", None, "Cellular Sheaf Cohomology Composition (CSCC) — abstract section-graph harmonic plan (rules.subset_network)"),
+    "ABS-139": ("rules.subset_network", None, "Latin Square & Orthogonal-Array Composition (LSAC) — abstract factorial matrix design (rules.subset_network)"),
+    # --- Human methods weekly promotion 2026-11-15 (reports HC-081..HC-092) ---
+    "HC-081": (None, None, "Gnawa Lila/Derdeba Ritual Composition — Treq Seven-Suite Architecture (spec in human_methods_db.md)"),
+    "HC-082": (None, None, "Jingju (Beijing Opera) Aria Composition — Xipi/Erhuang Modes & Banshi Chains (spec in human_methods_db.md)"),
+    "HC-083": (None, None, "Mariachi Son Jalisciense Composition — Sesquialtera Armonía & Parallel-Thirds (spec in human_methods_db.md)"),
+    "HC-084": (None, None, "Rebetiko (Greek Urban Song) Composition — Dromos, Taximi & Dance-Rhythm (spec in human_methods_db.md)"),
+    "HC-085": (None, None, "Danmono (Koto Sectional Variation) Composition — Fixed-Length Dan Architecture (spec in human_methods_db.md)"),
+    "HC-086": (None, None, "Steelband Panorama Arrangement — Theme-and-Variation Competition Craft (spec in human_methods_db.md)"),
+    "HC-087": (None, None, "Znamenny Chant Popevka (Kokiza) Formula Assembly (spec in human_methods_db.md)"),
+    "HC-088": (None, None, "Bebop Contrafact Head Composition — New Melody Over Borrowed Changes (spec in human_methods_db.md)"),
+    "HC-089": (None, None, "Canon Composition — Strict Imitation & Canonic Counterpoint (spec in human_methods_db.md)"),
+    "HC-090": (None, None, "Kalevala-Meter Rune Song Composition — Oral-Formulaic Parallelistic Craft (spec in human_methods_db.md)"),
+    "HC-091": (None, None, "Mongolian Urtiin Duu (Long Song) Composition — Shilber Skeleton & Khooslol Ornament (spec in human_methods_db.md)"),
+    "HC-092": (None, None, "Gospel Music Vamp & Modulation-Ladder Arrangement (spec in human_methods_db.md)"),
 }
 
 

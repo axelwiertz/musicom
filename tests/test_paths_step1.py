@@ -75,10 +75,15 @@ def test_level_counts_match_plan():
     # HC-075/076/078/079 at L4 (+7 → 77); ABS-127 at L3 and HC-077/080 at L3
     # (+3 → 84); 130 at L1 (+1 → 13). ABS-127 (SGNC) is abstract-layer,
     # routed to rules.subset_network like ABS-001..005/095/099/104/113.
-    assert len(methods_by_level("L4")) == 77
-    assert len(methods_by_level("L3")) == 84
+    # Weekly registration (2026-11-15) added 132/135/137/138/141/142 at L4,
+    # ABS-133/134/139 at L4, and HC-081/082/085/086/092 at L4 (+14 → 91);
+    # 140 at L3, ABS-131 at L3, and HC-083/084/087/088/089/090/091 at L3
+    # (+9 → 93); 136 at L1 (+1 → 14). ABS-131/133/134/139 are abstract-layer,
+    # routed to rules.subset_network like ABS-001..005/095/099/104/113/127.
+    assert len(methods_by_level("L4")) == 91
+    assert len(methods_by_level("L3")) == 93
     assert len(methods_by_level("L2")) == 22
-    assert len(methods_by_level("L1")) == 13
+    assert len(methods_by_level("L1")) == 14
 
 
 def test_level_of_known_and_unknown():
