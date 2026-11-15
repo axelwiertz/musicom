@@ -1,0 +1,217 @@
+{
+  "artifact": "306-lsystem-fanfare-perfect.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom two-phase (phase=2 rules: tiered chord-tone quantization + 8th grid snap + dedup + voice-leading + 6-voice brass texture) (method 019 L-System)",
+  "sources": [
+    "/opt/data/projects/Styles/Fanfare/306-lsystem-fanfare/MIDI/306-lsystem-fanfare-phase1.mid"
+  ],
+  "parameters": {
+    "bpm": 120,
+    "key": "Bb",
+    "mode": "ionian",
+    "style": "fanfare",
+    "form": "cinematic-build",
+    "bars": 32,
+    "sections": [
+      "Intro",
+      "Build",
+      "Rise",
+      "Peak",
+      "Resolve"
+    ],
+    "section_bars": {
+      "Intro": 4,
+      "Build": 8,
+      "Rise": 8,
+      "Peak": 8,
+      "Resolve": 4
+    },
+    "section_midpoint_chords": {
+      "Intro": {
+        "degree": 0,
+        "chord": "Bb"
+      },
+      "Build": {
+        "degree": 4,
+        "chord": "F"
+      },
+      "Rise": {
+        "degree": 5,
+        "chord": "Gm"
+      },
+      "Peak": {
+        "degree": 0,
+        "chord": "Bb"
+      },
+      "Resolve": {
+        "degree": 0,
+        "chord": "Bb"
+      }
+    },
+    "bar_degrees": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      3,
+      3,
+      4,
+      4,
+      0,
+      0,
+      3,
+      3,
+      4,
+      4,
+      5,
+      5,
+      4,
+      4,
+      0,
+      0,
+      3,
+      4,
+      0,
+      5,
+      4,
+      0,
+      4,
+      4,
+      0,
+      0
+    ],
+    "method": "019 L-System Algorithmic Composition",
+    "layer": "concrete",
+    "paradigm": "Rules-Based",
+    "lsystem": {
+      "axiom": "C",
+      "rules": {
+        "A": "ABA",
+        "B": "BC",
+        "C": "RA",
+        "R": "R"
+      },
+      "interpretation": "A=+1 deg, B=-1 deg, C=+2 deg, R=rest",
+      "symbols": 256,
+      "symbol_counts": {
+        "A": 109,
+        "B": 83,
+        "C": 36,
+        "R": 28
+      }
+    },
+    "voices": [
+      [
+        "Trumpet",
+        56,
+        0
+      ],
+      [
+        "FrenchHorn",
+        60,
+        1
+      ],
+      [
+        "Brass",
+        61,
+        2
+      ],
+      [
+        "Tuba",
+        58,
+        3
+      ],
+      [
+        "Timpani",
+        47,
+        4
+      ],
+      [
+        "Drums",
+        0,
+        9
+      ]
+    ],
+    "voice_leading_corrections": 0,
+    "humanize_seed": 66139,
+    "raw_seed": 20261115,
+    "humanize_profiles": {
+      "Trumpet": {
+        "timing_sigma_ms": 7.0,
+        "velocity_sigma": 8.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "FrenchHorn": {
+        "timing_sigma_ms": 7.0,
+        "velocity_sigma": 8.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Brass": {
+        "timing_sigma_ms": 7.0,
+        "velocity_sigma": 8.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Tuba": {
+        "timing_sigma_ms": 7.0,
+        "velocity_sigma": 8.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Timpani": {
+        "timing_sigma_ms": 7.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Drums": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.008,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      }
+    },
+    "phase": 2,
+    "version": "perfect",
+    "off_grid": 0
+  },
+  "notes": "Grid-locked perfect layer (cinematic-build, 32 bars). Method 019 L-System (concrete).",
+  "sha256": "f6f57e7261aabd06c7ae5fcc272ad6b006ad5afa2307ddf06054460ea6690131",
+  "bytes": 7041,
+  "created_utc": "2026-11-15T23:16:46.416698+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,39 @@
+{
+  "soundfont": "/opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2",
+  "style": "fanfare",
+  "target_lufs": -14.0,
+  "phase1": {
+    "lufs": -14.01,
+    "true_peak_db": -1.0,
+    "target_lufs": -14.0,
+    "silence_ratio": 0.041,
+    "rms_mean": 0.1455,
+    "rms_max": 0.1864,
+    "ogg_bytes": 657055,
+    "ogg": "/opt/data/projects/Styles/Fanfare/306-lsystem-fanfare/Audio/306-lsystem-fanfare-phase1.ogg"
+  },
+  "perfect": {
+    "lufs": -14.0,
+    "true_peak_db": -1.23,
+    "target_lufs": -14.0,
+    "silence_ratio": 0.0401,
+    "rms_mean": 0.139,
+    "rms_max": 0.1717,
+    "wav_bytes": 11811884,
+    "ogg_bytes": 525521,
+    "wav": "/opt/data/projects/Styles/Fanfare/306-lsystem-fanfare/Audio/306-lsystem-fanfare-perfect.wav",
+    "ogg": "/opt/data/projects/Styles/Fanfare/306-lsystem-fanfare/Audio/306-lsystem-fanfare-perfect.ogg"
+  },
+  "humanized": {
+    "lufs": -14.0,
+    "true_peak_db": -1.0,
+    "target_lufs": -14.0,
+    "silence_ratio": 0.0444,
+    "rms_mean": 0.1374,
+    "rms_max": 0.1805,
+    "wav_bytes": 11856940,
+    "ogg_bytes": 522677,
+    "wav": "/opt/data/projects/Styles/Fanfare/306-lsystem-fanfare/Audio/306-lsystem-fanfare-humanized.wav",
+    "ogg": "/opt/data/projects/Styles/Fanfare/306-lsystem-fanfare/Audio/306-lsystem-fanfare-humanized.ogg"
+  }
+}

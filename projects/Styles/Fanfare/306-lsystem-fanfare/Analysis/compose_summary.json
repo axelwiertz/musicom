@@ -1,0 +1,140 @@
+{
+  "style": "fanfare",
+  "genre": "Fanfare",
+  "method": "019 L-System Algorithmic Composition",
+  "layer": "concrete",
+  "form": "cinematic-build",
+  "key": "Bb major (Ionian)",
+  "bpm": 120,
+  "bars": 32,
+  "sections": [
+    "Intro",
+    "Build",
+    "Rise",
+    "Peak",
+    "Resolve"
+  ],
+  "section_bars": [
+    4,
+    8,
+    8,
+    8,
+    4
+  ],
+  "lsystem": {
+    "axiom": "C",
+    "rules": {
+      "A": "ABA",
+      "B": "BC",
+      "C": "RA",
+      "R": "R"
+    },
+    "symbols": 256,
+    "symbol_counts": {
+      "A": 109,
+      "B": 83,
+      "C": 36,
+      "R": 28
+    }
+  },
+  "raw_notes": 228,
+  "voice_leading_corrections": 0,
+  "phase1_path": "/opt/data/projects/Styles/Fanfare/306-lsystem-fanfare/MIDI/306-lsystem-fanfare-phase1.mid",
+  "perfect_path": "/opt/data/projects/Styles/Fanfare/306-lsystem-fanfare/MIDI/306-lsystem-fanfare-perfect.mid",
+  "humanized_path": "/opt/data/projects/Styles/Fanfare/306-lsystem-fanfare/MIDI/306-lsystem-fanfare-humanized.mid",
+  "hz_seed": 66139,
+  "hz": {
+    "Trumpet": {
+      "seed": 6680039,
+      "n_notes": 228,
+      "mean_abs_shift_ticks": 4.193,
+      "max_abs_shift_ticks": 15,
+      "mean_abs_vel_delta": 6.202,
+      "timing_sigma_ticks": 6.72
+    },
+    "FrenchHorn": {
+      "seed": 6680040,
+      "n_notes": 202,
+      "mean_abs_shift_ticks": 4.445,
+      "max_abs_shift_ticks": 16,
+      "mean_abs_vel_delta": 6.01,
+      "timing_sigma_ticks": 6.72
+    },
+    "Brass": {
+      "seed": 6680041,
+      "n_notes": 104,
+      "mean_abs_shift_ticks": 4.711,
+      "max_abs_shift_ticks": 13,
+      "mean_abs_vel_delta": 6.836,
+      "timing_sigma_ticks": 6.72
+    },
+    "Tuba": {
+      "seed": 6680042,
+      "n_notes": 80,
+      "mean_abs_shift_ticks": 4.825,
+      "max_abs_shift_ticks": 18,
+      "mean_abs_vel_delta": 6.388,
+      "timing_sigma_ticks": 6.72
+    },
+    "Timpani": {
+      "seed": 6680043,
+      "n_notes": 106,
+      "mean_abs_shift_ticks": 4.113,
+      "max_abs_shift_ticks": 17,
+      "mean_abs_vel_delta": 4.443,
+      "timing_sigma_ticks": 6.72
+    },
+    "Drums": {
+      "seed": 6680044,
+      "n_notes": 84,
+      "mean_abs_shift_ticks": 0.964,
+      "max_abs_shift_ticks": 4,
+      "mean_abs_vel_delta": 2.845,
+      "timing_sigma_ticks": 1.92
+    }
+  },
+  "progression": {
+    "Intro": [
+      "Bb",
+      "Bb",
+      "Bb",
+      "Bb"
+    ],
+    "Build": [
+      "Bb",
+      "Bb",
+      "Eb",
+      "Eb",
+      "F",
+      "F",
+      "Bb",
+      "Bb"
+    ],
+    "Rise": [
+      "Eb",
+      "Eb",
+      "F",
+      "F",
+      "Gm",
+      "Gm",
+      "F",
+      "F"
+    ],
+    "Peak": [
+      "Bb",
+      "Bb",
+      "Eb",
+      "F",
+      "Bb",
+      "Gm",
+      "F",
+      "Bb"
+    ],
+    "Resolve": [
+      "F",
+      "F",
+      "Bb",
+      "Bb"
+    ]
+  }
+}
