@@ -1,0 +1,12 @@
+check 1 (length ~ n/alpha, hop math): PASS
+check 2 (pitch preserved @ alpha=0.5): PASS  f_in=440.00 Hz f_out=440.00 Hz  (+0.00%)
+check 3 (harmonic ratios 1:2.000:3.000 vs 1:2:3): PASS
+check 4 (|delta| <= tol=512): PASS  max|delta|=506
+check 5 (transient: WSOLA peak 3.53 vs OLA 3.49 vs orig 3.89): PASS
+check 6 (WOLA gain ~1: rms 0.8157 vs 0.8185): PASS
+check 7 (bit-identical re-run): PASS
+check 8 (alpha=1.0 interior exact, max abs err 4.44e-16): PASS
+check 9 (stereo: corr in +0.800 shared-delta +0.808 per-channel +0.648): PASS
+check 10 (fluidsynth pipeline: in 319936 smp, alpha=0.5 -> 639872, alpha=1.5 -> 213291): PASS
+
+TOTAL: 18/18 checks PASS

@@ -1,0 +1,45 @@
+======================================================================
+FPBC verification — Fokker Periodicity Block Composition (method 143)
+======================================================================
+
+[1] 12-note block — 5-limit, unison vectors 81/80 = (4,-1), 128/125 = (0,-3)
+  [PASS] |det U| = 12 (det = -12)
+  [PASS] block has 12 lattice points (count = 12)
+  [PASS] 12 unique octave-reduced ratios (unique = 12)
+  [PASS] all ratios octave-reduced to [1,2) (min 0.0 c = 1/1, max 1129.3 c)
+  12-block ratios (origin-anchored representatives): 1/1, 27/25, 144/125, 6/5, 32/25, 27/20, 36/25, 192/125, 8/5, 216/125, 9/5, 48/25
+  [PASS] standard 5-limit chromatic is a transversal (12 distinct cosets) (pcs = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
+  [PASS] 12-ET pcs all distinct == {0..11} (pcs = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
+  step pattern (cents): [133.2, 111.7, 70.7, 111.7, 92.2, 111.7, 111.7, 70.7, 133.2, 70.7, 111.7, 70.7]
+  [PASS] periodicity: block + 81/80 == block (pc set) 
+  [PASS] constant structure (Wilson): ratio -> unique step count 
+
+[2] 19-note block — 5-limit, unison vectors 81/80 = (4,-1), 3125/3072 = (-1,5)
+  [PASS] |det U| = 19 (det = 19)
+  [PASS] block has 19 lattice points (count = 19)
+  [PASS] 19-ET pcs all distinct (n = 19)
+
+[3] 31-note block — 7-limit, unison vectors 81/80=(4,-1,0), 225/224=(2,2,-1), 1029/1024=(1,0,3)
+  [PASS] |det U| = 31 (det = 31)
+  [PASS] block has 31 lattice points (count = 31)
+  [PASS] 31 unique octave-reduced ratios 
+  [PASS] 31-ET pcs all distinct (Fokker-organ temperament) (n = 31)
+
+[4] Cyclic quotient — the ET mapping IS the quotient map Z^n/U -> Z/m
+  [PASS] 12-block  -> Z/12 cyclic: unison vectors in ker(phi) and block bijects onto Z/12 (|det| = 12, ker ok = True, bijective = True)
+  [PASS] 19-block  -> Z/19 cyclic: unison vectors in ker(phi) and block bijects onto Z/19 (|det| = 19, ker ok = True, bijective = True)
+  [PASS] 31-block  -> Z/31 cyclic: unison vectors in ker(phi) and block bijects onto Z/31 (|det| = 31, ker ok = True, bijective = True)
+  12-block: gcd of all unison-vector entries = 1 (SNF d1 = 1 -> cyclic)
+  19-block: gcd of all unison-vector entries = 1 (SNF d1 = 1 -> cyclic)
+  31-block: gcd of all unison-vector entries = 1 (SNF d1 = 1 -> cyclic)
+
+[5] Modulation seam — block + t vs block (common-tone voice-leading)
+  12-block + t = (1,0) = fifth 3/2: 8 common exact ratios {27/25, 144/125, 6/5, 27/20, 36/25, 216/125, 9/5, 48/25}
+  12-block + t = (0,1) = third 5/4: 8 common exact ratios {1/1, 27/25, 6/5, 27/20, 36/25, 8/5, 9/5, 48/25}
+  12-block + t = (1,1) = 15/8: 5 common exact ratios {27/25, 6/5, 27/20, 36/25, 9/5}
+  [PASS] modulation by non-unison vector changes the ratio set (distinct block) (|rset12 ∩ rset15/8| = 5 common ratios)
+  [PASS] unison-vector transposition = comma pump on ratios (81/80 shift) (|rset12 ∩ rset_u| = 0 shared ratios; 81/80 = 21.5 c ≠ 0)
+
+======================================================================
+RESULT: 20 passed, 0 failed
+======================================================================

@@ -1,25 +1,23 @@
 {
   "job": "random-style production (SP) layer-aligned",
-  "date": "2026-11-14",
-  "seed": 20261114,
-  "method": "SP-100",
-  "method_module": "sound.generators.bach_composer",
-  "method_desc": "B.A.C.H. Composition Generator \u2014 11 algorithmic composition engines: FUGUE/CANON/PROBA/TINTINNABULI/MINIMAL/CELLULAR/TREE/MOTIF/HYBRID/GROOVE/GROOVE_MIX (Kaona B.A.C.H.-style)",
-  "source_midi": "/opt/data/repos/musicom/projects/Styles/Japanese/001-japanese-hirajoshi/MIDI/japanese-hirajoshi.mid",
-  "source_project": "Japanese/001-japanese-hirajoshi/MIDI/japanese-hirajoshi.mid",
+  "date": "2026-11-15",
+  "seed": 20261115,
+  "method": "SP-075",
+  "method_module": "sound.render.hybrid",
+  "method_desc": "Voice-Like Instrument Hybrid Render (synthesized voice tracks + SoundFont backing)",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Soul/073-soul-rbmpd/MIDI/073-soul-rbmpd.mid",
+  "source_project": "Soul/073-soul-rbmpd/MIDI/073-soul-rbmpd.mid",
   "registry_size": 93,
   "recent_excluded": [
     "SP-069",
     "SP-084",
+    "SP-100",
     "SP-113",
     "SP-119",
     "SP-138",
-    "SP-146",
     "SP-154"
   ],
-  "already_on_source": [
-    "SP-105"
-  ],
+  "already_on_source": [],
   "baseline_excluded": [
     "SP-001"
   ],
@@ -60,11 +58,11 @@
     "SP-097",
     "SP-098",
     "SP-099",
-    "SP-100",
     "SP-101",
     "SP-102",
     "SP-103",
     "SP-104",
+    "SP-105",
     "SP-106",
     "SP-107",
     "SP-108",
@@ -100,6 +98,7 @@
     "SP-143",
     "SP-144",
     "SP-145",
+    "SP-146",
     "SP-147",
     "SP-148",
     "SP-150",
@@ -109,8 +108,8 @@
     "SP-155",
     "SP-156"
   ],
-  "n_candidates": 452,
-  "n_well_formed": 347,
-  "n_meaningful": 346,
+  "n_candidates": 456,
+  "n_well_formed": 351,
+  "n_meaningful": 350,
   "rejected_degenerate": []
 }

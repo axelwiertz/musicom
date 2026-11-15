@@ -1,0 +1,13 @@
+SP-075 Voice-Like Instrument Hybrid -- absolute layer (073-soul-rbmpd)
+seed=20261115 bpm=92.0 target_lufs=-13.0 vowels=aoeauo
+
+track -> engine -> instrument
+  track00 Lead       -> voice_like  talkbox (prog 75, ch 0, 384 notes)
+  track01 Horns      -> fluidsynth  soundfont (prog 61, ch 1, 160 notes)
+  track02 Rhodes     -> fluidsynth  soundfont (prog 4, ch 2, 96 notes)
+  track03 Bass       -> fluidsynth  soundfont (prog 33, ch 3, 104 notes)
+  track04 Drums      -> fluidsynth  soundfont (prog 0, ch 9, 296 notes)
+
+wet stems:
+  track00_Lead_talkbox.wav
+  track_backing_fluidsynth.wav

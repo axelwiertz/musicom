@@ -1,0 +1,53 @@
+{
+  "job": "random-style production (SP) layer-aligned",
+  "date": "2026-11-15",
+  "seed": 20261115,
+  "method": "SP-075",
+  "method_module": "sound.render.hybrid",
+  "method_desc": "Voice-Like Instrument Hybrid Render (synthesized voice tracks + SoundFont backing)",
+  "layer": "absolute",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Production/SP075-voice-hybrid-073-soul-rbmpd/MIDI/073-soul-rbmpd.mid",
+  "source_project": "Soul/073-soul-rbmpd",
+  "source_key": "C natural minor",
+  "source_bpm": 92.0,
+  "preflight": {
+    "zero_drift": "PASS (46080)",
+    "in_scale": "PASS (0)",
+    "grid_sync": "FAIL (27003 off-grid lead) -> FIXED",
+    "chord_tone": "FAIL (4766 out-of-chord lead) -> FIXED",
+    "rework_audit": {
+      "before_off_grid": 27003,
+      "before_out_of_chord": 4766,
+      "after": {
+        "off_grid": 0,
+        "out_scale": 0,
+        "out_chord": 0,
+        "total_onsets": 1088,
+        "track_spans": [
+          46080
+        ],
+        "zero_drift": true
+      }
+    }
+  },
+  "voice_instruments": [
+    "talkbox",
+    null,
+    null,
+    null,
+    null
+  ],
+  "output_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP075-voice-hybrid-073-soul-rbmpd/SP075-voice-hybrid-073-soul-rbmpd.wav",
+  "output_ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP075-voice-hybrid-073-soul-rbmpd/SP075-voice-hybrid-073-soul-rbmpd.ogg",
+  "dry_reference_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP075-voice-hybrid-073-soul-rbmpd/dry_full_mix_sp001_reference.wav",
+  "target_lufs": -13.0,
+  "ceiling_db": -1.0,
+  "lufs": -13.0,
+  "peak": 0.8145476001473424,
+  "silence_pct": 1.1,
+  "pitch_verdict": "PASS",
+  "midi_note_hit_rate": 1.0,
+  "he_mean": 0.9834,
+  "stems_ok": true,
+  "n_dry_stems": 5
+}

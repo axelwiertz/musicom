@@ -652,6 +652,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Percussion | Tubular Bells | 14 | 60–78 | accent, color, drone, lead, ornament |
 | Percussion | Vibraphone | 11 | 48–89 | lead, melody, harmony, countermelody, accent |
 | Percussion | Xylophone | 13 | 53–89 | lead, melody, ornament, accent, countermelody |
+| Percussion | Woodblock | 115 | 60–96 | rhythm, accent, ornament, color |
 | World | Sitar | 104 | 55–96 | lead, melody, ornament, drone |
 | World | Banjo | 105 | 46–93 | lead, melody, ornament, rhythm, accent |
 | World | Koto | 107 | 51–90 | lead, melody, ornament, drone, harmony |
@@ -2389,3 +2390,55 @@ f0), not the global FFT argmax. Same-pitch doubling rule applies: never
 layer pick + finger bass on the same pitches (comb filtering). Remaining
 sibling candidates: GM37 "Slap Bass 2" (FluidR3 "Pop Bass"), GM50/51 Synth
 Strings 1/2, GM63 Synth Brass 2, GM17/18 Percussive/Rock Organ.
+
+**Woodblock added** (2026-09-02 nightly slot, written 2026-11-15): GM115,
+**Percussion-family ninth entry** — the dry WOODEN tick of the GM percussion
+tail (instrument.md + woodblock.py), verified end-to-end UnitMatrixComposer →
+zero-drift ✓ → MIDI (263 bytes) → FluidSynth WAV (794,412 bytes) ✓;
+RenderPipeline stem label `trackXX_Woodblock.wav` ✓ (GM_PROGRAMS[115] =
+"Woodblock" → no quirk; FluidR3 preset 115 = **"Woodblock"**, bank 0 — labels
+match exactly). Identity: a hollowed hardwood SLIT BLOCK (maple, 5–9 in)
+struck with a drumstick — the orchestral/studio marker, NOT the claves (ch9
+note 75, a solid rod, 1080 Hz measured), NOT the cowbell (ch9 56, metal ring),
+NOT the muyu/temple block (no GM program), NOT the taiko (GM116, membrane).
+Range 60–96 (C4–C7) is a *window*, not a scale: a woodblock has no melodic
+range. Solo range 65–84, sweet spot 67–74 (**the patch's natural,
+unresampled centre** — natural note ≈68, 410 Hz measured). Zones low 60–70 /
+mid 71–79 / high 80–96 are TIMBRE zones, not pitch zones. Articulations:
+open 92/0.25, accent 106/0.30, muted 68/0.12, rim 86/0.10, stick_click 60/0.08,
+double 90/0.18, ghost 36/0.10, roll 60/0.06 — all durations SHORT by physics
+(block decays ~60–90 ms to inaudibility; a later note-off is inaudible).
+Synthesis: **ModalSynth** with custom `WOODBLOCK_MODES` built from MEASURED
+FluidR3 ratios 1 : 1.96 : 2.18 : 3.44 : 5.5 and decay rates 80/110/140/190/260
+(~10× faster than the marimba bank 8–20 — the shortest ring in the KB); the
+2.18× inharmonic partial is what makes it read as WOOD. MODAL_PRESET 'drum' is
+the closest stock bank (fast, inharmonic) but membrane-shaped. PhaseMod alt
+(sine carrier, **non-integer** ratio 3.4, depth 1.8, release 60 ms);
+Karplus-Strong REJECTED (no string/tube). Production: REVERB_TAIL **0.75 s
+(the driest entry in the KB)**, EQ cut 600 Hz −2 dB (hollow-slit box),
+boost 3.6 kHz +2.5 dB (stick crack), 10 kHz shelf +1.5 dB, PAN +0.15.
+**Quirk (measured, important)**: FluidR3 GM115 barely PITCH-TRACKS — sweeping
+MIDI 50 → 98 moves the spectral peak only 330 Hz → 580 Hz (1.76× where real
+transposition is 16×); note number is a TIMBRE control, so never write
+melodies on GM115. For a true hi/lo pair use **ch9 notes 76 (Hi) / 77 (Low)** —
+measured 380 Hz / 280 Hz in FluidR3 (a fifth apart; the "Hi" block is low-ish
+in this SF2), peak ≈0.55 = **+4.5 dB hotter** than the melodic patch (0.34 at
+vel 100), stem label falls back to the drum-kit `Acoustic_Grand_Piano` name.
+Other measured facts: decay −90% within 50 ms with a faint (−40 dB) tail to
+~1.5 s; velocity response near-linear (peak 0.014 at vel 20 → 0.490 at 120);
+spectral centroid ≈4.7 kHz at note 72 — brighter than marimba (3.0) and
+xylophone (3.4), darker than agogo (7.4); pitch sweep 48–96 audible 13/13, no
+gaps, level flat within 24%. Solo-render spectral check: 4–8 kHz buzz 7.6%
+(the tick band IS 4–8 kHz, no comb buzz). Registration proof:
+`by_name('woodblock')` / `by_name('Woodblock')` / `by_program(115)` →
+Woodblock (distinct from `by_program(114)` Steel Drums), `in_sweet_spot(72)` =
+True, `in_sweet_spot(48)` = False, `stem_label = 'Woodblock'`,
+`synthesis = 'modal'`; `registry_table()` row "| Percussion | Woodblock | 115
+| 60–96 | rhythm, accent, ornament, color |"; convenience constant
+`WOODBLOCK`. Role: rhythm (grid-keeping ostinato, the orchestral "clock"),
+accent (section marks, stops), ornament (double strokes, rim ticks, pickups),
+color (horse hooves, machine rhythm, toy-box) — NOT melodic, NOT harmony, NOT
+sustain. Humanize: Percussion DNA (2.5 ms sigma, 0 layback) — the block must
+sit ON the grid. Remaining sibling candidates: GM112 Tinkle Bell, GM117
+Melodic Tom, GM118 Synth Drum, GM76 Blown Bottle, GM17/18 Percussive/Rock
+Organ, GM50/51 Synth Strings 1/2.

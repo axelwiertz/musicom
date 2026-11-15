@@ -72,6 +72,7 @@ _INSTRUMENT_MODULES = {
     "Percussion.xylophone.xylophone": "xylophone",
     "Percussion.tubular_bells.tubular_bells": "tubular_bells",
     "Percussion.timpani.timpani": "timpani",
+    "Percussion.woodblock.woodblock": "woodblock",
     "Keys.accordion.accordion": "accordion",
     "Keys.reed_organ.reed_organ": "reed_organ",
     "Keys.rhodes.rhodes": "rhodes",
@@ -122,6 +123,7 @@ _FIELDS = (
     "motor_defaults", "string_ensemble_defaults",
     "xylophone_modes", "celesta_modes",
     "agogo_modes",
+    "woodblock_modes",
     "reverb_tail", "eq_body", "eq_presence", "eq_air", "pan",
     "stem_label",
 )
@@ -339,6 +341,7 @@ GLOCKENSPIEL = ALL_INSTRUMENTS["glockenspiel"]
 TUBULAR_BELLS = ALL_INSTRUMENTS["tubular_bells"]
 PICCOLO = ALL_INSTRUMENTS["piccolo"]
 TAIKO = ALL_INSTRUMENTS["taiko"]
+WOODBLOCK = ALL_INSTRUMENTS["woodblock"]
 AGOGO = ALL_INSTRUMENTS["agogo"]
 HUMAN_VOICE = ALL_INSTRUMENTS["human_voice"]
 CHOIR = ALL_INSTRUMENTS["choir"]
@@ -496,6 +499,8 @@ def registry_table():
             role = "accent, rhythm, drone, ornament"
         elif low == "agogo":
             role = "rhythm, accent, ornament, drone"
+        elif low == "woodblock":
+            role = "rhythm, accent, ornament, color"
         elif low == "human voice":
             role = "lead, melody, countermelody"
         elif low == "choir aahs":
@@ -1039,3 +1044,20 @@ if __name__ == "__main__":
     print("  PICK_BASS.stem_label =", repr(PICK_BASS.stem_label))
     print("  PICK_BASS.synthesis =", repr(PICK_BASS.synthesis))
     print("  PICK_BASS.karplus_defaults =", PICK_BASS.karplus_defaults)
+
+    print()
+    print("=== Woodblock (Percussion, GM115) ===")
+    print("  WOODBLOCK.midi_program =", WOODBLOCK.midi_program, "(should be 115)")
+    print("  by_name('woodblock') =", by_name("woodblock"))
+    print("  by_name('Woodblock') =", by_name("Woodblock"))
+    print("  by_program(115) =", by_program(115))
+    print("  by_program(114) =", by_program(114), "(distinct: steel drums)")
+    print("  WOODBLOCK.in_sweet_spot(72) =", WOODBLOCK.in_sweet_spot(72))
+    print("  WOODBLOCK.in_sweet_spot(48) =", WOODBLOCK.in_sweet_spot(48))
+    print("  WOODBLOCK.range_min =", WOODBLOCK.range_min,
+          "WOODBLOCK.range_max =", WOODBLOCK.range_max)
+    print("  WOODBLOCK.stem_label =", repr(WOODBLOCK.stem_label))
+    print("  WOODBLOCK.synthesis =", repr(WOODBLOCK.synthesis))
+    print("  WOODBLOCK.reverb_tail =", WOODBLOCK.reverb_tail,
+          "WOODBLOCK.pan =", WOODBLOCK.pan)
+    print("  WOODBLOCK.woodblock_modes =", WOODBLOCK.woodblock_modes)

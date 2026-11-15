@@ -1,0 +1,12 @@
+{
+  "method": "SP-075",
+  "project": "073-soul-rbmpd",
+  "status": "PASS",
+  "midi_note_hit_rate": 1.0,
+  "harmonic_energy_mean": 0.98339708856324,
+  "acf_unpitched": 0,
+  "acf_windows": 32,
+  "windows_analyzed": 126,
+  "median_dom_hz": 556.0,
+  "misses": []
+}
