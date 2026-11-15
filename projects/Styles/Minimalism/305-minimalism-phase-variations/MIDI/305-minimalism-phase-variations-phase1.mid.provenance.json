@@ -1,0 +1,26 @@
+{
+  "artifact": "305-minimalism-phase-variations-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.euclidean_phase_cell_phase1",
+  "sources": [
+    "/opt/data/projects/Styles/Minimalism/001-minimalism-phase-study/MIDI/minimalism-phase.mid"
+  ],
+  "parameters": {
+    "bpm": 120,
+    "bars": 32,
+    "seed": 20261115,
+    "phase": 1,
+    "quantized": false,
+    "key": "C major (Ionian)",
+    "form": "intro-phase1-6-bridge-resolve-coda",
+    "style": "minimalism",
+    "method": "E(5,12) Euclidean phase cell",
+    "notes": 51,
+    "rules_applied": "NONE (pre-rules)"
+  },
+  "notes": "Raw E(5,12) phase-cell draft: single marimba voice, unquantized float pitch (seeded random walk) + off-grid onsets, 32 bars, pre-rules. Rework source: 001-minimalism-phase-study (redesign).",
+  "sha256": "2d8d4207bf4592184bfc4ce5a17ee4dcc8efc189ac7d18fcdd3aa22ba418707e",
+  "bytes": 565,
+  "created_utc": "2026-11-15T01:08:46.533144+00:00",
+  "provenance_version": "1.0"
+}

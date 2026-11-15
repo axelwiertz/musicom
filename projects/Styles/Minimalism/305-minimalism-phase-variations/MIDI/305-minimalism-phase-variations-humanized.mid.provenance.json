@@ -1,0 +1,284 @@
+{
+  "artifact": "305-minimalism-phase-variations-humanized.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom two-phase (phase=2 + humanization) (E(5,12) phase cell)",
+  "sources": [
+    "/opt/data/projects/Styles/Minimalism/305-minimalism-phase-variations/MIDI/305-minimalism-phase-variations-perfect.mid"
+  ],
+  "parameters": {
+    "bpm": 120,
+    "key": "C",
+    "mode": "ionian",
+    "style": "minimalism",
+    "form": "intro-phase1-6-bridge-resolve-coda",
+    "bars": 32,
+    "sections": [
+      "Intro",
+      "Phase1",
+      "Phase2",
+      "Phase3",
+      "Phase4",
+      "Phase5",
+      "Bridge",
+      "Phase6",
+      "Resolve",
+      "Coda"
+    ],
+    "section_bars": {
+      "Intro": 2,
+      "Phase1": 4,
+      "Phase2": 4,
+      "Phase3": 4,
+      "Phase4": 4,
+      "Phase5": 4,
+      "Bridge": 4,
+      "Phase6": 2,
+      "Resolve": 2,
+      "Coda": 2
+    },
+    "section_techniques": {
+      "Intro": "register-shift (-12), MarimbaA only",
+      "Phase1": "baseline unison (phase 0)",
+      "Phase2": "phase-walk +1 beat",
+      "Phase3": "phase-walk +2 beats",
+      "Phase4": "phase-walk +3 + register-shift (+12) + density-rise (8th cell)",
+      "Phase5": "phase-walk +4 + retrograde",
+      "Bridge": "phase-walk +5 + inversion counter-line + relative-minor (vi)",
+      "Phase6": "phase-walk +6 + diminution (8th cell)",
+      "Resolve": "phase re-lock + register-shift (-12)",
+      "Coda": "augmentation (dur x2) fade"
+    },
+    "section_midpoint_chords": {
+      "Intro": {
+        "degree": 0,
+        "chord": "C"
+      },
+      "Phase1": {
+        "degree": 0,
+        "chord": "C"
+      },
+      "Phase2": {
+        "degree": 0,
+        "chord": "C"
+      },
+      "Phase3": {
+        "degree": 0,
+        "chord": "C"
+      },
+      "Phase4": {
+        "degree": 4,
+        "chord": "G"
+      },
+      "Phase5": {
+        "degree": 1,
+        "chord": "Dm"
+      },
+      "Bridge": {
+        "degree": 5,
+        "chord": "Am"
+      },
+      "Phase6": {
+        "degree": 5,
+        "chord": "Am"
+      },
+      "Resolve": {
+        "degree": 0,
+        "chord": "C"
+      },
+      "Coda": {
+        "degree": 0,
+        "chord": "C"
+      }
+    },
+    "bar_degrees": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      3,
+      0,
+      5,
+      0,
+      4,
+      0,
+      3,
+      0,
+      1,
+      4,
+      0,
+      5,
+      4,
+      1,
+      5,
+      5,
+      1,
+      5,
+      0,
+      4,
+      5,
+      0,
+      0,
+      0,
+      0
+    ],
+    "method": "E(5,12) Euclidean phase cell",
+    "layer": "concrete",
+    "paradigm": "Process",
+    "rework": {
+      "source": "001-minimalism-phase-study",
+      "decision": "redesign",
+      "standard_failures": [
+        "phase1 missing",
+        "index.html missing",
+        "dual-version missing"
+      ]
+    },
+    "variation_techniques": {
+      "phase_walk": "MarimbaB rotates E(5,12) cell +1 beat/section (identity)",
+      "retrograde": "Phase5 MarimbaB pitch sequence reversed",
+      "inversion": "Bridge MarimbaB mirrored around C5 (=72)",
+      "augmentation": "Coda MarimbaB durations x2",
+      "register_shift": "Phase4 +12 / Intro-Resolve-Coda -12",
+      "density_diminution": "Phase4+Phase6 MarimbaA cell 8th-note (x2 density)",
+      "relative_minor": "Bridge harmonic center -> vi (Am) region"
+    },
+    "voices": [
+      [
+        "MarimbaA",
+        12,
+        0
+      ],
+      [
+        "MarimbaB",
+        12,
+        1
+      ],
+      [
+        "Pad",
+        48,
+        2
+      ],
+      [
+        "Bass",
+        32,
+        3
+      ],
+      [
+        "Drums",
+        0,
+        9
+      ]
+    ],
+    "humanize_seed": 88122,
+    "raw_seed": 20261115,
+    "humanize_profiles": {
+      "MarimbaA": {
+        "timing_sigma_ms": 5.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.55,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "MarimbaB": {
+        "timing_sigma_ms": 5.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.55,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Pad": {
+        "timing_sigma_ms": 5.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.03,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.55,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Bass": {
+        "timing_sigma_ms": 5.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.55,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Drums": {
+        "timing_sigma_ms": 5.0,
+        "velocity_sigma": 3.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.55,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      }
+    },
+    "phase": 2,
+    "version": "humanized",
+    "humanize_stats": {
+      "MarimbaA": {
+        "seed": 8900322,
+        "n_notes": 58,
+        "mean_abs_shift_ticks": 2.483,
+        "max_abs_shift_ticks": 9,
+        "mean_abs_vel_delta": 3.879,
+        "timing_sigma_ticks": 4.8
+      },
+      "MarimbaB": {
+        "seed": 8900323,
+        "n_notes": 51,
+        "mean_abs_shift_ticks": 3.647,
+        "max_abs_shift_ticks": 15,
+        "mean_abs_vel_delta": 4.373,
+        "timing_sigma_ticks": 4.8
+      },
+      "Pad": {
+        "seed": 8900324,
+        "n_notes": 106,
+        "mean_abs_shift_ticks": 3.047,
+        "max_abs_shift_ticks": 10,
+        "mean_abs_vel_delta": 4.311,
+        "timing_sigma_ticks": 4.8
+      },
+      "Bass": {
+        "seed": 8900325,
+        "n_notes": 72,
+        "mean_abs_shift_ticks": 8.306,
+        "max_abs_shift_ticks": 19,
+        "mean_abs_vel_delta": 3.278,
+        "timing_sigma_ticks": 4.8
+      },
+      "Drums": {
+        "seed": 8900326,
+        "n_notes": 59,
+        "mean_abs_shift_ticks": 3.271,
+        "max_abs_shift_ticks": 9,
+        "mean_abs_vel_delta": 2.119,
+        "timing_sigma_ticks": 4.8
+      }
+    }
+  },
+  "notes": "Humanized layer (style minimalism + per-instrument DNA).",
+  "sha256": "c36aed2548f9d71026a3d04bfb2d5b8b2e5e375b13d5f2001c24ba0e03b3f093",
+  "bytes": 3112,
+  "created_utc": "2026-11-15T01:08:46.567691+00:00",
+  "provenance_version": "1.0"
+}

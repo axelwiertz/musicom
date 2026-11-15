@@ -1,0 +1,41 @@
+{
+  "soundfont": "/opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2",
+  "style": "minimalism",
+  "target_lufs": -18.0,
+  "phase1": {
+    "lufs": -19.21,
+    "true_peak_db": -2.47,
+    "target_lufs": -18.0,
+    "silence_ratio": 0.3103,
+    "rms_mean": 0.1101,
+    "rms_max": 0.1639,
+    "wav_bytes": 11725356,
+    "ogg_bytes": 489092,
+    "wav": "/opt/data/projects/Styles/Minimalism/305-minimalism-phase-variations/Audio/305-minimalism-phase-variations-phase1.wav",
+    "ogg": "/opt/data/projects/Styles/Minimalism/305-minimalism-phase-variations/Audio/305-minimalism-phase-variations-phase1.ogg"
+  },
+  "perfect": {
+    "lufs": -18.0,
+    "true_peak_db": -4.05,
+    "target_lufs": -18.0,
+    "silence_ratio": 0.0639,
+    "rms_mean": 0.0758,
+    "rms_max": 0.1086,
+    "wav_bytes": 12048684,
+    "ogg_bytes": 480371,
+    "wav": "/opt/data/projects/Styles/Minimalism/305-minimalism-phase-variations/Audio/305-minimalism-phase-variations-perfect.wav",
+    "ogg": "/opt/data/projects/Styles/Minimalism/305-minimalism-phase-variations/Audio/305-minimalism-phase-variations-perfect.ogg"
+  },
+  "humanized": {
+    "lufs": -18.0,
+    "true_peak_db": -3.68,
+    "target_lufs": -18.0,
+    "silence_ratio": 0.0649,
+    "rms_mean": 0.0761,
+    "rms_max": 0.1147,
+    "wav_bytes": 12054316,
+    "ogg_bytes": 478174,
+    "wav": "/opt/data/projects/Styles/Minimalism/305-minimalism-phase-variations/Audio/305-minimalism-phase-variations-humanized.wav",
+    "ogg": "/opt/data/projects/Styles/Minimalism/305-minimalism-phase-variations/Audio/305-minimalism-phase-variations-humanized.ogg"
+  }
+}
