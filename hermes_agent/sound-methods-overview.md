@@ -147,7 +147,11 @@ comparable to, and how do I use it in a workflow?*
 |||||||| `sound/effects/wax_theory_vinyl.py` | WaxTheory | effects (media/playback model) | Modbap Wax Theory, vinyl sims | audio + side/format/stylus → vinyl audio |
 |||||||| `sound/effects/hose_delay.py` | CooperTimeCube, Hose, FractionalDelay | effects (acoustic tube delay) | UAD Cooper Time Cube | audio → stereo hose slapback |
 |||||||| `sound/generators/gilla_arp.py` | GillaArp, ClassicArp, ModMatrix | sequencing (harmonic arp) + modulation | quietformat CERNION GILLA ARP | chord + steps → note list / audio |
-|| `sound/sync/clock.py` | DAWClockBridge | sync | MTC/MIDI clock | bpm → clock pulses |
+|||||||| `sound/effects/whole_tone_filterbank.py` | WholeToneFilterbank | effects (spectral filter bank) | AudioThing/Hainbach Seconds, SWR Sekundenfilterbank | audio + band gains/ring mod → stereo filtered audio; freeze + transfer = spectral envelope stamping |
+|||||||| `sound/generators/arp2_seq.py` | Arp2, ArpStep | sequencing (probability/ratchet/fill arp) | Synthstrom Deluge Arp 2.0 | chord + steps (probability/iteration/fill) → absolute-tick note events |
+|||||||| `sound/synthesis/origami_duo.py` | OrigamiDuo, sine_fold, comparator_morph | synthesis (dual complex osc + M/S) | Larix Elektro Origami Duo, AS3340 voice | note freq + fold/comp/PW/width → stereo audio |
+|||||||| `sound/effects/feedback_lab.py` | FeedbackLab, PT2399, SVF | effects (feedback instrument) | Body Synths Laboratory | audio or silence + feedback/routing → self-oscillating stereo drone |
+| `sound/sync/clock.py` | DAWClockBridge | sync | MTC/MIDI clock | bpm → clock pulses |
 | `sound/render/fluidsynth.py` | FluidSynthRenderer | render | SF2 synth | MIDI → WAV |
 | `sound/render/vst.py` | VSTRenderer | render | DAW VST3 | MIDI → VST audio |
 | `sound/render/pipeline.py` | RenderPipeline | render | export chain | MIDI → WAV/OGG/stems |
