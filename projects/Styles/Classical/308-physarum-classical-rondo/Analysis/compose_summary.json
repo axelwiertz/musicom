@@ -1,0 +1,112 @@
+{
+  "style": "classical",
+  "genre": "Classical",
+  "method": "035 Physarum Polycephalum Transport Network Optimization",
+  "layer": "concrete",
+  "paradigm": "Nature-Led",
+  "form": "rondo",
+  "key": "G major (Ionian)",
+  "bpm": 100,
+  "bars": 20,
+  "sections": [
+    "A",
+    "B",
+    "A2",
+    "C",
+    "A3"
+  ],
+  "section_bars": [
+    4,
+    4,
+    4,
+    4,
+    4
+  ],
+  "physarum": {
+    "streaming": 0.35,
+    "diffusion_sigma": 1.3,
+    "peristalsis_period_slots": 16,
+    "rest_threshold": 0.3,
+    "notes": 110
+  },
+  "raw_notes": 110,
+  "voice_leading_corrections": 0,
+  "phase1_path": "/opt/data/projects/Styles/Classical/308-physarum-classical-rondo/MIDI/308-physarum-classical-rondo-phase1.mid",
+  "perfect_path": "/opt/data/projects/Styles/Classical/308-physarum-classical-rondo/MIDI/308-physarum-classical-rondo-perfect.mid",
+  "humanized_path": "/opt/data/projects/Styles/Classical/308-physarum-classical-rondo/MIDI/308-physarum-classical-rondo-humanized.mid",
+  "hz_seed": 73893,
+  "hz": {
+    "Violin": {
+      "seed": 7463193,
+      "n_notes": 110,
+      "mean_abs_shift_ticks": 4.9,
+      "max_abs_shift_ticks": 14,
+      "mean_abs_vel_delta": 5.255,
+      "timing_sigma_ticks": 5.6
+    },
+    "Flute": {
+      "seed": 7463194,
+      "n_notes": 55,
+      "mean_abs_shift_ticks": 4.236,
+      "max_abs_shift_ticks": 13,
+      "mean_abs_vel_delta": 6.418,
+      "timing_sigma_ticks": 5.6
+    },
+    "Viola": {
+      "seed": 7463195,
+      "n_notes": 40,
+      "mean_abs_shift_ticks": 4.05,
+      "max_abs_shift_ticks": 8,
+      "mean_abs_vel_delta": 4.45,
+      "timing_sigma_ticks": 5.6
+    },
+    "Cello": {
+      "seed": 7463196,
+      "n_notes": 40,
+      "mean_abs_shift_ticks": 3.85,
+      "max_abs_shift_ticks": 10,
+      "mean_abs_vel_delta": 4.45,
+      "timing_sigma_ticks": 5.6
+    },
+    "Piano": {
+      "seed": 7463197,
+      "n_notes": 80,
+      "mean_abs_shift_ticks": 3.975,
+      "max_abs_shift_ticks": 12,
+      "mean_abs_vel_delta": 3.737,
+      "timing_sigma_ticks": 5.6
+    }
+  },
+  "progression": {
+    "A": [
+      "G",
+      "D",
+      "G",
+      "C"
+    ],
+    "B": [
+      "D",
+      "Em",
+      "Am",
+      "D"
+    ],
+    "A2": [
+      "G",
+      "D",
+      "G",
+      "C"
+    ],
+    "C": [
+      "Em",
+      "Am",
+      "D",
+      "G"
+    ],
+    "A3": [
+      "G",
+      "D",
+      "G",
+      "G"
+    ]
+  }
+}

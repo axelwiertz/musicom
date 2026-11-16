@@ -1,0 +1,180 @@
+{
+  "artifact": "308-physarum-classical-rondo-perfect.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom two-phase (phase=2 rules: tiered chord-tone quantization + 8th grid snap + dedup + voice-leading + 5-voice classical texture) (method 035 Physarum)",
+  "sources": [
+    "/opt/data/projects/Styles/Classical/308-physarum-classical-rondo/MIDI/308-physarum-classical-rondo-phase1.mid"
+  ],
+  "parameters": {
+    "bpm": 100,
+    "key": "G",
+    "mode": "ionian",
+    "style": "classical",
+    "form": "rondo",
+    "bars": 20,
+    "sections": [
+      "A",
+      "B",
+      "A2",
+      "C",
+      "A3"
+    ],
+    "section_bars": {
+      "A": 4,
+      "B": 4,
+      "A2": 4,
+      "C": 4,
+      "A3": 4
+    },
+    "section_midpoint_chords": {
+      "A": {
+        "degree": 0,
+        "chord": "G"
+      },
+      "B": {
+        "degree": 1,
+        "chord": "Am"
+      },
+      "A2": {
+        "degree": 0,
+        "chord": "G"
+      },
+      "C": {
+        "degree": 4,
+        "chord": "D"
+      },
+      "A3": {
+        "degree": 0,
+        "chord": "G"
+      }
+    },
+    "bar_degrees": [
+      0,
+      4,
+      0,
+      3,
+      4,
+      5,
+      1,
+      4,
+      0,
+      4,
+      0,
+      3,
+      5,
+      1,
+      4,
+      0,
+      0,
+      4,
+      0,
+      0
+    ],
+    "method": "035 Physarum Polycephalum Transport Network Optimization",
+    "layer": "concrete",
+    "paradigm": "Nature-Led",
+    "physarum": {
+      "food_sources": "bar chord tones + tonic attractor",
+      "streaming": 0.35,
+      "diffusion_sigma": 1.3,
+      "peristalsis_period_slots": 16,
+      "rest_threshold": 0.3,
+      "notes": 110
+    },
+    "voices": [
+      [
+        "Violin",
+        40,
+        0
+      ],
+      [
+        "Flute",
+        73,
+        1
+      ],
+      [
+        "Viola",
+        41,
+        2
+      ],
+      [
+        "Cello",
+        42,
+        3
+      ],
+      [
+        "Piano",
+        1,
+        4
+      ]
+    ],
+    "voice_leading_corrections": 0,
+    "humanize_seed": 73893,
+    "raw_seed": 20261116,
+    "humanize_profiles": {
+      "Violin": {
+        "timing_sigma_ms": 7.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.03,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.6,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Flute": {
+        "timing_sigma_ms": 7.0,
+        "velocity_sigma": 7.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.6,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Viola": {
+        "timing_sigma_ms": 7.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.03,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.6,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Cello": {
+        "timing_sigma_ms": 7.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.03,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.6,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Piano": {
+        "timing_sigma_ms": 7.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.015,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.6,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      }
+    },
+    "phase": 2,
+    "version": "perfect",
+    "off_grid": 0
+  },
+  "notes": "Grid-locked perfect layer (rondo, 20 bars). Method 035 Physarum (concrete).",
+  "sha256": "7f458450167a711d9f3016025837e4e696a1022457aefc51ca5e622f4306d96f",
+  "bytes": 3000,
+  "created_utc": "2026-11-16T23:10:20.518882+00:00",
+  "provenance_version": "1.0"
+}

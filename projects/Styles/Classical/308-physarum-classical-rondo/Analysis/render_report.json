@@ -1,0 +1,41 @@
+{
+  "soundfont": "/opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2",
+  "style": "classical",
+  "target_lufs": -18.0,
+  "phase1": {
+    "lufs": -18.07,
+    "true_peak_db": -1.63,
+    "target_lufs": -18.0,
+    "silence_ratio": 0.3313,
+    "rms_mean": 0.0528,
+    "rms_max": 0.1147,
+    "wav_bytes": 8910636,
+    "ogg_bytes": 352676,
+    "wav": "/opt/data/projects/Styles/Classical/308-physarum-classical-rondo/Audio/308-physarum-classical-rondo-phase1.wav",
+    "ogg": "/opt/data/projects/Styles/Classical/308-physarum-classical-rondo/Audio/308-physarum-classical-rondo-phase1.ogg"
+  },
+  "perfect": {
+    "lufs": -18.0,
+    "true_peak_db": -5.63,
+    "target_lufs": -18.0,
+    "silence_ratio": 0.0602,
+    "rms_mean": 0.0691,
+    "rms_max": 0.0907,
+    "wav_bytes": 8939820,
+    "ogg_bytes": 339346,
+    "wav": "/opt/data/projects/Styles/Classical/308-physarum-classical-rondo/Audio/308-physarum-classical-rondo-perfect.wav",
+    "ogg": "/opt/data/projects/Styles/Classical/308-physarum-classical-rondo/Audio/308-physarum-classical-rondo-perfect.ogg"
+  },
+  "humanized": {
+    "lufs": -18.0,
+    "true_peak_db": -5.9,
+    "target_lufs": -18.0,
+    "silence_ratio": 0.0602,
+    "rms_mean": 0.0693,
+    "rms_max": 0.0942,
+    "wav_bytes": 8940076,
+    "ogg_bytes": 344368,
+    "wav": "/opt/data/projects/Styles/Classical/308-physarum-classical-rondo/Audio/308-physarum-classical-rondo-humanized.wav",
+    "ogg": "/opt/data/projects/Styles/Classical/308-physarum-classical-rondo/Audio/308-physarum-classical-rondo-humanized.ogg"
+  }
+}
