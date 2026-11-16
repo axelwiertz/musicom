@@ -1,0 +1,208 @@
+{
+  "job": "random-style production (SP) layer-aligned",
+  "date": "2026-11-16",
+  "seed": 20261116,
+  "method": "SP-115",
+  "method_module": "sound.generators.chord_arranger",
+  "method_desc": "Chord-Driven 3-Track Generative Arranger \u2014 input chords -> chord/rhythm + arpeggiated melody + harmony-following bass tracks; ratchets/trills/swing/probability/accents/Euclidean muting; 8-macro + 16-step-lane modulation bus (Midicake UNA-style)",
+  "layer": "ABSOLUTE - generator re-composes the whole piece in the source's key/tempo; ChordDrivenArranger drives 3 voices from a derived 27-bar C-major trova progression",
+  "macros": {
+    "density": 0.6,
+    "probability": 0.7,
+    "swing": 0.15,
+    "accent": 0.5,
+    "ratchet": 0.3,
+    "octave": 0.0,
+    "gate": 0.6,
+    "spread": 0.3
+  },
+  "chords": [
+    [
+      60,
+      "maj"
+    ],
+    [
+      60,
+      "maj"
+    ],
+    [
+      55,
+      "maj"
+    ],
+    [
+      53,
+      "maj"
+    ],
+    [
+      55,
+      "dom7"
+    ],
+    [
+      53,
+      "maj"
+    ],
+    [
+      53,
+      "maj"
+    ],
+    [
+      60,
+      "maj"
+    ],
+    [
+      60,
+      "maj"
+    ],
+    [
+      55,
+      "dom7"
+    ],
+    [
+      53,
+      "maj"
+    ],
+    [
+      55,
+      "dom7"
+    ],
+    [
+      53,
+      "maj"
+    ],
+    [
+      53,
+      "maj"
+    ],
+    [
+      60,
+      "maj"
+    ],
+    [
+      57,
+      "min"
+    ],
+    [
+      60,
+      "maj"
+    ],
+    [
+      57,
+      "min"
+    ],
+    [
+      50,
+      "min"
+    ],
+    [
+      53,
+      "maj"
+    ],
+    [
+      55,
+      "dom7"
+    ],
+    [
+      60,
+      "maj"
+    ],
+    [
+      57,
+      "min"
+    ],
+    [
+      60,
+      "maj"
+    ],
+    [
+      53,
+      "maj"
+    ],
+    [
+      55,
+      "dom7"
+    ],
+    [
+      60,
+      "maj"
+    ]
+  ],
+  "target_lufs": -14.0,
+  "ceiling_db": -1.0,
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Cuban/001-cuban-trova-research/MIDI/cuban_seed.mid",
+  "source_bpm": 92.0,
+  "source_key": "C major",
+  "source_pitch_classes": [
+    0,
+    2,
+    4,
+    5,
+    7,
+    9,
+    11
+  ],
+  "source_form": "27 bars (single nylon-guitar trova melody, 96 notes)",
+  "output_midi": "/opt/data/repos/musicom/projects/Styles/Production/SP115-chord-arranger-001-cuban-trova/MIDI/001-cuban-trova.mid",
+  "phase1_midi": "/opt/data/repos/musicom/projects/Styles/Production/SP115-chord-arranger-001-cuban-trova/MIDI/001-cuban-trova-phase1.mid",
+  "output_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP115-chord-arranger-001-cuban-trova/Audio/SP115-chord-arranger-001-cuban-trova.wav",
+  "output_ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP115-chord-arranger-001-cuban-trova/Audio/SP115-chord-arranger-001-cuban-trova.ogg",
+  "dry_reference_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP115-chord-arranger-001-cuban-trova/Audio/dry_full_mix_sp001_reference.wav",
+  "lufs": -14.198783687560239,
+  "peak": 0.8912509381337457,
+  "silence_pct": 7.514204545454546,
+  "rms": 0.1506371183871305,
+  "pitch_verdict": "PASS",
+  "final_hit_rate": 1.0,
+  "final_he": 0.5954887492201965,
+  "dry_hit_rate": 1.0,
+  "dry_he": 0.6007677263205325,
+  "he_retention": 0.9912129482509525,
+  "source_preflight": {
+    "grid_off": 0,
+    "out_scale": 0,
+    "out_chord": 0,
+    "total_notes": 96,
+    "zero_drift": true,
+    "track_ends": [
+      51840
+    ]
+  },
+  "phase1_audit": {
+    "grid_off": 283,
+    "out_scale": 0,
+    "out_chord": 0,
+    "total_notes": 1015,
+    "zero_drift": true,
+    "track_ends": [
+      51840
+    ]
+  },
+  "final_audit": {
+    "grid_off": 0,
+    "out_scale": 0,
+    "out_chord": 0,
+    "total_notes": 1015,
+    "zero_drift": true,
+    "track_ends": [
+      51840
+    ]
+  },
+  "stems_ok": true,
+  "n_stems": 3,
+  "instruments": [
+    [
+      "Guitar",
+      24,
+      0
+    ],
+    [
+      "Flute",
+      73,
+      1
+    ],
+    [
+      "Bass",
+      32,
+      2
+    ]
+  ]
+}

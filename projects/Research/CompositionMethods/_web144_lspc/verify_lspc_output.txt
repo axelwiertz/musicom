@@ -1,0 +1,98 @@
+== 1. Langford existence, n = 1..14 (first-solution search) ==
+  n= 1   exists=False   predicted(n%4 in {0,3})=False   nodes=        1   match=True
+  n= 2   exists=False   predicted(n%4 in {0,3})=False   nodes=        2   match=True
+  n= 3   exists=True    predicted(n%4 in {0,3})=True    nodes=        4   match=True
+  n= 4   exists=True    predicted(n%4 in {0,3})=True    nodes=        6   match=True
+  n= 5   exists=False   predicted(n%4 in {0,3})=False   nodes=       67   match=True
+  n= 6   exists=False   predicted(n%4 in {0,3})=False   nodes=      296   match=True
+  n= 7   exists=True    predicted(n%4 in {0,3})=True    nodes=       17   match=True
+  n= 8   exists=True    predicted(n%4 in {0,3})=True    nodes=       33   match=True
+  n= 9   exists=False   predicted(n%4 in {0,3})=False   nodes=    39563   match=True
+  n=10   exists=False   predicted(n%4 in {0,3})=False   nodes=   242672   match=True
+  n=11   exists=True    predicted(n%4 in {0,3})=True    nodes=      563   match=True
+  n=12   exists=True    predicted(n%4 in {0,3})=True    nodes=      158   match=True
+  n=13   exists=False   predicted(n%4 in {0,3})=False   nodes=  3000001   match=True
+  n=14   exists=False   predicted(n%4 in {0,3})=False   nodes=  3000001   match=True
+  elapsed 6.42s
+
+== 2. Langford solution counts (exhaustive, n<=11) ==
+  L(1) =        0   (0.00s)
+  L(2) =        0   (0.00s)
+  L(3) =        2   (0.00s)
+  L(4) =        2   (0.00s)
+  L(5) =        0   (0.00s)
+  L(6) =        0   (0.00s)
+  L(7) =       52   (0.00s)
+  L(8) =      300   (0.01s)
+  L(9) =        0   (0.03s)
+  L(10) =        0   (0.17s)
+  L(11) =    35584   (1.57s)
+
+== 3. Skolem existence, n = 1..12 (plain) ==
+  n= 1   plain Skolem exists=True   predicted=True   match=True
+  n= 2   plain Skolem exists=False  predicted=False  match=True
+  n= 3   plain Skolem exists=False  predicted=False  match=True
+  n= 4   plain Skolem exists=True   predicted=True   match=True
+  n= 5   plain Skolem exists=True   predicted=True   match=True
+  n= 6   plain Skolem exists=False  predicted=False  match=True
+  n= 7   plain Skolem exists=False  predicted=False  match=True
+  n= 8   plain Skolem exists=True   predicted=True   match=True
+  n= 9   plain Skolem exists=True   predicted=True   match=True
+  n=10   plain Skolem exists=False  predicted=False  match=True
+  n=11   plain Skolem exists=False  predicted=False  match=True
+  n=12   plain Skolem exists=True   predicted=True   match=True
+
+== 4. Hooked Skolem existence, n = 1..12 (totality repair) ==
+  n= 1   hooked exists=True   predicted(n%4 in {2,3})=False  match=False
+  n= 2   hooked exists=True   predicted(n%4 in {2,3})=True   match=True
+  n= 3   hooked exists=True   predicted(n%4 in {2,3})=True   match=True
+  n= 4   hooked exists=True   predicted(n%4 in {2,3})=False  match=False
+  n= 5   hooked exists=True   predicted(n%4 in {2,3})=False  match=False
+  n= 6   hooked exists=True   predicted(n%4 in {2,3})=True   match=True
+  n= 7   hooked exists=True   predicted(n%4 in {2,3})=True   match=True
+  n= 8   hooked exists=True   predicted(n%4 in {2,3})=False  match=False
+  n= 9   hooked exists=True   predicted(n%4 in {2,3})=False  match=False
+  n=10   hooked exists=True   predicted(n%4 in {2,3})=True   match=True
+  n=11   hooked exists=True   predicted(n%4 in {2,3})=True   match=True
+  n=12   hooked exists=True   predicted(n%4 in {2,3})=False  match=False
+
+== 5. Perfect-cover / law audit on concrete pieces ==
+  n=3 langford seq=3-1-2-1-3-2
+     {'complete': True, 'law': True, 'slots': 6, 'events': 6, 'empty': 0, 'density': 1.0, 'lag_spectrum': [2, 3, 4]}
+  n=4 langford seq=4-1-3-1-2-4-3-2
+     {'complete': True, 'law': True, 'slots': 8, 'events': 8, 'empty': 0, 'density': 1.0, 'lag_spectrum': [2, 3, 4, 5]}
+  n=7 langford seq=7-3-6-2-5-3-2-4-7-6-5-1-4-1
+     {'complete': True, 'law': True, 'slots': 14, 'events': 14, 'empty': 0, 'density': 1.0, 'lag_spectrum': [2, 3, 4, 5, 6, 7, 8]}
+  n=8 langford seq=8-3-7-2-6-3-2-4-5-8-7-6-4-1-5-1
+     {'complete': True, 'law': True, 'slots': 16, 'events': 16, 'empty': 0, 'density': 1.0, 'lag_spectrum': [2, 3, 4, 5, 6, 7, 8, 9]}
+  n=4 skolem   seq=4-2-3-2-4-3-1-1
+     {'complete': True, 'law': True, 'slots': 8, 'events': 8, 'empty': 0, 'density': 1.0, 'lag_spectrum': [1, 2, 3, 4]}
+  n=5 skolem   seq=5-2-4-2-3-5-4-3-1-1
+     {'complete': True, 'law': True, 'slots': 10, 'events': 10, 'empty': 0, 'density': 1.0, 'lag_spectrum': [1, 2, 3, 4, 5]}
+
+== 6. Lag-spectrum completeness (the musical invariant) ==
+  n= 7 lag spectrum = [2, 3, 4, 5, 6, 7, 8]  complete(1..n once each) = True  density=1.000  empty=0
+  n= 8 lag spectrum = [2, 3, 4, 5, 6, 7, 8, 9]  complete(1..n once each) = True  density=1.000  empty=0
+  n=11 lag spectrum = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]  complete(1..n once each) = True  density=1.000  empty=0
+
+== 7. Scale: first-solution search cost for larger n ==
+  n=15  solved=True   nodes=     134    0.00s
+  n=16  solved=True   nodes=     494    0.00s
+  n=19  solved=True   nodes=     377    0.00s
+  n=20  solved=True   nodes=     956    0.00s
+  n=23  solved=True   nodes=     328    0.00s
+  n=24  solved=True   nodes=    2797    0.01s
+  n=27  solved=True   nodes=   13620    0.02s
+  n=28  solved=True   nodes=   13651    0.03s
+  n=31  solved=True   nodes=      40    0.00s
+  n=32  solved=True   nodes=      41    0.00s
+
+== 8. Reverse/complement symmetries ==
+  original  (7, 3, 6, 2, 5, 3, 2, 4, 7, 6, 5, 1, 4, 1)
+  reversed  (1, 4, 1, 5, 6, 7, 4, 2, 3, 5, 2, 6, 3, 7)  valid=True
+  relabelled k->n+1-k  (1, 5, 2, 6, 3, 5, 6, 4, 1, 2, 3, 7, 4, 7)  still-Langford=False
+
+== 9. Sum invariants ==
+  n= 7  sum(lags)=35  n(n+3)/2=35  mean lag=5.00  span=13
+  n= 8  sum(lags)=44  n(n+3)/2=44  mean lag=5.50  span=15
+  n=12  sum(lags)=90  n(n+3)/2=90  mean lag=7.50  span=23

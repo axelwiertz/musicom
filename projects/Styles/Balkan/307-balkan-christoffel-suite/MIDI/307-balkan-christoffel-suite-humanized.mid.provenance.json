@@ -1,0 +1,271 @@
+{
+  "artifact": "307-balkan-christoffel-suite-humanized.mid",
+  "classification": "ai-assisted",
+  "generator": "Christoffel Word + musicom rules + humanize",
+  "sources": [
+    "100-balkan-christoffel/MIDI/100-balkan-christoffel.mid",
+    "307-balkan-christoffel-suite-phase1.mid"
+  ],
+  "parameters": {
+    "bpm": 160,
+    "key": "D",
+    "mode": "dorian",
+    "key_label": "D Dorian + bVI (Bb) Balkan borrowing",
+    "style": "balkan",
+    "genre": "Balkan",
+    "source": "100-balkan-christoffel",
+    "meter": "11/8 (2+2+3+2+2)",
+    "bars": 32,
+    "sections": 8,
+    "section_names": [
+      "Intro",
+      "Tema_A",
+      "Tema_Ap",
+      "Tema_B",
+      "Razvivka",
+      "Razvivka_2",
+      "Tema_A_Var",
+      "Zavurshek"
+    ],
+    "progression_per_section": {
+      "Intro": [
+        "Dm",
+        "Dm",
+        "C",
+        "Dm"
+      ],
+      "Tema_A": [
+        "Dm",
+        "C",
+        "G",
+        "Dm"
+      ],
+      "Tema_Ap": [
+        "C",
+        "G",
+        "Dm",
+        "G"
+      ],
+      "Tema_B": [
+        "F",
+        "C",
+        "Dm",
+        "Am"
+      ],
+      "Razvivka": [
+        "G",
+        "F",
+        "C",
+        "Dm"
+      ],
+      "Razvivka_2": [
+        "C",
+        "Am",
+        "G",
+        "F"
+      ],
+      "Tema_A_Var": [
+        "Dm",
+        "G",
+        "C",
+        "Dm"
+      ],
+      "Zavurshek": [
+        "Bb",
+        "C",
+        "Dm",
+        "Dm"
+      ]
+    },
+    "section_midpoint_chords": {
+      "Intro": "C",
+      "Tema_A": "G",
+      "Tema_Ap": "Dm",
+      "Tema_B": "Dm",
+      "Razvivka": "C",
+      "Razvivka_2": "G",
+      "Tema_A_Var": "C",
+      "Zavurshek": "Dm"
+    },
+    "bar_chords": [
+      "Dm",
+      "Dm",
+      "C",
+      "Dm",
+      "Dm",
+      "C",
+      "G",
+      "Dm",
+      "C",
+      "G",
+      "Dm",
+      "G",
+      "F",
+      "C",
+      "Dm",
+      "Am",
+      "G",
+      "F",
+      "C",
+      "Dm",
+      "C",
+      "Am",
+      "G",
+      "F",
+      "Dm",
+      "G",
+      "C",
+      "Dm",
+      "Bb",
+      "C",
+      "Dm",
+      "Dm"
+    ],
+    "method": "069 Christoffel Word Combinatorial Composition (CWCC)",
+    "variation_techniques": [
+      "augmentation (Intro: sparse half-speed)",
+      "baseline contour (Tema_A: C(5,2) 16th run)",
+      "inversion + register shift up (Tema_Ap)",
+      "rotation (Tema_B: rotated conjugate word)",
+      "density rise + counterline (Razvivka: register climb + tambura off-beat)",
+      "retrograde (Razvivka_2: reversed word)",
+      "diminution (Tema_A_Var: staccato 16ths + register up)",
+      "mode shift bVI Bb + authentic cadence + augmentation (Zavurshek)"
+    ],
+    "voices": [
+      {
+        "name": "Clarinet",
+        "program": 71,
+        "channel": 0
+      },
+      {
+        "name": "Fiddle",
+        "program": 40,
+        "channel": 1
+      },
+      {
+        "name": "Tambura",
+        "program": 25,
+        "channel": 2
+      },
+      {
+        "name": "Bass",
+        "program": 43,
+        "channel": 3
+      },
+      {
+        "name": "Drums",
+        "program": 0,
+        "channel": 9
+      }
+    ],
+    "humanize_seed": 70323,
+    "seed": 20261116,
+    "humanize_profiles": {
+      "Clarinet": {
+        "timing_sigma_ms": 7.0,
+        "velocity_sigma": 7.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Fiddle": {
+        "timing_sigma_ms": 7.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.03,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Tambura": {
+        "timing_sigma_ms": 7.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Bass": {
+        "timing_sigma_ms": 10.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.03,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Drums": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.008,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      }
+    },
+    "phase": 2,
+    "version": "humanized",
+    "humanize_stats": {
+      "Clarinet": {
+        "seed": 7102623,
+        "n_notes": 264,
+        "mean_abs_shift_ticks": 5.955,
+        "max_abs_shift_ticks": 22,
+        "mean_abs_vel_delta": 5.011,
+        "timing_sigma_ticks": 8.96
+      },
+      "Fiddle": {
+        "seed": 7102624,
+        "n_notes": 160,
+        "mean_abs_shift_ticks": 5.656,
+        "max_abs_shift_ticks": 25,
+        "mean_abs_vel_delta": 4.856,
+        "timing_sigma_ticks": 8.96
+      },
+      "Tambura": {
+        "seed": 7102625,
+        "n_notes": 300,
+        "mean_abs_shift_ticks": 6.75,
+        "max_abs_shift_ticks": 20,
+        "mean_abs_vel_delta": 4.9,
+        "timing_sigma_ticks": 8.96
+      },
+      "Bass": {
+        "seed": 7102626,
+        "n_notes": 128,
+        "mean_abs_shift_ticks": 11.336,
+        "max_abs_shift_ticks": 35,
+        "mean_abs_vel_delta": 4.219,
+        "timing_sigma_ticks": 12.8
+      },
+      "Drums": {
+        "seed": 7102627,
+        "n_notes": 513,
+        "mean_abs_shift_ticks": 1.69,
+        "max_abs_shift_ticks": 8,
+        "mean_abs_vel_delta": 3.234,
+        "timing_sigma_ticks": 2.56
+      }
+    }
+  },
+  "notes": "humanized layer: balkan style profile + per-instrument DNA",
+  "sha256": "60661d74cd80c33aacc48ca8eea3a23a2f5d33bc122350f919d0b08127c56d1e",
+  "bytes": 10446,
+  "created_utc": "2026-11-16T01:12:16.720089+00:00",
+  "provenance_version": "1.0"
+}

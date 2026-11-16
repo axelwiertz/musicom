@@ -653,6 +653,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Percussion | Vibraphone | 11 | 48–89 | lead, melody, harmony, countermelody, accent |
 | Percussion | Xylophone | 13 | 53–89 | lead, melody, ornament, accent, countermelody |
 | Percussion | Woodblock | 115 | 60–96 | rhythm, accent, ornament, color |
+| Percussion | Melodic Tom | 117 | 36–96 | rhythm, accent, ornament, color |
 | World | Sitar | 104 | 55–96 | lead, melody, ornament, drone |
 | World | Banjo | 105 | 46–93 | lead, melody, ornament, rhythm, accent |
 | World | Koto | 107 | 51–90 | lead, melody, ornament, drone, harmony |
@@ -731,6 +732,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 || 79 | Ocarina | Ocarina ✓ (GM_PROGRAMS[79] + FluidR3 preset 79 both "Ocarina") |
 || 114 | Steel Drums | Steel Drums ✓ (GM_PROGRAMS[114] + FluidR3 preset 114 both "Steel Drums") |
 || 116 | Taiko Drum | Taiko Drum ✓ (GM_PROGRAMS[116] + FluidR3 preset 116 both "Taiko Drum") |
+|| 117 | Melodic Tom | Melodic_Tom ✓ (GM_PROGRAMS[117] + FluidR3 preset 117 both "Melodic Tom" — labels match exactly, **no quirk**) |
 || 113 | Agogo | Agogo ✓ (GM_PROGRAMS[113] = "Agogo"; FluidR3 preset 113 = "Agogo" — labels match exactly, **no quirk**) |
 ||| 66 | Tenor Sax | Tenor_Sax ✓ (GM_PROGRAMS[66] = "Tenor Sax"; FluidR3 preset 66 = "Tenor Sax" — labels match exactly, **no quirk**) |
 ||| 67 | Baritone Sax | Baritone_Sax ✓ (GM_PROGRAMS[67] = "Baritone Sax"; FluidR3 preset 67 = "Baritone Sax" — labels match exactly, **no quirk**) |
@@ -2442,3 +2444,49 @@ sustain. Humanize: Percussion DNA (2.5 ms sigma, 0 layback) — the block must
 sit ON the grid. Remaining sibling candidates: GM112 Tinkle Bell, GM117
 Melodic Tom, GM118 Synth Drum, GM76 Blown Bottle, GM17/18 Percussive/Rock
 Organ, GM50/51 Synth Strings 1/2.
+
+**Melodic Tom added** (2026-11-16): GM117, **Percussion-family tenth entry**
+— the tuned tom-tom set of the GM percussion tail, the 70s/80s "melodic tom
+fill" voice (Toto "Africa" intro, Men at Work "Down Under", The Police
+"Every Breath You Take", Phil Collins "In the Air Tonight" gated toms)
+(instrument.md + melodic_tom.py), verified end-to-end UnitMatrixComposer →
+zero-drift ✓ → MIDI (263 bytes) → FluidSynth WAV (851,500 bytes) ✓;
+RenderPipeline stem label `trackXX_Melodic_Tom.wav` ✓ (GM_PROGRAMS[117] =
+"Melodic Tom", FluidR3 preset 117 = "Melodic Tom" — labels match exactly,
+**no quirk**). Identity: GM117 = a set of SINGLE-HEADED concert
+toms/rototoms tuned in scale steps — the tuned-fill cousin of GM116 Taiko
+(higher, drum-set toms), NOT a chromatic melodic instrument. Range 36–96
+(C2–C6) is the composition window; solo range 48–72 (C3–C5) — the classic
+fill register; sweet spot 52–67 (E3–G4). Isolated-note sweep: 30–108 all
+audible, no gaps — SF2 never clips. Synthesis: **ModalSynth** with custom
+`MELODIC_TOM_MODES` (tuned (0,1) head mode at 174 Hz F3 reference + Bessel
+membrane partners 1.59×/2.14×/2.78×/3.56×, decay rates 4.5–9.5 — between
+timpani 0.9–3.0 and marimba 8–20); MODAL_PRESET 'drum' closest stock bank;
+DrumSynth606 tom (freq 174, decay 0.8, sweep 1.25) covers the strike;
+Karplus-Strong EXPLICITLY REJECTED (no string — timpani/taiko precedent).
+Solo-render spectral check: 4–8 kHz buzz 10.5% (stick band, no comb buzz).
+**PITCH QUIRK (measured, both soundfonts)**: GM117 does NOT chromatically
+pitch-track — the dominant partial stays 50–95 Hz (rising ~1 octave of
+pitch across 4 octaves of notes; centroid 1.1→1.5 kHz); note number is a
+COARSE timbre control — never write chromatic runs (woodblock lesson).
+**PIPELINE QUIRK (measured, pipeline-wide)**: every 2nd note-on EVENT
+within a MIDI track renders ~30–50 dB down in this FluidSynth binary — on
+GM117 AND the registered GM47/115/116/0/33 (timpani, woodblock, taiko,
+piano, electric bass) but NOT sustained violin/flute; per-track, ignores
+CCs/velocity/note-length/gap/channel, not fixed by polyphony/reverb/chorus
+options; present in the accepted woodblock verify WAV (2026-11-15) — a
+KNOWN-ACCEPTED pipeline behavior; at fill tempos the ring masks the gap
+(apparent ~6–8 dB accents). Registration proof:
+`by_name('melodic tom')` / `by_name('Melodic Tom')` / `by_program(117)` →
+Melodic Tom (distinct from `by_program(116)` Taiko Drum), `in_sweet_spot(60)`
+= True, `in_sweet_spot(30)` = False, `stem_label = 'Melodic Tom'`,
+`synthesis = 'modal'`; `registry_table()` row "| Percussion | Melodic Tom |
+117 | 36–96 | rhythm, accent, ornament, color |"; convenience constant
+`MELODIC_TOM`. Role: rhythm (melodic fills into/out of sections, drum
+breaks, intro riffs), accent (downbeat punctuation, stops), ornament (ghost
+taps, rim cracks, flams, rolls), color (tuned-drum colour; pairs with taiko/
+timpani/drum kit) — NOT melodic lead (no chromatic tracking), NOT harmony,
+NOT bass. Humanize: Percussion DNA (2.5 ms sigma, 0 layback) — the fill
+must sit ON the grid. Remaining sibling candidates: GM112 Tinkle Bell,
+GM118 Synth Drum, GM76 Blown Bottle, GM17/18 Percussive/Rock Organ, GM50/51
+Synth Strings 1/2, GM63 Synth Brass 2, GM37 Slap Bass 2.

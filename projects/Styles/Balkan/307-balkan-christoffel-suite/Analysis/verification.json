@@ -1,0 +1,39 @@
+{
+  "project": "307-balkan-christoffel-suite",
+  "report": {
+    "phase1": {
+      "tracks": 1,
+      "track_len": 42240,
+      "zero_drift": true,
+      "pitched": 207,
+      "drum": 0,
+      "off120": 198,
+      "scale_violations": 32,
+      "chord_violations": 150,
+      "chord_seam_violations": 2
+    },
+    "perfect": {
+      "tracks": 5,
+      "track_len": 42240,
+      "zero_drift": true,
+      "pitched": 852,
+      "drum": 513,
+      "off120": 0,
+      "scale_violations": 0,
+      "chord_violations": 0,
+      "chord_seam_violations": 0
+    },
+    "humanized": {
+      "tracks": 5,
+      "track_len": 42240,
+      "zero_drift": true,
+      "pitched": 852,
+      "drum": 513,
+      "off120": 804,
+      "scale_violations": 0,
+      "chord_violations": 20,
+      "chord_seam_violations": 20
+    }
+  },
+  "verdict": "PASS"
+}

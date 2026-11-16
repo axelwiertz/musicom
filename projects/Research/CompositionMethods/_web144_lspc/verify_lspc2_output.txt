@@ -1,0 +1,31 @@
+== A. Skolem solution counts (exhaustive) vs OEIS A004075 ==
+  n=1: measured=    1  OEIS a(1)=    1  match=True  (0.00s)
+  n=2: measured=    0  OEIS a(2)=    0  match=True  (0.00s)
+  n=3: measured=    0  OEIS a(3)=    0  match=True  (0.00s)
+  n=4: measured=    6  OEIS a(4)=    6  match=True  (0.00s)
+  n=5: measured=   10  OEIS a(5)=   10  match=True  (0.00s)
+  n=6: measured=    0  OEIS a(6)=    0  match=True  (0.00s)
+  n=7: measured=    0  OEIS a(7)=    0  match=True  (0.00s)
+  n=8: measured=  504  OEIS a(8)=  504  match=True  (0.01s)
+  n=9: measured= 2656  OEIS a(9)= 2656  match=True  (0.04s)
+
+== B. Langford counts summary (measured) ==
+  n= 3:      2 oriented solutions = 2 x A014552(3) = 2
+  n= 4:      2 oriented solutions = 2 x A014552(4) = 2
+  n= 7:     52 oriented solutions = 2 x A014552(7) = 52
+  n= 8:    300 oriented solutions = 2 x A014552(8) = 300
+  n=11:  35584 oriented solutions = 2 x A014552(11) = 35584
+
+== C. Hooked Skolem: does the hook genuinely repair n=2,3 mod 4? ==
+  n= 1 n%4=1  plain=YES hooked=YES  hook_required=False  repair_worked=True (plain already exists: (1, 1))
+  n= 2 n%4=2  plain=no  hooked=YES  hook_required=True  repair_worked=True
+  n= 3 n%4=3  plain=no  hooked=YES  hook_required=True  repair_worked=True
+  n= 4 n%4=0  plain=YES hooked=YES  hook_required=False  repair_worked=True (plain already exists: (4, 2, 3, 2, 4, 3, 1, 1))
+  n= 5 n%4=1  plain=YES hooked=YES  hook_required=False  repair_worked=True (plain already exists: (5, 2, 4, 2, 3, 5, 4, 3, 1, 1))
+  n= 6 n%4=2  plain=no  hooked=YES  hook_required=True  repair_worked=True
+  n= 7 n%4=3  plain=no  hooked=YES  hook_required=True  repair_worked=True
+  n= 8 n%4=0  plain=YES hooked=YES  hook_required=False  repair_worked=True (plain already exists: (8, 5, 7, 2, 6, 2, 5, 4, 8, 7, 6, 4, 3, 1, 1, 3))
+  n= 9 n%4=1  plain=YES hooked=YES  hook_required=False  repair_worked=True (plain already exists: (9, 7, 8, 4, 2, 6, 2, 4, 7, 9, 8, 6, 5, 3, 1, 1, 3, 5))
+  n=10 n%4=2  plain=no  hooked=YES  hook_required=True  repair_worked=True
+
+== D. Totality audit: every n >= 1 realizable in SOME family ==

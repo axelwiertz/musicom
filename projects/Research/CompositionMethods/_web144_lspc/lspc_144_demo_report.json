@@ -1,0 +1,64 @@
+{
+  "sequence": [
+    8,
+    3,
+    7,
+    2,
+    6,
+    3,
+    2,
+    4,
+    5,
+    8,
+    7,
+    6,
+    4,
+    1,
+    5,
+    1
+  ],
+  "n": 8,
+  "slots": 16,
+  "bars": 4,
+  "voices": 8,
+  "events": 16,
+  "events_per_voice": {
+    "1": 2,
+    "2": 2,
+    "3": 2,
+    "4": 2,
+    "5": 2,
+    "6": 2,
+    "7": 2,
+    "8": 2
+  },
+  "events_per_section": {
+    "0": 4,
+    "1": 4,
+    "2": 4,
+    "3": 4
+  },
+  "lag_spectrum": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "lag_spectrum_complete": true,
+  "pitches": [
+    48,
+    50,
+    52,
+    53,
+    55,
+    57,
+    59,
+    60
+  ],
+  "midi": "/opt/data/repos/musicom/projects/Research/CompositionMethods/_web144_lspc/lspc_144_langford8.mid",
+  "midi_bytes": 375
+}

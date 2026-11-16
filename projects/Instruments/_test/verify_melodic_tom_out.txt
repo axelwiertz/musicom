@@ -1,0 +1,42 @@
+registry: by_name('melodic tom') -> <Instrument Melodic Tom (family=Percussion, program=117, range=36-96)>
+registry: by_name('Melodic Tom') -> <Instrument Melodic Tom (family=Percussion, program=117, range=36-96)>
+registry: by_program(117) -> <Instrument Melodic Tom (family=Percussion, program=117, range=36-96)>
+registry: MELODIC_TOM is ALL_INSTRUMENTS['melodic_tom'] -> True
+registry: family=Percussion program=117 range=36-96 solo=(48, 72) sweet=(52, 67)
+registry: stem_label='Melodic Tom' reverb=1.2 pan=0.0
+registry: synthesis=modal modal_preset=drum
+registry: melodic_tom_modes=[(174.0, 1.0, 4.5), (277.0, 0.55, 5.5), (372.0, 0.32, 6.5), (483.0, 0.18, 8.0), (620.0, 0.1, 9.5)]
+registry: in_sweet_spot(60)=True in_sweet_spot(30)=False in_range(36)=True
+Melodic Tom: program=117 gm='Melodic Tom' stem='Melodic Tom' sweet=(48, 72) A4=440.0Hz
+Melodic Tom: zones={'low': (36, 47), 'mid': (48, 60), 'high': (61, 96)}
+Melodic Tom: art=['fill_16', 'fill_8', 'accent', 'ghost', 'rim', 'roll', 'flam', 'soft', 'toms_together'] synth=modal modal_preset=drum reverb=1.2s pan=0.0
+Melodic Tom: C3=130.8Hz C4=261.6Hz C5=523.3Hz
+
+Zero-drift: True (OK)
+MIDI: /opt/data/projects/Instruments/_test/melodic_tom_test.mid (263 bytes)
+WAV (solo): /opt/data/projects/Instruments/_test/melodic_tom_test.wav (851500 bytes)
+Spectral check: 4-8kHz buzz energy = 10.5% (OK)
+per-16th RMS (pipeline note-on alternation visible as level dip on even hits):
+  0.177 0.084 0.147 0.074 0.169 0.075 0.151 0.056 0.200 0.104 0.146 0.080 0.175 0.072 0.142 0.062
+
+Stem labels (pipeline GM_PROGRAMS, 0-indexed):
+  [115] = 'Woodblock'
+  [116] = 'Taiko Drum'
+  [117] = 'Melodic Tom'
+  [118] = 'Synth Drum'
+  Melodic Tom -> 'Melodic Tom'
+SF2: /opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2
+SF2 preset 117 -> 'Melodic Tom'
+
+Stems rendered (2 files):
+  track00_Melodic_Tom.wav (851500 bytes)
+  track01_Drums.wav (835628 bytes)
+
+ModalSynth MELODIC_TOM_MODES: peak=0.900 head_rms=0.4012 mid_rms=0.2362 late_rms=0.0180 late/peak=0.02001
+  partials vs f0 (174 Hz):
+    1.59x (   277 Hz) =  41.3% of f0
+    2.14x (   372 Hz) =  30.7% of f0
+    2.78x (   483 Hz) =  14.6% of f0
+    3.56x (   620 Hz) =   7.3% of f0
+
+ALL CHECKS PASSED

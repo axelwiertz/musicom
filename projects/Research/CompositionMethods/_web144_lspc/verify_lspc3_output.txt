@@ -1,0 +1,37 @@
+== D. Totality: one piece per n in the family the theorem allows ==
+  n= 1  n%4=1  family=Skolem        valid=True
+  n= 2  n%4=2  family=hooked Skolem valid=True
+  n= 3  n%4=3  family=Langford      valid=True
+  n= 4  n%4=0  family=Langford      valid=True
+  n= 5  n%4=1  family=Skolem        valid=True
+  n= 6  n%4=2  family=hooked Skolem valid=True
+  n= 7  n%4=3  family=Langford      valid=True
+  n= 8  n%4=0  family=Langford      valid=True
+  n= 9  n%4=1  family=Skolem        valid=True
+  n=10  n%4=2  family=hooked Skolem valid=True
+  n=11  n%4=3  family=Langford      valid=True
+  n=12  n%4=0  family=Langford      valid=True
+  n=13  n%4=1  family=Skolem        valid=True
+  n=14  n%4=2  family=hooked Skolem valid=True
+  n=15  n%4=3  family=Langford      valid=True
+  n=16  n%4=0  family=Langford      valid=True
+  n=17  n%4=1  family=Skolem        valid=True
+  n=18  n%4=2  family=hooked Skolem valid=True
+  n=19  n%4=3  family=Langford      valid=True
+  n=20  n%4=0  family=Langford      valid=True
+  n=21  n%4=1  family=Skolem        valid=True
+  n=22  n%4=2  family=hooked Skolem valid=True
+  n=23  n%4=3  family=Langford      valid=True
+  n=24  n%4=0  family=Langford      valid=True
+  n=25  n%4=1  family=Skolem        valid=True
+  n=26  n%4=2  family=hooked Skolem valid=True
+  n=27  n%4=3  family=Langford      valid=True
+  n=28  n%4=0  family=Langford      valid=True
+  n=29  n%4=1  family=Skolem        valid=True
+  n=30  n%4=2  family=hooked Skolem valid=True
+  n=31  n%4=3  family=Langford      valid=True
+  n=32  n%4=0  family=Langford      valid=True
+  n=33  n%4=1  family=Skolem        valid=True
+  n=34  n%4=2  family=hooked Skolem valid=True
+  n=35  n%4=3  family=Langford      valid=True
+  n=36  n%4=0  family=Langford      valid=False

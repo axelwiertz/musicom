@@ -1,0 +1,229 @@
+{
+  "artifact": "307-balkan-christoffel-suite-perfect.mid",
+  "classification": "ai-assisted",
+  "generator": "Christoffel Word + musicom rules (grid-locked)",
+  "sources": [
+    "100-balkan-christoffel/MIDI/100-balkan-christoffel.mid",
+    "307-balkan-christoffel-suite-phase1.mid"
+  ],
+  "parameters": {
+    "bpm": 160,
+    "key": "D",
+    "mode": "dorian",
+    "key_label": "D Dorian + bVI (Bb) Balkan borrowing",
+    "style": "balkan",
+    "genre": "Balkan",
+    "source": "100-balkan-christoffel",
+    "meter": "11/8 (2+2+3+2+2)",
+    "bars": 32,
+    "sections": 8,
+    "section_names": [
+      "Intro",
+      "Tema_A",
+      "Tema_Ap",
+      "Tema_B",
+      "Razvivka",
+      "Razvivka_2",
+      "Tema_A_Var",
+      "Zavurshek"
+    ],
+    "progression_per_section": {
+      "Intro": [
+        "Dm",
+        "Dm",
+        "C",
+        "Dm"
+      ],
+      "Tema_A": [
+        "Dm",
+        "C",
+        "G",
+        "Dm"
+      ],
+      "Tema_Ap": [
+        "C",
+        "G",
+        "Dm",
+        "G"
+      ],
+      "Tema_B": [
+        "F",
+        "C",
+        "Dm",
+        "Am"
+      ],
+      "Razvivka": [
+        "G",
+        "F",
+        "C",
+        "Dm"
+      ],
+      "Razvivka_2": [
+        "C",
+        "Am",
+        "G",
+        "F"
+      ],
+      "Tema_A_Var": [
+        "Dm",
+        "G",
+        "C",
+        "Dm"
+      ],
+      "Zavurshek": [
+        "Bb",
+        "C",
+        "Dm",
+        "Dm"
+      ]
+    },
+    "section_midpoint_chords": {
+      "Intro": "C",
+      "Tema_A": "G",
+      "Tema_Ap": "Dm",
+      "Tema_B": "Dm",
+      "Razvivka": "C",
+      "Razvivka_2": "G",
+      "Tema_A_Var": "C",
+      "Zavurshek": "Dm"
+    },
+    "bar_chords": [
+      "Dm",
+      "Dm",
+      "C",
+      "Dm",
+      "Dm",
+      "C",
+      "G",
+      "Dm",
+      "C",
+      "G",
+      "Dm",
+      "G",
+      "F",
+      "C",
+      "Dm",
+      "Am",
+      "G",
+      "F",
+      "C",
+      "Dm",
+      "C",
+      "Am",
+      "G",
+      "F",
+      "Dm",
+      "G",
+      "C",
+      "Dm",
+      "Bb",
+      "C",
+      "Dm",
+      "Dm"
+    ],
+    "method": "069 Christoffel Word Combinatorial Composition (CWCC)",
+    "variation_techniques": [
+      "augmentation (Intro: sparse half-speed)",
+      "baseline contour (Tema_A: C(5,2) 16th run)",
+      "inversion + register shift up (Tema_Ap)",
+      "rotation (Tema_B: rotated conjugate word)",
+      "density rise + counterline (Razvivka: register climb + tambura off-beat)",
+      "retrograde (Razvivka_2: reversed word)",
+      "diminution (Tema_A_Var: staccato 16ths + register up)",
+      "mode shift bVI Bb + authentic cadence + augmentation (Zavurshek)"
+    ],
+    "voices": [
+      {
+        "name": "Clarinet",
+        "program": 71,
+        "channel": 0
+      },
+      {
+        "name": "Fiddle",
+        "program": 40,
+        "channel": 1
+      },
+      {
+        "name": "Tambura",
+        "program": 25,
+        "channel": 2
+      },
+      {
+        "name": "Bass",
+        "program": 43,
+        "channel": 3
+      },
+      {
+        "name": "Drums",
+        "program": 0,
+        "channel": 9
+      }
+    ],
+    "humanize_seed": 70323,
+    "seed": 20261116,
+    "humanize_profiles": {
+      "Clarinet": {
+        "timing_sigma_ms": 7.0,
+        "velocity_sigma": 7.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Fiddle": {
+        "timing_sigma_ms": 7.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.03,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Tambura": {
+        "timing_sigma_ms": 7.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Bass": {
+        "timing_sigma_ms": 10.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.03,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Drums": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.008,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.4,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      }
+    },
+    "phase": 2,
+    "version": "perfect"
+  },
+  "notes": "grid-locked perfect layer: per-bar chord-tone quantize (floor t//BAR), 16th grid lock, register enforcement, dedup",
+  "sha256": "5f43171d62193ab5fc2929d26de3c9d0003bfd17d49873d6e235690508c80bf0",
+  "bytes": 10858,
+  "created_utc": "2026-11-16T01:12:16.719752+00:00",
+  "provenance_version": "1.0"
+}

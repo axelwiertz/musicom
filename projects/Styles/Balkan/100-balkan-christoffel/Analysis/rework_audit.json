@@ -1,0 +1,30 @@
+{
+  "chosen": "/opt/data/projects/Styles/Balkan/100-balkan-christoffel",
+  "genre": "Balkan",
+  "primary_midi": "/opt/data/projects/Styles/Balkan/100-balkan-christoffel/MIDI/100-balkan-christoffel.mid",
+  "audited_at": "2026-11-16",
+  "standard_failures": [
+    "6-sidecars: no top-level provenance.json + no index.html (only per-MIDI .mid.provenance.json sidecars)"
+  ],
+  "standards_passed": [
+    "1-engine: UnitMatrixComposer (compose.py imports workflows.unitmatrix_composer; no raw mido authoring)",
+    "2-zero-drift: 5 voice tracks all 31680 ticks (read-only mido verified)",
+    "3-rhythm-grid: 672 pitched onsets, 0 off-grid (all multiples of 120/240)",
+    "4-track-setup: 5 voice tracks (Clarinet 71, Fiddle/Violin 40, Tambura 25, Double Bass 43, Drums ch9)",
+    "5-two-phase: 100-balkan-christoffel.mid + 100-balkan-christoffel-phase1.mid present"
+  ],
+  "redesign_required": true,
+  "redesign_note": "Standard 6 failed (missing provenance.json + index.html). Musical core is fully engine-compliant; the piece also predates the 2026-10-17 dual-version humanization mandate (no -perfect/-humanized). Rebuild through the canonical engine preserving identity (genre, key, tempo, Christoffel-word method, 5-voice Balkan texture), adding humanization + all sidecars + a longer, more varied form.",
+  "source_identity": {
+    "genre": "Balkan",
+    "style": "Bulgarian Kopanitsa 11/8 (2+2+3+2+2)",
+    "key": "D Dorian (D E F G A B C) + Bb (bVI) folk borrowing",
+    "scale_pcs": [0, 2, 4, 5, 7, 9, 10, 11],
+    "tempo": 160,
+    "meter": "11/8 (11 sixteenth pulses per bar, 1320 ticks)",
+    "bars": 24,
+    "method": "069 Christoffel Word Combinatorial Composition (CWCC); C(5,2)='aaabaab' + Sturmian morphisms",
+    "chords": ["Dm", "C", "G", "F", "Am", "Bb"],
+    "instruments": ["Clarinet (71)", "Fiddle/Violin (40)", "Tambura/Steel Guitar (25)", "Double Bass (43)", "Tupan Drums (ch9)"]
+  }
+}
