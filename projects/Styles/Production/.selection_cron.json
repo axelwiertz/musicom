@@ -1,23 +1,25 @@
 {
   "job": "random-style production (SP) layer-aligned",
-  "date": "2026-11-16",
-  "seed": 20261116,
-  "method": "SP-115",
-  "method_module": "sound.generators.chord_arranger",
-  "method_desc": "Chord-Driven 3-Track Generative Arranger \u2014 input chords -> chord/rhythm + arpeggiated melody + harmony-following bass tracks; ratchets/trills/swing/probability/accents/Euclidean muting; 8-macro + 16-step-lane modulation bus (Midicake UNA-style)",
-  "source_midi": "/opt/data/repos/musicom/projects/Styles/Cuban/001-cuban-trova-research/MIDI/cuban_seed.mid",
-  "source_project": "Cuban/001-cuban-trova-research/MIDI/cuban_seed.mid",
+  "date": "2026-11-17",
+  "seed": 20261117,
+  "method": "SP-146",
+  "method_module": "sound.effects.feedback_loop_fx",
+  "method_desc": "Feedback-Loop Echo + Codec Loss \u2014 fractional delay whose wobble (wow/flutter/drift), tanh drive, tone band-limiting, all-pass smear and bitrate-derived bit-depth/bandwidth reduction run inside the feedback path, plus offline spectral codec (log-magnitude quantisation + band limit) (XLN Audio RC-20 V2 Echo/Loss-style)",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Reggae/076-reggae-lsystem/MIDI/076-reggae-lsystem.mid",
+  "source_project": "Reggae/076-reggae-lsystem/MIDI/076-reggae-lsystem.mid",
   "registry_size": 97,
   "recent_excluded": [
     "SP-069",
     "SP-075",
     "SP-084",
     "SP-100",
-    "SP-113",
+    "SP-115",
     "SP-138",
     "SP-154"
   ],
-  "already_on_source": [],
+  "already_on_source": [
+    "SP-026"
+  ],
   "baseline_excluded": [
     "SP-001"
   ],
@@ -25,7 +27,6 @@
     "SP-011",
     "SP-021",
     "SP-024",
-    "SP-026",
     "SP-028",
     "SP-032",
     "SP-033",
@@ -69,8 +70,8 @@
     "SP-110",
     "SP-111",
     "SP-112",
+    "SP-113",
     "SP-114",
-    "SP-115",
     "SP-116",
     "SP-117",
     "SP-118",
@@ -112,8 +113,8 @@
     "SP-159",
     "SP-160"
   ],
-  "n_candidates": 460,
-  "n_well_formed": 355,
-  "n_meaningful": 354,
+  "n_candidates": 462,
+  "n_well_formed": 357,
+  "n_meaningful": 356,
   "rejected_degenerate": []
 }

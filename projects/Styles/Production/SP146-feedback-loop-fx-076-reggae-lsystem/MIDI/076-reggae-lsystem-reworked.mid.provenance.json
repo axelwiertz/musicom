@@ -1,0 +1,42 @@
+{
+  "project": "076-reggae-lsystem",
+  "rework": "per-bar chord-tone quantization (lead + skank)",
+  "reason": "PRE-FLIGHT harmony gate: section-chord quantization left 115 out-of-chord notes in bars whose chord differs from the section chord",
+  "key": "A aeolian",
+  "progression_per_bar": [
+    "i",
+    "bVII",
+    "i",
+    "bVI",
+    "i",
+    "bVII",
+    "i",
+    "bVI",
+    "i",
+    "bVII",
+    "i",
+    "bVI",
+    "i",
+    "bVII",
+    "i",
+    "bVI",
+    "i",
+    "bVII",
+    "i",
+    "bVI",
+    "i",
+    "bVII",
+    "i",
+    "bVI"
+  ],
+  "voices": [
+    "Lead",
+    "Skank",
+    "Bass",
+    "Drums"
+  ],
+  "engine": "UnitMatrixComposer (validate() passed)",
+  "bpm": 96,
+  "ticks_per_beat": 480,
+  "bars": 24
+}
