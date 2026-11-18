@@ -1,0 +1,88 @@
+{
+  "artifact": "311-knight-tour-soul-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.knight_tour_phase1",
+  "sources": [],
+  "parameters": {
+    "bpm": 96,
+    "bars": 40,
+    "seed": 20261118,
+    "phase": 1,
+    "quantized": false,
+    "key": "F major",
+    "form": "verse-chorus",
+    "style": "soul",
+    "method": "126 Knight's Tour Composition (KTC)",
+    "layer": "concrete",
+    "paradigm": "Rules-Based",
+    "tour_config": {
+      "Intro": {
+        "R": 8,
+        "C": 4,
+        "start": [
+          0,
+          0
+        ],
+        "seed": 1,
+        "invert": false
+      },
+      "Verse": {
+        "R": 8,
+        "C": 8,
+        "start": [
+          0,
+          0
+        ],
+        "seed": 2,
+        "invert": false
+      },
+      "Chorus": {
+        "R": 8,
+        "C": 8,
+        "start": [
+          3,
+          2
+        ],
+        "seed": 3,
+        "invert": false
+      },
+      "Verse2": {
+        "R": 8,
+        "C": 8,
+        "start": [
+          0,
+          0
+        ],
+        "seed": 4,
+        "invert": true
+      },
+      "Chorus2": {
+        "R": 8,
+        "C": 8,
+        "start": [
+          3,
+          2
+        ],
+        "seed": 5,
+        "invert": false
+      },
+      "Outro": {
+        "R": 8,
+        "C": 4,
+        "start": [
+          0,
+          0
+        ],
+        "seed": 6,
+        "invert": true
+      }
+    },
+    "notes": 320,
+    "rules_applied": "NONE (pre-rules)"
+  },
+  "notes": "Raw knight's-tour draft: single tenor-sax voice, unquantized float pitch (scale-degree row + jitter) + off-grid onsets, 40 bars, pre-rules. Method 126 (concrete).",
+  "sha256": "e3a0eb7cffecc42bdbf8e97af60414b38a37e42683e1e3172ec0bbaf664a3d74",
+  "bytes": 2632,
+  "created_utc": "2026-11-18T23:10:34.958578+00:00",
+  "provenance_version": "1.0"
+}

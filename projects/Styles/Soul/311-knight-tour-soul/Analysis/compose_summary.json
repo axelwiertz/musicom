@@ -1,0 +1,195 @@
+{
+  "style": "soul",
+  "genre": "Soul",
+  "method": "126 Knight's Tour Composition (KTC)",
+  "layer": "concrete",
+  "paradigm": "Rules-Based",
+  "form": "verse-chorus",
+  "key": "F major",
+  "bpm": 96,
+  "bars": 40,
+  "sections": [
+    "Intro",
+    "Verse",
+    "Chorus",
+    "Verse2",
+    "Chorus2",
+    "Outro"
+  ],
+  "section_bars": [
+    4,
+    8,
+    8,
+    8,
+    8,
+    4
+  ],
+  "tour_config": {
+    "Intro": {
+      "R": 8,
+      "C": 4,
+      "start": [
+        0,
+        0
+      ],
+      "seed": 1,
+      "invert": false
+    },
+    "Verse": {
+      "R": 8,
+      "C": 8,
+      "start": [
+        0,
+        0
+      ],
+      "seed": 2,
+      "invert": false
+    },
+    "Chorus": {
+      "R": 8,
+      "C": 8,
+      "start": [
+        3,
+        2
+      ],
+      "seed": 3,
+      "invert": false
+    },
+    "Verse2": {
+      "R": 8,
+      "C": 8,
+      "start": [
+        0,
+        0
+      ],
+      "seed": 4,
+      "invert": true
+    },
+    "Chorus2": {
+      "R": 8,
+      "C": 8,
+      "start": [
+        3,
+        2
+      ],
+      "seed": 5,
+      "invert": false
+    },
+    "Outro": {
+      "R": 8,
+      "C": 4,
+      "start": [
+        0,
+        0
+      ],
+      "seed": 6,
+      "invert": true
+    }
+  },
+  "counter_sections": [
+    "Chorus",
+    "Chorus2"
+  ],
+  "raw_notes": 320,
+  "voice_leading_corrections": 0,
+  "phase1_path": "/opt/data/projects/Styles/Soul/311-knight-tour-soul/MIDI/311-knight-tour-soul-phase1.mid",
+  "perfect_path": "/opt/data/projects/Styles/Soul/311-knight-tour-soul/MIDI/311-knight-tour-soul-perfect.mid",
+  "humanized_path": "/opt/data/projects/Styles/Soul/311-knight-tour-soul/MIDI/311-knight-tour-soul-humanized.mid",
+  "hz_seed": 63699,
+  "hz": {
+    "Lead": {
+      "seed": 6433599,
+      "n_notes": 318,
+      "mean_abs_shift_ticks": 4.975,
+      "max_abs_shift_ticks": 19,
+      "mean_abs_vel_delta": 5.34,
+      "timing_sigma_ticks": 6.144
+    },
+    "Rhodes": {
+      "seed": 6433600,
+      "n_notes": 120,
+      "mean_abs_shift_ticks": 5.667,
+      "max_abs_shift_ticks": 15,
+      "mean_abs_vel_delta": 3.9,
+      "timing_sigma_ticks": 6.144
+    },
+    "Bass": {
+      "seed": 6433601,
+      "n_notes": 80,
+      "mean_abs_shift_ticks": 6.112,
+      "max_abs_shift_ticks": 14,
+      "mean_abs_vel_delta": 3.275,
+      "timing_sigma_ticks": 3.84
+    },
+    "Vox": {
+      "seed": 6433602,
+      "n_notes": 176,
+      "mean_abs_shift_ticks": 4.256,
+      "max_abs_shift_ticks": 19,
+      "mean_abs_vel_delta": 6.233,
+      "timing_sigma_ticks": 6.144
+    },
+    "Drums": {
+      "seed": 6433603,
+      "n_notes": 480,
+      "mean_abs_shift_ticks": 0.921,
+      "max_abs_shift_ticks": 3,
+      "mean_abs_vel_delta": 3.267,
+      "timing_sigma_ticks": 1.536
+    }
+  },
+  "progression": {
+    "Intro": [
+      "F",
+      "Bb",
+      "F",
+      "C"
+    ],
+    "Verse": [
+      "F",
+      "Dm",
+      "Bb",
+      "C",
+      "F",
+      "Dm",
+      "Gm",
+      "C"
+    ],
+    "Chorus": [
+      "F",
+      "Dm",
+      "Bb",
+      "C",
+      "F",
+      "Bb",
+      "C",
+      "F"
+    ],
+    "Verse2": [
+      "F",
+      "Dm",
+      "Bb",
+      "C",
+      "F",
+      "Dm",
+      "Gm",
+      "C"
+    ],
+    "Chorus2": [
+      "F",
+      "Dm",
+      "Bb",
+      "C",
+      "F",
+      "Bb",
+      "C",
+      "F"
+    ],
+    "Outro": [
+      "F",
+      "Bb",
+      "C",
+      "F"
+    ]
+  }
+}

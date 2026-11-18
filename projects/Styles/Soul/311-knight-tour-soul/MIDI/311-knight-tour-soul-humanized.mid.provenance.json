@@ -1,0 +1,288 @@
+{
+  "artifact": "311-knight-tour-soul-humanized.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom two-phase (phase=2 + humanization) (method 126 Knight's Tour)",
+  "sources": [
+    "/opt/data/projects/Styles/Soul/311-knight-tour-soul/MIDI/311-knight-tour-soul-perfect.mid"
+  ],
+  "parameters": {
+    "bpm": 96,
+    "key": "F",
+    "mode": "major",
+    "style": "soul",
+    "form": "verse-chorus",
+    "bars": 40,
+    "sections": [
+      "Intro",
+      "Verse",
+      "Chorus",
+      "Verse2",
+      "Chorus2",
+      "Outro"
+    ],
+    "section_bars": {
+      "Intro": 4,
+      "Verse": 8,
+      "Chorus": 8,
+      "Verse2": 8,
+      "Chorus2": 8,
+      "Outro": 4
+    },
+    "bar_degrees": [
+      0,
+      3,
+      0,
+      4,
+      0,
+      5,
+      3,
+      4,
+      0,
+      5,
+      1,
+      4,
+      0,
+      5,
+      3,
+      4,
+      0,
+      3,
+      4,
+      0,
+      0,
+      5,
+      3,
+      4,
+      0,
+      5,
+      1,
+      4,
+      0,
+      5,
+      3,
+      4,
+      0,
+      3,
+      4,
+      0,
+      0,
+      3,
+      4,
+      0
+    ],
+    "degree_names": {
+      "0": "F",
+      "1": "Gm",
+      "2": "Am",
+      "3": "Bb",
+      "4": "C",
+      "5": "Dm",
+      "6": "Edim"
+    },
+    "method": "126 Knight's Tour Composition (KTC)",
+    "layer": "concrete",
+    "paradigm": "Rules-Based",
+    "tour_config": {
+      "Intro": {
+        "R": 8,
+        "C": 4,
+        "start": [
+          0,
+          0
+        ],
+        "seed": 1,
+        "invert": false
+      },
+      "Verse": {
+        "R": 8,
+        "C": 8,
+        "start": [
+          0,
+          0
+        ],
+        "seed": 2,
+        "invert": false
+      },
+      "Chorus": {
+        "R": 8,
+        "C": 8,
+        "start": [
+          3,
+          2
+        ],
+        "seed": 3,
+        "invert": false
+      },
+      "Verse2": {
+        "R": 8,
+        "C": 8,
+        "start": [
+          0,
+          0
+        ],
+        "seed": 4,
+        "invert": true
+      },
+      "Chorus2": {
+        "R": 8,
+        "C": 8,
+        "start": [
+          3,
+          2
+        ],
+        "seed": 5,
+        "invert": false
+      },
+      "Outro": {
+        "R": 8,
+        "C": 4,
+        "start": [
+          0,
+          0
+        ],
+        "seed": 6,
+        "invert": true
+      }
+    },
+    "counter_sections": [
+      "Chorus",
+      "Chorus2"
+    ],
+    "voices": [
+      [
+        "Lead",
+        66,
+        0
+      ],
+      [
+        "Rhodes",
+        4,
+        1
+      ],
+      [
+        "Bass",
+        33,
+        2
+      ],
+      [
+        "Vox",
+        52,
+        3
+      ],
+      [
+        "Drums",
+        0,
+        9
+      ]
+    ],
+    "voice_leading_corrections": 0,
+    "humanize_seed": 63699,
+    "raw_seed": 20261118,
+    "humanize_profiles": {
+      "Lead": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 7.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 4.0,
+        "phrase_corr": 0.45,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Rhodes": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.015,
+        "layback_ms": 4.0,
+        "phrase_corr": 0.45,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Bass": {
+        "timing_sigma_ms": 5.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.45,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Vox": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 8.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.03,
+        "layback_ms": 4.0,
+        "phrase_corr": 0.45,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Drums": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.008,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.45,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      }
+    },
+    "phase": 2,
+    "version": "humanized",
+    "humanize_stats": {
+      "Lead": {
+        "seed": 6433599,
+        "n_notes": 318,
+        "mean_abs_shift_ticks": 4.975,
+        "max_abs_shift_ticks": 19,
+        "mean_abs_vel_delta": 5.34,
+        "timing_sigma_ticks": 6.144
+      },
+      "Rhodes": {
+        "seed": 6433600,
+        "n_notes": 120,
+        "mean_abs_shift_ticks": 5.667,
+        "max_abs_shift_ticks": 15,
+        "mean_abs_vel_delta": 3.9,
+        "timing_sigma_ticks": 6.144
+      },
+      "Bass": {
+        "seed": 6433601,
+        "n_notes": 80,
+        "mean_abs_shift_ticks": 6.112,
+        "max_abs_shift_ticks": 14,
+        "mean_abs_vel_delta": 3.275,
+        "timing_sigma_ticks": 3.84
+      },
+      "Vox": {
+        "seed": 6433602,
+        "n_notes": 176,
+        "mean_abs_shift_ticks": 4.256,
+        "max_abs_shift_ticks": 19,
+        "mean_abs_vel_delta": 6.233,
+        "timing_sigma_ticks": 6.144
+      },
+      "Drums": {
+        "seed": 6433603,
+        "n_notes": 480,
+        "mean_abs_shift_ticks": 0.921,
+        "max_abs_shift_ticks": 3,
+        "mean_abs_vel_delta": 3.267,
+        "timing_sigma_ticks": 1.536
+      }
+    }
+  },
+  "notes": "Humanized layer (style soul + per-instrument DNA).",
+  "sha256": "ab8f73148e7e0bd02e974cfc23c2021a79405ede495919d15737fd8a055ceac5",
+  "bytes": 9885,
+  "created_utc": "2026-11-18T23:10:35.062097+00:00",
+  "provenance_version": "1.0"
+}

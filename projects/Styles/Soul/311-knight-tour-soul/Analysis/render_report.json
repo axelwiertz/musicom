@@ -1,0 +1,41 @@
+{
+  "soundfont": "/opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2",
+  "style": "soul",
+  "target_lufs": -13.0,
+  "phase1": {
+    "lufs": -13.08,
+    "true_peak_db": -1.0,
+    "target_lufs": -13.0,
+    "silence_ratio": 0.0786,
+    "rms_mean": 0.1667,
+    "rms_max": 0.2357,
+    "wav_bytes": 18020908,
+    "ogg_bytes": 950285,
+    "wav": "/opt/data/projects/Styles/Soul/311-knight-tour-soul/Audio/311-knight-tour-soul-phase1.wav",
+    "ogg": "/opt/data/projects/Styles/Soul/311-knight-tour-soul/Audio/311-knight-tour-soul-phase1.ogg"
+  },
+  "perfect": {
+    "lufs": -13.03,
+    "true_peak_db": -1.0,
+    "target_lufs": -13.0,
+    "silence_ratio": 0.0443,
+    "rms_mean": 0.1581,
+    "rms_max": 0.2103,
+    "wav_bytes": 18497324,
+    "ogg_bytes": 812580,
+    "wav": "/opt/data/projects/Styles/Soul/311-knight-tour-soul/Audio/311-knight-tour-soul-perfect.wav",
+    "ogg": "/opt/data/projects/Styles/Soul/311-knight-tour-soul/Audio/311-knight-tour-soul-perfect.ogg"
+  },
+  "humanized": {
+    "lufs": -13.04,
+    "true_peak_db": -1.0,
+    "target_lufs": -13.0,
+    "silence_ratio": 0.044,
+    "rms_mean": 0.1579,
+    "rms_max": 0.2288,
+    "wav_bytes": 18496812,
+    "ogg_bytes": 809245,
+    "wav": "/opt/data/projects/Styles/Soul/311-knight-tour-soul/Audio/311-knight-tour-soul-humanized.wav",
+    "ogg": "/opt/data/projects/Styles/Soul/311-knight-tour-soul/Audio/311-knight-tour-soul-humanized.ogg"
+  }
+}
