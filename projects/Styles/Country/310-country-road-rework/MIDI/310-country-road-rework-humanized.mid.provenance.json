@@ -1,0 +1,33 @@
+{
+  "artifact": "310-country-road-rework-humanized.mid",
+  "classification": "ai-assisted",
+  "generator": "random-walk + musicom rules (phase 2 humanized)",
+  "sources": [
+    "/opt/data/projects/Styles/Country/012-country-country-uke/MIDI/v2_country_unitmatrix.mid"
+  ],
+  "parameters": {
+    "seed": 310,
+    "hz_seed": 2163656159,
+    "key": "G",
+    "bpm": 96,
+    "style": "country",
+    "total_bars": 68,
+    "form": [
+      "Intro",
+      "Verse 1",
+      "Pre-Chorus",
+      "Chorus 1",
+      "Verse 2",
+      "Chorus 2",
+      "Bridge",
+      "Solo",
+      "Final Chorus",
+      "Outro"
+    ]
+  },
+  "notes": "Humanized: style=country seed=2163656159. Per-voice jitter applied.",
+  "sha256": "84471b01ed5fa0a62025476e842bdf4f7371aaab4d04a2a37d80d5de51934ed8",
+  "bytes": 23287,
+  "created_utc": "2026-11-18T01:13:03.492632+00:00",
+  "provenance_version": "1.0"
+}

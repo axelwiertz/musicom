@@ -1,0 +1,335 @@
+{
+  "project": "310-country-road-rework",
+  "source": "012-country-country-uke",
+  "decision": "redesign",
+  "genre": "Country",
+  "key": "G",
+  "bpm": 96,
+  "total_bars": 68,
+  "total_ticks": 130560,
+  "sections": [
+    {
+      "name": "Intro",
+      "bars": 4,
+      "chords": [
+        "G",
+        "D",
+        "Em",
+        "C"
+      ]
+    },
+    {
+      "name": "Verse 1",
+      "bars": 8,
+      "chords": [
+        "G",
+        "D",
+        "Em",
+        "C",
+        "G",
+        "D",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "name": "Pre-Chorus",
+      "bars": 4,
+      "chords": [
+        "C",
+        "D",
+        "Em",
+        "D"
+      ]
+    },
+    {
+      "name": "Chorus 1",
+      "bars": 8,
+      "chords": [
+        "G",
+        "D",
+        "Em",
+        "C",
+        "G",
+        "D",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "name": "Verse 2",
+      "bars": 8,
+      "chords": [
+        "G",
+        "D",
+        "Em",
+        "C",
+        "G",
+        "D",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "name": "Chorus 2",
+      "bars": 8,
+      "chords": [
+        "G",
+        "D",
+        "Em",
+        "C",
+        "G",
+        "D",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "name": "Bridge",
+      "bars": 8,
+      "chords": [
+        "Em",
+        "C",
+        "G",
+        "D",
+        "Em",
+        "C",
+        "Am",
+        "D"
+      ]
+    },
+    {
+      "name": "Solo",
+      "bars": 8,
+      "chords": [
+        "G",
+        "Em",
+        "C",
+        "D",
+        "G",
+        "Em",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "name": "Final Chorus",
+      "bars": 8,
+      "chords": [
+        "G",
+        "D",
+        "Em",
+        "C",
+        "G",
+        "D",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "name": "Outro",
+      "bars": 4,
+      "chords": [
+        "G",
+        "C",
+        "G",
+        "G"
+      ]
+    }
+  ],
+  "variation_techniques": [
+    {
+      "technique": "inversion",
+      "where": "Verse 2",
+      "detail": "lead contour inverted around G4=67, re-quantized to chord tones"
+    },
+    {
+      "technique": "register shift",
+      "where": "Pre-Chorus (+4/+5) and Final Chorus (+12)",
+      "detail": "quantization window raised; final chorus one octave up"
+    },
+    {
+      "technique": "retrograde",
+      "where": "Outro",
+      "detail": "descending motif D5-B4-A4-G4 (degrees 5-3-2-1) reversing the intro 1-2-3-5 rise"
+    },
+    {
+      "technique": "mode shift",
+      "where": "Bridge",
+      "detail": "relative-minor emphasis: Em/C/Am region, low register, sustained fiddle texture"
+    },
+    {
+      "technique": "augmentation",
+      "where": "Solo",
+      "detail": "fiddle takes lead, durations doubled (half speed)"
+    },
+    {
+      "technique": "density rise + counterline",
+      "where": "Chorus 2",
+      "detail": "16th electric arpeggios, open hi-hat, fiddle off-beat counterline"
+    },
+    {
+      "technique": "diminution",
+      "where": "Outro",
+      "detail": "pedal steel durations shortened with velocity taper"
+    }
+  ],
+  "humanize": {
+    "seed": 2163656159,
+    "style": "country",
+    "profiles": {
+      "Lead Vocal": {
+        "seed": 218529272059,
+        "profile": {
+          "timing_sigma_ms": 9.0,
+          "velocity_sigma": 8.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.03,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.5,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 340,
+        "mean_abs_shift_ticks": 4.285,
+        "max_abs_shift_ticks": 15,
+        "mean_abs_vel_delta": 6.768,
+        "timing_sigma_ticks": 6.912
+      },
+      "Harmony Vox": {
+        "seed": 218529272060,
+        "profile": {
+          "timing_sigma_ms": 9.0,
+          "velocity_sigma": 8.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.03,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.5,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 340,
+        "mean_abs_shift_ticks": 4.485,
+        "max_abs_shift_ticks": 20,
+        "mean_abs_vel_delta": 5.835,
+        "timing_sigma_ticks": 6.912
+      },
+      "Acoustic Guitar": {
+        "seed": 218529272061,
+        "profile": {
+          "timing_sigma_ms": 9.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.02,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.5,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 408,
+        "mean_abs_shift_ticks": 5.231,
+        "max_abs_shift_ticks": 19,
+        "mean_abs_vel_delta": 4.902,
+        "timing_sigma_ticks": 6.912
+      },
+      "Electric Guitar": {
+        "seed": 218529272062,
+        "profile": {
+          "timing_sigma_ms": 9.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.02,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.5,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 496,
+        "mean_abs_shift_ticks": 5.329,
+        "max_abs_shift_ticks": 22,
+        "mean_abs_vel_delta": 4.581,
+        "timing_sigma_ticks": 6.912
+      },
+      "Bass": {
+        "seed": 218529272063,
+        "profile": {
+          "timing_sigma_ms": 5.0,
+          "velocity_sigma": 4.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.01,
+          "layback_ms": 8.0,
+          "phrase_corr": 0.5,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 136,
+        "mean_abs_shift_ticks": 6.044,
+        "max_abs_shift_ticks": 15,
+        "mean_abs_vel_delta": 3.132,
+        "timing_sigma_ticks": 3.84
+      },
+      "Drums": {
+        "seed": 218529272064,
+        "profile": {
+          "timing_sigma_ms": 2.0,
+          "velocity_sigma": 4.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.008,
+          "layback_ms": 0.0,
+          "phrase_corr": 0.5,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 828,
+        "mean_abs_shift_ticks": 1.002,
+        "max_abs_shift_ticks": 5,
+        "mean_abs_vel_delta": 3.128,
+        "timing_sigma_ticks": 1.536
+      },
+      "Fiddle": {
+        "seed": 218529272065,
+        "profile": {
+          "timing_sigma_ms": 9.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.02,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.5,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 162,
+        "mean_abs_shift_ticks": 5.087,
+        "max_abs_shift_ticks": 18,
+        "mean_abs_vel_delta": 5.136,
+        "timing_sigma_ticks": 6.912
+      },
+      "Pedal Steel": {
+        "seed": 218529272066,
+        "profile": {
+          "timing_sigma_ms": 9.0,
+          "velocity_sigma": 6.0,
+          "duration_scale": 1.0,
+          "duration_sigma": 0.02,
+          "layback_ms": 2.0,
+          "phrase_corr": 0.5,
+          "velocity_min": 20,
+          "velocity_max": 127,
+          "couple_thresh": 15.0
+        },
+        "n_notes": 136,
+        "mean_abs_shift_ticks": 4.36,
+        "max_abs_shift_ticks": 16,
+        "mean_abs_vel_delta": 4.655,
+        "timing_sigma_ticks": 6.912
+      }
+    }
+  }
+}

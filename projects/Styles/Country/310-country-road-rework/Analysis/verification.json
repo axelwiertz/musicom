@@ -1,0 +1,53 @@
+[
+  {
+    "file": "310-country-road-rework-phase1.mid",
+    "bytes": 3536,
+    "n_tracks": 2,
+    "voice_tracks": 1,
+    "track_length_ticks": 130560,
+    "zero_drift": true,
+    "distinct_lengths": [
+      130560
+    ],
+    "pitched_onsets": 408,
+    "ch9_onsets": 0,
+    "offgrid": 405,
+    "scale_violations": 209,
+    "chord_violations": 319,
+    "chord_violations_grid": 318
+  },
+  {
+    "file": "310-country-road-rework-perfect.mid",
+    "bytes": 23319,
+    "n_tracks": 9,
+    "voice_tracks": 8,
+    "track_length_ticks": 130560,
+    "zero_drift": true,
+    "distinct_lengths": [
+      130560
+    ],
+    "pitched_onsets": 2018,
+    "ch9_onsets": 828,
+    "offgrid": 0,
+    "scale_violations": 0,
+    "chord_violations": 0,
+    "chord_violations_grid": 0
+  },
+  {
+    "file": "310-country-road-rework-humanized.mid",
+    "bytes": 23287,
+    "n_tracks": 9,
+    "voice_tracks": 8,
+    "track_length_ticks": 130560,
+    "zero_drift": true,
+    "distinct_lengths": [
+      130560
+    ],
+    "pitched_onsets": 2018,
+    "ch9_onsets": 828,
+    "offgrid": 1873,
+    "scale_violations": 0,
+    "chord_violations": 78,
+    "chord_violations_grid": 0
+  }
+]

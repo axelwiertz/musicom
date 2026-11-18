@@ -1,0 +1,125 @@
+{
+  "project": "309-celtic-sieve-set",
+  "report": {
+    "phase1": {
+      "tracks": 1,
+      "track_len": 46080,
+      "zero_drift": true,
+      "pitched": 187,
+      "drum": 0,
+      "off120": 182,
+      "off240": 184,
+      "scale_violations": 67,
+      "non_resolving": 0,
+      "strong_violations": 0,
+      "voice_audits": {
+        "voice0": {
+          "notes": 187,
+          "untagged_out_of_scale": 67,
+          "tagged_non_resolving": 0,
+          "strong_violations": 0,
+          "passes": false
+        }
+      }
+    },
+    "perfect": {
+      "tracks": 5,
+      "track_len": 46080,
+      "zero_drift": true,
+      "pitched": 545,
+      "drum": 0,
+      "off120": 0,
+      "off240": 0,
+      "scale_violations": 0,
+      "non_resolving": 0,
+      "strong_violations": 0,
+      "voice_audits": {
+        "voice0": {
+          "notes": 170,
+          "untagged_out_of_scale": 0,
+          "tagged_non_resolving": 0,
+          "strong_violations": 0,
+          "passes": true
+        },
+        "voice1": {
+          "notes": 87,
+          "untagged_out_of_scale": 0,
+          "tagged_non_resolving": 0,
+          "strong_violations": 0,
+          "passes": true
+        },
+        "voice2": {
+          "notes": 48,
+          "untagged_out_of_scale": 0,
+          "tagged_non_resolving": 0,
+          "strong_violations": 0,
+          "passes": true
+        },
+        "voice3": {
+          "notes": 192,
+          "untagged_out_of_scale": 0,
+          "tagged_non_resolving": 0,
+          "strong_violations": 0,
+          "passes": true
+        },
+        "voice4": {
+          "notes": 48,
+          "untagged_out_of_scale": 0,
+          "tagged_non_resolving": 0,
+          "strong_violations": 0,
+          "passes": true
+        }
+      }
+    },
+    "humanized": {
+      "tracks": 5,
+      "track_len": 46080,
+      "zero_drift": true,
+      "pitched": 545,
+      "drum": 0,
+      "off120": 487,
+      "off240": 487,
+      "scale_violations": 0,
+      "non_resolving": 0,
+      "strong_violations": 0,
+      "voice_audits": {
+        "voice0": {
+          "notes": 170,
+          "untagged_out_of_scale": 0,
+          "tagged_non_resolving": 0,
+          "strong_violations": 0,
+          "passes": true
+        },
+        "voice1": {
+          "notes": 87,
+          "untagged_out_of_scale": 0,
+          "tagged_non_resolving": 0,
+          "strong_violations": 0,
+          "passes": true
+        },
+        "voice2": {
+          "notes": 48,
+          "untagged_out_of_scale": 0,
+          "tagged_non_resolving": 0,
+          "strong_violations": 0,
+          "passes": true
+        },
+        "voice3": {
+          "notes": 192,
+          "untagged_out_of_scale": 0,
+          "tagged_non_resolving": 0,
+          "strong_violations": 0,
+          "passes": true
+        },
+        "voice4": {
+          "notes": 48,
+          "untagged_out_of_scale": 0,
+          "tagged_non_resolving": 0,
+          "strong_violations": 0,
+          "passes": true
+        }
+      }
+    }
+  },
+  "verdict": "PASS"
+}

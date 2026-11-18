@@ -612,6 +612,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Keys | Clavi | 7 | 29–89 | lead, rhythm, accent, ornament, countermelody |
 | Keys | Honky-tonk Piano | 3 | 33–96 | rhythm, harmony, melody, bass, ornament, color |
 | Keys | Drawbar Organ | 16 | 24–89 | harmony, pad, comp, lead, bass, rhythm, drone, accent |
+| Keys | Rock Organ | 18 | 36–96 | lead, rhythm, harmony, comp, pad, bass, accent, drone |
 | Keys | Electric Piano 1 (Rhodes) | 4 | 36–96 | harmony, melody, bass, accent, color |
 | Brass | Trumpet | 56 | 54–86 | lead, accent, fanfare |
 | Brass | Muted Trumpet | 59 | 54–86 | lead, countermelody, accent, melody, ornament |
@@ -693,6 +694,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 6 | Harpsichord | Harpsichord ✓ (GM_PROGRAMS[6] + FluidR3 preset 6 both "Harpsichord") |
 | 7 | Clavi | **Clavi** ✓ (pipeline GM_PROGRAMS[7] = "Clavi"; FluidR3 preset 7 = "Clavinet" — cosmetic expansion, no routing impact; STEM_LABEL = "Clavi" matches pipeline) |
 | 16 | Drawbar Organ | Drawbar_Organ ✓ (GM_PROGRAMS[16] = "Drawbar Organ"; FluidR3 bank-0 preset 16 = "DrawbarOrgan" — no space in the SF2 name, cosmetic only, **no routing impact**; STEM_LABEL = "Drawbar_Organ") |
+| 18 | Rock Organ | Rock_Organ ✓ (GM_PROGRAMS[18] = "Rock Organ"; FluidR3 bank-0 preset 18 = "Rock Organ" — labels match exactly, **no quirk**; STEM_LABEL = "Rock_Organ"; distinct from GM16 Drawbar Organ) |
 | 8 | Celesta | Celesta ✓ (GM_PROGRAMS[8] + FluidR3 preset 8 both "Celesta") |
 | 69 | English Horn | English_Horn ✓ (GM_PROGRAMS[69] + FluidR3 preset 69 both "English Horn") |
 | 9 | Glockenspiel | Glockenspiel ✓ (GM_PROGRAMS[9] + FluidR3 preset 9 both "Glockenspiel") |
@@ -2391,7 +2393,7 @@ brightness, but pitch checks MUST use a band-limited peak search (±10% of
 f0), not the global FFT argmax. Same-pitch doubling rule applies: never
 layer pick + finger bass on the same pitches (comb filtering). Remaining
 sibling candidates: GM37 "Slap Bass 2" (FluidR3 "Pop Bass"), GM50/51 Synth
-Strings 1/2, GM63 Synth Brass 2, GM17/18 Percussive/Rock Organ.
+Strings 1/2, GM63 Synth Brass 2, GM17 Percussive Organ.
 
 **Woodblock added** (2026-09-02 nightly slot, written 2026-11-15): GM115,
 **Percussion-family ninth entry** — the dry WOODEN tick of the GM percussion
@@ -2488,5 +2490,41 @@ taps, rim cracks, flams, rolls), color (tuned-drum colour; pairs with taiko/
 timpani/drum kit) — NOT melodic lead (no chromatic tracking), NOT harmony,
 NOT bass. Humanize: Percussion DNA (2.5 ms sigma, 0 layback) — the fill
 must sit ON the grid. Remaining sibling candidates: GM112 Tinkle Bell,
-GM118 Synth Drum, GM76 Blown Bottle, GM17/18 Percussive/Rock Organ, GM50/51
+GM118 Synth Drum, GM76 Blown Bottle, GM17 Percussive Organ, GM50/51
 Synth Strings 1/2, GM63 Synth Brass 2, GM37 Slap Bass 2.
+
+**Rock Organ added** (2026-09-02): GM18, Keys-family entry — the *amplified*
+Hammond/transistor organ of rock (Jon Lord, Keith Emerson, Booker T., Steve
+Winwood, Jackie Mittoo), deliberately distinct from GM16 Drawbar Organ (clean
+jazz/gospel B-3): same additive tonewheel source plus a tanh overdrive stage,
+key-click percussion tab and a Leslie parked on FAST. Range 36–96 (C2–C7),
+solo 48–84 (C3–C6), sweet spot 55–79 (G3–G5); zones bass 36–55 / mid 56–79
+(comp+lead) / high 80–96. Synthesis: **`additive`** (SoundWave) with 7
+`ADDITIVE_HARMONICS` banks (rock/scream/ska/booker/gospel/bass/ballad; extra
+4x/6x/8x partials = the saturated bark), flat-sustain envelope (3 ms attack,
+no decay, 45 ms release), `OVERDRIVE_DEFAULTS` (tanh drive 2.6, 2.4 kHz
+cabinet LP, −3 dB trim), `MOTOR_DEFAULTS` (6.9 Hz tremolo, 7 cents Doppler);
+PhaseModSynth `FM_DEFAULTS` as cheap fallback. NOT Karplus-Strong/Modal (no
+resonator). Production: reverb 1.3 s, EQ body 250 Hz −1.5 dB, presence
+1800 Hz +3.0 dB, air 7 kHz +1.5 dB, pan 0.0. Articulations: sustain, stab,
+chop, percussion, key_click, accent, smear, swell — velocity is a MIX value,
+the key contact is binary, so dynamics come from drawbars/density/swell.
+Zero-drift ✓ → MIDI (84 bytes) → FluidSynth WAV via `discover_soundfont()`
+(FluidR3_GM.sf2, **743,724 bytes**) ✓, rendered SOLO (one voice, one track —
+no unison doubling, so no comb buzz); solo spectral check 4–8 kHz buzz energy
+0.3% (OK). RenderPipeline stem label `track00_Rock_Organ.wav` ✓
+(GM_PROGRAMS[18] = "Rock Organ", FluidR3 bank-0 preset 18 = "Rock Organ" —
+labels match exactly, **no quirk**). Registration proof: `by_name('rock
+organ')` / `by_name('Rock Organ')` / `by_program(18)` → Rock Organ (distinct
+from `by_program(16)` Drawbar Organ), `in_sweet_spot(67)` = True,
+`in_sweet_spot(30)` = False, `stem_label = 'Rock_Organ'`,
+`synthesis = 'additive'`; `registry_table()` row "| Keys | Rock Organ | 18 |
+36–96 | lead, rhythm, harmony, comp, pad, bass, accent, drone |";
+convenience constant `ROCK_ORGAN`. Role: lead (unison lines with guitar, organ
+solo), rhythm/comp (backbeat stabs, ska up-strokes), harmony/pad (sustained
+3–4 note voicings, omit the 5th when driven), bass (left-hand key bass),
+accent (section markers), drone (held root/fifth vamp). Humanize: Keys DNA
+(6 ms timing sigma, 5 velocity sigma, 0 layback) — sits ON the grid, the
+Leslie supplies the motion. Remaining sibling candidates: GM17 Percussive
+Organ, GM76 Blown Bottle, GM50/51 Synth Strings 1/2, GM63 Synth Brass 2,
+GM37 Slap Bass 2, GM118 Synth Drum, GM2 Electric Grand Piano.

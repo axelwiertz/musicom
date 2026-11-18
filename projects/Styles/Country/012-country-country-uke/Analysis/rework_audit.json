@@ -1,0 +1,40 @@
+{
+  "chosen": "/opt/data/projects/Styles/Country/012-country-country-uke",
+  "genre": "Country",
+  "project": "012-country-country-uke",
+  "primary_midi": "MIDI/v2_country_unitmatrix.mid",
+  "audit_date": "2026-11-18",
+  "standard_failures": [
+    "engine_not_handrolled: Scripts/generate_v2.py authors MIDI with raw mido.MidiTrack()/note_on/.save() (no UnitMatrixComposer import)",
+    "zero_drift: voice tracks have 8 distinct lengths {91680,92136,92040,91564,92112,92208,92400,91737}",
+    "rhythm_grid_sync: 192 off-grid pitched onsets out of 1608 (float-beat offsets 0.75/1.25/2.75/0.03)",
+    "two_phase_artifacts: no -phase1.mid present",
+    "provenance: no provenance.json sidecar (index.html present)"
+  ],
+  "passed": [
+    "track_count: 8 voice tracks >= 4",
+    "scale_discipline: 0 pitch-class violations vs G major (accidental, pre-audit)"
+  ],
+  "redesign_required": true,
+  "source_identity": {
+    "genre": "Country",
+    "subgenre": "Country-pop road song",
+    "key": "G major",
+    "tempo_bpm": 96,
+    "meter": "4/4",
+    "core_progression": ["G", "D", "Em", "C"],
+    "motif_degrees": ["1-2-3-5", "5-6-1-2-3"],
+    "instrumentation": {
+      "Lead Vocal": 53,
+      "Harmony Vox": 52,
+      "Acoustic Guitar": 24,
+      "Electric Guitar": 29,
+      "Bass": 33,
+      "Drums": "ch9",
+      "Fiddle": 40,
+      "Pedal Steel": 48
+    },
+    "form_bars": 48,
+    "sections": ["Intro", "Verse 1", "Chorus 1", "Verse 2", "Chorus 2", "Bridge", "Final Chorus", "Outro"]
+  }
+}

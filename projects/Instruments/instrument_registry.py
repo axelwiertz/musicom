@@ -79,6 +79,7 @@ _INSTRUMENT_MODULES = {
     "Keys.rhodes.rhodes": "rhodes",
     "Keys.electric_piano_2.electric_piano_2": "electric_piano_2",
     "Keys.drawbar_organ.drawbar_organ": "drawbar_organ",
+    "Keys.rock_organ.rock_organ": "rock_organ",
     "Keys.tango_accordion.tango_accordion": "tango_accordion",
     "World.sitar.sitar": "sitar",
     "World.koto.koto": "koto",
@@ -297,6 +298,7 @@ REED_ORGAN = ALL_INSTRUMENTS["reed_organ"]
 RHODES = ALL_INSTRUMENTS["rhodes"]
 ELECTRIC_PIANO_2 = ALL_INSTRUMENTS["electric_piano_2"]
 DRAWBAR_ORGAN = ALL_INSTRUMENTS["drawbar_organ"]
+ROCK_ORGAN = ALL_INSTRUMENTS["rock_organ"]
 HONKY_TONK = ALL_INSTRUMENTS["honky_tonk"]
 TRUMPET = ALL_INSTRUMENTS["trumpet"]
 TROMBONE = ALL_INSTRUMENTS["trombone"]
@@ -436,6 +438,8 @@ def registry_table():
             role = "harmony, pad, bass, rhythm, accent"
         elif low == "drawbar organ":
             role = "harmony, pad, comp, lead, bass, rhythm, drone, accent"
+        elif low == "rock organ":
+            role = "lead, rhythm, harmony, comp, pad, bass, accent, drone"
         elif low == "dulcimer":
             role = "lead, melody, ornament, rhythm, harmony"
         elif low == "honky-tonk piano":
@@ -1082,3 +1086,22 @@ if __name__ == "__main__":
     print("  MELODIC_TOM.reverb_tail =", MELODIC_TOM.reverb_tail,
           "MELODIC_TOM.pan =", MELODIC_TOM.pan)
     print("  WOODBLOCK.woodblock_modes =", WOODBLOCK.woodblock_modes)
+
+    print()
+    print("=== Rock Organ (Keys, GM18) ===")
+    print("  ROCK_ORGAN.midi_program =", ROCK_ORGAN.midi_program, "(should be 18)")
+    print("  by_name('rock organ') =", by_name("rock organ"))
+    print("  by_name('Rock Organ') =", by_name("Rock Organ"))
+    print("  by_program(18) =", by_program(18))
+    print("  by_program(16) =", by_program(16), "(distinct: drawbar organ)")
+    print("  ROCK_ORGAN.in_sweet_spot(67) =", ROCK_ORGAN.in_sweet_spot(67))
+    print("  ROCK_ORGAN.in_sweet_spot(30) =", ROCK_ORGAN.in_sweet_spot(30))
+    print("  ROCK_ORGAN.range_min =", ROCK_ORGAN.range_min,
+          "ROCK_ORGAN.range_max =", ROCK_ORGAN.range_max)
+    print("  ROCK_ORGAN.solo_range =", ROCK_ORGAN.solo_range)
+    print("  ROCK_ORGAN.stem_label =", repr(ROCK_ORGAN.stem_label))
+    print("  ROCK_ORGAN.synthesis =", repr(ROCK_ORGAN.synthesis))
+    print("  ROCK_ORGAN.reverb_tail =", ROCK_ORGAN.reverb_tail,
+          "ROCK_ORGAN.pan =", ROCK_ORGAN.pan)
+    print("  ROCK_ORGAN.motor_defaults =", ROCK_ORGAN.motor_defaults)
+    print("  ROCK_ORGAN.articulations =", list(ROCK_ORGAN.articulations or {}))

@@ -1,0 +1,21 @@
+{
+  "artifact": "310-country-road-rework-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "random-walk pitch_index + unquantized rhythm (phase 1 raw draft)",
+  "sources": [
+    "/opt/data/projects/Styles/Country/012-country-country-uke/Scripts/generate_v2.py"
+  ],
+  "parameters": {
+    "seed": 310,
+    "key": "G",
+    "bpm": 96,
+    "phase": 1,
+    "total_bars": 68,
+    "quantized": false
+  },
+  "notes": "Raw generative draft, pre-rules. Off-grid + off-scale by design.",
+  "sha256": "b6f04d0d71500476ef9bc1b38836e6513fbf12b6fccbd8520620facac236669d",
+  "bytes": 3536,
+  "created_utc": "2026-11-18T01:13:03.147288+00:00",
+  "provenance_version": "1.0"
+}

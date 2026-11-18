@@ -1,0 +1,24 @@
+{
+  "artifact": "dpbc_145_demo.mid",
+  "classification": "ai-generated",
+  "generator": "DPBC-145",
+  "sources": [
+    "methods_db.md#145"
+  ],
+  "parameters": {
+    "semilength": 8,
+    "sections": [
+      "A",
+      "B"
+    ],
+    "scale": "C major",
+    "seed": 20261118,
+    "pathA": "UUUUDDUDUDUDUDDD",
+    "pathB": "UUDUDDUDUUDUDUDD"
+  },
+  "notes": "Dyck tension curve -> scale-degree walk; ballot law keeps melody above tonic.",
+  "sha256": "2070a604572f4d35ca03fb60c1b63e739f1fa75f6c9ab75ea3ca011a23bc368a",
+  "bytes": 426,
+  "created_utc": "2026-11-18T09:10:31.411929+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,105 @@
+{
+  "artifact": "309-celtic-sieve-set-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom.xenakis_sieve_phase1",
+  "sources": [],
+  "parameters": {
+    "bpm": 120,
+    "bars": 24,
+    "seed": 20261117,
+    "phase": 1,
+    "quantized": false,
+    "key": "D Mixolydian",
+    "form": "through-composed",
+    "style": "celtic",
+    "method": "025 Xenakis Sieve Theory",
+    "layer": "concrete",
+    "paradigm": "Rules-Based",
+    "sieves": {
+      "S1": {
+        "pitch_mod": 4,
+        "pitch_res": [
+          0,
+          2
+        ],
+        "rhythm_mod": 4,
+        "rhythm_res": [
+          0,
+          3
+        ],
+        "dir": 1
+      },
+      "S2": {
+        "pitch_mod": 3,
+        "pitch_res": [
+          0,
+          1
+        ],
+        "rhythm_mod": 3,
+        "rhythm_res": [
+          0,
+          2
+        ],
+        "dir": -1
+      },
+      "S3": {
+        "pitch_mod": 5,
+        "pitch_res": [
+          0,
+          2
+        ],
+        "rhythm_mod": 5,
+        "rhythm_res": [
+          0,
+          2
+        ],
+        "dir": 1
+      },
+      "S4": {
+        "pitch_mod": 4,
+        "pitch_res": [
+          1,
+          3
+        ],
+        "rhythm_mod": 4,
+        "rhythm_res": [
+          1,
+          2
+        ],
+        "dir": 1
+      },
+      "S5": {
+        "pitch_mod": 3,
+        "pitch_res": [
+          0,
+          2
+        ],
+        "rhythm_mod": 3,
+        "rhythm_res": [
+          0
+        ],
+        "dir": -1
+      },
+      "S6": {
+        "pitch_mod": 7,
+        "pitch_res": [
+          0,
+          4
+        ],
+        "rhythm_mod": 4,
+        "rhythm_res": [
+          0,
+          3
+        ],
+        "dir": 1
+      }
+    },
+    "notes": 187,
+    "rules_applied": "NONE (pre-rules)"
+  },
+  "notes": "Raw Xenakis sieve draft: single violin voice, unquantized float pitch (modular-congruence sieve walk + jitter) + off-grid onsets, 24 bars, pre-rules. Method 025 (concrete).",
+  "sha256": "16ccc3aae063a452ce8076287086b23e25f3b5fd7c3fbb0ac439e7e9af113151",
+  "bytes": 1560,
+  "created_utc": "2026-11-17T23:11:46.670969+00:00",
+  "provenance_version": "1.0"
+}

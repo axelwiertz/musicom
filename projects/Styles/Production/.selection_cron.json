@@ -1,12 +1,12 @@
 {
   "job": "random-style production (SP) layer-aligned",
-  "date": "2026-11-17",
-  "seed": 20261117,
-  "method": "SP-146",
-  "method_module": "sound.effects.feedback_loop_fx",
-  "method_desc": "Feedback-Loop Echo + Codec Loss \u2014 fractional delay whose wobble (wow/flutter/drift), tanh drive, tone band-limiting, all-pass smear and bitrate-derived bit-depth/bandwidth reduction run inside the feedback path, plus offline spectral codec (log-magnitude quantisation + band limit) (XLN Audio RC-20 V2 Echo/Loss-style)",
-  "source_midi": "/opt/data/repos/musicom/projects/Styles/Reggae/076-reggae-lsystem/MIDI/076-reggae-lsystem.mid",
-  "source_project": "Reggae/076-reggae-lsystem/MIDI/076-reggae-lsystem.mid",
+  "date": "2026-11-18",
+  "seed": 20261118,
+  "method": "SP-107",
+  "method_module": "sound.effects.bit_crusher",
+  "method_desc": "Bit Crusher / Fidelity Reducer \u2014 linked sample-rate/bit-depth macro, Iron/Worn character voicing, aliasing foldover emphasis (Modbap Fidelity Theory-style)",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/IndianClassical/212-indian-boids-yaman/MIDI/212-indian-boids-yaman.mid",
+  "source_project": "IndianClassical/212-indian-boids-yaman/MIDI/212-indian-boids-yaman.mid",
   "registry_size": 97,
   "recent_excluded": [
     "SP-069",
@@ -14,11 +14,11 @@
     "SP-084",
     "SP-100",
     "SP-115",
-    "SP-138",
+    "SP-146",
     "SP-154"
   ],
   "already_on_source": [
-    "SP-026"
+    "SP-091"
   ],
   "baseline_excluded": [
     "SP-001"
@@ -27,6 +27,7 @@
     "SP-011",
     "SP-021",
     "SP-024",
+    "SP-026",
     "SP-028",
     "SP-032",
     "SP-033",
@@ -50,7 +51,6 @@
     "SP-085",
     "SP-086",
     "SP-090",
-    "SP-091",
     "SP-092",
     "SP-094",
     "SP-095",
@@ -92,6 +92,7 @@
     "SP-135",
     "SP-136",
     "SP-137",
+    "SP-138",
     "SP-139",
     "SP-140",
     "SP-141",
@@ -99,7 +100,6 @@
     "SP-143",
     "SP-144",
     "SP-145",
-    "SP-146",
     "SP-147",
     "SP-148",
     "SP-150",
@@ -113,8 +113,8 @@
     "SP-159",
     "SP-160"
   ],
-  "n_candidates": 462,
-  "n_well_formed": 357,
-  "n_meaningful": 356,
+  "n_candidates": 466,
+  "n_well_formed": 361,
+  "n_meaningful": 360,
   "rejected_degenerate": []
 }

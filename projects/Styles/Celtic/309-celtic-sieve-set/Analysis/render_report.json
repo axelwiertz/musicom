@@ -1,0 +1,41 @@
+{
+  "soundfont": "/opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2",
+  "style": "celtic",
+  "target_lufs": -14.0,
+  "phase1": {
+    "lufs": -14.04,
+    "true_peak_db": -1.0,
+    "target_lufs": -14.0,
+    "silence_ratio": 0.0604,
+    "rms_mean": 0.1078,
+    "rms_max": 0.1874,
+    "wav_bytes": 8926508,
+    "ogg_bytes": 394361,
+    "wav": "/opt/data/projects/Styles/Celtic/309-celtic-sieve-set/Audio/309-celtic-sieve-set-phase1.wav",
+    "ogg": "/opt/data/projects/Styles/Celtic/309-celtic-sieve-set/Audio/309-celtic-sieve-set-phase1.ogg"
+  },
+  "perfect": {
+    "lufs": -14.0,
+    "true_peak_db": -2.23,
+    "target_lufs": -14.0,
+    "silence_ratio": 0.1539,
+    "rms_mean": 0.1076,
+    "rms_max": 0.1559,
+    "wav_bytes": 10456108,
+    "ogg_bytes": 424461,
+    "wav": "/opt/data/projects/Styles/Celtic/309-celtic-sieve-set/Audio/309-celtic-sieve-set-perfect.wav",
+    "ogg": "/opt/data/projects/Styles/Celtic/309-celtic-sieve-set/Audio/309-celtic-sieve-set-perfect.ogg"
+  },
+  "humanized": {
+    "lufs": -14.0,
+    "true_peak_db": -1.02,
+    "target_lufs": -14.0,
+    "silence_ratio": 0.1579,
+    "rms_mean": 0.1075,
+    "rms_max": 0.153,
+    "wav_bytes": 10456108,
+    "ogg_bytes": 427794,
+    "wav": "/opt/data/projects/Styles/Celtic/309-celtic-sieve-set/Audio/309-celtic-sieve-set-humanized.wav",
+    "ogg": "/opt/data/projects/Styles/Celtic/309-celtic-sieve-set/Audio/309-celtic-sieve-set-humanized.ogg"
+  }
+}

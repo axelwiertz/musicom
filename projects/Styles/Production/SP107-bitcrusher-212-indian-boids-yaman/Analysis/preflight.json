@@ -1,0 +1,44 @@
+{
+  "audit": {
+    "grid_off": 0,
+    "out_scale": 0,
+    "out_chord": 0,
+    "total_notes": 960,
+    "zero_drift": true,
+    "track_ends": [
+      61440
+    ],
+    "per_voice": {
+      "ch0": {
+        "n_notes": 96,
+        "last_end": 61440
+      },
+      "ch1": {
+        "n_notes": 304,
+        "last_end": 61440
+      },
+      "ch2": {
+        "n_notes": 160,
+        "last_end": 61440
+      },
+      "ch9_drums": {
+        "n_notes": 400,
+        "last_end": 61440
+      }
+    }
+  },
+  "key": "Raga Yaman on C",
+  "scale_pcs": [
+    0,
+    2,
+    4,
+    6,
+    7,
+    9,
+    11
+  ],
+  "harmony_note": "monophonic raga over Sa+Pa drone; chord-tone vocab = full Yaman scale",
+  "bpm": 90,
+  "tpb": 480,
+  "bars": 32
+}

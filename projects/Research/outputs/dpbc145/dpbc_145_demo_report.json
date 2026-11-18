@@ -1,0 +1,17 @@
+{
+  "midi": "/opt/data/projects/Research/outputs/dpbc145/dpbc_145_demo.mid",
+  "bytes": 426,
+  "validate": "OK",
+  "pathA": "UUUUDDUDUDUDUDDD",
+  "statsA": {
+    "peaks": 5,
+    "arches": 1,
+    "max_height": 4
+  },
+  "pathB": "UUDUDDUDUUDUDUDD",
+  "statsB": {
+    "peaks": 6,
+    "arches": 3,
+    "max_height": 2
+  }
+}
