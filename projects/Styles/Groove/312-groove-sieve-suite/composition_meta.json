@@ -1,0 +1,186 @@
+{
+  "project": "312-groove-sieve-suite",
+  "pid": "312",
+  "genre": "Groove",
+  "style": "groove",
+  "key": "G natural minor",
+  "key_pcs": [
+    0,
+    2,
+    3,
+    5,
+    7,
+    9,
+    10
+  ],
+  "bpm": 110,
+  "bars": 40,
+  "sections": [
+    {
+      "name": "Intro",
+      "bars": 4,
+      "prog": [
+        "i",
+        "VII",
+        "i",
+        "VII"
+      ],
+      "technique": "sieve exposed (sparse)"
+    },
+    {
+      "name": "VerseA",
+      "bars": 4,
+      "prog": [
+        "i",
+        "III",
+        "iv",
+        "v"
+      ],
+      "technique": "core sieve motif"
+    },
+    {
+      "name": "VerseB",
+      "bars": 4,
+      "prog": [
+        "i",
+        "iv",
+        "v",
+        "VI"
+      ],
+      "technique": "transposition +12"
+    },
+    {
+      "name": "PreChorus",
+      "bars": 4,
+      "prog": [
+        "iv",
+        "VI",
+        "VII",
+        "v"
+      ],
+      "technique": "diminution (16th feel)"
+    },
+    {
+      "name": "Chorus",
+      "bars": 4,
+      "prog": [
+        "III",
+        "VII",
+        "i",
+        "iv"
+      ],
+      "technique": "density rise + counterline"
+    },
+    {
+      "name": "Bridge",
+      "bars": 4,
+      "prog": [
+        "VI",
+        "III",
+        "VII",
+        "v"
+      ],
+      "technique": "inversion"
+    },
+    {
+      "name": "VerseC",
+      "bars": 4,
+      "prog": [
+        "i",
+        "III",
+        "iv",
+        "v"
+      ],
+      "technique": "retrograde"
+    },
+    {
+      "name": "Chorus2",
+      "bars": 4,
+      "prog": [
+        "III",
+        "VII",
+        "i",
+        "iv"
+      ],
+      "technique": "transposition +12 + canon"
+    },
+    {
+      "name": "Break",
+      "bars": 4,
+      "prog": [
+        "VI",
+        "v",
+        "VI",
+        "VII"
+      ],
+      "technique": "register shift -12 (sparse)"
+    },
+    {
+      "name": "Outro",
+      "bars": 4,
+      "prog": [
+        "i",
+        "VI",
+        "VII",
+        "i"
+      ],
+      "technique": "augmentation + fade"
+    }
+  ],
+  "phase1_path": "/opt/data/projects/Styles/Groove/312-groove-sieve-suite/MIDI/312-groove-sieve-suite-phase1.mid",
+  "perfect_path": "/opt/data/projects/Styles/Groove/312-groove-sieve-suite/MIDI/312-groove-sieve-suite-perfect.mid",
+  "humanized_path": "/opt/data/projects/Styles/Groove/312-groove-sieve-suite/MIDI/312-groove-sieve-suite-humanized.mid",
+  "hz_seed": 81068,
+  "hz": {
+    "Lead": {
+      "seed": 8187868,
+      "n_notes": 334,
+      "mean_abs_shift_ticks": 1.934,
+      "max_abs_shift_ticks": 8,
+      "mean_abs_vel_delta": 5.452,
+      "timing_sigma_ticks": 2.64
+    },
+    "Horns": {
+      "seed": 8187869,
+      "n_notes": 132,
+      "mean_abs_shift_ticks": 1.659,
+      "max_abs_shift_ticks": 8,
+      "mean_abs_vel_delta": 6.212,
+      "timing_sigma_ticks": 2.64
+    },
+    "Rhodes": {
+      "seed": 8187870,
+      "n_notes": 160,
+      "mean_abs_shift_ticks": 1.994,
+      "max_abs_shift_ticks": 7,
+      "mean_abs_vel_delta": 4.344,
+      "timing_sigma_ticks": 2.64
+    },
+    "Bass": {
+      "seed": 8187871,
+      "n_notes": 168,
+      "mean_abs_shift_ticks": 7.387,
+      "max_abs_shift_ticks": 18,
+      "mean_abs_vel_delta": 3.714,
+      "timing_sigma_ticks": 4.4
+    },
+    "Counter": {
+      "seed": 8187872,
+      "n_notes": 55,
+      "mean_abs_shift_ticks": 1.727,
+      "max_abs_shift_ticks": 5,
+      "mean_abs_vel_delta": 4.109,
+      "timing_sigma_ticks": 2.64
+    },
+    "Drums": {
+      "seed": 8187873,
+      "n_notes": 520,
+      "mean_abs_shift_ticks": 1.058,
+      "max_abs_shift_ticks": 5,
+      "mean_abs_vel_delta": 3.206,
+      "timing_sigma_ticks": 1.76
+    }
+  },
+  "raw_event_count": 334,
+  "lead_event_count": 334
+}

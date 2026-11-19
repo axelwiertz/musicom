@@ -1,0 +1,41 @@
+{
+  "soundfont": "/opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2",
+  "style": "groove",
+  "target_lufs": -14.0,
+  "phase1": {
+    "lufs": -15.64,
+    "true_peak_db": -1.0,
+    "target_lufs": -14.0,
+    "silence_ratio": 0.3811,
+    "rms_mean": 0.1194,
+    "rms_max": 0.3007,
+    "wav_bytes": 15800364,
+    "ogg_bytes": 700346,
+    "wav": "/opt/data/projects/Styles/Groove/312-groove-sieve-suite/Audio/312-groove-sieve-suite-phase1.wav",
+    "ogg": "/opt/data/projects/Styles/Groove/312-groove-sieve-suite/Audio/312-groove-sieve-suite-phase1.ogg"
+  },
+  "perfect": {
+    "lufs": -14.0,
+    "true_peak_db": -1.0,
+    "target_lufs": -14.0,
+    "silence_ratio": 0.0314,
+    "rms_mean": 0.1438,
+    "rms_max": 0.17,
+    "wav_bytes": 15825964,
+    "ogg_bytes": 681727,
+    "wav": "/opt/data/projects/Styles/Groove/312-groove-sieve-suite/Audio/312-groove-sieve-suite-perfect.wav",
+    "ogg": "/opt/data/projects/Styles/Groove/312-groove-sieve-suite/Audio/312-groove-sieve-suite-perfect.ogg"
+  },
+  "humanized": {
+    "lufs": -14.0,
+    "true_peak_db": -1.0,
+    "target_lufs": -14.0,
+    "silence_ratio": 0.0328,
+    "rms_mean": 0.1446,
+    "rms_max": 0.1766,
+    "wav_bytes": 15825708,
+    "ogg_bytes": 676260,
+    "wav": "/opt/data/projects/Styles/Groove/312-groove-sieve-suite/Audio/312-groove-sieve-suite-humanized.wav",
+    "ogg": "/opt/data/projects/Styles/Groove/312-groove-sieve-suite/Audio/312-groove-sieve-suite-humanized.ogg"
+  }
+}

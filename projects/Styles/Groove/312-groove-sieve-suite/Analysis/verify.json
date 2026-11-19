@@ -1,0 +1,176 @@
+{
+  "phase1": {
+    "tracks": 1,
+    "all_equal_len": true,
+    "len": 76800,
+    "lens": [
+      76800
+    ],
+    "pitched_onsets": 334,
+    "off_grid": 259,
+    "scale_viol": 66,
+    "chord_viol": 226,
+    "per_voice": [
+      {
+        "pitched": 334,
+        "off_grid": 259,
+        "scale_viol": 66,
+        "chord_viol": 226
+      }
+    ],
+    "size_bytes": 2991
+  },
+  "perfect": {
+    "tracks": 6,
+    "all_equal_len": true,
+    "len": 76800,
+    "lens": [
+      76800,
+      76800,
+      76800,
+      76800,
+      76800,
+      76800
+    ],
+    "pitched_onsets": 849,
+    "off_grid": 0,
+    "scale_viol": 0,
+    "chord_viol": 0,
+    "per_voice": [
+      {
+        "pitched": 334,
+        "off_grid": 0,
+        "scale_viol": 0,
+        "chord_viol": 0
+      },
+      {
+        "pitched": 132,
+        "off_grid": 0,
+        "scale_viol": 0,
+        "chord_viol": 0
+      },
+      {
+        "pitched": 160,
+        "off_grid": 0,
+        "scale_viol": 0,
+        "chord_viol": 0
+      },
+      {
+        "pitched": 168,
+        "off_grid": 0,
+        "scale_viol": 0,
+        "chord_viol": 0
+      },
+      {
+        "pitched": 55,
+        "off_grid": 0,
+        "scale_viol": 0,
+        "chord_viol": 0
+      }
+    ],
+    "size_bytes": 11405
+  },
+  "humanized": {
+    "tracks": 6,
+    "all_equal_len": true,
+    "len": 76800,
+    "lens": [
+      76800,
+      76800,
+      76800,
+      76800,
+      76800,
+      76800
+    ],
+    "pitched_onsets": 849,
+    "off_grid": 735,
+    "scale_viol": 0,
+    "chord_viol": 20,
+    "per_voice": [
+      {
+        "pitched": 334,
+        "off_grid": 279,
+        "scale_viol": 0,
+        "chord_viol": 4
+      },
+      {
+        "pitched": 132,
+        "off_grid": 104,
+        "scale_viol": 0,
+        "chord_viol": 7
+      },
+      {
+        "pitched": 160,
+        "off_grid": 142,
+        "scale_viol": 0,
+        "chord_viol": 6
+      },
+      {
+        "pitched": 168,
+        "off_grid": 165,
+        "scale_viol": 0,
+        "chord_viol": 1
+      },
+      {
+        "pitched": 55,
+        "off_grid": 45,
+        "scale_viol": 0,
+        "chord_viol": 2
+      }
+    ],
+    "size_bytes": 11364
+  },
+  "section_midpoint_roots": [
+    [
+      "Intro",
+      "i",
+      7
+    ],
+    [
+      "VerseA",
+      "iv",
+      0
+    ],
+    [
+      "VerseB",
+      "v",
+      2
+    ],
+    [
+      "PreChorus",
+      "VII",
+      5
+    ],
+    [
+      "Chorus",
+      "i",
+      7
+    ],
+    [
+      "Bridge",
+      "VII",
+      5
+    ],
+    [
+      "VerseC",
+      "iv",
+      0
+    ],
+    [
+      "Chorus2",
+      "i",
+      7
+    ],
+    [
+      "Break",
+      "VI",
+      3
+    ],
+    [
+      "Outro",
+      "VII",
+      5
+    ]
+  ],
+  "all_sections_tonic": false
+}

@@ -1,0 +1,50 @@
+{
+  "artifact": "312-groove-sieve-suite-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom two-phase extension (phase=1 raw Xenakis sieve walk, Method 025)",
+  "sources": [
+    "/opt/data/projects/Styles/Groove/274-groove-sieve-rework/MIDI/274-groove-sieve-rework-phase1.mid"
+  ],
+  "parameters": {
+    "bpm": 110,
+    "key": "G natural minor",
+    "phase": 1,
+    "quantized": false,
+    "bars": 40,
+    "style": "groove",
+    "genre": "Groove",
+    "seed": 20261119,
+    "sieve_offsets": [
+      0,
+      8,
+      18,
+      21,
+      29,
+      32,
+      42,
+      50,
+      53
+    ],
+    "sieve_A": {
+      "mod": 8,
+      "res": [
+        0,
+        2,
+        5
+      ]
+    },
+    "sieve_B": {
+      "mod": 7,
+      "res": [
+        0,
+        1,
+        4
+      ]
+    }
+  },
+  "notes": "Raw sieve walk, single voice, off-grid onsets, no harmony, pre-rules.",
+  "sha256": "8ced06824411ed4c86b235d4cd74790140cb015db3368c775532eb10614b309c",
+  "bytes": 2991,
+  "created_utc": "2026-11-19T01:06:11.936724+00:00",
+  "provenance_version": "1.0"
+}

@@ -1,0 +1,107 @@
+{
+  "chosen": "/opt/data/projects/Styles/Groove/274-groove-sieve-rework",
+  "genre": "Groove",
+  "primary_midi": "/opt/data/projects/Styles/Groove/274-groove-sieve-rework/MIDI/274-groove-sieve-rework-perfect.mid",
+  "standard_failures": [],
+  "redesign_required": false,
+  "source_identity": {
+    "genre": "Groove",
+    "style": "groove",
+    "key": "G natural minor",
+    "key_root_pc": 7,
+    "key_pcs": [
+      7,
+      9,
+      10,
+      0,
+      2,
+      3,
+      5
+    ],
+    "bpm": 110,
+    "ticks_per_beat": 480,
+    "beats_per_bar": 4,
+    "bar": 1920,
+    "method": "025 Xenakis Sieve Theory",
+    "sieve": {
+      "A": {
+        "mod": 8,
+        "res": [
+          0,
+          2,
+          5
+        ]
+      },
+      "B": {
+        "mod": 7,
+        "res": [
+          0,
+          1,
+          4
+        ]
+      },
+      "period": 56,
+      "offsets": [
+        0,
+        8,
+        18,
+        21,
+        29,
+        32,
+        42,
+        50,
+        53
+      ]
+    },
+    "voices": [
+      [
+        "Lead",
+        65,
+        0
+      ],
+      [
+        "Horns",
+        61,
+        1
+      ],
+      [
+        "Rhodes",
+        4,
+        2
+      ],
+      [
+        "Bass",
+        33,
+        3
+      ],
+      [
+        "Counter",
+        48,
+        4
+      ],
+      [
+        "Drums",
+        0,
+        9
+      ]
+    ],
+    "source_bars": 32,
+    "source_sections": 8
+  },
+  "audit_detail": {
+    "n_voice_tracks": 6,
+    "track_lengths": [
+      61440,
+      61440,
+      61440,
+      61440,
+      61440,
+      61440
+    ],
+    "pitched_onsets": 652,
+    "off_grid": 0,
+    "phase1_present": true,
+    "provenance_sidecars": 3,
+    "index_html": true
+  }
+}
