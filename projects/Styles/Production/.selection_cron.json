@@ -1,25 +1,23 @@
 {
   "job": "random-style production (SP) layer-aligned",
-  "date": "2026-11-18",
-  "seed": 20261118,
-  "method": "SP-107",
-  "method_module": "sound.effects.bit_crusher",
-  "method_desc": "Bit Crusher / Fidelity Reducer \u2014 linked sample-rate/bit-depth macro, Iron/Worn character voicing, aliasing foldover emphasis (Modbap Fidelity Theory-style)",
-  "source_midi": "/opt/data/repos/musicom/projects/Styles/IndianClassical/212-indian-boids-yaman/MIDI/212-indian-boids-yaman.mid",
-  "source_project": "IndianClassical/212-indian-boids-yaman/MIDI/212-indian-boids-yaman.mid",
-  "registry_size": 97,
+  "date": "2026-11-19",
+  "seed": 20261119,
+  "method": "SP-157",
+  "method_module": "sound.effects.whole_tone_filterbank",
+  "method_desc": "48-Band Whole-Tone Filter Bank \u2014 48 RBJ bandpass bands spaced in whole tones over 8 octaves (40 Hz\u20139.1 kHz), 12/24 dB slopes, per-band resonance, MIDI-playable band gains, per-band ring mod, odd/even panning, FFT band-profile freeze + spectral transfer (AudioThing/Hainbach Seconds-style)",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Metal/247-metal-fourier-spectrum/MIDI/247-metal-fourier-spectrum.mid",
+  "source_project": "Metal/247-metal-fourier-spectrum/MIDI/247-metal-fourier-spectrum.mid",
+  "registry_size": 104,
   "recent_excluded": [
-    "SP-069",
     "SP-075",
     "SP-084",
     "SP-100",
+    "SP-107",
     "SP-115",
     "SP-146",
     "SP-154"
   ],
-  "already_on_source": [
-    "SP-091"
-  ],
+  "already_on_source": [],
   "baseline_excluded": [
     "SP-001"
   ],
@@ -35,6 +33,7 @@
     "SP-035",
     "SP-036",
     "SP-037",
+    "SP-069",
     "SP-070",
     "SP-071",
     "SP-072",
@@ -51,6 +50,7 @@
     "SP-085",
     "SP-086",
     "SP-090",
+    "SP-091",
     "SP-092",
     "SP-094",
     "SP-095",
@@ -64,7 +64,6 @@
     "SP-104",
     "SP-105",
     "SP-106",
-    "SP-107",
     "SP-108",
     "SP-109",
     "SP-110",
@@ -111,10 +110,17 @@
     "SP-157",
     "SP-158",
     "SP-159",
-    "SP-160"
+    "SP-160",
+    "SP-161",
+    "SP-162",
+    "SP-163",
+    "SP-164",
+    "SP-165",
+    "SP-166",
+    "SP-167"
   ],
-  "n_candidates": 466,
-  "n_well_formed": 361,
-  "n_meaningful": 360,
+  "n_candidates": 470,
+  "n_well_formed": 365,
+  "n_meaningful": 364,
   "rejected_degenerate": []
 }

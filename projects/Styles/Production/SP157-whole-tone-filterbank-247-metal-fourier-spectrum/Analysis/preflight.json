@@ -1,0 +1,46 @@
+{
+  "job": "random-style production (SP) layer-aligned",
+  "date": "2026-11-19",
+  "seed": 20261119,
+  "source": "Metal/247-metal-fourier-spectrum",
+  "key": "E minor",
+  "bpm": 140,
+  "tpb": 480,
+  "bar_ticks": 1920,
+  "grid": 120,
+  "bars": 32,
+  "total_ticks": 61440,
+  "section_pools": {
+    "Head1": [0, 2, 4, 6, 7, 9, 11],
+    "Solo1": [0, 3, 4, 6, 7, 9, 11],
+    "Solo2": [1, 2, 4, 5, 7, 8, 10, 11],
+    "Head2": [0, 2, 4, 6, 7, 9, 11]
+  },
+  "voices": [
+    {"name": "Lead", "program": 29, "channel": 0, "notes": 448},
+    {"name": "Rhythm", "program": 29, "channel": 1, "notes": 1152},
+    {"name": "Bass", "program": 33, "channel": 2, "notes": 384},
+    {"name": "Drums", "program": 0, "channel": 9, "notes": 676}
+  ],
+  "audit_before": {
+    "note": "source .mid is the composition job's HUMANIZED export (always-on micro-timing)",
+    "grid_off": 1826,
+    "out_scale": 0,
+    "out_chord": 0,
+    "zero_drift": true,
+    "verdict": "FAIL rule 1 (grid sync) - humanized onsets off-grid; rules 2+3 pass"
+  },
+  "rework": {
+    "action": "de-humanize: snap every note_on onset to nearest 16th grid (round(start/120)*120), preserve per-note duration, clamp to 61440 ticks, keep pitch-0 terminal landmark",
+    "note": "humanization shifted onsets <=20 ticks from grid positions, so round/120 recovers the exact pre-humanization grid"
+  },
+  "audit_after": {
+    "grid_off": 0,
+    "out_scale": 0,
+    "out_chord": 0,
+    "zero_drift": true,
+    "track_ends": [61440],
+    "total_notes": 2660,
+    "verdict": "PASS all three rules - clean grid source for SP-157"
+  }
+}
