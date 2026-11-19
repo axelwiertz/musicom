@@ -1,0 +1,55 @@
+
+The strike note of bells – The Sound of Bells
+ Skip to content 
+ Main Navigation 
+ The Sound of Bells 
+The Sound of Bells
+Wavanal
+PhD Thesis
+Contact
+Current Research
+Links
+Building a bell sound
+Classic papers on bell tuning
+Bell recordings collection
+Stretch tuning
+Gillett and Johnston
+Taylors of Loughborough
+William Dobson
+the van Aerschodts
+Weights, sizes and frequencies
+Steel, tubular, hemispherical and ceramic bells
+Recording and analysis
+Individual sets of bells
+How bells make their sound
+PhD Thesis
+The strike note of bells
+Posted on 
+4th January 2022
+ (4th January 2022) 
+ by
+Bill Hibbert
+This article was first published in ‘The Ringing World’ of June 20, 2003, page 586.
+What determines the pitch of a bell – the note we assign it – has been one of the continuing puzzles of campanology. It was 
+Lord Rayleigh
+ in 1890 who first established scientifically that the pitch of a bell was about an octave below its nominal partial, and that the pitch need not correspond to any actual mode of vibration of the bell. No explanation for this was attempted, and bell-founders have been content to tune the nominals of a peal of bells and assume that this would ensure they sounded in tune with one another. However, recent research has shown that a bell’s pitch is determined by a set of partials, not just the nominal, and that tuning the nominal of a bell to the other nominals in a peal can result in it sounding noticeably out of tune!
+In this article I give the theoretical explanation of this remarkable effect, followed by two real examples.
+The Theory
+It is the ear, not any instrument, that ultimately determines what we hear when a bell is struck. The ear does not respond equally to sounds of different frequency. The plot shows the partials of a bell, the tenor at Ranmore in Surrey, with a vertical scale of actual loudness in the ear. (The scale is in phons, a logarithmic scale, weighted according to the Fletcher-Munson equal loudness curves.) The low five partials (hum, prime, tierce, quint and nominal) are marked. It is not obvious why the nominal should play such an important part in setting the pitch of the bell.
+What is very noticeable is the regular pattern of partials – starting with the nominal and including those labelled with an ‘S’ – roughly equally spaced and almost always the loudest in a particular frequency range. This regular pattern is seen in every bell I have analysed with an identifiable pitch. These partials are those most stimulated by the impact of the clapper on the soundbow and for simplicity I call them the strike partials below.
+Regularly spaced partials like this in a sound generate an effect in the ear called virtual pitch or the missing fundamental, giving rise to a very strong pitch sensation at a frequency roughly equal to the spacing between the partials. The origin of this effect is not certain, other than that it is generated somewhere within the ear, auditory nerve or brain, but its existence has been researched in many different sounds and is a matter of scientific fact. That the virtual pitch sensation is very strong, and can dominate any sensation of the actual partials in the sound, can be intuitively understood because it is the result of so many strong partials. In a bell of normal shape, the spacing of the lower strike partials gives a virtual pitch of roughly the half nominal, just as we experience in practice.
+This explanation of the pitch of a bell was first proposed in the 1960s, and investigated and demonstrated by Eggen and Houtsma in Holland, and Terhardt in Germany, in the 1980s. As further confirmation of the effect, bells with a poor tone or ill-defined pitch typically do not have the clearly defined pattern of strike partials visible in the example I have given. Although it is known qualitatively that a bell’s pitch goes up when the strike partials get further apart, and goes down when they get closer, the exact relationship between partial spacing and virtual pitch has not yet been established.
+The Effect in Practice
+Now for some practical examples, which show why this effect needs to be taken into account when tuning bells. The spacing between the strike partials depends a lot on the thickness of the bell, i.e. its weight relative to the note we hear. In ringing peals, it is traditional to cast the trebles to a heavier scale than the tenors to make then easier to ring together. I was first alerted to the effects I describe when I began to notice that the trebles of peals of eight could sound flat, even though measurements of their nominals showed them to be exactly in tune. In particular, I noticed when ringing at Southwold in Suffolk on a ringing trip a couple of years ago that the trebles sounded quite flat to me even though they were retuned about ten years before.
+I recently had the opportunity to go back to Southwold and take a confirmatory set of recordings, and I am very grateful to the ringers there for allowing me to use them as a demonstration. The back six bells at Southwold, though they are from a range of founders dating from the 15th to the 19th centuries, all have strike partials of comparable and wide spacing. The two trebles, both cast by Moore, Holmes and Mackenzie in 1881, have strike partials unusually close together, which by the theory should flatten the pitch.
+I carried out experiments, sharpening the trebles by adjusting the recordings, and discovered that for the bells to sound in tune I had to sharpen the treble by a huge 35 cents or over 1/3 of a semitone, and the second by 20 cents or 1/5 of a semitone. These results have since been confirmed by an acquaintance, a carillon player, with a good musical ear. There is no problem with the tuning of the bells; they were tuned by Whitechapel to their usual exact standards and have nominals correct to within a cent or so.
+As another example, I have recently investigated the trebles of the twelve at Kidderminster, two true-harmonic Gillett and Johnston bells of 1935. These bells are soon to be replaced with a new peal, and are to be re-deployed by the Keltek Trust. As is usual in the trebles of twelve, these bells are thick and heavy for their note, and have correspondingly flat and closely-spaced strike partials. As part of a discussion on a potential new home for these bells, I put recordings of them together with six old-style bells to form an eight. The six tenors had wider spaced strike partials than the Kidderminster bells, though not as wide as the back six at Southwold. Even so, I had to put the treble nominal sharp by 20 or 25 cents to get it to sound in tune.
+This effect of a lowered pitch in bells with a thicker profile provides an elegant and convincing explanation of the use of stretch tuning. In many old-style rings of eight or more, and in higher-numbered rings produced both by Whitechapel and Taylors in the mid-20th century, the trebles were tuned sharp. We can now understand that this would be necessary, in a peal tuned by ear rather than with forks, to make the trebles sound in tune. The effect does not just apply to trebles, it is an issue for any bell in a ring with upper partials spaced differently than the rest.
+This flattening of the strike note is best demonstrated with bells rung together in changes. When bells are rung singly some listeners, especially professional musicians, hear individual partials rather than virtual pitch, and would describe trebles tuned with stretch to be sharp. As with everything in bell tuning, there is no single way to please everyone.
+Though the virtual pitch effect is well proven scientifically, there is more research to do – in particular, to establish the relationship in bells between the strike partial spacing and virtual pitch. However, the effect is so remarkable and unexpected that I thought it worth writing this preliminary report on my investigations.
+Posted in 
+How bells make their sound
+Post navigation
+ The various ways bells are used
+Coventry Cathedral – old ten 
+ The Sound of Bells 2022.

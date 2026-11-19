@@ -1,0 +1,368 @@
+
+Building a bell sound – The Sound of Bells
+ Skip to content 
+ Main Navigation 
+ The Sound of Bells 
+The Sound of Bells
+Wavanal
+PhD Thesis
+Contact
+Current Research
+Links
+Building a bell sound
+Classic papers on bell tuning
+Bell recordings collection
+Stretch tuning
+Gillett and Johnston
+Taylors of Loughborough
+William Dobson
+the van Aerschodts
+Weights, sizes and frequencies
+Steel, tubular, hemispherical and ceramic bells
+Recording and analysis
+Individual sets of bells
+How bells make their sound
+PhD Thesis
+Building a bell sound
+Posted on 
+30th December 2021
+ (2nd January 2022) 
+ by
+Bill Hibbert
+The science and history of bell sounds
+This is the text of a talk given to the Central Council of Church Bellringers on September 8th, 2019.
+Introduction
+This talk is a journey through 1000 years of bellfounding, with many examples of bell sounds that show how bells have changed over the millennium. I will demonstrate how the various partial frequencies contribute to the sound of a bell, building a bell sound partial by partial. I will explain some of the tuning issues that make for good and bad sounding bells, and demonstrate what causes bells tuned differently to sound the way they do. I’ll be explaining terms such as old-style tuning, true-harmonic or Simpson tuning, demonstrating bells that are very thin or thick, and showing what makes steel bells, at least in the UK, sound so peculiar.
+Along the way I’ll touch on the history of bellfounding and some of the key players: medieval founders, the Rudhalls and Mears families who dominated UK bellfounding in the 18th and 19th centuries, and the contributions of the Hemony brothers, Baron Grimthorpe, Canon Simpson, Taylors, Whitechapel, Cyril Johnston and others.
+I will include practical advice on what if anything can be done to improve bells if you don’t like their sound. Finally, I will try an experiment on you all about the sound of big bells, a subject I am currently investigating.
+This is a lot to cover in 50 minutes and I am not going to talk much if at all about how bells are tuned together as a ring, or about carillon bells, nor about west-country bellfounders – interesting subjects but there won’t be time to do them justice.
+I plan to leave some time for questions at the end, but the text of the talk and all the example sounds are available on my website and I am happy, as ever, to carry on discussions by email after today.
+In preparing this talk I have made extensive use of my collection of over 7,000 bell recordings. I also owe thanks to many people who over the years have provided information, insight, research and recordings: John Baldwin, Gideon Bodden, Will Bosworth, Nick Bowden, Chris Dalton, Peter Dyson, George Dawson, Matthew Higby, Andrew Higson, Alan Hughes, Steve Ivin, Tim Jackson, Dave Kelly, Ben Kipling, Christopher Lawton, André Lehr, David Marshall, Bob Perrin, Chris Pickford, Nigel Taylor, Ernst Terhardt, the members of the bell historians group, the Easter ringing holiday, people who post their bells on Youtube, and many many tower captains.
+Building a bell sound
+This talk is about the science as well as the history of bellfounding, but I am going to concentrate primarily on history and sounds, with just enough science to provide some context.
+When Clyde Whitaker originally asked me to give this talk back in March, he suggested that I show how a bell sound is built up from the individual frequencies. This proved to be an inspired idea, and many of the sounds I will demonstrate today have been created by digitally altering a set of real recordings. The advantage of basing demonstrations on a single set of recordings is that differences due to clappering, tower acoustics and microphone position are eliminated.
+I have based the work on recordings of All Saints, Glossop, a 1923 Gillett & Johnston eight.
+I took the recordings in April 2019, with the help of Alan Burlison and Tracy Cowburn.
+Here is the sound of all eight bells in changes.
+The microphone was placed above the bells and as a result the sound is bright – which makes it easier to hear the various effects I am going to demonstrate. In particular I am using the fourth bell as an example, because it is a nice sounding bell of middling weight (6cwt).
+Glossop 4th
+Building a bell sound – some technical terms
+Here are a few technical terms which will be useful.
+Partial or partial frequency – any one of the dozens or hundreds of individual frequencies in the sound of a bell. Each one has different vibrational patterns around the rim of the bell and up ots height
+Cent – 1/100th of a semitone, a good way to express musical intervals as a number. There are 12 semitones in an octave (C, C#, D, D# etc.) The twelve semitones mean that there are 1200 cents in an octave or 2400 cents in two octaves
+The strike pitch or strike note – the note we hear when a bell rings. It is an effect generated inside the ear, aural nerve or brain of the listener and may not correspond with any of the frequencies actually present in the sound. It is normally approximately an octave below the nominal partial.
+Low partials (sometimes called the Simpson partials) – the five partials with the lowest frequency: hum, prime, tierce, quint and nominal
+Rim partials – the set of prominent, regularly-spaced partials from the nominal up, generated by the rim or soundbow of the bell/
+Building a bell sound – the frequencies in a bell
+Here is the sound spectrum of the 4th bell at Glossop:
+Bells have many frequencies in their sound – one that I studied as part of my PhD had 135 different frequencies – but many of them are not very important! Here are the low five partials hum, prime, tierce, quint and nominal:
+And here are the rim partials:
+To be able to display a sound spectrum of a bell in a few seconds using any one of a number of free software packages, and to see the relative importance of each partials, is a truly remarkable thing. Bell founders of the past would have given their eye teeth to see such a thing!
+Building a bell sound – the lowest five partials
+The bottom five partials in the sound of a bell have well-established names. Click on the name of the partial to hear them in Glossop 4th, each partial has been made equally loud to make them easier to hear:
+Partial name
+Frequency
+Relationship to strike pitch
+Interval from nominal
+Hum
+270.0
+Octave below, lowest partial in the bell
+2200 to 2400 cents down
+Prime, Fundamental or 2nd partial
+540.0
+Close to the strike pitch
+1400 to 1200 cents down
+Tierce
+649.5
+Minor third above
+850 to 900 cents down
+Quint
+805.0
+Fifth above, not a very important partial
+300 to 500 cents down
+Nominal
+1078.5
+Octave above
+The nominal is a very important partial indeed, because it determines the note we hear when a bell strikes. Here is the 
+strike pitch of Glossop 4th
+, an octave below the nominal.
+Building a bell sound – putting it all together
+It is interesting to build up the sound of a bell partial by partial to see how each contributes to the sound. All the sounds specially generated for this talk were produced by digitally modifying the sounds using Audacity, a free sound editor. I used my program Wavanal to identify partial frequencies and sharpen / flatten sounds, and another program of mine, Rounds, to create the sound of bells in changes.
+Here’s the 
+hum alone
+Here’s the 
+hum and prime
+Let’s add 
+the tierce
+:
+Adding 
+the quint
+ (not usually an important partial)
+And finally 
+the nominal
+It still doesn’t sound much like a bell, and it doesn’t have a strike note! Let’s add 
+the rim partials
+Finally the strike note appears, and it sounds like a bell.
+To demonstrate how the strike note doesn’t rely on anything physical in the sound, here is Glossop 4th 
+with the prime removed
+, so there is no energy at all in the sound at the frequency of the note we hear. Here is the 
+strike pitch
+, just to confirm the note we are listening for.
+Tuning styles and discrepancies
+Having got the theory out of the way, let’s listen to some bells with different tuning styles. In Glossop 4th, the bell we have been listening to, the hum, prime and nominal are in exact octaves – a true-harmonic or Simpson tuned bell.
+In an old-style bell, common in the 19th century and earlier, the hum is sharp by up to a whole tone, and the prime is flat, again by up to a whole tone.
+Whether a bell is thin or thick affects the rim partials and this also has a considerable effect on the sound of a bell.
+Some bells have primes that are sharp rather than flat, which gives a distinctly odd sound.
+The best way to understand these effects is to hear them!
+Tuning styles and discrepancies – old style bells
+I begin with the 
+original sound of the fourth at Glossop
+, which is a true-harmonic bell, meaning that its hum, prime and nominal are close to perfect octaves.
+Here is the 
+sound of all eight Glossop bells
+ as a true-harmonic peal.
+In old style bells the hum is sharp and the prime is flat. Here is the 
+sound of Glossop 4th
+ modified in this way.
+And here is the 
+sound of all eight bells
+ as an old-style peal.
+The effect of old-style tuning is more prominent in smaller bells, because the ear pefers to create a strike pitch from a frequency in the range 500Hz to 1500Hz. In small bells, the nominal is near the top of or above this preferred band, and the ear focusses on the hum and prime as well as the rim partials.
+To demonstrate this, I took the front five Glossop bells and used them to create the 
+sound of a true-harmonic six
+ with a tenor of 7 3/4 cwt.
+And here is the 
+sound of the same six bells
+ as an old-style six.
+I hope you can hear that the difference in the tuning styles is much more pronounced. Some people would describe the old-style bells as out of tune, but I have a lot of affection for the sound – it makes me think of ringing outings and sunlight country churchyards! And as I shall demonstrate later, some true-harmonic bells can very poor in sound.
+Finally, here is the 
+sound of a bell with a sharp hum and prime
+.
+Tuning styles and discrepancies – thick and thin bells
+The effect of the thickness and relative weight of bells is to affect the spacing of the rim partials. Here is the sound spectrum of Glossop 4th again:
+If this bell were thicker, especially in the soundbow, the rim partials would be compressed together:
+If if were thinner, they would be stretched apart:
+One of the discoveries I made while doing my PhD research was that the rim partials can’t be controlled independently by the shape of the bell shape or the way it is tuned: they change proportionately together. Stretching or shrinking the rim partials also changes the strike pitch, by up to 1/4 or 1/3 of a semitone.
+To demonstrate the effect of these different shapes, here are simulations based on Glossop 4th, all with the same hum, prime, tierce and nominal – these are all true-harmonic bells with the same low five partials:
+with normally spaced rim partials
+as it if were much thicker
+as it if were much thinner
+.
+The dramatic effect of changes in thickness on the sound of a bell has not been appreciated until recently.
+If a bell is very thin with very widely spaced partials the ear can struggle to create a strike note, and sometimes very thin bells appear to have two notes, one a vestigial strike note based on the rim partials, and the other based on the prime. Thin bells can happen either because of the original casting, or because of excessive tuning.
+Tuning styles and discrepancies – tuning of bells
+When bells are tuned, metal is removed from the inside (or sometimes the outside) with a vertical lathe. It helps to think of this process as correcting the bell shape towards some ideal. Of course you can’t stick metal back on, and if a bell is the wrong shape, e.g. too tall, too short, or thin in the wrong places, there is little the tuner can do to improve it. Tuning of bells is done with two aims:
+to make the partials in an individual bell more in tune with each other
+to adjust the nominals / strike notes of a peal of bells to a musical scale.
+These days, bells are tuned on a tuning machine, a vertical lathe in which the bell rotates and metal is removed from the inside, or sometimes the outside:
+The bell can be machined all the way into the shoulder, and each individual partial can to some extent be controlled.
+In former times, bells were tuned with a hammer and chisel or file, and generally only the strike note could be controlled:
+This bell has been skirted to raise its strike note. Its rim has been cut away with a hammer and chisel, or possibly an axe!
+Thanks are due to Taylor’s bellfoundry for these pictures
+Tuning styles and disrepancies – what can be fixed?
+Bringing the nominals / strike notes of a peal of bells is easy if the discrepancy is not too big. Tuning (unless it is very heavy) lowers the strike note, so it is necessary to tune down to the flattest bell in the ring. If one of the bells in the ring can’t be tuned, perhaps because it is listed, and it is sharper than the others, then a compromise is needed. Bells can be sharpened with heavy tuning but this brings risks, as explained below.
+In an old-style bell, improving the relationship of the lower partials is possible, but even radical tuning (removing 10-15% of the weight of the bell) won’t necessarily make a bell true-harmonic if its shape is wrong. As an example, here is the result of tuning done by Whitechapel in 2002 on the peal of eight at Lyminge, Kent. The particular bell in the recording is the 5th, a Mears bell of 1785:
+Hum cents
+Prime cents
+Before tuning
+-2203
+-1290
+All eight
+After tuning
+-2324
+-1273
+All eight
+Considerable improvement in the hum has been possible, this partial has gone from two semitones sharp to 3/4 of a semitone sharp. The prime still remains 3/4 of a semitone flat. About 10% of the weight of the bell was removed.
+The risk is that too much metal is taken out, making the bell too thin. This can spoil the tone and also affect the strike note. An example is the 4th bell at Bagshot in Surrey, a Warner bell of 1883 that was tuned by Gillett and Johnston in 1914. It is illuminating to compare its sound with a untuned Warner bell. For this I have used the 7th bell at Milton Abbey in Dorset (Warner 1861) adjusted to have the same nominal as the Bagshot bell:
+Bagshot 4th
+Milton Abbey 7th
+Not only does the Bagshot bell sound poor, but its strike note is significantly sharper because the tuned bell is so thin. Another bell which has been heavily tuned and is thin and poor is the 4th at St Edward, Cambridge. The second at Little Somerford in Wiltshire, a bell by John Tosier of 1725, has a similar tone perhaps because it has been skirted.
+Unlike bells with flat primes, bells with sharp primes can usually be fixed on the tuning machine by removing metal high in the shoulder.
+I am now going to talk about bell founding and bell tuning history, to put these different tuning styles in context.
+1000 years of bells – changes in shape
+In the first centuries of the last millennium, bell shapes evolved quite dramatically.
+Lullus bell, Bad Hersfeld, Germany
+Weight: ~1 ton
+Date: 1038
+recording
+Leighton Buzzard
+Weight 1 1/2 cwt
+Diameter: 18.9 inches
+Date: 13th century
+recording
+Myndtown, Shropshire
+Diameter: 14.5 inches
+Date: 12th century
+recording
+Moresby, Cumbria
+Weight: 3/4 cwt
+Diameter: 17″
+Date: ~1420
+recording
+West Tytherley, Hampshire
+Weight: 2 1/4 cwt
+Diameter 23.23″
+Date: ~1260
+Said to be the oldest bell still rung full circle
+recording
+In the first four cases the partials don’t fall into the regular pattern of modern bells. The frequencies corresponding to particular patterns of vibration don’t have the expected frequency relationships, and don’t make the usual contribution to the sound of the bell. These bells have a confused sound and an unclear strike note.
+As the bell shape developed to one we recognise, the thicker soundbow meant that the rim partials came into alignment and created a strike note, even if the other partials in the bell were still far from the frequencies in a modern bell. It’s impossible to know at this distance of time what motivated the change in shape but one can imagine a process of trial and error eventually producing a more prominent strike note and a more tuneful bell.
+1000 years of bells – from the 13th to the 19th century
+Although the thick soundbow of a bell of normal shape creates a dominant strike note, bellfounders in this period had little control of, or perhaps even knowledge of, the individual partial frequencies. Bells of this period typically have flat primes and sharp hums, though some approximate to true-harmonic or have sharp primes or flat hums. Each bellfounder would have his own shape for bells, determined by the strickles or layout rules that were passed across the generations, or from a bellfounder to his apprentices. Bellfounders generally left little written evidence of their practices, either because they were practicioners, not writers, or didn’t want to reveal their secrets. Bells were tuned, if at all, with hammer and chisel, file or tuning hammer and this tuning was restricted to correcting the nominals or strike pitches.
+Several bell historians including Fred Sharpe and George Elphick have speculated that founders cast sharp hums and flat primes through choice, because they preferred the sound, and the term ‘old-style’ has been used extensively to describe such bells. On the other hand, Canon Simpson believed that older founders were trying to achieve true-harmonic tuning without the knowledge to do it. It is interesting to look at how the tuning of prime and hum has changed over the last 800 years:
+This plot shows the average deviation from true-harmonic in cents or 100ths of a semitone, averaged in 50 year blocks, for UK bells only. The first thing to say about this plot is that the averaging covers up a lot of bellfounding history, with different practices in different bellfoundries and different parts of the country, and variations in individual bells. It is also true that an unknown proportion of these have been tuned, and only the better-sounding bells will have survived recasting. However, as explained earlier without radical tuning (which is quite rare) it is not possible to make an old-style bell true-harmonic. What stands out is that from around 1600 onwards, primes start to flatten and hums to sharpen. Is this effect linked to changes in the shape of bells brought on by full-circle ringing? Or is it because of the dominance from the 1700s on of two founders, the Rudhalls and Mears, with particular bell shapes that favour sharp hums and flat primes? Certainly from 1600 to the end of the 19th century, bells got steadily less true-harmonic.
+The dramatic change to true-harmonic tuning around 1900 is clear, but before looking at what caused this change, I should mention two founders who solved or nearly solved the true-harmonic puzzle. In the Low Countries in the 17th century, the brothers Pieter and François Hemony, assisted by the blind musician Jacob van Eyck, discovered both a true-harmonic bell shape and also how to tune the individual partials. They had a tuning machine and tuned using chime bars – this was before the invention of the tuning fork. They produced considerable numbers of accurately tuned carillon bells, but the knowledge of how to do this died with them.
+In the UK, in the early part of the 19th century, William Dobson of Downham Market also discovered a true-harmonic bell shape. He didn’t have a tuning machine, and didn’t tune individual partials, but he produced bells closer to true-harmonic than any founder in the UK or abroad from the Hemonys in the 1650s to Taylors in 1895. Example Dobson peals are St John Peterborough of 1808, Ashbourne of 1815, Poole of 1821 and Wisbech of 1823. Unfortuately his knowledge was lost when he sold his business to Mears and moved to London to work in a lawyer’s office.
+The 19th century – Mears and their competitors
+In the late 18th and early to mid 19th century, the Mears family became proprietors of the long established bellfoundry in Whitechapel. William Mears, the first member of the family to be a bellfounder, cast his first bells in 1777. Elphick says about Thomas Mears junior (William’s grandson) “He had almost the monopoly of bellfounding as indicated by the enormous number of bells he cast. As the business expanded he bought up the smaller foundries. In 1825 he acquired the Aldbourne foundry in Wiltshire, then under James Wells. In the same year he took over the foundry at Hertford owned by John Briant. In 1830 Thomas acquired the great Gloucester foundry of the Rudhalls. Finally in 1833 he took over the foundry of William Dobson of Downham Market, Norfolk”.
+Although not an acquisition and in an earlier generation, the Knight foundry of Reading moved to London in the early 18th century, was run latterly by Robert Catlin and Thomas Swain, and closed in 1781, just as the expansion of the Whitechapel business began.
+Mears bells of this period are old-style, and many of their peals are tonally poor, for example St Luke’s Chelsea of 1824, St Barnabas Pimlico of 1849 and the old peal at Taunton with dates from 1816 to 1922. To compare the tonal quality of bells from Mears and the foundries they replaced, I took the average deviation from true-harmonic of the primes and hums for bells from these foundries. The results, in cents or 1/100ths of a semitone, are as follows:
+Founder
+No. of bells
+Earliest date
+Latest date
+Average Hum
+Average Prime
+Hum Std dev
+Prime Std dev
+Dobson
+63
+1808
+1828
+11.0
+-33.8
+40.4
+63.3
+Briant
+41
+1794
+1825
+60.7
+-153.7
+51.0
+95.5
+Knight / Catlin
+89
+1575
+1748
+62.2
+-37.1
+58.6
+74.9
+Wells
+19
+1770
+1826
+93.8
+-52.6
+56.9
+83.9
+Rudhall
+324
+1685
+1835
+98.5
+-73.3
+62.0
+88.7
+Mears < 1851
+290
+1783
+1850
+130.0
+-127.9
+59.4
+86.2
+Hemony
+61
+1651
+1668
+-0.4
+0.4
+4.3
+6.4
+Taylor > 1895
+1277
+1896
+2018
+0.6
+-2.0
+10.1
+11.3
+Mears > 1926
+498
+1927
+2012
+-1.5
+-1.1
+8.9
+6.5
+The founders in the top part of the table are listed in order of the discrepancies of the hums from true-harmonic. Dobson is clearly the best for both hums and primes. Briant is next best for hums but his primes are very flat (and he also didn’t always tune his nominals well). The average deviations from true-harmonic for all the founders taken over by Mears are very much better than Mears, apart from Briant’s primes. The clear conclusion from these figures is that although Mears were commercially very successful, the foundries they acquired and closed were all better at producing good sounding bells than they were.
+The standard deviations show how well each founder was able to control the partials – through bell shape, for the founders in the upper part of the table, and by bell shape and tuning for those in the lower part. 67% of Dobson’s bells had hums within 39 cents of the average. For the Hemony bells, 67% have hums within 4 cents of the average.
+In the lower part of the table the quality of bells from Taylors and Whitechapel after they adopted true-harmonic tuning is clear. The quality of surviving Hemony bells is remarkable.
+The 19th century – Taylors and Baron Grimthorpe
+Taylors had been casting bells in Oxford, Buckland Brewer and Loughbourough since the late 1700s. In 1848, the first contact occurred with Edmund Beckett, later Baron Grimthorpe, the clock designer and architect famous for designing the clock and bells for the Palace of Westminster and restoring St Albans Cathedral.
+Grimthorpe provided Taylors with a steady stream of work for many years, but he had strong views on bell design, advocating bells which were very thick and heavy for their note. Unfortunately Grimthorpe was wrong about bell design, and Taylor bells from this period, such as Dunham Massey (1854), Mirfield (1869) of which the trebles have now been replaced, the old 12 at Worcester Cathedral (1870) and the old 10 at Manchester Town Hall (1877) all sounded poor. Many of Grimthorpe’s heavy peals have been recast, with no tears shed at their passing. It is said that Grimthorpe specified the bells for St Pauls Cathedral as 3 tons in D-flat, but Taylors cast them in B-flat instead, claiming to have mistaken the instruction.
+As an example, here is the 
+sound of the original bells at Mirfield
+.
+And here is the 
+sound after the front six were replaced and the back four tuned
+ by Taylors in 2016.
+The 19th century – Naylor Vickers and steel bells
+Naylor Vickers were a firm of Sheffield steelmakers who cast bells from the late 1850s to the early 1880s. Casting steel is a specialist skill and Naylor Vickers used a patent process devised by Ewald Riepe, who the Naylor brothers met while undergoing technical training in Germany. The tonal quality of Naylor Vickers steel bells was disliked almost from the start – Alfred Cocks says in his Church Bells of Buckinghamshire published 1894 “Steel Bells are in my humble opinion an abomination which ought to be prohibited by Act of Parliament.”
+The problem with Naylor Vickers bells is that their shape is quite wrong. They are very thin, so they have widely spaced rim partials, and very sharp hums – up to two whole tones sharp of true-harmonic. Naylor Vickers also didn’t tune their nominals so that a peal of Naylor Vickers bells can sound wildly out of tune.
+Here is the sound of 
+a steel bell
+ created by making these changes to Glossop 4th.
+Here is the 
+sound of the bells at Chalford, Gloucestershire
+, a Naylor Vickers peal of 1857-1859.
+Some people suggest that the excessive thinness of Naylor Vickers steel bells is as a result of rust. A couple of years ago I investigated this by looking at a set of recordings of the bells once at Bassaleg, now in the Millennium Gallery in Sheffield.
+The Bassaleg recordings ranged in date between 1993 and 2017 (15% of the life of the bells, which were installed in 1866). Despite the bells having been shotblasted and then allowed to rust again, their partials had changed very little over the period. So the problem is the original shape, even though steel bells do rust badly in the wrong conditions.
+A German company Bochumer Verein also began casting steel bells around the same time that Naylor Vickers began production in the UK, and also used Riepe’s patent. Over 130 years they cast tens of thousands of steel bells. Their 19th century bells were often as bad as Naylor Vickers but after the second war, they suddenly discovered true-harmonic shapes and tuning and for around 30 years produced true-harmonic steel bells that can be a delight to the ear. Here is the 
+sound of the bells at St Petrikirche, Dortmund
+, a Bochmer Verein true-harmonic peal of 1963.
+Canon Simpson, Taylors and the true-harmonic revolution
+In 1895 and 1896, Canon Arthur Simpson, rector of Fittleworth in Sussex, published two papers ‘On Bell Tones’ in which he explained that very many English and foreign bells had sharp hums and flat primes, i.e. were old style, and in his view much the worse for it. In his second paper he makes specific recommendations on how bells could be designed and tuned to bring their hum, prime and nominal into octaves. In his papers he acknowledges the work of Lord Rayleigh who conducted experiments on bells from Taylors and Mears bell in 1890.
+Here is a picture of the Old Rectory, Fittleworth, and in the middle is what we might say is the most important chimney in the history of bellfounding.
+In his second paper Simpson says: “Sitting in my dining-room, with outer and inner doors shut, I was struck by the singularly sweet sound of our six little Fittleworth bells as heard down the chimney. On opening the doors, so as to hear them directly, I observed with surprise that the scale was different; and I finally discovered that what I had heard down the chimney were the hum-notes, which alone found their way, to me by this devious course”.
+The front four bells at Fittleworth are Mears (1880s and 1826) with typically sharp hums and flat primes. However the tenor, a Wokingham bell of around 1440, has an octave hum and near octave prime. It has been skirted, probably by Mears, to raise its strike note, which has spoilt its tone somewhat. Canon Simpson did tuning experiments on the Fittleworth bells, and probably also at his previous parish in Bexhill. Here is a picture of the file marks on the 5th at Fittleworth which must be part of his experiments:
+Simpson first took his findings to Whitechapel, and was rebuffed. Alfred Lawson, who at the time was running the foundry, said “Well Sir, you don’t expect the British general public to walk around listening to bells with a lot of instruments hanging round their necks!”
+Simpson wrote to Taylors in 1894 to explain his ideas, only to discover that Taylors were already experimenting with bell design and tuning along the same lines. The heavy tens at Newcastle Cathedral and Imperial College, both of 1892, already show considerable improvement over the Grimthorpe designs. Around the time of Simpson’s first visit they purchased their first tuning forks and tuning machine. Taylors went on to very quickly solve the true-harmonic puzzle and by 1896, Taylors were producing true-harmonic bells. The relative contribution of Simpson and Taylors may well never be known, but the bells at Merthyr Tydfil are an interesting case study. They were cast in 1893 but not shipped out because the church wasn’t ready. In 1896 the treble was recast and all the bells were retuned before dispatch. The hums in all the bells are exact double octaves but the primes are still flat, apart from the treble which is an exact octave. So by 1893 they already had a shape that was moving towards true-harmonic.
+Into the 20th century
+From 1896 onwards, Taylors produced a succession of classic peals using their new designs and tuning techniques: Heavitree (1897), Newton-le-Willows (1901), Redcliffe (1903), Selby (1908), Chagford (1914), Inveraray (1920), Skipton (1921) and so on. In the early 1920s they changed their bell designs to allow the exact tuning required by their work in the carillon market. They continued to produce classic peals with the new designs but some people will claim to hear a difference from the early true-harmonic peals prior to the early 20s. As already mentioned, in peals of ten and twelve, the heavy, thick trebles can sound flat because the thickness depresses the strike note. From the 1950s to the 1970s, Paul Taylor tuned trebles with sharp nominals to compensate for this. For example, the trebles at Tewkesbury are almost 40 cents or 4/10 of a semitone sharp.
+The firm of Gillett and Bland started as clockmakers in the 19th century and had been casting bells since the 1870s. Arthur Johnston bought into the partnership in the 1880s. His son Cyril Johnston joined the company in 1902 and soon began experiments in true-harmonic tuning. It is said that the first true-harmonic Gillett and Johnston bells are the chime at Elstree of 1907.
+Cyril Johnston tuned bells very thin in the early days and as a result some of his early bells cracked in use. The 1911 eight at Heywood was replaced free-of-charge in 1921 after the tenor cracked, and the 1921 fifth at Banstead was replaced in 1925 for the same reason. Cyril Johnston tuned the heavy Warner six at Bagshot in 1914 and left them true-harmonic but very thin indeed, which explains their unique tone.
+Gillett & Johnston also entered the carillon market with great success, and cast many well regarded peals: Halifax, Croydon, Egham, Birmingham Cathedral, Moretonhampstead, and of course Glossop! Cyril Johnston was also involved in the famous court case about Coventry bells in 1926 after which the Pack & Chapman 10 of 1774 was recast.
+Warners had been casting bells since the 18th century in small quantities, and went into the bellfounding business in earnest in the 1850s. As well as casting the Westminster quarters and the original Big Ben, they cast many peals of bells, including twelves for Chelmsford and Buckfast, and several notable bells including the tenor at Sherborne. They carried on casting until after the first war but never achieved consistent true-harmonic bells. Their bells are often quite thick, with enough metal to allow considerable tuning and improvement of their tone, such as the work recently done at Barrow in Furness.
+Whitechapel stayed with their old-style designs until the 1920s and 1930s. Some of the bells at Petham, Kent cast in 1923 are true-harmonic but Whitechapel continued to cast old-style bells for a number of years. I understand from Alan Hughes that this was because strickles were only remade as they were required. Whitechapel also entered the carillon market and their true-harmonic bells can be the most precisely tuned of any UK founder.
+Many other founders were casting in the late 19th and early 20th centuries in smaller quantities. None produced true-harmonic bells, but I have a fondness for the bells of Alfred Bowell, who had a tuning machine.
+One of the innovations in bellfounding in the 20th century was the creation of peals of more than 12 bells. These present special challenges for the bellfounder because the trebles need to be even thicker and heavier to ring satisfactorily with the tenors. The trebles have very compressed rim partials which has a considerable effect on their tone. The is demonstrated in examples such as Winchester Cathedral and the Bullring, where the trebles are not a good tonal match for the tenors despite accurate tuning.
+Very big bells – an experiment
+We’re at the end of the talk, and it’s time for questions, but before inviting these I’d like to try a quick experiment on you all.
+I am just beginning some research into the sound quality of very big bells; 2-3 tons or more. In these big bells, the partials that are subject to true-harmonic tuning are too low in frequency for the ear to appreciate them. The nominal and the rim partials are also low enough in frequency that some ears struggle to create a strike note from them. There are other partials higher in frequency that can also create a strike note and this gives rise to the effect known as secondary strike – big bells with more than one strike note.
+Hosanna at Buckfast – Taylor 1936, 7 tons 9 cwt
+Here is the recording of Glossop 4th modified to be 
+much lower in frequency
+, as if it were around 7 1/2 tons in weight.
+There are two possible strike notes in the sound of this bell:
+the lower strike note
+the upper strike note
+In the talk, I played the sound again and asked for a show of hands in four categories. Here are the results of the roughly 55 people in the room:
+Category
+Count
+Those who only hear the lower note
+about 5
+Those who only hear the upper note
+about 5
+Those who hear both notes
+about 45
+Those who hear something different altogether
+None
+Posted in 
+talks_articles
+Post navigation
+ Terhardt and Seewan 1984
+Steel, tubular, hemispherical and ceramic bells 
+ The Sound of Bells 2022.

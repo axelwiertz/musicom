@@ -613,6 +613,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Keys | Honky-tonk Piano | 3 | 33–96 | rhythm, harmony, melody, bass, ornament, color |
 | Keys | Drawbar Organ | 16 | 24–89 | harmony, pad, comp, lead, bass, rhythm, drone, accent |
 | Keys | Rock Organ | 18 | 36–96 | lead, rhythm, harmony, comp, pad, bass, accent, drone |
+| Keys | Percussive Organ | 17 | 36–96 | comp, rhythm, harmony, pad, lead, bass, accent, drone |
 | Keys | Electric Piano 1 (Rhodes) | 4 | 36–96 | harmony, melody, bass, accent, color |
 | Brass | Trumpet | 56 | 54–86 | lead, accent, fanfare |
 | Brass | Muted Trumpet | 59 | 54–86 | lead, countermelody, accent, melody, ornament |
@@ -695,6 +696,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 7 | Clavi | **Clavi** ✓ (pipeline GM_PROGRAMS[7] = "Clavi"; FluidR3 preset 7 = "Clavinet" — cosmetic expansion, no routing impact; STEM_LABEL = "Clavi" matches pipeline) |
 | 16 | Drawbar Organ | Drawbar_Organ ✓ (GM_PROGRAMS[16] = "Drawbar Organ"; FluidR3 bank-0 preset 16 = "DrawbarOrgan" — no space in the SF2 name, cosmetic only, **no routing impact**; STEM_LABEL = "Drawbar_Organ") |
 | 18 | Rock Organ | Rock_Organ ✓ (GM_PROGRAMS[18] = "Rock Organ"; FluidR3 bank-0 preset 18 = "Rock Organ" — labels match exactly, **no quirk**; STEM_LABEL = "Rock_Organ"; distinct from GM16 Drawbar Organ) |
+| 17 | Percussive Organ | Percussive_Organ ✓ (GM_PROGRAMS[17] = "Percussive Organ"; FluidR3 bank-0 preset 17 = "Percussive Organ" — labels match exactly, **no quirk**; STEM_LABEL = "Percussive_Organ"; distinct from GM16 Drawbar Organ and GM18 Rock Organ) |
 | 8 | Celesta | Celesta ✓ (GM_PROGRAMS[8] + FluidR3 preset 8 both "Celesta") |
 | 69 | English Horn | English_Horn ✓ (GM_PROGRAMS[69] + FluidR3 preset 69 both "English Horn") |
 | 9 | Glockenspiel | Glockenspiel ✓ (GM_PROGRAMS[9] + FluidR3 preset 9 both "Glockenspiel") |
@@ -2528,3 +2530,55 @@ accent (section markers), drone (held root/fifth vamp). Humanize: Keys DNA
 Leslie supplies the motion. Remaining sibling candidates: GM17 Percussive
 Organ, GM76 Blown Bottle, GM50/51 Synth Strings 1/2, GM63 Synth Brass 2,
 GM37 Slap Bass 2, GM118 Synth Drum, GM2 Electric Grand Piano.
+
+**Percussive Organ added** (2026-11-19): GM17, **Keys-family entry** completing
+the Hammond tonewheel set (16 Drawbar clean / **17 Percussive** / 18 Rock
+saturated / 19 Church pipes / 20 Reed) (instrument.md + percussive_organ.py),
+verified end-to-end UnitMatrixComposer → zero-drift ✓ → MIDI (131 bytes) →
+FluidSynth WAV via `discover_soundfont()` (FluidR3_GM.sf2, **748,844 bytes**) ✓,
+rendered SOLO (one voice, one track — no unison doubling, so no comb buzz);
+solo spectral check 4–8 kHz buzz energy **1.1%** (OK). RenderPipeline stem label
+`track00_Percussive_Organ.wav` ✓ (GM_PROGRAMS[17] = "Percussive Organ",
+FluidR3 bank-0 preset 17 = "Percussive Organ" — labels match exactly, **no
+quirk**). Identity: the tonewheel organ with the **percussion tab** engaged — a
+single fast-decaying 2nd (4') or 3rd (2 2/3') harmonic "ping" on every key-on,
+over brighter/thinner drawbars than GM16. That transient is why it is the
+classic jazz/funk/soul comp voice (Jimmy Smith, Jimmy McGriff, Billy Preston,
+Booker T. on bright stops). Range 36–96 (C2–C7), solo 48–84 (C3–C6), sweet
+spot 52–84 (E3–C6); zones bass 36–55 (percussion off) / mid 56–79 (comp) /
+high 80–96 (funk stabs). Measured level flatness: RMS 0.112–0.176 across 24
+notes from MIDI 24–108 (within ±2 dB, no gaps). Synthesis: **`additive`**
+(SoundWave) with 8 `ADDITIVE_HARMONICS` banks (perc3/perc2/funk/gospel/jazz/
+soul/bass/ballad), flat-sustain ADSR (4 ms attack, no decay, 40 ms release),
+plus the percussion ping as a SEPARATE mixed voice (`PERCUSSION_DEFAULTS`:
+harmonic 3, level 0.45, 180 ms exponential decay from
+`percussion_envelope()`); PhaseModSynth `FM_DEFAULTS` (ratio 3.0, mod_decay
+0.18 s) as fallback. NOT Karplus-Strong/Modal (no resonator). Production:
+reverb 1.6 s, EQ body 300 Hz −1.0 dB, presence 2500 Hz +2.5 dB, air 8 kHz
++1.5 dB, pan 0.0. Articulations: sustain, stab, chop, percussion, key_click,
+accent, swell, smear. **Measured SF2 quirks (FluidR3)**: (1) the **loudest
+partial is often not the fundamental** — at C4 the fundamental wins (0 dB) with
+the 5 1/3' quint at −1 dB, at G4 the two-octave **sub layer** (0.25×f0) is
+loudest and the fundamental sits at −9 dB, at C5 the 3rd harmonic dominates;
+pitch identity is still unambiguous, but never leave GM17 alone on a bare
+top-octave unison line. (2) The sub layer measures −3 dB at C4 — the patch
+sounds heavier than written; keep the left hand above C2 when a bass guitar is
+present. (3) **Slow body swell**: peak 0.048 at note-on → 0.386 at 250 ms, so
+staccato shorter than ~1/8 at 120 bpm reads as a click, not a chord; use
+velocity ≥ 92 for stabs. (4) **Slow decay + wobble**: −5 dB/s body decay and
+±2 dB at ~0.7 Hz while held (preset chorus/rotary) — re-trigger long pads every
+2–4 bars. (5) Velocity → **amplitude only** (centroid flat 1.37–1.43 kHz from
+vel 20–127; peak 0.016 → 0.64), so accents need real velocity — unlike GM16.
+Registration proof: `by_name('percussive organ')` / `by_name('Percussive
+Organ')` / `by_program(17)` → Percussive Organ (distinct from `by_program(16)`
+Drawbar Organ and `by_program(18)` Rock Organ), `in_sweet_spot(67)` = True,
+`in_sweet_spot(30)` = False, `stem_label = 'Percussive_Organ'`,
+`synthesis = 'additive'`; `registry_table()` row "| Keys | Percussive Organ |
+17 | 36–96 | comp, rhythm, harmony, pad, lead, bass, accent, drone |";
+convenience constant `PERCUSSIVE_ORGAN`. Role: comp (funk/soul stabs), rhythm,
+harmony/pad, lead (solos), bass (left-hand keys), accent, drone — NOT a
+substitute for Church Organ pipes or Rock Organ saturation. Humanize: Keys DNA
+(6 ms timing sigma, 5 velocity sigma, 0 layback) — sits ON the grid, the
+percussion tab supplies the groove. Remaining sibling candidates: GM112 Tinkle
+Bell, GM118 Synth Drum, GM76 Blown Bottle, GM50/51 Synth Strings 1/2, GM63
+Synth Brass 2, GM37 Slap Bass 2, GM2 Electric Grand Piano.

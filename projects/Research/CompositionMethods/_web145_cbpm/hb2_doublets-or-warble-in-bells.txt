@@ -1,0 +1,45 @@
+
+Doublets or warble in bells – The Sound of Bells
+ Skip to content 
+ Main Navigation 
+ The Sound of Bells 
+The Sound of Bells
+Wavanal
+PhD Thesis
+Contact
+Current Research
+Links
+Building a bell sound
+Classic papers on bell tuning
+Bell recordings collection
+Stretch tuning
+Gillett and Johnston
+Taylors of Loughborough
+William Dobson
+the van Aerschodts
+Weights, sizes and frequencies
+Steel, tubular, hemispherical and ceramic bells
+Recording and analysis
+Individual sets of bells
+How bells make their sound
+PhD Thesis
+Doublets or warble in bells
+Posted on 
+4th January 2022
+ (4th January 2022) 
+ by
+Bill Hibbert
+Bells may not be symmetrical about their vertical axis. This gives rise to the phenomenon of doublets. A doublet is a mode of vibration which sounds at two (usually closely spaced) frequencies rather than one. The easiest demonstration of this uses only a mug and a teaspoon.
+A mug is not symmetrical – it has a handle on one side. If you strike the rim of the mug at the points marked ‘A’ in the diagram, it produces a lower pitched note than if you strike it at the points marked ‘B’. This is because one of the main modes of vibration of the mug has four nodes (stationary points) around the rim, and four antinodes (where the rim vibrates in and out radially). When the handle is at an antinode, it increases the vibrating mass, which lowers the frequency. If you strike the rim at other points intermediate between ‘A’ and ‘B’ both notes are heard together.
+If two pure tones relatively close in frequency sound together, beats are heard – regular fluctuations in the sound intensity. The number of fluctuations per second is equal to the frequency difference between the two tones. For example, the sound file below contains two tones with frequencies 440 Hz and 445 Hz – you should hear a dramatic fluctuation five times per second.
+Beats
+If a bell is not round, it is highly unlikely that the clapper is striking at either point ‘A’ or ‘B’ in the diagram above. Therefore, both frequencies of a partial can sound, and if the partial is an important one, the beats can be heard, giving a ‘medieval’ sound. Here are two versions of a bell, one with pure partials and one with doublets on its prime and nominal:
+Pure partials
+Doubleted prime and nominal
+To create a perfectly round bell, with no significant doublets, requires considerable skill both for the founder and the tuner. It is possible to position a bell on its headstock so as to minimise doublets by selecting appropriate points for the clapper to strike. However, the position of the bell on the headstock may be driven as much by the need to make the inscription visible as by musical considerations!
+Posted in 
+How bells make their sound
+Post navigation
+ The musical pitch of bells
+The various ways bells are used 
+ The Sound of Bells 2022.

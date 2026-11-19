@@ -80,6 +80,7 @@ _INSTRUMENT_MODULES = {
     "Keys.electric_piano_2.electric_piano_2": "electric_piano_2",
     "Keys.drawbar_organ.drawbar_organ": "drawbar_organ",
     "Keys.rock_organ.rock_organ": "rock_organ",
+    "Keys.percussive_organ.percussive_organ": "percussive_organ",
     "Keys.tango_accordion.tango_accordion": "tango_accordion",
     "World.sitar.sitar": "sitar",
     "World.koto.koto": "koto",
@@ -299,6 +300,7 @@ RHODES = ALL_INSTRUMENTS["rhodes"]
 ELECTRIC_PIANO_2 = ALL_INSTRUMENTS["electric_piano_2"]
 DRAWBAR_ORGAN = ALL_INSTRUMENTS["drawbar_organ"]
 ROCK_ORGAN = ALL_INSTRUMENTS["rock_organ"]
+PERCUSSIVE_ORGAN = ALL_INSTRUMENTS["percussive_organ"]
 HONKY_TONK = ALL_INSTRUMENTS["honky_tonk"]
 TRUMPET = ALL_INSTRUMENTS["trumpet"]
 TROMBONE = ALL_INSTRUMENTS["trombone"]
@@ -440,6 +442,8 @@ def registry_table():
             role = "harmony, pad, comp, lead, bass, rhythm, drone, accent"
         elif low == "rock organ":
             role = "lead, rhythm, harmony, comp, pad, bass, accent, drone"
+        elif low == "percussive organ":
+            role = "comp, rhythm, harmony, pad, lead, bass, accent, drone"
         elif low == "dulcimer":
             role = "lead, melody, ornament, rhythm, harmony"
         elif low == "honky-tonk piano":
@@ -1105,3 +1109,26 @@ if __name__ == "__main__":
           "ROCK_ORGAN.pan =", ROCK_ORGAN.pan)
     print("  ROCK_ORGAN.motor_defaults =", ROCK_ORGAN.motor_defaults)
     print("  ROCK_ORGAN.articulations =", list(ROCK_ORGAN.articulations or {}))
+
+    print()
+    print("=== Percussive Organ (Keys, GM17) ===")
+    print("  PERCUSSIVE_ORGAN.midi_program =", PERCUSSIVE_ORGAN.midi_program,
+          "(should be 17)")
+    print("  by_name('percussive organ') =", by_name("percussive organ"))
+    print("  by_name('Percussive Organ') =", by_name("Percussive Organ"))
+    print("  by_program(17) =", by_program(17))
+    print("  by_program(16) =", by_program(16), "(distinct: drawbar organ)")
+    print("  by_program(18) =", by_program(18), "(distinct: rock organ)")
+    print("  PERCUSSIVE_ORGAN.in_sweet_spot(67) =",
+          PERCUSSIVE_ORGAN.in_sweet_spot(67))
+    print("  PERCUSSIVE_ORGAN.in_sweet_spot(30) =",
+          PERCUSSIVE_ORGAN.in_sweet_spot(30))
+    print("  PERCUSSIVE_ORGAN.range_min =", PERCUSSIVE_ORGAN.range_min,
+          "PERCUSSIVE_ORGAN.range_max =", PERCUSSIVE_ORGAN.range_max)
+    print("  PERCUSSIVE_ORGAN.solo_range =", PERCUSSIVE_ORGAN.solo_range)
+    print("  PERCUSSIVE_ORGAN.stem_label =", repr(PERCUSSIVE_ORGAN.stem_label))
+    print("  PERCUSSIVE_ORGAN.synthesis =", repr(PERCUSSIVE_ORGAN.synthesis))
+    print("  PERCUSSIVE_ORGAN.reverb_tail =", PERCUSSIVE_ORGAN.reverb_tail,
+          "PERCUSSIVE_ORGAN.pan =", PERCUSSIVE_ORGAN.pan)
+    print("  PERCUSSIVE_ORGAN.articulations =",
+          list(PERCUSSIVE_ORGAN.articulations or {}))

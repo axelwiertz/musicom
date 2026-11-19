@@ -1,0 +1,87 @@
+{
+  "artifact": "hhfc_146_demo.mid",
+  "classification": "ai-generated",
+  "generator": "hhfc_146_demo.py (Method 146 Hindemith Harmonic Fluctuation Composition)",
+  "sources": [
+    "Wikipedia DE: Unterweisung im Tonsatz (classification table)",
+    "Hindemith, Craft of Musical Composition I (Schott 1937/1942)",
+    "Wikipedia EN: Paul Hindemith / Ludus Tonalis"
+  ],
+  "parameters": {
+    "plan": [
+      [
+        "A",
+        0,
+        "I-1",
+        true,
+        [
+          0,
+          4,
+          7
+        ]
+      ],
+      [
+        "B",
+        5,
+        "I-2",
+        false,
+        [
+          9,
+          0,
+          5
+        ]
+      ],
+      [
+        "C",
+        7,
+        "II-a",
+        true,
+        [
+          7,
+          11,
+          2,
+          5
+        ]
+      ],
+      [
+        "D",
+        0,
+        "I-1",
+        true,
+        [
+          0,
+          4,
+          7
+        ]
+      ]
+    ],
+    "fluctuation_curve": [
+      0,
+      2,
+      1,
+      3
+    ],
+    "progression_values": {
+      "0": 0,
+      "1": -2,
+      "2": -1,
+      "3": 1,
+      "4": 1,
+      "5": 2,
+      "6": -3,
+      "7": 2,
+      "8": 1,
+      "9": 1,
+      "10": -1,
+      "11": -2
+    },
+    "bpm": 120,
+    "ticks_per_beat": 480,
+    "bars_per_section": 2
+  },
+  "notes": "Abstract->concrete demo: group/root plan realized as UnitMatrix; validate OK.",
+  "sha256": "5db47bdd317dae2a49d18f45604ec8f556340bf9193739c68d0190c84cc5785d",
+  "bytes": 780,
+  "created_utc": "2026-11-19T09:28:48.950971+00:00",
+  "provenance_version": "1.0"
+}

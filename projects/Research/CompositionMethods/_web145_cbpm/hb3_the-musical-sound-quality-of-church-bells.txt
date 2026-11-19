@@ -1,0 +1,108 @@
+
+The musical sound quality of church bells – The Sound of Bells
+ Skip to content 
+ Main Navigation 
+ The Sound of Bells 
+The Sound of Bells
+Wavanal
+PhD Thesis
+Contact
+Current Research
+Links
+Building a bell sound
+Classic papers on bell tuning
+Bell recordings collection
+Stretch tuning
+Gillett and Johnston
+Taylors of Loughborough
+William Dobson
+the van Aerschodts
+Weights, sizes and frequencies
+Steel, tubular, hemispherical and ceramic bells
+Recording and analysis
+Individual sets of bells
+How bells make their sound
+PhD Thesis
+The musical sound quality of church bells
+Posted on 
+18th June 2008
+ (29th December 2021) 
+ by
+Bill Hibbert
+It is now quite easy (using Wavanal or a general purpose spectrum analysis program) to ascertain the partial frequencies for church bells from recordings of them. Interpretation of these tuning figures is a different matter. Research recently completed as part of my PhD has shed new light on how the sound quality of bells is determined by the frequencies of the various partials.
+By way of illustration, the typical spectrum of a bell (the old 9th bell from St Mary le Tower, Ipswich) from the previous page is repeated here:
+The research shows that a strong sensation of pitch is generated within the ear by the nominal, superquint, octave nominal, I-7, I-8, I-9 etc. partials, roughly an octave below the nominal, though the octave can be ambiguous. For most bells this strike pitch or strike note creates a much stronger sensation than any individual partial. The strike pitch is generated within the human auditory system and does not appear as a measurable frequency in the sound (though it can coincide with the prime frequency). Experiments show that differences in partial amplitude have only a minor effect on the strike pitch which is heard. If the partials which give rise to the strike pitch are shrunk together in frequency (as is common in thick, heavy bells) the pitch heard is lower. If the partials are spaced wider apart (as is common in thin, lighter bells) the pitch is sharper. These changes in pitch or strike note due to the upper partials can be a third or half a semitone.
+The ear is differently sensitive at different frequencies. Another experiment described in my PhD thesis shows which partials determine the note heard for bells with different nominal frequencies. The second figure shows how many test subjects (out of a total of 17) hear a note near a particular partial frequency as the nominal changes (again repeated from a previous page:
+For bells of middling size (nominals between 500Hz and 1500Hz) the majority of people hear a pitch determined by the nominal. As the nominal frequency falls below 500Hz, i.e. in big bells, an increasing number of people hear a pitch determined by partial I-7 (the secondary strike). Both of these pitches are generated in the auditory system as described above. As the nominal frequency rises above 1500Hz, people increasingly hear a pitch determined solely by the prime, or in very small bells the hum.
+The results take this form because the ear is most sensitive to frequencies in a band around the middle of the audible range. Frequencies higher or lower than this band are not well perceived by the ear, and in particular it is very difficult to judge the pitch of a very high or very low frequency.
+As regards the effect partial tuning has on the quality of a bell’s sound, the most important factor is the relationship of the various physical partial frequencies to the dominant strike pitch. The most important partials in this respect are the hum, prime and nominal. If these three partials are in octaves the bell is called true-harmonic. True-harmonic bells with a nominal above about 500Hz will have a clear, harmonious sound because the physical frequencies of hum, prime and nominal are in accord with the strong strike pitch sensation generated in the auditory system. However, even if a bell is true-harmonic, if it is very thick the compression of the upper partials and the flattening of the strike pitch mean that the latter is no longer in accord with hum, prime and nominal. As a result, such a bell sounds flat and dull even if it is true-harmonic. This unfortunate effect is especially noticeable in the trebles of peals of ten and twelve if they have compressed upper partials. If the upper partials are widely spaced, the strike pitch sharpens, leading to a ‘hollow’ sound or at worst, a bell with multiple pitches.
+If hum, prime and nominal are not in octaves, the hum is often a tone or more sharp of two octaves below the nominal and the prime a tone or more flat of an octave below the nominal. This is often referred to as old-style tuning. More rarely, the prime is sharp.
+The test results above show that, for big low-pitched bells, the hum and often the prime are so low in frequency that they can effectively be ignored. Hum and prime can be quite an interval away from true-harmonic without spoiling the quality of the bell’s sound. The sound quality of big bells is determined by the nominal and higher partials, and in particular by the interval between the primary strike (determined by the nominal) and the secondary strike (determined by partial I-7). In thicker bells, the interval falls towards a flattish fourth or sharp major third and this can be appealing. In thinner bells the interval is a sharpish fourth which can sound unpleasant. The three partials between nominal and superquint (visible in the spectrum above) also make a contribution to the sound of bells but I have yet to fully investigate this.
+In smaller bells, as the test results show, the pitch perception from prime and hum becomes more important compared with the strike pitch arising from the upper partials. If the bell is not true-harmonic a discordant effect results. Whether mistuning of the prime or the hum has the worse effect depends both on the nominal frequency of the bell and individual characteristics of the listener. For many smaller old-style trebles, mistuning of the hum sounds most unpleasant, producing a squealing effect, because of the discord between the physical frequency of the hum and the strike pitch generated in the auditory system.
+Very sharp primes in any but the biggest bells always sound unpleasant, because the prime is then close to the tierce and is discordant with both that partial and the strike pitch.
+For very small bells, such as the trebles of carillons, the strike pitch based on the nominal completely disappears and the note which is heard is determined entirely by the prime or in very small bells the hum. Which partial dominates again varies for different listeners; if the hum and prime are an octave apart there is no ambiguity over the note of the bell. If they are not an octave apart there will be disagreement about the note of the bell. For such small bells the frequencies of the nominal and higher partials are not relevant.
+It will be seen from the test results that the tierce is an important partial. It is often the highest amplitude partial and as a result some people pick it as the note of the bell in the experiment. In bells of normal shape, the tierce can range in frequency from a flat minor third above the strike pitch (actually, a major sixth below the nominal) to almost a major third above the strike pitch (actually, a minor sixth below the nominal). As the tierce is so strident, it is advantageous for it to be tuned to a similar interval in all the bells in a peal. In change ringing bells, the exact tuning is not critical.
+In carillons, the exact tuning of the tierce is very important as the tierce of one bell can be discordant with the hum, prime or nominal of another bell when rung together. In consequence, in carillons in which the nominals are tuned in equal temperament, the tierce of each bell is arranged to be an equal tempered major sixth below the nominal. In carillons with nominals tuned in meantone, the tierce is arranged to be a just major sixth below the nominal. The bell tuner has little or no control over the tierce independent of the other partials, and these intervals are determined by careful design of the shape of the bell, especially of the soundbow.
+In good quality modern tuning, the quint is tuned to a fifth above the strike pitch, or equivalently a fourth below the nominal. As the quint is typically a very quiet partial due to it having a node near the soundbow, departures from this exact tuning have very little effect on the sound quality of a bell.
+Experiments undertaken during the research on 30 test subjects of varying musical experience show that even with a carefully designed experiment, test subjects find it difficult to judge pitch very accurately in the absence of other clues (such as the beats between harmonic higher partials heard in most musical instruments but not in bells). The test results shown in the figure below suggest that, averaged across the 30 test subjects, the human ear is not able to judge pitch to better than ten cents, i.e. 10 hundreths of a semitone. At higher frequencies, the precision would start to worsen again but the experiment did not extend into this area.
+Therefore, for change ringing purposes there is no need to tune partials even in a true-harmonic bell to better than this precision. In carillons, where bells are rung together, much more accurate tuning is needed to avoid audible beats between partials with similar frequencies in different bells.
+The following table summarises the effect of all the significant partials. The frequency bands for the nominal are approximate and will differ from listener to listener.
+Partial
+Very large bells (nominal < 300Hz)
+Large bells (nominal < 500Hz)
+Medium size bells (nominals from 500Hz to 1500Hz)
+Small bells (nominals > 1500Hz)
+Very small bells (nominals > 4000Hz)
+Hum
+Not significant
+Not significant
+Discordant with strike pitch if not 2 octaves below nominal
+Discordant with strike pitch if not 2 octaves below nominal
+Can determine pitch of bell (i.e. must be tuned to correct note)
+Prime
+Not significant
+Often not significant
+Discordant with strike pitch if not 1 octave below nominal, and also with tierce if sharp
+Discordant with strike pitch if not 1 octave below nominal, and also with tierce if sharp
+Can determine pitch of bell in all but the smallest bells(i.e. must be tuned to correct note)
+Tierce
+Not significant
+In carillons, needs to be tuned against partials of other bells
+In carillons, needs to be tuned against partials of other bells
+In carillons, needs to be tuned against partials of other bells
+Not significant
+Quint
+Not significant
+Usually not significant
+Usually not significant
+Not significant
+Not significant
+Nominal
+Not significant
+Determines the primary (lower) strike pitch
+Determines the strike pitch of the bell
+Hum, prime and nominal need to be in octaves for the bell to have a unique note
+Not significant
+Partials between nominal and superquint
+May have a significant effect – to be investigated
+May have a significant effect – to be investigated
+May have a significant effect – to be investigated
+Possibly not significant
+Not significant
+Superquint, octave nominal and higher rim partials
+Determine the quality of the bell’s sound
+Strike pitch sharpened or flattened by these partials
+Strike pitch sharpened or flattened by these partials
+Strike pitch sharpened or flattened by these partials
+Not significant
+I-7
+Determines the pitch of the bell
+Determines the secondary (higher) strike pitch
+Not independently audible
+Not independently audible
+Not significant
+Posted in 
+PhD Thesis
+Post navigation
+The upper partials of bells 
+ The Sound of Bells 2022.

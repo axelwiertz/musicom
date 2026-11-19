@@ -1,0 +1,194 @@
+
+Basic principles of bell tuning – The Sound of Bells
+ Skip to content 
+ Main Navigation 
+ The Sound of Bells 
+The Sound of Bells
+Wavanal
+PhD Thesis
+Contact
+Current Research
+Links
+Building a bell sound
+Classic papers on bell tuning
+Bell recordings collection
+Stretch tuning
+Gillett and Johnston
+Taylors of Loughborough
+William Dobson
+the van Aerschodts
+Weights, sizes and frequencies
+Steel, tubular, hemispherical and ceramic bells
+Recording and analysis
+Individual sets of bells
+How bells make their sound
+PhD Thesis
+Basic principles of bell tuning
+Posted on 
+4th January 2022
+ (4th January 2022) 
+ by
+Bill Hibbert
+Many references describe the way bells are tuned; the 
+Dave Kelly
+ articles, George Elphick’s book ‘The Craft of The Bell Founder’, and 
+Lehr’s paper
+. A quick recap will be useful. The theoretical background is given in the set of papers Rossing’s Acoustics of Bells.
+A vibrating bell produces many frequencies of sound, each produced by a different vibrational mode of the bell. Once a bell has been cast, the partial frequencies are tuned by removing metal in annular rings, usually from the inside. In fact, it is usually not possible to tune a single partial in a bell. The bell-founder’s skill is needed to accurately bring the partials into tune with themselves, and the bell in tune with others, because removing metal from one place inside the bell affects more than one partial, as explained in the 
+Lehr
+ paper.
+The basis of true-harmonic tuning as described by 
+Canon Simpson
+ in his papers in the Pall Mall Magazine, is that the five lowest partials (the hum, prime, tierce, quint and nominal) should be related as simple musical intervals. This was a rediscovery of knowledge obtained by bell-founders by rule of thumb. The Hemonys working in the 17th century could measure and tune partials to within 3 cents and tuned to true-harmonic principles. Some continental bells from the 19th century I have analysed are true-harmonic. However, the tradition in the UK up to the end of the 19th century was to produce non-true harmonic (old-style) bells. The frequency measurement techniques developed by 
+Rayleigh
+ and Helmholtz allowed the basis of true-harmonic tuning to be properly understood. Taylors, following visits abroad and a series of experiments, were the first UK founders to adopt the Continental practice of true-harmonic tuning.
+Although a bell sound can contain many partials, the overall impression on the ear is often of a single pitch. This frequency (the strike note) often does not appear in the list of partials. What determines the pitch of bells is covered in the next section.
+The frequencies of partials are usually determined by beating them against tuning forks, a frequency generator or stroboscopic discs – or sometimes nowadays, using an audio frequency spectrum analyser. Wavanal now provides an easy way for anyone with a multi-media PC to carry out investigations for themselves.
+Partials for typical bells
+The theoretical intervals for the lowest five partials are as follows. The intervals between the various partials are given in cents relative to the nominal.
+Partial
+Interval
+Interval in Cents
+Hum
+Two octaves below nominal
+-2400
+Prime
+One octave below nominal
+-1200
+Tierce
+Minor third above prime
+-900
+Quint
+Perfect fifth above prime
+-500
+Nominal
+–
+0
+To give practical examples of how bells are tuned, here are some of the partials for two bells, Taylor 1980s and Mears 1859, tuned in rather different ways.
+Taylor
+Mears
+Freq.
+Cents
+Freq.
+Cents
+Name
+293
+-2400
+327.5
+-2207
+Hum
+586
+-1199
+535.0
+-1358
+Prime
+693
+-909
+710
+-868
+Tierce
+882
+-491
+944.5
+-374
+Quint
+1171.5
+0
+1172
+0
+Nominal
+1560.5
+496
+1427
+341
+–
+–
+–
+1485.5
+410
+–
+–
+–
+1597
+536
+–
+1761
+706
+1721.5
+666
+Superquint
+1950
+882
+–
+–
+–
+–
+–
+1971.5
+900
+–
+2159
+1058
+–
+–
+–
+2437
+1268
+2348
+1203
+Octave nominal
+2619.2
+1393
+2535
+1336
+–
+3184.5
+1731
+3034
+1647
+I7
+3403.5
+1846
+–
+–
+–
+3982.5
+2118
+3751
+2018
+I8
+4131
+2182
+–
+–
+–
+–
+–
+4187
+2204
+–
+–
+–
+4497
+2328
+I9
+The maximum discrepancy from these theoretical values for the Taylor bell is 9 cents, which is within the normal tuning tolerance for a church bell of 10 cents. The Mears bell shows typical old style tuning; a hum which is sharp (in this case by 2 semitones), a prime which is flat by 1.5 semitones, a tierce which is sharper than a minor third, and a quint which is somewhat out from the theoretical. Finally, note the many other partials for both bells. A musical ear can probably hear several of the lowest five partials in a bell, especially the hum, tierce and prime which often last for quite a while (many seconds) after the bell has been struck.
+Here are recordings of the two bells:
+Taylor 1980s
+Mears 1859
+Beyond true-harmonic tuning
+There is more to the quality or timbre of a bell than the frequencies of the five lowest partials. Tuning of other partials, and intensities of the partials, can have a critical effect on the quality of a bell. This subject is gone into in more detail elsewhere on this site. However, there are three points pertinent to the historical development of bell tuning which will be covered now.
+Firstly, the frequency measurement techniques available at the end of the 19th century (and those still used in bell tuning today) are only practical for partials which last for a considerable time (several seconds) after the bell has been struck. Partials with a very short life will be hard to measure, though a spectrum analyser or Wavanal can do so with careful use. The short lived, high frequency partials can significantly affect the sound of a bell. Relative amplitude and time decay of partials is not usually considered explicitly.
+Secondly, Simpson assumed based on his experience that a bell would sound ‘in tune with itself’ if its partial frequencies are related as simple intervals – octaves, fifths, thirds etc. This is not necessarily so. Such simple intervals played on a musical instrument or sung sound harmonious, whereas intervals such as seconds, augmented fourths and sevenths sound discordant. Helmholtz was the first to show that the harmoniousness of an interval depended on the extent to which the upper partials of the tones interfere. Each partial of a bell is a pure tone and has no upper partials to interfere. Intervals between tones that would sound unpleasant played as notes on a piano do not jar if the tones are pure.
+Here’s an example of this. Both of the sound files below are of two tones an augmented fourth apart – usually acknowledged to be a nasty interval. The first contains only the two pure tones, the second tones with a rich harmonic structure. Judge for yourself!
+Tritone with pure tones
+Tritone with harmonics
+Finally, the practical difficulties of re-tuning large numbers of partials, controlling their relative intensities, and an understandable reluctance to take metal off the 
+outside
+ of a bell, is such that bells depend as much on their profile as the work of the tuner for their quality. Analysis of Taylor bells cast in the late 19th century suggests that they had already begun to change their profiles and the timbre of their bells before Simpson published his first paper. The importance of this change in profile to permit true-harmonic tuning was recently confirmed to me in a discussion with Alan Hughes of Whitechapel.
+Posted in 
+How bells make their sound
+Post navigation
+ How bells make their sound
+The musical pitch of bells 
+ The Sound of Bells 2022.
