@@ -150,7 +150,14 @@ comparable to, and how do I use it in a workflow?*
 |||||||| `sound/effects/whole_tone_filterbank.py` | WholeToneFilterbank | effects (spectral filter bank) | AudioThing/Hainbach Seconds, SWR Sekundenfilterbank | audio + band gains/ring mod → stereo filtered audio; freeze + transfer = spectral envelope stamping |
 |||||||| `sound/generators/arp2_seq.py` | Arp2, ArpStep | sequencing (probability/ratchet/fill arp) | Synthstrom Deluge Arp 2.0 | chord + steps (probability/iteration/fill) → absolute-tick note events |
 |||||||| `sound/synthesis/origami_duo.py` | OrigamiDuo, sine_fold, comparator_morph | synthesis (dual complex osc + M/S) | Larix Elektro Origami Duo, AS3340 voice | note freq + fold/comp/PW/width → stereo audio |
-|||||||| `sound/effects/feedback_lab.py` | FeedbackLab, PT2399, SVF | effects (feedback instrument) | Body Synths Laboratory | audio or silence + feedback/routing → self-oscillating stereo drone |
+||||||||| `sound/effects/feedback_lab.py` | FeedbackLab, PT2399, SVF | effects (feedback instrument) | Body Synths Laboratory | audio or silence + feedback/routing → self-oscillating stereo drone |
+||||||||| `sound/effects/multiband_freq_shifter.py` | MultibandFreqShifter, Hilbert, BandSplitter | effects (3-band SSB shifting) | FAC Shifter, Bode/Hilbert frequency shifters | stereo audio + per-band shift/sideband → shifted stereo audio |
+||||||||| `sound/generators/fm_groovebox.py` | FMGroovebox, FMTrack, FMPatch, FMVoice | sequencing + synthesis (4-op FM groovebox) | Pikoto, Digitone, Volca FM | 4 tracks of steps + locks → absolute-tick events + audio |
+||||||||| `sound/synthesis/tb303_circuit.py` | TB303Circuit, Ladder | synthesis (303 circuit topology) | Roland TB-303 / DW-303 (topology level) | steps (pitch/accent/slide) → bass audio |
+||||||||| `sound/generators/multi_playhead_seq.py` | MultiPlayheadSequencer, SeqTrack, Playhead | sequencing (multi-playhead polymetric) | AARM ADEPT, Norns pattern readers | step pool + 3 heads × division/direction → absolute-tick events + SMF |
+||||||||| `sound/effects/upward_dynamics.py` | UpwardDynamics, BandDynamics, FreqLift | effects (upward+downward dynamics) | Freqport FreqLift, upward compressors | stereo audio → 2-band dynamically lifted audio |
+||||||||| `sound/effects/structural_split_eq.py` | StructuralSplitEQ, StructuralSplit | effects (transient/tonal split EQ) | Eventide SplitEQ 2, SPL transient designer family | audio → per-element EQ'd/dynamically shaped audio |
+||||||||| `sound/generators/formula_drumkit.py` | FormulaDrumKit, DrumVoice, Formula | generators (procedural drum synthesis) | Drumlabooh 14 formula engine, SynthEdit formula drums | kit spec + steps → drum audio |
 | `sound/sync/clock.py` | DAWClockBridge | sync | MTC/MIDI clock | bpm → clock pulses |
 | `sound/render/fluidsynth.py` | FluidSynthRenderer | render | SF2 synth | MIDI → WAV |
 | `sound/render/vst.py` | VSTRenderer | render | DAW VST3 | MIDI → VST audio |
