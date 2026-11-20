@@ -1,0 +1,36 @@
+registry: by_name('blown bottle') -> <Instrument Blown Bottle (family=Woodwind, program=76, range=48-96)>
+registry: by_name('Blown Bottle') -> <Instrument Blown Bottle (family=Woodwind, program=76, range=48-96)>
+registry: by_program(76) -> <Instrument Blown Bottle (family=Woodwind, program=76, range=48-96)>
+registry: BLOWN_BOTTLE is ALL_INSTRUMENTS['blown_bottle'] -> True
+registry: family=Woodwind program=76 range=48-96 solo=(60, 84) sweet=(65, 79)
+registry: stem_label='Blown_Bottle' reverb=1.8 pan=0.0
+registry: synthesis=phase_mod fm_defaults={'carrier_shape': 'sine', 'mod_shape': 'sine', 'mod_freq_ratio': 1.0, 'mod_depth': 0.7, 'attack': 0.12, 'release': 0.2}
+registry: in_sweet_spot(72)=True in_sweet_spot(36)=False in_range(60)=True
+Blown Bottle: program=76 gm='Blown Bottle' stem='Blown_Bottle' sweet=(60, 84) A4=440.0Hz
+Blown Bottle: zones={'low': (48, 59), 'mid': (60, 71), 'high': (72, 96)}
+Blown Bottle: art=['blow', 'swell', 'puff', 'breath', 'accent', 'ghost', 'flutter'] synth=phase_mod reverb=1.8s pan=0.0
+Blown Bottle: C4=261.6Hz C5=523.3Hz C6=1046.5Hz
+
+Zero-drift: True (OK)
+MIDI: /opt/data/projects/Instruments/_test/blown_bottle_test.mid (195 bytes)
+WAV (solo): /opt/data/projects/Instruments/_test/blown_bottle_test.wav (866604 bytes)
+Spectral check: 4-8kHz buzz energy = 5.2% (OK)
+
+Stem labels (pipeline GM_PROGRAMS, 0-indexed):
+  [74] = 'Recorder'
+  [75] = 'Pan Flute'
+  [76] = 'Blown Bottle'
+  [77] = 'Shakuhachi'
+  [78] = 'Whistle'
+  Blown Bottle -> 'Blown Bottle'
+SF2: /opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2
+SF2 preset 76 -> 'Bottle Chiff'
+
+Stems rendered (2 files):
+  track00_Blown_Bottle.wav (866604 bytes)
+  track01_Drums.wav (835628 bytes)
+
+PhaseModSynth FM_DEFAULTS (C5=523.25Hz): peak=0.799 late_rms=0.2832 late/peak=0.354
+  harmonic check: 2nd/1st = 0.46 (near-sine Helmholtz tone)
+
+ALL CHECKS PASSED

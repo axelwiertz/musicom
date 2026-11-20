@@ -1,0 +1,28 @@
+{
+  "bands": 24,
+  "env_fs_hz": 400.0,
+  "iterations_inner_outer": "15 inner / 3 outer",
+  "proj_corr_err_final": 0.0009288120478312374,
+  "acoustic_corr_err_curve": [
+    0.1417,
+    0.1244,
+    0.1185
+  ],
+  "acoustic_corr_err_final": 0.1185,
+  "moment_abs_err_max": [
+    0.0062,
+    0.0119,
+    0.2386,
+    0.9858
+  ],
+  "kurt_target_max": 9.075,
+  "kurt_out_max": 8.089,
+  "band_rms_err_db_max": 0.574,
+  "band_rms_err_db_median": 0.335,
+  "centroid_target_hz": 2574.8,
+  "centroid_out_hz": 2553.5,
+  "centroid_rel_diff": 0.0083,
+  "wav_bytes": 176444,
+  "peak": 0.89,
+  "dc": -3.021015032993623e-18
+}

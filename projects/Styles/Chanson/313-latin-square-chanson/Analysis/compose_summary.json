@@ -1,0 +1,271 @@
+{
+  "style": "chanson",
+  "genre": "Chanson",
+  "method": "ABS-139 Latin Square & Orthogonal-Array (LSAC)",
+  "layer": "abstract",
+  "paradigm": "Rules-Based",
+  "form": "verse-chorus",
+  "key": "G major",
+  "bpm": 112,
+  "bars": 40,
+  "sections": [
+    "Intro",
+    "Verse",
+    "Chorus",
+    "Verse2",
+    "Chorus2",
+    "Outro"
+  ],
+  "section_bars": [
+    4,
+    8,
+    8,
+    8,
+    8,
+    4
+  ],
+  "order": 7,
+  "latin_square": [
+    [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      0
+    ],
+    [
+      2,
+      3,
+      4,
+      5,
+      6,
+      0,
+      1
+    ],
+    [
+      3,
+      4,
+      5,
+      6,
+      0,
+      1,
+      2
+    ],
+    [
+      4,
+      5,
+      6,
+      0,
+      1,
+      2,
+      3
+    ],
+    [
+      5,
+      6,
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    [
+      6,
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  ],
+  "orthogonal_mate": [
+    [
+      0,
+      2,
+      4,
+      6,
+      1,
+      3,
+      5
+    ],
+    [
+      1,
+      3,
+      5,
+      0,
+      2,
+      4,
+      6
+    ],
+    [
+      2,
+      4,
+      6,
+      1,
+      3,
+      5,
+      0
+    ],
+    [
+      3,
+      5,
+      0,
+      2,
+      4,
+      6,
+      1
+    ],
+    [
+      4,
+      6,
+      1,
+      3,
+      5,
+      0,
+      2
+    ],
+    [
+      5,
+      0,
+      2,
+      4,
+      6,
+      1,
+      3
+    ],
+    [
+      6,
+      1,
+      3,
+      5,
+      0,
+      2,
+      4
+    ]
+  ],
+  "transversal": [
+    0,
+    2,
+    4,
+    6,
+    1,
+    3,
+    5
+  ],
+  "raw_notes": 40,
+  "long_cells": 17,
+  "distinct_pairs": 40,
+  "voice_leading_corrections": 0,
+  "phase1_path": "/opt/data/projects/Styles/Chanson/313-latin-square-chanson/MIDI/313-latin-square-chanson-phase1.mid",
+  "perfect_path": "/opt/data/projects/Styles/Chanson/313-latin-square-chanson/MIDI/313-latin-square-chanson-perfect.mid",
+  "humanized_path": "/opt/data/projects/Styles/Chanson/313-latin-square-chanson/MIDI/313-latin-square-chanson-humanized.mid",
+  "hz_seed": 24702,
+  "hz": {
+    "Lead": {
+      "seed": 2494902,
+      "n_notes": 99,
+      "mean_abs_shift_ticks": 4.242,
+      "max_abs_shift_ticks": 12,
+      "mean_abs_vel_delta": 6.323,
+      "timing_sigma_ticks": 7.168
+    },
+    "Accordion": {
+      "seed": 2494903,
+      "n_notes": 120,
+      "mean_abs_shift_ticks": 5.242,
+      "max_abs_shift_ticks": 17,
+      "mean_abs_vel_delta": 4.758,
+      "timing_sigma_ticks": 7.168
+    },
+    "Guitar": {
+      "seed": 2494904,
+      "n_notes": 800,
+      "mean_abs_shift_ticks": 5.389,
+      "max_abs_shift_ticks": 20,
+      "mean_abs_vel_delta": 4.912,
+      "timing_sigma_ticks": 7.168
+    },
+    "Bass": {
+      "seed": 2494905,
+      "n_notes": 80,
+      "mean_abs_shift_ticks": 8.125,
+      "max_abs_shift_ticks": 19,
+      "mean_abs_vel_delta": 4.788,
+      "timing_sigma_ticks": 8.96
+    },
+    "Drums": {
+      "seed": 2494906,
+      "n_notes": 480,
+      "mean_abs_shift_ticks": 1.11,
+      "max_abs_shift_ticks": 4,
+      "mean_abs_vel_delta": 3.388,
+      "timing_sigma_ticks": 1.792
+    }
+  },
+  "progression": {
+    "Intro": [
+      "G",
+      "C",
+      "D",
+      "G"
+    ],
+    "Verse": [
+      "G",
+      "Em",
+      "C",
+      "D",
+      "G",
+      "Em",
+      "Am",
+      "D"
+    ],
+    "Chorus": [
+      "G",
+      "C",
+      "D",
+      "G",
+      "Em",
+      "Am",
+      "D",
+      "G"
+    ],
+    "Verse2": [
+      "G",
+      "Em",
+      "C",
+      "D",
+      "G",
+      "Em",
+      "Am",
+      "D"
+    ],
+    "Chorus2": [
+      "G",
+      "C",
+      "D",
+      "G",
+      "Em",
+      "Am",
+      "D",
+      "G"
+    ],
+    "Outro": [
+      "G",
+      "C",
+      "D",
+      "G"
+    ]
+  }
+}

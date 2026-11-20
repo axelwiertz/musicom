@@ -1,0 +1,124 @@
+{
+  "phase1": {
+    "size": 1932,
+    "size_ok": true,
+    "tracks": 2,
+    "voice": 1,
+    "lens": [
+      61440
+    ],
+    "drift": true,
+    "per_voice": [
+      {
+        "pitched": 236,
+        "offgrid": 229,
+        "out_of_scale": 102,
+        "out_of_chord": 184
+      }
+    ],
+    "pitched": 236,
+    "offgrid": 229,
+    "out_of_scale": 102,
+    "out_of_chord": 184
+  },
+  "perfect": {
+    "size": 5802,
+    "size_ok": true,
+    "tracks": 6,
+    "voice": 5,
+    "lens": [
+      61440,
+      61440,
+      61440,
+      61440,
+      61440
+    ],
+    "drift": true,
+    "per_voice": [
+      {
+        "pitched": 236,
+        "offgrid": 0,
+        "out_of_scale": 0,
+        "out_of_chord": 0
+      },
+      {
+        "pitched": 144,
+        "offgrid": 0,
+        "out_of_scale": 0,
+        "out_of_chord": 0
+      },
+      {
+        "pitched": 204,
+        "offgrid": 0,
+        "out_of_scale": 0,
+        "out_of_chord": 0
+      },
+      {
+        "pitched": 96,
+        "offgrid": 0,
+        "out_of_scale": 0,
+        "out_of_chord": 0
+      },
+      {
+        "pitched": 32,
+        "offgrid": 0,
+        "out_of_scale": 0,
+        "out_of_chord": 0
+      }
+    ],
+    "pitched": 712,
+    "offgrid": 0,
+    "out_of_scale": 0,
+    "out_of_chord": 0
+  },
+  "humanized": {
+    "size": 5745,
+    "size_ok": true,
+    "tracks": 6,
+    "voice": 5,
+    "lens": [
+      61440,
+      61440,
+      61440,
+      61440,
+      61440
+    ],
+    "drift": true,
+    "per_voice": [
+      {
+        "pitched": 236,
+        "offgrid": 203,
+        "out_of_scale": 0,
+        "out_of_chord": 0
+      },
+      {
+        "pitched": 144,
+        "offgrid": 131,
+        "out_of_scale": 0,
+        "out_of_chord": 0
+      },
+      {
+        "pitched": 204,
+        "offgrid": 148,
+        "out_of_scale": 0,
+        "out_of_chord": 0
+      },
+      {
+        "pitched": 96,
+        "offgrid": 58,
+        "out_of_scale": 0,
+        "out_of_chord": 0
+      },
+      {
+        "pitched": 32,
+        "offgrid": 26,
+        "out_of_scale": 0,
+        "out_of_chord": 0
+      }
+    ],
+    "pitched": 712,
+    "offgrid": 566,
+    "out_of_scale": 0,
+    "out_of_chord": 0
+  }
+}

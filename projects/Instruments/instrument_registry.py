@@ -101,6 +101,7 @@ _INSTRUMENT_MODULES = {
     "Vocal.choir.choir": "choir",
     "Vocal.voice_like.voice_like_voice": "voice_like",
     "Woodwind.whistle.whistle": "whistle",
+    "Woodwind.blown_bottle.blown_bottle": "blown_bottle",
     "Woodwind.soprano_sax.soprano_sax": "soprano_sax",
     "Bass.electric_bass.electric_bass": "electric_bass",
     "Bass.pick_bass.pick_bass": "pick_bass",
@@ -354,6 +355,7 @@ HUMAN_VOICE = ALL_INSTRUMENTS["human_voice"]
 CHOIR = ALL_INSTRUMENTS["choir"]
 PAN_FLUTE = ALL_INSTRUMENTS["pan_flute"]
 WHISTLE = ALL_INSTRUMENTS["whistle"]
+BLOWN_BOTTLE = ALL_INSTRUMENTS["blown_bottle"]
 SOPRANO_SAX = ALL_INSTRUMENTS["soprano_sax"]
 ELECTRIC_BASS = ALL_INSTRUMENTS["electric_bass"]
 PICK_BASS = ALL_INSTRUMENTS["pick_bass"]
@@ -506,6 +508,8 @@ def registry_table():
             role = "lead, melody, ornament, accent, countermelody"
         elif low == "piccolo":
             role = "lead, melody, ornament, accent, countermelody"
+        elif low == "blown bottle":
+            role = "lead, melody, ornament, accent, texture"
         elif low == "taiko drum":
             role = "accent, rhythm, drone, ornament"
         elif low == "agogo":
@@ -1132,3 +1136,21 @@ if __name__ == "__main__":
           "PERCUSSIVE_ORGAN.pan =", PERCUSSIVE_ORGAN.pan)
     print("  PERCUSSIVE_ORGAN.articulations =",
           list(PERCUSSIVE_ORGAN.articulations or {}))
+
+    print()
+    print("=== Blown Bottle (Woodwind, GM76) ===")
+    print("  BLOWN_BOTTLE.midi_program =", BLOWN_BOTTLE.midi_program,
+          "(should be 76)")
+    print("  by_name('blown bottle') =", by_name("blown bottle"))
+    print("  by_name('Blown Bottle') =", by_name("Blown Bottle"))
+    print("  by_program(76) =", by_program(76))
+    print("  by_program(75) =", by_program(75), "(distinct: pan flute)")
+    print("  BLOWN_BOTTLE.in_sweet_spot(72) =", BLOWN_BOTTLE.in_sweet_spot(72))
+    print("  BLOWN_BOTTLE.in_sweet_spot(36) =", BLOWN_BOTTLE.in_sweet_spot(36))
+    print("  BLOWN_BOTTLE.range_min =", BLOWN_BOTTLE.range_min,
+          "BLOWN_BOTTLE.range_max =", BLOWN_BOTTLE.range_max)
+    print("  BLOWN_BOTTLE.solo_range =", BLOWN_BOTTLE.solo_range)
+    print("  BLOWN_BOTTLE.stem_label =", repr(BLOWN_BOTTLE.stem_label))
+    print("  BLOWN_BOTTLE.synthesis =", repr(BLOWN_BOTTLE.synthesis))
+    print("  BLOWN_BOTTLE.reverb_tail =", BLOWN_BOTTLE.reverb_tail,
+          "BLOWN_BOTTLE.pan =", BLOWN_BOTTLE.pan)

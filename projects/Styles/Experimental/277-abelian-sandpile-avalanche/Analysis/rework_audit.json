@@ -1,0 +1,36 @@
+{
+  "chosen": "/opt/data/projects/Styles/Experimental/277-abelian-sandpile-avalanche",
+  "genre": "Experimental",
+  "primary_midi": "/opt/data/projects/Styles/Experimental/277-abelian-sandpile-avalanche/MIDI/277-abelian-sandpile-avalanche-perfect.mid",
+  "audited_utc": "2026-11-20",
+  "standards": {
+    "1_engine": "PASS",
+    "2_zero_drift": "PASS (5 voice tracks, 46080 ticks each)",
+    "3_rhythm_grid_sync": "PASS (0 off-grid)",
+    "4_min_4_tracks": "PASS (5)",
+    "5_two_phase_artifacts": "PASS (phase1 present)",
+    "6_provenance_index": "FAIL (no root provenance.json, no index.html)"
+  },
+  "standard_failures": [
+    "6: provenance.json + index.html missing at project root (only .mid.provenance.json sidecars exist)"
+  ],
+  "redesign_required": true,
+  "redesign_notes": "Engine code is compliant (UnitMatrixComposer, zero-drift, grid-synced). Failure is portfolio-artifact only. Rebuild preserves musical identity (genre Experimental, D minor aeolian, 88 BPM, Method 036 abelian sandpile, 5-voice Marimba/Celesta/Piano/Strings/DoubleBass), adds root provenance.json + index.html, and extends 24->32 bars with 6 variation techniques.",
+  "source_identity": {
+    "genre": "Experimental",
+    "key": "D minor (aeolian)",
+    "key_pcs": [0, 2, 4, 5, 7, 9, 10],
+    "bpm": 88,
+    "method": "036 ASAR (Abelian Sandpile Avalanche)",
+    "voices": [
+      ["Lead", "Marimba", 12],
+      ["Counter", "Celesta", 8],
+      ["Harmony", "Piano", 1],
+      ["Pad", "String Ensemble", 48],
+      ["Bass", "Double Bass", 43]
+    ],
+    "bars": 24,
+    "sections": 6,
+    "form": "through-composed S1..S6"
+  }
+}

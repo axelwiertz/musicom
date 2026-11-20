@@ -1,0 +1,176 @@
+{
+  "artifact": "314-abelian-sandpile-suite-humanized.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom rework 314 (phase=2 + humanization) (method 036 ASAR)",
+  "sources": [
+    "/opt/data/projects/Styles/Experimental/314-abelian-sandpile-suite/MIDI/314-abelian-sandpile-suite-perfect.mid"
+  ],
+  "parameters": {
+    "bpm": 88,
+    "key": "D",
+    "mode": "aeolian",
+    "style": "experimental",
+    "form": "through-composed S1..S8",
+    "bars": 32,
+    "sections": [
+      "S1",
+      "S2",
+      "S3",
+      "S4",
+      "S5",
+      "S6",
+      "S7",
+      "S8"
+    ],
+    "section_variation": {
+      "S1": "original",
+      "S2": "original",
+      "S3": "original",
+      "S4": "transpose",
+      "S5": "invert",
+      "S6": "original",
+      "S7": "retrograde",
+      "S8": "augment"
+    },
+    "method": "036 ASAR",
+    "layer": "concrete",
+    "paradigm": "Nature-Led",
+    "rework": "redesign+extension",
+    "source": "277-abelian-sandpile-avalanche",
+    "voices": [
+      [
+        "Lead",
+        "Marimba",
+        12
+      ],
+      [
+        "Counter",
+        "Celesta",
+        8
+      ],
+      [
+        "Harmony",
+        "Piano",
+        1
+      ],
+      [
+        "Pad",
+        "String Ensemble",
+        48
+      ],
+      [
+        "Bass",
+        "Double Bass",
+        43
+      ]
+    ],
+    "humanize_seed": 66824,
+    "raw_seed": 20261120,
+    "humanize_profiles": {
+      "Lead": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.5,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Counter": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.015,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.5,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Harmony": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.015,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.5,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Pad": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.03,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.5,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Bass": {
+        "timing_sigma_ms": 10.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.03,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.5,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      }
+    },
+    "phase": 2,
+    "version": "humanized",
+    "humanize_stats": {
+      "Lead": {
+        "seed": 6749224,
+        "n_notes": 236,
+        "mean_abs_shift_ticks": 3.703,
+        "max_abs_shift_ticks": 13,
+        "mean_abs_vel_delta": 4.085,
+        "timing_sigma_ticks": 5.632
+      },
+      "Counter": {
+        "seed": 6749225,
+        "n_notes": 144,
+        "mean_abs_shift_ticks": 3.597,
+        "max_abs_shift_ticks": 14,
+        "mean_abs_vel_delta": 4.208,
+        "timing_sigma_ticks": 5.632
+      },
+      "Harmony": {
+        "seed": 6749226,
+        "n_notes": 204,
+        "mean_abs_shift_ticks": 2.701,
+        "max_abs_shift_ticks": 10,
+        "mean_abs_vel_delta": 4.314,
+        "timing_sigma_ticks": 5.632
+      },
+      "Pad": {
+        "seed": 6749227,
+        "n_notes": 96,
+        "mean_abs_shift_ticks": 3.062,
+        "max_abs_shift_ticks": 12,
+        "mean_abs_vel_delta": 4.396,
+        "timing_sigma_ticks": 5.632
+      },
+      "Bass": {
+        "seed": 6749228,
+        "n_notes": 32,
+        "mean_abs_shift_ticks": 6.844,
+        "max_abs_shift_ticks": 17,
+        "mean_abs_vel_delta": 3.406,
+        "timing_sigma_ticks": 7.04
+      }
+    }
+  },
+  "notes": "Humanized layer (style experimental + per-instrument DNA).",
+  "sha256": "586acc5edf052335b984c2643e9ef8347cbb5a19dca4fba79fbb135cad792336",
+  "bytes": 5745,
+  "created_utc": "2026-11-20T01:11:31.990540+00:00",
+  "provenance_version": "1.0"
+}

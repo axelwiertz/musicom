@@ -1,0 +1,41 @@
+{
+  "soundfont": "/opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2",
+  "style": "chanson",
+  "target_lufs": -14.0,
+  "phase1": {
+    "lufs": -14.15,
+    "true_peak_db": -1.0,
+    "target_lufs": -14.0,
+    "silence_ratio": 0.5213,
+    "rms_mean": 0.1057,
+    "rms_max": 0.2465,
+    "wav_bytes": 15473452,
+    "ogg_bytes": 536685,
+    "wav": "/opt/data/projects/Styles/Chanson/313-latin-square-chanson/Audio/313-latin-square-chanson-phase1.wav",
+    "ogg": "/opt/data/projects/Styles/Chanson/313-latin-square-chanson/Audio/313-latin-square-chanson-phase1.ogg"
+  },
+  "perfect": {
+    "lufs": -14.08,
+    "true_peak_db": -1.0,
+    "target_lufs": -14.0,
+    "silence_ratio": 0.0532,
+    "rms_mean": 0.1361,
+    "rms_max": 0.2031,
+    "wav_bytes": 15985196,
+    "ogg_bytes": 687832,
+    "wav": "/opt/data/projects/Styles/Chanson/313-latin-square-chanson/Audio/313-latin-square-chanson-perfect.wav",
+    "ogg": "/opt/data/projects/Styles/Chanson/313-latin-square-chanson/Audio/313-latin-square-chanson-perfect.ogg"
+  },
+  "humanized": {
+    "lufs": -14.05,
+    "true_peak_db": -1.0,
+    "target_lufs": -14.0,
+    "silence_ratio": 0.0544,
+    "rms_mean": 0.137,
+    "rms_max": 0.1979,
+    "wav_bytes": 15985196,
+    "ogg_bytes": 691873,
+    "wav": "/opt/data/projects/Styles/Chanson/313-latin-square-chanson/Audio/313-latin-square-chanson-humanized.wav",
+    "ogg": "/opt/data/projects/Styles/Chanson/313-latin-square-chanson/Audio/313-latin-square-chanson-humanized.ogg"
+  }
+}

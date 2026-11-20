@@ -631,6 +631,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Woodwind | Bagpipe | 109 | 53–96 | lead, melody, ornament, drone, accent |
 | Woodwind | Baritone Saxophone | 67 | 36–80 | bass, harmony, accent, lead, countermelody |
 | Woodwind | Bassoon | 70 | 34–88 | bass, harmony, counter, lead |
+| Woodwind | Blown Bottle | 76 | 48–96 | lead, melody, ornament, accent, texture |
 | Guitar | Acoustic Guitar (nylon) | 24 | 40–84 | harmony, rhythm, strum |
 | Guitar | Acoustic Guitar (steel) | 25 | 40–86 | harmony, rhythm, strum, lead, melody, ornament, countermelody |
 | Guitar | Electric Guitar (jazz) | 26 | 28–84 | harmony, rhythm, comp, lead, melody, ornament, countermelody, accent |
@@ -2582,3 +2583,64 @@ substitute for Church Organ pipes or Rock Organ saturation. Humanize: Keys DNA
 percussion tab supplies the groove. Remaining sibling candidates: GM112 Tinkle
 Bell, GM118 Synth Drum, GM76 Blown Bottle, GM50/51 Synth Strings 1/2, GM63
 Synth Brass 2, GM37 Slap Bass 2, GM2 Electric Grand Piano.
+
+**Blown Bottle added** (2026-11-20): GM76, **Woodwind-family twelfth entry**
+— the Helmholtz-resonator aerophone (an air jet across the bottle mouth
+excites the cavity resonance — the same physics family as the ocarina but a
+WIDE mouth = far more breath turbulence and a slower, swelly onset)
+(instrument.md + blown_bottle.py), verified end-to-end UnitMatrixComposer →
+zero-drift ✓ → MIDI (195 bytes) → FluidSynth WAV (866,604 bytes) ✓; rendered
+SOLO (one voice + drums context — no unison doubling, so no comb buzz); solo
+spectral check 4–8 kHz buzz energy **5.2%** (OK). RenderPipeline stem label
+`trackXX_Blown_Bottle.wav` ✓ (GM_PROGRAMS[76] = "Blown Bottle" — matches
+exactly, **no stem quirk**; **SF2 spelling quirk**: FluidR3 preset 76 =
+"Bottle Chiff", NOT "Blown Bottle" — cosmetic only, no routing impact, the
+phdr name reflects the sample's chiff/breath character). Identity: GM76 = the
+sound of blowing across an empty bottle — pitch set by cavity volume + neck
+geometry (typical soda bottle ≈ 100–300 Hz = G2–E4); the GM patch transposes
+chromatically. Range 48–96 (C3–C7, the usable-tone writing band — the patch
+plays 24–108, level flat within 7.9 dB, no gaps) — trimmed for tone, not
+audibility: below C3 the blow-in swell exceeds ~2 s and a sub-octave layer
+dominates; above C6 the patch gets noisy (4–8 kHz band ~16%). Sweet spot
+65–79 (G4–G5), solo 60–84 (C4–C6); zones low 48–59 (deep slow swell, sub-octave
+heavy — roots/drone colour only) / mid 60–71 (primary melody) / high 72–96
+(fast attack, breathy; 84+ accents only). **Measured SF2 quirks (FluidR3)**:
+(1) **two-stage attack IS the identity** — initial breath onset ~80–120 ms,
+full swell register-dependent 40 ms (C6+) / 500 ms (C5) / 0.5–2.2 s (C3–B4);
+low notes are slow swells, write them ≥ 1–2 s or they never speak. (2) Weak
+sustain with a ~1 Hz "breathing" amplitude wobble (sample-loop) — not a flat
+flute sustain; re-articulate long pads every 2–4 bars. (3) Velocity →
+**amplitude only** (centroid flat 1593–1656 Hz from vel 20–120; peak 0.017 →
+0.592, near-linear) — accents need real velocity. (4) Strong **sub-octave
+layer** on low notes (48–60: dominant component an octave below written;
+pitch identity still unambiguous per band-limited check 0.90–1.10× f0 across
+24–108 — GM76 really transposes, unlike woodblock/melodic-tom). Synthesis:
+**`phase_mod`** (PhaseModSynth) primary — sine carrier + sine modulator,
+ratio 1.0, mod_depth **0.7** (shallowest of the flute set, reflecting the
+near-sinusoidal Helmholtz tone), attack 0.12 s (slowest of the set — the
+blow-in swell), release 0.20 s; verified: FM C5 render peak 0.799,
+late/peak 0.354 (sustain holds), 2nd/1st partial 0.46 (near-sine).
+**Additive** fallback (4 partials 0.9/0.25/0.1/0.04 — cavity suppresses
+harmonics); ModalSynth = struck-resonator ALT for short "bloop" puffs only;
+Karplus-Strong REJECTED (no string — Helmholtz cavity is not a string).
+Production: reverb 1.8 s, EQ cut 350 Hz −2.5 dB (sub-octave layer piles low
+energy), boost 2.5 kHz +2 dB (breath edge), 7 kHz shelf +1.5 dB (84+ is
+already ~16% noisy — never push 8 kHz+), pan 0.0. Articulations: blow, swell,
+puff, breath, accent, ghost, flutter. Registration proof:
+`by_name('blown bottle')` / `by_name('Blown Bottle')` / `by_program(76)` →
+Blown Bottle (distinct from `by_program(75)` Pan Flute), `in_sweet_spot(72)` =
+True, `in_sweet_spot(36)` = False, `stem_label = 'Blown_Bottle'`,
+`synthesis = 'phase_mod'`; `registry_table()` row "| Woodwind | Blown Bottle |
+76 | 48–96 | lead, melody, ornament, accent, texture |"; convenience constant
+`BLOWN_BOTTLE`. Role: lead/melody (novelty/folk/psychedelic colour lines, the
+"nature" melody voice), ornament (puffs, swells, breath ghosts, flutter),
+color/texture (long swelling single notes, breath beds, "wind in a bottle"
+ambience), countermelody (answers whistle/ocarina/recorder) — NOT harmony/pad
+(monophonic breath line, no dense chords), NOT bass (low register is sub-octave
+rumble with a > 1 s swell), NOT rhythmic (slow attack smears fast gestures;
+re-articulate puffs). Humanize: Woodwind DNA (8 ms sigma family; style governs
+timing). Completes the GM woodwind flute/whistle block 73–80 (Flute, Recorder,
+Pan Flute, **Blown Bottle**, Shakuhachi, Whistle, Ocarina — ALL present).
+Remaining sibling candidates: GM112 Tinkle Bell, GM118 Synth Drum, GM50/51
+Synth Strings 1/2, GM63 Synth Brass 2, GM37 Slap Bass 2, GM2 Electric Grand
+Piano.

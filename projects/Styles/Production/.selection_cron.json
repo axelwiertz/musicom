@@ -1,12 +1,12 @@
 {
   "job": "random-style production (SP) layer-aligned",
-  "date": "2026-11-19",
-  "seed": 20261119,
-  "method": "SP-157",
-  "method_module": "sound.effects.whole_tone_filterbank",
-  "method_desc": "48-Band Whole-Tone Filter Bank \u2014 48 RBJ bandpass bands spaced in whole tones over 8 octaves (40 Hz\u20139.1 kHz), 12/24 dB slopes, per-band resonance, MIDI-playable band gains, per-band ring mod, odd/even panning, FFT band-profile freeze + spectral transfer (AudioThing/Hainbach Seconds-style)",
-  "source_midi": "/opt/data/repos/musicom/projects/Styles/Metal/247-metal-fourier-spectrum/MIDI/247-metal-fourier-spectrum.mid",
-  "source_project": "Metal/247-metal-fourier-spectrum/MIDI/247-metal-fourier-spectrum.mid",
+  "date": "2026-11-20",
+  "seed": 20261120,
+  "method": "SP-032",
+  "method_module": "sound.effects.fdn_reverb",
+  "method_desc": "Feedback Delay Network Reverb",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Groove/274-groove-sieve-rework/MIDI/274-groove-sieve-rework-humanized.mid",
+  "source_project": "Groove/274-groove-sieve-rework/MIDI/274-groove-sieve-rework-humanized.mid",
   "registry_size": 104,
   "recent_excluded": [
     "SP-075",
@@ -15,7 +15,7 @@
     "SP-107",
     "SP-115",
     "SP-146",
-    "SP-154"
+    "SP-157"
   ],
   "already_on_source": [],
   "baseline_excluded": [
@@ -105,9 +105,9 @@
     "SP-151",
     "SP-152",
     "SP-153",
+    "SP-154",
     "SP-155",
     "SP-156",
-    "SP-157",
     "SP-158",
     "SP-159",
     "SP-160",
@@ -119,8 +119,8 @@
     "SP-166",
     "SP-167"
   ],
-  "n_candidates": 470,
-  "n_well_formed": 365,
-  "n_meaningful": 364,
+  "n_candidates": 474,
+  "n_well_formed": 369,
+  "n_meaningful": 368,
   "rejected_degenerate": []
 }

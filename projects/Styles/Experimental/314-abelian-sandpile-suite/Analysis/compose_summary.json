@@ -1,0 +1,142 @@
+{
+  "style": "experimental",
+  "genre": "Experimental",
+  "project": "314-abelian-sandpile-suite",
+  "method": "036 ASAR",
+  "form": "through-composed S1..S8",
+  "key": "D minor (aeolian)",
+  "bpm": 88,
+  "bars": 32,
+  "sections": [
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5",
+    "S6",
+    "S7",
+    "S8"
+  ],
+  "variation": {
+    "S1": "original",
+    "S2": "original",
+    "S3": "original",
+    "S4": "transpose",
+    "S5": "invert",
+    "S6": "original",
+    "S7": "retrograde",
+    "S8": "augment"
+  },
+  "sandpile_topplings": 718,
+  "varied_events": 236,
+  "raw_events": 236,
+  "phase1_path": "/opt/data/projects/Styles/Experimental/314-abelian-sandpile-suite/MIDI/314-abelian-sandpile-suite-phase1.mid",
+  "perfect_path": "/opt/data/projects/Styles/Experimental/314-abelian-sandpile-suite/MIDI/314-abelian-sandpile-suite-perfect.mid",
+  "humanized_path": "/opt/data/projects/Styles/Experimental/314-abelian-sandpile-suite/MIDI/314-abelian-sandpile-suite-humanized.mid",
+  "off_grid": 0,
+  "scale_violations": 0,
+  "chord_violations": 0,
+  "hz_seed": 66824,
+  "hz": {
+    "Lead": {
+      "seed": 6749224,
+      "n_notes": 236,
+      "mean_abs_shift_ticks": 3.953,
+      "max_abs_shift_ticks": 14,
+      "mean_abs_vel_delta": 4.085,
+      "timing_sigma_ticks": 5.632
+    },
+    "Counter": {
+      "seed": 6749225,
+      "n_notes": 144,
+      "mean_abs_shift_ticks": 3.743,
+      "max_abs_shift_ticks": 13,
+      "mean_abs_vel_delta": 4.208,
+      "timing_sigma_ticks": 5.632
+    },
+    "Harmony": {
+      "seed": 6749226,
+      "n_notes": 204,
+      "mean_abs_shift_ticks": 3.461,
+      "max_abs_shift_ticks": 11,
+      "mean_abs_vel_delta": 4.314,
+      "timing_sigma_ticks": 5.632
+    },
+    "Pad": {
+      "seed": 6749227,
+      "n_notes": 96,
+      "mean_abs_shift_ticks": 4.604,
+      "max_abs_shift_ticks": 15,
+      "mean_abs_vel_delta": 4.396,
+      "timing_sigma_ticks": 5.632
+    },
+    "Bass": {
+      "seed": 6749228,
+      "n_notes": 32,
+      "mean_abs_shift_ticks": 8.0,
+      "max_abs_shift_ticks": 23,
+      "mean_abs_vel_delta": 3.406,
+      "timing_sigma_ticks": 7.04
+    }
+  },
+  "progression": {
+    "S1": [
+      "Dm",
+      "F",
+      "Bb",
+      "C"
+    ],
+    "S2": [
+      "Dm",
+      "Gm",
+      "Dm",
+      "Am"
+    ],
+    "S3": [
+      "Bb",
+      "C",
+      "Dm",
+      "Am"
+    ],
+    "S4": [
+      "Gm",
+      "Dm",
+      "C",
+      "Bb"
+    ],
+    "S5": [
+      "Dm",
+      "Bb",
+      "Gm",
+      "Am"
+    ],
+    "S6": [
+      "F",
+      "C",
+      "Dm",
+      "Bb"
+    ],
+    "S7": [
+      "Dm",
+      "F",
+      "Bb",
+      "C"
+    ],
+    "S8": [
+      "Dm",
+      "Gm",
+      "C",
+      "Dm"
+    ]
+  },
+  "midpoint_degree": {
+    "S1": 6,
+    "S2": 1,
+    "S3": 1,
+    "S4": 7,
+    "S5": 4,
+    "S6": 1,
+    "S7": 6,
+    "S8": 7
+  }
+}

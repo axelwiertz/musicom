@@ -1,0 +1,34 @@
+{
+  "artifact": "314-abelian-sandpile-suite-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom rework 314 (phase=1 raw, method 036 ASAR + variation)",
+  "sources": [
+    "/opt/data/projects/Styles/Experimental/277-abelian-sandpile-avalanche/MIDI/277-abelian-sandpile-avalanche-phase1.mid"
+  ],
+  "parameters": {
+    "bpm": 88,
+    "bars": 32,
+    "seed": 20261120,
+    "phase": 1,
+    "quantized": false,
+    "key": "D minor (aeolian)",
+    "form": "through-composed S1..S8",
+    "style": "experimental",
+    "method": "036 ASAR (BTW abelian sandpile, 14x256 lattice)",
+    "variation": [
+      "original",
+      "original",
+      "original",
+      "transpose",
+      "invert",
+      "original",
+      "retrograde",
+      "augment"
+    ]
+  },
+  "notes": "Raw BTW abelian sandpile + per-section variation (transpose/invert/retrograde/augment). Off-grid, float pitch + jitter, single voice, pre-rules.",
+  "sha256": "95fefe29b1d096970203258a3ebbb23f7d46a2d39eb808c7922b5bd4c7c2b5bd",
+  "bytes": 1932,
+  "created_utc": "2026-11-20T01:11:31.902448+00:00",
+  "provenance_version": "1.0"
+}

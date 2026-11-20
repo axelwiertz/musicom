@@ -1,0 +1,137 @@
+{
+  "artifact": "314-abelian-sandpile-suite-perfect.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom rework 314 (phase=2 strict chord discipline: grid snap + chord-tone quantize + dedup + voice-leading) (method 036 ASAR)",
+  "sources": [
+    "/opt/data/projects/Styles/Experimental/314-abelian-sandpile-suite/MIDI/314-abelian-sandpile-suite-phase1.mid"
+  ],
+  "parameters": {
+    "bpm": 88,
+    "key": "D",
+    "mode": "aeolian",
+    "style": "experimental",
+    "form": "through-composed S1..S8",
+    "bars": 32,
+    "sections": [
+      "S1",
+      "S2",
+      "S3",
+      "S4",
+      "S5",
+      "S6",
+      "S7",
+      "S8"
+    ],
+    "section_variation": {
+      "S1": "original",
+      "S2": "original",
+      "S3": "original",
+      "S4": "transpose",
+      "S5": "invert",
+      "S6": "original",
+      "S7": "retrograde",
+      "S8": "augment"
+    },
+    "method": "036 ASAR",
+    "layer": "concrete",
+    "paradigm": "Nature-Led",
+    "rework": "redesign+extension",
+    "source": "277-abelian-sandpile-avalanche",
+    "voices": [
+      [
+        "Lead",
+        "Marimba",
+        12
+      ],
+      [
+        "Counter",
+        "Celesta",
+        8
+      ],
+      [
+        "Harmony",
+        "Piano",
+        1
+      ],
+      [
+        "Pad",
+        "String Ensemble",
+        48
+      ],
+      [
+        "Bass",
+        "Double Bass",
+        43
+      ]
+    ],
+    "humanize_seed": 66824,
+    "raw_seed": 20261120,
+    "humanize_profiles": {
+      "Lead": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.5,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Counter": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.015,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.5,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Harmony": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.015,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.5,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Pad": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.03,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.5,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Bass": {
+        "timing_sigma_ms": 10.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.03,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.5,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      }
+    },
+    "phase": 2,
+    "version": "perfect",
+    "off_grid": 0,
+    "scale_violations": 0,
+    "chord_violations": 0
+  },
+  "notes": "Grid-locked perfect layer (through-composed, 32 bars, 8 sections).",
+  "sha256": "df8c3982264802e3da7050919f785761b0b44bdd9bcc66f8d25bf9d7a0f61275",
+  "bytes": 5802,
+  "created_utc": "2026-11-20T01:11:31.990190+00:00",
+  "provenance_version": "1.0"
+}

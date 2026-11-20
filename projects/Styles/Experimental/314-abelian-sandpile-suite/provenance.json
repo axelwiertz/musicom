@@ -1,0 +1,295 @@
+{
+  "bpm": 88,
+  "key": "D",
+  "mode": "aeolian",
+  "style": "experimental",
+  "form": "through-composed S1..S8",
+  "bars": 32,
+  "sections": [
+    {
+      "name": "S1",
+      "bars": 4,
+      "progression": [
+        1,
+        3,
+        6,
+        7
+      ],
+      "progression_names": [
+        "Dm",
+        "F",
+        "Bb",
+        "C"
+      ],
+      "midpoint_degree": 6,
+      "variation": "original"
+    },
+    {
+      "name": "S2",
+      "bars": 4,
+      "progression": [
+        1,
+        4,
+        1,
+        5
+      ],
+      "progression_names": [
+        "Dm",
+        "Gm",
+        "Dm",
+        "Am"
+      ],
+      "midpoint_degree": 1,
+      "variation": "original"
+    },
+    {
+      "name": "S3",
+      "bars": 4,
+      "progression": [
+        6,
+        7,
+        1,
+        5
+      ],
+      "progression_names": [
+        "Bb",
+        "C",
+        "Dm",
+        "Am"
+      ],
+      "midpoint_degree": 1,
+      "variation": "original"
+    },
+    {
+      "name": "S4",
+      "bars": 4,
+      "progression": [
+        4,
+        1,
+        7,
+        6
+      ],
+      "progression_names": [
+        "Gm",
+        "Dm",
+        "C",
+        "Bb"
+      ],
+      "midpoint_degree": 7,
+      "variation": "transpose"
+    },
+    {
+      "name": "S5",
+      "bars": 4,
+      "progression": [
+        1,
+        6,
+        4,
+        5
+      ],
+      "progression_names": [
+        "Dm",
+        "Bb",
+        "Gm",
+        "Am"
+      ],
+      "midpoint_degree": 4,
+      "variation": "invert"
+    },
+    {
+      "name": "S6",
+      "bars": 4,
+      "progression": [
+        3,
+        7,
+        1,
+        6
+      ],
+      "progression_names": [
+        "F",
+        "C",
+        "Dm",
+        "Bb"
+      ],
+      "midpoint_degree": 1,
+      "variation": "original"
+    },
+    {
+      "name": "S7",
+      "bars": 4,
+      "progression": [
+        1,
+        3,
+        6,
+        7
+      ],
+      "progression_names": [
+        "Dm",
+        "F",
+        "Bb",
+        "C"
+      ],
+      "midpoint_degree": 6,
+      "variation": "retrograde"
+    },
+    {
+      "name": "S8",
+      "bars": 4,
+      "progression": [
+        1,
+        4,
+        7,
+        1
+      ],
+      "progression_names": [
+        "Dm",
+        "Gm",
+        "C",
+        "Dm"
+      ],
+      "midpoint_degree": 7,
+      "variation": "augment"
+    }
+  ],
+  "section_variation": {
+    "S1": "original",
+    "S2": "original",
+    "S3": "original",
+    "S4": "transpose",
+    "S5": "invert",
+    "S6": "original",
+    "S7": "retrograde",
+    "S8": "augment"
+  },
+  "method": "036 ASAR",
+  "layer": "concrete",
+  "paradigm": "Nature-Led",
+  "rework": "redesign+extension",
+  "source": "277-abelian-sandpile-avalanche",
+  "voices": [
+    [
+      "Lead",
+      "Marimba",
+      12
+    ],
+    [
+      "Counter",
+      "Celesta",
+      8
+    ],
+    [
+      "Harmony",
+      "Piano",
+      1
+    ],
+    [
+      "Pad",
+      "String Ensemble",
+      48
+    ],
+    [
+      "Bass",
+      "Double Bass",
+      43
+    ]
+  ],
+  "humanize_seed": 66824,
+  "raw_seed": 20261120,
+  "humanize_profiles": {
+    "Lead": {
+      "timing_sigma_ms": 8.0,
+      "velocity_sigma": 5.0,
+      "duration_scale": 1.0,
+      "duration_sigma": 0.01,
+      "layback_ms": 0.0,
+      "phrase_corr": 0.5,
+      "velocity_min": 20,
+      "velocity_max": 127,
+      "couple_thresh": 15.0
+    },
+    "Counter": {
+      "timing_sigma_ms": 8.0,
+      "velocity_sigma": 5.0,
+      "duration_scale": 1.0,
+      "duration_sigma": 0.015,
+      "layback_ms": 0.0,
+      "phrase_corr": 0.5,
+      "velocity_min": 20,
+      "velocity_max": 127,
+      "couple_thresh": 15.0
+    },
+    "Harmony": {
+      "timing_sigma_ms": 8.0,
+      "velocity_sigma": 5.0,
+      "duration_scale": 1.0,
+      "duration_sigma": 0.015,
+      "layback_ms": 0.0,
+      "phrase_corr": 0.5,
+      "velocity_min": 20,
+      "velocity_max": 127,
+      "couple_thresh": 15.0
+    },
+    "Pad": {
+      "timing_sigma_ms": 8.0,
+      "velocity_sigma": 6.0,
+      "duration_scale": 1.0,
+      "duration_sigma": 0.03,
+      "layback_ms": 0.0,
+      "phrase_corr": 0.5,
+      "velocity_min": 20,
+      "velocity_max": 127,
+      "couple_thresh": 15.0
+    },
+    "Bass": {
+      "timing_sigma_ms": 10.0,
+      "velocity_sigma": 6.0,
+      "duration_scale": 1.0,
+      "duration_sigma": 0.03,
+      "layback_ms": 8.0,
+      "phrase_corr": 0.5,
+      "velocity_min": 20,
+      "velocity_max": 127,
+      "couple_thresh": 15.0
+    }
+  },
+  "project": "314-abelian-sandpile-suite",
+  "genre": "Experimental",
+  "key_name": "D minor (aeolian)",
+  "tonic_pc": 2,
+  "key_pcs": [
+    0,
+    2,
+    4,
+    5,
+    7,
+    9,
+    10
+  ],
+  "ticks": 61440,
+  "variation_techniques": {
+    "transposition": "S4 lead +4 diatonic steps (perfect 4th up)",
+    "inversion": "S5 lead diatonic mirror around tonic",
+    "retrograde": "S7 avalanche cascade time-reversed within section",
+    "augmentation": "S8 durations doubled + tail thinned (half-time)",
+    "register_shift": "S4 pad +12, S4/S6 drop-center arch high",
+    "density_arc": "grains/col 3/5/7/11/7/9/5/3",
+    "counterline_variation": "S4/S5 ascending, S6 8th-note density"
+  },
+  "audit": {
+    "standard_failures": [
+      "6: missing root provenance.json + index.html (source 277)"
+    ],
+    "redesign_required": true,
+    "source_identity": {
+      "genre": "Experimental",
+      "key": "D minor (aeolian)",
+      "bpm": 88,
+      "method": "036 ASAR",
+      "voices": 5,
+      "bars": 24
+    }
+  },
+  "hz_seed": 66824,
+  "generator": "musicom rework agent (nightly) 2026-11-20",
+  "classification": "ai-assisted"
+}
