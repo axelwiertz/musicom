@@ -1,0 +1,41 @@
+{
+  "soundfont": "/opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2",
+  "style": "groove",
+  "target_lufs": -14.0,
+  "phase1": {
+    "lufs": -14.11,
+    "true_peak_db": -1.0,
+    "target_lufs": -14.0,
+    "silence_ratio": 0.49,
+    "rms_mean": 0.1304,
+    "rms_max": 0.1922,
+    "wav_bytes": 5284908,
+    "ogg_bytes": 195789,
+    "wav": "/opt/data/projects/Styles/Groove/315-de-bruijn-groove-blues/Audio/315-de-bruijn-groove-blues-phase1.wav",
+    "ogg": "/opt/data/projects/Styles/Groove/315-de-bruijn-groove-blues/Audio/315-de-bruijn-groove-blues-phase1.ogg"
+  },
+  "perfect": {
+    "lufs": -14.03,
+    "true_peak_db": -1.0,
+    "target_lufs": -14.0,
+    "silence_ratio": 0.1433,
+    "rms_mean": 0.1307,
+    "rms_max": 0.1684,
+    "wav_bytes": 5746476,
+    "ogg_bytes": 213002,
+    "wav": "/opt/data/projects/Styles/Groove/315-de-bruijn-groove-blues/Audio/315-de-bruijn-groove-blues-perfect.wav",
+    "ogg": "/opt/data/projects/Styles/Groove/315-de-bruijn-groove-blues/Audio/315-de-bruijn-groove-blues-perfect.ogg"
+  },
+  "humanized": {
+    "lufs": -14.06,
+    "true_peak_db": -1.0,
+    "target_lufs": -14.0,
+    "silence_ratio": 0.144,
+    "rms_mean": 0.1306,
+    "rms_max": 0.1781,
+    "wav_bytes": 5746732,
+    "ogg_bytes": 212331,
+    "wav": "/opt/data/projects/Styles/Groove/315-de-bruijn-groove-blues/Audio/315-de-bruijn-groove-blues-humanized.wav",
+    "ogg": "/opt/data/projects/Styles/Groove/315-de-bruijn-groove-blues/Audio/315-de-bruijn-groove-blues-humanized.ogg"
+  }
+}

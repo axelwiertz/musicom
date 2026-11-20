@@ -1,0 +1,231 @@
+{
+  "artifact": "315-de-bruijn-groove-blues-humanized.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom composition 315 (phase=2 + humanization) (method 077 DBUC)",
+  "sources": [
+    "/opt/data/projects/Styles/Groove/315-de-bruijn-groove-blues/MIDI/315-de-bruijn-groove-blues-perfect.mid"
+  ],
+  "parameters": {
+    "bpm": 104,
+    "key": "E",
+    "mode": "aeolian",
+    "style": "groove",
+    "form": "blues-12 (12-bar)",
+    "bars": 12,
+    "method": "077 DBUC",
+    "layer": "concrete",
+    "paradigm": "Rules-Based",
+    "progression": [
+      "Em",
+      "Em",
+      "Em",
+      "Em",
+      "Am",
+      "Am",
+      "Em",
+      "Em",
+      "Bm",
+      "Am",
+      "Em",
+      "Bm"
+    ],
+    "de_bruijn": {
+      "pitch_seq": [
+        0,
+        0,
+        1,
+        0,
+        2,
+        0,
+        3,
+        0,
+        4,
+        0,
+        5,
+        0,
+        6,
+        1,
+        1,
+        2,
+        1,
+        3,
+        1,
+        4,
+        1,
+        5,
+        1,
+        6,
+        2,
+        2,
+        3,
+        2,
+        4,
+        2,
+        5,
+        2,
+        6,
+        3,
+        3,
+        4,
+        3,
+        5,
+        3,
+        6,
+        4,
+        4,
+        5,
+        4,
+        6,
+        5,
+        5,
+        6,
+        6
+      ],
+      "rhythm_seq": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        1,
+        1
+      ]
+    },
+    "voices": [
+      [
+        "Lead",
+        "Clavinet",
+        7
+      ],
+      [
+        "Guitar",
+        "Muted Guitar",
+        28
+      ],
+      [
+        "Rhodes",
+        "Rhodes",
+        4
+      ],
+      [
+        "Bass",
+        "Electric Bass",
+        33
+      ],
+      [
+        "Drums",
+        "Drum Kit",
+        0
+      ]
+    ],
+    "humanize_seed": 29275,
+    "raw_seed": 20261120,
+    "humanize_profiles": {
+      "Lead": {
+        "timing_sigma_ms": 3.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.015,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.15,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Guitar": {
+        "timing_sigma_ms": 3.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.15,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Rhodes": {
+        "timing_sigma_ms": 3.0,
+        "velocity_sigma": 5.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.015,
+        "layback_ms": 1.0,
+        "phrase_corr": 0.15,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Bass": {
+        "timing_sigma_ms": 5.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 8.0,
+        "phrase_corr": 0.15,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "Drums": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.008,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.15,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      }
+    },
+    "phase": 2,
+    "version": "humanized",
+    "humanize_stats": {
+      "Lead": {
+        "seed": 2956775,
+        "n_notes": 48,
+        "mean_abs_shift_ticks": 2.125,
+        "max_abs_shift_ticks": 6,
+        "mean_abs_vel_delta": 3.979,
+        "timing_sigma_ticks": 2.496
+      },
+      "Guitar": {
+        "seed": 2956776,
+        "n_notes": 180,
+        "mean_abs_shift_ticks": 1.817,
+        "max_abs_shift_ticks": 6,
+        "mean_abs_vel_delta": 4.622,
+        "timing_sigma_ticks": 2.496
+      },
+      "Rhodes": {
+        "seed": 2956777,
+        "n_notes": 72,
+        "mean_abs_shift_ticks": 2.222,
+        "max_abs_shift_ticks": 5,
+        "mean_abs_vel_delta": 3.514,
+        "timing_sigma_ticks": 2.496
+      },
+      "Bass": {
+        "seed": 2956778,
+        "n_notes": 48,
+        "mean_abs_shift_ticks": 6.938,
+        "max_abs_shift_ticks": 17,
+        "mean_abs_vel_delta": 3.312,
+        "timing_sigma_ticks": 4.16
+      },
+      "Drums": {
+        "seed": 2956779,
+        "n_notes": 156,
+        "mean_abs_shift_ticks": 0.974,
+        "max_abs_shift_ticks": 4,
+        "mean_abs_vel_delta": 2.968,
+        "timing_sigma_ticks": 1.664
+      }
+    }
+  },
+  "notes": "Humanized layer (style groove + per-instrument DNA).",
+  "sha256": "a68ffbb07741763f32af342ace5c26dbd974dec39ec3c04016e64e1a13397bad",
+  "bytes": 4072,
+  "created_utc": "2026-11-20T23:12:08.574932+00:00",
+  "provenance_version": "1.0"
+}

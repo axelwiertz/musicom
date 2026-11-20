@@ -1,0 +1,24 @@
+{
+  "artifact": "315-de-bruijn-groove-blues-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom composition 315 (phase=1 raw, method 077 DBUC)",
+  "sources": [],
+  "parameters": {
+    "bpm": 104,
+    "bars": 12,
+    "seed": 20261120,
+    "phase": 1,
+    "quantized": false,
+    "key": "E minor (aeolian)",
+    "form": "blues-12 (12-bar)",
+    "style": "groove",
+    "method": "077 DBUC (de Bruijn B(7,2) x B(2,3))",
+    "pitch_seq_len": 49,
+    "rhythm_seq_len": 8
+  },
+  "notes": "Raw de Bruijn degree walk (B(7,2) pitch x B(2,3) gate), off-grid, float pitch + jitter, single voice, pre-rules.",
+  "sha256": "ca8922de6b12620fc906e9879d9910fd540964ff8273a7629b8da825733f051e",
+  "bytes": 494,
+  "created_utc": "2026-11-20T23:12:08.461876+00:00",
+  "provenance_version": "1.0"
+}

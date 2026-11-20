@@ -1,0 +1,115 @@
+{
+  "style": "groove",
+  "genre": "Groove",
+  "project": "315-de-bruijn-groove-blues",
+  "method": "077 DBUC",
+  "layer": "concrete",
+  "form": "blues-12",
+  "key": "E minor (aeolian)",
+  "bpm": 104,
+  "bars": 12,
+  "progression": [
+    "Em",
+    "Em",
+    "Em",
+    "Em",
+    "Am",
+    "Am",
+    "Em",
+    "Em",
+    "Bm",
+    "Am",
+    "Em",
+    "Bm"
+  ],
+  "pitch_seq_len": 49,
+  "rhythm_seq_len": 8,
+  "raw_events": 48,
+  "phase1_path": "/opt/data/projects/Styles/Groove/315-de-bruijn-groove-blues/MIDI/315-de-bruijn-groove-blues-phase1.mid",
+  "perfect_path": "/opt/data/projects/Styles/Groove/315-de-bruijn-groove-blues/MIDI/315-de-bruijn-groove-blues-perfect.mid",
+  "humanized_path": "/opt/data/projects/Styles/Groove/315-de-bruijn-groove-blues/MIDI/315-de-bruijn-groove-blues-humanized.mid",
+  "off_grid": 0,
+  "scale_violations": 0,
+  "chord_violations": 0,
+  "tiered_audit": {
+    "Lead": {
+      "audible": 48,
+      "strong_ok": 0,
+      "weak_in_scale": 48,
+      "untagged_out_of_scale": 0,
+      "tagged_non_resolving": 0,
+      "strong_violations": 0,
+      "passes": true
+    },
+    "Guitar": {
+      "audible": 180,
+      "strong_ok": 72,
+      "weak_in_scale": 108,
+      "untagged_out_of_scale": 0,
+      "tagged_non_resolving": 0,
+      "strong_violations": 0,
+      "passes": true
+    },
+    "Rhodes": {
+      "audible": 72,
+      "strong_ok": 0,
+      "weak_in_scale": 72,
+      "untagged_out_of_scale": 0,
+      "tagged_non_resolving": 0,
+      "strong_violations": 0,
+      "passes": true
+    },
+    "Bass": {
+      "audible": 48,
+      "strong_ok": 24,
+      "weak_in_scale": 24,
+      "untagged_out_of_scale": 0,
+      "tagged_non_resolving": 0,
+      "strong_violations": 0,
+      "passes": true
+    }
+  },
+  "hz_seed": 29275,
+  "hz": {
+    "Lead": {
+      "seed": 2956775,
+      "n_notes": 48,
+      "mean_abs_shift_ticks": 2.125,
+      "max_abs_shift_ticks": 6,
+      "mean_abs_vel_delta": 3.979,
+      "timing_sigma_ticks": 2.496
+    },
+    "Guitar": {
+      "seed": 2956776,
+      "n_notes": 180,
+      "mean_abs_shift_ticks": 1.817,
+      "max_abs_shift_ticks": 6,
+      "mean_abs_vel_delta": 4.622,
+      "timing_sigma_ticks": 2.496
+    },
+    "Rhodes": {
+      "seed": 2956777,
+      "n_notes": 72,
+      "mean_abs_shift_ticks": 2.222,
+      "max_abs_shift_ticks": 5,
+      "mean_abs_vel_delta": 3.514,
+      "timing_sigma_ticks": 2.496
+    },
+    "Bass": {
+      "seed": 2956778,
+      "n_notes": 48,
+      "mean_abs_shift_ticks": 6.938,
+      "max_abs_shift_ticks": 17,
+      "mean_abs_vel_delta": 3.312,
+      "timing_sigma_ticks": 4.16
+    },
+    "Drums": {
+      "seed": 2956779,
+      "n_notes": 156,
+      "mean_abs_shift_ticks": 0.974,
+      "max_abs_shift_ticks": 4,
+      "mean_abs_vel_delta": 2.968,
+      "timing_sigma_ticks": 1.664
+    }
+  }
+}

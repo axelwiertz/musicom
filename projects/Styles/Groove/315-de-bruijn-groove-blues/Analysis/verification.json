@@ -1,0 +1,111 @@
+{
+  "project": "315-de-bruijn-groove-blues",
+  "report": {
+    "phase1": {
+      "tracks": 1,
+      "track_len": 23040,
+      "zero_drift": true,
+      "pitched": 48,
+      "drum": 0,
+      "off120": 47,
+      "off240": 47,
+      "scale_violations": 19,
+      "non_resolving": 0,
+      "strong_violations": 0,
+      "voice_audits": {
+        "voice0": {
+          "notes": 48,
+          "untagged_out_of_scale": 19,
+          "tagged_non_resolving": 0,
+          "strong_violations": 0,
+          "passes": false
+        }
+      }
+    },
+    "perfect": {
+      "tracks": 5,
+      "track_len": 23040,
+      "zero_drift": true,
+      "pitched": 348,
+      "drum": 156,
+      "off120": 0,
+      "off240": 0,
+      "scale_violations": 0,
+      "non_resolving": 0,
+      "strong_violations": 0,
+      "voice_audits": {
+        "voice0": {
+          "notes": 48,
+          "untagged_out_of_scale": 0,
+          "tagged_non_resolving": 0,
+          "strong_violations": 0,
+          "passes": true
+        },
+        "voice1": {
+          "notes": 180,
+          "untagged_out_of_scale": 0,
+          "tagged_non_resolving": 0,
+          "strong_violations": 0,
+          "passes": true
+        },
+        "voice2": {
+          "notes": 72,
+          "untagged_out_of_scale": 0,
+          "tagged_non_resolving": 0,
+          "strong_violations": 0,
+          "passes": true
+        },
+        "voice3": {
+          "notes": 48,
+          "untagged_out_of_scale": 0,
+          "tagged_non_resolving": 0,
+          "strong_violations": 0,
+          "passes": true
+        }
+      }
+    },
+    "humanized": {
+      "tracks": 5,
+      "track_len": 23040,
+      "zero_drift": true,
+      "pitched": 348,
+      "drum": 156,
+      "off120": 407,
+      "off240": 407,
+      "scale_violations": 0,
+      "non_resolving": 0,
+      "strong_violations": 0,
+      "voice_audits": {
+        "voice0": {
+          "notes": 48,
+          "untagged_out_of_scale": 0,
+          "tagged_non_resolving": 0,
+          "strong_violations": 0,
+          "passes": true
+        },
+        "voice1": {
+          "notes": 180,
+          "untagged_out_of_scale": 0,
+          "tagged_non_resolving": 0,
+          "strong_violations": 0,
+          "passes": true
+        },
+        "voice2": {
+          "notes": 72,
+          "untagged_out_of_scale": 0,
+          "tagged_non_resolving": 0,
+          "strong_violations": 0,
+          "passes": true
+        },
+        "voice3": {
+          "notes": 48,
+          "untagged_out_of_scale": 0,
+          "tagged_non_resolving": 0,
+          "strong_violations": 0,
+          "passes": true
+        }
+      }
+    }
+  },
+  "verdict": "PASS"
+}
