@@ -1,0 +1,28 @@
+{
+  "chosen": "/opt/data/projects/Styles/Soul/229-soul-voiceleading-rework",
+  "genre": "Soul",
+  "primary_midi": "MIDI/229-soul-voiceleading-rework.mid",
+  "audited_at": "2026-11-21",
+  "standard_failures": [],
+  "redesign_required": false,
+  "decision": "extension",
+  "standards": {
+    "1_engine_unitmatrix_composer": "PASS",
+    "2_zero_drift": "PASS (6 voice tracks x 61440 ticks)",
+    "3_rhythm_grid_sync": "PASS (0 off-grid pitched onsets)",
+    "4_track_setup_ge4": "PASS (6 voice tracks)",
+    "5_two_phase_artifacts": "PASS (.mid + -phase1.mid)",
+    "6_provenance_and_index": "PASS (provenance.json + index.html)"
+  },
+  "source_identity": {
+    "genre": "Soul",
+    "key": "F natural minor",
+    "key_pcs": [5, 7, 8, 10, 0, 1, 3],
+    "bpm": 96,
+    "method": "007 Voice-Leading Graph Search (TonalNetworkGenerator)",
+    "motif": [65, 68, 72, 68, 65, 63, 60, 63],
+    "form": "8 sections x 4 bars = 32 bars",
+    "voices": ["Lead (TenorSax)", "Horns", "Rhodes", "Violin", "Bass", "Drums(ch9)"],
+    "rework_of": "078-soul-voiceleading"
+  }
+}
