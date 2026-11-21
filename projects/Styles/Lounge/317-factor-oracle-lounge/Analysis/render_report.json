@@ -1,0 +1,41 @@
+{
+  "soundfont": "/opt/data/micromamba/envs/musicom/share/soundfonts/FluidR3_GM.sf2",
+  "style": "lounge",
+  "target_lufs": -14.0,
+  "phase1": {
+    "lufs": -14.0,
+    "true_peak_db": -1.87,
+    "target_lufs": -14.0,
+    "silence_ratio": 0.2359,
+    "rms_mean": 0.1293,
+    "rms_max": 0.1895,
+    "wav_bytes": 17322028,
+    "ogg_bytes": 891223,
+    "wav": "/opt/data/projects/Styles/Lounge/317-factor-oracle-lounge/Audio/317-factor-oracle-lounge-phase1.wav",
+    "ogg": "/opt/data/projects/Styles/Lounge/317-factor-oracle-lounge/Audio/317-factor-oracle-lounge-phase1.ogg"
+  },
+  "perfect": {
+    "lufs": -14.01,
+    "true_peak_db": -1.0,
+    "target_lufs": -14.0,
+    "silence_ratio": 0.0357,
+    "rms_mean": 0.1389,
+    "rms_max": 0.1747,
+    "wav_bytes": 17426732,
+    "ogg_bytes": 775632,
+    "wav": "/opt/data/projects/Styles/Lounge/317-factor-oracle-lounge/Audio/317-factor-oracle-lounge-perfect.wav",
+    "ogg": "/opt/data/projects/Styles/Lounge/317-factor-oracle-lounge/Audio/317-factor-oracle-lounge-perfect.ogg"
+  },
+  "humanized": {
+    "lufs": -14.01,
+    "true_peak_db": -1.0,
+    "target_lufs": -14.0,
+    "silence_ratio": 0.0355,
+    "rms_mean": 0.1401,
+    "rms_max": 0.1822,
+    "wav_bytes": 17426732,
+    "ogg_bytes": 778740,
+    "wav": "/opt/data/projects/Styles/Lounge/317-factor-oracle-lounge/Audio/317-factor-oracle-lounge-humanized.wav",
+    "ogg": "/opt/data/projects/Styles/Lounge/317-factor-oracle-lounge/Audio/317-factor-oracle-lounge-humanized.ogg"
+  }
+}

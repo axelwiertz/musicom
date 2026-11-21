@@ -1,0 +1,139 @@
+{
+  "style": "lounge",
+  "genre": "Lounge",
+  "project": "317-factor-oracle-lounge",
+  "method": "067 FOGI",
+  "layer": "concrete",
+  "form": "intro-a-a-b-a",
+  "key": "F major (ionian)",
+  "bpm": 90,
+  "bars": 36,
+  "progression": [
+    "Fmaj7",
+    "Dm7",
+    "Gm7",
+    "C7",
+    "Fmaj7",
+    "Dm7",
+    "Gm7",
+    "C7",
+    "Fmaj7",
+    "Dm7",
+    "Gm7",
+    "C7",
+    "Fmaj7",
+    "Dm7",
+    "Gm7",
+    "C7",
+    "Fmaj7",
+    "Dm7",
+    "Gm7",
+    "C7",
+    "Bbmaj7",
+    "C7",
+    "Am7",
+    "Dm7",
+    "Gm7",
+    "C7",
+    "Fmaj7",
+    "C7",
+    "Fmaj7",
+    "Dm7",
+    "Gm7",
+    "C7",
+    "Fmaj7",
+    "Dm7",
+    "Gm7",
+    "C7"
+  ],
+  "corpus_len": 32,
+  "fo_symbols_len": 180,
+  "raw_events": 180,
+  "phase1_path": "/opt/data/projects/Styles/Lounge/317-factor-oracle-lounge/MIDI/317-factor-oracle-lounge-phase1.mid",
+  "perfect_path": "/opt/data/projects/Styles/Lounge/317-factor-oracle-lounge/MIDI/317-factor-oracle-lounge-perfect.mid",
+  "humanized_path": "/opt/data/projects/Styles/Lounge/317-factor-oracle-lounge/MIDI/317-factor-oracle-lounge-humanized.mid",
+  "off_grid": 0,
+  "scale_violations": 0,
+  "chord_violations": 0,
+  "tiered_audit": {
+    "Lead": {
+      "audible": 180,
+      "strong_ok": 36,
+      "weak_in_scale": 144,
+      "untagged_out_of_scale": 0,
+      "tagged_non_resolving": 0,
+      "strong_violations": 0,
+      "passes": true
+    },
+    "Rhodes": {
+      "audible": 144,
+      "strong_ok": 144,
+      "weak_in_scale": 0,
+      "untagged_out_of_scale": 0,
+      "tagged_non_resolving": 0,
+      "strong_violations": 0,
+      "passes": true
+    },
+    "Guitar": {
+      "audible": 432,
+      "strong_ok": 216,
+      "weak_in_scale": 216,
+      "untagged_out_of_scale": 0,
+      "tagged_non_resolving": 0,
+      "strong_violations": 0,
+      "passes": true
+    },
+    "Bass": {
+      "audible": 108,
+      "strong_ok": 72,
+      "weak_in_scale": 36,
+      "untagged_out_of_scale": 0,
+      "tagged_non_resolving": 0,
+      "strong_violations": 0,
+      "passes": true
+    }
+  },
+  "hz_seed": 52592,
+  "hz": {
+    "Lead": {
+      "seed": 5311792,
+      "n_notes": 180,
+      "mean_abs_shift_ticks": 3.311,
+      "max_abs_shift_ticks": 14,
+      "mean_abs_vel_delta": 5.45,
+      "timing_sigma_ticks": 5.04
+    },
+    "Rhodes": {
+      "seed": 5311793,
+      "n_notes": 144,
+      "mean_abs_shift_ticks": 3.972,
+      "max_abs_shift_ticks": 11,
+      "mean_abs_vel_delta": 3.965,
+      "timing_sigma_ticks": 5.04
+    },
+    "Guitar": {
+      "seed": 5311794,
+      "n_notes": 432,
+      "mean_abs_shift_ticks": 3.387,
+      "max_abs_shift_ticks": 12,
+      "mean_abs_vel_delta": 4.801,
+      "timing_sigma_ticks": 5.04
+    },
+    "Bass": {
+      "seed": 5311795,
+      "n_notes": 108,
+      "mean_abs_shift_ticks": 5.435,
+      "max_abs_shift_ticks": 12,
+      "mean_abs_vel_delta": 2.972,
+      "timing_sigma_ticks": 3.6
+    },
+    "Drums": {
+      "seed": 5311796,
+      "n_notes": 288,
+      "mean_abs_shift_ticks": 0.847,
+      "max_abs_shift_ticks": 3,
+      "mean_abs_vel_delta": 2.906,
+      "timing_sigma_ticks": 1.44
+    }
+  }
+}

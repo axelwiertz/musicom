@@ -1,0 +1,24 @@
+{
+  "artifact": "317-factor-oracle-lounge-phase1.mid",
+  "classification": "ai-assisted",
+  "generator": "musicom composition 317 (phase=1 raw, method 067 FOGI)",
+  "sources": [],
+  "parameters": {
+    "bpm": 90,
+    "bars": 36,
+    "seed": 20261121,
+    "phase": 1,
+    "quantized": false,
+    "key": "F major (ionian)",
+    "form": "intro-a-a-b-a (36 bars)",
+    "style": "lounge",
+    "method": "067 FOGI (Factor Oracle over 32-symbol corpus)",
+    "corpus_len": 32,
+    "fo_symbols": 180
+  },
+  "notes": "Raw Factor Oracle degree walk (32-symbol lounge corpus), off-grid, float pitch + jitter, single voice, pre-rules.",
+  "sha256": "b412388bf7136667d50455f0a36e501b2729905c7cc9dbbab5a3e0897395bd3f",
+  "bytes": 1734,
+  "created_utc": "2026-11-21T23:16:07.847388+00:00",
+  "provenance_version": "1.0"
+}
