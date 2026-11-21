@@ -37,6 +37,7 @@ _INSTRUMENT_MODULES = {
     "Strings.tremolo_strings.tremolo_strings": "tremolo_strings",
     "Strings.string_ensemble_2.string_ensemble_2": "string_ensemble_2",
     "Keys.piano.piano": "piano",
+    "Keys.electric_grand.electric_grand": "electric_grand",
     "Keys.organ.organ": "organ",
     "Keys.dulcimer.dulcimer": "dulcimer",
     "Keys.harpsichord.harpsichord": "harpsichord",
@@ -129,6 +130,7 @@ _FIELDS = (
     "agogo_modes",
     "woodblock_modes",
     "melodic_tom_modes",
+    "electric_grand_modes",
     "reverb_tail", "eq_body", "eq_presence", "eq_air", "pan",
     "stem_label",
 )
@@ -290,6 +292,7 @@ CELLO = ALL_INSTRUMENTS["cello"]
 DOUBLE_BASS = ALL_INSTRUMENTS["double_bass"]
 CLAVI = ALL_INSTRUMENTS["clavi"]
 PIANO = ALL_INSTRUMENTS["piano"]
+ELECTRIC_GRAND = ALL_INSTRUMENTS["electric_grand"]
 ORGAN = ALL_INSTRUMENTS["organ"]
 DULCIMER = ALL_INSTRUMENTS["dulcimer"]
 HARPSICHORD = ALL_INSTRUMENTS["harpsichord"]
@@ -524,6 +527,8 @@ def registry_table():
             role = "pad, harmony, melody, countermelody, anthem, texture"
         elif low == "soprano saxophone":
             role = "lead, countermelody, ornament, accent"
+        elif low == "electric grand piano":
+            role = "harmony, melody, bass, rhythm, accent, color"
         elif low == "electric piano 1":
             role = "harmony, melody, bass, accent, color"
         elif low == "electric piano 2":
@@ -1154,3 +1159,22 @@ if __name__ == "__main__":
     print("  BLOWN_BOTTLE.synthesis =", repr(BLOWN_BOTTLE.synthesis))
     print("  BLOWN_BOTTLE.reverb_tail =", BLOWN_BOTTLE.reverb_tail,
           "BLOWN_BOTTLE.pan =", BLOWN_BOTTLE.pan)
+
+    print()
+    print("=== Electric Grand Piano (Yamaha CP-70/CP-80, GM2) ===")
+    print("  ELECTRIC_GRAND.midi_program =", ELECTRIC_GRAND.midi_program,
+          "(should be 2)")
+    print("  by_name('electric grand piano') =", by_name("electric grand piano"))
+    print("  by_name('Electric Grand Piano') =", by_name("Electric Grand Piano"))
+    print("  by_program(2) =", by_program(2))
+    print("  by_program(1) =", by_program(1), "(distinct: acoustic grand)")
+    print("  ELECTRIC_GRAND.in_sweet_spot(72) =", ELECTRIC_GRAND.in_sweet_spot(72))
+    print("  ELECTRIC_GRAND.in_sweet_spot(30) =", ELECTRIC_GRAND.in_sweet_spot(30))
+    print("  ELECTRIC_GRAND.range_min =", ELECTRIC_GRAND.range_min,
+          "ELECTRIC_GRAND.range_max =", ELECTRIC_GRAND.range_max)
+    print("  ELECTRIC_GRAND.solo_range =", ELECTRIC_GRAND.solo_range)
+    print("  ELECTRIC_GRAND.stem_label =", repr(ELECTRIC_GRAND.stem_label))
+    print("  ELECTRIC_GRAND.synthesis =", repr(ELECTRIC_GRAND.synthesis))
+    print("  ELECTRIC_GRAND.karplus_defaults =", ELECTRIC_GRAND.karplus_defaults)
+    print("  ELECTRIC_GRAND.reverb_tail =", ELECTRIC_GRAND.reverb_tail,
+          "ELECTRIC_GRAND.pan =", ELECTRIC_GRAND.pan)

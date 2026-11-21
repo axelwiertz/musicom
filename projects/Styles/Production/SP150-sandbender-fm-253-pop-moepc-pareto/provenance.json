@@ -1,0 +1,118 @@
+{
+  "job": "random-style production (SP) layer-aligned",
+  "date": "2026-11-21",
+  "seed": 20261121,
+  "method": "SP-150",
+  "method_module": "sound.synthesis.sandbender_fm",
+  "method_desc": "4-Op FM Voice w/ Per-Operator Waveshaping (Sandbender-style)",
+  "layer": "ABSOLUTE (timbre re-synthesis, note material preserved)",
+  "params": {
+    "sample_rate": 44100,
+    "bpm": 112.0,
+    "ppqn": 480,
+    "tail_sec": 2.0,
+    "target_lufs": -9.0,
+    "ceiling_db": -1.0,
+    "voice_map": {
+      "lead": "stack4 serial FM, folder 0.6 symmetric, LP 6k",
+      "pad": "three_into_one sine-stack, folder 0.2 soft, LP 2.6k",
+      "bass": "tower FM + sub octave 0.45, folder 0.3, LP 900",
+      "sparkle": "bell FM free ratios 1:2.756:5.404:8.933",
+      "drums": "FM kick/tom (sub+folder) + noise_bank snare(velvet)/hat+crash(metal) + SVF"
+    },
+    "ring": {
+      "lead": 0.15,
+      "pad": 0.05,
+      "bass": 0.2,
+      "sparkle": 0.12
+    },
+    "gain": {
+      "lead": 0.9,
+      "pad": 0.45,
+      "bass": 0.85,
+      "sparkle": 0.3
+    }
+  },
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Pop/253-pop-moepc-pareto/MIDI/253-pop-moepc-pareto-humanized.mid",
+  "render_source_midi": "/opt/data/repos/musicom/projects/Styles/Pop/253-pop-moepc-pareto/MIDI/253-pop-moepc-pareto-perfect.mid",
+  "key": "C major",
+  "scale_pcs": [
+    0,
+    2,
+    4,
+    5,
+    7,
+    9,
+    11
+  ],
+  "bpm": 112.0,
+  "ppqn": 480,
+  "bars": 28,
+  "output_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP150-sandbender-fm-253-pop-moepc-pareto/SP150-sandbender-fm-253-pop-moepc-pareto.wav",
+  "output_ogg": "/opt/data/repos/musicom/projects/Styles/Production/SP150-sandbender-fm-253-pop-moepc-pareto/SP150-sandbender-fm-253-pop-moepc-pareto.ogg",
+  "raw_wav": "/opt/data/repos/musicom/projects/Styles/Production/SP150-sandbender-fm-253-pop-moepc-pareto/SP150_sandbender_raw.wav",
+  "lufs": -11.941919750964793,
+  "peak": 0.8912509381337457,
+  "silence_pct": 4.752914949667419,
+  "rms": 0.13824878322391143,
+  "stereo_width_ratio": 0.8621306504345776,
+  "pitch_verdict": "PASS",
+  "hit_rate": 1.0,
+  "he_mean": 0.2631839411708353,
+  "preflight": {
+    "perfect": {
+      "pitched": 428,
+      "off_grid": 0,
+      "out_scale": 0,
+      "out_chord": 0,
+      "zero_drift": true,
+      "track_ends": [
+        53760
+      ]
+    },
+    "humanized": {
+      "pitched": 428,
+      "off_grid": 367,
+      "out_scale": 0,
+      "out_chord": 19,
+      "zero_drift": true,
+      "track_ends": [
+        53760
+      ]
+    }
+  },
+  "stems": {
+    "lead": "/opt/data/repos/musicom/projects/Styles/Production/SP150-sandbender-fm-253-pop-moepc-pareto/Audio/stems/track00_lead.wav",
+    "pad": "/opt/data/repos/musicom/projects/Styles/Production/SP150-sandbender-fm-253-pop-moepc-pareto/Audio/stems/track01_pad.wav",
+    "bass": "/opt/data/repos/musicom/projects/Styles/Production/SP150-sandbender-fm-253-pop-moepc-pareto/Audio/stems/track02_bass.wav",
+    "sparkle": "/opt/data/repos/musicom/projects/Styles/Production/SP150-sandbender-fm-253-pop-moepc-pareto/Audio/stems/track03_sparkle.wav",
+    "drums": "/opt/data/repos/musicom/projects/Styles/Production/SP150-sandbender-fm-253-pop-moepc-pareto/Audio/stems/track04_drums.wav"
+  },
+  "role_stats": {
+    "lead": {
+      "notes": 76,
+      "render_s": 210.8,
+      "pre_rms": 0.30418
+    },
+    "pad": {
+      "notes": 100,
+      "render_s": 64.8,
+      "pre_rms": 0.08776
+    },
+    "bass": {
+      "notes": 84,
+      "render_s": 15.6,
+      "pre_rms": 0.15494
+    },
+    "sparkle": {
+      "notes": 168,
+      "render_s": 10.7,
+      "pre_rms": 0.02019
+    },
+    "drums": {
+      "notes": 297,
+      "render_s": 0.6,
+      "pre_rms": 0.04559
+    }
+  }
+}

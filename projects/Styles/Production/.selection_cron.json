@@ -1,23 +1,25 @@
 {
   "job": "random-style production (SP) layer-aligned",
-  "date": "2026-11-20",
-  "seed": 20261120,
-  "method": "SP-032",
-  "method_module": "sound.effects.fdn_reverb",
-  "method_desc": "Feedback Delay Network Reverb",
-  "source_midi": "/opt/data/repos/musicom/projects/Styles/Groove/274-groove-sieve-rework/MIDI/274-groove-sieve-rework-humanized.mid",
-  "source_project": "Groove/274-groove-sieve-rework/MIDI/274-groove-sieve-rework-humanized.mid",
+  "date": "2026-11-21",
+  "seed": 20261121,
+  "method": "SP-150",
+  "method_module": "sound.synthesis.sandbender_fm",
+  "method_desc": "4-Op FM Voice w/ Per-Operator Waveshaping \u2014 arbitrary routing matrix (drawn algorithms), harmonic/free/fixed operator tuning, tri\u2192sine\u2192pulse per-op shaper, symmetric/asymmetric/soft wavefolder, sub + 6 noise types, SVF filter, modeled low-pass gate (Audio Damage Sandbender-style)",
+  "source_midi": "/opt/data/repos/musicom/projects/Styles/Pop/253-pop-moepc-pareto/MIDI/253-pop-moepc-pareto-perfect.mid",
+  "source_project": "Pop/253-pop-moepc-pareto/MIDI/253-pop-moepc-pareto-perfect.mid",
   "registry_size": 104,
   "recent_excluded": [
+    "SP-032",
     "SP-075",
-    "SP-084",
     "SP-100",
     "SP-107",
     "SP-115",
     "SP-146",
     "SP-157"
   ],
-  "already_on_source": [],
+  "already_on_source": [
+    "SP-095"
+  ],
   "baseline_excluded": [
     "SP-001"
   ],
@@ -27,7 +29,6 @@
     "SP-024",
     "SP-026",
     "SP-028",
-    "SP-032",
     "SP-033",
     "SP-034",
     "SP-035",
@@ -47,13 +48,13 @@
     "SP-081",
     "SP-082",
     "SP-083",
+    "SP-084",
     "SP-085",
     "SP-086",
     "SP-090",
     "SP-091",
     "SP-092",
     "SP-094",
-    "SP-095",
     "SP-096",
     "SP-097",
     "SP-098",
@@ -119,8 +120,8 @@
     "SP-166",
     "SP-167"
   ],
-  "n_candidates": 474,
-  "n_well_formed": 369,
-  "n_meaningful": 368,
+  "n_candidates": 478,
+  "n_well_formed": 373,
+  "n_meaningful": 372,
   "rejected_degenerate": []
 }

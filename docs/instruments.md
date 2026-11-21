@@ -600,6 +600,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Strings | String Ensemble 1 | 48 | 28–96 | harmony, pad, melody, countermelody, accent |
 | Strings | String Ensemble 2 | 49 | 28–96 | pad, harmony, texture, melody, countermelody, accent |
 | Keys | Piano | 1 | 21–108 | harmony, melody, bass, rhythm |
+| Keys | Electric Grand Piano | 2 | 21–108 | harmony, melody, bass, rhythm, accent, color |
 | Keys | Church Organ | 19 | 36–96 | harmony, pad, bass, rhythm, accent |
 | Keys | Dulcimer | 15 | 48–96 | lead, melody, ornament, rhythm, harmony |
 | Keys | Electric Piano 1 | 4 | 36–96 | harmony, melody, bass, accent, color |
@@ -693,6 +694,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 | 5 | Electric Piano 2 | Electric_Piano_2 ✓ (GM_PROGRAMS[5] + FluidR3 preset 5 both "Electric Piano 2"; internal SF2 name "Legend EP 2" — cosmetic only, **no routing impact**) |
 | 3 | Honky-tonk Piano | Honky-tonk_Piano ✓ (GM_PROGRAMS[3] = "Honky-tonk Piano"; the sanitizer keeps the HYPHEN — only spaces/parens/slashes are rewritten. FluidR3 preset 3 = "Honky Tonk" — hyphen dropped in the SF2 name, cosmetic only, **no routing impact**; STEM_LABEL = "Honky-tonk_Piano") |
 || 1 | Acoustic Grand Piano | **Bright_Acoustic_Piano** ✗ (list[1]) |
+|| 2 | Electric Grand Piano | Electric_Grand_Piano ✓ (GM_PROGRAMS[2] = "Electric Grand Piano"; FluidR3 preset 2 = **"Electric Piano"** — SF2 uses the generic electric-piano family name, cosmetic only, **no routing impact**; STEM_LABEL = "Electric_Grand_Piano" matches the pipeline's real label) |
 | 6 | Harpsichord | Harpsichord ✓ (GM_PROGRAMS[6] + FluidR3 preset 6 both "Harpsichord") |
 | 7 | Clavi | **Clavi** ✓ (pipeline GM_PROGRAMS[7] = "Clavi"; FluidR3 preset 7 = "Clavinet" — cosmetic expansion, no routing impact; STEM_LABEL = "Clavi" matches pipeline) |
 | 16 | Drawbar Organ | Drawbar_Organ ✓ (GM_PROGRAMS[16] = "Drawbar Organ"; FluidR3 bank-0 preset 16 = "DrawbarOrgan" — no space in the SF2 name, cosmetic only, **no routing impact**; STEM_LABEL = "Drawbar_Organ") |
@@ -2644,3 +2646,60 @@ Pan Flute, **Blown Bottle**, Shakuhachi, Whistle, Ocarina — ALL present).
 Remaining sibling candidates: GM112 Tinkle Bell, GM118 Synth Drum, GM50/51
 Synth Strings 1/2, GM63 Synth Brass 2, GM37 Slap Bass 2, GM2 Electric Grand
 Piano.
+
+**Electric Grand Piano added** (2026-11-21): GM2, **Keys-family twelfth entry**
+— the amplified/electrified grand piano: the Yamaha CP-70/CP-80 (1974), a
+REAL acoustic grand piano (full-size strings, real hammers and dampers) with
+NO soundboard — each string group sits over a magnetic pickup (electric-
+guitar style) wired to a preamp (instrument.md + electric_grand.py), verified
+end-to-end UnitMatrixComposer (1 bar, 1 section, Electric Grand SOLO on ch0 —
+glassy C5–C6 hook + low C2 pedal — + drum-kit context on ch9) → **zero-drift ✓**
+→ MIDI **204 bytes** → FluidSynth WAV **982,060 bytes** SOLO render (FluidR3
+via `discover_soundfont()`) ✓; RenderPipeline stems on disk
+`track00_Electric_Grand_Piano.wav` (982,060 B) + `track01_Drums.wav`
+(835,628 B) ✓; stem label `GM_PROGRAMS[2]` = **"Electric Grand Piano"** —
+labels match exactly (sanitizer only rewrites spaces/parens/slashes), **no
+quirk**; FluidR3 preset 2 = **"Electric Piano"** — SF2 uses the generic
+electric-piano family name, cosmetic only, **no routing impact**; solo-render
+spectral 4–8 kHz buzz **2.0%** (clean single voice, no comb-filtering).
+Synthesis: **Karplus-Strong primary** (SP-011 — a plucked string waveguide IS
+the physical model: a real piano string struck by a felt hammer and read by a
+magnetic pickup; `loop_gain` **0.9982** — HIGH, above sitar 0.9975 and near
+harp 0.9985, because the missing soundboard removes the grand piano's main
+energy sink: the string rings 3–8 s almost undamped; ring test vs 0.990 dull
+control **4.2×**; `lowpass_hz` 5500 = the pickup bandwidth; `noise_component`
+0.02 = hammer-felt tick), **ModalSynth-family `ResonatorBank` secondary**
+(custom `ELECTRIC_GRAND_MODES` near-harmonic stack 1 : 2 : 3 : 4 : 5 — piano
+strings are near-harmonic, unlike the Rhodes tine's compressed inharmonic set
+— with SLOW decay rates 0.9–2.2: measured late(1.5–2.0 s) rms/peak **0.100**,
+a long soundboard-less ring; `MODAL_PRESET 'string'` = closest stock bank),
+**PhaseModSynth tertiary** (FM bright piano, sine carrier, ratio 2.0, depth
+2.0 — bright but not nasal, the DX EP2's 2.8 is the bell; attack 0.003 s,
+release 1.2 s). Range 21–108 = full 88-key CP-80 compass (A0–C8; CP-70 is 73
+keys E1–E7 = 28–100), sweet spot 60–84 (C4–C6 — the glassy attack zone, "The
+Logical Song" register), solo range 48–84. Registration proof:
+`by_name('electric grand piano')` / `by_name('Electric Grand Piano')` →
+Electric Grand Piano, `by_program(2)` → Electric Grand Piano (distinct from
+`by_program(1)` Acoustic Grand Piano), `in_sweet_spot(72)` = True,
+`in_sweet_spot(30)` = False, `stem_label = 'Electric_Grand_Piano'`;
+`registry_table()` row "| Keys | Electric Grand Piano | 2 | 21–108 | harmony,
+melody, bass, rhythm, accent, color |"; convenience constant `ELECTRIC_GRAND`;
+Registry `_FIELDS` extended with `electric_grand_modes` so the custom bank
+loads through the registry. Role: harmony (sustained mid-register chords —
+the "electric grand pad"), melody (glassy single-note lines, the CP
+signature), bass (left-hand 36–47 zone — firm and present, better than the
+Rhodes), rhythm (bright staccato chops), accent (the attack IS the voice),
+color (high-register bell notes) — NOT a sub-bass foundation (that is a bass
+guitar) and NOT a Rhodes/FM substitute (no tine compression, no DX bell).
+Production: REVERB_TAIL 2.2 s (stage/hall — the CP was DI + amp + room; the
+long clean ring blooms, Rhodes 2.2 precedent), EQ cut 300 Hz (cabinet/body
+boxiness), boost **3.5 kHz +2.5 dB** (the glassy attack band — THE CP move,
+higher than the Rhodes' 2.5 kHz bark), 8.5 kHz air shelf, PAN centre.
+Identity: GM2 = the 70s amplified grand — Supertramp "The Logical Song",
+Billy Joel "My Life", Toto "Africa", Queen "You're My Best Friend" (John
+Deacon), Peter Gabriel "Sledgehammer". Fully polyphonic keyboard; the records
+usually double it with an acoustic grand or strings — but NEVER a second
+melodic patch on the same pitches (the 2026-09-01 comb-filter rule). Completes
+the piano block: GM1 Acoustic, **GM2 Electric Grand**, GM3 Honky-tonk, GM4
+Rhodes, GM5 FM EP2. Remaining sibling candidates: GM112 Tinkle Bell, GM118
+Synth Drum, GM50/51 Synth Strings 1/2, GM63 Synth Brass 2, GM37 Slap Bass 2.

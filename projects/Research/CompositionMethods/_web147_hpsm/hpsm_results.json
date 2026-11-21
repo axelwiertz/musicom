@@ -1,0 +1,81 @@
+{
+ "midi_hz": {
+  "ok": true,
+  "detail": [
+   440.0,
+   880.0,
+   220.0,
+   261.625565
+  ]
+ },
+ "partial_ratios": {
+  "ok": true,
+  "peaks": [
+   196.0,
+   392.0,
+   588.0,
+   784.0
+  ],
+  "ratios": [
+   1.0,
+   2.0,
+   3.0,
+   4.0
+  ],
+  "max_rel_err": 0.0
+ },
+ "t60": {
+  "ok": true,
+  "spec": 2.5,
+  "measured": 2.505
+ },
+ "helmholtz": {
+  "ok": true,
+  "V_L": 0.02,
+  "a_cm": 5.0,
+  "L_mm": 1.2,
+  "fH_flanged": 116.52,
+  "fH_unflanged": 137.17,
+  "L_eff_m": 0.0862,
+  "cover50_ratio": 0.70711,
+  "sqrt_half": 0.70711
+ },
+ "beating": {
+  "ok": true,
+  "predicted": 0.9078,
+  "measured": 0.9028
+ },
+ "velocity_brightness": {
+  "ok": true,
+  "centroid": [
+   1.441,
+   1.692,
+   1.956
+  ]
+ },
+ "sizing_law": {
+  "ok": true,
+  "f(a=5cm)": 1195.9,
+  "f(a=10cm)": 299.0,
+  "ratio": 4.0
+ },
+ "zero_drift": {
+  "ok": true,
+  "requested": 221734,
+  "got": 221734
+ },
+ "determinism": {
+  "ok": true
+ },
+ "demo": {
+  "ok": true,
+  "bytes": 1221614,
+  "sec": 13.85,
+  "port_drone_open": 116.52,
+  "port_drone_covered": 90.25,
+  "bend_semitones": -4.42,
+  "sha256": "f300cb37aa712d8a"
+ }
+}
+
+ALL CHECKS: PASS
