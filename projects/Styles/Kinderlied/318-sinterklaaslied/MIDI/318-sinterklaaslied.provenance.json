@@ -1,0 +1,183 @@
+{
+  "project": "318-sinterklaaslied",
+  "style": "sinterklaas",
+  "key": "C",
+  "bpm": 112,
+  "time_sig": "4/4",
+  "form": "intro-verse-refrain-verse-outro",
+  "seed": 318,
+  "voices": [
+    {
+      "name": "Lead",
+      "program": 74,
+      "channel": 0
+    },
+    {
+      "name": "Pad",
+      "program": 8,
+      "channel": 0
+    },
+    {
+      "name": "Bass",
+      "program": 58,
+      "channel": 0
+    },
+    {
+      "name": "Arp",
+      "program": 9,
+      "channel": 0
+    },
+    {
+      "name": "Drums",
+      "program": 0,
+      "channel": 9
+    }
+  ],
+  "sections": {
+    "Intro": [
+      "C",
+      "C",
+      "C",
+      "C"
+    ],
+    "Verse": [
+      "C",
+      "C",
+      "F",
+      "G",
+      "C",
+      "F",
+      "G",
+      "C"
+    ],
+    "Refrain": [
+      "C",
+      "F",
+      "C",
+      "G",
+      "C",
+      "F",
+      "G",
+      "C"
+    ],
+    "Verse2": [
+      "C",
+      "C",
+      "F",
+      "G",
+      "C",
+      "F",
+      "G",
+      "C"
+    ],
+    "Outro": [
+      "C",
+      "C",
+      "C",
+      "C"
+    ]
+  },
+  "melody": {
+    "register": "B4..A5",
+    "range_semitones": 10,
+    "cadence": "verse: half (V) then authentic (V-I); refrain: authentic",
+    "style_note": "conjunct, dotted 'arrival' lilt, children singable"
+  },
+  "humanize": {
+    "Lead": {
+      "seed": 32118,
+      "profile": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.45,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 165,
+      "mean_abs_shift_ticks": 5.025,
+      "max_abs_shift_ticks": 15,
+      "mean_abs_vel_delta": 5.067,
+      "timing_sigma_ticks": 7.168
+    },
+    "Pad": {
+      "seed": 32119,
+      "profile": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.45,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 96,
+      "mean_abs_shift_ticks": 4.719,
+      "max_abs_shift_ticks": 12,
+      "mean_abs_vel_delta": 4.229,
+      "timing_sigma_ticks": 7.168
+    },
+    "Bass": {
+      "seed": 32120,
+      "profile": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.45,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 100,
+      "mean_abs_shift_ticks": 4.47,
+      "max_abs_shift_ticks": 22,
+      "mean_abs_vel_delta": 4.36,
+      "timing_sigma_ticks": 7.168
+    },
+    "Arp": {
+      "seed": 32121,
+      "profile": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.45,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 240,
+      "mean_abs_shift_ticks": 4.954,
+      "max_abs_shift_ticks": 19,
+      "mean_abs_vel_delta": 5.104,
+      "timing_sigma_ticks": 7.168
+    },
+    "Drums": {
+      "seed": 32122,
+      "profile": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.45,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 300,
+      "mean_abs_shift_ticks": 1.157,
+      "max_abs_shift_ticks": 5,
+      "mean_abs_vel_delta": 3.4,
+      "timing_sigma_ticks": 1.792
+    }
+  }
+}

@@ -77,6 +77,7 @@ composition in `projects/Styles/` or a `genre-composition-patterns` reference).
 | Amapiano | Log drum (GM38), Rhodes 4, shaker | 011 groove + sustained Rhodes + sub | 108–115 | Am/Dm/F#m |
 | Chanson | Accordion 21, guitar 25, trumpet 56, strings 49 | conjunct melody + I–V–vi–IV | 120–128 | C/G/F |
 | House/Techno | Synth, filtered arps, drones | 011 four-floor + 026 arps + sidechain | 120–130 | minor |
+| Sinterklaas lied | Recorder 74, celesta 8, glock 9, tuba 58 | conjunct dotted-lilt melody + oom-pah (Rules) + light march | 108–120 | C/F/G |
 
 ## 4. Instrumentation as a palette (per-project)
 

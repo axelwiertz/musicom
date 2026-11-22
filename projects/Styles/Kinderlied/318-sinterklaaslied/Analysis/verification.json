@@ -1,0 +1,78 @@
+{
+  "perfect": {
+    "midi": {
+      "tag": "perfect",
+      "zero_drift": true,
+      "padded_track_length_ticks": {
+        "1": 61440,
+        "2": 61440,
+        "3": 61440,
+        "4": 61440,
+        "5": 61440
+      },
+      "last_audible_note_end_ticks": {
+        "1": 61432,
+        "2": 61440,
+        "3": 55560,
+        "4": 57590,
+        "5": 55510
+      },
+      "total_notes": 901,
+      "off_grid_onsets": 0,
+      "out_of_scale_notes": [],
+      "lead_range_midi": [
+        71,
+        81
+      ],
+      "lead_range_names": [
+        "B4",
+        "A5"
+      ]
+    },
+    "audio": {
+      "rms": 0.1189,
+      "silence_ratio": 0.1037,
+      "dominant_peak_hz_50_1000": 926.0,
+      "strongest_fundamental_hz": 926.0,
+      "harmonic_energy_pct": 17.6
+    }
+  },
+  "humanized": {
+    "midi": {
+      "tag": "humanized",
+      "zero_drift": true,
+      "padded_track_length_ticks": {
+        "1": 61440,
+        "2": 61440,
+        "3": 61440,
+        "4": 61440,
+        "5": 61440
+      },
+      "last_audible_note_end_ticks": {
+        "1": 61387,
+        "2": 61440,
+        "3": 55568,
+        "4": 57589,
+        "5": 55510
+      },
+      "total_notes": 901,
+      "off_grid_onsets": 550,
+      "out_of_scale_notes": [],
+      "lead_range_midi": [
+        71,
+        81
+      ],
+      "lead_range_names": [
+        "B4",
+        "A5"
+      ]
+    },
+    "audio": {
+      "rms": 0.1199,
+      "silence_ratio": 0.1084,
+      "dominant_peak_hz_50_1000": 926.0,
+      "strongest_fundamental_hz": 926.0,
+      "harmonic_energy_pct": 22.5
+    }
+  }
+}

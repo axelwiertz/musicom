@@ -1,0 +1,171 @@
+{
+  "project": "319-sinterklaasavond",
+  "style": "sinterklaas",
+  "key": "G",
+  "bpm": 100,
+  "time_sig": "4/4",
+  "form": "intro-verse-verse-outro",
+  "seed": 319,
+  "composition_method": "023 Tendency Masking (melody, two-phase)",
+  "phase1": "TendencyMaskingGenerator, corridor G4..F#5, 8th step, density 0.85",
+  "phase2": "strong beats -> I-IV-V chord tones; conjunct clamp <= 3rd; diatonic",
+  "production_method": "SP-032 FDN Reverb (warm hall) + master -16 LUFS",
+  "voices": [
+    {
+      "name": "Lead",
+      "program": 74,
+      "channel": 0
+    },
+    {
+      "name": "Pad",
+      "program": 8,
+      "channel": 0
+    },
+    {
+      "name": "Bass",
+      "program": 58,
+      "channel": 0
+    },
+    {
+      "name": "Arp",
+      "program": 9,
+      "channel": 0
+    },
+    {
+      "name": "Drums",
+      "program": 0,
+      "channel": 9
+    }
+  ],
+  "sections": {
+    "Intro": [
+      "G",
+      "G",
+      "G",
+      "G"
+    ],
+    "Verse": [
+      "G",
+      "G",
+      "C",
+      "D",
+      "G",
+      "C",
+      "D",
+      "G"
+    ],
+    "Verse2": [
+      "G",
+      "G",
+      "C",
+      "D",
+      "G",
+      "C",
+      "D",
+      "G"
+    ],
+    "Outro": [
+      "G",
+      "G",
+      "G",
+      "G"
+    ]
+  },
+  "humanize": {
+    "Lead": {
+      "seed": 32219,
+      "profile": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.45,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 66,
+      "mean_abs_shift_ticks": 4.197,
+      "max_abs_shift_ticks": 15,
+      "mean_abs_vel_delta": 4.909,
+      "timing_sigma_ticks": 6.4
+    },
+    "Pad": {
+      "seed": 32220,
+      "profile": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.45,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 72,
+      "mean_abs_shift_ticks": 5.389,
+      "max_abs_shift_ticks": 14,
+      "mean_abs_vel_delta": 4.181,
+      "timing_sigma_ticks": 6.4
+    },
+    "Bass": {
+      "seed": 32221,
+      "profile": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.45,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 68,
+      "mean_abs_shift_ticks": 4.118,
+      "max_abs_shift_ticks": 12,
+      "mean_abs_vel_delta": 4.603,
+      "timing_sigma_ticks": 6.4
+    },
+    "Arp": {
+      "seed": 32222,
+      "profile": {
+        "timing_sigma_ms": 8.0,
+        "velocity_sigma": 6.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.02,
+        "layback_ms": 2.0,
+        "phrase_corr": 0.45,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 176,
+      "mean_abs_shift_ticks": 4.199,
+      "max_abs_shift_ticks": 17,
+      "mean_abs_vel_delta": 4.364,
+      "timing_sigma_ticks": 6.4
+    },
+    "Drums": {
+      "seed": 32223,
+      "profile": {
+        "timing_sigma_ms": 2.0,
+        "velocity_sigma": 4.0,
+        "duration_scale": 1.0,
+        "duration_sigma": 0.01,
+        "layback_ms": 0.0,
+        "phrase_corr": 0.45,
+        "velocity_min": 20,
+        "velocity_max": 127,
+        "couple_thresh": 15.0
+      },
+      "n_notes": 204,
+      "mean_abs_shift_ticks": 1.069,
+      "max_abs_shift_ticks": 4,
+      "mean_abs_vel_delta": 2.73,
+      "timing_sigma_ticks": 1.6
+    }
+  }
+}

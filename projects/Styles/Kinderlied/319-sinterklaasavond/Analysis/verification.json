@@ -1,0 +1,66 @@
+{
+  "perfect": {
+    "midi": {
+      "tag": "perfect",
+      "zero_drift": true,
+      "padded_track_length_ticks": {
+        "1": 46080,
+        "2": 46080,
+        "3": 46080,
+        "4": 46080,
+        "5": 46080
+      },
+      "off_grid_onsets": 0,
+      "out_of_scale_notes": [],
+      "lead_range_midi": [
+        67,
+        76
+      ],
+      "lead_range_names": [
+        "G4",
+        "E5"
+      ],
+      "max_consecutive_leap_st": 4
+    },
+    "audio": {
+      "rms": 0.123,
+      "silence_ratio": 0.107,
+      "dominant_peak_hz_50_1000": 520.0,
+      "strongest_fundamental_hz": 520.0,
+      "harmonic_energy_pct": 24.9,
+      "duration_seconds": 64.44
+    }
+  },
+  "humanized": {
+    "midi": {
+      "tag": "humanized",
+      "zero_drift": true,
+      "padded_track_length_ticks": {
+        "1": 46080,
+        "2": 46080,
+        "3": 46080,
+        "4": 46080,
+        "5": 46080
+      },
+      "off_grid_onsets": 350,
+      "out_of_scale_notes": [],
+      "lead_range_midi": [
+        67,
+        76
+      ],
+      "lead_range_names": [
+        "G4",
+        "E5"
+      ],
+      "max_consecutive_leap_st": 4
+    },
+    "audio": {
+      "rms": 0.1215,
+      "silence_ratio": 0.1144,
+      "dominant_peak_hz_50_1000": 520.0,
+      "strongest_fundamental_hz": 520.0,
+      "harmonic_energy_pct": 41.4,
+      "duration_seconds": 65.14
+    }
+  }
+}

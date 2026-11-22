@@ -114,6 +114,14 @@ STYLE_REGISTRY = {
                            ("Bass", "Double Bass"), ("Guitar", "Acoustic Guitar"),
                            ("Drums", "Drum Kit")],
     },
+    "sinterklaas": {
+        "bpm": 112, "time_sig": "4/4",
+        "form": "intro-verse-chorus-verse-chorus-outro",
+        "motion": "march oom-pah + dotted 'arrival' lilt + bell glitter",
+        "default_voices": [("Lead", "Recorder"), ("Pad", "Celesta"),
+                           ("Bass", "Tuba"), ("Arp", "Glockenspiel"),
+                           ("Drums", "Drum Kit")],
+    },
 }
 
 # --- form palette: name -> (section names, bars per section, hint styles) ---
@@ -151,7 +159,7 @@ FORM_PALETTE = {
     "cinematic-build": (["Intro", "Build", "Rise", "Peak", "Resolve"],
                         [4, 8, 8, 8, 4], ["cinematic", "ambient"]),
     "strophic":        (["Verse", "Verse", "Verse", "Verse"], [8, 8, 8, 8],
-                        ["folk", "chanson"]),
+                        ["folk", "chanson", "sinterklaas", "kinderlied"]),
 }
 
 

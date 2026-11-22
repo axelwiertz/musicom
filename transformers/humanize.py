@@ -100,6 +100,7 @@ STYLE_HUMANIZE = {
     "soul":      {"timing_sigma_ms": 8.0, "velocity_sigma": 6.5, "phrase_corr": 0.45, "layback_ms": 4.0},
     "funk":      {"timing_sigma_ms": 4.0, "velocity_sigma": 6.0, "phrase_corr": 0.25, "layback_ms": 2.0},
     "chanson":   {"timing_sigma_ms": 8.0, "velocity_sigma": 6.0, "phrase_corr": 0.45, "layback_ms": 2.0},
+    "sinterklaas": {"timing_sigma_ms": 8.0, "velocity_sigma": 6.0, "phrase_corr": 0.45, "layback_ms": 2.0},
     "latin":     {"timing_sigma_ms": 7.0, "velocity_sigma": 6.0, "phrase_corr": 0.40, "layback_ms": 2.0},
     "bossa":     {"timing_sigma_ms": 7.0, "velocity_sigma": 6.0, "phrase_corr": 0.40, "layback_ms": 2.0},
     "samba":     {"timing_sigma_ms": 7.0, "velocity_sigma": 6.0, "phrase_corr": 0.40, "layback_ms": 2.0},

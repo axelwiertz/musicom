@@ -48,6 +48,7 @@ STYLE_ALIASES: Dict[str, List[str]] = {
                    "experimental", "world", "other"],
     "chanson":    ["chanson", "country", "folk", "celtic", "bluegrass", "balfolk",
                    "klezmer", "indian classical", "japanese", "chinese", "gamelan"],
+    "sinterklaas": ["sinterklaas", "sinterklaaslied", "kinderlied", "sint"],
     "metal":      ["metal", "hard rock", "punk"],
     "hiphop":     ["hiphop", "hip hop", "rap", "boom bap"],
     "classical":  ["classical", "classic", "baroque", "romantic", "chamber",
@@ -338,6 +339,23 @@ def _pad_drone(ctx: CellContext) -> List[MusicEvent]:
             MusicEvent(ctx.chord_tones[0] + 7, 58, 0, ctx.section_len)]
 
 
+def _lead_sinterklaas(ctx: CellContext) -> List[MusicEvent]:
+    """sinterklaas/kinderlied: conjunct quarter-note melody, dotted 'arrival'
+    pickup, chord-tone anchored (children sing it)."""
+    rt, th, ft = ctx.chord_tones  # root, third, fifth (concrete MIDI)
+    top = rt + 12
+    line = [th + 12, ft + 12, top, ft + 12]  # 3rd 5th oct 5th (melodic contour)
+    evs = []
+    for b in range(ctx.section_bars):
+        base = b * ctx.bar_ticks
+        # dotted-8th + 16th pickup on beat 1 (the Sinterklaas 'arrival' lilt)
+        evs.append(MusicEvent(line[0], 92, base, base + 360))
+        evs.append(MusicEvent(line[0], 80, base + 360, base + 480))
+        for e in (1, 2, 3):
+            evs.append(MusicEvent(line[e], 88, base + e * 480, base + e * 480 + 440))
+    return evs
+
+
 # ---------------------------------------------------------------------------
 # The registry + resolver
 # ---------------------------------------------------------------------------
@@ -359,6 +377,7 @@ RHYTHM_BY_STYLE: Dict[str, Dict[str, Callable]] = {
     "lounge":    _recipe(bass=_bass_bossa, rhythm=_drums_bossa),
     "ambient":   _recipe(pad=_pad_drone, bass=_bass_drone, rhythm=_drums_ambient),
     "chanson":   _recipe(bass=_bass_oompah, rhythm=_drums_march),
+    "sinterklaas": _recipe(lead=_lead_sinterklaas, bass=_bass_oompah, rhythm=_drums_march),
     "metal":     _recipe(rhythm=_drums_metal),
     "hiphop":    _recipe(rhythm=_drums_hiphop),
     "classical": _recipe(rhythm=_drums_classical),

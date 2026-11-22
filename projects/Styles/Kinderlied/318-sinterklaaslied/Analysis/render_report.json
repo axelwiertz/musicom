@@ -1,0 +1,18 @@
+{
+  "perfect": {
+    "soundfont": "FluidR3_GM.sf2",
+    "target_lufs": -16.0,
+    "integrated_lufs": -16.03,
+    "true_peak_db": -1.0,
+    "wav_bytes": 13301804,
+    "ogg_bytes": 1311739
+  },
+  "humanized": {
+    "soundfont": "FluidR3_GM.sf2",
+    "target_lufs": -16.0,
+    "integrated_lufs": -16.03,
+    "true_peak_db": -1.0,
+    "wav_bytes": 13297452,
+    "ogg_bytes": 1318214
+  }
+}

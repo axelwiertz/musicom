@@ -625,7 +625,7 @@ GENRE_LUFS = {
     "chanson": -14.0, "country": -14.0, "reggae": -14.0, "latin": -13.0,
     # dynamic / quiet
     "ambient": -18.0, "classical": -18.0, "minimal": -18.0,
-    "folk": -16.0, "solo": -16.0,
+    "folk": -16.0, "solo": -16.0, "sinterklaas": -16.0, "kinderlied": -16.0,
 }
 
 
