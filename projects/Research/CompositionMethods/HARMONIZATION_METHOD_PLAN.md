@@ -16,7 +16,13 @@ melody method's phase-1 result, ordered abstract → concrete → absolute.*
   probe: default = static per-section roots `[48,48,48,48][55,55,55,55]…` vs
   `functional` = per-bar I–V–vi–IV `[48,55,57,53,…]` vs `abstract` = subset walk
   `[48,48,48,48,50,48,48,50]`; all zero-drift.
-- **P1 (plan_from_method adapters)** and **P2 (cron random selection)** — open.
+- **P1 BUILT (2026-11-23).** `plan_from_method(method_id, …, seed)` derives a
+  `HarmonyPlan` from the method's process over chord space: Markov 002/010 →
+  weighted degree walk, Tendency 023 → harmonic band, Skeleton 001 → strong/weak;
+  each forces V→I. `source="template"` methods (012/018/040/079/003) fall back to
+  their profile's template harmoniser (the "without phase-1" path). Suite 790
+  passed, 1 skipped. Commits `d3a91fe` (P0) + `b9f1a2b` (P1).
+- **P2 (cron random harmoniser selection)** — open.
 
 ---
 
