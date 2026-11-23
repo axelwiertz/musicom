@@ -45,6 +45,7 @@ __all__ = [
     "FunctionalHarmonizer", "SATBHarmonizer", "ChordArpHarmonizer",
     "AbstractHarmonizer", "HARMONIZERS", "harmonizer_plan",
     "HARMONY_PROFILES", "profile_for_method", "plan_from_method",
+    "select_harmonizer",
 ]
 
 
@@ -301,13 +302,40 @@ HARMONIZERS = {
 def harmonizer_plan(name: str, key: str, section_names: Sequence[str],
                     bars_per: Sequence[int], style: str = "", seed: int = 0,
                     phase1=None) -> HarmonyPlan:
-    """Resolve a harmoniser by name and build its per-bar HarmonyPlan."""
+    """Resolve a harmoniser by name and build its per-bar HarmonyPlan.
+
+    ``name`` is one of ``{"functional","abstract","satb","chordarp"}`` or
+    ``"method:<id>"`` (method-source harmony via ``plan_from_method``).
+    """
+    if isinstance(name, str) and name.startswith("method:"):
+        return plan_from_method(name[len("method:"):], key, section_names,
+                                bars_per, style=style, seed=seed, phase1=phase1)
     cls = HARMONIZERS.get(name)
     if cls is None:
         raise ValueError(
-            f"unknown harmonizer {name!r}; use {sorted(HARMONIZERS)}")
+            f"unknown harmonizer {name!r}; use {sorted(HARMONIZERS)} or 'method:<id>'")
     return cls().plan(key, section_names, bars_per, style=style, seed=seed,
                       phase1=phase1)
+
+
+def select_harmonizer(method_id: str, rng=None) -> str:
+    """Pick a harmoniser for a composition method (P2 — cron random selection).
+
+    Randomly draws from the four template harmonisers, plus (when the method has
+    a harmonic phase-1 reading) a ``"method:<id>"`` option — the "include
+    phase-1" path. Returns a name for ``compose(harmonizer=...)`` /
+    ``harmonizer_plan``.
+
+    Fallback: if the method has no profile, or its profile is ``source="template"``
+    (rhythm/contour — phase-1 carries no harmonic content), the method-source
+    option is dropped and only the four templates remain.
+    """
+    rng = rng or __import__("random")
+    prof = profile_for_method(method_id)
+    options = ["functional", "abstract", "satb", "chordarp"]
+    if prof is not None and prof.source == "method":
+        options = options + [f"method:{method_id}"]
+    return rng.choice(options)
 
 
 # Per-method harmonisation descriptors (§2 of the plan). P1 wires the

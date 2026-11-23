@@ -23,6 +23,7 @@ from workflows.method_contract import RawNote
 from workflows.realize_spine import realize
 from workflows.harmony_method import (
     HARMONIZERS, harmonizer_plan, plan_from_method, profile_for_method,
+    select_harmonizer,
 )
 
 C_MAJOR = [0, 2, 4, 5, 7, 9, 11]
@@ -246,6 +247,36 @@ def test_plan_from_method_template_source_falls_back():
 def test_plan_from_method_unknown_method():
     with pytest.raises(KeyError):
         plan_from_method("065", "C", ["A"], [4])
+
+
+# ---------------------------------------------------------------------------
+# P2 — random harmoniser selection
+# ---------------------------------------------------------------------------
+
+def test_select_harmonizer_method_source_offers_method_option():
+    import random
+    rng = random.Random(0)
+    seen = {select_harmonizer("002", rng) for _ in range(200)}
+    assert "method:002" in seen
+    assert seen <= {"functional", "abstract", "satb", "chordarp", "method:002"}
+
+
+def test_select_harmonizer_template_source_never_method():
+    import random
+    rng = random.Random(0)
+    seen = {select_harmonizer("012", rng) for _ in range(200)}
+    assert seen <= {"functional", "abstract", "satb", "chordarp"}
+    assert "method:012" not in seen
+    # unknown method -> no profile -> template only
+    seen2 = {select_harmonizer("065", random.Random(0)) for _ in range(200)}
+    assert "method:065" not in seen2
+    assert seen2 <= {"functional", "abstract", "satb", "chordarp"}
+
+
+def test_harmonizer_plan_method_path():
+    via_plan = harmonizer_plan("method:002", "C", ["A", "B"], [4, 4], seed=3)
+    via_fn = plan_from_method("002", "C", ["A", "B"], [4, 4], seed=3)
+    assert via_plan.roots == via_fn.roots
 
 
 # ---------------------------------------------------------------------------
