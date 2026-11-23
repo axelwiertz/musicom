@@ -41,6 +41,8 @@ PROGRESSIONS = {
     "minor-aeolian": ["i", "VI", "III", "VII"],
     "major-asc": ["I", "III", "IV", "V"],
     "blues-rock": ["I", "IV", "I", "V"],
+    "sinterklaas": ["I", "IV", "V"],
+    "kinderlied": ["I", "IV", "V"],
 }
 
 # Chord quality -> semitone offsets from root.

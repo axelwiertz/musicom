@@ -37,7 +37,7 @@ from typing import List, Optional, Sequence
 
 from structures import MusicEvent
 
-from rules.harmony import CHORD_SHAPES, KEY_OFFSET, MAJOR_DEGREES, PROGRESSIONS
+from rules.harmony import CHORD_SHAPES, KEY_OFFSET, PROGRESSIONS
 from workflows.harmony_plan import Chord, HarmonyPlan
 
 __all__ = [
@@ -108,15 +108,19 @@ def _plan_markov(total: int, seed: int) -> list:
 
 
 def _plan_tendency(total: int, seed: int) -> list:
-    """023: harmonic band — corridor widens mid-piece (distant degrees)."""
+    """023: harmonic band — corridor widens from tonic toward IV/V mid-piece.
+
+    Degrees ordered by harmonic distance from the tonic; the reachable band
+    narrows to I at the intro/outro and widens to {I,V,IV} mid-piece (a
+    children's-march reading of the tendency-mask corridor)."""
     rng = __import__("random").Random(seed)
+    band = ["I", "V", "IV", "vi", "ii", "iii", "vii"]
     degrees = []
     for b in range(total):
-        p = b / max(total - 1, 1)                  # 0..1 across the piece
-        width = 0.15 + 0.7 * (1 - abs(2 * p - 1))  # narrow ends, wide middle
-        band = rng.uniform(-width, width)          # position inside the corridor
-        idx = int(round(3 + band * 3))             # 0..6 -> degree index
-        degrees.append(MAJOR_DEGREES[max(0, min(6, idx))])
+        p = b / max(total - 1, 1)          # 0..1 across the piece
+        arc = 1 - abs(2 * p - 1)           # 0 at ends, 1 in the middle
+        reach = round(2 * arc)             # 0 (I only) .. 2 (I, V, IV)
+        degrees.append(band[rng.randint(0, reach)])
     return _force_cadence(degrees)
 
 
