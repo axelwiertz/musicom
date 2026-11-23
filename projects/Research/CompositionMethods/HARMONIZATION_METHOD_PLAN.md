@@ -22,7 +22,11 @@ melody method's phase-1 result, ordered abstract → concrete → absolute.*
   each forces V→I. `source="template"` methods (012/018/040/079/003) fall back to
   their profile's template harmoniser (the "without phase-1" path). Suite 790
   passed, 1 skipped. Commits `d3a91fe` (P0) + `b9f1a2b` (P1).
-- **P2 (cron random harmoniser selection)** — open.
+- **P2 BUILT (2026-11-23).** `select_harmonizer(method_id, rng)` draws from the
+  four templates + (method-source methods) a `"method:<id>"` option; rhythm/contour
+  methods auto-fallback to template. `harmonizer_plan()` accepts `"method:<id>"`.
+  Composition cron prompt wired (step 5 + REPORT CONTRACT; `jobs.json`). Cron still
+  paused on HTTP 402 credits — resumes via the 2026-12-06 job. Commit `c6b990d`.
 
 ---
 
