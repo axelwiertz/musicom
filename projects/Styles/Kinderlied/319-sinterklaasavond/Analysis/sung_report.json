@@ -1,0 +1,23 @@
+{
+  "project": "319-sinterklaasavond",
+  "variant": "sung",
+  "source_midi": "319-sinterklaasavond-perfect.mid",
+  "voice": "nl2 (MBROLA diphone, Dutch)",
+  "lyrics": "de a vond is ge ko men de ster ren staan daar te stra len zijn paard klinkt op de stoep sin ter klaas rijdt door de straat hij klopt aan zacht klop klop hoor daar de bel len klin ken en het paard stapt nu heel rust ig door de straat ga nu maar sla pen en droom van al het zoet sin ter klaas",
+  "note_count": 66,
+  "token_count": 66,
+  "phoneme_count": 202,
+  "mix": {
+    "vocal_sr": 16000,
+    "accomp_sr": 44100,
+    "vocal_gain": 4.971,
+    "vocal_peak": 0.1638,
+    "accomp_peak": 0.6851,
+    "vocal_rms": 0.10579,
+    "accomp_rms": 0.12105,
+    "integrated_lufs": -16.0,
+    "true_peak_db": -1.2,
+    "wav_bytes": 10666540,
+    "ogg_bytes": 982112
+  }
+}

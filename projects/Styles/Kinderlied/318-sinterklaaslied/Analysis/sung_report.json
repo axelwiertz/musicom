@@ -1,0 +1,23 @@
+{
+  "project": "318-sinterklaaslied",
+  "variant": "sung",
+  "source_midi": "318-sinterklaaslied-perfect.mid",
+  "voice": "nl2 (MBROLA diphone, Dutch)",
+  "lyrics": "sin ter klaas ka poen tje - - gooi wat in mijn schoen tje - - gooi wat in mijn laars je - - dank je sin ter klaas je - sin ter klaas je goe ie man - geef me wat ik wen sen kan - sui ker beest of mar se pein - laat mijn schoen tje vol maar zijn - hoor de bel len klink in de straat sin ter klaas komt aan ge reed hoor de bel len klink in de straat sin ter klaas kom van daag sin ter klaas ka poen tje - - gooi wat in mijn schoen tje - - gooi wat in mijn laars je - - dank je sin ter klaas je - sin ter klaas je goe ie man - geef me wat ik wen sen kan - sui ker beest of mar se pein - laat mijn schoen tje vol maar zijn - dank je sin ter klaas je dank je wel -",
+  "note_count": 165,
+  "token_count": 165,
+  "phoneme_count": 432,
+  "mix": {
+    "vocal_sr": 16000,
+    "accomp_sr": 44100,
+    "vocal_gain": 6.447,
+    "vocal_peak": 0.1534,
+    "accomp_peak": 0.8321,
+    "vocal_rms": 0.13139,
+    "accomp_rms": 0.17225,
+    "integrated_lufs": -15.94,
+    "true_peak_db": -1.75,
+    "wav_bytes": 12604716,
+    "ogg_bytes": 1167245
+  }
+}
