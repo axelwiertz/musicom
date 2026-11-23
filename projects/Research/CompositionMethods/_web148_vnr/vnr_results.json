@@ -1,0 +1,62 @@
+{
+  "density_pulses": 3998,
+  "density_expected": 4000.0,
+  "density_rel_err": 0.0005,
+  "density_ok": true,
+  "velvet_band_db": [
+    -7.72,
+    -7.31,
+    -7.17,
+    -7.33,
+    -7.38,
+    -7.45,
+    -7.63
+  ],
+  "velvet_flatness_db": 0.5445294653833246,
+  "velvet_flat_ok": true,
+  "t60_measured": [
+    3.127,
+    2.535,
+    1.993,
+    1.601,
+    1.282,
+    1.023
+  ],
+  "t60_target": [
+    3.125,
+    2.5,
+    2.0,
+    1.6,
+    1.28,
+    1.024
+  ],
+  "t60_target_mid": 2.0,
+  "t60_mid_rel_err": 0.00374999999999992,
+  "t60_mid_ok": true,
+  "hf_shorter_ok": true,
+  "ir48_energy": 1.0,
+  "ir_energy": 1.0000000000000002,
+  "energy_norm_ok": true,
+  "ir_len_samples": 195000,
+  "pulses_in_ir": 8125,
+  "sparse_speedup": 24.0,
+  "deterministic_ok": true,
+  "len_ok": true,
+  "corr_lf_125_250": 0.04834037566395459,
+  "corr_hf_4k_8k": -0.06159690251135947,
+  "decorr_ok": true,
+  "wet_level_db_by_rho": [
+    -0.512,
+    -0.521,
+    -0.523
+  ],
+  "level_invariance_db": 0.010544442173090252,
+  "level_invariance_ok": true,
+  "wav_bytes": 576044,
+  "wav_ok": true,
+  "wet_rms": 0.21068295568147208,
+  "dry_rms": 0.08602885123024157,
+  "checks_passed": 10,
+  "checks_total": 10,
+  "all_pass": true
+}

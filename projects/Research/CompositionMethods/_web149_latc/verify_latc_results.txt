@@ -1,0 +1,18 @@
+[PASS] 1. first-8-step positions known sequence  -- positions=[(0, 0), (1, 0), (1, -1), (0, -1), (0, 0), (-1, 0), (-1, 1), (0, 1)]
+[PASS] 2. highway emerges (onset found)  -- onset=9976 (Wikipedia: ~9,977)
+[PASS] 3. highway period = 104  -- detector period=104; 2000-step window all satisfied at t=9976 -> period 104 confirmed
+[PASS] 4. highway drift constant per period  -- drift per 104 steps = (-2, -2)
+[PASS] 4b. drift holds to end of run
+[PASS] 5. unbounded growth (Bunimovich-Troubetzkoy)  -- max radius @1k/5k/10k/20k/30k = [11, 22, 29, 211, 403]
+[PASS] 6. torus 4x4 eventually cycles (finite state space)  -- cycle onset=42 len=96
+[PASS] 6b. torus 5x5 eventually cycles  -- cycle onset=63 len=11710
+[PASS] 7. deterministic (identical trajectories)  -- sha256(pos_log)=8a6d9ab3759489a2
+[PASS] 8a. RL (Langton) reaches highway  -- onset=9975, drift=(-2, -2)
+[PASS] 8b. RLR: no highway in 30k horizon (chaotic growth)  -- onset=None, max radius=50
+[PASS] 8c. RLLR: no highway (bounded/symmetric growth, Truchet)  -- onset=None, max radius=26
+[PASS] 8d. RLLR repeatedly symmetric (Truchet-tile reflections)  -- horizontal-reflection hits 3/120 samples
+[PASS] 8e. LLRR more often symmetric; RL (Langton) never  -- LLRR 8/120, RL 0/56
+[PASS] 9. 8-state CA view == ant trajectory
+[PASS] 10. finite board: ant escapes (unboundedness corollary)  -- escaped after 901 steps on 21x21 board
+
+16/16 checks pass

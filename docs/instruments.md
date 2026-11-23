@@ -674,6 +674,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Synth | Orchestra Hit | 55 | 36–96 | accent, stab, rhythm, punctuation, texture, lead |
 | Synth | Lead 3 (calliope) | 82 | 60–96 | lead, melody, ornament, accent, countermelody |
 | Synth | Synth Brass 1 | 62 | 36–96 | lead, harmony, accent, stab, pad, countermelody |
+| Synth | Synth Strings 1 | 50 | 36–96 | pad, harmony, texture, drone, lead, countermelody, accent |
 | Synth | Synth Voice | 54 | 36–96 | lead, melody, harmony, pad, countermelody, accent |
 | Vocal | Choir Aahs | 52 | 40–88 | pad, harmony, melody, countermelody, anthem, texture |
 | Woodwind | Bagpipe | 109 | 53–96 | lead, melody, ornament, drone, accent |
@@ -761,6 +762,7 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 ||| 44 | Tremolo Strings | Tremolo_Strings ✓ (GM_PROGRAMS[44] = "Tremolo Strings"; FluidR3 preset 44 = "Tremolo" — one-word SF2 spelling, cosmetic only, **no routing impact**) |
 ||| 30 | Distortion Guitar | Distortion_Guitar ✓ (GM_PROGRAMS[30] + FluidR3 preset 30 both "Distortion Guitar" — labels match exactly, **no quirk**) |
 ||| 62 | Synth Brass 1 | Synth_Brass_1 ✓ (GM_PROGRAMS[62] = "Synth Brass 1"; FluidR3 preset 62 = "Synth Brass 1" — labels match exactly, **no quirk**) |
+|||| 50 | Synth Strings 1 | Synth_Strings_1 ✓ (GM_PROGRAMS[50] = "Synth Strings 1"; FluidR3 preset 50 = "Synth Strings 1" — labels match exactly, **no quirk**; STEM_LABEL = "Synth_Strings_1"; distinct from sampled GM48 "Strings" / GM49 "Slow Strings") |
 ||| 32 | Acoustic Bass | Acoustic_Bass ✓ (GM_PROGRAMS[32] = "Acoustic Bass"; FluidR3 preset 32 = "Acoustic Bass" — labels match exactly, **no quirk**) |
 |||| 82 | Lead 3 (calliope) | Lead_3_calliope ✓ (GM_PROGRAMS[82] = "Lead 3 (calliope)" → sanitized `Lead_3_calliope` — parens stripped, spaces → underscore; FluidR3 preset 82 = **"Calliope Lead"** — SF2 internal name differs from the GM label, cosmetic only, **no routing impact**; stems are labelled from GM_PROGRAMS) |
 |||| 89 | Pad 2 (warm) | Pad_2_warm ✓ (GM_PROGRAMS[89] = "Pad 2 (warm)" → sanitized `Pad_2_warm` — parens stripped, spaces → underscore; FluidR3 preset 89 = **"Warm Pad"** — SF2 internal name differs from the GM label, cosmetic only, **no routing impact**; STEM_LABEL = "Pad_2_warm" matches the pipeline's real label) |
@@ -2703,3 +2705,50 @@ melodic patch on the same pitches (the 2026-09-01 comb-filter rule). Completes
 the piano block: GM1 Acoustic, **GM2 Electric Grand**, GM3 Honky-tonk, GM4
 Rhodes, GM5 FM EP2. Remaining sibling candidates: GM112 Tinkle Bell, GM118
 Synth Drum, GM50/51 Synth Strings 1/2, GM63 Synth Brass 2, GM37 Slap Bass 2.
+
+**Synth Strings 1 added** (2026-11-23): GM50, **Synth-family seventh entry** —
+the divide-down **string machine** (Eminent 310 Unique 1972, ARP Solina,
+ARP Omni, Roland RS-202, Korg Poly-Ensemble, Elka Rhapsody, Logan String
+Melody, Crumar Performer): one divide-down oscillator bank + ONE shared filter
++ ONE shared LFO → paraphonic (all held notes share the same chorus phase) +
+triple BBD ensemble chorus (the slow ±8–15-cent swirl); no velocity sensing, no
+bow/rosin noise, **infinite sustain while held**, 20–40 ms capacitor attack,
+100–300 ms release. The synthetic sibling of the sampled sections: GM48 String
+Ensemble 1 / GM49 String Ensemble 2 are acoustic and realistic; GM50 is
+brighter, wider, obviously processed (Pink Floyd "Shine On", Jarre *Oxygène*,
+Air "Sexy Boy", disco pads). Files: instrument.md + synth_strings_1.py;
+verified end-to-end UnitMatrixComposer (1 bar, 1 section, Synth Strings 1
+**SOLO** on ch0 — sustained Cmaj7 pad C4–B4 held the full bar — + drum-kit
+context on ch9; NO second melodic patch on the same pitches, per the
+2026-09-01 comb-filter rule) → **zero-drift ✓** → MIDI **134 bytes** →
+FluidSynth WAV **1,290,028 bytes** SOLO (FluidR3 via `discover_soundfont()`) ✓;
+RenderPipeline stems on disk `track00_Synth_Strings_1.wav` (1,290,028 B) +
+`track01_Drums.wav` (784,428 B) ✓; stem label `GM_PROGRAMS[50]` =
+**"Synth Strings 1"** — exact match with FluidR3 preset 50, **no quirk**;
+solo-render spectral 4–8 kHz buzz **1.5%** (clean single voice); PolySynth
+smoke test peak 0.980 with tail_rms/peak **0.581** (sustained, i.e. no natural
+decay — the defining string-machine trait). Range 36–96 (C2–C7; original
+machines were 4-octave 49-key), sweet spot 60–84 (C4–C6), solo 52–88 (E3–E6);
+zones low 36–55 / mid 56–79 / high 80–96. Synthesis: **PolySynth primary**
+(subtractive divide-down saw+square → shared 3 kHz low-pass → 3-voice unison
+±9 cents = the BBD chorus; attack 0.03 s, sustain 1.0, release 0.25 s — the
+only engine that reproduces the constant swirl), **Additive secondary**
+(`string_machine` stack [1.0, 0.85, 0.70, 0.55, 0.40, 0.28, 0.18, 0.10],
+decay_S 1e-4 hold), **PhaseModSynth tertiary** (saw carrier, ratio 1.0, depth
+1.2 — gentle, NOT brassy). Production: REVERB_TAIL 2.8 s, EQ cut 250 Hz
+−2.5 dB, boost 3.2 kHz +2.0 dB, 8 kHz +1.5 dB air shelf (BBD top is dull —
+do NOT chase sampled-string sparkle), PAN centre. Registration proof:
+`by_name('synth strings 1')` / `by_name('Synth Strings 1')` → Synth Strings 1,
+`by_program(50)` → Synth Strings 1 (distinct from `by_program(49)` String
+Ensemble 2), `in_sweet_spot(72)` = True, `in_sweet_spot(24)` = False,
+`stem_label = 'Synth_Strings_1'`; `registry_table()` row "| Synth | Synth
+Strings 1 | 50 | 36–96 | pad, harmony, texture, drone, lead, countermelody,
+accent |"; convenience constant `SYNTH_STRINGS_1`; registry `_FIELDS` extended
+with `polysynth_defaults` so the subtractive preset loads through the registry
+(warm_pad's POLYSYNTH_DEFAULTS now loads too). Role: pad/harmony (sustained
+chords — the default), texture (wide chorus bed), drone (static held root/fifth),
+lead (unison chorus lead lines), countermelody, accent (swell hit) — NOT a bass
+foundation (thin chorused bottom) and NOT a realistic orchestral section (that
+is GM48/49). Remaining sibling candidates: GM51 Synth Strings 2 (slower/airier
+variant), GM112 Tinkle Bell, GM118 Synth Drum, GM63 Synth Brass 2, GM37 Slap
+Bass 2.

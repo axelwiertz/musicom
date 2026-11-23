@@ -113,6 +113,7 @@ _INSTRUMENT_MODULES = {
     "Bass.fretless_bass.fretless_bass": "fretless_bass",
     "Woodwind.recorder.recorder": "recorder",
     "Synth.synth_pad.synth_pad": "synth_pad",
+    "Synth.synth_strings_1.synth_strings_1": "synth_strings_1",
     "Synth.synth_brass_1.synth_brass_1": "synth_brass_1",
     "Synth.synth_voice.synth_voice": "synth_voice",
     "Synth.calliope.calliope": "calliope",
@@ -124,6 +125,7 @@ _FIELDS = (
     "midi_program", "gm_name", "range_min", "range_max",
     "solo_range", "sweet_spot", "zones", "articulations",
     "synthesis", "modal_preset", "karplus_defaults", "fm_defaults",
+    "polysynth_defaults",
     "bowed_defaults", "drum606_defaults", "synthesis_defaults",
     "motor_defaults", "string_ensemble_defaults",
     "xylophone_modes", "celesta_modes",
@@ -373,6 +375,7 @@ STRING_ENSEMBLE = ALL_INSTRUMENTS["string_ensemble"]
 STRING_ENSEMBLE_2 = ALL_INSTRUMENTS["string_ensemble_2"]
 TREMOLO_STRINGS = ALL_INSTRUMENTS["tremolo_strings"]
 SYNTH_PAD = ALL_INSTRUMENTS["synth_pad"]
+SYNTH_STRINGS_1 = ALL_INSTRUMENTS["synth_strings_1"]
 SYNTH_BRASS_1 = ALL_INSTRUMENTS["synth_brass_1"]
 SYNTH_VOICE = ALL_INSTRUMENTS["synth_voice"]
 CALIOPE = ALL_INSTRUMENTS["calliope"]
@@ -567,6 +570,8 @@ def registry_table():
             role = "pad, harmony, texture, drone, accent"
         elif low == "pad 2 (warm)":
             role = "pad, harmony, texture, drone, accent"
+        elif low == "synth strings 1":
+            role = "pad, harmony, texture, drone, lead, countermelody, accent"
         elif low == "synth brass 1":
             role = "lead, harmony, accent, stab, pad, countermelody"
         elif low == "synth voice":
@@ -1178,3 +1183,28 @@ if __name__ == "__main__":
     print("  ELECTRIC_GRAND.karplus_defaults =", ELECTRIC_GRAND.karplus_defaults)
     print("  ELECTRIC_GRAND.reverb_tail =", ELECTRIC_GRAND.reverb_tail,
           "ELECTRIC_GRAND.pan =", ELECTRIC_GRAND.pan)
+
+    print()
+    print("=== Synth Strings 1 (Divide-down String Machine, GM50) ===")
+    print("  SYNTH_STRINGS_1.midi_program =", SYNTH_STRINGS_1.midi_program,
+          "(should be 50)")
+    print("  by_name('synth strings 1') =", by_name("synth strings 1"))
+    print("  by_name('Synth Strings 1') =", by_name("Synth Strings 1"))
+    print("  by_program(50) =", by_program(50))
+    print("  by_program(49) =", by_program(49),
+          "(distinct: sampled string ensemble 2)")
+    print("  SYNTH_STRINGS_1.in_sweet_spot(72) =",
+          SYNTH_STRINGS_1.in_sweet_spot(72))
+    print("  SYNTH_STRINGS_1.in_sweet_spot(24) =",
+          SYNTH_STRINGS_1.in_sweet_spot(24))
+    print("  SYNTH_STRINGS_1.range_min =", SYNTH_STRINGS_1.range_min,
+          "SYNTH_STRINGS_1.range_max =", SYNTH_STRINGS_1.range_max)
+    print("  SYNTH_STRINGS_1.solo_range =", SYNTH_STRINGS_1.solo_range)
+    print("  SYNTH_STRINGS_1.stem_label =", repr(SYNTH_STRINGS_1.stem_label))
+    print("  SYNTH_STRINGS_1.synthesis =", repr(SYNTH_STRINGS_1.synthesis))
+    print("  SYNTH_STRINGS_1.polysynth_defaults =",
+          SYNTH_STRINGS_1.polysynth_defaults)
+    print("  SYNTH_STRINGS_1.reverb_tail =", SYNTH_STRINGS_1.reverb_tail,
+          "SYNTH_STRINGS_1.pan =", SYNTH_STRINGS_1.pan)
+    print("  SYNTH_STRINGS_1.articulations =",
+          list(SYNTH_STRINGS_1.articulations or {}))
