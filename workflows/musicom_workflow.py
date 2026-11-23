@@ -525,6 +525,7 @@ def _fill_method_cell(composer, vname, sname, ctx, role, method_id,
         section_bars=ctx.section_bars, section_len=ctx.section_len,
         bar_ticks=ctx.bar_ticks, seed=ctx.seed, style=ctx.style,
         voice_idx=voice_idx, instrument_name=instrument_name,
+        harmony_plan=getattr(ctx, "harmony_plan", None),
     )
     method = registry_method(method_id)
     resolved = method.resolve_role(mctx)
@@ -535,7 +536,8 @@ def _fill_method_cell(composer, vname, sname, ctx, role, method_id,
 
 def compose(style="pop", method=None, form=None, key="C", bpm=None,
             voices=None, num_bars=32, seed=None, out_dir=None,
-            sections=None, loop=False, humanize=True, section_methods=None):
+            sections=None, loop=False, humanize=True, section_methods=None,
+            harmonizer=None):
     """Compose a piece through the musicom engine (zero-drift guaranteed).
 
     Uses the UnitMatrixComposer with the requested voices. If `method` is
@@ -606,7 +608,7 @@ def compose(style="pop", method=None, form=None, key="C", bpm=None,
     # hardcoded I–V–vi–IV.
     _is_abs = str(method).startswith("ABS")
     chord_tones_by_section = []
-    if _is_abs:
+    if _is_abs and not harmonizer:
         from rules.subset_network import (patterns_from_degrees,
                                           PatternNetwork, standard_patterns,
                                           interval_vector, tension)
@@ -652,30 +654,50 @@ def compose(style="pop", method=None, form=None, key="C", bpm=None,
     for s in range(5):
         for b in range(4):
             slots.append(chord_roots[(b) % 4])
+    # --- harmonization method (HARMONIZATION_METHOD_PLAN.md P0) -------------
+    # When ``harmonizer`` is set, build a per-bar HarmonyPlan and let the fillers
+    # + realize_spine snap to the chord active in each bar (instead of one chord
+    # per section). Loop mode keeps its own per-bar cycle (P2 wires it).
+    full_plan = None
+    if harmonizer and not loop:
+        from workflows.harmony_method import harmonizer_plan
+        full_plan = harmonizer_plan(
+            harmonizer, key, section_names, bars_per, style=style,
+            seed=seed if seed is not None else 0)
     # build per-voice material — role-first cell engine (VOICE_ROLE_WORKFLOW_PLAN.md P0)
     from workflows.cell_engine import CellComposer, CellContext, default_resolve_role
     cell = CellComposer(composer)
+    bar_offset = 0
     for s, sname in enumerate(section_names):
         if loop:
             _fill_loop_section(composer, voices, chord_roots, num_bars)
             continue
+        section_bars = bars_per[s]
         # find the chord for this section's first bar (framework: hold chord per section)
-        if _is_abs:
+        if harmonizer and full_plan is not None:
+            plan_slice = full_plan.slice(bar_offset, section_bars)
+            first = plan_slice.chord_at(0)
+            chord_tones = list(first.chord_tones())
+            root_midi = first.root_midi
+            harmony_plan = plan_slice
+        elif _is_abs:
             # abstract path: chord tones come from the walked subset
             chord_tones = chord_tones_by_section[s]
             root_midi = chord_tones[0]
+            harmony_plan = None
         else:
             root_midi, qual = chord_roots[s % 4]
             third = 3 if qual == "min" else 4
             fifth = 7
             chord_tones = [root_midi, root_midi + third, root_midi + fifth]
-        section_bars = bars_per[s]
+            harmony_plan = None
         section_len = section_bars * BAR
         ctx = CellContext(
             key=key, pattern="major", chord_tones=tuple(chord_tones),
             register=(0, 127), density=1.0, root_midi=root_midi,
             section_bars=section_bars, section_len=section_len, bar_ticks=BAR,
             seed=seed if seed is not None else 0, style=style,
+            harmony_plan=harmony_plan,
         )
         method_id = (section_methods or {}).get(sname)
         for vi, (vname, inst_name) in enumerate(voices):
@@ -689,6 +711,7 @@ def compose(style="pop", method=None, form=None, key="C", bpm=None,
                                   vi, inst_name)
             else:
                 cell.fill_cell(vname, sname, ctx, role)
+        bar_offset += section_bars
 
     # --- humanization (style-derived, seeded, zero-drift safe) -------------
     # Dual-version contract (2026-10-17): humanize=True exports BOTH a

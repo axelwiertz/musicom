@@ -34,6 +34,8 @@ from typing import Callable, Dict, List, Optional, Sequence
 
 from structures import MusicEvent, MusicUnit
 
+from workflows.harmony_plan import HarmonyPlan
+
 __all__ = [
     "CellContext",
     "CellComposer",
@@ -74,6 +76,10 @@ class CellContext:
     seed: int = 0
     other_roles: frozenset = field(default_factory=frozenset)
     counter_mode: str = "independent"
+    # --- harmonization (HARMONIZATION_METHOD_PLAN.md P0) ---
+    harmony_plan: Optional[HarmonyPlan] = None   # per-bar chord skeleton
+
+
 
 
 # ---------------------------------------------------------------------------
@@ -106,23 +112,48 @@ def default_resolve_role(voice_idx: int, instrument_name: str,
 # Default fillers — byte-identical to the legacy hardcoded compose() fill
 # ---------------------------------------------------------------------------
 
+def _chord_tones_for_bar(ctx: CellContext, bar: int) -> tuple:
+    """Chord tones active in ``bar`` — per-bar plan if present, else legacy."""
+    if ctx.harmony_plan is not None:
+        return ctx.harmony_plan.chord_at(bar).chord_tones()
+    return ctx.chord_tones
+
+
+def _root_for_bar(ctx: CellContext, bar: int) -> int:
+    """Bass root active in ``bar`` — per-bar plan if present, else legacy."""
+    if ctx.harmony_plan is not None:
+        return ctx.harmony_plan.chord_at(bar).root_midi
+    return ctx.root_midi
+
+
 def _fill_lead(ctx: CellContext) -> List[MusicEvent]:
     """Lead: 8th-note arpeggio of chord tones, octave up (legacy)."""
     evs = []
     for b in range(ctx.section_bars * 2):
-        step = ctx.chord_tones[b % 3] + 12  # octave up for lead
+        tones = _chord_tones_for_bar(ctx, b // 2)
+        step = tones[b % len(tones)] + 12  # octave up for lead
         evs.append(MusicEvent(step, 90, b * 960, b * 960 + 480))
     return evs
 
 
 def _fill_pad(ctx: CellContext) -> List[MusicEvent]:
-    """Pad: sustained chord (whole-section), first three chord tones (legacy)."""
-    return [MusicEvent(ctx.chord_tones[i], 60, 0, ctx.section_len) for i in range(3)]
+    """Pad: sustained chord, first three chord tones (legacy)."""
+    if ctx.harmony_plan is None:
+        return [MusicEvent(ctx.chord_tones[i], 60, 0, ctx.section_len)
+                for i in range(3)]
+    evs = []
+    for b in range(ctx.section_bars):
+        tones = _chord_tones_for_bar(ctx, b)
+        base = b * ctx.bar_ticks
+        for t in tones[:3]:
+            evs.append(MusicEvent(t, 60, base, base + ctx.bar_ticks))
+    return evs
 
 
 def _fill_bass(ctx: CellContext) -> List[MusicEvent]:
-    """Bass: root on beats 1 & 3 (legacy)."""
-    return [MusicEvent(ctx.root_midi, 95, b * ctx.bar_ticks, b * ctx.bar_ticks + 900)
+    """Bass: root on beat 1 (legacy)."""
+    return [MusicEvent(_root_for_bar(ctx, b), 95, b * ctx.bar_ticks,
+                       b * ctx.bar_ticks + 900)
             for b in range(ctx.section_bars)]
 
 
@@ -130,7 +161,8 @@ def _fill_arp(ctx: CellContext) -> List[MusicEvent]:
     """Arp: 16th-note arpeggio of chord tones, octave up (legacy)."""
     evs = []
     for b in range(ctx.section_bars * 4):
-        note = ctx.chord_tones[b % 3] + 12
+        tones = _chord_tones_for_bar(ctx, b // 4)
+        note = tones[b % len(tones)] + 12
         evs.append(MusicEvent(note, 70, b * 480, b * 480 + 240))
     return evs
 

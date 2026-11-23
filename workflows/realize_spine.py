@@ -73,7 +73,8 @@ def realize(method_output: Sequence[MethodOutput], ctx: CellContext,
             f"unknown pattern {ctx.pattern!r}; use one of {sorted(SCALE_PATTERNS)}")
     pcs = set(scale_pcs)
     strong_grid = tuple(ctx.strong_beat_grid)
-    chord_tones = list(ctx.chord_tones) if ctx.chord_tones else None
+    default_tones = list(ctx.chord_tones) if ctx.chord_tones else None
+    plan = getattr(ctx, "harmony_plan", None)
     lo, hi = ctx.register
     section_len = ctx.section_len
 
@@ -90,6 +91,12 @@ def realize(method_output: Sequence[MethodOutput], ctx: CellContext,
         # RawNote -> snap + harmonize + grid-lock
         raw_pitch = lo + note.pitch_index * (hi - lo)
         weight = _classify(note.onset, strong_grid, ctx.bar_ticks)
+        chord_tones = default_tones
+        if plan is not None:
+            # per-bar harmony (HARMONIZATION_METHOD_PLAN.md P0): snap strong
+            # beats to the chord active in THIS note's bar, not the section chord
+            bar = int(note.onset) // ctx.bar_ticks
+            chord_tones = list(plan.chord_at(bar).chord_tones())
         pitch = _snap(raw_pitch, weight, pcs, chord_tones)
 
         onset = int(round(note.onset / grid) * grid)
