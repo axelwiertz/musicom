@@ -2,17 +2,17 @@
   "perfect": {
     "soundfont": "FluidR3_GM.sf2",
     "target_lufs": -16.0,
-    "integrated_lufs": -16.03,
-    "true_peak_db": -1.0,
-    "wav_bytes": 13301804,
-    "ogg_bytes": 1311739
+    "integrated_lufs": -15.98,
+    "true_peak_db": -4.93,
+    "wav_bytes": 12604716,
+    "ogg_bytes": 1273636
   },
   "humanized": {
     "soundfont": "FluidR3_GM.sf2",
     "target_lufs": -16.0,
-    "integrated_lufs": -16.03,
-    "true_peak_db": -1.0,
-    "wav_bytes": 13297452,
-    "ogg_bytes": 1318214
+    "integrated_lufs": -16.0,
+    "true_peak_db": -3.94,
+    "wav_bytes": 12601132,
+    "ogg_bytes": 1259596
   }
 }

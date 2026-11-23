@@ -6,6 +6,42 @@
   "time_sig": "4/4",
   "form": "intro-verse-refrain-verse-outro",
   "seed": 318,
+  "harmonizer": "functional",
+  "harmony_source": "template (without phase-1)",
+  "progression": [
+    "I",
+    "IV",
+    "V",
+    "I",
+    "IV",
+    "V",
+    "I",
+    "IV",
+    "V",
+    "I",
+    "IV",
+    "V",
+    "I",
+    "IV",
+    "V",
+    "I",
+    "IV",
+    "V",
+    "I",
+    "IV",
+    "V",
+    "I",
+    "IV",
+    "V",
+    "I",
+    "IV",
+    "V",
+    "I",
+    "IV",
+    "V",
+    "I",
+    "IV"
+  ],
   "voices": [
     {
       "name": "Lead",
@@ -15,17 +51,17 @@
     {
       "name": "Pad",
       "program": 8,
-      "channel": 0
+      "channel": 1
     },
     {
       "name": "Bass",
       "program": 58,
-      "channel": 0
+      "channel": 2
     },
     {
       "name": "Arp",
       "program": 9,
-      "channel": 0
+      "channel": 3
     },
     {
       "name": "Drums",
@@ -33,50 +69,6 @@
       "channel": 9
     }
   ],
-  "sections": {
-    "Intro": [
-      "C",
-      "C",
-      "C",
-      "C"
-    ],
-    "Verse": [
-      "C",
-      "C",
-      "F",
-      "G",
-      "C",
-      "F",
-      "G",
-      "C"
-    ],
-    "Refrain": [
-      "C",
-      "F",
-      "C",
-      "G",
-      "C",
-      "F",
-      "G",
-      "C"
-    ],
-    "Verse2": [
-      "C",
-      "C",
-      "F",
-      "G",
-      "C",
-      "F",
-      "G",
-      "C"
-    ],
-    "Outro": [
-      "C",
-      "C",
-      "C",
-      "C"
-    ]
-  },
   "melody": {
     "register": "B4..A5",
     "range_semitones": 10,

@@ -2,18 +2,18 @@
   "perfect": {
     "soundfont": "FluidR3_GM.sf2",
     "target_lufs": -16.0,
-    "integrated_lufs": -16.02,
-    "true_peak_db": -1.0,
+    "integrated_lufs": -16.0,
+    "true_peak_db": -3.16,
     "production": "dry (SP-001)",
     "fdn_params": null,
-    "wav_bytes": 11366700,
-    "ogg_bytes": 1126279
+    "wav_bytes": 10666540,
+    "ogg_bytes": 1046359
   },
   "humanized": {
     "soundfont": "FluidR3_GM.sf2",
     "target_lufs": -16.0,
-    "integrated_lufs": -16.02,
-    "true_peak_db": -1.0,
+    "integrated_lufs": -16.0,
+    "true_peak_db": -2.68,
     "production": "SP-032 FDN Reverb",
     "fdn_params": {
       "size": 0.72,
@@ -22,7 +22,7 @@
       "wet_dry": 0.32,
       "width": 1.0
     },
-    "wav_bytes": 11490860,
-    "ogg_bytes": 1132170
+    "wav_bytes": 10703404,
+    "ogg_bytes": 1041853
   }
 }

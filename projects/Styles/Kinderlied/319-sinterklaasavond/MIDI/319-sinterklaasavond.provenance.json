@@ -7,8 +7,36 @@
   "form": "intro-verse-verse-outro",
   "seed": 319,
   "composition_method": "023 Tendency Masking (melody, two-phase)",
+  "harmonizer": "method:023",
+  "harmony_source": "method (WITH phase-1)",
+  "progression": [
+    "I",
+    "I",
+    "I",
+    "I",
+    "I",
+    "V",
+    "I",
+    "V",
+    "I",
+    "IV",
+    "IV",
+    "IV",
+    "V",
+    "I",
+    "IV",
+    "I",
+    "V",
+    "V",
+    "I",
+    "V",
+    "V",
+    "I",
+    "V",
+    "I"
+  ],
   "phase1": "TendencyMaskingGenerator, corridor G4..F#5, 8th step, density 0.85",
-  "phase2": "strong beats -> I-IV-V chord tones; conjunct clamp <= 3rd; diatonic",
+  "phase2": "strong beats -> plan chord tones; conjunct clamp <= 3rd; diatonic",
   "production_method": "SP-032 FDN Reverb (warm hall) + master -16 LUFS",
   "voices": [
     {
@@ -19,17 +47,17 @@
     {
       "name": "Pad",
       "program": 8,
-      "channel": 0
+      "channel": 1
     },
     {
       "name": "Bass",
       "program": 58,
-      "channel": 0
+      "channel": 2
     },
     {
       "name": "Arp",
       "program": 9,
-      "channel": 0
+      "channel": 3
     },
     {
       "name": "Drums",
@@ -37,40 +65,6 @@
       "channel": 9
     }
   ],
-  "sections": {
-    "Intro": [
-      "G",
-      "G",
-      "G",
-      "G"
-    ],
-    "Verse": [
-      "G",
-      "G",
-      "C",
-      "D",
-      "G",
-      "C",
-      "D",
-      "G"
-    ],
-    "Verse2": [
-      "G",
-      "G",
-      "C",
-      "D",
-      "G",
-      "C",
-      "D",
-      "G"
-    ],
-    "Outro": [
-      "G",
-      "G",
-      "G",
-      "G"
-    ]
-  },
   "humanize": {
     "Lead": {
       "seed": 32219,
