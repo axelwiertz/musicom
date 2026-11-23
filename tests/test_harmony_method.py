@@ -204,14 +204,46 @@ def test_profiles_tag_sources_and_semantics():
     assert profile_for_method("040").harmonizer == "satb"
 
 
-def test_plan_from_method_honest_stub():
-    # template-source method -> tells you to harmonise from template
-    with pytest.raises(NotImplementedError):
-        plan_from_method("012", "C", ["A"], [4])
-    # method-source method -> P1 adapter gap
-    with pytest.raises(NotImplementedError):
-        plan_from_method("002", "C", ["A"], [4])
-    # unknown method -> no profile
+def test_plan_from_method_markov_in_key_and_cadence():
+    plan = plan_from_method("002", "C", ["A", "B"], [4, 4], seed=3)
+    assert plan.n_bars == 8
+    for c in plan.chords:
+        assert c.degree in ("I", "ii", "iii", "IV", "V", "vi", "vii")
+    # cadence V -> I on the last two bars
+    assert plan.chord_at(6).degree == "V"
+    assert plan.chord_at(7).degree == "I"
+    # deterministic per seed
+    again = plan_from_method("002", "C", ["A", "B"], [4, 4], seed=3)
+    assert plan.roots == again.roots
+
+
+def test_plan_from_method_tendency_band_and_cadence():
+    plan = plan_from_method("023", "C", ["A"], [8], seed=5)
+    assert plan.n_bars == 8
+    for c in plan.chords:
+        assert c.degree in ("I", "ii", "iii", "IV", "V", "vi", "vii")
+    assert plan.chord_at(6).degree == "V"
+    assert plan.chord_at(7).degree == "I"
+
+
+def test_plan_from_method_skeleton_strong_bars_tonic():
+    plan = plan_from_method("001", "C", ["A"], [8], seed=1)
+    # strong bars (0,2,4) are tonic; the cadence rewrites bars 6,7 -> V,I
+    assert plan.chord_at(0).degree == "I"
+    assert plan.chord_at(2).degree == "I"
+    assert plan.chord_at(4).degree == "I"
+    assert plan.chord_at(7).degree == "I"          # cadence
+
+
+def test_plan_from_method_template_source_falls_back():
+    # rhythm method (012) has no harmonic phase-1 -> chordarp->functional template
+    plan = plan_from_method("012", "C", ["A"], [4])
+    assert list(plan.roots) == [48, 55, 57, 53]    # I V vi IV
+    # contour method (040) -> satb->functional template
+    assert list(plan_from_method("040", "C", ["A"], [4]).roots) == [48, 55, 57, 53]
+
+
+def test_plan_from_method_unknown_method():
     with pytest.raises(KeyError):
         plan_from_method("065", "C", ["A"], [4])
 

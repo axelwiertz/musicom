@@ -37,7 +37,7 @@ from typing import List, Optional, Sequence
 
 from structures import MusicEvent
 
-from rules.harmony import CHORD_SHAPES, KEY_OFFSET, PROGRESSIONS
+from rules.harmony import CHORD_SHAPES, KEY_OFFSET, MAJOR_DEGREES, PROGRESSIONS
 from workflows.harmony_plan import Chord, HarmonyPlan
 
 __all__ = [
@@ -55,6 +55,88 @@ class HarmonizationProfile:
     source: str              # "method" | "template"
     phase_semantics: str     # "progression"|"band"|"rhythm"|"contour"|"none"
     harmonizer: str          # "functional"|"satb"|"chordarp"|"abstract"
+
+
+# ---------------------------------------------------------------------------
+# Module-level helpers: degree-space plan builders (P1 method adapters)
+# ---------------------------------------------------------------------------
+
+# 002/010 Markov: transition weights over the seven diatonic degrees. The same
+# "state weights -> probabilistic path" character as the melodic Markov adapter,
+# applied to CHORD space instead of pitch_index.
+_MARKOV_TRANSITIONS = {
+    "I":  [("V", 3), ("vi", 2), ("IV", 2), ("ii", 1), ("iii", 1)],
+    "ii": [("V", 4), ("IV", 2), ("vii", 1), ("I", 1)],
+    "iii": [("vi", 3), ("IV", 2), ("ii", 2), ("I", 1)],
+    "IV": [("V", 3), ("I", 2), ("ii", 2), ("vii", 1)],
+    "V":  [("I", 4), ("vi", 2), ("iii", 1)],
+    "vi": [("IV", 3), ("ii", 2), ("V", 2), ("I", 1)],
+    "vii": [("I", 4), ("iii", 2), ("vi", 1)],
+}
+
+
+def _degrees_to_plan(degrees, key: str) -> HarmonyPlan:
+    """Roman-numeral degree list -> per-bar Chord plan (root in bass octave)."""
+    off = KEY_OFFSET.get(key, 0)
+    chords = []
+    for deg in degrees:
+        root_iv, qual = CHORD_SHAPES.get(deg, CHORD_SHAPES["I"])
+        chords.append(Chord(root_midi=48 + off + root_iv, quality=qual,
+                            degree=deg))
+    return HarmonyPlan(chords=tuple(chords))
+
+
+def _force_cadence(degrees) -> list:
+    """Close the progression V -> I (last two bars)."""
+    out = list(degrees)
+    if len(out) >= 2:
+        out[-2], out[-1] = "V", "I"
+    return out
+
+
+def _plan_markov(total: int, seed: int) -> list:
+    """002/010: weighted Markov walk over the seven diatonic degrees."""
+    rng = __import__("random").Random(seed)
+    cur = "I"
+    out = [cur]
+    for _ in range(total - 1):
+        nxt, weights = zip(*_MARKOV_TRANSITIONS[cur])
+        cur = rng.choices(nxt, weights=weights)[0]
+        out.append(cur)
+    return _force_cadence(out)
+
+
+def _plan_tendency(total: int, seed: int) -> list:
+    """023: harmonic band — corridor widens mid-piece (distant degrees)."""
+    rng = __import__("random").Random(seed)
+    degrees = []
+    for b in range(total):
+        p = b / max(total - 1, 1)                  # 0..1 across the piece
+        width = 0.15 + 0.7 * (1 - abs(2 * p - 1))  # narrow ends, wide middle
+        band = rng.uniform(-width, width)          # position inside the corridor
+        idx = int(round(3 + band * 3))             # 0..6 -> degree index
+        degrees.append(MAJOR_DEGREES[max(0, min(6, idx))])
+    return _force_cadence(degrees)
+
+
+def _plan_skeleton(total: int, seed: int) -> list:
+    """001: strong bars = I, weak bars = passing chord (IV/vi)."""
+    rng = __import__("random").Random(seed)
+    degrees = []
+    for b in range(total):
+        if b % 4 in (0, 2):                        # strong bars -> tonic
+            degrees.append("I")
+        else:                                      # weak bars -> passing
+            degrees.append(rng.choice(["IV", "vi"]))
+    return _force_cadence(degrees)
+
+
+_METHOD_PLAN_BUILDERS = {
+    "001": _plan_skeleton,
+    "002": _plan_markov,
+    "010": _plan_markov,     # Hierarchical Diffusion — Markov base
+    "023": _plan_tendency,
+}
 
 
 class HarmonizationMethod:
@@ -97,14 +179,9 @@ class FunctionalHarmonizer(HarmonizationMethod):
                 break
         if prog is None:
             prog = PROGRESSIONS["pop"]
-        off = KEY_OFFSET.get(key, 0)
-        chords = []
-        for b in range(sum(bars_per)):
-            deg = prog[b % len(prog)]
-            root_iv, qual = CHORD_SHAPES.get(deg, CHORD_SHAPES["I"])
-            root_midi = 48 + off + root_iv
-            chords.append(Chord(root_midi=root_midi, quality=qual, degree=deg))
-        return HarmonyPlan(chords=tuple(chords))
+        total = sum(bars_per)
+        degrees = [prog[b % len(prog)] for b in range(total)]
+        return _degrees_to_plan(degrees, key)
 
     def voice(self, plan, key="C", seed=0, lead=None, ctx=None):
         """Sustained pad block per bar (the harmony layer)."""
@@ -255,20 +332,29 @@ def profile_for_method(method_id: str) -> Optional[HarmonizationProfile]:
 def plan_from_method(method_id: str, key: str, section_names: Sequence[str],
                      bars_per: Sequence[int], style: str = "", seed: int = 0,
                      phase1=None) -> HarmonyPlan:
-    """Derive a HarmonyPlan from a composition method's phase-1 output.
+    """Derive a HarmonyPlan from a composition method (P1).
 
-    P1. For methods with a natural ``progression``/``band`` phase-1 reading
-    (002/010/023/001) this re-reads ``phase1`` as a harmonic projection. For
-    ``rhythm``/``contour`` methods the profile forces ``source=template`` (no
-    harmonic content in phase-1). Not implemented at P0 — raise honestly.
+    For ``source="method"`` methods (001/002/010/023) this re-runs the method's
+    characteristic process over CHORD space — Markov transition weights -> degree
+    walk, tendency corridor -> harmonic band, skeleton strong/weak -> I vs
+    passing — then forces a V->I cadence. The phase-1 RawNote cloud encodes
+    MELODY (a pitch_index walk, not a progression), so the builders re-apply the
+    method's process to degree space rather than reverse-engineer a progression
+    from a melodic walk (that reverse-engineering is lossy + register-dependent).
+
+    For ``source="template"`` methods (rhythm/contour: 012/018/040/079/003) the
+    phase-1 has no harmonic content, so this falls back to the profile's
+    template harmoniser — the "without phase-1" path.
     """
     prof = profile_for_method(method_id)
     if prof is None:
         raise KeyError(f"no harmonisation profile for method {method_id!r}")
     if prof.source != "method":
+        return HARMONIZERS[prof.harmonizer]().plan(
+            key, section_names, bars_per, style, seed)
+    builder = _METHOD_PLAN_BUILDERS.get(method_id)
+    if builder is None:
         raise NotImplementedError(
-            f"method {method_id!r} is {prof.phase_semantics}-only; harmonise "
-            f"from template via {prof.harmonizer!r}, not phase-1 (P1 gap)")
-    raise NotImplementedError(
-        f"plan_from_method for {method_id!r} ({prof.phase_semantics}) is a P1 "
-        f"adapter — not built yet")
+            f"plan_from_method for {method_id!r} ({prof.phase_semantics}) not built")
+    degrees = builder(sum(bars_per), seed or 0)
+    return _degrees_to_plan(degrees, key)
