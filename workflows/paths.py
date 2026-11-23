@@ -434,8 +434,8 @@ def build_framework(style="pop", key="C", bpm=120, form=None, num_bars=None,
         voices = instrument_palette(style)
     from workflows.musicom_workflow import _resolve_instrument
     composer.create_matrix(num_voices=len(voices), num_sections=len(form))
-    for vname, inst in voices:
-        label, prog, ch = _resolve_instrument(vname, inst)
+    for vi, (vname, inst) in enumerate(voices):
+        label, prog, ch = _resolve_instrument(vname, inst, vi)
         composer.add_voice(label, program=prog, channel=ch)
 
     # --- sections (L4: form around the anchor) ---

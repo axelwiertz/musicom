@@ -37,7 +37,10 @@ from rules.realize import (
 # Captured from the pre-refactor inline implementation — proof the P3 refactor
 # was output-neutral. Refreshed for the flute program correction (GM 74
 # "Recorder" → GM 73 "Flute"), which changes the exported program_change bytes.
-ABS_GOLDEN_SHA256 = "a7a10393f6248bee99ed4542f6efa8b8e9e1bbf0b72a61d59ac17feceb1b35e9"
+# Re-pinned 2026-11-23 for the unique-channel fix: _resolve_instrument now
+# assigns each pitched voice its own channel (0,1,2,3 + drums 9) instead of all
+# on channel 0, which made FluidSynth render every voice as the last program.
+ABS_GOLDEN_SHA256 = "54c42fc780c570a82f83d3d474c04f505e575c33a4eb788881d0c1cdd3eba3c6"
 ABS_GOLDEN_SIZE = 4333
 
 
@@ -66,6 +69,32 @@ def test_abs_compose_midi_hash_unchanged():
         f"  actual   {actual}\n"
         "rules/realize.py must reproduce the legacy placement exactly."
     )
+
+
+def test_compose_assigns_unique_channels_per_voice():
+    """Pitched voices must get distinct channels (drums ch9).
+
+    Regression for 2026-11-23: _resolve_instrument used to put every non-drum
+    voice on channel 0, so FluidSynth's full-mix render kept only the LAST
+    program_change per channel — every voice sounded like the last instrument.
+    """
+    import mido
+    import tempfile as _tmp
+    from workflows.musicom_workflow import compose
+
+    with _tmp.TemporaryDirectory() as d:
+        r = compose(style="pop", method="001", seed=7, out_dir=d, humanize=False)
+        mid = mido.MidiFile(r.midi_path)
+    pitched, drums = [], 0
+    for trk in mid.tracks[1:]:
+        for m in trk:
+            if m.type == "program_change":
+                if m.channel == 9:
+                    drums += 1
+                else:
+                    pitched.append(m.channel)
+    assert drums == 1
+    assert len(pitched) == len(set(pitched)), f"channel collision: {pitched}"
 
 
 def test_realize_tonal_cluster_matches_legacy_formula():

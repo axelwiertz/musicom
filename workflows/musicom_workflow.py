@@ -391,12 +391,18 @@ def _unit_from_events(events, section_len=None):
     return unit
 
 
-def _resolve_instrument(voice_name, instrument_name):
-    """Return (voice_label, midi_program, channel). Drums → ch9."""
+def _resolve_instrument(voice_name, instrument_name, voice_idx=0):
+    """Return (voice_label, midi_program, channel). Drums → ch9.
+
+    Pitched voices get a UNIQUE channel = their voice index (0,1,2,...). This
+    fixes the all-on-channel-0 collision: FluidSynth's full-mix render keeps only
+    the LAST program_change on a channel, so every voice used to sound like the
+    last instrument (recorder melody lost, tuba near-silent).
+    """
     if instrument_name.lower() in ("drum kit", "drums", "percussion"):
         return voice_name, 0, 9
     inst = _instr_by_name(instrument_name)
-    return voice_name, inst.midi_program, 0
+    return voice_name, inst.midi_program, voice_idx
 
 
 def _fill_loop_section(composer, voices, chord_roots, num_bars):
@@ -575,7 +581,7 @@ def compose(style="pop", method=None, form=None, key="C", bpm=None,
     num_sections = 1 if loop else 5
     composer.create_matrix(num_voices=len(voices), num_sections=num_sections)
     for i, (vname, inst_name) in enumerate(voices):
-        label, prog, ch = _resolve_instrument(vname, inst_name)
+        label, prog, ch = _resolve_instrument(vname, inst_name, i)
         composer.add_voice(label, program=prog, channel=ch)
 
     # sections per form (default pop: intro/verse/chorus/bridge/outro)
