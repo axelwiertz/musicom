@@ -158,6 +158,10 @@ comparable to, and how do I use it in a workflow?*
 ||||||||| `sound/effects/upward_dynamics.py` | UpwardDynamics, BandDynamics, FreqLift | effects (upward+downward dynamics) | Freqport FreqLift, upward compressors | stereo audio → 2-band dynamically lifted audio |
 ||||||||| `sound/effects/structural_split_eq.py` | StructuralSplitEQ, StructuralSplit | effects (transient/tonal split EQ) | Eventide SplitEQ 2, SPL transient designer family | audio → per-element EQ'd/dynamically shaped audio |
 ||||||||| `sound/generators/formula_drumkit.py` | FormulaDrumKit, DrumVoice, Formula | generators (procedural drum synthesis) | Drumlabooh 14 formula engine, SynthEdit formula drums | kit spec + steps → drum audio |
+|||||||||| `sound/synthesis/virus_va.py` | VirusVA, VirusVoice, VirusOsc, VirusFilter | synthesis (virtual analog) | Access Virus B/C, InfeKt-FM1 firmware | midi notes + patch → polyphonic morphing-osc VA audio (unison/mono) |
+|||||||||| `sound/synthesis/paraphonic_voice.py` | ParaphonicVoice, ParaphonicOsc, SaturatingMixer, LadderFilter | synthesis (paraphonic) | Dubspot SM-1, Moog Grandmother-style paraphonic | notes + mode/mk → shared-filter paraphonic voice audio |
+|||||||||| `sound/generators/wavetable_drums.py` | WavetableDrumMachine, DrumTrack, WavetableOsc, TickSource | generators (drum synthesis + sequencing) | Sonicware CyDrums', wavetable drum machines | pattern dict → stereo drum audio + hit events |
+|||||||||| `sound/effects/drum_replacer.py` | DrumReplacer, detect_hits, hit_feature | effects (drum replacement) | Drumagog 6, Slate Trigger | drum track + samples → replaced/reinforced track |
 | `sound/sync/clock.py` | DAWClockBridge | sync | MTC/MIDI clock | bpm → clock pulses |
 | `sound/render/fluidsynth.py` | FluidSynthRenderer | render | SF2 synth | MIDI → WAV |
 | `sound/render/vst.py` | VSTRenderer | render | DAW VST3 | MIDI → VST audio |

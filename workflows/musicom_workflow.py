@@ -347,6 +347,11 @@ SP_METHODS = {
     "SP-165": ("sound.effects.upward_dynamics", "Two-Band Upward + Downward Dynamics w/ Tube Drive — zero-phase complementary raised-cosine FFT crossover (bit-exact reconstruction), upward compression below threshold + downward above, peak/RMS hybrid detector, tilt/bias asymmetric saturation, dry/wet (Freqport FreqLift-style)"),
     "SP-166": ("sound.effects.structural_split_eq", "Structural Split EQ — differential fast/slow envelope decomposition into transient/tonal elements (bit-exact complementary sum), per-element 8-band zero-phase EQ, per-element dynamics, constant-power pan, band-energy unmask analysis (Eventide SplitEQ 2-style)"),
     "SP-167": ("sound.generators.formula_drumkit", "Formula-Driven Procedural Drum Kit — AST-whitelisted pitch/amp/cutoff formulas over t, layer waveforms (sine/tri/saw/square/noise/metal/FM), per-layer envelope-following cutoff, Live per-hit variation, HP/LP/saturator order, declarative kit specs (Drumlabooh 14-style)"),
+    # 2026-11-23 scan
+    "SP-168": ("sound.synthesis.virus_va", "Virus-Style VA Voice — 3 morphing oscillators (saw->pulse morph, tri blend, hard sync, linear FM), sub/noise/ring mod, 2 multimode filters w/ serial/parallel/stereo/bypass routing, 2 ADSR, 3 LFOs, 6-slot mod matrix, unison/mono+glide poly (InfeKt-FM1 firmware-style)"),
+    "SP-169": ("sound.synthesis.paraphonic_voice", "Paraphonic Semi-Modular Voice — N oscs sharing one filter chain + amp env (mono/2/4-note), PWM + linear FM + sync + glide, tanh saturating mixer, Moog ladder, series/parallel/stereo dual-filter routing (Dubspot SM-1-style)"),
+    "SP-170": ("sound.generators.wavetable_drums", "Eight-Track Wavetable Drum Synth + Sequencer — dual wavetable oscs + 5 noise types + 10 tick sources, 6 filter types w/ filter env, amp env w/ distortion, 3 mod sources, 16-step seq w/ substeps/trigger conditions/param locks/swing (Sonicware CyDrums'-style)"),
+    "SP-171": ("sound.effects.drum_replacer", "Drum Replacement / Reinforcement — threshold/detail/retrigger hit detection, phase-vs-transient sample alignment, velocity-scaled sample playout, manual add/remove + Keep/Remove Similar by hit feature (Drumagog 6-style)"),
 }
 
 
