@@ -112,6 +112,8 @@ STYLE_HUMANIZE = {
     "classical": {"timing_sigma_ms": 7.0, "velocity_sigma": 5.0, "phrase_corr": 0.60, "layback_ms": 1.0},
     "cinematic": {"timing_sigma_ms": 7.0, "velocity_sigma": 5.0, "phrase_corr": 0.60, "layback_ms": 1.0},
     "experimental": {"timing_sigma_ms": 8.0, "velocity_sigma": 6.0, "phrase_corr": 0.50, "layback_ms": 0.0},
+    # --- balanced hybrid (genre-neutral personal voice) ---
+    "axel":        {"timing_sigma_ms": 5.0, "velocity_sigma": 5.0, "phrase_corr": 0.35, "layback_ms": 2.0},
 }
 
 STYLE_HUMANIZE_DEFAULT = {

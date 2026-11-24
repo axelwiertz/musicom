@@ -51,6 +51,7 @@ STYLE_ALIASES: Dict[str, List[str]] = {
     "sinterklaas": ["sinterklaas", "sinterklaaslied", "kinderlied", "sint"],
     "metal":      ["metal", "hard rock", "punk"],
     "hiphop":     ["hiphop", "hip hop", "rap", "boom bap"],
+    "axel":       ["axel"],
     "classical":  ["classical", "classic", "baroque", "romantic", "chamber",
                    "opera", "fanfare", "poetry", "modal"],
 }
@@ -357,6 +358,54 @@ def _lead_sinterklaas(ctx: CellContext) -> List[MusicEvent]:
 
 
 # ---------------------------------------------------------------------------
+# axel fillers — balanced hybrid (genre-neutral personal voice)
+# ---------------------------------------------------------------------------
+
+def _lead_axel(ctx: CellContext) -> List[MusicEvent]:
+    """axel: balanced quarter-note lead — stepwise chord-tone contour with one
+    leap, rising then settling (harmonious, singable)."""
+    rt, th, ft = ctx.chord_tones  # root, third, fifth (concrete MIDI)
+    line = [rt + 12, th + 12, ft + 12, th + 12]  # oct 3rd 5th 3rd
+    evs = []
+    for b in range(ctx.section_bars):
+        base = b * ctx.bar_ticks
+        for beat in range(4):
+            evs.append(MusicEvent(line[beat], 88, base + beat * 480,
+                                  base + beat * 480 + 440))
+    return evs
+
+
+def _bass_axel(ctx: CellContext) -> List[MusicEvent]:
+    """axel: balanced root-5th oom-pah + octave pickup into the next bar
+    (flowing, not static)."""
+    root = ctx.root_midi
+    fifth = root + 7
+    evs = []
+    for b in range(ctx.section_bars):
+        base = b * ctx.bar_ticks
+        for beat in range(4):
+            p = root if beat % 2 == 0 else fifth
+            evs.append(MusicEvent(p, 90, base + beat * 480, base + beat * 480 + 440))
+        # octave pickup on the "and" of 4 → flows into the next bar
+        evs.append(MusicEvent(root + 12, 68, base + 1680, base + 1680 + 200))
+    return evs
+
+
+def _drums_axel(ctx: CellContext) -> List[MusicEvent]:
+    """axel: balanced light kit — kick 1&3, snare 2&4, soft 8th hats, no crash."""
+    evs = []
+    for b in range(ctx.section_bars):
+        base = b * ctx.bar_ticks
+        evs.append(MusicEvent(36, 88, base, base + 100))               # kick 1
+        evs.append(MusicEvent(36, 80, base + 960, base + 960 + 100))   # kick 3
+        evs.append(MusicEvent(38, 82, base + 480, base + 480 + 90))    # snare 2
+        evs.append(MusicEvent(38, 82, base + 1440, base + 1440 + 90))  # snare 4
+        for e in range(8):  # soft closed hats
+            evs.append(MusicEvent(42, 48, base + e * 240, base + e * 240 + 70))
+    return evs
+
+
+# ---------------------------------------------------------------------------
 # The registry + resolver
 # ---------------------------------------------------------------------------
 
@@ -381,6 +430,7 @@ RHYTHM_BY_STYLE: Dict[str, Dict[str, Callable]] = {
     "metal":     _recipe(rhythm=_drums_metal),
     "hiphop":    _recipe(rhythm=_drums_hiphop),
     "classical": _recipe(rhythm=_drums_classical),
+    "axel":      _recipe(lead=_lead_axel, bass=_bass_axel, rhythm=_drums_axel),
 }
 
 

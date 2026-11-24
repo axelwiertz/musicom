@@ -104,6 +104,8 @@ INSTRUMENTATION_BY_STYLE: Dict[str, List[Tuple[str, str]]] = {
                    ("Arp", "xylophone"), ("Drums", "Drum Kit")],
     "world":      [("Lead", "oboe"), ("Pad", "string_ensemble"), ("Bass", "cello"),
                    ("Arp", "harp"), ("Drums", "Drum Kit")],
+    "axel":       [("Lead", "violin"), ("Pad", "piano"), ("Bass", "double_bass"),
+                   ("Arp", "acoustic_guitar"), ("Drums", "Drum Kit")],
 }
 
 # genre-name -> family key (normalized lowercase, spaces/hyphens/underscores -> space).
@@ -150,6 +152,7 @@ INSTRUMENT_ALIASES: Dict[str, str] = {
     "percussion": "percussion",
     "world": "world", "experimental": "world", "hybrid": "world", "other": "world",
     "poetry": "world",
+    "axel": "axel",
 }
 
 

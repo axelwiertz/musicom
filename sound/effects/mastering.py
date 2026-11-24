@@ -622,7 +622,7 @@ GENRE_LUFS = {
     "rock": -11.0, "amapiano": -11.0,
     # balanced
     "jazz": -14.0, "blues": -14.0, "soul": -13.0, "funk": -13.0,
-    "chanson": -14.0, "country": -14.0, "reggae": -14.0, "latin": -13.0,
+    "chanson": -14.0, "axel": -14.0, "country": -14.0, "reggae": -14.0, "latin": -13.0,
     # dynamic / quiet
     "ambient": -18.0, "classical": -18.0, "minimal": -18.0,
     "folk": -16.0, "solo": -16.0, "sinterklaas": -16.0, "kinderlied": -16.0,

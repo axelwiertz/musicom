@@ -122,6 +122,14 @@ STYLE_REGISTRY = {
                            ("Bass", "Tuba"), ("Arp", "Glockenspiel"),
                            ("Drums", "Drum Kit")],
     },
+    "axel": {
+        "bpm": 115, "time_sig": "4/4",
+        "form": "through-composed",
+        "motion": "evolving hybrid: ABS set-theory harmony + variation operators + balanced 8th-note flow",
+        "default_voices": [("Lead", "Violin"), ("Pad", "Piano"),
+                           ("Bass", "Double Bass"), ("Arp", "Acoustic Guitar"),
+                           ("Drums", "Drum Kit")],
+    },
 }
 
 # --- form palette: name -> (section names, bars per section, hint styles) ---
@@ -154,7 +162,7 @@ FORM_PALETTE = {
                        (["Intro", "Verse", "Chorus", "Verse", "Chorus", "Outro"],
                         [4, 8, 8, 8, 8, 4], ["chanson"]),
     "through-composed": (["S1", "S2", "S3", "S4", "S5", "S6"], [4] * 6,
-                         ["ambient", "experimental", "classical"]),
+                         ["ambient", "experimental", "classical", "axel"]),
     "rondo":           (["A", "B", "A", "C", "A"], [4] * 5, ["classical"]),
     "cinematic-build": (["Intro", "Build", "Rise", "Peak", "Resolve"],
                         [4, 8, 8, 8, 4], ["cinematic", "ambient"]),
