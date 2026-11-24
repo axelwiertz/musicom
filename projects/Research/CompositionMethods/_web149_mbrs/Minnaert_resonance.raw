@@ -1,0 +1,26 @@
+{{Short description|Sound of a drop of water falling into water}}
+[[File:2006-01-28_Drop-impact.jpg|thumb|right]]
+The '''Minnaert resonance'''<ref>{{Citation |last=Minnaert |first=M. |authorlink=Marcel Minnaert |year=1933 |title=On musical air-bubbles and the sound of running water |journal=Philosophical Magazine |volume=16 |issue=104 |pages=235–248 |doi=10.1080/14786443309462277|s2cid=120320419 }}</ref><ref>Marcel Minnaert: ''The Nature of Light and Color in the Open Air'', Dover, 1954</ref><ref>(in original Dutch) Marcel Minnaert: 55. The sound of water, in ''Physics of the Free Field'',  part 2 ''Sound, heat, electricity'', (Het geruis van water, in ''Natuurkunde van 't vrije veld'',  deel 2 ''Geluid, warmte, elektriciteit''), Thieme Zutphen, 1939 and later editions, p. 68-70</ref> is a phenomenon associated with a gas bubble pulsating at its [[natural frequency]] in a liquid, neglecting the effects of [[surface tension]] and [[viscous]] [[attenuation]]. It is the frequency of the sound made by a drop of water from a tap falling in water underneath, trapping a bubble of air as it falls. The natural frequency of the entrapped air bubble in the water is given by
+:<math>
+   f = \cfrac{1}{2\pi a}\left(\cfrac{3\gamma~p_A}{\rho}\right)^{1/2}
+ </math>
+where <math>a</math> is the radius of the bubble, <math>\gamma</math> is the [[polytropic]] coefficient, <math>p_A</math> is the [[ambient pressure]], and <math>\rho</math> is the density of water.  This formula can also be used to find the natural frequency of a bubble cloud with <math>a</math> as the radius of the cloud and <math>\rho</math> the difference between the density of water and the bulk density of the cloud. For a single bubble in water at standard pressure <math>(p_A=100~ {\rm kPa}, ~ \rho=1000~ {\rm kg/m^3})</math>, this equation reduces to
+<math>
+   f a \approx 3.26~m/s
+ </math>, 
+where <math> f~ </math> is the natural frequency of the bubble. The Minnaert formula assumes an ideal gas. However, it can be modified to account for deviations from real gas behavior by accounting for the gas [[compressibility factor]],<ref>{{Cite journal|last1=Greene|first1=Chad A.|last2=Wilson|first2=Preston S.|date=2012|title=Laboratory investigation of a passive acoustic method for measurement of underwater gas seep ebullition|journal=The Journal of the Acoustical Society of America|language=en|volume=131|issue=1|pages=EL61–EL66|doi=10.1121/1.3670590|pmid=22280731|issn=0001-4966|bibcode=2012ASAJ..131L..61G|doi-access=free}}</ref> or the gas [[bulk modulus]] <math>K = \rho_g c_g^2</math>
+
+:<math> 
+   f = \cfrac{1}{2\pi a}\left(\cfrac{3 K}{\rho}\right)^{1/2}
+ </math>
+
+<math>\rho_g</math> and <math>c_g^2</math> being respectively the density and the speed of sound in the bubble.
+
+== References ==
+<references/>
+
+== External links ==
+*[https://journals.ametsoc.org/view/journals/atot/17/6/1520-0426_2000_017_0847_lfrsob_2_0_co_2.xml  Low-Frequency Resonant Scattering of Bubble Clouds] by Paul A. Hwang and William J. Teague, 2000, Journal of Atmospheric and Oceanic Technology, vol. 17, no. 6, pp.&nbsp;847–853. journals.ametsoc.org
+
+[[Category:Sound]]
+[[Category:Bubbles (physics)]]

@@ -1,0 +1,409 @@
+ 
+
+ Mandelbrot Set -- from Wolfram MathWorld 
+
+ TOPICS 
+
+ Algebra
+
+ Applied Mathematics
+
+ Calculus and Analysis
+
+ Discrete Mathematics
+
+ Foundations of Mathematics
+
+ Geometry
+
+ History and Terminology
+
+ Number Theory
+
+ Probability and Statistics
+
+ Recreational Mathematics
+
+ Topology
+
+ Alphabetical Index
+
+ Random Entry
+
+ New in MathWorld
+
+ History and Terminology 
+
+ Database Collections 
+
+ Integer Sequence Databases 
+
+ Online Encyclopedia of
+Integer Sequences 
+
+ Applied Mathematics 
+
+ Complex Systems 
+
+ Fractals 
+
+ Recreational Mathematics 
+
+ Mathematical Art 
+
+ Mathematical Images 
+
+ Foundations of Mathematics 
+
+ Mathematical Problems 
+
+ Unsolved Problems 
+
+ Recreational Mathematics 
+
+ Mathematics in the Arts 
+
+ Mathematics in Video 
+
+ Numberphile 
+
+ History and Terminology 
+
+ MathWorld Resources 
+
+ Click to Copy 
+
+ History and Terminology 
+
+ MathWorld Resources 
+
+ MathWorld Contributors 
+
+ Dickau 
+
+ More... Less... 
+
+ Mandelbrot Set 
+
+ Download Wolfram  Notebook 
+
+The term Mandelbrot set is used to refer both to a general class of fractal sets and to a particular instance of such a set. For a family of polynomial
+ maps , a Mandelbrot set marks the set of points in the complex
+ plane such that the corresponding Julia set is connected .
+
+"The" Mandelbrot set is the set obtained from the quadratic
+recurrence equation 
+
+(1)
+
+with , where points in the complex plane for
+ which the orbit of 
+ does not tend to infinity are in the set . Starting instead
+ with 
+ gives the same boundedness criterion, since is the first iterate of 0. The Mandelbrot set was originally
+ called a 
+ molecule by Mandelbrot. J. Hubbard and A. Douady proved that the Mandelbrot
+ set is connected .
+
+A plot of the Mandelbrot set is shown above in which values of in the complex plane are
+ colored according to the number of steps required to exceed . The kidney bean-shaped portion of the Mandelbrot
+ set turns out to be bordered by a cardioid with equations
+
+(2)
+
+(3)
+
+The adjoining portion is a circle with center at and radius . 
+
+The region of the Mandelbrot set centered around is sometimes known as the sea
+ horse valley because the spiral shapes appearing in it resemble sea horse tails
+ (Giffin, Munafo).
+
+Similarly, the portion of the Mandelbrot set centered around with size approximately is known as elephant
+ valley .
+
+Shishikura (1994) proved that the boundary of the Mandelbrot set is a fractal with Hausdorff dimension 2, refuting the conclusion
+ of Elenbogen and Kaeding (1989) that it is not. However, the conjecture that the
+ Mandelbrot set is locally connected remains
+ open (Dudko 2025). If it is locally connected ,
+ then Hubbard and Douady's proof implies that the Mandelbrot set is the image of a
+ circle and can be constructed from a disk 
+ by collapsing certain arcs in the interior (Douady 1986).
+
+The area of the Mandelbrot set can be written exactly as
+
+(4)
+
+where 
+ are the coefficients of the Laurent series about
+ infinity of the conformal map of the exterior of the unit disk 
+ onto the exterior of the Mandelbrot set,
+
+(5)
+
+(6)
+
+(OEIS A054670 and A054671 ; Ewing and Schober 1992). The recursion for is given by
+
+(7)
+
+(8)
+
+(9)
+
+where . These coefficients can be computed recursively,
+ but a closed form is not known. Furthermore, the sum converges very slowly. An empirical
+ extrapolation by Munafo estimates approximately terms for two decimal places and terms for three decimal places. These estimates are
+ not rigorous convergence bounds. Ewing and Schober (1992) computed the first values of , found that in this range, and conjectured that this inequality
+ always holds. This calculation also provided the limit and led the authors to believe that the true value
+ lies between 
+ and . 
+
+The area of the set obtained by pixel counting is (OEIS A098403 ;
+ Munafo; Lesmoir-Gordon et al. 2000, p. 97) and by statistical sampling
+ is 
+ with 95% confidence (Mitchell 2001), both of which are significantly smaller than
+ the estimate of Ewing and Schober (1992).
+
+To visualize the Mandelbrot set, the limit at which points are assumed to have escaped can be approximated by 
+ instead of infinity. Beautiful computer-generated plots can be then be created by
+ coloring nonmember points depending on how quickly they diverge to . For an escaping point, an integer 
+ called the count can be defined as the first iteration
+ such that . With , exceeding this threshold certifies escape
+ for the critical orbit. Points with different counts are
+ colored differently. The boundary between successive counts 
+ defines a series of " Mandelbrot set
+ lemniscates " (or " equipotential
+ curves "; Peitgen and Saupe 1988) defined by iterating the quadratic
+ recurrence equation ,
+
+(10)
+
+The first few lemniscates are therefore given by
+
+(11)
+
+(12)
+
+(13)
+
+(14)
+
+(15)
+
+(16)
+
+(17)
+
+(OEIS A114448 ).
+
+When writing 
+ and taking the absolute square of each side, the
+ lemniscates can be plotted in the complex plane ,
+ and the first few are given by
+
+(18)
+
+(19)
+
+(20)
+
+These are a circle (black), an oval (red), and a pear curve (yellow). In fact, the second
+ Mandelbrot set lemniscate can be written in terms of a new coordinate system with
+ as
+
+(21)
+
+which is just a Cassini oval with and . The Mandelbrot
+ set lemniscates grow increasingly convoluted with higher count ,
+ illustrated above, and approach the Mandelbrot set as the count 
+ tends to infinity.
+
+A connection with pi occurs near the cusp of the main cardioid .
+ For a real number , let be the first positive
+ integer 
+ for which 
+ when 
+ and . Then
+
+(22)
+
+For example, 
+ gives 
+ (Klebanoff 2001, Numberphile 2015). This is a limit statement.
+ It does not identify the finite iteration counts with decimal prefixes of pi 
+ at every scale.
+
+For , where , 2, ..., the iteration counts begin 2, 3, 4, 5, 6,
+ 6, ... (OEIS A332061 ). This integer
+ sequence uses the threshold , which agrees with for these parameters because
+ equality cannot occur. For , where , 1, ..., the iteration counts begin 2, 3, 5, 7, 11,
+ ... (OEIS A332062 ). Both integer
+ sequences start with and count applications of the quadratic
+ recurrence equation .
+
+The term Mandelbrot set can also be applied to generalizations of "the" Mandelbrot set in which the function is replaced by some other function. In the above
+ plot, , , and is allowed to vary in the complex
+ plane . Note that completely different sets (that are not Mandelbrot sets) can
+ be obtained for choices of that do not lie in the fractal attractor. So, for example,
+ in the above set, picking inside the unit disk but outside
+ the red basins gives a set of completely different-looking images.
+
+Generalizations of the Mandelbrot set can be constructed by replacing with or , where is a positive integer 
+ and 
+ denotes the complex conjugate of . The above figures show the fractals 
+ obtained for , 3, and 4 (Dickau). The plots on the bottom have
+ replaced with and are sometimes called " mandelbar
+ sets ."
+
+Taking the absolute values of the real and imaginary parts of 
+ before each squaring instead gives the nonanalytic burning
+ ship fractal .
+
+ See also Buddhabrot , Burning Ship Fractal , Cactus Fractal , Elephant
+ Valley , Fractal , Julia Set ,
+ Mandelbar Set , Mandelbrot
+ Set Lemniscate , Quadratic Map , Randelbrot
+ Set , Sea Horse Valley Explore this topic in the MathWorld classroom 
+
+ Explore with Wolfram|Alpha 
+
+More things to try:
+
+mandelbrot set
+
+Mandelbrot set .2+.3i
+
+Mandelbrot set c=1
+
+ References Alfeld, P. "The Mandelbrot Set." http://www.math.utah.edu/~alfeld/math/mandelbrot/mandelbrot.html . Bowen, J. P. "Virtual Museum of Computing Mandelbrot Exhibition." http://archive.comlab.ox.ac.uk/other/museums/computing/mandelbrot.html . Branner,
+ B. "The Mandelbrot Set." In Chaos
+ and Fractals: The Mathematics behind the Computer Graphics, Proc. Sympos. Appl. Math.,
+ Vol. 39 (Ed. R. L. Devaney and L. Keen). Providence,
+ RI: Amer. Math. Soc., 75-105, 1989. Devaney, R. "The Mandelbrot
+ Set and the Farey Tree, and the Fibonacci Sequence." Amer. Math. Monthly 106 ,
+ 289-302, 1999. Dickau, R. M. "Mandelbrot (and Similar) Sets."
+ https://www.robertdickau.com/mandelbrot.html . Douady,
+ A. "Julia Sets and the Mandelbrot Set." In The
+ Beauty of Fractals: Images of Complex Dynamical Systems (Ed. H.-O. Peitgen
+ and D. H. Richter). Berlin, Germany: Springer-Verlag, p. 161, 1986. Dudko,
+ D. "On the MLC Conjecture and the Renormalization Theory in Complex Dynamics."
+ 30 Dec 2025. https://arxiv.org/abs/2512.24171 . Elenbogen,
+ B. and Kaeding, T. "A Weak Estimate of the Fractal Dimension of the Mandelbrot
+ Boundary." Phys. Lett. A 136 , 358-362, 1989. Eppstein,
+ D. "Area of the Mandelbrot Set." https://ics.uci.edu/~eppstein/junkyard/mand-area.html . Ewing,
+ J. H. and Schober, G. "The Area of the Mandelbrot Set." Numer.
+ Math. 61 , 59-72, 1992. Fisher, Y. and Hill, J. "Bounding
+ the Area of the Mandelbrot Set." Submitted to Numer. Math. Giffin,
+ N. "The 'Main Seahorse Valley Series' from Bengt Månsson." http://spanky.triumf.ca/www/fractint/bm/shv1/shv1.html . Gleick,
+ J. Chaos:
+ Making a New Science. New York: Penguin Books, center plate (following p. 114),
+ 1988. Hill, J. R. "Fractals and the Grand Internet Parallel
+ Processing Project." Ch. 15 in Fractal
+ Horizons: The Future Use of Fractals. New York: St. Martin's Press,
+ pp. 299-323, 1996. Klebanoff, A. " in the Mandelbrot Set." Fractals 9 , 393-402,
+ 2001. https://doi.org/10.1142/S0218348X01000828 . Lauwerier,
+ H. Fractals:
+ Endlessly Repeated Geometric Figures. Princeton, NJ: Princeton University
+ Press, pp. 148-151 and 179-180, 1991. Lei, T. (Ed.). The
+ Mandelbrot Set, Theme and Variations. Cambridge, England: Cambridge University
+ Press, 2000. Lesmoir-Gordon, N.; Rood, W.; and Edney, R. Introducing
+ Fractal Geometry. Cambridge, England: Icon Books, p. 97, 2000. Mandelbrot,
+ B. B. The
+ Fractal Geometry of Nature. New York: W. H. Freeman, pp. 188-189,
+ 1983. Mitchell, K. "A Statistical Investigation of the Area of the
+ Mandelbrot Set." 2001. http://www.fractalus.com/kerry/articles/area/mandelbrot-area.html . Munafo,
+ R. "Mu-Ency--The Encyclopedia of the Mandelbrot Set." https://www.mrob.com/pub/muency.html . Munafo,
+ R. "Area of the Mandelbrot Set." https://www.mrob.com/pub/muency/areaofthemandelbrotset.html . Munafo,
+ R. "Pixel Counting." https://www.mrob.com/pub/muency/pixelcounting.html . Numberphile.
+ "Pi and the Mandelbrot Set." Oct. 1, 2015. https://www.youtube.com/watch?v=d0vY0CKYhPY . Numberphile.
+ "The Mandelbrot Set." Jul. 25, 2014. https://www.youtube.com/watch?v=NGMRB4O922I . Peitgen,
+ H.-O. and Saupe, D. (Eds.). The
+ Science of Fractal Images. New York: Springer-Verlag, pp. 178-179, 1988. Shishikura,
+ M. "The Boundary of the Mandelbrot Set Has Hausdorff Dimension Two." Astérisque ,
+ No. 222, 389-405, 1994. https://numdam.org/item/AST_1994__222__389_0/ . Sloane,
+ N. J. A. Sequences A054670 , A054671 ,
+ A098403 , A114448 ,
+ A332061 , and A332062 
+ in "The On-Line Encyclopedia of Integer Sequences." Taylor,
+ M. "Deep into the Seahorse Valley." http://www.princeton.edu/~mstaylor/fractals/seahorse.htm . Wells,
+ D. The
+ Penguin Dictionary of Curious and Interesting Geometry. London, England:
+ Penguin, pp. 146-148, 1991. Referenced on Wolfram|Alpha Mandelbrot Set 
+
+ Cite this as: 
+
+ Weisstein, Eric W. "Mandelbrot Set." From
+ MathWorld --A Wolfram Resource. https://mathworld.wolfram.com/MandelbrotSet.html 
+
+ Subject classifications 
+
+ History and Terminology 
+
+ Database Collections 
+
+ Integer Sequence Databases 
+
+ Online Encyclopedia of
+Integer Sequences 
+
+ Applied Mathematics 
+
+ Complex Systems 
+
+ Fractals 
+
+ Recreational Mathematics 
+
+ Mathematical Art 
+
+ Mathematical Images 
+
+ Foundations of Mathematics 
+
+ Mathematical Problems 
+
+ Unsolved Problems 
+
+ Recreational Mathematics 
+
+ Mathematics in the Arts 
+
+ Mathematics in Video 
+
+ Numberphile 
+
+ History and Terminology 
+
+ MathWorld Resources 
+
+ Click to Copy 
+
+ History and Terminology 
+
+ MathWorld Resources 
+
+ MathWorld Contributors 
+
+ Dickau 
+
+ More... Less... 
+
+ About MathWorld 
+ MathWorld Classroom 
+ Contribute 
+ MathWorld Book 
+ wolfram.com 
+
+ 17,780 Entries 
+ Last Updated: Mon Nov 23 2026 
+ ©1999– Wolfram Research, Inc. --> 
+ ©1999–2026 Wolfram Research, Inc. 
+ Terms of Use 
+
+ wolfram.com 
+ Wolfram for Education 
+ Created, developed and nurtured by Eric Weisstein at Wolfram Research 
+
+ Created, developed and nurtured by Eric Weisstein at Wolfram Research 
+

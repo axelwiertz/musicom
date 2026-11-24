@@ -1,0 +1,14 @@
+==============================================================================
+MJETC verification — 10 checks
+ 1. [PASS] 1 escape-radius |z|>2 => divergence (2000 samples)
+ 2. [PASS] 2 Green's function continuity (max |dG| 3.30e-06, mean 3.15e-06, ratio 1.05 over 20k pts)
+ 3. [PASS] 3 bulb periods {(0.2+0.1j): 1, -1.0: 2, (-0.8+0.1j): 2, (-0.1226+0.7449j): 3, -1.7549: 3}
+ 4. [PASS] 4 cascade superstable centers {2: -1.0, 4: -1.3107015, 8: -1.3815475, 16: -1.3969453} -> periods [2, 4, 8, 16]; Feigenbaum pt period -1
+ 5. [PASS] 5 symmetry tau(cbar)==tau(c) on 2000 samples
+ 6. [PASS] 6 Julia: crit-orbit bounded c=-1.1:True c=1.1:False; filled frac 0.126 vs 0.00000
+ 7. [PASS] 7 M membership: in [(0.2+0.1j), (-0.8+0.1j), -1.7549, (0.1+0.1j), -1.0] -> [True, True, True, True, True]; out [1.1, -2.1, (0.3+0.6j), (0.5+0.5j)] -> [False, False, False, False]
+ 8. [PASS] 8 period-3 mini-Mandelbrot near -1.7549: max escape time 300 (cap 300)
+ 9. [PASS] 9 gravity: dist-to-fixedpoint tail 5.20e-12, monotone True, conv True; c=-1 cycle [(-1+0j), -0j, (-1-0j)]
+10. [PASS] 10 UnitMatrix texture field 64x64, row activity range [0,64]
+==============================================================================
+RESULT: 10/10 checks pass

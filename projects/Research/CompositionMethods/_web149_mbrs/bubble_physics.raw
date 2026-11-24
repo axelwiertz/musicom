@@ -1,0 +1,105 @@
+{{Short description|Globule of one substance in another, typically gas in a liquid}}
+[[File:Isla de Corbera, Santander, España, 2019-08-15, DD 68.jpg|thumb|Air bubbles rising from a [[scuba diver]] in water]]
+[[File:Bubble brokenchopstick.jpg|thumb|A [[soap bubble]] floating in the air]]
+
+A '''bubble''' is a [[:wikt:globule|globule]] of a [[gas]] substance in a liquid. In the opposite case, a globule of a liquid in a gas, is called a [[drop (liquid)|drop]].<ref>{{Cite book|url=https://books.google.com/books?id=zcWLcDtwI3YC&q=A+bubble+is++one+substance+in+another%2C+usually+gas+in+a+liquid.&pg=PA3|title=The Motion of Bubbles and Drops in Reduced Gravity|last1=Subramanian|first1=R. Shankar|last2=Balasubramaniam|first2=R.|date=2001-04-09|publisher=Cambridge University Press|isbn=9780521496056|language=en}}</ref> 
+Due to the [[Marangoni effect]], bubbles may remain intact when they reach the surface of the immersive substance.
+
+==Common examples==
+Bubbles are seen in many places in everyday life, for example:
+* As spontaneous [[nucleation]] of supersaturated [[carbon dioxide]] in [[soft drink]]s
+* As [[vapor]] in boiling water
+* As [[air]] mixed into agitated water, such as below a waterfall
+* As [[sea foam]][[File:Texel - North Sea Beach at Strandpaviljoen Paal 9 - Winter Sun, Sea Foam, Rough Seas 03.jpg|thumb|[[Sea foam]] on the shore]]
+* As a [[soap bubble]]
+* As given off in chemical reactions, e.g., baking soda + vinegar
+* As a gas trapped in [[glass]] during its manufacture
+* As the indicator in a [[spirit level]]
+* As [[bubble gum]]
+
+==Physics and chemistry==
+Bubbles form and coalesce into globular shapes because those shapes are at a lower energy state. For the physics and chemistry behind it, see [[nucleation]].
+
+===Appearance===
+
+[[Image:Soda bubbles macro.jpg|right|thumb|Bubbles of [[gas]] rising in a [[soft drink]]]]
+Bubbles are visible because they have a different [[refractive index]] (RI) than the surrounding substance. For example, the RI of air is approximately 1.0003 and the RI of water is approximately 1.333. [[Snell's Law]] describes how electromagnetic waves change direction at the interface between two mediums with different RI; thus bubbles can be identified from the accompanying [[refraction]] and [[internal reflection]] even though both the immersed and immersing mediums are transparent.
+
+The above explanation only holds for bubbles of one medium submerged in another medium (e.g. bubbles of gas in a soft drink); the volume of a [[membrane bubble]] (e.g. soap bubble) will not distort light very much, and one can only see a membrane bubble due to [[thin-film diffraction]] and [[Specular reflection|reflection]].
+
+===Applications===
+Nucleation can be intentionally induced, for example, to create a [[bubblegram]] in a solid.
+
+In medical [[ultrasound]] imaging, small, encapsulated bubbles called [[Contrast-enhanced ultrasound|contrast agent]] are used to enhance the contrast.
+
+In thermal [[Inkjet printer|inkjet]] printing, vapor bubbles are used as [[Actuator|actuators]]. They are occasionally used in other [[microfluidics]] applications as actuators.<ref>R. J. Dijkink, J. P. van der Dennen, C. D. Ohl, [[Andrea Prosperetti|A. Prosperetti]],'' The ‘acoustic scallop’: a bubble-powered actuator'', J. Micromech. Microeng. '''16''' 1653 (2006)</ref>
+
+The violent collapse of bubbles ([[cavitation]]) near solid surfaces and the resulting impinging jet constitute the mechanism used in [[Ultrasound#Ultrasonic cleaning|ultrasonic cleaning]]. The same effect, but on a larger scale, is used in focused energy weapons such as the [[bazooka]]{{clarify|how is the focused energy of a bazooka warhead explosion relevant to bubbles?|date=September 2025}} and the [[torpedo]]. [[Pistol shrimp]] also uses a collapsing cavitation bubble as a weapon. The same effect is used to treat [[kidney stones]] in a [[lithotripter]]. Marine mammals such as [[dolphins]] and [[whales]] use bubbles for entertainment or as hunting tools. [[Aeration|Aerators]] cause the dissolution of gas in the liquid by injecting bubbles.
+
+Bubbles are used by [[Chemical engineering|chemical]] and [[metallurgy|metallurgical]] [[engineer]]s in processes such as distillation, absorption, flotation and spray drying.{{clarify|how are bubbles used in spray drying|date=September 2025}} The complex processes involved often require consideration for mass and heat transfer and are modeled using [[fluid dynamics]].<ref>{{cite book|last=Weber|title=Bubbles, Drops and Particles|year=1978|publisher=Dover Publications|location=New York|isbn=978-0-486-44580-9|display-authors=etal}}</ref>
+
+The [[star-nosed mole]] and the [[American water shrew]] can smell underwater by rapidly breathing through their nostrils and creating a bubble.<ref>{{cite web|url=https://www.newscientist.com/article/dn10834-starnosed-mole-can-sniff-underwater-videos-reveal.html#.Uqyu-_RDuSo|title=Star-nosed mole can sniff underwater, videos reveal|author=Roxanne Khamsi}}</ref>
+
+Research on [[Abiogenesis|the origin of life on Earth]] suggests that bubbles may have played an integral role in confining and concentrating [[Precursor (chemistry)|precursor molecules]] for life, a function currently performed by [[cell membranes]].<ref>{{cite news |last1=Whitcomb |first1=Isobel |title=The Key to Life's Emergence? Bubbles, New Study Argues |url=https://www.livescience.com/66105-bubbles-early-life.html |access-date=January 8, 2022 |publisher=LiveScience |date=August 6, 2019}}</ref>
+
+[[Bubble laser]]s use bubbles as the optical resonator. They can be used as highly sensitive pressure sensors.<ref name="miller">{{cite web |last1=Miller |first1=Johanna |title=Bubble lasers can be sturdy and sensitive |url=https://pubs.aip.org/physicstoday/article/77/3/12/3267372/Bubble-lasers-can-be-sturdy-and-sensitiveMade-of |website=Physics Today |publisher=American Institute of Physics |access-date=2 April 2024}}</ref>
+
+=== Pulsation ===<!-- This section is linked from [[Drop (liquid)]] -->
+[[File:Burbuja subacuática, Cabo San Lucas, Baja California, México, 2024-12-18, DD 27.jpg|thumb|Air bubble with ripples, rising in water]]
+
+When bubbles are disturbed (for example when a gas bubble is injected underwater), the wall oscillates. Although it is often visually masked by much larger deformations in shape, a component of the oscillation changes the bubble volume (i.e. it is pulsation) which, in the absence of an externally-imposed sound field, occurs at the bubble's [[natural frequency]]. The pulsation is the most important component of the oscillation, acoustically, because by changing the gas volume, it changes its pressure, and leads to the emission of sound at the bubble's natural frequency. For air bubbles in water, large bubbles (negligible [[surface tension]] and [[thermal conductivity]]) undergo [[adiabatic]] pulsations, which means that no heat is transferred either from the liquid to the gas or vice versa. The natural frequency of such bubbles is determined by the equation:<ref>Minnaert, Marcel, On musical air-bubbles and the sounds of running water, Phil. Mag. 16, 235-248 (1933).</ref><ref name="Leighton">Leighton, Timothy G., The Acoustic Bubble (Academic, London, 1994).</ref>
+
+:<math>f_0 = {1 \over 2 \pi R_0}\sqrt{3 \gamma p_0 \over \rho}</math>
+
+where:
+* <math>\gamma</math> is the [[Heat capacity ratio|specific heat ratio]] of the gas
+* <math>R_0</math> is the [[steady state]] radius
+* <math>p_0</math> is the steady state [[pressure]]
+* <math>\rho</math> is the [[mass]] [[density]] of the surrounding liquid
+
+For air bubbles in water, smaller bubbles undergo [[isothermal]] pulsations.  The corresponding equation for small bubbles of surface tension σ (and negligible liquid [[viscosity]]) is<ref name="Leighton"/>
+
+:<math>f_0 = {1 \over 2 \pi R_0}\sqrt{{3 p_0 \over \rho}+{4 \sigma \over \rho R_0}}</math>
+
+Excited bubbles trapped underwater are the major source of liquid [[sound]]s, such as inside our knuckles during knuckle cracking,<ref>{{Cite journal|last1=Chandran Suja|first1=V.|last2=Barakat|first2=A. I.|date=2018-03-29|title=A Mathematical Model for the Sounds Produced by Knuckle Cracking|journal=Scientific Reports|language=En|volume=8|issue=1|pages=4600|doi=10.1038/s41598-018-22664-4|doi-access=free|pmid=29599511|issn=2045-2322|bibcode=2018NatSR...8.4600C|pmc=5876406}}</ref> and when a [[rain]] [[droplet]] impacts a surface of water.<ref>{{cite journal
+ | last = Prosperetti
+ | first = Andrea
+ |author2=Oguz, Hasan N.
+  | year = 1993
+ | title = The impact of drops on liquid surfaces and the underwater noise of rain
+ | journal = Annual Review of Fluid Mechanics
+ | volume = 25
+ | pages = 577–602
+ | doi = 10.1146/annurev.fl.25.010193.003045
+ |bibcode = 1993AnRFM..25..577P }}</ref><ref>{{cite web |url=http://ffden-2.phys.uaf.edu/311_fall2004.web.dir/Ryan_Rankin/bubble%20resonance.htm |title=Bubble Resonance |access-date=2006-12-09 |last=Rankin |first=Ryan C. |date=June 2005 |work=The Physics of Bubbles, Antibubbles, and all That}}</ref>
+
+==Physiology and medicine==
+Injury by bubble formation and growth in body tissues is the mechanism of [[decompression sickness]], which occurs when supersaturated dissolved inert gases leave the solution as bubbles during [[Decompression (diving)|decompression]]. The damage can be due to mechanical deformation of tissues due to bubble growth in situ, or by blocking [[blood vessel]]s where the bubble has lodged.
+
+[[Arterial gas embolism]] can occur when a gas bubble is introduced to the circulatory system and lodges in a blood vessel that is too small for it to pass through under the available pressure difference. This can occur as a result of [[Decompression (diving)|decompression]] after hyperbaric exposure, a [[Barotrauma|lung overexpansion injury]], during [[Intravenous therapy|intravenous fluid administration]], or during [[surgery]].
+
+== In foods ==
+Foods containing bubbles includes bread, cakes, cereals and [[Aerated chocolate|chocolate]], and drinks including beer, champagne, mineral water and soft drinks, as well as more experimental applications in foams as made by chefs.{{Sfnp|Pugh|Hamlett|Fairhurst|2023|p=1}} 
+
+== See also ==
+{{Commons category|Bubbles}}
+* {{annotated link|Antibubble}}
+* {{annotated link|Bubble fusion}}
+* {{annotated link|Bubble sensor}}
+* {{annotated link|Foam}}
+* {{annotated link|Minnaert resonance}}
+* {{annotated link|Nanobubble}}
+* {{annotated link|Sonoluminescence}}
+* {{annotated link|Underwater acoustics}}
+
+== References ==
+{{Reflist}}
+
+== Sources ==
+
+* {{Cite journal |last1=Pugh |first1=RJ |last2=Hamlett |first2=CAE |last3=Fairhurst |first3=DJ |date=April 2023 |title=A short overview of bubbles in foods and chocolate |journal=[[Advances in Colloid and Interface Science]] |volume=314 |article-number=102835 |doi=10.1016/j.cis.2023.102835 |pmid=36958180 }}
+{{Authority control}}
+
+{{DEFAULTSORT:Liquid Bubble}}
+[[Category:Fluid mechanics]]
+[[Category:Bubbles (physics)| ]]

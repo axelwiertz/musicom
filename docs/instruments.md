@@ -671,6 +671,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | World | Shakuhachi | 77 | 55–100 | lead, melody, ornament, drone, accent |
 | Synth | Pad 1 (new age) | 88 | 36–96 | pad, harmony, texture, drone, accent |
 | Synth | Pad 2 (warm) | 89 | 36–96 | pad, harmony, texture, drone, accent |
+| Synth | Pad 3 (polysynth) | 90 | 36–96 | pad, harmony, texture, drone, accent |
 | Synth | Orchestra Hit | 55 | 36–96 | accent, stab, rhythm, punctuation, texture, lead |
 | Synth | Lead 3 (calliope) | 82 | 60–96 | lead, melody, ornament, accent, countermelody |
 | Synth | Synth Brass 1 | 62 | 36–96 | lead, harmony, accent, stab, pad, countermelody |
@@ -765,7 +766,8 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 |||| 50 | Synth Strings 1 | Synth_Strings_1 ✓ (GM_PROGRAMS[50] = "Synth Strings 1"; FluidR3 preset 50 = "Synth Strings 1" — labels match exactly, **no quirk**; STEM_LABEL = "Synth_Strings_1"; distinct from sampled GM48 "Strings" / GM49 "Slow Strings") |
 ||| 32 | Acoustic Bass | Acoustic_Bass ✓ (GM_PROGRAMS[32] = "Acoustic Bass"; FluidR3 preset 32 = "Acoustic Bass" — labels match exactly, **no quirk**) |
 |||| 82 | Lead 3 (calliope) | Lead_3_calliope ✓ (GM_PROGRAMS[82] = "Lead 3 (calliope)" → sanitized `Lead_3_calliope` — parens stripped, spaces → underscore; FluidR3 preset 82 = **"Calliope Lead"** — SF2 internal name differs from the GM label, cosmetic only, **no routing impact**; stems are labelled from GM_PROGRAMS) |
-|||| 89 | Pad 2 (warm) | Pad_2_warm ✓ (GM_PROGRAMS[89] = "Pad 2 (warm)" → sanitized `Pad_2_warm` — parens stripped, spaces → underscore; FluidR3 preset 89 = **"Warm Pad"** — SF2 internal name differs from the GM label, cosmetic only, **no routing impact**; STEM_LABEL = "Pad_2_warm" matches the pipeline's real label) |
+||||| 89 | Pad 2 (warm) | Pad_2_warm ✓ (GM_PROGRAMS[89] = "Pad 2 (warm)" → sanitized `Pad_2_warm` — parens stripped, spaces → underscore; FluidR3 preset 89 = **"Warm Pad"** — SF2 internal name differs from the GM label, cosmetic only, **no routing impact**; STEM_LABEL = "Pad_2_warm" matches the pipeline's real label) |
+||||| 90 | Pad 3 (polysynth) | Pad_3_polysynth ✓ (GM_PROGRAMS[90] = "Pad 3 (polysynth)" → sanitized `Pad_3_polysynth` — parens stripped, spaces → underscore; FluidR3 preset 90 = **"Polysynth"** — SF2 internal name is the ENGINE name, cosmetic only, **no routing impact**; STEM_LABEL = "Pad_3_polysynth" matches the pipeline's real label; distinct from 88 "Fantasia" / 89 "Warm Pad") |
 |||| 55 | Orchestra Hit | Orchestra_Hit ✓ (GM_PROGRAMS[55] = "Orchestra Hit"; FluidR3 preset 55 = "Orchestra Hit" — labels match exactly, **no quirk**) |
 |||| 31 | Guitar Harmonics | Guitar_harmonics ✓ (GM_PROGRAMS[31] = "Guitar harmonics" — GM2 spec spelling, lowercase "h" + a SPACE, sanitized to `Guitar_harmonics`; FluidR3 preset 31 = "Guitar Harmonics" — capitalisation only, **no routing impact**; STEM_LABEL = "Guitar_harmonics" matches the pipeline's real label). **PITCH quirk**: FluidR3 preset 31 sounds ONE OCTAVE ABOVE the written note (written C4 → peak 522 Hz; control presets 25/105 → 262 Hz) — write an octave below the desired sound (`TRANSPOSE_SEMITONES = 12`) |
 
@@ -2752,3 +2754,58 @@ foundation (thin chorused bottom) and NOT a realistic orchestral section (that
 is GM48/49). Remaining sibling candidates: GM51 Synth Strings 2 (slower/airier
 variant), GM112 Tinkle Bell, GM118 Synth Drum, GM63 Synth Brass 2, GM37 Slap
 Bass 2.
+
+**Pad 3 (polysynth) added** (2026-11-24): GM90, **Synth-family ninth entry** —
+the classic **analog polysynth pad** (Roland Juno-106/JX-8P, Oberheim OB-X,
+Sequential Prophet-5, Korg Poly-61): a stack of detuned saw/triangle
+oscillators through a resonant low-pass with slow attack and wide ensemble
+chorus. The THIRD member of the KB's synth-pad block, the MIDDLE sibling of
+GM88 "Pad 1 (new age)" (bright/digital glass) and GM89 "Pad 2 (warm)"
+(dark/round analog): rounder and slower than the new-age shimmer, MORE mid
+presence and faster attack than the warm pad. Files: instrument.md +
+polysynth_pad.py; verified end-to-end UnitMatrixComposer (1 bar, 1 section,
+Polysynth Pad **SOLO** on ch0 — sustained Cmaj7 pad C4–B4 held the full bar
+— + drum-kit context on ch9; NO second melodic patch on the same pitches,
+per the 2026-09-01 comb-filter rule) → **zero-drift ✓** → MIDI **134 bytes**
+→ FluidSynth WAV **1,279,788 bytes** SOLO (FluidR3 via `discover_soundfont()`)
+✓; RenderPipeline stems on disk `track00_Pad_3_polysynth.wav` (1,279,788 B)
++ `track01_Drums.wav` (784,428 B) ✓; stem label `GM_PROGRAMS[90]` =
+**"Pad 3 (polysynth)"** → sanitized `Pad_3_polysynth` (parens stripped,
+spaces → underscore) — exact sanitization match, **no quirk**; FluidR3
+preset 90 = **"Polysynth"** — the ONE synth pad whose SF2 internal name IS
+the engine name (88 = "Fantasia", 89 = "Warm Pad"); solo-render spectral
+4–8 kHz buzz **0.8%** (clean single voice); PolySynth flatness test
+early(0.5–0.7 s) 0.486 vs late(1.3–1.5 s) 0.484 rms → late/early **0.995**
+(pad sustains flat while gated — no natural decay; measured inside the
+sustain plateau, NOT tail-vs-peak which the saw RMS skews at sustain < 1.0).
+Range 36–96 (C2–C7), sweet spot 60–84 (C4–C6), solo 55–84 (G3–C6); zones
+low 36–55 / mid 56–79 / high 80–96. Synthesis: **PolySynth primary**
+(`sound/synthesis/polysynth.py` PolyVoice — the ONE KB instrument whose GM
+name IS the engine: the polyBLEP subtractive architecture 3 osc + multimode
+filter + ADSR + unison IS the analog polysynth pad model; saw core + ±7-cent
+detuned saw + triangle body 0.7, **low-pass 1800 Hz** between warm_pad 1400
+and synth_brass_1 2800, resonance 0.3, attack 0.35 s / sustain 0.85 /
+release 0.6, **4 unison voices** — widest chorus in the Synth family),
+**Additive secondary** (`pad_polysynth` stack [1.0, 0.75, 0.55, 0.38, 0.25,
+0.15, 0.09], decay_S 1e-4 hold), **PhaseModSynth tertiary** (saw carrier,
+ratio 1.0, depth 1.8 — between warm 1.5 and brass 3.2; fattens, never
+honks). Production: REVERB_TAIL 3.0 s (same as warm_pad — rounder than
+new-age's 3.2), EQ cut 250 Hz −2.5 dB, boost 2.8 kHz +2.0 dB (mid BODY
+presence, brighter than warm's 2400), 8 kHz +1.5 dB air shelf, PAN centre.
+Registration proof: `by_name('polysynth pad')` / `by_name('Pad 3
+(polysynth)')` → Pad 3 (polysynth), `by_program(90)` → Pad 3 (polysynth)
+(distinct from `by_program(89)` Warm Pad / `by_program(88)` Pad 1 new age),
+`in_sweet_spot(72)` = True, `in_sweet_spot(24)` = False,
+`stem_label = 'Pad_3_polysynth'`; `registry_table()` row "| Synth | Pad 3
+(polysynth) | 90 | 36–96 | pad, harmony, texture, drone, accent |";
+convenience constant `POLYSYNTH_PAD` (registry `_FIELDS` already carried
+`polysynth_defaults` from synth_strings_1 — no extension needed). Role:
+pad/harmony (sustained chords — the default), texture (wide 4-voice chorus
+bed), drone (static held root/fifth), accent (soft marcato entrances — NOT
+stabs; slow attack smears, use synth_brass_1 for stabs) — NOT a lead voice
+(slow attack), NOT a rhythm/comp voice, NOT a bass foundation. Empirical
+FluidR3 pitch sweep (RMS, notes 36–108 step 12): preset 90 audible 7/7, no
+gaps — SF2 never clips a composition. Remaining sibling candidates: GM51
+Synth Strings 2, GM112 Tinkle Bell, GM118 Synth Drum, GM63 Synth Brass 2,
+GM37 Slap Bass 2, GM80/81 Lead square/saw (share programs with the Vocal
+Talkbox/Singing-Saw stand-ins — resolve collision before adding).

@@ -113,6 +113,7 @@ _INSTRUMENT_MODULES = {
     "Bass.fretless_bass.fretless_bass": "fretless_bass",
     "Woodwind.recorder.recorder": "recorder",
     "Synth.synth_pad.synth_pad": "synth_pad",
+    "Synth.polysynth_pad.polysynth_pad": "polysynth_pad",
     "Synth.synth_strings_1.synth_strings_1": "synth_strings_1",
     "Synth.synth_brass_1.synth_brass_1": "synth_brass_1",
     "Synth.synth_voice.synth_voice": "synth_voice",
@@ -375,6 +376,7 @@ STRING_ENSEMBLE = ALL_INSTRUMENTS["string_ensemble"]
 STRING_ENSEMBLE_2 = ALL_INSTRUMENTS["string_ensemble_2"]
 TREMOLO_STRINGS = ALL_INSTRUMENTS["tremolo_strings"]
 SYNTH_PAD = ALL_INSTRUMENTS["synth_pad"]
+POLYSYNTH_PAD = ALL_INSTRUMENTS["polysynth_pad"]
 SYNTH_STRINGS_1 = ALL_INSTRUMENTS["synth_strings_1"]
 SYNTH_BRASS_1 = ALL_INSTRUMENTS["synth_brass_1"]
 SYNTH_VOICE = ALL_INSTRUMENTS["synth_voice"]
@@ -569,6 +571,8 @@ def registry_table():
         elif low == "pad 1 (new age)":
             role = "pad, harmony, texture, drone, accent"
         elif low == "pad 2 (warm)":
+            role = "pad, harmony, texture, drone, accent"
+        elif low == "pad 3 (polysynth)":
             role = "pad, harmony, texture, drone, accent"
         elif low == "synth strings 1":
             role = "pad, harmony, texture, drone, lead, countermelody, accent"
@@ -1208,3 +1212,28 @@ if __name__ == "__main__":
           "SYNTH_STRINGS_1.pan =", SYNTH_STRINGS_1.pan)
     print("  SYNTH_STRINGS_1.articulations =",
           list(SYNTH_STRINGS_1.articulations or {}))
+
+    print()
+    print("=== Pad 3 (polysynth, GM90) ===")
+    print("  POLYSYNTH_PAD.midi_program =", POLYSYNTH_PAD.midi_program,
+          "(should be 90)")
+    print("  by_name('polysynth pad') =", by_name("polysynth pad"))
+    print("  by_name('Pad 3 (polysynth)') =", by_name("Pad 3 (polysynth)"))
+    print("  by_program(90) =", by_program(90))
+    print("  by_program(89) =", by_program(89),
+          "(distinct: warm pad — Pad 2)")
+    print("  POLYSYNTH_PAD.in_sweet_spot(72) =",
+          POLYSYNTH_PAD.in_sweet_spot(72))
+    print("  POLYSYNTH_PAD.in_sweet_spot(24) =",
+          POLYSYNTH_PAD.in_sweet_spot(24))
+    print("  POLYSYNTH_PAD.range_min =", POLYSYNTH_PAD.range_min,
+          "POLYSYNTH_PAD.range_max =", POLYSYNTH_PAD.range_max)
+    print("  POLYSYNTH_PAD.solo_range =", POLYSYNTH_PAD.solo_range)
+    print("  POLYSYNTH_PAD.stem_label =", repr(POLYSYNTH_PAD.stem_label))
+    print("  POLYSYNTH_PAD.synthesis =", repr(POLYSYNTH_PAD.synthesis))
+    print("  POLYSYNTH_PAD.polysynth_defaults =",
+          POLYSYNTH_PAD.polysynth_defaults)
+    print("  POLYSYNTH_PAD.reverb_tail =", POLYSYNTH_PAD.reverb_tail,
+          "POLYSYNTH_PAD.pan =", POLYSYNTH_PAD.pan)
+    print("  POLYSYNTH_PAD.articulations =",
+          list(POLYSYNTH_PAD.articulations or {}))

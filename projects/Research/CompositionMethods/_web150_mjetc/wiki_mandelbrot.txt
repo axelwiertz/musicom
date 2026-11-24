@@ -1,0 +1,722 @@
+ 
+
+ Mandelbrot set - Wikipedia 
+
+ Jump to content 
+
+ Main menu 
+
+ Main menu 
+ move to sidebar 
+ hide 
+
+ Navigation
+
+ Main page Contents Current events Random article About Wikipedia Contact us 
+
+ Contribute
+
+ Help Learn to edit Community portal Recent changes Upload file Special pages 
+
+ Search 
+
+ Search 
+
+ Appearance 
+
+ Donate 
+
+ Create account 
+
+ Log in 
+
+ Personal tools 
+
+ Donate 
+
+ Create account 
+
+ Log in 
+
+ Contents 
+ move to sidebar 
+ hide 
+
+ (Top) 
+
+ 1 
+ History 
+
+ 2 
+ Formal definition 
+
+ 3 
+ Basic properties 
+
+ 4 
+ Other properties 
+
+ Toggle Other properties subsection 
+
+ 4.1 
+ Main cardioid and period bulbs 
+
+ 4.2 
+ Hyperbolic components 
+
+ 4.3 
+ Local connectivity 
+
+ 4.4 
+ Self-similarity 
+
+ 4.5 
+ Further results 
+
+ 4.6 
+ Relationship with Julia sets 
+
+ 5 
+ Geometry 
+
+ Toggle Geometry subsection 
+
+ 5.1 
+ Pi in the Mandelbrot set 
+
+ 5.2 
+ Fibonacci sequence in the Mandelbrot set 
+
+ 5.3 
+ Image gallery of a zoom sequence 
+
+ 5.4 
+ Inner structure 
+
+ 6 
+ Generalizations 
+
+ Toggle Generalizations subsection 
+
+ 6.1 
+ Multibrot sets 
+
+ 6.2 
+ Higher dimensions 
+
+ 6.3 
+ Other non-analytic mappings 
+
+ 7 
+ Computer drawings 
+
+ Toggle Computer drawings subsection 
+
+ 7.1 
+ Python code 
+
+ 8 
+ See also 
+
+ 9 
+ References 
+
+ 10 
+ Further reading 
+
+ 11 
+ External links 
+
+ Toggle the table of contents 
+
+ Mandelbrot set 
+
+ 51 languages 
+
+ العربية Asturianu Башҡортса Беларуская Български বাংলা Català کوردی Čeština Dansk Deutsch Ελληνικά Esperanto Español Eesti Euskara فارسی Suomi Français Galego עברית Hrvatski Magyar Bahasa Indonesia Íslenska Italiano 日本語 Қазақша 한국어 Latviešu മലയാളം Nederlands Norsk bokmål Polski Português Română Русский Srpskohrvatski / српскохрватски Simple English Slovenčina Slovenščina Српски / srpski Svenska తెలుగు ไทย Türkçe Українська Tiếng Việt 吴语 粵語 中文 
+
+ Edit links 
+
+ Article 
+
+ Talk 
+
+ English 
+
+ Read 
+
+ Edit 
+
+ View history 
+
+ Save 
+
+ Tools 
+
+ Tools 
+ move to sidebar 
+ hide 
+
+ Actions
+
+ Read 
+
+ Edit 
+
+ View history 
+
+ Save 
+
+ General
+
+ What links here Related changes Upload file Permanent link Page information Cite this page Get shortened URL Switch to legacy parser 
+
+ Print/export
+
+ Download as PDF Printable version 
+
+ In other projects
+
+ Abstract Wikipedia Wikimedia Commons Wikiquote Wikidata item 
+
+ Appearance 
+ move to sidebar 
+ hide 
+
+ From Wikipedia, the free encyclopedia 
+
+ Fractal named after mathematician Benoit Mandelbrot 
+ This article needs more citations . Please help improve this article by adding citations to reliable sources . Unsourced material may be challenged and removed . Find sources:   "Mandelbrot set"   –   news   · newspapers   · books   · scholar   · JSTOR ( June 2024 ) ( Learn how and when to remove this message ) 
+
+ The Mandelbrot set (black region) plotted on the complex plane within a continuously colored environment 
+
+ The Mandelbrot set ( / ˈ m æ n d əl b r oʊ t , - b r ɒ t / ) [ 1 ] [ 2 ] is a two-dimensional set . It is defined in the complex plane as the complex numbers c for which the function f c ( z ) = z 2 + c does not diverge to infinity when iterated starting at z = 0 . In other words, it is the set of c for which the sequence f c ( 0 ) , f c ( f c ( 0 ) ) , and so on, remains bounded in absolute value . [ 3 ] 
+
+ This set was first defined and drawn by Robert W. Brooks and Peter Matelski in 1978, as part of a study of Kleinian groups . [ 4 ] Afterwards, in 1980, Benoit Mandelbrot obtained high-quality visualizations of the set while working at IBM 's Thomas J. Watson Research Center in Yorktown Heights, New York . [ 5 ] 
+ Zooming into the Mandelbrot set's "Seahorse Valley" with high iteration count 
+
+ Images of the Mandelbrot set exhibit an infinitely complicated boundary that reveals progressively ever-finer recursive detail at increasing magnifications; [ 6 ] [ 7 ] mathematically, the boundary of the Mandelbrot set is a fractal curve . [ 8 ] The "style" of this recursive detail depends on the region of the set boundary being examined. [ 9 ] Images of the Mandelbrot set are created by determining whether the sequence f c ( 0 ) , f c ( f c ( 0 ) ) , f c ( f c ( f c ( 0 ) ) ) , … goes to infinity for each sampled complex number c. [ 10 ] The real and imaginary parts of c are mapped as image coordinates on the complex plane and colored based on the point at which the sequence | f c ( 0 ) | , | f c ( f c ( 0 ) ) | , … crosses an arbitrary threshold. [ 10 ] If c is held constant and the initial value of z is varied instead, the corresponding Julia set for the point c is obtained. [ 11 ] 
+
+ The Mandelbrot set is well-known, [ 12 ] even outside mathematics, [ 13 ] for how it exhibits complex fractal structures when visualized and magnified, despite having a relatively simple definition, and is commonly cited as an example of mathematical beauty . [ 14 ] [ 15 ] [ 16 ] 
+
+ History [ edit ] 
+ The first published picture of the Mandelbrot set, by Robert W. Brooks and Peter Matelski in 1978 
+ The Mandelbrot set has its origin in complex dynamics , a field first investigated by the French mathematicians Pierre Fatou and Gaston Julia at the beginning of the 20th century. The fractal was first defined and drawn in 1978 by Robert W. Brooks and Peter Matelski as part of a study of Kleinian groups . [ 4 ] On 1 March 1980, at IBM 's Thomas J. Watson Research Center in Yorktown Heights, New York , Benoit Mandelbrot first visualized the set. [ 17 ] 
+
+ Mandelbrot studied the parameter space of quadratic polynomials in an article that appeared in 1980. [ 18 ] The mathematical study of the Mandelbrot set really began with work by the mathematicians Adrien Douady and John H. Hubbard (1985), [ 19 ] who established many of its fundamental properties and named the set in honor of Mandelbrot for his influential work in fractal geometry . [ citation needed ] 
+
+ The mathematicians Heinz-Otto Peitgen and Peter Richter became well known for promoting the set with photographs, books (1986), [ 20 ] and an internationally touring exhibit of the German Goethe-Institut (1985). [ 21 ] [ 22 ] 
+
+ The cover article of the August 1985 Scientific American introduced the algorithm for computing the Mandelbrot set. The cover was created by Peitgen, Richter and Saupe at the University of Bremen . [ 23 ] The Mandelbrot set became prominent in the mid-1980s as a computer-graphics demo , when personal computers became powerful enough to plot and display the set in high resolution. [ 24 ] 
+
+ The work of Douady and Hubbard occurred during an increase in interest in complex dynamics and abstract mathematics , [ 25 ] and the topological and geometric study of the Mandelbrot set remains a key topic in the field of complex dynamics. [ 26 ] 
+
+ Formal definition [ edit ] 
+ The set's location on the complex plane 
+ The Mandelbrot set is the uncountable set of values of c in the complex plane for which the orbit of the critical point z = 0 under iteration of the quadratic map 
+
+ z ↦ z 2 + c [ 27 ] 
+
+ remains bounded . [ 28 ] Thus, a complex number c is a member of the Mandelbrot set if, when starting with z 0 = 0 and applying the iteration repeatedly, the absolute value of z n remains bounded for all n ∈ ℤ + . [ citation needed ] 
+
+ For example, for c = 1, the sequence is 0, 1, 2, 5, 26, ..., (sequence A003095 in the OEIS ) which tends to infinity , so 1 is not an element of the Mandelbrot set. On the other hand, for c = − 1 , the sequence is 0, −1, 0, −1, 0, ..., which is bounded, so −1 does belong to the set. 
+
+ The Mandelbrot set can also be defined as the connectedness locus of the family of quadratic polynomials f ( z ) = z 2 + c , the subset of the space of parameters c for which the Julia set of the corresponding polynomial forms a connected set . [ 29 ] In the same way, the boundary of the Mandelbrot set can be defined as the bifurcation locus of this quadratic family, the subset of parameters near which the dynamic behavior of the polynomial (when it is iterated repeatedly) changes drastically. [ citation needed ] 
+
+ Basic properties [ edit ] 
+ The Mandelbrot set is a compact set , since it is closed and contained in the closed disk of radius 2 centred on zero . A point c belongs to the Mandelbrot set if and only if | z n | ≤ 2 for all n ≥ 0 . In other words, the absolute value of z n must remain at or below 2 for c to be in the Mandelbrot set, M , and if that absolute value exceeds 2, the sequence will escape to infinity. Since c = z 1 , it follows that | c | ≤ 2 , establishing that c will always be in the closed disk of radius 2 around the origin. [ 30 ] 
+
+ Correspondence between the Mandelbrot set and the bifurcation diagram of the quadratic map 
+ With z n iterates plotted on the vertical axis, the Mandelbrot set can be seen to bifurcate at the period-2 k components. 
+ The intersection of M with the real axis is the interval [ − 2 , 1 4 ] . The parameters along this interval can be put in one-to-one correspondence with those of the real logistic family , 
+ x n + 1 = r x n ( 1 − x n ) , r ∈ [ 1 , 4 ] . 
+ The correspondence is given by 
+
+ r = 1 + 1 − 4 c , c = r 2 ( 1 − r 2 ) , z n = r ( 1 2 − x n ) . 
+
+ This gives a correspondence between the entire parameter space of the logistic family and that of the Mandelbrot set. [ 31 ] 
+
+ Douady and Hubbard showed that the Mandelbrot set is connected . They constructed an explicit conformal isomorphism between the complement of the Mandelbrot set and the complement of the closed unit disk . Mandelbrot had originally conjectured that the Mandelbrot set is disconnected . This conjecture was based on computer pictures generated by programs that are unable to detect the thin filaments connecting different parts of M . Upon further experiments, he revised his conjecture, deciding that M should be connected. A topological proof of the connectedness was discovered in 2001 by Jeremy Kahn . [ 32 ] 
+ External rays of wakes near the period 1 continent in the Mandelbrot set 
+ The dynamical formula for the uniformisation of the complement of the Mandelbrot set, arising from Douady and Hubbard's proof of the connectedness of M , gives rise to external rays of the Mandelbrot set. These rays can be used to study the Mandelbrot set in combinatorial terms and form the backbone of the Yoccoz parapuzzle . [ 33 ] 
+
+ The boundary of the Mandelbrot set is the bifurcation locus of the family of quadratic polynomials. In other words, the boundary of the Mandelbrot set is the set of all parameters c for which the dynamics of the quadratic map z n = z n − 1 2 + c exhibits sensitive dependence on c , i.e. changes abruptly under arbitrarily small changes of c . It can be constructed as the limit set of a sequence of plane algebraic curves , the Mandelbrot curves , of the general type known as polynomial lemniscates . The Mandelbrot curves are defined by setting p 0 = z ,   p n + 1 = p n 2 + z , and then interpreting the set of points | p n ( z ) | = 2 in the complex plane as a curve in the real Cartesian plane of degree 2 n + 1 in x and y . [ 34 ] Each curve 0"}}'> n > 0 is the mapping of an initial circle of radius 2 under p n . These algebraic curves appear in images of the Mandelbrot set computed using the "escape time algorithm" mentioned below. [ citation needed ] 
+
+ Other properties [ edit ] 
+
+ Main cardioid and period bulbs [ edit ] 
+ Periods of hyperbolic components 
+
+ The main cardioid is the period 1 continent. [ 35 ] It is the region of parameters c for which the map f c ( z ) = z 2 + c has an attracting fixed point . [ 36 ] The set comprises all parameters of the form c ( μ ) := μ 2 ( 1 − μ 2 ) where μ lies within the open unit disk . [ 37 ] 
+
+ Attached to the left of the main cardioid at the point c = − 3 / 4 , the period-2 bulb is visible. [ 37 ] This region consists of values of c for which f c has an attracting cycle of period 2 . It is the filled circle of radius 1/4 centered around −1. [ 37 ] 
+
+ Attracting cycle in 2/5-bulb plotted over Julia set (animation) 
+ More generally, for every positive integer 2"}}'> q > 2 , there are ϕ ( q ) circular bulbs tangent to the main cardioid called period-q bulbs (where ϕ denotes the Euler phi function ), which consist of parameters c for which f c has an attracting cycle of period q . [ citation needed ] More specifically, for each primitive q th root of unity r = e 2 π i p q (where 0 < p q < 1 ), there is one period-q bulb called the p q bulb, which is tangent to the main cardioid at the parameter c p q := c ( r ) = r 2 ( 1 − r 2 ) , and which contains parameters with q -cycles having combinatorial rotation number p q . [ 38 ] The q periodic Fatou components containing the attracting cycle meet at the α -fixed point . If these are labelled counterclockwise as U 0 , … , U q − 1 , then component U j is mapped by f c to the component U j + p ( mod ⁡ q ) . [ 37 ] 
+
+ Attracting cycles and Julia sets for parameters in the 1/2, 3/7, 2/5, 1/3, 1/4, and 1/5 bulbs 
+
+ Hyperbolic components [ edit ] 
+ Bulbs that are interior components of the Mandelbrot set in which the maps f c have an attracting periodic cycle are called hyperbolic components . [ 39 ] 
+
+ It is conjectured that these are the only interior regions of M and that they are dense in M . This problem, known as density of hyperbolicity , is one of the most important open problems in complex dynamics . [ 40 ] Hypothetical non-hyperbolic components of the Mandelbrot set are often referred to as "queer" or ghost components. [ 41 ] [ 42 ] For real quadratic polynomials, this question was proved in the 1990s independently by Lyubich and by Graczyk and Świątek. [ citation needed ] (Note that hyperbolic components intersecting the real axis correspond exactly to periodic windows in the Feigenbaum diagram . So this result states that such windows exist near every parameter in the diagram. [ citation needed ] ) 
+
+ Not every hyperbolic component can be reached by a sequence of direct bifurcations from the main cardioid of the Mandelbrot set. Such a component can be reached by a sequence of direct bifurcations from the main cardioid of a little Mandelbrot copy (see below). [ citation needed ] 
+ Centers of 983 hyperbolic components of the Mandelbrot set 
+ Each of the hyperbolic components has a center , which is a point c such that the inner Fatou domain for f c ( z ) has a super-attracting cycle—that is, that the attraction is infinite. This means that the cycle contains the critical point 0, so that 0 is iterated back to itself after some iterations. Therefore, f c n ( 0 ) = 0 for some n . If we call this polynomial Q n ( c ) (letting it depend on c instead of z ), we have that Q n + 1 ( c ) = Q n ( c ) 2 + c and that the degree of Q n ( c ) is 2 n − 1 . Therefore, constructing the centers of the hyperbolic components is possible by successively solving the equations Q n ( c ) = 0 , n = 1 , 2 , 3 , ... . The number of new centers produced in each step is given by Sloane's (sequence A000740 in the OEIS ) . [ citation needed ] 
+
+ Local connectivity [ edit ] 
+ It is conjectured that the Mandelbrot set is locally connected . This conjecture is known as MLC (for Mandelbrot locally connected ). By the work of Adrien Douady and John H. Hubbard , this conjecture would result in a simple abstract "pinched disk" model of the Mandelbrot set. In particular, it would imply the important hyperbolicity conjecture mentioned above. [ 43 ] 
+
+ The work of Jean-Christophe Yoccoz established local connectivity of the Mandelbrot set at all finitely renormalizable parameters; that is, roughly speaking those contained only in finitely many small Mandelbrot copies. [ 44 ] Since then, local connectivity has been proved at many other points of M , but the full conjecture is still open. 
+
+ Self-similarity [ edit ] 
+ Self-similarity in the Mandelbrot set shown by zooming in on a round feature while panning in the negative- x direction. The display center pans left from the fifth to the seventh round feature (−1.4002,   0) to (−1.4011,   0) while the view magnifies by a factor of 21.78 to approximate the square of the Feigenbaum ratio . 
+ The Mandelbrot set is self-similar under magnification in the neighborhoods of the Misiurewicz points . It is also conjectured to be self-similar around generalized Feigenbaum points (e.g., −1.401155 or −0.1528   +   1.0397 i ), in the sense of converging to a limit set. [ 45 ] [ 46 ] The Mandelbrot set in general is quasi-self-similar, as small slightly different versions of itself can be found at arbitrarily small scales. These copies of the Mandelbrot set are all slightly different, mostly because of the thin threads connecting them to the main body of the set. [ 47 ] 
+
+ Further results [ edit ] 
+ The Hausdorff dimension of the boundary of the Mandelbrot set equals 2 as determined by a result of Mitsuhiro Shishikura . [ 48 ] The fact that this is greater by a whole integer than its topological dimension, which is 1, reflects the extreme fractal nature of the Mandelbrot set boundary. Roughly speaking, Shishikura's result states that the Mandelbrot set boundary is so "wiggly" that it locally fills space as efficiently as a two-dimensional planar region. Curves with Hausdorff dimension 2, despite being (topologically) 1-dimensional, are oftentimes capable of having nonzero area (more formally, a nonzero planar Lebesgue measure ). Whether this is the case for the Mandelbrot set boundary is an unsolved problem. [ citation needed ] 
+
+ It has been shown that the generalized Mandelbrot set in higher-dimensional hypercomplex number spaces (i.e. when the power α of the iterated variable z tends to infinity) is convergent to the unit ( α −1)-sphere. [ 49 ] 
+
+ In the Blum–Shub–Smale model of real computation , the Mandelbrot set is not computable, but its complement is computably enumerable . Many simple objects (e.g., the graph of exponentiation) are also not computable in the BSS model. At present, it is unknown whether the Mandelbrot set is computable in models of real computation based on computable analysis , which correspond more closely to the intuitive notion of "plotting the set by a computer". Hertling has shown that the Mandelbrot set is computable in this model if the hyperbolicity conjecture is true. [ 50 ] 
+
+ Relationship with Julia sets [ edit ] 
+ A mosaic made by matching Julia sets to their values of c on the complex plane. The Mandelbrot set is a map of connected Julia sets. 
+ As a consequence of the definition of the Mandelbrot set, there is a close correspondence between the geometry of the Mandelbrot set at a given point and the structure of the corresponding Julia set . For instance, a value of c belongs to the Mandelbrot set if and only if the corresponding Julia set is connected. Thus, the Mandelbrot set may be seen as a map of the connected Julia sets. [ 51 ] [ better   source   needed ] 
+
+ This principle is exploited in virtually all deep results on the Mandelbrot set. For example, Shishikura proved that, for a dense set of parameters in the boundary of the Mandelbrot set, the Julia set has Hausdorff dimension two, and then transfers this information to the parameter plane. [ 48 ] Similarly, Yoccoz first proved the local connectivity of Julia sets, before establishing it for the Mandelbrot set at the corresponding parameters. [ 44 ] 
+
+ Geometry [ edit ] 
+ For every rational number p q , where p and q are coprime , a hyperbolic component of period q bifurcates from the main cardioid at a point on the edge of the cardioid corresponding to an internal angle of 2 π p q . [ 52 ] The part of the Mandelbrot set connected to the main cardioid at this bifurcation point is called the p / q -limb . Computer experiments suggest that the diameter of the limb tends to zero like 1 q 2 . The best current estimate known is the Yoccoz-inequality, which states that the size tends to zero like 1 q . [ citation needed ] 
+
+ A period- q limb will have q − 1 "antennae" at the top of its limb. The period of a given bulb is determined by counting these antennas. The numerator of the rotation number, p , is found by numbering each antenna counterclockwise from the limb from 1 to q − 1 and finding which antenna is the shortest. [ 52 ] 
+
+ Pi in the Mandelbrot set [ edit ] 
+ There are intriguing experiments in the Mandelbrot set that lead to the occurrence of the number π . For a parameter c = − 3 4 + i ε with 0"}}'> ε > 0 , verifying that c is not in the Mandelbrot set means iterating the sequence z ↦ z 2 + c starting with z = 0 , until the sequence leaves the disk around 0 of any radius 2"}}'> R > 2 . This is motivated by the (still open) question whether the vertical line at real part − 3 / 4 intersects the Mandelbrot set at points away from the real line. It turns out that the necessary number of iterations, multiplied by ε , converges to pi. For example, for ε = 0.0000001, and R = 2 , the number of iterations is 31415928 and the product is 3.1415928. [ 53 ] This experiment was performed independently by many people in the early 1990s, if not before; for instance by David Boll. 
+
+ Analogous observations have also been made at the parameters c = − 5 / 4 and c = 1 / 4 (with a necessary modification in the latter case). In 2001, Aaron Klebanoff published a (non-conceptual) proof for this phenomenon at c = 1 / 4 [ 54 ] 
+
+ In 2023, Paul Siewert developed, in his Bachelor thesis, a conceptual proof also for the value c = 1 / 4 , explaining why the number pi occurs (geometrically as half the circumference of the unit circle). [ 55 ] 
+
+ In 2025, the three high school students Thies Brockmöller, Oscar Scherz, and Nedim Srkalovic extended the theory and the conceptual proof to all the infinitely many bifurcation points in the Mandelbrot set. [ 56 ] 
+
+ Fibonacci sequence in the Mandelbrot set [ edit ] 
+ The Mandelbrot Set features a fundamental cardioid shape adorned with numerous bulbs directly attached to it. [ 57 ] Understanding the arrangement of these bulbs requires a detailed examination of the Mandelbrot Set's boundary. As one zooms into specific portions with a geometric perspective, precise deducible information about the location within the boundary and the corresponding dynamical behavior for parameters drawn from associated bulbs emerges. [ 58 ] 
+
+ The iteration of the quadratic polynomial f c ( z ) = z 2 + c , where c   is a parameter drawn from one of the bulbs attached to the main cardioid within the Mandelbrot Set, gives rise to maps featuring attracting cycles of a specified period q   and a rotation number p / q . In this context, the attracting cycle of   exhibits rotational motion around a central fixed point, completing an average of p / q   revolutions at each iteration. [ 58 ] [ 59 ] 
+
+ The bulbs within the Mandelbrot Set are distinguishable by both their attracting cycles and the geometric features of their structure. Each bulb is characterized by an antenna attached to it, emanating from a junction point and displaying a certain number of spokes indicative of its period. For instance, the 2 / 5 bulb is identified by its attracting cycle with a rotation number of 2 / 5 . Its distinctive antenna-like structure comprises a junction point from which five spokes emanate. Among these spokes, called the principal spoke is directly attached to the 2 / 5 bulb, and the 'smallest' non-principal spoke is positioned approximately 2 / 5 of a turn counterclockwise from the principal spoke, providing a distinctive identification as a 2 / 5 -bulb. [ 60 ] This raises the question: how does one discern which among these spokes is the 'smallest'? [ 57 ] [ 60 ] In the theory of external rays developed by Douady and Hubbard , [ 61 ] there are precisely two external rays landing at the root point of a satellite hyperbolic component of the Mandelbrot Set. Each of these rays possesses an external angle that undergoes doubling under the angle doubling map θ ↦ 2 θ . According to this theorem, when two rays land at the same point, no other rays between them can intersect. Thus, the 'size' of this region is measured by determining the length of the arc between the two angles. [ 58 ] 
+
+ If the root point of the main cardioid is the cusp at c = 1 / 4 , then the main cardioid is the 0 / 1 -bulb. The root point of any other bulb is just the point where this bulb is attached to the main cardioid. This prompts the inquiry: which is the largest bulb between the root points of the 0 / 1 and 1 / 2 -bulbs? It is clearly the 1 / 3 -bulb. And note that 1 / 3 is obtained from the previous two fractions by Farey addition , i.e., adding the numerators and adding the denominators 
+
+ 0 1 ⊕ 1 2 = 1 3 
+
+ Similarly, the largest bulb between the 1 / 3 and 1 / 2 -bulbs is the 2 / 5 -bulb, again given by Farey addition. [ citation needed ] 
+
+ 1 3 ⊕ 1 2 = 2 5 
+
+ The largest bulb between the 2 / 5 and 1 / 2 -bulb is the 3 / 7 -bulb, while the largest bulb between the 2 / 5 and 1 / 3 -bulbs is the 3 / 8 -bulb, and so on. [ 58 ] [ 62 ] The arrangement of bulbs within the Mandelbrot set follows a remarkable pattern governed by the Farey tree , a structure encompassing all rationals between 0 and 1 . This ordering positions the bulbs along the boundary of the main cardioid precisely according to the rational numbers in the unit interval . [ 60 ] 
+ Fibonacci sequence within the Mandelbrot set 
+ Starting with the 1 / 3 bulb at the top and progressing towards the 1 / 2 circle, the sequence unfolds systematically: the largest bulb between 1 / 2 and 1 / 3 is 2 / 5 , between 1 / 3 and 2 / 5 is 3 / 8 , and so forth. [ 63 ] Intriguingly, the denominators of the periods of circular bulbs at sequential scales in the Mandelbrot Set conform to the Fibonacci number sequence , the sequence that is made by adding the previous two terms – 1, 2, 3, 5, 8, 13, 21... [ 64 ] [ 65 ] 
+
+ The Fibonacci sequence manifests in the number of spiral arms at a unique spot on the Mandelbrot set, mirrored both at the top and bottom. This distinctive location demands the highest number of iterations of   for a detailed fractal visual, with intricate details repeating as one zooms in. [ 66 ] 
+
+ Image gallery of a zoom sequence [ edit ] 
+ The boundary of the Mandelbrot set shows more intricate detail the closer one looks or magnifies the image. The following is an example of an image sequence zooming to a selected c value. The area shown is known as the "seahorse valley", which is a region of the Mandelbrot set centred on the point −0.75   +   0.1 i . [ 67 ] 
+
+ The magnification of the last image relative to the first one is about 10 10 to 1. Relating to an ordinary computer monitor , it represents a section of a Mandelbrot set with a diameter of 4 million kilometers. [ citation needed ] 
+
+ Start. Mandelbrot set with continuously colored environment. 
+ Gap between the "head" and the "body", also called the "seahorse valley" [ 68 ] 
+ Double-spirals on the left, "seahorses" on the right 
+ "Seahorse" upside down 
+
+ The seahorse "body" is composed by 25 "spokes" consisting of two groups of 12 "spokes" [ 69 ] each and one "spoke" connecting to the main cardioid. These two groups can be attributed by some metamorphosis to the two "fingers" of the "upper hand" of the Mandelbrot set; therefore, the number of "spokes" increases from one "seahorse" to the next by 2; the "hub" is a Misiurewicz point . Between the "upper part of the body" and the "tail", there is a distorted copy of the Mandelbrot set, called a "satellite". [ citation needed ] 
+
+ The central endpoint of the "seahorse tail" is also a Misiurewicz point . 
+ Part of the "tail" – there is only one path consisting of the thin structures that lead through the whole "tail". This zigzag path passes the "hubs" of the large objects with 25 "spokes" at the inner and outer border of the "tail"; thus the Mandelbrot set is a simply connected set, which means there are no islands and no loop roads around a hole. 
+ Satellite. The two "seahorse tails" (also called dendritic structures ) [ 70 ] are the beginning of a series of concentric crowns with the satellite in the center. 
+ Each of these crowns consists of similar "seahorse tails"; their number increases with powers of 2, a typical phenomenon in the environment of satellites. The unique path to the spiral center passes the satellite from the groove of the cardioid to the top of the "antenna" on the "head". 
+ "Antenna" of the satellite. There are several satellites of second order. 
+ The "seahorse valley" [ 68 ] of the satellite. All the structures from the start reappear. 
+ Double-spirals and "seahorses" – unlike the second image from the start, they have appendices consisting of structures like "seahorse tails"; this demonstrates the typical linking of n + 1 different structures in the environment of satellites of the order n , here for the simplest case n = 1. 
+ Double-spirals with satellites of second order – analogously to the "seahorses"; the double-spirals may be interpreted as a metamorphosis of the "antenna". 
+ In the outer part of the appendices, islands of structures may be recognized; they have a shape like Julia sets J c ; the largest of them may be found in the center of the "double-hook" on the right side. 
+ Part of the "double-hook" 
+ Islands 
+ A detail of one island 
+ Detail of the spiral 
+
+ The islands in the third-to-last step seem to consist of infinitely many parts, as is the case for the corresponding Julia set J c . They are connected by tiny structures, so that the whole represents a simply connected set. [ citation needed ] The tiny structures meet each other at a satellite in the center that is too small to be recognized at this magnification. The value of c for the corresponding J c is not the image center but, relative to the main body of the Mandelbrot set, has the same position as the center of this image relative to the satellite shown in the 6th step. [ citation needed ] 
+
+ Inner structure [ edit ] 
+ While the Mandelbrot set is typically rendered showing outside boundary detail, structure within the bounded set can also be revealed. [ 71 ] [ 72 ] [ 73 ] For example, while calculating whether or not a given c value is bound or unbound, while it remains bound, the maximum value that this number reaches can be compared to the c value at that location. [ citation needed ] If the sum of squares method is used, the calculated number would be max:(real^2 + imaginary^2) − c:(real^2 + imaginary^2). [ citation needed ] The magnitude of this calculation can be rendered as a value on a gradient. [ citation needed ] 
+
+ This produces results like the following, gradients with distinct edges and contours as the boundaries are approached. The animations serve to highlight the gradient boundaries. [ citation needed ] 
+
+ Animated gradient structure inside the Mandelbrot set 
+ Animated gradient structure inside the Mandelbrot set, detail 
+ Rendering of progressive iterations from 285 to approximately 200,000 with corresponding bounded gradients animated 
+ Thumbnail for gradient in progressive iterations 
+
+ Generalizations [ edit ] 
+ Animations of the Multibrot set for d from 0 to 5 (left) and from 0.05 to 2 (right) 
+ A 4D Julia set may be projected or cross-sectioned into 3D, and because of this a 4D Mandelbrot is also possible. 
+
+ Multibrot sets [ edit ] 
+ Multibrot sets are bounded sets found in the complex plane for members of the general monic univariate polynomial family of recursions 
+
+ z ↦ z d + c . [ 74 ] 
+
+ For an integer d , these sets are connectedness loci for the Julia sets built from the same formula. The full cubic connectedness locus has also been studied; here one considers the two-parameter recursion z ↦ z 3 + 3 k z + c , whose two critical points are the complex square roots of the parameter k . A parameter is in the cubic connectedness locus if both critical points are stable. [ 75 ] For general families of holomorphic functions , the boundary of the Mandelbrot set generalizes to the bifurcation locus . [ citation needed ] 
+
+ The Multibrot set is obtained by varying the value of the exponent d . The article has a video that shows the development from d = 0 to 7, at which point there are 6 i.e. ( d − 1 ) lobes around the perimeter . In general, when d is a positive integer, the central region in each of these sets is always an epicycloid of ( d − 1 ) cusps. A similar development with negative integral exponents results in ( 1 − d ) clefts on the inside of a ring, where the main central region of the set is a hypocycloid of ( 1 − d ) cusps. [ citation needed ] 
+
+ Higher dimensions [ edit ] 
+ There is no perfect extension of the Mandelbrot set into 3D, because there is no 3D analogue of the complex numbers for it to iterate on. There is an extension of the complex numbers into 4 dimensions, the quaternions , that creates a perfect extension of the Mandelbrot set and the Julia sets into 4 dimensions. [ 76 ] These can then be either cross-sectioned or projected into a 3D structure. The quaternion (4-dimensional) Mandelbrot set is simply a solid of revolution of the 2-dimensional Mandelbrot set (in the j-k plane), and is therefore uninteresting to look at. [ 76 ] Taking a 3-dimensional cross section at d = 0   ( q = a + b i + c j + d k ) results in a solid of revolution of the 2-dimensional Mandelbrot set around the real axis. [ citation needed ] 
+
+ Other non-analytic mappings [ edit ] 
+ Image of the Tricorn / Mandelbar fractal 
+
+ The tricorn fractal , also called the Mandelbar set , is the connectedness locus of the anti-holomorphic family z ↦ z ¯ 2 + c . [ 77 ] [ 78 ] It was encountered by Milnor in his study of parameter slices of real cubic polynomials . [ citation needed ] It is not locally connected. [ 77 ] This property is inherited by the connectedness locus of real cubic polynomials. [ citation needed ] 
+
+ Another non-analytic generalization is the Burning Ship fractal , which is obtained by iterating the following: 
+
+ z ↦ ( | ℜ ( z ) | + i | ℑ ( z ) | ) 2 + c . [ citation needed ] 
+
+ Computer drawings [ edit ] 
+ Main article: Plotting algorithms for the Mandelbrot set 
+ There exist a multitude of various algorithms for plotting the Mandelbrot set via a computing device. Here, the naïve [ 79 ] "escape time algorithm" will be shown, since it is the most popular [ 80 ] and one of the simplest algorithms. [ 81 ] In the escape time algorithm, a repeating calculation is performed for each x , y point in the plot area and based on the behavior of that calculation, a color is chosen for that pixel. [ 82 ] [ 83 ] 
+
+ The x and y locations of each point are used as starting values in a repeating, or iterating calculation (described in detail below). The result of each iteration is used as the starting values for the next. The values are checked during each iteration to see whether they have reached a critical "escape" condition, or "bailout". If that condition is reached, the calculation is stopped, the pixel is drawn, and the next x , y point is examined. [ citation needed ] 
+
+ The color of each point represents how quickly the values reached the escape point. Often black is used to show values that fail to escape before the iteration limit, and gradually brighter colors are used for points that escape. This gives a visual representation of how many cycles were required before reaching the escape condition. [ citation needed ] 
+
+ To render such an image, the region of the complex plane we are considering is subdivided into a certain number of pixels . To color any such pixel, let c be the midpoint of that pixel. Iterate the critical point 0 under f c , checking at each step whether the orbit point has a radius larger than 2. When this is the case, c does not belong to the Mandelbrot set, and color the pixel according to the number of iterations used to find out. Otherwise, keep iterating up to a fixed number of steps, after which we decide that our parameter is "probably" in the Mandelbrot set, or at least very close to it, and color the pixel black. [ citation needed ] 
+
+ In pseudocode , this algorithm would look as follows. The algorithm does not use complex numbers and manually simulates complex-number operations using two real numbers, for those who do not have a complex data type . The program may be simplified if the programming language includes complex-data-type operations. [ citation needed ] 
+
+ for each pixel (Px, Py) on the screen do 
+ x0 := scaled x coordinate of pixel (scaled to lie in the Mandelbrot X scale (-2.00, 0.47))
+ y0 := scaled y coordinate of pixel (scaled to lie in the Mandelbrot Y scale (-1.12, 1.12))
+ x := 0.0
+ y := 0.0
+ iteration := 0
+ max_iteration := 1000
+ while (x^2 + y^2 ≤ 2^2 AND iteration < max_iteration) do 
+ xtemp := x^2 - y^2 + x0
+ y := 2*x*y + y0
+ x := xtemp
+ iteration := iteration + 1
+
+ color := palette[iteration]
+ plot(Px, Py, color) 
+
+ Here, relating the pseudocode to c , z and f c : 
+ z = x + i y 
+ z 2 = x 2 + i 2 x y − y 2 
+ c = x 0 + i y 0 
+ and so, as can be seen in the pseudocode in the computation of x and y : 
+ x = R e ( z 2 + c ) = x 2 − y 2 + x 0 and y = I m ( z 2 + c ) = 2 x y + y 0 . 
+
+ To get colorful images of the set, the assignment of a color to each value of the number of executed iterations can be made using one of a variety of functions (linear, exponential, etc.). 
+
+ Python code [ edit ] 
+ Here is the code implementing the above algorithm in Python : [ 84 ] 
+
+ = bound:\n row.append(iteration_number)\n break\n else:\n try:\n z = func(z, p, c)\n except (ValueError, ZeroDivisionError):\n z = c\n else:\n row.append(0)\n\n iteration_array.append(row)\n\n# Plotting the data\nax = plt.axes()\nax.set_aspect(\"equal\")\ngraph = ax.pcolormesh(x_domain, y_domain, iteration_array, cmap=colormap)\nplt.colorbar(graph)\nplt.xlabel(\"Real-Axis\")\nplt.ylabel(\"Imaginary-Axis\")\nplt.show()\n"}}'> import numpy as np 
+ import matplotlib.pyplot as plt 
+
+ # Setting parameters (these values can be changed) 
+ x_domain , y_domain = np . linspace ( - 2 , 2 , 500 ), np . linspace ( - 2 , 2 , 500 ) 
+ bound = 2 
+ max_iterations = 50 # any positive integer value 
+ colormap = "nipy_spectral" # set to any matplotlib valid colormap 
+
+ func = lambda z , p , c : z ** p + c 
+
+ # Computing 2D array to represent the Mandelbrot set 
+ iteration_array = [] 
+ for y in y_domain : 
+ row = [] 
+ for x in x_domain : 
+ z = 0 
+ p = 2 
+ c = complex ( x , y ) 
+ for iteration_number in range ( max_iterations ): 
+ if abs ( z ) >= bound : 
+ row . append ( iteration_number ) 
+ break 
+ else : 
+ try : 
+ z = func ( z , p , c ) 
+ except ( ValueError , ZeroDivisionError ): 
+ z = c 
+ else : 
+ row . append ( 0 ) 
+
+ iteration_array . append ( row ) 
+
+ # Plotting the data 
+ ax = plt . axes () 
+ ax . set_aspect ( "equal" ) 
+ graph = ax . pcolormesh ( x_domain , y_domain , iteration_array , cmap = colormap ) 
+ plt . colorbar ( graph ) 
+ plt . xlabel ( "Real-Axis" ) 
+ plt . ylabel ( "Imaginary-Axis" ) 
+ plt . show () 
+
+ An image of a 2-dimensional multibrot-set represented by the equation z = z 5 + c 
+
+ The value of power variable can be modified to generate an image of equivalent multibrot set ( z = z power + c ). For example, setting p = 2 produces the associated image. [ citation needed ] 
+
+ See also [ edit ] 
+
+ Buddhabrot 
+ Collatz fractal 
+ Fractint 
+ Gilbreath permutation 
+ List of mathematical art software 
+ Mandelbox 
+ Mandelbulb 
+ Menger sponge 
+ Newton fractal 
+ Orbit portrait 
+ Orbit trap 
+ Pickover stalk 
+ Plotting algorithms for the Mandelbrot set 
+ Weierstrass–Mandelbrot function 
+
+ References [ edit ] 
+ ↑ "Mandelbrot set" . Lexico UK English Dictionary . Oxford University Press . Archived from the original on 31 January 2022. 
+ ↑ "Mandelbrot set" . Merriam-Webster.com Dictionary . Merriam-Webster. OCLC   1032680871 . Retrieved 30 January 2022 . 
+ ↑ Cooper, S. B.; Löwe, Benedikt; Sorbi, Andrea (28 November 2007). New Computational Paradigms: Changing Conceptions of What is Computable . Springer Science & Business Media. p.   450. ISBN   978-0-387-68546-5 . 
+ 1 2 Robert Brooks and Peter Matelski, The dynamics of 2-generator subgroups of PSL(2,C) , in Irwin Kra (1981). Irwin Kra (ed.). Riemann Surfaces and Related Topics: Proceedings of the 1978 Stony Brook Conference (PDF) . Bernard Maskit . Princeton University Press. ISBN   0-691-08267-7 . Archived from the original (PDF) on 28 July 2019 . Retrieved 1 July 2019 . 
+ ↑ Nakos, George (20 May 2024). Elementary Linear Algebra with Applications: MATLAB®, Mathematica® and MaplesoftTM . Walter de Gruyter GmbH & Co KG. p.   322. ISBN   978-3-11-133185-0 . 
+ ↑ Addison, Paul S. (1 January 1997). Fractals and Chaos: An illustrated course . CRC Press. p.   110. ISBN   978-0-8493-8443-1 . 
+ ↑ Briggs, John (1992). Fractals: The Patterns of Chaos   : a New Aesthetic of Art, Science, and Nature . Simon and Schuster. p.   77. ISBN   978-0-671-74217-1 . 
+ ↑ Hewson, Stephen Fletcher (2009). A Mathematical Bridge: An Intuitive Journey in Higher Mathematics . World Scientific. p.   155. ISBN   978-981-283-407-2 . 
+ ↑ Peitgen, Heinz-Otto; Richter, Peter H. (1 December 2013). The Beauty of Fractals: Images of Complex Dynamical Systems . Springer Science & Business Media. p.   166. ISBN   978-3-642-61717-1 . the Mandelbrot set is very diverse in its different regions 
+ 1 2 Hunt, John (1 October 2023). Advanced Guide to Python 3 Programming . Springer Nature. p.   117. ISBN   978-3-031-40336-1 . 
+ ↑ Campuzano, Juan Carlos Ponce (20 November 2020). "Complex Analysis" . Complex Analysis — The Mandelbrot Set . Archived from the original on 16 October 2024 . Retrieved 5 March 2025 . 
+ ↑ Oberguggenberger, Michael; Ostermann, Alexander (24 October 2018). Analysis for Computer Scientists: Foundations, Methods, and Algorithms . Springer. p.   131. ISBN   978-3-319-91155-7 . 
+ ↑ "Mandelbrot Set" . cometcloud.sci.utah.edu . Retrieved 22 March 2025 . 
+ ↑ Peitgen, Heinz-Otto; Jürgens, Hartmut; Saupe, Dietmar (6 December 2012). Fractals for the Classroom: Part Two: Complex Systems and Mandelbrot Set . Springer Science & Business Media. p.   415. ISBN   978-1-4612-4406-6 . 
+ ↑ Gulick, Denny; Ford, Jeff (10 May 2024). Encounters with Chaos and Fractals . CRC Press. pp.   §7.2. ISBN   978-1-003-83578-3 . 
+ ↑ Bialynicki-Birula, Iwo; Bialynicka-Birula, Iwona (21 October 2004). Modeling Reality: How Computers Mirror Life . OUP Oxford. p.   80. ISBN   978-0-19-853100-5 . 
+ ↑ R.P. Taylor & J.C. Sprott (2008). "Biophilic Fractals and the Visual Journey of Organic Screen-savers" (PDF) . Nonlinear Dynamics, Psychology, and Life Sciences . 12 (1). Society for Chaos Theory in Psychology & Life Sciences: 117– 129. PMID   18157930 . Retrieved 1 January 2009 . 
+ ↑ z\\mapsto\\lambda z(1-z)</math> for complex <math>\\lambda, z</math>"},"journal":{"wt":"Annals of the New York Academy of Sciences"},"volume":{"wt":"357"},"issue":{"wt":"1"},"pages":{"wt":"249–259"},"year":{"wt":"1980"},"doi":{"wt":"10.1111/j.1749-6632.1980.tb29690.x"},"s2cid":{"wt":"85237669"}},"i":0}}]}'/> Mandelbrot, Benoit (1980). "Fractal aspects of the iteration of z ↦ λ z ( 1 − z ) for complex λ , z ". Annals of the New York Academy of Sciences . 357 (1): 249– 259. doi : 10.1111/j.1749-6632.1980.tb29690.x . S2CID   85237669 . 
+ ↑ Adrien Douady and John H. Hubbard, Etude dynamique des polynômes complexes , Prépublications mathémathiques d'Orsay 2/4 (1984 / 1985) 
+ ↑ Peitgen, Heinz-Otto; Richter Peter (1986). The Beauty of Fractals . Heidelberg: Springer-Verlag. ISBN   0-387-15851-0 . 
+ ↑ Frontiers_of_Chaos , Exhibition of the Goethe-Institut by H.O. Peitgen, P. Richter, H. Jürgens, M. Prüfer, D.Saupe. Since 1985 shown in over 40 countries. 
+ ↑ Gleick, James (1987). Chaos: Making a New Science . London: Cardinal. p.   229. 
+ ↑ "Exploring The Mandelbrot Set" . Scientific American . 253 (2): 4. August 1985. JSTOR   24967754 . 
+ ↑ Pountain, Dick (September 1986). "Turbocharging Mandelbrot" . Byte . Retrieved 11 November 2015 . 
+ ↑ Rees, Mary (January 2016). "One hundred years of complex dynamics" . Proceedings of the Royal Society A: Mathematical, Physical and Engineering Sciences . 472 (2185). Bibcode : 2016RSPSA.47250453R . doi : 10.1098/rspa.2015.0453 . PMC   4786033 . PMID   26997888 . 
+ ↑ Schleicher, Dierk (3 November 2009). Complex Dynamics: Families and Friends . CRC Press. pp.   xii. ISBN   978-1-4398-6542-2 . 
+ ↑ Weisstein, Eric W. "Mandelbrot Set" . mathworld.wolfram.com . Retrieved 24 January 2024 . 
+ ↑ "Mandelbrot Set Explorer: Mathematical Glossary" . Retrieved 7 October 2007 . 
+ ↑ Tiozzo, Giulio (15 May 2013), Topological entropy of quadratic polynomials and dimension of sections of the Mandelbrot set , arXiv : 1305.3542 
+ ↑ "Escape Radius" . Retrieved 17 January 2024 . 
+ ↑ thatsmaths (7 December 2023). "The Logistic Map is hiding in the Mandelbrot Set" . ThatsMaths . Retrieved 18 February 2024 . 
+ ↑ Kahn, Jeremy (8 August 2001). "The Mandelbrot Set is Connected: a Topological Proof" (PDF) . 
+ ↑ The Mandelbrot set, theme and variations . Tan, Lei. Cambridge University Press, 2000. ISBN   978-0-521-77476-5 . Section 2.1, "Yoccoz para-puzzles", p.   121 
+ ↑ Weisstein, Eric W. "Mandelbrot Set Lemniscate" . Wolfram Mathworld . Retrieved 17 July 2023 . 
+ ↑ Brucks, Karen M.; Bruin, Henk (28 June 2004). Topics from One-Dimensional Dynamics . Cambridge University Press. p.   264. ISBN   978-0-521-54766-6 . 
+ ↑ Devaney, Robert (9 March 2018). An Introduction To Chaotic Dynamical Systems . CRC Press. p.   147. ISBN   978-0-429-97085-6 . 
+ 1 2 3 4 Ivancevic, Vladimir G.; Ivancevic, Tijana T. (6 February 2007). High-Dimensional Chaotic and Attractor Systems: A Comprehensive Introduction . Springer Science & Business Media. pp.   492– 493. ISBN   978-1-4020-5456-3 . 
+ ↑ Devaney, Robert L.; Branner, Bodil (1994). Complex Dynamical Systems: The Mathematics Behind the Mandelbrot and Julia Sets: The Mathematics Behind the Mandelbrot and Julia Sets . American Mathematical Soc. pp.   18– 19. ISBN   978-0-8218-0290-8 . 
+ ↑ Redona, Jeffrey Francis (1996). The Mandelbrot set (Masters of Arts in Mathematics). Theses Digitization Project. 
+ ↑ Anna Miriam Benini (2017). "A survey on MLC, Rigidity and related topics". arXiv : 1709.09869 [ math.DS ]. 
+ ↑ Douady, Adrien; Hubbard, John H. Exploring the Mandelbrot set. The Orsay Notes . p.   12. 
+ ↑ Jung, Wolf (2002). Homeomorphisms on Edges of the Mandelbrot Set (Doctoral thesis). RWTH Aachen University . urn : nbn:de:hbz:82-opus-3719 . 
+ ↑ Schleicher, Dierk (1999). "On Fibers and Local Connectivity of Mandelbrot and Multibrot Sets". arXiv : math/9902155 . 
+ 1 2 Hubbard, J. H. (1993). "Local connectivity of Julia sets and bifurcation loci: three theorems of J.-C. Yoccoz" (PDF) . Topological methods in modern mathematics (Stony Brook, NY, 1991) . Houston, TX: Publish or Perish. pp.   467– 511. MR   1215974 . . Hubbard cites as his source a 1989 unpublished manuscript of Yoccoz. 
+ ↑ Lei (1990). "Similarity between the Mandelbrot set and Julia Sets" . Communications in Mathematical Physics . 134 (3): 587– 617. Bibcode : 1990CMaPh.134..587L . doi : 10.1007/bf02098448 . S2CID   122439436 . 
+ ↑ J. Milnor (1989). "Self-Similarity and Hairiness in the Mandelbrot Set". In M. C. Tangora (ed.). Computers in Geometry and Topology . New York: Taylor & Francis. pp.   211– 257. ISBN   9780824780319 . ) 
+ ↑ "Mandelbrot Viewer" . math.hws.edu . Retrieved 1 March 2025 . 
+ 1 2 Shishikura, Mitsuhiro (1998). "The Hausdorff dimension of the boundary of the Mandelbrot set and Julia sets". Annals of Mathematics . Second Series. 147 (2): 225– 267. arXiv : math.DS/9201282 . doi : 10.2307/121009 . JSTOR   121009 . MR   1626737 . S2CID   14847943 . . 
+ ↑ Katunin, Andrzej; Fedio, Kamil (2015). "On a Visualization of the Convergence of the Boundary of Generalized Mandelbrot Set to (n-1)-Sphere" (PDF) . Journal of Applied Mathematics and Computational Mechanics . 14 (1): 63– 69. doi : 10.17512/jamcm.2015.1.06 . Retrieved 18 May 2022 . 
+ ↑ Hertling, Peter (January 2005). "Is the Mandelbrot set computable?". Mathematical Logic Quarterly . 51 (1): 5– 18. doi : 10.1002/malq.200310124 . 
+ ↑ Sims, Karl. "Understanding Julia and Mandelbrot Sets" . karlsims.com . Retrieved 27 January 2025 . 
+ 1 2 "Number Sequences in the Mandelbrot Set" . youtube.com . The Mathemagicians' Guild. 4 June 2020. Archived from the original on 30 October 2021. 
+ ↑ Flake, Gary William (1998). The Computational Beauty of Nature . MIT Press. p.   125. ISBN   978-0-262-56127-3 . 
+ ↑ Klebanoff, Aaron D. (2001). "π in the Mandelbrot Set". Fractals . 9 (4): 393– 402. doi : 10.1142/S0218348X01000828 . 
+ ↑ Paul Siewert, Pi in the Mandelbrot set. Bachelor Thesis, Universität Göttingen, 2023 
+ ↑ Brockmoeller, Thies; Scherz, Oscar; Srkalovic, Nedim (2025). "Pi in the Mandelbrot set everywhere". arXiv : 2505.07138 [ math.DS ]. 
+ 1 2 Devaney, Robert L. (April 1999). "The Mandelbrot Set, the Farey Tree, and the Fibonacci Sequence" . The American Mathematical Monthly . 106 (4): 289– 302. doi : 10.2307/2589552 . ISSN   0002-9890 . JSTOR   2589552 . 
+ 1 2 3 4 Devaney, Robert L. (7 January 2019). "Illuminating the Mandelbrot set" (PDF) . 
+ ↑ Allaway, Emily (May 2016). "The Mandelbrot Set and the Farey Tree" (PDF) . 
+ 1 2 3 Devaney, Robert L. (29 December 1997). "The Mandelbrot Set and the Farey Tree" (PDF) . 
+ ↑ Douady, A.; Hubbard, J (1982). "Iteration des Polynomials Quadratiques Complexes" (PDF) . 
+ ↑ "The Mandelbrot Set Explorer Welcome Page" . math.bu.edu . Retrieved 17 February 2024 . 
+ ↑ "Maths Town" . Patreon . Retrieved 17 February 2024 . 
+ ↑ Fang, Fang; Aschheim, Raymond; Irwin, Klee (December 2019). "The Unexpected Fractal Signatures in Fibonacci Chains" . Fractal and Fractional . 3 (4): 49. arXiv : 1609.01159 . doi : 10.3390/fractalfract3040049 . ISSN   2504-3110 . 
+ ↑ "7 The Fibonacci Sequence" . math.bu.edu . Retrieved 17 February 2024 . 
+ ↑ "fibomandel angle 0.51" . Desmos . Retrieved 17 February 2024 . 
+ ↑ Andrzej Katunin (2017). A Concise Introduction to Hypercomplex Fractals . CRC Press. p.   21. ISBN   978-1-351-80121-8 . 
+ 1 2 Lisle, Jason (1 July 2021). Fractals: The Secret Code of Creation . New Leaf Publishing Group. p.   28. ISBN   978-1-61458-780-4 . 
+ ↑ Devaney, Robert L. (4 May 2018). A First Course In Chaotic Dynamical Systems: Theory And Experiment . CRC Press. p.   259. ISBN   978-0-429-97203-4 . 
+ ↑ Kappraff, Jay (2002). Beyond Measure: A Guided Tour Through Nature, Myth, and Number . World Scientific. p.   437. ISBN   978-981-02-4702-7 . 
+ ↑ Hooper, Kenneth J. (1 January 1991). "A note on some internal structures of the Mandelbrot Set" . Computers & Graphics . 15 (2): 295– 297. doi : 10.1016/0097-8493(91)90082-S . ISSN   0097-8493 . 
+ ↑ Cunningham, Adam (20 December 2013). "Displaying the Internal Structure of the Mandelbrot Set" (PDF) . 
+ ↑ Youvan, Douglas C (2024). "Shades Within: Exploring the Mandelbrot Set Through Grayscale Variations" . Pre-print . doi : 10.13140/RG.2.2.24445.74727 . 
+ ↑ Schleicher, Dierk (2004). "On Fibers and Local Connectivity of Mandelbrot and Multibrot Sets". In Lapidus, Michel L.; van Frankenhuijsen, Machiel (eds.). Fractal Geometry and Applications: A Jubilee of Benoît Mandelbrot, Part 1 . American Mathematical Society. pp.   477– 517. 
+ ↑ Rudy Rucker 's discussion of the CCM: CS.sjsu.edu Archived 3 March 2017 at the Wayback Machine 
+ 1 2 Barrallo, Javier (2010). "Expanding the Mandelbrot Set into Higher Dimensions" (PDF) . BridgesMathArt . Retrieved 15 September 2021 . 
+ 1 2 Inou, Hiroyuki; Kawahira, Tomoki (23 March 2022), Accessible hyperbolic components in anti-holomorphic dynamics , arXiv : 2203.12156 
+ ↑ Gauthier, Thomas; Vigny, Gabriel (2 February 2016), Distribution of postcritically finite polynomials iii: Combinatorial continuity , arXiv : 1602.00925 
+ ↑ Jarzębowicz, Aleksander; Luković, Ivan; Przybyłek, Adam; Staroń, Mirosław; Ahmad, Muhammad Ovais; Ochodek, Mirosław (2 January 2024). Software, System, and Service Engineering: S3E 2023 Topical Area, 24th Conference on Practical Aspects of and Solutions for Software Engineering, KKIO 2023, and 8th Workshop on Advances in Programming Languages, WAPL 2023, Held as Part of FedCSIS 2023, Warsaw, Poland, 17–20 September 2023, Revised Selected Papers . Springer Nature. p.   142. ISBN   978-3-031-51075-5 . 
+ ↑ Katunin, Andrzej (5 October 2017). A Concise Introduction to Hypercomplex Fractals . CRC Press. p.   6. ISBN   978-1-351-80121-8 . 
+ ↑ Farlow, Stanley J. (23 October 2012). An Introduction to Differential Equations and Their Applications . Courier Corporation. p.   447. ISBN   978-0-486-13513-7 . 
+ ↑ Saha, Amit (1 August 2015). Doing Math with Python: Use Programming to Explore Algebra, Statistics, Calculus, and More! . No Starch Press. p.   176. ISBN   978-1-59327-640-9 . 
+ ↑ Crownover, Richard M. (1995). Introduction to Fractals and Chaos . Jones and Bartlett. p.   201. ISBN   978-0-86720-464-3 . 
+ ↑ "Mandelbrot Fractal Set visualization in Python" . GeeksforGeeks . 3 October 2018 . Retrieved 23 March 2025 . 
+
+ Further reading [ edit ] 
+ Milnor, John W. (2006). Dynamics in One Complex Variable . Annals of Mathematics Studies. Vol.   160 (Third   ed.). Princeton University Press. ISBN   0-691-12488-4 . (First appeared in 1990 as a Stony Brook IMS Preprint , available as arXiV:math.DS/9201272 ) 
+ Lesmoir-Gordon, Nigel (2004). The Colours of Infinity: The Beauty, The Power and the Sense of Fractals . Clear Press. ISBN   1-904555-05-5 . (includes a DVD featuring Arthur C. Clarke and David Gilmour ) 
+ Peitgen, Heinz-Otto ; Jürgens, Hartmut ; Saupe, Dietmar (2004) [1992]. Chaos and Fractals: New Frontiers of Science . New York: Springer. ISBN   0-387-20229-3 . 
+
+ External links [ edit ] 
+
+ Wikibooks has a book on the topic of: Fractals 
+
+ Wikimedia Commons has media related to Mandelbrot sets . 
+
+ Wikiquote has quotations related to Mandelbrot set . 
+
+ Video: Mandelbrot fractal zoom to 6.066 e228 
+ Relatively simple explanation of the mathematical process , by Dr Holly Krieger , MIT 
+ Mandelbrot Set Explorer : Browser based Mandelbrot set viewer with a map-like interface 
+ Various algorithms for calculating the Mandelbrot set (on Rosetta Code ) 
+ Fractal calculator written in Lua by Deyan Dobromiroiv, Sofia, Bulgaria 
+ " Fractals: The Colors of Infinity " . Documentary featuring Arthur C. Clarke 
+ v t e Fractals Characteristics 
+ Fractal dimensions 
+ Assouad 
+ Box-counting 
+ Higuchi 
+ Correlation 
+ Hausdorff 
+ Packing 
+ Topological 
+ Recursion 
+ Self-similarity 
+ Iterated function system 
+ Barnsley fern 
+ Cantor set 
+ Koch snowflake 
+ Menger sponge 
+ Sierpiński carpet 
+ Sierpiński triangle 
+ Apollonian gasket 
+ Fibonacci word 
+ Space-filling curve 
+ Blancmange curve 
+ De Rham curve 
+ Minkowski 
+ Dragon curve 
+ Hilbert curve 
+ Koch curve 
+ Lévy C curve 
+ Moore curve 
+ Peano curve 
+ Sierpiński curve 
+ Z-order curve 
+ String 
+ T-square 
+ n-flake 
+ Vicsek fractal 
+ Gosper curve 
+ Pythagoras tree 
+ Weierstrass function 
+ Strange attractor 
+ Multifractal system 
+ L-system 
+ Fractal canopy 
+ Space-filling curve 
+ H tree 
+ Escape-time fractals 
+ Burning Ship fractal 
+ Julia set 
+ Filled 
+ Newton fractal 
+ Douady rabbit 
+ Lyapunov fractal 
+ Mandelbrot set 
+ Misiurewicz point 
+ Multibrot set 
+ Newton fractal 
+ Tricorn 
+ Mandelbox 
+ Mandelbulb 
+ Rendering techniques 
+ Buddhabrot 
+ Orbit trap 
+ Pickover stalk 
+ Random fractals 
+ Brownian motion 
+ Brownian tree 
+ Brownian motor 
+ Fractal landscape 
+ Lévy flight 
+ Percolation theory 
+ Self-avoiding walk 
+ People 
+ Michael Barnsley 
+ Georg Cantor 
+ Bill Gosper 
+ Felix Hausdorff 
+ Desmond Paul Henry 
+ Gaston Julia 
+ Niels Fabian Helge von Koch 
+ Paul Lévy 
+ Aleksandr Lyapunov 
+ Benoit Mandelbrot 
+ Hamid Naderi Yeganeh 
+ Lewis Fry Richardson 
+ Wacław Sierpiński 
+ Other 
+ Coastline paradox 
+ Fractal art 
+ List of fractals by Hausdorff dimension 
+ The Fractal Geometry of Nature (1982 book) 
+ The Beauty of Fractals (1986 book) 
+ Chaos: Making a New Science (1987 book) 
+ Kaleidoscope 
+ Chaos theory 
+
+ Retrieved from " https://en.wikipedia.org/w/index.php?title=Mandelbrot_set&oldid=1386470628 " 
+ Categories : Fractals Complex dynamics Hidden categories: Articles with short description Short description is different from Wikidata Articles needing additional references from June 2024 All articles needing additional references Use dmy dates from September 2021 All articles with unsourced statements Articles with unsourced statements from July 2026 Articles with unsourced statements from March 2025 Articles with unsourced statements from July 2023 All articles lacking reliable references Articles lacking reliable references from January 2025 Webarchive template wayback links Commons category link from Wikidata Articles containing video clips Articles with example pseudocode 
+
+ This page was last edited on 18 November 2026, at 18:50  (UTC) . 
+ Page was rendered with Parsoid . 
+ Text is available under the Creative Commons Attribution-ShareAlike 4.0 License ;
+additional terms may apply. By using this site, you agree to the Terms of Use and Privacy Policy . Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc. , a non-profit organization. 
+
+ Privacy policy 
+ About Wikipedia 
+ Disclaimers 
+ Contact Wikipedia 
+ Legal & safety contacts 
+ Code of Conduct 
+ Developers 
+ Statistics 
+ Cookie statement 
+ Mobile view 
+
+ Search 
+
+ Search 
+
+ Toggle the table of contents 
+
+ Mandelbrot set 
+
+ 51 languages 
+
+ Add topic 
+
+ 
