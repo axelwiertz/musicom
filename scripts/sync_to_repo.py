@@ -6,20 +6,27 @@ into the repo. Since the restructure moved the tree INTO the repo and the old
 paths are symlinks, there is nothing to copy — every write already lands in the
 repo working dir. The job now only:
   1. renders the docs indexes (instruments.md, methods.md, human-methods.md),
-  2. git add + commit + push.
+  2. git add + commit + push (with retry + rebase-on-divergence).
 
 Keep the CLI/exit contract identical so the cron job (daily-repo-sync) works
 unchanged.
+
+NOTE: the live cron copy lives at /opt/data/scripts/sync_to_repo.py (the cron
+`script:` field resolves under ~/scripts/, NOT ~/.hermes/scripts/). Keep all
+three copies in sync (this file, ~/.hermes/scripts/, repo scripts/).
 """
 import os
 import shutil
 import subprocess
 import sys
+import time
 from datetime import datetime, timezone
 
 HERMES = "/opt/data/projects"          # legacy root — still resolves via symlinks
 REPO = "/opt/data/repos/musicom"
 DOCS = os.path.join(REPO, "docs")
+PUSH_RETRIES = 3
+PUSH_RETRY_DELAY = 15
 
 
 def log(msg):
@@ -29,6 +36,27 @@ def log(msg):
 def git(*args):
     r = subprocess.run(["git", "-C", REPO, *args], capture_output=True, text=True)
     return r.returncode, (r.stdout or "").strip(), (r.stderr or "").strip()
+
+
+def push_main():
+    """Push origin/main, retrying transient failures and rebasing on divergence."""
+    last = (1, "", "")
+    for attempt in range(1, PUSH_RETRIES + 1):
+        rc, out, err = git("push", "origin", "main")
+        if rc == 0:
+            return rc, out, err
+        last = (rc, out, err)
+        low = (out + err).lower()
+        if "non-fast-forward" in low or "rejected" in low or "fetch first" in low:
+            log(f"  push diverged — pull --rebase (attempt {attempt})")
+            prc, _, perr = git("pull", "--rebase", "origin", "main")
+            if prc != 0:
+                log(f"  pull --rebase failed rc={prc}: {perr[:200]}")
+        else:
+            log(f"  push attempt {attempt} failed rc={rc}: {err[:200]}")
+        if attempt < PUSH_RETRIES:
+            time.sleep(PUSH_RETRY_DELAY)
+    return last
 
 
 def main():
@@ -61,8 +89,8 @@ def main():
         log(f"  commit failed rc={rc}: {err[:300]}")
         sys.exit(1)
 
-    # 3. Push
-    rc, out, err = git("push", "origin", "main")
+    # 3. Push with retry
+    rc, out, err = push_main()
     if rc == 0:
         log(f"  pushed: {out.splitlines()[0] if out else 'ok'}")
     else:
