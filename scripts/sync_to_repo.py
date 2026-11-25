@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """Musicom repo sync — COMMIT-ONLY (restructure 2026-09-08).
 
@@ -83,7 +84,8 @@ def main():
     rc, out, err = git("commit", "-m", f"sync: musicom agent data {today}")
     if rc == 0:
         log(f"  committed: {out.splitlines()[0] if out else 'ok'}")
-    elif "nothing to commit" in (out + err):
+    elif any(ph in (out + err).lower() for ph in
+             ("nothing to commit", "no changes added to commit", "nothing added to commit")):
         log("  nothing to commit (no changes)")
     else:
         log(f"  commit failed rc={rc}: {err[:300]}")
