@@ -115,6 +115,7 @@ _INSTRUMENT_MODULES = {
     "Synth.synth_pad.synth_pad": "synth_pad",
     "Synth.polysynth_pad.polysynth_pad": "polysynth_pad",
     "Synth.synth_strings_1.synth_strings_1": "synth_strings_1",
+    "Synth.synth_strings_2.synth_strings_2": "synth_strings_2",
     "Synth.synth_brass_1.synth_brass_1": "synth_brass_1",
     "Synth.synth_voice.synth_voice": "synth_voice",
     "Synth.calliope.calliope": "calliope",
@@ -378,6 +379,7 @@ TREMOLO_STRINGS = ALL_INSTRUMENTS["tremolo_strings"]
 SYNTH_PAD = ALL_INSTRUMENTS["synth_pad"]
 POLYSYNTH_PAD = ALL_INSTRUMENTS["polysynth_pad"]
 SYNTH_STRINGS_1 = ALL_INSTRUMENTS["synth_strings_1"]
+SYNTH_STRINGS_2 = ALL_INSTRUMENTS["synth_strings_2"]
 SYNTH_BRASS_1 = ALL_INSTRUMENTS["synth_brass_1"]
 SYNTH_VOICE = ALL_INSTRUMENTS["synth_voice"]
 CALIOPE = ALL_INSTRUMENTS["calliope"]
@@ -576,6 +578,8 @@ def registry_table():
             role = "pad, harmony, texture, drone, accent"
         elif low == "synth strings 1":
             role = "pad, harmony, texture, drone, lead, countermelody, accent"
+        elif low == "synth strings 2":
+            role = "pad, harmony, texture, drone, swell, countermelody"
         elif low == "synth brass 1":
             role = "lead, harmony, accent, stab, pad, countermelody"
         elif low == "synth voice":
@@ -1212,6 +1216,31 @@ if __name__ == "__main__":
           "SYNTH_STRINGS_1.pan =", SYNTH_STRINGS_1.pan)
     print("  SYNTH_STRINGS_1.articulations =",
           list(SYNTH_STRINGS_1.articulations or {}))
+
+    print()
+    print("=== Synth Strings 2 (slow-swell string machine, GM51) ===")
+    print("  SYNTH_STRINGS_2.midi_program =", SYNTH_STRINGS_2.midi_program,
+          "(should be 51)")
+    print("  by_name('synth strings 2') =", by_name("synth strings 2"))
+    print("  by_name('Synth Strings 2') =", by_name("Synth Strings 2"))
+    print("  by_program(51) =", by_program(51))
+    print("  by_program(50) =", by_program(50),
+          "(distinct: synth strings 1 — bright sibling)")
+    print("  SYNTH_STRINGS_2.in_sweet_spot(72) =",
+          SYNTH_STRINGS_2.in_sweet_spot(72))
+    print("  SYNTH_STRINGS_2.in_sweet_spot(24) =",
+          SYNTH_STRINGS_2.in_sweet_spot(24))
+    print("  SYNTH_STRINGS_2.range_min =", SYNTH_STRINGS_2.range_min,
+          "SYNTH_STRINGS_2.range_max =", SYNTH_STRINGS_2.range_max)
+    print("  SYNTH_STRINGS_2.solo_range =", SYNTH_STRINGS_2.solo_range)
+    print("  SYNTH_STRINGS_2.stem_label =", repr(SYNTH_STRINGS_2.stem_label))
+    print("  SYNTH_STRINGS_2.synthesis =", repr(SYNTH_STRINGS_2.synthesis))
+    print("  SYNTH_STRINGS_2.polysynth_defaults =",
+          SYNTH_STRINGS_2.polysynth_defaults)
+    print("  SYNTH_STRINGS_2.reverb_tail =", SYNTH_STRINGS_2.reverb_tail,
+          "SYNTH_STRINGS_2.pan =", SYNTH_STRINGS_2.pan)
+    print("  SYNTH_STRINGS_2.articulations =",
+          list(SYNTH_STRINGS_2.articulations or {}))
 
     print()
     print("=== Pad 3 (polysynth, GM90) ===")

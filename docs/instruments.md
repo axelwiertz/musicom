@@ -676,6 +676,7 @@ Zero-drift pitfall: drum units MUST end with a terminal landmark
 | Synth | Lead 3 (calliope) | 82 | 60–96 | lead, melody, ornament, accent, countermelody |
 | Synth | Synth Brass 1 | 62 | 36–96 | lead, harmony, accent, stab, pad, countermelody |
 | Synth | Synth Strings 1 | 50 | 36–96 | pad, harmony, texture, drone, lead, countermelody, accent |
+| Synth | Synth Strings 2 | 51 | 36–96 | pad, harmony, texture, drone, swell, countermelody |
 | Synth | Synth Voice | 54 | 36–96 | lead, melody, harmony, pad, countermelody, accent |
 | Vocal | Choir Aahs | 52 | 40–88 | pad, harmony, melody, countermelody, anthem, texture |
 | Woodwind | Bagpipe | 109 | 53–96 | lead, melody, ornament, drone, accent |
@@ -763,7 +764,8 @@ GM_PROGRAMS list is **0-indexed** (index N = GM program N). Verified 2026-08-22 
 ||| 44 | Tremolo Strings | Tremolo_Strings ✓ (GM_PROGRAMS[44] = "Tremolo Strings"; FluidR3 preset 44 = "Tremolo" — one-word SF2 spelling, cosmetic only, **no routing impact**) |
 ||| 30 | Distortion Guitar | Distortion_Guitar ✓ (GM_PROGRAMS[30] + FluidR3 preset 30 both "Distortion Guitar" — labels match exactly, **no quirk**) |
 ||| 62 | Synth Brass 1 | Synth_Brass_1 ✓ (GM_PROGRAMS[62] = "Synth Brass 1"; FluidR3 preset 62 = "Synth Brass 1" — labels match exactly, **no quirk**) |
-|||| 50 | Synth Strings 1 | Synth_Strings_1 ✓ (GM_PROGRAMS[50] = "Synth Strings 1"; FluidR3 preset 50 = "Synth Strings 1" — labels match exactly, **no quirk**; STEM_LABEL = "Synth_Strings_1"; distinct from sampled GM48 "Strings" / GM49 "Slow Strings") |
+||||| 50 | Synth Strings 1 | Synth_Strings_1 ✓ (GM_PROGRAMS[50] = "Synth Strings 1"; FluidR3 preset 50 = "Synth Strings 1" — labels match exactly, **no quirk**; STEM_LABEL = "Synth_Strings_1"; distinct from sampled GM48 "Strings" / GM49 "Slow Strings") |
+||||| 51 | Synth Strings 2 | Synth_Strings_2 ✓ (GM_PROGRAMS[51] = "Synth Strings 2"; FluidR3 preset 51 = "Synth Strings 2" — labels match exactly, **no quirk**; STEM_LABEL = "Synth_Strings_2"; distinct from GM50 "Synth Strings 1" and from sampled GM48 "Strings" / GM49 "Slow Strings") |
 ||| 32 | Acoustic Bass | Acoustic_Bass ✓ (GM_PROGRAMS[32] = "Acoustic Bass"; FluidR3 preset 32 = "Acoustic Bass" — labels match exactly, **no quirk**) |
 |||| 82 | Lead 3 (calliope) | Lead_3_calliope ✓ (GM_PROGRAMS[82] = "Lead 3 (calliope)" → sanitized `Lead_3_calliope` — parens stripped, spaces → underscore; FluidR3 preset 82 = **"Calliope Lead"** — SF2 internal name differs from the GM label, cosmetic only, **no routing impact**; stems are labelled from GM_PROGRAMS) |
 ||||| 89 | Pad 2 (warm) | Pad_2_warm ✓ (GM_PROGRAMS[89] = "Pad 2 (warm)" → sanitized `Pad_2_warm` — parens stripped, spaces → underscore; FluidR3 preset 89 = **"Warm Pad"** — SF2 internal name differs from the GM label, cosmetic only, **no routing impact**; STEM_LABEL = "Pad_2_warm" matches the pipeline's real label) |
@@ -2809,3 +2811,58 @@ gaps — SF2 never clips a composition. Remaining sibling candidates: GM51
 Synth Strings 2, GM112 Tinkle Bell, GM118 Synth Drum, GM63 Synth Brass 2,
 GM37 Slap Bass 2, GM80/81 Lead square/saw (share programs with the Vocal
 Talkbox/Singing-Saw stand-ins — resolve collision before adding).
+
+**Synth Strings 2 added** (2026-11-25): GM51, **Synth-family tenth entry** over
+GM50 — the **slow-swell / airy** voice of the same 1972–1982 divide-down
+string machine family (Eminent 310, ARP Solina, Roland RS-202, Korg
+Poly-Ensemble, Elka Rhapsody). Not a pad: still paraphonic with one shared
+filter + one shared LFO and a triple BBD ensemble chorus, infinite sustain
+while held, no velocity sensitivity — but a darker top, a fuller low-mid body
+and a ~90 ms onset. Files: instrument.md + synth_strings_2.py; verified
+end-to-end UnitMatrixComposer (1 bar, 1 section, Synth Strings 2 **SOLO** on
+ch0 — C3 root + C4-E4-G4-Bb4 body held the full bar — + drum-kit context on
+ch9; NO second melodic patch on the same pitches, per the 2026-09-01
+comb-filter rule) → **zero-drift ✓** → MIDI **140 bytes** → FluidSynth WAV
+**1,290,028 bytes** SOLO (FluidR3 via `discover_soundfont()`) → 4–8 kHz buzz
+**1.9%** (clean single voice) ✓; RenderPipeline stems on disk
+`track00_Synth_Strings_2.wav` (1,290,028 B) + `track01_Drums.wav` (784,428 B)
+✓; stem label `GM_PROGRAMS[51]` = **"Synth Strings 2"** → sanitized
+`Synth_Strings_2` — **no quirk**; FluidR3 preset 51 = **"Synth Strings 2"**
+(exact match). Range 36–96 (C2–C7), sweet spot 55–84 (G3–C6), solo 48–86
+(C3–D6 — bottom LOWER than GM50's E3 because GM51 keeps definition down low);
+zones low 36–55 / mid 56–79 / high 80–96. **Measured A/B vs GM50** (identical
+Cmaj7, solo, FluidR3): spectral centroid mid **1853 vs 1738 Hz**, low
+**1487 vs 717 Hz** (≈2× upper-partial energy in the bass register — GM50 turns
+to mud, GM51 stays readable), high **2361 vs 2727 Hz** (top-octave fizz gone),
+6–12 kHz air **3.4% vs 4.2%**, envelope at 20 ms **12% vs 16% of peak**
+(softer onset), peak **0.544 vs 0.496** (≈+0.8 dB). Envelope wobbles ±25%
+during sustain on BOTH — that is BBD chorus amplitude/phase modulation, not
+decay. Synthesis: **PolySynth primary** (`sound/synthesis/polysynth.py` —
+divide-down bank + shared LPF + BBD chorus IS the physical model; saw + saw
+±11 cents + triangle body 0.75, filter **2700 Hz** between GM50 3000 and
+warm_pad 1400, resonance 0.25, attack **0.09 s**, sustain 1.0, release
+**0.45 s**, 3 unison voices; engine smoke test peak 0.980,
+tail/peak 0.581, early/mid 0.325 → sustains but swells), **Additive
+secondary** (`string_machine_airy` stack [1.0, 0.82, 0.64, 0.48, 0.34, 0.22,
+0.12, 0.06] — softer top than GM50's, decay_S 1e-4 hold), **PhaseModSynth
+tertiary** (saw carrier, ratio 1.0, depth **0.9** — gentler than GM50 1.2).
+Production: REVERB_TAIL **3.4 s** (longer than GM50 2.8 — cinematic bed),
+EQ cut 300 Hz −2.0 dB (less than GM50 −2.5, body already present), boost
+2.6 kHz +1.5 dB, 9 kHz +1.0 dB air shelf (GM50 uses 3.2 k +2.0 / 8 k +1.5),
+PAN centre. Registration proof: `by_name('synth strings 2')` /
+`by_name('Synth Strings 2')` → Synth Strings 2, `by_program(51)` → Synth
+Strings 2 (distinct from `by_program(50)` Synth Strings 1), `in_sweet_spot(72)`
+= True, `in_sweet_spot(24)` = False, `stem_label = 'Synth_Strings_2'`;
+`registry_table()` row "| Synth | Synth Strings 2 | 51 | 36–96 | pad, harmony,
+texture, drone, swell, countermelody |"; convenience constant
+`SYNTH_STRINGS_2`; registry load count now **102 keys**. Role: pad/harmony
+(sustained chords), texture (bed that does not mask a bright lead), drone,
+**swell** (the signature gesture — soft onset makes crescendos sound played),
+countermelody (long notes) — NOT a lead for fast lines (soft onset smears
+articulation), NOT rhythm/comp, NOT a bass foundation. Do not unison-double
+against GM50 or a sampled section on the same pitches (comb-filter rule).
+FluidR3 pitch sweep on 51 unremarkable: preset plays at written octave (no
+transpose quirk, unlike GM31). Remaining sibling candidates: GM63 Synth
+Brass 2, GM37 Slap Bass 2, GM112 Tinkle Bell, GM118 Synth Drum, GM80/81 Lead
+square/saw (program collision with the Vocal talkbox/singing-saw stand-ins
+must be resolved first), GM119 Reverse Cymbal, GM91–103 pads/FX block.

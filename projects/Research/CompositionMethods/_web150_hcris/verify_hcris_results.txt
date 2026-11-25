@@ -1,0 +1,121 @@
+SP-150 HCRIS verification
+19/19 checks pass
+
+PASS 1 bottle f0 (500 mL, 20 mm dia x 20 mm neck) :: f0=267.69 Hz  L_eq=0.0261 m  A=3.142e-04 m2
+PASS 2 f ~ V^-1/2 and f ~ A^+1/2 (exact) :: 2V ratio=0.707106781 (exp 0.707106781); 4A ratio=2.000000000
+PASS 3 end correction: unflanged / flanged / Wikipedia 0.3D :: unflanged=267.691 Hz flanged=257.606 Hz 0.6r=268.360 Hz (delta 0.250%)
+PASS 4 ocarina: total open area needed for C5 :: A=82.2 mm2 (1.6 x 8 mm holes), L_eq=0.0075 m, V=120 mL
+PASS 5 opening one 8 mm hole: f divides by sqrt(A/A0) :: f_new/f_old = 1.26958 (= sqrt(1.612))
+PASS 6 loss channels -> Q -> tau -> T60 :: Q_rad=59.5 Q_visc=38.1 Q_th=440.8 Q_tot=22.07 tau=13.4 ms T60=93 ms
+PASS 7 biquad f0 and Q recovered from impulse response :: f=439.892 Hz (target 440.0) Q=22.08 (target 22.07) tau=15.98 ms (th 15.97)
+PASS 8 jet drive self-oscillates at the phase-condition frequency :: f_pred=434.99 Hz f_sim=435.08 Hz f0=440.0 tau_j=0.171 ms drift_vs_f0=-1.12%
+PASS 9 harder blowing raises pitch, < about a semitone :: f=432.1/435.1/436.4 Hz at 400/800/1600 Pa -> +0.172 semitones
+PASS 10 limit-cycle amplitude saturates below pressure scaling :: rms=622.4520/1040.5331/1558.1957 -> 7.97 dB for 4x pressure (linear = 12.04 dB)
+PASS 11 membrane coupling -> avoided crossing, split grows, trace fixed :: k=0: 150.00/210.00 (spread 60.00); k=6k: 144.72/213.67 (68.95); k=20k: 102.81/236.71 (133.89); trace err 0.0e+00
+PASS 12 bass-reflex port tuning (40 L, 75 mm x 150 mm) :: f_b = 40.08 Hz (unflanged+flanged end correction 1.463 r)
+PASS 13 30 Hz needs a cavity in the tens of litres :: V(30 Hz) = 71.4 L for a 75 mm x 150 mm port
+PASS 14 bit-exact determinism and exact sample count :: n=4800 identical=True finite=True peak=1150.273
+PASS 15 single mode: top register is a small fraction of Nyquist :: 2000 Hz = 4.2% of fs
+PASS 16 single-mode purity: harmonics stay below 5% at any pressure :: HF energy fraction (>.5 f0): 0.00006 at 400 Pa, 0.00004 at 1600 Pa
+PASS 17 one octave down requires 4x cavity volume (exact) :: V=120 mL (C5) -> V=480 mL gives 261.62 Hz
+PASS 18 opening holes for the octave lowers Q (treble is more damped) :: C5: f=523.2 Hz Q=22.07 tau=13.4 ms | C6: f=1046.5 Hz Q=4.75 tau=1.4 ms
+PASS 19 demo WAV written, non-empty and finite :: /opt/data/projects/Research/outputs/sp150_hcris/sp150_hcris_demo.wav  1536044 B  8.0 s stereo  peak 0.89
+
+JSON:
+[
+ {
+  "check": "1 bottle f0 (500 mL, 20 mm dia x 20 mm neck)",
+  "pass": true,
+  "detail": "f0=267.69 Hz  L_eq=0.0261 m  A=3.142e-04 m2"
+ },
+ {
+  "check": "2 f ~ V^-1/2 and f ~ A^+1/2 (exact)",
+  "pass": true,
+  "detail": "2V ratio=0.707106781 (exp 0.707106781); 4A ratio=2.000000000"
+ },
+ {
+  "check": "3 end correction: unflanged / flanged / Wikipedia 0.3D",
+  "pass": true,
+  "detail": "unflanged=267.691 Hz flanged=257.606 Hz 0.6r=268.360 Hz (delta 0.250%)"
+ },
+ {
+  "check": "4 ocarina: total open area needed for C5",
+  "pass": true,
+  "detail": "A=82.2 mm2 (1.6 x 8 mm holes), L_eq=0.0075 m, V=120 mL"
+ },
+ {
+  "check": "5 opening one 8 mm hole: f divides by sqrt(A/A0)",
+  "pass": true,
+  "detail": "f_new/f_old = 1.26958 (= sqrt(1.612))"
+ },
+ {
+  "check": "6 loss channels -> Q -> tau -> T60",
+  "pass": true,
+  "detail": "Q_rad=59.5 Q_visc=38.1 Q_th=440.8 Q_tot=22.07 tau=13.4 ms T60=93 ms"
+ },
+ {
+  "check": "7 biquad f0 and Q recovered from impulse response",
+  "pass": true,
+  "detail": "f=439.892 Hz (target 440.0) Q=22.08 (target 22.07) tau=15.98 ms (th 15.97)"
+ },
+ {
+  "check": "8 jet drive self-oscillates at the phase-condition frequency",
+  "pass": true,
+  "detail": "f_pred=434.99 Hz f_sim=435.08 Hz f0=440.0 tau_j=0.171 ms drift_vs_f0=-1.12%"
+ },
+ {
+  "check": "9 harder blowing raises pitch, < about a semitone",
+  "pass": true,
+  "detail": "f=432.1/435.1/436.4 Hz at 400/800/1600 Pa -> +0.172 semitones"
+ },
+ {
+  "check": "10 limit-cycle amplitude saturates below pressure scaling",
+  "pass": true,
+  "detail": "rms=622.4520/1040.5331/1558.1957 -> 7.97 dB for 4x pressure (linear = 12.04 dB)"
+ },
+ {
+  "check": "11 membrane coupling -> avoided crossing, split grows, trace fixed",
+  "pass": true,
+  "detail": "k=0: 150.00/210.00 (spread 60.00); k=6k: 144.72/213.67 (68.95); k=20k: 102.81/236.71 (133.89); trace err 0.0e+00"
+ },
+ {
+  "check": "12 bass-reflex port tuning (40 L, 75 mm x 150 mm)",
+  "pass": true,
+  "detail": "f_b = 40.08 Hz (unflanged+flanged end correction 1.463 r)"
+ },
+ {
+  "check": "13 30 Hz needs a cavity in the tens of litres",
+  "pass": true,
+  "detail": "V(30 Hz) = 71.4 L for a 75 mm x 150 mm port"
+ },
+ {
+  "check": "14 bit-exact determinism and exact sample count",
+  "pass": true,
+  "detail": "n=4800 identical=True finite=True peak=1150.273"
+ },
+ {
+  "check": "15 single mode: top register is a small fraction of Nyquist",
+  "pass": true,
+  "detail": "2000 Hz = 4.2% of fs"
+ },
+ {
+  "check": "16 single-mode purity: harmonics stay below 5% at any pressure",
+  "pass": true,
+  "detail": "HF energy fraction (>.5 f0): 0.00006 at 400 Pa, 0.00004 at 1600 Pa"
+ },
+ {
+  "check": "17 one octave down requires 4x cavity volume (exact)",
+  "pass": true,
+  "detail": "V=120 mL (C5) -> V=480 mL gives 261.62 Hz"
+ },
+ {
+  "check": "18 opening holes for the octave lowers Q (treble is more damped)",
+  "pass": true,
+  "detail": "C5: f=523.2 Hz Q=22.07 tau=13.4 ms | C6: f=1046.5 Hz Q=4.75 tau=1.4 ms"
+ },
+ {
+  "check": "19 demo WAV written, non-empty and finite",
+  "pass": true,
+  "detail": "/opt/data/projects/Research/outputs/sp150_hcris/sp150_hcris_demo.wav  1536044 B  8.0 s stereo  peak 0.89"
+ }
+]
