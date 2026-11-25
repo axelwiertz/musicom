@@ -1,0 +1,18 @@
+PASS [1] (I1)-(I3) hold for partition matroid dim7/k=1; independents=125, bases=64
+PASS [2] bases equicardinal, r=3 notes per chord, 64 bases
+PASS [3] greedy == brute-force max-weight basis: 300/300
+PASS [4] NON-matroid '<=4 notes, no semitone cluster' fails axiom I3 (violator: A={0,2,4}, B={1,3}, no augmenting x); greedy trap: greedy [0, 2, 5, 7] w=1.30 < optimal [4, 6, 9, 11] w=1.40; random peaky weights: greedy suboptimal 13/300
+PASS [5] K4 graphic matroid: forests valid, 16 spanning trees, Kruskal == brute force 200/200
+PASS [6] basis-exchange axiom holds exhaustively on both matroids (partition + graphic)
+PASS [7] dual matroid bases = co-trees (16, rank 3 = m-r), exchange axiom holds on M*; T(1,1)=#bases=16 for both M and M*
+PASS [8] rank submodular (0 violations/400); beta(K4 cycle matroid)=2 > 0 (connected), beta(disconnected 2-triangle matroid)=0 = 0
+PASS [9] matroid intersection of dim7-partition and whole-tone-partition caps a chord at 2 notes
+PASS [10] 4x8 plan on fifths-region matroid: all 32 cells are bases (r(E)=4, every basis has 4 notes, 96 bases); 28/28 consecutive moves are single exchanges; 16 distinct chords; per-voice pitch-field growth V0=[4, 5, 7, 8, 8, 8, 8, 8]
+
+10/10 checks pass
+
+plan:
+ V0 0347 | 0349 | 059B | 257B | 2347 | 059B | 257B | 0347
+ V1 047A | 0489 | 0459 | 257B | 278B | 0459 | 257B | 0347
+ V2 047A | 249A | 2459 | 257B | 247A | 2459 | 257B | 0457
+ V3 0478 | 0489 | 059B | 579B | 789B | 059B | 579B | 0478
